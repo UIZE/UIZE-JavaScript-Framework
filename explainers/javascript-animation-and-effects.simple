@@ -985,9 +985,9 @@ Curves
 	- Uize.Fade.xSeries extension module
 	- Uize.Fx.fadeStyleAcrossNodes
 	- provide some examples
-		- C:/~uize/uize_framework/examples/fade-css-style-across-nodes.html
+		- C:/~uize/UIZE-JavaScript-Framework/examples/fade-css-style-across-nodes.html
 		- gradient and graph in Curve Explorer tool
-		- C:/~uize/uize_framework/examples/fade-quantization-chart.html
-		- C:/~uize/uize_framework/examples/fade-as-a-color-chart.html
-		- C:/~uize/uize_framework/examples/fade-as-a-graph.html
+		- C:/~uize/UIZE-JavaScript-Framework/examples/fade-quantization-chart.html
+		- C:/~uize/UIZE-JavaScript-Framework/examples/fade-as-a-color-chart.html
+		- C:/~uize/UIZE-JavaScript-Framework/examples/fade-as-a-graph.html
 
