@@ -1,0 +1,170 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Fade As a Graph | JavaScript Examples | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="Uize.Fade"/>
+	<meta name="description" content="Visualize how different acceleration / deceleration curves affect a fade with this graphical representation using bar widgets."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.example.css"/>
+	<link rel="stylesheet" href="../css/widget.databar.css"/>
+	<style type="text/css">
+		/*** data bar overrides ***/
+			.dataBar {
+				width:30px;
+				height:250px;
+				border:none;
+			}
+			.dataBar .dataBarTrack .dataBarKnob {
+				width:28px;
+			}
+			.dataBar .dataBarTrack .dataBarTrackFull {
+				width:26px;
+				background:#899;
+				border-left:2px solid #ccc;
+				border-right:2px solid #888;
+			}
+	</style>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	<a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow">JAVASCRIPT EXAMPLES</a>
+	Fade As a Graph
+	<div id="page-actions" class="pageActions">
+		<a href="source-code/fade-as-a-graph.html" class="buttonLink">SOURCE</a>
+	</div>
+</h1>
+
+<div class="main">
+	<!-- explanation copy -->
+
+	<div class="explanation">
+		<p>This example shows how different acceleration/deceleration curves (generated using the <code>Uize.Fade.celeration</code> static method of the <a href="../reference/Uize.Fade.html"><code>Uize.Fade</code></a> class) shape a fade's curve over time. A graph of twenty <a href="../reference/Uize.Widget.Bar.html"><code>Uize.Widget.Bar</code></a> instances represents the value of a fade over time. By default, the interpolated value for a fade is linear, but using different "celeration" curves allows for varying amounts of a fade's head and tail to be in acceleration and deceleration phases. A value of <code>.5</code> for <code>acceleration</code> means the first half of the fade will be acceleration. A value of <code>.25</code> for <code>deceleration</code> means that the last quarter will be deceleration. Click the test links below to choose different values for these properties. This example also illustrates how the <code>Uize.Fade</code> class can be used for non-time based fades, because we're using a fade to interpolate values for a series of bars.</p>
+	</div>
+
+	<!-- "wireframe" for the UI -->
+
+	<div id="page-bars"></div>
+	<br/>
+
+	<!-- programmatic interface examples -->
+
+	<div class="programmaticInterface">
+		<ul>
+			<li>EQUAL:&nbsp;
+				<a href="javascript://" class="linkedJs" title="fade.set ({curve:Uize.Fade.celeration (0,0)}); updateGraph ()">Uize.Fade.celeration (0,0)</a>
+				&nbsp;|&nbsp;
+				<a href="javascript://" class="linkedJs" title="fade.set ({curve:Uize.Fade.celeration (.25,.25)}); updateGraph ()">Uize.Fade.celeration (.25,.25)</a>
+				&nbsp;|&nbsp;
+				<a href="javascript://" class="linkedJs" title="fade.set ({curve:Uize.Fade.celeration (.33,.33)}); updateGraph ()">Uize.Fade.celeration (.33,.33)</a>
+				&nbsp;|&nbsp;
+				<a href="javascript://" class="linkedJs" title="fade.set ({curve:Uize.Fade.celeration (.5,.5)}); updateGraph ()">Uize.Fade.celeration (.5,.5)</a>
+			</li>
+			<li>INVERSE:&nbsp;
+				<a href="javascript://" class="linkedJs" title="fade.set ({curve:Uize.Fade.celeration (0,1)}); updateGraph ()">Uize.Fade.celeration (0,1)</a>
+				&nbsp;|&nbsp;
+				<a href="javascript://" class="linkedJs" title="fade.set ({curve:Uize.Fade.celeration (.33,.66)}); updateGraph ()">Uize.Fade.celeration (.33,.66)</a>
+				&nbsp;|&nbsp;
+				<a href="javascript://" class="linkedJs" title="fade.set ({curve:Uize.Fade.celeration (.66,.33)}); updateGraph ()">Uize.Fade.celeration (.66,.33)</a>
+				&nbsp;|&nbsp;
+				<a href="javascript://" class="linkedJs" title="fade.set ({curve:Uize.Fade.celeration (1,0)}); updateGraph ()">Uize.Fade.celeration (1,0)</a>
+			</li>
+			<li>acceleration is 0&nbsp;
+				<a href="javascript://" class="linkedJs" title="fade.set ({curve:Uize.Fade.celeration (0,.25)}); updateGraph ()">Uize.Fade.celeration (0,.25)</a>
+				&nbsp;|&nbsp;
+				<a href="javascript://" class="linkedJs" title="fade.set ({curve:Uize.Fade.celeration (0,.5)}); updateGraph ()">Uize.Fade.celeration (0,.5)</a>
+				&nbsp;|&nbsp;
+				<a href="javascript://" class="linkedJs" title="fade.set ({curve:Uize.Fade.celeration (0,.75)}); updateGraph ()">Uize.Fade.celeration (0,.75)</a>
+				&nbsp;|&nbsp;
+				<a href="javascript://" class="linkedJs" title="fade.set ({curve:Uize.Fade.celeration (0,1)}); updateGraph ()">Uize.Fade.celeration (0,1)</a>
+			</li>
+			<li>deceleration is 0&nbsp;
+				<a href="javascript://" class="linkedJs" title="fade.set ({curve:Uize.Fade.celeration (.25,0)}); updateGraph ()">Uize.Fade.celeration (.25,0)</a>
+				&nbsp;|&nbsp;
+				<a href="javascript://" class="linkedJs" title="fade.set ({curve:Uize.Fade.celeration (.5,0)}); updateGraph ()">Uize.Fade.celeration (.5,0)</a>
+				&nbsp;|&nbsp;
+				<a href="javascript://" class="linkedJs" title="fade.set ({curve:Uize.Fade.celeration (.75,0)}); updateGraph ()">Uize.Fade.celeration (.75,0)</a>
+				&nbsp;|&nbsp;
+				<a href="javascript://" class="linkedJs" title="fade.set ({curve:Uize.Fade.celeration (1,0)}); updateGraph ()">Uize.Fade.celeration (1,0)</a>
+			</li>
+		</ul>
+	</div>
+</div>
+
+<!-- JavaScript code to make the static HTML "come alive" -->
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Example.library',
+		'UizeDotCom.Page.Example',
+		'UizeDotCom.Templates.DataBar',
+		'Uize.Widget.Bar',
+		'Uize.Fade',
+		'Uize.Color'
+	],
+	builder:function () {
+		/*** create the example page widget ***/
+			var page = window.page = new UizeDotCom.Page.Example ({evaluator:function (code) {eval (code)}});
+
+		/*** configurable values ***/
+			var
+				totalBars = 20,
+				barProperties = {
+					html:UizeDotCom.Templates.DataBar,
+					minValue:0,
+					maxValue:100
+				}
+			;
+
+		/*** create fade instance ***/
+			var fade = new Uize.Fade ({
+				startValue:{barValue:barProperties.minValue,knobColor:{red:0,green:255,blue:60}},
+				endValue:{barValue:barProperties.maxValue,knobColor:{red:0,green:255,blue:255}}
+			});
+
+		/*** inside the table to hold the bars ***/
+			var htmlChunks = ['<table border="0" cellspacing="1" cellpadding="0" style="margin:auto;"><tr>'];
+			for (var barNo = -1; ++barNo < totalBars;) {
+				htmlChunks.push ('<td>' + UizeDotCom.Templates.DataBar.process ({idPrefix:'page_bar' + barNo}) + '</td>');
+			}
+			htmlChunks.push ('</tr></table>');
+			page.setNodeInnerHtml ('bars',htmlChunks.join (''));
+
+		/*** add bar child widgets ***/
+			for (var barNo = -1; ++barNo < totalBars;) {
+				page.addChild ('bar' + barNo,Uize.Widget.Bar,barProperties);
+			}
+
+		/*** graph updater code ***/
+			function updateGraph () {
+				for (var barNo = -1; ++barNo < totalBars;) {
+					fade.set ({progress:barNo / (totalBars - 1)});
+					var
+						fadeValue = fade.valueOf (),
+						bar = page.children ['bar' + barNo]
+					;
+					bar.set ({value:fadeValue.barValue});
+					bar.setNodeStyle ('knob',{backgroundColor:Uize.Color.to (fadeValue.knobColor,'RGB string')});
+				}
+			}
+
+		/*** wire up the page widget ***/
+			page.wireUi ();
+
+		/*** initialization ***/
+			updateGraph ();
+	}
+});
+
+</script>
+
+</body>
+</html>
+

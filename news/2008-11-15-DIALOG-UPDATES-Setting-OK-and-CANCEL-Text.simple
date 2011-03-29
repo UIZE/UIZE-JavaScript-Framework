@@ -1,0 +1,30 @@
+Various improvements have been made relating to dialog based widgets...
+
+IMPROVED MODULE: Uize.Widget.Palette
+	The =Uize.Widget.Palette= module has been updated to add support for the new =okText=, =defaultOkText=, =cancelText=, and =defaultCancelText= set-get properties.
+
+	These properties allow one to programmatically modify the label text on the ok and cancel buttons through the set-get property interface of a dialog widget.
+
+IMPROVED MODULE: Uize.Widget.Page
+	The implementation of confirm/inform dialogs in the =Uize.Widget.Page= base class now supports =okText= and =cancelText= parameters for the =confirm= and =inform= instance methods of widgets.
+
+	EXAMPLE
+	.......................................................................
+	myWidget.confirm ({
+		title:'Confirm Delete',
+		message:'Are you sure you would like to delete the selected items?',
+		okText:'YES, DELETE',
+		cancelText:'NO, DON\'T DELETE',
+		yesHandler:function () {myWidget.deleteSelected ()}
+	});
+	.......................................................................
+
+	See how they're used in the [[../examples/decorated-confirm.html][Decorated Confirm Dialog example]].
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2008-11-15 - DIALOG UPDATES: Setting OK and CANCEL Text
+....................................................................................

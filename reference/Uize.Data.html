@@ -1,0 +1,1357 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Uize.Data | Documentation | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework Documentation Uize.Data module reference documentation"/>
+	<meta name="description" content="The Uize.Data module provides methods for working with data, including comparing complex data structures, finding records, getting keys and values, etc."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../javascript-modules-index.html" class="breadcrumb breadcrumbWithArrow">MODULES</a>
+	<a href="Uize.html" title="View reference for Uize" class="breadcrumb">Uize</a>.<a href="Uize.Data.html" title="View reference for Uize.Data" class="breadcrumb">Data</a>
+	<div class="pageActions">
+		<a id="page-search" href="javascript://" class="buttonLink" title="Search for references to this module...">SEARCH</a><a id="page-examples" href="javascript://" class="buttonLink" title="View examples for this module...">EXAMPLES</a><a href="source-code/Uize.Data.html" class="buttonLink" title="View the JavaScript source code for this module...">SOURCE</a><a id="page-test" href="javascript://" class="buttonLink" title="Test this module...">TEST</a>
+	</div>
+
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="The Uize.Data module provides methods for working with data, including comparing complex data structures, finding records, getting keys and values, etc.">1. Introduction</a>
+				<ul>
+					<li><a href="#1_1" title="There are no dedicated showcase example pages for the Uize.Data module.">1.1. Examples</a></li>
+					<li><a href="#1_2" title="The Uize.Data module defines the Uize.Data package under the Uize namespace.">1.2. Implementation Info</a>
+						<ul>
+							<li><a href="#1_2_1" title="The features listed in this section have been introduced in this module.">1.2.1. Features Introduced in This Module</a></li>
+							<li><a href="#1_2_2" title="No features have been overridden in this module.">1.2.2. Features Overridden in This Module</a></li>
+							<li><a href="#1_2_3" title="This module has no inherited features.">1.2.3. Features Inherited From Other Modules</a></li>
+							<li><a href="#1_2_4" title="Uize.Data.Csv | Uize.Data.NameValueRecords | Uize.Data.PathsTree | Uize.Data.Simple">1.2.4. Modules Directly Under This Namespace</a></li>
+							<li><a href="#1_2_5" title="The Uize.Data module is unit tested by the Uize.Test.Uize.Data test module.">1.2.5. Unit Tests</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li><a href="#2">2. Static Methods</a>
+				<ul>
+					<li><a href="#2_1" title="Returns a boolean, indicating whether or not the two specified objects are identical clones of one another.">2.1. Uize.Data.clones</a></li>
+					<li><a href="#2_2" title="Returns a boolean, indicating whether or not the two specified objects share any object references.">2.2. Uize.Data.conjoined</a></li>
+					<li><a href="#2_3" title="Empties out the specified source object or array and returns a reference to the source.">2.3. Uize.Data.emptyOut</a></li>
+					<li><a href="#2_4" title="Returns an object with only the properties of the source object that are specified by an array of property names.">2.4. Uize.Data.filter</a></li>
+					<li><a href="#2_5" title="Returns an array of records from the specified record set that match the specified criteria.">2.5. Uize.Data.findRecords</a></li>
+					<li><a href="#2_6" title="Returns an array of the values for the specified column of the specified record set.">2.6. Uize.Data.getColumn</a></li>
+					<li><a href="#2_7" title="Returns an array, representing the keys (property names) of the specified object.">2.7. Uize.Data.getKeys</a></li>
+					<li><a href="#2_8" title="Returns a lookup object, where each key is a value from the specified values array.">2.8. Uize.Data.getLookup</a>
+						<ul>
+							<li><a href="#2_8_1" title="Creating a lookup object is useful when repeatedly checking to see if values are in a defined values set. Looping through that defined values set array for each of the lookups would result in poor performance if the set of values to scan through is large, and if the lookup is being performed frequently.">2.8.1. A Real World Example</a></li>
+						</ul>
+					</li>
+					<li><a href="#2_9" title="Returns a reverse lookup object, where each key is a value from the specified source object, and where the value for each key is the associated key from the specified source.">2.9. Uize.Data.getReverseLookup</a></li>
+					<li><a href="#2_10" title="Returns an integer, representing the total number of keys in the specified object.">2.10. Uize.Data.getTotalKeys</a></li>
+					<li><a href="#2_11" title="Returns an array, representing the property values of the specified object.">2.11. Uize.Data.getValues</a></li>
+					<li><a href="#2_12" title="Returns a boolean, indicating whether or not the two specified objects are identical in their contents.">2.12. Uize.Data.identical</a>
+						<ul>
+							<li><a href="#2_12_1" title="An object, with multiple optional properties, specifying the criteria this method should use when comparing the two objects.">2.12.1. optionsOBJ</a>
+								<ul>
+									<li><a href="#2_12_1_1" title="A string, specifying how the values of properties at any level of the objects&apos; structure should be tested for equality.">2.12.1.1. equality</a></li>
+									<li><a href="#2_12_1_2" title="A boolean, specifying whether or not the two objects being compared may reference the same shared sub-object at any level of their structure.">2.12.1.2. allowConjoined</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li><a href="#2_13" title="Returns an object that represents the key-value intersection / commonality between the two specified objects.">2.13. Uize.Data.intersection</a></li>
+					<li><a href="#2_14" title="Returns a boolean, indicating whether or not the specified object or array is empty.">2.14. Uize.Data.isEmpty</a></li>
+					<li><a href="#2_15" title="Iterates through the specified array (or object), executing the specified mapper expression or function for each element (or object property), and packages the results into an array (or object).">2.15. Uize.Data.map</a>
+						<ul>
+							<li><a href="#2_15_1" title="The Uize.Data.map static method provides some key improvements over the Array object&apos;s map method in JavaScript 1.6 (which is not supported in all browsers)...">2.15.1. Key Benefits</a></li>
+							<li><a href="#2_15_2">2.15.2. Parameters</a>
+								<ul>
+									<li><a href="#2_15_2_1" title="Lets you specify a mapper expression or function, for mapping the value of the current element of the source array or the current property of the source object to a new value.">2.15.2.1. mapperSTRorFUNC</a></li>
+									<li><a href="#2_15_2_2" title="Lets you specify the source array or object, or the length of a fresh array, with which the Uize.Data.map method should map new values.">2.15.2.2. sourceARRAYorOBJorINT</a></li>
+									<li><a href="#2_15_2_3" title="Lets you specify where the result of the mapper should be packaged.">2.15.2.3. targetARRAYorOBJorBOOL</a></li>
+								</ul>
+							</li>
+							<li><a href="#2_15_3" title="Following are a bunch of examples, demonstrating just a sampling of what&apos;s possible using the Uize.Data.map method...">2.15.3. More Examples</a>
+								<ul>
+									<li><a href="#2_15_3_1" title="Uize.Data.map (&apos;+value&apos;,array,false);&#10;">2.15.3.1. Coerce all elements of an array to being numbers, modifying the source array...</a></li>
+									<li><a href="#2_15_3_2" title="Uize.Data.map (&apos;value + &quot;&quot;&apos;,array,false);&#10;">2.15.3.2. Coerce all elements of an array to being strings, modifying the source array...</a></li>
+									<li><a href="#2_15_3_3" title="Uize.Data.map (&apos;value || &quot;--- no answer provided ---&quot;&apos;,surveyQuestions,false);&#10;">2.15.3.3. Default all empty string properties of an object to some value, modifying the source object...</a></li>
+									<li><a href="#2_15_3_4" title="var uppercased = Uize.Data.map (&apos;value.toUpperCase ()&apos;,array);&#10;">2.15.3.4. Return an array of all the elements in the source array uppercased...</a></li>
+									<li><a href="#2_15_3_5" title="Uize.Data.map (&apos;&quot;prefix_&quot; + value&apos;,array,false);&#10;">2.15.3.5. Add a prefix to all the string elements of an array, modifying the source array...</a></li>
+									<li><a href="#2_15_3_6" title="var copyOfFoo = Uize.Data.map (&apos;value&apos;,foo);&#10;">2.15.3.6. Create a cheap (ie. not deep) copy of an object...</a></li>
+									<li><a href="#2_15_3_7" title="var range0to99 = Uize.Data.map (&apos;key&apos;,100);&#10;">2.15.3.7. Seed an array of 100 elements with the value range 0 to 99...</a></li>
+									<li><a href="#2_15_3_8" title="var range1to100 = Uize.Data.map (&apos;key + 1&apos;,100);&#10;">2.15.3.8. Seed an array of 100 elements with the value range 1 to 100...</a></li>
+									<li><a href="#2_15_3_9" title="var squaresOf0to99 = Uize.Data.map (&apos;Math.sqrt (key)&apos;,100);&#10;">2.15.3.9. Create an array of the square roots of 0 to 99...</a></li>
+									<li><a href="#2_15_3_10" title="var squaresOfArray = Uize.Data.map (Math.sqrt,array);&#10;">2.15.3.10. Create an array of the square roots of the values in the source array...</a></li>
+									<li><a href="#2_15_3_11" title="var capLetters = Uize.Data.map (&apos;String.fromCharCode (65 + key)&apos;,26);&#10;">2.15.3.11. Create an array of all the capital letters of the alphabet...</a></li>
+									<li><a href="#2_15_3_12" title="var powersOf2 = Uize.Data.map (&apos;Math.pow (2,key)&apos;,10);&#10;">2.15.3.12. Create a fresh array of 10 elements that are the first ten powers of 2...</a></li>
+									<li><a href="#2_15_3_13" title="var fibonacci = Uize.Data.map (&apos;key &gt; 1 ? this [key - 2] + this [key - 1] : key&apos;,30);&#10;">2.15.3.13. Creates an array of the first 30 numbers in the Fibonacci series...</a></li>
+									<li><a href="#2_15_3_14" title="var smoothed = Uize.Data.map (&#10;	&apos;key &amp;&amp; key &lt; this.length - 1 ? (this [key-1] + value + this [key+1]) / 3 : value&apos;,&#10;	array&#10;);&#10;">2.15.3.14. Smooth an array of values by averaging against adjacent neighbors...</a></li>
+									<li><a href="#2_15_3_15" title="Uize.Data.map (&apos;console.log (value)&apos;,logArray);&#10;">2.15.3.15. Output elements of a log array to the `Firebug` console on separate lines...</a></li>
+									<li><a href="#2_15_3_16" title="Uize.Data.map (&apos;console.log (key + &quot;: &quot; + value)&apos;,logArray);&#10;">2.15.3.16. Output elements of a log array to the `Firebug` console on separate lines, with line numbers...</a></li>
+									<li><a href="#2_15_3_17" title="var coordsStyleProperties = Uize.Data.map (&apos;value + &quot;px&quot;&apos;,coords);&#10;&#10;// EXAMPLE&#10;// this... {left:0,top:50,width:100,height:175}&#10;// produces this... {left:&apos;0px&apos;,top:&apos;50px&apos;,width:&apos;100px&apos;,height:&apos;175px&apos;}&#10;">2.15.3.17. Gets a style properties object from a pure number coords object...</a></li>
+									<li><a href="#2_15_3_18" title="var maxStringLength = Uize.Data.max (Uize.Data.map (&apos;value.length&apos;,stringsArray));&#10;">2.15.3.18. Gets the length of the longest string in an array of strings....</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li><a href="#2_16" title="Returns the maximum value from the specified array or object.">2.16. Uize.Data.max</a></li>
+					<li><a href="#2_17" title="Returns the minimum value from the specified array or object.">2.17. Uize.Data.min</a></li>
+				</ul>
+			</li>
+			<li><a href="#3">3. Static Properties</a>
+				<ul>
+					<li><a href="#3_1" title="IMPLEMENTATION INFO">3.1. Uize.Data.moduleName</a></li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<a name="1"></a>
+	<h1 class="heading1" title="1. Introduction"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>. </span>Introduction</h1>
+	<div class="contents1">
+		<p>The <code>Uize.Data</code> module provides methods for working with data, including comparing complex data structures, finding records, getting keys and values, etc.</p>
+		
+		<p><b>DEVELOPERS:</b> <a href="http://www.tomkidding.com" target="_blank" class="externalSiteLink">Chris van Rensburg</a></p>
+		
+		<a name="1_1"></a>
+		<h2 class="heading2" title="1. Introduction -&gt; 1.1. Examples"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. Examples">1</a>. </span>Examples</h2>
+		<div class="contents2">
+			<p>There are no dedicated showcase example pages for the <code>Uize.Data</code> module.</p>
+			
+			<p><span class="allCaps">SEARCH FOR EXAMPLES</span></p>
+			
+			<p>Use the link below to search for example pages on the <b>uize.com</b> Web site that reference the <code>Uize.Data</code> module...</p>
+			
+			<p><a href="http://www.google.com/search?hl=en&safe=off&domains=uize.com%2Fexamples&sitesearch=uize.com%2Fexamples&q=%22Uize.Data%22" target="_blank" class="externalSiteLink">SEARCH</a></p>
+		</div>
+		
+		<a name="1_2"></a>
+		<h2 class="heading2" title="1. Introduction -&gt; 1.2. Implementation Info"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>. </span>Implementation Info</h2>
+		<div class="contents2">
+			<p>The <code>Uize.Data</code> module defines the <code>Uize.Data</code> package under the <code><a href="../reference/Uize.html">Uize</a></code> namespace.</p>
+			
+			<a name="1_2_1"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.1. Features Introduced in This Module"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>.<a href="#1_2_1" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.1. Features Introduced in This Module">1</a>. </span>Features Introduced in This Module</h3>
+			<div class="contents3">
+				<p>The features listed in this section have been introduced in this module.</p>
+				
+				<p><span class="allCaps">STATIC METHODS</span></p>
+				
+				<p><code><a href="#2_1">Uize.Data.clones</a></code> | <code><a href="#2_2">Uize.Data.conjoined</a></code> | <code><a href="#2_3">Uize.Data.emptyOut</a></code> | <code><a href="#2_4">Uize.Data.filter</a></code> | <code><a href="#2_5">Uize.Data.findRecords</a></code> | <code><a href="#2_6">Uize.Data.getColumn</a></code> | <code><a href="#2_7">Uize.Data.getKeys</a></code> | <code><a href="#2_8">Uize.Data.getLookup</a></code> | <code><a href="#2_9">Uize.Data.getReverseLookup</a></code> | <code><a href="#2_10">Uize.Data.getTotalKeys</a></code> | <code><a href="#2_11">Uize.Data.getValues</a></code> | <code><a href="#2_12">Uize.Data.identical</a></code> | <code><a href="#2_13">Uize.Data.intersection</a></code> | <code><a href="#2_14">Uize.Data.isEmpty</a></code> | <code><a href="#2_15">Uize.Data.map</a></code> | <code><a href="#2_16">Uize.Data.max</a></code> | <code><a href="#2_17">Uize.Data.min</a></code></p>
+				
+				<p><span class="allCaps">STATIC PROPERTIES</span></p>
+				
+				<p><code><a href="#3_1">Uize.Data.moduleName</a></code></p>
+			</div>
+			
+			<a name="1_2_2"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.2. Features Overridden in This Module"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>.<a href="#1_2_2" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.2. Features Overridden in This Module">2</a>. </span>Features Overridden in This Module</h3>
+			<div class="contents3">
+				<p>No features have been overridden in this module.</p>
+			</div>
+			
+			<a name="1_2_3"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.3. Features Inherited From Other Modules"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>.<a href="#1_2_3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.3. Features Inherited From Other Modules">3</a>. </span>Features Inherited From Other Modules</h3>
+			<div class="contents3">
+				<p>This module has no inherited features.</p>
+			</div>
+			
+			<a name="1_2_4"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.4. Modules Directly Under This Namespace"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>.<a href="#1_2_4" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.4. Modules Directly Under This Namespace">4</a>. </span>Modules Directly Under This Namespace</h3>
+			<div class="contents3">
+				<p><code><a href="../reference/Uize.Data.Csv.html">Uize.Data.Csv</a></code> | <code><a href="../reference/Uize.Data.NameValueRecords.html">Uize.Data.NameValueRecords</a></code> | <code><a href="../reference/Uize.Data.PathsTree.html">Uize.Data.PathsTree</a></code> | <code><a href="../reference/Uize.Data.Simple.html">Uize.Data.Simple</a></code></p>
+			</div>
+			
+			<a name="1_2_5"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.5. Unit Tests"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>.<a href="#1_2_5" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.5. Unit Tests">5</a>. </span>Unit Tests</h3>
+			<div class="contents3">
+				<p>The <code>Uize.Data</code> module is unit tested by the <code><a href="../reference/Uize.Test.Uize.Data.html">Uize.Test.Uize.Data</a></code> test module.</p>
+			</div>
+		</div>
+	</div>
+	
+	<a name="2"></a>
+	<h1 class="heading1" title="2. Static Methods"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>. </span>Static Methods</h1>
+	<div class="contents1">
+		<a name="2_1"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.1. Uize.Data.clones"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_1" title="2. Static Methods -&gt; 2.1. Uize.Data.clones">1</a>. </span>Uize.Data.clones</h2>
+		<div class="contents2">
+			<p>Returns a boolean, indicating whether or not the two specified objects are identical clones of one another.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">areClonesBOOL = Uize.Data.clones (object1OBJ,object2OBJ);
+</pre>
+			
+			<p>Identical clones have identical structure, possess all the same values for corresponding simple valued properties, but may not share objects (so, object type properties' values may not be shared, either at a corresponding place in their structure, or at different places in their structure).</p>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>Uize.Data.clones (myObjectOBJ,myObjectOBJ)</code> will return <code>false</code>, since they are one and the same and not clones.</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_2"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.2. Uize.Data.conjoined"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_2" title="2. Static Methods -&gt; 2.2. Uize.Data.conjoined">2</a>. </span>Uize.Data.conjoined</h2>
+		<div class="contents2">
+			<p>Returns a boolean, indicating whether or not the two specified objects share any object references.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">areConjoinedBOOL = Uize.Data.conjoined (object1OBJ,object2OBJ);
+</pre>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>Uize.Data.conjoined (myObjectOBJ,myObjectOBJ)</code> will return <code>true</code>, since they are one and the same (ie. conjoined at the root).</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_3"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.3. Uize.Data.emptyOut"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_3" title="2. Static Methods -&gt; 2.3. Uize.Data.emptyOut">3</a>. </span>Uize.Data.emptyOut</h2>
+		<div class="contents2">
+			<p>Empties out the specified source object or array and returns a reference to the source.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">sourceOBJorARRAY = Uize.Data.emptyOut (sourceOBJorARRAY);
+</pre>
+			
+			<p>Using this method to empty out an array is equivalent to setting the array's length to <code>0</code>, while using this method to empty out an object results in all the object's properties being deleted. When the value <code>null</code> or <code>undefined</code> is specified for the <code>sourceOBJorARRAY</code> parameter, then this method will do nothing and simply return the value of the <code>sourceOBJorARRAY</code> parameter.</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">Uize.copyInto (Uize.Data.emptyOut (userData),userDataDefaults);
+</pre>
+			
+			<p>In the above example, a <code>userData</code> object has accumulated a large amount of user data and we wish to reset it to some initial default state. Because references to the object may be shared by many parts of an application's code, we want to re-initiatialize it by modifying its contents, restoring its state to that of the <code>userDataDefaults</code> object. The <code><a href="#2_3">Uize.Data.emptyOut</a></code> method lets us first empty out the object, after which it is passed as the source for the <code>Uize.copyInto</code> method call where we copy back in the contents of the <code>userDataDefaults</code> object.</p>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#2_14">Uize.Data.isEmpty</a></code> static method</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_4"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.4. Uize.Data.filter"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_4" title="2. Static Methods -&gt; 2.4. Uize.Data.filter">4</a>. </span>Uize.Data.filter</h2>
+		<div class="contents2">
+			<p>Returns an object with only the properties of the source object that are specified by an array of property names.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">filteredOBJ = Uize.Data.filter (sourceObjectOBJ,propertyNamesARRAY);
+</pre>
+			
+			<p>This method can be useful when receiving an info package of which only a subset needs to be stored or passed on to a subsequent process.</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">var someNodeStyle = {
+  color:'#fff',
+  left:'10px',
+  top:'-50px',
+  position:'absolute',
+  display:'none',
+  width:'200px',
+  height:'300px',
+  overflow:'hidden'
+};
+Uize.Node.setStyle (
+  'someOtherNode',Uize.Data.filter (someNodeStyle,['left','top','width','height'])
+);
+</pre>
+			
+			<p>In this example, a node style object that is being used for some node is being filtered for just its dimensions and positioning properties, to then be applied to some other node.</p>
+			
+			<p>Without this method, the <code>setStyle</code> method call would look like...</p>
+			
+			
+<pre class="sample-code">Uize.Node.setStyle (
+  'someOtherNode',
+  {
+    left:someNodeStyle.left,
+    top:someNodeStyle.top,
+    width:someNodeStyle.width,
+    height:someNodeStyle.height
+  }
+);
+</pre>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_5"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.5. Uize.Data.findRecords"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_5" title="2. Static Methods -&gt; 2.5. Uize.Data.findRecords">5</a>. </span>Uize.Data.findRecords</h2>
+		<div class="contents2">
+			<p>Returns an array of records from the specified record set that match the specified criteria.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">matchingRecordsARRAY = Uize.Data.findRecords (recordsARRAY,matchOBJ);
+</pre>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">var
+  employees = [
+    {firstName:'John',lastName:'Wilkey',department:'engineering'},
+    {firstName:'Marie',lastName:'Stevenson',department:'finance'},
+    {firstName:'Craig',lastName:'Pollack',department:'finance'},
+    {firstName:'Nick',lastName:'Arendsen',department:'engineering'},
+    {firstName:'Mark',lastName:'Strathley',department:'engineering'}
+  ],
+  financeEmployees = Uize.Data.findRecords (employees,{department:'finance'})
+;
+</pre>
+			
+			<p>In the above example, the variable <code>financeEmployees</code> would be an array with the value...</p>
+			
+			
+<pre class="sample-code">[
+  {firstName:'Marie',lastName:'Stevenson',department:'finance'},
+  {firstName:'Craig',lastName:'Pollack',department:'finance'}
+]
+</pre>
+			
+			<p>If the records in your record set are arrays, rather than objects, then you can specify a match object where the keys are numerical indexes representing the array element index / column index, as in...</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">var
+  employees = [
+    ['John','Wilkey','engineering'],
+    ['Marie','Stevenson','finance'],
+    ['Craig','Pollack','finance'],
+    ['Nick','Arendsen','engineering'],
+    ['Mark','Strathley','engineering']
+  ],
+  financeEmployees = Uize.Data.findRecords (employees,{2:'finance'})
+;
+</pre>
+			
+			<p>In the above example, the <code>financeEmployees</code> variable would have the same value as in the previous example.</p>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code>Uize.findRecord</code>, <code>Uize.findRecordNo</code>, and <code>Uize.recordMatches</code> static methods of the <code><a href="../reference/Uize.html">Uize</a></code> base class</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_6"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.6. Uize.Data.getColumn"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_6" title="2. Static Methods -&gt; 2.6. Uize.Data.getColumn">6</a>. </span>Uize.Data.getColumn</h2>
+		<div class="contents2">
+			<p>Returns an array of the values for the specified column of the specified record set.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">columnValuesARRAY = Uize.Data.getColumn (rowsARRAY,columnNameSTR);
+</pre>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">var
+  peopleNames = [
+    {first:'John',last:'Wilkey'},
+    {first:'Marie',last:'Stevenson'},
+    {first:'Craig',last:'Pollack'}
+  ],
+  firstNames = Uize.Data.getColumn (peopleNames,'first'),
+  lastNames = Uize.Data.getColumn (peopleNames,'last')
+;
+</pre>
+			
+			<p>In the above example, the variable <code>firstNames</code> would be an array with the value <code>['John','Marie','Craig']</code> and the variable <code>lastNames</code> would be an array with the value <code>['Wilkey','Stevenson','Pollack']</code>.</p>
+			
+			<p>The records / rows in the record set do not need to be objects - they can also be arrays.</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">var
+  peopleNames = [
+    ['John','Wilkey'],
+    ['Marie','Stevenson'],
+    ['Craig','Pollack']
+  ],
+  firstNames = Uize.Data.getColumn (peopleNames,0),
+  lastNames = Uize.Data.getColumn (peopleNames,1)
+;
+</pre>
+			
+			<p>In the above example, the <code>firstNames</code> and <code>lastNames</code> variables would have the same values as in the previous example.</p>
+			
+			<p><span class="allCaps">VARIATION</span></p>
+			
+			
+<pre class="sample-code">columnValuesARRAY = Uize.Data.getColumn (rowsARRAY,columnNameSTR,onlyUniquesBOOL);
+</pre>
+			
+			<p>When the value <code>true</code> is specified for the optional <code>onlyUniquesBOOL</code> parameter, then this method will only return the unique values for the specified column.</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">var
+  employees = [
+    {firstName:'John',lastName:'Wilkey',department:'engineering'},
+    {firstName:'Marie',lastName:'Stevenson',department:'finance'},
+    {firstName:'Craig',lastName:'Pollack',department:'finance'},
+    {firstName:'Nick',lastName:'Arendsen',department:'engineering'},
+    {firstName:'Mark',lastName:'Strathley',department:'engineering'}
+  ],
+  departments = Uize.Data.getColumn (employees,'department',true)
+;
+</pre>
+			
+			<p>In the above example, the variable <code>departments</code> would be an array with the value <code>['engineering','finance']</code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_7"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.7. Uize.Data.getKeys"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_7" title="2. Static Methods -&gt; 2.7. Uize.Data.getKeys">7</a>. </span>Uize.Data.getKeys</h2>
+		<div class="contents2">
+			<p>Returns an array, representing the keys (property names) of the specified object.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">keysARRAY = Uize.Data.getKeys (objectOBJ);
+</pre>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">var
+  personRecord = {
+    firstName:'John',
+    lastName:'Wilkey',
+    addressStreet:'1 Shiny House Way',
+    addressCity:'Richville',
+    addressState:'CA',
+    addressZip:'91234'
+  },
+  myKeys = Uize.getKeys (personRecord)
+;
+</pre>
+			
+			<p>After the above code has executed, the <code>myKeys</code> variable will have the value <code>['firstName', 'lastName', 'addressStreet', 'addressCity', 'addressState', 'addressZip']</code>.</p>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>when the value of <code>objectOBJ</code> parameter is <code>null</code> or <code>undefined</code>, an empty array will be returned</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_8"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.8. Uize.Data.getLookup"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_8" title="2. Static Methods -&gt; 2.8. Uize.Data.getLookup">8</a>. </span>Uize.Data.getLookup</h2>
+		<div class="contents2">
+			<p>Returns a lookup object, where each key is a value from the specified values array.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">lookupOBJ = Uize.Data.getLookup (valuesARRAY);
+</pre>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">var
+  fruits = ['apple','peach','pear','banana','orange','mango'],
+  fruitsLookup = Uize.Data.getLookup (fruits)
+;
+</pre>
+			
+			<p>After the above code is executed, the value of the <code>fruitsLookup</code> variable will be an object with the contents...</p>
+			
+			
+<pre class="sample-code">{apple:true, peach:true, pear:true, banana:true, orange:true, mango:true}
+</pre>
+			
+			<p><span class="allCaps">VARIATION</span></p>
+			
+			
+<pre class="sample-code">lookupOBJ = Uize.Data.getLookup (valuesARRAY,lookupValueANYTYPE);
+</pre>
+			
+			<p>By default, the <code><a href="#2_8">Uize.Data.getLookup</a></code> method creates an object whose properties all have the boolean value <code>true</code>. The optional <code>lookupValueANYTYPE</code> parameter lets you specify the value that should be assigned to each of the properties in the lookup object.</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">var
+  fruits = ['apple','peach','pear','banana','orange','mango'],
+  fruitsLookup = Uize.Data.getLookup (fruits,1)
+;
+</pre>
+			
+			<p>In the above example, the value <code>1</code> is being specified for the optional <code>lookupValueANYTYPE</code>. After the above code is executed, the value of the <code>fruitsLookup</code> variable will be an object with the contents...</p>
+			
+			
+<pre class="sample-code">{apple:1, peach:1, pear:1, banana:1, orange:1, mango:1}
+</pre>
+			
+			<a name="2_8_1"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.8. Uize.Data.getLookup -&gt; 2.8.1. A Real World Example"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_8" title="2. Static Methods -&gt; 2.8. Uize.Data.getLookup">8</a>.<a href="#2_8_1" title="2. Static Methods -&gt; 2.8. Uize.Data.getLookup -&gt; 2.8.1. A Real World Example">1</a>. </span>A Real World Example</h3>
+			<div class="contents3">
+				<p>Creating a lookup object is useful when repeatedly checking to see if values are in a defined values set. Looping through that defined values set array for each of the lookups would result in poor performance if the set of values to scan through is large, and if the lookup is being performed frequently.</p>
+				
+				<p>Let's consider an example...</p>
+				
+				
+<pre class="sample-code">function getValuesInMasterList (values,masterList) {
+  var result = [];
+  for (var valueNo = -1; ++valueNo &lt; values.length;) {
+    var value = values [valueNo];
+    if (Uize.isIn (masterList,value)) result.push (value);
+  }
+  return result;
+}
+</pre>
+				
+				<p>In the above example, a <code>getValuesInMasterList</code> function is being defined. This function accepts two parameters: an array of values, and a master list of values. The function returns an array, containing all the values from the values array that are present in the master list of values. The way it's implemented, on each iteration of the loop through the values array the <code>Uize.isIn</code> static method is being used to determined if the current value is in the master list array. This provides less than optimal performance, since the complexity is O(n2).</p>
+				
+				<p>Using the <code><a href="#2_8">Uize.Data.getLookup</a></code> static method, a more efficient solution can be fashioned, as follows...</p>
+				
+				
+<pre class="sample-code">function getValuesInMasterList (values,masterList) {
+  var
+    result = [],
+    masterListLookup = Uize.Data.getLookup (masterList)
+  ;
+  for (var valueNo = -1; ++valueNo &lt; values.length;) {
+    var value = values [valueNo];
+    if (masterListLookup [value]) result.push (value);
+  }
+  return result;
+}
+</pre>
+				
+				<p>In the improved version, a lookup object (aka hash table) is created before the loop. Then, in the loop, all that is needed to see if a value being inspected is in the master list is to do a simple dereference into the lookup object, using the value as the key / property name. Here the complexity is O(n), since indexing into the lookup object is constant time.</p>
+			</div>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_9"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.9. Uize.Data.getReverseLookup"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_9" title="2. Static Methods -&gt; 2.9. Uize.Data.getReverseLookup">9</a>. </span>Uize.Data.getReverseLookup</h2>
+		<div class="contents2">
+			<p>Returns a reverse lookup object, where each key is a value from the specified source object, and where the value for each key is the associated key from the specified source.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">reverseLookupOBJ = Uize.Data.getReverseLookup (hashOBJ);
+</pre>
+			
+			<p><span class="allCaps">EXAMPLE 1</span></p>
+			
+			
+<pre class="sample-code">var
+  htmlEntities = {quot:34, amp:38, lt:60, gt:62, nbsp:160, copy:169, reg:174},
+  htmlEntitiesReverseLookup = Uize.Data.getReverseLookup (htmlEntities)
+;
+</pre>
+			
+			<p>After the above code is executed, the value of the <code>htmlEntitiesReverseLookup</code> variable will be an object with the contents...</p>
+			
+			
+<pre class="sample-code">{34:'quot', 38:'amp', 60:'lt', 62:'gt', 160:'nbsp', 169:'copy', 174:'reg'}
+</pre>
+			
+			<p>By creating a reverse lookup, this code can lookup up an entity's character code from its name, or its name from its character code.</p>
+			
+			<p><span class="allCaps">VARIATION</span></p>
+			
+			
+<pre class="sample-code">reverseLookupOBJ = Uize.Data.getReverseLookup (valuesARRAY);
+</pre>
+			
+			<p>The <code><a href="#2_9">Uize.Data.getReverseLookup</a></code> method can also be used to create a reverse lookup object for an array. When a <code>valuesARRAY</code> parameter is specified in place of the <code>hashOBJ</code> parameter, a reverse lookup object is generated where each of the values in the array is a key in the object, and the value corresponding to each key is the index of the value in the array.</p>
+			
+			<p><span class="allCaps">EXAMPLE 2</span></p>
+			
+			
+<pre class="sample-code">var
+  frontRunnerLineup = [
+    'John Backsberg',
+    'Adrian Gullipeg',
+    'Sasha Djenduriba',
+    'Clark Holstrom',
+    'Michael Anderson',
+    'Henry Pratt',
+    'Jacob Zimbalist',
+    'Steven P. McLoughlan',
+    'Chris Gates',
+    'Richard Crumb'
+  ],
+  frontRunnerLineupReverseLookup = Uize.Data.getReverseLookup (frontRunnerLineup)
+;
+</pre>
+			
+			<p>After the above code is executed, the value of the <code>frontRunnerLineupReverseLookup</code> variable will be an object with the contents...</p>
+			
+			
+<pre class="sample-code">[
+  'John Backsberg':0,
+  'Adrian Gullipeg':1,
+  'Sasha Djenduriba':2,
+  'Clark Holstrom':3,
+  'Michael Anderson':4,
+  'Henry Pratt':5,
+  'Jacob Zimbalist':6,
+  'Steven P. McLoughlan':7,
+  'Chris Gates':8,
+  'Richard Crumb':9
+]
+</pre>
+			
+			<p>Now the code can look up a front-runner from the front-runner lineup using an index, or the code can determine if a particular person is in the front-runner lineup and what their finishing place is using the generated reverse lookup.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_10"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.10. Uize.Data.getTotalKeys"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_10" title="2. Static Methods -&gt; 2.10. Uize.Data.getTotalKeys">10</a>. </span>Uize.Data.getTotalKeys</h2>
+		<div class="contents2">
+			<p>Returns an integer, representing the total number of keys in the specified object.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">totalKeysINT = Uize.Data.getTotalKeys (objectOBJ);
+</pre>
+			
+			<p>Using the <code><a href="#2_10">Uize.Data.getTotalKeys</a></code> method to determine the number of keys an object has is more efficient than using the expression <code>Uize.Data.getKeys (myObject).length</code>, because the <code><a href="#2_10">Uize.Data.getTotalKeys</a></code> method doesn't populate an array. Furthermore, to determine if an object is empty, you <b>could</b> use the expression <code>!Uize.Data.getTotalKeys (myObject)</code>, but it would be more efficient to use the convenient <code><a href="#2_14">Uize.Data.isEmpty</a></code> static method.</p>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>when the value of <code>objectOBJ</code> parameter is <code>null</code> or <code>undefined</code>, the value <code>0</code> will be returned</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_11"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.11. Uize.Data.getValues"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_11" title="2. Static Methods -&gt; 2.11. Uize.Data.getValues">11</a>. </span>Uize.Data.getValues</h2>
+		<div class="contents2">
+			<p>Returns an array, representing the property values of the specified object.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">valuesARRAY = Uize.Data.getValues (objectOBJ);
+</pre>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">var
+  personRecord = {
+    firstName:'John',
+    lastName:'Wilkey',
+    addressStreet:'1 Shiny House Way',
+    addressCity:'Richville',
+    addressState:'CA',
+    addressZip:'91234'
+  },
+  myValues = Uize.getKeys (personRecord)
+;
+</pre>
+			
+			<p>After the above code has executed, the <code>myValues</code> variable will have the value <code>['John', 'Wilkey', '1 Shiny House Way', 'Richville', 'CA', '91234']</code>.</p>
+			
+			<p><span class="allCaps">VARIATION</span></p>
+			
+			
+<pre class="sample-code">valuesARRAY = Uize.Data.getValues (objectARRAY);
+</pre>
+			
+			<p>When an <code>objectARRAY</code> parameter is specified in place of an <code>objectOBJ</code> parameter, then the value of the <code>objectARRAY</code> parameter will be returned as the result. This behavior makes this method useful for canonicalizing what could be an object or an array to an array of values.</p>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>when the value of <code>objectOBJ</code> parameter is <code>null</code> or <code>undefined</code>, an empty array will be returned</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_12"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.12. Uize.Data.identical"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_12" title="2. Static Methods -&gt; 2.12. Uize.Data.identical">12</a>. </span>Uize.Data.identical</h2>
+		<div class="contents2">
+			<p>Returns a boolean, indicating whether or not the two specified objects are identical in their contents.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">areIdenticalBOOL = Uize.Data.identical (object1OBJ,object2OBJ);
+</pre>
+			
+			<p>This method recurses through the two objects specified by the <code>object1OBJ</code> and <code>object2OBJ</code> parameters, testing that they have the same structure and property values. The two parameters can be arbitrarily complex data trees, or simple type values (ie. string, number, boolean). In order to be considered identical, the two objects must have the same structure and the same values at all levels of their structure.</p>
+			
+			<p><span class="allCaps">VARIATION</span></p>
+			
+			
+<pre class="sample-code">areIdenticalBOOL = Uize.Data.identical (object1OBJ,object2OBJ,optionsOBJ);
+</pre>
+			
+			<p>When the optional <code><a href="#2_12_1">optionsOBJ</a></code> parameter is specified, comparison options can be specified to determine the criteria this method uses when comparing the two objects.</p>
+			
+			<a name="2_12_1"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.12. Uize.Data.identical -&gt; 2.12.1. optionsOBJ"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_12" title="2. Static Methods -&gt; 2.12. Uize.Data.identical">12</a>.<a href="#2_12_1" title="2. Static Methods -&gt; 2.12. Uize.Data.identical -&gt; 2.12.1. optionsOBJ">1</a>. </span>optionsOBJ</h3>
+			<div class="contents3">
+				<p>An object, with multiple optional properties, specifying the criteria this method should use when comparing the two objects.</p>
+				
+				<p>The value of the <code><a href="#2_12_1">optionsOBJ</a></code> parameter should be an object of the form...</p>
+				
+				
+<pre class="sample-code">{
+  equality : equalitySTR,             // 'type' | 'loose' | 'strict' (default)
+  allowConjoined : allowConjoinedBOOL // false | true (default)
+}
+</pre>
+				
+				<a name="2_12_1_1"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.12. Uize.Data.identical -&gt; 2.12.1. optionsOBJ -&gt; 2.12.1.1. equality"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_12" title="2. Static Methods -&gt; 2.12. Uize.Data.identical">12</a>.<a href="#2_12_1" title="2. Static Methods -&gt; 2.12. Uize.Data.identical -&gt; 2.12.1. optionsOBJ">1</a>.<a href="#2_12_1_1" title="2. Static Methods -&gt; 2.12. Uize.Data.identical -&gt; 2.12.1. optionsOBJ -&gt; 2.12.1.1. equality">1</a>. </span>equality</h4>
+				<div class="contents4">
+					<p>A string, specifying how the values of properties at any level of the objects' structure should be tested for equality.</p>
+					
+					<p>The optional <code><a href="#2_12_1_1">equality</a></code> property of the <code><a href="#2_12_1">optionsOBJ</a></code> parameter can have the following values...</p>
+					
+					<table class="list">
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>'type'</code> - When the value <code>'type'</code> is specified, the values of properties do not need to be equal - only be of the same type. This setting is useful when merely trying to determine if two objects have the same structure, but not that their values match. This could be used to determine if an object being interrogated conforms to some reference structure that might indicate the type of data it contains, but where the specific values are not important.</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>'loose'</code> - When the value <code>'loose'</code> is specified, then the values of all properties must be equal only according to a loose equality comparison, where strict type matching is not performed. According to this setting, the number value <code>1</code> would equal the string value <code>'1'</code>, or the number value <code>0</code> would equal the string value <code>''</code> (empty string) and the boolean value <code>false</code>.</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>'strict'</code> - When the value <code>'strict'</code> is specified (or when no value is specified for the <code><a href="#2_12_1_1">equality</a></code> property, or when no <code><a href="#2_12_1">optionsOBJ</a></code> parameter is specified), then the values of all properties must be equal according to a strict equality comparison, where strict type matching is performed. According to this setting, the number value <code>1</code> would <b>NOT</b> equal the string value <code>'1'</code>, the number value <code>0</code> would <b>NOT</b> equal the string value <code>''</code> (empty string), and so on.</td></tr>
+					</table>
+				</div>
+				
+				<a name="2_12_1_2"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.12. Uize.Data.identical -&gt; 2.12.1. optionsOBJ -&gt; 2.12.1.2. allowConjoined"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_12" title="2. Static Methods -&gt; 2.12. Uize.Data.identical">12</a>.<a href="#2_12_1" title="2. Static Methods -&gt; 2.12. Uize.Data.identical -&gt; 2.12.1. optionsOBJ">1</a>.<a href="#2_12_1_2" title="2. Static Methods -&gt; 2.12. Uize.Data.identical -&gt; 2.12.1. optionsOBJ -&gt; 2.12.1.2. allowConjoined">2</a>. </span>allowConjoined</h4>
+				<div class="contents4">
+					<p>A boolean, specifying whether or not the two objects being compared may reference the same shared sub-object at any level of their structure.</p>
+					
+					<p>By default (when no value is specified for the <code><a href="#2_12_1_2">allowConjoined</a></code> property, or when no <code><a href="#2_12_1">optionsOBJ</a></code> parameter is specified), two objects being compared will be considered identical even if they are conjoined and reference the same shared sub-object at some level of their structure. Therefore, the statement <code>Uize.Data.identical (myObjectOBJ,myObjectOBJ)</code> will return the value <code>true</code>.</p>
+					
+					<p>Specifying the value <code>false</code> for this property will require that object references at any level of the structure of the two objects being compared are unique to each object. So, the statement <code>Uize.Data.identical (myObjectOBJ,myObjectOBJ,{allowConjoined:false})</code> would produce the result <code>false</code>.</p>
+					
+					<p><span class="allCaps">IMPORTANT</span></p>
+					
+					<p>It should be noted that the two objects being compared could still have references to shared objects at different levels in their structure. To reliably test that two objects are identical and yet completely discrete, one can use the <code><a href="#2_1">Uize.Data.clones</a></code> static method.</p>
+				</div>
+			</div>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#2_1">Uize.Data.clones</a></code> and <code><a href="#2_2">Uize.Data.conjoined</a></code> static methods</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_13"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.13. Uize.Data.intersection"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_13" title="2. Static Methods -&gt; 2.13. Uize.Data.intersection">13</a>. </span>Uize.Data.intersection</h2>
+		<div class="contents2">
+			<p>Returns an object that represents the key-value intersection / commonality between the two specified objects.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">intersectionOBJ = Uize.Data.intersection (object1OBJ,object2OBJ);
+</pre>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">var
+  employee1 = {
+    firstName:'John',
+    lastName:'Wilkey',
+    startYear:'2008',
+    department:'engineering'
+  },
+  employee2 = {
+    firstName:'John',
+    lastName:'Henderson',
+    startYear:'2008',
+    department:'finance'
+  },
+  employeeInCommon = Uize.Data.intersection (employee1,employee2)
+;
+</pre>
+			
+			<p>In the above example, the variable <code>employeeInCommon</code> would have the value <code>{firstName:'John',startYear:'2008'}</code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_14"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.14. Uize.Data.isEmpty"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_14" title="2. Static Methods -&gt; 2.14. Uize.Data.isEmpty">14</a>. </span>Uize.Data.isEmpty</h2>
+		<div class="contents2">
+			<p>Returns a boolean, indicating whether or not the specified object or array is empty.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">isEmptyBOOL = Uize.Data.isEmpty (valueANYTYPE);
+</pre>
+			
+			<p>The <code>valueANYTYPE</code> parameter can be an <code><a href="../javascript-reference/Object.html">Object</a></code> reference, an <code><a href="../javascript-reference/Array.html">Array</a></code> reference, a <code><a href="../javascript-reference/Function.html">Function</a></code> reference, or any other type. For object type values that are references to <code><a href="../javascript-reference/Object.html">Object</a></code> instances, the <code><a href="#2_14">Uize.Data.isEmpty</a></code> method returns <code>true</code> if the object has no keys. For an array type value, <code><a href="#2_14">Uize.Data.isEmpty</a></code> returns <code>true</code> if the array has no elements (ie. a length of <code>0</code>). For any other type of value, <code><a href="#2_14">Uize.Data.isEmpty</a></code> returns <code>true</code> if the value is equivalent to <code>false</code>.</p>
+			
+			<p><span class="allCaps">EXAMPLES</span></p>
+			
+			
+<pre class="sample-code">Uize.Data.isEmpty ({});                   // returns true
+Uize.Data.isEmpty ([]);                   // returns true
+Uize.Data.isEmpty ('');                   // returns true
+Uize.Data.isEmpty (0);                    // returns true
+Uize.Data.isEmpty (false);                // returns true
+Uize.Data.isEmpty (null);                 // returns true
+Uize.Data.isEmpty (undefined);            // returns true
+Uize.Data.isEmpty (NaN);                  // returns true
+
+Uize.Data.isEmpty ({blah:0});             // returns false
+Uize.Data.isEmpty (['blah']);             // returns false
+Uize.Data.isEmpty ('blah');               // returns false
+Uize.Data.isEmpty (1);                    // returns false
+Uize.Data.isEmpty (true);                 // returns false
+Uize.Data.isEmpty (function () {});       // returns false
+</pre>
+			
+			<p>For object type values that are references to instances of objects <b>other</b> than <code><a href="../javascript-reference/Object.html">Object</a></code> (such as the <code><a href="../javascript-reference/String.html">String</a></code>, <code><a href="../javascript-reference/Boolean.html">Boolean</a></code>, and <code><a href="../javascript-reference/Number.html">Number</a></code> objects, or <code><a href="../reference/Uize.html">Uize</a></code> subclasses), the object type value will first be resolved to a value by calling the <code>valueOf Instrinsic Method</code> of the object, and this resolved value will then be evaluated according the rules described above. Consider the following examples...</p>
+			
+			<p><span class="allCaps">EXAMPLES</span></p>
+			
+			
+<pre class="sample-code">Uize.Data.isEmpty (new String (''));      // returns true
+Uize.Data.isEmpty (new Number (0));       // returns true
+Uize.Data.isEmpty (new Boolean (false));  // returns true
+Uize.Data.isEmpty (new Uize ({value:0}))  // returns true
+
+Uize.Data.isEmpty (new String ('blah'));  // returns false
+Uize.Data.isEmpty (new Number (0));       // returns false
+Uize.Data.isEmpty (new Boolean (true));   // returns false
+Uize.Data.isEmpty (new Uize ({value:1}))  // returns false
+</pre>
+			
+			<p>Using <code>Uize.Data.isEmpty (objectOrArray)</code> has better performance than the expression <code>!Uize.Data.getTotalKeys (objectOrArray)</code>, because the latter expression iterates through all the keys of the object or elements of the array to count the total.</p>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the related <code><a href="#2_10">Uize.Data.getTotalKeys</a></code> static method</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#2_3">Uize.Data.emptyOut</a></code> static method</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_15"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.15. Uize.Data.map"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_15" title="2. Static Methods -&gt; 2.15. Uize.Data.map">15</a>. </span>Uize.Data.map</h2>
+		<div class="contents2">
+			<p>Iterates through the specified array (or object), executing the specified mapper expression or function for each element (or object property), and packages the results into an array (or object).</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">mappedARRAYorOBJ = Uize.Data.map (mapperSTRorFUNC,sourceARRAYorOBJorINT);
+</pre>
+			
+			<p>The <code><a href="#2_15">Uize.Data.map</a></code> method is very vertatile and can be used to accomplish a wide array of different tasks. Sure, you could do all the things you could do with <code><a href="#2_15">Uize.Data.map</a></code> by writing your own loops. This method serves as a convenience, making certain operations more concise in application code.</p>
+			
+			<p>The example below - which takes a source array of strings and produces a new array of those strings uppercased - illustrates the difference between writing your own iterator and using the <code><a href="#2_15">Uize.Data.map</a></code> method.</p>
+			
+			<p><span class="allCaps">INSTEAD OF...</span></p>
+			
+			
+<pre class="sample-code">var newArray = [];
+for (var elementNo = -1; ++elementNo &lt; sourceArray.length;) {
+  newArray.push (sourceArray [elementNo].toUpperCase ());
+}
+</pre>
+			
+			<p><span class="allCaps">USE...</span></p>
+			
+			
+<pre class="sample-code">var newArray = Uize.Data.map ('value.toUpperCase ()',sourceArray);
+</pre>
+			
+			<p><span class="allCaps">OR USING A FUNCTION...</span></p>
+			
+			
+<pre class="sample-code">var newArray = Uize.Data.map (
+  function (value) {return value.toUpperCase ()},sourceArray
+);
+</pre>
+			
+			<p>Another example below - which generates an array seeded with the values 0 to 99 - further illustrates the convenience of the <code><a href="#2_15">Uize.Data.map</a></code> method...</p>
+			
+			<p><span class="allCaps">INSTEAD OF...</span></p>
+			
+			
+<pre class="sample-code">var newArray = [];
+for (var elementNo = -1; ++elementNo &lt; 100;) {
+  newArray.push (elementNo);
+}
+</pre>
+			
+			<p><span class="allCaps">USE...</span></p>
+			
+			
+<pre class="sample-code">var newArray = Uize.Data.map ('key',100);
+</pre>
+			
+			<p><span class="allCaps">OR USING A FUNCTION...</span></p>
+			
+			
+<pre class="sample-code">var newArray = Uize.Data.map (function (value,key) {return key},100);
+</pre>
+			
+			<a name="2_15_1"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.1. Key Benefits"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_15" title="2. Static Methods -&gt; 2.15. Uize.Data.map">15</a>.<a href="#2_15_1" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.1. Key Benefits">1</a>. </span>Key Benefits</h3>
+			<div class="contents3">
+				<p>The <code><a href="#2_15">Uize.Data.map</a></code> static method provides some key improvements over the <code><a href="../javascript-reference/Array.html">Array</a></code> object's map method in JavaScript 1.6 (which is not supported in all browsers)...</p>
+				
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>can operate on objects as well as arrays</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>supports a more concise mapper expression string, as well as supporting a function</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>can optionally modify the source array or object</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>allows easy creation of a fresh source array for mapping, by specifying an array length</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>lets you specify an explicit target, where mapped values should be written</td></tr>
+				</table>
+			</div>
+			
+			<p><span class="allCaps">VARIATION</span></p>
+			
+			
+<pre class="sample-code">mappedARRAYorOBJ = Uize.Data.map (
+  mapperSTRorFUNC,
+  sourceARRAYorOBJorINT,
+  targetARRAYorOBJorBOOL
+);
+</pre>
+			
+			<p>By default, the <code><a href="#2_15">Uize.Data.map</a></code> method maps values of the source array or object and packages the result into a new array or object. Specifying the optional <code><a href="#2_15_2_3">targetARRAYorOBJorBOOL</a></code> parameter allows you to explicitly specify a target for the operation, into which the mapped values will be packaged.</p>
+			
+			<a name="2_15_2"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.2. Parameters"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_15" title="2. Static Methods -&gt; 2.15. Uize.Data.map">15</a>.<a href="#2_15_2" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.2. Parameters">2</a>. </span>Parameters</h3>
+			<div class="contents3">
+				<a name="2_15_2_1"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.2. Parameters -&gt; 2.15.2.1. mapperSTRorFUNC"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_15" title="2. Static Methods -&gt; 2.15. Uize.Data.map">15</a>.<a href="#2_15_2" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.2. Parameters">2</a>.<a href="#2_15_2_1" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.2. Parameters -&gt; 2.15.2.1. mapperSTRorFUNC">1</a>. </span>mapperSTRorFUNC</h4>
+				<div class="contents4">
+					<p>Lets you specify a mapper expression or function, for mapping the value of the current element of the source array or the current property of the source object to a new value.</p>
+					
+					<p><span class="allCaps">VALUES</span></p>
+					
+					<table class="list">
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>When a <b>string</b> value is specified, then the JavaScript expression specified in the string will be compiled to a mapper function that will then be used for each iteration. An expression specified for this parameter must be a complete JavaScript expression (it may not be arbitrary, multi-statement chunks of code) following the same requirements of any expression that you might place on the right-hand side of an assignment statement. Within the context of your expression, the identifiers <code>this</code>, <code>key</code>, and <code>value</code> are defined, where <code>this</code> is a reference to the source array or object, <code>key</code> is the index of the current element of the source array or the name of the current property of the source object, and where <code>value</code> is the value of the current element of the source array or the current property of the source object.</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>When a <b>function</b> reference is specified, then the specified function will be called during each iteration. The function you specify should expect to receive two parameters: <code>value</code> and <code>key</code>. If you don't care about the key, then you can omit the second parameter and only have one parameter declared in your function's argument list. The mapper function is called as an instance method on the source array or object, so the <code>this</code> keyword can be used to access the source array or object for querying the values of other elements or properties.</td></tr>
+					</table>
+				</div>
+				
+				<a name="2_15_2_2"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.2. Parameters -&gt; 2.15.2.2. sourceARRAYorOBJorINT"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_15" title="2. Static Methods -&gt; 2.15. Uize.Data.map">15</a>.<a href="#2_15_2" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.2. Parameters">2</a>.<a href="#2_15_2_2" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.2. Parameters -&gt; 2.15.2.2. sourceARRAYorOBJorINT">2</a>. </span>sourceARRAYorOBJorINT</h4>
+				<div class="contents4">
+					<p>Lets you specify the source array or object, or the length of a fresh array, with which the <code><a href="#2_15">Uize.Data.map</a></code> method should map new values.</p>
+					
+					<p><span class="allCaps">VALUES</span></p>
+					
+					<table class="list">
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>When an <b>array</b> is specified, then the <code><a href="#2_15">Uize.Data.map</a></code> method will iterate through the elements of the array.</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>When an <b>object</b> is specified, then the <code><a href="#2_15">Uize.Data.map</a></code> method will iterate through the properties of the object.</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>When a <b>positive integer</b> is specified, then the <code><a href="#2_15">Uize.Data.map</a></code> method will create a fresh array of the length specified by this parameter and then iterate through that array. This is a convenient facility for seeding arrays of some desired length with automatically generated values.</td></tr>
+					</table>
+				</div>
+				
+				<a name="2_15_2_3"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.2. Parameters -&gt; 2.15.2.3. targetARRAYorOBJorBOOL"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_15" title="2. Static Methods -&gt; 2.15. Uize.Data.map">15</a>.<a href="#2_15_2" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.2. Parameters">2</a>.<a href="#2_15_2_3" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.2. Parameters -&gt; 2.15.2.3. targetARRAYorOBJorBOOL">3</a>. </span>targetARRAYorOBJorBOOL</h4>
+				<div class="contents4">
+					<p>Lets you specify where the result of the mapper should be packaged.</p>
+					
+					<p>You can provide your own target array or object, you can specify to use the source array or object, or you can specify that the result should not be packaged (ie. discarded).</p>
+					
+					<p><span class="allCaps">VALUES</span></p>
+					
+					<table class="list">
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>true</code> - When the <b>boolean</b> value <code>true</code> is specified (the default value for the <code><a href="#2_15_2_3">targetARRAYorOBJorBOOL</a></code> parameter if it is omitted), then the <code><a href="#2_15">Uize.Data.map</a></code> method will package the result from the mapper into a new array or object.</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>false</code> - When the <b>boolean</b> value <code>false</code> is specified (not the same as not specifying a value), then the <code><a href="#2_15">Uize.Data.map</a></code> method will package the result from the mapper into the source array or object specified by the <code><a href="#2_15_2_2">sourceARRAYorOBJorINT</a></code> parameter (ie. won't use a different target).</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>null</code> - When the special value <code>null</code> is specified (not the same as not specifying a value), then the <code><a href="#2_15">Uize.Data.map</a></code> method will not package the result from the mapper into an array or object. This is useful if you just want to use this method as an iterator, without the memory expense of building an array or object.</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><b>object or array</b> - When an <b>object</b> or <b>array</b> is explicitly specified, then the <code><a href="#2_15">Uize.Data.map</a></code> method will package the result from the mapper into that array or object. This is convenient if you already have an array or object into which you wish to package the mapped values, or if you want to repeatedly map multiple source arrays or objects into a common array or object so that the mapped values are merged together. Incidentally, specifying the array or object value of the <code><a href="#2_15_2_2">sourceARRAYorOBJorINT</a></code> parameter as the value for the <code><a href="#2_15_2_3">targetARRAYorOBJorBOOL</a></code> parameter has the same effect as specifying the value <code>false</code> for this parameter (ie. use the source as the target, don't use a different target).</td></tr>
+					</table>
+				</div>
+			</div>
+			
+			<a name="2_15_3"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_15" title="2. Static Methods -&gt; 2.15. Uize.Data.map">15</a>.<a href="#2_15_3" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples">3</a>. </span>More Examples</h3>
+			<div class="contents3">
+				<p>Following are a bunch of examples, demonstrating just a sampling of what's possible using the <code><a href="#2_15">Uize.Data.map</a></code> method...</p>
+				
+				<a name="2_15_3_1"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.1. Coerce all elements of an array to being numbers, modifying the source array..."><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_15" title="2. Static Methods -&gt; 2.15. Uize.Data.map">15</a>.<a href="#2_15_3" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples">3</a>.<a href="#2_15_3_1" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.1. Coerce all elements of an array to being numbers, modifying the source array...">1</a>. </span>Coerce all elements of an array to being numbers, modifying the source array...</h4>
+				<div class="contents4">
+					
+<pre class="sample-code">Uize.Data.map ('+value',array,false);
+</pre>
+				</div>
+				
+				<a name="2_15_3_2"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.2. Coerce all elements of an array to being strings, modifying the source array..."><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_15" title="2. Static Methods -&gt; 2.15. Uize.Data.map">15</a>.<a href="#2_15_3" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples">3</a>.<a href="#2_15_3_2" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.2. Coerce all elements of an array to being strings, modifying the source array...">2</a>. </span>Coerce all elements of an array to being strings, modifying the source array...</h4>
+				<div class="contents4">
+					
+<pre class="sample-code">Uize.Data.map ('value + ""',array,false);
+</pre>
+				</div>
+				
+				<a name="2_15_3_3"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.3. Default all empty string properties of an object to some value, modifying the source object..."><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_15" title="2. Static Methods -&gt; 2.15. Uize.Data.map">15</a>.<a href="#2_15_3" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples">3</a>.<a href="#2_15_3_3" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.3. Default all empty string properties of an object to some value, modifying the source object...">3</a>. </span>Default all empty string properties of an object to some value, modifying the source object...</h4>
+				<div class="contents4">
+					
+<pre class="sample-code">Uize.Data.map ('value || "--- no answer provided ---"',surveyQuestions,false);
+</pre>
+				</div>
+				
+				<a name="2_15_3_4"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.4. Return an array of all the elements in the source array uppercased..."><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_15" title="2. Static Methods -&gt; 2.15. Uize.Data.map">15</a>.<a href="#2_15_3" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples">3</a>.<a href="#2_15_3_4" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.4. Return an array of all the elements in the source array uppercased...">4</a>. </span>Return an array of all the elements in the source array uppercased...</h4>
+				<div class="contents4">
+					
+<pre class="sample-code">var uppercased = Uize.Data.map ('value.toUpperCase ()',array);
+</pre>
+				</div>
+				
+				<a name="2_15_3_5"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.5. Add a prefix to all the string elements of an array, modifying the source array..."><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_15" title="2. Static Methods -&gt; 2.15. Uize.Data.map">15</a>.<a href="#2_15_3" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples">3</a>.<a href="#2_15_3_5" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.5. Add a prefix to all the string elements of an array, modifying the source array...">5</a>. </span>Add a prefix to all the string elements of an array, modifying the source array...</h4>
+				<div class="contents4">
+					
+<pre class="sample-code">Uize.Data.map ('"prefix_" + value',array,false);
+</pre>
+				</div>
+				
+				<a name="2_15_3_6"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.6. Create a cheap (ie. not deep) copy of an object..."><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_15" title="2. Static Methods -&gt; 2.15. Uize.Data.map">15</a>.<a href="#2_15_3" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples">3</a>.<a href="#2_15_3_6" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.6. Create a cheap (ie. not deep) copy of an object...">6</a>. </span>Create a cheap (ie. not deep) copy of an object...</h4>
+				<div class="contents4">
+					
+<pre class="sample-code">var copyOfFoo = Uize.Data.map ('value',foo);
+</pre>
+				</div>
+				
+				<a name="2_15_3_7"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.7. Seed an array of 100 elements with the value range 0 to 99..."><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_15" title="2. Static Methods -&gt; 2.15. Uize.Data.map">15</a>.<a href="#2_15_3" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples">3</a>.<a href="#2_15_3_7" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.7. Seed an array of 100 elements with the value range 0 to 99...">7</a>. </span>Seed an array of 100 elements with the value range 0 to 99...</h4>
+				<div class="contents4">
+					
+<pre class="sample-code">var range0to99 = Uize.Data.map ('key',100);
+</pre>
+				</div>
+				
+				<a name="2_15_3_8"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.8. Seed an array of 100 elements with the value range 1 to 100..."><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_15" title="2. Static Methods -&gt; 2.15. Uize.Data.map">15</a>.<a href="#2_15_3" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples">3</a>.<a href="#2_15_3_8" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.8. Seed an array of 100 elements with the value range 1 to 100...">8</a>. </span>Seed an array of 100 elements with the value range 1 to 100...</h4>
+				<div class="contents4">
+					
+<pre class="sample-code">var range1to100 = Uize.Data.map ('key + 1',100);
+</pre>
+				</div>
+				
+				<a name="2_15_3_9"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.9. Create an array of the square roots of 0 to 99..."><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_15" title="2. Static Methods -&gt; 2.15. Uize.Data.map">15</a>.<a href="#2_15_3" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples">3</a>.<a href="#2_15_3_9" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.9. Create an array of the square roots of 0 to 99...">9</a>. </span>Create an array of the square roots of 0 to 99...</h4>
+				<div class="contents4">
+					
+<pre class="sample-code">var squaresOf0to99 = Uize.Data.map ('Math.sqrt (key)',100);
+</pre>
+				</div>
+				
+				<a name="2_15_3_10"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.10. Create an array of the square roots of the values in the source array..."><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_15" title="2. Static Methods -&gt; 2.15. Uize.Data.map">15</a>.<a href="#2_15_3" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples">3</a>.<a href="#2_15_3_10" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.10. Create an array of the square roots of the values in the source array...">10</a>. </span>Create an array of the square roots of the values in the source array...</h4>
+				<div class="contents4">
+					
+<pre class="sample-code">var squaresOfArray = Uize.Data.map (Math.sqrt,array);
+</pre>
+				</div>
+				
+				<a name="2_15_3_11"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.11. Create an array of all the capital letters of the alphabet..."><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_15" title="2. Static Methods -&gt; 2.15. Uize.Data.map">15</a>.<a href="#2_15_3" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples">3</a>.<a href="#2_15_3_11" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.11. Create an array of all the capital letters of the alphabet...">11</a>. </span>Create an array of all the capital letters of the alphabet...</h4>
+				<div class="contents4">
+					
+<pre class="sample-code">var capLetters = Uize.Data.map ('String.fromCharCode (65 + key)',26);
+</pre>
+				</div>
+				
+				<a name="2_15_3_12"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.12. Create a fresh array of 10 elements that are the first ten powers of 2..."><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_15" title="2. Static Methods -&gt; 2.15. Uize.Data.map">15</a>.<a href="#2_15_3" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples">3</a>.<a href="#2_15_3_12" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.12. Create a fresh array of 10 elements that are the first ten powers of 2...">12</a>. </span>Create a fresh array of 10 elements that are the first ten powers of 2...</h4>
+				<div class="contents4">
+					
+<pre class="sample-code">var powersOf2 = Uize.Data.map ('Math.pow (2,key)',10);
+</pre>
+				</div>
+				
+				<a name="2_15_3_13"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.13. Creates an array of the first 30 numbers in the Fibonacci series..."><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_15" title="2. Static Methods -&gt; 2.15. Uize.Data.map">15</a>.<a href="#2_15_3" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples">3</a>.<a href="#2_15_3_13" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.13. Creates an array of the first 30 numbers in the Fibonacci series...">13</a>. </span>Creates an array of the first 30 numbers in the Fibonacci series...</h4>
+				<div class="contents4">
+					
+<pre class="sample-code">var fibonacci = Uize.Data.map ('key &gt; 1 ? this [key - 2] + this [key - 1] : key',30);
+</pre>
+				</div>
+				
+				<a name="2_15_3_14"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.14. Smooth an array of values by averaging against adjacent neighbors..."><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_15" title="2. Static Methods -&gt; 2.15. Uize.Data.map">15</a>.<a href="#2_15_3" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples">3</a>.<a href="#2_15_3_14" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.14. Smooth an array of values by averaging against adjacent neighbors...">14</a>. </span>Smooth an array of values by averaging against adjacent neighbors...</h4>
+				<div class="contents4">
+					
+<pre class="sample-code">var smoothed = Uize.Data.map (
+  'key &amp;&amp; key &lt; this.length - 1 ? (this [key-1] + value + this [key+1]) / 3 : value',
+  array
+);
+</pre>
+				</div>
+				
+				<a name="2_15_3_15"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.15. Output elements of a log array to the `Firebug` console on separate lines..."><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_15" title="2. Static Methods -&gt; 2.15. Uize.Data.map">15</a>.<a href="#2_15_3" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples">3</a>.<a href="#2_15_3_15" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.15. Output elements of a log array to the `Firebug` console on separate lines...">15</a>. </span>Output elements of a log array to the `Firebug` console on separate lines...</h4>
+				<div class="contents4">
+					
+<pre class="sample-code">Uize.Data.map ('console.log (value)',logArray);
+</pre>
+				</div>
+				
+				<a name="2_15_3_16"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.16. Output elements of a log array to the `Firebug` console on separate lines, with line numbers..."><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_15" title="2. Static Methods -&gt; 2.15. Uize.Data.map">15</a>.<a href="#2_15_3" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples">3</a>.<a href="#2_15_3_16" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.16. Output elements of a log array to the `Firebug` console on separate lines, with line numbers...">16</a>. </span>Output elements of a log array to the `Firebug` console on separate lines, with line numbers...</h4>
+				<div class="contents4">
+					
+<pre class="sample-code">Uize.Data.map ('console.log (key + ": " + value)',logArray);
+</pre>
+				</div>
+				
+				<a name="2_15_3_17"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.17. Gets a style properties object from a pure number coords object..."><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_15" title="2. Static Methods -&gt; 2.15. Uize.Data.map">15</a>.<a href="#2_15_3" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples">3</a>.<a href="#2_15_3_17" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.17. Gets a style properties object from a pure number coords object...">17</a>. </span>Gets a style properties object from a pure number coords object...</h4>
+				<div class="contents4">
+					
+<pre class="sample-code">var coordsStyleProperties = Uize.Data.map ('value + "px"',coords);
+
+// EXAMPLE
+// this... {left:0,top:50,width:100,height:175}
+// produces this... {left:'0px',top:'50px',width:'100px',height:'175px'}
+</pre>
+				</div>
+				
+				<a name="2_15_3_18"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.18. Gets the length of the longest string in an array of strings...."><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_15" title="2. Static Methods -&gt; 2.15. Uize.Data.map">15</a>.<a href="#2_15_3" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples">3</a>.<a href="#2_15_3_18" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.18. Gets the length of the longest string in an array of strings....">18</a>. </span>Gets the length of the longest string in an array of strings....</h4>
+				<div class="contents4">
+					
+<pre class="sample-code">var maxStringLength = Uize.Data.max (Uize.Data.map ('value.length',stringsArray));
+</pre>
+				</div>
+			</div>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_16"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.16. Uize.Data.max"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_16" title="2. Static Methods -&gt; 2.16. Uize.Data.max">16</a>. </span>Uize.Data.max</h2>
+		<div class="contents2">
+			<p>Returns the maximum value from the specified array or object.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">var maxValueNUM = Uize.Data.max (valuesARRAYorOBJ);
+</pre>
+			
+			<p>When an object is specified for the <code>valuesARRAYorOBJ</code> parameter, then the maximum property value in the object will be returned.</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">var
+  employeeSalaries = {
+    'John Anderson':80000,
+    'Peter Hendriks':56000,
+    'Jacob Previn':75000,
+    'Scarlet Sjedsondorf':63000
+  },
+  maxEmployeeSalary = Uize.Data.max (employeeSalaries)
+;
+</pre>
+			
+			<p>In the above example, the variable <code>maxEmployeeSalary</code> will be left with the value <code>80000</code>.</p>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>if any of the values are not a number, then this method will return the value <code>NaN</code></td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#2_17">Uize.Data.min</a></code> static method</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_17"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.17. Uize.Data.min"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_17" title="2. Static Methods -&gt; 2.17. Uize.Data.min">17</a>. </span>Uize.Data.min</h2>
+		<div class="contents2">
+			<p>Returns the minimum value from the specified array or object.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">var minValueNUM = Uize.Data.min (valuesARRAYorOBJ);
+</pre>
+			
+			<p>When an object is specified for the <code>valuesARRAYorOBJ</code> parameter, then the minimum property value in the object will be returned.</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">var
+  employeeSalaries = {
+    'John Anderson':80000,
+    'Peter Hendriks':56000,
+    'Jacob Previn':75000,
+    'Scarlet Sjedsondorf':63000
+  },
+  minEmployeeSalary = Uize.Data.min (employeeSalaries)
+;
+</pre>
+			
+			<p>In the above example, the variable <code>minEmployeeSalary</code> will be left with the value <code>56000</code>.</p>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>if any of the values are not a number, then this method will return the value <code>NaN</code></td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#2_16">Uize.Data.max</a></code> static method</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+	</div>
+	
+	<a name="3"></a>
+	<h1 class="heading1" title="3. Static Properties"><span class="headingNumber"><a href="#3" title="3. Static Properties">3</a>. </span>Static Properties</h1>
+	<div class="contents1">
+		<a name="3_1"></a>
+		<h2 class="heading2" title="3. Static Properties -&gt; 3.1. Uize.Data.moduleName"><span class="headingNumber"><a href="#3" title="3. Static Properties">3</a>.<a href="#3_1" title="3. Static Properties -&gt; 3.1. Uize.Data.moduleName">1</a>. </span>Uize.Data.moduleName</h2>
+		<div class="contents2">
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+	</div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

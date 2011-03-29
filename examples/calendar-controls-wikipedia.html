@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Calendar Controls Wikipedia | JavaScript Examples | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="Uize.Widget.Calendar"/>
+	<meta name="description" content="See an example of how a calendar widget can be used to control Wikipedia, where choosing a date loads the Wikipedia page for that date in an IFRAME."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.example.css"/>
+	<link rel="stylesheet" href="../css/widget.calendar.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	<a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow">JAVASCRIPT EXAMPLES</a>
+	Calendar Controls Wikipedia
+	<div id="page-actions" class="pageActions">
+		<a href="source-code/calendar-controls-wikipedia.html" class="buttonLink">SOURCE</a>
+	</div>
+</h1>
+
+<div class="main">
+	<!-- explanation copy -->
+
+	<div class="explanation">
+		<p>In this example, an instance of the <a href="../reference/Uize.Widget.Calendar.html"><code>Uize.Widget.Calendar</code></a> class is used to wire up a simple calendar widget that controls the URL for a document in an IFRAME to its right. Use the calendar to choose a date and the IFRAME will load information about what happened on that day in time, courtesy of <a href="http://www.wikipedia.org" target="_blank">wikipedia.org</a>. As powerful of a resource as it is, Wikipedia does not - unfortunately - contain reference information for the future. Because of this failing on Wikipedia's part, the calendar widget is configured to not allow selection of dates in the future, through the use of its <code>maxValue</code> set-get property.</p>
+	</div>
+
+	<div style="width:752px; margin:auto;">
+		<div id="page_calendar-shell" style="float:left;"></div>
+		<iframe id="page-wikipediaIframe" name="wikipediaIframe" src="../js/Uize/blank.html" style="width:580px; height:370px; margin-left:10px; border-width:5px; border-style:solid;" class="insetBorderColor" frameborder="0"></iframe>
+		<br style="clear:left;"/>
+	</div>
+</div>
+
+<!-- JavaScript code to insert the calendar widget and wire up the page -->
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Example.library',
+		'UizeDotCom.Page.Example',
+		'Uize.Widget.Calendar',
+		'Uize.Templates.Calendar',
+		'Uize.Date'
+	],
+	builder:function () {
+		/*** create the example page widget ***/
+			var page = window.page = new UizeDotCom.Page.Example;
+
+		/*** update wikipedia iframe to new date ***/
+			function updateWikipediaIframe () {
+				var
+					date = calendar.valueOf (),
+					monthName = Uize.Date.monthNames [date.getMonth ()],
+					fullYear = date.getFullYear ()
+				;
+				page.setNodeProperties (
+					'wikipediaIframe',
+					{
+						src:
+							'http://www.wikipedia.org/wiki/' +
+							monthName + '_' + fullYear + '#' + fullYear + '_' + monthName + '_' + date.getDate ()
+					}
+				);
+			}
+
+		/*** add the calendar child widget ***/
+			var calendar = page.addChild (
+				'calendar',
+				Uize.Widget.Calendar,
+				{
+					built:false,
+					html:Uize.Templates.Calendar,
+					maxValue:new Date
+				}
+			);
+			calendar.wire ('Changed.value',updateWikipediaIframe);
+
+		/*** wire up the page widget ***/
+			page.wireUi ();
+
+		/*** initialize the wikipedia iframe ***/
+			updateWikipediaIframe ();
+	}
+});
+
+</script>
+
+</body>
+</html>
+

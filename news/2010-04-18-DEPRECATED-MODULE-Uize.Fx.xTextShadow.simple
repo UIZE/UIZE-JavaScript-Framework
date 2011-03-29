@@ -1,0 +1,15 @@
+The =Uize.Fx.xTextShadow= extension module has been deprecated in favor of the new and more powerful =Uize.Fx.xShadows= module.
+
+As its name implies, the =Uize.Fx.xTextShadow= module provided support specifically for fading / animating values of the =text-shadow= CSS3 style property. The new =Uize.Fx.xShadows= module provides support for animating both the =text-shadow= *and* =box-shadow= style properties.
+
+BACKWARDS COMPATIBILITY
+
+Because the =Uize.Fx.xTextShadow= module has only been deprecated and has not yet been eliminated, code currently using it should continue to work. However, relying on the backwards compatibility provision will not be as efficient as directly using the new =Uize.Fx.xShadows= module. Therefore, code that was previously using the =Uize.Fx.xTextShadow= module should be updated to use the new =Uize.Fx.xShadows= module.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2010-04-18 - DEPRECATED MODULE: Uize.Fx.xTextShadow
+....................................................................................

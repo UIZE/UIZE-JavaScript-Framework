@@ -1,0 +1,22 @@
+.ratingStars {
+	position:relative;
+	width:100px;
+	height:20px;
+	margin:3px auto 5px auto;
+}
+.ratingStars div {
+	position:absolute;
+	left:0;
+	top:0;
+	width:100px;
+	height:20px;
+}
+.ratingStars .ratingStarsEmpty {
+	opacity:.6;
+	filter:alpha(opacity=60);
+	background:url(../images/stars-empty.gif);
+}
+.ratingStars .ratingStarsFull {
+	background:url(../images/stars-full.gif);
+}
+

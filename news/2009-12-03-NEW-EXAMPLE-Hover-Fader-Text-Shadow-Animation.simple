@@ -1,0 +1,13 @@
+The new [[../examples/hover-fader-text-shadow-animation.html][Hover Fader Text Shadow Animation]] example demonstrates how the =Uize.Fx.xTextShadow= extension module can be used in conjunction with the =Uize.Widget.HoverFader= class to produce stunning menu animation effects that include text shadow animation.
+
+Using the =Uize.Fx.xTextShadow= module, color, horizontal offset, vertical offset, and blur radius properties for an arbitrary number of text shadows can be animated between one state and another, making a vast array of interesting effects possible. Combined with the =Uize.Widget.HoverFader= for managing hover animation effects, menus become very interesting. A wide variety of preset configurations are provided in this demo, from the simple to the psychedelic. And if you're feeling adventurous, dive in and tweak the parameters yourself to create your own unique text shadow animation effects.
+
+[[../examples/hover-fader-text-shadow-animation.html][CHECK IT OUT]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-12-03 - NEW EXAMPLE: Hover Fader Text Shadow Animation
+....................................................................................

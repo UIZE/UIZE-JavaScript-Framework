@@ -1,0 +1,31 @@
+The =Uize.String= module has been improved with the addition of a number of new methods, and has been modified with the migration of some methods into the new =Uize.String.Lines= module.
+
+New Methods
+	The =Uize.String= module has been improved with the addition of the new =Uize.String.contains=, =Uize.String.trimLeft=, and =Uize.String.trimRight= static methods.
+
+	The new =Uize.String.contains= methods tests to see if a specified substring is contained anywhere within a specified source string. The new =Uize.String.trimLeft= and =Uize.String.trimRight= static methods perform whitespace trimming on only one side of a source string, rather than on both sides as with the already existing =Uize.String.trim= method.
+
+Migrated Methods
+	The =Uize.String.indent= and =Uize.String.splitLines= static methods have been migrated out of the =Uize.String= module and into the new =Uize.String.Lines= module, as =Uize.String.Lines.indent= and =Uize.String.Lines.split=, respectively.
+
+	The new =Uize.String.Lines= module provides a rich set of functionality geared specifically towards working with multi-line strings. The methods migrated out of the =Uize.String= module were considered too esoteric to be in such a fundamental code module.
+
+	MIGRATED
+	...........................................................................
+	Uize.String.indent (...)      >> BECOMES >>  Uize.String.Lines.indent (...)
+	Uize.String.splitLines (...)  >> BECOMES >>  Uize.String.Lines.split (...)
+	...........................................................................
+
+	NOT BACKWARDS COMPATIBLE
+
+	This change is *not backwards compatible*. If you had code that was relying on the =Uize.String.indent= and =Uize.String.splitLines= methods, then you will have to modify that code to require the new =Uize.String.Lines= module and to call the methods by their new names.
+
+[[Uize.String][READ MORE]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2010-02-19 - IMPROVED MODULE: Uize.String
+....................................................................................

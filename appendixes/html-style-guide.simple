@@ -1,0 +1,146 @@
+Introduction
+	This document provides a style guide for authoring of HTML and CSS that is recommended when building applications with the UIZE JavaScript Framework.
+
+### TO DO
+	Language & Browser Issues
+		Unvarred Global Identifiers and DOM Node ID's (in Internet Explorer)
+			- discuss issue where if you have a global identifier that is named the same as a node ID, you must use a var statement in its assignment
+
+		Multiline Return Statements
+			return (
+				...
+				...
+				...
+			);
+			return {
+				...
+				...
+				...
+			};
+			return [
+				...
+				...
+				...
+			];
+
+	- scruncher-related issues specific to subclassing
+		- same-named private class and instance properties and methods when in non-scrunched mode (unanticipated namespace non-collisions)
+		- class and subclass sharing the same namespace prefix when scrunched (unanticipated namespace collisions)
+
+	- internal access to set-get properties
+		- use of internal names in set method (eg. this.set ({_myProperty:'myValue'}) )
+
+HTML
+	Use Valid XHTML
+		This means no incorrect case for tags, and all tags with no content (eg. hr, br) should be closed with a slash, as in...
+
+		.....
+		<hr/>
+		<br/>
+		.....
+
+	No Smart Quotes, Bullet Characters or Other MS Word Residue
+		Don't introduce copy into HTML pages that contains special characters. This can happen when copying-and-pasting copy from Microsoft Word documents. In such cases, convert the special characters as appropriate. For example, for bullet characters, use real bullet lists.
+
+	Avoid Hard Linebreaks in Paragraphs
+		For long paragraphs, avoid separating lines in your text editor using hard line breaks. Different text editors should soft wrap as desired. Different people may have different display widths for their text editing region. By introducing hard line breaks based upon an individual editor's width setting, one runs the risk of introducing more and more linebreaks over time as different people iterate on a document. This is a phenomenon known as Linebreak Rot.
+
+	Spaces
+		Use single spaces between words as well as sentences. Avoid using double spaces to separate sentences.
+
+	JavaScript Wired Links
+		For links that are to only have an action once wired up by JavaScript code, and that should be dead when clicked on until they are wired up, use =javascript://= for the =href= attribute.
+
+		EXAMPLE
+		.............................................................................
+		<a id="page_chooseImage" href="javascript://" class="button">CHOOSE IMAGE</a>
+		.............................................................................
+
+		Using the =javascript:= protocol in the href means that the browser will execute the JavaScript code after the protocol when the link is clicked. Now, the JavaScript code in this case is simply a JavaScript comment (not to be confused with the "//" that follows other protocols, such as =http:=), so the browser does nothing - as if the link was simply dead.
+
+		There are some other ways that a similar effect can be achieved (as well as some non-starters), but each has its own issues, as outlined below...
+
+		BAD
+		........................................................
+		<a id="page_chooseImage" class="button">CHOOSE IMAGE</a>
+		........................................................
+
+		No =href= attribute means that the =a= tag is being used as a section anchor in the document, and it will not be decorated as a link and will not behave as a link (it will not be clickable, will not receive focus, will not be styled by link pseudoclass CSS selectors, etc.).
+
+		BAD
+		................................................................
+		<a id="page_chooseImage" href="" class="button">CHOOSE IMAGE</a>
+		................................................................
+
+		A link with an empty href, when clicked, will navigate to an empty URL path relative to the document's current base URL. In most cases - unless a =base href= tag is used to explicitly set the document's base URL - an empty link will result in navigating to the current document (essentially, reloading the page) when clicked.
+
+		BAD
+		.................................................................
+		<a id="page_chooseImage" href="#" class="button">CHOOSE IMAGE</a>
+		.................................................................
+
+		A link with an empty anchor, when clicked, will change the document's location (to contain the empty anchor) and will scroll to the top of the document in some browsers.
+
+		BAD
+		...........................................................................
+		<a id="page_chooseImage" href="javascript:" class="button">CHOOSE IMAGE</a>
+		...........................................................................
+
+		When clicked, this link will open the JavaScript console window in some browsers.
+
+		NOT IDEAL
+		..................................................................................
+		<a id="page_chooseImage" href="javascript:void(0)" class="button">CHOOSE IMAGE</a>
+		..................................................................................
+
+		It'll work, but it's just not the shortest technique.
+
+		NOT IDEAL
+		.......................................................................................
+		<a id="page_chooseImage" href="" onclick="return false" class="button">CHOOSE IMAGE</a>
+		.......................................................................................
+
+		This will also work, but it's most definitely not the shortest technique.
+
+	Make id the First Attribute
+		For tags that have an =id= attribute, make this the first attribute in the tag. This is a recommended convention and not a strict requirement. It certainly doesn't make any difference to the browser, but adopting this convention does make it easier to scan through the HTML to find the tags that are likely to be particularly consequential in either the styling or interactive logic of a document.
+
+		INSTEAD OF...
+		.............................................................................
+		<a href="javascript://" class="button" id="page_chooseImage">CHOOSE IMAGE</a>
+		.............................................................................
+
+		USE...
+		.............................................................................
+		<a id="page_chooseImage" href="javascript://" class="button">CHOOSE IMAGE</a>
+		.............................................................................
+
+CSS
+	Concise Color Values
+		For color values specified in hexadecimal RGB syntax (ie. =#ff0000=), CSS supports a more concise form where only one hex digit is specified per channel. When colors are written this way, the MSB (most significant byte) and LSB (least significant byte) for each channel are assumed to be identical in value. Using this concise form, =#ff0000= (pure red) can be written simply as =#f00=, =#000000= (black) can be written as =#000=, =#ffffff= (white) can be written as =#fff=, etc.
+
+		This concise form is convenient for gray values, primary colors, as well as a host of colors that don't need great precision. To reduce the size of CSS code, the concise form is recommended. You will likely find yourself using it quite often in CSS. If you have CSS code that uses the longer form, you might want to run a global search and replace on the code. With a text editor that supports regular expressions (like `jEdit`), you could replace the long form with the concise form as follows...
+
+		REPLACE...
+		..............................................
+		#([0-9a-fA-F])\1([0-9a-fA-F])\2([0-9a-fA-F])\3
+		..............................................
+
+		WITH...
+		.......
+		#$1$2$3
+		.......
+
+General Practices
+	Fix Things As Your See Them
+		As you work on code, if you encounter code that is not in line with the coding style guide, please fix the code to bring it in line.
+
+	### Refactor Aggressively
+
+	Keep Commented Out Code Current Or Delete It
+		If you're going to keep commented out code for an extended period of time, keep it current and refactor it along with refactoring of active code, or just delete it.
+
+		Beyond a certain point, there's little value in keeping out-dated code inside your source. If you ever decide to use this code again but haven't been keeping it updated, uncommenting it could introduce all sorts of problems and reintroduce old bugs that took long hours of investigation to fix.
+
+		Also, if you don't update the code it could contain patterns that could continue to match on searches you would use for finding and updating code during refactoring. If you keep finding matches on some old function that is no longer supported, for example, your out-of-date commented out code could become the source of continued false alerts.
+

@@ -1,0 +1,13 @@
+The new [[../explainers/javascript-libraries.html][JavaScript Libraries]] explainer discusses JavaScript library files and how they can be used to improve the performance of Web pages.
+
+In the UIZE JavaScript Framework, JavaScript libraries are bundles of JavaScript Modules. Think of a JavaScript module as like a book, where the various methods and properties of the module make up the "pages" of the book. A library is a collection of books. So, in this metaphor, a JavaScript library file is a collection of JavaScript modules, bundled together into a single file. JavaScript libraries offer a performance benefit for pages, by reducing the number of HTTP requests needed in order for the page to have all the JavaScript modules it needs - especially important for pages with rich client interactivity that may use dozens of different modules.
+
+[[../explainers/javascript-libraries.html][LEARN MORE]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-06-10 - NEW EXPLAINER: JavaScript Libraries
+....................................................................................

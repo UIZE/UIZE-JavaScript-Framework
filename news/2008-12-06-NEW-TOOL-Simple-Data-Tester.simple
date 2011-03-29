@@ -1,0 +1,13 @@
+The new [[../examples/simple-data-tester.html][Simple Data Tester]] tool (which makes use of the =Uize.Simple= module) lets you test the parsing and conversion of Simple Data documents into internal data structures.
+
+This tool provides a demonstration of the Simple Data formatting rules and lets you edit and preview changes to a sample Simple Data document.
+
+[[../examples/simple-data-tester.html][CHECK IT OUT]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2008-12-06 - NEW TOOL: Simple Data Tester
+....................................................................................

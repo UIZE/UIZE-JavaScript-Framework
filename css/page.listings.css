@@ -1,0 +1,40 @@
+.infoRow {
+	margin-top:20px;
+	clear:left;
+}
+.infoRow img {
+	float:left;
+	padding:3px;
+	border:1px solid #bcc;
+	background:#e4eeee;
+	margin-left:15px;
+	margin-right:25px;
+	margin-bottom:20px;
+	box-shadow:8px 8px 20px rgba(0,0,0,.7);
+	-moz-box-shadow:8px 8px 20px rgba(0,0,0,.7);
+	-webkit-box-shadow:8px 8px 20px rgba(0,0,0,.7);
+}
+a.imageLink, a.imageLink:link, a.imageLink:visited, a.imageLink:hover, a.imageLink:active {
+	border:none;
+	text-decoration:none;
+}
+.infoRow br.end {
+	clear:both;
+}
+.infoRow .more {
+	text-align:right;
+	white-space:nowrap;
+}
+.infoRow .more a {
+	font-size:11px;
+	color:#000;
+	letter-spacing:2px;
+	text-decoration:none;
+	margin-left:10px;
+	padding-bottom:1px;
+	border-bottom:2px dotted #ffa200;
+}
+.infoRow .more a:hover {
+	border-bottom-style:solid;
+}
+

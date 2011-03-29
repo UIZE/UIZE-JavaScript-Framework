@@ -1,0 +1,40 @@
+The =Uize.Fx= module has been improved in a number of ways.
+
+Opacity Now Supported
+	The =Uize.Fx.fadeStyle= method now supports fading of the =opacity= style property.
+
+	This module deals with the difference between Internet Explorer and browsers that support the CSS standard =opacity= style property. For IE, the proprietary =filter= style property is used, but as a developer you can specify =opacity= as if it were supported by IE.
+
+	EXAMPLES
+	....................................................................................
+	Uize.Fx.fadeStyle ('myNode',null,{opacity:0});        // from current to transparent
+	Uize.Fx.fadeStyle ('myNode',{opacity:0},{opacity:1}); // from transparent to opaque
+	....................................................................................
+
+Other Newly Supported Style Properties
+	The =Uize.Fx.fadeStyle= method now supports fading of a number of other CSS style properties, including =wordSpacing=, =textIndent=, and =backgroundPosition=.
+
+More Flexible Color Values
+	The =Uize.Fx.fadeStyle= method now supports a wide variety of ways for specifying values for color CSS style properties.
+
+	Basically, color values can be specified in any way that a color can be specified when using the single parameter variations of the =Uize.Color.RgbColor= constructor. For example, the following statements would all fade the background color of the node "myNode" from the current color to white...
+
+	EXAMPLES
+	..................................................................................
+	Uize.Fx.fadeStyle ('myNode',null,{backgroundColor:'#fff'});
+	Uize.Fx.fadeStyle ('myNode',null,{backgroundColor:'#ffffff'});
+	Uize.Fx.fadeStyle ('myNode',null,{backgroundColor:'f'});
+	Uize.Fx.fadeStyle ('myNode',null,{backgroundColor:'Rgb(255,255,255)');
+	Uize.Fx.fadeStyle ('myNode',null,{backgroundColor:{red:255,green:255,blue:255});
+	Uize.Fx.fadeStyle ('myNode',null,{backgroundColor:[255,255,255]});
+	Uize.Fx.fadeStyle ('myNode',null,{backgroundColor:new Uize.Color.RgbColor (255)});
+	Uize.Fx.fadeStyle ('myNode',null,{backgroundColor:255});
+	..................................................................................
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-04-01 - IMPROVED MODULE: Uize.Fx
+....................................................................................

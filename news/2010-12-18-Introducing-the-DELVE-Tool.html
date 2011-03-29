@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2010-12-18 - Introducing the DELVE Tool | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="The UIZE project is excited to announce the release of DELVE, a powerful new Web based tool that lets developers delve into the inner workings of pages that use the UIZE JavaScript Framework."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2010.html" class="breadcrumb breadcrumbWithArrow">2010 NEWS</a>
+	2010-12-18 - Introducing the DELVE Tool
+
+</h1>
+
+<div class="main">
+<div class="contents0">
+	<p>The UIZE project is excited to announce the release of <a href="../explainers/using-the-delve-tool.html">DELVE</a>, a powerful new Web based tool that lets developers <b>delve</b> into the inner workings of pages that use the UIZE JavaScript Framework.</p>
+	
+	<p>This is the first release version of the DELVE tool. While it can still be considered to be in a public beta state, it already sports a powerful array of features that will help developers to be more productive when writing UIZE powered Web pages and rich Internet applications.</p>
+	
+	<p>Among other things, DELVE lets you...</p>
+	
+	<table class="list">
+	<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see a tree or flattened list of all the widgets instantiated on a page</td></tr>
+	<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see a tree or flattened list of all the modules built for a page</td></tr>
+	<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see a list of all widgets that are in the disabled state, widgets that are not wired, widgets that are missing implied node DOM, all widget classes built for the page, only widget classes of which instances have been created, only widget classes of which instances <b>have not</b> been created, and many more different types of lists / reports of useful information</td></tr>
+	<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see a summary for various objects, such as widget instances, class or package modules, DOM nodes, functions and methods, etc.</td></tr>
+	<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see a listing of all the features that can be automatically detected for a class or an instance's class, such as instance methods, static methods, instance properties, set-get properties, etc.</td></tr>
+	<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>for widgets, see a summary of the widget's parentage, child widgets, sibling widgets, implied nodes, etc.</td></tr>
+	<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>for widget classes, see a summary of all the instances of such classes on the page</td></tr>
+	<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>easily get documentation for a widget's class, or any UIZE module (whether loaded on the page or not)</td></tr>
+	<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>watch all the events for a specific widget on the page</td></tr>
+	<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>and much more...</td></tr>
+	</table>
+	<p>DELVE is a completely Web based tool, so nothing needs to be installed in order to use it - it is launched from a simple bookmarklet. Furthermore, DELVE doesn't require the cooperation of the page that it inspects. So, if you're authoring a Web page that uses UIZE, you don't need to put the page into any special debug mode or anything like that in order to be able to use DELVE to inspect the page.</p>
+	
+	<p><a href="../explainers/using-the-delve-tool.html">LEARN MORE</a></p>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

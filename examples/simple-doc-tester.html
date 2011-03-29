@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>SimpleDoc Tester | JavaScript Tools | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="tool Uize.Doc.Simple"/>
+	<meta name="description" content="Experiment with SimpleDoc - a Wikitext like document format. See its formatting rules in action. See how it is generated to HTML and preview the HTML."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.example.css"/>
+	<link rel="stylesheet" href="../css/widget.tabs.css"/>
+	<link rel="stylesheet" href="css/tabbed.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	<a href="../javascript-tool-examples.html" class="breadcrumb breadcrumbWithArrow">JAVASCRIPT TOOLS</a>
+	SimpleDoc Tester
+	<div id="page-actions" class="pageActions">
+		<a href="source-code/simple-doc-tester.html" class="buttonLink">SOURCE</a>
+	</div>
+</h1>
+
+<div class="main">
+	<!-- explanation copy -->
+
+	<div class="explanation">
+		<p>The <b>SimpleDoc Tester</b> tool (which makes use of the <a href="../reference/Uize.Doc.Simple.html"><code>Uize.Doc.Simple</code></a> module) lets you test the conversion of SIMPLE document (.simple) files into HTML documents. It provides a demonstration of the SimpleDoc formatting rules and lets you edit and preview changes to a sample SIMPLE document.</p>
+	</div>
+
+	<form>
+	<div id="page_tabs" class="tabShell">
+		<div class="tabStubShell">
+			<a id="page_tabs_option0" class="tabStub" href="javascript://">SIMPLE DOC SOURCE</a>
+			<a id="page_tabs_option1" class="tabStub" href="javascript://">CONVERTED TO HTML</a>
+			<a id="page_tabs_option2" class="tabStub" href="javascript://">HTML PREVIEW</a>
+			<br style="clear:left;"/>
+		</div>
+		<div class="tabBodyShell">
+			<div id="page_tabs-option0TabBody" class="tabBodyInactive">
+				<textarea id="page-simpleDocSource" wrap="off"></textarea>
+			</div>
+			<div id="page_tabs-option1TabBody" class="tabBodyInactive">
+				<textarea id="page-convertedToHtml" wrap="off" readonly="readonly"></textarea>
+			</div>
+			<div id="page_tabs-option2TabBody" class="tabBodyInactive">
+				<iframe id="page-htmlPreview" src="../js/Uize/blank.html" style="width:100%; height:100%; border:none;" frameborder="0"></iframe>
+			</div>
+		</div>
+	</div>
+	</form>
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Example',
+		'Uize.Widget.Options.Tabbed',
+		'Uize.Doc.Simple',
+		'UizeDotCom.Templates.SimpleDocSample',
+		'Uize.Templates.SimpleDoc'
+	],
+	builder:function () {
+		/* TO DO:
+			- in FF, fix links within generated HTML document in IFRAME (lack of base tag?)
+			- in IE, fix problem of JS not loading correctly (lack of base tag?)
+		*/
+		/*** create the example page widget ***/
+			var page = window.page = new UizeDotCom.Page.Example;
+
+		/*** add property for managing update of converted HTML and preview ***/
+			page.Class.registerProperties ({
+				simpleDocSource:{
+					name:'simpleDocSource',
+					onChange:function () {
+						var _html = Uize.Templates.SimpleDoc.process ({
+							pathToRoot:'../',
+							body:Uize.Doc.Simple.toDocument (page.get ('simpleDocSource'))
+						});
+						page.setNodeValue ('convertedToHtml',_html);
+
+						/*** write the generated HTML to the preview iframe ***/
+							var
+								_previewIframe = page.getNode ('htmlPreview'),
+								_previewDocument = _previewIframe.contentDocument || _previewIframe.contentWindow.document
+							;
+							_previewDocument.open ('text/html');
+							_previewDocument.writeln (_html);
+							_previewDocument.close ();
+					}
+				}
+			});
+
+		/*** add the tabs child widget ***/
+			var tabs = window.tabs = page.addChild (
+				'tabs',
+				Uize.Widget.Options.Tabbed,
+				{
+					bodyClassActive:'tabBodyActive',
+					bodyClassInactive:'tabBodyInactive',
+					values:['simpleDocSource','convertedToHtml','htmlPreview'],
+					value:'simpleDocSource'
+				}
+			);
+			tabs.wire (
+				'Changed.value',
+				function () {
+					var tabsValue = tabs + '';
+					if (tabsValue == 'convertedToHtml' || tabsValue == 'htmlPreview')
+						page.set ({simpleDocSource:page.getNodeValue ('simpleDocSource')})
+					;
+				}
+			);
+
+		/*** wire up the page widget ***/
+			page.wireUi ();
+
+		/*** initialize sample data ***/
+			page.setNodeValue ('simpleDocSource',UizeDotCom.Templates.SimpleDocSample.process ());
+	}
+});
+
+</script>
+
+</body></html>
+

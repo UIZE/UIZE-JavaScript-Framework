@@ -1,0 +1,17 @@
+<%@
+	required ('UizeDotCom.Templates.SimpleDoc');
+	input ({title:'string',description:'string',body:'string'});
+%><%@ startBlock ('displayTitleHtml') %>
+	<a href="../javascript-reference.html" class="breadcrumb breadcrumbWithArrow">JAVASCRIPT REFERENCE</a>
+	<% .title %>
+<%@ endBlock () %><%=
+	UizeDotCom.Templates.SimpleDoc.process ({
+		title:input.title,
+		section:'JavaScript Reference',
+		description:input.description || 'This is a reference document for a feature of the JavaScript language.',
+		pathToRoot:'../',
+		displayTitleHtml:displayTitleHtml (),
+		body:input.body
+	})
+%>
+

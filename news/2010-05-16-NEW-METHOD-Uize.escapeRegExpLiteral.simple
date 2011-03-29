@@ -1,0 +1,16 @@
+The new =Uize.escapeRegExpLiteral= static method of the =Uize= base class provides a convenient way to escape regular expression special characters inside a string that is to be used as a literal match in a regular expression.
+
+SYNTAX
+......................................................................
+escapedRegExpLiteralSTR = Uize.escapeRegExpLiteral (regExpLiteralSTR);
+......................................................................
+
+Using this method, any string can be escaped so that it can be used in creating a regular expression where that string can be matched as a literal match. Strings may sometimes contain special regular expression characters, such as the =(= (open parenthesis), =)= (close parenthesis), =.= (period), =?= (question mark), and other characters that have special meaning in the context of regular expression strings. If you wanted to use a regular expression to match a string that contained any of these special characters, then the special characters would have to be escaped. The =Uize.escapeRegExpLiteral= method takes care of this for you.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2010-05-16 - NEW METHOD: Uize.escapeRegExpLiteral
+....................................................................................

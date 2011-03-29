@@ -1,0 +1,30 @@
+Deprecated Methods in Uize.Data
+	The =Uize.Data.indexIn= and =Uize.Data.isIn= static methods have been deprecated in the =Uize.Data= module and migrated into the =Uize= base class.
+
+	DEPRECATED
+	..........................................................
+	Uize.Data.indexIn (...)  >> BECOMES >>  Uize.indexIn (...)
+	Uize.Data.isIn (...)     >> BECOMES >>  Uize.isIn (...)
+	..........................................................
+
+	These methods have proven useful enough to various =Uize= subclasses and other modules that it was time to promote them to first class citizens in the framework. The benefit of this change is that modules that have been requiring the =Uize.Data= module only to access these methods will no longer need to. The new =Uize.indexIn= method now also supports searching backwards from the end of the array.
+
+	Because these methods have been deprecated, they are still accessible from the =Uize.Data= module for backwards compatibility reasons. At some point in the future, however, they *will* be cleared out. If you have modules that are using these static methods, you will want to at some point update the code to call the methods on the =Uize= module (or =_class=, if a call is within a subclass of =Uize=).
+
+SimpleDoc Improvements
+	Some improvements have been made to the modules that support the SimpleDoc documentation build scripts.
+
+	The =Uize.Simple= module has been refactored and optimized for code size and performance. Additionally, a bug was fixed with the =Uize.Simple.collapseChildren= static method that was causing failures in cases where the name of a child node was =name=, =value=, or =children=. Also, a bug was fixed in the =Uize.SimpleDoc= module that was causing certain bullet lists to not be recognized correctly (eg. =- &#61;title&#61; description=), and documents now only get a contents list if there are some sections in the document (yes, you *can* occasionally have a document that has no nested structure).
+
+Miscellaneous Improvements
+	Various miscellaneous small improvements have been made.
+
+	Several modules have been updated to take advantage of the migration of the =Uize.Data.indexIn= and =Uize.Data.isIn= static methods into the =Uize= base class. Some performance and code size optimizations have been made to the =Uize.Fade= class. A new =Uize.Node.centerInWindow= static method has been added to the =Uize.Node= module that positions the specified node so that it is centered within the window.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2008-12-12 - New Features and Framework Changes
+....................................................................................

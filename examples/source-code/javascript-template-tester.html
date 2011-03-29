@@ -1,0 +1,227 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>JavaScript Template Tester - HTML Source Code | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework HTML example source code"/>
+	<meta name="description" content="This is the source code for the JavaScript Template Tester example"/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../../css/page.css"/>
+	<link rel="stylesheet" href="../../css/page.source.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../../index.html" title="UIZE JavaScript Framework home"></a>
+	SOURCE CODE: JavaScript Template Tester
+	<div id="page-actions" class="pageActions">
+		<a href="../javascript-template-tester.html" class="buttonLink">VIEW EXAMPLE</a>
+	</div>
+</h1>
+
+<pre>
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+&lt;head&gt;
+  &lt;title&gt;JavaScript Template Tester | JavaScript Tools | UIZE JavaScript Framework&lt;/title&gt;
+  &lt;meta name="keywords" content="tool Uize.Template"/&gt;
+  &lt;meta name="description" content="Experiment with JavaScript templates and see how they can be used to generate HTML. See them compiled to JavaScript functions, and JavaScript modules."/&gt;
+  &lt;link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/&gt;
+  &lt;link rel="stylesheet" href="../css/page.css"/&gt;
+  &lt;link rel="stylesheet" href="../css/page.example.css"/&gt;
+  &lt;link rel="stylesheet" href="../css/widget.tabs.css"/&gt;
+  &lt;link rel="stylesheet" href="css/tabbed.css"/&gt;
+  &lt;style type="text/css"&gt;
+    /*** overrides to widget.tabs.css ***/
+      #page_tabs .tabBodyShell #page_tabs-option3TabBody textarea,
+      #page_tabs .tabBodyShell #page_tabs-option3TabBody .textAreaHeading
+      {
+        width:96%;
+        margin-left:2%;
+        border:1px solid #555;
+      }
+      #page_tabs .tabBodyShell #page_tabs-option3TabBody .textAreaHeading {
+        font-size:11px;
+        letter-spacing:3px;
+        background:#b7babf url(../images/title-bg-brushed-metal.jpg) repeat left top;
+        text-align:center;
+        border-bottom:none;
+      }
+  &lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+&lt;script type="text/javascript" src="../js/Uize.js"&gt;&lt;/script&gt;
+
+&lt;h1 class="document-title"&gt;
+  &lt;a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"&gt;&lt;/a&gt;
+  &lt;a href="../javascript-tool-examples.html" class="breadcrumb breadcrumbWithArrow"&gt;JAVASCRIPT TOOLS&lt;/a&gt;
+  JavaScript Template Tester
+  &lt;div id="page-actions" class="pageActions"&gt;
+    &lt;a href="source-code/javascript-template-tester.html" class="buttonLink"&gt;SOURCE&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/h1&gt;
+
+&lt;div class="main"&gt;
+  &lt;!-- explanation copy --&gt;
+
+  &lt;div class="explanation"&gt;
+    &lt;p&gt;The &lt;b&gt;JavaScript Template Tester&lt;/b&gt; tool (which makes use of the &lt;a href="../reference/Uize.Template.html"&gt;&lt;code&gt;Uize.Template&lt;/code&gt;&lt;/a&gt; module) lets you test the processing of JavaScript templates. It provides a demonstration of the JavaScript templates functionality, and also lets you see the JavaScript function that is "compiled" from a template.&lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;form&gt;
+  &lt;div id="page_tabs" class="tabShell"&gt;
+    &lt;div class="tabStubShell"&gt;
+      &lt;a id="page_tabs_option0" class="tabStub" href="javascript://"&gt;TEMPLATE SOURCE&lt;/a&gt;
+      &lt;a id="page_tabs_option1" class="tabStub" href="javascript://"&gt;COMPILED FORM&lt;/a&gt;
+      &lt;a id="page_tabs_option2" class="tabStub" href="javascript://"&gt;JST MODULE&lt;/a&gt;
+      &lt;a id="page_tabs_option3" class="tabStub" href="javascript://"&gt;INPUT &amp;amp; OUTPUT&lt;/a&gt;
+      &lt;br style="clear:left;"/&gt;
+    &lt;/div&gt;
+    &lt;div class="tabBodyShell"&gt;
+      &lt;div id="page_tabs-option0TabBody" class="tabBodyInactive"&gt;
+&lt;textarea id="page-templateSource" wrap="off"&gt;
+&amp;lt;div&amp;gt;
+  &amp;lt;% // this is a comment %&amp;gt;
+  &amp;lt;% /* this is another comment */ %&amp;gt;
+  &amp;lt;h1&amp;gt;&amp;lt;% = input.heading %&amp;gt;&amp;lt;/h1&amp;gt;
+  &amp;lt;% for (var repeatNo = -1; ++repeatNo &amp;lt; input.repeats;) { %&amp;gt;
+  &amp;lt;img src="someimage.gif"/&amp;gt;&amp;lt;% if (input.showTitle) { %&amp;gt;A TITLE&amp;lt;% } %&amp;gt;
+  &amp;lt;% } %&amp;gt;
+&amp;lt;/div&amp;gt;
+&lt;/textarea&gt;
+      &lt;/div&gt;
+      &lt;div id="page_tabs-option1TabBody" class="tabBodyInactive"&gt;
+        &lt;textarea id="page-compiledForm" wrap="off" readonly="readonly"&gt;&lt;/textarea&gt;
+      &lt;/div&gt;
+      &lt;div id="page_tabs-option2TabBody" class="tabBodyInactive"&gt;
+        &lt;textarea id="page-jstModule" wrap="off" readonly="readonly"&gt;&lt;/textarea&gt;
+      &lt;/div&gt;
+      &lt;div id="page_tabs-option3TabBody" class="tabBodyInactive"&gt;
+        &lt;div class="textAreaHeading" style="margin-top:12px;"&gt;TEMPLATE INPUT&lt;/div&gt;
+&lt;textarea id="page-templateInput" style="height:100px;"&gt;
+{
+  heading:'MY HEADING',
+  repeats:3,
+  showTitle:false
+}
+&lt;/textarea&gt;
+        &lt;a id="page-processTemplate" class="buttonLink" href="javascript://" style="display:block; width:150px; margin:4px auto;"&gt;PROCESS TEMPLATE&lt;/a&gt;
+        &lt;div class="textAreaHeading"&gt;TEMPLATE OUTPUT&lt;/div&gt;
+        &lt;textarea name="page-templateOutput" style="height:171px;" readonly="readonly"&gt;&lt;/textarea&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;/form&gt;
+&lt;/div&gt;
+
+&lt;script type="text/javascript"&gt;
+
+Uize.module ({
+  required:[
+    'UizeDotCom.Page.Example',
+    'Uize.Widget.Options.Tabbed',
+    'Uize.Json',
+    'Uize.String.Lines',
+    'Uize.Template',
+    'Uize.Templates.JstModule'
+  ],
+  builder:function () {
+    /*** create the example page widget ***/
+      var page = window.page = new UizeDotCom.Page.Example;
+
+    /*** add property for managing update of scrunched code and scruncher report ***/
+      page.Class.registerProperties ({
+        sourceCode:{
+          name:'sourceCode',
+          onChange:function () {
+            var compiledTemplate = Uize.Template.compile (this.sourceCode,{result:'full'});
+            this.templateFunction = compiledTemplate.templateFunction
+            page.setNodeValue (
+              'compiledForm',
+              'function (input) {\n' + Uize.String.Lines.indent (compiledTemplate.code,1,'\t') + '\n}'
+            );
+            page.setNodeValue (
+              'jstModule',
+              Uize.Templates.JstModule.process ({
+                moduleName:'YourNamespace.Templates.YourTemplateName',
+                compiledTemplate:compiledTemplate
+              })
+            );
+          }
+        }
+      });
+
+    /*** add the tabs child widget ***/
+      var tabs = window.tabs = page.addChild (
+        'tabs',
+        Uize.Widget.Options.Tabbed,
+        {
+          bodyClassActive:'tabBodyActive',
+          bodyClassInactive:'tabBodyInactive',
+          values:['templateSource','compiledForm','jstModule','inputAndOutput'],
+          value:'templateSource'
+        }
+      );
+      tabs.wire (
+        'Changed.value',
+        function () {
+          var tabsValue = tabs + '';
+          if (tabsValue != 'templateSource') {
+            updateSourceCodeFromInput ();
+            if (tabsValue == 'inputAndOutput')
+              processTemplateWithCurrentSettings ()
+            ;
+          }
+        }
+      );
+
+    /*** code for compiling and processing template ***/
+      function updateSourceCodeFromInput () {
+        page.set ({sourceCode:page.getNodeValue ('templateSource')});
+      }
+
+      function processTemplateWithCurrentSettings () {
+        page.setNodeValue (
+          'templateOutput',
+          page.templateFunction (Uize.Json.from (page.getNodeValue ('templateInput')))
+        );
+      }
+
+    /*** make the output and compiled textareas select all when clicked ***/
+      page.wireNode (['templateOutput','compiledForm','jstModule'],'click',function () {this.select ()});
+
+    /*** wire up the page widget ***/
+      page.wireUi ();
+
+    /*** wire up processTemplate link ***/
+      page.wireNode ('processTemplate','click',processTemplateWithCurrentSettings);
+
+    /*** initialize ***/
+      updateSourceCodeFromInput ();
+  }
+});
+
+&lt;/script&gt;
+
+&lt;/body&gt;&lt;/html&gt;
+
+
+</pre>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.library',
+		'UizeDotCom.Page'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page).wireUi ()}
+});
+
+</script>
+
+</body></html>

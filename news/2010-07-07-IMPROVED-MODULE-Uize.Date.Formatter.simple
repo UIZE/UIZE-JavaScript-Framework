@@ -1,0 +1,13 @@
+The =Uize.Date.Formatter= module has been improved with the addition of the new ={zzz}= and ={milliseconds}= tokens.
+
+The new ={zzz}= and ={milliseconds}= tokens are supported by both the =Uize.Date.Formatter.format= and =Uize.Date.Formatter.parse= static methods. These new tokens can be used to format dates with millisecond precision. The ={zzz}= token represents the milliseconds of the second always using three digits (ie. leading zeros as necessary), where the first millisecond of the second is represented by the value =000=, and where the last millisecond of the second is represented by the value =59=. In contrast, the ={milliseconds}= token represents the milliseconds of the second using only as many digits as necessary (ie. no leading zeros), where the first millisecond of the second is represented by the value =0=, and where the last millisecond of the second is represented by the value =999=.
+
+[[Uize.Date.Formatter][LEARN MORE]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2010-07-07 - IMPROVED MODULE: Uize.Date.Formatter
+....................................................................................

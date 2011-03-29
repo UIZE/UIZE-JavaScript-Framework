@@ -1,0 +1,23 @@
+<% @input ({idPrefix:'string',params:'object',presets:'object',previewButtonText:'string'}) %>
+<% @required ('UizeDotCom.Templates.ParamsTable') %>
+<div class="tabShell">
+	<div class="tabStubShell">
+		<a id="<% .idPrefix %>_tabs_option0" class="tabStub" href="javascript://">PRESETS</a>
+		<a id="<% .idPrefix %>_tabs_option1" class="tabStub" href="javascript://">PARAMS</a>
+		<br style="clear:left;"/>
+	</div>
+	<div class="tabBodyShell">
+		<div id="<% .idPrefix %>_tabs-option0TabBody" class="tabBodyInactive">
+			<div id="<% .idPrefix %>-presets" class="selectorLinks">
+			<% for (var _presetName in input.presets) { %>
+				<a href="javascript://" onfocus="this.blur ()" class="buttonLink"><%= _presetName %></a>
+			<% } %>
+			</div>
+		</div>
+		<div id="<% .idPrefix %>_tabs-option1TabBody" class="tabBodyInactive" style="overflow:auto;">
+			<%= UizeDotCom.Templates.ParamsTable.process ({idPrefix:input.idPrefix,params:input.params}) %>
+		</div>
+	</div>
+</div>
+<div id="<% .idPrefix %>_preview" class="button"><% .previewButtonText %></div>
+

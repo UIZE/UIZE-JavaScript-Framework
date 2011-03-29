@@ -1,0 +1,9 @@
+The new =Uize.Fade.xFactory= module adds factory methods to the =Uize.Fade= class for conventiently initiating fades, and implements a mechanism for automatically managing a pool of active fade instances. See the [[Uize.Fade.xFactory][reference documentation]] for more details.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-01-02 - NEW MODULE: Uize.Fade.xFactory
+....................................................................................

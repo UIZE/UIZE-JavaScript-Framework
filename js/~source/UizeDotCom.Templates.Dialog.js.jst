@@ -1,0 +1,43 @@
+<%@ input ({idPrefix:'string',contents:'string',dialogClass:'string'}) %>
+<!-- dialog UI -->
+
+<div id="<% .idPrefix %>-shield" class="dialogShield"></div>
+
+<div id="<% .idPrefix %>" class="dialog <% .dialogClass %>">
+	<div class="dialogShadow4"></div>
+	<div class="dialogShadow3"></div>
+	<div class="dialogShadow2"></div>
+	<div class="dialogShadow"></div>
+	<div class="dialogDecoration"></div>
+
+	<!-- sides -->
+		<div id="<% .idPrefix %>_resizer-west" class="dialogCornerEastWest dialogEdgeWest"></div>
+		<div id="<% .idPrefix %>_resizer-east" class="dialogCornerEastWest dialogEdgeEast"></div>
+		<div id="<% .idPrefix %>_resizer-north" class="dialogCornerNorthSouth dialogEdgeNorth"></div>
+		<div id="<% .idPrefix %>_resizer-south" class="dialogCornerNorthSouth dialogEdgeSouth"></div>
+
+	<!-- corners -->
+		<div id="<% .idPrefix %>_resizer-northWest" class="dialogCornerCorner dialogEdgeWest dialogEdgeNorth"></div>
+		<div id="<% .idPrefix %>_resizer-northEast" class="dialogCornerCorner dialogEdgeEast dialogEdgeNorth"></div>
+		<div id="<% .idPrefix %>_resizer-southWest" class="dialogCornerCorner dialogEdgeWest dialogEdgeSouth"></div>
+		<div id="<% .idPrefix %>_resizer-southEast" class="dialogCornerCorner dialogEdgeEast dialogEdgeSouth"></div>
+
+	<!-- title bar -->
+		<div class="dialogBar dialogTitleBar">
+			<% .topLeftButtons %>
+			<div id="<% .idPrefix %>-title" class="dialogTitle"></div>
+			<a id="<% .idPrefix %>_close" class="dialogCloseButton button">X</a>
+		</div>
+
+	<!-- contents -->
+		<div id="<% .idPrefix %>-contents" class="dialogContents">
+			<% .contents %>
+		</div>
+
+	<!-- status bar -->
+		<div class="dialogBar dialogStatusBar">
+			<a id="<% .idPrefix %>_cancel" class="dialogCancelButton button"><span id="<% .idPrefix %>_cancel-text">CANCEL</span></a>
+			<a id="<% .idPrefix %>_ok" class="dialogOkButton button"><span id="<% .idPrefix %>_ok-text">OK</span></a>
+		</div>
+</div>
+

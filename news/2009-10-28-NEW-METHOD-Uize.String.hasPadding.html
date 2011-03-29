@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2009-10-28 - NEW METHOD: Uize.String.hasPadding | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="The new Uize.String.hasPadding static method of the Uize.String module returns a boolean, indicidating whether or not the specified string has whitespace padding on either - or both - of its sides (ie. leading or trailing whitespace)."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2009.html" class="breadcrumb breadcrumbWithArrow">2009 NEWS</a>
+	2009-10-28 - NEW METHOD: Uize.String.hasPadding
+
+</h1>
+
+<div class="main">
+<div class="contents0">
+	<p>The new <code>Uize.String.hasPadding</code> static method of the <code><a href="../reference/Uize.String.html">Uize.String</a></code> module returns a boolean, indicidating whether or not the specified string has whitespace padding on either - or both - of its sides (ie. leading or trailing whitespace).</p>
+	
+	<p><span class="allCaps">EXAMPLES</span></p>
+	
+	
+<pre class="sample-code">Uize.String.hasPadding ('   leading whitespace');                  // returns true
+Uize.String.hasPadding ('trailing whitespace     ');               // returns true
+Uize.String.hasPadding ('   leading and trailing whitespace   ');  // returns true
+Uize.String.hasPadding ('no         padding');                     // returns false
+</pre>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

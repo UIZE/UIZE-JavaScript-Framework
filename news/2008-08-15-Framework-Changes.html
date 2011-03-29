@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2008-08-15 - Framework Changes | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="In the Uize base class, the MyClass.doOnceEvent and MyClass.hasEventFired static methods, along with the myInstance.doOnceEvent and myInstance.hasEventFired instance methods, have all been KILLED."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2008.html" class="breadcrumb breadcrumbWithArrow">2008 NEWS</a>
+	2008-08-15 - Framework Changes
+
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="In the Uize base class, the MyClass.doOnceEvent and MyClass.hasEventFired static methods, along with the myInstance.doOnceEvent and myInstance.hasEventFired instance methods, have all been KILLED.">1. Methods Killed in Uize Base Class</a></li>
+			<li><a href="#2" title="For horizontal rules generated from SimpleDoc files, the hr tag now specifies the CSS class &quot;thick&quot; for thick horizontal rules, and the CSS class &quot;thin&quot; for thin horizontal rules.">2. SimpleDoc Improvements</a></li>
+			<li><a href="#3" title="A valueOf instance method has been implemented in the Uize base class. This method will be invoked automatically by JavaScript whenever an instance of a Uize subclass is involved in an expression.">3. New valueOf Interface</a></li>
+			<li><a href="#4" title="A toString instance method has been implemented in the Uize base class that provides a convenient and lightweight way to gather some information about instances of Uize subclasses during debugging and troubleshooting.">4. New toString Interface</a></li>
+			<li><a href="#5">5. IMPROVED MODULE: Uize.Url</a>
+				<ul>
+					<li><a href="#5_1" title="The Uize.Url.toParams and Uize.Url.resolve static methods now support query param values that are objects that provide a valueOf interface (so, instances of all Uize subclasses). The Uize.Url.toPiece static method also supports this behavior with its single parameter.">5.1. Support for valueOf</a></li>
+					<li><a href="#5_2" title="The Uize.Url.resolve static method now supports parameter replacement for URLs.">5.2. Uize.Url.resolve Supports Param Replacement</a></li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<a name="1"></a>
+	<h1 class="heading1" title="1. Methods Killed in Uize Base Class"><span class="headingNumber"><a href="#1" title="1. Methods Killed in Uize Base Class">1</a>. </span>Methods Killed in Uize Base Class</h1>
+	<div class="contents1">
+		<p>In the <code><a href="../reference/Uize.html">Uize</a></code> base class, the <code>MyClass.doOnceEvent</code> and <code>MyClass.hasEventFired</code> static methods, along with the <code>myInstance.doOnceEvent</code> and <code>myInstance.hasEventFired</code> instance methods, have all been <b>KILLED</b>.</p>
+		
+		<p>The mechanism exposed through these methods was once used (long, long ago... in a land that time forgot), but has proven so uncompelling over the years that it is now not in use in even a single piece of code that can be found. The mechanism adds a memory burden to every single class, and every single instance of every single class, by maintaining an object hash (with event names as keys) reflecting all the events that have been fired at least once, thereby creating significant memory bloat for complex applications involving hundreds of instances that fire lots of events - not worth the cost, given how insufficiently compelling the feature is.</p>
+		
+		<p>In the very few use cases where such a mechanism is desired, it can be coded up manually. Removing this mechanism achieves a not insignificant reduction in memory use in more complex pages and also achieves a minor performance improvement.</p>
+	</div>
+	
+	<a name="2"></a>
+	<h1 class="heading1" title="2. SimpleDoc Improvements"><span class="headingNumber"><a href="#2" title="2. SimpleDoc Improvements">2</a>. </span>SimpleDoc Improvements</h1>
+	<div class="contents1">
+		<p>For horizontal rules generated from SimpleDoc files, the <code>hr</code> tag now specifies the CSS class "thick" for thick horizontal rules, and the CSS class "thin" for thin horizontal rules.</p>
+		
+		<p>All inline styling of the <code>hr</code> tag has been removed, leaving it up to the CSS to style the difference between thick and thin rules. A bug has been fixed in the <code>Uize.Simple</code> module that was causing HTML generated from SimpleDoc files to lose empty lines within sample code / example blocks.</p>
+	</div>
+	
+	<a name="3"></a>
+	<h1 class="heading1" title="3. New valueOf Interface"><span class="headingNumber"><a href="#3" title="3. New valueOf Interface">3</a>. </span>New valueOf Interface</h1>
+	<div class="contents1">
+		<p>A <code>valueOf</code> instance method has been implemented in the <code><a href="../reference/Uize.html">Uize</a></code> base class. This method will be invoked automatically by JavaScript whenever an instance of a <code><a href="../reference/Uize.html">Uize</a></code> subclass is involved in an expression.</p>
+		
+		<p>This provides a shortcut to accessing the <code>value</code> set-get property for instances of classes that register this property. In such cases, you can use an instance reference in an expression - such as a mathematical expression, or a string concatenation - as though the object reference were a proxy for its value.</p>
+	</div>
+	
+	<a name="4"></a>
+	<h1 class="heading1" title="4. New toString Interface"><span class="headingNumber"><a href="#4" title="4. New toString Interface">4</a>. </span>New toString Interface</h1>
+	<div class="contents1">
+		<p>A <code>toString</code> instance method has been implemented in the <code><a href="../reference/Uize.html">Uize</a></code> base class that provides a convenient and lightweight way to gather some information about instances of <code><a href="../reference/Uize.html">Uize</a></code> subclasses during debugging and troubleshooting.</p>
+		
+		<p>The string returned by this method provides a summary that includes an instance's class name and the state of its set-get properties. The <code>toString Intrinsic Method</code> is invoked automatically in certain contexts in order to convert an object to a string form, such as when alerting an object using the <code>alert</code> global function.</p>
+	</div>
+	
+	<a name="5"></a>
+	<h1 class="heading1" title="5. IMPROVED MODULE: Uize.Url"><span class="headingNumber"><a href="#5" title="5. IMPROVED MODULE: Uize.Url">5</a>. </span>IMPROVED MODULE: Uize.Url</h1>
+	<div class="contents1">
+		<a name="5_1"></a>
+		<h2 class="heading2" title="5. IMPROVED MODULE: Uize.Url -&gt; 5.1. Support for valueOf"><span class="headingNumber"><a href="#5" title="5. IMPROVED MODULE: Uize.Url">5</a>.<a href="#5_1" title="5. IMPROVED MODULE: Uize.Url -&gt; 5.1. Support for valueOf">1</a>. </span>Support for valueOf</h2>
+		<div class="contents2">
+			<p>The <code>Uize.Url.toParams</code> and <code>Uize.Url.resolve</code> static methods now support query param values that are objects that provide a <code>valueOf</code> interface (so, instances of all <code><a href="../reference/Uize.html">Uize</a></code> subclasses). The <code>Uize.Url.toPiece</code> static method also supports this behavior with its single parameter.</p>
+			
+			<p><span class="allCaps">EXAMPLE 1</span></p>
+			
+			
+<pre class="sample-code">Uize.Url.toParams ({rating:ratingSliderWidget,comment:commentTextInputWidget});
+</pre>
+			
+			<p><span class="allCaps">EXAMPLE 2</span></p>
+			
+			
+<pre class="sample-code">Uize.Url.Resolve (
+  'http://www.domain.com/svc/rating',
+  {rating:ratingSliderWidget,comment:commentTextInputWidget}
+);
+</pre>
+		</div>
+		
+		<a name="5_2"></a>
+		<h2 class="heading2" title="5. IMPROVED MODULE: Uize.Url -&gt; 5.2. Uize.Url.resolve Supports Param Replacement"><span class="headingNumber"><a href="#5" title="5. IMPROVED MODULE: Uize.Url">5</a>.<a href="#5_2" title="5. IMPROVED MODULE: Uize.Url -&gt; 5.2. Uize.Url.resolve Supports Param Replacement">2</a>. </span>Uize.Url.resolve Supports Param Replacement</h2>
+		<div class="contents2">
+			<p>The <code>Uize.Url.resolve</code> static method now supports parameter replacement for URLs.</p>
+			
+			<p>Basically, if the URL string provided contains query params that are also specified in a <code>urlParamsOBJ</code> parameter, then the param values contained in the <code>urlParamsOBJ</code> parameter will override those in the URL string.</p>
+		</div>
+	</div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

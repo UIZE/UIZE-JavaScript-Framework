@@ -1,0 +1,19 @@
+The =Uize.Data= module has been enhanced by the addition of a highly versatile =Uize.Data.map= static method.
+
+Many JavaScript frameworks - and many languages - have some form of =map= method, but the UIZE implementation goes beyond the capabilities of most - even while its implementation is still pretty compact and pretty simple. Most notably, the UIZE implementation has the following compelling benefits...
+
+- lets you operate on objects as well as arrays
+- supports a more concise mapper expression string, as well as supporting a function
+- can optionally modify the source array or object
+- allows easy creation of a fresh source array for mapping, by specifying an array length
+- lets you specify an explicit target, where mapped values should be written
+
+This newly added method has thorough documentation. [[../reference/Uize.Data.html#2_15][LEARN MORE]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-01-08 - NEW METHOD: Uize.Data.map
+....................................................................................

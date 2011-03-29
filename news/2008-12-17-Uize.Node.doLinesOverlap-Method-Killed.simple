@@ -1,0 +1,11 @@
+The =Uize.Node.doLinesOverlap= static method of the =Uize.Node= module has been eliminated.
+
+Notes have been added to the documentation for the =Uize.Node.doRectanglesOverlap= static method on how that method can be used for testing for overlapping line segments. Essentially, one can use the =Uize.Node.doRectanglesOverlap= method to accomplish the task of the now defunct =Uize.Node.doLinesOverlap= method.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2008-12-17 - Uize.Node.doLinesOverlap Method Killed
+....................................................................................

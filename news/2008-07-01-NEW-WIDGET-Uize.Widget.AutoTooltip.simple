@@ -1,0 +1,13 @@
+Another "unobtrusive JavaScript" feature has been added to the UIZE JavaScript Framework, in the form of the new =Uize.Widget.AutoTooltip= class.
+
+This widget lets you easily wire an auto tooltip behavior to a specified array of nodes, to provide decorated / fancy tooltips in a way that degrades gracefully.
+
+Check out the new [[../examples/auto-tooltip-photo-info.html][Auto Tooltip for Photo Info]] example that demonstrates this new functionality.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2008-07-01 - NEW WIDGET: Uize.Widget.AutoTooltip
+....................................................................................

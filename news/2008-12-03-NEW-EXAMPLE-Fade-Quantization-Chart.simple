@@ -1,0 +1,13 @@
+The new [[../examples/fade-quantization-chart.html][Fade Quantization Chart]] example illustrates, by way of a color chart representation, how the =quantization= set-get property of the =Uize.Fade= class affects a fade's interpolated value over the course of its progress.
+
+In the example, a color is being faded from red to black over a series of swatches, from left to right. The color chart lets you visualize how different =quantization= settings for a fade could be used to generate color gradients with varying characteristics.
+
+[[../examples/fade-quantization-chart.html][CHECK IT OUT]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2008-12-03 - NEW EXAMPLE: Fade Quantization Chart
+....................................................................................

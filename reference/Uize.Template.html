@@ -1,0 +1,1734 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Uize.Template | Documentation | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework Documentation Uize.Template module reference documentation"/>
+	<meta name="description" content="The Uize.Template module implements a JavaScript Templates system, with rich template functionality that fully leverages the JavaScript language."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../javascript-modules-index.html" class="breadcrumb breadcrumbWithArrow">MODULES</a>
+	<a href="Uize.html" title="View reference for Uize" class="breadcrumb">Uize</a>.<a href="Uize.Template.html" title="View reference for Uize.Template" class="breadcrumb">Template</a>
+	<div class="pageActions">
+		<a id="page-search" href="javascript://" class="buttonLink" title="Search for references to this module...">SEARCH</a><a id="page-examples" href="javascript://" class="buttonLink" title="View examples for this module...">EXAMPLES</a><a href="source-code/Uize.Template.html" class="buttonLink" title="View the JavaScript source code for this module...">SOURCE</a><a id="page-test" href="javascript://" class="buttonLink" title="Test this module...">TEST</a>
+	</div>
+
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="The Uize.Template module implements a JavaScript Templates system, with rich template functionality that fully leverages the JavaScript language.">1. Introduction</a>
+				<ul>
+					<li><a href="#1_1" title="For the sake of this document, a number of commonly used terms are defined below.">1.1. Definition of Terms</a>
+						<ul>
+							<li><a href="#1_1_1" title="The Uize.Template module supports the concept of an encoding.">1.1.1. Encoding</a>
+								<ul>
+									<li><a href="#1_1_1_1" title="It&apos;s important to note that different encodings require different JavaScript modules to support them, and these modules are not directly required by the Uize.Template module.">1.1.1.1. Modules Required to Support Encodings</a></li>
+								</ul>
+							</li>
+							<li><a href="#1_1_2" title="The Uize.Template module supports the concept of an encodings chain, which is a set of multiple encodings that are to be chained together and performed in sequence.">1.1.2. Encodings Chain</a></li>
+							<li><a href="#1_1_3" title="An Encoding is defined using an Encoding Profile, which is an object containing definitions for the encoder and decoder for the encoding.">1.1.3. Encoding Profile</a></li>
+							<li><a href="#1_1_4" title="A Standard Encoding is an Encoding whose encoder and decoder functions are static methods of the same module, and where those static methods accept as their first parameter a value to encode or decode, and as their optional second parameter encoding options.">1.1.4. Standard Encoding</a></li>
+						</ul>
+					</li>
+					<li><a href="#1_2" title="The following example pages are good showcases for the Uize.Template module...">1.2. Examples</a></li>
+					<li><a href="#1_3" title="The Uize.Template module defines the Uize.Template package under the Uize namespace.">1.3. Implementation Info</a>
+						<ul>
+							<li><a href="#1_3_1" title="The features listed in this section have been introduced in this module.">1.3.1. Features Introduced in This Module</a></li>
+							<li><a href="#1_3_2" title="No features have been overridden in this module.">1.3.2. Features Overridden in This Module</a></li>
+							<li><a href="#1_3_3" title="This module has no inherited features.">1.3.3. Features Inherited From Other Modules</a></li>
+							<li><a href="#1_3_4" title="There are no modules directly under this namespace.">1.3.4. Modules Directly Under This Namespace</a></li>
+							<li><a href="#1_3_5" title="The Uize.Template module is unit tested by the Uize.Test.Uize.Template test module.">1.3.5. Unit Tests</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li><a href="#2">2. Directives</a>
+				<ul>
+					<li><a href="#2_1" title="Lets you specify modules that are required by the code inside a JavaScript template.">2.1. @required</a>
+						<ul>
+							<li><a href="#2_1_1" title="You can call the @required directive multiple times inside the same template, which will have a cumulative effect in building up the required modules list.">2.1.1. Multiple Calls</a></li>
+							<li><a href="#2_1_2" title="When building up the canonical list of modules required by a template being compiled, the @required directive makes sure to ignore any duplicate instances of required modules.">2.1.2. Deduplication</a></li>
+						</ul>
+					</li>
+					<li><a href="#2_2" title="Lets you specify information about the inputs that a JavaScript template supports.">2.2. @input</a></li>
+					<li><a href="#2_3" title="Lets you specify the start of a block of template code.">2.3. @startBlock</a></li>
+					<li><a href="#2_4" title="Lets you specify the end of a block of template code.">2.4. @endBlock</a></li>
+				</ul>
+			</li>
+			<li><a href="#3">3. Static Methods</a>
+				<ul>
+					<li><a href="#3_1" title="Compiles a JavaScript template to a function for high performance repeat usage.">3.1. Uize.Template.compile</a>
+						<ul>
+							<li><a href="#3_1_1" title="The templateOptionsOBJ parameter lets you specify options for how the template should be compiled, and has properties as follows...">3.1.1. templateOptionsOBJ</a>
+								<ul>
+									<li><a href="#3_1_1_1" title="A string, specifying the characters that should delimit the start of a segment of template code. Defaults to &amp;#60;%.">3.1.1.1. openerToken</a></li>
+									<li><a href="#3_1_1_2" title="A string, specifying the characters that should delimit the end of a segment of template code. Defaults to %&amp;#62;.">3.1.1.2. closerToken</a></li>
+									<li><a href="#3_1_1_3" title="A boolean, specifying whether or not the automatic whitespace gobbling mechanism should be enabled. Defaults to true.">3.1.1.3. gobbleWhitespace</a></li>
+									<li><a href="#3_1_1_4" title="A string, specifying how the Uize.Template.compile method should return its result. The default value &apos;function&apos; will cause the method to return just a reference to the compiled template function. The value &apos;full&apos; will cause the method to return an object comprised of the following items...">3.1.1.4. result</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li><a href="#3_2" title="Decodes the specified value, by reversing the specified encoding(s).">3.2. Uize.Template.decode</a>
+						<ul>
+							<li><a href="#3_2_1" title="The Uize.Template.decode method allows encoding options to be specified for encodings in the encodingsChainSTR parameter, in the same way one would do so in templating assignment statements.">3.2.1. Encodings With Encoding Options</a></li>
+							<li><a href="#3_2_2" title="The Uize.Template.decode method allows an Encodings Chain to be specified in the encodingsChainSTR parameter, using the same syntax one would use for templating assignment statements.">3.2.2. Using an Encodings Chain</a></li>
+						</ul>
+					</li>
+					<li><a href="#3_3" title="Lets you conveniently extend the Uize.Template module by defining a new Standard Encoding.">3.3. Uize.Template.defineStandardEncoding</a>
+						<ul>
+							<li><a href="#3_3_1">3.3.1. Parameters</a>
+								<ul>
+									<li><a href="#3_3_1_1" title="A string, specifying the name of the encoding.">3.3.1.1. encodingNameSTR</a></li>
+									<li><a href="#3_3_1_2" title="A string, specifying the name of the module that contains the encoder and decoder methods for the encoding.">3.3.1.2. moduleNameSTR</a></li>
+									<li><a href="#3_3_1_3" title="A string, specifying the name of the static method that is to be used for encoding, and that is defined inside the module specified by the moduleNameSTR parameter.">3.3.1.3. encoderMethodNameSTR</a></li>
+									<li><a href="#3_3_1_4" title="A string, specifying the name of the static method that is to be used for decoding, and that is defined inside the module specified by the moduleNameSTR parameter.">3.3.1.4. decoderMethodNameSTR</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li><a href="#3_4" title="Encodes the specified value, using the specified encoding(s).">3.4. Uize.Template.encode</a>
+						<ul>
+							<li><a href="#3_4_1" title="The Uize.Template.encode method allows encoding options to be specified for encodings in the encodingsChainSTR parameter, in the same way one would do so in templating assignment statements.">3.4.1. Encodings With Encoding Options</a></li>
+							<li><a href="#3_4_2" title="The Uize.Template.encode method allows an Encodings Chain to be specified in the encodingsChainSTR parameter, using the same syntax one would use for templating assignment statements.">3.4.2. Using an Encodings Chain</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li><a href="#4">4. Static Properties</a>
+				<ul>
+					<li><a href="#4_1" title="IMPLEMENTATION INFO">4.1. Uize.Template.decoders</a></li>
+					<li><a href="#4_2" title="IMPLEMENTATION INFO">4.2. Uize.Template.encoders</a></li>
+					<li><a href="#4_3" title="An object, containing properties defining all the available Encodings, where the value for each property is an Encoding Profile object.">4.3. Uize.Template.encodings</a>
+						<ul>
+							<li><a href="#4_3_1" title="An Encoding Profile for the iso8601 encoding.">4.3.1. Uize.Template.encodings.iso8601</a></li>
+							<li><a href="#4_3_2" title="An Encoding Profile for the json encoding.">4.3.2. Uize.Template.encodings.json</a></li>
+							<li><a href="#4_3_3" title="An Encoding Profile for the miniJson encoding.">4.3.3. Uize.Template.encodings.miniJson</a></li>
+							<li><a href="#4_3_4" title="An Encoding Profile for the tagAttributes encoding.">4.3.4. Uize.Template.encodings.tagAttributes</a></li>
+							<li><a href="#4_3_5" title="An Encoding Profile for the tagAttributeValue encoding.">4.3.5. Uize.Template.encodings.tagAttributeValue</a></li>
+							<li><a href="#4_3_6" title="An Encoding Profile for the url encoding.">4.3.6. Uize.Template.encodings.url</a></li>
+							<li><a href="#4_3_7" title="An Encoding Profile for the urlParams encoding.">4.3.7. Uize.Template.encodings.urlParams</a></li>
+							<li><a href="#4_3_8" title="An Encoding Profile for the urlPiece encoding.">4.3.8. Uize.Template.encodings.urlPiece</a></li>
+						</ul>
+					</li>
+					<li><a href="#4_4" title="IMPLEMENTATION INFO">4.4. Uize.Template.moduleName</a></li>
+				</ul>
+			</li>
+			<li><a href="#5">5. Encodings</a>
+				<ul>
+					<li><a href="#5_1" title="Encodes to or decodes from an ISO8601 formatted date string.">5.1. iso8601</a>
+						<ul>
+							<li><a href="#5_1_1" title="When encoding, the value can be of any type that can be resolved to a Date object by the Uize.Date.resolve static method of the Uize.Date module.">5.1.1. Encoding</a></li>
+							<li><a href="#5_1_2" title="When decoding, the value should be a string, in ISO8601 format.">5.1.2. Decoding</a></li>
+						</ul>
+					</li>
+					<li><a href="#5_2" title="Encodes to or decodes from a JSON formatted string.">5.2. json</a>
+						<ul>
+							<li><a href="#5_2_1" title="When encoding, the value to encode can be a string, boolean, number, object, array, null, undefined, or a regular expression.">5.2.1. Encoding</a>
+								<ul>
+									<li><a href="#5_2_1_1" title="The json encoding supports encoding options, which may optionally be specified inside curly braces after the encoding name.">5.2.1.1. json Encoding Options</a></li>
+								</ul>
+							</li>
+							<li><a href="#5_2_2" title="When decoding, the value to decode should be a string in JSON format, and the decoded value can be a string, boolean, number, object, array, null, undefined, or a regular expression.">5.2.2. Decoding</a></li>
+						</ul>
+					</li>
+					<li><a href="#5_3" title="Encodes to a mini / compact (no indentation or linebreaks for complex objects) JSON formatted string, or decodes from any JSON formatted string.">5.3. miniJson</a>
+						<ul>
+							<li><a href="#5_3_1" title="When encoding, the value to encode can be a string, boolean, number, object, array, null, undefined, or a regular expression.">5.3.1. Encoding</a></li>
+							<li><a href="#5_3_2" title="When decoding, the value to decode should be a string in JSON format, and the decoded value can be a string, boolean, number, object, array, null, undefined, or a regular expression.">5.3.2. Decoding</a></li>
+						</ul>
+					</li>
+					<li><a href="#5_4" title="Encodes to or decodes from a tag attributes string.">5.4. tagAttributes</a>
+						<ul>
+							<li><a href="#5_4_1" title="When encoding, the value should be an object, containing properties for the tag attributes.">5.4.1. Encoding</a></li>
+							<li><a href="#5_4_2" title="When decoding, the value should be a tag attributes string, and the decoded value will be a tag attributes object.">5.4.2. Decoding</a></li>
+						</ul>
+					</li>
+					<li><a href="#5_5" title="Encodes to or decodes from a tag attribute value string (excluding the enclosing quotes).">5.5. tagAttributeValue</a>
+						<ul>
+							<li><a href="#5_5_1" title="When encoding, the value can be of any type and will be coerced to a string if necessary.">5.5.1. Encoding</a></li>
+							<li><a href="#5_5_2" title="When decoding, the value should be a tag attribute value string (excluding the enclosing quotes), and the decoded value will be a string.">5.5.2. Decoding</a></li>
+						</ul>
+					</li>
+					<li><a href="#5_6" title="Encodes to or decodes from a URL string.">5.6. url</a>
+						<ul>
+							<li><a href="#5_6_1" title="When encoding, the value can be a URL path string, or an array containing a URL path string and any number of optional query parameters objects.">5.6.1. Encoding</a>
+								<ul>
+									<li><a href="#5_6_1_1" title="When the value to encode to a URL string is a URL path string, then query parameters can be specified as the encoding options.">5.6.1.1. Value To Encode is a URL Path String</a></li>
+									<li><a href="#5_6_1_2" title="When the value to encode to a URL string is an array containing a URL path string and an arbitrary number of URL params objects, then additional query parameters may be optionally specified as the encoding options.">5.6.1.2. Value To Encode is a URL Path Plus Params Objects Array</a></li>
+								</ul>
+							</li>
+							<li><a href="#5_6_2" title="When decoding, the value should be a URL string, and the decoded value will be an object containing properties that represent different logical components of the URL (eg. protocol, host, folder path, filename, file extension, query string, etc.).">5.6.2. Decoding</a></li>
+						</ul>
+					</li>
+					<li><a href="#5_7" title="Encodes to or decodes from a URL query parameters string.">5.7. urlParams</a>
+						<ul>
+							<li><a href="#5_7_1" title="When encoding, the value should be an object, containing properties for the URL query parameters.">5.7.1. Encoding</a></li>
+							<li><a href="#5_7_2" title="When decoding, the value should be a URL query parameters string, or a full URL string that may contain query parameters, and the decoded value will be a URL query parameters object.">5.7.2. Decoding</a></li>
+						</ul>
+					</li>
+					<li><a href="#5_8" title="Encodes to or decodes from a URL fragment string.">5.8. urlPiece</a>
+						<ul>
+							<li><a href="#5_8_1" title="When encoding, the value can be of any type and will be coerced to a string if necessary.">5.8.1. Encoding</a></li>
+							<li><a href="#5_8_2" title="When decoding, the value should be a URL fragment string, and the decoded value will be a string.">5.8.2. Decoding</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li><a href="#6">6. Deprecated Features</a>
+				<ul>
+					<li><a href="#6_1">6.1. Uize.Template.decoders</a>
+						<ul>
+							<li><a href="#6_1_1" title="This encoder function has been deprecated and has been subsumed by the new Uize.Template.encodings.json Encoding Profile.">6.1.1. Uize.Template.decoders.json -- DEPRECATED 2010-04-15</a></li>
+							<li><a href="#6_1_2" title="This encoder function has been deprecated and has been subsumed by the new Uize.Template.encodings.miniJson Encoding Profile.">6.1.2. Uize.Template.decoders.miniJson -- DEPRECATED 2010-04-15</a></li>
+							<li><a href="#6_1_3" title="This encoder function has been deprecated and has been subsumed by the new Uize.Template.encodings.urlParams Encoding Profile.">6.1.3. Uize.Template.decoders.urlParams -- DEPRECATED 2010-04-15</a></li>
+							<li><a href="#6_1_4" title="This encoder function has been deprecated and has been subsumed by the new Uize.Template.encodings.urlPiece Encoding Profile.">6.1.4. Uize.Template.decoders.urlPiece -- DEPRECATED 2010-04-15</a></li>
+						</ul>
+					</li>
+					<li><a href="#6_2" title="This static property has been deprecated in favor of the improved Uize.Template.encodings static property.">6.2. Uize.Template.encoders -- DEPRECATED 2010-04-15</a>
+						<ul>
+							<li><a href="#6_2_1" title="This encoder function has been deprecated and has been subsumed by the new Uize.Template.encodings.json Encoding Profile.">6.2.1. Uize.Template.encoders.json -- DEPRECATED 2010-04-15</a></li>
+							<li><a href="#6_2_2" title="This encoder function has been deprecated and has been subsumed by the new Uize.Template.encodings.miniJson Encoding Profile.">6.2.2. Uize.Template.encoders.miniJson -- DEPRECATED 2010-04-15</a></li>
+							<li><a href="#6_2_3" title="This encoder function has been deprecated and has been subsumed by the new Uize.Template.encodings.url Encoding Profile.">6.2.3. Uize.Template.encoders.url -- DEPRECATED 2010-04-15</a></li>
+							<li><a href="#6_2_4" title="This encoder function has been deprecated and has been subsumed by the new Uize.Template.encodings.urlParams Encoding Profile.">6.2.4. Uize.Template.encoders.urlParams -- DEPRECATED 2010-04-15</a></li>
+							<li><a href="#6_2_5" title="This encoder function has been deprecated and has been subsumed by the new Uize.Template.encodings.urlPiece Encoding Profile.">6.2.5. Uize.Template.encoders.urlPiece -- DEPRECATED 2010-04-15</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<a name="1"></a>
+	<h1 class="heading1" title="1. Introduction"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>. </span>Introduction</h1>
+	<div class="contents1">
+		<p>The <code>Uize.Template</code> module implements a <a href="../explainers/javascript-templates.html">JavaScript Templates</a> system, with rich template functionality that fully leverages the JavaScript language.</p>
+		
+		<p><b>DEVELOPERS:</b> <a href="http://www.tomkidding.com" target="_blank" class="externalSiteLink">Chris van Rensburg</a></p>
+		
+		<a name="1_1"></a>
+		<h2 class="heading2" title="1. Introduction -&gt; 1.1. Definition of Terms"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. Definition of Terms">1</a>. </span>Definition of Terms</h2>
+		<div class="contents2">
+			<p>For the sake of this document, a number of commonly used terms are defined below.</p>
+			
+			<p>This is not, however, an exhaustive list of all the terms or concepts that comprise the JavaScript templates system. If you are not already familiar with this system, consult the <a href="../explainers/javascript-templates.html">JavaScript Templates</a> explainer for background reading.</p>
+			
+			<a name="1_1_1"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.1. Definition of Terms -&gt; 1.1.1. Encoding"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. Definition of Terms">1</a>.<a href="#1_1_1" title="1. Introduction -&gt; 1.1. Definition of Terms -&gt; 1.1.1. Encoding">1</a>. </span>Encoding</h3>
+			<div class="contents3">
+				<p>The <code>Uize.Template</code> module supports the concept of an encoding.</p>
+				
+				<p>An encoding is defined in an <a href="#1_1_3">Encoding Profile</a>, which defines how to encode to and decode from the encoding. The <code>Uize.Template</code> module defines many built-in standard encodings, such as the <code><a href="#5_2">json</a></code>, <code><a href="#5_7">urlParams</a></code>, <code><a href="#5_5">tagAttributeValue</a></code>, and other encodings. Encodings can be conveniently used inside templating assignment statements, as shown in the following example...</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">&lt;%= {hello:'world',foo:'bar'} -&gt; urlParams %&gt;
+</pre>
+				
+				<p>The above example is encoding the URL query parameters object to a URL parameters string by using the <code><a href="#5_7">urlParams</a></code> encoding, producing the string result <code>'hello&#61;world&foo&#61;bar'</code>.</p>
+				
+				<p>Encodings can also be used in the <code><a href="#3_4">Uize.Template.encode</a></code> and <code><a href="#3_2">Uize.Template.decode</a></code> static methods. Consider the following example...</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">var urlParamsStr = Uize.Template.encode ({hello:'world',foo:'bar'},'urlParams');
+</pre>
+				
+				<p>After the above code has been executed, the value of the <code>urlParamsStr</code> variable will be the string <code>'hello&#61;world&foo&#61;bar'</code>.</p>
+				
+				<a name="1_1_1_1"></a>
+				<h4 class="heading4" title="1. Introduction -&gt; 1.1. Definition of Terms -&gt; 1.1.1. Encoding -&gt; 1.1.1.1. Modules Required to Support Encodings"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. Definition of Terms">1</a>.<a href="#1_1_1" title="1. Introduction -&gt; 1.1. Definition of Terms -&gt; 1.1.1. Encoding">1</a>.<a href="#1_1_1_1" title="1. Introduction -&gt; 1.1. Definition of Terms -&gt; 1.1.1. Encoding -&gt; 1.1.1.1. Modules Required to Support Encodings">1</a>. </span>Modules Required to Support Encodings</h4>
+				<div class="contents4">
+					<p>It's important to note that different encodings require different JavaScript modules to support them, and these modules are not directly required by the <code>Uize.Template</code> module.</p>
+					
+					<p>This is by design and allows templates with diverse encoding needs to be compiled without having to have all modules loaded just in order to compile them. It is only when they are to be processed that the modules required by the encodings used in them will need to be loaded. This rule applies to template functions compiled using the <code><a href="#3_1">Uize.Template.compile</a></code> static method, as well as to using the <code><a href="#3_4">Uize.Template.encode</a></code> and <code><a href="#3_2">Uize.Template.decode</a></code> static methods.</p>
+					
+					<p>When a template is compiled using the <code><a href="#3_1">Uize.Template.compile</a></code> method with the value <code>'full'</code> specified for its optional <code><a href="#3_1_1">templateOptionsOBJ</a></code> parameter, then the object returned by this method will contain a <code>required</code> property, which will be an array containing the list of all modules required by the template, including modules required by encodings used, along with any required modules declared using the <code><a href="#2_1">@required</a></code> directive.</p>
+					
+					<p>The important point to remember is that an encoding can only be executed if the modules that it requires are loaded, otherwise an error will occur.</p>
+				</div>
+			</div>
+			
+			<a name="1_1_2"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.1. Definition of Terms -&gt; 1.1.2. Encodings Chain"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. Definition of Terms">1</a>.<a href="#1_1_2" title="1. Introduction -&gt; 1.1. Definition of Terms -&gt; 1.1.2. Encodings Chain">2</a>. </span>Encodings Chain</h3>
+			<div class="contents3">
+				<p>The <code>Uize.Template</code> module supports the concept of an encodings chain, which is a set of multiple encodings that are to be chained together and performed in sequence.</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">&lt;a href="search?&lt;% .searchParams -&gt; urlParams -&gt; tagAttributeValue %&gt;"&gt;
+  &lt;% .searchParams.category %&gt;
+&lt;/a&gt;
+</pre>
+				
+				<p>In the above example, the <code>searchParams</code> property of the template's <code>input</code> object is a reference to an object that contains properties for various search parameters. The <code><a href="#3_4">Uize.Template.encode</a></code> method is being used to first encode this object to a URL query paramaters string using the <code><a href="#5_7">urlParams</a></code> encoding, after which it is then encoded to a tag attribute value using the <code><a href="#5_5">tagAttributeValue</a></code> encoding.</p>
+				
+				<p>The <code><a href="#3_4">Uize.Template.encode</a></code> and <code><a href="#3_2">Uize.Template.decode</a></code> static methods also allow an Encodings Chain to be specified for their <code>encodingsChainSTR</code> parameter, as shown in the example below...</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">var searchUrlParamsTagAttributeValue = Uize.Template.encode (
+  searchParamsObj,
+  'urlParams -&gt; tagAttributeValue'
+);
+</pre>
+			</div>
+			
+			<a name="1_1_3"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.1. Definition of Terms -&gt; 1.1.3. Encoding Profile"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. Definition of Terms">1</a>.<a href="#1_1_3" title="1. Introduction -&gt; 1.1. Definition of Terms -&gt; 1.1.3. Encoding Profile">3</a>. </span>Encoding Profile</h3>
+			<div class="contents3">
+				<p>An <a href="#1_1_1">Encoding</a> is defined using an Encoding Profile, which is an object containing definitions for the encoder and decoder for the encoding.</p>
+				
+				<p><span class="allCaps">SYNTAX</span></p>
+				
+				
+<pre class="sample-code">{
+  to:{
+    required  : encoderRequiredModulesSTRorARRAY,
+    expansion : encoderExpansionFUNC
+  },
+  from:{
+    required  : decoderRequiredModulesSTRorARRAY,
+    expansion : decoderExpansionFUNC
+  }
+}
+</pre>
+				
+				<p>The <code>to</code> property of the Encoding Profile object defines how to encode to the encoding, while the <code>from</code> property defines how to decode from the encoding. Both the <code>to</code> and <code>from</code> properties' values should be objects containing <code>required</code> and <code>expansion</code> properties, where the <code>required</code> property's value can be a string or array specifying the name(s) of one or more modules required by the encoder/decoder, and where the <code>expansion</code> property's value should be a function that should accept value string and encoding options string parameters and output an expanded expression that can be evaluated to perform the encoding or decoding. This is best illustrated with an example...</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">Uize.Template.encoding.json = {
+  to:{
+    required:'Uize.Json',
+    expansion:function (_valueStr,_optionsStr) {
+      return 'Uize.Json.to (' + _valueStr + (_optionsStr &amp;&amp; ',') + _optionsStr + ')';
+    }
+  },
+  from:{
+    required:'Uize.Json',
+    expansion:function (_valueStr) {
+      return 'Uize.Json.from (' + _valueStr + ')';
+    }
+  }
+}
+</pre>
+				
+				<p>In the above example, the <code><a href="#5_2">json</a></code> encoding is being defined. Notice that both the encoder (<code>to</code>) and decoder (<code>from</code>) both require the <code><a href="../reference/Uize.Json.html">Uize.Json</a></code> module. The <code>expansion</code> function for the encoder is constructing a snippet of code that calls the <code>Uize.Json.to</code> static method, plugging in the values of its <code>_valueStr</code> and <code>_optionsStr</code> parameters. If the value of the <code>_optionsStr</code> parameter is an empty string, then the second parameter is omitted from the <code>Uize.Json.to</code> method call that is being constructed. Similarly, the <code>expansion</code> function for the decoder is constructing a snippet of code that calls the <code>Uize.Json.from</code> static method, but this function ignores its second parameter since the <code>Uize.Json.from</code> method doesn't support any encoding options.</p>
+			</div>
+			
+			<a name="1_1_4"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.1. Definition of Terms -&gt; 1.1.4. Standard Encoding"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. Definition of Terms">1</a>.<a href="#1_1_4" title="1. Introduction -&gt; 1.1. Definition of Terms -&gt; 1.1.4. Standard Encoding">4</a>. </span>Standard Encoding</h3>
+			<div class="contents3">
+				<p>A Standard Encoding is an <a href="#1_1_1">Encoding</a> whose encoder and decoder functions are static methods of the same module, and where those static methods accept as their first parameter a value to encode or decode, and as their optional second parameter encoding options.</p>
+				
+				<p>A Standard Encoding can be conveniently defined using the <code><a href="#3_3">Uize.Template.defineStandardEncoding</a></code> static method, by only specifying a few parameters and without having to flesh out the entire <a href="#1_1_3">Encoding Profile</a>. The majority of <a href="#5">Encodings</a> that are built into the <code>Uize.Template</code> module are standard encodings. As an example, the <code><a href="#5_2">json</a></code> encoding can easily be defined with the statement...</p>
+				
+				
+<pre class="sample-code">Uize.Template.defineStandardEncoding ('json','Uize.Json','to','from');
+</pre>
+			</div>
+		</div>
+		
+		<a name="1_2"></a>
+		<h2 class="heading2" title="1. Introduction -&gt; 1.2. Examples"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Examples">2</a>. </span>Examples</h2>
+		<div class="contents2">
+			<p>The following example pages are good showcases for the <code>Uize.Template</code> module...</p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><a href="../examples/options-dynamic.html">Dynamic Options</a> - See a demo of an options set widget, where the HTML for the widget's buttons can be dynamically regenerated just by setting new values for the widget.</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><a href="../examples/javascript-template-tester.html">JavaScript Template Tester</a> - Experiment with JavaScript templates and see how they can be used to generate HTML. See them compiled to JavaScript functions, and JavaScript modules.</td></tr>
+			</table>
+			<p><span class="allCaps">SEARCH FOR EXAMPLES</span></p>
+			
+			<p>Use the link below to search for example pages on the <b>uize.com</b> Web site that reference the <code>Uize.Template</code> module...</p>
+			
+			<p><a href="http://www.google.com/search?hl=en&safe=off&domains=uize.com%2Fexamples&sitesearch=uize.com%2Fexamples&q=%22Uize.Template%22" target="_blank" class="externalSiteLink">SEARCH</a></p>
+		</div>
+		
+		<a name="1_3"></a>
+		<h2 class="heading2" title="1. Introduction -&gt; 1.3. Implementation Info"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_3" title="1. Introduction -&gt; 1.3. Implementation Info">3</a>. </span>Implementation Info</h2>
+		<div class="contents2">
+			<p>The <code>Uize.Template</code> module defines the <code>Uize.Template</code> package under the <code><a href="../reference/Uize.html">Uize</a></code> namespace.</p>
+			
+			<a name="1_3_1"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.3. Implementation Info -&gt; 1.3.1. Features Introduced in This Module"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_3" title="1. Introduction -&gt; 1.3. Implementation Info">3</a>.<a href="#1_3_1" title="1. Introduction -&gt; 1.3. Implementation Info -&gt; 1.3.1. Features Introduced in This Module">1</a>. </span>Features Introduced in This Module</h3>
+			<div class="contents3">
+				<p>The features listed in this section have been introduced in this module.</p>
+				
+				<p><span class="allCaps">STATIC METHODS</span></p>
+				
+				<p><code><a href="#3_1">Uize.Template.compile</a></code> | <code><a href="#3_2">Uize.Template.decode</a></code> | <code><a href="#3_3">Uize.Template.defineStandardEncoding</a></code> | <code><a href="#3_4">Uize.Template.encode</a></code></p>
+				
+				<p><span class="allCaps">STATIC PROPERTIES</span></p>
+				
+				<p><code><a href="#4_1">Uize.Template.decoders</a></code> | <code><a href="#4_2">Uize.Template.encoders</a></code> | <code><a href="#4_3">Uize.Template.encodings</a></code> | <code><a href="#4_4">Uize.Template.moduleName</a></code></p>
+			</div>
+			
+			<a name="1_3_2"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.3. Implementation Info -&gt; 1.3.2. Features Overridden in This Module"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_3" title="1. Introduction -&gt; 1.3. Implementation Info">3</a>.<a href="#1_3_2" title="1. Introduction -&gt; 1.3. Implementation Info -&gt; 1.3.2. Features Overridden in This Module">2</a>. </span>Features Overridden in This Module</h3>
+			<div class="contents3">
+				<p>No features have been overridden in this module.</p>
+			</div>
+			
+			<a name="1_3_3"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.3. Implementation Info -&gt; 1.3.3. Features Inherited From Other Modules"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_3" title="1. Introduction -&gt; 1.3. Implementation Info">3</a>.<a href="#1_3_3" title="1. Introduction -&gt; 1.3. Implementation Info -&gt; 1.3.3. Features Inherited From Other Modules">3</a>. </span>Features Inherited From Other Modules</h3>
+			<div class="contents3">
+				<p>This module has no inherited features.</p>
+			</div>
+			
+			<a name="1_3_4"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.3. Implementation Info -&gt; 1.3.4. Modules Directly Under This Namespace"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_3" title="1. Introduction -&gt; 1.3. Implementation Info">3</a>.<a href="#1_3_4" title="1. Introduction -&gt; 1.3. Implementation Info -&gt; 1.3.4. Modules Directly Under This Namespace">4</a>. </span>Modules Directly Under This Namespace</h3>
+			<div class="contents3">
+				<p>There are no modules directly under this namespace.</p>
+			</div>
+			
+			<a name="1_3_5"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.3. Implementation Info -&gt; 1.3.5. Unit Tests"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_3" title="1. Introduction -&gt; 1.3. Implementation Info">3</a>.<a href="#1_3_5" title="1. Introduction -&gt; 1.3. Implementation Info -&gt; 1.3.5. Unit Tests">5</a>. </span>Unit Tests</h3>
+			<div class="contents3">
+				<p>The <code>Uize.Template</code> module is unit tested by the <code><a href="../reference/Uize.Test.Uize.Template.html">Uize.Test.Uize.Template</a></code> test module.</p>
+			</div>
+		</div>
+	</div>
+	
+	<a name="2"></a>
+	<h1 class="heading1" title="2. Directives"><span class="headingNumber"><a href="#2" title="2. Directives">2</a>. </span>Directives</h1>
+	<div class="contents1">
+		<a name="2_1"></a>
+		<h2 class="heading2" title="2. Directives -&gt; 2.1. @required"><span class="headingNumber"><a href="#2" title="2. Directives">2</a>.<a href="#2_1" title="2. Directives -&gt; 2.1. @required">1</a>. </span>@required</h2>
+		<div class="contents2">
+			<p>Lets you specify modules that are required by the code inside a JavaScript template.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">&lt;%@ required (moduleNamesSTRorARRAY) %&gt;
+</pre>
+			
+			<p>The <code>moduleNamesSTRorARRAY</code> parameter can be used to specify one or more module names, either in the form of a comma-separated module names string, or as an array of module name strings. The entire list of modules required for your template to process is returned in the <code>required</code> property of the <code><a href="#3_1">Uize.Template.compile</a></code> method's result, when the value <code>'full'</code> is specified for its optional <code><a href="#3_1_1">templateOptionsOBJ</a></code> parameter.</p>
+			
+			<p><span class="allCaps">EXAMPLE 1</span></p>
+			
+			
+<pre class="sample-code">&lt;%@ required ('Uize.Xml') %&gt;
+</pre>
+			
+			<p>In the above example, the <code><a href="#2_1">@required</a></code> directive declares that the template needs the <code><a href="../reference/Uize.Xml.html">Uize.Xml</a></code> module for its processing.</p>
+			
+			<p><span class="allCaps">EXAMPLE 2</span></p>
+			
+			
+<pre class="sample-code">&lt;%@ required ('Uize.Xml,Uize.Color') %&gt;
+</pre>
+			
+			<p>Here, the <code><a href="#2_1">@required</a></code> directive declares that both the <code><a href="../reference/Uize.Xml.html">Uize.Xml</a></code> and <code><a href="../reference/Uize.Color.html">Uize.Color</a></code> modules are needed for the module's processing.</p>
+			
+			<p><span class="allCaps">EXAMPLE 3</span></p>
+			
+			
+<pre class="sample-code">&lt;%@ required (['Uize.Xml','Uize.Color']) %&gt;
+</pre>
+			
+			<p>As an alternative to a comma-separated module names string, the <code><a href="../reference/Uize.Xml.html">Uize.Xml</a></code> and <code><a href="../reference/Uize.Color.html">Uize.Color</a></code> modules can be specified as individual string elements of a module names array.</p>
+			
+			<a name="2_1_1"></a>
+			<h3 class="heading3" title="2. Directives -&gt; 2.1. @required -&gt; 2.1.1. Multiple Calls"><span class="headingNumber"><a href="#2" title="2. Directives">2</a>.<a href="#2_1" title="2. Directives -&gt; 2.1. @required">1</a>.<a href="#2_1_1" title="2. Directives -&gt; 2.1. @required -&gt; 2.1.1. Multiple Calls">1</a>. </span>Multiple Calls</h3>
+			<div class="contents3">
+				<p>You can call the <code><a href="#2_1">@required</a></code> directive multiple times inside the same template, which will have a cumulative effect in building up the required modules list.</p>
+				
+				<p>So, for example, the following template code...</p>
+				
+				
+<pre class="sample-code">&lt;%@ required ('Uize.Xml') %&gt;
+&lt;%@ required ('Uize.Date') %&gt;
+</pre>
+				
+				<p>...is equivalent to...</p>
+				
+				
+<pre class="sample-code">&lt;%@ required (['Uize.Xml','Uize.Date']) %&gt;
+</pre>
+			</div>
+			
+			<a name="2_1_2"></a>
+			<h3 class="heading3" title="2. Directives -&gt; 2.1. @required -&gt; 2.1.2. Deduplication"><span class="headingNumber"><a href="#2" title="2. Directives">2</a>.<a href="#2_1" title="2. Directives -&gt; 2.1. @required">1</a>.<a href="#2_1_2" title="2. Directives -&gt; 2.1. @required -&gt; 2.1.2. Deduplication">2</a>. </span>Deduplication</h3>
+			<div class="contents3">
+				<p>When building up the canonical list of modules required by a template being compiled, the <code><a href="#2_1">@required</a></code> directive makes sure to ignore any duplicate instances of required modules.</p>
+				
+				<p>This applies both to duplicates that may occur within a single <code><a href="#2_1">@required</a></code> call, as well as duplicates that may arise across multiple <code><a href="#2_1">@required</a></code> calls. While duplicates are not a very likely occurrence, this protection does exist to prevent duplicates in the <code>required</code> property of the <code><a href="#3_1">Uize.Template.compile</a></code> method's full form result object.</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">&lt;%@ required ('Uize.Xml,Uize.Json,Uize.Color,Uize.Xml') %&gt;
+&lt;%@ required ('Uize.Color') %&gt;
+&lt;%@ required (['Uize.Date','Uize.String','Uize.Date']) %&gt;
+</pre>
+				
+				<p>In the above example, the very first <code><a href="#2_1">@required</a></code> call has two entries for the <code><a href="../reference/Uize.Xml.html">Uize.Xml</a></code> module. Then, the second call repeats the <code><a href="../reference/Uize.Color.html">Uize.Color</a></code> module that occurred in the first call. Finally, the third call, while using the array form for specifying the required modules, has a duplicate entry for the <code><a href="../reference/Uize.Date.html">Uize.Date</a></code> module. In this example, the final list of required modules would be <code>['Uize.Xml','Uize.Json','Uize.Color','Uize.Date','Uize.String']</code>.</p>
+			</div>
+		</div>
+		
+		<a name="2_2"></a>
+		<h2 class="heading2" title="2. Directives -&gt; 2.2. @input"><span class="headingNumber"><a href="#2" title="2. Directives">2</a>.<a href="#2_2" title="2. Directives -&gt; 2.2. @input">2</a>. </span>@input</h2>
+		<div class="contents2">
+			<p>Lets you specify information about the inputs that a JavaScript template supports.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">&lt;%@ input (inputProfileOBJ) %&gt;
+</pre>
+			
+			<p>The complete input profile, describing all the inputs that your template accepts, is returned in the <code>input</code> property of the <code><a href="#3_1">Uize.Template.compile</a></code> method's result, when the value <code>'full'</code> is specified for its optional <code><a href="#3_1_1">templateOptionsOBJ</a></code> parameter.</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">&lt;%@ input ({idPrefix:'string'}) %&gt;
+</pre>
+			
+			<p>In the above example, the <code><a href="#2_2">@input</a></code> directive declares that the template accepts the <code>idPrefix</code> input.</p>
+			
+			<p>You can specify profiles for multiple inputs at a time in the <code>inputProfileOBJ</code> parameter, simply by having multiple properties in the obejct. You can also call the <code><a href="#2_2">@input</a></code> directive multiple times inside the same template, which will have a cumulative effect in building up the input profile for the template.</p>
+			
+			<p>So, for example, the following template code...</p>
+			
+			
+<pre class="sample-code">&lt;%@ input ({idPrefix:'string'}) %&gt;
+&lt;%@ input ({displayTitle:'string'}) %&gt;
+</pre>
+			
+			<p>...is equivalent to...</p>
+			
+			
+<pre class="sample-code">&lt;%@ input ({idPrefix:'string',displayTitle:'string'}) %&gt;
+</pre>
+		</div>
+		
+		<a name="2_3"></a>
+		<h2 class="heading2" title="2. Directives -&gt; 2.3. @startBlock"><span class="headingNumber"><a href="#2" title="2. Directives">2</a>.<a href="#2_3" title="2. Directives -&gt; 2.3. @startBlock">3</a>. </span>@startBlock</h2>
+		<div class="contents2">
+			<p>Lets you specify the start of a block of template code.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">&lt;%@ startBlock (blockNameSTR) %&gt;
+</pre>
+			
+			<p>Once a block is defined using the <code><a href="#2_3">@startBlock</a></code> and <code><a href="#2_4">@endBlock</a></code> directives, the block is then accessible for use with a simple function call. Essentially, the block directives define a function by the name <code>blockName</code> that you can then use in subsequent JavaScript code in your template that executes at processing time.</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">&lt;%@ startBlock ('fancyRule') %&gt;
+&lt;div style="width:100%; height:5px; background:url(rule.jpg) repeat-x left top;"&gt;&lt;/div&gt;
+&lt;%@ endBlock () %&gt;
+&lt;p&gt;This is section 1.&lt;/p&gt;
+&lt;%= fancyRule () %&gt;
+&lt;p&gt;This is section 2.&lt;/p&gt;
+&lt;%= fancyRule () %&gt;
+&lt;p&gt;This is section 3.&lt;/p&gt;
+&lt;%= fancyRule () %&gt;
+&lt;p&gt;This is section 4.&lt;/p&gt;
+</pre>
+			
+			<p>In the above example, a block called <code>fancyRule</code> is being defined, that generates output for a decorated rule using a styled <code>div</code> tag. The block is then used within the rest of the template code to insert the decorated rule into the main output for the template, between each section paragraph.</p>
+			
+			<p><span class="allCaps">VARIATION</span></p>
+			
+			
+<pre class="sample-code">&lt;%@ startBlock (blockNameSTR,paramsListSTR) %&gt;
+</pre>
+			
+			<p>The optional <code>paramsListSTR</code> parameter lets you specify a list of parameters that your template block handles. The parameter list string should be formatted as a comma-separated list of parameter names.</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">&lt;%@ startBlock ('thumbnail','title') %&gt;
+&lt;% var filename = title.toLowerCase ().replace (/\s+/g,'-'); %&gt;
+&lt;a href="../photos/700x500/&lt;%= filename %&gt;.jpg"&gt;
+  &lt;img
+    src="../photos/105x75/&lt;%= filename %&gt;.jpg"
+    width="105" height="75"
+    alt="&lt;%= title %&gt;"
+  /&gt;
+&lt;/a&gt;
+&lt;%@ endBlock () %&gt;
+&lt;%= thumbnail ('Pink and Yellow Sunset') %&gt;
+&lt;%= thumbnail ('Braving the Onslaught') %&gt;
+&lt;%= thumbnail ('Companion to a Sunset') %&gt;
+&lt;%= thumbnail ('Concrete Eternity') %&gt;
+&lt;%= thumbnail ('Corrugate It') %&gt;
+</pre>
+			
+			<p>In the above example, a block called <code>thumbnail</code> is being defined, that takes the single parameter <code>title</code>. After the block is defined, it is called multiple times with different values for the block's <code>title</code> parameter. The block uses the parameter in generating its output. The block's function returns the block's generated output. The result of each call to the <code>thumbnail</code> block's function is being assigned to the template's main output, using the <code>&#60;%&#61;</code> syntax.</p>
+		</div>
+		
+		<a name="2_4"></a>
+		<h2 class="heading2" title="2. Directives -&gt; 2.4. @endBlock"><span class="headingNumber"><a href="#2" title="2. Directives">2</a>.<a href="#2_4" title="2. Directives -&gt; 2.4. @endBlock">4</a>. </span>@endBlock</h2>
+		<div class="contents2">
+			<p>Lets you specify the end of a block of template code.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">&lt;%@ endBlock () %&gt;
+</pre>
+			
+			<p>For a more detailed discussion of the block directives, see the reference for the <code><a href="#2_3">@startBlock</a></code> directive.</p>
+		</div>
+	</div>
+	
+	<a name="3"></a>
+	<h1 class="heading1" title="3. Static Methods"><span class="headingNumber"><a href="#3" title="3. Static Methods">3</a>. </span>Static Methods</h1>
+	<div class="contents1">
+		<a name="3_1"></a>
+		<h2 class="heading2" title="3. Static Methods -&gt; 3.1. Uize.Template.compile"><span class="headingNumber"><a href="#3" title="3. Static Methods">3</a>.<a href="#3_1" title="3. Static Methods -&gt; 3.1. Uize.Template.compile">1</a>. </span>Uize.Template.compile</h2>
+		<div class="contents2">
+			<p>Compiles a JavaScript template to a function for high performance repeat usage.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">compiledTemplateFUNC = Uize.Template.compile (templateSTR,templateOptionsOBJ);
+</pre>
+			
+			<a name="3_1_1"></a>
+			<h3 class="heading3" title="3. Static Methods -&gt; 3.1. Uize.Template.compile -&gt; 3.1.1. templateOptionsOBJ"><span class="headingNumber"><a href="#3" title="3. Static Methods">3</a>.<a href="#3_1" title="3. Static Methods -&gt; 3.1. Uize.Template.compile">1</a>.<a href="#3_1_1" title="3. Static Methods -&gt; 3.1. Uize.Template.compile -&gt; 3.1.1. templateOptionsOBJ">1</a>. </span>templateOptionsOBJ</h3>
+			<div class="contents3">
+				<p>The <code><a href="#3_1_1">templateOptionsOBJ</a></code> parameter lets you specify options for how the template should be compiled, and has properties as follows...</p>
+				
+				<p><span class="allCaps">PROPERTIES</span></p>
+				
+				
+<pre class="sample-code">{
+  openerToken:openerTokenSTR,            // optional, defaults to &lt;%
+  closerToken:closerTokenSTR,            // optional, defaults to %&gt;
+  gobbleWhitespace:gobbleWhitespaceBOOL, // optional, defaults to true
+  result:resultTypeSTR                   // 'function' (default) | 'full'
+};
+</pre>
+				
+				<a name="3_1_1_1"></a>
+				<h4 class="heading4" title="3. Static Methods -&gt; 3.1. Uize.Template.compile -&gt; 3.1.1. templateOptionsOBJ -&gt; 3.1.1.1. openerToken"><span class="headingNumber"><a href="#3" title="3. Static Methods">3</a>.<a href="#3_1" title="3. Static Methods -&gt; 3.1. Uize.Template.compile">1</a>.<a href="#3_1_1" title="3. Static Methods -&gt; 3.1. Uize.Template.compile -&gt; 3.1.1. templateOptionsOBJ">1</a>.<a href="#3_1_1_1" title="3. Static Methods -&gt; 3.1. Uize.Template.compile -&gt; 3.1.1. templateOptionsOBJ -&gt; 3.1.1.1. openerToken">1</a>. </span>openerToken</h4>
+				<div class="contents4">
+					<p>A string, specifying the characters that should delimit the start of a segment of template code. Defaults to <code>&#60;%</code>.</p>
+				</div>
+				
+				<a name="3_1_1_2"></a>
+				<h4 class="heading4" title="3. Static Methods -&gt; 3.1. Uize.Template.compile -&gt; 3.1.1. templateOptionsOBJ -&gt; 3.1.1.2. closerToken"><span class="headingNumber"><a href="#3" title="3. Static Methods">3</a>.<a href="#3_1" title="3. Static Methods -&gt; 3.1. Uize.Template.compile">1</a>.<a href="#3_1_1" title="3. Static Methods -&gt; 3.1. Uize.Template.compile -&gt; 3.1.1. templateOptionsOBJ">1</a>.<a href="#3_1_1_2" title="3. Static Methods -&gt; 3.1. Uize.Template.compile -&gt; 3.1.1. templateOptionsOBJ -&gt; 3.1.1.2. closerToken">2</a>. </span>closerToken</h4>
+				<div class="contents4">
+					<p>A string, specifying the characters that should delimit the end of a segment of template code. Defaults to <code>%&#62;</code>.</p>
+				</div>
+				
+				<a name="3_1_1_3"></a>
+				<h4 class="heading4" title="3. Static Methods -&gt; 3.1. Uize.Template.compile -&gt; 3.1.1. templateOptionsOBJ -&gt; 3.1.1.3. gobbleWhitespace"><span class="headingNumber"><a href="#3" title="3. Static Methods">3</a>.<a href="#3_1" title="3. Static Methods -&gt; 3.1. Uize.Template.compile">1</a>.<a href="#3_1_1" title="3. Static Methods -&gt; 3.1. Uize.Template.compile -&gt; 3.1.1. templateOptionsOBJ">1</a>.<a href="#3_1_1_3" title="3. Static Methods -&gt; 3.1. Uize.Template.compile -&gt; 3.1.1. templateOptionsOBJ -&gt; 3.1.1.3. gobbleWhitespace">3</a>. </span>gobbleWhitespace</h4>
+				<div class="contents4">
+					<p>A boolean, specifying whether or not the automatic whitespace gobbling mechanism should be enabled. Defaults to <code>true</code>.</p>
+				</div>
+				
+				<a name="3_1_1_4"></a>
+				<h4 class="heading4" title="3. Static Methods -&gt; 3.1. Uize.Template.compile -&gt; 3.1.1. templateOptionsOBJ -&gt; 3.1.1.4. result"><span class="headingNumber"><a href="#3" title="3. Static Methods">3</a>.<a href="#3_1" title="3. Static Methods -&gt; 3.1. Uize.Template.compile">1</a>.<a href="#3_1_1" title="3. Static Methods -&gt; 3.1. Uize.Template.compile -&gt; 3.1.1. templateOptionsOBJ">1</a>.<a href="#3_1_1_4" title="3. Static Methods -&gt; 3.1. Uize.Template.compile -&gt; 3.1.1. templateOptionsOBJ -&gt; 3.1.1.4. result">4</a>. </span>result</h4>
+				<div class="contents4">
+					<p>A string, specifying how the <code><a href="#3_1">Uize.Template.compile</a></code> method should return its result. The default value <code>'function'</code> will cause the method to return just a reference to the compiled template function. The value <code>'full'</code> will cause the method to return an object comprised of the following items...</p>
+					
+					<p><span class="allCaps">FULL RESULT</span></p>
+					
+					
+<pre class="sample-code">{
+  input:inputProfileOBJ,        // a profile of the input handled by the template
+  required:moduleNamesARRAY,    // a list of modules required by the template
+  code:templateCodeSTR,         // implementation code for the template function
+  templateFunction:templateFUNC // a reference to the compiled template function
+}
+</pre>
+				</div>
+			</div>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_2"></a>
+		<h2 class="heading2" title="3. Static Methods -&gt; 3.2. Uize.Template.decode"><span class="headingNumber"><a href="#3" title="3. Static Methods">3</a>.<a href="#3_2" title="3. Static Methods -&gt; 3.2. Uize.Template.decode">2</a>. </span>Uize.Template.decode</h2>
+		<div class="contents2">
+			<p>Decodes the specified value, by reversing the specified encoding(s).</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">decodedANYTYPE = Uize.Template.decode (toDecodeANYTYPE,encodingsChainSTR);
+</pre>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">urlParamsObj = Uize.Template.decode (
+  'category=Dogs%20and%20Cats&amp;type=allsort=recent&amp;resultsPerPage=20',
+  'urlParams'
+);
+</pre>
+			
+			<p>The above example would produce the following URL query parameters object value for the <code>urlParamsObj</code> variable...</p>
+			
+			
+<pre class="sample-code">{
+  category:'Dogs and Cats',
+  type:'all',
+  sort:'recent',
+  resultsPerPage:20
+}
+</pre>
+			
+			<a name="3_2_1"></a>
+			<h3 class="heading3" title="3. Static Methods -&gt; 3.2. Uize.Template.decode -&gt; 3.2.1. Encodings With Encoding Options"><span class="headingNumber"><a href="#3" title="3. Static Methods">3</a>.<a href="#3_2" title="3. Static Methods -&gt; 3.2. Uize.Template.decode">2</a>.<a href="#3_2_1" title="3. Static Methods -&gt; 3.2. Uize.Template.decode -&gt; 3.2.1. Encodings With Encoding Options">1</a>. </span>Encodings With Encoding Options</h3>
+			<div class="contents3">
+				<p>The <code><a href="#3_2">Uize.Template.decode</a></code> method allows encoding options to be specified for encodings in the <code>encodingsChainSTR</code> parameter, in the same way one would do so in templating assignment statements.</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">var attributesObj = Uize.Template.decode (
+  'hello="world" foo="bar"',
+  'tagAttributes{nameCase:\'upper\'}'
+);
+</pre>
+				
+				<p>After the above code has executed, the value of the <code>attributesObj</code> variable will be the attributes object <code>{HELLO:'world',FOO:'bar'}</code>. This is because the value <code>'upper'</code> is being specified for the <code>nameCase</code> encoding option of the <code><a href="#5_4">tagAttributes</a></code> encoding. Encoding options for an encoding are specified in curly braces after the encoding's name.</p>
+			</div>
+			
+			<a name="3_2_2"></a>
+			<h3 class="heading3" title="3. Static Methods -&gt; 3.2. Uize.Template.decode -&gt; 3.2.2. Using an Encodings Chain"><span class="headingNumber"><a href="#3" title="3. Static Methods">3</a>.<a href="#3_2" title="3. Static Methods -&gt; 3.2. Uize.Template.decode">2</a>.<a href="#3_2_2" title="3. Static Methods -&gt; 3.2. Uize.Template.decode -&gt; 3.2.2. Using an Encodings Chain">2</a>. </span>Using an Encodings Chain</h3>
+			<div class="contents3">
+				<p>The <code><a href="#3_2">Uize.Template.decode</a></code> method allows an <a href="#1_1_2">Encodings Chain</a> to be specified in the <code>encodingsChainSTR</code> parameter, using the same syntax one would use for templating assignment statements.</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">var searchParamsObj = Uize.Template.decode (
+  searchUrlParamsTagAttributeValue,
+  'urlParams -&gt; tagAttributeValue'
+);
+</pre>
+				
+				<p>In the above example, the value of the <code>searchUrlParamsTagAttributeValue</code> variable is a string that contains URL query paramaters that have been encoded to a string using the <code><a href="#5_7">urlParams</a></code> encoding, and have been further encoded to a tag attribute value using the <code><a href="#5_5">tagAttributeValue</a></code> encoding.</p>
+				
+				<p>The value <code>'urlParams -> tagAttributeValue'</code> for the <code>encodingsChainSTR</code> parameter specifies the encodings that were applied to the value that is being decoded - the encodings that will have to be reversed in order to decode from the <code>'urlParams -> tagAttributeValue'</code> compound encoding. The <code><a href="#3_2">Uize.Template.decode</a></code> method here is decoding the string by reversing the direction of the <code>'urlParams -> tagAttributeValue'</code> <a href="#1_1_2">Encodings Chain</a>, producing as its result a URL query paramaters object.</p>
+				
+				<p>It's worth pointing out that you could accomplish the same effect by using the <code><a href="#3_4">Uize.Template.encode</a></code> method and reversing the order of encodings in the chain, as well as reversing the direction of the individual encodings by toggling the "!" prefix in front of the encodings. So, the following example using the <code><a href="#3_4">Uize.Template.encode</a></code> method would have the same outcome as the example using the <code><a href="#3_2">Uize.Template.decode</a></code> method that is shown above...</p>
+				
+				
+<pre class="sample-code">var searchParamsObj = Uize.Template.encode (
+  searchUrlParamsTagAttributeValue,
+  '!tagAttributeValue -&gt; !urlParams'
+);
+</pre>
+				
+				<p>The benefit of using the <code><a href="#3_2">Uize.Template.decode</a></code> method is that it does the reverse mapping for you, which is especially useful if you have a specific <a href="#1_1_2">Encodings Chain</a> stored in some string variable and you want to easily encode to and decode from that compound encoding.</p>
+			</div>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_3"></a>
+		<h2 class="heading2" title="3. Static Methods -&gt; 3.3. Uize.Template.defineStandardEncoding"><span class="headingNumber"><a href="#3" title="3. Static Methods">3</a>.<a href="#3_3" title="3. Static Methods -&gt; 3.3. Uize.Template.defineStandardEncoding">3</a>. </span>Uize.Template.defineStandardEncoding</h2>
+		<div class="contents2">
+			<p>Lets you conveniently extend the <code>Uize.Template</code> module by defining a new <a href="#1_1_4">Standard Encoding</a>.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">Uize.Template.defineStandardEncoding (
+  encodingNameSTR,       // name of the encoding
+  moduleNameSTR,         // name of module containing the encoder and decoder methods
+  encoderMethodNameSTR,  // name of the encoder static method
+  decoderMethodNameSTR   // name of the decoder static method
+);
+</pre>
+			
+			<p>The <code><a href="#3_3">Uize.Template.defineStandardEncoding</a></code> method provides a shortcut way of defining an encoding for the common case where the encoding's encoder and decoder functions are static methods of the same module. Instead of having to specify the whole <a href="#1_1_3">Encoding Profile</a> structure, the <code><a href="#3_3">Uize.Template.defineStandardEncoding</a></code> method takes care of building it for you, from the details you provide in the <code><a href="#3_3_1_1">encodingNameSTR</a></code>, <code><a href="#3_3_1_2">moduleNameSTR</a></code>, <code><a href="#3_3_1_3">encoderMethodNameSTR</a></code>, and <code><a href="#3_3_1_4">decoderMethodNameSTR</a></code> parameters.</p>
+			
+			<a name="3_3_1"></a>
+			<h3 class="heading3" title="3. Static Methods -&gt; 3.3. Uize.Template.defineStandardEncoding -&gt; 3.3.1. Parameters"><span class="headingNumber"><a href="#3" title="3. Static Methods">3</a>.<a href="#3_3" title="3. Static Methods -&gt; 3.3. Uize.Template.defineStandardEncoding">3</a>.<a href="#3_3_1" title="3. Static Methods -&gt; 3.3. Uize.Template.defineStandardEncoding -&gt; 3.3.1. Parameters">1</a>. </span>Parameters</h3>
+			<div class="contents3">
+				<a name="3_3_1_1"></a>
+				<h4 class="heading4" title="3. Static Methods -&gt; 3.3. Uize.Template.defineStandardEncoding -&gt; 3.3.1. Parameters -&gt; 3.3.1.1. encodingNameSTR"><span class="headingNumber"><a href="#3" title="3. Static Methods">3</a>.<a href="#3_3" title="3. Static Methods -&gt; 3.3. Uize.Template.defineStandardEncoding">3</a>.<a href="#3_3_1" title="3. Static Methods -&gt; 3.3. Uize.Template.defineStandardEncoding -&gt; 3.3.1. Parameters">1</a>.<a href="#3_3_1_1" title="3. Static Methods -&gt; 3.3. Uize.Template.defineStandardEncoding -&gt; 3.3.1. Parameters -&gt; 3.3.1.1. encodingNameSTR">1</a>. </span>encodingNameSTR</h4>
+				<div class="contents4">
+					<p>A string, specifying the name of the encoding.</p>
+					
+					<p>The value of the <code><a href="#3_3_1_1">encodingNameSTR</a></code> parameter will be used as the name of the property assigned on the <code><a href="#4_3">Uize.Template.encodings</a></code> object to store the <a href="#1_1_3">Encoding Profile</a> for the newly defined encoding.</p>
+				</div>
+				
+				<a name="3_3_1_2"></a>
+				<h4 class="heading4" title="3. Static Methods -&gt; 3.3. Uize.Template.defineStandardEncoding -&gt; 3.3.1. Parameters -&gt; 3.3.1.2. moduleNameSTR"><span class="headingNumber"><a href="#3" title="3. Static Methods">3</a>.<a href="#3_3" title="3. Static Methods -&gt; 3.3. Uize.Template.defineStandardEncoding">3</a>.<a href="#3_3_1" title="3. Static Methods -&gt; 3.3. Uize.Template.defineStandardEncoding -&gt; 3.3.1. Parameters">1</a>.<a href="#3_3_1_2" title="3. Static Methods -&gt; 3.3. Uize.Template.defineStandardEncoding -&gt; 3.3.1. Parameters -&gt; 3.3.1.2. moduleNameSTR">2</a>. </span>moduleNameSTR</h4>
+				<div class="contents4">
+					<p>A string, specifying the name of the module that contains the encoder and decoder methods for the encoding.</p>
+				</div>
+				
+				<a name="3_3_1_3"></a>
+				<h4 class="heading4" title="3. Static Methods -&gt; 3.3. Uize.Template.defineStandardEncoding -&gt; 3.3.1. Parameters -&gt; 3.3.1.3. encoderMethodNameSTR"><span class="headingNumber"><a href="#3" title="3. Static Methods">3</a>.<a href="#3_3" title="3. Static Methods -&gt; 3.3. Uize.Template.defineStandardEncoding">3</a>.<a href="#3_3_1" title="3. Static Methods -&gt; 3.3. Uize.Template.defineStandardEncoding -&gt; 3.3.1. Parameters">1</a>.<a href="#3_3_1_3" title="3. Static Methods -&gt; 3.3. Uize.Template.defineStandardEncoding -&gt; 3.3.1. Parameters -&gt; 3.3.1.3. encoderMethodNameSTR">3</a>. </span>encoderMethodNameSTR</h4>
+				<div class="contents4">
+					<p>A string, specifying the name of the static method that is to be used for encoding, and that is defined inside the module specified by the <code><a href="#3_3_1_2">moduleNameSTR</a></code> parameter.</p>
+					
+					<p>The value of this parameter should not include the module name specified in the <code><a href="#3_3_1_2">moduleNameSTR</a></code> parameter. For example, for the static method <code>Uize.Json.to</code>, the value <code>'to'</code> should be specified for the <code><a href="#3_3_1_3">encoderMethodNameSTR</a></code> parameter.</p>
+				</div>
+				
+				<a name="3_3_1_4"></a>
+				<h4 class="heading4" title="3. Static Methods -&gt; 3.3. Uize.Template.defineStandardEncoding -&gt; 3.3.1. Parameters -&gt; 3.3.1.4. decoderMethodNameSTR"><span class="headingNumber"><a href="#3" title="3. Static Methods">3</a>.<a href="#3_3" title="3. Static Methods -&gt; 3.3. Uize.Template.defineStandardEncoding">3</a>.<a href="#3_3_1" title="3. Static Methods -&gt; 3.3. Uize.Template.defineStandardEncoding -&gt; 3.3.1. Parameters">1</a>.<a href="#3_3_1_4" title="3. Static Methods -&gt; 3.3. Uize.Template.defineStandardEncoding -&gt; 3.3.1. Parameters -&gt; 3.3.1.4. decoderMethodNameSTR">4</a>. </span>decoderMethodNameSTR</h4>
+				<div class="contents4">
+					<p>A string, specifying the name of the static method that is to be used for decoding, and that is defined inside the module specified by the <code><a href="#3_3_1_2">moduleNameSTR</a></code> parameter.</p>
+					
+					<p>The value of this parameter should not include the module name specified in the <code><a href="#3_3_1_2">moduleNameSTR</a></code> parameter. For example, for the static method <code>Uize.Json.from</code>, the value <code>'from'</code> should be specified for the <code><a href="#3_3_1_4">decoderMethodNameSTR</a></code> parameter.</p>
+				</div>
+			</div>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">Uize.Template.defineStandardEncoding ('json','Uize.Json','to','from');
+</pre>
+			
+			<p>The above example defines the <code><a href="#5_2">json</a></code> <a href="#1_1_4">Standard Encoding</a>. The value of the <code><a href="#3_3_1_1">encodingNameSTR</a></code> parameter is <code>'json'</code>. The value of the <code><a href="#3_3_1_2">moduleNameSTR</a></code> parameter is <code>'Uize.Json'</code>, because the <code><a href="../reference/Uize.Json.html">Uize.Json</a></code> module is the module that contains the encoder and decoder methods for this encoding. The value of the <code><a href="#3_3_1_3">encoderMethodNameSTR</a></code> parameter is <code>'to'</code>, because the <code>Uize.Json.to</code> static method is to be used for encoding. Similarly, the value of the <code><a href="#3_3_1_4">decoderMethodNameSTR</a></code> parameter is <code>'from'</code>, because the <code>Uize.Json.from</code> static method is to be used for decoding.</p>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#4_3">Uize.Template.encodings</a></code> static property</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_4"></a>
+		<h2 class="heading2" title="3. Static Methods -&gt; 3.4. Uize.Template.encode"><span class="headingNumber"><a href="#3" title="3. Static Methods">3</a>.<a href="#3_4" title="3. Static Methods -&gt; 3.4. Uize.Template.encode">4</a>. </span>Uize.Template.encode</h2>
+		<div class="contents2">
+			<p>Encodes the specified value, using the specified encoding(s).</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">encodedANYTYPE = Uize.Template.encode (toEncodeANYTYPE,encodingsChainSTR);
+</pre>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">urlParamsStr = Uize.Template.encode (
+  {
+    category:'Dogs and Cats',
+    type:'all',
+    sort:'recent',
+    resultsPerPage:20
+  },
+  'urlParams'
+);
+</pre>
+			
+			<p>The above example would produce the string output...</p>
+			
+			
+<pre class="sample-code">category=Dogs%20and%20Cats&amp;type=allsort=recent&amp;resultsPerPage=20
+</pre>
+			
+			<a name="3_4_1"></a>
+			<h3 class="heading3" title="3. Static Methods -&gt; 3.4. Uize.Template.encode -&gt; 3.4.1. Encodings With Encoding Options"><span class="headingNumber"><a href="#3" title="3. Static Methods">3</a>.<a href="#3_4" title="3. Static Methods -&gt; 3.4. Uize.Template.encode">4</a>.<a href="#3_4_1" title="3. Static Methods -&gt; 3.4. Uize.Template.encode -&gt; 3.4.1. Encodings With Encoding Options">1</a>. </span>Encodings With Encoding Options</h3>
+			<div class="contents3">
+				<p>The <code><a href="#3_4">Uize.Template.encode</a></code> method allows encoding options to be specified for encodings in the <code>encodingsChainSTR</code> parameter, in the same way one would do so in templating assignment statements.</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">var attributeValuesStr = Uize.Template.encode (
+  {HELLO:'world',FOO:'bar'},
+  'tagAttributes{nameCase:\'lower\'}'
+);
+</pre>
+				
+				<p>After the above code has executed, the value of the <code>attributeValuesStr</code> variable will be the string <code>'hello&#61;"world" foo&#61;"bar"'</code>. This is because the value <code>'lower'</code> is being specified for the <code>nameCase</code> encoding option of the <code><a href="#5_4">tagAttributes</a></code> encoding. Encoding options for an encoding are specified in curly braces after the encoding's name.</p>
+			</div>
+			
+			<a name="3_4_2"></a>
+			<h3 class="heading3" title="3. Static Methods -&gt; 3.4. Uize.Template.encode -&gt; 3.4.2. Using an Encodings Chain"><span class="headingNumber"><a href="#3" title="3. Static Methods">3</a>.<a href="#3_4" title="3. Static Methods -&gt; 3.4. Uize.Template.encode">4</a>.<a href="#3_4_2" title="3. Static Methods -&gt; 3.4. Uize.Template.encode -&gt; 3.4.2. Using an Encodings Chain">2</a>. </span>Using an Encodings Chain</h3>
+			<div class="contents3">
+				<p>The <code><a href="#3_4">Uize.Template.encode</a></code> method allows an <a href="#1_1_2">Encodings Chain</a> to be specified in the <code>encodingsChainSTR</code> parameter, using the same syntax one would use for templating assignment statements.</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">var searchUrlParamsTagAttributeValue = Uize.Template.encode (
+  searchParamsObj,
+  'urlParams -&gt; tagAttributeValue'
+);
+</pre>
+				
+				<p>In the above example, the <code>searchParams</code> variable is a reference to an object that contains properties for various search parameters. The <code><a href="#3_4">Uize.Template.encode</a></code> method is being used to first encode this object to a URL query paramaters string using the <code><a href="#5_7">urlParams</a></code> encoding, after which it is then encoded to a tag attribute value using the <code><a href="#5_5">tagAttributeValue</a></code> encoding.</p>
+			</div>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+	</div>
+	
+	<a name="4"></a>
+	<h1 class="heading1" title="4. Static Properties"><span class="headingNumber"><a href="#4" title="4. Static Properties">4</a>. </span>Static Properties</h1>
+	<div class="contents1">
+		<a name="4_1"></a>
+		<h2 class="heading2" title="4. Static Properties -&gt; 4.1. Uize.Template.decoders"><span class="headingNumber"><a href="#4" title="4. Static Properties">4</a>.<a href="#4_1" title="4. Static Properties -&gt; 4.1. Uize.Template.decoders">1</a>. </span>Uize.Template.decoders</h2>
+		<div class="contents2">
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_2"></a>
+		<h2 class="heading2" title="4. Static Properties -&gt; 4.2. Uize.Template.encoders"><span class="headingNumber"><a href="#4" title="4. Static Properties">4</a>.<a href="#4_2" title="4. Static Properties -&gt; 4.2. Uize.Template.encoders">2</a>. </span>Uize.Template.encoders</h2>
+		<div class="contents2">
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_3"></a>
+		<h2 class="heading2" title="4. Static Properties -&gt; 4.3. Uize.Template.encodings"><span class="headingNumber"><a href="#4" title="4. Static Properties">4</a>.<a href="#4_3" title="4. Static Properties -&gt; 4.3. Uize.Template.encodings">3</a>. </span>Uize.Template.encodings</h2>
+		<div class="contents2">
+			<p>An object, containing properties defining all the available <a href="#5">Encodings</a>, where the value for each property is an <a href="#1_1_3">Encoding Profile</a> object.</p>
+			
+			<p>To extend the <code>Uize.Template</code> module by adding further encodings, an <a href="#1_1_3">Encoding Profile</a> object can be assigned directly to a new property of the <code><a href="#4_3">Uize.Template.encodings</a></code> object. Or, if the encoding adheres to the constraints of a <a href="#1_1_4">Standard Encoding</a>, then it can be more conveniently registered using the <code><a href="#3_3">Uize.Template.defineStandardEncoding</a></code> static method.</p>
+			
+			<a name="4_3_1"></a>
+			<h3 class="heading3" title="4. Static Properties -&gt; 4.3. Uize.Template.encodings -&gt; 4.3.1. Uize.Template.encodings.iso8601"><span class="headingNumber"><a href="#4" title="4. Static Properties">4</a>.<a href="#4_3" title="4. Static Properties -&gt; 4.3. Uize.Template.encodings">3</a>.<a href="#4_3_1" title="4. Static Properties -&gt; 4.3. Uize.Template.encodings -&gt; 4.3.1. Uize.Template.encodings.iso8601">1</a>. </span>Uize.Template.encodings.iso8601</h3>
+			<div class="contents3">
+				<p>An <a href="#1_1_3">Encoding Profile</a> for the <code><a href="#5_1">iso8601</a></code> encoding.</p>
+			</div>
+			
+			<a name="4_3_2"></a>
+			<h3 class="heading3" title="4. Static Properties -&gt; 4.3. Uize.Template.encodings -&gt; 4.3.2. Uize.Template.encodings.json"><span class="headingNumber"><a href="#4" title="4. Static Properties">4</a>.<a href="#4_3" title="4. Static Properties -&gt; 4.3. Uize.Template.encodings">3</a>.<a href="#4_3_2" title="4. Static Properties -&gt; 4.3. Uize.Template.encodings -&gt; 4.3.2. Uize.Template.encodings.json">2</a>. </span>Uize.Template.encodings.json</h3>
+			<div class="contents3">
+				<p>An <a href="#1_1_3">Encoding Profile</a> for the <code><a href="#5_2">json</a></code> encoding.</p>
+			</div>
+			
+			<a name="4_3_3"></a>
+			<h3 class="heading3" title="4. Static Properties -&gt; 4.3. Uize.Template.encodings -&gt; 4.3.3. Uize.Template.encodings.miniJson"><span class="headingNumber"><a href="#4" title="4. Static Properties">4</a>.<a href="#4_3" title="4. Static Properties -&gt; 4.3. Uize.Template.encodings">3</a>.<a href="#4_3_3" title="4. Static Properties -&gt; 4.3. Uize.Template.encodings -&gt; 4.3.3. Uize.Template.encodings.miniJson">3</a>. </span>Uize.Template.encodings.miniJson</h3>
+			<div class="contents3">
+				<p>An <a href="#1_1_3">Encoding Profile</a> for the <code><a href="#5_3">miniJson</a></code> encoding.</p>
+			</div>
+			
+			<a name="4_3_4"></a>
+			<h3 class="heading3" title="4. Static Properties -&gt; 4.3. Uize.Template.encodings -&gt; 4.3.4. Uize.Template.encodings.tagAttributes"><span class="headingNumber"><a href="#4" title="4. Static Properties">4</a>.<a href="#4_3" title="4. Static Properties -&gt; 4.3. Uize.Template.encodings">3</a>.<a href="#4_3_4" title="4. Static Properties -&gt; 4.3. Uize.Template.encodings -&gt; 4.3.4. Uize.Template.encodings.tagAttributes">4</a>. </span>Uize.Template.encodings.tagAttributes</h3>
+			<div class="contents3">
+				<p>An <a href="#1_1_3">Encoding Profile</a> for the <code><a href="#5_4">tagAttributes</a></code> encoding.</p>
+			</div>
+			
+			<a name="4_3_5"></a>
+			<h3 class="heading3" title="4. Static Properties -&gt; 4.3. Uize.Template.encodings -&gt; 4.3.5. Uize.Template.encodings.tagAttributeValue"><span class="headingNumber"><a href="#4" title="4. Static Properties">4</a>.<a href="#4_3" title="4. Static Properties -&gt; 4.3. Uize.Template.encodings">3</a>.<a href="#4_3_5" title="4. Static Properties -&gt; 4.3. Uize.Template.encodings -&gt; 4.3.5. Uize.Template.encodings.tagAttributeValue">5</a>. </span>Uize.Template.encodings.tagAttributeValue</h3>
+			<div class="contents3">
+				<p>An <a href="#1_1_3">Encoding Profile</a> for the <code><a href="#5_5">tagAttributeValue</a></code> encoding.</p>
+			</div>
+			
+			<a name="4_3_6"></a>
+			<h3 class="heading3" title="4. Static Properties -&gt; 4.3. Uize.Template.encodings -&gt; 4.3.6. Uize.Template.encodings.url"><span class="headingNumber"><a href="#4" title="4. Static Properties">4</a>.<a href="#4_3" title="4. Static Properties -&gt; 4.3. Uize.Template.encodings">3</a>.<a href="#4_3_6" title="4. Static Properties -&gt; 4.3. Uize.Template.encodings -&gt; 4.3.6. Uize.Template.encodings.url">6</a>. </span>Uize.Template.encodings.url</h3>
+			<div class="contents3">
+				<p>An <a href="#1_1_3">Encoding Profile</a> for the <code><a href="#5_6">url</a></code> encoding.</p>
+			</div>
+			
+			<a name="4_3_7"></a>
+			<h3 class="heading3" title="4. Static Properties -&gt; 4.3. Uize.Template.encodings -&gt; 4.3.7. Uize.Template.encodings.urlParams"><span class="headingNumber"><a href="#4" title="4. Static Properties">4</a>.<a href="#4_3" title="4. Static Properties -&gt; 4.3. Uize.Template.encodings">3</a>.<a href="#4_3_7" title="4. Static Properties -&gt; 4.3. Uize.Template.encodings -&gt; 4.3.7. Uize.Template.encodings.urlParams">7</a>. </span>Uize.Template.encodings.urlParams</h3>
+			<div class="contents3">
+				<p>An <a href="#1_1_3">Encoding Profile</a> for the <code><a href="#5_7">urlParams</a></code> encoding.</p>
+			</div>
+			
+			<a name="4_3_8"></a>
+			<h3 class="heading3" title="4. Static Properties -&gt; 4.3. Uize.Template.encodings -&gt; 4.3.8. Uize.Template.encodings.urlPiece"><span class="headingNumber"><a href="#4" title="4. Static Properties">4</a>.<a href="#4_3" title="4. Static Properties -&gt; 4.3. Uize.Template.encodings">3</a>.<a href="#4_3_8" title="4. Static Properties -&gt; 4.3. Uize.Template.encodings -&gt; 4.3.8. Uize.Template.encodings.urlPiece">8</a>. </span>Uize.Template.encodings.urlPiece</h3>
+			<div class="contents3">
+				<p>An <a href="#1_1_3">Encoding Profile</a> for the <code><a href="#5_8">urlPiece</a></code> encoding.</p>
+			</div>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_4"></a>
+		<h2 class="heading2" title="4. Static Properties -&gt; 4.4. Uize.Template.moduleName"><span class="headingNumber"><a href="#4" title="4. Static Properties">4</a>.<a href="#4_4" title="4. Static Properties -&gt; 4.4. Uize.Template.moduleName">4</a>. </span>Uize.Template.moduleName</h2>
+		<div class="contents2">
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+	</div>
+	
+	<a name="5"></a>
+	<h1 class="heading1" title="5. Encodings"><span class="headingNumber"><a href="#5" title="5. Encodings">5</a>. </span>Encodings</h1>
+	<div class="contents1">
+		<a name="5_1"></a>
+		<h2 class="heading2" title="5. Encodings -&gt; 5.1. iso8601"><span class="headingNumber"><a href="#5" title="5. Encodings">5</a>.<a href="#5_1" title="5. Encodings -&gt; 5.1. iso8601">1</a>. </span>iso8601</h2>
+		<div class="contents2">
+			<p>Encodes to or decodes from an ISO8601 formatted date string.</p>
+			
+			<a name="5_1_1"></a>
+			<h3 class="heading3" title="5. Encodings -&gt; 5.1. iso8601 -&gt; 5.1.1. Encoding"><span class="headingNumber"><a href="#5" title="5. Encodings">5</a>.<a href="#5_1" title="5. Encodings -&gt; 5.1. iso8601">1</a>.<a href="#5_1_1" title="5. Encodings -&gt; 5.1. iso8601 -&gt; 5.1.1. Encoding">1</a>. </span>Encoding</h3>
+			<div class="contents3">
+				<p>When encoding, the value can be of any type that can be resolved to a <code><a href="../javascript-reference/Date.html">Date</a></code> object by the <code>Uize.Date.resolve</code> static method of the <code><a href="../reference/Uize.Date.html">Uize.Date</a></code> module.</p>
+				
+				<p><span class="allCaps">SYNTAX</span></p>
+				
+				
+<pre class="sample-code">&lt;%= dateSTRorOBJorNUM -&gt; iso8601 %&gt;
+</pre>
+				
+				<p>Using this encoding in the forward direction is equivalent to using the <code>Uize.Date.toIso8601</code> static method of the <code><a href="../reference/Uize.Date.html">Uize.Date</a></code> module.</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">&lt;%= 'Tue Sep 11 2001' -&gt; is8601 %&gt;
+</pre>
+				
+				<p><span class="allCaps">OUTPUT</span></p>
+				
+				
+<pre class="sample-code">2001-09-11
+</pre>
+			</div>
+			
+			<a name="5_1_2"></a>
+			<h3 class="heading3" title="5. Encodings -&gt; 5.1. iso8601 -&gt; 5.1.2. Decoding"><span class="headingNumber"><a href="#5" title="5. Encodings">5</a>.<a href="#5_1" title="5. Encodings -&gt; 5.1. iso8601">1</a>.<a href="#5_1_2" title="5. Encodings -&gt; 5.1. iso8601 -&gt; 5.1.2. Decoding">2</a>. </span>Decoding</h3>
+			<div class="contents3">
+				<p>When decoding, the value should be a string, in ISO8601 format.</p>
+				
+				<p><span class="allCaps">SYNTAX</span></p>
+				
+				
+<pre class="sample-code">&lt;%= dateIso8601STR -&gt; !iso8601 %&gt;
+</pre>
+				
+				<p>Using this encoding in the reverse direction (ie. decoding by using the "!" prefix) is equivalent to using the <code>Uize.Date.fromIso8601</code> static method of the <code><a href="../reference/Uize.Date.html">Uize.Date</a></code> module.</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">&lt;%= '2001-09-11' -&gt; !iso8601 -&gt; urlPiece %&gt;
+</pre>
+				
+				<p><span class="allCaps">OUTPUT</span></p>
+				
+				
+<pre class="sample-code">Tue%20Sep%2011%202001%2000%3A00%3A00%20GMT-0700%20(Pacific%20Daylight%20Time)
+</pre>
+			</div>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the <code><a href="#5_1">iso8601</a></code> encoding is defined by the <code><a href="#4_3_1">Uize.Template.encodings.iso8601</a></code> static property</td></tr>
+			</table>
+		</div>
+		
+		<a name="5_2"></a>
+		<h2 class="heading2" title="5. Encodings -&gt; 5.2. json"><span class="headingNumber"><a href="#5" title="5. Encodings">5</a>.<a href="#5_2" title="5. Encodings -&gt; 5.2. json">2</a>. </span>json</h2>
+		<div class="contents2">
+			<p>Encodes to or decodes from a JSON formatted string.</p>
+			
+			<a name="5_2_1"></a>
+			<h3 class="heading3" title="5. Encodings -&gt; 5.2. json -&gt; 5.2.1. Encoding"><span class="headingNumber"><a href="#5" title="5. Encodings">5</a>.<a href="#5_2" title="5. Encodings -&gt; 5.2. json">2</a>.<a href="#5_2_1" title="5. Encodings -&gt; 5.2. json -&gt; 5.2.1. Encoding">1</a>. </span>Encoding</h3>
+			<div class="contents3">
+				<p>When encoding, the value to encode can be a string, boolean, number, object, array, <code>null</code>, <code>undefined</code>, or a regular expression.</p>
+				
+				<p><span class="allCaps">SYNTAX</span></p>
+				
+				
+<pre class="sample-code">&lt;%= valueANYTYPE -&gt; json %&gt;
+</pre>
+				
+				<p>Using this encoding in the forward direction is equivalent to using the <code>Uize.Json.to</code> static method of the <code><a href="../reference/Uize.Json.html">Uize.Json</a></code> module.</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">&lt;%= {hello:'world',foo:'bar'} -&gt; json %&gt;
+</pre>
+				
+				<p><span class="allCaps">OUTPUT</span></p>
+				
+				
+<pre class="sample-code">{
+  hello:'world',
+  foo:'bar'
+}
+</pre>
+				
+				<a name="5_2_1_1"></a>
+				<h4 class="heading4" title="5. Encodings -&gt; 5.2. json -&gt; 5.2.1. Encoding -&gt; 5.2.1.1. json Encoding Options"><span class="headingNumber"><a href="#5" title="5. Encodings">5</a>.<a href="#5_2" title="5. Encodings -&gt; 5.2. json">2</a>.<a href="#5_2_1" title="5. Encodings -&gt; 5.2. json -&gt; 5.2.1. Encoding">1</a>.<a href="#5_2_1_1" title="5. Encodings -&gt; 5.2. json -&gt; 5.2.1. Encoding -&gt; 5.2.1.1. json Encoding Options">1</a>. </span>json Encoding Options</h4>
+				<div class="contents4">
+					<p>The <code><a href="#5_2">json</a></code> encoding supports encoding options, which may optionally be specified inside curly braces after the encoding name.</p>
+					
+					<p><span class="allCaps">SYNTAX</span></p>
+					
+					
+<pre class="sample-code">&lt;%= valueANYTYPE -&gt; json{encodingOptionsOBJ} %&gt;
+</pre>
+					
+					<p>When specifying the optional encoding options object, this object may contain any of the properties supported by the optional <code>encodingOptionsOBJ</code> parameter of the <code>Uize.Json.to</code> method.</p>
+					
+					<p><span class="allCaps">EXAMPLE</span></p>
+					
+					
+<pre class="sample-code">&lt;%= {hello:'world',foo:'bar'} -&gt; json{keyDelimiter:' : ',padKeys:true} %&gt;
+</pre>
+					
+					<p><span class="allCaps">OUTPUT</span></p>
+					
+					
+<pre class="sample-code">{
+  hello : 'world',
+  foo   : 'bar'
+}
+</pre>
+				</div>
+			</div>
+			
+			<a name="5_2_2"></a>
+			<h3 class="heading3" title="5. Encodings -&gt; 5.2. json -&gt; 5.2.2. Decoding"><span class="headingNumber"><a href="#5" title="5. Encodings">5</a>.<a href="#5_2" title="5. Encodings -&gt; 5.2. json">2</a>.<a href="#5_2_2" title="5. Encodings -&gt; 5.2. json -&gt; 5.2.2. Decoding">2</a>. </span>Decoding</h3>
+			<div class="contents3">
+				<p>When decoding, the value to decode should be a string in JSON format, and the decoded value can be a string, boolean, number, object, array, <code>null</code>, <code>undefined</code>, or a regular expression.</p>
+				
+				<p><span class="allCaps">SYNTAX</span></p>
+				
+				
+<pre class="sample-code">&lt;%= jsonSTR -&gt; !json %&gt;
+</pre>
+				
+				<p>Using this encoding in the reverse direction (ie. decoding by using the "!" prefix) is equivalent to using the <code>Uize.Json.from</code> static method of the <code><a href="../reference/Uize.Json.html">Uize.Json</a></code> module.</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">&lt;%= '{hello:"world",foo:"bar"}' -&gt; !json -&gt; urlParams %&gt;
+</pre>
+				
+				<p><span class="allCaps">OUTPUT</span></p>
+				
+				
+<pre class="sample-code">hello=world&amp;foo=bar
+</pre>
+			</div>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the <code><a href="#5_2">json</a></code> encoding is defined by the <code><a href="#4_3_2">Uize.Template.encodings.json</a></code> static property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare this encoding to the similar <code><a href="#5_3">miniJson</a></code> encoding</td></tr>
+			</table>
+		</div>
+		
+		<a name="5_3"></a>
+		<h2 class="heading2" title="5. Encodings -&gt; 5.3. miniJson"><span class="headingNumber"><a href="#5" title="5. Encodings">5</a>.<a href="#5_3" title="5. Encodings -&gt; 5.3. miniJson">3</a>. </span>miniJson</h2>
+		<div class="contents2">
+			<p>Encodes to a mini / compact (no indentation or linebreaks for complex objects) JSON formatted string, or decodes from any JSON formatted string.</p>
+			
+			<a name="5_3_1"></a>
+			<h3 class="heading3" title="5. Encodings -&gt; 5.3. miniJson -&gt; 5.3.1. Encoding"><span class="headingNumber"><a href="#5" title="5. Encodings">5</a>.<a href="#5_3" title="5. Encodings -&gt; 5.3. miniJson">3</a>.<a href="#5_3_1" title="5. Encodings -&gt; 5.3. miniJson -&gt; 5.3.1. Encoding">1</a>. </span>Encoding</h3>
+			<div class="contents3">
+				<p>When encoding, the value to encode can be a string, boolean, number, object, array, <code>null</code>, <code>undefined</code>, or a regular expression.</p>
+				
+				<p><span class="allCaps">SYNTAX</span></p>
+				
+				
+<pre class="sample-code">&lt;%= valueANYTYPE -&gt; miniJson %&gt;
+</pre>
+				
+				<p>Using this encoding in the forward direction is equivalent to using the <code>Uize.Json.to</code> static method of the <code><a href="../reference/Uize.Json.html">Uize.Json</a></code> module, and specifying the value <code>'mini'</code> for this method's optional <code>serializationOptionsOBJ</code> parameter.</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">&lt;%= {hello:'world',foo:'bar'} -&gt; miniJson %&gt;
+</pre>
+				
+				<p><span class="allCaps">OUTPUT</span></p>
+				
+				
+<pre class="sample-code">{hello:'world',foo:'bar'}
+</pre>
+			</div>
+			
+			<a name="5_3_2"></a>
+			<h3 class="heading3" title="5. Encodings -&gt; 5.3. miniJson -&gt; 5.3.2. Decoding"><span class="headingNumber"><a href="#5" title="5. Encodings">5</a>.<a href="#5_3" title="5. Encodings -&gt; 5.3. miniJson">3</a>.<a href="#5_3_2" title="5. Encodings -&gt; 5.3. miniJson -&gt; 5.3.2. Decoding">2</a>. </span>Decoding</h3>
+			<div class="contents3">
+				<p>When decoding, the value to decode should be a string in JSON format, and the decoded value can be a string, boolean, number, object, array, <code>null</code>, <code>undefined</code>, or a regular expression.</p>
+				
+				<p><span class="allCaps">SYNTAX</span></p>
+				
+				
+<pre class="sample-code">&lt;%= jsonSTR -&gt; !miniJson %&gt;
+</pre>
+				
+				<p>Using this encoding in the reverse direction (ie. decoding by using the "!" prefix) is equivalent to using the <code>Uize.Json.from</code> static method of the <code><a href="../reference/Uize.Json.html">Uize.Json</a></code> module.</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">&lt;%= '{hello:"world",foo:"bar"}' -&gt; !miniJson -&gt; urlParams %&gt;
+</pre>
+				
+				<p><span class="allCaps">OUTPUT</span></p>
+				
+				
+<pre class="sample-code">hello=world&amp;foo=bar
+</pre>
+			</div>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the <code><a href="#5_3">miniJson</a></code> encoding is defined by the <code><a href="#4_3_3">Uize.Template.encodings.miniJson</a></code> static property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare this encoding to the similar <code><a href="#5_2">json</a></code> encoding</td></tr>
+			</table>
+		</div>
+		
+		<a name="5_4"></a>
+		<h2 class="heading2" title="5. Encodings -&gt; 5.4. tagAttributes"><span class="headingNumber"><a href="#5" title="5. Encodings">5</a>.<a href="#5_4" title="5. Encodings -&gt; 5.4. tagAttributes">4</a>. </span>tagAttributes</h2>
+		<div class="contents2">
+			<p>Encodes to or decodes from a tag attributes string.</p>
+			
+			<a name="5_4_1"></a>
+			<h3 class="heading3" title="5. Encodings -&gt; 5.4. tagAttributes -&gt; 5.4.1. Encoding"><span class="headingNumber"><a href="#5" title="5. Encodings">5</a>.<a href="#5_4" title="5. Encodings -&gt; 5.4. tagAttributes">4</a>.<a href="#5_4_1" title="5. Encodings -&gt; 5.4. tagAttributes -&gt; 5.4.1. Encoding">1</a>. </span>Encoding</h3>
+			<div class="contents3">
+				<p>When encoding, the value should be an object, containing properties for the tag attributes.</p>
+				
+				<p><span class="allCaps">SYNTAX</span></p>
+				
+				
+<pre class="sample-code">&lt;%= tagAttributesOBJ -&gt; tagAttributes %&gt;
+</pre>
+				
+				<p>Using this encoding in the forward direction is equivalent to using the <code>Uize.Xml.toAttributes</code> static method of the <code><a href="../reference/Uize.Xml.html">Uize.Xml</a></code> module.</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">&lt;%= {width:320,height:480,alt:'CONTINUE &gt;&gt;'} -&gt; tagAttributes %&gt;
+</pre>
+				
+				<p><span class="allCaps">OUTPUT</span></p>
+				
+				
+<pre class="sample-code">width="320" height="480" alt="CONTINUE &amp;gt;&amp;gt;"
+</pre>
+			</div>
+			
+			<a name="5_4_2"></a>
+			<h3 class="heading3" title="5. Encodings -&gt; 5.4. tagAttributes -&gt; 5.4.2. Decoding"><span class="headingNumber"><a href="#5" title="5. Encodings">5</a>.<a href="#5_4" title="5. Encodings -&gt; 5.4. tagAttributes">4</a>.<a href="#5_4_2" title="5. Encodings -&gt; 5.4. tagAttributes -&gt; 5.4.2. Decoding">2</a>. </span>Decoding</h3>
+			<div class="contents3">
+				<p>When decoding, the value should be a tag attributes string, and the decoded value will be a tag attributes object.</p>
+				
+				<p><span class="allCaps">SYNTAX</span></p>
+				
+				
+<pre class="sample-code">&lt;%= tagAttributesSTR -&gt; !tagAttributes %&gt;
+</pre>
+				
+				<p>Using this encoding in the reverse direction (ie. decoding by using the "!" prefix) is equivalent to using the <code>Uize.Xml.fromAttributes</code> static method of the <code><a href="../reference/Uize.Xml.html">Uize.Xml</a></code> module.</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">&lt;%= 'width="320" height="480" alt="CONTINUE &amp;gt;&amp;gt;"' -&gt; !tagAttributes -&gt; miniJson %&gt;
+</pre>
+				
+				<p><span class="allCaps">OUTPUT</span></p>
+				
+				
+<pre class="sample-code">{width:320,height:480,alt:'CONTINUE &gt;&gt;'}
+</pre>
+			</div>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the <code><a href="#5_4">tagAttributes</a></code> encoding is defined by the <code><a href="#4_3_4">Uize.Template.encodings.tagAttributes</a></code> static property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#5_5">tagAttributeValue</a></code> encoding</td></tr>
+			</table>
+		</div>
+		
+		<a name="5_5"></a>
+		<h2 class="heading2" title="5. Encodings -&gt; 5.5. tagAttributeValue"><span class="headingNumber"><a href="#5" title="5. Encodings">5</a>.<a href="#5_5" title="5. Encodings -&gt; 5.5. tagAttributeValue">5</a>. </span>tagAttributeValue</h2>
+		<div class="contents2">
+			<p>Encodes to or decodes from a tag attribute value string (excluding the enclosing quotes).</p>
+			
+			<a name="5_5_1"></a>
+			<h3 class="heading3" title="5. Encodings -&gt; 5.5. tagAttributeValue -&gt; 5.5.1. Encoding"><span class="headingNumber"><a href="#5" title="5. Encodings">5</a>.<a href="#5_5" title="5. Encodings -&gt; 5.5. tagAttributeValue">5</a>.<a href="#5_5_1" title="5. Encodings -&gt; 5.5. tagAttributeValue -&gt; 5.5.1. Encoding">1</a>. </span>Encoding</h3>
+			<div class="contents3">
+				<p>When encoding, the value can be of any type and will be coerced to a string if necessary.</p>
+				
+				<p><span class="allCaps">SYNTAX</span></p>
+				
+				
+<pre class="sample-code">&lt;%= valueANYTYPE -&gt; tagAttributeValue %&gt;
+</pre>
+				
+				<p>Using this encoding in the forward direction is equivalent to using the <code>Uize.Xml.toAttributeValue</code> static method of the <code><a href="../reference/Uize.Xml.html">Uize.Xml</a></code> module.</p>
+				
+				<p><span class="allCaps">EXAMPLE 1</span></p>
+				
+				
+<pre class="sample-code">&lt;%= 'CONTINUE &gt;&gt;' -&gt; tagAttributeValue %&gt;
+</pre>
+				
+				<p><span class="allCaps">OUTPUT</span></p>
+				
+				
+<pre class="sample-code">CONTINUE &amp;gt;&amp;gt;
+</pre>
+				
+				<p><span class="allCaps">EXAMPLE 2</span></p>
+				
+				
+<pre class="sample-code">&lt;%= new Uize ({value:'CONTINUE &gt;&gt;'}) -&gt; tagAttributeValue %&gt;
+</pre>
+				
+				<p><span class="allCaps">OUTPUT</span></p>
+				
+				
+<pre class="sample-code">CONTINUE &amp;gt;&amp;gt;
+</pre>
+			</div>
+			
+			<a name="5_5_2"></a>
+			<h3 class="heading3" title="5. Encodings -&gt; 5.5. tagAttributeValue -&gt; 5.5.2. Decoding"><span class="headingNumber"><a href="#5" title="5. Encodings">5</a>.<a href="#5_5" title="5. Encodings -&gt; 5.5. tagAttributeValue">5</a>.<a href="#5_5_2" title="5. Encodings -&gt; 5.5. tagAttributeValue -&gt; 5.5.2. Decoding">2</a>. </span>Decoding</h3>
+			<div class="contents3">
+				<p>When decoding, the value should be a tag attribute value string (excluding the enclosing quotes), and the decoded value will be a string.</p>
+				
+				<p><span class="allCaps">SYNTAX</span></p>
+				
+				
+<pre class="sample-code">&lt;%= tagAttributeValueSTR -&gt; !tagAttributeValue %&gt;
+</pre>
+				
+				<p>Using this encoding in the reverse direction (ie. decoding by using the "!" prefix) is equivalent to using the <code>Uize.Xml.fromAttributeValue</code> static method of the <code><a href="../reference/Uize.Xml.html">Uize.Xml</a></code> module.</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">&lt;%= 'CONTINUE &amp;gt;&amp;gt;' -&gt; !tagAttributeValue %&gt;
+</pre>
+				
+				<p><span class="allCaps">OUTPUT</span></p>
+				
+				
+<pre class="sample-code">CONTINUE &gt;&gt;
+</pre>
+			</div>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the <code><a href="#5_5">tagAttributeValue</a></code> encoding is defined by the <code><a href="#4_3_5">Uize.Template.encodings.tagAttributeValue</a></code> static property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#5_4">tagAttributes</a></code> encoding</td></tr>
+			</table>
+		</div>
+		
+		<a name="5_6"></a>
+		<h2 class="heading2" title="5. Encodings -&gt; 5.6. url"><span class="headingNumber"><a href="#5" title="5. Encodings">5</a>.<a href="#5_6" title="5. Encodings -&gt; 5.6. url">6</a>. </span>url</h2>
+		<div class="contents2">
+			<p>Encodes to or decodes from a URL string.</p>
+			
+			<a name="5_6_1"></a>
+			<h3 class="heading3" title="5. Encodings -&gt; 5.6. url -&gt; 5.6.1. Encoding"><span class="headingNumber"><a href="#5" title="5. Encodings">5</a>.<a href="#5_6" title="5. Encodings -&gt; 5.6. url">6</a>.<a href="#5_6_1" title="5. Encodings -&gt; 5.6. url -&gt; 5.6.1. Encoding">1</a>. </span>Encoding</h3>
+			<div class="contents3">
+				<p>When encoding, the value can be a URL path string, or an array containing a URL path string and any number of optional query parameters objects.</p>
+				
+				<p>Using this encoding in the forward direction is equivalent to using the <code>Uize.Url.resolve</code> static method of the <code><a href="../reference/Uize.Url.html">Uize.Url</a></code> module.</p>
+				
+				<a name="5_6_1_1"></a>
+				<h4 class="heading4" title="5. Encodings -&gt; 5.6. url -&gt; 5.6.1. Encoding -&gt; 5.6.1.1. Value To Encode is a URL Path String"><span class="headingNumber"><a href="#5" title="5. Encodings">5</a>.<a href="#5_6" title="5. Encodings -&gt; 5.6. url">6</a>.<a href="#5_6_1" title="5. Encodings -&gt; 5.6. url -&gt; 5.6.1. Encoding">1</a>.<a href="#5_6_1_1" title="5. Encodings -&gt; 5.6. url -&gt; 5.6.1. Encoding -&gt; 5.6.1.1. Value To Encode is a URL Path String">1</a>. </span>Value To Encode is a URL Path String</h4>
+				<div class="contents4">
+					<p>When the value to encode to a URL string is a URL path string, then query parameters can be specified as the encoding options.</p>
+					
+					<p><span class="allCaps">SYNTAX</span></p>
+					
+					
+<pre class="sample-code">&lt;%= urlPathSTR -&gt; url{urlParamsOBJ} %&gt;
+</pre>
+					
+					<p>Consider the following example...</p>
+					
+					<p><span class="allCaps">EXAMPLE</span></p>
+					
+					
+<pre class="sample-code">&lt;%= 'http://www.uize.com' -&gt; url{hello:'world',foo:'bar'} %&gt;
+</pre>
+					
+					<p><span class="allCaps">OUTPUT</span></p>
+					
+					
+<pre class="sample-code">http://www.uize.com?hello=world&amp;foo=bar
+</pre>
+				</div>
+				
+				<a name="5_6_1_2"></a>
+				<h4 class="heading4" title="5. Encodings -&gt; 5.6. url -&gt; 5.6.1. Encoding -&gt; 5.6.1.2. Value To Encode is a URL Path Plus Params Objects Array"><span class="headingNumber"><a href="#5" title="5. Encodings">5</a>.<a href="#5_6" title="5. Encodings -&gt; 5.6. url">6</a>.<a href="#5_6_1" title="5. Encodings -&gt; 5.6. url -&gt; 5.6.1. Encoding">1</a>.<a href="#5_6_1_2" title="5. Encodings -&gt; 5.6. url -&gt; 5.6.1. Encoding -&gt; 5.6.1.2. Value To Encode is a URL Path Plus Params Objects Array">2</a>. </span>Value To Encode is a URL Path Plus Params Objects Array</h4>
+				<div class="contents4">
+					<p>When the value to encode to a URL string is an array containing a URL path string and an arbitrary number of URL params objects, then additional query parameters may be optionally specified as the encoding options.</p>
+					
+					<p><span class="allCaps">SYNTAX</span></p>
+					
+					
+<pre class="sample-code">&lt;%= urlPathPlusParamsObjectsARRAY -&gt; url %&gt;
+&lt;%= urlPathPlusParamsObjectsARRAY -&gt; url{urlParamsOBJ} %&gt;
+</pre>
+					
+					<p>Consider the following two examples that both produce the same output...</p>
+					
+					<p><span class="allCaps">EXAMPLE 1</span></p>
+					
+					
+<pre class="sample-code">&lt;%= ['http://www.uize.com',{hello:'world',foo:'bar'}] -&gt; url %&gt;
+</pre>
+					
+					<p><span class="allCaps">OUTPUT</span></p>
+					
+					
+<pre class="sample-code">http://www.uize.com?hello=world&amp;foo=bar
+</pre>
+					
+					<p><span class="allCaps">EXAMPLE 2</span></p>
+					
+					
+<pre class="sample-code">&lt;%= ['http://www.uize.com',{hello:'world'}] -&gt; url{foo:'bar'} %&gt;
+</pre>
+					
+					<p><span class="allCaps">OUTPUT</span></p>
+					
+					
+<pre class="sample-code">http://www.uize.com?hello=world&amp;foo=bar
+</pre>
+				</div>
+			</div>
+			
+			<a name="5_6_2"></a>
+			<h3 class="heading3" title="5. Encodings -&gt; 5.6. url -&gt; 5.6.2. Decoding"><span class="headingNumber"><a href="#5" title="5. Encodings">5</a>.<a href="#5_6" title="5. Encodings -&gt; 5.6. url">6</a>.<a href="#5_6_2" title="5. Encodings -&gt; 5.6. url -&gt; 5.6.2. Decoding">2</a>. </span>Decoding</h3>
+			<div class="contents3">
+				<p>When decoding, the value should be a URL string, and the decoded value will be an object containing properties that represent different logical components of the URL (eg. protocol, host, folder path, filename, file extension, query string, etc.).</p>
+				
+				<p><span class="allCaps">SYNTAX</span></p>
+				
+				
+<pre class="sample-code">&lt;%= urlSTR -&gt; !url %&gt;
+</pre>
+				
+				<p>Using this encoding in the reverse direction (ie. decoding by using the "!" prefix) is equivalent to using the <code>Uize.Url.from</code> static method of the <code><a href="../reference/Uize.Url.html">Uize.Url</a></code> module.</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">&lt;%= 'http://uize.com:80/reference/Uize.html?param=value#anchor' -&gt; !url -&gt; json %&gt;
+</pre>
+				
+				<p><span class="allCaps">OUTPUT</span></p>
+				
+				
+<pre class="sample-code">{
+  href:'http://uize.com:80/reference/Uize.html?param=value#anchor',
+  fullDomain:'http://uize.com:80',
+  protocol:'http:',
+  host:'uize.com:80',
+  hostname:'uize.com',
+  port:'80',
+  pathname:'/reference/Uize.html',
+  folderPath:'/reference/',
+  file:'Uize.html',
+  fileName:'Uize',
+  extension:'.html',
+  fileType:'html',
+  search:'?param=value',
+  query:'param=value',
+  hash:'#anchor',
+  anchor:'anchor'
+}                {
+</pre>
+			</div>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the <code><a href="#5_6">url</a></code> encoding is defined by the <code><a href="#4_3_6">Uize.Template.encodings.url</a></code> static property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#5_7">urlParams</a></code> and <code><a href="#5_8">urlPiece</a></code> encodings</td></tr>
+			</table>
+		</div>
+		
+		<a name="5_7"></a>
+		<h2 class="heading2" title="5. Encodings -&gt; 5.7. urlParams"><span class="headingNumber"><a href="#5" title="5. Encodings">5</a>.<a href="#5_7" title="5. Encodings -&gt; 5.7. urlParams">7</a>. </span>urlParams</h2>
+		<div class="contents2">
+			<p>Encodes to or decodes from a URL query parameters string.</p>
+			
+			<a name="5_7_1"></a>
+			<h3 class="heading3" title="5. Encodings -&gt; 5.7. urlParams -&gt; 5.7.1. Encoding"><span class="headingNumber"><a href="#5" title="5. Encodings">5</a>.<a href="#5_7" title="5. Encodings -&gt; 5.7. urlParams">7</a>.<a href="#5_7_1" title="5. Encodings -&gt; 5.7. urlParams -&gt; 5.7.1. Encoding">1</a>. </span>Encoding</h3>
+			<div class="contents3">
+				<p>When encoding, the value should be an object, containing properties for the URL query parameters.</p>
+				
+				<p><span class="allCaps">SYNTAX</span></p>
+				
+				
+<pre class="sample-code">&lt;%= urlParamsOBJ -&gt; urlParams %&gt;
+</pre>
+				
+				<p>Using this encoding in the forward direction is equivalent to using the <code>Uize.Url.toParams</code> static method of the <code><a href="../reference/Uize.Url.html">Uize.Url</a></code> module.</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">&lt;%= {hello:'world',foo:'bar'} -&gt; urlParams %&gt;
+</pre>
+				
+				<p><span class="allCaps">OUTPUT</span></p>
+				
+				
+<pre class="sample-code">hello=world&amp;foo=bar
+</pre>
+			</div>
+			
+			<a name="5_7_2"></a>
+			<h3 class="heading3" title="5. Encodings -&gt; 5.7. urlParams -&gt; 5.7.2. Decoding"><span class="headingNumber"><a href="#5" title="5. Encodings">5</a>.<a href="#5_7" title="5. Encodings -&gt; 5.7. urlParams">7</a>.<a href="#5_7_2" title="5. Encodings -&gt; 5.7. urlParams -&gt; 5.7.2. Decoding">2</a>. </span>Decoding</h3>
+			<div class="contents3">
+				<p>When decoding, the value should be a URL query parameters string, or a full URL string that may contain query parameters, and the decoded value will be a URL query parameters object.</p>
+				
+				<p><span class="allCaps">SYNTAX</span></p>
+				
+				
+<pre class="sample-code">&lt;%= urlParamsSTR -&gt; !urlParams %&gt;
+</pre>
+				
+				<p>Using this encoding in the reverse direction (ie. decoding by using the "!" prefix) is equivalent to using the <code>Uize.Url.fromParams</code> static method of the <code><a href="../reference/Uize.Url.html">Uize.Url</a></code> module.</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">&lt;%= 'http://www.uize.com/?hello=world&amp;foo=bar' -&gt; !urlParams -&gt; miniJson %&gt;
+</pre>
+				
+				<p><span class="allCaps">OUTPUT</span></p>
+				
+				
+<pre class="sample-code">{hello:'world',foo:'bar'}
+</pre>
+			</div>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the <code><a href="#5_7">urlParams</a></code> encoding is defined by the <code><a href="#4_3_7">Uize.Template.encodings.urlParams</a></code> static property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#5_6">url</a></code> and <code><a href="#5_8">urlPiece</a></code> encodings</td></tr>
+			</table>
+		</div>
+		
+		<a name="5_8"></a>
+		<h2 class="heading2" title="5. Encodings -&gt; 5.8. urlPiece"><span class="headingNumber"><a href="#5" title="5. Encodings">5</a>.<a href="#5_8" title="5. Encodings -&gt; 5.8. urlPiece">8</a>. </span>urlPiece</h2>
+		<div class="contents2">
+			<p>Encodes to or decodes from a URL fragment string.</p>
+			
+			<a name="5_8_1"></a>
+			<h3 class="heading3" title="5. Encodings -&gt; 5.8. urlPiece -&gt; 5.8.1. Encoding"><span class="headingNumber"><a href="#5" title="5. Encodings">5</a>.<a href="#5_8" title="5. Encodings -&gt; 5.8. urlPiece">8</a>.<a href="#5_8_1" title="5. Encodings -&gt; 5.8. urlPiece -&gt; 5.8.1. Encoding">1</a>. </span>Encoding</h3>
+			<div class="contents3">
+				<p>When encoding, the value can be of any type and will be coerced to a string if necessary.</p>
+				
+				<p><span class="allCaps">SYNTAX</span></p>
+				
+				
+<pre class="sample-code">&lt;%= valueANYTYPE -&gt; urlPiece %&gt;
+</pre>
+				
+				<p>Using this encoding in the forward direction is equivalent to using the <code>Uize.Url.toPiece</code> static method of the <code><a href="../reference/Uize.Url.html">Uize.Url</a></code> module.</p>
+				
+				<p><span class="allCaps">EXAMPLE 1</span></p>
+				
+				
+<pre class="sample-code">&lt;%= 'hello, world' -&gt; urlPiece %&gt;
+</pre>
+				
+				<p><span class="allCaps">OUTPUT</span></p>
+				
+				
+<pre class="sample-code">hello%2C%20world
+</pre>
+				
+				<p><span class="allCaps">EXAMPLE 2</span></p>
+				
+				
+<pre class="sample-code">&lt;%= new Uize ({value:'hello, world'}) -&gt; urlPiece %&gt;
+</pre>
+				
+				<p><span class="allCaps">OUTPUT</span></p>
+				
+				
+<pre class="sample-code">hello%2C%20world
+</pre>
+			</div>
+			
+			<a name="5_8_2"></a>
+			<h3 class="heading3" title="5. Encodings -&gt; 5.8. urlPiece -&gt; 5.8.2. Decoding"><span class="headingNumber"><a href="#5" title="5. Encodings">5</a>.<a href="#5_8" title="5. Encodings -&gt; 5.8. urlPiece">8</a>.<a href="#5_8_2" title="5. Encodings -&gt; 5.8. urlPiece -&gt; 5.8.2. Decoding">2</a>. </span>Decoding</h3>
+			<div class="contents3">
+				<p>When decoding, the value should be a URL fragment string, and the decoded value will be a string.</p>
+				
+				<p><span class="allCaps">SYNTAX</span></p>
+				
+				
+<pre class="sample-code">&lt;%= urlPieceSTR -&gt; !urlPiece %&gt;
+</pre>
+				
+				<p>Using this encoding in the reverse direction (ie. decoding by using the "!" prefix) is equivalent to using the <code>Uize.Url.fromPiece</code> static method of the <code><a href="../reference/Uize.Url.html">Uize.Url</a></code> module.</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">&lt;%= 'hello%2C%20world' -&gt; !urlPiece %&gt;
+</pre>
+				
+				<p><span class="allCaps">OUTPUT</span></p>
+				
+				
+<pre class="sample-code">hello, world
+</pre>
+			</div>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the <code><a href="#5_8">urlPiece</a></code> encoding is defined by the <code><a href="#4_3_8">Uize.Template.encodings.urlPiece</a></code> static property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#5_6">url</a></code> and <code><a href="#5_7">urlParams</a></code> encodings</td></tr>
+			</table>
+		</div>
+	</div>
+	
+	<a name="6"></a>
+	<h1 class="heading1" title="6. Deprecated Features"><span class="headingNumber"><a href="#6" title="6. Deprecated Features">6</a>. </span>Deprecated Features</h1>
+	<div class="contents1">
+		<a name="6_1"></a>
+		<h2 class="heading2" title="6. Deprecated Features -&gt; 6.1. Uize.Template.decoders"><span class="headingNumber"><a href="#6" title="6. Deprecated Features">6</a>.<a href="#6_1" title="6. Deprecated Features -&gt; 6.1. Uize.Template.decoders">1</a>. </span>Uize.Template.decoders</h2>
+		<div class="contents2">
+			<a name="6_1_1"></a>
+			<h3 class="heading3" title="6. Deprecated Features -&gt; 6.1. Uize.Template.decoders -&gt; 6.1.1. Uize.Template.decoders.json -- DEPRECATED 2010-04-15"><span class="headingNumber"><a href="#6" title="6. Deprecated Features">6</a>.<a href="#6_1" title="6. Deprecated Features -&gt; 6.1. Uize.Template.decoders">1</a>.<a href="#6_1_1" title="6. Deprecated Features -&gt; 6.1. Uize.Template.decoders -&gt; 6.1.1. Uize.Template.decoders.json -- DEPRECATED 2010-04-15">1</a>. </span>Uize.Template.decoders.json -- DEPRECATED 2010-04-15</h3>
+			<div class="contents3">
+				<p>This encoder function has been deprecated and has been subsumed by the new <code><a href="#4_3_2">Uize.Template.encodings.json</a></code> <a href="#1_1_3">Encoding Profile</a>.</p>
+			</div>
+			
+			<a name="6_1_2"></a>
+			<h3 class="heading3" title="6. Deprecated Features -&gt; 6.1. Uize.Template.decoders -&gt; 6.1.2. Uize.Template.decoders.miniJson -- DEPRECATED 2010-04-15"><span class="headingNumber"><a href="#6" title="6. Deprecated Features">6</a>.<a href="#6_1" title="6. Deprecated Features -&gt; 6.1. Uize.Template.decoders">1</a>.<a href="#6_1_2" title="6. Deprecated Features -&gt; 6.1. Uize.Template.decoders -&gt; 6.1.2. Uize.Template.decoders.miniJson -- DEPRECATED 2010-04-15">2</a>. </span>Uize.Template.decoders.miniJson -- DEPRECATED 2010-04-15</h3>
+			<div class="contents3">
+				<p>This encoder function has been deprecated and has been subsumed by the new <code><a href="#4_3_3">Uize.Template.encodings.miniJson</a></code> <a href="#1_1_3">Encoding Profile</a>.</p>
+			</div>
+			
+			<a name="6_1_3"></a>
+			<h3 class="heading3" title="6. Deprecated Features -&gt; 6.1. Uize.Template.decoders -&gt; 6.1.3. Uize.Template.decoders.urlParams -- DEPRECATED 2010-04-15"><span class="headingNumber"><a href="#6" title="6. Deprecated Features">6</a>.<a href="#6_1" title="6. Deprecated Features -&gt; 6.1. Uize.Template.decoders">1</a>.<a href="#6_1_3" title="6. Deprecated Features -&gt; 6.1. Uize.Template.decoders -&gt; 6.1.3. Uize.Template.decoders.urlParams -- DEPRECATED 2010-04-15">3</a>. </span>Uize.Template.decoders.urlParams -- DEPRECATED 2010-04-15</h3>
+			<div class="contents3">
+				<p>This encoder function has been deprecated and has been subsumed by the new <code><a href="#4_3_7">Uize.Template.encodings.urlParams</a></code> <a href="#1_1_3">Encoding Profile</a>.</p>
+			</div>
+			
+			<a name="6_1_4"></a>
+			<h3 class="heading3" title="6. Deprecated Features -&gt; 6.1. Uize.Template.decoders -&gt; 6.1.4. Uize.Template.decoders.urlPiece -- DEPRECATED 2010-04-15"><span class="headingNumber"><a href="#6" title="6. Deprecated Features">6</a>.<a href="#6_1" title="6. Deprecated Features -&gt; 6.1. Uize.Template.decoders">1</a>.<a href="#6_1_4" title="6. Deprecated Features -&gt; 6.1. Uize.Template.decoders -&gt; 6.1.4. Uize.Template.decoders.urlPiece -- DEPRECATED 2010-04-15">4</a>. </span>Uize.Template.decoders.urlPiece -- DEPRECATED 2010-04-15</h3>
+			<div class="contents3">
+				<p>This encoder function has been deprecated and has been subsumed by the new <code><a href="#4_3_8">Uize.Template.encodings.urlPiece</a></code> <a href="#1_1_3">Encoding Profile</a>.</p>
+			</div>
+		</div>
+		
+		<a name="6_2"></a>
+		<h2 class="heading2" title="6. Deprecated Features -&gt; 6.2. Uize.Template.encoders -- DEPRECATED 2010-04-15"><span class="headingNumber"><a href="#6" title="6. Deprecated Features">6</a>.<a href="#6_2" title="6. Deprecated Features -&gt; 6.2. Uize.Template.encoders -- DEPRECATED 2010-04-15">2</a>. </span>Uize.Template.encoders -- DEPRECATED 2010-04-15</h2>
+		<div class="contents2">
+			<p>This static property has been deprecated in favor of the improved <code><a href="#4_3">Uize.Template.encodings</a></code> static property.</p>
+			
+			<a name="6_2_1"></a>
+			<h3 class="heading3" title="6. Deprecated Features -&gt; 6.2. Uize.Template.encoders -- DEPRECATED 2010-04-15 -&gt; 6.2.1. Uize.Template.encoders.json -- DEPRECATED 2010-04-15"><span class="headingNumber"><a href="#6" title="6. Deprecated Features">6</a>.<a href="#6_2" title="6. Deprecated Features -&gt; 6.2. Uize.Template.encoders -- DEPRECATED 2010-04-15">2</a>.<a href="#6_2_1" title="6. Deprecated Features -&gt; 6.2. Uize.Template.encoders -- DEPRECATED 2010-04-15 -&gt; 6.2.1. Uize.Template.encoders.json -- DEPRECATED 2010-04-15">1</a>. </span>Uize.Template.encoders.json -- DEPRECATED 2010-04-15</h3>
+			<div class="contents3">
+				<p>This encoder function has been deprecated and has been subsumed by the new <code><a href="#4_3_2">Uize.Template.encodings.json</a></code> <a href="#1_1_3">Encoding Profile</a>.</p>
+			</div>
+			
+			<a name="6_2_2"></a>
+			<h3 class="heading3" title="6. Deprecated Features -&gt; 6.2. Uize.Template.encoders -- DEPRECATED 2010-04-15 -&gt; 6.2.2. Uize.Template.encoders.miniJson -- DEPRECATED 2010-04-15"><span class="headingNumber"><a href="#6" title="6. Deprecated Features">6</a>.<a href="#6_2" title="6. Deprecated Features -&gt; 6.2. Uize.Template.encoders -- DEPRECATED 2010-04-15">2</a>.<a href="#6_2_2" title="6. Deprecated Features -&gt; 6.2. Uize.Template.encoders -- DEPRECATED 2010-04-15 -&gt; 6.2.2. Uize.Template.encoders.miniJson -- DEPRECATED 2010-04-15">2</a>. </span>Uize.Template.encoders.miniJson -- DEPRECATED 2010-04-15</h3>
+			<div class="contents3">
+				<p>This encoder function has been deprecated and has been subsumed by the new <code><a href="#4_3_3">Uize.Template.encodings.miniJson</a></code> <a href="#1_1_3">Encoding Profile</a>.</p>
+			</div>
+			
+			<a name="6_2_3"></a>
+			<h3 class="heading3" title="6. Deprecated Features -&gt; 6.2. Uize.Template.encoders -- DEPRECATED 2010-04-15 -&gt; 6.2.3. Uize.Template.encoders.url -- DEPRECATED 2010-04-15"><span class="headingNumber"><a href="#6" title="6. Deprecated Features">6</a>.<a href="#6_2" title="6. Deprecated Features -&gt; 6.2. Uize.Template.encoders -- DEPRECATED 2010-04-15">2</a>.<a href="#6_2_3" title="6. Deprecated Features -&gt; 6.2. Uize.Template.encoders -- DEPRECATED 2010-04-15 -&gt; 6.2.3. Uize.Template.encoders.url -- DEPRECATED 2010-04-15">3</a>. </span>Uize.Template.encoders.url -- DEPRECATED 2010-04-15</h3>
+			<div class="contents3">
+				<p>This encoder function has been deprecated and has been subsumed by the new <code><a href="#4_3_6">Uize.Template.encodings.url</a></code> <a href="#1_1_3">Encoding Profile</a>.</p>
+			</div>
+			
+			<a name="6_2_4"></a>
+			<h3 class="heading3" title="6. Deprecated Features -&gt; 6.2. Uize.Template.encoders -- DEPRECATED 2010-04-15 -&gt; 6.2.4. Uize.Template.encoders.urlParams -- DEPRECATED 2010-04-15"><span class="headingNumber"><a href="#6" title="6. Deprecated Features">6</a>.<a href="#6_2" title="6. Deprecated Features -&gt; 6.2. Uize.Template.encoders -- DEPRECATED 2010-04-15">2</a>.<a href="#6_2_4" title="6. Deprecated Features -&gt; 6.2. Uize.Template.encoders -- DEPRECATED 2010-04-15 -&gt; 6.2.4. Uize.Template.encoders.urlParams -- DEPRECATED 2010-04-15">4</a>. </span>Uize.Template.encoders.urlParams -- DEPRECATED 2010-04-15</h3>
+			<div class="contents3">
+				<p>This encoder function has been deprecated and has been subsumed by the new <code><a href="#4_3_7">Uize.Template.encodings.urlParams</a></code> <a href="#1_1_3">Encoding Profile</a>.</p>
+			</div>
+			
+			<a name="6_2_5"></a>
+			<h3 class="heading3" title="6. Deprecated Features -&gt; 6.2. Uize.Template.encoders -- DEPRECATED 2010-04-15 -&gt; 6.2.5. Uize.Template.encoders.urlPiece -- DEPRECATED 2010-04-15"><span class="headingNumber"><a href="#6" title="6. Deprecated Features">6</a>.<a href="#6_2" title="6. Deprecated Features -&gt; 6.2. Uize.Template.encoders -- DEPRECATED 2010-04-15">2</a>.<a href="#6_2_5" title="6. Deprecated Features -&gt; 6.2. Uize.Template.encoders -- DEPRECATED 2010-04-15 -&gt; 6.2.5. Uize.Template.encoders.urlPiece -- DEPRECATED 2010-04-15">5</a>. </span>Uize.Template.encoders.urlPiece -- DEPRECATED 2010-04-15</h3>
+			<div class="contents3">
+				<p>This encoder function has been deprecated and has been subsumed by the new <code><a href="#4_3_8">Uize.Template.encodings.urlPiece</a></code> <a href="#1_1_3">Encoding Profile</a>.</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

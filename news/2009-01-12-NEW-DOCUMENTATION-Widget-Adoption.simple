@@ -1,0 +1,13 @@
+Documentation has been added for the [[../explainers/javascript-widgets.html#2_2][Widget Adoption]] mechanism of the =Uize.Widget.Page= class.
+
+A facility exists within the =Uize.Widget.Page= class for automatic adoption of child widgets that are declared inside a page using a special declarative syntax. This mechanism makes it possible to place the markup and the data that a JavaScript widget needs in the page in a declarative manner, without having to explicitly require the JavaScript modules that the widget might need, and without having to explicitly add the child widget in the page widget's implementation. Widgets can be declared in this way without having to source in all JavaScript modules that the widget might require ahead of the declaration block. The newly added documentation discusses this mechanism in thorough detail.
+
+[[../explainers/javascript-widgets.html#2_2][LEARN MORE]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-01-12 - NEW DOCUMENTATION: Widget Adoption
+....................................................................................

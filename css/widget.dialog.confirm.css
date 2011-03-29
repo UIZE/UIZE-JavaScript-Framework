@@ -1,0 +1,27 @@
+.dialogIcon {
+	margin:10px;
+	width:48px;
+	height:48px;
+}
+.dialogInfoIcon {
+	background:url(../images/icons/crystal/Crystal_Clear_action_info.png) top left no-repeat;
+}
+.dialogWarningIcon {
+	background:url(../images/icons/crystal/Crystal_Clear_app_error.png) top left no-repeat;
+}
+.dialogErrorIcon {
+	background:url(../images/icons/crystal/Crystal_Clear_action_stop.png) top left no-repeat;
+}
+.dialogSuccessIcon {
+	background:url(../images/icons/crystal/Crystal_Clear_action_apply.png) top left no-repeat;
+}
+.dialogConfirmIcon {
+	background:url(../images/icons/crystal/Crystal_Clear_app_error.png) top left no-repeat;
+}
+.dialogMessage {
+	position:relative;
+	padding:11px 0 15px 0;
+	font-weight:bold;
+	font-size:12px;
+}
+

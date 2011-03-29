@@ -1,0 +1,38 @@
+<% @input ({params:'object',idPrefix:'string'}) %>
+<%
+	var
+		params = input.params,
+		idPrefix = input.idPrefix
+	;
+%>
+<table id="<%= idPrefix %>" class="paramsTable">
+<% for (var paramName in params) { %>
+	<tr>
+		<td class="fieldLabel"><%= paramName %></td>
+		<td class="field">
+		<%
+			var
+				paramType = params [paramName],
+				paramId = idPrefix + '_' + paramName
+			;
+			if (paramType == 'boolean') { %>
+			<input id="<%= paramId %>" type="checkbox"/>
+			<% } else if (Uize.isArray (paramType)) { %>
+			<select id="<%= paramId %>">
+			<% for (var optionNo = -1, totalOptions = paramType.length; ++optionNo < totalOptions;) { %>
+			<% var value = paramType [optionNo]; %>
+				<option value="<%= value %>"><%= value %></option>
+			<% } %>
+			</select>
+			<% } else if (typeof paramType == 'object') { %>
+			<input id="<%= paramId %>" type="text" style="width:50px;"/> (<%= paramType.minValue %>-<%= paramType.maxValue %>)
+			<% } else if (paramType == 'string-multiline') { %>
+			<textarea id="<%= paramId %>"/ wrap="off"></textarea>
+			<% } else { // json, integer, number, string, text %>
+			<input id="<%= paramId %>" type="text"/>
+			<% }
+		%>
+		</td>
+	</tr>
+<% } %>
+</table>

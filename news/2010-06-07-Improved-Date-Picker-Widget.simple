@@ -1,0 +1,11 @@
+The date picker widget, implemented in the =Uize.Widget.Picker.Date= module, has been improved to correctly support date entry in a wide variety of different formats.
+
+Previously, dates selected by the user in the date picker dialog could be formatted in the date picker widget's text input field using a configurable date format, as specified in the =Uize.Widget.Picker.Date= class' =displayFormat= set-get property. However, the date picker dialog could only parse dates specified in a format that could be recognized by the =Uize.Date.resolve= method. The new implementation uses the =Uize.Date.Formatter.parse= method of the new =Uize.Date.Formatter= module to parse dates in any format specified by the =displayFormat= property. This change also involves improvements to the =Uize.Widget.Calendar=, =Uize.Widget.Dialog.Picker=, =Uize.Widget.Dialog.Picker.Date=, and =Uize.Widget.Picker= modules.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2010-06-07 - Improved Date Picker Widget
+....................................................................................

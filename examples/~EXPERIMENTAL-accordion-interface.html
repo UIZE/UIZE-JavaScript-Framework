@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Accordion Interface | JavaScript Examples | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="widget Uize.Widget.Options.Accordion"/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.example.css"/>
+	<style type="text/css">
+		.tabShell {
+			position:relative;
+			overflow:hidden;
+			width:602px;
+			height:202px;
+			margin:auto;
+			margin-bottom:10px;
+			background:#00f;
+		}
+		/*** tab stub ***/
+			.tabStub {
+				padding:2px 10px 1px 10px;
+				width:580px;
+				height:20px;
+				text-align:center;
+				font-family:Arial;
+				font-size:16px;
+				font-weight:bold;
+				color:#000;
+				background:#999;
+				border:1px solid #000;
+				margin-right:6px;
+			}
+			.tabStubGrayed {
+				color:#888;
+				background:#999;
+			}
+			.tabStubOver {
+				background:#ccc;
+			}
+			.tabStubActive {
+				background:#fff;
+				color:#000;
+				border-bottom:none;
+				padding-bottom:2px;
+			}
+
+		/*** tab body ***/
+			.tabBody {
+				width:600px;
+				border:1px solid #000;
+				border-top:none;
+				background:#f00;
+			}
+	</style>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	<a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow">JAVASCRIPT EXAMPLES</a>
+	Accordion Interface
+	<div id="page-actions" class="pageActions">
+		<a href="source-code/~EXPERIMENTAL-accordion-interface.html" class="buttonLink">SOURCE</a>
+	</div>
+</h1>
+
+<div class="main">
+	<!-- explanation copy -->
+
+	<div class="explanation">
+		<p>In this example, the markup for an accordion interface is being wired up by an instance of <a href="../reference/Uize.Widget.Options.Accordion.html"><code>Uize.Widget.Options.Accordion</code></a>. Below the accordion are some links that execute snippets of code to demonstrate the programmatic interface of the widget. Because the accordion widget is a subclass of <a href="../reference/Uize.Widget.Options.html"><code>Uize.Widget.Options</code></a>, it provides a <code>value</code> set-get property in its interface. The <code>Changed.value</code> instance event for this property can be used to watch for changes in the selected section. The property can be set to programmatically change the selected section. Interact with both the accordion UI and the test links to see how they affect one another.</p>
+	</div>
+
+	<!-- accordion UI -->
+
+	<div class="tabShell">
+		<div>
+			<a id="page_accordion_option0" class="tabStub" href="javascript://">SOLAR</a>
+			<div id="page_accordion-option0TabBody" class="tabBody">
+				SOLAR
+			</div>
+			<a id="page_accordion_option1" class="tabStub" href="javascript://">WIND</a>
+			<div id="page_accordion-option1TabBody" class="tabBody">
+				WIND
+			</div>
+			<a id="page_accordion_option2" class="tabStub" href="javascript://">GEOTHERMAL</a>
+			<div id="page_accordion-option2TabBody" class="tabBody">
+				GEOTHERMAL
+			</div>
+			<a id="page_accordion_option3" class="tabStub" href="javascript://">EFFICIENCY</a>
+			<div id="page_accordion-option3TabBody" class="tabBody">
+				EFFICIENCY
+			</div>
+			<a id="page_accordion_option4" class="tabStub" href="javascript://">TIDAL</a>
+			<div id="page_accordion-option4TabBody" class="tabBody">
+				TIDAL
+			</div>
+		</div>
+	</div>
+
+	<!-- programmatic interface examples -->
+
+	<div class="programmaticInterface">
+		<p><b>accordion.get ('value') == </b>'<span id="page-accordionValue"></span>'</p>
+		<p><b>accordion.get ('tentativeValue') == </b>'<span id="page-accordionTentativeValue"></span>'</p>
+		<p>
+			<b>Set the value for the accordion widget: </b>
+			<a href="javascript://" onclick="accordion.set ({value:'solar'}); return false">accordion.set ({value:'solar'})</a>
+			&nbsp;,&nbsp;
+			<a href="javascript://" onclick="accordion.set ({value:'wind'}); return false">accordion.set ({value:'wind'})</a>
+			&nbsp;,&nbsp;
+			<a href="javascript://" onclick="accordion.set ({value:'geothermal'}); return false">accordion.set ({value:'geothermal'})</a>
+			&nbsp;,&nbsp;
+			<a href="javascript://" onclick="accordion.set ({value:'efficiency'}); return false">accordion.set ({value:'efficiency'})</a>
+			&nbsp;,&nbsp;
+			<a href="javascript://" onclick="accordion.set ({value:'tidal'}); return false">accordion.set ({value:'tidal'})</a>
+		</p>
+	</div>
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Example.library',
+		'UizeDotCom.Page.Example',
+		'Uize.Widget.Options.Accordion'
+	],
+	builder:function () {
+		/*** create the example page widget ***/
+			var page = window.page = new UizeDotCom.Page.Example;
+
+		/*** add the accordion child widget ***/
+			var accordion = window.accordion = page.addChild ('accordion',Uize.Widget.Options.Accordion,{
+				values:['solar','wind','geothermal','efficiency','tidal'],
+				value:'solar'
+			});
+
+		/*** some code for demonstrating the widget's programmatic interface ***/
+			accordion.wire ({
+				'Changed.value':
+					function () {page.setNodeInnerHtml ('accordionValue',accordion)},
+				'Changed.tentativeValue':
+					function () {page.setNodeInnerHtml ('accordionTentativeValue',accordion.get ('tentativeValue'))}
+			});
+
+		/*** wire up the page widget ***/
+			page.wireUi ();
+	}
+});
+
+</script>
+
+</body>
+</html>
+

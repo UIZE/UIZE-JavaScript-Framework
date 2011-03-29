@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Calculator | Widgets | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="calculator widget embed blog iframe bookmarklet"/>
+	<meta name="description" content="An easy to use calculator widget that you can embed in your Web sites and blogs, supporting all the operations you&apos;d expect from a basic calculator."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	
+	<!-- for Facebook Share (http://wiki.developers.facebook.com/index.php/Facebook_Share/Specifying_Meta_Tags) -->
+		<meta name="title" content="calculator"/>
+		<link rel="image_src" href="../images/widgets/calculator-96x96.gif"/>
+
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../examples/css/params-table.css"/>
+	<link rel="stylesheet" href="../css/page.widgethomepage.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	<a href="../javascript-widgets.html" class="breadcrumb breadcrumbWithArrow">WIDGETS</a>
+	Calculator
+</h1>
+
+<div class="main">
+	<div class="preamble">
+		An easy to use calculator widget that you can embed in your Web sites and blogs, supporting all the operations you'd expect from a basic calculator.
+	</div>
+
+	<div class="widgetInfoPane">
+		<ul class="featuresList">			<li>BASIC NUMERICAL OPERATIONS: addition, subtraction, multiplication, division</li>
+			<li>MEMORY FEATURE: M+ (memory plus), M- (memory minus), MR (memory recall), and MC (memory clear)</li>
+			<li>CLEAR OPERATIONS: CE (clear entry), C (clear all)</li>
+			<li>EXTRA OPERATIONS: +/- (invert sign / polarity), square root</li>
+			<li>ENTRY USING KEYBOARD: digits 0 through 9, "." (decimal point), "%" (percent operation), "*" (multiply), "/" (divide), "+" (add), "-" (subtract), "Enter" or "=" (calculate result), "Esc" or "Spacebar" (clear all), "m" (memory plus)</li>
+			<li>BUTTON HIGHLIGHTING: buttons that correspond to keys that are being pressed on the keyboard are highlighted, to simulate the buttons being clicked</li>
+			<li>KEYBOARD FILTERING: invalid keys are filtered out</li>
+			<li>OPERATION COMPOUNDING: by using the "=" operation repeatedly (eg. "2 x 3 = = =" is the same as "2 x 3 x 3 x 3 =")</li>
+			<li>VERSATILE PERCENT FUNCTION: "85 % 50 =" (85 percent of 50), "50 x 85 %" (85 percent of 50), "15 + 12 %" (15 increased by 12 percent), "15 - 12 %" (15 decreased by 12 percent)</li>
+			<li>BUTTON STATE MANAGEMENT: buttons are disabled when their functions can't be used</li>
+</ul>
+
+		<p>This widget is built using the <a href="../reference/Uize.Widget.Calculator.html">Uize.Widget.Calculator</a> module of the UIZE JavaScript Framework. To see more JavaScript examples, view the <a href="../javascript-examples.html">Javascript Examples</a> index page.</p>
+
+		
+	</div>
+
+	<div class="widgetPreviewPane">
+		<iframe src="calculator/web.html" style="width:240px; height:314px;" scrolling="no" frameborder="0" allowtransparency="true" class="widgetPreviewIframe"></iframe>
+
+		<table class="paramsTable">
+			<tr>
+				<td class="fieldLabel">EMBED</td>
+				<td><input type="text" value="&lt;iframe src=&quot;http://www.uize.com/widgets/calculator/web.html&quot; style=&quot;width:240px; height:314px;&quot; scrolling=&quot;no&quot; frameborder=&quot;0&quot; allowtransparency=&quot;true&quot;&gt;&lt;/iframe&gt;" readonly="readonly"/></td>
+			</tr>
+			<tr>
+				<td class="fieldLabel">BOOKMARKLET</td>
+				<td><a href="javascript:window.open('http://www.uize.com/widgets/calculator/web.html','calculator','width=240,%20height=314,toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no').focus(),undefined;">CALCULATOR</a></a></td>
+			</tr>
+		</table>
+
+		<a href="../javascript-widgets.html" class="buttonLink seeMoreWidgetsButton">SEE MORE WIDGETS</a>
+	</div>
+
+	<br style="clear:left;"/>
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.library',
+		'UizeDotCom.Page'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page).wireUi ()}
+});
+
+</script>
+
+</body></html>
+

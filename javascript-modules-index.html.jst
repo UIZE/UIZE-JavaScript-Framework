@@ -1,0 +1,9 @@
+<%@
+	required ('UizeDotCom.Templates.IndexPage');
+	input ({files:'array'});
+%><%= UizeDotCom.Templates.IndexPage.process ({
+	title:'JavaScript Modules Index',
+	description:'The UIZE JavaScript Framework includes over a hundred JavaScript modules to get you started creating powerful Web applications and slick Web sites.',
+	files:input.files
+}) %>
+

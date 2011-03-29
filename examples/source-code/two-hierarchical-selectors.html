@@ -1,0 +1,134 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Two Hierarchical Selectors - HTML Source Code | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework HTML example source code"/>
+	<meta name="description" content="This is the source code for the Two Hierarchical Selectors example"/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../../css/page.css"/>
+	<link rel="stylesheet" href="../../css/page.source.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../../index.html" title="UIZE JavaScript Framework home"></a>
+	SOURCE CODE: Two Hierarchical Selectors
+	<div id="page-actions" class="pageActions">
+		<a href="../two-hierarchical-selectors.html" class="buttonLink">VIEW EXAMPLE</a>
+	</div>
+</h1>
+
+<pre>
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+&lt;head&gt;
+  &lt;title&gt;Two Hierarchical Selectors | JavaScript Examples | UIZE JavaScript Framework&lt;/title&gt;
+  &lt;meta name="keywords" content="form Uize.Widget.Tree.Select"/&gt;
+  &lt;meta name="description" content="See a demo of two instances of the tree select widget used side-by-side - one lets the user select an animal, the other lets the user select a plant."/&gt;
+  &lt;link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/&gt;
+  &lt;link rel="stylesheet" href="../css/page.css"/&gt;
+  &lt;link rel="stylesheet" href="../css/page.example.css"/&gt;
+  &lt;style type="text/css"&gt;
+    select {
+      display:block;
+      width:200px;
+      margin:3px;
+    }
+&lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+&lt;script type="text/javascript" src="../js/Uize.js"&gt;&lt;/script&gt;
+
+&lt;h1 class="document-title"&gt;
+  &lt;a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"&gt;&lt;/a&gt;
+  &lt;a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow"&gt;JAVASCRIPT EXAMPLES&lt;/a&gt;
+  Two Hierarchical Selectors
+  &lt;div id="page-actions" class="pageActions"&gt;
+    &lt;a href="source-code/two-hierarchical-selectors.html" class="buttonLink"&gt;SOURCE&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/h1&gt;
+
+&lt;!-- load in the JavaScript libraries that define the animals and plants hierarchical lists --&gt;
+
+&lt;script type="text/javascript" src="js/animals.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="js/plants.js"&gt;&lt;/script&gt;
+
+&lt;div class="main"&gt;
+  &lt;!-- select nodes that make up the UI of the Uize.Widget.SelectTree object --&gt;
+
+  &lt;br/&gt;
+  &lt;form&gt;
+  &lt;table border="0" cellspacing="3" cellpadding="0" style="margin:auto;"&gt;
+    &lt;tr class="headings"&gt;
+      &lt;td&gt;ANIMALS&lt;/td&gt;
+      &lt;td&gt;PLANTS&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr valign="top"&gt;
+      &lt;td&gt;
+        &lt;select id="page_animalsSelectTree-level1"&gt;&lt;/select&gt;
+        &lt;select id="page_animalsSelectTree-level2"&gt;&lt;/select&gt;
+        &lt;select id="page_animalsSelectTree-level3"&gt;&lt;/select&gt;
+        &lt;select id="page_animalsSelectTree-level4"&gt;&lt;/select&gt;
+        &lt;select id="page_animalsSelectTree-level5"&gt;&lt;/select&gt;
+      &lt;/td&gt;
+      &lt;td&gt;
+        &lt;select id="page_plantsSelectTree-level1"&gt;&lt;/select&gt;
+        &lt;select id="page_plantsSelectTree-level2"&gt;&lt;/select&gt;
+        &lt;select id="page_plantsSelectTree-level3"&gt;&lt;/select&gt;
+        &lt;select id="page_plantsSelectTree-level4"&gt;&lt;/select&gt;
+        &lt;select id="page_plantsSelectTree-level5"&gt;&lt;/select&gt;
+      &lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/table&gt;
+  &lt;/form&gt;
+&lt;/div&gt;
+
+&lt;!-- JavaScript code to make the static tree select UI "come alive" --&gt;
+
+&lt;script type="text/javascript"&gt;
+
+Uize.module ({
+  required:[
+    'UizeDotCom.Page.Example.library',
+    'UizeDotCom.Page.Example',
+    'Uize.Widget.Tree.Select'
+  ],
+  builder:function () {
+    /*** create the example page widget ***/
+      var page = window.page = new UizeDotCom.Page.Example;
+
+    /*** add the Uize.Widget.Tree.Select child widgets ***/
+      page.addChild ('animalsSelectTree',Uize.Widget.Tree.Select,{items:animals});
+      page.addChild ('plantsSelectTree',Uize.Widget.Tree.Select,{items:plants});
+
+    /*** wire up the page widget ***/
+      page.wireUi ();
+  }
+});
+
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+
+</pre>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.library',
+		'UizeDotCom.Page'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page).wireUi ()}
+});
+
+</script>
+
+</body></html>

@@ -1,0 +1,22 @@
+The =Uize= and =Uize.Data= modules have been improved with better handling of certain types of objects when cloning and comparing arbitrarily complex data structures.
+
+Better Handling of Certain Objects When Cloning Data
+	The =Uize.clone= static method of the =Uize= module has been improved with better handling of window and DOM objects encountered within arbitrarily complex data structures.
+
+	The =Uize.clone= method was previously not able to handle cloning a data object that contained a property whose value was a reference to the =window= object or a DOM node. This is because the =window= object and DOM nodes contain properties that refer back to themselves. Cloning of data structures containing =window= object or DOM object references would result in an infinite loop. With the new behavior, any object reference that is not an instance of JavaScript's built-in =RegExp=, =Date=, =String=, =Number=, or =Boolean= objects will be copied by reference only, so the properties of =window= and DOM objects will no longer be traversed. This doesn't mean that =window= or DOM objects will be cloned - they won't. It simply means that cloning data structures that contain references to these types of objects won't result in JavaScript code hanging.
+
+Better Handling of Certain Objects When Comparing Data
+	The =Uize.Data.identical= static method of the =Uize.Data= module has been improved with better handling of JavaScript's built-in objects when comparing arbitrarily complex data structures.
+
+	The =Uize.Data.identical= method was previously not able to handle comparing instances of JavaScript's built-in =RegExp=, =Number=, or =Boolean= objects. In fact, comparison of two regular expression instances would always report them as being identical - even if they had completely different patterns or options. So, for example, the statement =Uize.Data.identical (new RegExp ('foo'),new RegExp ('bar'))= would produce the result =true=. This problem has been addressed, and instances of the =RegExp=, =Number=, =Boolean= objects are now only considered identical if they have the same value. With the new behavior, the statement =Uize.Data.identical (new Boolean (false),new Boolean (true))= will produce the result =false=, while the statement =Uize.Data.identical (new Boolean (false),new Boolean (false))= will produce the result =true=.
+
+Unit Tests
+	As part of this update, a thorough unit test has been created for the =Uize.clone= method, and the existing unit test for the =Uize.Data.identical= method has been updated to test the new behavior.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2010-11-01 - IMPROVED MODULES: Uize and Uize.Data
+....................................................................................

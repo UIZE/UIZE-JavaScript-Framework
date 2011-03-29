@@ -1,0 +1,11 @@
+The =Uize.Widget.HoverFader= widget class has been improved with support for the fading of more CSS style properties.
+
+Previously, the =Uize.Widget.HoverFader= class only supported fading of color CSS style properties. With the recent creation of the new =Uize.Fx= module, the =Uize.Widget.HoverFader= class now also supports the fading of dimension style properties, such as =padding=, =margin=, =fontSize=, =letterSpacing=, =lineHeight=, =borderWidth=, =borderLeftWidth=, etc. Moreover, the =Uize.Widget.HoverFader= class has been refactored to rely upon the new =Uize.Fx= module for style fading support, and this significantly reduced its code size. The [[../examples/fading-links.html][Fading Links]] example has been updated to provide a menu that demonstrates the new possibilities, showing the effect of fading the =borderLeftWidth= style property.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-03-25 - IMPROVED MODULE: Uize.Widget.HoverFader
+....................................................................................

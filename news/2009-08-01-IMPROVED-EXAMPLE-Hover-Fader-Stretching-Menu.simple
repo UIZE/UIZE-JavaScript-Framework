@@ -1,0 +1,13 @@
+The [[../examples/hover-fader-stretching-menu.html][Hover Fader Stretching Menu]] example has been improved with the addition of programmatic links that let you preview the different kinds of JavaScript animation effects that can be achieved by simply using different curves to control the fade in and fade out.
+
+Example animation effects include: PLAIN VANILLA, JELLO, GENTLE ELASTIC, JERKY, GENTLE BOUNCE, CRAZY BOUNCY, SNAPPY, OVERSHOOT, FAST THUD, JUMPING BEAN MADNESS, SHUDDERS, and BLINKY.
+
+[[../examples/hover-fader-stretching-menu.html][CHECK IT OUT]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-08-01 - IMPROVED EXAMPLE: Hover Fader Stretching Menu
+....................................................................................

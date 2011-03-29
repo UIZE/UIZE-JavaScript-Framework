@@ -1,0 +1,13 @@
+The new =Uize.Color.xHsv= extension module extends the =Uize.Color= object by defining the =HSV= (Hue, Saturation, Value) color space.
+
+Similar to the built-in =HSL= color space, the =HSV= color space also expresses colors in terms of their hue on a 360 degree color wheel. There are subtle differences between how grayness and lightness / darkness are expressed through the saturation and value components of =HSV=, and the saturation and lightness components of =HSL=.
+
+[[Uize.Color.xHsv][LEARN MORE]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-04-27 - NEW MODULE: Uize.Color.xHsv
+....................................................................................

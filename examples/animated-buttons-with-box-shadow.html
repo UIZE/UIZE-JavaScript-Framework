@@ -1,0 +1,139 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Animated Buttons with Box Shadow | JavaScript Examples | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="animation widget menu Uize.Widget.HoverFader Uize.Fx.xShadows"/>
+	<meta name="description" content="See how to animate CSS3 box-shadow in order to make buttons leap out of the page when you mouse over them and bounce back when you mouse out of them."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.example.css"/>
+	<style type="text/css">
+		.menuWorkspace {
+			position:relative;
+			width:750px;
+			height:280px;
+			margin:auto;
+			border-radius:20px;
+			-moz-border-radius:20px;
+			-webkit-border-radius:20px;
+		}
+		.menuLinkShell {
+			position:absolute;
+			width:250px;
+		}
+		.menuLink, .menuLink:link, .menuLink:visited, .menuLink:hover, .menuLink:active {
+			position:absolute;
+			font-size:16px;
+			font-weight:bold;
+			color:#ddd;
+			padding:20px 15px;
+			text-transform:uppercase;
+			text-shadow:2px 2px 2px rgba(0,0,0,.5);
+			margin-left:15px;
+			margin-top:15px;
+			border:10px solid #abc;
+			border-radius:45px;
+			-moz-border-radius:45px;
+			-webkit-border-radius:45px;
+			margin-bottom:1px;
+			text-decoration:none;
+			box-shadow:0 0 0 #000;
+			-moz-box-shadow:0 0 0 #000;
+			-webkit-box-shadow:0 0 0 #000;
+		}
+	</style>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	<a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow">JAVASCRIPT EXAMPLES</a>
+	Animated Buttons with Box Shadow
+	<div id="page-actions" class="pageActions">
+		<a href="source-code/animated-buttons-with-box-shadow.html" class="buttonLink">SOURCE</a>
+	</div>
+</h1>
+
+<div class="main">
+	<!-- explanation copy -->
+
+	<div class="explanation">
+		<p>In this example, an instance of the <a href="../reference/Uize.Widget.HoverFader.html"><code>Uize.Widget.HoverFader</code></a> widget class is adding a JavaScript animation effect to a set of navigation buttons. With help from the <a href="../reference/Uize.Fx.xShadows.html"><code>Uize.Fx.xShadows</code></a> extension module, this instance manages fading of values for the <code>box-shadow</code>, <code>margin-left</code>, <code>margin-top</code>, <code>color</code>, and <code>border-color</code> CSS style properties for the buttons. Mouse over the buttons to experience the effect. If your browser supports the CSS3 <code>box-shadow</code> style property, then the buttons should appear to "leap" out of the page when you mouse over them. This is because the <code>box-shadow</code> and margin properties are being faded between two extremes. At one extreme, when the mouse is not over a button, the box shadow for the button has zero horizontal and vertical offset and zero blur radius, and the left and top margins are both at <code>15px</code>. At the other extreme, when the mouse is over a button, the box shadow is offset horizontally and vertically by <code>20px</code> and has a blur radius of <code>25px</code>, and the left and top margins are both at <code>0px</code>. Fading between these extremes makes the buttons appear to leap out of the page. To add more realism, the <a href="../reference/Uize.Curve.Rubber.html"><code>Uize.Curve.Rubber</code></a> module is used to add a bounce quality to the fade back from a button's hover state to its resting state, which makes the buttons bounce as they sink back in and "hit the page surface".</p>
+	</div>
+
+	<div class="menuWorkspace darkInsetBackgroundColor">
+		<div class="menuLinkShell" style="left:20px; top:0px;">
+			<a href="javascript://" class="menuLink" style="background:#77f;">About Us</a>
+		</div>
+		<div class="menuLinkShell" style="left:77px; top:93px;">
+			<a href="javascript://" class="menuLink" style="background:#0c9;">Products</a>
+		</div>
+		<div class="menuLinkShell" style="left:176px; top:17px;">
+			<a href="javascript://" class="menuLink" style="background:#eb3;">Services</a>
+		</div>
+		<div class="menuLinkShell" style="left:232px; top:158px;">
+			<a href="javascript://" class="menuLink" style="background:#9c7;">Technology</a>
+		</div>
+		<div class="menuLinkShell" style="left:319px; top:-8px;">
+			<a href="javascript://" class="menuLink" style="background:#f96;">Solutions</a>
+		</div>
+		<div class="menuLinkShell" style="left:390px; top:73px;">
+			<a href="javascript://" class="menuLink" style="background:#c6f;">My Account</a>
+		</div>
+		<div class="menuLinkShell" style="left:506px; top:-3px;">
+			<a href="javascript://" class="menuLink" style="background:#86f;">Store Locator</a>
+		</div>
+		<div class="menuLinkShell" style="left:559px; top:90px;">
+			<a href="javascript://" class="menuLink" style="background:#f4c;">Investors</a>
+		</div>
+		<div class="menuLinkShell" style="left:42px; top:176px;">
+			<a href="javascript://" class="menuLink" style="background:#f88;">Support</a>
+		</div>
+		<div class="menuLinkShell" style="left:447px; top:176px;">
+			<a href="javascript://" class="menuLink" style="background:#79f;">Contact Us</a>
+		</div>
+	</div>
+</div>
+
+<!-- JavaScript code to make the static HTML "come alive" -->
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Example.library',
+		'UizeDotCom.Page.Example',
+		'Uize.Widget.HoverFader',
+		'Uize.Curve.Rubber',
+		'Uize.Fx.xShadows'
+	],
+	builder:function () {
+		/*** create the example page widget ***/
+			var page = window.page = new UizeDotCom.Page.Example;
+
+		/*** create the hover fader instance ***/
+			page.addChild (
+				'hoverFader',
+				Uize.Widget.HoverFader,
+				{
+					nodes:{className:/\bmenuLink\b/},
+					defaultStyle:{marginLeft:15,marginTop:15,boxShadow:'0 0 0 #123',color:'d',borderColor:'abc'},
+					hoverStyle:{marginLeft:0,marginTop:0,boxShadow:'20px 20px 25px #345',color:'f',borderColor:'f'},
+					fadeIn:{duration:400,curve:Uize.Curve.easeInOutPow (4)},
+					fadeOut:{duration:800,curve:Uize.Curve.Rubber.easeOutBounce (3,1.8,2.5)}
+				}
+			);
+
+		/*** wire up the page widget ***/
+			page.wireUi ();
+	}
+});
+
+</script>
+
+</body>
+</html>
+

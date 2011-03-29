@@ -1,0 +1,57 @@
+A variety of features in various modules, that were deprecated over a year ago, have finally been killed.
+
+Event Methods of Uize.Node Killed
+	The =Uize.Node.wireEvent= and =Uize.Node.wireEvents= static methods of the =Uize.Node= package, that were deprecated in November of 2009, have finally been killed.
+
+	NEW MAPPINGS FOR KILLED STATIC METHODS
+	...................................................
+	Uize.Node.wireEvent   >> BECOMES >>  Uize.Node.wire
+	Uize.Node.wireEvents  >> BECOMES >>  Uize.Node.wire
+	...................................................
+
+Static Events of Uize.Widget Killed
+	The =Document Loaded=, =Document Unload=, =Window Resized=, and =Window Scrolled= static events of the =Uize.Widget= class, that were deprecated in November of 2009, have been killed.
+
+	NEW MAPPINGS FOR KILLED STATIC EVENTS
+	...........................................................................................
+	Uize.Widget.wire ('Document Loaded',...) >> BECOMES >> Uize.Node.wire (window,'load',...)
+	Uize.Widget.wire ('Document Unload',...) >> BECOMES >> Uize.Node.wire (window,'unload',...)
+	Uize.Widget.wire ('Window Resized',...)  >> BECOMES >> Uize.Node.wire (window,'resize',...)
+	Uize.Widget.wire ('Window Scrolled',...) >> BECOMES >> Uize.Node.wire (window,'scroll',...)
+	...........................................................................................
+
+Instance Methods of Uize.Widget Killed
+	The =unwireNodeEvent=, =wired=, =wireNodeEvent=, and =wireNodeEvents= instance methods of the =Uize.Widget= class, that were deprecated over a year ago in 2009, have been killed.
+
+	NEW MAPPINGS FOR KILLED INSTANCE EVENTS
+	........................................................................
+	myWidget.unwireNodeEvent (...)  >> BECOMES >>  myWidget.unwireNode (...)
+	myWidget.wired ()               >> BECOMES >>  myWidget.isWired
+	myWidget.wireNodeEvent  (...)   >> BECOMES >>  myWidget.wireNode (...)
+	myWidget.wireNodeEvents (...)   >> BECOMES >>  myWidget.wireNode (...)
+	........................................................................
+
+validDateRange Set-get Property of Uize.Widget.Calendar Killed
+	The =validDateRange= set-get property of the =Uize.Widget.Calendar= class, that was deprecated back in September of 2009, has finally been killed.
+
+	The =validDateRange= property was replaced with the =minValue= and =maxValue= set-get properties.
+
+	INSTEAD OF...
+	........................................................................
+	myCalendar.set ({validDateRange:{start:'2009-09-18',end:'2009-12-25'}});
+	........................................................................
+
+	USE...
+	...............................................................
+	myCalendar.set ({minValue:'2009-09-18',maxValue:'2009-12-25'});
+	...............................................................
+
+The one year grace period for the various deprecated features listed above is now over. If you had any straggler code that had not been updated appropriately to use the newer forms of these features, which have now been dealt the fatal death blow, then you will have to update that code if you wish to use the latest version of the UIZE JavaScript Framework.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2010-12-19 - Various Deprecated Features Killed
+....................................................................................

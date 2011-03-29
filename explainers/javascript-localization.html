@@ -1,0 +1,572 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Javascript Localization | Documentation | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework Documentation "/>
+	<meta name="description" content="The UIZE JavaScript Framework provides facilities (in Uize.Widget) to ease i18n (internationalization) and L10n (localization) of JavaScript code."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../javascript-explainers.html" class="breadcrumb breadcrumbWithArrow">EXPLAINERS</a>
+	Javascript Localization
+
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="The UIZE JavaScript Framework provides facilities (in Uize.Widget) to ease i18n (internationalization) and L10n (localization) of JavaScript code.">1. Introduction</a></li>
+			<li><a href="#2" title="Widgets can form localized strings by calling their localize instance method.">2. The localize Instance Method</a>
+				<ul>
+					<li><a href="#2_1" title="It may be more convenient (or desirable) for the tokens inside your localized strings to be named with symbolic keys that will give a translator more context for what they&apos;re translating.">2.1. Named Tokens</a></li>
+					<li><a href="#2_2" title="One may wish to use a syntax for named tokens other than the built-in default of curly braces.">2.2. Controlling Token Syntax</a></li>
+				</ul>
+			</li>
+			<li><a href="#3" title="The localized set-get property lets you register one or more localized resources for a widget, which will then also be accessible to any child widget that belongs to the widget tree of which that widget is the root.">3. The localized Set-get Property</a></li>
+			<li><a href="#4" title="The localize instance method&apos;s implementation supports &quot;inheriting&quot; localized resources from the widget tree in which a widget resides.">4. Inheritance Tree</a>
+				<ul>
+					<li><a href="#4_1" title="Cases may arise where widgets are developed with an expected parent-child relationship.">4.1. Parent-child Relationships</a></li>
+				</ul>
+			</li>
+			<li><a href="#5" title="A simple yet powerful feature of the localize method is its support for function type resources.">5. Function Type Localized Resources</a>
+				<ul>
+					<li><a href="#5_1" title="To illustrate the value of function type resources, consider the following simple example...">5.1. Simple Example</a></li>
+					<li><a href="#5_2" title="When calling the localize method, if the specified resource ID resolves to a function type resource, then whatever substitution values are specified in the localize call and that otherwise be used to replace tokens in a string type resource, these substitution values will be passed as a parameter when calling the resource function. Consider the following example...">5.2. Interchangeable With Strings</a></li>
+					<li><a href="#5_3" title="Because function type resources are simply functions, and because the Uize.Template module allows a JavaScript template string to be compiled into a function, compiled JavaScript templates can be provided as localized resources.">5.3. Using Compiled JavaScript Templates</a></li>
+					<li><a href="#5_4" title="When a function type resource is processed by the localize method, the resource function is called as an instance method on the instance for which the resource is being localized. Consider the following example...">5.4. Accessing Instance State</a></li>
+					<li><a href="#5_5" title="One compelling application of the Function Type Localized Resources facility is forking between different localized resources, based upon some input or instance state. Consider the following example...">5.5. Forking Localized Resources</a></li>
+					<li><a href="#5_6" title="It should be pointed out that using Function Type Localized Resources is not a recommended practice.">5.6. Use With Caution</a></li>
+				</ul>
+			</li>
+			<li><a href="#6" title="In a comprehensively internationalized Web site, there often exists a robust system for localizing resources as part of the middle tier of the application.">6. Marshalling Localized Resources</a></li>
+			<li><a href="#7" title="One means for sharing localized resources across many instances of the same widget class is to set the localized static set-get property of the class. That way, all instances created will get those localized resources. Consider the following example...">7. Static Localized Resources</a></li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<a name="1"></a>
+	<h1 class="heading1" title="1. Introduction"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>. </span>Introduction</h1>
+	<div class="contents1">
+		<p>The UIZE JavaScript Framework provides facilities (in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>) to ease <a href="http://en.wikipedia.org/wiki/I18n" target="_blank" class="externalSiteLink">i18n</a> (internationalization) and <a href="http://en.wikipedia.org/wiki/I18n" target="_blank" class="externalSiteLink">L10n</a> (localization) of JavaScript code.</p>
+		
+		<p>In order to achieve an effective division of responsibilities between client logic and middle tier logic, it is often desirable to make the server-side code responsible for generation of markup for widgets. In general, therefore, it is best to minimize the amount of localization that occurs inside JavaScript code. That said, it cannot always be avoided. Sometimes some markup needs to be dynamically generated on the client-side - without contacting the server - for better responsiveness and an improved user experience. Perhaps a tooltip's text needs to be updated. Perhaps a message needs to be displayed in a modal dialog. Perhaps some status text needs to be displayed.</p>
+		
+		<p>In such cases, one needs a way to retrieve and process localized resources. In the UIZE JavaScript Framework, localization of widgets is done by use of <a href="#2">The localize Instance Method</a> and <a href="#3">The localized Set-get Property</a>, both of which are discussed in more detail below.</p>
+	</div>
+	
+	<a name="2"></a>
+	<h1 class="heading1" title="2. The localize Instance Method"><span class="headingNumber"><a href="#2" title="2. The localize Instance Method">2</a>. </span>The localize Instance Method</h1>
+	<div class="contents1">
+		<p>Widgets can form localized strings by calling their <code>localize</code> instance method.</p>
+		
+		<p><span class="allCaps">SYNTAX</span></p>
+		
+		
+<pre class="sample-code">localizedSTR = myWidget.localize (resourceIdSTR,substitutionsARRAYorOBJ);
+</pre>
+		
+		<p><span class="allCaps">EXAMPLE</span></p>
+		
+		
+<pre class="sample-code">this.setNodeInnerHtml (
+  'welcomeMsg',
+  this.localize ('welcomeMessage',['Chris','California','USA'])
+);
+</pre>
+		
+		<p>The above example shows a snippet of code taken from the implementation of a widget class. The class assumes that instances will be configured with a localized string named "welcomeMessage". The localized string is expected to have three tokens - for a first name, state, and country. The localized string's value could look something like <code>'Welcome, {0} of {1}, {2}'</code>, depending on the language for which it is localized (English, in this case). The localized string would be registered when the widget instance is created, as follows...</p>
+		
+		
+<pre class="sample-code">var myWidget = new MyNamespace.MyWidgetClass (
+  localized:{welcomeMessage:'Welcome, {0} of {1}, {2}'}
+);
+</pre>
+		
+		<a name="2_1"></a>
+		<h2 class="heading2" title="2. The localize Instance Method -&gt; 2.1. Named Tokens"><span class="headingNumber"><a href="#2" title="2. The localize Instance Method">2</a>.<a href="#2_1" title="2. The localize Instance Method -&gt; 2.1. Named Tokens">1</a>. </span>Named Tokens</h2>
+		<div class="contents2">
+			<p>It may be more convenient (or desirable) for the tokens inside your localized strings to be named with symbolic keys that will give a translator more context for what they're translating.</p>
+			
+			<p>When specifying an array for the <code>substitutionsARRAYorOBJ</code> parameter of the <code>localize</code> method, numbered tokens are substituted with the values of the corresponding elements from the array. Making use of named keys instead is easy: simply specify an object hash in place of an array.</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">myWidget.set ({
+  localized:{welcomeMessage:'Welcome, {firstName} of {state}, {country}'}
+});
+var localWelcome = myWidget.localize (
+  'welcomeMessage',
+  {firstName:'Chris',state:'California',country:'USA'}
+);
+</pre>
+			
+			<p>The above example would produce the result <code>'Welcome, Chris of California, USA'</code>.</p>
+		</div>
+		
+		<a name="2_2"></a>
+		<h2 class="heading2" title="2. The localize Instance Method -&gt; 2.2. Controlling Token Syntax"><span class="headingNumber"><a href="#2" title="2. The localize Instance Method">2</a>.<a href="#2_2" title="2. The localize Instance Method -&gt; 2.2. Controlling Token Syntax">2</a>. </span>Controlling Token Syntax</h2>
+		<div class="contents2">
+			<p>One may wish to use a syntax for named tokens other than the built-in default of curly braces.</p>
+			
+			<p>Using the optional <code>tokenNamingSTR</code> parameter of the <code>localize</code> instance method, the syntax of the tokens that will be substituted can be controlled. This facility provides a lot of flexibility in how tokens are formatted inside localized strings. The value specified for the <code>tokenNamingSTR</code> parameter should be a string containing the text <code>'KEY'</code> somewhere inside it, where that segment will be replaced with the name for a given key. So, for example, a value of <code>'[KEY]'</code> for the <code>tokenNamingSTR</code> parameter would produce the token name <code>'[firstName]'</code> for the substitution key <code>'firstName'</code>. Consider the following example...</p>
+			
+			<p><span class="allCaps">EXAMPLE 1</span></p>
+			
+			
+<pre class="sample-code">myWidget.set ({
+  localized:{welcomeMessage:'Welcome, [firstName] of [state], [country]'}
+});
+var localWelcome = myWidget.localize (
+  'welcomeMessage',
+  {firstName:'Chris',state:'California',country:'USA'},
+  '[KEY]'
+);
+</pre>
+			
+			<p>The above example would produce the result <code>'Welcome, Chris of California, USA'</code>.</p>
+			
+			<p>The benefit of separating the token syntax from the key names of the dynamic data is that the dynamic data may be coming from AJAX service requests or through a method call, and letting the <code>localize</code> method use the <code>tokenNamingSTR</code> parameter to package up the keys to form the substitution tokens takes the burden off your application code having to do this.</p>
+			
+			<p>In a variation on the previous example, an array can be used to specify the substitutions...</p>
+			
+			<p><span class="allCaps">EXAMPLE 2</span></p>
+			
+			
+<pre class="sample-code">myWidget.set ({localized:{welcomeMessage:'Welcome, [0] of [1], [2]'}});
+var localWelcome = myWidget.localize (
+  'welcomeMessage',
+  ['Chris','California','USA'],
+  '[KEY]'
+);
+</pre>
+			
+			<p>The above example would also produce the result <code>'Welcome, Chris of California, USA'</code>.</p>
+			
+			<p>In yet another example, one may wish to have no enclosing delimeters at all in the localized string...</p>
+			
+			<p><span class="allCaps">EXAMPLE 3</span></p>
+			
+			
+<pre class="sample-code">myWidget.set ({localized:{welcomeMessage:'Welcome, firstName of state, country'}});
+var localWelcome = myWidget.localize (
+  'welcomeMessage',
+  {firstName:'Chris',state:'California',country:'USA'},
+  'KEY'
+);
+</pre>
+			
+			<p>The above example would also produce the result <code>'Welcome, Chris of California, USA'</code>.</p>
+		</div>
+	</div>
+	
+	<a name="3"></a>
+	<h1 class="heading1" title="3. The localized Set-get Property"><span class="headingNumber"><a href="#3" title="3. The localized Set-get Property">3</a>. </span>The localized Set-get Property</h1>
+	<div class="contents1">
+		<p>The <code>localized</code> set-get property lets you register one or more localized resources for a widget, which will then also be accessible to any child widget that belongs to the widget tree of which that widget is the root.</p>
+		
+		<p><span class="allCaps">EXAMPLE (APPLICATION PERSPECTIVE)</span></p>
+		
+		
+<pre class="sample-code">page.addChild (
+  'collection',
+  Uize.Widget.Collection.Dynamic,
+  {
+    built:false,
+    html:Uize.Templates.Collection,
+    itemWidgetClass:Uize.Widget.CollectionItem,
+    itemWidgetProperties:{
+      html:Uize.Templates.CollectionItem,
+      cssClassBase:'collectionItem',
+      cssClassActive:'collectionItemActive',
+      cssClassOver:'collectionItemOver',
+      previewClickAction:'Select'
+    },
+    dragToReorder:true,
+    makeNewlyAddedSelected:false,
+    localized:{
+      draggingToReorderSingular:'Moving one item.',
+      draggingToReorderPlural:'Moving {totalItems} items.',
+      removeItemConfirmation:
+        'Are you sure you would like to remove this image?',
+      removeItemsConfirmation:
+        'Are you sure you would like to remove the {0} selected items?'
+    }
+  }
+);
+</pre>
+		
+		<p>The above code illustrates registering localized resources by specifying a value for the <code>localized</code> set-get property when adding a child widget to a page widget instance. Notice how there are four localized strings being registered: <code>draggingToReorderSingular</code>, <code>draggingToReorderPlural</code>, <code>removeItemConfirmation</code>, <code>removeItemsConfirmation</code>.</p>
+		
+		<p>The code snippet below illustrates how the <code>draggingToReorderSingular</code> and <code>draggingToReorderPlural</code> localized strings may be used in a widget's implementation. In this case, one of the two strings is being chosen to use, depending on how many items are being dragged. A string expression is constructing the name of the localized string, adding a suffix of either "Plural" or "Singular".</p>
+		
+		<p><span class="allCaps">EXAMPLE (WIDGET IMPLEMENTATION)</span></p>
+		
+		
+<pre class="sample-code">if (_inDrag)
+  _Uize_Node.setInnerHtml (
+    _draggingTooltip,
+    _this.localize (
+      'draggingToReorder' + (_itemsDraggedLength &gt; 1 ? 'Plural' : 'Singular'),
+      {totalItems:_itemsDraggedLength}
+    )
+  )
+;
+</pre>
+	</div>
+	
+	<a name="4"></a>
+	<h1 class="heading1" title="4. Inheritance Tree"><span class="headingNumber"><a href="#4" title="4. Inheritance Tree">4</a>. </span>Inheritance Tree</h1>
+	<div class="contents1">
+		<p>The <code>localize</code> instance method's implementation supports "inheriting" localized resources from the widget tree in which a widget resides.</p>
+		
+		<p>This facility makes it possible to share localized resources across a number of widgets. In one approach, localized resources may be registered with the page widget when instantiating it. These localized resources are then available to all child widgets in its tree. This is a way for multiple widgets to share common localized resources. Consider the following example...</p>
+		
+		<p><span class="allCaps">EXAMPLE</span></p>
+		
+		
+<pre class="sample-code">page.set ({
+  localized:{deleteConfirmation:'Are you sure you want to delete?'}
+});
+page.addChild (
+  'myChildWidget',
+  MyNamespace.MyWidgetClass,
+  {localized:{welcomeMessage:'Welcome, {0} of {1}, {2}'}}
+);
+alert (
+  page.children.myChildWidget.localize ('deleteConfirmation')
+);
+alert (
+  page.children.myChildWidget.localize ('welcomeMessage',['Chris','California','USA'])
+);
+</pre>
+		
+		<p>In the above example, a child widget is being added to a page widget instance (which we assume to have already been created). Both the page widget instance and the child widget have values set for the <code>localized</code> set-get property, registering localized strings with each. Now, with this setup the first <code>alert</code> statement will display the text <b>"Are you sure you want to delete?"</b>, while the second <code>alert</code> statement will display the text <b>"Welcome, Chris of California, USA"</b>.</p>
+		
+		<p>Even though the <code>deleteConfirmation</code> localized string is not registered for the <code>myChildWidget</code> instance, the call to the <code>localize</code> method on this instance results in the localized string being found in the parent page widget's <code>localized</code> set-get property. Thus, any widget anywhere in this page widget's widget tree can utilize the <code>deleteConfirmation</code> localized string that is registered with the page widget. Child widgets can still override this localized string value by registering their own localized version with different wording. If we extend on the previous example...</p>
+		
+		<p><span class="allCaps">EXAMPLE</span></p>
+		
+		
+<pre class="sample-code">page.set ({
+  localized:{deleteConfirmation:'Are you sure you want to delete?'}
+});
+page.addChild (
+  'myChildWidget',
+  MyNamespace.MyWidgetClass,
+  {
+    localized:{
+      welcomeMessage:'Welcome, {0} of {1}, {2}',
+      deleteConfirmation:'Are you sure you want to delete the selected items?'
+    }
+  }
+);
+alert (
+  page.children.myChildWidget.localize ('deleteConfirmation')
+);
+alert (
+  page.children.myChildWidget.localize ('welcomeMessage',['Chris','California','USA'])
+);
+</pre>
+		
+		<p>Now, in the above example, the first <code>alert</code> statement will display the text <b>"Are you sure you want to delete the selected items?"</b>, instead of the text <b>"Are you sure you want to delete?"</b>.</p>
+		
+		<a name="4_1"></a>
+		<h2 class="heading2" title="4. Inheritance Tree -&gt; 4.1. Parent-child Relationships"><span class="headingNumber"><a href="#4" title="4. Inheritance Tree">4</a>.<a href="#4_1" title="4. Inheritance Tree -&gt; 4.1. Parent-child Relationships">1</a>. </span>Parent-child Relationships</h2>
+		<div class="contents2">
+			<p>Cases may arise where widgets are developed with an expected parent-child relationship.</p>
+			
+			<p>In such cases, localized resources needed by the child widgets can be registered with the parent widget, and then all the child widgets can share those resources. An example of such a case is the <code><a href="../reference/Uize.Widget.Collection.html">Uize.Widget.Collection</a></code> and <code><a href="../reference/Uize.Widget.CollectionItem.html">Uize.Widget.CollectionItem</a></code> classes, where the <code><a href="../reference/Uize.Widget.Collection.html">Uize.Widget.Collection</a></code> class is implemented to be a parent to many instances of the <code><a href="../reference/Uize.Widget.CollectionItem.html">Uize.Widget.CollectionItem</a></code> class. Another example of such a relationship is the <code><a href="../reference/Uize.Widget.Options.html">Uize.Widget.Options</a></code> class, which is designed to be a parent to many instances of the <code><a href="../reference/Uize.Widget.Button.html">Uize.Widget.Button</a></code> class. In such cases, localized resources expected by the child widgets can be registered on the instance of the parent widget.</p>
+		</div>
+	</div>
+	
+	<a name="5"></a>
+	<h1 class="heading1" title="5. Function Type Localized Resources"><span class="headingNumber"><a href="#5" title="5. Function Type Localized Resources">5</a>. </span>Function Type Localized Resources</h1>
+	<div class="contents1">
+		<p>A simple yet powerful feature of the <code>localize</code> method is its support for function type resources.</p>
+		
+		<p>Typically, a localized resource will be a string. In some cases, such strings will have substitution tokens and the <code>localize</code> method will need to be called with one or more substitution values. In exceptional cases, plain old token substitution may not be adequate and more sophisticated string construction may be necessary. In such cases, a function type resource can be used.</p>
+		
+		<a name="5_1"></a>
+		<h2 class="heading2" title="5. Function Type Localized Resources -&gt; 5.1. Simple Example"><span class="headingNumber"><a href="#5" title="5. Function Type Localized Resources">5</a>.<a href="#5_1" title="5. Function Type Localized Resources -&gt; 5.1. Simple Example">1</a>. </span>Simple Example</h2>
+		<div class="contents2">
+			<p>To illustrate the value of function type resources, consider the following simple example...</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">page.addChild (
+  'productWidget',
+  SomeNamespace.ProductWidgetClass,
+  {
+    localized:{
+      buyConfirmation:function (productTitle) {
+        return (
+          'Are you sure you\'d like to purchase the product "' +
+          productTitle.toUpperCase () + '"?'
+        )
+      }
+    }
+  }
+);
+</pre>
+			
+			<p>In the above example, an instance of the fictitious <code>SomeNamespace.ProductWidgetClass</code> widget class is being added as a child widget of the page widget. The localized resource <code>buyConfirmation</code> is being registered for this instance. The implementation of a <code>buyWithConfirm</code> instance method of the <code>SomeNamespace.ProductWidgetClass</code> class calls the <code>localize</code> method to localize this resource, passing a single substitution value for the title of the product, and then displays the localized confirmation message in a confirm dialog, as shown in the code below...</p>
+			
+			
+<pre class="sample-code">_classPrototype.buyWithConfirm = function () {
+  var _this = this;
+  _this.confirm ({
+    title:_this.localize ('buyConfirmationTitle'),
+    message:_this.localize ('buyConfirmation',_this._productTitle),
+    yesHandler:function () {
+      // code here to perform the buy action
+    }
+  });
+};
+</pre>
+			
+			<p>Now, typically, the <code>buyConfirmation</code> resource would just be a string, and the product title would simply be substituted in, as in the following code...</p>
+			
+			<p><span class="allCaps">TYPICAL APPROACH</span></p>
+			
+			
+<pre class="sample-code">page.addChild (
+  'productWidget',
+  SomeNamespace.ProductWidgetClass,
+  {
+    localized:{
+      buyConfirmation:'Are you sure you\'d like to purchase the product "{0}"?'
+    }
+  }
+);
+</pre>
+			
+			<p>But we've decided, for whatever reason, that in this case we would like the product title to be in all uppercase characters. The standard string type resource approach can't accomplish this, so the function type resource comes to the rescue. The function type resource, as shown in the previous code block, accepts the substitution value as input, and uses the <code>toUpperCase</code> string method to uppercase the string before building the localized string that it returns as its result.</p>
+		</div>
+		
+		<a name="5_2"></a>
+		<h2 class="heading2" title="5. Function Type Localized Resources -&gt; 5.2. Interchangeable With Strings"><span class="headingNumber"><a href="#5" title="5. Function Type Localized Resources">5</a>.<a href="#5_2" title="5. Function Type Localized Resources -&gt; 5.2. Interchangeable With Strings">2</a>. </span>Interchangeable With Strings</h2>
+		<div class="contents2">
+			<p>When calling the <code>localize</code> method, if the specified resource ID resolves to a function type resource, then whatever substitution values are specified in the <code>localize</code> call and that otherwise be used to replace tokens in a string type resource, these substitution values will be passed as a parameter when calling the resource function. Consider the following example...</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">// a string type resource
+
+myWidget.set ({
+  localized:{
+    someResource:'valueA is "{valueA}", and valueB is "{valueB}".'
+  }
+});
+myWidget.localize ('someResource',{valueA:'foo',valueB:'bar'});
+  // returns the result 'valueA is "foo", and valueB is "bar".'
+
+
+// a function type resource
+
+myWidget.set ({
+  localized:{
+    someResource:function (params) {
+      return 'valueA is "' + params.valueA + '", and valueB is "' + params.valueB + '".';
+    }
+  }
+});
+myWidget.localize ('someResource',{valueA:'foo',valueB:'bar'});
+  // returns the result 'valueA is "foo", and valueB is "bar".'
+</pre>
+			
+			<p>As you can see from the above example, the way that <code>localize</code> is called remains the same, regardless of whether the localized resource is a string or a function. This means that string type resources and function type resources are essentially interchangeable, without the code that calls the <code>localize</code> method needing to care.</p>
+		</div>
+		
+		<a name="5_3"></a>
+		<h2 class="heading2" title="5. Function Type Localized Resources -&gt; 5.3. Using Compiled JavaScript Templates"><span class="headingNumber"><a href="#5" title="5. Function Type Localized Resources">5</a>.<a href="#5_3" title="5. Function Type Localized Resources -&gt; 5.3. Using Compiled JavaScript Templates">3</a>. </span>Using Compiled JavaScript Templates</h2>
+		<div class="contents2">
+			<p>Because function type resources are simply functions, and because the <code><a href="../reference/Uize.Template.html">Uize.Template</a></code> module allows a JavaScript template string to be compiled into a function, compiled JavaScript templates can be provided as localized resources.</p>
+			
+			<p>The following example reformulates the <a href="#5_1">Simple Example</a> shown above using JavaScript templates instead of a hand-rolled function. Granted, it's not the most compelling use of the powerful capabilities of JavaScript templates, but it illustrates the principle.</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">var buyConfirmationTemplate = Uize.Template.compile (
+  'Are you sure you\'d like to purchase the product "&lt;%= input.toUpperCase () %&gt;"?'
+);
+page.addChild (
+  'productWidget',
+  SomeNamespace.ProductWidgetClass,
+  {localized:{buyConfirmation:buyConfirmationTemplate}}
+);
+</pre>
+		</div>
+		
+		<a name="5_4"></a>
+		<h2 class="heading2" title="5. Function Type Localized Resources -&gt; 5.4. Accessing Instance State"><span class="headingNumber"><a href="#5" title="5. Function Type Localized Resources">5</a>.<a href="#5_4" title="5. Function Type Localized Resources -&gt; 5.4. Accessing Instance State">4</a>. </span>Accessing Instance State</h2>
+		<div class="contents2">
+			<p>When a function type resource is processed by the <code>localize</code> method, the resource function is called as an instance method on the instance for which the resource is being localized. Consider the following example...</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">page.addChild (
+  'productWidget',
+  SomeNamespace.ProductWidgetClass,
+  {
+    localized:{
+      buyConfirmation:function (productTitle) {
+        return (
+          'Are you sure you\'d like to purchase the ' +
+          (this.get ('isCustomized') ? 'customized ' : '') +
+          'product entitled "' + productTitle + '"?'
+        )
+      }
+    }
+  }
+);
+</pre>
+			
+			<p>In the above example, the function type <code>buyConfirmation</code> resource would like to conditionally add in the word "customized" to the sentence (versions for different languages would construct the sentence differently, of course). Two problems: 1) the code for the <code>SomeNamespace.ProductWidgetClass</code> class was not written to pass in the value of this property as a substitution value, and 2) even if the <code>isCustomized</code> value <b>was</b> passed in, the substitution system for string type resources does not support conditional logic.</p>
+			
+			<p>Once again, the function type resource comes to the rescue. In this case, the function is using the <code>get</code> method to access the value of the instance's <code>isCustomized</code> set-get property. It can do this using the <code>this</code> keyword because the function is called as an instance method on the <code>productWidget</code> child widget.</p>
+		</div>
+		
+		<a name="5_5"></a>
+		<h2 class="heading2" title="5. Function Type Localized Resources -&gt; 5.5. Forking Localized Resources"><span class="headingNumber"><a href="#5" title="5. Function Type Localized Resources">5</a>.<a href="#5_5" title="5. Function Type Localized Resources -&gt; 5.5. Forking Localized Resources">5</a>. </span>Forking Localized Resources</h2>
+		<div class="contents2">
+			<p>One compelling application of the <a href="#5">Function Type Localized Resources</a> facility is forking between different localized resources, based upon some input or instance state. Consider the following example...</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">page.addChild (
+  'productWidget',
+  SomeNamespace.ProductWidgetClass,
+  {
+    localized:{
+      buyConfirmationEmbroideredHat:
+        'Are you sure you\'d like to have this hat embroidered?',
+      buyConfirmationShoe:
+        'Are you sure you\'d like to have this shoe custom built?',
+      buyConfirmationPrint:
+        'Are you sure you\'d like to have this poster printed?',
+      buyConfirmationGeneric:
+        'Are you sure you\'d like to purchase the product "{0}"?',
+      buyConfirmation:function (productTitle) {
+        return (
+          this.localize (
+            'buyConfirmation' + Uize.capFirstChar (this.get ('productType'))
+          ) ||
+          this.localize ('buyConfirmationGeneric')
+        );
+      }
+    }
+  }
+);
+</pre>
+			
+			<p>In the above example, the <code>buyConfirmation</code> function type resource is accessing the <code>productType</code> set-get property of the instance for which it is producing a localized string. It uses the value of this property to form the name of a localized resource by capitalizing the first character and then prepending "buyConfirmation". It then calls the <code>localize</code> method on the instance, providing the constructed resource name. The <code>localize</code> method returns an empty string if the specified resource cannot be found, so our function uses the <code>||</code> (logical OR) operator to default the localized string using the <code>buyConfirmationGeneric</code> resource.</p>
+		</div>
+		
+		<a name="5_6"></a>
+		<h2 class="heading2" title="5. Function Type Localized Resources -&gt; 5.6. Use With Caution"><span class="headingNumber"><a href="#5" title="5. Function Type Localized Resources">5</a>.<a href="#5_6" title="5. Function Type Localized Resources -&gt; 5.6. Use With Caution">6</a>. </span>Use With Caution</h2>
+		<div class="contents2">
+			<p>It should be pointed out that using <a href="#5">Function Type Localized Resources</a> is not a recommended practice.</p>
+			
+			<p>It is often better to modify the code to provide more substitution values, rather than having a function type resource access state or methods of an instance. Alternatively, conditional logic for forking resources can be built into a class. Sometimes this is not possible, however, since the code may not be easily accessible to change. In such cases, this facility offers flexibility that might prove expedient. Most systems for managing localized resources can't handle the concept of resources being JavaScript functions, and it may be challenging for translation services to digest resources in this form. Application specific resource forking is a safer use of this facility, since such function type resources would only contain forking logic and no translatable text. All that said, there may still be situations where this facility is handy in a pinch to address some uncooperative problem.</p>
+		</div>
+	</div>
+	
+	<a name="6"></a>
+	<h1 class="heading1" title="6. Marshalling Localized Resources"><span class="headingNumber"><a href="#6" title="6. Marshalling Localized Resources">6</a>. </span>Marshalling Localized Resources</h1>
+	<div class="contents1">
+		<p>In a comprehensively internationalized Web site, there often exists a robust system for localizing resources as part of the middle tier of the application.</p>
+		
+		<p>Such localization mechanisms are relied upon when generating HTML output that is to be sent to the client. Often a JavaScript widget will have a corresponding server component, implemented in a form that is specific to the server platform (such as a control, for example, in Microsoft's .NET framework). Such a component will be responsible for generating the markup for a JavaScript widget and will be invoked during page generation, or may be invoked later by the client-side code (typically through an AJAX service call) in order to dynamically insert a widget's markup into a page.</p>
+		
+		<p>Thus, it is often desirable for the component code to employ the server-side localization facilities in order to marshal the needed localized resources to the JavaScript widget that is instantiated on the client-side. This is a perfect application for the Declarative Syntax For Widget Data mechanism that is implemented in the <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> base class. Using this mechanism, a script block can be added to the HTML output generated by the server-side component, where a global variable declared in that script block declares the data that should be picked up by the client widget instance when it is created. Consider the following example...</p>
+		
+		<p><span class="allCaps">EXAMPLE COMPONENT OUTPUT</span></p>
+		
+		
+<pre class="sample-code">&lt;div id="page_productsGrid"&gt;
+  &lt;div id="selectLinks"&gt;
+    &lt;a id="page_productsGrid_selectAll" href="javascript://"&gt;Select all&lt;/a&gt;
+    &amp;nbsp;|&amp;nbsp;
+    &lt;a id="page_productsGrid_selectNone" href="javascript://"&gt;Select none&lt;/a&gt;
+    &amp;nbsp;|&amp;nbsp;
+    &lt;a id="page_productsGrid_remove" href="javascript://"&gt;Delete selected&lt;/a&gt;
+  &lt;/div&gt;
+  &lt;div style="clear:both;margin-bottom:9px;"&gt;&lt;/div&gt;
+  &lt;div id="page_productsGrid-items" class="gridShell clearfix"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script type="text/javascript"&gt;
+  $page_productsGrid = {
+    localized:{
+      removeItemConfirmation:
+        'Are you sure you would like to remove this item?',
+      removeItemsConfirmation:
+        'Are you sure you would like to remove the {0} selected items?'
+    }
+  };
+&lt;/script&gt;
+</pre>
+		
+		<p>The above snippet of HTML represents the output of a server-side component that generates the HTML that is to be wired up on the client-side by an instance of the <code><a href="../reference/Uize.Widget.Collection.Dynamic.html">Uize.Widget.Collection.Dynamic</a></code> class. This class expects the localized resources <code>removeItemConfirmation</code> and <code>removeItemsConfirmation</code>. The server-side component marshals values for these two localized resources to the client code by means of the Declarative Syntax For Widget Data. According to this mechanism, the globally declared variable <code>$page_productsGrid</code> declares values of set-get properties that are to be "consumed" by the child widget <code>productsGrid</code> of the parent widget <code>page</code>. When a widget is instantiated with the <code>idPrefix</code> of <code>'page_productsGrid'</code>, then the set-get property values declared by the <code>$page_productsGrid</code> global variable will be scooped up.</p>
+		
+		<p><b>NOTE:</b> The above example shows the <b>output</b> of a server-side component. Naturally, the resources in the component's source code wouldn't be hard-coded and there would be method calls in the appropriate spots to get the localized resources and insert them into the output that the server-side component generates.</p>
+	</div>
+	
+	<a name="7"></a>
+	<h1 class="heading1" title="7. Static Localized Resources"><span class="headingNumber"><a href="#7" title="7. Static Localized Resources">7</a>. </span>Static Localized Resources</h1>
+	<div class="contents1">
+		<p>One means for sharing localized resources across many instances of the same widget class is to set the <code>localized</code> static set-get property of the class. That way, all instances created will get those localized resources. Consider the following example...</p>
+		
+		<p><span class="allCaps">EXAMPLE</span></p>
+		
+		
+<pre class="sample-code">MyNamespace.MyWidget.set ({localized:{welcomeMessage:'Welcome, {0} of {1}, {2}'}});
+
+myWidget1 = new MyWidget;
+alert (myWidget1.localize ('welcomeMessage',['Chris','California','USA']));
+
+myWidget2 = new MyWidget;
+alert (myWidget2.localize ('welcomeMessage',['Chris','California','USA']));
+</pre>
+		
+		<p>In the above example, both <code>alert</code> statements will display the text <b>"Welcome, Chris of California, USA"</b>.</p>
+	</div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

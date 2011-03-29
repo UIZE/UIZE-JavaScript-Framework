@@ -1,0 +1,360 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>PERFORMANCE TEST: String Starts With Substring Styles | UIZE JavaScript Framework</title>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../../css/page.css"/>
+	<link rel="stylesheet" href="../../css/page.example.css"/>
+	<link rel="stylesheet" href="../../css/page.example.test.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../../index.html" title="UIZE JavaScript Framework home"></a>
+	PERFORMANCE TEST: String Starts With Substring Styles
+	<div class="pageActions">
+		<a id="page-viewSource" href="javascript://" class="buttonLink">SOURCE</a>
+	</div>
+</h1>
+
+<div class="main">
+	<!-- explanation copy -->
+
+	<div class="explanation">
+		<p>This test page demonstrates the performance of the <code>Uize.String.startsWith</code> static method, as compared to the performance of two other, less optimized techniques for testing if one string starts with another string.</p>
+	</div>
+
+	<!-- test results -->
+
+	<div class="testResults">
+		<div class="testResultsFooter">
+			<a id="page_performTest" class="button" href="javascript://">PERFORM TEST</a>
+		</div>
+		<div id="page-testResults"></div>
+	</div>
+</div>
+
+<!-- JavaScript code to wire up the page widget and define the test code -->
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Example.Test.library',
+		'Uize.String'
+	],
+	builder:function () {
+		/*** create the example page widget ***/
+			var page = window.page = new UizeDotCom.Page.Example.Test;
+
+		/*** some other approaches ***/
+			Uize.String.startsWithUsingSliceEqualsSubstr = function (_string,_subStr) {
+				return _string.slice (0,_subStr.length) == _subStr;
+			};
+
+			Uize.String.startsWithUsingIndexOfEquals0 = function (_string,_subStr) {
+				return !_string.indexOf (_subStr);
+			};
+
+		/*** define the test code by overriding the performTest method of the page widget ***/
+			page.performTest = function (_reportResults) {
+				var
+					_this = this,
+					_totalIterations = 10000,
+					_iterationNo,
+					_sourceStr = Uize.String.repeat ('this is my string with a bunch of different stuff in it',500),
+					_identical = _sourceStr,
+					_emptyString = '',
+					_charNotInSource = '*',
+					_sourceStrPlusOneChar = _sourceStr + _charNotInSource,
+					_identicalButMissingLastChar = _sourceStr.slice (0,_sourceStr.length - 1),
+					_identicalButShorterAndDifferentAtEnd = _sourceStr.slice (0,_sourceStr.length - 2) + _charNotInSource,
+					_identicalButMissingFirstChar = _sourceStr.slice (1),
+					_identicalButFirstCharDifferent = _charNotInSource + _identicalButMissingFirstChar,
+					_identicalButLastCharDifferent = _identicalButMissingLastChar + _charNotInSource,
+					_firstCharAtStartButSecondCharDoesntMatch = _sourceStr.charAt (0) + _charNotInSource
+				;
+				_this.executeFunctionsWithPause (
+					[
+						/*** substring is longer ***/
+							function () {
+								/*** substring is longer - slice equals substring ***/
+									for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
+										Uize.String.startsWithUsingSliceEqualsSubstr (_sourceStr,_sourceStrPlusOneChar)
+									;
+							},
+							function () {
+								/*** substring is longer - indexOf substring equals zero ***/
+									for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
+										Uize.String.startsWithUsingIndexOfEquals0 (_sourceStr,_sourceStrPlusOneChar)
+									;
+							},
+							function () {
+								/*** substring identical, but last char different - using Uize.String.startsWith ***/
+									for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
+										Uize.String.startsWith (_sourceStr,_sourceStrPlusOneChar)
+									;
+							},
+
+						/*** substring identical but missing last char ***/
+							function () {
+								/*** substring identical but missing last char - slice equals substring ***/
+									for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
+										Uize.String.startsWithUsingSliceEqualsSubstr (_sourceStr,_identicalButMissingLastChar)
+									;
+							},
+							function () {
+								/*** substring identical but missing last char - indexOf substring equals zero ***/
+									for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
+										Uize.String.startsWithUsingIndexOfEquals0 (_sourceStr,_identicalButMissingLastChar)
+									;
+							},
+							function () {
+								/*** substring identical but missing last char - using Uize.String.startsWith ***/
+									for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
+										Uize.String.startsWith (_sourceStr,_identicalButMissingLastChar)
+									;
+							},
+
+						/*** substring identical but missing first char ***/
+							function () {
+								/*** substring identical but missing first char - slice equals substring ***/
+									for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
+										Uize.String.startsWithUsingSliceEqualsSubstr (_sourceStr,_identicalButMissingFirstChar)
+									;
+							},
+							function () {
+								/*** substring identical but missing first char - indexOf substring equals zero ***/
+									for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
+										Uize.String.startsWithUsingIndexOfEquals0 (_sourceStr,_identicalButMissingFirstChar)
+									;
+							},
+							function () {
+								/*** substring identical but missing first char - using Uize.String.startsWith ***/
+									for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
+										Uize.String.startsWith (_sourceStr,_identicalButMissingFirstChar)
+									;
+							},
+
+						/*** substring identical but first char different ***/
+							function () {
+								/*** substring identical but first char different - slice equals substring ***/
+									for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
+										Uize.String.startsWithUsingSliceEqualsSubstr (_sourceStr,_identicalButFirstCharDifferent)
+									;
+							},
+							function () {
+								/*** substring identical but first char different - indexOf substring equals zero ***/
+									for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
+										Uize.String.startsWithUsingIndexOfEquals0 (_sourceStr,_identicalButFirstCharDifferent)
+									;
+							},
+							function () {
+								/*** substring identical but first char different - using Uize.String.startsWith ***/
+									for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
+										Uize.String.startsWith (_sourceStr,_identicalButFirstCharDifferent)
+									;
+							},
+
+						/*** substring identical but last char different ***/
+							function () {
+								/*** substring identical but last char different - slice equals substring ***/
+									for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
+										Uize.String.startsWithUsingSliceEqualsSubstr (_sourceStr,_identicalButLastCharDifferent)
+									;
+							},
+							function () {
+								/*** substring identical but last char different - indexOf substring equals zero ***/
+									for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
+										Uize.String.startsWithUsingIndexOfEquals0 (_sourceStr,_identicalButLastCharDifferent)
+									;
+							},
+							function () {
+								/*** substring identical but last char different - using Uize.String.startsWith ***/
+									for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
+										Uize.String.startsWith (_sourceStr,_identicalButLastCharDifferent)
+									;
+							},
+
+						/*** substring identical but shorter and different at end ***/
+							function () {
+								/*** substring identical but shorter and different at end - slice equals substring ***/
+									for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
+										Uize.String.startsWithUsingSliceEqualsSubstr (_sourceStr,_identicalButShorterAndDifferentAtEnd)
+									;
+							},
+							function () {
+								/*** substring identical but shorter and different at end - indexOf substring equals zero ***/
+									for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
+										Uize.String.startsWithUsingIndexOfEquals0 (_sourceStr,_identicalButShorterAndDifferentAtEnd)
+									;
+							},
+							function () {
+								/*** substring identical but shorter and different at end - using Uize.String.startsWith ***/
+									for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
+										Uize.String.startsWith (_sourceStr,_identicalButShorterAndDifferentAtEnd)
+									;
+							},
+
+						/*** substring is a char not in source ***/
+							function () {
+								/*** substring is a char not in source - slice equals substring ***/
+									for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
+										Uize.String.startsWithUsingSliceEqualsSubstr (_sourceStr,_charNotInSource)
+									;
+							},
+							function () {
+								/*** substring is a char not in source - indexOf substring equals zero ***/
+									for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
+										Uize.String.startsWithUsingIndexOfEquals0 (_sourceStr,_charNotInSource)
+									;
+							},
+							function () {
+								/*** substring is a char not in source - using Uize.String.startsWith ***/
+									for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
+										Uize.String.startsWith (_sourceStr,_charNotInSource)
+									;
+							},
+
+						/*** substring is an empty string ***/
+							function () {
+								/*** substring is an empty string - slice equals substring ***/
+									for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
+										Uize.String.startsWithUsingSliceEqualsSubstr (_sourceStr,_emptyString)
+									;
+							},
+							function () {
+								/*** substring is an empty string - indexOf substring equals zero ***/
+									for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
+										Uize.String.startsWithUsingIndexOfEquals0 (_sourceStr,_emptyString)
+									;
+							},
+							function () {
+								/*** substring is an empty string - using Uize.String.startsWith ***/
+									for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
+										Uize.String.startsWith (_sourceStr,_emptyString)
+									;
+							},
+
+						/*** first char at start but second char doesn't match ***/
+							function () {
+								/*** first char at start but second char doesn't match - slice equals substring ***/
+									for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
+										Uize.String.startsWithUsingSliceEqualsSubstr (_sourceStr,_firstCharAtStartButSecondCharDoesntMatch)
+									;
+							},
+							function () {
+								/*** first char at start but second char doesn't match - indexOf substring equals zero ***/
+									for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
+										Uize.String.startsWithUsingIndexOfEquals0 (_sourceStr,_firstCharAtStartButSecondCharDoesntMatch)
+									;
+							},
+							function () {
+								/*** first char at start but second char doesn't match - using Uize.String.startsWith ***/
+									for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
+										Uize.String.startsWith (_sourceStr,_firstCharAtStartButSecondCharDoesntMatch)
+									;
+							},
+
+						/*** substring identical ***/
+							function () {
+								/*** substring identical - slice equals substring ***/
+									for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
+										Uize.String.startsWithUsingSliceEqualsSubstr (_sourceStr,_identical)
+									;
+							},
+							function () {
+								/*** substring identical - indexOf substring equals zero ***/
+									for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
+										Uize.String.startsWithUsingIndexOfEquals0 (_sourceStr,_identical)
+									;
+							},
+							function () {
+								/*** substring identical - using Uize.String.startsWith ***/
+									for (_iterationNo = _totalIterations; --_iterationNo >= 0;)
+										Uize.String.startsWith (_sourceStr,_identical)
+									;
+							}
+					],
+					1000,
+					function (_executionTimes) {
+						/*** report the results ***/
+							var _testNo = 0;
+							_reportResults (
+								'<h1>Durations</h1>\n' +
+								/*** substring is longer ***/
+									'<p><b>substring is longer - slice equals substring :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n' +
+									'<p><b>substring is longer - indexOf substring equals zero :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n' +
+									'<p><b>substring is longer - using Uize.String.startsWith :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n' +
+									'<hr/>\n' +
+
+								/*** substring identical but missing last char ***/
+									'<p><b>substring identical but missing last char - slice equals substring :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n' +
+									'<p><b>substring identical but missing last char - indexOf substring equals zero :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n' +
+									'<p><b>substring identical but missing last char - using Uize.String.startsWith :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n' +
+									'<hr/>\n' +
+
+								/*** substring identical but missing first char ***/
+									'<p><b>substring identical but missing first char - slice equals substring :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n' +
+									'<p><b>substring identical but missing first char - indexOf substring equals zero :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n' +
+									'<p><b>substring identical but missing first char - using Uize.String.startsWith :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n' +
+									'<hr/>\n' +
+
+								/*** substring identical but first char different ***/
+									'<p><b>substring identical but first char different - slice equals substring :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n' +
+									'<p><b>substring identical but first char different - indexOf substring equals zero :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n' +
+									'<p><b>substring identical but first char different - using Uize.String.startsWith :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n' +
+									'<hr/>\n' +
+
+								/*** substring identical but last char different ***/
+									'<p><b>substring identical but last char different - slice equals substring :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n' +
+									'<p><b>substring identical but last char different - indexOf substring equals zero :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n' +
+									'<p><b>substring identical but last char different - using Uize.String.startsWith :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n' +
+									'<hr/>\n' +
+
+								/*** substring identical but shorter and different at end ***/
+									'<p><b>substring identical but shorter and different at end - slice equals substring :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n' +
+									'<p><b>substring identical but shorter and different at end - indexOf substring equals zero :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n' +
+									'<p><b>substring identical but shorter and different at end - using Uize.String.startsWith :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n' +
+									'<hr/>\n' +
+
+								/*** substring is a char not in source ***/
+									'<p><b>substring is a char not in source - slice equals substring :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n' +
+									'<p><b>substring is a char not in source - indexOf substring equals zero :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n' +
+									'<p><b>substring is a char not in source - using Uize.String.startsWith :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n' +
+									'<hr/>\n' +
+
+								/*** substring is an empty string ***/
+									'<p><b>substring is an empty string - slice equals substring :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n' +
+									'<p><b>substring is an empty string - indexOf substring equals zero :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n' +
+									'<p><b>substring is an empty string - using Uize.String.startsWith :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n' +
+									'<hr/>\n' +
+
+								/*** first char at start but second char doesn't match ***/
+									'<p><b>first char at start but second char doesn\'t match - slice equals substring :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n' +
+									'<p><b>first char at start but second char doesn\'t match - indexOf substring equals zero :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n' +
+									'<p><b>first char at start but second char doesn\'t match - using Uize.String.startsWith :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n' +
+									'<hr/>\n' +
+
+								/*** substring identical ***/
+									'<p><b>substring identical - slice equals substring :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n' +
+									'<p><b>substring identical - indexOf substring equals zero :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n' +
+									'<p><b>substring identical - using Uize.String.startsWith :</b> ' + _executionTimes [_testNo++] + 'ms</p>\n'
+							);
+					}
+				);
+			};
+
+		/*** wire up the page widget ***/
+			page.wireUi ();
+	}
+});
+
+</script>
+
+</body>
+</html>
+

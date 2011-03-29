@@ -1,0 +1,13 @@
+The =Uize.Scruncher= JavaScript scruncher module has been significantly optimized in order to dramatically speed up the scruncher build script, along with all other processes utilizing this module.
+
+The scruncher's algorithm for parsing and compacting JavaScript code has been optimized for speed using a variety of different optimization strategies. The end result is that scrunching a JavaScript file is now many times faster. As an illustration of this improvement, scrunching all the JavaScript modules in the *uize.com* Web site project (over 180 of them) previously took about 45 seconds on one machine. The exact same process now takes about 11 seconds on that same machine!
+
+The benefits of this performance optimization will be keenly felt in larger Web site projects that have lots of additional proprietary JavaScript modules. And, because the build script for building reference documentation from comments inside JavaScript modules also utilizes the =Uize.Scruncher= module for extracting SimpleDoc comment, the documentation build script will also run much faster.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2010-01-25 - Scruncher Gets Major Performance Upgrade
+....................................................................................

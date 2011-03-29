@@ -1,0 +1,986 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Javascript Testing Framework | Documentation | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework Documentation "/>
+	<meta name="description" content="The UIZE JavaScript Framework provides a powerful framework for developing tests (both unit tests as well as funtional tests) to test critical code and systems."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../javascript-explainers.html" class="breadcrumb breadcrumbWithArrow">EXPLAINERS</a>
+	Javascript Testing Framework
+
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="The UIZE JavaScript Framework provides a powerful framework for developing tests (both unit tests as well as funtional tests) to test critical code and systems.">1. Introduction</a></li>
+			<li><a href="#2" title="It&apos;s worth emphasizing that, while you might use the testing framework most commonly for unit testing, the testing framework is designed to support all kinds of testing.">2. All Kinds of Tests</a></li>
+			<li><a href="#3" title="In the UIZE JavaScript Framework, every test is implemented as a test class.">3. Test Class</a>
+				<ul>
+					<li><a href="#3_1" title="Every Test Class, except test classes that serve as parents of Child Tests, has a test function that is responsible for executing the actual test and then calculating and reporting the Test Result.">3.1. Test Function</a></li>
+					<li><a href="#3_2" title="The Test Result for a Test Instance, calculated by the Test Function for a test, indicates whether or not the test has passed.">3.2. Test Result</a></li>
+					<li><a href="#3_3" title="Every Test Class can have a unique and descriptive title that can be used to distinguish it from other tests in the log messages of a test runner application, or to help locate the test&apos;s code inside a Test Module when troubleshooting a test&apos;s failure.">3.3. Test Title</a></li>
+				</ul>
+			</li>
+			<li><a href="#4" title="A test is run by creating an instance of a Test Class and calling its run instance method.">4. Test Instance</a></li>
+			<li><a href="#5" title="Every test has at least one Expectation.">5. Expectation</a>
+				<ul>
+					<li><a href="#5_1" title="Expectations for a test are expressed using Expectation Methods.">5.1. Expectation Methods</a>
+						<ul>
+							<li><a href="#5_1_1" title="All of the Expectation Methods adhere to the convention that the actual value that is being tested against an expectation appears last in the arguments for the method.">5.1.1. Expectation First, Value Last</a></li>
+							<li><a href="#5_1_2" title="The Uize.Test module provides a rich array of Expectation Methods to support a variety of different types of expectations, including Equality Expectations, Type Expectations, Range Expectations, and Quality Expectations.">5.1.2. Different Types of Expectations</a>
+								<ul>
+									<li><a href="#5_1_2_1" title="An equality expectation is the most basic type of expectation, in which a test value is expected to be equal to a reference value.">5.1.2.1. Equality Expectations</a></li>
+									<li><a href="#5_1_2_2" title="A type expectation is an expectation that a test value is of a specific type, such as a string, number, boolean, object, etc.">5.1.2.2. Type Expectations</a></li>
+									<li><a href="#5_1_2_3" title="A range expectation is an expectation that a test value (or the value of one of its properties, such as the length property) is within a specific value range.">5.1.2.3. Range Expectations</a></li>
+									<li><a href="#5_1_2_4" title="A quality expectation is an expectation that a test value has a specific quality, such as being non-empty, or not having any repeated values in the case of arrays.">5.1.2.4. Quality Expectations</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li><a href="#5_2" title="A test may have more than one expectation, and these expectations can be built into a single boolean condition.">5.2. Compound Expectation</a></li>
+					<li><a href="#5_3" title="Besides simply testing whether or not an expectation is met, the Expectation Methods also record the reason for a test&apos;s failure.">5.3. Reason For Failure</a>
+						<ul>
+							<li><a href="#5_3_1" title="Let&apos;s say, for example, that we needed to test a custom add function, as shown below...">5.3.1. An Example</a></li>
+							<li><a href="#5_3_2" title="The value of the reasonForFailure property is used when generating a Test Synopsis for a Test Instance by calling the instance&apos;s getSynopsis instance method.">5.3.2. When You'll See the Reason For Failure</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li><a href="#6" title="While many tests can be synchronous, there will be some tests that will be asynchronous out of necessity - either just some of the time, or all of the time.">6. Asynchronous Tests</a>
+				<ul>
+					<li><a href="#6_1" title="When a test is asynchronous, it cannot return the Test Result in a return statement inside the Test Function.">6.1. Test Result Callback Function</a>
+						<ul>
+							<li><a href="#6_1_1" title="When a Test Instance is run and it becomes known that its Test Function is asynchronous in its execution, then the isAsync set-get property for the instance will be set to true.">6.1.1. isAsync Set-get Property</a></li>
+							<li><a href="#6_1_2" title="The Uize.Test module provides a Uize.Test.isAsync static property whose value is used as a placeholder value for the result set-get property when a test is asynchronous.">6.1.2. Uize.Test.isAsync Special Value</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li><a href="#7" title="A Test Class can either have a Test Function or it can have Child Tests.">7. Child Tests</a>
+				<ul>
+					<li><a href="#7_1" title="A Test Tree is a hierarchical set of tests that allows a multitude tests to be organized in a meaningful way.">7.1. Test Tree</a>
+						<ul>
+							<li><a href="#7_1_1" title="When a Test Class is a wrapper for Child Tests, the value of the test set-get property for the class is an array of test classes, but the child test classes are not parented.">7.1.1. Test Parenting</a></li>
+							<li><a href="#7_1_2" title="In a Test Tree, the Root Test is the test that is not a child test of some other test on the tree.">7.1.2. Root Test</a></li>
+							<li><a href="#7_1_3" title="Because a Test Class is never parented when it is used as a child test, any test class can be used in more than one Test Tree.">7.1.3. Multiple Occurrences of a Test Class</a></li>
+							<li><a href="#7_1_4" title="When a Test Instance is deep inside a Test Tree, its depth within that tree can be determined by calling its getDepth instance method.">7.1.4. Test Instance Depth</a></li>
+							<li><a href="#7_1_5" title="The total number of tests - including wrapper tests - in a Test Tree can be determined by calling the getTotalTests instance method on the instance of the Root Test for the tree.">7.1.5. Total Tests</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li><a href="#8" title="After a Test Instance has been run by calling its run instance method, a synopsis for the test can be obtained by calling the instance&apos;s getSynopsis method.">8. Test Synopsis</a>
+				<ul>
+					<li><a href="#8_1" title="When a synopsis is generated for a Test Instance using the getSynopsis method, Test Breadcrumbs are generated  to indicate where the test is in a Test Tree.">8.1. Test Breadcrumbs</a></li>
+					<li><a href="#8_2" title="The code in the example below creates a Test Tree that is three levels deep, using the Basic Test Declaration Factory Method (which makes it a bit more concise).">8.2. Test Synopsis Example</a></li>
+				</ul>
+			</li>
+			<li><a href="#9" title="When a Test Instance is run by calling its run method, the instance records certain basic metrics that can be analyzed later.">9. Test Metrics</a></li>
+			<li><a href="#10" title="Beyond the basic Test Metrics that are automatically recorded for every Test Instance by the testing framework, every Test Instance also has a log in which additional information can be stored.">10. Test Log</a>
+				<ul>
+					<li><a href="#10_1" title="Every message logged for a Test Instance is represented by a Log Message Object, which contains the text of the message along with a timestamp for when the message was logged.">10.1. Log Message Object</a>
+						<ul>
+							<li><a href="#10_1_1" title="In analyzing the results from a test, the timestamp property in the Log Message Object for logged messages can be used to calculate the durations for different portions of code in a Test Function. Consider the following example...">10.1.1. Log Message Timestamp</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li><a href="#11" title="In addition to the regular set-get property change events, the Uize.Test class supports the following custom instance events...">11. Test Events</a>
+				<ul>
+					<li><a href="#11_1" title="It is important to note that the Start and Done Test Events bubble.">11.1. Bubbling</a></li>
+				</ul>
+			</li>
+			<li><a href="#12" title="The Uize.Test class provides a number of Test Class Factory Methods that make the creation of new test classes more convenient and one&apos;s test code more concise.">12. Test Class Factory Methods</a>
+				<ul>
+					<li><a href="#12_1" title="While a basic Test Class can be created by subclassing the Uize.Test class and then setting values for the class&apos; set-get properties, a more convenient approach is to use the Uize.Test.declare static method.">12.1. Basic Test Declaration Factory Method</a></li>
+					<li><a href="#12_2" title="Beyond the Basic Test Declaration Factory Method, factory methods also exist for creating test classes in a declarative fashion for some fancier types of tests.">12.2. Factory Methods for Fancier Test Declarations</a>
+						<ul>
+							<li><a href="#12_2_1" title="A Test Class can be created to test that one or more JavaScript modules can be required and built using the Uize.Test.requiredModulesTest method.">12.2.1. Required Modules Test</a></li>
+							<li><a href="#12_2_2" title="A Test Class can be created to test that a static property is defined and that its value is of an expected type using the Uize.Test.staticPropertyTest method.">12.2.2. Static Property Test</a></li>
+							<li><a href="#12_2_3" title="A Test Class can be created to test that a static method is defined and that a set of test cases succeed using the Uize.Test.staticMethodTest method.">12.2.3. Static Method Test</a>
+								<ul>
+									<li><a href="#12_2_3_1" title="As a convenience, a Test Class can be created to test multiple static methods in a single declaration using the Uize.Test.staticMethodsTest method.">12.2.3.1. Static Methods Test</a></li>
+								</ul>
+							</li>
+							<li><a href="#12_2_4" title="A Test Class can be created to test that a Test Module can be successfully required (and loaded and built, if necessary) and that running the test module&apos;s tests is successful, using the Uize.Test.testModuleTest method.">12.2.4. Test Module Test</a></li>
+							<li><a href="#12_2_5" title="A Test Class can be created to combine multiple separate test modules into a single Test Suite using the Uize.Test.testSuite method.">12.2.5. Test Suite Test</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li><a href="#13" title="A Test Module is a JavaScript module that defines a Test Class.">13. Test Module</a>
+				<ul>
+					<li><a href="#13_1" title="A good convention to follow when naming a Test Module is to take the name of the module that it tests and prepend a test namespace under which all of your test modules will reside.">13.1. Test Namespace</a>
+						<ul>
+							<li><a href="#13_1_1" title="If you have created your own namespace for your application specific JavaScript modules (ie. non-UIZE modules), then you can create a test modules namespace under that namespace and place all your test modules under that namespace.">13.1.1. An Example</a></li>
+						</ul>
+					</li>
+					<li><a href="#13_2" title="To examine what the typical contents of a Test Module looks like, consider the following example...">13.2. Test Module Contents</a></li>
+				</ul>
+			</li>
+			<li><a href="#14" title="Any Test Class can define a hierarchical Test Tree that contains many tests, but the term Test Suite is used to refer specifically to a Test Class that combines the test classes defined by a number of different test modules into a single Test Suite Test.">14. Test Suite</a>
+				<ul>
+					<li><a href="#14_1" title="The unit tests Test Suite for the UIZE JavaScript Framework is implemented in the Uize.Test.UnitTests module.">14.1. Unit Tests Test Suite</a></li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<a name="1"></a>
+	<h1 class="heading1" title="1. Introduction"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>. </span>Introduction</h1>
+	<div class="contents1">
+		<p>The UIZE JavaScript Framework provides a powerful framework for developing tests (both unit tests as well as funtional tests) to test critical code and systems.</p>
+		
+		<p>This document describes the testing framework and how to write tests in UIZE. For the purpose of this document, it is assumed that you are already familiar with the concepts of <a href="http://en.wikipedia.org/wiki/Unit_testing" target="_blank" class="externalSiteLink">unit testing</a>, <a href="http://en.wikipedia.org/wiki/Functional_testing" target="_blank" class="externalSiteLink">functional testing</a>, and <a href="http://en.wikipedia.org/wiki/Software_performance_testing" target="_blank" class="externalSiteLink">performance testing</a>, and may have some familiarity with the concept of TDD (<a href="http://en.wikipedia.org/wiki/Test-driven_development" target="_blank" class="externalSiteLink">Test Driven Development</a>).</p>
+	</div>
+	
+	<a name="2"></a>
+	<h1 class="heading1" title="2. All Kinds of Tests"><span class="headingNumber"><a href="#2" title="2. All Kinds of Tests">2</a>. </span>All Kinds of Tests</h1>
+	<div class="contents1">
+		<p>It's worth emphasizing that, while you might use the testing framework most commonly for unit testing, the testing framework is designed to support all kinds of testing.</p>
+		
+		<p>This means that you can write unit tests, functional tests, performance tests, and other kinds of tests using this testing framework.</p>
+	</div>
+	
+	<a name="3"></a>
+	<h1 class="heading1" title="3. Test Class"><span class="headingNumber"><a href="#3" title="3. Test Class">3</a>. </span>Test Class</h1>
+	<div class="contents1">
+		<p>In the UIZE JavaScript Framework, every test is implemented as a test class.</p>
+		
+		<p>Even the smallest test, such as a test of the behavior of a method under very specific conditions, is implemented as a test class. Every test class is a subclass of the <code><a href="../reference/Uize.Test.html">Uize.Test</a></code> class.</p>
+		
+		<p><span class="allCaps">EXAMPLE</span></p>
+		
+		
+<pre class="sample-code">var My2Plus2Equals4TestClass = Uize.Test.subclass ();
+</pre>
+		
+		<a name="3_1"></a>
+		<h2 class="heading2" title="3. Test Class -&gt; 3.1. Test Function"><span class="headingNumber"><a href="#3" title="3. Test Class">3</a>.<a href="#3_1" title="3. Test Class -&gt; 3.1. Test Function">1</a>. </span>Test Function</h2>
+		<div class="contents2">
+			<p>Every <a href="#3">Test Class</a>, except test classes that serve as parents of <a href="#7">Child Tests</a>, has a test function that is responsible for executing the actual test and then calculating and reporting the <a href="#3_2">Test Result</a>.</p>
+			
+			<p>The Test Function for a Test Class is set on the <code>test</code> set-get property for the class. Consider the following example...</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">My2Plus2Equals4TestClass.set ({test:function () {return 2 + 2 == 4}});
+</pre>
+			
+			<p>In the case of synchronous tests, the Test Result is reported using a <code>return</code> statement. In the case of <a href="#6">Asynchronous Tests</a>, the Test Result is reported by calling a <a href="#6_1">Test Result Callback Function</a>. In the axample above, the Test Result is being calculated using a simple boolean expression, but it is more common to calculate the result using one or more of the available <a href="#5_1">Expectation Methods</a>. When a <a href="#4">Test Instance</a> is run by calling its <code>run</code> instance method, the Test Function is called as an instance method on the <a href="#4">Test Instance</a>. This allows the Test Function to call other instance methods on the instance, such as the <a href="#5_1">Expectation Methods</a>.</p>
+		</div>
+		
+		<a name="3_2"></a>
+		<h2 class="heading2" title="3. Test Class -&gt; 3.2. Test Result"><span class="headingNumber"><a href="#3" title="3. Test Class">3</a>.<a href="#3_2" title="3. Test Class -&gt; 3.2. Test Result">2</a>. </span>Test Result</h2>
+		<div class="contents2">
+			<p>The Test Result for a <a href="#4">Test Instance</a>, calculated by the <a href="#3_1">Test Function</a> for a test, indicates whether or not the test has passed.</p>
+			
+			<p>The <a href="#3_2">Test Result</a> is automatically set as the value of the <code>result</code> set-get property for the instance. The boolean value <code>true</code> indicates that a test has passed, while the boolean value <code>false</code> indicates that the test has failed. In the special case of asynchronous tests, the Test Result can be a special value indicating that the test is asynchronous and is still being executed (see <a href="#6">Asynchronous Tests</a>). The Test Result is determined by the <a href="#3_1">Test Function</a> for a test, and is calculated based upon every <a href="#5">Expectation</a> of the <a href="#3_1">Test Function</a> being met.</p>
+		</div>
+		
+		<a name="3_3"></a>
+		<h2 class="heading2" title="3. Test Class -&gt; 3.3. Test Title"><span class="headingNumber"><a href="#3" title="3. Test Class">3</a>.<a href="#3_3" title="3. Test Class -&gt; 3.3. Test Title">3</a>. </span>Test Title</h2>
+		<div class="contents2">
+			<p>Every <a href="#3">Test Class</a> can have a unique and descriptive title that can be used to distinguish it from other tests in the log messages of a test runner application, or to help locate the test's code inside a <a href="#13">Test Module</a> when troubleshooting a test's failure.</p>
+			
+			<p>A title is set for a Test Class by setting the value of its <code>title</code> set-get property, as shown in the example below...</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">My2Plus2Equals4TestClass.set ({title:'Test that two plus two equals four'});
+</pre>
+			
+			<p>Now, when a <a href="#4">Test Instance</a> of <code>My2Plus2Equals4TestClass</code> is created, the value of its <code>title</code> set-get property will automatically be set to the class' value for that property. If the test is part of a <a href="#7_1">Test Tree</a> and it fails when it is run, then the <a href="#8">Test Synopsis</a> for the test will automatically contain the title for the test, along with the titles of all the tests up the test parent chain, in the <a href="#8_1">Test Breadcrumbs</a> info. Looking at the synopsis that may be logged by a test runner application, it will be evident which test failed, and where the failed test is in the <a href="#7_1">Test Tree</a>.</p>
+		</div>
+	</div>
+	
+	<a name="4"></a>
+	<h1 class="heading1" title="4. Test Instance"><span class="headingNumber"><a href="#4" title="4. Test Instance">4</a>. </span>Test Instance</h1>
+	<div class="contents1">
+		<p>A test is run by creating an instance of a <a href="#3">Test Class</a> and calling its <code>run</code> instance method.</p>
+		
+		<p><span class="allCaps">EXAMPLE</span></p>
+		
+		
+<pre class="sample-code">var my2Plus2Equals4TestInstance = new My2Plus2Equals4TestClass;
+my2Plus2Equals4TestInstance.run ();
+</pre>
+		
+		<p>Multiple instances of the same test class can be created and run, separately or concurrently, with each instance retaining its <a href="#10">Test Log</a> messages, <a href="#9">Test Metrics</a>, and other state after it has been run. Additionally, instances of the same test class can occur within different test suites and can coexist without problem.</p>
+	</div>
+	
+	<a name="5"></a>
+	<h1 class="heading1" title="5. Expectation"><span class="headingNumber"><a href="#5" title="5. Expectation">5</a>. </span>Expectation</h1>
+	<div class="contents1">
+		<p>Every test has at least one Expectation.</p>
+		
+		<p>While every test has at least one expectation, tests will often have multiple expectations. All expectations for a test must be met in order for the test to succeed. Take, for example, a test for a random generator function that generates a random number within a specified range. A test for the function, providing it with a specific range, would expect that the returned result is a number and <b>also</b> that the number lies within the range specified by the test - so, two expectations.</p>
+		
+		<a name="5_1"></a>
+		<h2 class="heading2" title="5. Expectation -&gt; 5.1. Expectation Methods"><span class="headingNumber"><a href="#5" title="5. Expectation">5</a>.<a href="#5_1" title="5. Expectation -&gt; 5.1. Expectation Methods">1</a>. </span>Expectation Methods</h2>
+		<div class="contents2">
+			<p>Expectations for a test are expressed using Expectation Methods.</p>
+			
+			<p>An expectation method is an instance method that can be called on the <a href="#4">Test Instance</a> to test that a particular expectation is met. For example, to test that the result returned by some function is a number, the <code>expectNumber</code> instance method can be used. The <code><a href="../reference/Uize.Test.html">Uize.Test</a></code> module supports a wide variety of expectation methods for testing a wide variety of <a href="#5_1_2">Different Types of Expectations</a>, such as <a href="#5_1_2_2">Type Expectations</a>, <a href="#5_1_2_3">Range Expectations</a>, and other kinds of expectations.</p>
+			
+			<p>An expectation method is called as an instance method on the test and is provided with details to qualify the expectation in cases of parameterized expectations (such as a range expectation), along with the value that must meet the expectation. The method returns a boolean value, indicating whether or not the expectation is met. The result of the expectation method call can either be used as the <a href="#3_2">Test Result</a>, or it can be combined with the result of calling other expectation methods (see the section <a href="#5_2">Compound Expectation</a>). Ultimately, the <a href="#3_1">Test Function</a> must generate a boolean <a href="#3_2">Test Result</a> value, indicating whether or not the test passed.</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">My2Plus2Equals4TestClass.set ({test:function () {return this.expect (4,2 + 2)}});
+</pre>
+			
+			<a name="5_1_1"></a>
+			<h3 class="heading3" title="5. Expectation -&gt; 5.1. Expectation Methods -&gt; 5.1.1. Expectation First, Value Last"><span class="headingNumber"><a href="#5" title="5. Expectation">5</a>.<a href="#5_1" title="5. Expectation -&gt; 5.1. Expectation Methods">1</a>.<a href="#5_1_1" title="5. Expectation -&gt; 5.1. Expectation Methods -&gt; 5.1.1. Expectation First, Value Last">1</a>. </span>Expectation First, Value Last</h3>
+			<div class="contents3">
+				<p>All of the <a href="#5_1">Expectation Methods</a> adhere to the convention that the actual value that is being tested against an expectation appears last in the arguments for the method.</p>
+				
+				<p>So, for Expectation Methods that are parameterized, the parameters that qualify the expectation appear before the value that is being tested. For example, in the case of a range type expectation method, the range parameters would be specified first and then the value being tested. This is illustrated by the following examples...</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">myTestInstance.expectInRange (0,100,value);  // expect that value is in range of 0 to 100
+myTestInstance.expectType ('number',value);  // expect that value is of type 'number'
+myTestInstance.expect ('foo',value);         // expect that value is 'foo'
+</pre>
+			</div>
+			
+			<a name="5_1_2"></a>
+			<h3 class="heading3" title="5. Expectation -&gt; 5.1. Expectation Methods -&gt; 5.1.2. Different Types of Expectations"><span class="headingNumber"><a href="#5" title="5. Expectation">5</a>.<a href="#5_1" title="5. Expectation -&gt; 5.1. Expectation Methods">1</a>.<a href="#5_1_2" title="5. Expectation -&gt; 5.1. Expectation Methods -&gt; 5.1.2. Different Types of Expectations">2</a>. </span>Different Types of Expectations</h3>
+			<div class="contents3">
+				<p>The <code><a href="../reference/Uize.Test.html">Uize.Test</a></code> module provides a rich array of <a href="#5_1">Expectation Methods</a> to support a variety of different types of expectations, including <a href="#5_1_2_1">Equality Expectations</a>, <a href="#5_1_2_2">Type Expectations</a>, <a href="#5_1_2_3">Range Expectations</a>, and <a href="#5_1_2_4">Quality Expectations</a>.</p>
+				
+				<a name="5_1_2_1"></a>
+				<h4 class="heading4" title="5. Expectation -&gt; 5.1. Expectation Methods -&gt; 5.1.2. Different Types of Expectations -&gt; 5.1.2.1. Equality Expectations"><span class="headingNumber"><a href="#5" title="5. Expectation">5</a>.<a href="#5_1" title="5. Expectation -&gt; 5.1. Expectation Methods">1</a>.<a href="#5_1_2" title="5. Expectation -&gt; 5.1. Expectation Methods -&gt; 5.1.2. Different Types of Expectations">2</a>.<a href="#5_1_2_1" title="5. Expectation -&gt; 5.1. Expectation Methods -&gt; 5.1.2. Different Types of Expectations -&gt; 5.1.2.1. Equality Expectations">1</a>. </span>Equality Expectations</h4>
+				<div class="contents4">
+					<p>An equality expectation is the most basic type of expectation, in which a test value is expected to be equal to a reference value.</p>
+					
+					<p>Built-in <a href="#5_1">Expectation Methods</a> that support equality expectations include: <code>expect</code>, and <code>expectSameAs</code>.</p>
+				</div>
+				
+				<a name="5_1_2_2"></a>
+				<h4 class="heading4" title="5. Expectation -&gt; 5.1. Expectation Methods -&gt; 5.1.2. Different Types of Expectations -&gt; 5.1.2.2. Type Expectations"><span class="headingNumber"><a href="#5" title="5. Expectation">5</a>.<a href="#5_1" title="5. Expectation -&gt; 5.1. Expectation Methods">1</a>.<a href="#5_1_2" title="5. Expectation -&gt; 5.1. Expectation Methods -&gt; 5.1.2. Different Types of Expectations">2</a>.<a href="#5_1_2_2" title="5. Expectation -&gt; 5.1. Expectation Methods -&gt; 5.1.2. Different Types of Expectations -&gt; 5.1.2.2. Type Expectations">2</a>. </span>Type Expectations</h4>
+				<div class="contents4">
+					<p>A type expectation is an expectation that a test value is of a specific type, such as a string, number, boolean, object, etc.</p>
+					
+					<p>Built-in <a href="#5_1">Expectation Methods</a> that support type expectations include: <code>expectArray</code>, <code>ecpectArrayLike</code>, <code>expectBoolean</code>, <code>expectFunction</code>, <code>expectInstanceOf</code>, <code>expectInteger</code>, <code>expectNumber</code>, <code>expectObject</code>, <code>expectRegExp</code>, <code>expectString</code>, and <code>expectType</code>.</p>
+				</div>
+				
+				<a name="5_1_2_3"></a>
+				<h4 class="heading4" title="5. Expectation -&gt; 5.1. Expectation Methods -&gt; 5.1.2. Different Types of Expectations -&gt; 5.1.2.3. Range Expectations"><span class="headingNumber"><a href="#5" title="5. Expectation">5</a>.<a href="#5_1" title="5. Expectation -&gt; 5.1. Expectation Methods">1</a>.<a href="#5_1_2" title="5. Expectation -&gt; 5.1. Expectation Methods -&gt; 5.1.2. Different Types of Expectations">2</a>.<a href="#5_1_2_3" title="5. Expectation -&gt; 5.1. Expectation Methods -&gt; 5.1.2. Different Types of Expectations -&gt; 5.1.2.3. Range Expectations">3</a>. </span>Range Expectations</h4>
+				<div class="contents4">
+					<p>A range expectation is an expectation that a test value (or the value of one of its properties, such as the <code>length</code> property) is within a specific value range.</p>
+					
+					<p>Built-in <a href="#5_1">Expectation Methods</a> that support range expectations include: <code>expectInRange</code>, <code>expectIntegerInRange</code>, <code>expectLengthInRange</code>, <code>expectNegativeInteger</code>, <code>expectNegativeNumber</code>, <code>expectNumberInRange</code>, <code>expectPositiveInteger</code>, and <code>expectPositiveNumber</code>.</p>
+				</div>
+				
+				<a name="5_1_2_4"></a>
+				<h4 class="heading4" title="5. Expectation -&gt; 5.1. Expectation Methods -&gt; 5.1.2. Different Types of Expectations -&gt; 5.1.2.4. Quality Expectations"><span class="headingNumber"><a href="#5" title="5. Expectation">5</a>.<a href="#5_1" title="5. Expectation -&gt; 5.1. Expectation Methods">1</a>.<a href="#5_1_2" title="5. Expectation -&gt; 5.1. Expectation Methods -&gt; 5.1.2. Different Types of Expectations">2</a>.<a href="#5_1_2_4" title="5. Expectation -&gt; 5.1. Expectation Methods -&gt; 5.1.2. Different Types of Expectations -&gt; 5.1.2.4. Quality Expectations">4</a>. </span>Quality Expectations</h4>
+				<div class="contents4">
+					<p>A quality expectation is an expectation that a test value has a specific quality, such as being non-empty, or not having any repeated values in the case of arrays.</p>
+					
+					<p>Built-in <a href="#5_1">Expectation Methods</a> that support quality expectations include: <code>expectNoRepeats</code>, <code>expectNonEmpty</code>, <code>expectNonEmptyArray</code>, <code>expectNonEmptyObject</code>, <code>expectNonEmptyString</code>, and <code>expectNonNull</code>.</p>
+				</div>
+			</div>
+		</div>
+		
+		<a name="5_2"></a>
+		<h2 class="heading2" title="5. Expectation -&gt; 5.2. Compound Expectation"><span class="headingNumber"><a href="#5" title="5. Expectation">5</a>.<a href="#5_2" title="5. Expectation -&gt; 5.2. Compound Expectation">2</a>. </span>Compound Expectation</h2>
+		<div class="contents2">
+			<p>A test may have more than one expectation, and these expectations can be built into a single boolean condition.</p>
+			
+			<p>If multiple calls to <a href="#5_1">Expectation Methods</a> are chained together into a single boolean expression using the <code>&amp;&amp;</code> operator, then the short circuiting behavior of boolean expressions will result in the first expectation that is not met terminating evaluation of the expression. Consider the following example...</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">RandomInRangeTestClass.set ({
+  test:function () {
+    var result = randomInRange (15,20);
+    return this.expectNumber (result) &amp;&amp; this.expectInRange (15,20,result);
+  }
+});
+</pre>
+			
+			<p>In the above example, a <a href="#3_1">Test Function</a> is being set for a <a href="#3">Test Class</a> that has been created to test a <code>randomInRange</code> function. The <a href="#3_1">Test Function</a> calls the <code>randomInRange</code> function, captures the result, and then returns the result of a <a href="#5_2">Compound Expectation</a> boolean expression. The first expectation is that the result is a number, while the second expectation is that the result is in the range of <code>15</code> to <code>20</code>. If the result is not a number, then the call to the <code>expectNumber</code> instance method will return the value <code>false</code>, causing the boolean expression to terminate evaluation and the <code>expectInRange</code> method would not be called.</p>
+		</div>
+		
+		<a name="5_3"></a>
+		<h2 class="heading2" title="5. Expectation -&gt; 5.3. Reason For Failure"><span class="headingNumber"><a href="#5" title="5. Expectation">5</a>.<a href="#5_3" title="5. Expectation -&gt; 5.3. Reason For Failure">3</a>. </span>Reason For Failure</h2>
+		<div class="contents2">
+			<p>Besides simply testing whether or not an expectation is met, the <a href="#5_1">Expectation Methods</a> also record the reason for a test's failure.</p>
+			
+			<p>The reason for a test's failure is recorded in the <code>reasonForFailure</code> set-get property of a <a href="#4">Test Instance</a>. While the value for this property can be set explicitly inside a <a href="#3_1">Test Function</a>, the value is automatically set when using the <a href="#5_1">Expectation Methods</a> and when an expectation is not met.</p>
+			
+			<a name="5_3_1"></a>
+			<h3 class="heading3" title="5. Expectation -&gt; 5.3. Reason For Failure -&gt; 5.3.1. An Example"><span class="headingNumber"><a href="#5" title="5. Expectation">5</a>.<a href="#5_3" title="5. Expectation -&gt; 5.3. Reason For Failure">3</a>.<a href="#5_3_1" title="5. Expectation -&gt; 5.3. Reason For Failure -&gt; 5.3.1. An Example">1</a>. </span>An Example</h3>
+			<div class="contents3">
+				<p>Let's say, for example, that we needed to test a custom add function, as shown below...</p>
+				
+				<p><span class="allCaps">ADD FUNCTION</span></p>
+				
+				
+<pre class="sample-code">function add (a,b) {
+  return a - b; // &lt;--- OUR FUNCTION HAS A BUG!!!
+}
+</pre>
+				
+				<p>As you can see, our <code>add</code> function has a bug in it. Now let's say that we created a <a href="#3">Test Class</a> for this function (we'll call it <code>AddFunctionTestClass</code>) and tested to see that adding <code>2</code> and <code>2</code> produced <code>4</code>, as we would expect. The <a href="#3_1">Test Function</a> for the <a href="#3">Test Class</a> could be writted as follows...</p>
+				
+				<p><span class="allCaps">NOT USING EXPECTATION METHOD</span></p>
+				
+				
+<pre class="sample-code">AddFunctionTestClass.set ({test:function () {return add (2,2) == 4}});
+</pre>
+				
+				<p>With the bug in our <code>add</code> function, the above Test Function would return the value <code>false</code> to indicate that the test failed. This is fine, but we're missing a <a href="#5_3">Reason For Failure</a>. If we use one of the <a href="#5_1">Expectation Methods</a>, then we get the reason for failure set for us automatically. The above statement could be rewritten as follows...</p>
+				
+				<p><span class="allCaps">USING EXPECTATION METHOD</span></p>
+				
+				
+<pre class="sample-code">AddFunctionTestClass.set ({test:function () {return this.expect (4,add (2,2))});
+</pre>
+				
+				<p>The <code>expect</code> instance method compares the expected value (the first parameter) to the actual value (the second parameter). If the values don't match, then the expectation is not met, the method returns the value <code>false</code>, and it sets a value for the <code>reasonForFailure</code> set-get property along the lines of...</p>
+				
+				<p><span class="allCaps">REASON FOR FAILURE</span></p>
+				
+				
+<pre class="sample-code">EXPECTED:
+
+4
+
+ACTUAL:
+
+0
+</pre>
+			</div>
+			
+			<a name="5_3_2"></a>
+			<h3 class="heading3" title="5. Expectation -&gt; 5.3. Reason For Failure -&gt; 5.3.2. When You&apos;ll See the Reason For Failure"><span class="headingNumber"><a href="#5" title="5. Expectation">5</a>.<a href="#5_3" title="5. Expectation -&gt; 5.3. Reason For Failure">3</a>.<a href="#5_3_2" title="5. Expectation -&gt; 5.3. Reason For Failure -&gt; 5.3.2. When You&apos;ll See the Reason For Failure">2</a>. </span>When You'll See the Reason For Failure</h3>
+			<div class="contents3">
+				<p>The value of the <code>reasonForFailure</code> property is used when generating a <a href="#8">Test Synopsis</a> for a <a href="#4">Test Instance</a> by calling the instance's <code>getSynopsis</code> instance method.</p>
+				
+				<p>When running tests in a <a href="#14">Test Suite</a>, it is very convenient that the <a href="#5_1">Expectation Methods</a> set the <code>reasonForFailure</code> value, since this information is reported along with the breadcrumbs for a specific <a href="#4">Test Instance</a> that fails and makes it easier to locate that test's code in the <a href="#13">Test Module</a> so that troubleshooting can be performed.</p>
+			</div>
+		</div>
+	</div>
+	
+	<a name="6"></a>
+	<h1 class="heading1" title="6. Asynchronous Tests"><span class="headingNumber"><a href="#6" title="6. Asynchronous Tests">6</a>. </span>Asynchronous Tests</h1>
+	<div class="contents1">
+		<p>While many tests can be synchronous, there will be some tests that will be asynchronous out of necessity - either just some of the time, or all of the time.</p>
+		
+		<p>A test being asynchronous means that the code inside the <a href="#3_1">Test Function</a> is asynchronous. This might be because timeouts are involved, or because the test may test some functionality that involves the use of asynchronous communication (eg. Ajax communication to a server).</p>
+		
+		<a name="6_1"></a>
+		<h2 class="heading2" title="6. Asynchronous Tests -&gt; 6.1. Test Result Callback Function"><span class="headingNumber"><a href="#6" title="6. Asynchronous Tests">6</a>.<a href="#6_1" title="6. Asynchronous Tests -&gt; 6.1. Test Result Callback Function">1</a>. </span>Test Result Callback Function</h2>
+		<div class="contents2">
+			<p>When a test is asynchronous, it cannot return the <a href="#3_2">Test Result</a> in a <code>return</code> statement inside the <a href="#3_1">Test Function</a>.</p>
+			
+			<p>Instead, the <a href="#3_1">Test Function</a> must report the <a href="#3_2">Test Result</a> using a callback function that is provided to it when it is called. Consider the following example...</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">MyTimeoutTestClass.set ({
+  test:function (testResultCallback) {
+    var whenTimeoutSet = new Date;
+    setTimeout (
+      function () {
+        testResultCallback (this.expectInRange (1000,Infinity,new Date - whenTimeoutSet));
+      },
+      1000
+    );
+  }
+});
+</pre>
+			
+			<p>In the above example, a <a href="#3_1">Test Function</a> is being set for the test class <code>MyTimeoutTestClass</code>. This test is testing JavaScript's built-in <code>setTimeout</code> function to make sure that the code to be executed at the end of the timeout isn't executed before the timeout duration has elapsed. The <a href="#3_1">Test Function</a> is, therefore, guaranteed here to be asynchronous.</p>
+			
+			<p>Now, the time is captured right before the timeout is set and assigned to the <code>whenTimeoutSet</code> variable. The timeout is then set with a duration of <code>1000</code> milliseconds. The code executed by the timeout tests that at least a second has elapsed since the timeout was set. It does this by subtracting the value of the <code>whenTimeoutSet</code> variable from the current time, and then using the <code>expectInRange</code> expectation method to test that the elapsed time is in the range of <code>1000</code> to <code>Infinity</code>. The <a href="#3_2">Test Result</a> that is calculated in this way is then "reported" by calling the <a href="#6_1">Test Result Callback Function</a> (named <code>testResultCallback</code> here) and passing the result as the single parameter.</p>
+			
+			<p>Looking at the code in this example, you should notice a few things. First, the <a href="#6_1">Test Result Callback Function</a> is passed to the <a href="#3_1">Test Function</a> as a parameter. If your test function is not asynchronous, then you don't need to declare this parameter. If you <b>do</b> choose to declare the parameter for use in an asynchronous test, you can name it however you like - just refer to it by that name when you use it inside your test function's code. Another thing you'll notice is that the <a href="#3_1">Test Function</a> has no <code>return</code> statement. Without a <code>return</code> statement, the function will return the value <code>undefined</code> by default. The <code><a href="../reference/Uize.Test.html">Uize.Test</a></code> class interprets this to mean that the test is asynchronous, so there's no need to return a special value or otherwise indicate that the test is asynchronous. Finally, you'll notice that you can still use <a href="#5_1">Expectation Methods</a> in asynchronous tests - the only difference is that the <a href="#3_2">Test Result</a> is being calculated at the end of some asynchronous code execution.</p>
+			
+			<a name="6_1_1"></a>
+			<h3 class="heading3" title="6. Asynchronous Tests -&gt; 6.1. Test Result Callback Function -&gt; 6.1.1. isAsync Set-get Property"><span class="headingNumber"><a href="#6" title="6. Asynchronous Tests">6</a>.<a href="#6_1" title="6. Asynchronous Tests -&gt; 6.1. Test Result Callback Function">1</a>.<a href="#6_1_1" title="6. Asynchronous Tests -&gt; 6.1. Test Result Callback Function -&gt; 6.1.1. isAsync Set-get Property">1</a>. </span>isAsync Set-get Property</h3>
+			<div class="contents3">
+				<p>When a <a href="#4">Test Instance</a> is run and it becomes known that its <a href="#3_1">Test Function</a> is asynchronous in its execution, then the <code>isAsync</code> set-get property for the instance will be set to <code>true</code>.</p>
+				
+				<p>Whenever an instance's <code>isAsync</code> property is set to <code>true</code>, the value of its <code>result</code> set-get property will be set to <a href="#6_1_2">Uize.Test.isAsync Special Value</a>.</p>
+			</div>
+			
+			<a name="6_1_2"></a>
+			<h3 class="heading3" title="6. Asynchronous Tests -&gt; 6.1. Test Result Callback Function -&gt; 6.1.2. Uize.Test.isAsync Special Value"><span class="headingNumber"><a href="#6" title="6. Asynchronous Tests">6</a>.<a href="#6_1" title="6. Asynchronous Tests -&gt; 6.1. Test Result Callback Function">1</a>.<a href="#6_1_2" title="6. Asynchronous Tests -&gt; 6.1. Test Result Callback Function -&gt; 6.1.2. Uize.Test.isAsync Special Value">2</a>. </span>Uize.Test.isAsync Special Value</h3>
+			<div class="contents3">
+				<p>The <code><a href="../reference/Uize.Test.html">Uize.Test</a></code> module provides a <code>Uize.Test.isAsync</code> static property whose value is used as a placeholder value for the <code>result</code> set-get property when a test is asynchronous.</p>
+				
+				<p>As soon as it is known that the <a href="#3_1">Test Function</a> for a <a href="#4">Test Instance</a> will produce its <a href="#3_2">Test Result</a> asynchronously, the value of the instance's <code>result</code> property is set to the value of the <code>Uize.Test.isAsync</code> static property. You can think of the <code>Uize.Test.isAsync</code> static property as being like a constant. Whenever the <code>result</code> property is set to <code>Uize.Test.isAsync</code>, the <a href="#6_1_1">isAsync Set-get Property</a> will also be set to <code>true</code>.</p>
+			</div>
+		</div>
+	</div>
+	
+	<a name="7"></a>
+	<h1 class="heading1" title="7. Child Tests"><span class="headingNumber"><a href="#7" title="7. Child Tests">7</a>. </span>Child Tests</h1>
+	<div class="contents1">
+		<p>A <a href="#3">Test Class</a> can either have a <a href="#3_1">Test Function</a> or it can have Child Tests.</p>
+		
+		<p>A basic <a href="#3">Test Class</a> simply has a <a href="#3_1">Test Function</a> and doesn't serve as a wrapper / container. A <a href="#3">Test Class</a> becomes a wrapper for child tests when the value of its <code>test</code> set-get property is an array, where each element of the array is a <a href="#3">Test Class</a>. Using this facility, the basic building block of the <a href="#3">Test Class</a> can be used to create an arbitrarily structured <a href="#7_1">Test Tree</a>.</p>
+		
+		<a name="7_1"></a>
+		<h2 class="heading2" title="7. Child Tests -&gt; 7.1. Test Tree"><span class="headingNumber"><a href="#7" title="7. Child Tests">7</a>.<a href="#7_1" title="7. Child Tests -&gt; 7.1. Test Tree">1</a>. </span>Test Tree</h2>
+		<div class="contents2">
+			<p>A Test Tree is a hierarchical set of tests that allows a multitude tests to be organized in a meaningful way.</p>
+			
+			<a name="7_1_1"></a>
+			<h3 class="heading3" title="7. Child Tests -&gt; 7.1. Test Tree -&gt; 7.1.1. Test Parenting"><span class="headingNumber"><a href="#7" title="7. Child Tests">7</a>.<a href="#7_1" title="7. Child Tests -&gt; 7.1. Test Tree">1</a>.<a href="#7_1_1" title="7. Child Tests -&gt; 7.1. Test Tree -&gt; 7.1.1. Test Parenting">1</a>. </span>Test Parenting</h3>
+			<div class="contents3">
+				<p>When a <a href="#3">Test Class</a> is a wrapper for <a href="#7">Child Tests</a>, the value of the <code>test</code> set-get property for the class is an array of test classes, but the child test classes are not parented.</p>
+				
+				<p>A Test Class is never parented - only a <a href="#4">Test Instance</a> is parented. When a <a href="#3">Test Class</a> has child tests, the value of the <code>test</code> set-get property for the class is an array of test classes. When an instance is created of a test class that has child tests, then the value of the <code>test</code> set-get property for the instance is an array of instances of the child tests, and those child test instances will be parented to the instance of the test class that has the child tests. Consider the following example...</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">var
+  MyTestClass1 = Uize.Test.subclass (),  // this will be used as a child test
+  MyTestClass2 = Uize.Test.subclass (),  // this will also be used as a child test
+  MyTestClass3 = Uize.Test.subclass ()   // this will be used as a wrapper test
+;
+MyTestClass3.set ({test:[MyTestClass1,MyTestClass2]});
+var myTestClass3Instance = new MyTestClass3;
+</pre>
+				
+				<p>In the above example, the test class <code>MyTestClass3</code> is serving as a wrapper that has <code>MyTestClass1</code> and <code>MyTestClass2</code> as <a href="#7">Child Tests</a>. An instance of the <code>MyTestClass3</code> class is created and assigned to the variable <code>myTestClass3Instance</code>. For this instance, the value of its <code>test</code> set-get property will be an array, where the first element is an instance of <code>MyTestClass1</code> and the second element is an instance of <code>MyTestClass2</code>, and where the value of the <code>parent</code> instance property for both of those child test instances will be a reference to the instance <code>myTestClass3Instance</code>. In contrast, the value of the <code>test</code> set-get property for the class <code>MyTestClass3</code> is an array where the first element is <code>MyTestClass1</code> and the second element is <code>MyTestClass2</code> - there is no static property on the <code>MyTestClass1</code> and <code>MyTestClass2</code> classes that links them to the <code>MyTestClass1</code> class.</p>
+				
+				<p>Now, when the <code>myTestClass3Instance</code> test instance is run, the instances of the child tests will be run in the order in which they appear in the array of child tests.</p>
+			</div>
+			
+			<a name="7_1_2"></a>
+			<h3 class="heading3" title="7. Child Tests -&gt; 7.1. Test Tree -&gt; 7.1.2. Root Test"><span class="headingNumber"><a href="#7" title="7. Child Tests">7</a>.<a href="#7_1" title="7. Child Tests -&gt; 7.1. Test Tree">1</a>.<a href="#7_1_2" title="7. Child Tests -&gt; 7.1. Test Tree -&gt; 7.1.2. Root Test">2</a>. </span>Root Test</h3>
+			<div class="contents3">
+				<p>In a <a href="#7_1">Test Tree</a>, the Root Test is the test that is not a child test of some other test on the tree.</p>
+				
+				<p>A Root Test <b>can</b> be a child test in some other test tree, however, since a test tree can be "grafted in" to a larger test tree by making its root test a child test somewhere in the structure of some other test tree.</p>
+			</div>
+			
+			<a name="7_1_3"></a>
+			<h3 class="heading3" title="7. Child Tests -&gt; 7.1. Test Tree -&gt; 7.1.3. Multiple Occurrences of a Test Class"><span class="headingNumber"><a href="#7" title="7. Child Tests">7</a>.<a href="#7_1" title="7. Child Tests -&gt; 7.1. Test Tree">1</a>.<a href="#7_1_3" title="7. Child Tests -&gt; 7.1. Test Tree -&gt; 7.1.3. Multiple Occurrences of a Test Class">3</a>. </span>Multiple Occurrences of a Test Class</h3>
+			<div class="contents3">
+				<p>Because a <a href="#3">Test Class</a> is never parented when it is used as a child test, any test class can be used in more than one <a href="#7_1">Test Tree</a>.</p>
+				
+				<p>This could be useful when creating different tests that have different emphasis in what they cover, but where there might be some overlaps.</p>
+			</div>
+			
+			<a name="7_1_4"></a>
+			<h3 class="heading3" title="7. Child Tests -&gt; 7.1. Test Tree -&gt; 7.1.4. Test Instance Depth"><span class="headingNumber"><a href="#7" title="7. Child Tests">7</a>.<a href="#7_1" title="7. Child Tests -&gt; 7.1. Test Tree">1</a>.<a href="#7_1_4" title="7. Child Tests -&gt; 7.1. Test Tree -&gt; 7.1.4. Test Instance Depth">4</a>. </span>Test Instance Depth</h3>
+			<div class="contents3">
+				<p>When a <a href="#4">Test Instance</a> is deep inside a <a href="#7_1">Test Tree</a>, its depth within that tree can be determined by calling its <code>getDepth</code> instance method.</p>
+			</div>
+			
+			<a name="7_1_5"></a>
+			<h3 class="heading3" title="7. Child Tests -&gt; 7.1. Test Tree -&gt; 7.1.5. Total Tests"><span class="headingNumber"><a href="#7" title="7. Child Tests">7</a>.<a href="#7_1" title="7. Child Tests -&gt; 7.1. Test Tree">1</a>.<a href="#7_1_5" title="7. Child Tests -&gt; 7.1. Test Tree -&gt; 7.1.5. Total Tests">5</a>. </span>Total Tests</h3>
+			<div class="contents3">
+				<p>The total number of tests - including wrapper tests - in a <a href="#7_1">Test Tree</a> can be determined by calling the <code>getTotalTests</code> instance method on the instance of the <a href="#7_1_2">Root Test</a> for the tree.</p>
+				
+				<p>The <code>getTotalTests</code> method recurses through the entire tree, essentially flattening the tree in order to count the total number of actual tests that would be performed. The method includes parent tests in the tally, along with all child tests. For example, if the <a href="#7_1_2">Root Test</a> contained two child tests, and each one of those child tests contained two child tests, then the total number of tests in the tree would be <code>7</code> - one root test, two child tests, and four grandchild tests.</p>
+			</div>
+		</div>
+	</div>
+	
+	<a name="8"></a>
+	<h1 class="heading1" title="8. Test Synopsis"><span class="headingNumber"><a href="#8" title="8. Test Synopsis">8</a>. </span>Test Synopsis</h1>
+	<div class="contents1">
+		<p>After a <a href="#4">Test Instance</a> has been run by calling its <code>run</code> instance method, a synopsis for the test can be obtained by calling the instance's <code>getSynopsis</code> method.</p>
+		
+		<p>The synopsis for a test contains the following information...</p>
+		
+		<table class="list">
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>a friendly representation ("PASSED" or "FAILED") of the <a href="#3_2">Test Result</a></td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>breadcrumbs to indicate where the test is in a <a href="#7_1">Test Tree</a> (see <a href="#8_1">Test Breadcrumbs</a>)</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>when the test started and ended and its duration (see <a href="#9">Test Metrics</a>)</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the <a href="#5_3">Reason For Failure</a>, if the test failed</td></tr>
+		</table>
+		<a name="8_1"></a>
+		<h2 class="heading2" title="8. Test Synopsis -&gt; 8.1. Test Breadcrumbs"><span class="headingNumber"><a href="#8" title="8. Test Synopsis">8</a>.<a href="#8_1" title="8. Test Synopsis -&gt; 8.1. Test Breadcrumbs">1</a>. </span>Test Breadcrumbs</h2>
+		<div class="contents2">
+			<p>When a synopsis is generated for a <a href="#4">Test Instance</a> using the <code>getSynopsis</code> method, Test Breadcrumbs are generated  to indicate where the test is in a <a href="#7_1">Test Tree</a>.</p>
+			
+			<p>The breadcrumbs are generated for an instance by concatenating the titles of all instances up the parent chain to the <a href="#7_1_2">Root Test</a>. This can be seen in the <a href="#8_2">Test Synopsis Example</a>.</p>
+		</div>
+		
+		<a name="8_2"></a>
+		<h2 class="heading2" title="8. Test Synopsis -&gt; 8.2. Test Synopsis Example"><span class="headingNumber"><a href="#8" title="8. Test Synopsis">8</a>.<a href="#8_2" title="8. Test Synopsis -&gt; 8.2. Test Synopsis Example">2</a>. </span>Test Synopsis Example</h2>
+		<div class="contents2">
+			<p>The code in the example below creates a <a href="#7_1">Test Tree</a> that is three levels deep, using the <a href="#12_1">Basic Test Declaration Factory Method</a> (which makes it a bit more concise).</p>
+			
+			<p>The <a href="#7_1_2">Root Test</a> has a single child test, and its child test in turn has a child test (so, it's a grandchild test). The <a href="#3_1">Test Function</a> for the grandchild test is designed to deliberately fail so that we can see what kind of synopsis is generated in this case. The test fails because we are calling the <code>expect</code> instance method and expecting the string value <code>'foo'</code>, but the actual value being tested against this expectation is <code>'bar'</code>.</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">var
+  MyTestClass = Uize.Test.declare ({
+    title:'This is the root test',
+    test:[
+      {
+        title:'This is a child test',
+        test:[
+          {
+            title:'This is a grandchild test',
+            test:function () {return this.expect ('foo','bar')}
+          }
+        ]
+      }
+    ]
+  }),
+  myTestClassInstance = new MyTestClass
+;
+myTestClassInstance.wire (
+  'Done',
+  function (e) {if (e.source.get ('reasonForFailure')) alert (e.source.getSynopsis ())}
+);
+myTestClassInstance.run ();
+</pre>
+			
+			<p>When the above code is executed, a synopsis as shown below will be displayed in an <code>alert</code> dialog...</p>
+			
+			<p><span class="allCaps">SYNOPSIS</span></p>
+			
+			
+<pre class="sample-code">FAILED
+
+----------------------------------------------------------
+
+BREADCRUMBS...
+
+This is the root test
+  This is a child test
+    This is a grandchild test
+
+----------------------------------------------------------
+
+TIME STARTED: Fri Sep 24 2010 16:49:48 GMT-0700 (Pacific Daylight Time)
+TIME ENDED: Fri Sep 24 2010 16:49:48 GMT-0700 (Pacific Daylight Time)
+DURATION: 10ms
+
+----------------------------------------------------------
+
+REASON FOR FAILURE...
+
+EXPECTED:
+
+'foo'
+
+ACTUAL:
+
+'bar'
+</pre>
+		</div>
+	</div>
+	
+	<a name="9"></a>
+	<h1 class="heading1" title="9. Test Metrics"><span class="headingNumber"><a href="#9" title="9. Test Metrics">9</a>. </span>Test Metrics</h1>
+	<div class="contents1">
+		<p>When a <a href="#4">Test Instance</a> is run by calling its <code>run</code> method, the instance records certain basic metrics that can be analyzed later.</p>
+		
+		<p>The metrics are recorded in the following set-get properties...</p>
+		
+		<table class="list">
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>startTime</code> - a <code><a href="../javascript-reference/Date.html">Date</a></code> object instance, indicating the time that the test was started</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>endTime</code> - a <code><a href="../javascript-reference/Date.html">Date</a></code> object instance, indicating the time that the test completed running</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>duration</code> - a number, indicating how long (in milliseconds) it took for the test to run</td></tr>
+		</table>
+		<p>Values for these set-get properties are set automatically by the testing framework - it is not necessary to write additional code for measuring the durations of tests. Time metrics can be useful when specifically designing performance tests. Beyond the automatically recorded time metrics, additional information can be stored in the <a href="#10">Test Log</a>.</p>
+	</div>
+	
+	<a name="10"></a>
+	<h1 class="heading1" title="10. Test Log"><span class="headingNumber"><a href="#10" title="10. Test Log">10</a>. </span>Test Log</h1>
+	<div class="contents1">
+		<p>Beyond the basic <a href="#9">Test Metrics</a> that are automatically recorded for every <a href="#4">Test Instance</a> by the testing framework, every Test Instance also has a log in which additional information can be stored.</p>
+		
+		<p>The test log for an instance is exposed through its <code>log</code> set-get property, which is an array where each element of the array is a <a href="#10_1">Log Message Object</a>. A message can be added to the log for an instance by calling its <code>log</code> instance method, as shown in the following example...</p>
+		
+		<p><span class="allCaps">EXAMPLE</span></p>
+		
+		
+<pre class="sample-code">My2Plus2Equals4TestClass.set ({
+  test:function () {
+    this.log ('about to calculate 2 + 2');
+    var value = 2 + 2;
+    this.log ('finished calculating 2 + 2');
+    return this.expect (4,value);
+  }
+});
+</pre>
+		
+		<p>In the above example, two log messages are being added - one right before we perform our test operation (adding <code>2</code> and <code>2</code>), and the other right after the calculation. After an instance of <code>My2Plus2Equals4TestClass</code> has been run, the value of that instance's <code>log</code> set-get property will be an array containing the two logged messages. Notice that, in the call to the <code>log</code> instance method, only the text for the log message is supplied - the timestamp for each log message is recorded automatically by the testing framework and is stored in the <a href="#10_1">Log Message Object</a>.</p>
+		
+		<a name="10_1"></a>
+		<h2 class="heading2" title="10. Test Log -&gt; 10.1. Log Message Object"><span class="headingNumber"><a href="#10" title="10. Test Log">10</a>.<a href="#10_1" title="10. Test Log -&gt; 10.1. Log Message Object">1</a>. </span>Log Message Object</h2>
+		<div class="contents2">
+			<p>Every message logged for a <a href="#4">Test Instance</a> is represented by a Log Message Object, which contains the text of the message along with a timestamp for when the message was logged.</p>
+			
+			<p><span class="allCaps">LOG MESSAGE OBJECT</span></p>
+			
+			
+<pre class="sample-code">{
+  message   : messageSTR,  // the text of the log message
+  timestamp : dataOBJ      // the time at which the message was added to the log
+}
+</pre>
+			
+			<a name="10_1_1"></a>
+			<h3 class="heading3" title="10. Test Log -&gt; 10.1. Log Message Object -&gt; 10.1.1. Log Message Timestamp"><span class="headingNumber"><a href="#10" title="10. Test Log">10</a>.<a href="#10_1" title="10. Test Log -&gt; 10.1. Log Message Object">1</a>.<a href="#10_1_1" title="10. Test Log -&gt; 10.1. Log Message Object -&gt; 10.1.1. Log Message Timestamp">1</a>. </span>Log Message Timestamp</h3>
+			<div class="contents3">
+				<p>In analyzing the results from a test, the <code>timestamp</code> property in the <a href="#10_1">Log Message Object</a> for logged messages can be used to calculate the durations for different portions of code in a <a href="#3_1">Test Function</a>. Consider the following example...</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">function timeBetweenLogEntries (testInstance,entryA,entryB) {
+  if (entryA == entryB) return 0;
+  var
+    log = testInstance.get ('log') || [],
+    lastEntryNo = log.length - 1,
+    startTime = testInstance.get ('startTime'),
+    endTime = testInstance.get ('endTime')
+  ;
+  return (
+    (entryB &gt; lastEntryNo ? endTime : entryB &lt; 0 ? startTime : log [entryB].timestamp) -
+    (entryA &gt; lastEntryNo ? endTime : entryA &lt; 0 ? startTime : log [entryA].timestamp)
+  );
+}
+
+function timeFromPreviousLogEntry (testInstance,entry) {
+  return timeBetweenLogEntries (testInstance,entry - 1,entry);
+}
+
+function timeTillNextLogEntry (testInstance,entry) {
+  return timeBetweenLogEntries (testInstance,entry,entry + 1);
+}
+</pre>
+				
+				<p>In the above example, three utility functions are defined for calculating the time between log entries for a specified <a href="#4">Test Instance</a>. The <code>timeBetweenLogEntries</code> function calculates the time between two log entries, the <code>timeFromPreviousLogEntry</code> function calculates the time from the previous log entry to the specified log entry, and the <code>timeTillNextLogEntry</code> function calculates the time from the specified log entry to the next log entry. When there is no previous log entry, then the start time for the test is used. When there is no next log entry, then the end time for the test is used.</p>
+			</div>
+		</div>
+	</div>
+	
+	<a name="11"></a>
+	<h1 class="heading1" title="11. Test Events"><span class="headingNumber"><a href="#11" title="11. Test Events">11</a>. </span>Test Events</h1>
+	<div class="contents1">
+		<p>In addition to the regular set-get property change events, the <code><a href="../reference/Uize.Test.html">Uize.Test</a></code> class supports the following custom instance events...</p>
+		
+		<table class="list">
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>Start</code> - fired every time a <a href="#4">Test Instance</a> is run by calling its <code>run</code> instance method</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>Done</code> - fired every time a <a href="#4">Test Instance</a> completes running</td></tr>
+		</table>
+		<p>Consider the following example...</p>
+		
+		<p><span class="allCaps">EXAMPLE</span></p>
+		
+		
+<pre class="sample-code">var my2Plus2Equals4TestInstance = new My2Plus2Equals4TestClass;
+my2Plus2Equals4TestInstance.wire (
+  'Done',
+  function () {alert (my2Plus2Equals4TestInstance.get ('result'))}
+);
+my2Plus2Equals4TestInstance.run ();
+</pre>
+		
+		<p>In the above example, a handler is being wired for the <code>Done</code> event of the test instance <code>my2Plus2Equals4TestInstance</code>. Now, even if the <a href="#3_1">Test Function</a> for this test is asynchronous, our handler will still get executed when the test has completed running. Because the test may be asynchronous, it is not appropriate to place the <code>alert</code> statement immediately after the call to the instance's <code>run</code> method.</p>
+		
+		<a name="11_1"></a>
+		<h2 class="heading2" title="11. Test Events -&gt; 11.1. Bubbling"><span class="headingNumber"><a href="#11" title="11. Test Events">11</a>.<a href="#11_1" title="11. Test Events -&gt; 11.1. Bubbling">1</a>. </span>Bubbling</h2>
+		<div class="contents2">
+			<p>It is important to note that the <code>Start</code> and <code>Done</code> <a href="#11">Test Events</a> bubble.</p>
+			
+			<p>This means that if you wire a handler for either of these events on an instance, and that instance happens to have <a href="#7">Child Tests</a> and is somewhere within a <a href="#7_1">Test Tree</a>, then the handler you registered will be executed for some instances other than the one on which you wired the handler. In such cases, if you only want to execute the handler code for the instance on which the handler is wired, then you should test the <code>source</code> property of the event object, as follows...</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">var myTestTreeInstance = new MyTestTreeClass;
+myTestTreeInstance.wire (
+  'Done',
+  function (e) {
+    if (e.source == myTestTreeInstance) {
+      alert ('Executing the test tree is complete');
+    }
+  }
+);
+myTestTreeInstance.run ();
+</pre>
+			
+			<p>In the above example, the <code>alert</code> statement will only be executed one the test instance <code>myTestTreeInstance</code> has completed running - not when any instance within the <a href="#7_1">Test Tree</a> has completed running.</p>
+		</div>
+	</div>
+	
+	<a name="12"></a>
+	<h1 class="heading1" title="12. Test Class Factory Methods"><span class="headingNumber"><a href="#12" title="12. Test Class Factory Methods">12</a>. </span>Test Class Factory Methods</h1>
+	<div class="contents1">
+		<p>The <code><a href="../reference/Uize.Test.html">Uize.Test</a></code> class provides a number of Test Class Factory Methods that make the creation of new test classes more convenient and one's test code more concise.</p>
+		
+		<p>Each of these factory methods accepts some parameters to qualify the <a href="#3">Test Class</a> that it creates, and then returns a unique subclass of the <code><a href="../reference/Uize.Test.html">Uize.Test</a></code> class that is "keyed" to the parameters that were supplied. For example, a test class can be created to test that the module <code><a href="../reference/Uize.Data.html">Uize.Data</a></code> can be required and built using the statement <code>Uize.Test.requiredModulesTest ('Uize.Data')</code>. In this example, the <code>modulesSTRorARRAY</code> parameter accepted by the <code>Uize.Test.requiredModulesTest</code> method specifies which module (or modules) should be required and tested to see if requiring them is successful. Other test class factory methods accept different parameters, depending on the kind of test classes they create.</p>
+		
+		<a name="12_1"></a>
+		<h2 class="heading2" title="12. Test Class Factory Methods -&gt; 12.1. Basic Test Declaration Factory Method"><span class="headingNumber"><a href="#12" title="12. Test Class Factory Methods">12</a>.<a href="#12_1" title="12. Test Class Factory Methods -&gt; 12.1. Basic Test Declaration Factory Method">1</a>. </span>Basic Test Declaration Factory Method</h2>
+		<div class="contents2">
+			<p>While a basic <a href="#3">Test Class</a> can be created by subclassing the <code><a href="../reference/Uize.Test.html">Uize.Test</a></code> class and then setting values for the class' set-get properties, a more convenient approach is to use the <code>Uize.Test.declare</code> static method.</p>
+			
+			<p>The <code>Uize.Test.declare</code> method is the most basic of the available <a href="#12">Test Class Factory Methods</a>. It accepts a single parameter, being an object that contains values for the set-get properties of the <code><a href="../reference/Uize.Test.html">Uize.Test</a></code> class.</p>
+			
+			<p><span class="allCaps">INSTEAD OF...</span></p>
+			
+			
+<pre class="sample-code">var My2Plus2Equals4TestClass = Uize.Test.subclass ();
+My2Plus2Equals4TestClass.set ({
+  title:'Test that 2 + 2 equals 4',
+  test:function () {return this.expect (4,2 + 2)}
+});
+</pre>
+			
+			<p><span class="allCaps">USE...</span></p>
+			
+			
+<pre class="sample-code">Uize.Test.declare ({
+  title:'Test that 2 + 2 equals 4',
+  test:function () {return this.expect (4,2 + 2)}
+});
+</pre>
+			
+			<p>The <code>Uize.Test.declare</code> method returns a <code><a href="../reference/Uize.Test.html">Uize.Test</a></code> subclass, so it can be used for declaring a child test in an array of child tests, as with all the other <a href="#12">Test Class Factory Methods</a>. For a more in-depth discussion of the <code>Uize.Test.declare</code> method, consult the reference documentation for the <code><a href="../reference/Uize.Test.html">Uize.Test</a></code> module.</p>
+		</div>
+		
+		<a name="12_2"></a>
+		<h2 class="heading2" title="12. Test Class Factory Methods -&gt; 12.2. Factory Methods for Fancier Test Declarations"><span class="headingNumber"><a href="#12" title="12. Test Class Factory Methods">12</a>.<a href="#12_2" title="12. Test Class Factory Methods -&gt; 12.2. Factory Methods for Fancier Test Declarations">2</a>. </span>Factory Methods for Fancier Test Declarations</h2>
+		<div class="contents2">
+			<p>Beyond the <a href="#12_1">Basic Test Declaration Factory Method</a>, factory methods also exist for creating test classes in a declarative fashion for some fancier types of tests.</p>
+			
+			<p>Following is an overview of some of the more exotic <a href="#12">Test Class Factory Methods</a>. For comprehensive documentation on the methods, you should consult the reference for the <code><a href="../reference/Uize.Test.html">Uize.Test</a></code> class.</p>
+			
+			<a name="12_2_1"></a>
+			<h3 class="heading3" title="12. Test Class Factory Methods -&gt; 12.2. Factory Methods for Fancier Test Declarations -&gt; 12.2.1. Required Modules Test"><span class="headingNumber"><a href="#12" title="12. Test Class Factory Methods">12</a>.<a href="#12_2" title="12. Test Class Factory Methods -&gt; 12.2. Factory Methods for Fancier Test Declarations">2</a>.<a href="#12_2_1" title="12. Test Class Factory Methods -&gt; 12.2. Factory Methods for Fancier Test Declarations -&gt; 12.2.1. Required Modules Test">1</a>. </span>Required Modules Test</h3>
+			<div class="contents3">
+				<p>A <a href="#3">Test Class</a> can be created to test that one or more JavaScript modules can be required and built using the <code>Uize.Test.requiredModulesTest</code> method.</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">var RequireUizeDataTestClass = Uize.Test.requiredModulesTest ('Uize.Data');
+</pre>
+				
+				<p>The above example creates a <a href="#3">Test Class</a> to test that the <code><a href="../reference/Uize.Data.html">Uize.Data</a></code> module can be required and built.</p>
+			</div>
+			
+			<a name="12_2_2"></a>
+			<h3 class="heading3" title="12. Test Class Factory Methods -&gt; 12.2. Factory Methods for Fancier Test Declarations -&gt; 12.2.2. Static Property Test"><span class="headingNumber"><a href="#12" title="12. Test Class Factory Methods">12</a>.<a href="#12_2" title="12. Test Class Factory Methods -&gt; 12.2. Factory Methods for Fancier Test Declarations">2</a>.<a href="#12_2_2" title="12. Test Class Factory Methods -&gt; 12.2. Factory Methods for Fancier Test Declarations -&gt; 12.2.2. Static Property Test">2</a>. </span>Static Property Test</h3>
+			<div class="contents3">
+				<p>A <a href="#3">Test Class</a> can be created to test that a static property is defined and that its value is of an expected type using the <code>Uize.Test.staticPropertyTest</code> method.</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">var
+  MathMinTestClass = Uize.Test.staticPropertyTest ('Math.min','function'),
+  NumberMaxValueTestClass = Uize.Test.staticPropertyTest ('Number.MAX_VALUE','number')
+;
+</pre>
+				
+				<p>The above example creates two static property test classes: one to test that the <code>Math.min</code> static property of JavaScript's built-in <code><a href="../javascript-reference/Math.html">Math</a></code> object is a function, and the other to test that the <code>Number.MAX_VALUE</code> static property of JavaScript's built-in <code><a href="../javascript-reference/Number.html">Number</a></code> object is a number.</p>
+			</div>
+			
+			<a name="12_2_3"></a>
+			<h3 class="heading3" title="12. Test Class Factory Methods -&gt; 12.2. Factory Methods for Fancier Test Declarations -&gt; 12.2.3. Static Method Test"><span class="headingNumber"><a href="#12" title="12. Test Class Factory Methods">12</a>.<a href="#12_2" title="12. Test Class Factory Methods -&gt; 12.2. Factory Methods for Fancier Test Declarations">2</a>.<a href="#12_2_3" title="12. Test Class Factory Methods -&gt; 12.2. Factory Methods for Fancier Test Declarations -&gt; 12.2.3. Static Method Test">3</a>. </span>Static Method Test</h3>
+			<div class="contents3">
+				<p>A <a href="#3">Test Class</a> can be created to test that a static method is defined and that a set of test cases succeed using the <code>Uize.Test.staticMethodTest</code> method.</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">Uize.Test.staticMethodTest (
+  'Uize.capFirstChar',
+  [
+    ['Many letters, first letter is lowercase','hello','Hello'],
+    ['Many letters, first letter is uppercase','Hello','Hello'],
+    ['Single letter, lowercase','h','H'],
+    ['Single letter, uppercase','H','H'],
+    ['Empty string','','']
+  ]
+);
+</pre>
+				
+				<p>In the above example, a test class is being created for the <code>Uize.capFirstChar</code> static method. In the array of test cases that are specified for a <a href="#12_2_3">Static Method Test</a>, each test case is specified as an array containing the title, input arguments, and expected output value for the test case.</p>
+				
+				<a name="12_2_3_1"></a>
+				<h4 class="heading4" title="12. Test Class Factory Methods -&gt; 12.2. Factory Methods for Fancier Test Declarations -&gt; 12.2.3. Static Method Test -&gt; 12.2.3.1. Static Methods Test"><span class="headingNumber"><a href="#12" title="12. Test Class Factory Methods">12</a>.<a href="#12_2" title="12. Test Class Factory Methods -&gt; 12.2. Factory Methods for Fancier Test Declarations">2</a>.<a href="#12_2_3" title="12. Test Class Factory Methods -&gt; 12.2. Factory Methods for Fancier Test Declarations -&gt; 12.2.3. Static Method Test">3</a>.<a href="#12_2_3_1" title="12. Test Class Factory Methods -&gt; 12.2. Factory Methods for Fancier Test Declarations -&gt; 12.2.3. Static Method Test -&gt; 12.2.3.1. Static Methods Test">1</a>. </span>Static Methods Test</h4>
+				<div class="contents4">
+					<p>As a convenience, a <a href="#3">Test Class</a> can be created to test multiple static methods in a single declaration using the <code>Uize.Test.staticMethodsTest</code> method.</p>
+					
+					<p>The <code>Uize.Test.staticMethodsTest</code> method accepts a single parameter, being an array of arguments for successive calls to the <code>Uize.Test.staticMethodTest</code> static method.</p>
+				</div>
+			</div>
+			
+			<a name="12_2_4"></a>
+			<h3 class="heading3" title="12. Test Class Factory Methods -&gt; 12.2. Factory Methods for Fancier Test Declarations -&gt; 12.2.4. Test Module Test"><span class="headingNumber"><a href="#12" title="12. Test Class Factory Methods">12</a>.<a href="#12_2" title="12. Test Class Factory Methods -&gt; 12.2. Factory Methods for Fancier Test Declarations">2</a>.<a href="#12_2_4" title="12. Test Class Factory Methods -&gt; 12.2. Factory Methods for Fancier Test Declarations -&gt; 12.2.4. Test Module Test">4</a>. </span>Test Module Test</h3>
+			<div class="contents3">
+				<p>A <a href="#3">Test Class</a> can be created to test that a <a href="#13">Test Module</a> can be successfully required (and loaded and built, if necessary) and that running the test module's tests is successful, using the <code>Uize.Test.testModuleTest</code> method.</p>
+				
+				<p>A Test Module Test has two main benefits...</p>
+				
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;">1. </span></td><td>It provides a safety wrapper around the <a href="#13">Test Module</a>, in case the test module has syntax errors. This is a very useful protection when incorporating a test module into a <a href="#14">Test Suite</a>, so that running the test suite does not fail catastrophically when the test module has JavaScript errors.</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;">2. </span></td><td>It allows a <a href="#14">Test Suite</a> to incorporate many test modules without having to directly require those test modules. Test modules can be quite large, depending on how much functionality they are testing. With the benefit of the <a href="#12_2_4">Test Module Test</a> wrapper, the test modules can be loaded dynamically as needed when the Test Suite is run, rather than simply when the Test Suite is loaded.</td></tr>
+				</table>
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">uizeDataTestModuleRunner = Uize.Test.testModuleTest ('Uize.Test.Uize.Data');
+</pre>
+				
+				<p>In the above example, a <a href="#3">Test Class</a> is being created to test that the <code><a href="../reference/Uize.Test.Uize.Data.html">Uize.Test.Uize.Data</a></code> test module can be successfully required and that all its tests pass.</p>
+			</div>
+			
+			<a name="12_2_5"></a>
+			<h3 class="heading3" title="12. Test Class Factory Methods -&gt; 12.2. Factory Methods for Fancier Test Declarations -&gt; 12.2.5. Test Suite Test"><span class="headingNumber"><a href="#12" title="12. Test Class Factory Methods">12</a>.<a href="#12_2" title="12. Test Class Factory Methods -&gt; 12.2. Factory Methods for Fancier Test Declarations">2</a>.<a href="#12_2_5" title="12. Test Class Factory Methods -&gt; 12.2. Factory Methods for Fancier Test Declarations -&gt; 12.2.5. Test Suite Test">5</a>. </span>Test Suite Test</h3>
+			<div class="contents3">
+				<p>A <a href="#3">Test Class</a> can be created to combine multiple separate test modules into a single <a href="#14">Test Suite</a> using the <code>Uize.Test.testSuite</code> method.</p>
+				
+				<p>The <code>Uize.Test.testSuite</code> method wraps each of the specified test modules in a <a href="#12_2_4">Test Module Test</a>. This ensures that the many individual test modules that make up a test suite are only loaded dynamically as needed when the test suite is run - they are not directly required by the test suite test, and they do not need to be loaded in just so that the test suite's test class can be built. This is a good thing, because many of the test modules are rather large.</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">var uizeTestSuite = Uize.Test.testSuite (
+  'UIZE JavaScript Framework Unit Tests',
+  [
+    'Uize.Test.Uize.Data',
+    'Uize.Test.Uize',
+    'Uize.Test.Uize.Array',
+    'Uize.Test.Uize.Array.Order',
+    'Uize.Test.Uize.Array.Sort',
+    'Uize.Test.Uize.Data.Csv',
+    'Uize.Test.Uize.Date',
+    // ... ... ... ... ... ...
+    // more test modules here
+    // ... ... ... ... ... ...
+  ]
+);
+</pre>
+				
+				<p>In the above example, a <a href="#14">Test Suite</a> test class is being created to sequence execution of a series of test modules that test various modules of the UIZE JavaScript Framework.</p>
+			</div>
+		</div>
+	</div>
+	
+	<a name="13"></a>
+	<h1 class="heading1" title="13. Test Module"><span class="headingNumber"><a href="#13" title="13. Test Module">13</a>. </span>Test Module</h1>
+	<div class="contents1">
+		<p>A Test Module is a <a href="javascript-modules.html">JavaScript module</a> that defines a <a href="#3">Test Class</a>.</p>
+		
+		<p>A Test Module can define unit tests, functional tests, performance tests, or even a <a href="#14">Test Suite</a>. For unit testing, it is typical to create a companion Test Module for any JavaScript module that implements actual functionality.</p>
+		
+		<a name="13_1"></a>
+		<h2 class="heading2" title="13. Test Module -&gt; 13.1. Test Namespace"><span class="headingNumber"><a href="#13" title="13. Test Module">13</a>.<a href="#13_1" title="13. Test Module -&gt; 13.1. Test Namespace">1</a>. </span>Test Namespace</h2>
+		<div class="contents2">
+			<p>A good convention to follow when naming a <a href="#13">Test Module</a> is to take the name of the module that it tests and prepend a test namespace under which all of your test modules will reside.</p>
+			
+			<p>For the modules that make up the UIZE JavaScript Framework, test modules are located under the <code><a href="../reference/Uize.Test.html">Uize.Test</a></code> namespace. So, for example, the test module for testing the <code><a href="../reference/Uize.Data.html">Uize.Data</a></code> module lives under the <code><a href="../reference/Uize.Test.html">Uize.Test</a></code> namespace as <code><a href="../reference/Uize.Test.Uize.Data.html">Uize.Test.Uize.Data</a></code>. Essentially, the namespace hierarchy of the UIZE JavaScript Framework is replicated under the <code><a href="../reference/Uize.Test.html">Uize.Test</a></code> namespace - excepting, of course, the <code><a href="../reference/Uize.Test.html">Uize.Test</a></code> namespace hierarchy (or you would have video feedback style infinite recursion).</p>
+			
+			<a name="13_1_1"></a>
+			<h3 class="heading3" title="13. Test Module -&gt; 13.1. Test Namespace -&gt; 13.1.1. An Example"><span class="headingNumber"><a href="#13" title="13. Test Module">13</a>.<a href="#13_1" title="13. Test Module -&gt; 13.1. Test Namespace">1</a>.<a href="#13_1_1" title="13. Test Module -&gt; 13.1. Test Namespace -&gt; 13.1.1. An Example">1</a>. </span>An Example</h3>
+			<div class="contents3">
+				<p>If you have created your own namespace for your application specific JavaScript modules (ie. non-UIZE modules), then you can create a test modules namespace under that namespace and place all your test modules under that namespace.</p>
+				
+				<p>For example, if your Web site was <b>www.mycompany.com</b> and you created the root namespace of <code>MyCompanySite</code> for your JavaScript, then you could create a testing namespace under that namespace called <code>MyCompanySite.Test</code>. Now, if your application had a custom JavaScript module called <code>MyCompanySite.CommonUtils</code>, then a test module for testing that module could be named <code>MyCompanySite.Test.MyCompanySite.CommonUtils</code>. It may seem redundant to repeat the "MyCompanySite" part, but your root namespace file may define some common functions that you may also wish to test separately, and the test module for testing the <code>MyCompanySite</code> module would be named <code>MyCompanySite.Test.MyCompanySite</code>.</p>
+			</div>
+		</div>
+		
+		<a name="13_2"></a>
+		<h2 class="heading2" title="13. Test Module -&gt; 13.2. Test Module Contents"><span class="headingNumber"><a href="#13" title="13. Test Module">13</a>.<a href="#13_2" title="13. Test Module -&gt; 13.2. Test Module Contents">2</a>. </span>Test Module Contents</h2>
+		<div class="contents2">
+			<p>To examine what the typical contents of a <a href="#13">Test Module</a> looks like, consider the following example...</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">Uize.module ({
+  name:'MyCompanySite.Test.MyCompanySite.CommonUtils',
+  builder:function () {
+    return Uize.Test.declare ({
+      title:'MyCompanySite.CommonUtils Test',
+      test:[
+        Uize.Test.requiredModulesTest ('MyCompanySite.CommonUtils'),
+        Uize.Test.staticMethodsTest ([
+          // ... ... ... ... ... ... ... ...
+          // static methods tests go here
+          // ... ... ... ... ... ... ... ...
+        ])
+      ]
+    });
+  }
+});
+</pre>
+			
+			<p>In the above example, the <a href="#13">Test Module</a> <code>MyCompanySite.Test.MyCompanySite.CommonUtils</code> defines a <a href="#3">Test Class</a> that tests the <code>MyCompanySite.CommonUtils</code> module. The <code>builder</code> function uses the <code>Uize.Test.declare</code> method to define the test class in a declarative fashion and then returns a reference to the class. The test class has two <a href="#7">Child Tests</a>, the first of which tests requiring of the module being tested, and the second of which tests all the module's static methods (you'll have to just imagine the code that replaces those comments).</p>
+			
+			<p>One thing you'll notice by looking at the code is that the <a href="#13">Test Module</a> is not requiring the module that it is testing - there isn't even a <code>required</code> property in the module declaration (the call to the <code>Uize.module</code> method) in this case. This is because the module being tested will be required dynamically when an instance of the test class is run, as soon as the <a href="#12_2_1">Required Modules Test</a> is encountered, which happens to be the first test (defined by calling the <code>Uize.Test.requiredModulesTest</code> method). This has the benefit that loading the <code>MyCompanySite.Test.MyCompanySite.CommonUtils</code> test module does not incur loading of the module that it tests - only when the test is run will the module being tested be loaded, as necessary.</p>
+		</div>
+	</div>
+	
+	<a name="14"></a>
+	<h1 class="heading1" title="14. Test Suite"><span class="headingNumber"><a href="#14" title="14. Test Suite">14</a>. </span>Test Suite</h1>
+	<div class="contents1">
+		<p>Any <a href="#3">Test Class</a> can define a hierarchical <a href="#7_1">Test Tree</a> that contains many tests, but the term Test Suite is used to refer specifically to a <a href="#3">Test Class</a> that combines the test classes defined by a number of different test modules into a single <a href="#12_2_5">Test Suite Test</a>.</p>
+		
+		<p>A test suite test class can be conveniently defined in a declarative fashion by using the <code>Uize.Test.testSuite</code> static method.</p>
+		
+		<a name="14_1"></a>
+		<h2 class="heading2" title="14. Test Suite -&gt; 14.1. Unit Tests Test Suite"><span class="headingNumber"><a href="#14" title="14. Test Suite">14</a>.<a href="#14_1" title="14. Test Suite -&gt; 14.1. Unit Tests Test Suite">1</a>. </span>Unit Tests Test Suite</h2>
+		<div class="contents2">
+			<p>The unit tests <a href="#14">Test Suite</a> for the UIZE JavaScript Framework is implemented in the <code>Uize.Test.UnitTests</code> module.</p>
+			
+			<p>The <code>Uize.Test.UnitTests</code> module is a test module that defines an uber <a href="#14">Test Suite</a> comprised of all the test modules that test individual modules of the framework, and is used by build scripts that automate testing of the framework. If you are looking to create a <a href="#14">Test Suite</a> of unit tests for your own site / application, you can use this module as a reference. You can create your unit tests module under your own <a href="#13_1">Test Namespace</a> (as <code>MyCompanySite.Test.UnitTests</code>, for example) and model its contents on the contents of the <code>Uize.Test.UnitTests</code> module. Then, whenever you create a new JavaScript module for your site / application, you can create a companion <a href="#13">Test Module</a> and add an entry for it in your unit tests test suite module - a simple matter of adding a line to the file in order to add the test to the sequence of tests performed by the module.</p>
+		</div>
+	</div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

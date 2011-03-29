@@ -1,0 +1,11 @@
+The =Uize.Widget.CollectionItem.Zooming= module has been improved with the addition of the new =deadMargin= and =zoomFadeProperties= set-get properties.
+
+The new =deadMargin= set-get property lets you configure the thickness of the margin at the edges of the preview image where moving the mouse will produce no change in the values of either - or both - of the =alignX= and =alignY= set-get properties. The new =zoomFadeProperties= set-get property lets you specify properties that should be used for the =Uize.Fade= instance that drives the zoom in effect's animation.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-08-08 - IMPROVED MODULE: Uize.Widget.CollectionItem.Zooming
+....................................................................................

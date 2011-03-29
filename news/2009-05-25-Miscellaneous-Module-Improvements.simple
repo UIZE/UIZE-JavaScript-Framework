@@ -1,0 +1,26 @@
+Various miscellaneous improvements have been made to a number of modules.
+
+IMPROVED MODULE: Uize.Node.Form
+	The new =Uize.Node.Form.setDisabled= static method of the =Uize.Node.Form= module enables or disables all of the form elements found within a specified root node, using the "disabled" node attribute.
+
+IMPROVED MODULE: Uize.Comm
+	Two new minor features have been added to the =Uize.Comm= base class.
+
+	- A new =cutToHead= property is supported for request objects specified when calling the =request= or =queueRequest= instance methods of the =Uize.Comm= class (and its subclasses), where specifying the value =true= for this property will cause the request to cut to the head of the request queue.
+
+	- The new =flushCache= instance method lets you flush the cached response for a specific request, or lets you flush the entire response cache for the instance.
+
+IMPROVED MODULE: Uize.Wsh
+	Two new static methods have been added to the =Uize.Wsh= module.
+
+	- The new =Uize.Wsh.getFiles= static method returns an array, being a listing of the files contained inside the specified folder, where each element of the array is a string representing the path for a file.
+
+	- The new =Uize.Wsh.getScriptFolderPath= static method returns a string, representing the folder path for the folder from which the current script is being executed.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-05-25 - Miscellaneous Module Improvements
+....................................................................................

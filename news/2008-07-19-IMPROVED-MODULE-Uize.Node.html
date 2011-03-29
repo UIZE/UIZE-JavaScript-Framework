@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2008-07-19 - IMPROVED MODULE: Uize.Node | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="The functionality of the Uize.Node.getByMatch static method has been enhanced to support regular expression and function type node property tests, and it has been given the new name Uize.Node.find - short and sweet (and clear)."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2008.html" class="breadcrumb breadcrumbWithArrow">2008 NEWS</a>
+	2008-07-19 - IMPROVED MODULE: Uize.Node
+
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="The functionality of the Uize.Node.getByMatch static method has been enhanced to support regular expression and function type node property tests, and it has been given the new name Uize.Node.find - short and sweet (and clear).">1. Uize.Node.find</a></li>
+			<li><a href="#2" title="The Uize.Node.addEventHandler and Uize.Node.addEventHandlers static methods, that were deprecated a very long time ago, have finally been given a proper burial in the dusty annals of source control.">2. Uize.Node.addEventHandler and Uize.Node.addEventHandlers Killed</a></li>
+			<li><a href="#3" title="Uize.Node.getByMatch        &gt;&gt; BECOMES &gt;&gt;  Uize.Node.find&#10;Uize.Node.addEventHandler   &gt;&gt; BECOMES &gt;&gt;  !!! DEAD !!!&#10;Uize.Node.addEventHandlers  &gt;&gt; BECOMES &gt;&gt;  !!! DEAD !!!&#10;">3. Summary of Changes</a></li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<a name="1"></a>
+	<h1 class="heading1" title="1. Uize.Node.find"><span class="headingNumber"><a href="#1" title="1. Uize.Node.find">1</a>. </span>Uize.Node.find</h1>
+	<div class="contents1">
+		<p>The functionality of the <code>Uize.Node.getByMatch</code> static method has been enhanced to support regular expression and function type node property tests, and it has been given the new name <code><a href="#1">Uize.Node.find</a></code> - short and sweet (and clear).</p>
+		
+		<p>Being deprecated, the old name will still work for some time before it is given a proper burial. The enhanced method provides a lot more power in finding nodes in a document. The new capabilities have been comprehensively documented.</p>
+	</div>
+	
+	<a name="2"></a>
+	<h1 class="heading1" title="2. Uize.Node.addEventHandler and Uize.Node.addEventHandlers Killed"><span class="headingNumber"><a href="#2" title="2. Uize.Node.addEventHandler and Uize.Node.addEventHandlers Killed">2</a>. </span>Uize.Node.addEventHandler and Uize.Node.addEventHandlers Killed</h1>
+	<div class="contents1">
+		<p>The <code>Uize.Node.addEventHandler</code> and <code>Uize.Node.addEventHandlers</code> static methods, that were deprecated a very long time ago, have finally been given a proper burial in the dusty annals of source control.</p>
+		
+		<p>If your code was still using these methods, you should be ashamed (chances are you weren't using them).</p>
+	</div>
+	
+	<a name="3"></a>
+	<h1 class="heading1" title="3. Summary of Changes"><span class="headingNumber"><a href="#3" title="3. Summary of Changes">3</a>. </span>Summary of Changes</h1>
+	<div class="contents1">
+		
+<pre class="sample-code">Uize.Node.getByMatch        &gt;&gt; BECOMES &gt;&gt;  Uize.Node.find
+Uize.Node.addEventHandler   &gt;&gt; BECOMES &gt;&gt;  !!! DEAD !!!
+Uize.Node.addEventHandlers  &gt;&gt; BECOMES &gt;&gt;  !!! DEAD !!!
+</pre>
+	</div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

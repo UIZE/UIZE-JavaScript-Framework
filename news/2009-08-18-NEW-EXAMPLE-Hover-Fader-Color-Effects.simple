@@ -1,0 +1,13 @@
+The new [[../examples/hover-fader-color-effects.html][Hover Fader Color Effects]] example demonstrates how the =Uize.Widget.HoverFader= class can be used to create stunning menu animation effects to liven up your Web pages.
+
+In this example, an instance of the =Uize.Widget.HoverFader= class is wiring up a slick JavaScript animation effect to the links in a menu. A list of links in a *"PRESETS"* tab lets you preview effect presets. When you choose a preset, the =Uize.Widget.HoverFader= instance is configured with those settings, and is automatically "tickled" to demo the settings. A *"PARAMS"* tab lets you fool around with settings for a preset and then preview your changes by clicking on a *"PERFORM HOVER FADER SETTINGS"* button. See what is possible with the UIZE JavaScript Framework.
+
+[[../examples/hover-fader-color-effects.html][CHECK IT OUT]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-08-18 - NEW EXAMPLE: Hover Fader Color Effects
+....................................................................................

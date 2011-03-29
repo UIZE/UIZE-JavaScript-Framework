@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2008-06-17 - New Features & Changes | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="The UIZE JavaScript Framework now has support for JavaScript templates."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2008.html" class="breadcrumb breadcrumbWithArrow">2008 NEWS</a>
+	2008-06-17 - New Features & Changes
+
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="The UIZE JavaScript Framework now has support for JavaScript templates.">1. Uize.Template</a></li>
+			<li><a href="#2" title="The new Uize.Url package provides convenient methods for encoding and decoding URLs and URL query params.">2. Uize.Url (and Uize.Comm deprecations)</a></li>
+			<li><a href="#3" title="The Uize.String package gets the new Uize.String.splitInTwo and Uize.String.stripPadding static methods.">3. Uize.String</a></li>
+			<li><a href="#4" title="The new Uize.evalGlobal static method allows one to eval a code string in the global context.">4. Uize.evalGlobal</a></li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<a name="1"></a>
+	<h1 class="heading1" title="1. Uize.Template"><span class="headingNumber"><a href="#1" title="1. Uize.Template">1</a>. </span>Uize.Template</h1>
+	<div class="contents1">
+		<p>The UIZE JavaScript Framework now has support for JavaScript templates.</p>
+		
+		<p>Support is provided in the form of the <code><a href="#1">Uize.Template</a></code> package. This package provides a way to "compile" JavaScript templates to output generator functions, so that the template string only needs to be parsed once and so that the functions generated in this way are efficient when called repeatedly to generate output with different input values. Look for an explanation of this new feature under the explainer "JavaScript Templates".</p>
+	</div>
+	
+	<a name="2"></a>
+	<h1 class="heading1" title="2. Uize.Url (and Uize.Comm deprecations)"><span class="headingNumber"><a href="#2" title="2. Uize.Url (and Uize.Comm deprecations)">2</a>. </span>Uize.Url (and Uize.Comm deprecations)</h1>
+	<div class="contents1">
+		<p>The new <code><a href="../reference/Uize.Url.html">Uize.Url</a></code> package provides convenient methods for encoding and decoding URLs and URL query params.</p>
+		
+		<p>Certain methods of the <code><a href="../reference/Uize.Comm.html">Uize.Comm</a></code> base class have been deprecated in favor of static methods of the new <code><a href="../reference/Uize.Url.html">Uize.Url</a></code> package.</p>
+		
+		<p><span class="allCaps">DEPRECATED</span></p>
+		
+		
+<pre class="sample-code">myCommObject.serializeParams (...) &gt;&gt; BECOMES &gt;&gt;  Uize.Url.toParams (...)
+Uize.Comm.serializeParams (...)    &gt;&gt; BECOMES &gt;&gt;  Uize.Url.toParams (...)
+Uize.Comm.parseQuery (...)         &gt;&gt; BECOMES &gt;&gt;  Uize.Url.fromParams (...)
+Uize.Comm.getCacheDefeatStr (...)  &gt;&gt; BECOMES &gt;&gt;  Uize.Url.getCacheDefeatStr (...)
+</pre>
+		
+		<p>The new <code>Uize.Url.resolve</code> static method provides a powerful and versatile way to resolve a URL path and optional query params objects to URL strings.</p>
+	</div>
+	
+	<a name="3"></a>
+	<h1 class="heading1" title="3. Uize.String"><span class="headingNumber"><a href="#3" title="3. Uize.String">3</a>. </span>Uize.String</h1>
+	<div class="contents1">
+		<p>The <code><a href="#3">Uize.String</a></code> package gets the new <code>Uize.String.splitInTwo</code> and <code>Uize.String.stripPadding</code> static methods.</p>
+	</div>
+	
+	<a name="4"></a>
+	<h1 class="heading1" title="4. Uize.evalGlobal"><span class="headingNumber"><a href="#4" title="4. Uize.evalGlobal">4</a>. </span>Uize.evalGlobal</h1>
+	<div class="contents1">
+		<p>The new <code><a href="#4">Uize.evalGlobal</a></code> static method allows one to eval a code string in the global context.</p>
+	</div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

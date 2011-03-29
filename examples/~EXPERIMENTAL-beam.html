@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Beam | JavaScript Examples | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="widget Uize.Widget.Resizer.Marquee Uize.Widget.Beam Uize.Widget.Mask"/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.example.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	<a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow">JAVASCRIPT EXAMPLES</a>
+	Beam
+	<div id="page-actions" class="pageActions">
+		<a href="source-code/~EXPERIMENTAL-beam.html" class="buttonLink">SOURCE</a>
+	</div>
+</h1>
+
+<div class="main">
+	<!-- marquee UI wireframe -->
+
+	<div id="page_marquee-shell" style="width:700px; height:500px; position:relative;">
+		<img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228026937512483785&max_dim=500" style="position:absolute; left:0px; top:0px; width:700px; height:500px;" alt=""/>
+		<div id="page_mask" style="position:absolute; left:0px; top:0px; width:700px; height:500px; background:#000; opacity:.4; filter:alpha(opacity=40);"></div>
+		<div id="page_marquee" style="width:700px; height:500px; position:absolute; left:0px; top:0px;"></div>
+		<div id="page_beam" style="position:absolute; opacity:.2; filter:alpha(opacity=20);">
+			<img id="page_beam-diamondTopLeft" src="../js/Uize_Widget_Beam/diamond-top-left.gif" style="position:absolute;" alt=""/>
+			<img id="page_beam-diamondBottomLeft" src="../js/Uize_Widget_Beam/diamond-bottom-left.gif" style="position:absolute;" alt=""/>
+			<img id="page_beam-middle" src="../js/Uize/blank.gif" style="background:#fff; position:absolute;" alt=""/>
+		</div>
+	</div>
+</div>
+
+<!-- JavaScript code to make the static marquee HTML "come alive" -->
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Example.library',
+		'UizeDotCom.Page.Example',
+		'Uize.Node',
+		'Uize.Widget.Resizer.Marquee',
+		'Uize.Widget.Beam',
+		'Uize.Widget.Mask'
+	],
+	builder:function () {
+		/*** create the example page widget ***/
+			var page = window.page = new UizeDotCom.Page.Example;
+
+		/*** create the marquee instance ***/
+			var marquee = page.addChild (
+				'marquee',
+				Uize.Widget.Resizer.Marquee,
+				{
+					constrain:true,
+					minWidth:20,
+					minHeight:20,
+					width:100,
+					height:100,
+					built:false
+				}
+			);
+
+		/*** create the Uize.Widget.Mask instance ***/
+			var mask = page.addChild ('mask',Uize.Widget.Mask);
+
+		/*** create the beam instance ***/
+			var beam = page.addChild ('beam',Uize.Widget.Beam,{direction:'right'});
+
+		/*** display marquee position while dragging ***/
+			var marqueeShellDimensions = Uize.Node.getDimensions (marquee.getNode ('shell'));
+			function updateBeam () {
+				mask.set (marquee.getCoords ());
+				var marqueeRight = marquee.get ('left') + marquee.get ('width');
+				beam.set ({
+					width:marqueeShellDimensions.width - marqueeRight,
+					height:marqueeShellDimensions.height,
+					thinSize:marquee.get ('height') / marqueeShellDimensions.height,
+					thinAlign:marquee.get ('top') / (marqueeShellDimensions.height - marquee.get ('height')) || 0
+				});
+				Uize.Node.setCoords (beam.getNode (),{left:marqueeRight});
+			}
+			marquee.wire ('Position Changed',updateBeam);
+			updateBeam ();
+
+		/*** wire up the page widget ***/
+			page.wireUi ();
+	}
+});
+
+</script>
+
+</body>
+</html>
+

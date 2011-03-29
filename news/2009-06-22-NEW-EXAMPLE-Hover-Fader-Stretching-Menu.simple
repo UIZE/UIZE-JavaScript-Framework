@@ -1,0 +1,13 @@
+The new [[../examples/hover-fader-stretching-menu.html][Hover Fader Stretching Menu]] example demonstrates how the =Uize.Widget.HoverFader= widget class can be used to create a stretching menu effect.
+
+In the example, an instance of the =Uize.Widget.HoverFader= class is being used to add an animated stretching effect to a navigation menu. This instance manages fading of values for the =width=, =margin-left=, =letter-spacing=, and =border-right-color= CSS style properties for all links in the menu. Mousing over a menu link triggers an animation that increases its width and the letter spacing of its text. Additionally, the color for the five pixel wide right border is faded from black to white.
+
+[[../examples/hover-fader-stretching-menu.html][CHECK IT OUT]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-06-22 - NEW EXAMPLE: Hover Fader Stretching Menu
+....................................................................................

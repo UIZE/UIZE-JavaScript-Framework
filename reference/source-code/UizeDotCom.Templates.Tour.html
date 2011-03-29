@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>UizeDotCom.Templates.Tour | JavaScript Source Code | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework module source code"/>
+	<meta name="description" content="This is the JavaScript source code for the UizeDotCom.Templates.Tour module of the UIZE JavaScript Framework"/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../../css/page.css"/>
+	<link rel="stylesheet" href="../../css/page.source.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../../index.html" title="UIZE JavaScript Framework home"></a>
+	SOURCE CODE: UizeDotCom.Templates.Tour
+	<div class="pageActions">
+		<a href="../UizeDotCom.Templates.Tour.html" class="buttonLink">VIEW REFERENCE</a>
+	</div>
+</h1>
+
+<pre>
+/*
+  This is an automatically generated module, compiled from the JavaScript template file:
+    UizeDotCom.Templates.Tour.js.jst
+*/
+
+/*ScruncherSettings Mappings="=" LineCompacting="TRUE"*/
+
+Uize.module ({
+  name:'UizeDotCom.Templates.Tour',
+  required:[
+    'UizeDotCom.Examples',
+    'Uize.Url'
+  ],
+  builder:function () {
+    var _package = function () {};
+
+    /*** Public Static Methods ***/
+      _package.process = function (input) {
+        var output = [];
+
+          var
+            _tour = input.tour,
+            _tourExamples = UizeDotCom.Examples ()
+          ;
+
+          /*** if tour is not "all", find all pages for this specific tour ***/
+            if (_tour.toLowerCase () != 'all') {
+              var
+                _examples = _tourExamples,
+                _keywordsMatchRegExp = new RegExp ('\\b' + _tour + '\\b','i')
+              ;
+              _tourExamples = [];
+              for (var _exampleNo = -1, _examplesLength = _examples.length; ++_exampleNo &lt; _examplesLength;) {
+                var _example = _examples [_exampleNo];
+                _keywordsMatchRegExp.test (_example.keywords) &amp;&amp; _tourExamples.push (_example);
+              }
+            }
+
+          var
+            _tourExamplesLength = _tourExamples.length,
+            _tourExampleUrlSuffix = '?tour=' + _tour,
+            _pageNo = -1,
+            _pageFileName = Uize.Url.from (input.pageUrl).fileName
+          ;
+
+          function _getExamplePageLink (_example) {
+            return _example.path.match (/[\\\/]([^\\\/]+)$/) [1] + _tourExampleUrlSuffix;
+          }
+
+        output.push ('\r\n\r\n&lt;div id="page-tourPageTooltip" class="tourPageTooltip"&gt;\r\n  &lt;div id="page-tourPageTooltip-title" class="tourPageTitle"&gt;&lt;/div&gt;\r\n  &lt;div id="page-tourPageTooltip-description" class="tourPageDescription"&gt;&lt;/div&gt;\r\n  &lt;div class="tourPageKeywords"&gt;TAGS: &lt;span id="page-tourPageTooltip-keywords"&gt;&lt;/span&gt;&lt;/div&gt;\r\n&lt;/div&gt;\r\n\r\n&lt;table class="tourPages"&gt;\r\n  &lt;tr&gt;');
+
+            for (var _tourExampleNo = -1; ++_tourExampleNo &lt; _tourExamplesLength;) {
+              var _tourExample = _tourExamples [_tourExampleNo];
+              if (_pageNo &lt; 0 &amp;&amp; _pageFileName == Uize.Url.from (_tourExample.path).fileName)
+                _pageNo = _tourExampleNo
+              ;
+
+        output.push ('&lt;td&gt;\r\n      &lt;a href="',_getExamplePageLink (_tourExample),'" class="tourPage',_tourExampleNo == _pageNo ? ' tourCurrentPage' : '','"&gt;&lt;/a&gt;\r\n    &lt;/td&gt;');
+
+            }
+
+        output.push ('&lt;/tr&gt;\r\n&lt;/table&gt;\r\n');
+         var _previousExample = _pageNo &gt; 0 ? _tourExamples [_pageNo - 1] : null;
+         if (_previousExample) {
+        output.push ('\r\n&lt;a href="',_getExamplePageLink (_previousExample),'" class="tourButton tourButtonPrevious"&gt;&lt;/a&gt;');
+         }
+        output.push ('\r\n');
+         var _nextExample = _pageNo &lt; _tourExamplesLength - 1 ? _tourExamples [_pageNo + 1] : null;
+         if (_nextExample) {
+        output.push ('\r\n&lt;a href="',_getExamplePageLink (_nextExample),'" class="tourButton tourButtonNext"&gt;&lt;/a&gt;');
+         }
+        output.push ('\r\n\r\n');
+        return output.join ('');
+      };
+
+    /*** Public Static Properties ***/
+      _package.input = {
+        tour:'string',
+        pageUrl:'string'
+      };
+
+    return _package;
+  }
+});
+
+
+</pre>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.library',
+		'UizeDotCom.Page'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page).wireUi ()}
+});
+
+</script>
+
+</body></html>

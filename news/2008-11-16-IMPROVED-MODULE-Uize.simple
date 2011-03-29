@@ -1,0 +1,61 @@
+A number of small improvements have been made to the =Uize= base class.
+
+Uize.toString
+	The =toString= intrinsic method is now implemented also as a static method on =Uize= subclasses, so the alert statement can now be used to display a summary of info for an object that is a reference to a =Uize= subclass. For example, the statement =alert (Uize.Widget.Page)= would produce an output like...
+
+	................................
+	[class Uize.Widget.Page]
+
+	built : true
+	busy : inherit
+	busyInherited : false
+	confirmDialog : [object Object]
+	container : undefined
+	enabled : inherit
+	enabledInherited : true
+	html : undefined
+	idPrefix : page
+	idPrefixConstruction : undefined
+	insertionMode : undefined
+	localized : undefined
+	name : undefined
+	nodeMap : undefined
+	wired : false
+	................................
+
+	This new behavior is similar to the existing behavior for instances of a =Uize= subclass, excepting that the summary of values for set-get properties is for the class (ie. static) rather than an instance.
+
+Uize.valueOf
+	Less compelling than the new =Uize.toString= static implementation, the =valueOf= intrinsic method is now also implemented as a static method on =Uize= subclasses.
+
+	This change is more for parity than anything else. This means that you can access the static value of a class' =value= set-get property by involving the class reference in an expression, such as =+Uize.Widget.Bar.Slider=, or =Uize.Widget.ColorPicker + ''=.
+
+Name Property Optional in Set-get Property Profiles
+	When registering set-get properties using the =Uize.registerProperties= static method, it is now possible to omit the public name for a property and it will default to the private name.
+
+	This may be useful in certain special cases, as outlined in more detail in the [[../explainers/set-get-properties.html][Set-get Properties explainer]] (see the section on =Public Name Defaulting=, which talks about =Naked Set-get Properties= and =Private Set-get Properties=).
+
+New Variation of set Method
+	A new variation of the =set= method that accepts the two parameters =propertyNameSTR= and =propertyValueANYTYPE= makes it possible to use an expression or the value of a variable for specifying the name of the property to set.
+
+	This variation is supported for both static *and* instance calls of this method.
+
+	INSTEAD OF...
+	................................................
+	var propertyToSetObj = {};
+	propertyToSetObj [propertyName] = propertyValue;
+	myInstance.set (propertyToSetObj);
+	................................................
+
+	USE...
+	............................................
+	myInstance.set (propertyName,propertyValue);
+	............................................
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2008-11-16 - IMPROVED MODULE: Uize
+....................................................................................

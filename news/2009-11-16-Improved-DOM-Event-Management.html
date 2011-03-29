@@ -1,0 +1,136 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2009-11-16 - Improved DOM Event Management | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="The DOM event management system, implemented in the Uize.Node module, has been improved with the addition of the versatile new Uize.Node.wire and Uize.Node.unwire static methods."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2009.html" class="breadcrumb breadcrumbWithArrow">2009 NEWS</a>
+	2009-11-16 - Improved DOM Event Management
+
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="The new Uize.Node.wire static method replaces the now deprecated Uize.Node.wireEvent and Uize.Node.wireEvents static methods.">1. Deprecated Methods</a></li>
+			<li><a href="#2" title="The new Uize.Node.wire static method wires the specified handler function to the specified event, or the specified handlers to the specified events, of the specified node or Node Blob.">2. New Uize.Node.wire Static Method</a></li>
+			<li><a href="#3" title="The new Uize.Node.unwire static method lets you unwire one or more event handlers for the specified node or Node Blob.">3. New Uize.Node.unwire Static Method</a></li>
+			<li><a href="#4" title="The changes to these various methods offer the following benefits...">4. Benefits of These Changes</a></li>
+			<li><a href="#5" title="For backwards compatibility, the deprecated Uize.Node.wireEvent and Uize.Node.wireEvents static methods are all still supported, and will be supported for some time into the future.">5. Deprecated Methods Still Supported</a></li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<p>The DOM event management system, implemented in the <code><a href="../reference/Uize.Node.html">Uize.Node</a></code> module, has been improved with the addition of the versatile new <code>Uize.Node.wire</code> and <code>Uize.Node.unwire</code> static methods.</p>
+	
+	<a name="1"></a>
+	<h1 class="heading1" title="1. Deprecated Methods"><span class="headingNumber"><a href="#1" title="1. Deprecated Methods">1</a>. </span>Deprecated Methods</h1>
+	<div class="contents1">
+		<p>The new <code>Uize.Node.wire</code> static method replaces the now deprecated <code>Uize.Node.wireEvent</code> and <code>Uize.Node.wireEvents</code> static methods.</p>
+		
+		<p>The new <code>Uize.Node.wire</code> method is more versatile than the two deprecated methods, supporting both of their parameter signatures. So, you can easily just change the method name in any method call in existing code to use the new name. The new name is also more concise.</p>
+		
+		<p><span class="allCaps">DEPRECATED</span></p>
+		
+		
+<pre class="sample-code">Uize.Node.wireEvent   &gt;&gt; BECOMES &gt;&gt;  Uize.Node.wire
+Uize.Node.wireEvents  &gt;&gt; BECOMES &gt;&gt;  Uize.Node.wire
+</pre>
+	</div>
+	
+	<a name="2"></a>
+	<h1 class="heading1" title="2. New Uize.Node.wire Static Method"><span class="headingNumber"><a href="#2" title="2. New Uize.Node.wire Static Method">2</a>. </span>New Uize.Node.wire Static Method</h1>
+	<div class="contents1">
+		<p>The new <code>Uize.Node.wire</code> static method wires the specified handler function to the specified event, or the specified handlers to the specified events, of the specified node or <code>Node Blob</code>.</p>
+		
+		<p><span class="allCaps">WIRE ONE EVENT</span></p>
+		
+		
+<pre class="sample-code">Uize.Node.wire (nodeBLOB,eventNameSTR,eventHandlerFUNC);
+</pre>
+		
+		<p><span class="allCaps">WIRE ONE OR MORE EVENTS</span></p>
+		
+		
+<pre class="sample-code">Uize.Node.wire (nodeBLOB,eventNamesToHandlersMapOBJ);
+</pre>
+		
+		<p>The signatures of the new method are more in harmony with the signatures of the <code>wireNode</code> instance method of the <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> class, and the <code>wire</code> instance method and <code>Uize.wire</code> static method of the <code><a href="../reference/Uize.html">Uize</a></code> base class. This method takes over from the now deprecated <code>Uize.Node.wireEvent</code> and <code>Uize.Node.wireEvents</code> methods.</p>
+	</div>
+	
+	<a name="3"></a>
+	<h1 class="heading1" title="3. New Uize.Node.unwire Static Method"><span class="headingNumber"><a href="#3" title="3. New Uize.Node.unwire Static Method">3</a>. </span>New Uize.Node.unwire Static Method</h1>
+	<div class="contents1">
+		<p>The new <code>Uize.Node.unwire</code> static method lets you unwire one or more event handlers for the specified node or <code>Node Blob</code>.</p>
+		
+		<p><span class="allCaps">UNWIRE ONE EVENT</span></p>
+		
+		
+<pre class="sample-code">Uize.Node.unwire (nodeBLOB,eventNameSTR,eventHandlerFUNC);
+</pre>
+		
+		<p><span class="allCaps">UNWIRE ONE OR MORE EVENTS</span></p>
+		
+		
+<pre class="sample-code">Uize.Node.unwire (nodeBLOB,eventNamesToHandlersMapOBJ);
+</pre>
+		
+		<p>The <code>Uize.Node.unwire</code> method supports unwiring events for multiple nodes in a single method call, using the <code>nodeBLOB</code> parameter. Most importantly, the new <code>Uize.Node.unwire</code> method has parity with its new <code>Uize.Node.wire</code> counterpart. Actually, it supports a few more variations, but it supports all the variations that <code>Uize.Node.wire</code> supports. So, if you can wire events using certain parameter values in the <code>Uize.Node.wire</code> method, then you should be able to reverse the effect of calling <code>Uize.Node.wire</code> with those parameter values by calling <code>Uize.Node.unwire</code> with those same parameter values.</p>
+	</div>
+	
+	<a name="4"></a>
+	<h1 class="heading1" title="4. Benefits of These Changes"><span class="headingNumber"><a href="#4" title="4. Benefits of These Changes">4</a>. </span>Benefits of These Changes</h1>
+	<div class="contents1">
+		<p>The changes to these various methods offer the following benefits...</p>
+		
+		<table class="list">
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the new method names are more concise (short 'n sweet, less to type, smaller code)</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the new methods are more versatile, supporting single or multiple event-to-handler mappings</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the signatures of the variations for the new methods are more in harmony with the DOM event wiring and unwiring methods of the <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> class, as well as the event wiring and unwiring methods of the <code><a href="../reference/Uize.html">Uize</a></code> base class, increasing consistency across the framework</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>there is now finally parity between the new <code>Uize.Node.wire</code> and <code>Uize.Node.unwire</code> methods</td></tr>
+		</table>
+	</div>
+	
+	<a name="5"></a>
+	<h1 class="heading1" title="5. Deprecated Methods Still Supported"><span class="headingNumber"><a href="#5" title="5. Deprecated Methods Still Supported">5</a>. </span>Deprecated Methods Still Supported</h1>
+	<div class="contents1">
+		<p>For backwards compatibility, the deprecated <code>Uize.Node.wireEvent</code> and <code>Uize.Node.wireEvents</code> static methods are all still supported, and will be supported for some time into the future.</p>
+		
+		<p>All existing code using the deprecated methods should continue to work as normal. It would be wise to progressively migrate code over to using the new methods.</p>
+	</div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

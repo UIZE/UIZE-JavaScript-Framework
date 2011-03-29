@@ -1,0 +1,17 @@
+The =Uize.Date.format= and =Uize.Date.toPretty= static methods of the =Uize.Date= module have been migrated into the new =Uize.Date.Formatter= module.
+
+MIGRATED
+...............................................................
+Uize.Date.format    >> BECOMES >>  Uize.Date.Formatter.format
+Uize.Date.toPretty  >> BECOMES >>  Uize.Date.Formatter.toPretty
+...............................................................
+
+Because these methods have only been deprecated and have not yet been eliminated from the =Uize.Date= module, code currently using them should continue to work. However, code that was previously using these methods should be updated to use the new =Uize.Date.Formatter.format= and =Uize.Date.Formatter.toPretty= methods of the =Uize.Date.Formatter= module.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2010-06-07 - MIGRATED METHODS: Uize.Date.format, Uize.Date.toPretty
+....................................................................................

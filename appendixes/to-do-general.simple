@@ -1,0 +1,658 @@
+Client Services
+	- unit conversion (possible to implement this on the client side, but might be appropriate to migrate such a service to server side at some stage, and in such a case it would be desirable to allow for such a migration in a way that doesn't heavily impact the code using such a service)
+
+	- myWidget.ajax | myWidget.service
+	- Uize.Widget.Page.MySite subclass implements performAjax
+
+	- myWidget.ajax ({action:'convert',fromUnit:'inches',toUnit:''})
+
+	Example 1
+
+		BEFORE
+		...........................................................
+		myWidget.callInherited ('ensureLoggedIn') (function () {});
+		...........................................................
+
+		AFTER
+		.................................................
+		myWidget.ajax ({service:'login'},function () {});
+
+		// or...
+
+		myWidget.service ('login',function () {});
+		.................................................
+
+	Example 2
+
+		BEFORE
+		..........................................................
+		myWidget.callInherited ('enableProfile') (function () {});
+		..........................................................
+
+		AFTER
+		.........................................................
+		myWidget.ajax ({service:'enableProfile'},function () {});
+
+		or...
+
+		myWidget.service ('enableProfile',function () {});
+		.........................................................
+
+	What All Can Services Replace or Do?
+		- things like ensureLoggedIn & ensure (becomes login and services)
+			- should something like a login service
+		- basic unit conversion, localization services, validation services
+		- useDialog for probably a good number of existing dialogs that gather input / choices from the user
+		- anything asynchronous that requires a callback
+
+	Dynamically Load Client Code Supporting Service
+		Look at the example of enableProfile.
+
+		Benefit of being able to dynamically load code supporting client side execution of portions of the service.
+
+	Zazzle Specific Registration of Services
+
+		SYNTAX
+		...
+		{
+			service:serviceNameSTR,
+			module:moduleNameSTR,
+			methodName:
+		}
+		...
+
+		EXAMPLE - EXISTING CODE
+		...
+		{
+			service:'isValidHandle',
+			module:'Zazzle.Validator',
+			methodName:'handle'
+		}
+		...
+
+		EXAMPLE - NEW CODE
+		...
+		{
+			service:'enableProfile',
+			performService:function (_params,_directives) {
+				var _this = this;
+				Uize.module ({
+					required:'Zazzle.Services.MemberProfile',
+					builder:function () {
+						Zazzle.Services.MemberProfile.enable (_params,_this);
+					}
+				});
+			}
+		}
+		...
+
+	Caching?
+		If implemented in Uize.Comm, can get the benefit of its client caching mechanism. How could one get that benefit using a different approach? (such as implementing in performAjax in page widget subclass)
+
+Test Improvements
+	Make Unit Test Build Scripts Generic
+		Shareable Code to Dynamically Add Tests
+			Have shareable code that can take a list of module names, and dynamically add tests for modules for which no dedicated test modules have been created.
+
+			This code would be used in the UIZE Unit Tests example page, by supplying the list of modules from the =UizeDotCom.ModulesTree= module, and in the =_run-unit-tests-scrunched.js= and =_run-unit-tests-source.js= build scripts which would obtain a list of modules using =Uize.Wsh.getFiles=.
+
+	Clean Up Tests
+		Make Performance Tests Legit
+			Performance tests that aren't browser dependent should be turned into true test modules.
+
+			- they would exist under the namespace =Uize.Test.Performance=
+			- they would be combined into a test suite module as =Uize.Test.PerformanceTests=
+			- they would be runnable in the regular UIZE Unit Tests example
+			- as real modules, they would automatically have reference documentation, which could contain the full description / explanation for what the tests aim to establish
+
+		- some tests could become examples
+		- some tests could be eliminated
+
+	Put Tests Into Separate Uize.Tests Namespace
+		It would be better for tests to exist under a different namespace than =Uize.Test=, so that the =Uize.Test= namespace can be reserved for test subclasses for special types of tests.
+
+	For Unit Test Build Scripts
+		Consider testing the loading of modules in isolation of other modules, in order to determine that modules correctly declare their dependencies, without having missing declared dependencies masked by other modules that were loaded and built before them that shared some of their dependencies.
+
+		This approach would still not be foolproof, however, since merely loading and building a module can't determine that all modules that are needed are declared in the =required= list, since some required modules may only be accessed during runtime execution of some code within a module.
+
+	Test All JavaScript Files
+		It would be nice if the build script could also test code besides and other JavaScript files throughout the folder hierarchy of a site, rather than just testing the modules.
+
+		There might be numerous issues with testing arbitrary JavaScript files found spotted throughout a Web site's folders. For one thing, such JavaScript files may not be written as =Uize= JavaScript modules, and such files may not be able to be loaded without causing errors if they depend on other JavaScript code that they don't declare dependencies on.
+
+Node as a Widget
+	- a lot of widgets have to synchronize state to implied nodes
+
+	- to make it easier for widgets to optimize their performance and minimize the number of times that they touch the DOM in performing UI updates, it might be helpful to provide a representation of the state of a DOM node in the form of a widget. In this approach, implied nodes are instead represented as node type child widgets. Instances of node type widgets can carry state for a node while the widget is not yet wired and while the node does not exist, to be synchronized with the node when the widget is wired up later.
+
+	In what different ways do widgets touch implied nodes?
+
+	- modifying the className to reflect state
+	- modifying position
+	- modifying dimensions
+	- modifying color
+	- wiring event handlers
+
+Test Modules to Implement Next...
+	- =Uize.Test.Uize.Template=
+	- =Uize.Test.Uize=
+	- =Uize.Test.Uize.Json=
+	- =Uize.Test.Uize.Color=
+	- =Uize.Test.Uize.Color.xUtil=
+	- =Uize.Test.Uize.Curve=
+	- =Uize.Test.Uize.Scruncher=
+	- =Uize.Test.Uize.Curve.Rubber=
+	- =Uize.Test.Uize.Curve.Mod=
+
+Factor Out mergeCopy
+	Migrate mergeCopyInto to Uize base class, so it can be used by Uize.Widget.Page and other modules.
+
+Value Modifier Function
+	- a function that is flagged as a value modifier
+	- it is up to each function or method to determine if they will support value modifiers or not
+	- good candidates for methods to support value modifiers...
+		- myInstance.set
+		- MyClass.set
+		- Uize.Fade.fadeProperty
+		- Uize.Fade.fadeProperties
+		- Uize.Fx.fadeStyle
+		- Uize.Node.setStyle, myWidget.setNodeStyle
+		- Uize.Node.setProperty, myWidget.setNodeProperty
+
+	- makes sense where the value for which a value modifier is being specified is intended to specify a value for something for which a current value is known
+
+	Possible Semantics
+
+		.........................................................
+		slider.set ({value:slider + 10})
+		slider.set ({value:Uize.modifier.plus (10)})
+		slider.set ({value:Uize.modifier.toggle ('!')})
+		slider.set ({value:Uize.modifier ('*',10)})
+		slider.set ({value:Uize ['*'] (10)})
+		slider.set ({value:Uize ('*',10)})
+
+		slider.set ({value:Uize.mods.multiply (10)})
+
+		Uize.modifier ('+',10)
+
+		Uize._.plus (10)
+		Uize._.minus (5)
+		Uize.mod ('+',10)
+		Uize.mod (Math.round)
+
+		Uize.modifier ('*',10)
+		Uize.mod ('*',10)
+
+		Uize.mod.multiply (10)
+		.........................................................
+
+Profiling Support
+	- a means for getting reports of the time that certain operations take on a page
+		- module building time
+			- time for building each module
+			- total time for building all modules
+		- for widget instances (stored on each instance)...
+			- construction time
+			- wiring time
+				- total wiring time
+				- wiring time for children
+				- self wiring time
+			- inspect by widget tree
+			- inspect by module
+				- total number of instances
+				- total construction time
+				- total wiring time
+				- average construction time
+				- average wiring time
+
+Performance Questions...
+	- is there any difference between array.push (element) and array [array.length] = element ?
+		- there appears to be, with assign-to-end being faster, but it is not significant. In building an array of 1,000,000 elements, it can make a difference of up to 2 seconds. Difference is most pronounced in IE. At scales of 1000 elements, it makes a difference of just 1 or 2 ms. The assign-to-end approach adds to code size a tiny bit, requires maintaining a separate array length counter variable, and doesn't offer the convenience of pushing multiple elements in a single statement. Assign-to-end with accessing the length property is definitely not advisable, since that would eat into the performance benefit and more significantly add to code size.
+
+	- when getting a reference to a node, does it hurt to fall back to document.getElementsByName?
+		- doesn't appear to make that much difference in cases of many lookups. Optimizing it out for most lookups might help a little bit, but it's not that compelling.
+
+	- does setting a style property on a node always incur a cost, even if the value you're setting is the current value? If so, does accessing and testing before setting improve performance?
+
+	- what's the performance difference between Math.round (myNumber) and (myNumber + .5) >> 0 ?
+
+	- what's the performance difference between...
+
+		.........................................................
+		function doSomething (value) {
+			...
+		}
+		doSomething ('value1');
+		doSomething ('value2');
+		doSomething ('value3');
+		doSomething ('value4');
+		.........................................................
+
+		...and...
+
+		.........................................................
+		for (var value in {value1:1,value2:1,value3:1,value4:1}) {
+			...
+		}
+		.........................................................
+
+	- what's the performance difference between...
+
+		.........................................................
+		if (condition) doSomething ();
+		.........................................................
+
+		...and...
+
+		.........................................................
+		condition && doSomething ();
+		.........................................................
+
+Idea for Handling Functions That May Be Asynchronous
+	- approach 1
+		.........................................................
+		function blah (param1,param2,param3,_returnResult) {
+			var _returnResult = arguments.callee.returnResult || _returnResult;
+			delete arguments.callee.returnResult;
+
+			doAsyncStuff (
+				function () {
+					_returnResult (result);
+				}
+			);
+
+			arguments.callee.isAsync = true;
+		}
+
+		function callAsAsync (_functionToCall,_args,_returnResult) {
+			_functionToCall.returnResult = _returnResult;
+			var
+				result = _functionToCall.apply (_args),
+				thisCallWasAsync = _functionToCall.isAsync
+			;
+			delete _functionToCall.returnResult;
+			delete _functionToCall.isAsync;
+			thisCallWasAsync || setTimeout (0,function () {_returnResult (result)});
+		}
+		.........................................................
+
+		using it...
+
+		.........................................................
+		callAsAsync (blah,[1,2,3],handleReturn);
+		function handleReturn (result) {
+		}
+		.........................................................
+
+	- approach 2
+		.........................................................
+		function isValidUser (_user) {
+			var _result = new Async;
+
+			doAsyncUserValidation ({
+				user:_user,
+				callback:function (_isValidUser) {
+					_result.returnResult
+						? _result.returnResult (_isValidUser)
+						: (_result = _isValidUser)
+					;
+				}
+			});
+
+			return _result;
+		}
+
+		function callAsAsync (_functionToCall,_args,_returnResult) {
+			var _result = _functionToCall.apply (0,_args);
+			_result instanceof Async
+				? (_result.returnResult = _returnResult)
+				: _returnResult (_result)
+			;
+		}
+		.........................................................
+
+		using it...
+		.........................................................
+		callAsAsync (
+			isValidUser,
+			['timipoo'],
+			function (_isValid) {
+				// do next stuff
+			}
+		);
+		.........................................................
+
+- the most challenging and difficult problems to solve
+	- generic I18N resource string dependency system
+	- CSS dependency resolution system
+	- generic tracking/logging solution
+	- unit testing
+
+Generic Solution for Tracking
+	- in most cases, should not require code changes
+	- ability, from the outside of code, to track any event of any type of widget
+	- whether or not to track an event is determined by a configurable rule
+	- with tracked events, ability to log any aspects of set-get state that might be interesting
+	- tracking is basically just logging by a different name
+	- tracking and logging as good candidates for Aspect Oriented Programming
+
+Only Use set Method For Changing Property Values
+	Make sure that all setting of properties is done through the set method (ie. no more adhoc setting by assigning using the private name). Use a regular expression to search through the code.
+
+	How to Find Offending Cases
+		To find most cases...
+
+		SEARCH REGEXP
+		.........................................................
+		/this\._\w+\s*=[^=]/
+		.........................................................
+
+		...or write a build script that scans through JS files, determines private names of registered properties, and then uses those names in generated regular expressions to find direct assignments.
+
+	Issues found
+		Zazzle.ControlCustomShape
+			=width= and =height= being set when ratio locked - in onChange handler, so need to do some tricky dance moves.
+
+			FILE
+			................................................................................
+			C:/thesource/z.1/www.zazzle.com/trunk/z.2/js/library/Zazzle.ControlCustomShape.js
+			................................................................................
+
+		Zazzle.ControlPoptions
+			This one's tricky, assuming that a bunch of thought has already done into why it is the way it is.
+
+			FILE
+			................................................................................
+			C:/thesource/z.1/www.zazzle.com/trunk/z.2/js/library/Zazzle.ControlPoptions.js
+			................................................................................
+
+		Zazzle.ControlPoptionsShared
+			Another tricky one...
+
+			FILE
+			................................................................................
+			C:/thesource/z.1/www.zazzle.com/trunk/z.2/js/library/Zazzle.ControlPoptionsShared.js
+			................................................................................
+
+- factor out code for validating a value, where the validator can be...
+	- a simple value, to which the value being tested should be compared for equality
+	- a function, whose return result should indicate whether or not the value being tested is valid
+	- a regular expression, which should be tested on the value to determine if it is valid
+	- null or undefined, indicating that no test should be performed
+	- an optional parameter, indicating whether or not equality, strict equality, or dynamic (or some better name) mode should be used
+
+	- could be used...
+		- C:/thesource/z.1/www.zazzle.com/trunk/z.2/js/library/Zazzle.FormElement.js
+		- Uize (modify Uize.recordMatches)
+		- Uize.Node.find
+
+- should factor out code to set HTML for frame or iframe (best implementation so far in Simple Doc Tester)
+	- while at it, should factor out code for replacing contents of any window, and move into Uize.Node.setInnerHtml? Or Uize.Node.injectHtml? Or should there be a window utilities package?
+		Uize.Browser.Window.write
+			Uize.Browser.Window.write (window,content)
+			Uize.Browser.Window.write (window,content,contentType)
+		Uize.Browser.Window.launch
+		Uize.Browser.Window.center
+			Uize.Browser.Window.center (window)
+			Uize.Browser.Window.center ()
+		Uize.Browser.Window.resize
+			Uize.Browser.Window.resize (windowOBJ,width,height,positionX,positionY)
+
+			Uize.Browser.Window.resize (window,600,400)
+			Uize.Browser.Window.resize (window,'max','max')
+			Uize.Browser.Window.resize (window,null,'max')
+
+Proposed Shortenings
+	- Uize.Node.getById -> Uize.Node.byId or Uize.Node.id or just Uize.Node
+	- myWidget.getNode -> myWidget.node
+
+Key Aspects of a Framework
+	Solving fundamental problems in useful, convenient, friendly, understandable ways
+
+	- performance (load time, interaction speed, memory usage (non-leaky))
+	- I18N
+	- interaction logging & tracking
+	- application robustness & state management
+	- skinning / theming
+	- troubleshooting
+	- sensible code reuse
+	- ease of development
+	- easy wow (effects and animation)
+	- user help
+	- interoperability
+
+- Uize.Delayed
+	Portion of Implementation
+
+		.........................................................
+		_classPrototype.cancel = function () {
+			if (_this._timeout) {
+				clearTimeout (_this._timeout);
+				_this._timeout = _null;
+			}
+		}
+		_classPrototype.perform (_actionFunction) { // support optional delay param
+			var
+				_this = this,
+				_delay = _this._delay
+			;
+			_this.cancel ();
+			_delay ? (_this._timeout = setTimeout (_actionFunction,_delay)) : _actionFunction ();
+		};
+		.........................................................
+
+	Another Possible Implementation
+
+		.........................................................
+		Uize.caller = function (_context,_method,_params,_delay) {
+			function _callMethod () {
+				var _function = typeof _method == 'string' ? _context [_method] : _method;
+				_function.callerThis = this;
+				_function.callerArguments = arguments;
+				var _result = _params ? _function.apply (_context,_params) : _function.call (_context);
+				delete _function.callerThis;
+				delete _function.callerArguments;
+				return _result;
+			}
+			_callMethod.cancel = function () {};
+			if (_delay) {
+				var
+					_timeout,
+					_caller = function () {
+						var
+							_this = this,
+							_arguments = arguments
+						;
+						return (_timeout = setTimeout (function () {_callMethod.apply (_this,_arguments)},_delay));
+					}
+				;
+				(_caller.cancel = function () {if (_timeout) _timeout = clearTimeout (_timeout)}) ();
+				return _caller;
+			} else {
+				return _callMethod;
+			}
+		};
+		.........................................................
+
+	Sample Usage
+		Approach 1
+			.........................................................
+			_this._delayedAction = new Uize.Delayed ({delay:1000});
+			_this.wireNode (
+				node,
+				{
+					mouseover:function () {_this._delayed.perform (function () {_this.doSomething ()})},
+					mouseout:function () {_this._delayed.cancel ()}
+				}
+			);
+			.........................................................
+
+		Approach 2
+			.........................................................
+			var _delayedCaller = Uize.caller (_this,'doSomething',null,1000);
+			_this.wireNode (
+				node,
+				{
+					mouseover:_delayedCaller,
+					mouseout:function () {_delayedCaller.cancel ()}
+				}
+			);
+			.........................................................
+
+	Thoughts
+		.........................................................
+		function () {_this.setNodeStyle ('blah',{color:'#000'})}
+		Uize.caller (_this,'setNodeStyle,['blah',{color:'#000'}])
+
+		Uize.defer
+		.........................................................
+
+		What's good about closures for node event handlers is that they can access...
+
+		- the node as this
+		- the event as the first parameter
+
+		What's bad about closures...
+
+		- don't offer the delayed execution and cancelability supported with Uize.caller
+		- code hangs on to state of closure's scope
+
+More Unobtrusive JavaScript Features
+	Implement more unobtrusive features, where no JS is needed inside markup, such as...
+
+	- links that are flagged to pop open windows (perhaps with target="[some window name]")
+	- expand/collapse
+		- a lightweight way to get expand/collapse behavior into documents, without having to instantiate widgets
+
+Code Development (in order of priority)
+	**** property changed events refactoring
+		- some events that were being fired in the onChange handlers were not being fired right at the end, but now they in effect are because of the way the Changed.[propertyName] event mechanism is implemented. Could this cause any weird order of execution problems?
+
+		- the code registered in handlers for the Changed.[propertyName] event is now being executed as a batch for the changed properties after the whole batch of onChange handlers is executed. Could this cause order of execution problems, with some code already expecting the previous behavior?
+
+		- the Uize.Widget.Options class is using the '*' event to bubble up events from the button instances. The Uize.Widget.Button class was previously firing an event for change of the 'selected' property value. Because of the way that the Changed.[propertyName] event is currently implemented, this event will no longer be bubbled up. Could this issue with the '*' event become a general problem?
+
+		- perhaps onChange handlers should get the previous value for the property as a parameter
+
+	- high-minded ideas
+		- support for mix-ins
+			mixing in would...
+				...copy all properties of the prototype
+				...copy all static properties
+				...copy in all information of registered properties
+
+			ISSUES
+				- namespace conflict for all instance properties
+
+		- drag a value from any widget to any other widget that supports or has a child that supports the value as part of its interface
+		- an easy way to bind two widgets to each other, so that values are syncronized
+		- an orthogonal effect system that does not require widget code to implement effects
+		- a codified system for registering optimized handlers for batch property changes (eg. when value and value set are changed in one action)
+
+	- memory usage optimizations
+		- use prototype for set-get properties?
+
+	- performance optimizations
+		- a way to avoid calling onChange handlers at construction time
+
+	- new subclassing syntax
+		.........................................................
+		MyClass.subclass ({
+			alphastructor:{
+			},
+			omegastructor:{
+			},
+			instanceMethods:{
+			},
+			staticMethods:{
+			},
+			instaticMethods:{
+			},
+			setGetProperties:{
+			}
+		});
+		.........................................................
+
+	widget ID scheme refactoring
+		other...
+			- possibly come up with a different term for the root node of a widget (since we still have shell references in identifiers in various places, possibly just "root" instead of "shell")
+
+	image border fade overlay
+		a convenient way to automatically overlay a border fade on images in a document
+
+	Uize.TextOutline: a little class to make it easy to create an outline effect around text, so that it can be legible when against a background of a similar tone (ie. insufficient contrast)
+
+	Graphing DHTML
+		overlay for stock price chart images to highlight date and price at date
+
+	Image Letters Widget (Uize.Widget.Spritext)
+		an easy way to display words using character set table images
+
+	Auto-wired hide-reveal mechanism
+		for documents with sections of extra in-depth information that most users may not be interested. Allows the information to be available and read in the context of the larger document with an extra click, but without creating an overly heavy read for most users
+
+	Stars Rating Widget
+		a convenient way to have a rating value translated into a graphic of stars (whole and fractional). Could this be accomplished with a generalized bar / slider widget that has stars as its fullness bg?
+
+	Suggest / Auto-complete Widget
+
+	Utility routine to easily make a bunch of links open in a new window
+		- mode to automatically detect links to larger images and wire to open correctly sized. Frill where linked thumbnail "throbs" outwardly to suggest enlarging.
+		- mode to overlay alt/title on image with transparency effect
+
+	Auto-viewer for Images
+		Simply put in image tags in your page, let the auto-viewer present the images to the user in a professional layout
+		- covenient skins for easy setup
+
+	IDEAS
+		- facilitate multiple controls controlling the same data (eg. two buttons for the same action) -- might be two different object instances linked in some way
+		- combined with conformer mechanism, perhaps also the concept of discrete set value and resolved (ie. calculated value) value -- so if there was a valid range and there was an attempt to set outside the valid range, the common value used by most code would be the resolved value, but the set value would also still be stored and accessible through some interface
+
+	Puzzle Game
+		- takes an image and splits it up into puzzle fragments and then lets the user drag and drop them in place
+		- race against time
+		- mode where puzzle split if they haven't been used in a while
+		- mode where unused pieces fade out over time
+		- difficulty level can affect number of pieces
+		- difficulty level can increase piece dimension variation
+
+	- expand/collapse module for documents (to attach logic in similar way to Uize.Widget.Tree.List)
+	- letters remaining widget implemented using slider indicator widget
+	- XY selector widget
+	- nifty javascript bookmarklets that allow you to view the online version of a local file, or the local version of an online file
+	- table color fader
+	- text color fader
+	- ordering widget (for customizing table column order, etc.)
+
+BUGS
+	General
+		- examples/button-types.html - nodes type button
+			- when disabled or selected, busy cursor doesn't display
+			- in IE, when in normal state, busy cursor only display when mousing over certain regions
+
+	Firefox
+		- in the button-types example, the frames style button does not fire the "Click" event (seems to have something to do with the mousedown event handler's execution)
+
+	Safari
+		- for all behaviors that are modified using the Ctrl key, should also be modified by the metaKey (for Mac users)
+		- the slideshow stuff is not working
+		- the ThumbZoom class zoom out effect is not centering in the window when the window is scrolled
+		- after an image has zoomed out, there is a brief moment where the shield displays all solid before the opacity kicks in
+
+		...ImagePort.Draggable
+			no way to initiate Ctrl modifier key behaviors
+
+		Color Pickers With Gradient example
+			extremely slow
+
+		ThumbZoom
+			- zoom out effect is very choppy
+			- fade-to-black effect is very choppy
+			- weird flash sometimes at start of fade-to-black
+			- positioning is not adjusted for page being scrolled
+			- zoomed image is spontaneously dismissed if page had scrollbars (some weird event thing?)
+
+	IE (in order of priority)
+		- "Uize.WiseLoad Example": mouseover opacity effect on thumbnails not working (and trying to enable it using filter:alpha(opacity=...) was completely hosing my machine)
+

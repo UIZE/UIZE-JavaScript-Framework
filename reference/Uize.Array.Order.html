@@ -1,0 +1,531 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Uize.Array.Order | Documentation | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework Documentation Uize.Array.Order module reference documentation"/>
+	<meta name="description" content="The Uize.Array.Order module provides utility methods for reordering the elements of arrays, with support for reversing, jumbling, inside to out, etc."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../javascript-modules-index.html" class="breadcrumb breadcrumbWithArrow">MODULES</a>
+	<a href="Uize.html" title="View reference for Uize" class="breadcrumb">Uize</a>.<a href="Uize.Array.html" title="View reference for Uize.Array" class="breadcrumb">Array</a>.<a href="Uize.Array.Order.html" title="View reference for Uize.Array.Order" class="breadcrumb">Order</a>
+	<div class="pageActions">
+		<a id="page-search" href="javascript://" class="buttonLink" title="Search for references to this module...">SEARCH</a><a id="page-examples" href="javascript://" class="buttonLink" title="View examples for this module...">EXAMPLES</a><a href="source-code/Uize.Array.Order.html" class="buttonLink" title="View the JavaScript source code for this module...">SOURCE</a><a id="page-test" href="javascript://" class="buttonLink" title="Test this module...">TEST</a>
+	</div>
+
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="The Uize.Array.Order module provides utility methods for reordering the elements of arrays, with support for reversing, jumbling, inside to out, etc.">1. Introduction</a>
+				<ul>
+					<li><a href="#1_1">1.1. In a Nutshell</a>
+						<ul>
+							<li><a href="#1_1_1" title="Unlike sorting an array based upon its elements&apos; values, the methods of the Uize.Array.Order module allow you to reorder the elements according to different patterns - without respect to the element values.">1.1.1. Reordering Ins't Sorting</a></li>
+							<li><a href="#1_1_2">1.1.2. Types of Reordering</a>
+								<ul>
+									<li><a href="#1_1_2_1" title="The elements in an array can be reversed by using the Uize.Array.Order.reverse method, or by using the Uize.Array.Order.reorder method and specifying the value &apos;reverse&apos; for the method&apos;s reorderingModeSTR parameter.">1.1.2.1. Reverse</a></li>
+									<li><a href="#1_1_2_2" title="The elements of an array can be jumbled (randomly shuffled) by using the Uize.Array.Order.jumble static method, or by using the Uize.Array.Order.reorder method and specifying the value &apos;jumbled&apos; for the method&apos;s reorderingModeSTR parameter.">1.1.2.2. Jumble</a></li>
+									<li><a href="#1_1_2_3" title="The elements of an array can be reordered from inside to out by using the Uize.Array.Order.insideOut static method, or by using the Uize.Array.Order.reorder method and specifying the value &apos;inside out&apos; for the method&apos;s reorderingModeSTR parameter.">1.1.2.3. Inside to Out</a></li>
+									<li><a href="#1_1_2_4" title="The elements of an array can be reordered from outside to in by using the Uize.Array.Order.insideOut static method, or by using the Uize.Array.Order.reorder method and specifying the value &apos;outside in&apos; for the method&apos;s reorderingModeSTR parameter.">1.1.2.4. Outside to In</a></li>
+								</ul>
+							</li>
+							<li><a href="#1_1_3" title="The methods of the Uize.Array.Order module support a versatile target facility that allows the processed elements of the source array to be targeted either to the source array, to a fresh array, or to a specified target array.">1.1.3. Versatile Target</a></li>
+						</ul>
+					</li>
+					<li><a href="#1_2" title="The following example pages are good showcases for the Uize.Array.Order module...">1.2. Examples</a></li>
+					<li><a href="#1_3" title="The Uize.Array.Order module defines the Uize.Array.Order package under the Uize.Array namespace.">1.3. Implementation Info</a>
+						<ul>
+							<li><a href="#1_3_1" title="The features listed in this section have been introduced in this module.">1.3.1. Features Introduced in This Module</a></li>
+							<li><a href="#1_3_2" title="No features have been overridden in this module.">1.3.2. Features Overridden in This Module</a></li>
+							<li><a href="#1_3_3" title="This module has no inherited features.">1.3.3. Features Inherited From Other Modules</a></li>
+							<li><a href="#1_3_4" title="There are no modules directly under this namespace.">1.3.4. Modules Directly Under This Namespace</a></li>
+							<li><a href="#1_3_5" title="The Uize.Array.Order module is unit tested by the Uize.Test.Uize.Array.Order test module.">1.3.5. Unit Tests</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li><a href="#2">2. Static Methods</a>
+				<ul>
+					<li><a href="#2_1" title="Returns an array, being the specified source array reordered from inside to out.">2.1. Uize.Array.Order.insideOut</a></li>
+					<li><a href="#2_2" title="Returns an array, being a jumbled (randomly shuffled) version of the specified source array.">2.2. Uize.Array.Order.jumble</a></li>
+					<li><a href="#2_3" title="Returns an array, being the specified source array reordered from outside to in.">2.3. Uize.Array.Order.outsideIn</a></li>
+					<li><a href="#2_4" title="Returns an array, being a reordered version of the specified source array, using the specified reordering mode.">2.4. Uize.Array.Order.reorder</a>
+						<ul>
+							<li><a href="#2_4_1" title="The reorderingModeSTR parameter is a string, specifying the reordering mode that should be employed, and can have the following values...">2.4.1. reorderingModeSTR</a></li>
+						</ul>
+					</li>
+					<li><a href="#2_5" title="Returns an array, being a reversed version of the specified source array.">2.5. Uize.Array.Order.reverse</a></li>
+				</ul>
+			</li>
+			<li><a href="#3" title="For the sake of not redundantly describing the value types for certain method parameters and return values repeatedly, some common value types are described here.">3. Value Types</a>
+				<ul>
+					<li><a href="#3_1" title="An array reference, specifying an array that should be processed by an array method.">3.1. sourceARRAY</a>
+						<ul>
+							<li><a href="#3_1_1" title="Methods that accept parameters of the sourceARRAY value type can also support array-like objects, such as collections of DOM nodes - provided that the source array is not also specified as the target for reordered elements.">3.1.1. Array-like Values</a></li>
+						</ul>
+					</li>
+					<li><a href="#3_2" title="An array reference or boolean value, which lets you specify where the result of an array method&apos;s processing should be packaged.">3.2. targetARRAYorBOOL</a></li>
+				</ul>
+			</li>
+			<li><a href="#4">4. Static Properties</a>
+				<ul>
+					<li><a href="#4_1" title="IMPLEMENTATION INFO">4.1. Uize.Array.Order.moduleName</a></li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<a name="1"></a>
+	<h1 class="heading1" title="1. Introduction"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>. </span>Introduction</h1>
+	<div class="contents1">
+		<p>The <code>Uize.Array.Order</code> module provides utility methods for reordering the elements of arrays, with support for reversing, jumbling, inside to out, etc.</p>
+		
+		<p><b>DEVELOPERS:</b> <a href="http://www.tomkidding.com" target="_blank" class="externalSiteLink">Chris van Rensburg</a></p>
+		
+		<a name="1_1"></a>
+		<h2 class="heading2" title="1. Introduction -&gt; 1.1. In a Nutshell"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. In a Nutshell">1</a>. </span>In a Nutshell</h2>
+		<div class="contents2">
+			<a name="1_1_1"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.1. Reordering Ins&apos;t Sorting"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. In a Nutshell">1</a>.<a href="#1_1_1" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.1. Reordering Ins&apos;t Sorting">1</a>. </span>Reordering Ins't Sorting</h3>
+			<div class="contents3">
+				<p>Unlike sorting an array based upon its elements' values, the methods of the <code>Uize.Array.Order</code> module allow you to reorder the elements according to different patterns - without respect to the element values.</p>
+				
+				<p>As an example, the <code><a href="#2_5">Uize.Array.Order.reverse</a></code> method reverses the order of the elements in an array.</p>
+			</div>
+			
+			<a name="1_1_2"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Types of Reordering"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. In a Nutshell">1</a>.<a href="#1_1_2" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Types of Reordering">2</a>. </span>Types of Reordering</h3>
+			<div class="contents3">
+				<a name="1_1_2_1"></a>
+				<h4 class="heading4" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Types of Reordering -&gt; 1.1.2.1. Reverse"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. In a Nutshell">1</a>.<a href="#1_1_2" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Types of Reordering">2</a>.<a href="#1_1_2_1" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Types of Reordering -&gt; 1.1.2.1. Reverse">1</a>. </span>Reverse</h4>
+				<div class="contents4">
+					<p>The elements in an array can be reversed by using the <code><a href="#2_5">Uize.Array.Order.reverse</a></code> method, or by using the <code><a href="#2_4">Uize.Array.Order.reorder</a></code> method and specifying the value <code>'reverse'</code> for the method's <code><a href="#2_4_1">reorderingModeSTR</a></code> parameter.</p>
+					
+					<p><span class="allCaps">EXAMPLE</span></p>
+					
+					
+<pre class="sample-code">Uize.Array.Order.reverse ([1,2,3,4,5,6,7,8]); // returns the array [8,7,6,5,4,3,2,1]
+</pre>
+					
+					<p>While JavaScript's built-in <code><a href="../javascript-reference/Array.html">Array</a></code> object <b>does</b> provide a <code><a href="#1_1_2_1">reverse</a></code> instance method, the <code><a href="#2_5">Uize.Array.Order.reverse</a></code> method offers a <a href="#1_1_3">Versatile Target</a> facility that is lacking with the built-in <code><a href="#1_1_2_1">reverse</a></code> method, which always modifies the source array.</p>
+					
+					<p>For a more in-depth explanation, consult the reference for the <code><a href="#2_5">Uize.Array.Order.reverse</a></code> method.</p>
+				</div>
+				
+				<a name="1_1_2_2"></a>
+				<h4 class="heading4" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Types of Reordering -&gt; 1.1.2.2. Jumble"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. In a Nutshell">1</a>.<a href="#1_1_2" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Types of Reordering">2</a>.<a href="#1_1_2_2" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Types of Reordering -&gt; 1.1.2.2. Jumble">2</a>. </span>Jumble</h4>
+				<div class="contents4">
+					<p>The elements of an array can be jumbled (randomly shuffled) by using the <code><a href="#2_2">Uize.Array.Order.jumble</a></code> static method, or by using the <code><a href="#2_4">Uize.Array.Order.reorder</a></code> method and specifying the value <code>'jumbled'</code> for the method's <code><a href="#2_4_1">reorderingModeSTR</a></code> parameter.</p>
+					
+					<p><span class="allCaps">EXAMPLE</span></p>
+					
+					
+<pre class="sample-code">Uize.Array.Order.jumble ([1,2,3,4,5,6,7,8]); // returns an array like [2,8,4,1,6,3,7,5]
+</pre>
+					
+					<p>For a more in-depth explanation, consult the reference for the <code><a href="#2_2">Uize.Array.Order.jumble</a></code> method.</p>
+				</div>
+				
+				<a name="1_1_2_3"></a>
+				<h4 class="heading4" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Types of Reordering -&gt; 1.1.2.3. Inside to Out"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. In a Nutshell">1</a>.<a href="#1_1_2" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Types of Reordering">2</a>.<a href="#1_1_2_3" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Types of Reordering -&gt; 1.1.2.3. Inside to Out">3</a>. </span>Inside to Out</h4>
+				<div class="contents4">
+					<p>The elements of an array can be reordered from inside to out by using the <code><a href="#2_1">Uize.Array.Order.insideOut</a></code> static method, or by using the <code><a href="#2_4">Uize.Array.Order.reorder</a></code> method and specifying the value <code>'inside out'</code> for the method's <code><a href="#2_4_1">reorderingModeSTR</a></code> parameter.</p>
+					
+					<p><span class="allCaps">EXAMPLE</span></p>
+					
+					
+<pre class="sample-code">Uize.Array.Order.insideOut ([1,2,3,4,5,6,7,8]); // returns the array [4,5,3,6,2,7,1,8]
+</pre>
+					
+					<p>For a more in-depth explanation, consult the reference for the <code><a href="#2_1">Uize.Array.Order.insideOut</a></code> method.</p>
+				</div>
+				
+				<a name="1_1_2_4"></a>
+				<h4 class="heading4" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Types of Reordering -&gt; 1.1.2.4. Outside to In"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. In a Nutshell">1</a>.<a href="#1_1_2" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Types of Reordering">2</a>.<a href="#1_1_2_4" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Types of Reordering -&gt; 1.1.2.4. Outside to In">4</a>. </span>Outside to In</h4>
+				<div class="contents4">
+					<p>The elements of an array can be reordered from outside to in by using the <code><a href="#2_1">Uize.Array.Order.insideOut</a></code> static method, or by using the <code><a href="#2_4">Uize.Array.Order.reorder</a></code> method and specifying the value <code>'outside in'</code> for the method's <code><a href="#2_4_1">reorderingModeSTR</a></code> parameter.</p>
+					
+					<p><span class="allCaps">EXAMPLE</span></p>
+					
+					
+<pre class="sample-code">Uize.Array.Order.outsideIn ([1,2,3,4,5,6,7,8]); // returns the array [1,8,2,7,3,6,4,5]
+</pre>
+					
+					<p>For a more in-depth explanation, consult the reference for the <code><a href="#2_3">Uize.Array.Order.outsideIn</a></code> method.</p>
+				</div>
+			</div>
+			
+			<a name="1_1_3"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.3. Versatile Target"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. In a Nutshell">1</a>.<a href="#1_1_3" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.3. Versatile Target">3</a>. </span>Versatile Target</h3>
+			<div class="contents3">
+				<p>The methods of the <code>Uize.Array.Order</code> module support a versatile target facility that allows the processed elements of the source array to be targeted either to the source array, to a fresh array, or to a specified target array.</p>
+				
+				<p>With JavaScript's built-in <code><a href="../javascript-reference/Array.html">Array</a></code> object, some instance methods will modify the source array while others will create a fresh array. For example, the <code>splice</code> and <code><a href="#1_1_2_1">reverse</a></code> methods will modify the source array. On the other hand, the <code>concat</code> and <code>slice</code> methods return new arrays. In contrast, the methods of the <code>Uize.Array.Order</code> module let you specify the target behavior for the processed elements of the source array. A target is specified using the optional <code><a href="#3_2">targetARRAYorBOOL</a></code> parameter. Essentially three behaviors are supported: 1) modify the source array, 2) create a fresh array, or 3) use a specified target array.</p>
+				
+				<p>For a more in-depth discussion, consult the reference for the <code><a href="#3_2">targetARRAYorBOOL</a></code> value type.</p>
+			</div>
+		</div>
+		
+		<a name="1_2"></a>
+		<h2 class="heading2" title="1. Introduction -&gt; 1.2. Examples"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Examples">2</a>. </span>Examples</h2>
+		<div class="contents2">
+			<p>The following example pages are good showcases for the <code>Uize.Array.Order</code> module...</p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><a href="../examples/sequenced-show.html">Sequenced Show</a> - This demo shows how you can sequence the appearance of thumbnails in a grid, with thumbnails filling in from the top left and bottom right corners.</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><a href="../examples/sequenced-show-using-swap.html">Sequenced Show Using Swap</a> - See how thumbnails in a grid of thumbnails can be revealed in a choreographed manner, with a JavaScript animation effect for revealing each thumbnail.</td></tr>
+			</table>
+			<p><span class="allCaps">SEARCH FOR EXAMPLES</span></p>
+			
+			<p>Use the link below to search for example pages on the <b>uize.com</b> Web site that reference the <code>Uize.Array.Order</code> module...</p>
+			
+			<p><a href="http://www.google.com/search?hl=en&safe=off&domains=uize.com%2Fexamples&sitesearch=uize.com%2Fexamples&q=%22Uize.Array.Order%22" target="_blank" class="externalSiteLink">SEARCH</a></p>
+		</div>
+		
+		<a name="1_3"></a>
+		<h2 class="heading2" title="1. Introduction -&gt; 1.3. Implementation Info"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_3" title="1. Introduction -&gt; 1.3. Implementation Info">3</a>. </span>Implementation Info</h2>
+		<div class="contents2">
+			<p>The <code>Uize.Array.Order</code> module defines the <code>Uize.Array.Order</code> package under the <code><a href="../reference/Uize.Array.html">Uize.Array</a></code> namespace.</p>
+			
+			<a name="1_3_1"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.3. Implementation Info -&gt; 1.3.1. Features Introduced in This Module"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_3" title="1. Introduction -&gt; 1.3. Implementation Info">3</a>.<a href="#1_3_1" title="1. Introduction -&gt; 1.3. Implementation Info -&gt; 1.3.1. Features Introduced in This Module">1</a>. </span>Features Introduced in This Module</h3>
+			<div class="contents3">
+				<p>The features listed in this section have been introduced in this module.</p>
+				
+				<p><span class="allCaps">STATIC METHODS</span></p>
+				
+				<p><code><a href="#2_1">Uize.Array.Order.insideOut</a></code> | <code><a href="#2_2">Uize.Array.Order.jumble</a></code> | <code><a href="#2_3">Uize.Array.Order.outsideIn</a></code> | <code><a href="#2_4">Uize.Array.Order.reorder</a></code> | <code><a href="#2_5">Uize.Array.Order.reverse</a></code></p>
+				
+				<p><span class="allCaps">STATIC PROPERTIES</span></p>
+				
+				<p><code><a href="#4_1">Uize.Array.Order.moduleName</a></code></p>
+			</div>
+			
+			<a name="1_3_2"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.3. Implementation Info -&gt; 1.3.2. Features Overridden in This Module"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_3" title="1. Introduction -&gt; 1.3. Implementation Info">3</a>.<a href="#1_3_2" title="1. Introduction -&gt; 1.3. Implementation Info -&gt; 1.3.2. Features Overridden in This Module">2</a>. </span>Features Overridden in This Module</h3>
+			<div class="contents3">
+				<p>No features have been overridden in this module.</p>
+			</div>
+			
+			<a name="1_3_3"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.3. Implementation Info -&gt; 1.3.3. Features Inherited From Other Modules"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_3" title="1. Introduction -&gt; 1.3. Implementation Info">3</a>.<a href="#1_3_3" title="1. Introduction -&gt; 1.3. Implementation Info -&gt; 1.3.3. Features Inherited From Other Modules">3</a>. </span>Features Inherited From Other Modules</h3>
+			<div class="contents3">
+				<p>This module has no inherited features.</p>
+			</div>
+			
+			<a name="1_3_4"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.3. Implementation Info -&gt; 1.3.4. Modules Directly Under This Namespace"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_3" title="1. Introduction -&gt; 1.3. Implementation Info">3</a>.<a href="#1_3_4" title="1. Introduction -&gt; 1.3. Implementation Info -&gt; 1.3.4. Modules Directly Under This Namespace">4</a>. </span>Modules Directly Under This Namespace</h3>
+			<div class="contents3">
+				<p>There are no modules directly under this namespace.</p>
+			</div>
+			
+			<a name="1_3_5"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.3. Implementation Info -&gt; 1.3.5. Unit Tests"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_3" title="1. Introduction -&gt; 1.3. Implementation Info">3</a>.<a href="#1_3_5" title="1. Introduction -&gt; 1.3. Implementation Info -&gt; 1.3.5. Unit Tests">5</a>. </span>Unit Tests</h3>
+			<div class="contents3">
+				<p>The <code>Uize.Array.Order</code> module is unit tested by the <code><a href="../reference/Uize.Test.Uize.Array.Order.html">Uize.Test.Uize.Array.Order</a></code> test module.</p>
+			</div>
+		</div>
+	</div>
+	
+	<a name="2"></a>
+	<h1 class="heading1" title="2. Static Methods"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>. </span>Static Methods</h1>
+	<div class="contents1">
+		<a name="2_1"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.1. Uize.Array.Order.insideOut"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_1" title="2. Static Methods -&gt; 2.1. Uize.Array.Order.insideOut">1</a>. </span>Uize.Array.Order.insideOut</h2>
+		<div class="contents2">
+			<p>Returns an array, being the specified source array reordered from inside to out.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">reorderedARRAY = Uize.Array.Order.insideOut (sourceARRAY);
+</pre>
+			
+			<p>When an array is reordered from inside to out, the new order is formed by starting with the inner elements and moving outwards in both directions to reach the start and the end of the array. Consider the following example...</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">Uize.Array.Order.insideOut ([1,2,3,4,5,6,7,8]); // returns the array [4,5,3,6,2,7,1,8]
+</pre>
+			
+			<p>In the above example, at the center of the array being reordered are the values <code>4</code> and <code>5</code>. These are the first two elements of the reordered array. Moving outwards in both directions, the next two values are <code>3</code> and <code>6</code>, so these are the next two elements in the reordered array. Moving outwards further, the next two values are <code>2</code> and <code>7</code>, which become the next two elements in the reordered array. Finally, we get to the first and last values in the array being reordered, <code>1</code> and <code>9</code>, which become the last two elements of the reordered array.</p>
+			
+			<p><span class="allCaps">VARIATION</span></p>
+			
+			
+<pre class="sample-code">reorderedARRAY = Uize.Array.Order.insideOut (sourceARRAY,targetARRAYorBOOL);
+</pre>
+			
+			<p>When the optional <code><a href="#3_2">targetARRAYorBOOL</a></code> parameter is specified, the target destination for the reordered elements can be controlled (for more info, see the reference for the <code><a href="#3_2">targetARRAYorBOOL</a></code> value type).</p>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#2_2">Uize.Array.Order.jumble</a></code>, <code><a href="#2_3">Uize.Array.Order.outsideIn</a></code>, <code><a href="#2_4">Uize.Array.Order.reorder</a></code>, and <code><a href="#2_5">Uize.Array.Order.reverse</a></code> static methods</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_2"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.2. Uize.Array.Order.jumble"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_2" title="2. Static Methods -&gt; 2.2. Uize.Array.Order.jumble">2</a>. </span>Uize.Array.Order.jumble</h2>
+		<div class="contents2">
+			<p>Returns an array, being a jumbled (randomly shuffled) version of the specified source array.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">reorderedARRAY = Uize.Array.Order.jumble (sourceARRAY);
+</pre>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">Uize.Array.Order.jumble ([1,2,3,4,5,6,7,8]); // returns an array like [2,8,4,1,6,3,7,5]
+</pre>
+			
+			<p>In the above example, the order of the elements in the jumbled array will very likely be different for every different time that the <code><a href="#2_2">Uize.Array.Order.jumble</a></code> method is called.</p>
+			
+			<p><span class="allCaps">VARIATION</span></p>
+			
+			
+<pre class="sample-code">reorderedARRAY = Uize.Array.Order.jumble (sourceARRAY,targetARRAYorBOOL);
+</pre>
+			
+			<p>When the optional <code><a href="#3_2">targetARRAYorBOOL</a></code> parameter is specified, the target destination for the jumbled elements can be controlled (for more info, see the reference for the <code><a href="#3_2">targetARRAYorBOOL</a></code> value type).</p>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#2_1">Uize.Array.Order.insideOut</a></code>, <code><a href="#2_3">Uize.Array.Order.outsideIn</a></code>, <code><a href="#2_4">Uize.Array.Order.reorder</a></code>, and <code><a href="#2_5">Uize.Array.Order.reverse</a></code> static methods</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_3"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.3. Uize.Array.Order.outsideIn"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_3" title="2. Static Methods -&gt; 2.3. Uize.Array.Order.outsideIn">3</a>. </span>Uize.Array.Order.outsideIn</h2>
+		<div class="contents2">
+			<p>Returns an array, being the specified source array reordered from outside to in.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">reorderedARRAY = Uize.Array.Order.outsideIn (sourceARRAY);
+</pre>
+			
+			<p>When an array is reordered from outside to in, the new order is formed by starting with the start and the end of the array and moving inwards in both directions to reach the inner elements. Consider the following example...</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">Uize.Array.Order.outsideIn ([1,2,3,4,5,6,7,8]); // returns the array [1,8,2,7,3,6,4,5]
+</pre>
+			
+			<p>In the above example, at the start and end of the array being reordered are the values <code>1</code> and <code>8</code>. These are the first two elements of the reordered array. Moving inwards in both directions, the next two values are <code>2</code> and <code>7</code>, so these are the next two elements in the reordered array. Moving inwards further, the next two values are <code>3</code> and <code>6</code>, which become the next two elements in the reordered array. Finally, we get to the inner values in the array being reordered, <code>4</code> and <code>5</code>, which become the last two elements of the reordered array.</p>
+			
+			<p><span class="allCaps">VARIATION</span></p>
+			
+			
+<pre class="sample-code">reorderedARRAY = Uize.Array.Order.outsideIn (sourceARRAY,targetARRAYorBOOL);
+</pre>
+			
+			<p>When the optional <code><a href="#3_2">targetARRAYorBOOL</a></code> parameter is specified, the target destination for the reordered elements can be controlled (for more info, see the reference for the <code><a href="#3_2">targetARRAYorBOOL</a></code> value type).</p>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#2_1">Uize.Array.Order.insideOut</a></code>, <code><a href="#2_2">Uize.Array.Order.jumble</a></code>, <code><a href="#2_4">Uize.Array.Order.reorder</a></code>, and <code><a href="#2_5">Uize.Array.Order.reverse</a></code> static methods</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_4"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.4. Uize.Array.Order.reorder"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_4" title="2. Static Methods -&gt; 2.4. Uize.Array.Order.reorder">4</a>. </span>Uize.Array.Order.reorder</h2>
+		<div class="contents2">
+			<p>Returns an array, being a reordered version of the specified source array, using the specified reordering mode.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">reorderedARRAY = Uize.Array.Order.reorder (sourceARRAY,reorderingModeSTR);
+</pre>
+			
+			<p><span class="allCaps">VARIATION 1</span></p>
+			
+			
+<pre class="sample-code">reorderedARRAY =
+  Uize.Array.Order.reorder (sourceARRAY,reorderingModeSTR,targetARRAYorBOOL)
+;
+</pre>
+			
+			<p>By default, the <code><a href="#2_4">Uize.Array.Order.reorder</a></code> method packages the reordered array elements into a new array and does not modify the source array (ie. it's non-destructive). Specifying the optional <code><a href="#3_2">targetARRAYorBOOL</a></code> parameter allows you to explicitly specify a target for the operation, into which the reordered elements will be packaged.</p>
+			
+			<p><span class="allCaps">VARIATION 2</span></p>
+			
+			
+<pre class="sample-code">jumbledARRAY = Uize.Array.Order.reorder (sourceARRAY);
+</pre>
+			
+			<p>When only a <code><a href="#3_1">sourceARRAY</a></code> parameter is specified, then the default behavior is to reorder the source array using the <code>'jumble'</code> mode and package the results into a new array.</p>
+			
+			<a name="2_4_1"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.4. Uize.Array.Order.reorder -&gt; 2.4.1. reorderingModeSTR"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_4" title="2. Static Methods -&gt; 2.4. Uize.Array.Order.reorder">4</a>.<a href="#2_4_1" title="2. Static Methods -&gt; 2.4. Uize.Array.Order.reorder -&gt; 2.4.1. reorderingModeSTR">1</a>. </span>reorderingModeSTR</h3>
+			<div class="contents3">
+				<p>The <code><a href="#2_4_1">reorderingModeSTR</a></code> parameter is a string, specifying the reordering mode that should be employed, and can have the following values...</p>
+				
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>'jumbled'</code> (default) - reorders the specified source array in the same way as the <code><a href="#2_2">Uize.Array.Order.jumble</a></code> static method</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>'reverse'</code> - reorders the specified source array in the same way as the <code><a href="#2_5">Uize.Array.Order.reverse</a></code> static method</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>'inside out'</code> - reorders the specified source array in the same way as the <code><a href="#2_1">Uize.Array.Order.insideOut</a></code> static method</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>'outside in'</code> - reorders the specified source array in the same way as the <code><a href="#2_3">Uize.Array.Order.outsideIn</a></code> static method</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>'normal'</code> - leaves the order of elements unchanged</td></tr>
+				</table>
+			</div>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#2_1">Uize.Array.Order.insideOut</a></code>, <code><a href="#2_2">Uize.Array.Order.jumble</a></code>, <code><a href="#2_3">Uize.Array.Order.outsideIn</a></code>, and <code><a href="#2_5">Uize.Array.Order.reverse</a></code> static methods</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_5"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.5. Uize.Array.Order.reverse"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_5" title="2. Static Methods -&gt; 2.5. Uize.Array.Order.reverse">5</a>. </span>Uize.Array.Order.reverse</h2>
+		<div class="contents2">
+			<p>Returns an array, being a reversed version of the specified source array.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">reorderedARRAY = Uize.Array.Order.reverse (sourceARRAY);
+</pre>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">Uize.Array.Order.reverse ([1,2,3,4,5,6,7,8]); // returns the array [8,7,6,5,4,3,2,1]
+</pre>
+			
+			<p><span class="allCaps">VARIATION</span></p>
+			
+			
+<pre class="sample-code">reorderedARRAY = Uize.Array.Order.reverse (sourceARRAY,targetARRAYorBOOL);
+</pre>
+			
+			<p>When the optional <code><a href="#3_2">targetARRAYorBOOL</a></code> parameter is specified, the target destination for the reversed elements can be controlled (for more info, see the reference for the <code><a href="#3_2">targetARRAYorBOOL</a></code> value type).</p>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#2_1">Uize.Array.Order.insideOut</a></code>, <code><a href="#2_2">Uize.Array.Order.jumble</a></code>, <code><a href="#2_3">Uize.Array.Order.outsideIn</a></code>, and <code><a href="#2_4">Uize.Array.Order.reorder</a></code> static methods</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+	</div>
+	
+	<a name="3"></a>
+	<h1 class="heading1" title="3. Value Types"><span class="headingNumber"><a href="#3" title="3. Value Types">3</a>. </span>Value Types</h1>
+	<div class="contents1">
+		<p>For the sake of not redundantly describing the value types for certain method parameters and return values repeatedly, some common value types are described here.</p>
+		
+		<a name="3_1"></a>
+		<h2 class="heading2" title="3. Value Types -&gt; 3.1. sourceARRAY"><span class="headingNumber"><a href="#3" title="3. Value Types">3</a>.<a href="#3_1" title="3. Value Types -&gt; 3.1. sourceARRAY">1</a>. </span>sourceARRAY</h2>
+		<div class="contents2">
+			<p>An array reference, specifying an array that should be processed by an array method.</p>
+			
+			<p>Values of this type can be accepted by the <code><a href="#2_1">Uize.Array.Order.insideOut</a></code>, <code><a href="#2_2">Uize.Array.Order.jumble</a></code>, <code><a href="#2_3">Uize.Array.Order.outsideIn</a></code>, <code><a href="#2_4">Uize.Array.Order.reorder</a></code>, and <code><a href="#2_5">Uize.Array.Order.reverse</a></code> static methods.</p>
+			
+			<a name="3_1_1"></a>
+			<h3 class="heading3" title="3. Value Types -&gt; 3.1. sourceARRAY -&gt; 3.1.1. Array-like Values"><span class="headingNumber"><a href="#3" title="3. Value Types">3</a>.<a href="#3_1" title="3. Value Types -&gt; 3.1. sourceARRAY">1</a>.<a href="#3_1_1" title="3. Value Types -&gt; 3.1. sourceARRAY -&gt; 3.1.1. Array-like Values">1</a>. </span>Array-like Values</h3>
+			<div class="contents3">
+				<p>Methods that accept parameters of the <code><a href="#3_1">sourceARRAY</a></code> value type can also support array-like objects, such as collections of DOM nodes - provided that the source array is not also specified as the target for reordered elements.</p>
+			</div>
+		</div>
+		
+		<a name="3_2"></a>
+		<h2 class="heading2" title="3. Value Types -&gt; 3.2. targetARRAYorBOOL"><span class="headingNumber"><a href="#3" title="3. Value Types">3</a>.<a href="#3_2" title="3. Value Types -&gt; 3.2. targetARRAYorBOOL">2</a>. </span>targetARRAYorBOOL</h2>
+		<div class="contents2">
+			<p>An array reference or boolean value, which lets you specify where the result of an array method's processing should be packaged.</p>
+			
+			<p>Values of this type can be accepted by the <code><a href="#2_1">Uize.Array.Order.insideOut</a></code>, <code><a href="#2_2">Uize.Array.Order.jumble</a></code>, <code><a href="#2_3">Uize.Array.Order.outsideIn</a></code>, <code><a href="#2_4">Uize.Array.Order.reorder</a></code>, and <code><a href="#2_5">Uize.Array.Order.reverse</a></code> static methods.</p>
+			
+			<p><span class="allCaps">VALUES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>When the <b>boolean</b> value <code>true</code> is specified (the default value for the <code><a href="#3_2">targetARRAYorBOOL</a></code> parameter if it is omitted), then the result of an array method's processing will be packaged into a new array.</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>When the <b>boolean</b> value <code>false</code> is specified (not the same as not specifying a value), then the result of an array method's processing will be packaged into the source array that was supplied to the array method in its <code><a href="#3_1">sourceARRAY</a></code> parameter (ie. the method won't use a different target).</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>When an <b>array</b> is explicitly specified, then the result of an array method's processing will be packaged into the specified target array. This is convenient if you already have an array into which you wish to package the result. Incidentally, specifying the source array that you supplied to an array method as also the target array has the same effect as specifying the value <code>false</code> for <code><a href="#3_2">targetARRAYorBOOL</a></code> (ie. use the source as the target, don't use a different target).</td></tr>
+			</table>
+		</div>
+	</div>
+	
+	<a name="4"></a>
+	<h1 class="heading1" title="4. Static Properties"><span class="headingNumber"><a href="#4" title="4. Static Properties">4</a>. </span>Static Properties</h1>
+	<div class="contents1">
+		<a name="4_1"></a>
+		<h2 class="heading2" title="4. Static Properties -&gt; 4.1. Uize.Array.Order.moduleName"><span class="headingNumber"><a href="#4" title="4. Static Properties">4</a>.<a href="#4_1" title="4. Static Properties -&gt; 4.1. Uize.Array.Order.moduleName">1</a>. </span>Uize.Array.Order.moduleName</h2>
+		<div class="contents2">
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+	</div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

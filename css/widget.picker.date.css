@@ -1,0 +1,12 @@
+.datePickerIcon, .datePickerIcon:link, .datePickerIcon:visited, .datePickerIcon:hover, .datePickerIcon:active {
+	border:none;
+	padding:3px;
+	background:url(../images/widgets/date-picker/selector-icon.jpg) right center no-repeat;
+}
+.datePickerIcon img {
+	width:17px;
+	height:17px;
+	margin:0;
+	border:0;
+}
+

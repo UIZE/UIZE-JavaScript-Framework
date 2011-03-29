@@ -1,0 +1,194 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Sequenced Show Using Swap - HTML Source Code | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework HTML example source code"/>
+	<meta name="description" content="This is the source code for the Sequenced Show Using Swap example"/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../../css/page.css"/>
+	<link rel="stylesheet" href="../../css/page.source.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../../index.html" title="UIZE JavaScript Framework home"></a>
+	SOURCE CODE: Sequenced Show Using Swap
+	<div id="page-actions" class="pageActions">
+		<a href="../sequenced-show-using-swap.html" class="buttonLink">VIEW EXAMPLE</a>
+	</div>
+</h1>
+
+<pre>
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+&lt;head&gt;
+  &lt;title&gt;Sequenced Show Using Swap | JavaScript Examples | UIZE JavaScript Framework&lt;/title&gt;
+  &lt;meta name="keywords" content="featured animation Uize.Array.Order Uize.Widget.Swap Uize.Widget.ThumbZoom"/&gt;
+  &lt;meta name="description" content="See how thumbnails in a grid of thumbnails can be revealed in a choreographed manner, with a JavaScript animation effect for revealing each thumbnail."/&gt;
+  &lt;link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/&gt;
+  &lt;link rel="stylesheet" href="../css/page.css"/&gt;
+  &lt;link rel="stylesheet" href="../css/page.example.css"/&gt;
+  &lt;link rel="stylesheet" href="css/thumbnail-set.css"/&gt;
+  &lt;style type="text/css"&gt;
+    .main {
+      padding-bottom:5px; /* avoid scrolling in 1024x768 */
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+&lt;script type="text/javascript" src="../js/Uize.js"&gt;&lt;/script&gt;
+
+&lt;h1 class="document-title"&gt;
+  &lt;a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"&gt;&lt;/a&gt;
+  &lt;a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow"&gt;JAVASCRIPT EXAMPLES&lt;/a&gt;
+  Sequenced Show Using Swap
+  &lt;div id="page-actions" class="pageActions"&gt;
+    &lt;a href="source-code/sequenced-show-using-swap.html" class="buttonLink"&gt;SOURCE&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/h1&gt;
+
+&lt;div class="main"&gt;
+  &lt;!-- explanation copy --&gt;
+
+  &lt;div class="explanation"&gt;
+    &lt;p&gt;In this example, the &lt;code&gt;Uize.Array.Order.jumble&lt;/code&gt; method of the &lt;a href="../reference/Uize.Array.Order.html"&gt;&lt;code&gt;Uize.Array.Order&lt;/code&gt;&lt;/a&gt; package is used in conjunction with the &lt;code&gt;Uize.Node.find&lt;/code&gt; method in order to sequence the showing of thumbnail images in a grid. Each thumbnail is revealed using a JavaScript animation effect provided by the &lt;a href="../reference/Uize.Widget.Swap.html"&gt;&lt;code&gt;Uize.Widget.Swap&lt;/code&gt;&lt;/a&gt; class. Additionally, the &lt;a href="../reference/Uize.Widget.ThumbZoom.html"&gt;&lt;code&gt;Uize.Widget.ThumbZoom&lt;/code&gt;&lt;/a&gt; widget is being used to provide a JavaScript animation zoomed view effect when you click on the thumbnails.&lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;!-- grid containing lots and lots of thumbnail images --&gt;
+
+  &lt;div class="thumbnailSet"&gt;
+    &lt;a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228109666540948246&amp;max_dim=500"&gt;&lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228109666540948246&amp;max_dim=105" class="thumbnail" title="Braving the Onslaught" alt=""/&gt;&lt;/a&gt;
+    &lt;a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228745103279879745&amp;max_dim=500"&gt;&lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228745103279879745&amp;max_dim=105" class="thumbnail" title="Companion to a Sunset" alt=""/&gt;&lt;/a&gt;
+    &lt;a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228866001826566384&amp;max_dim=500"&gt;&lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228866001826566384&amp;max_dim=105" class="thumbnail" title="Concrete Eternity" alt=""/&gt;&lt;/a&gt;
+    &lt;a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228321774790917687&amp;max_dim=500"&gt;&lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228321774790917687&amp;max_dim=105" class="thumbnail" title="Corrugate It" alt=""/&gt;&lt;/a&gt;
+    &lt;a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228463251413365530&amp;max_dim=500"&gt;&lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228463251413365530&amp;max_dim=105" class="thumbnail" title="Crank It Up" alt=""/&gt;&lt;/a&gt;
+    &lt;a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228507796122097730&amp;max_dim=500"&gt;&lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228507796122097730&amp;max_dim=105" class="thumbnail" title="Driving Through the Rain" alt=""/&gt;&lt;/a&gt;
+
+    &lt;a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228267745724726415&amp;max_dim=500"&gt;&lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228267745724726415&amp;max_dim=105" class="thumbnail" title="Flock of Clouds" alt=""/&gt;&lt;/a&gt;
+    &lt;a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228937676589416694&amp;max_dim=500"&gt;&lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228937676589416694&amp;max_dim=105" class="thumbnail" title="Hail to the Opening" alt=""/&gt;&lt;/a&gt;
+    &lt;a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228483162492178759&amp;max_dim=500"&gt;&lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228483162492178759&amp;max_dim=105" class="thumbnail" title="Heavens Open Over Pedro" alt=""/&gt;&lt;/a&gt;
+    &lt;a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228855435929294206&amp;max_dim=500"&gt;&lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228855435929294206&amp;max_dim=105" class="thumbnail" title="Hook in the Wall" alt=""/&gt;&lt;/a&gt;
+    &lt;a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228496639998196479&amp;max_dim=500"&gt;&lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228496639998196479&amp;max_dim=105" class="thumbnail" title="Huddling Together" alt=""/&gt;&lt;/a&gt;
+    &lt;a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228623703668130129&amp;max_dim=500"&gt;&lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228623703668130129&amp;max_dim=105" class="thumbnail" title="Just a Visitor" alt=""/&gt;&lt;/a&gt;
+
+    &lt;a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228897217554746467&amp;max_dim=500"&gt;&lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228897217554746467&amp;max_dim=105" class="thumbnail" title="Out the Bus Window" alt=""/&gt;&lt;/a&gt;
+    &lt;a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228554379238024970&amp;max_dim=500"&gt;&lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228554379238024970&amp;max_dim=105" class="thumbnail" title="Pacifica Pier From Milagra" alt=""/&gt;&lt;/a&gt;
+    &lt;a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228550194293355740&amp;max_dim=500"&gt;&lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228550194293355740&amp;max_dim=105" class="thumbnail" title="Pier Before the Storm" alt=""/&gt;&lt;/a&gt;
+    &lt;a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228234695931308619&amp;max_dim=500"&gt;&lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228234695931308619&amp;max_dim=105" class="thumbnail" title="Rain Fall" alt=""/&gt;&lt;/a&gt;
+    &lt;a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228580091324147918&amp;max_dim=500"&gt;&lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228580091324147918&amp;max_dim=105" class="thumbnail" title="Retirement Home" alt=""/&gt;&lt;/a&gt;
+    &lt;a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228074575082103294&amp;max_dim=500"&gt;&lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228074575082103294&amp;max_dim=105" class="thumbnail" title="San Fran Sunset" alt=""/&gt;&lt;/a&gt;
+
+    &lt;a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228118804591686444&amp;max_dim=500"&gt;&lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228118804591686444&amp;max_dim=105" class="thumbnail" title="San Mateo Sunset" alt=""/&gt;&lt;/a&gt;
+    &lt;a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228948359037055649&amp;max_dim=500"&gt;&lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228948359037055649&amp;max_dim=105" class="thumbnail" title="Setting Below Clouds" alt=""/&gt;&lt;/a&gt;
+    &lt;a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228026937512483785&amp;max_dim=500"&gt;&lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228026937512483785&amp;max_dim=105" class="thumbnail" title="Shadow of the Past" alt=""/&gt;&lt;/a&gt;
+    &lt;a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228586025680090150&amp;max_dim=500"&gt;&lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228586025680090150&amp;max_dim=105" class="thumbnail" title="Stacks of Steel" alt=""/&gt;&lt;/a&gt;
+    &lt;a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228888824201666423&amp;max_dim=500"&gt;&lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228888824201666423&amp;max_dim=105" class="thumbnail" title="Sun Sets Soon at Sweeney" alt=""/&gt;&lt;/a&gt;
+    &lt;a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228484030353525473&amp;max_dim=500"&gt;&lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228484030353525473&amp;max_dim=105" class="thumbnail" title="Sun Through a Tree" alt=""/&gt;&lt;/a&gt;
+
+    &lt;a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228859576507617417&amp;max_dim=500"&gt;&lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228859576507617417&amp;max_dim=105" class="thumbnail" title="Sweeney Ridge Sunset" alt=""/&gt;&lt;/a&gt;
+    &lt;a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228620264277935845&amp;max_dim=500"&gt;&lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228620264277935845&amp;max_dim=105" class="thumbnail" title="Trees Meet Sky" alt=""/&gt;&lt;/a&gt;
+    &lt;a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228786228006249323&amp;max_dim=500"&gt;&lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228786228006249323&amp;max_dim=105" class="thumbnail" title="Twins" alt=""/&gt;&lt;/a&gt;
+    &lt;a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228225341102196754&amp;max_dim=500"&gt;&lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228225341102196754&amp;max_dim=105" class="thumbnail" title="Urban Heavens" alt=""/&gt;&lt;/a&gt;
+    &lt;a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228213464916914087&amp;max_dim=500"&gt;&lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228213464916914087&amp;max_dim=105" class="thumbnail" title="Window Lean" alt=""/&gt;&lt;/a&gt;
+    &lt;a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228734547884666866&amp;max_dim=500"&gt;&lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228734547884666866&amp;max_dim=105" class="thumbnail" title="Windswept and Alone" alt=""/&gt;&lt;/a&gt;
+  &lt;/div&gt;
+  &lt;div style="clear:left;"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- JavaScript code to wire up the sequenced show and "thumb zoom" behavior for the image thumbnails --&gt;
+
+&lt;script type="text/javascript"&gt;
+
+Uize.module ({
+  required:[
+    'UizeDotCom.Page.Example.library',
+    'UizeDotCom.Page.Example',
+    'Uize.Array.Order',
+    'Uize.Node',
+    'Uize.Widget.Swap',
+    'Uize.Widget.ThumbZoom'
+  ],
+  builder:function () {
+    /*** create the example page widget ***/
+      var page = window.page = new UizeDotCom.Page.Example;
+
+    /* TO DO:
+      - need a way to know when all images have completed loading
+    */
+
+    /*** common code ***/
+      var thumbNodes = Uize.Array.Order.jumble (Uize.Node.find ({tagName:'IMG',className:'thumbnail'}));
+
+    /*** wire up sequenced reveal behavior ***/
+      var
+        thumbNodeSwap = page.addChild (
+          'swap',
+          Uize.Widget.Swap,
+          {
+            viewSeedSizeX:0,
+            viewSeedSizeY:0,
+            viewSeedAlignX:.5,
+            viewSeedAlignY:.5,
+            dissolve:false
+          }
+        ),
+        currentThumbNodeNo = -1,
+        currentThumbNode
+      ;
+      thumbNodeSwap.fade.set ({
+        duration:200,
+        curve:null
+      });
+      thumbNodeSwap.fade.wire ('Done',revealNextThumbNode);
+      function revealNextThumbNode () {
+        currentThumbNodeNo++;
+        if (currentThumbNodeNo &lt; thumbNodes.length) {
+          currentThumbNode = thumbNodes [currentThumbNodeNo];
+          thumbNodeSwap.prepareForNextItem (null,currentThumbNode);
+          Uize.Node.setStyle (currentThumbNode,{visibility:'visible'});
+          thumbNodeSwap.setCurrentItem (currentThumbNode);
+        }
+      }
+      revealNextThumbNode ();
+      /*
+      var imageLoader = new Uize.ImageLoader;
+      imageLoader.wire (
+        'Images Loaded',
+        function () {
+          // start the sequence of
+        }
+      );
+      */
+
+    /*** create the Uize.Widget.ThumbZoom instance ***/
+      page.addChild ('thumbZoom',Uize.Widget.ThumbZoom,{thumbNodes:thumbNodes,imageValidator:null});
+
+    /*** wire up the page widget ***/
+      page.wireUi ();
+  }
+});
+
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.library',
+		'UizeDotCom.Page'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page).wireUi ()}
+});
+
+</script>
+
+</body></html>

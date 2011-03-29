@@ -1,0 +1,400 @@
+<%@
+	input ({
+		title:'string',
+		pathToRoot:'string',
+		body:'string'
+	});
+%><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title><% .title %></title>
+</head>
+
+<body>
+
+<style type="text/css">
+	.simpleDoc {
+		width:780px;
+		margin:auto;
+		padding:10px 15px;
+		border-left:1px dotted #ccc;
+		border-right:1px dotted #ccc;
+		background:#f9faf9;
+		font-family:Arial;
+		font-size:12px;
+	}
+
+	/*** title ***/
+		.simpleDoc .documentTitle {
+			font-family:Arial, Helvetica, Verdana;
+			font-size:16px;
+			font-weight:bold;
+			letter-spacing:5px;
+			color:#000;
+			background:#fff;
+			padding:10px 0 10px 28px;
+			margin:0;
+			border:none;
+			border-top:1px solid #e8ecea;
+			border-bottom:10px solid #e8ecea;
+		}
+
+	/*** links ***/
+		.simpleDoc a, .simpleDoc a:link, .simpleDoc a:visited, .simpleDoc a:hover, .simpleDoc a:active {
+			text-decoration:none;
+			outline:none;
+			color:#354;
+			border-bottom:1px dotted #aaa;
+		}
+		.simpleDoc a:hover, .simpleDoc a:active {
+			color:#f00;
+		}
+		.simpleDoc a:hover {
+			border-bottom:1px dotted #f00;
+		}
+		.simpleDoc a:active {
+			border-bottom:1px solid #f00;
+		}
+
+	/*** inline code snippets ***/
+		.simpleDoc code {
+			font-weight:bold;
+			white-space:nowrap;
+			color:#354;
+			margin-left:2px;
+			margin-right:2px;
+		}
+
+	/*** contents tree ***/
+		.simpleDoc .contents-tree-shell a,
+		.simpleDoc .contents-tree-shell a:link,
+		.simpleDoc .contents-tree-shell a:visited
+		{
+			border-bottom:none;
+		}
+		.simpleDoc .contents-tree-shell li {
+			list-style:none;
+		}
+
+	/*** Section Contents ***/
+		.simpleDoc .contents1,
+		.simpleDoc .contents2,
+		.simpleDoc .contents3,
+		.simpleDoc .contents4,
+		.simpleDoc .contents5,
+		.simpleDoc .contents6,
+		.simpleDoc .contents7,
+		.simpleDoc .contents8,
+		.simpleDoc .contents9
+		{
+			margin-left:10px;
+			margin-bottom:10px;
+		}
+
+	/*** Section Headings ***/
+		/*** all ***/
+			.simpleDoc .heading1,
+			.simpleDoc .heading2,
+			.simpleDoc .heading3,
+			.simpleDoc .heading4,
+			.simpleDoc .heading5,
+			.simpleDoc .heading6,
+			.simpleDoc .heading7,
+			.simpleDoc .heading8,
+			.simpleDoc .heading9
+			{
+				font-family:Arial, Helvetica, Verdana;
+				font-weight:normal;
+			}
+
+		/*** heading numbering ***/
+			.simpleDoc .heading2 .headingNumber,
+			.simpleDoc .heading3 .headingNumber,
+			.simpleDoc .heading4 .headingNumber,
+			.simpleDoc .heading5 .headingNumber,
+			.simpleDoc .heading6 .headingNumber,
+			.simpleDoc .heading7 .headingNumber,
+			.simpleDoc .heading8 .headingNumber,
+			.simpleDoc .heading9 .headingNumber
+			{
+				margin-right:3px;
+			}
+
+		/*** heading 1 ***/
+			.simpleDoc .heading1 {
+				font-size:14px;
+				letter-spacing:3px;
+				padding:6px 0 6px 16px;
+				margin-top:20px;
+				margin-bottom:0;
+				border:1px solid #aab;
+				border-radius:5px;
+				-moz-border-radius:5px;
+				-webkit-border-radius:5px;
+				color:#000;
+				background:#b7babf;
+			}
+			.simpleDoc .heading1 a, .simpleDoc .heading1 a:visited {
+				color:#000;
+				background:none;
+				border:none;
+				margin:0;
+			}
+			.simpleDoc .heading1 a:hover {
+				color:#fff;
+				background:#000;
+				border:none;
+			}
+
+		/*** heading 2 ***/
+			.simpleDoc .heading2 {
+				font-size:15px;
+				padding:3px 2px 3px 15px;
+				margin-bottom:0;
+				margin-top:20px;
+				border:1px solid #b3bcbd;
+				border-radius:3px;
+				-moz-border-radius:3px;
+				-webkit-border-radius:3px;
+				color:#000;
+				background:#e3e9ea;
+			}
+			.simpleDoc .heading2 a, .simpleDoc .heading2 a:visited {
+				color:#000;
+				background:none;
+				border:none;
+				margin:0;
+			}
+			.simpleDoc .heading2 a:hover {
+				color:#fff;
+				background:#000;
+				border:none;
+			}
+
+		/*** heading 3 ***/
+			.simpleDoc .heading3 {
+				font-size:14px;
+				letter-spacing:1px;
+				padding:1px 0 4px 0;
+				margin-bottom:0;
+				margin-top:25px;
+				border-bottom:1px solid #899;
+				color:#000;
+			}
+			.simpleDoc .heading3 a, .simpleDoc .heading3 a:visited {
+				color:#000;
+				background:none;
+				border:none;
+				margin:0;
+			}
+			.simpleDoc .heading3 a:hover {
+				color:#fff;
+				background:#000;
+				border:none;
+			}
+
+		/*** heading 4 ***/
+			.simpleDoc .heading4 {
+				font-size:12px;
+				letter-spacing:2px;
+				background:#d2ddde;
+				margin-bottom:0;
+				margin-top:15px;
+				border:1px solid #fff;
+				border-radius:2px;
+				-moz-border-radius:2px;
+				-webkit-border-radius:2px;
+				padding:5px 0 5px 10px;
+				color:#000;
+			}
+			.simpleDoc .heading4 a, .simpleDoc .heading4 a:visited {
+				color:#000;
+				background:none;
+				border:none;
+			}
+			.simpleDoc .heading4 a:hover {
+				color:#fff;
+				background:#000;
+				border:none;
+			}
+
+		/*** heading 5 ***/
+			.simpleDoc .heading5 {
+				font-size:12px;
+				letter-spacing:2px;
+				background:#e6eaef;
+				margin-bottom:0;
+				margin-top:15px;
+				border:1px solid #d0d0d0;
+				border-radius:2px;
+				-moz-border-radius:2px;
+				-webkit-border-radius:2px;
+				padding:4px 0 4px 10px;
+				color:#000;
+			}
+			.simpleDoc .heading5 a, .simpleDoc .heading5 a:visited {
+				color:#000;
+				background:none;
+				border:none;
+			}
+			.simpleDoc .heading5 a:hover {
+				color:#fff;
+				background:#000;
+				border:none;
+			}
+
+		/*** heading 6-9 ***/
+			.simpleDoc .heading6,
+			.simpleDoc .heading7,
+			.simpleDoc .heading8,
+			.simpleDoc .heading9 {
+				font-size:12px;
+				letter-spacing:1px;
+				margin-bottom:0;
+				margin-top:15px;
+				border-bottom:1px solid #d0d0d0;
+				padding:4px 0 4px 10px;
+				color:#000;
+			}
+			.simpleDoc .heading6 a, .simpleDoc .heading6 a:visited,
+			.simpleDoc .heading7 a, .simpleDoc .heading6 a:visited,
+			.simpleDoc .heading8 a, .simpleDoc .heading6 a:visited,
+			.simpleDoc .heading9 a, .simpleDoc .heading6 a:visited
+			{
+				color:#000;
+				background:none;
+				border:none;
+			}
+			.simpleDoc .heading6 a:hover,
+			.simpleDoc .heading7 a:hover,
+			.simpleDoc .heading8 a:hover,
+			.simpleDoc .heading9 a:hover
+			{
+				color:#fff;
+				background:#000;
+				border:none;
+			}
+
+	/*** Other Elements ***/
+		.simpleDoc pre.sample-code {
+			color:#000;
+			background:#fff;
+			font-family:Courier;
+			font-size:12px;
+			font-weight:normal;
+			padding:10px;
+			border:4px solid #afb6b8;
+			border-radius:10px;
+			-moz-border-radius:10px;
+			-webkit-border-radius:10px;
+			overflow:auto;
+		}
+		.simpleDoc .allCaps {
+			font-family:Verdana, Arial, Helvetica;
+			font-size:11px;
+			font-weight:bold;
+			color:#354;
+			letter-spacing:3px;
+			text-shadow:
+				-1px -1px 0 #f3f3f3, -1px 0 0 #f3f3f3, -1px 1px 0 #f3f3f3,
+				1px -1px 0 #f3f3f3, 1px 0 0 #f3f3f3, 1px 1px 0 #f3f3f3
+			;
+			padding-bottom:2px;
+			border-bottom:1px solid #ccc;
+		}
+
+		/*** lists ***/
+			.simpleDoc table.list {
+				margin-top:5px;
+			}
+			.simpleDoc table.list td {
+				padding:2px 0;
+			}
+			.simpleDoc table.list .bullet {
+				display:list-item;
+				margin-left:15px;
+			}
+
+		/*** Horizontal Rules ***/
+			.simpleDoc hr.thin,
+			.simpleDoc hr.thick {
+				margin:20px 0;
+			}
+			.simpleDoc hr.thin {
+				height:0;
+				border:1px dotted #899;
+				border-bottom:none;
+			}
+			.simpleDoc hr.thick {
+				background:#c6cccc;
+				border:none;
+				height:10px;
+			}
+
+	/*** data tables ***/
+		.simpleDoc table.data {
+			border-collapse:collapse;
+			background:#fff;
+			margin:5px 0;
+		}
+		.simpleDoc table.data tr td {
+			border:1px solid #aaa;
+			text-align:left;
+			padding:3px 7px;
+			font-family:courier;
+		}
+		.simpleDoc table.data tr.title td,
+		.simpleDoc table.data tr.heading td {
+			color:#000;
+			font-family:Arial;
+			text-shadow:1px 0 1px #fff;
+			background:#ccc;
+			border-bottom:1px solid #888;
+			text-align:center;
+		}
+		.simpleDoc table.data tr.heading td {
+			background:#e4e4e4;
+		}
+		.simpleDoc table.data tr.title td {
+			font-size:11px;
+			font-weight:bold;
+			letter-spacing:4px;
+			padding:5px 15px 6px 15px;
+		}
+		.simpleDoc table.data tr.heading td {
+			font-size:11px;
+			padding:4px 8px;
+		}
+
+	/*** image objects ***/
+		.simpleDoc .image {
+			margin:15px 0;
+		}
+		.simpleDoc .image a {
+			border:none;
+		}
+		.simpleDoc .image img {
+			border:none;
+		}
+		.simpleDoc .image .imageTitle {
+			font-size:12px;
+			font-weight:bold;
+			padding-right:5px;
+		}
+		.simpleDoc .image .imageSubtitle {
+			font-size:10px;
+		}
+</style>
+
+<div class="simpleDoc"><%
+	if (input.title) {
+%>
+	<div class="documentTitle"><% .title -> tagAttributeValue %></div>
+
+<%
+	}
+%><% .body %>
+</div>
+
+</body></html>
+

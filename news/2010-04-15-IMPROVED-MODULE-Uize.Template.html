@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2010-04-15 - IMPROVED MODULE: Uize.Template | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="The Uize.Template module has been improved with the addition of the new Uize.Template.defineStandardEncoding static method, addition of a number of new encodings, improvement of the existing @required directive and Uize.Template.encode and Uize.Template.decode static methods, and in a number of other ways."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2010.html" class="breadcrumb breadcrumbWithArrow">2010 NEWS</a>
+	2010-04-15 - IMPROVED MODULE: Uize.Template
+
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="The new Uize.Template.encodings static property, which is an object, allows custom encodings to be registered by assigning encoding profile objects as properties on it.">1. New Static Property: Uize.Template.encodings</a></li>
+			<li><a href="#2" title="The new Uize.Template.defineStandardEncoding static method provides a convenient way to define new standard encodings.">2. New Static Method: Uize.Template.defineStandardEncoding</a></li>
+			<li><a href="#3" title="Three new encodings have been added: iso8601, tagAttributes, and tagAttributeValue.">3. New Encodings</a></li>
+			<li><a href="#4" title="When building up the canonical list of modules required by a template being compiled, the @required directive now makes sure to ignore any duplicate instances of required modules.">4. Improved Directive: @required</a></li>
+			<li><a href="#5" title="The Uize.Template.encode and Uize.Template.decode static methods have been improved to now both support encoding chains, in the same format as can be used in assignment expressions in template code (eg. &apos;json -&gt; urlPiece&apos;).">5. Improved Static Methods: Uize.Template.encode and Uize.Template.decode</a></li>
+			<li><a href="#6" title="The reference documentation for the Uize.Template module has been improved in a number of ways.">6. Improved Documentation</a></li>
+			<li><a href="#7" title="With the introduction of the new Uize.Template.encodings static property, the Uize.Template.encoders and Uize.Template.decoders static properties have been deprecated.">7. Deprecated Static Properties: Uize.Template.encoders and Uize.Template.decoders</a></li>
+			<li><a href="#8" title="With the introduction of the new Uize.Template.encodings static property, the way that encodings imply dependencies upon code execution has changed.">8. Important Change in Encoding Dependencies</a></li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<p>The <code><a href="../reference/Uize.Template.html">Uize.Template</a></code> module has been improved with the addition of the new <code>Uize.Template.defineStandardEncoding</code> static method, addition of a number of new encodings, improvement of the existing <code>@required</code> directive and <code>Uize.Template.encode</code> and <code>Uize.Template.decode</code> static methods, and in a number of other ways.</p>
+	
+	<a name="1"></a>
+	<h1 class="heading1" title="1. New Static Property: Uize.Template.encodings"><span class="headingNumber"><a href="#1" title="1. New Static Property: Uize.Template.encodings">1</a>. </span>New Static Property: Uize.Template.encodings</h1>
+	<div class="contents1">
+		<p>The new <code>Uize.Template.encodings</code> static property, which is an object, allows custom encodings to be registered by assigning encoding profile objects as properties on it.</p>
+		
+		<p>This new property subsumes the now deprecated <code>Uize.Template.encoders</code> and <code>Uize.Template.decoders</code> static properties.</p>
+	</div>
+	
+	<a name="2"></a>
+	<h1 class="heading1" title="2. New Static Method: Uize.Template.defineStandardEncoding"><span class="headingNumber"><a href="#2" title="2. New Static Method: Uize.Template.defineStandardEncoding">2</a>. </span>New Static Method: Uize.Template.defineStandardEncoding</h1>
+	<div class="contents1">
+		<p>The new <code>Uize.Template.defineStandardEncoding</code> static method provides a convenient way to define new standard encodings.</p>
+		
+		<p>A standard encoding is an encoding whose encoder and decoder functions are static methods of the same module, and where those static methods accept as their first parameter a value to encode or decode, and as their optional second parameter encoding options. A standard encoding can be conveniently defined using the <code>Uize.Template.defineStandardEncoding</code> static method, by only specifying a few parameters and without having to flesh out the entire Encoding Profile. The majority of Encodings that are built into the <code><a href="../reference/Uize.Template.html">Uize.Template</a></code> module are standard encodings. As an example, the <code>json</code> encoding can easily be defined with the statement...</p>
+		
+		
+<pre class="sample-code">Uize.Template.defineStandardEncoding ('json','Uize.Json','to','from');
+</pre>
+	</div>
+	
+	<a name="3"></a>
+	<h1 class="heading1" title="3. New Encodings"><span class="headingNumber"><a href="#3" title="3. New Encodings">3</a>. </span>New Encodings</h1>
+	<div class="contents1">
+		<p>Three new encodings have been added: <code>iso8601</code>, <code>tagAttributes</code>, and <code>tagAttributeValue</code>.</p>
+		
+		<table class="list">
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>iso8601</code> - encodes to or decodes from an ISO8601 formatted date string</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>tagAttributes</code> - encodes to or decodes from a tag attributes string</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>tagAttributeValue</code> - encodes to or decodes from a tag attribute value string (excluding the enclosing quotes)</td></tr>
+		</table>
+	</div>
+	
+	<a name="4"></a>
+	<h1 class="heading1" title="4. Improved Directive: @required"><span class="headingNumber"><a href="#4" title="4. Improved Directive: @required">4</a>. </span>Improved Directive: @required</h1>
+	<div class="contents1">
+		<p>When building up the canonical list of modules required by a template being compiled, the <code>@required</code> directive now makes sure to ignore any duplicate instances of required modules.</p>
+		
+		<p>This applies both to duplicates that may occur within a single <code>@required</code> call, as well as duplicates that may arise across multiple <code>@required</code> calls. While duplicates are not a very likely occurrence, this protection does exist to prevent duplicates in the <code>required</code> property of the <code>Uize.Template.compile</code> method's full form result object. The <code>@required</code> directive now also supports a string that contains a comma-separated list of module names, in addition to the existing support for an array of module names.</p>
+	</div>
+	
+	<a name="5"></a>
+	<h1 class="heading1" title="5. Improved Static Methods: Uize.Template.encode and Uize.Template.decode"><span class="headingNumber"><a href="#5" title="5. Improved Static Methods: Uize.Template.encode and Uize.Template.decode">5</a>. </span>Improved Static Methods: Uize.Template.encode and Uize.Template.decode</h1>
+	<div class="contents1">
+		<p>The <code>Uize.Template.encode</code> and <code>Uize.Template.decode</code> static methods have been improved to now both support encoding chains, in the same format as can be used in assignment expressions in template code (eg. <code>'json -> urlPiece'</code>).</p>
+		
+		<p>These methods now also support encoding options (eg. <code>'tagAttributes{nameCase:"lower"}'</code>), as well as mixed encoding directions (eg. <code>'!urlParams -> tagAttributes'</code>).</p>
+	</div>
+	
+	<a name="6"></a>
+	<h1 class="heading1" title="6. Improved Documentation"><span class="headingNumber"><a href="#6" title="6. Improved Documentation">6</a>. </span>Improved Documentation</h1>
+	<div class="contents1">
+		<p>The reference documentation for the <code><a href="../reference/Uize.Template.html">Uize.Template</a></code> module has been improved in a number of ways.</p>
+		
+		<table class="list">
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Comprehensive reference documentation has been added for all available encodings.</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Explanations have been added for various concepts, including encodings, encodings chains, encoding profiles, and standard encodings.</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>The documentation for the <code>Uize.Template.encode</code> and <code>Uize.Template.decode</code> static methods has been fleshed out to be much more thorough.</td></tr>
+		</table>
+	</div>
+	
+	<a name="7"></a>
+	<h1 class="heading1" title="7. Deprecated Static Properties: Uize.Template.encoders and Uize.Template.decoders"><span class="headingNumber"><a href="#7" title="7. Deprecated Static Properties: Uize.Template.encoders and Uize.Template.decoders">7</a>. </span>Deprecated Static Properties: Uize.Template.encoders and Uize.Template.decoders</h1>
+	<div class="contents1">
+		<p>With the introduction of the new <code>Uize.Template.encodings</code> static property, the <code>Uize.Template.encoders</code> and <code>Uize.Template.decoders</code> static properties have been deprecated.</p>
+	</div>
+	
+	<a name="8"></a>
+	<h1 class="heading1" title="8. Important Change in Encoding Dependencies"><span class="headingNumber"><a href="#8" title="8. Important Change in Encoding Dependencies">8</a>. </span>Important Change in Encoding Dependencies</h1>
+	<div class="contents1">
+		<p>With the introduction of the new <code>Uize.Template.encodings</code> static property, the way that encodings imply dependencies upon code execution has changed.</p>
+		
+		<p>It used to be that templates compiled using the <code>Uize.Template.compile</code> static method and that employed encodings could be guaranteed to work if the <code><a href="../reference/Uize.Template.html">Uize.Template</a></code> module was loaded. This is no longer the case. The <code><a href="../reference/Uize.Template.html">Uize.Template</a></code> module no longer directly requires modules that are required by encodings that can be used in templates. Instead, using encodings imparts module requirements upon the compiled template, and those modules will need to be loaded in order for the template to be processed (which may be at a later time than when the template is compiled).</p>
+		
+		<p>This allows templates with diverse encoding needs to be compiled without having to have all modules loaded just in order to compile them. It is only when they are to be processed that the modules required by the encodings used in them will need to be loaded. This rule applies to template functions compiled using the <code>Uize.Template.compile</code> static method, as well as to using the <code>Uize.Template.encode</code> and <code>Uize.Template.decode</code> static methods.</p>
+		
+		<p>When a template is compiled using the <code>Uize.Template.compile</code> method with the value <code>'full'</code> specified for its optional <code>templateOptionsOBJ</code> parameter, then the object returned by this method will contain a <code>required</code> property, which will be an array containing the list of all modules required by the template, including modules required by encodings used, along with any required modules declared using the <code>@required</code> directive.</p>
+		
+		<p>The important point to remember is that an encoding can only be executed if the modules that it requires are loaded, otherwise an error will occur.</p>
+	</div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

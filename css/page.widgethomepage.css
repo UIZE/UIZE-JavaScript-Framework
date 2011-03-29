@@ -1,0 +1,40 @@
+/*** widget info ***/
+	.widgetInfoPane {
+		float:left;
+		width:440px;
+		padding:0 20px;
+		margin:0 22px 0 15px;
+		border:1px solid #789;
+		background:#fff;
+		color:#000;
+	}
+
+/*** widget preview ***/
+	.widgetPreviewPane {
+		float:left;
+	}
+	.widgetPreviewIframe {
+		border:1px solid #234;
+		box-shadow:7px 7px 16px rgba(0,0,0,.6);
+		-moz-box-shadow:7px 7px 16px rgba(0,0,0,.6);
+		-webkit-box-shadow:7px 7px 16px rgba(0,0,0,.6);
+		margin-bottom:25px;
+	}
+	table.paramsTable {
+		width:100%;
+		border:none;
+	}
+	.paramsTable .fieldLabel {
+		font-size:11px;
+	}
+	a.seeMoreWidgetsButton,
+	a.seeMoreWidgetsButton:link,
+	a.seeMoreWidgetsButton:visited,
+	a.seeMoreWidgetsButton:hover,
+	a.seeMoreWidgetsButton:active {
+		display:block;
+		margin:auto;
+		margin-top:4px;
+		width:170px;
+	}
+

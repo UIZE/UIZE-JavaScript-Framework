@@ -1,0 +1,76 @@
+Introduction
+	Features
+		Easily Skinnable
+			The Uize.Widget.Bar.Slider class is easily skinnable. You need only take a look at some of the slider example pages to see for yourself.
+
+			If you don't wish to use the highly customizable built-in slider theme, you can build your own. And because the Uize.Widget.Bar.Slider class uses the GLUE user interface paradigm, you have a number of options for building custom slider custom - choose the one that best suits your needs. The clean GLUE approach also reduces messy JavaScript intrusion into your HTML documents, so that they don't become a rat's nest of code that is fragile to updates.
+
+		Vertical and Horizontal Orientations
+			The Uize.Widget.Bar.Slider class supports both vertical and horizontal sliders easily. Depending on the orientation setting for a slider, the code automatically manages the knob positioning logic.
+
+		Full and Empty Indicators
+			You can optionally create sliders where the full and empty sides of a slider's track (ie. on opposite sides of the knob) can look different. This is achieved easily in your slider skin design and the code automatically manages revealing and hiding the appropriate parts of the full and empty design elements.
+
+		Value Display Box
+			You can easily have the current value for a slider automatically displayed in a node of your choosing. It's even easy to design a slider where the value is displayed inside the knob.
+
+		### Knob Highlight States
+			[explain]
+
+		Value Increments
+			You can specify the steps in which the slider is permitted to set the value. For example, you can easily create a slider that lets the user choose a value from 0 to 100 in increments of 10. The code automatically manages restricting the movement of the slider's knob so that it can only settle into the valid slots, and ensures that the user cannot choose a value inbetween the specified steps along the slider's value range. Of course, you can also just as easily allow any fractional value to be chosen.
+
+		Rich Event Support
+			Sliders fire notification events so you can "hook" your own custom code into a slider to perform any desired updates when changes occur with a slider.
+
+		### Click On Track To Set
+			[user can set values by clicking directly in the track (and optionally dragging)]
+
+		Efficient Performance
+			The slider code has been written to perform updates efficiently, so that the sliders you create behave smoothly.
+
+		Reverse Value Ranges
+			There is no restriction on the lower and upper bounds of a slider's value range -- the code supports "reverse" value ranges. So you can create sliders with a lower bound that is a higher value than its upper bound. For example, you can create a slider that lets the user select a value between 100 and 0, where the 100 bound is at the bottom or left side of the slider and the 0 bound is at the top or right side of the slider.
+
+		Use as Progress Bar
+			You can easily create a slider that does not have a knob in its UI and whose value is not user-adjustable. By using your own custom code to automate changes in the slider's value, you can essentially turn the slider into a progress bar.
+
+		Use in Bar Chart
+			In a similar way to using a slider as a progress bar, you could just as easily create a slider that acts as a bar in a bar chart. Stack a bunch of these sliders together into a layout and you've got a ready-made bar chart that can easily be dynamically updated in realtime.
+
+		Dynamic Updating
+			The slider code has been designed to allow many of its properties to be updated dynamically, even after the slider UI has been generated and GLUE'd. In the most obvious example, you can dynamically change a slider's value. Not quite as obvious, though, is that you can also change a slider's range bounds and its increments setting, and the slider's UI will automatically be updated.
+
+Set-get Properties
+	increments
+		Specifies the increments in which the slider's value can be set between the lower and upper bounds of its range. For example, a slider with a range of 0 to 50 and with its increment set to 10 can only have its value set to 0, 10, 20, 30, 40, or 50.
+
+		When you specify the value =0= for this property, then the slider's value can be continuous (ie. a real number) between its =minValue= and =maxValue=. This would, for example, allow you to create a slider for choosing any fractional value between 0 and 1. Of course, the number of possible fractional values will then be determined by the number of pixels that the slider's =knob= can move inside its =track=.
+
+		NOTES
+		- the default value for this property is =1=
+
+	minValue
+		A number, representing the lower (bottom for vertical sliders, left for horizontal sliders) bound of a slider's range. Whenever this property is set, the slider's UI will be automatically updated. Because the slider code supports reverse ranges, this property's value can be higher than the =maxValue= property.
+
+		NOTES
+		- the default value for this property is =0=
+
+	maxValue
+		A number, representing the upper (top for vertical sliders, right for horizontal sliders) bound of a slider's range. Whenever this property is set, the slider's UI will be automatically updated. Because the slider code supports reverse ranges, this property's value can be lower than the =minValue= property.
+
+		NOTES
+		- the default value for this property is =100=
+
+	orientation
+		A string, specifying the orientation of a slider. Valid values are "vertical" and "horizontal", with "vertical" being the default. If this property is not set correctly for a slider, then the slider will not behave correctly.
+
+		NOTES
+		- the default value for this property is "=vertical="
+
+	value
+		A number, representing the current value of a slider. Whenever this property is set, the slider's UI will be automatically updated. This property cannot be set outside the range specified by the =minValue= and =maxValue= properties, and attempts to set it outside this range will constrain it to the lower or upper bounds of the range. Also, when setting the =value= property to a value that does not lie on a step (as determined by the =increments= property), then the value will be set to "snap" to the nearest step.
+
+		NOTES
+		- the default value for this property is =0=
+

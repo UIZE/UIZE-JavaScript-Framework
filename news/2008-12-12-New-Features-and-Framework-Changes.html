@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2008-12-12 - New Features and Framework Changes | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="The Uize.Data.indexIn and Uize.Data.isIn static methods have been deprecated in the Uize.Data module and migrated into the Uize base class."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2008.html" class="breadcrumb breadcrumbWithArrow">2008 NEWS</a>
+	2008-12-12 - New Features and Framework Changes
+
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="The Uize.Data.indexIn and Uize.Data.isIn static methods have been deprecated in the Uize.Data module and migrated into the Uize base class.">1. Deprecated Methods in Uize.Data</a></li>
+			<li><a href="#2" title="Some improvements have been made to the modules that support the SimpleDoc documentation build scripts.">2. SimpleDoc Improvements</a></li>
+			<li><a href="#3" title="Various miscellaneous small improvements have been made.">3. Miscellaneous Improvements</a></li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<a name="1"></a>
+	<h1 class="heading1" title="1. Deprecated Methods in Uize.Data"><span class="headingNumber"><a href="#1" title="1. Deprecated Methods in Uize.Data">1</a>. </span>Deprecated Methods in Uize.Data</h1>
+	<div class="contents1">
+		<p>The <code>Uize.Data.indexIn</code> and <code>Uize.Data.isIn</code> static methods have been deprecated in the <code><a href="../reference/Uize.Data.html">Uize.Data</a></code> module and migrated into the <code><a href="../reference/Uize.html">Uize</a></code> base class.</p>
+		
+		<p><span class="allCaps">DEPRECATED</span></p>
+		
+		
+<pre class="sample-code">Uize.Data.indexIn (...)  &gt;&gt; BECOMES &gt;&gt;  Uize.indexIn (...)
+Uize.Data.isIn (...)     &gt;&gt; BECOMES &gt;&gt;  Uize.isIn (...)
+</pre>
+		
+		<p>These methods have proven useful enough to various <code><a href="../reference/Uize.html">Uize</a></code> subclasses and other modules that it was time to promote them to first class citizens in the framework. The benefit of this change is that modules that have been requiring the <code><a href="../reference/Uize.Data.html">Uize.Data</a></code> module only to access these methods will no longer need to. The new <code>Uize.indexIn</code> method now also supports searching backwards from the end of the array.</p>
+		
+		<p>Because these methods have been deprecated, they are still accessible from the <code><a href="../reference/Uize.Data.html">Uize.Data</a></code> module for backwards compatibility reasons. At some point in the future, however, they <b>will</b> be cleared out. If you have modules that are using these static methods, you will want to at some point update the code to call the methods on the <code><a href="../reference/Uize.html">Uize</a></code> module (or <code>_class</code>, if a call is within a subclass of <code><a href="../reference/Uize.html">Uize</a></code>).</p>
+	</div>
+	
+	<a name="2"></a>
+	<h1 class="heading1" title="2. SimpleDoc Improvements"><span class="headingNumber"><a href="#2" title="2. SimpleDoc Improvements">2</a>. </span>SimpleDoc Improvements</h1>
+	<div class="contents1">
+		<p>Some improvements have been made to the modules that support the SimpleDoc documentation build scripts.</p>
+		
+		<p>The <code>Uize.Simple</code> module has been refactored and optimized for code size and performance. Additionally, a bug was fixed with the <code>Uize.Simple.collapseChildren</code> static method that was causing failures in cases where the name of a child node was <code>name</code>, <code>value</code>, or <code>children</code>. Also, a bug was fixed in the <code>Uize.SimpleDoc</code> module that was causing certain bullet lists to not be recognized correctly (eg. <code>- &#61;title&#61; description</code>), and documents now only get a contents list if there are some sections in the document (yes, you <b>can</b> occasionally have a document that has no nested structure).</p>
+	</div>
+	
+	<a name="3"></a>
+	<h1 class="heading1" title="3. Miscellaneous Improvements"><span class="headingNumber"><a href="#3" title="3. Miscellaneous Improvements">3</a>. </span>Miscellaneous Improvements</h1>
+	<div class="contents1">
+		<p>Various miscellaneous small improvements have been made.</p>
+		
+		<p>Several modules have been updated to take advantage of the migration of the <code>Uize.Data.indexIn</code> and <code>Uize.Data.isIn</code> static methods into the <code><a href="../reference/Uize.html">Uize</a></code> base class. Some performance and code size optimizations have been made to the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> class. A new <code>Uize.Node.centerInWindow</code> static method has been added to the <code><a href="../reference/Uize.Node.html">Uize.Node</a></code> module that positions the specified node so that it is centered within the window.</p>
+	</div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

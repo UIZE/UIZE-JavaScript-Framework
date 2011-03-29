@@ -1,0 +1,13 @@
+The new [[../explainers/javascript-animation-and-effects.html][JavaScript Animation and Effects]] explainer discusses very thoroughly the support for animation in the UIZE JavaScript Framework.
+
+The UIZE JavaScript Framework provides powerful features to support slick animation effects. This new explainer goes into depth with subjects like the engine, compound value interpolation, quantization, the fade factory, non-interpolated values, fading a function call, fading a method call, fading one or more set-get properties, animating CSS style properties, advanced techniques like color component curves, curve functions, curve function generators, easing equations, curve function modifiers, and more.
+
+[[../explainers/javascript-animation-and-effects.html][LEARN MORE]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-08-06 - NEW EXPLAINER: JavaScript Animation and Effects
+....................................................................................

@@ -1,0 +1,13 @@
+The new [[../examples/animated-buttons-with-box-shadow.html][Animated Buttons with Box Shadow]] example demonstrates the UIZE JavaScript Framework's ability to animate values for the =box-shadow= CSS3 style property.
+
+In this example, an instance of the =Uize.Widget.HoverFader= widget class is being used to add a JavaScript animation effect to a set of navigation buttons. With help from the =Uize.Fx.xShadows= extension module, the instance manages fading of values for the =box-shadow=, =margin-left=, =margin-top=, =color=, and =border-color= CSS style properties for the buttons. For the newer browsers that support the CSS3 =box-shadow= style property, the buttons appear to "leap" out of the page when they are moused over. To add more realism, the =Uize.Curve.Rubber= module is used to add a bounce quality to the fade back from a button's hover state to its resting state, which makes the buttons bounce as they sink back in and "hit the page surface".
+
+[[../examples/animated-buttons-with-box-shadow.html][CHECK IT OUT]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2010-04-18 - NEW EXAMPLE: Animated Buttons with Box Shadow
+....................................................................................

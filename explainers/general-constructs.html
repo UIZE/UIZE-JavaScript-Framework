@@ -1,0 +1,655 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>General Constructs | Documentation | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework Documentation "/>
+	<meta name="description" content="This document describes a number of general constructs that apply across the entire UIZE JavaScript Framework, and can apply in application programming more generally."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../javascript-explainers.html" class="breadcrumb breadcrumbWithArrow">EXPLAINERS</a>
+	General Constructs
+
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="This document describes a number of general constructs that apply across the entire UIZE JavaScript Framework, and can apply in application programming more generally.">1. Introduction</a></li>
+			<li><a href="#2" title="A Value Transformer is code (specified as a Value Transformer Function) that transforms one value to another value.">2. Value Transformer</a>
+				<ul>
+					<li><a href="#2_1" title="A Value Transformer Function is a Value Transformer specified in the form of a function.">2.1. Value Transformer Function</a>
+						<ul>
+							<li><a href="#2_1_1" title="A Value Transformer Function can be supplied as a parameter to any method that supports a Value Transformer Function, such as the Uize.Data.map static method of the Uize.Data module. Consider the following example...">2.1.1. Using a Value Transformer Function</a></li>
+							<li><a href="#2_1_2" title="The value input parameter for a Value Transformer Function can be named anything - it does not need to be named value. Consider the following example...">2.1.2. Value Parameter Can Be Named Anything</a></li>
+						</ul>
+					</li>
+					<li><a href="#2_2" title="The Value Transformer construct is deliberately very generic, making it applicable in a number of different contexts and to a wide range of different types of value transformers.">2.2. Different Types of Value Transformers</a>
+						<ul>
+							<li><a href="#2_2_1" title="A Curve Function is a specialized kind of Value Transformer whose input value is expected to be a floating point number in the range of 0 to 1, and where the returned transformed value should also be a floating point number in the range of 0 to 1.">2.2.1. Curve Functions Are Specialized Value Transformers</a></li>
+							<li><a href="#2_2_2" title="A Value Matcher is a specialized kind of Value Transformer that transforms a value to a boolean value.">2.2.2. Value Matchers Are Specialized Value Transformers</a></li>
+							<li><a href="#2_2_3" title="A Value Conformer is a specialized kind of Value Transformer that transforms a value so that it conforms to certain criteria.">2.2.3. Value Conformers Are Specialized Value Transformers</a></li>
+						</ul>
+					</li>
+					<li><a href="#2_3" title="A Value Transformer can be used with any of the many methods that support a Value Transformer.">2.3. Using Value Transformers</a>
+						<ul>
+							<li><a href="#2_3_1" title="The Uize.Fade class supports a Value Transformer with its curve set-get property.">2.3.1. The Uize.Fade Class</a></li>
+							<li><a href="#2_3_2" title="The Uize.String.Lines.modify static method of the Uize.String.Lines module supports a Value Transformer for the line modifier that processes each line of a multi-line string.">2.3.2. The Uize.String.Lines.modify Method</a></li>
+							<li><a href="#2_3_3" title="A Value Transformer can always be used in place of a Value and Key Transformer.">2.3.3. Using a Value Transformer in Place of a Value and Key Transformer</a>
+								<ul>
+									<li><a href="#2_3_3_1" title="While the Uize.Data.map method of the Uize.Data module expects a Value and Key Transformer, a Value Transformer can be supplied instead.">2.3.3.1. The Uize.Data.map Method</a></li>
+									<li><a href="#2_3_3_2" title="The Uize.Array.Sort.sortBy method of the Uize.Array.Sort module expects a Value and Key Transformer, but a Value Transformer can be supplied instead. Consider the following example...">2.3.3.2. The Uize.Array.Sort.sortBy Method</a></li>
+								</ul>
+							</li>
+							<li><a href="#2_3_4" title="There is no limit to the kinds of values that can be transformed by a Value Transformer.">2.3.4. Any Type of Value Can Be Transformed</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li><a href="#3" title="A Value Matcher is code (specified as a Value Matcher Function) that transforms a value to a boolean value.">3. Value Matcher</a>
+				<ul>
+					<li><a href="#3_1" title="Value matchers can have a variety of different uses - they can be used as validators, they can be supplied to map functions (such as Uize.String.Lines.removeMatching), they can be used to test values generated in unit tests against expectations, etc.">3.1. Applications of Value Matchers</a></li>
+					<li><a href="#3_2" title="A Value Matcher Function is a Value Matcher specified in the form of a function.">3.2. Value Matcher Function</a>
+						<ul>
+							<li><a href="#3_2_1" title="A Value Matcher Function can be supplied as a parameter to any method that supports a Value Matcher Function, such as the Uize.String.Lines.removeMatching static method of the Uize.String.Lines module. Consider the following example...">3.2.1. Using a Value Matcher Function</a></li>
+						</ul>
+					</li>
+					<li><a href="#3_3" title="As with the Value Transformer construct, the Value Matcher construct is deliberately very generic, making it applicable in a number of different contexts.">3.3. Different Types of Value Matchers</a>
+						<ul>
+							<li><a href="#3_3_1" title="A Value Validator is a specialized kind of Value Matcher that transforms a value to a boolean value, indicating whether or not the input value is valid according to certain criteria.">3.3.1. Value Validators Are Specialized Value Matchers</a></li>
+						</ul>
+					</li>
+					<li><a href="#3_4" title="A Value Matcher can be used with any of the many methods that support a Value Matcher.">3.4. Using Value Matchers</a>
+						<ul>
+							<li><a href="#3_4_1" title="Some of the static methods of the Uize.String.Lines module support a Value Matcher.">3.4.1. Methods of the Uize.String.Lines Module</a>
+								<ul>
+									<li><a href="#3_4_1_1" title="The Uize.String.Lines.removeMatching static method supports a value matcher to identify which lines of a multi-line string should be removed.">3.4.1.1. Uize.String.Lines.removeMatching</a></li>
+									<li><a href="#3_4_1_2" title="The Uize.String.Lines.retainMatching static method supports a value matcher to identify which lines of a multi-line string should be retained (ie. not removed).">3.4.1.2. Uize.String.Lines.retainMatching</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li><a href="#4" title="A Value Conformer is code (specified as a Value Conformer Function) that transforms a value so that it conforms to certain criteria.">4. Value Conformer</a>
+				<ul>
+					<li><a href="#4_1" title="Value conformers can have a variety of different uses - they can be used as conformers for set-get properties, or they can be supplied to map functions (such as Uize.Data.map).">4.1. Applications of Value Conformers</a></li>
+					<li><a href="#4_2" title="A Value Conformer Function is a Value Conformer specified in the form of a function.">4.2. Value Conformer Function</a>
+						<ul>
+							<li><a href="#4_2_1" title="A Value Conformer Function can be supplied as a parameter to any method that supports a Value Transformer Function, such as the Uize.Data.map static method of the Uize.Data module. Consider the following example...">4.2.1. Using a Value Conformer Function</a>
+								<ul>
+									<li><a href="#4_2_1_1" title="A Value Conformer Function can be specified for the conformer property in the profile of a set-get property. Consider the following example...">4.2.1.1. Conformers for Set-get Properties</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li><a href="#5" title="A Value Validator is code (specified as a Value Validator Function) that transforms an input value to a boolean value, indicating whether or not the input value is valid according to certain criteria.">5. Value Validator</a>
+				<ul>
+					<li><a href="#5_1" title="Value validators can have a variety of different uses, but most typically they are used for validating user input for form element widgets.">5.1. Applications of Value Validators</a></li>
+					<li><a href="#5_2" title="A Value Validator Function is a Value Validator specified in the form of a function.">5.2. Value Validator Function</a></li>
+				</ul>
+			</li>
+			<li><a href="#6" title="Conformers and validators are similar in nature, and can be considered to be two sides of the same coin.">6. Conformers vs. Validators</a>
+				<ul>
+					<li><a href="#6_1" title="While there is a simple way of Deriving a Validator From a Conformer, it is not always possible to create a meaningful conformer to pair with a validator.">6.1. Not all Validators Have Corresponding Conformers</a></li>
+					<li><a href="#6_2" title="While Not all Validators Have Corresponding Conformers, it is always possible to generate / derive a Value Validator from a Value Conformer, according to the following simple principle...">6.2. Deriving a Validator From a Conformer</a></li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<a name="1"></a>
+	<h1 class="heading1" title="1. Introduction"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>. </span>Introduction</h1>
+	<div class="contents1">
+		<p>This document describes a number of general constructs that apply across the entire UIZE JavaScript Framework, and can apply in application programming more generally.</p>
+	</div>
+	
+	<a name="2"></a>
+	<h1 class="heading1" title="2. Value Transformer"><span class="headingNumber"><a href="#2" title="2. Value Transformer">2</a>. </span>Value Transformer</h1>
+	<div class="contents1">
+		<p>A Value Transformer is code (specified as a <a href="#2_1">Value Transformer Function</a>) that transforms one value to another value.</p>
+		
+		<a name="2_1"></a>
+		<h2 class="heading2" title="2. Value Transformer -&gt; 2.1. Value Transformer Function"><span class="headingNumber"><a href="#2" title="2. Value Transformer">2</a>.<a href="#2_1" title="2. Value Transformer -&gt; 2.1. Value Transformer Function">1</a>. </span>Value Transformer Function</h2>
+		<div class="contents2">
+			<p>A Value Transformer Function is a <a href="#2">Value Transformer</a> specified in the form of a function.</p>
+			
+			<p>A Value Transformer Function should expect to receive a single parameter, being the value that is to be transformed to a new value. The function should return the transformed value. Consider the following example...</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">function cubed (value) {
+  return value * value * value;
+}
+</pre>
+			
+			<p>In the above example, the function <code>cubed</code> transforms its input value to the input value to the power of three (ie. cubed).</p>
+			
+			<a name="2_1_1"></a>
+			<h3 class="heading3" title="2. Value Transformer -&gt; 2.1. Value Transformer Function -&gt; 2.1.1. Using a Value Transformer Function"><span class="headingNumber"><a href="#2" title="2. Value Transformer">2</a>.<a href="#2_1" title="2. Value Transformer -&gt; 2.1. Value Transformer Function">1</a>.<a href="#2_1_1" title="2. Value Transformer -&gt; 2.1. Value Transformer Function -&gt; 2.1.1. Using a Value Transformer Function">1</a>. </span>Using a Value Transformer Function</h3>
+			<div class="contents3">
+				<p>A <a href="#2_1">Value Transformer Function</a> can be supplied as a parameter to any method that supports a Value Transformer Function, such as the <code>Uize.Data.map</code> static method of the <code><a href="../reference/Uize.Data.html">Uize.Data</a></code> module. Consider the following example...</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">function cubed (value) {
+  return value * value * value;
+}
+
+var myValuesCubed = Uize.Data.map (cubed,myValues);
+</pre>
+				
+				<p>The <code>Uize.Data.map</code> method accepts a Value and Key Transformer for its first parameter and a source array as its second. It iterates through all the elements of the source array, calling the Value and Key Transformer for each element. With the transformed element values returned by the Value and Key Transformer, the method populates a new array.</p>
+				
+				<p>In this example we are supplying a <a href="#2">Value Transformer</a> in place of a Value and Key Transformer (see <a href="#2_3_3">Using a Value Transformer in Place of a Value and Key Transformer</a>), which just means that the additional key / index information for the elements will be ignored. The variable <code>myValuesCubed</code>, in this case, will contain the cubes of all the values in the <code>myValues</code> source array.</p>
+			</div>
+			
+			<a name="2_1_2"></a>
+			<h3 class="heading3" title="2. Value Transformer -&gt; 2.1. Value Transformer Function -&gt; 2.1.2. Value Parameter Can Be Named Anything"><span class="headingNumber"><a href="#2" title="2. Value Transformer">2</a>.<a href="#2_1" title="2. Value Transformer -&gt; 2.1. Value Transformer Function">1</a>.<a href="#2_1_2" title="2. Value Transformer -&gt; 2.1. Value Transformer Function -&gt; 2.1.2. Value Parameter Can Be Named Anything">2</a>. </span>Value Parameter Can Be Named Anything</h3>
+			<div class="contents3">
+				<p>The value input parameter for a <a href="#2_1">Value Transformer Function</a> can be named anything - it does <b>not</b> need to be named <code>value</code>. Consider the following example...</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">function cubed (toCube) {
+  return toCube * toCube * toCube;
+}
+</pre>
+				
+				<p>In the above example, our value parameter is named <code>toCube</code>.</p>
+			</div>
+		</div>
+		
+		<a name="2_2"></a>
+		<h2 class="heading2" title="2. Value Transformer -&gt; 2.2. Different Types of Value Transformers"><span class="headingNumber"><a href="#2" title="2. Value Transformer">2</a>.<a href="#2_2" title="2. Value Transformer -&gt; 2.2. Different Types of Value Transformers">2</a>. </span>Different Types of Value Transformers</h2>
+		<div class="contents2">
+			<p>The <a href="#2">Value Transformer</a> construct is deliberately very generic, making it applicable in a number of different contexts and to a wide range of different types of value transformers.</p>
+			
+			<p>Now, while there are a number of different kinds of value transformers (as outlined below) that are different in spirit and intended use, they all share the basic feature of accepting an input value and then returning that value transformed somehow into a new value. Different types of value transformers can impose different limits on the kinds of input values they accept, and the nature of their transformations can differ radically.</p>
+			
+			<a name="2_2_1"></a>
+			<h3 class="heading3" title="2. Value Transformer -&gt; 2.2. Different Types of Value Transformers -&gt; 2.2.1. Curve Functions Are Specialized Value Transformers"><span class="headingNumber"><a href="#2" title="2. Value Transformer">2</a>.<a href="#2_2" title="2. Value Transformer -&gt; 2.2. Different Types of Value Transformers">2</a>.<a href="#2_2_1" title="2. Value Transformer -&gt; 2.2. Different Types of Value Transformers -&gt; 2.2.1. Curve Functions Are Specialized Value Transformers">1</a>. </span>Curve Functions Are Specialized Value Transformers</h3>
+			<div class="contents3">
+				<p>A Curve Function is a specialized kind of <a href="#2">Value Transformer</a> whose input value is expected to be a floating point number in the range of <code>0</code> to <code>1</code>, and where the returned transformed value should also be a floating point number in the range of <code>0</code> to <code>1</code>.</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">Uize.Fade.fade (scrollTo,[0,0],[0,200],800,{curve:Uize.Curve.easeInOutPow (4)});
+</pre>
+				
+				<p>In the above example, the vertical scroll position of a browser window is being animated using the <code>Uize.Fade.fade</code> static method of the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> class. A curve function (which is a <a href="#2">Value Transformer</a>) is being created using the statement <code>Uize.Curve.easeInOutPow (4)</code>, and this curve is being supplied to the <code>Uize.Fade.fade</code> method so that the animation isn't completely linear and lifeless - some non-linearity adds physical realism to the animation. The curve function is being used to bend / distort a <code>0</code> to <code>1</code> floating point number into a different <code>0</code> to <code>1</code> floating point number.</p>
+			</div>
+			
+			<a name="2_2_2"></a>
+			<h3 class="heading3" title="2. Value Transformer -&gt; 2.2. Different Types of Value Transformers -&gt; 2.2.2. Value Matchers Are Specialized Value Transformers"><span class="headingNumber"><a href="#2" title="2. Value Transformer">2</a>.<a href="#2_2" title="2. Value Transformer -&gt; 2.2. Different Types of Value Transformers">2</a>.<a href="#2_2_2" title="2. Value Transformer -&gt; 2.2. Different Types of Value Transformers -&gt; 2.2.2. Value Matchers Are Specialized Value Transformers">2</a>. </span>Value Matchers Are Specialized Value Transformers</h3>
+			<div class="contents3">
+				<p>A <a href="#3">Value Matcher</a> is a specialized kind of <a href="#2">Value Transformer</a> that transforms a value to a boolean value.</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">function isOnlyWhitespace (value) {
+  return /^\s*$/.test (value);
+}
+</pre>
+				
+				<p>In the above example, the function <code>isOnlyWhitespace</code> returns a boolean value, indicating whether or not the input value is a string containing only whitespace characters (such as spaces and tabs). The fact that it always returns a value <code>true</code> or <code>false</code> makes it a <a href="#3">Value Matcher</a> (by the very definition of a Value Matcher).</p>
+			</div>
+			
+			<a name="2_2_3"></a>
+			<h3 class="heading3" title="2. Value Transformer -&gt; 2.2. Different Types of Value Transformers -&gt; 2.2.3. Value Conformers Are Specialized Value Transformers"><span class="headingNumber"><a href="#2" title="2. Value Transformer">2</a>.<a href="#2_2" title="2. Value Transformer -&gt; 2.2. Different Types of Value Transformers">2</a>.<a href="#2_2_3" title="2. Value Transformer -&gt; 2.2. Different Types of Value Transformers -&gt; 2.2.3. Value Conformers Are Specialized Value Transformers">3</a>. </span>Value Conformers Are Specialized Value Transformers</h3>
+			<div class="contents3">
+				<p>A <a href="#4">Value Conformer</a> is a specialized kind of <a href="#2">Value Transformer</a> that transforms a value so that it conforms to certain criteria.</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">function limitStringLengthTo100Chars (sourceStr) {
+  return sourceStr.length &gt; 100 ? sourceStr.slice (0,100) : sourceStr;
+}
+</pre>
+				
+				<p>In the above example, the <code>limitStringLengthTo100Chars</code> function is a <a href="#4">Value Conformer</a> that conforms a string value so that it can never be more than a hundred characters in length. It does this by using the <code><a href="../javascript-reference/String.html">String</a></code> object's <code>slice</code> instance method, chopping off any characters beyond the first hundred.</p>
+			</div>
+		</div>
+		
+		<a name="2_3"></a>
+		<h2 class="heading2" title="2. Value Transformer -&gt; 2.3. Using Value Transformers"><span class="headingNumber"><a href="#2" title="2. Value Transformer">2</a>.<a href="#2_3" title="2. Value Transformer -&gt; 2.3. Using Value Transformers">3</a>. </span>Using Value Transformers</h2>
+		<div class="contents2">
+			<p>A <a href="#2">Value Transformer</a> can be used with any of the many methods that support a Value Transformer.</p>
+			
+			<a name="2_3_1"></a>
+			<h3 class="heading3" title="2. Value Transformer -&gt; 2.3. Using Value Transformers -&gt; 2.3.1. The Uize.Fade Class"><span class="headingNumber"><a href="#2" title="2. Value Transformer">2</a>.<a href="#2_3" title="2. Value Transformer -&gt; 2.3. Using Value Transformers">3</a>.<a href="#2_3_1" title="2. Value Transformer -&gt; 2.3. Using Value Transformers -&gt; 2.3.1. The Uize.Fade Class">1</a>. </span>The Uize.Fade Class</h3>
+			<div class="contents3">
+				<p>The <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> class supports a <a href="#2">Value Transformer</a> with its <code>curve</code> set-get property.</p>
+				
+				<p>Additionally, any of the factory methods that create instances of the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> class will also support value transformers for the <code>curve</code> fade property. Examples of such factory methods are the <code>Uize.Fade.fade</code>, <code>Uize.Fade.fadeMethod</code>, <code>Uize.Fade.fadeProperty</code>, and <code>Uize.Fade.fadeProperties</code> methods implemented in the <code><a href="../reference/Uize.Fade.xFactory.html">Uize.Fade.xFactory</a></code> extension module, as well as the <code>Uize.Fx.fadeStyle</code> and <code>Uize.Fx.fadeStyleAcrossNodes</code> methods of the <code><a href="../reference/Uize.Fx.html">Uize.Fx</a></code> module.</p>
+				
+				<p>For a more in-depth discussion of curve functions, see the section <a href="#2_2_1">Curve Functions Are Specialized Value Transformers</a>.</p>
+			</div>
+			
+			<a name="2_3_2"></a>
+			<h3 class="heading3" title="2. Value Transformer -&gt; 2.3. Using Value Transformers -&gt; 2.3.2. The Uize.String.Lines.modify Method"><span class="headingNumber"><a href="#2" title="2. Value Transformer">2</a>.<a href="#2_3" title="2. Value Transformer -&gt; 2.3. Using Value Transformers">3</a>.<a href="#2_3_2" title="2. Value Transformer -&gt; 2.3. Using Value Transformers -&gt; 2.3.2. The Uize.String.Lines.modify Method">2</a>. </span>The Uize.String.Lines.modify Method</h3>
+			<div class="contents3">
+				<p>The <code>Uize.String.Lines.modify</code> static method of the <code><a href="../reference/Uize.String.Lines.html">Uize.String.Lines</a></code> module supports a <a href="#2">Value Transformer</a> for the line modifier that processes each line of a multi-line string.</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">function limitStringLengthTo100Chars (sourceStr) {
+  return sourceStr.length &gt; 100 ? sourceStr.slice (0,100) : sourceStr;
+}
+
+Uize.String.Lines.modify (multiLineStr,limitStringLengthTo100Chars);
+</pre>
+				
+				<p>In the above example, the <code>Uize.String.Lines.modify</code> method is using the <code>limitStringLengthTo100Chars</code> value transformer to limit the length of all lines in a multi-line string to a maximum of a hundred characters - lines that are longer than a hundred characters in length will be truncated so that the extra characters are discarded.</p>
+			</div>
+			
+			<a name="2_3_3"></a>
+			<h3 class="heading3" title="2. Value Transformer -&gt; 2.3. Using Value Transformers -&gt; 2.3.3. Using a Value Transformer in Place of a Value and Key Transformer"><span class="headingNumber"><a href="#2" title="2. Value Transformer">2</a>.<a href="#2_3" title="2. Value Transformer -&gt; 2.3. Using Value Transformers">3</a>.<a href="#2_3_3" title="2. Value Transformer -&gt; 2.3. Using Value Transformers -&gt; 2.3.3. Using a Value Transformer in Place of a Value and Key Transformer">3</a>. </span>Using a Value Transformer in Place of a Value and Key Transformer</h3>
+			<div class="contents3">
+				<p>A <a href="#2">Value Transformer</a> can always be used in place of a Value and Key Transformer.</p>
+				
+				<p>In such cases, the key that is supplied as the second parameter to the Value Transformer that is only expecting a single parameter will simply be ignored - the transformed value that it returns will only be influenced by the value and not the key.</p>
+				
+				<a name="2_3_3_1"></a>
+				<h4 class="heading4" title="2. Value Transformer -&gt; 2.3. Using Value Transformers -&gt; 2.3.3. Using a Value Transformer in Place of a Value and Key Transformer -&gt; 2.3.3.1. The Uize.Data.map Method"><span class="headingNumber"><a href="#2" title="2. Value Transformer">2</a>.<a href="#2_3" title="2. Value Transformer -&gt; 2.3. Using Value Transformers">3</a>.<a href="#2_3_3" title="2. Value Transformer -&gt; 2.3. Using Value Transformers -&gt; 2.3.3. Using a Value Transformer in Place of a Value and Key Transformer">3</a>.<a href="#2_3_3_1" title="2. Value Transformer -&gt; 2.3. Using Value Transformers -&gt; 2.3.3. Using a Value Transformer in Place of a Value and Key Transformer -&gt; 2.3.3.1. The Uize.Data.map Method">1</a>. </span>The Uize.Data.map Method</h4>
+				<div class="contents4">
+					<p>While the <code>Uize.Data.map</code> method of the <code><a href="../reference/Uize.Data.html">Uize.Data</a></code> module expects a Value and Key Transformer, a <a href="#2">Value Transformer</a> can be supplied instead.</p>
+					
+					<p>To see an example that illustrates this, consult the section <a href="#2_1_1">Using a Value Transformer Function</a>.</p>
+				</div>
+				
+				<a name="2_3_3_2"></a>
+				<h4 class="heading4" title="2. Value Transformer -&gt; 2.3. Using Value Transformers -&gt; 2.3.3. Using a Value Transformer in Place of a Value and Key Transformer -&gt; 2.3.3.2. The Uize.Array.Sort.sortBy Method"><span class="headingNumber"><a href="#2" title="2. Value Transformer">2</a>.<a href="#2_3" title="2. Value Transformer -&gt; 2.3. Using Value Transformers">3</a>.<a href="#2_3_3" title="2. Value Transformer -&gt; 2.3. Using Value Transformers -&gt; 2.3.3. Using a Value Transformer in Place of a Value and Key Transformer">3</a>.<a href="#2_3_3_2" title="2. Value Transformer -&gt; 2.3. Using Value Transformers -&gt; 2.3.3. Using a Value Transformer in Place of a Value and Key Transformer -&gt; 2.3.3.2. The Uize.Array.Sort.sortBy Method">2</a>. </span>The Uize.Array.Sort.sortBy Method</h4>
+				<div class="contents4">
+					<p>The <code>Uize.Array.Sort.sortBy</code> method of the <code><a href="../reference/Uize.Array.Sort.html">Uize.Array.Sort</a></code> module expects a Value and Key Transformer, but a <a href="#2">Value Transformer</a> can be supplied instead. Consider the following example...</p>
+					
+					<p><span class="allCaps">EXAMPLE</span></p>
+					
+					
+<pre class="sample-code">Uize.Array.Sort.sortBy (dateStrings,function (value) {return +(new Date (value))});
+</pre>
+					
+					<p>In the above example, the <code>dateStrings</code> variable is a reference to an array containing correctly formatted date strings. The array of date strings is being sorted into chronological order by the <code>Uize.Array.Sort.sortBy</code> method, with a <a href="#2_1">Value Transformer Function</a> specified for the sort value generator that transforms a date string value into a number, representing the date as the number of milliseconds elapsed since January 1st, 1970 (ie. POSIX time). While the sort value generator will be passed the index / key as the second parameter when it is called for each element of the <code>dateStrings</code> array, the function does not declare or use that second parameter.</p>
+				</div>
+			</div>
+			
+			<a name="2_3_4"></a>
+			<h3 class="heading3" title="2. Value Transformer -&gt; 2.3. Using Value Transformers -&gt; 2.3.4. Any Type of Value Can Be Transformed"><span class="headingNumber"><a href="#2" title="2. Value Transformer">2</a>.<a href="#2_3" title="2. Value Transformer -&gt; 2.3. Using Value Transformers">3</a>.<a href="#2_3_4" title="2. Value Transformer -&gt; 2.3. Using Value Transformers -&gt; 2.3.4. Any Type of Value Can Be Transformed">4</a>. </span>Any Type of Value Can Be Transformed</h3>
+			<div class="contents3">
+				<p>There is no limit to the kinds of values that can be transformed by a <a href="#2">Value Transformer</a>.</p>
+				
+				<p>While an input value for a Value Transformer is likely to be a simple type value, such as a number or a string, there is no saying that an input value can't also be an array or an object. Consider the following example...</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">function computeArea (value) {
+  return value.width * value.height;
+}
+
+var
+  rects = [
+    {width:5,height:10},
+    {width:1.4,height:5},
+    {width:3,height:4}
+  ],
+  rectAreas = Uize.Data.map (computeArea,rects)
+;
+</pre>
+				
+				<p>In the above example, the <code>computeArea</code> function defines a <a href="#2">Value Transformer</a> that transforms an input value that is expected to be an object with <code>width</code> and <code>height</code> properties, into an area value that is computed as the product of the <code>width</code> and <code>height</code> properties. This value transformer is then supplied to the <code>Uize.Data.map</code> method, which is used to produce an array containing the areas computed from the rectangle objects inside the <code>rects</code> array. After the above code has been executed, the statement <code>alert (rectAreas)</code> would display the text "50,7,12" in the alert dialog.</p>
+			</div>
+		</div>
+	</div>
+	
+	<a name="3"></a>
+	<h1 class="heading1" title="3. Value Matcher"><span class="headingNumber"><a href="#3" title="3. Value Matcher">3</a>. </span>Value Matcher</h1>
+	<div class="contents1">
+		<p>A Value Matcher is code (specified as a <a href="#3_2">Value Matcher Function</a>) that transforms a value to a boolean value.</p>
+		
+		<p>A Value Matcher can be considered to be a specialized kind of <a href="#2">Value Transformer</a>, where the input value is always transformed to a result of <code>true</code> or <code>false</code>.</p>
+		
+		<a name="3_1"></a>
+		<h2 class="heading2" title="3. Value Matcher -&gt; 3.1. Applications of Value Matchers"><span class="headingNumber"><a href="#3" title="3. Value Matcher">3</a>.<a href="#3_1" title="3. Value Matcher -&gt; 3.1. Applications of Value Matchers">1</a>. </span>Applications of Value Matchers</h2>
+		<div class="contents2">
+			<p>Value matchers can have a variety of different uses - they can be used as validators, they can be supplied to map functions (such as <code><a href="#3_4_1_1">Uize.String.Lines.removeMatching</a></code>), they can be used to test values generated in unit tests against expectations, etc.</p>
+			
+			<p>Among other things, value matchers can be used to match...</p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>integer numbers</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>odd numbers, or even numbers</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>values within a specific value range</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>strings or arrays whose length is in a specific range</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>empty objects, or non-empty objects</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>empty arrays, or non-empty arrays</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>non-null values</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>instances of specific objects or classes</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>correctly formatted e-mail addresses</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>correctly formatted URLs</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>correctly formatted color values</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>etc.</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_2"></a>
+		<h2 class="heading2" title="3. Value Matcher -&gt; 3.2. Value Matcher Function"><span class="headingNumber"><a href="#3" title="3. Value Matcher">3</a>.<a href="#3_2" title="3. Value Matcher -&gt; 3.2. Value Matcher Function">2</a>. </span>Value Matcher Function</h2>
+		<div class="contents2">
+			<p>A Value Matcher Function is a <a href="#3">Value Matcher</a> specified in the form of a function.</p>
+			
+			<p>A Value Matcher Function should expect to receive a single parameter, being the value that is to be transformed to a boolean value. The function should return the transformed boolean value. Consider the following example...</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">function isOnlyWhitespace (value) {
+  return /^\s*$/.test (value);
+}
+</pre>
+			
+			<p>In the above example, the function <code>isOnlyWhitespace</code> returns a boolean value, indicating whether or not the input value is a string containing only whitespace characters (such as spaces and tabs).</p>
+			
+			<a name="3_2_1"></a>
+			<h3 class="heading3" title="3. Value Matcher -&gt; 3.2. Value Matcher Function -&gt; 3.2.1. Using a Value Matcher Function"><span class="headingNumber"><a href="#3" title="3. Value Matcher">3</a>.<a href="#3_2" title="3. Value Matcher -&gt; 3.2. Value Matcher Function">2</a>.<a href="#3_2_1" title="3. Value Matcher -&gt; 3.2. Value Matcher Function -&gt; 3.2.1. Using a Value Matcher Function">1</a>. </span>Using a Value Matcher Function</h3>
+			<div class="contents3">
+				<p>A <a href="#3_2">Value Matcher Function</a> can be supplied as a parameter to any method that supports a Value Matcher Function, such as the <code><a href="#3_4_1_1">Uize.String.Lines.removeMatching</a></code> static method of the <code><a href="../reference/Uize.String.Lines.html">Uize.String.Lines</a></code> module. Consider the following example...</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">function isOnlyWhitespace (value) {
+  return /^\s*$/.test (value);
+}
+
+myString = Uize.String.Lines.removeMatching (myString,isOnlyWhitespace);
+</pre>
+				
+				<p>The <code><a href="#3_4_1_1">Uize.String.Lines.removeMatching</a></code> method accepts a multi-line string (containing zero or more linebreaks) for its first parameter and a matcher function as its second. It iterates through all the lines of the specified multi-line string, calling the Value Matcher Function for each line. Depending on the boolean value that is returned by the matcher, the method will either remove or retain the line.</p>
+				
+				<p>The variable <code>myString</code>, in this case, will contain only the lines of the source multi-line string that have at least one non-whitespace character - lines containing only whitespace are matched by the <code>isOnlyWhitespace</code> matcher function and are removed by the <code><a href="#3_4_1_1">Uize.String.Lines.removeMatching</a></code> method.</p>
+			</div>
+		</div>
+		
+		<a name="3_3"></a>
+		<h2 class="heading2" title="3. Value Matcher -&gt; 3.3. Different Types of Value Matchers"><span class="headingNumber"><a href="#3" title="3. Value Matcher">3</a>.<a href="#3_3" title="3. Value Matcher -&gt; 3.3. Different Types of Value Matchers">3</a>. </span>Different Types of Value Matchers</h2>
+		<div class="contents2">
+			<p>As with the <a href="#2">Value Transformer</a> construct, the <a href="#3">Value Matcher</a> construct is deliberately very generic, making it applicable in a number of different contexts.</p>
+			
+			<a name="3_3_1"></a>
+			<h3 class="heading3" title="3. Value Matcher -&gt; 3.3. Different Types of Value Matchers -&gt; 3.3.1. Value Validators Are Specialized Value Matchers"><span class="headingNumber"><a href="#3" title="3. Value Matcher">3</a>.<a href="#3_3" title="3. Value Matcher -&gt; 3.3. Different Types of Value Matchers">3</a>.<a href="#3_3_1" title="3. Value Matcher -&gt; 3.3. Different Types of Value Matchers -&gt; 3.3.1. Value Validators Are Specialized Value Matchers">1</a>. </span>Value Validators Are Specialized Value Matchers</h3>
+			<div class="contents3">
+				<p>A <a href="#5">Value Validator</a> is a specialized kind of <a href="#3">Value Matcher</a> that transforms a value to a boolean value, indicating whether or not the input value is valid according to certain criteria.</p>
+				
+				<p>A Value Validator is no more than a <a href="#3">Value Matcher</a>, where the implication of a value not being matched by the matcher is that the value is not valid.</p>
+			</div>
+		</div>
+		
+		<a name="3_4"></a>
+		<h2 class="heading2" title="3. Value Matcher -&gt; 3.4. Using Value Matchers"><span class="headingNumber"><a href="#3" title="3. Value Matcher">3</a>.<a href="#3_4" title="3. Value Matcher -&gt; 3.4. Using Value Matchers">4</a>. </span>Using Value Matchers</h2>
+		<div class="contents2">
+			<p>A <a href="#3">Value Matcher</a> can be used with any of the many methods that support a Value Matcher.</p>
+			
+			<a name="3_4_1"></a>
+			<h3 class="heading3" title="3. Value Matcher -&gt; 3.4. Using Value Matchers -&gt; 3.4.1. Methods of the Uize.String.Lines Module"><span class="headingNumber"><a href="#3" title="3. Value Matcher">3</a>.<a href="#3_4" title="3. Value Matcher -&gt; 3.4. Using Value Matchers">4</a>.<a href="#3_4_1" title="3. Value Matcher -&gt; 3.4. Using Value Matchers -&gt; 3.4.1. Methods of the Uize.String.Lines Module">1</a>. </span>Methods of the Uize.String.Lines Module</h3>
+			<div class="contents3">
+				<p>Some of the static methods of the <code><a href="../reference/Uize.String.Lines.html">Uize.String.Lines</a></code> module support a <a href="#3">Value Matcher</a>.</p>
+				
+				<a name="3_4_1_1"></a>
+				<h4 class="heading4" title="3. Value Matcher -&gt; 3.4. Using Value Matchers -&gt; 3.4.1. Methods of the Uize.String.Lines Module -&gt; 3.4.1.1. Uize.String.Lines.removeMatching"><span class="headingNumber"><a href="#3" title="3. Value Matcher">3</a>.<a href="#3_4" title="3. Value Matcher -&gt; 3.4. Using Value Matchers">4</a>.<a href="#3_4_1" title="3. Value Matcher -&gt; 3.4. Using Value Matchers -&gt; 3.4.1. Methods of the Uize.String.Lines Module">1</a>.<a href="#3_4_1_1" title="3. Value Matcher -&gt; 3.4. Using Value Matchers -&gt; 3.4.1. Methods of the Uize.String.Lines Module -&gt; 3.4.1.1. Uize.String.Lines.removeMatching">1</a>. </span>Uize.String.Lines.removeMatching</h4>
+				<div class="contents4">
+					<p>The <code><a href="#3_4_1_1">Uize.String.Lines.removeMatching</a></code> static method supports a value matcher to identify which lines of a multi-line string should be removed.</p>
+					
+					<p><span class="allCaps">EXAMPLE</span></p>
+					
+					
+<pre class="sample-code">myString = Uize.String.Lines.removeMatching (
+  myString,
+  function (value) {return /^\s*$/.test (value)
+};
+</pre>
+					
+					<p>In the above example, all lines that are either empty or only contain whitespace characters will be removed from the string specified by the <code>myString</code> variable, and the resulting string will be assigned back to the <code>myString</code> variable.</p>
+				</div>
+				
+				<a name="3_4_1_2"></a>
+				<h4 class="heading4" title="3. Value Matcher -&gt; 3.4. Using Value Matchers -&gt; 3.4.1. Methods of the Uize.String.Lines Module -&gt; 3.4.1.2. Uize.String.Lines.retainMatching"><span class="headingNumber"><a href="#3" title="3. Value Matcher">3</a>.<a href="#3_4" title="3. Value Matcher -&gt; 3.4. Using Value Matchers">4</a>.<a href="#3_4_1" title="3. Value Matcher -&gt; 3.4. Using Value Matchers -&gt; 3.4.1. Methods of the Uize.String.Lines Module">1</a>.<a href="#3_4_1_2" title="3. Value Matcher -&gt; 3.4. Using Value Matchers -&gt; 3.4.1. Methods of the Uize.String.Lines Module -&gt; 3.4.1.2. Uize.String.Lines.retainMatching">2</a>. </span>Uize.String.Lines.retainMatching</h4>
+				<div class="contents4">
+					<p>The <code><a href="#3_4_1_2">Uize.String.Lines.retainMatching</a></code> static method supports a value matcher to identify which lines of a multi-line string should be retained (ie. not removed).</p>
+					
+					<p><span class="allCaps">EXAMPLE</span></p>
+					
+					
+<pre class="sample-code">myString = Uize.String.Lines.retainMatching (
+  myString,
+  function (value) {return /\S/.test (value)
+};
+</pre>
+					
+					<p>In the above example, all lines that contain at least one non-whitespace character will be retained in the string specified by the <code>myString</code> variable (so, empty lines or lines with only whitespace will be removed), and the resulting string will be assigned back to the <code>myString</code> variable.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<a name="4"></a>
+	<h1 class="heading1" title="4. Value Conformer"><span class="headingNumber"><a href="#4" title="4. Value Conformer">4</a>. </span>Value Conformer</h1>
+	<div class="contents1">
+		<p>A Value Conformer is code (specified as a <a href="#4_2">Value Conformer Function</a>) that transforms a value so that it conforms to certain criteria.</p>
+		
+		<p>A Value Conformer can be considered to be a specialized kind of <a href="#2">Value Transformer</a>, where the input value may be returned as is if it already conforms to the criteria, or it may be transformed in some way to force it into conformance with the criteria.</p>
+		
+		<a name="4_1"></a>
+		<h2 class="heading2" title="4. Value Conformer -&gt; 4.1. Applications of Value Conformers"><span class="headingNumber"><a href="#4" title="4. Value Conformer">4</a>.<a href="#4_1" title="4. Value Conformer -&gt; 4.1. Applications of Value Conformers">1</a>. </span>Applications of Value Conformers</h2>
+		<div class="contents2">
+			<p>Value conformers can have a variety of different uses - they can be used as conformers for set-get properties, or they can be supplied to map functions (such as <code>Uize.Data.map</code>).</p>
+			
+			<p>Among other things, value conformers can be used to...</p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>conform floating point numbers to integer numbers</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>constrain numbers to limited value ranges</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>coerce values to specific allowable types</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>limit string values to a maximum length</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>limit string or number values to being within a finite set of allowable values</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>conform strings to strip out disallowed characters</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>etc.</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_2"></a>
+		<h2 class="heading2" title="4. Value Conformer -&gt; 4.2. Value Conformer Function"><span class="headingNumber"><a href="#4" title="4. Value Conformer">4</a>.<a href="#4_2" title="4. Value Conformer -&gt; 4.2. Value Conformer Function">2</a>. </span>Value Conformer Function</h2>
+		<div class="contents2">
+			<p>A Value Conformer Function is a <a href="#4">Value Conformer</a> specified in the form of a function.</p>
+			
+			<p>A Value Conformer Function should expect to receive a single parameter, being the value that is to be conformed. The function should return the conformed value. Consider the following example...</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">function conformToRange0to100 (value) {
+  return Uize.constrain (value,0,100);
+}
+</pre>
+			
+			<p>In the above example, the <code>conformToRange0to100</code> function defines a <a href="#4">Value Conformer</a> that conforms a number value so that it is constrained to the value range of <code>0</code> to <code>100</code>.</p>
+			
+			<a name="4_2_1"></a>
+			<h3 class="heading3" title="4. Value Conformer -&gt; 4.2. Value Conformer Function -&gt; 4.2.1. Using a Value Conformer Function"><span class="headingNumber"><a href="#4" title="4. Value Conformer">4</a>.<a href="#4_2" title="4. Value Conformer -&gt; 4.2. Value Conformer Function">2</a>.<a href="#4_2_1" title="4. Value Conformer -&gt; 4.2. Value Conformer Function -&gt; 4.2.1. Using a Value Conformer Function">1</a>. </span>Using a Value Conformer Function</h3>
+			<div class="contents3">
+				<p>A <a href="#4_2">Value Conformer Function</a> can be supplied as a parameter to any method that supports a <a href="#2_1">Value Transformer Function</a>, such as the <code>Uize.Data.map</code> static method of the <code><a href="../reference/Uize.Data.html">Uize.Data</a></code> module. Consider the following example...</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">Uize.Data.map (Math.round,myNumbersArray,false);
+</pre>
+				
+				<p>In the above example, the <code>Math.round</code> static method of JavaScript's built-in <code><a href="../javascript-reference/Math.html">Math</a></code> object is being used as a value conformer with the <code>Uize.Data.map</code> method in order to conform all the number values in an array to integer values. The third parameter of the <code>Uize.Data.map</code> method specifies the target for the mapped values, where the value <code>false</code> indicates that the values should <b>not</b> be populated into a new array but should replace the values in the source array.</p>
+				
+				<a name="4_2_1_1"></a>
+				<h4 class="heading4" title="4. Value Conformer -&gt; 4.2. Value Conformer Function -&gt; 4.2.1. Using a Value Conformer Function -&gt; 4.2.1.1. Conformers for Set-get Properties"><span class="headingNumber"><a href="#4" title="4. Value Conformer">4</a>.<a href="#4_2" title="4. Value Conformer -&gt; 4.2. Value Conformer Function">2</a>.<a href="#4_2_1" title="4. Value Conformer -&gt; 4.2. Value Conformer Function -&gt; 4.2.1. Using a Value Conformer Function">1</a>.<a href="#4_2_1_1" title="4. Value Conformer -&gt; 4.2. Value Conformer Function -&gt; 4.2.1. Using a Value Conformer Function -&gt; 4.2.1.1. Conformers for Set-get Properties">1</a>. </span>Conformers for Set-get Properties</h4>
+				<div class="contents4">
+					<p>A <a href="#4_2">Value Conformer Function</a> can be specified for the <code>conformer</code> property in the profile of a set-get property. Consider the following example...</p>
+					
+					<p><span class="allCaps">EXAMPLE</span></p>
+					
+					
+<pre class="sample-code">function conformToRange0to100 (value) {
+  return Uize.constrain (value,0,100);
+}
+
+var MyClass = Uize.subclass ();
+MyClass.registerProperties ({
+  _percentLoaded:{
+    name:'percentLoaded',
+    conformer:conformToRange0to100,
+    value:0
+  }
+});
+</pre>
+					
+					<p>In the above example, a <code>percentLoaded</code> set-get property is being registered for the class <code>MyClass</code>. In order to ensure that the value set for this property doesn't stray outside of the range of <code>0</code> to <code>100</code>, the <a href="#4_2">Value Conformer Function</a> <code>conformToRange0to100</code> is being specified for the <code>conformer</code> property inside the profile for the <code>percentLoaded</code> set-get property.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<a name="5"></a>
+	<h1 class="heading1" title="5. Value Validator"><span class="headingNumber"><a href="#5" title="5. Value Validator">5</a>. </span>Value Validator</h1>
+	<div class="contents1">
+		<p>A Value Validator is code (specified as a <a href="#5_2">Value Validator Function</a>) that transforms an input value to a boolean value, indicating whether or not the input value is valid according to certain criteria.</p>
+		
+		<p>A Value Validator is no more than a <a href="#3">Value Matcher</a>, where the implication of a value not being matched by the matcher is that the value is not valid.</p>
+		
+		<a name="5_1"></a>
+		<h2 class="heading2" title="5. Value Validator -&gt; 5.1. Applications of Value Validators"><span class="headingNumber"><a href="#5" title="5. Value Validator">5</a>.<a href="#5_1" title="5. Value Validator -&gt; 5.1. Applications of Value Validators">1</a>. </span>Applications of Value Validators</h2>
+		<div class="contents2">
+			<p>Value validators can have a variety of different uses, but most typically they are used for validating user input for form element widgets.</p>
+			
+			<p>Among other things, value validators can be used to...</p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>validate that a user entered e-mail address is correctly formatted</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>validate that a user entered phone number is correctly formatted</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>validate that a user entered date falls within a valid date range</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>validate that user entered text does not exceed a maximum allowable length</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>validate that a user entered string does not contain illegal characters (eg. a user name that may not contain spaces or special characters)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>etc.</td></tr>
+			</table>
+		</div>
+		
+		<a name="5_2"></a>
+		<h2 class="heading2" title="5. Value Validator -&gt; 5.2. Value Validator Function"><span class="headingNumber"><a href="#5" title="5. Value Validator">5</a>.<a href="#5_2" title="5. Value Validator -&gt; 5.2. Value Validator Function">2</a>. </span>Value Validator Function</h2>
+		<div class="contents2">
+			<p>A Value Validator Function is a <a href="#5">Value Validator</a> specified in the form of a function.</p>
+			
+			<p>A Value Validator Function should expect to receive a single parameter, being the value that is to be validated. The function should return a boolean value, indicating whether or not the input value is valid according to the validation criteria. Consider the following example...</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">function validateInRange0to100 (value) {
+  return value &gt;= 0 &amp;&amp; value &lt;= 100;
+}
+</pre>
+			
+			<p>In the above example, the <code>validateInRange0to100</code> function defines a <a href="#5">Value Validator</a> that validates that a value is in the range of <code>0</code> to <code>100</code>.</p>
+		</div>
+	</div>
+	
+	<a name="6"></a>
+	<h1 class="heading1" title="6. Conformers vs. Validators"><span class="headingNumber"><a href="#6" title="6. Conformers vs. Validators">6</a>. </span>Conformers vs. Validators</h1>
+	<div class="contents1">
+		<p>Conformers and validators are similar in nature, and can be considered to be two sides of the same coin.</p>
+		
+		<p>Whereas a <a href="#5">Value Validator</a> is a type of <a href="#3">Value Matcher</a> that returns a boolean to indicate whether or not the input value is valid according to certain criteria, a <a href="#4">Value Conformer</a> is a <a href="#2">Value Transformer</a> that will modify the input value as needed in order to ensure that it is valid according to specific constrains (returning it as is when it is already valid). To illustrate this point, let's look at a comparison of a <code>0</code> to <code>100</code> range conformer versus a <code>0</code> to <code>100</code> range validator...</p>
+		
+		<p><span class="allCaps">0 TO 100 RANGE CONFORMER</span></p>
+		
+		
+<pre class="sample-code">function conformToRange0to100 (value) {  // this function is a conformer
+  return Uize.constrain (value,0,100);
+}
+</pre>
+		
+		<p><span class="allCaps">0 TO 100 RANGE VALIDATOR</span></p>
+		
+		
+<pre class="sample-code">function validateInRange0to100 (value) {  // this function is a validator
+  return value &gt;= 0 &amp;&amp; value &lt;= 100;
+}
+</pre>
+		
+		<a name="6_1"></a>
+		<h2 class="heading2" title="6. Conformers vs. Validators -&gt; 6.1. Not all Validators Have Corresponding Conformers"><span class="headingNumber"><a href="#6" title="6. Conformers vs. Validators">6</a>.<a href="#6_1" title="6. Conformers vs. Validators -&gt; 6.1. Not all Validators Have Corresponding Conformers">1</a>. </span>Not all Validators Have Corresponding Conformers</h2>
+		<div class="contents2">
+			<p>While there is a simple way of <a href="#6_2">Deriving a Validator From a Conformer</a>, it is not always possible to create a meaningful conformer to pair with a validator.</p>
+			
+			<p>Take for example a validator that tests whether or not a string is a correctly formatted e-mail address. Such a validator can be implemented without too much difficulty using a regular expression - albeit a rather sophisticated one. On the flip side, how does one meaningfully conform a string value to a correctly formatted e-mail address? An even more extreme illustration of this is with a non-empty validator, where a string value is considered valid as long as it is not empty. How does one then conform a string that <b>is</b> empty to being a string that is not empty? There are too many choices of possible non-empty values.</p>
+		</div>
+		
+		<a name="6_2"></a>
+		<h2 class="heading2" title="6. Conformers vs. Validators -&gt; 6.2. Deriving a Validator From a Conformer"><span class="headingNumber"><a href="#6" title="6. Conformers vs. Validators">6</a>.<a href="#6_2" title="6. Conformers vs. Validators -&gt; 6.2. Deriving a Validator From a Conformer">2</a>. </span>Deriving a Validator From a Conformer</h2>
+		<div class="contents2">
+			<p>While <a href="#6_1">Not all Validators Have Corresponding Conformers</a>, it is always possible to generate / derive a <a href="#5">Value Validator</a> from a <a href="#4">Value Conformer</a>, according to the following simple principle...</p>
+			
+			
+<pre class="sample-code">function deriveValidatorFromConformer (conformer) {
+  return function (value) {
+    return value === conformer (value);
+  };
+}
+</pre>
+			
+			<p>Essentially, if you use a specified <a href="#4">Value Conformer</a> to conform a value, and the resulting conformed value is not the same as the original value, then the original value must have been non-conforming (another way of saying not valid). So, for example, the <code>Math.round</code> method of JavaScript's built-in <code><a href="../javascript-reference/Math.html">Math</a></code> object can be considered a conformer that conforms any floating point number value to an integer number value. Therefore, a validator can be produced by using the <code>Math.round</code> method, as follows...</p>
+			
+			
+<pre class="sample-code">var isInteger = deriveValidatorFromConformer (Math.round);
+</pre>
+			
+			<p>Similarly, the <code>conformToRange0to100</code> function defined in the example in the <a href="#6">Conformers vs. Validators</a> section could be used to derive the <code>validateInRange0to100</code> validator function using the statement <code>deriveValidatorFromConformer (conformToRange0to100)</code>.</p>
+		</div>
+	</div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

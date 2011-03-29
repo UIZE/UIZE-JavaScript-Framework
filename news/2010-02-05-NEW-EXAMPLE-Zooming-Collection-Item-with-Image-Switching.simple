@@ -1,0 +1,13 @@
+The new [[../examples/collection-item-zooming-with-image-switching.html][Zooming Collection Item with Image Switching]] examples demonstrates how the =Uize.Widget.CollectionItem.Zooming= widget class handles dynamically switching the image that it displays.
+
+In this example, the =Uize.Widget.CollectionItem.Zooming= widget class is being used to add a JavaScript animation zoom in effect to an image. In contrast to the [[../examples/collection-item-zooming.html][Zooming Collection Items]] example, which simply demonstrates this widget applied across multiple images in a grid, this example demonstrates how the value of a single instance's previewUrl set-get property can be changed dynamically, and how the zoom and pan behavior still works as expected after the image URL has been updated.
+
+[[../examples/collection-item-zooming-with-image-switching.html][CHECK IT OUT]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2010-02-05 - NEW EXAMPLE: Zooming Collection Item with Image Switching
+....................................................................................

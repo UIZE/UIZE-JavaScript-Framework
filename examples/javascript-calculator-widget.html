@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>JavaScript Calculator Widget | JavaScript Examples | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="widget Uize.Widget.Calculator"/>
+	<meta name="description" content="The calculator widget gives you all the functions you'd expect: division, multiplication, addition, subtraction, square root, memory, and percent."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.example.css"/>
+	<link rel="stylesheet" href="../css/widget.calculator.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	<a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow">JAVASCRIPT EXAMPLES</a>
+	JavaScript Calculator Widget
+	<div id="page-actions" class="pageActions">
+		<a href="source-code/javascript-calculator-widget.html" class="buttonLink">SOURCE</a>
+	</div>
+</h1>
+
+<div class="main">
+	<!-- explanation copy -->
+
+	<div class="explanation">
+		<p>In this example, an instance of <a href="../reference/Uize.Widget.Calculator.html"><code>Uize.Widget.Calculator</code></a> is used to wire up a basic JavaScript calculator widget. The widget provides the basic functions you'd expect from an easy-to-use pocket calculator: division, multiplication, addition, subtraction, square root, a memory feature, and a versatile percent function that supports operations like <code>15 + 12%</code> (15 increased by 12%), <code>5000 - 2.3%</code> (5000 reduced by 2.3%), <code>50 * 85%</code> (85% of 50), and <code>85% 50 =</code> (85% of 50). Operations are automatically completed, as expected (eg. with <code>2 x 3 + 4 =</code>, <code>2 x 3</code> is completed when addition is triggered). You can use your regular keyboard to enter values <b>and</b> trigger operators - click in the display to focus the entry field and start typing. The corresponding buttons on the calculator keypad will be higlighted as you type. For appreciators of CSS, the characters in the display are styled using the CSS3 <code>text-shadow</code> property to produce an LCD / neon glow. This can be seen in browsers that support this property, such as Safari 4.x and Google Chrome 3.x. Finally, buttons are disabled whenever the actions they would trigger would not be valid. Play around for a while and you'll see. Try getting the square root of <code>-1</code>.</p>
+	</div>
+
+	<center id="page_calculator-shell">
+		<!-- calculator widget's UI HTML gets dynamically inserted in here -->
+	</center>
+
+	<center style="padding-top:10px;">
+		<a id="page-launchWidgetInPopup" href="javascript:window.open ('../widgets/calculator/web.html','calculator','width=240, height=314, toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no').focus (), undefined;" class="buttonLink">LAUNCH CALCULATOR IN POPUP</a>
+	</center>
+</div>
+
+<!-- JavaScript code to make the HTML "come alive" -->
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Example.library',
+		'UizeDotCom.Page.Example',
+		'Uize.Widget.Calculator',
+		'Uize.Templates.Calculator'
+	],
+	builder:function () {
+		/*** create the example page widget ***/
+			var page = window.page = new UizeDotCom.Page.Example ({evaluator:function (code) {eval (code)}});
+
+		/*** add calculator widget instance ***/
+			page.addChild (
+				'calculator',
+				Uize.Widget.Calculator,
+				{built:false,html:Uize.Templates.Calculator}
+			);
+
+		/*** wire up the page widget ***/
+			page.wireUi ();
+	}
+});
+
+</script>
+
+</body>
+</html>
+

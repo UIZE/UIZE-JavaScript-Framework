@@ -1,0 +1,13 @@
+The new [[../explainers/general-constructs.html][General Constructs]] explainer discusses a number of general constructs that apply across the entire UIZE JavaScript Framework, and can apply in application programming more generally.
+
+Among the constructs discussed are: value transformers, value matchers, value conformers, and value validators. Each of these constructs is discussed in a good amount of detail, with code examples provided to illustrate how the constructs can be used.
+
+[[../explainers/general-constructs.html][LEARN MORE]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2010-10-24 - NEW EXPLAINER: General Constructs
+....................................................................................

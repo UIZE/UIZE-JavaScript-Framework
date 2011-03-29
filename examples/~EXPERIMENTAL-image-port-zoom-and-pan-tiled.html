@@ -1,0 +1,173 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<title>Tiled Zoom and Pan | JavaScript Examples | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="Uize.Fade Uize.Widget.ImagePort.Draggable"/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.example.css"/>
+	<link rel="stylesheet" href="css/selector-links.css"/>
+	<style type="text/css">
+		table.portholes div.porthole {
+			position:relative;
+			width:175px;
+			height:125px;
+			overflow:hidden;
+		}
+		table.portholes div.porthole img {
+			position:absolute;
+			cursor:pointer;
+			border:none;
+		}
+	</style>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	<a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow">JAVASCRIPT EXAMPLES</a>
+	Tiled Zoom and Pan
+	<div id="page-actions" class="pageActions">
+		<a href="source-code/~EXPERIMENTAL-image-port-zoom-and-pan-tiled.html" class="buttonLink">SOURCE</a>
+	</div>
+</h1>
+
+<div class="main">
+	<table border="0" cellspacing="1" cellpadding="0" style="margin:auto;">
+		<tr>
+			<td>
+				<!-- the matrix of nine images that are cropped by parent nodes -->
+				<table id="portholes" class="portholes" border="0" cellspacing="0" cellpadding="0" style="visibility:hidden;">
+					<tr align="left" valign="top">
+						<td><div id="imagePort1" class="porthole"><img id="imagePort1-image" src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228277244419896914&max_dim=500" title="A Lighted Spot" alt=""/></div></td>
+						<td><div id="imagePort2" class="porthole"><img id="imagePort2-image" src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228109666540948246&max_dim=500" title="Braving the Onslaught" alt=""/></div></td>
+						<td><div id="imagePort3" class="porthole"><img id="imagePort3-image" src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228745103279879745&max_dim=500" title="Companion to a Sunset" alt=""/></div></td>
+						<td><div id="imagePort4" class="porthole"><img id="imagePort4-image" src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228507796122097730&max_dim=500" title="Driving Through the Rain" alt=""/></div></td>
+					</tr>
+					<tr align="left" valign="top">
+						<td><div id="imagePort5" class="porthole"><img id="imagePort5-image" src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228267745724726415&max_dim=500" title="Flock of Clouds" alt=""/></div></td>
+						<td><div id="imagePort6" class="porthole"><img id="imagePort6-image" src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228937676589416694&max_dim=500" title="Hail to the Opening" alt=""/></div></td>
+						<td><div id="imagePort7" class="porthole"><img id="imagePort7-image" src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228623703668130129&max_dim=500" title="Just a Visitor" alt=""/></div></td>
+						<td><div id="imagePort8" class="porthole"><img id="imagePort8-image" src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228897217554746467&max_dim=500" title="Out the Bus Window" alt=""/></div></td>
+					</tr>
+					<tr align="left" valign="top">
+						<td><div id="imagePort9" class="porthole"><img id="imagePort9-image" src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228554379238024970&max_dim=500" title="Pacifica Pier From Milagra" alt=""/></div></td>
+						<td><div id="imagePort10" class="porthole"><img id="imagePort10-image" src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228554379238024970&max_dim=500" title="Pacifica Pier From Milagra" alt=""/></div></td>
+						<td><div id="imagePort11" class="porthole"><img id="imagePort11-image" src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228554379238024970&max_dim=500" title="Pacifica Pier From Milagra" alt=""/></div></td>
+						<td><div id="imagePort12" class="porthole"><img id="imagePort12-image" src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228554379238024970&max_dim=500" title="Pacifica Pier From Milagra" alt=""/></div></td>
+					</tr>
+					<tr align="left" valign="top">
+						<td><div id="imagePort13" class="porthole"><img id="imagePort13-image" src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228554379238024970&max_dim=500" title="Pacifica Pier From Milagra" alt=""/></div></td>
+						<td><div id="imagePort14" class="porthole"><img id="imagePort14-image" src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228554379238024970&max_dim=500" title="Pacifica Pier From Milagra" alt=""/></div></td>
+						<td><div id="imagePort15" class="porthole"><img id="imagePort15-image" src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228554379238024970&max_dim=500" title="Pacifica Pier From Milagra" alt=""/></div></td>
+						<td><div id="imagePort16" class="porthole"><img id="imagePort16-image" src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228554379238024970&max_dim=500" title="Pacifica Pier From Milagra" alt=""/></div></td>
+					</tr>
+				</table>
+			</td>
+			<td valign="top">
+				<div id="imageSetSelector"></div>
+			</td>
+		</tr>
+	</table>
+</div>
+
+<!-- JavaScript code to wire up the sequenced show and "thumb zoom" behavior for the image portholes -->
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Example.library',
+		'UizeDotCom.Page.Example',
+		'Uize.Node',
+		'Uize.Widget',
+		'Uize.Fade',
+		'Uize.Widget.ImagePort.Draggable',
+		'Uize.Curve'
+	],
+	builder:function () {
+		/*** create the example page widget ***/
+			var page = window.page = new UizeDotCom.Page.Example;
+
+		setTimeout (
+			function () {
+				var imagePortNodes = Uize.Node.find ({className:'porthole'});
+
+				/*** create and wire the ImagePort instances ***/
+					var imagePorts = Uize.Widget.ImagePort.Draggable.spawn ({
+						idPrefix:imagePortNodes,
+						maxSizingValue:10,
+						minSizingValue:1,
+						sizingLowerBound:'0',
+						sizingUpperBound:'fill',
+						sizingValue:2.5,
+						alignX:.5,
+						alignY:.5
+					});
+					Uize.Node.show ('portholes');
+
+				/*** generate interface for changing the image set ***/
+					var
+						fade = new Uize.Fade ({
+							startValue:0,
+							endValue:1,
+							duration:3500,
+							curve:Uize.Curve.easeInOutPow (3)
+						}),
+						totalRowsAndColumns = 4,
+						startSizingValue = 60,
+						endSizingValue = totalRowsAndColumns
+					;
+					fade.wire (
+						'Changed.value',
+						function () {
+							Uize.callOn (
+								imagePorts,
+								'set',
+								[{sizingValue:startSizingValue + (endSizingValue - startSizingValue) * fade}]
+							);
+						}
+					);
+					setImageForMatrix = function (imageSrc) {
+						for (var imagePortNodeNo = -1; ++imagePortNodeNo < imagePortNodes.length;) {
+							var
+								rowNo = Math.floor (imagePortNodeNo / totalRowsAndColumns),
+								columnNo = imagePortNodeNo - rowNo * totalRowsAndColumns,
+								imagePortNodeImg = imagePortNodes [imagePortNodeNo].getElementsByTagName ('img') [0]
+							;
+							imagePorts [imagePortNodeNo].set ({
+								sizingValue:startSizingValue,
+								alignX:columnNo / (totalRowsAndColumns - 1),
+								alignY:rowNo / (totalRowsAndColumns - 1)
+							});
+							imagePortNodeImg.src = imageSrc;
+						}
+						setTimeout (function () {fade.start ()},500);
+					};
+					var html = '<div class="selectorHeading">&nbsp;CHANGE IMAGES&nbsp;</div>';
+					for (var imagePortNodeNo = -1; ++imagePortNodeNo < imagePortNodes.length;) {
+						var imagePortNodeImg = imagePortNodes [imagePortNodeNo].getElementsByTagName ('img') [0];
+						html +=
+							'<a href="javascript://" class="selector" onclick="setImageForMatrix (\'' + imagePortNodeImg.src + '\'); return false">' +
+								'&nbsp;' + imagePortNodeImg.title + '&nbsp;' +
+							'</a>'
+						;
+					}
+					Uize.Node.injectHtml ('imageSetSelector',html);
+			},
+			1000
+		);
+
+		/*** wire up the page widget ***/
+			page.wireUi ();
+	}
+});
+
+</script>
+
+</body>
+</html>

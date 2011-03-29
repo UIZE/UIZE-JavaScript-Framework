@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2010-11-03 - NEW METHOD: Uize.getModuleByName | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="The Uize base class has been improved with the addition of the new Uize.getModuleByName static method."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2010.html" class="breadcrumb breadcrumbWithArrow">2010 NEWS</a>
+	2010-11-03 - NEW METHOD: Uize.getModuleByName
+
+</h1>
+
+<div class="main">
+<div class="contents0">
+	<p>The <code><a href="../reference/Uize.html">Uize</a></code> base class has been improved with the addition of the new <code>Uize.getModuleByName</code> static method.</p>
+	
+	<p>The <code>Uize.getModuleByName</code> method returns an object reference, being a reference to the module of the specified name, or it returns the value <code>undefined</code> if no such module is defined. If the special value <code>'*'</code> (wildcard character) is specified in place of a module name, then the method returns an object that serves as a lookup table for all the modules that have been built, where each property's name is the name of a module and each property's value is a reference to the module. This lookup can be used to, among other things, generate a list of all the modules that have been built for a Web page, and this information can then be used as the basis for creating a JavaScript library file.</p>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

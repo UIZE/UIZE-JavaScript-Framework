@@ -1,0 +1,23 @@
+<%@
+	required ('UizeDotCom.Templates.IndexPage');
+	input ({files:'array'});
+%><%@
+	startBlock ('extraPreambleContent')
+%>
+	<ul class="featuresList">
+		<li><b>FREE</b> - All widgets are free to use. There is no charge for putting them on your Web page. And the widgets are hosted for you, free of charge.</li>
+		<li><b>EASY TO INSTALL</b> - Widgets are easy to install on your Web pages. You don't have to download and install any JavaScript on your server. You don't have to author your pages in any special way. Embedding a widget is as simple as adding an IFRAME tag to your page's HTML.</li>
+		<li><b>VERSATILE</b> - Besides embedding on your pages using an IFRAME tag, you can also also add links in your Web pages, so that the users of your Web site can conveniently launch the widgets in popup windows when they want to use them. You can even bookmark them using the bookmarklets provided, so you can launch them for your own personal use in your Web browser.</li>
+		<li><b>EASY TO USE</b> - All widgets are designed to be user friendly and easy to use by the end user.</li>
+		<li><b>EASY TO REMOVE</b> - If you get tired of a widget or no longer need it on a page, removing it is easy as pie. Just remove the tiny snippet of HTML that you added to get them onto your page in the first place.</li> 
+		<li><b>TASTEFUL DESIGN</b> - All widgets are designed to look pleasing and professional, to make a smart addition to any Web page you put them on.</li>
+	</ul>
+<%@
+	endBlock ()
+%><%= UizeDotCom.Templates.IndexPage.process ({
+	title:'JavaScript Widgets',
+	description:'The UIZE JavaScript Framework offers FREE widgets that can be easily and safely embedded in your own Web sites and blogs. No fees. No advertising.',
+	extraPreambleContent:extraPreambleContent (),
+	files:input.files
+}) %>
+

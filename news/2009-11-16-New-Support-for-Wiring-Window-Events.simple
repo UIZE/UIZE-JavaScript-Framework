@@ -1,0 +1,76 @@
+Wiring of events on the =window= object is now supported by both the =Uize.Node= and =Uize.Widget= modules.
+
+Handlers can be wired for the =focus=, =blur=, =load=, =beforeunload=, =unload=, =resize=, and =scroll= events, using the =Uize.Node.wire= static method of the =Uize.Node= module, or the =wireNode= instance method of the =Uize.Widget= class. Similarly, handlers for these events can be unwired using the various node event unwiring methods of these two modules.
+
+Deprecated Static Events
+	As a result of the improved support for wiring =window= object event handlers, the =Document Loaded=, =Document Unload=, =Window Resized=, and =Window Scrolled= static events of the =Uize.Widget= class have been deprecated.
+
+	INSTEAD OF...
+	............................................
+	Uize.Widget.wire (
+		'Window Resized',
+		function () {
+			// do something when window is resized
+		}
+	);
+	............................................
+
+	USE...
+	............................................
+	Uize.Node.wire (
+		window,
+		'resize',
+		function () {
+			// do something when window is resized
+		}
+	);
+	............................................
+
+	OR...
+	............................................
+	myWidget.wireNode (
+		window,
+		'resize',
+		function () {
+			// do something when window is resized
+		}
+	);
+	............................................
+
+	OR, FOR MULTIPLE WIRINGS...
+	..............................................................
+	Uize.Node.wire (
+		window,
+		{
+			load:
+				function () {
+					// do something when document loads
+				},
+			scroll:
+				function () {
+					// do something when window / document is scrolled
+				}
+		}
+	);
+	..............................................................
+
+Benefits of This Change
+	The changes to these various methods offer the following benefits...
+
+	- the new system provides support for wiring handlers for seven =window= events, while the previous system supported only four
+	- the new system is more inituitive, since more developers will be familiar with the names of the =window= object events than the custom static event names that were offered in =Uize.Widget= class
+	- the new system relays the event object for the =window= event to the handler (previously not the case), and the handler is called as an instance method on the =window= object (previously not the case) - consistent with the behavior for wiring DOM nodes
+	- events of the =window= object that are wired using the =wireNode= method inside a widget's =wireUi= method will be automatically unwired when calling the =unwireUi= method
+
+Deprecated Events Still Supported
+	For backwards compatibility, the deprecated =Document Loaded=, =Document Unload=, =Window Resized=, and =Window Scrolled= static events of the =Uize.Widget= class are all still supported, and will be supported for some time into the future.
+
+	All existing code using the deprecated events should continue to work as normal. It would be wise to progressively migrate code over to using the new methods.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-11-16 - New Support for Wiring Window Events
+....................................................................................

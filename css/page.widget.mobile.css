@@ -1,0 +1,38 @@
+/*** widget title and menu ***/
+	/*** title ***/
+		.widgetHeader {
+			width:305px;
+		}
+		.widgetHeader .widgetTitle .textShadow,
+		.widgetHeader .widgetTitle .textHighlight,
+		.widgetHeader .widgetTitle .textMain
+		{
+			font-size:27px;
+			font-weight:bold;
+			letter-spacing:5px;
+		}
+		.widgetHeader .widgetTitle .textHighlight {
+			left:45px;
+			top:1px;
+		}
+		.widgetHeader .widgetTitle .textMain {
+			left:46px;
+			top:2px;
+		}
+		.widgetHeader .widgetTitle .textShadow {
+			left:47px;
+			top:3px;
+		}
+
+	/*** menu ***/
+		.subMenuShell {
+			width:301px;
+		}
+		.subMenuShell .subMenuItem,
+		.subMenuShell .subMenuItem:link,
+		.subMenuShell .subMenuItem:visited,
+		.subMenuShell .subMenuItem:hover,
+		.subMenuShell .subMenuItem:active {
+			font-size:18px;
+		}
+

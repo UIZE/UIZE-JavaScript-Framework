@@ -1,0 +1,11 @@
+Basic reference documentation has been added for various JavaScript template modules under the =Uize.Templates= namespace.
+
+This update adds documentation for the following JavaScript template modules: =Uize.Templates.Calculator=, =Uize.Templates.Calendar=, =Uize.Templates.Collection=, =Uize.Templates.CollectionItem=, =Uize.Templates.ColorInfo=, =Uize.Templates.HashTable=, =Uize.Templates.JstModule=, and =Uize.Templates.List=.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2010-01-17 - NEW REFERENCE DOCUMENTATION: Uize.Templates.*
+....................................................................................

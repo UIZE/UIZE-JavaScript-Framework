@@ -1,0 +1,11 @@
+The new =Uize.isFunction= static method of the =Uize= base class returns a boolean, indicating whether or not the specified value is a function.
+
+The =Uize.isFunction= method provides a useful abstraction to deal with some issues with detecting function type values using the traditional =typeof value &#61;&#61; 'function'= approach in different Web browsers. For example, in a number of browsers, instances of JavaScript's built-in =RegExp= object are reported as type ='function'= by the =typeof= operator. Also, in Microsoft Internet Explorer, references to functions defined in another window are *not* reported as type ='function'= by the =typeof= operator, and such function references will also fail in a test of "instanceof Function". The =Uize.isFunction= method deals with these issues, providing a more reliable way to test for function type values. A number of modules, that were using the traditional =typeof value &#61;&#61; 'function'= approach to testing for function type values, were updated to use the new =Uize.isFunction= method. The new method is fully documented.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2010-11-19 - NEW METHOD: Uize.isFunction
+....................................................................................

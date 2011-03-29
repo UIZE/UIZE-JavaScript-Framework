@@ -1,0 +1,13 @@
+The new [[../examples/drag-to-move.html][Drag-to-move]] example demonstrates how to wire up a bunch of image thumbnails so they can be dragged around a workspace.
+
+In this example, the =Uize.Widget.Drag.Move= widget class is being used to wire up a bunch of image thumbnails so that they can be dragged around a "workspace". This is a very basic example of drag-and-drop - there are no drop targets to speak of. Instances of the =Uize.Widget.Drag.Move= class are wired up for all the thumbnails in a single statement, thanks to the =Uize.Widget.Drag.Move.spawn= static method. The =Uize.Widget.Drag.Move= class doesn't deal with managing =z-index= - just coordinates. It does, however, support coordinates specified in units of =px= (pixels) as well as =%= (percent).
+
+[[../examples/drag-to-move.html][CHECK IT OUT]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2010-01-19 - NEW EXAMPLE: Drag-to-move
+....................................................................................

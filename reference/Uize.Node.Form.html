@@ -1,0 +1,424 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Uize.Node.Form | Documentation | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework Documentation Uize.Node.Form module reference documentation"/>
+	<meta name="description" content="The Uize.Node.Form package provides convenient methods for harvesting values from - and setting values for - many form elements in a single operation."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../javascript-modules-index.html" class="breadcrumb breadcrumbWithArrow">MODULES</a>
+	<a href="Uize.html" title="View reference for Uize" class="breadcrumb">Uize</a>.<a href="Uize.Node.html" title="View reference for Uize.Node" class="breadcrumb">Node</a>.<a href="Uize.Node.Form.html" title="View reference for Uize.Node.Form" class="breadcrumb">Form</a>
+	<div class="pageActions">
+		<a id="page-search" href="javascript://" class="buttonLink" title="Search for references to this module...">SEARCH</a><a id="page-examples" href="javascript://" class="buttonLink" title="View examples for this module...">EXAMPLES</a><a href="source-code/Uize.Node.Form.html" class="buttonLink" title="View the JavaScript source code for this module...">SOURCE</a><a id="page-test" href="javascript://" class="buttonLink" title="Test this module...">TEST</a>
+	</div>
+
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="The Uize.Node.Form package provides convenient methods for harvesting values from - and setting values for - many form elements in a single operation.">1. Introduction</a>
+				<ul>
+					<li><a href="#1_1" title="There are no dedicated showcase example pages for the Uize.Node.Form module.">1.1. Examples</a></li>
+					<li><a href="#1_2" title="The Uize.Node.Form module defines the Uize.Node.Form package under the Uize.Node namespace.">1.2. Implementation Info</a>
+						<ul>
+							<li><a href="#1_2_1" title="The features listed in this section have been introduced in this module.">1.2.1. Features Introduced in This Module</a></li>
+							<li><a href="#1_2_2" title="No features have been overridden in this module.">1.2.2. Features Overridden in This Module</a></li>
+							<li><a href="#1_2_3" title="This module has no inherited features.">1.2.3. Features Inherited From Other Modules</a></li>
+							<li><a href="#1_2_4" title="There are no modules directly under this namespace.">1.2.4. Modules Directly Under This Namespace</a></li>
+							<li><a href="#1_2_5" title="There is no dedicated unit tests module for the Uize.Node.Form module.">1.2.5. Unit Tests</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li><a href="#2">2. Static Methods</a>
+				<ul>
+					<li><a href="#2_1" title="Iterates through all the form elements found within a specified root node, calling the specified function for each node and passing the node reference as a parameter.">2.1. Uize.Node.Form.doForAll</a>
+						<ul>
+							<li><a href="#2_1_1" title="In the following example, there is a form tag containing a number of different form elements.">2.1.1. An Example</a></li>
+						</ul>
+					</li>
+					<li><a href="#2_2" title="Harvests the values for all form elements found within a specified root node, and packages them into an object.">2.2. Uize.Node.Form.getValues</a>
+						<ul>
+							<li><a href="#2_2_1" title="In the following example, there is a form tag containing a number of different form elements.">2.2.1. An Example</a></li>
+						</ul>
+					</li>
+					<li><a href="#2_3" title="Enables or disables all of the form elements found within a specified root node, using the &quot;disabled&quot; node attribute.">2.3. Uize.Node.Form.setEnabled</a></li>
+					<li><a href="#2_4" title="Lets you conveniently set the values for a set of form elements, using a values object.">2.4. Uize.Node.Form.setValues</a>
+						<ul>
+							<li><a href="#2_4_1" title="In the following example, there is a form tag containing a number of different form elements.">2.4.1. An Example</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li><a href="#3">3. Static Properties</a>
+				<ul>
+					<li><a href="#3_1" title="IMPLEMENTATION INFO">3.1. Uize.Node.Form.moduleName</a></li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<a name="1"></a>
+	<h1 class="heading1" title="1. Introduction"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>. </span>Introduction</h1>
+	<div class="contents1">
+		<p>The <code>Uize.Node.Form</code> package provides convenient methods for harvesting values from - and setting values for - many form elements in a single operation.</p>
+		
+		<p><b>DEVELOPERS:</b> <a href="http://www.linkedin.com/pub/0/054/b2b" target="_blank" class="externalSiteLink">Guang-Yu Xu</a>, <a href="http://www.tomkidding.com" target="_blank" class="externalSiteLink">Chris van Rensburg</a>, <a href="http://www.benmvp.com" target="_blank" class="externalSiteLink">Ben Ilegbodu</a></p>
+		
+		<a name="1_1"></a>
+		<h2 class="heading2" title="1. Introduction -&gt; 1.1. Examples"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. Examples">1</a>. </span>Examples</h2>
+		<div class="contents2">
+			<p>There are no dedicated showcase example pages for the <code>Uize.Node.Form</code> module.</p>
+			
+			<p><span class="allCaps">SEARCH FOR EXAMPLES</span></p>
+			
+			<p>Use the link below to search for example pages on the <b>uize.com</b> Web site that reference the <code>Uize.Node.Form</code> module...</p>
+			
+			<p><a href="http://www.google.com/search?hl=en&safe=off&domains=uize.com%2Fexamples&sitesearch=uize.com%2Fexamples&q=%22Uize.Node.Form%22" target="_blank" class="externalSiteLink">SEARCH</a></p>
+		</div>
+		
+		<a name="1_2"></a>
+		<h2 class="heading2" title="1. Introduction -&gt; 1.2. Implementation Info"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>. </span>Implementation Info</h2>
+		<div class="contents2">
+			<p>The <code>Uize.Node.Form</code> module defines the <code>Uize.Node.Form</code> package under the <code><a href="../reference/Uize.Node.html">Uize.Node</a></code> namespace.</p>
+			
+			<a name="1_2_1"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.1. Features Introduced in This Module"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>.<a href="#1_2_1" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.1. Features Introduced in This Module">1</a>. </span>Features Introduced in This Module</h3>
+			<div class="contents3">
+				<p>The features listed in this section have been introduced in this module.</p>
+				
+				<p><span class="allCaps">STATIC METHODS</span></p>
+				
+				<p><code><a href="#2_1">Uize.Node.Form.doForAll</a></code> | <code><a href="#2_2">Uize.Node.Form.getValues</a></code> | <code><a href="#2_3">Uize.Node.Form.setEnabled</a></code> | <code><a href="#2_4">Uize.Node.Form.setValues</a></code></p>
+				
+				<p><span class="allCaps">STATIC PROPERTIES</span></p>
+				
+				<p><code><a href="#3_1">Uize.Node.Form.moduleName</a></code></p>
+			</div>
+			
+			<a name="1_2_2"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.2. Features Overridden in This Module"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>.<a href="#1_2_2" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.2. Features Overridden in This Module">2</a>. </span>Features Overridden in This Module</h3>
+			<div class="contents3">
+				<p>No features have been overridden in this module.</p>
+			</div>
+			
+			<a name="1_2_3"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.3. Features Inherited From Other Modules"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>.<a href="#1_2_3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.3. Features Inherited From Other Modules">3</a>. </span>Features Inherited From Other Modules</h3>
+			<div class="contents3">
+				<p>This module has no inherited features.</p>
+			</div>
+			
+			<a name="1_2_4"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.4. Modules Directly Under This Namespace"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>.<a href="#1_2_4" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.4. Modules Directly Under This Namespace">4</a>. </span>Modules Directly Under This Namespace</h3>
+			<div class="contents3">
+				<p>There are no modules directly under this namespace.</p>
+			</div>
+			
+			<a name="1_2_5"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.5. Unit Tests"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>.<a href="#1_2_5" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.5. Unit Tests">5</a>. </span>Unit Tests</h3>
+			<div class="contents3">
+				<p>There is no dedicated unit tests module for the <code>Uize.Node.Form</code> module.</p>
+			</div>
+		</div>
+	</div>
+	
+	<a name="2"></a>
+	<h1 class="heading1" title="2. Static Methods"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>. </span>Static Methods</h1>
+	<div class="contents1">
+		<a name="2_1"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.1. Uize.Node.Form.doForAll"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_1" title="2. Static Methods -&gt; 2.1. Uize.Node.Form.doForAll">1</a>. </span>Uize.Node.Form.doForAll</h2>
+		<div class="contents2">
+			<p>Iterates through all the form elements found within a specified root node, calling the specified function for each node and passing the node reference as a parameter.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">Uize.Node.Form.doForAll (rootNodeSTRorOBJ,actionFUNC);
+</pre>
+			
+			<p>The value of the <code>rootNodeSTRorOBJ</code> parameter can be a string, representing the <code>id</code> of the root node, or an object reference to the root node. The root node can be either a <code>form</code> tag, or any DOM node that contains all the desired form elements, such as a <code>div</code> or other type of element.</p>
+			
+			<a name="2_1_1"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.1. Uize.Node.Form.doForAll -&gt; 2.1.1. An Example"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_1" title="2. Static Methods -&gt; 2.1. Uize.Node.Form.doForAll">1</a>.<a href="#2_1_1" title="2. Static Methods -&gt; 2.1. Uize.Node.Form.doForAll -&gt; 2.1.1. An Example">1</a>. </span>An Example</h3>
+			<div class="contents3">
+				<p>In the following example, there is a <code>form</code> tag containing a number of different form elements.</p>
+				
+				<p><span class="allCaps">SAMPLE HTML</span></p>
+				
+				
+<pre class="sample-code">&lt;form id="myForm"&gt;
+  &lt;input id="myForm-myText" name="myText" type="text" value="blah"/&gt;
+  &lt;input id="myForm-myCheckbox" name="myCheckbox" type="checkbox" checked="checked"/&gt;
+  &lt;select id="myForm-mySelect" name="mySelect"&gt;
+    &lt;option value="1"&gt;One&lt;/option&gt;
+    &lt;option value="2" selected="selected"&gt;Two&lt;/option&gt;
+    &lt;option value="3"&gt;Three&lt;/option&gt;
+  &lt;/select&gt;
+&lt;/form&gt;
+</pre>
+				
+				<p>With the above HTML, you could call the method like this...</p>
+				
+				
+<pre class="sample-code">Uize.Node.Form.doForAll (
+  function (node) {
+    node.className = 'formElement';
+    Uize.Node.wire (node,'change',handleNodeChange);
+  }
+);
+</pre>
+				
+				<p>This snippet of code would set the <code>class</code> attribute of each node to "formElment" as well as wire the <code>handleNodeChange</code> function to the <code>onChange</code> event of each node.</p>
+			</div>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_2"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.2. Uize.Node.Form.getValues"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_2" title="2. Static Methods -&gt; 2.2. Uize.Node.Form.getValues">2</a>. </span>Uize.Node.Form.getValues</h2>
+		<div class="contents2">
+			<p>Harvests the values for all form elements found within a specified root node, and packages them into an object.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">valuesOBJ = Uize.Node.Form.getValues (rootNodeSTRorOBJ);
+</pre>
+			
+			<p>The value of the <code>rootNodeSTRorOBJ</code> parameter can be a string, representing the <code>id</code> of the root node, or an object reference to the root node. The root node can be either a <code>form</code> tag, or any DOM node that contains all the desired form elements, such as a <code>div</code> or other type of element.</p>
+			
+			<p>By default, the keys of the values object generated by this method will be named according to the <code>name</code> attribute of the form elements from which values are harvested. However, different variations of this method also allow the <code>id</code> attribute to be used, and allow an optional prefix to be specified that should be removed when generating the key names.</p>
+			
+			<p><span class="allCaps">VARIATION 1</span></p>
+			
+			
+<pre class="sample-code">valuesOBJ = Uize.Node.Form.getValues (rootNodeSTRorOBJ,useNodeIdBOOL);
+</pre>
+			
+			<p>When the optional <code>useNodeIdBOOL</code> parameter is specified, you can control whether or not the <code>id</code> attribute of form elements is used in naming the keys of the returned values object. Specifying the value <code>true</code> for this parameter will cause the <code>id</code> attribute to be used, while specifying the value <code>false</code> will cause the <code>name</code> attribute to be used.</p>
+			
+			<p><span class="allCaps">VARIATION 2</span></p>
+			
+			
+<pre class="sample-code">valuesOBJ = Uize.Node.Form.getValues (rootNodeSTRorOBJ,useNodeIdBOOL,prefixSTR);
+</pre>
+			
+			<p>When the optional <code>prefixSTR</code> parameter is specified, you can specify a prefix that should be stripped off the ids or names of form elements when generating key names for the returned values object.</p>
+			
+			<a name="2_2_1"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.2. Uize.Node.Form.getValues -&gt; 2.2.1. An Example"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_2" title="2. Static Methods -&gt; 2.2. Uize.Node.Form.getValues">2</a>.<a href="#2_2_1" title="2. Static Methods -&gt; 2.2. Uize.Node.Form.getValues -&gt; 2.2.1. An Example">1</a>. </span>An Example</h3>
+			<div class="contents3">
+				<p>In the following example, there is a <code>form</code> tag containing a number of different form elements.</p>
+				
+				<p><span class="allCaps">SAMPLE HTML</span></p>
+				
+				
+<pre class="sample-code">&lt;form id="myForm"&gt;
+  &lt;input id="myForm-myText" name="myText" type="text" value="blah"/&gt;
+  &lt;input id="myForm-myCheckbox" name="myCheckbox" type="checkbox" checked="checked"/&gt;
+  &lt;select id="myForm-mySelect" name="mySelect"&gt;
+    &lt;option value="1"&gt;One&lt;/option&gt;
+    &lt;option value="2" selected="selected"&gt;Two&lt;/option&gt;
+    &lt;option value="3"&gt;Three&lt;/option&gt;
+  &lt;/select&gt;
+&lt;/form&gt;
+</pre>
+				
+				<p>With the above HTML, the statement <code>Uize.Node.Form.getValues ('myForm')</code> would produce the following object (here we're using form element names as keys)...</p>
+				
+				
+<pre class="sample-code">// Uize.Node.Form.getValues ('myForm') produces...
+{
+  myText:'blah',
+  myCheckbox:true,
+  mySelect:'2'
+}
+</pre>
+				
+				<p>The statement <code>Uize.Node.Form.getValues ('myForm',true)</code> would produce the following object (here we're using form element ids as keys)...</p>
+				
+				
+<pre class="sample-code">// Uize.Node.Form.getValues ('myForm',true) produces...
+{
+  'myForm-myText':'blah',
+  'myForm-myCheckbox':true,
+  'myForm-mySelect':'2'
+}
+</pre>
+				
+				<p>The statement <code>Uize.Node.Form.getValues ('myForm',true,'myForm-')</code> would produce the following object (here we're using form element ids as keys, and we're stripping off the specified <code>'myForm-'</code> prefix)...</p>
+				
+				
+<pre class="sample-code">// Uize.Node.Form.getValues ('myForm',true,'myForm-') produces...
+{
+  myText:'blah',
+  myCheckbox:true,
+  mySelect:'2'
+}
+</pre>
+			</div>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the corresponding <code><a href="#2_4">Uize.Node.Form.setValues</a></code> static method</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_3"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.3. Uize.Node.Form.setEnabled"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_3" title="2. Static Methods -&gt; 2.3. Uize.Node.Form.setEnabled">3</a>. </span>Uize.Node.Form.setEnabled</h2>
+		<div class="contents2">
+			<p>Enables or disables all of the form elements found within a specified root node, using the "disabled" node attribute.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">Uize.Node.Form.setEnabled (rootNodeSTRorOBJ,mustEnableANYTYPE);
+</pre>
+			
+			<p>The value of the <code>rootNodeSTRorOBJ</code> parameter can be a string, representing the <code>id</code> of the root node, or an object reference to the root node. The root node can be either a <code>form</code> tag, or any DOM node that contains all the desired form elements, such as a <code>div</code> or other type of element.</p>
+			
+			<p>While typically a Boolean, the <code>mustEnableANYTYPE</code> parameter can be of any type and the node(s) will be enabled if it resolves to <code>true</code>, and disabled if it resolves to <code>false</code> - with the exception of <code>undefined</code>, when the node(s) will be enabled (see explanation below).</p>
+			
+			<p><span class="allCaps">VARIATION</span></p>
+			
+			
+<pre class="sample-code">Uize.Node.Form.setEnabled (rootNodeSTRorOBJ);
+</pre>
+			
+			<p>When no <code>mustEnableANYTYPE</code> parameter is specified (or when its value is <code>undefined</code>), the node(s) will be enabled.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_4"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.4. Uize.Node.Form.setValues"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_4" title="2. Static Methods -&gt; 2.4. Uize.Node.Form.setValues">4</a>. </span>Uize.Node.Form.setValues</h2>
+		<div class="contents2">
+			<p>Lets you conveniently set the values for a set of form elements, using a values object.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">Uize.Node.Form.setValues (valuesOBJ);
+</pre>
+			
+			<p>By default, the keys of the values object specified by the <code>valuesOBJ</code> parameter are used as the ids or names for identifying the form elements. So, for example, a values object with a key of <code>username</code> will set the value for the form element whose <code>id</code> or <code>name</code> is <code>username</code>.</p>
+			
+			<p><span class="allCaps">VARIATION</span></p>
+			
+			
+<pre class="sample-code">Uize.Node.Form.setValues (valuesOBJ,prefixSTR);
+</pre>
+			
+			<p>When the optional <code>prefixSTR</code> parameter is specified, then a prefix can be specific that will be added before the names of the keys in the values object, when generating the ids or names of their corresponding form elements. For example, when the value <code>'myForm-'</code> is specified for the <code>prefixSTR</code> parameter, then a values object with a key of <code>username</code> will set the value for the form element whose <code>id</code> or <code>name</code> is <code>myForm-username</code>.</p>
+			
+			<a name="2_4_1"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.4. Uize.Node.Form.setValues -&gt; 2.4.1. An Example"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_4" title="2. Static Methods -&gt; 2.4. Uize.Node.Form.setValues">4</a>.<a href="#2_4_1" title="2. Static Methods -&gt; 2.4. Uize.Node.Form.setValues -&gt; 2.4.1. An Example">1</a>. </span>An Example</h3>
+			<div class="contents3">
+				<p>In the following example, there is a <code>form</code> tag containing a number of different form elements.</p>
+				
+				<p><span class="allCaps">SAMPLE HTML</span></p>
+				
+				
+<pre class="sample-code">&lt;form id="myForm"&gt;
+  &lt;input id="myForm-myText" name="myText" type="text"/&gt;
+  &lt;input id="myForm-myCheckbox" name="myCheckbox" type="checkbox"/&gt;
+  &lt;select id="myForm-mySelect" name="mySelect"&gt;
+    &lt;option value="1"&gt;One&lt;/option&gt;
+    &lt;option value="2"&gt;Two&lt;/option&gt;
+    &lt;option value="3"&gt;Three&lt;/option&gt;
+  &lt;/select&gt;
+&lt;/form&gt;
+</pre>
+				
+				<p><span class="allCaps">SAMPLE JAVASCRIPT</span></p>
+				
+				
+<pre class="sample-code">Uize.Node.Form.setValues (
+  {
+    myText:'blah',
+    myCheckbox:true,
+    mySelect:'2'
+  },
+  'myForm-'
+);
+</pre>
+				
+				<p>After the above JavaScript statement has been executed, the text input with the <code>id</code> of <code>myForm-myText</code> will be set to the value <code>'blah'</code>, the checkbox with the <code>id</code> of <code>myForm-myCheckbox</code> will be checked, and the second option of the select element with the <code>id</code> of <code>myForm-mySelect</code> will be selected.</p>
+			</div>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the corresponding <code><a href="#2_2">Uize.Node.Form.getValues</a></code> static method</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+	</div>
+	
+	<a name="3"></a>
+	<h1 class="heading1" title="3. Static Properties"><span class="headingNumber"><a href="#3" title="3. Static Properties">3</a>. </span>Static Properties</h1>
+	<div class="contents1">
+		<a name="3_1"></a>
+		<h2 class="heading2" title="3. Static Properties -&gt; 3.1. Uize.Node.Form.moduleName"><span class="headingNumber"><a href="#3" title="3. Static Properties">3</a>.<a href="#3_1" title="3. Static Properties -&gt; 3.1. Uize.Node.Form.moduleName">1</a>. </span>Uize.Node.Form.moduleName</h2>
+		<div class="contents2">
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+	</div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

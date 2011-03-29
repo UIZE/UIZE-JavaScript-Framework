@@ -1,0 +1,62 @@
+.colorInfo {
+	display:none;
+	padding:0;
+	width:119px;
+	border:3px solid #fff;
+	border-radius:10px;
+	-moz-border-radius:10px;
+	-webkit-border-radius:10px;
+	background:#adbebf url(../images/brushed-metal.jpg) repeat left top;
+	/*
+	box-shadow:5px 0 12px rgba(0,0,0,.7);
+	-moz-box-shadow:5px 0 12px rgba(0,0,0,.7);
+	-webkit-box-shadow:5px 0 12px rgba(0,0,0,.7);
+	*/
+	text-align:center;
+}
+.colorInfo .colorInfoTitle {
+	font-size:12px;
+	font-weight:bold;
+	color:#000;
+	text-shadow:-1px -1px 1px #fff, -1px 1px 1px #fff, 1px -1px 1px #fff, 1px 1px 1px #fff;
+	letter-spacing:2px;
+	padding:2px 5px 3px 5px;
+	width:109px;
+	text-transform:uppercase;
+}
+.colorInfo .colorInfoSwatch, .colorInfo .colorInfoAsBg, .colorInfo .colorInfoAsColor {
+	width:105px;
+	padding:1px;
+	margin:0 5px;
+	border:1px solid #666;
+	font-size:11px;
+	text-align:center;
+}
+.colorInfo .colorInfoSwatch {
+	height:75px;
+}
+.colorInfo .colorInfoAsColor {
+	position:relative;
+	margin-bottom:5px;
+}
+.colorInfo .colorInfoAsColor .onWhite, .colorInfo .colorInfoAsColor .onBlack {
+	position:absolute;
+	top:0;
+	width:50%;
+	height:100%;
+}
+.colorInfo .colorInfoAsColor .onWhite {
+	left:0;
+	background-color:#fff;
+}
+.colorInfo .colorInfoAsColor .onBlack {
+	left:50%;
+	background-color:#000;
+}
+.colorInfo .subheader {
+	font-size:9px;
+	text-transform:uppercase;
+	text-align:center;
+	padding-top:4px;
+}
+

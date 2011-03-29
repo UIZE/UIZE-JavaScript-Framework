@@ -1,0 +1,13 @@
+The new =Uize.Curve.Rubber= module is a package under the =Uize.Curve= namespace, and defines various "rubbery" easing curve function generators, some of which are based on the easing equations work of `Robert Penner`.
+
+Whereas the =Uize.Curve= module provides some of the most commonly used ease-in, ease-out, ease-in-out, and ease-in-the-middle curve function generators, the =Uize.Curve.Rubber= module offers curve function generators for more exotic types of curves that emulate the complex qualities of motion.
+
+[[Uize.Curve.Rubber][LEARN MORE]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-07-14 - NEW MODULE: Uize.Curve.Rubber
+....................................................................................

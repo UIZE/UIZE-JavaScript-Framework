@@ -1,0 +1,77 @@
+Introduction
+	UIZE (pronounced "you eyes") is a powerful, open source, object oriented JavaScript framework - supporting widgets, AJAX, DOM, templates, and more.
+
+What's in a Name
+	The name "UIZE" is pronounced "you eyes".
+
+	Think of it as "UI", with an "-ize" tacked onto the end - as in to turn something into a UI or to add a UI onto it. When you UIZE your Web application, you're giving it a user interface. The way UIZE is pronounced also makes it sound like the plural of "UI", which is also fine. Incidentally, the word "uize" is also a traditional Scottish spelling of the word "use", which is nice because the UIZE JavaScript Framework is all about users and providing interfaces to them.
+
+What is UIZE?
+	The UIZE JavaScript Framework is an open source, object-oriented JavaScript framework designed to facilitate development of JavaScript based applications for a range of computing platforms and a range of host environments, including Rich Internet Applications built on Web standards supported by contemporary web browsers, build script applications written for Microsoft's Windows Script Host technology, and applications for other host environments that support the ECMA-262 standard upon which JavaScript is based, such as Adobe Photoshop with its ExtendScript system.
+
+	- UIZE is *open source*.
+	- UIZE is *free* to use ([[../license.html][available under MIT License or GNU General Public License]]).
+	- UIZE *does not* extend native objects, and supports interoperability with other libraries that adhere to this principle.
+	- UIZE is in *active development*, by a [[../appendixes/credits.html][team of experienced programmers]], and is used on [[http://www.zazzle.com][zazzle.com]] - a high profile, consumer facing, e-commerce Web site.
+	- UIZE is *server agnostic* - so you can use it with any choice of server language and platform, including Java (Apache TomCat), C# (IIS / ASP.NET), Visual Basic (IIS / ASP), C/C++, Perl (Perl / Apache), PHP, Ruby (Ruby on Rails), Python, etc.
+	- UIZE implements systems for [[javascript-inheritance.html][JavaScript Inheritance]], [[javascript-event-system.html][JavaScript Events]], [[javascript-modules.html][JavaScript Modules]], [[javascript-libraries.html][JavaScript Libraries]], [[javascript-templates.html][JavaScript Templates]], [[javascript-widgets.html][JavaScript Widgets]], [[javascript-localization.html][JavaScript Localization]], [[javascript-documentation-system.html][JavaScript Documentation]], [[all-about-scrunching.html][JavaScript Code Compression]], [[javascript-build-scripts.html][JavaScript Build Scripts]], and [[overview-of-features.html][many more powerful capabilities]].
+
+Who's Behind UIZE?
+	Development on the UIZE JavaScript Framework was started by `Chris van Rensburg` in December of 2004.
+
+	The framework has been in use by `Zazzle Inc.` since May of 2005, and was officially made available as open source in May of 2008. The framework is in ongoing active development, by a [[../appendixes/credits.html][team of experienced programmers]], with new functionality, documentation, and sample code examples being added all the time.
+
+With UIZE, You Can...
+	- Start building high profile, solid, and scalable RIA-style Web sites - with rich interactivity and client-side refresh using AJAX.
+	- Manipulate the DOM to produce client updates and visual effects.
+	- Communicate with the server using XMLHttpRequest, in formats like JSON and XML.
+	- Build reusable widgets and modules of functionality, using object oriented JavaScript.
+	- Learn how to code well designed application logic using State Oriented Programming.
+
+Where's It Used?
+	The UIZE JavaScript Framework has had the opportunity to mature "in the wild" and has been used to provide rich client functionality on the `Zazzle Inc.` Web site since 2005.
+
+	The `Zazzle Inc.` Web site is a heavily trafficed, consumer facing e-commerce site where stability and performance of all aspects of the code have a direct impact on customer experience and conversion rates. The UIZE JavaScript Framework has been tested against these important criteria. In addition to the `Zazzle Inc.` Web site, the UIZE JavaScript Framework is in use on a steadily growing list of Web sites, some of which are showcased on the UIZE Showcase page.
+	
+	[[../appendixes/showcase.html][See the UIZE Showcase]]
+
+It's Raining Widgets
+	The UIZE JavaScript Framework comes packed with a good number of ready-to-go widgets.
+
+	Built-in widgets include: the slider, progress bar, color picker, date picker, draggable and resizable window, marquee / resizer, image wipe with advanced fades / transitions, tabs, table sorter, thumbnail zoom, tree list, tree menu / drop down menu, egg timer, button, collection, collection item, image port, options selection, stretchy, and more. The widgets are being added to all the time.
+
+Object Oriented Design
+	The UIZE JavaScript Framework has been designed making full use of the object orientation features of the JavaScript language.
+
+	The APIs of the various modules have been carefully thought out so that they are comprehensive, sensible and consistent.
+
+Server Agnostic
+	The UIZE JavaScript Framework is developed as a purely client framework and is, therefore, server language and server platform agnostic.
+
+	Heck, you can even run the UIZE Web site without a Web server - just off the local file system! So, you keep complete control over your server side architecture. You can write your middle tier code and business logic in any server language you desire and you should be able to build on rich client functionality using UIZE.
+
+	The UIZE JavaScript Framework works with...
+
+	- Java (Apache TomCat)
+	- C# (IIS / ASP.NET)
+	- Visual Basic (IIS / ASP)
+	- C/C++
+	- Perl (Perl / Apache)
+	- PHP
+	- Ruby (Ruby on Rails)
+	- Python
+	- etc., etc., etc.
+
+What Next?
+	Heard enough and ready to download the UIZE JavaScript Framework so you can start using it in your own Web application projects?
+
+	Ready to Download?
+		UIZE is free to download, and you don't have to sign up for anything (although you're welcome to join the [[http://groups.google.com/group/uize][UIZE JavaScript Framework Group]] to post questions and get support).
+
+		>>> [[../download.html][*DOWNLOAD UIZE*]]
+
+	Want to Learn More?
+		Want to learn more? Take a deeper dive into the UIZE JavaScript Framework by learning more about its full range of features and capabilities in the Overview of Features explainer.
+
+		>>> [[overview-of-features.html][*LEARN MORE*]]
+

@@ -1,0 +1,1168 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Uize.Date | Documentation | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework Documentation Uize.Date module reference documentation"/>
+	<meta name="description" content="The Uize.Date module provides methods for working with dates, including converting time to different units, encoding / decoding dates in ISO 8601, etc."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../javascript-modules-index.html" class="breadcrumb breadcrumbWithArrow">MODULES</a>
+	<a href="Uize.html" title="View reference for Uize" class="breadcrumb">Uize</a>.<a href="Uize.Date.html" title="View reference for Uize.Date" class="breadcrumb">Date</a>
+	<div class="pageActions">
+		<a id="page-search" href="javascript://" class="buttonLink" title="Search for references to this module...">SEARCH</a><a id="page-examples" href="javascript://" class="buttonLink" title="View examples for this module...">EXAMPLES</a><a href="source-code/Uize.Date.html" class="buttonLink" title="View the JavaScript source code for this module...">SOURCE</a><a id="page-test" href="javascript://" class="buttonLink" title="Test this module...">TEST</a>
+	</div>
+
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="The Uize.Date module provides methods for working with dates, including converting time to different units, encoding / decoding dates in ISO 8601, etc.">1. Introduction</a>
+				<ul>
+					<li><a href="#1_1" title="The Uize.Date module is a package under the Uize namespace, providing a suite of utility methods for working with dates.">1.1. In a Nutshell</a>
+						<ul>
+							<li><a href="#1_1_1" title="Methods of the Uize.Date module that accept date values for parameters allow such date values to be specified as strings in ISO 8601 format.">1.1.1. ISO 8601</a></li>
+						</ul>
+					</li>
+					<li><a href="#1_2" title="There are no dedicated showcase example pages for the Uize.Date module.">1.2. Examples</a></li>
+					<li><a href="#1_3" title="The Uize.Date module defines the Uize.Date object under the Uize namespace.">1.3. Implementation Info</a>
+						<ul>
+							<li><a href="#1_3_1" title="The features listed in this section have been introduced in this module.">1.3.1. Features Introduced in This Module</a></li>
+							<li><a href="#1_3_2" title="No features have been overridden in this module.">1.3.2. Features Overridden in This Module</a></li>
+							<li><a href="#1_3_3" title="This module has no inherited features.">1.3.3. Features Inherited From Other Modules</a></li>
+							<li><a href="#1_3_4" title="Uize.Date.Formatter">1.3.4. Modules Directly Under This Namespace</a></li>
+							<li><a href="#1_3_5" title="The Uize.Date module is unit tested by the Uize.Test.Uize.Date test module.">1.3.5. Unit Tests</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li><a href="#2">2. Static Methods</a>
+				<ul>
+					<li><a href="#2_1" title="Converts the specified time in the specified time unit to a different specified time unit.">2.1. Uize.Date.convert</a></li>
+					<li><a href="#2_2" title="Returns a boolean, indicating whether or not the two specified dates can be considered equal, according to the specified level of precision / accuracy.">2.2. Uize.Date.equal</a></li>
+					<li><a href="#2_3" title="IMPLEMENTATION INFO">2.3. Uize.Date.format</a></li>
+					<li><a href="#2_4" title="Converts the specified ISO 8601 format (YYYY-MM-DD) date string and returns the date as a Date object instance.">2.4. Uize.Date.fromIso8601</a></li>
+					<li><a href="#2_5" title="Returns an integer, indicating the number of days in the specified month of the specified year.">2.5. Uize.Date.getDaysInMonth</a></li>
+					<li><a href="#2_6" title="Returns an object, specifying the &quot;neat&quot; date range of the specified range size around the specified date.">2.6. Uize.Date.getRangeAround</a>
+						<ul>
+							<li><a href="#2_6_1" title="The rangeSizeSTR parameter is a string, specifying the size of the date range, where the following sizes are supported...">2.6.1. rangeSizeSTR</a>
+								<ul>
+									<li><a href="#2_6_1_1" title="The second sized date range containing the specified date.">2.6.1.1. 'second'</a></li>
+									<li><a href="#2_6_1_2" title="The minute sized date range containing the specified date.">2.6.1.2. 'minute'</a></li>
+									<li><a href="#2_6_1_3" title="The hour sized date range containing the specified date.">2.6.1.3. 'hour'</a></li>
+									<li><a href="#2_6_1_4" title="The half day sized date range containing the specified date.">2.6.1.4. 'am/pm'</a></li>
+									<li><a href="#2_6_1_5" title="The day sized date range containing the specified date.">2.6.1.5. 'day'</a></li>
+									<li><a href="#2_6_1_6" title="The week sized date range containing the specified date.">2.6.1.6. 'week'</a></li>
+									<li><a href="#2_6_1_7" title="The month sized date range containing the specified date.">2.6.1.7. 'month'</a></li>
+									<li><a href="#2_6_1_8" title="The quarter sized date range containing the specified date.">2.6.1.8. 'quarter'</a></li>
+									<li><a href="#2_6_1_9" title="The year sized date range containing the specified date.">2.6.1.9. 'year'</a></li>
+									<li><a href="#2_6_1_10" title="The decade sized date range containing the specified date.">2.6.1.10. 'decade'</a></li>
+									<li><a href="#2_6_1_11" title="The century sized date range containing the specified date.">2.6.1.11. 'century'</a></li>
+									<li><a href="#2_6_1_12" title="The millennium sized date range containing the specified date.">2.6.1.12. 'millennium'</a></li>
+									<li><a href="#2_6_1_13" title="The millisecond sized date range containing the specified date.">2.6.1.13. 'millisecond'</a></li>
+								</ul>
+							</li>
+							<li><a href="#2_6_2">2.6.2. Using Date Ranges</a>
+								<ul>
+									<li><a href="#2_6_2_1" title="Because the value returned by the Uize.Date.getRangeAround method is an object containing minValue and maxValue properties, this object can be used to set the set-get properties for an instance of any class that implements the Value Range Interface.">2.6.2.1. Using Date Ranges With Classes Supporting the Value Range Interface</a></li>
+									<li><a href="#2_6_2_2" title="Other methods of the Uize.Date module can accept date range objects as values for certain parameters.">2.6.2.2. Using Date Ranges With Other Uize.Date Methods</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li><a href="#2_7" title="Returns a boolean, indicating whether or not the specified date is within the specified date range.">2.7. Uize.Date.inRange</a>
+						<ul>
+							<li><a href="#2_7_1" title="It is important to note that the Uize.Date.inRange method considers all components of the boundary dates in the date range supplied to it.">2.7.1. Precision to the Millisecond</a></li>
+						</ul>
+					</li>
+					<li><a href="#2_8" title="Returns a boolean, indicating whether or not the specified year is a leap year.">2.8. Uize.Date.isLeapYear</a></li>
+					<li><a href="#2_9" title="Returns a boolean, indicating whether or not the specified date is within the specified window of recency (as specified in days).">2.9. Uize.Date.isRecent</a></li>
+					<li><a href="#2_10" title="Resolves the specified date to a Date object instance and returns that instance.">2.10. Uize.Date.resolve</a></li>
+					<li><a href="#2_11" title="Returns a string, representing the specified date in ISO 8601 format (YYYY-MM-DD).">2.11. Uize.Date.toIso8601</a></li>
+					<li><a href="#2_12" title="IMPLEMENTATION INFO">2.12. Uize.Date.toPretty</a></li>
+				</ul>
+			</li>
+			<li><a href="#3">3. Static Properties</a>
+				<ul>
+					<li><a href="#3_1" title="An array of strings, representing the names of the days of the week, starting with Sunday.">3.1. Uize.Date.dayNames</a></li>
+					<li><a href="#3_2" title="document...">3.2. Uize.Date.dayNoSuffixes</a></li>
+					<li><a href="#3_3" title="IMPLEMENTATION INFO">3.3. Uize.Date.moduleName</a></li>
+					<li><a href="#3_4" title="An array of strings, representing the names of the months of the year, starting with January.">3.4. Uize.Date.monthNames</a></li>
+					<li><a href="#3_5" title="An array of strings, representing the short names of the days of the week, starting with Sunday.">3.5. Uize.Date.shortDayNames</a></li>
+					<li><a href="#3_6" title="An array of strings, representing the short names of the months of the year, starting with January.">3.6. Uize.Date.shortMonthNames</a></li>
+				</ul>
+			</li>
+			<li><a href="#4" title="The following parameters are common to a number of methods and warrant separate, shared explanations...">4. Value Types</a>
+				<ul>
+					<li><a href="#4_1" title="A string in ISO 8601 format (YYYY-MM-DD), a string that can be parsed by the Date object, a Date object instance, or a number specifying the Unix Time in milliseconds.">4.1. dateSTRorNUMorOBJ</a></li>
+					<li><a href="#4_2" title="An object, containing minValue and maxValue properties, where the value of these properties are of the type dateSTRorNUMorOBJ, and where the minValue property specifies the start of the date range, and the maxValue property specifies the end of the range.">4.2. dateRangeOBJ</a>
+						<ul>
+							<li><a href="#4_2_1" title="Methods that accept a value of type dateRangeOBJ should treat the absence of a property specifying a value for a boundary, or specifying the value null or undefined for a boundary, as indicating that the date range is not bounded on that end of its range.">4.2.1. Boundless Date Ranges</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<a name="1"></a>
+	<h1 class="heading1" title="1. Introduction"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>. </span>Introduction</h1>
+	<div class="contents1">
+		<p>The <code>Uize.Date</code> module provides methods for working with dates, including converting time to different units, encoding / decoding dates in <code><a href="#1_1_1">ISO 8601</a></code>, etc.</p>
+		
+		<p><b>DEVELOPERS:</b> <a href="http://www.tomkidding.com" target="_blank" class="externalSiteLink">Chris van Rensburg</a></p>
+		
+		<a name="1_1"></a>
+		<h2 class="heading2" title="1. Introduction -&gt; 1.1. In a Nutshell"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. In a Nutshell">1</a>. </span>In a Nutshell</h2>
+		<div class="contents2">
+			<p>The <code>Uize.Date</code> module is a package under the <code><a href="../reference/Uize.html">Uize</a></code> namespace, providing a suite of utility methods for working with dates.</p>
+			
+			<a name="1_1_1"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.1. ISO 8601"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. In a Nutshell">1</a>.<a href="#1_1_1" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.1. ISO 8601">1</a>. </span>ISO 8601</h3>
+			<div class="contents3">
+				<p>Methods of the <code>Uize.Date</code> module that accept date values for parameters allow such date values to be specified as strings in <code><a href="#1_1_1">ISO 8601</a></code> format.</p>
+				
+				<p><a href="http://en.wikipedia.org/wiki/ISO_8601" target="_blank" class="externalSiteLink">ISO 8601</a> is an international standard for the representation of dates. A key characteristic of this format is its ordering of components of a date from most significant (year) to least significant (day). When dates in this format are used in file names, titles, or otherwise used to construct alphanumeric strings, sorting such strings can have the effect of sorting the strings chronologically as well.</p>
+				
+				<p>The <code>Uize.Date</code> module supports parsing from and serializing to the most typical and simple of the <code><a href="#1_1_1">ISO 8601</a></code> standard's many formatting options, namely the big-endian all-numeric date notation <code>YYYY-MM-DD</code>. JavaScript's built-in <code><a href="../javascript-reference/Date.html">Date</a></code> object does not support parsing dates in <code><a href="#1_1_1">ISO 8601</a></code> format. When having date strings in this format, the <code><a href="#2_10">Uize.Date.resolve</a></code> static method can be used to produce <code><a href="../javascript-reference/Date.html">Date</a></code> instances set to the correct date. Consider the following example...</p>
+				
+				<p><span class="allCaps">WRONG! WRONG! WRONG!</span></p>
+				
+				
+<pre class="sample-code">var myDate = new Date ('2009-09-27');  // produces an invalid date object
+</pre>
+				
+				<p><span class="allCaps">CORRECT</span></p>
+				
+				
+<pre class="sample-code">var myDate = Uize.Date.resolve ('2009-09-27');
+</pre>
+				
+				<p>As mentioned, dates in ISO 8601 format can be used with methods of the <code>Uize.Date</code> module that accept dates as parameters. Consider the following example...</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">Uize.Date.getRangeAround ('2009-01-10','month');
+</pre>
+				
+				<p>The statement in the above example would produce a <code><a href="#4_2">dateRangeOBJ</a></code> value representing the month around January 10th, 2009.</p>
+			</div>
+		</div>
+		
+		<a name="1_2"></a>
+		<h2 class="heading2" title="1. Introduction -&gt; 1.2. Examples"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Examples">2</a>. </span>Examples</h2>
+		<div class="contents2">
+			<p>There are no dedicated showcase example pages for the <code>Uize.Date</code> module.</p>
+			
+			<p><span class="allCaps">SEARCH FOR EXAMPLES</span></p>
+			
+			<p>Use the link below to search for example pages on the <b>uize.com</b> Web site that reference the <code>Uize.Date</code> module...</p>
+			
+			<p><a href="http://www.google.com/search?hl=en&safe=off&domains=uize.com%2Fexamples&sitesearch=uize.com%2Fexamples&q=%22Uize.Date%22" target="_blank" class="externalSiteLink">SEARCH</a></p>
+		</div>
+		
+		<a name="1_3"></a>
+		<h2 class="heading2" title="1. Introduction -&gt; 1.3. Implementation Info"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_3" title="1. Introduction -&gt; 1.3. Implementation Info">3</a>. </span>Implementation Info</h2>
+		<div class="contents2">
+			<p>The <code>Uize.Date</code> module defines the <code>Uize.Date</code> object under the <code><a href="../reference/Uize.html">Uize</a></code> namespace.</p>
+			
+			<a name="1_3_1"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.3. Implementation Info -&gt; 1.3.1. Features Introduced in This Module"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_3" title="1. Introduction -&gt; 1.3. Implementation Info">3</a>.<a href="#1_3_1" title="1. Introduction -&gt; 1.3. Implementation Info -&gt; 1.3.1. Features Introduced in This Module">1</a>. </span>Features Introduced in This Module</h3>
+			<div class="contents3">
+				<p>The features listed in this section have been introduced in this module.</p>
+				
+				<p><span class="allCaps">STATIC METHODS</span></p>
+				
+				<p><code><a href="#2_1">Uize.Date.convert</a></code> | <code><a href="#2_2">Uize.Date.equal</a></code> | <code><a href="#2_3">Uize.Date.format</a></code> | <code><a href="#2_4">Uize.Date.fromIso8601</a></code> | <code><a href="#2_5">Uize.Date.getDaysInMonth</a></code> | <code><a href="#2_6">Uize.Date.getRangeAround</a></code> | <code><a href="#2_7">Uize.Date.inRange</a></code> | <code><a href="#2_8">Uize.Date.isLeapYear</a></code> | <code><a href="#2_9">Uize.Date.isRecent</a></code> | <code><a href="#2_10">Uize.Date.resolve</a></code> | <code><a href="#2_11">Uize.Date.toIso8601</a></code> | <code><a href="#2_12">Uize.Date.toPretty</a></code></p>
+				
+				<p><span class="allCaps">STATIC PROPERTIES</span></p>
+				
+				<p><code><a href="#3_1">Uize.Date.dayNames</a></code> | <code><a href="#3_2">Uize.Date.dayNoSuffixes</a></code> | <code><a href="#3_3">Uize.Date.moduleName</a></code> | <code><a href="#3_4">Uize.Date.monthNames</a></code> | <code><a href="#3_5">Uize.Date.shortDayNames</a></code> | <code><a href="#3_6">Uize.Date.shortMonthNames</a></code></p>
+			</div>
+			
+			<a name="1_3_2"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.3. Implementation Info -&gt; 1.3.2. Features Overridden in This Module"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_3" title="1. Introduction -&gt; 1.3. Implementation Info">3</a>.<a href="#1_3_2" title="1. Introduction -&gt; 1.3. Implementation Info -&gt; 1.3.2. Features Overridden in This Module">2</a>. </span>Features Overridden in This Module</h3>
+			<div class="contents3">
+				<p>No features have been overridden in this module.</p>
+			</div>
+			
+			<a name="1_3_3"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.3. Implementation Info -&gt; 1.3.3. Features Inherited From Other Modules"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_3" title="1. Introduction -&gt; 1.3. Implementation Info">3</a>.<a href="#1_3_3" title="1. Introduction -&gt; 1.3. Implementation Info -&gt; 1.3.3. Features Inherited From Other Modules">3</a>. </span>Features Inherited From Other Modules</h3>
+			<div class="contents3">
+				<p>This module has no inherited features.</p>
+			</div>
+			
+			<a name="1_3_4"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.3. Implementation Info -&gt; 1.3.4. Modules Directly Under This Namespace"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_3" title="1. Introduction -&gt; 1.3. Implementation Info">3</a>.<a href="#1_3_4" title="1. Introduction -&gt; 1.3. Implementation Info -&gt; 1.3.4. Modules Directly Under This Namespace">4</a>. </span>Modules Directly Under This Namespace</h3>
+			<div class="contents3">
+				<p><code><a href="../reference/Uize.Date.Formatter.html">Uize.Date.Formatter</a></code></p>
+			</div>
+			
+			<a name="1_3_5"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.3. Implementation Info -&gt; 1.3.5. Unit Tests"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_3" title="1. Introduction -&gt; 1.3. Implementation Info">3</a>.<a href="#1_3_5" title="1. Introduction -&gt; 1.3. Implementation Info -&gt; 1.3.5. Unit Tests">5</a>. </span>Unit Tests</h3>
+			<div class="contents3">
+				<p>The <code>Uize.Date</code> module is unit tested by the <code><a href="../reference/Uize.Test.Uize.Date.html">Uize.Test.Uize.Date</a></code> test module.</p>
+			</div>
+		</div>
+	</div>
+	
+	<a name="2"></a>
+	<h1 class="heading1" title="2. Static Methods"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>. </span>Static Methods</h1>
+	<div class="contents1">
+		<a name="2_1"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.1. Uize.Date.convert"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_1" title="2. Static Methods -&gt; 2.1. Uize.Date.convert">1</a>. </span>Uize.Date.convert</h2>
+		<div class="contents2">
+			<p>Converts the specified time in the specified time unit to a different specified time unit.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">convertedTimeFLOAT = Uize.Date.convert (timeFLOAT,timeUnitSTR,convertedTimeUnitSTR);
+</pre>
+			
+			<p>This methods allows you to convert from days to milliseconds, seconds to years, years to hours, hours to weeks, months to hours, or from any one of the supported time units to another.</p>
+			
+			<p><span class="allCaps">TIME UNITS</span></p>
+			
+			<p>The value specified for the <code>timeUnitSTR</code> and <code>convertedTimeUnitSTR</code> parameters can be any one of:  <code>ms</code>, <code>seconds</code>, <code>minutes</code>, <code>hours</code>, <code>days</code>, <code>weeks</code>, <code>months</code>, <code>years</code>.</p>
+			
+			<p><span class="allCaps">EXAMPLES</span></p>
+			
+			
+<pre class="sample-code">var
+  timeInDays = Uize.Date.convert (18287659,'ms','days'),
+  timeInHours = Uize.Date.convert (15306,'seconds','hours'),
+  timeInWeeks = Uize.Date.convert (6,'months','weeks')
+;
+</pre>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>any parameter of this method can be an object that implements a <code>valueOf</code> interface (such as an instance of a <code><a href="../reference/Uize.html">Uize</a></code> subclass that implements the <code>value</code> set-get property)</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_2"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.2. Uize.Date.equal"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_2" title="2. Static Methods -&gt; 2.2. Uize.Date.equal">2</a>. </span>Uize.Date.equal</h2>
+		<div class="contents2">
+			<p>Returns a boolean, indicating whether or not the two specified dates can be considered equal, according to the specified level of precision / accuracy.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">datesEqualBOOL = Uize.Date.equal (date1STRorOBJ,date2STRorOBJ,precisionSTR);
+</pre>
+			
+			<p>You can use this method to easily test if two dates exist together within the same logical date range. For example, you can test to see if two dates are in the same week, the same month, the same quarter of the year, the same decade, etc. Consider the following example...</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">Uize.Date.equal ('2009/09/10 18:19:25','2009/08/01 01:51:47','hour');        // false
+Uize.Date.equal ('2009/09/10 18:19:25','2009/08/01 01:51:47','day');         // false
+Uize.Date.equal ('2009/09/10 18:19:25','2009/08/01 01:51:47','week');        // false
+Uize.Date.equal ('2009/09/10 18:19:25','2009/08/01 01:51:47','month');       // false
+Uize.Date.equal ('2009/09/10 18:19:25','2009/08/01 01:51:47','quarter');     // true
+Uize.Date.equal ('2009/09/10 18:19:25','2009/08/01 01:51:47','year');        // true
+Uize.Date.equal ('2009/09/10 18:19:25','2009/08/01 01:51:47','decade');      // true
+Uize.Date.equal ('2009/09/10 18:19:25','2009/08/01 01:51:47','century');     // true
+</pre>
+			
+			<p>Values specified for the <code>date1STRorOBJ</code> and <code>date2STRorOBJ</code> parameters are of the <code><a href="#4_1">dateSTRorNUMorOBJ</a></code> value type. The values that can be specified for the <code>precisionSTR</code> parameter are all the values that can be specified for the <code><a href="#2_6_1">rangeSizeSTR</a></code> parameter of the <code><a href="#2_6">Uize.Date.getRangeAround</a></code> method (eg. <code><a href="#2_6_1_2">'minute'</a></code>, <code><a href="#2_6_1_3">'hour'</a></code>, <code><a href="#2_6_1_4">'am/pm'</a></code>, <code><a href="#2_6_1_6">'week'</a></code>, <code><a href="#2_6_1_8">'quarter'</a></code>, <code><a href="#2_6_1_10">'decade'</a></code>, etc.).</p>
+			
+			<p><span class="allCaps">MIND THE GAP</span></p>
+			
+			<p>Don't be suckered into thinking that two dates like those shown in the example below should be considered equal when compared with precision down to the second.</p>
+			
+			
+<pre class="sample-code">Uize.Date.equal ('2009/09/10 18:19:25','2008/09/10 18:19:25','second');  // false
+</pre>
+			
+			<p>Yes, the hours, minutes, and seconds of the two dates are identical, but they're a full year apart. So, they can't be considered equal down to a second in accuracy. In fact, they can't even be considered equal down to a year in accuracy.</p>
+			
+			<p><span class="allCaps">VARIATION 1</span></p>
+			
+			
+<pre class="sample-code">datesEqualBOOL = Uize.Date.equal (date1STRorOBJ,date2STRorOBJ);
+</pre>
+			
+			<p>When no <code>precisionSTR</code> parameter is specified, the value <code><a href="#2_6_1_5">'day'</a></code> will be used as the default for this parameter. This default provides a convenient way of just testing if two dates are for the same day of the same month of the same year, without regard to hours, minutes, seconds, or milliseconds. This is a typical way to compare two dates, such as testing if a particular date is someone's birthday, or a national holiday, etc.</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">Uize.Date.equal ('2009/09/10 18:19:25','2009/09/10 12:30:10');  // produces true
+Uize.Date.equal ('2009/09/10 18:19:25','2009/09/09 18:19:25');  // produces false
+</pre>
+			
+			<p><span class="allCaps">VARIATION 2</span></p>
+			
+			
+<pre class="sample-code">todayIsBOOL = Uize.Date.equal (date1STRorOBJ);
+</pre>
+			
+			<p>When no <code>date2STRorOBJ</code> parameter is specified, then the date at the time that the <code><a href="#2_2">Uize.Date.equal</a></code> method is called will be used as the default for this parameter. Combined with the sensible defaulting of the <code>precisionSTR</code> parameter, this shorthand provides a convenient way ot testing if today's date is a particular date. Consider a few examples...</p>
+			
+			<p><span class="allCaps">EXAMPLES</span></p>
+			
+			
+<pre class="sample-code">isTodayHalloween2009 = Uize.Date.equal ('2009-10-31');
+isTodayChristmas2010 = Uize.Date.equal ('2009-12-25');
+isTodayStartOfRamadan2010 = Uize.Date.equal ('2010-08-11');
+</pre>
+			
+			<p>Specifying the value <code>null</code> or <code>''</code> (empty string) for the <code>date2STRorOBJ</code> parameter has the same effect as omitting this parameter.</p>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#2_6">Uize.Date.getRangeAround</a></code> and <code><a href="#2_7">Uize.Date.inRange</a></code> static methods</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_3"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.3. Uize.Date.format"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_3" title="2. Static Methods -&gt; 2.3. Uize.Date.format">3</a>. </span>Uize.Date.format</h2>
+		<div class="contents2">
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_4"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.4. Uize.Date.fromIso8601"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_4" title="2. Static Methods -&gt; 2.4. Uize.Date.fromIso8601">4</a>. </span>Uize.Date.fromIso8601</h2>
+		<div class="contents2">
+			<p>Converts the specified <code><a href="#1_1_1">ISO 8601</a></code> format (YYYY-MM-DD) date string and returns the date as a <code><a href="../javascript-reference/Date.html">Date</a></code> object instance.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">dateOBJ = Uize.Date.fromIso8601 (dateIso8601STR);
+</pre>
+			
+			<p>If the date specified by the <code>dateIso8601STR</code> parameter is not in the <code><a href="#1_1_1">ISO 8601</a></code> format, then this method will return the value <code>undefined</code>.</p>
+			
+			<p><span class="allCaps">EXAMPLES</span></p>
+			
+			
+<pre class="sample-code">Uize.Date.fromIso8601 ('1981-01-12');       // 12th January 1981
+Uize.Date.fromIso8601 ('99-6-29');          // 29th June 1999
+Uize.Date.fromIso8601 ('2001-09-11');       // 11th September 2001
+Uize.Date.fromIso8601 ('2008-11-04');       // 4th November 2008
+Uize.Date.fromIso8601 ('Fri Jul 16 2006');  // undefined
+</pre>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the companion <code><a href="#2_11">Uize.Date.toIso8601</a></code> static method</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_5"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.5. Uize.Date.getDaysInMonth"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_5" title="2. Static Methods -&gt; 2.5. Uize.Date.getDaysInMonth">5</a>. </span>Uize.Date.getDaysInMonth</h2>
+		<div class="contents2">
+			<p>Returns an integer, indicating the number of days in the specified month of the specified year.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">daysInMonthINT = Uize.Date.getDaysInMonth (month0to11INT,yearINT);
+</pre>
+			
+			<p>The value of the <code>month0to11INT</code> parameter should be a number in the range of <code>0</code> to <code>11</code>, where <code>0</code> represents January, and <code>11</code> represents December.</p>
+			
+			<p><span class="allCaps">EXAMPLES</span></p>
+			
+			
+<pre class="sample-code">Uize.Date.getDaysInMonth (1,2008);   // returns 29, because 2008 is a leap year
+Uize.Date.getDaysInMonth (1,2009);   // returns 28, because 2009 is not a leap year
+Uize.Date.getDaysInMonth (3,1876);   // returns 30 for April of any year
+Uize.Date.getDaysInMonth (11,1989);  // returns 31 for December of any year
+</pre>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#2_8">Uize.Date.isLeapYear</a></code> static method</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_6"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_6" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround">6</a>. </span>Uize.Date.getRangeAround</h2>
+		<div class="contents2">
+			<p>Returns an object, specifying the "neat" date range of the specified range size around the specified date.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">dateRangeOBJ = Uize.Date.getRangeAround (dateSTRorNUMorOBJ,rangeSizeSTR);
+</pre>
+			
+			<p>This method can be used to obtain the date range for the week around a specified date, the month around a date, the quarter around a date, the year around a date, etc. The date range is specified by a <code><a href="#4_2">dateRangeOBJ</a></code> type value.</p>
+			
+			<a name="2_6_1"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround -&gt; 2.6.1. rangeSizeSTR"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_6" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround">6</a>.<a href="#2_6_1" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround -&gt; 2.6.1. rangeSizeSTR">1</a>. </span>rangeSizeSTR</h3>
+			<div class="contents3">
+				<p>The <code><a href="#2_6_1">rangeSizeSTR</a></code> parameter is a string, specifying the size of the date range, where the following sizes are supported...</p>
+				
+				<a name="2_6_1_1"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround -&gt; 2.6.1. rangeSizeSTR -&gt; 2.6.1.1. &apos;second&apos;"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_6" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround">6</a>.<a href="#2_6_1" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround -&gt; 2.6.1. rangeSizeSTR">1</a>.<a href="#2_6_1_1" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround -&gt; 2.6.1. rangeSizeSTR -&gt; 2.6.1.1. &apos;second&apos;">1</a>. </span>'second'</h4>
+				<div class="contents4">
+					<p>The second sized date range containing the specified date.</p>
+					
+					<p><span class="allCaps">EXAMPLE</span></p>
+					
+					
+<pre class="sample-code">Uize.Date.getRangeAround ('Thu Sep 10 2009 18:19:25','second');
+// minValue: Thu Sep 10 2009 18:19:25 (and 0 milliseconds)
+// maxValue: Thu Sep 10 2009 18:19:25 (and 999 milliseconds)
+</pre>
+				</div>
+				
+				<a name="2_6_1_2"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround -&gt; 2.6.1. rangeSizeSTR -&gt; 2.6.1.2. &apos;minute&apos;"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_6" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround">6</a>.<a href="#2_6_1" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround -&gt; 2.6.1. rangeSizeSTR">1</a>.<a href="#2_6_1_2" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround -&gt; 2.6.1. rangeSizeSTR -&gt; 2.6.1.2. &apos;minute&apos;">2</a>. </span>'minute'</h4>
+				<div class="contents4">
+					<p>The minute sized date range containing the specified date.</p>
+					
+					<p><span class="allCaps">EXAMPLE</span></p>
+					
+					
+<pre class="sample-code">Uize.Date.getRangeAround ('Thu Sep 10 2009 18:19:25','minute');
+// minValue: Thu Sep 10 2009 18:19:00 (and 0 milliseconds)
+// maxValue: Thu Sep 10 2009 18:19:59 (and 999 milliseconds)
+</pre>
+				</div>
+				
+				<a name="2_6_1_3"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround -&gt; 2.6.1. rangeSizeSTR -&gt; 2.6.1.3. &apos;hour&apos;"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_6" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround">6</a>.<a href="#2_6_1" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround -&gt; 2.6.1. rangeSizeSTR">1</a>.<a href="#2_6_1_3" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround -&gt; 2.6.1. rangeSizeSTR -&gt; 2.6.1.3. &apos;hour&apos;">3</a>. </span>'hour'</h4>
+				<div class="contents4">
+					<p>The hour sized date range containing the specified date.</p>
+					
+					<p><span class="allCaps">EXAMPLE</span></p>
+					
+					
+<pre class="sample-code">Uize.Date.getRangeAround ('Thu Sep 10 2009 18:19:25','hour');
+// minValue: Thu Sep 10 2009 18:00:00 (and 0 milliseconds)
+// maxValue: Thu Sep 10 2009 18:59:59 (and 999 milliseconds)
+</pre>
+				</div>
+				
+				<a name="2_6_1_4"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround -&gt; 2.6.1. rangeSizeSTR -&gt; 2.6.1.4. &apos;am/pm&apos;"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_6" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround">6</a>.<a href="#2_6_1" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround -&gt; 2.6.1. rangeSizeSTR">1</a>.<a href="#2_6_1_4" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround -&gt; 2.6.1. rangeSizeSTR -&gt; 2.6.1.4. &apos;am/pm&apos;">4</a>. </span>'am/pm'</h4>
+				<div class="contents4">
+					<p>The half day sized date range containing the specified date.</p>
+					
+					<p><span class="allCaps">EXAMPLE</span></p>
+					
+					
+<pre class="sample-code">Uize.Date.getRangeAround ('Thu Sep 10 2009 18:19:25','am/pm');
+// minValue: Thu Sep 10 2009 12:00:00 (and 0 milliseconds)
+// maxValue: Thu Sep 10 2009 23:59:59 (and 999 milliseconds)
+</pre>
+				</div>
+				
+				<a name="2_6_1_5"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround -&gt; 2.6.1. rangeSizeSTR -&gt; 2.6.1.5. &apos;day&apos;"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_6" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround">6</a>.<a href="#2_6_1" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround -&gt; 2.6.1. rangeSizeSTR">1</a>.<a href="#2_6_1_5" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround -&gt; 2.6.1. rangeSizeSTR -&gt; 2.6.1.5. &apos;day&apos;">5</a>. </span>'day'</h4>
+				<div class="contents4">
+					<p>The day sized date range containing the specified date.</p>
+					
+					<p><span class="allCaps">EXAMPLE</span></p>
+					
+					
+<pre class="sample-code">Uize.Date.getRangeAround ('Thu Sep 10 2009 18:19:25','day');
+// minValue: Thu Sep 10 2009 00:00:00 (and 0 milliseconds)
+// maxValue: Thu Sep 10 2009 23:59:59 (and 999 milliseconds)
+</pre>
+				</div>
+				
+				<a name="2_6_1_6"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround -&gt; 2.6.1. rangeSizeSTR -&gt; 2.6.1.6. &apos;week&apos;"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_6" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround">6</a>.<a href="#2_6_1" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround -&gt; 2.6.1. rangeSizeSTR">1</a>.<a href="#2_6_1_6" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround -&gt; 2.6.1. rangeSizeSTR -&gt; 2.6.1.6. &apos;week&apos;">6</a>. </span>'week'</h4>
+				<div class="contents4">
+					<p>The week sized date range containing the specified date.</p>
+					
+					<p><span class="allCaps">EXAMPLE</span></p>
+					
+					
+<pre class="sample-code">Uize.Date.getRangeAround ('Thu Sep 10 2009 18:19:25','week');
+// minValue: Sun Sep 06 2009 00:00:00 (and 0 milliseconds)
+// maxValue: Sat Sep 12 2009 23:59:59 (and 999 milliseconds)
+</pre>
+				</div>
+				
+				<a name="2_6_1_7"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround -&gt; 2.6.1. rangeSizeSTR -&gt; 2.6.1.7. &apos;month&apos;"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_6" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround">6</a>.<a href="#2_6_1" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround -&gt; 2.6.1. rangeSizeSTR">1</a>.<a href="#2_6_1_7" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround -&gt; 2.6.1. rangeSizeSTR -&gt; 2.6.1.7. &apos;month&apos;">7</a>. </span>'month'</h4>
+				<div class="contents4">
+					<p>The month sized date range containing the specified date.</p>
+					
+					<p><span class="allCaps">EXAMPLE</span></p>
+					
+					
+<pre class="sample-code">Uize.Date.getRangeAround ('Thu Sep 10 2009 18:19:25','month');
+// minValue: Tue Sep 01 2009 00:00:00 (and 0 milliseconds)
+// maxValue: Wed Sep 30 2009 23:59:59 (and 999 milliseconds)
+</pre>
+				</div>
+				
+				<a name="2_6_1_8"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround -&gt; 2.6.1. rangeSizeSTR -&gt; 2.6.1.8. &apos;quarter&apos;"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_6" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround">6</a>.<a href="#2_6_1" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround -&gt; 2.6.1. rangeSizeSTR">1</a>.<a href="#2_6_1_8" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround -&gt; 2.6.1. rangeSizeSTR -&gt; 2.6.1.8. &apos;quarter&apos;">8</a>. </span>'quarter'</h4>
+				<div class="contents4">
+					<p>The quarter sized date range containing the specified date.</p>
+					
+					<p><span class="allCaps">EXAMPLE</span></p>
+					
+					
+<pre class="sample-code">Uize.Date.getRangeAround ('Thu Sep 10 2009 18:19:25','quarter');
+// minValue: Wed Jul 01 2009 00:00:00 (and 0 milliseconds)
+// maxValue: Wed Sep 30 2009 23:59:59 (and 999 milliseconds)
+</pre>
+				</div>
+				
+				<a name="2_6_1_9"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround -&gt; 2.6.1. rangeSizeSTR -&gt; 2.6.1.9. &apos;year&apos;"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_6" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround">6</a>.<a href="#2_6_1" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround -&gt; 2.6.1. rangeSizeSTR">1</a>.<a href="#2_6_1_9" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround -&gt; 2.6.1. rangeSizeSTR -&gt; 2.6.1.9. &apos;year&apos;">9</a>. </span>'year'</h4>
+				<div class="contents4">
+					<p>The year sized date range containing the specified date.</p>
+					
+					<p><span class="allCaps">EXAMPLE</span></p>
+					
+					
+<pre class="sample-code">Uize.Date.getRangeAround ('Thu Sep 10 2009 18:19:25','year');
+// minValue: Thu Jan 01 2009 00:00:00 (and 0 milliseconds)
+// maxValue: Thu Dec 31 2009 23:59:59 (and 999 milliseconds)
+</pre>
+				</div>
+				
+				<a name="2_6_1_10"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround -&gt; 2.6.1. rangeSizeSTR -&gt; 2.6.1.10. &apos;decade&apos;"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_6" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround">6</a>.<a href="#2_6_1" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround -&gt; 2.6.1. rangeSizeSTR">1</a>.<a href="#2_6_1_10" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround -&gt; 2.6.1. rangeSizeSTR -&gt; 2.6.1.10. &apos;decade&apos;">10</a>. </span>'decade'</h4>
+				<div class="contents4">
+					<p>The decade sized date range containing the specified date.</p>
+					
+					<p><span class="allCaps">EXAMPLE</span></p>
+					
+					
+<pre class="sample-code">Uize.Date.getRangeAround ('Thu Sep 10 2009 18:19:25','decade');
+// minValue: Sat Jan 01 2000 00:00:00 (and 0 milliseconds)
+// maxValue: Thu Dec 31 2009 23:59:59 (and 999 milliseconds)
+</pre>
+				</div>
+				
+				<a name="2_6_1_11"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround -&gt; 2.6.1. rangeSizeSTR -&gt; 2.6.1.11. &apos;century&apos;"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_6" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround">6</a>.<a href="#2_6_1" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround -&gt; 2.6.1. rangeSizeSTR">1</a>.<a href="#2_6_1_11" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround -&gt; 2.6.1. rangeSizeSTR -&gt; 2.6.1.11. &apos;century&apos;">11</a>. </span>'century'</h4>
+				<div class="contents4">
+					<p>The century sized date range containing the specified date.</p>
+					
+					<p><span class="allCaps">EXAMPLE</span></p>
+					
+					
+<pre class="sample-code">Uize.Date.getRangeAround ('Thu Sep 10 2009 18:19:25','century');
+// minValue: Sat Jan 01 2000 00:00:00 (and 0 milliseconds)
+// maxValue: Thu Dec 31 2099 23:59:59 (and 999 milliseconds)
+</pre>
+				</div>
+				
+				<a name="2_6_1_12"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround -&gt; 2.6.1. rangeSizeSTR -&gt; 2.6.1.12. &apos;millennium&apos;"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_6" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround">6</a>.<a href="#2_6_1" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround -&gt; 2.6.1. rangeSizeSTR">1</a>.<a href="#2_6_1_12" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround -&gt; 2.6.1. rangeSizeSTR -&gt; 2.6.1.12. &apos;millennium&apos;">12</a>. </span>'millennium'</h4>
+				<div class="contents4">
+					<p>The millennium sized date range containing the specified date.</p>
+					
+					<p><span class="allCaps">EXAMPLE</span></p>
+					
+					
+<pre class="sample-code">Uize.Date.getRangeAround ('Thu Sep 10 2009 18:19:25','millennium');
+// minValue: Sat Jan 01 2000 00:00:00 (and 0 milliseconds)
+// maxValue: Tue Dec 31 2999 23:59:59 (and 999 milliseconds)
+</pre>
+				</div>
+				
+				<a name="2_6_1_13"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround -&gt; 2.6.1. rangeSizeSTR -&gt; 2.6.1.13. &apos;millisecond&apos;"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_6" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround">6</a>.<a href="#2_6_1" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround -&gt; 2.6.1. rangeSizeSTR">1</a>.<a href="#2_6_1_13" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround -&gt; 2.6.1. rangeSizeSTR -&gt; 2.6.1.13. &apos;millisecond&apos;">13</a>. </span>'millisecond'</h4>
+				<div class="contents4">
+					<p>The millisecond sized date range containing the specified date.</p>
+					
+					<p><span class="allCaps">EXAMPLE</span></p>
+					
+					
+<pre class="sample-code">Uize.Date.getRangeAround ('Thu Sep 10 2009 18:19:25','millisecond');
+// minValue: Thu Sep 10 2009 18:19:25 (and N milliseconds)
+// maxValue: Thu Sep 10 2009 18:19:25 (and N milliseconds)
+</pre>
+					
+					<p><span class="allCaps">SPECIAL CASE</span></p>
+					
+					<p>The millisecond sized date range is a special case, which is nevertheless useful in certain situations. Since milliseconds is the highest degree of precision in representing date values in JavaScript, when a millisecond sized date range is requested, the <code>minValue</code> and <code>maxValue</code> properties of the <code><a href="#4_2">dateRangeOBJ</a></code> object will be identifical to the value of the <code><a href="#4_1">dateSTRorNUMorOBJ</a></code> parameter. In other words, technically, the date range around a specific date that is only a millisecond big is where the upper and lower bounds of the range are the date itself.</p>
+				</div>
+			</div>
+			
+			<a name="2_6_2"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround -&gt; 2.6.2. Using Date Ranges"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_6" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround">6</a>.<a href="#2_6_2" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround -&gt; 2.6.2. Using Date Ranges">2</a>. </span>Using Date Ranges</h3>
+			<div class="contents3">
+				<a name="2_6_2_1"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround -&gt; 2.6.2. Using Date Ranges -&gt; 2.6.2.1. Using Date Ranges With Classes Supporting the Value Range Interface"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_6" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround">6</a>.<a href="#2_6_2" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround -&gt; 2.6.2. Using Date Ranges">2</a>.<a href="#2_6_2_1" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround -&gt; 2.6.2. Using Date Ranges -&gt; 2.6.2.1. Using Date Ranges With Classes Supporting the Value Range Interface">1</a>. </span>Using Date Ranges With Classes Supporting the Value Range Interface</h4>
+				<div class="contents4">
+					<p>Because the value returned by the <code><a href="#2_6">Uize.Date.getRangeAround</a></code> method is an object containing <code>minValue</code> and <code>maxValue</code> properties, this object can be used to set the set-get properties for an instance of any class that implements the Value Range Interface.</p>
+					
+					<p>An example of this is the <code><a href="../reference/Uize.Widget.Picker.Date.html">Uize.Widget.Picker.Date</a></code> class, which lets the user select a date inside a popup date dialog.</p>
+					
+					<p><span class="allCaps">EXAMPLE</span></p>
+					
+					
+<pre class="sample-code">page.addChild (
+  'datePickerThisWeek',
+  Uize.Widget.Picker.Date,
+  Uize.Date.getRangeAround (
+    '',     // empty string for date means now
+    'week'  // range size
+  )
+);
+</pre>
+					
+					<p>In the above example, the date picker widget that is being added as a child of the page widget would let the user select a date in the current week. The result from the call to the <code><a href="#2_6">Uize.Date.getRangeAround</a></code> method is being supplied as the set-get property values for the <code><a href="../reference/Uize.Widget.Picker.Date.html">Uize.Widget.Picker.Date</a></code> instance. This works because the <code><a href="../reference/Uize.Widget.Picker.Date.html">Uize.Widget.Picker.Date</a></code> class implements <code>minValue</code> and <code>maxValue</code> set-get properties for constraining the range in which the user can select a date.</p>
+				</div>
+				
+				<a name="2_6_2_2"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround -&gt; 2.6.2. Using Date Ranges -&gt; 2.6.2.2. Using Date Ranges With Other Uize.Date Methods"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_6" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround">6</a>.<a href="#2_6_2" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround -&gt; 2.6.2. Using Date Ranges">2</a>.<a href="#2_6_2_2" title="2. Static Methods -&gt; 2.6. Uize.Date.getRangeAround -&gt; 2.6.2. Using Date Ranges -&gt; 2.6.2.2. Using Date Ranges With Other Uize.Date Methods">2</a>. </span>Using Date Ranges With Other Uize.Date Methods</h4>
+				<div class="contents4">
+					<p>Other methods of the <code>Uize.Date</code> module can accept date range objects as values for certain parameters.</p>
+					
+					<p>An example of this is the <code><a href="#2_7">Uize.Date.inRange</a></code> static method, which returns a boolean value indicating whether or not the specified date falls within the specified date range.</p>
+					
+					<p><span class="allCaps">EXAMPLE</span></p>
+					
+					
+<pre class="sample-code">function dateIsThisWeek (date) {
+  return Uize.Date.inRange (
+    date,
+    Uize.Date.getRangeAround (
+      '',     // empty string for date means now
+      'week'  // range size
+    )
+  );
+}
+</pre>
+					
+					<p>In the above example, a <code>dateIsThisWeek</code> function is being defined. This function accepts a date as a parameter and then returns a boolean indicating whether or not this date is within the current week. It does this by getting the week sized date range around today's date by calling the <code><a href="#2_6">Uize.Date.getRangeAround</a></code> method. The resulting date range object is then supplied as the value of the <code><a href="#4_2">dateRangeOBJ</a></code> parameter for the <code><a href="#2_7">Uize.Date.inRange</a></code> method.</p>
+				</div>
+			</div>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>when the value <code>''</code> (empty string), <code>null</code>, or <code>undefined</code> is specified for the <code><a href="#4_1">dateSTRorNUMorOBJ</a></code> parameter, then this parameter will be defaulted to the date at the time that the method is called (today's date, essentially)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#2_7">Uize.Date.inRange</a></code> static method</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_7"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.7. Uize.Date.inRange"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_7" title="2. Static Methods -&gt; 2.7. Uize.Date.inRange">7</a>. </span>Uize.Date.inRange</h2>
+		<div class="contents2">
+			<p>Returns a boolean, indicating whether or not the specified date is within the specified date range.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">inRangeBOOL = Uize.Date.inRange (dateSTRorNUMorOBJ,dateRangeOBJ);
+</pre>
+			
+			<p>The date range is specified by a <code><a href="#4_2">dateRangeOBJ</a></code> type value.</p>
+			
+			<p><span class="allCaps">EXAMPLES</span></p>
+			
+			
+<pre class="sample-code">Uize.Date.inRange (             // produces the result false
+  '2009/09/23 00:00:00',
+  {minValue:'2009/09/23 00:00:01',maxValue:'2009/09/23 23:59:59'}
+);
+
+Uize.Date.inRange (             // produces the result true
+  '2009/09/23 00:00:01',
+  {minValue:'2009/09/23 00:00:01',maxValue:'2009/09/23 23:59:59'}
+);
+
+Uize.Date.inRange (             // produces the result true
+  '2009/09/23 23:59:59',
+  {minValue:'2009/09/23 00:00:01',maxValue:'2009/09/23 23:59:59'}
+);
+
+Uize.Date.inRange (             // produces the result false
+  '2009/09/24 00:00:00',
+  {minValue:'2009/09/23 00:00:01',maxValue:'2009/09/23 23:59:59'}
+);
+</pre>
+			
+			<a name="2_7_1"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.7. Uize.Date.inRange -&gt; 2.7.1. Precision to the Millisecond"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_7" title="2. Static Methods -&gt; 2.7. Uize.Date.inRange">7</a>.<a href="#2_7_1" title="2. Static Methods -&gt; 2.7. Uize.Date.inRange -&gt; 2.7.1. Precision to the Millisecond">1</a>. </span>Precision to the Millisecond</h3>
+			<div class="contents3">
+				<p>It is important to note that the <code><a href="#2_7">Uize.Date.inRange</a></code> method considers all components of the boundary dates in the date range supplied to it.</p>
+				
+				<p>This includes the hours, minutes, seconds, and even milliseconds. Consider the example where you want to determine if a specified date is today or later. If you just specify the value <code>new Date</code> for the <code>minValue</code> property of the date range object, you may miss some dates that are today but whose time is before the time when the <code>new Date</code> value is created for the <code>minValue</code> property.</p>
+				
+				<p>What you can do in such cases is "snap" a date to a neat boundary using the <code><a href="#2_6">Uize.Date.getRangeAround</a></code> method. Then you can take only the <code>minValue</code> or <code>maxValue</code> property of the returned date range in order to produce a new date range that's missing one of its boundaries, as shown in the example below...</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">function isTodayOrLater (date) {
+  return Uize.Date.inRange (
+    date,
+    {minValue:Uize.Date.getRangeAround ('','day').minValue}
+  );
+}
+</pre>
+				
+				<p>The call to the <code><a href="#2_6">Uize.Date.getRangeAround</a></code> method here produces a date range with a <code>minValue</code> that is at the start of today, and a <code>maxValue</code> that is at the end of today. Then we use just the <code>minValue</code> property to create a new date range that has no <code>maxValue</code>, and we supply this date range with no upper bound to the <code><a href="#2_7">Uize.Date.inRange</a></code> method.</p>
+			</div>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#2_6">Uize.Date.getRangeAround</a></code> static method</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this method supports <a href="#4_2_1">Boundless Date Ranges</a></td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>when the value <code>''</code> (empty string), <code>null</code>, or <code>undefined</code> is specified for the <code><a href="#4_1">dateSTRorNUMorOBJ</a></code> parameter, then this parameter will be defaulted to the date at the time that the method is called (today's date, essentially)</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_8"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.8. Uize.Date.isLeapYear"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_8" title="2. Static Methods -&gt; 2.8. Uize.Date.isLeapYear">8</a>. </span>Uize.Date.isLeapYear</h2>
+		<div class="contents2">
+			<p>Returns a boolean, indicating whether or not the specified year is a leap year.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">isLeapYearBOOL = Uize.Date.isLeapYear (yearINT);
+</pre>
+			
+			<p><span class="allCaps">EXAMPLES</span></p>
+			
+			
+<pre class="sample-code">Uize.Date.isLeapYear (2008);   // returns true, because 2008 is a leap year
+Uize.Date.isLeapYear (2009);   // returns false, because 2009 is not a leap year
+</pre>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#2_5">Uize.Date.getDaysInMonth</a></code> static method</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_9"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.9. Uize.Date.isRecent"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_9" title="2. Static Methods -&gt; 2.9. Uize.Date.isRecent">9</a>. </span>Uize.Date.isRecent</h2>
+		<div class="contents2">
+			<p>Returns a boolean, indicating whether or not the specified date is within the specified window of recency (as specified in days).</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">isRecentBOOL = Uize.Date.isRecent (dateSTRorNUMorOBJ,recencyWindowDaysINT);
+</pre>
+			
+			<p>The date to be tested for recency can be specified using the <code><a href="#4_1">dateSTRorNUMorOBJ</a></code> value type. This method can be useful for filtering content to highlight as new or recent, based upon release date.</p>
+			
+			<p><span class="allCaps">VARIATION</span></p>
+			
+			
+<pre class="sample-code">isRecentBOOL = Uize.Date.isRecent (
+  dateSTRorNUMorOBJ,
+  recencyWindowDaysINT,
+  referencePointDateSTRorNUMorOBJ
+);
+</pre>
+			
+			<p>The optional <code>referencePointDateSTRorNUMorOBJ</code> parameter lets you specify the reference point date, relative to which the date specified by the <code><a href="#4_1">dateSTRorNUMorOBJ</a></code> parameter should be tested for recency. When the optional <code>referencePointDateSTRorNUMorOBJ</code> parameter is not specified, then the default reference point is the time that the <code><a href="#2_9">Uize.Date.isRecent</a></code> method is called. It may be, however, that you wish to determine if a date is recent relative to some other reference point date. In such cases, use the <code>referencePointDateSTRorNUMorOBJ</code> parameter.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_10"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.10. Uize.Date.resolve"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_10" title="2. Static Methods -&gt; 2.10. Uize.Date.resolve">10</a>. </span>Uize.Date.resolve</h2>
+		<div class="contents2">
+			<p>Resolves the specified date to a <code><a href="../javascript-reference/Date.html">Date</a></code> object instance and returns that instance.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">dateOBJ = Uize.Date.resolve (dateSTRorNUMorOBJ);
+</pre>
+			
+			<p>The date to resolve can be specified using the <code><a href="#4_1">dateSTRorNUMorOBJ</a></code> value type. When the specified date is already an instance of the <code><a href="../javascript-reference/Date.html">Date</a></code> object, then that instance is simply returned.</p>
+			
+			<p>This method can be useful when implementing other methods, to give them flexibility in the manner in which dates can be specified for them. Resolving dates means that your code can be sure to be dealing with <code><a href="../javascript-reference/Date.html">Date</a></code> object instances, and can then have a canonical implementation when dealing with dates.</p>
+			
+			<p><span class="allCaps">VARIATION 1</span></p>
+			
+			
+<pre class="sample-code">dateOBJ = Uize.Date.resolve (dateSTRorNUMorOBJ,defaultDateANYTYPE);
+</pre>
+			
+			<p>When the optional <code>defaultDateANYTYPE</code> parameter is specified, the value of this parameter will be returned by the <code><a href="#2_10">Uize.Date.resolve</a></code> method when the value specified for the <code><a href="#4_1">dateSTRorNUMorOBJ</a></code> parameter is <code>''</code> (empty string), <code>null</code>, or <code>undefined</code>. This allows you to resolve a date with a default other than the date at the time that the <code><a href="#2_10">Uize.Date.resolve</a></code> method is called. Note that the <code>value</code> of the <code>defaultDateANYTYPE</code> parameter is not itself resolved to a date - its value will be returned as is. So, if you want a <code><a href="../javascript-reference/Date.html">Date</a></code> object instance to be the default value for the resolved date, provide the default as a <code><a href="../javascript-reference/Date.html">Date</a></code> object instance.</p>
+			
+			<p><span class="allCaps">VARIATION 2</span></p>
+			
+			
+<pre class="sample-code">dateOBJ = Uize.Date.resolve ();
+</pre>
+			
+			<p>When no <code><a href="#4_1">dateSTRorNUMorOBJ</a></code> parameter is specified, or if an empty string or the value <code>null</code> is specified for this parameter, then a fresh <code><a href="../javascript-reference/Date.html">Date</a></code> object instance (ie. now) will be returned.</p>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>when the value <code>''</code> (empty string), <code>null</code>, or <code>undefined</code> is specified for the <code><a href="#4_1">dateSTRorNUMorOBJ</a></code> parameter, and when no value is specified for the <code>defaultDateANYTYPE</code> parameter, then this parameter will be defaulted to the date at the time that the method is called (today's date, essentially)</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_11"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.11. Uize.Date.toIso8601"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_11" title="2. Static Methods -&gt; 2.11. Uize.Date.toIso8601">11</a>. </span>Uize.Date.toIso8601</h2>
+		<div class="contents2">
+			<p>Returns a string, representing the specified date in <code><a href="#1_1_1">ISO 8601</a></code> format (YYYY-MM-DD).</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">dateIso8601STR = Uize.Date.toIso8601 (dateSTRorNUMorOBJ);
+</pre>
+			
+			<p>The date to be formatted in the <code><a href="#1_1_1">ISO 8601</a></code> format can be specified using the <code><a href="#4_1">dateSTRorNUMorOBJ</a></code> value type.</p>
+			
+			<p><span class="allCaps">VARIATION</span></p>
+			
+			
+<pre class="sample-code">dateIso8601STR = Uize.Date.toIso8601 ();
+</pre>
+			
+			<p>When no <code><a href="#4_1">dateSTRorNUMorOBJ</a></code> parameter is specified, this method will return the current date in <code><a href="#1_1_1">ISO 8601</a></code> format.</p>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the companion <code><a href="#2_4">Uize.Date.fromIso8601</a></code> static method</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>when the value <code>''</code> (empty string), <code>null</code>, or <code>undefined</code> is specified for the <code><a href="#4_1">dateSTRorNUMorOBJ</a></code> parameter, then this parameter will be defaulted to the date at the time that the method is called (today's date, essentially)</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_12"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.12. Uize.Date.toPretty"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_12" title="2. Static Methods -&gt; 2.12. Uize.Date.toPretty">12</a>. </span>Uize.Date.toPretty</h2>
+		<div class="contents2">
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+	</div>
+	
+	<a name="3"></a>
+	<h1 class="heading1" title="3. Static Properties"><span class="headingNumber"><a href="#3" title="3. Static Properties">3</a>. </span>Static Properties</h1>
+	<div class="contents1">
+		<a name="3_1"></a>
+		<h2 class="heading2" title="3. Static Properties -&gt; 3.1. Uize.Date.dayNames"><span class="headingNumber"><a href="#3" title="3. Static Properties">3</a>.<a href="#3_1" title="3. Static Properties -&gt; 3.1. Uize.Date.dayNames">1</a>. </span>Uize.Date.dayNames</h2>
+		<div class="contents2">
+			<p>An array of strings, representing the names of the days of the week, starting with Sunday.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">dayNameSTR = Uize.Date.dayNames [dayOfWeekINT];
+</pre>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">var todaysDayName = Uize.Date.dayNames [(new Date).getDay ()];
+</pre>
+			
+			<p>In the above example, the variable <code>todaysDayName</code> would be left with the name of the day of the week during which the code is executed.</p>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the companion <code><a href="#3_5">Uize.Date.shortDayNames</a></code> static property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#3_4">Uize.Date.monthNames</a></code> and <code><a href="#3_6">Uize.Date.shortMonthNames</a></code> static properties</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_2"></a>
+		<h2 class="heading2" title="3. Static Properties -&gt; 3.2. Uize.Date.dayNoSuffixes"><span class="headingNumber"><a href="#3" title="3. Static Properties">3</a>.<a href="#3_2" title="3. Static Properties -&gt; 3.2. Uize.Date.dayNoSuffixes">2</a>. </span>Uize.Date.dayNoSuffixes</h2>
+		<div class="contents2">
+			<p>document...</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_3"></a>
+		<h2 class="heading2" title="3. Static Properties -&gt; 3.3. Uize.Date.moduleName"><span class="headingNumber"><a href="#3" title="3. Static Properties">3</a>.<a href="#3_3" title="3. Static Properties -&gt; 3.3. Uize.Date.moduleName">3</a>. </span>Uize.Date.moduleName</h2>
+		<div class="contents2">
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_4"></a>
+		<h2 class="heading2" title="3. Static Properties -&gt; 3.4. Uize.Date.monthNames"><span class="headingNumber"><a href="#3" title="3. Static Properties">3</a>.<a href="#3_4" title="3. Static Properties -&gt; 3.4. Uize.Date.monthNames">4</a>. </span>Uize.Date.monthNames</h2>
+		<div class="contents2">
+			<p>An array of strings, representing the names of the months of the year, starting with January.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">monthNameSTR = Uize.Date.monthNames [monthOfYearINT];
+</pre>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">var todaysMonthName = Uize.Date.monthNames [(new Date).getMonth ()];
+</pre>
+			
+			<p>In the above example, the variable <code>todaysMonthName</code> would be left with the name of the month of the year during which the code is executed.</p>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the companion <code><a href="#3_6">Uize.Date.shortMonthNames</a></code> static property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#3_1">Uize.Date.dayNames</a></code> and <code><a href="#3_5">Uize.Date.shortDayNames</a></code> static properties</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_5"></a>
+		<h2 class="heading2" title="3. Static Properties -&gt; 3.5. Uize.Date.shortDayNames"><span class="headingNumber"><a href="#3" title="3. Static Properties">3</a>.<a href="#3_5" title="3. Static Properties -&gt; 3.5. Uize.Date.shortDayNames">5</a>. </span>Uize.Date.shortDayNames</h2>
+		<div class="contents2">
+			<p>An array of strings, representing the short names of the days of the week, starting with Sunday.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">shortDayNameSTR = Uize.Date.shortDayNames [dayOfWeekINT];
+</pre>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">var todaysShortDayName = Uize.Date.shortDayNames [(new Date).getDay ()];
+</pre>
+			
+			<p>In the above example, the variable <code>todaysShortDayName</code> would be left with the short name of the day of the week during which the code is executed.</p>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the companion <code><a href="#3_1">Uize.Date.dayNames</a></code> static property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#3_4">Uize.Date.monthNames</a></code> and <code><a href="#3_6">Uize.Date.shortMonthNames</a></code> static properties</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_6"></a>
+		<h2 class="heading2" title="3. Static Properties -&gt; 3.6. Uize.Date.shortMonthNames"><span class="headingNumber"><a href="#3" title="3. Static Properties">3</a>.<a href="#3_6" title="3. Static Properties -&gt; 3.6. Uize.Date.shortMonthNames">6</a>. </span>Uize.Date.shortMonthNames</h2>
+		<div class="contents2">
+			<p>An array of strings, representing the short names of the months of the year, starting with January.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">shortMonthNameSTR = Uize.Date.shortMonthNames [monthOfYearINT];
+</pre>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">var todaysShortMonthName = Uize.Date.shortMonthNames [(new Date).getMonth ()];
+</pre>
+			
+			<p>In the above example, the variable <code>todaysShortMonthName</code> would be left with the short name of the month of the year during which the code is executed.</p>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the companion <code><a href="#3_4">Uize.Date.monthNames</a></code> static property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#3_1">Uize.Date.dayNames</a></code> and <code><a href="#3_5">Uize.Date.shortDayNames</a></code> static properties</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+	</div>
+	
+	<a name="4"></a>
+	<h1 class="heading1" title="4. Value Types"><span class="headingNumber"><a href="#4" title="4. Value Types">4</a>. </span>Value Types</h1>
+	<div class="contents1">
+		<p>The following parameters are common to a number of methods and warrant separate, shared explanations...</p>
+		
+		<a name="4_1"></a>
+		<h2 class="heading2" title="4. Value Types -&gt; 4.1. dateSTRorNUMorOBJ"><span class="headingNumber"><a href="#4" title="4. Value Types">4</a>.<a href="#4_1" title="4. Value Types -&gt; 4.1. dateSTRorNUMorOBJ">1</a>. </span>dateSTRorNUMorOBJ</h2>
+		<div class="contents2">
+			<p>A string in <code><a href="#1_1_1">ISO 8601</a></code> format (YYYY-MM-DD), a string that can be parsed by the <code><a href="../javascript-reference/Date.html">Date</a></code> object, a <code><a href="../javascript-reference/Date.html">Date</a></code> object instance, or a number specifying the <a href="http://en.wikipedia.org/wiki/Unix_time" target="_blank" class="externalSiteLink">Unix Time</a> in milliseconds.</p>
+			
+			<p>Methods accepting this value type for a parameter may resolve the value <code>''</code> (empty string), <code>null</code>, or <code>undefined</code> to the date at the time that the method is called (today's date, essentially), or they may provide an alternate defaulting behavior.</p>
+			
+			<p><span class="allCaps">EXAMPLES</span></p>
+			
+			
+<pre class="sample-code">'Thu Sep 10 2009'             // string that can be parsed by JavaScript's Date object
+'2009-09-10'                  // ISO 8601
+new Date ('Thu Sep 10 2009')  // JavaScript Date object instance
+</pre>
+			
+			<p>The above example are all valid ways to specify the same date using the <code><a href="#4_1">dateSTRorNUMorOBJ</a></code> value type.</p>
+		</div>
+		
+		<a name="4_2"></a>
+		<h2 class="heading2" title="4. Value Types -&gt; 4.2. dateRangeOBJ"><span class="headingNumber"><a href="#4" title="4. Value Types">4</a>.<a href="#4_2" title="4. Value Types -&gt; 4.2. dateRangeOBJ">2</a>. </span>dateRangeOBJ</h2>
+		<div class="contents2">
+			<p>An object, containing <code>minValue</code> and <code>maxValue</code> properties, where the value of these properties are of the type <code><a href="#4_1">dateSTRorNUMorOBJ</a></code>, and where the <code>minValue</code> property specifies the start of the date range, and the <code>maxValue</code> property specifies the end of the range.</p>
+			
+			<p><span class="allCaps">STRUCTURE</span></p>
+			
+			
+<pre class="sample-code">{
+  minValue:startDateSTRorNUMorOBJ,
+  maxValue:endDateSTRorNUMorOBJ
+}
+</pre>
+			
+			<p>Various methods deal with values of the <code><a href="#4_2">dateRangeOBJ</a></code> type. One example is the <code><a href="#2_6">Uize.Date.getRangeAround</a></code> method, which returns a <code><a href="#4_2">dateRangeOBJ</a></code> value specifying the "neat" date range of the specified range size around the specified date. Another example is the <code><a href="#2_7">Uize.Date.inRange</a></code> method, which returns a boolean, indicating whether or not the specified date is within the date range specified by a <code><a href="#4_2">dateRangeOBJ</a></code> value.</p>
+			
+			<a name="4_2_1"></a>
+			<h3 class="heading3" title="4. Value Types -&gt; 4.2. dateRangeOBJ -&gt; 4.2.1. Boundless Date Ranges"><span class="headingNumber"><a href="#4" title="4. Value Types">4</a>.<a href="#4_2" title="4. Value Types -&gt; 4.2. dateRangeOBJ">2</a>.<a href="#4_2_1" title="4. Value Types -&gt; 4.2. dateRangeOBJ -&gt; 4.2.1. Boundless Date Ranges">1</a>. </span>Boundless Date Ranges</h3>
+			<div class="contents3">
+				<p>Methods that accept a value of type <code><a href="#4_2">dateRangeOBJ</a></code> should treat the absence of a property specifying a value for a boundary, or specifying the value <code>null</code> or <code>undefined</code> for a boundary, as indicating that the date range is not bounded on that end of its range.</p>
+				
+				<p>So, specifying no value for the <code>minValue</code> property (or specifying the value <code>null</code> or <code>undefined</code>) would mean that the date range has no lower bound. Similarly, specifying no value for the <code>maxValue</code> property (or specifying the value <code>null</code> or <code>undefined</code>) would mean that the date range has no upper bound. Not specifying values for either of the <code>minValue</code> or <code>maxValue</code> properties would mean that the date range is unbounded - all dates would fall within such a date range.</p>
+				
+				<p><span class="allCaps">EXAMPLES</span></p>
+				
+				
+<pre class="sample-code">// no upper bound
+
+Uize.Date.inRange ('2009-08-10',{minValue:'2009-09-01'});        // false
+Uize.Date.inRange ('2009-09-01',{minValue:'2009-09-01'});        // true
+Uize.Date.inRange ('2009-09-10',{minValue:'2009-09-01'});        // true
+
+
+// no lower bound
+
+Uize.Date.inRange ('2009-08-10',{maxValue:'2009-09-01'});        // true
+Uize.Date.inRange ('2009-09-01',{maxValue:'2009-09-01'});        // true
+Uize.Date.inRange ('2009-09-10',{maxValue:'2009-09-01'});        // false
+
+
+// no bound at all
+
+Uize.Date.inRange ('2009-09-10',{});                             // true
+Uize.Date.inRange ('2009-09-10',{minValue:null});                // true
+Uize.Date.inRange ('2009-09-10',{maxValue:null});                // true
+Uize.Date.inRange ('2009-09-10',{minValue:null,maxValue:null});  // true
+</pre>
+			</div>
+		</div>
+	</div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

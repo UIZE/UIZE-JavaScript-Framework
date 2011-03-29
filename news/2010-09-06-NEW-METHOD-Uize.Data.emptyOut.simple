@@ -1,0 +1,25 @@
+The new =Uize.Data.emptyOut= static method, implemented in the =Uize.Data= module, lets you empty out the contents of a specified source array or object, returning a reference to that source.
+
+SYNTAX
+.........................................................
+sourceOBJorARRAY = Uize.Data.emptyOut (sourceOBJorARRAY);
+.........................................................
+
+Using this method to empty out an array is equivalent to setting the array's length to =0=, while using this method to empty out an object results in all the object's properties being deleted.
+
+EXAMPLE
+...............................................................
+Uize.copyInto (Uize.Data.emptyOut (userData),userDataDefaults);
+...............................................................
+
+In the above example, a =userData= object has accumulated a large amount of user data and we wish to reset it to some initial default state. Because references to the object may be shared by many parts of an application's code, we want to re-initiatialize it by modifying its contents, restoring its state to that of the =userDataDefaults= object. The =Uize.Data.emptyOut= method lets us first empty out the object, after which it is passed as the source for the =Uize.copyInto= method call where we copy back in the contents of the =userDataDefaults= object.
+
+This new method is fully documented and unit tested.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2010-09-06 - NEW METHOD: Uize.Data.emptyOut
+....................................................................................

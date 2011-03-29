@@ -1,0 +1,21 @@
+The =Uize.Node.getStyle= static method of the =Uize.Node= module now supports the =opacity= style property.
+
+This module deals with the difference between Internet Explorer and browsers that support the CSS standard =opacity= style property. For IE, the proprietary =filter= style property is queried, but as a developer you can specify =opacity= as if it were supported by IE.
+
+EXAMPLE 1
+...........................................................
+var opacityValue = Uize.Node.getStyle ('myNode','opacity');
+...........................................................
+
+EXAMPLE 2
+.......................................................................................
+var opacityAndBorderColorObj = Uize.Node.getStyle ('myNode',{opacity:1,borderColor:1});
+.......................................................................................
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-03-27 - IMPROVED MODULE: Uize.Node
+....................................................................................

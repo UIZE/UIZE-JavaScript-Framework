@@ -1,0 +1,502 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Uize.Json | Documentation | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework Documentation Uize.Json module reference documentation"/>
+	<meta name="description" content="The Uize.Json module provides versatile methods for serializing and deserializing objects to and from the JSON (JavaScript Object Notation) format."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../javascript-modules-index.html" class="breadcrumb breadcrumbWithArrow">MODULES</a>
+	<a href="Uize.html" title="View reference for Uize" class="breadcrumb">Uize</a>.<a href="Uize.Json.html" title="View reference for Uize.Json" class="breadcrumb">Json</a>
+	<div class="pageActions">
+		<a id="page-search" href="javascript://" class="buttonLink" title="Search for references to this module...">SEARCH</a><a id="page-examples" href="javascript://" class="buttonLink" title="View examples for this module...">EXAMPLES</a><a href="source-code/Uize.Json.html" class="buttonLink" title="View the JavaScript source code for this module...">SOURCE</a><a id="page-test" href="javascript://" class="buttonLink" title="Test this module...">TEST</a>
+	</div>
+
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="The Uize.Json module provides versatile methods for serializing and deserializing objects to and from the JSON (JavaScript Object Notation) format.">1. Introduction</a>
+				<ul>
+					<li><a href="#1_1" title="The following example pages are good showcases for the Uize.Json module...">1.1. Examples</a></li>
+					<li><a href="#1_2" title="The Uize.Json module defines the Uize.Json package under the Uize namespace.">1.2. Implementation Info</a>
+						<ul>
+							<li><a href="#1_2_1" title="The features listed in this section have been introduced in this module.">1.2.1. Features Introduced in This Module</a></li>
+							<li><a href="#1_2_2" title="No features have been overridden in this module.">1.2.2. Features Overridden in This Module</a></li>
+							<li><a href="#1_2_3" title="This module has no inherited features.">1.2.3. Features Inherited From Other Modules</a></li>
+							<li><a href="#1_2_4" title="There are no modules directly under this namespace.">1.2.4. Modules Directly Under This Namespace</a></li>
+							<li><a href="#1_2_5" title="There is no dedicated unit tests module for the Uize.Json module.">1.2.5. Unit Tests</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li><a href="#2">2. Static Methods</a>
+				<ul>
+					<li><a href="#2_1" title="Returns a value of any type, being the result of evaluating the expression specified by the jsonSTR parameter.">2.1. Uize.Json.from</a></li>
+					<li><a href="#2_2" title="Serializes the specified value to a string of JSON format. The value to serialize can be a string, boolean, number, object, array, null, undefined, or a regular expression.">2.2. Uize.Json.to</a>
+						<ul>
+							<li><a href="#2_2_1" title="A string, specifying the characters that should be used to indent key/value pairs of objects and elements of arrays. Defaults to one tab. Specify an empty string for compact serialization.">2.2.1. indentChars</a></li>
+							<li><a href="#2_2_2" title="A string, specifying the characters to be used to separate key/value pairs of objects and elements of arrays. Defaults to a single linebreak. Specify an empty string for compact serialization.">2.2.2. linebreakChars</a></li>
+							<li><a href="#2_2_3" title="A string, specifying the character to be used when quoting string literals for string values or object property names (keys) that require quoting. Defaults to a single quote character.">2.2.3. quoteChar</a></li>
+							<li><a href="#2_2_4" title="A string, specifying the characters to be used when separating keys from values for serializing objects. Defaults to a colon without padding spaces around it. Add your own spaces to order.">2.2.4. keyDelimiter</a></li>
+							<li><a href="#2_2_5" title="A boolean, specifying whether or not keys should be padded with spaces so that all keys occupy the same number of characters and so that the keyDelimiter character lines up vertically. Defaults to false. See the companion keyAlign property.">2.2.5. padKeys</a></li>
+							<li><a href="#2_2_6" title="A string, specifying whether the keys should be aligned left, center, or right when padding keys. Only applicable when the companion padKeys property is set to true.">2.2.6. keyAlign</a></li>
+							<li><a href="#2_2_7" title="A string, specifying under what conditions object property names (keys) should be quoted. The default value of &apos;auto&apos; causes individual keys to only be quoted when necessary. The value of &apos;auto all&apos; causes all keys of the same object to be quoted if any of the keys needs to be quoted. The value of &apos;always&apos; causes all keys to always be quoted.">2.2.7. whenToQuoteKeys</a></li>
+							<li><a href="#2_2_8" title="A boolean, specifying whether or not object property names (keys) should be sorted ASCIIbetically when serializing objects. Defaults to false.">2.2.8. sortKeys</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li><a href="#3">3. Static Properties</a>
+				<ul>
+					<li><a href="#3_1">3.1. Uize.Json.encodingOptionsPresets</a>
+						<ul>
+							<li><a href="#3_1_1">3.1.1. Available Presets</a>
+								<ul>
+									<li><a href="#3_1_1_1" title="document...">3.1.1.1. Uize.Json.encodingOptionsPresets.mini</a></li>
+									<li><a href="#3_1_1_2" title="document...">3.1.1.2. Uize.Json.encodingOptionsPresets.miniStrict</a></li>
+									<li><a href="#3_1_1_3" title="document...">3.1.1.3. Uize.Json.encodingOptionsPresets.nice</a></li>
+									<li><a href="#3_1_1_4" title="document...">3.1.1.4. Uize.Json.encodingOptionsPresets.strict</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li><a href="#3_2" title="IMPLEMENTATION INFO">3.2. Uize.Json.moduleName</a></li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<a name="1"></a>
+	<h1 class="heading1" title="1. Introduction"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>. </span>Introduction</h1>
+	<div class="contents1">
+		<p>The <code>Uize.Json</code> module provides versatile methods for serializing and deserializing objects to and from the <a href="http://en.wikipedia.org/wiki/JSON" target="_blank" class="externalSiteLink">JSON</a> (JavaScript Object Notation) format.</p>
+		
+		<p><b>DEVELOPERS:</b> <a href="http://www.tomkidding.com" target="_blank" class="externalSiteLink">Chris van Rensburg</a></p>
+		
+		<p>The <code>Uize.Json</code> module provides versatile serializaton options to permit a wide array of results, from prettified JSON (with linebreaks, indentation, key sorting, etc.) to compact (efficient for AJAX communication).</p>
+		
+		<a name="1_1"></a>
+		<h2 class="heading2" title="1. Introduction -&gt; 1.1. Examples"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. Examples">1</a>. </span>Examples</h2>
+		<div class="contents2">
+			<p>The following example pages are good showcases for the <code>Uize.Json</code> module...</p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><a href="../examples/json-prettifier.html">JSON Prettifier</a> - Take ugly / unreadable JSON data and prettify it by re-serializing it. Make it look exactly how you want with the many serialization options provided.</td></tr>
+			</table>
+			<p><span class="allCaps">SEARCH FOR EXAMPLES</span></p>
+			
+			<p>Use the link below to search for example pages on the <b>uize.com</b> Web site that reference the <code>Uize.Json</code> module...</p>
+			
+			<p><a href="http://www.google.com/search?hl=en&safe=off&domains=uize.com%2Fexamples&sitesearch=uize.com%2Fexamples&q=%22Uize.Json%22" target="_blank" class="externalSiteLink">SEARCH</a></p>
+		</div>
+		
+		<a name="1_2"></a>
+		<h2 class="heading2" title="1. Introduction -&gt; 1.2. Implementation Info"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>. </span>Implementation Info</h2>
+		<div class="contents2">
+			<p>The <code>Uize.Json</code> module defines the <code>Uize.Json</code> package under the <code><a href="../reference/Uize.html">Uize</a></code> namespace.</p>
+			
+			<a name="1_2_1"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.1. Features Introduced in This Module"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>.<a href="#1_2_1" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.1. Features Introduced in This Module">1</a>. </span>Features Introduced in This Module</h3>
+			<div class="contents3">
+				<p>The features listed in this section have been introduced in this module.</p>
+				
+				<p><span class="allCaps">STATIC METHODS</span></p>
+				
+				<p><code><a href="#2_1">Uize.Json.from</a></code> | <code><a href="#2_2">Uize.Json.to</a></code></p>
+				
+				<p><span class="allCaps">STATIC PROPERTIES</span></p>
+				
+				<p><code><a href="#3_1">Uize.Json.encodingOptionsPresets</a></code> | <code><a href="#3_2">Uize.Json.moduleName</a></code></p>
+			</div>
+			
+			<a name="1_2_2"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.2. Features Overridden in This Module"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>.<a href="#1_2_2" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.2. Features Overridden in This Module">2</a>. </span>Features Overridden in This Module</h3>
+			<div class="contents3">
+				<p>No features have been overridden in this module.</p>
+			</div>
+			
+			<a name="1_2_3"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.3. Features Inherited From Other Modules"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>.<a href="#1_2_3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.3. Features Inherited From Other Modules">3</a>. </span>Features Inherited From Other Modules</h3>
+			<div class="contents3">
+				<p>This module has no inherited features.</p>
+			</div>
+			
+			<a name="1_2_4"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.4. Modules Directly Under This Namespace"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>.<a href="#1_2_4" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.4. Modules Directly Under This Namespace">4</a>. </span>Modules Directly Under This Namespace</h3>
+			<div class="contents3">
+				<p>There are no modules directly under this namespace.</p>
+			</div>
+			
+			<a name="1_2_5"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.5. Unit Tests"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>.<a href="#1_2_5" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.5. Unit Tests">5</a>. </span>Unit Tests</h3>
+			<div class="contents3">
+				<p>There is no dedicated unit tests module for the <code>Uize.Json</code> module.</p>
+			</div>
+		</div>
+	</div>
+	
+	<a name="2"></a>
+	<h1 class="heading1" title="2. Static Methods"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>. </span>Static Methods</h1>
+	<div class="contents1">
+		<a name="2_1"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.1. Uize.Json.from"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_1" title="2. Static Methods -&gt; 2.1. Uize.Json.from">1</a>. </span>Uize.Json.from</h2>
+		<div class="contents2">
+			<p>Returns a value of any type, being the result of evaluating the expression specified by the <code>jsonSTR</code> parameter.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">valueANYTYPE = Uize.Json.from (jsonSTR);
+</pre>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#2_2">Uize.Json.to</a></code> static method</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_2"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.2. Uize.Json.to"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_2" title="2. Static Methods -&gt; 2.2. Uize.Json.to">2</a>. </span>Uize.Json.to</h2>
+		<div class="contents2">
+			<p>Serializes the specified value to a string of JSON format. The value to serialize can be a string, boolean, number, object, array, null, undefined, or a regular expression.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">jsonSTR = Uize.Json.to (valueANYTYPE);
+</pre>
+			
+			<p><span class="allCaps">VARIATION 1</span></p>
+			
+			
+<pre class="sample-code">jsonSTR = Uize.Json.to (valueANYTYPE,serializationOptionsOBJ);
+</pre>
+			
+			<p>When the optional <code>serializationOptionsOBJ</code> parameter is specified, then the way in which the value is serialized to JSON format can be configured to produce wide ranging results, from prettified to compact. The value of the <code>serializationOptionsOBJ</code> parameter should be an object, with properties as follows...</p>
+			
+			<p><span class="allCaps">SERIALIZATION OPTIONS</span></p>
+			
+			
+<pre class="sample-code">{
+  indentChars:indentCharsSTR,         // optional, defaults to one tab
+  linebreakChars:linebreakCharsSTR,   // optional, defaults to one linebreak
+  quoteChar:quoteCharSTR,             // optional, defaults to a single quote
+  keyDelimiter:keyDelimiterSTR,       // optional, defaults to colon without spaces
+  padKeys:padKeysBOOL,                // optional, defaults to false
+  keyAlign:keyAlignSTR,               // 'left' (default) | 'center' | 'right'
+  whenToQuoteKeys:whenToQuoteKeysSTR, // 'auto' (default) | 'auto all' | 'always'
+  sortKeys:sortKeysBOOL               // optional, defaults to false
+}
+</pre>
+			
+			<a name="2_2_1"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.2. Uize.Json.to -&gt; 2.2.1. indentChars"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_2" title="2. Static Methods -&gt; 2.2. Uize.Json.to">2</a>.<a href="#2_2_1" title="2. Static Methods -&gt; 2.2. Uize.Json.to -&gt; 2.2.1. indentChars">1</a>. </span>indentChars</h3>
+			<div class="contents3">
+				<p>A string, specifying the characters that should be used to indent key/value pairs of objects and elements of arrays. Defaults to one tab. Specify an empty string for compact serialization.</p>
+			</div>
+			
+			<a name="2_2_2"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.2. Uize.Json.to -&gt; 2.2.2. linebreakChars"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_2" title="2. Static Methods -&gt; 2.2. Uize.Json.to">2</a>.<a href="#2_2_2" title="2. Static Methods -&gt; 2.2. Uize.Json.to -&gt; 2.2.2. linebreakChars">2</a>. </span>linebreakChars</h3>
+			<div class="contents3">
+				<p>A string, specifying the characters to be used to separate key/value pairs of objects and elements of arrays. Defaults to a single linebreak. Specify an empty string for compact serialization.</p>
+			</div>
+			
+			<a name="2_2_3"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.2. Uize.Json.to -&gt; 2.2.3. quoteChar"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_2" title="2. Static Methods -&gt; 2.2. Uize.Json.to">2</a>.<a href="#2_2_3" title="2. Static Methods -&gt; 2.2. Uize.Json.to -&gt; 2.2.3. quoteChar">3</a>. </span>quoteChar</h3>
+			<div class="contents3">
+				<p>A string, specifying the character to be used when quoting string literals for string values or object property names (keys) that require quoting. Defaults to a single quote character.</p>
+			</div>
+			
+			<a name="2_2_4"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.2. Uize.Json.to -&gt; 2.2.4. keyDelimiter"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_2" title="2. Static Methods -&gt; 2.2. Uize.Json.to">2</a>.<a href="#2_2_4" title="2. Static Methods -&gt; 2.2. Uize.Json.to -&gt; 2.2.4. keyDelimiter">4</a>. </span>keyDelimiter</h3>
+			<div class="contents3">
+				<p>A string, specifying the characters to be used when separating keys from values for serializing objects. Defaults to a colon without padding spaces around it. Add your own spaces to order.</p>
+			</div>
+			
+			<a name="2_2_5"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.2. Uize.Json.to -&gt; 2.2.5. padKeys"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_2" title="2. Static Methods -&gt; 2.2. Uize.Json.to">2</a>.<a href="#2_2_5" title="2. Static Methods -&gt; 2.2. Uize.Json.to -&gt; 2.2.5. padKeys">5</a>. </span>padKeys</h3>
+			<div class="contents3">
+				<p>A boolean, specifying whether or not keys should be padded with spaces so that all keys occupy the same number of characters and so that the <code><a href="#2_2_4">keyDelimiter</a></code> character lines up vertically. Defaults to <code>false</code>. See the companion <code><a href="#2_2_6">keyAlign</a></code> property.</p>
+			</div>
+			
+			<a name="2_2_6"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.2. Uize.Json.to -&gt; 2.2.6. keyAlign"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_2" title="2. Static Methods -&gt; 2.2. Uize.Json.to">2</a>.<a href="#2_2_6" title="2. Static Methods -&gt; 2.2. Uize.Json.to -&gt; 2.2.6. keyAlign">6</a>. </span>keyAlign</h3>
+			<div class="contents3">
+				<p>A string, specifying whether the keys should be aligned left, center, or right when padding keys. Only applicable when the companion <code><a href="#2_2_5">padKeys</a></code> property is set to <code>true</code>.</p>
+			</div>
+			
+			<a name="2_2_7"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.2. Uize.Json.to -&gt; 2.2.7. whenToQuoteKeys"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_2" title="2. Static Methods -&gt; 2.2. Uize.Json.to">2</a>.<a href="#2_2_7" title="2. Static Methods -&gt; 2.2. Uize.Json.to -&gt; 2.2.7. whenToQuoteKeys">7</a>. </span>whenToQuoteKeys</h3>
+			<div class="contents3">
+				<p>A string, specifying under what conditions object property names (keys) should be quoted. The default value of <code>'auto'</code> causes individual keys to only be quoted when necessary. The value of <code>'auto all'</code> causes all keys of the same object to be quoted if any of the keys needs to be quoted. The value of <code>'always'</code> causes all keys to always be quoted.</p>
+			</div>
+			
+			<a name="2_2_8"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.2. Uize.Json.to -&gt; 2.2.8. sortKeys"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_2" title="2. Static Methods -&gt; 2.2. Uize.Json.to">2</a>.<a href="#2_2_8" title="2. Static Methods -&gt; 2.2. Uize.Json.to -&gt; 2.2.8. sortKeys">8</a>. </span>sortKeys</h3>
+			<div class="contents3">
+				<p>A boolean, specifying whether or not object property names (keys) should be sorted ASCIIbetically when serializing objects. Defaults to <code>false</code>.</p>
+			</div>
+			
+			<p><span class="allCaps">EXAMPLES</span></p>
+			
+			<p>For the following examples, let's assume that we have a JavaScript object defined as follows...</p>
+			
+			
+<pre class="sample-code">var myObject = {
+  someNumber:123.456,
+  aBoolean:true,
+  'value is a regular expression':/\d+/gim,
+  123.456:'it\'s a floating point key!',
+  '~!@#$%^&amp;*()_+':1,
+  'a key with a double quote "':1,
+  'a key with a single quote \'':1
+};
+</pre>
+			
+			<p><span class="allCaps">EXAMPLE 1</span></p>
+			
+			<p>The following call to <code><a href="#2_2">Uize.Json.to</a></code>...</p>
+			
+			
+<pre class="sample-code">Uize.Json.to (myObject,{keyDelimiter:' : '});
+</pre>
+			
+			<p>...would produce the output...</p>
+			
+			
+<pre class="sample-code">{
+  someNumber : 123.456,
+  aBoolean : true,
+  'value is a regular expression' : /\d+/gim,
+  123.456 : 'it\'s a floating point key!',
+  '~!@#$%^&amp;*()_+' : 1,
+  'a key with a double quote "' : 1,
+  'a key with a single quote \'' : 1
+}
+</pre>
+			
+			<p><span class="allCaps">EXAMPLE 2</span></p>
+			
+			<p>The following call to <code><a href="#2_2">Uize.Json.to</a></code>...</p>
+			
+			
+<pre class="sample-code">Uize.Json.to (myObject,{keyDelimiter:' : ',padKeys:true,keyAlign:'left'});
+</pre>
+			
+			<p>...would produce the output...</p>
+			
+			
+<pre class="sample-code">{
+  someNumber                      : 123.456,
+  aBoolean                        : true,
+  'value is a regular expression' : /\d+/gim,
+  123.456                         : 'it\'s a floating point key!',
+  '~!@#$%^&amp;*()_+'                 : 1,
+  'a key with a double quote "'   : 1,
+  'a key with a single quote \''  : 1
+}
+</pre>
+			
+			<p><span class="allCaps">EXAMPLE 3</span></p>
+			
+			<p>The following call to <code><a href="#2_2">Uize.Json.to</a></code>...</p>
+			
+			
+<pre class="sample-code">Uize.Json.to (myObject,{keyDelimiter:' : ',padKeys:true,keyAlign:'right'});
+</pre>
+			
+			<p>...would produce the output...</p>
+			
+			
+<pre class="sample-code">{
+                       someNumber : 123.456,
+                         aBoolean : true,
+  'value is a regular expression' : /\d+/gim,
+                          123.456 : 'it\'s a floating point key!',
+                  '~!@#$%^&amp;*()_+' : 1,
+    'a key with a double quote "' : 1,
+   'a key with a single quote \'' : 1
+}
+</pre>
+			
+			<p><span class="allCaps">EXAMPLE 4</span></p>
+			
+			<p>The following call to <code><a href="#2_2">Uize.Json.to</a></code>...</p>
+			
+			
+<pre class="sample-code">Uize.Json.to (myObject,{keyDelimiter:' : ',whenToQuoteKeys:'auto all'});
+</pre>
+			
+			<p>...would produce the output...</p>
+			
+			
+<pre class="sample-code">{
+  'someNumber' : 123.456,
+  'aBoolean' : true,
+  'value is a regular expression' : /\d+/gim,
+  '123.456' : 'it\'s a floating point key!',
+  '~!@#$%^&amp;*()_+' : 1,
+  'a key with a double quote "' : 1,
+  'a key with a single quote \'' : 1
+}
+</pre>
+			
+			<p><span class="allCaps">EXAMPLE 5</span></p>
+			
+			<p>The following call to <code><a href="#2_2">Uize.Json.to</a></code>...</p>
+			
+			
+<pre class="sample-code">Uize.Json.to (myObject,{keyDelimiter:' : ',quoteChar:'"'});
+</pre>
+			
+			<p>...would produce the output...</p>
+			
+			
+<pre class="sample-code">{
+  someNumber : 123.456,
+  aBoolean : true,
+  "value is a regular expression" : /\d+/gim,
+  123.456 : "it's a floating point key!",
+  "~!@#$%^&amp;*()_+" : 1,
+  "a key with a double quote \"" : 1,
+  "a key with a single quote '" : 1
+}
+</pre>
+			
+			<p><span class="allCaps">EXAMPLE 6</span></p>
+			
+			<p>The following call to <code><a href="#2_2">Uize.Json.to</a></code>...</p>
+			
+			
+<pre class="sample-code">Uize.Json.to (myObject,{keyDelimiter:' : ',sortKeys:true});
+</pre>
+			
+			<p>...would produce the output...</p>
+			
+			
+<pre class="sample-code">{
+  123.456 : 'it\'s a floating point key!',
+  'a key with a double quote "' : 1,
+  'a key with a single quote \'' : 1,
+  aBoolean : true,
+  someNumber : 123.456,
+  'value is a regular expression' : /\d+/gim,
+  '~!@#$%^&amp;*()_+' : 1
+}
+</pre>
+			
+			<p><span class="allCaps">VARIATION 2</span></p>
+			
+			
+<pre class="sample-code">jsonSTR = Uize.Json.to (valueANYTYPE,'mini');
+</pre>
+			
+			<p>When the special string value <code>'mini'</code> is specified in place of the <code>serializationOptionsOBJ</code> parameter, then serialization options are used that will produce a compact serialization of the specified value. This is equivalent to specifying the value <code>{indentChars:'',linebreakChars:''}</code> for the <code>serializationOptionsOBJ</code> parameter.</p>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#2_1">Uize.Json.from</a></code> static method</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+	</div>
+	
+	<a name="3"></a>
+	<h1 class="heading1" title="3. Static Properties"><span class="headingNumber"><a href="#3" title="3. Static Properties">3</a>. </span>Static Properties</h1>
+	<div class="contents1">
+		<a name="3_1"></a>
+		<h2 class="heading2" title="3. Static Properties -&gt; 3.1. Uize.Json.encodingOptionsPresets"><span class="headingNumber"><a href="#3" title="3. Static Properties">3</a>.<a href="#3_1" title="3. Static Properties -&gt; 3.1. Uize.Json.encodingOptionsPresets">1</a>. </span>Uize.Json.encodingOptionsPresets</h2>
+		<div class="contents2">
+			<a name="3_1_1"></a>
+			<h3 class="heading3" title="3. Static Properties -&gt; 3.1. Uize.Json.encodingOptionsPresets -&gt; 3.1.1. Available Presets"><span class="headingNumber"><a href="#3" title="3. Static Properties">3</a>.<a href="#3_1" title="3. Static Properties -&gt; 3.1. Uize.Json.encodingOptionsPresets">1</a>.<a href="#3_1_1" title="3. Static Properties -&gt; 3.1. Uize.Json.encodingOptionsPresets -&gt; 3.1.1. Available Presets">1</a>. </span>Available Presets</h3>
+			<div class="contents3">
+				<a name="3_1_1_1"></a>
+				<h4 class="heading4" title="3. Static Properties -&gt; 3.1. Uize.Json.encodingOptionsPresets -&gt; 3.1.1. Available Presets -&gt; 3.1.1.1. Uize.Json.encodingOptionsPresets.mini"><span class="headingNumber"><a href="#3" title="3. Static Properties">3</a>.<a href="#3_1" title="3. Static Properties -&gt; 3.1. Uize.Json.encodingOptionsPresets">1</a>.<a href="#3_1_1" title="3. Static Properties -&gt; 3.1. Uize.Json.encodingOptionsPresets -&gt; 3.1.1. Available Presets">1</a>.<a href="#3_1_1_1" title="3. Static Properties -&gt; 3.1. Uize.Json.encodingOptionsPresets -&gt; 3.1.1. Available Presets -&gt; 3.1.1.1. Uize.Json.encodingOptionsPresets.mini">1</a>. </span>Uize.Json.encodingOptionsPresets.mini</h4>
+				<div class="contents4">
+					<p>document...</p>
+				</div>
+				
+				<a name="3_1_1_2"></a>
+				<h4 class="heading4" title="3. Static Properties -&gt; 3.1. Uize.Json.encodingOptionsPresets -&gt; 3.1.1. Available Presets -&gt; 3.1.1.2. Uize.Json.encodingOptionsPresets.miniStrict"><span class="headingNumber"><a href="#3" title="3. Static Properties">3</a>.<a href="#3_1" title="3. Static Properties -&gt; 3.1. Uize.Json.encodingOptionsPresets">1</a>.<a href="#3_1_1" title="3. Static Properties -&gt; 3.1. Uize.Json.encodingOptionsPresets -&gt; 3.1.1. Available Presets">1</a>.<a href="#3_1_1_2" title="3. Static Properties -&gt; 3.1. Uize.Json.encodingOptionsPresets -&gt; 3.1.1. Available Presets -&gt; 3.1.1.2. Uize.Json.encodingOptionsPresets.miniStrict">2</a>. </span>Uize.Json.encodingOptionsPresets.miniStrict</h4>
+				<div class="contents4">
+					<p>document...</p>
+				</div>
+				
+				<a name="3_1_1_3"></a>
+				<h4 class="heading4" title="3. Static Properties -&gt; 3.1. Uize.Json.encodingOptionsPresets -&gt; 3.1.1. Available Presets -&gt; 3.1.1.3. Uize.Json.encodingOptionsPresets.nice"><span class="headingNumber"><a href="#3" title="3. Static Properties">3</a>.<a href="#3_1" title="3. Static Properties -&gt; 3.1. Uize.Json.encodingOptionsPresets">1</a>.<a href="#3_1_1" title="3. Static Properties -&gt; 3.1. Uize.Json.encodingOptionsPresets -&gt; 3.1.1. Available Presets">1</a>.<a href="#3_1_1_3" title="3. Static Properties -&gt; 3.1. Uize.Json.encodingOptionsPresets -&gt; 3.1.1. Available Presets -&gt; 3.1.1.3. Uize.Json.encodingOptionsPresets.nice">3</a>. </span>Uize.Json.encodingOptionsPresets.nice</h4>
+				<div class="contents4">
+					<p>document...</p>
+				</div>
+				
+				<a name="3_1_1_4"></a>
+				<h4 class="heading4" title="3. Static Properties -&gt; 3.1. Uize.Json.encodingOptionsPresets -&gt; 3.1.1. Available Presets -&gt; 3.1.1.4. Uize.Json.encodingOptionsPresets.strict"><span class="headingNumber"><a href="#3" title="3. Static Properties">3</a>.<a href="#3_1" title="3. Static Properties -&gt; 3.1. Uize.Json.encodingOptionsPresets">1</a>.<a href="#3_1_1" title="3. Static Properties -&gt; 3.1. Uize.Json.encodingOptionsPresets -&gt; 3.1.1. Available Presets">1</a>.<a href="#3_1_1_4" title="3. Static Properties -&gt; 3.1. Uize.Json.encodingOptionsPresets -&gt; 3.1.1. Available Presets -&gt; 3.1.1.4. Uize.Json.encodingOptionsPresets.strict">4</a>. </span>Uize.Json.encodingOptionsPresets.strict</h4>
+				<div class="contents4">
+					<p>document...</p>
+				</div>
+			</div>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_2"></a>
+		<h2 class="heading2" title="3. Static Properties -&gt; 3.2. Uize.Json.moduleName"><span class="headingNumber"><a href="#3" title="3. Static Properties">3</a>.<a href="#3_2" title="3. Static Properties -&gt; 3.2. Uize.Json.moduleName">2</a>. </span>Uize.Json.moduleName</h2>
+		<div class="contents2">
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+	</div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

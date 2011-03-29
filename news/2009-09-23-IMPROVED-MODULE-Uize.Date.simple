@@ -1,0 +1,52 @@
+The =Uize.Date= module has been improved with the addition of the =Uize.Date.format=, =Uize.Date.getRangeAround=, and =Uize.Date.inRange= static methods, and an improved implementation for the =Uize.Date.resolve= static method.
+
+New Uize.Date.format Static Method
+	The versatile new =Uize.Date.format= static method provides a way to format a date in a wide variety of different ways.
+
+	EXAMPLES
+	..................................................................
+	var date = 'Thu Sep 10 2009 18:19:25';
+
+	Uize.Date.format (date,'{YY}-{MM}-{DD}');
+		// RESULT : 08-02-29
+
+	Uize.Date.format (date,'{YYYY}/{MM}/{DD}');
+		// RESULT : 2008/02/29
+
+	Uize.Date.format (date,'{dayNo}{dayNoSuffix} {monthName} {YYYY}');
+		// RESULT : 29th February 2009
+	..................................................................
+
+New Uize.Date.getRangeAround Static Method
+	The new =Uize.Date.getRangeAround= static method provides a way to get a "neat" date range of a specified range size around a specified date.
+
+	This method can be used to obtain the date range for the week around a specified date, the month around a date, the quarter around a date, the year around a date, etc. The date range is specified by a =dateRangeOBJ= type value, with =minValue= and =maxValue= properties indicating the start date and end date of the date range, respectively.
+
+	EXAMPLE
+	..............................................................
+	Uize.Date.getRangeAround ('Thu Sep 10 2009 18:19:25','month');
+	// minValue: Tue Sep 01 2009 00:00:00 (and 0 milliseconds)
+	// maxValue: Wed Sep 30 2009 23:59:59 (and 999 milliseconds)
+	..............................................................
+
+New Uize.Date.inRange Static Method
+	The new =Uize.Date.inRange= static method returns a boolean, indicating whether or not the specified date is within the specified date range.
+
+	EXAMPLE
+	..................................................................
+	Uize.Date.inRange (             // produces the result false
+		'2009/09/23 00:00:00',
+		{minValue:'2009/09/23 00:00:01',maxValue:'2009/09/23 23:59:59'}
+	);
+	..................................................................
+
+Improved Uize.Date.resolve Static Method
+	The =Uize.Date.resolve= static method has been improved with the addition of a new optional =defaultDateANYTYPE= parameter which lets you specify the default value to be used for when the date value being resolved is =''= (empty string), =null=, or =undefined=.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-09-23 - IMPROVED MODULE: Uize.Date
+....................................................................................

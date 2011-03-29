@@ -1,0 +1,53 @@
+{
+	alwaysBuild:false,
+	buildFolderPath:'',
+	buildSequence:[
+		/* IMPORTANT:
+			The order of execution of these build scripts is important, informed by the following criteria...
+
+			- _build-jst-modules.js must execute before _uize-site-build-widget-pages.js, _build-pages-from-simple-doc.js, _uize-site-build-pages-from-source-code.js, and _build-scrunched.js, because the latter three build scripts process JavaScript modules, and _build-jst-modules.js builds JavaScript modules from .js.jst files
+
+			- _build-pages-from-simple-doc.js must execute before _uize-site-build-index-pages.js, because _uize-site-build-index-pages.js builds the UizeDotCom.ModulesTree module based upon the module reference pages it finds in the reference folder, and these reference pages are built by _build-pages-from-simple-doc.js
+
+			- _uize-site-build-index-pages.js must execute before _uize-site-build-pages-from-source-code.js and _build-scrunched.js, because the latter scripts process JavaScript modules, and _uize-site-build-index-pages.js builds a JavaScript module containing a list of all the example pages in a JSON data structure
+
+			- _uize-site-build-index-pages.js must execute before _build-pages-from-simple-data.js, because _uize-site-build-index-pages.js builds the UizeDotCom.ModulesTree module, which is required by the UizeDotCom.SiteMap module, which is in turn required by _build-pages-from-simple-data.js when it builds the directory.html page from directory.html.simpledata
+
+			- _uize-site-build-index-pages.js must execute after _build-pages-from-simple-doc.js, because _uize-site-build-index-pages.js builds index pages for explainers and module references, which are built by _build-pages-from-simple-doc.js
+
+			- _uize-site-build-sotu.js must execute after _build-jst-modules.js, because _uize-site-build-sotu.js needs to know the file sizes for the JavaScript module source code, and because some JavaScript modules are built by _build-jst-modules.js. _uize-site-build-sotu.js must execute after _build-scrunched.js, because _uize-site-build-sotu.js needs to know the scrunched file sizes for the JavaScript modules, since this information is listed on the module details page
+
+			If, at some point in the future, things get jammed up in a catch 22 situation, then one or more of these build scripts may have to get broken up further into more atomic build scripts, so that the order of some build tasks can be changed.
+		*/
+		'_build-jst-modules.js',
+		'_uize-site-build-widget-pages.js',
+		'_build-pages-from-simple-doc.js',
+		'_uize-site-build-index-pages.js',
+		'_build-pages-from-simple-data.js',
+		'_uize-site-build-pages-from-source-code.js',
+		'_build-scrunched.js',
+		'_uize-site-build-sotu.js',
+		'_uize-site-build-code-sitemap.js'
+	],
+	doNotEnter:/\\(css|images|OLD|photos|source-code|Uize.*)$/,
+	dryRun:false,
+	moduleFolderPath:'js\\~source',
+	scrunchedHeadComments:{
+		Uize:
+			'/*\n' +
+				'\tUIZE JAVASCRIPT FRAMEWORK {buildDate}\n' +
+				'\n' +
+				'\thttp://www.uize.com/reference/{moduleName}.html\n' +
+				'\tAvailable under MIT License or GNU General Public License -- http://www.uize.com/license.html\n' +
+			'*/\n',
+		UizeDotCom:
+			'/*\n' +
+				'\tUIZE Web Site {buildDate}\n' +
+				'\n' +
+				'\thttp://www.uize.com/reference/{moduleName}.html\n' +
+				'\tAvailable under MIT License or GNU General Public License -- http://www.uize.com/license.html\n' +
+			'*/\n'
+	},
+	sourceFolderName:'~source'
+}
+

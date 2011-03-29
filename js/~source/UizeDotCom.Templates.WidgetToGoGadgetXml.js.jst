@@ -1,0 +1,28 @@
+<%@
+	input ({
+		title:'string',
+		urls:'object',
+		dimensions:'object',
+		description:'object',
+		author:'object',
+		images:'object'
+	});
+%><?xml version="1.0" encoding="UTF-8"?>
+<Module>
+	<ModulePrefs
+		title="<% .title -> tagAttributeValue %>"
+		title_url="<% .urls.homepage -> tagAttributeValue %>"
+		description="<% .description.short -> tagAttributeValue %>"
+		author="<%= (input.author.name.first + ' ' + input.author.name.last) -> tagAttributeValue %>"
+		author_email="<% .author.email -> tagAttributeValue %>"
+		author_location="<% .author.location -> tagAttributeValue %>"
+		author_affiliation="<% .author.affiliation -> tagAttributeValue %>"
+		height="<% .dimensions.webHeight %>"
+		screenshot="<% .images.screenshot -> tagAttributeValue %>"
+		thumbnail="<% .images.thumbnail120x60 -> tagAttributeValue %>"
+	/>
+	<Content
+		type="url"
+		href="<% .urls.web -> tagAttributeValue %>"
+	/>
+</Module>

@@ -1,0 +1,11 @@
+Documentation has been added explaining internationalization and localization techniques in the context of the UIZE JavaScript Framework.
+
+The new documentation discusses such topics as: the =localize= instance method, the =localized= set-get property, localization and the inheritance tree, marshalling localized strings, and static localized strings. [[../explainers/javascript-localization.html][READ IT NOW]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-02-02 - NEW DOCUMENTATION: JavaScript Localization
+....................................................................................

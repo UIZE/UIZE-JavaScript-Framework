@@ -1,0 +1,171 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Tree List From JSON - HTML Source Code | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework HTML example source code"/>
+	<meta name="description" content="This is the source code for the Tree List From JSON example"/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../../css/page.css"/>
+	<link rel="stylesheet" href="../../css/page.source.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../../index.html" title="UIZE JavaScript Framework home"></a>
+	SOURCE CODE: Tree List From JSON
+	<div id="page-actions" class="pageActions">
+		<a href="../tree-list.html" class="buttonLink">VIEW EXAMPLE</a>
+	</div>
+</h1>
+
+<pre>
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+&lt;head&gt;
+  &lt;title&gt;Tree List From JSON | JavaScript Examples | UIZE JavaScript Framework&lt;/title&gt;
+  &lt;meta name="keywords" content="featured widget menu Uize.Widget.Tree.List"/&gt;
+  &lt;meta name="description" content="See a demo of a JavaScript expandable / collapsible tree list widget, that can be easily built from a JSON object and can even be dynamically updated."/&gt;
+  &lt;link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/&gt;
+  &lt;link rel="stylesheet" href="../css/page.css"/&gt;
+  &lt;link rel="stylesheet" href="../css/page.example.css"/&gt;
+  &lt;link rel="stylesheet" href="../css/widget.tree.list.css"/&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+&lt;script type="text/javascript" src="../js/Uize.js"&gt;&lt;/script&gt;
+
+&lt;h1 class="document-title"&gt;
+  &lt;a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"&gt;&lt;/a&gt;
+  &lt;a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow"&gt;JAVASCRIPT EXAMPLES&lt;/a&gt;
+  Tree List From JSON
+  &lt;div id="page-actions" class="pageActions"&gt;
+    &lt;a href="source-code/tree-list.html" class="buttonLink"&gt;SOURCE&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/h1&gt;
+
+&lt;!-- load in the JavaScript libraries that define the animals and plants hierarchical lists --&gt;
+
+&lt;script type="text/javascript" src="js/animals.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="js/plants.js"&gt;&lt;/script&gt;
+
+&lt;div class="main"&gt;
+  &lt;div style="margin:auto; width:752px;"&gt;
+    &lt;div id="page_treeList-shell" class="contents-tree-shell" style="width:200px; height:460px; float:left; overflow:auto; margin-right:10px; border:1px solid #9aa; padding:10px; margin-left:20px; background:#c9cfd6 url(../images/tree-menu-bg.gif) repeat-x left top;
+"&gt;&lt;/div&gt;
+    &lt;div style="width:500px; float:left;"&gt;
+      &lt;!-- explanation copy --&gt;
+
+      &lt;div class="explanation"&gt;
+        &lt;p&gt;In this example, an instance of &lt;a href="../reference/Uize.Widget.Tree.List.html"&gt;&lt;code&gt;Uize.Widget.Tree.List&lt;/code&gt;&lt;/a&gt; is instantiated to produce a multi-level contents tree. The markup for the list is generated when the widget is wired up. The structure for the markup is driven by a JSON data structure that is supplied to the &lt;code&gt;items&lt;/code&gt; set-get property of the widget. This data structure is purely for demonstration purposes, so none of the items have active links specified (ie. clicking does nothing).&lt;/p&gt;
+
+        &lt;p&gt;If you hold down the shift key when clicking to expand a level, you can expand the contents of that level to only one level deep. This is convenient when trying to expand a tree bit by bit. Holding down the ctrl key when expanding a level will expand the contents of that level fully. Whenever you collapse a level and expand it again later, its contents are restored to the way they were before you collapsed the level.&lt;/p&gt;
+
+        &lt;p&gt;Below are some links that execute snippets of code to demonstrate the programmatic interface of the widget.&lt;/p&gt;
+      &lt;/div&gt;
+
+      &lt;!-- programmatic interface examples --&gt;
+
+      &lt;div class="programmaticInterface" style="margin-top:0;"&gt;
+        &lt;ul&gt;
+          &lt;li&gt;setExpandedDepth
+            &lt;ul&gt;
+              &lt;li&gt;&lt;a href="javascript://" class="linkedJs"&gt;treeList.setExpandedDepth (0)&lt;/a&gt;&lt;/li&gt;
+              &lt;li&gt;&lt;a href="javascript://" class="linkedJs"&gt;treeList.setExpandedDepth (1)&lt;/a&gt;&lt;/li&gt;
+              &lt;li&gt;&lt;a href="javascript://" class="linkedJs"&gt;treeList.setExpandedDepth (2)&lt;/a&gt;&lt;/li&gt;
+              &lt;li&gt;&lt;a href="javascript://" class="linkedJs"&gt;treeList.setExpandedDepth (3)&lt;/a&gt;&lt;/li&gt;
+              &lt;li&gt;&lt;a href="javascript://" class="linkedJs"&gt;treeList.setExpandedDepth (4)&lt;/a&gt;&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;
+            &lt;a href="javascript://" class="linkedJs"&gt;treeList.set ({items:animalsAndPlants})&lt;/a&gt;&lt;br/&gt;
+            &lt;ul&gt;
+              &lt;li&gt;&lt;a href="javascript://" class="linkedJs"&gt;treeList.collapseAllBut (['Animals','Wild Animals','Cats'])&lt;/a&gt;&lt;/li&gt;
+              &lt;li&gt;&lt;a href="javascript://" class="linkedJs"&gt;treeList.collapseAllBut (['Plants','Bushes and Shrubs','Hedges'])&lt;/a&gt;&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;
+            &lt;a href="javascript://" class="linkedJs"&gt;treeList.set ({items:animals})&lt;/a&gt;&lt;br/&gt;
+            &lt;ul&gt;
+              &lt;li&gt;&lt;a href="javascript://" class="linkedJs"&gt;treeList.collapseAllBut (['Pets','Dogs','Large Breeds'])&lt;/a&gt;&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;
+            &lt;a href="javascript://" class="linkedJs"&gt;treeList.set ({items:plants})&lt;/a&gt;&lt;br/&gt;
+            &lt;ul&gt;
+              &lt;li&gt;&lt;a href="javascript://" class="linkedJs"&gt;treeList.collapseAllBut (['Trees','Deciduous'])&lt;/a&gt;&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div style="clear:left;"&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- JavaScript code to create tree list instance and insert and wire its UI --&gt;
+
+&lt;script type="text/javascript"&gt;
+
+Uize.module ({
+  required:[
+    'UizeDotCom.Page.Example.library',
+    'UizeDotCom.Page.Example',
+    'Uize.Widget.Tree.List',
+    'Uize.Node'
+  ],
+  builder:function () {
+    /*** create the example page widget ***/
+      var page = window.page = new UizeDotCom.Page.Example ({evaluator:function (code) {eval (code)}});
+
+    /*** add the tree list child widget ***/
+      var
+        animalsAndPlants = [
+          {title:'Animals',items:animals},
+          {title:'Plants',items:plants}
+        ],
+        treeList = page.addChild (
+          'treeList',
+          Uize.Widget.Tree.List,
+          {
+            items:animalsAndPlants,
+            alwaysLinkHeadings:true,
+            linksAlwaysToggleExpanded:true,
+            levelClasses:['contents-tree-level1','contents-tree-level2','contents-tree-level3','contents-tree-level4'],
+            iconTheme:'arrows-black',
+            iconBgColor:'',
+            spaceBeforeText:2,
+            built:false
+          }
+        )
+      ;
+
+    /*** wire up the page widget ***/
+      page.wireUi ();
+  }
+});
+
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+
+</pre>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.library',
+		'UizeDotCom.Page'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page).wireUi ()}
+});
+
+</script>
+
+</body></html>

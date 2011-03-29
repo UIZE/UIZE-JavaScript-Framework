@@ -1,0 +1,11 @@
+The new =Uize.Data.isEmpty= method (implemented in the =Uize.Data= module) returns a boolean value, indicating whether or not the specified object or array is empty.
+
+This method will return =true= for the values ={}=, =[]=, =''=, =0=, =false=, =null=, =undefined=, =NaN=, and will return =false= for the values ={blah:1}=, =['blah']=, ='blah'=, =1=, =true=, =/^.+$/=, and =function () {}=.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-02-25 - NEW METHOD: Uize.Data.isEmpty
+....................................................................................

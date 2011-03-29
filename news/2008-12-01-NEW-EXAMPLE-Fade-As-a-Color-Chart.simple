@@ -1,0 +1,13 @@
+The new [[../examples/fade-as-a-color-chart.html][Fade As a Color Chart]] example illustrates, by way of a color chart representation, how the acceleration and deceleration set-get properties of the Uize.Fade class shape a fade's curve over the course of its progress.
+
+In the example, a color is being faded from one to another over a series of swatches, from left to right. The color chart lets you visualize how different acceleration and deceleration settings for a fade could be used to generate color gradients with varying characteristics.
+
+[[../examples/fade-as-a-color-chart.html][CHECK IT OUT]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2008-12-01 - NEW EXAMPLE: Fade As a Color Chart
+....................................................................................

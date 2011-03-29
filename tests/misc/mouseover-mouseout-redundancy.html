@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>TEST: mouseover/mouseout Redundancy | UIZE JavaScript Framework</title>
+	<style type="text/css">
+		img {
+			width:100px;
+			height:100px;
+			border:1px solid #000;
+		}
+	</style>
+</head>
+<body>
+
+<script type="text/javascript" src="../../js/Uize.Node.js"></script>
+
+<table id="testNode" style="background:#fff; border:15px solid #800;" cellspacing="0" cellpadding="0"><tr><td>
+<img id="row0cell0" src="../../images/blank.gif" alt=""/><img id="row0cell1" src="../../images/blank.gif" alt=""/><img id="row0cell2" src="../../images/blank.gif" alt=""/><br/>
+<img id="row1cell0" src="../../images/blank.gif" alt=""/><img id="row1cell1" src="../../images/blank.gif" alt=""/><img id="row1cell2" src="../../images/blank.gif" alt=""/><br/>
+<img id="row2cell0" src="../../images/blank.gif" alt=""/><img id="row2cell1" src="../../images/blank.gif" alt=""/><img id="row2cell2" src="../../images/blank.gif" alt=""/><br/>
+</td></tr></table>
+
+<form>
+	mouseover count: <input id="mouseoverCountNode" type="text" value=""/><br/>
+	mouseout count: <input id="mouseoutCountNode" type="text" value=""/>
+</form>
+
+<script type="text/javascript">
+	var
+		mouseoverCount = 0,
+		mouseoutCount = 0
+	;
+
+	var _testNode = Uize.Node.getById ('testNode');
+	Uize.Node.wire (
+		_testNode,
+		{
+			mouseover:
+				function (_event) {
+					Uize.Node.getById ('mouseoverCountNode').value = ++mouseoverCount;
+					_testNode.style.background = '#f00';
+				}
+			,
+			mouseout:
+				function (_event) {
+					Uize.Node.getById ('mouseoutCountNode').value = ++mouseoutCount;
+					_testNode.style.background = '#fff';
+				}
+		}
+	);
+
+</script>
+
+</body>
+</html>
+

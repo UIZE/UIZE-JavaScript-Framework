@@ -1,0 +1,11 @@
+The =Uize.Node= and =Uize.Widget= modules have been improved with new support for multi-select select tags in the =Uize.Node.getValue= and =Uize.Node.setValue= static methods of the =Uize.Node= module, and the =getNodeValue= and =setNodeValue= instance methods of the =Uize.Widget= module.
+
+The =Uize.Node.getValue= and =getNodeValue= methods provide a convenient way to "harvest" the values of all the selected options of a multi-select select tag as a single value that is an array of strings. The =Uize.Node.setValue= and =setNodeValue= methods provide a convenient way to set the selected options for a multi-select select tag, by specifying the selected options either as an array of strings or as a string formatted as a comma-separated list.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-08-31 - IMPROVED MODULES: Uize.Node and Uize.Widget
+....................................................................................

@@ -1,0 +1,12 @@
+<%@
+	required ('UizeDotCom.Templates.ListingsPage');
+	input ({listings:'array'});
+%><%=
+	UizeDotCom.Templates.ListingsPage.process ({
+		title:'Endorsements',
+		pathToRoot:'',
+		metaDescription:'This is a list of endorsements for applications, companies, open source initiatives, and various other contributions to the open source effort that have aided development of the UIZE JavaScript Framework',
+		preamble:'Development on the UIZE JavaScript Framework has been aided by the following applications, companies, open source initiatives, and various other contributions to the open source effort...',
+		listings:input.listings
+	})
+%>

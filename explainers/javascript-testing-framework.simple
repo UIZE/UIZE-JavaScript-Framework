@@ -1,0 +1,630 @@
+Introduction
+	The UIZE JavaScript Framework provides a powerful framework for developing tests (both unit tests as well as funtional tests) to test critical code and systems.
+
+	This document describes the testing framework and how to write tests in UIZE. For the purpose of this document, it is assumed that you are already familiar with the concepts of [[http://en.wikipedia.org/wiki/Unit_testing][unit testing]], [[http://en.wikipedia.org/wiki/Functional_testing][functional testing]], and [[http://en.wikipedia.org/wiki/Software_performance_testing][performance testing]], and may have some familiarity with the concept of TDD ([[http://en.wikipedia.org/wiki/Test-driven_development][Test Driven Development]]).
+
+All Kinds of Tests
+	It's worth emphasizing that, while you might use the testing framework most commonly for unit testing, the testing framework is designed to support all kinds of testing.
+
+	This means that you can write unit tests, functional tests, performance tests, and other kinds of tests using this testing framework.
+
+Test Class
+	In the UIZE JavaScript Framework, every test is implemented as a test class.
+
+	Even the smallest test, such as a test of the behavior of a method under very specific conditions, is implemented as a test class. Every test class is a subclass of the =Uize.Test= class.
+
+	EXAMPLE
+	.....................................................
+	var My2Plus2Equals4TestClass = Uize.Test.subclass ();
+	.....................................................
+
+	Test Function
+		Every `Test Class`, except test classes that serve as parents of `Child Tests`, has a test function that is responsible for executing the actual test and then calculating and reporting the `Test Result`.
+
+		The Test Function for a Test Class is set on the =test= set-get property for the class. Consider the following example...
+
+		EXAMPLE
+		......................................................................
+		My2Plus2Equals4TestClass.set ({test:function () {return 2 + 2 == 4}});
+		......................................................................
+
+		In the case of synchronous tests, the Test Result is reported using a =return= statement. In the case of `Asynchronous Tests`, the Test Result is reported by calling a `Test Result Callback Function`. In the axample above, the Test Result is being calculated using a simple boolean expression, but it is more common to calculate the result using one or more of the available `Expectation Methods`. When a `Test Instance` is run by calling its =run= instance method, the Test Function is called as an instance method on the `Test Instance`. This allows the Test Function to call other instance methods on the instance, such as the `Expectation Methods`.
+
+	Test Result
+		The Test Result for a `Test Instance`, calculated by the `Test Function` for a test, indicates whether or not the test has passed.
+
+		The `Test Result` is automatically set as the value of the =result= set-get property for the instance. The boolean value =true= indicates that a test has passed, while the boolean value =false= indicates that the test has failed. In the special case of asynchronous tests, the Test Result can be a special value indicating that the test is asynchronous and is still being executed (see `Asynchronous Tests`). The Test Result is determined by the `Test Function` for a test, and is calculated based upon every `Expectation` of the `Test Function` being met.
+
+	Test Title
+		Every `Test Class` can have a unique and descriptive title that can be used to distinguish it from other tests in the log messages of a test runner application, or to help locate the test's code inside a `Test Module` when troubleshooting a test's failure.
+
+		A title is set for a Test Class by setting the value of its =title= set-get property, as shown in the example below...
+
+		EXAMPLE
+		............................................................................
+		My2Plus2Equals4TestClass.set ({title:'Test that two plus two equals four'});
+		............................................................................
+
+		Now, when a `Test Instance` of =My2Plus2Equals4TestClass= is created, the value of its =title= set-get property will automatically be set to the class' value for that property. If the test is part of a `Test Tree` and it fails when it is run, then the `Test Synopsis` for the test will automatically contain the title for the test, along with the titles of all the tests up the test parent chain, in the `Test Breadcrumbs` info. Looking at the synopsis that may be logged by a test runner application, it will be evident which test failed, and where the failed test is in the `Test Tree`.
+
+Test Instance
+	A test is run by creating an instance of a `Test Class` and calling its =run= instance method.
+
+	EXAMPLE
+	...............................................................
+	var my2Plus2Equals4TestInstance = new My2Plus2Equals4TestClass;
+	my2Plus2Equals4TestInstance.run ();
+	...............................................................
+
+	Multiple instances of the same test class can be created and run, separately or concurrently, with each instance retaining its `Test Log` messages, `Test Metrics`, and other state after it has been run. Additionally, instances of the same test class can occur within different test suites and can coexist without problem.
+
+Expectation
+	Every test has at least one Expectation.
+
+	While every test has at least one expectation, tests will often have multiple expectations. All expectations for a test must be met in order for the test to succeed. Take, for example, a test for a random generator function that generates a random number within a specified range. A test for the function, providing it with a specific range, would expect that the returned result is a number and *also* that the number lies within the range specified by the test - so, two expectations.
+
+	Expectation Methods
+		Expectations for a test are expressed using Expectation Methods.
+
+		An expectation method is an instance method that can be called on the `Test Instance` to test that a particular expectation is met. For example, to test that the result returned by some function is a number, the =expectNumber= instance method can be used. The =Uize.Test= module supports a wide variety of expectation methods for testing a wide variety of `Different Types of Expectations`, such as `Type Expectations`, `Range Expectations`, and other kinds of expectations.
+
+		An expectation method is called as an instance method on the test and is provided with details to qualify the expectation in cases of parameterized expectations (such as a range expectation), along with the value that must meet the expectation. The method returns a boolean value, indicating whether or not the expectation is met. The result of the expectation method call can either be used as the `Test Result`, or it can be combined with the result of calling other expectation methods (see the section `Compound Expectation`). Ultimately, the `Test Function` must generate a boolean `Test Result` value, indicating whether or not the test passed.
+
+		EXAMPLE
+		.................................................................................
+		My2Plus2Equals4TestClass.set ({test:function () {return this.expect (4,2 + 2)}});
+		.................................................................................
+
+		Expectation First, Value Last
+			All of the `Expectation Methods` adhere to the convention that the actual value that is being tested against an expectation appears last in the arguments for the method.
+
+			So, for Expectation Methods that are parameterized, the parameters that qualify the expectation appear before the value that is being tested. For example, in the case of a range type expectation method, the range parameters would be specified first and then the value being tested. This is illustrated by the following examples...
+
+			EXAMPLE
+			.........................................................................................
+			myTestInstance.expectInRange (0,100,value);  // expect that value is in range of 0 to 100
+			myTestInstance.expectType ('number',value);  // expect that value is of type 'number'
+			myTestInstance.expect ('foo',value);         // expect that value is 'foo'
+			.........................................................................................
+
+		Different Types of Expectations
+			The =Uize.Test= module provides a rich array of `Expectation Methods` to support a variety of different types of expectations, including `Equality Expectations`, `Type Expectations`, `Range Expectations`, and `Quality Expectations`.
+
+			Equality Expectations
+				An equality expectation is the most basic type of expectation, in which a test value is expected to be equal to a reference value.
+
+				Built-in `Expectation Methods` that support equality expectations include: =expect=, and =expectSameAs=.
+
+			Type Expectations
+				A type expectation is an expectation that a test value is of a specific type, such as a string, number, boolean, object, etc.
+
+				Built-in `Expectation Methods` that support type expectations include: =expectArray=, =ecpectArrayLike=, =expectBoolean=, =expectFunction=, =expectInstanceOf=, =expectInteger=, =expectNumber=, =expectObject=, =expectRegExp=, =expectString=, and =expectType=.
+
+			Range Expectations
+				A range expectation is an expectation that a test value (or the value of one of its properties, such as the =length= property) is within a specific value range.
+
+				Built-in `Expectation Methods` that support range expectations include: =expectInRange=, =expectIntegerInRange=, =expectLengthInRange=, =expectNegativeInteger=, =expectNegativeNumber=, =expectNumberInRange=, =expectPositiveInteger=, and =expectPositiveNumber=.
+
+			Quality Expectations
+				A quality expectation is an expectation that a test value has a specific quality, such as being non-empty, or not having any repeated values in the case of arrays.
+
+				Built-in `Expectation Methods` that support quality expectations include: =expectNoRepeats=, =expectNonEmpty=, =expectNonEmptyArray=, =expectNonEmptyObject=, =expectNonEmptyString=, and =expectNonNull=.
+
+	Compound Expectation
+		A test may have more than one expectation, and these expectations can be built into a single boolean condition.
+
+		If multiple calls to `Expectation Methods` are chained together into a single boolean expression using the =&amp;&amp;= operator, then the short circuiting behavior of boolean expressions will result in the first expectation that is not met terminating evaluation of the expression. Consider the following example...
+
+		EXAMPLE
+		.............................................................................
+		RandomInRangeTestClass.set ({
+			test:function () {
+				var result = randomInRange (15,20);
+				return this.expectNumber (result) && this.expectInRange (15,20,result);
+			}
+		});
+		.............................................................................
+
+		In the above example, a `Test Function` is being set for a `Test Class` that has been created to test a =randomInRange= function. The `Test Function` calls the =randomInRange= function, captures the result, and then returns the result of a `Compound Expectation` boolean expression. The first expectation is that the result is a number, while the second expectation is that the result is in the range of =15= to =20=. If the result is not a number, then the call to the =expectNumber= instance method will return the value =false=, causing the boolean expression to terminate evaluation and the =expectInRange= method would not be called.
+
+	Reason For Failure
+		Besides simply testing whether or not an expectation is met, the `Expectation Methods` also record the reason for a test's failure.
+
+		The reason for a test's failure is recorded in the =reasonForFailure= set-get property of a `Test Instance`. While the value for this property can be set explicitly inside a `Test Function`, the value is automatically set when using the `Expectation Methods` and when an expectation is not met.
+
+		An Example
+			Let's say, for example, that we needed to test a custom add function, as shown below...
+
+			ADD FUNCTION
+			..................................................
+			function add (a,b) {
+				return a - b; // <--- OUR FUNCTION HAS A BUG!!!
+			}
+			..................................................
+
+			As you can see, our =add= function has a bug in it. Now let's say that we created a `Test Class` for this function (we'll call it =AddFunctionTestClass=) and tested to see that adding =2= and =2= produced =4=, as we would expect. The `Test Function` for the `Test Class` could be writted as follows...
+
+			NOT USING EXPECTATION METHOD
+			......................................................................
+			AddFunctionTestClass.set ({test:function () {return add (2,2) == 4}});
+			......................................................................
+
+			With the bug in our =add= function, the above Test Function would return the value =false= to indicate that the test failed. This is fine, but we're missing a `Reason For Failure`. If we use one of the `Expectation Methods`, then we get the reason for failure set for us automatically. The above statement could be rewritten as follows...
+
+			USING EXPECTATION METHOD
+			................................................................................
+			AddFunctionTestClass.set ({test:function () {return this.expect (4,add (2,2))});
+			................................................................................
+
+			The =expect= instance method compares the expected value (the first parameter) to the actual value (the second parameter). If the values don't match, then the expectation is not met, the method returns the value =false=, and it sets a value for the =reasonForFailure= set-get property along the lines of...
+
+			REASON FOR FAILURE
+			..................
+			EXPECTED:
+
+			4
+
+			ACTUAL:
+
+			0
+			..................
+
+		When You'll See the Reason For Failure
+			The value of the =reasonForFailure= property is used when generating a `Test Synopsis` for a `Test Instance` by calling the instance's =getSynopsis= instance method.
+
+			When running tests in a `Test Suite`, it is very convenient that the `Expectation Methods` set the =reasonForFailure= value, since this information is reported along with the breadcrumbs for a specific `Test Instance` that fails and makes it easier to locate that test's code in the `Test Module` so that troubleshooting can be performed.
+
+Asynchronous Tests
+	While many tests can be synchronous, there will be some tests that will be asynchronous out of necessity - either just some of the time, or all of the time.
+
+	A test being asynchronous means that the code inside the `Test Function` is asynchronous. This might be because timeouts are involved, or because the test may test some functionality that involves the use of asynchronous communication (eg. Ajax communication to a server).
+
+	Test Result Callback Function
+		When a test is asynchronous, it cannot return the `Test Result` in a =return= statement inside the `Test Function`.
+
+		Instead, the `Test Function` must report the `Test Result` using a callback function that is provided to it when it is called. Consider the following example...
+
+		EXAMPLE
+		..............................................................................................
+		MyTimeoutTestClass.set ({
+			test:function (testResultCallback) {
+				var whenTimeoutSet = new Date;
+				setTimeout (
+					function () {
+						testResultCallback (this.expectInRange (1000,Infinity,new Date - whenTimeoutSet));
+					},
+					1000
+				);
+			}
+		});
+		..............................................................................................
+
+		In the above example, a `Test Function` is being set for the test class =MyTimeoutTestClass=. This test is testing JavaScript's built-in =setTimeout= function to make sure that the code to be executed at the end of the timeout isn't executed before the timeout duration has elapsed. The `Test Function` is, therefore, guaranteed here to be asynchronous.
+
+		Now, the time is captured right before the timeout is set and assigned to the =whenTimeoutSet= variable. The timeout is then set with a duration of =1000= milliseconds. The code executed by the timeout tests that at least a second has elapsed since the timeout was set. It does this by subtracting the value of the =whenTimeoutSet= variable from the current time, and then using the =expectInRange= expectation method to test that the elapsed time is in the range of =1000= to =Infinity=. The `Test Result` that is calculated in this way is then "reported" by calling the `Test Result Callback Function` (named =testResultCallback= here) and passing the result as the single parameter.
+
+		Looking at the code in this example, you should notice a few things. First, the `Test Result Callback Function` is passed to the `Test Function` as a parameter. If your test function is not asynchronous, then you don't need to declare this parameter. If you *do* choose to declare the parameter for use in an asynchronous test, you can name it however you like - just refer to it by that name when you use it inside your test function's code. Another thing you'll notice is that the `Test Function` has no =return= statement. Without a =return= statement, the function will return the value =undefined= by default. The =Uize.Test= class interprets this to mean that the test is asynchronous, so there's no need to return a special value or otherwise indicate that the test is asynchronous. Finally, you'll notice that you can still use `Expectation Methods` in asynchronous tests - the only difference is that the `Test Result` is being calculated at the end of some asynchronous code execution.
+
+		isAsync Set-get Property
+			When a `Test Instance` is run and it becomes known that its `Test Function` is asynchronous in its execution, then the =isAsync= set-get property for the instance will be set to =true=.
+
+			Whenever an instance's =isAsync= property is set to =true=, the value of its =result= set-get property will be set to `Uize.Test.isAsync Special Value`.
+
+		Uize.Test.isAsync Special Value
+			The =Uize.Test= module provides a =Uize.Test.isAsync= static property whose value is used as a placeholder value for the =result= set-get property when a test is asynchronous.
+
+			As soon as it is known that the `Test Function` for a `Test Instance` will produce its `Test Result` asynchronously, the value of the instance's =result= property is set to the value of the =Uize.Test.isAsync= static property. You can think of the =Uize.Test.isAsync= static property as being like a constant. Whenever the =result= property is set to =Uize.Test.isAsync=, the `isAsync Set-get Property` will also be set to =true=.
+
+Child Tests
+	A `Test Class` can either have a `Test Function` or it can have Child Tests.
+
+	A basic `Test Class` simply has a `Test Function` and doesn't serve as a wrapper / container. A `Test Class` becomes a wrapper for child tests when the value of its =test= set-get property is an array, where each element of the array is a `Test Class`. Using this facility, the basic building block of the `Test Class` can be used to create an arbitrarily structured `Test Tree`.
+
+	Test Tree
+		A Test Tree is a hierarchical set of tests that allows a multitude tests to be organized in a meaningful way.
+
+		Test Parenting
+			When a `Test Class` is a wrapper for `Child Tests`, the value of the =test= set-get property for the class is an array of test classes, but the child test classes are not parented.
+
+			A Test Class is never parented - only a `Test Instance` is parented. When a `Test Class` has child tests, the value of the =test= set-get property for the class is an array of test classes. When an instance is created of a test class that has child tests, then the value of the =test= set-get property for the instance is an array of instances of the child tests, and those child test instances will be parented to the instance of the test class that has the child tests. Consider the following example...
+
+			EXAMPLE
+			...................................................................................
+			var
+				MyTestClass1 = Uize.Test.subclass (),  // this will be used as a child test
+				MyTestClass2 = Uize.Test.subclass (),  // this will also be used as a child test
+				MyTestClass3 = Uize.Test.subclass ()   // this will be used as a wrapper test
+			;
+			MyTestClass3.set ({test:[MyTestClass1,MyTestClass2]});
+			var myTestClass3Instance = new MyTestClass3;
+			...................................................................................
+
+			In the above example, the test class =MyTestClass3= is serving as a wrapper that has =MyTestClass1= and =MyTestClass2= as `Child Tests`. An instance of the =MyTestClass3= class is created and assigned to the variable =myTestClass3Instance=. For this instance, the value of its =test= set-get property will be an array, where the first element is an instance of =MyTestClass1= and the second element is an instance of =MyTestClass2=, and where the value of the =parent= instance property for both of those child test instances will be a reference to the instance =myTestClass3Instance=. In contrast, the value of the =test= set-get property for the class =MyTestClass3= is an array where the first element is =MyTestClass1= and the second element is =MyTestClass2= - there is no static property on the =MyTestClass1= and =MyTestClass2= classes that links them to the =MyTestClass1= class.
+
+			Now, when the =myTestClass3Instance= test instance is run, the instances of the child tests will be run in the order in which they appear in the array of child tests.
+
+		Root Test
+			In a `Test Tree`, the Root Test is the test that is not a child test of some other test on the tree.
+
+			A Root Test *can* be a child test in some other test tree, however, since a test tree can be "grafted in" to a larger test tree by making its root test a child test somewhere in the structure of some other test tree.
+
+		Multiple Occurrences of a Test Class
+			Because a `Test Class` is never parented when it is used as a child test, any test class can be used in more than one `Test Tree`.
+
+			This could be useful when creating different tests that have different emphasis in what they cover, but where there might be some overlaps.
+
+		Test Instance Depth
+			When a `Test Instance` is deep inside a `Test Tree`, its depth within that tree can be determined by calling its =getDepth= instance method.
+
+		Total Tests
+			The total number of tests - including wrapper tests - in a `Test Tree` can be determined by calling the =getTotalTests= instance method on the instance of the `Root Test` for the tree.
+
+			The =getTotalTests= method recurses through the entire tree, essentially flattening the tree in order to count the total number of actual tests that would be performed. The method includes parent tests in the tally, along with all child tests. For example, if the `Root Test` contained two child tests, and each one of those child tests contained two child tests, then the total number of tests in the tree would be =7= - one root test, two child tests, and four grandchild tests.
+
+Test Synopsis
+	After a `Test Instance` has been run by calling its =run= instance method, a synopsis for the test can be obtained by calling the instance's =getSynopsis= method.
+
+	The synopsis for a test contains the following information...
+
+	- a friendly representation ("PASSED" or "FAILED") of the `Test Result`
+	- breadcrumbs to indicate where the test is in a `Test Tree` (see `Test Breadcrumbs`)
+	- when the test started and ended and its duration (see `Test Metrics`)
+	- the `Reason For Failure`, if the test failed
+
+	Test Breadcrumbs
+		When a synopsis is generated for a `Test Instance` using the =getSynopsis= method, Test Breadcrumbs are generated  to indicate where the test is in a `Test Tree`.
+
+		The breadcrumbs are generated for an instance by concatenating the titles of all instances up the parent chain to the `Root Test`. This can be seen in the `Test Synopsis Example`.
+
+	Test Synopsis Example
+		The code in the example below creates a `Test Tree` that is three levels deep, using the `Basic Test Declaration Factory Method` (which makes it a bit more concise).
+
+		The `Root Test` has a single child test, and its child test in turn has a child test (so, it's a grandchild test). The `Test Function` for the grandchild test is designed to deliberately fail so that we can see what kind of synopsis is generated in this case. The test fails because we are calling the =expect= instance method and expecting the string value ='foo'=, but the actual value being tested against this expectation is ='bar'=.
+
+		EXAMPLE
+		........................................................................................
+		var
+			MyTestClass = Uize.Test.declare ({
+				title:'This is the root test',
+				test:[
+					{
+						title:'This is a child test',
+						test:[
+							{
+								title:'This is a grandchild test',
+								test:function () {return this.expect ('foo','bar')}
+							}
+						]
+					}
+				]
+			}),
+			myTestClassInstance = new MyTestClass
+		;
+		myTestClassInstance.wire (
+			'Done',
+			function (e) {if (e.source.get ('reasonForFailure')) alert (e.source.getSynopsis ())}
+		);
+		myTestClassInstance.run ();
+		........................................................................................
+
+		When the above code is executed, a synopsis as shown below will be displayed in an =alert= dialog...
+
+		SYNOPSIS
+		.......................................................................
+		FAILED
+
+		----------------------------------------------------------
+
+		BREADCRUMBS...
+
+		This is the root test
+			This is a child test
+				This is a grandchild test
+
+		----------------------------------------------------------
+
+		TIME STARTED: Fri Sep 24 2010 16:49:48 GMT-0700 (Pacific Daylight Time)
+		TIME ENDED: Fri Sep 24 2010 16:49:48 GMT-0700 (Pacific Daylight Time)
+		DURATION: 10ms
+
+		----------------------------------------------------------
+
+		REASON FOR FAILURE...
+
+		EXPECTED:
+
+		'foo'
+
+		ACTUAL:
+
+		'bar'
+		.......................................................................
+
+Test Metrics
+	When a `Test Instance` is run by calling its =run= method, the instance records certain basic metrics that can be analyzed later.
+
+	The metrics are recorded in the following set-get properties...
+	- =startTime= - a =Date= object instance, indicating the time that the test was started
+	- =endTime= - a =Date= object instance, indicating the time that the test completed running
+	- =duration= - a number, indicating how long (in milliseconds) it took for the test to run
+
+	Values for these set-get properties are set automatically by the testing framework - it is not necessary to write additional code for measuring the durations of tests. Time metrics can be useful when specifically designing performance tests. Beyond the automatically recorded time metrics, additional information can be stored in the `Test Log`.
+
+Test Log
+	Beyond the basic `Test Metrics` that are automatically recorded for every `Test Instance` by the testing framework, every Test Instance also has a log in which additional information can be stored.
+
+	The test log for an instance is exposed through its =log= set-get property, which is an array where each element of the array is a `Log Message Object`. A message can be added to the log for an instance by calling its =log= instance method, as shown in the following example...
+
+	EXAMPLE
+	..............................................
+	My2Plus2Equals4TestClass.set ({
+		test:function () {
+			this.log ('about to calculate 2 + 2');
+			var value = 2 + 2;
+			this.log ('finished calculating 2 + 2');
+			return this.expect (4,value);
+		}
+	});
+	..............................................
+
+	In the above example, two log messages are being added - one right before we perform our test operation (adding =2= and =2=), and the other right after the calculation. After an instance of =My2Plus2Equals4TestClass= has been run, the value of that instance's =log= set-get property will be an array containing the two logged messages. Notice that, in the call to the =log= instance method, only the text for the log message is supplied - the timestamp for each log message is recorded automatically by the testing framework and is stored in the `Log Message Object`.
+
+	Log Message Object
+		Every message logged for a `Test Instance` is represented by a Log Message Object, which contains the text of the message along with a timestamp for when the message was logged.
+
+		LOG MESSAGE OBJECT
+		.................................................................................
+		{
+			message   : messageSTR,  // the text of the log message
+			timestamp : dataOBJ      // the time at which the message was added to the log
+		}
+		.................................................................................
+
+		Log Message Timestamp
+			In analyzing the results from a test, the =timestamp= property in the `Log Message Object` for logged messages can be used to calculate the durations for different portions of code in a `Test Function`. Consider the following example...
+
+			EXAMPLE
+			..........................................................................................
+			function timeBetweenLogEntries (testInstance,entryA,entryB) {
+				if (entryA == entryB) return 0;
+				var
+					log = testInstance.get ('log') || [],
+					lastEntryNo = log.length - 1,
+					startTime = testInstance.get ('startTime'),
+					endTime = testInstance.get ('endTime')
+				;
+				return (
+					(entryB > lastEntryNo ? endTime : entryB < 0 ? startTime : log [entryB].timestamp) -
+					(entryA > lastEntryNo ? endTime : entryA < 0 ? startTime : log [entryA].timestamp)
+				);
+			}
+
+			function timeFromPreviousLogEntry (testInstance,entry) {
+				return timeBetweenLogEntries (testInstance,entry - 1,entry);
+			}
+
+			function timeTillNextLogEntry (testInstance,entry) {
+				return timeBetweenLogEntries (testInstance,entry,entry + 1);
+			}
+			..........................................................................................
+
+			In the above example, three utility functions are defined for calculating the time between log entries for a specified `Test Instance`. The =timeBetweenLogEntries= function calculates the time between two log entries, the =timeFromPreviousLogEntry= function calculates the time from the previous log entry to the specified log entry, and the =timeTillNextLogEntry= function calculates the time from the specified log entry to the next log entry. When there is no previous log entry, then the start time for the test is used. When there is no next log entry, then the end time for the test is used.
+
+Test Events
+	In addition to the regular set-get property change events, the =Uize.Test= class supports the following custom instance events...
+
+	- =Start= - fired every time a `Test Instance` is run by calling its =run= instance method
+	- =Done= - fired every time a `Test Instance` completes running
+
+	Consider the following example...
+
+	EXAMPLE
+	...................................................................
+	var my2Plus2Equals4TestInstance = new My2Plus2Equals4TestClass;
+	my2Plus2Equals4TestInstance.wire (
+		'Done',
+		function () {alert (my2Plus2Equals4TestInstance.get ('result'))}
+	);
+	my2Plus2Equals4TestInstance.run ();
+	...................................................................
+
+	In the above example, a handler is being wired for the =Done= event of the test instance =my2Plus2Equals4TestInstance=. Now, even if the `Test Function` for this test is asynchronous, our handler will still get executed when the test has completed running. Because the test may be asynchronous, it is not appropriate to place the =alert= statement immediately after the call to the instance's =run= method.
+
+	Bubbling
+		It is important to note that the =Start= and =Done= `Test Events` bubble.
+
+		This means that if you wire a handler for either of these events on an instance, and that instance happens to have `Child Tests` and is somewhere within a `Test Tree`, then the handler you registered will be executed for some instances other than the one on which you wired the handler. In such cases, if you only want to execute the handler code for the instance on which the handler is wired, then you should test the =source= property of the event object, as follows...
+
+		EXAMPLE
+		.......................................................
+		var myTestTreeInstance = new MyTestTreeClass;
+		myTestTreeInstance.wire (
+			'Done',
+			function (e) {
+				if (e.source == myTestTreeInstance) {
+					alert ('Executing the test tree is complete');
+				}
+			}
+		);
+		myTestTreeInstance.run ();
+		.......................................................
+
+		In the above example, the =alert= statement will only be executed one the test instance =myTestTreeInstance= has completed running - not when any instance within the `Test Tree` has completed running.
+
+Test Class Factory Methods
+	The =Uize.Test= class provides a number of Test Class Factory Methods that make the creation of new test classes more convenient and one's test code more concise.
+
+	Each of these factory methods accepts some parameters to qualify the `Test Class` that it creates, and then returns a unique subclass of the =Uize.Test= class that is "keyed" to the parameters that were supplied. For example, a test class can be created to test that the module =Uize.Data= can be required and built using the statement =Uize.Test.requiredModulesTest ('Uize.Data')=. In this example, the =modulesSTRorARRAY= parameter accepted by the =Uize.Test.requiredModulesTest= method specifies which module (or modules) should be required and tested to see if requiring them is successful. Other test class factory methods accept different parameters, depending on the kind of test classes they create.
+
+	Basic Test Declaration Factory Method
+		While a basic `Test Class` can be created by subclassing the =Uize.Test= class and then setting values for the class' set-get properties, a more convenient approach is to use the =Uize.Test.declare= static method.
+
+		The =Uize.Test.declare= method is the most basic of the available `Test Class Factory Methods`. It accepts a single parameter, being an object that contains values for the set-get properties of the =Uize.Test= class.
+
+		INSTEAD OF...
+		..................................................
+		var My2Plus2Equals4TestClass = Uize.Test.subclass ();
+		My2Plus2Equals4TestClass.set ({
+			title:'Test that 2 + 2 equals 4',
+			test:function () {return this.expect (4,2 + 2)}
+		});
+		..................................................
+
+		USE...
+		..................................................
+		Uize.Test.declare ({
+			title:'Test that 2 + 2 equals 4',
+			test:function () {return this.expect (4,2 + 2)}
+		});
+		..................................................
+
+		The =Uize.Test.declare= method returns a =Uize.Test= subclass, so it can be used for declaring a child test in an array of child tests, as with all the other `Test Class Factory Methods`. For a more in-depth discussion of the =Uize.Test.declare= method, consult the reference documentation for the =Uize.Test= module.
+
+	Factory Methods for Fancier Test Declarations
+		Beyond the `Basic Test Declaration Factory Method`, factory methods also exist for creating test classes in a declarative fashion for some fancier types of tests.
+
+		Following is an overview of some of the more exotic `Test Class Factory Methods`. For comprehensive documentation on the methods, you should consult the reference for the =Uize.Test= class.
+
+		Required Modules Test
+			A `Test Class` can be created to test that one or more JavaScript modules can be required and built using the =Uize.Test.requiredModulesTest= method.
+
+			EXAMPLE
+			...........................................................................
+			var RequireUizeDataTestClass = Uize.Test.requiredModulesTest ('Uize.Data');
+			...........................................................................
+
+			The above example creates a `Test Class` to test that the =Uize.Data= module can be required and built.
+
+		Static Property Test
+			A `Test Class` can be created to test that a static property is defined and that its value is of an expected type using the =Uize.Test.staticPropertyTest= method.
+
+			EXAMPLE
+			.......................................................................................
+			var
+				MathMinTestClass = Uize.Test.staticPropertyTest ('Math.min','function'),
+				NumberMaxValueTestClass = Uize.Test.staticPropertyTest ('Number.MAX_VALUE','number')
+			;
+			.......................................................................................
+
+			The above example creates two static property test classes: one to test that the =Math.min= static property of JavaScript's built-in =Math= object is a function, and the other to test that the =Number.MAX_VALUE= static property of JavaScript's built-in =Number= object is a number.
+
+		Static Method Test
+			A `Test Class` can be created to test that a static method is defined and that a set of test cases succeed using the =Uize.Test.staticMethodTest= method.
+
+			EXAMPLE
+			..................................................................
+			Uize.Test.staticMethodTest (
+				'Uize.capFirstChar',
+				[
+					['Many letters, first letter is lowercase','hello','Hello'],
+					['Many letters, first letter is uppercase','Hello','Hello'],
+					['Single letter, lowercase','h','H'],
+					['Single letter, uppercase','H','H'],
+					['Empty string','','']
+				]
+			);
+			..................................................................
+
+			In the above example, a test class is being created for the =Uize.capFirstChar= static method. In the array of test cases that are specified for a `Static Method Test`, each test case is specified as an array containing the title, input arguments, and expected output value for the test case.
+
+			Static Methods Test
+				As a convenience, a `Test Class` can be created to test multiple static methods in a single declaration using the =Uize.Test.staticMethodsTest= method.
+
+				The =Uize.Test.staticMethodsTest= method accepts a single parameter, being an array of arguments for successive calls to the =Uize.Test.staticMethodTest= static method.
+
+		Test Module Test
+			A `Test Class` can be created to test that a `Test Module` can be successfully required (and loaded and built, if necessary) and that running the test module's tests is successful, using the =Uize.Test.testModuleTest= method.
+
+			A Test Module Test has two main benefits...
+
+			+. It provides a safety wrapper around the `Test Module`, in case the test module has syntax errors. This is a very useful protection when incorporating a test module into a `Test Suite`, so that running the test suite does not fail catastrophically when the test module has JavaScript errors.
+			+. It allows a `Test Suite` to incorporate many test modules without having to directly require those test modules. Test modules can be quite large, depending on how much functionality they are testing. With the benefit of the `Test Module Test` wrapper, the test modules can be loaded dynamically as needed when the Test Suite is run, rather than simply when the Test Suite is loaded.
+
+			EXAMPLE
+			............................................................................
+			uizeDataTestModuleRunner = Uize.Test.testModuleTest ('Uize.Test.Uize.Data');
+			............................................................................
+
+			In the above example, a `Test Class` is being created to test that the =Uize.Test.Uize.Data= test module can be successfully required and that all its tests pass.
+
+		Test Suite Test
+			A `Test Class` can be created to combine multiple separate test modules into a single `Test Suite` using the =Uize.Test.testSuite= method.
+
+			The =Uize.Test.testSuite= method wraps each of the specified test modules in a `Test Module Test`. This ensures that the many individual test modules that make up a test suite are only loaded dynamically as needed when the test suite is run - they are not directly required by the test suite test, and they do not need to be loaded in just so that the test suite's test class can be built. This is a good thing, because many of the test modules are rather large.
+
+			EXAMPLE
+			..........................................
+			var uizeTestSuite = Uize.Test.testSuite (
+				'UIZE JavaScript Framework Unit Tests',
+				[
+					'Uize.Test.Uize.Data',
+					'Uize.Test.Uize',
+					'Uize.Test.Uize.Array',
+					'Uize.Test.Uize.Array.Order',
+					'Uize.Test.Uize.Array.Sort',
+					'Uize.Test.Uize.Data.Csv',
+					'Uize.Test.Uize.Date',
+					// ... ... ... ... ... ...
+					// more test modules here
+					// ... ... ... ... ... ...
+				]
+			);
+			..........................................
+
+			In the above example, a `Test Suite` test class is being created to sequence execution of a series of test modules that test various modules of the UIZE JavaScript Framework.
+
+Test Module
+	A Test Module is a [[javascript-modules.html][JavaScript module]] that defines a `Test Class`.
+
+	A Test Module can define unit tests, functional tests, performance tests, or even a `Test Suite`. For unit testing, it is typical to create a companion Test Module for any JavaScript module that implements actual functionality.
+
+	Test Namespace
+		A good convention to follow when naming a `Test Module` is to take the name of the module that it tests and prepend a test namespace under which all of your test modules will reside.
+
+		For the modules that make up the UIZE JavaScript Framework, test modules are located under the =Uize.Test= namespace. So, for example, the test module for testing the =Uize.Data= module lives under the =Uize.Test= namespace as =Uize.Test.Uize.Data=. Essentially, the namespace hierarchy of the UIZE JavaScript Framework is replicated under the =Uize.Test= namespace - excepting, of course, the =Uize.Test= namespace hierarchy (or you would have video feedback style infinite recursion).
+
+		An Example
+			If you have created your own namespace for your application specific JavaScript modules (ie. non-UIZE modules), then you can create a test modules namespace under that namespace and place all your test modules under that namespace.
+
+			For example, if your Web site was *www.mycompany.com* and you created the root namespace of =MyCompanySite= for your JavaScript, then you could create a testing namespace under that namespace called =MyCompanySite.Test=. Now, if your application had a custom JavaScript module called =MyCompanySite.CommonUtils=, then a test module for testing that module could be named =MyCompanySite.Test.MyCompanySite.CommonUtils=. It may seem redundant to repeat the "MyCompanySite" part, but your root namespace file may define some common functions that you may also wish to test separately, and the test module for testing the =MyCompanySite= module would be named =MyCompanySite.Test.MyCompanySite=.
+
+	Test Module Contents
+		To examine what the typical contents of a `Test Module` looks like, consider the following example...
+
+		EXAMPLE
+		........................................................................
+		Uize.module ({
+			name:'MyCompanySite.Test.MyCompanySite.CommonUtils',
+			builder:function () {
+				return Uize.Test.declare ({
+					title:'MyCompanySite.CommonUtils Test',
+					test:[
+						Uize.Test.requiredModulesTest ('MyCompanySite.CommonUtils'),
+						Uize.Test.staticMethodsTest ([
+							// ... ... ... ... ... ... ... ...
+							// static methods tests go here
+							// ... ... ... ... ... ... ... ...
+						])
+					]
+				});
+			}
+		});
+		........................................................................
+
+		In the above example, the `Test Module` =MyCompanySite.Test.MyCompanySite.CommonUtils= defines a `Test Class` that tests the =MyCompanySite.CommonUtils= module. The =builder= function uses the =Uize.Test.declare= method to define the test class in a declarative fashion and then returns a reference to the class. The test class has two `Child Tests`, the first of which tests requiring of the module being tested, and the second of which tests all the module's static methods (you'll have to just imagine the code that replaces those comments).
+
+		One thing you'll notice by looking at the code is that the `Test Module` is not requiring the module that it is testing - there isn't even a =required= property in the module declaration (the call to the =Uize.module= method) in this case. This is because the module being tested will be required dynamically when an instance of the test class is run, as soon as the `Required Modules Test` is encountered, which happens to be the first test (defined by calling the =Uize.Test.requiredModulesTest= method). This has the benefit that loading the =MyCompanySite.Test.MyCompanySite.CommonUtils= test module does not incur loading of the module that it tests - only when the test is run will the module being tested be loaded, as necessary.
+
+Test Suite
+	Any `Test Class` can define a hierarchical `Test Tree` that contains many tests, but the term Test Suite is used to refer specifically to a `Test Class` that combines the test classes defined by a number of different test modules into a single `Test Suite Test`.
+
+	A test suite test class can be conveniently defined in a declarative fashion by using the =Uize.Test.testSuite= static method.
+
+	Unit Tests Test Suite
+		The unit tests `Test Suite` for the UIZE JavaScript Framework is implemented in the =Uize.Test.UnitTests= module.
+
+		The =Uize.Test.UnitTests= module is a test module that defines an uber `Test Suite` comprised of all the test modules that test individual modules of the framework, and is used by build scripts that automate testing of the framework. If you are looking to create a `Test Suite` of unit tests for your own site / application, you can use this module as a reference. You can create your unit tests module under your own `Test Namespace` (as =MyCompanySite.Test.UnitTests=, for example) and model its contents on the contents of the =Uize.Test.UnitTests= module. Then, whenever you create a new JavaScript module for your site / application, you can create a companion `Test Module` and add an entry for it in your unit tests test suite module - a simple matter of adding a line to the file in order to add the test to the sequence of tests performed by the module.
+
+### to cover
+	- writing good unit tests
+

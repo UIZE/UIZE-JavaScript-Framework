@@ -1,0 +1,24 @@
+The new [[../examples/date-picker.html][Date Picker]] example shows how the date picker widget lets users pick dates within configured date ranges, inside a shared date picker dialog.
+
+Many configurations are demonstrated, including...
+
+- select any date
+- select a day up until today
+- select a day from today onwards
+- select a day this week
+- select a day this month
+- select a day this year
+- date picker with initial value
+- date picker with custom display format
+- date picker with pretty format
+- date picker with no manual input
+
+[[../examples/date-picker.html][CHECK IT OUT]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-10-14 - NEW EXAMPLE: Date Picker
+....................................................................................

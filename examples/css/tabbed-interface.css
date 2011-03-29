@@ -1,0 +1,16 @@
+.tabShell {
+	width:600px;
+	margin:auto;
+	margin-bottom:10px;
+}
+.tabBodyShell {
+	height:200px;
+}
+.tabBodyActive {
+	font-size:70px;
+	line-height:185px;
+	font-weight:bold;
+	text-align:center;
+	color:#ccc;
+}
+

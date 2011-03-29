@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2009-03-24 - NEW MODULE: Uize.Fx | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="The new Uize.Fx package module provides a convenient way to initiate fades of CSS style properties."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2009.html" class="breadcrumb breadcrumbWithArrow">2009 NEWS</a>
+	2009-03-24 - NEW MODULE: Uize.Fx
+
+</h1>
+
+<div class="main">
+<div class="contents0">
+	<p>The new <code><a href="../reference/Uize.Fx.html">Uize.Fx</a></code> package module provides a convenient way to initiate fades of CSS style properties.</p>
+	
+	<p>The <code>Uize.Fx.fadeStyle</code> static method of the new <code><a href="../reference/Uize.Fx.html">Uize.Fx</a></code> module lets you easily fade one or more CSS style properties for a specified node.</p>
+	
+	<p><span class="allCaps">EXAMPLES</span></p>
+	
+	
+<pre class="sample-code">// fade from thin border/thick padding to thick border/thin padding over 1/4 second
+Uize.Fx.fadeStyle ('myNode',{borderWidth:1,padding:20},{borderWidth:20,padding:1},250);
+
+// fade from current colors to white text on black background over two seconds
+Uize.Fx.fadeStyle ('myNode',null,{color:'#fff',backgroundColor:'#000'},2000);
+
+// fade font size from 30px back to current size over a half second
+Uize.Fx.fadeStyle ('myNode',{fontSize:30},null,500);
+</pre>
+	
+	<p>The <code>Uize.Fx.fadeStyle</code> static method supports fading values for a large number of CSS style properties.</p>
+	
+	<p><a href="../reference/Uize.Fx.html">LEARN MORE</a></p>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

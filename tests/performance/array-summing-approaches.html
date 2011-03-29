@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>PERFORMANCE TEST: Array Summing Approaches | UIZE JavaScript Framework</title>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../../css/page.css"/>
+	<link rel="stylesheet" href="../../css/page.example.css"/>
+	<link rel="stylesheet" href="../../css/page.example.test.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../../index.html" title="UIZE JavaScript Framework home"></a>
+	PERFORMANCE TEST: Array Summing Approaches
+	<div class="pageActions">
+		<a id="page-viewSource" href="javascript://" class="buttonLink">SOURCE</a>
+	</div>
+</h1>
+
+<div class="main">
+	<!-- explanation copy -->
+
+	<div class="explanation">
+		<p>This test page demonstrates...</p>
+
+		<p>In the test, ...</p>
+	</div>
+
+	<!-- test results -->
+
+	<div class="testResults">
+		<div class="testResultsFooter">
+			<a id="page_performTest" class="button" href="javascript://">PERFORM TEST</a>
+		</div>
+		<div id="page-testResults"></div>
+	</div>
+</div>
+
+<!-- JavaScript code to wire up the page widget and define the test code -->
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Example.Test.library',
+		'Uize.String'
+	],
+	builder:function () {
+		/*** create the example page widget ***/
+			var page = window.page = new UizeDotCom.Page.Example.Test;
+
+		/*** define the constrain method ***/
+			function _sumArrayUsingLoop (_array) {
+				var _result = 0;
+				for (var _elementNo = _array.length; --_elementNo >= 0;) {
+					_result += _array [_elementNo];
+				}
+				return _result;
+			}
+
+			function _sumArrayUsingJoinAndEval (_array) {
+				return eval (_array.join ('+'));
+			}
+
+			function _makeRandomNumbersArray (_arrayLength) {
+				var _result = [];
+				for (_elementNo = _arrayLength; --_elementNo >= 0;) {
+					_result.push (Math.random () * 1000000);
+				}
+				return _result;
+			}
+			var
+				_shortArray = _makeRandomNumbersArray (10),
+				_mediumArray = _makeRandomNumbersArray (100),
+				_longArray = _makeRandomNumbersArray (1000)
+			;
+
+			page.performTest = function (_reportResults) {
+				var
+					_this = this,
+					_totalIterations = 500,
+					_iterationNo
+				;
+				_this.executeFunctionsWithPause (
+					[
+						function () {
+							// do nothing
+						},
+						function () {
+							/*** short array, loop approach ***/
+								for (_iterationNo = _totalIterations; --_iterationNo >= 0;) {
+									_sumArrayUsingLoop (_shortArray);
+								}
+						},
+						function () {
+							/*** short array, join approach ***/
+								for (_iterationNo = _totalIterations; --_iterationNo >= 0;) {
+									_sumArrayUsingJoinAndEval (_shortArray);
+								}
+						},
+						function () {
+							/*** medium array, loop approach ***/
+								for (_iterationNo = _totalIterations; --_iterationNo >= 0;) {
+									_sumArrayUsingLoop (_mediumArray);
+								}
+						},
+						function () {
+							/*** medium array, join approach ***/
+								for (_iterationNo = _totalIterations; --_iterationNo >= 0;) {
+									_sumArrayUsingJoinAndEval (_mediumArray);
+								}
+						},
+						function () {
+							/*** long array, loop approach ***/
+								for (_iterationNo = _totalIterations; --_iterationNo >= 0;) {
+									_sumArrayUsingLoop (_longArray);
+								}
+						},
+						function () {
+							/*** long array, join approach ***/
+								for (_iterationNo = _totalIterations; --_iterationNo >= 0;) {
+									_sumArrayUsingJoinAndEval (_longArray);
+								}
+						}
+					],
+					1000,
+					function (_executionTimes) {
+						/*** report the results ***/
+							_reportResults (
+								'<h1>Durations</h1>\n' +
+								'<p><b>short array, loop approach:</b> ' + _executionTimes [1] + 'ms</p>\n' +
+								'<p><b>short array, join approach:</b> ' + _executionTimes [2] + 'ms</p>\n' +
+								'<p><b>medium array, loop approach:</b> ' + _executionTimes [3] + 'ms</p>\n' +
+								'<p><b>medium array, join approach:</b> ' + _executionTimes [4] + 'ms</p>\n' +
+								'<p><b>long array, loop approach:</b> ' + _executionTimes [5] + 'ms</p>\n' +
+								'<p><b>long array, join approach:</b> ' + _executionTimes [6] + 'ms</p>\n'
+							);
+					}
+				);
+			};
+
+		/*** wire up the page widget ***/
+			page.wireUi ();
+	}
+});
+
+</script>
+
+</body>
+</html>
+

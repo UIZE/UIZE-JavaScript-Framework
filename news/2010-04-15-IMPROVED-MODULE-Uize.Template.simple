@@ -1,0 +1,61 @@
+The =Uize.Template= module has been improved with the addition of the new =Uize.Template.defineStandardEncoding= static method, addition of a number of new encodings, improvement of the existing =@required= directive and =Uize.Template.encode= and =Uize.Template.decode= static methods, and in a number of other ways.
+
+New Static Property: Uize.Template.encodings
+	The new =Uize.Template.encodings= static property, which is an object, allows custom encodings to be registered by assigning encoding profile objects as properties on it.
+
+	This new property subsumes the now deprecated =Uize.Template.encoders= and =Uize.Template.decoders= static properties.
+
+New Static Method: Uize.Template.defineStandardEncoding
+	The new =Uize.Template.defineStandardEncoding= static method provides a convenient way to define new standard encodings.
+
+	A standard encoding is an encoding whose encoder and decoder functions are static methods of the same module, and where those static methods accept as their first parameter a value to encode or decode, and as their optional second parameter encoding options. A standard encoding can be conveniently defined using the =Uize.Template.defineStandardEncoding= static method, by only specifying a few parameters and without having to flesh out the entire `Encoding Profile`. The majority of `Encodings` that are built into the =Uize.Template= module are standard encodings. As an example, the =json= encoding can easily be defined with the statement...
+
+	......................................................................
+	Uize.Template.defineStandardEncoding ('json','Uize.Json','to','from');
+	......................................................................
+
+New Encodings
+	Three new encodings have been added: =iso8601=, =tagAttributes=, and =tagAttributeValue=.
+
+	- =iso8601= - encodes to or decodes from an ISO8601 formatted date string
+	- =tagAttributes= - encodes to or decodes from a tag attributes string
+	- =tagAttributeValue= - encodes to or decodes from a tag attribute value string (excluding the enclosing quotes)
+
+Improved Directive: @required
+	When building up the canonical list of modules required by a template being compiled, the =@required= directive now makes sure to ignore any duplicate instances of required modules.
+
+	This applies both to duplicates that may occur within a single =@required= call, as well as duplicates that may arise across multiple =@required= calls. While duplicates are not a very likely occurrence, this protection does exist to prevent duplicates in the =required= property of the =Uize.Template.compile= method's full form result object. The =@required= directive now also supports a string that contains a comma-separated list of module names, in addition to the existing support for an array of module names.
+
+Improved Static Methods: Uize.Template.encode and Uize.Template.decode
+	The =Uize.Template.encode= and =Uize.Template.decode= static methods have been improved to now both support encoding chains, in the same format as can be used in assignment expressions in template code (eg. ='json -> urlPiece'=).
+
+	These methods now also support encoding options (eg. ='tagAttributes{nameCase:"lower"}'=), as well as mixed encoding directions (eg. ='!urlParams -> tagAttributes'=).
+
+Improved Documentation
+	The reference documentation for the =Uize.Template= module has been improved in a number of ways.
+
+	- Comprehensive reference documentation has been added for all available encodings.
+	- Explanations have been added for various concepts, including encodings, encodings chains, encoding profiles, and standard encodings.
+	- The documentation for the =Uize.Template.encode= and =Uize.Template.decode= static methods has been fleshed out to be much more thorough.
+
+Deprecated Static Properties: Uize.Template.encoders and Uize.Template.decoders
+	With the introduction of the new =Uize.Template.encodings= static property, the =Uize.Template.encoders= and =Uize.Template.decoders= static properties have been deprecated.
+
+Important Change in Encoding Dependencies
+	With the introduction of the new =Uize.Template.encodings= static property, the way that encodings imply dependencies upon code execution has changed.
+
+	It used to be that templates compiled using the =Uize.Template.compile= static method and that employed encodings could be guaranteed to work if the =Uize.Template= module was loaded. This is no longer the case. The =Uize.Template= module no longer directly requires modules that are required by encodings that can be used in templates. Instead, using encodings imparts module requirements upon the compiled template, and those modules will need to be loaded in order for the template to be processed (which may be at a later time than when the template is compiled).
+
+	This allows templates with diverse encoding needs to be compiled without having to have all modules loaded just in order to compile them. It is only when they are to be processed that the modules required by the encodings used in them will need to be loaded. This rule applies to template functions compiled using the =Uize.Template.compile= static method, as well as to using the =Uize.Template.encode= and =Uize.Template.decode= static methods.
+
+	When a template is compiled using the =Uize.Template.compile= method with the value ='full'= specified for its optional =templateOptionsOBJ= parameter, then the object returned by this method will contain a =required= property, which will be an array containing the list of all modules required by the template, including modules required by encodings used, along with any required modules declared using the =@required= directive.
+
+	The important point to remember is that an encoding can only be executed if the modules that it requires are loaded, otherwise an error will occur.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2010-04-15 - IMPROVED MODULE: Uize.Template
+....................................................................................

@@ -1,0 +1,11 @@
+The =Uize.Wsh.AutoScruncher= module now also builds JavaScript library (=.library.js=) files.
+
+The =Uize.Wsh.AutoScruncher.perform= static method now also recurses through all the folders, finding JavaScript library (=.library.js=) files and building scrunched versions that combine the scrunched versions of all the JavaScript modules referenced in the library file. It does this after first building scrunched versions of the JavaScript files throughout the Web site project.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-03-09 - IMPROVED MODULE: Uize.Wsh.AutoScruncher
+....................................................................................

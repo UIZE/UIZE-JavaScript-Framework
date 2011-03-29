@@ -1,0 +1,13 @@
+The =Uize.Curve.Mod= module is a package under the =Uize.Curve= namespace that defines various curve function modifiers, enabling the creation of new curve functions by combining existing curve functions.
+
+Curve function modifiers are curve function generators that accept curve functions as their primary inputs. The =Uize.Curve.Mod= module provides a good selection of these curve function modifiers. Curve function modifiers operate on the curve functions they are provided in order to produce new, modified curve functions. You can consider them as operators that operate on curve functions to produce new curve functions. They could also be thought of as specialized parameterized curve function generators, where some - or all - of the parameters just happen to be curve functions. As an example, the =Uize.Curve.Mod.blend= static method blends the two specified curve functions to produce a new curve function, with blend parameters that let you specify the blend between the two curve functions.
+
+[[Uize.Curve.Mod][LEARN MORE]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-07-17 - NEW MODULE: Uize.Curve.Mod
+....................................................................................

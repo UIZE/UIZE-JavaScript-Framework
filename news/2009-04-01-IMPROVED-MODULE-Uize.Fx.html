@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2009-04-01 - IMPROVED MODULE: Uize.Fx | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="The Uize.Fx module has been improved in a number of ways."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2009.html" class="breadcrumb breadcrumbWithArrow">2009 NEWS</a>
+	2009-04-01 - IMPROVED MODULE: Uize.Fx
+
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="The Uize.Fx.fadeStyle method now supports fading of the opacity style property.">1. Opacity Now Supported</a></li>
+			<li><a href="#2" title="The Uize.Fx.fadeStyle method now supports fading of a number of other CSS style properties, including wordSpacing, textIndent, and backgroundPosition.">2. Other Newly Supported Style Properties</a></li>
+			<li><a href="#3" title="The Uize.Fx.fadeStyle method now supports a wide variety of ways for specifying values for color CSS style properties.">3. More Flexible Color Values</a></li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<p>The <code><a href="../reference/Uize.Fx.html">Uize.Fx</a></code> module has been improved in a number of ways.</p>
+	
+	<a name="1"></a>
+	<h1 class="heading1" title="1. Opacity Now Supported"><span class="headingNumber"><a href="#1" title="1. Opacity Now Supported">1</a>. </span>Opacity Now Supported</h1>
+	<div class="contents1">
+		<p>The <code>Uize.Fx.fadeStyle</code> method now supports fading of the <code>opacity</code> style property.</p>
+		
+		<p>This module deals with the difference between Internet Explorer and browsers that support the CSS standard <code>opacity</code> style property. For IE, the proprietary <code>filter</code> style property is used, but as a developer you can specify <code>opacity</code> as if it were supported by IE.</p>
+		
+		<p><span class="allCaps">EXAMPLES</span></p>
+		
+		
+<pre class="sample-code">Uize.Fx.fadeStyle ('myNode',null,{opacity:0});        // from current to transparent
+Uize.Fx.fadeStyle ('myNode',{opacity:0},{opacity:1}); // from transparent to opaque
+</pre>
+	</div>
+	
+	<a name="2"></a>
+	<h1 class="heading1" title="2. Other Newly Supported Style Properties"><span class="headingNumber"><a href="#2" title="2. Other Newly Supported Style Properties">2</a>. </span>Other Newly Supported Style Properties</h1>
+	<div class="contents1">
+		<p>The <code>Uize.Fx.fadeStyle</code> method now supports fading of a number of other CSS style properties, including <code>wordSpacing</code>, <code>textIndent</code>, and <code>backgroundPosition</code>.</p>
+	</div>
+	
+	<a name="3"></a>
+	<h1 class="heading1" title="3. More Flexible Color Values"><span class="headingNumber"><a href="#3" title="3. More Flexible Color Values">3</a>. </span>More Flexible Color Values</h1>
+	<div class="contents1">
+		<p>The <code>Uize.Fx.fadeStyle</code> method now supports a wide variety of ways for specifying values for color CSS style properties.</p>
+		
+		<p>Basically, color values can be specified in any way that a color can be specified when using the single parameter variations of the <code>Uize.Color.RgbColor</code> constructor. For example, the following statements would all fade the background color of the node "myNode" from the current color to white...</p>
+		
+		<p><span class="allCaps">EXAMPLES</span></p>
+		
+		
+<pre class="sample-code">Uize.Fx.fadeStyle ('myNode',null,{backgroundColor:'#fff'});
+Uize.Fx.fadeStyle ('myNode',null,{backgroundColor:'#ffffff'});
+Uize.Fx.fadeStyle ('myNode',null,{backgroundColor:'f'});
+Uize.Fx.fadeStyle ('myNode',null,{backgroundColor:'Rgb(255,255,255)');
+Uize.Fx.fadeStyle ('myNode',null,{backgroundColor:{red:255,green:255,blue:255});
+Uize.Fx.fadeStyle ('myNode',null,{backgroundColor:[255,255,255]});
+Uize.Fx.fadeStyle ('myNode',null,{backgroundColor:new Uize.Color.RgbColor (255)});
+Uize.Fx.fadeStyle ('myNode',null,{backgroundColor:255});
+</pre>
+	</div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

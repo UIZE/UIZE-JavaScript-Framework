@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2009-07-10 - IMPROVED MODULE: Uize.Fade | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="The Uize.Fade module has been improved with the addition of a new curve set-get property, a new Uize.Fade.celeration static method, and with a more robust implementation for the inProgress set-get property."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2009.html" class="breadcrumb breadcrumbWithArrow">2009 NEWS</a>
+	2009-07-10 - IMPROVED MODULE: Uize.Fade
+
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="The new curve set-get property lets you specify a curve function in order to achieve a wide variety of different kinds of non-linear fade effects, including effects like bounce, springiness, wobble, elasticity, etc.">1. New curve Set-get Property</a></li>
+			<li><a href="#2" title="With the addition of the more versatile curve set-get property, the acceleration and deceleration set-get properties have been deprecated.">2. Set-get Properties Deprecated</a></li>
+			<li><a href="#3" title="With the introduction of the new curve set-get property and the deprecation of the acceleration and deceleration set-get properties, the new Uize.Fade.celeration static method has been introduced as a way of generating the same type of acceleration/deceleration curve functions that were implied by setting values of the acceleration and deceleration properties.">3. New Uize.Fade.celeration Static Method</a></li>
+			<li><a href="#4" title="The implementation of the inProgress set-get property has been improved to be more robust.">4. More Robust inProgress Set-get Property</a></li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<p>The <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> module has been improved with the addition of a new <code>curve</code> set-get property, a new <code>Uize.Fade.celeration</code> static method, and with a more robust implementation for the <code>inProgress</code> set-get property.</p>
+	
+	<a name="1"></a>
+	<h1 class="heading1" title="1. New curve Set-get Property"><span class="headingNumber"><a href="#1" title="1. New curve Set-get Property">1</a>. </span>New curve Set-get Property</h1>
+	<div class="contents1">
+		<p>The new <code>curve</code> set-get property lets you specify a curve function in order to achieve a wide variety of different kinds of non-linear fade effects, including effects like bounce, springiness, wobble, elasticity, etc.</p>
+		
+		<p>When setting a value for the <code>curve</code> property, you can provide your own hand-rolled curve function, or you can pick from the many convenient curve function generators provided in the <code><a href="../reference/Uize.Curve.html">Uize.Curve</a></code> and <code><a href="../reference/Uize.Curve.Rubber.html">Uize.Curve.Rubber</a></code> modules. Even more complex curve functions can be generated using the versatile curve function modifiers provided in the <code><a href="../reference/Uize.Curve.Mod.html">Uize.Curve.Mod</a></code> module. Now there's no more excuse to have boring animations.</p>
+	</div>
+	
+	<a name="2"></a>
+	<h1 class="heading1" title="2. Set-get Properties Deprecated"><span class="headingNumber"><a href="#2" title="2. Set-get Properties Deprecated">2</a>. </span>Set-get Properties Deprecated</h1>
+	<div class="contents1">
+		<p>With the addition of the more versatile <code>curve</code> set-get property, the <code>acceleration</code> and <code>deceleration</code> set-get properties have been deprecated.</p>
+		
+		<p>These properties are still supported for backwards compatibility, but will at some point be eliminated. Setting values for these properties will have the effect of creating a curve function using the new <code>Uize.Fade.celeration</code> static method and then setting the curve function created as the value of the new <code>curve</code> property.</p>
+	</div>
+	
+	<a name="3"></a>
+	<h1 class="heading1" title="3. New Uize.Fade.celeration Static Method"><span class="headingNumber"><a href="#3" title="3. New Uize.Fade.celeration Static Method">3</a>. </span>New Uize.Fade.celeration Static Method</h1>
+	<div class="contents1">
+		<p>With the introduction of the new <code>curve</code> set-get property and the deprecation of the <code>acceleration</code> and <code>deceleration</code> set-get properties, the new <code>Uize.Fade.celeration</code> static method has been introduced as a way of generating the same type of acceleration/deceleration curve functions that were implied by setting values of the <code>acceleration</code> and <code>deceleration</code> properties.</p>
+	</div>
+	
+	<a name="4"></a>
+	<h1 class="heading1" title="4. More Robust inProgress Set-get Property"><span class="headingNumber"><a href="#4" title="4. More Robust inProgress Set-get Property">4</a>. </span>More Robust inProgress Set-get Property</h1>
+	<div class="contents1">
+		<p>The implementation of the <code>inProgress</code> set-get property has been improved to be more robust.</p>
+		
+		<p>It is now possible to start and stop fades simply by setting the value of the inProgress set-get property - one no longer has to use the <code>start</code> and <code>stop</code> instance methods. To start a fade you could use the statement <code>myFade.set ({inProgress:true})</code>, and to stop a fade you could use the statement <code>myFade.set ({inProgress:false})</code>. Using the <code>start</code> instance method can still be useful in some cases, as it has the effect of first stopping the current fade. You can also use its optional <code>fadePropertiesOBJ</code> parameter to specify properties for the new fade process.</p>
+	</div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

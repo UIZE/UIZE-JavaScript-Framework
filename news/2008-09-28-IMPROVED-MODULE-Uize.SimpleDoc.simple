@@ -1,0 +1,11 @@
+The =Uize.SimpleDoc= module now automatically adds a =target&#61;"_blank"= attribute in link tags generated for URL's that begin with a protocol (eg. =http://www.somewhere.com/document.html= vs. just =document.html=).
+
+This causes absolute URL's (typically for links to external sites) to open up in a new tab or window, rather than replacing the current window or frame's contents.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2008-09-28 - IMPROVED MODULE: Uize.SimpleDoc
+....................................................................................

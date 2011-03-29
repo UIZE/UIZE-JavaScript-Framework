@@ -1,0 +1,226 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Tiled Zoom and Pan - HTML Source Code | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework HTML example source code"/>
+	<meta name="description" content="This is the source code for the Tiled Zoom and Pan example"/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../../css/page.css"/>
+	<link rel="stylesheet" href="../../css/page.source.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../../index.html" title="UIZE JavaScript Framework home"></a>
+	SOURCE CODE: Tiled Zoom and Pan
+	<div id="page-actions" class="pageActions">
+		<a href="../image-port-zoom-and-pan-tiled.html" class="buttonLink">VIEW EXAMPLE</a>
+	</div>
+</h1>
+
+<pre>
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+&lt;head&gt;
+  &lt;title&gt;Tiled Zoom and Pan | JavaScript Examples | UIZE JavaScript Framework&lt;/title&gt;
+  &lt;meta name="keywords" content="Uize.Widget.ImagePort.Draggable"/&gt;
+  &lt;meta name="description" content="In this demo, an image is split into six image port tiles. A JavaScript animation zooms from seeing it repeated six times to seeing the large version."/&gt;
+  &lt;link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/&gt;
+  &lt;link rel="stylesheet" href="../css/page.css"/&gt;
+  &lt;link rel="stylesheet" href="../css/page.example.css"/&gt;
+  &lt;link rel="stylesheet" href="css/selector-links.css"/&gt;
+  &lt;style type="text/css"&gt;
+    .mainUi {
+      width:651px;
+      margin:auto;
+    }
+
+    /*** image ports grid ***/
+      .imagePortsGrid {
+        position:relative;
+        float:left;
+        width:444px;
+        height:318px;
+        padding-left:1px;
+        padding-top:1px;
+        background:#000;
+      }
+
+      /*** image port ***/
+        .imagePortsGrid .imagePort {
+          position:relative;
+          float:left;
+          width:147px;
+          height:105px;
+          margin-right:1px;
+          margin-bottom:1px;
+          overflow:hidden;
+        }
+        .imagePortsGrid .imagePort img {
+          position:absolute;
+          cursor:pointer;
+          border:none;
+          width:500px;
+          height:357px;
+        }
+
+    /*** selector links ***/
+      .selectorLinks {
+        float:left;
+        width:200px;
+        margin-left:6px;
+      }
+  &lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+&lt;script type="text/javascript" src="../js/Uize.js"&gt;&lt;/script&gt;
+
+&lt;h1 class="document-title"&gt;
+  &lt;a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"&gt;&lt;/a&gt;
+  &lt;a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow"&gt;JAVASCRIPT EXAMPLES&lt;/a&gt;
+  Tiled Zoom and Pan
+  &lt;div id="page-actions" class="pageActions"&gt;
+    &lt;a href="source-code/image-port-zoom-and-pan-tiled.html" class="buttonLink"&gt;SOURCE&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/h1&gt;
+
+&lt;div class="main"&gt;
+  &lt;!-- explanation copy --&gt;
+
+  &lt;div class="explanation"&gt;
+    &lt;p&gt;In this example, a 3x3 matrix of draggable image port widgets is set up. The &lt;a href="../reference/Uize.Widget.ImagePort.Draggable.html"&gt;&lt;code&gt;Uize.Widget.ImagePort.Draggable&lt;/code&gt;&lt;/a&gt; class wires up a view port to an image and lets you click-and-drag the image to pan the view of it. Holding the control modifier key while dragging up and down zooms in and out, respectively. Initially, the images are zoomed so that clicking-and-dragging will pan. When you select a new image from the list to the right of the grid, all the image port widgets will be set to display that image. The initial zoom level will show the entire image in each grid cell. Then, a &lt;a href="../reference/Uize.Fade.html"&gt;&lt;code&gt;Uize.Fade&lt;/code&gt;&lt;/a&gt; instance is used to fade the zoom amount so that each image port is zoomed out. The exact ending values for the &lt;code&gt;sizingValue&lt;/code&gt;, &lt;code&gt;alignX&lt;/code&gt;, and &lt;code&gt;alignY&lt;/code&gt; set-get properties results in the various cells of the grid combining to form a faceted representation of the image as a whole - a neat effect. After selecting an image, now you can click-and-drag within the individual grid cells to "disrupt" the image to artistic effect.&lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;div class="mainUi"&gt;
+    &lt;!-- the matrix of nine images that are cropped by parent nodes --&gt;
+    &lt;div id="page-imagePortsGrid" class="imagePortsGrid"&gt;
+      &lt;!-- row 1 --&gt;
+        &lt;div id="imagePort1" class="imagePort"&gt;&lt;img id="imagePort1-image" src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228866001826566384&amp;max_dim=500" title="" alt="Concrete Eternity"/&gt;&lt;/div&gt;
+        &lt;div id="imagePort2" class="imagePort"&gt;&lt;img id="imagePort2-image" src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228321774790917687&amp;max_dim=500" title="" alt="Corrugate It"/&gt;&lt;/div&gt;
+        &lt;div id="imagePort3" class="imagePort"&gt;&lt;img id="imagePort3-image" src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228463251413365530&amp;max_dim=500" title="" alt="Crank it Up"/&gt;&lt;/div&gt;
+      &lt;!-- row 2 --&gt;
+        &lt;div id="imagePort4" class="imagePort"&gt;&lt;img id="imagePort4-image" src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228483162492178759&amp;max_dim=500" title="" alt="Heavens Open Over Pedro"/&gt;&lt;/div&gt;
+        &lt;div id="imagePort5" class="imagePort"&gt;&lt;img id="imagePort5-image" src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228623703668130129&amp;max_dim=500" title="" alt="Just a Visitor"/&gt;&lt;/div&gt;
+        &lt;div id="imagePort6" class="imagePort"&gt;&lt;img id="imagePort6-image" src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228760841280004992&amp;max_dim=500" title="" alt="Ocean\'s Kiss"/&gt;&lt;/div&gt;
+      &lt;!-- row 3 --&gt;
+        &lt;div id="imagePort7" class="imagePort"&gt;&lt;img id="imagePort7-image" src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228580091324147918&amp;max_dim=500" title="" alt="Retirement Home"/&gt;&lt;/div&gt;
+        &lt;div id="imagePort8" class="imagePort"&gt;&lt;img id="imagePort8-image" src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228026937512483785&amp;max_dim=500" title="" alt="Shadow of the Past"/&gt;&lt;/div&gt;
+        &lt;div id="imagePort9" class="imagePort"&gt;&lt;img id="imagePort9-image" src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228225341102196754&amp;max_dim=500" title="" alt="Urban Heavens"/&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div id="page-imageSelector" class="selectorLinks"&gt;&lt;/div&gt;
+    &lt;div style="clear:left;"&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- JavaScript code to wire up the sequenced show and "thumb zoom" behavior for the image ports grid --&gt;
+
+&lt;script type="text/javascript"&gt;
+
+Uize.module ({
+  required:[
+    'UizeDotCom.Page.Example.library',
+    'UizeDotCom.Page.Example',
+    'Uize.Node',
+    'Uize.Widget',
+    'Uize.Fade',
+    'Uize.Widget.ImagePort.Draggable',
+    'Uize.Curve'
+  ],
+  builder:function () {
+    /*** create the example page widget ***/
+      var page = window.page = new UizeDotCom.Page.Example ({evaluator:function (code) {eval (code)}});
+
+    /*** create and wire the ImagePort instances ***/
+      var
+        imagePorts = Uize.Widget.ImagePort.Draggable.spawn (
+          {
+            idPrefix:{className:'imagePort'},
+            maxSizingValue:10,
+            minSizingValue:1,
+            sizingLowerBound:'0',
+            sizingUpperBound:'fill',
+            sizingValue:1,
+            alignX:.5,
+            alignY:.5
+          },
+          page
+        ),
+        imagePortsLength = imagePorts.length
+      ;
+
+    /*** utility functions ***/
+      function getImagePortImageNode (imagePortNo) {return imagePorts [imagePortNo].getNode ('image')}
+
+    /*** code for switching the image ***/
+      var
+        fade = new Uize.Fade ({
+          duration:1800,
+          startValue:1,
+          endValue:3,
+          curve:Uize.Curve.easeInOutPow (5)
+        }),
+        totalRows = 3,
+        totalColumns = 3
+      ;
+      fade.wire (
+        'Changed.value',
+        function () {Uize.callOn (imagePorts,'set',[{sizingValue:+fade}])}
+      );
+      function setImageForMatrix (imageSrc) {
+        for (var imagePortNo = -1; ++imagePortNo &lt; imagePortsLength;) {
+          var
+            rowNo = Math.floor (imagePortNo / totalColumns),
+            columnNo = imagePortNo - rowNo * totalColumns
+          ;
+          imagePorts [imagePortNo].set ({
+            sizingValue:1,
+            alignX:columnNo / (totalColumns - 1),
+            alignY:rowNo / (totalRows - 1)
+          });
+          getImagePortImageNode (imagePortNo).src = imageSrc;
+        }
+        setTimeout (function () {fade.start ()},1000);
+      }
+
+    /*** generate interface for changing the image set ***/
+      var htmlChunks = ['&lt;div class="exampleSectionHeading" style="margin:0;"&gt;CHANGE IMAGE&lt;/div&gt;'];
+      for (var imagePortNo = -1; ++imagePortNo &lt; imagePortsLength;) {
+        var imagePortNodeImg = getImagePortImageNode (imagePortNo);
+        htmlChunks.push (
+          '&lt;a href="javascript://" class="buttonLink linkedJs" onfocus="this.blur ()" title="setImageForMatrix (\'' + imagePortNodeImg.src + '\')"&gt;' +
+            '&amp;nbsp;' + imagePortNodeImg.alt + '&amp;nbsp;' +
+          '&lt;/a&gt;'
+        );
+      }
+      Uize.Node.injectHtml (page.getNode ('imageSelector'),htmlChunks.join (''));
+
+    /*** wire up the page widget ***/
+      page.wireUi ();
+  }
+});
+
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+</pre>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.library',
+		'UizeDotCom.Page'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page).wireUi ()}
+});
+
+</script>
+
+</body></html>

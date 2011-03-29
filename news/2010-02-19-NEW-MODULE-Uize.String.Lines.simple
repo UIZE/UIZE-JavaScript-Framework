@@ -1,0 +1,21 @@
+The new =Uize.String.Lines= module provides methods for working with multi-line strings, supporting indenting, changing linebreaks, modifying lines, etc.
+
+The =Uize.String.Lines= module lets you easily...
+
+- iterate across lines using the =Uize.String.Lines.forEach= method
+- modify the contents of lines using the =Uize.String.Lines.modify= method
+- filter lines using the =Uize.String.Lines.retainMatching=, =Uize.String.Lines.removeMatching=, and =Uize.String.Lines.removeBlanks= methods
+- trim whitespace on all lines using the =Uize.String.Lines.trim=, =Uize.String.Lines.trimLeft=, and =Uize.String.Lines.trimRight= methods
+- analyze and modify indentation on all lines using the =Uize.String.Lines.getIndentRange=, =Uize.String.Lines.indent=, =Uize.String.Lines.switchIndentType=, and =Uize.String.Lines.normalizeIndent= methods
+- analyze and modify linebreak type using the =Uize.String.Lines.getLinebreakType= and =Uize.String.Lines.switchLinebreakType= methods
+- split a multi-line string into a lines array using the =Uize.String.Lines.split= method
+
+[[Uize.String.Lines][LEARN MORE]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2010-02-19 - NEW MODULE: Uize.String.Lines
+....................................................................................

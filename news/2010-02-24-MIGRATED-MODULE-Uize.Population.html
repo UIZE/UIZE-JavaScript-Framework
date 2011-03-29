@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2010-02-24 - MIGRATED MODULE: Uize.Population | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="The Uize.Population module has been migrated to under the Uize.Widget namespace as Uize.Widget.Population."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2010.html" class="breadcrumb breadcrumbWithArrow">2010 NEWS</a>
+	2010-02-24 - MIGRATED MODULE: Uize.Population
+
+</h1>
+
+<div class="main">
+<div class="contents0">
+	<p>The <code>Uize.Population</code> module has been migrated to under the <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> namespace as <code><a href="../reference/Uize.Widget.Population.html">Uize.Widget.Population</a></code>.</p>
+	
+	<p><span class="allCaps">MIGRATED</span></p>
+	
+	
+<pre class="sample-code">Uize.Population  &gt;&gt; BECOMES &gt;&gt;  Uize.Widget.Population
+</pre>
+	
+	<p><span class="allCaps">WHAT'S CHANGED</span></p>
+	
+	<p>For the most part, the interface is entirely the same and compatible with the old interface, with some very minor differences. As a widget class now, instances of the <code><a href="../reference/Uize.Widget.Population.html">Uize.Widget.Population</a></code> class must be wired (by calling the <code>wireUi</code> instance method) before changing the value of the <code>items</code> set-get property will result in an update of the contents of the instance's DOM node. Also, as a true widget class, instances of the <code><a href="../reference/Uize.Widget.Population.html">Uize.Widget.Population</a></code> class can be added as child widgets of other widget instances. Finally, the DOM node into which generated HTML is injeted can now be specified with either of the <code>idPrefix</code>, <code>node</code>, or <code>container</code> set-get properties. This change, which is not backwards compatible, has the benefit of further cleaning up the <code><a href="../reference/Uize.html">Uize</a></code> root namespace.</p>
+	
+	<p><span class="allCaps">UPDATING YOUR CODE</span></p>
+	
+	<p>The two examples that were previously using the now defunct <code>Uize.Population</code> class, <a href="../examples/populating-photo-details.html">Populating Photo Details</a> and <a href="../examples/population-structured-record.html">Structured Record Population</a>, have been updated to use the new <code><a href="../reference/Uize.Widget.Population.html">Uize.Widget.Population</a></code> class. If you were previously using the <code>Uize.Population</code> class, then you can use these two example pages as a reference when updating your own code.</p>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

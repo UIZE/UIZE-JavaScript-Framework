@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2008-05-28 - Framework Updates | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="The objectName instance property of the Uize base class has been renamed to instanceId."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2008.html" class="breadcrumb breadcrumbWithArrow">2008 NEWS</a>
+	2008-05-28 - Framework Updates
+
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="The objectName instance property of the Uize base class has been renamed to instanceId.">1. myInstance.objectName Eliminated</a></li>
+			<li><a href="#2" title="The widgets instance property of the Uize.Widget base class has been deprecated in favor of the new children instance property, and the addChild and removeChild instance methods.">2. myWidget.widgets Deprecated</a></li>
+			<li><a href="#3" title="The Uize.DataFace module has been eliminated and its two methods have been promoted to being first class citizens of the Uize.Node package.">3. Uize.DataFace Eliminated</a></li>
+			<li><a href="#4" title="The getByNameOrId static method of the Uize.Node module has been deprecated in favor of an updated version of the Uize.Node.getById static method.">4. Uize.Node.getByNameOrId Deprecated</a></li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<a name="1"></a>
+	<h1 class="heading1" title="1. myInstance.objectName Eliminated"><span class="headingNumber"><a href="#1" title="1. myInstance.objectName Eliminated">1</a>. </span>myInstance.objectName Eliminated</h1>
+	<div class="contents1">
+		<p>The <code>objectName</code> instance property of the <code><a href="../reference/Uize.html">Uize</a></code> base class has been renamed to <code>instanceId</code>.</p>
+		
+		<p>This is a seldom used property, so the chances of your code having used it are very slim. The old name has not been deprecated, but has been completely eliminated. Affected modules of the UIZE JavaScript Framework have been updated appropriately.</p>
+	</div>
+	
+	<a name="2"></a>
+	<h1 class="heading1" title="2. myWidget.widgets Deprecated"><span class="headingNumber"><a href="#2" title="2. myWidget.widgets Deprecated">2</a>. </span>myWidget.widgets Deprecated</h1>
+	<div class="contents1">
+		<p>The <code>widgets</code> instance property of the <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> base class has been deprecated in favor of the new <code>children</code> instance property, and the <code>addChild</code> and <code>removeChild</code> instance methods.</p>
+		
+		<p>The <code>widgets</code> property was an object, having a <code>map</code> property which was an object hash of all of a widget's children, an <code>add</code> method which allowed child widgets to be added, and a <code>remove</code> method which allowed child widgets to be removed. The new interface is semantically more elegant.</p>
+		
+		<p><span class="allCaps">SUMMARY</span></p>
+		
+		
+<pre class="sample-code">myWidget.widgets.map           &gt;&gt; BECOMES &gt;&gt;  myWidget.children
+myWidget.widgets.add (...)     &gt;&gt; BECOMES &gt;&gt;  myWidget.addChild (...)
+myWidget.widgets.remove (...)  &gt;&gt; BECOMES &gt;&gt;  myWidget.removeChild (...)
+</pre>
+		
+		<p><span class="allCaps">INSTEAD OF...</span></p>
+		
+		
+<pre class="sample-code">myWidget.widgets.map.someChild.widgets.map.someChild
+</pre>
+		
+		<p><span class="allCaps">USE...</span></p>
+		
+		
+<pre class="sample-code">myWidget.children.someChild.children.someChild
+</pre>
+		
+		<p>The <code>widgets</code> property has only been deprecated, so code that uses it will still work. However, code should be gradually refactored to use the new interface as the <code>widgets</code> property will be eliminated at some point in the future. Affected modules of the UIZE JavaScript Framework have been updated appropriately.</p>
+	</div>
+	
+	<a name="3"></a>
+	<h1 class="heading1" title="3. Uize.DataFace Eliminated"><span class="headingNumber"><a href="#3" title="3. Uize.DataFace Eliminated">3</a>. </span>Uize.DataFace Eliminated</h1>
+	<div class="contents1">
+		<p>The <code>Uize.DataFace</code> module has been eliminated and its two methods have been promoted to being first class citizens of the <code><a href="../reference/Uize.Node.html">Uize.Node</a></code> package.</p>
+		
+		<p>Affected modules of the UIZE JavaScript Framework have been updated appropriately.</p>
+		
+		<p><span class="allCaps">SUMMARY</span></p>
+		
+		
+<pre class="sample-code">Uize.DataFace.setNodeValue (...)  &gt;&gt; BECOMES &gt;&gt;  Uize.Node.setValue (...)
+Uize.DataFace.getNodeValue (...)  &gt;&gt; BECOMES &gt;&gt;  Uize.Node.getValue (...)
+</pre>
+	</div>
+	
+	<a name="4"></a>
+	<h1 class="heading1" title="4. Uize.Node.getByNameOrId Deprecated"><span class="headingNumber"><a href="#4" title="4. Uize.Node.getByNameOrId Deprecated">4</a>. </span>Uize.Node.getByNameOrId Deprecated</h1>
+	<div class="contents1">
+		<p>The <code>getByNameOrId</code> static method of the <code><a href="../reference/Uize.Node.html">Uize.Node</a></code> module has been deprecated in favor of an updated version of the <code>Uize.Node.getById</code> static method.</p>
+		
+		<p>The way that <code>Uize.Node.getById</code> now works, if getting the node by id fails, an attempt will be made to get the node by name. As such, the <code>getById</code> method name is a slight misnomer, but its name may change in future as well to become more generic. The benefit of using the <code>Uize.Node.getById</code> method is that it implements support for node caching which can speed up performance in certain browsers.</p>
+		
+		<p><span class="allCaps">SUMMARY</span></p>
+		
+		
+<pre class="sample-code">Uize.Node.getByNameOrId (...)  &gt;&gt; BECOMES &gt;&gt;  Uize.Node.getById (...)
+</pre>
+	</div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

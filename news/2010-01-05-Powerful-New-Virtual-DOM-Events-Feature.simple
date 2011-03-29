@@ -1,0 +1,86 @@
+The UIZE JavaScript Framework has introduced a powerful new construct called a Virtual DOM Event (implemented in the new =Uize.Node.VirtualEvent= module), which allows more sophisticated user interactions with DOM nodes to be expressed using the event paradigm.
+
+Overview
+	Put quite simply, a Virtual DOM Event is an event for a DOM node that is not part of the standard set of DOM events, but that is implemented in supplemental JavaScript code.
+
+	While the DOM standard *does* provide a decent array of different events for different types of DOM nodes, there are still certain "events" that can occur during the user's interaction with a DOM node for which standard DOM events do not exist. Consider the classic case of the user mousing over a node and then resting the mouse for a certain period of time over that node. You might like to know if the user does this for a specific node, because this may be your indication that the user is interested in what clicking the node might do, and you may wish to present them with a helpful tooltip that is implemented using HTML and that provides them more information about what they're considering clicking on.
+
+	Now, you probably don't want to trigger the display of an elaborate info tooltip based merely upon the user mousing over the node, since this may hamper the page's performance - especially if displaying the tooltip requires an Ajax request - and displaying and hiding chunky tooltips as the user moves the mouse across the page may be a dreadful user experience, in any event. In such cases, it would be really nice to have an event that fires only when the user has actually stopped the mouse over a node. Virtual DOM events to the rescue! Specifically, in this case, the =mouseRest= virtual DOM event. This event accepts a duration parameter, to let you tune how long the user needs to keep the mouse rested over the node before the event is fired.
+
+What's in the Uize.Node.VirtualEvent Module
+	At the highest level, the new =Uize.Node.VirtualEvent= module provides the following...
+
+	- a foundation and features (including static methods) to facilitate the creation of virtual DOM events
+	- a sizable selection of virtual DOM event implementations (eg. =ctrlClick=, =shiftClick=, =mouseRest=, =mouseRemainDown=, =remainFocused=, etc.)
+	- a namespace, under which further sets of virtual DOM event implementations can be organized into modules
+
+Changes to the mouserest Virtual DOM Event
+	As part of the process of creating a generalized system for virtual DOM events, the old =mouserest= virtual DOM event that was previously supported in the =Uize.Node= module has been migrated.
+
+	Must Always Specify Parentheses
+		As per the new and generalized implementation for virtual DOM events, specifying them by name in the node wiring and unwiring methods requires the event names to always end with parentheses.
+
+		If you were using the =mouserest= event in the form without the parentheses, where you were relying on the default rest duration, then such code would need to be changed as shown in the following example...
+
+		INSTEAD OF...
+		...........................................................................
+		Uize.Node.wire ('myNode','mouserest',function () {alert ('mouse rested')});
+		...........................................................................
+
+		NOW USE...
+		.............................................................................
+		Uize.Node.wire ('myNode','mouseRest()',function () {alert ('mouse rested')});
+		.............................................................................
+
+	Implementation Migrated
+		The implementation for the old =mouserest= event has been migrated into the new =Uize.Node.VirtualEvent= module.
+
+		This means that a JavaScript module that wants to use this event will have to require the =Uize.Node.VirtualEvent= module. If you had any modules or pages that were using the old =mouserest= virtual DOM event, those pages should continue to work if you were specifying the =mouserest= event with parentheses at the end, and if you modify those modules or pages to require the new =Uize.Node.VirtualEvent= module.
+
+	Now Camel-cased
+		As part of the migration of the =mouserest= event, it is now registered by the name =mouseRest= (camel-cased, in other words), although the all lowercase form is still supported.
+
+		INSTEAD OF...
+		................................................................................
+		Uize.Node.wire ('myNode','mouserest(500)',function () {alert ('mouse rested')});
+		................................................................................
+
+		IDEALLY, YOU SHOULD USE...
+		.............................................................................
+		Uize.Node.wire ('myNode','mouseRest(500)',function () {alert ('mouse rested')});
+		.............................................................................
+
+	Can Now Use Maker Method
+		As part of the migration of the =mouserest= event, instances of this virtual DOM event can now also be created using the new =Uize.Node.VirtualEvent.mouseRest= maker method.
+
+		INSTEAD OF...
+		................................................................................
+		Uize.Node.wire ('myNode','mouserest(500)',function () {alert ('mouse rested')});
+		................................................................................
+
+		YOU COULD ALSO USE...
+		............................................................................
+		Uize.Node.wire (
+			'myNode',
+			Uize.Node.VirtualEvent.mouseRest (500),  // specified by object reference
+			function () {alert ('mouse rested')}
+		);
+		............................................................................
+
+		Using the latter form, while lengthier, makes it obvious that this code has a dependency on the =Uize.Node.VirtualEvent= module, because that's where the =Uize.Node.VirtualEvent.mouseRest= static method is implemented.
+
+	Not Backwards Compatible
+		The changes associated with this migration of the old =mouserest= event are not backwards compatible, and this migration will require an update to any code that was using the old =mouserest= event.
+
+	UIZE Modules Updated, As Necessary
+		Some JavaScript modules in the UIZE JavaScript Framework that were using the old =mouserest= event, such as the =Uize.Widget.CollectionItem.Zooming= module, have been updated to work with these changes.
+
+[[Uize.Node.VirtualEvent][LEARN MORE]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2010-01-05 - Powerful New Virtual DOM Events Feature
+....................................................................................

@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2009-12-02 - NEW MODULE: Uize.Fx.xTextShadow | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="The new Uize.Fx.xTextShadow extension module implements support for animating the CSS3 text-shadow property, enabling a wide variety of stunning effects."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2009.html" class="breadcrumb breadcrumbWithArrow">2009 NEWS</a>
+	2009-12-02 - NEW MODULE: Uize.Fx.xTextShadow
+
+</h1>
+
+<div class="main">
+<div class="contents0">
+	<p>The new <code><a href="../reference/Uize.Fx.xTextShadow.html">Uize.Fx.xTextShadow</a></code> extension module implements support for animating the CSS3 <code>text-shadow</code> property, enabling a wide variety of stunning effects.</p>
+	
+	<p>Using this module, color, horizontal offset, vertical offset, and blur radius properties for an arbitrary number of text shadows can be animated between one state and another, making a vast array of interesting effects possible. Once the <code><a href="../reference/Uize.Fx.xTextShadow.html">Uize.Fx.xTextShadow</a></code> module has been loaded, the <code>Uize.Fx.fadeStyle</code> method of the <code><a href="../reference/Uize.Fx.html">Uize.Fx</a></code> module can be used to fade/animate the properties of text shadows, as shown in the following example...</p>
+	
+	<p><span class="allCaps">EXAMPLE</span></p>
+	
+	
+<pre class="sample-code">Uize.Fx.fadeStyle (
+  'myNode',
+  {
+    color:'#fff',
+    backgroundColor:'#000',
+    textShadow:'#000 0px 0 0em, #000 0px 0 0em, #000 0px 0 0em, #000 0px 0 0em'
+  },
+  {
+    color:'#000',
+    backgroundColor:'#045',
+    textShadow:'#0ff -30px 0 .5em, #0ff 30px 0 .5em, #0f0 -20px 0 1em, #0f0 20px 0 1em'
+  },
+  500
+);
+</pre>
+	
+	<p>Furthermore, once the <code><a href="../reference/Uize.Fx.xTextShadow.html">Uize.Fx.xTextShadow</a></code> module has been loaded, all modules that use the <code><a href="../reference/Uize.Fx.html">Uize.Fx</a></code> module in their implementation will get the benefit of being able to animate text shadows. For example, the <code><a href="../reference/Uize.Widget.HoverFader.html">Uize.Widget.HoverFader</a></code> widget class, which uses the <code>Uize.Fx.fadeStyle</code> method in its implementation, will be able to support fading of text shadows and will support default and hover styles that contain text shadow properties. A good demonstration of this can be seen in the <a href="../examples/hover-fader-text-shadow-animation.html">Hover Fader Text Shadow Animation</a> example.</p>
+	
+	<p><a href="../reference/Uize.Fx.xTextShadow.html">LEARN MORE</a></p>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

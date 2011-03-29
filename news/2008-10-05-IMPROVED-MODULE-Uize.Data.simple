@@ -1,0 +1,11 @@
+The =Uize.Data= module has been improved with the addition of the two new =Uize.Data.min= and =Uize.Data.max= static methods that return the minimum value and maximum value from the specified array (or object), respectively.
+
+Also, the =Uize.Data.getValues= static method has been improved to return the argument passed to it, if that argument is an array, providing a convenient way to canonicalize an object or array to an array of values.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2008-10-05 - IMPROVED MODULE: Uize.Data
+....................................................................................

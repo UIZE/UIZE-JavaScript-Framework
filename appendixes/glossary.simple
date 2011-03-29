@@ -1,0 +1,93 @@
+Introduction
+	This document is a glossary of terms that are used throughout the documentation for the UIZE JavaScript Framework.
+
+Terms
+	Asynconditional
+		The pattern of using lambda closure to combine asynchronous function calls into a conditional execution flow.
+
+		EXAMPLE
+		....................................................
+		function doSomethingAsynchronous (callback) {
+			/*
+				do something asynchronous (like AJAX request),
+				then call callback function
+			*/
+		}
+
+		if (needToDoSomethingAsynchronous) {
+			doSomethingAsynchronous (continuation);
+		} else {
+			continuation ();
+		}
+		function continuation () {
+			/*
+				do all the rest of the cool
+				stuff that will make the world
+				a better place for future generations
+			*/
+		}
+		....................................................
+
+	code beside
+		A JavaScript file that provides the controller logic for a page and that is typically named the same as the page's source file, but with the page file's extension replaced with the =.js= extension.
+
+		For example, in the .NET world, an aspx page will typically pair a =.aspx= page file with a =.aspx.cs= code behind file. If such a page also had substantial JavaScript controller logic - sufficient to warrant putting it in an external JavaScript file - then that JavaScript file would sit alongside the other two files, named as...
+
+		.NET EXAMPLE
+		.......................
+		myfolder/mypage.aspx
+		myfolder/mypage.aspx.cs
+		myfolder/mypage.js
+		.......................
+
+		Or, in the PHP world...
+
+		PHP EXAMPLE
+		...................
+		myfolder/mypage.php
+		myfolder/mypage.js
+		...................
+
+	CRIS
+		A mechanism called a Circular Reference Isolation System is employed in the event wiring mechanism of the =Uize.Node= package and acts to isolate DOM nodes from their true event handler code, thereby avoiding all circular references and possible DOM node memory leaks in Internet Explorer 6.
+
+	fade
+		In the context of the UIZE JavaScript Framework, the term "fade" is used to refer to an automated interpolation of a value between a start value and an end value.
+
+		Accordingly, other terms that are synonymous with "fade" include "animation", "morph" or "morphing", "tween" or "tweening", "effects", "automation", and such like. The term "fade" is a generic term that can refer to time-based fades as well as non-time-based fades. Moreover, a "fade" does not need to control a property that is manifested visually, but could also control things unseen.
+
+	GLUE
+		GLUE, which stands for Glue Logic Upon Elements, is a core principle of the UIZE JavaScript Framework.
+
+		At its heart, GLUE aims to aid the Web interface design process by decoupling the interface skin development from the interface functionality development. Widgets in the UIZE JavaScript Framework employ this core principle.
+
+	Implied Node
+		In the UIZE JavaScript Framework, all widgets can have a set of implied nodes - DOM nodes that are expected to be in the document for the widget and that will be wired up to represent state and potentially allow user control of state.
+
+		This is part of the "contract" between a UIZE widget's JavaScript code and its markup in the document. (credit goes to Jan Borgersen for suggesting the term "implied node")
+
+	JavaScript Library
+		In the UIZE JavaScript Framework, JavaScript libraries are bundles of JavaScript modules.
+
+		Think of a JavaScript module as like a book, where the various methods and properties of the module make up the "pages" of the book. A library is a collection of books. So, in this metaphor, a JavaScript library file is a collection of JavaScript modules, bundled together into a single file. JavaScript libraries offer a performance benefit for pages, by reducing the number of HTTP requests needed in order for the page to have all the JavaScript modules it needs.
+
+		For more information on JavaScript libraries, consult the explainer [[../explainers/javascript-libraries.html][JavaScript Libraries]].
+
+	JavaScript Module
+		In the UIZE JavaScript Framework, classes, packages, and extensions are implemented in JavaScript modules.
+
+		JavaScript modules are typically implemented in external JavaScript files - usually with one module defined per file. The UIZE JavaScript Framework reserves the term "library" to refer to collections of modules. To improve page load performance, many JavaScript modules can be bundled together in a single `JavaScript Library` file.
+
+		For more information on JavaScript libraries, consult the explainer [[../explainers/javascript-modules.html][JavaScript Modules]].
+
+	Node Blob
+		A node blob is a concept that exists in the =Uize.Node= and =Uize.Widget= classes, whereby one ore more DOM nodes can be specified using an arbitrarily complex data structure.
+
+		Such a data structure may employ an arbitrary mix of objects, arrays, and simple values that are node references or strings representing node ID's.
+
+	Paramless
+		A [[http://en.wikipedia.org/wiki/Contraction_(grammar)][contraction]] of the word "paremeterless", meaning without parameters or having no parameters. A paramless function is a function that accepts no parameters / arguments.
+
+	Thinterface
+		The practice of maintaining thin interfaces wherever possible and not exposing something publicly until there is a compelling need for it and it is well thought out.
+

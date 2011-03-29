@@ -1,0 +1,59 @@
+listings
+:
+	fullName: WardTog
+	subTitle: Hometown Pride T-Shirts, Mugs, and more!
+	text::
+		WardTog gear is <b>THE</b> perfect way to express your love and pride for your country, state or city. With our t-shirts, mugs, bumper stickers and other products, you can represent your hometown for all to see. Or you can give one of our WardTog products as a gift to a friend or loved one. We have gifts for over 900 locations including all of the 50 states in the <a href="http://www.wardtog.com/united-states+gifts" class="externalSiteLink" target="_blank">United States</a> and many cities within them, as well as all the <a href="http://www.wardtog.com/international+gifts" class="externalSiteLink" target="_blank">international countries</a> and their major cities. There are many <a href="http://www.wardtog.com/designs" class="externalSiteLink" target="_blank">designs</a> to choose from, so there's definitely something for everyone! WardTog is a <a href="http://www.benmvp.com/" class="externalSiteLink" target="_blank">BenMVP</a> shoppe.
+
+		WardTog is a hand-crafted e-commerce website running on a LAMP stack (Linux, Apache, MySQL and PHP). WardTog utilizes the UIZE JavaScript Framework for client-side interactions, but primarily for shell scripting (for building static pages, processing recommendations, etc). WardTog is also built on top of the <a href="http://www.zazzle.com/api?rf=238165161201109799" class="externalSiteLink" target="_blank">Zazzle Templates API</a>, such that all products are dynamically generated when viewed and purchased on Zazzle.
+	link: http://www.wardtog.com/
+:
+	fullName: Zazzle Keds Shoe Design Tool
+	text::
+		The Keds shoe design tool on the Zazzle, Inc. Web site is an Ajax application with client-side drag-and-drop features that is built using the UIZE JavaScript Framework.
+
+		With the help of powerful server-side product visualization technology, the tool lets users add custom images and text, and change colors and patterns for may different parts of the shoe, including the tongue, heel, laces, eyelets, stitching, lining, upper and lower midsole, upper binding and tongue binding, and more.
+
+		Different configurations of the same design tool allow users to create numerous styles of Keds shoes, including Mens PRO-Keds Hi, Mens PRO-Keds Lo, Womens Slip On, Womens Mini Slip On, Womens Lace Up, Kids Slip On, and Kids Lace Up. Users can publish their shoe designs to the public marketplace, and orders for those shoes will be produced on demand and delivered fresh to the customer's doorstep.
+	link: http://www.zazzle.com/cr/design/pt-kedsshoe/style-mens_hightop?customize_it=false
+:
+	fullName: Zazzle Shirt Product Page
+	text::
+		The shirt product page on the Zazzle, Inc. Web site provides a rich interface for users to view and configure shirt options.
+
+		With the help of powerful server-side product visualization technology, this page lets users see a custom shirt design on one of many thousands of different shirt SKUs, letting users choose their preferred style, color, and size, and letting users preview their choices on one of many views of many unique human models. Interactive features on the product page include a magnifier view that is activated when the user mouses over the image of the product, selectors for models and views, selectors for product options such as style, color, and size, and a dialog for seeing and choosing from all available styles, complete with filtering and sorting features.
+
+		By choosing to customize a shirt, the user is taken from the product page to the shirt design tool, where they can further customize their product by adding their own images and text. Users who create their own shirt designs from scratch in the design tool can publish their designs to the public marketplace, and orders for those shirts will be produced on demand and delivered fresh to the customer's doorstep. All this functionality is built with the help of the UIZE JavaScript Framework.
+	link: http://www.zazzle.com/i_kill_n00bs_tshirt-235363112019027552
+:
+	fullName: Zazzle Mug Design Tool
+	text::
+		The mug design tool on the Zazzle, Inc. Web site is an Ajax application with client-side drag-and-drop features that is built using the UIZE JavaScript Framework.
+
+		With the help of powerful server-side product visualization technology, the tool lets users add custom images and text. Users can choose from many available styles and colors of drinkware, including classic white, ringer, two-tone, morphing mug, beer stein, travel / commuter mug, and frosted glass mug. Users can publish their mug designs to the public marketplace, and orders for those mugs will be produced on demand and delivered fresh to the customer's doorstep.
+	link: http://www.zazzle.com/cr/design/pt-mug
+:
+	fullName: Zazzle Stamp Design Tool
+	text::
+		The stamp design tool on the Zazzle, Inc. Web site is an Ajax application with client-side drag-and-drop features that is built using the UIZE JavaScript Framework.
+
+		The stamp design tool lets users add custom images and text to real U.S. postage. Users can choose from three different sizes of stamps, and many different available standard postage rates for anything from postcards to letters, different 1st class package weights, and even priority mail. Users can publish their stamp designs to the public marketplace, and orders for those stamps will be produced on demand and delivered fresh to the customer's doorstep.
+	link: http://www.zazzle.com/cr/design/pt-stamp
+:
+	fullName: uize.com
+	subTitle: UIZE JavaScript Framework Official Web Site
+	text::
+		In the software industry, the phrase "<a href="http://en.wikipedia.org/wiki/Eating_one%27s_own_dog_food" class="externalSiteLink" target="_blank">eating one's own dog food</a>" refers to the practice of using one's own software, in just the same way as any other end user or developer who is expected to be using your software. This practice forces developers of software to deal with real problems and use cases that may arise with the software they develop.
+
+		In the spirit of eating one's own dog food, the <b>uize.com</b> Web site makes extensive use of the UIZE JavaScript Framework, and can be regarded as a model for how to effectively develop a Web site with modular, well factored, object oriented, rich client interaction logic. The many <a href="../javascript-examples.html">JavaScript examples</a> in the Web site are an overt demonstration of and showcase for the many features of the framework, but the Web site itself is also a great showcase.
+
+		From build and deploy scripts that are used to update the Web site, to the rich interactivity on the many pages of the Web site, <b>uize.com</b> pushes the boundaries of the framework's capabilities.
+	link: http://www.uize.com
+:
+	fullName: UIZE Merch Store
+	text::
+		All the products in the UIZE Official Merchandise Store were built using the Zazzle Inc. design tool that was developed using the UIZE JavaScript Framework. Talk about eating your own dogfood!
+
+		In addition to using the UIZE powered design tool to create the UIZE merch products, the store itself also uses features of the UIZE JavaScript Framework (since the whole zazzle.com Web site uses UIZE), including the zooming collection items that let users more closely inspect products before clicking through, right inside the products grid.
+	link: http://www.zazzle.com/uize_merch*
+

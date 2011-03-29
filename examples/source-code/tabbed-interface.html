@@ -1,0 +1,169 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Tabbed Interface - HTML Source Code | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework HTML example source code"/>
+	<meta name="description" content="This is the source code for the Tabbed Interface example"/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../../css/page.css"/>
+	<link rel="stylesheet" href="../../css/page.source.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../../index.html" title="UIZE JavaScript Framework home"></a>
+	SOURCE CODE: Tabbed Interface
+	<div id="page-actions" class="pageActions">
+		<a href="../tabbed-interface.html" class="buttonLink">VIEW EXAMPLE</a>
+	</div>
+</h1>
+
+<pre>
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+&lt;head&gt;
+  &lt;title&gt;Tabbed Interface | JavaScript Examples | UIZE JavaScript Framework&lt;/title&gt;
+  &lt;meta name="keywords" content="Uize.Widget.Options.Tabbed"/&gt;
+  &lt;meta name="description" content="Add tabbed interfaces to your own Web pages. See how in this example. Some test links are provided to demo the programmatic interface of this widget."/&gt;
+  &lt;link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/&gt;
+  &lt;link rel="stylesheet" href="../css/page.css"/&gt;
+  &lt;link rel="stylesheet" href="../css/page.example.css"/&gt;
+  &lt;link rel="stylesheet" href="../css/widget.tabs.css"/&gt;
+  &lt;link rel="stylesheet" href="css/tabbed-interface.css"/&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+&lt;script type="text/javascript" src="../js/Uize.js"&gt;&lt;/script&gt;
+
+&lt;h1 class="document-title"&gt;
+  &lt;a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"&gt;&lt;/a&gt;
+  &lt;a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow"&gt;JAVASCRIPT EXAMPLES&lt;/a&gt;
+  Tabbed Interface
+  &lt;div id="page-actions" class="pageActions"&gt;
+    &lt;a href="source-code/tabbed-interface.html" class="buttonLink"&gt;SOURCE&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/h1&gt;
+
+&lt;div class="main"&gt;
+  &lt;!-- explanation copy --&gt;
+
+  &lt;div class="explanation"&gt;
+    &lt;p&gt;In this example, the markup for a tabbed interface is being wired up by an instance of &lt;a href="../reference/Uize.Widget.Options.Tabbed.html"&gt;&lt;code&gt;Uize.Widget.Options.Tabbed&lt;/code&gt;&lt;/a&gt;. Below the tabs are some links that execute snippets of code to demonstrate the programmatic interface of the widget. Because the tabs widget is a subclass of &lt;a href="../reference/Uize.Widget.Options.html"&gt;&lt;code&gt;Uize.Widget.Options&lt;/code&gt;&lt;/a&gt;, it provides a &lt;code&gt;value&lt;/code&gt; set-get property in its interface. The &lt;code&gt;Changed.value&lt;/code&gt; instance event for this property can be used to watch for changes in the selected tab. The property can be set to programmatically change the selected tab. Interact with both the tabs UI and the test links to see how they affect one another.&lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;!-- tabs UI --&gt;
+
+  &lt;div class="tabShell"&gt;
+    &lt;div class="tabStubShell"&gt;
+      &lt;a id="page_tabs_option0" class="tabStub" href="javascript://"&gt;SOLAR&lt;/a&gt;
+      &lt;a id="page_tabs_option1" class="tabStub" href="javascript://"&gt;WIND&lt;/a&gt;
+      &lt;a id="page_tabs_option2" class="tabStub" href="javascript://"&gt;GEOTHERMAL&lt;/a&gt;
+      &lt;a id="page_tabs_option3" class="tabStub" href="javascript://"&gt;EFFICIENCY&lt;/a&gt;
+      &lt;a id="page_tabs_option4" class="tabStub" href="javascript://"&gt;TIDAL&lt;/a&gt;
+      &lt;br style="clear:left;"/&gt;
+    &lt;/div&gt;
+    &lt;div class="tabBodyShell"&gt;
+      &lt;div id="page_tabs-option0TabBody" class="tabBodyInactive"&gt;
+        SOLAR
+      &lt;/div&gt;
+      &lt;div id="page_tabs-option1TabBody" class="tabBodyInactive"&gt;
+        WIND
+      &lt;/div&gt;
+      &lt;div id="page_tabs-option2TabBody" class="tabBodyInactive"&gt;
+        GEOTHERMAL
+      &lt;/div&gt;
+      &lt;div id="page_tabs-option3TabBody" class="tabBodyInactive"&gt;
+        EFFICIENCY
+      &lt;/div&gt;
+      &lt;div id="page_tabs-option4TabBody" class="tabBodyInactive"&gt;
+        TIDAL
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;!-- programmatic interface examples --&gt;
+
+  &lt;div class="programmaticInterface"&gt;
+    &lt;p&gt;&lt;b&gt;tabs.get ('value') == &lt;/b&gt;'&lt;span id="page-tabsValue"&gt;&lt;/span&gt;'&lt;/p&gt;
+    &lt;p&gt;&lt;b&gt;tabs.get ('tentativeValue') == &lt;/b&gt;'&lt;span id="page-tabsTentativeValue"&gt;&lt;/span&gt;'&lt;/p&gt;
+    &lt;p&gt;
+      &lt;b&gt;Set the value for the tabs widget: &lt;/b&gt;
+      &lt;a href="javascript://" class="linkedJs"&gt;tabs.set ({value:'solar'})&lt;/a&gt;
+      &amp;nbsp;,&amp;nbsp;
+      &lt;a href="javascript://" class="linkedJs"&gt;tabs.set ({value:'wind'})&lt;/a&gt;
+      &amp;nbsp;,&amp;nbsp;
+      &lt;a href="javascript://" class="linkedJs"&gt;tabs.set ({value:'geothermal'})&lt;/a&gt;
+      &amp;nbsp;,&amp;nbsp;
+      &lt;a href="javascript://" class="linkedJs"&gt;tabs.set ({value:'efficiency'})&lt;/a&gt;
+      &amp;nbsp;,&amp;nbsp;
+      &lt;a href="javascript://" class="linkedJs"&gt;tabs.set ({value:'tidal'})&lt;/a&gt;
+    &lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script type="text/javascript"&gt;
+
+Uize.module ({
+  required:[
+    'UizeDotCom.Page.Example.library',
+    'UizeDotCom.Page.Example',
+    'Uize.Widget.Options.Tabbed'
+  ],
+  builder:function () {
+    /*** create the example page widget ***/
+      var page = window.page = new UizeDotCom.Page.Example ({evaluator:function (code) {eval (code)}});
+
+    /*** add the tabs child widget ***/
+      var tabs = page.addChild (
+        'tabs',
+        Uize.Widget.Options.Tabbed,
+        {
+          bodyClassActive:'tabBodyActive',
+          bodyClassInactive:'tabBodyInactive'
+        }
+      );
+
+    /*** some code for demonstrating the widget's programmatic interface ***/
+      tabs.wire ({
+        'Changed.value':
+          function () {page.setNodeInnerHtml ('tabsValue',tabs)},
+        'Changed.tentativeValue':
+          function () {page.setNodeInnerHtml ('tabsTentativeValue',tabs.get ('tentativeValue'))}
+      });
+
+    /*** wire up the page widget ***/
+      page.wireUi ();
+
+    /*** initialize the tabs widget's values ***/
+      tabs.set ({
+        values:['solar','wind','geothermal','efficiency','tidal'],
+        value:'solar'
+      });
+  }
+});
+
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+
+</pre>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.library',
+		'UizeDotCom.Page'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page).wireUi ()}
+});
+
+</script>
+
+</body></html>

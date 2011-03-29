@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2010-09-06 - NEW METHOD: Uize.Data.emptyOut | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="The new Uize.Data.emptyOut static method, implemented in the Uize.Data module, lets you empty out the contents of a specified source array or object, returning a reference to that source."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2010.html" class="breadcrumb breadcrumbWithArrow">2010 NEWS</a>
+	2010-09-06 - NEW METHOD: Uize.Data.emptyOut
+
+</h1>
+
+<div class="main">
+<div class="contents0">
+	<p>The new <code>Uize.Data.emptyOut</code> static method, implemented in the <code><a href="../reference/Uize.Data.html">Uize.Data</a></code> module, lets you empty out the contents of a specified source array or object, returning a reference to that source.</p>
+	
+	<p><span class="allCaps">SYNTAX</span></p>
+	
+	
+<pre class="sample-code">sourceOBJorARRAY = Uize.Data.emptyOut (sourceOBJorARRAY);
+</pre>
+	
+	<p>Using this method to empty out an array is equivalent to setting the array's length to <code>0</code>, while using this method to empty out an object results in all the object's properties being deleted.</p>
+	
+	<p><span class="allCaps">EXAMPLE</span></p>
+	
+	
+<pre class="sample-code">Uize.copyInto (Uize.Data.emptyOut (userData),userDataDefaults);
+</pre>
+	
+	<p>In the above example, a <code>userData</code> object has accumulated a large amount of user data and we wish to reset it to some initial default state. Because references to the object may be shared by many parts of an application's code, we want to re-initiatialize it by modifying its contents, restoring its state to that of the <code>userDataDefaults</code> object. The <code>Uize.Data.emptyOut</code> method lets us first empty out the object, after which it is passed as the source for the <code>Uize.copyInto</code> method call where we copy back in the contents of the <code>userDataDefaults</code> object.</p>
+	
+	<p>This new method is fully documented and unit tested.</p>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

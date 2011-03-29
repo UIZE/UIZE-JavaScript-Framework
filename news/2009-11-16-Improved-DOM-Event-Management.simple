@@ -1,0 +1,63 @@
+The DOM event management system, implemented in the =Uize.Node= module, has been improved with the addition of the versatile new =Uize.Node.wire= and =Uize.Node.unwire= static methods.
+
+Deprecated Methods
+	The new =Uize.Node.wire= static method replaces the now deprecated =Uize.Node.wireEvent= and =Uize.Node.wireEvents= static methods.
+
+	The new =Uize.Node.wire= method is more versatile than the two deprecated methods, supporting both of their parameter signatures. So, you can easily just change the method name in any method call in existing code to use the new name. The new name is also more concise.
+
+	DEPRECATED
+	...................................................
+	Uize.Node.wireEvent   >> BECOMES >>  Uize.Node.wire
+	Uize.Node.wireEvents  >> BECOMES >>  Uize.Node.wire
+	...................................................
+
+New Uize.Node.wire Static Method
+	The new =Uize.Node.wire= static method wires the specified handler function to the specified event, or the specified handlers to the specified events, of the specified node or =Node Blob=.
+
+	WIRE ONE EVENT
+	........................................................
+	Uize.Node.wire (nodeBLOB,eventNameSTR,eventHandlerFUNC);
+	........................................................
+
+	WIRE ONE OR MORE EVENTS
+	.....................................................
+	Uize.Node.wire (nodeBLOB,eventNamesToHandlersMapOBJ);
+	.....................................................
+
+	The signatures of the new method are more in harmony with the signatures of the =wireNode= instance method of the =Uize.Widget= class, and the =wire= instance method and =Uize.wire= static method of the =Uize= base class. This method takes over from the now deprecated =Uize.Node.wireEvent= and =Uize.Node.wireEvents= methods.
+
+New Uize.Node.unwire Static Method
+	The new =Uize.Node.unwire= static method lets you unwire one or more event handlers for the specified node or =Node Blob=.
+
+	UNWIRE ONE EVENT
+	..........................................................
+	Uize.Node.unwire (nodeBLOB,eventNameSTR,eventHandlerFUNC);
+	..........................................................
+
+	UNWIRE ONE OR MORE EVENTS
+	.......................................................
+	Uize.Node.unwire (nodeBLOB,eventNamesToHandlersMapOBJ);
+	.......................................................
+
+	The =Uize.Node.unwire= method supports unwiring events for multiple nodes in a single method call, using the =nodeBLOB= parameter. Most importantly, the new =Uize.Node.unwire= method has parity with its new =Uize.Node.wire= counterpart. Actually, it supports a few more variations, but it supports all the variations that =Uize.Node.wire= supports. So, if you can wire events using certain parameter values in the =Uize.Node.wire= method, then you should be able to reverse the effect of calling =Uize.Node.wire= with those parameter values by calling =Uize.Node.unwire= with those same parameter values.
+
+Benefits of These Changes
+	The changes to these various methods offer the following benefits...
+
+	- the new method names are more concise (short 'n sweet, less to type, smaller code)
+	- the new methods are more versatile, supporting single or multiple event-to-handler mappings
+	- the signatures of the variations for the new methods are more in harmony with the DOM event wiring and unwiring methods of the =Uize.Widget= class, as well as the event wiring and unwiring methods of the =Uize= base class, increasing consistency across the framework
+	- there is now finally parity between the new =Uize.Node.wire= and =Uize.Node.unwire= methods
+
+Deprecated Methods Still Supported
+	For backwards compatibility, the deprecated =Uize.Node.wireEvent= and =Uize.Node.wireEvents= static methods are all still supported, and will be supported for some time into the future.
+
+	All existing code using the deprecated methods should continue to work as normal. It would be wise to progressively migrate code over to using the new methods.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-11-16 - Improved DOM Event Management
+....................................................................................

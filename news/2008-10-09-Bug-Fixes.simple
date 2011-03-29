@@ -1,0 +1,9 @@
+A bug (affecting Internet Explorer 7 and earlier) that was causing the =Uize.Node.display= static method to throw a JavaScript error when using it to display =table=, =tr=, =th=, =td=, =tbody=, =colgroup=, =col=, and =caption= nodes has been fixed.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2008-10-09 - Bug Fixes
+....................................................................................

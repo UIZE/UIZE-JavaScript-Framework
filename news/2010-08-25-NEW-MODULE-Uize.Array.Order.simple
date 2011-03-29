@@ -1,0 +1,27 @@
+The new =Uize.Array.Order= module provides functionality for changing the order of elements in an array, with support for reversing, jumbling, inside to out, etc.
+
+Unlike sorting an array based upon the values of its elements, the methods of the =Uize.Array.Order= module allow you to reorder the elements according to different patterns - without respect to the element values. For example, the =Uize.Array.Order.reverse= method reverses the order of the elements in an array. The =Uize.Array.Order.jumble= method jumbles (randomly shuffles) the elements in an array. The =Uize.Array.Order.insideOut= method reorders the elements from inside to out by starting with the inner elements and moving outwards in both directions to reach the start and the end of the array, while the =Uize.Array.Order.outsideIn= method reorders the elements from outside to in by starting with the outer elements and moving inwards in both directions to reach the inner elements.
+
+Uize.Data.reorderArray Method Migrated
+	As part of this update, the =Uize.Data.reorderArray= static method has been migrated from the =Uize.Data= module into the new =Uize.Array.Order= module as =Uize.Array.Order.reorder=.
+
+	MIGRATED
+	................................................................
+	Uize.Data.reorderArray   >> BECOMES >>  Uize.Array.Order.reorder
+	................................................................
+
+	This static method has been migrated but has not been changed - its parameter signature and behavior remain the same as before.
+
+	NOT BACKWARDS COMPATIBLE
+
+	This change is *not backwards compatible*. If you had code that was relying on the =Uize.Data.reorderArray= static method that has been migrated into the new =Uize.Array.Order= module, then you will have to modify that code to require the =Uize.Array.Order= module and to call the =Uize.Array.Order.reorder= method in that module. A small handful of modules of the UIZE JavaScript Framework that were affected by the migration of this method, along with a few example pages, have been updated accordingly.
+
+[[Uize.Array.Order][LEARN MORE]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2010-08-25 - NEW MODULE: Uize.Array.Order
+....................................................................................

@@ -1,0 +1,17 @@
+Wipe effect presets that used to reside in the =Uize.Widget.ImageWipe= module have been moved out into the new =Uize.Widget.ImageWipe.xPresets= extension module. Additionally, many slick new wipe presets have been added in this new module.
+
+This change offers greater flexibility for deployment. In the cases where only one or a small handfull of wipe effect settings are needed, it is not necessary to use the entire =Uize.Widget.ImageWipe.xPresets= module. Instead, you can just cherry pick the few presets you'd like to use and code those directly into your application. On the other hand, if you want to cycle between many more of the presets, or if size is not as much of a concern, it may be more convenient to load the =Uize.Widget.ImageWipe.xPresets= module. The new module *has* been optimized for size, so that the scrunched file can hold even more presets at a smaller size than before.
+
+New presets added include: =blindsVerticalFromRightEven=, =blindsVerticalGrowFromCenter=, =blindsHorizontalFromTop=, =blindsHorizontalFromBottom=, =blindsHorizontalGrowFromCenter=, =verticalStackingAgainstLeft=, =verticalStackingAgainstRight=, =matrixDrifting=, =matrixFromBottomRightFade=, =matrixFromCornersFade=, =matrixTartanFacetedFade=, =backSlash= ( old =backSlash= becomes =backSlashWithCurl= ), =forwardSlash= ( old =forwardSlash= becomes =forwardSlashWithCurl= ), =twoBackSlashesCoalesce=, =fourSlashesCounterClockwise=, =verticalFadeFromTop=, =verticalFadeFromBottom=, =verticalFadeFromInside=, =verticalFadeFromOutside=, =horizontalFadeFromLeft=, =horizontalFadeFromRight=, =horizontalFadeFromInside=, =horizontalFadeFromOutside=, =horizontalRibbonFadeFromInside=, =verticalRibbonFadeFromInside=, and =facetedFade=.
+
+The new presets - along with all the old classics - can be previewed *and tweaked* in the updated [[../examples/image-wipe.html][ImageWipe example]]. Full documentation and a description of all the presets is also available.
+
+[[Uize.Widget.ImageWipe.xPresets][LEARN MORE]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-01-20 - NEW MODULE: Uize.Widget.ImageWipe.xPresets
+....................................................................................

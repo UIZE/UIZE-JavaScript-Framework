@@ -1,0 +1,40 @@
+The new =Uize.Node.Event= module is a package module under the =Uize.Node= namespace that provides convenient methods for abstracting differences between the DOM node event systems of different browsers.
+
+Key Features
+	The =Uize.Node.Event= module implements the following key features...
+
+	Event Property Abstraction
+		The =Uize.Node.Event= module implements static methods for obtaining the values of DOM standard event object properties, even though some browsers do not supports these standards.
+
+		Examples of such methods are the =Uize.Node.Event.target= and =Uize.Node.Event.relatedTarget= methods.
+
+	Event Method Abstraction
+		The =Uize.Node.Event= module implements static methods that are equivalent to DOM standard event object methods, even though some browsers do not supports these standards.
+
+		Examples of such methods are the =Uize.Node.Event.preventDefault= and =Uize.Node.Event.stopPropagation= methods.
+
+	Testing for Certain Keys
+		As a convenience, a number of static methods are provided in this module to make it easier to detect certain keys in =keydown= and =keyup= keyboard events, without having to remember the key codes.
+
+		An example is the =Uize.Node.Event.isKeyEnter= method, which tests if the key being pressed down or released is the enter key. Other such methods include: =Uize.Node.Event.isKeyEscape=, =Uize.Node.Event.isKeyDownArrow=, =Uize.Node.Event.isKeyInsert=, =Uize.Node.Event.isKeyTab=, etc.
+
+	Other Utilities
+		The =Uize.Node.Event= module provides various other utilities, including the ability to fix event objects to make them more consistent with standards by calling the =Uize.Node.Event.fix= method, and the ability to abort events (so that they don't bubble and don't trigger the browser's default action) by calling the =Uize.Node.Event.abort= method.
+
+Room to Grow
+	While the initial functionality in the =Uize.Node.Event= module is basic, this module provides a namespace that will act as a home for new DOM event specific functionality in future.
+
+Some Modules Updated
+	A number of modules have been updated to use this new module.
+
+	These include the modules =Uize.Widget.Calculator=, =Uize.Widget.Collection=, =Uize.Widget.Drag=, =Uize.Widget.FormElement=, =Uize.Widget.ListEditor=, =Uize.Widget.Picker=, and =Uize.Widget.TextInput=. If your code was using one of these modules - directly or indirectly - you might notice the =Uize.Node.Event= module being loaded in dynamically as a separate HTTP request. To address this, simply add this module to any =.library.js= library files you may be using in your projects, as appropriate.
+
+Reference documentation for this new module is complete. [[Uize.Node.Event][LEARN MORE]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-10-22 - NEW MODULE: Uize.Node.Event
+....................................................................................

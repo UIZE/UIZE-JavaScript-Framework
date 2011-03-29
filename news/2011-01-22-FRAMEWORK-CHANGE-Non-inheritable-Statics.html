@@ -1,0 +1,164 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2011-01-22 - FRAMEWORK CHANGE: Non-inheritable Statics | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="A number of static methods that are implemented in the Uize base class, and that have (up until now) been inherited by all subclasses of Uize, are now no longer inheritable."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2011.html" class="breadcrumb breadcrumbWithArrow">2011 NEWS</a>
+	2011-01-22 - FRAMEWORK CHANGE: Non-inheritable Statics
+
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="The static features of the Uize base class that have been made non-inheritable have been made so in order to clean up the statics defined in all classes across the entire framework.">1. Why the Change?</a></li>
+			<li><a href="#2" title="With this change, certain static methods of Uize that you may have come to rely on as static methods inherited by the Uize subclasses you write, are no longer inherited by your subclasses.">2. How This Change Affects You</a></li>
+			<li><a href="#3" title="Static features of the Uize base class that are no longer inheritable by subclasses are as follows...">3. Statics That Are No Longer Inheritable</a></li>
+			<li><a href="#4" title="A good number of modules in the UIZE JavaScript Framework had to be updated as a result of the previously inheritable static methods becoming non-inheritable.">4. Updated UIZE Modules</a></li>
+			<li><a href="#5" title="With the introduction of the new MyClass.nonInheritableStatics static property, static features of any class you create can now be &quot;registered&quot; as non-inheritable.">5. Registering Non-inheritable Statics</a></li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<p>A number of static methods that are implemented in the Uize base class, and that have (up until now) been inherited by all subclasses of Uize, are now no longer inheritable.</p>
+	
+	<p>The concept of non-inheritable statics has been introduced, with a way provided to "register" static features of a class as being non-inheritable.</p>
+	
+	<a name="1"></a>
+	<h1 class="heading1" title="1. Why the Change?"><span class="headingNumber"><a href="#1" title="1. Why the Change?">1</a>. </span>Why the Change?</h1>
+	<div class="contents1">
+		<p>The static features of the <code><a href="../reference/Uize.html">Uize</a></code> base class that have been made non-inheritable have been made so in order to clean up the statics defined in all classes across the entire framework.</p>
+		
+		<p>Previously, all classes were inheriting a ton of static methods (see <a href="#3">Statics That Are No Longer Inheritable</a>) that are really just utility functions that only need to exist directly in the <code><a href="../reference/Uize.html">Uize</a></code> base class. More generally, there are times when there is no compelling reason for a static feature of a class to be inherited by its subclasses. Too many inherited static features can just clutter subclasses in the class hierarchy with cruft that they neither need nor care about. To address this concern, the inheritance system of the UIZE JavaScript Framework provides a way to "register" static features of a class as being non-inheritable.</p>
+	</div>
+	
+	<a name="2"></a>
+	<h1 class="heading1" title="2. How This Change Affects You"><span class="headingNumber"><a href="#2" title="2. How This Change Affects You">2</a>. </span>How This Change Affects You</h1>
+	<div class="contents1">
+		<p>With this change, certain static methods of <code><a href="../reference/Uize.html">Uize</a></code> that you may have come to rely on as static methods inherited by the <code><a href="../reference/Uize.html">Uize</a></code> subclasses you write, are no longer inherited by your subclasses.</p>
+		
+		<p>Therefore, these methods must now be called directly on the <code><a href="../reference/Uize.html">Uize</a></code> base class and <b>not</b> on your subclasses. So, whereas previously you may have written something like...</p>
+		
+		<p><span class="allCaps">BEFORE</span></p>
+		
+		
+<pre class="sample-code">_class.copyInto (myObject,myExtraProperties);
+</pre>
+		
+		<p>...now you will need to write this statement as...</p>
+		
+		<p><span class="allCaps">AFTER</span></p>
+		
+		
+<pre class="sample-code">Uize.copyInto (myObject,myExtraProperties);
+</pre>
+	</div>
+	
+	<a name="3"></a>
+	<h1 class="heading1" title="3. Statics That Are No Longer Inheritable"><span class="headingNumber"><a href="#3" title="3. Statics That Are No Longer Inheritable">3</a>. </span>Statics That Are No Longer Inheritable</h1>
+	<div class="contents1">
+		<p>Static features of the <code><a href="../reference/Uize.html">Uize</a></code> base class that are no longer inheritable by subclasses are as follows...</p>
+		
+		<p><span class="allCaps">NO LONGER INHERITABLE STATICS</span></p>
+		
+		
+<pre class="sample-code">_class.callOn               &gt;&gt; BECOMES &gt;&gt;  Uize.callOn
+_class.capFirstChar         &gt;&gt; BECOMES &gt;&gt;  Uize.capFirstChar
+_class.clone                &gt;&gt; BECOMES &gt;&gt;  Uize.clone
+_class.constrain            &gt;&gt; BECOMES &gt;&gt;  Uize.constrain
+_class.copyInto             &gt;&gt; BECOMES &gt;&gt;  Uize.copyInto
+_class.escapeRegExpLiteral  &gt;&gt; BECOMES &gt;&gt;  Uize.escapeRegExpLiteral
+_class.findRecord           &gt;&gt; BECOMES &gt;&gt;  Uize.findRecord
+_class.findRecordNo         &gt;&gt; BECOMES &gt;&gt;  Uize.findRecordNo
+_class.getGuid              &gt;&gt; BECOMES &gt;&gt;  Uize.getGuid
+_class.getModuleByName      &gt;&gt; BECOMES &gt;&gt;  Uize.getModuleByName
+_class.getPathToLibrary     &gt;&gt; BECOMES &gt;&gt;  Uize.getPathToLibrary
+_class.globalEval           &gt;&gt; BECOMES &gt;&gt;  Uize.globalEval
+_class.indexIn              &gt;&gt; BECOMES &gt;&gt;  Uize.indexIn
+_class.isArray              &gt;&gt; BECOMES &gt;&gt;  Uize.isArray
+_class.isFunction           &gt;&gt; BECOMES &gt;&gt;  Uize.isFunction
+_class.isIn                 &gt;&gt; BECOMES &gt;&gt;  Uize.isIn
+_class.isInstance           &gt;&gt; BECOMES &gt;&gt;  Uize.isInstance
+_class.isNumber             &gt;&gt; BECOMES &gt;&gt;  Uize.isNumber
+_class.module               &gt;&gt; BECOMES &gt;&gt;  Uize.module
+_class.moduleLoader         &gt;&gt; BECOMES &gt;&gt;  Uize.moduleLoader
+_class.moduleUrlResolver    &gt;&gt; BECOMES &gt;&gt;  Uize.moduleUrlResolver
+_class.moduleUrlTemplate    &gt;&gt; BECOMES &gt;&gt;  Uize.moduleUrlTemplate
+_class.pairUp               &gt;&gt; BECOMES &gt;&gt;  Uize.pairUp
+_class.pathToResources      &gt;&gt; BECOMES &gt;&gt;  Uize.pathToResources
+_class.recordMatches        &gt;&gt; BECOMES &gt;&gt;  Uize.recordMatches
+_class.substituteInto       &gt;&gt; BECOMES &gt;&gt;  Uize.substituteInto
+</pre>
+		
+		<p>Of the static methods that have become non-inheritable, the following methods are more likely to have been used in code (given their utility value) and are more likely to need changing in your code: <code>Uize.capFirstChar</code>, <code>Uize.clone</code>, <code>Uize.constrain</code>, <code>Uize.copyInto</code>, <code>Uize.findRecord</code>, <code>Uize.findRecordNo</code>, <code>Uize.indexIn</code>, <code>Uize.isArray</code>, <code>Uize.isFunction</code>, <code>Uize.isIn</code>, <code>Uize.isNumber</code>, <code>Uize.pairUp</code>.</p>
+	</div>
+	
+	<a name="4"></a>
+	<h1 class="heading1" title="4. Updated UIZE Modules"><span class="headingNumber"><a href="#4" title="4. Updated UIZE Modules">4</a>. </span>Updated UIZE Modules</h1>
+	<div class="contents1">
+		<p>A good number of modules in the UIZE JavaScript Framework had to be updated as a result of the previously inheritable static methods becoming non-inheritable.</p>
+		
+		<p>The modules that were updated include: <code><a href="../reference/Uize.html">Uize</a></code>, <code><a href="../reference/Uize.Comm.html">Uize.Comm</a></code>, <code><a href="../reference/Uize.Comm.Iframe.html">Uize.Comm.Iframe</a></code>, <code><a href="../reference/Uize.Comm.Iframe.Upload.html">Uize.Comm.Iframe.Upload</a></code>, <code><a href="../reference/Uize.Comm.Script.html">Uize.Comm.Script</a></code>, <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code>, <code><a href="../reference/Uize.Fade.xFactory.html">Uize.Fade.xFactory</a></code>, <code><a href="../reference/Uize.Fade.xSeries.html">Uize.Fade.xSeries</a></code>, <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, <code><a href="../reference/Uize.Widget.Bar.html">Uize.Widget.Bar</a></code>, <code><a href="../reference/Uize.Widget.Button.html">Uize.Widget.Button</a></code>, <code><a href="../reference/Uize.Widget.Button.Toggle.html">Uize.Widget.Button.Toggle</a></code>, <code><a href="../reference/Uize.Widget.Collection.Dynamic.html">Uize.Widget.Collection.Dynamic</a></code>, <code><a href="../reference/Uize.Widget.Collection.html">Uize.Widget.Collection</a></code>, <code><a href="../reference/Uize.Widget.CollectionItem.Zooming.html">Uize.Widget.CollectionItem.Zooming</a></code>, <code><a href="../reference/Uize.Widget.ColorPicker.html">Uize.Widget.ColorPicker</a></code>, <code><a href="../reference/Uize.Widget.Committer.html">Uize.Widget.Committer</a></code>, <code><a href="../reference/Uize.Widget.Dialog.Confirm.html">Uize.Widget.Dialog.Confirm</a></code>, <code><a href="../reference/Uize.Widget.Dialog.html">Uize.Widget.Dialog</a></code>, <code><a href="../reference/Uize.Widget.Drag.html">Uize.Widget.Drag</a></code>, <code><a href="../reference/Uize.Widget.EdgeHugger.html">Uize.Widget.EdgeHugger</a></code>, <code><a href="../reference/Uize.Widget.Form.html">Uize.Widget.Form</a></code>, <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>, <code><a href="../reference/Uize.Widget.FormElements.html">Uize.Widget.FormElements</a></code>, <code><a href="../reference/Uize.Widget.FormWarnings.html">Uize.Widget.FormWarnings</a></code>, <code><a href="../reference/Uize.Widget.HoverFader.html">Uize.Widget.HoverFader</a></code>, <code><a href="../reference/Uize.Widget.ImagePort.Draggable.html">Uize.Widget.ImagePort.Draggable</a></code>, <code><a href="../reference/Uize.Widget.ImageWipe.html">Uize.Widget.ImageWipe</a></code>, <code><a href="../reference/Uize.Widget.MagView.html">Uize.Widget.MagView</a></code>, <code><a href="../reference/Uize.Widget.Options.Accordion.html">Uize.Widget.Options.Accordion</a></code>, <code><a href="../reference/Uize.Widget.Options.html">Uize.Widget.Options</a></code>, <code><a href="../reference/Uize.Widget.Options.Tabbed.html">Uize.Widget.Options.Tabbed</a></code>, <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code>, <code><a href="../reference/Uize.Widget.Page.xDeferredLinks.html">Uize.Widget.Page.xDeferredLinks</a></code>, <code><a href="../reference/Uize.Widget.Picker.html">Uize.Widget.Picker</a></code>, <code><a href="../reference/Uize.Widget.Picker.Selector.html">Uize.Widget.Picker.Selector</a></code>, <code><a href="../reference/Uize.Widget.Population.html">Uize.Widget.Population</a></code>, <code><a href="../reference/Uize.Widget.Resizer.html">Uize.Widget.Resizer</a></code>, <code><a href="../reference/Uize.Widget.Scrolly.html">Uize.Widget.Scrolly</a></code>, <code><a href="../reference/Uize.Widget.SlideShow.html">Uize.Widget.SlideShow</a></code>, <code><a href="../reference/Uize.Widget.Swap.Image.Cycle.html">Uize.Widget.Swap.Image.Cycle</a></code>, <code><a href="../reference/Uize.Widget.Swap.html">Uize.Widget.Swap</a></code>, <code><a href="../reference/Uize.Widget.Tree.html">Uize.Widget.Tree</a></code>.</p>
+	</div>
+	
+	<a name="5"></a>
+	<h1 class="heading1" title="5. Registering Non-inheritable Statics"><span class="headingNumber"><a href="#5" title="5. Registering Non-inheritable Statics">5</a>. </span>Registering Non-inheritable Statics</h1>
+	<div class="contents1">
+		<p>With the introduction of the new <code>MyClass.nonInheritableStatics</code> static property, static features of any class you create can now be "registered" as non-inheritable.</p>
+		
+		<p>The <code>MyClass.nonInheritableStatics</code> static property is a lookup object, automatically created for a class, in which you can register the static features (methods or properties) of the class that should <b>not</b> be inherited when that class is subclassed. Each property of the <code>Uize.nonInheritableStatics</code> lookup object represents a single static feature of the class that should not be inherited by subclasses, where the name of each property should be the name of a static feature (excluding the module name), and the value of each property should be a truthy value (such as <code>true</code>, <code>1</code>, <code>'foo'</code>, <code>[]</code>, <code>{}</code>, etc.). After a class has been created, non-inheritable statics can be registered for that class by assigning properties to the class' <code>MyClass.nonInheritableStatics</code> static property, as shown in the example below...</p>
+		
+		<p><span class="allCaps">EXAMPLE</span></p>
+		
+		
+<pre class="sample-code">MyClass = Uize.subclass ();
+MyClass.someUtilityFunction = function () {
+  // do something of great utility
+};
+MyClass.nonInheritableStatics.someUtilityFunction = 1;
+
+MyClassSubclass = MyClass.subclass ();
+alert (MyClassSubclass.someUtilityFunction); // alerts the text "undefined"
+</pre>
+		
+		<p>In the above example, the <code>MyClass.someUtilityFunction</code> static method of the class <code>MyClass</code> has been registered as a non-inheritable static. This is done by the statement <code>MyClass.nonInheritableStatics.someUtilityFunction &#61; 1</code>. Now, when the <code>MyClassSubclass</code> class is created by calling the <code>MyClass.subclass</code> method, the new subclass that is created does not get the <code>someUtilityFunction</code> static feature. Therefore, the <code>alert</code> statement displays the text "undefined" in the alert dialog.</p>
+		
+		<p>For a more in-depth discussion of non-inheritable statics, consult the Non-inheritable Statics section of the <a href="../explainers/javascript-inheritance.html">JavaScript Inheritance</a> explainer, along with the reference documentation for the <code>Uize.nonInheritableStatics</code> static property in the reference for the <code><a href="../reference/Uize.html">Uize</a></code> module.</p>
+	</div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

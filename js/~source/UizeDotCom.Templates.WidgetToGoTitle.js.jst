@@ -1,0 +1,23 @@
+<%@
+	input ({
+		idPrefix:'string',
+		title:'string'
+	})
+%><div class="widgetHeader">
+	<div id="<% .idPrefix %>_menu_selector" title="Click to show/hide widget options..." class="widgetTitle">
+		<div class="logo"></div>
+		<div class="textShadow"><% .title %></div>
+		<div class="textHighlight"><% .title %></div>
+		<div class="textMain"><% .title %></div>
+	</div>
+	<div id="<% .idPrefix %>_menu-palette" class="subMenuShell">
+		<a id="<% .idPrefix %>_menu-getThisWidget" href="javascript://" class="subMenuItem">GET THIS WIDGET</a>
+		<div class="divider"></div>
+		<a id="<% .idPrefix %>_menu-aboutThisWidget" href="javascript://" class="subMenuItem">About This Widget</a>
+		<a id="<% .idPrefix %>_menu-openInNewWindow" href="javascript://" class="subMenuItem">Open Widget in New Window</a>
+		<div class="divider"></div>
+		<a id="<% .idPrefix %>_menu-moreWidgets"  href="javascript://" class="subMenuItem">More UIZE Widgets...</a>
+		<a id="<% .idPrefix %>_menu-uize" href="javascript://" class="subMenuItem">UIZE JavaScript Framework</a>
+	</div>
+</div>
+

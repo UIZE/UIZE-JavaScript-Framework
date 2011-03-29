@@ -1,0 +1,90 @@
+IMPROVED MODULE: Uize.SimpleDoc
+	The =Uize.SimpleDoc= module has been updated so that the automatically generated title attributes for list items in the contents tree now are stripped of SimpleDoc formatting.
+
+IMPROVED MODULE: Uize.Widget.Tree.List
+	The =Uize.Widget.Tree.List= widget class now supports a =tooltip= set-get property that lets you optionally specify a tooltip node that should be updated with the description of items as the user mouses over them.
+
+	The documentation in the uize.com Web site utilizes this feature - along with the =Uize.SimpleDoc= module's automatic generation of descriptions for items in the contents tree - to display a summary / teaser for sections when the user mouses over section links in the contents tree.
+
+2008-09-24 - Minor Tweaks
+	IMPROVED MODULE: Uize.SimpleDoc
+		Any document created using the =Uize.SimpleDoc= module now contains a contents list that is generated based on the structure of the document.
+
+		The list item for each section is linked to the section's anchor in the document and has a =title= attribute (ie. a tooltip) that provides a preview of the section's first paragraph. Some other small tweaks were made to improve performance and the appearance of the generated markup.
+
+	IMPROVED MODULE: Uize.Widget.Tree
+		The =Uize.Widget.Tree= module - that is the base class for the =Uize.Widget.Tree.List= module - now is implemented so that the =setExpandedDepth= instance method does not require the DOM for a list instance to already be created before this method can be called.
+
+		If an instance of =Uize.Widget.Tree.List= is not yet wired up and there is no corresponding DOM for the list, then the =setExpandedDepth= method will only modify the =expanded= property at the appropriate places in the tree structure JSON object. This allows a list widget to be instantiated, with its data tree, then the tree can be expanded to a desired depth, and then the UI can be built and wired up to immediately reflect that state. This is mostly a performance improvement.
+
+2008-09-19 - Miscellaneous Improvements
+	BUG FIX: Uize.Tooltip
+		A bug was fixed with tooltips not being positioned correctly in Safari when a document is scrolled.
+
+		Essentially, Safari is not consistent with other browsers in where meaningful values for =scrollLeft= and =scrollTop= are reflected.
+
+	IMPROVED MODULE: Uize.Widget.PopupPalette
+		The =palette= implied node of an instance of the =Uize.Widget.PopupPalette= widget class is now positioned to butt up against the =selector= child button's root node.
+
+		If the selector button is not visible at the time that the palette is shown, then the palette is positioned based upon the current mouse coordinates.
+
+	IMPROVED MODULE: Uize.Node
+		New Method: Uize.Node.setAbsPosAdjacentTo
+			The new =Uize.Node.setAbsPosAdjacentTo= static method lets you absolutely position a specified node so that it butts up against a specified reference node.
+
+			This is useful for positioning a popup palette or droplist - that might be absolutely positioned and at the root of a document's DOM - next to its corresponding selector button node that might be deep in the document's DOM structure.
+
+		Improved Method: Uize.Node.getEventAbsPos
+			When no =eventOBJ= parameter is specified, the =Uize.Node.getEventAbsPos= static method now returns the absolute coordinates of the current mouse position.
+
+2008-09-12 - Marquee Performance Optimizations
+	MODULE UPDATE
+		The =widgets.map=, =widgets.add=, and =widgets.remove= backwards compatibility provisions in the =Uize.Widget= class have been eliminated.
+
+		This feature had been deprecated back in May, in favor of the more concise and semantically elegant =children= property, and the =addChild= and =removeChild= instance methods. If you have code that references the =widgets= property or its =add= and =remove= methods (which is unlikely), you will need to update your code. This change lightens the memory load for every widget instance and reduces code size for the =Uize.Widget= class a tiny bit.
+
+	IMPROVED MODULE: Uize.Widget.Window
+		The =Uize.Widget.Window= module now supports new =title= and =defaultTitle= set-get properties that let you modify the title displayed in a window's title bar.
+
+	IMPROVED MODULE: Uize
+		The =Uize.clone= static method of the =Uize= base class now supports cloning values that are instances of JavaScript's built-in =RegExp=, =Date=, =String=, =Number=, and =Boolean= objects.
+
+		For example, if you clone an instance of the =Date= object, you get a new =Date= object instance of the same value.
+
+	IMPROVED MODULE: Uize.Widget.Resizer
+		- The =fixedX= and =fixedY= set-get properties now cause updates in enabled state for a resizer's drag handles, allowing resizable windows to be made resizable only in one axis (or neither axes, so not resizable).
+		- The values of the =left=, =top=, =width=, and =height= set-get properties are now conformed when set through the =set= instance method, so that a resizer (such as a marquee) does not violate bounds set by the =constrain=, =constrainBounds=, =minWidth=, and =minHeight=, set-get properties. This fixes a bug that allowed a marquee to pop outside of its bounds when clicking-and-dragging to create a new marquee region near the edge of its bounds.
+		- Many performance optimizations have been made to improve the drag performance of the =Uize.Widget.Resizer.Marquee= subclass and the =Uize.Widget.Window.Resizable= class
+
+	IMPROVED MODULE: Uize.Widget.Drag
+		- Instances of =Uize.Widget.Drag= now observe enabled state. This capability is utilized by drag handles in the =Uize.Widget.Resizer= class, allowing its =fixedX= and =fixedY= set-get properties to update resizing configuration at any time.
+		- A bug was fixed that was causing the cursor that displayed during drag to not always be the cursor of the drag instance's root node (this was evident with the =Uize.Widget.Resizer.Marquee= and =Uize.Widget.Window.Resizable= classes).
+
+	IMPROVED EXAMPLE: Basic Marquee Example
+		The basic marquee example has been updated to provide linked JavaScript statements that provide a demonstration of the widget's programmatic interface.
+
+		The configuration of the marquee can be updated in realtime.
+
+2008-09-01 - New Example, Optimizations
+	NEW EXAMPLE: Scrolly Carousel
+		The new =Scrolly Carousel= example demonstrates how the =Uize.Widget.Scrolly= class can be used to create a carousel scrolly that lets you step through a series of pages.
+
+		Such an interface could be provided on a company's homepage, with pages like "About Us", "Products", "Services", "Investor Relations", etc. Some examples of the scrolly's programmatic interface are also provided.
+
+		[[../examples/scrolly-carousel.html][CHECK IT OUT]]
+
+	OPTIMIZED MODULE: Uize.Widget.Button
+		Support for the ='nodes'= mode for =Uize.Widget.Button= instances has been eliminated.
+
+		There were only a few cases of this feature being used, and they have been converted over to the more flexible ='classes'= mode. The performance of applications that instantiate hundreds of button widgets is improved as a result of this change, and the code size of the module is reduced.
+
+	MORE DOCUMENTATION
+		There are new additions to the =Coding Style Guide= and =JavaScript Optimization= appendixes, and various methods of various modules have been documented. Documentation continues to be fleshed out more upon each release.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2008-09-27 - Improved Modules
+....................................................................................

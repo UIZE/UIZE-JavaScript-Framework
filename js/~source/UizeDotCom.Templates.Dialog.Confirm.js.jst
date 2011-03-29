@@ -1,0 +1,11 @@
+<%@ input ({idPrefix:'string',message:'string',title:'string'}) %>
+<%@ required ('UizeDotCom.Templates.Dialog') %>
+<%@ startBlock ('dialogContents') %>
+			<table>
+				<tr>
+					<td><div class="dialogIcon dialogConfirmIcon" id="<%. idPrefix %>-icon">&nbsp;</div></td>
+					<td><div id="<%. idPrefix %>-message" class="dialogMessage"><% .message || '' %></div></td>
+				</tr>
+			</table>
+<%@ endBlock () %>
+<%= UizeDotCom.Templates.Dialog.process ({idPrefix:input.idPrefix,title:input.title,contents:dialogContents ()}) %>

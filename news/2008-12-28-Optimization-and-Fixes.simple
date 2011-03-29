@@ -1,0 +1,17 @@
+Performance Optimization
+	A number of methods in the =Uize= base class have been optimized for performance.
+
+	Because this optimization has occurred in the base class, performance for all applications built on the UIZE JavaScript Framework should be improved. Methods benefiting from this optimization include the =Uize.clone= and =Uize.fireEvent= static methods, and the =fireEvent= instance method. Many other small optimizations have been made to methods that are called most frequently.
+
+Bug Fix: Uize.Node.Form.getValues
+	A bug in the =Uize.Node.Form.getValues= static method of the =Uize.Node.Form= module has been fixed.
+
+	This bug was causing the values for radio button sets to be incorrectly reported and had broken some serialization options functionality in the [[../examples/json-prettifier.html][JSON Prettifier]] tool.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2008-12-28 - Optimization and Fixes
+....................................................................................

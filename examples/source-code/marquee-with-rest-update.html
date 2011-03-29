@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Marquee With Rest Update - HTML Source Code | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework HTML example source code"/>
+	<meta name="description" content="This is the source code for the Marquee With Rest Update example"/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../../css/page.css"/>
+	<link rel="stylesheet" href="../../css/page.source.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../../index.html" title="UIZE JavaScript Framework home"></a>
+	SOURCE CODE: Marquee With Rest Update
+	<div id="page-actions" class="pageActions">
+		<a href="../marquee-with-rest-update.html" class="buttonLink">VIEW EXAMPLE</a>
+	</div>
+</h1>
+
+<pre>
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+&lt;head&gt;
+  &lt;title&gt;Marquee With Rest Update | JavaScript Examples | UIZE JavaScript Framework&lt;/title&gt;
+  &lt;meta name="keywords" content="Uize.Widget.Resizer.Marquee"/&gt;
+  &lt;meta name="description" content="See a demo of the marquee widget's Drag Rest event, which lets you perform more costly drag updates only when the user rests the mouse or ends drag."/&gt;
+  &lt;link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/&gt;
+  &lt;link rel="stylesheet" href="../css/page.css"/&gt;
+  &lt;link rel="stylesheet" href="../css/page.example.css"/&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+&lt;script type="text/javascript" src="../js/Uize.js"&gt;&lt;/script&gt;
+
+&lt;h1 class="document-title"&gt;
+  &lt;a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"&gt;&lt;/a&gt;
+  &lt;a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow"&gt;JAVASCRIPT EXAMPLES&lt;/a&gt;
+  Marquee With Rest Update
+  &lt;div id="page-actions" class="pageActions"&gt;
+    &lt;a href="source-code/marquee-with-rest-update.html" class="buttonLink"&gt;SOURCE&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/h1&gt;
+
+&lt;div class="main"&gt;
+  &lt;!-- explanation copy --&gt;
+
+  &lt;div class="explanation"&gt;
+    &lt;p&gt;In this example, an instance of &lt;a href="../reference/Uize.Widget.Resizer.Marquee.html"&gt;&lt;code&gt;Uize.Widget.Resizer.Marquee&lt;/code&gt;&lt;/a&gt; has been created to allow you to move and resize a marquee. The region that is occupied by the marquee is highlighted. Updating this highlight is actually phenomenally quick, but imagine - if you will - that the highlight is a proxy for some very computationally heavy task that needs to be informed by the marquee's position. You might not want such a computationally heavy task to be performed on every single move of the marquee during the drag process. The &lt;code&gt;Uize.Widget.Resizer.Marquee&lt;/code&gt; class provides a convenient &lt;code&gt;'Drag Rest'&lt;/code&gt; instance event, whose rest time is configurable through the &lt;code&gt;dragRestTime&lt;/code&gt; instance set-get property. Drag the marquee around and notice that the highlight doesn't update unless you rest during the drag process for &lt;code&gt;250&lt;/code&gt; milliseconds, or you end drag. If you drag without resting and then release, the &lt;code&gt;'Drag Rest'&lt;/code&gt; event is always fired immediately upon release.&lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;!-- marquee UI wireframe --&gt;
+
+  &lt;div style="width:700px; height:330px; position:relative; margin:auto;" class="darkInsetBackgroundColor"&gt;
+    &lt;div id="page-marqueeHighlight" style="position:absolute; left:0px; top:0px; width:0px; height:0px;" class="insetBackgroundColor"&gt;&lt;/div&gt;
+    &lt;div id="page_marquee" style="position:absolute; left:0px; top:0px; width:700px; height:330px;"&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- JavaScript code to make the static marquee HTML "come alive" --&gt;
+
+&lt;script type="text/javascript"&gt;
+
+Uize.module ({
+  required:[
+    'UizeDotCom.Page.Example.library',
+    'UizeDotCom.Page.Example',
+    'Uize.Widget.Resizer.Marquee',
+    'Uize.Node'
+  ],
+  builder:function () {
+    /*** create the example page widget ***/
+      var page = window.page = new UizeDotCom.Page.Example;
+
+    /*** code to update the marquee highlight ***/
+      function updateMarqueeHighlight () {
+        page.setNodeStyle ('marqueeHighlight',page.children.marquee.getCoords ());
+      }
+
+    /*** add the marquee child widget ***/
+      page.addChild (
+        'marquee',
+        Uize.Widget.Resizer.Marquee,
+        {
+          constrain:true,
+          width:150,
+          height:150,
+          dragRestTime:250,
+          built:false
+        }
+      ).wire ('Drag Rest',updateMarqueeHighlight);
+
+    /*** display marquee's initial position ***/
+      updateMarqueeHighlight ();
+
+    /*** wire up the page widget ***/
+      page.wireUi ();
+  }
+});
+
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+
+</pre>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.library',
+		'UizeDotCom.Page'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page).wireUi ()}
+});
+
+</script>
+
+</body></html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2009-04-15 - Uize.Node.setStyle and setNodeStyle Improved | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="The Uize.Node.setStyle static method of the Uize.Node module and the setNodeStyle instance method of the Uize.Widget module have been improved in a number of ways."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2009.html" class="breadcrumb breadcrumbWithArrow">2009 NEWS</a>
+	2009-04-15 - Uize.Node.setStyle and setNodeStyle Improved
+
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="The Uize.Node.setStyle method now abstracts the differences between Internet Explorer and browsers that support the standard CSS opacity property.">1. Special Handling for Opacity</a></li>
+			<li><a href="#2" title="Now, when number type values are specified for CSS style properties (other than the opacity and zIndex properties), the values are converted to strings by appending the &quot;px&quot; unit.">2. Specifying Number Values</a></li>
+			<li><a href="#3" title="Now, when an instance of a Uize subclass is specified for a CSS style property, the instance&apos;s valueOf Intrinsic Method is invoked in order to obtain the value of the instance&apos;s value set-get property.">3. Specifying Instance Values</a></li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<p>The <code>Uize.Node.setStyle</code> static method of the <code><a href="../reference/Uize.Node.html">Uize.Node</a></code> module and the <code>setNodeStyle</code> instance method of the <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> module have been improved in a number of ways.</p>
+	
+	<a name="1"></a>
+	<h1 class="heading1" title="1. Special Handling for Opacity"><span class="headingNumber"><a href="#1" title="1. Special Handling for Opacity">1</a>. </span>Special Handling for Opacity</h1>
+	<div class="contents1">
+		<p>The <code>Uize.Node.setStyle</code> method now abstracts the differences between Internet Explorer and browsers that support the standard CSS <code>opacity</code> property.</p>
+		
+		<p>This means that you can use the <code>Uize.Node.setStyle</code> method to set opacity as you would any other CSS style property, and the method will set the value of IE's proprietary <code>filter</code> style property as necessary.</p>
+		
+		<p><span class="allCaps">NOW</span></p>
+		
+		
+<pre class="sample-code">Uize.Node.setStyle ('myNodeId',{opacity:.5,width:200,height:100});
+</pre>
+		
+		<p>Previously, you would have had to split the above statement into one call to the <code>Uize.Node.setOpacity</code> method and one call to the <code>Uize.Node.setStyle</code> method, as follows...</p>
+		
+		<p><span class="allCaps">PREVIOUSLY</span></p>
+		
+		
+<pre class="sample-code">Uize.Node.setOpacity ('myNodeId',.5);
+Uize.Node.setStyle ('myNodeId',{width:200,height:100});
+</pre>
+	</div>
+	
+	<a name="2"></a>
+	<h1 class="heading1" title="2. Specifying Number Values"><span class="headingNumber"><a href="#2" title="2. Specifying Number Values">2</a>. </span>Specifying Number Values</h1>
+	<div class="contents1">
+		<p>Now, when number type values are specified for CSS style properties (other than the <code>opacity</code> and <code>zIndex</code> properties), the values are converted to strings by appending the "px" unit.</p>
+		
+		<p>So, for example, the following statement...</p>
+		
+		
+<pre class="sample-code">Uize.Node.setStyle ('myNodeId',{width:'200px',height:'100px'});
+</pre>
+		
+		<p>...can now also be written as...</p>
+		
+		
+<pre class="sample-code">Uize.Node.setStyle ('myNodeId',{width:200,height:100});
+</pre>
+		
+		<p>This feature of the <code>Uize.Node.setStyle</code> method is provided as a convenience, so that the values of number type variables can be supplied - as is - when setting style properties such as <code>left</code>, <code>top</code>, <code>width</code>, <code>height</code>, <code>fontSize</code>, etc.</p>
+	</div>
+	
+	<a name="3"></a>
+	<h1 class="heading1" title="3. Specifying Instance Values"><span class="headingNumber"><a href="#3" title="3. Specifying Instance Values">3</a>. </span>Specifying Instance Values</h1>
+	<div class="contents1">
+		<p>Now, when an instance of a <code><a href="../reference/Uize.html">Uize</a></code> subclass is specified for a CSS style property, the instance's <code>valueOf Intrinsic Method</code> is invoked in order to obtain the value of the instance's <code>value</code> set-get property.</p>
+		
+		<p>So, for example, the following statement...</p>
+		
+		
+<pre class="sample-code">Uize.Node.setStyle ('myNodeId',{width:myWidthSlider.get ('value') + 'px'});
+</pre>
+		
+		<p>...can now also be written as just...</p>
+		
+		
+<pre class="sample-code">Uize.Node.setStyle ('myNodeId',{width:myWidthSlider});
+</pre>
+		
+		<p>This feature of the <code>Uize.Node.setStyle</code> method is provided as a convenience, so that instances of <code><a href="../reference/Uize.html">Uize</a></code> subclasses that are value selectors and that implement the <code>value</code> set-get property can be supplied - as is - when setting any style properties. If the value for an instance is a number type, then it will be further handled according to the rules for <a href="#2">Specifying Number Values</a>.</p>
+	</div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

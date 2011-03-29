@@ -1,0 +1,17 @@
+The recently released [[http://www.wardtog.com][wardtog.com]] Web site is an excellent showcase of the UIZE JavaScript Framework.
+
+Wardtog.com really is the long tail of location based products, offering products that represent hundreds upon hundreds of cities across the entire globe. Let's say, hypothetically, that you were born and raised in the city of Cape Town, South Africa. Then, let's say further that you were at some point transplanted to San Francisco, California. Now, as an expatriate of Cape Town, South Africa, you might be moved to buy a shirt declaring your undying love for your city of birth. At Wardtog.com, this hypothetical expatriate can do just that by going to the [[http://www.wardtog.com/cape-town-south-africa+designs+gifts][Cape Town Designs]] page. With *wardtog.com*, transplants from all around the globe can step up and represent. Each city has numerous products with numerous design themes.
+
+The *wardtog.com* Web site is an impressive showcase of what can be accomplished using the UIZE JavaScript Framework. The designs for the many cities represented on the site are generated dynamically in Adobe Photoshop, with some help from the host-neutral modules of UIZE. Then, build scripts running in Windows Script Host are responsible for building the thousands of HTML pages, utilizing UIZE and its JavaScript templates functionality, thereby reducing server load by not requiring large amounts of dynamic processing and database access when pages of the site are viewed. Then, the entire site, consisting of thousands of static pages, is packaged and deployed to the server, once again utilizing scripts running in Windows Script Host and employing the host-neutral features of UIZE. Finally, the UIZE JavaScript Framework is used on the client-side to provide zoom previews in product grids, and for other client-side interactivity.
+
+All in all, *wardtog.com* really flexes the muscles of the UIZE JavaScript Framework and puts its robust features to good use.
+
+[[http://www.wardtog.com][CHECK IT OUT]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2010-03-24 - New Web Site Using UIZE: wardtog.com
+....................................................................................

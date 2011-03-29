@@ -1,0 +1,11 @@
+The =Uize.Fade.xFactory= extension module has been improved with the additional of an optional =startNowBOOL= parameter for various of its static methods.
+
+The =Uize.Fade.fade=, =Uize.Fade.fadeMethod=, =Uize.Fade.fadeProperties=, and =Uize.Fade.fadeProperty= static methods - implemented in the =Uize.Fade.xFactory= extension module - now all support an optional =startNowBOOL= parameter. By specifying the value =false= for this parameter, one can use these factory methods to create an instance of the =Uize.Fade= class without initiating the fade. Such a fade instance can then be started at a later point using the =start= instance method of the =Uize.Fade= class.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-03-21 - IMPROVED MODULE: Uize.Fade.xFactory
+....................................................................................

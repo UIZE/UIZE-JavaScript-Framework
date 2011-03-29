@@ -1,0 +1,55 @@
+The =Uize.Widget= module has been improved with the addition of the new =ajax= instance method.
+
+The new =ajax= instance method provides a concise and user friendly way for widget instances to execute ajax requests, without having to worry about the communication protocol used (eg. XHR or IFRAME), service URLs, or how service parameters are serialized in the request to the server.
+
+EXAMPLE
+......................................................................
+myWidget.ajax (
+	{
+		action:'getresults',    // <--- these are the service parameters
+		query:'dog shirts',
+		sort:'price_asc',
+		pg:2,
+		num:25
+	},
+	function (responseObj) {   // <--- this is the callback
+		// do something
+	}
+);
+......................................................................
+
+In the above example, the widget =myWidget= is executing an Ajax request to obtain a set of search results. The call to the =ajax= method passes two parameters: the service parameters, and the callback function that should be executed when the Ajax request is successfully processed. A variation of the =ajax= method allows a request parameters object to be specified as the second parameter of the method (instead of just a callback function), which allows a callback to be specified along with other parameters for qualifying how the request is performed. Examples of request parameters are directives to control the HTTP method (ie. GET or POST), the caching behavior for the request, etc.
+
+Bring Your Own Implementation
+	While individual widget classes do not need to bother with the mechanics of how Ajax communication is managed, you *will* want to provide the implementation of Ajax communication in your own page widget subclass.
+
+	SAMPLE IMPLEMENTATION
+	....................................................................................
+	MyPageWidgetClass.prototype.performAjax = function (_serviceParams,_requestParams) {
+		this._commObject.request ({
+			url:['http://www.somedomain.com/services',_requestParams],
+			returnType:'json',
+			requestMethod:_requestParams.requestMethod || 'POST',
+			cache:_requestParams.cache,
+			callback:_requestParams.callback
+		})
+	};
+	....................................................................................
+
+	The above sample implementation assumes that there is a private reference to a comm object (such as an instance of either the =Uize.Comm.Ajax= or the =Uize.Comm.Iframe= class), which was most likely created in the constructor of this widget. So, the truth of the matter is that the =ajax= method of the =Uize.Widget= class doesn't really do much - it simply hands over the responsibility of performing the actual request to the nearest widget up the parent chain that implements the companion =performAjax= method.
+
+ajax vs performAjax
+	The relationship between the =ajax= method and the =performAjax= method can best be characterized as follows: the =ajax= method is what widget instances use to initiate requests, while the =performAjax= method is how you provide an application-wide implementation of Ajax communication that will be used by all widgets on the widget tree that call the =ajax= method.
+
+	In a typical case, the =performAjax= method will be implemented by your page widget class, which sits at the root of the widget tree, so Ajax requests initiated by widgets that sit on the widget tree of a page widget will have their requests handled by the page widget's =performAjax= implementation. This allows the specifics of how Ajax is done for a specific site to be controlled in a central place, with minimal - if any - impact on the various widgets.
+
+Consult the Reference
+	For a detailed discussion of the =ajax= method and how it relates to the companion =performAjax= method, consult the reference for the =ajax= instance method of the =Uize.Widget= class.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2011-02-11 - New ajax Method in Uize.Widget
+....................................................................................

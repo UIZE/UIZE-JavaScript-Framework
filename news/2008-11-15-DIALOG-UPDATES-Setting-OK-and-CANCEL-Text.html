@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2008-11-15 - DIALOG UPDATES: Setting OK and CANCEL Text | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="Various improvements have been made relating to dialog based widgets..."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2008.html" class="breadcrumb breadcrumbWithArrow">2008 NEWS</a>
+	2008-11-15 - DIALOG UPDATES: Setting OK and CANCEL Text
+
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="The Uize.Widget.Palette module has been updated to add support for the new okText, defaultOkText, cancelText, and defaultCancelText set-get properties.">1. IMPROVED MODULE: Uize.Widget.Palette</a></li>
+			<li><a href="#2" title="The implementation of confirm/inform dialogs in the Uize.Widget.Page base class now supports okText and cancelText parameters for the confirm and inform instance methods of widgets.">2. IMPROVED MODULE: Uize.Widget.Page</a></li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<p>Various improvements have been made relating to dialog based widgets...</p>
+	
+	<a name="1"></a>
+	<h1 class="heading1" title="1. IMPROVED MODULE: Uize.Widget.Palette"><span class="headingNumber"><a href="#1" title="1. IMPROVED MODULE: Uize.Widget.Palette">1</a>. </span>IMPROVED MODULE: Uize.Widget.Palette</h1>
+	<div class="contents1">
+		<p>The <code>Uize.Widget.Palette</code> module has been updated to add support for the new <code>okText</code>, <code>defaultOkText</code>, <code>cancelText</code>, and <code>defaultCancelText</code> set-get properties.</p>
+		
+		<p>These properties allow one to programmatically modify the label text on the ok and cancel buttons through the set-get property interface of a dialog widget.</p>
+	</div>
+	
+	<a name="2"></a>
+	<h1 class="heading1" title="2. IMPROVED MODULE: Uize.Widget.Page"><span class="headingNumber"><a href="#2" title="2. IMPROVED MODULE: Uize.Widget.Page">2</a>. </span>IMPROVED MODULE: Uize.Widget.Page</h1>
+	<div class="contents1">
+		<p>The implementation of confirm/inform dialogs in the <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code> base class now supports <code>okText</code> and <code>cancelText</code> parameters for the <code>confirm</code> and <code>inform</code> instance methods of widgets.</p>
+		
+		<p><span class="allCaps">EXAMPLE</span></p>
+		
+		
+<pre class="sample-code">myWidget.confirm ({
+  title:'Confirm Delete',
+  message:'Are you sure you would like to delete the selected items?',
+  okText:'YES, DELETE',
+  cancelText:'NO, DON\'T DELETE',
+  yesHandler:function () {myWidget.deleteSelected ()}
+});
+</pre>
+		
+		<p>See how they're used in the <a href="../examples/decorated-confirm.html">Decorated Confirm Dialog example</a>.</p>
+	</div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

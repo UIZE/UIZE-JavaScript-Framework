@@ -1,0 +1,9 @@
+Fixed two bugs that were introduced with the 2008-07-01 build: one with Uize.Node and unwiring events, and one with a slideshow example that got broken in some refactoring.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2008-07-02 - Bug Fixes
+....................................................................................

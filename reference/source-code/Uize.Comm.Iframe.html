@@ -1,0 +1,148 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Uize.Comm.Iframe | JavaScript Source Code | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework module source code"/>
+	<meta name="description" content="This is the JavaScript source code for the Uize.Comm.Iframe module of the UIZE JavaScript Framework"/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../../css/page.css"/>
+	<link rel="stylesheet" href="../../css/page.source.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../../index.html" title="UIZE JavaScript Framework home"></a>
+	SOURCE CODE: Uize.Comm.Iframe
+	<div class="pageActions">
+		<a href="../Uize.Comm.Iframe.html" class="buttonLink">VIEW REFERENCE</a>
+	</div>
+</h1>
+
+<pre>
+/*______________
+|       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
+|     /      /  |   ---------------------------------------------------
+|    /    O /   |    MODULE : Uize.Comm.Iframe Class
+|   /    / /    |
+|  /    / /  /| |    ONLINE : http://www.uize.com
+| /____/ /__/_| | COPYRIGHT : (c)2004-2011 UIZE
+|          /___ |   LICENSE : Available under MIT License or GNU General Public License
+|_______________|             http://www.uize.com/license.html
+*/
+
+/*ScruncherSettings Mappings="=c" LineCompacting="TRUE"*/
+
+/* Module Meta Data
+  type: Class
+  importance: 5
+  codeCompleteness: 100
+  testCompleteness: 0
+  docCompleteness: 50
+*/
+
+/*?
+  Introduction
+    The =Uize.Comm.Iframe= class implements support for communication to a server by submitting form data to it and targeting its response to an IFRAME.
+
+    *DEVELOPERS:* `Chris van Rensburg`, `Jan Borgersen`, original code donated by `Zazzle Inc.`
+
+    In order to implement support for communication through an IFRAME, this class overrides the implementation of the =performRequest= instance method inherited from the =Uize.Comm= base class. There are no additional methods or properties provided by this class - all the interface is provided in the =Uize.Comm= superclass.
+*/
+
+Uize.module ({
+  name:'Uize.Comm.Iframe',
+  required:[
+    'Uize.Url',
+    'Uize.Node'
+  ],
+  builder:function (_superclass) {
+    /*** Class Constructor ***/
+      var
+        _class = _superclass.subclass (),
+        _classPrototype = _class.prototype
+      ;
+
+    /*** Global Variables ***/
+      var _iframeId;
+
+    /*** Public Instance Methods ***/
+      _classPrototype.performRequest = function (_request,_callback) {
+        var
+          _this = this,
+          _iframe = Uize.Node.getById (_iframeId),
+          _requestUrl = Uize.Url.resolve (
+            _request.url,
+            {
+              comm_mode:'ajax',
+              output:'js',
+              rnd:_request.cache == 'never' ? Uize.Url.getCacheDefeatStr () : null
+            }
+          ),
+          _returnType = _request.returnType,
+          _returnTypeIsObject = _returnType == 'object'
+        ;
+        handleResponse = function (_responseResult) {
+          if (_returnTypeIsObject || _returnType == 'json')
+            _request.responseJson = Uize.clone (_responseResult)
+          ;
+          Uize.Node.isIe &amp;&amp; _iframe.contentWindow.history.go (-1);
+          _callback ();
+        };
+        if (_request.requestMethod == 'POST') {
+          var
+            _form = Uize.Node.getById ('CommIframe_form'),
+            _paramsField = Uize.Node.getById ('CommIframe_params'),
+            _queryPos = _requestUrl.indexOf ('?')
+          ;
+          _paramsField.value = _queryPos &gt; -1 ? _requestUrl.substr (_queryPos + 1) : '';
+          _form.action = _requestUrl.slice (0,_queryPos);
+          _form.submit ();
+        } else {
+          _iframe.src = _requestUrl;
+        }
+      };
+
+    /*** Initialization ***/
+      if (typeof navigator != 'undefined') {
+        /* NOTE:
+          This puts the iframe in the page, but really the iframe should only be put into the page when the first instance of the class is created. Or, ideally, there should be a unique iframe per instance. The iframe insertion could even be deferred until the first request is performed.
+        */
+        _iframeId = _classPrototype.iframeId = 'Uize_Comm_Iframe_iframe' + Uize.Url.getCacheDefeatStr ();
+        Uize.Node.injectHtml (
+          Uize.Node.getById ('globalContent') || document.body,
+          '&lt;form id="CommIframe_form" style="display:none;" target="' + _iframeId + '" method="POST" accept-charset="utf-8"&gt;' +
+            '&lt;input id="CommIframe_params" name="params" type="hidden"/&gt;' +
+          '&lt;/form&gt;' +
+          '&lt;iframe id="' + _iframeId + '" name="' + _iframeId + '" width="1" height="1" src="/z.2/js/library/Zazzle_CommIframe/blank.html" frameborder="1" style="position:absolute; visibility:hidden;" scrolling="no"&gt;&lt;/iframe&gt;' /* NOTE: this code shouldn't make an assumption about the library being served from this place - initial src URL should */
+        );
+      }
+
+      handleResponse = function () {
+        /*
+          a dummy version of this function in case the user navigates back to a page using this code and a cached iframe server response tries to call this function (ie. no requests have been made yet)
+        */
+      };
+
+    return _class;
+  }
+});
+
+
+</pre>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.library',
+		'UizeDotCom.Page'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page).wireUi ()}
+});
+
+</script>
+
+</body></html>

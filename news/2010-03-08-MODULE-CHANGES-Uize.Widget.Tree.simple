@@ -1,0 +1,31 @@
+A number of instance and static methods of the =Uize.Widget.Tree= module have been deprecated and migrated into the new =Uize.Node.Tree= module.
+
+The =getTreeFromList= and =getTreeFromPage= instance methods, along with the =Uize.Widget.Tree.getTreeFromList= and =Uize.Widget.Tree.getTreeFromPage= static methods, have been deprecated and migrated into the =Uize.Node.Tree= module as =Uize.Node.Tree.getTreeFromList= and =Uize.Node.Tree.getTreeFromPage=.
+
+MIGRATED
+...........................................................................................
+myTreeWidget.getTreeFromList (...)      >> BECOMES >>  Uize.Node.Tree.getTreeFromList (...)
+Uize.Widget.Tree.getTreeFromList (...)  >> BECOMES >>  Uize.Node.Tree.getTreeFromList (...)
+myTreeWidget.getTreeFromPage (...)      >> BECOMES >>  Uize.Node.Tree.getTreeFromPage (...)
+Uize.Widget.Tree.getTreeFromPage (...)  >> BECOMES >>  Uize.Node.Tree.getTreeFromPage (...)
+...........................................................................................
+
+Reasons for this Change
+	This change was made for the following two primary reasons...
+
+	+. The migrated methods should never have been exposed as instance methods in the =Uize.Widget.Tree= class, since they do not depend on and are not affected by instance state. This change addresses that bad design choice by eliminating the instance methods (well, they're deprecated for now, but they will eventually be killed).
+
+	+. The functionality of building a tree data structure by analyzing the HTML in a document could be useful outside of the context of a tree widget. Therefore, this functionality should not have been placed inside a widget class' implementation. This change addresses that bad design choice by locating the functionality in a utility type module.
+
+Deprecated Methods Still Supported
+	For backwards compatibility, the deprecated instance and static methods of the =Uize.Widget.Tree= class are all still supported, and will be supported for some time.
+
+	All existing code using the deprecated methods should continue to work as normal. It would be wise to progressively migrate code over to using the static methods in the new =Uize.Node.Tree= module. In order to achieve backwards compatibility, the =Uize.Widget.Tree= base class now requires the new =Uize.Node.Tree= module. Other than that, the static methods in the new =Uize.Node.Tree= module have the same signature and behavior as the deprecated methods of the =Uize.Node.Tree= module.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2010-03-08 - MODULE CHANGES: Uize.Widget.Tree
+....................................................................................

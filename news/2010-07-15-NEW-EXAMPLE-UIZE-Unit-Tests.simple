@@ -1,0 +1,13 @@
+The new [[../examples/uize-unit-tests.html][UIZE Unit Tests]] example lets you select and run any of the test modules of the UIZE JavaScript Framework.
+
+In the example, a test module selector lets you choose your test module. On selecting a test module, the test module is loaded dynamically. After it has loaded, you can use the *"START TESTS"* button to start running the tests contained inside the selected test module. While the tests are being performed, a progress bar is updated to show how far you are through the tests. Also, a log is written to with details of the tests being performed. You can stop the tests at any time using the *"STOP TESTS"* button. If one of the tests fails (none should, of course), test execution is aborted and a synopsis of the failure is displayed in a dialog. To run the entire test suite for the UIZE JavaScript Framework, you can select the =Uize.Test.UnitTests= test module.
+
+[[../examples/uize-unit-tests.html][CHECK IT OUT]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2010-07-15 - NEW EXAMPLE: UIZE Unit Tests
+....................................................................................

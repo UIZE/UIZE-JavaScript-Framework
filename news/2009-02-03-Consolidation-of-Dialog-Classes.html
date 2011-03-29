@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2009-02-03 - Consolidation of Dialog Classes | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="The Uize.Widget.Palette class (and its subclasses) and the Uize.Widget.Window class (and its subclasses) have been consolidated into the new Uize.Widget.Dialog class (and subclasses)."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2009.html" class="breadcrumb breadcrumbWithArrow">2009 NEWS</a>
+	2009-02-03 - Consolidation of Dialog Classes
+
+</h1>
+
+<div class="main">
+<div class="contents0">
+	<p>The <code>Uize.Widget.Palette</code> class (and its subclasses) and the <code>Uize.Widget.Window</code> class (and its subclasses) have been consolidated into the new <code><a href="../reference/Uize.Widget.Dialog.html">Uize.Widget.Dialog</a></code> class (and subclasses).</p>
+	
+	<p>For a while now there have been two parallel worlds of dialog widgets: the <code>Uize.Widget.Palette</code> world and the <code>Uize.Widget.Window</code> world. The most heavily used in real world applications have been the <code>Uize.Widget.Palette</code> subclasses, however the more contemporary <code>Uize.Widget.Window</code> code supported drag-and-drop resizability. The consolidation brings the best of both these two worlds together into one new, more appropriately named <code><a href="../reference/Uize.Widget.Dialog.html">Uize.Widget.Dialog</a></code> class. As a result of this change, a number of widget classes have been remapped as shown below...</p>
+	
+	<p><span class="allCaps">DEPRECATED</span></p>
+	
+	
+<pre class="sample-code">Uize.Widget.Window            &gt;&gt;  Uize.Widget.Dialog
+Uize.Widget.Window.Draggable  &gt;&gt;  Uize.Widget.Dialog
+Uize.Widget.Window.Resizable  &gt;&gt;  Uize.Widget.Dialog + Uize.Widget.Dialog.xResizable
+Uize.Widget.Palette           &gt;&gt;  Uize.Widget.Dialog
+Uize.Widget.Palette.Confirm   &gt;&gt;  Uize.Widget.Dialog.Confirm
+Uize.Widget.Palette.Form      &gt;&gt;  Uize.Widget.Dialog.Form
+Uize.Widget.Palette.Iframe    &gt;&gt;  Uize.Widget.Dialog.Iframe
+</pre>
+	
+	<p><span class="allCaps">BACKWARDS COMPATIBILITY</span></p>
+	
+	<p>The old dialog classes have been deprecated in such a way that they should still continue to work (if currently in use in applications). Class alias modules have been left behind that map to the appropriate new <code><a href="../reference/Uize.Widget.Dialog.html">Uize.Widget.Dialog</a></code> subclasses. You can still use these alias modules, but using them will add additional links in the dependency chain - so it would be better to migrate your code away from using them at some point.</p>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

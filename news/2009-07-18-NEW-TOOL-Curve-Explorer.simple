@@ -1,0 +1,13 @@
+The [[../examples/curve-explorer.html][Curve Explorer]] tool (which makes use of the =Uize.Curve=, =Uize.Curve.Rubber=, and =Uize.Curve.Mod= modules, among others) provides a UI for visualizing and experimenting with curve functions.
+
+This tool lets you select from a large number of preset curves in its <b>"PRESETS"</b> tab. Upon selecting a preset curve, a preview of the selected curve will be generated, made up of a graph that plots the curve's values, a color gradient that represents the curve's values using dark blue for =0= and light blue for =1=, and an animation of the UIZE logo that uses the selected curve to control its motion. The curve expression for the selected curve preset is shown in the <b>"PARAMS"</b> tab. By selecting this tab, you get to see the curve expression and modify it to produce new curves. Here you can play around with the parameters in a curve expression - if present - to see how they affect the curve, or you can add more complexity by using the curve modifiers defined in the =Uize.Curve.Mod= package. A <b>"PREVIEW CURVE"</b> button lets you preview the changes you make. A wide variety of curve presets are provided to get you started, from the most basic built-ins to complex curves that combine many built-in curves into complex expressions using curve modifiers.
+
+[[../examples/curve-explorer.html][CHECK IT OUT]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-07-18 - NEW TOOL: Curve Explorer
+....................................................................................

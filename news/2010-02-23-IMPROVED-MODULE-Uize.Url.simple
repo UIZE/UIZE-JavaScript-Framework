@@ -1,0 +1,37 @@
+The =Uize.Url= module has been improved with the introduction of the =Uize.Url.from= static method (actually, it's existed in the code for a while, but has never been officially documented or fully tested).
+
+The =Uize.Url.from= static method returns an object, containing properties for the various logical segments of the specified URL string. This method provides a convenient way to get at very precise portions of a URL string, such as the file name without the extension, the file type without the "." (period) character, the query params string without the "?" (question mark) character, the anchor without the "#" (pound / hash) character, etc. Upon parsing a specified URL string, the =Uize.Url.from= method returns an object with the following structure...
+
+URL SEGMENTS OBJECT
+............................................................................................
+{
+	href       : hrefSTR,       //  http://uize.com:80/reference/Uize.html?param=value#anchor
+	fullDomain : fullDomainSTR, //  http://uize.com:80
+	protocol   : protocolSTR,   //  http:
+	host       : hostSTR,       //  uize.com:80
+	hostname   : hostnameSTR,   //  uize.com
+	port       : portSTR,       //  80
+	pathname   : pathnameSTR,   //  /reference/Uize.html
+	folderPath : folderPathSTR, //  /reference/
+	file       : fileSTR,       //  Uize.html
+	fileName   : fileNameSTR,   //  Uize
+	extension  : extensionSTR,  //  .html
+	fileType   : fileTypeSTR,   //  html
+	search     : searchSTR,     //  ?param=value
+	query      : querySTR,      //  param=value
+	hash       : hashSTR,       //  #anchor
+	anchor     : anchorSTR      //  hash
+}
+............................................................................................
+
+The =Uize.Url.from= method is comprehensively documented and fully tested. Additionally, all static methods of the =Uize.Url= module are now fully unit tested by the module =Uize.Test.Uize.Url=.
+
+[[Uize.Url][LEARN MORE]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2010-02-23 - IMPROVED MODULE: Uize.Url
+....................................................................................

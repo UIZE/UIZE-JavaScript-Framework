@@ -1,0 +1,13 @@
+The new [[../examples/animate-size-in-javascript.html][Animate Size in JavaScript]] example shows how to animate the size of an HTML element and how to apply amazingly realistic motion effects like easing, elasticity, bounce, and many more.
+
+In the example, the =Uize.Fx.fadeStyle= method of the =Uize.Fx= module is animating the size of an object. You can move the mouse around inside the brushed metal square to see a faint preview for a new size for the object, and then click to animate the object to that new size. How the object transitions is decided by the curve(s) used. The curve(s) can be changed by clicking on one of the links in the <b>"PRESETS"</b> tab. Upon choosing a preset, a random new size is chosen and the object is animated to the size using the new curve(s). The object's size can be animated again by clicking a preset link repeatedly, by clicking the <b>"PREVIEW ANIMATION"</b> button repeatedly, or by clicking anywhere on the metal square. The settings for a preset can be edited in the *"PARAMS"* tab, and the edited settings can be previewed by clicking on the *"PREVIEW ANIMATION"* button.
+
+[[../examples/animate-size-in-javascript.html][CHECK IT OUT]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2010-05-18 - NEW EXAMPLE: Animate Size in JavaScript
+....................................................................................

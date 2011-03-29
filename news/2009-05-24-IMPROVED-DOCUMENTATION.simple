@@ -1,0 +1,26 @@
+A number of significant improvements have been made to the documentation for the UIZE JavaScript Framework.
+
+New Section Search
+	The search feature for the *uize.com* Web site has been improved to make it easy to search major sections of the Web site.
+
+	Search for anything within the *uize.com* Web site. Simply click on the *"SEARCH"* link located in the lower left - at the very bottom of the contents menu pane. Then, enter your search query in the search page that loads in, and click on one of the search buttons for the various main sections of the site - your search will be conducted within that section.
+
+	For your convenience, the section search feature is linked to directly from the many module reference documents under the "Module Reference" section. Simply browse to the reference document for a particular module. When the reference document loads in, you'll notice a *"( SEARCH )"* link in parentheses, just after the module name in the title bar. Clicking this link will take you directly to the section search feature, with the name of the module you were reading about automatically filled in as the search query.
+
+Smaller Download
+	The size of the =uize.zip= archive has been reduced by a few megabytes in order to reduce download time.
+
+	For convenience, the largest sized images used in some of the example pages have been removed from the download. These binary files constituted a few megabytes of the overall archive, and removing them reduced its size from around 9MB to around 6MB. The reduced size means that the zip file will download and extract faster. The large image files are now hosted online. So, for the few example pages that use them, an Internet connection will be needed, and the pages may load a little slower than when the images were part of the download. This should be an acceptable price to pay for a somewhat smaller download.
+
+Improved Cross-linking
+	There is now more effective cross-linking between documents, with many previously unlinked module names now linked to their associated reference documents.
+
+	Basically, just about anywhere that there was previously an unlinked module name there is now a linked module name. Module names are automatically linked to their reference documents from all SimpleDoc documents, including explainers, appendixes, module reference documents, and various other miscellaneous SimpleDoc documents.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-05-24 - IMPROVED DOCUMENTATION
+....................................................................................

@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2008-11-16 - IMPROVED MODULE: Uize | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="A number of small improvements have been made to the Uize base class."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2008.html" class="breadcrumb breadcrumbWithArrow">2008 NEWS</a>
+	2008-11-16 - IMPROVED MODULE: Uize
+
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="The toString intrinsic method is now implemented also as a static method on Uize subclasses, so the alert statement can now be used to display a summary of info for an object that is a reference to a Uize subclass. For example, the statement alert (Uize.Widget.Page) would produce an output like...">1. Uize.toString</a></li>
+			<li><a href="#2" title="Less compelling than the new Uize.toString static implementation, the valueOf intrinsic method is now also implemented as a static method on Uize subclasses.">2. Uize.valueOf</a></li>
+			<li><a href="#3" title="When registering set-get properties using the Uize.registerProperties static method, it is now possible to omit the public name for a property and it will default to the private name.">3. Name Property Optional in Set-get Property Profiles</a></li>
+			<li><a href="#4" title="A new variation of the set method that accepts the two parameters propertyNameSTR and propertyValueANYTYPE makes it possible to use an expression or the value of a variable for specifying the name of the property to set.">4. New Variation of set Method</a></li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<p>A number of small improvements have been made to the <code><a href="../reference/Uize.html">Uize</a></code> base class.</p>
+	
+	<a name="1"></a>
+	<h1 class="heading1" title="1. Uize.toString"><span class="headingNumber"><a href="#1" title="1. Uize.toString">1</a>. </span>Uize.toString</h1>
+	<div class="contents1">
+		<p>The <code>toString</code> intrinsic method is now implemented also as a static method on <code><a href="../reference/Uize.html">Uize</a></code> subclasses, so the alert statement can now be used to display a summary of info for an object that is a reference to a <code><a href="../reference/Uize.html">Uize</a></code> subclass. For example, the statement <code>alert (Uize.Widget.Page)</code> would produce an output like...</p>
+		
+		
+<pre class="sample-code">[class Uize.Widget.Page]
+
+built : true
+busy : inherit
+busyInherited : false
+confirmDialog : [object Object]
+container : undefined
+enabled : inherit
+enabledInherited : true
+html : undefined
+idPrefix : page
+idPrefixConstruction : undefined
+insertionMode : undefined
+localized : undefined
+name : undefined
+nodeMap : undefined
+wired : false
+</pre>
+		
+		<p>This new behavior is similar to the existing behavior for instances of a <code><a href="../reference/Uize.html">Uize</a></code> subclass, excepting that the summary of values for set-get properties is for the class (ie. static) rather than an instance.</p>
+	</div>
+	
+	<a name="2"></a>
+	<h1 class="heading1" title="2. Uize.valueOf"><span class="headingNumber"><a href="#2" title="2. Uize.valueOf">2</a>. </span>Uize.valueOf</h1>
+	<div class="contents1">
+		<p>Less compelling than the new <code><a href="#1">Uize.toString</a></code> static implementation, the <code>valueOf</code> intrinsic method is now also implemented as a static method on <code><a href="../reference/Uize.html">Uize</a></code> subclasses.</p>
+		
+		<p>This change is more for parity than anything else. This means that you can access the static value of a class' <code>value</code> set-get property by involving the class reference in an expression, such as <code>+Uize.Widget.Bar.Slider</code>, or <code>Uize.Widget.ColorPicker + ''</code>.</p>
+	</div>
+	
+	<a name="3"></a>
+	<h1 class="heading1" title="3. Name Property Optional in Set-get Property Profiles"><span class="headingNumber"><a href="#3" title="3. Name Property Optional in Set-get Property Profiles">3</a>. </span>Name Property Optional in Set-get Property Profiles</h1>
+	<div class="contents1">
+		<p>When registering set-get properties using the <code>Uize.registerProperties</code> static method, it is now possible to omit the public name for a property and it will default to the private name.</p>
+		
+		<p>This may be useful in certain special cases, as outlined in more detail in the <a href="../explainers/set-get-properties.html">Set-get Properties explainer</a> (see the section on <code>Public Name Defaulting</code>, which talks about <code>Naked Set-get Properties</code> and <code>Private Set-get Properties</code>).</p>
+	</div>
+	
+	<a name="4"></a>
+	<h1 class="heading1" title="4. New Variation of set Method"><span class="headingNumber"><a href="#4" title="4. New Variation of set Method">4</a>. </span>New Variation of set Method</h1>
+	<div class="contents1">
+		<p>A new variation of the <code>set</code> method that accepts the two parameters <code>propertyNameSTR</code> and <code>propertyValueANYTYPE</code> makes it possible to use an expression or the value of a variable for specifying the name of the property to set.</p>
+		
+		<p>This variation is supported for both static <b>and</b> instance calls of this method.</p>
+		
+		<p><span class="allCaps">INSTEAD OF...</span></p>
+		
+		
+<pre class="sample-code">var propertyToSetObj = {};
+propertyToSetObj [propertyName] = propertyValue;
+myInstance.set (propertyToSetObj);
+</pre>
+		
+		<p><span class="allCaps">USE...</span></p>
+		
+		
+<pre class="sample-code">myInstance.set (propertyName,propertyValue);
+</pre>
+	</div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

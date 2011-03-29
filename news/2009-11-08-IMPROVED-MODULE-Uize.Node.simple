@@ -1,0 +1,11 @@
+The =Uize.Node.unwireEventsByOwnerId= static method of the =Uize.Node= module has been improved with the addition of support for arrays of node references for the =node= property of the method's =eventMatchOBJ= parameter.
+
+As a side effect of this improvement, the =unwireNodeEventsByMatch= instance method of the =Uize.Widget= class now supports a node blob for its first parameter, allowing events for multiple nodes to be unwired in one method call.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-11-08 - IMPROVED MODULE: Uize.Node
+....................................................................................

@@ -1,0 +1,17 @@
+<%@
+	required ('UizeDotCom.Templates.SimpleDoc');
+	input ({title:'string',description:'string',body:'string'});
+%><%@ startBlock ('displayTitleHtml') %><% var year = input.title.slice (0,4); %>
+	<a href="../news-<%= year %>.html" class="breadcrumb breadcrumbWithArrow"><%= year %> NEWS</a>
+	<% .title %>
+<%@ endBlock () %><%=
+	UizeDotCom.Templates.SimpleDoc.process ({
+		title:input.title,
+		section:'News',
+		description:input.description || 'This is a news item for the UIZE JavaScript Framework.',
+		pathToRoot:'../',
+		displayTitleHtml:displayTitleHtml (),
+		body:input.body
+	})
+%>
+

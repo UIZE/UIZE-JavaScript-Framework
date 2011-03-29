@@ -1,0 +1,13 @@
+The new [[../examples/color-sort-by-rgb-proximity.html][Color Sort by RGB Proximity]] example demonstrates the proximity-based color sorting functionality of the UIZE JavaScript Framework, as implemented in the =Uize.Color.xUtil= module.
+
+The example provides an interface with a sorted array of colors on one side, and an RGB color picker on the other side, with sliders for selecting levels for the red, green, and blue color channels of an RGB color. As you use the sliders to change your desired color, the finite set of available colors is re-sorted so that the colors most like your desired color are rearranged to be on the left.
+
+[[../examples/color-sort-by-rgb-proximity.html][CHECK IT OUT]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-04-28 - NEW EXAMPLE: Color Sort by RGB Proximity
+....................................................................................

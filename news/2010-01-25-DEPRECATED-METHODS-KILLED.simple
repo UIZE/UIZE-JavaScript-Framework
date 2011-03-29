@@ -1,0 +1,17 @@
+The =Uize.Data.indexIn= and =Uize.Data.isIn= static methods of the =Uize.Data= module, that were both deprecated way back in December of 2008, have finally been killed.
+
+The identical functionality provided by the old methods is available in the =Uize.indexIn= and =Uize.isIn= static methods of the =Uize= base class.
+
+KILLED
+..........................................................
+Uize.Data.indexIn (...)  >> BECOMES >>  Uize.indexIn (...)
+Uize.Data.isIn (...)     >> BECOMES >>  Uize.isIn (...)
+..........................................................
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2010-01-25 - DEPRECATED METHODS KILLED
+....................................................................................

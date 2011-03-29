@@ -1,0 +1,68 @@
+<%@
+	input ({tour:'string',pageUrl:'string'});
+	required ([
+		'UizeDotCom.Examples',
+		'Uize.Url'
+	]);
+%>
+<%
+	var
+		_tour = input.tour,
+		_tourExamples = UizeDotCom.Examples ()
+	;
+
+	/*** if tour is not "all", find all pages for this specific tour ***/
+		if (_tour.toLowerCase () != 'all') {
+			var
+				_examples = _tourExamples,
+				_keywordsMatchRegExp = new RegExp ('\\b' + _tour + '\\b','i')
+			;
+			_tourExamples = [];
+			for (var _exampleNo = -1, _examplesLength = _examples.length; ++_exampleNo < _examplesLength;) {
+				var _example = _examples [_exampleNo];
+				_keywordsMatchRegExp.test (_example.keywords) && _tourExamples.push (_example);
+			}
+		}
+
+	var
+		_tourExamplesLength = _tourExamples.length,
+		_tourExampleUrlSuffix = '?tour=' + _tour,
+		_pageNo = -1,
+		_pageFileName = Uize.Url.from (input.pageUrl).fileName
+	;
+
+	function _getExamplePageLink (_example) {
+		return _example.path.match (/[\\\/]([^\\\/]+)$/) [1] + _tourExampleUrlSuffix;
+	}
+%>
+
+<div id="page-tourPageTooltip" class="tourPageTooltip">
+	<div id="page-tourPageTooltip-title" class="tourPageTitle"></div>
+	<div id="page-tourPageTooltip-description" class="tourPageDescription"></div>
+	<div class="tourPageKeywords">TAGS: <span id="page-tourPageTooltip-keywords"></span></div>
+</div>
+
+<table class="tourPages">
+	<tr><%
+		for (var _tourExampleNo = -1; ++_tourExampleNo < _tourExamplesLength;) {
+			var _tourExample = _tourExamples [_tourExampleNo];
+			if (_pageNo < 0 && _pageFileName == Uize.Url.from (_tourExample.path).fileName)
+				_pageNo = _tourExampleNo
+			;
+		%><td>
+			<a href="<%= _getExamplePageLink (_tourExample) %>" class="tourPage<%= _tourExampleNo == _pageNo ? ' tourCurrentPage' : '' %>"></a>
+		</td><%
+		}
+	%></tr>
+</table>
+
+<% var _previousExample = _pageNo > 0 ? _tourExamples [_pageNo - 1] : null; %>
+<% if (_previousExample) { %>
+<a href="<%= _getExamplePageLink (_previousExample) %>" class="tourButton tourButtonPrevious"></a>
+<% } %>
+
+<% var _nextExample = _pageNo < _tourExamplesLength - 1 ? _tourExamples [_pageNo + 1] : null; %>
+<% if (_nextExample) { %>
+<a href="<%= _getExamplePageLink (_nextExample) %>" class="tourButton tourButtonNext"></a>
+<% } %>
+

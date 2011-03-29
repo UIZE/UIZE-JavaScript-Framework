@@ -1,0 +1,11 @@
+The =Uize.Fade= module has been updated with the addition of the new =getSeries= instance method and the =Uize.Fade.getSeries= static method, both of which let you use a fade to generate an interpolated series of values.
+
+These new methods can be useful when using fades in non-time based applications, such as displaying values in a bar chart, fading colors over a series of elements, plotting positions for a series of elements, populating data sets, etc.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2008-11-27 - IMPROVED MODULE: Uize.Fade
+....................................................................................

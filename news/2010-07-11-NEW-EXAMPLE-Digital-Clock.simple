@@ -1,0 +1,13 @@
+The new [[../examples/digital-clock.html][Digital Clock]] example shows how the =Uize.Widget.SegmentDisplay.Seven= widget class can be used to easily create a digital clock that shows hours, minutes, and seconds.
+
+In the example, six seven segment display widgets are used - two for the hours display, two for the minutes display, and two for the seconds display. After the page loads and is initialized, a timer/interval is started that updates the clock's display every second. For every update, the current time is queried using JavaScript's Date object and formatted to an =HHMMSS= string using the =Uize.Date.Formatter.format= method of the =Uize.Date.Formatter= module, specifying the string value ='{hh}{mm}{ss}'= for the date format. From the formatted string, the first character is used to set the value of the hours display's tens widget, and the second character is used to set the value of the hours display's ones widget. In a similar manner, the third and fourth characters of the formatted date string are used for the minutes display's two seven segment display widgets, and the last two characters of the formatted date string are used for the seconds display's two widgets.
+
+[[../examples/digital-clock.html][CHECK IT OUT]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2010-07-11 - NEW EXAMPLE: Digital Clock
+....................................................................................

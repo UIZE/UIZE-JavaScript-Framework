@@ -1,0 +1,65 @@
+/*** Contents Trees ***/
+	.contents-tree-shell *,
+	.contents-tree-shell *:link,
+	.contents-tree-shell *:visited,
+	.contents-tree-shell *:hover,
+	.contents-tree-shell *:active
+	{
+		text-decoration:none;
+		border-bottom:none;
+		font-family:Arial;
+		font-style:normal;
+		color:#000;
+	}
+
+	/*** common to all levels ***/
+		a.contents-tree-level1:hover,
+		a.contents-tree-level2:hover,
+		a.contents-tree-level3:hover,
+		a.contents-tree-level4:hover
+		{
+			border-bottom:1px solid #ffa200;
+		}
+
+	/*** level 1 ***/
+		.contents-tree-level1,
+		.contents-tree-level1:link,
+		.contents-tree-level1:visited,
+		.contents-tree-level1:hover,
+		.contents-tree-level1:active
+		{
+			font-size:13px;
+			font-weight:bold;
+		}
+
+	/*** level 2 ***/
+		.contents-tree-level2,
+		.contents-tree-level2:link,
+		.contents-tree-level2:visited,
+		.contents-tree-level2:hover,
+		.contents-tree-level2:active
+		{
+			font-size:11px;
+			font-weight:bold;
+		}
+
+	/*** level 3 ***/
+		.contents-tree-level3,
+		.contents-tree-level3:link,
+		.contents-tree-level3:visited,
+		.contents-tree-level3:hover,
+		.contents-tree-level3:active
+		{
+			font-size:11px;
+		}
+
+	/*** level 4 ***/
+		.contents-tree-level4,
+		.contents-tree-level4:link,
+		.contents-tree-level4:visited,
+		.contents-tree-level4:hover,
+		.contents-tree-level4:active
+		{
+			font-size:11px;
+		}
+

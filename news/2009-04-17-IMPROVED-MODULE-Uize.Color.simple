@@ -1,0 +1,50 @@
+The =Uize.Color= module has been *dramatically improved*, with the addition of a framework for color spaces, a framework for color encodings, a framework for named colors, built-in support for the =sRGB= and =HSL= color spaces, and a diverse array of built-in color encodings.
+
+The new framework for working with colors is extensible. New color spaces, new color encodings, and new named colors can be defined in extension modules (or your application code). Built-in color encodings include =hex=, =#hex=, =name=, =RGB array=, =RGB int=, =RGB object=, =RGB string=, and many more. Seventeen CSS 2.1 named colors are defined, and over a hundred SVG 1.0 / CSS 3 named colors are defined in the =Uize.Color.xSvgColors= extension module. Along with =sRGB=, the =Uize.Color= module also defines the =HSL= (Hue, Saturation, Lightness) color space, along with a variety of associated color encodings for that color space.
+
+Along with these major improvements, a number of older features have been deprecated or migrated into extension modules, in order to improve the architecture.
+
+Instance Methods Deprecated
+	A number of instance methods of the =Uize.Color= object have been deprecated.
+
+	.........................................................................
+	myColor.toHex         >> BECOMES >>  myColor.to ('hex')
+	myColor.setColor      >> BECOMES >>  myColor.from
+	myColor.mix           >> BECOMES >>  myColor.blend -- in Uize.Color.xUtil
+	.........................................................................
+
+Static Methods Deprecated
+	A number of static methods of the =Uize.Color= object have been deprecated.
+
+	..................................................................................
+	Uize.Color.blendHex         >> BECOMES >>  Uize.Color.blend -- in Uize.Color.xUtil
+	Uize.Color.mixColors        >> BECOMES >>  Uize.Color.mix -- in Uize.Color.xUtil
+	Uize.Color.hexStrToRgb      >> BECOMES >>  Uize.Color.to (hexRgbSTR,'RGB object')
+	Uize.Color.rgbFromStyleStr  >> BECOMES >>  new Uize.Color
+	Uize.Color.rgbToHexStr      >> BECOMES >>  Uize.Color.to (rgbOBJ,'hex')
+	Uize.Color.rgbToStyleStr    >> BECOMES >>  Uize.Color.to (myColor,'RGB string')
+	..................................................................................
+
+Features Killed
+	A couple of features have been killed entirely, with no backwards compatibility provided.
+
+	- The =Uize.Color.hexStr= static method has been killed. If you want to convert a number to a hexadecimal string, use the =toString= instance method of the =Number= object that accepts a base argument, as in =(new Number (myNumber)).toString (16)=, or =myNumberVariable.toString (16)=.
+
+	- A variation of the deprecated =Uize.Color.RgbColor= object constructor that accepted a single integer parameter in the range of =0= to =255=, representing gray scale, has been killed. Now, when specifying a number as the only argument to the constructor to the =Uize.Color= object, the number must be the integer equivalent of a hexadecimal RGB color value. This allows one to do things like =new Uize.Color (0xff00ff)=, which creates a =Uize.Color= instance initialized to the color fuchsia.
+
+Uize.Color.RgbColor Deprecated
+	The =Uize.Color.RgbColor= object has been deprecated in favor of the enhanced =Uize.Color= object.
+
+	The =Uize.Color= module is now an object module. While providing the same static methods as before, it is now also possible to create instances of the =Uize.Color= object. The =Uize.Color= object takes over from the deprecated =Uize.Color.RgbColor= object, although the latter is still supported. Essentially, =Uize.Color.RgbColor= is now a synonym / alias for =Uize.Color=. This change greatly simplifies the interface of the =Uize.Color= module.
+
+	......................................................
+	new Uize.Color.RgbColor  >> BECOMES >>  new Uize.Color
+	......................................................
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-04-17 - IMPROVED MODULE: Uize.Color
+....................................................................................

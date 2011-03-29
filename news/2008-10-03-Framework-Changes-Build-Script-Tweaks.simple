@@ -1,0 +1,24 @@
+UPDATED MODULE: Uize.Comm - Deprecated Methods Killed
+	The =serializeParams= instance method and the =Uize.Comm.serializeParams=, =Uize.Comm.parseQuery=, and =Uize.Comm.getCacheDefeatStr= static methods of the =Uize.Comm= module - that were deprecated back in June of 2008 - have finally been killed.
+
+	For a time, they were left for backwards compatibility in order to ease transition. Now those backwards compatibility references have been removed in order to keep the codebase from bloating up. New equivalents for those methods can be found in the =Uize.Url= module.
+
+	If you need to refresh your memory, refer back to [[2008-06-17-New-Features-Changes.html][2008-06-17 - New Features & Changes]].
+
+IMPROVED MODULE: Uize.Wsh
+	For the =Uize.Wsh.buildFiles= static method, the =logFilename= property of the =paramsOBJ= parameter is now optional.
+
+	When not specified, the filename for the log file is determined from the value of the =buildScriptName= property by replacing the ".js" file extension with the extension ".log".
+
+NEW MODULE: Uize.Templates.List
+	The new =Uize.Templates.List= module implements a template for generating the HTML markup for a nested, unordered list from a JSON data tree.
+
+	This module is used by the =Uize.SimpleDoc= module for generating the contents tree HTML for HTML documents generated from SimpleDoc files, but it may be useful in other applications as well.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2008-10-03 - Framework Changes, Build Script Tweaks
+....................................................................................

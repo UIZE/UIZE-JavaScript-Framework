@@ -1,0 +1,18 @@
+Uize.Json
+	The recently added =Uize.Json= package, with features that were *migrated* from the now defunct =Uize.serialize= extension, has been fully documented.
+
+Uize.Node.setValue and PRE Tags
+	An issue was discovered with the way that Internet Explorer handles setting of the =innerHTML= property for =pre= tags.
+
+	Consequently, provisions were added to the =Uize.Node.setValue= and =Uize.Node.getValue= static methods of the =Uize.Node= package to ensure that one can display text as expected with =pre= tags. The changes also apply to the =setNodeValue= and =getNodeValue= instance methods of the =Uize.Widget= class.
+
+Uize.Widget.Tree.Menu - IE Flicker Issue Fixed
+	An issue was discovered with the tree menu widget, where scrollbars would sometimes flicker momentarily on displaying submenus for the first time. The issue has been resolved in the latest version.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2008-06-19 - New Documentation
+....................................................................................

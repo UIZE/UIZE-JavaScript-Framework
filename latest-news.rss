@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<rss xmlns:feedburner="http://rssnamespace.org/feedburner/ext/1.0" version="2.0">
+	<channel>
+		<title>UIZE JavaScript Framework | Latest News</title>
+		<link>http://www.uize.com/latest-news.rss</link>
+		<description>UIZE JavaScript Framework (AJAX, RIA, widgets, JSON, OOP, Class Inheritance, XMLHttpRequest, DOM manipulation, and all that stuff)</description>
+		<language>en-us</language>
+		<copyright>© 1996-2008 UIZE</copyright>
+		<pubDate>Fri, 25 Mar 2011 06:27:22 UT</pubDate>
+		<ttl>10080</ttl>
+		<image>
+			<title>UIZE JavaScript Framework | Latest News</title>
+			<link>http://www.uize.com/latest-news.rss</link>
+			<url>http://www.uize.com/images/uize-50x50.gif</url>
+			<width>50</width>
+			<height>50</height>
+			<description>UIZE JavaScript Framework (AJAX, RIA, widgets, JSON, OOP, Class Inheritance, XMLHttpRequest, DOM manipulation, and all that stuff)</description>
+		</image>
+		<atom10:link xmlns:atom10="http://www.w3.org/2005/Atom" rel="self" href="http://www.uize.com/latest-news.rss" type="application/rss+xml" />
+		<item>
+			<title>2011-03-24 - NEW EXAMPLE - Color Format Converter</title>
+			<link>http://www.uize.com/news/2011-03-24-NEW-EXAMPLE-Color-Format-Converter.html</link>
+			<guid>http://www.uize.com/news/2011-03-24-NEW-EXAMPLE-Color-Format-Converter.html</guid>
+			<description>The new Color Format Converter Tool lets you easily convert color values from one format to another.</description>
+			<pubDate>Thu, 24 Mar 2011 07:00:00 UT</pubDate>
+			<feedburner:origLink>http://www.uize.com/news/2011-03-24-NEW-EXAMPLE-Color-Format-Converter.html</feedburner:origLink>
+		</item>
+		<item>
+			<title>2011-03-23 - NEW MODULE: Uize.Util.PropertyAdapter</title>
+			<link>http://www.uize.com/news/2011-03-23-NEW-MODULE-Uize.Util.PropertyAdapter.html</link>
+			<guid>http://www.uize.com/news/2011-03-23-NEW-MODULE-Uize.Util.PropertyAdapter.html</guid>
+			<description>The new Uize.Util.PropertyAdapter module implements a mechanism for connecting two set-get properties together, with optional bi-directional value adapter code.</description>
+			<pubDate>Wed, 23 Mar 2011 07:00:00 UT</pubDate>
+			<feedburner:origLink>http://www.uize.com/news/2011-03-23-NEW-MODULE-Uize.Util.PropertyAdapter.html</feedburner:origLink>
+		</item>
+		<item>
+			<title>2011-03-11 - Bug Fix For toString and valueOf Intrinsic Methods</title>
+			<link>http://www.uize.com/news/2011-03-11-Bug-Fix-For-toString-and-valueOf-Intrinsic-Methods.html</link>
+			<guid>http://www.uize.com/news/2011-03-11-Bug-Fix-For-toString-and-valueOf-Intrinsic-Methods.html</guid>
+			<description>An Internet Explorer specific problem with the toString intrinsic method and the valueOf intrinsic method, that are specially implemented for Uize subclasses, has been fixed.</description>
+			<pubDate>Fri, 11 Mar 2011 08:00:00 UT</pubDate>
+			<feedburner:origLink>http://www.uize.com/news/2011-03-11-Bug-Fix-For-toString-and-valueOf-Intrinsic-Methods.html</feedburner:origLink>
+		</item>
+		<item>
+			<title>2011-03-10 - Improved Process for Announcing News</title>
+			<link>http://www.uize.com/news/2011-03-10-Improved-Process-for-Announcing-News.html</link>
+			<guid>http://www.uize.com/news/2011-03-10-Improved-Process-for-Announcing-News.html</guid>
+			<description>For developers of the UIZE JavaScript Framework, the process for adding news announcements has been improved and simplified, so that all that is required is to create a .simple file for a news item, and then the build process for the site will do the rest.</description>
+			<pubDate>Thu, 10 Mar 2011 08:00:00 UT</pubDate>
+			<feedburner:origLink>http://www.uize.com/news/2011-03-10-Improved-Process-for-Announcing-News.html</feedburner:origLink>
+		</item>
+		<item>
+			<title>2011-03-05 - Deprecated Features of Uize.Widget.Tree Killed</title>
+			<link>http://www.uize.com/news/2011-03-05-Deprecated-Features-of-Uize.Widget.Tree-Killed.html</link>
+			<guid>http://www.uize.com/news/2011-03-05-Deprecated-Features-of-Uize.Widget.Tree-Killed.html</guid>
+			<description>A number of instance and static methods of the Uize.Widget.Tree module that were deprecated a year ago have finally been killed.</description>
+			<pubDate>Sat, 5 Mar 2011 08:00:00 UT</pubDate>
+			<feedburner:origLink>http://www.uize.com/news/2011-03-05-Deprecated-Features-of-Uize.Widget.Tree-Killed.html</feedburner:origLink>
+		</item>
+		<item>
+			<title>2011-02-21 - Unit Test Improvements</title>
+			<link>http://www.uize.com/news/2011-02-21-Unit-Test-Improvements.html</link>
+			<guid>http://www.uize.com/news/2011-02-21-Unit-Test-Improvements.html</guid>
+			<description>Unit tests for the UIZE JavaScript Framework have been improved in a number of ways, as outlined below...</description>
+			<pubDate>Mon, 21 Feb 2011 08:00:00 UT</pubDate>
+			<feedburner:origLink>http://www.uize.com/news/2011-02-21-Unit-Test-Improvements.html</feedburner:origLink>
+		</item>
+		<item>
+			<title>2011-02-11 - New ajax Method in Uize.Widget</title>
+			<link>http://www.uize.com/news/2011-02-11-New-ajax-Method-in-Uize.Widget.html</link>
+			<guid>http://www.uize.com/news/2011-02-11-New-ajax-Method-in-Uize.Widget.html</guid>
+			<description>The Uize.Widget module has been improved with the addition of the new ajax instance method.</description>
+			<pubDate>Fri, 11 Feb 2011 08:00:00 UT</pubDate>
+			<feedburner:origLink>http://www.uize.com/news/2011-02-11-New-ajax-Method-in-Uize.Widget.html</feedburner:origLink>
+		</item>
+		<item>
+			<title>2011-01-31 - Major Improvements to Module References</title>
+			<link>http://www.uize.com/news/2011-01-31-Major-Improvements-to-Module-References.html</link>
+			<guid>http://www.uize.com/news/2011-01-31-Major-Improvements-to-Module-References.html</guid>
+			<description>Reference documentation for modules of the UIZE JavaScript Framework has been substantially improved, with the addition of automatically generated documentation for features of modules for which no documentation has explicitly been written.</description>
+			<pubDate>Mon, 31 Jan 2011 08:00:00 UT</pubDate>
+			<feedburner:origLink>http://www.uize.com/news/2011-01-31-Major-Improvements-to-Module-References.html</feedburner:origLink>
+		</item>
+		<item>
+			<title>2011-01-22 - FRAMEWORK CHANGE: Non-inheritable Statics</title>
+			<link>http://www.uize.com/news/2011-01-22-FRAMEWORK-CHANGE-Non-inheritable-Statics.html</link>
+			<guid>http://www.uize.com/news/2011-01-22-FRAMEWORK-CHANGE-Non-inheritable-Statics.html</guid>
+			<description>A number of static methods that are implemented in the Uize base class, and that have (up until now) been inherited by all subclasses of Uize, are now no longer inheritable.</description>
+			<pubDate>Sat, 22 Jan 2011 08:00:00 UT</pubDate>
+			<feedburner:origLink>http://www.uize.com/news/2011-01-22-FRAMEWORK-CHANGE-Non-inheritable-Statics.html</feedburner:origLink>
+		</item>
+		<item>
+			<title>2011-01-01 - Documentation System Improvements</title>
+			<link>http://www.uize.com/news/2011-01-01-Documentation-System-Improvements.html</link>
+			<guid>http://www.uize.com/news/2011-01-01-Documentation-System-Improvements.html</guid>
+			<description>The JavaScript Documentation System, that is used to produce all the documentation for the UIZE JavaScript Framework, has been improved in a number of ways.</description>
+			<pubDate>Sat, 1 Jan 2011 08:00:00 UT</pubDate>
+			<feedburner:origLink>http://www.uize.com/news/2011-01-01-Documentation-System-Improvements.html</feedburner:origLink>
+		</item>
+		<item>
+			<title>2010-12-19 - Various Deprecated Features Killed</title>
+			<link>http://www.uize.com/news/2010-12-19-Various-Deprecated-Features-Killed.html</link>
+			<guid>http://www.uize.com/news/2010-12-19-Various-Deprecated-Features-Killed.html</guid>
+			<description>A variety of features in various modules, that were deprecated over a year ago, have finally been killed.</description>
+			<pubDate>Sun, 19 Dec 2010 08:00:00 UT</pubDate>
+			<feedburner:origLink>http://www.uize.com/news/2010-12-19-Various-Deprecated-Features-Killed.html</feedburner:origLink>
+		</item>
+		<item>
+			<title>2010-12-18 - Introducing the DELVE Tool</title>
+			<link>http://www.uize.com/news/2010-12-18-Introducing-the-DELVE-Tool.html</link>
+			<guid>http://www.uize.com/news/2010-12-18-Introducing-the-DELVE-Tool.html</guid>
+			<description>The UIZE project is excited to announce the release of DELVE, a powerful new Web based tool that lets developers delve into the inner workings of pages that use the UIZE JavaScript Framework.</description>
+			<pubDate>Sat, 18 Dec 2010 08:00:00 UT</pubDate>
+			<feedburner:origLink>http://www.uize.com/news/2010-12-18-Introducing-the-DELVE-Tool.html</feedburner:origLink>
+		</item>
+		<item>
+			<title>2010-11-19 - NEW METHOD: Uize.isFunction</title>
+			<link>http://www.uize.com/news/2010-11-19-NEW-METHOD-Uize.isFunction.html</link>
+			<guid>http://www.uize.com/news/2010-11-19-NEW-METHOD-Uize.isFunction.html</guid>
+			<description>The new Uize.isFunction static method of the Uize base class returns a boolean, indicating whether or not the specified value is a function.</description>
+			<pubDate>Fri, 19 Nov 2010 08:00:00 UT</pubDate>
+			<feedburner:origLink>http://www.uize.com/news/2010-11-19-NEW-METHOD-Uize.isFunction.html</feedburner:origLink>
+		</item>
+		<item>
+			<title>2010-11-04 - NEW EXPLAINER: JavaScript Bookmarklets</title>
+			<link>http://www.uize.com/news/2010-11-04-NEW-EXPLAINER-JavaScript-Bookmarklets.html</link>
+			<guid>http://www.uize.com/news/2010-11-04-NEW-EXPLAINER-JavaScript-Bookmarklets.html</guid>
+			<description>The new JavaScript Bookmarklets explainer provides some useful bookmarklets that should come in handy when doing development using the UIZE JavaScript Framework.</description>
+			<pubDate>Thu, 4 Nov 2010 07:00:00 UT</pubDate>
+			<feedburner:origLink>http://www.uize.com/news/2010-11-04-NEW-EXPLAINER-JavaScript-Bookmarklets.html</feedburner:origLink>
+		</item>
+		<item>
+			<title>2010-11-03 - NEW METHOD: Uize.getModuleByName</title>
+			<link>http://www.uize.com/news/2010-11-03-NEW-METHOD-Uize.getModuleByName.html</link>
+			<guid>http://www.uize.com/news/2010-11-03-NEW-METHOD-Uize.getModuleByName.html</guid>
+			<description>The Uize base class has been improved with the addition of the new Uize.getModuleByName static method.</description>
+			<pubDate>Wed, 3 Nov 2010 07:00:00 UT</pubDate>
+			<feedburner:origLink>http://www.uize.com/news/2010-11-03-NEW-METHOD-Uize.getModuleByName.html</feedburner:origLink>
+		</item>
+		<item>
+			<title>2010-11-01 - IMPROVED MODULES: Uize and Uize.Data</title>
+			<link>http://www.uize.com/news/2010-11-01-IMPROVED-MODULES-Uize-and-Uize.Data.html</link>
+			<guid>http://www.uize.com/news/2010-11-01-IMPROVED-MODULES-Uize-and-Uize.Data.html</guid>
+			<description>The Uize and Uize.Data modules have been improved with better handling of certain types of objects when cloning and comparing arbitrarily complex data structures.</description>
+			<pubDate>Mon, 1 Nov 2010 07:00:00 UT</pubDate>
+			<feedburner:origLink>http://www.uize.com/news/2010-11-01-IMPROVED-MODULES-Uize-and-Uize.Data.html</feedburner:origLink>
+		</item>
+		<item>
+			<title>2010-10-26 - NEW MODULE: Uize.Array.Sort</title>
+			<link>http://www.uize.com/news/2010-10-26-NEW-MODULE-Uize.Array.Sort.html</link>
+			<guid>http://www.uize.com/news/2010-10-26-NEW-MODULE-Uize.Array.Sort.html</guid>
+			<description>The versatile new Uize.Array.Sort module provides a way to sort arrays in a performance efficient manner using a custom sort value generator.</description>
+			<pubDate>Tue, 26 Oct 2010 07:00:00 UT</pubDate>
+			<feedburner:origLink>http://www.uize.com/news/2010-10-26-NEW-MODULE-Uize.Array.Sort.html</feedburner:origLink>
+		</item>
+		<item>
+			<title>2010-10-24 - NEW EXPLAINER: General Constructs</title>
+			<link>http://www.uize.com/news/2010-10-24-NEW-EXPLAINER-General-Constructs.html</link>
+			<guid>http://www.uize.com/news/2010-10-24-NEW-EXPLAINER-General-Constructs.html</guid>
+			<description>The new General Constructs explainer discusses a number of general constructs that apply across the entire UIZE JavaScript Framework, and can apply in application programming more generally.</description>
+			<pubDate>Sun, 24 Oct 2010 07:00:00 UT</pubDate>
+			<feedburner:origLink>http://www.uize.com/news/2010-10-24-NEW-EXPLAINER-General-Constructs.html</feedburner:origLink>
+		</item>
+		<item>
+			<title>2010-10-05 - NEW EXPLAINER: JavaScript Testing Framework</title>
+			<link>http://www.uize.com/news/2010-10-05-NEW-EXPLAINER-JavaScript-Testing-Framework.html</link>
+			<guid>http://www.uize.com/news/2010-10-05-NEW-EXPLAINER-JavaScript-Testing-Framework.html</guid>
+			<description>The new JavaScript Testing Framework explainer discusses the testing framework that is provided as part of the UIZE JavaScript Framework.</description>
+			<pubDate>Tue, 5 Oct 2010 07:00:00 UT</pubDate>
+			<feedburner:origLink>http://www.uize.com/news/2010-10-05-NEW-EXPLAINER-JavaScript-Testing-Framework.html</feedburner:origLink>
+		</item>
+		<item>
+			<title>2010-09-27 - NEW DOCUMENTATION: Uize.Test</title>
+			<link>http://www.uize.com/news/2010-09-27-NEW-DOCUMENTATION-Uize.Test.html</link>
+			<guid>http://www.uize.com/news/2010-09-27-NEW-DOCUMENTATION-Uize.Test.html</guid>
+			<description>Thorough reference documentation has been completed for the Uize.Test module, which provides the underpinnings of the UIZE JavaScript Framework&amp;apos;s unit testing system.</description>
+			<pubDate>Mon, 27 Sep 2010 07:00:00 UT</pubDate>
+			<feedburner:origLink>http://www.uize.com/news/2010-09-27-NEW-DOCUMENTATION-Uize.Test.html</feedburner:origLink>
+		</item>
+		<item>
+			<title>2010-09-06 - NEW METHOD: Uize.Data.emptyOut</title>
+			<link>http://www.uize.com/news/2010-09-06-NEW-METHOD-Uize.Data.emptyOut.html</link>
+			<guid>http://www.uize.com/news/2010-09-06-NEW-METHOD-Uize.Data.emptyOut.html</guid>
+			<description>The new Uize.Data.emptyOut static method, implemented in the Uize.Data module, lets you empty out the contents of a specified source array or object, returning a reference to that source.</description>
+			<pubDate>Mon, 6 Sep 2010 07:00:00 UT</pubDate>
+			<feedburner:origLink>http://www.uize.com/news/2010-09-06-NEW-METHOD-Uize.Data.emptyOut.html</feedburner:origLink>
+		</item>
+		<item>
+			<title>2010-08-25 - NEW MODULE: Uize.Array.Order</title>
+			<link>http://www.uize.com/news/2010-08-25-NEW-MODULE-Uize.Array.Order.html</link>
+			<guid>http://www.uize.com/news/2010-08-25-NEW-MODULE-Uize.Array.Order.html</guid>
+			<description>The new Uize.Array.Order module provides functionality for changing the order of elements in an array, with support for reversing, jumbling, inside to out, etc.</description>
+			<pubDate>Wed, 25 Aug 2010 07:00:00 UT</pubDate>
+			<feedburner:origLink>http://www.uize.com/news/2010-08-25-NEW-MODULE-Uize.Array.Order.html</feedburner:origLink>
+		</item>
+		<item>
+			<title>2010-08-25 - NEW MODULE: Uize.Array</title>
+			<link>http://www.uize.com/news/2010-08-25-NEW-MODULE-Uize.Array.html</link>
+			<guid>http://www.uize.com/news/2010-08-25-NEW-MODULE-Uize.Array.html</guid>
+			<description>The new Uize.Array module defines a namespace for various modules that provide array specific functionality or utilities.</description>
+			<pubDate>Wed, 25 Aug 2010 07:00:00 UT</pubDate>
+			<feedburner:origLink>http://www.uize.com/news/2010-08-25-NEW-MODULE-Uize.Array.html</feedburner:origLink>
+		</item>
+		<item>
+			<title>2010-08-17 - IMPROVED MODULE: Uize.Widget.Collection.Dynamic</title>
+			<link>http://www.uize.com/news/2010-08-17-IMPROVED-MODULE-Uize.Widget.Collection.Dynamic.html</link>
+			<guid>http://www.uize.com/news/2010-08-17-IMPROVED-MODULE-Uize.Widget.Collection.Dynamic.html</guid>
+			<description>The Uize.Widget.Collection.Dynamic module has been improved with the addition of support for the touch interface of Apple&amp;apos;s iPad.</description>
+			<pubDate>Tue, 17 Aug 2010 07:00:00 UT</pubDate>
+			<feedburner:origLink>http://www.uize.com/news/2010-08-17-IMPROVED-MODULE-Uize.Widget.Collection.Dynamic.html</feedburner:origLink>
+		</item>
+		<item>
+			<title>2010-08-06 - NEW MODULE: Uize.Node.Util</title>
+			<link>http://www.uize.com/news/2010-08-06-NEW-MODULE-Uize.Node.Util.html</link>
+			<guid>http://www.uize.com/news/2010-08-06-NEW-MODULE-Uize.Node.Util.html</guid>
+			<description>The new Uize.Node.Util module provides a home for miscellaneous node related methods that are too esoteric to belong in the base Uize.Node module.</description>
+			<pubDate>Fri, 6 Aug 2010 07:00:00 UT</pubDate>
+			<feedburner:origLink>http://www.uize.com/news/2010-08-06-NEW-MODULE-Uize.Node.Util.html</feedburner:origLink>
+		</item>
+		<item>
+			<title>2010-08-03 - NEW MODULE: Uize.Node.Classes</title>
+			<link>http://www.uize.com/news/2010-08-03-NEW-MODULE-Uize.Node.Classes.html</link>
+			<guid>http://www.uize.com/news/2010-08-03-NEW-MODULE-Uize.Node.Classes.html</guid>
+			<description>The new Uize.Node.Classes module is a package module with static methods to facilitate manipulation of the value of the className property of DOM nodes, with support for adding classes, removing classes, toggling classes, and lots more.</description>
+			<pubDate>Tue, 3 Aug 2010 07:00:00 UT</pubDate>
+			<feedburner:origLink>http://www.uize.com/news/2010-08-03-NEW-MODULE-Uize.Node.Classes.html</feedburner:origLink>
+		</item>
+		<item>
+			<title>2010-07-24 - NEW EXAMPLE:  3D Rotation Viewer</title>
+			<link>http://www.uize.com/news/2010-07-24-NEW-EXAMPLE-3D-Rotation-Viewer.html</link>
+			<guid>http://www.uize.com/news/2010-07-24-NEW-EXAMPLE-3D-Rotation-Viewer.html</guid>
+			<description>The new 3D Rotation Viewer example demonstrates how to easily create a slick 3D rotation viewer in UIZE that lets users rotate the view of an object a full 360 degrees using a mouse, or finger on the Apple iPad.</description>
+			<pubDate>Sat, 24 Jul 2010 07:00:00 UT</pubDate>
+			<feedburner:origLink>http://www.uize.com/news/2010-07-24-NEW-EXAMPLE-3D-Rotation-Viewer.html</feedburner:origLink>
+		</item>
+		<item>
+			<title>2010-07-22 - Improved Unit Tests</title>
+			<link>http://www.uize.com/news/2010-07-22-Improved-Unit-Tests.html</link>
+			<guid>http://www.uize.com/news/2010-07-22-Improved-Unit-Tests.html</guid>
+			<description>The unit tests suite for the UIZE JavaScript Framework, implemented in the Uize.Test.UnitTests module, has been improved with the addition of basic loadability tests for all modules for which dedicated test modules have not yet been written.</description>
+			<pubDate>Thu, 22 Jul 2010 07:00:00 UT</pubDate>
+			<feedburner:origLink>http://www.uize.com/news/2010-07-22-Improved-Unit-Tests.html</feedburner:origLink>
+		</item>
+		<item>
+			<title>2010-07-15 - NEW EXAMPLE: UIZE Unit Tests</title>
+			<link>http://www.uize.com/news/2010-07-15-NEW-EXAMPLE-UIZE-Unit-Tests.html</link>
+			<guid>http://www.uize.com/news/2010-07-15-NEW-EXAMPLE-UIZE-Unit-Tests.html</guid>
+			<description>The new UIZE Unit Tests example lets you select and run any of the test modules of the UIZE JavaScript Framework.</description>
+			<pubDate>Thu, 15 Jul 2010 07:00:00 UT</pubDate>
+			<feedburner:origLink>http://www.uize.com/news/2010-07-15-NEW-EXAMPLE-UIZE-Unit-Tests.html</feedburner:origLink>
+		</item>
+		<item>
+			<title>2010-07-11 - NEW EXAMPLE: Digital Clock</title>
+			<link>http://www.uize.com/news/2010-07-11-NEW-EXAMPLE-Digital-Clock.html</link>
+			<guid>http://www.uize.com/news/2010-07-11-NEW-EXAMPLE-Digital-Clock.html</guid>
+			<description>The new Digital Clock example shows how the Uize.Widget.SegmentDisplay.Seven widget class can be used to easily create a digital clock that shows hours, minutes, and seconds.</description>
+			<pubDate>Sun, 11 Jul 2010 07:00:00 UT</pubDate>
+			<feedburner:origLink>http://www.uize.com/news/2010-07-11-NEW-EXAMPLE-Digital-Clock.html</feedburner:origLink>
+		</item>
+		<item>
+			<title>2010-07-07 - NEW MODULE: Uize.Widget.Log.InstanceEvents</title>
+			<link>http://www.uize.com/news/2010-07-07-NEW-MODULE-Uize.Widget.Log.InstanceEvents.html</link>
+			<guid>http://www.uize.com/news/2010-07-07-NEW-MODULE-Uize.Widget.Log.InstanceEvents.html</guid>
+			<description>The new Uize.Widget.Log.InstanceEvents module implements a log interface for logging the instance events of an instance of a Uize subclass.</description>
+			<pubDate>Wed, 7 Jul 2010 07:00:00 UT</pubDate>
+			<feedburner:origLink>http://www.uize.com/news/2010-07-07-NEW-MODULE-Uize.Widget.Log.InstanceEvents.html</feedburner:origLink>
+		</item>
+		<item>
+			<title>2010-07-07 - NEW MODULE: Uize.Widget.Log</title>
+			<link>http://www.uize.com/news/2010-07-07-NEW-MODULE-Uize.Widget.Log.html</link>
+			<guid>http://www.uize.com/news/2010-07-07-NEW-MODULE-Uize.Widget.Log.html</guid>
+			<description>The new Uize.Widget.Log module implements a very basic logging widget, to serve as a base class for more specialized logging widget subclasses.</description>
+			<pubDate>Wed, 7 Jul 2010 07:00:00 UT</pubDate>
+			<feedburner:origLink>http://www.uize.com/news/2010-07-07-NEW-MODULE-Uize.Widget.Log.html</feedburner:origLink>
+		</item>
+		<item>
+			<title>2010-07-07 - NEW EXAMPLE: Button</title>
+			<link>http://www.uize.com/news/2010-07-07-NEW-EXAMPLE-Button.html</link>
+			<guid>http://www.uize.com/news/2010-07-07-NEW-EXAMPLE-Button.html</guid>
+			<description>The new Button example provides a demonstration of the features of the Uize.Widget.Button widget class.</description>
+			<pubDate>Wed, 7 Jul 2010 07:00:00 UT</pubDate>
+			<feedburner:origLink>http://www.uize.com/news/2010-07-07-NEW-EXAMPLE-Button.html</feedburner:origLink>
+		</item>
+		<item>
+			<title>2010-07-07 - IMPROVED MODULE: Uize.Date.Formatter</title>
+			<link>http://www.uize.com/news/2010-07-07-IMPROVED-MODULE-Uize.Date.Formatter.html</link>
+			<guid>http://www.uize.com/news/2010-07-07-IMPROVED-MODULE-Uize.Date.Formatter.html</guid>
+			<description>The Uize.Date.Formatter module has been improved with the addition of the new {zzz} and {milliseconds} tokens.</description>
+			<pubDate>Wed, 7 Jul 2010 07:00:00 UT</pubDate>
+			<feedburner:origLink>http://www.uize.com/news/2010-07-07-IMPROVED-MODULE-Uize.Date.Formatter.html</feedburner:origLink>
+		</item>
+		<item>
+			<title>2010-06-29 - UIZE Adds Support For Touch</title>
+			<link>http://www.uize.com/news/2010-06-29-UIZE-Adds-Support-For-Touch.html</link>
+			<guid>http://www.uize.com/news/2010-06-29-UIZE-Adds-Support-For-Touch.html</guid>
+			<description>The UIZE JavaScript Framework has added support for the touch interface of Apple&amp;apos;s iPad.</description>
+			<pubDate>Tue, 29 Jun 2010 07:00:00 UT</pubDate>
+			<feedburner:origLink>http://www.uize.com/news/2010-06-29-UIZE-Adds-Support-For-Touch.html</feedburner:origLink>
+		</item>
+		<item>
+			<title>2010-06-28 - UIZE Web Site Revamp</title>
+			<link>http://www.uize.com/news/2010-06-28-UIZE-Web-Site-Revamp.html</link>
+			<guid>http://www.uize.com/news/2010-06-28-UIZE-Web-Site-Revamp.html</guid>
+			<description>The uize.com Web site has been updated with a bright new look and usability improvements for the Apple iPad.</description>
+			<pubDate>Mon, 28 Jun 2010 07:00:00 UT</pubDate>
+			<feedburner:origLink>http://www.uize.com/news/2010-06-28-UIZE-Web-Site-Revamp.html</feedburner:origLink>
+		</item>
+		<item>
+			<title>2010-06-15 - Deprecated Event Management Methods Killed</title>
+			<link>http://www.uize.com/news/2010-06-15-Deprecated-Event-Management-Methods-Killed.html</link>
+			<guid>http://www.uize.com/news/2010-06-15-Deprecated-Event-Management-Methods-Killed.html</guid>
+			<description>A number of instance and static event management methods of the Uize base class that were deprecated back in early June of 2009 have finally been killed.</description>
+			<pubDate>Tue, 15 Jun 2010 07:00:00 UT</pubDate>
+			<feedburner:origLink>http://www.uize.com/news/2010-06-15-Deprecated-Event-Management-Methods-Killed.html</feedburner:origLink>
+		</item>
+		<item>
+			<title>2010-06-07 - NEW MODULE: Uize.Date.Formatter</title>
+			<link>http://www.uize.com/news/2010-06-07-NEW-MODULE-Uize.Date.Formatter.html</link>
+			<guid>http://www.uize.com/news/2010-06-07-NEW-MODULE-Uize.Date.Formatter.html</guid>
+			<description>The new Uize.Date.Formatter module provides methods for formatting and parsing date strings, supporting a wide variety of different formatting options.</description>
+			<pubDate>Mon, 7 Jun 2010 07:00:00 UT</pubDate>
+			<feedburner:origLink>http://www.uize.com/news/2010-06-07-NEW-MODULE-Uize.Date.Formatter.html</feedburner:origLink>
+		</item>
+		<item>
+			<title>2010-06-07 - MIGRATED METHODS: Uize.Date.format, Uize.Date.toPretty</title>
+			<link>http://www.uize.com/news/2010-06-07-MIGRATED-METHODS-Uize.Date.format-Uize.Date.toPretty.html</link>
+			<guid>http://www.uize.com/news/2010-06-07-MIGRATED-METHODS-Uize.Date.format-Uize.Date.toPretty.html</guid>
+			<description>The Uize.Date.format and Uize.Date.toPretty static methods of the Uize.Date module have been migrated into the new Uize.Date.Formatter module.</description>
+			<pubDate>Mon, 7 Jun 2010 07:00:00 UT</pubDate>
+			<feedburner:origLink>http://www.uize.com/news/2010-06-07-MIGRATED-METHODS-Uize.Date.format-Uize.Date.toPretty.html</feedburner:origLink>
+		</item>
+		<item>
+			<title>2010-06-07 - Improved Date Picker Widget</title>
+			<link>http://www.uize.com/news/2010-06-07-Improved-Date-Picker-Widget.html</link>
+			<guid>http://www.uize.com/news/2010-06-07-Improved-Date-Picker-Widget.html</guid>
+			<description>The date picker widget, implemented in the Uize.Widget.Picker.Date module, has been improved to correctly support date entry in a wide variety of different formats.</description>
+			<pubDate>Mon, 7 Jun 2010 07:00:00 UT</pubDate>
+			<feedburner:origLink>http://www.uize.com/news/2010-06-07-Improved-Date-Picker-Widget.html</feedburner:origLink>
+		</item>
+		<item>
+			<title>2010-05-18 - NEW EXAMPLE: Animate Size in JavaScript</title>
+			<link>http://www.uize.com/news/2010-05-18-NEW-EXAMPLE-Animate-Size-in-JavaScript.html</link>
+			<guid>http://www.uize.com/news/2010-05-18-NEW-EXAMPLE-Animate-Size-in-JavaScript.html</guid>
+			<description>The new Animate Size in JavaScript example shows how to animate the size of an HTML element and how to apply amazingly realistic motion effects like easing, elasticity, bounce, and many more.</description>
+			<pubDate>Tue, 18 May 2010 07:00:00 UT</pubDate>
+			<feedburner:origLink>http://www.uize.com/news/2010-05-18-NEW-EXAMPLE-Animate-Size-in-JavaScript.html</feedburner:origLink>
+		</item>
+		<item>
+			<title>2010-05-16 - NEW METHOD: Uize.escapeRegExpLiteral</title>
+			<link>http://www.uize.com/news/2010-05-16-NEW-METHOD-Uize.escapeRegExpLiteral.html</link>
+			<guid>http://www.uize.com/news/2010-05-16-NEW-METHOD-Uize.escapeRegExpLiteral.html</guid>
+			<description>The new Uize.escapeRegExpLiteral static method of the Uize base class provides a convenient way to escape regular expression special characters inside a string that is to be used as a literal match in a regular expression.</description>
+			<pubDate>Sun, 16 May 2010 07:00:00 UT</pubDate>
+			<feedburner:origLink>http://www.uize.com/news/2010-05-16-NEW-METHOD-Uize.escapeRegExpLiteral.html</feedburner:origLink>
+		</item>
+		<item>
+			<title>2010-05-16 - Deprecated Methods Killed</title>
+			<link>http://www.uize.com/news/2010-05-16-Deprecated-Methods-Killed.html</link>
+			<guid>http://www.uize.com/news/2010-05-16-Deprecated-Methods-Killed.html</guid>
+			<description>A number of methods of the Uize.Color and Uize.Node modules that were deprecated back in the first half of 2009 have finally been killed.</description>
+			<pubDate>Sun, 16 May 2010 07:00:00 UT</pubDate>
+			<feedburner:origLink>http://www.uize.com/news/2010-05-16-Deprecated-Methods-Killed.html</feedburner:origLink>
+		</item>
+		<item>
+			<title>2010-04-30 - NEW EXAMPLE: Animate Position in JavaScript</title>
+			<link>http://www.uize.com/news/2010-04-30-NEW-EXAMPLE-Animate-Position-in-JavaScript.html</link>
+			<guid>http://www.uize.com/news/2010-04-30-NEW-EXAMPLE-Animate-Position-in-JavaScript.html</guid>
+			<description>The new Animate Position in JavaScript example shows how to animate the position of an HTML element and how to apply amazingly realistic motion effects like easing, elasticity, bounce, and many more.</description>
+			<pubDate>Fri, 30 Apr 2010 07:00:00 UT</pubDate>
+			<feedburner:origLink>http://www.uize.com/news/2010-04-30-NEW-EXAMPLE-Animate-Position-in-JavaScript.html</feedburner:origLink>
+		</item>
+		<item>
+			<title>2010-04-25 - IMPROVED METHOD: Uize.substituteInto</title>
+			<link>http://www.uize.com/news/2010-04-25-IMPROVED-METHOD-Uize.substituteInto.html</link>
+			<guid>http://www.uize.com/news/2010-04-25-IMPROVED-METHOD-Uize.substituteInto.html</guid>
+			<description>The Uize.substituteInto static method, implemented in the Uize base class has been improved to be more robust.</description>
+			<pubDate>Sun, 25 Apr 2010 07:00:00 UT</pubDate>
+			<feedburner:origLink>http://www.uize.com/news/2010-04-25-IMPROVED-METHOD-Uize.substituteInto.html</feedburner:origLink>
+		</item>
+		<item>
+			<title>2010-04-18 - NEW MODULE: Uize.Fx.xShadows</title>
+			<link>http://www.uize.com/news/2010-04-18-NEW-MODULE-Uize.Fx.xShadows.html</link>
+			<guid>http://www.uize.com/news/2010-04-18-NEW-MODULE-Uize.Fx.xShadows.html</guid>
+			<description>The new Uize.Fx.xShadows extension module implements support for fading / animating the values of both the text-shadow and box-shadow CSS3 style properties.</description>
+			<pubDate>Sun, 18 Apr 2010 07:00:00 UT</pubDate>
+			<feedburner:origLink>http://www.uize.com/news/2010-04-18-NEW-MODULE-Uize.Fx.xShadows.html</feedburner:origLink>
+		</item>
+		<item>
+			<title>2010-04-18 - NEW EXAMPLE: Animated Buttons with Box Shadow</title>
+			<link>http://www.uize.com/news/2010-04-18-NEW-EXAMPLE-Animated-Buttons-with-Box-Shadow.html</link>
+			<guid>http://www.uize.com/news/2010-04-18-NEW-EXAMPLE-Animated-Buttons-with-Box-Shadow.html</guid>
+			<description>The new Animated Buttons with Box Shadow example demonstrates the UIZE JavaScript Framework&amp;apos;s ability to animate values for the box-shadow CSS3 style property.</description>
+			<pubDate>Sun, 18 Apr 2010 07:00:00 UT</pubDate>
+			<feedburner:origLink>http://www.uize.com/news/2010-04-18-NEW-EXAMPLE-Animated-Buttons-with-Box-Shadow.html</feedburner:origLink>
+		</item>
+		<item>
+			<title>2010-04-18 - DEPRECATED MODULE: Uize.Fx.xTextShadow</title>
+			<link>http://www.uize.com/news/2010-04-18-DEPRECATED-MODULE-Uize.Fx.xTextShadow.html</link>
+			<guid>http://www.uize.com/news/2010-04-18-DEPRECATED-MODULE-Uize.Fx.xTextShadow.html</guid>
+			<description>The Uize.Fx.xTextShadow extension module has been deprecated in favor of the new and more powerful Uize.Fx.xShadows module.</description>
+			<pubDate>Sun, 18 Apr 2010 07:00:00 UT</pubDate>
+			<feedburner:origLink>http://www.uize.com/news/2010-04-18-DEPRECATED-MODULE-Uize.Fx.xTextShadow.html</feedburner:origLink>
+		</item>
+		<item>
+			<title>2010-04-15 - IMPROVED MODULE: Uize.Template</title>
+			<link>http://www.uize.com/news/2010-04-15-IMPROVED-MODULE-Uize.Template.html</link>
+			<guid>http://www.uize.com/news/2010-04-15-IMPROVED-MODULE-Uize.Template.html</guid>
+			<description>The Uize.Template module has been improved with the addition of the new Uize.Template.defineStandardEncoding static method, addition of a number of new encodings, improvement of the existing @required directive and Uize.Template.encode and Uize.Template.decode static methods, and in a number of other ways.</description>
+			<pubDate>Thu, 15 Apr 2010 07:00:00 UT</pubDate>
+			<feedburner:origLink>http://www.uize.com/news/2010-04-15-IMPROVED-MODULE-Uize.Template.html</feedburner:origLink>
+		</item>
+		<item>
+			<title>2010-04-12 - IMPROVED MODULE: Uize.Date</title>
+			<link>http://www.uize.com/news/2010-04-12-IMPROVED-MODULE-Uize.Date.html</link>
+			<guid>http://www.uize.com/news/2010-04-12-IMPROVED-MODULE-Uize.Date.html</guid>
+			<description>The Uize.Date module has been improved, with fixes for a number of issues, improvements to a number of static methods, and the addition of a thorough set of unit tests in the new Uize.Test.Uize.Date unit tests module.</description>
+			<pubDate>Mon, 12 Apr 2010 07:00:00 UT</pubDate>
+			<feedburner:origLink>http://www.uize.com/news/2010-04-12-IMPROVED-MODULE-Uize.Date.html</feedburner:origLink>
+		</item>
+	</channel>
+</rss>

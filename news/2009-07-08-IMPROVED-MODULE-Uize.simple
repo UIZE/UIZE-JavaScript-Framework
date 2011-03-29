@@ -1,0 +1,21 @@
+The =Uize= base class has been improved with the addition of a new =superclass= static property and an improved behavior for inheriting static properties in subclasses.
+
+New superclass Static Property
+	The new =superclass= static property provides a reference to a class' superclass.
+
+	The =superclass= static property exists for all subclasses of the =Uize= base class, and its value is set at the time that a subclass is created by calling the =Uize.subclass= static method. This static property is, therefore, not inherited in the traditional sense.
+
+Improved Behavior For Inheriting Static Properties
+	The [[../explainers/javascript-inheritance.html][inheritance system]] of the UIZE JavaScript Framework has been improved with regards to the inheritance of static properties.
+
+	Prior to this change, all static properties of a superclass were inherited by a subclass through a copy process. This meant that a property that was a reference to a subclass would be inherited by other subclasses created later. To use an example, if the class =Uize.Widget.Button= is defined, then there will be a static property =Button= on the =Uize.Widget= class. Previously, if you were to create another subclass of =Uize.Widget= named =Uize.Widget.MyClass=, then that class would inherit the =Button= static property, and so the property =Uize.Widget.MyClass.Button= would be a reference to the =Uize.Widget.Button= class. This behavior would interfere with the creation of =Uize.Widget.MyClass.Button= as a subclass of =Uize.Widget.MyClass=, where the =Uize.Widget.MyClass.Button= subclass may be nothing like =Uize.Widget.Button=.
+
+	With the new behavior, static properties that are subclasses are not inherited when subclassing - while all other static properties still are. Using the previous example, this means that =Uize.Widget.MyClass= would no longer end up with a =Button= static property that looks like it's a subclass - merely because that property existed on the superclass at the time that the subclass was created.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-07-08 - IMPROVED MODULE: Uize
+....................................................................................

@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2010-11-01 - IMPROVED MODULES: Uize and Uize.Data | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="The Uize and Uize.Data modules have been improved with better handling of certain types of objects when cloning and comparing arbitrarily complex data structures."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2010.html" class="breadcrumb breadcrumbWithArrow">2010 NEWS</a>
+	2010-11-01 - IMPROVED MODULES: Uize and Uize.Data
+
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="The Uize.clone static method of the Uize module has been improved with better handling of window and DOM objects encountered within arbitrarily complex data structures.">1. Better Handling of Certain Objects When Cloning Data</a></li>
+			<li><a href="#2" title="The Uize.Data.identical static method of the Uize.Data module has been improved with better handling of JavaScript&apos;s built-in objects when comparing arbitrarily complex data structures.">2. Better Handling of Certain Objects When Comparing Data</a></li>
+			<li><a href="#3" title="As part of this update, a thorough unit test has been created for the Uize.clone method, and the existing unit test for the Uize.Data.identical method has been updated to test the new behavior.">3. Unit Tests</a></li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<p>The <code><a href="../reference/Uize.html">Uize</a></code> and <code><a href="../reference/Uize.Data.html">Uize.Data</a></code> modules have been improved with better handling of certain types of objects when cloning and comparing arbitrarily complex data structures.</p>
+	
+	<a name="1"></a>
+	<h1 class="heading1" title="1. Better Handling of Certain Objects When Cloning Data"><span class="headingNumber"><a href="#1" title="1. Better Handling of Certain Objects When Cloning Data">1</a>. </span>Better Handling of Certain Objects When Cloning Data</h1>
+	<div class="contents1">
+		<p>The <code>Uize.clone</code> static method of the <code><a href="../reference/Uize.html">Uize</a></code> module has been improved with better handling of window and DOM objects encountered within arbitrarily complex data structures.</p>
+		
+		<p>The <code>Uize.clone</code> method was previously not able to handle cloning a data object that contained a property whose value was a reference to the <code>window</code> object or a DOM node. This is because the <code>window</code> object and DOM nodes contain properties that refer back to themselves. Cloning of data structures containing <code>window</code> object or DOM object references would result in an infinite loop. With the new behavior, any object reference that is not an instance of JavaScript's built-in <code><a href="../javascript-reference/RegExp.html">RegExp</a></code>, <code><a href="../javascript-reference/Date.html">Date</a></code>, <code><a href="../javascript-reference/String.html">String</a></code>, <code><a href="../javascript-reference/Number.html">Number</a></code>, or <code><a href="../javascript-reference/Boolean.html">Boolean</a></code> objects will be copied by reference only, so the properties of <code>window</code> and DOM objects will no longer be traversed. This doesn't mean that <code>window</code> or DOM objects will be cloned - they won't. It simply means that cloning data structures that contain references to these types of objects won't result in JavaScript code hanging.</p>
+	</div>
+	
+	<a name="2"></a>
+	<h1 class="heading1" title="2. Better Handling of Certain Objects When Comparing Data"><span class="headingNumber"><a href="#2" title="2. Better Handling of Certain Objects When Comparing Data">2</a>. </span>Better Handling of Certain Objects When Comparing Data</h1>
+	<div class="contents1">
+		<p>The <code>Uize.Data.identical</code> static method of the <code><a href="../reference/Uize.Data.html">Uize.Data</a></code> module has been improved with better handling of JavaScript's built-in objects when comparing arbitrarily complex data structures.</p>
+		
+		<p>The <code>Uize.Data.identical</code> method was previously not able to handle comparing instances of JavaScript's built-in <code><a href="../javascript-reference/RegExp.html">RegExp</a></code>, <code><a href="../javascript-reference/Number.html">Number</a></code>, or <code><a href="../javascript-reference/Boolean.html">Boolean</a></code> objects. In fact, comparison of two regular expression instances would always report them as being identical - even if they had completely different patterns or options. So, for example, the statement <code>Uize.Data.identical (new RegExp ('foo'),new RegExp ('bar'))</code> would produce the result <code>true</code>. This problem has been addressed, and instances of the <code><a href="../javascript-reference/RegExp.html">RegExp</a></code>, <code><a href="../javascript-reference/Number.html">Number</a></code>, <code><a href="../javascript-reference/Boolean.html">Boolean</a></code> objects are now only considered identical if they have the same value. With the new behavior, the statement <code>Uize.Data.identical (new Boolean (false),new Boolean (true))</code> will produce the result <code>false</code>, while the statement <code>Uize.Data.identical (new Boolean (false),new Boolean (false))</code> will produce the result <code>true</code>.</p>
+	</div>
+	
+	<a name="3"></a>
+	<h1 class="heading1" title="3. Unit Tests"><span class="headingNumber"><a href="#3" title="3. Unit Tests">3</a>. </span>Unit Tests</h1>
+	<div class="contents1">
+		<p>As part of this update, a thorough unit test has been created for the <code>Uize.clone</code> method, and the existing unit test for the <code>Uize.Data.identical</code> method has been updated to test the new behavior.</p>
+	</div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

@@ -1,0 +1,13 @@
+Reference documentation has been added for the =Uize.Widget.Calendar= widget class.
+
+The =Uize.Widget.Calendar= module defines the =Uize.Widget.Calendar= widget class, a subclass of =Uize.Widget= that implements a calendar widget that supports selecting a date within a given date range, with month and year navigation. This module provides a number of key features, including: 1) the ability to specify a valid date range, 2) navigation buttons for navigating month and year, 3) navigation button state management so that it's not possible to navigate outside of a specified valid date range, 4) a snap view behavior so that programmatically changing the date will update the month and year of the view so the newly selected date is in view, and 5) flexibility in how date values can be specified for the various date set-get properties.
+
+[[Uize.Widget.Calendar][LEARN MORE]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-09-29 - NEW DOCUMENTATION: Uize.Widget.Calendar
+....................................................................................

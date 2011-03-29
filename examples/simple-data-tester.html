@@ -1,0 +1,182 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Simple Data Tester | JavaScript Tools | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="tool Uize.Data.Simple"/>
+	<meta name="description" content="Experiment with SimpleData - an indentation-based format for representing structured data. Convert data formatted as SimpleData to the JSON format."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.example.css"/>
+	<link rel="stylesheet" href="../css/widget.tabs.css"/>
+	<link rel="stylesheet" href="css/tabbed.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	<a href="../javascript-tool-examples.html" class="breadcrumb breadcrumbWithArrow">JAVASCRIPT TOOLS</a>
+	Simple Data Tester
+	<div id="page-actions" class="pageActions">
+		<a href="source-code/simple-data-tester.html" class="buttonLink">SOURCE</a>
+	</div>
+</h1>
+
+<div class="main">
+	<!-- explanation copy -->
+
+	<div class="explanation">
+		<p>The <b>Simple Data Tester</b> tool (which makes use of the <a href="../reference/Uize.Data.Simple.html"><code>Uize.Data.Simple</code></a> module) lets you test the parsing and conversion of Simple Data documents into internal data structures. It provides a demonstration of the Simple Data formatting rules and lets you edit and preview changes to a sample Simple Data document. Edit the text under the "<b>SIMPLE DATA SOURCE</b>" tab and then switch to the "<b>CONVERTED TO JSON</b>" tab to see how that Simple Data would be serialized and represented as a JSON object.</p>
+	</div>
+
+	<form>
+	<div id="page_tabs" class="tabShell">
+		<div class="tabStubShell">
+			<a id="page_tabs_option0" class="tabStub" href="javascript://">SIMPLE DATA SOURCE</a>
+			<a id="page_tabs_option1" class="tabStub" href="javascript://">LONG FORM (JSON)</a>
+			<a id="page_tabs_option2" class="tabStub" href="javascript://">COLLAPSED FORM (JSON)</a>
+			<br style="clear:left;"/>
+		</div>
+		<div class="tabBodyShell">
+			<div id="page_tabs-option0TabBody" class="tabBodyInactive">
+				<textarea id="page-simpleDataSource" wrap="off">
+Invoice
+	From
+		Name   : Jacob Paulson
+		Street : 1308 Andromeda Avenue
+		City   : St. Albion
+		State  : MN
+		Zip    : 12345
+		Phone  : 808.123.4567
+		E-mail : jacob@excessmemory.net
+
+	To
+		Company  : Future Habitat for Man, Inc.
+		Street 1 : 1400 Montgomery Street
+		Street 2 : 2nd Floor
+		City     : San Francisco
+		State    : CA
+		Zip      : 94104
+
+	Date: 2009-01-15
+
+	Description::
+		Invoice for services provided to Future Habitat for Man, Inc., including but not limited to 1) the setup and configuration of a corporate firewall, 2) various network configration projects, 3) scalability assessment for data storage framework, and 4) security audit for corporate data warehousing and, 5) recommendation of protocols for access distribution amongst privileged / authorized personnel.
+
+	Breakdown
+		Items
+		:
+			Date     : 2009-01-07
+			Services : Initial expedited security measures, including establishment of corporate firewall, virus scanning, login and password audit.
+			Rate     : $100/hr
+			Hours    : 7hrs
+			Subtotal : $700
+		:
+			Date     : 2009-01-08
+			Services : Network configuration and scalability assessment, and setup of NAS storage system for enterprise wide data warehousing.
+			Rate     : $100/hr
+			Hours    : 7hrs
+			Subtotal : $700
+		:
+			Date     : 2009-01-10
+			Services : Security audit report and recommendations for access and authorization protocols.
+			Rate     : $100/hr
+			Hours    : 6hrs
+			Subtotal : $600
+
+	Total: $2000
+
+Alternate Array Representations
+	Animals: | Black_Cat | Dog | "Babe" The Pig | Cow | John's Poodle | Sphincter Beast |
+
+	Vegetables:>
+		Pumpkin
+		Broccoli
+		Cabbage
+		Tomato
+		Potato
+		Bean
+		Leek
+		Onion
+
+	Fruits
+	: Peach
+	: Apple
+	: Pear
+	: Grapes
+	: Orange
+	: Guava</textarea>
+			</div>
+			<div id="page_tabs-option1TabBody" class="tabBodyInactive">
+				<textarea id="page-dataLongForm" wrap="off" readonly="readonly"></textarea>
+			</div>
+			<div id="page_tabs-option2TabBody" class="tabBodyInactive">
+				<textarea id="page-dataCollapsedForm" wrap="off" readonly="readonly"></textarea>
+			</div>
+		</div>
+	</div>
+	</form>
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Example',
+		'Uize.Widget.Options.Tabbed',
+		'Uize.Data.Simple',
+		'Uize.Json'
+	],
+	builder:function () {
+		/*** create the example page widget ***/
+			var page = window.page = new UizeDotCom.Page.Example;
+
+		/*** add property for managing update of converted HTML and preview ***/
+			page.Class.registerProperties ({
+				simpleDataSource:{
+					name:'simpleDataSource',
+					onChange:function () {
+						page.setNodeValue (
+							'dataLongForm',
+							Uize.Json.to (Uize.Data.Simple.parse ({simple:this.simpleDataSource}))
+						);
+						page.setNodeValue (
+							'dataCollapsedForm',
+							Uize.Json.to (Uize.Data.Simple.parse ({simple:this.simpleDataSource,collapseChildren:true}))
+						);
+					}
+				}
+			});
+
+		/*** add the tabs child widget ***/
+			var tabs = window.tabs = page.addChild (
+				'tabs',
+				Uize.Widget.Options.Tabbed,
+				{
+					bodyClassActive:'tabBodyActive',
+					bodyClassInactive:'tabBodyInactive',
+					values:['simpleDataSource','dataLongForm','dataCollapsedForm'],
+					value:'simpleDataSource'
+				}
+			);
+			tabs.wire (
+				'Changed.value',
+				function () {
+					var tabsValue = tabs + '';
+					if (tabsValue == 'dataLongForm' || tabsValue == 'dataCollapsedForm')
+						page.set ({simpleDataSource:page.getNodeValue ('simpleDataSource')})
+					;
+				}
+			);
+
+		/*** wire up the page widget ***/
+			page.wireUi ();
+	}
+});
+
+</script>
+
+</body></html>
+

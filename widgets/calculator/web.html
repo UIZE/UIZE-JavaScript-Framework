@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Calculator</title>
+	<link rel="stylesheet" href="../../css/page.css"/>
+	<link rel="stylesheet" href="../../css/page.widget.css"/>
+	<link rel="stylesheet" href="../../css/widget.calculator.css"/>
+	<link rel="stylesheet" href="../../css/widget.calculator.widgetstogo.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../../js/Uize.js"></script>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.WidgetToGoPage.Calculator.library',
+		'UizeDotCom.WidgetToGoPage'
+	],
+	builder:function () {
+		(
+			window.page = new UizeDotCom.WidgetToGoPage ({
+				title:'Calculator',
+				widgetClass:'Uize.Widget.Calculator',
+				widgetHtml:'Uize.Templates.Calculator'
+			})
+		).wireUi ();
+	}
+});
+
+</script>
+
+</body>
+</html>
+

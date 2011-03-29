@@ -1,0 +1,132 @@
+/*** dialog style ***/
+	.dialogShield {
+		position:absolute;
+		display:none;
+		background-color:#000;
+		opacity:0.1;
+		filter:alpha(opacity=10);
+		cursor:not-allowed;
+		z-index:1;
+	}
+	.dialog {
+		position:absolute;
+		display:none;
+		top:100px;
+		left:200px;
+		width:300px;
+		height:300px;
+		background:#000;
+		padding:0px;
+		z-index:2;
+	}
+
+	/*** dialog shadow ***/
+		.dialogShadow, .dialogShadow2, .dialogShadow3, .dialogShadow4 {
+			display:none;
+			position:absolute;
+			width:100%;
+			height:100%;
+		}
+
+	/*** dialog chrome ***/
+		/*** title bar and status bar ***/
+			.dialogBar {
+				position:absolute;
+				left:0px;
+				width:100%;
+				height:25px;
+				text-align:center;
+				font-size:14px;
+				font-family:Arial, Helvetica, Verdana;
+				margin:-1px;
+				background:#b7babf url(../images/title-bg-brushed-metal.jpg) repeat left top;
+				border:1px solid #000;
+			}
+			/*** title bar ***/
+				.dialogTitleBar {
+					top:-26px;
+					border-bottom:1px solid #333;
+				}
+				.dialogTitleBar .dialogTitle {
+					width:100%;
+					color:#000;
+					text-shadow:-1px -1px 2px #eee, -1px 1px 2px #eee, 0 -1px 2px #eee, 0 1px 2px #eee;
+					line-height:22px;
+					text-transform:uppercase;
+					letter-spacing:1px;
+				}
+				.dialogTitleBar .dialogCloseButton {
+					display:block;
+					position:absolute;
+					right:2px;
+					bottom:2px;
+				}
+			/*** dialog status bar ***/
+				.dialogStatusBar {
+					bottom:-26px;
+					border-top:1px solid #333;
+				}
+				.dialogStatusBar .dialogCancelButton,
+				.dialogStatusBar .dialogOkButton
+				{
+					display:block;
+					position:absolute;
+					bottom:2px;
+					min-width:55px;
+				}
+				.dialogStatusBar .dialogCancelButton {
+					left:2px;
+				}
+				.dialogStatusBar .dialogOkButton {
+					right:2px;
+				}
+
+		/*** dialog corners / edges ***/
+			.dialogCornerEastWest, .dialogCornerNorthSouth {
+				position:absolute;
+				background:#bcc;
+				border:1px solid #000;
+			}
+			.dialogCornerEastWest {
+				height:100%;
+				width:2px;
+				top:0px;
+			}
+			.dialogCornerNorthSouth {
+				position:absolute;
+				width:100%;
+				height:2px;
+				left:0px;
+			}
+			.dialogCornerCorner {
+				position:absolute;
+				width:29px;
+				height:29px;
+				border:1px solid #000;
+				background:#e4eeee;
+			}
+			/*** edge positioning ***/
+				.dialogEdgeWest {left:-4px;}
+				.dialogEdgeEast {right:-4px;}
+				.dialogEdgeNorth {top:-30px;}
+				.dialogEdgeSouth {bottom:-30px;}
+
+	/*** contents ***/
+		.dialogContents {
+			position:absolute;
+			left:0px;
+			top:0px;
+			width:100%;
+			height:100%;
+			background:#fff;
+			overflow:auto;
+		}
+		.dialogContents h1 {
+			font-size:14px;
+			margin:0 5px;
+			border-bottom:1px solid #555;
+		}
+		.dialogContents p {
+			margin:4px 4px 12px 4px;
+		}
+

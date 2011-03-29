@@ -1,0 +1,15 @@
+The UIZE JavaScript Framework has added support for [[http://en.wikipedia.org/wiki/Comma-separated_values][CSV (Comma Separated Values)]] formatted data, in the form of the new =Uize.Data.Csv= module.
+
+The =Uize.Data.Csv= module provides highly versatile methods for serializing to and parsing from CSV formatted data. The =Uize.Data.Csv= module offers full support for all features of the CSV format (see [[http://tools.ietf.org/html/rfc4180][RFC 4180]]), including multiline column values, automatic quoting of column values that contain special characters, respecting all whitespace, and optional header rows.
+
+In addition, the =Uize.Data.Csv= module provides support for non-standard options, such as a configurable quoting character, configurable value delimiter, configurable quoting behavior, and optional trimming of whitespace padding around values. The =Uize.Data.Csv= module also supports serializing from and parsing to arrays of arrays or arrays of objects. When records are represented as objects, each key represents the name of a column and each value is that column's value. When records are represented as arrays, then each element of a record's array is a column value. Finally, when serializing from an array of objects, the =Uize.Data.Csv= module supports controlling column ordering and filtering (where only a subset of the columns in the data set are serialized).
+
+This new module is comprehensively documented, and loads of examples are provided. [[Uize.Data.Csv][LEARN MORE]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-11-04 - UIZE Adds Support for CSV (Comma Separated Values)
+....................................................................................

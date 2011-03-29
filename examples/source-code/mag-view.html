@@ -1,0 +1,241 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Mag View - HTML Source Code | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework HTML example source code"/>
+	<meta name="description" content="This is the source code for the Mag View example"/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../../css/page.css"/>
+	<link rel="stylesheet" href="../../css/page.source.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../../index.html" title="UIZE JavaScript Framework home"></a>
+	SOURCE CODE: Mag View
+	<div id="page-actions" class="pageActions">
+		<a href="../mag-view.html" class="buttonLink">VIEW EXAMPLE</a>
+	</div>
+</h1>
+
+<pre>
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+&lt;head&gt;
+  &lt;title&gt;Mag View | JavaScript Examples | UIZE JavaScript Framework&lt;/title&gt;
+  &lt;meta name="keywords" content="featured widget zoom Uize.Widget.MagView"/&gt;
+  &lt;meta name="description" content="Experience the image magnifier widget that lets you see a zoomed in version of a highlighted area of an image, with support for multiple zoom levels."/&gt;
+  &lt;link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/&gt;
+  &lt;link rel="stylesheet" href="../css/page.css"/&gt;
+  &lt;link rel="stylesheet" href="../css/page.example.css"/&gt;
+  &lt;style type="text/css"&gt;
+    .magViewShell {
+      position:relative;
+      left:100px;
+    }
+    .magViewShell, .magViewShell img {
+      width:350px;
+      height:250px;
+    }
+
+    /*** highlight ***/
+      .magViewHighlight {
+        position:absolute;
+        width:1px;
+        height:1px;
+        display:none;
+      }
+      .magViewHighlight .magViewHighlightFill {
+        position:absolute;
+        width:100%;
+        height:100%;
+        background:#ccc;
+        opacity:.15;
+        filter:alpha(opacity=15);
+      }
+      .magViewHighlight .magViewHighlightBorder1, .magViewHighlight .magViewHighlightBorder2 {
+        position:absolute;
+        width:100%;
+        height:100%;
+      }
+      .magViewHighlight .magViewHighlightBorder1 {
+        border:2px solid #000;
+        left:-1px;
+        top:-1px;
+      }
+      .magViewHighlight .magViewHighlightBorder2 {
+        border:1px solid #fff;
+        left:0;
+        top:0;
+      }
+
+    /*** mag image port ***/
+      .magImagePortShell {
+        position:absolute;
+        width:250px;
+        height:250px;
+        display:none;
+      }
+      .magImagePortShell .magImagePortShadow {
+        position:absolute;
+        left:12px;
+        top:-3px;
+        width:250px;
+        height:250px;
+        background:#000;
+        opacity:.75;
+        filter:alpha(opacity=75);
+      }
+      .magImagePortShell .magImagePort {
+        position:absolute;
+        left:5px;
+        top:-10px;
+        width:250px;
+        height:250px;
+        overflow:hidden;
+        z-index:1001;
+        border:1px solid #777;
+        background-color:#fff;
+      }
+      .magImagePortShell .magImagePortImage {
+        position:absolute;
+        width:700px;
+        height:500px;
+      }
+      .magImagePortShell .magImagePortImage img {
+        position:absolute;
+        width:100%;
+        height:100%;
+      }
+
+      /*** high res loading indicator ***/
+        .magImagePortShell .magViewHighResLoading {
+          position:absolute;
+          left:0px;
+          top:110px;
+          font-size:20px;
+          z-index:1002;
+        }
+        .magImagePortShell .magViewHighResLoading div {
+          position:absolute;
+          width:250px;
+          text-align:center;
+          color:#fff;
+        }
+  &lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+&lt;script type="text/javascript" src="../js/Uize.js"&gt;&lt;/script&gt;
+
+&lt;h1 class="document-title"&gt;
+  &lt;a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"&gt;&lt;/a&gt;
+  &lt;a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow"&gt;JAVASCRIPT EXAMPLES&lt;/a&gt;
+  Mag View
+  &lt;div id="page-actions" class="pageActions"&gt;
+    &lt;a href="source-code/mag-view.html" class="buttonLink"&gt;SOURCE&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/h1&gt;
+
+&lt;div class="main"&gt;
+  &lt;!-- explanation copy --&gt;
+
+  &lt;div class="explanation"&gt;
+    &lt;p&gt;In this example, an instance of &lt;a href="../reference/Uize.Widget.MagView.html"&gt;&lt;code&gt;Uize.Widget.MagView&lt;/code&gt;&lt;/a&gt; is instantiated and wired up to provide a lightweight detail view interaction. When you mouse over the image, a magnified view appears to the right. The portion of the main image that is highlight by the square is shown larger on the right. The highlight follows the mouse as you move it. Clicking on the main image zooms in even further. Clicking again returns you to normal zoom. The zoom level change is accompanied by a JavaScript animation of both the highlight square in the main image and the magnified view on the right.&lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;!-- mag view UI wireframe --&gt;
+
+  &lt;div id="page_magView" class="magViewShell"&gt;
+    &lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228026937512483785&amp;max_dim=350" alt="Shadow of the Past"/&gt;
+    &lt;div id="page_magView-highlight" class="magViewHighlight"&gt;
+      &lt;div class="magViewHighlightFill"&gt;&lt;/div&gt;
+      &lt;div class="magViewHighlightBorder1"&gt;&lt;/div&gt;
+      &lt;div class="magViewHighlightBorder2"&gt;&lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div id="page_magView-magImagePortShell" class="magImagePortShell"&gt;
+      &lt;div class="magImagePortShadow"&gt;&lt;/div&gt;
+      &lt;div id="page_magView_magImagePort" class="magImagePort" style="width:250px; height:250px;"&gt;
+        &lt;div id="page_magView_magImagePort-image" class="magImagePortImage" style="width:750px; height:500px;"&gt;
+          &lt;img id="page_magView-magImageLowRes" src="../images/blank.gif" alt=""/&gt;
+          &lt;img id="page_magView-magImageHighRes" src="../images/blank.gif" alt=""/&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;div id="page_magView-highResLoading" class="magViewHighResLoading"&gt;
+        &lt;!-- outline - top row --&gt;
+          &lt;div style="left:-1px; top:-1px;"&gt;Loading High Res&lt;/div&gt;
+          &lt;div style="left:0px; top:-1px;"&gt;Loading High Res&lt;/div&gt;
+          &lt;div style="left:1px; top:-1px;"&gt;Loading High Res&lt;/div&gt;
+        &lt;!-- outline - middle row --&gt;
+          &lt;div style="left:-1px; top:0px;"&gt;Loading High Res&lt;/div&gt;
+          &lt;div style="left:1px; top:0px;"&gt;Loading High Res&lt;/div&gt;
+        &lt;!-- outline - bottom row --&gt;
+          &lt;div style="left:-1px; top:1px;"&gt;Loading High Res&lt;/div&gt;
+          &lt;div style="left:0px; top:1px;"&gt;Loading High Res&lt;/div&gt;
+          &lt;div style="left:1px; top:1px;"&gt;Loading High Res&lt;/div&gt;
+        &lt;!-- main text --&gt;
+          &lt;div style="left:0px; top:0px; color:#000;"&gt;Loading High Res&lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- JavaScript code to make the static marquee HTML "come alive" --&gt;
+
+&lt;script type="text/javascript"&gt;
+
+Uize.module ({
+  required:[
+    'UizeDotCom.Page.Example.library',
+    'UizeDotCom.Page.Example',
+    'Uize.Widget.MagView'
+  ],
+  builder:function () {
+    /*** create the example page widget ***/
+      var page = window.page = new UizeDotCom.Page.Example;
+
+    /*** add the mag view child widget ***/
+      page.addChild (
+        'magView',
+        Uize.Widget.MagView,
+        {
+          magImageLowResUrl:'http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228026937512483785&amp;max_dim=350',
+          magImageHighResUrl:function (_magPower) {
+            return (
+              this.get ('magImageLowResUrl').replace ('max_dim=350','max_dim=' + Math.round (350 * _magPower))
+            )
+          },
+          magPowers:[1.4,3]
+        }
+      );
+
+    /*** wire up the page widget ***/
+      page.wireUi ();
+  }
+});
+
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+
+</pre>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.library',
+		'UizeDotCom.Page'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page).wireUi ()}
+});
+
+</script>
+
+</body></html>

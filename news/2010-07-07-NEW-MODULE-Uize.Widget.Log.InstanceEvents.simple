@@ -1,0 +1,13 @@
+The new =Uize.Widget.Log.InstanceEvents= module implements a log interface for logging the instance events of an instance of a =Uize= subclass.
+
+The =Uize.Widget.Log.InstanceEvents= module provides a convenient way to easily present a log of all the instance events that occur for an instance of a =Uize= subclass, including custom instance events that are fired using the instance's =fire= method, as well as all =Changed.&#42;= property change events that result from values of the instance's various set-get properties being changed. This means that you can use a =Uize.Widget.Log.InstanceEvents= instance to watch for changes in the state of some other instance. The instance for which instance events are logged can be an instance of *any* =Uize= subclass - not just widget classes.
+
+[[Uize.Widget.Log.InstanceEvents][LEARN MORE]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2010-07-07 - NEW MODULE: Uize.Widget.Log.InstanceEvents
+....................................................................................

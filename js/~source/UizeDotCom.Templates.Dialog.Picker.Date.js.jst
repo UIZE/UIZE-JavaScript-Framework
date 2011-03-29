@@ -1,0 +1,9 @@
+<%@ input ({idPrefix:'string',title:'string'}) %>
+<%@ required (['UizeDotCom.Templates.Dialog.Picker','Uize.Templates.Calendar']) %>
+<%=
+	UizeDotCom.Templates.Dialog.Picker.process ({
+		idPrefix:input.idPrefix,
+		title:input.title,
+		contents:Uize.Templates.Calendar.process ({idPrefix:input.idPrefix + '_value'})
+	})
+%>

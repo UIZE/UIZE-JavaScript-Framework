@@ -1,0 +1,29 @@
+<%@ input ({idPrefix:'string',viewHtml:'string'}) %>
+<table class="slideshow" cellspacing="0" cellpadding="0" style="margin:auto;">
+	<tr class="slideshowHeader" valign="top">
+		<td align="left">
+			<table border="0" cellspacing="0" cellpadding="0">
+				<tr valign="top">
+					<td><a id="<% .idPrefix %>_first" class="navButton" href="javascript://"><div class="arrow towardsFirst gotoFirst"></div></a></td>
+					<td><a id="<% .idPrefix %>_previous" class="navButton" href="javascript://"><div class="arrow towardsFirst gotoPrevious"></div></a></td>
+				</tr>
+			</table>
+		</td>
+		<td align="center">
+			<span id="<% .idPrefix %>-slide_title" class="slideshowTitle"></span><br/>
+			<span class="slideshowSubtitle">(<span id="<% .idPrefix %>-slideNumber"></span> of <span id="<% .idPrefix %>-totalSlides"></span>)</span>
+		</td>
+		<td align="right">
+			<table border="0" cellspacing="0" cellpadding="0">
+				<tr valign="top">
+					<td><a id="<% .idPrefix %>_next" class="navButton" href="javascript://"><div class="arrow towardsLast gotoNext"></div></a></td>
+					<td><a id="<% .idPrefix %>_last" class="navButton" href="javascript://"><div class="arrow towardsLast gotoLast"></div></a></td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="3" align="center" valign="center"><% .viewHtml %></td>
+	</tr>
+</table>
+

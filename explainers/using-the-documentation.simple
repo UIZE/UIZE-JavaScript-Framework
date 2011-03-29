@@ -1,0 +1,105 @@
+Introduction
+	To learn all about UIZE, you'll have to rely heavily on the documentation. This document discusses tips for using the documentation more effectively.
+
+Navigating This Site
+	Navigating the documentation - and the entire *uize.com* Web site, in general - can be done by mousing over the UIZE logo at the top left and then using the drop down menu that pops up. Easy!
+
+Sections of This Web Site
+	Example Pages
+		If you haven't already taken a tour through the many example pages available with the UIZE JavaScript Framework, you're encouraged to browse through these examples under the "Examples" section.
+
+		Viewing Example Source Code
+			If you stumble onto an example where you see something you particularly like, you can then view the source code by clicking on the convenient *"SOURCE"* button on the right hand side of the example's title bar.
+
+			If you scroll to the bottom of the source page, you'll see a =Uize.module= declaration that sets up the page widget for the page. This block of code will give you a sense of which UIZE modules are used in the page.
+
+		Designed to be Demonstrative
+			The many examples included are designed to be demonstrative, and are not guaranteed to be the prettiest possible embodiments of widgets.
+
+			UIZE widgets can look very slick and elegant with appropriate design and styling, but the focus of the example pages is keeping the source code as clean and simple as possible, so that one can quickly cut through the fluff and get to the essence of how UIZE classes can be used in a page.
+
+			Similarly, UIZE widgets can be combined together in intricate ways to produce sophisticated applications. However, when trying to learn how to use a specific UIZE class, trying to get your head around a complex chunk of code when you just want to see how to use a single class can feel frustrating and counterproductive.
+
+			So, the many example pages offered with the documentation are deliberately designed to be quite elemental in nature. Some demonstrate how code components can interact with one another. However, the examples are not necessarily designed to be compelling - they're designed to be instructive. We trust you will use your imagination in applying the UIZE JavaScript Framework towards the development of your own compelling applications.
+
+	Explainers
+		Learn how to use the UIZE JavaScript Framework by reading through the various topic oriented documents in the [[../javascript-explainers.html][Explainers]] section.
+
+		This section covers things from a subject matter perspective, and deals with such topics as [[javascript-inheritance.html][JavaScript Inheritance]], [[javascript-event-system.html][JavaScript Events]], [[javascript-modules.html][JavaScript Modules]], [[javascript-templates.html][JavaScript Templates]], [[javascript-widgets.html][JavaScript Widgets]], [[javascript-localization.html][JavaScript Localization]], [[javascript-documentation-system.html][JavaScript Documentation]], [[all-about-scrunching.html][JavaScript Code Compression]], [[javascript-build-scripts.html][JavaScript Build Scripts]], and lots more.
+
+		Because the pages in this section are topic oriented, they will likely refer to many different module reference documents, link to examples, and cross-reference other explainers.
+
+	Module Reference
+		Every module in the UIZE JavaScript Framework has a corresponding reference document that can be found under the "Module Reference" section.
+
+		Structure of the Module Reference Section
+			The contents list under this section is structured according to the class and namespace hierarchy of the modules, themselves.
+
+			So, for example, the reference document for the =Uize.Widget.Page= class would be the item "Page" under the section "Widget" under the section "Uize" (ie. "Uize" -> "Widget" -> "Page"). For modules that also have modules underneath them, the item for the module will be named =&#91;&#91; BASE &#93;&#93;= and will be inside the section named after the last level in the module's name. For instance, the class =Uize.Widget= is represented as the item "&#91;&#91; BASE &#93;&#93;" under the section "Widget" under the section "Uize" (ie. "Uize" -> "Widget" -> "&#91;&#91; BASE &#93;&#93;"). This allows "Widget" to be a section that contains all the other subclasses and deeper namespaces alongside the =Uize.Widget= base class.
+
+		Viewing Module Source Code
+			On any one of the module reference documents, you can conveniently view the source code of the module by clicking the *"SOURCE"* button on the right hand side of the title bar.
+
+			Then, to get back to the reference document from a module's source code page, just click the *"VIEW REFERENCE"* button on the right hand side of the page's title bar.
+
+		Playing Catch-up
+			There is module reference documentation that still needs to be written.
+
+			The documentation under the "Module Reference" section is generated automatically by a build script that runs through all the JavaScript modules and extracts documentation styled SimpleDoc comments. In reality, there are a number of modules that don't yet have documentation written. The documentation is still playing catch-up to the code development, so you may stumble across many a sad looking module reference page - with nothing on it but a lonely heading. Documentation is being written all the time, so please be patient with this effort.
+
+			Even for modules that aren't yet documented, you can still use the module reference pages as a starting point for search, by clicking on the convenient *"SEARCH"* link to the right of the module name in their title bar (see the section `Searching for References to a Module`), or as a way of viewing the source code for modules while browsing the site (see the section `Viewing Module Source Code`).
+
+	Tests
+		The tests section contains pages that are likely more interesting to developers *on* the UIZE JavaScript Framework than developers *using* the framework, with performance tests that have helped determine some implementation choices for the UIZE JavaScript Framework.
+
+	Appendixes
+		Various miscellaneous documents are thrown under the "Appendixes" section.
+
+		This section includes such things as a credits list, endorsements of software and utilities, a glossary or terms, style guides, UIZE licensing terms, some JavaScript trivia, and more. Sniff around and see what you find.
+
+Search Tips
+	If you're looking for information on something in particular, be sure to use the convenient *"SEARCH"* link located in the lower left - at the very bottom of the contents menu pane.
+
+	You may be looking for references to a certain topic (such as "Ajax"), or you may be looking for references to method names (eg "Uize.Node.setStyle"), or module names (eg. "Uize.Widget.Calendar"), or types of widgets (eg. "calendar"). Search for anything within the *uize.com* Web site. Just click the *"SEARCH"* link, enter your search query in the search page that loads in, and then click on one of the search buttons for the various main sections of the site - your search will be conducted within that section.
+
+	Searching for References to a Module
+		When you're reading up on a particular JavaScript module and you want to understand more about it by viewing examples that use it, or by reading explainers that reference it, or by seeing how it's used by other modules, etc., then a dedicated feature of the module reference documents will make your life easier.
+
+		Simply browse to the reference document for a particular module under the "Module Reference" section. When the reference document loads in, you'll notice a *"( SEARCH )"* link in parentheses, just after the module name in the title bar. This special search features makes it easy to find references to a module (or its subclasses or extensions) inside different sections of the site. Click on this link and you will be taken to a page where you can choose the section you'd like to search in.
+
+		ENTIRE SITE
+			To find pages throughout the entire *uize.com* Web site that reference the module you're searching on, use this link. Your search results could include pages from all sections of the site, including the example pages, example source code pages, module reference documents, module source code pages, explainers, appendixes, etc.
+
+		IN EXAMPLES
+			To learn how to use a module, it may be helpful to see how it is used in example pages. If you want to find examples that directly use a module, or that reference it somewhere in the source, use this link.
+
+			Your search will be performed within the =examples/source-code= section of the site, so the results will contain the source code documents for examples that reference the module you're searching on. If you click a search result you will then see the source code for an example. You can read through the source code to see how the module is referenced. To view the live example, just click the *"VIEW EXAMPLE"* button on the right hand side of the title bar.
+
+		IN MODULES
+			To learn how to use a module, it may be helpful to see how it is used by other modules. To find modules that directly use a module, or that reference it somewhere in the source, use this link.
+
+			Your search will be performed within the =reference/source-code= section of the site, so the results will contain the source code documents for modules that reference the module you're searching on. If you click a search result you will then see the source code for a module. You can read through the source code to see how the module you're searching on is referenced. To view the reference document for the module, just click the *"VIEW REFERENCE"* button on the right hand side of the title bar.
+
+		IN EXPLAINERS
+			To find explainers that reference the module you're searching on (or its subclasses or extensions), use this link. Your search will be performed within the =explainers= section of the site.
+
+General Documentation Tips
+	A number of features of the documentation are available within all documents in the *uize.com* Web site.
+
+	Contents Lists
+		Expanding One Level Deep
+			For all contents trees in the *uize.com* Web site, a collapsed section can be expanded to only one level deep by holding down the shift key while clicking on the expander arrow, allowing you to "peel back the layers", one at a time.
+
+		Expading All
+			For all contents trees in the *uize.com* Web site, a collapsed section can be fully expanded (so that all deeper subsections are also fully expanded) by holding down the ctrl key while clicking on the expander arrow.
+
+		Contents List Tooltips
+			For any item in a document page's contents list, a tooltip is displayed when hovering over the item, that provides a snapshot / preview of the section by showing a portion of the first paragraph of the section (provided that the section has a first paragraph).
+
+			For module reference documents, the first paragraph is typically a one or two sentence summary of a method, property, event, implied node, etc., so you can use the contents tree as a kind of feature summary or cheat sheet.
+
+	Hyperlinked Section Numbering
+		A feature of the documentation that may come in handy on occasion and that is kind of buried is the hyperlinking of the section numbering.
+
+		Basically, every number in the numbering of sections links back to the start of that section node, so you can conveniently "prune" back to a higher section level just by clicking on the appropriate linked number. This is best explained by using an example, so let's say that you are reading in section "1.2.3." of a document. Then, if you clicked the number "3" in the section number, you would be taken to the top of section "1.2.3.". If you clicked the number "2", you would be taken to the top of section "1.2.". And if you clicked the number "1", you would be taken to the top of section "1.". This is kind of like a more sophisticated "back to top" feature.
+

@@ -1,0 +1,20 @@
+Some methods of the =Uize.Data= module have been improved, and a new method has been added.
+
+Comparison Options for Uize.Data.identical
+	The =Uize.Data.identical= static method of the =Uize.Data= module has been improved with the addition of a new variation that allows comparison options to be specified in an optional =optionsOBJ= parameter.
+
+	One new comparison option allows for comparing only the structure of two objects to see if they are identical, regardless of property values for either of the objects. Another new comparison option allows for testing that values for properties of both objects are equal, but not according to a strict equality match, so the object ={prop:1}= would be considered identical to the object ={prop:'1'}= when using this option. Finally, the new =allowConjoined= comparison option lets you specify whether or not the two objects being compared may reference the same shared object at any level of their structure.
+
+Performance Optimization
+	The =Uize.Data.identical= and =Uize.Data.clones= static methods have been optimized for performance.
+
+New Uize.Data.getTotalKeys Method
+	The new =Uize.Data.getTotalKeys= static method lets you get the total number of keys in an object, without the cost of actually building an array of all the keys.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2008-12-24 - IMPROVED MODULE: Uize.Data
+....................................................................................

@@ -1,0 +1,773 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Uize.Comm | Documentation | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework Documentation Uize.Comm module reference documentation"/>
+	<meta name="description" content="The Uize.Comm class provides functionality and interface that is shared by subclasses that implement support for specific communication protocols."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../javascript-modules-index.html" class="breadcrumb breadcrumbWithArrow">MODULES</a>
+	<a href="Uize.html" title="View reference for Uize" class="breadcrumb">Uize</a>.<a href="Uize.Comm.html" title="View reference for Uize.Comm" class="breadcrumb">Comm</a>
+	<div class="pageActions">
+		<a id="page-search" href="javascript://" class="buttonLink" title="Search for references to this module...">SEARCH</a><a id="page-examples" href="javascript://" class="buttonLink" title="View examples for this module...">EXAMPLES</a><a href="source-code/Uize.Comm.html" class="buttonLink" title="View the JavaScript source code for this module...">SOURCE</a><a id="page-test" href="javascript://" class="buttonLink" title="Test this module...">TEST</a>
+	</div>
+
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="The Uize.Comm class provides functionality and interface that is shared by subclasses that implement support for specific communication protocols.">1. Introduction</a>
+				<ul>
+					<li><a href="#1_1" title="There are no dedicated showcase example pages for the Uize.Comm module.">1.1. Examples</a></li>
+					<li><a href="#1_2" title="The Uize.Comm module defines the Uize.Comm class, which is a subclass of Uize.">1.2. Implementation Info</a>
+						<ul>
+							<li><a href="#1_2_1" title="The features listed in this section have been introduced in this module.">1.2.1. Features Introduced in This Module</a></li>
+							<li><a href="#1_2_2" title="The features listed in this section have been overridden in this module.">1.2.2. Features Overridden in This Module</a></li>
+							<li><a href="#1_2_3" title="The features listed in this section have been inherited from other modules.">1.2.3. Features Inherited From Other Modules</a></li>
+							<li><a href="#1_2_4" title="Uize.Comm.Ajax | Uize.Comm.Iframe | Uize.Comm.Script">1.2.4. Modules Directly Under This Namespace</a></li>
+							<li><a href="#1_2_5" title="There is no dedicated unit tests module for the Uize.Comm module.">1.2.5. Unit Tests</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li><a href="#2">2. Instance Properties</a>
+				<ul>
+					<li><a href="#2_1" title="An array, containing all pending requests that have been queued up and are waiting to be performed.">2.1. requestQueue</a></li>
+				</ul>
+			</li>
+			<li><a href="#3">3. Instance Events</a>
+				<ul>
+					<li><a href="#3_1" title="The Perform Request instance event fires each time before a request is performed - for both single requests as well as batch requests. The event object contains a &quot;request&quot; property, which is a reference to the request object for the request about to be performed.">3.1. Perform Request</a></li>
+					<li><a href="#3_2" title="The Request Queue Updated event is fired each time the requestQueue instance property is updated.">3.2. Request Queue Updated</a></li>
+				</ul>
+			</li>
+			<li><a href="#4">4. Instance Methods</a>
+				<ul>
+					<li><a href="#4_1" title="Inherited from Uize.">4.1. fire</a></li>
+					<li><a href="#4_2" title="A method that lets you flush the request queue.">4.2. flush</a></li>
+					<li><a href="#4_3" title="Lets you flush the cached response for a specific request, or lets you flush the entire response cache for the instance.">4.3. flushCache</a></li>
+					<li><a href="#4_4" title="Inherited from Uize.">4.4. get</a></li>
+					<li><a href="#4_5" title="Inherited from Uize.">4.5. kill</a></li>
+					<li><a href="#4_6" title="A method that should be overrided in subclasses that implement support for specific communication protocols.">4.6. performRequest</a></li>
+					<li><a href="#4_7" title="IMPLEMENTATION INFO">4.7. queueRequest</a></li>
+					<li><a href="#4_8" title="A method that lets you initiate a request.">4.8. request</a>
+						<ul>
+							<li><a href="#4_8_1" title="The Uize.Comm base class handles the following properties of the requestOBJ parameter...">4.8.1. requestOBJ Properties</a>
+								<ul>
+									<li><a href="#4_8_1_1" title="A string, specifying the data type that should be used when passing the response result to the callback function specified by the callback property.">4.8.1.1. returnType</a></li>
+									<li><a href="#4_8_1_2" title="A string, specifying the caching mode that should be employed when performing the request.">4.8.1.2. cache</a></li>
+									<li><a href="#4_8_1_3" title="A function reference, specifying the function that should be called once the request has been performed.">4.8.1.3. callback</a></li>
+									<li><a href="#4_8_1_4" title="A boolean, specifying whether or not the request should cut to the head of the request queue.">4.8.1.4. cutToHead</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li><a href="#4_9" title="Inherited from Uize.">4.9. set</a></li>
+					<li><a href="#4_10" title="Inherited from Uize.">4.10. toggle</a></li>
+					<li><a href="#4_11" title="Inherited from Uize.">4.11. unwire</a></li>
+					<li><a href="#4_12" title="IMPLEMENTATION INFO">4.12. useQueue</a></li>
+					<li><a href="#4_13" title="Inherited from Uize.">4.13. wire</a></li>
+				</ul>
+			</li>
+			<li><a href="#5">5. Static Methods</a>
+				<ul>
+					<li><a href="#5_1" title="Inherited from Uize.">5.1. Uize.Comm.fire</a></li>
+					<li><a href="#5_2" title="Inherited from Uize.">5.2. Uize.Comm.get</a></li>
+					<li><a href="#5_3" title="A method that facilitates asynchronous iteration through and processing of the elements of an array.">5.3. Uize.Comm.processArrayAsync</a></li>
+					<li><a href="#5_4" title="Inherited from Uize.">5.4. Uize.Comm.registerProperties</a></li>
+					<li><a href="#5_5" title="Inherited from Uize.">5.5. Uize.Comm.set</a></li>
+					<li><a href="#5_6" title="Inherited from Uize.">5.6. Uize.Comm.subclass</a></li>
+					<li><a href="#5_7" title="Inherited from Uize.">5.7. Uize.Comm.toggle</a></li>
+					<li><a href="#5_8" title="Inherited from Uize.">5.8. Uize.Comm.unwire</a></li>
+					<li><a href="#5_9" title="Inherited from Uize.">5.9. Uize.Comm.wire</a></li>
+				</ul>
+			</li>
+			<li><a href="#6">6. Static Properties</a>
+				<ul>
+					<li><a href="#6_1" title="IMPLEMENTATION INFO">6.1. Uize.Comm.moduleName</a></li>
+					<li><a href="#6_2" title="IMPLEMENTATION INFO">6.2. Uize.Comm.nonInheritableStatics</a></li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<a name="1"></a>
+	<h1 class="heading1" title="1. Introduction"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>. </span>Introduction</h1>
+	<div class="contents1">
+		<p>The <code>Uize.Comm</code> class provides functionality and interface that is shared by subclasses that implement support for specific communication protocols.</p>
+		
+		<p><b>DEVELOPERS:</b> <a href="http://www.tomkidding.com" target="_blank" class="externalSiteLink">Chris van Rensburg</a>, <a href="http://www.hikingviking.com" target="_blank" class="externalSiteLink">Jan Borgersen</a>, original code donated by <a href="http://www.zazzle.com" target="_blank" class="externalSiteLink">Zazzle Inc.</a></p>
+		
+		<p>The <code>Uize.Comm</code> class serves as the base class for subclasses that implement support for specific communication protocols (such as <code><a href="../reference/Uize.Comm.Ajax.html">Uize.Comm.Ajax</a></code>, <code><a href="../reference/Uize.Comm.Iframe.html">Uize.Comm.Iframe</a></code>, and <code><a href="../reference/Uize.Comm.Script.html">Uize.Comm.Script</a></code>). The <code>Uize.Comm</code> base class provides support for queuing subsequent calls to allow sequenced server requests.</p>
+		
+		<a name="1_1"></a>
+		<h2 class="heading2" title="1. Introduction -&gt; 1.1. Examples"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. Examples">1</a>. </span>Examples</h2>
+		<div class="contents2">
+			<p>There are no dedicated showcase example pages for the <code>Uize.Comm</code> module.</p>
+			
+			<p><span class="allCaps">SEARCH FOR EXAMPLES</span></p>
+			
+			<p>Use the link below to search for example pages on the <b>uize.com</b> Web site that reference the <code>Uize.Comm</code> module...</p>
+			
+			<p><a href="http://www.google.com/search?hl=en&safe=off&domains=uize.com%2Fexamples&sitesearch=uize.com%2Fexamples&q=%22Uize.Comm%22" target="_blank" class="externalSiteLink">SEARCH</a></p>
+		</div>
+		
+		<a name="1_2"></a>
+		<h2 class="heading2" title="1. Introduction -&gt; 1.2. Implementation Info"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>. </span>Implementation Info</h2>
+		<div class="contents2">
+			<p>The <code>Uize.Comm</code> module defines the <code>Uize.Comm</code> class, which is a subclass of <code><a href="../reference/Uize.html">Uize</a></code>.</p>
+			
+			<p><span class="allCaps">INHERITANCE CHAIN</span></p>
+			
+			<p><code><a href="../reference/Uize.html">Uize</a></code> -> <code>Uize.Comm</code></p>
+			
+			<a name="1_2_1"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.1. Features Introduced in This Module"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>.<a href="#1_2_1" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.1. Features Introduced in This Module">1</a>. </span>Features Introduced in This Module</h3>
+			<div class="contents3">
+				<p>The features listed in this section have been introduced in this module.</p>
+				
+				<p><span class="allCaps">INSTANCE METHODS</span></p>
+				
+				<p><code><a href="#4_2">flush</a></code> | <code><a href="#4_3">flushCache</a></code> | <code><a href="#4_6">performRequest</a></code> | <code><a href="#4_7">queueRequest</a></code> | <code><a href="#4_8">request</a></code> | <code><a href="#4_12">useQueue</a></code></p>
+				
+				<p><span class="allCaps">STATIC METHODS</span></p>
+				
+				<p><code><a href="#5_3">Uize.Comm.processArrayAsync</a></code></p>
+			</div>
+			
+			<a name="1_2_2"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.2. Features Overridden in This Module"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>.<a href="#1_2_2" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.2. Features Overridden in This Module">2</a>. </span>Features Overridden in This Module</h3>
+			<div class="contents3">
+				<p>The features listed in this section have been overridden in this module.</p>
+				
+				<p>The module that an overridden feature was initially introduced in will be noted in the IMPLEMENTATION INFO notes for the feature.</p>
+				
+				<p><span class="allCaps">STATIC PROPERTIES</span></p>
+				
+				<p><code><a href="#6_1">Uize.Comm.moduleName</a></code> | <code><a href="#6_2">Uize.Comm.nonInheritableStatics</a></code></p>
+			</div>
+			
+			<a name="1_2_3"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.3. Features Inherited From Other Modules"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>.<a href="#1_2_3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.3. Features Inherited From Other Modules">3</a>. </span>Features Inherited From Other Modules</h3>
+			<div class="contents3">
+				<p>The features listed in this section have been inherited from other modules.</p>
+				
+				<p>The module that an inherited feature was initially introduced in will be noted in the IMPLEMENTATION INFO notes for the feature.</p>
+				
+				<p><span class="allCaps">INSTANCE METHODS</span></p>
+				
+				<p><code><a href="#4_1">fire</a></code> | <code><a href="#4_4">get</a></code> | <code><a href="#4_5">kill</a></code> | <code><a href="#4_9">set</a></code> | <code><a href="#4_10">toggle</a></code> | <code><a href="#4_11">unwire</a></code> | <code><a href="#4_13">wire</a></code></p>
+				
+				<p><span class="allCaps">STATIC METHODS</span></p>
+				
+				<p><code><a href="#5_1">Uize.Comm.fire</a></code> | <code><a href="#5_2">Uize.Comm.get</a></code> | <code><a href="#5_4">Uize.Comm.registerProperties</a></code> | <code><a href="#5_5">Uize.Comm.set</a></code> | <code><a href="#5_6">Uize.Comm.subclass</a></code> | <code><a href="#5_7">Uize.Comm.toggle</a></code> | <code><a href="#5_8">Uize.Comm.unwire</a></code> | <code><a href="#5_9">Uize.Comm.wire</a></code></p>
+			</div>
+			
+			<a name="1_2_4"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.4. Modules Directly Under This Namespace"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>.<a href="#1_2_4" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.4. Modules Directly Under This Namespace">4</a>. </span>Modules Directly Under This Namespace</h3>
+			<div class="contents3">
+				<p><code><a href="../reference/Uize.Comm.Ajax.html">Uize.Comm.Ajax</a></code> | <code><a href="../reference/Uize.Comm.Iframe.html">Uize.Comm.Iframe</a></code> | <code><a href="../reference/Uize.Comm.Script.html">Uize.Comm.Script</a></code></p>
+			</div>
+			
+			<a name="1_2_5"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.5. Unit Tests"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>.<a href="#1_2_5" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.5. Unit Tests">5</a>. </span>Unit Tests</h3>
+			<div class="contents3">
+				<p>There is no dedicated unit tests module for the <code>Uize.Comm</code> module.</p>
+			</div>
+		</div>
+	</div>
+	
+	<a name="2"></a>
+	<h1 class="heading1" title="2. Instance Properties"><span class="headingNumber"><a href="#2" title="2. Instance Properties">2</a>. </span>Instance Properties</h1>
+	<div class="contents1">
+		<a name="2_1"></a>
+		<h2 class="heading2" title="2. Instance Properties -&gt; 2.1. requestQueue"><span class="headingNumber"><a href="#2" title="2. Instance Properties">2</a>.<a href="#2_1" title="2. Instance Properties -&gt; 2.1. requestQueue">1</a>. </span>requestQueue</h2>
+		<div class="contents2">
+			<p>An array, containing all pending requests that have been queued up and are waiting to be performed.</p>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#4_2">flush</a></code>, <code><a href="#4_7">queueRequest</a></code>, and <code><a href="#4_12">useQueue</a></code> instance methods</td></tr>
+			</table>
+		</div>
+	</div>
+	
+	<a name="3"></a>
+	<h1 class="heading1" title="3. Instance Events"><span class="headingNumber"><a href="#3" title="3. Instance Events">3</a>. </span>Instance Events</h1>
+	<div class="contents1">
+		<a name="3_1"></a>
+		<h2 class="heading2" title="3. Instance Events -&gt; 3.1. Perform Request"><span class="headingNumber"><a href="#3" title="3. Instance Events">3</a>.<a href="#3_1" title="3. Instance Events -&gt; 3.1. Perform Request">1</a>. </span>Perform Request</h2>
+		<div class="contents2">
+			<p>The <code><a href="#3_1">Perform Request</a></code> instance event fires each time before a request is performed - for both single requests as well as batch requests. The event object contains a "request" property, which is a reference to the request object for the request about to be performed.</p>
+		</div>
+		
+		<a name="3_2"></a>
+		<h2 class="heading2" title="3. Instance Events -&gt; 3.2. Request Queue Updated"><span class="headingNumber"><a href="#3" title="3. Instance Events">3</a>.<a href="#3_2" title="3. Instance Events -&gt; 3.2. Request Queue Updated">2</a>. </span>Request Queue Updated</h2>
+		<div class="contents2">
+			<p>The <code><a href="#3_2">Request Queue Updated</a></code> event is fired each time the <code><a href="#2_1">requestQueue</a></code> instance property is updated.</p>
+		</div>
+	</div>
+	
+	<a name="4"></a>
+	<h1 class="heading1" title="4. Instance Methods"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>. </span>Instance Methods</h1>
+	<div class="contents1">
+		<a name="4_1"></a>
+		<h2 class="heading2" title="4. Instance Methods -&gt; 4.1. fire"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_1" title="4. Instance Methods -&gt; 4.1. fire">1</a>. </span>fire</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_2"></a>
+		<h2 class="heading2" title="4. Instance Methods -&gt; 4.2. flush"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_2" title="4. Instance Methods -&gt; 4.2. flush">2</a>. </span>flush</h2>
+		<div class="contents2">
+			<p>A method that lets you flush the request queue.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">myInstance.flush ();
+</pre>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this method takes no parameters</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>after flushing the request queue, the <code><a href="#3_2">Request Queue Updated</a></code> instance event will be fired</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#4_7">queueRequest</a></code> and <code><a href="#4_12">useQueue</a></code> instance methods</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#2_1">requestQueue</a></code> instance property</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_3"></a>
+		<h2 class="heading2" title="4. Instance Methods -&gt; 4.3. flushCache"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_3" title="4. Instance Methods -&gt; 4.3. flushCache">3</a>. </span>flushCache</h2>
+		<div class="contents2">
+			<p>Lets you flush the cached response for a specific request, or lets you flush the entire response cache for the instance.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">myInstance.flushCache (requestOBJ);
+</pre>
+			
+			<p><span class="allCaps">VARIATION 1</span></p>
+			
+			
+<pre class="sample-code">myInstance.flushCache (requestUrlSTR);
+</pre>
+			
+			<p>As an alternative to specifying a request by request object, a request can be specified by its URL (ie. the value of the <code>url</code> property of the request object).</p>
+			
+			<p><span class="allCaps">VARIATION 2</span></p>
+			
+			
+<pre class="sample-code">myInstance.flushCache ();
+</pre>
+			
+			<p>When no parameter is specified, then the <code><a href="#4_3">flushCache</a></code> method will flush the entire response cache for the instance.</p>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>don't confuse this method with the <code><a href="#4_2">flush</a></code> instance method that flushes the request queue</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_4"></a>
+		<h2 class="heading2" title="4. Instance Methods -&gt; 4.4. get"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_4" title="4. Instance Methods -&gt; 4.4. get">4</a>. </span>get</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_5"></a>
+		<h2 class="heading2" title="4. Instance Methods -&gt; 4.5. kill"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_5" title="4. Instance Methods -&gt; 4.5. kill">5</a>. </span>kill</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_6"></a>
+		<h2 class="heading2" title="4. Instance Methods -&gt; 4.6. performRequest"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_6" title="4. Instance Methods -&gt; 4.6. performRequest">6</a>. </span>performRequest</h2>
+		<div class="contents2">
+			<p>A method that should be overrided in subclasses that implement support for specific communication protocols.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">myInstance.performRequest (requestOBJ,callbackFUNC)
+</pre>
+			
+			<p>This method is not intended to be called by application code. It is only public so that it can be overrided in subclasses. When implementing this method in a subclass, your method should expect to receive the two parameters <code>requestOBJ</code> and <code>callbackFUNC</code>. The <code>requestOBJ</code> parameter will contain all the information necessary for performing the request.</p>
+			
+			<p>Once the request has been sucessfully completed, your implementation should place request results into <code>requestOBJ</code> and then call the callback function specified in the <code>callbackFUNC</code> parameter. It is not necessary to pass any parameters when calling the <code>callbackFUNC</code> function, since the request results are placed into <code>requestOBJ</code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_7"></a>
+		<h2 class="heading2" title="4. Instance Methods -&gt; 4.7. queueRequest"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_7" title="4. Instance Methods -&gt; 4.7. queueRequest">7</a>. </span>queueRequest</h2>
+		<div class="contents2">
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_8"></a>
+		<h2 class="heading2" title="4. Instance Methods -&gt; 4.8. request"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_8" title="4. Instance Methods -&gt; 4.8. request">8</a>. </span>request</h2>
+		<div class="contents2">
+			<p>A method that lets you initiate a request.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">myInstance.request (requestOBJ);
+</pre>
+			
+			<p>All the information that governs the request is contained inside the <code>requestOBJ</code> parameter. The properties of this object will vary, depending on the communication protocol and are determined by the particular subclass <code>Uize.Comm</code> you are using.</p>
+			
+			<p><span class="allCaps">SYNTAX (EXPLODED)</span></p>
+			
+			
+<pre class="sample-code">myInstance.request ({
+  // ...properties specific to comm protocol...
+  // ...properties specific to comm protocol...
+  // ...properties specific to comm protocol...
+  returnType:returnTypeSTR,
+  cache:cacheBOOLorSTR,
+  callback:callbackFUNC
+});
+</pre>
+			
+			<a name="4_8_1"></a>
+			<h3 class="heading3" title="4. Instance Methods -&gt; 4.8. request -&gt; 4.8.1. requestOBJ Properties"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_8" title="4. Instance Methods -&gt; 4.8. request">8</a>.<a href="#4_8_1" title="4. Instance Methods -&gt; 4.8. request -&gt; 4.8.1. requestOBJ Properties">1</a>. </span>requestOBJ Properties</h3>
+			<div class="contents3">
+				<p>The <code>Uize.Comm</code> base class handles the following properties of the <code>requestOBJ</code> parameter...</p>
+				
+				<a name="4_8_1_1"></a>
+				<h4 class="heading4" title="4. Instance Methods -&gt; 4.8. request -&gt; 4.8.1. requestOBJ Properties -&gt; 4.8.1.1. returnType"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_8" title="4. Instance Methods -&gt; 4.8. request">8</a>.<a href="#4_8_1" title="4. Instance Methods -&gt; 4.8. request -&gt; 4.8.1. requestOBJ Properties">1</a>.<a href="#4_8_1_1" title="4. Instance Methods -&gt; 4.8. request -&gt; 4.8.1. requestOBJ Properties -&gt; 4.8.1.1. returnType">1</a>. </span>returnType</h4>
+				<div class="contents4">
+					<p>A string, specifying the data type that should be used when passing the response result to the callback function specified by the <code><a href="#4_8_1_3">callback</a></code> property.</p>
+					
+					<p><span class="allCaps">VALUES</span></p>
+					
+					<table class="list">
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>'text'</code> - the value of the <code>responseText</code> property of <code>requestOBJ</code> will be passed as the parameter to the <code><a href="#4_8_1_3">callback</a></code> function</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>'json'</code> - the value of the <code>responseJson</code> property of <code>requestOBJ</code> will be passed as the parameter to the <code><a href="#4_8_1_3">callback</a></code> function</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>'xml'</code> - the value of the <code>responseJson</code> property of <code>requestOBJ</code> will be passed as the parameter to the <code><a href="#4_8_1_3">callback</a></code> function</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>'object'</code> (default) - the <code>requestOBJ</code> object will be passed as the parameter to the <code><a href="#4_8_1_3">callback</a></code> function</td></tr>
+					</table>
+					<p><span class="allCaps">NOTES</span></p>
+					
+					<table class="list">
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the default value for this property is <code>'object'</code></td></tr>
+					</table>
+				</div>
+				
+				<a name="4_8_1_2"></a>
+				<h4 class="heading4" title="4. Instance Methods -&gt; 4.8. request -&gt; 4.8.1. requestOBJ Properties -&gt; 4.8.1.2. cache"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_8" title="4. Instance Methods -&gt; 4.8. request">8</a>.<a href="#4_8_1" title="4. Instance Methods -&gt; 4.8. request -&gt; 4.8.1. requestOBJ Properties">1</a>.<a href="#4_8_1_2" title="4. Instance Methods -&gt; 4.8. request -&gt; 4.8.1. requestOBJ Properties -&gt; 4.8.1.2. cache">2</a>. </span>cache</h4>
+				<div class="contents4">
+					<p>A string, specifying the caching mode that should be employed when performing the request.</p>
+					
+					<p><span class="allCaps">VALUES</span></p>
+					
+					<table class="list">
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>'memory'</code> - a JavaScript memory based mechanism will be employed to cache the request's response. Using this caching mode, the browser's caching mechanism is preempted. Because this caching mode is memory based, the caching of responses in this mode is not persisted across page reloads or navigation. This mode is useful for requests that are likely to be hit heavily and repeatedly throughout a page session.</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>'browser'</code> - caching is left to the browser's built-in mechanism.</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>'never'</code> (default) - a cache defeat mechanism is employed to ensure that the request is never cached. This mode is useful for requests where the response will vary with repeated use - even with identical request parameters - because the response may be determined by data beyond that contained in the request, such as data contributed through community interaction with a Web application, or data that is updated in the user's session.</td></tr>
+					</table>
+					<p><span class="allCaps">NOTES</span></p>
+					
+					<table class="list">
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the default value for this property is <code>'never'</code></td></tr>
+					</table>
+				</div>
+				
+				<a name="4_8_1_3"></a>
+				<h4 class="heading4" title="4. Instance Methods -&gt; 4.8. request -&gt; 4.8.1. requestOBJ Properties -&gt; 4.8.1.3. callback"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_8" title="4. Instance Methods -&gt; 4.8. request">8</a>.<a href="#4_8_1" title="4. Instance Methods -&gt; 4.8. request -&gt; 4.8.1. requestOBJ Properties">1</a>.<a href="#4_8_1_3" title="4. Instance Methods -&gt; 4.8. request -&gt; 4.8.1. requestOBJ Properties -&gt; 4.8.1.3. callback">3</a>. </span>callback</h4>
+				<div class="contents4">
+					<p>A function reference, specifying the function that should be called once the request has been performed.</p>
+					
+					<p>The callback function you specify should expect to receive one parameter that will be of the type specified by the <code><a href="#4_8_1_1">returnType</a></code> property.</p>
+				</div>
+				
+				<a name="4_8_1_4"></a>
+				<h4 class="heading4" title="4. Instance Methods -&gt; 4.8. request -&gt; 4.8.1. requestOBJ Properties -&gt; 4.8.1.4. cutToHead"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_8" title="4. Instance Methods -&gt; 4.8. request">8</a>.<a href="#4_8_1" title="4. Instance Methods -&gt; 4.8. request -&gt; 4.8.1. requestOBJ Properties">1</a>.<a href="#4_8_1_4" title="4. Instance Methods -&gt; 4.8. request -&gt; 4.8.1. requestOBJ Properties -&gt; 4.8.1.4. cutToHead">4</a>. </span>cutToHead</h4>
+				<div class="contents4">
+					<p>A boolean, specifying whether or not the request should cut to the head of the request queue.</p>
+					
+					<p>If the value <code>false</code> is specified for the <code><a href="#4_8_1_4">cutToHead</a></code> property, or if this property is not specified, then the request is appended to the request queue. This is the default behavior. In some rare cases, such as when recovering from a request that returns a failure / error response, it might be desirable to push requests that are part of recovering from the failed request to the head of the queue. In such cases, such recovery requests can specify the value <code>true</code> for the <code><a href="#4_8_1_4">cutToHead</a></code> property.</p>
+				</div>
+			</div>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_9"></a>
+		<h2 class="heading2" title="4. Instance Methods -&gt; 4.9. set"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_9" title="4. Instance Methods -&gt; 4.9. set">9</a>. </span>set</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_10"></a>
+		<h2 class="heading2" title="4. Instance Methods -&gt; 4.10. toggle"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_10" title="4. Instance Methods -&gt; 4.10. toggle">10</a>. </span>toggle</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_11"></a>
+		<h2 class="heading2" title="4. Instance Methods -&gt; 4.11. unwire"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_11" title="4. Instance Methods -&gt; 4.11. unwire">11</a>. </span>unwire</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_12"></a>
+		<h2 class="heading2" title="4. Instance Methods -&gt; 4.12. useQueue"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_12" title="4. Instance Methods -&gt; 4.12. useQueue">12</a>. </span>useQueue</h2>
+		<div class="contents2">
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_13"></a>
+		<h2 class="heading2" title="4. Instance Methods -&gt; 4.13. wire"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_13" title="4. Instance Methods -&gt; 4.13. wire">13</a>. </span>wire</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			</table>
+		</div>
+	</div>
+	
+	<a name="5"></a>
+	<h1 class="heading1" title="5. Static Methods"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>. </span>Static Methods</h1>
+	<div class="contents1">
+		<a name="5_1"></a>
+		<h2 class="heading2" title="5. Static Methods -&gt; 5.1. Uize.Comm.fire"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_1" title="5. Static Methods -&gt; 5.1. Uize.Comm.fire">1</a>. </span>Uize.Comm.fire</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
+			</table>
+		</div>
+		
+		<a name="5_2"></a>
+		<h2 class="heading2" title="5. Static Methods -&gt; 5.2. Uize.Comm.get"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_2" title="5. Static Methods -&gt; 5.2. Uize.Comm.get">2</a>. </span>Uize.Comm.get</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
+			</table>
+		</div>
+		
+		<a name="5_3"></a>
+		<h2 class="heading2" title="5. Static Methods -&gt; 5.3. Uize.Comm.processArrayAsync"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_3" title="5. Static Methods -&gt; 5.3. Uize.Comm.processArrayAsync">3</a>. </span>Uize.Comm.processArrayAsync</h2>
+		<div class="contents2">
+			<p>A method that facilitates asynchronous iteration through and processing of the elements of an array.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">Uize.Comm.processArrayAsync (elementsARRAY,processElementAsyncFUNC,completionFUNC);
+</pre>
+			
+			<p>While asynchronous, the array specified by the <code>elementsARRAY</code> parameter is guaranteed to be iterated through sequentially. This method is useful for iterating through the elements of an array and using an asynchronous communication protocol, such as Ajax, in the processing of the elements.</p>
+			
+			<p>The function you specify in the <code>processElementAsyncFUNC</code> parameter should be of the form...</p>
+			
+			
+<pre class="sample-code">myAsyncElementProcessor (elementToProcessANYTYPE,processNextElementFUNC,elementNoINT);
+</pre>
+			
+			<p>The value of the <code>elementToProcessANYTYPE</code> parameter will be the value of each successive element in the array that is being iterated through. In order to inform the <code><a href="#5_3">Uize.Comm.processArrayAsync</a></code> method that the asynchronous processing of the current element has been completed so that it can continue on with the iteration, the function specified by the <code>processNextElementFUNC</code> parameter should be called. This function does not need to be called with any parameters. However, if you call it with the value <code>false</code>, then the iteration will be terminated and any function that you specified for the <code>completionFUNC</code> parameter will be called.</p>
+			
+			<p>Your processor function can optionally declare an <code>elementNoINT</code> parameter, to receive the array index of the current element being processed. This might be useful if you need to index into other corresponding support data structures, or use the number as part of the construction of some string or such. Naturally, your own element processor function can name these three parameters whatever it likes.</p>
+			
+			<p>If you specified a value for the optional <code>completionFUNC</code> parameter, then your completion function will be called once the iteration is completed, with one parameter, being the length of the array that was processed.</p>
+			
+			<p><span class="allCaps">TYPICAL USAGE SKELETON</span></p>
+			
+			
+<pre class="sample-code">Uize.Comm.processArrayAsync (
+  _elementsToIterateThrough,
+  function (_currentElement,_continueIterating) {
+    _doSomethingAsynchronous (
+      function () { // the callback for _doSomethingAsynchronous
+        // further processing of element
+        _continueIterating ();
+      }
+    );
+  },
+  function () {
+    // done iterating, wrap it all up
+  }
+);
+</pre>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">var imagesInfoHtml = '';
+Uize.Comm.processArrayAsync (
+  myPhotoStream.getImageIds (),
+  function (_imageId,_addInfoHtmlForNextImage) {
+    myAjaxCommObject.request ({
+      url:'/svc/getimageinfo?id=' + _imageId,
+      returnType:'json',
+      requestMethod:'GET',
+      callback:function (resonseJson) {
+        imagesInfoHtml +=
+          'title: ' + resonseJson.title + '&lt;br/&gt;' +
+          'description: ' + resonseJson.description + '&lt;br/&gt;' +
+          'dimensions: ' + resonseJson.width + 'x' + resonseJson.height + '&lt;br/&gt;' +
+          '&lt;hr/&gt;'
+        ;
+        _addInfoHtmlForNextImage ();
+      }
+    });
+  },
+  function () {
+    Uize.Node.setInnerHtml ('imagesInfo',imagesInfoHtml);
+  }
+);
+</pre>
+			
+			<p>In this fictitious example, <code><a href="#5_3">Uize.Comm.processArrayAsync</a></code> is being used to iterate through an array of image IDs for a photo stream.</p>
+			
+			<p>On each iteration, the processor function performs an asynchronous request, using an instance of <code><a href="../reference/Uize.Comm.Ajax.html">Uize.Comm.Ajax</a></code>, to the service "/svc/getimageinfo" in order to get info for each image. When the Ajax request returns with the image info, the callback registered for the request uses the image info to build image info HTML for the entire photo stream. After adding to the HTML string, the continuation function is called in order to continue the iteration. Once all the image IDs have been processed, the completion function is called, which spits out the constructed info HTML into the page.</p>
+			
+			<p>One thing that this example demonstrates is that the parameters that your element processor function receives can be named to be semantically suitable to your application.</p>
+			
+			<p><span class="allCaps">VARIATION 1</span></p>
+			
+			
+<pre class="sample-code">Uize.Comm.processArrayAsync (
+  elementsARRAY,processElementAsyncFUNC,completionFUNC,directionINT
+);
+</pre>
+			
+			<p>The optional <code>directionINT</code> parameter lets you specify the increment (and, therefore, direction) of the asynchronous loop. By default, this method loops forward through the array - from the first element to the last element. Specifying a value of <code>-1</code> for the <code>directionINT</code> parameter will cause the iteration to start from the last element of the array and loop towards the first element - one element at a time. Specifying a value of <code>-2</code> will also result in a reverse loop, but will iterate backwards two elements at a time.</p>
+			
+			<p><span class="allCaps">VARIATION 2</span></p>
+			
+			
+<pre class="sample-code">Uize.Comm.processArrayAsync (elementsARRAY,processElementAsyncFUNC);
+</pre>
+			
+			<p>When the optional <code>completionFUNC</code> parameter is not specified, then the caller of this method will not be notified when the process has been completed.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
+			</table>
+		</div>
+		
+		<a name="5_4"></a>
+		<h2 class="heading2" title="5. Static Methods -&gt; 5.4. Uize.Comm.registerProperties"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_4" title="5. Static Methods -&gt; 5.4. Uize.Comm.registerProperties">4</a>. </span>Uize.Comm.registerProperties</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
+			</table>
+		</div>
+		
+		<a name="5_5"></a>
+		<h2 class="heading2" title="5. Static Methods -&gt; 5.5. Uize.Comm.set"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_5" title="5. Static Methods -&gt; 5.5. Uize.Comm.set">5</a>. </span>Uize.Comm.set</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
+			</table>
+		</div>
+		
+		<a name="5_6"></a>
+		<h2 class="heading2" title="5. Static Methods -&gt; 5.6. Uize.Comm.subclass"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_6" title="5. Static Methods -&gt; 5.6. Uize.Comm.subclass">6</a>. </span>Uize.Comm.subclass</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
+			</table>
+		</div>
+		
+		<a name="5_7"></a>
+		<h2 class="heading2" title="5. Static Methods -&gt; 5.7. Uize.Comm.toggle"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_7" title="5. Static Methods -&gt; 5.7. Uize.Comm.toggle">7</a>. </span>Uize.Comm.toggle</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
+			</table>
+		</div>
+		
+		<a name="5_8"></a>
+		<h2 class="heading2" title="5. Static Methods -&gt; 5.8. Uize.Comm.unwire"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_8" title="5. Static Methods -&gt; 5.8. Uize.Comm.unwire">8</a>. </span>Uize.Comm.unwire</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
+			</table>
+		</div>
+		
+		<a name="5_9"></a>
+		<h2 class="heading2" title="5. Static Methods -&gt; 5.9. Uize.Comm.wire"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_9" title="5. Static Methods -&gt; 5.9. Uize.Comm.wire">9</a>. </span>Uize.Comm.wire</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
+			</table>
+		</div>
+	</div>
+	
+	<a name="6"></a>
+	<h1 class="heading1" title="6. Static Properties"><span class="headingNumber"><a href="#6" title="6. Static Properties">6</a>. </span>Static Properties</h1>
+	<div class="contents1">
+		<a name="6_1"></a>
+		<h2 class="heading2" title="6. Static Properties -&gt; 6.1. Uize.Comm.moduleName"><span class="headingNumber"><a href="#6" title="6. Static Properties">6</a>.<a href="#6_1" title="6. Static Properties -&gt; 6.1. Uize.Comm.moduleName">1</a>. </span>Uize.Comm.moduleName</h2>
+		<div class="contents2">
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an override of an inherited feature (implementation is in this module, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
+			</table>
+		</div>
+		
+		<a name="6_2"></a>
+		<h2 class="heading2" title="6. Static Properties -&gt; 6.2. Uize.Comm.nonInheritableStatics"><span class="headingNumber"><a href="#6" title="6. Static Properties">6</a>.<a href="#6_2" title="6. Static Properties -&gt; 6.2. Uize.Comm.nonInheritableStatics">2</a>. </span>Uize.Comm.nonInheritableStatics</h2>
+		<div class="contents2">
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an override of an inherited feature (implementation is in this module, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is <b>not</b> inherited by subclasses</td></tr>
+			</table>
+		</div>
+	</div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

@@ -1,0 +1,13 @@
+The new [[../examples/collection-item-coupled-zooming.html][Coupled Zooming Collection Items]] example demonstrates how the =Uize.Coupler= class can be used to easily couple together two instances of the =Uize.Widget.CollectionItem.Zooming= widget class.
+
+In this example, the =Uize.Widget.CollectionItem.Zooming= widget class is being used to add an animated zoom in effect to a pair of thumbnails. The two instances are coupled together using an instance of the =Uize.Coupler= class, so that the values of the =alignX=, =alignY=, and =inUse= set-get properties are synchronized between the two. This means that if you rest the mouse over one of the thumbnails and the zoom in behavior is activated for that instance, it will also be activated for the other instance. Similarly, when you move the mouse around on one of the instances, the other instance follows the lead of the one you're mousing over. This coupling facility is made possible as a result of the state oriented design of the UIZE JavaScript Framework. Using the =Uize.Coupler= class is easy: all you have to do is create an instance of it, specifying which properties of which instances you would like to be coupled together. This example demonstrates coupling two instances, but the =Uize.Coupler= class supports coupling an arbitrary number of instances.
+
+[[../examples/collection-item-coupled-zooming.html][CHECK IT OUT]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-07-02 - NEW EXAMPLE: Coupled Zooming Collection Items
+....................................................................................

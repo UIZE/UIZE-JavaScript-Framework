@@ -1,0 +1,11 @@
+The =Uize= base class has been improved with the addition of the new =Uize.moduleUrlResolver= static property.
+
+The property lets you specify a custom module URL resolver for resolving module names to the URL paths from where the module can be loaded. This facility provides you with the flexibility to have different types of modules load from different locations. A classic example would be loading modules of the UIZE JavaScript Framework from a shared CDN (Content Delivery Network) location, while loading modules that are in your own Web site's namespace from the same machine that serves the pages.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-09-24 - New Module URL Resolver Facility
+....................................................................................

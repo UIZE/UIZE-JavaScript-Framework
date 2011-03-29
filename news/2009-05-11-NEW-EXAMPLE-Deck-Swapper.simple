@@ -1,0 +1,13 @@
+The new [[../examples/swap-deck.html][Deck Swapper]] example demonstrates use of the =Uize.Widget.Swap.Deck= widget class.
+
+In the example, an instance of the =Uize.Widget.Swap.Deck= class is wired up to a deck of divs in the document in order to provide a transition effect when swapping from one item in the deck to another. Making the widget switch to another item with an accompanying transition effect is as simple as setting the widget's =itemNo= set-get property.
+
+[[../examples/swap-deck.html][CHECK IT OUT]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-05-11 - NEW EXAMPLE: Deck Swapper
+....................................................................................

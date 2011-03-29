@@ -1,0 +1,254 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Draggable Image Port - HTML Source Code | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework HTML example source code"/>
+	<meta name="description" content="This is the source code for the Draggable Image Port example"/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../../css/page.css"/>
+	<link rel="stylesheet" href="../../css/page.source.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../../index.html" title="UIZE JavaScript Framework home"></a>
+	SOURCE CODE: Draggable Image Port
+	<div id="page-actions" class="pageActions">
+		<a href="../image-port-drag.html" class="buttonLink">VIEW EXAMPLE</a>
+	</div>
+</h1>
+
+<pre>
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+&lt;head&gt;
+  &lt;title&gt;Draggable Image Port | JavaScript Examples | UIZE JavaScript Framework&lt;/title&gt;
+  &lt;meta name="keywords" content="touch ipad Uize.Widget.ImagePort.Draggable"/&gt;
+  &lt;meta name="description" content="See how a draggable image port is wired up to a set of sliders. Use the image port and the sliders update. Use the sliders and the image port updates."/&gt;
+  &lt;link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/&gt;
+  &lt;link rel="stylesheet" href="../css/page.css"/&gt;
+  &lt;link rel="stylesheet" href="../css/page.example.css"/&gt;
+  &lt;style type="text/css"&gt;
+    .label {
+      font-size:10px;
+    }
+    select {
+      border:1px solid #fff;
+      font-size:12px;
+      width:40px;
+      height:20px;
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+&lt;script type="text/javascript" src="../js/Uize.js"&gt;&lt;/script&gt;
+
+&lt;h1 class="document-title"&gt;
+  &lt;a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"&gt;&lt;/a&gt;
+  &lt;a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow"&gt;JAVASCRIPT EXAMPLES&lt;/a&gt;
+  Draggable Image Port
+  &lt;div id="page-actions" class="pageActions"&gt;
+    &lt;a href="source-code/image-port-drag.html" class="buttonLink"&gt;SOURCE&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/h1&gt;
+
+&lt;div class="main"&gt;
+  &lt;!-- explanation copy --&gt;
+
+  &lt;div class="explanation"&gt;
+    &lt;p&gt;In this example, an instance of &lt;a href="../reference/Uize.Widget.ImagePort.Draggable.html"&gt;&lt;code&gt;Uize.Widget.ImagePort.Draggable&lt;/code&gt;&lt;/a&gt; is wired up to let you explore an image inside an image port. Click-and-drag on the image to pan it from side to side. Ctrl-click-and-drag up and down to zoom in and out, respectively. Additionally, sliders (instances of the &lt;a href="../reference/Uize.Widget.Bar.Slider.html"&gt;&lt;code&gt;Uize.Widget.Bar.Slider&lt;/code&gt;&lt;/a&gt; class) are wired up to control the &lt;code&gt;alignX&lt;/code&gt; and &lt;code&gt;alignY&lt;/code&gt; set-get properties of the widget, and a slider and two select boxes are wired up to control the &lt;code&gt;sizingValue&lt;/code&gt;, &lt;code&gt;sizingUpperBound&lt;/code&gt;, and &lt;code&gt;sizingLowerBound&lt;/code&gt; set-get properties. Event handlers wire the widgets bidirectionally, so dragging inside the image port updates the sliders, and dragging the sliders updates the image port.&lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;form&gt;
+    &lt;table border="0" cellspacing="0" cellpadding="0" style="margin:auto;"&gt;
+      &lt;tr&gt;
+        &lt;td&gt;&lt;/td&gt;
+        &lt;td&gt;&lt;/td&gt;
+        &lt;td width="5"&gt;&lt;/td&gt;
+        &lt;td class="label" style="text-align:center;"&gt;alignY&lt;/td&gt;
+        &lt;td width="15"&gt;&lt;/td&gt;
+        &lt;td&gt;
+          &lt;select id="page-sizingUpperBound"&gt;
+            &lt;option value="fill" selected&gt;fill&lt;/option&gt;
+            &lt;option value="fit"&gt;fit&lt;/option&gt;
+          &lt;/select&gt;
+        &lt;/td&gt;
+        &lt;td class="label" style="padding-left:5px;"&gt;sizingUpperBound&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td&gt;&lt;/td&gt;
+        &lt;td&gt;
+          &lt;div id="page_imagePort" style="position:relative; width:300px; height:300px; overflow:hidden; background:#000; border:1px solid #555;"&gt;
+            &lt;img id="page_imagePort-image" src="http://upload.wikimedia.org/wikipedia/commons/d/db/Nasa_blue_marble.jpg" style="width:3000px; height:3075px; position:absolute;" alt=""/&gt;
+          &lt;/div&gt;
+        &lt;/td&gt;
+        &lt;td width="5"&gt;&lt;/td&gt;
+        &lt;td id="page_alignYSlider"&gt;&lt;img src="../images/blank.gif" style="width:40px; height:300px;" alt=""/&gt;&lt;/td&gt;
+        &lt;td width="5"&gt;&lt;/td&gt;
+        &lt;td&gt;
+          &lt;div id="page_sizingValueSlider" style="width:40px; height:300px;"&gt;&lt;/div&gt;
+        &lt;/td&gt;
+        &lt;td class="label" valign="center" style="padding-left:5px;"&gt;sizingValue (0 to 3)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td colspan="7" height="5"&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td class="label" style="padding-right:5px;"&gt;alignX&lt;/td&gt;
+        &lt;td id="page_alignXSlider"&gt;&lt;img src="../images/blank.gif" style="width:300px; height:40px;" alt=""/&gt;&lt;/td&gt;
+        &lt;td&gt;&lt;/td&gt;
+        &lt;td&gt;&lt;/td&gt;
+        &lt;td&gt;&lt;/td&gt;
+        &lt;td&gt;
+          &lt;select id="page-sizingLowerBound"&gt;
+            &lt;option value="fit"&gt;fit&lt;/option&gt;
+            &lt;option value="0" selected&gt;0&lt;/option&gt;
+          &lt;/select&gt;
+        &lt;/td&gt;
+        &lt;td class="label" style="padding-left:5px;"&gt;sizingLowerBound&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/table&gt;
+  &lt;/form&gt;
+&lt;/div&gt;
+
+&lt;!-- JavaScript code to activate the image port functionality --&gt;
+
+&lt;script type="text/javascript"&gt;
+
+Uize.module ({
+  required:[
+    'UizeDotCom.Page.Example.library',
+    'UizeDotCom.Page.Example',
+    'Uize.Widget.ImagePort.Draggable',
+    'Uize.Widget.Bar.Slider.xSkin'
+  ],
+  builder:function () {
+    /*** create the example page widget ***/
+      var page = window.page = new UizeDotCom.Page.Example;
+
+    /*** add the image port child widget ***/
+      var imagePort = page.addChild (
+        'imagePort',
+        Uize.Widget.ImagePort.Draggable,
+        {
+          sizingLowerBound:'0',
+          sizingUpperBound:'fill',
+          sizingValue:.5,
+          alignX:.5,
+          alignY:.5
+        }
+      );
+
+    /*** code to update the image port instance based on user input values ***/
+      function updateImagePortSettings () {
+        imagePort.set ({
+          alignX:+alignXSlider,
+          alignY:+alignYSlider,
+          sizingUpperBound:page.getNodeValue ('sizingUpperBound'),
+          sizingLowerBound:page.getNodeValue ('sizingLowerBound'),
+          sizingValue:+sizingValueSlider
+        });
+      }
+
+    /*** common values shared by alignX, alignY, and sizingValue sliders ***/
+      Uize.Widget.Bar.Slider.set ({
+        value:.5,
+        fullTintColor:'#9aa',
+        fullTintLevel:50,
+        emptyTintColor:'#9aa',
+        emptyTintLevel:50,
+        borderThickness:3,
+        borderTintColor:'#455',
+        borderTintLevel:50,
+        increments:0,
+        knobSize:24,
+        built:false
+      });
+
+    /*** add the alignX slider child widget ***/
+      var alignXSlider = page.addChild (
+        'alignXSlider',
+        Uize.Widget.Bar.Slider,
+        {
+          minValue:0,
+          maxValue:1,
+          orientation:'horizontal'
+        }
+      );
+      alignXSlider.wire ('Changed.value',function () {imagePort.set ({alignX:+alignXSlider})});
+
+    /*** add the alignY slider child widget ***/
+      var alignYSlider = page.addChild (
+        'alignYSlider',
+        Uize.Widget.Bar.Slider,
+        {
+          minValue:1,
+          maxValue:0,
+          orientation:'vertical'
+        }
+      );
+      alignYSlider.wire ('Changed.value',function () {imagePort.set ({alignY:+alignYSlider})});
+
+    /*** add the sizingValue slider child widget ***/
+      var sizingValueSlider = page.addChild (
+        'sizingValueSlider',
+        Uize.Widget.Bar.Slider,
+        {
+          fullTintColor:'#fff',
+          fullTintLevel:70,
+          minValue:0,
+          maxValue:8,
+          value:1,
+          orientation:'vertical'
+        }
+      );
+      sizingValueSlider.wire ('Changed.value',function () {imagePort.set ({sizingValue:+sizingValueSlider})});
+
+    /*** update settings UI whenever position changes ***/
+      imagePort.wire (
+        'Position Changed',
+        function () {
+          alignXSlider.set ({value:imagePort.get ('alignX')});
+          alignYSlider.set ({value:imagePort.get ('alignY')});
+          sizingValueSlider.set ({value:imagePort.get ('sizingValue')});
+        }
+      );
+
+    /*** initialize the ImagePort instance ***/
+      updateImagePortSettings ();
+
+    /*** wire up the page widget ***/
+      page.wireUi ();
+
+    /*** watch for changes in sizing bound values ***/
+      page.wireNode ('sizingUpperBound','change',updateImagePortSettings);
+      page.wireNode ('sizingLowerBound','change',updateImagePortSettings);
+  }
+});
+
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+
+</pre>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.library',
+		'UizeDotCom.Page'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page).wireUi ()}
+});
+
+</script>
+
+</body></html>

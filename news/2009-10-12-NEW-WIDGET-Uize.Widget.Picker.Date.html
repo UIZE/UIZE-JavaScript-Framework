@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2009-10-12 - NEW WIDGET: Uize.Widget.Picker.Date | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="The new Uize.Widget.Picker.Date class implements a date picker widget, using a deferred loaded date picker modal dialog to let the user select a date."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2009.html" class="breadcrumb breadcrumbWithArrow">2009 NEWS</a>
+	2009-10-12 - NEW WIDGET: Uize.Widget.Picker.Date
+
+</h1>
+
+<div class="main">
+<div class="contents0">
+	<p>The new <code><a href="../reference/Uize.Widget.Picker.Date.html">Uize.Widget.Picker.Date</a></code> class implements a date picker widget, using a deferred loaded date picker modal dialog to let the user select a date.</p>
+	
+	<p>The date picker widget supports the following key features...</p>
+	
+	<table class="list">
+	<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>It lets you constrain the date range within which a user can select a date by specifying values for the <code>minValue</code> and <code>maxValue</code> set-get properties.</td></tr>
+	<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>The way that the currently selected date is displayed in an instance's <code>input</code> implied node can be configured using the <code>displayFormat</code> set-get property.</td></tr>
+	<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>The dialog that is launched to let the user select a date is deferred loaded, so that it does not add to the initial load time of the page.</td></tr>
+	<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Multiple instances of the <code><a href="../reference/Uize.Widget.Picker.Date.html">Uize.Widget.Picker.Date</a></code> class share the same date picker dialog instance.</td></tr>
+	<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>When the date picker dialog is launched for a specific <code><a href="../reference/Uize.Widget.Picker.Date.html">Uize.Widget.Picker.Date</a></code> instance, the dialog is "moored" to the root node of the instance's <code>selector</code> button.</td></tr>
+	<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>You can specify a custom date picker dialog class that should be used for selecting a date.</td></tr>
+	</table>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

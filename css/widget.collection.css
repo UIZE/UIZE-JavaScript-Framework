@@ -1,0 +1,18 @@
+.collectionToolbar, .collectionView {
+	width:685px;
+	margin:auto;
+}
+.collectionToolbar {
+	height:25px;
+}
+.collectionView {
+	padding:4px;
+}
+.collectionInsertionMarker {
+	display:none;
+	position:absolute;
+	width:3px;
+	height:3px;
+	background:#ffa200;
+}
+

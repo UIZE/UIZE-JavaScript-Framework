@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2010-01-28 - NEW MODULE: Uize.String.Builder | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="The new Uize.String.Builder module implements an object to facilitate the building of very large strings, in a way that minimizes performance costs."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2010.html" class="breadcrumb breadcrumbWithArrow">2010 NEWS</a>
+	2010-01-28 - NEW MODULE: Uize.String.Builder
+
+</h1>
+
+<div class="main">
+<div class="contents0">
+	<p>The new <code><a href="../reference/Uize.String.Builder.html">Uize.String.Builder</a></code> module implements an object to facilitate the building of very large strings, in a way that minimizes performance costs.</p>
+	
+	<p>Building strings using a traditional incremental concatenation approach using the <code>+&#61;</code> (incrementing assignment) operator can be slow in certain JavaScript interpreters when <b>very large</b> strings are being built. One way around this performance issue is to use an array to accumulate all the segments of a large string, and then concatenate all the elements of that array at the end of the string building process using the <code><a href="../javascript-reference/Array.html">Array</a></code> object's <code>join</code> instance method. The <code><a href="../reference/Uize.String.Builder.html">Uize.String.Builder</a></code> object wraps this pattern up neatly into an object that also provides the benefit of <code><a href="../javascript-reference/String.html">String</a></code> object parity that wouldn't otherwise be available in a manual array building process. In doing so, the <code><a href="../reference/Uize.String.Builder.html">Uize.String.Builder</a></code> object can provide a substantial performance benefit in certain applications. This new module is comprehensively documented and unit tested.</p>
+	
+	<p><a href="../reference/Uize.String.Builder.html">LEARN MORE</a></p>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

@@ -1,0 +1,11 @@
+The =Uize.indexIn= and =Uize.isIn= static methods of the =Uize= base class now support loose (ie. non-strict) equality matching.
+
+Loose equality matching is achieved by specifying the value =false= for the optional new =strictEqualityBOOL= parameter. This change is backwards compatible, as the default value for the new =strictEqualityBOOL= parameter is =true=, which corresponds to previous behavior.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-01-15 - IMPROVED METHODS: Uize.indexIn and Uize.isIn
+....................................................................................

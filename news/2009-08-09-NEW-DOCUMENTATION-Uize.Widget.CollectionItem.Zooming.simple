@@ -1,0 +1,13 @@
+Reference documentation has been added for the =Uize.Widget.CollectionItem.Zooming= widget class.
+
+The =Uize.Widget.CollectionItem.Zooming= module defines the =Uize.Widget.CollectionItem.Zooming= widget class, a subclass of =Uize.Widget.CollectionItem= that adds support for a configurable zoom in behavior when mousing over an instance's preview image.
+
+[[Uize.Widget.CollectionItem.Zooming][LEARN MORE]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-08-09 - NEW DOCUMENTATION: Uize.Widget.CollectionItem.Zooming
+....................................................................................

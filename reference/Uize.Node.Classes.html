@@ -1,0 +1,1006 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Uize.Node.Classes | Documentation | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework Documentation Uize.Node.Classes module reference documentation"/>
+	<meta name="description" content="The Uize.Node.Classes module facilitates manipulation of the value of the className property of DOM nodes, with support for adding classes, removing classes, toggling classes, and more."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../javascript-modules-index.html" class="breadcrumb breadcrumbWithArrow">MODULES</a>
+	<a href="Uize.html" title="View reference for Uize" class="breadcrumb">Uize</a>.<a href="Uize.Node.html" title="View reference for Uize.Node" class="breadcrumb">Node</a>.<a href="Uize.Node.Classes.html" title="View reference for Uize.Node.Classes" class="breadcrumb">Classes</a>
+	<div class="pageActions">
+		<a id="page-search" href="javascript://" class="buttonLink" title="Search for references to this module...">SEARCH</a><a id="page-examples" href="javascript://" class="buttonLink" title="View examples for this module...">EXAMPLES</a><a href="source-code/Uize.Node.Classes.html" class="buttonLink" title="View the JavaScript source code for this module...">SOURCE</a><a id="page-test" href="javascript://" class="buttonLink" title="Test this module...">TEST</a>
+	</div>
+
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="The Uize.Node.Classes module facilitates manipulation of the value of the className property of DOM nodes, with support for adding classes, removing classes, toggling classes, and more.">1. Introduction</a>
+				<ul>
+					<li><a href="#1_1" title="The Uize.Node.Classes module provides a number of key benefits.">1.1. Key Benefits</a>
+						<ul>
+							<li><a href="#1_1_1" title="It is certainly possible to manipulate classes using regular expressions, but the methods of the Uize.Node.Classes module make it easier to do and make one&apos;s code easier to read.">1.1.1. More Elegant, Easier to Read</a>
+								<ul>
+									<li><a href="#1_1_1_1" title="To illustrate the ease of use of the Uize.Node.Classes module, consider the following example of adding a CSS class to a node&apos;s className property...">1.1.1.1. An Example of Adding a Class</a></li>
+									<li><a href="#1_1_1_2" title="In another illustration of the ease of use of the Uize.Node.Classes module, consider the following example of toggling a CSS class in a node&apos;s className property...">1.1.1.2. An Example of Toggling a Class</a></li>
+								</ul>
+							</li>
+							<li><a href="#1_1_2" title="In addition to ease of use, the Uize.Node.Classes module introduces a powerful, higher level construct called a state.">1.1.2. Powerful State Paradigm</a></li>
+						</ul>
+					</li>
+					<li><a href="#1_2" title="A CSS class can be added to a node&apos;s className property using the Uize.Node.Classes.addClass static method.">1.2. Adding a Class</a></li>
+					<li><a href="#1_3" title="A CSS class can be removed from a node&apos;s className property using the Uize.Node.Classes.removeClass static method.">1.3. Removing a Class</a></li>
+					<li><a href="#1_4" title="A CSS class can be toggled for a node&apos;s className property using the Uize.Node.Classes.toggleClass static method.">1.4. Toggling a Class</a></li>
+					<li><a href="#1_5" title="The presence of a CSS class in a node&apos;s className property can be tested for by using the Uize.Node.Classes.hasClass static method.">1.5. Testing For a Class</a></li>
+					<li><a href="#1_6" title="Beyond simply adding, removing, and toggling CSS classes in the className property of nodes, the Uize.Node.Classes module introduces a powerful, higher level construct called a state.">1.6. State Related Methods</a>
+						<ul>
+							<li><a href="#1_6_1" title="Typically, when you&apos;re adding, removing, or toggling CSS classes for a DOM node, what you&apos;re really trying to do is have the node reflect some state in your application.">1.6.1. Presence or Absence State</a></li>
+							<li><a href="#1_6_2" title="The State Related Methods become far more compelling and powerful when you consider their support for multiple state classes and what that means for managing CSS classes for DOM nodes.">1.6.2. Multiple State Classes</a>
+								<ul>
+									<li><a href="#1_6_2_1" title="The State Related Methods become even more compelling when you consider their support for more than two state classes.">1.6.2.1. More Than Two State Classes</a></li>
+								</ul>
+							</li>
+							<li><a href="#1_6_3" title="State can be reflected with CSS classes in the className property of one or more DOM nodes using the Uize.Node.Classes.setState static method.">1.6.3. Setting State</a></li>
+							<li><a href="#1_6_4" title="As with Setting State for CSS classes using the Uize.Node.Classes.setState static method, the current value for a state can be determined from the className property of a node using the Uize.Node.Classes.getState static method.">1.6.4. Getting State</a></li>
+							<li><a href="#1_6_5" title="State that is reflected with CSS classes in the className property of one or more DOM nodes can be toggled (or cycled, for more than two state classes) using the Uize.Node.Classes.toggleState static method.">1.6.5. Toggling State</a>
+								<ul>
+									<li><a href="#1_6_5_1" title="When a state is represented by more than two state classes, then the Uize.Node.Classes.toggleState method will cycle through the state classes.">1.6.5.1. Toggling State With More Than Two State Classes</a></li>
+								</ul>
+							</li>
+							<li><a href="#1_6_6" title="State classes associated with a state can be removed from the className property of one or more DOM nodes using the Uize.Node.Classes.removeState static method.">1.6.6. Removing State</a></li>
+						</ul>
+					</li>
+					<li><a href="#1_7" title="When working with CSS classes using the methods of the Uize.Node.Classes module, there are some important considerations to keep in mind.">1.7. Important Considerations</a>
+						<ul>
+							<li><a href="#1_7_1" title="When matching CSS classes against the value of a node&apos;s className property, the methods of the Uize.Node.Classes module perform case sensitive matching.">1.7.1. Case Sensitivity</a></li>
+							<li><a href="#1_7_2" title="When adding, replacing, or removing classes from the className property of a node, the methods of the Uize.Node.Classes module observe certain principles regarding whitespace.">1.7.2. Whitespace Handling</a>
+								<ul>
+									<li><a href="#1_7_2_1" title="When a class needs to be added by a Uize.Node.Classes method, it will be appended to the className property, with a single space separating it from the other classes (if present).">1.7.2.1. Minimal Whitespace Added When Adding Classes</a></li>
+									<li><a href="#1_7_2_2" title="When replacing classes in the className property of a node, the methods of the Uize.Node.Classes module will respect existing whitespace separating classes.">1.7.2.2. Whitespace Respected When Replacing Classes</a></li>
+									<li><a href="#1_7_2_3" title="In the case where a class is being removed by one of the Uize.Node.Classes methods and the class is surrounded by other classes, the trailing whitespace that separates the class being removed from the next class will be retained, while the whitespace that separates it from the previous class will be lost.">1.7.2.3. No Whitespace Bloat When Removing Classes</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li><a href="#1_8" title="There are no dedicated showcase example pages for the Uize.Node.Classes module.">1.8. Examples</a></li>
+					<li><a href="#1_9" title="The Uize.Node.Classes module defines the Uize.Node.Classes package under the Uize.Node namespace.">1.9. Implementation Info</a>
+						<ul>
+							<li><a href="#1_9_1" title="The features listed in this section have been introduced in this module.">1.9.1. Features Introduced in This Module</a></li>
+							<li><a href="#1_9_2" title="No features have been overridden in this module.">1.9.2. Features Overridden in This Module</a></li>
+							<li><a href="#1_9_3" title="This module has no inherited features.">1.9.3. Features Inherited From Other Modules</a></li>
+							<li><a href="#1_9_4" title="There are no modules directly under this namespace.">1.9.4. Modules Directly Under This Namespace</a></li>
+							<li><a href="#1_9_5" title="The Uize.Node.Classes module is unit tested by the Uize.Test.Uize.Node.Classes test module.">1.9.5. Unit Tests</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li><a href="#2">2. Static Methods</a>
+				<ul>
+					<li><a href="#2_1" title="Adds the specified CSS class to the className property of the specified node(s), provided that the class name is not already present.">2.1. Uize.Node.Classes.addClass</a></li>
+					<li><a href="#2_2" title="Returns a boolean or integer (a value of the type stateBOOLorINT), indicating the current state for the specified state classes.">2.2. Uize.Node.Classes.getState</a></li>
+					<li><a href="#2_3" title="Returns a boolean, indicating whether or not the specified node&apos;s className property contains the specified CSS class.">2.3. Uize.Node.Classes.hasClass</a></li>
+					<li><a href="#2_4" title="Removes the specified CSS class from the className property of the specified node(s), provided that the class is present.">2.4. Uize.Node.Classes.removeClass</a></li>
+					<li><a href="#2_5" title="Updates the className property of the specified node(s), to no longer contain one of the specified state classes.">2.5. Uize.Node.Classes.removeState</a></li>
+					<li><a href="#2_6" title="Updates the className property of the specified node(s), to contain the one CSS class out of the specified state classes that corresponds to the specified state.">2.6. Uize.Node.Classes.setState</a></li>
+					<li><a href="#2_7" title="Toggles the presence of the specified CSS class in the className property of the specified node(s).">2.7. Uize.Node.Classes.toggleClass</a></li>
+					<li><a href="#2_8" title="Updates the className property of the specified node(s), to contain the one CSS class out of the specified state classes that corresponds to the state that is obtained from the specified node(s) and then advanced by one.">2.8. Uize.Node.Classes.toggleState</a></li>
+				</ul>
+			</li>
+			<li><a href="#3" title="For the sake of not redundantly describing the value types for certain method parameters and return values repeatedly, some common value types are described here.">3. Value Types</a>
+				<ul>
+					<li><a href="#3_1" title="A string, specifying the name of a single CSS class.">3.1. classSTR</a></li>
+					<li><a href="#3_2" title="A boolean or integer, specifying a state that maps to one of the CSS classes specified in a stateClassesSTRorARRAY value.">3.2. stateBOOLorINT</a></li>
+					<li><a href="#3_3" title="A comma-separated string or an array of strings, specifying a list of CSS classes that are to be mapped to a stateBOOLorINT type value.">3.3. stateClassesSTRorARRAY</a></li>
+				</ul>
+			</li>
+			<li><a href="#4">4. Static Properties</a>
+				<ul>
+					<li><a href="#4_1" title="IMPLEMENTATION INFO">4.1. Uize.Node.Classes.moduleName</a></li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<a name="1"></a>
+	<h1 class="heading1" title="1. Introduction"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>. </span>Introduction</h1>
+	<div class="contents1">
+		<p>The <code>Uize.Node.Classes</code> module facilitates manipulation of the value of the <code>className</code> property of DOM nodes, with support for adding classes, removing classes, toggling classes, and more.</p>
+		
+		<p><b>DEVELOPERS:</b> <a href="http://www.tomkidding.com" target="_blank" class="externalSiteLink">Chris van Rensburg</a></p>
+		
+		<a name="1_1"></a>
+		<h2 class="heading2" title="1. Introduction -&gt; 1.1. Key Benefits"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. Key Benefits">1</a>. </span>Key Benefits</h2>
+		<div class="contents2">
+			<p>The <code>Uize.Node.Classes</code> module provides a number of key benefits.</p>
+			
+			<a name="1_1_1"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.1. Key Benefits -&gt; 1.1.1. More Elegant, Easier to Read"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. Key Benefits">1</a>.<a href="#1_1_1" title="1. Introduction -&gt; 1.1. Key Benefits -&gt; 1.1.1. More Elegant, Easier to Read">1</a>. </span>More Elegant, Easier to Read</h3>
+			<div class="contents3">
+				<p>It is certainly possible to manipulate classes using regular expressions, but the methods of the <code>Uize.Node.Classes</code> module make it easier to do and make one's code easier to read.</p>
+				
+				<a name="1_1_1_1"></a>
+				<h4 class="heading4" title="1. Introduction -&gt; 1.1. Key Benefits -&gt; 1.1.1. More Elegant, Easier to Read -&gt; 1.1.1.1. An Example of Adding a Class"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. Key Benefits">1</a>.<a href="#1_1_1" title="1. Introduction -&gt; 1.1. Key Benefits -&gt; 1.1.1. More Elegant, Easier to Read">1</a>.<a href="#1_1_1_1" title="1. Introduction -&gt; 1.1. Key Benefits -&gt; 1.1.1. More Elegant, Easier to Read -&gt; 1.1.1.1. An Example of Adding a Class">1</a>. </span>An Example of Adding a Class</h4>
+				<div class="contents4">
+					<p>To illustrate the ease of use of the <code>Uize.Node.Classes</code> module, consider the following example of adding a CSS class to a node's <code>className</code> property...</p>
+					
+					<p><span class="allCaps">BEFORE</span></p>
+					
+					
+<pre class="sample-code">var node = Uize.Node.getById ('recommendationsPod');
+if (!/\bpodPopulated\b/.test (node.className)) {
+  node.className += ' podPopulated';
+}
+</pre>
+					
+					<p><span class="allCaps">AFTER</span></p>
+					
+					
+<pre class="sample-code">Uize.Node.Classes.addClass ('recommendationsPod','podPopulated');
+</pre>
+					
+					<p>As you can see, the code using the <code><a href="#2_1">Uize.Node.Classes.addClass</a></code> is much easier to read and understand.</p>
+				</div>
+				
+				<a name="1_1_1_2"></a>
+				<h4 class="heading4" title="1. Introduction -&gt; 1.1. Key Benefits -&gt; 1.1.1. More Elegant, Easier to Read -&gt; 1.1.1.2. An Example of Toggling a Class"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. Key Benefits">1</a>.<a href="#1_1_1" title="1. Introduction -&gt; 1.1. Key Benefits -&gt; 1.1.1. More Elegant, Easier to Read">1</a>.<a href="#1_1_1_2" title="1. Introduction -&gt; 1.1. Key Benefits -&gt; 1.1.1. More Elegant, Easier to Read -&gt; 1.1.1.2. An Example of Toggling a Class">2</a>. </span>An Example of Toggling a Class</h4>
+				<div class="contents4">
+					<p>In another illustration of the ease of use of the <code>Uize.Node.Classes</code> module, consider the following example of toggling a CSS class in a node's <code>className</code> property...</p>
+					
+					<p><span class="allCaps">BEFORE</span></p>
+					
+					
+<pre class="sample-code">var node = Uize.Node.getById ('recommendationsPod');
+if (/\bpodPopulated\b/.test (node.className)) {
+  node.className = node.className.replace (/\bpodPopulated\b/,'');
+} else {
+  node.className += ' podPopulated';
+}
+</pre>
+					
+					<p><span class="allCaps">AFTER</span></p>
+					
+					
+<pre class="sample-code">Uize.Node.Classes.toggleClass ('recommendationsPod','podPopulated');
+</pre>
+				</div>
+			</div>
+			
+			<a name="1_1_2"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.1. Key Benefits -&gt; 1.1.2. Powerful State Paradigm"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. Key Benefits">1</a>.<a href="#1_1_2" title="1. Introduction -&gt; 1.1. Key Benefits -&gt; 1.1.2. Powerful State Paradigm">2</a>. </span>Powerful State Paradigm</h3>
+			<div class="contents3">
+				<p>In addition to ease of use, the <code>Uize.Node.Classes</code> module introduces a powerful, higher level construct called a state.</p>
+				
+				<p>The <a href="#1_6">State Related Methods</a> that support the state paradigm make it much easier to manage the classes in the <code>className</code> property of a node to reflect application state. Consider an example where you want the CSS class "selected" to be present in the <code>className</code> property of a node with the <code>id</code> of <code>'recommendationsPod'</code> when the application variable <code>podIsSelected</code> is set to <code>true</code>, and to be absent when the variable is set to <code>false</code>. Your application will have updater code to update the <code>className</code> of the node to reflect the state of the <code>podIsSelected</code> variable. This updater code may not know or trust what the current state of the <code>className</code> property of the node might be, so it may test first to see if the "selected" class should be added or removed. You might write the code as follows...</p>
+				
+				<p><span class="allCaps">BEFORE</span></p>
+				
+				
+<pre class="sample-code">if (podIsSelected) {
+  Uize.Node.Classes.addClass ('recommendationsPod','selected');
+} else {
+  Uize.Node.Classes.removeClass ('recommendationsPod','selected');
+}
+</pre>
+				
+				<p>Well, the <code><a href="#2_6">Uize.Node.Classes.setState</a></code> static method makes this type of update operation a lot simpler. Instead of conditionally adding or removing the class, you simply set its state as follows...</p>
+				
+				<p><span class="allCaps">AFTER</span></p>
+				
+				
+<pre class="sample-code">Uize.Node.Classes.setState ('recommendationsPod','selected',podIsSelected);
+</pre>
+				
+				<p>This is a very simple use case, but the <a href="#1_6">State Related Methods</a> of the <code>Uize.Node.Classes</code> module also support more sophisticated cases.</p>
+			</div>
+		</div>
+		
+		<a name="1_2"></a>
+		<h2 class="heading2" title="1. Introduction -&gt; 1.2. Adding a Class"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Adding a Class">2</a>. </span>Adding a Class</h2>
+		<div class="contents2">
+			<p>A CSS class can be added to a node's <code>className</code> property using the <code><a href="#2_1">Uize.Node.Classes.addClass</a></code> static method.</p>
+			
+			<p>This method only adds the specified CSS class to the node's <code>className</code> property if the class isn't already present, so you will never have the same class occurring multiple times in the <code>className</code> as a result of calling this method.</p>
+			
+			<p>The <code><a href="#2_1">Uize.Node.Classes.addClass</a></code> method follows these basic rules...</p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;">1. </span></td><td>If the <code>className</code> property is empty, then it will be set to the class being added.</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;">2. </span></td><td>If the class being added is already present in the <code>className</code> property, then the value of the <code>className</code> property will be unchanged (see important note on <a href="#1_7_1">Case Sensitivity</a>).</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;">3. </span></td><td>If the class being added is not present but there are other classes in the <code>className</code> property, then the class being added will be appended, with a single space separating it from the other classes (if present).</td></tr>
+			</table>
+			<p>To illustrate the above rules, consider the following example...</p>
+			
+			<p><span class="allCaps">HTML - BEFORE</span></p>
+			
+			
+<pre class="sample-code">&lt;!-- rule 1 example --&gt; &lt;div id="recommendationsPod"&gt;&lt;/div&gt;
+&lt;!-- rule 2 example --&gt; &lt;div id="commentsPod" class="podPopulated"&gt;&lt;/div&gt;
+&lt;!-- rule 3 example --&gt; &lt;div id="detailsPod" class="featured"&gt;
+</pre>
+			
+			<p><span class="allCaps">JAVASCRIPT</span></p>
+			
+			
+<pre class="sample-code">Uize.Node.Classes.addClass (
+  ['recommendationsPod','commentsPod','detailsPod'],
+  'podPopulated'
+);
+</pre>
+			
+			<p><span class="allCaps">HTML - AFTER</span></p>
+			
+			
+<pre class="sample-code">&lt;!-- rule 1 example --&gt; &lt;div id="recommendationsPod" class="podPopulated"&gt;&lt;/div&gt;
+&lt;!-- rule 2 example --&gt; &lt;div id="commentsPod" class="podPopulated"&gt;&lt;/div&gt;
+&lt;!-- rule 3 example --&gt; &lt;div id="detailsPod" class="featured podPopulated"&gt;
+</pre>
+		</div>
+		
+		<a name="1_3"></a>
+		<h2 class="heading2" title="1. Introduction -&gt; 1.3. Removing a Class"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_3" title="1. Introduction -&gt; 1.3. Removing a Class">3</a>. </span>Removing a Class</h2>
+		<div class="contents2">
+			<p>A CSS class can be removed from a node's <code>className</code> property using the <code><a href="#2_4">Uize.Node.Classes.removeClass</a></code> static method.</p>
+			
+			<p>If the specified CSS class to remove isn't present in the node's <code>className</code> property, then calling this method will have no effect.</p>
+			
+			<p>The <code><a href="#2_4">Uize.Node.Classes.removeClass</a></code> method follows these basic rules...</p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;">1. </span></td><td>If the <code>className</code> property is empty, then it will simply remain empty.</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;">2. </span></td><td>If the class being removed is present in the <code>className</code> property, then it will be removed along with any surrounding whitespace, while leaving the trailing whitespace if the class was between two surrounding classes (see important note on <a href="#1_7_1">Case Sensitivity</a>).</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;">3. </span></td><td>If the class being removed is not present but there are other classes in the <code>className</code> property, then calling this method will have no effect.</td></tr>
+			</table>
+			<p>To illustrate the above rules, consider the following example...</p>
+			
+			<p><span class="allCaps">HTML - BEFORE</span></p>
+			
+			
+<pre class="sample-code">&lt;!-- rule 1 example --&gt; &lt;div id="recommendationsPod"&gt;&lt;/div&gt;
+&lt;!-- rule 2 example --&gt; &lt;div id="commentsPod" class="podPopulated selected featured"&gt;&lt;/div&gt;
+&lt;!-- rule 3 example --&gt; &lt;div id="detailsPod" class="podPopulated featured"&gt;&lt;/div&gt;
+</pre>
+			
+			<p><span class="allCaps">JAVASCRIPT</span></p>
+			
+			
+<pre class="sample-code">Uize.Node.Classes.removeClass (
+  ['recommendationsPod','commentsPod','detailsPod'],
+  'selected'
+);
+</pre>
+			
+			<p><span class="allCaps">HTML - AFTER</span></p>
+			
+			
+<pre class="sample-code">&lt;!-- rule 1 example --&gt; &lt;div id="recommendationsPod"&gt;&lt;/div&gt;
+&lt;!-- rule 2 example --&gt; &lt;div id="commentsPod" class="podPopulated featured"&gt;&lt;/div&gt;
+&lt;!-- rule 3 example --&gt; &lt;div id="detailsPod" class="podPopulated featured"&gt;&lt;/div&gt;
+</pre>
+		</div>
+		
+		<a name="1_4"></a>
+		<h2 class="heading2" title="1. Introduction -&gt; 1.4. Toggling a Class"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_4" title="1. Introduction -&gt; 1.4. Toggling a Class">4</a>. </span>Toggling a Class</h2>
+		<div class="contents2">
+			<p>A CSS class can be toggled for a node's <code>className</code> property using the <code><a href="#2_7">Uize.Node.Classes.toggleClass</a></code> static method.</p>
+			
+			<p>The <code><a href="#2_7">Uize.Node.Classes.toggleClass</a></code> method follows these basic rules...</p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;">1. </span></td><td>If the <code>className</code> property is empty, then it will be set to the class being toggled.</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;">2. </span></td><td>If the class being toggled is not present in the node's <code>className</code> property, but there are other classes in the <code>className</code> property, then the class being toggled will be appended, with a single space separating it from the other classes (see important note on <a href="#1_7_1">Case Sensitivity</a>).</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;">3. </span></td><td>If the class being toggled is present in the <code>className</code> property, then it will be removed along with any surrounding whitespace, while leaving the trailing whitespace if the class was between two surrounding classes (see important note on <a href="#1_7_1">Case Sensitivity</a>).</td></tr>
+			</table>
+			<p>To illustrate the above rules, consider the following example...</p>
+			
+			<p><span class="allCaps">HTML - BEFORE</span></p>
+			
+			
+<pre class="sample-code">&lt;!-- rule 1 example --&gt; &lt;div id="recommendationsPod"&gt;&lt;/div&gt;
+&lt;!-- rule 2 example --&gt; &lt;div id="commentsPod" class="podPopulated selected"&gt;&lt;/div&gt;
+&lt;!-- rule 3 example --&gt; &lt;div id="detailsPod" class="podPopulated selected featured"&gt;&lt;/div&gt;
+</pre>
+			
+			<p><span class="allCaps">JAVASCRIPT</span></p>
+			
+			
+<pre class="sample-code">Uize.Node.Classes.toggleClass (['recommendationsPod','commentsPod'],'featured');
+</pre>
+			
+			<p><span class="allCaps">HTML - AFTER</span></p>
+			
+			
+<pre class="sample-code">&lt;!-- rule 1 example --&gt; &lt;div id="recommendationsPod" class="featured"&gt;&lt;/div&gt;
+&lt;!-- rule 2 example --&gt; &lt;div id="commentsPod" class="podPopulated selected featured"&gt;&lt;/div&gt;
+&lt;!-- rule 3 example --&gt; &lt;div id="detailsPod" class="podPopulated selected"&gt;&lt;/div&gt;
+</pre>
+		</div>
+		
+		<a name="1_5"></a>
+		<h2 class="heading2" title="1. Introduction -&gt; 1.5. Testing For a Class"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_5" title="1. Introduction -&gt; 1.5. Testing For a Class">5</a>. </span>Testing For a Class</h2>
+		<div class="contents2">
+			<p>The presence of a CSS class in a node's <code>className</code> property can be tested for by using the <code><a href="#2_3">Uize.Node.Classes.hasClass</a></code> static method.</p>
+			
+			<p>The <code><a href="#2_3">Uize.Node.Classes.hasClass</a></code> method will return the value <code>true</code> if the class is present, and the value <code>false</code> if the class is not present (or if the specified node does not exist). When testing for the presence of a class, matching is case sensitive (see important note on <a href="#1_7_1">Case Sensitivity</a>)</p>
+			
+			<p><span class="allCaps">EXAMPLE HTML</span></p>
+			
+			
+<pre class="sample-code">&lt;div id="recommendationsPod" class="podPopulated featured"&gt;
+  &lt;!-- stuff --&gt;
+&lt;/div&gt;
+</pre>
+			
+			<p><span class="allCaps">EXAMPLE JAVASCRIPT</span></p>
+			
+			
+<pre class="sample-code">var
+  podIsSelected = Uize.Node.Classes.hasClass ('recommendationsPod','selected'),
+  podIsFeatured = Uize.Node.Classes.hasClass ('recommendationsPod','featured')
+;
+</pre>
+			
+			<p>In the above example, after the above JavaScript code has executed, the value of the <code>podIsSelected</code> variable will be <code>false</code>, and the value of the <code>podIsFeatured</code> variable will be <code>true</code>.</p>
+		</div>
+		
+		<a name="1_6"></a>
+		<h2 class="heading2" title="1. Introduction -&gt; 1.6. State Related Methods"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_6" title="1. Introduction -&gt; 1.6. State Related Methods">6</a>. </span>State Related Methods</h2>
+		<div class="contents2">
+			<p>Beyond simply adding, removing, and toggling CSS classes in the <code>className</code> property of nodes, the <code>Uize.Node.Classes</code> module introduces a powerful, higher level construct called a state.</p>
+			
+			<a name="1_6_1"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.6. State Related Methods -&gt; 1.6.1. Presence or Absence State"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_6" title="1. Introduction -&gt; 1.6. State Related Methods">6</a>.<a href="#1_6_1" title="1. Introduction -&gt; 1.6. State Related Methods -&gt; 1.6.1. Presence or Absence State">1</a>. </span>Presence or Absence State</h3>
+			<div class="contents3">
+				<p>Typically, when you're adding, removing, or toggling CSS classes for a DOM node, what you're really trying to do is have the node reflect some state in your application.</p>
+				
+				<p>Often you will have a variable or a property of an object instance that will carry some important state, and you will want to update the <code>className</code> of a node (or multiple nodes) to reflect that state. Now, your code may not know or trust what the current state of the <code>className</code> property of a node might be, so it may test first to see if a class should be added or removed. You might write code as follows...</p>
+				
+				<p><span class="allCaps">CONDITIONALIZED TOGGLE</span></p>
+				
+				
+<pre class="sample-code">if (podIsSelected != Uize.Node.Classes.hasClass ('recommendationsPod','selected')) {
+  Uize.Node.Classes.toggleClass ('recommendationsPod','selected');
+}
+</pre>
+				
+				<p>In the above example, whenever the value of the <code>podIsSelected</code> variable is <code>true</code>, then the CSS class called "selected" should be present in the node with the <code>id</code> of <code>'recommendationsPod'</code>. When <code>podIsSelected</code> is <code>false</code>, then the "selected" class should be absent. In order to synchronize the DOM node's <code>className</code> property to correctly reflect the application state, some code must perform an update. In the update code, the code is first testing to see if the presence of the CSS class called "selected" <b>does not</b> match what the desired state should be. If it doesn't, then something must be done to make it match the desired state, so the CSS class is toggled (because its presence is the opposite of what it should be).</p>
+				
+				<p>An alternative to the conditionalized toggling approach is a conditionalized add or remove approach, as shown below...</p>
+				
+				<p><span class="allCaps">CONDITIONALIZED ADD OR REMOVE</span></p>
+				
+				
+<pre class="sample-code">if (podIsSelected) {
+  Uize.Node.Classes.addClass ('recommendationsPod','selected');
+} else {
+  Uize.Node.Classes.removeClass ('recommendationsPod','selected');
+}
+</pre>
+				
+				<p>Of course, you could get even more fancy with conditionalizing which static method to call, using a ternary operator, as follows...</p>
+				
+				<p><span class="allCaps">FANCY CONDITIONALIZED ADD OR REMOVE</span></p>
+				
+				
+<pre class="sample-code">Uize.Node.Classes [podIsSelected ? 'addClass' : 'removeClass'] (
+  'recommendationsPod',
+  'selected'
+);
+</pre>
+				
+				<p>Well, whichever way you might write it, the <code>Uize.Node.Classes</code> module reduces the above pattern to a more concise and conceptually elegant form with the help of the <code><a href="#2_6">Uize.Node.Classes.setState</a></code> static method, as follows...</p>
+				
+				
+<pre class="sample-code">Uize.Node.Classes.setState ('recommendationsPod','selected',podIsSelected);
+</pre>
+				
+				<p>The <code><a href="#2_6">Uize.Node.Classes.setState</a></code> method takes three parameters: the node (or nodes) for which state should be set, the state class or classes (see <a href="#1_6_2">Multiple State Classes</a>), and the state value. In the above usage, calling the <code><a href="#2_6">Uize.Node.Classes.setState</a></code> method will set the presence of the "selected" CSS class, based upon the value of the <code>podIsSelected</code> variable. If the value of <code>podIsSelected</code> is <code>false</code>, then the class will be removed. If the value of <code>podIsSelected</code> is <code>true</code>, then the class will be added.</p>
+			</div>
+			
+			<a name="1_6_2"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.6. State Related Methods -&gt; 1.6.2. Multiple State Classes"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_6" title="1. Introduction -&gt; 1.6. State Related Methods">6</a>.<a href="#1_6_2" title="1. Introduction -&gt; 1.6. State Related Methods -&gt; 1.6.2. Multiple State Classes">2</a>. </span>Multiple State Classes</h3>
+			<div class="contents3">
+				<p>The <a href="#1_6">State Related Methods</a> become far more compelling and powerful when you consider their support for multiple state classes and what that means for managing CSS classes for DOM nodes.</p>
+				
+				<p>In the simplest use of the <code><a href="#2_6">Uize.Node.Classes.setState</a></code> method, the presence state of a single class can be controlled with a specified boolean value. This is in fact, however, a special case of a booean, two CSS class state where the first class (for the <code>false</code> value of the state) is an empty string and the second class (for the <code>true</code> value of the state) is the CSS class you specified. So, the following two statements are equivalent...</p>
+				
+				<p><span class="allCaps">EQUIVALENT STATEMENTS</span></p>
+				
+				
+<pre class="sample-code">Uize.Node.Classes.setState ('recommendationsPod','selected',podIsSelected);
+Uize.Node.Classes.setState ('recommendationsPod',['','selected'],podIsSelected);
+</pre>
+				
+				<p>So, what if a node should have one CSS class if a state's value is <code>false</code>, and a different CSS class if the state's value is <code>true</code>? This is accomplished quite easily. Consider an example where there is an <code>enabled</code> state variable in your application, whose value should be reflected in some node. When your <code>enabled</code> variable is <code>false</code>, then the node's <code>className</code> property should contain the CSS class "disabled". When your <code>enabled</code> variable is <code>true</code>, then the node's <code>className</code> property should contain the CSS class "enabled". Using the <code><a href="#2_6">Uize.Node.Classes.setState</a></code> method's support for <a href="#1_6_2">Multiple State Classes</a>, the update code is made quite simple, as follows...</p>
+				
+				<p><span class="allCaps">STATE UPDATE WITH TWO STATE CLASSES</span></p>
+				
+				
+<pre class="sample-code">Uize.Node.Classes.setState ('recommendationsPod',['disabled','enabled'],enabled);
+</pre>
+				
+				<p>In the above statement, the value of the <code>enabled</code> variable is being passed as the state value in the call to the <code><a href="#2_6">Uize.Node.Classes.setState</a></code> method. The <code>false</code> and <code>true</code> values of the state are mapped to the state classes <code>'disabled'</code> and <code>'enabled'</code>. For the state value <code>false</code>, the class <code>'disabled'</code> should be present and the class <code>'enabled'</code> should be absent. For the state value <code>true</code>, the opposite should be the case. The <code><a href="#2_6">Uize.Node.Classes.setState</a></code> method does whatever is necessary to ensure that the correct state class is in the <code>className</code> property, removing and adding classes as needed. To perform this same kind of update without the <code><a href="#2_6">Uize.Node.Classes.setState</a></code> method would be a little bit more laborious, as follows...</p>
+				
+				<p><span class="allCaps">LABORIOUS APPROACH</span></p>
+				
+				
+<pre class="sample-code">if (enabled) {
+  Uize.Node.Classes.removeClass ('recommendationsPod','disabled');
+  Uize.Node.Classes.addClass ('recommendationsPod','enabled');
+} else {
+  Uize.Node.Classes.removeClass ('recommendationsPod','enabled');
+  Uize.Node.Classes.addClass ('recommendationsPod','disabled');
+}
+</pre>
+				
+				<p>You could reduce the above code down using some fancy tricks and avoid using the <code><a href="#2_6">Uize.Node.Classes.setState</a></code> method, but the <code><a href="#2_6">Uize.Node.Classes.setState</a></code> method makes things more semantically elegant.</p>
+				
+				<a name="1_6_2_1"></a>
+				<h4 class="heading4" title="1. Introduction -&gt; 1.6. State Related Methods -&gt; 1.6.2. Multiple State Classes -&gt; 1.6.2.1. More Than Two State Classes"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_6" title="1. Introduction -&gt; 1.6. State Related Methods">6</a>.<a href="#1_6_2" title="1. Introduction -&gt; 1.6. State Related Methods -&gt; 1.6.2. Multiple State Classes">2</a>.<a href="#1_6_2_1" title="1. Introduction -&gt; 1.6. State Related Methods -&gt; 1.6.2. Multiple State Classes -&gt; 1.6.2.1. More Than Two State Classes">1</a>. </span>More Than Two State Classes</h4>
+				<div class="contents4">
+					<p>The <a href="#1_6">State Related Methods</a> become even more compelling when you consider their support for more than two state classes.</p>
+					
+					<p>There may be situations where a state is not binary, and having two CSS classes mapped to the state will not suffice. Consider the example where a DOM node may need to be styled to reflect an error level, where the first error level is no error, the second level is a non-critical warning type error, and the third level is a critical, fatal, or blocking error. In this situation, your application may have a state variable called <code>errorLevel</code>, whose value can be <code>0</code>, <code>1</code>, or <code>2</code>, and where the value <code>0</code> should be mapped to the state class <code>''</code> (empty string), the value <code>1</code> should be mapped to the state class <code>'warning'</code>, and the value <code>2</code> should be mapped to the state class <code>'error'</code>.</p>
+					
+					<p>Fortunately, the <a href="#1_6">State Related Methods</a> support <a href="#1_6_2">Multiple State Classes</a> specified in array form. So, our updater code would look as follows...</p>
+					
+					<p><span class="allCaps">STATE UPDATE WITH THREE STATE CLASSES</span></p>
+					
+					
+<pre class="sample-code">Uize.Node.Classes.setState ('recommendationsPod',['','warning','error'],errorLevel);
+</pre>
+					
+					<p>In another three state classes example, consider a text input element whose <code>className</code> property should contain a CSS class to reflect the validation status of the text entered by the user. The three levels for validation state are: 1) the text has not yet been validated, 2) the text has been validated and has failed validation, and 3) the text has been validated and has passed validation. The application may have a <code>validationStatus</code> variable, where the value <code>0</code> indicates not yet validated, the value <code>-1</code> indicates failed validation, and the value <code>1</code> indicates passed validation. We want the value <code>0</code> to map to the state class <code>''</code> (empty string), the value <code>-1</code> to map to the state class <code>valueBad</code>, and the value <code>1</code> to map to the state class <code>valueGood</code>. Our updater code would look as follows...</p>
+					
+					<p><span class="allCaps">STATE UPDATE WITH STATE VALUE OFFSET</span></p>
+					
+					
+<pre class="sample-code">Uize.Node.Classes.setState ('phone',['valueBad','','valueGood'],validationStatus + 1);
+</pre>
+					
+					<p>Notice how we are adding <code>1</code> to the value of the <code>validationStatus</code> variable when calling the <code><a href="#2_6">Uize.Node.Classes.setState</a></code> method and how the empty string state class is now in the middle of the state classes array.</p>
+				</div>
+			</div>
+			
+			<a name="1_6_3"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.6. State Related Methods -&gt; 1.6.3. Setting State"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_6" title="1. Introduction -&gt; 1.6. State Related Methods">6</a>.<a href="#1_6_3" title="1. Introduction -&gt; 1.6. State Related Methods -&gt; 1.6.3. Setting State">3</a>. </span>Setting State</h3>
+			<div class="contents3">
+				<p>State can be reflected with CSS classes in the <code>className</code> property of one or more DOM nodes using the <code><a href="#2_6">Uize.Node.Classes.setState</a></code> static method.</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">Uize.Node.Classes.setState ('recommendationsPod',['disabled','enabled'],enabled);
+</pre>
+				
+				<p>In the above example, the value of the <code>enabled</code> variable will determine whether the CSS class <code>'enabled'</code> or the CSS class <code>'disabled'</code> will be present in the <code>className</code> property of the node with the <code>id</code> of <code>'recommendationsPod'</code>. If the value of the <code>enabled</code> variable is <code>false</code>, then the <code>'enabled'</code> class will be removed and the <code>'disabled'</code> class will be added. Conversely, if the value of the <code>enabled</code> variable is <code>true</code>, then the <code>'disabled'</code> class will be removed and the <code>'enabled'</code> class will be added.</p>
+				
+				<p>The <code><a href="#2_6">Uize.Node.Classes.setState</a></code> method, along with the other state related methods, supports <a href="#1_6_2">Multiple State Classes</a>.</p>
+			</div>
+			
+			<a name="1_6_4"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.6. State Related Methods -&gt; 1.6.4. Getting State"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_6" title="1. Introduction -&gt; 1.6. State Related Methods">6</a>.<a href="#1_6_4" title="1. Introduction -&gt; 1.6. State Related Methods -&gt; 1.6.4. Getting State">4</a>. </span>Getting State</h3>
+			<div class="contents3">
+				<p>As with <a href="#1_6_3">Setting State</a> for CSS classes using the <code><a href="#2_6">Uize.Node.Classes.setState</a></code> static method, the current value for a state can be determined from the <code>className</code> property of a node using the <code><a href="#2_2">Uize.Node.Classes.getState</a></code> static method.</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">var enabled = Uize.Node.Classes.getState ('recommendationsPod',['disabled','enabled']);
+</pre>
+				
+				<p>In the above example, the value of the <code>enabled</code> variable will be determined by whether the CSS class <code>'enabled'</code> or the CSS class <code>'disabled'</code> is present in the <code>className</code> property of the node with the <code>id</code> of <code>'recommendationsPod'</code>. If the <code>className</code> property contains the class <code>'disabled'</code>, then the <code>enabled</code> variable will be set to <code>false</code>. Conversely, if the <code>className</code> property contains the class <code>'enabled'</code>, then the <code>enabled</code> variable will be set to <code>true</code>.</p>
+				
+				<p>The <code><a href="#2_2">Uize.Node.Classes.getState</a></code> method, along with the other state related methods, supports <a href="#1_6_2">Multiple State Classes</a>.</p>
+			</div>
+			
+			<a name="1_6_5"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.6. State Related Methods -&gt; 1.6.5. Toggling State"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_6" title="1. Introduction -&gt; 1.6. State Related Methods">6</a>.<a href="#1_6_5" title="1. Introduction -&gt; 1.6. State Related Methods -&gt; 1.6.5. Toggling State">5</a>. </span>Toggling State</h3>
+			<div class="contents3">
+				<p>State that is reflected with CSS classes in the <code>className</code> property of one or more DOM nodes can be toggled (or cycled, for more than two state classes) using the <code><a href="#2_8">Uize.Node.Classes.toggleState</a></code> static method.</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">Uize.Node.Classes.toggleState ('recommendationsPod',['disabled','enabled']);
+</pre>
+				
+				<p>In the above example, whichever of the two CSS classes <code>'disabled'</code> or <code>'enabled'</code> is present in the <code>className</code> property of the node with the <code>id</code> of <code>'recommendationsPod'</code> will be replaced with the other. So, if the <code>className</code> property contains the class <code>'disabled'</code>, then it will be replaced with the class <code>'enabled'</code>. Conversely, if the <code>className</code> property contains the class <code>'disabled'</code>, then it will be replaced with the class <code>'enabled'</code>. If the <code>className</code> property contains neither of the classes <code>'disabled'</code> or <code>'enabled'</code>, then the first of the state classes (ie. <code>'disabled'</code>) will be added.</p>
+				
+				<p>The <code><a href="#2_8">Uize.Node.Classes.toggleState</a></code> method, along with the other state related methods, supports <a href="#1_6_2">Multiple State Classes</a>.</p>
+				
+				<a name="1_6_5_1"></a>
+				<h4 class="heading4" title="1. Introduction -&gt; 1.6. State Related Methods -&gt; 1.6.5. Toggling State -&gt; 1.6.5.1. Toggling State With More Than Two State Classes"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_6" title="1. Introduction -&gt; 1.6. State Related Methods">6</a>.<a href="#1_6_5" title="1. Introduction -&gt; 1.6. State Related Methods -&gt; 1.6.5. Toggling State">5</a>.<a href="#1_6_5_1" title="1. Introduction -&gt; 1.6. State Related Methods -&gt; 1.6.5. Toggling State -&gt; 1.6.5.1. Toggling State With More Than Two State Classes">1</a>. </span>Toggling State With More Than Two State Classes</h4>
+				<div class="contents4">
+					<p>When a state is represented by more than two state classes, then the <code><a href="#2_8">Uize.Node.Classes.toggleState</a></code> method will cycle through the state classes.</p>
+					
+					<p>When cycling through <a href="#1_6_2">Multiple State Classes</a>, the <code><a href="#2_8">Uize.Node.Classes.toggleState</a></code> method follows these basic rules...</p>
+					
+					<table class="list">
+					<tr valign="top"><td><span style="white-space:nowrap;">1. </span></td><td>If none of the state classes are present in the node's <code>className</code> property, then the first of the state classes will be appended, with a single space separating it from the other classes (if present).</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;">2. </span></td><td>If any of the state classes other than the last of the state classes is present in the node's <code>className</code> property, then it will be replaced with the next state class in the list.</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;">3. </span></td><td>If the last of the state classes is present in the node's <code>className</code> property, then it will be replaced with the first state class in the list (ie. wrapping around).</td></tr>
+					</table>
+					<p>To illustrate the above rules, consider the following example...</p>
+					
+					<p><span class="allCaps">HTML - BEFORE</span></p>
+					
+					
+<pre class="sample-code">&lt;!-- rule 1 example --&gt; &lt;input id="input1" type="text"/&gt;
+&lt;!-- rule 2 example --&gt; &lt;input id="input2" type="text" class="warning"/&gt;
+&lt;!-- rule 3 example --&gt; &lt;input id="input3" type="text" class="error"/&gt;
+</pre>
+					
+					<p><span class="allCaps">JAVASCRIPT</span></p>
+					
+					
+<pre class="sample-code">Uize.Node.Classes.toggleState (['input1','input2','input3'],['','warning','error']);
+</pre>
+					
+					<p><span class="allCaps">HTML - AFTER</span></p>
+					
+					
+<pre class="sample-code">&lt;!-- rule 1 example --&gt; &lt;input id="input1" type="text" class="warning"/&gt;
+&lt;!-- rule 2 example --&gt; &lt;input id="input2" type="text" class="error"/&gt;
+&lt;!-- rule 3 example --&gt; &lt;input id="input3" type="text"/&gt;
+</pre>
+				</div>
+			</div>
+			
+			<a name="1_6_6"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.6. State Related Methods -&gt; 1.6.6. Removing State"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_6" title="1. Introduction -&gt; 1.6. State Related Methods">6</a>.<a href="#1_6_6" title="1. Introduction -&gt; 1.6. State Related Methods -&gt; 1.6.6. Removing State">6</a>. </span>Removing State</h3>
+			<div class="contents3">
+				<p>State classes associated with a state can be removed from the <code>className</code> property of one or more DOM nodes using the <code><a href="#2_5">Uize.Node.Classes.removeState</a></code> static method.</p>
+				
+				<p>Removing a state is distinct from <a href="#1_6_3">Setting State</a> and <a href="#1_6_5">Toggling State</a> - removing a state for a node makes it so that the state no longer applies for that node. When removing a state, the <code><a href="#2_5">Uize.Node.Classes.removeState</a></code> method follows these basic rules...</p>
+				
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;">1. </span></td><td>If the <code>className</code> property is empty, then it will simply remain empty.</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;">2. </span></td><td>If the <code>className</code> property is not empty, but none of the state classes for the state being removed are present, then the <code>className</code> property will remain unchanged.</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;">3. </span></td><td>If one of the state classes for the state being removed is present in the <code>className</code> property, then it will be removed along with any surrounding whitespace, while leaving the trailing whitespace if the class was between two surrounding classes.</td></tr>
+				</table>
+				<p>To illustrate the above rules, consider the following example...</p>
+				
+				<p><span class="allCaps">HTML - BEFORE</span></p>
+				
+				
+<pre class="sample-code">&lt;!-- rule 1 example --&gt; &lt;input id="input1" type="text"/&gt;
+&lt;!-- rule 2 example --&gt; &lt;input id="input2" type="text" class="focused"/&gt;
+&lt;!-- rule 3 example --&gt; &lt;input id="input3" type="text" class="focused error required"/&gt;
+</pre>
+				
+				<p><span class="allCaps">JAVASCRIPT</span></p>
+				
+				
+<pre class="sample-code">Uize.Node.Classes.removeState (['input1','input2','input3'],['','warning','error']);
+</pre>
+				
+				<p><span class="allCaps">HTML - AFTER</span></p>
+				
+				
+<pre class="sample-code">&lt;!-- rule 1 example --&gt; &lt;input id="input1" type="text"/&gt;
+&lt;!-- rule 2 example --&gt; &lt;input id="input2" type="text" class="focused"/&gt;
+&lt;!-- rule 3 example --&gt; &lt;input id="input3" type="text" class="focused required"/&gt;
+</pre>
+				
+				<p>The <code><a href="#2_5">Uize.Node.Classes.removeState</a></code> method, along with the other state related methods, supports <a href="#1_6_2">Multiple State Classes</a>.</p>
+			</div>
+		</div>
+		
+		<a name="1_7"></a>
+		<h2 class="heading2" title="1. Introduction -&gt; 1.7. Important Considerations"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_7" title="1. Introduction -&gt; 1.7. Important Considerations">7</a>. </span>Important Considerations</h2>
+		<div class="contents2">
+			<p>When working with CSS classes using the methods of the <code>Uize.Node.Classes</code> module, there are some important considerations to keep in mind.</p>
+			
+			<a name="1_7_1"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.7. Important Considerations -&gt; 1.7.1. Case Sensitivity"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_7" title="1. Introduction -&gt; 1.7. Important Considerations">7</a>.<a href="#1_7_1" title="1. Introduction -&gt; 1.7. Important Considerations -&gt; 1.7.1. Case Sensitivity">1</a>. </span>Case Sensitivity</h3>
+			<div class="contents3">
+				<p>When matching CSS classes against the value of a node's <code>className</code> property, the methods of the <code>Uize.Node.Classes</code> module perform case sensitive matching.</p>
+				
+				<p>To illustrate this, consider the following example...</p>
+				
+				<p><span class="allCaps">HTML - BEFORE</span></p>
+				
+				
+<pre class="sample-code">&lt;div id="recommendationsPod" class="SELECTED"&gt;&lt;/div&gt;
+&lt;div id="commentsPod" class="SELECTED"&gt;&lt;/div&gt;
+&lt;div id="detailsPod" class="SELECTED"&gt;
+</pre>
+				
+				<p><span class="allCaps">JAVASCRIPT</span></p>
+				
+				
+<pre class="sample-code">Uize.Node.Classes.addClass ('recommendationsPod','selected');
+Uize.Node.Classes.removeClass ('commentsPod','selected');
+Uize.Node.Classes.toggleClass ('detailsPod','selected');
+</pre>
+				
+				<p><span class="allCaps">HTML - AFTER</span></p>
+				
+				
+<pre class="sample-code">&lt;div id="recommendationsPod" class="SELECTED selected"&gt;&lt;/div&gt;
+&lt;div id="commentsPod" class="SELECTED"&gt;&lt;/div&gt;
+&lt;div id="detailsPod" class="SELECTED selected"&gt;
+</pre>
+				
+				<p>This case sensitivity rule applies equally to the <a href="#1_6">State Related Methods</a>.</p>
+			</div>
+			
+			<a name="1_7_2"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.7. Important Considerations -&gt; 1.7.2. Whitespace Handling"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_7" title="1. Introduction -&gt; 1.7. Important Considerations">7</a>.<a href="#1_7_2" title="1. Introduction -&gt; 1.7. Important Considerations -&gt; 1.7.2. Whitespace Handling">2</a>. </span>Whitespace Handling</h3>
+			<div class="contents3">
+				<p>When adding, replacing, or removing classes from the <code>className</code> property of a node, the methods of the <code>Uize.Node.Classes</code> module observe certain principles regarding whitespace.</p>
+				
+				<a name="1_7_2_1"></a>
+				<h4 class="heading4" title="1. Introduction -&gt; 1.7. Important Considerations -&gt; 1.7.2. Whitespace Handling -&gt; 1.7.2.1. Minimal Whitespace Added When Adding Classes"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_7" title="1. Introduction -&gt; 1.7. Important Considerations">7</a>.<a href="#1_7_2" title="1. Introduction -&gt; 1.7. Important Considerations -&gt; 1.7.2. Whitespace Handling">2</a>.<a href="#1_7_2_1" title="1. Introduction -&gt; 1.7. Important Considerations -&gt; 1.7.2. Whitespace Handling -&gt; 1.7.2.1. Minimal Whitespace Added When Adding Classes">1</a>. </span>Minimal Whitespace Added When Adding Classes</h4>
+				<div class="contents4">
+					<p>When a class needs to be added by a <code>Uize.Node.Classes</code> method, it will be appended to the <code>className</code> property, with a single space separating it from the other classes (if present).</p>
+				</div>
+				
+				<a name="1_7_2_2"></a>
+				<h4 class="heading4" title="1. Introduction -&gt; 1.7. Important Considerations -&gt; 1.7.2. Whitespace Handling -&gt; 1.7.2.2. Whitespace Respected When Replacing Classes"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_7" title="1. Introduction -&gt; 1.7. Important Considerations">7</a>.<a href="#1_7_2" title="1. Introduction -&gt; 1.7. Important Considerations -&gt; 1.7.2. Whitespace Handling">2</a>.<a href="#1_7_2_2" title="1. Introduction -&gt; 1.7. Important Considerations -&gt; 1.7.2. Whitespace Handling -&gt; 1.7.2.2. Whitespace Respected When Replacing Classes">2</a>. </span>Whitespace Respected When Replacing Classes</h4>
+				<div class="contents4">
+					<p>When replacing classes in the <code>className</code> property of a node, the methods of the <code>Uize.Node.Classes</code> module will respect existing whitespace separating classes.</p>
+					
+					<p>This means that if a class is separated from surrounding classes by tabs, newlines, or multiple spaces, then that whitespace separation will be retained when the class is replaced with a different class. The exception to this rule is where the new class is the empty string (see <a href="#1_7_2_3">No Whitespace Bloat When Removing Classes</a>).</p>
+				</div>
+				
+				<a name="1_7_2_3"></a>
+				<h4 class="heading4" title="1. Introduction -&gt; 1.7. Important Considerations -&gt; 1.7.2. Whitespace Handling -&gt; 1.7.2.3. No Whitespace Bloat When Removing Classes"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_7" title="1. Introduction -&gt; 1.7. Important Considerations">7</a>.<a href="#1_7_2" title="1. Introduction -&gt; 1.7. Important Considerations -&gt; 1.7.2. Whitespace Handling">2</a>.<a href="#1_7_2_3" title="1. Introduction -&gt; 1.7. Important Considerations -&gt; 1.7.2. Whitespace Handling -&gt; 1.7.2.3. No Whitespace Bloat When Removing Classes">3</a>. </span>No Whitespace Bloat When Removing Classes</h4>
+				<div class="contents4">
+					<p>In the case where a class is being removed by one of the <code>Uize.Node.Classes</code> methods and the class is surrounded by other classes, the trailing whitespace that separates the class being removed from the next class will be retained, while the whitespace that separates it from the previous class will be lost.</p>
+					
+					<p>This behavior avoids whitespace bloat that might otherwise occur if all surrounding whitespace were retained when classes are repeatedly removed and added for a node.</p>
+				</div>
+			</div>
+		</div>
+		
+		<a name="1_8"></a>
+		<h2 class="heading2" title="1. Introduction -&gt; 1.8. Examples"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_8" title="1. Introduction -&gt; 1.8. Examples">8</a>. </span>Examples</h2>
+		<div class="contents2">
+			<p>There are no dedicated showcase example pages for the <code>Uize.Node.Classes</code> module.</p>
+			
+			<p><span class="allCaps">SEARCH FOR EXAMPLES</span></p>
+			
+			<p>Use the link below to search for example pages on the <b>uize.com</b> Web site that reference the <code>Uize.Node.Classes</code> module...</p>
+			
+			<p><a href="http://www.google.com/search?hl=en&safe=off&domains=uize.com%2Fexamples&sitesearch=uize.com%2Fexamples&q=%22Uize.Node.Classes%22" target="_blank" class="externalSiteLink">SEARCH</a></p>
+		</div>
+		
+		<a name="1_9"></a>
+		<h2 class="heading2" title="1. Introduction -&gt; 1.9. Implementation Info"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_9" title="1. Introduction -&gt; 1.9. Implementation Info">9</a>. </span>Implementation Info</h2>
+		<div class="contents2">
+			<p>The <code>Uize.Node.Classes</code> module defines the <code>Uize.Node.Classes</code> package under the <code><a href="../reference/Uize.Node.html">Uize.Node</a></code> namespace.</p>
+			
+			<a name="1_9_1"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.9. Implementation Info -&gt; 1.9.1. Features Introduced in This Module"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_9" title="1. Introduction -&gt; 1.9. Implementation Info">9</a>.<a href="#1_9_1" title="1. Introduction -&gt; 1.9. Implementation Info -&gt; 1.9.1. Features Introduced in This Module">1</a>. </span>Features Introduced in This Module</h3>
+			<div class="contents3">
+				<p>The features listed in this section have been introduced in this module.</p>
+				
+				<p><span class="allCaps">STATIC METHODS</span></p>
+				
+				<p><code><a href="#2_1">Uize.Node.Classes.addClass</a></code> | <code><a href="#2_2">Uize.Node.Classes.getState</a></code> | <code><a href="#2_3">Uize.Node.Classes.hasClass</a></code> | <code><a href="#2_4">Uize.Node.Classes.removeClass</a></code> | <code><a href="#2_5">Uize.Node.Classes.removeState</a></code> | <code><a href="#2_6">Uize.Node.Classes.setState</a></code> | <code><a href="#2_7">Uize.Node.Classes.toggleClass</a></code> | <code><a href="#2_8">Uize.Node.Classes.toggleState</a></code></p>
+				
+				<p><span class="allCaps">STATIC PROPERTIES</span></p>
+				
+				<p><code><a href="#4_1">Uize.Node.Classes.moduleName</a></code></p>
+			</div>
+			
+			<a name="1_9_2"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.9. Implementation Info -&gt; 1.9.2. Features Overridden in This Module"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_9" title="1. Introduction -&gt; 1.9. Implementation Info">9</a>.<a href="#1_9_2" title="1. Introduction -&gt; 1.9. Implementation Info -&gt; 1.9.2. Features Overridden in This Module">2</a>. </span>Features Overridden in This Module</h3>
+			<div class="contents3">
+				<p>No features have been overridden in this module.</p>
+			</div>
+			
+			<a name="1_9_3"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.9. Implementation Info -&gt; 1.9.3. Features Inherited From Other Modules"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_9" title="1. Introduction -&gt; 1.9. Implementation Info">9</a>.<a href="#1_9_3" title="1. Introduction -&gt; 1.9. Implementation Info -&gt; 1.9.3. Features Inherited From Other Modules">3</a>. </span>Features Inherited From Other Modules</h3>
+			<div class="contents3">
+				<p>This module has no inherited features.</p>
+			</div>
+			
+			<a name="1_9_4"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.9. Implementation Info -&gt; 1.9.4. Modules Directly Under This Namespace"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_9" title="1. Introduction -&gt; 1.9. Implementation Info">9</a>.<a href="#1_9_4" title="1. Introduction -&gt; 1.9. Implementation Info -&gt; 1.9.4. Modules Directly Under This Namespace">4</a>. </span>Modules Directly Under This Namespace</h3>
+			<div class="contents3">
+				<p>There are no modules directly under this namespace.</p>
+			</div>
+			
+			<a name="1_9_5"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.9. Implementation Info -&gt; 1.9.5. Unit Tests"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_9" title="1. Introduction -&gt; 1.9. Implementation Info">9</a>.<a href="#1_9_5" title="1. Introduction -&gt; 1.9. Implementation Info -&gt; 1.9.5. Unit Tests">5</a>. </span>Unit Tests</h3>
+			<div class="contents3">
+				<p>The <code>Uize.Node.Classes</code> module is unit tested by the <code><a href="../reference/Uize.Test.Uize.Node.Classes.html">Uize.Test.Uize.Node.Classes</a></code> test module.</p>
+			</div>
+		</div>
+	</div>
+	
+	<a name="2"></a>
+	<h1 class="heading1" title="2. Static Methods"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>. </span>Static Methods</h1>
+	<div class="contents1">
+		<a name="2_1"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.1. Uize.Node.Classes.addClass"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_1" title="2. Static Methods -&gt; 2.1. Uize.Node.Classes.addClass">1</a>. </span>Uize.Node.Classes.addClass</h2>
+		<div class="contents2">
+			<p>Adds the specified CSS class to the <code>className</code> property of the specified node(s), provided that the class name is not already present.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">Uize.Node.Classes.addClass (nodeBLOB,classSTR);
+</pre>
+			
+			<p>For a more detailed discussion and to see examples, see the section <a href="#1_2">Adding a Class</a>.</p>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#2_4">Uize.Node.Classes.removeClass</a></code> static method</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#2_3">Uize.Node.Classes.hasClass</a></code> and <code><a href="#2_7">Uize.Node.Classes.toggleClass</a></code> static methods</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#2_6">Uize.Node.Classes.setState</a></code> static method</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_2"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.2. Uize.Node.Classes.getState"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_2" title="2. Static Methods -&gt; 2.2. Uize.Node.Classes.getState">2</a>. </span>Uize.Node.Classes.getState</h2>
+		<div class="contents2">
+			<p>Returns a boolean or integer (a value of the type <code><a href="#3_2">stateBOOLorINT</a></code>), indicating the current state for the specified state classes.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">stateBOOLorINT = Uize.Node.Classes.getState (nodeSTRorOBJ,stateClassesSTRorARRAY);
+</pre>
+			
+			<p>For a more detailed discussion and to see examples, see the section <a href="#1_6_4">Getting State</a>.</p>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#2_6">Uize.Node.Classes.setState</a></code>, <code><a href="#2_8">Uize.Node.Classes.toggleState</a></code>, and <code><a href="#2_5">Uize.Node.Classes.removeState</a></code> static methods</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_3"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.3. Uize.Node.Classes.hasClass"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_3" title="2. Static Methods -&gt; 2.3. Uize.Node.Classes.hasClass">3</a>. </span>Uize.Node.Classes.hasClass</h2>
+		<div class="contents2">
+			<p>Returns a boolean, indicating whether or not the specified node's <code>className</code> property contains the specified CSS class.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">hasClassBOOL = Uize.Node.Classes.hasClass (nodeSTRorOBJ,classSTR);
+</pre>
+			
+			<p>For a more detailed discussion and to see examples, see the section <a href="#1_5">Testing For a Class</a>.</p>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#2_1">Uize.Node.Classes.addClass</a></code>, <code><a href="#2_7">Uize.Node.Classes.toggleClass</a></code>, and <code><a href="#2_4">Uize.Node.Classes.removeClass</a></code> static methods</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#2_2">Uize.Node.Classes.getState</a></code> static method</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_4"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.4. Uize.Node.Classes.removeClass"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_4" title="2. Static Methods -&gt; 2.4. Uize.Node.Classes.removeClass">4</a>. </span>Uize.Node.Classes.removeClass</h2>
+		<div class="contents2">
+			<p>Removes the specified CSS class from the <code>className</code> property of the specified node(s), provided that the class is present.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">Uize.Node.Classes.removeClass (nodeBLOB,classSTR);
+</pre>
+			
+			<p>For a more detailed discussion and to see examples, see the section <a href="#1_3">Removing a Class</a>.</p>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#2_1">Uize.Node.Classes.addClass</a></code> static method</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#2_3">Uize.Node.Classes.hasClass</a></code> and <code><a href="#2_7">Uize.Node.Classes.toggleClass</a></code> static methods</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#2_6">Uize.Node.Classes.setState</a></code> static method</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_5"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.5. Uize.Node.Classes.removeState"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_5" title="2. Static Methods -&gt; 2.5. Uize.Node.Classes.removeState">5</a>. </span>Uize.Node.Classes.removeState</h2>
+		<div class="contents2">
+			<p>Updates the <code>className</code> property of the specified node(s), to no longer contain one of the specified state classes.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">Uize.Node.Classes.removeState (nodeBLOB,stateClassesSTRorARRAY);
+</pre>
+			
+			<p>For a more detailed discussion and to see examples, see the section <a href="#1_6_6">Removing State</a>.</p>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#2_2">Uize.Node.Classes.getState</a></code>, <code><a href="#2_6">Uize.Node.Classes.setState</a></code>, and <code><a href="#2_8">Uize.Node.Classes.toggleState</a></code> static methods</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_6"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.6. Uize.Node.Classes.setState"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_6" title="2. Static Methods -&gt; 2.6. Uize.Node.Classes.setState">6</a>. </span>Uize.Node.Classes.setState</h2>
+		<div class="contents2">
+			<p>Updates the <code>className</code> property of the specified node(s), to contain the one CSS class out of the specified state classes that corresponds to the specified state.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">Uize.Node.Classes.setState (nodeBLOB,stateClassesSTRorARRAY,stateBOOLorINT);
+</pre>
+			
+			<p>For a more detailed discussion and to see examples, see the section <a href="#1_6_3">Setting State</a>.</p>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#2_2">Uize.Node.Classes.getState</a></code>, <code><a href="#2_8">Uize.Node.Classes.toggleState</a></code>, and <code><a href="#2_5">Uize.Node.Classes.removeState</a></code> static methods</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_7"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.7. Uize.Node.Classes.toggleClass"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_7" title="2. Static Methods -&gt; 2.7. Uize.Node.Classes.toggleClass">7</a>. </span>Uize.Node.Classes.toggleClass</h2>
+		<div class="contents2">
+			<p>Toggles the presence of the specified CSS class in the <code>className</code> property of the specified node(s).</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">Uize.Node.Classes.toggleClass (nodeBLOB,classSTR);
+</pre>
+			
+			<p>For a more detailed discussion and to see examples, see the section <a href="#1_4">Toggling a Class</a>.</p>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#2_1">Uize.Node.Classes.addClass</a></code>, <code><a href="#2_3">Uize.Node.Classes.hasClass</a></code>, and <code><a href="#2_4">Uize.Node.Classes.removeClass</a></code> static methods</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#2_8">Uize.Node.Classes.toggleState</a></code> static method</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_8"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.8. Uize.Node.Classes.toggleState"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_8" title="2. Static Methods -&gt; 2.8. Uize.Node.Classes.toggleState">8</a>. </span>Uize.Node.Classes.toggleState</h2>
+		<div class="contents2">
+			<p>Updates the <code>className</code> property of the specified node(s), to contain the one CSS class out of the specified state classes that corresponds to the state that is obtained from the specified node(s) and then advanced by one.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">Uize.Node.Classes.toggleState (nodeBLOB,stateClassesSTRorARRAY);
+</pre>
+			
+			<p>For a more detailed discussion and to see examples, see the section <a href="#1_6_5">Toggling State</a>.</p>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#2_2">Uize.Node.Classes.getState</a></code> and <code><a href="#2_6">Uize.Node.Classes.setState</a></code> static methods</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#2_7">Uize.Node.Classes.toggleClass</a></code> static method</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+	</div>
+	
+	<a name="3"></a>
+	<h1 class="heading1" title="3. Value Types"><span class="headingNumber"><a href="#3" title="3. Value Types">3</a>. </span>Value Types</h1>
+	<div class="contents1">
+		<p>For the sake of not redundantly describing the value types for certain method parameters and return values repeatedly, some common value types are described here.</p>
+		
+		<a name="3_1"></a>
+		<h2 class="heading2" title="3. Value Types -&gt; 3.1. classSTR"><span class="headingNumber"><a href="#3" title="3. Value Types">3</a>.<a href="#3_1" title="3. Value Types -&gt; 3.1. classSTR">1</a>. </span>classSTR</h2>
+		<div class="contents2">
+			<p>A string, specifying the name of a single CSS class.</p>
+			
+			<p>A <code><a href="#3_1">classSTR</a></code> value should be a valid CSS class name for a single class - it may not be a space separated list of multiple classes. Values of this type can be accepted by the <code><a href="#2_3">Uize.Node.Classes.hasClass</a></code>, <code><a href="#2_1">Uize.Node.Classes.addClass</a></code>, <code><a href="#2_4">Uize.Node.Classes.removeClass</a></code>, and <code><a href="#2_7">Uize.Node.Classes.toggleClass</a></code> static methods.</p>
+		</div>
+		
+		<a name="3_2"></a>
+		<h2 class="heading2" title="3. Value Types -&gt; 3.2. stateBOOLorINT"><span class="headingNumber"><a href="#3" title="3. Value Types">3</a>.<a href="#3_2" title="3. Value Types -&gt; 3.2. stateBOOLorINT">2</a>. </span>stateBOOLorINT</h2>
+		<div class="contents2">
+			<p>A boolean or integer, specifying a state that maps to one of the CSS classes specified in a <code><a href="#3_3">stateClassesSTRorARRAY</a></code> value.</p>
+			
+			<p>Values of this type can be accepted by the <code><a href="#2_6">Uize.Node.Classes.setState</a></code> static method. Values of this type are returned by the <code><a href="#2_2">Uize.Node.Classes.getState</a></code> static method. When a <code><a href="#3_2">stateBOOLorINT</a></code> value is specified along with a <code><a href="#3_3">stateClassesSTRorARRAY</a></code> value when calling the <code><a href="#2_6">Uize.Node.Classes.setState</a></code> method, it can be a boolean or an integer, where the boolean value <code>false</code> is equivalent to the integer value <code>0</code>, and where the boolean value <code>true</code> is equivalent to the integer value <code>1</code>. The <code><a href="#3_3">stateClassesSTRorARRAY</a></code> value should not exceed the number of classes specified in a <code><a href="#3_3">stateClassesSTRorARRAY</a></code> value. If it does, then it will be "wrapped" around to become a value that is within range.</p>
+		</div>
+		
+		<a name="3_3"></a>
+		<h2 class="heading2" title="3. Value Types -&gt; 3.3. stateClassesSTRorARRAY"><span class="headingNumber"><a href="#3" title="3. Value Types">3</a>.<a href="#3_3" title="3. Value Types -&gt; 3.3. stateClassesSTRorARRAY">3</a>. </span>stateClassesSTRorARRAY</h2>
+		<div class="contents2">
+			<p>A comma-separated string or an array of strings, specifying a list of CSS classes that are to be mapped to a <code><a href="#3_2">stateBOOLorINT</a></code> type value.</p>
+			
+			<p>Values of this type can be accepted by the <a href="#1_6">State Related Methods</a> (<code><a href="#2_6">Uize.Node.Classes.setState</a></code>, <code><a href="#2_2">Uize.Node.Classes.getState</a></code>, <code><a href="#2_8">Uize.Node.Classes.toggleState</a></code>, and <code><a href="#2_5">Uize.Node.Classes.removeState</a></code>). A <code><a href="#3_3">stateClassesSTRorARRAY</a></code> value should generally specify two or more state classes, typically specifying just two (eg. <code>'disabled,enabled'</code> or <code>['disabled','enabled']</code>).</p>
+			
+			<p>In the special case where only one state class is specified (eg. <code>'enabled'</code> or <code>['enabled']</code>), it is implicit that the class specified is the second of two state classes where the first class is an empty string. Therefore, the string value <code>'enabled'</code> and the array value <code>['enabled']</code> would be equivalent to the values <code>',enabled'</code> and <code>['','enabled']</code>, respectively. This behavior provides a convenient shorthand for simple <a href="#1_6_1">Presence or Absence State</a> cases, where a specified single CSS class is to be mapped to the <code>true</code> value of a binary state (such as an enabled or selected state, for example), and where the <code>false</code> value is represented by the absence of that class.</p>
+		</div>
+	</div>
+	
+	<a name="4"></a>
+	<h1 class="heading1" title="4. Static Properties"><span class="headingNumber"><a href="#4" title="4. Static Properties">4</a>. </span>Static Properties</h1>
+	<div class="contents1">
+		<a name="4_1"></a>
+		<h2 class="heading2" title="4. Static Properties -&gt; 4.1. Uize.Node.Classes.moduleName"><span class="headingNumber"><a href="#4" title="4. Static Properties">4</a>.<a href="#4_1" title="4. Static Properties -&gt; 4.1. Uize.Node.Classes.moduleName">1</a>. </span>Uize.Node.Classes.moduleName</h2>
+		<div class="contents2">
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+	</div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

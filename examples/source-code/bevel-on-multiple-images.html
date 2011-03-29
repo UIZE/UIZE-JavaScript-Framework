@@ -1,0 +1,219 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Bevel On Multiple Images - HTML Source Code | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework HTML example source code"/>
+	<meta name="description" content="This is the source code for the Bevel On Multiple Images example"/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../../css/page.css"/>
+	<link rel="stylesheet" href="../../css/page.source.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../../index.html" title="UIZE JavaScript Framework home"></a>
+	SOURCE CODE: Bevel On Multiple Images
+	<div id="page-actions" class="pageActions">
+		<a href="../bevel-on-multiple-images.html" class="buttonLink">VIEW EXAMPLE</a>
+	</div>
+</h1>
+
+<pre>
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+&lt;head&gt;
+  &lt;title&gt;Bevel On Multiple Images | JavaScript Examples | UIZE JavaScript Framework&lt;/title&gt;
+  &lt;meta name="keywords" content="Uize.Widget.Bevel"/&gt;
+  &lt;meta name="description" content="See how bevel overlays can be created for multiple images, where the thickness and opacity of the bevel for all images can be controlled with sliders."/&gt;
+  &lt;link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/&gt;
+  &lt;link rel="stylesheet" href="../css/page.css"/&gt;
+  &lt;link rel="stylesheet" href="../css/page.example.css"/&gt;
+  &lt;link rel="stylesheet" href="css/labeled-horizontal-sliders.css"/&gt;
+  &lt;style type="text/css"&gt;
+    /*** labeled horizontal slider overrides ***/
+      .sliderPlaceholder {
+        width:480px;
+      }
+
+    .bevelThumb {
+      width:105px;
+      height:75px;
+      position:relative;
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+&lt;script type="text/javascript" src="../js/Uize.js"&gt;&lt;/script&gt;
+
+&lt;h1 class="document-title"&gt;
+  &lt;a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"&gt;&lt;/a&gt;
+  &lt;a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow"&gt;JAVASCRIPT EXAMPLES&lt;/a&gt;
+  Bevel On Multiple Images
+  &lt;div id="page-actions" class="pageActions"&gt;
+    &lt;a href="source-code/bevel-on-multiple-images.html" class="buttonLink"&gt;SOURCE&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/h1&gt;
+
+&lt;div class="main"&gt;
+  &lt;!-- explanation copy --&gt;
+
+  &lt;div class="explanation"&gt;
+    &lt;p&gt;In this example, the &lt;code&gt;Uize.Widget.Bevel.spawn&lt;/code&gt; method is being used to spawn multiple &lt;a href="../reference/Uize.Widget.Bevel.html"&gt;&lt;code&gt;Uize.Widget.Bevel&lt;/code&gt;&lt;/a&gt; widget instances. This widget simply adds a bevel effect to the edge of the node to which it attaches. Instances are spawned for all div elements with a CSS class string of "bevelThumb". This is done by specifying a find expression object when calling the &lt;code&gt;Uize.Widget.Bevel.spawn&lt;/code&gt; static method. Additionally, two slider widgets of the &lt;a href="../reference/Uize.Widget.Bar.Slider.html"&gt;&lt;code&gt;Uize.Widget.Bar.Slider&lt;/code&gt;&lt;/a&gt; class are instantiated and are wired up to control the &lt;code&gt;thickness&lt;/code&gt; and &lt;code&gt;opacity&lt;/code&gt; set-get properties for all the bevel widget instances. Each time the value of either slider changes, all &lt;code&gt;Uize.Widget.Bevel&lt;/code&gt; instances are updated. The batch update is accomplished using the &lt;code&gt;Uize.callOn&lt;/code&gt; static method, which allows a specified instance method or function to be called on all the instances contained inside the specified array - a form of convenience iterator.&lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;!-- page layout's "wireframe" with slots for wipe objects --&gt;
+
+  &lt;form&gt;
+    &lt;table border="0" cellspacing="2" cellpadding="0" style="margin:auto;"&gt;
+      &lt;tr&gt;
+        &lt;td colspan="4"&gt;
+          &lt;table border="0" cellspacing="6" cellpadding="0"&gt;
+            &lt;tr&gt;
+              &lt;td&gt;&lt;div class="bevelThumb" style="background:url(http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228109666540948246&amp;max_dim=105);" title="Braving the Onslaught"/&gt;&lt;/td&gt;
+              &lt;td&gt;&lt;div class="bevelThumb" style="background:url(http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228745103279879745&amp;max_dim=105);" title="Companion to a Sunset"/&gt;&lt;/td&gt;
+              &lt;td&gt;&lt;div class="bevelThumb" style="background:url(http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228866001826566384&amp;max_dim=105);" title="Concrete Eternity"/&gt;&lt;/td&gt;
+              &lt;td&gt;&lt;div class="bevelThumb" style="background:url(http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228321774790917687&amp;max_dim=105);" title="Corrugate It"/&gt;&lt;/td&gt;
+              &lt;td&gt;&lt;div class="bevelThumb" style="background:url(http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228463251413365530&amp;max_dim=105);" title="Crank It Up"/&gt;&lt;/td&gt;
+              &lt;td&gt;&lt;div class="bevelThumb" style="background:url(http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228507796122097730&amp;max_dim=105);" title="Driving Through the Rain"/&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+              &lt;td&gt;&lt;div class="bevelThumb" style="background:url(http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228267745724726415&amp;max_dim=105);" title="Flock of Clouds"/&gt;&lt;/td&gt;
+              &lt;td&gt;&lt;div class="bevelThumb" style="background:url(http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228937676589416694&amp;max_dim=105);" title="Hail to the Opening"/&gt;&lt;/td&gt;
+              &lt;td&gt;&lt;div class="bevelThumb" style="background:url(http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228483162492178759&amp;max_dim=105);" title="Heavens Open Over Pedro"/&gt;&lt;/td&gt;
+              &lt;td&gt;&lt;div class="bevelThumb" style="background:url(http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228855435929294206&amp;max_dim=105);" title="Hook in the Wall"/&gt;&lt;/td&gt;
+              &lt;td&gt;&lt;div class="bevelThumb" style="background:url(http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228496639998196479&amp;max_dim=105);" title="Huddling Together"/&gt;&lt;/td&gt;
+              &lt;td&gt;&lt;div class="bevelThumb" style="background:url(http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228623703668130129&amp;max_dim=105);" title="Just a Visitor"/&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+              &lt;td&gt;&lt;div class="bevelThumb" style="background:url(http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228897217554746467&amp;max_dim=105);" title="Out the Bus Window"/&gt;&lt;/td&gt;
+              &lt;td&gt;&lt;div class="bevelThumb" style="background:url(http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228554379238024970&amp;max_dim=105);" title="Pacifica Pier From Milagra"/&gt;&lt;/td&gt;
+              &lt;td&gt;&lt;div class="bevelThumb" style="background:url(http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228550194293355740&amp;max_dim=105);" title="Pier Before the Storm"/&gt;&lt;/td&gt;
+              &lt;td&gt;&lt;div class="bevelThumb" style="background:url(http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228234695931308619&amp;max_dim=105);" title="Rain Fall"/&gt;&lt;/td&gt;
+              &lt;td&gt;&lt;div class="bevelThumb" style="background:url(http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228580091324147918&amp;max_dim=105);" title="Retirement Home"/&gt;&lt;/td&gt;
+              &lt;td&gt;&lt;div class="bevelThumb" style="background:url(http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228074575082103294&amp;max_dim=105);" title="San Fran Sunset"/&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+          &lt;/table&gt;
+        &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td colspan="4" style="height:8px;"&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td class="sliderLabel"&gt;BEVEL THICKNESS&lt;/td&gt;
+        &lt;td class="sliderValueLabel slideMinValue"&gt;0&lt;/td&gt;
+        &lt;td id="page_bevelThickness"&gt;&lt;img src="../images/blank.gif" class="sliderPlaceholder" alt=""/&gt;&lt;/td&gt;
+        &lt;td class="sliderValueLabel sliderMaxValue"&gt;30&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td class="sliderLabel"&gt;BEVEL OPACITY&lt;/td&gt;
+        &lt;td class="sliderValueLabel slideMinValue"&gt;0&lt;/td&gt;
+        &lt;td id="page_bevelOpacity"&gt;&lt;img src="../images/blank.gif" class="sliderPlaceholder" alt=""/&gt;&lt;/td&gt;
+        &lt;td class="sliderValueLabel sliderMaxValue"&gt;1&lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/table&gt;
+  &lt;/form&gt;
+&lt;/div&gt;
+
+&lt;!-- JavaScript code to make the static wipe HTML "come alive" --&gt;
+
+&lt;script type="text/javascript"&gt;
+
+Uize.module ({
+  required:[
+    'UizeDotCom.Page.Example.library',
+    'UizeDotCom.Page.Example',
+    'Uize.Widget.Bevel',
+    'Uize.Widget.Bar.Slider.xSkin'
+  ],
+  builder:function () {
+    /*** create the example page widget ***/
+      var page = window.page = new UizeDotCom.Page.Example;
+
+    /*** spawn a batch of Uize.Widget.Bevel instances ***/
+      var bevels = Uize.Widget.Bevel.spawn ({idPrefix:{tagName:'DIV',className:'bevelThumb'}},page);
+
+    /*** code to update thickness and opacity for the bevel instances ***/
+      function updateBevelInstances () {
+        Uize.callOn (
+          bevels,
+          'set',
+          [{
+            thickness:+bevelThickness,
+            opacity:+bevelOpacity
+          }]
+        );
+      }
+
+    /*** set defaults for properties whose values are the same for most sliders ***/
+      Uize.Widget.Bar.Slider.set ({
+        fullTintColor:'#fff',
+        fullTintLevel:60,
+        emptyTintColor:'#9aa',
+        emptyTintLevel:40,
+        borderThickness:1,
+        borderTintColor:'#666',
+        borderTintLevel:100,
+        knobSize:18,
+        orientation:'horizontal'
+      });
+
+    /*** create the Uize.Widget.Bar.Slider object for the bevel thickness selector ***/
+      var bevelThickness = page.addChild (
+        'bevelThickness',
+        Uize.Widget.Bar.Slider,
+        {
+          minValue:1,
+          maxValue:10,
+          value:4,
+          built:false
+        }
+      );
+      bevelThickness.wire ('Changed.value',updateBevelInstances);
+
+    /*** create the Uize.Widget.Bar.Slider object for the bevel opacity selector ***/
+      var bevelOpacity = page.addChild (
+        'bevelOpacity',
+        Uize.Widget.Bar.Slider,
+        {
+          minValue:0,
+          maxValue:1,
+          value:.575,
+          increments:0,
+          built:false
+        }
+      );
+      bevelOpacity.wire ('Changed.value',updateBevelInstances);
+
+    /*** initialize the bevel instances to the slider values ***/
+      updateBevelInstances ();
+
+    /*** wire up the page widget ***/
+      page.wireUi ();
+  }
+});
+
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+</pre>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.library',
+		'UizeDotCom.Page'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page).wireUi ()}
+});
+
+</script>
+
+</body></html>

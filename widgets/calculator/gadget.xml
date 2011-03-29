@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+	<ModulePrefs
+		title="Calculator"
+		title_url="http://www.uize.com/widgets/calculator.html"
+		description="An easy to use calculator widget that you can embed in your Web sites and blogs, supporting all the operations you&apos;d expect from a basic calculator."
+		author="Chris van Rensburg"
+		author_email="uize.javascript.framework@gmail.com"
+		author_location="Redwood City"
+		author_affiliation="UIZE JavaScript Framework"
+		height="314"
+		screenshot="http://www.uize.com/images/widgets/calculator.jpg"
+		thumbnail="http://www.uize.com/images/widgets/calculator-120x60.gif"
+	/>
+	<Content
+		type="url"
+		href="http://www.uize.com/widgets/calculator/web.html"
+	/>
+</Module>

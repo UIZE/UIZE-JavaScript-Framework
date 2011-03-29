@@ -1,0 +1,21 @@
+The =Uize.Widget.Window= and =Uize.Widget.Palette= backwards compatibility alias modules, and the various other alias modules under these namespaces, have finally been killed.
+
+.........................................................
+Uize.Widget.Window            >> BECOMES >>  !!! DEAD !!!
+Uize.Widget.Window.Draggable  >> BECOMES >>  !!! DEAD !!!
+Uize.Widget.Window.Resizable  >> BECOMES >>  !!! DEAD !!!
+Uize.Widget.Palette           >> BECOMES >>  !!! DEAD !!!
+Uize.Widget.Palette.Confirm   >> BECOMES >>  !!! DEAD !!!
+Uize.Widget.Palette.Form      >> BECOMES >>  !!! DEAD !!!
+Uize.Widget.Palette.Iframe    >> BECOMES >>  !!! DEAD !!!
+.........................................................
+
+These modules were turned into backwards compatibility alias modules during the dialog code consolidation effort in February of 2009, so the backwards compatibility provision has been available for six months - adequate time to update code to using the new dialog classes. The alias modules are now being removed to keep the framework clean and prevent it from becoming encrusted with defunct code. For background on this change, see the original deprecation notice `2009-02-03 - Consolidation of Dialog Classes`.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-09-08 - Deprecated Modules Killed
+....................................................................................

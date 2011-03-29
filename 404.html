@@ -1,0 +1,25 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="refresh" content="2000; URL=http://www.uize.com"/>
+	<meta name="robots" content="noindex"/>
+	<title>ERROR 404 - redirecting to uize.com</title>
+</head>
+
+<body>
+
+<script type="text/javascript">
+	location.replace (
+		'http://www.uize.com/search-sections.html?' +
+		escape (
+			location.href.slice (location.href.indexOf (location.pathname))
+				.replace (/[^a-zA-Z0-9\.]/g,' ')
+				.replace (/\.html$/,'')
+		)
+	);
+</script>
+
+</body>
+
+</html>
+

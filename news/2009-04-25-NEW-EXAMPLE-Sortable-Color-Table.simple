@@ -1,0 +1,13 @@
+The new [[../examples/sortable-color-table.html][Sortable Color Table]] example presents the user with a sortable table of the named colors defined in the SVG 1.0 / CSS Color Module Level 3 specifications.
+
+The table is sortable by any one of the colors' properties, so you can get a sense of how properties such as hue, saturation, lightness, red level, etc. relate to different colors by sorting on those properties - in either ascending or descending order. Indicators alongside the column values also provide cues for visual reference. The table is generated with the help of the =Uize.Color= module and the named colors defined in the =Uize.Color.xSvgColors= extension. The table is made sortable with the help of the =Uize.Widget.TableSort= module.
+
+[[../examples/sortable-color-table.html][CHECK IT OUT]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-04-25 - NEW EXAMPLE: Sortable Color Table
+....................................................................................

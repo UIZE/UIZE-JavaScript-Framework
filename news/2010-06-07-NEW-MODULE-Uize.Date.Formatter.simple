@@ -1,0 +1,24 @@
+The new =Uize.Date.Formatter= module provides methods for formatting and parsing date strings, supporting a wide variety of different formatting options.
+
+The =Uize.Date.Formatter.format= static method of the new =Uize.Date.Formatter= module allows date objects to be formatted in many different ways, by specifying date formats using the many available date component tokens, such as ={YYYY}=, ={YY}=, ={MM}=, ={monthNo}=, ={monthName}=, ={shortMonthName}=, ={DD}=, ={dayNo}=, ={dayNoSuffix}=, ={dayName}=, ={shortDayName}=, ={hh}=, ={h12}=, ={hh12}=, ={mm}=, ={minutes}=, ={ss}=, ={seconds}=, and ={ampm}=. Additionally, date strings can be parsed according to any specified date format.
+
+EXAMPLE
+...................................................................................
+var
+	date = new Date ('Sat Sep 8 2007 18:03:05'),
+	dateFormat = '{h12}:{mm}:{ss}{ampm} on {dayNo}{dayNoSuffix} {monthName} {YYYY}',
+	formattedDateStr = Uize.Date.Formatter.format (date,dateFormat),
+	parsedDate = Uize.Date.Formatter.parse (formattedDateStr,dateFormat)
+;
+alert (+date == +parsedDate);  // alerts "true"
+...................................................................................
+
+In the above example, the date "Sat Sep 8 2007 18:03:05" is being formatted to a date string using the date format ='{h12}:{mm}:{ss}{ampm} on {dayNo}{dayNoSuffix} {monthName} {YYYY}'=, which produces the date string ='6:03:05pm on 8th September 2007'=. Then, this date string is being parsed using the same date format, and the resulting date object is being assigned to the =parsedDate= variable. The =alert= statement compares the time in milliseconds of the original date against the time in milliseconds of the parsed date. They are identical, because the =Uize.Date.Formatter.parse= method is able to successfully parse a date using the same format that was used to format it with the =Uize.Date.Formatter.format= method.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2010-06-07 - NEW MODULE: Uize.Date.Formatter
+....................................................................................

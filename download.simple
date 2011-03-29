@@ -1,0 +1,35 @@
+It's *free* and it's *open source*. Download the UIZE JavaScript Framework to start developing *dazzling* Web sites with rich client side interactivity.
+
+WHAT YOU GET
+
+- the entire *uize.com* site that runs locally, with loads of useful stuff to get you started...
+- all the example files and tools... use them as a starting point and hack away at them to your heart's content
+- all the JavaScript source files... so you can develop and troubleshoot applications using the source code first...
+- all the scrunched JavaScript files... so you can see how small they are for production ready applications
+- all the build scripts... so you can see how they're used in a real world Web site. Hack them to suit your own Web projects.
+- all the SimpleDoc source files, so you can see how easy it is to write structured documents in this wikitext like format
+
+[[http://www.uize.com/uize.zip][*DOWNLOAD IT NOW*]]
+
+========================================================================================================
+
+GET INVOLVED
+
+So, UIZE is totally FREE to use. All we ask in return is for you to please promote UIZE. Some easy things you can do...
+
+- get support, give support, and get involved in the discussion in the Google Group [[http://groups.google.com/group/uize][UIZE JavaScript Framework Group]]
+- subscribe to the *uize.com* [[http://www.uize.com/latest-news.rss][RSS feed]] and keep up-to-date on recent developments
+- mention UIZE to all your developer friends, in your blog postings, and on popular blogs like [[http://ajaxian.com][ajaxian.com]]
+- buy your very own UIZE swag at the [[http://www.zazzle.com/uize_merch*][OFFICIAL MERCHANDISE STORE]] 
+- put a link in the footer of pages that use UIZE, like the HTML shown below (or whatever's appropriate for the site)...
+
+...................................................................................
+built using the <a
+	href="http://www.uize.com"
+	title="AJAX, RIA, widgets, JSON, OOP, Class Inheritance, XMLHttpRequest, DOM..."
+	target="_blank"
+>
+	UIZE JavaScript Framework
+</a>
+...................................................................................
+

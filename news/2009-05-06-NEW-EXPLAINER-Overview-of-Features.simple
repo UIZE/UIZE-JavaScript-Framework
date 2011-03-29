@@ -1,0 +1,13 @@
+The new [[../explainers/overview-of-features.html][Overview of Features]] explainer provides a very thorough overview of the most important features and areas of functionality of the UIZE JavaScript Framework.
+
+Among the features and topics covered in this overview are: Inheritance and Object Orientation, Modules and Dependency Resolution, State Interface, Event Infrastructure, Ajax / Asynchronous Communication, DOM Manipulation, Cross-compatibility and Browser Abstraction, Widgets Framework, Progressive Enhancement / Unobtrusive JavaScript, Internationalization and Localization, JavaScript Templates, Effects and Animation, Documentation System, Code Compression and Libraries, Build Scripts, Working with JSON, Working with Strings, Working with URLs, Working with Dates, Working with Colors, and more...
+
+[[../explainers/overview-of-features.html][READ IT NOW]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-05-06 - NEW EXPLAINER: Overview of Features
+....................................................................................

@@ -1,0 +1,20 @@
+The new [[../explainers/creating-a-new-uize-module.html][Creating A New Uize Module]] explainer provides guidelines and advice for the development of new UIZE modules, to be followed by developers of the UIZE JavaScript Framework.
+
+Among other things, this document discusses...
+
+- choosing an appropriate namespace and name for your new module
+- requirements for the module info, scruncher settings, and module meta data comment blocks of your new module
+- guidelines on implementing the functionality for your new module
+- implementing a companion unit test module for your new module
+- documenting your new module
+- creating one or more examples for your new module
+
+[[../explainers/creating-a-new-uize-module.html][LEARN MORE]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2010-03-18 - NEW EXPLAINER: Creating A New Uize Module
+....................................................................................

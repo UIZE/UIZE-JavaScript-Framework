@@ -1,0 +1,23 @@
+The unit tests suite for the UIZE JavaScript Framework, implemented in the =Uize.Test.UnitTests= module, has been improved with the addition of basic loadability tests for all modules for which dedicated test modules have not yet been written.
+
+All Modules Now Tested For Loadability
+	All modules for which dedicated tests have not yet been written are now automatically tested at least for loadability.
+
+	Modules that are excluded from automated loadability testing are...
+
+	- modules for which dedicated test modules have already been created (naturally)
+	- modules that are themselves test modules
+	- library modules, since they are merely collections of individual modules bundled together, where those individual modules will have been tested by either their corresponding dedicated test modules, or by automated loadability tests
+
+All Modules Safe To Load
+	All modules of the UIZE JavaScript Framework are now designed to be safe to load in a non-browser context, such as Microsoft's Windows Script Host.
+
+	There were some modules that would fail to load because certain aspects of the initialization of the modules relied on specific features exposed by a Web browser, such as the =window=, =document=, and =navigator= objects. These modules have been updated to deal gracefully with the non-existence of those objects in non-browser contexts. This allows an automated unit test system to at least verify that these modules can be loaded and that their code does not contain fatal syntax errors or other crippling errors of initialization / module setup - without having to involve a Web browser. Features of the modules may still not be usable in a non-browser context, but at least the modules can be sanity checked for basic well-formedness of the JavaScript. This is particularly helpful for the automatic testing of the loadability of the scrunched versions of modules.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2010-07-22 - Improved Unit Tests
+....................................................................................

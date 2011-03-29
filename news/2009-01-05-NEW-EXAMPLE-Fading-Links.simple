@@ -1,0 +1,13 @@
+The new [[../examples/fading-links.html][Fading Links]] example demonstrates how the =Uize.Widget.HoverFader= widget class can be used to add an animated color fading effect to the links in five different menus.
+
+In the example, an instance of =Uize.Widget.HoverFader= is created for each menu. Each instance manages the color fade effect for all the links in a menu. This allows each menu to have different effect settings.
+
+[[../examples/fading-links.html][CHECK IT OUT]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-01-05 - NEW EXAMPLE: Fading Links
+....................................................................................

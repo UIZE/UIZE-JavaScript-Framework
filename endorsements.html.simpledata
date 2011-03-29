@@ -1,0 +1,37 @@
+listings
+:
+	fullName: Zazzle Inc.
+	text::
+		Zazzle has provided a compelling incubation environment for the development of a JavaScript framework and has always been encouraging and supportive of development on an open source project. A good number of more generic and generally useful (ie. not very Zazzle specific) widgets in the UIZE framework were originally developed for the zazzle.com Web site and then ported over to the framework.
+	link: http://www.zazzle.com
+:
+	fullName: jEdit
+	text::
+		Over the years, the jEdit text editor has been an invaluable aid in the development of code for UIZE. jEdit is a phenomenally powerful and highly configurable text editor that is perfectly suited to the task of editing JavaScript, HTML, CSS, and many other file types one is likely to encounter when doing Web UI development. Particularly compelling are its indentation based folding capability, its fully configurable shortcuts, cross-platform support (by virtue of running in the Java Virtual Machine), and its comprehensive array of third party plugins. Thanks to all the guys who have worked on the jEdit project for their incredible contribution.
+	link: http://www.jedit.org/
+:
+	fullName: Firebug
+	text::
+		Thanks to Joe Hewitt, Justin Dolske, and Rob Campbell for the fantastic extension for Firefox that so many UI engineers, Web developers, and client coders of just about any flavor find indispensable in their daily lives as developers. Firefox owes a great deal of its popularity amongst developers to the powerful Firebug extension, with its extensive capabilities made possible through the comprehensive extension API conjured up by the Mozilla brains. With its console logging, DOM inspector, dynamic CSS editing, script debugging, net activity monitoring, script profiling, and more, Firebug makes troubleshooting Web applications in Firefox a pleasure.
+	link: http://getfirebug.com
+:
+	fullName: FileZilla
+	text::
+		Thanks to Tim Kosse (and his fellow developers) for his tireless work on the FileZilla project. FileZilla is a superlative (and free) FTP client that is available for multiple platforms, including Windows, Linux, and Mac OS X. FileZilla has uploaded many a file for the UIZE JavaScript Framework's Web site. The application's interface is a snap to use and it seamlessly manages large uploads and downloads of complex directory structures.
+	link: http://forum.filezilla-project.org/
+:
+	fullName: Scooter Software
+	text::
+		For years, Scooter Software has produced a powerful yet affordable folder and file diffing tool that rivals the functionality found in much more expensive software tools, like the industry standard Araxis Merge. Scooter Software's Beyond Compare utility has proven itself to be an invaluable aid in resolving discrepancies between different copies of Web sites and projects that tend to want to float around on different hard drives, in free roaming zip packages, on CD backups, and archives of various flavors. Source control is obviously always the ideal, but there just come times when you have to deal with multiple copies of an entire site. When that time comes, Beyond Compare is there to help figure out the mess.
+	link: http://www.scootersoftware.com/
+:
+	fullName: Everaldo Coelho
+	text::
+		UIZE thanks consummate icon designer, Everaldo Coelho for his generous licensing of the Crystal Clear icon set under the GNU Lesser General Public License (LGPL), a number of which icons have been used in example pages throughout the uize.com Web site.
+	link: http://commons.wikimedia.org/wiki/Crystal_Clear
+:
+	fullName: Robert Penner
+	text::
+		Robert studied philosophy at Trinity Western University in Vancouver, B.C., graduating in 1999. Soon after that, he tried Flash 4 and has been hooked ever since. After working as an independent contractor for several years, Robert was hired by Adobe in 2006 where he worked as a software engineer on the Flash Authoring team, adding features to Flash with ActionScript and JavaScript. Recently, Robert joined on at Club Penguin, a Disney owned company based in British Columbia that specializes in massively multiplayer online game development. Robert Penner is endorsed for his work on his easing equations, which provided a starting point and inspiration for work that has been done in the Uize.Curve module and related modules. 
+	link: http://www.robertpenner.com
+

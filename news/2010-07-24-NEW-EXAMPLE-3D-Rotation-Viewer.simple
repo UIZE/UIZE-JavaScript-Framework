@@ -1,0 +1,13 @@
+The new [[../examples/3d-rotation-viewer.html][3D Rotation Viewer]] example demonstrates how to easily create a slick 3D rotation viewer in UIZE that lets users rotate the view of an object a full 360 degrees using a mouse, or finger on the Apple iPad.
+
+The example is inspired by a showcase example by Apple of HTML5 technologies. The UIZE implementation works in pretty much all browsers, with no need for HTML5 or CSS3 features. This was an exercise in seeing how easy it would be to create an equivalent experience in UIZE. It was easy, taking less than a day. The code is all original, with absolutely no referencing of Apple's code (but thanks to Apple for their delicious iPod Touch products, and for their fabulous photos of said products). In the example, an instance of the Uize.Widget.Drag  class is being used to create a simple 3D rotation viewer. Using a mouse, you can click and drag to rotate the 3D image. On an Apple iPad, you can use your finger. The viewer implements a deceleration behavior - the speed at the time of release determines how long it will take to spin down to a stop. When the page loads initially, the image is animated 360 degrees clockwise. Buttons beneath the viewer let you trigger other kinds of spins.
+
+[[../examples/3d-rotation-viewer.html][CHECK IT OUT]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2010-07-24 - NEW EXAMPLE:  3D Rotation Viewer
+....................................................................................

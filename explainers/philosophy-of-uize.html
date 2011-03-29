@@ -1,0 +1,270 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Philosophy Of Uize | Documentation | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework Documentation "/>
+	<meta name="description" content="This document discusses the philosophy behind the design of the UIZE JavaScript Framework, including key precepts like not extending native objects."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../javascript-explainers.html" class="breadcrumb breadcrumbWithArrow">EXPLAINERS</a>
+	Philosophy Of Uize
+
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="This document discusses the philosophy behind the design of the UIZE JavaScript Framework, including key precepts like not extending native objects.">1. Introduction</a></li>
+			<li><a href="#2" title="There are some key precepts that guide the design of the UIZE JavaScript Framework.">2. Key Precepts</a>
+				<ul>
+					<li><a href="#2_1" title="What&apos;s in a namespace? Everything, as it turns out. The UIZE JavaScript Framework tucks away its features into a single Uize namespace (and if you create your own namespace for your site, you should do the same).">2.1. Respect Global Namespace</a></li>
+					<li><a href="#2_2" title="A conscious decision was made early on to not rely upon non-standard extensions of the DOM for registering attributes that client code may want to use for qualifying its behavior.">2.2. Don't Violate Standards</a></li>
+					<li><a href="#2_3">2.3. Don't Molest JavaScript</a>
+						<ul>
+							<li><a href="#2_3_1" title="The UIZE JavaScript embraces the JavaScript language as it is.">2.3.1. JavaScript Got Game</a></li>
+							<li><a href="#2_3_2" title="UIZE doesn&apos;t place undue emphasis on introducing exotic new iterator constructs, purely for the sake of how neat they are.">2.3.2. Caution With Iterator Methods</a></li>
+							<li><a href="#2_3_3" title="UIZE doesn&apos;t try to fix JavaScript, and - in the interests of interoperability - avoids polluting the global namespace or extending built-in objects.">2.3.3. UIZE Doesn't Extend Core JavaScript Objects</a></li>
+						</ul>
+					</li>
+					<li><a href="#2_4" title="There are four primary facets to the implementation of a healthy Web site: structure, content, design, and interaction.">2.4. Separation of Design and Interaction</a></li>
+				</ul>
+			</li>
+			<li><a href="#3" title="The UIZE JavaScript Framework is inspired by the environment that gave birth to it - the Web. UIZE adopts several paradigms that are inspired by the world of HTML and CSS.">3. Inspired by the Web</a>
+				<ul>
+					<li><a href="#3_1" title="HTML doesn&apos;t care in which order tag attributes are specified.">3.1. Order Agnostic and Defaulted Method Parameters</a>
+						<ul>
+							<li><a href="#3_1_1" title="In some ways it would be nice (at least consistent) if all functions took an object hash of named parameters.">3.1.1. Necessarily Mixed Approach</a></li>
+						</ul>
+					</li>
+					<li><a href="#3_2">3.2. State Oriented Programming</a>
+						<ul>
+							<li><a href="#3_2_1" title="An invaluable feature, when using JavaScript in the context of a Web document, is reflection.">3.2.1. The Joy of Reflection</a></li>
+							<li><a href="#3_2_2" title="In a similar vein as DOM reflection, the UIZE JavaScript Framework provides a state interface through its Set-get Properties mechanism.">3.2.2. Make It So</a></li>
+						</ul>
+					</li>
+					<li><a href="#3_3" title="UIZE takes the approach that the value of static typing is overestimated and is not philosophically compatible with a dynamic language like JavaScript and the Web environment in which it primarily lives - an environment which emphasizes versatility.">3.3. Type Versatility</a></li>
+				</ul>
+			</li>
+			<li><a href="#4">4. Key Concepts</a>
+				<ul>
+					<li><a href="#4_1" title="Widgets available in the UIZE JavaScript Framework have been designed using the GLUE paradigm.">4.1. The GLUE Paradigm</a>
+						<ul>
+							<li><a href="#4_1_1" title="&quot;GLUE&quot; stands for Glue Logic Upon Elements. At its heart, GLUE aims to aid the Web interface design process by decoupling the interface skin development from the interface functionality development.">4.1.1. What is GLUE?</a></li>
+							<li><a href="#4_1_2" title="When working on the user interface for a project, graphic designers and HTML coders should not have to wrestle with complicated JavaScript code while they are making aesthetic choices. And the coders wiring up a Web-based application should not have to wrestle with dependencies on graphic/layout designers in order to make progress with developing functionality.">4.1.2. Decoupling Design And Interaction</a></li>
+							<li><a href="#4_1_3" title="With the GLUE approach, the JavaScript code supporting the functional logic of a user interface can be more cleanly separated from the HTML and CSS code.">4.1.3. GLUE'ing is More Robust</a></li>
+						</ul>
+					</li>
+					<li><a href="#4_2" title="With the .NET framework, Microsoft introduced the concept of &quot;code in front&quot; and &quot;code behind&quot;.">4.2. Code Beside</a></li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<a name="1"></a>
+	<h1 class="heading1" title="1. Introduction"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>. </span>Introduction</h1>
+	<div class="contents1">
+		<p>This document discusses the philosophy behind the design of the UIZE JavaScript Framework, including key precepts like not extending native objects.</p>
+	</div>
+	
+	<a name="2"></a>
+	<h1 class="heading1" title="2. Key Precepts"><span class="headingNumber"><a href="#2" title="2. Key Precepts">2</a>. </span>Key Precepts</h1>
+	<div class="contents1">
+		<p>There are some key precepts that guide the design of the UIZE JavaScript Framework.</p>
+		
+		<a name="2_1"></a>
+		<h2 class="heading2" title="2. Key Precepts -&gt; 2.1. Respect Global Namespace"><span class="headingNumber"><a href="#2" title="2. Key Precepts">2</a>.<a href="#2_1" title="2. Key Precepts -&gt; 2.1. Respect Global Namespace">1</a>. </span>Respect Global Namespace</h2>
+		<div class="contents2">
+			<p>What's in a namespace? Everything, as it turns out. The UIZE JavaScript Framework tucks away its features into a single <code><a href="../reference/Uize.html">Uize</a></code> namespace (and if you create your own namespace for your site, you should do the same).</p>
+			
+			<p>Global functions and properties are not provided, even though providing them might result in fewer keystrokes. UIZE has steered clear of the "battle of the dollar function". The holistic approach that the UIZE JavaScript Framework takes to the client code aspects of a Web application tends to make ad hoc access to the DOM by miscellaneous JavaScript code less necessary. Generally, if you're touching DOM nodes, those nodes are associated with widgets and they will usually be accessed as implied nodes using the facilities provided for this in the <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> class.</p>
+		</div>
+		
+		<a name="2_2"></a>
+		<h2 class="heading2" title="2. Key Precepts -&gt; 2.2. Don&apos;t Violate Standards"><span class="headingNumber"><a href="#2" title="2. Key Precepts">2</a>.<a href="#2_2" title="2. Key Precepts -&gt; 2.2. Don&apos;t Violate Standards">2</a>. </span>Don't Violate Standards</h2>
+		<div class="contents2">
+			<p>A conscious decision was made early on to not rely upon non-standard extensions of the DOM for registering attributes that client code may want to use for qualifying its behavior.</p>
+			
+			<p>There are other ways to pipe data to a widget's corresponding client code that don't violate W3C standards and don't require custom DTD's in order for pages to validate.</p>
+		</div>
+		
+		<a name="2_3"></a>
+		<h2 class="heading2" title="2. Key Precepts -&gt; 2.3. Don&apos;t Molest JavaScript"><span class="headingNumber"><a href="#2" title="2. Key Precepts">2</a>.<a href="#2_3" title="2. Key Precepts -&gt; 2.3. Don&apos;t Molest JavaScript">3</a>. </span>Don't Molest JavaScript</h2>
+		<div class="contents2">
+			<a name="2_3_1"></a>
+			<h3 class="heading3" title="2. Key Precepts -&gt; 2.3. Don&apos;t Molest JavaScript -&gt; 2.3.1. JavaScript Got Game"><span class="headingNumber"><a href="#2" title="2. Key Precepts">2</a>.<a href="#2_3" title="2. Key Precepts -&gt; 2.3. Don&apos;t Molest JavaScript">3</a>.<a href="#2_3_1" title="2. Key Precepts -&gt; 2.3. Don&apos;t Molest JavaScript -&gt; 2.3.1. JavaScript Got Game">1</a>. </span>JavaScript Got Game</h3>
+			<div class="contents3">
+				<p>The UIZE JavaScript embraces the JavaScript language as it is.</p>
+				
+				<p>JavaScript is a powerful interpreted scripting language, combining elements of object oriented languages and functional languages. There are some other cute and trendy languages out there, and we might become envious of their junk. UIZE is not preoccupied with trying to invent sexy new language constructs, purely for the sake of coolness.</p>
+			</div>
+			
+			<a name="2_3_2"></a>
+			<h3 class="heading3" title="2. Key Precepts -&gt; 2.3. Don&apos;t Molest JavaScript -&gt; 2.3.2. Caution With Iterator Methods"><span class="headingNumber"><a href="#2" title="2. Key Precepts">2</a>.<a href="#2_3" title="2. Key Precepts -&gt; 2.3. Don&apos;t Molest JavaScript">3</a>.<a href="#2_3_2" title="2. Key Precepts -&gt; 2.3. Don&apos;t Molest JavaScript -&gt; 2.3.2. Caution With Iterator Methods">2</a>. </span>Caution With Iterator Methods</h3>
+			<div class="contents3">
+				<p>UIZE doesn't place undue emphasis on introducing exotic new iterator constructs, purely for the sake of how neat they are.</p>
+				
+				<p>Unless you're factoring out significant code, iterator methods that act merely as for loops and take a function reference as the code to execute on iteration can take away more than they give. Superficially, it seems tedious to declare counters over and over again, just so you can iterate through elements of an array. It's cool that you can use anonymous functions in JavaScript and pass them to iterator methods, but if you're just replacing a simple for loop, you're hardly saving much in code size and you're adding a performance penalty. Iterator methods are best left to those that do complex iteration, like queued asynchronous iteration, tree traversal, node blob recursion, etc.</p>
+			</div>
+			
+			<a name="2_3_3"></a>
+			<h3 class="heading3" title="2. Key Precepts -&gt; 2.3. Don&apos;t Molest JavaScript -&gt; 2.3.3. UIZE Doesn&apos;t Extend Core JavaScript Objects"><span class="headingNumber"><a href="#2" title="2. Key Precepts">2</a>.<a href="#2_3" title="2. Key Precepts -&gt; 2.3. Don&apos;t Molest JavaScript">3</a>.<a href="#2_3_3" title="2. Key Precepts -&gt; 2.3. Don&apos;t Molest JavaScript -&gt; 2.3.3. UIZE Doesn&apos;t Extend Core JavaScript Objects">3</a>. </span>UIZE Doesn't Extend Core JavaScript Objects</h3>
+			<div class="contents3">
+				<p>UIZE doesn't try to fix JavaScript, and - in the interests of interoperability - avoids polluting the global namespace or extending built-in objects.</p>
+				
+				<p>UIZE does not seek to coerce JavaScript into taking on the form of some other language. UIZE leverages the intrinsic strengths of the language. Consequently, the UIZE JavaScript Framework does not extend any of JavaScript's built-in core objects, even though it's possible to do so, and even though it might seem cool to do so. There are no new methods of the String object, for example. Built-in JavaScript objects - along with their properties and methods - are also considered part of the global namespace, so adding custom methods would violate the <code><a href="#2_1">Respect Global Namespace</a></code> principle.</p>
+			</div>
+		</div>
+		
+		<a name="2_4"></a>
+		<h2 class="heading2" title="2. Key Precepts -&gt; 2.4. Separation of Design and Interaction"><span class="headingNumber"><a href="#2" title="2. Key Precepts">2</a>.<a href="#2_4" title="2. Key Precepts -&gt; 2.4. Separation of Design and Interaction">4</a>. </span>Separation of Design and Interaction</h2>
+		<div class="contents2">
+			<p>There are four primary facets to the implementation of a healthy Web site: structure, content, design, and interaction.</p>
+			
+			<p><span class="allCaps">STRUCTURE</span></p>
+			
+			<p>The structure of a document, its XHTML markup, is the glue that binds together the other three facets.</p>
+			
+			<p><span class="allCaps">CONTENT</span></p>
+			
+			<p>Content is kept separate, in the form of dynamic data held in databases, user provided assets held in network attached storage systems, and resource strings that aid in internationalization.</p>
+			
+			<p><span class="allCaps">DESIGN</span></p>
+			
+			<p>Design is kept separate from the structure of the document, in the form of assets and CSS files, in order to aid in workflow and facilitate reuse and to ease change in design over time.</p>
+			
+			<p><span class="allCaps">INTERACTION</span></p>
+			
+			<p>Interaction is kept separate, in the form of JavaScript framework class libraries and page code besides, in order to maintain clean HTML structure that can be modified by Web developers without having to deal with the complexity of scripting code and possibly breaking it.</p>
+		</div>
+	</div>
+	
+	<a name="3"></a>
+	<h1 class="heading1" title="3. Inspired by the Web"><span class="headingNumber"><a href="#3" title="3. Inspired by the Web">3</a>. </span>Inspired by the Web</h1>
+	<div class="contents1">
+		<p>The UIZE JavaScript Framework is inspired by the environment that gave birth to it - the Web. UIZE adopts several paradigms that are inspired by the world of HTML and CSS.</p>
+		
+		<a name="3_1"></a>
+		<h2 class="heading2" title="3. Inspired by the Web -&gt; 3.1. Order Agnostic and Defaulted Method Parameters"><span class="headingNumber"><a href="#3" title="3. Inspired by the Web">3</a>.<a href="#3_1" title="3. Inspired by the Web -&gt; 3.1. Order Agnostic and Defaulted Method Parameters">1</a>. </span>Order Agnostic and Defaulted Method Parameters</h2>
+		<div class="contents2">
+			<p>HTML doesn't care in which order tag attributes are specified.</p>
+			
+			<p>This has been a boon to the development of the Web as a platform, as it makes HTML source code human readable and understandable, without requiring a companion reference or IDE in order to make sense of tags. Imagine if tags were implemented using a syntax akin to the function syntax of programming language, where the tag's attributes weren't named, their order was critical, and defaulting required a complex tree of overload permutations and where certain attributes could only be defaulted by specifying null values for them. That would suck.</p>
+			
+			<p>UIZE likes the idea of naming parameters in the calls to methods. This is accomplished by passing a "params" object hash in method calls. This is great in that it allows the signature of a method to evolve over time without being so disruptive to backwards compatilibilty. New parameters can be added with common sense defaults, and old code can continue on merrily. Defaulting allows parameters to be ommitted without having to worry about having to declare all possible permutations of presence/abscense of parameters in overloads. Not having to worry about order is also great, since the order that seems logical might change as parameters get added. Named parameters help readability and learnability of code.</p>
+			
+			<a name="3_1_1"></a>
+			<h3 class="heading3" title="3. Inspired by the Web -&gt; 3.1. Order Agnostic and Defaulted Method Parameters -&gt; 3.1.1. Necessarily Mixed Approach"><span class="headingNumber"><a href="#3" title="3. Inspired by the Web">3</a>.<a href="#3_1" title="3. Inspired by the Web -&gt; 3.1. Order Agnostic and Defaulted Method Parameters">1</a>.<a href="#3_1_1" title="3. Inspired by the Web -&gt; 3.1. Order Agnostic and Defaulted Method Parameters -&gt; 3.1.1. Necessarily Mixed Approach">1</a>. </span>Necessarily Mixed Approach</h3>
+			<div class="contents3">
+				<p>In some ways it would be nice (at least consistent) if all functions took an object hash of named parameters.</p>
+				
+				<p>In reality, this would be cumbersome for methods with uncomplicated signatures, requiring more typing, adding to the code size, and - most importantly - incurring potentially a substantial performance penalty for heavily hit methods (since building an object hash comes at a price). There are some downsides to params hashes. UIZE takes a necessarily balanced approach, where methods with simple signatures use traditional params, but methods that may have complex param sets or that might likely change a lot over time will use a params hash, or sometimes params hashes for specific arguments.</p>
+			</div>
+		</div>
+		
+		<a name="3_2"></a>
+		<h2 class="heading2" title="3. Inspired by the Web -&gt; 3.2. State Oriented Programming"><span class="headingNumber"><a href="#3" title="3. Inspired by the Web">3</a>.<a href="#3_2" title="3. Inspired by the Web -&gt; 3.2. State Oriented Programming">2</a>. </span>State Oriented Programming</h2>
+		<div class="contents2">
+			<a name="3_2_1"></a>
+			<h3 class="heading3" title="3. Inspired by the Web -&gt; 3.2. State Oriented Programming -&gt; 3.2.1. The Joy of Reflection"><span class="headingNumber"><a href="#3" title="3. Inspired by the Web">3</a>.<a href="#3_2" title="3. Inspired by the Web -&gt; 3.2. State Oriented Programming">2</a>.<a href="#3_2_1" title="3. Inspired by the Web -&gt; 3.2. State Oriented Programming -&gt; 3.2.1. The Joy of Reflection">1</a>. </span>The Joy of Reflection</h3>
+			<div class="contents3">
+				<p>An invaluable feature, when using JavaScript in the context of a Web document, is <b>reflection</b>.</p>
+				
+				<p>The reflection of an element node's attributes and style properties provides an intuitive and lightweight way to modify the state of the user interface, without understanding the inner working of how state change is managed by the browser's layout / rendering engine.</p>
+				
+				<p>This is a huge load off the mind of a Web UI engineer, since undoubtedly there are any number of very clever ways in which handling state change is optimized for different scenarios, and undoubtedly there are any number of specific updater methods that are kicked off in carefully chosen order under different circumstances. The UI engineer doesn't have to care about what the browser has to do in order to synchronize the display to a changed state. The change could be minimal, or it could be very major.</p>
+			</div>
+			
+			<a name="3_2_2"></a>
+			<h3 class="heading3" title="3. Inspired by the Web -&gt; 3.2. State Oriented Programming -&gt; 3.2.2. Make It So"><span class="headingNumber"><a href="#3" title="3. Inspired by the Web">3</a>.<a href="#3_2" title="3. Inspired by the Web -&gt; 3.2. State Oriented Programming">2</a>.<a href="#3_2_2" title="3. Inspired by the Web -&gt; 3.2. State Oriented Programming -&gt; 3.2.2. Make It So">2</a>. </span>Make It So</h3>
+			<div class="contents3">
+				<p>In a similar vein as DOM reflection, the UIZE JavaScript Framework provides a state interface through its <a href="set-get-properties.html">Set-get Properties</a> mechanism.</p>
+				
+				<p>In spirit, a widget class should expose its state through the set-get properties, and should register <code>onChange</code> handlers for these properties, as appropriate, in order to synchronize the UI to a changed state. The application developer using the widgets then does not have to worry about a suite of updater methods and understand why two should be used in a specific order in one case, but three should be used in any order in some other case (for example). We call this the <b>"make it so"</b> principle. You tell an instance what state it should be in, and it figures out how to get all its junk into that new state.</p>
+			</div>
+		</div>
+		
+		<a name="3_3"></a>
+		<h2 class="heading2" title="3. Inspired by the Web -&gt; 3.3. Type Versatility"><span class="headingNumber"><a href="#3" title="3. Inspired by the Web">3</a>.<a href="#3_3" title="3. Inspired by the Web -&gt; 3.3. Type Versatility">3</a>. </span>Type Versatility</h2>
+		<div class="contents2">
+			<p>UIZE takes the approach that the value of static typing is overestimated and is not philosophically compatible with a dynamic language like JavaScript and the Web environment in which it primarily lives - an environment which emphasizes versatility.</p>
+			
+			<p>Take, for example, CSS, where values for style properties can be specified in any of a number of ways, using dramatically different types and units. Rather than providing multiple differently named methods to do similar things but with different function signatures, UIZE takes the approach of trying to minimize the number of different methods that are created, preferring instead to support common sense defaulting and type versatility for parameter values.</p>
+		</div>
+	</div>
+	
+	<a name="4"></a>
+	<h1 class="heading1" title="4. Key Concepts"><span class="headingNumber"><a href="#4" title="4. Key Concepts">4</a>. </span>Key Concepts</h1>
+	<div class="contents1">
+		<a name="4_1"></a>
+		<h2 class="heading2" title="4. Key Concepts -&gt; 4.1. The GLUE Paradigm"><span class="headingNumber"><a href="#4" title="4. Key Concepts">4</a>.<a href="#4_1" title="4. Key Concepts -&gt; 4.1. The GLUE Paradigm">1</a>. </span>The GLUE Paradigm</h2>
+		<div class="contents2">
+			<p>Widgets available in the UIZE JavaScript Framework have been designed using the GLUE paradigm.</p>
+			
+			<a name="4_1_1"></a>
+			<h3 class="heading3" title="4. Key Concepts -&gt; 4.1. The GLUE Paradigm -&gt; 4.1.1. What is GLUE?"><span class="headingNumber"><a href="#4" title="4. Key Concepts">4</a>.<a href="#4_1" title="4. Key Concepts -&gt; 4.1. The GLUE Paradigm">1</a>.<a href="#4_1_1" title="4. Key Concepts -&gt; 4.1. The GLUE Paradigm -&gt; 4.1.1. What is GLUE?">1</a>. </span>What is GLUE?</h3>
+			<div class="contents3">
+				<p>"GLUE" stands for Glue Logic Upon Elements. At its heart, GLUE aims to aid the Web interface design process by decoupling the interface skin development from the interface functionality development.</p>
+			</div>
+			
+			<a name="4_1_2"></a>
+			<h3 class="heading3" title="4. Key Concepts -&gt; 4.1. The GLUE Paradigm -&gt; 4.1.2. Decoupling Design And Interaction"><span class="headingNumber"><a href="#4" title="4. Key Concepts">4</a>.<a href="#4_1" title="4. Key Concepts -&gt; 4.1. The GLUE Paradigm">1</a>.<a href="#4_1_2" title="4. Key Concepts -&gt; 4.1. The GLUE Paradigm -&gt; 4.1.2. Decoupling Design And Interaction">2</a>. </span>Decoupling Design And Interaction</h3>
+			<div class="contents3">
+				<p>When working on the user interface for a project, graphic designers and HTML coders should not have to wrestle with complicated JavaScript code while they are making aesthetic choices. And the coders wiring up a Web-based application should not have to wrestle with dependencies on graphic/layout designers in order to make progress with developing functionality.</p>
+			</div>
+			
+			<a name="4_1_3"></a>
+			<h3 class="heading3" title="4. Key Concepts -&gt; 4.1. The GLUE Paradigm -&gt; 4.1.3. GLUE&apos;ing is More Robust"><span class="headingNumber"><a href="#4" title="4. Key Concepts">4</a>.<a href="#4_1" title="4. Key Concepts -&gt; 4.1. The GLUE Paradigm">1</a>.<a href="#4_1_3" title="4. Key Concepts -&gt; 4.1. The GLUE Paradigm -&gt; 4.1.3. GLUE&apos;ing is More Robust">3</a>. </span>GLUE'ing is More Robust</h3>
+			<div class="contents3">
+				<p>With the GLUE approach, the JavaScript code supporting the functional logic of a user interface can be more cleanly separated from the HTML and CSS code.</p>
+				
+				<p>JavaScript code for interface logic that is tighly integrated into the HTML code results in an application that is more brittle and vulnerable to edits during the ongoing maintenance phase of an application. The GLUE approach is more robust because it more effectively encapsulates the JavaScript interface logic code and puts it out of the reach of casual page tweaks and routine content updates.</p>
+			</div>
+		</div>
+		
+		<a name="4_2"></a>
+		<h2 class="heading2" title="4. Key Concepts -&gt; 4.2. Code Beside"><span class="headingNumber"><a href="#4" title="4. Key Concepts">4</a>.<a href="#4_2" title="4. Key Concepts -&gt; 4.2. Code Beside">2</a>. </span>Code Beside</h2>
+		<div class="contents2">
+			<p>With the .NET framework, Microsoft introduced the concept of "code in front" and "code behind".</p>
+			
+			<p>UIZE goes one step further, to introduce the concept of "code beside", which is a recommended practice of separating out the static JavaScript control logic from a page's "code in front" and consolidating it into a single JavaScript library file that typically  sits in the same directory as the page and is named the same except for the extension being ".js" (in the case of code beside that is shared across multiple pages, the file can be a module inside the central JavaScript directory).</p>
+			
+			<p>The "code beside" file can then be separately scrunched (either dynamically or by a site build script) to reduce its size, and the browser can also cache it since it's static. Any dynamic data that should qualify its operation should be "piped" through a clear interface, in the same way that "code in front" and "code behind" should connect through a well defined (and, ideally, thin) interface.</p>
+			
+			<p>The "code beside" practice is not a requirement in the UIZE JavaScript Framework, but it turns out to faciliate good Web application design. For example, a set of pages that share common interaction logic can implement that logic in a page widget class file that all the pages instantiate. Then, for pages that use that functionality but need to extend it to provide more, a subclass can be created. This is similar - in spirit, at least - to .NET's master pages. Of course, this concept of the "code beside" doesn't care about platform, so you can consolidate interaction logic in code besides with a LAMP driven site - or any other server platform - just as easily.</p>
+		</div>
+	</div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

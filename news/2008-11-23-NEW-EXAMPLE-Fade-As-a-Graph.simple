@@ -1,0 +1,13 @@
+The new [[../examples/fade-as-a-graph.html][Fade As a Graph]] example illustrates how the =acceleration= and =deceleration= set-get properties of the =Uize.Fade= class shape a fade's curve over time.
+
+By default, the interpolated value for a fade is linear, but the =acceleration= and =deceleration= properties allow for varying amounts of a fade's head and tail to be in acceleration and deceleration phases. This example also illustrates how the =Uize.Fade= class can be used for non-time based fades.
+
+[[../examples/fade-as-a-graph.html][CHECK IT OUT]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2008-11-23 - NEW EXAMPLE: Fade As a Graph
+....................................................................................

@@ -1,0 +1,620 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Uize.Fx | Documentation | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework Documentation Uize.Fx module reference documentation"/>
+	<meta name="description" content="The Uize.Fx module provides easy ways to initiate fades of CSS style properties, making a wide array of unique JavaScript animation effects possible."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../javascript-modules-index.html" class="breadcrumb breadcrumbWithArrow">MODULES</a>
+	<a href="Uize.html" title="View reference for Uize" class="breadcrumb">Uize</a>.<a href="Uize.Fx.html" title="View reference for Uize.Fx" class="breadcrumb">Fx</a>
+	<div class="pageActions">
+		<a id="page-search" href="javascript://" class="buttonLink" title="Search for references to this module...">SEARCH</a><a id="page-examples" href="javascript://" class="buttonLink" title="View examples for this module...">EXAMPLES</a><a href="source-code/Uize.Fx.html" class="buttonLink" title="View the JavaScript source code for this module...">SOURCE</a><a id="page-test" href="javascript://" class="buttonLink" title="Test this module...">TEST</a>
+	</div>
+
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="The Uize.Fx module provides easy ways to initiate fades of CSS style properties, making a wide array of unique JavaScript animation effects possible.">1. Introduction</a>
+				<ul>
+					<li><a href="#1_1" title="Using this module, colors can easily be animated, DOM nodes can be made to fly across the page, dimensions of objects can be morphed, and a whole array of other interesting effects can be achieved.">1.1. In a Nutshell</a></li>
+					<li><a href="#1_2" title="Support for fading the values of CSS3 style properties that are not yet universally supported by Web browsers is provided in the form of extension modules under the Uize.Fx namespace.">1.2. Extensions For CSS3 Support</a></li>
+					<li><a href="#1_3" title="The following example pages are good showcases for the Uize.Fx module...">1.3. Examples</a></li>
+					<li><a href="#1_4" title="The Uize.Fx module defines the Uize.Fx package under the Uize namespace.">1.4. Implementation Info</a>
+						<ul>
+							<li><a href="#1_4_1" title="The features listed in this section have been introduced in this module.">1.4.1. Features Introduced in This Module</a></li>
+							<li><a href="#1_4_2" title="No features have been overridden in this module.">1.4.2. Features Overridden in This Module</a></li>
+							<li><a href="#1_4_3" title="This module has no inherited features.">1.4.3. Features Inherited From Other Modules</a></li>
+							<li><a href="#1_4_4" title="Uize.Fx.xShadows | Uize.Fx.xTextShadow">1.4.4. Modules Directly Under This Namespace</a></li>
+							<li><a href="#1_4_5" title="There is no dedicated unit tests module for the Uize.Fx module.">1.4.5. Unit Tests</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li><a href="#2">2. Static Methods</a>
+				<ul>
+					<li><a href="#2_1" title="For advanced developers only, this is an extension hook that lets you extend the Uize.Fx module by adding support for fading of CSS style properties for which built-in support is not provided.">2.1. Uize.Fx.defineStylePropertiesProfile</a>
+						<ul>
+							<li><a href="#2_1_1" title="A profile for one or more style properties is defined in the stylePropertiesProfileOBJ parameter.">2.1.1. stylePropertiesProfileOBJ</a>
+								<ul>
+									<li><a href="#2_1_1_1" title="A string, regular expression, or function, that will be used to determine if the profile applies to a specific style property.">2.1.1.1. test</a></li>
+									<li><a href="#2_1_1_2" title="An optional string, specifying a remapped name for the style property supported by the profile.">2.1.1.2. remappedProperty</a></li>
+									<li><a href="#2_1_1_3" title="A function that is responsible for decoding the value of the style property and returning a value (possibly a compound value) that can be interpolated in the code of the Uize.Fade class.">2.1.1.3. decoder</a></li>
+									<li><a href="#2_1_1_4" title="A string, specifying an expression that can be used to encode the style property value that is interpolated in the code of the Uize.Fade class.">2.1.1.4. encoderExpression</a></li>
+								</ul>
+							</li>
+							<li><a href="#2_1_2" title="In order to support multiple style properties, the test specified by the test property of the stylePropertiesProfileOBJ parameter should test positive for multiple style property names.">2.1.2. Supporting Multiple Style Properties</a></li>
+							<li><a href="#2_1_3" title="The following example shows a style properties profile that will support a large number of color type style properties...">2.1.3. EXAMPLE: Color Properties Profile</a></li>
+							<li><a href="#2_1_4" title="The following example shows a style properties profile that supports just the opacity style property...">2.1.4. EXAMPLE: Opacity Profile</a></li>
+							<li><a href="#2_1_5" title="If you&apos;re looking to develop extension modules to support CSS style properties, you can look over the code of the Uize.Fx module (yes, this module), which contains style properties profiles for a variety of different style properties.">2.1.5. More Examples of Style Properties Profiles</a></li>
+						</ul>
+					</li>
+					<li><a href="#2_2" title="Lets you easily fade one or more CSS style properties for a specified node.">2.2. Uize.Fx.fadeStyle</a>
+						<ul>
+							<li><a href="#2_2_1" title="The Uize.Fx.fadeStyle method can be used to fade the value of the clip style property.">2.2.1. Fading Clip Region</a></li>
+							<li><a href="#2_2_2" title="The Uize.Fx module supports fading of the opacity style property.">2.2.2. Fading Opacity</a></li>
+							<li><a href="#2_2_3" title="The Uize.Fx.fadeStyle method supports a wide variety of ways for specifying values for color CSS style properties.">2.2.3. Specifying Color Values</a></li>
+						</ul>
+					</li>
+					<li><a href="#2_3" title="Lets you easily fade values for an arbitrary number of CSS style properties across a specified series of nodes.">2.3. Uize.Fx.fadeStyleAcrossNodes</a>
+						<ul>
+							<li><a href="#2_3_1" title="An object, specifying the series of nodes across which the CSS style fade should be applied.">2.3.1. findExpressionOBJ</a></li>
+							<li><a href="#2_3_2" title="An object, specifying the start values for an arbitrary number of CSS style properties.">2.3.2. startStylePropertiesOBJ</a></li>
+							<li><a href="#2_3_3" title="An object, specifying the end values for an arbitrary number of CSS style properties.">2.3.3. endStylePropertiesOBJ</a></li>
+							<li><a href="#2_3_4" title="Whatever style property values are specified in the startStylePropertiesOBJ object, values for those same style properties should also be specified in the endStylePropertiesOBJ parameter, so the structures of these two parameters should be the same.">2.3.4. Start and End Style Structures Must Match</a></li>
+							<li><a href="#2_3_5" title="When the optional fadePropertiesOBJ parameter is specified, additional values can be specified for the set-get properties of the Uize.Fade class - such as curve, quantization, etc.">2.3.5. fadePropertiesOBJ</a></li>
+							<li><a href="#2_3_6" title="To get a better idea of how the Uize.Fx.fadeStyleAcrossNodes works, let&apos;s consider an example...">2.3.6. An Example</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li><a href="#3">3. Static Properties</a>
+				<ul>
+					<li><a href="#3_1" title="IMPLEMENTATION INFO">3.1. Uize.Fx.moduleName</a></li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<a name="1"></a>
+	<h1 class="heading1" title="1. Introduction"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>. </span>Introduction</h1>
+	<div class="contents1">
+		<p>The <code>Uize.Fx</code> module provides easy ways to initiate fades of CSS style properties, making a wide array of unique JavaScript animation effects possible.</p>
+		
+		<p><b>DEVELOPERS:</b> <a href="http://www.tomkidding.com" target="_blank" class="externalSiteLink">Chris van Rensburg</a></p>
+		
+		<a name="1_1"></a>
+		<h2 class="heading2" title="1. Introduction -&gt; 1.1. In a Nutshell"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. In a Nutshell">1</a>. </span>In a Nutshell</h2>
+		<div class="contents2">
+			<p>Using this module, colors can easily be animated, DOM nodes can be made to fly across the page, dimensions of objects can be morphed, and a whole array of other interesting effects can be achieved.</p>
+			
+			<p><span class="allCaps">BACKGROUND READING</span></p>
+			
+			<p>For an in-depth discussion on animation in the UIZE JavaScript Framework, and for a discussion on how this module fits into the larger picture, consult the explainer <a href="../explainers/javascript-animation-and-effects.html">JavaScript Animation and Effects</a> and read through the section Animating CSS Style Properties.</p>
+		</div>
+		
+		<a name="1_2"></a>
+		<h2 class="heading2" title="1. Introduction -&gt; 1.2. Extensions For CSS3 Support"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Extensions For CSS3 Support">2</a>. </span>Extensions For CSS3 Support</h2>
+		<div class="contents2">
+			<p>Support for fading the values of CSS3 style properties that are not yet universally supported by Web browsers is provided in the form of extension modules under the <code>Uize.Fx</code> namespace.</p>
+			
+			<p>An example is the <code><a href="../reference/Uize.Fx.xShadows.html">Uize.Fx.xShadows</a></code> module, which provides support for fading values for the <code>text-shadow</code> and <code>box-shadow</code> CSS3 style properties.</p>
+		</div>
+		
+		<a name="1_3"></a>
+		<h2 class="heading2" title="1. Introduction -&gt; 1.3. Examples"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_3" title="1. Introduction -&gt; 1.3. Examples">3</a>. </span>Examples</h2>
+		<div class="contents2">
+			<p>The following example pages are good showcases for the <code>Uize.Fx</code> module...</p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><a href="../examples/animate-position-in-javascript.html">Animate Position in JavaScript</a> - See how to animate the position of an HTML element and how to apply amazingly realistic motion effects like easing, elasticity, bounce, and many more.</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><a href="../examples/animate-size-in-javascript.html">Animate Size in JavaScript</a> - See how to animate the size of an HTML element and how to apply amazingly realistic physics effects like easing, elasticity, bounce, and many more.</td></tr>
+			</table>
+			<p><span class="allCaps">SEARCH FOR EXAMPLES</span></p>
+			
+			<p>Use the link below to search for example pages on the <b>uize.com</b> Web site that reference the <code>Uize.Fx</code> module...</p>
+			
+			<p><a href="http://www.google.com/search?hl=en&safe=off&domains=uize.com%2Fexamples&sitesearch=uize.com%2Fexamples&q=%22Uize.Fx%22" target="_blank" class="externalSiteLink">SEARCH</a></p>
+		</div>
+		
+		<a name="1_4"></a>
+		<h2 class="heading2" title="1. Introduction -&gt; 1.4. Implementation Info"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_4" title="1. Introduction -&gt; 1.4. Implementation Info">4</a>. </span>Implementation Info</h2>
+		<div class="contents2">
+			<p>The <code>Uize.Fx</code> module defines the <code>Uize.Fx</code> package under the <code><a href="../reference/Uize.html">Uize</a></code> namespace.</p>
+			
+			<a name="1_4_1"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.4. Implementation Info -&gt; 1.4.1. Features Introduced in This Module"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_4" title="1. Introduction -&gt; 1.4. Implementation Info">4</a>.<a href="#1_4_1" title="1. Introduction -&gt; 1.4. Implementation Info -&gt; 1.4.1. Features Introduced in This Module">1</a>. </span>Features Introduced in This Module</h3>
+			<div class="contents3">
+				<p>The features listed in this section have been introduced in this module.</p>
+				
+				<p><span class="allCaps">STATIC METHODS</span></p>
+				
+				<p><code><a href="#2_1">Uize.Fx.defineStylePropertiesProfile</a></code> | <code><a href="#2_2">Uize.Fx.fadeStyle</a></code> | <code><a href="#2_3">Uize.Fx.fadeStyleAcrossNodes</a></code></p>
+				
+				<p><span class="allCaps">STATIC PROPERTIES</span></p>
+				
+				<p><code><a href="#3_1">Uize.Fx.moduleName</a></code></p>
+			</div>
+			
+			<a name="1_4_2"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.4. Implementation Info -&gt; 1.4.2. Features Overridden in This Module"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_4" title="1. Introduction -&gt; 1.4. Implementation Info">4</a>.<a href="#1_4_2" title="1. Introduction -&gt; 1.4. Implementation Info -&gt; 1.4.2. Features Overridden in This Module">2</a>. </span>Features Overridden in This Module</h3>
+			<div class="contents3">
+				<p>No features have been overridden in this module.</p>
+			</div>
+			
+			<a name="1_4_3"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.4. Implementation Info -&gt; 1.4.3. Features Inherited From Other Modules"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_4" title="1. Introduction -&gt; 1.4. Implementation Info">4</a>.<a href="#1_4_3" title="1. Introduction -&gt; 1.4. Implementation Info -&gt; 1.4.3. Features Inherited From Other Modules">3</a>. </span>Features Inherited From Other Modules</h3>
+			<div class="contents3">
+				<p>This module has no inherited features.</p>
+			</div>
+			
+			<a name="1_4_4"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.4. Implementation Info -&gt; 1.4.4. Modules Directly Under This Namespace"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_4" title="1. Introduction -&gt; 1.4. Implementation Info">4</a>.<a href="#1_4_4" title="1. Introduction -&gt; 1.4. Implementation Info -&gt; 1.4.4. Modules Directly Under This Namespace">4</a>. </span>Modules Directly Under This Namespace</h3>
+			<div class="contents3">
+				<p><code><a href="../reference/Uize.Fx.xShadows.html">Uize.Fx.xShadows</a></code> | <code><a href="../reference/Uize.Fx.xTextShadow.html">Uize.Fx.xTextShadow</a></code></p>
+			</div>
+			
+			<a name="1_4_5"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.4. Implementation Info -&gt; 1.4.5. Unit Tests"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_4" title="1. Introduction -&gt; 1.4. Implementation Info">4</a>.<a href="#1_4_5" title="1. Introduction -&gt; 1.4. Implementation Info -&gt; 1.4.5. Unit Tests">5</a>. </span>Unit Tests</h3>
+			<div class="contents3">
+				<p>There is no dedicated unit tests module for the <code>Uize.Fx</code> module.</p>
+			</div>
+		</div>
+	</div>
+	
+	<a name="2"></a>
+	<h1 class="heading1" title="2. Static Methods"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>. </span>Static Methods</h1>
+	<div class="contents1">
+		<a name="2_1"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.1. Uize.Fx.defineStylePropertiesProfile"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_1" title="2. Static Methods -&gt; 2.1. Uize.Fx.defineStylePropertiesProfile">1</a>. </span>Uize.Fx.defineStylePropertiesProfile</h2>
+		<div class="contents2">
+			<p>For advanced developers only, this is an extension hook that lets you extend the <code>Uize.Fx</code> module by adding support for fading of CSS style properties for which built-in support is not provided.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">Uize.Fx.defineStylePropertiesProfile (stylePropertiesProfileOBJ);
+</pre>
+			
+			<p>The <code><a href="#2_1">Uize.Fx.defineStylePropertiesProfile</a></code> method lets you define a profile for one or more CSS style properties, and such a profile will then allow values for those properties to be faded using the <code><a href="#2_2">Uize.Fx.fadeStyle</a></code> static method. Furthermore, any other modules that use the <code><a href="#2_2">Uize.Fx.fadeStyle</a></code> method in their implementation will also gain the benefit of supporting fading for those style properties.</p>
+			
+			<p>As an example, the <code><a href="../reference/Uize.Fx.xShadows.html">Uize.Fx.xShadows</a></code> module uses the <code><a href="#2_1">Uize.Fx.defineStylePropertiesProfile</a></code> method to add support for the CSS3 <code>text-shadow</code> and <code>box-shadow</code> style properties. Once this module has been loaded, the <code><a href="../reference/Uize.Widget.HoverFader.html">Uize.Widget.HoverFader</a></code> widget class, which uses the <code><a href="#2_2">Uize.Fx.fadeStyle</a></code> method in its implementation, will be able to support fading of text shadows and box shadows.</p>
+			
+			<a name="2_1_1"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.1. Uize.Fx.defineStylePropertiesProfile -&gt; 2.1.1. stylePropertiesProfileOBJ"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_1" title="2. Static Methods -&gt; 2.1. Uize.Fx.defineStylePropertiesProfile">1</a>.<a href="#2_1_1" title="2. Static Methods -&gt; 2.1. Uize.Fx.defineStylePropertiesProfile -&gt; 2.1.1. stylePropertiesProfileOBJ">1</a>. </span>stylePropertiesProfileOBJ</h3>
+			<div class="contents3">
+				<p>A profile for one or more style properties is defined in the <code><a href="#2_1_1">stylePropertiesProfileOBJ</a></code> parameter.</p>
+				
+				<p>The value of this parameter should be an object of the form...</p>
+				
+				
+<pre class="sample-code">{
+  test              : testSTRorREGEXPorFUNC,  // property name test
+  decoder           : decoderFUNC,            // value decoder function
+  encoderExpression : encoderExpressionSTR,   // interpolated value encoder expression
+  remappedProperty  : remappedPropertySTR     // remapped property name (optional)
+}
+</pre>
+				
+				<a name="2_1_1_1"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.1. Uize.Fx.defineStylePropertiesProfile -&gt; 2.1.1. stylePropertiesProfileOBJ -&gt; 2.1.1.1. test"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_1" title="2. Static Methods -&gt; 2.1. Uize.Fx.defineStylePropertiesProfile">1</a>.<a href="#2_1_1" title="2. Static Methods -&gt; 2.1. Uize.Fx.defineStylePropertiesProfile -&gt; 2.1.1. stylePropertiesProfileOBJ">1</a>.<a href="#2_1_1_1" title="2. Static Methods -&gt; 2.1. Uize.Fx.defineStylePropertiesProfile -&gt; 2.1.1. stylePropertiesProfileOBJ -&gt; 2.1.1.1. test">1</a>. </span>test</h4>
+				<div class="contents4">
+					<p>A string, regular expression, or function, that will be used to determine if the profile applies to a specific style property.</p>
+					
+					<p>A string value can be used to specify the exact name of a style property to which the profile applies. A regular expression can be used to match the profile to multiple style properties. A function can be used to provide a custom test that will be used to determine if the profile applies for a specific style property. A function value specified for this parameter should expect to receive a single parameter, being the name of a style property. The function should return <code>true</code> or <code>false</code>, depending on whether or not the profile supports the style property being tested.</p>
+					
+					<p><span class="allCaps">LAST PROFILE WINS</span></p>
+					
+					<p>The last profile that is defined and that tests positive for a specific style property will take over support for that property, even if a profile defined earlier had tested positive for that property and was providing support for it.</p>
+				</div>
+				
+				<a name="2_1_1_2"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.1. Uize.Fx.defineStylePropertiesProfile -&gt; 2.1.1. stylePropertiesProfileOBJ -&gt; 2.1.1.2. remappedProperty"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_1" title="2. Static Methods -&gt; 2.1. Uize.Fx.defineStylePropertiesProfile">1</a>.<a href="#2_1_1" title="2. Static Methods -&gt; 2.1. Uize.Fx.defineStylePropertiesProfile -&gt; 2.1.1. stylePropertiesProfileOBJ">1</a>.<a href="#2_1_1_2" title="2. Static Methods -&gt; 2.1. Uize.Fx.defineStylePropertiesProfile -&gt; 2.1.1. stylePropertiesProfileOBJ -&gt; 2.1.1.2. remappedProperty">2</a>. </span>remappedProperty</h4>
+				<div class="contents4">
+					<p>An optional string, specifying a remapped name for the style property supported by the profile.</p>
+					
+					<p>This property of the <code><a href="#2_1_1">stylePropertiesProfileOBJ</a></code> parameter can be useful in rare cases where the actual CSS style property to be faded needs to be different to the style property specified, such as with fading the value of the <code>opacity</code> style property in Internet Explorer. See the <a href="#2_1_4">EXAMPLE: Opacity Profile</a> below...</p>
+				</div>
+				
+				<a name="2_1_1_3"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.1. Uize.Fx.defineStylePropertiesProfile -&gt; 2.1.1. stylePropertiesProfileOBJ -&gt; 2.1.1.3. decoder"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_1" title="2. Static Methods -&gt; 2.1. Uize.Fx.defineStylePropertiesProfile">1</a>.<a href="#2_1_1" title="2. Static Methods -&gt; 2.1. Uize.Fx.defineStylePropertiesProfile -&gt; 2.1.1. stylePropertiesProfileOBJ">1</a>.<a href="#2_1_1_3" title="2. Static Methods -&gt; 2.1. Uize.Fx.defineStylePropertiesProfile -&gt; 2.1.1. stylePropertiesProfileOBJ -&gt; 2.1.1.3. decoder">3</a>. </span>decoder</h4>
+				<div class="contents4">
+					<p>A function that is responsible for decoding the value of the style property and returning a value (possibly a compound value) that can be interpolated in the code of the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> class.</p>
+					
+					<p>If a compound value is returned, then the various interpolatable components of that compound value should be numbers. For example, a color type style property value can be decoded to produce a tuple array representing the components of the color. Decoding an RGB color value in this way would produce a color tuple with three elements, representing the values of the red, green, and blue components, respectively.</p>
+				</div>
+				
+				<a name="2_1_1_4"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.1. Uize.Fx.defineStylePropertiesProfile -&gt; 2.1.1. stylePropertiesProfileOBJ -&gt; 2.1.1.4. encoderExpression"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_1" title="2. Static Methods -&gt; 2.1. Uize.Fx.defineStylePropertiesProfile">1</a>.<a href="#2_1_1" title="2. Static Methods -&gt; 2.1. Uize.Fx.defineStylePropertiesProfile -&gt; 2.1.1. stylePropertiesProfileOBJ">1</a>.<a href="#2_1_1_4" title="2. Static Methods -&gt; 2.1. Uize.Fx.defineStylePropertiesProfile -&gt; 2.1.1. stylePropertiesProfileOBJ -&gt; 2.1.1.4. encoderExpression">4</a>. </span>encoderExpression</h4>
+				<div class="contents4">
+					<p>A string, specifying an expression that can be used to encode the style property value that is interpolated in the code of the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> class.</p>
+					
+					<p>The specified expression string should contain the text "VALUE", which will be substituted, by the <code><a href="#2_2">Uize.Fx.fadeStyle</a></code> method, with a reference to the interpolated value for the style property. This is because the <code><a href="#2_2">Uize.Fx.fadeStyle</a></code> method can be used to fade the values of many style properties in a single fade process, and a larger compound value contains the values for all the individual style properties being faded. The encoder expression provided in your style properties profile will be combined together with the encodeer expressions for other style properties being faded and will then be compiled into a single function for improved performance.</p>
+				</div>
+			</div>
+			
+			<a name="2_1_2"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.1. Uize.Fx.defineStylePropertiesProfile -&gt; 2.1.2. Supporting Multiple Style Properties"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_1" title="2. Static Methods -&gt; 2.1. Uize.Fx.defineStylePropertiesProfile">1</a>.<a href="#2_1_2" title="2. Static Methods -&gt; 2.1. Uize.Fx.defineStylePropertiesProfile -&gt; 2.1.2. Supporting Multiple Style Properties">2</a>. </span>Supporting Multiple Style Properties</h3>
+			<div class="contents3">
+				<p>In order to support multiple style properties, the test specified by the <code><a href="#2_1_1_1">test</a></code> property of the <code><a href="#2_1_1">stylePropertiesProfileOBJ</a></code> parameter should test positive for multiple style property names.</p>
+				
+				<p>This, by definition, means that the value of the <code><a href="#2_1_1_1">test</a></code> property cannot be a string with a specific style property name, but should be either a regular expression or function. It also means that the <code><a href="#2_1_1_2">remappedProperty</a></code> property is not likely to be applicable, because you're not likely to want to map multiple different style property names to the same style property for fading. You should also only support multiple style properties with the same style properties profile if the value follows the same format for all the style properties.</p>
+				
+				<p>See the <a href="#2_1_3">EXAMPLE: Color Properties Profile</a> for a demonstration of supporting multiple style properties.</p>
+			</div>
+			
+			<a name="2_1_3"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.1. Uize.Fx.defineStylePropertiesProfile -&gt; 2.1.3. EXAMPLE: Color Properties Profile"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_1" title="2. Static Methods -&gt; 2.1. Uize.Fx.defineStylePropertiesProfile">1</a>.<a href="#2_1_3" title="2. Static Methods -&gt; 2.1. Uize.Fx.defineStylePropertiesProfile -&gt; 2.1.3. EXAMPLE: Color Properties Profile">3</a>. </span>EXAMPLE: Color Properties Profile</h3>
+			<div class="contents3">
+				<p>The following example shows a style properties profile that will support a large number of color type style properties...</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">Uize.Fx.defineStylePropertiesProfile ({
+  test:/color|^background$/i,
+  decoder:function (_value) {return Uize.Color.to (_value,'RGB array')},
+  encoderExpression:'"rgb("+VALUE.join(",")+")"',
+  quantization:1
+});
+</pre>
+				
+				<p>Because we want to support a wide array of color style properties - such as <code>color</code>, <code>background</code>, <code>backgroundColor</code>, <code>borderColor</code>, <code>borderTopColor</code>, etc. - we use a regular expression for the <code><a href="#2_1_1_1">test</a></code> property of the <code><a href="#2_1_1">stylePropertiesProfileOBJ</a></code> parameter. The regular expression in this case will test positive for any style property name containing the word "color", and also for the <code>background</code> style property.</p>
+				
+				<p>Our <code><a href="#2_1_1_3">decoder</a></code> takes the color style property value and turns it into an RGB tuple array using the <code>Uize.Color.to</code> method of the <code><a href="../reference/Uize.Color.html">Uize.Color</a></code> module and specifying the value <code>'RGB array'</code> for its <code>encodingSTR</code> parameter. Our <code><a href="#2_1_1_4">encoderExpression</a></code> specifies an expression that constructs an <code>rgb(...)</code> formatted color value by joining the interpolated tuple array, represented by the "VALUE" token. Finally, to ensure that the values interpolated for the components of the RGB color tuple are integers, we specify the value <code>1</code> for the <code>quantization</code> property.</p>
+			</div>
+			
+			<a name="2_1_4"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.1. Uize.Fx.defineStylePropertiesProfile -&gt; 2.1.4. EXAMPLE: Opacity Profile"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_1" title="2. Static Methods -&gt; 2.1. Uize.Fx.defineStylePropertiesProfile">1</a>.<a href="#2_1_4" title="2. Static Methods -&gt; 2.1. Uize.Fx.defineStylePropertiesProfile -&gt; 2.1.4. EXAMPLE: Opacity Profile">4</a>. </span>EXAMPLE: Opacity Profile</h3>
+			<div class="contents3">
+				<p>The following example shows a style properties profile that supports just the <code>opacity</code> style property...</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">Uize.Fx.defineStylePropertiesProfile ({
+  test:'opacity',
+  remappedProperty:Uize.Node.isIe ? 'filter' : 'opacity',
+  decoder:function (_value) {return +_value},
+  encoderExpression:Uize.Node.isIe ? '"alpha(opacity="+Math.round(VALUE*100)+")"' : 'VALUE'
+});
+</pre>
+				
+				<p>Because we're only supporting the <code>opacity</code> style property in this profile, we can use the string value <code>'opacity'</code> for the <code><a href="#2_1_1_1">test</a></code> property of the <code><a href="#2_1_1">stylePropertiesProfileOBJ</a></code> parameter. To deal with the fact that supporting opacity fades in Internet Explorer involves using the non-standard <code>filter</code> style property, we specify a value for the <code><a href="#2_1_1_2">remappedProperty</a></code> property of the <code><a href="#2_1_1">stylePropertiesProfileOBJ</a></code> parameter, where this value is conditionalized using the <code>Uize.Node.isIe</code> static property.</p>
+				
+				<p>The <code><a href="#2_1_1_3">decoder</a></code> is easy in this case - all our decoder function does is coerce the <code>opacity</code> property value to a number. Our <code>encoder</code> is also conditionalized, based upon whether or not we're dealing with Internet Explorer. For IE the expression constructs an alpha filter value for the non-standard <code>filter</code> style property, and for all other browsers the interpolated value is simply used as is. Finally, because opacity is interpolated as a floating point number in the range of <code>0</code> to <code>1</code>, we don't specify any <code>quantization</code> property in this profile, which defaults the quantization to <code>0</code> for this profile.</p>
+			</div>
+			
+			<a name="2_1_5"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.1. Uize.Fx.defineStylePropertiesProfile -&gt; 2.1.5. More Examples of Style Properties Profiles"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_1" title="2. Static Methods -&gt; 2.1. Uize.Fx.defineStylePropertiesProfile">1</a>.<a href="#2_1_5" title="2. Static Methods -&gt; 2.1. Uize.Fx.defineStylePropertiesProfile -&gt; 2.1.5. More Examples of Style Properties Profiles">5</a>. </span>More Examples of Style Properties Profiles</h3>
+			<div class="contents3">
+				<p>If you're looking to develop extension modules to support CSS style properties, you can look over the code of the <code>Uize.Fx</code> module (yes, <b>this</b> module), which contains style properties profiles for a variety of different style properties.</p>
+			</div>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_2"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.2. Uize.Fx.fadeStyle"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_2" title="2. Static Methods -&gt; 2.2. Uize.Fx.fadeStyle">2</a>. </span>Uize.Fx.fadeStyle</h2>
+		<div class="contents2">
+			<p>Lets you easily fade one or more CSS style properties for a specified node.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">fadeOBJ = Uize.Fx.fadeStyle (
+  nodeSTRorOBJ,
+  startStylePropertiesOBJ,
+  endStylePropertiesOBJ,
+  durationINT
+);
+</pre>
+			
+			<p>The <code><a href="#2_2">Uize.Fx.fadeStyle</a></code> method supports fading values for the following CSS style properties...</p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>color style properties: <code>color</code>, <code>background</code>, <code>backgroundColor</code>, <code>borderColor</code>, <code>borderTopColor</code>, <code>borderRightColor</code>, <code>borderBottomColor</code>, <code>borderLeftColor</code></td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>position style properties: <code>top</code>, <code>right</code>, <code>bottom</code>, <code>left</code>, <code>backgroundPosition</code></td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>padding and margin style properties: <code>padding</code>, <code>paddingTop</code>, <code>paddingRight</code>, <code>paddingBottom</code>, <code>paddingLeft</code>, <code>margin</code>, <code>marginTop</code>, <code>marginRight</code>, <code>marginBottom</code>, <code>marginLeft</code></td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>dimension style properties: <code>width</code>, <code>height</code>, <code>maxWidth</code>, <code>maxHeigh</code>, <code>borderWidth</code>, <code>borderTopWidth</code>, <code>borderRightWidth</code>, <code>borderBottomWidth</code>, <code>borderLeftWidth</code></td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>font style properties: <code>fontSize</code>, <code>letterSpacing</code>, <code>wordSpacing</code>, <code>lineHeight</code>, <code>textIndent</code></td></tr>
+			</table>
+			<p><span class="allCaps">EXAMPLES</span></p>
+			
+			
+<pre class="sample-code">// fade from thin border/thick padding to thick border/thin padding over 1/4 second
+Uize.Fx.fadeStyle ('myNode',{borderWidth:1,padding:20},{borderWidth:20,padding:1},250);
+
+// fade from current colors to white text on black background over two seconds
+Uize.Fx.fadeStyle ('myNode',null,{color:'#fff',backgroundColor:'#000'},2000);
+
+// fade font size from 30px back to current size over a half second
+Uize.Fx.fadeStyle ('myNode',{fontSize:30},null,500);
+</pre>
+			
+			<p><span class="allCaps">IMPORTANT</span></p>
+			
+			<p>The naming of style properties in the style properties objects for the <code><a href="#2_3_2">startStylePropertiesOBJ</a></code> and <code><a href="#2_3_3">endStylePropertiesOBJ</a></code> parameters should use the DOM reflected (ie. camelCased) names rather than the CSS format names. For example, the CSS style property <code>border-left-color</code> is reflected in the DOM as <code>borderLeftColor</code>.</p>
+			
+			<p><span class="allCaps">VARIATION 1</span></p>
+			
+			
+<pre class="sample-code">fadeOBJ = Uize.Fx.fadeStyle (
+  nodeSTRorOBJ,
+  startStylePropertiesOBJ,
+  endStylePropertiesOBJ,
+  durationINT,
+  fadePropertiesOBJ
+);
+</pre>
+			
+			<p>When the optional <code><a href="#2_3_5">fadePropertiesOBJ</a></code> parameter is specified, additional values can be specified for the set-get properties of the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> class - such as <code>curve</code>, <code>quantization</code>, etc. These property values will be set on the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> instance that is created to service the fade process requested by calling this method.</p>
+			
+			<p><span class="allCaps">VARIATION 2</span></p>
+			
+			
+<pre class="sample-code">fadeOBJ = Uize.Fx.fadeStyle (
+  nodeSTRorOBJ,
+  startStylePropertiesOBJ,
+  endStylePropertiesOBJ,
+  durationINT,
+  fadePropertiesOBJ,
+  startNowBOOL
+);
+</pre>
+			
+			<p>By default, fades created using the <code>Uize.Fade.fadeStyle</code> method are started immediately. If you do not wish the fade to start immediately, but wish to initiate the fade at a later time by using the <code>start</code> instance method of the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> instance returned from the <code>Uize.Fade.fadeStyle</code> method, then you can specify the value <code>false</code> for the optional <code>startNowBOOL</code> parameter. If you wish to use the <code>startNowBOOL</code> parameter but do not wish to specify any fade properties, then you should specify the value <code>null</code> for the <code><a href="#2_3_5">fadePropertiesOBJ</a></code> parameter.</p>
+			
+			<a name="2_2_1"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.2. Uize.Fx.fadeStyle -&gt; 2.2.1. Fading Clip Region"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_2" title="2. Static Methods -&gt; 2.2. Uize.Fx.fadeStyle">2</a>.<a href="#2_2_1" title="2. Static Methods -&gt; 2.2. Uize.Fx.fadeStyle -&gt; 2.2.1. Fading Clip Region">1</a>. </span>Fading Clip Region</h3>
+			<div class="contents3">
+				<p>The <code><a href="#2_2">Uize.Fx.fadeStyle</a></code> method can be used to fade the value of the <code>clip</code> style property.</p>
+				
+				<p>With the <code><a href="#2_2">Uize.Fx.fadeStyle</a></code> method, values for the <code>clip</code> style property can be specified in a variety of ways, as illustrated by the examples below...</p>
+				
+				
+<pre class="sample-code">// as a correct string value, according to CSS spec
+
+{clip:'rect (0px , 200px , 100px , 0px)'}
+{clip:'rect(0px, 200px, 100px, 0px)'}
+{clip:'rect(0px,200px,100px,0px)'}
+
+// as a string value, with a measure of forgiveness
+
+{clip:'rect(0px 200px 100px 0px)'}
+{clip:'rect(0px200px100px0px)'}
+{clip:'rect(0 200 100 0)'}
+{clip:'rect(0,200,100,0)'}
+
+// as a string, with no "rect(...)" wrapper
+
+{clip:'0px 200px 100px 0px'}
+{clip:'0px, 200px, 100px, 0px'}
+{clip:'0px,200px,100px,0px'}
+{clip:'0px200px100px0px'}
+{clip:'0 200 100 0'}
+{clip:'0,200,100,0'}
+
+// as an array with four elements
+
+{clip:['0px','200px','100px','0px']}
+{clip:['0','200','100','0']}
+{clip:[0,200,100,0]}
+</pre>
+			</div>
+			
+			<a name="2_2_2"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.2. Uize.Fx.fadeStyle -&gt; 2.2.2. Fading Opacity"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_2" title="2. Static Methods -&gt; 2.2. Uize.Fx.fadeStyle">2</a>.<a href="#2_2_2" title="2. Static Methods -&gt; 2.2. Uize.Fx.fadeStyle -&gt; 2.2.2. Fading Opacity">2</a>. </span>Fading Opacity</h3>
+			<div class="contents3">
+				<p>The <code>Uize.Fx</code> module supports fading of the <code>opacity</code> style property.</p>
+				
+				<p>This module deals with the difference between Internet Explorer and browsers that support the CSS standard <code>opacity</code> style property. For IE, the proprietary <code>filter</code> style property is used, but as a developer you can specify <code>opacity</code> as if it were supported by IE.</p>
+				
+				<p><span class="allCaps">EXAMPLES</span></p>
+				
+				
+<pre class="sample-code">Uize.Fx.fadeStyle ('myNode',null,{opacity:0});        // from current to transparent
+Uize.Fx.fadeStyle ('myNode',{opacity:0},{opacity:1}); // from transparent to opaque
+</pre>
+			</div>
+			
+			<a name="2_2_3"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.2. Uize.Fx.fadeStyle -&gt; 2.2.3. Specifying Color Values"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_2" title="2. Static Methods -&gt; 2.2. Uize.Fx.fadeStyle">2</a>.<a href="#2_2_3" title="2. Static Methods -&gt; 2.2. Uize.Fx.fadeStyle -&gt; 2.2.3. Specifying Color Values">3</a>. </span>Specifying Color Values</h3>
+			<div class="contents3">
+				<p>The <code><a href="#2_2">Uize.Fx.fadeStyle</a></code> method supports a wide variety of ways for specifying values for color CSS style properties.</p>
+				
+				<p>Basically, color values can be specified in any way that a color can be specified when using the single parameter variations of the <code><a href="../reference/Uize.Color.html">Uize.Color</a></code> constructor. For example, the following statements would all fade the background color of the node "myNode" from the current color to white...</p>
+				
+				<p><span class="allCaps">EXAMPLES</span></p>
+				
+				
+<pre class="sample-code">Uize.Fx.fadeStyle ('myNode',null,{backgroundColor:'#fff'});
+Uize.Fx.fadeStyle ('myNode',null,{backgroundColor:'#ffffff'});
+Uize.Fx.fadeStyle ('myNode',null,{backgroundColor:'f'});
+Uize.Fx.fadeStyle ('myNode',null,{backgroundColor:'Rgb(255,255,255)');
+Uize.Fx.fadeStyle ('myNode',null,{backgroundColor:{red:255,green:255,blue:255});
+Uize.Fx.fadeStyle ('myNode',null,{backgroundColor:[255,255,255]});
+Uize.Fx.fadeStyle ('myNode',null,{backgroundColor:new Uize.Color (255)});
+Uize.Fx.fadeStyle ('myNode',null,{backgroundColor:255});
+</pre>
+			</div>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#2_3">Uize.Fx.fadeStyleAcrossNodes</a></code> static method</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_3"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.3. Uize.Fx.fadeStyleAcrossNodes"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_3" title="2. Static Methods -&gt; 2.3. Uize.Fx.fadeStyleAcrossNodes">3</a>. </span>Uize.Fx.fadeStyleAcrossNodes</h2>
+		<div class="contents2">
+			<p>Lets you easily fade values for an arbitrary number of CSS style properties across a specified series of nodes.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">Uize.Fx.fadeStyleAcrossNodes (
+  findExpressionOBJ,
+  startStylePropertiesOBJ,
+  endStylePropertiesOBJ
+);
+</pre>
+			
+			<p>This method produces a style fade across a series of nodes, rather than over a period of time like the related <code><a href="#2_2">Uize.Fx.fadeStyle</a></code> static method. Using this method, you can easily produce color gradients that span multiple nodes by fading the values of the <code>color</code>, <code>backgroundColor</code>, <code>borderColor</code>, and other color style properties. You can just as easily create size and position graduations in order to arrange and scale HTML elements in a continuous fashion. Other CSS style properties, such as <code>padding</code>, <code>margin</code>, <code>fontSize</code>, <code>letterSpacing</code>, <code>wordSpacing</code>, <code>lineHeight</code>, <code>textIndent</code>, etc. can also be faded across a series of nodes. And, when loading in extension modules that provide support for additional CSS style properties, such as the <code><a href="../reference/Uize.Fx.xShadows.html">Uize.Fx.xShadows</a></code> module that provides support for the <code>text-shadow</code> and <code>box-shadow</code> CSS3 style properties, such style properties can also be faded across nodes.</p>
+			
+			<p>With the ability to apply curve functions discretely to different properties in a style fade, complex and compelling non-linear style fades can be created. To get a taste of the wide variety of different effects that can be achieved using this method, see the example <a href="../examples/fade-css-style-across-nodes.html">Fade CSS Style Across Nodes</a>.</p>
+			
+			<a name="2_3_1"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.3. Uize.Fx.fadeStyleAcrossNodes -&gt; 2.3.1. findExpressionOBJ"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_3" title="2. Static Methods -&gt; 2.3. Uize.Fx.fadeStyleAcrossNodes">3</a>.<a href="#2_3_1" title="2. Static Methods -&gt; 2.3. Uize.Fx.fadeStyleAcrossNodes -&gt; 2.3.1. findExpressionOBJ">1</a>. </span>findExpressionOBJ</h3>
+			<div class="contents3">
+				<p>An object, specifying the series of nodes across which the CSS style fade should be applied.</p>
+				
+				<p>The value of the <code><a href="#2_3_1">findExpressionOBJ</a></code> parameter is resolved to an array of nodes using the <code>Uize.Node.find</code> static method that is implemented in the <code><a href="../reference/Uize.Node.html">Uize.Node</a></code> module. This means that any facilities provided by that method are available when specifying nodes in a call to the <code><a href="#2_3">Uize.Fx.fadeStyleAcrossNodes</a></code> method. If you already have an array of nodes, then this array can be supplied as the value of the <code><a href="#2_3_1">findExpressionOBJ</a></code> parameter.</p>
+			</div>
+			
+			<a name="2_3_2"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.3. Uize.Fx.fadeStyleAcrossNodes -&gt; 2.3.2. startStylePropertiesOBJ"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_3" title="2. Static Methods -&gt; 2.3. Uize.Fx.fadeStyleAcrossNodes">3</a>.<a href="#2_3_2" title="2. Static Methods -&gt; 2.3. Uize.Fx.fadeStyleAcrossNodes -&gt; 2.3.2. startStylePropertiesOBJ">2</a>. </span>startStylePropertiesOBJ</h3>
+			<div class="contents3">
+				<p>An object, specifying the start values for an arbitrary number of CSS style properties.</p>
+				
+				<p>The style property values specified in the <code><a href="#2_3_2">startStylePropertiesOBJ</a></code> parameter will be applied to the <b>first</b> node in the series of nodes specified by the <code><a href="#2_3_1">findExpressionOBJ</a></code> parameter (unless you specify the value <code>true</code> for the <code>reverse</code> property in the optional <code><a href="#2_3_5">fadePropertiesOBJ</a></code> parameter).</p>
+			</div>
+			
+			<a name="2_3_3"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.3. Uize.Fx.fadeStyleAcrossNodes -&gt; 2.3.3. endStylePropertiesOBJ"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_3" title="2. Static Methods -&gt; 2.3. Uize.Fx.fadeStyleAcrossNodes">3</a>.<a href="#2_3_3" title="2. Static Methods -&gt; 2.3. Uize.Fx.fadeStyleAcrossNodes -&gt; 2.3.3. endStylePropertiesOBJ">3</a>. </span>endStylePropertiesOBJ</h3>
+			<div class="contents3">
+				<p>An object, specifying the end values for an arbitrary number of CSS style properties.</p>
+				
+				<p>The style property values specified in the <code><a href="#2_3_3">endStylePropertiesOBJ</a></code> parameter will be applied to the <b>last</b> node in the series of nodes specified by the <code><a href="#2_3_1">findExpressionOBJ</a></code> parameter (unless you specify the value <code>true</code> for the <code>reverse</code> property in the optional <code><a href="#2_3_5">fadePropertiesOBJ</a></code> parameter).</p>
+			</div>
+			
+			<a name="2_3_4"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.3. Uize.Fx.fadeStyleAcrossNodes -&gt; 2.3.4. Start and End Style Structures Must Match"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_3" title="2. Static Methods -&gt; 2.3. Uize.Fx.fadeStyleAcrossNodes">3</a>.<a href="#2_3_4" title="2. Static Methods -&gt; 2.3. Uize.Fx.fadeStyleAcrossNodes -&gt; 2.3.4. Start and End Style Structures Must Match">4</a>. </span>Start and End Style Structures Must Match</h3>
+			<div class="contents3">
+				<p>Whatever style property values are specified in the <code><a href="#2_3_2">startStylePropertiesOBJ</a></code> object, values for those same style properties should also be specified in the <code><a href="#2_3_3">endStylePropertiesOBJ</a></code> parameter, so the structures of these two parameters should be the same.</p>
+				
+				<p>This rule also applies to style properties that can have compound values, such as <code>textShadow</code>. For example, if the value of the <code>textShadow</code> property specified in the <code><a href="#2_3_2">startStylePropertiesOBJ</a></code> parameter defines three shadows, then the value of the <code>textShadow</code> property specified in the <code><a href="#2_3_3">endStylePropertiesOBJ</a></code> parameter should also define three shadows. Moreover, the structure of the corresponding shadow definitions should match between the start value and the end value. For instance, the unit used for specifying the optional blur radius should be the same for the same shadow between the start and end values for <code>textShadow</code>. Similarly, if shadow color is specified for a shadow in the start value, then shadow color should also be specified for the corresponding shadow in the end value.</p>
+			</div>
+			
+			<a name="2_3_5"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.3. Uize.Fx.fadeStyleAcrossNodes -&gt; 2.3.5. fadePropertiesOBJ"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_3" title="2. Static Methods -&gt; 2.3. Uize.Fx.fadeStyleAcrossNodes">3</a>.<a href="#2_3_5" title="2. Static Methods -&gt; 2.3. Uize.Fx.fadeStyleAcrossNodes -&gt; 2.3.5. fadePropertiesOBJ">5</a>. </span>fadePropertiesOBJ</h3>
+			<div class="contents3">
+				<p>When the optional <code><a href="#2_3_5">fadePropertiesOBJ</a></code> parameter is specified, additional values can be specified for the set-get properties of the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> class - such as <code>curve</code>, <code>quantization</code>, etc.</p>
+				
+				<p><span class="allCaps">VARIATION</span></p>
+				
+				
+<pre class="sample-code">Uize.Fx.fadeStyleAcrossNodes (
+  findExpressionOBJ,
+  startStylePropertiesOBJ,
+  endStylePropertiesOBJ,
+  fadePropertiesOBJ
+);
+</pre>
+				
+				<p>The fade property values specified in the optional <code><a href="#2_3_5">fadePropertiesOBJ</a></code> parameter will be set on the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> instance that is created for the style fade. One compelling use of the <code><a href="#2_3_5">fadePropertiesOBJ</a></code> parameter is to use it to specify a curve function, so that a style fade can be non-linear.</p>
+			</div>
+			
+			<a name="2_3_6"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.3. Uize.Fx.fadeStyleAcrossNodes -&gt; 2.3.6. An Example"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_3" title="2. Static Methods -&gt; 2.3. Uize.Fx.fadeStyleAcrossNodes">3</a>.<a href="#2_3_6" title="2. Static Methods -&gt; 2.3. Uize.Fx.fadeStyleAcrossNodes -&gt; 2.3.6. An Example">6</a>. </span>An Example</h3>
+			<div class="contents3">
+				<p>To get a better idea of how the <code><a href="#2_3">Uize.Fx.fadeStyleAcrossNodes</a></code> works, let's consider an example...</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">Uize.Fx.fadeStyleAcrossNodes (
+  {className:/\bmenuLink\b/},
+  {
+    color:'efe',
+    backgroundColor:'9aa',
+    borderColor:'bcb',
+    textShadow:'#0 2 2 3'
+  },
+  {
+    color:'899',
+    backgroundColor:'234',
+    borderColor:'345',
+    textShadow:'#0 2 2 3'
+  }
+)
+</pre>
+				
+				<p>In the above example, a color gradient is being applied to all the nodes that make up a navigation menu. The series of nodes across which CSS style is being faded is specified using the find expression <code>{className:/\bmenuLink\b/}</code>. This expression finds all nodes that contain the CSS class "menuLink" in their <code>class</code> attribute (the <code>\b</code> in the regular expression indicates a word boundary).</p>
+				
+				<p>The color gradient being applied across the menu nodes is fading the color values of the <code>color</code>, <code>backgroundColor</code>, and <code>borderColor</code> style properties. In addition, a text shadow is being applied to all the nodes, but the properties of the text shadow are not changing across the nodes - it's just a basic drop shadow. The particular color gradient represented by the above style fade statement would result in the first node in the series being a light greenish gray, and the last node in the series being a dark blueish gray. Nodes between the first and last nodes would be blends of gray that are between the light gray and the dark gray.</p>
+			</div>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#2_2">Uize.Fx.fadeStyle</a></code> static method</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+	</div>
+	
+	<a name="3"></a>
+	<h1 class="heading1" title="3. Static Properties"><span class="headingNumber"><a href="#3" title="3. Static Properties">3</a>. </span>Static Properties</h1>
+	<div class="contents1">
+		<a name="3_1"></a>
+		<h2 class="heading2" title="3. Static Properties -&gt; 3.1. Uize.Fx.moduleName"><span class="headingNumber"><a href="#3" title="3. Static Properties">3</a>.<a href="#3_1" title="3. Static Properties -&gt; 3.1. Uize.Fx.moduleName">1</a>. </span>Uize.Fx.moduleName</h2>
+		<div class="contents2">
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+	</div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

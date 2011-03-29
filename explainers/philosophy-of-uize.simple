@@ -1,0 +1,125 @@
+Introduction
+	This document discusses the philosophy behind the design of the UIZE JavaScript Framework, including key precepts like not extending native objects.
+
+Key Precepts
+	There are some key precepts that guide the design of the UIZE JavaScript Framework.
+
+	Respect Global Namespace
+		What's in a namespace? Everything, as it turns out. The UIZE JavaScript Framework tucks away its features into a single =Uize= namespace (and if you create your own namespace for your site, you should do the same).
+
+		Global functions and properties are not provided, even though providing them might result in fewer keystrokes. UIZE has steered clear of the "battle of the dollar function". The holistic approach that the UIZE JavaScript Framework takes to the client code aspects of a Web application tends to make ad hoc access to the DOM by miscellaneous JavaScript code less necessary. Generally, if you're touching DOM nodes, those nodes are associated with widgets and they will usually be accessed as implied nodes using the facilities provided for this in the =Uize.Widget= class.
+
+	Don't Violate Standards
+		A conscious decision was made early on to not rely upon non-standard extensions of the DOM for registering attributes that client code may want to use for qualifying its behavior.
+
+		There are other ways to pipe data to a widget's corresponding client code that don't violate W3C standards and don't require custom DTD's in order for pages to validate.
+
+	Don't Molest JavaScript
+		JavaScript Got Game
+			The UIZE JavaScript embraces the JavaScript language as it is.
+
+			JavaScript is a powerful interpreted scripting language, combining elements of object oriented languages and functional languages. There are some other cute and trendy languages out there, and we might become envious of their junk. UIZE is not preoccupied with trying to invent sexy new language constructs, purely for the sake of coolness.
+
+		Caution With Iterator Methods
+			UIZE doesn't place undue emphasis on introducing exotic new iterator constructs, purely for the sake of how neat they are.
+
+			Unless you're factoring out significant code, iterator methods that act merely as for loops and take a function reference as the code to execute on iteration can take away more than they give. Superficially, it seems tedious to declare counters over and over again, just so you can iterate through elements of an array. It's cool that you can use anonymous functions in JavaScript and pass them to iterator methods, but if you're just replacing a simple for loop, you're hardly saving much in code size and you're adding a performance penalty. Iterator methods are best left to those that do complex iteration, like queued asynchronous iteration, tree traversal, node blob recursion, etc.
+
+		UIZE Doesn't Extend Core JavaScript Objects
+			UIZE doesn't try to fix JavaScript, and - in the interests of interoperability - avoids polluting the global namespace or extending built-in objects.
+
+			UIZE does not seek to coerce JavaScript into taking on the form of some other language. UIZE leverages the intrinsic strengths of the language. Consequently, the UIZE JavaScript Framework does not extend any of JavaScript's built-in core objects, even though it's possible to do so, and even though it might seem cool to do so. There are no new methods of the String object, for example. Built-in JavaScript objects - along with their properties and methods - are also considered part of the global namespace, so adding custom methods would violate the =Respect Global Namespace= principle.
+
+	Separation of Design and Interaction
+		There are four primary facets to the implementation of a healthy Web site: structure, content, design, and interaction.
+
+		STRUCTURE
+
+		The structure of a document, its XHTML markup, is the glue that binds together the other three facets.
+
+		CONTENT
+
+		Content is kept separate, in the form of dynamic data held in databases, user provided assets held in network attached storage systems, and resource strings that aid in internationalization.
+
+		DESIGN
+
+		Design is kept separate from the structure of the document, in the form of assets and CSS files, in order to aid in workflow and facilitate reuse and to ease change in design over time.
+
+		INTERACTION
+
+		Interaction is kept separate, in the form of JavaScript framework class libraries and page code besides, in order to maintain clean HTML structure that can be modified by Web developers without having to deal with the complexity of scripting code and possibly breaking it.
+
+Inspired by the Web
+	The UIZE JavaScript Framework is inspired by the environment that gave birth to it - the Web. UIZE adopts several paradigms that are inspired by the world of HTML and CSS.
+
+	Order Agnostic and Defaulted Method Parameters
+		HTML doesn't care in which order tag attributes are specified.
+
+		This has been a boon to the development of the Web as a platform, as it makes HTML source code human readable and understandable, without requiring a companion reference or IDE in order to make sense of tags. Imagine if tags were implemented using a syntax akin to the function syntax of programming language, where the tag's attributes weren't named, their order was critical, and defaulting required a complex tree of overload permutations and where certain attributes could only be defaulted by specifying null values for them. That would suck.
+
+		UIZE likes the idea of naming parameters in the calls to methods. This is accomplished by passing a "params" object hash in method calls. This is great in that it allows the signature of a method to evolve over time without being so disruptive to backwards compatilibilty. New parameters can be added with common sense defaults, and old code can continue on merrily. Defaulting allows parameters to be ommitted without having to worry about having to declare all possible permutations of presence/abscense of parameters in overloads. Not having to worry about order is also great, since the order that seems logical might change as parameters get added. Named parameters help readability and learnability of code.
+
+		Necessarily Mixed Approach
+			In some ways it would be nice (at least consistent) if all functions took an object hash of named parameters.
+
+			In reality, this would be cumbersome for methods with uncomplicated signatures, requiring more typing, adding to the code size, and - most importantly - incurring potentially a substantial performance penalty for heavily hit methods (since building an object hash comes at a price). There are some downsides to params hashes. UIZE takes a necessarily balanced approach, where methods with simple signatures use traditional params, but methods that may have complex param sets or that might likely change a lot over time will use a params hash, or sometimes params hashes for specific arguments.
+
+	State Oriented Programming
+		The Joy of Reflection
+			An invaluable feature, when using JavaScript in the context of a Web document, is *reflection*.
+
+			The reflection of an element node's attributes and style properties provides an intuitive and lightweight way to modify the state of the user interface, without understanding the inner working of how state change is managed by the browser's layout / rendering engine.
+
+			This is a huge load off the mind of a Web UI engineer, since undoubtedly there are any number of very clever ways in which handling state change is optimized for different scenarios, and undoubtedly there are any number of specific updater methods that are kicked off in carefully chosen order under different circumstances. The UI engineer doesn't have to care about what the browser has to do in order to synchronize the display to a changed state. The change could be minimal, or it could be very major.
+
+		Make It So
+			In a similar vein as DOM reflection, the UIZE JavaScript Framework provides a state interface through its [[set-get-properties.html][Set-get Properties]] mechanism.
+
+			In spirit, a widget class should expose its state through the set-get properties, and should register =onChange= handlers for these properties, as appropriate, in order to synchronize the UI to a changed state. The application developer using the widgets then does not have to worry about a suite of updater methods and understand why two should be used in a specific order in one case, but three should be used in any order in some other case (for example). We call this the *"make it so"* principle. You tell an instance what state it should be in, and it figures out how to get all its junk into that new state.
+
+	Type Versatility
+		UIZE takes the approach that the value of static typing is overestimated and is not philosophically compatible with a dynamic language like JavaScript and the Web environment in which it primarily lives - an environment which emphasizes versatility.
+
+		Take, for example, CSS, where values for style properties can be specified in any of a number of ways, using dramatically different types and units. Rather than providing multiple differently named methods to do similar things but with different function signatures, UIZE takes the approach of trying to minimize the number of different methods that are created, preferring instead to support common sense defaulting and type versatility for parameter values.
+
+	### Tree Based Inheritance
+
+		Orthogonal to class-based inheritance
+		state inheritance rather than functional inheritance
+
+Key Concepts
+	The GLUE Paradigm
+		Widgets available in the UIZE JavaScript Framework have been designed using the GLUE paradigm.
+
+		What is GLUE?
+			"GLUE" stands for Glue Logic Upon Elements. At its heart, GLUE aims to aid the Web interface design process by decoupling the interface skin development from the interface functionality development.
+
+		Decoupling Design And Interaction
+			When working on the user interface for a project, graphic designers and HTML coders should not have to wrestle with complicated JavaScript code while they are making aesthetic choices. And the coders wiring up a Web-based application should not have to wrestle with dependencies on graphic/layout designers in order to make progress with developing functionality.
+
+		GLUE'ing is More Robust
+			With the GLUE approach, the JavaScript code supporting the functional logic of a user interface can be more cleanly separated from the HTML and CSS code.
+
+			JavaScript code for interface logic that is tighly integrated into the HTML code results in an application that is more brittle and vulnerable to edits during the ongoing maintenance phase of an application. The GLUE approach is more robust because it more effectively encapsulates the JavaScript interface logic code and puts it out of the reach of casual page tweaks and routine content updates.
+
+	Code Beside
+		With the .NET framework, Microsoft introduced the concept of "code in front" and "code behind".
+
+		UIZE goes one step further, to introduce the concept of "code beside", which is a recommended practice of separating out the static JavaScript control logic from a page's "code in front" and consolidating it into a single JavaScript library file that typically  sits in the same directory as the page and is named the same except for the extension being ".js" (in the case of code beside that is shared across multiple pages, the file can be a module inside the central JavaScript directory).
+
+		The "code beside" file can then be separately scrunched (either dynamically or by a site build script) to reduce its size, and the browser can also cache it since it's static. Any dynamic data that should qualify its operation should be "piped" through a clear interface, in the same way that "code in front" and "code behind" should connect through a well defined (and, ideally, thin) interface.
+
+		The "code beside" practice is not a requirement in the UIZE JavaScript Framework, but it turns out to faciliate good Web application design. For example, a set of pages that share common interaction logic can implement that logic in a page widget class file that all the pages instantiate. Then, for pages that use that functionality but need to extend it to provide more, a subclass can be created. This is similar - in spirit, at least - to .NET's master pages. Of course, this concept of the "code beside" doesn't care about platform, so you can consolidate interaction logic in code besides with a LAMP driven site - or any other server platform - just as easily.
+
+### Coding Philosophy
+	Clear Before Concise
+		Writing less is not the be all and end all of what constitutes a pleasant framework. A certain degree of verbosity provides clarity.
+
+		Certainly, the verbosity of a language like Java can be a nightmare to type and a general pain in the ass. But, conversely, the cryptic terseness of a language like Perl can be a nightmare to read and a general pain in the brain. Code that reads well and is semantically clear is better than exotic looking hieroglyphics. Concise yet clear is a great goal, whenever that can be achieved, though sometimes those two objectives decide to be mutually exclusive. Most of all, one doesn't want to resent a persistent feeling that one is typing unnecessary boilerplate all over the place. The UIZE JavaScript Framework aims to be readable while not hitting that threshold of feeling cumbersome.
+
+	verbosity within application code is welcome, as a framework varies less than the wide array of logic that can be written in applications
+
+
+	Function Names Should Imply Action
+		To help semantic clarity,
+

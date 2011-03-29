@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2010-12-19 - Various Deprecated Features Killed | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="A variety of features in various modules, that were deprecated over a year ago, have finally been killed."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2010.html" class="breadcrumb breadcrumbWithArrow">2010 NEWS</a>
+	2010-12-19 - Various Deprecated Features Killed
+
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="The Uize.Node.wireEvent and Uize.Node.wireEvents static methods of the Uize.Node package, that were deprecated in November of 2009, have finally been killed.">1. Event Methods of Uize.Node Killed</a></li>
+			<li><a href="#2" title="The Document Loaded, Document Unload, Window Resized, and Window Scrolled static events of the Uize.Widget class, that were deprecated in November of 2009, have been killed.">2. Static Events of Uize.Widget Killed</a></li>
+			<li><a href="#3" title="The unwireNodeEvent, wired, wireNodeEvent, and wireNodeEvents instance methods of the Uize.Widget class, that were deprecated over a year ago in 2009, have been killed.">3. Instance Methods of Uize.Widget Killed</a></li>
+			<li><a href="#4" title="The validDateRange set-get property of the Uize.Widget.Calendar class, that was deprecated back in September of 2009, has finally been killed.">4. validDateRange Set-get Property of Uize.Widget.Calendar Killed</a></li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<p>A variety of features in various modules, that were deprecated over a year ago, have finally been killed.</p>
+	
+	<a name="1"></a>
+	<h1 class="heading1" title="1. Event Methods of Uize.Node Killed"><span class="headingNumber"><a href="#1" title="1. Event Methods of Uize.Node Killed">1</a>. </span>Event Methods of Uize.Node Killed</h1>
+	<div class="contents1">
+		<p>The <code>Uize.Node.wireEvent</code> and <code>Uize.Node.wireEvents</code> static methods of the <code><a href="../reference/Uize.Node.html">Uize.Node</a></code> package, that were deprecated in November of 2009, have finally been killed.</p>
+		
+		<p><span class="allCaps">NEW MAPPINGS FOR KILLED STATIC METHODS</span></p>
+		
+		
+<pre class="sample-code">Uize.Node.wireEvent   &gt;&gt; BECOMES &gt;&gt;  Uize.Node.wire
+Uize.Node.wireEvents  &gt;&gt; BECOMES &gt;&gt;  Uize.Node.wire
+</pre>
+	</div>
+	
+	<a name="2"></a>
+	<h1 class="heading1" title="2. Static Events of Uize.Widget Killed"><span class="headingNumber"><a href="#2" title="2. Static Events of Uize.Widget Killed">2</a>. </span>Static Events of Uize.Widget Killed</h1>
+	<div class="contents1">
+		<p>The <code>Document Loaded</code>, <code>Document Unload</code>, <code>Window Resized</code>, and <code>Window Scrolled</code> static events of the <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> class, that were deprecated in November of 2009, have been killed.</p>
+		
+		<p><span class="allCaps">NEW MAPPINGS FOR KILLED STATIC EVENTS</span></p>
+		
+		
+<pre class="sample-code">Uize.Widget.wire ('Document Loaded',...) &gt;&gt; BECOMES &gt;&gt; Uize.Node.wire (window,'load',...)
+Uize.Widget.wire ('Document Unload',...) &gt;&gt; BECOMES &gt;&gt; Uize.Node.wire (window,'unload',...)
+Uize.Widget.wire ('Window Resized',...)  &gt;&gt; BECOMES &gt;&gt; Uize.Node.wire (window,'resize',...)
+Uize.Widget.wire ('Window Scrolled',...) &gt;&gt; BECOMES &gt;&gt; Uize.Node.wire (window,'scroll',...)
+</pre>
+	</div>
+	
+	<a name="3"></a>
+	<h1 class="heading1" title="3. Instance Methods of Uize.Widget Killed"><span class="headingNumber"><a href="#3" title="3. Instance Methods of Uize.Widget Killed">3</a>. </span>Instance Methods of Uize.Widget Killed</h1>
+	<div class="contents1">
+		<p>The <code>unwireNodeEvent</code>, <code>wired</code>, <code>wireNodeEvent</code>, and <code>wireNodeEvents</code> instance methods of the <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> class, that were deprecated over a year ago in 2009, have been killed.</p>
+		
+		<p><span class="allCaps">NEW MAPPINGS FOR KILLED INSTANCE EVENTS</span></p>
+		
+		
+<pre class="sample-code">myWidget.unwireNodeEvent (...)  &gt;&gt; BECOMES &gt;&gt;  myWidget.unwireNode (...)
+myWidget.wired ()               &gt;&gt; BECOMES &gt;&gt;  myWidget.isWired
+myWidget.wireNodeEvent  (...)   &gt;&gt; BECOMES &gt;&gt;  myWidget.wireNode (...)
+myWidget.wireNodeEvents (...)   &gt;&gt; BECOMES &gt;&gt;  myWidget.wireNode (...)
+</pre>
+	</div>
+	
+	<a name="4"></a>
+	<h1 class="heading1" title="4. validDateRange Set-get Property of Uize.Widget.Calendar Killed"><span class="headingNumber"><a href="#4" title="4. validDateRange Set-get Property of Uize.Widget.Calendar Killed">4</a>. </span>validDateRange Set-get Property of Uize.Widget.Calendar Killed</h1>
+	<div class="contents1">
+		<p>The <code>validDateRange</code> set-get property of the <code><a href="../reference/Uize.Widget.Calendar.html">Uize.Widget.Calendar</a></code> class, that was deprecated back in September of 2009, has finally been killed.</p>
+		
+		<p>The <code>validDateRange</code> property was replaced with the <code>minValue</code> and <code>maxValue</code> set-get properties.</p>
+		
+		<p><span class="allCaps">INSTEAD OF...</span></p>
+		
+		
+<pre class="sample-code">myCalendar.set ({validDateRange:{start:'2009-09-18',end:'2009-12-25'}});
+</pre>
+		
+		<p><span class="allCaps">USE...</span></p>
+		
+		
+<pre class="sample-code">myCalendar.set ({minValue:'2009-09-18',maxValue:'2009-12-25'});
+</pre>
+	</div>
+	
+	<p>The one year grace period for the various deprecated features listed above is now over. If you had any straggler code that had not been updated appropriately to use the newer forms of these features, which have now been dealt the fatal death blow, then you will have to update that code if you wish to use the latest version of the UIZE JavaScript Framework.</p>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

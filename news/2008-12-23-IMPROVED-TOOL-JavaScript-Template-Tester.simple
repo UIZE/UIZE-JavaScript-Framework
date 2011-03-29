@@ -1,0 +1,13 @@
+The [[../examples/javascript-template-tester.html][JavaScript Template Tester]] tool has been improved with the addition of a "JST MODULE" tab that displays the input JavaScript template source code converted to a JavaScript template module.
+
+Additionally, the *"COMPILED FORM"* tab now shows the actual compiled code, including JavaScript comments that may have been in your JavaScript template source code. Previously, this tab displayed the browser's serialization of the compiled template function to a string - something which varies from browser to browser, with some browsers omitting comments and imposing their own quotes, indenting, etc.
+
+[[../examples/javascript-template-tester.html][CHECK IT OUT]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2008-12-23 - IMPROVED TOOL: JavaScript Template Tester
+....................................................................................

@@ -1,0 +1,141 @@
+Introduction
+	The =Uize.TableSort= class provides a convenient way to easily add column sorting functionality to your HTML tables. Because this class is designed using the GLUE paradigm, adding sort functionality to your tables is minimally invasive. In fact, you can make your tables sortable by doing as little as adding a single =id= attribute to the =table= tag. Then, a little bit of isolated JavaScript code tucked away near the end of your document (or anywhere below the table code) is all that it takes.
+
+	A Simple Example
+		To give you an idea of how easy it is to make your tables sortable, take a look at the example below...
+
+		....................................................................
+
+		<script src="js/Uize.js"></script>
+		<script src="js/Uize.Node.js"></script>
+		<script src="js/Uize.TableSort.js"></script>
+
+		<table id="friendsTable" border="1" cellspacing="0" cellpadding="2">
+			<tr>
+				<td colspan="8" align="center">Table of Friends</td>
+			</tr>
+			<tr bgcolor="#ccc" align="center">
+				<td>First Name</td>
+				<td>Last Name</td>
+				<td>Sex</td>
+				<td>Weight</td>
+				<td>Hair Color</td>
+				<td>Eye Color</td>
+				<td>Date of Birth</td>
+				<td>Known for How Long</td>
+			</tr>
+			<tr>
+				<td>John</td>
+				<td>Engelbrecht</td>
+				<td>male</td>
+				<td>189 lbs</td>
+				<td>brown, light</td>
+				<td>gray</td>
+				<td>May 5 1963</td>
+				<td>5 years</td>
+			</tr>
+			<tr>
+				<td>Alissa</td>
+				<td>Pierson</td>
+				<td>female</td>
+				<td>154 lbs</td>
+				<td>brown, dark</td>
+				<td>green</td>
+				<td>3/29/1972</td>
+				<td>2 years</td>
+			</tr>
+
+			<!--
+
+			AND A BUNCH MORE TABLE ROWS...
+
+			-->
+
+			<tr>
+				<td>Richard</td>
+				<td>van Doren</td>
+				<td>male</td>
+				<td>149 lbs</td>
+				<td>brown</td>
+				<td>brown</td>
+				<td>October 23 1974</td>
+				<td>.5 years</td>
+			</tr>
+		</table>
+		</center>
+
+		<script language="JavaScript">
+
+			Uize.TableSort.spawn ({node:'friendsTable'});
+
+		</script>
+		....................................................................
+
+		There are just three steps involved...
+
+		Source in the JavaScript Libraries
+			The =Uize.TableSort= class inherits from the =Uize= class, so the =Uize.js= JavaScript library must be sourced in. Then, the =Uize.TableSort= class relies on utility features provided in the =Uize.Node= package, so the =Uize.Node.js= library must be sourced in. Finally, the =Uize.TableSort.js= library itself must be sourced in. It is recommended that these libraries be sourced in immediately after the open =body= tag.
+
+		Give Your Table an ID Attribute
+			Because tables are used heavily in page layout, a document may contain many tables that it would not be appropriate to make sortable. By giving the tables you wish to sort unique =id= attribute values, you can then specify just these tables when using the =Uize.TableSort= class to make your tables sortable.
+
+		Wire Up the Table
+			There are a few ways in which you can wire up tables to be sortable. In this example, we're using the simplest approach by calling the =Uize.TableSort.spawn= static method. The =id= of the table that should be made sortable is specified by the =node= set-get property. After this method has been called, the table is now sortable. It's as easy as that. Of course, there are some more sophisticated things you can do and various ways to tweak how your sortable tables behave. All that is covered in this reference for the =Uize.TableSort= class.
+
+	### Features
+		[must to document]
+
+Inherited Instance and Static Methods and Properties
+	This class inherits from the =Uize= base class. Consequently, it inherits all the instance and static methods that comprise the mechanism for setting and getting property values, the mechanism for managing events, as well as other utility features. This class also inherits all the instance and static properties of the =Uize= base class. Consult the documentation for the =Uize= base class for detailed information on all these inherited features, since they are not explained again in the documentation for this class.
+
+Set-get Properties
+	node
+		[must to document]
+
+		NOTES
+		- the default value for this property is =null=
+
+	headingOverClass
+		[must to document]
+
+		NOTES
+		- the default value for this property is =null=
+
+	headingLitClass
+		[must to document]
+
+		NOTES
+		- the default value for this property is =null=
+
+	languageSortAscending
+		[must to document]
+
+		NOTES
+		- the default value for this property is ="Click to sort in ascending order"=
+
+	languageSortDescending
+		[must to document]
+
+		NOTES
+		- the default value for this property is ="Click to sort in descending order"=
+
+Instance Methods
+	sort
+		[must to document]
+
+	wireUi
+		[must to document]
+
+Static Methods
+	Uize.TableSort.spawn
+		[must to document]
+
+	Uize.TableSort.wireUi
+		[must to document]
+
+Instance Events
+	This class does not currently provide any instance events.
+
+Static Events
+	This class does not currently provide any static events.
+

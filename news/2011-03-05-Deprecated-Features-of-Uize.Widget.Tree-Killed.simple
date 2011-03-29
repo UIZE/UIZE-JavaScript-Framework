@@ -1,0 +1,19 @@
+A number of instance and static methods of the =Uize.Widget.Tree= module that were deprecated a year ago have finally been killed.
+
+The =getTreeFromList= and =getTreeFromPage= instance methods, along with the =Uize.Widget.Tree.getTreeFromList= and =Uize.Widget.Tree.getTreeFromPage= static methods, that were deprecated and migrated into the =Uize.Node.Tree= module, have been killed. To use these methods, you will now have to use the static methods of the =Uize.Node.Tree= module.
+
+KILLED
+...........................................................................................
+myTreeWidget.getTreeFromList (...)      >> NOW USE >>  Uize.Node.Tree.getTreeFromList (...)
+Uize.Widget.Tree.getTreeFromList (...)  >> NOW USE >>  Uize.Node.Tree.getTreeFromList (...)
+myTreeWidget.getTreeFromPage (...)      >> NOW USE >>  Uize.Node.Tree.getTreeFromPage (...)
+Uize.Widget.Tree.getTreeFromPage (...)  >> NOW USE >>  Uize.Node.Tree.getTreeFromPage (...)
+...........................................................................................
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2011-03-05 - Deprecated Features of Uize.Widget.Tree Killed
+....................................................................................

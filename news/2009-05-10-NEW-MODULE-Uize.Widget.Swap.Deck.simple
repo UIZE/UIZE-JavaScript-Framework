@@ -1,0 +1,13 @@
+The new =Uize.Widget.Swap.Deck= module manages the displayed state of different DOM nodes in a deck of DOM nodes, with support for swapping between the last displayed node and the new displayed node using a configurable transition effect.
+
+The =Uize.Widget.Swap.Deck= class is a subclass of the =Uize.Widget.Swap= class, and employs the same underlying swap transition effect mechanism. Consequently, effects settings defined in the =Uize.Widget.Swap.xPresets= extension module, and that can be used with the =Uize.Widget.Swap.Html=, =Uize.Widget.Swap.Image=, and other subclasses of the =Uize.Widget.Swap= base class, can also be used with this class.
+
+[[Uize.Widget.Swap.Deck][LEARN MORE]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-05-10 - NEW MODULE: Uize.Widget.Swap.Deck
+....................................................................................

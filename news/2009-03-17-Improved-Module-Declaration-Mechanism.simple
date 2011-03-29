@@ -1,0 +1,21 @@
+The module declaration mechanism (utilizing the =Uize.module= static method) has been improved in a number of ways to provide greater flexibility in how - and when - modules are declared.
+
+The following improvements have been made...
+
+- Now you can have multiple consecutive module declarations that share common required modules and things will work correctly, rather than some of the required modules being loaded multiple times (which caused all sorts of problems with modules stomping over themselves when re-declaring themselves and thereby crippling code).
+
+- Now you can have a named inline module declaration that requires other external modules, and subsequent inline module declarations that require that first module will correctly wait until it is built - rather than trying to load it externally.
+
+- Now there can be empty entries in the required list for a module and the module loader mechanism will ignore them. This is particularly good for forgiving the added undefined value in an array with a dangling comma (permitted in some browsers).
+
+- Now you can have modules loaded in the head of the document, and the built-in module loader mechanism will append the script tags to the head rather than trying (and failing) to append them to the body (which isn't guaranteed to exist yet in the DOM when a module declaration inside the head is executed).
+
+Addressing these various cases supports the use of JavaScript library (=.library.js=) modules, and improves the flexibility of the module declaration mechanism in general.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-03-17 - Improved Module Declaration Mechanism
+....................................................................................

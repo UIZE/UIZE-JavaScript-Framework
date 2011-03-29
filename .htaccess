@@ -1,0 +1,69 @@
+# renamed or relocated pages
+	# renamed examples
+		Redirect 301 /examples/window-draggable.html http://www.uize.com/examples/dialog.html
+		Redirect 301 /examples/window-resizable.html http://www.uize.com/examples/dialog-resizable.html
+		Redirect 301 /examples/source-code/window-draggable.html http://www.uize.com/examples/source-code/dialog.html
+		Redirect 301 /examples/source-code/window-resizable.html http://www.uize.com/examples/source-code/dialog-resizable.html
+		Redirect 301 /examples/pretty-json-serializing.html http://www.uize.com/examples/json-prettifier.html
+
+	# renamed explainers
+		Redirect 301 /explainers/all-about-events.html http://www.uize.com/explainers/javascript-event-system.html
+		Redirect 301 /explainers/all-about-modules.html http://www.uize.com/explainers/javascript-modules.html
+		Redirect 301 /explainers/all-about-simpledoc.html http://www.uize.com/explainers/javascript-documentation-system.html
+		Redirect 301 /explainers/all-about-templates.html http://www.uize.com/explainers/javascript-templates.html
+		Redirect 301 /explainers/all-about-widgets.html http://www.uize.com/explainers/javascript-widgets.html
+		Redirect 301 /explainers/modules.html http://www.uize.com/explainers/javascript-modules.html
+		Redirect 301 /tools/scruncher/introduction-to-the-scruncher.html http://www.uize.com/explainers/all-about-scrunching.html
+
+	# renamed modules
+		Redirect 301 /reference/Uize.serialize.html http://www.uize.com/reference/Uize.Json.html
+		Redirect 301 /reference/Uize.DataFace.html http://www.uize.com/reference/Uize.Node.html
+		RedirectMatch 301 ^/(reference(/source-code)?)/Uize\.Widget\.TextInputAdder\.html$ http://www.uize.com/$1/Uize.Widget.ListEditor.html
+		RedirectMatch 301 ^/(reference(/source-code)?)/Uize\.DocSucker\.html$ http://www.uize.com/$1/Uize.Doc.Sucker.html
+		RedirectMatch 301 ^/(reference(/source-code)?)/Uize\.SimpleDoc\.html$ http://www.uize.com/$1/Uize.Doc.Simple.html
+		RedirectMatch 301 ^/(reference(/source-code)?)/Uize\.Coupler\.html$ http://www.uize.com/$1/Uize.Util.Coupler.html
+		RedirectMatch 301 ^/(reference(/source-code)?)/Uize\.Cycle\.html$ http://www.uize.com/$1/Uize.Util.Cycle.html
+		RedirectMatch 301 ^/(reference(/source-code)?)/Uize\.Population\.html$ http://www.uize.com/$1/Uize.Widget.Population.html
+
+		# killed modules
+			RedirectMatch 301 ^/(reference(/source-code)?)/Uize\.Subclass\.html$ http://www.uize.com/javascript-modules-index.html
+
+		# deprecated Uize.Widget.Window.* modules
+			RedirectMatch 301 ^/(reference(/source-code)?)/Uize\.Widget\.Window(\.Draggable)?\.html$ http://www.uize.com/$1/Uize.Widget.Dialog.html
+			RedirectMatch 301 ^/(reference(/source-code)?)/Uize\.Widget\.Window\.Resizable\.html$ http://www.uize.com/$1/Uize.Widget.Dialog.xResizable.html
+
+		# deprecated Uize.Widget.Palette.* modules
+			RedirectMatch 301 ^/(reference(/source-code)?)/Uize\.Widget\.Palette(\.(Confirm|Form|Iframe))?.html$ http://www.uize.com/$1/Uize.Widget.Dialog$3.html
+
+	# misc
+		Redirect 301 /credits.html http://www.uize.com/appendixes/credits.html
+		Redirect 301 /appendixes/coding-style-guide.html http://www.uize.com/appendixes/javascript-code-conventions.html
+		Redirect 301 /appendixes/license-agreement.html http://www.uize.com/license.html
+
+	# renamed tools
+		Redirect 301 /tools/curve-explorer.html http://www.uize.com/examples/curve-explorer.html
+		Redirect 301 /tools/javascript-template-tester.html http://www.uize.com/examples/javascript-template-tester.html
+		Redirect 301 /tools/json-prettifier.html http://www.uize.com/examples/json-prettifier.html
+		Redirect 301 /tools/scruncher/index.html http://www.uize.com/examples/javascript-scruncher.html
+		Redirect 301 /tools/simple-data-tester.html http://www.uize.com/examples/simple-data-tester.html
+		Redirect 301 /tools/simple-doc-tester.html http://www.uize.com/examples/simple-doc-tester.html
+		Redirect 301 /tools/simple-doc/index.html http://www.uize.com/examples/simple-doc-tester.html
+		Redirect 301 /javascript-tools.html http://www.uize.com/javascript-tool-examples.html
+
+# killed pages
+	Redirect 301 /appendixes/known-bugs-and-issues.html http://www.uize.com
+	Redirect 301 /examples.html http://www.uize.com/javascript-examples.html
+	RedirectMatch 301 ^/(about|blog|community|documentation|welcome-to-uize)\.html$ http://www.uize.com
+
+# prevent folder browsing
+	RedirectMatch 301 ^/(appendixes|explainers|tests)/?$ http://www.uize.com
+	RedirectMatch 301 ^/examples/?$ http://www.uize.com/javascript-examples.html
+	RedirectMatch 301 ^/reference/?$ http://www.uize.com/javascript-modules-index.html
+	RedirectMatch 301 ^/tools/?$ http://www.uize.com/javascript-tool-examples.html
+
+# using images from tomkidding.com Web site
+	RedirectMatch 301 ^/photos/(.*)/(.*)$ http://www.tomkidding.com/artworks/photos/small/$2
+
+# custom 404 error page
+	ErrorDocument 404 /404.html
+

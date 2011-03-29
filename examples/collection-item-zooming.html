@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Zooming Collection Items | JavaScript Examples | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="featured animation widget zoom Uize.Widget.CollectionItem.Zooming"/>
+	<meta name="description" content="Experience the zooming collection item widget. It gives you a lightweight and intuitive preview behavior, with a JavaScript animation zoom-in effect."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.example.css"/>
+	<style type="text/css">
+		.thumbnails {
+			width:684px;
+			_width:688px; /* IE6 needs the extra 4 pixels to prevent wrapping, for some weird reason */
+			margin:auto;
+		}
+		.thumbnails .thumbnail {
+			display:block;
+			position:relative;
+			float:left;
+			margin:4px;
+			border-width:10px;
+			border-style:solid;
+			overflow:hidden;
+		}
+		.thumbnails .thumbnail a, .thumbnails .thumbnail a img {
+			display:block;
+			position:relative;
+			border:none;
+		}
+		.thumbnails .thumbnail, .thumbnails .thumbnail a, .thumbnails .thumbnail a img {
+			width:200px;
+			height:143px;
+		}
+		.clearFloatLeft {
+			clear:left;
+			height:0;
+		}
+	</style>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	<a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow">JAVASCRIPT EXAMPLES</a>
+	Zooming Collection Items
+	<div id="page-actions" class="pageActions">
+		<a href="source-code/collection-item-zooming.html" class="buttonLink">SOURCE</a>
+	</div>
+</h1>
+
+<div class="main">
+	<!-- explanation copy -->
+
+	<div class="explanation">
+		<p>In this example, the <a href="../reference/Uize.Widget.CollectionItem.Zooming.html"><code>Uize.Widget.CollectionItem.Zooming</code></a> widget class is being used to add a JavaScript animation zoom in effect to a set of thumbnails. If you mouseover one of the images and rest the mouse, the zoom in behavior will be activated. Once zoomed in, moving the mouse lets you pan up and down and left and right inside the view port. The <code>Uize.Widget.CollectionItem.Zooming</code> class is typically used in the context of a <a href="../reference/Uize.Widget.Collection.html"><code>Uize.Widget.Collection</code></a> instance, but it doesn't have to be, and can stand on its own and still provide the zoom in behavior. In this particular example, there is one <code>Uize.Widget.CollectionItem.Zooming</code> instance per image, and the six instances are created using the declarative spawning mechanism (if you look at the source code, you'll see the <code>script</code> tag that declares the <code>window.$page_$$</code> property).</p>
+	</div>
+
+	<div id="thumbnails" class="thumbnails">
+		<div id="page_item0" class="thumbnail insetBorderColor">
+			<a id="page_item0-previewShell" href="http://www.tomkidding.com/artworks/photos/shadow-of-the-past.html">
+				<img id="page_item0-preview" src="http://rlv.zcache.com/isapi/designall.dll?pid=228026937512483785&action=realview&pdt=print&pending=false&rvtype=pre&max_dim=200" alt=""/>
+			</a>
+		</div>
+		<div id="page_item1" class="thumbnail insetBorderColor">
+			<a id="page_item1-previewShell" href="http://www.tomkidding.com/artworks/photos/retirement-home.html">
+				<img id="page_item1-preview" src="http://rlv.zcache.com/isapi/designall.dll?pid=228580091324147918&action=realview&pdt=print&pending=false&rvtype=pre&max_dim=200" alt=""/>
+			</a>
+		</div>
+		<div id="page_item2" class="thumbnail insetBorderColor">
+			<a id="page_item2-previewShell" href="http://www.tomkidding.com/artworks/photos/heavens-open-over-pedro.html">
+				<img id="page_item2-preview" src="http://rlv.zcache.com/isapi/designall.dll?pid=228483162492178759&action=realview&pdt=print&pending=false&rvtype=pre&max_dim=200" alt=""/>
+			</a>
+		</div>
+		<div id="page_item3" class="thumbnail insetBorderColor">
+			<a id="page_item3-previewShell" href="http://www.tomkidding.com/artworks/photos/san-fran-sunset.html">
+				<img id="page_item3-preview" src="http://rlv.zcache.com/isapi/designall.dll?pid=228074575082103294&action=realview&pdt=print&pending=false&rvtype=pre&max_dim=200" alt=""/>
+			</a>
+		</div>
+		<div id="page_item4" class="thumbnail insetBorderColor">
+			<a id="page_item4-previewShell" href="http://www.tomkidding.com/artworks/photos/hook-in-the-wall.html">
+				<img id="page_item4-preview" src="http://rlv.zcache.com/isapi/designall.dll?pid=228855435929294206&action=realview&pdt=print&pending=false&rvtype=pre&max_dim=200" alt=""/>
+			</a>
+		</div>
+		<div id="page_item5" class="thumbnail insetBorderColor">
+			<a id="page_item5-previewShell" href="http://www.tomkidding.com/artworks/photos/window-lean.html">
+				<img id="page_item5-preview" src="http://rlv.zcache.com/isapi/designall.dll?pid=228213464916914087&action=realview&pdt=print&pending=false&rvtype=pre&max_dim=200" alt=""/>
+			</a>
+		</div>
+		<div class="clearFloatLeft"></div>
+		<script type="text/javascript">
+			window.$page_$$ = {
+				idPrefix:{root:'thumbnails',tagName:'DIV',className:/\bthumbnail\b/},
+				widgetClass:'Uize.Widget.CollectionItem.Zooming',
+				previewZoomUrl:function () {return this.get ('previewUrl').replace ('200','500')},
+				zoomPower:2.5
+			};
+		</script>
+	</div>
+</div>
+
+<!-- JavaScript code to make the static HTML "come alive" -->
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Example.library',
+		'UizeDotCom.Page.Example'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Example).wireUi ()}
+});
+
+</script>
+
+</body>
+</html>
+

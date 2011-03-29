@@ -1,0 +1,120 @@
+.calculator {
+	background:#1e252e url(../images/widget-bg.gif) repeat-x left top;
+	padding:4px;
+	width:230px;
+	height:262px;
+	border:1px solid #456;
+	border-color:#567 #000 #000 #456;
+}
+
+/*** entry field ***/
+	.calculator .entry, .calculator .entry:focus {
+		font-size:32px;
+		font-family:Courier;
+		color:#0fb;
+		width:217px;
+		height:38px;
+		text-align:right;
+		padding:0;
+		padding-right:5px;
+		background:#000 url(../images/title-bg.gif) repeat-x left -5px;
+		border:2px solid #567;
+		border-color:#123 #456 #456 #123;
+		margin:4px 2px;
+		outline:none;
+		/* text-shadow:0 0 100px #0f0, 0 0 10px #00f, 0 0 10px #0f0, 0 0 4px #0ff, 0 0 3px #0ff; */
+		text-shadow:0 -3px 10px #0cf, 0 5px 10px #0fc, 0 0 4px #0fc, 0 0 3px #0cf;
+	}
+
+/*** buttons ***/
+	.calculator .buttonShell {
+		padding:1px;
+		background:#000;
+		border:1px solid #000;
+		float:left;
+		margin:3px;
+	}
+
+	.calculator .button {
+		display:block;
+		font-size:19px;
+		font-family:Verdana;
+		width:20px;
+		height:25px;
+		white-space:nowrap;
+	}
+
+	/*** overrides to maintain backwards compatibility with old dark styled site ***/
+		.calculator .button,
+		.calculator .button:link,
+		.calculator .button:visited,
+		.calculator .button:hover,
+		.calculator .button:active
+		{
+			color:#a6aaaf;
+			background:#000 url(../images/button-bg-dark.gif) left top repeat-x;
+			border:1px solid #000;
+			border-color:#3f444f #222 #223 #3f444f;
+			text-shadow:none;
+		}
+		.calculator .buttonOver,
+		.calculator .buttonOver:link,
+		.calculator .buttonOver:visited,
+		.calculator .buttonOver:hover,
+		.calculator .buttonOver:active
+		{
+			color:#c6cacf;
+			border-color:#889 #000 #334 #778;
+			text-shadow:none;
+		}
+		.calculator .buttonActive,
+		.calculator .buttonActive:link,
+		.calculator .buttonActive:visited,
+		.calculator .buttonActive:hover,
+		.calculator .buttonActive:active
+		{
+			color:#fff;
+			border-color:#bbb #000 #223 #999;
+			text-shadow:-.1em 0 .1em #000, .1em 0 .1em #000, 0 -.1em .1em #000, 0 .1em .1em #000, 0 0 .3em #fff, 0 0 .5em #fff, 0 0 .6em #fff;
+		}
+		.calculator .buttonGrayed,
+		.calculator .buttonGrayed:link,
+		.calculator .buttonGrayed:visited,
+		.calculator .buttonGrayed:hover,
+		.calculator .buttonGrayed:active {
+			color:#555;
+			border-color:#444 #222 #222 #333;
+			text-shadow:none;
+		}
+
+	/*** digit buttons ***/
+		.calculator .digitButton {
+			border-color:#047;
+		}
+
+	/*** memory buttons ***/
+		.calculator .memoryButton {
+			border-color:#740;
+		}
+
+	/*** basic arithmetic buttons ***/
+		.calculator .operatorButtonBasic {
+			border-color:#354;
+		}
+
+	/*** negate button ***/
+		.calculator .operatorButtonNegate .button {
+			letter-spacing:-1px;
+		}
+
+	/*** smaller text for some buttons ***/
+		.calculator .memoryButton .button,
+		.calculator .operatorButtonClearEntry .button,
+		.calculator .operatorButtonClear .button,
+		.calculator .operatorButtonNegate .button
+		{
+			font-size:12px;
+			font-weight:bold;
+			line-height:22px;
+		}
+

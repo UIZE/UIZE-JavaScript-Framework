@@ -1,0 +1,13 @@
+The =Uize.String= module has been improved with the addition of the new =Uize.String.startsWith= and =Uize.String.endsWith= static methods.
+
+The =Uize.String.startsWith= method returns a boolean, indicating whether or not the specified source string starts with the specified substring. Similarly, the =Uize.String.endsWith= method returns a boolean, indicating whether or not the specified source string ends with the specified substring.
+
+Both methods have been implemented to be optimized for performance, with several tests that catch certain conditions early to avoid always incurring the cost of an =indexOf= call. Such conditions include: 1) the substring is longer than the source string, 2) the first character of the substring is not in the source string at the spot where the substring would have to start (in order to be at the start or end), 3) the last character of the substring is not in the source string at the spot where the substring would have to end (in order to be at the start or end), 4) the substring is the same length as the source string (so they can simply be tested for equality). These various optimizations catch many cases where simply resorting to an =indexOf= test would produce suboptimal performance.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-06-21 - NEW STRING METHODS: startsWith and endsWith
+....................................................................................

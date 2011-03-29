@@ -1,0 +1,19 @@
+A number of bug fixes and minor tweaks have been made, including...
+
+- A bug with the [[../examples/swap-image-cycle.html][Image Cycle]], [[../examples/swap-html.html][Basic HTML Swap]], [[../examples/slideshow-of-data.html][Slideshow of Data]], and [[../examples/slideshow-with-dissolve.html][Slideshow With Dissolve]] examples that was causing the dynamically swapped content to not be horizontally centered correctly in IE has been fixed.
+
+- A recently introduced bug with the =flushNodeCache= instance method of the =Uize.Widget= class has been fixed. This bug broke the =Uize.Widget.Calendar= widget's month navigation.
+
+- The default module loader built into the =Uize= base class has been modified to now only add script tags to the =head= of the document and never the body.
+
+- A bug with the widget adoption mechanism that was breaking the [[../examples/slideshow-with-dissolve.html][Slideshow With Dissolve]] example in IE has been fixed.
+
+- A bug that was breaking the [[../examples/dialog-resizable.html][Resizable Dialog]] example in IE has been fixed.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-04-06 - BUG FIXES & TWEAKS
+....................................................................................

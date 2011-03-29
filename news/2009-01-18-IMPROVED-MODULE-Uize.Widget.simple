@@ -1,0 +1,11 @@
+The =Uize.Widget= module has been improved with the addition of a new facility for supporting inline JST (JavaScript Template) script blocks for declaring a widget's HTML generator.
+
+When the boolean value =true= is set for the =html= set-get property of a widget instance, and if the =Uize.Template= module is loaded, then the =Uize.Widget= class will attempt to find a =script= tag inside the container, shell, or root node of the widget with the type "text/jst" (JavaScript Template). If such a =script= tag is found, then its contents will be compiled by the =Uize.Template= module and the resulting JST module will be set on the =html= set-get property.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-01-18 - IMPROVED MODULE: Uize.Widget
+....................................................................................

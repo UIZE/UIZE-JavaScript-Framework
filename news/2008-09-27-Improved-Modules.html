@@ -1,0 +1,243 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2008-09-27 - Improved Modules | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="The Uize.SimpleDoc module has been updated so that the automatically generated title attributes for list items in the contents tree now are stripped of SimpleDoc formatting."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2008.html" class="breadcrumb breadcrumbWithArrow">2008 NEWS</a>
+	2008-09-27 - Improved Modules
+
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="The Uize.SimpleDoc module has been updated so that the automatically generated title attributes for list items in the contents tree now are stripped of SimpleDoc formatting.">1. IMPROVED MODULE: Uize.SimpleDoc</a></li>
+			<li><a href="#2" title="The Uize.Widget.Tree.List widget class now supports a tooltip set-get property that lets you optionally specify a tooltip node that should be updated with the description of items as the user mouses over them.">2. IMPROVED MODULE: Uize.Widget.Tree.List</a></li>
+			<li><a href="#3">3. 2008-09-24 - Minor Tweaks</a>
+				<ul>
+					<li><a href="#3_1" title="Any document created using the Uize.SimpleDoc module now contains a contents list that is generated based on the structure of the document.">3.1. IMPROVED MODULE: Uize.SimpleDoc</a></li>
+					<li><a href="#3_2" title="The Uize.Widget.Tree module - that is the base class for the Uize.Widget.Tree.List module - now is implemented so that the setExpandedDepth instance method does not require the DOM for a list instance to already be created before this method can be called.">3.2. IMPROVED MODULE: Uize.Widget.Tree</a></li>
+				</ul>
+			</li>
+			<li><a href="#4">4. 2008-09-19 - Miscellaneous Improvements</a>
+				<ul>
+					<li><a href="#4_1" title="A bug was fixed with tooltips not being positioned correctly in Safari when a document is scrolled.">4.1. BUG FIX: Uize.Tooltip</a></li>
+					<li><a href="#4_2" title="The palette implied node of an instance of the Uize.Widget.PopupPalette widget class is now positioned to butt up against the selector child button&apos;s root node.">4.2. IMPROVED MODULE: Uize.Widget.PopupPalette</a></li>
+					<li><a href="#4_3">4.3. IMPROVED MODULE: Uize.Node</a>
+						<ul>
+							<li><a href="#4_3_1" title="The new Uize.Node.setAbsPosAdjacentTo static method lets you absolutely position a specified node so that it butts up against a specified reference node.">4.3.1. New Method: Uize.Node.setAbsPosAdjacentTo</a></li>
+							<li><a href="#4_3_2" title="When no eventOBJ parameter is specified, the Uize.Node.getEventAbsPos static method now returns the absolute coordinates of the current mouse position.">4.3.2. Improved Method: Uize.Node.getEventAbsPos</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li><a href="#5">5. 2008-09-12 - Marquee Performance Optimizations</a>
+				<ul>
+					<li><a href="#5_1" title="The widgets.map, widgets.add, and widgets.remove backwards compatibility provisions in the Uize.Widget class have been eliminated.">5.1. MODULE UPDATE</a></li>
+					<li><a href="#5_2" title="The Uize.Widget.Window module now supports new title and defaultTitle set-get properties that let you modify the title displayed in a window&apos;s title bar.">5.2. IMPROVED MODULE: Uize.Widget.Window</a></li>
+					<li><a href="#5_3" title="The Uize.clone static method of the Uize base class now supports cloning values that are instances of JavaScript&apos;s built-in RegExp, Date, String, Number, and Boolean objects.">5.3. IMPROVED MODULE: Uize</a></li>
+					<li><a href="#5_4" title="- The fixedX and fixedY set-get properties now cause updates in enabled state for a resizer&apos;s drag handles, allowing resizable windows to be made resizable only in one axis (or neither axes, so not resizable).">5.4. IMPROVED MODULE: Uize.Widget.Resizer</a></li>
+					<li><a href="#5_5" title="- Instances of Uize.Widget.Drag now observe enabled state. This capability is utilized by drag handles in the Uize.Widget.Resizer class, allowing its fixedX and fixedY set-get properties to update resizing configuration at any time.">5.5. IMPROVED MODULE: Uize.Widget.Drag</a></li>
+					<li><a href="#5_6" title="The basic marquee example has been updated to provide linked JavaScript statements that provide a demonstration of the widget&apos;s programmatic interface.">5.6. IMPROVED EXAMPLE: Basic Marquee Example</a></li>
+				</ul>
+			</li>
+			<li><a href="#6">6. 2008-09-01 - New Example, Optimizations</a>
+				<ul>
+					<li><a href="#6_1" title="The new Scrolly Carousel example demonstrates how the Uize.Widget.Scrolly class can be used to create a carousel scrolly that lets you step through a series of pages.">6.1. NEW EXAMPLE: Scrolly Carousel</a></li>
+					<li><a href="#6_2" title="Support for the &apos;nodes&apos; mode for Uize.Widget.Button instances has been eliminated.">6.2. OPTIMIZED MODULE: Uize.Widget.Button</a></li>
+					<li><a href="#6_3" title="There are new additions to the Coding Style Guide and JavaScript Optimization appendixes, and various methods of various modules have been documented. Documentation continues to be fleshed out more upon each release.">6.3. MORE DOCUMENTATION</a></li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<a name="1"></a>
+	<h1 class="heading1" title="1. IMPROVED MODULE: Uize.SimpleDoc"><span class="headingNumber"><a href="#1" title="1. IMPROVED MODULE: Uize.SimpleDoc">1</a>. </span>IMPROVED MODULE: Uize.SimpleDoc</h1>
+	<div class="contents1">
+		<p>The <code>Uize.SimpleDoc</code> module has been updated so that the automatically generated title attributes for list items in the contents tree now are stripped of SimpleDoc formatting.</p>
+	</div>
+	
+	<a name="2"></a>
+	<h1 class="heading1" title="2. IMPROVED MODULE: Uize.Widget.Tree.List"><span class="headingNumber"><a href="#2" title="2. IMPROVED MODULE: Uize.Widget.Tree.List">2</a>. </span>IMPROVED MODULE: Uize.Widget.Tree.List</h1>
+	<div class="contents1">
+		<p>The <code><a href="../reference/Uize.Widget.Tree.List.html">Uize.Widget.Tree.List</a></code> widget class now supports a <code>tooltip</code> set-get property that lets you optionally specify a tooltip node that should be updated with the description of items as the user mouses over them.</p>
+		
+		<p>The documentation in the uize.com Web site utilizes this feature - along with the <code>Uize.SimpleDoc</code> module's automatic generation of descriptions for items in the contents tree - to display a summary / teaser for sections when the user mouses over section links in the contents tree.</p>
+	</div>
+	
+	<a name="3"></a>
+	<h1 class="heading1" title="3. 2008-09-24 - Minor Tweaks"><span class="headingNumber"><a href="#3" title="3. 2008-09-24 - Minor Tweaks">3</a>. </span>2008-09-24 - Minor Tweaks</h1>
+	<div class="contents1">
+		<a name="3_1"></a>
+		<h2 class="heading2" title="3. 2008-09-24 - Minor Tweaks -&gt; 3.1. IMPROVED MODULE: Uize.SimpleDoc"><span class="headingNumber"><a href="#3" title="3. 2008-09-24 - Minor Tweaks">3</a>.<a href="#3_1" title="3. 2008-09-24 - Minor Tweaks -&gt; 3.1. IMPROVED MODULE: Uize.SimpleDoc">1</a>. </span>IMPROVED MODULE: Uize.SimpleDoc</h2>
+		<div class="contents2">
+			<p>Any document created using the <code>Uize.SimpleDoc</code> module now contains a contents list that is generated based on the structure of the document.</p>
+			
+			<p>The list item for each section is linked to the section's anchor in the document and has a <code>title</code> attribute (ie. a tooltip) that provides a preview of the section's first paragraph. Some other small tweaks were made to improve performance and the appearance of the generated markup.</p>
+		</div>
+		
+		<a name="3_2"></a>
+		<h2 class="heading2" title="3. 2008-09-24 - Minor Tweaks -&gt; 3.2. IMPROVED MODULE: Uize.Widget.Tree"><span class="headingNumber"><a href="#3" title="3. 2008-09-24 - Minor Tweaks">3</a>.<a href="#3_2" title="3. 2008-09-24 - Minor Tweaks -&gt; 3.2. IMPROVED MODULE: Uize.Widget.Tree">2</a>. </span>IMPROVED MODULE: Uize.Widget.Tree</h2>
+		<div class="contents2">
+			<p>The <code><a href="../reference/Uize.Widget.Tree.html">Uize.Widget.Tree</a></code> module - that is the base class for the <code><a href="../reference/Uize.Widget.Tree.List.html">Uize.Widget.Tree.List</a></code> module - now is implemented so that the <code>setExpandedDepth</code> instance method does not require the DOM for a list instance to already be created before this method can be called.</p>
+			
+			<p>If an instance of <code><a href="../reference/Uize.Widget.Tree.List.html">Uize.Widget.Tree.List</a></code> is not yet wired up and there is no corresponding DOM for the list, then the <code>setExpandedDepth</code> method will only modify the <code>expanded</code> property at the appropriate places in the tree structure JSON object. This allows a list widget to be instantiated, with its data tree, then the tree can be expanded to a desired depth, and then the UI can be built and wired up to immediately reflect that state. This is mostly a performance improvement.</p>
+		</div>
+	</div>
+	
+	<a name="4"></a>
+	<h1 class="heading1" title="4. 2008-09-19 - Miscellaneous Improvements"><span class="headingNumber"><a href="#4" title="4. 2008-09-19 - Miscellaneous Improvements">4</a>. </span>2008-09-19 - Miscellaneous Improvements</h1>
+	<div class="contents1">
+		<a name="4_1"></a>
+		<h2 class="heading2" title="4. 2008-09-19 - Miscellaneous Improvements -&gt; 4.1. BUG FIX: Uize.Tooltip"><span class="headingNumber"><a href="#4" title="4. 2008-09-19 - Miscellaneous Improvements">4</a>.<a href="#4_1" title="4. 2008-09-19 - Miscellaneous Improvements -&gt; 4.1. BUG FIX: Uize.Tooltip">1</a>. </span>BUG FIX: Uize.Tooltip</h2>
+		<div class="contents2">
+			<p>A bug was fixed with tooltips not being positioned correctly in Safari when a document is scrolled.</p>
+			
+			<p>Essentially, Safari is not consistent with other browsers in where meaningful values for <code>scrollLeft</code> and <code>scrollTop</code> are reflected.</p>
+		</div>
+		
+		<a name="4_2"></a>
+		<h2 class="heading2" title="4. 2008-09-19 - Miscellaneous Improvements -&gt; 4.2. IMPROVED MODULE: Uize.Widget.PopupPalette"><span class="headingNumber"><a href="#4" title="4. 2008-09-19 - Miscellaneous Improvements">4</a>.<a href="#4_2" title="4. 2008-09-19 - Miscellaneous Improvements -&gt; 4.2. IMPROVED MODULE: Uize.Widget.PopupPalette">2</a>. </span>IMPROVED MODULE: Uize.Widget.PopupPalette</h2>
+		<div class="contents2">
+			<p>The <code>palette</code> implied node of an instance of the <code><a href="../reference/Uize.Widget.PopupPalette.html">Uize.Widget.PopupPalette</a></code> widget class is now positioned to butt up against the <code>selector</code> child button's root node.</p>
+			
+			<p>If the selector button is not visible at the time that the palette is shown, then the palette is positioned based upon the current mouse coordinates.</p>
+		</div>
+		
+		<a name="4_3"></a>
+		<h2 class="heading2" title="4. 2008-09-19 - Miscellaneous Improvements -&gt; 4.3. IMPROVED MODULE: Uize.Node"><span class="headingNumber"><a href="#4" title="4. 2008-09-19 - Miscellaneous Improvements">4</a>.<a href="#4_3" title="4. 2008-09-19 - Miscellaneous Improvements -&gt; 4.3. IMPROVED MODULE: Uize.Node">3</a>. </span>IMPROVED MODULE: Uize.Node</h2>
+		<div class="contents2">
+			<a name="4_3_1"></a>
+			<h3 class="heading3" title="4. 2008-09-19 - Miscellaneous Improvements -&gt; 4.3. IMPROVED MODULE: Uize.Node -&gt; 4.3.1. New Method: Uize.Node.setAbsPosAdjacentTo"><span class="headingNumber"><a href="#4" title="4. 2008-09-19 - Miscellaneous Improvements">4</a>.<a href="#4_3" title="4. 2008-09-19 - Miscellaneous Improvements -&gt; 4.3. IMPROVED MODULE: Uize.Node">3</a>.<a href="#4_3_1" title="4. 2008-09-19 - Miscellaneous Improvements -&gt; 4.3. IMPROVED MODULE: Uize.Node -&gt; 4.3.1. New Method: Uize.Node.setAbsPosAdjacentTo">1</a>. </span>New Method: Uize.Node.setAbsPosAdjacentTo</h3>
+			<div class="contents3">
+				<p>The new <code>Uize.Node.setAbsPosAdjacentTo</code> static method lets you absolutely position a specified node so that it butts up against a specified reference node.</p>
+				
+				<p>This is useful for positioning a popup palette or droplist - that might be absolutely positioned and at the root of a document's DOM - next to its corresponding selector button node that might be deep in the document's DOM structure.</p>
+			</div>
+			
+			<a name="4_3_2"></a>
+			<h3 class="heading3" title="4. 2008-09-19 - Miscellaneous Improvements -&gt; 4.3. IMPROVED MODULE: Uize.Node -&gt; 4.3.2. Improved Method: Uize.Node.getEventAbsPos"><span class="headingNumber"><a href="#4" title="4. 2008-09-19 - Miscellaneous Improvements">4</a>.<a href="#4_3" title="4. 2008-09-19 - Miscellaneous Improvements -&gt; 4.3. IMPROVED MODULE: Uize.Node">3</a>.<a href="#4_3_2" title="4. 2008-09-19 - Miscellaneous Improvements -&gt; 4.3. IMPROVED MODULE: Uize.Node -&gt; 4.3.2. Improved Method: Uize.Node.getEventAbsPos">2</a>. </span>Improved Method: Uize.Node.getEventAbsPos</h3>
+			<div class="contents3">
+				<p>When no <code>eventOBJ</code> parameter is specified, the <code>Uize.Node.getEventAbsPos</code> static method now returns the absolute coordinates of the current mouse position.</p>
+			</div>
+		</div>
+	</div>
+	
+	<a name="5"></a>
+	<h1 class="heading1" title="5. 2008-09-12 - Marquee Performance Optimizations"><span class="headingNumber"><a href="#5" title="5. 2008-09-12 - Marquee Performance Optimizations">5</a>. </span>2008-09-12 - Marquee Performance Optimizations</h1>
+	<div class="contents1">
+		<a name="5_1"></a>
+		<h2 class="heading2" title="5. 2008-09-12 - Marquee Performance Optimizations -&gt; 5.1. MODULE UPDATE"><span class="headingNumber"><a href="#5" title="5. 2008-09-12 - Marquee Performance Optimizations">5</a>.<a href="#5_1" title="5. 2008-09-12 - Marquee Performance Optimizations -&gt; 5.1. MODULE UPDATE">1</a>. </span>MODULE UPDATE</h2>
+		<div class="contents2">
+			<p>The <code>widgets.map</code>, <code>widgets.add</code>, and <code>widgets.remove</code> backwards compatibility provisions in the <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> class have been eliminated.</p>
+			
+			<p>This feature had been deprecated back in May, in favor of the more concise and semantically elegant <code>children</code> property, and the <code>addChild</code> and <code>removeChild</code> instance methods. If you have code that references the <code>widgets</code> property or its <code>add</code> and <code>remove</code> methods (which is unlikely), you will need to update your code. This change lightens the memory load for every widget instance and reduces code size for the <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> class a tiny bit.</p>
+		</div>
+		
+		<a name="5_2"></a>
+		<h2 class="heading2" title="5. 2008-09-12 - Marquee Performance Optimizations -&gt; 5.2. IMPROVED MODULE: Uize.Widget.Window"><span class="headingNumber"><a href="#5" title="5. 2008-09-12 - Marquee Performance Optimizations">5</a>.<a href="#5_2" title="5. 2008-09-12 - Marquee Performance Optimizations -&gt; 5.2. IMPROVED MODULE: Uize.Widget.Window">2</a>. </span>IMPROVED MODULE: Uize.Widget.Window</h2>
+		<div class="contents2">
+			<p>The <code>Uize.Widget.Window</code> module now supports new <code>title</code> and <code>defaultTitle</code> set-get properties that let you modify the title displayed in a window's title bar.</p>
+		</div>
+		
+		<a name="5_3"></a>
+		<h2 class="heading2" title="5. 2008-09-12 - Marquee Performance Optimizations -&gt; 5.3. IMPROVED MODULE: Uize"><span class="headingNumber"><a href="#5" title="5. 2008-09-12 - Marquee Performance Optimizations">5</a>.<a href="#5_3" title="5. 2008-09-12 - Marquee Performance Optimizations -&gt; 5.3. IMPROVED MODULE: Uize">3</a>. </span>IMPROVED MODULE: Uize</h2>
+		<div class="contents2">
+			<p>The <code>Uize.clone</code> static method of the <code><a href="../reference/Uize.html">Uize</a></code> base class now supports cloning values that are instances of JavaScript's built-in <code><a href="../javascript-reference/RegExp.html">RegExp</a></code>, <code><a href="../javascript-reference/Date.html">Date</a></code>, <code><a href="../javascript-reference/String.html">String</a></code>, <code><a href="../javascript-reference/Number.html">Number</a></code>, and <code><a href="../javascript-reference/Boolean.html">Boolean</a></code> objects.</p>
+			
+			<p>For example, if you clone an instance of the <code><a href="../javascript-reference/Date.html">Date</a></code> object, you get a new <code><a href="../javascript-reference/Date.html">Date</a></code> object instance of the same value.</p>
+		</div>
+		
+		<a name="5_4"></a>
+		<h2 class="heading2" title="5. 2008-09-12 - Marquee Performance Optimizations -&gt; 5.4. IMPROVED MODULE: Uize.Widget.Resizer"><span class="headingNumber"><a href="#5" title="5. 2008-09-12 - Marquee Performance Optimizations">5</a>.<a href="#5_4" title="5. 2008-09-12 - Marquee Performance Optimizations -&gt; 5.4. IMPROVED MODULE: Uize.Widget.Resizer">4</a>. </span>IMPROVED MODULE: Uize.Widget.Resizer</h2>
+		<div class="contents2">
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>The <code>fixedX</code> and <code>fixedY</code> set-get properties now cause updates in enabled state for a resizer's drag handles, allowing resizable windows to be made resizable only in one axis (or neither axes, so not resizable).</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>The values of the <code>left</code>, <code>top</code>, <code>width</code>, and <code>height</code> set-get properties are now conformed when set through the <code>set</code> instance method, so that a resizer (such as a marquee) does not violate bounds set by the <code>constrain</code>, <code>constrainBounds</code>, <code>minWidth</code>, and <code>minHeight</code>, set-get properties. This fixes a bug that allowed a marquee to pop outside of its bounds when clicking-and-dragging to create a new marquee region near the edge of its bounds.</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Many performance optimizations have been made to improve the drag performance of the <code><a href="../reference/Uize.Widget.Resizer.Marquee.html">Uize.Widget.Resizer.Marquee</a></code> subclass and the <code>Uize.Widget.Window.Resizable</code> class</td></tr>
+			</table>
+		</div>
+		
+		<a name="5_5"></a>
+		<h2 class="heading2" title="5. 2008-09-12 - Marquee Performance Optimizations -&gt; 5.5. IMPROVED MODULE: Uize.Widget.Drag"><span class="headingNumber"><a href="#5" title="5. 2008-09-12 - Marquee Performance Optimizations">5</a>.<a href="#5_5" title="5. 2008-09-12 - Marquee Performance Optimizations -&gt; 5.5. IMPROVED MODULE: Uize.Widget.Drag">5</a>. </span>IMPROVED MODULE: Uize.Widget.Drag</h2>
+		<div class="contents2">
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Instances of <code><a href="../reference/Uize.Widget.Drag.html">Uize.Widget.Drag</a></code> now observe enabled state. This capability is utilized by drag handles in the <code><a href="../reference/Uize.Widget.Resizer.html">Uize.Widget.Resizer</a></code> class, allowing its <code>fixedX</code> and <code>fixedY</code> set-get properties to update resizing configuration at any time.</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>A bug was fixed that was causing the cursor that displayed during drag to not always be the cursor of the drag instance's root node (this was evident with the <code><a href="../reference/Uize.Widget.Resizer.Marquee.html">Uize.Widget.Resizer.Marquee</a></code> and <code>Uize.Widget.Window.Resizable</code> classes).</td></tr>
+			</table>
+		</div>
+		
+		<a name="5_6"></a>
+		<h2 class="heading2" title="5. 2008-09-12 - Marquee Performance Optimizations -&gt; 5.6. IMPROVED EXAMPLE: Basic Marquee Example"><span class="headingNumber"><a href="#5" title="5. 2008-09-12 - Marquee Performance Optimizations">5</a>.<a href="#5_6" title="5. 2008-09-12 - Marquee Performance Optimizations -&gt; 5.6. IMPROVED EXAMPLE: Basic Marquee Example">6</a>. </span>IMPROVED EXAMPLE: Basic Marquee Example</h2>
+		<div class="contents2">
+			<p>The basic marquee example has been updated to provide linked JavaScript statements that provide a demonstration of the widget's programmatic interface.</p>
+			
+			<p>The configuration of the marquee can be updated in realtime.</p>
+		</div>
+	</div>
+	
+	<a name="6"></a>
+	<h1 class="heading1" title="6. 2008-09-01 - New Example, Optimizations"><span class="headingNumber"><a href="#6" title="6. 2008-09-01 - New Example, Optimizations">6</a>. </span>2008-09-01 - New Example, Optimizations</h1>
+	<div class="contents1">
+		<a name="6_1"></a>
+		<h2 class="heading2" title="6. 2008-09-01 - New Example, Optimizations -&gt; 6.1. NEW EXAMPLE: Scrolly Carousel"><span class="headingNumber"><a href="#6" title="6. 2008-09-01 - New Example, Optimizations">6</a>.<a href="#6_1" title="6. 2008-09-01 - New Example, Optimizations -&gt; 6.1. NEW EXAMPLE: Scrolly Carousel">1</a>. </span>NEW EXAMPLE: Scrolly Carousel</h2>
+		<div class="contents2">
+			<p>The new <code>Scrolly Carousel</code> example demonstrates how the <code><a href="../reference/Uize.Widget.Scrolly.html">Uize.Widget.Scrolly</a></code> class can be used to create a carousel scrolly that lets you step through a series of pages.</p>
+			
+			<p>Such an interface could be provided on a company's homepage, with pages like "About Us", "Products", "Services", "Investor Relations", etc. Some examples of the scrolly's programmatic interface are also provided.</p>
+			
+			<p><a href="../examples/scrolly-carousel.html">CHECK IT OUT</a></p>
+		</div>
+		
+		<a name="6_2"></a>
+		<h2 class="heading2" title="6. 2008-09-01 - New Example, Optimizations -&gt; 6.2. OPTIMIZED MODULE: Uize.Widget.Button"><span class="headingNumber"><a href="#6" title="6. 2008-09-01 - New Example, Optimizations">6</a>.<a href="#6_2" title="6. 2008-09-01 - New Example, Optimizations -&gt; 6.2. OPTIMIZED MODULE: Uize.Widget.Button">2</a>. </span>OPTIMIZED MODULE: Uize.Widget.Button</h2>
+		<div class="contents2">
+			<p>Support for the <code>'nodes'</code> mode for <code><a href="../reference/Uize.Widget.Button.html">Uize.Widget.Button</a></code> instances has been eliminated.</p>
+			
+			<p>There were only a few cases of this feature being used, and they have been converted over to the more flexible <code>'classes'</code> mode. The performance of applications that instantiate hundreds of button widgets is improved as a result of this change, and the code size of the module is reduced.</p>
+		</div>
+		
+		<a name="6_3"></a>
+		<h2 class="heading2" title="6. 2008-09-01 - New Example, Optimizations -&gt; 6.3. MORE DOCUMENTATION"><span class="headingNumber"><a href="#6" title="6. 2008-09-01 - New Example, Optimizations">6</a>.<a href="#6_3" title="6. 2008-09-01 - New Example, Optimizations -&gt; 6.3. MORE DOCUMENTATION">3</a>. </span>MORE DOCUMENTATION</h2>
+		<div class="contents2">
+			<p>There are new additions to the <code>Coding Style Guide</code> and <code>JavaScript Optimization</code> appendixes, and various methods of various modules have been documented. Documentation continues to be fleshed out more upon each release.</p>
+		</div>
+	</div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

@@ -1,0 +1,31 @@
+A number of instance and static event management methods of the =Uize= base class that were deprecated back in early June of 2009 have finally been killed.
+
+In keeping with the policy of one year backwards compatibility transition periods, the deprecated forms of these methods were kept in place for a year and are now ready to expire. Specifically, the =addEventHandler=, =addEventHandlers=, =fireEvent=, =removeEventHandler=, and =removeEventHandlers= instance methods have been killed, and the =Uize.addEventHandler=, =Uize.addEventHandlers=, =Uize.wire=, =Uize.fireEvent=, =Uize.removeEventHandler=, and =Uize.removeEventHandlers= static methods have been killed.
+
+To recap, the new mappings are as follows...
+
+NEW MAPPINGS FOR KILLED INSTANCE METHODS
+................................................................
+myInstance.addEventHandler      >> BECOMES >>  myInstance.wire
+myInstance.addEventHandlers     >> BECOMES >>  myInstance.wire
+myInstance.fireEvent            >> BECOMES >>  myInstance.fire
+myInstance.removeEventHandler   >> BECOMES >>  myInstance.unwire
+myInstance.removeEventHandlers  >> BECOMES >>  myInstance.unwire
+................................................................
+
+NEW MAPPINGS FOR KILLED STATIC METHODS
+....................................................
+Uize.addEventHandler      >> BECOMES >>  Uize.wire
+Uize.addEventHandlers     >> BECOMES >>  Uize.wire
+Uize.fireEvent            >> BECOMES >>  Uize.fire
+Uize.removeEventHandler   >> BECOMES >>  Uize.unwire
+Uize.removeEventHandlers  >> BECOMES >>  Uize.unwire
+....................................................
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2010-06-15 - Deprecated Event Management Methods Killed
+....................................................................................

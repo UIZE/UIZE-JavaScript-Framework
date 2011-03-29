@@ -1,0 +1,198 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Uize.Widget.Button.Toggle - HTML Source Code | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework HTML example source code"/>
+	<meta name="description" content="This is the source code for the Uize.Widget.Button.Toggle example"/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../../css/page.css"/>
+	<link rel="stylesheet" href="../../css/page.source.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../../index.html" title="UIZE JavaScript Framework home"></a>
+	SOURCE CODE: Uize.Widget.Button.Toggle
+	<div id="page-actions" class="pageActions">
+		<a href="../button-toggle.html" class="buttonLink">VIEW EXAMPLE</a>
+	</div>
+</h1>
+
+<pre>
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+&lt;head&gt;
+  &lt;title&gt;Uize.Widget.Button.Toggle | JavaScript Examples | UIZE JavaScript Framework&lt;/title&gt;
+  &lt;meta name="keywords" content="Uize.Widget.Button.Toggle"/&gt;
+  &lt;meta name="description" content="See a demo of the toggle button that lets the user cycle through values by repeatedly clicking it. Experiment with the widget's configuration options."/&gt;
+  &lt;link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/&gt;
+  &lt;link rel="stylesheet" href="../css/page.css"/&gt;
+  &lt;link rel="stylesheet" href="../css/page.example.css"/&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+&lt;script type="text/javascript" src="../js/Uize.js"&gt;&lt;/script&gt;
+
+&lt;h1 class="document-title"&gt;
+  &lt;a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"&gt;&lt;/a&gt;
+  &lt;a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow"&gt;JAVASCRIPT EXAMPLES&lt;/a&gt;
+  Uize.Widget.Button.Toggle
+  &lt;div id="page-actions" class="pageActions"&gt;
+    &lt;a href="source-code/button-toggle.html" class="buttonLink"&gt;SOURCE&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/h1&gt;
+
+&lt;div class="main"&gt;
+  &lt;!-- the HTML "wireframe" for the button --&gt;
+
+  &lt;a id="page_toggleButton" class="button" style="display:block; width:160px; margin:auto; margin-bottom:10px;"&gt;&lt;span id="page_toggleButton-text"&gt;&lt;/span&gt;&lt;/a&gt;
+
+  &lt;!-- programmatic interface examples --&gt;
+
+  &lt;div class="programmaticInterface"&gt;
+    &lt;ul&gt;
+      &lt;li&gt;
+        Setting value
+        &lt;ul&gt;
+          &lt;li&gt;
+            &lt;a href="javascript://" class="linkedJs"&gt;toggleButton.set ({value:'normalView'})&lt;/a&gt;
+            &amp;nbsp;|&amp;nbsp;
+            &lt;a href="javascript://" class="linkedJs"&gt;toggleButton.set ({value:'zoomView'})&lt;/a&gt;
+            &amp;nbsp;|&amp;nbsp;
+            &lt;a href="javascript://" class="linkedJs"&gt;toggleButton.toggleButton ()&lt;/a&gt;
+            &amp;nbsp;|&amp;nbsp;
+            &lt;a href="javascript://" class="linkedJs"&gt;toggleButton.set ({value:'BOGUS'})&lt;/a&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        Setting template for button text
+        &lt;ul&gt;
+          &lt;li&gt;
+            &lt;a href="javascript://" class="linkedJs"&gt;toggleButton.set ({textTemplate:'Select [#displayName]'})&lt;/a&gt;
+            &amp;nbsp;|&amp;nbsp;
+            &lt;a href="javascript://" class="linkedJs"&gt;toggleButton.set ({textTemplate:'Switch to [#displayName]'})&lt;/a&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        Setting template for title
+        &lt;ul&gt;
+          &lt;li&gt;
+            &lt;a href="javascript://" class="linkedJs"&gt;toggleButton.set ({titleTemplate:'Now on: [#displayName]'})&lt;/a&gt;
+            &amp;nbsp;|&amp;nbsp;
+            &lt;a href="javascript://" class="linkedJs"&gt;toggleButton.set ({titleTemplate:'Currently [#displayName]'})&lt;/a&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        text and tooltip reflect state after toggle
+        &lt;ul&gt;
+          &lt;li&gt;&lt;a href="javascript://" class="linkedJs"&gt;toggleButton.set ({textShowNext:true,textTemplate:'Switch to [#displayName]',titleShowNext:true,titleTemplate:'[#description]'})&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        text shows current state, but tooltip shows state after toggle
+        &lt;ul&gt;
+          &lt;li&gt;&lt;a href="javascript://" class="linkedJs"&gt;toggleButton.set ({textShowNext:false,textTemplate:'[#displayName]',titleShowNext:true,titleTemplate:'Click to switch to [#displayName]'})&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        text shows state after toggle, but tooltip shows current state
+        &lt;ul&gt;
+          &lt;li&gt;&lt;a href="javascript://" class="linkedJs"&gt;toggleButton.set ({textShowNext:true,textTemplate:'Switch to [#displayName]',titleShowNext:false,titleTemplate:'Currently on [#displayName]'})&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        Current state:
+        &lt;ul&gt;
+          &lt;li id="buttonValueObject"&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- JavaScript code to make the HTML "come alive" --&gt;
+
+&lt;script type="text/javascript"&gt;
+
+Uize.module ({
+  required:[
+    'UizeDotCom.Page.Example.library',
+    'UizeDotCom.Page.Example',
+    'Uize.Widget.Button.Toggle',
+    'Uize.Node'
+  ],
+  builder:function () {
+    /*** create the example page widget ***/
+      var page = window.page = new UizeDotCom.Page.Example ({evaluator:function (code) {eval (code)}});
+
+    /*** create and wire up the Uize.Widget.Button instance for the frames type button ***/
+      var toggleButton = page.addChild (
+        'toggleButton',
+        Uize.Widget.Button.Toggle,
+        {
+          values:[
+            {
+              displayName:'Normal View',
+              value:'normalView',
+              description:'In the normal view, you will see the image in its entirety, without needing to scroll. However, the image will be very small and certain details may be hard to make out.'
+            },
+            {
+              displayName:'Zoom View',
+              value:'zoomView',
+              description:'In the zoom view, you will see a zoomed in version of the image with scrollbars to let you scroll to all parts of the image.'
+            }
+          ]
+        }
+      );
+
+    /*** code to display the button's currently selected value object ***/
+      function updateValueObjectDisplay () {
+        var
+          html = '',
+          valueObject = toggleButton.get ('valueObject')
+        ;
+        if (valueObject) {
+          for (var propertyName in valueObject)
+            html += '&lt;b&gt;' + propertyName + ' : &lt;/b&gt;' + valueObject [propertyName] + '&lt;br/&gt;'
+          ;
+        }
+        Uize.Node.setInnerHtml ('buttonValueObject',html);
+      }
+      toggleButton.wire ('Changed.value',updateValueObjectDisplay);
+
+    /*** initialize the display of the button's currently selected value object ***/
+      updateValueObjectDisplay ();
+
+    /*** wire up the page widget ***/
+      page.wireUi ();
+  }
+});
+
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+
+</pre>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.library',
+		'UizeDotCom.Page'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page).wireUi ()}
+});
+
+</script>
+
+</body></html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2010-01-19 - NEW EXAMPLE: Drag-to-move | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="The new Drag-to-move example demonstrates how to wire up a bunch of image thumbnails so they can be dragged around a workspace."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2010.html" class="breadcrumb breadcrumbWithArrow">2010 NEWS</a>
+	2010-01-19 - NEW EXAMPLE: Drag-to-move
+
+</h1>
+
+<div class="main">
+<div class="contents0">
+	<p>The new <a href="../examples/drag-to-move.html">Drag-to-move</a> example demonstrates how to wire up a bunch of image thumbnails so they can be dragged around a workspace.</p>
+	
+	<p>In this example, the <code><a href="../reference/Uize.Widget.Drag.Move.html">Uize.Widget.Drag.Move</a></code> widget class is being used to wire up a bunch of image thumbnails so that they can be dragged around a "workspace". This is a very basic example of drag-and-drop - there are no drop targets to speak of. Instances of the <code><a href="../reference/Uize.Widget.Drag.Move.html">Uize.Widget.Drag.Move</a></code> class are wired up for all the thumbnails in a single statement, thanks to the <code>Uize.Widget.Drag.Move.spawn</code> static method. The <code><a href="../reference/Uize.Widget.Drag.Move.html">Uize.Widget.Drag.Move</a></code> class doesn't deal with managing <code>z-index</code> - just coordinates. It does, however, support coordinates specified in units of <code>px</code> (pixels) as well as <code>%</code> (percent).</p>
+	
+	<p><a href="../examples/drag-to-move.html">CHECK IT OUT</a></p>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

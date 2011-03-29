@@ -1,0 +1,28 @@
+The UIZE project is excited to announce the release of [[../explainers/using-the-delve-tool.html][DELVE]], a powerful new Web based tool that lets developers *delve* into the inner workings of pages that use the UIZE JavaScript Framework.
+
+This is the first release version of the DELVE tool. While it can still be considered to be in a public beta state, it already sports a powerful array of features that will help developers to be more productive when writing UIZE powered Web pages and rich Internet applications.
+
+Among other things, DELVE lets you...
+
+- see a tree or flattened list of all the widgets instantiated on a page
+- see a tree or flattened list of all the modules built for a page
+- see a list of all widgets that are in the disabled state, widgets that are not wired, widgets that are missing implied node DOM, all widget classes built for the page, only widget classes of which instances have been created, only widget classes of which instances *have not* been created, and many more different types of lists / reports of useful information
+- see a summary for various objects, such as widget instances, class or package modules, DOM nodes, functions and methods, etc.
+- see a listing of all the features that can be automatically detected for a class or an instance's class, such as instance methods, static methods, instance properties, set-get properties, etc.
+- for widgets, see a summary of the widget's parentage, child widgets, sibling widgets, implied nodes, etc.
+- for widget classes, see a summary of all the instances of such classes on the page
+- easily get documentation for a widget's class, or any UIZE module (whether loaded on the page or not)
+- watch all the events for a specific widget on the page
+- and much more...
+
+DELVE is a completely Web based tool, so nothing needs to be installed in order to use it - it is launched from a simple bookmarklet. Furthermore, DELVE doesn't require the cooperation of the page that it inspects. So, if you're authoring a Web page that uses UIZE, you don't need to put the page into any special debug mode or anything like that in order to be able to use DELVE to inspect the page.
+
+[[../explainers/using-the-delve-tool.html][LEARN MORE]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2010-12-18 - Introducing the DELVE Tool
+....................................................................................

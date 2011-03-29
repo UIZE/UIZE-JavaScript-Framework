@@ -1,0 +1,13 @@
+The versatile new =Uize.Array.Sort= module provides a way to sort arrays in a performance efficient manner using a custom sort value generator.
+
+The ability to supply a sort value generator is useful for sorting arrays of date strings, performing case insensitive alphanumerical sorts, sorting colors by proximity to a reference color, sorting an array of records by a specified property, and much more. This new module is fully unit-tested. Thorough reference documentation is also provided, with scores of useful examples to illustrate how to use the module.
+
+[[Uize.Array.Sort][LEARN MORE]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2010-10-26 - NEW MODULE: Uize.Array.Sort
+....................................................................................

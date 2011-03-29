@@ -1,0 +1,11 @@
+A bug has been fixed with the =Uize.Node.unwireEventsByOwnerId= static method of the =Uize.Node= module and the =unwireNodeEvent= and =unwireNodeEventsByMatch= instance methods of the =Uize.Widget= module.
+
+A problem was found with the implementation of these methods, where attempting to unwire events for a node that didn't exist in the document would cause matching events to be unwired for all nodes (ie. the node match behaved like a wild card). This problem has been fixed. Node match specifiers that resolve to =null= now cause no events to be unwired, and only if the node match is not specified or if its value is =undefined= is the node match treated as a wildcard when finding wiring matches.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-04-14 - Bug Fix: Unwiring Node Events
+....................................................................................

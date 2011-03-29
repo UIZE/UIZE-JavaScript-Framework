@@ -1,0 +1,11 @@
+The =Uize.Date.resolve= static method of the =Uize.Date= module has been improved to now also support resolving string date values that are *not* in ISO 8601 format.
+
+Previously, the value for the =dateSTRorOBJ= parameter of the =Uize.Date.resolve= method could be a string formatted in ISO 8601 date format, or an instance of the =Date= object, or =null= or =undefined=. It was not possible to resolve date strings that were formatted how the =Date= object would format dates, and specifying date strings formatted in such a way would result in an instance of the =Date= object being returned in the invalid state. With the new change, if a date string cannot be parsed as an ISO 8601 formatted date, then it will be supplied to the =Date= object constructor. This provides much more flexibility in resolving date strings. As part of this change, the =Uize.Date.fromIso8601= static method now returns the value =undefined= when it cannot parse a date string as an ISO 8601 formatted date, where previously it would return an instance of the =Date= object in the invalid state.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-08-31 - IMPROVED MODULE: Uize.Date
+....................................................................................

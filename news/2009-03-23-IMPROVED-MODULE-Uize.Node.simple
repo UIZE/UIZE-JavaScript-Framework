@@ -1,0 +1,22 @@
+The =Uize.Node= module has been improved with the introduction of a new =Uize.Node.getStyle= static method to replace the now deprecated =Uize.Node.getStyleAttribute= method, and which provides parity with the companion =Uize.Node.setStyle= static method.
+
+DEPRECATED
+..............................................................
+Uize.Node.getStyleAttribute  >> BECOMES >>  Uize.Node.getStyle
+..............................................................
+
+Some features of the new =Uize.Node.getStyle= method include...
+
+- it now correctly reports current values for the =margin=, =padding=, =borderColor=, and =borderWidth= style properties in Firefox
+- it now accepts a style properties object which allows you to get the values of multiple style properties in a single call, and the result is returned in a style properties object that can then be supplied to the =Uize.Node.setStyle= static method
+- it's more concisely named and provides parity with the companion =Uize.Node.setStyle= static method
+
+In order to maintain backwards compatibility with existing code, the deprecated =Uize.Node.getStyleAttribute= static method is still supported and will be for some time. Moreover, the new =Uize.Node.getStyle= method supports the same parameters as the deprecated =Uize.Node.getStyleAttribute= method.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-03-23 - IMPROVED MODULE: Uize.Node
+....................................................................................

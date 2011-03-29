@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>UizeDotCom.Templates.WidgetToGoHomepage | JavaScript Source Code | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework module source code"/>
+	<meta name="description" content="This is the JavaScript source code for the UizeDotCom.Templates.WidgetToGoHomepage module of the UIZE JavaScript Framework"/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../../css/page.css"/>
+	<link rel="stylesheet" href="../../css/page.source.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../../index.html" title="UIZE JavaScript Framework home"></a>
+	SOURCE CODE: UizeDotCom.Templates.WidgetToGoHomepage
+	<div class="pageActions">
+		<a href="../UizeDotCom.Templates.WidgetToGoHomepage.html" class="buttonLink">VIEW REFERENCE</a>
+	</div>
+</h1>
+
+<pre>
+/*
+  This is an automatically generated module, compiled from the JavaScript template file:
+    UizeDotCom.Templates.WidgetToGoHomepage.js.jst
+*/
+
+/*ScruncherSettings Mappings="=" LineCompacting="TRUE"*/
+
+Uize.module ({
+  name:'UizeDotCom.Templates.WidgetToGoHomepage',
+  required:[
+    'Uize.Xml',
+    'Uize.String'
+  ],
+  builder:function () {
+    var _package = function () {};
+
+    /*** Public Static Methods ***/
+      _package.process = function (input) {
+        var output = [];
+
+          var
+            _widgetName = input.title.toLowerCase (),
+            _widgetNameForUrl = _widgetName.replace (/\s+/g,'-'),
+            _description = input.description.short || 'This is the homepage for the ' + input.title + ' widget of the UIZE JavaScript Framework.'
+          ;
+
+        output.push ('&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;\n&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;\n&lt;head&gt;\n  &lt;title&gt;',input .title,' | Widgets | UIZE JavaScript Framework&lt;/title&gt;\n  &lt;meta name="keywords" content="',_widgetName,' widget embed blog iframe bookmarklet"/&gt;\n  &lt;meta name="description" content="',Uize.Xml.toAttributeValue (_description),'"/&gt;\n  &lt;link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/&gt;\n  \n  &lt;!-- for Facebook Share (http://wiki.developers.facebook.com/index.php/Facebook_Share/Specifying_Meta_Tags) --&gt;\n    &lt;meta name="title" content="',_widgetName,'"/&gt;\n    &lt;link rel="image_src" href="../images/widgets/',_widgetNameForUrl,'-96x96.gif"/&gt;\n\n  &lt;link rel="stylesheet" href="../css/page.css"/&gt;\n  &lt;link rel="stylesheet" href="../examples/css/params-table.css"/&gt;\n  &lt;link rel="stylesheet" href="../css/page.widgethomepage.css"/&gt;\n&lt;/head&gt;\n\n&lt;body&gt;\n\n&lt;script type="text/javascript" src="../js/Uize.js"&gt;&lt;/script&gt;\n\n&lt;h1 class="document-title"&gt;\n  &lt;a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"&gt;&lt;/a&gt;\n  &lt;a href="../javascript-widgets.html" class="breadcrumb breadcrumbWithArrow"&gt;WIDGETS&lt;/a&gt;\n  ',input .title,'\n&lt;/h1&gt;\n\n');
+
+          var
+            _dimensions = input.dimensions,
+            _webWidth = _dimensions.webWidth,
+            _webHeight = _dimensions.webHeight,
+            _widgetWebUrl = 'http://www.uize.com/widgets/' + _widgetNameForUrl + '/web.html'
+          ;
+
+        output.push ('&lt;div class="main"&gt;\n  &lt;div class="preamble"&gt;\n    ',_description,'\n  &lt;/div&gt;\n\n  &lt;div class="widgetInfoPane"&gt;\n    &lt;ul class="featuresList"&gt;',Uize.String.hugJoin (input.features,'\t\t\t&lt;li&gt;','&lt;/li&gt;\n'),'&lt;/ul&gt;\n\n    &lt;p&gt;This widget is built using the &lt;a href="../reference/',input .widgetClassModule,'.html"&gt;',input .widgetClassModule,'&lt;/a&gt; module of the UIZE JavaScript Framework. To see more JavaScript examples, view the &lt;a href="../javascript-examples.html"&gt;Javascript Examples&lt;/a&gt; index page.&lt;/p&gt;\n\n    ');
+         /*
+        output.push ('&lt;p&gt;To see the ??? widget in action, view the &lt;a href="../examples/???.html"&gt;???&lt;/a&gt; example.&lt;/p&gt;');
+         */
+        output.push ('\n  &lt;/div&gt;\n\n  &lt;div class="widgetPreviewPane"&gt;\n    &lt;iframe src="',_widgetNameForUrl,'/web.html" style="width:',_webWidth,'px; height:',_webHeight,'px;" scrolling="no" frameborder="0" allowtransparency="true" class="widgetPreviewIframe"&gt;&lt;/iframe&gt;\n\n    &lt;table class="paramsTable"&gt;\n      &lt;tr&gt;\n        &lt;td class="fieldLabel"&gt;EMBED&lt;/td&gt;\n        &lt;td&gt;&lt;input type="text" value="',Uize.Xml.toAttributeValue (('&lt;iframe src="' + _widgetWebUrl + '" style="width:' + _webWidth + 'px; height:' + _webHeight + 'px;" scrolling="no" frameborder="0" allowtransparency="true"&gt;&lt;/iframe&gt;')),'" readonly="readonly"/&gt;&lt;/td&gt;\n      &lt;/tr&gt;\n      &lt;tr&gt;\n        &lt;td class="fieldLabel"&gt;BOOKMARKLET&lt;/td&gt;\n        &lt;td&gt;&lt;a href="javascript:window.open(\'',_widgetWebUrl,'\',\'',_widgetName,'\',\'width=',_webWidth,',%20height=',_webHeight,',toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no\').focus(),undefined;"&gt;',input .title.toUpperCase (),'&lt;/a&gt;&lt;/a&gt;&lt;/td&gt;\n      &lt;/tr&gt;\n    &lt;/table&gt;\n\n    &lt;a href="../javascript-widgets.html" class="buttonLink seeMoreWidgetsButton"&gt;SEE MORE WIDGETS&lt;/a&gt;\n  &lt;/div&gt;\n\n  &lt;br style="clear:left;"/&gt;\n&lt;/div&gt;\n\n&lt;script type="text/javascript"&gt;\n\nUize.module ({\n  required:[\n    \'UizeDotCom.Page.library\',\n    \'UizeDotCom.Page\'\n  ],\n  builder:function () {(window.page = new UizeDotCom.Page).wireUi ()}\n});\n\n&lt;/script&gt;\n\n&lt;/body&gt;&lt;/html&gt;\n\n');
+        return output.join ('');
+      };
+
+    /*** Public Static Properties ***/
+      _package.input = {
+        title:'string',
+        urls:'object',
+        dimensions:'object',
+        description:'object',
+        author:'object',
+        images:'object'
+      };
+
+    return _package;
+  }
+});
+
+
+</pre>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.library',
+		'UizeDotCom.Page'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page).wireUi ()}
+});
+
+</script>
+
+</body></html>

@@ -1,0 +1,22 @@
+The =Uize.Population= module has been migrated to under the =Uize.Widget= namespace as =Uize.Widget.Population=.
+
+MIGRATED
+......................................................
+Uize.Population  >> BECOMES >>  Uize.Widget.Population
+......................................................
+
+WHAT'S CHANGED
+
+For the most part, the interface is entirely the same and compatible with the old interface, with some very minor differences. As a widget class now, instances of the =Uize.Widget.Population= class must be wired (by calling the =wireUi= instance method) before changing the value of the =items= set-get property will result in an update of the contents of the instance's DOM node. Also, as a true widget class, instances of the =Uize.Widget.Population= class can be added as child widgets of other widget instances. Finally, the DOM node into which generated HTML is injeted can now be specified with either of the =idPrefix=, =node=, or =container= set-get properties. This change, which is not backwards compatible, has the benefit of further cleaning up the =Uize= root namespace.
+
+UPDATING YOUR CODE
+
+The two examples that were previously using the now defunct =Uize.Population= class, [[../examples/populating-photo-details.html][Populating Photo Details]] and [[../examples/population-structured-record.html][Structured Record Population]], have been updated to use the new =Uize.Widget.Population= class. If you were previously using the =Uize.Population= class, then you can use these two example pages as a reference when updating your own code.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2010-02-24 - MIGRATED MODULE: Uize.Population
+....................................................................................

@@ -1,0 +1,13 @@
+The new [[../examples/get-tree-from-page.html][Get Tree from Page]] example demonstrates how a tree data object can be created by analyzing the occurrence of different CSS classes for section headings at different depths of a document.
+
+In this example, the =Uize.Node.Tree.getTreeFromPage= static method of the =Uize.Node.Tree= module is being used to build a tree data object respresenting the structure of the document, by analyzing the occurrence of different CSS classes for section headings at different depths of the document (in this case, the CSS classes =level1Header=, =level2Header=, and =level3Header=). A tree data object like this can be supplied to a tree menu widget, or can otherwise be used to build UI for navigating to different sections of the document (a contents tree, for example).
+
+[[../examples/get-tree-from-page.html][CHECK IT OUT]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2010-03-08 - NEW EXAMPLE: Get Tree from Page
+....................................................................................

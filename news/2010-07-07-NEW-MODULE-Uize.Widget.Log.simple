@@ -1,0 +1,13 @@
+The new =Uize.Widget.Log= module implements a very basic logging widget, to serve as a base class for more specialized logging widget subclasses.
+
+The =Uize.Widget.Log= class provides very basic support for displaying messages in a logging pane, with a =clear= button that lets the user clear logged messages. The =Uize.Widget.Log= widget class serves as the base class for the more specific =Uize.Widget.Log.InstanceEvents= widget class. Examples of the logging widget in action can be seen in the [[../examples/button.html][Button]] and [[../examples/virtual-dom-events.html][Virtual DOM Events]] examples.
+
+[[Uize.Widget.Log][LEARN MORE]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2010-07-07 - NEW MODULE: Uize.Widget.Log
+....................................................................................

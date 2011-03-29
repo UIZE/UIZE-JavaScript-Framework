@@ -1,0 +1,11 @@
+A new explainer has been added to delve into the [[../explainers/javascript-inheritance.html][class inheritance mechanism]] of the UIZE JavaScript Framework.
+
+The explainer covers topics such as: adding instance and static methods and properties, overriding instance and static methods and properties inherited from a superclass, registering set-get properties, phases of construction, private vs. public methods and properties, the composition of a subclass module, and many more.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2008-10-12 - Class Inheritance Explainer
+....................................................................................

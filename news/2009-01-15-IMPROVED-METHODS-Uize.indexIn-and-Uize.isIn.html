@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2009-01-15 - IMPROVED METHODS: Uize.indexIn and Uize.isIn | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="The Uize.indexIn and Uize.isIn static methods of the Uize base class now support loose (ie. non-strict) equality matching."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2009.html" class="breadcrumb breadcrumbWithArrow">2009 NEWS</a>
+	2009-01-15 - IMPROVED METHODS: Uize.indexIn and Uize.isIn
+
+</h1>
+
+<div class="main">
+<div class="contents0">
+	<p>The <code>Uize.indexIn</code> and <code>Uize.isIn</code> static methods of the <code><a href="../reference/Uize.html">Uize</a></code> base class now support loose (ie. non-strict) equality matching.</p>
+	
+	<p>Loose equality matching is achieved by specifying the value <code>false</code> for the optional new <code>strictEqualityBOOL</code> parameter. This change is backwards compatible, as the default value for the new <code>strictEqualityBOOL</code> parameter is <code>true</code>, which corresponds to previous behavior.</p>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

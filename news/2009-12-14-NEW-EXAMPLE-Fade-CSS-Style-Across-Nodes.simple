@@ -1,0 +1,13 @@
+The new [[../examples/fade-css-style-across-nodes.html][Fade CSS Style Across Nodes]] example shows how the =Uize.Fx.fadeStyleAcrossNodes= method of the =Uize.Fx= module can be used to apply interesting color gradient effects to the items in a navigation menu, from the tasteful to the outlandish.
+
+There is no animation in this example - instead, the style fade is occurring across a series of nodes. A list of links in a *"PRESETS"* tab lets you select / preview different effect presets. After selecting a preset effect, you can then fool around with the settings for the preset by switching over to the *"PARAMS"* tab and tweaking values. A number of the presets in this example utilize the CSS3 text-shadow property, so this is also a good demonstration of the =Uize.Fx.xTextShadow= module in action.
+
+[[../examples/fade-css-style-across-nodes.html][CHECK IT OUT]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-12-14 - NEW EXAMPLE: Fade CSS Style Across Nodes
+....................................................................................

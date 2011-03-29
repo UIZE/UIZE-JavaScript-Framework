@@ -1,0 +1,11 @@
+Various modules now support a find expression object in place of a list of nodes, including the =Uize.Widget.HoverFader=, =Uize.Widget.AutoTooltip=, and =Uize.Widget.ThumbZoom= widget classes.
+
+For example, the =thumbNodes= set-get property of the =Uize.Widget.ThumbZoom= class previously only accepted an array of nodes. This meant that a method such as the =Uize.Node.find= static method would first need to be used in order to get an array of nodes. Instead, the find expression object that would be supplied to the =Uize.Node.find= method can now be specified directly as the value for the =thumbNodes= set-get property. This new facility is particularly useful when using the declarative syntax for widget adoption, as it means that the =Uize.Node= package is not required at the time that a widget declaration is made for these classes that accept a find expression object.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-06-24 - More Support for Find Expressions
+....................................................................................

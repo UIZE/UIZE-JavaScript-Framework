@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Uize.Widget.Swap.Image - HTML Source Code | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework HTML example source code"/>
+	<meta name="description" content="This is the source code for the Uize.Widget.Swap.Image example"/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../../css/page.css"/>
+	<link rel="stylesheet" href="../../css/page.source.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../../index.html" title="UIZE JavaScript Framework home"></a>
+	SOURCE CODE: Uize.Widget.Swap.Image
+	<div id="page-actions" class="pageActions">
+		<a href="../swap-image.html" class="buttonLink">VIEW EXAMPLE</a>
+	</div>
+</h1>
+
+<pre>
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+&lt;head&gt;
+  &lt;title&gt;Uize.Widget.Swap.Image | JavaScript Examples | UIZE JavaScript Framework&lt;/title&gt;
+  &lt;meta name="keywords" content="animation widget Uize.Widget.Swap.Image"/&gt;
+  &lt;meta name="description" content="See some amazing possibilities for image transitions using lightweight JavaScript animation. Play with lots of effect presets, and even make your own."/&gt;
+  &lt;link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/&gt;
+  &lt;link rel="stylesheet" href="../css/page.css"/&gt;
+  &lt;link rel="stylesheet" href="../css/page.example.css"/&gt;
+  &lt;link rel="stylesheet" href="../css/widget.tabs.css"/&gt;
+  &lt;link rel="stylesheet" href="css/selector-links.css"/&gt;
+  &lt;link rel="stylesheet" href="../examples/css/params-table.css"/&gt;
+  &lt;link rel="stylesheet" href="../examples/css/params-inspector.css"/&gt;
+  &lt;style type="text/css"&gt;
+    #page_paramsInspector_preview {
+      width:240px;
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+&lt;script type="text/javascript" src="../js/Uize.js"&gt;&lt;/script&gt;
+
+&lt;h1 class="document-title"&gt;
+  &lt;a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"&gt;&lt;/a&gt;
+  &lt;a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow"&gt;JAVASCRIPT EXAMPLES&lt;/a&gt;
+  Uize.Widget.Swap.Image
+  &lt;div id="page-actions" class="pageActions"&gt;
+    &lt;a href="source-code/swap-image.html" class="buttonLink"&gt;SOURCE&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/h1&gt;
+
+&lt;div class="main"&gt;
+  &lt;!-- explanation copy --&gt;
+
+  &lt;div class="explanation"&gt;
+    &lt;p&gt;In this example, an instance of &lt;a href="../reference/Uize.Widget.Swap.Image.html"&gt;&lt;code&gt;Uize.Widget.Swap.Image&lt;/code&gt;&lt;/a&gt; has been wired up to a &lt;code&gt;div&lt;/code&gt; in the document. This class provides a highly configurable yet lightweight JavaScript animation effect to transition from one image to another. A list of links in the &lt;b&gt;"PRESETS"&lt;/b&gt; tab lets you preview all the effect presets defined in the &lt;a href="../reference/Uize.Widget.Swap.xPresets.html"&gt;&lt;code&gt;Uize.Widget.Swap.xPresets&lt;/code&gt;&lt;/a&gt; extension. Click to experience some of the many effects that this widget supports. To fool around with the settings for a preset to create your own swap effects, switch over to the &lt;b&gt;"PARAMS"&lt;/b&gt; tab to tweak values and click the &lt;b&gt;"PERFORM SWAP EFFECT"&lt;/b&gt; button to preview changes. To understand how the effect settings work, consult the reference for the &lt;a href="../reference/Uize.Widget.Swap.html"&gt;&lt;code&gt;Uize.Widget.Swap&lt;/code&gt;&lt;/a&gt; class.&lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;!-- page layout's "wireframe" with slots for Uize.Widget.Swap.Image instance and params inspector --&gt;
+
+  &lt;table border="0" cellspacing="0" cellpadding="4" style="margin:auto;"&gt;
+    &lt;tr valign="top"&gt;
+      &lt;td&gt;
+        &lt;div id="page_imageSwap" style="position:relative; width:500px; height:357px; border:1px solid #555; background:#000;"&gt;&lt;/div&gt;
+      &lt;/td&gt;
+      &lt;td id="page_paramsInspector-shell"&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/table&gt;
+&lt;/div&gt;
+
+&lt;!-- JavaScript code to make the static swap HTML "come alive" --&gt;
+
+&lt;script type="text/javascript"&gt;
+
+Uize.module ({
+  required:[
+    'UizeDotCom.Page.Example.library',
+    'UizeDotCom.Page.Example',
+    'Uize.Widget.Swap.Image',
+    'Uize.Widget.Swap.xPresets',
+    'UizeDotCom.TestDataPhotos',
+    'UizeDotCom.ParamsInspector'
+  ],
+  builder:function () {
+    /*** create the example page widget ***/
+      var page = window.page = new UizeDotCom.Page.Example;
+
+    /*** create the Uize.Widget.Swap.Image instance ***/
+      var imageSwap = page.addChild ('imageSwap',Uize.Widget.Swap.Image,{built:false});
+
+    /*** create the params inspector widget ***/
+      var
+        photos = UizeDotCom.TestDataPhotos (),
+        photoNo = 0
+      ;
+      page.addChild (
+        'paramsInspector',
+        UizeDotCom.ParamsInspector,
+        {
+          params:{
+            crossFade:'boolean',
+            crossFadeSize:'number',
+            crossFadeAlign:'number',
+            dissolve:'boolean',
+            viewContentAlignX:'json',
+            viewContentAlignY:'json',
+            viewSeedSizeX:'number',
+            viewSeedSizeY:'number',
+            viewSeedAlignX:'number',
+            viewSeedAlignY:'number'
+          },
+          presets:Uize.Widget.Swap.presets,
+          previewButtonText:'PERFORM SWAP EFFECT'
+        }
+      ).wire (
+        'Preset Selected',
+        function (_presetName) {
+          imageSwap.set (page.children.paramsInspector.getValues ());
+          imageSwap.set ({src:photos [photoNo].image});
+          photoNo = (photoNo + 1) % photos.length;
+        }
+      );
+
+    /*** wire up the page widget ***/
+      page.wireUi ();
+  }
+});
+
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+</pre>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.library',
+		'UizeDotCom.Page'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page).wireUi ()}
+});
+
+</script>
+
+</body></html>

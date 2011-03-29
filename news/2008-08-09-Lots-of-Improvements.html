@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2008-08-09 - Lots of Improvements | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="This new example demonstrates how the Uize.Widget.AutoTooltip class can be used to enhance links to external sites so that a summary info table is provided in a tooltip as you mouse over the links."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2008.html" class="breadcrumb breadcrumbWithArrow">2008 NEWS</a>
+	2008-08-09 - Lots of Improvements
+
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="This new example demonstrates how the Uize.Widget.AutoTooltip class can be used to enhance links to external sites so that a summary info table is provided in a tooltip as you mouse over the links.">1. NEW EXAMPLE: Generic Auto Tooltip</a></li>
+			<li><a href="#2" title="The Uize.Wsh module has been improved with the addition of the new alert and confirm global functions.">2. IMPROVED MODULE: Uize.Wsh</a></li>
+			<li><a href="#3" title="The Uize.String.splitInTwo static method has been enhanced to support a regular expression as the splitter. A new Uize.String.toCamel static method has been added that lets you convert a space separated (or otherwise delimited) string to a camelCase formatted string.">3. IMPROVED MODULE: Uize.String</a></li>
+			<li><a href="#4" title="The SimpleDoc Tester tool has been updated to have a more contemporary (and more usable) interface.">4. UPDATED TOOL: SimpleDoc Tester</a></li>
+			<li><a href="#5" title="Various other improvements have been made, including...">5. Miscellaneous Improvements</a></li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<a name="1"></a>
+	<h1 class="heading1" title="1. NEW EXAMPLE: Generic Auto Tooltip"><span class="headingNumber"><a href="#1" title="1. NEW EXAMPLE: Generic Auto Tooltip">1</a>. </span>NEW EXAMPLE: Generic Auto Tooltip</h1>
+	<div class="contents1">
+		<p>This new example demonstrates how the <code><a href="../reference/Uize.Widget.AutoTooltip.html">Uize.Widget.AutoTooltip</a></code> class can be used to enhance links to external sites so that a summary info table is provided in a tooltip as you mouse over the links.</p>
+		
+		<p>This example also demonstrates the use of a JavaScript template that has been pre-compiled to a JavaScript module by a build script.</p>
+		
+		<p><a href="../examples/auto-tooltip-generic.html">CHECK IT OUT</a></p>
+	</div>
+	
+	<a name="2"></a>
+	<h1 class="heading1" title="2. IMPROVED MODULE: Uize.Wsh"><span class="headingNumber"><a href="#2" title="2. IMPROVED MODULE: Uize.Wsh">2</a>. </span>IMPROVED MODULE: Uize.Wsh</h1>
+	<div class="contents1">
+		<p>The <code><a href="../reference/Uize.Wsh.html">Uize.Wsh</a></code> module has been improved with the addition of the new <code>alert</code> and <code>confirm</code> global functions.</p>
+		
+		<p>These functions behave similarly to their namesakes found within the Web browser contex, and make it easier to troubleshoot build scripts that run within the Window Scripting Host context, and also easier to control script execution with the aid of user confirmations. In addition to these new functions, build script code used by the uize.com Web site has been factored out and made more generally available in the form of the new <code><a href="../reference/Uize.Wsh.AutoScruncher.html">Uize.Wsh.AutoScruncher</a></code> and <code><a href="../reference/Uize.Wsh.CompileJstModules.html">Uize.Wsh.CompileJstModules</a></code> modules.</p>
+	</div>
+	
+	<a name="3"></a>
+	<h1 class="heading1" title="3. IMPROVED MODULE: Uize.String"><span class="headingNumber"><a href="#3" title="3. IMPROVED MODULE: Uize.String">3</a>. </span>IMPROVED MODULE: Uize.String</h1>
+	<div class="contents1">
+		<p>The <code>Uize.String.splitInTwo</code> static method has been enhanced to support a regular expression as the splitter. A new <code>Uize.String.toCamel</code> static method has been added that lets you convert a space separated (or otherwise delimited) string to a camelCase formatted string.</p>
+	</div>
+	
+	<a name="4"></a>
+	<h1 class="heading1" title="4. UPDATED TOOL: SimpleDoc Tester"><span class="headingNumber"><a href="#4" title="4. UPDATED TOOL: SimpleDoc Tester">4</a>. </span>UPDATED TOOL: SimpleDoc Tester</h1>
+	<div class="contents1">
+		<p>The <code>SimpleDoc Tester</code> tool has been updated to have a more contemporary (and more usable) interface.</p>
+		
+		<p>Play around with it to see how SimpleDoc formatted text is converted to HTML. The tool lets you edit the SimpleDoc source, view the generated HTML source, and preview the generated HTML document - all in an easy-to-use tabbed interface.</p>
+		
+		<p><a href="../examples/simple-doc-tester.html">CHECK IT OUT</a></p>
+	</div>
+	
+	<a name="5"></a>
+	<h1 class="heading1" title="5. Miscellaneous Improvements"><span class="headingNumber"><a href="#5" title="5. Miscellaneous Improvements">5</a>. </span>Miscellaneous Improvements</h1>
+	<div class="contents1">
+		<p>Various other improvements have been made, including...</p>
+		
+		<table class="list">
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>A problem was fixed with the <code><a href="../reference/Uize.Tooltip.html">Uize.Tooltip</a></code> module that was causing the tooltip to sometimes shift position very quickly on first appearing, making the browser window appear to flicker. The problem was only occasionally seen, and seemed to affect Firefox more than Internet Explorer.</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>The <code>Uize.Node.wireEvent</code> method has been enhanced to support a new <code>onmouserest</code> virtual event.</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>The <code><a href="../reference/Uize.Widget.AutoTooltip.html">Uize.Widget.AutoTooltip</a></code> module has been updated to offer a <code>dataKeyTransformer</code> set-get property that allows you to override the default camelCase transformation that is performed on data keys by the built-in dataDecoder.</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Documentation has been added for the <code>Uize.Node.getValue</code> and <code>Uize.Node.setValue</code> static methods.</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Various optimizations have been made to various modules.</td></tr>
+		</table>
+	</div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2009-10-22 - NEW MODULE: Uize.Node.Event | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="The new Uize.Node.Event module is a package module under the Uize.Node namespace that provides convenient methods for abstracting differences between the DOM node event systems of different browsers."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2009.html" class="breadcrumb breadcrumbWithArrow">2009 NEWS</a>
+	2009-10-22 - NEW MODULE: Uize.Node.Event
+
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="The Uize.Node.Event module implements the following key features...">1. Key Features</a>
+				<ul>
+					<li><a href="#1_1" title="The Uize.Node.Event module implements static methods for obtaining the values of DOM standard event object properties, even though some browsers do not supports these standards.">1.1. Event Property Abstraction</a></li>
+					<li><a href="#1_2" title="The Uize.Node.Event module implements static methods that are equivalent to DOM standard event object methods, even though some browsers do not supports these standards.">1.2. Event Method Abstraction</a></li>
+					<li><a href="#1_3" title="As a convenience, a number of static methods are provided in this module to make it easier to detect certain keys in keydown and keyup keyboard events, without having to remember the key codes.">1.3. Testing for Certain Keys</a></li>
+					<li><a href="#1_4" title="The Uize.Node.Event module provides various other utilities, including the ability to fix event objects to make them more consistent with standards by calling the Uize.Node.Event.fix method, and the ability to abort events (so that they don&apos;t bubble and don&apos;t trigger the browser&apos;s default action) by calling the Uize.Node.Event.abort method.">1.4. Other Utilities</a></li>
+				</ul>
+			</li>
+			<li><a href="#2" title="While the initial functionality in the Uize.Node.Event module is basic, this module provides a namespace that will act as a home for new DOM event specific functionality in future.">2. Room to Grow</a></li>
+			<li><a href="#3" title="A number of modules have been updated to use this new module.">3. Some Modules Updated</a></li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<p>The new <code><a href="../reference/Uize.Node.Event.html">Uize.Node.Event</a></code> module is a package module under the <code><a href="../reference/Uize.Node.html">Uize.Node</a></code> namespace that provides convenient methods for abstracting differences between the DOM node event systems of different browsers.</p>
+	
+	<a name="1"></a>
+	<h1 class="heading1" title="1. Key Features"><span class="headingNumber"><a href="#1" title="1. Key Features">1</a>. </span>Key Features</h1>
+	<div class="contents1">
+		<p>The <code><a href="../reference/Uize.Node.Event.html">Uize.Node.Event</a></code> module implements the following key features...</p>
+		
+		<a name="1_1"></a>
+		<h2 class="heading2" title="1. Key Features -&gt; 1.1. Event Property Abstraction"><span class="headingNumber"><a href="#1" title="1. Key Features">1</a>.<a href="#1_1" title="1. Key Features -&gt; 1.1. Event Property Abstraction">1</a>. </span>Event Property Abstraction</h2>
+		<div class="contents2">
+			<p>The <code><a href="../reference/Uize.Node.Event.html">Uize.Node.Event</a></code> module implements static methods for obtaining the values of DOM standard event object properties, even though some browsers do not supports these standards.</p>
+			
+			<p>Examples of such methods are the <code>Uize.Node.Event.target</code> and <code>Uize.Node.Event.relatedTarget</code> methods.</p>
+		</div>
+		
+		<a name="1_2"></a>
+		<h2 class="heading2" title="1. Key Features -&gt; 1.2. Event Method Abstraction"><span class="headingNumber"><a href="#1" title="1. Key Features">1</a>.<a href="#1_2" title="1. Key Features -&gt; 1.2. Event Method Abstraction">2</a>. </span>Event Method Abstraction</h2>
+		<div class="contents2">
+			<p>The <code><a href="../reference/Uize.Node.Event.html">Uize.Node.Event</a></code> module implements static methods that are equivalent to DOM standard event object methods, even though some browsers do not supports these standards.</p>
+			
+			<p>Examples of such methods are the <code>Uize.Node.Event.preventDefault</code> and <code>Uize.Node.Event.stopPropagation</code> methods.</p>
+		</div>
+		
+		<a name="1_3"></a>
+		<h2 class="heading2" title="1. Key Features -&gt; 1.3. Testing for Certain Keys"><span class="headingNumber"><a href="#1" title="1. Key Features">1</a>.<a href="#1_3" title="1. Key Features -&gt; 1.3. Testing for Certain Keys">3</a>. </span>Testing for Certain Keys</h2>
+		<div class="contents2">
+			<p>As a convenience, a number of static methods are provided in this module to make it easier to detect certain keys in <code>keydown</code> and <code>keyup</code> keyboard events, without having to remember the key codes.</p>
+			
+			<p>An example is the <code>Uize.Node.Event.isKeyEnter</code> method, which tests if the key being pressed down or released is the enter key. Other such methods include: <code>Uize.Node.Event.isKeyEscape</code>, <code>Uize.Node.Event.isKeyDownArrow</code>, <code>Uize.Node.Event.isKeyInsert</code>, <code>Uize.Node.Event.isKeyTab</code>, etc.</p>
+		</div>
+		
+		<a name="1_4"></a>
+		<h2 class="heading2" title="1. Key Features -&gt; 1.4. Other Utilities"><span class="headingNumber"><a href="#1" title="1. Key Features">1</a>.<a href="#1_4" title="1. Key Features -&gt; 1.4. Other Utilities">4</a>. </span>Other Utilities</h2>
+		<div class="contents2">
+			<p>The <code><a href="../reference/Uize.Node.Event.html">Uize.Node.Event</a></code> module provides various other utilities, including the ability to fix event objects to make them more consistent with standards by calling the <code>Uize.Node.Event.fix</code> method, and the ability to abort events (so that they don't bubble and don't trigger the browser's default action) by calling the <code>Uize.Node.Event.abort</code> method.</p>
+		</div>
+	</div>
+	
+	<a name="2"></a>
+	<h1 class="heading1" title="2. Room to Grow"><span class="headingNumber"><a href="#2" title="2. Room to Grow">2</a>. </span>Room to Grow</h1>
+	<div class="contents1">
+		<p>While the initial functionality in the <code><a href="../reference/Uize.Node.Event.html">Uize.Node.Event</a></code> module is basic, this module provides a namespace that will act as a home for new DOM event specific functionality in future.</p>
+	</div>
+	
+	<a name="3"></a>
+	<h1 class="heading1" title="3. Some Modules Updated"><span class="headingNumber"><a href="#3" title="3. Some Modules Updated">3</a>. </span>Some Modules Updated</h1>
+	<div class="contents1">
+		<p>A number of modules have been updated to use this new module.</p>
+		
+		<p>These include the modules <code><a href="../reference/Uize.Widget.Calculator.html">Uize.Widget.Calculator</a></code>, <code><a href="../reference/Uize.Widget.Collection.html">Uize.Widget.Collection</a></code>, <code><a href="../reference/Uize.Widget.Drag.html">Uize.Widget.Drag</a></code>, <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>, <code><a href="../reference/Uize.Widget.ListEditor.html">Uize.Widget.ListEditor</a></code>, <code><a href="../reference/Uize.Widget.Picker.html">Uize.Widget.Picker</a></code>, and <code><a href="../reference/Uize.Widget.TextInput.html">Uize.Widget.TextInput</a></code>. If your code was using one of these modules - directly or indirectly - you might notice the <code><a href="../reference/Uize.Node.Event.html">Uize.Node.Event</a></code> module being loaded in dynamically as a separate HTTP request. To address this, simply add this module to any <code>.library.js</code> library files you may be using in your projects, as appropriate.</p>
+	</div>
+	
+	<p>Reference documentation for this new module is complete. <a href="../reference/Uize.Node.Event.html">LEARN MORE</a></p>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

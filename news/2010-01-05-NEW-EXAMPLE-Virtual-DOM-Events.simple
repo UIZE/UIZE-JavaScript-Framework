@@ -1,0 +1,13 @@
+The new [[../examples/virtual-dom-events.html][Virtual DOM Events]] example demonstrates virtual DOM events - such as =mouseRest=, =mouseRemainDown=, =remainFocused=, =ctrlClick=, etc. - that are available in the =Uize.Node.VirtualEvent= module.
+
+In this example, a series of ten test pods is provided for demostrating different virtual DOM events. Each of these pods is a test for a type of virtual DOM event. Each pod has a colorful test node, with handlers registered for various virtual DOM events, and with instructions on how to interact with the test node in order to trigger the virtual events. Below each test node is a mini log console, which will fill up with log entries as the virtual DOM events are fired (a clear link lets you clear a log).
+
+[[../examples/virtual-dom-events.html][CHECK IT OUT]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2010-01-05 - NEW EXAMPLE: Virtual DOM Events
+....................................................................................

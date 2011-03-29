@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<%@ required (['Uize.Date','Uize.Xml','Uize.Url']) %><%
+	function pubDate (date) {
+		return Uize.Date.resolve (date).toUTCString ().replace ('UTC','UT');
+	}
+%>
+<rss xmlns:feedburner="http://rssnamespace.org/feedburner/ext/1.0" version="2.0">
+	<channel>
+		<title>UIZE JavaScript Framework | Latest News</title>
+		<link>http://www.uize.com/latest-news.rss</link>
+		<description>UIZE JavaScript Framework (AJAX, RIA, widgets, JSON, OOP, Class Inheritance, XMLHttpRequest, DOM manipulation, and all that stuff)</description>
+		<language>en-us</language>
+		<copyright>© 1996-2008 UIZE</copyright>
+		<pubDate><%= pubDate () %></pubDate>
+		<ttl>10080</ttl>
+		<image>
+			<title>UIZE JavaScript Framework | Latest News</title>
+			<link>http://www.uize.com/latest-news.rss</link>
+			<url>http://www.uize.com/images/uize-50x50.gif</url>
+			<width>50</width>
+			<height>50</height>
+			<description>UIZE JavaScript Framework (AJAX, RIA, widgets, JSON, OOP, Class Inheritance, XMLHttpRequest, DOM manipulation, and all that stuff)</description>
+		</image>
+		<atom10:link xmlns:atom10="http://www.w3.org/2005/Atom" rel="self" href="http://www.uize.com/latest-news.rss" type="application/rss+xml" />
+<%
+	for (var itemNo = -1, items = input.items, itemsLength = items.length; ++itemNo < itemsLength;) {
+		var
+			item = items [itemNo],
+			linkXmlText = Uize.Xml.toAttributeValue (item.link)
+		;
+%>
+		<item>
+			<title><%= item.date %> - <%= item.title -> tagAttributeValue %></title>
+			<link><%= linkXmlText %></link>
+			<guid><%= linkXmlText %></guid>
+			<description><%= item.description -> tagAttributeValue %></description>
+			<pubDate><%= pubDate (item.date) %></pubDate>
+			<feedburner:origLink><%= linkXmlText %></feedburner:origLink>
+		</item>
+<% } %>
+	</channel>
+</rss>

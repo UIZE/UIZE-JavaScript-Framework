@@ -1,0 +1,22 @@
+The new =Uize.Widget.ListEditor= module implements a widget that lets the user build and edit a simple list of string values.
+
+This module implements a number of noteworthy features:
+
+- items added by the user can be conformed before being added to the list using a configurable =itemConformer= function
+- the list can be maintained in a sorted state by using the =sort= set-get property
+- special handling is implemented for the keyboard's enter, escape, and delete keys
+- the state of the widget's =add= and =remove= button child widgets is managed so they are only enabled when appropriate
+- the combination of the add and remove behaviors provides for a sufficiently intuitive way to make edits to items in the list
+- and more...
+
+The =Uize.Widget.ListEditor= module is actually not an entirely new module, but rather an evolution of the =Uize.Widget.TextInputAdder= module. The =Uize.Widget.TextInputAdder= module has been replaced by the =Uize.Widget.ListEditor= module, and this change in not backwards compatible.
+
+[[Uize.Widget.ListEditor][LEARN MORE]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-09-06 - NEW MODULE: Uize.Widget.ListEditor
+....................................................................................

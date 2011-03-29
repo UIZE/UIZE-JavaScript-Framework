@@ -1,0 +1,28 @@
+<%@
+	required ('UizeDotCom.Templates.IndexPage');
+	input ({files:'array',keyword:'string'});
+%><%
+	var
+		_files = input.files,
+		_keyword = input.keyword
+	;
+%><%@ startBlock ('extraPreambleContent') %>
+	<div class="tourPromo">
+		<div class="tourPromoHeading">TAKE A STEP-BY-STEP TOUR...</div>
+		<div class="tourPromoText">
+			You can take a step-by-step tour through the examples listed on this page. When you get into the tour, you can use the gigantic arrows that will appear on either side of the example pages to navigate from one page to the next (or back). You can also use the "thermometer" bar, that will appear right underneath the title bar of the example pages, to navigate to other pages in the tour. The highlighted segment of the thermometer shows you where you are in the tour.
+		</div>
+		<div>
+			<a href="javascript-feature-tours.html?tour=<%= _keyword || 'all' %>" class="buttonLink">START THE TOUR<span class="arrow">&nbsp;</span></a>
+			<br style="line-height:6px;"/>
+			<br style="clear:right;"/>
+		</div>
+	</div>
+<%@ endBlock () %>
+<%= UizeDotCom.Templates.IndexPage.process ({
+	title:'JavaScript ' + (_keyword && (Uize.capFirstChar (_keyword) + ' ')) + 'Examples',
+	description:'The UIZE JavaScript Framework includes scores of excellent examples to get you started. This index lists ' + (_keyword ? '' : 'all ') + _files.length + ' JavaScript ' + (_keyword && (_keyword + ' ')) + 'examples.',
+	extraPreambleContent:extraPreambleContent (),
+	files:_files
+}) %>
+

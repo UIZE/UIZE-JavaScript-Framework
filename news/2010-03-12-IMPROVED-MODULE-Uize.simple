@@ -1,0 +1,35 @@
+The built-in module loader in the =Uize= base class has been improved to make updating the version of the UIZE JavaScript Framework used on a particular Web site easier.
+
+Query Parameters Retained in Uize.moduleUrlTemplate
+	The built-in module loader mechanism has been updated so that it now retains the query parameters from the URL that is used when sourcing in the =Uize=.
+
+	These query parameters make their way into the default value that is set for the =Uize.moduleUrlTemplate= static property when loading in the =Uize= base class in a Web page. As such, they are then used when forming the URLs for requesting subsequent modules that need to be dynamically loaded in. This means that if you're adding a build number query parameter onto the URL when loading in the =Uize= base class in a =script= tag, then that same build number will appear in URLs for dynamically loaded modules. By using a build version query param when loading the =Uize= base class, one can ensure that the browser's cache will be defeated for *all* dynamically loaded modules, which guarantees that the browser won't continue using an old cached copy for one module while potentially using a new fresh copy of some other module (which could produce errors if the different modules from different versions of the framework are not compatible with one another).
+
+Improved Uize.getPathToLibrary Static Method
+	The =Uize.getPathToLibrary= static method has been improved to now support an optional moduleTokenSTR parameter.
+
+	SYNTAX
+	..............................................................................
+	pathToModuleSTR = MyClass.getPathToLibrary (moduleFilenameSTR,moduleTokenSTR);
+	..............................................................................
+
+	When the optional =moduleTokenSTR= parameter is specified, then the value returned by this method will be the value of the =src= property for the =script= tag that sources in the module specified by the =moduleFilenameSTR= parameter, but with the module filename replaced by the substitution token specified by the =moduleTokenSTR= parameter. Consider the following example...
+
+	EXAMPLE
+	............................................................................................
+	<script type="text/javascript" src="../js/Uize.js?bld=123"></script>
+
+	<script type="text/javascript">
+		alert (Uize.getPathToLibrary ('Uize.js','[MODULE]'));  // alerts "../js/[MODULE]?bld=123"
+	</script>
+	............................................................................................
+
+	In the above example, the =script= tag that sources in the "Uize.js" module has the value "../js/Uize.js?bld=123" specified for its =src= attribute. By specifying the value ='[MODULE]'= for the optional =moduleTokenSTR= parameter in the =Uize.getPathToLibrary= method call, the text "Uize.js" is replaced with the text "[MODULE]", and the value returned by the =Uize.getPathToLibrary= method is ='../js/[MODULE]?bld=123'=.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2010-03-12 - IMPROVED MODULE: Uize
+....................................................................................

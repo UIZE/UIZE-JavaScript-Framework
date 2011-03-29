@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2010-04-25 - IMPROVED METHOD: Uize.substituteInto | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="The Uize.substituteInto static method, implemented in the Uize base class has been improved to be more robust."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2010.html" class="breadcrumb breadcrumbWithArrow">2010 NEWS</a>
+	2010-04-25 - IMPROVED METHOD: Uize.substituteInto
+
+</h1>
+
+<div class="main">
+<div class="contents0">
+	<p>The <code>Uize.substituteInto</code> static method, implemented in the <code><a href="../reference/Uize.html">Uize</a></code> base class has been improved to be more robust.</p>
+	
+	<p>Because of the way it was previously implemented, the <code>Uize.substituteInto</code> method would perform further substitutions into values previously substituted into the source string. This could result in some odd and unexpected behaviors in the unlikely event that the value for one substitution contained the token name for another substitution. Consider the following example...</p>
+	
+	<p><span class="allCaps">EXAMPLE</span></p>
+	
+	
+<pre class="sample-code">Uize.substituteInto ('[#token1]',{token1:'[#token2]',token2:'FAIL'});
+</pre>
+	
+	<p><span class="allCaps">RESULT WITH OLD BEHAVIOR</span></p>
+	
+	
+<pre class="sample-code">'FAIL'
+</pre>
+	
+	<p><span class="allCaps">RESULT WITH NEW BEHAVIOR</span></p>
+	
+	
+<pre class="sample-code">'[#token2]'
+</pre>
+	
+	<p>With the old behavior, the <code>token1</code> substitution would be performed first, and then the <code>token2</code> substitution would be performed on the modified string. Given the source string in this example, that would result in the string <code>'[#token2]'. Upon the subsequent =token2</code> substitution, the final result would be <code>'FAIL'</code>. What's worse, this behavior would be impacted by the order that the substitutions are defined in the substitutions object. If the <code>token2</code> property were defined before the <code>token1</code> property, then the result would be different.</p>
+	
+	<p>With the new implementation, token substitution is not multi-pass, so there is not the possibility of one substitution value affecting the subsitution of other values. In our example, the result with the new behavior would correctly be <code>'[#token2]'</code>, and <code>'FAIL'</code> is not contained in the result because the source string did not contain a token for the <code>token2</code> substitution.</p>
+	
+	<p>In addition to this improvement, the <code>Uize.substituteInto</code> method is also now fully unit tested, and its documentation has been updated to be more comprehensive and accurate.</p>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

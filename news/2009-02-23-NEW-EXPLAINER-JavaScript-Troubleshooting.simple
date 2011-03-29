@@ -1,0 +1,11 @@
+A newly added [[../explainers/javascript-troubleshooting.html][JavaScript Troubleshooting]] explainer discusses various troubleshooting techniques.
+
+This new explainer covers such topics as: Alerting Summary Info for Instances or Classes, Alerting Values of Instances or Classes, Traversing the Widget Tree in `Firebug`, Display of Types in Firebug's DOM Inspector, Logging Summary Info for Instances or Classes to Firebug's Console, Logging Values of Instances or Classes to Firebug's Console, Scrunch-related Problems, Accessing Private Identifiers as Publics, Private Collisions, Private Identifiers Inside String Literals, Accidental Globals, and more...  [[../explainers/javascript-troubleshooting.html][READ IT NOW]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-02-23 - NEW EXPLAINER: JavaScript Troubleshooting
+....................................................................................

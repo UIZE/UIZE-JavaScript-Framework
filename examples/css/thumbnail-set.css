@@ -1,0 +1,26 @@
+.thumbnailSet {
+	width:678px;
+	margin:auto;
+}
+.thumbnailSet a {
+	display:block;
+	position:relative;
+	float:left;
+	width:105px;
+	height:75px;
+	padding:2px;
+	border:1px solid transparent;
+	margin:1px;
+}
+.thumbnailSet a:hover {
+	border:1px solid #ffa200;
+	background:#000;
+}
+.thumbnailSet img.thumbnail {
+	position:absolute;
+	visibility:hidden;
+	width:105px;
+	height:75px;
+	border:none;
+}
+

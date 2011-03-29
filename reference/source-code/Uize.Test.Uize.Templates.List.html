@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Uize.Test.Uize.Templates.List | JavaScript Source Code | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework module source code"/>
+	<meta name="description" content="This is the JavaScript source code for the Uize.Test.Uize.Templates.List module of the UIZE JavaScript Framework"/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../../css/page.css"/>
+	<link rel="stylesheet" href="../../css/page.source.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../../index.html" title="UIZE JavaScript Framework home"></a>
+	SOURCE CODE: Uize.Test.Uize.Templates.List
+	<div class="pageActions">
+		<a href="../Uize.Test.Uize.Templates.List.html" class="buttonLink">VIEW REFERENCE</a>
+	</div>
+</h1>
+
+<pre>
+/*______________
+|       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
+|     /      /  |   ---------------------------------------------------
+|    /    O /   |    MODULE : Uize.Test.Uize.Templates.List Class
+|   /    / /    |
+|  /    / /  /| |    ONLINE : http://www.uize.com
+| /____/ /__/_| | COPYRIGHT : (c)2010-2011 UIZE
+|          /___ |   LICENSE : Available under MIT License or GNU General Public License
+|_______________|             http://www.uize.com/license.html
+*/
+
+/*ScruncherSettings Mappings="=" LineCompacting="TRUE"*/
+
+/* Module Meta Data
+  type: Test
+  importance: 1
+  codeCompleteness: 100
+  testCompleteness: 100
+  docCompleteness: 100
+*/
+
+/*?
+  Introduction
+    The =Uize.Test.Uize.Templates.List= module defines basic unit tests for the =Uize.Templates.List= JavaScript template module.
+
+    *DEVELOPERS:* `Chris van Rensburg`
+*/
+
+Uize.module ({
+  name:'Uize.Test.Uize.Templates.List',
+  builder:function () {
+    return Uize.Test.declare ({
+      title:'Test for Uize.Templates.List JavaScript Template',
+      test:[
+        Uize.Test.requiredModulesTest ('Uize.Templates.List'),
+        {
+          title:'Test that calling the process static method produces a non-empty string',
+          test:function () {
+            return this.expectNonEmptyString (
+              Uize.Templates.List.process ({
+                indentChars:'   ',
+                items:[{
+                  title:'Item Title',
+                  description:'This is an item',
+                  link:'http://www.uize.com',
+                  expanded:true
+                }]
+              })
+            );
+          }
+        }
+      ]
+    });
+  }
+});
+
+
+</pre>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.library',
+		'UizeDotCom.Page'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page).wireUi ()}
+});
+
+</script>
+
+</body></html>

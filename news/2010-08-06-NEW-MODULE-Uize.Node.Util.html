@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2010-08-06 - NEW MODULE: Uize.Node.Util | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="The new Uize.Node.Util module provides a home for miscellaneous node related methods that are too esoteric to belong in the base Uize.Node module."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2010.html" class="breadcrumb breadcrumbWithArrow">2010 NEWS</a>
+	2010-08-06 - NEW MODULE: Uize.Node.Util
+
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="A small handful of modules that were affected by the migration of the methods have been updated accordingly.">1. Affected Modules Updated</a></li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<p>The new <code><a href="../reference/Uize.Node.Util.html">Uize.Node.Util</a></code> module provides a home for miscellaneous node related methods that are too esoteric to belong in the base <code><a href="../reference/Uize.Node.html">Uize.Node</a></code> module.</p>
+	
+	<p>Along with creating a home for esoteric node related methods to be developed in the future, a handful of static methods already in the <code><a href="../reference/Uize.Node.html">Uize.Node</a></code> module that were judged to be too esoteric to be in that module were migrated out into the new <code><a href="../reference/Uize.Node.Util.html">Uize.Node.Util</a></code> module, thereby reducing the size of the <code><a href="../reference/Uize.Node.html">Uize.Node</a></code> module that is relied upon heavily by other code. The migrated methods are as follows...</p>
+	
+	<p><span class="allCaps">MIGRATED</span></p>
+	
+	
+<pre class="sample-code">Uize.Node.getEffectiveBgColor   &gt;&gt; BECOMES &gt;&gt;  Uize.Node.Util.getEffectiveBgColor
+Uize.Node.getOpacityProperties  &gt;&gt; BECOMES &gt;&gt;  Uize.Node.Util.getOpacityProperties
+Uize.Node.getOpacityStr         &gt;&gt; BECOMES &gt;&gt;  Uize.Node.Util.getOpacityStr
+Uize.Node.showInLayoutFlow      &gt;&gt; BECOMES &gt;&gt;  Uize.Node.Util.showInLayoutFlow
+Uize.Node.stylePropertiesAsStr  &gt;&gt; BECOMES &gt;&gt;  Uize.Node.Util.stylePropertiesAsStr
+</pre>
+	
+	<p>The static methods that have been migrated have not been changed - their parameter signatures and behavior remain the same as before.</p>
+	
+	<a name="1"></a>
+	<h1 class="heading1" title="1. Affected Modules Updated"><span class="headingNumber"><a href="#1" title="1. Affected Modules Updated">1</a>. </span>Affected Modules Updated</h1>
+	<div class="contents1">
+		<p>A small handful of modules that were affected by the migration of the methods have been updated accordingly.</p>
+		
+		<table class="list">
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>The <code><a href="../reference/Uize.Widget.Bar.Slider.xSkin.html">Uize.Widget.Bar.Slider.xSkin</a></code> and <code><a href="../reference/Uize.Widget.Bevel.html">Uize.Widget.Bevel</a></code> modules were updated to reflect the migration of the <code>Uize.Node.getOpacityStr</code> method.</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>The <code><a href="../reference/Uize.Widget.ImageWipe.html">Uize.Widget.ImageWipe</a></code> and <code><a href="../reference/Uize.Widget.Swap.Image.html">Uize.Widget.Swap.Image</a></code> modules were updated to reflect the migration of the <code>Uize.Node.getEffectiveBgColor</code> method.</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>The <code><a href="../reference/Uize.Widget.Swap.html">Uize.Widget.Swap</a></code> module was updated to reflect the migration of the <code>Uize.Node.getOpacityProperties</code> method.</td></tr>
+		</table>
+	</div>
+	
+	<p><span class="allCaps">NOT BACKWARDS COMPATIBLE</span></p>
+	
+	<p>This change is <b>not backwards compatible</b>. If you had code that was relying on the static methods that have been migrated into the new <code><a href="../reference/Uize.Node.Util.html">Uize.Node.Util</a></code> module, then you will have to modify that code to require the <code><a href="../reference/Uize.Node.Util.html">Uize.Node.Util</a></code> module and to call the methods in that module.</p>
+	
+	<p><a href="../reference/Uize.Node.Util.html">READ MORE</a></p>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

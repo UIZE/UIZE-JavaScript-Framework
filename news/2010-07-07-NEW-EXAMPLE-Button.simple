@@ -1,0 +1,13 @@
+The new [[../examples/button.html][Button]] example provides a demonstration of the features of the =Uize.Widget.Button= widget class.
+
+In the example, an instance of the =Uize.Widget.Button= widget class is instantiated and wired up. A log widget is used to log the instance events that occur for the button widget. Interacting with the widget will cause events to be fired, and those events will appear in the log. The log displays both the custom instance events that are fired using the button widget's =fire= method, as well as all =Changed.&#42;= property change events that result from values of the button's various set-get properties being changed (so, the log can be used to watch for changes in the state of the button widget). Below the instance event log for the button is a set of links for testing aspects of the programmatic interface of the button widget. A *"TOGGLE ENABLED"* link toggles the value of the button's =enabled= set-get property. A *"TOGGLE BUSY"* link toggles the value of its =busy= set-get property. A *"TOGGLE SELECTED"* link toggles the value of its =selected= set-get property. Finally, a *"CHANGE BUTTON TEXT"* link changes the value of its =text= set-get property.
+
+[[../examples/button.html][CHECK IT OUT]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2010-07-07 - NEW EXAMPLE: Button
+....................................................................................

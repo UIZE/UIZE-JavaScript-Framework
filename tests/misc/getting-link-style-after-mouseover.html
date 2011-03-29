@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>TEST: Getting Link Style After Mouseover | UIZE JavaScript Framework</title>
+	<style type="text/css">
+		a.test {
+			display:block;
+			width:100px;
+			text-align:center;
+			font-family:Arial;
+			font-size:18px;
+			color:#000;
+			background:#ccc;
+			text-decoration:none;
+		}
+		a.test:hover {
+			color:#fff;
+			background:#444;
+		}
+	</style>
+</head>
+<body>
+
+<script type="text/javascript" src="../../js/Uize.js"></script>
+<script type="text/javascript" src="../../js/Uize.Node.js"></script>
+<script type="text/javascript" src="../../js/Uize.Widget.js"></script>
+<script type="text/javascript" src="../../js/Uize.Fade.js"></script>
+<script type="text/javascript" src="../../js/Uize.Color.js"></script>
+<script type="text/javascript" src="../../js/Uize.Widget.LinkFader.js"></script>
+
+<a href="javascript://" id="test" class="test">A LINK</a>
+
+<p>LINK STYLES:</p>
+
+<div id="linkStyles"></div>
+
+<script type="text/javascript">
+
+function displayLinkStyles () {
+	var _testLink = Uize.Node.getById ('test');
+	setTimeout (
+		function () {
+			Uize.Node.setInnerHtml (
+				'linkStyles',
+				'<b>color</b>: ' + Uize.Node.getStyle (_testLink,'color') + '<br/>' +
+				'<b>background</b>: ' + Uize.Node.getStyle (_testLink,'backgroundColor') + '<br/>'
+			);
+		},
+		0
+	);
+}
+
+	/*** create link fader instance ***/
+		var linkFade = new Uize.Widget.LinkFader ({idPrefix:'test'});
+
+	/*** wire up the link fader instance's HTML ***/
+		linkFade.wireUi ();
+
+/*
+Uize.Node.wire ('test','mouseover',displayLinkStyles);
+Uize.Node.wire ('test','mouseout',displayLinkStyles);
+*/
+
+displayLinkStyles ();
+
+</script>
+
+</body>
+</html>
+

@@ -1,0 +1,9 @@
+User-agent: *
+Disallow: /css/
+Disallow: /examples/css/
+Disallow: /404.html
+Disallow: /logo.html
+Disallow: /search.html
+Disallow: /*.simple$
+Disallow: /*.simpledata$
+

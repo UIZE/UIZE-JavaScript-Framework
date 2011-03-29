@@ -1,0 +1,19 @@
+.sliderLabel {
+	text-align:right;
+	font-size:12px;
+}
+.sliderValueLabel {
+	font-size:11px;
+	width:40px;
+}
+.slideMinValue {
+	text-align:right;
+}
+.sliderMaxValue {
+	text-align:left;
+}
+.sliderPlaceholder {
+	width:330px;
+	height:20px;
+}
+

@@ -1,0 +1,207 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Populating Photo Details - HTML Source Code | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework HTML example source code"/>
+	<meta name="description" content="This is the source code for the Populating Photo Details example"/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../../css/page.css"/>
+	<link rel="stylesheet" href="../../css/page.source.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../../index.html" title="UIZE JavaScript Framework home"></a>
+	SOURCE CODE: Populating Photo Details
+	<div id="page-actions" class="pageActions">
+		<a href="../populating-photo-details.html" class="buttonLink">VIEW EXAMPLE</a>
+	</div>
+</h1>
+
+<pre>
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+&lt;head&gt;
+  &lt;title&gt;Populating Photo Details | JavaScript Examples | UIZE JavaScript Framework&lt;/title&gt;
+  &lt;meta name="keywords" content="Uize.Widget.Population"/&gt;
+  &lt;meta name="description" content="See the population class used to dynamically generate HTML for a photo set, where the HTML for each photo shows title, image, description, and rating."/&gt;
+  &lt;link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/&gt;
+  &lt;link rel="stylesheet" href="../css/page.css"/&gt;
+  &lt;link rel="stylesheet" href="../css/page.example.css"/&gt;
+  &lt;link rel="stylesheet" href="css/rating-stars.css"/&gt;
+  &lt;style type="text/css"&gt;
+    .photoRecord {
+      position:relative;
+      width:500px;
+      padding:6px;
+      margin:7px auto;
+      background:url(../images/page-contents-bg.gif) repeat-x left top;
+      border:1px solid #9aa;
+    }
+    .photoRecord .photoTitle {
+      font-size:10px;
+      text-transform:uppercase;
+      letter-spacing:4px;
+      color:#000;
+      background:#b7babf url(../images/title-bg-brushed-metal.jpg) repeat left top;
+      padding:4px 0 4px 8px;
+      margin-bottom:5px;
+    }
+    .photoRecord .photoThumbnail {
+      width:105px;
+      height:75px;
+      margin-right:7px;
+      border:4px solid #cfdadd;
+      float:left;
+    }
+    .photoRecord .photoDate {
+      font-size:10px;
+    }
+    .photoRecord .photoDescription {
+      font-size:12px;
+      color:#666;
+      padding-bottom:20px;
+    }
+    .photoRecord .clearLeft {
+      clear:left;
+    }
+    .photoRecord .ratingStars {
+      position:absolute;
+      right:5px;
+      bottom:0px;
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+&lt;script type="text/javascript" src="../js/Uize.js"&gt;&lt;/script&gt;
+
+&lt;h1 class="document-title"&gt;
+  &lt;a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"&gt;&lt;/a&gt;
+  &lt;a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow"&gt;JAVASCRIPT EXAMPLES&lt;/a&gt;
+  Populating Photo Details
+  &lt;div id="page-actions" class="pageActions"&gt;
+    &lt;a href="source-code/populating-photo-details.html" class="buttonLink"&gt;SOURCE&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/h1&gt;
+
+&lt;div class="main"&gt;
+  &lt;!-- explanation copy --&gt;
+
+  &lt;div class="explanation"&gt;
+    &lt;p&gt;In this example, an instance of the &lt;a href="../reference/Uize.Widget.Population.html"&gt;&lt;code&gt;Uize.Widget.Population&lt;/code&gt;&lt;/a&gt; class is being used to populate a node with a details view for a set of photos. The HTML used as the template for populating the node with a photo record set is the initial inner HTML of the node. The &lt;code&gt;Uize.Widget.Population&lt;/code&gt; instance is configured with a value for its &lt;code&gt;templateItem&lt;/code&gt; set-get property that maps record fields to specific substrings of the HTML template by example values, allowing the initial HTML contents of the populated node to be well-formed (something that cannot be guaranteed when using strictly a substitution token syntax).&lt;/p&gt;
+
+    &lt;p&gt;The photo records do not contain a URL for the thumbnail, but only a title. So, in order to substitute the correct thumbnail URL into the HTML template when populating, a phantom property called &lt;code&gt;thumbnailUrl&lt;/code&gt; is registered with the &lt;code&gt;Uize.Widget.Population&lt;/code&gt; instance using the &lt;code&gt;itemPhantomProperties&lt;/code&gt; set-get property. Similarly, in order to show the ratings for each record, a &lt;code&gt;ratingStarsCrop&lt;/code&gt; phantom property is registered, and this is substituted into the correct place in the HTML in order to achieve crop rects for the rating stars HTML that would correctly reflect the rating value.&lt;/p&gt;
+
+    &lt;p&gt;Finally, a category selector is provided to let you choose from category subselections of the complete photos record set (methods of the &lt;a href="../reference/Uize.Data.html"&gt;&lt;code&gt;Uize.Data&lt;/code&gt;&lt;/a&gt; package come in handy here). Each time you select a new category, the &lt;code&gt;items&lt;/code&gt; set-get property of the &lt;code&gt;Uize.Widget.Population&lt;/code&gt; is updated. Updating this property automatically results in the population instance re-populating its container node to reflect its new data set.&lt;/p&gt;
+
+    &lt;p&gt;Scroll down, as necessary, to get the full effect.&lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;center&gt;
+    &lt;form style="margin:auto;"&gt;
+      CATEGORY: &lt;select id="page-categorySelector"&gt;&lt;/select&gt;
+    &lt;/form&gt;
+  &lt;/center&gt;
+
+  &lt;!-- the photo details node (containing the template used for populating) --&gt;
+
+  &lt;div id="page_photoDetails"&gt;
+    &lt;div class="photoRecord"&gt;
+      &lt;div class="photoTitle"&gt;TITLE&lt;/div&gt;
+      &lt;img src="../images/blank.gif" class="photoThumbnail"/&gt;
+      &lt;div class="photoDescription"&gt;DESCRIPTION&lt;/div&gt;
+      &lt;div class="clearLeft" style="height:0px;"&gt;&amp;nbsp;&lt;/div&gt;
+      &lt;div class="ratingStars"&gt;
+        &lt;div class="ratingStarsEmpty" style="clip:rect(0 100px 20px 53px);"&gt;&lt;/div&gt;
+        &lt;div class="ratingStarsFull" style="clip:rect(0 53px 20px 0);"&gt;&lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- JavaScript code to wire up page and populate it with photo details --&gt;
+
+&lt;script type="text/javascript"&gt;
+
+Uize.module ({
+  required:[
+    'UizeDotCom.Page.Example.library',
+    'UizeDotCom.Page.Example',
+    'UizeDotCom.TestDataPhotos',
+    'Uize.Data',
+    'Uize.Widget.Population'
+  ],
+  builder:function () {
+    /*** create the example page widget ***/
+      var page = window.page = new UizeDotCom.Page.Example;
+
+    /*** set up the category selector ***/
+      var
+        photos = UizeDotCom.TestDataPhotos (),
+        categories = Uize.Data.getColumn (photos,'category',true),
+        categorySelectorOptions = page.getNode ('categorySelector').options
+      ;
+      for (var categoryNo = -1, categoriesLength = categories.length; ++categoryNo &lt; categoriesLength;) {
+        var categoryName = categories [categoryNo];
+        categorySelectorOptions [categorySelectorOptions.length] = new Option (categoryName,categoryName);
+      }
+
+    /*** add the Uize.Widget.Population instance ***/
+      var population = page.addChild (
+        'photoDetails',
+        Uize.Widget.Population,
+        {
+          templateItem:{
+            title:'TITLE',
+            description:'DESCRIPTION',
+            thumbnailUrl:'../images/blank.gif',
+            ratingStarsCrop:'53px'
+          },
+          itemPhantomProperties:{
+            thumbnailUrl:function () {
+              return this.image.replace ('max_dim=500','max_dim=105');
+            },
+            ratingStarsCrop:function () {
+              return (this.rating * 10) + 'px';
+            }
+          }
+        }
+      );
+
+    /*** populate photo details from selected category ***/
+      function populatePhotoDetails () {
+        population.set ({items:Uize.Data.findRecords (photos,{category:page.getNodeValue ('categorySelector')})});
+      }
+      populatePhotoDetails (); // initialize
+      page.wireNode ('categorySelector','change',populatePhotoDetails);
+
+    /*** wire up the page widget ***/
+      page.wireUi ();
+  }
+});
+
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+</pre>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.library',
+		'UizeDotCom.Page'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page).wireUi ()}
+});
+
+</script>
+
+</body></html>

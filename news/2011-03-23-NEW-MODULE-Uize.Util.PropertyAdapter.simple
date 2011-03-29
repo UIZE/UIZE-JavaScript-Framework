@@ -1,0 +1,38 @@
+The new =Uize.Util.PropertyAdapter= module implements a mechanism for connecting two set-get properties together, with optional bi-directional value adapter code.
+
+An Example
+	The =Uize.Util.PropertyAdapter= class makes it easy to connect two set-get properties in a synchronization relationship, where a change in the value of one of the properties results in the value of the other property being synchronized to the new value of the property that changed.
+	
+	Consider the following basic example...
+	
+	EXAMPLE
+	................................
+	new Uize.Util.PropertyAdapter ({
+		propertyA:{
+			instance:sliderA,
+			property:'minValue'
+		},
+		propertyB:{
+			instance:sliderB,
+			property:'minValue'
+		}
+	});
+	................................
+	
+	In the above example, the =minValue= set-get properties of two sliders (instances of the =Uize.Widget.Bar.Slider= class) are being connected through a property adapter, so that if the value of the =minValue= property is modified in =sliderA=, the value of the =minValue= property of =sliderB= is automatically synchronized to that new value, and vice versa.
+
+Any Two Set-get Properties
+	Any two set-get properties can be connected to each other using a property adapter instance. It can be two properties of the same instance, or it can be properties of two different instances.
+
+	The properties being connected can belong to widget instances (ie. instances of =Uize.Widget= subclasses), but the instances owning the properties do not have to be widgets. The instances owning the two properties being connected do not even have to be of the same class. And the two properties do not even have to be of the same type or have the same value range - the =Uize.Util.PropertyAdapter= class provides a way to specify a value adapter that should be used to adapt the value in either direction.
+
+Comprehensive Docs and Tests
+	The new =Uize.Util.PropertyAdapter= module has comprehensive [[Uize.Util.PropertyAdapter][reference documentation]], and is comprehensively unit-tested by the =Uize.Test.Uize.Util.PropertyAdapter= unit test module.
+
+	[[Uize.Util.PropertyAdapter][LEARN MORE]]
+
+....................................................................................
+<< metadata >>
+
+title: 2011-03-23 - NEW MODULE: Uize.Util.PropertyAdapter
+....................................................................................

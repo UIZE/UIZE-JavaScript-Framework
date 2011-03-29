@@ -1,0 +1,312 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Complex Table Sort | JavaScript Examples | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="Uize.Widget.TableSort"/>
+	<meta name="description" content="See an example of a sortable data table, where one column has complex HTML and some rows are fixed. No problem - the table sort widget handles it all!"/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.example.css"/>
+	<link rel="stylesheet" href="../css/widget.datatable.css"/>
+	<style type="text/css">
+		table.fruitName td {
+			font-size:11px;
+			font-weight:bold;
+			border:1px solid #ccc;
+			padding:0 4px;
+			background:#ccc;
+			text-align:center;
+		}
+	</style>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	<a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow">JAVASCRIPT EXAMPLES</a>
+	Complex Table Sort
+	<div id="page-actions" class="pageActions">
+		<a href="source-code/table-sort-complex.html" class="buttonLink">SOURCE</a>
+	</div>
+</h1>
+
+<div class="main">
+	<!-- explanation copy -->
+
+	<div class="explanation">
+		<p>In this example, an instance of the <a href="../reference/Uize.Widget.TableSort.html"><code>Uize.Widget.TableSort</code></a> widget class is being spawned and attached to a table of data. This use of the <code>Uize.Widget.TableSort</code> class is notable in that the table's markup is rather complex in a number of ways. Firstly, there is a separator table row between each row of data. Secondly, there is a separator row between every three rows of data. When you click the column headings to sort different columns, notice how the separator rows are not included in the sort and do not budge. To add another wrinkle, the fruit names in the first column are buried deep inside nested tables, yet the text is still found and sorting by fruit works as expected. Finally, there is a <code>thead</code> tag that contains the title for the table, and the table's data is contained inside the <code>tbody</code> tag. None of these little kinks throw off the table sorting logic.</p>
+	</div>
+
+	<!-- table of data to which a Uize.Widget.TableSort instance will be attached -->
+
+	<table id="tableOfFruits" class="data" style="margin:auto;">
+		<thead>
+			<tr class="title">
+				<td colspan="12">Fruit Nutritional Information (per 8oz serving)</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr class="heading">
+				<td>Fruit</td>
+				<td>Calories</td>
+				<td>Total Fat</td>
+				<td>Sat. Fat</td>
+				<td>Salt</td>
+				<td>Total Carbs</td>
+				<td>Fiber</td>
+				<td>Sugars</td>
+				<td>Protein</td>
+				<td>Calcium</td>
+				<td>Potassium</td>
+			</tr>
+			<tr valign="top" align="right">
+				<td><table width="100%" class="fruitName"><tr><td>Apples</td></tr></table></td>
+				<td>52 kcal</td>
+				<td>0.17 g</td>
+				<td>0.028 g</td>
+				<td>1 mg</td>
+				<td>13.81 g</td>
+				<td>2.4 g</td>
+				<td>10.39 g</td>
+				<td>0.26 g</td>
+				<td>6 mg</td>
+				<td>107 mg</td>
+			</tr>
+			<tr class="rowSeparator"><td colspan="12">&nbsp;</td></tr>
+			<tr valign="top" align="right">
+				<td><table width="100%" class="fruitName"><tr><td>Avocados</td></tr></table></td>
+				<td>160 kcal</td>
+				<td>14.66 g</td>
+				<td>2.126 g</td>
+				<td>7 mg</td>
+				<td>8.53 g</td>
+				<td>6.7 g</td>
+				<td>0.66 g</td>
+				<td>2 g</td>
+				<td>12 mg</td>
+				<td>485 mg</td>
+			</tr>
+			<tr class="rowSeparator"><td colspan="12">&nbsp;</td></tr>
+			<tr valign="top" align="right">
+				<td><table width="100%" class="fruitName"><tr><td>Bananas</td></tr></table></td>
+				<td>89 kcal</td>
+				<td>0.33 g</td>
+				<td>0.112 g</td>
+				<td>1 mg</td>
+				<td>22.84 g</td>
+				<td>2.6 g</td>
+				<td>12.23 g</td>
+				<td>1.09 g</td>
+				<td>5 mg</td>
+				<td>358 mg</td>
+			</tr>
+			<tr class="sectionSeparator"><td colspan="12">&nbsp;</td></tr>
+			<tr valign="top" align="right">
+				<td><table width="100%" class="fruitName"><tr><td>Dates</td></tr></table></td>
+				<td>277 kcal</td>
+				<td>0.15 g</td>
+				<td>0 g</td>
+				<td>1 mg</td>
+				<td>74.97 g</td>
+				<td>6.7 g</td>
+				<td>66.47 g</td>
+				<td>1.81 g</td>
+				<td>64 mg</td>
+				<td>696 mg</td>
+			</tr>
+			<tr class="rowSeparator"><td colspan="12">&nbsp;</td></tr>
+			<tr valign="top" align="right">
+				<td><table width="100%" class="fruitName"><tr><td>Grapefruits</td></tr></table></td>
+				<td>42 kcal</td>
+				<td>0.14 g</td>
+				<td>0.021 g</td>
+				<td>0 mg</td>
+				<td>10.66 g</td>
+				<td>1.6 g</td>
+				<td>6.89 g</td>
+				<td>0.77 g</td>
+				<td>22 mg</td>
+				<td>135 mg</td>
+			</tr>
+			<tr class="rowSeparator"><td colspan="12">&nbsp;</td></tr>
+			<tr valign="top" align="right">
+				<td><table width="100%" class="fruitName"><tr><td>Grapes</td></tr></table></td>
+				<td>67 kcal</td>
+				<td>0.35 g</td>
+				<td>0.114 g</td>
+				<td>2 mg</td>
+				<td>17.15 g</td>
+				<td>0.9 g</td>
+				<td>16.25 g</td>
+				<td>0.63 g</td>
+				<td>14 mg</td>
+				<td>191 mg</td>
+			</tr>
+			<tr class="sectionSeparator"><td colspan="12">&nbsp;</td></tr>
+			<tr valign="top" align="right">
+				<td><table width="100%" class="fruitName"><tr><td>Mangos</td></tr></table></td>
+				<td>65 kcal</td>
+				<td>0.27 g</td>
+				<td>0.066 g</td>
+				<td>2 mg</td>
+				<td>17 g</td>
+				<td>1.8 g</td>
+				<td>14.8 g</td>
+				<td>0.51 g</td>
+				<td>10 mg</td>
+				<td>156 mg</td>
+			</tr>
+			<tr class="rowSeparator"><td colspan="12">&nbsp;</td></tr>
+			<tr valign="top" align="right">
+				<td><table width="100%" class="fruitName"><tr><td>Oranges</td></tr></table></td>
+				<td>49 kcal</td>
+				<td>0.15 g</td>
+				<td>0.017 g</td>
+				<td>1 mg</td>
+				<td>12.54 g</td>
+				<td>2.2 g</td>
+				<td>8.5 g</td>
+				<td>0.91 g</td>
+				<td>43 mg</td>
+				<td>166 mg</td>
+			</tr>
+			<tr class="rowSeparator"><td colspan="12">&nbsp;</td></tr>
+			<tr valign="top" align="right">
+				<td><table width="100%" class="fruitName"><tr><td>Pears</td></tr></table></td>
+				<td>58 kcal</td>
+				<td>0.12 g</td>
+				<td>0.006 g</td>
+				<td>1 mg</td>
+				<td>15.46 g</td>
+				<td>3.1 g</td>
+				<td>9.8 g</td>
+				<td>0.38 g</td>
+				<td>9 mg</td>
+				<td>119 mg</td>
+			</tr>
+			<tr class="sectionSeparator"><td colspan="12">&nbsp;</td></tr>
+			<tr valign="top" align="right">
+				<td><table width="100%" class="fruitName"><tr><td>Plums</td></tr></table></td>
+				<td>46 kcal</td>
+				<td>0.28 g</td>
+				<td>0.017 g</td>
+				<td>0 mg</td>
+				<td>11.42 g</td>
+				<td>1.4 g</td>
+				<td>9.92 g</td>
+				<td>0.7 g</td>
+				<td>6 mg</td>
+				<td>157 mg</td>
+			</tr>
+			<tr class="rowSeparator"><td colspan="12">&nbsp;</td></tr>
+			<tr valign="top" align="right">
+				<td><table width="100%" class="fruitName"><tr><td>Raspberries</td></tr></table></td>
+				<td>52 kcal</td>
+				<td>0.65 g</td>
+				<td>0.019 g</td>
+				<td>1 mg</td>
+				<td>11.94 g</td>
+				<td>6.5 g</td>
+				<td>4.42 g</td>
+				<td>1.2 g</td>
+				<td>25 mg</td>
+				<td>151 mg</td>
+			</tr>
+			<tr class="rowSeparator"><td colspan="12">&nbsp;</td></tr>
+			<tr valign="top" align="right">
+				<td><table width="100%" class="fruitName"><tr><td>Strawberries</td></tr></table></td>
+				<td>32 kcal</td>
+				<td>0.3 g</td>
+				<td>0.015 g</td>
+				<td>1 mg</td>
+				<td>7.68 g</td>
+				<td>2 g</td>
+				<td>4.89 g</td>
+				<td>0.67 g</td>
+				<td>16 mg</td>
+				<td>153 mg</td>
+			</tr>
+			<tr class="sectionSeparator"><td colspan="12">&nbsp;</td></tr>
+			<tr valign="top" align="right">
+				<td><table width="100%" class="fruitName"><tr><td>Tamarinds</td></tr></table></td>
+				<td>239 kcal</td>
+				<td>0.6 g</td>
+				<td>0.272 g</td>
+				<td>1 mg</td>
+				<td>62.5 g</td>
+				<td>5.1 g</td>
+				<td>57.4 g</td>
+				<td>2.8 g</td>
+				<td>74 mg</td>
+				<td>628 mg</td>
+			</tr>
+			<tr class="rowSeparator"><td colspan="12">&nbsp;</td></tr>
+			<tr valign="top" align="right">
+				<td><table width="100%" class="fruitName"><tr><td>Tangerines</td></tr></table></td>
+				<td>53 kcal</td>
+				<td>0.31 g</td>
+				<td>0.039 g</td>
+				<td>2 mg</td>
+				<td>13.34 g</td>
+				<td>1.8 g</td>
+				<td>10.58 g</td>
+				<td>0.81 g</td>
+				<td>37 mg</td>
+				<td>166 mg</td>
+			</tr>
+			<tr class="rowSeparator"><td colspan="12">&nbsp;</td></tr>
+			<tr valign="top" align="right">
+				<td><table width="100%" class="fruitName"><tr><td>Watermelon</td></tr></table></td>
+				<td>30 kcal</td>
+				<td>0.15 g</td>
+				<td>0.016 g</td>
+				<td>1 mg</td>
+				<td>7.55 g</td>
+				<td>0.4 g</td>
+				<td>6.2 g</td>
+				<td>0.61 g</td>
+				<td>7 mg</td>
+				<td>112 mg</td>
+			</tr>
+			<tr class="sectionSeparator"><td colspan="12">&nbsp;</td></tr>
+		</tbody>
+	</table>
+</div>
+
+<!-- JavaScript code to make the table sortable -->
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Example.library',
+		'UizeDotCom.Page.Example',
+		'Uize.Widget.TableSort'
+	],
+	builder:function () {
+		/*** create the example page widget ***/
+			var page = window.page = new UizeDotCom.Page.Example;
+
+		/*** spawn (and automatically wire) the Uize.Widget.TableSort object ***/
+			Uize.Widget.TableSort.spawn (
+				{
+					idPrefix:'tableOfFruits',
+					headingOverClass:'headingOver',
+					headingLitClass:'headingLit',
+					rowOverClass:'rowOver'
+				},
+				page
+			);
+
+		/*** wire up the page widget ***/
+			page.wireUi ();
+	}
+});
+
+</script>
+
+</body>
+</html>

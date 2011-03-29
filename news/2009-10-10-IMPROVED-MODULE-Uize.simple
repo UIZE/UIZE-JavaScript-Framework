@@ -1,0 +1,28 @@
+It is now possible to set the value of set-get properties to =undefined= using the =set= instance method.
+
+It has been a long-standing shortcoming of the set-get properties mechanism that it has not been possible to "restore" properties back to an =undefined= state. It was always possible for the initial value for set-get properties to be =undefined=. However, once set to any value other than =undefined=, it was not possible to set their value back to =undefined=. The closest you could come was setting a property's value to =null=. This limitation has been fixed.
+
+PREVIOUSLY
+............................................................
+MyClass = Uize.subclass ();
+MyClass.registerProperties ({_myProperty:'myProperty'});
+
+var myClass = new MyClass;
+alert (myClass.get ('myProperty'));    // alerts "undefined"
+
+myClass.set ({myProperty:'solar'});
+alert (myClass.get ('myProperty'));    // alerts "solar"
+
+myClass.set ({myProperty:undefined});
+alert (myClass.get ('myProperty'));    // alerts "solar"
+............................................................
+
+With the new behavior, the last =alert= statement would display the text "undefined" in the alert dialog. That's because the =set= statement on the previous line *would* successfully set the property's value back to =undefined=.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-10-10 - IMPROVED MODULE: Uize
+....................................................................................

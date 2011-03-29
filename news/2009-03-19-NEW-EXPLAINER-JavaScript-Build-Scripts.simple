@@ -1,0 +1,22 @@
+The new [[../explainers/javascript-build-scripts.html][JavaScript Build Scripts]] explainer discusses all the ins and outs of the JavaScript build scripts that are used for the *uize.com* Web site project, and that you can use in your own Web site projects to automate certain build tasks.
+
+Among other things, build scripts let you...
+
+- automatically scrunch down all JavaScript files inside a Web site project into smaller, obfuscated files using the UIZE JavaScript Framework's [[../explainers/all-about-scrunching.html][Scruncher]]
+- automatically find all JavaScript library (=.library.js=) files inside a Web site project and build a version of the file for production/deployment that combines all the JavaScript modules referenced in the library file
+- automatically build JavaScript template modules from all JavaScript template module source (=.js.jst=) files contained inside the JavaScript modules folder
+- audit all the string literals in all the JavaScript files throughout a Web site project, to aid in internationalizing your JavaScript code
+- automatically build documentation from comments contained inside your JavaScript modules
+- automatically build all Wikitext-like Simple Doc (.simple) documents into attractive HTML documentation files
+- automatically build all Simple Data (.simpledata) data files into HTML files using JavaScript template (.jst) files
+- and much more...
+
+[[../explainers/javascript-build-scripts.html][READ IT NOW]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-03-19 - NEW EXPLAINER: JavaScript Build Scripts
+....................................................................................

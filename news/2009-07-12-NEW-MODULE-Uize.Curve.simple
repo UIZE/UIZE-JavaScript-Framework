@@ -1,0 +1,13 @@
+The new =Uize.Curve= module is a package under the =Uize= namespace that defines a namespace for other curve related modules (such as the =Uize.Curve.Rubber= and =Uize.Curve.Mod= modules), that provides some basic services that are useful for creating such curve related modules, and that also provides a number of the more commonly used curve function generators as built-ins.
+
+The =Uize.Curve= module provides built-in curve function generators for power easing curves, "sweetened" power easing curves, sinusoidal easing curves, circular easing curves, exponential easing curves, and basic straight line curves. This module also provides curve function modifiers for making ease-out, ease-in-out, and ease-in-the-middle curve functions from ease-in curve functions, as well as a method for making ease-in, ease-out, ease-in-out, and ease-in-the-middle curve function generators from an ease-in curve function generator. Finally, miscellaneous services are provided that are useful for other curve related modules, such as the =Uize.Curve.linear= curve function, =Uize.Curve.resolve= static method, etc.
+
+[[Uize.Curve][LEARN MORE]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-07-12 - NEW MODULE: Uize.Curve
+....................................................................................

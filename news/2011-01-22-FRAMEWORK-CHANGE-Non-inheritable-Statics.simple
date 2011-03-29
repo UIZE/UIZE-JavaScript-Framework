@@ -1,0 +1,94 @@
+A number of static methods that are implemented in the Uize base class, and that have (up until now) been inherited by all subclasses of Uize, are now no longer inheritable.
+
+The concept of non-inheritable statics has been introduced, with a way provided to "register" static features of a class as being non-inheritable.
+
+Why the Change?
+	The static features of the =Uize= base class that have been made non-inheritable have been made so in order to clean up the statics defined in all classes across the entire framework.
+
+	Previously, all classes were inheriting a ton of static methods (see `Statics That Are No Longer Inheritable`) that are really just utility functions that only need to exist directly in the =Uize= base class. More generally, there are times when there is no compelling reason for a static feature of a class to be inherited by its subclasses. Too many inherited static features can just clutter subclasses in the class hierarchy with cruft that they neither need nor care about. To address this concern, the inheritance system of the UIZE JavaScript Framework provides a way to "register" static features of a class as being non-inheritable.
+
+How This Change Affects You
+	With this change, certain static methods of =Uize= that you may have come to rely on as static methods inherited by the =Uize= subclasses you write, are no longer inherited by your subclasses.
+
+	Therefore, these methods must now be called directly on the =Uize= base class and *not* on your subclasses. So, whereas previously you may have written something like...
+
+	BEFORE
+	.............................................
+	_class.copyInto (myObject,myExtraProperties);
+	.............................................
+
+	...now you will need to write this statement as...
+
+	AFTER
+	...........................................
+	Uize.copyInto (myObject,myExtraProperties);
+	...........................................
+
+Statics That Are No Longer Inheritable
+	Static features of the =Uize= base class that are no longer inheritable by subclasses are as follows...
+
+	NO LONGER INHERITABLE STATICS
+	...................................................................
+	_class.callOn               >> BECOMES >>  Uize.callOn
+	_class.capFirstChar         >> BECOMES >>  Uize.capFirstChar
+	_class.clone                >> BECOMES >>  Uize.clone
+	_class.constrain            >> BECOMES >>  Uize.constrain
+	_class.copyInto             >> BECOMES >>  Uize.copyInto
+	_class.escapeRegExpLiteral  >> BECOMES >>  Uize.escapeRegExpLiteral
+	_class.findRecord           >> BECOMES >>  Uize.findRecord
+	_class.findRecordNo         >> BECOMES >>  Uize.findRecordNo
+	_class.getGuid              >> BECOMES >>  Uize.getGuid
+	_class.getModuleByName      >> BECOMES >>  Uize.getModuleByName
+	_class.getPathToLibrary     >> BECOMES >>  Uize.getPathToLibrary
+	_class.globalEval           >> BECOMES >>  Uize.globalEval
+	_class.indexIn              >> BECOMES >>  Uize.indexIn
+	_class.isArray              >> BECOMES >>  Uize.isArray
+	_class.isFunction           >> BECOMES >>  Uize.isFunction
+	_class.isIn                 >> BECOMES >>  Uize.isIn
+	_class.isInstance           >> BECOMES >>  Uize.isInstance
+	_class.isNumber             >> BECOMES >>  Uize.isNumber
+	_class.module               >> BECOMES >>  Uize.module
+	_class.moduleLoader         >> BECOMES >>  Uize.moduleLoader
+	_class.moduleUrlResolver    >> BECOMES >>  Uize.moduleUrlResolver
+	_class.moduleUrlTemplate    >> BECOMES >>  Uize.moduleUrlTemplate
+	_class.pairUp               >> BECOMES >>  Uize.pairUp
+	_class.pathToResources      >> BECOMES >>  Uize.pathToResources
+	_class.recordMatches        >> BECOMES >>  Uize.recordMatches
+	_class.substituteInto       >> BECOMES >>  Uize.substituteInto
+	...................................................................
+
+	Of the static methods that have become non-inheritable, the following methods are more likely to have been used in code (given their utility value) and are more likely to need changing in your code: =Uize.capFirstChar=, =Uize.clone=, =Uize.constrain=, =Uize.copyInto=, =Uize.findRecord=, =Uize.findRecordNo=, =Uize.indexIn=, =Uize.isArray=, =Uize.isFunction=, =Uize.isIn=, =Uize.isNumber=, =Uize.pairUp=.
+
+Updated UIZE Modules
+	A good number of modules in the UIZE JavaScript Framework had to be updated as a result of the previously inheritable static methods becoming non-inheritable.
+
+	The modules that were updated include: =Uize=, =Uize.Comm=, =Uize.Comm.Iframe=, =Uize.Comm.Iframe.Upload=, =Uize.Comm.Script=, =Uize.Fade=, =Uize.Fade.xFactory=, =Uize.Fade.xSeries=, =Uize.Widget=, =Uize.Widget.Bar=, =Uize.Widget.Button=, =Uize.Widget.Button.Toggle=, =Uize.Widget.Collection.Dynamic=, =Uize.Widget.Collection=, =Uize.Widget.CollectionItem.Zooming=, =Uize.Widget.ColorPicker=, =Uize.Widget.Committer=, =Uize.Widget.Dialog.Confirm=, =Uize.Widget.Dialog=, =Uize.Widget.Drag=, =Uize.Widget.EdgeHugger=, =Uize.Widget.Form=, =Uize.Widget.FormElement=, =Uize.Widget.FormElements=, =Uize.Widget.FormWarnings=, =Uize.Widget.HoverFader=, =Uize.Widget.ImagePort.Draggable=, =Uize.Widget.ImageWipe=, =Uize.Widget.MagView=, =Uize.Widget.Options.Accordion=, =Uize.Widget.Options=, =Uize.Widget.Options.Tabbed=, =Uize.Widget.Page=, =Uize.Widget.Page.xDeferredLinks=, =Uize.Widget.Picker=, =Uize.Widget.Picker.Selector=, =Uize.Widget.Population=, =Uize.Widget.Resizer=, =Uize.Widget.Scrolly=, =Uize.Widget.SlideShow=, =Uize.Widget.Swap.Image.Cycle=, =Uize.Widget.Swap=, =Uize.Widget.Tree=.
+
+Registering Non-inheritable Statics
+	With the introduction of the new =MyClass.nonInheritableStatics= static property, static features of any class you create can now be "registered" as non-inheritable.
+
+	The =MyClass.nonInheritableStatics= static property is a lookup object, automatically created for a class, in which you can register the static features (methods or properties) of the class that should *not* be inherited when that class is subclassed. Each property of the =Uize.nonInheritableStatics= lookup object represents a single static feature of the class that should not be inherited by subclasses, where the name of each property should be the name of a static feature (excluding the module name), and the value of each property should be a truthy value (such as =true=, =1=, ='foo'=, =[]=, ={}=, etc.). After a class has been created, non-inheritable statics can be registered for that class by assigning properties to the class' =MyClass.nonInheritableStatics= static property, as shown in the example below...
+
+	EXAMPLE
+	...........................................................................
+	MyClass = Uize.subclass ();
+	MyClass.someUtilityFunction = function () {
+		// do something of great utility
+	};
+	MyClass.nonInheritableStatics.someUtilityFunction = 1;
+
+	MyClassSubclass = MyClass.subclass ();
+	alert (MyClassSubclass.someUtilityFunction); // alerts the text "undefined"
+	...........................................................................
+
+	In the above example, the =MyClass.someUtilityFunction= static method of the class =MyClass= has been registered as a non-inheritable static. This is done by the statement =MyClass.nonInheritableStatics.someUtilityFunction &#61; 1=. Now, when the =MyClassSubclass= class is created by calling the =MyClass.subclass= method, the new subclass that is created does not get the =someUtilityFunction= static feature. Therefore, the =alert= statement displays the text "undefined" in the alert dialog.
+
+	For a more in-depth discussion of non-inheritable statics, consult the Non-inheritable Statics section of the [[../explainers/javascript-inheritance.html][JavaScript Inheritance]] explainer, along with the reference documentation for the =Uize.nonInheritableStatics= static property in the reference for the =Uize= module.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2011-01-22 - FRAMEWORK CHANGE: Non-inheritable Statics
+....................................................................................

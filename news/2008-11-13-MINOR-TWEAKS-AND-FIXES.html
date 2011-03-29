@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2008-11-13 - MINOR TWEAKS AND FIXES | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="- A new insertionMode set-get property implemented in the Uize.Widget base class provides a way for applications to control how a widget&apos;s HTML is inserted when the built set-get property is set to false and a non-empty value is specified for the html set-get property. For more details, consult the reference for the Uize.Widget class."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2008.html" class="breadcrumb breadcrumbWithArrow">2008 NEWS</a>
+	2008-11-13 - MINOR TWEAKS AND FIXES
+
+</h1>
+
+<div class="main">
+<div class="contents0">
+	<table class="list">
+	<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>A new <code>insertionMode</code> set-get property implemented in the <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> base class provides a way for applications to control how a widget's HTML is inserted when the <code>built</code> set-get property is set to <code>false</code> and a non-empty value is specified for the <code>html</code> set-get property. For more details, consult the reference for the <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> class.</td></tr>
+	<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>The <a href="../examples/slideshow-with-wipes.html">Slideshow With Wipes</a> and <a href="../examples/slideshow.html">Slideshow</a> examples have been updated to use JavaScript Template (.jst) files for building the HTML of the slideshow widget's UI.</td></tr>
+	<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>A bug in the <code><a href="../reference/Uize.Widget.Button.html">Uize.Widget.Button</a></code> class that was affecting the Firefox 2 and Opera browsers has been fixed. Basically, using the <code>text</code> set-get property of a button widget instance to change a button's label text was causing a button to become non-responsive when clicking on the <code>text</code> implied node (but not other parts of the button).</td></tr>
+	</table>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

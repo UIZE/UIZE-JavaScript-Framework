@@ -1,0 +1,11 @@
+The =Uize= base class has been improved with the addition of the new =Uize.getModuleByName= static method.
+
+The =Uize.getModuleByName= method returns an object reference, being a reference to the module of the specified name, or it returns the value =undefined= if no such module is defined. If the special value ='*'= (wildcard character) is specified in place of a module name, then the method returns an object that serves as a lookup table for all the modules that have been built, where each property's name is the name of a module and each property's value is a reference to the module. This lookup can be used to, among other things, generate a list of all the modules that have been built for a Web page, and this information can then be used as the basis for creating a JavaScript library file.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2010-11-03 - NEW METHOD: Uize.getModuleByName
+....................................................................................

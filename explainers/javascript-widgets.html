@@ -1,0 +1,1401 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Javascript Widgets | Documentation | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework Documentation "/>
+	<meta name="description" content="The UIZE JavaScript Framework provides a system to facilitate the development of behavioral logic for widgets that can be embedded in HTML pages."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../javascript-explainers.html" class="breadcrumb breadcrumbWithArrow">EXPLAINERS</a>
+	Javascript Widgets
+
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="The UIZE JavaScript Framework provides a system to facilitate the development of behavioral logic for widgets that can be embedded in HTML pages.">1. Introduction</a>
+				<ul>
+					<li><a href="#1_1" title="Widgets in the UIZE JavaScript Framework derive from the Uize.Widget base class.">1.1. The Uize.Widget Base Class</a></li>
+					<li><a href="#1_2">1.2. Widget Class Naming</a>
+						<ul>
+							<li><a href="#1_2_1" title="Because UIZE widgets inherit from Uize.Widget, the class files are typically named Uize.Widget.*, such as for example the Uize.Widget.Bar.Slider widget class, which is a subclass of the Uize.Widget.Bar widget class, which is a subclass of the Uize.Widget base class.">1.2.1. UIZE Widgets</a></li>
+							<li><a href="#1_2_2" title="It is not required to place widget classes under the Uize.Widget namespace. The Zazzle Inc. Web site, for example, implements a large number of custom widgets that are placed under their own Zazzle namespace, such as Zazzle.ControlMove, Zazzle.ControlNumber, Zazzle.GridCell, etc.">1.2.2. Custom Namespaces</a></li>
+						</ul>
+					</li>
+					<li><a href="#1_3" title="The UIZE JavaScript Framework comes packed with scores of built in widgets.">1.3. Meet the Widgets</a></li>
+					<li><a href="#1_4" title="Every widget can own child widgets to support its implementation.">1.4. Every Widget Can Have Children</a></li>
+					<li><a href="#1_5" title="Because every widget can have child widgets, this makes it possible to have a hierarchical tree of widgets.">1.5. Widget Tree</a></li>
+					<li><a href="#1_6">1.6. Page Widget</a>
+						<ul>
+							<li><a href="#1_6_1" title="In the UIZE JavaScript Framework, the page is a widget too.">1.6.1. What is the Page Widget?</a></li>
+							<li><a href="#1_6_2" title="The page widget provides an environment and services that can be relied upon by child widgets in its tree.">1.6.2. What Does the Page Widget Do?</a></li>
+							<li><a href="#1_6_3" title="The page widget doesn&apos;t do a lot of things.">1.6.3. What Doesn't the Page Widget Do?</a></li>
+							<li><a href="#1_6_4" title="The page widget base class is implemented in the Uize.Widget.Page module.">1.6.4. Where is the Page Widget?</a></li>
+							<li><a href="#1_6_5" title="Any Web site is likely to have several subclasses of the Uize.Widget.Page class - likely even a small class hierarchy.">1.6.5. Your Own Page Widgets</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li><a href="#2">2. More on Widgets</a>
+				<ul>
+					<li><a href="#2_1" title="At some point, a widget is going to want to touch the DOM - especially if it wants to be at all useful.">2.1. Implied Nodes</a>
+						<ul>
+							<li><a href="#2_1_1" title="Implied nodes are DOM nodes that are expected by a widget class to exist in the document in order to support the functioning of instances of such a class.">2.1.1. What are These Implied Node Thingies?</a></li>
+							<li><a href="#2_1_2" title="The HTML markup for a widget instance may contain more DOM nodes than the widget&apos;s implementation knows - or cares - about.">2.1.2. Need-to-Know Basis</a></li>
+							<li><a href="#2_1_3" title="When it comes to widgets, the UIZE JavaScript Framework is predicated on the notion of unobtrusive JavaScript.">2.1.3. In the Spirit of Unobtrusive JavaScript</a></li>
+							<li><a href="#2_1_4" title="By now you&apos;re probably wondering how an instance of a widget class finds its implied nodes so it can then have its way with them.">2.1.4. How Are Implied Nodes Found?</a></li>
+							<li><a href="#2_1_5" title="The namespace for the implied nodes of a widget instance is controlled by the value of its idPrefix set-get property.">2.1.5. Widget Namespaces and the idPrefix</a></li>
+							<li><a href="#2_1_6" title="Different instances of the same widget class, but at different places on the widget tree, will have different idPrefix values that reflect where they reside on the tree.">2.1.6. Widget Namespaces and the Widget Tree</a></li>
+							<li><a href="#2_1_7" title="Not all of a widget class&apos; implied nodes are always required in order for an instance of the widget to function correctly.">2.1.7. Required vs. Optional Implied Nodes</a></li>
+							<li><a href="#2_1_8" title="Besides the implied nodes that are supported by subclasses of the Uize.Widget base class, the base class itself supports special implied nodes.">2.1.8. Special Implied Nodes</a>
+								<ul>
+									<li><a href="#2_1_8_1" title="The optional root node of a widget is the implied node with the name &apos;&apos; (empty string).">2.1.8.1. The Root Node</a></li>
+									<li><a href="#2_1_8_2" title="The optional shell implied node for a widget instance provides a &quot;slot&quot; in the document into which markup for that instance can be inserted.">2.1.8.2. The Shell Node</a></li>
+								</ul>
+							</li>
+							<li><a href="#2_1_9" title="References to the implied nodes of a widget instance can be obtained by calling the getNode instance method.">2.1.9. Accessing Implied Nodes</a></li>
+							<li><a href="#2_1_10" title="Various static methods of the Uize.Node module are exposed as instance methods of the Uize.Widget class.">2.1.10. Node Related Instance Methods</a>
+								<ul>
+									<li><a href="#2_1_10_1" title="Node related instance methods of the Uize.Widget class are named like their counterparts in the Uize.Node module, but with the word &quot;Node&quot; spliced in at an appropriate spot.">2.1.10.1. Naming Scheme for Node Related Instance Methods</a></li>
+									<li><a href="#2_1_10_2" title="The node related instance methods are provided as a convenience, as they are more concise and more semantically elegant.">2.1.10.2. Node Related Instance Methods Are More Concise</a></li>
+									<li><a href="#2_1_10_3" title="Most of the node related instance methods are straight mappings to their Uize.Node module counterparts, with the differences mentioned above in method name and how nodes are specified.">2.1.10.3. Straight Mappings, For the Most Part</a></li>
+								</ul>
+							</li>
+							<li><a href="#2_1_11" title="While implied nodes are typically specified by name when using the node related instance methods, one can also use references to them.">2.1.11. Implied Node Names vs. Node Ids</a></li>
+							<li><a href="#2_1_12" title="The Uize.Widget base class implements a system for caching references to implied nodes when they are first accessed.">2.1.12. The Node Cache</a>
+								<ul>
+									<li><a href="#2_1_12_1" title="Unlike with toilets, there are only a few rare instances where it is necessary to flush the node cache, and these typically involve more sophisticated widget implementations.">2.1.12.1. Don't Forget To Flush</a></li>
+									<li><a href="#2_1_12_2" title="Flushing the node cache for a widget instance is performed quite easily by calling the instance&apos;s flushNodeCache method.">2.1.12.2. How to Flush</a></li>
+									<li><a href="#2_1_12_3" title="In some cases, an implied node - or several implied nodes - may be added at some point after a widget has been wired up.">2.1.12.3. DOM Added Later</a></li>
+									<li><a href="#2_1_12_4" title="In some cases, one may wish to rebuild or otherwise modify the DOM for a widget, replacing one or more implied nodes for which references have already been cached.">2.1.12.4. DOM Rebuilt</a></li>
+									<li><a href="#2_1_12_5" title="In addition to being able to flush the node cache using the flushNodeCache method, the node cache is also automatically completely flushed in certain situations.">2.1.12.5. Automatic Flushing</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li><a href="#3">3. More on Child Widgets</a>
+				<ul>
+					<li><a href="#3_1" title="Child widgets are added to a widget using the addChild instance method, as in...">3.1. Adding Child Widgets</a></li>
+					<li><a href="#3_2" title="After the above code has executed, the newly added child widget can be referenced using your widget&apos;s children instance property, as in myWidget.children.childWidgetName.">3.2. Referencing Child Widgets</a></li>
+					<li><a href="#3_3" title="The child widget can be removed at a later stage using your widget&apos;s removeChild instance method, as in...">3.3. Removing Child Widgets</a></li>
+				</ul>
+			</li>
+			<li><a href="#4" title="A facility exists within the Uize.Widget.Page class for automatic adoption of child widgets that are declared inside a page using a special declarative syntax.">4. Widget Adoption</a>
+				<ul>
+					<li><a href="#4_1" title="The syntax for declaring a widget to adopt is as follows...">4.1. Declarative Syntax For Widget Adoption</a></li>
+					<li><a href="#4_2" title="When you add a child widget of the name &apos;slideShow&apos; to a page widget with the idPrefix of &apos;page&apos;, then the child widget&apos;s idPrefix is constructed to be &apos;page_slideShow&apos;.">4.2. The $[idPrefix] Syntax</a></li>
+					<li><a href="#4_3" title="A declarative syntax using JavaScript and JSON has some benefits over other approaches.">4.3. Benefits of Using JSON</a></li>
+					<li><a href="#4_4" title="The idPrefix for a widget you would like to be adopted lets you control where in the Widget Tree that the widget should be attached as a child.">4.4. Deep Adoption</a></li>
+					<li><a href="#4_5" title="There is also a more concise way of tackling the above use case by using the special children property of the widget properties object, as follows...">4.5. The children Property</a></li>
+					<li><a href="#4_6" title="Of course, you can mix and match both techniques for specifying where to attach adopted widgets, so the following code would have the same effect...">4.6. Mix-and-Match</a></li>
+					<li><a href="#4_7" title="Using the declarative syntax for widget adoption, it is possible to declare multiple widgets that should be spawned as children of a parent widget.">4.7. Declarative Spawning</a>
+						<ul>
+							<li><a href="#4_7_1" title="To indicate that multiple child widgets should be spawned, prefix the child widget name with &quot;$$&quot; (two dollar signs).">4.7.1. The $[parentName]_$$[childWidgetName] Syntax</a></li>
+							<li><a href="#4_7_2" title="The number of widgets spawned is determined by the value of the &quot;idPrefix&quot; property in the object that specifies the instance properties.">4.7.2. Special Meaning of idPrefix</a></li>
+							<li><a href="#4_7_3" title="To better understand the syntax for spawn declarations and how to use it, consider the following example...">4.7.3. An Example</a></li>
+							<li><a href="#4_7_4" title="In addition to being able to use The $[parentName]_$$[childWidgetName] Syntax for declaring widgets to be spawned, the name of child widgets can be prefixed with &quot;$$&quot; (two dollar signs) when declaring them using The children Property.">4.7.4. Spawning Using the children Property</a></li>
+							<li><a href="#4_7_5" title="The mechanism for spawning child widgets utilizes the Uize.Widget.spawn static method that is implemented in the Uize.Widget base class.">4.7.5. Uses the Uize.Widget.spawn Method</a></li>
+						</ul>
+					</li>
+					<li><a href="#4_8" title="In the event that a widget declared for adoption is already created by the page widget code, the existing instance will be retained and the properties declared for the widget in the adoption declaration will be set on the existing instance.">4.8. Set-get Properties Merge-in</a></li>
+					<li><a href="#4_9" title="A mechanism exists for filling in &quot;holes&quot; in the Widget Tree path in widget adoption declarations.">4.9. Vanilla Parent Widgets</a></li>
+					<li><a href="#4_10" title="There are some important considerations that should be kept in mind when using the widget adoption mechanism.">4.10. Important Considerations</a>
+						<ul>
+							<li><a href="#4_10_1" title="The widget adoption mechanism is implemented in the Uize.Widget.Page class.">4.10.1. You Need a Page Widget</a></li>
+							<li><a href="#4_10_2" title="Because of an issue in Internet Explorer, it is necessary to assign the $ declaration as a property on the window object.">4.10.2. Must Assign to window Object</a></li>
+							<li><a href="#4_10_3" title="The JavaScript code that declares the widgets to adopt should appear earlier in the page than the JavaScript code that wires up the page widget.">4.10.3. Declarations Must Occur Before Wiring Page Widget</a></li>
+							<li><a href="#4_10_4" title="The name you specify for the page widget in your child widget idPrefix must match the actual idPrefix that is set for the page widget, or your child widgets will not be adopted.">4.10.4. Must Match the Page Widget idPrefix</a></li>
+							<li><a href="#4_10_5" title="Because a widget to adopt may require JavaScript modules that aren&apos;t already loaded, instantiation of adopted widgets may be asynchronous.">4.10.5. Potentially Asynchronous</a></li>
+							<li><a href="#4_10_6" title="The spirit of the declarative syntax for widget adoption is to be declarative, so that no JavaScript modules need to be loaded in order to make the declaration - and it is a declaration of data and not code logic.">4.10.6. It's Declarative, So Avoid Relying on Modules</a></li>
+							<li><a href="#4_10_7" title="As mentioned earlier, the special properties widgetClass and children are reserved for the widget adoption mechanism.">4.10.7. Reserved Property Names</a></li>
+							<li><a href="#4_10_8" title="It does take a tiny bit of time for the page widget to scan through and discover widget adoption declarations.">4.10.8. Takes Time</a></li>
+						</ul>
+					</li>
+					<li><a href="#4_11" title="Adopted widgets maintain a loose / informal relationship with the page widget (or a page&apos;s code beside), from a code design perspective.">4.11. Relationship To Code Beside / Page Widget</a>
+						<ul>
+							<li><a href="#4_11_1" title="The declarative approach offers several benefits...">4.11.1. Benefits of Declarative Approach</a></li>
+							<li><a href="#4_11_2" title="The explicit approach for adding widgets to a page widget offers several benefits...">4.11.2. Benefits of Explicit Approach</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li><a href="#5">5. Developing Custom Widgets</a>
+				<ul>
+					<li><a href="#5_1" title="Before you go ahead and re-invent the wheel, try to leverage the foundation of existing widgets that have been implemented for the UIZE JavaScript Framework.">5.1. Build on the Foundation</a>
+						<ul>
+							<li><a href="#5_1_1" title="Or perhaps an existing widget could be the foundation of your new widget by using it as a superclass.">5.1.1. Subclassing An Existing Widget Class</a></li>
+							<li><a href="#5_1_2" title="If a widget already exists that almost meets your needs, perhaps it could be improved to have the new features or behaviors you require.">5.1.2. Modifying An Existing Widget Class</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li><a href="#6">6. Principles of Good Widget Design</a>
+				<ul>
+					<li><a href="#6_1" title="The updateUi method - as a general rule - should never be called by code that is using a particular widget. The code using a widget should not be responsible for knowing that the user interface of a widget needs to be updated. The code using a widget should only change state of a widget using the properties interface (or, in rare cases, special state setting combo methods). If a widget&apos;s state ...">6.1. Self-maintaining UI</a></li>
+					<li><a href="#6_2" title="All the state properties that influence a widget&apos;s UI should be maintained in the widget instance. In other words, parameters should not be used to qualify how a widget&apos;s UI is represented and then forgotten to the widget. So, at any given moment if a widget is coerced to regenerate its UI, the result should exactly match the last generated UI.">6.2. Recoverable UI</a></li>
+					<li><a href="#6_3" title="It should be possible to fully unwire and then rewire any widget.">6.3. Unwiring & Rewiring</a></li>
+					<li><a href="#6_4" title="Ideally, child widgets used by a widget are created when the widget is created and not only when the widget is wired, so that the child widgets can be accessed and their configuration modified immediately after a widget is created.">6.4. Immediate Child Widget Accessibility</a></li>
+					<li><a href="#6_5">6.5. Update Optimization</a>
+						<ul>
+							<li><a href="#6_5_1" title="Calling uodateUi on a widget should not result in any DOM updates is the state that would be reflected in the UI has not changed since the last time the UI was updated (ie. update optimization code should be implemented, and perhaps a mechanism provided to facilitate this).">6.5.1. No Unnecessary DOM Updates</a></li>
+							<li><a href="#6_5_2" title="Updating the UI should be optimized so that unnecessary redundant DOM updates are not performed for state that has not changed (ie. even if some state has changed, updating should be broken down into more granular units). A widget&apos;s UI generation code should be optimized such that subcomponents of the UI are only regenerated or refreshed if the state properties that relate to them have changed ...">6.5.2. Granular DOM Updates</a></li>
+							<li><a href="#6_5_3" title="Setting a widget repeatedly to the same state should not result in repeated redundant refreshes.">6.5.3. Deduplication of Updates</a></li>
+							<li><a href="#6_5_4" title="Changing the state of multiple properties that will affect a widget&apos;s UI in a batch set method call should only result in a single refresh.">6.5.4. Batched Update</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<a name="1"></a>
+	<h1 class="heading1" title="1. Introduction"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>. </span>Introduction</h1>
+	<div class="contents1">
+		<p>The UIZE JavaScript Framework provides a system to facilitate the development of behavioral logic for widgets that can be embedded in HTML pages.</p>
+		
+		<a name="1_1"></a>
+		<h2 class="heading2" title="1. Introduction -&gt; 1.1. The Uize.Widget Base Class"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. The Uize.Widget Base Class">1</a>. </span>The Uize.Widget Base Class</h2>
+		<div class="contents2">
+			<p>Widgets in the UIZE JavaScript Framework derive from the <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> base class.</p>
+			
+			<p>From the <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> base class, widgets of the UIZE JavaScript Framework inherit certain key facilities and capabilities that are commonly needed in their implementation. The fundamentals of widgetdom are wrapped up in this base class.</p>
+		</div>
+		
+		<a name="1_2"></a>
+		<h2 class="heading2" title="1. Introduction -&gt; 1.2. Widget Class Naming"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Widget Class Naming">2</a>. </span>Widget Class Naming</h2>
+		<div class="contents2">
+			<a name="1_2_1"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.2. Widget Class Naming -&gt; 1.2.1. UIZE Widgets"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Widget Class Naming">2</a>.<a href="#1_2_1" title="1. Introduction -&gt; 1.2. Widget Class Naming -&gt; 1.2.1. UIZE Widgets">1</a>. </span>UIZE Widgets</h3>
+			<div class="contents3">
+				<p>Because UIZE widgets inherit from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, the class files are typically named <code>Uize.Widget.*</code>, such as for example the <code><a href="../reference/Uize.Widget.Bar.Slider.html">Uize.Widget.Bar.Slider</a></code> widget class, which is a subclass of the <code><a href="../reference/Uize.Widget.Bar.html">Uize.Widget.Bar</a></code> widget class, which is a subclass of the <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> base class.</p>
+				
+				<p><span class="allCaps">SOME EXAMPLES OF WIDGET CLASS NAMES</span></p>
+				
+				
+<pre class="sample-code">Uize.Widget
+Uize.Widget.Bar.Slider
+Uize.Widget.Button
+Uize.Widget.Calendar
+Uize.Widget.ImageWipe
+Uize.Widget.Options
+Uize.Widget.Options.Tabbed
+Uize.Widget.Tree
+Uize.Widget.Tree.List
+Uize.Widget.Tree.Menu
+</pre>
+			</div>
+			
+			<a name="1_2_2"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.2. Widget Class Naming -&gt; 1.2.2. Custom Namespaces"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Widget Class Naming">2</a>.<a href="#1_2_2" title="1. Introduction -&gt; 1.2. Widget Class Naming -&gt; 1.2.2. Custom Namespaces">2</a>. </span>Custom Namespaces</h3>
+			<div class="contents3">
+				<p>It is not required to place widget classes under the <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> namespace. The <a href="http://www.zazzle.com" target="_blank" class="externalSiteLink">Zazzle Inc.</a> Web site, for example, implements a large number of custom widgets that are placed under their own <code>Zazzle</code> namespace, such as <code>Zazzle.ControlMove</code>, <code>Zazzle.ControlNumber</code>, <code>Zazzle.GridCell</code>, etc.</p>
+			</div>
+		</div>
+		
+		<a name="1_3"></a>
+		<h2 class="heading2" title="1. Introduction -&gt; 1.3. Meet the Widgets"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_3" title="1. Introduction -&gt; 1.3. Meet the Widgets">3</a>. </span>Meet the Widgets</h2>
+		<div class="contents2">
+			<p>The UIZE JavaScript Framework comes packed with scores of built in widgets.</p>
+			
+			<p>These built in widgets include the calendar widget, the scrolly widget, the thumb zoom widget, the slider widget, the bar widget, the image port widget, the marquee widget, the window widget, the accordion widget, the tree menu widget, the tree list widget, the slide show widget, the egg timer widget, the collection widget... the list goes on and on. And new widgets are being developed all the time. Feel free to use these widgets in your own Web applications, or reference their source code for a guide on how to implement your own UIZE widgets. To get a sense of all the available widgets and how they may be used, take a swing through the many examples provided.</p>
+		</div>
+		
+		<a name="1_4"></a>
+		<h2 class="heading2" title="1. Introduction -&gt; 1.4. Every Widget Can Have Children"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_4" title="1. Introduction -&gt; 1.4. Every Widget Can Have Children">4</a>. </span>Every Widget Can Have Children</h2>
+		<div class="contents2">
+			<p>Every widget can own child widgets to support its implementation.</p>
+			
+			<p>The widget architecture of the UIZE JavaScript Framework makes it possible to conveniently build new widgets that use other existing widgets in their implementation, in the form of child widgets. Every widget can be a parent to an unlimited number of children. The <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> base class implements mechanisms that provide value to the parent-child relationship.</p>
+		</div>
+		
+		<a name="1_5"></a>
+		<h2 class="heading2" title="1. Introduction -&gt; 1.5. Widget Tree"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_5" title="1. Introduction -&gt; 1.5. Widget Tree">5</a>. </span>Widget Tree</h2>
+		<div class="contents2">
+			<p>Because every widget can have child widgets, this makes it possible to have a hierarchical tree of widgets.</p>
+			
+			<p>Not to be confused with "widgetry" (which we do a lot of in the UIZE JavaScript Framework), the inherent parent-child relationship of widgets in the UIZE JavaScript Framework means that one can construct an arbitrarily complex "tree" of widgets.</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">page
+page.children.colorPicker
+page.children.colorPicker.children.sliderR
+page.children.colorPicker.children.sliderG
+page.children.colorPicker.children.sliderB
+</pre>
+			
+			<p>The above representation depicts a widget tree with a <code>page</code> widget instance at the root of the tree. The <code>page</code> widget instance has one child widget, named <code>colorPicker</code>, which is an instance of the <code><a href="../reference/Uize.Widget.ColorPicker.html">Uize.Widget.ColorPicker</a></code> class. The <code>colorPicker</code> widget has three child widgets - <code>sliderR</code>, <code>sliderG</code>, and <code>sliderB</code> - which are added in the implementation of the <code><a href="../reference/Uize.Widget.ColorPicker.html">Uize.Widget.ColorPicker</a></code> class.</p>
+			
+			<p>The hierarchical nature of the widget tree brings the same kinds of benefits to the use of widgets in an application as the Document Object Model brings to document structure, or nested encapsulation brings to good functional programming, or folder structure brings to file management. Hierarchy is a pervasive phenomenon in complex systems of all kinds, and the widgets want some of that sweet hierarchy juice as well.</p>
+		</div>
+		
+		<a name="1_6"></a>
+		<h2 class="heading2" title="1. Introduction -&gt; 1.6. Page Widget"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_6" title="1. Introduction -&gt; 1.6. Page Widget">6</a>. </span>Page Widget</h2>
+		<div class="contents2">
+			<a name="1_6_1"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.6. Page Widget -&gt; 1.6.1. What is the Page Widget?"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_6" title="1. Introduction -&gt; 1.6. Page Widget">6</a>.<a href="#1_6_1" title="1. Introduction -&gt; 1.6. Page Widget -&gt; 1.6.1. What is the Page Widget?">1</a>. </span>What is the Page Widget?</h3>
+			<div class="contents3">
+				<p>In the UIZE JavaScript Framework, the page is a widget too.</p>
+				
+				<p>Yes, the whole Web page is considered a widget. A revolutionary concept, perhaps. Because the widget framework of UIZE supports a hierarchical structure for widgets (the <a href="#1_5">Widget Tree</a>), the most logical thing to put at the root of that tree on a Web page is a widget that represents the page. In this way, the widget tree is analogous to - but not identical to - the DOM structure, and the page widget is to the widget tree as <code>documentElement</code> is to the DOM hierarchy of a document.</p>
+			</div>
+			
+			<a name="1_6_2"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.6. Page Widget -&gt; 1.6.2. What Does the Page Widget Do?"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_6" title="1. Introduction -&gt; 1.6. Page Widget">6</a>.<a href="#1_6_2" title="1. Introduction -&gt; 1.6. Page Widget -&gt; 1.6.2. What Does the Page Widget Do?">2</a>. </span>What Does the Page Widget Do?</h3>
+			<div class="contents3">
+				<p>The page widget provides an environment and services that can be relied upon by child widgets in its tree.</p>
+				
+				<p>As the root parent of the <a href="#1_5">Widget Tree</a>, the page widget gets to provide to all widgets on the tree:</p>
+				
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>useful context (such as environment variables)</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>useful facilities (such as decorated alert/confirmation dialogs, methods for generating URLs for the site, localization resources, etc.)</td></tr>
+				</table>
+				<p>Facilities provided by the page widget are available to child widgets via their <code>getInherited</code> and <code>callInherited</code> instance methods. The page widget base class also implements a <a href="#4">Widget Adoption</a> mechanism that allows child widgets to be declared in the page's markup using a purely declarative syntax (ie. requiring no JavaScript to be previously loaded).</p>
+			</div>
+			
+			<a name="1_6_3"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.6. Page Widget -&gt; 1.6.3. What Doesn&apos;t the Page Widget Do?"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_6" title="1. Introduction -&gt; 1.6. Page Widget">6</a>.<a href="#1_6_3" title="1. Introduction -&gt; 1.6. Page Widget -&gt; 1.6.3. What Doesn&apos;t the Page Widget Do?">3</a>. </span>What Doesn't the Page Widget Do?</h3>
+			<div class="contents3">
+				<p>The page widget doesn't do a lot of things.</p>
+				
+				<p>The page widget paradigm is a progressive / opt-in design pattern for a page's client code. The UIZE JavaScript Framework doesn't presume that all aspects of a page's functionality need to be under the purview of - or even known about by - the page widget.</p>
+				
+				<p>Ideally, functionality can be migrated into the page widget as it proves convenient to do so, and as the benefits of doing so prove compelling. However, a pragmatic approach is to expect that aspects of what appear in a page will remain the domain of middle tier code, or even that some aspects of client interaction may be controlled by other non-UIZE JavaScript code, such as code using aspects of other JavaScript frameworks, widgets or utilities from other providers, proprietary JavaScript code not written according to the UIZE model, or just legacy JavaScript code.</p>
+				
+				<p>Essentially, as the page widget model proves useful in your Web applications, your own page widget subclasses will gather more functionality over time.</p>
+			</div>
+			
+			<a name="1_6_4"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.6. Page Widget -&gt; 1.6.4. Where is the Page Widget?"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_6" title="1. Introduction -&gt; 1.6. Page Widget">6</a>.<a href="#1_6_4" title="1. Introduction -&gt; 1.6. Page Widget -&gt; 1.6.4. Where is the Page Widget?">4</a>. </span>Where is the Page Widget?</h3>
+			<div class="contents3">
+				<p>The page widget base class is implemented in the <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code> module.</p>
+			</div>
+			
+			<a name="1_6_5"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.6. Page Widget -&gt; 1.6.5. Your Own Page Widgets"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_6" title="1. Introduction -&gt; 1.6. Page Widget">6</a>.<a href="#1_6_5" title="1. Introduction -&gt; 1.6. Page Widget -&gt; 1.6.5. Your Own Page Widgets">5</a>. </span>Your Own Page Widgets</h3>
+			<div class="contents3">
+				<p>Any Web site is likely to have several subclasses of the <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code> class - likely even a small class hierarchy.</p>
+				
+				<p>For example, the <a href="http://www.zazzle.com" target="_blank" class="externalSiteLink">Zazzle Inc.</a> Web site implements its own <code>Zazzle.Page</code> page widget class, that is a subclass of <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code>. To get an idea of how the page widget paradigm is applied to a real world project, take a look at the module reference for the <code><a href="../reference/UizeDotCom.Page.html">UizeDotCom.Page</a></code> class and all its subclasses.</p>
+				
+				<p>The <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code> base class provides some base functionality. You will likely want to create a subclass of <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code>, in a namespace appropriate for your site, and then use that in all your pages. That's a good starting point, even if your subclass adds no additional functionality initially. In time, you will find that your page widget class is a useful place to put functionality that needs to be available to many widgets that may exist at different places in the <a href="#1_5">Widget Tree</a>.</p>
+				
+				<p>You may also find yourself creating subclasses of your page widget base class, for the pages of different sections of your Web site. If a lot of pages in a section share common functionality, then you can implement that functionality in a page widget subclass. This may involve adding and connecting up child widgets to support certain features for those pages. This provides an object oriented approach for designing the shared functionality of pages in different sections, rather than employing the typical ad hoc, source-in-shared-snippets approach.</p>
+			</div>
+		</div>
+	</div>
+	
+	<a name="2"></a>
+	<h1 class="heading1" title="2. More on Widgets"><span class="headingNumber"><a href="#2" title="2. More on Widgets">2</a>. </span>More on Widgets</h1>
+	<div class="contents1">
+		<a name="2_1"></a>
+		<h2 class="heading2" title="2. More on Widgets -&gt; 2.1. Implied Nodes"><span class="headingNumber"><a href="#2" title="2. More on Widgets">2</a>.<a href="#2_1" title="2. More on Widgets -&gt; 2.1. Implied Nodes">1</a>. </span>Implied Nodes</h2>
+		<div class="contents2">
+			<p>At some point, a widget is going to want to touch the DOM - especially if it wants to be at all useful.</p>
+			
+			<p>The UIZE JavaScript Framework provides a facility for associating DOM nodes in a document to corresponding widget instances. Using this facility in the design of widget classes allows multiple instances of such classes to coexist in the same page together, without stomping on each other's nodes (yes, it sounds painful, I know). This facility is referred to as the system of "implied nodes".</p>
+			
+			<a name="2_1_1"></a>
+			<h3 class="heading3" title="2. More on Widgets -&gt; 2.1. Implied Nodes -&gt; 2.1.1. What are These Implied Node Thingies?"><span class="headingNumber"><a href="#2" title="2. More on Widgets">2</a>.<a href="#2_1" title="2. More on Widgets -&gt; 2.1. Implied Nodes">1</a>.<a href="#2_1_1" title="2. More on Widgets -&gt; 2.1. Implied Nodes -&gt; 2.1.1. What are These Implied Node Thingies?">1</a>. </span>What are These Implied Node Thingies?</h3>
+			<div class="contents3">
+				<p>Implied nodes are DOM nodes that are expected by a widget class to exist in the document in order to support the functioning of instances of such a class.</p>
+				
+				<p>They are "implied" because the implementation of a widget class implies their presence in the DOM. The vast majority of widget classes are implemented to expect the existence of certain nodes in the DOM. For example, the slider class (<code><a href="../reference/Uize.Widget.Bar.Slider.html">Uize.Widget.Bar.Slider</a></code>) anticipates the presence of the <code>track</code>, <code>knob</code>, <code>empty</code>, <code>full</code>, and <code>value</code>, and root (blank) implied nodes.</p>
+			</div>
+			
+			<a name="2_1_2"></a>
+			<h3 class="heading3" title="2. More on Widgets -&gt; 2.1. Implied Nodes -&gt; 2.1.2. Need-to-Know Basis"><span class="headingNumber"><a href="#2" title="2. More on Widgets">2</a>.<a href="#2_1" title="2. More on Widgets -&gt; 2.1. Implied Nodes">1</a>.<a href="#2_1_2" title="2. More on Widgets -&gt; 2.1. Implied Nodes -&gt; 2.1.2. Need-to-Know Basis">2</a>. </span>Need-to-Know Basis</h3>
+			<div class="contents3">
+				<p>The HTML markup for a widget instance may contain more DOM nodes than the widget's implementation knows - or cares - about.</p>
+				
+				<p>To a widget class, all HTML outside of the implied nodes that its implementation cares about is like dark matter in the Universe. A widget class doesn't need to know about all the bells and whistles that may be added to the decoration of a widget through the addition of further extraneous layout HTML. This allows flexibility in the choice of layout implementation for widgets, since widgets don't presume an exact DOM structure for their HTML - they only expect certain implied nodes, to which they will attach behavior logic.</p>
+			</div>
+			
+			<a name="2_1_3"></a>
+			<h3 class="heading3" title="2. More on Widgets -&gt; 2.1. Implied Nodes -&gt; 2.1.3. In the Spirit of Unobtrusive JavaScript"><span class="headingNumber"><a href="#2" title="2. More on Widgets">2</a>.<a href="#2_1" title="2. More on Widgets -&gt; 2.1. Implied Nodes">1</a>.<a href="#2_1_3" title="2. More on Widgets -&gt; 2.1. Implied Nodes -&gt; 2.1.3. In the Spirit of Unobtrusive JavaScript">3</a>. </span>In the Spirit of Unobtrusive JavaScript</h3>
+			<div class="contents3">
+				<p>When it comes to widgets, the UIZE JavaScript Framework is predicated on the notion of unobtrusive JavaScript.</p>
+				
+				<p>The GLUE (Glue Logic Upon Elements) paradigm means that the HTML for widgets contains no inline event handlers. Instead, all the behavior logic for widgets is neatly consolidated into JavaScript modules. As external files, code for widget classes can be scrunched and is cacheable. This approach also frees up designers and Web developers to work on the HTML layout and CSS separately from an interaction programmer, and without having to worry about potentially breaking behavior logic. This design strategy is sometimes referred to as the <a href="http://en.wikipedia.org/wiki/Separation_of_concerns" target="_blank" class="externalSiteLink">separation of concerns</a>.</p>
+				
+				<p>Now, when an instance of a widget class is created and its user interface is wired up, the implied nodes of the widget may be wired up with event handlers, and properties of these nodes might be modified in order to correctly reflect current state for the widget.</p>
+			</div>
+			
+			<a name="2_1_4"></a>
+			<h3 class="heading3" title="2. More on Widgets -&gt; 2.1. Implied Nodes -&gt; 2.1.4. How Are Implied Nodes Found?"><span class="headingNumber"><a href="#2" title="2. More on Widgets">2</a>.<a href="#2_1" title="2. More on Widgets -&gt; 2.1. Implied Nodes">1</a>.<a href="#2_1_4" title="2. More on Widgets -&gt; 2.1. Implied Nodes -&gt; 2.1.4. How Are Implied Nodes Found?">4</a>. </span>How Are Implied Nodes Found?</h3>
+			<div class="contents3">
+				<p>By now you're probably wondering how an instance of a widget class finds its implied nodes so it can then have its way with them.</p>
+				
+				<p>The UIZE JavaScript Framework relies upon node ids for identifying implied nodes of widgets. The <code>id</code> system is largely orthogonal to document structure and document styling. Although ids <b>are</b> used at times for narrowly selecting very specific nodes for styling, the rather compelling benefits of reusability means that CSS style sheets tend to rely more heavily on class names, tag names, and structure relationships for selecting nodes in their style rules. By using the <code>id</code> system, widgets can minimize competition with the interests of designers and Web devs. Since id-based wiring is a core tenet of the framework, CSS selectors are not necessary for finding nodes that belong to widget instances.</p>
+			</div>
+			
+			<a name="2_1_5"></a>
+			<h3 class="heading3" title="2. More on Widgets -&gt; 2.1. Implied Nodes -&gt; 2.1.5. Widget Namespaces and the idPrefix"><span class="headingNumber"><a href="#2" title="2. More on Widgets">2</a>.<a href="#2_1" title="2. More on Widgets -&gt; 2.1. Implied Nodes">1</a>.<a href="#2_1_5" title="2. More on Widgets -&gt; 2.1. Implied Nodes -&gt; 2.1.5. Widget Namespaces and the idPrefix">5</a>. </span>Widget Namespaces and the idPrefix</h3>
+			<div class="contents3">
+				<p>The namespace for the implied nodes of a widget instance is controlled by the value of its <code>idPrefix</code> set-get property.</p>
+				
+				<p>The <code>idPrefix</code> is just what it sounds like it is: it's the prefix for the ids of all implied nodes that the widget may have. The ids for implied nodes of a widget are named according to the following rule...</p>
+				
+				<p><span class="allCaps">IMPLIED NODE ID SYNTAX</span></p>
+				
+				
+<pre class="sample-code">[idPrefix]-[impliedNodeName]
+</pre>
+				
+				<p>The <code>idPrefix</code> and implied node name are joined with a "-" (hyphen) character. For example, this means that an instance of the slider class (<code><a href="../reference/Uize.Widget.Bar.Slider.html">Uize.Widget.Bar.Slider</a></code>) with its <code>idPrefix</code> set to the value <code>'mySlider'</code> would have the following ids for its implied nodes...</p>
+				
+				
+<pre class="sample-code">mySlider        // root node
+mySlider-track
+mySlider-knob
+mySlider-empty
+mySlider-full
+mySlider-value
+</pre>
+				
+				<p>The <code>idPrefix</code> acts as a namespace, allowing the same implied nodes to appear multiple times in the DOM for different instances of the same widget class. Setting different <code>idPrefix</code> values for the different instances of the widget prevents the ids for the implied nodes of those instances from having conflicts. For example, if you had two instances of the slider class, one with an <code>idPrefix</code> of <code>'mySlider1'</code>, and the other with an <code>idPrefix</code> of <code>'mySlider2'</code>, then the two instances would have the following ids for their implied nodes...</p>
+				
+				
+<pre class="sample-code">mySlider1        // root node of mySlider1
+mySlider1-track
+mySlider1-knob
+mySlider1-empty
+mySlider1-full
+mySlider1-value
+mySlider2        // root node of mySlider2
+mySlider2-track
+mySlider2-knob
+mySlider2-empty
+mySlider2-full
+mySlider2-value
+</pre>
+				
+				<p><span class="allCaps">IMPORTANT</span></p>
+				
+				<p>In order for widgets to work correctly, two different widget instances should never have the same value for their <code>idPrefix</code> property.</p>
+			</div>
+			
+			<a name="2_1_6"></a>
+			<h3 class="heading3" title="2. More on Widgets -&gt; 2.1. Implied Nodes -&gt; 2.1.6. Widget Namespaces and the Widget Tree"><span class="headingNumber"><a href="#2" title="2. More on Widgets">2</a>.<a href="#2_1" title="2. More on Widgets -&gt; 2.1. Implied Nodes">1</a>.<a href="#2_1_6" title="2. More on Widgets -&gt; 2.1. Implied Nodes -&gt; 2.1.6. Widget Namespaces and the Widget Tree">6</a>. </span>Widget Namespaces and the Widget Tree</h3>
+			<div class="contents3">
+				<p>Different instances of the same widget class, but at different places on the widget tree, will have different <code>idPrefix</code> values that reflect where they reside on the tree.</p>
+				
+				<p>When adding a child widget to a parent widget, the <code>idPrefix</code> value for the child widget is derived by combining the <code>idPrefix</code> of the parent widget with the name of the child widget, according to the following rule...</p>
+				
+				<p><span class="allCaps">CHILD WIDGET ID PREFIX NAMING</span></p>
+				
+				
+<pre class="sample-code">[parentIdPrefix]_[childWidgetName]
+</pre>
+				
+				<p>The <code>idPrefix</code> of the parent widget and the name of the child widget are joined with a "_" (underscore) character to form an <code>idPrefix</code> for the child widget. For example, this means that an instance of the slider class that was added as a child widget to an instance of the page widget class (<code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code>), where the <code>idPrefix</code> of the page widget instance is <code>'page'</code> and where the name of the slider child widget is <code>'mySlider'</code>, would have the following ids for its implied nodes...</p>
+				
+				
+<pre class="sample-code">page_mySlider        // root node of page.children.mySlider
+page_mySlider-track
+page_mySlider-knob
+page_mySlider-empty
+page_mySlider-full
+page_mySlider-value
+</pre>
+				
+				<p>Looking at the ids in the HTML, you can tell what part of the id "path" is the implied node, and what part is the parent chain. Underscores separate the names of widgets along the parent chain, and the hyphen terminates the parent chain to indicate an implied node of the last child widget in that chain.</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">// create an instance of the page widget class
+var pageWidget = new Uize.Widget.Page ({idPrefix:'page'});
+
+// add a slider child widget to the page widget
+pageWidget.addChild ('slider',Uize.Widget.Bar.Slider);
+
+// add a plain vanilla child widget
+var plainWidget = pageWidget.addChild ('plain',Uize.Widget)
+
+// now add a slider child widget to the plain vanilla widget
+plainWidget.addChild ('slider',Uize.Widget.Bar.Slider);
+</pre>
+				
+				<p>The above example would produce the following set of implied node ids for the four widgets involved...</p>
+				
+				
+<pre class="sample-code">page                      // root node of page widget instance
+page_slider               // root node of page.children.slider
+page_slider-track
+page_slider-knob
+page_slider-empty
+page_slider-full
+page_slider-value
+page_plain                // root node of page.children.plain
+page_plain_slider         // root node of page.children.plain.children.slider
+page_plain_slider-track
+page_plain_slider-knob
+page_plain_slider-empty
+page_plain_slider-full
+page_plain_slider-value
+</pre>
+				
+				<p>As you can see from the above example, different child widgets <b>can</b> have the same name, as long as they reside at different places on the widget tree. In this case, there are two slider instances with the name <code>'slider'</code>, but one is a child of the page widget, and the other is a child of the deeper plain vanilla widget.</p>
+			</div>
+			
+			<a name="2_1_7"></a>
+			<h3 class="heading3" title="2. More on Widgets -&gt; 2.1. Implied Nodes -&gt; 2.1.7. Required vs. Optional Implied Nodes"><span class="headingNumber"><a href="#2" title="2. More on Widgets">2</a>.<a href="#2_1" title="2. More on Widgets -&gt; 2.1. Implied Nodes">1</a>.<a href="#2_1_7" title="2. More on Widgets -&gt; 2.1. Implied Nodes -&gt; 2.1.7. Required vs. Optional Implied Nodes">7</a>. </span>Required vs. Optional Implied Nodes</h3>
+			<div class="contents3">
+				<p>Not all of a widget class' implied nodes are always required in order for an instance of the widget to function correctly.</p>
+				
+				<p>Some implied nodes may be deliberately implemented to be optional in the markup. For example, in the case of the slider widget class (<code><a href="../reference/Uize.Widget.Bar.Slider.html">Uize.Widget.Bar.Slider</a></code>), the <code>track</code> and <code>knob</code> implied nodes are required, while the <code>empty</code>, <code>full</code>, and <code>value</code> implied nodes are optional. Widgets with optional implied nodes are implemented so that they fail gracefully when those nodes are not present in the markup. To find out which implied nodes are required and which ones are optional for a particular widget class, consult the reference documentation for the class.</p>
+			</div>
+			
+			<a name="2_1_8"></a>
+			<h3 class="heading3" title="2. More on Widgets -&gt; 2.1. Implied Nodes -&gt; 2.1.8. Special Implied Nodes"><span class="headingNumber"><a href="#2" title="2. More on Widgets">2</a>.<a href="#2_1" title="2. More on Widgets -&gt; 2.1. Implied Nodes">1</a>.<a href="#2_1_8" title="2. More on Widgets -&gt; 2.1. Implied Nodes -&gt; 2.1.8. Special Implied Nodes">8</a>. </span>Special Implied Nodes</h3>
+			<div class="contents3">
+				<p>Besides the implied nodes that are supported by subclasses of the <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> base class, the base class itself supports special implied nodes.</p>
+				
+				<a name="2_1_8_1"></a>
+				<h4 class="heading4" title="2. More on Widgets -&gt; 2.1. Implied Nodes -&gt; 2.1.8. Special Implied Nodes -&gt; 2.1.8.1. The Root Node"><span class="headingNumber"><a href="#2" title="2. More on Widgets">2</a>.<a href="#2_1" title="2. More on Widgets -&gt; 2.1. Implied Nodes">1</a>.<a href="#2_1_8" title="2. More on Widgets -&gt; 2.1. Implied Nodes -&gt; 2.1.8. Special Implied Nodes">8</a>.<a href="#2_1_8_1" title="2. More on Widgets -&gt; 2.1. Implied Nodes -&gt; 2.1.8. Special Implied Nodes -&gt; 2.1.8.1. The Root Node">1</a>. </span>The Root Node</h4>
+				<div class="contents4">
+					<p>The optional root node of a widget is the implied node with the name <code>''</code> (empty string).</p>
+					
+					<p>The <code>id</code> for the root node of a widget instance is the value of that instance's <code>idPrefix</code> set-get property - there is no "-" (hyphen) separating the <code>idPrefix</code> and the empty implied node name. So, for an instance of the slider class with its <code>idPrefix</code> set to the value <code>'mySlider'</code>, the id of that instance's root node would be just <code>mySlider</code>. If you're looking at an implied node in the HTML and there's no hyphen character in its id, then you know you're dealing with the root node for a widget instance.</p>
+					
+					<p>A reference to the root node can be obtained by either specifying the value <code>''</code> (empty string) or no <code>impliedNodeSTRorBLOB</code> parameter when calling the <code>getNode</code> instance method, as in...</p>
+					
+					
+<pre class="sample-code">var theRootNode = myWidget.getNode ();
+var alsoTheRootNode = myWidget.getNode ('');
+</pre>
+					
+					<p>Similarly, when using the <a href="#2_1_10">Node Related Instance Methods</a>, one can specify the value <code>''</code> (empty string), as in...</p>
+					
+					
+<pre class="sample-code">myWidget.displayNode ('',false); // hide myWidget, if it has a root node in its HTML
+</pre>
+				</div>
+				
+				<a name="2_1_8_2"></a>
+				<h4 class="heading4" title="2. More on Widgets -&gt; 2.1. Implied Nodes -&gt; 2.1.8. Special Implied Nodes -&gt; 2.1.8.2. The Shell Node"><span class="headingNumber"><a href="#2" title="2. More on Widgets">2</a>.<a href="#2_1" title="2. More on Widgets -&gt; 2.1. Implied Nodes">1</a>.<a href="#2_1_8" title="2. More on Widgets -&gt; 2.1. Implied Nodes -&gt; 2.1.8. Special Implied Nodes">8</a>.<a href="#2_1_8_2" title="2. More on Widgets -&gt; 2.1. Implied Nodes -&gt; 2.1.8. Special Implied Nodes -&gt; 2.1.8.2. The Shell Node">2</a>. </span>The Shell Node</h4>
+				<div class="contents4">
+					<p>The optional <code>shell</code> implied node for a widget instance provides a "slot" in the document into which markup for that instance can be inserted.</p>
+					
+					<p>The following example illustrates use of the <code>shell</code> implied node by showing some HTML before and after a widget instance is set up. The widget instance that is created is a plain vanilla widget (ie. an instance of the <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> base class), with its <code>idPrefix</code> set to the value <code>'myWidget'</code>.</p>
+					
+					<p><span class="allCaps">HTML BEFORE</span></p>
+					
+					
+<pre class="sample-code">&lt;div id="myWidget-shell"&gt;
+&lt;/div&gt;
+</pre>
+					
+					<p><span class="allCaps">WIDGET SETUP</span></p>
+					
+					
+<pre class="sample-code">// create a plain vanilla widget instance
+var myWidget = new Uize.Widget ({
+  idPrefix:'myWidget',
+  html:'&lt;div id="myWidget"&gt;I CRAWLED INTO MY SHELL&lt;/div&gt;'
+});
+
+// insert the UI for the widget
+myWidget.insertUi ();
+</pre>
+					
+					<p><span class="allCaps">HTML AFTER</span></p>
+					
+					
+<pre class="sample-code">&lt;div id="myWidget-shell"&gt;
+  &lt;div id="myWidget"&gt;I CRAWLED INTO MY SHELL&lt;/div&gt;
+&lt;/div&gt;
+</pre>
+				</div>
+			</div>
+			
+			<a name="2_1_9"></a>
+			<h3 class="heading3" title="2. More on Widgets -&gt; 2.1. Implied Nodes -&gt; 2.1.9. Accessing Implied Nodes"><span class="headingNumber"><a href="#2" title="2. More on Widgets">2</a>.<a href="#2_1" title="2. More on Widgets -&gt; 2.1. Implied Nodes">1</a>.<a href="#2_1_9" title="2. More on Widgets -&gt; 2.1. Implied Nodes -&gt; 2.1.9. Accessing Implied Nodes">9</a>. </span>Accessing Implied Nodes</h3>
+			<div class="contents3">
+				<p>References to the implied nodes of a widget instance can be obtained by calling the <code>getNode</code> instance method.</p>
+				
+				<p><span class="allCaps">SYNTAX</span></p>
+				
+				
+<pre class="sample-code">nodeOBJ = myWidget.getNode (impliedNodeSTRorBLOB);
+</pre>
+				
+				<p>Additionally, the <a href="#2_1_10">Node Related Instance Methods</a> of the <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> class allow implied nodes to be specified by their name, so it is <b>not</b> necessary in most cases to even use the <code>getNode</code> method when using these node related instance methods. However, the <code>getNode</code> method <b>is</b> quite useful for other methods - possibly outside of the <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> class - that deal in node references. This is true of some of the static methods in the <code><a href="../reference/Uize.Node.html">Uize.Node</a></code> module, since not all of the static methods of this module have analogs in the <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> class - only the most generally useful ones do.</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">// create a plain vanilla widget instance
+var myWidget = new Uize.Widget ({idPrefix:'myWidget'});
+
+// inject some HTML into the document for the widget instance
+Uize.Node.injectHtml (
+  document.body,
+  '&lt;span id="myWidget-title"&gt;this is the title implied node&lt;/span&gt;'
+);
+
+// change the title's text color and background color to white over black
+myWidget.setNodeStyle ('title',{color:'#fff',backgroudColor:'#000'});
+
+// or, get a reference to the "title" implied node, to be used later
+var myWidgetTitleNode = myWidget.getNode ('title');
+</pre>
+				
+				<p>The above example illustrates both specifying an implied node by name when using the <code>setNodeStyle</code> node related instance method, as well as getting a reference to a node using the <code>getNode</code> method.</p>
+			</div>
+			
+			<a name="2_1_10"></a>
+			<h3 class="heading3" title="2. More on Widgets -&gt; 2.1. Implied Nodes -&gt; 2.1.10. Node Related Instance Methods"><span class="headingNumber"><a href="#2" title="2. More on Widgets">2</a>.<a href="#2_1" title="2. More on Widgets -&gt; 2.1. Implied Nodes">1</a>.<a href="#2_1_10" title="2. More on Widgets -&gt; 2.1. Implied Nodes -&gt; 2.1.10. Node Related Instance Methods">10</a>. </span>Node Related Instance Methods</h3>
+			<div class="contents3">
+				<p>Various static methods of the <code><a href="../reference/Uize.Node.html">Uize.Node</a></code> module are exposed as instance methods of the <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> class.</p>
+				
+				<p>The node related instance methods of the <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> class differ from their counterparts in the <code><a href="../reference/Uize.Node.html">Uize.Node</a></code> module in the following key ways:</p>
+				
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;">1) </span></td><td>they are named differently</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;">2) </span></td><td>string values for nodes are implied node names, rather than node ids</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;">3) </span></td><td>some <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> class counterparts provide additional logic</td></tr>
+				</table>
+				<a name="2_1_10_1"></a>
+				<h4 class="heading4" title="2. More on Widgets -&gt; 2.1. Implied Nodes -&gt; 2.1.10. Node Related Instance Methods -&gt; 2.1.10.1. Naming Scheme for Node Related Instance Methods"><span class="headingNumber"><a href="#2" title="2. More on Widgets">2</a>.<a href="#2_1" title="2. More on Widgets -&gt; 2.1. Implied Nodes">1</a>.<a href="#2_1_10" title="2. More on Widgets -&gt; 2.1. Implied Nodes -&gt; 2.1.10. Node Related Instance Methods">10</a>.<a href="#2_1_10_1" title="2. More on Widgets -&gt; 2.1. Implied Nodes -&gt; 2.1.10. Node Related Instance Methods -&gt; 2.1.10.1. Naming Scheme for Node Related Instance Methods">1</a>. </span>Naming Scheme for Node Related Instance Methods</h4>
+				<div class="contents4">
+					<p>Node related instance methods of the <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> class are named like their counterparts in the <code><a href="../reference/Uize.Node.html">Uize.Node</a></code> module, but with the word "Node" spliced in at an appropriate spot.</p>
+					
+					<p><span class="allCaps">EXAMPLES</span></p>
+					
+					
+<pre class="sample-code">Uize.Node                     Uize.Widget
+---------                     -----------
+Uize.Node.display             myWidget.displayNode
+Uize.Node.getStyle            myWidget.getNodeStyle
+Uize.Node.getValue            myWidget.getNodeValue
+Uize.Node.remove              myWidget.removeNode
+Uize.Node.setClipRect         myWidget.setNodeClipRect
+Uize.Node.setInnerHtml        myWidget.setNodeInnerHtml
+Uize.Node.setOpacity          myWidget.setNodeOpacity
+Uize.Node.setProperties       myWidget.setNodeProperties
+Uize.Node.setValue            myWidget.setNodeValue
+Uize.Node.show                myWidget.showNode
+Uize.Node.wire                myWidget.wireNode
+Uize.Node.unwire              myWidget.unwireNode
+</pre>
+				</div>
+				
+				<a name="2_1_10_2"></a>
+				<h4 class="heading4" title="2. More on Widgets -&gt; 2.1. Implied Nodes -&gt; 2.1.10. Node Related Instance Methods -&gt; 2.1.10.2. Node Related Instance Methods Are More Concise"><span class="headingNumber"><a href="#2" title="2. More on Widgets">2</a>.<a href="#2_1" title="2. More on Widgets -&gt; 2.1. Implied Nodes">1</a>.<a href="#2_1_10" title="2. More on Widgets -&gt; 2.1. Implied Nodes -&gt; 2.1.10. Node Related Instance Methods">10</a>.<a href="#2_1_10_2" title="2. More on Widgets -&gt; 2.1. Implied Nodes -&gt; 2.1.10. Node Related Instance Methods -&gt; 2.1.10.2. Node Related Instance Methods Are More Concise">2</a>. </span>Node Related Instance Methods Are More Concise</h4>
+				<div class="contents4">
+					<p>The node related instance methods are provided as a convenience, as they are more concise and more semantically elegant.</p>
+					
+					<p><span class="allCaps">INSTEAD OF...</span></p>
+					
+					
+<pre class="sample-code">Uize.Node.setStyle (myWidget.getNode ('title'),{color:'#fff',backgroudColor:'#000'});
+</pre>
+					
+					<p><span class="allCaps">USE...</span></p>
+					
+					
+<pre class="sample-code">myWidget.setNodeStyle ('title',{color:'#fff',backgroudColor:'#000'});
+</pre>
+				</div>
+				
+				<a name="2_1_10_3"></a>
+				<h4 class="heading4" title="2. More on Widgets -&gt; 2.1. Implied Nodes -&gt; 2.1.10. Node Related Instance Methods -&gt; 2.1.10.3. Straight Mappings, For the Most Part"><span class="headingNumber"><a href="#2" title="2. More on Widgets">2</a>.<a href="#2_1" title="2. More on Widgets -&gt; 2.1. Implied Nodes">1</a>.<a href="#2_1_10" title="2. More on Widgets -&gt; 2.1. Implied Nodes -&gt; 2.1.10. Node Related Instance Methods">10</a>.<a href="#2_1_10_3" title="2. More on Widgets -&gt; 2.1. Implied Nodes -&gt; 2.1.10. Node Related Instance Methods -&gt; 2.1.10.3. Straight Mappings, For the Most Part">3</a>. </span>Straight Mappings, For the Most Part</h4>
+				<div class="contents4">
+					<p>Most of the node related instance methods are straight mappings to their <code><a href="../reference/Uize.Node.html">Uize.Node</a></code> module counterparts, with the differences mentioned above in method name and how nodes are specified.</p>
+					
+					<p>So, for example, the following two statements are equivalent...</p>
+					
+					
+<pre class="sample-code">Uize.Node.setStyle (myWidget.getNode ('title'),{color:'#fff',backgroudColor:'#000'});
+myWidget.setNodeStyle ('title',{color:'#fff',backgroudColor:'#000'});
+</pre>
+					
+					<p>A few of the instance methods, however, add additional logic not implemeted in the <code><a href="../reference/Uize.Node.html">Uize.Node</a></code> module. Example of such methods include the <code>removeNode</code> and <code>wireNode</code> instance methods.</p>
+					
+					<p>When removing a node from the DOM using the <code>removeNode</code> instance method, the cached reference to the removed implied node is cleared from <a href="#2_1_12">The Node Cache</a>. When wiring events on implied nodes using the <code>wireNode</code> instance method, an ID for the widget instance that owns the event wirings is provided to the <code>Uize.Node.wire</code> static method, so that events can be unwired later by the widget by providing the same owner ID to the <code>Uize.Node.unwire</code> static method.</p>
+					
+					<p><span class="allCaps">WRONG! WRONG! WRONG!</span></p>
+					
+					
+<pre class="sample-code">Uize.Node.wire (
+  myWidget.getNode ('title'),
+  'click',
+  function () {alert ('You clicked the title')}
+);
+</pre>
+					
+					<p><span class="allCaps">CORRECT</span></p>
+					
+					
+<pre class="sample-code">myWidget.wireNode (
+  'title',
+  'click',
+  function () {alert ('You clicked the title')}
+);
+</pre>
+					
+					<p>While the first snippet of code <b>will</b> wire up the <code>click</code> event of the <code>title</code> implied node of the widget instance <code>myWidget</code>, the wiring will not be associated to this widget instance. So, when at a later stage you might call the <code>unwireUi</code> instance method on the instance, that <code>click</code> event handler will not be unwired. With the second snippet of code, the <code>click</code> event <b>will</b> be unwired correctly when calling <code>myWidget.unwireUi ()</code>.</p>
+				</div>
+			</div>
+			
+			<a name="2_1_11"></a>
+			<h3 class="heading3" title="2. More on Widgets -&gt; 2.1. Implied Nodes -&gt; 2.1.11. Implied Node Names vs. Node Ids"><span class="headingNumber"><a href="#2" title="2. More on Widgets">2</a>.<a href="#2_1" title="2. More on Widgets -&gt; 2.1. Implied Nodes">1</a>.<a href="#2_1_11" title="2. More on Widgets -&gt; 2.1. Implied Nodes -&gt; 2.1.11. Implied Node Names vs. Node Ids">11</a>. </span>Implied Node Names vs. Node Ids</h3>
+			<div class="contents3">
+				<p>While implied nodes are typically specified by name when using the node related instance methods, one can also use references to them.</p>
+				
+				<p>The following statements are equivalent ways to replace the <code>innerHTML</code> for the <code>title</code> implied node of the widget instance <code>myWidget</code>...</p>
+				
+				
+<pre class="sample-code">myWidget.setNodeInnerHtml ('title','THIS WORKS');
+myWidget.setNodeInnerHtml (myWidget.getNode ('title'),'THIS WORKS');
+
+var _titleNode = myWidget.getNode ('title');
+myWidget.setNodeInnerHtml (_titleNode,'THIS WORKS');
+</pre>
+				
+				<p>Using a node reference for an implied node may be more convenient if one already has a reference to the node. Capturing a reference to an implied node in a private instance property or a local variable can offer a slight performance advantage, but not much since references to implied nodes are cached by the <a href="#2_1_12">The Node Cache</a>.</p>
+			</div>
+			
+			<a name="2_1_12"></a>
+			<h3 class="heading3" title="2. More on Widgets -&gt; 2.1. Implied Nodes -&gt; 2.1.12. The Node Cache"><span class="headingNumber"><a href="#2" title="2. More on Widgets">2</a>.<a href="#2_1" title="2. More on Widgets -&gt; 2.1. Implied Nodes">1</a>.<a href="#2_1_12" title="2. More on Widgets -&gt; 2.1. Implied Nodes -&gt; 2.1.12. The Node Cache">12</a>. </span>The Node Cache</h3>
+			<div class="contents3">
+				<p>The <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> base class implements a system for caching references to implied nodes when they are first accessed.</p>
+				
+				<p>This caching mechanism improves performance on subsequent occasions when implied nodes that have already been cached are again accessed, and makes it possible to specify implied nodes by named without worrying about significant cost of repeated lookups in the DOM - something that can be quite slow with large or complex documents in certain browsers. While improving performance, this caching mechanism (like any caching mechanism) has some implications that should be considered when implementing more sophisticated widget classes.</p>
+				
+				<a name="2_1_12_1"></a>
+				<h4 class="heading4" title="2. More on Widgets -&gt; 2.1. Implied Nodes -&gt; 2.1.12. The Node Cache -&gt; 2.1.12.1. Don&apos;t Forget To Flush"><span class="headingNumber"><a href="#2" title="2. More on Widgets">2</a>.<a href="#2_1" title="2. More on Widgets -&gt; 2.1. Implied Nodes">1</a>.<a href="#2_1_12" title="2. More on Widgets -&gt; 2.1. Implied Nodes -&gt; 2.1.12. The Node Cache">12</a>.<a href="#2_1_12_1" title="2. More on Widgets -&gt; 2.1. Implied Nodes -&gt; 2.1.12. The Node Cache -&gt; 2.1.12.1. Don&apos;t Forget To Flush">1</a>. </span>Don't Forget To Flush</h4>
+				<div class="contents4">
+					<p>Unlike with toilets, there are only a few rare instances where it is necessary to flush the node cache, and these typically involve more sophisticated widget implementations.</p>
+				</div>
+				
+				<a name="2_1_12_2"></a>
+				<h4 class="heading4" title="2. More on Widgets -&gt; 2.1. Implied Nodes -&gt; 2.1.12. The Node Cache -&gt; 2.1.12.2. How to Flush"><span class="headingNumber"><a href="#2" title="2. More on Widgets">2</a>.<a href="#2_1" title="2. More on Widgets -&gt; 2.1. Implied Nodes">1</a>.<a href="#2_1_12" title="2. More on Widgets -&gt; 2.1. Implied Nodes -&gt; 2.1.12. The Node Cache">12</a>.<a href="#2_1_12_2" title="2. More on Widgets -&gt; 2.1. Implied Nodes -&gt; 2.1.12. The Node Cache -&gt; 2.1.12.2. How to Flush">2</a>. </span>How to Flush</h4>
+				<div class="contents4">
+					<p>Flushing the node cache for a widget instance is performed quite easily by calling the instance's <code>flushNodeCache</code> method.</p>
+					
+					<p><span class="allCaps">SYNTAX</span></p>
+					
+					
+<pre class="sample-code">myWidget.flushNodeCache (impliedNodeName);  // flush the cache for one implied node
+myWidget.flushNodeCache ();                 // flush the cache for ALL implied nodes
+</pre>
+					
+					<p>It is safe to flush the cache for implied nodes that have not already been cached. It is also safe to flush the entire cache at any time. This will not affect the functioning of a widget that has already been wired up, but may incur a very small performance cost the next time that operations on implied nodes are performed.</p>
+				</div>
+				
+				<a name="2_1_12_3"></a>
+				<h4 class="heading4" title="2. More on Widgets -&gt; 2.1. Implied Nodes -&gt; 2.1.12. The Node Cache -&gt; 2.1.12.3. DOM Added Later"><span class="headingNumber"><a href="#2" title="2. More on Widgets">2</a>.<a href="#2_1" title="2. More on Widgets -&gt; 2.1. Implied Nodes">1</a>.<a href="#2_1_12" title="2. More on Widgets -&gt; 2.1. Implied Nodes -&gt; 2.1.12. The Node Cache">12</a>.<a href="#2_1_12_3" title="2. More on Widgets -&gt; 2.1. Implied Nodes -&gt; 2.1.12. The Node Cache -&gt; 2.1.12.3. DOM Added Later">3</a>. </span>DOM Added Later</h4>
+				<div class="contents4">
+					<p>In some cases, an implied node - or several implied nodes - may be added at some point after a widget has been wired up.</p>
+					
+					<p>If an attempt is made to operate on or to get a reference to an implied node of a widget and that implied node does not exist in the DOM, then a <code>null</code> result <b>will be cached</b> for that node. This is an optimization for implied nodes that may be optional in a widget's implementation. So, if the widget anticipates that an implied node may be added at some later stage, after the widget has already been wired up and an attempt has already been made to access that node, then the cached reference can be flushed using the <code>flushNodeCache</code> method.</p>
+					
+					<p><span class="allCaps">EXAMPLE</span></p>
+					
+					
+<pre class="sample-code">// we create a widget instance with the idPrefix of "foo" and wire it up
+var myWidget = new Uize.Widget ({idPrefix:'foo'});
+myWidget.wireUi ();
+
+// no DOM for "bar" implied node yet, so null value is cached for it
+myWidget.setNodeInnerHtml ('bar','I fail silently [shhhhhh]');
+
+// now we inject the HTML for the "bar" implied node into the body
+Uize.Node.injectHtml (document.body,'&lt;div id="foo-bar"&gt;&lt;/div&gt;');
+
+// now "bar" implied node exists, but null value is cached, so nothing happens
+myWidget.setNodeInnerHtml ('bar','D\'OH!');
+
+// now we flush the node cache for the "bar" implied node
+myWidget.flushNodeCache  ('bar');
+
+// now a reference to the injected node is obtained, and "Woo Hoo!" shows up
+myWidget.setNodeInnerHtml ('bar','Woo Hoo!');
+</pre>
+					
+					<p><span class="allCaps">REMEMBER</span></p>
+					
+					<p>Null references are cached!!!</p>
+				</div>
+				
+				<a name="2_1_12_4"></a>
+				<h4 class="heading4" title="2. More on Widgets -&gt; 2.1. Implied Nodes -&gt; 2.1.12. The Node Cache -&gt; 2.1.12.4. DOM Rebuilt"><span class="headingNumber"><a href="#2" title="2. More on Widgets">2</a>.<a href="#2_1" title="2. More on Widgets -&gt; 2.1. Implied Nodes">1</a>.<a href="#2_1_12" title="2. More on Widgets -&gt; 2.1. Implied Nodes -&gt; 2.1.12. The Node Cache">12</a>.<a href="#2_1_12_4" title="2. More on Widgets -&gt; 2.1. Implied Nodes -&gt; 2.1.12. The Node Cache -&gt; 2.1.12.4. DOM Rebuilt">4</a>. </span>DOM Rebuilt</h4>
+				<div class="contents4">
+					<p>In some cases, one may wish to rebuild or otherwise modify the DOM for a widget, replacing one or more implied nodes for which references have already been cached.</p>
+					
+					<p>In such cases, unless one flushes the node cache, attempts to access the replaced nodes will result in accessing the old nodes that have become orphaned from the DOM, since the node cache holds on to references to them. When significantly modifying the DOM for a widget that has been wired, it may be safest to flush the widget's entire node cache by specifying no parameter when calling the <code>flushNodeCache</code> method.</p>
+				</div>
+				
+				<a name="2_1_12_5"></a>
+				<h4 class="heading4" title="2. More on Widgets -&gt; 2.1. Implied Nodes -&gt; 2.1.12. The Node Cache -&gt; 2.1.12.5. Automatic Flushing"><span class="headingNumber"><a href="#2" title="2. More on Widgets">2</a>.<a href="#2_1" title="2. More on Widgets -&gt; 2.1. Implied Nodes">1</a>.<a href="#2_1_12" title="2. More on Widgets -&gt; 2.1. Implied Nodes -&gt; 2.1.12. The Node Cache">12</a>.<a href="#2_1_12_5" title="2. More on Widgets -&gt; 2.1. Implied Nodes -&gt; 2.1.12. The Node Cache -&gt; 2.1.12.5. Automatic Flushing">5</a>. </span>Automatic Flushing</h4>
+				<div class="contents4">
+					<p>In addition to being able to flush the node cache using the <code>flushNodeCache</code> method, the node cache is also automatically completely flushed in certain situations.</p>
+					
+					<p>Such situations include...</p>
+					
+					<table class="list">
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>when the widget is unwired by calling the <code>unwireUi</code> instance method</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>when the value of the <code>idPrefix</code> set-get property is modified</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>when the DOM for the widget is built by explicitly calling the <code>buildUi</code> or <code>insertUi</code> instance methods, or by calling the <code>insertOrWireUi</code> instance method when the <code>built</code> set-get property is set to <code>false</code></td></tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<a name="3"></a>
+	<h1 class="heading1" title="3. More on Child Widgets"><span class="headingNumber"><a href="#3" title="3. More on Child Widgets">3</a>. </span>More on Child Widgets</h1>
+	<div class="contents1">
+		<a name="3_1"></a>
+		<h2 class="heading2" title="3. More on Child Widgets -&gt; 3.1. Adding Child Widgets"><span class="headingNumber"><a href="#3" title="3. More on Child Widgets">3</a>.<a href="#3_1" title="3. More on Child Widgets -&gt; 3.1. Adding Child Widgets">1</a>. </span>Adding Child Widgets</h2>
+		<div class="contents2">
+			<p>Child widgets are added to a widget using the <code>addChild</code> instance method, as in...</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">myWidget.addChild (
+  'childWidgetName',
+  MyNamespace.MyChildWidgetClass,
+  {
+    property1Name:property1Value,
+    property2Name:property2Value,
+    ...
+    propertyNName:propertyNValue
+  }
+);
+</pre>
+			
+			<p>Notice how the child widget is not created first using the <code>new</code> keyword with its class constructor. Instead, a reference to the child widget's class is provided in the second parameter, and the values for the child widget's set-get properties are supplied in the optional third parameter. By leaving it up to the parent widget to instantiate the child widget before adding it, the parent can ensure that the child widget knows its <code>parent</code> and its <code>idPrefix</code> when its constructor is executed. This can be useful information for the code inside the constructor.</p>
+		</div>
+		
+		<a name="3_2"></a>
+		<h2 class="heading2" title="3. More on Child Widgets -&gt; 3.2. Referencing Child Widgets"><span class="headingNumber"><a href="#3" title="3. More on Child Widgets">3</a>.<a href="#3_2" title="3. More on Child Widgets -&gt; 3.2. Referencing Child Widgets">2</a>. </span>Referencing Child Widgets</h2>
+		<div class="contents2">
+			<p>After the above code has executed, the newly added child widget can be referenced using your widget's <code>children</code> instance property, as in <code>myWidget.children.childWidgetName</code>.</p>
+		</div>
+		
+		<a name="3_3"></a>
+		<h2 class="heading2" title="3. More on Child Widgets -&gt; 3.3. Removing Child Widgets"><span class="headingNumber"><a href="#3" title="3. More on Child Widgets">3</a>.<a href="#3_3" title="3. More on Child Widgets -&gt; 3.3. Removing Child Widgets">3</a>. </span>Removing Child Widgets</h2>
+		<div class="contents2">
+			<p>The child widget can be removed at a later stage using your widget's <code>removeChild</code> instance method, as in...</p>
+			
+			
+<pre class="sample-code">myWidget.removeChild ('childWidgetName');
+</pre>
+			
+			<p>If no child widget by the specified name exists, then the <code>removeChild</code> method will have no effect. In addition to being able to specify a child widget to remove by its name, a reference to a child widget can also be supplied, as in...</p>
+			
+			
+<pre class="sample-code">myWidget.removeChild (myChildWidget);
+</pre>
+			
+			<p>If you have only a reference to the child widget, then you can remove that widget from its parent widget by using the <code>parent</code> instance property, as in...</p>
+			
+			
+<pre class="sample-code">myChildWidget.parent.removeChild (myChildWidget);
+</pre>
+		</div>
+	</div>
+	
+	<a name="4"></a>
+	<h1 class="heading1" title="4. Widget Adoption"><span class="headingNumber"><a href="#4" title="4. Widget Adoption">4</a>. </span>Widget Adoption</h1>
+	<div class="contents1">
+		<p>A facility exists within the <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code> class for automatic adoption of child widgets that are declared inside a page using a special declarative syntax.</p>
+		
+		<p>This mechanism makes it possible to place the markup and the data that a JavaScript widget needs in the page in a declarative manner, without having to explicitly require the JavaScript modules that the widget might need, and without having to explicitly add the child widget in the page widget's implementation. Widgets can be declared in this way without having to source in all JavaScript modules that the widget might require ahead of the declaration block.</p>
+		
+		<p><span class="allCaps">EXAMPLE</span></p>
+		
+		
+<pre class="sample-code">&lt;div id="menu1" class="menu"&gt;
+  &lt;a href="javascript://" class="menuLink"&gt;About Us&lt;/a&gt;
+  &lt;a href="javascript://" class="menuLink"&gt;Products&lt;/a&gt;
+  &lt;a href="javascript://" class="menuLink"&gt;Services&lt;/a&gt;
+  &lt;a href="javascript://" class="menuLink"&gt;Technology&lt;/a&gt;
+  &lt;a href="javascript://" class="menuLink"&gt;Solutions&lt;/a&gt;
+  &lt;a href="javascript://" class="menuLink"&gt;My Account&lt;/a&gt;
+  &lt;a href="javascript://" class="menuLink"&gt;Store Locator&lt;/a&gt;
+  &lt;a href="javascript://" class="menuLink"&gt;Investors&lt;/a&gt;
+  &lt;a href="javascript://" class="menuLink"&gt;Support&lt;/a&gt;
+  &lt;a href="javascript://" class="menuLink"&gt;Contact Us&lt;/a&gt;
+&lt;/div&gt;
+&lt;script type="text/javascript"&gt;
+  window.$page_menu1HoverFader = {
+    widgetClass:'Uize.Widget.HoverFader',
+    nodes:{root:'menu1',className:/\bmenuLink\b/}
+  };
+&lt;/script&gt;
+</pre>
+		
+		<p>In the above example, an instance of the <code><a href="../reference/Uize.Widget.HoverFader.html">Uize.Widget.HoverFader</a></code> class is being adopted by the page widget. The adoption mechanism will automatically resolve the module dependencies for this class and dynamically load all the necessary modules if they're not already loaded. Once all modules are loaded, the widget instance will be created and wired up.</p>
+		
+		<a name="4_1"></a>
+		<h2 class="heading2" title="4. Widget Adoption -&gt; 4.1. Declarative Syntax For Widget Adoption"><span class="headingNumber"><a href="#4" title="4. Widget Adoption">4</a>.<a href="#4_1" title="4. Widget Adoption -&gt; 4.1. Declarative Syntax For Widget Adoption">1</a>. </span>Declarative Syntax For Widget Adoption</h2>
+		<div class="contents2">
+			<p>The syntax for declaring a widget to adopt is as follows...</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">&lt;script type="text/javascript"&gt;
+  window.$page_widgetName = {
+    widgetClass:'WidgetClassName',
+    setGetProperty1Name:'setGetProperty1Value',
+    setGetProperty2Name:'setGetProperty2Value',
+    setGetProperty3Name:'setGetProperty3Value'
+  };
+&lt;/script&gt;
+</pre>
+			
+			<p><span class="allCaps">IN A NUTSHELL</span></p>
+			
+			<p>Basically, you're assigning a property to the <code>window</code> object, where the property name is the <code>idPrefix</code> of the widget you want to have instantiated, prefixed with a "$" (dollar) sign. The dollar sign serves to minimize namespace collisions with other properties on the window object, and also to flag the property to the page widget as a candidate for adoption. The value of the property is a bundle of set-get property values for the widget that's to be instantiated and adopted. The special <code>widgetClass</code> property is a string value specifying the class name of your widget. Note that you can't just have an "open" class reference here, because the widget class is not guaranteed to be loaded and may need to be dynamically loaded.</p>
+			
+			<p><span class="allCaps">WRONG! WRONG! WRONG!</span></p>
+			
+			
+<pre class="sample-code">&lt;script type="text/javascript"&gt;
+  window.$page_menu1HoverFader = {
+    widgetClass:Uize.Widget.HoverFader,
+    nodes:{root:'menu1',className:/\bmenuLink\b/}
+  };
+&lt;/script&gt;
+</pre>
+			
+			<p>The above example will trigger an error if the <code><a href="../reference/Uize.Widget.HoverFader.html">Uize.Widget.HoverFader</a></code> class isn't already loaded when the declaration is encountered, defeating the purpose of this declarative syntax. Wrap the class name in quotes.</p>
+		</div>
+		
+		<a name="4_2"></a>
+		<h2 class="heading2" title="4. Widget Adoption -&gt; 4.2. The $[idPrefix] Syntax"><span class="headingNumber"><a href="#4" title="4. Widget Adoption">4</a>.<a href="#4_2" title="4. Widget Adoption -&gt; 4.2. The $[idPrefix] Syntax">2</a>. </span>The $[idPrefix] Syntax</h2>
+		<div class="contents2">
+			<p>When you add a child widget of the name <code>'slideShow'</code> to a page widget with the <code>idPrefix</code> of <code>'page'</code>, then the child widget's <code>idPrefix</code> is constructed to be <code>'page_slideShow'</code>.</p>
+			
+			<p>Now, when you declare a widget to adopt with an <code>idPrefix</code> of <code>'page_slideShow'</code>, then the adoption mechanism determines that you want a child widget of the name <code>'slideShow'</code> to be adopted by the page widget with the <code>idPrefix</code> of <code>'page'</code>.</p>
+			
+			<p>Furthermore, when you add a child widget of the name <code>'slideImage'</code> to a parent widget of the name <code>'slideShow'</code>, which is itself a child widget of the page with the <code>idPrefix</code> of <code>'page'</code>, then the child widget's <code>idPrefix</code> is constructed to be <code>'page_slideShow_slideImage'</code>. Conversely, when you declare a widget to adopt with an <code>idPrefix</code> of <code>'page_slideShow_slideImage'</code>, then the adoption mechanism determines that you want a child widget of the name <code>'slideImage'</code> to be adopted by the parent widget of the name <code>'slideShow'</code>, which is itself a child widget of the page with the <code>idPrefix</code> of <code>'page'</code>.</p>
+		</div>
+		
+		<a name="4_3"></a>
+		<h2 class="heading2" title="4. Widget Adoption -&gt; 4.3. Benefits of Using JSON"><span class="headingNumber"><a href="#4" title="4. Widget Adoption">4</a>.<a href="#4_3" title="4. Widget Adoption -&gt; 4.3. Benefits of Using JSON">3</a>. </span>Benefits of Using JSON</h2>
+		<div class="contents2">
+			<p>A declarative syntax using JavaScript and JSON has some benefits over other approaches.</p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Scanning to find the declared widgets in the <code>window</code> object avoids scanning through the DOM and inspecting <code>class</code> attributes or otherwise identifying if a DOM node is associated to a widget.</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>No proprietary attributes need to be used for declaring data for widgets - attributes that would cause an XHTML document to fail validation.</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Avoiding accessing attributes of a DOM node improves performance, as DOM reflection comes at a cost.</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>No parsing of data taken from DOM nodes is necessary in order to obtain the data for the widget. The parsing has already been done by the JavaScript interpreter.</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>The JSON format allows one to specify rich data - such as an array of slide records for a slideshow - without having to worry about ugly encoding and escaping characters so data can be put into XHTML attributes. The JSON data is similar to how it would be specified if you were adding the child widget in page widget code, so the data is easily portable. Furthermore, many convenient utilities exist across different server platforms for serializing data structures to JSON objects.</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_4"></a>
+		<h2 class="heading2" title="4. Widget Adoption -&gt; 4.4. Deep Adoption"><span class="headingNumber"><a href="#4" title="4. Widget Adoption">4</a>.<a href="#4_4" title="4. Widget Adoption -&gt; 4.4. Deep Adoption">4</a>. </span>Deep Adoption</h2>
+		<div class="contents2">
+			<p>The <code>idPrefix</code> for a widget you would like to be adopted lets you control where in the <a href="#1_5">Widget Tree</a> that the widget should be attached as a child.</p>
+			
+			<p>The page widget's adoption mechanism allows child widgets to be attached anywhere on a widget tree - not just as children of the page widget, itself. So, if you happen to know that the page widget creates its own child widgets (perhaps in your subclass of <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code>), then the declarative syntax allows child widgets to be adopted deeper into the tree. Moreover, you can declare widgets that should be adopted by other widgets that are, themselves, being adopted.</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">&lt;script type="text/javascript"&gt;
+  window.$page_slideShow = {
+    widgetClass:'Uize.Widget.SlideShow',
+    slides:UizeDotCom.TestDataPhotos ()
+  };
+  window.$page_slideShow_slideImage = {
+    widgetClass:'Uize.Widget.Swap.Image',
+    width:350,
+    height:250,
+    built:false
+  };
+  window.$page_slideShow_slideRating = {
+    widgetClass:'Uize.Widget.Bar',
+    orientation:'horizontal',
+    minValue:0,
+    maxValue:10
+  };
+&lt;/script&gt;
+</pre>
+			
+			<p>In the above example, an instance of the <code><a href="../reference/Uize.Widget.SlideShow.html">Uize.Widget.SlideShow</a></code> class is being adopted by the page widget as a child named <code>'slideShow'</code>. Then, an instance of <code><a href="../reference/Uize.Widget.Swap.Image.html">Uize.Widget.Swap.Image</a></code> and an instance of <code><a href="../reference/Uize.Widget.Bar.html">Uize.Widget.Bar</a></code> are both being adopted by the <code>slideShow</code> widget. As you will note from the example, one script block can contain any number of widget declarations (three in this case).</p>
+		</div>
+		
+		<a name="4_5"></a>
+		<h2 class="heading2" title="4. Widget Adoption -&gt; 4.5. The children Property"><span class="headingNumber"><a href="#4" title="4. Widget Adoption">4</a>.<a href="#4_5" title="4. Widget Adoption -&gt; 4.5. The children Property">5</a>. </span>The children Property</h2>
+		<div class="contents2">
+			<p>There is also a more concise way of tackling the above use case by using the special <code>children</code> property of the widget properties object, as follows...</p>
+			
+			
+<pre class="sample-code">&lt;script type="text/javascript"&gt;
+  window.$page_slideShow = {
+    widgetClass:'Uize.Widget.SlideShow',
+    slides:UizeDotCom.TestDataPhotos (),
+    children:{
+      slideImage:{
+        widgetClass:'Uize.Widget.Swap.Image',
+        width:350,
+        height:250,
+        built:false
+      },
+      slideRating:{
+        widgetClass:'Uize.Widget.Bar',
+        orientation:'horizontal',
+        minValue:0,
+        maxValue:10
+      }
+    }
+  };
+&lt;/script&gt;
+</pre>
+		</div>
+		
+		<a name="4_6"></a>
+		<h2 class="heading2" title="4. Widget Adoption -&gt; 4.6. Mix-and-Match"><span class="headingNumber"><a href="#4" title="4. Widget Adoption">4</a>.<a href="#4_6" title="4. Widget Adoption -&gt; 4.6. Mix-and-Match">6</a>. </span>Mix-and-Match</h2>
+		<div class="contents2">
+			<p>Of course, you can mix and match both techniques for specifying where to attach adopted widgets, so the following code would have the same effect...</p>
+			
+			
+<pre class="sample-code">&lt;script type="text/javascript"&gt;
+  window.$page_slideShow = {
+    widgetClass:'Uize.Widget.SlideShow',
+    slides:UizeDotCom.TestDataPhotos (),
+    children:{
+      slideImage:{
+        widgetClass:'Uize.Widget.Swap.Image',
+        width:350,
+        height:250,
+        built:false
+      }
+    }
+  };
+  window.$page_slideShow_slideRating = {
+    widgetClass:'Uize.Widget.Bar',
+    orientation:'horizontal',
+    minValue:0,
+    maxValue:10
+  };
+&lt;/script&gt;
+</pre>
+		</div>
+		
+		<a name="4_7"></a>
+		<h2 class="heading2" title="4. Widget Adoption -&gt; 4.7. Declarative Spawning"><span class="headingNumber"><a href="#4" title="4. Widget Adoption">4</a>.<a href="#4_7" title="4. Widget Adoption -&gt; 4.7. Declarative Spawning">7</a>. </span>Declarative Spawning</h2>
+		<div class="contents2">
+			<p>Using the declarative syntax for widget adoption, it is possible to declare multiple widgets that should be spawned as children of a parent widget.</p>
+			
+			<a name="4_7_1"></a>
+			<h3 class="heading3" title="4. Widget Adoption -&gt; 4.7. Declarative Spawning -&gt; 4.7.1. The $[parentName]_$$[childWidgetName] Syntax"><span class="headingNumber"><a href="#4" title="4. Widget Adoption">4</a>.<a href="#4_7" title="4. Widget Adoption -&gt; 4.7. Declarative Spawning">7</a>.<a href="#4_7_1" title="4. Widget Adoption -&gt; 4.7. Declarative Spawning -&gt; 4.7.1. The $[parentName]_$$[childWidgetName] Syntax">1</a>. </span>The $[parentName]_$$[childWidgetName] Syntax</h3>
+			<div class="contents3">
+				<p>To indicate that multiple child widgets should be spawned, prefix the child widget name with "$$" (two dollar signs).</p>
+				
+				<p>The <code>[childWidgetName]</code> text that follows the "$$" prefix is optional and actually not significant - it will not affect the names of the spawned child widgets. Specifying anything at all after the "$$" prefix might be useful if you wish to have multiple spawn declarations for the same parent widget, in which case you can use the optional <code>[childWidgetName]</code> suffix to distinguish the window property names for the different spawn declarations from one another so they don't overwrite each other, as in...</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">&lt;script type="text/javascript"&gt;
+  window.$page_$$spawnedWidgets1 = {
+    ... ... ...
+    ... ... ...
+  };
+
+  window.$page_$$spawnedWidgets2 = {
+    ... ... ...
+    ... ... ...
+  };
+&lt;/script&gt;
+</pre>
+			</div>
+			
+			<a name="4_7_2"></a>
+			<h3 class="heading3" title="4. Widget Adoption -&gt; 4.7. Declarative Spawning -&gt; 4.7.2. Special Meaning of idPrefix"><span class="headingNumber"><a href="#4" title="4. Widget Adoption">4</a>.<a href="#4_7" title="4. Widget Adoption -&gt; 4.7. Declarative Spawning">7</a>.<a href="#4_7_2" title="4. Widget Adoption -&gt; 4.7. Declarative Spawning -&gt; 4.7.2. Special Meaning of idPrefix">2</a>. </span>Special Meaning of idPrefix</h3>
+			<div class="contents3">
+				<p>The number of widgets spawned is determined by the value of the "idPrefix" property in the object that specifies the instance properties.</p>
+				
+				<p>A value for "idPrefix" must be specified, otherwise the declarative spawning will not work correctly. The value of this property identifies one or more DOM nodes for which the widget instances should be spawned, and may be a DOM node reference, a string representing the <code>id</code> of a DOM node, an array of DOM node references, or a find expression object that will be used with the <code>Uize.Node.find</code> static method to find the DOM nodes.</p>
+				
+				<p>Once the value of the "idPrefix" property has been resolved to one or more DOM nodes, an instance of the specified widget class will be created for each of the DOM nodes. For each widget instance that is created, the actual <code>idPrefix</code> value for the instance will be derived from the <code>id</code> attribute of the DOM node for which the instance is being created. For this reason, the DOM nodes represented by the "idPrefix" property should be the root nodes for the widget instances that will be spawned.</p>
+			</div>
+			
+			<a name="4_7_3"></a>
+			<h3 class="heading3" title="4. Widget Adoption -&gt; 4.7. Declarative Spawning -&gt; 4.7.3. An Example"><span class="headingNumber"><a href="#4" title="4. Widget Adoption">4</a>.<a href="#4_7" title="4. Widget Adoption -&gt; 4.7. Declarative Spawning">7</a>.<a href="#4_7_3" title="4. Widget Adoption -&gt; 4.7. Declarative Spawning -&gt; 4.7.3. An Example">3</a>. </span>An Example</h3>
+			<div class="contents3">
+				<p>To better understand the syntax for spawn declarations and how to use it, consider the following example...</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">&lt;script type="text/javascript"&gt;
+  window.$page_$$ = {
+    idPrefix:{root:'thumbnails',tagName:'DIV',className:'thumbnail'},
+    widgetClass:'Uize.Widget.CollectionItem.Zooming',
+    previewZoomUrl:function () {return this.get ('previewUrl')},
+    zoomPower:2.5
+  };
+&lt;/script&gt;
+</pre>
+				
+				<p>In the above example, instances of the <code><a href="../reference/Uize.Widget.CollectionItem.Zooming.html">Uize.Widget.CollectionItem.Zooming</a></code> widget class are being spawned - one for each of the nodes obtained by evaluating the find expression object <code>{root:'thumbnails',tagName:'A',className:'thumbnail'}</code>.</p>
+				
+				<p>Besides the <code>idPrefix</code> value here that identifies the DOM nodes for which the <code><a href="../reference/Uize.Widget.CollectionItem.Zooming.html">Uize.Widget.CollectionItem.Zooming</a></code> instances should be created, the values specified for the <code>previewZoomUrl</code> and <code>zoomPower</code> set-get properties of this widget class are common for all instances that are spawned. The <code>$[idPrefix]</code> declaration of <code>$page_$$</code> indicates that the spawned widgets are to be added as children of the page widget instance.</p>
+			</div>
+			
+			<a name="4_7_4"></a>
+			<h3 class="heading3" title="4. Widget Adoption -&gt; 4.7. Declarative Spawning -&gt; 4.7.4. Spawning Using the children Property"><span class="headingNumber"><a href="#4" title="4. Widget Adoption">4</a>.<a href="#4_7" title="4. Widget Adoption -&gt; 4.7. Declarative Spawning">7</a>.<a href="#4_7_4" title="4. Widget Adoption -&gt; 4.7. Declarative Spawning -&gt; 4.7.4. Spawning Using the children Property">4</a>. </span>Spawning Using the children Property</h3>
+			<div class="contents3">
+				<p>In addition to being able to use <a href="#4_7_1">The $[parentName]_$$[childWidgetName] Syntax</a> for declaring widgets to be spawned, the name of child widgets can be prefixed with "$$" (two dollar signs) when declaring them using <a href="#4_5">The children Property</a>.</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">&lt;script type="text/javascript"&gt;
+  window.$page_wrapper = {
+    widgetClass:'Uize.Widget',
+    children:{
+      $$:{
+        idPrefix:{root:'thumbnails',tagName:'DIV',className:'thumbnail'},
+        widgetClass:'Uize.Widget.CollectionItem.Zooming',
+        previewZoomUrl:function () {return this.get ('previewUrl')},
+        zoomPower:2.5
+      }
+    }
+  };
+&lt;/script&gt;
+</pre>
+				
+				<p>In the above example, instances of the <code><a href="../reference/Uize.Widget.CollectionItem.Zooming.html">Uize.Widget.CollectionItem.Zooming</a></code> widget class are being spawned as children of the widget named <code>'wrapper'</code> that is an instance of the <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> base class and that is added as a child widget of the page widget instance. The widget <code>page.children.wrapper</code> that is created will not actually have a child widget named <code>'$$'</code> - instead it will have the dynamically spawned widgets.</p>
+			</div>
+			
+			<a name="4_7_5"></a>
+			<h3 class="heading3" title="4. Widget Adoption -&gt; 4.7. Declarative Spawning -&gt; 4.7.5. Uses the Uize.Widget.spawn Method"><span class="headingNumber"><a href="#4" title="4. Widget Adoption">4</a>.<a href="#4_7" title="4. Widget Adoption -&gt; 4.7. Declarative Spawning">7</a>.<a href="#4_7_5" title="4. Widget Adoption -&gt; 4.7. Declarative Spawning -&gt; 4.7.5. Uses the Uize.Widget.spawn Method">5</a>. </span>Uses the Uize.Widget.spawn Method</h3>
+			<div class="contents3">
+				<p>The mechanism for spawning child widgets utilizes the <code>Uize.Widget.spawn</code> static method that is implemented in the <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> base class.</p>
+				
+				<p>For some more insights into how this mechanism works, consult the reference documentation for this method.</p>
+			</div>
+		</div>
+		
+		<a name="4_8"></a>
+		<h2 class="heading2" title="4. Widget Adoption -&gt; 4.8. Set-get Properties Merge-in"><span class="headingNumber"><a href="#4" title="4. Widget Adoption">4</a>.<a href="#4_8" title="4. Widget Adoption -&gt; 4.8. Set-get Properties Merge-in">8</a>. </span>Set-get Properties Merge-in</h2>
+		<div class="contents2">
+			<p>In the event that a widget declared for adoption is already created by the page widget code, the existing instance will be retained and the properties declared for the widget in the adoption declaration will be set on the existing instance.</p>
+			
+			<p>This behavior allows easy migration of the instantiation from using the adoption mechanism to using explicit instantiation inside the page widget's code. When this case arises, the <code>widgetClass</code> property in the declaration will be ignored - even if it doesn't match the class of the existing widget, so the page widget's child widget takes precedence since it's already created. Child widgets declared using the <code>children</code> property <b>will</b>, however, be added to the existing widget.</p>
+		</div>
+		
+		<a name="4_9"></a>
+		<h2 class="heading2" title="4. Widget Adoption -&gt; 4.9. Vanilla Parent Widgets"><span class="headingNumber"><a href="#4" title="4. Widget Adoption">4</a>.<a href="#4_9" title="4. Widget Adoption -&gt; 4.9. Vanilla Parent Widgets">9</a>. </span>Vanilla Parent Widgets</h2>
+		<div class="contents2">
+			<p>A mechanism exists for filling in "holes" in the <a href="#1_5">Widget Tree</a> path in widget adoption declarations.</p>
+			
+			<p>Specifically, if an <code>idPrefix</code> specified in a widget adoption declaration implies a parent widget - at any level of the widget tree - that doesn't exist and for which there is no explicit adoption declaration, then a plain vanilla widget (an instance of the <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> base class) will be created as that parent. This behavior allows for casual grouping of adopted widgets under a plain vanilla <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> parent, or the use of a plain vanilla parent as a placeholder for some other widget class that might be plugged in later.</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">&lt;script type="text/javascript"&gt;
+  window.$page_slideshows_slideShow1 = {widgetClass:'Uize.Widget.SlideShow'};
+  window.$page_slideshows_slideShow2 = {widgetClass:'Uize.Widget.SlideShow'};
+  window.$page_slideshows_slideShow3 = {widgetClass:'Uize.Widget.SlideShow'};
+&lt;/script&gt;
+</pre>
+			
+			<p>In the above example, the three slideshow widgets (nevermind the fact that there are no useful properties specified here) are being adopted into the parent widget named <code>'slideshows'</code>, which is itself adopted into the page widget, and for which there is no explicit adoption declaration.</p>
+			
+			<p>Incidentally, the above declaration would be equivalent to...</p>
+			
+			
+<pre class="sample-code">&lt;script type="text/javascript"&gt;
+  window.$page_slideshows = {
+    widgetClass:'Uize.Widget',
+    children:{
+      slideShow1:{widgetClass:'Uize.Widget.SlideShow'},
+      slideShow2:{widgetClass:'Uize.Widget.SlideShow'},
+      slideShow3:{widgetClass:'Uize.Widget.SlideShow'}
+    }
+  };
+&lt;/script&gt;
+</pre>
+		</div>
+		
+		<a name="4_10"></a>
+		<h2 class="heading2" title="4. Widget Adoption -&gt; 4.10. Important Considerations"><span class="headingNumber"><a href="#4" title="4. Widget Adoption">4</a>.<a href="#4_10" title="4. Widget Adoption -&gt; 4.10. Important Considerations">10</a>. </span>Important Considerations</h2>
+		<div class="contents2">
+			<p>There are some important considerations that should be kept in mind when using the widget adoption mechanism.</p>
+			
+			<a name="4_10_1"></a>
+			<h3 class="heading3" title="4. Widget Adoption -&gt; 4.10. Important Considerations -&gt; 4.10.1. You Need a Page Widget"><span class="headingNumber"><a href="#4" title="4. Widget Adoption">4</a>.<a href="#4_10" title="4. Widget Adoption -&gt; 4.10. Important Considerations">10</a>.<a href="#4_10_1" title="4. Widget Adoption -&gt; 4.10. Important Considerations -&gt; 4.10.1. You Need a Page Widget">1</a>. </span>You Need a Page Widget</h3>
+			<div class="contents3">
+				<p>The widget adoption mechanism is implemented in the <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code> class.</p>
+				
+				<p>Consequently, you can't adopt widgets using the declarative syntax unless your page uses a page widget instance. This should be contrasted against the generic Declarative Syntax For Widget Data mechanism that is implemented in the <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> base class and that <b>doesn't</b> require a page widget instance in order to take advantage of it.</p>
+			</div>
+			
+			<a name="4_10_2"></a>
+			<h3 class="heading3" title="4. Widget Adoption -&gt; 4.10. Important Considerations -&gt; 4.10.2. Must Assign to window Object"><span class="headingNumber"><a href="#4" title="4. Widget Adoption">4</a>.<a href="#4_10" title="4. Widget Adoption -&gt; 4.10. Important Considerations">10</a>.<a href="#4_10_2" title="4. Widget Adoption -&gt; 4.10. Important Considerations -&gt; 4.10.2. Must Assign to window Object">2</a>. </span>Must Assign to window Object</h3>
+			<div class="contents3">
+				<p>Because of an issue in Internet Explorer, it is necessary to assign the $ declaration as a property on the <code>window</code> object.</p>
+				
+				<p>In some browsers, global variables are enumerable on the <code>window</code> object, so iterating through the properties of the <code>window</code> object will find them. This is not the case in IE - even though global variables can be accessed by dereferencing off of the <code>window</code> object. The solution is to assign the declaration as a property on the <code>window</code> object. This works in all browsers.</p>
+				
+				<p><span class="allCaps">THIS WORKS...</span></p>
+				
+				
+<pre class="sample-code">&lt;script type="text/javascript"&gt;
+  window.$page_widgetName = {widgetClass:'WidgetClassName'};
+&lt;/script&gt;
+</pre>
+				
+				<p><span class="allCaps">WRONG! WRONG! WRONG!</span></p>
+				
+				
+<pre class="sample-code">&lt;script type="text/javascript"&gt;
+  var $page_widgetName = {widgetClass:'WidgetClassName'};
+&lt;/script&gt;
+</pre>
+				
+				<p>The latter syntax only works for the Declarative Syntax For Widget Data (but that's a whole other subject).</p>
+			</div>
+			
+			<a name="4_10_3"></a>
+			<h3 class="heading3" title="4. Widget Adoption -&gt; 4.10. Important Considerations -&gt; 4.10.3. Declarations Must Occur Before Wiring Page Widget"><span class="headingNumber"><a href="#4" title="4. Widget Adoption">4</a>.<a href="#4_10" title="4. Widget Adoption -&gt; 4.10. Important Considerations">10</a>.<a href="#4_10_3" title="4. Widget Adoption -&gt; 4.10. Important Considerations -&gt; 4.10.3. Declarations Must Occur Before Wiring Page Widget">3</a>. </span>Declarations Must Occur Before Wiring Page Widget</h3>
+			<div class="contents3">
+				<p>The JavaScript code that declares the widgets to adopt should appear earlier in the page than the JavaScript code that wires up the page widget.</p>
+				
+				<p>In order for your widgets to be adopted, the window properties declaring those widgets must exist at the time that the page widget is wired up, otherwise the page widget won't know of your widgets and they won't be adopted (a terrible fate, indeed).</p>
+			</div>
+			
+			<a name="4_10_4"></a>
+			<h3 class="heading3" title="4. Widget Adoption -&gt; 4.10. Important Considerations -&gt; 4.10.4. Must Match the Page Widget idPrefix"><span class="headingNumber"><a href="#4" title="4. Widget Adoption">4</a>.<a href="#4_10" title="4. Widget Adoption -&gt; 4.10. Important Considerations">10</a>.<a href="#4_10_4" title="4. Widget Adoption -&gt; 4.10. Important Considerations -&gt; 4.10.4. Must Match the Page Widget idPrefix">4</a>. </span>Must Match the Page Widget idPrefix</h3>
+			<div class="contents3">
+				<p>The name you specify for the page widget in your child widget <code>idPrefix</code> must match the actual <code>idPrefix</code> that is set for the page widget, or your child widgets will not be adopted.</p>
+				
+				<p>The initial value for the <code>idPrefix</code> set-get property in the <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code> class is <code>'page'</code>, so unless you change that in your own subclasses of <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code> you should be able to start all your widget adoption statements with <code>window.$page_</code>.</p>
+				
+				<p><span class="allCaps">WRONG! WRONG! WRONG!</span></p>
+				
+				
+<pre class="sample-code">&lt;script type="text/javascript"&gt;
+  window.$page_widgetName = {widgetClass:'WidgetClassName'};
+&lt;/script&gt;
+... ... ...
+... ... ...
+... ... ...
+&lt;script type="text/javascript"&gt;
+  Uize.module ({
+    required:'Uize.Widget.Page',
+    builder:function () {
+      (window.page = new Uize.Widget.Page ({idPrefix:'mySitePage'})).wireUi ();
+    }
+  });
+&lt;/script&gt;
+</pre>
+				
+				<p>In the above example, the declaration for the adopted widget should start with <code>window.$mySitePage_widgetName</code>, because <code>'mySitePage'</code> is the <code>idPrefix</code> specified for the page widget in its instantiation.</p>
+			</div>
+			
+			<a name="4_10_5"></a>
+			<h3 class="heading3" title="4. Widget Adoption -&gt; 4.10. Important Considerations -&gt; 4.10.5. Potentially Asynchronous"><span class="headingNumber"><a href="#4" title="4. Widget Adoption">4</a>.<a href="#4_10" title="4. Widget Adoption -&gt; 4.10. Important Considerations">10</a>.<a href="#4_10_5" title="4. Widget Adoption -&gt; 4.10. Important Considerations -&gt; 4.10.5. Potentially Asynchronous">5</a>. </span>Potentially Asynchronous</h3>
+			<div class="contents3">
+				<p>Because a widget to adopt may require JavaScript modules that aren't already loaded, instantiation of adopted widgets may be asynchronous.</p>
+				
+				<p>The page widget instance scans the page for widgets to adopt during its wiring phase. Because the adoption of widgets may spawn asynchronous loading of additional JavaScript modules, there is no guarantee that - after returning from the <code>wireUi</code> call on the page widget - all widgets to be adopted will be instantiated and wired up. This is usually not a problem, however, since the types of widgets that are adopted are not usually widgets that are intimately tied in to a page widget's functioning or the rest of the widgets that it may govern.</p>
+			</div>
+			
+			<a name="4_10_6"></a>
+			<h3 class="heading3" title="4. Widget Adoption -&gt; 4.10. Important Considerations -&gt; 4.10.6. It&apos;s Declarative, So Avoid Relying on Modules"><span class="headingNumber"><a href="#4" title="4. Widget Adoption">4</a>.<a href="#4_10" title="4. Widget Adoption -&gt; 4.10. Important Considerations">10</a>.<a href="#4_10_6" title="4. Widget Adoption -&gt; 4.10. Important Considerations -&gt; 4.10.6. It&apos;s Declarative, So Avoid Relying on Modules">6</a>. </span>It's Declarative, So Avoid Relying on Modules</h3>
+			<div class="contents3">
+				<p>The spirit of the declarative syntax for widget adoption is to be declarative, so that no JavaScript modules need to be loaded in order to make the declaration - and it is a declaration of data and not code logic.</p>
+				
+				<p>The case may occasionally arise where the data that should be supplied in a declaration either needs to come from some other JavaScript module, or needs to be formulated with some JavaScript logic. This is not ideal, but in such cases one will have to ensure that modules - or any external JavaScript code - required in order to make the declaration are loaded at the time that the declaration is made.</p>
+			</div>
+			
+			<a name="4_10_7"></a>
+			<h3 class="heading3" title="4. Widget Adoption -&gt; 4.10. Important Considerations -&gt; 4.10.7. Reserved Property Names"><span class="headingNumber"><a href="#4" title="4. Widget Adoption">4</a>.<a href="#4_10" title="4. Widget Adoption -&gt; 4.10. Important Considerations">10</a>.<a href="#4_10_7" title="4. Widget Adoption -&gt; 4.10. Important Considerations -&gt; 4.10.7. Reserved Property Names">7</a>. </span>Reserved Property Names</h3>
+			<div class="contents3">
+				<p>As mentioned earlier, the special properties <code>widgetClass</code> and <code>children</code> are reserved for the widget adoption mechanism.</p>
+				
+				<p>The implication of this is that you can't create widget classes that register either <code>widgetClass</code> or <code>children</code> as set-get properties and expect to use the widget adoption mechanism. Or, more correctly, you can, but any values that you specify for those properties in a widget declaration won't make their way through to the widget, because they get "consumed" by the adoption mechanism. So, best to avoid using those names for set-get properties, which is not likely to be a major constraint.</p>
+			</div>
+			
+			<a name="4_10_8"></a>
+			<h3 class="heading3" title="4. Widget Adoption -&gt; 4.10. Important Considerations -&gt; 4.10.8. Takes Time"><span class="headingNumber"><a href="#4" title="4. Widget Adoption">4</a>.<a href="#4_10" title="4. Widget Adoption -&gt; 4.10. Important Considerations">10</a>.<a href="#4_10_8" title="4. Widget Adoption -&gt; 4.10. Important Considerations -&gt; 4.10.8. Takes Time">8</a>. </span>Takes Time</h3>
+			<div class="contents3">
+				<p>It <b>does</b> take a tiny bit of time for the page widget to scan through and discover widget adoption declarations.</p>
+				
+				<p>This should not be a significant cost, but it is worth considering when choosing between adoption and explicit instantiation in the code beside.</p>
+			</div>
+		</div>
+		
+		<a name="4_11"></a>
+		<h2 class="heading2" title="4. Widget Adoption -&gt; 4.11. Relationship To Code Beside / Page Widget"><span class="headingNumber"><a href="#4" title="4. Widget Adoption">4</a>.<a href="#4_11" title="4. Widget Adoption -&gt; 4.11. Relationship To Code Beside / Page Widget">11</a>. </span>Relationship To Code Beside / Page Widget</h2>
+		<div class="contents2">
+			<p>Adopted widgets maintain a loose / informal relationship with the page widget (or a page's code beside), from a code design perspective.</p>
+			
+			<p>The benefit of the widget adoption mechanism is that widgets can be plopped into the markup for a page in an ad hoc manner, without being too concerned about how they tie into the overal page control logic and how they might relate to other widgets on the page. This implies that they are not tightly integrated into a page's control logic, or otherwise it might be more suitable to place the setup logic along with the other code for the page. It is still possible, however, for the page widget code for a specific page to sniff for the presence of certain expected adopted widgets and respond in different ways to the presence of different adopted widgets.</p>
+			
+			<p>Mostly, however, widget adoption is convenient for ad hoc placement of discrete widgets that don't care about their surroundings or the page that they're in.</p>
+			
+			<a name="4_11_1"></a>
+			<h3 class="heading3" title="4. Widget Adoption -&gt; 4.11. Relationship To Code Beside / Page Widget -&gt; 4.11.1. Benefits of Declarative Approach"><span class="headingNumber"><a href="#4" title="4. Widget Adoption">4</a>.<a href="#4_11" title="4. Widget Adoption -&gt; 4.11. Relationship To Code Beside / Page Widget">11</a>.<a href="#4_11_1" title="4. Widget Adoption -&gt; 4.11. Relationship To Code Beside / Page Widget -&gt; 4.11.1. Benefits of Declarative Approach">1</a>. </span>Benefits of Declarative Approach</h3>
+			<div class="contents3">
+				<p>The declarative approach offers several benefits...</p>
+				
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>doesn't require modules to be loaded at the time that a widget is declared</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>doesn't require the page widget / code beside logic to be aware of the widgets being adopted</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>allows a widget's markup and data for client side interaction to be declared entirely in a server side / middle tier component or control, in a self-contained way, and without intimate cooperation from a page's other client code</td></tr>
+				</table>
+			</div>
+			
+			<a name="4_11_2"></a>
+			<h3 class="heading3" title="4. Widget Adoption -&gt; 4.11. Relationship To Code Beside / Page Widget -&gt; 4.11.2. Benefits of Explicit Approach"><span class="headingNumber"><a href="#4" title="4. Widget Adoption">4</a>.<a href="#4_11" title="4. Widget Adoption -&gt; 4.11. Relationship To Code Beside / Page Widget">11</a>.<a href="#4_11_2" title="4. Widget Adoption -&gt; 4.11. Relationship To Code Beside / Page Widget -&gt; 4.11.2. Benefits of Explicit Approach">2</a>. </span>Benefits of Explicit Approach</h3>
+			<div class="contents3">
+				<p>The explicit approach for adding widgets to a page widget offers several benefits...</p>
+				
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>guarantees that child widgets added explicitly are wired and ready upon return from the <code>wireUi</code> call on the page widget</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>allows an intimate relationship with the page's client logic and other child widgets on a page, enabling more sophisticated client functionality, where multiple widgets are involved together in producing a client side application</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>allows all child widget instantiation to be consolidated within a single module of code, improving maintainability, and allowing for scrunching of that code as an external JavaScript module</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>it does take the page widget a tiny bit of time to scan through and discover and act on widget adoption declarations, so explicit instantiation is technically - if not practically - faster.</td></tr>
+				</table>
+			</div>
+			
+			<p>As you can see, both the adoption approach and the explicit instantiation approach have their benefits, and the right one to choose will depend on what best suits your particular use case. In the case that the explicit instantiation approach is desired, you can still achieve some of the server component encapsulation benefits of the widget adoption mechanism by employing the Declarative Syntax For Widget Data mechanism. This mechanism allows data for a widget to be "piped" through to the widget instance via the server generated markup, using a declarative syntax similar to the widget adoption syntax.</p>
+		</div>
+	</div>
+	
+	<a name="5"></a>
+	<h1 class="heading1" title="5. Developing Custom Widgets"><span class="headingNumber"><a href="#5" title="5. Developing Custom Widgets">5</a>. </span>Developing Custom Widgets</h1>
+	<div class="contents1">
+		<a name="5_1"></a>
+		<h2 class="heading2" title="5. Developing Custom Widgets -&gt; 5.1. Build on the Foundation"><span class="headingNumber"><a href="#5" title="5. Developing Custom Widgets">5</a>.<a href="#5_1" title="5. Developing Custom Widgets -&gt; 5.1. Build on the Foundation">1</a>. </span>Build on the Foundation</h2>
+		<div class="contents2">
+			<p>Before you go ahead and re-invent the wheel, try to leverage the foundation of existing widgets that have been implemented for the UIZE JavaScript Framework.</p>
+			
+			<p>There are three main ways in which you can leverage existing code:</p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;">1) </span></td><td>use an existing widget class as the superclass for your new widget class, and add the new functionality in the your subclass</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;">2) </span></td><td>use one or more existing widget classes for child widgets in your new widget class</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;">3) </span></td><td>improve an existing widget class and add new functionality to it (proceed with caution)</td></tr>
+			</table>
+			<a name="5_1_1"></a>
+			<h3 class="heading3" title="5. Developing Custom Widgets -&gt; 5.1. Build on the Foundation -&gt; 5.1.1. Subclassing An Existing Widget Class"><span class="headingNumber"><a href="#5" title="5. Developing Custom Widgets">5</a>.<a href="#5_1" title="5. Developing Custom Widgets -&gt; 5.1. Build on the Foundation">1</a>.<a href="#5_1_1" title="5. Developing Custom Widgets -&gt; 5.1. Build on the Foundation -&gt; 5.1.1. Subclassing An Existing Widget Class">1</a>. </span>Subclassing An Existing Widget Class</h3>
+			<div class="contents3">
+				<p>Or perhaps an existing widget could be the foundation of your new widget by using it as a superclass.</p>
+			</div>
+			
+			<a name="5_1_2"></a>
+			<h3 class="heading3" title="5. Developing Custom Widgets -&gt; 5.1. Build on the Foundation -&gt; 5.1.2. Modifying An Existing Widget Class"><span class="headingNumber"><a href="#5" title="5. Developing Custom Widgets">5</a>.<a href="#5_1" title="5. Developing Custom Widgets -&gt; 5.1. Build on the Foundation">1</a>.<a href="#5_1_2" title="5. Developing Custom Widgets -&gt; 5.1. Build on the Foundation -&gt; 5.1.2. Modifying An Existing Widget Class">2</a>. </span>Modifying An Existing Widget Class</h3>
+			<div class="contents3">
+				<p>If a widget already exists that almost meets your needs, perhaps it could be improved to have the new features or behaviors you require.</p>
+				
+				<p>You can make the modifications to meet your own needs and <b>not</b> submit those changes back to the Open Source project. If you choose this option, you will have to deal carefully with framework updates to ensure that you don't get drawn into conflicts, and that you don't accidentally obliterate your modified version with an update. You may also find yourself needing to re-implement your modifications if it becomes fundamentally incompatible with an update of the framework and the only option is to revert back to the framework's version to get things working again.</p>
+				
+				<p>For numerous reasons, modifying existing UIZE classes is best left to those who are serious about and committed to contributing to the UIZE JavaScript Framework's codebase.</p>
+			</div>
+		</div>
+	</div>
+	
+	<a name="6"></a>
+	<h1 class="heading1" title="6. Principles of Good Widget Design"><span class="headingNumber"><a href="#6" title="6. Principles of Good Widget Design">6</a>. </span>Principles of Good Widget Design</h1>
+	<div class="contents1">
+		<a name="6_1"></a>
+		<h2 class="heading2" title="6. Principles of Good Widget Design -&gt; 6.1. Self-maintaining UI"><span class="headingNumber"><a href="#6" title="6. Principles of Good Widget Design">6</a>.<a href="#6_1" title="6. Principles of Good Widget Design -&gt; 6.1. Self-maintaining UI">1</a>. </span>Self-maintaining UI</h2>
+		<div class="contents2">
+			<p>The <code>updateUi</code> method - as a general rule - should never be called by code that is using a particular widget. The code using a widget should not be responsible for knowing that the user interface of a widget needs to be updated. The code using a widget should only change state of a widget using the properties interface (or, in rare cases, special state setting combo methods). If a widget's state is changed in a way that should be reflected in its user interface, then it is the responsibility of the widget code to detect this and update its UI accordingly.</p>
+		</div>
+		
+		<a name="6_2"></a>
+		<h2 class="heading2" title="6. Principles of Good Widget Design -&gt; 6.2. Recoverable UI"><span class="headingNumber"><a href="#6" title="6. Principles of Good Widget Design">6</a>.<a href="#6_2" title="6. Principles of Good Widget Design -&gt; 6.2. Recoverable UI">2</a>. </span>Recoverable UI</h2>
+		<div class="contents2">
+			<p>All the state properties that influence a widget's UI should be maintained in the widget instance. In other words, parameters should not be used to qualify how a widget's UI is represented and then forgotten to the widget. So, at any given moment if a widget is coerced to regenerate its UI, the result should exactly match the last generated UI.</p>
+		</div>
+		
+		<a name="6_3"></a>
+		<h2 class="heading2" title="6. Principles of Good Widget Design -&gt; 6.3. Unwiring &amp; Rewiring"><span class="headingNumber"><a href="#6" title="6. Principles of Good Widget Design">6</a>.<a href="#6_3" title="6. Principles of Good Widget Design -&gt; 6.3. Unwiring &amp; Rewiring">3</a>. </span>Unwiring & Rewiring</h2>
+		<div class="contents2">
+			<p>It should be possible to fully unwire and then rewire any widget.</p>
+		</div>
+		
+		<a name="6_4"></a>
+		<h2 class="heading2" title="6. Principles of Good Widget Design -&gt; 6.4. Immediate Child Widget Accessibility"><span class="headingNumber"><a href="#6" title="6. Principles of Good Widget Design">6</a>.<a href="#6_4" title="6. Principles of Good Widget Design -&gt; 6.4. Immediate Child Widget Accessibility">4</a>. </span>Immediate Child Widget Accessibility</h2>
+		<div class="contents2">
+			<p>Ideally, child widgets used by a widget are created when the widget is created and not only when the widget is wired, so that the child widgets can be accessed and their configuration modified immediately after a widget is created.</p>
+		</div>
+		
+		<a name="6_5"></a>
+		<h2 class="heading2" title="6. Principles of Good Widget Design -&gt; 6.5. Update Optimization"><span class="headingNumber"><a href="#6" title="6. Principles of Good Widget Design">6</a>.<a href="#6_5" title="6. Principles of Good Widget Design -&gt; 6.5. Update Optimization">5</a>. </span>Update Optimization</h2>
+		<div class="contents2">
+			<a name="6_5_1"></a>
+			<h3 class="heading3" title="6. Principles of Good Widget Design -&gt; 6.5. Update Optimization -&gt; 6.5.1. No Unnecessary DOM Updates"><span class="headingNumber"><a href="#6" title="6. Principles of Good Widget Design">6</a>.<a href="#6_5" title="6. Principles of Good Widget Design -&gt; 6.5. Update Optimization">5</a>.<a href="#6_5_1" title="6. Principles of Good Widget Design -&gt; 6.5. Update Optimization -&gt; 6.5.1. No Unnecessary DOM Updates">1</a>. </span>No Unnecessary DOM Updates</h3>
+			<div class="contents3">
+				<p>Calling uodateUi on a widget should not result in any DOM updates is the state that would be reflected in the UI has not changed since the last time the UI was updated (ie. update optimization code should be implemented, and perhaps a mechanism provided to facilitate this).</p>
+			</div>
+			
+			<a name="6_5_2"></a>
+			<h3 class="heading3" title="6. Principles of Good Widget Design -&gt; 6.5. Update Optimization -&gt; 6.5.2. Granular DOM Updates"><span class="headingNumber"><a href="#6" title="6. Principles of Good Widget Design">6</a>.<a href="#6_5" title="6. Principles of Good Widget Design -&gt; 6.5. Update Optimization">5</a>.<a href="#6_5_2" title="6. Principles of Good Widget Design -&gt; 6.5. Update Optimization -&gt; 6.5.2. Granular DOM Updates">2</a>. </span>Granular DOM Updates</h3>
+			<div class="contents3">
+				<p>Updating the UI should be optimized so that unnecessary redundant DOM updates are not performed for state that has not changed (ie. even if some state has changed, updating should be broken down into more granular units). A widget's UI generation code should be optimized such that subcomponents of the UI are only regenerated or refreshed if the state properties that relate to them have changed since the last time the UI was updated.</p>
+			</div>
+			
+			<a name="6_5_3"></a>
+			<h3 class="heading3" title="6. Principles of Good Widget Design -&gt; 6.5. Update Optimization -&gt; 6.5.3. Deduplication of Updates"><span class="headingNumber"><a href="#6" title="6. Principles of Good Widget Design">6</a>.<a href="#6_5" title="6. Principles of Good Widget Design -&gt; 6.5. Update Optimization">5</a>.<a href="#6_5_3" title="6. Principles of Good Widget Design -&gt; 6.5. Update Optimization -&gt; 6.5.3. Deduplication of Updates">3</a>. </span>Deduplication of Updates</h3>
+			<div class="contents3">
+				<p>Setting a widget repeatedly to the same state should not result in repeated redundant refreshes.</p>
+			</div>
+			
+			<a name="6_5_4"></a>
+			<h3 class="heading3" title="6. Principles of Good Widget Design -&gt; 6.5. Update Optimization -&gt; 6.5.4. Batched Update"><span class="headingNumber"><a href="#6" title="6. Principles of Good Widget Design">6</a>.<a href="#6_5" title="6. Principles of Good Widget Design -&gt; 6.5. Update Optimization">5</a>.<a href="#6_5_4" title="6. Principles of Good Widget Design -&gt; 6.5. Update Optimization -&gt; 6.5.4. Batched Update">4</a>. </span>Batched Update</h3>
+			<div class="contents3">
+				<p>Changing the state of multiple properties that will affect a widget's UI in a batch <code>set</code> method call should only result in a single refresh.</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

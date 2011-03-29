@@ -1,0 +1,3019 @@
+Uize
+	Safe Privates
+		A new system to support safe private properties and methods - for both instance as well as static private properties and methods.
+
+		EXAMPLE 1
+		..........................................................................................
+		/*** create variables for mapping between pretty name of privates and generated names ***/
+			var _ = _class.priv ({
+				_myProperty:1,
+				_myMethod:1
+			});
+
+		_classPrototype [_._myProperty] = 'blah';        // declaring instance property
+		_classPrototype [_._myMethod] = function () {};  // declaring instance method
+
+		alert (this [_._myProperty]); // accessing instance property
+		this [_._myMethod] ();        // calling instance method
+		..........................................................................................
+
+		EXAMPLE 2
+		..........................................................................................
+		/*** create variables for mapping between pretty name of privates and generated names ***/
+			var
+				_ = _class.priv ({
+					_myProperty:1,
+					_myMethod:1
+				}),
+				_myProperty = _._myProperty,
+				_myMethod = _._myMethod
+			;
+
+		_classPrototype [_myProperty] = 'blah';        // declaring instance property
+		_classPrototype [_myMethod] = function () {};  // declaring instance method
+
+		alert (this [_myProperty]); // accessing instance property
+		this [_myMethod] ();        // calling instance method
+		..........................................................................................
+
+		ISSUES
+
+		- all accesses and assignments of privates involve an additional variable lookup step, and dereferencing with the result of an expression (so, precompilation benefits are lost)
+		- "lookup" of private names involves accessing variables in a higher scope than point of access, so performance cost
+		- names must be generated for all privates, which adds setup code
+		- makes it harder to do impromptu assignments of privates
+		- accessing set-get properties via their private names becomes rather inconvenient, and their private names must be registered in an extra step
+
+	Property Bindings
+		Provide a way in the =Uize= base class to bind two set-get properties together, in order to keep their values synchronized.
+
+		This would provide a more concise and lightweight way of binding properties than using an instance of the =Uize.Util.PropertyAdapter= class.
+
+		INSTEAD OF...
+		....................................................................................
+		new Uize.Util.PropertyAdapter ({propertyA:[this,'prop'],propertyB:[slider,'prop']});
+		....................................................................................
+
+		USE...
+		............................................
+		_this.bindProperty ('prop',[slider,'prop']);
+		............................................
+
+		BENEFITS
+		- The =bindProperty= instance method would be a core capability of the =Uize= base class, and all classes would get to benefit from this.
+		- The =bindProperty= instance method should require a little less code to implement than the =Uize.Util.PropertyAdapter= class.
+
+		NOTES
+		- The =bindProperty= instance method would support an optional value adapter, just like the =Uize.Util.PropertyAdapter= class.
+		- The =bindProperty= instance method would return an array of all the wirings created, so that they could be unwired later.
+		- The =bindProperty= instance method should ideally be implemented by factoring some code out of the =Uize.Util.PropertyAdapter= class, and then the =Uize.Util.PropertyAdapter= class could be reduced in size and made to leverage the =bindProperty= implementation in the =Uize= base class.
+
+	Copy Ability for Set-get Properties
+		Copy ability, for initial values of set-get properties that are arrays or objects.
+
+		Have a property that can be specified in a set-get property's profile, which can be used to cause properties whose initial values are object types to be initialized by cloning the initial value rather than simply setting a reference to a shared object.
+
+	Uize.makeCaller
+		Lets you conveniently create a function / method caller, where you can specify context, function, and arguments.
+
+		IMPLEMENTATION
+		................................................................................
+		Uize.makeCaller = function (_context,_function,_arguments) {
+			var _caller = new Function (
+				'var m=arguments.callee;' +
+				'return m.f.apply(' +
+					(_context ? 'm.c' : 'this') +
+					(
+						(
+							_arguments = _arguments === _undefined
+								? _sacredEmptyArray
+								: Uize.isArray (_arguments) ? _arguments : [_arguments]
+						).length
+							? ',arguments.length?m.a.concat.apply(m.a,arguments):m.a'
+								// IMPORTANT: CAN'T USE CONCAT BECAUSE OF ARRAY FLATTENING WHEN ARGUMENTS ARE ARRAYS!!!
+							: ',arguments'
+					) +
+				')'
+			);
+			_caller.c = _context;
+			_caller.f = typeof _function == 'string' ? _context [_function] : _function;
+			_caller.a = _arguments;
+			return _caller;
+		};
+		................................................................................
+
+	Uize.constrain
+		Support a wrap flag
+			Support a wrap flag, so that constrained values can be made to wrap around within the constraining range, rather than always only hitting up against the edges.
+
+			EXAMPLE USAGE
+			......................................
+			hue = Uize.constrain (hue,0,360,true);
+			......................................
+
+			IMPLEMENTATION THOUGHTS
+			.......................................................................
+			var maxMinDelta = max - min;
+			return ((value - min) % maxMinDelta + maxMinDelta) % maxMinDelta + min;
+			// what about max < min?
+			.......................................................................
+
+	Uize.indexIn
+		Support Object Source
+			For object type source, could find key whose value matches, and return undefined (or null?) if value not found in object.
+
+			In this mode, =fromEndBOOL= parameter could control direction for iterating through the keys of the object.
+
+		Support Simple Type Source
+			For simple type source, could do string index.
+
+			In this mode, =fromEndBOOL= parameter could control choice of =indexOf= vs =lastIndexOf=, and =strictEqualityBOOL= parameter could control case sensitivity.
+
+	Uize.module
+		Support Code Besides in Module Loader
+			How can code require a module that is not in the modules directory (like a code beside)?
+
+			What about by specifying a path (relative to the current file) in parentheses in the module name?
+
+	Multiple Inheritance
+		Consider a facility to support multiple inheritance (may involve creating a merge service for merging data from one object into another, since it should be possible to merge additional features of a different class into an already created class, and perhaps that merge feature would also be used in the _subclass function's implementation).
+
+	Library Modules
+		Library of Dispersed Modules
+			Can library modules that are outside the modules directory require modules that are outside the modules directory?
+
+	Handle Simple Type in Place of Constructor Properties
+		Variation on constructor, where specifying a non-object for the properties has the effect of setting the value property.
+
+		For example, if =Uize.Color= were to become a subclass of =Uize=...
+
+		EXAMPLE
+		................................................
+		new Uize.Color ({value:'#ffffff'});  // old form
+		new Uize.Color ('#ffffff');          // new form
+		................................................
+
+		Or, in the case of an existing widget class that supports the value interface...
+
+		EXAMPLE
+		.....................................................
+		new Uize.Widget.Bar.Slider ({value:50});  // old form
+		new Uize.Widget.Bar.Slider (50);          // old form
+		.....................................................
+
+	Uize.clone and Recursion
+		Handle recursion in Uize.clone (how to generate properties that are references to other parts of structure in same relationship as the equivalent property in the cloning source???)
+
+	Improvements to Property Mechanism
+		New Profile Features
+			type
+				Basic types...
+
+				- string (coerce with value + '', implicit initial value is '')
+				- boolean (coerce with !!value, implicit initial value is false)
+				- number (coerce with +value, implicit initial value is 0)
+				- date (coerce with new Date (value), implicit initial value is now)
+
+				Extended types (ideas for other useful types)...
+
+				- switch (valid string values for true value, implicit initial value is false)
+				- integer (coerce with Math.round (value))
+
+			validator
+				Different types of validators...
+
+				- function that can return true or false
+				- regular expression
+				- array of valid values
+
+		- support for read-only properties (how would that work, exactly? Only settable through private name?)
+
+		- problem: there's currently no way to use the set method to set the value for a set-get property to undefined. This is lame. The original reason for this had to do with the optimizing performance for the very first set during construction. This behavior is beneficial for set-get properties that have no initial value (what percentage of the overall is that?).
+
+	Uize.substituteInto
+		- optimize for successive substitution on the same source using the same form of map (but different values, of course)
+
+	constructed Property
+		- to indicate that the instance has been constructed
+		- can be used by onChange handlers for set-get properties to conditionalize actions
+		- particularly compelling to widgets, since being completely constructed is a good indicator child widgets added during construction exist and can be accessed
+		- some classes (maybe Zazzle.* or Uize.*) are already doing this with their own private properties
+
+	- idea: originator of a property set knows that the property is being set, so doesn't want to be informed of a change in the value? A way to provide an ID for the originator of a set? The basic ongoing problem is when multiple sources want to be able to change and also be informed of changes in a particular property. How does one make this more efficient and eliminate multiple redundant execution triggered by events?
+
+	- idea: a way to track whether a user originated an event. Sufficient to check on the presence of domEvent property? domEvent property should be propagated all the way up.
+
+	- new and more concise semantics for calling methods on superclass
+		................................................................................
+		_this.doIn (_superclass,'wireUi');
+
+		_class.doSuper (_this,'wireUi');
+		_class.useSuper (_this,'wireUi');
+		_class.callSuper (_this,'wireUi');
+
+		_superclass.on (_this,'wireUi');
+		_superclass.my (_this,'wireUi');
+		_superclass.doOn (_this,'wireUi');
+		_superclass.doMy (_this,'wireUi');
+		_superclass.useMy (_this,'wireUi');
+		_superclass.proto (_this,'wireUi');
+		_superclass.useMine (_this,'wireUi');
+		................................................................................
+
+Uize.Array
+	Uize.Array.flatten
+		................................................................................
+		Uize.Array.flatten = function (array) {
+			var oldArrayLength;
+			do {
+				oldArrayLength = array.length;
+				array = array.concat.apply ([],array);
+			} while (array.length != oldArrayLength);
+			return array;
+		};
+		................................................................................
+
+	Uize.Array.Matching
+		Uize.Array.Matching.countMatching
+		Uize.Array.Matching.removeMatching
+		Uize.Array.Matching.retainMatching
+
+		- model the interface for this package on the interface for the Uize.String.Lines package
+		- should this be more general and able to apply to both arrays or objects?
+
+	Uize.Array.Order
+		New 'binary' Mode for Uize.Array.Order.reorder
+			- reorders the array in a binary search pattern
+			1,2,3,4,5,6,7
+			4,2,6,1,3,5,7
+			- modes for order of iterating through at any depth level?
+
+		New 'evens odds' Mode for Uize.Array.Order.reorder
+			1,2,3,4,5,6,7
+			2,4,6,1,3,5,7
+			- what about 'evens reverse odds'?
+			- is this a special case of a more general algorithm? What about every third?
+				1,2,3,4,5,6,7
+				1,4,7,2,5,3,6
+				- for every successive scan, can the direction be different?
+
+		New 'odds evens' Mode for Uize.Array.Order.reorder
+			1,2,3,4,5,6,7
+			1,3,5,7,2,4,6
+			- what about 'odds reverse evens'?
+
+		- Uize.Array.Order.binary
+		- Uize.Array.Order.evensOdds
+		- Uize.Array.Order.oddsEvens
+	
+		Primary, Secondary, or Even Tertiary Ordering?
+			In other words, perhaps any reordering should be able have a chunk size, which could be larger than one element, and when it is, then the chunks can themselves be ordered according to secondary ordering.
+
+			Then, why not support arbitrary levels of subordering?
+
+	Uize.Array.Records
+		Uize.Array.Records.getColumn -- migrated from Uize.Data.getColumn
+		Uize.Array.Records.findRows -- migrated from Uize.Data.findRows
+		Uize.Array.Records.removeMatching
+			delete all records that match (with configurable match function)
+		Uize.Array.Records.retainMatching
+			delete all records that match (with configurable match function)
+
+	Uize.Array.Sort
+		Uize.Array.Sort.alphaNum
+			- a sophisticated, human / intuituve alphanumeric sort
+			- http://www.davekoelle.com/alphanum.html
+
+		Uize.Array.Sort.sortBy
+			- support for secondary, tertiary sorts
+				- sort value generator can be an array of sort value generators?
+			- support for optional sort value comparison function
+				This allows more sophisticated sorts. For example, with an alphanumerical (as opposed to ASCIIbetical) sort, the sort value generator function may do the work of parsing each element value into a set of number and non-number segments, and then the value comparison function can deal with comparing two sort values that may have different structure. In other words, the sort values generated cannot be compared by a simple a < b logical comparison.
+
+	Uize.Array.Uniques
+		Uize.Array.Uniques.getUniques
+		Uize.Array.Uniques.getOccurrences
+		Uize.Array.Uniques.getOccurrencesLookup
+
+	Uize.Array.Util
+		Uize.Array.Util.ensureValueIn
+			if the specified element is not in the specified source array, then it is added (configurable whether to prepend or append, but default is to append)
+		Uize.Array.Util.swap -- what does this do?
+
+Uize.Color
+	- support for % unit in "RGB string" decoder (eg. rgb(100%,50%,25%))
+		- support % generically in setTupleFromString, now that there are profiles for the color components
+	- for color profile conversions, can component profile min/max info now be used for normalizing values to 0-1 range, and denormalizing as well?
+	- for =to= and =Uize.Color.to= encoding methods, possibly a way to specify a target array or object for encodings that use arrays or objects (in some cases this would avoid wasteful creation of a temporary array)
+	- in a color space profile, should it be possible to also register short names for tuple components?
+		eg. for sRGB...
+			................................................................................
+			tuple:[
+				{name:'red',shortName:'r',min:0,max:255},
+				{name:'green',shortName:'g',min:0,max:255},
+				{name:'green',shortName:'b',min:0,max:255}
+			]
+			................................................................................
+
+		- could the short name then be used to automatically recognize object formats like {r:255,g:50,b:50} ?
+
+		- with component profile, instance methods could be supported, like...
+
+			................................................................................
+			myColor.getComponent ('red')
+			................................................................................
+
+			equivalent to =myColor.getComponent (0)=, but where naming a component might imply conversion across color spaces
+
+	- need a way for encodings to register tests for auto-decoders (eg. when adding HSV, how does one detect HSV object?)
+	- support for alpha
+
+	- a reference: http://www.easyrgb.com/index.php?X=MATH&H=01#text1
+
+	- refactor tomkidding.com to no longer use Tk.Color
+
+	- should named colors be defined with display names, rather than crunched names?
+		- the crunched names could be generated from the display names
+		- should the Uize.Color object have a name property, so that a particular instance can be given a name?
+
+	- disambiguating color space / format
+		Certain formats for representing data may produce ambiguity.
+
+		For instance, a color can be represented in both the RGB and HSL color spaces using an array with three elements. For certain colors, it cannot be automatically determined by the values of the elements which color space the color is being specified in. In such cases, a color value may be wrapped in an object with only one key, where the key's name specifies the color's encoding (color space and format), and where the value represents the encoded color.
+
+		- with values...
+			the UIZE way...
+				................................................................................
+				Uize.Color.blend ({hslArray:[200,100,40]},{hslArray:[240,10,0]},.25);
+				................................................................................
+
+			the dojo way...
+				................................................................................
+				dojox.color.blend (dojox.color.fromHsl(200,100,40),dojox.color.fromHsl(240,10,0),.25);
+				................................................................................
+
+		- with array variables
+			the UIZE way...
+				................................................................................
+				Uize.Color.blend ({hslArray:myHslColor1Array},{hslArray:myHslColor2Array},.25)
+				................................................................................
+
+			the dojo way...
+				................................................................................
+				dojox.color.blend (
+					dojox.color.fromHsl(myHslColor1Array[0], myHslColor1Array[1], myHslColor1Array[2]),
+					dojox.color.fromHsl(myHslColor2Array[0], myHslColor2Array[1], myHslColor2Array[2]),
+					.25
+				);
+				................................................................................
+
+				...or...
+
+				................................................................................
+				dojox.color.blend (
+					dojox.color.fromHsl.apply(0,myHslColor1Array),
+					dojox.color.fromHsl.apply(0,myHslColor2Array),
+					.25
+				);
+				................................................................................
+
+	- support for alpha, rgba
+
+	- consider normalizing RGB components to floats in range of 0 to 1
+
+	- lingering questions
+		- should from/to instance methods be renamed to set/get ? Or encode/decode?
+		- should Uize.Color.to be renamed to Uize.Color.convert ?
+
+Uize.Color.xCmyk
+	- an extension module with encodings for the CMYK color space
+
+Uize.Color.xUtil
+	- proximity sort
+		- ability to use average of colors as starting point for proximity (ie. center of clump) -- just add as note in example for sort method
+
+	- possibly have a gray encoding
+		eg. {gray:50}
+
+		- a gray level in range of 0-100, being black to white
+		- encoding name is gray, so can use {'encoding name':value} scheme for specifying value
+		- its an encoding for sRGB
+		- when encoding, average components to produce gray value ((tuple [0] + tuple [1] + tuple [2]) / 3 / 255 * 100
+
+	Uize.Color.sort
+		- support 4-tuple color spaces
+		- should it be possible to do a primary,secondary,tertiary component-based subsort after a proximity sort?
+			- ability to specify component order (or can some weighting scheme apply here as well?)
+
+	Uize.Color.closest
+		- returns the closest match to a reference color, out of a specified array of colors
+			eg. closestColorANYTYPE = Uize.Color.closest (referenceColorANYTYPE,colorsARRAY);
+
+			- how does this relate to proximity sort? Can it share code with sort?
+
+	Uize.Color.makeCombinations
+		- support 4-tuple color spaces
+
+	Uize.Color.makeSeries
+		.....................................
+		colorsARRAY = Uize.Color.makeSeries (
+			color1ANYTYPE,
+			color2ANYTYPE,
+			componentChaosFLOATorARRAY,
+			outputEncodingSTR
+		);
+		.....................................
+
+		eg. =Uize.Color.makeSeries ('0','f',100)=
+		eg. =Uize.Color.makeSeries ('0','f',100,0,'#hex')=
+
+		component chaos of 1 lets you create any number of random colors within a range
+
+Uize.Comm
+	- must support synchronous communication
+		- one thing that Ben would like to do is implement a Uize.Comm.Wsh
+	- provide a way to allow JavaScript functions to be registered as handlers for specific requests, intercepting requests before they reach the performRequest method of a subclass. This would be useful for emulation of AJAX communication in tests and demos.
+	- caching
+		- edge case optimization: consolidate consecutive requests when identical and memory caching is in use
+	- flushCache property of request object
+	- timeout failure mechanism
+	- cancelability for requests
+	- configurable comm_mode & output format query params (ie. not always assumed)
+
+Uize.Comm.Ajax
+	- better handling of error
+
+Uize.Comm.Iframe
+	- refactor
+		- currently has dependency on Zazzle site URL
+		- should support multi-instance
+		- uniquifying strings could be generated by Uize.Url.getCacheDefeatStr
+
+Uize.Cookie
+	- getCookies method that returns the values of all the cookies as a hash
+
+Uize.Css
+	- methods
+		Uize.Css.fromProperty
+		Uize.Css.toProperty
+		Uize.Css.fromPropertyName
+		Uize.Css.toPropertyName
+		Uize.Css.fromPropertyValue
+		Uize.Css.toPropertyValue
+		Uize.Css.fromProperties
+		Uize.Css.toProperties
+		Uize.Css.fromRule
+		Uize.Css.toRule
+
+	- modules
+		Uize.Css.Shadow
+		Uize.Css.BoxRadius
+		Uize.Css.Gradient
+		Uize.Css.Background
+		Uize.Css.Border
+
+Uize.Curve.Mod
+	- Uize.Curve.Mod.tame
+		- a curve function modifier that...
+			- constrains a curve function so that its values are in the range of =0= to =1=
+			- guarantees that the value =0= is returned for the input value of =0=, and that the value =1= is returned for the input value of =1=
+
+	- Uize.Curve.Mod.Sample
+		- generates a curve function that is a sample, with a specifiable degree of precision, of the specified curve function. This could be useful for curve functions that are performance intensive and where a finite precision might be acceptable. Can be lazy in generation, so values are only generated when needed - perhaps this is a parameter. Also possibly a parameter for interpolation between sample points when using curve function.
+
+	- Uize.Curve.Mod.noise
+		- possible implementation...
+			................................................................................
+			_package.noise = function (_curveFunction,_noiseLevel) {
+				/*** parameter defaulting ***/
+					_curveFunction = _resolve (_curveFunction);
+					if (_noiseLevel == _undefined) _noiseLevel = .25;
+
+				function _noiseCurveFunction (_value) {
+					function _getNoiseValue (_value) {
+						var
+							_cycles = 20,
+							_cycle = ((_value / .001) % 20) / (_cycles - 1)
+						;
+						if (!(Math.floor (_cycle) % 2)) _value = (_value + .05) % 1;
+						return (Math.pow (_cycle,Math.abs (_value - 1 / (_cycle || .001) / ((1 - _value) || .0001),1)) / ((1 - _value) || .0001)) % 1;
+					}
+					return (_getNoiseValue (_value) + _getNoiseValue (((1 - _value) * Math.PI) % 1)) % 1;
+				}
+
+				return (
+					!_noiseLevel
+						? _curveFunction
+						: _noiseLevel == 1
+							? _noiseCurveFunction
+							: function (_value) {
+								return _blendFloats (_curveFunction (_value),_noiseCurveFunction (_value),_noiseLevel);
+							}
+				);
+			};
+			................................................................................
+
+Uize.Curve.Plot
+	- a class that allows the creation of arbitrarily complex multi-point curve functions
+
+	Uize.Curve.Plot.plot
+		- x distribution curve function, array of y values, y-to-y interpolation curve function
+		- array of x and y values, y-to-y interpolation curve function
+		- array of x and y values and interpolation curve function
+
+		................................................................................
+		Uize.Curve.Plot.plot (pointsARRAY)
+		Uize.Curve.Plot.plot (pointsARRAY,interpolationCurveFUNC)
+		Uize.Curve.Plot.plot (pointsARRAY,interpolationCurveFUNC,distributionCurveFUNC)
+		................................................................................
+
+		pointsARRAY can be...
+			- array of numbers, being y values
+			- array of objects, containing x, y, and curve properties
+				- if x property is not present, use distributionCurveFUNC
+				- if curve property is not present, use interpolationCurveFUNC
+
+Uize.Data
+	- Uize.Data.safeLookup
+		- performs a lookup in a lookup object that may not be a safe lookup, so it handles the problems keys
+		- perhaps there should also be a similar Uize.Data.keyIn (or Uize.Data.keyExists) method
+		- possible implementation
+			................................................................................
+			var _problemKeys = {constructor:1,toString:1,valueOf:1};
+			Uize.Data.safeLookup = function (_lookup,_key) {
+				if (_problemKeys [_key]) {
+					var
+						_value = _lookup [_key],
+						_lookupConstructor = _lookup.constructor
+					;
+					return _lookupConstructor && _value == _lookupConstructor.prototype [_key] ? _undefined : _value;
+				} else {
+					return _lookup [_key];
+				}
+			};
+			................................................................................
+
+	................................................................................
+	Uize.Data.resolveTransformer = function (_transformer) {
+		return (
+			typeof _transformer == _typeFunction
+				? _transformer
+				: typeof _transformer == _typeString
+					? new Function ('value','key','return ' + _transformer)
+					: function (_value) {return _transformer.test (_value)}
+		);
+		/*?
+			Static Methods
+				Uize.Data.resolveTransformer
+					SYNTAX
+					..............................................................................
+					transformerFUNC = Uize.Data.resolveTransformer (transformerFUNCorSTRorREGEXP);
+					..............................................................................
+
+					NOTES
+					- see the related =Uize.Data.resolveMatcher= static method
+		*/
+	};
+	................................................................................
+
+	................................................................................
+	Uize.Data.resolveMatcher = function (_matcher,_inverse) {
+		_matcher = _class.resolveTransformer (_matcher);
+		_inverse = !!_inverse;
+		return function (_value,_key) {return !_matcher (_value,_key) == _inverse};
+		/*?
+			Static Methods
+				Uize.Data.resolveMatcher
+					SYNTAX
+					..................................................................
+					matcherFUNC = Uize.Data.resolveMatcher (matcherFUNCorSTRorREGEXP);
+					..................................................................
+
+					VARIATION
+					..............................................................................
+					matcherFUNC = Uize.Data.resolveMatcher (matcherFUNCorSTRorREGEXP,inverseBOOL);
+					..............................................................................
+
+					NOTES
+					- see the related =Uize.Data.resolveTransformer= static method
+		*/
+	};
+	................................................................................
+
+	................................................................................
+	Uize.Data.makeValueTransformerGenerator = function (_valueTransformer) {
+		_valueTransformer = Uize.Data.resolveTransformer (_valueTransformer);
+		var _generator = function () {
+			if (arguments.length) {
+				var _arguments = [0];
+				_arguments.push.apply (_arguments,arguments);
+				return function (_value) {
+					_arguments [0] = _value;
+					return _valueTransformer.apply (0,_arguments);
+				};
+			} else {
+				return _valueTransformer;
+			}
+		};
+		_generator.exec = _valueTransformer;
+		return _generator;
+	};
+	................................................................................
+
+	Uize.Data.resolveSourceAndTarget
+		................................................................................
+		_package.resolveSourceAndTarget = function (_source,_target,_targetDefault,_keysMayChange,_emptyOutTarget) {
+			if (_target === _undefined) _target = _targetDefault;
+			if (typeof _source == 'number') {
+				_source = new Array (_source);
+				if (typeof _target != 'object') _target = _source;
+			} else if (typeof _target != 'object') {
+				_target = !_target ? _source : Uize.isArray (_source) ? [] : {};
+			}
+			if (_keysMayChange && _target == _source)
+				_source = Uize.isArray (_source) ? _source.concat () : Uize.copyInto ({},_source)
+			;
+			_target != _source && _emptyOutTarget && Uize.Data.emptyOut (_target);
+			return {source:_source,target:_target};
+		};
+		................................................................................
+
+		usage...
+
+		................................................................................
+		var _sourceAndTarget = Uize.Data.resolveSourceAndTarget (_source,_target,true);
+		_source = _sourceAndTarget._source;
+		_target = _sourceAndTarget._target;
+		................................................................................
+
+	- Uize.Data.getLookup & Uize.Data.getReverseLookup
+		- must deal with the fact that valueOf and toString are on the prototype of Object
+		- for Uize.Data.getLookup, support mode with no parameters that returns an empty object (but with valueOf and toString set to undefined)
+	- Uize.Data.doPropertiesSetsMatch
+		returns true if two objects have the same set of properties
+
+	- Uize.Data.filter
+		- support for new filter types
+			- regular expression type filter
+				- when regular expression is specified for filter, properties are filtered that match the regular expression
+			- function type filter
+				- when function is specified for filter, function receives property name and must return boolean indicating match
+			- object type filter
+				- filter source object to have only properties contained in filter object
+			- string type filter
+				- only permit the exactly matching property name? How else would this be handled?
+			- array -- CHANGE IMPLEMENTATION?
+				- already supported, but need to change implementation? Change implementation for performance, or code size?
+		- support for target property
+
+	- Uize.Data.identical
+		- handle recursion (safeguard against infinite loops). Do this by marking objects / arrays as encountered?
+		- how to support comparison of Uize subclass instances? Is there a meaningful way to do this?
+			- can two instances of classes that support the value interface simply be compared by their respective values?
+			- can two instances of any Uize subclass simply be compared by the values of all their set-get properties?
+
+	- implement Uize.Data.hasRecursion method?
+	- Uize.Data.map
+		- support string for _source?
+	- Uize.Data.mapKeys
+		- lets you rename keys in an object
+
+Uize.Data.Csv
+	- test performance of parser using regular expressions
+
+Uize.Data.Simple
+	- fix bug where multi-line values are unindented using a crude slice (switch over to using the Uize.String.Lines.indent method)
+	- parsing for quoted strings (names and values)
+	- support for structure without indenting
+
+Uize.Date
+	- possibly turn package into an Object
+		- stitch in instance methods from Date object, as is done with the Uize.String.Builder object
+		- make majority of static methods available as instance methods
+	- Uize.Date.resolve
+		- consider expanding dateSTRorOBJ value type to dateSTRorINTorOBJ, in order to support dates specified as POSIX milliseconds
+	- refactor tomkidding.com to no longer use Tk.Date
+	- localization
+
+	- possible new methods...
+		- Uize.Date.is - determines if specified value is a valid date (could be used by Uize.Widget.TableSort in checking for valid date columns)
+	- Uize.Date.getRange
+		- support more range types
+			- range, neatly bound
+				- start to end
+					eg. this week, this month, this year, etc.
+				- start to date
+					eg. from start of this month till date
+				- date to end
+					eg. from date till end of month
+				- end and beyond
+					eg. starting next month
+				- up until start
+					eg. before this month
+				- past
+					- before date
+				- future
+					- after date
+			- range, with date alignment
+				- 0: starting at
+				- .5: range with date in middle
+				- 1: ending at
+	- Uize.Date.isRecent
+		- ability to specify time unit for recency window (default to days)
+		- right now, always checks if specified date is recent, relative to now - could also allow reference point date to be specified
+		- right now, you can check if date is within a time window before or after now -- what about date being "around" now (ie. in a window some time leading up to and some time past now)
+	- Uize.Date.constrain
+		- constrain a date to a specified Date range
+	- Uize.Date.inRange
+		- could be refactored to make use of new Uize.Date.constrain method
+			return +(_date = _resolve (_date)) == +_package.constrain (_date,_range)
+		- benefit would be smaller implementation, and Uize.Date.constrain would support ranges where minValue is after maxValue, because it would use Uize.constrain in its implementation
+
+Uize.Date.Formatter
+	Uize.Date.Formatter.getDateComponents
+		- returns an object containing the values for all the date components
+
+	Uize.Date.Formatter.format
+		- add support for time zone
+		- add support for milliseconds
+		- allow format to be a function that accepts an object containing the values for all the date components
+			- this would allow a format to be a compiled template, which would allow certain of the component values to go through encodings as well
+
+	Uize.Date.Formatter.parse
+		- add support for time zone
+		- add support for milliseconds
+		- consider supporting {date} token (might need complex regular expression)
+		- possible encoding options / switches
+			- case sensitive
+			- allow padding around token values
+			- allow padding around token separators
+				eg. a date formatted with 'YYYY/MM/DD' could currently no be parsed with 'YYYY / MM / DD' because all whitespace segments are turned into \s+ matches. Perhaps this is just a switch on the whitespace segment matcher... \s* vs \s+
+		- possible loose rules around certain separator characters
+			eg. a date formatted with 'YYYY-MM-DD' could not currently be parsed with 'YYYY/MM/DD'
+		- consider making dates not validate when values for equivalent / overlapping date components don't agree
+			- eg. if the day name is not correct for the date, or if the month name is not correct for the month, or if the am/pm is not correct for the hour of the day (if it is specified using 24hr / military time)
+
+Uize.Debug
+	- a package to facilitate logging and debugging of all Uize subclasses
+		- provide a generic log service
+		- ability to trace method calls, events, property value changes, etc. (provide multiple levels of filters)
+
+Uize.Doc.Simple
+	- improved automatic linking behavior
+		- multiple branch disambiguation syntax (eg. Section : Section : Section)
+		- warnings
+			- for any ambiguity in links to sections of same name
+				- could be a log of how such ambiguities were resolved
+					- link text
+					- link context (section identifier)
+					- resolved link (section identifier)
+			- for links to non-existent sections (ie. dead links)
+			- invalid / unrecognized types of object blocks
+		- should never link the same item more than once in the same paragraph
+		- should ideally never link to the same URL / anchor more than once in the same section (unless, perhaps there was at least one deeper section between the new occurrence and the last occurrence)
+		- should never link to the section within that same section, unless...
+			- the link is in a much later paragraph in that section
+			- the link is in a subsection of that section
+
+	- table improvements
+		- add ability to formally describe individual columns
+			- support for horizontal alignment for columns
+			- logical (and limited) styling options for columns (that key into specific CSS classes)
+			- columns can be declared as having SimpleDoc formatted text
+			- ability to specify type for a column's data (eg. completion level, rating, time, etc.)
+		- allow tables to be sortable (column description can qualify sorting behavior)
+		- ability to specify row data as object, rather than array, with named keys identifying columns
+
+	- need a more robust solution for defining bullet lists, particularly to allow nested lists, and nested contents within lists
+
+	- conversion of special characters to HTML entities
+	- formatting issues
+		- nested inline formatting
+		- some formatting is currently supported in inline code segments, which is a problem for use of "*", "+", "_", and other formatting characters in inline code.
+		- there is no formal way to escape the "=" character inside inline code segments
+		- there should be a way to escape all formatting characters
+		- a way to have bolded text that is not auto-linked
+
+	Problems
+		- no way to disambiguate for intra-document linking purposes when an instance method and a set-get property have the same name (happens with =wired= in doc for Uize.Widget, for example)
+
+Uize.Doc.Sucker
+	- automatically stitched in documentation, based on auto-detection of features and such...
+		- module level info
+			- a list of all modules directly under the module's namespace
+			- the unit test module (if one exists) that tests this module
+			- a list of the examples that feature the module
+
+			- a way to see a table (or other representation) of the module meta data, as well as other information like file size, scrunched file size, etc.
+
+		- feature level info
+			- for static features, a note regarding whether or not the static feature is inheritable
+			- for properties (instance properties, static properties, set-get properties), note the initial value
+
+			- for method features, the ability to see the implementation (not the scrunched, of course, so how???)
+
+		- more module utilities
+			- a way to launch a table to view all the features detected for the class
+			- a way to see the full list of dependencies
+			- a way to see the total scrunched file size of the module and all its dependencies
+			- a list of all the other modules that depend on this module
+				- directly
+				- indirectly
+			- a way to load and play with the module
+
+	- create a test page/utility for displaying doc, given any JS file's contents as input
+
+Uize.Fade
+	- instead of start / stop methods, just use property interface (ie. inProgress property)
+	- for compound curves and quantization, a way to specify a default for all properties of an object, when an object is specified in order to specify curves or quantization for some properties
+		eg.
+			................................................................................
+			quantization:{
+				'*':1,
+				opacity:0
+			}
+			................................................................................
+
+			Without this ability, if you wanted quantization to be 0 for opacity, but 1 for all other properties, you'd be forced to explicitly specify it for all those other properties. The alternative would be to specify quantization:1, but then you can't have 0 for opacity.
+
+	- ability to pause and resume a time-based fade
+	- ability to specify the number of updates in the fade
+		1 = gets to end immediately
+		2 = start value, then end value
+		n = start value, update 2, update 3, ..., end value
+
+	- consider changing the implementation of reverse, to instead swap the start and end values (or offer an additional property for this kind of fade reversing)
+
+Uize.Fade.xSeries
+	- ability to specify decoder and encoder functions, so that you could do something like...
+
+	................................................................................
+	Uize.Fade.getSeries ('#000000','#ffffff',20,{from:Uize.Color.encoder ('#hex'),to:Uize.Color.decoder ('#hex'))
+	Uize.Fade.getSeries ('#000000','#ffffff',20,Uize.Color.encodings ['#hex'])
+	Uize.Fade.getSeries (Uize.Color.from ('#000000'),Uize.Color.from ('#ffffff'),20) ???
+	................................................................................
+
+	- if there was a toNumerical and fromNumerical method for all objects, then something like the Uize.Fade class could use these methods for interpolating
+
+Uize.Fade.xFactory
+	- ability to chain fades
+	- for Uize.Fade.fadeProperty, and Uize.Fade.fadeProperties, have a way to specify values that are to be relative to current value
+		eg.
+			................................................................................
+			Uize.Fade.fadeProperty (slider,'value',null,['+',10])
+			Uize.Fade.fadeProperty (slider,'value',null,['+',10])
+			Uize.Fade.fadeProperty (slider,'value',null,['+',incAmount])
+			Uize.Fade.fadeProperty (slider,'value',null,['-',10])
+			Uize.Fade.fadeProperty (slider,'value',null,['%',110])
+			Uize.Fade.fadeProperty (slider,'value',null,['*',1.1])
+			Uize.Fade.fadeProperty (slider,'value',null,['=',110])
+			Uize.Fade.fadeProperty (slider,'value',null,['=',function (value) {return value * 1.1}])
+			................................................................................
+
+	- for performance optimization, consider reusing spent fades rather than throwing them away for garbage collection
+
+Uize.Fx
+	- for all style properties that can be animated by this module, it would be useful if parsing and serializing of the style properties was available outside of the context of just fading for FX purposes
+		- perhaps a Uize.Css module (see Uize.Css)?
+
+	- Uize.Fx.fadeStyle
+		- ability to take over fading of certain style properties from active fades
+		- look into support for HSL color fades
+			- with true support, not just initial conversion to RGB
+			- maybe support for all color spaces, with translation at time of setting style properties, so you could always interpolate in the color space's original components
+			- don't think IE6 supports hsl(...,...,...), so may have to do translation to RGB when setting properties
+		- ability to chain fades
+		- support for compound TRBL values, like "1px 0px 10px 5px" (split up into multiple properties?)
+		- what's the best way to support compound, mixed type values like "1px solid #fff"? (split up into multiple properties?)
+		- ability to set style properties immediately for properties and terminate active fade (ie. like a fade with 0 duration)
+		- support for non-px units of dimension (em, pt)
+		- idea: ability to specify a node for start or end style, and have the style values for that node picked up
+		- ability to fade style for multiple nodes at the same time
+		- think about what it means to have generators for components of a fade effect, or being able to compose a fade from multiple different parts, where the generators of those parts may provide start values, end values, and curve and quantization values. Perhaps such a use case could be satisfied by just being able to merge two fades together.
+		- have a way to specify values that are to be relative to current value
+
+	- migrate effects from Uize.Widget.Swap into Uize.Fx
+	- Uize.Fx.fadeOpacity
+	- possibly higher level effects (could be in subnamespace), ala what's available in some other frameworks
+	- for defineStylePropertiesProfile, support ability to build quantization object based upon decoded fade value, rather than assuming that one size fits all for quantization, especially since some properties like textShadow will have many different components, each with different quantization needs (eg. color and px vs. em or ex).
+
+Uize.Fx.String
+	- it should be possible to animate the value of a string over time, and have anything display the value of that string (could be shown in browser's title bar, could be shown in a div or span, could be set on an instance property, etc.)
+
+	................................................................................
+	javascript:var newTitle = 'THIS IS A NEW TITLE THAT SHOULD BE ANIMATED FROM LEFT TO RIGHT'; Uize.Fade.fade (function (value) {document.title = newTitle.slice (0,value)},0,newTitle.length,1000,{quantization:1,curve:Uize.Curve.Rubber.easeOutBounce (4,1.5)}), undefined;
+	................................................................................
+
+
+	................................................................................
+	Uize.Fx.Title.fade (newTitle,1000,{curve:Uize.Curve.Rubber.easeOutBounce (4,1.5)});
+	................................................................................
+
+	................................................................................
+	Uize.Fade.fadeString (newTitle,1000,{curve:Uize.Curve.Rubber.easeOutBounce (4,1.5)})
+	................................................................................
+
+Uize.Fx.xBoxRadius
+	- extends support for box-radius CSS3 style property
+
+Uize.Generator
+	- from the widget's perspective as a user of generators
+		- you have a set of display properties (set-get properties that are reflected in the UI)
+		- a widget class should be able to register which of its set-get properties affect display
+			- of the set-get properties that affect display...
+				- which are updated by the client code
+				- which are handled as inputs by the generator specified by the html set-get property
+				- some display set-get properties may be handled by both the generator and client code
+
+		................................................................................
+		if (property values are modified) {
+			displayPropertiesModified = /* code to determine this */
+			if (displayPropertiesModified.length) {
+				displayPropertiesOnlyReflectedByRenderWereModified = /* code to determine this */
+				if (displayPropertiesOnlyReflectedByRenderWereModified && can re-render DOME) {
+					unwireUi ();
+					remove DOM
+					re-render DOM and insert
+					wireUi ();
+					remove properties handled by re-render from displayPropertiesModified
+				}
+				if (displayPropertiesModified.length) {
+			}
+		}
+		................................................................................
+
+		- html set-get property
+			- string, being a template into which a limited set of params are substituted
+			- a function, which can generate the HTML, and which receives no parameters but which is called as a method on the instance (so can access property values)
+			- an instance of a generator class
+
+	- generator principles
+		- a generator should be able to leverage or depend on other code modules, so it should be declared with a module declaration
+		- a generator should be able to register its inputs
+		- a generator should not assume the context of its usage, so it should be able to operate on the server side or in a non HTML document context
+
+	- Uize.Generator implements simply...
+		- set-get properties
+			- asynchronous
+			- params
+		- getOutput (params,callback)
+			- result can be a string, or an object of which text is a property
+
+	- good tests of the paradigm would be...
+		- implementing the slider skin extension, in such a way, that setting properties track, knob, and other colors would trigger a re-render
+		- providing the functionality of Zazzle.ControlPoptions in Uize.Widget.Options
+
+	- classes of generator
+		- thoughts
+			- generators should be able to require any module in order to accomplish generating their output
+			- generators should be able to use JavaScript templates, or other means
+			- generators should be able to be used in a context outside of the Web, Web pages, and browsers
+
+			- widgets should be able to use generators to generate their markup
+			- the same class of widget should be able to use any number of generators, and theoretically, different widget classes should be able to use the same generator
+			- a generator should be able to leverage other generators in the process of generating their output
+			- generators should be able to register their input interface
+
+		- Uize.Generator (base class)
+			- params
+
+		- Uize.Generator.Basic (utilizing basic substitution)
+			- params
+			- templateStr
+
+			EXAMPLE
+			................................................................................
+			new Uize.Generator.Basic ({
+				params:['property1','property2'],
+				templateStr:'This template supports [#property1] and [#property2]'
+			});
+			................................................................................
+
+		- Uize.Generator.Tokenized
+			- params
+			- templateStr
+			- tokenNaming
+
+			EXAMPLE
+			................................................................................
+			new Uize.Generator.Tokenized ({
+				params:['property1','property2'],
+				templateStr:'This template supports {property1} and {property2}',
+				tokenNaming:'{KEY}'
+			})
+			................................................................................
+
+		- Uize.Generator.Population
+			- params
+			- templateStr
+			- templateItem
+
+			EXAMPLE
+			................................................................................
+			new Uize.Generator.Population ({
+				params:['property1','property2'],
+				templateStr:'This template supports property1Value and property2Value',
+				templateItem:{
+					property1:'property1Value',
+					property2:'property2Value'
+				}
+			})
+			................................................................................
+
+		- Uize.Generator.Function
+			- generator
+
+			EXAMPLE
+			................................................................................
+			new Uize.Generator.Function ({
+				params:['property1','property2'],
+				generator:
+					function (_params) {
+						return 'This template supports ' + _params.property1 + ' and ' + _params.property2;
+					}
+			});
+			................................................................................
+
+		- Uize.Generator.Ajax
+			- serviceUrl
+
+			EXAMPLE
+			................................................................................
+			new Uize.Generator.Ajax ({
+				params:['property1','property2'],
+				url:'service/getcomponent?'
+			});
+			................................................................................
+
+			NOTES
+			- provides a system for expressing dynamically loaded HTML through service
+			- should it require its own instance of Uize.Comm.Ajax
+			- no, because it should be able to use whatever the protocol is that's in use?
+			- should defer to page's environment for URLs and comm
+
+		- Uize.Generator.Async
+			requires a...
+				- comm object
+				- environment for URLs
+
+				- or...
+					maybe it just requires a loader...
+
+			- to provide the maximum flexibility, the only thing that an async generator needs is a loader
+
+		- Uize.Generator.Http
+
+Uize.Is
+	................................................................................
+	Uize.Is.nonNull
+	Uize.Is.anInstanceOf (classOBJ)
+	Uize.Is.ofType (typeSTR)
+	Uize.Is.anArray
+	Uize.Is.aBoolean
+	Uize.Is.aString
+	Uize.Is.aNumber
+	Uize.Is.aFunction
+	Uize.Is.anObject
+	Uize.Is.aRegExp
+	Uize.Is.arrayLike
+	Uize.Is.inRange (min,max)
+	Uize.Is.negative
+	Uize.Is.positive
+	Uize.Is.inLengthRange (min,max)
+	Uize.Is.nonEmpty
+	Uize.Is.anInteger
+	Uize.Is.evenNumber
+	Uize.Is.oddNumber
+	Uize.Is.arrayWithNoRepeats
+	................................................................................
+
+	- other possibles
+		................................................................................
+		Uize.Is.greaterThan
+		Uize.Is.lessThan
+		Uize.Is.emailAddress
+		Uize.Is.Url
+		Uize.Is.Color
+		................................................................................
+
+	- semantics for test vs make tester
+		- test
+			................................................................................
+			Uize.Is.inRange (0,100,value)
+			................................................................................
+
+		- make tester
+			................................................................................
+			function (value) {return Uize.Is.inRange (0,100,value)}
+
+			Uize.Is.inRange.fn (0,100)
+			Uize.Is.inRange.tester (0,100)
+			Uize.Is.inRange.test (0,100)
+			Uize.Is.inRange.match (0,100)
+			Uize.Is.inRange.matcher (0,100)
+			Uize.Is.inRange.value (0,100)
+
+			Uize.Is.inRange.make (0,100)
+			Uize.Is.inRange.capture (0,100)
+			Uize.Is.inRange.freeze (0,100)
+
+			Uize.Is.inRange._(0,100)
+			Uize.Is.inRange ['...'] (0,100)
+			Uize.Is.inRange ['?'] (0,100)
+			................................................................................
+
+		- more thoughts on make tester
+			................................................................................
+			Uize.Is.instanceOf (Uize.Widget.FormElement,myInstance)
+			Uize.Is.instanceOf (Uize.Widget.FormElement) (myInstance)
+			Uize.Is.instanceOf.tester (Uize.Widget.FormElement)
+			Uize.curry (Uize.Is.instanceOf,Uize.Widget.FormElement)
+			Uize.Is.instanceOf.curry (Uize.Widget.FormElement)
+
+			Uize.bind (Uize.Is,'instanceOf',[Uize.Widget.FormElement])
+
+
+			Uize.makeCaller (context,method,params)
+
+			Uize.Widget.setNodeValue.bind ()
+
+			myInstance.methodCaller ('setNodeValue',['value','']);
+
+			Uize.bind (myInstance,'setNodeValue',['value',''])
+			Uize.delegate (myInstance,'setNodeValue',['value',''])
+			Uize.performer (myInstance,'setNodeValue',['value',''])
+			Uize.makeCaller (myInstance,'setNodeValue',['value',''])
+			Uize.methodCaller (myInstance,'setNodeValue',['value',''])
+			Uize.functionCaller (myInstance,'setNodeValue',['value',''])
+			Uize.methodProxy (myInstance,'setNodeValue',['value',''])
+
+			myInstance.setNodeValue.bind (myInstance,['value',''])
+			Uize.Widget.setNodeValue.bind (myInstance,['value',''])
+			................................................................................
+
+Uize.Matcher
+	................................................................................
+	Uize.Matcher.inRange = Uize.Data.makeValueTransformerGenerator (
+		function (_value,_minValue,_maxValue) {return _value >= _minValue && _value <= _maxValue}
+	);
+
+	Uize.Matcher.inRange (1,100);         // creates a matcher
+	Uize.Matcher.inRange.exec (5,1,100);  // executes a matcher immediately against a subject
+	Uize.Matcher.inRange (1,100) (5);     // creates a matcher, uses it immediately, and throws it away
+	................................................................................
+
+Uize.Conformer
+	................................................................................
+	Uize.Conformer.toRange = Uize.Data.makeValueTransformerGenerator (Uize.constrain);
+
+	Uize.Conformer.toRange (1,100);         // creates a conformer
+	Uize.Conformer.toRange.exec (5,1,100);  // executes a conformer immediately against a subject
+	Uize.Conformer.toRange (1,100) (5);     // creates a conformer, uses it immediately, and throws it away
+	................................................................................
+
+Uize.Json
+	- document Uize.Json.encodingOptionsPresets static property
+	- perhaps optimize the mini option for higher performance, possibly avoiding recursion?
+	- rely on new JSON object that's supported in FF3.5 and IE8 for mini mode
+	- a safe mode that will neutralize </script> and other HTML tags inside string literals by escaping the less than sign as \x3c
+
+Uize.Node
+	- Uize.Node.setValue & Uize.Node.getValue
+		- respect disabled property?
+			- what about disabled select options, radios?
+			- browsers are not supposed to send values for disabled form elements to the form processor, so should getValue have special handling to mimic this behavior?
+
+	- NEW WIRE EVENTS MECHANISM
+		- consider providing a way of unwiring wirings by specifying the wiring IDs, and returning wiring IDs from Uize.Node.wire and myWidget.wire
+
+		**** make sure that Uize.Node.wire handles rewiring the same event for the same node
+			1) when is this likely to happen? what code might do this?
+			2) how would I accomplish this without Uize.Node.wire becoming too slow?
+
+		- make changes so that wired nodes are only remembered by ID (make IDs on the fly for nodes without)
+		- for all widget classes...
+			- make sure no events are being wired in a way that they wouldn't get unwired
+			- look at moving more child widget creation into constructor rather than wireUi
+
+	- Uize.Node.display
+		- IDEA: respecting initial non-none display value
+			................................................................................
+			var currentDisplay = Uize.Node.getStyle (node,'display');
+			if (mustDisplay != (currentDisplay != 'none')) {
+				if (mustDisplay) {
+					node.style.display = node.OLDDISPLAY || 'block';
+				} else {
+					node.OLDDISPLAY = currentDisplay;
+					node.style.display = 'none';
+				}
+			}
+			................................................................................
+
+	- Uize.Node.getProperty
+		- should support string for property name, or object for properties
+
+	- Uize.Node.find
+		- provide a way to search through a specified set of nodes (so that one can chain searches)
+		- think about supporting node blob for root, or test object for root (ie. invoke find)
+		- think about testing...
+			- style properties
+			- calculated / computed style properties
+			- element attributes (as opposed to reflected properties)
+		- how would one do OR finds? (basically, merging multiple finds)
+		- idea: optimization for when tagName is non-simple type (could test tagName against a known list of tag names and perform successive getElementsByTagName on result set of tag names)
+
+	- facility for specifying a set of nodes using a match object (eg {class:/^heading\d+$/})
+
+	- methods that should coerce use of valueOf interface
+		- Uize.Node.setProperties
+
+	- Uize.Node.setStyle
+		- when setting opacity, if opacity is 1, set opacity properties to '' (empty string). Some browsers seem to still be processing opacity when set to 1, which is slowing down render time.
+
+	- Uize.Node.getStyle
+		- it would be useful to have a way to parse out a number from style attribute values that are denominated in px (eg. 128px -> 128, empty string -> 0)
+
+	- Uize.Node.injectHtml
+		- support a node reference, or document fragment for html parameter
+
+	- for Uize.Node.getCoords, consider deprecating some of the properties of the return object (eg. right, bottom) to simplify the interface (first investigate extent of usage)
+	- for Uize.Node.isNode, is it possible to use instanceof in some way? What about the cross frames issue in FF?
+	- consider "fixing" Uize.Node.doRectanglesOverlap method to be able to work as well for floating point and relative coordinates (ie. not just pixels). Could it then be used in Ben's DT code?
+	- for Uize.Node.getByMatch, consider supporting regular expressions in the properties match object
+	- rename: getDimensions -> getSize
+	- new methods
+		- setSize
+	- Uize.Node.wire to support array for _eventName parameters (ie. change to just _event)
+
+Uize.Node.Pos
+	- a module that provides services for determining and manipulating node positions
+
+Uize.Node.Tree
+	Uize.Node.Tree.getTreeFromPage
+		- should support description property for items, just as Uize.Node.Tree.getTreeFromList, but should look at title attribute of section heading node
+		- should support expanded property for items, just as Uize.Node.Tree.getTreeFromList, but should look at display style for section body node (would need to work out how to identify section body nodes)
+		- fix method so that it doesn't have to modify the HTML that it analyzes in order to produce link property value (possibly look for id of section heading node, and possibly assign if not present, but have this behavior be configurable, with the default being to not modify the DOM)
+	Uize.Node.Tree.getTreeFromHeadings
+		- a configurable method for getting a tree data object from heading nodes
+		- ability to specify a qualifying CSS class, or some other arbitrary node matcher, to identify heading nodes
+		- configurable heading level function
+		- examples
+			- heading nodes are h1, h2, h3, h4, h5 tags, where heading level is determined from tag name
+			- heading nodes have special class names, and heading level is determined from class name
+			- heading nodes have specially formatted id attributes, and heading level is determined from id value
+
+Uize.Node.VirtualEvent
+	- can a virtual DOM event involve multiple nodes, or more complex relationships?
+
+	- ideas for new virtual DOM events
+		- match(matchObject)
+			- match()
+				- wildcard virtual DOM event
+				- wires handlers for all events supported by node type
+		- firstClick()
+		- repeatClick(times,maxInterval)
+		- key abstractions
+			- delete()
+			- cut()
+			- copy()
+			- paste()
+			- print()
+			- undo()
+			- redo()
+		- ctrl('v')
+		- keyDown(keyName)
+			- examples...
+				- keyDown('delete')
+				- keyDown('tab')
+				- keyDown('enter')
+		- keyPressed(keyName)
+			- examples...
+				- keyDown('delete')
+				- keyPressed('v')
+				- keyPressed('v',{shift:true,ctrl:true})
+		- inState({state:'mouseover',shiftKey:true})
+			- would fire when mousing over node with shift modifier key pressed
+			- would fire when already moused over node and then pressing down shift key
+		- notInState({state:'mouseover',shiftKey:true})
+			- would fire when having been moused over node and having shift modifier key pressed, and then either mousing out of node or releasing shift modifier key
+		- becomeSeen
+		- becomeUnseen
+		- valueChange
+		- not quite sure what to do with these ones...
+			- mouseenter (currently mouseover)
+			- mouseleave (currently mouseout)
+		- sector detection events
+			- virtual DOM events for when mouse activity occurs within a specific sector of a node's region
+			- question: doesn't this approach limit the ability to use the remain-in-state events for sectors, as well? Perhaps there's a better construct to permit wiring sectors of nodes? Perhaps DOM nodes need a companion virtual DOM node construct, where a sector of a node can be treated as a discrete node for convenience of coding application logic.
+			- possible event names
+				- mouseoverSector(x,y,width,height)
+				- mousedownSector(x,y,width,height)
+				- mouseupSector(x,y,width,height)
+				- clickSector(x,y,width,height)
+
+Uize.Widget.Population
+	- optimization
+		!!!!!! store the reconstruction sequence so that it is only ever reformulated if the templateItem or templateStr are modified. This will optimize the repeat use of an instance, which is common in Zazzle's design tool attribute selectors.
+
+		- could theoretically move some of the optimization into the getOutput method as well as where it is right now in the updateUi method, so that if the templateStr, templateItem, and items set-get properties don't change then the output isn't generated repeatedly if the getOutput method is called repeatedly
+
+	- for the replaceByToken method...
+		- add support for an array as the second param (where the tokens are of the form {elementNo})
+		- add support for an optional tokenNaming scheme param
+			- if its value is a string (eg. "[#KEY]", "{KEY}", "##KEY##"), the word KEY will be replaced with the key name
+			- if its value is a function, it will receive the key name and must return the token name. This allows complete flexibility in token name conventions, such as always camel-casing, uppercasing, crunching, etc.
+				eg. function (_keyName) {return '[' + _keyName.toUpperCase () + ']'}
+			- default value for this param is "{KEY}"
+
+Uize.Scruncher
+	- allow the first block of comments in a document to consist of comment lines that are started with a "//"
+	- provide more info in reports
+		- time elapsed
+		- speed (size/second)
+	- further code size optimization
+		- allow for flagging concise header comments for concise output mode
+		- last semicolon before close brace not needed
+	- misc improvements
+		- allow "ScruncherSettings" directive to have space between itself and comment start chars
+	- error reports
+		- an option for evaluating libraries before and after they are scrunched, and reporting the position in the source code for syntax errors
+			- pre-scrunch
+				- IE-specific
+					- trailing comma in JSON object or multi-line var statement that is not OK in IE
+			- post-scrunch
+				- missing comma in multi-line var statement
+					- ok in unscrunched code, because the JavaScript interpreter accepts a linebreak as a terminator
+
+					EXAMPLE
+					................................................................................
+					var
+						blah = 1234
+						blahBlah = 123
+					;
+					................................................................................
+
+				- missing semi-colon after any statement (but often method assignments)
+					- ok in unscrunched code, because the JavaScript interpreter accepts a linebreak as a terminator
+
+					EXAMPLE
+					................................................................................
+					_classPrototype.myMethod1 = function () {
+					}
+					_classPrototype.myMethod2 = function () {
+					};
+					................................................................................
+
+				- implementation idea: map each line+char in scrunched code to line+char in source
+
+	- idea: ability to find error in source file
+		- deal with the following two cases...
+			- error is in scrunched module that is part of library file
+			- error is in scrunched module that is discretely loaded
+
+Uize.String
+	- Uize.String.lengthize (sourceSTR,lengthINT,alignFLOAT,padBOOL,truncateBOOL,tildeBOOLorSTR)
+		- how does this relate to Uize.String.limitLength? (is limitLength a special case of lengthize?)
+		- should the defaults for the extended parameters result in it effectively being a pad? If so, should there be a pad method that is just an alias to lengthize?
+
+	- Uize.String.fromCamel
+
+	- Uize.String.toDelimited & Uize.String.fromDelimited
+		Uize.String.[someMethodName]
+			- how are word starts denoted
+				- delimiter character eg. '_', '-', ':'
+				- first char of each word capped
+					- first char of first word capped
+				- char validator
+				- invalid char replacement char
+				- invalid char replacement mode
+					- one replacement char per invalid char
+					- one replacement char per one or more invalid chars
+
+Uize.String.Discombobulator
+	- more ideas
+		- backwording
+			siht si gnidrowkcab
+			gnidrowkcab si siht
+		- modes for intra-word hyphening
+			instead of having the number of intra-word hyphens be fixed for all letters, it could increase or decrease from left to right or have a center peack
+				h-y--p---h----e-----n------i-------n--------g
+				h--------y-------p------h-----e----n---i--n-g
+				h----y---p--h-e-n---i----n-----g
+			randomization could be per word or per letter
+
+Uize.String.Lines
+	Uize.String.Lines.addLineNumbering
+
+	low priority
+		Uize.String.Lines.removeLineNumbering ??
+		Uize.String.Lines.consolidateBlanks
+			................................................................................
+			Uize.String.Lines.consolidateBlanks = function (_sourceStr) {
+				var _previousIsBlank;
+				return _package.modify (
+					_sourceStr,
+					function (_line) {
+						var
+							_isBlank = !Uize.String.trim (_line),
+							_keepLine = !_isBlank || !_previousIsBlank
+						;
+						_previousIsBlank = _isBlank;
+						return _keepLine;
+					}
+				);
+			};
+			................................................................................
+
+		Uize.String.Lines.pad
+
+		Rearranging Lines
+			- Uize.String.Lines.sort
+				................................................................................
+				function sortMultilineStr (sourceStr) {
+					return (
+						Uize.String.Lines.split (sourceStr).sort (
+							function (a,b) {return a < b ? -1 : 1}
+						).join (
+							Uize.String.Lines.getLinebreakType (sourceStr)
+						)
+					);
+				}
+				................................................................................
+
+			- Uize.String.Lines.reverse
+
+Uize.Template
+	Look Into Supporting Subclassing
+		Subclassing of templates would allow template subclasses to more easily use the rendering features of their base classes.
+
+		Also, any features defined in a template base class and that are used for rendering can then be accessed of public instance methods from the subclass. Perhaps a separate question is how *.jst* files that can be compiled into template modules can expose generator functions as methods, to be used by external code. Would the =input= directive then define the properties for the class?
+
+	- other encodings to support
+		- colors
+			- rgbHex
+			- rgb
+			- hsl
+			- hsv
+		- dates
+			- date('{YY}-{MM}-{DD}')
+
+				EXAMPLE
+				................................................................................
+				<%= '12/31/2007' -> date('{YY}-{MM}-{DD}') %>
+				................................................................................
+
+		- currency
+		- urls
+			- absoluteUrl
+
+				EXAMPLE
+				................................................................................
+				<%= myRelativeUrl -> absoluteUrl('http://www.uize.com') %>
+
+				................................................................................
+		- string encodings
+			repeat (Uize.String.repeat)
+			camel (Uize.String.toCamel)
+			trim (Uize.String.trim or Uize.String.Lines.trim?)
+			trimLeft (Uize.String.trimLeft or Uize.String.Lines.trimLeft?)
+			trimRight (Uize.String.trimRight or Uize.String.Lines.trimRight?)
+			indent (Uize.String.Lines.indent)
+
+	- for templates...
+		- multi return value templates (blocks that can assign output to specific output property)
+		- support whitespace gobbling
+
+Uize.Test
+	- expectInstanceState (set-get properties values)
+
+	- new set-get properties
+		- breathe: an amount of time that the test runner should pause after completion of a test
+		- cleanup: code to execute upon completion of a test (different between success or failure?)
+		- context: a context selector/filter that can be used by the test runner to determine if the test should be run in the current context (eg. browser tests vs non-browser tests, tests specific to certain browsers, etc.)
+		- setup: code to execute before running of a test
+
+	- should be possible for tests to declare that they can run outside of browser context
+
+Uize.Url
+	- refactor tomkidding.com to no longer use Tk.Url
+
+Uize.Util.Conformer
+	Examples of Usage
+		................................................................................
+		conformer:Uize.Util.Conformer.oneOf (['auto','always'],'auto')
+
+		conformer:Uize.Util.Conformer.oneOf (['auto','always']),
+		noSetIfConformed:true
+		................................................................................
+
+		................................................................................
+		Uize.Util.Conformer.oneOf (['auto','always'],'auto')
+		Uize.Util.Conformer.oneOf (['auto','always'],'auto') (blah)
+
+		Uize.Util.Conformer.string ()
+		Uize.Util.Conformer.bool ()
+		................................................................................
+
+	- chaining conformers
+		................................................................................
+		Uize.Util.Conformer.chain (
+			Uize.Util.Conformer.string (),
+			Uize.Util.Conformer.oneOf (['auto','always'],'always')
+		)
+
+		Uize.Util.Conformer.chain (
+			'string',
+			['oneOf',['auto','always'],'always']
+		)
+		................................................................................
+
+	- example implementations
+		................................................................................
+		function _bool (_value) {return !!(typeof _value == 'object' && _value ? _value.valueOf : _value)}
+		_package.bool = function () {return _bool};
+
+		var _trueValuesMap = {1:1,TRUE:1,ON:1,YES:1};
+		function _switchBool (_value) {
+			if (typeof _value == 'object' && _value)
+				_value = _value.valueOf ()
+			;
+			return (
+				typeof _value == 'boolean'
+					? _value
+					: (_value = (_value + '').toUpperCase ()) == '1' || _value == 'TRUE' || _value == 'ON' || _value == 'YES'
+			);
+		}
+		_package.switchBool = function () {return _switchBool};
+
+		function _string () {return _value + ''}
+		_package.string = function () {return _string};
+
+		function _number (_value) {return +_value}
+		_package.number = function () {return _number};
+
+		_package.range = function (_minValue,_maxValue) {
+			return function (_value) {Uize.constrain (_value,_minValue,_maxValue)};
+		};
+
+		_package.oneOf = function (_values,_default) {
+			if (_default == _undefined) _default = _values [0];
+			var _valuesLookup = {};
+			for (var _valueNo = -1, _valuesLength = _values.length; ++_valueNo < _valuesLength;)
+				_valuesLookup [_values [_valueNo]] = 1
+			;
+			_valuesLookup.toString = _valuesLookup.valueOf = 0;
+			return function (_value) {_valuesLookup [_value] ? _value : _default};
+		};
+		................................................................................
+
+Uize.Util.Coupler
+	- the loop approach to coupling more than two instances is not robust, because...
+		- some instance in the chain may already have the correct value for one of the changing properties, and so the change from the master isn't guaranteed to propagate through the chain
+		- some instance in the chain may have a conformer that modifies the value of a changing property, and so there could be drift as change propagates through the chain
+		- it would be better to set all others directly from the master, rather than the telephone game approach
+	- handle property names that contain quotes or backslashes
+
+Uize.Util.Cycle
+	- instead of start / stop methods, just use property interface (ie. inProgress property)
+
+Uize.Web.ImageLoader
+	- a class that manages loading state for one or more images
+	- state interface
+		- images
+		- total images
+		- total images loaded
+		- loading progress
+		- average load time
+
+Uize.Widget
+	- more versatile wireNode method
+
+		................................................................................
+		widget.wireNode (
+			'nodeName',
+			[
+				'event1Name',handler,
+				'event2Name',handler,
+				'event3Name',handler
+			]
+		)
+		................................................................................
+
+	- UI Updater Mechanism
+		- register updaters
+			- register which properties updaters cover
+			- can have multiple updaters
+
+		- viewed properties
+			- viewed properties are properties whose values are reflected somehow in the view
+			- viewed properties can be registered
+		- when the values of viewed properties change, one of two things can happen...
+			- if the widget is able to update its view, then the appropriate updaters are executed in order to synchronize the view to the new values of the viewed properties
+			- if the widget is NOT able to update its view, then the viewed properties whose values have changed are flagged as needing to be reflected in the view when next the view is updated
+		- UI Updater
+			- a UI Updater can serve multipled viewed properties
+			- more than one UI Updater can serve the same viewed property
+
+		- questions to resolve
+			- what if a property is not viewed by a superclass but *is* viewed by a subclass?
+				- how does the subclass flag the property as viewed?
+				- perhaps this problem is averted by not flagging the properties, but rather by specifying the properties when registering updaters
+
+		BEFORE
+		..............................................
+		_classPrototype._updateUiValue = function () {
+			var _this = this;
+			if (_this.isWired) {
+				// code to update UI for value
+			}
+		};
+
+		_classPrototype.updateUi = function () {
+			this._updateUiValue ();
+		};
+
+		_class.registerProperties ({
+			_value:{
+				name:'value',
+				onChange:_classPrototype._updateUiValue
+			}
+		});
+		..............................................
+
+		AFTER
+		....................................
+		_class.registerProperties ({
+			_value:'value'
+		});
+
+		_class.registerUiUpdater (
+			'value',
+			function () {
+				var _this = this;
+				// code to update UI for value
+			}
+		);
+		....................................
+
+		When you register a UI updater, the UI updater system makes sure that Changed.[propertyName] event handlers are registered for all the properties that the UI updater serves. If values for any viewed properties are changed, then the UI updater system should execute registered UI updaters if possible, or flag the viewed properties whose values have changed as needing synchronization.
+
+		- Benefits
+			- registered UI updaters can automatically be *not* called when the UI cannot be updated (because of the widget not being seen, for example)
+			- the UI updater mechanism takes care of initial synchronization when wiring up a widget's UI, as well as synchronizing the UI when values of viewed properties changed after the widget has been wired.
+			- less code, in general. In some cases, widget classes may no longer need to override the updateUi method, because the updateUi overrides in a lot of cases simply call all the more granular updater methods that are typically defined to handle individual properties.
+
+	- should wired be set to true only after wiring of child widgets?
+		- what would the impact of this change be?
+	- should the Uize.Widget base class implement basic hour glass cursor support for busyEnabled?
+	- should there be generic focus and blur methods of Uize.Widget, with overridded implementation in Uize.Widget.FormElement
+	- for nodeMap and nodeCache, should use lookup that sets valueOf and toString properties to undefined, otherwise an implied node with either of those names will have problems
+
+	- getImpliedNodeName (impliedNodeIdSTR) or getImpliedNodeName (impliedNodeOBJ)
+		- returns the name of an implied node, deduced from its id (implied node doesn't have to exist in the DOM)
+		- should take into account nodeMap (has to do reverse lookup, potentially)
+
+	- getImpliedNodeId (impliedNodeSTR) or getImpliedNodeId (impliedNodeOBJ)
+		- returns the id of an implied node, built from its name (implied node doesn't have to exist in the DOM)
+		- should take into account nodeMap
+
+	- getNodeProperty (to use Uize.Node.getProperty)
+
+	- a way of easily binding any set-get property to either a child widget (or any widget) or an implied node
+		- the connection is bi-directional (changing the child widget's value or node's value updates set-get property, and changing set-get property value updates child widget's or node's value)
+	- disabled reason mechanism
+		- a general mechanism for widgets to have reasons registered for why they are disabled. Then, a tooltip could display this reason (or reasons) on mousing over the widget, or a dialog with the reason (or reasons) could be displayed when trying to interact with the widget (eg. clicking or mousing down on it)
+	- node cache improvements
+		- different caching levels
+			- never
+			- after wired
+			- always
+		- possible caching switch
+			- cache null result
+
+	- idea: when html property is a function, supply it with outer dimensions, based on shell size
+	- new semantics for getInherited, callInherited, getProvider
+		- new names
+			callInherited -> callProvided
+			getInherited -> getProvided
+			getProvider REMAINS getProvider
+			??? inherit -> provided
+			??? enabledInherited -> enabledProvided
+			??? busyInherited -> busyProvided
+		- label the concept "widget providence"
+		- reconcile any new semantics with existing "inherit" value for set-get properties, and "enabledInherited" and "busyInherited" set-get properties for widgets
+	- if wireNode is called before widget instance is fully constructed, consider throwing a warning?
+	- removeNode method: update to support removing multiple nodes
+	- flushNodeCache: update to support flushing by node reference, and for multiple nodes in a blob
+	- deferred wiring/building mechanism
+		- generalized mechanism for deferring building and/or wiring UI of non-displayed widgets
+	- deprecate insertUi in favor of built property
+		- PROBLEM: can't rely on wireUi as single gatekeeper because it gets overrided by subclasses, unless you try to tuck the logic into the conditional check and change its semantics...
+			................................................................................
+			if (!_this.wired ()) {
+				// wire stuff up
+			}
+			................................................................................
+
+			BECOMES...
+
+			................................................................................
+			if (!_this.prepareToWire ()) {
+				// wire stuff up
+			}
+			................................................................................
+
+			here, prepareToWire can check...
+				- if not already wired
+				- if widget UI needs to be built
+				- if wiring should be deferred because root node is not visible
+
+		- implement backwards compatible as
+			................................................................................
+			insertUi = function () {
+				this.set ({_built:_false)
+				this.wireUi ();
+			};
+			................................................................................
+
+	- deep state
+		- a way to retrieve state all the way through a widget tree
+		- a way to set state all the way through a widget tree
+
+	**** a way of cloning the DOM nodes used by one instance, to be used in another instance
+	- a formalized means of registering certain parameters as display parameters (ie. parameters that impact display)
+
+	- a way for one widget to have more than one set of DOM nodes for the same UI (to have the UI appear in more than one place)
+	- provide an automatic way to bubble up inDrag state and the drag events for all widgets (an onChange handler for inDrag at the Uize.Widget level?)
+	- provide a general way that a drag rest event can bubble up to the topmost parent
+	- consider an alternative to bubble:true, that allows all events to bubble if any widget up the parent chain of a particular widget cares to listen to a specific event coming from deep within
+	- a generic way for a widget to be informed if it is being revealed as a result of a parent node in the DOM changing its display state or something else
+	- idea: provide a way to expose all Uize.Node methods through Uize.Widget, without having to create instance methods for each...
+		eg.
+			................................................................................
+			_this.node (nodeName,'methodName',param1,param2,...)
+			a_a.node (nodeName,'methodName',param1,param2,...)
+			................................................................................
+
+			vs.
+
+			................................................................................
+			_Uize_Node.methodName (_this.getNode (nodeName),param1,param2,...)
+			a_a.methodName (a_a.getNode (nodeName),param1,param2,...)
+			................................................................................
+
+		- benefits
+			- makes the code a tiny bit shorter
+			- reduces (and in many cases eliminates) the need for widget classes to require Uize.Node
+			- would eliminate many cases of having to capture Uize.Node as _Uize_Node
+
+	- expose more Uize.Node methods as node-related methods (in order of priority)
+		- keep in mind that more instance methods means more time copying when subclassing
+
+		- getCoords => getNodeCoords
+		- setCoords => setNodeCoords
+		- setAbsPos => setNodeAbsPos
+		- getDimensions => getNodeDimensions (maybe deprecate getDimensions -> getDims before exposing the widget method)
+		- centerInWindow => centerNodeInWindow
+		- getText => getNodeText
+		- injectHtml => injectNodeHtml
+		- showInLayoutFlow => showNodeInLayoutFlow
+
+		- dynamically construct such methods, in order to avoid adding too much to code size
+			................................................................................
+			function _makeNodeMethod (_methodPrefix,_methodSuffix) {
+				_classPrototype [_methodPrefix + 'Node' + _methodSuffix] = new Function ('arguments [0] = this.getNode (arguments [0]); return Uize.Node.' + _methodPrefix + _methodSuffix + '.apply (0,arguments)');
+			}
+
+			_makeNodeMethod ('set','Value'); // creates setNodeValue
+			_makeNodeMethod ('get','Style'); // creates getNodeStyle
+			................................................................................
+
+			- scrunched size before change = 8347
+			- scrunched size after change = 7921
+
+	- solve the problem of some widget classes being used only for their static methods and not their full functionality. Perhaps some helper method functionality should be separated out into packages that can be used outside of the context of widgets. As a general rule, if some functionality might be useful without widgets being involved, then it should be implemented in a separate package module.
+		- Uize.Widget.Drag
+		- Uize.Widget.ImagePort
+		- Uize.Widget.Page
+		- Uize.Widget.Population
+		- Uize.Widget.Tree
+
+Uize.Widget.AutoTooltip
+	- handle case of nodes being changed in "mid flight"
+
+Uize.Widget.Bar
+	- eliminate need for setting orientation property (possibly keep, but have 'auto' value as default)
+	- OPTIMIZE UPDATE PERFORMANCE
+		- consider moving some of the wireUi optimization that's currently in Uize.Widget.Bar.Slider into the wireUi method of this class
+
+	- truncation for display of value, so doesn't overflow outside of display node
+	- valid values list
+
+Uize.Widget.Bar.Progress
+	- move implementation of hysteresis from Zazzle.ProductView into Uize.Widget.Bar.Progress. Basically, after inProgress changes to false, the progress bar should be allowed to stay displayed and running for a configurable amount of time, in case new tasks are initiated soon afterwards. Similarly, the progress bar shouldn't be displayed and started running until after a configurable amount of time has elapsed from inProgress changing to true. The combination of these two configurable durations should prevent the progress bar from ever displaying for very short tasks, and should prevent the progress bar from flashing on and off rapidly for a succession of tasks separated by small intervals, overal creating a smoother and less seizure inducing experience.
+
+Uize.Widget.Bar.Slider
+	- refactor code to use Drag Rest event of Uize.Widget.Drag class
+
+	- click on track to move continuously
+		- must be able to disable this (for when the coordinate system fails hopelessly)
+		- problem: requires a bunch of positioning code in order to work
+
+	- implement support for disabled state
+	- support for auto orientation (based upon aspect ratio of track)
+
+	- support for display boxes for min and max range values
+
+	- consider making knob a button, so that it can support mouseover, mousedown, and disabled display states
+	- value display in knob (while dragging, mousing over knob, etc.)
+	- switch to allow coerceing fine adjustment inbetween valid values
+	- sticky value notches (like for a center position)?
+	- calibration marks
+	- should observe enabled state
+	- capture calculated value (rather than recalculating each time it is needed)
+
+Uize.Widget.Bar.CharsUsed
+	- package up the code from the chars used example so that it can be easily used (ala TableSort) in pages
+
+Uize.Widget.Browser
+	- a simple Web browser widget that lets the user browse the Web in an IFRAME
+	- back and forward buttons
+	- a location field for entering a URL
+		- location field value is used to set src of iframe on the user hitting enter
+		- location field value is blanked out upon use, since it is not possible to keep it current (can't watch iframe's location.href for cross-domain URLs)
+	- go button next to location field provides another way to commit entered URL
+
+Uize.Widget.Button
+	- performance optimization idea: only wire up additional events (click, mousedown, mouseup, mouseout) on mouseover
+	- double-click actions for buttons
+	- state->node map to allow different naming schemes? (grayed vs. dimmed, etc.)
+	- state->className map to allow different naming schemes
+	- state cumulative mode (exclusive or cumulative)
+
+Uize.Widget.Calendar
+	- fix bug with being able to year navigate past end of valid range (is this what the conformer for month and year should do?)
+	- localize this widget!!!!
+		- month names
+		- day names
+		- day letters?
+	- calling updateUi when the value property changes is problematic the way that updateUi is currently implemented because all the day nodes will get wired over. Also, it's not efficient that simply changing the selected date should cause an entire re-rendering of the grid.
+	- tooltip for when hovering over dates, to show at least pretty representation of date, but could also for custom date specific notes or events to be displayed
+
+Uize.Widget.Calculator
+	- BUG WITH PASTE:
+		- when pasting in a new value that contains a decimal point, the point button is not disabled as it should be
+		- pasting in a value when the current value is an empty string, or was entirely selected, does not behave as value entry (so it does not clear the clearOnNextDigit flag)
+
+	- when validation moves into Uize.Widget.FormElement, then make Uize.Widget.Calculator configure the entry child widget with a number validator, and make it rely on the entry widget's isValid state for maintaining the enabled state of the operator buttons (it can wire the Changed.isValid event on the entry widget)
+
+	- indicator for memory
+	- indicator for current binary operator
+	- enforce maximum number of digits?
+
+	- extended calculator operators
+	- hook methods for adding buttons for unary and binary operations
+		- such methods can be used by subclasses for adding button child widgets that trigger operations
+		- methods will handle maintaining enabled state of different types of buttons
+		- possibly look at the method in Uize.Widget.Collection and implement something like that
+
+Uize.Widget.Calculator.Scientific
+	- a subclass of Uize.Widget.Calculator that adds functions of a scientific calculator
+	- unary operators
+		- inverse (1/x)
+		- pi
+		- power
+			- x^2
+			- 2^x
+			- 10^x
+			- e^x
+		- ln
+		- log
+		- log2
+		- logx(y)
+		- trigonometric operators: sin, cos, tan, asin, acos, atan
+		- series: n!, sigma n
+		- x mod y
+		- int
+			- floor
+			- ceil
+			- round
+	- binary operators
+		- x^y
+	- base support: decimal, binary, octal, hexadecimal, arbitrary?
+
+Uize.Widget.Positioner
+	- used to position a node, and maintain the node's position as properties that should influence its position are modified
+	- different positioning behaviors can be specified for each axis
+	- types of positioning behaviors to accommodate...
+		- alignment
+			- centered
+			- left/top
+			- right/bottom
+			- continuous
+		- pixel offset
+	- positioning reference box
+		- left
+		- top
+		- right
+		- bottom
+		- all can be specified independently
+	- positioning properties
+	- ability to maintain position through polling, with configurable polling interval
+	- ability to explicitly invoke position update
+	- positioning updated by scrolling and resize
+
+Uize.Widget.SevenSegmentDisplay
+	- an old style LED/LCD seven segment digit display (like what you would find on a calculator, or some digital recording hardware)
+
+Uize.Widget.Collection.Dynamic
+	- drag-to-reorder
+		- NEXT
+			- should not permit drag-and-drop when all items would be dragged (either all are selected, or there is only one item)
+			- escape key should cancel drag (right now it just forces drop)
+
+		- cleanup
+			- share CSS for insertion marker, so it's not in inline style attributes
+
+		- low priority
+			- hover cursor should be move cursor?
+			- come up with better tooltip / proxy for items being moved
+			- come up with better insertion marker
+			- optimize reordering of itemWidgets array
+
+		- hooks
+			- drag start: should provide hook for validation logic before drag, so that code can evaluate if drag should be allowed, based upon contents
+			- drag done: should provide hook to validate drop
+		- dragging
+			- should be able to autoscroll when detecting mouse at boundaries of scrollable view port
+		- drop
+
+		- facility for duplicating an item (something like this was wanted at one point for an add-another-one-of-these feature in the photoprints page, and we were discussing making that page use Uize.Widget.Collection.Dynamic)
+
+Uize.Widget.CollectionItem.Zooming
+	- design choices
+		- in order to achieve zooming as soon as possible, low res image is used
+		- in order to achieve a smooth crossover from zooming low res to zooming high res, two different image nodes are needed, since switching src can have flickery artifacts in some browsers
+
+		- one low res image node
+			- low res image node is inserted as needed, either on over becoming true, or inUse becoming true
+		- one high res image node
+			- high res image node is inserted as needed, on inUse becoming true
+		- when user mouses over, src for low src image node is set to current preview src
+		- when user rests mouse, animation begins, and src for high res image node is set
+			- once high res image node has loaded image, it is revealed and low res image node is hidden
+		- zooming applies to either low res image node or high res image node, depending on loaded state of high res image
+
+	- previewZoomUrl set-get property should have onChange handler to handle change in URL possibly during use
+
+Uize.Widget.ColorCube
+	- allow setting class name for swatch nodes
+	- pair with other class to wire up swatches to fire event (for actual selection)
+
+	IDEAS
+		- double-clicking or ctrl-clicking a swatch could set all four corner colors to that color (only useful for color cubes where UI, such as sliders or input boxes, provides control over the corner colors)
+		- ability, with a draggable target overlay icon, to select colors continuously based on pixel coordinates within cube
+
+Uize.Widget.ColorCube.Draggable
+	- perhaps the _getColorAtRelativePoint function could be replaced with a blendFour method implement in Uize.Color.xUtil?
+
+Uize.Widget.ColorInfo
+	- a simple widget that provides a swatch for previewing a color and shows the current color as a background with white and black text, and as a text color over white and black background
+	- can be used in Color Sort by RGB Proximity example (both for tooltip as well as large preview of desired color)
+	- can be used for tooltip in color palette widget
+	- should combine default HTML template, since it's such a simple widget to begin with
+
+Uize.Widget.ColorPicker
+	- implement disabling
+	- allow customization of layout
+
+Uize.Widget.Committer
+	- need to clean up event handlers properly when watchedProperties changes
+
+Uize.Widget.Day
+	- a widget for a single day, that can be used as a child widget of a month widget
+
+Uize.Widget.Dialog
+	- support for multiple non-modal windows at the same z level, with switching when mousing down on any part of window
+	- the update UI method for position updates should not always resize the drag shield
+
+	- optional reveal/hide effect
+		- fade
+		- zoom in/out
+
+	- for shield, optional fade to reveal/hide
+
+	- constraining within view (specified as percent of size, or as constrain event coords)
+	- auto-constrain in view on resize
+	- maintain relative position in view (on resize and scroll)
+
+	ISSUES
+		- when dragging, if you mouse up outside the window in Firefox, you get stuck in drag mode, even once the mouse is up
+
+	- the update UI method for position updates should not always resize the drag shield
+
+	- constraining within view (specified as percent of size, or as constrain event coords)
+	- auto-constrain in view on resize
+	- maintain relative position in view (on resize and scroll)
+	- modifier keys to constrain movement
+		- snap to edges
+		- snap to 45 degree angles
+
+	- for changes in resizer position and sizing...
+		- make sure various events are fired
+	- Uize.Widget.Resizer refactoring
+		- when drag starts, must pick up coordinates from area node, so that window can be moved in other ways
+
+	- positioning on click event
+		when clicking a button indirectly results in a dialog being launched... or if the dialog is deferred loaded and shown is set to true long after the click happens, how does the dialog know that it was launched from a button click, or wasn't launched programmatically? Or from a mouseover event?
+
+		If you remember the last click, do you remember the event position? Or the node reference of the event source? The document could be scrolled between clicking and showing the dialog. Is it a configuration of the dialog to position on
+
+	- support for okText and cancelText set-get properties
+		and perhaps defaultOkText and defaultCancelText? Either way, localization of default strings should be able to occur inside the widget module, rather than being defaulted in Uize.Widget.Page where the code to show the confirm dialog is
+
+	- the update UI method for position updates should not always resize the drag shield
+
+	- optional reveal/hide effect
+		- fade
+		- zoom in/out
+
+	- for shield, optional fade to reveal/hide
+
+	- constraining within view (specified as percent of size, or as constrain event coords)
+	- auto-constrain in view on resize
+	- maintain relative position in view (on resize and scroll)
+	- modifier keys to constrain movement
+		- snap to edges
+		- snap to 45 degree angles
+	- consider adding resizable feature
+
+	refactor Uize.Widget.Dialog in the following ways...
+		- implement support for fading to reveal and fading to hide
+	ISSUES
+		- when dragging, if you mouse up outside the window in Firefox, you get stuck in drag mode, even once the mouse is up
+
+Uize.Widget.Dialog.Browser
+	- an instance of the Uize.Widget.Browser class used in a resizable dialog
+
+Uize.Widget.Dialog.Calculator
+	- an instance of the Uize.Widget.Calculator class used in a dialog
+
+Uize.Widget.Dialog.Confirm
+	- the icon state mechanism makes assumptions about CSS implementation. This should be fixed.
+
+Uize.Widget.Dialog.Iframe
+	- formalize system for interface between iframe dialog widget and iframe document
+		- dialog widget should be able to be proxy for certain state that the iframe document's page widget cares to expose
+		- exposed state could be reflected as set-get properties of the dialog widget, with corresponding set-get properties of the iframe document's page widget
+		- property values are synchronized in both directions: if any are changed in the dialog widget, the changes are relayed to the iframe document's page widget, and if any are changed in the iframe document's page widget, the changes are relayed to the dialog widget
+		- property values from dialog widget are used - somehow - during construction of iframe document's page widget, so it has its state as early as possible
+		- dialog widget can become persister of state for iframe document's page widget, even with navigation across pages within the iframe
+		- means should be available for iframe document's page widget to get access to its corresponding dialog widget, and thereby provide dialog widget with reference to page widget
+		- the ok button may require initiating a completion action in the iframe document, so the ok button should disabled initially and enabled using the iframe document's page widget as the authority
+		- a cancel button may require initiating some undo/recover functionality in the iframe document, however cancel should always be enabled, even before the iframe document has completed loading. So, what the cancel button does should depend on whether or not the iframe document is loaded: if it is not loaded, the dialog should just be dismissed, and if it *is* loaded, then the iframe document's page widget should be given the opportunity to do something special before the dialog is dismissed.
+
+Uize.Widget.Dialog.Picker
+	support different behaviors
+		- dialog submits when the value is changed
+		- dialog doesn't submit when the value is changed
+			- value is submitted on every change
+				- if value has been submitted since dialog has been in use, cancel button submits initial state
+				- delay behavior allows changed value to only be submitted after a configurable idle period
+			- value is not submitted on every change
+				- apply button submits value, if changed value not already submitted
+		- stay open option is exposed to user through pin button in dialog's title bar
+		- submit value while changing behavior is exposed to user through preview checkbox (where?)
+
+Uize.Widget.Drag
+	- it should be possible to cancel drag programmatically during drag, just by setting the dragCancelled set-get property to true
+	- upon releasing, an event should be fired to allow an application to programmatically cancel drag
+	- scroll near borders behavior
+	- clicking right mouse button during drag should also cancel drag (just like hitting escape key)
+	- find a consistent and reliable way to implement the shield resizing (perhaps using a table at the root with width=100% and height=100% ? Then, is there something additional that has to be done to make it work in the various DOCTYPE modes so that its height is 100% even if the document is short?
+	- deal with unnecessary window scrollbars issue during drag in IE
+	- support switching in and out of SHIFT modifier mode during drag
+
+Uize.Widget.Drift
+	Wires up a node that is being cropped by a containing node so that it automatically drifts inside its containing node in order to reveal over time all of its contents. Motion may involve some arbitrary angle and bouncing at edges, with slight randomization of reflection angle on bouncing to avoid too repetitive of an animation path.
+
+Uize.Widget.Folding
+	- a module to provide a folding mechanism for any document
+
+Uize.Widget.Form
+	- something akin to Zazzle.TemplateFields. Basically, a generic container for numerous input widgets, and something that manages the full data set.
+		- makes it easy to build input UI for an arbitrary data set (will be invaluable for examples pages)
+		- allows specifying default widget types for certain input types (but is set to generic defaults)
+		- uses a Uize.Widget.Committer instance
+		- integrates validation
+		- can bind widgets to hidden form fields
+
+Uize.Widget.FormElement
+	- enabled / busy state
+		- for busy state, possibly use hourglass cursor, as with button
+		- for disabled state, possibly add CSS class name to input node
+	- should all events fired that are triggered by DOM events put the DOM event into a domEvent property of the event object?
+	- move validation mechanism into this class
+	- possibly rename to something more concise (fewer syllables would be nice)
+		- Uize.Widget.FormField
+		- Uize.Widget.FormInput
+	- should implement a values set-get property for select type (single and multi-select)
+	- support readOnly state? Pick up initial enabled value from readOnly property of input node?
+
+Uize.Widget.HoverFader
+	- mode where the start style property values for a fade is the current state, rather than the opposite extreme. Currently, the behavior of starting a fade out from the hoverStyle values when mousing out of a node can cause some spastic / jerky effects when moving the mouse quickly over a series of nodes wired up by the widget.
+	- ability to configure the widget so that the fade in and/or fade out phases are only triggered when the mouse remains over or remains out for long enough. This could be accomplished using the virtual DOM events, and by the ability to configure the trigger events for the widget. This would also allow some other interesting use cases, like an effect for when the user focuses and blurs form fields, or for while the user is mousing down on a button.
+
+Uize.Widget.HtmlEntity
+	- a widget that lets you select an HTML entity
+	- selector for number of entities to display per row
+		- should it be a slider that controls entity cell size?
+	- clicking of entity adds entity code to text field, from where it can be copied
+	- possible copy-to-clipboard feature?
+	- ability to filter entities
+
+	- master list of entities
+		................................................................................
+		[
+			34,'quot','quotation mark',
+			38,'amp','ampersand',
+			39,'apos','apostrophe',
+			60,'lt','less-than',
+			62,'gt','greater-than',
+			160,'nbsp','non-breaking space',
+			161,'iexcl','inverted exclamation mark',
+			162,'cent','cent',
+			163,'pound','pound',
+			164,'curren','currency',
+			165,'yen','yen',
+			166,'brvbar','broken vertical bar',
+			167,'sect','section',
+			168,'uml','spacing diaeresis',
+			169,'copy','copyright',
+			170,'ordf','feminine ordinal indicator',
+			171,'laquo','angle quotation mark (left)',
+			172,'not','negation',
+			173,'shy','soft hyphen',
+			174,'reg','registered trademark',
+			175,'macr','spacing macron',
+			176,'deg','degree',
+			177,'plusmn','plus-or-minus',
+			178,'sup2','superscript 2',
+			179,'sup3','superscript 3',
+			180,'acute','spacing acute',
+			181,'micro','micro',
+			182,'para','paragraph',
+			183,'middot','middle dot',
+			184,'cedil','spacing cedilla',
+			185,'sup1','superscript 1',
+			186,'ordm','masculine ordinal indicator',
+			187,'raquo','angle quotation mark (right)',
+			188,'frac14','fraction 1/4',
+			189,'frac12','fraction 1/2',
+			190,'frac34','fraction 3/4',
+			191,'iquest','inverted question mark',
+			192,'Agrave','capital a, grave accent',
+			193,'Aacute','capital a, acute accent',
+			194,'Acirc','capital a, circumflex accent',
+			195,'Atilde','capital a, tilde',
+			196,'Auml','capital a, umlaut mark',
+			197,'Aring','capital a, ring',
+			198,'AElig','capital ae',
+			199,'Ccedil','capital c, cedilla',
+			200,'Egrave','capital e, grave accent',
+			201,'Eacute','capital e, acute accent',
+			202,'Ecirc','capital e, circumflex accent',
+			203,'Euml','capital e, umlaut mark',
+			204,'Igrave','capital i, grave accent',
+			205,'Iacute','capital i, acute accent',
+			206,'Icirc','capital i, circumflex accent',
+			207,'Iuml','capital i, umlaut mark',
+			208,'ETH','capital eth, Icelandic',
+			209,'Ntilde','capital n, tilde',
+			210,'Ograve','capital o, grave accent',
+			211,'Oacute','capital o, acute accent',
+			212,'Ocirc','capital o, circumflex accent',
+			213,'Otilde','capital o, tilde',
+			214,'Ouml','capital o, umlaut mark',
+			215,'times','multiplication',
+			216,'Oslash','capital o, slash',
+			217,'Ugrave','capital u, grave accent',
+			218,'Uacute','capital u, acute accent',
+			219,'Ucirc','capital u, circumflex accent',
+			220,'Uuml','capital u, umlaut mark',
+			221,'Yacute','capital y, acute accent',
+			222,'THORN','capital THORN, Icelandic',
+			223,'szlig','small sharp s, German',
+			224,'agrave','small a, grave accent',
+			225,'aacute','small a, acute accent',
+			226,'acirc','small a, circumflex accent',
+			227,'atilde','small a, tilde',
+			228,'auml','small a, umlaut mark',
+			229,'aring','small a, ring',
+			230,'aelig','small ae',
+			231,'ccedil','small c, cedilla',
+			232,'egrave','small e, grave accent',
+			233,'eacute','small e, acute accent',
+			234,'ecirc','small e, circumflex accent',
+			235,'euml','small e, umlaut mark',
+			236,'igrave','small i, grave accent',
+			237,'iacute','small i, acute accent',
+			238,'icirc','small i, circumflex accent',
+			239,'iuml','small i, umlaut mark',
+			240,'eth','small eth, Icelandic',
+			241,'ntilde','small n, tilde',
+			242,'ograve','small o, grave accent',
+			243,'oacute','small o, acute accent',
+			244,'ocirc','small o, circumflex accent',
+			245,'otilde','small o, tilde',
+			246,'ouml','small o, umlaut mark',
+			247,'divide','division',
+			248,'oslash','small o, slash',
+			249,'ugrave','small u, grave accent',
+			250,'uacute','small u, acute accent',
+			251,'ucirc','small u, circumflex accent',
+			252,'uuml','small u, umlaut mark',
+			253,'yacute','small y, acute accent',
+			254,'thorn','small thorn, Icelandic',
+			255,'yuml','small y, umlaut mark',
+			338,'OElig','capital ligature OE',
+			339,'oelig','small ligature oe',
+			352,'Scaron','capital S with caron',
+			353,'scaron','small S with caron',
+			376,'Yuml','capital Y with diaeres',
+			402,'fnof','f with hook',
+			710,'circ','modifier letter circumflex accent',
+			732,'tilde','small tilde',
+			913,'Alpha','Alpha',
+			914,'Beta','Beta',
+			915,'Gamma','Gamma',
+			916,'Delta','Delta',
+			917,'Epsilon','Epsilon',
+			918,'Zeta','Zeta',
+			919,'Eta','Eta',
+			920,'Theta','Theta',
+			921,'Iota','Iota',
+			922,'Kappa','Kappa',
+			923,'Lambda','Lambda',
+			924,'Mu','Mu',
+			925,'Nu','Nu',
+			926,'Xi','Xi',
+			927,'Omicron','Omicron',
+			928,'Pi','Pi',
+			929,'Rho','Rho',
+			931,'Sigma','Sigma',
+			932,'Tau','Tau',
+			933,'Upsilon','Upsilon',
+			934,'Phi','Phi',
+			935,'Chi','Chi',
+			936,'Psi','Psi',
+			937,'Omega','Omega',
+			945,'alpha','alpha',
+			946,'beta','beta',
+			947,'gamma','gamma',
+			948,'delta','delta',
+			949,'epsilon','epsilon',
+			950,'zeta','zeta',
+			951,'eta','eta',
+			952,'theta','theta',
+			953,'iota','iota',
+			954,'kappa','kappa',
+			955,'lambda','lambda',
+			956,'mu','mu',
+			957,'nu','nu',
+			958,'xi','xi',
+			959,'omicron','omicron',
+			960,'pi','pi',
+			961,'rho','rho',
+			962,'sigmaf','sigmaf',
+			963,'sigma','sigma',
+			964,'tau','tau',
+			965,'upsilon','upsilon',
+			966,'phi','phi',
+			967,'chi','chi',
+			968,'psi','psi',
+			969,'omega','omega',
+			977,'thetasym','theta symbol',
+			978,'upsih','upsilon symbol',
+			982,'piv','pi symbol',
+			8194,'ensp','en space',
+			8195,'emsp','em space',
+			8201,'thinsp','thin space',
+			8204,'zwnj','zero width non-joiner',
+			8205,'zwj','zero width joiner',
+			8206,'lrm','left-to-right mark',
+			8207,'rlm','right-to-left mark',
+			8211,'ndash','en dash',
+			8212,'mdash','em dash',
+			8216,'lsquo','left single quotation mark',
+			8217,'rsquo','right single quotation mark',
+			8218,'sbquo','single low-9 quotation mark',
+			8220,'ldquo','left double quotation mark',
+			8221,'rdquo','right double quotation mark',
+			8222,'bdquo','double low-9 quotation mark',
+			8224,'dagger','dagger',
+			8225,'Dagger','double dagger',
+			8226,'bull','bullet',
+			8230,'hellip','horizontal ellipsis',
+			8240,'permil','per mille',
+			8242,'prime','minutes',
+			8243,'Prime','seconds',
+			8249,'lsaquo','single left angle quotation',
+			8250,'rsaquo','single right angle quotation',
+			8254,'oline','overline',
+			8364,'euro','euro',
+			8482,'trade','trademark',
+			8592,'larr','left arrow',
+			8593,'uarr','up arrow',
+			8594,'rarr','right arrow',
+			8595,'darr','down arrow',
+			8596,'harr','left right arrow',
+			8629,'crarr','carriage return arrow',
+			8704,'forall','for all',
+			8706,'part','part',
+			8707,'exists','exists',
+			8709,'empty','empty',
+			8711,'nabla','nabla',
+			8712,'isin','isin',
+			8713,'notin','notin',
+			8715,'ni','ni',
+			8719,'prod','prod',
+			8721,'sum','sum',
+			8722,'minus','minus',
+			8727,'lowast','lowast',
+			8730,'radic','square root',
+			8733,'prop','proportional to',
+			8734,'infin','infinity',
+			8736,'ang','angle',
+			8743,'and','and',
+			8744,'or','or',
+			8745,'cap','cap',
+			8746,'cup','cup',
+			8747,'int','integral',
+			8756,'there4','therefore',
+			8764,'sim','simular to',
+			8773,'cong','approximately equal',
+			8776,'asymp','almost equal',
+			8800,'ne','not equal',
+			8801,'equiv','equivalent',
+			8804,'le','less or equal',
+			8805,'ge','greater or equal',
+			8834,'sub','subset of',
+			8835,'sup','superset of',
+			8836,'nsub','not subset of',
+			8838,'sube','subset or equal',
+			8839,'supe','superset or equal',
+			8853,'oplus','circled plus',
+			8855,'otimes','cirled times',
+			8869,'perp','perpendicular',
+			8901,'sdot','dot operator',
+			8968,'lceil','left ceiling',
+			8969,'rceil','right ceiling',
+			8970,'lfloor','left floor',
+			8971,'rfloor','right floor',
+			9674,'loz','lozenge',
+			9824,'spades','spade',
+			9827,'clubs','club',
+			9829,'hearts','heart',
+			9830,'diams','diamond'
+		]
+		................................................................................
+
+	- entity categorization
+		................................................................................
+		{
+			'reserved XML special characters':[34,38,39,60,62],
+			'quotation marks':{
+				conventional:[34,39,8216,8217,8218,8220,8221,8222],
+				'angle quotations':[171,187,8249,8250],
+				'quote-like (false quotes)':[8242,8243]
+			},
+			'currency symbols':[162,163,164,165,8364],
+			'copyright and trade marks':[169,174,8482],
+			'punctuation marks':{
+				'':[175,183,8211,8212,8230],
+				inverted:[161,191]
+			},
+			'lines and arrows':{
+				lines:[161,167,172,175,915,921,926,928,932,8211,8212,8224,8225,8260,8719,8722,8869,8968,8969,8970,8971],
+				arrows:[8592,8593,8594,8595,8629,8656,8657,8658,8659,8660],
+				'arrow-like':[60,62,171,187,238,916,923,947,957,978,8249,8250,8704,8711,8736,8744,9001,9002]
+			},
+			'card suits':[9824,9827,9829,9830],
+			'spacers and joiners':[173,8194,8195,8201,8204,8205,8206,8207],
+			greek:{
+				'small letter':[945,946,947,948,949,950,951,952,953,954,955,956,957,958,959,960,961,962,963,964,965,966,967,968,969],
+				'capital letters':[913,914,915,916,917,918,919,920,921,922,923,924,925,926,927,928,929,930,931,932,933,934,935,936,937],
+				symbols:[977,978,982,8721]
+			},
+			letters:{
+				'accented and lookalikes':{
+					a:{
+						'like small "a"':[170,224,225,226,227,228,229,230,945,8706],
+						'like capital "A"':[192,193,194,195,196,197,198,913,916,923,955,8704]
+					},
+					b:{
+						'like small "b"':[222,254],
+						'like capital "B"':[223,914,946,952]
+					},
+					c:{
+						'like small "c"':[60,162,169,231,962,8834,8835,8836],
+						'like capital "C"':[199,9001,9002]
+					},
+					d:{
+						'like small "d"':[948,8706,8834,8836],
+						'like capital "D"':[208,222,254,2283,9002]
+					},
+					e:{
+						'like small "e"':[230,232,233,234,235,339,8706],
+						'like capital "E"':[163,200,201,202,203,338,917,920,926,931,949,952,958,8364,8707,8712,8713,8715,8721]
+					},
+					f:{
+						'like small "f"':[402,8747],
+						'like capital "F"':[163]
+					},
+					h:{
+						'like capital "H"':[919]
+					},
+					i:{
+						'like small "i"':[161,236,237,238,239,953],
+						'like capital "I"':[166,204,205,206,207,921,8465]
+					},
+					j:{
+						'like capital "J"':[8747]
+					},
+					k:{
+						'like small "k"':[954],
+						'like capital "K"':[922]
+					},
+					l:{
+						'like small "l"':[921,953,8747],
+						'like capital "L"':[8970]
+					},
+					m:{
+						'like capital "M"':[924,8721]
+					},
+					n:{
+						'like small "n"':[241,928,937,951,960,8719,8745],
+						'like capital "N"':[209,925]
+					},
+					o:{
+						'like small "o"':[164,176,186,242,243,244,245,246,248,339,948,952,959,963,966,8743,8853,8855],
+						'like capital "O"':[210,211,212,213,214,216,338,920,927,934,8709]
+					},
+					p:{
+						'like small "p"':[254,961,966],
+						'like capital "P"':[222,929,8472]
+					},
+					r:{
+						'like small "r"':[915],
+						'like capital "R"':[8476]
+					},
+					s:{
+						'like capital "S"':[167,352]
+					},
+					t:{
+						'like small "t"':[8224,8593,8968],
+						'like capital "T"':[932,964]
+					},
+					u:{
+						'like small "u"':[181,249,250,251,252,956,965,977],
+						'like capital "U"':[217,218,219,220]
+					},
+					v:{
+						'like small "v"':[957,8730,8744],
+						'like capital "V"':[947]
+					},
+					w:{
+						'like small "w"':[936,968,969,982]
+					},
+					x:{
+						'like small "x"':[215,8501],
+						'like capital "X"':[935,967]
+					}
+				}
+			},
+			numerical:{
+				fractions:[188,189,190],
+				superscripts:[176,178,179,185,186],
+				'number lookalikes':{
+					0:[164,176,186,210,211,212,213,214,216,240,242,243,244,245,246,248,920,927,934,937,948,952,952,961,963,966,8709,8743,8853,8855],
+					1:[161,166,185,204,205,206,207,236,237,238,239,921,953,8224,8593,8747,8969],
+					2:[178],
+					3:[179,949,958,969,8707,8715],
+					6:[222,254],
+					7:[172,8969],
+					8:[38,208,223,914,920,946,949,952]
+				}
+			},
+			brackets:[9001,9002],
+			'bullet-like':[164,183,248,958,8226,8743,8853,8855,8901,9674,9830],
+			accents:{
+				'accent marks':[168,180,710,732,8764],
+				'accented letters':{
+					acute:{
+						'capital letters':[193,201,205,211,218,221],
+						'small letters':[233,237,243,250,253,]
+					},
+					grave:{
+						'capital letters':[192,200,204,210,217],
+						'small letters':[224,232,236,242,249]
+					},
+					circumflex:{
+						'capital letters':[194,202,206,212,219],
+						'small letters':[226,234,238,244,251]
+					},
+					'umlaut / diaeres':{
+						'capital letters':[196,203,207,214,220,376],
+						'small letters':[228,235,239,246,252,255]
+					},
+					tilde:{
+						'capital letters':[195,209,213],
+						'small letters':[227,241,245]
+					},
+					ring:{
+						'capital letters':[197],
+						'small letters':[229]
+					},
+					caron:{
+						'capital letters':[352],
+						'small letters':[353]
+					},
+					slash:{
+						'capital letters':[217,8709],
+						'small letters':[248]
+					}
+				}
+			},
+			geometric shapes:{
+				'circles and ellipses':[164,176,186,927,959],
+				triangles:[916,8711],
+				diamonds:[9674,9830],
+				angles:[60,62,172,915,923,947,955,957,978,8249,8250,8730,8736,8744,8968,8969,8970,8971,9001,9002]
+			}
+		}
+		................................................................................
+
+		http://en.wikipedia.org/wiki/List_of_XML_and_HTML_character_entity_references
+			- Math
+				- arithmetic operators
+				- set theory
+				- equivalence
+				- geometry
+			- footnote
+				- dagger
+				- double dagger
+			- crosses (plus, x, multiply, circled plus, circled x, etc.)
+
+	- sort by
+		- entity number
+		- entity code
+		- entity name
+
+Uize.Widget.ImagePort.Draggable
+	- with ctrl-click for zooming, respect click position as indicator of point of interest and stay aligned to that region/point while zooming in or out.
+	- find a more elegant way to expose portVsScaledDelta info from Uize.Widget.ImagePort
+
+	- ideas
+		- a mode where the overflow is revealed during drag, with a mask that highlights the port and shades out the overflow
+
+Uize.Widget.ImageWipe
+	- factor out code that looks like it could be common between Uize.Widget.Swap.Image and this class (some of this code was intentionally derived from Uize.Widget.Swap and Uize.Widget.Swap.Image to make it easier to contemplate merging / refactoring later)
+
+	- come up with a better mechanism than the allToFull property
+	- problem with the current finalCoords approach is that it doesn't account for wipes where the pane size doesn't change over time
+		- final pane coord should be able to be...
+			- initial seed coords
+			- calculated matrix sector coords
+			- full image coords
+		- should be able to be continuous between two limits
+		- one application for refactored mechanism would be a fading zoom from center
+
+Uize.Widget.Keyboard
+	- a simple widget that permits entering text with a keyboard made up of buttons
+
+Uize.Widget.LinkToThis
+	- a widget that wires up anchored section headings in a document, so that...
+		- mousing over the heading displays a tooltip that invites the user to click to get a URL/link for that section of the document
+		- clicking on the section heading opens up a dialog that contains a URL for that section that can be copied-and-pasted
+			- dialog would contain
+				................................................................................
+				document | section of document
+
+					Link to This
+
+					Document Title: [documentTitle]
+					Document URL: [documentUrl] -- in auto-selecting input field
+
+					Section Title: [sectionTitle]
+					Section URL: [sectionUrl] -- in auto-selecting input field
+
+					---------------------------------------------------
+
+					Link to: document | section
+
+					Copy-and-paste HTML: <a href="[documentUrl | sectionUrl]" title="[documentTitle]" target="_blank">[documentTitle | sectionTitle]</a>
+				................................................................................
+
+		- or, clicking on the section heading could initiate a third party service, like "Add this"
+
+		Uize.Widget.DialogLinkToThis
+			documentUrl
+			documentTitle
+			sectionUrl
+			sectionTitle
+
+Uize.Widget.ListEditor
+	- must allow validation ability (for things like domains and such)
+	- possibly have a conformer for the list set-get property that applies the item conformer to all the items
+		- in such cases, one may wish for performance sake to maintain a hash of values and cached conformed state, that gets flushed whenever the itemConformer is changed
+	- for 'a-z' and 'z-a' values for sort set-get property, sort should be case insensitive
+	- configurable max number of items?
+
+Uize.Widget.Log
+	- features
+		- ability to have a display template for each log item
+			- can be string or function
+				- string, to be used with substitution
+				- function (which can be a compiled template)
+			- timestamp format ability
+			- ability to have different display templates for different types of items
+		- ability to display new items at top or bottom
+		- ability to filter display of log items (by type or other properties)
+		- ability to disable logging
+		- automatic timestamping of log items
+		- display of line numbers in log
+		- color coding?
+	- big question: should a log really just be a dynamic collection, where each log message is a collection item?
+		- lots of benefits would accrue by building advanced logging around the collection architecture
+
+Uize.Widget.MagView
+	- zoom in/out tooltip, which disappears while moving, but fades in on hover pause
+
+	ISSUES
+		- if the mouse is over the main view before the widget is wired up, the mag view doesn't activate. This is understandable, given the implementation, but I fear that users will have little patience with such excuses and the UX will feel flaky.
+		- there's some weird mouseover capturing flakiness - in both FF and IE (seems to suggest something) - when moving the mouse in and out of the main view from the side that has the mag image port
+
+	NICE TO HAVE
+		- support a choice of positioning for the mag image port node (left, right, top, bottom)
+		- support a mode for auto popping the mag image port node to the best available side, if it won't all be visible within the window's view port using the specified preferred positioning
+		- support for enabling/disabling auto-active
+			- showWhenOver (ala Uize.Widget.PopupPalette)
+			- support for an activation delay (user would have to rest on the image for a specified amount of time before entering into magnify mode)
+		- property interface for activating the mag view (so that it can be activated with a toggle button UI)
+
+		- fade in the large view once the image has loaded
+
+Uize.Widget.MantleSlideShow
+	- a slideshow experience specifically designed for mantle and that utilizes...
+		- an instance of Uize.Widget.Swap.Deck (for the view)
+		- an instance of Uize.Widget.Options
+		- an instance of Uize.Widget.SlideShow.AutoAdvance
+	- ties all these widgets together into an experience where...
+		- slideshow plays automatically on wiring
+		- optional play, pause, stop buttons allow control
+		- mousing over the options buttons sets the relevant item while pausing the slideshow and setting an autoresume timeout
+
+Uize.Widget.Month
+	- a widget that can be used as a child widget in a calendar widget, or as one of many child widgets in a year widget
+
+Uize.Widget.Options
+	- migrate filter support from poptions class (basically, code changes should make it possible to avoid wiring all the options that are filtered out on first wiring, and also the filter should be remembered so that it can be automatically reapplied in all the right deep little spots)
+	- support an array of values, where the elements are objects, ala poptions (and then try to migrate more logic specific to the value object array support out of poptions, so options becomes more powerful)
+
+Uize.Widget.Options.Tabbed
+	- come up with a better scheme for updating the className of the tab contents nodes, so that the whole class name string doesn't have to be specified, and rather just the segment that needs updating (refer to the way this is done with class-based buttons)
+
+Uize.Widget.Page
+	- right now, the implementation of useDialog has support for component loading that is a functionality specific to zazzle.com and that is dependent on the loadComponentIntoNode method implemented in Zazzle.Page. Either find a way to make this generic and configurable, or provide some hooks so that this code can migrate back into Zazzle.Page.
+	- there is an ugly reference to productType that is Zazzle-specific. Find a way to migrate this out.
+	- with the declaration syntax for widget adoption, devise a way to have code that executes as part of the adoption process (possibly allow value of $ variable to be a function?)
+		- must cater to cases where HTML is to be a template module
+		- must cater to case where data needed by widget instance is defined in separate module, or needs to be somehow computed
+
+	New Mechanism For Widget Adoption
+		Existing Syntax
+			EXAMPLE
+			......................................................
+			<script type="text/javascript">
+				window.$page_menu4HoverFader = {
+					widgetClass:'Uize.Widget.HoverFader',
+					nodes:{root:'menu4',className:/\bmenuLink\b/},
+					defaultStyle:{color:'bbb',borderColor:'555'},
+					hoverStyle:{color:'ffa200',borderColor:'ffa200'},
+					fadeIn:{duration:500,deceleration:1},
+					fadeOut:{duration:750,acceleration:1}
+				};
+			</script>
+			......................................................
+
+			A major problem with this approach is that it does not allow such declarations to declare dependencies on other modules.
+
+		Dedicated pageWiring Script Type
+			EXAMPLE
+			.......................................................................
+			<script type="text/pageWiring">
+				Uize.module ({
+					required:'Uize.Fade',
+					builder:function () {
+						continueWiring (
+							'page_menu4HoverFader',
+							{
+								widgetClass:'Uize.Widget.HoverFader',
+								nodes:{root:'menu4',className:/\bmenuLink\b/},
+								defaultStyle:{color:'bbb',borderColor:'555'},
+								hoverStyle:{color:'ffa200',borderColor:'ffa200'},
+								fadeIn:{duration:500,curve:Uize.Fade.celeration (0,1)},
+								fadeOut:{duration:750,curve:Uize.Fade.celeration (1,0)}
+							}
+						);
+					}
+				});
+			</script>
+			.......................................................................
+
+		Widget To Adopt is a Function
+			EXAMPLE
+			.....................................................................
+			<script type="text/javascript">
+				window.$page_menu4HoverFader = function (_returnWidgetData) {
+					Uize.module ({
+						required:'Uize.Fade',
+						builder:function () {
+							_returnWidgetData ({
+								widgetClass:'Uize.Widget.HoverFader',
+								nodes:{root:'menu4',className:/\bmenuLink\b/},
+								defaultStyle:{color:'bbb',borderColor:'555'},
+								hoverStyle:{color:'ffa200',borderColor:'ffa200'},
+								fadeIn:{duration:500,curve:Uize.Fade.celeration (0,1)},
+								fadeOut:{duration:750,curve:Uize.Fade.celeration (1,0)}
+							});
+						}
+					})
+				};
+			</script>
+			.....................................................................
+
+		Dedicated widgetToAdopt Script Type
+
+			JSON Object's Properties As Per Current Syntax
+				EXAMPLE
+				.............................................................
+				<script type="text/widgetToAdopt" required="Uize.Fade">
+					{
+						idPrefix:'page_menu4HoverFader',
+						widgetClass:'Uize.Widget.HoverFader',
+						nodes:{root:'menu4',className:/\bmenuLink\b/},
+						defaultStyle:{color:'bbb',borderColor:'555'},
+						hoverStyle:{color:'ffa200',borderColor:'ffa200'},
+						fadeIn:{duration:500,curve:Uize.Fade.celeration (0,1)},
+						fadeOut:{duration:750,curve:Uize.Fade.celeration (1,0)}
+					}
+				</script>
+				.............................................................
+
+			JSON Object's Properties Has New Structure
+				EXAMPLE
+				................................................................
+				<script type="text/widgetToAdopt" required="Uize.Fade">
+					{
+						idPrefix:'',
+						widgetClass:'Uize.Widget.HoverFader',
+						widgetProperties:{
+							nodes:{root:'menu4',className:/\bmenuLink\b/},
+							defaultStyle:{color:'bbb',borderColor:'555'},
+							hoverStyle:{color:'ffa200',borderColor:'ffa200'},
+							fadeIn:{duration:500,curve:Uize.Fade.celeration (0,1)},
+							fadeOut:{duration:750,curve:Uize.Fade.celeration (1,0)}
+						}
+					}
+				</script>
+				................................................................
+
+		- simple / elegant
+		- understandable / readable
+
+		..............................................
+		<script type="text/widgetToAdopt" required="">
+			adoptWidget (
+				'page_someWidget',
+				'Uize.Widget.SomeWidgetClass',
+				{
+					// widget properties
+				}
+			);
+		</script>
+		..............................................
+
+		.........................................................................
+		<script type="text/widgetToAdopt" widgetClass="" idPrefix="" required="">
+			(function () {
+				return {
+				}
+			}) ()
+		</script>
+		.........................................................................
+
+		.........................................................................
+		<script type="text/javascript">
+			window.$page_menu4HoverFader = function (_returnWidgetData) {
+				Uize.module ({
+					required:'Uize.Fade',
+					builder:function () {
+						_returnWidgetData ({
+							widgetClass:'Uize.Widget.HoverFader',
+							nodes:{root:'menu4',className:/\bmenuLink\b/},
+							defaultStyle:{color:'bbb',borderColor:'555'},
+							hoverStyle:{color:'ffa200',borderColor:'ffa200'},
+							fadeIn:{duration:500,curve:Uize.Fade.celeration (0,1)},
+							fadeOut:{duration:750,curve:Uize.Fade.celeration (1,0)}
+						});
+					}
+				})
+			};
+		</script>
+		.........................................................................
+
+Uize.Widget.Picker
+	- consider adding a valueParser or valueDecoder property
+		- Uize.Widget.Picker.Date could provide an inputFormat property, which would allow fallbacks to be specified
+
+			EXAMPLES
+			................................................................................
+			inputFormat:'YYYY-MM-DD'
+			inputFormat:['YYYY-MM-DD','YYYY/MM/DD']
+			................................................................................
+
+Uize.Widget.Picker.Date
+	- need support for validation
+		- validates format (ie. can parse date) & within valid date range
+	- IDEAS
+		- consider providing support for time
+
+Uize.Widget.PopupPalette
+	- perhaps it's now OK now to use Uize.Node.wire for the window event thingy towards the bottom
+
+Uize.Widget.Resizer
+	- BUG: issue with minWidth and minHeight, where min for an axis is not observed when resizing from opposite axis
+	- SUBCLASSING
+		- deal with where jiggler should go
+		- make sure all Uize.Widget.Resizer.Marquee references to Uize.Widget.Resizer superclass are through public interface
+
+	- create mechanism by which node map can be overrided for the various nodes that a resizable palette or other subclass might need to override
+	- automatically pick up coordinates each time drag is initiated, so that if the area is moved / resized through other means, it takes effect
+
+	- support for floating point coordinates
+	- support for resize pinned to center using ctrl modifier key
+	- support for constraining to not fall entirely outside of a specified region (ie. hanging-on-by-a-thread mode)
+	- support snapping behaviors, with modifier key for override
+	- support for maximum dimensions (maxWidth, maxHeight)
+	- support for allowing override of constrained aspect ratio (using modifier key?) -- is this the same as "concept of preferred aspect ratio" that I made a note about at one point?
+	- perhaps storing of start drag positions to be used by end-of-drag handlers or in-drag-rest handlers
+
+	- deal with issue of swapping over sides in preserve aspect ratio mode
+
+	- fire events all through drag (whenever positioning changes)
+	- highlight current handle being dragged
+
+Uize.Widget.Resizer.Marquee
+	- 'Position Changed' event should be fired whenever the position is changed, even if it's through the set-get property interface (make sure this won't mess up any code -- especially Zazzle DT)
+	- a mode where the middle handles are sized to the length of the axis (similar to hot area for resizing a window in one axis only)
+	- consider marquee HTML implementation with no drag handles, just hot regions (for less clutter)
+	- prim up built in HTML markup to allow parameters
+
+	- ideas
+		- consider optional tooltip feature to indicate dimensions when mousing over move node
+		- consider tooltips when mousing over handles
+		- consider way of displaying positioning information only during drag
+		- consider making handles be buttons, so marquees can easily be disabled
+		- consider implementing border differently to allow for marching ants
+
+Uize.Widget.Resizer.Marquee.Masking
+	- pre-packaged support for the picture masking effect in the "Marquee For Picture Window" example
+
+Uize.Widget.Scrolly
+	- figure out a better way to handle the issue where dimensions get reported as 0,0 if the scrolly is display:none at the time that its dimensions must be evaluated
+
+Uize.Widget.SlideShow
+	- clean up inconsistency with phantom slide properties (for implied node binding, naming is as per normal slide properties, but for child widget binding, naming is not)
+		progress
+		slideNumber
+		totalSlides
+	- provide some way that a node can specify that its value setting behavior is to display or not, or perhaps different modes for setting values. For example, a way to route the value into a deeper property of the node, such as a style property, or a way to provide a node modifier handler to accept the value and apply it to itself, or a way to specify a certain kind of widget type.
+
+Uize.Widget.SlideShow.AutoAdvance
+	- add play button
+
+	ISSUES
+		- don't like the wipeDone method approach and this kind of bi-directional interfacing. Think of a better way to allow for an indeterminate period of time between moving to the next slide and being ready to hold before advancing to the next.
+
+Uize.Widget.Stretchy
+	- make it work with Ajax'ed components
+	- make it work with a single div that's hidden
+
+Uize.Widget.SwatchSet
+	A generalized widget that can wire up a range of nodes as color selector swatches, using either their foreground color, background color, or both for currently selected value.
+
+	This class could be used as a helper class in implementation of the ColorCube class.
+
+Uize.Widget.Swap
+	- refactor to move basic wipe code into some other module
+		- refactor various Zazzle classes that use this effect to instead use built in service
+	- handle switching transition settings during a transition (ie. make sure all state is reflected correctly visually)
+
+Uize.Widget.Swap.Image
+	BUGS
+		- noticed a problem in Firefox with an image that doesn't fill the entire view and is not being centered correctly.
+
+	- feature to prefetch "next" image while current image is fading in
+
+Uize.Widget.TableSort
+	- should support headings with linebreaks (when headings have linebreaks, the tooltips for column values don't display well)
+	- update data sorting algorithm to be efficient (not bubble sort). Perhaps there's a way to use the built in sort, if the array being sorted is an array of objects combining the value and original column index, with a custom sort function that performs the comparison on the value. This could avoid using the current sortMap approach, which involves more swapping.
+
+	MUST HAVE
+		- CSS styles that can be specified for the sort order (rather than simply the headingLitClass property)
+		- support different combinations of over/lit classes
+
+	DESIRABLE
+		- a way to implement highlight states without the user having to specify classes
+		- for numbers with units suffixes, support metric unit canonicalization (so, one could have "2cm" and "1m" in a column, and sorting would do the right thing)
+		- extensible system for registering sort handlers for different types of column data
+		- support multiple table sections, with sorting discrete to each group
+		- support for mixed data types in columns
+		- support for form fields (sorting, and retaining values to deal with stupid IE bug)
+
+	PERHAPS
+		- ability to have class values for rows persist regardless of changed row order (useful for tables that alternate classes for readability)
+		- support for non-sortable columns (eg. a column in a table containing only pictures)
+		- failure modes for complex tables that aren't suited to sorting (eg. columns with rowspans)
+		- a way for the user to restore the table to its original state (unsort?)
+
+Uize.Widget.ThumbZoom
+	- code for finding links that are to larger images
+
+	IDEAS
+		- drop shadow for image
+
+Uize.Widget.Time
+	- a widget for displaying the current time
+	- support for configurable digit widget class, so that a time widget could employ effects
+
+Uize.Widget.Tree
+	- consider how a complex tree could be filled in on demand using AJAX. This should apply to all subclasses of Uize.Widget.Tree
+
+Uize.Widget.Tree.Filmstrip
+	- a widget that provides typical pop-up menu support (ie. DHTML menus)
+
+Uize.Widget.Tree.List
+	- research implementing markup using true nested UL/LI
+	- refactor to make all styling done through CSS (ie. no img URLs known to JS). Do away with old school approach.
+	- support for divider items
+
+	- move to using UL/LI for markup
+	- feature to automatically add title property to headings so a tooltip displays the full "path"
+
+Uize.Widget.Tree.List.Draggable
+	- a subclass that lets you rearrange the tree hierarchy using drag-and-drop
+
+Uize.Widget.Tree.Menu
+	- build submenus dynamically -- only when needed (for load performance optimization)
+
+	- move to using UL/LI for markup
+	- make highlight of active menu items "sticky" (ie. not based on a:hover pseudoclass), so that entire choice path can be indicated
+	- support for heading items
+
+Uize.Widget.Tree.Select
+	- a way to get the current value series (as an array)
+	- a way to get a reference to the final item object
+
+	IDEAS
+		- facility for adding an ellipsis to options that have further suboptions
+		- a switch for keeping as many selected values as possible when selecting a different value closer to the root
+		- possibly a way to remember selections on different branches for when switching back (ie. maybe selections are remembered per node)
+		- a way to easily populate the final value and peripheral data into form nodes
+		- a way to inherit values for peripheral data down the tree chain, with values on deeper branches overriding values closer to the root
+
+Uize.Widget.Year
+	- a widget that can be used for a 12 month calendar widget
+
+Uize.WiseLoad
+	- a module to load images when they come into view
+
+Uize.Wsh
+	- improve performance of some build scripts by providing a param for a starting folder, and a recurse param
+
+		EXAMPLE
+		..................
+		startFolder:...
+		recurse:false
+		..................
+
+		- use these new params to speed up: _build-pages-from-simple-doc.js (for documenting the JavaScript modules)
+
+Uize.Wsh.AutoScruncher
+	- should no longer support .library.js files that don't have a Library Contents comment, because it's not really a JS file if it has a bunch of modules listed in the open
+	- provide a switch to use the source files (ie. scrunched files are replaced with source files)
+	- provide a switch to enable echo of progress / status
+	- look into drag-and-drop support, so that the auto-scruncher can exist anywhere, and operate on files or folders
+	- store a mapping of modified date for all scrunchable JS modules, and then library builder code can use that mapping to determine if a previously built library file should be updated
+

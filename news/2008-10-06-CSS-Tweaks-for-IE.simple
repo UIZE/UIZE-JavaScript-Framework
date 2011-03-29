@@ -1,0 +1,11 @@
+An issue that was causing documentation pages to have obnoxious horizontal scrollbars in IE6 and IE7 (caused by =white-space:pre= for the =code= tag) has been fixed.
+
+Also, a few issues have been addressed in IE6 that were causing the documentation to look lousy, because the CSS was relying on features only supported from IE7 on up (png with alpha, the =max-width= property, and =position:fixed=). As a result of these tweaks, the documentation (and the site in general) looks somewhat more respectable in IE.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2008-10-06 - CSS Tweaks for IE
+....................................................................................

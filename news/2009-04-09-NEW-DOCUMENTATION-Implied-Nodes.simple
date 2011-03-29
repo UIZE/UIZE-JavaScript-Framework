@@ -1,0 +1,13 @@
+Documentation has been added to the [[../explainers/javascript-widgets.html][JavaScript Widgets]] explainer, describing the implied nodes facility.
+
+Implied nodes are DOM nodes that are expected by a widget class to exist in the document in order to support the functioning of instances of such a class. They are "implied" because the implementation of a widget class implies their presence in the DOM. The vast majority of widget classes are implemented to expect the existence of certain nodes in the DOM. For example, the slider class (=Uize.Widget.Bar.Slider=) anticipates the presence of the =track=, =knob=, =empty=, =full=, and =value=, and root (blank) implied nodes.
+
+For an in-depth discussion, go to the section *More on Widgets - Implied Nodes* in the [[../explainers/javascript-widgets.html][JavaScript Widgets]] explainer.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-04-09 - NEW DOCUMENTATION: Implied Nodes
+....................................................................................

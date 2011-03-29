@@ -1,0 +1,19 @@
+The =Uize.Widget= class has been improved in a number of ways.
+
+Optimized Node Caching
+	The node caching mechanism of the =Uize.Widget= class has been improved to reduce memory usage and improve performance.
+
+	Previously, references to implied nodes were cached using their full node =id= as key. This would produce large keys for complex pages with deep widget trees. Instead, now only the names of implied nodes are used as keys for cache lookup. This reduces memory usage and should improve lookup time, as the shorter keys can be hashed more rapidly.
+
+New Method: getNodeStyle
+	The new =getNodeStyle= instance method returns the value of the specified style property (or style properties) for the specified implied node.
+
+	This method has been added to provide parity with the companion =setNodeStyle= instance method, and with the =Uize.Node.getStyle= and =Uize.Node.setStyle= static methods of the =Uize.Node= package.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-04-02 - IMPROVED MODULE: Uize.Widget
+....................................................................................

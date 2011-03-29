@@ -1,0 +1,12 @@
+<%@
+	required ('UizeDotCom.Templates.ListingsPage');
+	input ({listings:'array'});
+%><%=
+	UizeDotCom.Templates.ListingsPage.process ({
+		title:'Showcase',
+		pathToRoot:'../',
+		metaDescription:'See showcases of the UIZE JavaScript Framework in action on Web 2.0 sites with rich client interaction, widgets, Ajax, drag-and-drop, animation, etc.',
+		preamble:'UIZE (pronounced "you eyes") is a powerful, open source, object oriented JavaScript framework - supporting widgets, AJAX, DOM, templates, and more. The UIZE JavaScript Framework us in use on a steadily growing list of Web sites, some of which are showcased on this page.',
+		listings:input.listings
+	})
+%>

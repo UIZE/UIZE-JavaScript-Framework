@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>TEST: Multi-line "return" Statements | UIZE JavaScript Framework</title>
+	<link rel="stylesheet" href="../../css/page.css"/>
+</head>
+
+<body>
+
+<p>This test demonstrates...</p>
+
+<p>In the test, ...</p>
+
+<p>What this test establishes is that it is always safe to use multiline...</p>
+
+<script type="text/javascript">
+
+document.writeln (
+	'<p>' +
+		'value returned from multiline return statement with no open parenthesis on "return" line: <b>' +
+		(function () {
+			return
+				'IT WORKED' +
+				'IT WORKED' +
+				'IT WORKED'
+			;
+		}) () + '</b>' +
+	'</p>' +
+	'<p>' +
+		'value returned from multiline return statement WITH open parenthesis on "return" line: <b>' +
+		(function () {
+			return (
+				'IT WORKED, ' +
+				'IT WORKED, ' +
+				'IT WORKED'
+			);
+		}) () + '</b>' +
+	'</p>' +
+	'<p>' +
+		'value returned from multiline return statement WITH open curly bracket on "return" line: <b>' +
+		(function () {
+			return {
+				prop1:'IT WORKED',
+				prop2:'IT WORKED',
+				prop3:'IT WORKED'
+			};
+		}) () + '</b>' +
+	'</p>' +
+	'<p>' +
+		'value returned from multiline return statement WITH open square bracket on "return" line: <b>' +
+		(function () {
+			return [
+				'IT WORKED',
+				'IT WORKED',
+				'IT WORKED'
+			];
+		}) ().join (', ') + '</b>' +
+	'</p>'
+);
+
+</script>
+
+</body>
+</html>
+

@@ -1,0 +1,58 @@
+The new =Uize.Node.Classes= module is a package module with static methods to facilitate manipulation of the value of the =className= property of DOM nodes, with support for adding classes, removing classes, toggling classes, and lots more.
+
+Benefits
+	More Elegant, Easier to Read
+		The methdos of the =Uize.Node.Classes= module make it much easier to manipulate classes than it would be to use regular expressions, and one's code becomes easier to read and more elegant.
+
+		To illustrate this, consider the following example of adding a CSS class to a node's =className= property...
+
+		BEFORE
+		....................................................
+		var node = Uize.Node.getById ('recommendationsPod');
+		if (!/\bpodPopulated\b/.test (node.className)) {
+			node.className += ' podPopulated';
+		}
+		....................................................
+
+		AFTER
+		.................................................................
+		Uize.Node.Classes.addClass ('recommendationsPod','podPopulated');
+		.................................................................
+
+		As you can see, the code using the =Uize.Node.Classes.addClass= is much easier to read and understand.
+
+	Powerful State Paradigm
+		In addition to ease of use, the =Uize.Node.Classes= module introduces a powerful, higher level construct called a state.
+
+		The `State Related Methods` that support the state paradigm make it much easier to manage the classes in the =className= property of a node to reflect application state. Consider an example where you want the CSS class "selected" to be present in the =className= property of a node with the =id= of ='recommendationsPod'= when the application variable =podIsSelected= is set to =true=, and to be absent when the variable is set to =false=. Your application will have updater code to update the =className= of the node to reflect the state of the =podIsSelected= variable. This updater code may not know or trust what the current state of the =className= property of the node might be, so it may test first to see if the "selected" class should be added or removed. You might write the code as follows...
+
+		BEFORE
+		...................................................................
+		if (podIsSelected) {
+			Uize.Node.Classes.addClass ('recommendationsPod','selected');
+		} else {
+			Uize.Node.Classes.removeClass ('recommendationsPod','selected');
+		}
+		...................................................................
+
+		Well, the =Uize.Node.Classes.setState= static method makes this type of update operation a lot simpler. Instead of conditionally adding or removing the class, you simply set its state as follows...
+
+		AFTER
+		...........................................................................
+		Uize.Node.Classes.setState ('recommendationsPod','selected',podIsSelected);
+		...........................................................................
+
+		This is a very simple use case, but the `State Related Methods` of the =Uize.Node.Classes= module also support more sophisticated cases.
+
+A Safe Introduction
+	The node class manipulation functionality was not added directly into the =Uize.Node= module in order to not impact the current size of that module.
+
+	In time, these new features may find their way into the base layer modules in some fashion, but a separate new module is an appropriate form in which to feed these new features into the framework without impacting existing code. Going forward, widget classes that wish to use node class name manipulation as a means of reflecting instance state can require the =Uize.Node.Classes= module and use its methods.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2010-08-03 - NEW MODULE: Uize.Node.Classes
+....................................................................................

@@ -1,0 +1,150 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Uize.Widget.ThumbZoom | JavaScript Examples | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="animation widget zoom Uize.Widget.ThumbZoom"/>
+	<meta name="description" content="Astonish users with a slick animated image preview feature where a larger preview zooms out from a grid of thumbnail images. This demo shows you how."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.example.css"/>
+	<style type="text/css">
+		/* IMPORTANT!!! If filter:alpha(opacity=x); is used to achieve the opacity change effect on mouseover in IE6, it completely hoses the browser, the hard drive goes completely nuts, and the system ultimately freezes up under incredible load */
+		#page-thumbnails {
+			margin:auto;
+			width:642px;
+			padding:2px;
+			bacgkground:#fff;
+		}
+		#page-thumbnails a {
+			float:left;
+		}
+		#page-thumbnails a,
+		#page-thumbnails a:link,
+		#page-thumbnails a:visited,
+		#page-thumbnails a:hover,
+		#page-thumbnails a:active {
+			border:none;
+		}
+		#page-thumbnails a img {
+			background:#fff;
+			border:solid 1px #afbbb8;
+			width:105px;
+			height:75px;
+		}
+		#page-thumbnails.over a img {
+			opacity:.6;
+			filter:alpha(opacity=60);
+		}
+		#page-thumbnails a:hover img {
+			border:solid 1px #bbb;
+			opacity:1;
+			filter:alpha(opacity=100);
+		}
+		#page-thumbnails br {
+			clear:left;
+		}
+	</style>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	<a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow">JAVASCRIPT EXAMPLES</a>
+	Uize.Widget.ThumbZoom
+	<div id="page-actions" class="pageActions">
+		<a href="source-code/thumbzoom.html" class="buttonLink">SOURCE</a>
+	</div>
+</h1>
+
+<div class="main">
+	<!-- explanation copy -->
+
+	<div class="explanation">
+		<p>In this example, an instance of the <a href="../reference/Uize.Widget.ThumbZoom.html"><code>Uize.Widget.ThumbZoom</code></a> widget class is created and wired up to the thumbnail images on the page. This is done by specifying the thumbnail <code>img</code> nodes through the <code>thumbNodes</code> set-get property on the <code>Uize.Widget.ThumbZoom</code> instance. The nodes to wire up are determined using the <code>Uize.Node.find</code> static method.</p>
+		<p>The <code>Uize.Widget.ThumbZoom</code> class wires a lightweight, inline preview behavior to these images. The URL for the larger version of each image is found from the <code>href</code> of the <code>img</code> tag's containing <code>a</code> tag. This provides the benefits of SEO indexing of the large images, as well as a fallback behavior should JavaScript be disabled or some failure occurs (so, a progressive enhancement approach). When you click on a thumbnail, the larger version is loaded and zooms out from the thumbnail using a JavaScript animation effect. Moving the mouse dismisses the large view. This provides a lightweight and easily discoverable and learnable interaction that makes it quick to go from one preview to the next. Additionally, there is some very simple CSS and JavaScript as part of the page wiring that dims the grid when you mouse over it, but for the thumbnail that you mouse over, helping to make the thumbnails "pop".</p>
+	</div>
+
+	<!-- grid containing lots and lots of thumbnail images -->
+
+	<div id="page-thumbnails">
+		<a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228109666540948246&max_dim=500"><img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228109666540948246&max_dim=105" alt="Braving the Onslaught"/></a>
+		<a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228745103279879745&max_dim=500"><img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228745103279879745&max_dim=105" alt="Companion to a Sunset"/></a>
+		<a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228866001826566384&max_dim=500"><img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228866001826566384&max_dim=105" alt="Concrete Eternity"/></a>
+		<a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228321774790917687&max_dim=500"><img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228321774790917687&max_dim=105" alt="Corrugate It"/></a>
+		<a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228463251413365530&max_dim=500"><img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228463251413365530&max_dim=105" alt="Crank It Up"/></a>
+		<a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228507796122097730&max_dim=500"><img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228507796122097730&max_dim=105" alt="Driving Through the Rain"/></a>
+
+		<a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228267745724726415&max_dim=500"><img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228267745724726415&max_dim=105" alt="Flock of Clouds"/></a>
+		<a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228937676589416694&max_dim=500"><img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228937676589416694&max_dim=105" alt="Hail to the Opening"/></a>
+		<a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228483162492178759&max_dim=500"><img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228483162492178759&max_dim=105" alt="Heavens Open Over Pedro"/></a>
+		<a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228855435929294206&max_dim=500"><img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228855435929294206&max_dim=105" alt="Hook in the Wall"/></a>
+		<a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228496639998196479&max_dim=500"><img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228496639998196479&max_dim=105" alt="Huddling Together"/></a>
+		<a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228623703668130129&max_dim=500"><img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228623703668130129&max_dim=105" alt="Just a Visitor"/></a>
+
+		<a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228897217554746467&max_dim=500"><img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228897217554746467&max_dim=105" alt="Out the Bus Window"/></a>
+		<a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228554379238024970&max_dim=500"><img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228554379238024970&max_dim=105" alt="Pacifica Pier From Milagra"/></a>
+		<a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228550194293355740&max_dim=500"><img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228550194293355740&max_dim=105" alt="Pier Before the Storm"/></a>
+		<a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228234695931308619&max_dim=500"><img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228234695931308619&max_dim=105" alt="Rain Fall"/></a>
+		<a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228580091324147918&max_dim=500"><img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228580091324147918&max_dim=105" alt="Retirement Home"/></a>
+		<a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228074575082103294&max_dim=500"><img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228074575082103294&max_dim=105" alt="San Fran Sunset"/></a>
+
+		<a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228118804591686444&max_dim=500"><img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228118804591686444&max_dim=105" alt="San Mateo Sunset"/></a>
+		<a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228948359037055649&max_dim=500"><img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228948359037055649&max_dim=105" alt="Setting Below Clouds"/></a>
+		<a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228026937512483785&max_dim=500"><img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228026937512483785&max_dim=105" alt="Shadow of the Past"/></a>
+		<a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228586025680090150&max_dim=500"><img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228586025680090150&max_dim=105" alt="Stacks of Steel"/></a>
+		<a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228888824201666423&max_dim=500"><img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228888824201666423&max_dim=105" alt="Sun Sets Soon at Sweeney"/></a>
+		<a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228484030353525473&max_dim=500"><img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228484030353525473&max_dim=105" alt="Sun Through a Tree"/></a>
+
+		<a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228859576507617417&max_dim=500"><img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228859576507617417&max_dim=105" alt="Sweeney Ridge Sunset"/></a>
+		<a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228620264277935845&max_dim=500"><img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228620264277935845&max_dim=105" alt="Trees Meet Sky"/></a>
+		<a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228786228006249323&max_dim=500"><img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228786228006249323&max_dim=105" alt="Twins"/></a>
+		<a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228225341102196754&max_dim=500"><img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228225341102196754&max_dim=105" alt="Urban Heavens"/></a>
+		<a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228213464916914087&max_dim=500"><img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228213464916914087&max_dim=105" alt="Window Lean"/></a>
+		<a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228734547884666866&max_dim=500"><img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228734547884666866&max_dim=105" alt="Windswept and Alone"/></a>
+		<br/>
+	</div>
+</div>
+
+<!-- JavaScript code to wire up the "thumb zoom" behavior for the image thumbnails -->
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Example.library',
+		'UizeDotCom.Page.Example',
+		'Uize.Widget.ThumbZoom',
+		'Uize.Node'
+	],
+	builder:function () {
+		/*** create the example page widget ***/
+			var page = window.page = new UizeDotCom.Page.Example;
+
+		/*** add the thumb zoom child widget ***/
+			page.addChild (
+				'thumbZoom',
+				Uize.Widget.ThumbZoom,
+				{thumbNodes:{tagName:'IMG',src:/max_dim=105/},imageValidator:null}
+			);
+
+		/*** wire up the page widget ***/
+			page.wireUi ();
+
+		/*** wire up dimming of grid on mouseover ***/
+			page.wireNode (
+				'thumbnails',
+				{
+					mouseover:function () {page.setNodeProperties ('thumbnails',{className:'over'})},
+					mouseout:function () {page.setNodeProperties ('thumbnails',{className:''})}
+				}
+			);
+	}
+});
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,13 @@
+As an aid to developers of the UIZE JavaScript Framework, the new [[../appendixes/sotu.html][SOTU (State of the UIZE)]] page provides an overview of the state of all the modules that make up the framework.
+
+Developers of UIZE modules can use this document as a guide on where work is needed. The table below provides information on various aspects of UIZE modules: things such as estimated code completeness, estimated documentation completeness, unit test completeness, scrunched file size, etc. The table's columns are sortable, so if you want to sort the modules by documentation completeness, you can do so clicking on the *"DOC"* heading. Or, if you want to see all modules of a certain type, sort by the *"MODULE TYPE"* column and then scroll to the module type you're interested in - they'll all be clumped together. The *"IMPORT."* column is a high level assessment of the importance of modules in the grand scheme of things, so this can also inform where effort is invested in writing documentation and tests.
+
+[[../appendixes/sotu.html][CHECK IT OUT]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2010-02-11 - SOTU (State of the UIZE)
+....................................................................................

@@ -1,0 +1,157 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>JavaScript Scruncher - HTML Source Code | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework HTML example source code"/>
+	<meta name="description" content="This is the source code for the JavaScript Scruncher example"/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../../css/page.css"/>
+	<link rel="stylesheet" href="../../css/page.source.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../../index.html" title="UIZE JavaScript Framework home"></a>
+	SOURCE CODE: JavaScript Scruncher
+	<div id="page-actions" class="pageActions">
+		<a href="../javascript-scruncher.html" class="buttonLink">VIEW EXAMPLE</a>
+	</div>
+</h1>
+
+<pre>
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+&lt;head&gt;
+  &lt;title&gt;JavaScript Scruncher | JavaScript Tools | UIZE JavaScript Framework&lt;/title&gt;
+  &lt;meta name="keywords" content="tool Uize.Scruncher"/&gt;
+  &lt;meta name="description" content="Take bloated JavaScript source code and scrunch (minify, compress) it using this versatile tool. Drastically reduce its size and even obfuscate it!"/&gt;
+  &lt;link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/&gt;
+  &lt;link rel="stylesheet" href="../css/page.css"/&gt;
+  &lt;link rel="stylesheet" href="../css/page.example.css"/&gt;
+  &lt;link rel="stylesheet" href="../css/widget.tabs.css"/&gt;
+  &lt;link rel="stylesheet" href="css/tabbed.css"/&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+&lt;script type="text/javascript" src="../js/Uize.js"&gt;&lt;/script&gt;
+
+&lt;h1 class="document-title"&gt;
+  &lt;a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"&gt;&lt;/a&gt;
+  &lt;a href="../javascript-tool-examples.html" class="breadcrumb breadcrumbWithArrow"&gt;JAVASCRIPT TOOLS&lt;/a&gt;
+  JavaScript Scruncher
+  &lt;div id="page-actions" class="pageActions"&gt;
+    &lt;a href="source-code/javascript-scruncher.html" class="buttonLink"&gt;SOURCE&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/h1&gt;
+
+&lt;div class="main"&gt;
+  &lt;!-- explanation copy --&gt;
+
+  &lt;div class="explanation"&gt;
+    &lt;p&gt;The &lt;b&gt;JavaScript Scruncher&lt;/b&gt; tool (which makes use of the &lt;a href="../reference/Uize.Scruncher.html"&gt;&lt;code&gt;Uize.Scruncher&lt;/code&gt;&lt;/a&gt; module) lets you test the scrunching of JavaScript code. Paste some JavaScript into the &lt;b&gt;"SOURCE CODE"&lt;/b&gt; tab and then switch to the &lt;b&gt;"SCRUNCHED CODE"&lt;/b&gt; tab to see the scrunched version. Switch to the &lt;b&gt;"SCRUNCHER REPORT"&lt;/b&gt; tab to see a summary of the file size savings for different facets of the scrunching operation. To start you off, the &lt;b&gt;"SOURCE CODE"&lt;/b&gt; tab is set up with the contents of a Uize module. To learn more about how the scruncher works and the options available, consult the explainer &lt;a href="../explainers/all-about-scrunching.html"&gt;All About Scrunching&lt;/a&gt;.&lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;form&gt;
+  &lt;div id="page_tabs" class="tabShell"&gt;
+    &lt;div class="tabStubShell"&gt;
+      &lt;a id="page_tabs_option0" class="tabStub" href="javascript://"&gt;SOURCE CODE&lt;/a&gt;
+      &lt;a id="page_tabs_option1" class="tabStub" href="javascript://"&gt;SCRUNCHED CODE&lt;/a&gt;
+      &lt;a id="page_tabs_option2" class="tabStub" href="javascript://"&gt;SCRUNCHER REPORT&lt;/a&gt;
+      &lt;br style="clear:left;"/&gt;
+    &lt;/div&gt;
+    &lt;div class="tabBodyShell"&gt;
+      &lt;div id="page_tabs-option0TabBody" class="tabBodyInactive"&gt;
+        &lt;textarea id="page-sourceCode" wrap="off"&gt;&lt;/textarea&gt;
+      &lt;/div&gt;
+      &lt;div id="page_tabs-option1TabBody" class="tabBodyInactive"&gt;
+        &lt;textarea id="page-scrunchedCode" wrap="off"&gt;&lt;/textarea&gt;
+      &lt;/div&gt;
+      &lt;div id="page_tabs-option2TabBody" class="tabBodyInactive"&gt;
+        &lt;textarea id="page-scruncherReport" wrap="off" readonly="readonly"&gt;&lt;/textarea&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;/form&gt;
+&lt;/div&gt;
+
+&lt;script type="text/javascript"&gt;
+
+Uize.module ({
+  required:[
+    'UizeDotCom.Page.Example',
+    'Uize.Widget.Options.Tabbed',
+    'Uize.Scruncher',
+    'UizeDotCom.Templates.JavaScriptSourceSample'
+  ],
+  builder:function () {
+    /*** create the example page widget ***/
+      var page = window.page = new UizeDotCom.Page.Example;
+
+    /*** add property for managing update of scrunched code and scruncher report ***/
+      page.Class.registerProperties ({
+        sourceCode:{
+          name:'sourceCode',
+          onChange:function () {
+            var scruncherResult = Uize.Scruncher.scrunch (this.sourceCode);
+            page.setNodeValue ('scrunchedCode',scruncherResult.scrunchedCode);
+            page.setNodeValue ('scruncherReport',scruncherResult.report);
+          }
+        }
+      });
+
+    /*** add the tabs child widget ***/
+      var tabs = window.tabs = page.addChild (
+        'tabs',
+        Uize.Widget.Options.Tabbed,
+        {
+          bodyClassActive:'tabBodyActive',
+          bodyClassInactive:'tabBodyInactive',
+          values:['sourceCode','scrunchedCode','scruncherReport'],
+          value:'sourceCode'
+        }
+      );
+      tabs.wire (
+        'Changed.value',
+        function () {
+          var tabsValue = tabs + '';
+          if (tabsValue == 'scrunchedCode' || tabsValue == 'scruncherReport')
+            page.set ({sourceCode:page.getNodeValue ('sourceCode')})
+          ;
+        }
+      );
+
+    /*** make the scrunched code and scruncher report textareas select all when clicked ***/
+      page.wireNode (['scrunchedCode','scruncherReport'],'click',function () {this.select ()});
+
+    /*** wire up the page widget ***/
+      page.wireUi ();
+
+    /*** initialize sample data ***/
+      page.setNodeValue ('sourceCode',UizeDotCom.Templates.JavaScriptSourceSample.process ());
+  }
+});
+
+&lt;/script&gt;
+
+&lt;/body&gt;&lt;/html&gt;
+
+
+</pre>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.library',
+		'UizeDotCom.Page'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page).wireUi ()}
+});
+
+</script>
+
+</body></html>

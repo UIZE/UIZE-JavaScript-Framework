@@ -1,0 +1,11 @@
+Various framework-specific identifiers that were polluting the global namespace have been eliminated.
+
+The =Uize= base class used to define the global function =Uize_globalEval=, and the global object constructor =RootClass=. The =Uize.Node= module used to define the global functions =Uize_Node_makeGenericHandlerCaller=, =Uize_Node_makeOnmouseoverHandlerCaller=, =Uize_Node_makeOnmouseoutHandlerCaller=, =Uize_Node_returnFalse=, =Uize_Node_returnTrue= , which were all differently named as =Uize_Node_a= through =Uize_Node_e= with scrunched / production code. The =Uize.Comm.Ajax= module used to defined the global function =Uize_Comm_Ajax_doNothing=. All of these globals have been eliminated and tucked neatly into their respective modules, leaving the only intrusion into the global namespace being the =Uize= base class / namespace.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-03-26 - GENERAL IMPROVEMENT: Reduced Global Pollution
+....................................................................................

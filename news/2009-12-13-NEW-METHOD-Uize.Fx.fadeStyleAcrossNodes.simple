@@ -1,0 +1,15 @@
+The new =Uize.Fx.fadeStyleAcrossNodes= static method, implemented in the =Uize.Fx= module, lets you easily fade values for an arbitrary number of CSS style properties across a specified set of nodes.
+
+This method produces a style fade across a series of nodes, rather than over a period of time. Using this method, you can easily produce color gradients that span multiple nodes by fading the values of the =color=, =backgroundColor=, =borderColor=, and other color style properties. You can just as easily create size and position graduations in order to arrange and scale HTML elements in a continuous fashion. Other CSS style properties, such as =padding=, =margin=, =fontSize=, =letterSpacing=, =wordSpacing=, =lineHeight=, =textIndent=, etc. can also be faded across a series of nodes. And, when loading in extension modules that provide support for additional CSS style properties, such as the =Uize.Fx.xTextShadow= module that provides support for the =text-shadow= CSS3 style property, such style properties can also be faded across nodes.
+
+With the ability to apply curve functions discretely to different properties in a style fade, complex and compelling non-linear style fades can be created. To get a taste of the wide variety of different effects that can be achieved using this method, see the example [[../examples/fade-css-style-across-nodes.html][Fade CSS Style Across Nodes]].
+
+[[Uize.Fx][LEARN MORE]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-12-13 - NEW METHOD: Uize.Fx.fadeStyleAcrossNodes
+....................................................................................

@@ -1,0 +1,91 @@
+.sevenSeg {
+	position:relative;
+}
+.sevenSegSegment {
+	position:absolute;
+}
+.sevenSegSegment div {
+	position:absolute;
+}
+.sevenSegSegmentBar {
+	background:#3f6;
+}
+
+/*** segment states ***/
+	.sevenSegSegmentOff .sevenSegSegmentBar,
+	.sevenSegSegmentOff .sevenSegSegmentEnd {
+		/* NOTE:
+			For some weird reason, simply having the opacity styling on the sevenSegSegmentOff element doesn't work in IE8 in standards mode, only IE8 in IE7 compatibility mode (what a mess). We have to select on the child elements. Doesn't seem like IE can ever get opacity quite right.
+		*/
+		opacity:.12;
+		filter:alpha(opacity=12);
+	}
+	/*
+	.sevenSegSegmentOn {
+	}
+	*/
+
+/*** horizontal segments ***/
+	.sevenSegHorzSegment {
+		width:100%;
+	}
+	.sevenSegHorzSegment .sevenSegSegmentBar {
+		top:0;
+		height:100%;
+	}
+	.sevenSegHorzSegmentTop {
+		top:0;
+	}
+	.sevenSegHorzSegmentBottom {
+		bottom:0;
+	}
+
+/*** vertical segments ***/
+	.sevenSegVertSegment {
+		height:50%;
+	}
+	.sevenSegVertSegment .sevenSegSegmentBar {
+		left:0;
+		width:100%;
+	}
+	.sevenSegVertSegmentTop {
+		top:0;
+	}
+	.sevenSegVertSegmentBottom {
+		bottom:0;
+	}
+	.sevenSegVertSegmentLeft {
+		left:0;
+	}
+	.sevenSegVertSegmentRight {
+		right:0;
+	}
+
+.sevenSegSegmentEnd {
+	width:0;
+	height:0;
+	border-style:solid;
+	border-color:#3f6;
+	background:none;
+}
+.sevenSegSegmentLeftEnd {
+	border-top-color:transparent;
+	border-bottom-color:transparent;
+	border-left-color:transparent;
+}
+.sevenSegSegmentRightEnd {
+	border-top-color:transparent;
+	border-bottom-color:transparent;
+	border-right-color:transparent;
+}
+.sevenSegSegmentTopEnd {
+	border-left-color:transparent;
+	border-right-color:transparent;
+	border-top-color:transparent;
+}
+.sevenSegSegmentBottomEnd {
+	border-left-color:transparent;
+	border-right-color:transparent;
+	border-bottom-color:transparent;
+}
+

@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2010-01-06 - NEW EXAMPLE: Edge Virtual DOM Events | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="The new Edge Virtual DOM Events example demonstrates the edge virtual DOM events - such as mouseEnterLeft, mouseEnterBottom, mouseExitTop, mouseExitRight, etc. - that are available in the Uize.Node.VirtualEvent.Edge module."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2010.html" class="breadcrumb breadcrumbWithArrow">2010 NEWS</a>
+	2010-01-06 - NEW EXAMPLE: Edge Virtual DOM Events
+
+</h1>
+
+<div class="main">
+<div class="contents0">
+	<p>The new <a href="../examples/edge-virtual-dom-events.html">Edge Virtual DOM Events</a> example demonstrates the edge virtual DOM events - such as <code>mouseEnterLeft</code>, <code>mouseEnterBottom</code>, <code>mouseExitTop</code>, <code>mouseExitRight</code>, etc. - that are available in the <code><a href="../reference/Uize.Node.VirtualEvent.Edge.html">Uize.Node.VirtualEvent.Edge</a></code> module.</p>
+	
+	<p>In this demo, a grid of squares is presented. Each of the squares is wired up with handlers for enter and exit events for all of their edges. The enter events are wired to fade the color of the border at which the mouse enters a square from orange to black. The exit events are wired to fade the color of the border at which the mouse exits a square from cyan to black. The animation of the border color is done using the <code>Uize.Fx.fadeStyle</code> method of the <code><a href="../reference/Uize.Fx.html">Uize.Fx</a></code> module. Moving the mouse around the squares will cause the various edges to light up in response to executing the handlers for the edge virtual DOM events that are wired up.</p>
+	
+	<p><a href="../examples/edge-virtual-dom-events.html">CHECK IT OUT</a></p>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

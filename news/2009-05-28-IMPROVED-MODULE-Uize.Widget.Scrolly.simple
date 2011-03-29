@@ -1,0 +1,13 @@
+The =Uize.Widget.Scrolly= module has been revamped and improved in a number of ways.
+
+The implementation of the =pageX= and =pageY= set-get properties has been improved. The extra magic that was locked up in the defunct =moveTo= and =moveBy= instance methods has been moved into the definitions of these set-get properties. This means that one can now set values for these properties that are outside of bounds and they will automatically be conformed to be constrained within bounds. This provides a cleaner interface, and one that is more in keeping with the state interface philosophy of the UIZE JavaScript Framework. As a result, the =moveTo= and =moveBy= instance methods have been killed, and the =pageX= and =pageY= set-get properties should be used instead.
+
+Additionally, the two new =maxPageX= and =maxPageY= set-get properties have been introduced. Along with the existing =isScrollableX= and =isScrollableY= set-get properties, this provides a comprehensive state summary that application code can watch on and query in order to build logic around instances of this class. Also in the spirit of cleaning up the interface, the =Page Changed= instance event has been killed. Instead, application code can use the =Changed.pageX= and/or =Changed.pageY= property change events instead.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-05-28 - IMPROVED MODULE: Uize.Widget.Scrolly
+....................................................................................

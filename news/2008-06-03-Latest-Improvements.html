@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2008-06-03 - Latest Improvements | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="This is a news item for the UIZE JavaScript Framework."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2008.html" class="breadcrumb breadcrumbWithArrow">2008 NEWS</a>
+	2008-06-03 - Latest Improvements
+
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1">1. Code Improvements</a>
+				<ul>
+					<li><a href="#1_1" title="The new globalizeNode method, implemented in the Uize.Widget base class, lets you conveniently dislocate a node from its place inside a widget&apos;s DOM and place it at the root of the document&apos;s DOM - as a direct child of the body node.">1.1. New globalizeNode Instance Method</a></li>
+					<li><a href="#1_2" title="The Uize.Widget.Tree base class has been updated to rebuild the UI when the value of the items set-get property is changed.">1.2. Tree Widget Classes Updated</a></li>
+					<li><a href="#1_3" title="The Uize.Widget.SlideShow widget class has been updated to allow easy / implicit mapping of slide field data to child widgets.">1.3. Uize.Widget.SlideShow Improvements</a></li>
+					<li><a href="#1_4" title="Some more performance tuning has been done to the Uize base class, the inheritance mechanism, and instance construction.">1.4. Performance Optimizations</a></li>
+				</ul>
+			</li>
+			<li><a href="#2" title="A bug in the Bars For Data Comparison example has been fixed, so that now the nutritional data values for all fruits shows correctly.">2. BUG FIX: Bars For Data Comparison</a></li>
+			<li><a href="#3" title="This new examples demonstrates how a slide show does not need to be strictly about images.">3. NEW EXAMPLE: Slideshow of Data</a></li>
+			<li><a href="#4" title="I keep chipping away at the backlog of functionality to document.">4. More Documentation</a></li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<a name="1"></a>
+	<h1 class="heading1" title="1. Code Improvements"><span class="headingNumber"><a href="#1" title="1. Code Improvements">1</a>. </span>Code Improvements</h1>
+	<div class="contents1">
+		<a name="1_1"></a>
+		<h2 class="heading2" title="1. Code Improvements -&gt; 1.1. New globalizeNode Instance Method"><span class="headingNumber"><a href="#1" title="1. Code Improvements">1</a>.<a href="#1_1" title="1. Code Improvements -&gt; 1.1. New globalizeNode Instance Method">1</a>. </span>New globalizeNode Instance Method</h2>
+		<div class="contents2">
+			<p>The new <code>globalizeNode</code> method, implemented in the <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> base class, lets you conveniently dislocate a node from its place inside a widget's DOM and place it at the root of the document's DOM - as a direct child of the body node.</p>
+			
+			<p>This is useful for when nodes need to be plucked out so that they can be absolutely positioned relative to the view port and so that they can appear above everything else on the page. The <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> class keeps track of nodes that are globalized by this method, so that they are correctly removed when the <code>removeUi</code> instance method is called.</p>
+		</div>
+		
+		<a name="1_2"></a>
+		<h2 class="heading2" title="1. Code Improvements -&gt; 1.2. Tree Widget Classes Updated"><span class="headingNumber"><a href="#1" title="1. Code Improvements">1</a>.<a href="#1_2" title="1. Code Improvements -&gt; 1.2. Tree Widget Classes Updated">2</a>. </span>Tree Widget Classes Updated</h2>
+		<div class="contents2">
+			<p>The <code><a href="../reference/Uize.Widget.Tree.html">Uize.Widget.Tree</a></code> base class has been updated to rebuild the UI when the value of the <code>items</code> set-get property is changed.</p>
+			
+			<p>This allows the contents of a tree-based widget to be updated programmatically after the widget has already been wired up. This change increases the versatility of the <code><a href="../reference/Uize.Widget.Tree.List.html">Uize.Widget.Tree.List</a></code> and <code><a href="../reference/Uize.Widget.Tree.Menu.html">Uize.Widget.Tree.Menu</a></code> classes.</p>
+		</div>
+		
+		<a name="1_3"></a>
+		<h2 class="heading2" title="1. Code Improvements -&gt; 1.3. Uize.Widget.SlideShow Improvements"><span class="headingNumber"><a href="#1" title="1. Code Improvements">1</a>.<a href="#1_3" title="1. Code Improvements -&gt; 1.3. Uize.Widget.SlideShow Improvements">3</a>. </span>Uize.Widget.SlideShow Improvements</h2>
+		<div class="contents2">
+			<p>The <code><a href="../reference/Uize.Widget.SlideShow.html">Uize.Widget.SlideShow</a></code> widget class has been updated to allow easy / implicit mapping of slide field data to child widgets.</p>
+		</div>
+		
+		<a name="1_4"></a>
+		<h2 class="heading2" title="1. Code Improvements -&gt; 1.4. Performance Optimizations"><span class="headingNumber"><a href="#1" title="1. Code Improvements">1</a>.<a href="#1_4" title="1. Code Improvements -&gt; 1.4. Performance Optimizations">4</a>. </span>Performance Optimizations</h2>
+		<div class="contents2">
+			<p>Some more performance tuning has been done to the <code><a href="../reference/Uize.html">Uize</a></code> base class, the inheritance mechanism, and instance construction.</p>
+			
+			<p>These improvements are more likely to be noticeable with complex applications utilizing hundreds of instances of different widgets.</p>
+		</div>
+	</div>
+	
+	<a name="2"></a>
+	<h1 class="heading1" title="2. BUG FIX: Bars For Data Comparison"><span class="headingNumber"><a href="#2" title="2. BUG FIX: Bars For Data Comparison">2</a>. </span>BUG FIX: Bars For Data Comparison</h1>
+	<div class="contents1">
+		<p>A bug in the <code>Bars For Data Comparison</code> example has been fixed, so that now the nutritional data values for all fruits shows correctly.</p>
+		
+		<p>There was some bad data in the original set, so all the nutritional data was replaced with authoritative data from the USDA Web site. Also, the old data didn't seem to be even comparing the same portion sizes for different fruits. The new data is based on a 100g serving size. This change also affected the <code>Slideshow of Data</code> and <code>Complex Table Sort</code> examples.</p>
+	</div>
+	
+	<a name="3"></a>
+	<h1 class="heading1" title="3. NEW EXAMPLE: Slideshow of Data"><span class="headingNumber"><a href="#3" title="3. NEW EXAMPLE: Slideshow of Data">3</a>. </span>NEW EXAMPLE: Slideshow of Data</h1>
+	<div class="contents1">
+		<p>This new examples demonstrates how a slide show does not need to be strictly about images.</p>
+		
+		<p>In the example, a slide show widget is being used to display nutritional information for various fruits. Each slide shows data for a different fruit.</p>
+		
+		<p><a href="../examples/slideshow-of-data.html">CHECK IT OUT</a></p>
+	</div>
+	
+	<a name="4"></a>
+	<h1 class="heading1" title="4. More Documentation"><span class="headingNumber"><a href="#4" title="4. More Documentation">4</a>. </span>More Documentation</h1>
+	<div class="contents1">
+		<p>I keep chipping away at the backlog of functionality to document.</p>
+		
+		<p>This is an ongoing effort, but the rate of documentation has now eclipsed the rate of development (and that's not because the rate of development has slowed, either).</p>
+	</div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

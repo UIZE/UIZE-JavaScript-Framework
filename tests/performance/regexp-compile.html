@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>PERFORMANCE TEST: Compiling Regular Expressions | UIZE JavaScript Framework</title>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../../css/page.css"/>
+	<link rel="stylesheet" href="../../css/page.example.css"/>
+	<link rel="stylesheet" href="../../css/page.example.test.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../../index.html" title="UIZE JavaScript Framework home"></a>
+	PERFORMANCE TEST: Compiling Regular Expressions
+	<div class="pageActions">
+		<a id="page-viewSource" href="javascript://" class="buttonLink">SOURCE</a>
+	</div>
+</h1>
+
+<div class="main">
+	<!-- explanation copy -->
+
+	<div class="explanation">
+		<p>This test page demonstrates...</p>
+
+		<p>In the test, ...</p>
+	</div>
+
+	<!-- test results -->
+
+	<div class="testResults">
+		<div class="testResultsFooter">
+			<a id="page_performTest" class="button" href="javascript://">PERFORM TEST</a>
+		</div>
+		<div id="page-testResults"></div>
+	</div>
+</div>
+
+<!-- JavaScript code to wire up the page widget and define the test code -->
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:'UizeDotCom.Page.Example.Test.library',
+	builder:function () {
+		/*** create the example page widget ***/
+			var page = window.page = new UizeDotCom.Page.Example.Test;
+
+		/*** define the test code by overriding the performTest method of the page widget ***/
+			page.performTest = function (_reportResults) {
+				var
+					_this = this,
+					_totalIterations = 100000,
+					_iterationNo,
+					_attributesStr = 'src="myimage.gif" width="640" height="480" alt="My Image"'
+				;
+				_this.executeFunctionsWithPause (
+					[
+						function () {
+							var _allDigitsRegExp =
+								new RegExp ('/\\s*([^=\\s]+)\\s*(=\\s*("([^"]*)"|\'([^\']*)\'|(\\S*))|$|)/g')
+							;
+							_allDigitsRegExp.compile ();
+							/*** measure duration of matching using compiled RegExp instance ***/
+								for (_iterationNo = _totalIterations; --_iterationNo >= 0;) {
+									_attributesStr.match (_allDigitsRegExp);
+								}
+						},
+						function () {
+							var _allDigitsRegExp =
+								new RegExp ('/\\s*([^=\\s]+)\\s*(=\\s*("([^"]*)"|\'([^\']*)\'|(\\S*))|$|)/g')
+							;
+							/*** measure duration of matching using uncompiled RegExp instance ***/
+								for (_iterationNo = _totalIterations; --_iterationNo >= 0;) {
+									_attributesStr.match (_allDigitsRegExp);
+								}
+						},
+						function () {
+							var _allDigitsRegExp = /\s*([^=\s]+)\s*(=\s*("([^"]*)"|'([^']*)'|(\S*))|$|)/g;
+							/*** measure duration of matching using /.../ style regular expression ***/
+								for (_iterationNo = _totalIterations; --_iterationNo >= 0;) {
+									_attributesStr.match (_allDigitsRegExp);
+								}
+						}
+					],
+					1000,
+					function (_executionTimes) {
+						/*** report the results ***/
+							_reportResults (
+								'<h1>Durations</h1>\n' +
+								'<p><b>match using compiled RegExp instance:</b> ' + _executionTimes [0] + 'ms</p>\n' +
+								'<p><b>match using uncompiled RegExp instance:</b> ' + _executionTimes [1] + 'ms</p>\n' +
+								'<p><b>match using /.../ style regular expression:</b> ' + _executionTimes [2] + 'ms</p>\n'
+							);
+					}
+				);
+			};
+
+		/*** wire up the page widget ***/
+			page.wireUi ();
+	}
+});
+
+</script>
+
+</body>
+</html>
+

@@ -1,0 +1,18 @@
+The new =Uize.Widget.Picker.Date= class implements a date picker widget, using a deferred loaded date picker modal dialog to let the user select a date.
+
+The date picker widget supports the following key features...
+
+- It lets you constrain the date range within which a user can select a date by specifying values for the =minValue= and =maxValue= set-get properties.
+- The way that the currently selected date is displayed in an instance's =input= implied node can be configured using the =displayFormat= set-get property.
+- The dialog that is launched to let the user select a date is deferred loaded, so that it does not add to the initial load time of the page.
+- Multiple instances of the =Uize.Widget.Picker.Date= class share the same date picker dialog instance.
+- When the date picker dialog is launched for a specific =Uize.Widget.Picker.Date= instance, the dialog is "moored" to the root node of the instance's =selector= button.
+- You can specify a custom date picker dialog class that should be used for selecting a date.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-10-12 - NEW WIDGET: Uize.Widget.Picker.Date
+....................................................................................

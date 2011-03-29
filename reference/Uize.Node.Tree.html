@@ -1,0 +1,972 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Uize.Node.Tree | Documentation | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework Documentation Uize.Node.Tree module reference documentation"/>
+	<meta name="description" content="The Uize.Node.Tree package provides convenience methods for generating a tree data object by analyzing HTML on a page."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../javascript-modules-index.html" class="breadcrumb breadcrumbWithArrow">MODULES</a>
+	<a href="Uize.html" title="View reference for Uize" class="breadcrumb">Uize</a>.<a href="Uize.Node.html" title="View reference for Uize.Node" class="breadcrumb">Node</a>.<a href="Uize.Node.Tree.html" title="View reference for Uize.Node.Tree" class="breadcrumb">Tree</a>
+	<div class="pageActions">
+		<a id="page-search" href="javascript://" class="buttonLink" title="Search for references to this module...">SEARCH</a><a id="page-examples" href="javascript://" class="buttonLink" title="View examples for this module...">EXAMPLES</a><a href="source-code/Uize.Node.Tree.html" class="buttonLink" title="View the JavaScript source code for this module...">SOURCE</a><a id="page-test" href="javascript://" class="buttonLink" title="Test this module...">TEST</a>
+	</div>
+
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="The Uize.Node.Tree package provides convenience methods for generating a tree data object by analyzing HTML on a page.">1. Introduction</a>
+				<ul>
+					<li><a href="#1_1" title="The following example pages are good showcases for the Uize.Node.Tree module...">1.1. Examples</a></li>
+					<li><a href="#1_2" title="The Uize.Node.Tree module defines the Uize.Node.Tree package under the Uize.Node namespace.">1.2. Implementation Info</a>
+						<ul>
+							<li><a href="#1_2_1" title="The features listed in this section have been introduced in this module.">1.2.1. Features Introduced in This Module</a></li>
+							<li><a href="#1_2_2" title="No features have been overridden in this module.">1.2.2. Features Overridden in This Module</a></li>
+							<li><a href="#1_2_3" title="This module has no inherited features.">1.2.3. Features Inherited From Other Modules</a></li>
+							<li><a href="#1_2_4" title="There are no modules directly under this namespace.">1.2.4. Modules Directly Under This Namespace</a></li>
+							<li><a href="#1_2_5" title="There is no dedicated unit tests module for the Uize.Node.Tree module.">1.2.5. Unit Tests</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li><a href="#2" title="The Uize.Node.Tree module provides convenient ways to derive a Tree Data Object from HTML on a page.">2. In a Nutshell</a>
+				<ul>
+					<li><a href="#2_1" title="A tree data object is an array, where each element of the array is a Tree Item.">2.1. Tree Data Object</a></li>
+					<li><a href="#2_2" title="A Tree Data Object can be used in any number of ways, but is commonly used for building tree-based user interface elements such as contents lists, structured dropdown menus, etc.">2.2. Using a Tree Data Object</a></li>
+					<li><a href="#2_3" title="A tree item is a single item in an array of items that make up a Tree Data Object.">2.3. Tree Item</a>
+						<ul>
+							<li><a href="#2_3_1" title="A string, specifying the display title for the item.">2.3.1. title</a></li>
+							<li><a href="#2_3_2" title="An optional string, specifying the URL that the item should link to.">2.3.2. link</a></li>
+							<li><a href="#2_3_3" title="An optional string, specifying description text for the item.">2.3.3. description</a></li>
+							<li><a href="#2_3_4" title="An optional array, specifying the Tree Data Object for a subtree, where each element in the array is an item.">2.3.4. items</a></li>
+							<li><a href="#2_3_5" title="An optional boolean, specifying whether or not a subtree specified by the items property is expanded.">2.3.5. expanded</a></li>
+						</ul>
+					</li>
+					<li><a href="#2_4" title="To generate a Tree Data Object from a hierarchical list defined by an HTML ul (unordered list) or ol (ordered list) tag, the Uize.Node.Tree module provides the Uize.Node.Tree.getTreeFromList static method.">2.4. Getting a Tree From a List Element</a>
+						<ul>
+							<li><a href="#2_4_1" title="The following sample code blocks show the source HTML, JavaScript code, and output Tree Data Object for the Get Tree from List example.">2.4.1. An Example</a></li>
+							<li><a href="#2_4_2" title="Values for item properties are derived in a number of different ways, depending on the property.">2.4.2. Deriving Item Property Values</a>
+								<ul>
+									<li><a href="#2_4_2_1" title="The value of the title item property is derived by getting the cumulative text contained inside an item node, without regard to HTML elements used in formatting the item node, and excluding the text contained inside nested lists.">2.4.2.1. Deriving the title Property's Value</a></li>
+									<li><a href="#2_4_2_2" title="The value of the link property is derived from the href property of an item&apos;s node, if this node is a link tag.">2.4.2.2. Deriving the link Property's Value</a></li>
+									<li><a href="#2_4_2_3" title="The value of the description property is derived from the &quot;title&quot; attribute of an item&apos;s node, if this node is a link tag.">2.4.2.3. Deriving the description Property's Value</a></li>
+									<li><a href="#2_4_2_4" title="The value of the items property is derived from the first ul (unordered list) or ol (ordered list) tag encountered in an item&apos;s node.">2.4.2.4. Deriving the items Property's Value</a></li>
+									<li><a href="#2_4_2_5" title="The value of the expanded property is derived from the value of the display CSS property of the first ul (unordered list) or ol (ordered list) tag encountered in an item&apos;s node.">2.4.2.5. Deriving the expanded Property's Value</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li><a href="#2_5" title="To generate a Tree Data Object from the section headings contained inside a document, the Uize.Node.Tree module provides the Uize.Node.Tree.getTreeFromPage static method.">2.5. Getting a Tree From a Page's Section Headings</a>
+						<ul>
+							<li><a href="#2_5_1" title="The following sample code blocks show the source HTML, JavaScript code, and output Tree Data Object for the Get Tree from Page example.">2.5.1. An Example</a></li>
+							<li><a href="#2_5_2">2.5.2. Deriving Item Property Values</a>
+								<ul>
+									<li><a href="#2_5_2_1" title="The value of the title item property is derived by getting the cumulative text contained inside an item&apos;s heading node, without regard to HTML elements used in formatting the heading text, and then stripping leading and trailing whitespace.">2.5.2.1. Deriving the title Property's Value</a></li>
+									<li><a href="#2_5_2_2" title="The value of the link property is derived from the id attribute of an item&apos;s heading node, by concatenating the value of the id attribute at the end of the value of the location object&apos;s href property, with the two parts separated by a &quot;#&quot; (pound / hash) character.">2.5.2.2. Deriving the link Property's Value</a></li>
+									<li><a href="#2_5_2_3" title="The value of the description property is derived from the &quot;title&quot; attribute of an item&apos;s heading node.">2.5.2.3. Deriving the description Property's Value</a></li>
+									<li><a href="#2_5_2_4" title="The value of the items property is derived from all Tree Item heading nodes following the current item&apos;s heading node, that are at the immediately deeper level in the document structure, and up until the very next heading node that is at the same level as or at a shallower level than the current item.">2.5.2.4. Deriving the items Property's Value</a></li>
+									<li><a href="#2_5_2_5" title="When using the Uize.Node.Tree.getTreeFromPage method, the value of the expanded property is derived from the value of the method&apos;s initialExpandedDepthINT parameter and the level of the current item.">2.5.2.5. Deriving the expanded Property's Value</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li><a href="#3">3. Static Methods</a>
+				<ul>
+					<li><a href="#3_1" title="Returns a Tree Data Object, generated by analyzing the structure and contents of a hierarchical list defined by an HTML ul (unordered list) or ol (ordered list) tag.">3.1. Uize.Node.Tree.getTreeFromList</a></li>
+					<li><a href="#3_2" title="Returns a Tree Data Object, generated by analyzing the occurrence of different CSS classes for section headings at different depths of a document.">3.2. Uize.Node.Tree.getTreeFromPage</a>
+						<ul>
+							<li><a href="#3_2_1" title="The Uize.Node.Tree.getTreeFromPage method supports the following parameters...">3.2.1. Parameters</a>
+								<ul>
+									<li><a href="#3_2_1_1" title="An array of string type elements, representing the CSS class names that identify section headings for different levels of a document.">3.2.1.1. levelClassesARRAY</a></li>
+									<li><a href="#3_2_1_2" title="An integer, specifying the depth to which the generated Tree Data Object should be expanded.">3.2.1.2. initialExpandedDepthINT</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li><a href="#4">4. Static Properties</a>
+				<ul>
+					<li><a href="#4_1" title="IMPLEMENTATION INFO">4.1. Uize.Node.Tree.moduleName</a></li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<a name="1"></a>
+	<h1 class="heading1" title="1. Introduction"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>. </span>Introduction</h1>
+	<div class="contents1">
+		<p>The <code>Uize.Node.Tree</code> package provides convenience methods for generating a tree data object by analyzing HTML on a page.</p>
+		
+		<p><b>DEVELOPERS:</b> <a href="http://www.tomkidding.com" target="_blank" class="externalSiteLink">Chris van Rensburg</a></p>
+		
+		<a name="1_1"></a>
+		<h2 class="heading2" title="1. Introduction -&gt; 1.1. Examples"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. Examples">1</a>. </span>Examples</h2>
+		<div class="contents2">
+			<p>The following example pages are good showcases for the <code>Uize.Node.Tree</code> module...</p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><a href="../examples/get-tree-from-list.html">Get Tree from List</a> - See how a tree data object can be generated by analyzing the structure and contents of a nested list defined by an HTML ul (unordered list) tag.</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><a href="../examples/get-tree-from-page.html">Get Tree from Page</a> - See how a tree data object can be created by analyzing the occurrence of different CSS classes for section headings at different depths of a document.</td></tr>
+			</table>
+			<p><span class="allCaps">SEARCH FOR EXAMPLES</span></p>
+			
+			<p>Use the link below to search for example pages on the <b>uize.com</b> Web site that reference the <code>Uize.Node.Tree</code> module...</p>
+			
+			<p><a href="http://www.google.com/search?hl=en&safe=off&domains=uize.com%2Fexamples&sitesearch=uize.com%2Fexamples&q=%22Uize.Node.Tree%22" target="_blank" class="externalSiteLink">SEARCH</a></p>
+		</div>
+		
+		<a name="1_2"></a>
+		<h2 class="heading2" title="1. Introduction -&gt; 1.2. Implementation Info"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>. </span>Implementation Info</h2>
+		<div class="contents2">
+			<p>The <code>Uize.Node.Tree</code> module defines the <code>Uize.Node.Tree</code> package under the <code><a href="../reference/Uize.Node.html">Uize.Node</a></code> namespace.</p>
+			
+			<a name="1_2_1"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.1. Features Introduced in This Module"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>.<a href="#1_2_1" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.1. Features Introduced in This Module">1</a>. </span>Features Introduced in This Module</h3>
+			<div class="contents3">
+				<p>The features listed in this section have been introduced in this module.</p>
+				
+				<p><span class="allCaps">STATIC METHODS</span></p>
+				
+				<p><code><a href="#3_1">Uize.Node.Tree.getTreeFromList</a></code> | <code><a href="#3_2">Uize.Node.Tree.getTreeFromPage</a></code></p>
+				
+				<p><span class="allCaps">STATIC PROPERTIES</span></p>
+				
+				<p><code><a href="#4_1">Uize.Node.Tree.moduleName</a></code></p>
+			</div>
+			
+			<a name="1_2_2"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.2. Features Overridden in This Module"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>.<a href="#1_2_2" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.2. Features Overridden in This Module">2</a>. </span>Features Overridden in This Module</h3>
+			<div class="contents3">
+				<p>No features have been overridden in this module.</p>
+			</div>
+			
+			<a name="1_2_3"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.3. Features Inherited From Other Modules"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>.<a href="#1_2_3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.3. Features Inherited From Other Modules">3</a>. </span>Features Inherited From Other Modules</h3>
+			<div class="contents3">
+				<p>This module has no inherited features.</p>
+			</div>
+			
+			<a name="1_2_4"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.4. Modules Directly Under This Namespace"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>.<a href="#1_2_4" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.4. Modules Directly Under This Namespace">4</a>. </span>Modules Directly Under This Namespace</h3>
+			<div class="contents3">
+				<p>There are no modules directly under this namespace.</p>
+			</div>
+			
+			<a name="1_2_5"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.5. Unit Tests"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>.<a href="#1_2_5" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.5. Unit Tests">5</a>. </span>Unit Tests</h3>
+			<div class="contents3">
+				<p>There is no dedicated unit tests module for the <code>Uize.Node.Tree</code> module.</p>
+			</div>
+		</div>
+	</div>
+	
+	<a name="2"></a>
+	<h1 class="heading1" title="2. In a Nutshell"><span class="headingNumber"><a href="#2" title="2. In a Nutshell">2</a>. </span>In a Nutshell</h1>
+	<div class="contents1">
+		<p>The <code>Uize.Node.Tree</code> module provides convenient ways to derive a <a href="#2_1">Tree Data Object</a> from HTML on a page.</p>
+		
+		<a name="2_1"></a>
+		<h2 class="heading2" title="2. In a Nutshell -&gt; 2.1. Tree Data Object"><span class="headingNumber"><a href="#2" title="2. In a Nutshell">2</a>.<a href="#2_1" title="2. In a Nutshell -&gt; 2.1. Tree Data Object">1</a>. </span>Tree Data Object</h2>
+		<div class="contents2">
+			<p>A tree data object is an array, where each element of the array is a <a href="#2_3">Tree Item</a>.</p>
+			
+			<p>Because a Tree Item may itself contain a child Tree Data Object, specified by its <code><a href="#2_3_4">items</a></code> property, a Tree Data Object can be used to represent an arbitrarily complex, hierarchical structure for information.</p>
+		</div>
+		
+		<a name="2_2"></a>
+		<h2 class="heading2" title="2. In a Nutshell -&gt; 2.2. Using a Tree Data Object"><span class="headingNumber"><a href="#2" title="2. In a Nutshell">2</a>.<a href="#2_2" title="2. In a Nutshell -&gt; 2.2. Using a Tree Data Object">2</a>. </span>Using a Tree Data Object</h2>
+		<div class="contents2">
+			<p>A <a href="#2_1">Tree Data Object</a> can be used in any number of ways, but is commonly used for building tree-based user interface elements such as contents lists, structured dropdown menus, etc.</p>
+			
+			<p>A number of widget class support data in the <a href="#2_1">Tree Data Object</a> format, such as the <code><a href="../reference/Uize.Widget.Tree.List.html">Uize.Widget.Tree.List</a></code>, <code><a href="../reference/Uize.Widget.Tree.Menu.html">Uize.Widget.Tree.Menu</a></code>, and <code><a href="../reference/Uize.Widget.Tree.Select.html">Uize.Widget.Tree.Select</a></code> classes. Outside of widgets, tree data objects can be used to drive the generation of HTML, in build scripts or Web applications, using <a href="../explainers/javascript-templates.html">JavaScript Templates</a>. To see tree data objects in action, see the <a href="../examples/tree-list.html">Tree List From JSON</a> and <a href="../examples/tree-menu.html">Tree Menu From JSON</a> examples.</p>
+		</div>
+		
+		<a name="2_3"></a>
+		<h2 class="heading2" title="2. In a Nutshell -&gt; 2.3. Tree Item"><span class="headingNumber"><a href="#2" title="2. In a Nutshell">2</a>.<a href="#2_3" title="2. In a Nutshell -&gt; 2.3. Tree Item">3</a>. </span>Tree Item</h2>
+		<div class="contents2">
+			<p>A tree item is a single item in an array of items that make up a <a href="#2_1">Tree Data Object</a>.</p>
+			
+			<p>Any tree item may contain a subtree, which is itself a <a href="#2_1">Tree Data Object</a>, specified by the <code><a href="#2_3_4">items</a></code> property. A tree item has the following structure...</p>
+			
+			<p><span class="allCaps">ITEM STRUCTURE</span></p>
+			
+			
+<pre class="sample-code">{
+  title       : titleSTR,         // required
+  link        : linkUrlSTR,       // optional
+  description : descriptionSTR,   // optional
+  items       : childItemsARRAY,  // optional
+  expanded    : expandedBOOL      // optional, defaults to true
+}
+</pre>
+			
+			<a name="2_3_1"></a>
+			<h3 class="heading3" title="2. In a Nutshell -&gt; 2.3. Tree Item -&gt; 2.3.1. title"><span class="headingNumber"><a href="#2" title="2. In a Nutshell">2</a>.<a href="#2_3" title="2. In a Nutshell -&gt; 2.3. Tree Item">3</a>.<a href="#2_3_1" title="2. In a Nutshell -&gt; 2.3. Tree Item -&gt; 2.3.1. title">1</a>. </span>title</h3>
+			<div class="contents3">
+				<p>A string, specifying the display title for the item.</p>
+			</div>
+			
+			<a name="2_3_2"></a>
+			<h3 class="heading3" title="2. In a Nutshell -&gt; 2.3. Tree Item -&gt; 2.3.2. link"><span class="headingNumber"><a href="#2" title="2. In a Nutshell">2</a>.<a href="#2_3" title="2. In a Nutshell -&gt; 2.3. Tree Item">3</a>.<a href="#2_3_2" title="2. In a Nutshell -&gt; 2.3. Tree Item -&gt; 2.3.2. link">2</a>. </span>link</h3>
+			<div class="contents3">
+				<p>An optional string, specifying the URL that the item should link to.</p>
+				
+				<p>For items that should execute JavaScript code, a link with the <code>javascript:</code> protocol can be used.</p>
+			</div>
+			
+			<a name="2_3_3"></a>
+			<h3 class="heading3" title="2. In a Nutshell -&gt; 2.3. Tree Item -&gt; 2.3.3. description"><span class="headingNumber"><a href="#2" title="2. In a Nutshell">2</a>.<a href="#2_3" title="2. In a Nutshell -&gt; 2.3. Tree Item">3</a>.<a href="#2_3_3" title="2. In a Nutshell -&gt; 2.3. Tree Item -&gt; 2.3.3. description">3</a>. </span>description</h3>
+			<div class="contents3">
+				<p>An optional string, specifying description text for the item.</p>
+			</div>
+			
+			<a name="2_3_4"></a>
+			<h3 class="heading3" title="2. In a Nutshell -&gt; 2.3. Tree Item -&gt; 2.3.4. items"><span class="headingNumber"><a href="#2" title="2. In a Nutshell">2</a>.<a href="#2_3" title="2. In a Nutshell -&gt; 2.3. Tree Item">3</a>.<a href="#2_3_4" title="2. In a Nutshell -&gt; 2.3. Tree Item -&gt; 2.3.4. items">4</a>. </span>items</h3>
+			<div class="contents3">
+				<p>An optional array, specifying the <a href="#2_1">Tree Data Object</a> for a subtree, where each element in the array is an item.</p>
+				
+				<p>An empty array value for this property is equivalent to the values <code>null</code> or <code>undefined</code>, and indicates that the item does not have a subtree.</p>
+			</div>
+			
+			<a name="2_3_5"></a>
+			<h3 class="heading3" title="2. In a Nutshell -&gt; 2.3. Tree Item -&gt; 2.3.5. expanded"><span class="headingNumber"><a href="#2" title="2. In a Nutshell">2</a>.<a href="#2_3" title="2. In a Nutshell -&gt; 2.3. Tree Item">3</a>.<a href="#2_3_5" title="2. In a Nutshell -&gt; 2.3. Tree Item -&gt; 2.3.5. expanded">5</a>. </span>expanded</h3>
+			<div class="contents3">
+				<p>An optional boolean, specifying whether or not a subtree specified by the <code><a href="#2_3_4">items</a></code> property is expanded.</p>
+				
+				<p>When this property is omitted, its value is defaulted to <code>true</code>. Therefore, for a subtree to be collapsed, the <code><a href="#2_3_5">expanded</a></code> property must be explicitly set to <code>false</code>.</p>
+			</div>
+		</div>
+		
+		<a name="2_4"></a>
+		<h2 class="heading2" title="2. In a Nutshell -&gt; 2.4. Getting a Tree From a List Element"><span class="headingNumber"><a href="#2" title="2. In a Nutshell">2</a>.<a href="#2_4" title="2. In a Nutshell -&gt; 2.4. Getting a Tree From a List Element">4</a>. </span>Getting a Tree From a List Element</h2>
+		<div class="contents2">
+			<p>To generate a <a href="#2_1">Tree Data Object</a> from a hierarchical list defined by an HTML <code>ul</code> (unordered list) or <code>ol</code> (ordered list) tag, the <code>Uize.Node.Tree</code> module provides the <code><a href="#3_1">Uize.Node.Tree.getTreeFromList</a></code> static method.</p>
+			
+			<p>This method is able to scan through the structure and contents of a list element and build a data structure that reflects the structure of the list. All the method needs in order to work its magic is a reference to</p>
+			
+			<p>(or id for) either a list node or the immediate parent node of a list node. The method can handle unordered lists as well as ordered lists. From the list HTML that it analyzes, the method is able to build a tree data object where each item will have a <code><a href="#2_3_1">title</a></code> property, and may also have <code><a href="#2_3_2">link</a></code>, <code><a href="#2_3_3">description</a></code>, <code><a href="#2_3_4">items</a></code>, and <code><a href="#2_3_5">expanded</a></code> properties.</p>
+			
+			<a name="2_4_1"></a>
+			<h3 class="heading3" title="2. In a Nutshell -&gt; 2.4. Getting a Tree From a List Element -&gt; 2.4.1. An Example"><span class="headingNumber"><a href="#2" title="2. In a Nutshell">2</a>.<a href="#2_4" title="2. In a Nutshell -&gt; 2.4. Getting a Tree From a List Element">4</a>.<a href="#2_4_1" title="2. In a Nutshell -&gt; 2.4. Getting a Tree From a List Element -&gt; 2.4.1. An Example">1</a>. </span>An Example</h3>
+			<div class="contents3">
+				<p>The following sample code blocks show the source HTML, JavaScript code, and output <a href="#2_1">Tree Data Object</a> for the <a href="../examples/get-tree-from-list.html">Get Tree from List</a> example.</p>
+				
+				<p><span class="allCaps">HTML</span></p>
+				
+				
+<pre class="sample-code">&lt;ul id="page-list"&gt;
+  &lt;li&gt;Dogs
+    &lt;ul&gt;
+      &lt;li&gt;Small Breeds
+        &lt;ul&gt;
+          &lt;li&gt;
+            &lt;a href="http://en.wikipedia.org/wiki/West_Highland_White_Terrier"&gt;
+              West Highland White
+            &lt;/a&gt;
+          &lt;/li&gt;
+          &lt;li&gt;
+            &lt;a href="http://en.wikipedia.org/wiki/Mexican_Hairless_Dog"&gt;
+              Mexican Hairless
+            &lt;/a&gt;
+          &lt;/li&gt;
+          &lt;li&gt;
+            &lt;a href="http://en.wikipedia.org/wiki/Chihuahua_%28dog%29"&gt;
+              Miniature Chihuahua
+            &lt;/a&gt;
+          &lt;/li&gt;
+          &lt;li&gt;
+            &lt;a href="http://en.wikipedia.org/wiki/Teacup_Poodle#Poodle_sizes"&gt;
+              Teacup Poodle
+            &lt;/a&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;Large Breeds
+        &lt;ul&gt;
+          &lt;li&gt;
+            &lt;a href="http://en.wikipedia.org/wiki/Afghan_Hound"&gt;Afghan&lt;/a&gt;
+          &lt;/li&gt;
+          &lt;li&gt;
+            &lt;a href="http://en.wikipedia.org/wiki/Great_Dane"&gt;Great Dane&lt;/a&gt;
+          &lt;/li&gt;
+          &lt;li&gt;
+            &lt;a href="http://en.wikipedia.org/wiki/Irish_Wolfhound"&gt;Irish Wolfhound&lt;/a&gt;
+          &lt;/li&gt;
+          &lt;li&gt;
+            &lt;a href="http://en.wikipedia.org/wiki/St._Bernard_%28dog%29"&gt;St. Bernard&lt;/a&gt;
+          &lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Cats
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href="http://en.wikipedia.org/wiki/Persian_%28cat%29"&gt;Persian&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="http://en.wikipedia.org/wiki/Siamese_%28cat%29"&gt;Siamese&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="http://en.wikipedia.org/wiki/Hairless_cat"&gt;Hairless&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Other
+    &lt;ul&gt;
+      &lt;li&gt;&lt;a href="http://en.wikipedia.org/wiki/Bunny"&gt;Bunny&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="http://en.wikipedia.org/wiki/Hamster"&gt;Hamster&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="http://en.wikipedia.org/wiki/Mouse"&gt;Mouse&lt;/a&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;a href="http://en.wikipedia.org/wiki/Rat"&gt;Rat&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+</pre>
+				
+				<p><span class="allCaps">JAVASCRIPT</span></p>
+				
+				
+<pre class="sample-code">Uize.Node.Tree.getTreeFromList (page.getNode ('list'));
+</pre>
+				
+				<p><span class="allCaps">OUTPUT</span></p>
+				
+				
+<pre class="sample-code">[
+  {
+    title:'Dogs',
+    items:[
+      {
+        title:'Small Breeds',
+        items:[
+          {
+            title:'West Highland White',
+            link:'http://en.wikipedia.org/wiki/West_Highland_White_Terrier'
+          },
+          {
+            title:'Mexican Hairless',
+            link:'http://en.wikipedia.org/wiki/Mexican_Hairless_Dog'
+          },
+          {
+            title:'Miniature Chihuahua',
+            link:'http://en.wikipedia.org/wiki/Chihuahua_%28dog%29'
+          },
+          {
+            title:'Teacup Poodle',
+            link:'http://en.wikipedia.org/wiki/Teacup_Poodle#Poodle_sizes'
+          }
+        ]
+      },
+      {
+        title:'Large Breeds',
+        items:[
+          {
+            title:'Afghan',
+            link:'http://en.wikipedia.org/wiki/Afghan_Hound'
+          },
+          {
+            title:'Great Dane',
+            link:'http://en.wikipedia.org/wiki/Great_Dane'
+          },
+          {
+            title:'Irish Wolfhound',
+            link:'http://en.wikipedia.org/wiki/Irish_Wolfhound'
+          },
+          {
+            title:'St. Bernard',
+            link:'http://en.wikipedia.org/wiki/St._Bernard_%28dog%29'
+          }
+        ]
+      }
+    ]
+  },
+  {
+    title:'Cats',
+    items:[
+      {
+        title:'Persian',
+        link:'http://en.wikipedia.org/wiki/Persian_%28cat%29'
+      },
+      {
+        title:'Siamese',
+        link:'http://en.wikipedia.org/wiki/Siamese_%28cat%29'
+      },
+      {
+        title:'Hairless',
+        link:'http://en.wikipedia.org/wiki/Hairless_cat'
+      }
+    ]
+  },
+  {
+    title:'Other',
+    items:[
+      {
+        title:'Bunny',
+        link:'http://en.wikipedia.org/wiki/Bunny'
+      },
+      {
+        title:'Hamster',
+        link:'http://en.wikipedia.org/wiki/Hamster'
+      },
+      {
+        title:'Mouse',
+        link:'http://en.wikipedia.org/wiki/Mouse'
+      },
+      {
+        title:'Rat',
+        link:'http://en.wikipedia.org/wiki/Rat'
+      }
+    ]
+  }
+]
+</pre>
+			</div>
+			
+			<a name="2_4_2"></a>
+			<h3 class="heading3" title="2. In a Nutshell -&gt; 2.4. Getting a Tree From a List Element -&gt; 2.4.2. Deriving Item Property Values"><span class="headingNumber"><a href="#2" title="2. In a Nutshell">2</a>.<a href="#2_4" title="2. In a Nutshell -&gt; 2.4. Getting a Tree From a List Element">4</a>.<a href="#2_4_2" title="2. In a Nutshell -&gt; 2.4. Getting a Tree From a List Element -&gt; 2.4.2. Deriving Item Property Values">2</a>. </span>Deriving Item Property Values</h3>
+			<div class="contents3">
+				<p>Values for item properties are derived in a number of different ways, depending on the property.</p>
+				
+				<a name="2_4_2_1"></a>
+				<h4 class="heading4" title="2. In a Nutshell -&gt; 2.4. Getting a Tree From a List Element -&gt; 2.4.2. Deriving Item Property Values -&gt; 2.4.2.1. Deriving the title Property&apos;s Value"><span class="headingNumber"><a href="#2" title="2. In a Nutshell">2</a>.<a href="#2_4" title="2. In a Nutshell -&gt; 2.4. Getting a Tree From a List Element">4</a>.<a href="#2_4_2" title="2. In a Nutshell -&gt; 2.4. Getting a Tree From a List Element -&gt; 2.4.2. Deriving Item Property Values">2</a>.<a href="#2_4_2_1" title="2. In a Nutshell -&gt; 2.4. Getting a Tree From a List Element -&gt; 2.4.2. Deriving Item Property Values -&gt; 2.4.2.1. Deriving the title Property&apos;s Value">1</a>. </span>Deriving the title Property's Value</h4>
+				<div class="contents4">
+					<p>The value of the <code><a href="#2_3_1">title</a></code> item property is derived by getting the cumulative text contained inside an item node, without regard to HTML elements used in formatting the item node, and excluding the text contained inside nested lists.</p>
+					
+					<p><span class="allCaps">EXAMPLE</span></p>
+					
+					
+<pre class="sample-code">&lt;li&gt;&lt;span&gt;This is the item &lt;b&gt;title&lt;/b&gt;&lt;/span&gt;
+  &lt;ul&gt;
+    &lt;li&gt;This is nested item 1&lt;/li&gt;
+    &lt;li&gt;This is nested item 2&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/li&gt;
+</pre>
+					
+					<p>If the above HTML were the HTML for a <a href="#2_3">Tree Item</a>, then the value derived for the <code><a href="#2_3_1">title</a></code> property of the item would be "This is the item title". For one thing, the <code>span</code> and <code>b</code> tags would be stripped out, and only the unformatted / unmarked up text would be retained. And, secondly, the text contents of the nested <code>ul</code> tag would be ignored and would not contribute to the tree item's derived <code><a href="#2_3_1">title</a></code>.</p>
+				</div>
+				
+				<a name="2_4_2_2"></a>
+				<h4 class="heading4" title="2. In a Nutshell -&gt; 2.4. Getting a Tree From a List Element -&gt; 2.4.2. Deriving Item Property Values -&gt; 2.4.2.2. Deriving the link Property&apos;s Value"><span class="headingNumber"><a href="#2" title="2. In a Nutshell">2</a>.<a href="#2_4" title="2. In a Nutshell -&gt; 2.4. Getting a Tree From a List Element">4</a>.<a href="#2_4_2" title="2. In a Nutshell -&gt; 2.4. Getting a Tree From a List Element -&gt; 2.4.2. Deriving Item Property Values">2</a>.<a href="#2_4_2_2" title="2. In a Nutshell -&gt; 2.4. Getting a Tree From a List Element -&gt; 2.4.2. Deriving Item Property Values -&gt; 2.4.2.2. Deriving the link Property&apos;s Value">2</a>. </span>Deriving the link Property's Value</h4>
+				<div class="contents4">
+					<p>The value of the <code><a href="#2_3_2">link</a></code> property is derived from the <code>href</code> property of an item's node, if this node is a link tag.</p>
+					
+					<p><span class="allCaps">EXAMPLE</span></p>
+					
+					
+<pre class="sample-code">&lt;li&gt;&lt;a href="http://www.uize.com"&gt;&lt;b&gt;HOME&lt;/b&gt;&lt;/span&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href="http://www.uize.com/download.html"&gt;Download&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="http://www.uize.com/directory.html"&gt;Site Map&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/li&gt;
+</pre>
+					
+					<p>If the above HTML were the HTML for a <a href="#2_3">Tree Item</a>, then the value derived for the <code><a href="#2_3_2">link</a></code> property of the item would be "http://www.uize.com". It doesn't matter that there are multiple link tags in the HTML, since the two other link tags belong to a nested <code>ul</code> tag - only the first link tag will be used when deriving the value for the item's <code><a href="#2_3_2">link</a></code> property. Note that not all items need to be linked - for item nodes that are not link tags, the value of the <code><a href="#2_3_2">link</a></code> property will not be set and the <code><a href="#2_3_2">link</a></code> property will not be present in the <a href="#2_3">Tree Item</a>.</p>
+				</div>
+				
+				<a name="2_4_2_3"></a>
+				<h4 class="heading4" title="2. In a Nutshell -&gt; 2.4. Getting a Tree From a List Element -&gt; 2.4.2. Deriving Item Property Values -&gt; 2.4.2.3. Deriving the description Property&apos;s Value"><span class="headingNumber"><a href="#2" title="2. In a Nutshell">2</a>.<a href="#2_4" title="2. In a Nutshell -&gt; 2.4. Getting a Tree From a List Element">4</a>.<a href="#2_4_2" title="2. In a Nutshell -&gt; 2.4. Getting a Tree From a List Element -&gt; 2.4.2. Deriving Item Property Values">2</a>.<a href="#2_4_2_3" title="2. In a Nutshell -&gt; 2.4. Getting a Tree From a List Element -&gt; 2.4.2. Deriving Item Property Values -&gt; 2.4.2.3. Deriving the description Property&apos;s Value">3</a>. </span>Deriving the description Property's Value</h4>
+				<div class="contents4">
+					<p>The value of the <code><a href="#2_3_3">description</a></code> property is derived from the "title" attribute of an item's node, if this node is a link tag.</p>
+					
+					<p><span class="allCaps">EXAMPLE</span></p>
+					
+					
+<pre class="sample-code">&lt;li&gt;&lt;a href="http://www.uize.com" title="UIZE JavaScript Framework"&gt;&lt;b&gt;HOME&lt;/b&gt;&lt;/span&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href="http://www.uize.com/download.html"&gt;Download&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="http://www.uize.com/directory.html"&gt;Site Map&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/li&gt;
+</pre>
+					
+					<p>If the above HTML were the HTML for a <a href="#2_3">Tree Item</a>, then the value derived for the <code><a href="#2_3_3">description</a></code> property of the item would be "UIZE JavaScript Framework". It doesn't matter that there are multiple link tags in the HTML, since the two other link tags belong to a nested <code>ul</code> tag - only the first link tag will be used when deriving the value for the item's <code><a href="#2_3_3">description</a></code> property.</p>
+					
+					<p>Note that not all items need to be linked - for item nodes that are not link tags, the value of the <code><a href="#2_3_3">description</a></code> property will not be set and the <code><a href="#2_3_3">description</a></code> property will not be present in the <a href="#2_3">Tree Item</a>. Similarly, for item nodes that <b>are</b> link tags, but that do not have a "title" attribute specified, or that have an empty string specified for the "title" attribute, the <code><a href="#2_3_3">description</a></code> property will not be present in the <a href="#2_3">Tree Item</a>.</p>
+				</div>
+				
+				<a name="2_4_2_4"></a>
+				<h4 class="heading4" title="2. In a Nutshell -&gt; 2.4. Getting a Tree From a List Element -&gt; 2.4.2. Deriving Item Property Values -&gt; 2.4.2.4. Deriving the items Property&apos;s Value"><span class="headingNumber"><a href="#2" title="2. In a Nutshell">2</a>.<a href="#2_4" title="2. In a Nutshell -&gt; 2.4. Getting a Tree From a List Element">4</a>.<a href="#2_4_2" title="2. In a Nutshell -&gt; 2.4. Getting a Tree From a List Element -&gt; 2.4.2. Deriving Item Property Values">2</a>.<a href="#2_4_2_4" title="2. In a Nutshell -&gt; 2.4. Getting a Tree From a List Element -&gt; 2.4.2. Deriving Item Property Values -&gt; 2.4.2.4. Deriving the items Property&apos;s Value">4</a>. </span>Deriving the items Property's Value</h4>
+				<div class="contents4">
+					<p>The value of the <code><a href="#2_3_4">items</a></code> property is derived from the first <code>ul</code> (unordered list) or <code>ol</code> (ordered list) tag encountered in an item's node.</p>
+					
+					<p><span class="allCaps">EXAMPLE</span></p>
+					
+					
+<pre class="sample-code">&lt;li&gt;&lt;a href="http://www.uize.com" title="UIZE JavaScript Framework"&gt;&lt;b&gt;HOME&lt;/b&gt;&lt;/span&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href="http://www.uize.com/download.html"&gt;Download&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="http://www.uize.com/directory.html"&gt;Site Map&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/li&gt;
+</pre>
+					
+					<p>If the above HTML were the HTML for a <a href="#2_3">Tree Item</a>, then the value derived for the <code><a href="#2_3_4">items</a></code> property of the item would be an array with the following structure...</p>
+					
+					
+<pre class="sample-code">[
+  {
+    title:'Download',
+    link:'http://www.uize.com/download.html'
+  },
+  {
+    title:'Site Map',
+    link:'http://www.uize.com/directory.html'
+  }
+]
+</pre>
+					
+					<p>It doesn't matter that there is HTML content ahead of the nested <code>ul</code> tag - that content will be ignored when deriving the value for the <code><a href="#2_3_4">items</a></code> property, but it will be used when deriving values for the <code><a href="#2_3_1">title</a></code>, <code><a href="#2_3_2">link</a></code>, and <code><a href="#2_3_3">description</a></code> properties of the <a href="#2_3">Tree Item</a> object. Note that not every item needs to have a subtree - in most cases, the majority will not. For item nodes that do not contain nested list tags, the value of the <code><a href="#2_3_4">items</a></code> property will not be set and the <code><a href="#2_3_4">items</a></code> property will not be present in the <a href="#2_3">Tree Item</a>.</p>
+				</div>
+				
+				<a name="2_4_2_5"></a>
+				<h4 class="heading4" title="2. In a Nutshell -&gt; 2.4. Getting a Tree From a List Element -&gt; 2.4.2. Deriving Item Property Values -&gt; 2.4.2.5. Deriving the expanded Property&apos;s Value"><span class="headingNumber"><a href="#2" title="2. In a Nutshell">2</a>.<a href="#2_4" title="2. In a Nutshell -&gt; 2.4. Getting a Tree From a List Element">4</a>.<a href="#2_4_2" title="2. In a Nutshell -&gt; 2.4. Getting a Tree From a List Element -&gt; 2.4.2. Deriving Item Property Values">2</a>.<a href="#2_4_2_5" title="2. In a Nutshell -&gt; 2.4. Getting a Tree From a List Element -&gt; 2.4.2. Deriving Item Property Values -&gt; 2.4.2.5. Deriving the expanded Property&apos;s Value">5</a>. </span>Deriving the expanded Property's Value</h4>
+				<div class="contents4">
+					<p>The value of the <code><a href="#2_3_5">expanded</a></code> property is derived from the value of the <code>display</code> CSS property of the first <code>ul</code> (unordered list) or <code>ol</code> (ordered list) tag encountered in an item's node.</p>
+					
+					<p><span class="allCaps">EXAMPLE</span></p>
+					
+					
+<pre class="sample-code">&lt;li&gt;&lt;a href="http://www.uize.com" title="UIZE JavaScript Framework"&gt;&lt;b&gt;HOME&lt;/b&gt;&lt;/span&gt;
+  &lt;ul style="display:none;"&gt;
+    &lt;li&gt;&lt;a href="http://www.uize.com/download.html"&gt;Download&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="http://www.uize.com/directory.html"&gt;Site Map&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/li&gt;
+</pre>
+					
+					<p>If the above HTML were the HTML for a <a href="#2_3">Tree Item</a>, then the value derived for the <code><a href="#2_3_5">expanded</a></code> property of the item would be <code>false</code>. The rule is simple: if the list tag that represents the items in the subtree for an item is set to <code>display:none</code>, either through inline CSS in a <code>style</code> attribute, or in a style rule in an external style sheet, then the value of the <code><a href="#2_3_5">expanded</a></code> property will be <code>false</code>. Note that not every item needs to have a subtree - in most cases, the majority will not. For item nodes that do not contain nested list tags, the <code><a href="#2_3_5">expanded</a></code> property will not be present in the <a href="#2_3">Tree Item</a>. Also, for any item that <b>does</b> have a subtree and where the subtree is expanded, the value of the <code><a href="#2_3_5">expanded</a></code> property will be <code>true</code> and the property will not be present in the <a href="#2_3">Tree Item</a>, since <code>true</code> is the default value for this property.</p>
+				</div>
+			</div>
+		</div>
+		
+		<a name="2_5"></a>
+		<h2 class="heading2" title="2. In a Nutshell -&gt; 2.5. Getting a Tree From a Page&apos;s Section Headings"><span class="headingNumber"><a href="#2" title="2. In a Nutshell">2</a>.<a href="#2_5" title="2. In a Nutshell -&gt; 2.5. Getting a Tree From a Page&apos;s Section Headings">5</a>. </span>Getting a Tree From a Page's Section Headings</h2>
+		<div class="contents2">
+			<p>To generate a <a href="#2_1">Tree Data Object</a> from the section headings contained inside a document, the <code>Uize.Node.Tree</code> module provides the <code><a href="#3_2">Uize.Node.Tree.getTreeFromPage</a></code> static method.</p>
+			
+			<p>This method is able to scan through all the nodes inside a document, building a data structure that reflects the structure of the document by analyzing the occurrence of different CSS classes for section headings at different depths of a document. All this method needs in order to work its magic is an array specifying the names of CSS classes that identify section headings at different depths (section heading nodes may be of any type, including <code>div</code>, <code>span</code>, <code>p</code>, etc.). From the document HTML that it analyzes, the method is able to build a tree data object where each item will have <code><a href="#2_3_1">title</a></code> and <code><a href="#2_3_2">link</a></code> properties, and may also have <code><a href="#2_3_3">description</a></code> and <code><a href="#2_3_4">items</a></code> properties.</p>
+			
+			<a name="2_5_1"></a>
+			<h3 class="heading3" title="2. In a Nutshell -&gt; 2.5. Getting a Tree From a Page&apos;s Section Headings -&gt; 2.5.1. An Example"><span class="headingNumber"><a href="#2" title="2. In a Nutshell">2</a>.<a href="#2_5" title="2. In a Nutshell -&gt; 2.5. Getting a Tree From a Page&apos;s Section Headings">5</a>.<a href="#2_5_1" title="2. In a Nutshell -&gt; 2.5. Getting a Tree From a Page&apos;s Section Headings -&gt; 2.5.1. An Example">1</a>. </span>An Example</h3>
+			<div class="contents3">
+				<p>The following sample code blocks show the source HTML, JavaScript code, and output <a href="#2_1">Tree Data Object</a> for the <a href="../examples/get-tree-from-page.html">Get Tree from Page</a> example.</p>
+				
+				<p><span class="allCaps">HTML</span></p>
+				
+				
+<pre class="sample-code">&lt;div id="sect1" class="level1Header" title="All about renewable energy technologies"&gt;
+  1. Renewable Energy
+&lt;/div&gt;
+  &lt;p class="level1Body"&gt;WWW WWW WWW WWW WWW WWW WWW WWW WWW WWW WWW WWW WWW WWW&lt;/p&gt;
+  &lt;div id="sect1_1" class="level2Header" title="An introduction to solar power"&gt;
+    1.1. Solar Power
+  &lt;/div&gt;
+    &lt;p class="level2Body"&gt;WWW WWW WWW WWW WWW WWW WWW WWW WWW WWW WWW WWW WWW WWW&lt;/p&gt;
+  &lt;div id="sect1_2" class="level2Header" title="An introduction to wind power"&gt;
+    1.2. Wind Power
+  &lt;/div&gt;
+    &lt;p class="level2Body"&gt;WWW WWW WWW WWW WWW WWW WWW WWW WWW WWW WWW WWW WWW WWW&lt;/p&gt;
+  &lt;div id="sect1_3" class="level2Header" title="An introduction to biofuels"&gt;
+    1.3. Biofuels
+  &lt;/div&gt;
+    &lt;p class="level2Body"&gt;WWW WWW WWW WWW WWW WWW WWW WWW WWW WWW WWW WWW WWW WWW&lt;/p&gt;
+&lt;div id="sect2" class="level1Header" title="All about fossil fuel technologies"&gt;
+  2. Fossil Fuels
+&lt;/div&gt;
+  &lt;p class="level1Body"&gt;WWW WWW WWW WWW WWW WWW WWW WWW WWW WWW WWW WWW WWW WWW&lt;/p&gt;
+  &lt;div id="sect2_1" class="level2Header" title="Peak oil and how it will affect us"&gt;
+    2.1. Peak Oil
+  &lt;/div&gt;
+    &lt;p class="level2Body"&gt;WWW WWW WWW WWW WWW WWW WWW WWW WWW WWW WWW WWW WWW WWW&lt;/p&gt;
+  &lt;div id="sect2_2" class="level2Header" title="A look at the types of fossil fuels"&gt;
+    2.2. Types of Fossil Fuel
+  &lt;/div&gt;
+    &lt;p class="level2Body"&gt;WWW WWW WWW WWW WWW WWW WWW WWW WWW WWW WWW WWW WWW WWW&lt;/p&gt;
+    &lt;div id="sect2_2_1" class="level3Header" title="Oil as an energy source"&gt;
+      2.2.1. Oil
+    &lt;/div&gt;
+      &lt;p class="level3Body"&gt;WWW WWW WWW WWW WWW WWW WWW WWW WWW WWW WWW WWW WWW WWW&lt;/p&gt;
+    &lt;div id="sect2_2_2" class="level3Header" title="An introduction to natural gas"&gt;
+      2.2.2. Natural Gas
+    &lt;/div&gt;
+      &lt;p class="level3Body"&gt;WWW WWW WWW WWW WWW WWW WWW WWW WWW WWW WWW WWW WWW WWW&lt;/p&gt;
+  &lt;div id="sect2_3" class="level2Header" title="Climate change and fossil fuels"&gt;
+    2.3. Climate Change
+  &lt;/div&gt;
+    &lt;p class="level2Body"&gt;WWW WWW WWW WWW WWW WWW WWW WWW WWW WWW WWW WWW WWW WWW&lt;/p&gt;
+  &lt;div id="sect2_4" class="level2Header" title="Fossil fuels and energy security"&gt;
+    2.4. Energy Security
+  &lt;/div&gt;
+    &lt;p class="level2Body"&gt;WWW WWW WWW WWW WWW WWW WWW WWW WWW WWW WWW WWW WWW WWW&lt;/p&gt;
+</pre>
+				
+				<p><span class="allCaps">JAVASCRIPT</span></p>
+				
+				
+<pre class="sample-code">Uize.Node.Tree.getTreeFromPage (['level1Header','level2Header','level3Header'],Infinity);
+</pre>
+				
+				<p><span class="allCaps">OUTPUT</span></p>
+				
+				
+<pre class="sample-code">[
+  {
+    title:'Contents',
+    items:[
+      {
+        title:'1. Renewable Energy',
+        link:'http://www.uize.com/examples/get-tree-from-page.html#sect1',
+        description:'All about renewable energy technologies',
+        items:[
+          {
+            title:'1.1. Solar Power',
+            link:'http://www.uize.com/examples/get-tree-from-page.html#sect1_1',
+            description:'An introduction to solar power'
+          },
+          {
+            title:'1.2. Wind Power',
+            link:'http://www.uize.com/examples/get-tree-from-page.html#sect1_2',
+            description:'An introduction to wind power'
+          },
+          {
+            title:'1.3. Biofuels',
+            link:'http://www.uize.com/examples/get-tree-from-page.html#sect1_3',
+            description:'An introduction to biofuels'
+          }
+        ]
+      },
+      {
+        title:'2. Fossil Fuels',
+        link:'http://www.uize.com/examples/get-tree-from-page.html#sect2',
+        description:'All about fossil fuel technologies',
+        items:[
+          {
+            title:'2.1. Peak Oil',
+            link:'http://www.uize.com/examples/get-tree-from-page.html#sect2_1',
+            description:'An introduction to the concept of peak oil'
+          },
+          {
+            title:'2.2. Types of Fossil Fuel',
+            link:'http://www.uize.com/examples/get-tree-from-page.html#sect2_2',
+            description:'A look at different types of fossil fuels',
+            items:[
+              {
+                title:'2.2.1. Oil',
+                link:'http://www.uize.com/examples/get-tree-from-page.html#sect2_2_1',
+                description:'A look at the history and future of oil'
+              },
+              {
+                title:'2.2.2. Natural Gas',
+                link:'http://www.uize.com/examples/get-tree-from-page.html#sect2_2_2',
+                description:'An introduction to natural gas'
+              }
+            ]
+          },
+          {
+            title:'2.3. Climate Change',
+            link:'http://www.uize.com/examples/get-tree-from-page.html#sect2_3',
+            description:'Climate change and fossil fuels'
+          },
+          {
+            title:'2.4. Energy Security',
+            link:'http://www.uize.com/examples/get-tree-from-page.html#sect2_4',
+            description:'Fossil fuels and energy security'
+          }
+        ]
+      }
+    ]
+  }
+]
+</pre>
+			</div>
+			
+			<a name="2_5_2"></a>
+			<h3 class="heading3" title="2. In a Nutshell -&gt; 2.5. Getting a Tree From a Page&apos;s Section Headings -&gt; 2.5.2. Deriving Item Property Values"><span class="headingNumber"><a href="#2" title="2. In a Nutshell">2</a>.<a href="#2_5" title="2. In a Nutshell -&gt; 2.5. Getting a Tree From a Page&apos;s Section Headings">5</a>.<a href="#2_5_2" title="2. In a Nutshell -&gt; 2.5. Getting a Tree From a Page&apos;s Section Headings -&gt; 2.5.2. Deriving Item Property Values">2</a>. </span>Deriving Item Property Values</h3>
+			<div class="contents3">
+				<a name="2_5_2_1"></a>
+				<h4 class="heading4" title="2. In a Nutshell -&gt; 2.5. Getting a Tree From a Page&apos;s Section Headings -&gt; 2.5.2. Deriving Item Property Values -&gt; 2.5.2.1. Deriving the title Property&apos;s Value"><span class="headingNumber"><a href="#2" title="2. In a Nutshell">2</a>.<a href="#2_5" title="2. In a Nutshell -&gt; 2.5. Getting a Tree From a Page&apos;s Section Headings">5</a>.<a href="#2_5_2" title="2. In a Nutshell -&gt; 2.5. Getting a Tree From a Page&apos;s Section Headings -&gt; 2.5.2. Deriving Item Property Values">2</a>.<a href="#2_5_2_1" title="2. In a Nutshell -&gt; 2.5. Getting a Tree From a Page&apos;s Section Headings -&gt; 2.5.2. Deriving Item Property Values -&gt; 2.5.2.1. Deriving the title Property&apos;s Value">1</a>. </span>Deriving the title Property's Value</h4>
+				<div class="contents4">
+					<p>The value of the <code><a href="#2_3_1">title</a></code> item property is derived by getting the cumulative text contained inside an item's heading node, without regard to HTML elements used in formatting the heading text, and then stripping leading and trailing whitespace.</p>
+					
+					<p><span class="allCaps">EXAMPLE</span></p>
+					
+					
+<pre class="sample-code">&lt;h2 id="sect2" class="heading1"&gt;
+  &lt;span class="headingNumber"&gt;
+    &lt;a href="#sect2" title="2. Static Methods"&gt;2&lt;/a&gt;.
+  &lt;/span&gt; Static Methods
+&lt;/h2&gt;
+</pre>
+					
+					<p>If the above HTML were the HTML for a <a href="#2_3">Tree Item</a> heading node, then the value derived for the <code><a href="#2_3_1">title</a></code> property of the item would be "2.1. Tree Data Object" - the <code>span</code> and <code>a</code> tags would be stripped out, and only the unformatted / unmarked up text would be retained. Note also that the leading and trailing whitespace resulting from the indentation of the HTML tags would be stripped as well.</p>
+				</div>
+				
+				<a name="2_5_2_2"></a>
+				<h4 class="heading4" title="2. In a Nutshell -&gt; 2.5. Getting a Tree From a Page&apos;s Section Headings -&gt; 2.5.2. Deriving Item Property Values -&gt; 2.5.2.2. Deriving the link Property&apos;s Value"><span class="headingNumber"><a href="#2" title="2. In a Nutshell">2</a>.<a href="#2_5" title="2. In a Nutshell -&gt; 2.5. Getting a Tree From a Page&apos;s Section Headings">5</a>.<a href="#2_5_2" title="2. In a Nutshell -&gt; 2.5. Getting a Tree From a Page&apos;s Section Headings -&gt; 2.5.2. Deriving Item Property Values">2</a>.<a href="#2_5_2_2" title="2. In a Nutshell -&gt; 2.5. Getting a Tree From a Page&apos;s Section Headings -&gt; 2.5.2. Deriving Item Property Values -&gt; 2.5.2.2. Deriving the link Property&apos;s Value">2</a>. </span>Deriving the link Property's Value</h4>
+				<div class="contents4">
+					<p>The value of the <code><a href="#2_3_2">link</a></code> property is derived from the <code>id</code> attribute of an item's heading node, by concatenating the value of the <code>id</code> attribute at the end of the value of the <code>location</code> object's <code>href</code> property, with the two parts separated by a "#" (pound / hash) character.</p>
+					
+					<p><span class="allCaps">EXAMPLE 1</span></p>
+					
+					
+<pre class="sample-code">&lt;h2 id="sect2" class="heading1"&gt;
+  &lt;span class="headingNumber"&gt;
+    &lt;a href="#sect2" title="2. Static Methods"&gt;2&lt;/a&gt;.
+  &lt;/span&gt; Static Methods
+&lt;/h2&gt;
+</pre>
+					
+					<p>If the above HTML were the HTML for a <a href="#2_3">Tree Item</a> heading node, and if the value of the <code>location</code> object's <code>href</code> property was "http://www.uize.com", then the value derived for the <code><a href="#2_3_2">link</a></code> property of the item would be "http://www.uize.com#sect2".</p>
+					
+					<p>For heading nodes that do not have an <code>id</code> specified, an ID will be dynamically generated and assigned to the node. The generated ID will be constructed by combining the prefix "Uize_Node_Tree_" with a suffix that indicates the "path" of the section or subsection in the overal hierarchical structure of the document. The format for the suffix is <code>[sectionNo]&#95;[subsectionNo]&#95;[subSubsectionNo]...</code>, where the numbering for sections at any level in the tree structure is one-based (<b>not</b> zero-based). In order words, the generated suffix for the third subsection of the second section of a document would "2_3", where "2" represents the second section, and "3" represents the third subsection.</p>
+					
+					<p>Consider the following example...</p>
+					
+					<p><span class="allCaps">EXAMPLE 2</span></p>
+					
+					
+<pre class="sample-code">&lt;h2 class="heading1"&gt;
+  &lt;span class="headingNumber"&gt;2.&lt;/span&gt; Static Methods
+&lt;/h2&gt;
+</pre>
+					
+					<p>In the above example, assuming that the heading was for the second section of the document, then the value derived for the <code><a href="#2_3_2">link</a></code> property of the item would be "http://www.uize.com#Uize_Node_Tree_2".</p>
+				</div>
+				
+				<a name="2_5_2_3"></a>
+				<h4 class="heading4" title="2. In a Nutshell -&gt; 2.5. Getting a Tree From a Page&apos;s Section Headings -&gt; 2.5.2. Deriving Item Property Values -&gt; 2.5.2.3. Deriving the description Property&apos;s Value"><span class="headingNumber"><a href="#2" title="2. In a Nutshell">2</a>.<a href="#2_5" title="2. In a Nutshell -&gt; 2.5. Getting a Tree From a Page&apos;s Section Headings">5</a>.<a href="#2_5_2" title="2. In a Nutshell -&gt; 2.5. Getting a Tree From a Page&apos;s Section Headings -&gt; 2.5.2. Deriving Item Property Values">2</a>.<a href="#2_5_2_3" title="2. In a Nutshell -&gt; 2.5. Getting a Tree From a Page&apos;s Section Headings -&gt; 2.5.2. Deriving Item Property Values -&gt; 2.5.2.3. Deriving the description Property&apos;s Value">3</a>. </span>Deriving the description Property's Value</h4>
+				<div class="contents4">
+					<p>The value of the <code><a href="#2_3_3">description</a></code> property is derived from the "title" attribute of an item's heading node.</p>
+					
+					<p><span class="allCaps">EXAMPLE</span></p>
+					
+					
+<pre class="sample-code">&lt;h2 id="sect2" class="heading1" title="2. Static Methods"&gt;
+  &lt;span class="headingNumber"&gt;
+    &lt;a href="#sect2" title="2. Static Methods"&gt;2&lt;/a&gt;.
+  &lt;/span&gt; Static Methods
+&lt;/h2&gt;
+</pre>
+					
+					<p>If the above HTML were the HTML for a <a href="#2_3">Tree Item</a> heading node, then the value derived for the <code><a href="#2_3_3">description</a></code> property of the item would be "2. Static Methods". For item heading nodes that do not have a "title" attribute specified, or that have an empty string specified for the "title" attribute, the value of the <code><a href="#2_3_3">description</a></code> property will not be set and the <code><a href="#2_3_3">description</a></code> property will not be present in the <a href="#2_3">Tree Item</a>.</p>
+				</div>
+				
+				<a name="2_5_2_4"></a>
+				<h4 class="heading4" title="2. In a Nutshell -&gt; 2.5. Getting a Tree From a Page&apos;s Section Headings -&gt; 2.5.2. Deriving Item Property Values -&gt; 2.5.2.4. Deriving the items Property&apos;s Value"><span class="headingNumber"><a href="#2" title="2. In a Nutshell">2</a>.<a href="#2_5" title="2. In a Nutshell -&gt; 2.5. Getting a Tree From a Page&apos;s Section Headings">5</a>.<a href="#2_5_2" title="2. In a Nutshell -&gt; 2.5. Getting a Tree From a Page&apos;s Section Headings -&gt; 2.5.2. Deriving Item Property Values">2</a>.<a href="#2_5_2_4" title="2. In a Nutshell -&gt; 2.5. Getting a Tree From a Page&apos;s Section Headings -&gt; 2.5.2. Deriving Item Property Values -&gt; 2.5.2.4. Deriving the items Property&apos;s Value">4</a>. </span>Deriving the items Property's Value</h4>
+				<div class="contents4">
+					<p>The value of the <code><a href="#2_3_4">items</a></code> property is derived from all <a href="#2_3">Tree Item</a> heading nodes following the current item's heading node, that are at the immediately deeper level in the document structure, and up until the very next heading node that is at the same level as or at a shallower level than the current item.</p>
+					
+					<p>So, for example, if an item is a section, then the items in that section will be derived by finding all heading nodes following the section heading node that are subsection heading nodes, up until the next section heading node. Consider the following example...</p>
+					
+					<p><span class="allCaps">EXAMPLE</span></p>
+					
+					
+<pre class="sample-code">&lt;h2 id="sect2" class="heading1" title="2. Static Methods"&gt;
+  &lt;span class="headingNumber"&gt;
+    &lt;a href="#sect2" title="2. Static Methods"&gt;2&lt;/a&gt;.
+  &lt;/span&gt; Static Methods
+&lt;/h2&gt;
+
+&lt;div class="contents1"&gt;
+  &lt;h2 id="sect2_1" class="heading2" title="2. Static Methods -&gt; 2.1. Uize.callOn"&gt;
+    &lt;span class="headingNumber"&gt;
+      &lt;a href="#sect2" title="2. Static Methods"&gt;2&lt;/a&gt;.
+      &lt;a href="#sect2_1" title="2. Static Methods -&gt; 2.1. Uize.callOn"&gt;1&lt;/a&gt;.
+    &lt;/span&gt; Uize.callOn
+  &lt;/h2&gt;
+
+  &lt;div class="contents2"&gt;
+    ...
+  &lt;/div&gt;
+
+  &lt;h2 id="sect2_2" class="heading2" title="2. Static Methods -&gt; 2.2. Uize.capFirstChar"&gt;
+    &lt;span class="headingNumber"&gt;
+      &lt;a href="#sect2" title="2. Static Methods"&gt;2&lt;/a&gt;.
+      &lt;a href="#sect2_2" title="2. Static Methods -&gt; 2.2. Uize.capFirstChar"&gt;2&lt;/a&gt;.
+    &lt;/span&gt; Uize.capFirstChar
+  &lt;/h2&gt;
+
+  &lt;div class="contents2"&gt;
+    ...
+  &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+					
+					<p>If the above HTML were the HTML for a <a href="#2_3">Tree Item</a>, then the value derived for the <code><a href="#2_3_4">items</a></code> property of the item would be an array with the following structure...</p>
+					
+					
+<pre class="sample-code">[
+  {
+    title:'2.1. Uize.callOn',
+    link:'http://www.uize.com/reference/Uize.html#sect2_1',
+    description:'2. Static Methods -&gt; 2.1. Uize.callOn'
+  },
+  {
+    title:'2.2. Uize.capFirstChar',
+    link:'http://www.uize.com/reference/Uize.html#sect2_2',
+    description:'2. Static Methods -&gt; 2.2. Uize.capFirstChar'
+  }
+]
+</pre>
+					
+					<p>Note that not every item needs to have a subtree - in most cases, the majority will not. For items that do not, the value of the <code><a href="#2_3_4">items</a></code> property will not be set and the <code><a href="#2_3_4">items</a></code> property will not be present in the <a href="#2_3">Tree Item</a>. In our above example, this is the case for the items for sections 2.1 and 2.2.</p>
+				</div>
+				
+				<a name="2_5_2_5"></a>
+				<h4 class="heading4" title="2. In a Nutshell -&gt; 2.5. Getting a Tree From a Page&apos;s Section Headings -&gt; 2.5.2. Deriving Item Property Values -&gt; 2.5.2.5. Deriving the expanded Property&apos;s Value"><span class="headingNumber"><a href="#2" title="2. In a Nutshell">2</a>.<a href="#2_5" title="2. In a Nutshell -&gt; 2.5. Getting a Tree From a Page&apos;s Section Headings">5</a>.<a href="#2_5_2" title="2. In a Nutshell -&gt; 2.5. Getting a Tree From a Page&apos;s Section Headings -&gt; 2.5.2. Deriving Item Property Values">2</a>.<a href="#2_5_2_5" title="2. In a Nutshell -&gt; 2.5. Getting a Tree From a Page&apos;s Section Headings -&gt; 2.5.2. Deriving Item Property Values -&gt; 2.5.2.5. Deriving the expanded Property&apos;s Value">5</a>. </span>Deriving the expanded Property's Value</h4>
+				<div class="contents4">
+					<p>When using the <code><a href="#3_2">Uize.Node.Tree.getTreeFromPage</a></code> method, the value of the <code><a href="#2_3_5">expanded</a></code> property is derived from the value of the method's <code><a href="#3_2_1_2">initialExpandedDepthINT</a></code> parameter and the level of the current item.</p>
+					
+					<p>The <code><a href="#3_2_1_2">initialExpandedDepthINT</a></code> parameter specifies the depth to which the generated <a href="#2_1">Tree Data Object</a> should be expanded, so the value of the <code><a href="#2_3_5">expanded</a></code> property for any <a href="#2_3">Tree Item</a> will be <code>true</code> if the depth level of that item is less than or equal to the value of the <code><a href="#3_2_1_2">initialExpandedDepthINT</a></code> parameter. Put another way, a value of <code>1</code> for the <code><a href="#3_2_1_2">initialExpandedDepthINT</a></code> parameter will result in the generated <a href="#2_1">Tree Data Object</a> being expanded to only one level deep, while the value <code>2</code> will result in the <a href="#2_1">Tree Data Object</a> being expanded to two levels deep.</p>
+					
+					<p>So, for example, if sections of a document are considered to be at level 1, and subsections of a document are considered to be at level 2, then the value <code>2</code> for the <code><a href="#3_2_1_2">initialExpandedDepthINT</a></code> parameter will result in all section and subsection items in the generated <a href="#2_1">Tree Data Object</a> being expanded, the value <code>1</code> will result in only section items being expanded, and the value <code>0</code> will result in all items being collapsed. If you wish all levels of the tree to be expanded, then you can specify the value <code>Infinity</code> for the <code><a href="#3_2_1_2">initialExpandedDepthINT</a></code> parameter. If you wish all levels to be collapsed, then you can specify any value less than <code>1</code>.</p>
+					
+					<p><span class="allCaps">NOTE</span></p>
+					
+					<p>Note that for any item that is expanded, the value of the <code><a href="#2_3_5">expanded</a></code> property will be <code>true</code> and the property will not be present in the <a href="#2_3">Tree Item</a>, since <code>true</code> is the default value for this property.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<a name="3"></a>
+	<h1 class="heading1" title="3. Static Methods"><span class="headingNumber"><a href="#3" title="3. Static Methods">3</a>. </span>Static Methods</h1>
+	<div class="contents1">
+		<a name="3_1"></a>
+		<h2 class="heading2" title="3. Static Methods -&gt; 3.1. Uize.Node.Tree.getTreeFromList"><span class="headingNumber"><a href="#3" title="3. Static Methods">3</a>.<a href="#3_1" title="3. Static Methods -&gt; 3.1. Uize.Node.Tree.getTreeFromList">1</a>. </span>Uize.Node.Tree.getTreeFromList</h2>
+		<div class="contents2">
+			<p>Returns a <a href="#2_1">Tree Data Object</a>, generated by analyzing the structure and contents of a hierarchical list defined by an HTML <code>ul</code> (unordered list) or <code>ol</code> (ordered list) tag.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">treeOBJ = Uize.Node.Tree.getTreeFromList (nodeSTRorOBJ);
+</pre>
+			
+			<p>The <code>nodeSTRorOBJ</code> parameter should specify either a list node (ie. a <code>ul</code> or <code>ol</code> tag) or the immediate parent node of a list node. List type (unordered or ordered) does not affect the data in the <a href="#2_1">Tree Data Object</a> returned by this method, and a hierarchical list can mix different types of lists.</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			<p>For an example showing how this method is used, consult the section <a href="#2_4">Getting a Tree From a List Element</a>.</p>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#3_2">Uize.Node.Tree.getTreeFromPage</a></code> static method</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_2"></a>
+		<h2 class="heading2" title="3. Static Methods -&gt; 3.2. Uize.Node.Tree.getTreeFromPage"><span class="headingNumber"><a href="#3" title="3. Static Methods">3</a>.<a href="#3_2" title="3. Static Methods -&gt; 3.2. Uize.Node.Tree.getTreeFromPage">2</a>. </span>Uize.Node.Tree.getTreeFromPage</h2>
+		<div class="contents2">
+			<p>Returns a <a href="#2_1">Tree Data Object</a>, generated by analyzing the occurrence of different CSS classes for section headings at different depths of a document.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">treeOBJ = Uize.Node.Tree.getTreeFromPage (levelClassesARRAY,initialExpandedDepthINT);
+</pre>
+			
+			<p>Provided that unique CSS classes are used for styling section headings differently at different levels in a document's structure, then the <code><a href="#3_2">Uize.Node.Tree.getTreeFromPage</a></code> method can be used to glean a contents tree for a document by scanning through the elements of the document and watching for the CSS classes that denote section headings.</p>
+			
+			<p><span class="allCaps">VARIATION</span></p>
+			
+			
+<pre class="sample-code">treeOBJ = Uize.Node.Tree.getTreeFromPage (levelClassesARRAY);
+</pre>
+			
+			<p>When the <code><a href="#3_2_1_2">initialExpandedDepthINT</a></code> parameter is not specified, then the value <code>1</code> will be used as the default for this parameter.</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			<p>For an example showing how this method is used, consult the section <a href="#2_5">Getting a Tree From a Page's Section Headings</a>.</p>
+			
+			<a name="3_2_1"></a>
+			<h3 class="heading3" title="3. Static Methods -&gt; 3.2. Uize.Node.Tree.getTreeFromPage -&gt; 3.2.1. Parameters"><span class="headingNumber"><a href="#3" title="3. Static Methods">3</a>.<a href="#3_2" title="3. Static Methods -&gt; 3.2. Uize.Node.Tree.getTreeFromPage">2</a>.<a href="#3_2_1" title="3. Static Methods -&gt; 3.2. Uize.Node.Tree.getTreeFromPage -&gt; 3.2.1. Parameters">1</a>. </span>Parameters</h3>
+			<div class="contents3">
+				<p>The <code><a href="#3_2">Uize.Node.Tree.getTreeFromPage</a></code> method supports the following parameters...</p>
+				
+				<a name="3_2_1_1"></a>
+				<h4 class="heading4" title="3. Static Methods -&gt; 3.2. Uize.Node.Tree.getTreeFromPage -&gt; 3.2.1. Parameters -&gt; 3.2.1.1. levelClassesARRAY"><span class="headingNumber"><a href="#3" title="3. Static Methods">3</a>.<a href="#3_2" title="3. Static Methods -&gt; 3.2. Uize.Node.Tree.getTreeFromPage">2</a>.<a href="#3_2_1" title="3. Static Methods -&gt; 3.2. Uize.Node.Tree.getTreeFromPage -&gt; 3.2.1. Parameters">1</a>.<a href="#3_2_1_1" title="3. Static Methods -&gt; 3.2. Uize.Node.Tree.getTreeFromPage -&gt; 3.2.1. Parameters -&gt; 3.2.1.1. levelClassesARRAY">1</a>. </span>levelClassesARRAY</h4>
+				<div class="contents4">
+					<p>An array of string type elements, representing the CSS class names that identify section headings for different levels of a document.</p>
+					
+					<p>The first element in this array specifies the CSS class name for top level section headings, the second element specifies the CSS class name for subsection headings, the third element specifies the CSS class name for sub-subsection headings, and so on. The <code><a href="#3_2">Uize.Node.Tree.getTreeFromPage</a></code> method supports documents with an arbitrary number of section levels.</p>
+				</div>
+				
+				<a name="3_2_1_2"></a>
+				<h4 class="heading4" title="3. Static Methods -&gt; 3.2. Uize.Node.Tree.getTreeFromPage -&gt; 3.2.1. Parameters -&gt; 3.2.1.2. initialExpandedDepthINT"><span class="headingNumber"><a href="#3" title="3. Static Methods">3</a>.<a href="#3_2" title="3. Static Methods -&gt; 3.2. Uize.Node.Tree.getTreeFromPage">2</a>.<a href="#3_2_1" title="3. Static Methods -&gt; 3.2. Uize.Node.Tree.getTreeFromPage -&gt; 3.2.1. Parameters">1</a>.<a href="#3_2_1_2" title="3. Static Methods -&gt; 3.2. Uize.Node.Tree.getTreeFromPage -&gt; 3.2.1. Parameters -&gt; 3.2.1.2. initialExpandedDepthINT">2</a>. </span>initialExpandedDepthINT</h4>
+				<div class="contents4">
+					<p>An integer, specifying the depth to which the generated <a href="#2_1">Tree Data Object</a> should be expanded.</p>
+					
+					<p>If you wish all levels of the tree to be expanded, then you can specify the value <code>Infinity</code> for the <code><a href="#3_2_1_2">initialExpandedDepthINT</a></code> parameter. If you wish all levels to be collapsed, then you can specify any value less than <code>1</code>.</p>
+				</div>
+			</div>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#3_1">Uize.Node.Tree.getTreeFromList</a></code> static method</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+	</div>
+	
+	<a name="4"></a>
+	<h1 class="heading1" title="4. Static Properties"><span class="headingNumber"><a href="#4" title="4. Static Properties">4</a>. </span>Static Properties</h1>
+	<div class="contents1">
+		<a name="4_1"></a>
+		<h2 class="heading2" title="4. Static Properties -&gt; 4.1. Uize.Node.Tree.moduleName"><span class="headingNumber"><a href="#4" title="4. Static Properties">4</a>.<a href="#4_1" title="4. Static Properties -&gt; 4.1. Uize.Node.Tree.moduleName">1</a>. </span>Uize.Node.Tree.moduleName</h2>
+		<div class="contents2">
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+	</div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

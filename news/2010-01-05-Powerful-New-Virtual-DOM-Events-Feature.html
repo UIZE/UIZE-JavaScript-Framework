@@ -1,0 +1,179 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2010-01-05 - Powerful New Virtual DOM Events Feature | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="The UIZE JavaScript Framework has introduced a powerful new construct called a Virtual DOM Event (implemented in the new Uize.Node.VirtualEvent module), which allows more sophisticated user interactions with DOM nodes to be expressed using the event paradigm."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2010.html" class="breadcrumb breadcrumbWithArrow">2010 NEWS</a>
+	2010-01-05 - Powerful New Virtual DOM Events Feature
+
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="Put quite simply, a Virtual DOM Event is an event for a DOM node that is not part of the standard set of DOM events, but that is implemented in supplemental JavaScript code.">1. Overview</a></li>
+			<li><a href="#2" title="At the highest level, the new Uize.Node.VirtualEvent module provides the following...">2. What's in the Uize.Node.VirtualEvent Module</a></li>
+			<li><a href="#3" title="As part of the process of creating a generalized system for virtual DOM events, the old mouserest virtual DOM event that was previously supported in the Uize.Node module has been migrated.">3. Changes to the mouserest Virtual DOM Event</a>
+				<ul>
+					<li><a href="#3_1" title="As per the new and generalized implementation for virtual DOM events, specifying them by name in the node wiring and unwiring methods requires the event names to always end with parentheses.">3.1. Must Always Specify Parentheses</a></li>
+					<li><a href="#3_2" title="The implementation for the old mouserest event has been migrated into the new Uize.Node.VirtualEvent module.">3.2. Implementation Migrated</a></li>
+					<li><a href="#3_3" title="As part of the migration of the mouserest event, it is now registered by the name mouseRest (camel-cased, in other words), although the all lowercase form is still supported.">3.3. Now Camel-cased</a></li>
+					<li><a href="#3_4" title="As part of the migration of the mouserest event, instances of this virtual DOM event can now also be created using the new Uize.Node.VirtualEvent.mouseRest maker method.">3.4. Can Now Use Maker Method</a></li>
+					<li><a href="#3_5" title="The changes associated with this migration of the old mouserest event are not backwards compatible, and this migration will require an update to any code that was using the old mouserest event.">3.5. Not Backwards Compatible</a></li>
+					<li><a href="#3_6" title="Some JavaScript modules in the UIZE JavaScript Framework that were using the old mouserest event, such as the Uize.Widget.CollectionItem.Zooming module, have been updated to work with these changes.">3.6. UIZE Modules Updated, As Necessary</a></li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<p>The UIZE JavaScript Framework has introduced a powerful new construct called a Virtual DOM Event (implemented in the new <code><a href="../reference/Uize.Node.VirtualEvent.html">Uize.Node.VirtualEvent</a></code> module), which allows more sophisticated user interactions with DOM nodes to be expressed using the event paradigm.</p>
+	
+	<a name="1"></a>
+	<h1 class="heading1" title="1. Overview"><span class="headingNumber"><a href="#1" title="1. Overview">1</a>. </span>Overview</h1>
+	<div class="contents1">
+		<p>Put quite simply, a Virtual DOM Event is an event for a DOM node that is not part of the standard set of DOM events, but that is implemented in supplemental JavaScript code.</p>
+		
+		<p>While the DOM standard <b>does</b> provide a decent array of different events for different types of DOM nodes, there are still certain "events" that can occur during the user's interaction with a DOM node for which standard DOM events do not exist. Consider the classic case of the user mousing over a node and then resting the mouse for a certain period of time over that node. You might like to know if the user does this for a specific node, because this may be your indication that the user is interested in what clicking the node might do, and you may wish to present them with a helpful tooltip that is implemented using HTML and that provides them more information about what they're considering clicking on.</p>
+		
+		<p>Now, you probably don't want to trigger the display of an elaborate info tooltip based merely upon the user mousing over the node, since this may hamper the page's performance - especially if displaying the tooltip requires an Ajax request - and displaying and hiding chunky tooltips as the user moves the mouse across the page may be a dreadful user experience, in any event. In such cases, it would be really nice to have an event that fires only when the user has actually stopped the mouse over a node. Virtual DOM events to the rescue! Specifically, in this case, the <code>mouseRest</code> virtual DOM event. This event accepts a duration parameter, to let you tune how long the user needs to keep the mouse rested over the node before the event is fired.</p>
+	</div>
+	
+	<a name="2"></a>
+	<h1 class="heading1" title="2. What&apos;s in the Uize.Node.VirtualEvent Module"><span class="headingNumber"><a href="#2" title="2. What&apos;s in the Uize.Node.VirtualEvent Module">2</a>. </span>What's in the Uize.Node.VirtualEvent Module</h1>
+	<div class="contents1">
+		<p>At the highest level, the new <code><a href="../reference/Uize.Node.VirtualEvent.html">Uize.Node.VirtualEvent</a></code> module provides the following...</p>
+		
+		<table class="list">
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>a foundation and features (including static methods) to facilitate the creation of virtual DOM events</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>a sizable selection of virtual DOM event implementations (eg. <code>ctrlClick</code>, <code>shiftClick</code>, <code>mouseRest</code>, <code>mouseRemainDown</code>, <code>remainFocused</code>, etc.)</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>a namespace, under which further sets of virtual DOM event implementations can be organized into modules</td></tr>
+		</table>
+	</div>
+	
+	<a name="3"></a>
+	<h1 class="heading1" title="3. Changes to the mouserest Virtual DOM Event"><span class="headingNumber"><a href="#3" title="3. Changes to the mouserest Virtual DOM Event">3</a>. </span>Changes to the mouserest Virtual DOM Event</h1>
+	<div class="contents1">
+		<p>As part of the process of creating a generalized system for virtual DOM events, the old <code>mouserest</code> virtual DOM event that was previously supported in the <code><a href="../reference/Uize.Node.html">Uize.Node</a></code> module has been migrated.</p>
+		
+		<a name="3_1"></a>
+		<h2 class="heading2" title="3. Changes to the mouserest Virtual DOM Event -&gt; 3.1. Must Always Specify Parentheses"><span class="headingNumber"><a href="#3" title="3. Changes to the mouserest Virtual DOM Event">3</a>.<a href="#3_1" title="3. Changes to the mouserest Virtual DOM Event -&gt; 3.1. Must Always Specify Parentheses">1</a>. </span>Must Always Specify Parentheses</h2>
+		<div class="contents2">
+			<p>As per the new and generalized implementation for virtual DOM events, specifying them by name in the node wiring and unwiring methods requires the event names to always end with parentheses.</p>
+			
+			<p>If you were using the <code>mouserest</code> event in the form without the parentheses, where you were relying on the default rest duration, then such code would need to be changed as shown in the following example...</p>
+			
+			<p><span class="allCaps">INSTEAD OF...</span></p>
+			
+			
+<pre class="sample-code">Uize.Node.wire ('myNode','mouserest',function () {alert ('mouse rested')});
+</pre>
+			
+			<p><span class="allCaps">NOW USE...</span></p>
+			
+			
+<pre class="sample-code">Uize.Node.wire ('myNode','mouseRest()',function () {alert ('mouse rested')});
+</pre>
+		</div>
+		
+		<a name="3_2"></a>
+		<h2 class="heading2" title="3. Changes to the mouserest Virtual DOM Event -&gt; 3.2. Implementation Migrated"><span class="headingNumber"><a href="#3" title="3. Changes to the mouserest Virtual DOM Event">3</a>.<a href="#3_2" title="3. Changes to the mouserest Virtual DOM Event -&gt; 3.2. Implementation Migrated">2</a>. </span>Implementation Migrated</h2>
+		<div class="contents2">
+			<p>The implementation for the old <code>mouserest</code> event has been migrated into the new <code><a href="../reference/Uize.Node.VirtualEvent.html">Uize.Node.VirtualEvent</a></code> module.</p>
+			
+			<p>This means that a JavaScript module that wants to use this event will have to require the <code><a href="../reference/Uize.Node.VirtualEvent.html">Uize.Node.VirtualEvent</a></code> module. If you had any modules or pages that were using the old <code>mouserest</code> virtual DOM event, those pages should continue to work if you were specifying the <code>mouserest</code> event with parentheses at the end, and if you modify those modules or pages to require the new <code><a href="../reference/Uize.Node.VirtualEvent.html">Uize.Node.VirtualEvent</a></code> module.</p>
+		</div>
+		
+		<a name="3_3"></a>
+		<h2 class="heading2" title="3. Changes to the mouserest Virtual DOM Event -&gt; 3.3. Now Camel-cased"><span class="headingNumber"><a href="#3" title="3. Changes to the mouserest Virtual DOM Event">3</a>.<a href="#3_3" title="3. Changes to the mouserest Virtual DOM Event -&gt; 3.3. Now Camel-cased">3</a>. </span>Now Camel-cased</h2>
+		<div class="contents2">
+			<p>As part of the migration of the <code>mouserest</code> event, it is now registered by the name <code>mouseRest</code> (camel-cased, in other words), although the all lowercase form is still supported.</p>
+			
+			<p><span class="allCaps">INSTEAD OF...</span></p>
+			
+			
+<pre class="sample-code">Uize.Node.wire ('myNode','mouserest(500)',function () {alert ('mouse rested')});
+</pre>
+			
+			<p><span class="allCaps">IDEALLY, YOU SHOULD USE...</span></p>
+			
+			
+<pre class="sample-code">Uize.Node.wire ('myNode','mouseRest(500)',function () {alert ('mouse rested')});
+</pre>
+		</div>
+		
+		<a name="3_4"></a>
+		<h2 class="heading2" title="3. Changes to the mouserest Virtual DOM Event -&gt; 3.4. Can Now Use Maker Method"><span class="headingNumber"><a href="#3" title="3. Changes to the mouserest Virtual DOM Event">3</a>.<a href="#3_4" title="3. Changes to the mouserest Virtual DOM Event -&gt; 3.4. Can Now Use Maker Method">4</a>. </span>Can Now Use Maker Method</h2>
+		<div class="contents2">
+			<p>As part of the migration of the <code>mouserest</code> event, instances of this virtual DOM event can now also be created using the new <code>Uize.Node.VirtualEvent.mouseRest</code> maker method.</p>
+			
+			<p><span class="allCaps">INSTEAD OF...</span></p>
+			
+			
+<pre class="sample-code">Uize.Node.wire ('myNode','mouserest(500)',function () {alert ('mouse rested')});
+</pre>
+			
+			<p><span class="allCaps">YOU COULD ALSO USE...</span></p>
+			
+			
+<pre class="sample-code">Uize.Node.wire (
+  'myNode',
+  Uize.Node.VirtualEvent.mouseRest (500),  // specified by object reference
+  function () {alert ('mouse rested')}
+);
+</pre>
+			
+			<p>Using the latter form, while lengthier, makes it obvious that this code has a dependency on the <code><a href="../reference/Uize.Node.VirtualEvent.html">Uize.Node.VirtualEvent</a></code> module, because that's where the <code>Uize.Node.VirtualEvent.mouseRest</code> static method is implemented.</p>
+		</div>
+		
+		<a name="3_5"></a>
+		<h2 class="heading2" title="3. Changes to the mouserest Virtual DOM Event -&gt; 3.5. Not Backwards Compatible"><span class="headingNumber"><a href="#3" title="3. Changes to the mouserest Virtual DOM Event">3</a>.<a href="#3_5" title="3. Changes to the mouserest Virtual DOM Event -&gt; 3.5. Not Backwards Compatible">5</a>. </span>Not Backwards Compatible</h2>
+		<div class="contents2">
+			<p>The changes associated with this migration of the old <code>mouserest</code> event are not backwards compatible, and this migration will require an update to any code that was using the old <code>mouserest</code> event.</p>
+		</div>
+		
+		<a name="3_6"></a>
+		<h2 class="heading2" title="3. Changes to the mouserest Virtual DOM Event -&gt; 3.6. UIZE Modules Updated, As Necessary"><span class="headingNumber"><a href="#3" title="3. Changes to the mouserest Virtual DOM Event">3</a>.<a href="#3_6" title="3. Changes to the mouserest Virtual DOM Event -&gt; 3.6. UIZE Modules Updated, As Necessary">6</a>. </span>UIZE Modules Updated, As Necessary</h2>
+		<div class="contents2">
+			<p>Some JavaScript modules in the UIZE JavaScript Framework that were using the old <code>mouserest</code> event, such as the <code><a href="../reference/Uize.Widget.CollectionItem.Zooming.html">Uize.Widget.CollectionItem.Zooming</a></code> module, have been updated to work with these changes.</p>
+		</div>
+	</div>
+	
+	<p><a href="../reference/Uize.Node.VirtualEvent.html">LEARN MORE</a></p>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

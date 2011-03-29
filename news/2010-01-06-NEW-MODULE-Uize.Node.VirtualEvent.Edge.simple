@@ -1,0 +1,13 @@
+The =Uize.Node.VirtualEvent.Edge= module implements virtual DOM events that can be used to detect when the mouse enters / exits nodes at specific edges.
+
+The virtual DOM events provided in the =Uize.Node.VirtualEvent.Edge= module make it easy to wire up DOM nodes so that different things occur depending on at which edge the user enters a DOM node. So, for example, you could perform a different action when the user mouses over a node from the left side than when the user mouses over the same node from the right side. Edge virtual DOM events are implemented for a node by comparing the coordinates of the mouse - at the time that a =mouseover= or =mouseout= real DOM event occurs for a node - to the coordinates of the node itself.
+
+[[Uize.Node.VirtualEvent.Edge][LEARN MORE]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2010-01-06 - NEW MODULE: Uize.Node.VirtualEvent.Edge
+....................................................................................

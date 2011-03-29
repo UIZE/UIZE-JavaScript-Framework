@@ -1,0 +1,20 @@
+/*** overrides for 320x480 viewport ***/
+	.calendarContainer {
+		width:319px;
+		height:484px;
+	}
+	.calendarControls .calendarIndicator {
+		font-size:14px;
+		letter-spacing:3px;
+		width:319px;
+	}
+	table.calendarGrid {
+		width:304px;
+		margin-top:10px;
+		margin-bottom:0;
+	}
+	div.calendarGrid td {
+		font-size:23px;
+		padding:9px 0;
+	}
+

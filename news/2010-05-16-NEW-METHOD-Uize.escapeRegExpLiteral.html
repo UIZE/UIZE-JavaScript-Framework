@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2010-05-16 - NEW METHOD: Uize.escapeRegExpLiteral | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="The new Uize.escapeRegExpLiteral static method of the Uize base class provides a convenient way to escape regular expression special characters inside a string that is to be used as a literal match in a regular expression."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2010.html" class="breadcrumb breadcrumbWithArrow">2010 NEWS</a>
+	2010-05-16 - NEW METHOD: Uize.escapeRegExpLiteral
+
+</h1>
+
+<div class="main">
+<div class="contents0">
+	<p>The new <code>Uize.escapeRegExpLiteral</code> static method of the <code><a href="../reference/Uize.html">Uize</a></code> base class provides a convenient way to escape regular expression special characters inside a string that is to be used as a literal match in a regular expression.</p>
+	
+	<p><span class="allCaps">SYNTAX</span></p>
+	
+	
+<pre class="sample-code">escapedRegExpLiteralSTR = Uize.escapeRegExpLiteral (regExpLiteralSTR);
+</pre>
+	
+	<p>Using this method, any string can be escaped so that it can be used in creating a regular expression where that string can be matched as a literal match. Strings may sometimes contain special regular expression characters, such as the <code>(</code> (open parenthesis), <code>)</code> (close parenthesis), <code>.</code> (period), <code>?</code> (question mark), and other characters that have special meaning in the context of regular expression strings. If you wanted to use a regular expression to match a string that contained any of these special characters, then the special characters would have to be escaped. The <code>Uize.escapeRegExpLiteral</code> method takes care of this for you.</p>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

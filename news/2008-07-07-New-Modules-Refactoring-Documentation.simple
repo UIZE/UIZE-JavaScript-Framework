@@ -1,0 +1,20 @@
+IMPROVED TOOL: Scruncher
+	The [[../examples/javascript-scruncher.html][JavaScript Scruncher tool]] has been updated and improved to have a tabbed interface, initial test data, an explanation, and contemporary coding style.
+
+	Additionally, the documentation about scrunching has been fleshed out and made more comprehensive in the explainer [[../explainers/all-about-scrunching.html][All About Scrunching]]. Finally, reference documentation has been created for the =Uize.Scruncher= module.
+
+NEW MODULE: Uize.Date
+	A new =Uize.Date= utility module has been added, with static methods for displaying and parsing dates in ISO 8601 format and some other date-related utility methods. [[Uize.Date][Documentation]] is complete.
+
+General Improvements
+	For the scrunched code modules of the UIZE JavaScript Framework, file size has been reduced by reducing the size of the comment headers (which were rather large previously).
+
+	The scrunched files now also contain the date that they were scrunched, embedded in the header comment, as an aid in troubleshooting. Build scripts for the building the scrunched files and documentation have been refactored to support module declarations and to leverage the module mechanism's dependency resolution. A new =Uize.Wsh= module, with code factored out of the build scripts, provides utility methods specific to Windows Script Host that facilitate processing files in directories.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2008-07-07 - New Modules, Refactoring, Documentation
+....................................................................................

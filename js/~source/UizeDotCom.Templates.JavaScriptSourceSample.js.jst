@@ -1,0 +1,324 @@
+/*______________
+|       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
+|     /      /  |   ---------------------------------------------------
+|    /    O /   |    MODULE : Uize.Date Package
+|   /    / /    |
+|  /    / /  /| |    ONLINE : http://www.uize.com
+| /____/ /__/_| | COPYRIGHT : (c)2004-2011 UIZE
+|          /___ |   LICENSE : Available under MIT License or GNU General Public License
+|_______________|             http://www.uize.com/license.html
+*/
+
+/*ScruncherSettings Mappings="=" LineCompacting="TRUE"*/
+
+/*?
+	Introduction
+		The =Uize.Date= module provides methods for working with dates, including converting time to different units, encoding / decoding dates in ISO8601, etc.
+
+		*DEVELOPERS:* `Chris van Rensburg`
+
+		The =Uize.Date= module is a package under the =Uize= namespace.
+*/
+
+Uize.module ({
+	name:'Uize.Date',
+	builder:function () {
+		/*** Variables for Scruncher Optimization ***/
+			var _package = function () {};
+
+		/*** Public Static Methods ***/
+			var _unitsToMsFactorMap = {
+				ms:1,               // canonical unit
+				seconds:1000,       // 1000 ms per second
+				minutes:60000,      // 60 seconds per minute
+				hours:3600000,      // 60 minutes per hour
+				days:86400000,      // 24 hours per day
+				weeks:604800000,    // 7 days per week
+				months:2629743840,  // 365.2422 days per month (from 365.2422 days per year)
+				years:31556926080   // 12 months per year
+			};
+			var _convert = _package.convert = function (_timeValue,_timeUnit,_newTimeUnit) {
+				/* NOTES: first convert to the canonical unit ms, then convert to target unit */
+				return _timeValue * _unitsToMsFactorMap [_timeUnit + ''] / _unitsToMsFactorMap [_newTimeUnit + ''];
+				/*?
+					Static Methods
+						Uize.Date.convert
+							Converts the specified time in the specified time unit to a different specified time unit.
+
+							SYNTAX
+							....................................................................................
+							convertedTimeFLOAT = Uize.Date.convert (timeFLOAT,timeUnitSTR,convertedTimeUnitSTR);
+							....................................................................................
+
+							This methods allows you to convert from days to milliseconds, seconds to years, years to hours, hours to weeks, months to hours, or from any one of the supported time units to another.
+
+							TIME UNITS
+							The value specified for the =timeUnitSTR= and =convertedTimeUnitSTR= parameters can be any one of:  =ms=, =seconds=, =minutes=, =hours=, =days=, =weeks=, =months=, =years=.
+
+							EXAMPLES
+							............................................................
+							var
+								timeInDays = Uize.Date.convert (18287659,'ms','days'),
+								timeInHours = Uize.Date.convert (15306,'seconds','hours'),
+								timeInWeeks = Uize.Date.convert (6,'months','weeks')
+							;
+							............................................................
+
+							NOTES
+							- any parameter of this method can be an object that implements a =valueOf= interface (such as an instance of a =Uize= subclass that implements the =value= set-get property)
+				*/
+			};
+
+			var _resolve = _package.resolve = function (_date) {
+				return _date ? (typeof _date == 'string' ? _package.fromIso8601 (_date) : _date) : new Date;
+				/*?
+					Static Methods
+						Uize.Date.resolve
+							Resolves the specified date to a =Date= object instance and returns that instance.
+
+							SYNTAX
+							...........................................
+							dateOBJ = Uize.Date.resolve (dateSTRorOBJ);
+							...........................................
+
+							The date to resolve can be specified as a string in ISO8601 format (YYYY-MM-DD), or as a =Date= object instance. When the specified date is already an instance of the =Date= object, then that instance is simply returned.
+
+							This method can be useful when implementing other methods, to give them flexibility in the manner in which dates can be specified for them. Resolving dates means that your code can be sure to be dealing with =Date= object instances, and can then have a canonical implementation when dealing with dates.
+
+							VARIATION
+							...............................
+							dateOBJ = Uize.Date.resolve ();
+							...............................
+
+							When no =dateSTRorOBJ= parameter is specified, or if an empty string or the value =null= is specified for this parameter, then a fresh =Date= object instance (ie. now) will be returned.
+				*/
+			};
+
+			_package.toIso8601 = function (_date) {
+				return (
+					(_date = _resolve (_date)).getFullYear () + '-' +
+					('0' + (_date.getMonth () + 1)).slice (-2) + '-' +
+					('0' + _date.getDate ()).slice (-2)
+				);
+				/*?
+					Static Methods
+						Uize.Date.toIso8601
+							Returns a string, representing the specified =Date= object instance in ISO8601 format (YYYY-MM-DD).
+
+							SYNTAX
+							...............................................
+							dateIso8601STR = Uize.Date.toIso8601 (dateOBJ);
+							...............................................
+
+							VARIATION 1
+							...............................................
+							dateIso8601STR = Uize.Date.toIso8601 (dateSTR);
+							...............................................
+
+							When the date to convert to ISO8601 format is specified as a string, then it is assumed to already be in ISO8601 format, and that date value will simply be returned.
+
+							VARIATION 2
+							........................................
+							dateIso8601STR = Uize.Date.toIso8601 ();
+							........................................
+
+							When no parameter is specified, this method will return the current date in ISO8601 format.
+
+							NOTES
+							- see also the companion =Uize.Date.fromIso8601= static method
+							- compare to the =Uize.Date.toPretty= static method
+				*/
+			};
+
+			_package.fromIso8601 = function (_dateIso8601) {
+				var
+					_yearMonthDay = _dateIso8601.split ('-'),
+					_date = new Date
+				;
+				_date.setFullYear (_yearMonthDay [0]);
+				_date.setDate (1);
+					/* WORKAROUND:
+						This is needed in order to avoid an odd issue that only occurs after the 28th of every month. Basically, because the Date object has the current day set, if you set the month to a month in which that day is not valid, the Date object rolls the month over to the next month. This is, obviously, not what we desire in this instance. By first setting the day to 1, we avoid tripping on this issue.
+					*/
+				_date.setMonth (_yearMonthDay [1] - 1);
+				_date.setDate (_yearMonthDay [2]);
+				_date.setHours (0,0,0,0);
+				return _date;
+				/*?
+					Static Methods
+						Uize.Date.fromIso8601
+							Converts the specified ISO8601 format (YYYY-MM-DD) date string and returns the date as a =Date= object instance.
+
+							SYNTAX
+							.................................................
+							dateOBJ = Uize.Date.fromIso8601 (dateIso8601STR);
+							.................................................
+
+							NOTES
+							- see also the companion =Uize.Date.toIso8601= static method
+				*/
+			};
+
+			_package.toPretty = function (_date) {
+				_date = _resolve (_date);
+				var
+					_dayNumber = _date.getDate (),
+					_dayNumberMod10 = _dayNumber % 10,
+					_dayNumberSuffix = (_dayNumberMod10 > 3 || Math.floor (_dayNumber / 10) % 10 == 1) ? 'th' : ['th','st','nd','rd'] [_dayNumberMod10]
+				;
+				return (
+					_dayNames [_date.getDay ()] + ', ' + _dayNumber + _dayNumberSuffix + ' ' +
+					_monthNames [_date.getMonth ()] + ' ' +
+					_date.getFullYear ()
+				);
+				/*?
+					Static Methods
+						Uize.Date.toPretty
+							Returns a string, representing a "pretty" formatting of the specified date.
+
+							SYNTAX
+							..................................................
+							prettyDateSTR = Uize.Date.toPretty (dateSTRorOBJ);
+							..................................................
+
+							The date to be pretty-formatted can be specified using a =Date= object instance, or as a date string in ISO8601 format (YYYY-MM-DD). A pretty-formatted date follows the syntax...
+
+							.........................................................................
+							[full day name], [day of month][day suffix] [full month name] [full year]
+							.........................................................................
+
+							Following are some examples of pretty-formatted dates...
+
+							EXAMPLES
+							............................
+							Friday, 15th December 2006
+							Tuesday, 23rd February 1999
+							Friday, 4th July 2008
+							Thursday, 1st April 2004
+							Saturday, 2nd September 2006
+							............................
+
+							NOTES
+							- compare to the =Uize.Date.toPretty= static method
+				*/
+			};
+
+			_package.isLeapYear = function (_year) {
+				return _year % 4 == 0 && (_year % 100 != 0 || _year % 400 == 0);
+				/*?
+					Static Methods
+						Uize.Date.isLeapYear
+							Returns a boolean, indicating whether or not the specified year is a leap year.
+
+							SYNTAX
+							................................................
+							isLeapYearBOOL = Uize.Date.isLeapYear (yearINT);
+							................................................
+
+							EXAMPLES
+							................................................................................
+							Uize.Date.isLeapYear (2008);   // returns true, because 2008 is a leap year
+							Uize.Date.isLeapYear (2009);   // returns false, because 2009 is not a leap year
+							................................................................................
+
+							NOTES
+							- see the related =Uize.Date.getDaysInMonth= static method
+				*/
+			};
+
+			_package.getDaysInMonth = function (_month,_year) {
+				return _month == 1 ? (_package.isLeapYear (_year) ? 29 : 28) : (30 + ((2773 >> _month) & 1));
+				/* NOTE:
+					2773 is 101011010101 in binary, which flags the 31 day months, and we use a binary shift right to "index" into the flags, with a binary and on 1 to mask out unwanted crud
+				*/
+				/*?
+					Static Methods
+						Uize.Date.getDaysInMonth
+							Returns an integer, indicating the number of days in the specified month of the specified year.
+
+							SYNTAX
+							.............................................................
+							daysInMonthINT = Uize.Date.getDaysInMonth (monthINT,yearINT);
+							.............................................................
+
+							The value of the =monthINT= parameter should be a number in the range of =0= to =11=, where =0= represents January, and =11= represents December.
+
+							EXAMPLES
+							...................................................................................
+							Uize.Date.getDaysInMonth (1,2008);   // returns 29, because 2008 is a leap year
+							Uize.Date.getDaysInMonth (1,2009);   // returns 28, because 2009 is not a leap year
+							Uize.Date.getDaysInMonth (3,1876);   // returns 30 for April of any year
+							Uize.Date.getDaysInMonth (11,1989);  // returns 31 for December of any year
+							...................................................................................
+
+							NOTES
+							- see the related =Uize.Date.isLeapYear= static method
+				*/
+			};
+
+			_package.isRecent = function (_date,_recencyWindowDays) {
+				return Math.round (_convert (new Date - _resolve (_date),'ms','days')) <= _recencyWindowDays;
+				/*?
+					Static Methods
+						Uize.Date.isRecent
+							Returns a boolean, indicating whether or not the specified date is within the specified window of recency (as specified in days).
+
+							SYNTAX
+							......................................................................
+							isRecentBOOL = Uize.Date.isRecent (dateSTRorOBJ,recencyWindowDaysINT);
+							......................................................................
+
+							The date to be tested for recency can be specified using a =Date= object instance, or as a date string in ISO8601 format (YYYY-MM-DD). This method can be useful for filtering content to highlight as new or recent, based upon release date.
+				*/
+			};
+
+		/*** Public Static Properties ***/
+			var
+				_dayNames = _package.dayNames = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
+					/*?
+						Static Properties
+							Uize.Date.dayNames
+								An array of strings, representing the English names of the days of the week, starting with Sunday.
+
+								SYNTAX
+								...............................................
+								dayNameSTR = Uize.Date.dayNames [dayOfWeekINT];
+								...............................................
+
+								EXAMPLE
+								..............................................................
+								var todaysDayName = Uize.Date.dayNames [(new Date).getDay ()];
+								..............................................................
+
+								In the above example, the variable =todaysDayName= would be left with the name of the day of the week during which the code is executed.
+
+								NOTES
+								- see also the companion =Uize.Date.monthNames= static property
+					*/
+				_monthNames = _package.monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+					/*?
+						Static Properties
+							Uize.Date.monthNames
+								An array of strings, representing the English names of the months of the year, starting with January.
+
+								SYNTAX
+								.....................................................
+								monthNameSTR = Uize.Date.monthNames [monthOfYearINT];
+								.....................................................
+
+								EXAMPLE
+								....................................................................
+								var todaysMonthName = Uize.Date.monthNames [(new Date).getMonth ()];
+								....................................................................
+
+								In the above example, the variable =todaysMonthName= would be left with the name of the month of the year during which the code is executed.
+
+								NOTES
+								- see also the companion =Uize.Date.dayNames= static property
+					*/
+			;
+
+		return _package;
+	}
+});
+

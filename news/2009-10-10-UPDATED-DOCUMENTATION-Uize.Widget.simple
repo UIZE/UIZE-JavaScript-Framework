@@ -1,0 +1,14 @@
+Documentation has been added for the =insertUi= and =insertOrWire= instance methods, and the =idPrefixConstruction= set-get properties of the =Uize.Widget= module.
+
+SUMMARY
+- The =insertOrWireUi= instance method calls either the =wireUi= or =insertUi= instance method, depending on the value of the =built= set-get property.
+- The =insertUi= instance method inserts the UI for an instance by calling the =buildHtml= instance method, and then wires the instance's UI by calling the =wireUi= method.
+- The =idPrefixConstruction= set-get property is a string, specifying the mode of construction of the value for the =idPrefix= set-get property.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-10-10 - UPDATED DOCUMENTATION: Uize.Widget
+....................................................................................

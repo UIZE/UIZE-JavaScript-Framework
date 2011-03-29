@@ -1,0 +1,15 @@
+/*** test results ***/
+	.testResults {
+		padding:10px;
+		padding-right:3px;
+		margin:0 10px 0 10px;
+		background:#c9cfd6 url(../images/tree-menu-bg.gif) repeat-x left top;
+		border:3px solid #fff;
+		border-radius:10px;
+		-moz-border-radius:10px;
+		-webkit-border-radius:10px;
+	}
+	.testResults .testResultsFooter {
+		text-align:right;
+	}
+

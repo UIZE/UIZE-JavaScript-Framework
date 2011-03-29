@@ -1,0 +1,23 @@
+.selectorLinks {
+	height:100%;
+	width:100%;
+	overflow:auto;
+}
+/*** tab styling ***/
+	.tabShell {
+		width:255px;
+		margin-bottom:3px;
+	}
+	.tabBodyShell {
+		height:303px;
+	}
+
+/*** overrides for paramsTable ***/
+	table.paramsTable {
+		width:100%;
+		border:none;
+	}
+	table.paramsTable td.fieldLabel {
+		font-size:11px;
+	}
+

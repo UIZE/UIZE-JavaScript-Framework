@@ -1,0 +1,9 @@
+<%@ input ({idPrefix:'string',unit:'string'}) %>
+<div class="dataBar">
+	<div id="<% .idPrefix %>-track" class="dataBarTrack">
+		<div id="<% .idPrefix %>-full" class="dataBarTrackFull"></div>
+		<div id="<% .idPrefix %>-empty" class="dataBarTrackEmpty"></div>
+		<div id="<% .idPrefix %>-knob" class="dataBarKnob"><span id="<% .idPrefix %>-value"></span><% .unit %></div>
+	</div>
+</div>
+

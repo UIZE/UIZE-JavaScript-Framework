@@ -1,0 +1,61 @@
+Reference documentation for modules of the UIZE JavaScript Framework has been substantially improved, with the addition of automatically generated documentation for features of modules for which no documentation has explicitly been written.
+
+Examples Subsection
+	For every module of the UIZE JavaScript Framework, the Introduction section of the module's reference now contains a dynamically generated Examples subsection.
+
+	The Examples subsection lists all example pages that are flagged as being good showcases for the module (an example page is flagged as being a showcase for a module by adding the module name to the keywords meta tag of the example page). In addition to a list of showcase example pages, the Examples subsection also contains a *SEARCH* link that lets you easily search through all the example pages for pages that have references to the module (this includes references that may only appear in the source code for an example). The Examples subsection is always dynamically added to the Introduction section of a module's reference - even when there are no showcase example pages for the module. There is always, at the very least, the *SEARCH* link.
+
+	Because the Examples subsection is dynamically generated, there is no need for a developer who is writing a UIZE module (and, hopefully, also documenting it) to list example pages that showcase that module. As long as there are example pages written that list that module in their keywords meta tag, those example pages will automatically be listed in the dynamically generated Examples subsection.
+
+Implementation Info Subsection
+	For every module of the UIZE JavaScript Framework, the Introduction section of the module's reference now contains a dynamically generated Implementation Info subsection.
+
+	The Implementation Info subsection provides a decent amount of useful information about the module's implementation - all information that can be automatically gleaned from the module's code.
+
+	Inheritance Chain
+		If the module is a class, then its inheritance chain will be listed (using a breadcrumbs style format) in an INHERITANCE CHAIN notes section.
+
+		Each module listed in the class' inheritance chain is linked to the reference for the module, so you can use the INHERITANCE CHAIN notes section to navigate up a class' inheritance chain within the reference documentation. While the title bar of a module reference page always lets you navigate up a module's namespace chain (segments of the module name in the title bar are linked), a class' inheritance chain does not always map directly to the module's namespace chain. Seeing a class' inheritance chain listed is useful in highlighting the cases where a class' position in the class hierarchy cannot be inferred from the module's name and the namespace it is under.
+
+	Breakdown of Features
+		All the features of a module that can be automatically detected from the code are listed in the Implementation Info subsection, broken down into sections based upon where they are implemented in the inheritance chain (if the module defines a class).
+
+		- *Features Introduced in This Module* - This section lists all features that have been introduced in the module (ie. they have not been inherited from a superclass). For non-class modules, such as package modules, all of the module's features will be listed in this section.
+
+		- *Features Overridden in This Module* - For class modules, this section lists all features that were introduced in some superclass up the class' inheritance chain, but that were overridden in this class (for non-class modules, there will be no features listed in this section). To find out where a specific overridden feature was first introduced, go to the reference documentation for the feature and read through the IMPLEMENTATION INFO notes section for the feature.
+
+		- *Features Inherited From Other Modules* - For class modules, this section lists all features that were inherited from some superclass up the class' inheritance chain, and that have not been overridden in this class (for non-class modules, there will be no features listed in this section). To find out where a specific inherited feature was first introduced, go to the reference documentation for the feature and read through the IMPLEMENTATION INFO notes section for the feature.
+
+		Within the three sections mentioned above, features are further broken down by type, into the groups: *INSTANCE METHODS*, *INSTANCE PROPERTIES*, *SET-GET PROPERTIES*, *STATIC METHODS*, and *STATIC PROPERTIES*. All the features listed in these sections are linked to reference documentation within the module reference. If a feature of a class module is inherited from a superclass up the class' inheritance chain (regardless of whether or not the feature is overriden in the current module), then the class in which the feature was first introduced will be noted in the IMPLEMENTATION INFO notes section in the feature's reference documentation.
+
+	Modules Directly Under This Namespace
+		The Modules Directly Under This Namespace section lists all of the UIZE modules that are directly under the namespace of the module.
+
+		The other modules that are under a module's namespace could be any type of module. Modules under a class module's namespace are often subclasses of that class, but this is not guaranteed - they might be extension modules, or some other type of module that is simply using the class module as its namespace. Every module listed in this section is linked to its reference documentation, so you can use this section to navigate deeper into the class and/or namespace hierarchy of the UIZE JavaScript Framework (rather than always having to use the site nav).
+
+	Unit Tests
+		If the module has a corresponding unit tests module, then the unit tests module will be listed in the Unit Tests section and will be linked to the unit tests module's reference documentation.
+
+		If the module does not have a corresponding unit tests module, then it will be noted in this section that the module has no dedicated unit tests module.
+
+Feature-specific Implementation Info Notes
+	In addition to the dynamically generated Examples and Implementation Info subsections that are stitched into the Introduction section, a dynamically generated IMPLEMENTATION INFO notes section is inserted into the reference documentation for each feature of the module.
+
+	The IMPLEMENTATION INFO notes provides the following information about a feature...
+
+	- *Where the Feature Was Introduced* - The feature may have been introduced in the current module, or it may have been inherited from a superclass. If the feature is inherited from a superclass, then it will be noted whether or not the feature is overridden in the current module, along with in which class the current implementation resides and in which class the feature was first introduced.
+
+	- *Whether or Not the Feature is Inheritable* - If the feature is a static feature (such as a static method or a static property) and the module is a class, then it will be noted whether or not the static feature is inherited by subclasses created from the class.
+
+	Every Feature Now Has Documentation
+		Because the IMPLEMENTATION INFO section is stitched in to the reference documentation for a feature, every feature now has at least this basic documentation - even if the feature has no documentation explicitly written for it.
+
+		Previously, if a feature had no documentation written for it, the feature would simply not be listed in the reference documenttion generated for the module. Additionally (and almost more importantly), inherited features of a class were previously never documented in module references, so you would be hard pressed to figure out what all the features of a class were by going to its reference documentation - especially if the class was deep in the class hierarchy and had loads of inherited features. Now, dynamically generated documentation is automatically stitched in for inherited features, so you can be aware that all these feature exist in the class, and also learn from which class(es) they are inherited.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2011-01-31 - Major Improvements to Module References
+....................................................................................

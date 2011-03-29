@@ -1,0 +1,611 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Creating A New Uize Module | Documentation | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework Documentation "/>
+	<meta name="description" content="This document provides guidelines and advice for the development of new UIZE modules, to be followed by developers of the UIZE JavaScript Framework."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../javascript-explainers.html" class="breadcrumb breadcrumbWithArrow">EXPLAINERS</a>
+	Creating A New Uize Module
+
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="This document provides guidelines and advice for the development of new UIZE modules, to be followed by developers of the UIZE JavaScript Framework.">1. Introduction</a></li>
+			<li><a href="#2" title="The first step in creating a new UIZE module is to decide what type of module you are creating.">2. What Type of Module Are You Creating?</a>
+				<ul>
+					<li><a href="#2_1" title="If you&apos;re creating a new widget, then you&apos;ll be creating a class module, where the class is either a direct subclass of the Uize.Widget base class, or is a subclass of some other existing widget class.">2.1. Creating Widget Modules</a></li>
+				</ul>
+			</li>
+			<li><a href="#3" title="Your new UIZE module needs a name, of course, and naming your module requires you to Find the Appropriate Namespace and Choose a Name.">3. Name Your Module</a>
+				<ul>
+					<li><a href="#3_1" title="All modules of the UIZE JavaScript Framework must exist somewhere under the Uize namespace.">3.1. Find the Appropriate Namespace</a>
+						<ul>
+							<li><a href="#3_1_1" title="When adding a new module to the UIZE JavaScript Framework, avoid adding it directly under the Uize root namespace if this can at all be avoided.">3.1.1. Avoid Using the Uize Root Namespace</a></li>
+							<li><a href="#3_1_2" title="Extension modules always exist in the namespace of the module they extend.">3.1.2. Namespace for Extension Modules</a></li>
+							<li><a href="#3_1_3" title="Class modules often, but do not have to, exist under the namespace of the classes that they subclass.">3.1.3. Namespace for Class Modules</a></li>
+							<li><a href="#3_1_4" title="Certain dedicated namespaces exist for grouping / organization modules according to their area of functionality, such as, for example, the Uize.Color, Uize.Data, and Uize.Util modules.">3.1.4. Namespaces for Areas of Functionality</a>
+								<ul>
+									<li><a href="#3_1_4_1" title="In some cases, a module that defines a namespace for an area of functionality also defines a class or object.">3.1.4.1. Namespace Modules Can Define Classes or Objects</a></li>
+									<li><a href="#3_1_4_2" title="In some cases, a module that defines a namespace for an area of functionality also defines a package that offers a base level of functionality in the form of static methods, and expects other modules under that namespace to offer additional related functionality.">3.1.4.2. Namespace Modules Can Define Packages</a></li>
+									<li><a href="#3_1_4_3" title="In some cases, a module that defines a namespace for an area of functionality does nothing more than define a namespace, with the expectation that modules under that namespace will provide the functionality.">3.1.4.3. Namespace Modules Can Be Purely Namespaces</a></li>
+								</ul>
+							</li>
+							<li><a href="#3_1_5" title="When adding a new package module to the UIZE JavaScript Framework, first consider the general rule Avoid Using the Uize Root Namespace, and then try to use one of the already established Namespaces for Areas of Functionality as a place to house your new module.">3.1.5. Namespaces for Package Modules</a></li>
+							<li><a href="#3_1_6" title="All test modules that test regular / non-test modules of the UIZE JavaScript Framework are placed within the Uize.Test namespace.">3.1.6. Namespace for Test Modules</a></li>
+							<li><a href="#3_1_7" title="All JavaScript template modules added to the UIZE JavaScript Framework should be placed somewhere within the Uize.Templates namespace.">3.1.7. Namespace for JavaScript Template Modules</a></li>
+						</ul>
+					</li>
+					<li><a href="#3_2" title="Once you Find the Appropriate Namespace for your new UIZE module, you will need to decide the name of the property of that namespace object that will reference your module.">3.2. Choose a Name</a></li>
+				</ul>
+			</li>
+			<li><a href="#4" title="When you use an existing module as the basis for creating a new module, make sure to update the header comments appropriately.">4. Update Header Comments</a>
+				<ul>
+					<li><a href="#4_1" title="Make sure that all information in the module info comment (the one that sits right at the very top of the file) is correct, paying attention to the Module Name Comment Line and the Copyright Notice Comment Line.">4.1. Module Info Comment</a>
+						<ul>
+							<li><a href="#4_1_1" title="The Module Name Comment Line is the line in the Module Info Comment that lists the name of the module defined by the JavaScript file.">4.1.1. Module Name Comment Line</a></li>
+							<li><a href="#4_1_2" title="The Copyright Notice Comment Line is the line in the Module Info Comment that provides a notice of copyright for the code contained inside the module, stating the Copyright Date Range and the Copyright Holder for the module&apos;s code.">4.1.2. Copyright Notice Comment Line</a>
+								<ul>
+									<li><a href="#4_1_2_1" title="The copyright date range must reflect when the code in the module was initially created - which is not necessarily the date when the actually JavaScript file that defines the module was created.">4.1.2.1. Copyright Date Range</a></li>
+									<li><a href="#4_1_2_2" title="The copyright holder portion of the Copyright Notice Comment Line identifies the holder of the rights to copy the contents of the file.">4.1.2.2. Copyright Holder</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li><a href="#4_2" title="The scruncher settings comment contains settings that are used by the scruncher when it builds a scrunched version of a JavaScript module&apos;s source code.">4.2. Scruncher Settings Comment</a>
+						<ul>
+							<li><a href="#4_2_1" title="For class modules, it is the convention to use a single letter for the scrunch namespace, where that letter is one letter higher than the letter used for the class&apos; superclass.">4.2.1. Scruncher Mappings for Class Modules</a></li>
+							<li><a href="#4_2_2" title="For package modules, the convention is to use the blank scrunch namespace.">4.2.2. Scruncher Mappings for Package Modules</a></li>
+							<li><a href="#4_2_3" title="For class extension modules (not package extension modules), the convention is to use the letter used by the class that is being extended, with an underscore separated suffix appended that is unique to the extension module.">4.2.3. Scruncher Mappings for Class Extension Modules</a></li>
+						</ul>
+					</li>
+					<li><a href="#4_3" title="The module meta data comment is required for all UIZE modules and contains meta data information that is used on the SOTU (State of the UIZE) page.">4.3. Module Meta Data Comment</a>
+						<ul>
+							<li><a href="#4_3_1">4.3.1. Module Meta Data Comment Entries</a>
+								<ul>
+									<li><a href="#4_3_1_1" title="The type of the JavaScript module.">4.3.1.1. type</a></li>
+									<li><a href="#4_3_1_2" title="A number, in the range of 0 to 10, indicating the overal importance of the module in the larger scheme of things.">4.3.1.2. importance</a></li>
+									<li><a href="#4_3_1_3" title="A number, in the range of 0 to 100, indicating the code completeness of the module as a percentage.">4.3.1.3. codeCompleteness</a></li>
+									<li><a href="#4_3_1_4" title="A number, in the range of 0 to 100, indicating the completeness of unit tests for the module as a percentage.">4.3.1.4. testCompleteness</a></li>
+									<li><a href="#4_3_1_5" title="A number, in the range of 0 to 100, indicating the completeness of documentation for the module as a percentage.">4.3.1.5. docCompleteness</a></li>
+								</ul>
+							</li>
+							<li><a href="#4_3_2" title="Attaining the sought after value of 100 for either of the codeCompleteness, codeCompleteness, or docCompleteness meta data entries is unfortunately not the end of the story.">4.3.2. So Long, One Hundred Percent</a></li>
+							<li><a href="#4_3_3" title="Getting the Module Meta Data Comment into JavaScript template modules is a little bit trickier than regular JavaScript modules, but still quite doable.">4.3.3. Module Meta Data in JavaScript Template Modules</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li><a href="#5" title="When implementing your new UIZE module, there are a number of considerations to keep in mind...">5. Implement the Module</a></li>
+			<li><a href="#6" title="New modules added to the UIZE JavaScript Framework should, ideally, be comprehensively document.">6. Document the Module</a>
+				<ul>
+					<li><a href="#6_1" title="If time does not allow every feature of a new module to be documented in a lot of detail, at least make sure that every feature is mentioned, along with some minimal information about the feature.">6.1. At Least Have a Skeleton</a></li>
+					<li><a href="#6_2" title="Once you have the basic skeleton of the documentation, convering in a very sparse way all the features of the module, you can then proceed to flesh out the documentation in the following order...">6.2. Add Flesh to the Skeleton</a></li>
+					<li><a href="#6_3" title="Once you&apos;ve written as much documentation as you&apos;re going to write, make sure to update the value for the docCompleteness meta data entry to reflect how complete the documentation is, using the following rough guide to completeness milestones...">6.3. Update the docCompleteness Meta Data Entry</a></li>
+				</ul>
+			</li>
+			<li><a href="#7" title="New modules added to the UIZE JavaScript Framework should have at least one example page to serve as a real life test and demonstration of the module&apos;s key capabilities.">7. Create Examples for the Module</a>
+				<ul>
+					<li><a href="#7_1" title="Example pages are neither necessary nor particularly useful for certain kinds of modules, including data modules, template modules, test modules, namespace modules, alias modules, and library modules.">7.1. Modules That Don't Warrant Examples</a></li>
+				</ul>
+			</li>
+			<li><a href="#8" title="New modules added to the UIZE JavaScript Framework should be thoroughly unit tested.">8. Write Unit Tests</a>
+				<ul>
+					<li><a href="#8_1" title="Each UIZE module should have a companion test module (except test modules themselves, of course).">8.1. Unit Test Module</a></li>
+					<li><a href="#8_2" title="The unit test suite for the UIZE JavaScript Framework is implemented in the Uize.Test.UnitTests module.">8.2. UIZE Unit Tests</a></li>
+				</ul>
+			</li>
+			<li><a href="#9" title="Creating a new module for the UIZE JavaScript Framework is no trivial matter - you&apos;re growing a framework that many developers will be building applications and features on.">9. Revisit This Explainer, As Needed</a></li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<a name="1"></a>
+	<h1 class="heading1" title="1. Introduction"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>. </span>Introduction</h1>
+	<div class="contents1">
+		<p>This document provides guidelines and advice for the development of new UIZE modules, to be followed by developers of the UIZE JavaScript Framework.</p>
+	</div>
+	
+	<a name="2"></a>
+	<h1 class="heading1" title="2. What Type of Module Are You Creating?"><span class="headingNumber"><a href="#2" title="2. What Type of Module Are You Creating?">2</a>. </span>What Type of Module Are You Creating?</h1>
+	<div class="contents1">
+		<p>The first step in creating a new UIZE module is to decide what type of module you are creating.</p>
+		
+		<p>Depending on your needs, you may wish to create a class module, a package module, an extension module, a namespace module, a library module, etc. If you need a refresher on modules, what's inside them, how they're loaded, the different types, etc., refer back to the <a href="javascript-modules.html">JavaScript Modules</a> explainer.</p>
+		
+		<a name="2_1"></a>
+		<h2 class="heading2" title="2. What Type of Module Are You Creating? -&gt; 2.1. Creating Widget Modules"><span class="headingNumber"><a href="#2" title="2. What Type of Module Are You Creating?">2</a>.<a href="#2_1" title="2. What Type of Module Are You Creating? -&gt; 2.1. Creating Widget Modules">1</a>. </span>Creating Widget Modules</h2>
+		<div class="contents2">
+			<p>If you're creating a new widget, then you'll be creating a class module, where the class is either a direct subclass of the <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> base class, or is a subclass of some other existing widget class.</p>
+		</div>
+	</div>
+	
+	<a name="3"></a>
+	<h1 class="heading1" title="3. Name Your Module"><span class="headingNumber"><a href="#3" title="3. Name Your Module">3</a>. </span>Name Your Module</h1>
+	<div class="contents1">
+		<p>Your new UIZE module needs a name, of course, and naming your module requires you to <a href="#3_1">Find the Appropriate Namespace</a> and <a href="#3_2">Choose a Name</a>.</p>
+		
+		<a name="3_1"></a>
+		<h2 class="heading2" title="3. Name Your Module -&gt; 3.1. Find the Appropriate Namespace"><span class="headingNumber"><a href="#3" title="3. Name Your Module">3</a>.<a href="#3_1" title="3. Name Your Module -&gt; 3.1. Find the Appropriate Namespace">1</a>. </span>Find the Appropriate Namespace</h2>
+		<div class="contents2">
+			<p>All modules of the UIZE JavaScript Framework must exist somewhere under the <code><a href="../reference/Uize.html">Uize</a></code> namespace.</p>
+			
+			<p>When choosing the namespace for your new UIZE module, keep in mind the following considerations and conventions...</p>
+			
+			<a name="3_1_1"></a>
+			<h3 class="heading3" title="3. Name Your Module -&gt; 3.1. Find the Appropriate Namespace -&gt; 3.1.1. Avoid Using the Uize Root Namespace"><span class="headingNumber"><a href="#3" title="3. Name Your Module">3</a>.<a href="#3_1" title="3. Name Your Module -&gt; 3.1. Find the Appropriate Namespace">1</a>.<a href="#3_1_1" title="3. Name Your Module -&gt; 3.1. Find the Appropriate Namespace -&gt; 3.1.1. Avoid Using the Uize Root Namespace">1</a>. </span>Avoid Using the Uize Root Namespace</h3>
+			<div class="contents3">
+				<p>When adding a new module to the UIZE JavaScript Framework, avoid adding it directly under the <code><a href="../reference/Uize.html">Uize</a></code> root namespace if this can at all be avoided.</p>
+				
+				<p>Before placing a module into the <code><a href="../reference/Uize.html">Uize</a></code> root namespace, exhaust all other options discussed in the sections below. There is usually a better place to put a module than directly under <code><a href="../reference/Uize.html">Uize</a></code>. Generally, modules directly under the <code><a href="../reference/Uize.html">Uize</a></code> root namespace should either be incredibly important and essential, or they should defined namespaces that are likely to grow into substantial subtrees in the module hierarchy (consider the examples of the <code><a href="../reference/Uize.Templates.html">Uize.Templates</a></code>, <code><a href="../reference/Uize.Test.html">Uize.Test</a></code>, and <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> namespaces).</p>
+			</div>
+			
+			<a name="3_1_2"></a>
+			<h3 class="heading3" title="3. Name Your Module -&gt; 3.1. Find the Appropriate Namespace -&gt; 3.1.2. Namespace for Extension Modules"><span class="headingNumber"><a href="#3" title="3. Name Your Module">3</a>.<a href="#3_1" title="3. Name Your Module -&gt; 3.1. Find the Appropriate Namespace">1</a>.<a href="#3_1_2" title="3. Name Your Module -&gt; 3.1. Find the Appropriate Namespace -&gt; 3.1.2. Namespace for Extension Modules">2</a>. </span>Namespace for Extension Modules</h3>
+			<div class="contents3">
+				<p>Extension modules always exist in the namespace of the module they extend.</p>
+				
+				<p>For example, the <code><a href="../reference/Uize.Fade.xFactory.html">Uize.Fade.xFactory</a></code> extension module extends the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> class, therefore it is placed directly under the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> namespace. Similarly, the <code><a href="../reference/Uize.Color.xHsv.html">Uize.Color.xHsv</a></code> extension module extends the <code><a href="../reference/Uize.Color.html">Uize.Color</a></code> object, so it is placed directly under that namespace.</p>
+			</div>
+			
+			<a name="3_1_3"></a>
+			<h3 class="heading3" title="3. Name Your Module -&gt; 3.1. Find the Appropriate Namespace -&gt; 3.1.3. Namespace for Class Modules"><span class="headingNumber"><a href="#3" title="3. Name Your Module">3</a>.<a href="#3_1" title="3. Name Your Module -&gt; 3.1. Find the Appropriate Namespace">1</a>.<a href="#3_1_3" title="3. Name Your Module -&gt; 3.1. Find the Appropriate Namespace -&gt; 3.1.3. Namespace for Class Modules">3</a>. </span>Namespace for Class Modules</h3>
+			<div class="contents3">
+				<p>Class modules often, but do not have to, exist under the namespace of the classes that they subclass.</p>
+				
+				<p>For example, the <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> module defines a class that is a subclass of the <code><a href="../reference/Uize.html">Uize</a></code> class, so it is placed under that namespace. Similarly, the <code><a href="../reference/Uize.Widget.Bar.html">Uize.Widget.Bar</a></code> module defines a class that is a subclass of the <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> class, so it is placed under that namespace. Even further, the <code><a href="../reference/Uize.Widget.Bar.Slider.html">Uize.Widget.Bar.Slider</a></code> module defines a class that is a subclass of the <code><a href="../reference/Uize.Widget.Bar.html">Uize.Widget.Bar</a></code> class, and so on.</p>
+				
+				<p>There are times when this general rule is deviated from, such as when class modules are placed under <a href="#3_1_4">Namespaces for Areas of Functionality</a>, rather than directly under the namespace of the class that they subclass. An example of this is the <code><a href="../reference/Uize.Util.Coupler.html">Uize.Util.Coupler</a></code> module. This module defines the <code><a href="../reference/Uize.Util.Coupler.html">Uize.Util.Coupler</a></code> class, which is a subclass of the <code><a href="../reference/Uize.html">Uize</a></code> base class - <b>not</b> a subclass of <code><a href="../reference/Uize.Util.html">Uize.Util</a></code>. The <code><a href="../reference/Uize.Util.html">Uize.Util</a></code> module merely defines a namespace that serves as a place to group / organize various utility type modules. The modules under this namespace may be any <code><a href="#4_3_1_1">type</a></code> of module.</p>
+			</div>
+			
+			<a name="3_1_4"></a>
+			<h3 class="heading3" title="3. Name Your Module -&gt; 3.1. Find the Appropriate Namespace -&gt; 3.1.4. Namespaces for Areas of Functionality"><span class="headingNumber"><a href="#3" title="3. Name Your Module">3</a>.<a href="#3_1" title="3. Name Your Module -&gt; 3.1. Find the Appropriate Namespace">1</a>.<a href="#3_1_4" title="3. Name Your Module -&gt; 3.1. Find the Appropriate Namespace -&gt; 3.1.4. Namespaces for Areas of Functionality">4</a>. </span>Namespaces for Areas of Functionality</h3>
+			<div class="contents3">
+				<p>Certain dedicated namespaces exist for grouping / organization modules according to their area of functionality, such as, for example, the <code><a href="../reference/Uize.Color.html">Uize.Color</a></code>, <code><a href="../reference/Uize.Data.html">Uize.Data</a></code>, and <code><a href="../reference/Uize.Util.html">Uize.Util</a></code> modules.</p>
+				
+				<a name="3_1_4_1"></a>
+				<h4 class="heading4" title="3. Name Your Module -&gt; 3.1. Find the Appropriate Namespace -&gt; 3.1.4. Namespaces for Areas of Functionality -&gt; 3.1.4.1. Namespace Modules Can Define Classes or Objects"><span class="headingNumber"><a href="#3" title="3. Name Your Module">3</a>.<a href="#3_1" title="3. Name Your Module -&gt; 3.1. Find the Appropriate Namespace">1</a>.<a href="#3_1_4" title="3. Name Your Module -&gt; 3.1. Find the Appropriate Namespace -&gt; 3.1.4. Namespaces for Areas of Functionality">4</a>.<a href="#3_1_4_1" title="3. Name Your Module -&gt; 3.1. Find the Appropriate Namespace -&gt; 3.1.4. Namespaces for Areas of Functionality -&gt; 3.1.4.1. Namespace Modules Can Define Classes or Objects">1</a>. </span>Namespace Modules Can Define Classes or Objects</h4>
+				<div class="contents4">
+					<p>In some cases, a module that defines a namespace for an area of functionality also defines a class or object.</p>
+					
+					<p>For example, the <code><a href="../reference/Uize.Color.html">Uize.Color</a></code> module defines the <code><a href="../reference/Uize.Color.html">Uize.Color</a></code> object, but also provides a namespace for additional modules that provide color related functionality.</p>
+				</div>
+				
+				<a name="3_1_4_2"></a>
+				<h4 class="heading4" title="3. Name Your Module -&gt; 3.1. Find the Appropriate Namespace -&gt; 3.1.4. Namespaces for Areas of Functionality -&gt; 3.1.4.2. Namespace Modules Can Define Packages"><span class="headingNumber"><a href="#3" title="3. Name Your Module">3</a>.<a href="#3_1" title="3. Name Your Module -&gt; 3.1. Find the Appropriate Namespace">1</a>.<a href="#3_1_4" title="3. Name Your Module -&gt; 3.1. Find the Appropriate Namespace -&gt; 3.1.4. Namespaces for Areas of Functionality">4</a>.<a href="#3_1_4_2" title="3. Name Your Module -&gt; 3.1. Find the Appropriate Namespace -&gt; 3.1.4. Namespaces for Areas of Functionality -&gt; 3.1.4.2. Namespace Modules Can Define Packages">2</a>. </span>Namespace Modules Can Define Packages</h4>
+				<div class="contents4">
+					<p>In some cases, a module that defines a namespace for an area of functionality also defines a package that offers a base level of functionality in the form of static methods, and expects other modules under that namespace to offer additional related functionality.</p>
+					
+					<p>An example of this is the <code><a href="../reference/Uize.Data.html">Uize.Data</a></code> module, which contains a number of basic methods that are useful when dealing with data structures. Other modules under the <code><a href="../reference/Uize.Data.html">Uize.Data</a></code> namespace, such as the <code><a href="../reference/Uize.Data.Csv.html">Uize.Data.Csv</a></code> and <code><a href="../reference/Uize.Data.NameValueRecords.html">Uize.Data.NameValueRecords</a></code> modules, provide more advanced or more specific functionality, but which is still centered around dealing with data structures.</p>
+				</div>
+				
+				<a name="3_1_4_3"></a>
+				<h4 class="heading4" title="3. Name Your Module -&gt; 3.1. Find the Appropriate Namespace -&gt; 3.1.4. Namespaces for Areas of Functionality -&gt; 3.1.4.3. Namespace Modules Can Be Purely Namespaces"><span class="headingNumber"><a href="#3" title="3. Name Your Module">3</a>.<a href="#3_1" title="3. Name Your Module -&gt; 3.1. Find the Appropriate Namespace">1</a>.<a href="#3_1_4" title="3. Name Your Module -&gt; 3.1. Find the Appropriate Namespace -&gt; 3.1.4. Namespaces for Areas of Functionality">4</a>.<a href="#3_1_4_3" title="3. Name Your Module -&gt; 3.1. Find the Appropriate Namespace -&gt; 3.1.4. Namespaces for Areas of Functionality -&gt; 3.1.4.3. Namespace Modules Can Be Purely Namespaces">3</a>. </span>Namespace Modules Can Be Purely Namespaces</h4>
+				<div class="contents4">
+					<p>In some cases, a module that defines a namespace for an area of functionality does nothing more than define a namespace, with the expectation that modules under that namespace will provide the functionality.</p>
+					
+					<p>Examples of this are the <code><a href="../reference/Uize.Templates.html">Uize.Templates</a></code> and <code><a href="../reference/Uize.Util.html">Uize.Util</a></code> modules, which only define namespaces and provide no actual functionality themselves.</p>
+				</div>
+			</div>
+			
+			<a name="3_1_5"></a>
+			<h3 class="heading3" title="3. Name Your Module -&gt; 3.1. Find the Appropriate Namespace -&gt; 3.1.5. Namespaces for Package Modules"><span class="headingNumber"><a href="#3" title="3. Name Your Module">3</a>.<a href="#3_1" title="3. Name Your Module -&gt; 3.1. Find the Appropriate Namespace">1</a>.<a href="#3_1_5" title="3. Name Your Module -&gt; 3.1. Find the Appropriate Namespace -&gt; 3.1.5. Namespaces for Package Modules">5</a>. </span>Namespaces for Package Modules</h3>
+			<div class="contents3">
+				<p>When adding a new package module to the UIZE JavaScript Framework, first consider the general rule <a href="#3_1_1">Avoid Using the Uize Root Namespace</a>, and then try to use one of the already established <a href="#3_1_4">Namespaces for Areas of Functionality</a> as a place to house your new module.</p>
+				
+				<p>Package modules that provide additional more advanced or more esoteric functionality can exist under the namespace of a module that offers related but more basic functionality. For example, the <code><a href="../reference/Uize.Data.Csv.html">Uize.Data.Csv</a></code> package module was added under the <code><a href="../reference/Uize.Data.html">Uize.Data</a></code> namespace, because it also offers data-related functionality. Another example is the <code><a href="../reference/Uize.Node.VirtualEvent.html">Uize.Node.VirtualEvent</a></code> package module, which offers additional node-related functionality. Extending this approach even further, the <code><a href="../reference/Uize.Node.VirtualEvent.Edge.html">Uize.Node.VirtualEvent.Edge</a></code> package module was added under the <code><a href="../reference/Uize.Node.VirtualEvent.html">Uize.Node.VirtualEvent</a></code> namespace, because the <code><a href="../reference/Uize.Node.VirtualEvent.Edge.html">Uize.Node.VirtualEvent.Edge</a></code> module provides additional virtual event related functionality. And, this module actually directly requires the <code><a href="../reference/Uize.Node.VirtualEvent.html">Uize.Node.VirtualEvent</a></code> module for features that it provides. So, in the absence of class inheritance, a namespace hierarchy can be established around the dependency relationships and a sensible layering of functionality.</p>
+			</div>
+			
+			<a name="3_1_6"></a>
+			<h3 class="heading3" title="3. Name Your Module -&gt; 3.1. Find the Appropriate Namespace -&gt; 3.1.6. Namespace for Test Modules"><span class="headingNumber"><a href="#3" title="3. Name Your Module">3</a>.<a href="#3_1" title="3. Name Your Module -&gt; 3.1. Find the Appropriate Namespace">1</a>.<a href="#3_1_6" title="3. Name Your Module -&gt; 3.1. Find the Appropriate Namespace -&gt; 3.1.6. Namespace for Test Modules">6</a>. </span>Namespace for Test Modules</h3>
+			<div class="contents3">
+				<p>All test modules that test regular / non-test modules of the UIZE JavaScript Framework are placed within the <code><a href="../reference/Uize.Test.html">Uize.Test</a></code> namespace.</p>
+				
+				<p>The namespace hierarchy for test modules mirrors the namespace hierarchy of regular / non-test modules (see the section <a href="#8_1">Unit Test Module</a> for more info). The inheritance pattern is not the same, however. For example, the <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> module would define a subclass of <code><a href="../reference/Uize.html">Uize</a></code>, but the <code>Uize.Test.Uize.Widget</code> module <b>would not</b> define a subclass of <code><a href="../reference/Uize.Test.Uize.html">Uize.Test.Uize</a></code>, since all test modules define subclasses of the <code><a href="../reference/Uize.Test.html">Uize.Test</a></code> base class.</p>
+			</div>
+			
+			<a name="3_1_7"></a>
+			<h3 class="heading3" title="3. Name Your Module -&gt; 3.1. Find the Appropriate Namespace -&gt; 3.1.7. Namespace for JavaScript Template Modules"><span class="headingNumber"><a href="#3" title="3. Name Your Module">3</a>.<a href="#3_1" title="3. Name Your Module -&gt; 3.1. Find the Appropriate Namespace">1</a>.<a href="#3_1_7" title="3. Name Your Module -&gt; 3.1. Find the Appropriate Namespace -&gt; 3.1.7. Namespace for JavaScript Template Modules">7</a>. </span>Namespace for JavaScript Template Modules</h3>
+			<div class="contents3">
+				<p>All JavaScript template modules added to the UIZE JavaScript Framework should be placed somewhere within the <code><a href="../reference/Uize.Templates.html">Uize.Templates</a></code> namespace.</p>
+				
+				<p>While JavaScript template modules merely define packages and not classes, template modules <b>can</b> potentially extend on other template modules. For example, a certain flavor of dialog HTML template may build upon the HTML generated by a basic dialog HTML template. In such cases, the specific dialog template module could be placed under the namespace of the more general dialog template module, and it would then be coded to require the general dialog template module and would use that module in generating its output.</p>
+			</div>
+		</div>
+		
+		<a name="3_2"></a>
+		<h2 class="heading2" title="3. Name Your Module -&gt; 3.2. Choose a Name"><span class="headingNumber"><a href="#3" title="3. Name Your Module">3</a>.<a href="#3_2" title="3. Name Your Module -&gt; 3.2. Choose a Name">2</a>. </span>Choose a Name</h2>
+		<div class="contents2">
+			<p>Once you <a href="#3_1">Find the Appropriate Namespace</a> for your new UIZE module, you will need to decide the name of the property of that namespace object that will reference your module.</p>
+			
+			<p>For example, with the module <code><a href="../reference/Uize.Data.Csv.html">Uize.Data.Csv</a></code>, the <code><a href="../reference/Uize.Data.html">Uize.Data</a></code> module is the namespace, and the property <code>Csv</code> of that namespace object is a reference to the module named <code><a href="../reference/Uize.Data.Csv.html">Uize.Data.Csv</a></code>. If you're placing your new module under a namespace that already has a number of other modules under it, you'll need to come up with a name for a property that doesn't conflict with other properties already on the namespace object. By convention, property names for modules always begin with a capital letter, with the exception of extension modules, that begin with a lowercase "x".</p>
+		</div>
+	</div>
+	
+	<a name="4"></a>
+	<h1 class="heading1" title="4. Update Header Comments"><span class="headingNumber"><a href="#4" title="4. Update Header Comments">4</a>. </span>Update Header Comments</h1>
+	<div class="contents1">
+		<p>When you use an existing module as the basis for creating a new module, make sure to update the header comments appropriately.</p>
+		
+		<p>Don't just leave your new module with information that lingers from the module you used as your template, where this lingering information is incorrect for the new module you are creating. Pay attention to the considerations noted below...</p>
+		
+		<a name="4_1"></a>
+		<h2 class="heading2" title="4. Update Header Comments -&gt; 4.1. Module Info Comment"><span class="headingNumber"><a href="#4" title="4. Update Header Comments">4</a>.<a href="#4_1" title="4. Update Header Comments -&gt; 4.1. Module Info Comment">1</a>. </span>Module Info Comment</h2>
+		<div class="contents2">
+			<p>Make sure that all information in the module info comment (the one that sits right at the very top of the file) is correct, paying attention to the <a href="#4_1_1">Module Name Comment Line</a> and the <a href="#4_1_2">Copyright Notice Comment Line</a>.</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">/*______________
+|       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
+|     /      /  |   ---------------------------------------------------
+|    /    O /   |    MODULE : Uize.Widget.ListEditor Class
+|   /    / /    |
+|  /    / /  /| |    ONLINE : http://www.uize.com
+| /____/ /__/_| | COPYRIGHT : (c)2006-2011 UIZE
+|          /___ |   LICENSE : Available under MIT License or GNU General Public License
+|_______________|             http://www.uize.com/license.html
+*/
+</pre>
+			
+			<a name="4_1_1"></a>
+			<h3 class="heading3" title="4. Update Header Comments -&gt; 4.1. Module Info Comment -&gt; 4.1.1. Module Name Comment Line"><span class="headingNumber"><a href="#4" title="4. Update Header Comments">4</a>.<a href="#4_1" title="4. Update Header Comments -&gt; 4.1. Module Info Comment">1</a>.<a href="#4_1_1" title="4. Update Header Comments -&gt; 4.1. Module Info Comment -&gt; 4.1.1. Module Name Comment Line">1</a>. </span>Module Name Comment Line</h3>
+			<div class="contents3">
+				<p>The Module Name Comment Line is the line in the <a href="#4_1">Module Info Comment</a> that lists the name of the module defined by the JavaScript file.</p>
+				
+				
+<pre class="sample-code">|    /    O /   |    MODULE : Uize.Widget.ListEditor Class
+</pre>
+				
+				<p>In the example <a href="#4_1">Module Info Comment</a> shown above, the module name comment line is the one with the text "MODULE : Uize.Widget.ListEditor Class". If you use an existing module as a starting point for creating a new module, be sure not to leave this comment line unchanged (and, therefore, incorrect).</p>
+			</div>
+			
+			<a name="4_1_2"></a>
+			<h3 class="heading3" title="4. Update Header Comments -&gt; 4.1. Module Info Comment -&gt; 4.1.2. Copyright Notice Comment Line"><span class="headingNumber"><a href="#4" title="4. Update Header Comments">4</a>.<a href="#4_1" title="4. Update Header Comments -&gt; 4.1. Module Info Comment">1</a>.<a href="#4_1_2" title="4. Update Header Comments -&gt; 4.1. Module Info Comment -&gt; 4.1.2. Copyright Notice Comment Line">2</a>. </span>Copyright Notice Comment Line</h3>
+			<div class="contents3">
+				<p>The Copyright Notice Comment Line is the line in the <a href="#4_1">Module Info Comment</a> that provides a notice of copyright for the code contained inside the module, stating the <a href="#4_1_2_1">Copyright Date Range</a> and the <a href="#4_1_2_2">Copyright Holder</a> for the module's code.</p>
+				
+				
+<pre class="sample-code">| /____/ /__/_| | COPYRIGHT : (c)2006-2011 UIZE
+</pre>
+				
+				<p>In the example <a href="#4_1">Module Info Comment</a> shown above, the Copyright Notice Comment Line is the one with the text "COPYRIGHT : (c)2006-2011 UIZE". If you use an existing module as a starting point for creating a new module, be sure to update the date range in the copyright notice the correctly reflect the year in which the new module is being created.</p>
+				
+				<a name="4_1_2_1"></a>
+				<h4 class="heading4" title="4. Update Header Comments -&gt; 4.1. Module Info Comment -&gt; 4.1.2. Copyright Notice Comment Line -&gt; 4.1.2.1. Copyright Date Range"><span class="headingNumber"><a href="#4" title="4. Update Header Comments">4</a>.<a href="#4_1" title="4. Update Header Comments -&gt; 4.1. Module Info Comment">1</a>.<a href="#4_1_2" title="4. Update Header Comments -&gt; 4.1. Module Info Comment -&gt; 4.1.2. Copyright Notice Comment Line">2</a>.<a href="#4_1_2_1" title="4. Update Header Comments -&gt; 4.1. Module Info Comment -&gt; 4.1.2. Copyright Notice Comment Line -&gt; 4.1.2.1. Copyright Date Range">1</a>. </span>Copyright Date Range</h4>
+				<div class="contents4">
+					<p>The copyright date range must reflect when the code in the module was initially created - which is not necessarily the date when the actually JavaScript file that defines the module was created.</p>
+					
+					<p>For example, a new module could be created by factoring out code that used to exist in some other module. In such cases, the copyright date range used in the <a href="#4_1_2">Copyright Notice Comment Line</a> for the new module should be the copyright date range for the existing module from which the new module's code was taken.</p>
+				</div>
+				
+				<a name="4_1_2_2"></a>
+				<h4 class="heading4" title="4. Update Header Comments -&gt; 4.1. Module Info Comment -&gt; 4.1.2. Copyright Notice Comment Line -&gt; 4.1.2.2. Copyright Holder"><span class="headingNumber"><a href="#4" title="4. Update Header Comments">4</a>.<a href="#4_1" title="4. Update Header Comments -&gt; 4.1. Module Info Comment">1</a>.<a href="#4_1_2" title="4. Update Header Comments -&gt; 4.1. Module Info Comment -&gt; 4.1.2. Copyright Notice Comment Line">2</a>.<a href="#4_1_2_2" title="4. Update Header Comments -&gt; 4.1. Module Info Comment -&gt; 4.1.2. Copyright Notice Comment Line -&gt; 4.1.2.2. Copyright Holder">2</a>. </span>Copyright Holder</h4>
+				<div class="contents4">
+					<p>The copyright holder portion of the <a href="#4_1_2">Copyright Notice Comment Line</a> identifies the holder of the rights to copy the contents of the file.</p>
+					
+					<p>The copyright holder should always be "UIZE" for modules of the UIZE JavaScript Framework.</p>
+				</div>
+			</div>
+		</div>
+		
+		<a name="4_2"></a>
+		<h2 class="heading2" title="4. Update Header Comments -&gt; 4.2. Scruncher Settings Comment"><span class="headingNumber"><a href="#4" title="4. Update Header Comments">4</a>.<a href="#4_2" title="4. Update Header Comments -&gt; 4.2. Scruncher Settings Comment">2</a>. </span>Scruncher Settings Comment</h2>
+		<div class="contents2">
+			<p>The scruncher settings comment contains settings that are used by the scruncher when it builds a scrunched version of a JavaScript module's source code.</p>
+			
+			
+<pre class="sample-code">/*ScruncherSettings Mappings="=c" LineCompacting="TRUE"*/
+</pre>
+			
+			<p>Among the scruncher settings that can be specified in this comment, the most common and typical is the mappings setting, which specifies a comma separated list of one or more mappings (but usually just one), where each mapping maps an identifier prefix to a scrunch prefix. In the above example, there is only one mapping, between the empty prefix and the scrunch prefix "c". It should be noted that it is implicit that the prefix is delimited from the suffix by a "&#95;" (underscore) character, so that's why the value on the left of the "&#61;" (equals sign) is an empty string. This particular mapping maps all identifiers of the form <code>&#95;[unscrunchedIdentifierName]</code> to scrunched identifiers of the form <code>c&#95;[scrunchedIdentifierName]</code>. For a refresher on scrunching JavaScript files, consult the explainer <a href="all-about-scrunching.html">All About Scrunching</a>.</p>
+			
+			<a name="4_2_1"></a>
+			<h3 class="heading3" title="4. Update Header Comments -&gt; 4.2. Scruncher Settings Comment -&gt; 4.2.1. Scruncher Mappings for Class Modules"><span class="headingNumber"><a href="#4" title="4. Update Header Comments">4</a>.<a href="#4_2" title="4. Update Header Comments -&gt; 4.2. Scruncher Settings Comment">2</a>.<a href="#4_2_1" title="4. Update Header Comments -&gt; 4.2. Scruncher Settings Comment -&gt; 4.2.1. Scruncher Mappings for Class Modules">1</a>. </span>Scruncher Mappings for Class Modules</h3>
+			<div class="contents3">
+				<p>For class modules, it is the convention to use a single letter for the scrunch namespace, where that letter is one letter higher than the letter used for the class' superclass.</p>
+				
+				<p>So, for example, the <code><a href="../reference/Uize.Widget.ListEditor.html">Uize.Widget.ListEditor</a></code> module defines a class that is a subclass of the <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> base class. Further, the <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> class is a subclass of the <code><a href="../reference/Uize.html">Uize</a></code> base class. The <code><a href="../reference/Uize.html">Uize</a></code> base class module uses the letter "a" for its scrunch namespace, so the <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> subclass uses the letter "b", and the <code><a href="../reference/Uize.Widget.ListEditor.html">Uize.Widget.ListEditor</a></code> class uses the letter "c". This ensures that the scrunched identifier names for private properties and methods that are defined at the various different levels of this class hierarchy don't accidentally collide (scrunching is applied discretely to each file, after all).</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">/*ScruncherSettings Mappings="=c" LineCompacting="TRUE"*/
+</pre>
+			</div>
+			
+			<a name="4_2_2"></a>
+			<h3 class="heading3" title="4. Update Header Comments -&gt; 4.2. Scruncher Settings Comment -&gt; 4.2.2. Scruncher Mappings for Package Modules"><span class="headingNumber"><a href="#4" title="4. Update Header Comments">4</a>.<a href="#4_2" title="4. Update Header Comments -&gt; 4.2. Scruncher Settings Comment">2</a>.<a href="#4_2_2" title="4. Update Header Comments -&gt; 4.2. Scruncher Settings Comment -&gt; 4.2.2. Scruncher Mappings for Package Modules">2</a>. </span>Scruncher Mappings for Package Modules</h3>
+			<div class="contents3">
+				<p>For package modules, the convention is to use the blank scrunch namespace.</p>
+				
+				<p>Because package modules only define utility static methods and properties, and because they do not place private static methods or properties into an object along with the private static methods or properties of other modules, there is no need for them to use a unique scrunch namespace. By using the blank-to-blank scrunch namespace mapping, all identifiers prefixed with just an underscore will be scrunched down to scrunched identifiers prefixed with just an underscore. This same convention applies to namespace modules, library modules, alias modules, and data modules.</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">/*ScruncherSettings Mappings="=" LineCompacting="TRUE"*/
+</pre>
+			</div>
+			
+			<a name="4_2_3"></a>
+			<h3 class="heading3" title="4. Update Header Comments -&gt; 4.2. Scruncher Settings Comment -&gt; 4.2.3. Scruncher Mappings for Class Extension Modules"><span class="headingNumber"><a href="#4" title="4. Update Header Comments">4</a>.<a href="#4_2" title="4. Update Header Comments -&gt; 4.2. Scruncher Settings Comment">2</a>.<a href="#4_2_3" title="4. Update Header Comments -&gt; 4.2. Scruncher Settings Comment -&gt; 4.2.3. Scruncher Mappings for Class Extension Modules">3</a>. </span>Scruncher Mappings for Class Extension Modules</h3>
+			<div class="contents3">
+				<p>For class extension modules (not package extension modules), the convention is to use the letter used by the class that is being extended, with an underscore separated suffix appended that is unique to the extension module.</p>
+				
+				<p>For example, both the <code><a href="../reference/Uize.Fade.xFactory.html">Uize.Fade.xFactory</a></code> and <code><a href="../reference/Uize.Fade.xSeries.html">Uize.Fade.xSeries</a></code> modules are class extension modules because they extend the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> class. Now, the scrunch namespace used by the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> class is "b". Therefore, by the convention used for class extension modules, the scrunch namespace for the <code><a href="../reference/Uize.Fade.xFactory.html">Uize.Fade.xFactory</a></code> module is "b_a", and the scrunch namespace for the <code><a href="../reference/Uize.Fade.xSeries.html">Uize.Fade.xSeries</a></code> module is "b_b".</p>
+				
+				<p>Because these two class extension modules only extend the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> class and don't create subclasses, we don't want to use the letter "c", since this should be reserved for any module that were to define a <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> subclass. Also, we don't want the two extension modules to use the same scrunch namespace, since they could both be used at the same time to extend the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> class, and the scrunched names of any private properties or methods on instances of the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> class that are added by these extensions should not accidentally collide with one another.</p>
+				
+				<p>Therefore, what we do is we branch off of the scrunch namespace of the class being extended, using an added suffix that is unique to each extension module. This approach does have the drawback that there has to be cooperation across the various extension modules.</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">/*ScruncherSettings Mappings="=b_a" LineCompacting="TRUE"*/
+</pre>
+			</div>
+		</div>
+		
+		<a name="4_3"></a>
+		<h2 class="heading2" title="4. Update Header Comments -&gt; 4.3. Module Meta Data Comment"><span class="headingNumber"><a href="#4" title="4. Update Header Comments">4</a>.<a href="#4_3" title="4. Update Header Comments -&gt; 4.3. Module Meta Data Comment">3</a>. </span>Module Meta Data Comment</h2>
+		<div class="contents2">
+			<p>The module meta data comment is required for all UIZE modules and contains meta data information that is used on the <a href="../appendixes/sotu.html">SOTU (State of the UIZE)</a> page.</p>
+			
+			<p>The meta data contained in the module meta data comments of all UIZE JavaScript modules is scooped up by the <code>_uize-site-build-sotu.js</code> build script when it iterates through all the module files. This data is then presented on the State of the UIZE page in a sortable table. This information can then be used by UIZE framework developers to get a big picture view of where things stand with the framework, and can help in determining where development effort should be directed.</p>
+			
+			<p>The module meta data comment has the following syntax...</p>
+			
+			
+<pre class="sample-code">/* Module Meta Data
+  type: [module type]
+  importance: [0-10]
+  codeCompleteness: [0-100]
+  testCompleteness: [0-100]
+  docCompleteness: [0-100]
+*/
+</pre>
+			
+			<a name="4_3_1"></a>
+			<h3 class="heading3" title="4. Update Header Comments -&gt; 4.3. Module Meta Data Comment -&gt; 4.3.1. Module Meta Data Comment Entries"><span class="headingNumber"><a href="#4" title="4. Update Header Comments">4</a>.<a href="#4_3" title="4. Update Header Comments -&gt; 4.3. Module Meta Data Comment">3</a>.<a href="#4_3_1" title="4. Update Header Comments -&gt; 4.3. Module Meta Data Comment -&gt; 4.3.1. Module Meta Data Comment Entries">1</a>. </span>Module Meta Data Comment Entries</h3>
+			<div class="contents3">
+				<a name="4_3_1_1"></a>
+				<h4 class="heading4" title="4. Update Header Comments -&gt; 4.3. Module Meta Data Comment -&gt; 4.3.1. Module Meta Data Comment Entries -&gt; 4.3.1.1. type"><span class="headingNumber"><a href="#4" title="4. Update Header Comments">4</a>.<a href="#4_3" title="4. Update Header Comments -&gt; 4.3. Module Meta Data Comment">3</a>.<a href="#4_3_1" title="4. Update Header Comments -&gt; 4.3. Module Meta Data Comment -&gt; 4.3.1. Module Meta Data Comment Entries">1</a>.<a href="#4_3_1_1" title="4. Update Header Comments -&gt; 4.3. Module Meta Data Comment -&gt; 4.3.1. Module Meta Data Comment Entries -&gt; 4.3.1.1. type">1</a>. </span>type</h4>
+				<div class="contents4">
+					<p>The type of the JavaScript module.</p>
+					
+					<p>The value for this meta data entry should be one of the following, depending on the module...</p>
+					
+					<table class="list">
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><b>Class</b> - for modules that implemented classes</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><b>Package</b> - for modules that provide utility static methods and/or properties</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><b>Extension</b> - for modules that extend classes or packages</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><b>Data</b> - for modules that define data objects</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><b><a href="../javascript-reference/Object.html">Object</a></b> - for modules that define objects (as opposed to classes), such as the <code><a href="../reference/Uize.Color.html">Uize.Color</a></code> object module</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><b>Template</b> - for JavaScript template modules that are generated from <code>.js.jst</code> files</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><b>Test</b> - for unit test or functional test modules (subclasses of the <code><a href="../reference/Uize.Test.html">Uize.Test</a></code> class)</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><b>Namespace</b> - for modules that define namespaces</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><b>Alias</b> - for modules that are merely aliases to other modules (provided for backwards compatibility)</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><b>Library</b> - for modules that define libraries of modules that are to be bundled together by the auto scruncher build script</td></tr>
+					</table>
+				</div>
+				
+				<a name="4_3_1_2"></a>
+				<h4 class="heading4" title="4. Update Header Comments -&gt; 4.3. Module Meta Data Comment -&gt; 4.3.1. Module Meta Data Comment Entries -&gt; 4.3.1.2. importance"><span class="headingNumber"><a href="#4" title="4. Update Header Comments">4</a>.<a href="#4_3" title="4. Update Header Comments -&gt; 4.3. Module Meta Data Comment">3</a>.<a href="#4_3_1" title="4. Update Header Comments -&gt; 4.3. Module Meta Data Comment -&gt; 4.3.1. Module Meta Data Comment Entries">1</a>.<a href="#4_3_1_2" title="4. Update Header Comments -&gt; 4.3. Module Meta Data Comment -&gt; 4.3.1. Module Meta Data Comment Entries -&gt; 4.3.1.2. importance">2</a>. </span>importance</h4>
+				<div class="contents4">
+					<p>A number, in the range of <code>0</code> to <code>10</code>, indicating the overal importance of the module in the larger scheme of things.</p>
+					
+					<p>To get a sense of how modules should be ranked in importance, take a look at the <a href="../appendixes/sotu.html">SOTU (State of the UIZE)</a> page and note the importance that is assigned to modules with which you are familiar. A module like the <code><a href="../reference/Uize.html">Uize</a></code> base class, for example, is assigned the importance of <code>10</code>. Without the <code><a href="../reference/Uize.html">Uize</a></code> base class and namespace, pretty much nothing else in the framework can exist, so this is the most important module and has the highest importance possible.</p>
+					
+					<p>On the opposite end of the spectrum, a module like the <code><a href="../reference/Uize.String.Discombobulator.html">Uize.String.Discombobulator</a></code> package is assigned an importance of <code>0</code>. This module provides some very esoteric and hardly used functionality, and so it has the lowest importance possible. It's important to emphasize that having an importance of <code>0</code> doesn't mean that a module is useless and has no value - it just means that it is among the least important modules in the framework, in the larger scheme of things.</p>
+					
+					<p>In the middle of the importance spectrum, one finds modules like <code><a href="../reference/Uize.String.Lines.html">Uize.String.Lines</a></code>, <code><a href="../reference/Uize.Fx.html">Uize.Fx</a></code>, <code><a href="../reference/Uize.Date.html">Uize.Date</a></code>, <code><a href="../reference/Uize.Tooltip.html">Uize.Tooltip</a></code>, and many others. Towards the high end of the importance spectrum, but not right at the top, are modules like <code><a href="../reference/Uize.Node.html">Uize.Node</a></code>, <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, <code><a href="../reference/Uize.Test.html">Uize.Test</a></code>, <code><a href="../reference/Uize.Template.html">Uize.Template</a></code>, and others. Assigning an importance ranking to a module is not an exact science, and the rankings are likely to shift over time as the framework evolves and expands. Just make the best assessment you can.</p>
+				</div>
+				
+				<a name="4_3_1_3"></a>
+				<h4 class="heading4" title="4. Update Header Comments -&gt; 4.3. Module Meta Data Comment -&gt; 4.3.1. Module Meta Data Comment Entries -&gt; 4.3.1.3. codeCompleteness"><span class="headingNumber"><a href="#4" title="4. Update Header Comments">4</a>.<a href="#4_3" title="4. Update Header Comments -&gt; 4.3. Module Meta Data Comment">3</a>.<a href="#4_3_1" title="4. Update Header Comments -&gt; 4.3. Module Meta Data Comment -&gt; 4.3.1. Module Meta Data Comment Entries">1</a>.<a href="#4_3_1_3" title="4. Update Header Comments -&gt; 4.3. Module Meta Data Comment -&gt; 4.3.1. Module Meta Data Comment Entries -&gt; 4.3.1.3. codeCompleteness">3</a>. </span>codeCompleteness</h4>
+				<div class="contents4">
+					<p>A number, in the range of <code>0</code> to <code>100</code>, indicating the code completeness of the module as a percentage.</p>
+					
+					<p>The <code><a href="#4_3_1_3">codeCompleteness</a></code> value is a best guess estimate of how complete a module's code is. One could argue that a module is never complete, because it can always be improved and features can always be added to it. The <code><a href="#4_3_1_3">codeCompleteness</a></code> measure, however, is a measure of how complete the code is for an established feature set at any given point in time. Generally, a module should be 100% code complete before it is officially made public as part of the framework. This principle can be seen when viewing the <a href="../appendixes/sotu.html">SOTU</a> page, where you will notice that the overwhelming majority of modules are marked as being 100% code complete.</p>
+					
+					<p>Note that if the module is a unit test module, then the value of the <code><a href="#4_3_1_3">codeCompleteness</a></code> meta data entry for the module should correspond to the value of the <code><a href="#4_3_1_4">testCompleteness</a></code> meta data entry in the module that the unit test module is intended to test. It is far more acceptable for test modules to not be 100% code complete than it is for other types of modules.</p>
+				</div>
+				
+				<a name="4_3_1_4"></a>
+				<h4 class="heading4" title="4. Update Header Comments -&gt; 4.3. Module Meta Data Comment -&gt; 4.3.1. Module Meta Data Comment Entries -&gt; 4.3.1.4. testCompleteness"><span class="headingNumber"><a href="#4" title="4. Update Header Comments">4</a>.<a href="#4_3" title="4. Update Header Comments -&gt; 4.3. Module Meta Data Comment">3</a>.<a href="#4_3_1" title="4. Update Header Comments -&gt; 4.3. Module Meta Data Comment -&gt; 4.3.1. Module Meta Data Comment Entries">1</a>.<a href="#4_3_1_4" title="4. Update Header Comments -&gt; 4.3. Module Meta Data Comment -&gt; 4.3.1. Module Meta Data Comment Entries -&gt; 4.3.1.4. testCompleteness">4</a>. </span>testCompleteness</h4>
+				<div class="contents4">
+					<p>A number, in the range of <code>0</code> to <code>100</code>, indicating the completeness of unit tests for the module as a percentage.</p>
+					
+					<p>If the module is a unit test module, then the value of the <code><a href="#4_3_1_4">testCompleteness</a></code> meta data entry for the module should be <code>100</code>, since unit test modules are not themselves unit tested. Assigning them test complete just means that they won't sort along with other modules that truly are in need of unit testing when sorting the <a href="../appendixes/sotu.html">SOTU</a> table by its "TEST" column. Instead, they appear "checked off" as done, with regards to unit testing.</p>
+					
+					<p>For regular / non-unit test modules, the <code><a href="#4_3_1_4">testCompleteness</a></code> value is a best guess estimate of how complete the unit test for the module is. To determine a value, you can consider what percentage of a module's static methods, static properties, instance methods, instance properties, etc. are tested. Bear in mind that if, say, 50% of the features of a module are tested, you may still wish to assign a <code><a href="#4_3_1_4">testCompleteness</a></code> value for the module that is less than or greater than 50%, based upon how much coding work you feel there is to writing the remaining tests. Any value that you assign to the <code><a href="#4_3_1_4">testCompleteness</a></code> meta data entry for a module should correspond to the value of the <code><a href="#4_3_1_3">codeCompleteness</a></code> meta data entry for that module's companion unit test module.</p>
+				</div>
+				
+				<a name="4_3_1_5"></a>
+				<h4 class="heading4" title="4. Update Header Comments -&gt; 4.3. Module Meta Data Comment -&gt; 4.3.1. Module Meta Data Comment Entries -&gt; 4.3.1.5. docCompleteness"><span class="headingNumber"><a href="#4" title="4. Update Header Comments">4</a>.<a href="#4_3" title="4. Update Header Comments -&gt; 4.3. Module Meta Data Comment">3</a>.<a href="#4_3_1" title="4. Update Header Comments -&gt; 4.3. Module Meta Data Comment -&gt; 4.3.1. Module Meta Data Comment Entries">1</a>.<a href="#4_3_1_5" title="4. Update Header Comments -&gt; 4.3. Module Meta Data Comment -&gt; 4.3.1. Module Meta Data Comment Entries -&gt; 4.3.1.5. docCompleteness">5</a>. </span>docCompleteness</h4>
+				<div class="contents4">
+					<p>A number, in the range of <code>0</code> to <code>100</code>, indicating the completeness of documentation for the module as a percentage.</p>
+					
+					<p>The <code><a href="#4_3_1_5">docCompleteness</a></code> value is a best guess estimate of how complete the documentation for the module is. To determine a value, you can consider what percentage of a module's static methods, static properties, instance methods, instance properties, etc. are documented. Bear in mind that if, say, 50% of the features of a module are documented, you may still wish to assign a <code><a href="#4_3_1_5">docCompleteness</a></code> value for the module that is less than or greater than 50%, based upon how much work you feel there is to writing the remaining documentation.</p>
+				</div>
+			</div>
+			
+			<a name="4_3_2"></a>
+			<h3 class="heading3" title="4. Update Header Comments -&gt; 4.3. Module Meta Data Comment -&gt; 4.3.2. So Long, One Hundred Percent"><span class="headingNumber"><a href="#4" title="4. Update Header Comments">4</a>.<a href="#4_3" title="4. Update Header Comments -&gt; 4.3. Module Meta Data Comment">3</a>.<a href="#4_3_2" title="4. Update Header Comments -&gt; 4.3. Module Meta Data Comment -&gt; 4.3.2. So Long, One Hundred Percent">2</a>. </span>So Long, One Hundred Percent</h3>
+			<div class="contents3">
+				<p>Attaining the sought after value of <code>100</code> for either of the <code><a href="#4_3_1_3">codeCompleteness</a></code>, <code><a href="#4_3_1_3">codeCompleteness</a></code>, or <code><a href="#4_3_1_5">docCompleteness</a></code> meta data entries is unfortunately not the end of the story.</p>
+				
+				<p>The value of any one of these entries may have to be bumped back down again as the framework evolves. A module that used to be code complete, for example, may cease to be code complete if its functionality is expanded but not completely implemented. Similarly, test completeness may be bumped back down from 100% if the module's functionality is expanded and the unit tests are not completely updated to keep up with the added features. The same effect can apply to documentation completeness, if new functionality is added without fully documenting it.</p>
+			</div>
+			
+			<a name="4_3_3"></a>
+			<h3 class="heading3" title="4. Update Header Comments -&gt; 4.3. Module Meta Data Comment -&gt; 4.3.3. Module Meta Data in JavaScript Template Modules"><span class="headingNumber"><a href="#4" title="4. Update Header Comments">4</a>.<a href="#4_3" title="4. Update Header Comments -&gt; 4.3. Module Meta Data Comment">3</a>.<a href="#4_3_3" title="4. Update Header Comments -&gt; 4.3. Module Meta Data Comment -&gt; 4.3.3. Module Meta Data in JavaScript Template Modules">3</a>. </span>Module Meta Data in JavaScript Template Modules</h3>
+			<div class="contents3">
+				<p>Getting the <a href="#4_3">Module Meta Data Comment</a> into <a href="javascript-templates.html">JavaScript template modules</a> is a little bit trickier than regular JavaScript modules, but still quite doable.</p>
+				
+				<p>JavaScript template modules don't have to be generated from JavaScript template (<code>.js.jst</code>) files, but they generally are. It is the <code>_build-jst-modules.js</code> build script that scans the modules folder for <code>.js.jst</code> files and generates <code>.js</code> JavaScript template modules from them. Now, all that the <code>_uize-site-build-sotu.js</code> build script knows and cares about is regular JavaScript modules (<code>.js</code> files in the modules folder). Therefore, the <a href="#4_3">Module Meta Data Comment</a> for a JavaScript template module needs to be in the generated JavaScript file. In order to get there, it needs to come from the <code>.js.jst</code> file. Since JavaScript templates <b>can</b> contain JavaScript comments that <b>do</b> make their way into the compiled JavaScript code, getting the <a href="#4_3">Module Meta Data Comment</a> into the <code>.js.jst</code> file can be accomplished as follows...</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">&lt;%@ input ({idPrefix:'string'}) %&gt;&lt;%/* Module Meta Data
+  type: Template
+  importance: 2
+  codeCompleteness: 100
+  testCompleteness: 0
+  docCompleteness: 100
+*/%&gt;&lt;%@
+  /* guts of template follows... */
+%&gt;
+</pre>
+				
+				<p>So it's admittedly a little bit ugly / awkward, but it works! In the example shown above, the <a href="#4_3">Module Meta Data Comment</a> is close to the top of the JavaScript template file, but after the <code>input</code> directive. It doesn't have to be after the directive, but it feels right to have the directives first. Notice how there is no whitespace between the tokens that enclose the directive, the module meta data comment, and what follows the comment. This prevents unwanted extra whitespace from creeping into the generated JavaScript template module.</p>
+			</div>
+		</div>
+	</div>
+	
+	<a name="5"></a>
+	<h1 class="heading1" title="5. Implement the Module"><span class="headingNumber"><a href="#5" title="5. Implement the Module">5</a>. </span>Implement the Module</h1>
+	<div class="contents1">
+		<p>When implementing your new UIZE module, there are a number of considerations to keep in mind...</p>
+		
+		<table class="list">
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><b>Follow the Coding Style Guide</b> - Be sure to be aware of the recommended coding conventions for JavaScript code. For a refresher, consult the <a href="../appendixes/javascript-code-conventions.html">JavaScript Code Conventions</a> appendix.</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><b>Write Optimized Code</b> - Make sure to optimize your code for both performance and code size. To learn some useful optimization tips and tricks, consult the <a href="../appendixes/javascript-optimization.html">JavaScript Optimization</a> appendix.</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><b>Write Scruncher-ready Code</b> - Make sure your UIZE module's code is Scruncher-ready. For a refresher on scrunching, consult the explainer <a href="all-about-scrunching.html">All About Scrunching</a>.</td></tr>
+		</table>
+	</div>
+	
+	<a name="6"></a>
+	<h1 class="heading1" title="6. Document the Module"><span class="headingNumber"><a href="#6" title="6. Document the Module">6</a>. </span>Document the Module</h1>
+	<div class="contents1">
+		<p>New modules added to the UIZE JavaScript Framework should, ideally, be comprehensively document.</p>
+		
+		<p>When documenting your new UIZE module, keep the following considerations in mind...</p>
+		
+		<a name="6_1"></a>
+		<h2 class="heading2" title="6. Document the Module -&gt; 6.1. At Least Have a Skeleton"><span class="headingNumber"><a href="#6" title="6. Document the Module">6</a>.<a href="#6_1" title="6. Document the Module -&gt; 6.1. At Least Have a Skeleton">1</a>. </span>At Least Have a Skeleton</h2>
+		<div class="contents2">
+			<p>If time does not allow every feature of a new module to be documented in a lot of detail, at least make sure that every feature is mentioned, along with some minimal information about the feature.</p>
+			
+			<p>Build up the skeleton of your documentation in the following order...</p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>For methods, at least have a basic summary line about the method, along with a <b>SYNTAX</b> sample code block.</td></tr>
+			</table>
+		</div>
+		
+		<a name="6_2"></a>
+		<h2 class="heading2" title="6. Document the Module -&gt; 6.2. Add Flesh to the Skeleton"><span class="headingNumber"><a href="#6" title="6. Document the Module">6</a>.<a href="#6_2" title="6. Document the Module -&gt; 6.2. Add Flesh to the Skeleton">2</a>. </span>Add Flesh to the Skeleton</h2>
+		<div class="contents2">
+			<p>Once you have the basic skeleton of the documentation, convering in a very sparse way all the features of the module, you can then proceed to flesh out the documentation in the following order...</p>
+		</div>
+		
+		<a name="6_3"></a>
+		<h2 class="heading2" title="6. Document the Module -&gt; 6.3. Update the docCompleteness Meta Data Entry"><span class="headingNumber"><a href="#6" title="6. Document the Module">6</a>.<a href="#6_3" title="6. Document the Module -&gt; 6.3. Update the docCompleteness Meta Data Entry">3</a>. </span>Update the docCompleteness Meta Data Entry</h2>
+		<div class="contents2">
+			<p>Once you've written as much documentation as you're going to write, make sure to update the value for the <code><a href="#4_3_1_5">docCompleteness</a></code> meta data entry to reflect how complete the documentation is, using the following rough guide to completeness milestones...</p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>docCompleteness: 2</code> - You only wrote the most basic "Introduction" paragraph, with no in-depth discussion of the module.</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>docCompleteness: 20</code> - You wrote the basic "Introduction" paragraph, along with a skeleton that lists all the features of the module, such as static and instance methods, static and instance properties, set-get properties, static and instance events, implied nodes (for widget classes), etc.</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>docCompleteness: 80</code> - You wrote the basic "Introduction" paragraph, along with thorough reference documentation for all the features of the modules. There is not yet a thorough introduction and explanation of the module.</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>docCompleteness: 100</code> - You wrote thorough reference documentation for all the features of the modules, and you wrote a thorough introduction and explanation of the module. Therefore, the documentation is complete! (yay)</td></tr>
+			</table>
+		</div>
+	</div>
+	
+	<a name="7"></a>
+	<h1 class="heading1" title="7. Create Examples for the Module"><span class="headingNumber"><a href="#7" title="7. Create Examples for the Module">7</a>. </span>Create Examples for the Module</h1>
+	<div class="contents1">
+		<p>New modules added to the UIZE JavaScript Framework should have at least one example page to serve as a real life test and demonstration of the module's key capabilities.</p>
+		
+		<p>An example page for a module should be only as complicated as is necessary to provide a compelling / convincing demonstration for the module, and as simple as possible so that a developer considering using the module doesn't have to wade through unnecessary complexity in order to get to the crux of how a module is used.</p>
+		
+		<a name="7_1"></a>
+		<h2 class="heading2" title="7. Create Examples for the Module -&gt; 7.1. Modules That Don&apos;t Warrant Examples"><span class="headingNumber"><a href="#7" title="7. Create Examples for the Module">7</a>.<a href="#7_1" title="7. Create Examples for the Module -&gt; 7.1. Modules That Don&apos;t Warrant Examples">1</a>. </span>Modules That Don't Warrant Examples</h2>
+		<div class="contents2">
+			<p>Example pages are neither necessary nor particularly useful for certain kinds of modules, including data modules, template modules, test modules, namespace modules, alias modules, and library modules.</p>
+			
+			<p>For template modules that generate HTML for specific widget classes, these template modules can be demonstrated along with the widget class modules for which they are intended. For template modules that are not widget HTML generators, example pages can be created.</p>
+		</div>
+	</div>
+	
+	<a name="8"></a>
+	<h1 class="heading1" title="8. Write Unit Tests"><span class="headingNumber"><a href="#8" title="8. Write Unit Tests">8</a>. </span>Write Unit Tests</h1>
+	<div class="contents1">
+		<p>New modules added to the UIZE JavaScript Framework should be thoroughly unit tested.</p>
+		
+		<p>This involves the creation of a companion <a href="#8_1">Unit Test Module</a> for your new module, and the incorporation of that unit test module into the <a href="#8_2">UIZE Unit Tests</a>.</p>
+		
+		<a name="8_1"></a>
+		<h2 class="heading2" title="8. Write Unit Tests -&gt; 8.1. Unit Test Module"><span class="headingNumber"><a href="#8" title="8. Write Unit Tests">8</a>.<a href="#8_1" title="8. Write Unit Tests -&gt; 8.1. Unit Test Module">1</a>. </span>Unit Test Module</h2>
+		<div class="contents2">
+			<p>Each UIZE module should have a companion test module (except test modules themselves, of course).</p>
+			
+			<p>A unit test module for a UIZE module should be placed under the <code><a href="../reference/Uize.Test.html">Uize.Test</a></code> namespace, and should be named by appending the module name to "Uize.Test.". So, for example, the unit test module for the module <code><a href="../reference/Uize.Data.html">Uize.Data</a></code> would be named <code><a href="../reference/Uize.Test.Uize.Data.html">Uize.Test.Uize.Data</a></code>. To get a sense for how unit test modules should be implemented, take a look through the source code of existing test modules. When implementing your unit test module, be sure to follow these same guidelines for creating regular UIZE modules, since many of the same principles apply, but keep the following points in mind...</p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Test modules only need to have the most basic "Introduction" paragraph in order to be considered documentation complete (see the <code><a href="../reference/Uize.Test.Uize.Data.html">Uize.Test.Uize.Data</a></code> module for an example of documentation for a test module).</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>The <code><a href="#4_3_1_4">testCompleteness</a></code> meta data entry in the <a href="#4_3">Module Meta Data Comment</a> can be automatically marked as <code>100</code> for test modules, since it is not desirable to test test modules with yet other test module test modules.</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>The value for the <code><a href="#4_3_1_2">importance</a></code> meta data entry in the <a href="#4_3">Module Meta Data Comment</a> for a test module should never be greater than the <code><a href="#4_3_1_2">importance</a></code> value for the module it tests, and should generally be somewhat less.</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>The <code><a href="#4_3_1_3">codeCompleteness</a></code> value for a test module should be identical to the <code><a href="#4_3_1_4">testCompleteness</a></code> value for the module that it tests.</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Test modules do not need example pages.</td></tr>
+			</table>
+		</div>
+		
+		<a name="8_2"></a>
+		<h2 class="heading2" title="8. Write Unit Tests -&gt; 8.2. UIZE Unit Tests"><span class="headingNumber"><a href="#8" title="8. Write Unit Tests">8</a>.<a href="#8_2" title="8. Write Unit Tests -&gt; 8.2. UIZE Unit Tests">2</a>. </span>UIZE Unit Tests</h2>
+		<div class="contents2">
+			<p>The unit test suite for the UIZE JavaScript Framework is implemented in the <code>Uize.Test.UnitTests</code> module.</p>
+			
+			<p>The <code>Uize.Test.UnitTests</code> module is a test module that defines an uber test comprised of all the test modules that test individual modules of the framework, and is used by build scripts that automate testing of the framework. When creating a new UIZE module and, therefore, creating its companion <a href="#8_1">Unit Test Module</a>, the unit test module needs to be entered into the <code>Uize.Test.UnitTests</code> module. This involves adding a line to the file in order to add the test to the sequence of tests performed by the <code>Uize.Test.UnitTests</code> module. When you open up the source code for the <code>Uize.Test.UnitTests</code> module, it should be pretty clear what to do.</p>
+		</div>
+	</div>
+	
+	<a name="9"></a>
+	<h1 class="heading1" title="9. Revisit This Explainer, As Needed"><span class="headingNumber"><a href="#9" title="9. Revisit This Explainer, As Needed">9</a>. </span>Revisit This Explainer, As Needed</h1>
+	<div class="contents1">
+		<p>Creating a new module for the UIZE JavaScript Framework is no trivial matter - you're <b>growing</b> a framework that many developers will be building applications and features on.</p>
+		
+		<p>Don't be afraid to revisit this document as a refresher when adding a new module, and as a last step / checklist before finally committing your new module to the framework. If it takes a few minutes to skim through this document and see if you've forgotten or missed anything, it might be a few minutes well spent.</p>
+	</div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

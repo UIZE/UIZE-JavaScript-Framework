@@ -1,0 +1,15 @@
+The =Uize.Fx= module can now be extended, with extension modules that can provide support for animating CSS style properties that are not supported in the base =Uize.Fx= module.
+
+The =Uize.Fx= module is extended by using its new =Uize.Fx.defineStylePropertiesProfile= static method. This method lets you define a profile for one or more CSS style properties, and such a profile will then allow values for those properties to be faded using the =Uize.Fx.fadeStyle= static method. Furthermore, any other modules that use the =Uize.Fx.fadeStyle= method in their implementation will also gain the benefit of supporting fading for those style properties.
+
+As an example, the new =Uize.Fx.xTextShadow= module uses the =Uize.Fx.defineStylePropertiesProfile= method to add support for the CSS3 =text-shadow= style property. Once this module has been loaded, the =Uize.Widget.HoverFader= widget class, which uses the =Uize.Fx.fadeStyle= method in its implementation, will be able to support fading of text shadows.
+
+[[Uize.Fx][LEARN MORE]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-12-01 - Uize.Fx Now Extensible
+....................................................................................

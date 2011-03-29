@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2010-08-03 - NEW MODULE: Uize.Node.Classes | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="The new Uize.Node.Classes module is a package module with static methods to facilitate manipulation of the value of the className property of DOM nodes, with support for adding classes, removing classes, toggling classes, and lots more."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2010.html" class="breadcrumb breadcrumbWithArrow">2010 NEWS</a>
+	2010-08-03 - NEW MODULE: Uize.Node.Classes
+
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1">1. Benefits</a>
+				<ul>
+					<li><a href="#1_1" title="The methdos of the Uize.Node.Classes module make it much easier to manipulate classes than it would be to use regular expressions, and one&apos;s code becomes easier to read and more elegant.">1.1. More Elegant, Easier to Read</a></li>
+					<li><a href="#1_2" title="In addition to ease of use, the Uize.Node.Classes module introduces a powerful, higher level construct called a state.">1.2. Powerful State Paradigm</a></li>
+				</ul>
+			</li>
+			<li><a href="#2" title="The node class manipulation functionality was not added directly into the Uize.Node module in order to not impact the current size of that module.">2. A Safe Introduction</a></li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<p>The new <code><a href="../reference/Uize.Node.Classes.html">Uize.Node.Classes</a></code> module is a package module with static methods to facilitate manipulation of the value of the <code>className</code> property of DOM nodes, with support for adding classes, removing classes, toggling classes, and lots more.</p>
+	
+	<a name="1"></a>
+	<h1 class="heading1" title="1. Benefits"><span class="headingNumber"><a href="#1" title="1. Benefits">1</a>. </span>Benefits</h1>
+	<div class="contents1">
+		<a name="1_1"></a>
+		<h2 class="heading2" title="1. Benefits -&gt; 1.1. More Elegant, Easier to Read"><span class="headingNumber"><a href="#1" title="1. Benefits">1</a>.<a href="#1_1" title="1. Benefits -&gt; 1.1. More Elegant, Easier to Read">1</a>. </span>More Elegant, Easier to Read</h2>
+		<div class="contents2">
+			<p>The methdos of the <code><a href="../reference/Uize.Node.Classes.html">Uize.Node.Classes</a></code> module make it much easier to manipulate classes than it would be to use regular expressions, and one's code becomes easier to read and more elegant.</p>
+			
+			<p>To illustrate this, consider the following example of adding a CSS class to a node's <code>className</code> property...</p>
+			
+			<p><span class="allCaps">BEFORE</span></p>
+			
+			
+<pre class="sample-code">var node = Uize.Node.getById ('recommendationsPod');
+if (!/\bpodPopulated\b/.test (node.className)) {
+  node.className += ' podPopulated';
+}
+</pre>
+			
+			<p><span class="allCaps">AFTER</span></p>
+			
+			
+<pre class="sample-code">Uize.Node.Classes.addClass ('recommendationsPod','podPopulated');
+</pre>
+			
+			<p>As you can see, the code using the <code>Uize.Node.Classes.addClass</code> is much easier to read and understand.</p>
+		</div>
+		
+		<a name="1_2"></a>
+		<h2 class="heading2" title="1. Benefits -&gt; 1.2. Powerful State Paradigm"><span class="headingNumber"><a href="#1" title="1. Benefits">1</a>.<a href="#1_2" title="1. Benefits -&gt; 1.2. Powerful State Paradigm">2</a>. </span>Powerful State Paradigm</h2>
+		<div class="contents2">
+			<p>In addition to ease of use, the <code><a href="../reference/Uize.Node.Classes.html">Uize.Node.Classes</a></code> module introduces a powerful, higher level construct called a state.</p>
+			
+			<p>The State Related Methods that support the state paradigm make it much easier to manage the classes in the <code>className</code> property of a node to reflect application state. Consider an example where you want the CSS class "selected" to be present in the <code>className</code> property of a node with the <code>id</code> of <code>'recommendationsPod'</code> when the application variable <code>podIsSelected</code> is set to <code>true</code>, and to be absent when the variable is set to <code>false</code>. Your application will have updater code to update the <code>className</code> of the node to reflect the state of the <code>podIsSelected</code> variable. This updater code may not know or trust what the current state of the <code>className</code> property of the node might be, so it may test first to see if the "selected" class should be added or removed. You might write the code as follows...</p>
+			
+			<p><span class="allCaps">BEFORE</span></p>
+			
+			
+<pre class="sample-code">if (podIsSelected) {
+  Uize.Node.Classes.addClass ('recommendationsPod','selected');
+} else {
+  Uize.Node.Classes.removeClass ('recommendationsPod','selected');
+}
+</pre>
+			
+			<p>Well, the <code>Uize.Node.Classes.setState</code> static method makes this type of update operation a lot simpler. Instead of conditionally adding or removing the class, you simply set its state as follows...</p>
+			
+			<p><span class="allCaps">AFTER</span></p>
+			
+			
+<pre class="sample-code">Uize.Node.Classes.setState ('recommendationsPod','selected',podIsSelected);
+</pre>
+			
+			<p>This is a very simple use case, but the State Related Methods of the <code><a href="../reference/Uize.Node.Classes.html">Uize.Node.Classes</a></code> module also support more sophisticated cases.</p>
+		</div>
+	</div>
+	
+	<a name="2"></a>
+	<h1 class="heading1" title="2. A Safe Introduction"><span class="headingNumber"><a href="#2" title="2. A Safe Introduction">2</a>. </span>A Safe Introduction</h1>
+	<div class="contents1">
+		<p>The node class manipulation functionality was not added directly into the <code><a href="../reference/Uize.Node.html">Uize.Node</a></code> module in order to not impact the current size of that module.</p>
+		
+		<p>In time, these new features may find their way into the base layer modules in some fashion, but a separate new module is an appropriate form in which to feed these new features into the framework without impacting existing code. Going forward, widget classes that wish to use node class name manipulation as a means of reflecting instance state can require the <code><a href="../reference/Uize.Node.Classes.html">Uize.Node.Classes</a></code> module and use its methods.</p>
+	</div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

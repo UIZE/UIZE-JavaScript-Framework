@@ -1,0 +1,13 @@
+Reference documentation has been completed for the =Uize.Widget.Collection= widget class.
+
+The =Uize.Widget.Collection= module defines the =Uize.Widget.Collection= widget class, a subclass of =Uize.Widget= that implements a widget for managing a collection of items, with support for managing selected state of items (including non-contiguous selection, range selection, and controls for selecting all, selecting none, and removing selected items), and methods by which application code can manipulate the collection.
+
+[[Uize.Widget.Collection][LEARN MORE]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-12-10 - NEW DOCUMENTATION: Uize.Widget.Collection
+....................................................................................

@@ -1,0 +1,238 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Date Picker - HTML Source Code | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework HTML example source code"/>
+	<meta name="description" content="This is the source code for the Date Picker example"/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../../css/page.css"/>
+	<link rel="stylesheet" href="../../css/page.source.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../../index.html" title="UIZE JavaScript Framework home"></a>
+	SOURCE CODE: Date Picker
+	<div id="page-actions" class="pageActions">
+		<a href="../date-picker.html" class="buttonLink">VIEW EXAMPLE</a>
+	</div>
+</h1>
+
+<pre>
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+&lt;head&gt;
+  &lt;title&gt;Date Picker | JavaScript Examples | UIZE JavaScript Framework&lt;/title&gt;
+  &lt;meta name="keywords" content="widget form Uize.Widget.Picker.Date"/&gt;
+  &lt;meta name="description" content="The date picker widget lets users pick dates within configured date ranges, inside a shared date picker dialog. Many configurations are demonstrated."/&gt;
+  &lt;link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/&gt;
+  &lt;link rel="stylesheet" href="../css/page.css"/&gt;
+  &lt;link rel="stylesheet" href="../css/page.example.css"/&gt;
+  &lt;link rel="stylesheet" href="../css/widget.dialog.css"/&gt;
+  &lt;link rel="stylesheet" href="../css/widget.dialog.picker.css"/&gt;
+  &lt;link rel="stylesheet" href="../css/widget.picker.date.css"/&gt;
+  &lt;link rel="stylesheet" href="../css/widget.calendar.css"/&gt;
+  &lt;link rel="stylesheet" href="css/params-table.css"/&gt;
+  &lt;style type="text/css"&gt;
+    .dialog .calendarContainer {
+      border:none;
+    }
+    table.paramsTable td.fieldLabel {
+      padding:0 7px;
+    }
+    table.paramsTable td {
+      padding:0;
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+&lt;script type="text/javascript" src="../js/Uize.js"&gt;&lt;/script&gt;
+
+&lt;h1 class="document-title"&gt;
+  &lt;a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"&gt;&lt;/a&gt;
+  &lt;a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow"&gt;JAVASCRIPT EXAMPLES&lt;/a&gt;
+  Date Picker
+  &lt;div id="page-actions" class="pageActions"&gt;
+    &lt;a href="source-code/date-picker.html" class="buttonLink"&gt;SOURCE&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/h1&gt;
+
+&lt;div class="main"&gt;
+  &lt;!-- explanation copy --&gt;
+
+  &lt;div class="explanation"&gt;
+    &lt;p&gt;In this example, many instances of the &lt;a href="../reference/Uize.Widget.Picker.Date.html"&gt;&lt;code&gt;Uize.Widget.Picker.Date&lt;/code&gt;&lt;/a&gt; class are being wired up to let you select dates, with each date picker configured slightly differently.&lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;!-- HTML for the date picker form field --&gt;
+
+  &lt;form&gt;
+    &lt;table class="paramsTable" style="margin:auto;"&gt;
+      &lt;thead&gt;
+        &lt;tr&gt;
+          &lt;td colspan="2" class="tableHeading"&gt;Each Date Picker is Configured Differently&lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/thead&gt;
+      &lt;tr&gt;
+        &lt;td class="fieldLabel"&gt;select any date&lt;/td&gt;
+        &lt;td&gt;
+          &lt;input id="page_datePickerAnyDate-input" type="text"/&gt;&lt;a id="page_datePickerAnyDate_selector" href="javascript://" class="datePickerIcon"&gt;&lt;img src="../images/blank.gif"&gt;&lt;/a&gt;
+        &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td class="fieldLabel"&gt;select a day up until today&lt;/td&gt;
+        &lt;td&gt;
+          &lt;input id="page_datePickerUntilToday-input" type="text"/&gt;&lt;a id="page_datePickerUntilToday_selector" href="javascript://" class="datePickerIcon"&gt;&lt;img src="../images/blank.gif"&gt;&lt;/a&gt;
+        &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td class="fieldLabel"&gt;select a day from today onwards&lt;/td&gt;
+        &lt;td&gt;
+          &lt;input id="page_datePickerFromToday-input" type="text"/&gt;&lt;a id="page_datePickerFromToday_selector" href="javascript://" class="datePickerIcon"&gt;&lt;img src="../images/blank.gif"&gt;&lt;/a&gt;
+        &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td class="fieldLabel"&gt;select a day this week&lt;/td&gt;
+        &lt;td&gt;
+          &lt;input id="page_datePickerThisWeek-input" type="text"/&gt;&lt;a id="page_datePickerThisWeek_selector" href="javascript://" class="datePickerIcon"&gt;&lt;img src="../images/blank.gif"&gt;&lt;/a&gt;
+        &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td class="fieldLabel"&gt;select a day this month&lt;/td&gt;
+        &lt;td&gt;
+          &lt;input id="page_datePickerThisMonth-input" type="text"/&gt;&lt;a id="page_datePickerThisMonth_selector" href="javascript://" class="datePickerIcon"&gt;&lt;img src="../images/blank.gif"&gt;&lt;/a&gt;
+        &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td class="fieldLabel"&gt;select a day this year&lt;/td&gt;
+        &lt;td&gt;
+          &lt;input id="page_datePickerThisYear-input" type="text"/&gt;&lt;a id="page_datePickerThisYear_selector" href="javascript://" class="datePickerIcon"&gt;&lt;img src="../images/blank.gif"&gt;&lt;/a&gt;
+        &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td class="fieldLabel"&gt;date picker with initial value&lt;/td&gt;
+        &lt;td&gt;
+          &lt;input id="page_datePickerInitialValue-input" type="text" value="2009-01-01"/&gt;&lt;a id="page_datePickerInitialValue_selector" href="javascript://" class="datePickerIcon"&gt;&lt;img src="../images/blank.gif"&gt;&lt;/a&gt;
+        &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td class="fieldLabel"&gt;custom display format -- {YYYY}/{monthNo}/{dayNo}&lt;/td&gt;
+        &lt;td&gt;
+          &lt;input id="page_datePickerCustomFormatYyyyMonthNoDayNo-input" type="text" value="2008/2/29"/&gt;&lt;a id="page_datePickerCustomFormatYyyyMonthNoDayNo_selector" href="javascript://" class="datePickerIcon"&gt;&lt;img src="../images/blank.gif"&gt;&lt;/a&gt;
+        &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td class="fieldLabel"&gt;custom display format -- {dayNo}/{monthNo}/{YYYY}&lt;/td&gt;
+        &lt;td&gt;
+          &lt;input id="page_datePickerCustomFormatDayNoMonthNoYyyy-input" type="text" value="29/2/2008"/&gt;&lt;a id="page_datePickerCustomFormatDayNoMonthNoYyyy_selector" href="javascript://" class="datePickerIcon"&gt;&lt;img src="../images/blank.gif"&gt;&lt;/a&gt;
+        &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td class="fieldLabel"&gt;date picker with pretty format&lt;/td&gt;
+        &lt;td&gt;
+          &lt;input id="page_datePickerPrettyFormat-input" type="text" value="21 January 1981"/&gt;&lt;a id="page_datePickerPrettyFormat_selector" href="javascript://" class="datePickerIcon"&gt;&lt;img src="../images/blank.gif"&gt;&lt;/a&gt;
+        &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td class="fieldLabel"&gt;date picker with no manual input&lt;/td&gt;
+        &lt;td&gt;
+          &lt;input id="page_datePickerNoManualInput-input" type="text"/&gt;&lt;a id="page_datePickerNoManualInput_selector" href="javascript://" class="datePickerIcon"&gt;&lt;img src="../images/blank.gif"&gt;&lt;/a&gt;
+        &lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/table&gt;
+  &lt;/form&gt;
+&lt;/div&gt;
+
+&lt;!-- JavaScript code to wire up the page UI --&gt;
+
+&lt;script type="text/javascript"&gt;
+
+Uize.module ({
+  required:[
+    'UizeDotCom.Page.Example.library',
+    'UizeDotCom.Page.Example',
+    'Uize.Widget.Picker.Date',
+    'Uize.Date'
+  ],
+  builder:function () {
+    /*** create the example page widget ***/
+      var page = window.page = new UizeDotCom.Page.Example;
+
+    /*** add the date picker widgets ***/
+      // all our date pickers use the same dialog widget class for the uize.com Web site
+      Uize.Widget.Picker.Date.set ({dialogWidgetClass:'UizeDotCom.DialogDate'});
+
+      var today = new Date;
+
+      /*** date picker - pick any date ***/
+        page.addChild ('datePickerAnyDate',Uize.Widget.Picker.Date);
+
+      /*** date picker - pick a day up until today ***/
+        page.addChild ('datePickerUntilToday',Uize.Widget.Picker.Date,{maxValue:today});
+
+      /*** date picker - pick a day from today onwards ***/
+        page.addChild ('datePickerFromToday',Uize.Widget.Picker.Date,{minValue:today});
+
+      /*** date picker - pick a day this week ***/
+        page.addChild ('datePickerThisWeek',Uize.Widget.Picker.Date,Uize.Date.getRangeAround ('','week'));
+
+      /*** date picker - pick a day this month ***/
+        page.addChild ('datePickerThisMonth',Uize.Widget.Picker.Date,Uize.Date.getRangeAround ('','month'));
+
+      /*** date picker - pick a day this year ***/
+        page.addChild ('datePickerThisYear',Uize.Widget.Picker.Date,Uize.Date.getRangeAround ('','year'));
+
+      /*** date picker - with initial value ***/
+        page.addChild ('datePickerInitialValue',Uize.Widget.Picker.Date);
+
+      /*** date picker - custom display format -- {YYYY}/{monthNo}/{dayNo} ***/
+        page.addChild (
+          'datePickerCustomFormatYyyyMonthNoDayNo',
+          Uize.Widget.Picker.Date,{displayFormat:'{YYYY}/{monthNo}/{dayNo}'}
+        );
+
+      /*** date picker - custom display format (DD/MM/YYYY) ***/
+        page.addChild (
+          'datePickerCustomFormatDayNoMonthNoYyyy',
+          Uize.Widget.Picker.Date,{displayFormat:'{dayNo}/{monthNo}/{YYYY}'}
+        );
+
+      /*** date picker - pretty display format ***/
+        page.addChild (
+          'datePickerPrettyFormat',Uize.Widget.Picker.Date,{displayFormat:'{dayNo} {monthName} {YYYY}'}
+        );
+
+      /*** date picker - no manual input ***/
+        page.addChild ('datePickerNoManualInput',Uize.Widget.Picker.Date,{allowManualEntry:false});
+
+    /*** wire up the page widget ***/
+      page.wireUi ();
+  }
+});
+
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+
+</pre>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.library',
+		'UizeDotCom.Page'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page).wireUi ()}
+});
+
+</script>
+
+</body></html>

@@ -1,0 +1,1140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Uize.Url | Documentation | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework Documentation Uize.Url module reference documentation"/>
+	<meta name="description" content="The Uize.Url module eases working with URLs, supporting query string parsing and serialization, resolving relative URLs to absolute URLs, and more."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../javascript-modules-index.html" class="breadcrumb breadcrumbWithArrow">MODULES</a>
+	<a href="Uize.html" title="View reference for Uize" class="breadcrumb">Uize</a>.<a href="Uize.Url.html" title="View reference for Uize.Url" class="breadcrumb">Url</a>
+	<div class="pageActions">
+		<a id="page-search" href="javascript://" class="buttonLink" title="Search for references to this module...">SEARCH</a><a id="page-examples" href="javascript://" class="buttonLink" title="View examples for this module...">EXAMPLES</a><a href="source-code/Uize.Url.html" class="buttonLink" title="View the JavaScript source code for this module...">SOURCE</a><a id="page-test" href="javascript://" class="buttonLink" title="Test this module...">TEST</a>
+	</div>
+
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="The Uize.Url module eases working with URLs, supporting query string parsing and serialization, resolving relative URLs to absolute URLs, and more.">1. Introduction</a>
+				<ul>
+					<li><a href="#1_1" title="There are no dedicated showcase example pages for the Uize.Url module.">1.1. Examples</a></li>
+					<li><a href="#1_2" title="The Uize.Url module defines the Uize.Url package under the Uize namespace.">1.2. Implementation Info</a>
+						<ul>
+							<li><a href="#1_2_1" title="The features listed in this section have been introduced in this module.">1.2.1. Features Introduced in This Module</a></li>
+							<li><a href="#1_2_2" title="No features have been overridden in this module.">1.2.2. Features Overridden in This Module</a></li>
+							<li><a href="#1_2_3" title="This module has no inherited features.">1.2.3. Features Inherited From Other Modules</a></li>
+							<li><a href="#1_2_4" title="There are no modules directly under this namespace.">1.2.4. Modules Directly Under This Namespace</a></li>
+							<li><a href="#1_2_5" title="The Uize.Url module is unit tested by the Uize.Test.Uize.Url test module.">1.2.5. Unit Tests</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li><a href="#2">2. Static Methods</a>
+				<ul>
+					<li><a href="#2_1" title="Returns an object, containing properties for the various logical segments of the specified URL string.">2.1. Uize.Url.from</a>
+						<ul>
+							<li><a href="#2_1_1" title="The urlSegmentsOBJ object returned by this method has the following structure...">2.1.1. URL Segment Properties</a>
+								<ul>
+									<li><a href="#2_1_1_1" title="A string, representing the entire URL string parsed by the Uize.Url.from method.">2.1.1.1. href</a></li>
+									<li><a href="#2_1_1_2" title="A string, representing the portion of the URL comprised of the protocol, &quot;//&quot; (two forward slashes), and the host.">2.1.1.2. fullDomain</a></li>
+									<li><a href="#2_1_1_3" title="A string, representing the Internet protocol in use by the URL (eg. http, ftp, irc, ssh, etc.)">2.1.1.3. protocol</a></li>
+									<li><a href="#2_1_1_4" title="A string, representing the portion of the URL comprised of the hostname, followed by a &quot;:&quot; (colon) character and the port if a port is present in the URL.">2.1.1.4. host</a></li>
+									<li><a href="#2_1_1_5" title="A string, representing the portion of the URL comprised of just the name of the host (ie. domain name or IP address) and without the protocol and port portions.">2.1.1.5. hostname</a></li>
+									<li><a href="#2_1_1_6" title="A string, representing the portion of the URL that specifies the port on which to communicate with a server.">2.1.1.6. port</a></li>
+									<li><a href="#2_1_1_7" title="A string, representing the portion of the URL comprised of the folderPath and file, and excluding the fullDomain, search, and hash.">2.1.1.7. pathname</a></li>
+									<li><a href="#2_1_1_8" title="A string, representing the complete path to a folder (which may include multiple nested folder levels), and excluding the fullDomain, file, search, and hash.">2.1.1.8. folderPath</a></li>
+									<li><a href="#2_1_1_9" title="A string, representing the portion of the URL comprised of just the fileName and extension, and excluding the fullDomain, folderPath, search, and hash.">2.1.1.9. file</a></li>
+									<li><a href="#2_1_1_10" title="A string, representing the portion of the URL that specifies just the file name for a file, and excluding its extension.">2.1.1.10. fileName</a></li>
+									<li><a href="#2_1_1_11" title="A string, representing the portion of the URL that specifies just the file extension for a file, and excluding its fileName.">2.1.1.11. extension</a></li>
+									<li><a href="#2_1_1_12" title="A string, representing the portion of the URL that specifies just the file type for a file, and excluding the conventional &quot;.&quot; (period character) delimiter that separates the fileName and fileType.">2.1.1.12. fileType</a></li>
+									<li><a href="#2_1_1_13" title="A string, representing the portion of the URL comprised of the &quot;?&quot; (question mark) character and query, if present in the URL.">2.1.1.13. search</a></li>
+									<li><a href="#2_1_1_14" title="A string, representing the portion of the URL that specifies just the query parameters, and excluding the conventional &quot;?&quot; (question mark character) that delimits the query from preceding portions of the URL.">2.1.1.14. query</a></li>
+									<li><a href="#2_1_1_15" title="A string, representing the portion of the URL comprised of the &quot;#&quot; (hash / pound) character and anchor, if present in the URL.">2.1.1.15. hash</a></li>
+									<li><a href="#2_1_1_16" title="A string, representing the portion of the URL that specifies just the anchor name, and excluding the conventional &quot;#&quot; (hash / pound character) that delimits the anchor from preceding portions of the URL.">2.1.1.16. anchor</a></li>
+								</ul>
+							</li>
+							<li><a href="#2_1_2" title="Of the properties in the urlSegmentsOBJ object returned by the Uize.Url.from method, the properties href, protocol, host, hostname, port, pathname, search, and hash are consistent with the properties of the built-in window.location object.">2.1.2. Properties Consistent with window.location</a></li>
+							<li><a href="#2_1_3" title="The following diagram shows the properties of the urlSegmentsOBJ object as a tree structure, illustrating the relationship between the properties...">2.1.3. URL Segments, as a Tree</a></li>
+							<li><a href="#2_1_4" title="A URL string can be reconstructed from a urlSegmentsOBJ type value in one of the following ways...">2.1.4. Reconstructing a URL String</a></li>
+						</ul>
+					</li>
+					<li><a href="#2_2" title="A utility method that parses a query string and returns the query parameters as an object.">2.2. Uize.Url.fromParams</a></li>
+					<li><a href="#2_3" title="Returns a string, representing the decoded form of the specified URL segment string.">2.3. Uize.Url.fromPiece</a></li>
+					<li><a href="#2_4" title="A utility method that returns a string value, generated using time and a random number, that can then be used as a uniquifying query parameter on request URLs in order to defeat client caching.">2.4. Uize.Url.getCacheDefeatStr</a></li>
+					<li><a href="#2_5" title="Returns a string, representing a URL that has been resolved from the specified URL path string and query params object.">2.5. Uize.Url.resolve</a>
+						<ul>
+							<li><a href="#2_5_1" title="The value of the urlPathSTR parameter may already contain a query &apos;?&apos; character at the end.">2.5.1. An Existing Query Character</a></li>
+							<li><a href="#2_5_2" title="The value of the urlPathSTR parameter may already contain query parameters.">2.5.2. Augmenting Existing Query Params</a></li>
+							<li><a href="#2_5_3" title="The value of the urlPathSTR parameter may contain query parameters whose values you wish to modify.">2.5.3. Modifying Existing Query Params</a></li>
+							<li><a href="#2_5_4" title="The value of the urlPathSTR parameter may contain query parameters that you wish to remove.">2.5.4. Removing Existing Query Params</a></li>
+							<li><a href="#2_5_5" title="The Uize.Url.resolve method is quite versatile in its signature, with several variations that can come in handy under different circumstances.">2.5.5. Variations</a></li>
+							<li><a href="#2_5_6" title="If the value for a query params object is null or undefined, it will simply be treated as an empty params object, regardless of whether it&apos;s specified for the urlParamsOBJ parameter or one of the elements in the urlPathAndParamsObjectsARRAY or urlParamsObjectsARRAY parameters. This is convenient when using conditional expressions to choose params that should or should not be present.">2.5.6. Conditional Params</a></li>
+						</ul>
+					</li>
+					<li><a href="#2_6" title="Returns a string, representing the specified relative URL resolved against the specified base URL.">2.6. Uize.Url.toAbsolute</a></li>
+					<li><a href="#2_7" title="A utility method that serializes the properties of the specified object to produce a URL query params string.">2.7. Uize.Url.toParams</a></li>
+					<li><a href="#2_8" title="Returns a string, representing the URL encoded form of the specified string.">2.8. Uize.Url.toPiece</a></li>
+				</ul>
+			</li>
+			<li><a href="#3">3. Static Properties</a>
+				<ul>
+					<li><a href="#3_1" title="IMPLEMENTATION INFO">3.1. Uize.Url.moduleName</a></li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<a name="1"></a>
+	<h1 class="heading1" title="1. Introduction"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>. </span>Introduction</h1>
+	<div class="contents1">
+		<p>The <code>Uize.Url</code> module eases working with URLs, supporting query string parsing and serialization, resolving relative URLs to absolute URLs, and more.</p>
+		
+		<p><b>DEVELOPERS:</b> <a href="http://www.tomkidding.com" target="_blank" class="externalSiteLink">Chris van Rensburg</a></p>
+		
+		<a name="1_1"></a>
+		<h2 class="heading2" title="1. Introduction -&gt; 1.1. Examples"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. Examples">1</a>. </span>Examples</h2>
+		<div class="contents2">
+			<p>There are no dedicated showcase example pages for the <code>Uize.Url</code> module.</p>
+			
+			<p><span class="allCaps">SEARCH FOR EXAMPLES</span></p>
+			
+			<p>Use the link below to search for example pages on the <b>uize.com</b> Web site that reference the <code>Uize.Url</code> module...</p>
+			
+			<p><a href="http://www.google.com/search?hl=en&safe=off&domains=uize.com%2Fexamples&sitesearch=uize.com%2Fexamples&q=%22Uize.Url%22" target="_blank" class="externalSiteLink">SEARCH</a></p>
+		</div>
+		
+		<a name="1_2"></a>
+		<h2 class="heading2" title="1. Introduction -&gt; 1.2. Implementation Info"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>. </span>Implementation Info</h2>
+		<div class="contents2">
+			<p>The <code>Uize.Url</code> module defines the <code>Uize.Url</code> package under the <code><a href="../reference/Uize.html">Uize</a></code> namespace.</p>
+			
+			<a name="1_2_1"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.1. Features Introduced in This Module"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>.<a href="#1_2_1" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.1. Features Introduced in This Module">1</a>. </span>Features Introduced in This Module</h3>
+			<div class="contents3">
+				<p>The features listed in this section have been introduced in this module.</p>
+				
+				<p><span class="allCaps">STATIC METHODS</span></p>
+				
+				<p><code><a href="#2_1">Uize.Url.from</a></code> | <code><a href="#2_2">Uize.Url.fromParams</a></code> | <code><a href="#2_3">Uize.Url.fromPiece</a></code> | <code><a href="#2_4">Uize.Url.getCacheDefeatStr</a></code> | <code><a href="#2_5">Uize.Url.resolve</a></code> | <code><a href="#2_6">Uize.Url.toAbsolute</a></code> | <code><a href="#2_7">Uize.Url.toParams</a></code> | <code><a href="#2_8">Uize.Url.toPiece</a></code></p>
+				
+				<p><span class="allCaps">STATIC PROPERTIES</span></p>
+				
+				<p><code><a href="#3_1">Uize.Url.moduleName</a></code></p>
+			</div>
+			
+			<a name="1_2_2"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.2. Features Overridden in This Module"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>.<a href="#1_2_2" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.2. Features Overridden in This Module">2</a>. </span>Features Overridden in This Module</h3>
+			<div class="contents3">
+				<p>No features have been overridden in this module.</p>
+			</div>
+			
+			<a name="1_2_3"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.3. Features Inherited From Other Modules"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>.<a href="#1_2_3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.3. Features Inherited From Other Modules">3</a>. </span>Features Inherited From Other Modules</h3>
+			<div class="contents3">
+				<p>This module has no inherited features.</p>
+			</div>
+			
+			<a name="1_2_4"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.4. Modules Directly Under This Namespace"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>.<a href="#1_2_4" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.4. Modules Directly Under This Namespace">4</a>. </span>Modules Directly Under This Namespace</h3>
+			<div class="contents3">
+				<p>There are no modules directly under this namespace.</p>
+			</div>
+			
+			<a name="1_2_5"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.5. Unit Tests"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>.<a href="#1_2_5" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.5. Unit Tests">5</a>. </span>Unit Tests</h3>
+			<div class="contents3">
+				<p>The <code>Uize.Url</code> module is unit tested by the <code><a href="../reference/Uize.Test.Uize.Url.html">Uize.Test.Uize.Url</a></code> test module.</p>
+			</div>
+		</div>
+	</div>
+	
+	<a name="2"></a>
+	<h1 class="heading1" title="2. Static Methods"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>. </span>Static Methods</h1>
+	<div class="contents1">
+		<a name="2_1"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.1. Uize.Url.from"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_1" title="2. Static Methods -&gt; 2.1. Uize.Url.from">1</a>. </span>Uize.Url.from</h2>
+		<div class="contents2">
+			<p>Returns an object, containing properties for the various logical segments of the specified URL string.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">urlSegmentsOBJ = Uize.Url.from (urlSTR);
+</pre>
+			
+			<p>This method provides a convenient way to get at very precise portions of a URL string, such as the file name without the extension, the file type without the "." (period) character, the query params string without the "?" (question mark) character, the anchor without the "#" (pound / hash) character, etc.</p>
+			
+			<a name="2_1_1"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.1. Uize.Url.from -&gt; 2.1.1. URL Segment Properties"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_1" title="2. Static Methods -&gt; 2.1. Uize.Url.from">1</a>.<a href="#2_1_1" title="2. Static Methods -&gt; 2.1. Uize.Url.from -&gt; 2.1.1. URL Segment Properties">1</a>. </span>URL Segment Properties</h3>
+			<div class="contents3">
+				<p>The <code>urlSegmentsOBJ</code> object returned by this method has the following structure...</p>
+				
+				<p><span class="allCaps">URL SEGMENTS OBJECT</span></p>
+				
+				
+<pre class="sample-code">{
+  href       : hrefSTR,       //  http://uize.com:80/reference/Uize.html?param=value#anchor
+  fullDomain : fullDomainSTR, //  http://uize.com:80
+  protocol   : protocolSTR,   //  http:
+  host       : hostSTR,       //  uize.com:80
+  hostname   : hostnameSTR,   //  uize.com
+  port       : portSTR,       //  80
+  pathname   : pathnameSTR,   //  /reference/Uize.html
+  folderPath : folderPathSTR, //  /reference/
+  file       : fileSTR,       //  Uize.html
+  fileName   : fileNameSTR,   //  Uize
+  extension  : extensionSTR,  //  .html
+  fileType   : fileTypeSTR,   //  html
+  search     : searchSTR,     //  ?param=value
+  query      : querySTR,      //  param=value
+  hash       : hashSTR,       //  #anchor
+  anchor     : anchorSTR      //  hash
+}
+</pre>
+				
+				<p>The URL segment properties are described in more detail below...</p>
+				
+				<a name="2_1_1_1"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.1. Uize.Url.from -&gt; 2.1.1. URL Segment Properties -&gt; 2.1.1.1. href"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_1" title="2. Static Methods -&gt; 2.1. Uize.Url.from">1</a>.<a href="#2_1_1" title="2. Static Methods -&gt; 2.1. Uize.Url.from -&gt; 2.1.1. URL Segment Properties">1</a>.<a href="#2_1_1_1" title="2. Static Methods -&gt; 2.1. Uize.Url.from -&gt; 2.1.1. URL Segment Properties -&gt; 2.1.1.1. href">1</a>. </span>href</h4>
+				<div class="contents4">
+					<p>A string, representing the entire URL string parsed by the <code><a href="#2_1">Uize.Url.from</a></code> method.</p>
+					
+					<p><span class="allCaps">ILLUSTRATION</span></p>
+					
+					
+<pre class="sample-code">URL      :  http://uize.com:80/reference/Uize.html?param=value#anchor
+PORTION  :  |&lt;-----------------------------------------------------&gt;|
+VALUE    :  http://uize.com:80/reference/Uize.html?param=value#anchor
+</pre>
+					
+					<p><span class="allCaps">NOTES</span></p>
+					
+					<table class="list">
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this property is equivalent to the same named property of the <code>window.location</code> object (see <a href="#2_1_2">Properties Consistent with window.location</a>)</td></tr>
+					</table>
+				</div>
+				
+				<a name="2_1_1_2"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.1. Uize.Url.from -&gt; 2.1.1. URL Segment Properties -&gt; 2.1.1.2. fullDomain"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_1" title="2. Static Methods -&gt; 2.1. Uize.Url.from">1</a>.<a href="#2_1_1" title="2. Static Methods -&gt; 2.1. Uize.Url.from -&gt; 2.1.1. URL Segment Properties">1</a>.<a href="#2_1_1_2" title="2. Static Methods -&gt; 2.1. Uize.Url.from -&gt; 2.1.1. URL Segment Properties -&gt; 2.1.1.2. fullDomain">2</a>. </span>fullDomain</h4>
+				<div class="contents4">
+					<p>A string, representing the portion of the URL comprised of the <code><a href="#2_1_1_3">protocol</a></code>, "//" (two forward slashes), and the <code><a href="#2_1_1_4">host</a></code>.</p>
+					
+					<p><span class="allCaps">ILLUSTRATION</span></p>
+					
+					
+<pre class="sample-code">URL      :  http://uize.com:80/reference/Uize.html?param=value#anchor
+PORTION  :  |&lt;--------------&gt;|
+VALUE    :  http://uize.com:80
+</pre>
+					
+					<p><span class="allCaps">NOTES</span></p>
+					
+					<table class="list">
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>for relative URLs that only specify a <code><a href="#2_1_1_7">pathname</a></code> and/or <code><a href="#2_1_1_13">search</a></code> and/or <code><a href="#2_1_1_15">hash</a></code>, the value of this property will be <code>''</code> (an empty string)</td></tr>
+					</table>
+				</div>
+				
+				<a name="2_1_1_3"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.1. Uize.Url.from -&gt; 2.1.1. URL Segment Properties -&gt; 2.1.1.3. protocol"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_1" title="2. Static Methods -&gt; 2.1. Uize.Url.from">1</a>.<a href="#2_1_1" title="2. Static Methods -&gt; 2.1. Uize.Url.from -&gt; 2.1.1. URL Segment Properties">1</a>.<a href="#2_1_1_3" title="2. Static Methods -&gt; 2.1. Uize.Url.from -&gt; 2.1.1. URL Segment Properties -&gt; 2.1.1.3. protocol">3</a>. </span>protocol</h4>
+				<div class="contents4">
+					<p>A string, representing the <a href="http://en.wikipedia.org/wiki/Internet_Protocol" target="_blank" class="externalSiteLink">Internet protocol</a> in use by the URL (eg. <code>http</code>, <code>ftp</code>, <code>irc</code>, <code>ssh</code>, etc.)</p>
+					
+					<p><span class="allCaps">ILLUSTRATION</span></p>
+					
+					
+<pre class="sample-code">URL      :  http://uize.com:80/reference/Uize.html?param=value#anchor
+PORTION  :  |&lt;-&gt;|
+VALUE    :  http:
+</pre>
+					
+					<p><span class="allCaps">NOTES</span></p>
+					
+					<table class="list">
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>for relative URLs that only specify a <code><a href="#2_1_1_7">pathname</a></code> and/or <code><a href="#2_1_1_13">search</a></code> and/or <code><a href="#2_1_1_15">hash</a></code>, the value of this property will be <code>''</code> (an empty string)</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this property is equivalent to the same named property of the <code>window.location</code> object (see <a href="#2_1_2">Properties Consistent with window.location</a>)</td></tr>
+					</table>
+				</div>
+				
+				<a name="2_1_1_4"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.1. Uize.Url.from -&gt; 2.1.1. URL Segment Properties -&gt; 2.1.1.4. host"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_1" title="2. Static Methods -&gt; 2.1. Uize.Url.from">1</a>.<a href="#2_1_1" title="2. Static Methods -&gt; 2.1. Uize.Url.from -&gt; 2.1.1. URL Segment Properties">1</a>.<a href="#2_1_1_4" title="2. Static Methods -&gt; 2.1. Uize.Url.from -&gt; 2.1.1. URL Segment Properties -&gt; 2.1.1.4. host">4</a>. </span>host</h4>
+				<div class="contents4">
+					<p>A string, representing the portion of the URL comprised of the <code><a href="#2_1_1_5">hostname</a></code>, followed by a ":" (colon) character and the <code><a href="#2_1_1_6">port</a></code> if a port is present in the URL.</p>
+					
+					<p><span class="allCaps">ILLUSTRATION</span></p>
+					
+					
+<pre class="sample-code">URL      :  http://uize.com:80/reference/Uize.html?param=value#anchor
+PORTION  :         |&lt;-------&gt;|
+VALUE    :         uize.com:80
+</pre>
+					
+					<p><span class="allCaps">NOTES</span></p>
+					
+					<table class="list">
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>for relative URLs that only specify a <code><a href="#2_1_1_7">pathname</a></code> and/or <code><a href="#2_1_1_13">search</a></code> and/or <code><a href="#2_1_1_15">hash</a></code>, the value of this property will be <code>''</code> (an empty string)</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this property is equivalent to the same named property of the <code>window.location</code> object (see <a href="#2_1_2">Properties Consistent with window.location</a>)</td></tr>
+					</table>
+				</div>
+				
+				<a name="2_1_1_5"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.1. Uize.Url.from -&gt; 2.1.1. URL Segment Properties -&gt; 2.1.1.5. hostname"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_1" title="2. Static Methods -&gt; 2.1. Uize.Url.from">1</a>.<a href="#2_1_1" title="2. Static Methods -&gt; 2.1. Uize.Url.from -&gt; 2.1.1. URL Segment Properties">1</a>.<a href="#2_1_1_5" title="2. Static Methods -&gt; 2.1. Uize.Url.from -&gt; 2.1.1. URL Segment Properties -&gt; 2.1.1.5. hostname">5</a>. </span>hostname</h4>
+				<div class="contents4">
+					<p>A string, representing the portion of the URL comprised of just the name of the host (ie. domain name or IP address) and without the <code><a href="#2_1_1_3">protocol</a></code> and <code><a href="#2_1_1_6">port</a></code> portions.</p>
+					
+					<p><span class="allCaps">ILLUSTRATION</span></p>
+					
+					
+<pre class="sample-code">URL      :  http://uize.com:80/reference/Uize.html?param=value#anchor
+PORTION  :         |&lt;----&gt;|
+VALUE    :         uize.com
+</pre>
+					
+					<p><span class="allCaps">NOTES</span></p>
+					
+					<table class="list">
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>for relative URLs that only specify a <code><a href="#2_1_1_7">pathname</a></code> and/or <code><a href="#2_1_1_13">search</a></code> and/or <code><a href="#2_1_1_15">hash</a></code>, the value of this property will be <code>''</code> (an empty string)</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this property is equivalent to the same named property of the <code>window.location</code> object (see <a href="#2_1_2">Properties Consistent with window.location</a>)</td></tr>
+					</table>
+				</div>
+				
+				<a name="2_1_1_6"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.1. Uize.Url.from -&gt; 2.1.1. URL Segment Properties -&gt; 2.1.1.6. port"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_1" title="2. Static Methods -&gt; 2.1. Uize.Url.from">1</a>.<a href="#2_1_1" title="2. Static Methods -&gt; 2.1. Uize.Url.from -&gt; 2.1.1. URL Segment Properties">1</a>.<a href="#2_1_1_6" title="2. Static Methods -&gt; 2.1. Uize.Url.from -&gt; 2.1.1. URL Segment Properties -&gt; 2.1.1.6. port">6</a>. </span>port</h4>
+				<div class="contents4">
+					<p>A string, representing the portion of the URL that specifies the <a href="http://en.wikipedia.org/wiki/TCP_and_UDP_port" target="_blank" class="externalSiteLink">port</a> on which to communicate with a server.</p>
+					
+					<p><span class="allCaps">ILLUSTRATION</span></p>
+					
+					
+<pre class="sample-code">URL      :  http://uize.com:80/reference/Uize.html?param=value#anchor
+PORTION  :                  ^^
+VALUE    :                  80
+</pre>
+					
+					<p>Most URLs will not contain an explicit port, and the port will typically be defaulted by the server to 80 for communication via HTTP, and 443 for secure communication via HTTPS. For URLs that do not specify a port, the value of the <code><a href="#2_1_1_6">port</a></code> property will be <code>''</code> (an empty string).</p>
+					
+					<p><span class="allCaps">NOTES</span></p>
+					
+					<table class="list">
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>for relative URLs that only specify a <code><a href="#2_1_1_7">pathname</a></code> and/or <code><a href="#2_1_1_13">search</a></code> and/or <code><a href="#2_1_1_15">hash</a></code>, the value of this property will be <code>''</code> (an empty string)</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this property is equivalent to the same named property of the <code>window.location</code> object (see <a href="#2_1_2">Properties Consistent with window.location</a>)</td></tr>
+					</table>
+				</div>
+				
+				<a name="2_1_1_7"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.1. Uize.Url.from -&gt; 2.1.1. URL Segment Properties -&gt; 2.1.1.7. pathname"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_1" title="2. Static Methods -&gt; 2.1. Uize.Url.from">1</a>.<a href="#2_1_1" title="2. Static Methods -&gt; 2.1. Uize.Url.from -&gt; 2.1.1. URL Segment Properties">1</a>.<a href="#2_1_1_7" title="2. Static Methods -&gt; 2.1. Uize.Url.from -&gt; 2.1.1. URL Segment Properties -&gt; 2.1.1.7. pathname">7</a>. </span>pathname</h4>
+				<div class="contents4">
+					<p>A string, representing the portion of the URL comprised of the <code><a href="#2_1_1_8">folderPath</a></code> and <code><a href="#2_1_1_9">file</a></code>, and excluding the <code><a href="#2_1_1_2">fullDomain</a></code>, <code><a href="#2_1_1_13">search</a></code>, and <code><a href="#2_1_1_15">hash</a></code>.</p>
+					
+					<p><span class="allCaps">ILLUSTRATION</span></p>
+					
+					
+<pre class="sample-code">URL      :  http://uize.com:80/reference/Uize.html?param=value#anchor
+PORTION  :                    |&lt;----------------&gt;|
+VALUE    :                    /reference/Uize.html
+</pre>
+					
+					<p><span class="allCaps">NOTES</span></p>
+					
+					<table class="list">
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this property is equivalent to the same named property of the <code>window.location</code> object (see <a href="#2_1_2">Properties Consistent with window.location</a>)</td></tr>
+					</table>
+				</div>
+				
+				<a name="2_1_1_8"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.1. Uize.Url.from -&gt; 2.1.1. URL Segment Properties -&gt; 2.1.1.8. folderPath"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_1" title="2. Static Methods -&gt; 2.1. Uize.Url.from">1</a>.<a href="#2_1_1" title="2. Static Methods -&gt; 2.1. Uize.Url.from -&gt; 2.1.1. URL Segment Properties">1</a>.<a href="#2_1_1_8" title="2. Static Methods -&gt; 2.1. Uize.Url.from -&gt; 2.1.1. URL Segment Properties -&gt; 2.1.1.8. folderPath">8</a>. </span>folderPath</h4>
+				<div class="contents4">
+					<p>A string, representing the complete path to a folder (which may include multiple nested folder levels), and excluding the <code><a href="#2_1_1_2">fullDomain</a></code>, <code><a href="#2_1_1_9">file</a></code>, <code><a href="#2_1_1_13">search</a></code>, and <code><a href="#2_1_1_15">hash</a></code>.</p>
+					
+					<p><span class="allCaps">ILLUSTRATION</span></p>
+					
+					
+<pre class="sample-code">URL      :  http://uize.com:80/reference/Uize.html?param=value#anchor
+PORTION  :                    |&lt;-------&gt;|
+VALUE    :                    /reference/
+</pre>
+				</div>
+				
+				<a name="2_1_1_9"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.1. Uize.Url.from -&gt; 2.1.1. URL Segment Properties -&gt; 2.1.1.9. file"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_1" title="2. Static Methods -&gt; 2.1. Uize.Url.from">1</a>.<a href="#2_1_1" title="2. Static Methods -&gt; 2.1. Uize.Url.from -&gt; 2.1.1. URL Segment Properties">1</a>.<a href="#2_1_1_9" title="2. Static Methods -&gt; 2.1. Uize.Url.from -&gt; 2.1.1. URL Segment Properties -&gt; 2.1.1.9. file">9</a>. </span>file</h4>
+				<div class="contents4">
+					<p>A string, representing the portion of the URL comprised of just the <code><a href="#2_1_1_10">fileName</a></code> and <code><a href="#2_1_1_11">extension</a></code>, and excluding the <code><a href="#2_1_1_2">fullDomain</a></code>, <code><a href="#2_1_1_8">folderPath</a></code>, <code><a href="#2_1_1_13">search</a></code>, and <code><a href="#2_1_1_15">hash</a></code>.</p>
+					
+					<p><span class="allCaps">ILLUSTRATION</span></p>
+					
+					
+<pre class="sample-code">URL      :  http://uize.com:80/reference/Uize.html?param=value#anchor
+PORTION  :                               |&lt;-----&gt;|
+VALUE    :                               Uize.html
+</pre>
+				</div>
+				
+				<a name="2_1_1_10"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.1. Uize.Url.from -&gt; 2.1.1. URL Segment Properties -&gt; 2.1.1.10. fileName"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_1" title="2. Static Methods -&gt; 2.1. Uize.Url.from">1</a>.<a href="#2_1_1" title="2. Static Methods -&gt; 2.1. Uize.Url.from -&gt; 2.1.1. URL Segment Properties">1</a>.<a href="#2_1_1_10" title="2. Static Methods -&gt; 2.1. Uize.Url.from -&gt; 2.1.1. URL Segment Properties -&gt; 2.1.1.10. fileName">10</a>. </span>fileName</h4>
+				<div class="contents4">
+					<p>A string, representing the portion of the URL that specifies just the file name for a file, and excluding its <code><a href="#2_1_1_11">extension</a></code>.</p>
+					
+					<p><span class="allCaps">ILLUSTRATION</span></p>
+					
+					
+<pre class="sample-code">URL      :  http://uize.com:80/reference/Uize.html?param=value#anchor
+PORTION  :                               |&lt;&gt;|
+VALUE    :                               Uize
+</pre>
+				</div>
+				
+				<a name="2_1_1_11"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.1. Uize.Url.from -&gt; 2.1.1. URL Segment Properties -&gt; 2.1.1.11. extension"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_1" title="2. Static Methods -&gt; 2.1. Uize.Url.from">1</a>.<a href="#2_1_1" title="2. Static Methods -&gt; 2.1. Uize.Url.from -&gt; 2.1.1. URL Segment Properties">1</a>.<a href="#2_1_1_11" title="2. Static Methods -&gt; 2.1. Uize.Url.from -&gt; 2.1.1. URL Segment Properties -&gt; 2.1.1.11. extension">11</a>. </span>extension</h4>
+				<div class="contents4">
+					<p>A string, representing the portion of the URL that specifies just the file extension for a file, and excluding its <code><a href="#2_1_1_10">fileName</a></code>.</p>
+					
+					<p><span class="allCaps">ILLUSTRATION</span></p>
+					
+					
+<pre class="sample-code">URL      :  http://uize.com:80/reference/Uize.html?param=value#anchor
+PORTION  :                                   |&lt;-&gt;|
+VALUE    :                                   .html
+</pre>
+					
+					<p>Unlike the <code><a href="#2_1_1_12">fileType</a></code> property, the <code><a href="#2_1_1_11">extension</a></code> property contains the conventional "." (period character) delimiter that separates the <code><a href="#2_1_1_10">fileName</a></code> and <code><a href="#2_1_1_12">fileType</a></code>.</p>
+				</div>
+				
+				<a name="2_1_1_12"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.1. Uize.Url.from -&gt; 2.1.1. URL Segment Properties -&gt; 2.1.1.12. fileType"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_1" title="2. Static Methods -&gt; 2.1. Uize.Url.from">1</a>.<a href="#2_1_1" title="2. Static Methods -&gt; 2.1. Uize.Url.from -&gt; 2.1.1. URL Segment Properties">1</a>.<a href="#2_1_1_12" title="2. Static Methods -&gt; 2.1. Uize.Url.from -&gt; 2.1.1. URL Segment Properties -&gt; 2.1.1.12. fileType">12</a>. </span>fileType</h4>
+				<div class="contents4">
+					<p>A string, representing the portion of the URL that specifies just the file type for a file, and excluding the conventional "." (period character) delimiter that separates the <code><a href="#2_1_1_10">fileName</a></code> and <code><a href="#2_1_1_12">fileType</a></code>.</p>
+					
+					<p><span class="allCaps">ILLUSTRATION</span></p>
+					
+					
+<pre class="sample-code">URL      :  http://uize.com:80/reference/Uize.html?param=value#anchor
+PORTION  :                                    |&lt;&gt;|
+VALUE    :                                    html
+</pre>
+				</div>
+				
+				<a name="2_1_1_13"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.1. Uize.Url.from -&gt; 2.1.1. URL Segment Properties -&gt; 2.1.1.13. search"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_1" title="2. Static Methods -&gt; 2.1. Uize.Url.from">1</a>.<a href="#2_1_1" title="2. Static Methods -&gt; 2.1. Uize.Url.from -&gt; 2.1.1. URL Segment Properties">1</a>.<a href="#2_1_1_13" title="2. Static Methods -&gt; 2.1. Uize.Url.from -&gt; 2.1.1. URL Segment Properties -&gt; 2.1.1.13. search">13</a>. </span>search</h4>
+				<div class="contents4">
+					<p>A string, representing the portion of the URL comprised of the "?" (question mark) character and <code><a href="#2_1_1_14">query</a></code>, if present in the URL.</p>
+					
+					<p><span class="allCaps">ILLUSTRATION</span></p>
+					
+					
+<pre class="sample-code">URL      :  http://uize.com:80/reference/Uize.html?param=value#anchor
+PORTION  :                                        |&lt;--------&gt;|
+VALUE    :                                        ?param=value
+</pre>
+					
+					<p>Unlike the <code><a href="#2_1_1_14">query</a></code> property, the <code><a href="#2_1_1_13">search</a></code> property contains the conventional "?" (question mark character) that delimits the <code><a href="#2_1_1_14">query</a></code> from preceding portions of the URL.</p>
+					
+					<p><span class="allCaps">NOTES</span></p>
+					
+					<table class="list">
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this property is equivalent to the same named property of the <code>window.location</code> object (see <a href="#2_1_2">Properties Consistent with window.location</a>)</td></tr>
+					</table>
+				</div>
+				
+				<a name="2_1_1_14"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.1. Uize.Url.from -&gt; 2.1.1. URL Segment Properties -&gt; 2.1.1.14. query"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_1" title="2. Static Methods -&gt; 2.1. Uize.Url.from">1</a>.<a href="#2_1_1" title="2. Static Methods -&gt; 2.1. Uize.Url.from -&gt; 2.1.1. URL Segment Properties">1</a>.<a href="#2_1_1_14" title="2. Static Methods -&gt; 2.1. Uize.Url.from -&gt; 2.1.1. URL Segment Properties -&gt; 2.1.1.14. query">14</a>. </span>query</h4>
+				<div class="contents4">
+					<p>A string, representing the portion of the URL that specifies just the query parameters, and excluding the conventional "?" (question mark character) that delimits the <code><a href="#2_1_1_14">query</a></code> from preceding portions of the URL.</p>
+					
+					<p><span class="allCaps">ILLUSTRATION</span></p>
+					
+					
+<pre class="sample-code">URL      :  http://uize.com:80/reference/Uize.html?param=value#anchor
+PORTION  :                                         |&lt;-------&gt;|
+VALUE    :                                         param=value
+</pre>
+				</div>
+				
+				<a name="2_1_1_15"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.1. Uize.Url.from -&gt; 2.1.1. URL Segment Properties -&gt; 2.1.1.15. hash"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_1" title="2. Static Methods -&gt; 2.1. Uize.Url.from">1</a>.<a href="#2_1_1" title="2. Static Methods -&gt; 2.1. Uize.Url.from -&gt; 2.1.1. URL Segment Properties">1</a>.<a href="#2_1_1_15" title="2. Static Methods -&gt; 2.1. Uize.Url.from -&gt; 2.1.1. URL Segment Properties -&gt; 2.1.1.15. hash">15</a>. </span>hash</h4>
+				<div class="contents4">
+					<p>A string, representing the portion of the URL comprised of the "#" (hash / pound) character and <code><a href="#2_1_1_16">anchor</a></code>, if present in the URL.</p>
+					
+					<p><span class="allCaps">ILLUSTRATION</span></p>
+					
+					
+<pre class="sample-code">URL      :  http://uize.com:80/reference/Uize.html?param=value#anchor
+PORTION  :                                                    |&lt;---&gt;|
+VALUE    :                                                    #anchor
+</pre>
+					
+					<p>Unlike the <code><a href="#2_1_1_16">anchor</a></code> property, the <code><a href="#2_1_1_15">hash</a></code> property contains the conventional "#" (hash / pound character) that delimits the <code><a href="#2_1_1_16">anchor</a></code> from preceding portions of the URL.</p>
+					
+					<p><span class="allCaps">NOTES</span></p>
+					
+					<table class="list">
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this property is equivalent to the same named property of the <code>window.location</code> object (see <a href="#2_1_2">Properties Consistent with window.location</a>)</td></tr>
+					</table>
+				</div>
+				
+				<a name="2_1_1_16"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.1. Uize.Url.from -&gt; 2.1.1. URL Segment Properties -&gt; 2.1.1.16. anchor"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_1" title="2. Static Methods -&gt; 2.1. Uize.Url.from">1</a>.<a href="#2_1_1" title="2. Static Methods -&gt; 2.1. Uize.Url.from -&gt; 2.1.1. URL Segment Properties">1</a>.<a href="#2_1_1_16" title="2. Static Methods -&gt; 2.1. Uize.Url.from -&gt; 2.1.1. URL Segment Properties -&gt; 2.1.1.16. anchor">16</a>. </span>anchor</h4>
+				<div class="contents4">
+					<p>A string, representing the portion of the URL that specifies just the anchor name, and excluding the conventional "#" (hash / pound character) that delimits the <code><a href="#2_1_1_16">anchor</a></code> from preceding portions of the URL.</p>
+					
+					<p><span class="allCaps">ILLUSTRATION</span></p>
+					
+					
+<pre class="sample-code">URL      :  http://uize.com:80/reference/Uize.html?param=value#anchor
+PORTION  :                                                     |&lt;--&gt;|
+VALUE    :                                                     anchor
+</pre>
+				</div>
+			</div>
+			
+			<a name="2_1_2"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.1. Uize.Url.from -&gt; 2.1.2. Properties Consistent with window.location"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_1" title="2. Static Methods -&gt; 2.1. Uize.Url.from">1</a>.<a href="#2_1_2" title="2. Static Methods -&gt; 2.1. Uize.Url.from -&gt; 2.1.2. Properties Consistent with window.location">2</a>. </span>Properties Consistent with window.location</h3>
+			<div class="contents3">
+				<p>Of the properties in the <code>urlSegmentsOBJ</code> object returned by the <code><a href="#2_1">Uize.Url.from</a></code> method, the properties <code><a href="#2_1_1_1">href</a></code>, <code><a href="#2_1_1_3">protocol</a></code>, <code><a href="#2_1_1_4">host</a></code>, <code><a href="#2_1_1_5">hostname</a></code>, <code><a href="#2_1_1_6">port</a></code>, <code><a href="#2_1_1_7">pathname</a></code>, <code><a href="#2_1_1_13">search</a></code>, and <code><a href="#2_1_1_15">hash</a></code> are consistent with the properties of the built-in <code>window.location</code> object.</p>
+			</div>
+			
+			<a name="2_1_3"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.1. Uize.Url.from -&gt; 2.1.3. URL Segments, as a Tree"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_1" title="2. Static Methods -&gt; 2.1. Uize.Url.from">1</a>.<a href="#2_1_3" title="2. Static Methods -&gt; 2.1. Uize.Url.from -&gt; 2.1.3. URL Segments, as a Tree">3</a>. </span>URL Segments, as a Tree</h3>
+			<div class="contents3">
+				<p>The following diagram shows the properties of the <code>urlSegmentsOBJ</code> object as a tree structure, illustrating the relationship between the properties...</p>
+				
+				<p><span class="allCaps">URL SEGMENTS, AS A TREE</span></p>
+				
+				
+<pre class="sample-code">href
+|__ fullDomain
+|       |__ protocol
+|       |__ //
+|       |__ host
+|            |__ hostname
+|            |__ :
+|            |__ port
+|
+|__ pathname
+|      |__ folderPath
+|      |__ file
+|            |__ fileName
+|            |__ extension
+|                    |__ .
+|                    |__ fileType
+|
+|__ search
+|      |__ ?
+|      |__ query
+|
+|__ hash
+      |__ #
+      |__ anchor
+</pre>
+			</div>
+			
+			<a name="2_1_4"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.1. Uize.Url.from -&gt; 2.1.4. Reconstructing a URL String"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_1" title="2. Static Methods -&gt; 2.1. Uize.Url.from">1</a>.<a href="#2_1_4" title="2. Static Methods -&gt; 2.1. Uize.Url.from -&gt; 2.1.4. Reconstructing a URL String">4</a>. </span>Reconstructing a URL String</h3>
+			<div class="contents3">
+				<p>A URL string can be reconstructed from a <code>urlSegmentsOBJ</code> type value in one of the following ways...</p>
+				
+				
+<pre class="sample-code">urlStr =
+  urlSegments.fullDomain +
+  urlSegments.pathname +
+  urlSegments.search +
+  urlSegments.hash
+;
+
+urlStr =
+  urlSegments.fullDomain +
+  urlSegments.folderPath +
+  urlSegments.file +
+  urlSegments.search +
+  urlSegments.hash
+;
+
+urlStr =
+  urlSegments.fullDomain +
+  urlSegments.folderPath +
+  urlSegments.fileName +
+  urlSegments.extension +
+  urlSegments.search +
+  urlSegments.hash
+;
+</pre>
+				
+				<p>If you wish to reconstruct a URL string using any of the more granular URL segment properties, such as <code><a href="#2_1_1_3">protocol</a></code>, <code><a href="#2_1_1_5">hostname</a></code>, <code><a href="#2_1_1_6">port</a></code>, <code><a href="#2_1_1_12">fileType</a></code>, <code><a href="#2_1_1_14">query</a></code>, etc., then you will have to use logic to conditionally include the delimiters <code>//</code>, <code>:</code>, <code>.</code>, <code>?</code>, and <code>#</code>.</p>
+			</div>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#2_2">Uize.Url.fromParams</a></code> and <code><a href="#2_3">Uize.Url.fromPiece</a></code> static methods</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_2"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.2. Uize.Url.fromParams"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_2" title="2. Static Methods -&gt; 2.2. Uize.Url.fromParams">2</a>. </span>Uize.Url.fromParams</h2>
+		<div class="contents2">
+			<p>A utility method that parses a query string and returns the query parameters as an object.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">paramsOBJ = Uize.Url.fromParams (queryParamsSTR);
+</pre>
+			
+			<p>This method assumes that the query string was serialized using "&" to separate parameters, and "=" to separate parameter name from parameter value in each name/value pair.</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">Uize.Url.fromParams ('category=holiday&amp;type=all&amp;results=20');
+</pre>
+			
+			<p>With the above query string, the <code><a href="#2_2">Uize.Url.fromParams</a></code> method would produce the object...</p>
+			
+			
+<pre class="sample-code">{
+  category:'holiday',
+  type:'all',
+  results:'20'
+}
+</pre>
+			
+			<p>The value of the <code>queryParamsSTR</code> parameter may contain a prepended query '?' character, and even a URL path. These will simply be ignored when parsing the query parameters, so this method can be applied to a complete URL without worrying about first having to remove the path. So, extending on the above example, the same result would be produced if the value of the <code>queryParamsSTR</code> parameter was <code>'http://www.somedomain.com/search?category=holiday&type=all&results=20'</code>.</p>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>when parsing the query string, all parameter values are treated as strings</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the corresponding <code><a href="#2_7">Uize.Url.toParams</a></code> static method</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_3"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.3. Uize.Url.fromPiece"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_3" title="2. Static Methods -&gt; 2.3. Uize.Url.fromPiece">3</a>. </span>Uize.Url.fromPiece</h2>
+		<div class="contents2">
+			<p>Returns a string, representing the decoded form of the specified URL segment string.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">unencodedSTR = Uize.Url.fromPiece (encodedUrlPieceSTR);
+</pre>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">unencoded = Uize.Url.fromPiece ('solar%2C%20wind%2C%20efficiency%20%26%20biofuels');
+</pre>
+			
+			<p>After executing the above statement, the variable <code>unencoded</code> would have the value <code>'solar, wind, efficiency & biofuels'</code>.</p>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the corresponding <code><a href="#2_8">Uize.Url.toPiece</a></code> static method</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_4"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.4. Uize.Url.getCacheDefeatStr"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_4" title="2. Static Methods -&gt; 2.4. Uize.Url.getCacheDefeatStr">4</a>. </span>Uize.Url.getCacheDefeatStr</h2>
+		<div class="contents2">
+			<p>A utility method that returns a string value, generated using time and a random number, that can then be used as a uniquifying query parameter on request URLs in order to defeat client caching.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">cacheDefeatSTR = Uize.Url.getCacheDefeatStr ();
+</pre>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this method takes no parameters</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_5"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.5. Uize.Url.resolve"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_5" title="2. Static Methods -&gt; 2.5. Uize.Url.resolve">5</a>. </span>Uize.Url.resolve</h2>
+		<div class="contents2">
+			<p>Returns a string, representing a URL that has been resolved from the specified URL path string and query params object.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">urlSTR = Uize.Url.resolve (urlPathSTR,urlParamsOBJ);
+</pre>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">searchUrl = Uize.Url.resolve (
+  'http://www.somedomain.com/search',
+  {
+    category:'holiday',
+    type:'all',
+    results:'20'
+  }
+);
+</pre>
+			
+			<p>In the above example, the <code><a href="#2_5">Uize.Url.resolve</a></code> method would produce the result <code>'http://www.somedomain.com/search?category=holiday&type=all&results=20'</code>.</p>
+			
+			<a name="2_5_1"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.5. Uize.Url.resolve -&gt; 2.5.1. An Existing Query Character"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_5" title="2. Static Methods -&gt; 2.5. Uize.Url.resolve">5</a>.<a href="#2_5_1" title="2. Static Methods -&gt; 2.5. Uize.Url.resolve -&gt; 2.5.1. An Existing Query Character">1</a>. </span>An Existing Query Character</h3>
+			<div class="contents3">
+				<p>The value of the <code>urlPathSTR</code> parameter may already contain a query '?' character at the end.</p>
+				
+				<p>If this is the case, the <code><a href="#2_5">Uize.Url.resolve</a></code> method will <b>not</b> add an additional query character. So, the following example would produce the same result as the first example...</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">searchUrl = Uize.Url.resolve (
+  'http://www.somedomain.com/search?',
+  {
+    category:'holiday',
+    type:'all',
+    results:'20'
+  }
+);
+</pre>
+				
+				<p>In the above example, the <code><a href="#2_5">Uize.Url.resolve</a></code> method would produce the result <code>'http://www.somedomain.com/search?category=holiday&type=all&results=20'</code>.</p>
+			</div>
+			
+			<a name="2_5_2"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.5. Uize.Url.resolve -&gt; 2.5.2. Augmenting Existing Query Params"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_5" title="2. Static Methods -&gt; 2.5. Uize.Url.resolve">5</a>.<a href="#2_5_2" title="2. Static Methods -&gt; 2.5. Uize.Url.resolve -&gt; 2.5.2. Augmenting Existing Query Params">2</a>. </span>Augmenting Existing Query Params</h3>
+			<div class="contents3">
+				<p>The value of the <code>urlPathSTR</code> parameter may already contain query parameters.</p>
+				
+				<p>If this is the case, the <code><a href="#2_5">Uize.Url.resolve</a></code> method will concatenate the additional query parameters using the '&' query param delimiter.</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">searchUrl = Uize.Url.resolve (
+  'http://www.somedomain.com/search?sort=recent',
+  {
+    category:'holiday',
+    type:'all',
+    results:'20'
+  }
+);
+</pre>
+				
+				<p>In the above example, the <code><a href="#2_5">Uize.Url.resolve</a></code> method would produce the result <code>'http://www.somedomain.com/search?sort=recent&category=holiday&type=all&results=20'</code>.</p>
+			</div>
+			
+			<a name="2_5_3"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.5. Uize.Url.resolve -&gt; 2.5.3. Modifying Existing Query Params"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_5" title="2. Static Methods -&gt; 2.5. Uize.Url.resolve">5</a>.<a href="#2_5_3" title="2. Static Methods -&gt; 2.5. Uize.Url.resolve -&gt; 2.5.3. Modifying Existing Query Params">3</a>. </span>Modifying Existing Query Params</h3>
+			<div class="contents3">
+				<p>The value of the <code>urlPathSTR</code> parameter may contain query parameters whose values you wish to modify.</p>
+				
+				<p>Overwriting existing values for query params is handled automatically by the <code><a href="#2_5">Uize.Url.resolve</a></code> method - all you have to do is specify the new values in the <code>urlParamsOBJ</code> parameter.</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">searchUrl = Uize.Url.resolve (
+  'http://www.somedomain.com/search?sort=recent&amp;results=20',
+  {
+    sort:'popular',      // overwrites existing sort param in URL
+    category:'holiday',
+    type:'all',
+    results:'100'        // overwrites existing results param in URL
+  }
+);
+</pre>
+				
+				<p>In the above example, the <code><a href="#2_5">Uize.Url.resolve</a></code> method would produce the result <code>'http://www.somedomain.com/search?sort=popular&results=100&category=holiday&type=all'</code>.</p>
+			</div>
+			
+			<a name="2_5_4"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.5. Uize.Url.resolve -&gt; 2.5.4. Removing Existing Query Params"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_5" title="2. Static Methods -&gt; 2.5. Uize.Url.resolve">5</a>.<a href="#2_5_4" title="2. Static Methods -&gt; 2.5. Uize.Url.resolve -&gt; 2.5.4. Removing Existing Query Params">4</a>. </span>Removing Existing Query Params</h3>
+			<div class="contents3">
+				<p>The value of the <code>urlPathSTR</code> parameter may contain query parameters that you wish to remove.</p>
+				
+				<p>Removing existing query params from a URL can be accomplished by specifying the value <code>null</code> for the params you wish to remove in the <code>urlParamsOBJ</code> parameter. You can specify to remove params that don't exist in the URL, without any ill effects - those params will simply be ignored.</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">searchUrl = Uize.Url.resolve (
+  'http://www.somedomain.com/search?sort=recent&amp;results=20',
+  {
+    sort:null,      // removes existing sort param in URL
+    category:null,  // would remove category param in URL, if it existed
+    type:'all',
+    results:null    // removes existing results param in URL
+  }
+);
+</pre>
+				
+				<p>In the above example, the <code><a href="#2_5">Uize.Url.resolve</a></code> method would produce the result <code>'http://www.somedomain.com/search?type=all'</code>.</p>
+			</div>
+			
+			<a name="2_5_5"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.5. Uize.Url.resolve -&gt; 2.5.5. Variations"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_5" title="2. Static Methods -&gt; 2.5. Uize.Url.resolve">5</a>.<a href="#2_5_5" title="2. Static Methods -&gt; 2.5. Uize.Url.resolve -&gt; 2.5.5. Variations">5</a>. </span>Variations</h3>
+			<div class="contents3">
+				<p>The <code><a href="#2_5">Uize.Url.resolve</a></code> method is quite versatile in its signature, with several variations that can come in handy under different circumstances.</p>
+				
+				<p><span class="allCaps">VARIATION 1</span></p>
+				
+				
+<pre class="sample-code">urlSTR = Uize.Url.resolve (urlPathSTR,urlParamsObjectsARRAY);
+</pre>
+				
+				<p>When a <code>urlParamsObjectsARRAY</code> parameter is specified, multiple params objects can be specified in an array. This provides for an easy way to merge query param sets from multiple sources, or to blend fixed params with parameterized params (eg. passed in a method call), or to override the values in param sets. The values from params objects later in the array override those from earlier params objects. None of the objects in the array will be modified by the operation.</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">var defaultSearchSettings = {
+  sort:'recent',
+  type:'all',
+  results:'20'
+};
+searchUrl = Uize.Url.resolve (
+  'http://www.somedomain.com/search',
+  [
+    defaultSearchSettings,
+    {
+      category:'holiday',
+      sort:'popular'
+    }
+  ]
+);
+</pre>
+				
+				<p>In the above example, the values of the <code>category</code> and <code>sort</code> properties of the second params object in the <code>urlParamsObjectsARRAY</code> value would be stitched in to the values provided by the <code>defaultSearchSettings</code> query params object that appears first in the array, with the value of the <code>sort</code> property of the second params object overriding the value contained in the <code>defaultSearchSettings</code> object, and with the <code>defaultSearchSettings</code> object <b>not</b> being modified in the process.</p>
+				
+				<p><span class="allCaps">VARIATION 2</span></p>
+				
+				
+<pre class="sample-code">urlSTR = Uize.Url.resolve (urlPathAndParamsObjectsARRAY);
+</pre>
+				
+				<p>Another versatile variation allows a single <code>urlPathAndParamsObjectsARRAY</code> parameter to be specified, where the array specified by this parameter contains the URL path string as its first element, and an arbitrary number of params objects in subsequent elements. Using this variation, the example shown for <b>VARIATION 1</b> could be re-written as...</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">var defaultSearchSettings = {
+  sort:'recent',
+  type:'all',
+  results:'20'
+};
+searchUrl = Uize.Url.resolve ([
+  'http://www.somedomain.com/search',
+  defaultSearchSettings,
+  {
+    category:'holiday',
+    sort:'popular'
+  }
+]);
+</pre>
+				
+				<p>This variation is powerful in that it allows you to write functions that can accept a single URL parameter, where that parameter's value may be a string, <b>or</b> an array containing a string path and params objects - and a single call to the <code><a href="#2_5">Uize.Url.resolve</a></code> method will resolve it to a string for the benefit of your functions' implementation code.</p>
+				
+				<p><span class="allCaps">VARIATION 3</span></p>
+				
+				
+<pre class="sample-code">urlSTR = Uize.Url.resolve (urlPathAndParamsObjectsARRAY,urlParamsOBJ);
+</pre>
+				
+				<p>When using the <code>urlPathAndParamsObjectsARRAY</code> parameter, you can still specify the <code>urlParamsOBJ</code> second parameter to stitch in further query params.</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">var defaultSearchSettings = {
+  sort:'recent',
+  type:'all',
+  results:'20'
+};
+searchUrl = Uize.Url.resolve (
+  ['http://www.somedomain.com/search',defaultSearchSettings],
+  {
+    category:'holiday',
+    sort:'popular'
+  }
+);
+</pre>
+				
+				<p>The above example would produce the same results as the previous example.</p>
+				
+				<p><span class="allCaps">VARIATION 4</span></p>
+				
+				
+<pre class="sample-code">urlSTR = Uize.Url.resolve (urlPathAndParamsObjectsARRAY,urlParamsObjectsARRAY);
+</pre>
+				
+				<p>Finally, it is also possible to specify the <code>urlParamsObjectsARRAY</code> second parameter, allowing ridiculous numbers of query params objects to be specified where desired and/or convenient.</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">var defaultSearchSettings = {
+  sort:'recent',
+  type:'all',
+  results:'20'
+};
+searchUrl = Uize.Url.resolve (
+  ['http://www.somedomain.com/search',{category:'holiday'}],
+  [
+    defaultSearchSettings,
+    {sort:'popular'}
+  ]
+);
+</pre>
+				
+				<p>The above example would produce the same results as the previous example.</p>
+			</div>
+			
+			<a name="2_5_6"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.5. Uize.Url.resolve -&gt; 2.5.6. Conditional Params"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_5" title="2. Static Methods -&gt; 2.5. Uize.Url.resolve">5</a>.<a href="#2_5_6" title="2. Static Methods -&gt; 2.5. Uize.Url.resolve -&gt; 2.5.6. Conditional Params">6</a>. </span>Conditional Params</h3>
+			<div class="contents3">
+				<p>If the value for a query params object is <code>null</code> or <code>undefined</code>, it will simply be treated as an empty params object, regardless of whether it's specified for the <code>urlParamsOBJ</code> parameter or one of the elements in the <code>urlPathAndParamsObjectsARRAY</code> or <code>urlParamsObjectsARRAY</code> parameters. This is convenient when using conditional expressions to choose params that should or should not be present.</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">var defaultSearchSettings = {
+  category:'any',
+  sort:'recent',
+  type:'all',
+  results:'20'
+};
+searchUrl = Uize.Url.resolve ([
+  'http://www.somedomain.com/search',
+  defaultSearchSettings,
+  searchCategory ? {category:searchCategory} : null,
+  useUserSearchSettings ? userSearchSettings : null,
+  useCustomSort ? {sort:customSortValue} : null
+]);
+</pre>
+				
+				<p>In the above example, conditional expressions that result in a null value will be treated as params objects containing no param values, so they will have no effect.</p>
+			</div>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#2_7">Uize.Url.toParams</a></code> static method</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_6"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.6. Uize.Url.toAbsolute"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_6" title="2. Static Methods -&gt; 2.6. Uize.Url.toAbsolute">6</a>. </span>Uize.Url.toAbsolute</h2>
+		<div class="contents2">
+			<p>Returns a string, representing the specified relative URL resolved against the specified base URL.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">absoluteUrlSTR = Uize.Url.toAbsolute (baseUrlSTR,relativeUrlSTR);
+</pre>
+			
+			<p><span class="allCaps">EXAMPLE 1</span></p>
+			
+			
+<pre class="sample-code">Uize.Url.toAbsolute (
+  'http://www.uize.com/reference/source-code/Uize.html',
+  '../../download.html'
+);
+</pre>
+			
+			<p>The above statement would produce the value <code>'http://www.uize.com/download.html'</code>.</p>
+			
+			<p><span class="allCaps">EXAMPLE 2</span></p>
+			
+			
+<pre class="sample-code">Uize.Url.toAbsolute ('http://www.uize.com/index.html','download.html');
+</pre>
+			
+			<p>The above statement would produce the value <code>'http://www.uize.com/download.html'</code>.</p>
+			
+			<p><span class="allCaps">EXAMPLE 3</span></p>
+			
+			
+<pre class="sample-code">Uize.Url.toAbsolute ('http://www.uize.com/index.html','');
+</pre>
+			
+			<p>The above statement would produce the value <code>'http://www.uize.com'</code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_7"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.7. Uize.Url.toParams"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_7" title="2. Static Methods -&gt; 2.7. Uize.Url.toParams">7</a>. </span>Uize.Url.toParams</h2>
+		<div class="contents2">
+			<p>A utility method that serializes the properties of the specified object to produce a URL query params string.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">queryParamsSTR = Uize.Url.toParams (paramsOBJ);
+</pre>
+			
+			<p>This method assumes that the params in <code>paramsOBJ</code> should be serialized using "&" to separate parameters, and "=" to separate parameter name from parameter value in each name/value pair.</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">Uize.Url.toParams ({
+  category:'holiday',
+  type:'all',
+  results:'20'
+});
+</pre>
+			
+			<p>With the above <code>paramsOBJ</code> value, the <code><a href="#2_7">Uize.Url.toParams</a></code> method would produce the string...</p>
+			
+			
+<pre class="sample-code">'category=holiday&amp;type=all&amp;results=20'
+</pre>
+			
+			<p><span class="allCaps">VARIATION</span></p>
+			
+			
+<pre class="sample-code">queryParamsSTR = Uize.Url.toParams (urlParamsObjectsARRAY);
+</pre>
+			
+			<p>When a <code>urlParamsObjectsARRAY</code> parameter is specified, multiple params objects can be specified in an array. This provides for an easy way to merge query param sets from multiple sources, or to blend fixed params with parameterized params (eg. passed in a method call), or to override the values in param sets. The values from params objects later in the array override those from earlier params objects. None of the objects in the array will be modified by the operation.</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">var defaultSearchSettings = {
+  sort:'recent',
+  type:'all',
+  results:'20'
+};
+searchQueryParamsStr = Uize.Url.toParams (
+  [defaultSearchSettings,{category:'holiday',sort:'popular'}]
+);
+</pre>
+			
+			<p>In the above example, the values of the <code>category</code> and <code>sort</code> properties of the second params object in the <code>urlParamsObjectsARRAY</code> value would be stitched in to the values provided by the <code>defaultSearchSettings</code> query params object that appears first in the array, with the value of the <code>sort</code> property of the second params object overriding the value contained in the <code>defaultSearchSettings</code> object, and with the <code>defaultSearchSettings</code> object <b>not</b> being modified in the process.</p>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this method does not prepend the query '?' character to the params string</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the corresponding <code><a href="#2_2">Uize.Url.fromParams</a></code> static method</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_8"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.8. Uize.Url.toPiece"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_8" title="2. Static Methods -&gt; 2.8. Uize.Url.toPiece">8</a>. </span>Uize.Url.toPiece</h2>
+		<div class="contents2">
+			<p>Returns a string, representing the URL encoded form of the specified string.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">encodedUrlPieceSTR = Uize.Url.toPiece (unencodedSTR);
+</pre>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">encodedUrlPiece = Uize.Url.toPiece ('solar, wind, efficiency &amp; biofuels');
+</pre>
+			
+			<p>After executing the above statement, the variable <code>encodedUrlPiece</code> would have the value <code>'solar%2C%20wind%2C%20efficiency%20%26%20biofuels'</code>.</p>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the corresponding <code><a href="#2_3">Uize.Url.fromPiece</a></code> static method</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+	</div>
+	
+	<a name="3"></a>
+	<h1 class="heading1" title="3. Static Properties"><span class="headingNumber"><a href="#3" title="3. Static Properties">3</a>. </span>Static Properties</h1>
+	<div class="contents1">
+		<a name="3_1"></a>
+		<h2 class="heading2" title="3. Static Properties -&gt; 3.1. Uize.Url.moduleName"><span class="headingNumber"><a href="#3" title="3. Static Properties">3</a>.<a href="#3_1" title="3. Static Properties -&gt; 3.1. Uize.Url.moduleName">1</a>. </span>Uize.Url.moduleName</h2>
+		<div class="contents2">
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+	</div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

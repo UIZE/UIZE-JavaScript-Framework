@@ -1,0 +1,32 @@
+/*** heading ***/
+	.selectorHeading {
+		font-family:Arial, Helvetica, Verdana;
+		font-size:11px;
+		font-weight:bold;
+		text-align:center;
+		letter-spacing:5px;
+		color:#fff;
+		background:#000;
+		border-bottom:3px solid #ffa200;
+		padding-top:3px;
+		padding-bottom:3px;
+	}
+
+/*** selector links ***/
+	.selectorLinks a.buttonLink,
+	.selectorLinks a.buttonLink:link,
+	.selectorLinks a.buttonLink:visited,
+	.selectorLinks a.buttonLink:hover,
+	.selectorLinks a.buttonLink:active {
+		display:block;
+		text-align:left;
+		margin:-1px 0;
+		padding-left:10px;
+		padding-top:3px;
+		padding-bottom:5px;
+	}
+	.selectorLinks a.buttonLink:hover, .selectorLinks a.buttonLink:active {
+		padding-left:4px;
+		border-left:7px solid #ffa200;
+	}
+

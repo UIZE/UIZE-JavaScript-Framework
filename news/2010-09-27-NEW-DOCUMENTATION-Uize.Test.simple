@@ -1,0 +1,13 @@
+Thorough reference documentation has been completed for the =Uize.Test= module, which provides the underpinnings of the UIZE JavaScript Framework's unit testing system.
+
+This documentation is reference documentation for the methods and properties of the =Uize.Test= class - not an explainer or tutorial on unit testing. An explainer that goes into greater detail on the subject of writing unit tests and test suites will be added in a future update. For now, the reference documentation is a decent starting point to get some insights into unit testing in the UIZE JavaScript Framework.
+
+[[Uize.Test][CHECK IT OUT]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2010-09-27 - NEW DOCUMENTATION: Uize.Test
+....................................................................................

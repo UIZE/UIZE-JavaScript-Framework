@@ -1,0 +1,13 @@
+The new [[../explainers/javascript-dom-events.html][JavaScript DOM Events]] explainer discusses managing the wiring and unwiring of event handlers for DOM events of HTML elements in the context of the UIZE JavaScript Framework.
+
+The UIZE JavaScript Framework provides versatile features for managing the wiring and unwiring of event handlers for DOM events of HTML elements. DOM events are events that originate from HTML elements / DOM nodes in a document. This explainer covers a wide range of matters, including event naming conventions, the event object, order of event handler execution, wiring and unwiring of single event handlers, wiring and unwiring of multiple event handlers, wiring and unwiring of handlers for multiple events of multiple DOM nodes, and more.
+
+[[../explainers/javascript-dom-events.html][LEARN MORE]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-11-25 - NEW EXPLAINER: JavaScript DOM Events
+....................................................................................

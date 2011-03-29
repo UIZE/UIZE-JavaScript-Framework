@@ -1,0 +1,220 @@
+Introduction
+	This document provides guidelines and advice for the development of new UIZE example pages and tools, to be followed by developers of the UIZE JavaScript Framework.
+
+What Type of Example Page Are You Creating?
+	Module Showcases
+		document...
+
+	Widget Showcases
+		document...
+
+	Behavior or Feature Showcases
+		document...
+
+	Demo Applications
+		document...
+
+	Tools
+		document...
+
+Implement the Example Page
+	When implementing your new UIZE example page, there are a number of considerations to keep in mind.
+
+	Find an Example Page to Use as a Template
+		Find an appropriate existing example page or tool to use as a starting point / skeleton for your new example page or tool.
+
+		[[../examples/~example-template.html][~example-template.html]]
+
+	Follow the Coding Style Guide
+		Be sure to be aware of the recommended coding conventions for JavaScript code. For a refresher, consult the [[../appendixes/javascript-code-conventions.html][JavaScript Code Conventions]] appendix.
+
+	Write Optimized Code
+		Make sure to optimize your code for both performance and code size. To learn some useful optimization tips and tricks, consult the [[../appendixes/javascript-optimization.html][JavaScript Optimization]] appendix.
+
+Location and Filename
+	Location
+		Example pages are all located at the *root level* of the "examples" folder - examples are *not* organized into subfolders.
+
+	Filename
+		The filename for an example page should be derived from the `Title` of the page, according to the following scheme...
+
+		- use the first portion up to the first " | " separator
+		- lowercase all the characters
+		- replace all occurrences of one or more non-word characters with a "-" (hyphen) character
+		- append the =.html= file extension
+
+		EXAMPLE PAGE TITLE
+		...................................................................................
+		Hover Fader Text Shadow Animation | JavaScript Examples | UIZE JavaScript Framework
+		...................................................................................
+
+		EXAMPLE PAGE FILENAME
+		......................................
+		hover-fader-text-shadow-animation.html
+		......................................
+
+		As you can see from the above example, we have taken the "Hover Fader Text Shadow Animation" text from the example page's `Title`, then we have lowercased all the letters, replaced non-word characters (only spaces in this case) with hyphens, and then appended the =.html= file extension. The result is the filename =hover-fader-text-shadow-animation.html=.
+
+		There are some exceptions to this rule, but most of these exceptions are legacy - going forward, all filenames for example pages should be derived from their `Title`.
+
+		Unreleased Example Pages
+			Example pages that are still under development and that are not yet ready for primetime release can be distinguished from released example pages by adding a "~" (tilde) character as a prefix.
+
+			For one thing, the tilde prefix makes all the example pages still under development clump together in a sort of the =examples= folder's contents. This is useful in easily seeing which examples are still works in progress. More importantly, however, the tilde prefix is observed by any build scripts that iterate through the contents of the =examples= folder to create example index pages, example source pages, and the like.
+
+Example Page Requirements
+	Examples pages created for the UIZE JavaScript Framework should satisfy the following requirements...
+
+	Title
+		The text of the =title= tag of an example page or tool should conform to the following format...
+
+		EXAMPLE TITLE FORMAT
+		................................................................
+		[example name] | JavaScript Examples | UIZE JavaScript Framework
+		................................................................
+
+		A value for the =[example name]= token should conform to the following rules...
+
+		- should be in [[http://en.wikipedia.org/wiki/Title_case#Headings_and_publication_titles][title case]]
+		- should, ideally, be no more than 64 characters long
+		- should not contain the "|" (pipe) character
+		- may contain non-word characters (except "|")
+		- should include words that capture / express essential aspects of the example
+
+		TITLE EXAMPLE
+		...................................................................................
+		Hover Fader Text Shadow Animation | JavaScript Examples | UIZE JavaScript Framework
+		...................................................................................
+
+		In the above example, our example title has the text "Hover Fader Text Shadow Animation" for the =[example name]= token.
+
+		Additional Use of Example Name
+			Put some careful thought into the creation of the value for the =[example name]= token, since it gets used in other places...
+
+			- By convention, the =[example name]= value is used in deriving a `Filename` for the example page.
+			- The =[example name]= value is extracted by build scripts that then use it as the title / link text for examples in index pages that list examples by keyword, module, etc.
+
+	Meta Description
+		- create an enticing description for the description meta tag
+			- make sure it is no more than 150 characters in length
+			- use the SEO tag editor widget
+		- make sure the example
+
+	Meta Keywords
+		- add the appropriate combination of keywords to the keywords meta tag
+
+			- only choose keywords if the example is a particularly exemplary showcase for that keyword, not if it just barely exhibits the quality or qualities represented by the keywords (provide an example of this principle)
+
+		Category Keywords
+			- choose from one or more of the following keywords
+				- animation
+				- color
+				- drag-and-drop
+				- form
+				- ipad
+				- menu
+				- slideshow
+				- tool
+				- touch
+				- widget
+				- zoom
+
+		Module Name Keywords
+			document...
+
+	Main Layout
+		Explanation
+			- example should always contain a reasonable length explanation
+				- with instructions to the user where appropriate so that things that are not always self-evident are not missed by the user
+				- module links
+					- explanation should link to the module (or modules) that are the focus of the example
+					- don't need to link to all modules used by the example's code (if your example happens to use Uize.Node in a rather mundane way and merely in support of the main crux of the example, then it's not terribly compelling to call the user's attention to this)
+				- inline code, such as static and instance method names, or the names of set-get properties, etc. should be enclosed in the =code= tag
+
+		Main Content
+			- main content of example should not be so large as to prevent the entire example from being visible inside a 1024x768 window, even if explanation has to be scrolled out of view. There can be exceptions to this guideline.
+
+			- find a way with the layout of the examples to put space around active draggable UI, to minimize the risk of drag taking the mouse outside the window and resulting in the sticky drag effect
+
+		Programmatic Interface Demos
+			- where appropriate, examples should contain demos of programmatic interface, ideally below main content of example
+
+	Maximum Dimensions
+		Avoid Horizontal Scrolling
+			On a 1024x768 display with the browser maximized, an example page should never require horizontal scrolling.
+
+			The styling of the *uize.com* Web site imposes a maximum width of =780= pixels on the main content area for all pages, including example pages. The `Main Layout` for an example should be designed to fit within that width.
+
+		Avoid Vertical Scrolling, Where Possible
+			On a 1024x768 display with the browser maximized, an example page should ideally not require vertical scrolling.
+
+			This requirement is not as important as the requirement to `Avoid Horizontal Scrolling`, but it preferable that example pages not require vertical scrolling. Where possible, modify the various elements of the `Main Layout` (such as the `Explanation` text, the `Main Content`, and the `Programmatic Interface Demos`) as needed to ensure that the combined height does not introduce vertical scrolling.
+
+			Maximum Height Marker
+				The styling of example pages includes a dotted marker line that indicates the maximum height for the combined contents of an example page.
+
+				The `Maximum Height Marker` is subtle so as to not be too intrusive for those viewing the examples, but it's easy enough to spot when you're designing an example page. The position of the marker takes into account a worst case scenario of a browser with a lot of vertical chrome - window title bar, window menu bar, location bar, personal bookmarks bar, developer toolbar, and tabs. So, if your example page fits above that fold line, chances are there'll be enough breathing room to avoid scrolling on most notebook and netbook displays, and ample room to view the entire example in Safari on an iPad.
+
+			Benefits of No Vertical Scrolling
+				Avoiding vertical scrolling in example pages offers the following important benefits...
+
+				- *Improved User Experience* - By avoiding vertical scrolling wherever possible, the user experience of taking a tour through a series of examples is improved - the user gets to see in a single glance the overal layout / structure of the example to get the gist of what's going on, and the interation of stepping through multiple examples to find an example of interest is not punctuated by messing with scrolling to see if there's anything of interest below the fold.
+
+				- *Easier Screenshots* - Avoiding vertical scrolling increases the chances of an example's entire UI fitting nicely into a screenshot, and thumbnails used to represent the example can better capture what's offered in the example.
+
+			When Vertical Scrolling is Necessary
+				There will always be a few cases where it is just not possible to avoid vertical scrolling and still produce a viable example page.
+
+				Some example pages that have more content than can fit above the `Maximum Height Marker` include...
+
+				- [[../examples/collection-dynamic.html][Dynamic Collection]]
+				- [[../examples/hover-fader-for-thumbnails.html][ Hover Fader for Thumbnails]]
+				- [[../examples/populating-photo-details.html][Populating Photo Details]]
+				- [[../examples/sortable-color-table.html][ Uize.Widget.ThumbZoom]]
+
+				Apart from exceptional cases like those listed above, the overwhelming majority of the example pages are designed very deliberately so that their entire contents fits into a 1024x768 browser window without requiring vertical or horizontal scrollbars.
+
+				Whenever working on an example page where vertical scrolling may be necessary, consider the following guidelines...
+
+				- The `Main Content` of an example page should never be pushed below or deep into the `Maximum Height Marker` because the `Explanation` is too long.
+
+				- If the `Main Content` of an example page *must* extend beneath the `Maximum Height Marker`, make sure at least to fit a compelling portion of the `Main Content` above the `Maximum Height Marker`, so that the user viewing the example can at least get a good sense of what it offers at first glance - there must be something sufficiently juicy within plain view.
+
+	Comments
+		document...
+		Comment the Example Page Source
+
+	Conform to the HTML Style Guide
+		- refer to the HTML Style Guide
+
+What's Done for You Automatically
+	When you create a new example page, various build scripts perform some functions for you automatically.
+
+	Source Code Pages Built Automatically
+		For every example page (excluding `Unreleased Example Pages`), a corresponding source code page is automatically generated.
+
+		Generated source code pages are all placed within the =examples/source-code= folder, and the filename for each source code page is identical to the filename of its corresponding example.
+
+	Listing in Various Index Pages
+		Every example page you create (excluding `Unreleased Example Pages`) is automatically listed in appropriate example index pages, using the `Title`, `Meta Description`, and `Meta Keywords` you provided for the example.
+
+		Examples By Keyword Listings
+			Using the `Category Keywords` contained in the `Meta Keywords` you provide for an example page, the page will be listed in the index page for each of the specified `Category Keywords`.
+
+		Examples By Module Name Listing
+			Using the `Module Name Keywords`, if any, contained in the `Meta Keywords` you provide for an example page, the page will be listed in the appropriate place(s) in the tree menu on the [[../javascript-examples-by-module.html][JavaScript Examples, By Module]] page.
+
+		All Examples Listing
+			Every example page you create (excluding `Unreleased Example Pages`) is automatically listed in the [[../javascript-examples.html][JavaScript Examples]] page, which lists all examples.
+
+	Example Tours
+		The example pages listed in any of the `Examples By Keyword Listings`, as well as the `All Examples Listing`, can be viewed in a step-by-step tour ([[../javascript-feature-tours.html?tour=all][see example]]), so any example page you create will be available in at least one tour, and possibly more (depending on how many `Category Keywords` you supply).
+
+Announce a New Example Page or Tool
+	document...
+
+Revisit This Explainer, As Needed
+	Developers using the UIZE JavaScript Framework will use the example pages you create to learn how to use the framework or the UIZE modules that you develop that are showcased by your example pages.
+
+	Therefore, take the process of creating example pages seriously. Don't be afraid to revisit this document as a refresher when adding a new example page, and as a last step / checklist before finally committing your new example page to the framework. If it takes a few minutes to skim through this document and see if you've forgotten or missed anything, it might be a few minutes well spent.
+

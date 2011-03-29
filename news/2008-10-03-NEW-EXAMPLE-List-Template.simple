@@ -1,0 +1,11 @@
+This modest little example demonstrates how a JavaScript template for generating an unordered list can be used to populate list HTML into a node in the page.
+
+[[../examples/templates-list.html][CHECK IT OUT]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2008-10-03 - NEW EXAMPLE: List Template
+....................................................................................

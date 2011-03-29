@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Options - HTML Source Code | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework HTML example source code"/>
+	<meta name="description" content="This is the source code for the Options example"/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../../css/page.css"/>
+	<link rel="stylesheet" href="../../css/page.source.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../../index.html" title="UIZE JavaScript Framework home"></a>
+	SOURCE CODE: Options
+	<div id="page-actions" class="pageActions">
+		<a href="../options.html" class="buttonLink">VIEW EXAMPLE</a>
+	</div>
+</h1>
+
+<pre>
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+&lt;head&gt;
+  &lt;title&gt;Options | JavaScript Examples | UIZE JavaScript Framework&lt;/title&gt;
+  &lt;meta name="keywords" content="Uize.Widget.Options"/&gt;
+  &lt;meta name="description" content="See how to use the options widget to let the user pick a single option from a set of options by clicking on an option button. Test links are provided."/&gt;
+  &lt;link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/&gt;
+  &lt;link rel="stylesheet" href="../css/page.css"/&gt;
+  &lt;link rel="stylesheet" href="../css/page.example.css"/&gt;
+  &lt;link rel="stylesheet" href="css/option-buttons-set.css"/&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+&lt;script type="text/javascript" src="../js/Uize.js"&gt;&lt;/script&gt;
+
+&lt;h1 class="document-title"&gt;
+  &lt;a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"&gt;&lt;/a&gt;
+  &lt;a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow"&gt;JAVASCRIPT EXAMPLES&lt;/a&gt;
+  Options
+  &lt;div id="page-actions" class="pageActions"&gt;
+    &lt;a href="source-code/options.html" class="buttonLink"&gt;SOURCE&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/h1&gt;
+
+&lt;div class="main"&gt;
+  &lt;!-- explanation copy --&gt;
+
+  &lt;div class="explanation"&gt;
+    &lt;p&gt;In this example, the markup for an options widget is being wired up by an instance of &lt;a href="../reference/Uize.Widget.Options.html"&gt;&lt;code&gt;Uize.Widget.Options&lt;/code&gt;&lt;/a&gt;. Below the options are some links that execute snippets of code to demonstrate the programmatic interface of the widget. The &lt;code&gt;Uize.Widget.Options&lt;/code&gt; class provides &lt;code&gt;value&lt;/code&gt; and &lt;code&gt;tentativeValue&lt;/code&gt; set-get properties in its interface. The &lt;code&gt;Changed.value&lt;/code&gt; and &lt;code&gt;Changed.tentativeValue&lt;/code&gt; instance events for these two properties can be used to watch for changes in the widget's state. The &lt;code&gt;value&lt;/code&gt; set-get property can be set to programmatically change the selected option. Interact with both the options UI and the test links to see how they affect one another.&lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;!-- options UI --&gt;
+
+  &lt;table class="optionsShell" cellspacing="0" cellpadding="0"&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;div id="page_options_option0" class="button"&gt;SOLAR&lt;/div&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;div id="page_options_option1" class="button"&gt;WIND&lt;/div&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;div id="page_options_option2" class="button"&gt;GEOTHERMAL&lt;/div&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;div id="page_options_option3" class="button"&gt;EFFICIENCY&lt;/div&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;div id="page_options_option4" class="button"&gt;TIDAL&lt;/div&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/table&gt;
+  &lt;br/&gt;
+
+  &lt;!-- programmatic interface examples --&gt;
+
+  &lt;div class="programmaticInterface"&gt;
+    &lt;p&gt;&lt;b&gt;options.get ('value') == &lt;/b&gt; '&lt;span id="page-optionsValue"&gt;&lt;/span&gt;'&lt;/p&gt;
+    &lt;p&gt;&lt;b&gt;options.get ('tentativeValue') == &lt;/b&gt; '&lt;span id="page-optionsTentativeValue"&gt;&lt;/span&gt;'&lt;/p&gt;
+    &lt;p&gt;
+      &lt;b&gt;Set the value for the options widget: &lt;/b&gt;
+      &lt;a href="javascript://" class="linkedJs"&gt;options.set ({value:'solar'})&lt;/a&gt;
+      &amp;nbsp;,&amp;nbsp;
+      &lt;a href="javascript://" class="linkedJs"&gt;options.set ({value:'wind'})&lt;/a&gt;
+      &amp;nbsp;,&amp;nbsp;
+      &lt;a href="javascript://" class="linkedJs"&gt;options.set ({value:'geothermal'})&lt;/a&gt;
+      &amp;nbsp;,&amp;nbsp;
+      &lt;a href="javascript://" class="linkedJs"&gt;options.set ({value:'efficiency'})&lt;/a&gt;
+      &amp;nbsp;,&amp;nbsp;
+      &lt;a href="javascript://" class="linkedJs"&gt;options.set ({value:'tidal'})&lt;/a&gt;
+    &lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;script type="text/javascript"&gt;
+
+Uize.module ({
+  required:[
+    'UizeDotCom.Page.Example.library',
+    'UizeDotCom.Page.Example',
+    'Uize.Widget.Options'
+  ],
+  builder:function () {
+    /*** create the example page widget ***/
+      var page = window.page = new UizeDotCom.Page.Example ({evaluator:function (code) {eval (code)}});
+
+    /*** add the options child widget ***/
+      var options = page.addChild ('options',Uize.Widget.Options);
+
+    /*** some code for demonstrating the widget's programmatic interface ***/
+      options.wire ({
+        'Changed.value':
+          function () {page.setNodeInnerHtml ('optionsValue',options)},
+        'Changed.tentativeValue':
+          function () {page.setNodeInnerHtml ('optionsTentativeValue',options.get ('tentativeValue'))}
+      });
+
+    /*** wire up the page widget ***/
+      page.wireUi ();
+
+    /*** initialize the options widget's values ***/
+      options.set ({
+        values:['solar','wind','geothermal','efficiency','tidal'],
+        value:'solar'
+      });
+  }
+});
+
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+
+</pre>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.library',
+		'UizeDotCom.Page'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page).wireUi ()}
+});
+
+</script>
+
+</body></html>

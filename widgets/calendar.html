@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Calendar | Widgets | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="calendar widget embed blog iframe bookmarklet"/>
+	<meta name="description" content="An easy to use calendar widget that you can embed in your Web sites and blogs, that automatically shows the current date and the days in the month."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	
+	<!-- for Facebook Share (http://wiki.developers.facebook.com/index.php/Facebook_Share/Specifying_Meta_Tags) -->
+		<meta name="title" content="calendar"/>
+		<link rel="image_src" href="../images/widgets/calendar-96x96.gif"/>
+
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../examples/css/params-table.css"/>
+	<link rel="stylesheet" href="../css/page.widgethomepage.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	<a href="../javascript-widgets.html" class="breadcrumb breadcrumbWithArrow">WIDGETS</a>
+	Calendar
+</h1>
+
+<div class="main">
+	<div class="preamble">
+		An easy to use calendar widget that you can embed in your Web sites and blogs, that automatically shows the current date and the days in the month.
+	</div>
+
+	<div class="widgetInfoPane">
+		<ul class="featuresList">			<li>MONTH AND YEAR DISPLAY: the current month and year are displayed above the month grid</li>
+			<li>TODAY HIGHLIGHT: today's date is highlighted in the month grid (if it falls into the currently shown month and year)</li>
+			<li>MONTH NAVIGATION: see what days are in next month (or any other month) by navigating to the month using the convenient month navigation buttons</li>
+			<li>YEAR NAVIGATION: find a date in a month next year (or any other year) by navigating to the year using the convenient year navigation buttons</li>
+			<li>TASTEFUL DESIGN: the calendar widget is designed to look pleasing and professional, to make a smart addition to any Web page</li>
+</ul>
+
+		<p>This widget is built using the <a href="../reference/Uize.Widget.Calendar.html">Uize.Widget.Calendar</a> module of the UIZE JavaScript Framework. To see more JavaScript examples, view the <a href="../javascript-examples.html">Javascript Examples</a> index page.</p>
+
+		
+	</div>
+
+	<div class="widgetPreviewPane">
+		<iframe src="calendar/web.html" style="width:240px; height:314px;" scrolling="no" frameborder="0" allowtransparency="true" class="widgetPreviewIframe"></iframe>
+
+		<table class="paramsTable">
+			<tr>
+				<td class="fieldLabel">EMBED</td>
+				<td><input type="text" value="&lt;iframe src=&quot;http://www.uize.com/widgets/calendar/web.html&quot; style=&quot;width:240px; height:314px;&quot; scrolling=&quot;no&quot; frameborder=&quot;0&quot; allowtransparency=&quot;true&quot;&gt;&lt;/iframe&gt;" readonly="readonly"/></td>
+			</tr>
+			<tr>
+				<td class="fieldLabel">BOOKMARKLET</td>
+				<td><a href="javascript:window.open('http://www.uize.com/widgets/calendar/web.html','calendar','width=240,%20height=314,toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=no,resizable=no').focus(),undefined;">CALENDAR</a></a></td>
+			</tr>
+		</table>
+
+		<a href="../javascript-widgets.html" class="buttonLink seeMoreWidgetsButton">SEE MORE WIDGETS</a>
+	</div>
+
+	<br style="clear:left;"/>
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.library',
+		'UizeDotCom.Page'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page).wireUi ()}
+});
+
+</script>
+
+</body></html>
+

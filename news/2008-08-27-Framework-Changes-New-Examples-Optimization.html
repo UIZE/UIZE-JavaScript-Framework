@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2008-08-27 - Framework Changes, New Examples, Optimization | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="The Uize.Widget.Page page widget class now provides an implementation for decorated confirm and inform (aka alert) modal dialogs."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2008.html" class="breadcrumb breadcrumbWithArrow">2008 NEWS</a>
+	2008-08-27 - Framework Changes, New Examples, Optimization
+
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="The Uize.Widget.Page page widget class now provides an implementation for decorated confirm and inform (aka alert) modal dialogs.">1. Decorated Confirm and Inform</a></li>
+			<li><a href="#2" title="The new Calendar example provides a simple demonstration of the Uize.Widget.Calendar widget class and some aspects of its programmatic interface.">2. NEW EXAMPLE: Calendar</a></li>
+			<li><a href="#3" title="The new Calendar Controls Wikipedia example demonstrates how an instance of the calendar widget class (Uize.Widget.Calendar) can be wired up to let the user choose a date in time and then view Wikipedia reference information for that date inside an IFRAME document in the page.">3. NEW EXAMPLE: Calendar Controls Wikipedia</a></li>
+			<li><a href="#4" title="The new Decorated Confirm Dialog example demonstrates the decorated confirm and inform (aka alert) modal dialog functionality that is implemented in the Uize.Widget.Page base class. The example demonstrates various forms that the decorated dialog can take, including customizable title, message, and state icon.">4. NEW EXAMPLE: Decorated Confirm Dialog</a></li>
+			<li><a href="#5" title="The Uize.Json module now supports serializing of values that are date objects (ie. instances of JavaScript&apos;s built-in Date object).">5. IMPROVED MODULE: Uize.Json</a></li>
+			<li><a href="#6" title="Several modifications have been made to the Uize.Widget class, including...">6. OPTIMIZED MODULE: Uize.Widget</a></li>
+			<li><a href="#7" title="Several modifications have been made to the Uize.Widget.Button class, including...">7. OPTIMIZED MODULE: Uize.Widget.Button</a></li>
+			<li><a href="#8" title="Several modifications have been made to the Uize.Widget.Options class, including...">8. OPTIMIZED MODULE: Uize.Widget.Options</a></li>
+			<li><a href="#9" title="The Uize.Date module has been enhanced with the following new features...">9. IMPROVED MODULE: Uize.Date</a></li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<a name="1"></a>
+	<h1 class="heading1" title="1. Decorated Confirm and Inform"><span class="headingNumber"><a href="#1" title="1. Decorated Confirm and Inform">1</a>. </span>Decorated Confirm and Inform</h1>
+	<div class="contents1">
+		<p>The <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code> page widget class now provides an implementation for decorated confirm and inform (aka alert) modal dialogs.</p>
+		
+		<p>All pages that use this class (or a subclass of this class) get the benefit of this functionality. Any widget that is on the widget tree of a page widget of this class (or a subclass) can use the decorated dialogs by calling its <code>confirm</code> and <code>inform</code> instance methods. The dialog widget itself is implemented in the new <code>Uize.Widget.Palette.Confirm</code> module.</p>
+	</div>
+	
+	<a name="2"></a>
+	<h1 class="heading1" title="2. NEW EXAMPLE: Calendar"><span class="headingNumber"><a href="#2" title="2. NEW EXAMPLE: Calendar">2</a>. </span>NEW EXAMPLE: Calendar</h1>
+	<div class="contents1">
+		<p>The new <code>Calendar</code> example provides a simple demonstration of the <code><a href="../reference/Uize.Widget.Calendar.html">Uize.Widget.Calendar</a></code> widget class and some aspects of its programmatic interface.</p>
+		
+		<p><a href="../examples/calendar.html">CHECK IT OUT</a></p>
+	</div>
+	
+	<a name="3"></a>
+	<h1 class="heading1" title="3. NEW EXAMPLE: Calendar Controls Wikipedia"><span class="headingNumber"><a href="#3" title="3. NEW EXAMPLE: Calendar Controls Wikipedia">3</a>. </span>NEW EXAMPLE: Calendar Controls Wikipedia</h1>
+	<div class="contents1">
+		<p>The new <code>Calendar Controls Wikipedia</code> example demonstrates how an instance of the calendar widget class (<code><a href="../reference/Uize.Widget.Calendar.html">Uize.Widget.Calendar</a></code>) can be wired up to let the user choose a date in time and then view Wikipedia reference information for that date inside an IFRAME document in the page.</p>
+		
+		<p><a href="../examples/calendar-controls-wikipedia.html">CHECK IT OUT</a></p>
+	</div>
+	
+	<a name="4"></a>
+	<h1 class="heading1" title="4. NEW EXAMPLE: Decorated Confirm Dialog"><span class="headingNumber"><a href="#4" title="4. NEW EXAMPLE: Decorated Confirm Dialog">4</a>. </span>NEW EXAMPLE: Decorated Confirm Dialog</h1>
+	<div class="contents1">
+		<p>The new <code>Decorated Confirm Dialog</code> example demonstrates the decorated confirm and inform (aka alert) modal dialog functionality that is implemented in the <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code> base class. The example demonstrates various forms that the decorated dialog can take, including customizable title, message, and state icon.</p>
+		
+		<p><a href="../examples/decorated-confirm.html">CHECK IT OUT</a></p>
+	</div>
+	
+	<a name="5"></a>
+	<h1 class="heading1" title="5. IMPROVED MODULE: Uize.Json"><span class="headingNumber"><a href="#5" title="5. IMPROVED MODULE: Uize.Json">5</a>. </span>IMPROVED MODULE: Uize.Json</h1>
+	<div class="contents1">
+		<p>The <code><a href="../reference/Uize.Json.html">Uize.Json</a></code> module now supports serializing of values that are date objects (ie. instances of JavaScript's built-in <code><a href="../javascript-reference/Date.html">Date</a></code> object).</p>
+		
+		<p>Date values are serialized as a call to the <code><a href="../javascript-reference/Date.html">Date</a></code> constructor, with a value formatted in POSIX time (ie. milliseconds since January 1, 1970 UTC). This means that for objects serialized to JSON format and that contain values that are dates, they can be returned back to an in-memory representation using a simple JavaScript <code>eval</code>, since the <code><a href="../javascript-reference/Date.html">Date</a></code> constructor will be invoked to create true date objects.</p>
+		
+		<p><span class="allCaps">EXAMPLE</span></p>
+		
+		
+<pre class="sample-code">{
+  firstName:'Mary',
+  lastName:'Jackson',
+  dateOfBirth:new Date (20588354000)
+}
+</pre>
+	</div>
+	
+	<a name="6"></a>
+	<h1 class="heading1" title="6. OPTIMIZED MODULE: Uize.Widget"><span class="headingNumber"><a href="#6" title="6. OPTIMIZED MODULE: Uize.Widget">6</a>. </span>OPTIMIZED MODULE: Uize.Widget</h1>
+	<div class="contents1">
+		<p>Several modifications have been made to the <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> class, including...</p>
+		
+		<table class="list">
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>The <code>useNewIdSyntax</code> set-get property, that was provided many moons back as a means of easing the transition over to the new id syntax for widgets and their implied nodes, has finally been completely killed. There are no longer any living widgets using the old id syntax. Any widgets that had not yet been converted over were either updated or killed. Removing this old facility clears out a little bit of cruft and extra complication from the code for the <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> class.</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>The <code>wired</code> instance method now only returns the value of the <code>wired</code> set-get property and no longer accepts an optional parameter for setting the property's value. The ability to set using the optional parameter was not being used anywhere and, in the rare event that you may need to set the <code>wired</code> set-get property (not generally advisable), you can simply use <code>myWidget.set ({wired:wiredBOOL})</code>.</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>The <code>htmlSubstitutions</code> set-get property has been <b>KILLED</b>. As it turns out, there are better alternatives for funneling data to HTML templates for widgets. When the <code>html</code> set-get property of a widget is a function or a compiled JavaScript template package, then the HTML generator function is supplied with the current state for all the widget's set-get properties.</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the <code>uiWired</code> alias for the <code>wired</code> set-get property, that had been kept around for backwards compatibility purposes, has finally, after way too many years, been <b>KILLED</b>. No code was found that still referenced the old alias.</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>many miscellaneous small performance and code size optimizations have been made to the <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> class</td></tr>
+		</table>
+	</div>
+	
+	<a name="7"></a>
+	<h1 class="heading1" title="7. OPTIMIZED MODULE: Uize.Widget.Button"><span class="headingNumber"><a href="#7" title="7. OPTIMIZED MODULE: Uize.Widget.Button">7</a>. </span>OPTIMIZED MODULE: Uize.Widget.Button</h1>
+	<div class="contents1">
+		<p>Several modifications have been made to the <code><a href="../reference/Uize.Widget.Button.html">Uize.Widget.Button</a></code> class, including...</p>
+		
+		<table class="list">
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>for button widgets added to other widgets using the <code>Uize.Widget.Button.addChildButton</code> stitch-in method, the <code>'Click'</code> instance event fired when such buttons are clicked no longer carries a <code>buttonId</code> property in the <code>event</code> object. Handlers of the <code>'Click'</code> event can, instead, use <code>event.source.get ('name')</code> to obtain the name of the button widget that fired the event, which is equivalent to the old <code>buttonId</code> approach. This is a rare use case, and all code was paying a small price for a convenience enjoyed by only a few. Various modules have been updated accordingly.</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>various performance improvements have been made that benefit applications that use hundreds of button widget instances, like instances of <code><a href="../reference/Uize.Widget.Options.html">Uize.Widget.Options</a></code> that have large values arrays</td></tr>
+		</table>
+	</div>
+	
+	<a name="8"></a>
+	<h1 class="heading1" title="8. OPTIMIZED MODULE: Uize.Widget.Options"><span class="headingNumber"><a href="#8" title="8. OPTIMIZED MODULE: Uize.Widget.Options">8</a>. </span>OPTIMIZED MODULE: Uize.Widget.Options</h1>
+	<div class="contents1">
+		<p>Several modifications have been made to the <code><a href="../reference/Uize.Widget.Options.html">Uize.Widget.Options</a></code> class, including...</p>
+		
+		<table class="list">
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>The <code>'Option Bed Event'</code> instance event has been eliminated. It was not found to be in use anywhere, and instances of <code><a href="../reference/Uize.Widget.Options.html">Uize.Widget.Options</a></code> with hundreds of options were paying a performance penalty.</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>various performance improvements have been made that benefit applications that use instances that have large values arrays</td></tr>
+		</table>
+	</div>
+	
+	<a name="9"></a>
+	<h1 class="heading1" title="9. IMPROVED MODULE: Uize.Date"><span class="headingNumber"><a href="#9" title="9. IMPROVED MODULE: Uize.Date">9</a>. </span>IMPROVED MODULE: Uize.Date</h1>
+	<div class="contents1">
+		<p>The <code><a href="../reference/Uize.Date.html">Uize.Date</a></code> module has been enhanced with the following new features...</p>
+		
+		<table class="list">
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the new <code>Uize.Date.dayNames</code> static property provides an array of English names for the days of the week</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the new <code>Uize.Date.monthNames</code> static property provides an array of English names for the months of the year</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the new <code>Uize.Date.isLeapYear</code> static method provides a way of determining whether or not a specific year is a leap year</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the new <code>Uize.Date.getDaysInMonth</code> static method calculates the number of days in the specified month of the specified year</td></tr>
+		</table>
+	</div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

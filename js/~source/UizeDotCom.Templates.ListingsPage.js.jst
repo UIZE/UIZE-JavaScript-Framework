@@ -1,0 +1,83 @@
+<%@
+	required ('Uize.String.Lines');
+	input ({
+		title:'string',
+		displayTitle:'string',
+		pathToRoot:'string',
+		imageFolder:'string',
+		metaDescription:'string',
+		preamble:'string',
+		listings:'array'
+	});
+%><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title><% .title %> | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework"/>
+	<meta name="description" content="<% .metaDescription -> tagAttributeValue %>"/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="<% .pathToRoot %>css/page.css"/>
+	<link rel="stylesheet" href="<% .pathToRoot %>css/page.simpledoc.css"/>
+	<link rel="stylesheet" href="<% .pathToRoot %>css/page.listings.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="<% .pathToRoot %>js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="<% .pathToRoot %>index.html" title="UIZE JavaScript Framework home"></a>
+	<%= input.displayTitle || input.title %>
+</h1>
+
+<div class="main">
+
+<div class="preamble"><% .preamble %></div>
+
+<%
+	for (
+		var
+			listingNo = -1,
+			listings = input.listings,
+			listingsLength = listings.length,
+			imageFolder = input.imageFolder || input.title.toLowerCase ()
+		;
+		++listingNo < listingsLength;
+	) {
+		var
+			listing = listings [listingNo],
+			listingName = listing.fullName,
+			listingSubTitle = listing.subTitle || '',
+			listingNamePlusSubTitle = listingName + (listingSubTitle && ' - ') + listingSubTitle,
+			moreInfoLink = listing.link
+		;
+%>
+<div class="heading1"><%= listingNamePlusSubTitle %></div>
+<div class="infoRow">
+	<% if (moreInfoLink) { %><a href="<%= moreInfoLink %>" target="_blank" class="imageLink"><% } %><img src="<% .pathToRoot %>images/<%= imageFolder %>/<%= listingName.toLowerCase ().replace (/ /g,'-') %>.png" alt="<%= listingNamePlusSubTitle -> tagAttributeValue %>"/><% if (moreInfoLink) { %></a><% } %>
+	<% for (
+		var lineNo = -1, lines = Uize.String.Lines.split (listing.text), linesLength = lines.length;
+		++lineNo < linesLength;
+	) { %>
+	<p><%= lines [lineNo] %></p>
+	<% } %>
+	<%
+		if (moreInfoLink) { %>
+	<p class="more">more info at... <a href="<%= moreInfoLink %>" target="_blank"><%= moreInfoLink %></a></p>
+	<% } %>
+	<br class="end"/>
+</div>
+<% } %>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:'UizeDotCom.Page.library',
+	builder:function () {(window.page = new UizeDotCom.Page).wireUi ()}
+});
+
+</script>
+
+</body></html>

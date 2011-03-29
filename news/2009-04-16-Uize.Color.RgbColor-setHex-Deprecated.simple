@@ -1,0 +1,24 @@
+The =setHex= instance method of the =Uize.Color.RgbColor= object in the =Uize.Color= package has been deprecated in favor of the more versatile =setColor= instance method.
+
+The new =setColor= method allows colors to be specified in a wide variety of different ways, consistent with the ways that initial color can be specified when using the constructor of the =Uize.Color.RgbColor= object.
+
+A FEW EXAMPLES
+............................................................
+myRgbColor.setColor (136,136,136);
+myRgbColor.setColor ('#888888');
+myRgbColor.setColor ('888');
+myRgbColor.setColor ('Rgb(136,136,136)');
+myRgbColor.setColor ({red:136,green:136,blue:136});
+myRgbColor.setColor ([136,136,136]);
+myRgbColor.setColor (new Uize.Color.RgbColor (136,136,136));
+............................................................
+
+The old =setHex= method is still supported.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-04-16 - Uize.Color.RgbColor: setHex Deprecated
+....................................................................................

@@ -1,0 +1,186 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>TEST: Uize.Node.injectHtml | UIZE JavaScript Framework</title>
+	<style type="text/css">
+		h1 {
+			border-left:1px solid #ccc;
+			border-bottom:1px solid #ccc;
+			padding-left:10px;
+			font-family:Arial;
+			font-size:20px;
+			margin-top:30px;
+		}
+		.testNodeParent {
+			border:1px dotted #f00;
+			padding:4px;
+			margin-left:20px;
+			margin-right:20px;
+		}
+		.testNode {
+			border:1px dotted #00f;
+			background:#eee;
+			margin:8px;
+			padding:4px;
+		}
+		.injected {
+			display:block;
+			width:200px;
+			background:#8f8;
+			padding:4px;
+			border:1px dotted #000;
+		}
+		.injected ul {
+			margin-top:0px;
+			margin-bottom:0px;
+		}
+	</style>
+</head>
+<body>
+
+<script type="text/javascript" src="../../js/Uize.js"></script>
+<script type="text/javascript" src="../../js/Uize.Node.js"></script>
+
+<script type="text/javascript">
+
+var _htmlToInject =
+	'<div class="injected">\n' +
+		'<b>INJECTED LIST</b><br/>\n' +
+		'<ul>\n' +
+			'<li>item 1</li>\n' +
+			'<li>item 2</li>\n' +
+			'<li>item 3</li>\n' +
+		'</ul>\n' +
+	'</div>'
+;
+
+</script>
+
+<h1>TEST 1 - default injection mode</h1>
+
+	<p>Using the default injection mode ('inner bottom'), a list is injected. It should appear at the bottom of the inner gray block.</p>
+
+	<div class="testNodeParent">
+		stuff before the test node
+		<div id="test1Node" class="testNode">
+			<p>existing stuff inside the test node</p>
+		</div>
+		stuff after the test node
+	</div>
+
+	<script type="text/javascript">
+		Uize.Node.injectHtml ('test1Node',_htmlToInject);
+	</script>
+
+<h1>TEST 2 - inner top</h1>
+
+	<p>Using the 'inner top' injection mode, a list is injected. It should appear at the top of the inner gray block.</p>
+
+	<div class="testNodeParent">
+		stuff before the test node
+		<div id="test2Node" class="testNode">
+			<p>existing stuff inside the test node</p>
+		</div>
+		stuff after the test node
+	</div>
+
+	<script type="text/javascript">
+		Uize.Node.injectHtml ('test2Node',_htmlToInject,'inner top');
+	</script>
+
+<h1>TEST 3 - inner replace</h1>
+
+	<p>Using the 'inner replace' injection mode, a list is injected. It should be the only contents of the inner gray block.</p>
+
+	<div class="testNodeParent">
+		stuff before the test node
+		<div id="test3Node" class="testNode">
+			<p>existing stuff inside the test node</p>
+		</div>
+		stuff after the test node
+	</div>
+
+	<script type="text/javascript">
+		Uize.Node.injectHtml ('test3Node',_htmlToInject,'inner replace');
+	</script>
+
+<h1>TEST 4 - outer top</h1>
+
+	<p>Using the 'outer top' injection mode, a list is injected. It should appear just before the inner gray block, in the outer block.</p>
+
+	<div class="testNodeParent">
+		stuff before the test node
+		<div id="test4Node" class="testNode">
+			<p>existing stuff inside the test node</p>
+		</div>
+		stuff after the test node
+	</div>
+
+	<script type="text/javascript">
+		Uize.Node.injectHtml ('test4Node',_htmlToInject,'outer top');
+	</script>
+
+<h1>TEST 5 - outer bottom</h1>
+
+	<p>Using the 'outer bottom' injection mode, a list is injected. It should appear just after the inner gray block, in the outer block.</p>
+
+	<div class="testNodeParent">
+		stuff before the test node
+		<div id="test5Node" class="testNode">
+			<p>existing stuff inside the test node</p>
+		</div>
+		stuff after the test node
+	</div>
+
+	<script type="text/javascript">
+		Uize.Node.injectHtml ('test5Node',_htmlToInject,'outer bottom');
+	</script>
+
+<h1>TEST 6 - outer replace</h1>
+
+	<p>Using the 'outer replace' injection mode, a list is injected. It should completely replace the inner gray block (which, therefore, you shouldn't see), and should appear in the middle of the outer block's content, between the "stuff before the test node" and the "stuff after the test node".</p>
+
+	<div class="testNodeParent">
+		stuff before the test node
+		<div id="test6Node" class="testNode">
+			<p>existing stuff inside the test node</p>
+		</div>
+		stuff after the test node
+	</div>
+
+	<script type="text/javascript">
+		Uize.Node.injectHtml ('test6Node',_htmlToInject,'outer replace');
+	</script>
+
+<h1>TEST 7 - outer bottom (when no existing content there)</h1>
+
+	<p>Using the 'outer bottom' injection mode, a list is injected when there is no existing content after the node. It should appear just after the inner gray block, in the outer block. This specifically tests conditional logic in <b>Uize.Node.injectHtml</b> that handles choosing the appropriate DOM methods when the node has no next sibling to insert before (so appendChild has to be used instead).</p>
+
+	<div class="testNodeParent">
+		stuff before the test node
+		<div id="test7Node" class="testNode">
+			<p>existing stuff inside the test node</p>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		Uize.Node.injectHtml ('test7Node',_htmlToInject,'outer bottom');
+	</script>
+
+<h1>TEST 8 - inner top (when no existing content there)</h1>
+
+	<p>Using the 'inner top' injection mode, a list is injected when there is no existing content inside the node. It should appear inside the inner gray block. This specifically tests conditional logic in <b>Uize.Node.injectHtml</b> that handles using innerHTML replacement as an optimization for this special case.</p>
+
+	<div class="testNodeParent">
+		stuff before the test node
+		<div id="test8Node" class="testNode"></div>
+		stuff after the test node
+	</div>
+
+	<script type="text/javascript">
+		Uize.Node.injectHtml ('test8Node',_htmlToInject,'inner top');
+	</script>
+
+</body>
+</html>
+

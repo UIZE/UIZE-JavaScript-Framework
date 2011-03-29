@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2009-08-07 - NEW MODULE: Uize.Fade.xSeries | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="The new Uize.Fade.xSeries module is an extension module that extends the Uize.Fade class by adding static and instance methods for interpolating a series of values between specified start and end values."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2009.html" class="breadcrumb breadcrumbWithArrow">2009 NEWS</a>
+	2009-08-07 - NEW MODULE: Uize.Fade.xSeries
+
+</h1>
+
+<div class="main">
+<div class="contents0">
+	<p>The new <code><a href="../reference/Uize.Fade.xSeries.html">Uize.Fade.xSeries</a></code> module is an extension module that extends the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> class by adding static and instance methods for interpolating a series of values between specified start and end values.</p>
+	
+	<p>The methods defined in the <code><a href="../reference/Uize.Fade.xSeries.html">Uize.Fade.xSeries</a></code> module utilize the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> class to let you create arrays of interpolated values. Typically, the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> class is used to produce time-based animations, but this class can also be used solely for its powerful value interpolation capabilities. The <code>getSeries</code> and <code>Uize.Fade.getSeries</code> methods defined in this extension module could be useful when using fades in non-time based applications, such as displaying values in a bar chart, fading colors over a series of elements, plotting positions for a series of elements, populating data sets, etc.</p>
+	
+	<p><a href="../reference/Uize.Fade.xSeries.html">LEARN MORE</a></p>
+	
+	<p><span class="allCaps">IMPORTANT</span></p>
+	
+	<p>The functionality in the <code><a href="../reference/Uize.Fade.xSeries.html">Uize.Fade.xSeries</a></code> module was migrated out of the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> module. This means that the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> module no longer has <code>getSeries</code> and <code>Uize.Fade.getSeries</code> methods - you need to load the extension module to get these. The rationale for this change - that is <b>not backwards compatible</b> - is that the migrated functionality is esoteric and not often needed, and there's not a good reason why this functionality should add to the page weight for all pages that use <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code>. Removing the code from <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> shaved about 300 bytes off of the scrunched size of the module.</p>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

@@ -1,0 +1,391 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Uize.Color.xCmyk | Documentation | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework Documentation Uize.Color.xCmyk module reference documentation"/>
+	<meta name="description" content="The Uize.Color.xCmyk module extends the Uize.Color object by adding a profile for the CMYK color space, and by providing encodings for this color space."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../javascript-modules-index.html" class="breadcrumb breadcrumbWithArrow">MODULES</a>
+	<a href="Uize.html" title="View reference for Uize" class="breadcrumb">Uize</a>.<a href="Uize.Color.html" title="View reference for Uize.Color" class="breadcrumb">Color</a>.<a href="Uize.Color.xCmyk.html" title="View reference for Uize.Color.xCmyk" class="breadcrumb">xCmyk</a>
+	<div class="pageActions">
+		<a id="page-search" href="javascript://" class="buttonLink" title="Search for references to this module...">SEARCH</a><a id="page-examples" href="javascript://" class="buttonLink" title="View examples for this module...">EXAMPLES</a><a href="source-code/Uize.Color.xCmyk.html" class="buttonLink" title="View the JavaScript source code for this module...">SOURCE</a><a id="page-test" href="javascript://" class="buttonLink" title="Test this module...">TEST</a>
+	</div>
+
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="The Uize.Color.xCmyk module extends the Uize.Color object by adding a profile for the CMYK color space, and by providing encodings for this color space.">1. Introduction</a>
+				<ul>
+					<li><a href="#1_1" title="The following example pages are good showcases for the Uize.Color.xCmyk module...">1.1. Examples</a></li>
+					<li><a href="#1_2" title="The Uize.Color.xCmyk module defines the Uize.Color.xCmyk extension module under the Uize.Color namespace.">1.2. Implementation Info</a>
+						<ul>
+							<li><a href="#1_2_1" title="The features listed in this section have been introduced in this module.">1.2.1. Features Introduced in This Module</a></li>
+							<li><a href="#1_2_2" title="No features have been overridden in this module.">1.2.2. Features Overridden in This Module</a></li>
+							<li><a href="#1_2_3" title="This module has no inherited features.">1.2.3. Features Inherited From Other Modules</a></li>
+							<li><a href="#1_2_4" title="There are no modules directly under this namespace.">1.2.4. Modules Directly Under This Namespace</a></li>
+							<li><a href="#1_2_5" title="There is no dedicated unit tests module for the Uize.Color.xCmyk module.">1.2.5. Unit Tests</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li><a href="#2" title="The Uize.Color.xCmyk extension implements support for the following color encodings / formats...">2. Color Encodings</a>
+				<ul>
+					<li><a href="#2_1" title="An array, containing four elements for cyan, magenta, yellow, and key components of the color, whose values may be floating point numbers in the range of 0 to 100 (eg. the color chartreuse is encoded as [50,0,100,0]).">2.1. CMYK array</a>
+						<ul>
+							<li><a href="#2_1_1" title="When a color is encoded as CMYK array, the resulting array is made up of four number type elements that represent the values of the source color&apos;s cyan, magenta, yellow, and key components, respectively.">2.1.1. Encoding</a></li>
+							<li><a href="#2_1_2" title="When a color is decoded from CMYK array, the values of the array&apos;s four elements may be numbers, strings, or any object that implements a valueOf interface (such as an instance of a Uize subclass that implements the value set-get property).">2.1.2. Decoding</a></li>
+						</ul>
+					</li>
+					<li><a href="#2_2" title="An object, containing cyan, magenta, yellow, and key properties, whose values may be floating point numbers in the range of 0 to 100 (eg. the color chartreuse is encoded as {cyan:50,magenta:0,yellow:100,key:0}).">2.2. CMYK object</a>
+						<ul>
+							<li><a href="#2_2_1" title="When a color is encoded as CMYK object, the resulting object will contain the four number type properties cyan, magenta, yellow, and key, reflecting the values of the source color&apos;s cyan, magenta, yellow, and key components, respectively.">2.2.1. Encoding</a></li>
+							<li><a href="#2_2_2" title="When a color is decoded from CMYK object, the values of the object&apos;s cyan, magenta, yellow, and key properties may be numbers, strings, or any object that implements a valueOf interface (such as an instance of a Uize subclass that implements the value set-get property).">2.2.2. Decoding</a></li>
+						</ul>
+					</li>
+					<li><a href="#2_3" title="A Cmyk(...) formatted 4-tuple string (eg. the color chartreuse is encoded as &apos;cmyk(50%,0%,100%,0%)&apos;).">2.3. CMYK string</a>
+						<ul>
+							<li><a href="#2_3_1" title="When a color is encoded as CMYK string, the resulting string will always be all lowercase, without any spaces.">2.3.1. Encoding</a></li>
+							<li><a href="#2_3_2" title="When a color is decoded from CMYK string, the string may contain separating spaces, may be in upper, lower, or mixed case (ie. not case sensitive), and the &quot;%&quot; (percent symbol) character for the saturation and value values may be omitted.">2.3.2. Decoding</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li><a href="#3">3. Static Properties</a>
+				<ul>
+					<li><a href="#3_1" title="IMPLEMENTATION INFO">3.1. Uize.Color.xCmyk.moduleName</a></li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<a name="1"></a>
+	<h1 class="heading1" title="1. Introduction"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>. </span>Introduction</h1>
+	<div class="contents1">
+		<p>The <code>Uize.Color.xCmyk</code> module extends the <code><a href="../reference/Uize.Color.html">Uize.Color</a></code> object by adding a profile for the <code>CMYK</code> color space, and by providing encodings for this color space.</p>
+		
+		<p><b>DEVELOPERS:</b> <a href="http://www.tomkidding.com" target="_blank" class="externalSiteLink">Chris van Rensburg</a></p>
+		
+		<p>The <code>Uize.Color.colorSpaces.CMYK</code> property - defined in this extension - provides a profile for the <a href="http://en.wikipedia.org/wiki/Cmyk" target="_blank" class="externalSiteLink">CMYK</a> (Cyan, Magenta, Yellow, Key) color space. The CMYK color model is a subtractive color model used to describe the printing process. Some examples of CMYK formatted colors can be viewed at <a href="http://www.december.com/html/spec/colorcmyk.html" target="_blank" class="externalSiteLink">http://www.december.com/html/spec/colorcmyk.html</a>.</p>
+		
+		<a name="1_1"></a>
+		<h2 class="heading2" title="1. Introduction -&gt; 1.1. Examples"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. Examples">1</a>. </span>Examples</h2>
+		<div class="contents2">
+			<p>The following example pages are good showcases for the <code>Uize.Color.xCmyk</code> module...</p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><a href="../examples/color-format-converter.html">Color Format Converter</a> - </td></tr>
+			</table>
+			<p><span class="allCaps">SEARCH FOR EXAMPLES</span></p>
+			
+			<p>Use the link below to search for example pages on the <b>uize.com</b> Web site that reference the <code>Uize.Color.xCmyk</code> module...</p>
+			
+			<p><a href="http://www.google.com/search?hl=en&safe=off&domains=uize.com%2Fexamples&sitesearch=uize.com%2Fexamples&q=%22Uize.Color.xCmyk%22" target="_blank" class="externalSiteLink">SEARCH</a></p>
+		</div>
+		
+		<a name="1_2"></a>
+		<h2 class="heading2" title="1. Introduction -&gt; 1.2. Implementation Info"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>. </span>Implementation Info</h2>
+		<div class="contents2">
+			<p>The <code>Uize.Color.xCmyk</code> module defines the <code>Uize.Color.xCmyk</code> extension module under the <code><a href="../reference/Uize.Color.html">Uize.Color</a></code> namespace.</p>
+			
+			<a name="1_2_1"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.1. Features Introduced in This Module"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>.<a href="#1_2_1" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.1. Features Introduced in This Module">1</a>. </span>Features Introduced in This Module</h3>
+			<div class="contents3">
+				<p>The features listed in this section have been introduced in this module.</p>
+				
+				<p><span class="allCaps">STATIC PROPERTIES</span></p>
+				
+				<p><code><a href="#3_1">Uize.Color.xCmyk.moduleName</a></code></p>
+			</div>
+			
+			<a name="1_2_2"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.2. Features Overridden in This Module"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>.<a href="#1_2_2" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.2. Features Overridden in This Module">2</a>. </span>Features Overridden in This Module</h3>
+			<div class="contents3">
+				<p>No features have been overridden in this module.</p>
+			</div>
+			
+			<a name="1_2_3"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.3. Features Inherited From Other Modules"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>.<a href="#1_2_3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.3. Features Inherited From Other Modules">3</a>. </span>Features Inherited From Other Modules</h3>
+			<div class="contents3">
+				<p>This module has no inherited features.</p>
+			</div>
+			
+			<a name="1_2_4"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.4. Modules Directly Under This Namespace"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>.<a href="#1_2_4" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.4. Modules Directly Under This Namespace">4</a>. </span>Modules Directly Under This Namespace</h3>
+			<div class="contents3">
+				<p>There are no modules directly under this namespace.</p>
+			</div>
+			
+			<a name="1_2_5"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.5. Unit Tests"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>.<a href="#1_2_5" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.5. Unit Tests">5</a>. </span>Unit Tests</h3>
+			<div class="contents3">
+				<p>There is no dedicated unit tests module for the <code>Uize.Color.xCmyk</code> module.</p>
+			</div>
+		</div>
+	</div>
+	
+	<a name="2"></a>
+	<h1 class="heading1" title="2. Color Encodings"><span class="headingNumber"><a href="#2" title="2. Color Encodings">2</a>. </span>Color Encodings</h1>
+	<div class="contents1">
+		<p>The <code>Uize.Color.xCmyk</code> extension implements support for the following color encodings / formats...</p>
+		
+		<a name="2_1"></a>
+		<h2 class="heading2" title="2. Color Encodings -&gt; 2.1. CMYK array"><span class="headingNumber"><a href="#2" title="2. Color Encodings">2</a>.<a href="#2_1" title="2. Color Encodings -&gt; 2.1. CMYK array">1</a>. </span>CMYK array</h2>
+		<div class="contents2">
+			<p>An array, containing four elements for cyan, magenta, yellow, and key components of the color, whose values may be floating point numbers in the range of <code>0</code> to <code>100</code> (eg. the color chartreuse is encoded as <code>[50,0,100,0]</code>).</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">[ cyan0to100FLOAT, magenta0to100FLOAT, yellow0to100FLOAT, key0to100FLOAT ]
+</pre>
+			
+			<a name="2_1_1"></a>
+			<h3 class="heading3" title="2. Color Encodings -&gt; 2.1. CMYK array -&gt; 2.1.1. Encoding"><span class="headingNumber"><a href="#2" title="2. Color Encodings">2</a>.<a href="#2_1" title="2. Color Encodings -&gt; 2.1. CMYK array">1</a>.<a href="#2_1_1" title="2. Color Encodings -&gt; 2.1. CMYK array -&gt; 2.1.1. Encoding">1</a>. </span>Encoding</h3>
+			<div class="contents3">
+				<p>When a color is encoded as <code><a href="#2_1">CMYK array</a></code>, the resulting array is made up of four number type elements that represent the values of the source color's cyan, magenta, yellow, and key components, respectively.</p>
+				
+				
+				<table class="data">
+					<tr class="title">
+						<td colspan="2">EXAMPLES</td>
+					</tr>
+					<tr class="heading">
+						<td>COLOR NAME</td>
+						<td>CMYK array</td>
+					</tr>
+					<tr>
+						<td>fuchsia</td>
+						<td>[0,100,0,0]</td>
+					</tr>
+					<tr>
+						<td>yellow</td>
+						<td>[0,0,100,0]</td>
+					</tr>
+					<tr>
+						<td>blue</td>
+						<td>[100,100,0,0]</td>
+					</tr>
+					<tr>
+						<td>white</td>
+						<td>[0,0,0,0]</td>
+					</tr>
+				</table>
+			</div>
+			
+			<a name="2_1_2"></a>
+			<h3 class="heading3" title="2. Color Encodings -&gt; 2.1. CMYK array -&gt; 2.1.2. Decoding"><span class="headingNumber"><a href="#2" title="2. Color Encodings">2</a>.<a href="#2_1" title="2. Color Encodings -&gt; 2.1. CMYK array">1</a>.<a href="#2_1_2" title="2. Color Encodings -&gt; 2.1. CMYK array -&gt; 2.1.2. Decoding">2</a>. </span>Decoding</h3>
+			<div class="contents3">
+				<p>When a color is decoded from <code><a href="#2_1">CMYK array</a></code>, the values of the array's four elements may be numbers, strings, or any object that implements a <code>valueOf</code> interface (such as an instance of a <code><a href="../reference/Uize.html">Uize</a></code> subclass that implements the <code>value</code> set-get property).</p>
+				
+				<p>The values will be coerced to number type by invoking the <code>valueOf Intrinsic Method</code>.</p>
+				
+				<p><span class="allCaps">EXAMPLES</span></p>
+				
+				
+<pre class="sample-code">[0,100,0,0]           // fuchsia
+['0','100','0','0']   // fuchsia
+[cyanSlider,magentaSlider,yellowSlider,keySlider]
+</pre>
+				
+				<p><span class="allCaps">NOTES</span></p>
+				
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>string values for the elements of the array <b>may not</b> contain a "%" (percent) suffix</td></tr>
+				</table>
+			</div>
+		</div>
+		
+		<a name="2_2"></a>
+		<h2 class="heading2" title="2. Color Encodings -&gt; 2.2. CMYK object"><span class="headingNumber"><a href="#2" title="2. Color Encodings">2</a>.<a href="#2_2" title="2. Color Encodings -&gt; 2.2. CMYK object">2</a>. </span>CMYK object</h2>
+		<div class="contents2">
+			<p>An object, containing <code>cyan</code>, <code>magenta</code>, <code>yellow</code>, and <code>key</code> properties, whose values may be floating point numbers in the range of <code>0</code> to <code>100</code> (eg. the color chartreuse is encoded as <code>{cyan:50,magenta:0,yellow:100,key:0}</code>).</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">{
+  cyan    : cyan0to100FLOAT,
+  magenta : magenta0to100FLOAT,
+  yellow  : yellow0to100FLOAT,
+  key     : key0to100FLOAT
+}
+</pre>
+			
+			<a name="2_2_1"></a>
+			<h3 class="heading3" title="2. Color Encodings -&gt; 2.2. CMYK object -&gt; 2.2.1. Encoding"><span class="headingNumber"><a href="#2" title="2. Color Encodings">2</a>.<a href="#2_2" title="2. Color Encodings -&gt; 2.2. CMYK object">2</a>.<a href="#2_2_1" title="2. Color Encodings -&gt; 2.2. CMYK object -&gt; 2.2.1. Encoding">1</a>. </span>Encoding</h3>
+			<div class="contents3">
+				<p>When a color is encoded as <code><a href="#2_2">CMYK object</a></code>, the resulting object will contain the four number type properties <code>cyan</code>, <code>magenta</code>, <code>yellow</code>, and <code>key</code>, reflecting the values of the source color's cyan, magenta, yellow, and key components, respectively.</p>
+				
+				
+				<table class="data">
+					<tr class="title">
+						<td colspan="2">EXAMPLES</td>
+					</tr>
+					<tr class="heading">
+						<td>COLOR NAME</td>
+						<td>CMYK object</td>
+					</tr>
+					<tr>
+						<td>fuchsia</td>
+						<td>{cyan:0,magenta:100,yellow:0,key:0}</td>
+					</tr>
+					<tr>
+						<td>yellow</td>
+						<td>{cyan:0,magenta:0,yellow:100,key:0}</td>
+					</tr>
+					<tr>
+						<td>blue</td>
+						<td>{cyan:100,magenta:100,yellow:0,key:0}</td>
+					</tr>
+					<tr>
+						<td>white</td>
+						<td>{cyan:0,magenta:0,yellow:0,key:0}</td>
+					</tr>
+				</table>
+			</div>
+			
+			<a name="2_2_2"></a>
+			<h3 class="heading3" title="2. Color Encodings -&gt; 2.2. CMYK object -&gt; 2.2.2. Decoding"><span class="headingNumber"><a href="#2" title="2. Color Encodings">2</a>.<a href="#2_2" title="2. Color Encodings -&gt; 2.2. CMYK object">2</a>.<a href="#2_2_2" title="2. Color Encodings -&gt; 2.2. CMYK object -&gt; 2.2.2. Decoding">2</a>. </span>Decoding</h3>
+			<div class="contents3">
+				<p>When a color is decoded from <code><a href="#2_2">CMYK object</a></code>, the values of the object's <code>cyan</code>, <code>magenta</code>, <code>yellow</code>, and <code>key</code> properties may be numbers, strings, or any object that implements a <code>valueOf</code> interface (such as an instance of a <code><a href="../reference/Uize.html">Uize</a></code> subclass that implements the <code>value</code> set-get property).</p>
+				
+				<p>The values will be coerced to number type by invoking the <code>valueOf Intrinsic Method</code>.</p>
+				
+				<p><span class="allCaps">EXAMPLES</span></p>
+				
+				
+<pre class="sample-code">{cyan:0,magenta:100,yellow:0,key:0}           // fuchsia
+{cyan:'0',magenta:'100',yellow:'0',key:'0'}   // fuchsia
+{cyan:cyanSlider,magenta:magentaSlider,yellow:yellowSlider,key:keySlider}
+</pre>
+				
+				<p><span class="allCaps">NOTES</span></p>
+				
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>string values for the properties of the object <b>may not</b> contain a "%" (percent) suffix</td></tr>
+				</table>
+			</div>
+		</div>
+		
+		<a name="2_3"></a>
+		<h2 class="heading2" title="2. Color Encodings -&gt; 2.3. CMYK string"><span class="headingNumber"><a href="#2" title="2. Color Encodings">2</a>.<a href="#2_3" title="2. Color Encodings -&gt; 2.3. CMYK string">3</a>. </span>CMYK string</h2>
+		<div class="contents2">
+			<p>A <code>Cmyk(...)</code> formatted 4-tuple string (eg. the color chartreuse is encoded as <code>'cmyk(50%,0%,100%,0%)'</code>).</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">cmyk([cyan0to100]%,[magenta0to100]%,[yellow0to100]%,[key0to100]%)
+</pre>
+			
+			<a name="2_3_1"></a>
+			<h3 class="heading3" title="2. Color Encodings -&gt; 2.3. CMYK string -&gt; 2.3.1. Encoding"><span class="headingNumber"><a href="#2" title="2. Color Encodings">2</a>.<a href="#2_3" title="2. Color Encodings -&gt; 2.3. CMYK string">3</a>.<a href="#2_3_1" title="2. Color Encodings -&gt; 2.3. CMYK string -&gt; 2.3.1. Encoding">1</a>. </span>Encoding</h3>
+			<div class="contents3">
+				<p>When a color is encoded as <code><a href="#2_3">CMYK string</a></code>, the resulting string will always be all lowercase, without any spaces.</p>
+				
+				<p>Furthermore, the values for cyan, magenta, yellow, and key components of the tuple will be rounded to the nearest integer and constrained to a range of <code>0</code> to <code>100</code>, with a "%" (percent symbol) character appended to each.</p>
+				
+				
+				<table class="data">
+					<tr class="title">
+						<td colspan="2">EXAMPLES</td>
+					</tr>
+					<tr class="heading">
+						<td>COLOR NAME</td>
+						<td>CMYK string</td>
+					</tr>
+					<tr>
+						<td>fuchsia</td>
+						<td>cmyk(0%,100%,0%,0%)</td>
+					</tr>
+					<tr>
+						<td>yellow</td>
+						<td>cmyk(0%,0%,100%,0%)</td>
+					</tr>
+					<tr>
+						<td>blue</td>
+						<td>cmyk(100%,100%,0%,0%)</td>
+					</tr>
+					<tr>
+						<td>white</td>
+						<td>cmyk(0%,0%,0%,0%)</td>
+					</tr>
+				</table>
+				
+				<p><span class="allCaps">NOTES</span></p>
+				
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>because encoding as <code><a href="#2_3">CMYK string</a></code> rounds the values for all four components of a color, colors encoded as <code><a href="#2_3">CMYK string</a></code> may not produce exactly the same original color when decoding the encoded <code><a href="#2_3">CMYK string</a></code></td></tr>
+				</table>
+			</div>
+			
+			<a name="2_3_2"></a>
+			<h3 class="heading3" title="2. Color Encodings -&gt; 2.3. CMYK string -&gt; 2.3.2. Decoding"><span class="headingNumber"><a href="#2" title="2. Color Encodings">2</a>.<a href="#2_3" title="2. Color Encodings -&gt; 2.3. CMYK string">3</a>.<a href="#2_3_2" title="2. Color Encodings -&gt; 2.3. CMYK string -&gt; 2.3.2. Decoding">2</a>. </span>Decoding</h3>
+			<div class="contents3">
+				<p>When a color is decoded from <code><a href="#2_3">CMYK string</a></code>, the string may contain separating spaces, may be in upper, lower, or mixed case (ie. <b>not</b> case sensitive), and the "%" (percent symbol) character for the saturation and value values may be omitted.</p>
+				
+				<p><span class="allCaps">FUCHSIA</span></p>
+				
+				
+<pre class="sample-code">cmyk(0,100,0,0)
+cmyk(0%,100%,0%,0%)
+CMYK(0%,100%,0%,0%)
+Cmyk (0%, 100%, 0%, 0%)
+CMYK ( 0% , 100% , 0% , 0% )
+Cmyk ( 0 , 100 , 0 , 0 )
+</pre>
+			</div>
+		</div>
+	</div>
+	
+	<a name="3"></a>
+	<h1 class="heading1" title="3. Static Properties"><span class="headingNumber"><a href="#3" title="3. Static Properties">3</a>. </span>Static Properties</h1>
+	<div class="contents1">
+		<a name="3_1"></a>
+		<h2 class="heading2" title="3. Static Properties -&gt; 3.1. Uize.Color.xCmyk.moduleName"><span class="headingNumber"><a href="#3" title="3. Static Properties">3</a>.<a href="#3_1" title="3. Static Properties -&gt; 3.1. Uize.Color.xCmyk.moduleName">1</a>. </span>Uize.Color.xCmyk.moduleName</h2>
+		<div class="contents2">
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+	</div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

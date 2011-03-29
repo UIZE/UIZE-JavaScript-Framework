@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2009-06-21 - NEW STRING METHODS: startsWith and endsWith | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="The Uize.String module has been improved with the addition of the new Uize.String.startsWith and Uize.String.endsWith static methods."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2009.html" class="breadcrumb breadcrumbWithArrow">2009 NEWS</a>
+	2009-06-21 - NEW STRING METHODS: startsWith and endsWith
+
+</h1>
+
+<div class="main">
+<div class="contents0">
+	<p>The <code><a href="../reference/Uize.String.html">Uize.String</a></code> module has been improved with the addition of the new <code>Uize.String.startsWith</code> and <code>Uize.String.endsWith</code> static methods.</p>
+	
+	<p>The <code>Uize.String.startsWith</code> method returns a boolean, indicating whether or not the specified source string starts with the specified substring. Similarly, the <code>Uize.String.endsWith</code> method returns a boolean, indicating whether or not the specified source string ends with the specified substring.</p>
+	
+	<p>Both methods have been implemented to be optimized for performance, with several tests that catch certain conditions early to avoid always incurring the cost of an <code>indexOf</code> call. Such conditions include: 1) the substring is longer than the source string, 2) the first character of the substring is not in the source string at the spot where the substring would have to start (in order to be at the start or end), 3) the last character of the substring is not in the source string at the spot where the substring would have to end (in order to be at the start or end), 4) the substring is the same length as the source string (so they can simply be tested for equality). These various optimizations catch many cases where simply resorting to an <code>indexOf</code> test would produce suboptimal performance.</p>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

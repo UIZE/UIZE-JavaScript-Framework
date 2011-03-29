@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2009-08-31 - IMPROVED MODULE: Uize.Date | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="The Uize.Date.resolve static method of the Uize.Date module has been improved to now also support resolving string date values that are not in ISO 8601 format."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2009.html" class="breadcrumb breadcrumbWithArrow">2009 NEWS</a>
+	2009-08-31 - IMPROVED MODULE: Uize.Date
+
+</h1>
+
+<div class="main">
+<div class="contents0">
+	<p>The <code>Uize.Date.resolve</code> static method of the <code><a href="../reference/Uize.Date.html">Uize.Date</a></code> module has been improved to now also support resolving string date values that are <b>not</b> in ISO 8601 format.</p>
+	
+	<p>Previously, the value for the <code>dateSTRorOBJ</code> parameter of the <code>Uize.Date.resolve</code> method could be a string formatted in ISO 8601 date format, or an instance of the <code><a href="../javascript-reference/Date.html">Date</a></code> object, or <code>null</code> or <code>undefined</code>. It was not possible to resolve date strings that were formatted how the <code><a href="../javascript-reference/Date.html">Date</a></code> object would format dates, and specifying date strings formatted in such a way would result in an instance of the <code><a href="../javascript-reference/Date.html">Date</a></code> object being returned in the invalid state. With the new change, if a date string cannot be parsed as an ISO 8601 formatted date, then it will be supplied to the <code><a href="../javascript-reference/Date.html">Date</a></code> object constructor. This provides much more flexibility in resolving date strings. As part of this change, the <code>Uize.Date.fromIso8601</code> static method now returns the value <code>undefined</code> when it cannot parse a date string as an ISO 8601 formatted date, where previously it would return an instance of the <code><a href="../javascript-reference/Date.html">Date</a></code> object in the invalid state.</p>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

@@ -1,0 +1,27 @@
+The new =Uize.Fx= package module provides a convenient way to initiate fades of CSS style properties.
+
+The =Uize.Fx.fadeStyle= static method of the new =Uize.Fx= module lets you easily fade one or more CSS style properties for a specified node.
+
+EXAMPLES
+.......................................................................................
+// fade from thin border/thick padding to thick border/thin padding over 1/4 second
+Uize.Fx.fadeStyle ('myNode',{borderWidth:1,padding:20},{borderWidth:20,padding:1},250);
+
+// fade from current colors to white text on black background over two seconds
+Uize.Fx.fadeStyle ('myNode',null,{color:'#fff',backgroundColor:'#000'},2000);
+
+// fade font size from 30px back to current size over a half second
+Uize.Fx.fadeStyle ('myNode',{fontSize:30},null,500);
+.......................................................................................
+
+The =Uize.Fx.fadeStyle= static method supports fading values for a large number of CSS style properties.
+
+[[Uize.Fx][LEARN MORE]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-03-24 - NEW MODULE: Uize.Fx
+....................................................................................

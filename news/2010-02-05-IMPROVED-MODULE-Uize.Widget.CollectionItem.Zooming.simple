@@ -1,0 +1,11 @@
+The implementation of the =Uize.Widget.CollectionItem.Zooming= module has been improved to provide a smoother experience in Apple Safari, Google Chrome, and other browsers based on the WebKit project.
+
+With the previous implementation approach, the zoom in effect would be jerky in some browsers the very first time that the zoom in effect was triggered for an instance. In worst case scenarios, there would be no zoom in effect visible at all, and the larger, pannable version of the image would appear abruptly when it had completed loading in. Even in such cases, though, on subsequent triggering the effect would be smooth. The new implementation approach addresses this problem and produces a zoom in effect that is smooth - from the first triggering of the effect for an instance - in Apple Safari, Google Chrome, and other browsers based on the WebKit project, while still remaining smooth in all other browsers.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2010-02-05 - IMPROVED MODULE: Uize.Widget.CollectionItem.Zooming
+....................................................................................

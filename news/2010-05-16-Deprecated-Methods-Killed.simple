@@ -1,0 +1,11 @@
+A number of methods of the =Uize.Color= and =Uize.Node= modules that were deprecated back in the first half of 2009 have finally been killed.
+
+Deprecated features of the =Uize.Color= module that have now been killed include the =mix=, =setColor=, =setHex=, and =toHex= instance methods, the =Uize.Color.blendHex=, =Uize.Color.hexStrToRgb=, =Uize.Color.mixColors=, =Uize.Color.rgbFromStyleStr=, =Uize.Color.rgbToHexStr=, and =Uize.Color.rgbToStyleStr= static methods, and the =Uize.Color.RgbColor= object. Additionally, the deprecated =Uize.Node.getStyleAttribute= static method of the =Uize.Node= module has been killed. For backwards compatibility and to provide time for transition, these methods were supported for just over a year after being deprecated. Finally removing them helps to clean up the code and reduce code size by a little bit.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2010-05-16 - Deprecated Methods Killed
+....................................................................................

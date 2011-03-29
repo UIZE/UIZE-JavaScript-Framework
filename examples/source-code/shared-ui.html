@@ -1,0 +1,198 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Shared UI - HTML Source Code | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework HTML example source code"/>
+	<meta name="description" content="This is the source code for the Shared UI example"/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../../css/page.css"/>
+	<link rel="stylesheet" href="../../css/page.source.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../../index.html" title="UIZE JavaScript Framework home"></a>
+	SOURCE CODE: Shared UI
+	<div id="page-actions" class="pageActions">
+		<a href="../shared-ui.html" class="buttonLink">VIEW EXAMPLE</a>
+	</div>
+</h1>
+
+<pre>
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+&lt;head&gt;
+  &lt;title&gt;Shared UI | JavaScript Examples | UIZE JavaScript Framework&lt;/title&gt;
+  &lt;meta name="keywords" content="Uize.Widget"/&gt;
+  &lt;meta name="description" content="See how some widget HTML for a slider widget can be shared by multiple slider widget instances. The UIZE JavaScript Framework makes this possible."/&gt;
+  &lt;link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/&gt;
+  &lt;link rel="stylesheet" href="../css/page.css"/&gt;
+  &lt;link rel="stylesheet" href="../css/page.example.css"/&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+&lt;script type="text/javascript" src="../js/Uize.js"&gt;&lt;/script&gt;
+
+&lt;h1 class="document-title"&gt;
+  &lt;a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"&gt;&lt;/a&gt;
+  &lt;a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow"&gt;JAVASCRIPT EXAMPLES&lt;/a&gt;
+  Shared UI
+  &lt;div id="page-actions" class="pageActions"&gt;
+    &lt;a href="source-code/shared-ui.html" class="buttonLink"&gt;SOURCE&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/h1&gt;
+
+&lt;div class="main"&gt;
+  &lt;!-- explanation copy --&gt;
+
+  &lt;div class="explanation"&gt;
+    &lt;p&gt;On the surface of things, there may appear to be nothing terribly exceptional about this example. There is a slider widget that can control any of three selectable style properties: border width, padding, and font size. One way to achieve this effect would be to create one slider widget and write application logic that governs what the slider operates on, based upon the value selected in the select control. Of course, then you'd have to write your own code to update the configutation of this single slider widget when changing selection, since the value ranges for the different properties will differ. And if you later decided to offer the user a dedicated slider control for each style property, then your code would have to be significantly refactored. Instead, in this example there is a dedicated slider widget for each style property, but they all share the same DOM nodes in the document. Using the &lt;code&gt;wireUi&lt;/code&gt; and &lt;code&gt;unwireUi&lt;/code&gt; methods lets the code hand the slider DOM nodes back and forth between the different slider widgets, based upon the user's selection.&lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;!-- sample node and slider UI --&gt;
+
+  &lt;form&gt;
+    &lt;table border="0" cellspacing="0" cellpadding="0" align="center"&gt;
+      &lt;tr&gt;
+        &lt;td class="heading"&gt;Sample Area&lt;/td&gt;
+        &lt;td width="20"&gt;&lt;/td&gt;
+        &lt;td&gt;
+          &lt;select id="page-sliderSelector"&gt;
+            &lt;option value="" selected&gt;- CHOOSE -&lt;/option&gt;
+            &lt;option value="sliderBorderWidth"&gt;Border Width&lt;/option&gt;
+            &lt;option value="sliderPadding"&gt;Padding&lt;/option&gt;
+            &lt;option value="sliderFontSize"&gt;Font Size&lt;/option&gt;
+          &lt;/select&gt;
+        &lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+        &lt;td style="width:500px; height:280px; border:1px solid #666;" class="insetBackgroundColor" align="center" valign="center"&gt;
+          &lt;div id="page-sampleNode" style="width:300px; border-width:10px; border-style:solid; padding:10px;" class="darkInsetBorderColor"&gt;
+            This is some profound text. You cannot possibly comprehend how profound it truly is.
+          &lt;/div&gt;
+        &lt;/td&gt;
+        &lt;td&gt;&lt;/td&gt;
+        &lt;td style="border:1px solid #666;" class="insetBackgroundColor" align="center"&gt;
+          &lt;div style="position:relative; left:0; top:0; width:44px; height:261px; background:#888;"&gt;
+            &lt;div id="slider-track" style="position:absolute; left:2px; top:2px; width:40px; height:235px;"&gt;
+              &lt;img src="../js/Uize_Widget_Bar_Slider/track-bg-vertical.gif" style="position:absolute; left:0; top:0; width:100%; height:100%;" alt=""/&gt;
+              &lt;img id="slider-knob" src="../js/Uize_Widget_Bar_Slider/knob-vertical.gif" style="position:absolute; left:0; top:0; width:40px; height:28px; cursor:n-resize;" border="0" hspace="0" vspace="0" alt=""/&gt;
+            &lt;/div&gt;
+            &lt;div id="slider-value" style="position:absolute; left:2px; top:239px; width:40px; height:20px; font-family:Arial; font-size:17px; font-weight:bold; color:#555; background:#adbebf url(../images/brushed-metal.jpg) repeat left top; text-align:center;"&gt;&lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/table&gt;
+  &lt;/form&gt;
+&lt;/div&gt;
+
+&lt;!-- JavaScript code to make the static slider HTML "come alive" --&gt;
+
+&lt;script type="text/javascript"&gt;
+
+Uize.module ({
+  required:[
+    'UizeDotCom.Page.Example.library',
+    'UizeDotCom.Page.Example',
+    'Uize.Widget.Bar.Slider',
+    'Uize.Node'
+  ],
+  builder:function () {
+    /*** create the example page widget ***/
+      var page = window.page = new UizeDotCom.Page.Example;
+
+    /*** code to manage sharing of the same UI HTML among different widget instances ***/
+      var wiredSlider;
+      function wireSelectedSliderUi () {
+        if (wiredSlider)
+          page.children [wiredSlider].unwireUi ()
+        ;
+        wiredSlider = page.getNodeValue ('sliderSelector');
+        if (wiredSlider)
+          page.children [wiredSlider].wireUi ()
+        ;
+      }
+      page.wireNode ('sliderSelector','change',wireSelectedSliderUi);
+      wireSelectedSliderUi ();
+
+    /*** wire up the page widget ***/
+      page.wireUi ();
+
+    /*** set up the slider for border width ***/
+      page.addChild (
+        'sliderBorderWidth',
+        Uize.Widget.Bar.Slider,
+        {
+          idPrefix:'slider',
+          minValue:1,
+          maxValue:30,
+          value:5
+        }
+      );
+      function updateSampleBorderWidth () {
+        page.setNodeStyle ('sampleNode',{borderWidth:page.children.sliderBorderWidth});
+      }
+      page.children.sliderBorderWidth.wire ('Changed.value',updateSampleBorderWidth);
+      updateSampleBorderWidth ();
+
+    /*** set up the slider for padding ***/
+      page.addChild (
+        'sliderPadding',
+        Uize.Widget.Bar.Slider,
+        {
+          idPrefix:'slider',
+          minValue:1,
+          maxValue:30,
+          value:5
+        }
+      );
+      function updateSamplePadding () {
+        page.setNodeStyle ('sampleNode',{padding:page.children.sliderPadding});
+      }
+      page.children.sliderPadding.wire ('Changed.value',updateSamplePadding);
+      updateSamplePadding ();
+
+    /*** set up the slider for font size ***/
+      page.addChild (
+        'sliderFontSize',
+        Uize.Widget.Bar.Slider,
+        {
+          idPrefix:'slider',
+          minValue:9,
+          maxValue:25,
+          value:12
+        }
+      );
+      function updateSampleFontSize () {
+        page.setNodeStyle ('sampleNode',{fontSize:page.children.sliderFontSize});
+      }
+      page.children.sliderFontSize.wire ('Changed.value',updateSampleFontSize);
+      updateSampleFontSize ();
+  }
+});
+
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+
+</pre>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.library',
+		'UizeDotCom.Page'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page).wireUi ()}
+});
+
+</script>
+
+</body></html>

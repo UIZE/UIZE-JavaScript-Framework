@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Drag-to-move | JavaScript Examples | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="drag-and-drop touch ipad Uize.Widget.Drag.Move"/>
+	<meta name="description" content="Learn about drag-and-drop in this basic example where you'll see how to wire up a bunch of image thumbnails so they can be dragged around a workspace."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.example.css"/>
+	<style type="text/css">
+		.dragMoveGroup {
+			position:relative;
+			width:750px;
+			height:390px;
+			border:1px solid #fff;
+			border-radius:20px;
+			-moz-border-radius:20px;
+			-webkit-border-radius:20px;
+			margin:auto;
+			overflow:hidden;
+		}
+		.dragMoveGroup img {
+			position:absolute;
+			cursor:move;
+			width:105px;
+			height:75px;
+			box-shadow:7px 7px 15px rgba(0,0,0,.7);
+			-moz-box-shadow:7px 7px 15px rgba(0,0,0,.7);
+			-webkit-box-shadow:7px 7px 15px rgba(0,0,0,.7);
+		}
+	</style>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	<a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow">JAVASCRIPT EXAMPLES</a>
+	Drag-to-move
+	<div id="page-actions" class="pageActions">
+		<a href="source-code/drag-to-move.html" class="buttonLink">SOURCE</a>
+	</div>
+</h1>
+
+<div class="main">
+	<!-- explanation copy -->
+
+	<div class="explanation">
+		<p>In this example, the <a href="../reference/Uize.Widget.Drag.Move.html"><code>Uize.Widget.Drag.Move</code></a> widget class is being used to wire up a bunch of image thumbnails so that they can be dragged around a "workspace". This is a very basic example of drag-and-drop - there are no drop targets to speak of. Instances of the <code>Uize.Widget.Drag.Move</code> class are wired up for all the thumbnails in a single statement, thanks to the <code>Uize.Widget.Drag.Move.spawn</code> static method. The <code>Uize.Widget.Drag.Move</code> class doesn't deal with managing <code>z-index</code> - just coordinates. It does, however, support coordinates specified in units of <code>px</code> (pixels) as well as <code>%</code> (percent).</p>
+	</div>
+
+	<!-- draggable nodes -->
+
+	<div id="dragMoveGroup" class="dragMoveGroup" style="background:#adbebf url(../images/brushed-metal.jpg) repeat-x left top;">
+		<img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228888824201666423&max_dim=105" style="left:5px; top:50px;" alt=""/>
+		<img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228786228006249323&max_dim=105" style="left:20%; top:4px;" alt=""/>
+		<img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228109666540948246&max_dim=105" style="left:500px; top:230px;" alt=""/>
+		<img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228745103279879745&max_dim=105" style="left:250px; top:176px;" alt=""/>
+		<img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228866001826566384&max_dim=105" style="right:15px; top:15px;" alt=""/>
+		<img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228321774790917687&max_dim=105" style="left:406px; top:5px;" alt=""/>
+		<img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228463251413365530&max_dim=105" style="right:150px; top:100px;" alt=""/>
+		<img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228507796122097730&max_dim=105" style="right:440px; top:43px;" alt=""/>
+		<img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228267745724726415&max_dim=105" style="left:190px; bottom:5px;" alt=""/>
+		<img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228937676589416694&max_dim=105" style="right:240px; top:270px;" alt=""/>
+		<img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&rvtype=pre&pid=228483162492178759&max_dim=105" style="right:15px; top:210px;" alt=""/>
+	</div>
+</div>
+
+<!-- JavaScript code to make the static HTML "come alive" -->
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Example.library',
+		'UizeDotCom.Page.Example',
+		'Uize.Node',
+		'Uize.Widget.Drag.Move'
+	],
+	builder:function () {
+		/*** create the example page widget ***/
+			var page = window.page = new UizeDotCom.Page.Example;
+
+		/*** spawn instances of Uize.Widget.Drag.Move for all the images ***/
+			Uize.Widget.Drag.Move.spawn ({idPrefix:{root:'dragMoveGroup',tagName:'IMG'}},page);
+
+		/*** wire up the page widget ***/
+			page.wireUi ();
+	}
+});
+
+</script>
+
+</body>
+</html>
+

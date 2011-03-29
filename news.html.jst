@@ -1,0 +1,11 @@
+<%@
+	required ('UizeDotCom.Templates.IndexPage');
+	input ({files:'array',year:'string'});
+%><%= UizeDotCom.Templates.IndexPage.process ({
+	title:(input.year || 'Latest') + ' News',
+	description:input.year
+		? 'This is the news archive for the UIZE JavaScript Framework for the year ' + input.year + '.'
+		: 'The UIZE JavaScript Framework is constantly evolving and improving. This document provides a summary of some of the latest developments.',
+	files:input.files
+}) %>
+

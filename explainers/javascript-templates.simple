@@ -1,0 +1,545 @@
+Introduction
+	The UIZE JavaScript Framework implements a JavaScript templating system with rich template functionality that fully leverages the JavaScript language.
+
+	This templating system is implemented in the =Uize.Template= module.
+
+Similar to ASP and JSP
+	Developers with experience in =asp= or =jsp= syntax will find the UIZE JavaScript template syntax familiar and easy to understand.
+
+	The principle is very simple: stuff inside =<%= and =%>= delimiters is regarded as JavaScript code, and everything else is added to output.
+
+	EXAMPLE
+	....................................
+	<% for (var i = 0; i < 5; i++) { %>
+	<p>Hello World !</p>
+	<% } %>
+	....................................
+
+	The above template would generate the following output, with five paragraphs containing the message =Hello World!=...
+
+	OUTPUT
+	....................
+	<p>Hello World !</p>
+	<p>Hello World !</p>
+	<p>Hello World !</p>
+	<p>Hello World !</p>
+	<p>Hello World !</p>
+	....................
+
+Benefits of Using JavaScript
+	Because the UIZE JavaScript Template system directly leverages JavaScript...
+
+	1. parsing templates is very fast
+	1. the code required to parse templates is very small
+	1. you get the full power of the JavaScript language - not a hobbled templating language that is geared towards a lowest common denominator of implementation contexts
+	1. you don't have to learn a whole new language for writing your templating logic
+
+Compiled For Performance
+	JavaScript templates are parsed and "compiled" to JavaScript functions that can be called multiple times.
+
+	Because the parsing is only done the first time, repeat calls are substantially more efficient. A template string is compiled using the =Uize.Template.compile= static method, as follows...
+
+	....................................................................
+	var helloWorldTemplate = Uize.Template.compile (
+		'<% for (var i = 0; i < 10; i++) { %><p>Hello World !</p><% } %>'
+	);
+	....................................................................
+
+	Once "compiled", the template can be executed simply by calling it as a function, as in...
+
+	.............................................
+	var myTemplateOutput = helloWorldTemplate ();
+	.............................................
+
+Input Data
+	The function that is "compiled" from the template string expects a single parameter, that is known within the scope of your template's JavaScript code as =input=.
+
+	Calling the compiled template function with a single argument passes this value to the =input= variable in the function's local scope. Your template's JavaScript code can reference this parameter to qualify its execution. The value that you pass to your template function should be an object.
+
+	EXAMPLE
+	...............................................
+	<% for (var i = 0; i < input.repeats; i++) { %>
+	<p>Hello World !</p>
+	<% } %>
+	...............................................
+
+	In the above JavaScript template, the template is expecting a =repeats= property to be specified in the =input= object when the template function is executed.
+
+	If you compiled the template as follows...
+
+	...............................................................................
+	var helloWorldTemplate = Uize.Template.compile (
+		'<% for (var i = 0; i < input.repeats; i++) { %><p>Hello World !</p><% } %>'
+	);
+	...............................................................................
+
+	...then you could call it as follows...
+
+	.........................................................
+	var myTemplateOutput = helloWorldTemplate ({repeats:10});
+	.........................................................
+
+Assignment Expressions
+	The UIZE JavaScript Template syntax supports two types of assignment expressions: implicit input value references and full fledged JavaScript expressions.
+
+	Implicit Input Value References
+		It is common in many templating languages to have a simple way for substituting values into templates, using a token syntax.
+
+		The UIZE JavaScript Template syntax does *not* provide an additional dedicated token syntax for simple variable substitution, but instead provides a convenient shorthand for referencing the properties of the =input= object and indicating that the value should be assigned to the template's output.
+
+		Basically, if the first character inside the =<% %>= block is a period, then what follows is assumed to be the name of a property of the =input= object. Consider the following example...
+
+		EXAMPLE
+		...............................................
+		<% for (var i = 0; i < input.repeats; i++) { %>
+		<p><%.message%></p>
+		<% } %>
+		...............................................
+
+		In the above example, the repeated message is now configurable through the =message= property of the =input= object. The =<%.message%>= block sends its value to the template's output when the compiled template function is executed.
+
+		If you compiled the template as follows...
+
+		..............................................................................
+		var messageRepeatedTemplate = Uize.Template.compile (
+			'<% for (var i = 0; i < input.repeats; i++) { %><p><%.message%></p><% } %>'
+		);
+		..............................................................................
+
+		...then you could call it as follows...
+
+		......................................................................................
+		var myTemplateOutput = messageRepeatedTemplate ({message:'Hello World !',repeats:10});
+		......................................................................................
+
+	Full Fledged JavaScript Expressions
+		In addition to the shorthand =<%.myInputProperty%>= syntax, the UIZE JavaScript Template system also supports the traditional =<%&#61; %>= syntax.
+
+		Basically, if the first character inside the =<% %>= block is an equal sign, then what follows is assumed to be a JavaScript expression whose value should be sent to the template's output when executed. Therefore, using the =<%&#61; %>= syntax it would be possible to also write the configurable message template shown earlier as follows...
+
+		...............................................
+		<% for (var i = 0; i < input.repeats; i++) { %>
+		<p><%= input.message %></p>
+		<% } %>
+		...............................................
+
+		The benefit of the =<%&#61; %>= syntax is that it allows for complete JavaScript expressions to be assigned to a template's output. Consider the following example...
+
+		EXAMPLE
+		...............................................
+		<% for (var i = 0; i < input.repeats; i++) { %>
+		<p><%= i %> squared is <%= i * i %></p>
+		<% } %>
+		...............................................
+
+		In the above example, a list of the squares of a series of integers of a specified length will be output in paragraphs. When you need to do anything more complex than substituting the value of an input in a particular spot in a template's output, then this syntax is the way to go. Also, because the =<%. %>= syntax assumes the named identifier is a property of the =input= object (that's what it's designed for), the =<%&#61; %>= syntax is the way to send the values of local variables to the template's output.
+
+	Encoding Output
+		It is not always desirable to send the value of an input property or local variable or expression to the template's output as is.
+
+		In some cases, one may be sending to output within a scope that requires specific encoding. For example, one may be placing a value as a query param value as part of a URL. In such a case, the value will need to be URI encoded. The UIZE JavaScript Template system provides a syntax for specifying an arbitrary series of encodings. Consider the following example...
+
+		EXAMPLE
+		......................................................
+		<a href="search?category=<% .category -> urlPiece %>">
+			<% .category %>
+		</a>
+		......................................................
+
+		In the above example, the template generates a category search link. The link's text is simply the value of the =category= property of the =input= object, but when the category is placed inside the link tag's =href= attribute as a query param, it needs to be URI encoded. This is done by using the =urlPiece= encoding. If the above template were processed with the =input= of ={category:'Dogs and Cats'}=, it would produce the output...
+
+		............................................
+		<a href="search?category=Dogs%20and%20Cats">
+			Dogs and Cats
+		</a>
+		............................................
+
+	Other Encodings
+		There are other encodings as well.
+
+		Consider an example where all the search parameters are passed to a template in a =searchParams= property, where the category is just one parameter. Then, the following template might do the trick...
+
+		..................................................
+		<a href="search?<% .searchParams -> urlParams %>">
+			<% .searchParams.category %>
+		</a>
+		..................................................
+
+		If the above template were processed with the =input= of ={searchParams:{category:'Dogs and Cats',sort:'recent'}}=, it would produce the output...
+
+		........................................................
+		<a href="search?category=Dogs%20and%20Cats&sort=recent">
+			Dogs and Cats
+		</a>
+		........................................................
+
+		Some other examples of encodings include: =json=, =miniJson=, =url=. Additional encodings can be registered with the =Uize.Template= package by assigning new properties on the =Uize.Template.encodings= object, or by calling the =Uize.Template.defineStandardEncoding= static method. For more information on adding new encodings, consult the reference for the =Uize.Template= module.
+
+	Chained Encodings
+		It is possible to chain an arbitrary number of encodings together. The syntax is simply =-> encoding1 -> encoding2 -> ... -> encodingN=.
+
+		Say, for example, the search parameters for a URL were to be specified as a JSON object that was to be sent as a single "bucket" URL query param to the server. In such a case you could employ a template as follows...
+
+		..........................................................................
+		<a href="search?searchParams=<% .searchParams -> miniJson -> urlPiece %>">
+			<% .searchParams.category %>
+		</a>
+		..........................................................................
+
+		In this example, the =searchParams= property of =input= would first be encoded to a compact JSON format and would then be subsequently URI encoded as a piece of a URL.
+
+	Encoding Options
+		Certain encodings may provide encoding options to let you qualify how the encoding should be performed.
+
+		An example is the =json= encoding, which lets you specify indent characters, object key delimiter, quote character, etc. Such encoding options can be specified in JSON syntax right after the encoding name, as follows...
+
+		EXAMPLE
+		......................................................................
+		<script type="type/javascript">
+			var searchParams = <% .searchParams -> json{keyDelimiter:' : '} %>;
+		</script>
+		......................................................................
+
+		In the above example, the =searchParams= property of =input= is being written out into a script block, where the JSON encoding is being told to use a colon with spaces around it as the key delimiter for objects, thereby making the output more readable.
+
+	Reverse Encoding (ie. Decoding)
+		A specific encoding can be reversed (provided that there is a defined decoder registered for that encoding) by simply prefixing the encoding name with the "!" character.
+
+		Let's say that the search params for a link generation template is being provided to the template as a serialized JSON string. If the server requires the search params as URL query params, then the template can first decode the JSON string to a query params object before encoding it as URL query params, as in the following example template...
+
+		EXAMPLE
+		..................................................................
+		<a href="search?<% .searchParamsJsonStr -> !json -> urlParams %>">
+			<% .searchLinkText %>
+		</a>
+		..................................................................
+
+	Encoding In Other Contexts
+		The convenient encodings syntax only applies to =<%. %>= and =<%&#61; %>= style assignment blocks.
+
+		If you wish to use encodings and/or decodings in more complex JavaScript code inside your templates, then you will have to use the =Uize.Template.encode= and =Uize.Template.decode= static methods. These methods provide access to all the same functionality, but in a more conventional (ie. long-winded) manner.
+
+		For example, the following template...
+
+		..................................................
+		<a href="search?<% .searchParams -> urlParams %>">
+			<% .searchParams.category %>
+		</a>
+		..................................................
+
+		...could also be written as...
+
+		..............................................................................
+		<a href="search?<%= Uize.Template.encode (input.searchParams,'urlParams') %>">
+			<% .searchParams.category %>
+		</a>
+		..............................................................................
+
+		For `Chained Encodings`, the encodings can be specified in the same way as with `Assignment Expressions`. For example, the following template...
+
+		.......................................................................
+		<a href="search?<% .searchParams -> urlParams -> tagAttributeValue %>">
+			<% .searchParams.category %>
+		</a>
+		.......................................................................
+
+		...could also be written as...
+
+		.............................................................................
+		<a href="search?<%=
+			Uize.Template.encode (input.searchParams,'urlParams -> tagAttributeValue')
+		%>">
+			<% .searchParams.category %>
+		</a>
+		.............................................................................
+
+		### stress that the latter approach does not automatically add to the list of modules required by the template
+
+Directives
+	Directives provide a way to guide how a template is compiled. They can be executed within templates by using the "@" prefix, as follows...
+
+	..............................
+	<%@ startBlock ('contents') %>
+	...my block of stuff...
+	...my block of stuff...
+	...my block of stuff...
+	<%@ endBlock () %>
+	..............................
+
+	Block Directives
+		The =@startBlock= and =@endBlock= directives let you define blocks of template code inside your templates.
+
+		A block defined using these directives can be invoked at processing time by a function call, using the block name as the function name. Essentially, the block directives define a function - by the name that you can specify - that you can then use in subsequent JavaScript code in your template that executes at processing time.
+
+		EXAMPLE 1
+		.......................................................................................
+		<%@ startBlock ('fancyRule') %>
+		<div style="width:100%; height:5px; background:url(rule.jpg) repeat-x left top;"></div>
+		<%@ endBlock () %>
+		<p>This is section 1.</p>
+		<%= fancyRule () %>
+		<p>This is section 2.</p>
+		<%= fancyRule () %>
+		<p>This is section 3.</p>
+		<%= fancyRule () %>
+		<p>This is section 4.</p>
+		.......................................................................................
+
+		In the above example, a block called =fancyRule= is being defined, that generates output for a decorated rule using a styled =div= tag. The block is then used within the rest of the template code to insert the decorated rule into the main output for the template, between each section paragraph.
+
+		EXAMPLE 2
+		...............................................................
+		<%@ startBlock ('thumbnail','title') %>
+		<% var filename = title.toLowerCase ().replace (/\s+/g,'-'); %>
+		<a href="../photos/700x500/<%= filename %>.jpg">
+			<img
+				src="../photos/105x75/<%= filename %>.gif"
+				width="105" height="75"
+				alt="<%= title %>"
+			/>
+		</a>
+		<%@ endBlock () %>
+		<%= thumbnail ('Pink and Yellow Sunset') %>
+		<%= thumbnail ('Braving the Onslaught') %>
+		<%= thumbnail ('Companion to a Sunset') %>
+		<%= thumbnail ('Concrete Eternity') %>
+		<%= thumbnail ('Corrugate It') %>
+		...............................................................
+
+		When defining a block, you can also specify a parameter list. In the above example, a block called =thumbnail= is being defined, that takes the single parameter =title=. After the block is defined, it is called multiple times with different values for the block's =title= parameter. The block uses the parameter in generating its output. The block's function returns the block's generated output. The result of each call to the =thumbnail= block's function is being assigned to the template's main output, using the =&#60;%&#61;= syntax.
+
+		Blocks vs. Functions
+			For some use cases, you can achieve an effect equivalent to blocks by using function statements inside your template.
+
+			So, the same effect as the previous example could also be achieved using the following template...
+
+			...............................................................
+			<% function thumbnail (title) { %>
+			<% var filename = title.toLowerCase ().replace (/\s+/g,'-'); %>
+			<a href="../photos/700x500/<%= filename %>.jpg">
+				<img
+					src="../photos/105x75/<%= filename %>.gif"
+					width="105" height="75"
+					alt="<%= title %>"
+				/>
+			</a>
+			<% } %>
+			<% thumbnail ('Pink and Yellow Sunset') %>
+			<% thumbnail ('Braving the Onslaught') %>
+			<% thumbnail ('Companion to a Sunset') %>
+			<% thumbnail ('Concrete Eternity') %>
+			<% thumbnail ('Corrugate It') %>
+			...............................................................
+
+			In this case, the function =thumbnail= inside the template is being called several times. Each time it is called, it executes and adds to template's main output.
+
+			The fundamentally useful difference between the function approach and using a block is that a function in your template will always add to the template's main output, whereas a block has its own discrete output. This is why the form shown earlier that uses the block needed to use the =&#60;%&#61; %&#62;= assignment syntax to assign the result obtained from calling the block to the template's output, whereas this was not necessary with the simple function approach.
+
+			The benefit of discrete output with blocks is that your template can then use the block's result in interesting ways, such as encoding it further when assigning it to the template's output, or passing the value to some other function.
+
+			EXAMPLE
+			.......................................................................
+			<%@ input ({idPrefix:'string'}) %>
+			<%@ required ('UizeDotCom.Templates.Dialog') %>
+			<%@ startBlock ('dialogContents') %>
+				<p>
+					Renewable energy is energy generated from natural resources
+					such as sunlight, wind, rain, tides and geothermal heat
+					which are renewable (naturally replenished).
+					Renewable energy technologies range from solar power, wind power,
+					hydroelectricity/micro hydro, biomass and biofuels for
+					transportation.
+				</p>
+			<%@ endBlock () %>
+			<%=
+				UizeDotCom.Templates.Dialog.process ({
+					idPrefix:input.idPrefix,
+					contents:dialogContents ()}
+				)
+			%>
+			.......................................................................
+
+			In the above example, the =dialogContents= block is being used to generate contents for a dialog. The output of the block is passed to the =process= method of the compiled =UizeDotCom.Templates.Dialog= template in the =contents= property of its input. The result of calling the =process= method is then assigned to the template's output. This provides a means for a template to use other templates in its implementation, where those other templates can essentially define content placeholders, and where the template that use them can then build the contents for those content placeholders using block directives.
+
+	What Are Directives, Really?
+		In contrast to template code that is JavaScript code compiled into the template function and executed at processing time, directives are bits of JavaScript code that are executed at compile time for templates.
+
+		They are only relevant at compile time. They have no impact at processing time. Directives are executed within the scope of the =Uize.Template.compile= method. As such, directive code has access to functions defined inside the =Uize.Template.compile= method's scope. So, for example, by using the =@startBlock= directive you are essentially just calling the =startBlock= function that is defined within the =Uize.Template.compile= method.
+
+		Because directives can really be any JavaScript code, you can place JavaScript logic into directives.
+
+		EXAMPLE
+		..................................
+		<%@ var blockName = 'contents'; %>
+		<%@ startBlock (blockName) %>
+		...my block of stuff...
+		...my block of stuff...
+		...my block of stuff...
+		<%@ endBlock () %>
+		..................................
+
+		Not the most compelling use of directives, but it illustrates the point that one can execute JavaScript code in directives. In this example, a block by the name of ='contents'= is being defined. This is because the variable =blockName= is being defined in a directive before the =@startBlock= directive.
+
+		Note that the =blockName= variable would exist during the compilation process but would not exist at the processing time of the template. So, for example, the following template would still define a block called ='contents'=. That's because the second definition of the =blockName= variable is a standard processing time statement and does not get executed during compilation.
+
+		...................................................
+		<%@ var blockName = 'contents'; %>
+		<% var blockName = 'somethingOtherThanContents'; %>
+		<%@ startBlock (blockName) %>
+		...my block of stuff...
+		...my block of stuff...
+		...my block of stuff...
+		<%@ endBlock () %>
+		...................................................
+
+	Other Directives
+		For a complete list and explanation of all the directive functions - such as the =@input= and =@required= directives - consult the reference documentation for the =Uize.Template= module.
+
+Non-significant Whitespace
+	Whitespace within =<% %>= blocks is not significant and does not find its way into a template's output.
+
+	The following template blocks are all equivalent in their behavior...
+
+	THE FOLLOWING ARE EQUIVALENT
+	................................................
+	<%.searchParamsJsonStr->!json->urlParams%>
+	<%. searchParamsJsonStr->!json->urlParams %>
+	<% .searchParamsJsonStr->!json->urlParams %>
+	<% .searchParamsJsonStr -> !json -> urlParams %>
+	<%.searchParamsJsonStr -> ! json -> urlParams%>
+	................................................
+
+	Blocks can span multiple lines, without affecting a template's output. So, for example, the following template blocks are all equivalent...
+
+	THE FOLLOWING ARE EQUIVALENT
+	.................................................
+	<% .searchParamsJsonStr -> !json -> urlParams %>
+
+	<%
+		.searchParamsJsonStr -> !json -> urlParams
+	%>
+
+	<%
+		.searchParamsJsonStr
+			-> !json
+			-> urlParams
+	%>
+	.................................................
+
+	Similarly, whitespace within control (ie. non-assignment) blocks is non-significant and does not affect output.
+
+Comments
+	Because any contents of non-assignment =<% %>= blocks is treated as JavaScript code, you can easily add comments to your templates by simply putting JavaScript style comments inside template blocks.
+
+	Note Style Comments
+		Note style comments are comments that are purely intended to provide information / annotations to a JavaScript template.
+
+		EXAMPLE
+		..............................................................
+		<% /* This is a template for a category search link */ %>
+		<a href="search?<% .searchParams -> urlParams %>">
+			<% .searchParams.category %> <% // this is the link text %>
+		</a>
+		..............................................................
+
+		As you can see from the example above, you can use both =/&#42; &#42;/= and =//= style comments.
+
+	Commenting Out Template Sections
+		You can also use comments to comment out sections of a template, as follows...
+
+		.................................................................
+		<a href="search?<% .searchParams -> urlParams %>">
+			<% .searchParams.category %>
+			<% /* not yet ready to use this CSS styling %>
+			<span class="categoryName"><% .searchParams.category %></span>
+			<% */ %>
+		</a>
+		.................................................................
+
+		In the above example, the decoration of the category name inside a styled =span= tag has been commented out using an enclosing =/&#42; &#42;/= style comment.
+
+	Comments Inside Directives
+		Code inside directives is also JavaScript code, so you can use directives as another place to stash comments for your JavaScript templates.
+
+		EXAMPLE
+		..............................................................
+		<%@ /* This is a template for a category search link */ %>
+		<a href="search?<% .searchParams -> urlParams %>">
+			<% .searchParams.category %> <% // this is the link text %>
+		</a>
+		..............................................................
+
+		Whereas comments inside normal non-assignment =<% %>= blocks will actually appear inside the code of compiled JavaScript templates, comments inside directives will not, since directives are executed (and "consumed") during compilation time and directive code doesn't appear inside a template's compiled code.
+
+	HTML Comments
+		Of course, there is nothing to stop you from including HTML style comments inside a JavaScript template - assuming the template is intended to output HTML.
+
+		EXAMPLE
+		....................................................................
+		<!-- Generated from the category search link JavaScript template -->
+		<a href="search?<% .searchParams -> urlParams %>">
+			<% .searchParams.category %> <% // this is the link text %>
+		</a>
+		....................................................................
+
+		HTML comments, like the one above, will appear in the actual generated output of a template. There is really nothing special about it - it's merely a static part of the template's output.
+
+Advanced Topics
+	Alternate Token Syntax
+		While the default behavior of the UIZE JavaScript Template system assumes the delimiters =<%= and =%>= for enclosing code and assignment blocks, it is possible to compile templates using different tokens by specifying a value for the optional =templateOptions= parameter when calling the =Uize.Template.compile= method.
+
+		The =openerToken= and =closerToken= properties of the =templateOptions= object let you configure the block delimiter tokens.
+
+		EXAMPLE
+		..................................................................................
+		var
+			messageRepeatedTemplate1 = Uize.Template.compile (
+				'<% for (var i = 0; i < input.repeats; i++) { %><p><%.message%></p><% } %>'
+			),
+			messageRepeatedTemplate2 = Uize.Template.compile (
+				'[% for (var i = 0; i < input.repeats; i++) { %]<p>[%.message%]</p>[% } %]',
+				{openerToken:'[%',closerToken:'%]'}
+			),
+			messageRepeatedTemplate3 = Uize.Template.compile (
+				'[# for (var i = 0; i < input.repeats; i++) { #]<p>[#.message#]</p>[# } #]',
+				{openerToken:'[#',closerToken:'#]'}
+			)
+		;
+		..................................................................................
+
+		In the above example, =messageRepeatedTemplate1=, =messageRepeatedTemplate2=, and =messageRepeatedTemplate3= are all equivalent and would produce the same results when called.
+
+	### Delimiter Snagging
+		Think of it like catching your beautiful cashmere sweater on a rusty nail that's sticking out from a picnic table at a public park.
+
+		What are the odds? Not very high, but the outcome is unpleasant. A challenge of any templating language is contention with delimiters or character sequences that one may happen to use in one's non-template language content.
+
+		Let's consider the various special meanings of characters, how those characters are parsed, the potential confusions that could arise, and how to handle those cases.
+
+		The Token Delimiters
+
+		The Input Assignment Period
+
+		The Expression Assignment Equal Sign
+
+		The Encoding Separator
+
+### TO DOCUMENT
+	Using Templates
+		JavaScript templates are very versatile and can be used in a wide variety of different applications, ranging from building UI HTML for widgets to use in build scripts that can build anything from HTML pages to RSS files, sitemap XML data files.
+
+		Hiding JavaScript Templates in HTML
+			Where to Hide Them
+			How to Retrieve and Compile Them
+		Using JavaScript Templates for Widgets
+			Inline JavaScript Templates for Widgets
+			Using JavaScript Template Modules for Widgets
+				- widget class requiring a template module
+					- use a subclass so as not to impose template module requirement on base class
+				- widget instances using template modules
+		Using JavaScript Templates in Build Scripts
+			Loading and Compiling JavaScript Templates
+			Requiring JavaScript Template Modules
+
+	Whitespace Gobbling
+

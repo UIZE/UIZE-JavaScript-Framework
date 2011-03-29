@@ -1,0 +1,9 @@
+Performance optimization on the Uize.Fade class, since this is hit heavily during any kind of animation process. Various changes in other core classes that are heavily used to improve performance.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2006-07-23 - More Performance Optimization
+....................................................................................

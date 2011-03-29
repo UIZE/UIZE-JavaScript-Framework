@@ -1,0 +1,223 @@
+The [[../explainers/javascript-documentation-system.html][JavaScript Documentation System]], that is used to produce all the documentation for the UIZE JavaScript Framework, has been improved in a number of ways.
+
+Styling for Nine Levels Deep
+	While the SimpleDoc format that is used for the documentation has always supported an arbitrry number of levels of document structure depth, the CSS styling has only ever addressed the first five levels.
+
+	With the recent update, there are now CSS style rules to cover documents that are up to nine levels deep. Any document that goes to nine levels deep would be a pretty deep document (no, not deep in the profound sense, and, no, the CSS styling doesn't go up to 11, and if it ever does go up to 11, SimpleDoc will have to be renamed to SpinalDoc... and if you still don't get the joke, then you're disqualified).
+
+Improved Auto Section Linking
+	The Auto Section Linking feature of SimpleDoc has been improved in two key ways...
+
+	Linking to Nearest of Same Named Sections
+		When multiple sections share the same name, auto linked text links to the one of those same named sections that is nearest to the link.
+
+		Just as it is natural to have files with the same name at different places in a large folder structure, so it is natural to sometimes have sections of the same name at different places in a large structured document. In the past, the Auto Section Linking feature was not sophisticated enough to handle such cases, and the last section having a name shared by multiple sections would win. This would lead to auto linked text for such sections sometimes taking the reader to the wrong place in a document. With the new improved behavior, the Auto Section Linking links section links to the section nearest the linked text, when multiple sections share the same name.
+
+		Consider the following example...
+
+		SOURCE
+		.........................................................................
+		MyClass.foo
+			Parameters
+				This section describes the parameters for the =MyClass.foo= method.
+
+			In-depth
+				For a refresher, refer back to the `Parameters` section.
+
+		MyClass.bar
+			Parameters
+				This section describes the parameters for the =MyClass.bar= method.
+
+			In-depth
+				For a refresher, refer back to the `Parameters` section.
+		.........................................................................
+
+		In the above example, you'll notice that there are two sections named "Parameters". In the references for each of the methods, there are links back to these sections. Now, it's perfectly reasonable for each method reference to have a "Parameters" section, and links to those sections inside the references for those methods would be expected to go to the correct "Parameters" section - not some arbitrarily chosen section named "Parameters" in some other faraway place in the document.
+
+		You can see how this works below, where you'll notice that the links to the "Parameters" sections automatically do what you'd expect of them...
+
+		HOW IT LOOKS
+
+		=========================================================================================================
+
+		MyClass.foo
+			Parameters
+				This section describes the parameters for the =MyClass.foo= method.
+
+			In-depth
+				For a refresher, refer back to the `Parameters` section.
+
+		MyClass.bar
+			Parameters
+				This section describes the parameters for the =MyClass.bar= method.
+
+			In-depth
+				For a refresher, refer back to the `Parameters` section.
+
+		=========================================================================================================
+
+	Auto Section Linking is Now Case-insensitive
+		The Auto Section Linking feature is now case insensitive, which allows linked section names to be used more naturally in sentences.
+
+		When specifying the name of a section that is to be linked to in an area that supports `inline formatting`, the name does not need to exactly match the case used in the section's heading. This is particularly useful when using a linked section name as part of a larger sentence, where retaining the section name's real capitalization would produce a sentence that looks awkward. Consider the following example...
+
+		SOURCE
+		...........................................................................
+		The First Section
+			Here is some profound (or not) stuff inside the first section.
+
+		The Second Section
+			Here are some links to the first section, using different case...
+
+			- This is a link to `the first section` (using all lowercase).
+			- This is a link to `The First Section` (using the section's real case).
+			- This is a link to `THE FIRST SECTION` (using all uppercase).
+		...........................................................................
+
+		You can see how this works below, where you'll notice that all the links to the first section work as desired, even though they all have different case, and two of the section links don't match the real case of the first section's heading.
+
+		HOW IT LOOKS
+
+		=========================================================================================================
+
+		The First Section
+			Here is some profound (or not) stuff inside the first section.
+
+		The Second Section
+			Here are some links to the first section, using different case...
+
+			- This is a link to `the first section` (using all lowercase).
+			- This is a link to `The First Section` (using the section's real case).
+			- This is a link to `THE FIRST SECTION` (using all uppercase).
+
+		=========================================================================================================
+
+Extensible System for Object Blocks
+	The SimpleDoc document format now provides a formal way of extending on its basic formatting and layout capabilities through the use of object blocks.
+
+	Object blocks are specially formatted blocks whose contents are given special handling. Some built-in object blocks, for example, provide `support for arbitrary HTML blocks` and `basic support for tables`. In time, more different types of object blocks will be added to the built-in object blocks.
+
+Support for Arbitrary HTML Blocks
+	Through its new `extensible system for object blocks`, SimpleDoc documents can now contain arbitrary blocks of HTML code.
+
+	While you always want to use a facility like this as only a last resort (after all, why would you want to think in HTML?), there are sometimes cases where a particular need is not addressed by the formatting and/or layout capabilities of SimpleDoc. In such cases, HTML code can be injected into the HTML document that is generated from a SimpleDoc document, using the new HTML object block.
+
+	Consider the following example...
+
+	SOURCE
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	....................................................
+	<< HTML >>
+
+	code::
+		<div style="font-weight:bold; color:#f00;">
+			<span style="font-size:14px;">This</span>
+			&nbsp;
+			<span style="font-size:18px;">is</span>
+			&nbsp;
+			<span style="font-size:22px;">some</span>
+			&nbsp;
+			<span style="font-size:26px;">arbitrary</span>
+			&nbsp;
+			<span style="font-size:30px;">HTML</span>
+		</div>
+	....................................................
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	HOW IT LOOKS
+	....................................................
+	<< HTML >>
+
+	code::
+		<div style="font-weight:bold; color:#f00">
+			<span style="font-size:14px;">This</span>
+			&nbsp;
+			<span style="font-size:18px;">is</span>
+			&nbsp;
+			<span style="font-size:22px;">some</span>
+			&nbsp;
+			<span style="font-size:26px;">arbitrary</span>
+			&nbsp;
+			<span style="font-size:30px;">HTML</span>
+		</div>
+	....................................................
+
+Basic Support for Tables
+	Through its new `extensible system for object blocks`, SimpleDoc documents can now contain data tables.
+
+	The new table object block provides a way to insert tabular data in a way that is human readable inside a SimpleDoc document, and that is also formatted appropriately as a table in the HTML document generated from a SimpleDoc document.
+
+	Consider the following example...
+
+	SOURCE
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+	...........................................................................................
+	<< table >>
+
+	title: Nutritional Information for Various Fruits
+	data
+	:| Name     | Calories | Fat    | Carbs  | Fiber | Sugars | Protein | Calcium | Potassium |
+	:| Apples   | 52 kcal  | .17g   | 13.81g | 2.4g  | 10.39g | .26g    | 6g      | 107mg     |
+	:| Avocados | 160 kcal | 14.66g | 8.53g  | 6.7g  | .66g   | 2g      | 12g     | 485mg     |
+	:| Bananas  | 89 kcal  | .33g   | 22.84g | 2.6g  | 12.23g | 1.09g   | 5g      | 358mg     |
+	:| Dates    | 277 kcal | .15g   | 74.97g | 6.7g  | 66.47g | 1.81g   | 64g     | 696mg     |
+	:| Oranges  | 49 kcal  | .15g   | 12.54g | 2.2g  | 8.5g   | .91g    | 43g     | 166mg     |
+	:| Pears    | 58 kcal  | .12g   | 15.46g | 3.1g  | 9.8g   | .38g    | 9g      | 119mg     |
+	:| Plums    | 46 kcal  | .28g   | 11.42g | 1.4g  | 9.92g  | .7g     | 6g      | 157mg     |
+	...........................................................................................
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	HOW IT LOOKS
+	...........................................................................................
+	<< table >>
+
+	title: Nutritional Information for Various Fruits
+	data
+	:| Name     | Calories | Fat    | Carbs  | Fiber | Sugars | Protein | Calcium | Potassium |
+	:| Apples   | 52 kcal  | .17g   | 13.81g | 2.4g  | 10.39g | .26g    | 6g      | 107mg     |
+	:| Avocados | 160 kcal | 14.66g | 8.53g  | 6.7g  | .66g   | 2g      | 12g     | 485mg     |
+	:| Bananas  | 89 kcal  | .33g   | 22.84g | 2.6g  | 12.23g | 1.09g   | 5g      | 358mg     |
+	:| Dates    | 277 kcal | .15g   | 74.97g | 6.7g  | 66.47g | 1.81g   | 64g     | 696mg     |
+	:| Oranges  | 49 kcal  | .15g   | 12.54g | 2.2g  | 8.5g   | .91g    | 43g     | 166mg     |
+	:| Pears    | 58 kcal  | .12g   | 15.46g | 3.1g  | 9.8g   | .38g    | 9g      | 119mg     |
+	:| Plums    | 46 kcal  | .28g   | 11.42g | 1.4g  | 9.92g  | .7g     | 6g      | 157mg     |
+	...........................................................................................
+
+New SimpleDoc Previewing Utility
+	A new SimpleDoc previewing utility has been created to assist with authoring and editing SimpleDoc documents.
+
+	Why a previewing utility? Certainly, once one has gotten the hang of writing documentation in the SimpleDoc format, one hardly has any hunger for WYSIWYG editing. That said, it *is* nice to see an updated preview of a document one is working on after key changes are made. The nifty new previewing utility makes it easy to work on SimpleDoc documents in the text editor of your choice, while simultaneously viewing automatically updated previews of the document in a browser window. The utility is a simple WSH (Windows Script Host) based script, so no new software needs to be installed.
+
+	Using the utility in Windows is dead easy - just follow these simple steps...
+
+	+. Load a *.simple* file (or a *.js* file containing SimpleDoc documentation comments) into the text editor of your choice.
+	+. Drag that same file onto the *_test-simpledoc.js* script file that is located at the root of the UIZE JavaScript Framework's *uize_framework* folder (assuming you've already downloaded and unzipped the latest version of the framework).
+	+. After dropping the file onto the SimpleDoc previewing utility, an alert dialog will be displayed, informing you that the file is now being watched for modifications by the utility.
+	+. Click the OK button in the alert dialog and an Internet Explorer browser window will be opened up, which will contain a styled preview of the HTML generated from the SimpleDoc documentation.
+	+. Now you can proceed with editing the file in your text editor, and watch as the preview is automatically updated in the browser window each time you save your changes.
+	+. Once you're done with editing the document, you can simply close the browser window. The temporary HTML file that was created for previewing purposes, and that was stored in the same folder as the file being edited, will then be removed.
+
+	Use it Just for Quick Previews
+		You're not limited to only using the previewing utility when you're actively editing SimpleDoc documentation.
+
+		You can also use the utility to just get a quick preview of some SimpleDoc documentation, without having to load the source file into a text editor. Just drag the source file onto the previewing utility and the browser window will be launched for viewing the preview. Close the window when you're done. It's as simple as that.
+
+	For Mac Users
+		For Mac users who wish to use this utility, you will need to use bootcamp to boot into Windows, or have virtualization software like Parallels Desktop or WMWare Fusion installed.
+
+Miscellaneous Bugs Fixed
+	Various annoying little bugs have been squelched, as listed below...
+
+	- A bug, where the documentation build script would choke on empty *.simple* files, has been fixed. The issue had to do with a peculiar behavior of the =ReadAll= method in Windows' API for file I/O.
+
+	- A bug, where lines containing only whitespace (such as tabs or spaces) might confuse the SimpleDoc parser about a document's structure, has been fixed. It used to be that one had to be careful about introducing whitespace-only lines. No longer. It's still not polite to leave trailing whitespace laying around everywhere, but it's no longer potentially fatal.
+
+	- An issue, where section headings of SimpleDoc documents couldn't be "constructor", "toString", or "valueOf", has been fixed. While it's not common to want to name section headings "constructor", "toString", or "valueOf", it does happen when you're trying to document these particular features of the JavaScript language.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2011-01-01 - Documentation System Improvements
+....................................................................................

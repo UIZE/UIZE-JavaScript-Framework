@@ -1,0 +1,13 @@
+Demonstrates the capability of widgets for unwiring and rewiring, and allowing the same nodes in the DOM to be handed back and forth between different instances of the same widget class.
+
+In this example, a single set of slider markup is shared between multiple instances of the slider class.
+
+[[../examples/shared-ui.html][CHECK IT OUT]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2006-07-02 - NEW EXAMPLE - Shared UI Example
+....................................................................................

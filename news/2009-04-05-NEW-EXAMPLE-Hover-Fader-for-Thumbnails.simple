@@ -1,0 +1,13 @@
+The new [[../examples/hover-fader-for-thumbnails.html][Hover Fader for Thumbnails]] example demonstrates the versatility of the animation support provided in the UIZE JavaScript Framework.
+
+In this example, the =Uize.Widget.HoverFader= widget class is being used to add an animated effect to the thumbnails in several different sets of thumbnails. An instance of =Uize.Widget.HoverFader= is created and wired up to the thumbnail nodes for each thumbnail set. Each instance manages the fade / animation effect for various CSS style properties for all the thumbnails in its set.
+
+[[../examples/hover-fader-for-thumbnails.html][CHECK IT OUT]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-04-05 - NEW EXAMPLE: Hover Fader for Thumbnails
+....................................................................................

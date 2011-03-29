@@ -1,0 +1,12 @@
+The =Uize.Node= module has been improved in a couple of ways.
+
++. The =Uize.Node.find= static method can now accept a node reference or an array of nodes as a parameter and will simply pass the value through rather than performing a find operation, making this method convenient to use in classes where either a find expression object or a node or array of nodes may be specified.
++. The =Uize.Node.getCoords= static method has been improved to be more accurate for nodes contained inside nodes with non-zero borders.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-06-27 - IMPROVED MODULE: Uize.Node
+....................................................................................

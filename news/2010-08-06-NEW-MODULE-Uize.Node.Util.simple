@@ -1,0 +1,35 @@
+The new =Uize.Node.Util= module provides a home for miscellaneous node related methods that are too esoteric to belong in the base =Uize.Node= module.
+
+Along with creating a home for esoteric node related methods to be developed in the future, a handful of static methods already in the =Uize.Node= module that were judged to be too esoteric to be in that module were migrated out into the new =Uize.Node.Util= module, thereby reducing the size of the =Uize.Node= module that is relied upon heavily by other code. The migrated methods are as follows...
+
+MIGRATED
+..................................................................................
+Uize.Node.getEffectiveBgColor   >> BECOMES >>  Uize.Node.Util.getEffectiveBgColor
+Uize.Node.getOpacityProperties  >> BECOMES >>  Uize.Node.Util.getOpacityProperties
+Uize.Node.getOpacityStr         >> BECOMES >>  Uize.Node.Util.getOpacityStr
+Uize.Node.showInLayoutFlow      >> BECOMES >>  Uize.Node.Util.showInLayoutFlow
+Uize.Node.stylePropertiesAsStr  >> BECOMES >>  Uize.Node.Util.stylePropertiesAsStr
+..................................................................................
+
+The static methods that have been migrated have not been changed - their parameter signatures and behavior remain the same as before.
+
+Affected Modules Updated
+	A small handful of modules that were affected by the migration of the methods have been updated accordingly.
+
+	- The =Uize.Widget.Bar.Slider.xSkin= and =Uize.Widget.Bevel= modules were updated to reflect the migration of the =Uize.Node.getOpacityStr= method.
+	- The =Uize.Widget.ImageWipe= and =Uize.Widget.Swap.Image= modules were updated to reflect the migration of the =Uize.Node.getEffectiveBgColor= method.
+	- The =Uize.Widget.Swap= module was updated to reflect the migration of the =Uize.Node.getOpacityProperties= method.
+
+NOT BACKWARDS COMPATIBLE
+
+This change is *not backwards compatible*. If you had code that was relying on the static methods that have been migrated into the new =Uize.Node.Util= module, then you will have to modify that code to require the =Uize.Node.Util= module and to call the methods in that module.
+
+[[Uize.Node.Util][READ MORE]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2010-08-06 - NEW MODULE: Uize.Node.Util
+....................................................................................

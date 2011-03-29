@@ -1,0 +1,138 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Drag-to-move - HTML Source Code | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework HTML example source code"/>
+	<meta name="description" content="This is the source code for the Drag-to-move example"/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../../css/page.css"/>
+	<link rel="stylesheet" href="../../css/page.source.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../../index.html" title="UIZE JavaScript Framework home"></a>
+	SOURCE CODE: Drag-to-move
+	<div id="page-actions" class="pageActions">
+		<a href="../drag-to-move.html" class="buttonLink">VIEW EXAMPLE</a>
+	</div>
+</h1>
+
+<pre>
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+&lt;head&gt;
+  &lt;title&gt;Drag-to-move | JavaScript Examples | UIZE JavaScript Framework&lt;/title&gt;
+  &lt;meta name="keywords" content="drag-and-drop touch ipad Uize.Widget.Drag.Move"/&gt;
+  &lt;meta name="description" content="Learn about drag-and-drop in this basic example where you'll see how to wire up a bunch of image thumbnails so they can be dragged around a workspace."/&gt;
+  &lt;link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/&gt;
+  &lt;link rel="stylesheet" href="../css/page.css"/&gt;
+  &lt;link rel="stylesheet" href="../css/page.example.css"/&gt;
+  &lt;style type="text/css"&gt;
+    .dragMoveGroup {
+      position:relative;
+      width:750px;
+      height:390px;
+      border:1px solid #fff;
+      border-radius:20px;
+      -moz-border-radius:20px;
+      -webkit-border-radius:20px;
+      margin:auto;
+      overflow:hidden;
+    }
+    .dragMoveGroup img {
+      position:absolute;
+      cursor:move;
+      width:105px;
+      height:75px;
+      box-shadow:7px 7px 15px rgba(0,0,0,.7);
+      -moz-box-shadow:7px 7px 15px rgba(0,0,0,.7);
+      -webkit-box-shadow:7px 7px 15px rgba(0,0,0,.7);
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+&lt;script type="text/javascript" src="../js/Uize.js"&gt;&lt;/script&gt;
+
+&lt;h1 class="document-title"&gt;
+  &lt;a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"&gt;&lt;/a&gt;
+  &lt;a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow"&gt;JAVASCRIPT EXAMPLES&lt;/a&gt;
+  Drag-to-move
+  &lt;div id="page-actions" class="pageActions"&gt;
+    &lt;a href="source-code/drag-to-move.html" class="buttonLink"&gt;SOURCE&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/h1&gt;
+
+&lt;div class="main"&gt;
+  &lt;!-- explanation copy --&gt;
+
+  &lt;div class="explanation"&gt;
+    &lt;p&gt;In this example, the &lt;a href="../reference/Uize.Widget.Drag.Move.html"&gt;&lt;code&gt;Uize.Widget.Drag.Move&lt;/code&gt;&lt;/a&gt; widget class is being used to wire up a bunch of image thumbnails so that they can be dragged around a "workspace". This is a very basic example of drag-and-drop - there are no drop targets to speak of. Instances of the &lt;code&gt;Uize.Widget.Drag.Move&lt;/code&gt; class are wired up for all the thumbnails in a single statement, thanks to the &lt;code&gt;Uize.Widget.Drag.Move.spawn&lt;/code&gt; static method. The &lt;code&gt;Uize.Widget.Drag.Move&lt;/code&gt; class doesn't deal with managing &lt;code&gt;z-index&lt;/code&gt; - just coordinates. It does, however, support coordinates specified in units of &lt;code&gt;px&lt;/code&gt; (pixels) as well as &lt;code&gt;%&lt;/code&gt; (percent).&lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;!-- draggable nodes --&gt;
+
+  &lt;div id="dragMoveGroup" class="dragMoveGroup" style="background:#adbebf url(../images/brushed-metal.jpg) repeat-x left top;"&gt;
+    &lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228888824201666423&amp;max_dim=105" style="left:5px; top:50px;" alt=""/&gt;
+    &lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228786228006249323&amp;max_dim=105" style="left:20%; top:4px;" alt=""/&gt;
+    &lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228109666540948246&amp;max_dim=105" style="left:500px; top:230px;" alt=""/&gt;
+    &lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228745103279879745&amp;max_dim=105" style="left:250px; top:176px;" alt=""/&gt;
+    &lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228866001826566384&amp;max_dim=105" style="right:15px; top:15px;" alt=""/&gt;
+    &lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228321774790917687&amp;max_dim=105" style="left:406px; top:5px;" alt=""/&gt;
+    &lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228463251413365530&amp;max_dim=105" style="right:150px; top:100px;" alt=""/&gt;
+    &lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228507796122097730&amp;max_dim=105" style="right:440px; top:43px;" alt=""/&gt;
+    &lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228267745724726415&amp;max_dim=105" style="left:190px; bottom:5px;" alt=""/&gt;
+    &lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228937676589416694&amp;max_dim=105" style="right:240px; top:270px;" alt=""/&gt;
+    &lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228483162492178759&amp;max_dim=105" style="right:15px; top:210px;" alt=""/&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- JavaScript code to make the static HTML "come alive" --&gt;
+
+&lt;script type="text/javascript"&gt;
+
+Uize.module ({
+  required:[
+    'UizeDotCom.Page.Example.library',
+    'UizeDotCom.Page.Example',
+    'Uize.Node',
+    'Uize.Widget.Drag.Move'
+  ],
+  builder:function () {
+    /*** create the example page widget ***/
+      var page = window.page = new UizeDotCom.Page.Example;
+
+    /*** spawn instances of Uize.Widget.Drag.Move for all the images ***/
+      Uize.Widget.Drag.Move.spawn ({idPrefix:{root:'dragMoveGroup',tagName:'IMG'}},page);
+
+    /*** wire up the page widget ***/
+      page.wireUi ();
+  }
+});
+
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+
+</pre>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.library',
+		'UizeDotCom.Page'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page).wireUi ()}
+});
+
+</script>
+
+</body></html>

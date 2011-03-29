@@ -1,0 +1,18 @@
+The =Uize.Node.getByNameOrId= static method that was deprecated back in May of 2008, and the =Uize.String.stripPadding= and =Uize.Node.getByMatch= static methods that were deprecated back in July of 2008 have all been killed.
+
+For a time, they were left for backwards compatibility in order to ease transition. Now those backwards compatibility references have been removed in order to keep the codebase from bloating up. New equivalents for those methods exist. Just to recap...
+
+SUMMARY
+..........................................................
+Uize.Node.getByNameOrId   >> BECOMES >>  Uize.Node.getById
+Uize.Node.getByMatch      >> BECOMES >>  Uize.Node.find
+Uize.String.stripPadding  >> BECOMES >>  Uize.String.trim
+..........................................................
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2008-11-07 - Deprecated Methods Killed
+....................................................................................

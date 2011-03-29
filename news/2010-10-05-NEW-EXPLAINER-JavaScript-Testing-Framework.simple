@@ -1,0 +1,26 @@
+The new [[../explainers/javascript-testing-framework.html][JavaScript Testing Framework]] explainer discusses the testing framework that is provided as part of the UIZE JavaScript Framework.
+
+Among other things, this document discusses...
+
+- *test classes* - including test function, test result, and test title
+- *test instances* - including how to run tests
+- *expectations* - including expectation methods, compound expectations, and reason for failure
+- *asynchronous tests* - including how to report test result using a callback
+- *child tests* - including test trees
+- *test synopsis* - including test breadcrumbs
+- *test metrics* - including built-in time recording
+- *test logs* - including how to add to a log, access a log, and what a log contains
+- *test events* - including how to monitor the running of a test
+- *test class factory methods* - including required modules tests, static property tests, static method tests, test module tests, and test suite tests
+- *test modules* - including test namespace, and test module contents
+- *test suites* - including unit tests test suites
+
+[[../explainers/javascript-testing-framework.html][LEARN MORE]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2010-10-05 - NEW EXPLAINER: JavaScript Testing Framework
+....................................................................................

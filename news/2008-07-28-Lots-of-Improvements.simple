@@ -1,0 +1,24 @@
+IMPROVED MODULE: Uize.String
+	The new =Uize.String.indent= static method lets you easily indent or unindent multi-line strings. The new =Uize.String.repeat= static method lets you easily repeat a specified string a specified number of times. The =Uize.String.stripPadding= static method has been renamed to simply =Uize.String.trim= (the old method name is deprecated and will still be supported for some time).
+
+NEW MODULE: Uize.Node.Form
+	The new =Uize.Node.Form= package module has been added, providing functionality to facilitate working with forms.
+
+	The first =Uize.Node.Form.getValues= static method provides a convenient way to serialize the values of fields in a form (or form fields within any root node) to a JavaScript object hash.
+
+New Performance Tests
+	A new performance test shows how the =Uize.String.repeat= method outperforms the typical implementation approach to repeating strings.
+
+JavaScript Template Compiler Build Script
+	A new build script demonstrates how =.js.jst= JavaScript template files in a site project can be compiled into corresponding =.js= UIZE modules that can be used for generating markup for widgets and for other purposes.
+
+Small Optimizations
+	A number of modules have been updated to use the =myRegExp.test= method in place of the =myString.search= method, for a small file size and performance win.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2008-07-28 - Lots of Improvements
+....................................................................................

@@ -1,0 +1,13 @@
+The new [[../examples/edge-virtual-dom-events.html][Edge Virtual DOM Events]] example demonstrates the edge virtual DOM events - such as =mouseEnterLeft=, =mouseEnterBottom=, =mouseExitTop=, =mouseExitRight=, etc. - that are available in the =Uize.Node.VirtualEvent.Edge= module.
+
+In this demo, a grid of squares is presented. Each of the squares is wired up with handlers for enter and exit events for all of their edges. The enter events are wired to fade the color of the border at which the mouse enters a square from orange to black. The exit events are wired to fade the color of the border at which the mouse exits a square from cyan to black. The animation of the border color is done using the =Uize.Fx.fadeStyle= method of the =Uize.Fx= module. Moving the mouse around the squares will cause the various edges to light up in response to executing the handlers for the edge virtual DOM events that are wired up.
+
+[[../examples/edge-virtual-dom-events.html][CHECK IT OUT]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2010-01-06 - NEW EXAMPLE: Edge Virtual DOM Events
+....................................................................................

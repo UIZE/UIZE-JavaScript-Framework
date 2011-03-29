@@ -1,0 +1,43 @@
+Code Improvements
+	New globalizeNode Instance Method
+		The new =globalizeNode= method, implemented in the =Uize.Widget= base class, lets you conveniently dislocate a node from its place inside a widget's DOM and place it at the root of the document's DOM - as a direct child of the body node.
+
+		This is useful for when nodes need to be plucked out so that they can be absolutely positioned relative to the view port and so that they can appear above everything else on the page. The =Uize.Widget= class keeps track of nodes that are globalized by this method, so that they are correctly removed when the =removeUi= instance method is called.
+
+	Tree Widget Classes Updated
+		The =Uize.Widget.Tree= base class has been updated to rebuild the UI when the value of the =items= set-get property is changed.
+
+		This allows the contents of a tree-based widget to be updated programmatically after the widget has already been wired up. This change increases the versatility of the =Uize.Widget.Tree.List= and =Uize.Widget.Tree.Menu= classes.
+
+	Uize.Widget.SlideShow Improvements
+		The =Uize.Widget.SlideShow= widget class has been updated to allow easy / implicit mapping of slide field data to child widgets.
+
+	Performance Optimizations
+		Some more performance tuning has been done to the =Uize= base class, the inheritance mechanism, and instance construction.
+
+		These improvements are more likely to be noticeable with complex applications utilizing hundreds of instances of different widgets.
+
+BUG FIX: Bars For Data Comparison
+	A bug in the =Bars For Data Comparison= example has been fixed, so that now the nutritional data values for all fruits shows correctly.
+
+	There was some bad data in the original set, so all the nutritional data was replaced with authoritative data from the USDA Web site. Also, the old data didn't seem to be even comparing the same portion sizes for different fruits. The new data is based on a 100g serving size. This change also affected the =Slideshow of Data= and =Complex Table Sort= examples.
+
+NEW EXAMPLE: Slideshow of Data
+	This new examples demonstrates how a slide show does not need to be strictly about images.
+
+	In the example, a slide show widget is being used to display nutritional information for various fruits. Each slide shows data for a different fruit.
+
+	[[../examples/slideshow-of-data.html][CHECK IT OUT]]
+
+More Documentation
+	I keep chipping away at the backlog of functionality to document.
+
+	This is an ongoing effort, but the rate of documentation has now eclipsed the rate of development (and that's not because the rate of development has slowed, either).
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2008-06-03 - Latest Improvements
+....................................................................................

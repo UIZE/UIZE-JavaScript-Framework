@@ -1,0 +1,2047 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>To Do Documentation | Appendixes | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework Appendixes "/>
+	<meta name="description" content="Document the pattern of creating inner classes."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	To Do Documentation
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="Document the pattern of creating inner classes.">1. Document Inner Classes</a>
+				<ul>
+					<li><a href="#1_1" title="Push dependencies of inner class(es) into required list of host class or module.">1.1. Private Inner Classes</a></li>
+					<li><a href="#1_2" title="Don&apos;t do them, because they&apos;re too problematic.">1.2. Public Inner Classes</a></li>
+					<li><a href="#1_3" title="Because the inner subclass would require the host module as its base class, and it would not be built before trying to declare the module for the inner subclass.">1.3. Can't Have Inner Subclasses</a></li>
+				</ul>
+			</li>
+			<li><a href="#2">2. Issues With Auto-generated Documentation</a>
+				<ul>
+					<li><a href="#2_1" title="- perhaps in such cases such features should just get documented and referred to as static methods">2.1. - static properties whose values are functions are regarded as static methods</a></li>
+					<li><a href="#2_2" title="Documenting extension modules can mess things up.">2.2. Extension Modules Mess Things Up</a></li>
+				</ul>
+			</li>
+			<li><a href="#3" title="- eliminate alert dialog when first starting up">3. SimpleDoc Previewing Utility</a></li>
+			<li><a href="#4" title="- polling to watch the window and detect when the window has been reloaded, and then auto-refresh view">4. DELVE tool improvements</a>
+				<ul>
+					<li><a href="#4_1" title="- when rebuilding the tree list, ideally retain the expanded state of nodes in the tree">4.1. - polling (or some other mechanism) to keep DELVE in sync with changing contents in the page being inspected</a></li>
+					<li><a href="#4_2">4.2. Bugs / Issues</a>
+						<ul>
+							<li><a href="#4_2_1" title="- currently breaks on some pages because of presence of global variable named page that is not page widget">4.2.1. - improve page widget detection method</a></li>
+						</ul>
+					</li>
+					<li><a href="#4_3" title="- to be an inspector UI, with form elements for viewing and modifying values of set-get properties">4.3. State Tab</a></li>
+					<li><a href="#4_4" title="- possibly provide percentage results (eg. % of widgets that are missing all DOM nodes)">4.4. Uber Report Improvements</a></li>
+					<li><a href="#4_5" title="- serialize the other properties of the event object">4.5. Events Log Improvements</a></li>
+					<li><a href="#4_6" title="- maintain sort state across rewirings (ie. sort should be a property)">4.6. Features Tab</a></li>
+					<li><a href="#4_7">4.7. Summary Tab</a>
+						<ul>
+							<li><a href="#4_7_1" title="- this possibly argues in favor of not rebuilding the entire contents, but only rebuilding the contents for sections, and then showing / hiding sections relevant to the object inspected)">4.7.1. - have sections be collapsible, with collapsible state remembered across updates</a></li>
+							<li><a href="#4_7_2">4.7.2. - for widgets...</a>
+								<ul>
+									<li><a href="#4_7_2_1" title="- DOM nodes whose IDs suggest the nodes belong to the widget, but the node is not in the node cache">4.7.2.1. - unaccessed DOM nodes table</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li><a href="#4_8" title="- add handling for instances of Uize classes to Uize.Json">4.8. - issue with serializing children property of widget, because of circular references</a></li>
+					<li><a href="#4_9" title="- back">4.9. - for object entry, implement history feature</a></li>
+					<li><a href="#4_10">4.10. - select widget by clicking on node in page being inspected</a>
+						<ul>
+							<li><a href="#4_10_1" title="- would require wiring mouseover, mouseout, and click events for all nodes of all widgets">4.10.1. - mouseover nodes of widgets to show info tooltip about node and owner widget</a></li>
+						</ul>
+					</li>
+					<li><a href="#4_11" title="- good for watching events on multiple different objects at the same time, or seeing different tree list contents">4.11. - ability to spawn multiple DELVE tools inspecting the same document</a></li>
+					<li><a href="#4_12">4.12. - different contents for tree list...</a>
+						<ul>
+							<li><a href="#4_12_1" title="- widgets that don&apos;t appear to have any HTML (for them, directly, or their children)">4.12.1. - widget instance queries</a></li>
+							<li><a href="#4_12_2" title="- widgets classes that have no subclasses and of which no instances have been created">4.12.2. - module queries</a></li>
+							<li><a href="#4_12_3">4.12.3. - DOM node queries</a>
+								<ul>
+									<li><a href="#4_12_3_1" title="- DOM nodes that have not been accessed by any widget, and whose id structure does not appear to fit with any widget on the page">4.12.3.1. - DOM nodes that have ids, but that don't appear to belong to widget instances</a></li>
+								</ul>
+							</li>
+							<li><a href="#4_12_4" title="- all localized strings">4.12.4. - localized string queries</a></li>
+							<li><a href="#4_12_5" title="- children of a specific widget">4.12.5. - stuff that's already interspersed in the summary tab info</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li><a href="#5" title="Kill acceleration and deceleration set-get properties of Uize.Fade class.">5. Kill acceleration and deceleration</a></li>
+			<li><a href="#6">6. Explainers to Update</a>
+				<ul>
+					<li><a href="#6_1">6.1. JavaScript Build Scripts</a>
+						<ul>
+							<li><a href="#6_1_1" title="Update JavaScript Build Scripts explainer with info about head comments...">6.1.1. Add Head Comments Into</a></li>
+						</ul>
+					</li>
+					<li><a href="#6_2" title="- Declarative Syntax for Widget Data">6.2. JavaScript Widgets</a></li>
+				</ul>
+			</li>
+			<li><a href="#7">7. iPad issues</a>
+				<ul>
+					<li><a href="#7_1">7.1. - outstanding</a>
+						<ul>
+							<li><a href="#7_1_1" title="- share it panel is useless on iPad, because neither mouseover nor fixed positioning are supported">7.1.1. - all pages</a>
+								<ul>
+									<li><a href="#7_1_1_1" title="- on doc pages, building of contents tree&apos;s DOM in JavaScript slows down page load, and also leaves page in unattractive state for too long. Suggest moving to building contents tree HTML as part of build script, and modify tree widget to be able to wire up prebuilt HTML (perhaps it already can do this)">7.1.1.1. - performance</a></li>
+								</ul>
+							</li>
+							<li><a href="#7_1_2" title="- have to tap tour navigation buttons twice in order to navigate (first tap shows tooltip), which is annoying">7.1.2. - example pages</a></li>
+							<li><a href="#7_1_3" title="- for example and module source code pages, width of pages causes titlebar to be tiny, since default is to scale page so there is no horizontal scrolling">7.1.3. - misc</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li><a href="#8">8. Bugs</a>
+				<ul>
+					<li><a href="#8_1" title="- data bars don&apos;t have any space around them (has to do with IE8&apos;s handling of cellspacing attribute of table)">8.1. file:///C:/~uize/uize_framework/examples/slideshow-of-data.html</a></li>
+				</ul>
+			</li>
+			<li><a href="#9" title="- integrate examples into reference doc">9. Doc Improvements</a>
+				<ul>
+					<li><a href="#9_1" title="- will need to settle on naming scheme for anchors for doc sections">9.1. - link references to static methods and properties (eg. =Uize.clone=) to appropriate sections of reference documents</a></li>
+				</ul>
+			</li>
+			<li><a href="#10" title="- script to insert UIZE version number into all script tags that source in the Uize.js file">10. Build Process Improvements</a>
+				<ul>
+					<li><a href="#10_1" title="- as long as they don&apos;t have a &quot;~&quot; at the beginning of the file name">10.1. - write script to search for example files that are using ~source JS</a></li>
+				</ul>
+			</li>
+			<li><a href="#11">11. gzipping Text Files</a>
+				<ul>
+					<li><a href="#11_1" title="AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/javascript">11.1. - add to .htaccess file</a></li>
+				</ul>
+			</li>
+			<li><a href="#12" title="Migrate some modules at the root Uize namespace into deeper namespaces in order to tuck them away.">12. Migrate Modules Into Deeper Namespaces</a></li>
+			<li><a href="#13" title="- Uize.Build">13. Possible New Namespaces</a></li>
+			<li><a href="#14" title="Code to factor out of widget classes into non-Web specific modules...">14. Code to Factor Out</a></li>
+			<li><a href="#15">15. Upcoming Releases</a>
+				<ul>
+					<li><a href="#15_1">15.1. - loop optimization approaches</a>
+						<ul>
+							<li><a href="#15_1_1" title="- write up explanation">15.1.1. - finish loop optimization approaches performance test...</a></li>
+						</ul>
+					</li>
+					<li><a href="#15_2" title="if (blah) doSomething ();   ==&gt;  blah &amp;&amp; doSomething ();&#10;if (!blah) doSomething ();  ==&gt;  blah || doSomething ();&#10;">15.2. Conditional Expression Optimization</a></li>
+					<li><a href="#15_3" title="alert (blah);            // displays &quot;Hello&quot;&#10;alert (blah + &apos;Brian&apos;);  // displays &quot;Hello, Brian&quot;&#10;">15.3. Brain Teaser / Interview Question</a></li>
+					<li><a href="#15_4" title="if (someInstance.constructor == SomeClass) {&#10;	// ...&#10;}&#10;">15.4. Testing if instance is of a certain class or object type</a></li>
+					<li><a href="#15_5" title="if (someInstance1.constructor == someInstance2.constructor) {&#10;	// ...&#10;}&#10;">15.5. Testing if two instances are of the same class or object type</a></li>
+					<li><a href="#15_6" title="someInstance2 = new someInstance1.Class (someInstance1.get ())&#10;">15.6. Creating a fresh instance with same state</a></li>
+					<li><a href="#15_7" title="optimize the following statement...">15.7. Interview question / brainteaser</a></li>
+				</ul>
+			</li>
+			<li><a href="#16">16. Pull all Images from Zazzle...</a>
+				<ul>
+					<li><a href="#16_1" title="- have slideshows and such, containing UIZE merch product images">16.1. - use more product images from Zazzle for slideshow widgets and such</a></li>
+				</ul>
+			</li>
+			<li><a href="#17" title="- http://www.100abandonedhouses.com/">17. URLs that could use a UIZE slideshow experience</a></li>
+			<li><a href="#18" title="- http://dean.edwards.name/weblog/2007/03/rules/">18. URLs to link to somewhere in docs</a></li>
+			<li><a href="#19" title="For examples, modules, put source code into a peer folder, rather than child folder">19. Improved Location of Source Code</a>
+				<ul>
+					<li><a href="#19_1" title="- users can search only source code, or only documents">19.1. - benefits</a></li>
+				</ul>
+			</li>
+			<li><a href="#20" title="Uize.Fade&#10;Uize.Node&#10;Uize.Url&#10;Uize.Tooltip&#10;Uize.Comm&#10;Uize.Comm.Ajax&#10;Uize.Widget&#10;">20. Uize.Minimal.library.js</a></li>
+			<li><a href="#21">21. For Framework Developers</a>
+				<ul>
+					<li><a href="#21_1" title="- first paragraph at root of document, or first paragraph of first section of document should be no more than 150 characters (excluding SimpleDoc formatting characters). This is because this paragraph is used as the value for the meta description tag. In this paragraph, make careful use of words, with the mind to maximizing the value of the description. This is the first opporunity that the rea...">21.1. Documentation Style Guide</a>
+						<ul>
+							<li><a href="#21_1_1">21.1.1. General</a>
+								<ul>
+									<li><a href="#21_1_1_1" title="Each section should start with a clear and concise, salient, in-a-nutshell declaration of what the section is about. This first paragraph should be able to stand alone, without requiring the subsequent paragraphs for it to make sense. The first paragraph">21.1.1.1. First Paragraph Should Summarize</a></li>
+								</ul>
+							</li>
+							<li><a href="#21_1_2">21.1.2. Module References</a>
+								<ul>
+									<li><a href="#21_1_2_1" title="SYNTAX">21.1.2.1. Defining Syntax</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li><a href="#21_2" title="Add an Entry to the Site Map">21.2. - Creating a New Explainer</a>
+						<ul>
+							<li><a href="#21_2_1" title="- refer to Announcing a New Development">21.2.1. Announce the New Explainer</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li><a href="#22">22. New Explainers</a>
+				<ul>
+					<li><a href="#22_1" title="- specifying params">22.1. Ajax</a></li>
+					<li><a href="#22_2">22.2. JavaScript Mobile Development</a>
+						<ul>
+							<li><a href="#22_2_1" title="- typically, these are devices that support HTML5 and CSS3">22.2.1. - UIZE works in smart phones and other mobile devices with Web browsers that support JavaScript and other Web standards</a></li>
+							<li><a href="#22_2_2" title="- provide examples: Uize.Fx, Uize.Fade.*, etc.">22.2.2. - emphasize that UIZE file size is compact, and that features better suited to devices with more real estate, processing power, or memory need not be loaded in</a></li>
+						</ul>
+					</li>
+					<li><a href="#22_3" title="- animating colors">22.3. JavaScript Colors</a></li>
+					<li><a href="#22_4" title="- GLUE paradigm">22.4. Unobtrusive JavaScript</a>
+						<ul>
+							<li><a href="#22_4_1" title="- Uize.Widget.HoverFader">22.4.1. - progressive enhancement</a></li>
+						</ul>
+					</li>
+					<li><a href="#22_5" title="- Uize.Widget.Drag (for drag handles)">22.5. JavaScript Drag-and-drop</a></li>
+					<li><a href="#22_6" title="- The Value Interface">22.6. JavaScript Interfaces</a></li>
+					<li><a href="#22_7">22.7. Extending UIZE</a>
+						<ul>
+							<li><a href="#22_7_1" title="- creating your own widgets">22.7.1. - subclassing existing widget classes, or other classes</a></li>
+							<li><a href="#22_7_2" title="- defining new named colors">22.7.2. - extending color support</a></li>
+							<li><a href="#22_7_3" title="- adding new effects">22.7.3. - extending Fx</a></li>
+							<li><a href="#22_7_4" title="- creating Uize.Comm subclasses">22.7.4. - adding support for communication protocols</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li><a href="#23" title="- for any content document, pop open search pop-up when selecting text (as long as text is not more than a certain max length, and does not contain linebreaks -- must make sure that this feature wouldn&apos;t be annoying, so perhaps only for documentation pages? Don&apos;t want to confuse this search feature with normal interaction with form fields).">23. Search on Selected Text</a></li>
+			<li><a href="#24" title="default localized strings (could be English)">24. Explainer: JavaScript Localization</a></li>
+			<li><a href="#25">25. Explainer: JavaScript Libraries</a>
+				<ul>
+					<li><a href="#25_1" title="I read over the JavaScript Library Documentation and here are my suggestions:">25.1. - feedback from Ben</a></li>
+					<li><a href="#25_2">25.2. - feedback from Tim</a>
+						<ul>
+							<li><a href="#25_2_1" title="The word “page” is used primarily to describe the environment in which Uize operates, but using the word “application” would suggest that Uize is able to work in more diverse environments than just a web browser. Of course, using “application” would confuse people who aren’t used to thinking about javascript as anything more than a web-scripting tool.">25.2.1. General:</a></li>
+							<li><a href="#25_2_2" title="- Strike the “like” from “Think of a JavaScript module as like a book”">25.2.2. Introduction:</a></li>
+							<li><a href="#25_2_3" title="- Doesn’t using the extension .library.js remove an entire range of possible names for js files? Could .jsl be appropriate?">25.2.3. Where They Live:</a></li>
+							<li><a href="#25_2_4" title="Point out that, in source, absolutely nothing happens if the Library Contents comment is all that is in the library file. People might wonder if there’s a special mechanism within Uize to parse the comment and load the js classes using the module loader.">25.2.4. 3.1</a></li>
+							<li><a href="#25_2_5" title="The paragraph about not requiring modules that are listed in a library module is unclear. This would be my re-write:">25.2.5. 3.1.2.3</a></li>
+							<li><a href="#25_2_6" title="Add Zazzle?">25.2.6. Real World Examples</a></li>
+							<li><a href="#25_2_7" title="A gentle reminder of how multiple module declarations of the same module won’t lead to multiple requests might be helpful">25.2.7. 7.1</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li><a href="#26">26. Explainer: JavaScript Modules</a>
+				<ul>
+					<li><a href="#26_1">26.1. Uize.module -> Parameters -> required</a>
+						<ul>
+							<li><a href="#26_1_1" title="It&apos;s worth mentioning and explaining why order is not important in the required list">26.1.1. Order Unimportant</a></li>
+							<li><a href="#26_1_2" title="Because they extend namespaces, how do you know from the code if you need them? Yes, it&apos;s a little trickier.">26.1.2. Requiring Extension Modules</a></li>
+						</ul>
+					</li>
+					<li><a href="#26_2" title="You can have multiple consecutive module declarations that share common required modules and things will work correctly, rather than some of the required modules being loaded multiple times (which would cause all sorts of problems with modules stomping over themselves when re-declaring themselves and thereby crippling code).">26.2. Multiple Consecutive Module Declarations</a></li>
+					<li><a href="#26_3" title="You can have an inline module declaration that requires other external modules, and subsequent inline module declarations that require that first module will correctly wait until it is built - rather than trying to load it externally">26.3. Named Inline Module Required By Subsequent Anonymous Inline Module</a></li>
+				</ul>
+			</li>
+			<li><a href="#27">27. Miscellaneous</a>
+				<ul>
+					<li><a href="#27_1" title="Uize.Data.map (&apos;key &gt; 1 ? this [key - 2] + this [key - 1] : key&apos;,30)&#10;">27.1. Novel map Method</a></li>
+				</ul>
+			</li>
+			<li><a href="#28" title="- the matrix">28. Interview Questions to Add</a>
+				<ul>
+					<li><a href="#28_1" title="- find the smallest number in an array of numbers, without using methods of the Math object (like Math.max or Math.min)">28.1. - find smallest number</a></li>
+				</ul>
+			</li>
+			<li><a href="#29" title="- &quot;JavaScript Templates&quot; explainer has issue with &quot;&lt;%&quot; and &quot;&gt;&quot; chars not being entities. This is a problem for SimpleDoc in general.">29. XHTML Validation Problems</a>
+				<ul>
+					<li><a href="#29_1" title="&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=utf-8&quot; /&gt;">29.1. - for pages delivered by server, no char encoding specified in response headers (refer to zazzle.com response headers)</a></li>
+					<li><a href="#29_2" title="&lt;!--&#10;// --&gt;&#10;">29.2. - script tags with inline code should really have...</a></li>
+				</ul>
+			</li>
+			<li><a href="#30" title="Node-related methods implemented in Uize.Widget are a reflection of static methods from the Uize.Node package that are the most useful and frequently used in the context of widget implementations. If you need to use more esoteric methods, you can access those from the Uize.Node package and use the getNode instance method to get references to implied nodes to supply to the methods of the Uize.No...">30. Design Philosophy (some ramblings)</a></li>
+			<li><a href="#31">31. Site & Documentation (in order of priority)</a>
+				<ul>
+					<li><a href="#31_1" title="- possibly write a build script to find documents with first paragraphs for sections that are long or contain multiple sentences (non-period, following by period, followed by space)">31.1. - go through all documentation pages and see what tooltips show up for the contents tree links. Make sure all sections have a concise introductory first paragraph.</a></li>
+					<li><a href="#31_2" title="Describe the many ways in which UIZE is utilized on the zazzle.com Web site.">31.2. How UIZE is used on Zazzle</a></li>
+					<li><a href="#31_3" title="In discussion of UIZE, WRT how UIZE compares to other frameworks.">31.3. UIZE Comparison With Other Frameworks</a>
+						<ul>
+							<li><a href="#31_3_1" title="- Uize.callOn">31.3.1. Discuss convenience iterators...</a></li>
+						</ul>
+					</li>
+					<li><a href="#31_4" title="A feature can be a side effect of an implementation by design.">31.4. Thoughts on Good Design</a></li>
+				</ul>
+			</li>
+			<li><a href="#32">32. UIZE guidelines</a>
+				<ul>
+					<li><a href="#32_1" title="- only source in JavaScript files that are actually used on a page (same applies to CSS files)">32.1. Development Practices</a></li>
+					<li><a href="#32_2" title="- UIZE-specific: Leave Set-get Property Initial Values undefined, where possible. don&apos;t define an initial value for a set-get property when it offers no benefit (especially if your code tests the property in its execution to protect against null or undefined values)">32.2. Code Size Optimization</a>
+						<ul>
+							<li><a href="#32_2_1" title="if (!_param) _param = _lastValue;&#10;if (_param) {&#10;	// do stuff&#10;}&#10;_lastValue = _param;&#10;">32.2.1. - lazy assignment combined with conditional execution</a></li>
+						</ul>
+					</li>
+					<li><a href="#32_3" title="- sacred empty object and sacred empty array techniques">32.3. Code Performance Optimization</a></li>
+					<li><a href="#32_4">32.4. Code Tricks & Tips</a>
+						<ul>
+							<li><a href="#32_4_1" title="function hasLineExceedingMaxLength (sourceStr,maxLength) {&#10;	return new RegExp (&apos;^.{&apos; + (maxLength + 1) + &apos;,}$&apos;,&apos;m&apos;).test (sourceStr);&#10;}&#10;">32.4.1. - how to test if a multi-line string contains any lines exceeding a specific length</a></li>
+							<li><a href="#32_4_2" title="myArray.concat ();&#10;">32.4.2. - how to create a copy of an array...</a></li>
+							<li><a href="#32_4_3" title="myString.split (&apos;&apos;);&#10;">32.4.3. - how to split out the characters from a string into an array of characters...</a></li>
+							<li><a href="#32_4_4" title="myString.split (&apos;&apos;).join (&apos; &apos;);&#10;">32.4.4. - how to double space the characters in a string...</a></li>
+						</ul>
+					</li>
+					<li><a href="#32_5" title="- put JavaScript only as early in page as is needed (at end of page, if possible)">32.5. - page performance optimization</a></li>
+				</ul>
+			</li>
+			<li><a href="#33" title="- mention Uize/uize/UIZE namespace considerations for developers">33. Overview</a></li>
+			<li><a href="#34">34. For All Examples</a>
+				<ul>
+					<li><a href="#34_1" title="C:/~uize/uize_framework/examples/hierarchical-selector.html">34.1. - add explanation copy</a></li>
+				</ul>
+			</li>
+			<li><a href="#35" title="- add description copy">35. For All Tests</a>
+				<ul>
+					<li><a href="#35_1">35.1. - improve test framework, so that...</a>
+						<ul>
+							<li><a href="#35_1_1" title="- generating the report is easier">35.1.1. - each individual test can specify its title, so that...</a></li>
+							<li><a href="#35_1_2" title="- the user knows when a wait is happening">35.1.2. - give better status updates, so that the user knows...</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li><a href="#36">36. New Examples to Create</a>
+				<ul>
+					<li><a href="#36_1">36.1. Uize</a>
+						<ul>
+							<li><a href="#36_1_1" title="- an example that demonstrates the Changed.* event">36.1.1. - Changed.* event</a></li>
+						</ul>
+					</li>
+					<li><a href="#36_2" title="- demonstrates use of Uize.Fx.fadeStyleAcrossNodes">36.2. - Color Gradients</a></li>
+					<li><a href="#36_3">36.3. Uize.Color.xUtil</a>
+						<ul>
+							<li><a href="#36_3_1" title="- an example that takes a set of colors and provides various controls for transforming the colors in the color theme">36.3.1. - Color Theme Transformation</a>
+								<ul>
+									<li><a href="#36_3_1_1">36.3.1.1. - ability to...</a>
+										<ul>
+											<li><a href="#36_3_1_1_1" title="- reduce range">36.3.1.1.1. - change hue</a></li>
+											<li><a href="#36_3_1_1_2" title="- reduce range">36.3.1.1.2. - change saturation</a></li>
+											<li><a href="#36_3_1_1_3" title="- reduce range">36.3.1.1.3. - change lightness</a></li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li><a href="#36_4" title="- CSV-to-JSON / JSON-to-CSV converter">36.4. Uize.Data.Csv</a></li>
+					<li><a href="#36_5" title="- an example that illustrates animating the opening of a popup browser window for displaying help topics">36.5. Uize.Fade.xFactory</a>
+						<ul>
+							<li><a href="#36_5_1" title="- top left, top center, top right">36.5.1. - an example that illustrates animating the positioning of the browser window</a></li>
+						</ul>
+					</li>
+					<li><a href="#36_6">36.6. Uize.Fx.fadeStyle</a>
+						<ul>
+							<li><a href="#36_6_1">36.6.1. - an example that demonstrates fading of many different CSS style properties</a>
+								<ul>
+									<li><a href="#36_6_1_1" title="- left side has playground area">36.6.1.1. - layout...</a>
+										<ul>
+											<li><a href="#36_6_1_1_1" title="- a text field where selected operation is editable">36.6.1.1.1. - right side has vertically scrolling list of fade operations, below which is...</a></li>
+										</ul>
+									</li>
+									<li><a href="#36_6_1_2" title="- moving an object">36.6.1.2. - stuff to demo</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li><a href="#36_7" title="- movie queue sorter (ala Netflix)">36.7. Uize.Widget.Collection</a></li>
+					<li><a href="#36_8" title="- a demo that loads an example into a resizable iframe dialog">36.8. Uize.Widget.Dialog.Iframe</a></li>
+					<li><a href="#36_9" title="- a vanilla widget that has a bunch of Uize.Widget.FormElement instances as child widgets">36.9. Uize.Widget.FormElement</a>
+						<ul>
+							<li><a href="#36_9_1" title="- text input">36.9.1. - form elements</a></li>
+						</ul>
+					</li>
+					<li><a href="#36_10">36.10. Uize.Widget.Options</a>
+						<ul>
+							<li><a href="#36_10_1" title="- image selector UI, where each selector has thumbnail, title, rating">36.10.1. - dynamic options, with more elaborate HTML</a></li>
+						</ul>
+					</li>
+					<li><a href="#36_11" title="- new demo to show how scrolly could be used simply to scroll a regular block of HTML (a div with scrollbar)">36.11. Uize.Widget.Scrolly</a></li>
+					<li><a href="#36_12" title="- migrate existing test from functionality test and add explanation">36.12. Uize.Node.injectHtml</a></li>
+					<li><a href="#36_13" title="- Declarative Syntax for Properties">36.13. Uize.Widget</a></li>
+					<li><a href="#36_14">36.14. Uize.Widget.Page</a>
+						<ul>
+							<li><a href="#36_14_1" title="- declarative syntax for page&apos;s child widgets">36.14.1. Widget Adoption by Page Widget</a></li>
+						</ul>
+					</li>
+					<li><a href="#36_15" title="- example showing how multiple table are made sortable with a single spawning declarative">36.15. Uize.Widget.TableSort</a></li>
+					<li><a href="#36_16" title="Uize.Validator">36.16. Form Validation</a></li>
+					<li><a href="#36_17" title="- example with different icon themes">36.17. Uize.Widget.Tree.List</a></li>
+					<li><a href="#36_18" title="- an example with two columns of identical form fields, a bunch of different types of form fields in each column, with a different form field per row">36.18. Transferring Form Field Values</a></li>
+				</ul>
+			</li>
+			<li><a href="#37" title="- lightweight, quick to create presentations">37. SIMPLE-based Presentation Tool</a></li>
+			<li><a href="#38" title="- trademark &amp; copyright notices">38. Things to Add to Documentation</a>
+				<ul>
+					<li><a href="#38_1" title="- Tortoise SVN">38.1. - more endorsements</a>
+						<ul>
+							<li><a href="#38_1_1" title="- Tamper Data">38.1.1. - Firefox</a></li>
+							<li><a href="#38_1_2" title="- Fiddler">38.1.2. - for IE</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<a name="1"></a>
+	<h1 class="heading1" title="1. Document Inner Classes"><span class="headingNumber"><a href="#1" title="1. Document Inner Classes">1</a>. </span>Document Inner Classes</h1>
+	<div class="contents1">
+		<p>Document the pattern of creating inner classes.</p>
+		
+		<a name="1_1"></a>
+		<h2 class="heading2" title="1. Document Inner Classes -&gt; 1.1. Private Inner Classes"><span class="headingNumber"><a href="#1" title="1. Document Inner Classes">1</a>.<a href="#1_1" title="1. Document Inner Classes -&gt; 1.1. Private Inner Classes">1</a>. </span>Private Inner Classes</h2>
+		<div class="contents2">
+			<p>Push dependencies of inner class(es) into <code>required</code> list of host class or module.</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">Uize.module ({
+  name:'MySite.MyClass',
+  required:[
+    'MySite.Widget',  // required as base class of inner class
+    'Uize.Data'       // required for inner class
+  ],
+  builder:function () {
+    /*** create the inner class ***/
+      var _MyInnerClass = MySite.Widget.subclass ();
+      // code here to further create the inner class
+
+    /*** build the class ***/
+      // code here to build the main class for the module
+  }
+});
+</pre>
+		</div>
+		
+		<a name="1_2"></a>
+		<h2 class="heading2" title="1. Document Inner Classes -&gt; 1.2. Public Inner Classes"><span class="headingNumber"><a href="#1" title="1. Document Inner Classes">1</a>.<a href="#1_2" title="1. Document Inner Classes -&gt; 1.2. Public Inner Classes">2</a>. </span>Public Inner Classes</h2>
+		<div class="contents2">
+			<p>Don't do them, because they're too problematic.</p>
+		</div>
+		
+		<a name="1_3"></a>
+		<h2 class="heading2" title="1. Document Inner Classes -&gt; 1.3. Can&apos;t Have Inner Subclasses"><span class="headingNumber"><a href="#1" title="1. Document Inner Classes">1</a>.<a href="#1_3" title="1. Document Inner Classes -&gt; 1.3. Can&apos;t Have Inner Subclasses">3</a>. </span>Can't Have Inner Subclasses</h2>
+		<div class="contents2">
+			<p>Because the inner subclass would require the host module as its base class, and it would not be built before trying to declare the module for the inner subclass.</p>
+		</div>
+	</div>
+	
+	<a name="2"></a>
+	<h1 class="heading1" title="2. Issues With Auto-generated Documentation"><span class="headingNumber"><a href="#2" title="2. Issues With Auto-generated Documentation">2</a>. </span>Issues With Auto-generated Documentation</h1>
+	<div class="contents1">
+		<a name="2_1"></a>
+		<h2 class="heading2" title="2. Issues With Auto-generated Documentation -&gt; 2.1. - static properties whose values are functions are regarded as static methods"><span class="headingNumber"><a href="#2" title="2. Issues With Auto-generated Documentation">2</a>.<a href="#2_1" title="2. Issues With Auto-generated Documentation -&gt; 2.1. - static properties whose values are functions are regarded as static methods">1</a>. </span>- static properties whose values are functions are regarded as static methods</h2>
+		<div class="contents2">
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>perhaps in such cases such features should just get documented and referred to as static methods</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>in the future, it should be possible to register a feature as a static property, but where the type of the property can be function</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_2"></a>
+		<h2 class="heading2" title="2. Issues With Auto-generated Documentation -&gt; 2.2. Extension Modules Mess Things Up"><span class="headingNumber"><a href="#2" title="2. Issues With Auto-generated Documentation">2</a>.<a href="#2_2" title="2. Issues With Auto-generated Documentation -&gt; 2.2. Extension Modules Mess Things Up">2</a>. </span>Extension Modules Mess Things Up</h2>
+		<div class="contents2">
+			<p>Documenting extension modules can mess things up.</p>
+			
+			<p>Loading extension modules in the documentation build script in order to document them can have the side effect of modifying a class, and other modules that are subclasses of the modified class that are then documented later appear to have features that they really do not have, because they've inherited the features that were extended on their base class by loading and documenting the extension module.</p>
+		</div>
+		
+		<table class="list">
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>set-get properties whose initial values are objects or arrays are incorrectly indicated as having been overridden in a module that inherits the feature, simply because the initial value in the subclass is a clone of the initial value in the base class</td></tr>
+		</table>
+	</div>
+	
+	<a name="3"></a>
+	<h1 class="heading1" title="3. SimpleDoc Previewing Utility"><span class="headingNumber"><a href="#3" title="3. SimpleDoc Previewing Utility">3</a>. </span>SimpleDoc Previewing Utility</h1>
+	<div class="contents1">
+		<table class="list">
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>eliminate alert dialog when first starting up</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>add convenient way in window to get source - either the full document, or just the contents of the body</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>open window with minimal chrome</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see if it's possible to launch Firefox instead of IE</td></tr>
+		</table>
+	</div>
+	
+	<a name="4"></a>
+	<h1 class="heading1" title="4. DELVE tool improvements"><span class="headingNumber"><a href="#4" title="4. DELVE tool improvements">4</a>. </span>DELVE tool improvements</h1>
+	<div class="contents1">
+		<table class="list">
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>polling to watch the window and detect when the window has been reloaded, and then auto-refresh view</td></tr>
+		</table>
+		<a name="4_1"></a>
+		<h2 class="heading2" title="4. DELVE tool improvements -&gt; 4.1. - polling (or some other mechanism) to keep DELVE in sync with changing contents in the page being inspected"><span class="headingNumber"><a href="#4" title="4. DELVE tool improvements">4</a>.<a href="#4_1" title="4. DELVE tool improvements -&gt; 4.1. - polling (or some other mechanism) to keep DELVE in sync with changing contents in the page being inspected">1</a>. </span>- polling (or some other mechanism) to keep DELVE in sync with changing contents in the page being inspected</h2>
+		<div class="contents2">
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>when rebuilding the tree list, ideally retain the expanded state of nodes in the tree</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_2"></a>
+		<h2 class="heading2" title="4. DELVE tool improvements -&gt; 4.2. Bugs / Issues"><span class="headingNumber"><a href="#4" title="4. DELVE tool improvements">4</a>.<a href="#4_2" title="4. DELVE tool improvements -&gt; 4.2. Bugs / Issues">2</a>. </span>Bugs / Issues</h2>
+		<div class="contents2">
+			<a name="4_2_1"></a>
+			<h3 class="heading3" title="4. DELVE tool improvements -&gt; 4.2. Bugs / Issues -&gt; 4.2.1. - improve page widget detection method"><span class="headingNumber"><a href="#4" title="4. DELVE tool improvements">4</a>.<a href="#4_2" title="4. DELVE tool improvements -&gt; 4.2. Bugs / Issues">2</a>.<a href="#4_2_1" title="4. DELVE tool improvements -&gt; 4.2. Bugs / Issues -&gt; 4.2.1. - improve page widget detection method">1</a>. </span>- improve page widget detection method</h3>
+			<div class="contents3">
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>currently breaks on some pages because of presence of global variable named page that is not page widget</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>eg. http://www.webreference.com/js/column5/methods.html</td></tr>
+				</table>
+			</div>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>DELVE fails during launch on iPad</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_3"></a>
+		<h2 class="heading2" title="4. DELVE tool improvements -&gt; 4.3. State Tab"><span class="headingNumber"><a href="#4" title="4. DELVE tool improvements">4</a>.<a href="#4_3" title="4. DELVE tool improvements -&gt; 4.3. State Tab">3</a>. </span>State Tab</h2>
+		<div class="contents2">
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>to be an inspector UI, with form elements for viewing and modifying values of set-get properties</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>to be wired to observe object's Changed.* event in order to keep values synchronized</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>yellow fade effect (or equivalent) for highlighting set-get properties that have recently changed value</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>link to documentation for every set-get property (link to class that introduces property)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>count of the number of times the value has changed since being watched (good for judging volume of activity)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>property name linked to get summary (as with current behavior with set-get properties table in summary tab)</td></tr>
+			</table>
+		</div>
+		
+		<table class="list">
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>wire up a menu for the UIZE logo, as a spillover for more features</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>for tree list, show total number of items somewhere in UI</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>write reference documentation</td></tr>
+		</table>
+		<a name="4_4"></a>
+		<h2 class="heading2" title="4. DELVE tool improvements -&gt; 4.4. Uber Report Improvements"><span class="headingNumber"><a href="#4" title="4. DELVE tool improvements">4</a>.<a href="#4_4" title="4. DELVE tool improvements -&gt; 4.4. Uber Report Improvements">4</a>. </span>Uber Report Improvements</h2>
+		<div class="contents2">
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>possibly provide percentage results (eg. % of widgets that are missing all DOM nodes)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>possible conclusions section</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_5"></a>
+		<h2 class="heading2" title="4. DELVE tool improvements -&gt; 4.5. Events Log Improvements"><span class="headingNumber"><a href="#4" title="4. DELVE tool improvements">4</a>.<a href="#4_5" title="4. DELVE tool improvements -&gt; 4.5. Events Log Improvements">5</a>. </span>Events Log Improvements</h2>
+		<div class="contents2">
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>serialize the other properties of the event object</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>for the source property, make it a linked object (this may mean having to make the log message generator configurable in Uize.Widget.Log.InstanceEvents, and providing some custom handling in DELVE)</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_6"></a>
+		<h2 class="heading2" title="4. DELVE tool improvements -&gt; 4.6. Features Tab"><span class="headingNumber"><a href="#4" title="4. DELVE tool improvements">4</a>.<a href="#4_6" title="4. DELVE tool improvements -&gt; 4.6. Features Tab">6</a>. </span>Features Tab</h2>
+		<div class="contents2">
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>maintain sort state across rewirings (ie. sort should be a property)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>ability to filter the data in the table (say I only care about instance methods, for example)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>link to documentation for every feature</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_7"></a>
+		<h2 class="heading2" title="4. DELVE tool improvements -&gt; 4.7. Summary Tab"><span class="headingNumber"><a href="#4" title="4. DELVE tool improvements">4</a>.<a href="#4_7" title="4. DELVE tool improvements -&gt; 4.7. Summary Tab">7</a>. </span>Summary Tab</h2>
+		<div class="contents2">
+			<a name="4_7_1"></a>
+			<h3 class="heading3" title="4. DELVE tool improvements -&gt; 4.7. Summary Tab -&gt; 4.7.1. - have sections be collapsible, with collapsible state remembered across updates"><span class="headingNumber"><a href="#4" title="4. DELVE tool improvements">4</a>.<a href="#4_7" title="4. DELVE tool improvements -&gt; 4.7. Summary Tab">7</a>.<a href="#4_7_1" title="4. DELVE tool improvements -&gt; 4.7. Summary Tab -&gt; 4.7.1. - have sections be collapsible, with collapsible state remembered across updates">1</a>. </span>- have sections be collapsible, with collapsible state remembered across updates</h3>
+			<div class="contents3">
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this possibly argues in favor of not rebuilding the entire contents, but only rebuilding the contents for sections, and then showing / hiding sections relevant to the object inspected)</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this might be an acceptable vehicle for an animated expand/collapse widget</td></tr>
+				</table>
+			</div>
+			
+			<a name="4_7_2"></a>
+			<h3 class="heading3" title="4. DELVE tool improvements -&gt; 4.7. Summary Tab -&gt; 4.7.2. - for widgets..."><span class="headingNumber"><a href="#4" title="4. DELVE tool improvements">4</a>.<a href="#4_7" title="4. DELVE tool improvements -&gt; 4.7. Summary Tab">7</a>.<a href="#4_7_2" title="4. DELVE tool improvements -&gt; 4.7. Summary Tab -&gt; 4.7.2. - for widgets...">2</a>. </span>- for widgets...</h3>
+			<div class="contents3">
+				<a name="4_7_2_1"></a>
+				<h4 class="heading4" title="4. DELVE tool improvements -&gt; 4.7. Summary Tab -&gt; 4.7.2. - for widgets... -&gt; 4.7.2.1. - unaccessed DOM nodes table"><span class="headingNumber"><a href="#4" title="4. DELVE tool improvements">4</a>.<a href="#4_7" title="4. DELVE tool improvements -&gt; 4.7. Summary Tab">7</a>.<a href="#4_7_2" title="4. DELVE tool improvements -&gt; 4.7. Summary Tab -&gt; 4.7.2. - for widgets...">2</a>.<a href="#4_7_2_1" title="4. DELVE tool improvements -&gt; 4.7. Summary Tab -&gt; 4.7.2. - for widgets... -&gt; 4.7.2.1. - unaccessed DOM nodes table">1</a>. </span>- unaccessed DOM nodes table</h4>
+				<div class="contents4">
+					<table class="list">
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>DOM nodes whose IDs suggest the nodes belong to the widget, but the node is not in the node cache</td></tr>
+					</table>
+				</div>
+			</div>
+		</div>
+		
+		<a name="4_8"></a>
+		<h2 class="heading2" title="4. DELVE tool improvements -&gt; 4.8. - issue with serializing children property of widget, because of circular references"><span class="headingNumber"><a href="#4" title="4. DELVE tool improvements">4</a>.<a href="#4_8" title="4. DELVE tool improvements -&gt; 4.8. - issue with serializing children property of widget, because of circular references">8</a>. </span>- issue with serializing children property of widget, because of circular references</h2>
+		<div class="contents2">
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>add handling for instances of Uize classes to Uize.Json</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>add handling of DOM objects to Uize.Json</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_9"></a>
+		<h2 class="heading2" title="4. DELVE tool improvements -&gt; 4.9. - for object entry, implement history feature"><span class="headingNumber"><a href="#4" title="4. DELVE tool improvements">4</a>.<a href="#4_9" title="4. DELVE tool improvements -&gt; 4.9. - for object entry, implement history feature">9</a>. </span>- for object entry, implement history feature</h2>
+		<div class="contents2">
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>back</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>forward</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>up arrow / down arrow</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>history droplist</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>note: in FF, undo and redo provide a kind of history</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_10"></a>
+		<h2 class="heading2" title="4. DELVE tool improvements -&gt; 4.10. - select widget by clicking on node in page being inspected"><span class="headingNumber"><a href="#4" title="4. DELVE tool improvements">4</a>.<a href="#4_10" title="4. DELVE tool improvements -&gt; 4.10. - select widget by clicking on node in page being inspected">10</a>. </span>- select widget by clicking on node in page being inspected</h2>
+		<div class="contents2">
+			<a name="4_10_1"></a>
+			<h3 class="heading3" title="4. DELVE tool improvements -&gt; 4.10. - select widget by clicking on node in page being inspected -&gt; 4.10.1. - mouseover nodes of widgets to show info tooltip about node and owner widget"><span class="headingNumber"><a href="#4" title="4. DELVE tool improvements">4</a>.<a href="#4_10" title="4. DELVE tool improvements -&gt; 4.10. - select widget by clicking on node in page being inspected">10</a>.<a href="#4_10_1" title="4. DELVE tool improvements -&gt; 4.10. - select widget by clicking on node in page being inspected -&gt; 4.10.1. - mouseover nodes of widgets to show info tooltip about node and owner widget">1</a>. </span>- mouseover nodes of widgets to show info tooltip about node and owner widget</h3>
+			<div class="contents3">
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>would require wiring mouseover, mouseout, and click events for all nodes of all widgets</td></tr>
+				</table>
+			</div>
+		</div>
+		
+		<a name="4_11"></a>
+		<h2 class="heading2" title="4. DELVE tool improvements -&gt; 4.11. - ability to spawn multiple DELVE tools inspecting the same document"><span class="headingNumber"><a href="#4" title="4. DELVE tool improvements">4</a>.<a href="#4_11" title="4. DELVE tool improvements -&gt; 4.11. - ability to spawn multiple DELVE tools inspecting the same document">11</a>. </span>- ability to spawn multiple DELVE tools inspecting the same document</h2>
+		<div class="contents2">
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>good for watching events on multiple different objects at the same time, or seeing different tree list contents</td></tr>
+			</table>
+		</div>
+		
+		<table class="list">
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>automatic expanding of tree list to reveal current widget or module, when tree list is showing all widgets or all modules as a tree</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>idea (from Jason) - ability to e-mail the state of DELVE to someone else, as a way of showing another person what you were seeing. This could involve creating a bookmarklet URL that captures the state of DELVE, such as the object inspected, the active tab, the URL of the page being inspected, etc.</td></tr>
+		</table>
+		<a name="4_12"></a>
+		<h2 class="heading2" title="4. DELVE tool improvements -&gt; 4.12. - different contents for tree list..."><span class="headingNumber"><a href="#4" title="4. DELVE tool improvements">4</a>.<a href="#4_12" title="4. DELVE tool improvements -&gt; 4.12. - different contents for tree list...">12</a>. </span>- different contents for tree list...</h2>
+		<div class="contents2">
+			<a name="4_12_1"></a>
+			<h3 class="heading3" title="4. DELVE tool improvements -&gt; 4.12. - different contents for tree list... -&gt; 4.12.1. - widget instance queries"><span class="headingNumber"><a href="#4" title="4. DELVE tool improvements">4</a>.<a href="#4_12" title="4. DELVE tool improvements -&gt; 4.12. - different contents for tree list...">12</a>.<a href="#4_12_1" title="4. DELVE tool improvements -&gt; 4.12. - different contents for tree list... -&gt; 4.12.1. - widget instance queries">1</a>. </span>- widget instance queries</h3>
+			<div class="contents3">
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>widgets that don't appear to have any HTML (for them, directly, or their children)</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>only widgets that are wired</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>widgets that were adopted</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>widgets for which DOM events have fired?</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>widgets of a specific class?</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>widgets whose class inherits from a specific class?</td></tr>
+				</table>
+			</div>
+			
+			<a name="4_12_2"></a>
+			<h3 class="heading3" title="4. DELVE tool improvements -&gt; 4.12. - different contents for tree list... -&gt; 4.12.2. - module queries"><span class="headingNumber"><a href="#4" title="4. DELVE tool improvements">4</a>.<a href="#4_12" title="4. DELVE tool improvements -&gt; 4.12. - different contents for tree list...">12</a>.<a href="#4_12_2" title="4. DELVE tool improvements -&gt; 4.12. - different contents for tree list... -&gt; 4.12.2. - module queries">2</a>. </span>- module queries</h3>
+			<div class="contents3">
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>widgets classes that have no subclasses and of which no instances have been created</td></tr>
+				</table>
+			</div>
+			
+			<a name="4_12_3"></a>
+			<h3 class="heading3" title="4. DELVE tool improvements -&gt; 4.12. - different contents for tree list... -&gt; 4.12.3. - DOM node queries"><span class="headingNumber"><a href="#4" title="4. DELVE tool improvements">4</a>.<a href="#4_12" title="4. DELVE tool improvements -&gt; 4.12. - different contents for tree list...">12</a>.<a href="#4_12_3" title="4. DELVE tool improvements -&gt; 4.12. - different contents for tree list... -&gt; 4.12.3. - DOM node queries">3</a>. </span>- DOM node queries</h3>
+			<div class="contents3">
+				<a name="4_12_3_1"></a>
+				<h4 class="heading4" title="4. DELVE tool improvements -&gt; 4.12. - different contents for tree list... -&gt; 4.12.3. - DOM node queries -&gt; 4.12.3.1. - DOM nodes that have ids, but that don&apos;t appear to belong to widget instances"><span class="headingNumber"><a href="#4" title="4. DELVE tool improvements">4</a>.<a href="#4_12" title="4. DELVE tool improvements -&gt; 4.12. - different contents for tree list...">12</a>.<a href="#4_12_3" title="4. DELVE tool improvements -&gt; 4.12. - different contents for tree list... -&gt; 4.12.3. - DOM node queries">3</a>.<a href="#4_12_3_1" title="4. DELVE tool improvements -&gt; 4.12. - different contents for tree list... -&gt; 4.12.3. - DOM node queries -&gt; 4.12.3.1. - DOM nodes that have ids, but that don&apos;t appear to belong to widget instances">1</a>. </span>- DOM nodes that have ids, but that don't appear to belong to widget instances</h4>
+				<div class="contents4">
+					<table class="list">
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>DOM nodes that have not been accessed by any widget, and whose id structure does not appear to fit with any widget on the page</td></tr>
+					</table>
+				</div>
+				
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>DOM nodes that appear to belong to widgets, but that haven't been accessed by those widgets</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>DOM nodes that are missing according to a widget's node cache, but are actually present</td></tr>
+				</table>
+			</div>
+			
+			<a name="4_12_4"></a>
+			<h3 class="heading3" title="4. DELVE tool improvements -&gt; 4.12. - different contents for tree list... -&gt; 4.12.4. - localized string queries"><span class="headingNumber"><a href="#4" title="4. DELVE tool improvements">4</a>.<a href="#4_12" title="4. DELVE tool improvements -&gt; 4.12. - different contents for tree list...">12</a>.<a href="#4_12_4" title="4. DELVE tool improvements -&gt; 4.12. - different contents for tree list... -&gt; 4.12.4. - localized string queries">4</a>. </span>- localized string queries</h3>
+			<div class="contents3">
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>all localized strings</td></tr>
+				</table>
+			</div>
+			
+			<a name="4_12_5"></a>
+			<h3 class="heading3" title="4. DELVE tool improvements -&gt; 4.12. - different contents for tree list... -&gt; 4.12.5. - stuff that&apos;s already interspersed in the summary tab info"><span class="headingNumber"><a href="#4" title="4. DELVE tool improvements">4</a>.<a href="#4_12" title="4. DELVE tool improvements -&gt; 4.12. - different contents for tree list...">12</a>.<a href="#4_12_5" title="4. DELVE tool improvements -&gt; 4.12. - different contents for tree list... -&gt; 4.12.5. - stuff that&apos;s already interspersed in the summary tab info">5</a>. </span>- stuff that's already interspersed in the summary tab info</h3>
+			<div class="contents3">
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>children of a specific widget</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>parent chain for a specific widget</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>siblings of a specific widget</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>all subclasses of a specific class</td></tr>
+				</table>
+			</div>
+		</div>
+	</div>
+	
+	<a name="5"></a>
+	<h1 class="heading1" title="5. Kill acceleration and deceleration"><span class="headingNumber"><a href="#5" title="5. Kill acceleration and deceleration">5</a>. </span>Kill acceleration and deceleration</h1>
+	<div class="contents1">
+		<p>Kill acceleration and deceleration set-get properties of Uize.Fade class.</p>
+		
+		<p>Pages still to update...</p>
+		
+		<table class="list">
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>C:/~uize/uize_framework/examples/hover-fader-for-thumbnails.html</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>C:/~uize/uize_framework/examples/fading-links.html</td></tr>
+		</table>
+	</div>
+	
+	<a name="6"></a>
+	<h1 class="heading1" title="6. Explainers to Update"><span class="headingNumber"><a href="#6" title="6. Explainers to Update">6</a>. </span>Explainers to Update</h1>
+	<div class="contents1">
+		<a name="6_1"></a>
+		<h2 class="heading2" title="6. Explainers to Update -&gt; 6.1. JavaScript Build Scripts"><span class="headingNumber"><a href="#6" title="6. Explainers to Update">6</a>.<a href="#6_1" title="6. Explainers to Update -&gt; 6.1. JavaScript Build Scripts">1</a>. </span>JavaScript Build Scripts</h2>
+		<div class="contents2">
+			<a name="6_1_1"></a>
+			<h3 class="heading3" title="6. Explainers to Update -&gt; 6.1. JavaScript Build Scripts -&gt; 6.1.1. Add Head Comments Into"><span class="headingNumber"><a href="#6" title="6. Explainers to Update">6</a>.<a href="#6_1" title="6. Explainers to Update -&gt; 6.1. JavaScript Build Scripts">1</a>.<a href="#6_1_1" title="6. Explainers to Update -&gt; 6.1. JavaScript Build Scripts -&gt; 6.1.1. Add Head Comments Into">1</a>. </span>Add Head Comments Into</h3>
+			<div class="contents3">
+				<p>Update JavaScript Build Scripts explainer with info about head comments...</p>
+				
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Head Comments</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>scrunchedHeadComments</td></tr>
+				</table>
+			</div>
+		</div>
+		
+		<a name="6_2"></a>
+		<h2 class="heading2" title="6. Explainers to Update -&gt; 6.2. JavaScript Widgets"><span class="headingNumber"><a href="#6" title="6. Explainers to Update">6</a>.<a href="#6_2" title="6. Explainers to Update -&gt; 6.2. JavaScript Widgets">2</a>. </span>JavaScript Widgets</h2>
+		<div class="contents2">
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Declarative Syntax for Widget Data</td></tr>
+			</table>
+		</div>
+	</div>
+	
+	<p>Finish "Creating a New UIZE Example Page" Explainer</p>
+	
+	<a name="7"></a>
+	<h1 class="heading1" title="7. iPad issues"><span class="headingNumber"><a href="#7" title="7. iPad issues">7</a>. </span>iPad issues</h1>
+	<div class="contents1">
+		<a name="7_1"></a>
+		<h2 class="heading2" title="7. iPad issues -&gt; 7.1. - outstanding"><span class="headingNumber"><a href="#7" title="7. iPad issues">7</a>.<a href="#7_1" title="7. iPad issues -&gt; 7.1. - outstanding">1</a>. </span>- outstanding</h2>
+		<div class="contents2">
+			<a name="7_1_1"></a>
+			<h3 class="heading3" title="7. iPad issues -&gt; 7.1. - outstanding -&gt; 7.1.1. - all pages"><span class="headingNumber"><a href="#7" title="7. iPad issues">7</a>.<a href="#7_1" title="7. iPad issues -&gt; 7.1. - outstanding">1</a>.<a href="#7_1_1" title="7. iPad issues -&gt; 7.1. - outstanding -&gt; 7.1.1. - all pages">1</a>. </span>- all pages</h3>
+			<div class="contents3">
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>share it panel is useless on iPad, because neither mouseover nor fixed positioning are supported</td></tr>
+				</table>
+				<a name="7_1_1_1"></a>
+				<h4 class="heading4" title="7. iPad issues -&gt; 7.1. - outstanding -&gt; 7.1.1. - all pages -&gt; 7.1.1.1. - performance"><span class="headingNumber"><a href="#7" title="7. iPad issues">7</a>.<a href="#7_1" title="7. iPad issues -&gt; 7.1. - outstanding">1</a>.<a href="#7_1_1" title="7. iPad issues -&gt; 7.1. - outstanding -&gt; 7.1.1. - all pages">1</a>.<a href="#7_1_1_1" title="7. iPad issues -&gt; 7.1. - outstanding -&gt; 7.1.1. - all pages -&gt; 7.1.1.1. - performance">1</a>. </span>- performance</h4>
+				<div class="contents4">
+					<table class="list">
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>on doc pages, building of contents tree's DOM in JavaScript slows down page load, and also leaves page in unattractive state for too long. Suggest moving to building contents tree HTML as part of build script, and modify tree widget to be able to wire up prebuilt HTML (perhaps it already can do this)</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>rendering share it panel slows down page rendering, and it adds no value on iPad. Perhaps an alternate UI that defers the cost until the user wants to share a page would be a better approach.</td></tr>
+					</table>
+				</div>
+			</div>
+			
+			<a name="7_1_2"></a>
+			<h3 class="heading3" title="7. iPad issues -&gt; 7.1. - outstanding -&gt; 7.1.2. - example pages"><span class="headingNumber"><a href="#7" title="7. iPad issues">7</a>.<a href="#7_1" title="7. iPad issues -&gt; 7.1. - outstanding">1</a>.<a href="#7_1_2" title="7. iPad issues -&gt; 7.1. - outstanding -&gt; 7.1.2. - example pages">2</a>. </span>- example pages</h3>
+			<div class="contents3">
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>have to tap tour navigation buttons twice in order to navigate (first tap shows tooltip), which is annoying</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>navigating back leaves some pages in a state where dynamically rendered HTML is not re-rendered. You can see this in the pages that have lists of presets - they are rendered on arriving on the pages, but using the back button to go back to them leaves them in a broken state.</td></tr>
+				</table>
+			</div>
+			
+			<a name="7_1_3"></a>
+			<h3 class="heading3" title="7. iPad issues -&gt; 7.1. - outstanding -&gt; 7.1.3. - misc"><span class="headingNumber"><a href="#7" title="7. iPad issues">7</a>.<a href="#7_1" title="7. iPad issues -&gt; 7.1. - outstanding">1</a>.<a href="#7_1_3" title="7. iPad issues -&gt; 7.1. - outstanding -&gt; 7.1.3. - misc">3</a>. </span>- misc</h3>
+			<div class="contents3">
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>for example and module source code pages, width of pages causes titlebar to be tiny, since default is to scale page so there is no horizontal scrolling</td></tr>
+				</table>
+			</div>
+		</div>
+	</div>
+	
+	<a name="8"></a>
+	<h1 class="heading1" title="8. Bugs"><span class="headingNumber"><a href="#8" title="8. Bugs">8</a>. </span>Bugs</h1>
+	<div class="contents1">
+		<a name="8_1"></a>
+		<h2 class="heading2" title="8. Bugs -&gt; 8.1. file:///C:/~uize/uize_framework/examples/slideshow-of-data.html"><span class="headingNumber"><a href="#8" title="8. Bugs">8</a>.<a href="#8_1" title="8. Bugs -&gt; 8.1. file:///C:/~uize/uize_framework/examples/slideshow-of-data.html">1</a>. </span>file:///C:/~uize/uize_framework/examples/slideshow-of-data.html</h2>
+		<div class="contents2">
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>data bars don't have any space around them (has to do with IE8's handling of cellspacing attribute of table)</td></tr>
+			</table>
+		</div>
+		
+		<table class="list">
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>weird bug with slideshow with wipes, where if you navigate forward and then back (or vice versa), it starts coming up with bogus wipe effect settings. Is this a side effect of the code that picks a new random wipe each slide? Or is this a side effect of recent loop optimizations? Seems like it may have to do with the images for the various panes being cached. Maybe something about the load handler behavior. Doesn't seem reproducable at all when going straight through - regardless of direction. Flipping back and forth between two images, however, causes corruption of the effects.</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Chrome: issue with thumbzoom in some examples (zoomed image disappears as soon as its zoomed out)</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>FF: issue with ThumbZoom and horizontal scrolly in scrolly example - zooms out from pancaked sliver (could this be a result of changes in getCoordinates?)</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>IE7: Hover Fader Stretching Menu - weird flickering with some presets, screwy sticky shifting of entire menu with other presets</td></tr>
+		</table>
+	</div>
+	
+	<a name="9"></a>
+	<h1 class="heading1" title="9. Doc Improvements"><span class="headingNumber"><a href="#9" title="9. Doc Improvements">9</a>. </span>Doc Improvements</h1>
+	<div class="contents1">
+		<table class="list">
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>integrate examples into reference doc</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>integrate module meta data into reference doc</td></tr>
+		</table>
+		<a name="9_1"></a>
+		<h2 class="heading2" title="9. Doc Improvements -&gt; 9.1. - link references to static methods and properties (eg. =Uize.clone=) to appropriate sections of reference documents"><span class="headingNumber"><a href="#9" title="9. Doc Improvements">9</a>.<a href="#9_1" title="9. Doc Improvements -&gt; 9.1. - link references to static methods and properties (eg. =Uize.clone=) to appropriate sections of reference documents">1</a>. </span>- link references to static methods and properties (eg. =Uize.clone=) to appropriate sections of reference documents</h2>
+		<div class="contents2">
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>will need to settle on naming scheme for anchors for doc sections</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>will need ability to register custom linker function, so that the doc build script can provide this meta level intelligence about the documentation</td></tr>
+			</table>
+		</div>
+		
+		<table class="list">
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>tooltip behavior for linking to other documents in documentation</td></tr>
+		</table>
+	</div>
+	
+	<a name="10"></a>
+	<h1 class="heading1" title="10. Build Process Improvements"><span class="headingNumber"><a href="#10" title="10. Build Process Improvements">10</a>. </span>Build Process Improvements</h1>
+	<div class="contents1">
+		<table class="list">
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>script to insert UIZE version number into all script tags that source in the Uize.js file</td></tr>
+		</table>
+		<a name="10_1"></a>
+		<h2 class="heading2" title="10. Build Process Improvements -&gt; 10.1. - write script to search for example files that are using ~source JS"><span class="headingNumber"><a href="#10" title="10. Build Process Improvements">10</a>.<a href="#10_1" title="10. Build Process Improvements -&gt; 10.1. - write script to search for example files that are using ~source JS">1</a>. </span>- write script to search for example files that are using ~source JS</h2>
+		<div class="contents2">
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>as long as they don't have a "~" at the beginning of the file name</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>incorporate into the build sequence for the <b>uize.com</b> site</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>terminate build script if examples found, report offending examples</td></tr>
+			</table>
+		</div>
+		
+		<table class="list">
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>write script to test for HTML pages with meta descriptions that are too long (more than 150 characters)</td></tr>
+		</table>
+	</div>
+	
+	<a name="11"></a>
+	<h1 class="heading1" title="11. gzipping Text Files"><span class="headingNumber"><a href="#11" title="11. gzipping Text Files">11</a>. </span>gzipping Text Files</h1>
+	<div class="contents1">
+		<a name="11_1"></a>
+		<h2 class="heading2" title="11. gzipping Text Files -&gt; 11.1. - add to .htaccess file"><span class="headingNumber"><a href="#11" title="11. gzipping Text Files">11</a>.<a href="#11_1" title="11. gzipping Text Files -&gt; 11.1. - add to .htaccess file">1</a>. </span>- add to .htaccess file</h2>
+		<div class="contents2">
+			<p>AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/javascript</p>
+		</div>
+		
+		<table class="list">
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>http://httpd.apache.org/docs/2.0/mod/mod_deflate.html</td></tr>
+		</table>
+	</div>
+	
+	<a name="12"></a>
+	<h1 class="heading1" title="12. Migrate Modules Into Deeper Namespaces"><span class="headingNumber"><a href="#12" title="12. Migrate Modules Into Deeper Namespaces">12</a>. </span>Migrate Modules Into Deeper Namespaces</h1>
+	<div class="contents1">
+		<p>Migrate some modules at the root <code><a href="#36_1">Uize</a></code> namespace into deeper namespaces in order to tuck them away.</p>
+		
+		
+<pre class="sample-code">Uize.Scruncher   -&gt;  Uize.Build.Scruncher ?
+Uize.Tooltip     -&gt;  ???
+Uize.Xml         -&gt;  ???
+</pre>
+	</div>
+	
+	<a name="13"></a>
+	<h1 class="heading1" title="13. Possible New Namespaces"><span class="headingNumber"><a href="#13" title="13. Possible New Namespaces">13</a>. </span>Possible New Namespaces</h1>
+	<div class="contents1">
+		<table class="list">
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Uize.Build</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Uize.Math</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Uize.Web (or Uize.Browser? or Uize.Html? or Uize.WebBrowser? or Uize.Wb? or Uize.Www?)</td></tr>
+		</table>
+	</div>
+	
+	<a name="14"></a>
+	<h1 class="heading1" title="14. Code to Factor Out"><span class="headingNumber"><a href="#14" title="14. Code to Factor Out">14</a>. </span>Code to Factor Out</h1>
+	<div class="contents1">
+		<p>Code to factor out of widget classes into non-Web specific modules...</p>
+		
+		<table class="list">
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="../reference/Uize.Widget.ImagePort.html">Uize.Widget.ImagePort</a></code> - pure rectangle scaling math should be factored out into a new Uize.Math.RectScaler module</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="../reference/Uize.Widget.Population.html">Uize.Widget.Population</a></code> - pure population string functionality should be migrated into a new Uize.String.Population module (or Uize.Template.Population?)</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="../reference/Uize.Widget.Tree.html">Uize.Widget.Tree</a></code> - model stuff for the data structure that represents a tree (Uize.Data.Tree?)</td></tr>
+		</table>
+	</div>
+	
+	<a name="15"></a>
+	<h1 class="heading1" title="15. Upcoming Releases"><span class="headingNumber"><a href="#15" title="15. Upcoming Releases">15</a>. </span>Upcoming Releases</h1>
+	<div class="contents1">
+		<a name="15_1"></a>
+		<h2 class="heading2" title="15. Upcoming Releases -&gt; 15.1. - loop optimization approaches"><span class="headingNumber"><a href="#15" title="15. Upcoming Releases">15</a>.<a href="#15_1" title="15. Upcoming Releases -&gt; 15.1. - loop optimization approaches">1</a>. </span>- loop optimization approaches</h2>
+		<div class="contents2">
+			<a name="15_1_1"></a>
+			<h3 class="heading3" title="15. Upcoming Releases -&gt; 15.1. - loop optimization approaches -&gt; 15.1.1. - finish loop optimization approaches performance test..."><span class="headingNumber"><a href="#15" title="15. Upcoming Releases">15</a>.<a href="#15_1" title="15. Upcoming Releases -&gt; 15.1. - loop optimization approaches">1</a>.<a href="#15_1_1" title="15. Upcoming Releases -&gt; 15.1. - loop optimization approaches -&gt; 15.1.1. - finish loop optimization approaches performance test...">1</a>. </span>- finish loop optimization approaches performance test...</h3>
+			<div class="contents3">
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>write up explanation</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>list in directory</td></tr>
+				</table>
+			</div>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>add entry in javascript optimization appendix</td></tr>
+			</table>
+		</div>
+		
+		<a name="15_2"></a>
+		<h2 class="heading2" title="15. Upcoming Releases -&gt; 15.2. Conditional Expression Optimization"><span class="headingNumber"><a href="#15" title="15. Upcoming Releases">15</a>.<a href="#15_2" title="15. Upcoming Releases -&gt; 15.2. Conditional Expression Optimization">2</a>. </span>Conditional Expression Optimization</h2>
+		<div class="contents2">
+			
+<pre class="sample-code">if (blah) doSomething ();   ==&gt;  blah &amp;&amp; doSomething ();
+if (!blah) doSomething ();  ==&gt;  blah || doSomething ();
+</pre>
+		</div>
+		
+		<a name="15_3"></a>
+		<h2 class="heading2" title="15. Upcoming Releases -&gt; 15.3. Brain Teaser / Interview Question"><span class="headingNumber"><a href="#15" title="15. Upcoming Releases">15</a>.<a href="#15_3" title="15. Upcoming Releases -&gt; 15.3. Brain Teaser / Interview Question">3</a>. </span>Brain Teaser / Interview Question</h2>
+		<div class="contents2">
+			
+<pre class="sample-code">alert (blah);            // displays "Hello"
+alert (blah + 'Brian');  // displays "Hello, Brian"
+</pre>
+			
+			<p>define blah</p>
+			
+			
+<pre class="sample-code">var blah = {};
+blah.toString = function () {return 'Hello'};
+blah.valueOf = function () {return 'Hello, '};
+</pre>
+			
+			<p>or...</p>
+			
+			
+<pre class="sample-code">var blah = new String ('Hello');
+blah.valueOf = function () {return 'Hello, '};
+</pre>
+			
+			<p>or...</p>
+			
+			
+<pre class="sample-code">var blah = new String ('Hello');
+blah.valueOf = function () {return this.toString () + ', '};
+</pre>
+		</div>
+		
+		<a name="15_4"></a>
+		<h2 class="heading2" title="15. Upcoming Releases -&gt; 15.4. Testing if instance is of a certain class or object type"><span class="headingNumber"><a href="#15" title="15. Upcoming Releases">15</a>.<a href="#15_4" title="15. Upcoming Releases -&gt; 15.4. Testing if instance is of a certain class or object type">4</a>. </span>Testing if instance is of a certain class or object type</h2>
+		<div class="contents2">
+			
+<pre class="sample-code">if (someInstance.constructor == SomeClass) {
+  // ...
+}
+</pre>
+		</div>
+		
+		<a name="15_5"></a>
+		<h2 class="heading2" title="15. Upcoming Releases -&gt; 15.5. Testing if two instances are of the same class or object type"><span class="headingNumber"><a href="#15" title="15. Upcoming Releases">15</a>.<a href="#15_5" title="15. Upcoming Releases -&gt; 15.5. Testing if two instances are of the same class or object type">5</a>. </span>Testing if two instances are of the same class or object type</h2>
+		<div class="contents2">
+			
+<pre class="sample-code">if (someInstance1.constructor == someInstance2.constructor) {
+  // ...
+}
+</pre>
+		</div>
+		
+		<a name="15_6"></a>
+		<h2 class="heading2" title="15. Upcoming Releases -&gt; 15.6. Creating a fresh instance with same state"><span class="headingNumber"><a href="#15" title="15. Upcoming Releases">15</a>.<a href="#15_6" title="15. Upcoming Releases -&gt; 15.6. Creating a fresh instance with same state">6</a>. </span>Creating a fresh instance with same state</h2>
+		<div class="contents2">
+			
+<pre class="sample-code">someInstance2 = new someInstance1.Class (someInstance1.get ())
+</pre>
+		</div>
+		
+		<a name="15_7"></a>
+		<h2 class="heading2" title="15. Upcoming Releases -&gt; 15.7. Interview question / brainteaser"><span class="headingNumber"><a href="#15" title="15. Upcoming Releases">15</a>.<a href="#15_7" title="15. Upcoming Releases -&gt; 15.7. Interview question / brainteaser">7</a>. </span>Interview question / brainteaser</h2>
+		<div class="contents2">
+			<p>optimize the following statement...</p>
+			
+			
+<pre class="sample-code">someCondition ? variableA - variableB : variableA
+variableA - (someCondition ? variableB : 0)
+variableA - someCondition * variableB        // works if someCondition is guaranteed to produce a boolean
+variableA - (someCondition &amp;&amp; variableB)     // works even if someCondition is not a boolean value
+</pre>
+		</div>
+	</div>
+	
+	<table class="list">
+	<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>explain about layer library modules (as used by the <b>uize.com</b> Web site)</td></tr>
+	</table>
+	<a name="16"></a>
+	<h1 class="heading1" title="16. Pull all Images from Zazzle..."><span class="headingNumber"><a href="#16" title="16. Pull all Images from Zazzle...">16</a>. </span>Pull all Images from Zazzle...</h1>
+	<div class="contents1">
+		<a name="16_1"></a>
+		<h2 class="heading2" title="16. Pull all Images from Zazzle... -&gt; 16.1. - use more product images from Zazzle for slideshow widgets and such"><span class="headingNumber"><a href="#16" title="16. Pull all Images from Zazzle...">16</a>.<a href="#16_1" title="16. Pull all Images from Zazzle... -&gt; 16.1. - use more product images from Zazzle for slideshow widgets and such">1</a>. </span>- use more product images from Zazzle for slideshow widgets and such</h2>
+		<div class="contents2">
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>have slideshows and such, containing UIZE merch product images</td></tr>
+			</table>
+		</div>
+	</div>
+	
+	<a name="17"></a>
+	<h1 class="heading1" title="17. URLs that could use a UIZE slideshow experience"><span class="headingNumber"><a href="#17" title="17. URLs that could use a UIZE slideshow experience">17</a>. </span>URLs that could use a UIZE slideshow experience</h1>
+	<div class="contents1">
+		<table class="list">
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>http://www.100abandonedhouses.com/</td></tr>
+		</table>
+	</div>
+	
+	<a name="18"></a>
+	<h1 class="heading1" title="18. URLs to link to somewhere in docs"><span class="headingNumber"><a href="#18" title="18. URLs to link to somewhere in docs">18</a>. </span>URLs to link to somewhere in docs</h1>
+	<div class="contents1">
+		<table class="list">
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>http://dean.edwards.name/weblog/2007/03/rules/</td></tr>
+		</table>
+	</div>
+	
+	<a name="19"></a>
+	<h1 class="heading1" title="19. Improved Location of Source Code"><span class="headingNumber"><a href="#19" title="19. Improved Location of Source Code">19</a>. </span>Improved Location of Source Code</h1>
+	<div class="contents1">
+		<p>For examples, modules, put source code into a peer folder, rather than child folder</p>
+		
+		<p>So...</p>
+		
+		<table class="list">
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>examples/</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>examples-source-code/</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>reference</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>reference-source-code/</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>must add 301 redirect rules in .htaccess</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>must update .jst files that generate reference pages and source code pages, to link to correct places</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>must update examples to link to source code files correctly</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>must update search page to allow separate searching in source code folders</td></tr>
+		</table>
+		<a name="19_1"></a>
+		<h2 class="heading2" title="19. Improved Location of Source Code -&gt; 19.1. - benefits"><span class="headingNumber"><a href="#19" title="19. Improved Location of Source Code">19</a>.<a href="#19_1" title="19. Improved Location of Source Code -&gt; 19.1. - benefits">1</a>. </span>- benefits</h2>
+		<div class="contents2">
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>users can search only source code, or only documents</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>UIZE developers can search within examples folder without also searching in source-code child folder by default</td></tr>
+			</table>
+		</div>
+	</div>
+	
+	<a name="20"></a>
+	<h1 class="heading1" title="20. Uize.Minimal.library.js"><span class="headingNumber"><a href="#20" title="20. Uize.Minimal.library.js">20</a>. </span>Uize.Minimal.library.js</h1>
+	<div class="contents1">
+		
+<pre class="sample-code">Uize.Fade
+Uize.Node
+Uize.Url
+Uize.Tooltip
+Uize.Comm
+Uize.Comm.Ajax
+Uize.Widget
+</pre>
+	</div>
+	
+	<a name="21"></a>
+	<h1 class="heading1" title="21. For Framework Developers"><span class="headingNumber"><a href="#21" title="21. For Framework Developers">21</a>. </span>For Framework Developers</h1>
+	<div class="contents1">
+		<a name="21_1"></a>
+		<h2 class="heading2" title="21. For Framework Developers -&gt; 21.1. Documentation Style Guide"><span class="headingNumber"><a href="#21" title="21. For Framework Developers">21</a>.<a href="#21_1" title="21. For Framework Developers -&gt; 21.1. Documentation Style Guide">1</a>. </span>Documentation Style Guide</h2>
+		<div class="contents2">
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>first paragraph at root of document, or first paragraph of first section of document should be no more than 150 characters (excluding SimpleDoc formatting characters). This is because this paragraph is used as the value for the meta description tag. In this paragraph, make careful use of words, with the mind to maximizing the value of the description. This is the first opporunity that the reader will have to glean what the document is discussing. Sum it all up, ideally, in a single sentence, touching on key themes that will capture the reader's attention and interest. This paragraph has to make a case for reading the document.</td></tr>
+			</table>
+			<a name="21_1_1"></a>
+			<h3 class="heading3" title="21. For Framework Developers -&gt; 21.1. Documentation Style Guide -&gt; 21.1.1. General"><span class="headingNumber"><a href="#21" title="21. For Framework Developers">21</a>.<a href="#21_1" title="21. For Framework Developers -&gt; 21.1. Documentation Style Guide">1</a>.<a href="#21_1_1" title="21. For Framework Developers -&gt; 21.1. Documentation Style Guide -&gt; 21.1.1. General">1</a>. </span>General</h3>
+			<div class="contents3">
+				<a name="21_1_1_1"></a>
+				<h4 class="heading4" title="21. For Framework Developers -&gt; 21.1. Documentation Style Guide -&gt; 21.1.1. General -&gt; 21.1.1.1. First Paragraph Should Summarize"><span class="headingNumber"><a href="#21" title="21. For Framework Developers">21</a>.<a href="#21_1" title="21. For Framework Developers -&gt; 21.1. Documentation Style Guide">1</a>.<a href="#21_1_1" title="21. For Framework Developers -&gt; 21.1. Documentation Style Guide -&gt; 21.1.1. General">1</a>.<a href="#21_1_1_1" title="21. For Framework Developers -&gt; 21.1. Documentation Style Guide -&gt; 21.1.1. General -&gt; 21.1.1.1. First Paragraph Should Summarize">1</a>. </span>First Paragraph Should Summarize</h4>
+				<div class="contents4">
+					<p>Each section should start with a clear and concise, salient, in-a-nutshell declaration of what the section is about. This first paragraph should be able to stand alone, without requiring the subsequent paragraphs for it to make sense. The first paragraph</p>
+				</div>
+			</div>
+			
+			<a name="21_1_2"></a>
+			<h3 class="heading3" title="21. For Framework Developers -&gt; 21.1. Documentation Style Guide -&gt; 21.1.2. Module References"><span class="headingNumber"><a href="#21" title="21. For Framework Developers">21</a>.<a href="#21_1" title="21. For Framework Developers -&gt; 21.1. Documentation Style Guide">1</a>.<a href="#21_1_2" title="21. For Framework Developers -&gt; 21.1. Documentation Style Guide -&gt; 21.1.2. Module References">2</a>. </span>Module References</h3>
+			<div class="contents3">
+				<a name="21_1_2_1"></a>
+				<h4 class="heading4" title="21. For Framework Developers -&gt; 21.1. Documentation Style Guide -&gt; 21.1.2. Module References -&gt; 21.1.2.1. Defining Syntax"><span class="headingNumber"><a href="#21" title="21. For Framework Developers">21</a>.<a href="#21_1" title="21. For Framework Developers -&gt; 21.1. Documentation Style Guide">1</a>.<a href="#21_1_2" title="21. For Framework Developers -&gt; 21.1. Documentation Style Guide -&gt; 21.1.2. Module References">2</a>.<a href="#21_1_2_1" title="21. For Framework Developers -&gt; 21.1. Documentation Style Guide -&gt; 21.1.2. Module References -&gt; 21.1.2.1. Defining Syntax">1</a>. </span>Defining Syntax</h4>
+				<div class="contents4">
+					<p><span class="allCaps">SYNTAX</span></p>
+					
+					
+<pre class="sample-code">resultTYPE = object.methodName (...);
+</pre>
+					
+					<p><span class="allCaps">SYNTAX</span></p>
+					
+					
+<pre class="sample-code">object.methodName (...);
+</pre>
+					
+					<table class="list">
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>talk about type indicating assignment variable only being to indicate type, optional because one can always discard the result of a method call, function call, or expression</td></tr>
+					</table>
+				</div>
+			</div>
+		</div>
+		
+		<table class="list">
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Deprecating Features</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Renaming UIZE Modules</td></tr>
+		</table>
+		<a name="21_2"></a>
+		<h2 class="heading2" title="21. For Framework Developers -&gt; 21.2. - Creating a New Explainer"><span class="headingNumber"><a href="#21" title="21. For Framework Developers">21</a>.<a href="#21_2" title="21. For Framework Developers -&gt; 21.2. - Creating a New Explainer">2</a>. </span>- Creating a New Explainer</h2>
+		<div class="contents2">
+			<p>Add an Entry to the Site Map</p>
+			
+			<a name="21_2_1"></a>
+			<h3 class="heading3" title="21. For Framework Developers -&gt; 21.2. - Creating a New Explainer -&gt; 21.2.1. Announce the New Explainer"><span class="headingNumber"><a href="#21" title="21. For Framework Developers">21</a>.<a href="#21_2" title="21. For Framework Developers -&gt; 21.2. - Creating a New Explainer">2</a>.<a href="#21_2_1" title="21. For Framework Developers -&gt; 21.2. - Creating a New Explainer -&gt; 21.2.1. Announce the New Explainer">1</a>. </span>Announce the New Explainer</h3>
+			<div class="contents3">
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>refer to Announcing a New Development</td></tr>
+				</table>
+			</div>
+		</div>
+		
+		<table class="list">
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Announcing a New Development</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Registering New Developers</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Registering New Contributing Organizations</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Releasing a Build</td></tr>
+		</table>
+	</div>
+	
+	<a name="22"></a>
+	<h1 class="heading1" title="22. New Explainers"><span class="headingNumber"><a href="#22" title="22. New Explainers">22</a>. </span>New Explainers</h1>
+	<div class="contents1">
+		<a name="22_1"></a>
+		<h2 class="heading2" title="22. New Explainers -&gt; 22.1. Ajax"><span class="headingNumber"><a href="#22" title="22. New Explainers">22</a>.<a href="#22_1" title="22. New Explainers -&gt; 22.1. Ajax">1</a>. </span>Ajax</h2>
+		<div class="contents2">
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>specifying params</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>GET vs. POST</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>caching results</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>batching requests</td></tr>
+			</table>
+		</div>
+		
+		<a name="22_2"></a>
+		<h2 class="heading2" title="22. New Explainers -&gt; 22.2. JavaScript Mobile Development"><span class="headingNumber"><a href="#22" title="22. New Explainers">22</a>.<a href="#22_2" title="22. New Explainers -&gt; 22.2. JavaScript Mobile Development">2</a>. </span>JavaScript Mobile Development</h2>
+		<div class="contents2">
+			<a name="22_2_1"></a>
+			<h3 class="heading3" title="22. New Explainers -&gt; 22.2. JavaScript Mobile Development -&gt; 22.2.1. - UIZE works in smart phones and other mobile devices with Web browsers that support JavaScript and other Web standards"><span class="headingNumber"><a href="#22" title="22. New Explainers">22</a>.<a href="#22_2" title="22. New Explainers -&gt; 22.2. JavaScript Mobile Development">2</a>.<a href="#22_2_1" title="22. New Explainers -&gt; 22.2. JavaScript Mobile Development -&gt; 22.2.1. - UIZE works in smart phones and other mobile devices with Web browsers that support JavaScript and other Web standards">1</a>. </span>- UIZE works in smart phones and other mobile devices with Web browsers that support JavaScript and other Web standards</h3>
+			<div class="contents3">
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>typically, these are devices that support HTML5 and CSS3</td></tr>
+				</table>
+			</div>
+			
+			<a name="22_2_2"></a>
+			<h3 class="heading3" title="22. New Explainers -&gt; 22.2. JavaScript Mobile Development -&gt; 22.2.2. - emphasize that UIZE file size is compact, and that features better suited to devices with more real estate, processing power, or memory need not be loaded in"><span class="headingNumber"><a href="#22" title="22. New Explainers">22</a>.<a href="#22_2" title="22. New Explainers -&gt; 22.2. JavaScript Mobile Development">2</a>.<a href="#22_2_2" title="22. New Explainers -&gt; 22.2. JavaScript Mobile Development -&gt; 22.2.2. - emphasize that UIZE file size is compact, and that features better suited to devices with more real estate, processing power, or memory need not be loaded in">2</a>. </span>- emphasize that UIZE file size is compact, and that features better suited to devices with more real estate, processing power, or memory need not be loaded in</h3>
+			<div class="contents3">
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>provide examples: Uize.Fx, Uize.Fade.*, etc.</td></tr>
+				</table>
+			</div>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>point to example widgets that run on Palm Pre and Apple iPhone</td></tr>
+			</table>
+		</div>
+		
+		<a name="22_3"></a>
+		<h2 class="heading2" title="22. New Explainers -&gt; 22.3. JavaScript Colors"><span class="headingNumber"><a href="#22" title="22. New Explainers">22</a>.<a href="#22_3" title="22. New Explainers -&gt; 22.3. JavaScript Colors">3</a>. </span>JavaScript Colors</h2>
+		<div class="contents2">
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>animating colors</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>working with colors</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>color selector</td></tr>
+			</table>
+		</div>
+		
+		<a name="22_4"></a>
+		<h2 class="heading2" title="22. New Explainers -&gt; 22.4. Unobtrusive JavaScript"><span class="headingNumber"><a href="#22" title="22. New Explainers">22</a>.<a href="#22_4" title="22. New Explainers -&gt; 22.4. Unobtrusive JavaScript">4</a>. </span>Unobtrusive JavaScript</h2>
+		<div class="contents2">
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>GLUE paradigm</td></tr>
+			</table>
+			<a name="22_4_1"></a>
+			<h3 class="heading3" title="22. New Explainers -&gt; 22.4. Unobtrusive JavaScript -&gt; 22.4.1. - progressive enhancement"><span class="headingNumber"><a href="#22" title="22. New Explainers">22</a>.<a href="#22_4" title="22. New Explainers -&gt; 22.4. Unobtrusive JavaScript">4</a>.<a href="#22_4_1" title="22. New Explainers -&gt; 22.4. Unobtrusive JavaScript -&gt; 22.4.1. - progressive enhancement">1</a>. </span>- progressive enhancement</h3>
+			<div class="contents3">
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Uize.Widget.HoverFader</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Uize.Widget.TableSort</td></tr>
+				</table>
+			</div>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>code beside concept</td></tr>
+			</table>
+		</div>
+		
+		<a name="22_5"></a>
+		<h2 class="heading2" title="22. New Explainers -&gt; 22.5. JavaScript Drag-and-drop"><span class="headingNumber"><a href="#22" title="22. New Explainers">22</a>.<a href="#22_5" title="22. New Explainers -&gt; 22.5. JavaScript Drag-and-drop">5</a>. </span>JavaScript Drag-and-drop</h2>
+		<div class="contents2">
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Uize.Widget.Drag (for drag handles)</td></tr>
+			</table>
+		</div>
+		
+		<a name="22_6"></a>
+		<h2 class="heading2" title="22. New Explainers -&gt; 22.6. JavaScript Interfaces"><span class="headingNumber"><a href="#22" title="22. New Explainers">22</a>.<a href="#22_6" title="22. New Explainers -&gt; 22.6. JavaScript Interfaces">6</a>. </span>JavaScript Interfaces</h2>
+		<div class="contents2">
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>The Value Interface</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>The ValueAndValues Interface</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>The ValueAndRange Interface</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>The ValueSelectorDialog Interface</td></tr>
+			</table>
+		</div>
+		
+		<a name="22_7"></a>
+		<h2 class="heading2" title="22. New Explainers -&gt; 22.7. Extending UIZE"><span class="headingNumber"><a href="#22" title="22. New Explainers">22</a>.<a href="#22_7" title="22. New Explainers -&gt; 22.7. Extending UIZE">7</a>. </span>Extending UIZE</h2>
+		<div class="contents2">
+			<a name="22_7_1"></a>
+			<h3 class="heading3" title="22. New Explainers -&gt; 22.7. Extending UIZE -&gt; 22.7.1. - subclassing existing widget classes, or other classes"><span class="headingNumber"><a href="#22" title="22. New Explainers">22</a>.<a href="#22_7" title="22. New Explainers -&gt; 22.7. Extending UIZE">7</a>.<a href="#22_7_1" title="22. New Explainers -&gt; 22.7. Extending UIZE -&gt; 22.7.1. - subclassing existing widget classes, or other classes">1</a>. </span>- subclassing existing widget classes, or other classes</h3>
+			<div class="contents3">
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>creating your own widgets</td></tr>
+				</table>
+			</div>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>extension modules to extend classes or packages</td></tr>
+			</table>
+			<a name="22_7_2"></a>
+			<h3 class="heading3" title="22. New Explainers -&gt; 22.7. Extending UIZE -&gt; 22.7.2. - extending color support"><span class="headingNumber"><a href="#22" title="22. New Explainers">22</a>.<a href="#22_7" title="22. New Explainers -&gt; 22.7. Extending UIZE">7</a>.<a href="#22_7_2" title="22. New Explainers -&gt; 22.7. Extending UIZE -&gt; 22.7.2. - extending color support">2</a>. </span>- extending color support</h3>
+			<div class="contents3">
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>defining new named colors</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>defining new color spaces (including encodings)</td></tr>
+				</table>
+			</div>
+			
+			<a name="22_7_3"></a>
+			<h3 class="heading3" title="22. New Explainers -&gt; 22.7. Extending UIZE -&gt; 22.7.3. - extending Fx"><span class="headingNumber"><a href="#22" title="22. New Explainers">22</a>.<a href="#22_7" title="22. New Explainers -&gt; 22.7. Extending UIZE">7</a>.<a href="#22_7_3" title="22. New Explainers -&gt; 22.7. Extending UIZE -&gt; 22.7.3. - extending Fx">3</a>. </span>- extending Fx</h3>
+			<div class="contents3">
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>adding new effects</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>supporting style properties</td></tr>
+				</table>
+			</div>
+			
+			<a name="22_7_4"></a>
+			<h3 class="heading3" title="22. New Explainers -&gt; 22.7. Extending UIZE -&gt; 22.7.4. - adding support for communication protocols"><span class="headingNumber"><a href="#22" title="22. New Explainers">22</a>.<a href="#22_7" title="22. New Explainers -&gt; 22.7. Extending UIZE">7</a>.<a href="#22_7_4" title="22. New Explainers -&gt; 22.7. Extending UIZE -&gt; 22.7.4. - adding support for communication protocols">4</a>. </span>- adding support for communication protocols</h3>
+			<div class="contents3">
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>creating Uize.Comm subclasses</td></tr>
+				</table>
+			</div>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>implementing virtual DOM events</td></tr>
+			</table>
+		</div>
+	</div>
+	
+	<a name="23"></a>
+	<h1 class="heading1" title="23. Search on Selected Text"><span class="headingNumber"><a href="#23" title="23. Search on Selected Text">23</a>. </span>Search on Selected Text</h1>
+	<div class="contents1">
+		<table class="list">
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>for any content document, pop open search pop-up when selecting text (as long as text is not more than a certain max length, and does not contain linebreaks -- must make sure that this feature wouldn't be annoying, so perhaps only for documentation pages? Don't want to confuse this search feature with normal interaction with form fields).</td></tr>
+		</table>
+	</div>
+	
+	<a name="24"></a>
+	<h1 class="heading1" title="24. Explainer: JavaScript Localization"><span class="headingNumber"><a href="#24" title="24. Explainer: JavaScript Localization">24</a>. </span>Explainer: JavaScript Localization</h1>
+	<div class="contents1">
+		<p>default localized strings (could be English)</p>
+	</div>
+	
+	<a name="25"></a>
+	<h1 class="heading1" title="25. Explainer: JavaScript Libraries"><span class="headingNumber"><a href="#25" title="25. Explainer: JavaScript Libraries">25</a>. </span>Explainer: JavaScript Libraries</h1>
+	<div class="contents1">
+		<a name="25_1"></a>
+		<h2 class="heading2" title="25. Explainer: JavaScript Libraries -&gt; 25.1. - feedback from Ben"><span class="headingNumber"><a href="#25" title="25. Explainer: JavaScript Libraries">25</a>.<a href="#25_1" title="25. Explainer: JavaScript Libraries -&gt; 25.1. - feedback from Ben">1</a>. </span>- feedback from Ben</h2>
+		<div class="contents2">
+			<p>I read over the JavaScript Library Documentation and here are my suggestions:</p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>I like the metaphor in the 1. Introduction section.  When talking about the performance benefit of the libraries maybe using an actual real example (maybe the UizeDotCom.Page.Doc.library.js file?) of what the savings look like of one request versus many requests.</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>In the 2. Where They Live section, I think it'd be helpful to actually list where the default JavaScript modules folder is (both the source and built versions) just so someone reading can know exactly what you're referring to.</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>In the 3.1.2.3. Don't Require List Modules I understand what you're getting at in the paragraph about not requiring the modules so the onus is on the modules that actually need those modules to require them properly. I think what's confusing is that if you don't know how the framework works in "source-mode" (i.e. all the modules are loaded dynamically) then the paragraph seems pretty confusing.  I think either it needs some examples of what you're trying to explain or at least a reference to the explainer section that talks about the source-mode module loading</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>In 3.2 The Built Version I think you may want to play up the performance benefits mention in 1. Introduction about saving http requests because that's when the benefits come in (in the built version).  Maybe here is where you can do an analysis using the UizeDotCom page widget library file (if not in the intro)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>In 4. How To use Them it seems to me that the example in 4.1 Sourcing the Source Version looks the same as the example in 4.2 Source in the Built Version.  This also got me thinking.  In Zazzle we have a function that listens to a config entry as to whether to use the source JS.  How does Uize.com (or any other site for that matter) determine which version to use?  Most likely people will just copy what they developed locally to their website.  Maybe a suggestion on how to implement that in the Build Scripts explainer (I did a cursory search and didn't find anything) would help</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>It seems that the paragraph in 4.3 Requiring a JavaScript Library sort of explains what I was just talking about, although I still don't see how the module loading mechanism knows to use the built version of the modules.  Is that because the script tag sourcing of the Uize.js module would be changed to point to the built version (and thus the module loading mechanism knows where to find the rest)?</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>I think an example of what you mean in 7.1. Pages Should Always Work Without Libraries would be nice</td></tr>
+			</table>
+			<p>Looking at all my suggestions, I think I understand now where my confusions lie.  In some regards I'm a visual learner so I like to see things rather than just read or hear them.  So for the more tricky explanation, an example of what you're talking about would clear things up for me.  Towards the end of the explainer it seems that you talked about some of the things I was mentioning earlier on the explainer, so maybe some well-placed links to further in the document might help as well.</p>
+			
+			<p>But overall after reading the explainer, I think you really need to beat the developer over the head as to why library files are useful.  There's all this explanation of how they were and some dancing you have to do, but only a little bit on why you would actually use them.</p>
+		</div>
+		
+		<a name="25_2"></a>
+		<h2 class="heading2" title="25. Explainer: JavaScript Libraries -&gt; 25.2. - feedback from Tim"><span class="headingNumber"><a href="#25" title="25. Explainer: JavaScript Libraries">25</a>.<a href="#25_2" title="25. Explainer: JavaScript Libraries -&gt; 25.2. - feedback from Tim">2</a>. </span>- feedback from Tim</h2>
+		<div class="contents2">
+			<a name="25_2_1"></a>
+			<h3 class="heading3" title="25. Explainer: JavaScript Libraries -&gt; 25.2. - feedback from Tim -&gt; 25.2.1. General:"><span class="headingNumber"><a href="#25" title="25. Explainer: JavaScript Libraries">25</a>.<a href="#25_2" title="25. Explainer: JavaScript Libraries -&gt; 25.2. - feedback from Tim">2</a>.<a href="#25_2_1" title="25. Explainer: JavaScript Libraries -&gt; 25.2. - feedback from Tim -&gt; 25.2.1. General:">1</a>. </span>General:</h3>
+			<div class="contents3">
+				<p>The word “page” is used primarily to describe the environment in which Uize operates, but using the word “application” would suggest that Uize is able to work in more diverse environments than just a web browser. Of course, using “application” would confuse people who aren’t used to thinking about javascript as anything more than a web-scripting tool.</p>
+				
+				<p>More emphasis on how libraries are an optimization, and that the application should be able to chug along if the libraries were stripped from it. I’d personally use some analogy about how the modules are like Captain Kirk and Spock, while the libraries are Red-shirt Ensign #3. If the Ensign is killed, the mission should still succeed.</p>
+			</div>
+			
+			<a name="25_2_2"></a>
+			<h3 class="heading3" title="25. Explainer: JavaScript Libraries -&gt; 25.2. - feedback from Tim -&gt; 25.2.2. Introduction:"><span class="headingNumber"><a href="#25" title="25. Explainer: JavaScript Libraries">25</a>.<a href="#25_2" title="25. Explainer: JavaScript Libraries -&gt; 25.2. - feedback from Tim">2</a>.<a href="#25_2_2" title="25. Explainer: JavaScript Libraries -&gt; 25.2. - feedback from Tim -&gt; 25.2.2. Introduction:">2</a>. </span>Introduction:</h3>
+			<div class="contents3">
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Strike the “like” from “Think of a JavaScript module as like a book”</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>There shouldn’t be a comma in the sentence “JavaScript libraries offer a performance benefit for pages…”</td></tr>
+				</table>
+			</div>
+			
+			<a name="25_2_3"></a>
+			<h3 class="heading3" title="25. Explainer: JavaScript Libraries -&gt; 25.2. - feedback from Tim -&gt; 25.2.3. Where They Live:"><span class="headingNumber"><a href="#25" title="25. Explainer: JavaScript Libraries">25</a>.<a href="#25_2" title="25. Explainer: JavaScript Libraries -&gt; 25.2. - feedback from Tim">2</a>.<a href="#25_2_3" title="25. Explainer: JavaScript Libraries -&gt; 25.2. - feedback from Tim -&gt; 25.2.3. Where They Live:">3</a>. </span>Where They Live:</h3>
+			<div class="contents3">
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Doesn’t using the extension .library.js remove an entire range of possible names for js files? Could .jsl be appropriate?</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>In the first sentence of the second paragraph, “the” and “inside” are reverse</td></tr>
+				</table>
+			</div>
+			
+			<a name="25_2_4"></a>
+			<h3 class="heading3" title="25. Explainer: JavaScript Libraries -&gt; 25.2. - feedback from Tim -&gt; 25.2.4. 3.1"><span class="headingNumber"><a href="#25" title="25. Explainer: JavaScript Libraries">25</a>.<a href="#25_2" title="25. Explainer: JavaScript Libraries -&gt; 25.2. - feedback from Tim">2</a>.<a href="#25_2_4" title="25. Explainer: JavaScript Libraries -&gt; 25.2. - feedback from Tim -&gt; 25.2.4. 3.1">4</a>. </span>3.1</h3>
+			<div class="contents3">
+				<p>Point out that, in source, absolutely nothing happens if the Library Contents comment is all that is in the library file. People might wonder if there’s a special mechanism within Uize to parse the comment and load the js classes using the module loader.</p>
+			</div>
+			
+			<a name="25_2_5"></a>
+			<h3 class="heading3" title="25. Explainer: JavaScript Libraries -&gt; 25.2. - feedback from Tim -&gt; 25.2.5. 3.1.2.3"><span class="headingNumber"><a href="#25" title="25. Explainer: JavaScript Libraries">25</a>.<a href="#25_2" title="25. Explainer: JavaScript Libraries -&gt; 25.2. - feedback from Tim">2</a>.<a href="#25_2_5" title="25. Explainer: JavaScript Libraries -&gt; 25.2. - feedback from Tim -&gt; 25.2.5. 3.1.2.3">5</a>. </span>3.1.2.3</h3>
+			<div class="contents3">
+				<p>The paragraph about not requiring modules that are listed in a library module is unclear. This would be my re-write:</p>
+				
+				<p>“The source version of the library module, if consisting solely of the Library Contents comment, will not load any modules, thus forcing the other modules in the application to load their required lists (which may include modules listed in the library). This mechanism allows any errors in the modules’ required lists to be revealed while running in source. By requiring the modules in the library file that are listed in the Library Contents comment, this mechanism will be hidden.”</p>
+				
+				<p>It might not make sense to everyone, but it makes sense to me. If you stick with the original, then note that “omissions” is spelled wrong.</p>
+			</div>
+			
+			<a name="25_2_6"></a>
+			<h3 class="heading3" title="25. Explainer: JavaScript Libraries -&gt; 25.2. - feedback from Tim -&gt; 25.2.6. Real World Examples"><span class="headingNumber"><a href="#25" title="25. Explainer: JavaScript Libraries">25</a>.<a href="#25_2" title="25. Explainer: JavaScript Libraries -&gt; 25.2. - feedback from Tim">2</a>.<a href="#25_2_6" title="25. Explainer: JavaScript Libraries -&gt; 25.2. - feedback from Tim -&gt; 25.2.6. Real World Examples">6</a>. </span>Real World Examples</h3>
+			<div class="contents3">
+				<p>Add Zazzle?</p>
+			</div>
+			
+			<a name="25_2_7"></a>
+			<h3 class="heading3" title="25. Explainer: JavaScript Libraries -&gt; 25.2. - feedback from Tim -&gt; 25.2.7. 7.1"><span class="headingNumber"><a href="#25" title="25. Explainer: JavaScript Libraries">25</a>.<a href="#25_2" title="25. Explainer: JavaScript Libraries -&gt; 25.2. - feedback from Tim">2</a>.<a href="#25_2_7" title="25. Explainer: JavaScript Libraries -&gt; 25.2. - feedback from Tim -&gt; 25.2.7. 7.1">7</a>. </span>7.1</h3>
+			<div class="contents3">
+				<p>A gentle reminder of how multiple module declarations of the same module won’t lead to multiple requests might be helpful</p>
+			</div>
+		</div>
+	</div>
+	
+	<a name="26"></a>
+	<h1 class="heading1" title="26. Explainer: JavaScript Modules"><span class="headingNumber"><a href="#26" title="26. Explainer: JavaScript Modules">26</a>. </span>Explainer: JavaScript Modules</h1>
+	<div class="contents1">
+		<a name="26_1"></a>
+		<h2 class="heading2" title="26. Explainer: JavaScript Modules -&gt; 26.1. Uize.module -&gt; Parameters -&gt; required"><span class="headingNumber"><a href="#26" title="26. Explainer: JavaScript Modules">26</a>.<a href="#26_1" title="26. Explainer: JavaScript Modules -&gt; 26.1. Uize.module -&gt; Parameters -&gt; required">1</a>. </span>Uize.module -> Parameters -> required</h2>
+		<div class="contents2">
+			<a name="26_1_1"></a>
+			<h3 class="heading3" title="26. Explainer: JavaScript Modules -&gt; 26.1. Uize.module -&gt; Parameters -&gt; required -&gt; 26.1.1. Order Unimportant"><span class="headingNumber"><a href="#26" title="26. Explainer: JavaScript Modules">26</a>.<a href="#26_1" title="26. Explainer: JavaScript Modules -&gt; 26.1. Uize.module -&gt; Parameters -&gt; required">1</a>.<a href="#26_1_1" title="26. Explainer: JavaScript Modules -&gt; 26.1. Uize.module -&gt; Parameters -&gt; required -&gt; 26.1.1. Order Unimportant">1</a>. </span>Order Unimportant</h3>
+			<div class="contents3">
+				<p>It's worth mentioning and explaining why order is not important in the required list</p>
+			</div>
+			
+			<a name="26_1_2"></a>
+			<h3 class="heading3" title="26. Explainer: JavaScript Modules -&gt; 26.1. Uize.module -&gt; Parameters -&gt; required -&gt; 26.1.2. Requiring Extension Modules"><span class="headingNumber"><a href="#26" title="26. Explainer: JavaScript Modules">26</a>.<a href="#26_1" title="26. Explainer: JavaScript Modules -&gt; 26.1. Uize.module -&gt; Parameters -&gt; required">1</a>.<a href="#26_1_2" title="26. Explainer: JavaScript Modules -&gt; 26.1. Uize.module -&gt; Parameters -&gt; required -&gt; 26.1.2. Requiring Extension Modules">2</a>. </span>Requiring Extension Modules</h3>
+			<div class="contents3">
+				<p>Because they extend namespaces, how do you know from the code if you need them? Yes, it's a little trickier.</p>
+			</div>
+		</div>
+		
+		<a name="26_2"></a>
+		<h2 class="heading2" title="26. Explainer: JavaScript Modules -&gt; 26.2. Multiple Consecutive Module Declarations"><span class="headingNumber"><a href="#26" title="26. Explainer: JavaScript Modules">26</a>.<a href="#26_2" title="26. Explainer: JavaScript Modules -&gt; 26.2. Multiple Consecutive Module Declarations">2</a>. </span>Multiple Consecutive Module Declarations</h2>
+		<div class="contents2">
+			<p>You can have multiple consecutive module declarations that share common required modules and things will work correctly, rather than some of the required modules being loaded multiple times (which would cause all sorts of problems with modules stomping over themselves when re-declaring themselves and thereby crippling code).</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">Uize.module ({
+  required:'Uize.Widget',
+  builder:function () {
+    alert ('build the first anonymous module');
+  }
+});
+
+Uize.module ({
+  required:'Uize.Widget',
+  builder:function () {
+    alert ('build the second anonymous module');
+  }
+});
+</pre>
+			
+			<p>The first anonymous module being declared requires the <code><a href="#36_13">Uize.Widget</a></code> module. If this module is not already loaded, then the module loader mechanism will load it asynchronously. The second anonymous module declaration occurs immediately after the first (because this code is synchronous), and it also requires the <code><a href="#36_13">Uize.Widget</a></code> module. A second request to load this required module externally is <b>not</b> made, because the module loader mechanism knows that loading of the module is already in progress.</p>
+		</div>
+		
+		<a name="26_3"></a>
+		<h2 class="heading2" title="26. Explainer: JavaScript Modules -&gt; 26.3. Named Inline Module Required By Subsequent Anonymous Inline Module"><span class="headingNumber"><a href="#26" title="26. Explainer: JavaScript Modules">26</a>.<a href="#26_3" title="26. Explainer: JavaScript Modules -&gt; 26.3. Named Inline Module Required By Subsequent Anonymous Inline Module">3</a>. </span>Named Inline Module Required By Subsequent Anonymous Inline Module</h2>
+		<div class="contents2">
+			<p>You can have an inline module declaration that requires other external modules, and subsequent inline module declarations that require that first module will correctly wait until it is built - rather than trying to load it externally</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">Uize.module ({
+  name:'Uize.MyInlineModule',
+  required:'Uize.Widget',
+  builder:function () {
+    alert ('build Uize.MyInlineModule');
+  }
+});
+
+Uize.module {{
+  required:'Uize.MyInlineModule',
+  builder:function () {
+    alert ('build the anonymous module that requires Uize.MyInlineModule');
+  }
+});
+</pre>
+			
+			<p>The <code>Uize.MyInlineModule</code> module may not be built yet when the second, anonymous module is declared because <code>Uize.MyInlineModule</code> requires the module <code><a href="#36_13">Uize.Widget</a></code> that may not yet be defined and may have to be loaded asynchronously. Now, when the anonymous module is declared, the module loader mechanism doesn't try to load <code>Uize.MyInlineModule</code> externally even though it is not yet defined, because it knows that this required module is in the process of being defined.</p>
+		</div>
+		
+		<table class="list">
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>discuss Uize.moduleUrlResolver</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>implementing "inner classes" within modules</td></tr>
+		</table>
+	</div>
+	
+	<a name="27"></a>
+	<h1 class="heading1" title="27. Miscellaneous"><span class="headingNumber"><a href="#27" title="27. Miscellaneous">27</a>. </span>Miscellaneous</h1>
+	<div class="contents1">
+		<a name="27_1"></a>
+		<h2 class="heading2" title="27. Miscellaneous -&gt; 27.1. Novel map Method"><span class="headingNumber"><a href="#27" title="27. Miscellaneous">27</a>.<a href="#27_1" title="27. Miscellaneous -&gt; 27.1. Novel map Method">1</a>. </span>Novel map Method</h2>
+		<div class="contents2">
+			
+<pre class="sample-code">Uize.Data.map ('key &gt; 1 ? this [key - 2] + this [key - 1] : key',30)
+</pre>
+			
+			<p>Can't do this with JavaScript 1.6's map method (or the map methods in any other framework), because the map function can't reference the newly created target array.</p>
+		</div>
+	</div>
+	
+	<a name="28"></a>
+	<h1 class="heading1" title="28. Interview Questions to Add"><span class="headingNumber"><a href="#28" title="28. Interview Questions to Add">28</a>. </span>Interview Questions to Add</h1>
+	<div class="contents1">
+		<table class="list">
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the matrix</td></tr>
+		</table>
+		<a name="28_1"></a>
+		<h2 class="heading2" title="28. Interview Questions to Add -&gt; 28.1. - find smallest number"><span class="headingNumber"><a href="#28" title="28. Interview Questions to Add">28</a>.<a href="#28_1" title="28. Interview Questions to Add -&gt; 28.1. - find smallest number">1</a>. </span>- find smallest number</h2>
+		<div class="contents2">
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>find the smallest number in an array of numbers, without using methods of the Math object (like Math.max or Math.min)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>now, find the smallest number using a method of the Math object</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>does the candidate still use iteration? do they know about the Infinity value?</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>now, find the smallest number in a single statement</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>does the candidate know that Math.min can take an arbitrary number of parameters?</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>does the candidate understand how to use the call and apply methods of Function objects?</td></tr>
+			</table>
+		</div>
+	</div>
+	
+	<p>!!! basic wireframe documentation for <b>ALL</b> modules</p>
+	
+	<a name="29"></a>
+	<h1 class="heading1" title="29. XHTML Validation Problems"><span class="headingNumber"><a href="#29" title="29. XHTML Validation Problems">29</a>. </span>XHTML Validation Problems</h1>
+	<div class="contents1">
+		<table class="list">
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>"JavaScript Templates" explainer has issue with "<%" and ">" chars not being entities. This is a problem for SimpleDoc in general.</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>for all pages when run locally, need default style language</td></tr>
+		</table>
+		<a name="29_1"></a>
+		<h2 class="heading2" title="29. XHTML Validation Problems -&gt; 29.1. - for pages delivered by server, no char encoding specified in response headers (refer to zazzle.com response headers)"><span class="headingNumber"><a href="#29" title="29. XHTML Validation Problems">29</a>.<a href="#29_1" title="29. XHTML Validation Problems -&gt; 29.1. - for pages delivered by server, no char encoding specified in response headers (refer to zazzle.com response headers)">1</a>. </span>- for pages delivered by server, no char encoding specified in response headers (refer to zazzle.com response headers)</h2>
+		<div class="contents2">
+			<p><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /></p>
+		</div>
+		
+		<a name="29_2"></a>
+		<h2 class="heading2" title="29. XHTML Validation Problems -&gt; 29.2. - script tags with inline code should really have..."><span class="headingNumber"><a href="#29" title="29. XHTML Validation Problems">29</a>.<a href="#29_2" title="29. XHTML Validation Problems -&gt; 29.2. - script tags with inline code should really have...">2</a>. </span>- script tags with inline code should really have...</h2>
+		<div class="contents2">
+			
+<pre class="sample-code">&lt;!--
+// --&gt;
+</pre>
+		</div>
+	</div>
+	
+	<a name="30"></a>
+	<h1 class="heading1" title="30. Design Philosophy (some ramblings)"><span class="headingNumber"><a href="#30" title="30. Design Philosophy (some ramblings)">30</a>. </span>Design Philosophy (some ramblings)</h1>
+	<div class="contents1">
+		<p>Node-related methods implemented in Uize.Widget are a reflection of static methods from the Uize.Node package that are the most useful and frequently used in the context of widget implementations. If you need to use more esoteric methods, you can access those from the Uize.Node package and use the getNode instance method to get references to implied nodes to supply to the methods of the Uize.Node package.</p>
+		
+		<p>UIZE takes the approach of exposing abstractions for things for which it is useful to provide abstractions. Beyond these useful abstractions, UIZE does not attempt to provide a comprehensive abstraction of all DOM APIs. There's nothing wrong with using safe and consistently implemented methods of the standard DOM APIs.</p>
+	</div>
+	
+	<a name="31"></a>
+	<h1 class="heading1" title="31. Site &amp; Documentation (in order of priority)"><span class="headingNumber"><a href="#31" title="31. Site &amp; Documentation (in order of priority)">31</a>. </span>Site & Documentation (in order of priority)</h1>
+	<div class="contents1">
+		<a name="31_1"></a>
+		<h2 class="heading2" title="31. Site &amp; Documentation (in order of priority) -&gt; 31.1. - go through all documentation pages and see what tooltips show up for the contents tree links. Make sure all sections have a concise introductory first paragraph."><span class="headingNumber"><a href="#31" title="31. Site &amp; Documentation (in order of priority)">31</a>.<a href="#31_1" title="31. Site &amp; Documentation (in order of priority) -&gt; 31.1. - go through all documentation pages and see what tooltips show up for the contents tree links. Make sure all sections have a concise introductory first paragraph.">1</a>. </span>- go through all documentation pages and see what tooltips show up for the contents tree links. Make sure all sections have a concise introductory first paragraph.</h2>
+		<div class="contents2">
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>possibly write a build script to find documents with first paragraphs for sections that are long or contain multiple sentences (non-period, following by period, followed by space)</td></tr>
+			</table>
+		</div>
+		
+		<table class="list">
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>add like button to all pages (in title bar)</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>look into gzip'ing entire site (or enabling Apache's mod_gzip)</td></tr>
+		</table>
+		<a name="31_2"></a>
+		<h2 class="heading2" title="31. Site &amp; Documentation (in order of priority) -&gt; 31.2. How UIZE is used on Zazzle"><span class="headingNumber"><a href="#31" title="31. Site &amp; Documentation (in order of priority)">31</a>.<a href="#31_2" title="31. Site &amp; Documentation (in order of priority) -&gt; 31.2. How UIZE is used on Zazzle">2</a>. </span>How UIZE is used on Zazzle</h2>
+		<div class="contents2">
+			<p>Describe the many ways in which UIZE is utilized on the zazzle.com Web site.</p>
+		</div>
+		
+		<a name="31_3"></a>
+		<h2 class="heading2" title="31. Site &amp; Documentation (in order of priority) -&gt; 31.3. UIZE Comparison With Other Frameworks"><span class="headingNumber"><a href="#31" title="31. Site &amp; Documentation (in order of priority)">31</a>.<a href="#31_3" title="31. Site &amp; Documentation (in order of priority) -&gt; 31.3. UIZE Comparison With Other Frameworks">3</a>. </span>UIZE Comparison With Other Frameworks</h2>
+		<div class="contents2">
+			<p>In discussion of UIZE, WRT how UIZE compares to other frameworks.</p>
+			
+			<a name="31_3_1"></a>
+			<h3 class="heading3" title="31. Site &amp; Documentation (in order of priority) -&gt; 31.3. UIZE Comparison With Other Frameworks -&gt; 31.3.1. Discuss convenience iterators..."><span class="headingNumber"><a href="#31" title="31. Site &amp; Documentation (in order of priority)">31</a>.<a href="#31_3" title="31. Site &amp; Documentation (in order of priority) -&gt; 31.3. UIZE Comparison With Other Frameworks">3</a>.<a href="#31_3_1" title="31. Site &amp; Documentation (in order of priority) -&gt; 31.3. UIZE Comparison With Other Frameworks -&gt; 31.3.1. Discuss convenience iterators...">1</a>. </span>Discuss convenience iterators...</h3>
+			<div class="contents3">
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Uize.callOn</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Uize.doForAll</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Uize.Comm.processArrayAsync</td></tr>
+				</table>
+			</div>
+		</div>
+		
+		<a name="31_4"></a>
+		<h2 class="heading2" title="31. Site &amp; Documentation (in order of priority) -&gt; 31.4. Thoughts on Good Design"><span class="headingNumber"><a href="#31" title="31. Site &amp; Documentation (in order of priority)">31</a>.<a href="#31_4" title="31. Site &amp; Documentation (in order of priority) -&gt; 31.4. Thoughts on Good Design">4</a>. </span>Thoughts on Good Design</h2>
+		<div class="contents2">
+			<p>A feature can be a side effect of an implementation by design.</p>
+			
+			<p>In other words, an elegant design can have the intention of producing positive side effects. From a certain perspective, it might seem purely lucky or fortuitous that certain good things fall out of a particular implementation choice. But a good designer has their mind tuned to deliver positive knock-on effects from their design choices.</p>
+		</div>
+	</div>
+	
+	<a name="32"></a>
+	<h1 class="heading1" title="32. UIZE guidelines"><span class="headingNumber"><a href="#32" title="32. UIZE guidelines">32</a>. </span>UIZE guidelines</h1>
+	<div class="contents1">
+		<a name="32_1"></a>
+		<h2 class="heading2" title="32. UIZE guidelines -&gt; 32.1. Development Practices"><span class="headingNumber"><a href="#32" title="32. UIZE guidelines">32</a>.<a href="#32_1" title="32. UIZE guidelines -&gt; 32.1. Development Practices">1</a>. </span>Development Practices</h2>
+		<div class="contents2">
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>only source in JavaScript files that are actually used on a page (same applies to CSS files)</td></tr>
+			</table>
+		</div>
+		
+		<a name="32_2"></a>
+		<h2 class="heading2" title="32. UIZE guidelines -&gt; 32.2. Code Size Optimization"><span class="headingNumber"><a href="#32" title="32. UIZE guidelines">32</a>.<a href="#32_2" title="32. UIZE guidelines -&gt; 32.2. Code Size Optimization">2</a>. </span>Code Size Optimization</h2>
+		<div class="contents2">
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>UIZE-specific: Leave Set-get Property Initial Values undefined, where possible. don't define an initial value for a set-get property when it offers no benefit (especially if your code tests the property in its execution to protect against null or undefined values)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>use slice instead of substring (or substr when just one parameter) method, wherever possible</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>omit parentheses after constructor when constructor doesn't take any parameters</td></tr>
+			</table>
+			<a name="32_2_1"></a>
+			<h3 class="heading3" title="32. UIZE guidelines -&gt; 32.2. Code Size Optimization -&gt; 32.2.1. - lazy assignment combined with conditional execution"><span class="headingNumber"><a href="#32" title="32. UIZE guidelines">32</a>.<a href="#32_2" title="32. UIZE guidelines -&gt; 32.2. Code Size Optimization">2</a>.<a href="#32_2_1" title="32. UIZE guidelines -&gt; 32.2. Code Size Optimization -&gt; 32.2.1. - lazy assignment combined with conditional execution">1</a>. </span>- lazy assignment combined with conditional execution</h3>
+			<div class="contents3">
+				
+<pre class="sample-code">if (!_param) _param = _lastValue;
+if (_param) {
+  // do stuff
+}
+_lastValue = _param;
+</pre>
+				
+				
+<pre class="sample-code">if (_param || (_param = _lastValue)) {
+  // do stuff
+}
+_lastValue = _param;
+</pre>
+			</div>
+		</div>
+		
+		<a name="32_3"></a>
+		<h2 class="heading2" title="32. UIZE guidelines -&gt; 32.3. Code Performance Optimization"><span class="headingNumber"><a href="#32" title="32. UIZE guidelines">32</a>.<a href="#32_3" title="32. UIZE guidelines -&gt; 32.3. Code Performance Optimization">3</a>. </span>Code Performance Optimization</h2>
+		<div class="contents2">
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>sacred empty object and sacred empty array techniques</td></tr>
+			</table>
+		</div>
+		
+		<a name="32_4"></a>
+		<h2 class="heading2" title="32. UIZE guidelines -&gt; 32.4. Code Tricks &amp; Tips"><span class="headingNumber"><a href="#32" title="32. UIZE guidelines">32</a>.<a href="#32_4" title="32. UIZE guidelines -&gt; 32.4. Code Tricks &amp; Tips">4</a>. </span>Code Tricks & Tips</h2>
+		<div class="contents2">
+			<a name="32_4_1"></a>
+			<h3 class="heading3" title="32. UIZE guidelines -&gt; 32.4. Code Tricks &amp; Tips -&gt; 32.4.1. - how to test if a multi-line string contains any lines exceeding a specific length"><span class="headingNumber"><a href="#32" title="32. UIZE guidelines">32</a>.<a href="#32_4" title="32. UIZE guidelines -&gt; 32.4. Code Tricks &amp; Tips">4</a>.<a href="#32_4_1" title="32. UIZE guidelines -&gt; 32.4. Code Tricks &amp; Tips -&gt; 32.4.1. - how to test if a multi-line string contains any lines exceeding a specific length">1</a>. </span>- how to test if a multi-line string contains any lines exceeding a specific length</h3>
+			<div class="contents3">
+				
+<pre class="sample-code">function hasLineExceedingMaxLength (sourceStr,maxLength) {
+  return new RegExp ('^.{' + (maxLength + 1) + ',}$','m').test (sourceStr);
+}
+</pre>
+			</div>
+			
+			<a name="32_4_2"></a>
+			<h3 class="heading3" title="32. UIZE guidelines -&gt; 32.4. Code Tricks &amp; Tips -&gt; 32.4.2. - how to create a copy of an array..."><span class="headingNumber"><a href="#32" title="32. UIZE guidelines">32</a>.<a href="#32_4" title="32. UIZE guidelines -&gt; 32.4. Code Tricks &amp; Tips">4</a>.<a href="#32_4_2" title="32. UIZE guidelines -&gt; 32.4. Code Tricks &amp; Tips -&gt; 32.4.2. - how to create a copy of an array...">2</a>. </span>- how to create a copy of an array...</h3>
+			<div class="contents3">
+				
+<pre class="sample-code">myArray.concat ();
+</pre>
+			</div>
+			
+			<a name="32_4_3"></a>
+			<h3 class="heading3" title="32. UIZE guidelines -&gt; 32.4. Code Tricks &amp; Tips -&gt; 32.4.3. - how to split out the characters from a string into an array of characters..."><span class="headingNumber"><a href="#32" title="32. UIZE guidelines">32</a>.<a href="#32_4" title="32. UIZE guidelines -&gt; 32.4. Code Tricks &amp; Tips">4</a>.<a href="#32_4_3" title="32. UIZE guidelines -&gt; 32.4. Code Tricks &amp; Tips -&gt; 32.4.3. - how to split out the characters from a string into an array of characters...">3</a>. </span>- how to split out the characters from a string into an array of characters...</h3>
+			<div class="contents3">
+				
+<pre class="sample-code">myString.split ('');
+</pre>
+			</div>
+			
+			<a name="32_4_4"></a>
+			<h3 class="heading3" title="32. UIZE guidelines -&gt; 32.4. Code Tricks &amp; Tips -&gt; 32.4.4. - how to double space the characters in a string..."><span class="headingNumber"><a href="#32" title="32. UIZE guidelines">32</a>.<a href="#32_4" title="32. UIZE guidelines -&gt; 32.4. Code Tricks &amp; Tips">4</a>.<a href="#32_4_4" title="32. UIZE guidelines -&gt; 32.4. Code Tricks &amp; Tips -&gt; 32.4.4. - how to double space the characters in a string...">4</a>. </span>- how to double space the characters in a string...</h3>
+			<div class="contents3">
+				
+<pre class="sample-code">myString.split ('').join (' ');
+</pre>
+			</div>
+		</div>
+		
+		<a name="32_5"></a>
+		<h2 class="heading2" title="32. UIZE guidelines -&gt; 32.5. - page performance optimization"><span class="headingNumber"><a href="#32" title="32. UIZE guidelines">32</a>.<a href="#32_5" title="32. UIZE guidelines -&gt; 32.5. - page performance optimization">5</a>. </span>- page performance optimization</h2>
+		<div class="contents2">
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>put JavaScript only as early in page as is needed (at end of page, if possible)</td></tr>
+			</table>
+		</div>
+	</div>
+	
+	<a name="33"></a>
+	<h1 class="heading1" title="33. Overview"><span class="headingNumber"><a href="#33" title="33. Overview">33</a>. </span>Overview</h1>
+	<div class="contents1">
+		<table class="list">
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>mention Uize/uize/UIZE namespace considerations for developers</td></tr>
+		</table>
+	</div>
+	
+	<a name="34"></a>
+	<h1 class="heading1" title="34. For All Examples"><span class="headingNumber"><a href="#34" title="34. For All Examples">34</a>. </span>For All Examples</h1>
+	<div class="contents1">
+		<a name="34_1"></a>
+		<h2 class="heading2" title="34. For All Examples -&gt; 34.1. - add explanation copy"><span class="headingNumber"><a href="#34" title="34. For All Examples">34</a>.<a href="#34_1" title="34. For All Examples -&gt; 34.1. - add explanation copy">1</a>. </span>- add explanation copy</h2>
+		<div class="contents2">
+			<p>C:/~uize/uize_framework/examples/hierarchical-selector.html</p>
+			
+			<p>C:/~uize/uize_framework/examples/two-hierarchical-selectors.html</p>
+			
+			<p>C:/~uize/uize_framework/examples/button-types.html</p>
+			
+			<p>C:/~uize/uize_framework/examples/button-toggle.html</p>
+			
+			<p>C:/~uize/uize_framework/examples/swap-image-png.html -- mention "JavaScript animation"</p>
+		</div>
+		
+		<table class="list">
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>for examples that should wait until all images are loaded (eg. sequenced show), for now use Uize.Widget's "Document Loaded" event as a proxy for detecting that state</td></tr>
+		</table>
+	</div>
+	
+	<a name="35"></a>
+	<h1 class="heading1" title="35. For All Tests"><span class="headingNumber"><a href="#35" title="35. For All Tests">35</a>. </span>For All Tests</h1>
+	<div class="contents1">
+		<table class="list">
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>add description copy</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>turn as many of the faceless tests as possible into true tests using the Uize.Test class</td></tr>
+		</table>
+		<a name="35_1"></a>
+		<h2 class="heading2" title="35. For All Tests -&gt; 35.1. - improve test framework, so that..."><span class="headingNumber"><a href="#35" title="35. For All Tests">35</a>.<a href="#35_1" title="35. For All Tests -&gt; 35.1. - improve test framework, so that...">1</a>. </span>- improve test framework, so that...</h2>
+		<div class="contents2">
+			<a name="35_1_1"></a>
+			<h3 class="heading3" title="35. For All Tests -&gt; 35.1. - improve test framework, so that... -&gt; 35.1.1. - each individual test can specify its title, so that..."><span class="headingNumber"><a href="#35" title="35. For All Tests">35</a>.<a href="#35_1" title="35. For All Tests -&gt; 35.1. - improve test framework, so that...">1</a>.<a href="#35_1_1" title="35. For All Tests -&gt; 35.1. - improve test framework, so that... -&gt; 35.1.1. - each individual test can specify its title, so that...">1</a>. </span>- each individual test can specify its title, so that...</h3>
+			<div class="contents3">
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>generating the report is easier</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the user can know what test is currently being performed</td></tr>
+				</table>
+			</div>
+			
+			<a name="35_1_2"></a>
+			<h3 class="heading3" title="35. For All Tests -&gt; 35.1. - improve test framework, so that... -&gt; 35.1.2. - give better status updates, so that the user knows..."><span class="headingNumber"><a href="#35" title="35. For All Tests">35</a>.<a href="#35_1" title="35. For All Tests -&gt; 35.1. - improve test framework, so that...">1</a>.<a href="#35_1_2" title="35. For All Tests -&gt; 35.1. - improve test framework, so that... -&gt; 35.1.2. - give better status updates, so that the user knows...">2</a>. </span>- give better status updates, so that the user knows...</h3>
+			<div class="contents3">
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the user knows when a wait is happening</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the user knows what test is currently being performed</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the user can see the results as they come in</td></tr>
+				</table>
+			</div>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>have a non-animating progress bar that indicates how far along the user is through the tests</td></tr>
+			</table>
+		</div>
+	</div>
+	
+	<a name="36"></a>
+	<h1 class="heading1" title="36. New Examples to Create"><span class="headingNumber"><a href="#36" title="36. New Examples to Create">36</a>. </span>New Examples to Create</h1>
+	<div class="contents1">
+		<a name="36_1"></a>
+		<h2 class="heading2" title="36. New Examples to Create -&gt; 36.1. Uize"><span class="headingNumber"><a href="#36" title="36. New Examples to Create">36</a>.<a href="#36_1" title="36. New Examples to Create -&gt; 36.1. Uize">1</a>. </span>Uize</h2>
+		<div class="contents2">
+			<a name="36_1_1"></a>
+			<h3 class="heading3" title="36. New Examples to Create -&gt; 36.1. Uize -&gt; 36.1.1. - Changed.* event"><span class="headingNumber"><a href="#36" title="36. New Examples to Create">36</a>.<a href="#36_1" title="36. New Examples to Create -&gt; 36.1. Uize">1</a>.<a href="#36_1_1" title="36. New Examples to Create -&gt; 36.1. Uize -&gt; 36.1.1. - Changed.* event">1</a>. </span>- Changed.* event</h3>
+			<div class="contents3">
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>an example that demonstrates the Changed.* event</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>a widget that updates a lot of set-get properties during user interaction</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>a log pane that fills with notifications of set-get properties changed during user interaction</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>possibly a listing (to the right of the widget) of all the widget's set-get properties, with the most recently changed properties highlighted in red and bolded</td></tr>
+				</table>
+			</div>
+		</div>
+		
+		<a name="36_2"></a>
+		<h2 class="heading2" title="36. New Examples to Create -&gt; 36.2. - Color Gradients"><span class="headingNumber"><a href="#36" title="36. New Examples to Create">36</a>.<a href="#36_2" title="36. New Examples to Create -&gt; 36.2. - Color Gradients">2</a>. </span>- Color Gradients</h2>
+		<div class="contents2">
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>demonstrates use of Uize.Fx.fadeStyleAcrossNodes</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>demonstrates use of different curve functions for different color components</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>should have ability to select color for both ends of gradient</td></tr>
+			</table>
+		</div>
+		
+		<a name="36_3"></a>
+		<h2 class="heading2" title="36. New Examples to Create -&gt; 36.3. Uize.Color.xUtil"><span class="headingNumber"><a href="#36" title="36. New Examples to Create">36</a>.<a href="#36_3" title="36. New Examples to Create -&gt; 36.3. Uize.Color.xUtil">3</a>. </span>Uize.Color.xUtil</h2>
+		<div class="contents2">
+			<a name="36_3_1"></a>
+			<h3 class="heading3" title="36. New Examples to Create -&gt; 36.3. Uize.Color.xUtil -&gt; 36.3.1. - Color Theme Transformation"><span class="headingNumber"><a href="#36" title="36. New Examples to Create">36</a>.<a href="#36_3" title="36. New Examples to Create -&gt; 36.3. Uize.Color.xUtil">3</a>.<a href="#36_3_1" title="36. New Examples to Create -&gt; 36.3. Uize.Color.xUtil -&gt; 36.3.1. - Color Theme Transformation">1</a>. </span>- Color Theme Transformation</h3>
+			<div class="contents3">
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>an example that takes a set of colors and provides various controls for transforming the colors in the color theme</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>a live preview of the theme is updated in realtime as the theme is transformed</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>a variety of preset color themes as starting points</td></tr>
+				</table>
+				<a name="36_3_1_1"></a>
+				<h4 class="heading4" title="36. New Examples to Create -&gt; 36.3. Uize.Color.xUtil -&gt; 36.3.1. - Color Theme Transformation -&gt; 36.3.1.1. - ability to..."><span class="headingNumber"><a href="#36" title="36. New Examples to Create">36</a>.<a href="#36_3" title="36. New Examples to Create -&gt; 36.3. Uize.Color.xUtil">3</a>.<a href="#36_3_1" title="36. New Examples to Create -&gt; 36.3. Uize.Color.xUtil -&gt; 36.3.1. - Color Theme Transformation">1</a>.<a href="#36_3_1_1" title="36. New Examples to Create -&gt; 36.3. Uize.Color.xUtil -&gt; 36.3.1. - Color Theme Transformation -&gt; 36.3.1.1. - ability to...">1</a>. </span>- ability to...</h4>
+				<div class="contents4">
+					<a name="36_3_1_1_1"></a>
+					<h5 class="heading5" title="36. New Examples to Create -&gt; 36.3. Uize.Color.xUtil -&gt; 36.3.1. - Color Theme Transformation -&gt; 36.3.1.1. - ability to... -&gt; 36.3.1.1.1. - change hue"><span class="headingNumber"><a href="#36" title="36. New Examples to Create">36</a>.<a href="#36_3" title="36. New Examples to Create -&gt; 36.3. Uize.Color.xUtil">3</a>.<a href="#36_3_1" title="36. New Examples to Create -&gt; 36.3. Uize.Color.xUtil -&gt; 36.3.1. - Color Theme Transformation">1</a>.<a href="#36_3_1_1" title="36. New Examples to Create -&gt; 36.3. Uize.Color.xUtil -&gt; 36.3.1. - Color Theme Transformation -&gt; 36.3.1.1. - ability to...">1</a>.<a href="#36_3_1_1_1" title="36. New Examples to Create -&gt; 36.3. Uize.Color.xUtil -&gt; 36.3.1. - Color Theme Transformation -&gt; 36.3.1.1. - ability to... -&gt; 36.3.1.1.1. - change hue">1</a>. </span>- change hue</h5>
+					<div class="contents5">
+						<table class="list">
+						<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>reduce range</td></tr>
+						<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>shift (with shift mode = "wrap", "constrain", "align")</td></tr>
+						</table>
+					</div>
+					
+					<a name="36_3_1_1_2"></a>
+					<h5 class="heading5" title="36. New Examples to Create -&gt; 36.3. Uize.Color.xUtil -&gt; 36.3.1. - Color Theme Transformation -&gt; 36.3.1.1. - ability to... -&gt; 36.3.1.1.2. - change saturation"><span class="headingNumber"><a href="#36" title="36. New Examples to Create">36</a>.<a href="#36_3" title="36. New Examples to Create -&gt; 36.3. Uize.Color.xUtil">3</a>.<a href="#36_3_1" title="36. New Examples to Create -&gt; 36.3. Uize.Color.xUtil -&gt; 36.3.1. - Color Theme Transformation">1</a>.<a href="#36_3_1_1" title="36. New Examples to Create -&gt; 36.3. Uize.Color.xUtil -&gt; 36.3.1. - Color Theme Transformation -&gt; 36.3.1.1. - ability to...">1</a>.<a href="#36_3_1_1_2" title="36. New Examples to Create -&gt; 36.3. Uize.Color.xUtil -&gt; 36.3.1. - Color Theme Transformation -&gt; 36.3.1.1. - ability to... -&gt; 36.3.1.1.2. - change saturation">2</a>. </span>- change saturation</h5>
+					<div class="contents5">
+						<table class="list">
+						<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>reduce range</td></tr>
+						<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>shift (with shift mode = "wrap", "constrain", "align")</td></tr>
+						</table>
+					</div>
+					
+					<a name="36_3_1_1_3"></a>
+					<h5 class="heading5" title="36. New Examples to Create -&gt; 36.3. Uize.Color.xUtil -&gt; 36.3.1. - Color Theme Transformation -&gt; 36.3.1.1. - ability to... -&gt; 36.3.1.1.3. - change lightness"><span class="headingNumber"><a href="#36" title="36. New Examples to Create">36</a>.<a href="#36_3" title="36. New Examples to Create -&gt; 36.3. Uize.Color.xUtil">3</a>.<a href="#36_3_1" title="36. New Examples to Create -&gt; 36.3. Uize.Color.xUtil -&gt; 36.3.1. - Color Theme Transformation">1</a>.<a href="#36_3_1_1" title="36. New Examples to Create -&gt; 36.3. Uize.Color.xUtil -&gt; 36.3.1. - Color Theme Transformation -&gt; 36.3.1.1. - ability to...">1</a>.<a href="#36_3_1_1_3" title="36. New Examples to Create -&gt; 36.3. Uize.Color.xUtil -&gt; 36.3.1. - Color Theme Transformation -&gt; 36.3.1.1. - ability to... -&gt; 36.3.1.1.3. - change lightness">3</a>. </span>- change lightness</h5>
+					<div class="contents5">
+						<table class="list">
+						<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>reduce range</td></tr>
+						<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>shift (with shift mode = "wrap", "constrain", "align")</td></tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<a name="36_4"></a>
+		<h2 class="heading2" title="36. New Examples to Create -&gt; 36.4. Uize.Data.Csv"><span class="headingNumber"><a href="#36" title="36. New Examples to Create">36</a>.<a href="#36_4" title="36. New Examples to Create -&gt; 36.4. Uize.Data.Csv">4</a>. </span>Uize.Data.Csv</h2>
+		<div class="contents2">
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>CSV-to-JSON / JSON-to-CSV converter</td></tr>
+			</table>
+		</div>
+		
+		<a name="36_5"></a>
+		<h2 class="heading2" title="36. New Examples to Create -&gt; 36.5. Uize.Fade.xFactory"><span class="headingNumber"><a href="#36" title="36. New Examples to Create">36</a>.<a href="#36_5" title="36. New Examples to Create -&gt; 36.5. Uize.Fade.xFactory">5</a>. </span>Uize.Fade.xFactory</h2>
+		<div class="contents2">
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>an example that illustrates animating the opening of a popup browser window for displaying help topics</td></tr>
+			</table>
+			<a name="36_5_1"></a>
+			<h3 class="heading3" title="36. New Examples to Create -&gt; 36.5. Uize.Fade.xFactory -&gt; 36.5.1. - an example that illustrates animating the positioning of the browser window"><span class="headingNumber"><a href="#36" title="36. New Examples to Create">36</a>.<a href="#36_5" title="36. New Examples to Create -&gt; 36.5. Uize.Fade.xFactory">5</a>.<a href="#36_5_1" title="36. New Examples to Create -&gt; 36.5. Uize.Fade.xFactory -&gt; 36.5.1. - an example that illustrates animating the positioning of the browser window">1</a>. </span>- an example that illustrates animating the positioning of the browser window</h3>
+			<div class="contents3">
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>top left, top center, top right</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>center left, center center, center right</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>bottom left, bottom center, bottom right</td></tr>
+				</table>
+			</div>
+		</div>
+		
+		<a name="36_6"></a>
+		<h2 class="heading2" title="36. New Examples to Create -&gt; 36.6. Uize.Fx.fadeStyle"><span class="headingNumber"><a href="#36" title="36. New Examples to Create">36</a>.<a href="#36_6" title="36. New Examples to Create -&gt; 36.6. Uize.Fx.fadeStyle">6</a>. </span>Uize.Fx.fadeStyle</h2>
+		<div class="contents2">
+			<a name="36_6_1"></a>
+			<h3 class="heading3" title="36. New Examples to Create -&gt; 36.6. Uize.Fx.fadeStyle -&gt; 36.6.1. - an example that demonstrates fading of many different CSS style properties"><span class="headingNumber"><a href="#36" title="36. New Examples to Create">36</a>.<a href="#36_6" title="36. New Examples to Create -&gt; 36.6. Uize.Fx.fadeStyle">6</a>.<a href="#36_6_1" title="36. New Examples to Create -&gt; 36.6. Uize.Fx.fadeStyle -&gt; 36.6.1. - an example that demonstrates fading of many different CSS style properties">1</a>. </span>- an example that demonstrates fading of many different CSS style properties</h3>
+			<div class="contents3">
+				<a name="36_6_1_1"></a>
+				<h4 class="heading4" title="36. New Examples to Create -&gt; 36.6. Uize.Fx.fadeStyle -&gt; 36.6.1. - an example that demonstrates fading of many different CSS style properties -&gt; 36.6.1.1. - layout..."><span class="headingNumber"><a href="#36" title="36. New Examples to Create">36</a>.<a href="#36_6" title="36. New Examples to Create -&gt; 36.6. Uize.Fx.fadeStyle">6</a>.<a href="#36_6_1" title="36. New Examples to Create -&gt; 36.6. Uize.Fx.fadeStyle -&gt; 36.6.1. - an example that demonstrates fading of many different CSS style properties">1</a>.<a href="#36_6_1_1" title="36. New Examples to Create -&gt; 36.6. Uize.Fx.fadeStyle -&gt; 36.6.1. - an example that demonstrates fading of many different CSS style properties -&gt; 36.6.1.1. - layout...">1</a>. </span>- layout...</h4>
+				<div class="contents4">
+					<table class="list">
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>left side has playground area</td></tr>
+					</table>
+					<a name="36_6_1_1_1"></a>
+					<h5 class="heading5" title="36. New Examples to Create -&gt; 36.6. Uize.Fx.fadeStyle -&gt; 36.6.1. - an example that demonstrates fading of many different CSS style properties -&gt; 36.6.1.1. - layout... -&gt; 36.6.1.1.1. - right side has vertically scrolling list of fade operations, below which is..."><span class="headingNumber"><a href="#36" title="36. New Examples to Create">36</a>.<a href="#36_6" title="36. New Examples to Create -&gt; 36.6. Uize.Fx.fadeStyle">6</a>.<a href="#36_6_1" title="36. New Examples to Create -&gt; 36.6. Uize.Fx.fadeStyle -&gt; 36.6.1. - an example that demonstrates fading of many different CSS style properties">1</a>.<a href="#36_6_1_1" title="36. New Examples to Create -&gt; 36.6. Uize.Fx.fadeStyle -&gt; 36.6.1. - an example that demonstrates fading of many different CSS style properties -&gt; 36.6.1.1. - layout...">1</a>.<a href="#36_6_1_1_1" title="36. New Examples to Create -&gt; 36.6. Uize.Fx.fadeStyle -&gt; 36.6.1. - an example that demonstrates fading of many different CSS style properties -&gt; 36.6.1.1. - layout... -&gt; 36.6.1.1.1. - right side has vertically scrolling list of fade operations, below which is...">1</a>. </span>- right side has vertically scrolling list of fade operations, below which is...</h5>
+					<div class="contents5">
+						<table class="list">
+						<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>a text field where selected operation is editable</td></tr>
+						<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>a button for performing the current edited operation</td></tr>
+						</table>
+					</div>
+				</div>
+				
+				<a name="36_6_1_2"></a>
+				<h4 class="heading4" title="36. New Examples to Create -&gt; 36.6. Uize.Fx.fadeStyle -&gt; 36.6.1. - an example that demonstrates fading of many different CSS style properties -&gt; 36.6.1.2. - stuff to demo"><span class="headingNumber"><a href="#36" title="36. New Examples to Create">36</a>.<a href="#36_6" title="36. New Examples to Create -&gt; 36.6. Uize.Fx.fadeStyle">6</a>.<a href="#36_6_1" title="36. New Examples to Create -&gt; 36.6. Uize.Fx.fadeStyle -&gt; 36.6.1. - an example that demonstrates fading of many different CSS style properties">1</a>.<a href="#36_6_1_2" title="36. New Examples to Create -&gt; 36.6. Uize.Fx.fadeStyle -&gt; 36.6.1. - an example that demonstrates fading of many different CSS style properties -&gt; 36.6.1.2. - stuff to demo">2</a>. </span>- stuff to demo</h4>
+				<div class="contents4">
+					<table class="list">
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>moving an object</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>fading an object's size</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>fading position and size</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>fading position and size and properties</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>I'm feeling lucky (where many properties are randomized)</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>a reset</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>fading an object's font-size</td></tr>
+					</table>
+				</div>
+			</div>
+		</div>
+		
+		<a name="36_7"></a>
+		<h2 class="heading2" title="36. New Examples to Create -&gt; 36.7. Uize.Widget.Collection"><span class="headingNumber"><a href="#36" title="36. New Examples to Create">36</a>.<a href="#36_7" title="36. New Examples to Create -&gt; 36.7. Uize.Widget.Collection">7</a>. </span>Uize.Widget.Collection</h2>
+		<div class="contents2">
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>movie queue sorter (ala Netflix)</td></tr>
+			</table>
+		</div>
+		
+		<a name="36_8"></a>
+		<h2 class="heading2" title="36. New Examples to Create -&gt; 36.8. Uize.Widget.Dialog.Iframe"><span class="headingNumber"><a href="#36" title="36. New Examples to Create">36</a>.<a href="#36_8" title="36. New Examples to Create -&gt; 36.8. Uize.Widget.Dialog.Iframe">8</a>. </span>Uize.Widget.Dialog.Iframe</h2>
+		<div class="contents2">
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>a demo that loads an example into a resizable iframe dialog</td></tr>
+			</table>
+		</div>
+		
+		<p>Uize.Widget.EggTimer</p>
+		
+		<a name="36_9"></a>
+		<h2 class="heading2" title="36. New Examples to Create -&gt; 36.9. Uize.Widget.FormElement"><span class="headingNumber"><a href="#36" title="36. New Examples to Create">36</a>.<a href="#36_9" title="36. New Examples to Create -&gt; 36.9. Uize.Widget.FormElement">9</a>. </span>Uize.Widget.FormElement</h2>
+		<div class="contents2">
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>a vanilla widget that has a bunch of Uize.Widget.FormElement instances as child widgets</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>a checkbox for changing the enabled state of the form widget</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>a checkbox for changing the busy state of the form widget</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>spans / divs alongside form elements for displaying current value</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>hook into Changed.value event for each element to update display of current value</td></tr>
+			</table>
+			<a name="36_9_1"></a>
+			<h3 class="heading3" title="36. New Examples to Create -&gt; 36.9. Uize.Widget.FormElement -&gt; 36.9.1. - form elements"><span class="headingNumber"><a href="#36" title="36. New Examples to Create">36</a>.<a href="#36_9" title="36. New Examples to Create -&gt; 36.9. Uize.Widget.FormElement">9</a>.<a href="#36_9_1" title="36. New Examples to Create -&gt; 36.9. Uize.Widget.FormElement -&gt; 36.9.1. - form elements">1</a>. </span>- form elements</h3>
+			<div class="contents3">
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>text input</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>checkbox</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>radio buttons</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>select (single)</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>select (multiple)</td></tr>
+				</table>
+			</div>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>all form element nodes to have labels (for radio buttons, a label per radio)</td></tr>
+			</table>
+		</div>
+		
+		<a name="36_10"></a>
+		<h2 class="heading2" title="36. New Examples to Create -&gt; 36.10. Uize.Widget.Options"><span class="headingNumber"><a href="#36" title="36. New Examples to Create">36</a>.<a href="#36_10" title="36. New Examples to Create -&gt; 36.10. Uize.Widget.Options">10</a>. </span>Uize.Widget.Options</h2>
+		<div class="contents2">
+			<a name="36_10_1"></a>
+			<h3 class="heading3" title="36. New Examples to Create -&gt; 36.10. Uize.Widget.Options -&gt; 36.10.1. - dynamic options, with more elaborate HTML"><span class="headingNumber"><a href="#36" title="36. New Examples to Create">36</a>.<a href="#36_10" title="36. New Examples to Create -&gt; 36.10. Uize.Widget.Options">10</a>.<a href="#36_10_1" title="36. New Examples to Create -&gt; 36.10. Uize.Widget.Options -&gt; 36.10.1. - dynamic options, with more elaborate HTML">1</a>. </span>- dynamic options, with more elaborate HTML</h3>
+			<div class="contents3">
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>image selector UI, where each selector has thumbnail, title, rating</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>values uses object form</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>displayName property (rather than name) is used in JST template for displaying title</td></tr>
+				</table>
+			</div>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>example with animating arrow pointing to selected option, with elastic motion</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>possible trail of ghosted arrows, delayed behind main arrow</td></tr>
+			</table>
+		</div>
+		
+		<p>Uize.Widget.Stretchy</p>
+		
+		<a name="36_11"></a>
+		<h2 class="heading2" title="36. New Examples to Create -&gt; 36.11. Uize.Widget.Scrolly"><span class="headingNumber"><a href="#36" title="36. New Examples to Create">36</a>.<a href="#36_11" title="36. New Examples to Create -&gt; 36.11. Uize.Widget.Scrolly">11</a>. </span>Uize.Widget.Scrolly</h2>
+		<div class="contents2">
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>new demo to show how scrolly could be used simply to scroll a regular block of HTML (a div with scrollbar)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>a scrolly combined with an options widget for pagination</td></tr>
+			</table>
+		</div>
+		
+		<p>Uize.Widget.Options.Accordion</p>
+		
+		<a name="36_12"></a>
+		<h2 class="heading2" title="36. New Examples to Create -&gt; 36.12. Uize.Node.injectHtml"><span class="headingNumber"><a href="#36" title="36. New Examples to Create">36</a>.<a href="#36_12" title="36. New Examples to Create -&gt; 36.12. Uize.Node.injectHtml">12</a>. </span>Uize.Node.injectHtml</h2>
+		<div class="contents2">
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>migrate existing test from functionality test and add explanation</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>create interactive example that lets you add things in different places</td></tr>
+			</table>
+		</div>
+		
+		<a name="36_13"></a>
+		<h2 class="heading2" title="36. New Examples to Create -&gt; 36.13. Uize.Widget"><span class="headingNumber"><a href="#36" title="36. New Examples to Create">36</a>.<a href="#36_13" title="36. New Examples to Create -&gt; 36.13. Uize.Widget">13</a>. </span>Uize.Widget</h2>
+		<div class="contents2">
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Declarative Syntax for Properties</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>mouserest Virtual Event</td></tr>
+			</table>
+		</div>
+		
+		<p>Uize.Widget.Committer</p>
+		
+		<a name="36_14"></a>
+		<h2 class="heading2" title="36. New Examples to Create -&gt; 36.14. Uize.Widget.Page"><span class="headingNumber"><a href="#36" title="36. New Examples to Create">36</a>.<a href="#36_14" title="36. New Examples to Create -&gt; 36.14. Uize.Widget.Page">14</a>. </span>Uize.Widget.Page</h2>
+		<div class="contents2">
+			<a name="36_14_1"></a>
+			<h3 class="heading3" title="36. New Examples to Create -&gt; 36.14. Uize.Widget.Page -&gt; 36.14.1. Widget Adoption by Page Widget"><span class="headingNumber"><a href="#36" title="36. New Examples to Create">36</a>.<a href="#36_14" title="36. New Examples to Create -&gt; 36.14. Uize.Widget.Page">14</a>.<a href="#36_14_1" title="36. New Examples to Create -&gt; 36.14. Uize.Widget.Page -&gt; 36.14.1. Widget Adoption by Page Widget">1</a>. </span>Widget Adoption by Page Widget</h3>
+			<div class="contents3">
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>declarative syntax for page's child widgets</td></tr>
+				</table>
+			</div>
+		</div>
+		
+		<a name="36_15"></a>
+		<h2 class="heading2" title="36. New Examples to Create -&gt; 36.15. Uize.Widget.TableSort"><span class="headingNumber"><a href="#36" title="36. New Examples to Create">36</a>.<a href="#36_15" title="36. New Examples to Create -&gt; 36.15. Uize.Widget.TableSort">15</a>. </span>Uize.Widget.TableSort</h2>
+		<div class="contents2">
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>example showing how multiple table are made sortable with a single spawning declarative</td></tr>
+			</table>
+		</div>
+		
+		<p>Uize.Tooltip</p>
+		
+		<p>Uize.Widget.Options.Popup</p>
+		
+		<p>Uize.Widget.Committer</p>
+		
+		<a name="36_16"></a>
+		<h2 class="heading2" title="36. New Examples to Create -&gt; 36.16. Form Validation"><span class="headingNumber"><a href="#36" title="36. New Examples to Create">36</a>.<a href="#36_16" title="36. New Examples to Create -&gt; 36.16. Form Validation">16</a>. </span>Form Validation</h2>
+		<div class="contents2">
+			<p>Uize.Validator</p>
+			
+			<p>Uize.Widget.FormElement</p>
+		</div>
+		
+		<p>Uize.Comm.Ajax</p>
+		
+		<a name="36_17"></a>
+		<h2 class="heading2" title="36. New Examples to Create -&gt; 36.17. Uize.Widget.Tree.List"><span class="headingNumber"><a href="#36" title="36. New Examples to Create">36</a>.<a href="#36_17" title="36. New Examples to Create -&gt; 36.17. Uize.Widget.Tree.List">17</a>. </span>Uize.Widget.Tree.List</h2>
+		<div class="contents2">
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>example with different icon themes</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>example of tree generated from document</td></tr>
+			</table>
+		</div>
+		
+		<a name="36_18"></a>
+		<h2 class="heading2" title="36. New Examples to Create -&gt; 36.18. Transferring Form Field Values"><span class="headingNumber"><a href="#36" title="36. New Examples to Create">36</a>.<a href="#36_18" title="36. New Examples to Create -&gt; 36.18. Transferring Form Field Values">18</a>. </span>Transferring Form Field Values</h2>
+		<div class="contents2">
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>an example with two columns of identical form fields, a bunch of different types of form fields in each column, with a different form field per row</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>for each row, arrows exist between the two columns to transfer the values from one side to the other</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the example demonstrates how easy it is to tranfer a value from form field to another using the getNodeValue and setNodeValue methods, and also tests that there is parity between these two methods</td></tr>
+			</table>
+		</div>
+	</div>
+	
+	<a name="37"></a>
+	<h1 class="heading1" title="37. SIMPLE-based Presentation Tool"><span class="headingNumber"><a href="#37" title="37. SIMPLE-based Presentation Tool">37</a>. </span>SIMPLE-based Presentation Tool</h1>
+	<div class="contents1">
+		<table class="list">
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>lightweight, quick to create presentations</td></tr>
+		</table>
+	</div>
+	
+	<a name="38"></a>
+	<h1 class="heading1" title="38. Things to Add to Documentation"><span class="headingNumber"><a href="#38" title="38. Things to Add to Documentation">38</a>. </span>Things to Add to Documentation</h1>
+	<div class="contents1">
+		<table class="list">
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>trademark & copyright notices</td></tr>
+		</table>
+		<a name="38_1"></a>
+		<h2 class="heading2" title="38. Things to Add to Documentation -&gt; 38.1. - more endorsements"><span class="headingNumber"><a href="#38" title="38. Things to Add to Documentation">38</a>.<a href="#38_1" title="38. Things to Add to Documentation -&gt; 38.1. - more endorsements">1</a>. </span>- more endorsements</h2>
+		<div class="contents2">
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Tortoise SVN</td></tr>
+			</table>
+			<a name="38_1_1"></a>
+			<h3 class="heading3" title="38. Things to Add to Documentation -&gt; 38.1. - more endorsements -&gt; 38.1.1. - Firefox"><span class="headingNumber"><a href="#38" title="38. Things to Add to Documentation">38</a>.<a href="#38_1" title="38. Things to Add to Documentation -&gt; 38.1. - more endorsements">1</a>.<a href="#38_1_1" title="38. Things to Add to Documentation -&gt; 38.1. - more endorsements -&gt; 38.1.1. - Firefox">1</a>. </span>- Firefox</h3>
+			<div class="contents3">
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Tamper Data</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>DustMe Selectors</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>YSlow</td></tr>
+				</table>
+			</div>
+			
+			<a name="38_1_2"></a>
+			<h3 class="heading3" title="38. Things to Add to Documentation -&gt; 38.1. - more endorsements -&gt; 38.1.2. - for IE"><span class="headingNumber"><a href="#38" title="38. Things to Add to Documentation">38</a>.<a href="#38_1" title="38. Things to Add to Documentation -&gt; 38.1. - more endorsements">1</a>.<a href="#38_1_2" title="38. Things to Add to Documentation -&gt; 38.1. - more endorsements -&gt; 38.1.2. - for IE">2</a>. </span>- for IE</h3>
+			<div class="contents3">
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Fiddler</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>DevToolBar for IE</td></tr>
+				</table>
+			</div>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Windows Script Host</td></tr>
+			</table>
+		</div>
+	</div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

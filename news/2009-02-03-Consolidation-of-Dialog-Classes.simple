@@ -1,0 +1,26 @@
+The =Uize.Widget.Palette= class (and its subclasses) and the =Uize.Widget.Window= class (and its subclasses) have been consolidated into the new =Uize.Widget.Dialog= class (and subclasses).
+
+For a while now there have been two parallel worlds of dialog widgets: the =Uize.Widget.Palette= world and the =Uize.Widget.Window= world. The most heavily used in real world applications have been the =Uize.Widget.Palette= subclasses, however the more contemporary =Uize.Widget.Window= code supported drag-and-drop resizability. The consolidation brings the best of both these two worlds together into one new, more appropriately named =Uize.Widget.Dialog= class. As a result of this change, a number of widget classes have been remapped as shown below...
+
+DEPRECATED
+....................................................................................
+Uize.Widget.Window            >>  Uize.Widget.Dialog
+Uize.Widget.Window.Draggable  >>  Uize.Widget.Dialog
+Uize.Widget.Window.Resizable  >>  Uize.Widget.Dialog + Uize.Widget.Dialog.xResizable
+Uize.Widget.Palette           >>  Uize.Widget.Dialog
+Uize.Widget.Palette.Confirm   >>  Uize.Widget.Dialog.Confirm
+Uize.Widget.Palette.Form      >>  Uize.Widget.Dialog.Form
+Uize.Widget.Palette.Iframe    >>  Uize.Widget.Dialog.Iframe
+....................................................................................
+
+BACKWARDS COMPATIBILITY
+
+The old dialog classes have been deprecated in such a way that they should still continue to work (if currently in use in applications). Class alias modules have been left behind that map to the appropriate new =Uize.Widget.Dialog= subclasses. You can still use these alias modules, but using them will add additional links in the dependency chain - so it would be better to migrate your code away from using them at some point.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-02-03 - Consolidation of Dialog Classes
+....................................................................................

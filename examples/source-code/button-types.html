@@ -1,0 +1,183 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Button Types - HTML Source Code | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework HTML example source code"/>
+	<meta name="description" content="This is the source code for the Button Types example"/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../../css/page.css"/>
+	<link rel="stylesheet" href="../../css/page.source.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../../index.html" title="UIZE JavaScript Framework home"></a>
+	SOURCE CODE: Button Types
+	<div id="page-actions" class="pageActions">
+		<a href="../button-types.html" class="buttonLink">VIEW EXAMPLE</a>
+	</div>
+</h1>
+
+<pre>
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+&lt;head&gt;
+  &lt;title&gt;Button Types | JavaScript Examples | UIZE JavaScript Framework&lt;/title&gt;
+  &lt;meta name="keywords" content="Uize.Widget.Button"/&gt;
+  &lt;meta name="description" content="See a demonstration of different HTML implementations for the basic button widget. Play with the enabled, busy, and selected states of the buttons."/&gt;
+  &lt;link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/&gt;
+  &lt;link rel="stylesheet" href="../css/page.css"/&gt;
+  &lt;link rel="stylesheet" href="../css/page.example.css"/&gt;
+  &lt;style type="text/css"&gt;
+    /*** styles for frames type button ***/
+      .framesButton {
+        position:relative;
+        width:200px;
+        height:20px;
+        overflow:hidden;
+      }
+      .framesButtonFrame {
+        position:absolute;
+        left:0px;
+        top:0px;
+        text-align:center;
+        font-family:Arial;
+        font-size:16px;
+        font-weight:bold;
+        width:200px;
+        height:20px;
+        color:#444;
+        background:#abb;
+        border:none;
+      }
+      .framesButtonEvents {
+        width:200px;
+        height:20px;
+        border:none;
+        background:none;
+      }
+      .framesButtonGrayed {
+        color:#abb;
+        background:#bcc;
+      }
+      .framesButtonOver {
+        color:#222;
+        background:#bcc;
+      }
+      .framesButtonActive {
+        color:#000;
+        background:#fff;
+      }
+  &lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+&lt;script type="text/javascript" src="../js/Uize.js"&gt;&lt;/script&gt;
+
+&lt;h1 class="document-title"&gt;
+  &lt;a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"&gt;&lt;/a&gt;
+  &lt;a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow"&gt;JAVASCRIPT EXAMPLES&lt;/a&gt;
+  Button Types
+  &lt;div id="page-actions" class="pageActions"&gt;
+    &lt;a href="source-code/button-types.html" class="buttonLink"&gt;SOURCE&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/h1&gt;
+
+&lt;div class="main"&gt;
+  &lt;!-- frames type button --&gt;
+
+  &lt;div id="page_framesButton" class="framesButton"&gt;
+    &lt;div id="page_framesButton-frames" style="position:relative; left:0px; top:0px;"&gt;
+      &lt;div class="framesButtonFrame framesButtonGrayed" style="top:0px;"&gt;FRAMES BUTTON&lt;/div&gt;
+      &lt;div class="framesButtonFrame" style="top:20px;"&gt;FRAMES BUTTON&lt;/div&gt;
+      &lt;div class="framesButtonFrame framesButtonOver" style="top:40px;"&gt;FRAMES BUTTON&lt;/div&gt;
+      &lt;div class="framesButtonFrame framesButtonActive" style="top:60px;"&gt;FRAMES BUTTON&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;br/&gt;
+
+  &lt;!-- programmatic interface examples --&gt;
+
+  &lt;div class="programmaticInterface"&gt;
+    &lt;a href="javascript://" class="linkedJs" title="framesButton.set ({enabled:framesButton.get ('enabled') === false ? 'inherit' : false})"&gt;TOGGLE ENABLED&lt;/a&gt;
+    &amp;nbsp;|&amp;nbsp;
+    &lt;a href="javascript://" class="linkedJs" title="framesButton.set ({busy:framesButton.get ('busy') === true ? 'inherit' : true})"&gt;TOGGLE BUSY&lt;/a&gt;
+    &amp;nbsp;|&amp;nbsp;
+    &lt;a href="javascript://" class="linkedJs" title="framesButton.set ({selected:!framesButton.get ('selected')})"&gt;TOGGLE SELECTED&lt;/a&gt;
+  &lt;/div&gt;
+
+  &lt;!-- classes type button --&gt;
+
+  &lt;hr/&gt;
+
+  &lt;div id="page_classesButton" class="button" style="width:130px;"&gt;&lt;span id="page_classesButton-text"&gt;CLASSES BUTTON&lt;/span&gt;&lt;/div&gt;
+
+  &lt;br/&gt;
+
+  &lt;!-- programmatic interface examples --&gt;
+
+  &lt;div class="programmaticInterface"&gt;
+    &lt;a href="javascript://" class="linkedJs" title="classesButton.set ({enabled:classesButton.get ('enabled') === false ? 'inherit' : false})"&gt;TOGGLE ENABLED&lt;/a&gt;
+    &amp;nbsp;|&amp;nbsp;
+    &lt;a href="javascript://" class="linkedJs" title="classesButton.set ({busy:classesButton.get ('busy') === true ? 'inherit' : true})"&gt;TOGGLE BUSY&lt;/a&gt;
+    &amp;nbsp;|&amp;nbsp;
+    &lt;a href="javascript://" class="linkedJs" title="classesButton.set ({selected:!classesButton.get ('selected')})"&gt;TOGGLE SELECTED&lt;/a&gt;
+    &amp;nbsp;|&amp;nbsp;
+    &lt;a href="javascript://" class="linkedJs" title="classesButton.set ({text:'NEW BUTTON TEXT'})"&gt;CHANGE BUTTON TEXT&lt;/a&gt;
+  &lt;/div&gt;
+  &lt;br/&gt;
+&lt;/div&gt;
+
+&lt;!-- JavaScript code to make the HTML "come alive" --&gt;
+
+&lt;script type="text/javascript"&gt;
+
+Uize.module ({
+  required:[
+    'UizeDotCom.Page.Example.library',
+    'UizeDotCom.Page.Example',
+    'Uize.Widget.Button'
+  ],
+  builder:function () {
+    /*** create the example page widget ***/
+      var page = window.page = new UizeDotCom.Page.Example ({evaluator:function (code) {eval (code)}});
+
+    /*** create and wire up the Uize.Widget.Button instance for the frames type button ***/
+      var framesButton = page.addChild ('framesButton',Uize.Widget.Button);
+      framesButton.wire ('Click',function () {alert ('you clicked the frames button')});
+
+    /*** create and wire up the Uize.Widget.Button instance for the classes type button ***/
+      var classesButton = page.addChild ('classesButton',Uize.Widget.Button);
+      classesButton.wire ('Click',function () {alert ('you clicked the classes button')});
+
+    /*** wire up the page widget ***/
+      page.wireUi ();
+  }
+});
+
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+
+</pre>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.library',
+		'UizeDotCom.Page'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page).wireUi ()}
+});
+
+</script>
+
+</body></html>

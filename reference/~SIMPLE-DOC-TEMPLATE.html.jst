@@ -1,0 +1,43 @@
+<%@
+	required ('UizeDotCom.Templates.SimpleDoc');
+	input ({title:'string',description:'string',body:'string'});
+%><%
+	function getLinkedModuleName (moduleName) {
+		var
+			htmlChunks = [],
+			periodPrefix = '',
+			hostModuleName = '',
+			moduleNameSegment
+		;
+		for (
+			var
+				moduleNameSegmentNo = -1,
+				moduleNameSegments = moduleName.split ('.'),
+				moduleNameSegmentsLength = moduleNameSegments.length
+			;
+			++moduleNameSegmentNo < moduleNameSegmentsLength;
+		) {
+			hostModuleName += periodPrefix + (moduleNameSegment = moduleNameSegments [moduleNameSegmentNo]);
+			htmlChunks.push (periodPrefix + '<a href="' + hostModuleName + '.html" title="View reference for ' + hostModuleName + '" class="breadcrumb">' + moduleNameSegment + '</a>');
+			periodPrefix = '.';
+		}
+		return htmlChunks.join ('');
+	}
+%><%@ startBlock ('displayTitleHtml') %>
+	<a href="../javascript-modules-index.html" class="breadcrumb breadcrumbWithArrow">MODULES</a>
+	<%= getLinkedModuleName (input.title) %>
+	<div class="pageActions">
+		<a id="page-search" href="javascript://" class="buttonLink" title="Search for references to this module...">SEARCH</a><a id="page-examples" href="javascript://" class="buttonLink" title="View examples for this module...">EXAMPLES</a><a href="source-code/<% .title %>.html" class="buttonLink" title="View the JavaScript source code for this module...">SOURCE</a><a id="page-test" href="javascript://" class="buttonLink" title="Test this module...">TEST</a>
+	</div>
+<%@ endBlock () %><%=
+	UizeDotCom.Templates.SimpleDoc.process ({
+		title:input.title,
+		section:'Documentation',
+		description:input.description || 'This is reference documentation for the ' + input.title + ' module of the UIZE JavaScript Framework.',
+		extraMetaKeywords:input.title + ' module reference documentation',
+		pathToRoot:'../',
+		displayTitleHtml:displayTitleHtml (),
+		body:input.body
+	})
+%>
+

@@ -1,0 +1,9 @@
+The performance of the =Uize.Node.setClipRect= and =Uize.Node.setOpacity= static methods of the =Uize.Node= module have been improved.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-01-17 - PERFORMANCE IMPROVEMENTS: Uize.Node
+....................................................................................

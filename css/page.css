@@ -1,0 +1,491 @@
+/*** General ***/
+	/*** Common Properties ***/
+		body {
+			background:#728088;
+			margin:48px 0 0 0;
+			_margin-top:0; /* hack for IE6, because the title isn't fixed positioned for this browser */
+		}
+		.main {
+			width:780px;
+			min-height:490px;
+			padding:15px 14px;
+			margin:0 auto 0 auto;
+			background:#e0e3e9;
+			border-left:10px solid #fff;
+			border-right:10px solid #fff;
+		}
+		body, p, blockquote, td, ol {
+			color:#000;
+			font-family:Arial, Helvetica, Verdana;
+			font-size:13px;
+		}
+		ul li {
+			list-style-type:disc;
+		}
+		/*** links ***/
+			a, a:link, a:visited, a:hover, a:active {
+				text-decoration:none;
+				outline:none;
+				color:#830;
+				border-bottom:1px dotted #aaa;
+			}
+			a:hover, a:active {
+				color:#f00;
+			}
+			a:hover {
+				border-bottom:1px dotted #f00;
+			}
+			a:active {
+				border-bottom:1px solid #f00;
+			}
+			/*** special decoration for external site links ***/
+				a.externalSiteLink {
+					padding-right:13px;
+					margin-left:1px;
+					margin-right:2px;
+					background:url(../images/external-link.png) right top no-repeat;
+				}
+
+	/*** plain old links styled like buttons, and button widget ***/
+		a.buttonLink, a.buttonLink:link, a.buttonLink:visited,
+		.button, .button:link, .button:visited, .button:hover, .button:active
+		{
+			display:inline-block;
+			font-family:Arial;
+			font-size:12px;
+			letter-spacing:1px;
+			color:#044;
+			text-shadow:0 -1px 2px #fff;
+			background:#c4cdd4 url(../images/button-bg.gif) left top repeat-x;
+			text-align:center;
+			text-decoration:none;
+			padding:3px 7px;
+			padding-top:2px;
+			border:1px solid #000;
+			border-color:#eee #999 #999 #eee;
+		}
+		a.buttonLink:hover,
+		.buttonOver, .buttonOver:link, .buttonOver:visited, .buttonOver:hover, .buttonOver:active
+		{
+			color:#222;
+			text-shadow:0 -1px 2px #fff, 0 1px 2px #fff;
+			background-position:left -100px;
+			border-color:#889 #000 #334 #778;
+		}
+		a.buttonLink:active,
+		.buttonActive, .buttonActive:link, .buttonActive:visited, .buttonActive:hover, .buttonActive:active
+		{
+			color:#000;
+			text-shadow:0 -1px 2px #fff, 0 1px 2px #fff;
+			background-position:left -200px;
+			border-color:#bbb #000 #223 #999;
+		}
+		.buttonGrayed, .buttonGrayed:link, .buttonGrayed:visited, .buttonGrayed:hover, .buttonGrayed:active {
+			color:#abb;
+			background-position:left -300px;
+			border-color:#bcc;
+		}
+
+	code {
+		white-space:nowrap;
+		color:#830;
+		margin-left:2px;
+		margin-right:2px;
+	}
+
+	/*** form fields ***/
+		input[type="text"], textarea, select {
+			border:1px solid #555;
+			color:#000;
+			background:#fff;
+			padding:2px;
+		}
+		input[type="text"]:focus, textarea:focus, select:focus {
+			border:2px solid #ffa200;
+			padding:1px;
+		}
+
+	/*** tooltips ***/
+		.genericTooltip {
+			display:none;
+			font-size:11px;
+			color:#fff;
+			padding:1px 6px;
+			background:#000;
+			border:3px solid #333c44;
+			border-radius:8px;
+			-moz-border-radius:8px;
+			-webkit-border-radius:8px;
+			max-width:260px;
+			_width:260px; /* hack for IE6 (which doesn't support max-width) */
+		}
+
+	/*** features list ***/
+		.featuresList, .featuresList li {
+			padding-left:0;
+			margin-left:10px;
+		}
+		.featuresList li {
+			font-size:12px;
+			list-style-image:url(../images/icons/check-mark.gif);
+			padding-bottom:5px;
+		}
+
+/*** Document Components ***/
+	/*** document title bar ***/
+		.document-title {
+			display:block;
+			position:fixed;
+			_position:relative; /* hack for IE6, because the title isn't fixed positioned for this browser */
+			z-index:1; /* needed for FF, or some things in document display above title */
+			left:0;
+			top:0;
+			width:100%;
+			_width:auto; /* hack for IE6, because the z-index can't be overrided back to auto, and because the z-index seems to cause the homeLink icon to be overpainted */
+			font-family:Arial, Helvetica, Verdana;
+			font-size:16px;
+			letter-spacing:3px;
+			text-align:left;
+			color:#444;
+			font-weight:bold;
+			text-shadow:1px -1px 1px #eee, 1px 1px 1px #eee;
+			background:#b7babf url(../images/title-bg-shiny.gif) repeat left top;
+			padding:14px 8px 14px 60px;
+			margin:0;
+			border:none;
+			border-bottom:1px solid #777;
+		}
+		.document-title a:link, .document-title a:visited, .document-title a:hover, .document-title a:active {
+			color:#444;
+		}
+
+		/*** breadcrumb link ***/
+			.breadcrumb,
+			.breadcrumb:link,
+			.breadcrumb:visited
+			{
+				border:none;
+			}
+			.breadcrumb:hover {
+				border-bottom:1px dotted #000;
+			}
+			.breadcrumb:active {
+				border-bottom:1px solid #000;
+			}
+			.breadcrumbWithArrow {
+				background:transparent url(../images/icons/black-dotty-arrow-right.gif) no-repeat right 5px;
+				padding-right:14px;
+			}
+
+		/*** home link ***/
+			#page-homeLink,
+			#page-homeLink:link,
+			#page-homeLink:visited,
+			#page-homeLink:hover,
+			#page-homeLink:active,
+			.siteMenuIcon {
+				position:absolute;
+				display:block;
+				left:4px;
+				_left:-47px; /* hack for IE6, because its context for absolute positioning is the box excluding padding */
+				top:4px;
+				width:38px;
+				height:38px;
+				background:transparent url(../images/uize-logo-title-bar.gif) no-repeat left top;
+				border:none;
+			}
+
+		/*** page actions ***/
+			.document-title .pageActions {
+				position:absolute;
+				right:77px;
+				_right:7px; /* hack for IE6, because the title isn't fixed positioned for this browser */
+				top:10px;
+			}
+			.pageActions a.buttonLink,
+			.pageActions a.buttonLink:link,
+			.pageActions a.buttonLink:visited,
+			.pageActions a.buttonLink:hover,
+			.pageActions a.buttonLink:active {
+				font-size:11px;
+				padding:6px 9px;
+				background:none;
+			}
+
+	/*** preamble paragraph ***/
+		.preamble {
+			position:relative;
+			background:#c2c8ca url(../images/page-contents-bg.gif) repeat-x left top;
+			padding:15px;
+			margin:0 15px 25px 15px;
+			border:1px solid #899;
+			border-radius:10px;
+			-moz-border-radius:10px;
+			-webkit-border-radius:10px;
+		}
+
+	/*** footer ***/
+		.footer {
+			position:relative;
+			text-align:center;
+			padding-bottom:10px;
+			background:#becacd url(../images/page-contents-bg.gif) repeat-x left top;
+			border-bottom:5px solid #ddd;
+		}
+		.footer * {
+			font-size:11px;
+		}
+		.footer a {
+			border:none;
+		}
+		.footer .legalese {
+			font-size:13px;
+			margin-bottom:5px;
+			padding:5px 0;
+			border-top:1px solid #fff;
+			border-bottom:1px solid #999;
+			background:#b7babf url(../images/title-bg-brushed-metal.jpg) repeat left top;
+			text-shadow:0 -1px 1px #fff, 0 1px 1px #fff;
+		}
+		.footer span.label {
+			font-size:10px;
+			padding-right:5px;
+			text-transform:uppercase;
+		}
+
+/*** tree menu ***/
+	/*** menu ***/
+		.menuShell {
+			background:#afb6b8;
+			height:23px;
+		}
+		.menuShell .menuItem,
+		.menuShell .menuItem:link,
+		.menuShell .menuItem:visited,
+		.menuShell .menuItem:hover,
+		.menuShell .menuItem:active {
+			padding:2px 10px 2px 10px;
+			height:20px;
+			text-align:center;
+			font-family:Arial;
+			font-size:16px;
+			background:none;
+			border:none;
+			color:#000;
+			margin:0 1px;
+			float:left;
+			text-decoration:none;
+		}
+		.menuShell .menuItemActive,
+		.menuShell .menuItemActive:link,
+		.menuShell .menuItemActive:visited,
+		.menuShell .menuItemActive:hover,
+		.menuShell .menuItemActive:active {
+			color:#fff;
+			background-color:#456;
+		}
+		.menuShell .menuItemWithChildren,
+		.menuShell .menuItemWithChildren:link,
+		.menuShell .menuItemWithChildren:visited,
+		.menuShell .menuItemWithChildren:hover,
+		.menuShell .menuItemWithChildren:active {
+			padding-right:20px;
+			background-image:url(../js/Uize_Widget_Tree_List/arrows-black-expanded.gif);
+			background-attachment:scroll;
+			background-repeat:no-repeat;
+			background-position:95% 50%;
+		}
+		.menuShell .divider {
+			font-size:0;
+			float:left;
+			height:20px;
+			margin:2px 4px;
+			border-left:solid 1px #aaa;
+			border-right:solid 1px #333;
+		}
+
+	/*** submenu ***/
+		.subMenuShell {
+			display:none;
+			position:absolute;
+			padding:5px 0;
+			background:#c9cfd6 url(../images/tree-menu-bg.gif) repeat-x left top;
+			border:1px solid #dee;
+			border-right-color:#889094;
+			border-bottom-color:#889094;
+			box-shadow:0 0 20px rgba(0,0,0,.6);
+			-moz-box-shadow:0 0 20px rgba(0,0,0,.6);
+			-webkit-box-shadow:0 0 20px rgba(0,0,0,.6);
+			max-height:560px;
+			overflow:auto;
+		}
+		.subMenuShell .subMenuItem,
+		.subMenuShell .subMenuItem:link,
+		.subMenuShell .subMenuItem:visited,
+		.subMenuShell .subMenuItem:hover,
+		.subMenuShell .subMenuItem:active
+		{
+			display:block;
+			padding:2px 45px 3px 10px;
+			margin:0 1px; /* NOTE: need a margin around links, or focus highlight causes menu shell to have scrollbars */
+			font-family:Arial;
+			font-size:12px;
+			color:#000;
+			border:none;
+			text-decoration:none;
+		}
+		.subMenuShell .subMenuItemActive,
+		.subMenuShell .subMenuItemActive:link,
+		.subMenuShell .subMenuItemActive:visited,
+		.subMenuShell .subMenuItemActive:hover,
+		.subMenuShell .subMenuItemActive:active
+		{
+			color:#fff;
+			background-color:#788;
+		}
+		.subMenuShell .subMenuItemWithChildren,
+		.subMenuShell .subMenuItemWithChildren:link,
+		.subMenuShell .subMenuItemWithChildren:visited,
+		.subMenuShell .subMenuItemWithChildren:hover,
+		.subMenuShell .subMenuItemWithChildren:active {
+			background-image:url(../images/tree-menu-right-arrow.gif);
+			background-attachment:scroll;
+			background-repeat:no-repeat;
+			background-position:right center;
+		}
+		.subMenuShell .divider {
+			font-size:0;
+			line-height:0;
+			margin:4px 10px;
+			border-top:solid 2px #fff;
+			border-bottom:solid 2px #afbcc4;
+		}
+
+/*** site menu ***/
+	.siteMenuShell {
+		position:absolute;
+		left:0;
+		top:0;
+		width:100%;
+		height:100%;
+	}
+	.siteMenuShell .siteMenuItem,
+	.siteMenuShell .siteMenuItem:link,
+	.siteMenuShell .siteMenuItem:visited,
+	.siteMenuShell .siteMenuItem:hover,
+	.siteMenuShell .siteMenuItem:active {
+		position:absolute;
+		width:100%;
+		height:100%;
+		border:none;
+	}
+
+/*** share this panel ***/
+	.shareThisPanel {
+		position:fixed;
+		left:-112px;
+		top:82px;
+		width:130px;
+		background:#dde0e5 url(../images/pod-bg-brushed-metal.jpg) repeat left top;
+		border-right:1px solid #fff;
+		border-top:1px solid #eff;
+		box-shadow:0 0 25px #000;
+		-moz-box-shadow:0 0 25px #000;
+		-webkit-box-shadow:0 0 25px #000;
+		border-radius:10px;
+		-moz-border-radius:10px;
+		-webkit-border-radius:10px;
+		z-index:1;
+		opacity:.01;
+		filter:alpha(opacity=1);
+	}
+	.shareThisPanel .shareThisHeading, .shareThisPanel .shareThisFooter {
+		font-size:10px;
+		font-weight:bold;
+		color:#000;
+		text-shadow:1px 1px 0 #bcd;
+		text-transform:uppercase;
+		padding:3px 3px;
+		height:14px;
+	}
+	.shareThisLink, .shareThisLink:link, .shareThisLink:visited, .shareThisLink:hover, .shareThisLink:active {
+		display:block;
+		border:none;
+		padding:2px 22px 2px 3px;
+		color:#123;
+		text-shadow:1px 1px 0 #eee;
+		font-size:11px;
+		white-space:nowrap;
+		background:transparent url(../images/blank.gif) no-repeat 113px center;
+		border-bottom:1px solid #abb;
+		border-top:1px solid #fff;
+	}
+	.shareThisLink:hover, .shareThisLink:active {
+		color:#fff;
+		text-shadow:1px 1px 0 #000;
+		background-color:#456;
+	}
+	.shareThisPanel .email {
+		background-image:url(../images/icons/email.png);
+	}
+	.shareThisPanel .facebook {
+		background-image:url(../images/icons/facebook.png);
+	}
+	.shareThisPanel .twitter {
+		background-image:url(../images/icons/twitter.png);
+	}
+	.shareThisPanel .stumbleUpon {
+		background-image:url(../images/icons/stumbleupon.png);
+	}
+	.shareThisPanel .delicious {
+		background-image:url(../images/icons/del.icio.us.png);
+	}
+	.shareThisPanel .digg {
+		background-image:url(../images/icons/digg.png);
+	}
+	.shareThisPanel .reddit {
+		background-image:url(../images/icons/reddit.png);
+	}
+	.shareThisPanel .friendFeed {
+		background-image:url(../images/icons/friendfeed.png);
+	}
+	.shareThisPanel .mySpace {
+		background-image:url(../images/icons/myspace.png);
+	}
+	.shareThisPanel .google {
+		background-image:url(../images/icons/google.png);
+	}
+	.shareThisPanel .linkedIn {
+		background-image:url(../images/icons/linkedin.png);
+	}
+	.shareThisPanel .mixx {
+		background-image:url(../images/icons/mixx.png);
+	}
+	.shareThisPanel .technorati {
+		background-image:url(../images/icons/technorati.png);
+	}
+	.shareThisPanel .posterous {
+		background-image:url(../images/icons/posterous.png);
+	}
+	.shareThisPanel .plurk {
+		background-image:url(../images/icons/plurk.png);
+	}
+	.shareThisPanel .pingFm {
+		background-image:url(../images/icons/pingfm.png);
+	}
+	.shareThisPanel .diigo {
+		background-image:url(../images/icons/diigo.gif);
+	}
+	.shareThisPanel .faves {
+		background-image:url(../images/icons/faves.png);
+	}
+	.shareThisPanel .misterWong {
+		background-image:url(../images/icons/mister-wong.gif);
+	}
+	.shareThisPanel .dzone {
+		background-image:url(../images/icons/dzone.gif);
+	}
+	.shareThisPanel .connotea {
+		background-image:url(../images/icons/connotea.gif);
+	}
+

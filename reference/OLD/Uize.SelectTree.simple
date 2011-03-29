@@ -1,0 +1,109 @@
+### Introduction
+	Features
+		[must to document]
+
+Set-get Properties
+	chooseText
+		A string, specifying the text that should be displayed as the first option in a =Uize.SelectTree= instance's select boxes.
+
+		NOTES
+		- if the value of this property is modified after the select boxes have already been populated, the select boxes will not be updated to reflect the new value until the next time the =items= property is modified and the select boxes are re-populated
+
+	idPrefix
+		A string, specifying the ID prefix of the HTML Nodes that belong to the =Uize.SelectTree= instance's UI.
+
+	items
+		An array of objects, specifying the options of the first level of a =Uize.SelectTree= instance's hierarchical list.
+		
+		Each object in the =items= array should have a =title= property and an optional =items= property. The optional =items= property should have the same structure as the top-level =items= property, thereby allowing you to nest deeper levels of selection and define arbitrarily complex hierarchical tree structures. Consider the following simple example...
+		
+		EXAMPLE
+		......................................................
+		MySelectTree.set ({
+			items:[
+				{
+					title:'Pets',
+					items:[
+						{
+							title:'Dogs',
+							items:[
+								{
+									title:'Small Breeds',
+									items:[
+										{title:'West Highland White'},
+										{title:'Miniature Chihuahua'},
+										{title:'Teacup Poodle'}
+									]
+								},
+								{
+									title:'Large Breeds',
+									items:[
+										{title:'Great Dane'},
+										{title:'Irish Wolfhound'},
+										{title:'St. Bernard'}
+									]
+								}
+							]
+						},
+						{
+							title:'Cats',
+							items:[
+								{title:'Persian'},
+								{title:'Siamese'},
+								{title:'Hairless'}
+							]
+						}
+					]
+				},
+				{
+					title:'Wild Animals',
+					items:[
+						{
+							title:'Dogs',
+							items:[
+								{title:'Coyote'},
+								{title:'Dingo'}
+							]
+						},
+						{
+							title:'Cats',
+							items:[
+								{title:'Bobcat'},
+								{title:'Lynx'},
+								{title:'Mountain Lion'}
+							]
+						}
+					]
+				}
+			];
+		});
+		......................................................
+
+	maxLevels
+		[must to document]
+
+UI Nodes
+	level[N]
+		[must to document]
+
+	submitButton
+		[must to document]
+
+Instance Methods
+	getNode
+		[must to document]
+
+	wireUi
+		[must to document]
+
+Static Methods
+	Uize.TreeSelect.wireUi
+		[must to document]
+
+Instance Events
+	Selection Complete
+		[must to document]
+
+	Selection Incomplete
+		[must to document]
+

@@ -1,0 +1,19 @@
+Reference documentation has been added for the =Uize.Widget.CollectionItem= widget class.
+
+The =Uize.Widget.CollectionItem= module defines the =Uize.Widget.CollectionItem= widget class, a subclass of =Uize.Widget= that implements and manages the user interface for an item in a collection and is intended to be used in conjunction with the =Uize.Widget.Collection= class (or subclass).
+
+Some examples of collection items would be...
+
+- search results in a search results grid
+- movies in a queue of pending movie rentals
+- books in a list of book recommendations, in order of ratings score
+
+[[Uize.Widget.CollectionItem][LEARN MORE]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-07-30 - NEW DOCUMENTATION: Uize.Widget.CollectionItem
+....................................................................................

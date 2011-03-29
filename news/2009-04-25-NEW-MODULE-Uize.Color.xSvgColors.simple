@@ -1,0 +1,16 @@
+The new =Uize.Color.xSvgColors= extension module extends the =Uize.Color= object by defining the over one hundred named colors that are defined in the SVG 1.0 / CSS Color Module Level 3 specifications.
+
+Once this module is loaded, all the named colors defined by it can be used wherever color values can be specified in the methods of the =Uize.Color= object, and other modules that use this object for resolving color values.
+
+EXAMPLE
+.............................................................................
+Uize.Fx.fadeStyle ('myNodeId',{color:'darkmagenta'},{color:'lavenderblush'});
+.............................................................................
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-04-25 - NEW MODULE: Uize.Color.xSvgColors
+....................................................................................

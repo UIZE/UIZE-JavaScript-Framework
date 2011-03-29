@@ -1,0 +1,643 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Overview Of Features | Documentation | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework Documentation "/>
+	<meta name="description" content="This document provides an overview of the comprehensive feature set of the UIZE JavaScript Framework, with examples and links to further explainers."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../javascript-explainers.html" class="breadcrumb breadcrumbWithArrow">EXPLAINERS</a>
+	Overview Of Features
+
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="This document provides an overview of the comprehensive feature set of the UIZE JavaScript Framework, with examples and links to further explainers.">1. Introduction</a></li>
+			<li><a href="#2" title="The UIZE JavaScript Framework implements a system for class inheritance that makes subclassing and object-oriented programming possible in JavaScript.">2. Inheritance and Object Orientation</a></li>
+			<li><a href="#3" title="The UIZE JavaScript framework implements systems to facilitate modular programming, such as dependency resolution, dynamic module loading, and more.">3. Modules and Dependency Resolution</a></li>
+			<li><a href="#4" title="The UIZE JavaScript Framework implements a system to facilitate a state-oriented approach to software design.">4. State Interface</a></li>
+			<li><a href="#5" title="The JavaScript language does not provide a built-in system for event-driven programming, so the UIZE JavaScript Framework provides an event system.">5. Event Infrastructure</a></li>
+			<li><a href="#6" title="The UIZE JavaScript Framework provides features to enable Web applications to more easily perform asynchronous communication with a Web server, a technique that is often referred to broadly as Ajax.">6. Ajax / Asynchronous Communication</a></li>
+			<li><a href="#7" title="While a design goal of the UIZE JavaScript Framework is to support multiple different host environments that support the JavaScript language, a key application of the framework is to facilitate the development of Rich Internet Applications that run with a web browser as the host environment for client-side functionality.">7. DOM Manipulation</a></li>
+			<li><a href="#8" title="A number of compatibility issues arise when developing applications that must run on a variety of different Web browsers.">8. Cross-compatibility and Browser Abstraction</a></li>
+			<li><a href="#9" title="The UIZE JavaScript Framework provides a system to facilitate the development of behavioral logic for widgets that can be embedded in HTML pages.">9. Widgets Framework</a></li>
+			<li><a href="#10" title="The UIZE JavaScript Framework offers its fair share of features that can be &quot;stitched on&quot; to a page&apos;s markup, without the page&apos;s knowledge or deliberate consent.">10. Progressive Enhancement / Unobtrusive JavaScript</a></li>
+			<li><a href="#11" title="The UIZE JavaScript Framework provides facilities (in Uize.Widget) to ease i18n (internationalization) and L10n (localization) of JavaScript code.">11. Internationalization and Localization</a></li>
+			<li><a href="#12" title="The UIZE JavaScript Framework implements a system for templating that allows the JavaScript language to be leveraged within templates, such templates being referred to as JavaScript templates.">12. JavaScript Templates</a></li>
+			<li><a href="#13" title="The UIZE JavaScript Framework provides powerful features to support slick animation effects, with easing, bounce, elasticity, pulsing, and much more.">13. Effects and Animation</a></li>
+			<li><a href="#14" title="The UIZE JavaScript Framework implements a system for building HTML from documentation that is written in a Wikitext like format called Simple Doc.">14. Documentation System</a></li>
+			<li><a href="#15" title="The UIZE JavaScript Framework provides a system for scrunching (minifying) JavaScript code - primarily to reduce its size, but also to obfuscate it.">15. Code Compression</a></li>
+			<li><a href="#16" title="The UIZE JavaScript Framework provides a system for developing build scripts that can be run by Windows Scripting Host, for automating build tasks.">16. Build Scripts</a></li>
+			<li><a href="#17">17. More Features</a>
+				<ul>
+					<li><a href="#17_1" title="The UIZE JavaScript Framework provides functionality for serializing data to the JSON format, and deserializing from the JSON format.">17.1. Working with JSON</a></li>
+					<li><a href="#17_2" title="The UIZE JavaScript Framework provides utility methods for working with strings in the Uize.String module.">17.2. Working with Strings</a></li>
+					<li><a href="#17_3" title="The UIZE JavaScript Framework provides utility methods for working with URLs in the Uize.Url module.">17.3. Working with URLs</a></li>
+					<li><a href="#17_4" title="The UIZE JavaScript Framework provides utility methods for working with dates in the Uize.Date module.">17.4. Working with Dates</a></li>
+					<li><a href="#17_5" title="The UIZE JavaScript Framework provides a comprehensive framework for working with colors, with support for color spaces, a wide variety of color encodings, a framework for named colors, extension modules that define additional color spaces and named colors, and extensions that provide utilities for manipulating colors.">17.5. Working with Colors</a></li>
+					<li><a href="#17_6" title="The UIZE JavaScript Framework provides utility methods for working with various types of data structures in the Uize.Data module.">17.6. Working with Data Structures</a></li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<a name="1"></a>
+	<h1 class="heading1" title="1. Introduction"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>. </span>Introduction</h1>
+	<div class="contents1">
+		<p>This document provides an overview of the comprehensive feature set of the UIZE JavaScript Framework, with examples and links to further explainers.</p>
+	</div>
+	
+	<a name="2"></a>
+	<h1 class="heading1" title="2. Inheritance and Object Orientation"><span class="headingNumber"><a href="#2" title="2. Inheritance and Object Orientation">2</a>. </span>Inheritance and Object Orientation</h1>
+	<div class="contents1">
+		<p>The UIZE JavaScript Framework implements a system for class inheritance that makes subclassing and object-oriented programming possible in JavaScript.</p>
+		
+		<p>Subclassing is very easy in the UIZE JavaScript Framework. Creating a fresh subclass is as simple as the following statement...</p>
+		
+		
+<pre class="sample-code">var MySubclass = MySuperclass.subclass ();
+</pre>
+		
+		<p>Once you have a subclass, you can modify it by assigning values on its <code>prototype</code> object, adding static methods or properties to the subclass, and registering set-get properties or overriding the initial values of inherited set-get properties. Each class that you create using the framework inherits the <code>subclass</code> static method, so you can easily make further subclasses of them.</p>
+		
+		<p>The <code><a href="../reference/Uize.html">Uize</a></code> base class provides a mechanism for inheriting instance methods and properties assigned on a superclass' prototype, set-get properties registered on the superclass using the <code>registerProperties</code> static method, and static methods and properties assigned on the superclass. The inheritance system that is implemented in the <code><a href="../reference/Uize.html">Uize</a></code> base class overcomes some of the weaknesses of a superficial prototype-based approach to inheritance. As part of the foundation for developing <code><a href="../reference/Uize.html">Uize</a></code> subclasses, the <code><a href="../reference/Uize.html">Uize</a></code> base class also provides its subclasses with a set of useful static and instance utility methods and properties.</p>
+		
+		<p>For a more in-depth discussion on class inheritance, consult the explainer <a href="javascript-inheritance.html">JavaScript Inheritance</a>.</p>
+	</div>
+	
+	<a name="3"></a>
+	<h1 class="heading1" title="3. Modules and Dependency Resolution"><span class="headingNumber"><a href="#3" title="3. Modules and Dependency Resolution">3</a>. </span>Modules and Dependency Resolution</h1>
+	<div class="contents1">
+		<p>The UIZE JavaScript framework implements systems to facilitate <a href="http://www.wikipedia.org/modular_programming" target="_blank" class="externalSiteLink">modular programming</a>, such as dependency resolution, dynamic module loading, and more.</p>
+		
+		<p>Modules of functionality are divided up into JavaScript modules, each of which is declared by calling the <code>Uize.module</code> static method. This method allows the programmer to declare the name of the module, dependencies for the module, an optional superclass for class modules, and a builder function that is to be executed once all declared dependencies are resolved. The framework implements a system for dynamically loading required modules and resolving all of a module's dependencies before building the module.</p>
+		
+		<p>The following example illustrates an outline of a widget class module declaration, where the module name is in a different namespace from the superclass.</p>
+		
+		<p><span class="allCaps">EXAMPLE</span></p>
+		
+		
+<pre class="sample-code">Uize.module ({
+  name:'MyNamespace.MyWidgetClass',
+  superclass:'Uize.Widget',
+  required:['Uize.Node','Uize.Color'],
+  builder:function (_superclass) {
+    // code here to build subclass module and return a reference to it
+  }
+});
+</pre>
+		
+		<p>In the above example, the package modules <code><a href="../reference/Uize.Node.html">Uize.Node</a></code> and <code><a href="../reference/Uize.Color.html">Uize.Color</a></code> (explicit dependencies) and the namespace module <code>MyNamespace</code> and class module <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> (implicit dependencies) must be loaded and built before the <code>MyNamespace.MyWidgetClass</code> module can be built. The properties of a module declaration make it possible to implement a number of different types of modules, including subclass modules, package modules, extension modules, anonymous modules, namespace modules, and alias modules.</p>
+		
+		<p>For a more in-depth discussion of modules, see the explainer <a href="javascript-modules.html">JavaScript Modules</a>.</p>
+	</div>
+	
+	<a name="4"></a>
+	<h1 class="heading1" title="4. State Interface"><span class="headingNumber"><a href="#4" title="4. State Interface">4</a>. </span>State Interface</h1>
+	<div class="contents1">
+		<p>The UIZE JavaScript Framework implements a system to facilitate a state-oriented approach to software design.</p>
+		
+		<p>The state interface is provided in the form of the set-get properties system, so named because state is changed by means of the generic <code>set</code> instance and static methods, and state is queried by means of the generic <code>get</code> instance and static methods. While methods exist in many classes to modify state, an emphasis is placed on using the set-get properties system as the primary means for modifying state of instances. The framework encourages thinking of state as passive data, rather than active in the form of setter and getter methods.</p>
+		
+		<p>Features of the set-get properties system allow for registering properties, defining conformer functions to ensure values are conformed during setting in order to be kept valid, defining change handler functions to respond to changes in values, and registering listeners on the change events that are fired when values change.</p>
+		
+		<p><span class="allCaps">EXAMPLE</span></p>
+		
+		
+<pre class="sample-code">var MyClass = Uize.subclass ();
+
+function _updateArea () {this.set ({area:this._width * this._height})}
+function _preventNegatives (_value) {return _value &gt; 0 ? _value : 0}
+
+MyClass.registerProperties ({
+  _area:'area',
+  _height:{
+    name:'height',
+    value:10,
+    conformer:_preventNegatives,
+    onChange:_updateArea
+  },
+  _width:{
+    name:'width',
+    value:10,
+    conformer:_preventNegatives,
+    onChange:_updateArea
+  }
+});
+
+var myClassInstance1 = new MyClass;
+alert (myClassInstance1.get ('area'); // alerts 100 (width and height are defaulted to 10)
+
+var myClassInstance2 = new MyClass ({width:100,height:-50});
+alert (myClassInstance2.get ('area'); // alerts 0 (negative height is conformed to 0)
+
+var myClassInstance3 = new MyClass ({width:5,height:5});
+alert (myClassInstance3.get ('area'); // alerts 25 (explicit values set in constructor)
+
+var myClassInstance4 = new MyClass ({width:5});
+myClassInstance4.set ({height:5});
+alert (myClassInstance4.get ('area'); // alerts 25 (width set in constructor, height after)
+</pre>
+		
+		<p>In the above example, a subclass called <code>MyClass</code> is created. The <code>registerProperties</code> static method is called on this class to register the three set-get properties <code>area</code>, <code>height</code>, and <code>width</code>. A conformer is defined for both the <code>height</code> and <code>width</code> properties that ensures that values cannot be set below zero. Moreover, a change handler is registered for both <code>height</code> and <code>width</code> that updates the value of the <code>area</code> property to be the product of the two. A few different instances of <code>MyClass</code> are created, illustrating how the set-get properties mechanism behaves under different conditions.</p>
+		
+		<p>For a more in-depth discussion on set-get properties, consult the explainer <a href="set-get-properties.html">Set-get Properties</a>.</p>
+	</div>
+	
+	<a name="5"></a>
+	<h1 class="heading1" title="5. Event Infrastructure"><span class="headingNumber"><a href="#5" title="5. Event Infrastructure">5</a>. </span>Event Infrastructure</h1>
+	<div class="contents1">
+		<p>The JavaScript language does not provide a built-in system for event-driven programming, so the UIZE JavaScript Framework provides an event system.</p>
+		
+		<p>Such events can be dispatched (or "fired") from anywhere in the code in an ad hoc fashion, and listenable events do not need to be registered formally. Multiple handlers can be registered for the same event. Handlers can be registered for events that are never fired, without ill effects. Conversely, events can be dispatched that are never listened for, without ill effects.</p>
+		
+		<p><span class="allCaps">EXAMPLE</span></p>
+		
+		
+<pre class="sample-code">var myWidget = new Uize.Widget;
+myWidget.wire (
+  'My Arbitrary Event',
+  function (event) {alert (event.message)}
+);
+myWidget.fire ({name:'My Arbitrary Event',message:'Hello, world!'});
+</pre>
+		
+		<p>In the above example, an instance of the <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> class is created, a handler is registered on an arbitrarily named event (<code>'My Arbitrary Event'</code>), and then the <code>fire</code> instance method is called on the widget in order to fire that event. The event object contains an additional <code>message</code> property, whose value is alerted in the handler that was registered for the event.</p>
+		
+		<p>The event system implemented by the UIZE JavaScript Framework is orthogonal to the event model of Web browsers that is provided as part of the standardized Document Object Model, and can be used outside of the context of Web browsers and other host environments for the JavaScript language that may implement their own proprietary event systems. As an example of this, the framework's event system can be utilized within Windows Script Host by scripts that use the <code><a href="../reference/Uize.html">Uize</a></code> base class.</p>
+		
+		<p>The <code><a href="../reference/Uize.html">Uize</a></code> base class provides a convenient infrastructure for supporting both static and instance events. Events can conveniently be fired for a class or an instance of a class, and methods are provided to every class that subclasses the <code><a href="../reference/Uize.html">Uize</a></code> class to allow code to manage the registering and unregistering of event handlers for static and instance events. This provides all <code><a href="../reference/Uize.html">Uize</a></code> subclasses with a consistent event model.</p>
+		
+		<p>For a more in-depth discussion on events, consult the explainer <a href="javascript-event-system.html">JavaScript Event System</a>.</p>
+	</div>
+	
+	<a name="6"></a>
+	<h1 class="heading1" title="6. Ajax / Asynchronous Communication"><span class="headingNumber"><a href="#6" title="6. Ajax / Asynchronous Communication">6</a>. </span>Ajax / Asynchronous Communication</h1>
+	<div class="contents1">
+		<p>The UIZE JavaScript Framework provides features to enable Web applications to more easily perform asynchronous communication with a Web server, a technique that is often referred to broadly as <a href="http://www.wikipedia.org/Ajax_(programming)" target="_blank" class="externalSiteLink">Ajax</a>.</p>
+		
+		<p>The <code><a href="../reference/Uize.Comm.html">Uize.Comm</a></code> base class provides a foundation for supporting asynchronous communication regardless of the mechanism employed, which could be a hidden <code>iframe</code>, the <code><a href="../javascript-reference/XMLHttpRequest.html">XMLHttpRequest</a></code> object, or script tags (see <a href="http://www.wikipedia.org/AJAST_(Programming)" target="_blank" class="externalSiteLink">AJAST</a>). This base class provides a caching mechanism for requests, a queueing mechanism in order to sequence successive asynchronous requests through a single communication object, and a standard interface for issuing requests. Various subclasses of the <code><a href="../reference/Uize.Comm.html">Uize.Comm</a></code> base class implement support for different communication mechanisms.</p>
+		
+		<p><span class="allCaps">EXAMPLE</span></p>
+		
+		
+<pre class="sample-code">(new Uize.Comm.Ajax).request ({
+  url:[
+    '/service/search',
+    {
+      productFilter:'movies',
+      genre:'comedy',
+      sort:'popular',
+      results:100
+    }
+  ],
+  returnType:'json',
+  callback:function (searchResults) {
+    // do something with the search results
+  }
+});
+</pre>
+		
+		<p>In the above example, an instance of the <code><a href="../reference/Uize.Comm.Ajax.html">Uize.Comm.Ajax</a></code> class is created and immediately used to perform an asynchronous request to a hypothetical search service using the <code><a href="../javascript-reference/XMLHttpRequest.html">XMLHttpRequest</a></code> object. The anonymous function specified for the callback property is executed once the request has successfully executed, and the result from the server is passed as a parameter to the callback function as a JSON object.</p>
+		
+		<p>For a more in-depth discussion of AJAX programming, consult the reference for the <code><a href="../reference/Uize.Comm.html">Uize.Comm</a></code> base class.</p>
+	</div>
+	
+	<a name="7"></a>
+	<h1 class="heading1" title="7. DOM Manipulation"><span class="headingNumber"><a href="#7" title="7. DOM Manipulation">7</a>. </span>DOM Manipulation</h1>
+	<div class="contents1">
+		<p>While a design goal of the UIZE JavaScript Framework is to support multiple different host environments that support the JavaScript language, a key application of the framework is to facilitate the development of Rich Internet Applications that run with a web browser as the host environment for client-side functionality.</p>
+		
+		<p>As such, there exist a number of modules designed specifically to assist with inspection of and manipulation of a Web page's Document Object Model. Among other things, these modules provide static methods for: iterating across a range HTML elements and performing operations on each, finding a set of HTML elements by means of a match expression, getting and setting Cascading Style Sheet (CSS) style properties, insertion of HTML markup, management of DOM event listeners, and querying and modifying coordinates.</p>
+		
+		<p><span class="allCaps">EXAMPLE</span></p>
+		
+		
+<pre class="sample-code">Uize.Node.setStyle (
+  ['myNode1','myNode2','myNode3'],
+  {
+    width:'100px',
+    height:'20px',
+    backgroundColor:'#000',
+    fontFamily:'Times'
+  }
+);
+</pre>
+		
+		<p>The above example demonstrates how the <code>Uize.Node.setStyle</code> static method of the <code><a href="../reference/Uize.Node.html">Uize.Node</a></code> module is used to set the <code>width</code>, <code>height</code>, <code>backgroundColor</code>, and <code>fontFamily</code> CSS style properties for the three nodes with the ids "myNode1", "myNode2", and "myNode3".</p>
+		
+		<p>For a more in-depth discussion of DOM manipulation, consult the reference for the <code><a href="../reference/Uize.Node.html">Uize.Node</a></code> module.</p>
+	</div>
+	
+	<a name="8"></a>
+	<h1 class="heading1" title="8. Cross-compatibility and Browser Abstraction"><span class="headingNumber"><a href="#8" title="8. Cross-compatibility and Browser Abstraction">8</a>. </span>Cross-compatibility and Browser Abstraction</h1>
+	<div class="contents1">
+		<p>A number of compatibility issues arise when developing applications that must run on a variety of different Web browsers.</p>
+		
+		<p>The UIZE JavaScript Framework implements some abstractions to help with cross-browser development, such as abstracting the differences between how DOM events are implemented, or how opacity is supported in CSS. Most of these abstractions are implemented in the <code><a href="../reference/Uize.Node.html">Uize.Node</a></code> module.</p>
+		
+		<p><span class="allCaps">EXAMPLE</span></p>
+		
+		
+<pre class="sample-code">Uize.Node.wire ('myNode','click',function () {alert ('You clicked me')});
+</pre>
+		
+		<p>The above example shows how the <code>Uize.Node.wire</code> static method of the <code><a href="../reference/Uize.Node.html">Uize.Node</a></code> module is used to wire a handler function to the <code>click</code> event of a DOM node with the id "myNode". The <code>Uize.Node.wire</code> method abstracts differences between the event systems of different browsers so that application developers don't need to conditionalize their code.</p>
+	</div>
+	
+	<a name="9"></a>
+	<h1 class="heading1" title="9. Widgets Framework"><span class="headingNumber"><a href="#9" title="9. Widgets Framework">9</a>. </span>Widgets Framework</h1>
+	<div class="contents1">
+		<p>The UIZE JavaScript Framework provides a system to facilitate the development of behavioral logic for widgets that can be embedded in HTML pages.</p>
+		
+		<p>Functionality that can be inherited by widget classes is implemented in the <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> base class. The framework's widget system allows widgets to be arranged in a hierarchical tree structure, where each widget can have one parent widget and any number of child widgets. In this relationship, parent widgets can provide services to child widgets on their tree, and child widgets can inherit state from widgets higher up in the parent chain.</p>
+		
+		<p>Examples of widgets include: buttons, sliders for selecting continuous values, progress bars, calendar / date pickers, color pickers, sortable collections, tabbed interfaces, modal dialogs, slide shows, data table sorters, tree list controls, and hierarchical menus.</p>
+		
+		<p>For a more in-depth discussion of UIZE's widget framework, consult the explainer <a href="javascript-widgets.html">JavaScript Widgets</a>.</p>
+	</div>
+	
+	<a name="10"></a>
+	<h1 class="heading1" title="10. Progressive Enhancement / Unobtrusive JavaScript"><span class="headingNumber"><a href="#10" title="10. Progressive Enhancement / Unobtrusive JavaScript">10</a>. </span>Progressive Enhancement / Unobtrusive JavaScript</h1>
+	<div class="contents1">
+		<p>The UIZE JavaScript Framework offers its fair share of features that can be "stitched on" to a page's markup, without the page's knowledge or deliberate consent.</p>
+		
+		<p>In the world of Web application development, there is a legitimate place for features that are implemented through the technique of <b>progressive enhancement</b> (sometimes referred to as unobtrusive JavaScript, or graceful degradation). Making tables sortable is a great example of how one can "stitch on" an enhanced user experience, without requiring much cooperation from the application development side of things. Other examples of progressive enhancement features provided in the framework are the lightweight image preview user interaction provided by the <code><a href="../reference/Uize.Widget.ThumbZoom.html">Uize.Widget.ThumbZoom</a></code> widget class, and the ability of the <code><a href="../reference/Uize.Widget.Tree.Menu.html">Uize.Widget.Tree.Menu</a></code> widget (and other subclasses of the <code><a href="../reference/Uize.Widget.Tree.html">Uize.Widget.Tree</a></code> base class) to extract a hierarchical tree data structure from nested lists.</p>
+	</div>
+	
+	<a name="11"></a>
+	<h1 class="heading1" title="11. Internationalization and Localization"><span class="headingNumber"><a href="#11" title="11. Internationalization and Localization">11</a>. </span>Internationalization and Localization</h1>
+	<div class="contents1">
+		<p>The UIZE JavaScript Framework provides facilities (in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>) to ease <a href="http://en.wikipedia.org/wiki/I18n" target="_blank" class="externalSiteLink">i18n</a> (internationalization) and <a href="http://en.wikipedia.org/wiki/I18n" target="_blank" class="externalSiteLink">L10n</a> (localization) of JavaScript code.</p>
+		
+		<p>The <code>localized</code> set-get property allows an arbitrary number of localized string templates to be specified in an object hash, and these string templates are then available to the widget and all its child widgets. The <code>localize</code> instance method allows a string template to be retrieved and will process the string, as necessary, to replace substitution tokens with dynamic data.</p>
+		
+		<p><span class="allCaps">EXAMPLE</span></p>
+		
+		
+<pre class="sample-code">myWidget = new Uize.Widget ({
+  localized:{welcomeMessage:'Welcome, {firstName} of {state}, {country}'}
+});
+alert (
+  myWidget.localize (
+    'welcomeMessage',
+    {firstName:'Chris',state:'California',country:'USA'}
+  )
+);
+</pre>
+		
+		<p>In the above example, an instance of the <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> class is created, specifying a <code>localized</code> hash that contains just one localized string template named <code>welcomeMessage</code>. This string contains the substitution tokens <code>{firstName}</code>, <code>{state}</code>, and <code>{country}</code>. The <code>localize</code> instance method is called on the widget instance, with parameters specifying the name of the localized string to retrieve and dynamic data that should be substituted into its tokens. The result is then displayed to the user with the <code>alert</code> statement. Typically, localization will occur inside the implementation for a widget class, so this example is purely for illustrating the syntax.</p>
+		
+		<p><b>TIP</b>: To aid in internationalizing legacy code, a script is provided that can be run in Windows Script Host and that will recurse through the folders of a Web site project in order to compile a report of all the string literals contained inside JavaScript files, using a heuristic algorithm to bucket them according to their likelihood of being internationalizable strings (see <a href="javascript-build-scripts.html">JavaScript Build Scripts</a>).</p>
+		
+		<p>For a more in-depth discussion of internationalization and localization, consult the explainer <a href="javascript-localization.html">JavaScript Localization</a>.</p>
+	</div>
+	
+	<a name="12"></a>
+	<h1 class="heading1" title="12. JavaScript Templates"><span class="headingNumber"><a href="#12" title="12. JavaScript Templates">12</a>. </span>JavaScript Templates</h1>
+	<div class="contents1">
+		<p>The UIZE JavaScript Framework implements a system for templating that allows the JavaScript language to be leveraged within templates, such templates being referred to as JavaScript templates.</p>
+		
+		<p>This system allows for the use of programmatic logic and JavaScript control structures within a template for the purpose of rendering a result document. The template engine is implemented in the <code><a href="../reference/Uize.Template.html">Uize.Template</a></code> module, which provides a means for compiling a source template into a more performant JavaScript function. Once compiled into JavaScript functions, JavaScript templates can be used to generate text output for a variety of purposes, including, for example, the generation of HTML markup for widgets, the generation of complete HTML documents as part of a Web project build process, and the generation of RSS documents from a data source.</p>
+		
+		<p><span class="allCaps">EXAMPLE</span></p>
+		
+		
+<pre class="sample-code">var helloWorldTemplate = Uize.Template.compile (
+  '&lt;% for (var i = 0; i &lt; input.repeats; i++) { %&gt;' +
+  '&lt;p&gt;&lt;% .message %&gt;&lt;/p&gt;\n' +
+  '&lt;% } %&gt;'
+);
+
+var myTemplateOutput = helloWorldTemplate ({repeats:5,message:'Hello World !'});
+
+/* myTemplateOutput will now have the value...
+
+&lt;p&gt;Hello World !&lt;/p&gt;
+&lt;p&gt;Hello World !&lt;/p&gt;
+&lt;p&gt;Hello World !&lt;/p&gt;
+&lt;p&gt;Hello World !&lt;/p&gt;
+&lt;p&gt;Hello World !&lt;/p&gt;
+
+*/
+</pre>
+		
+		<p>In the above example, a JavaScript template in a string literal is being compiled to a JavaScript function, and then that function is being called with input data that is supplied to the template function. The result is assigned to a variable.</p>
+		
+		<p>In practice, JavaScript templates are contained inside separate files with the extension <code>.jst</code> in order that the template source not be subject to a further level of escaping within JavaScript string literals. JavaScript template files can be compiled into JavaScript modules with the use of JavaScript build scripts, and such modules can then be required as dependencies and treated as regular JavaScript modules. Alternatively, JavaScript template source can be embedded in non-visible elements of a Web page, such as a hidden <code>textarea</code> tag or a <code>script</code> tag with a mime type of <code>text/jst</code>, and then retrieved and compiled by client code when the document loads.</p>
+		
+		<p>For a more in-depth discussion, consult the explainer <a href="javascript-templates.html">JavaScript Templates</a>.</p>
+	</div>
+	
+	<a name="13"></a>
+	<h1 class="heading1" title="13. Effects and Animation"><span class="headingNumber"><a href="#13" title="13. Effects and Animation">13</a>. </span>Effects and Animation</h1>
+	<div class="contents1">
+		<p>The UIZE JavaScript Framework provides powerful features to support slick animation effects, with easing, bounce, elasticity, pulsing, and much more.</p>
+		
+		<p>Effects and animation in the UIZE JavaScript Framework are achieved through use of a suite of associated modules. The <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> module provides the underpinnings of time-based animation and compound value interpolation, the <code><a href="../reference/Uize.Fade.xFactory.html">Uize.Fade.xFactory</a></code> extension module extends the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> class with factory methods for creating, starting, and managing fades in a fade pool, and the <code><a href="../reference/Uize.Fx.html">Uize.Fx</a></code> module provides static methods for initiating fades of CSS style properties.</p>
+		
+		<p><span class="allCaps">EXAMPLE</span></p>
+		
+		
+<pre class="sample-code">// fade from thin border/thick padding to thick border/thin padding over 1/4 second
+Uize.Fx.fadeStyle ('myNode',{borderWidth:1,padding:20},{borderWidth:20,padding:1},250);
+
+// fade from current colors to white text on black background over two seconds
+Uize.Fx.fadeStyle ('myNode',null,{color:'#fff',backgroundColor:'#000'},2000);
+
+// fade font size from 30px back to current size over a half second
+Uize.Fx.fadeStyle ('myNode',{fontSize:30},null,500);
+</pre>
+		
+		<p>To add some pizazz to animations, the UIZE JavaScript Framework provides the <code><a href="../reference/Uize.Curve.html">Uize.Curve</a></code>, <code><a href="../reference/Uize.Curve.Mod.html">Uize.Curve.Mod</a></code>, and <code><a href="../reference/Uize.Curve.Rubber.html">Uize.Curve.Rubber</a></code> modules that let you stray from the bland world of linear animations and into an exotic world of animations driven by arbitrary curve functions, with built-in support for easing curves as well as curves that emulate the complex properties of motion, letting you achieve effects like bounce, springiness, wobble, elasticity, etc. Beyond the built-ins, you have the freedom to roll your own curve functions in order to achieve some of the craziest motion effects you could imagine.</p>
+		
+		<p>For a more in-depth discussion, consult the explainer <a href="javascript-animation-and-effects.html">JavaScript Animation and Effects</a>.</p>
+	</div>
+	
+	<a name="14"></a>
+	<h1 class="heading1" title="14. Documentation System"><span class="headingNumber"><a href="#14" title="14. Documentation System">14</a>. </span>Documentation System</h1>
+	<div class="contents1">
+		<p>The UIZE JavaScript Framework implements a system for building HTML from documentation that is written in a Wikitext like format called Simple Doc.</p>
+		
+		<p>Document structure in this format is controlled through indentation, much like program structure can be governed by indentation in the <a href="http://www.wikipedia.org/Python_(programming_language)" target="_blank" class="externalSiteLink">Python programming language</a>. A documentation builder script is provided that can run in Windows Script Host. This build script can recurse through all the folders of a Web site project, building HTML files from all Simple Doc files it finds, and extracting Simple Doc formatted documentation from specially flagged comments inside JavaScript module files and synthesizing these Simple Doc fragments together into Simple Doc documents for conversion into HTML documentation files.</p>
+		
+		<p>The following example shows the documentation for the <code>to</code> instance method of the <code><a href="../reference/Uize.Color.html">Uize.Color</a></code> module. Notice how the documentation comment is indicated with the question mark immediately following the comment begin characters <code>/*</code>.</p>
+		
+		<p><span class="allCaps">EXAMPLE</span></p>
+		
+		
+<pre class="sample-code">/*?
+  Instance Methods
+    to
+      Returns the current color of the instance, encoded to the specified format.
+
+      SYNTAX
+      .........................................
+      encodedColor = colorOBJ.to (encodingSTR);
+      .........................................
+
+      The =encodingSTR= parameter supports a wide variety of different `Color Encodings`.
+
+      EXAMPLES
+      .............................................................................
+      var fuchsia = new Uize.Color ('fuchsia');
+      fuchsia.to ('color');       // produces a new Uize.Color object
+      fuchsia.to ('hex');         // produces 'ff00ff'
+      fuchsia.to ('#hex');        // produces '#ff00ff'
+      fuchsia.to ('name');        // produces 'fuchsia'
+      fuchsia.to ('RGB array');   // produces [255,0,255]
+      fuchsia.to ('RGB int');     // produces 16711935
+      fuchsia.to ('RGB object');  // produces {red:255,green:0,blue:255}
+      fuchsia.to ('RGB string');  // produces 'rgb(255,0,255)'
+      fuchsia.to ('HSL array');   // produces [300,100,50]
+      fuchsia.to ('HSL object');  // produces {hue:300,saturation:100,lightness:50}
+      fuchsia.to ('HSL string');  // produces 'hsl(300,100,50)'
+      .............................................................................
+
+      NOTES
+      - see the related =Uize.Color.to= static method
+*/
+</pre>
+		
+		<p>For a more in-depth discussion of this documentation system, consult the explainer <a href="javascript-documentation-system.html">JavaScript Documentation System</a>.</p>
+	</div>
+	
+	<a name="15"></a>
+	<h1 class="heading1" title="15. Code Compression"><span class="headingNumber"><a href="#15" title="15. Code Compression">15</a>. </span>Code Compression</h1>
+	<div class="contents1">
+		<p>The UIZE JavaScript Framework provides a system for scrunching (minifying) JavaScript code - primarily to reduce its size, but also to obfuscate it.</p>
+		
+		<p>While the network bandwidth that is used to transfer JavaScript code to the client can be reduced in order to reduce transfer time through the use of HTTP compression methods such as gzip, further code size reduction as well as a degree of code obfuscation can be achieved with the use of the Scruncher, a code minification utility that is provided as part of the UIZE JavaScript Framework. This utility can be accessed for individual use through a Web page interface, but can be more conveniently utilized as part of a build script that recurses through the folders of a Web site project and generates compressed and obfuscated code from all the JavaScript files it encounters.</p>
+		
+		<p>Among the operations that are performed by the Scruncher are:</p>
+		
+		<table class="list">
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>remove unnecessary whitespace, such as line indentation, unnecessary whitespace between tokens, and linebreaks</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>remove comments, including documentation comments</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>rename private identifiers to shortened, cryptic forms</td></tr>
+		</table>
+		<p>Obfuscation that is provided by the Scruncher is an artifact of the code compression process, and the Scruncher is not designed to provide robust obfuscation.</p>
+		
+		<p>The two examples below show first an extract of JavaScript code, and second the compressed and obfuscated form of that code. Notice how, in the compressed version of the code, private identifiers that were prefixed with an underscore in the source code have been reduced down to enumerated forms (eg. <code>_a</code>, <code>_b</code>, <code>_c</code>). For the sake of readability in this example, the <code>LineCompacting</code> setting is turned off for the compressed code.</p>
+		
+		<p><span class="allCaps">SOURCE CODE</span></p>
+		
+		
+<pre class="sample-code">/*ScruncherSettings Mappings="=" LineCompacting="FALSE"*/
+
+_package.toAbsolute = function (_baseUrl,_url) {
+  if (_package.from (_url).fullDomain) return _url;
+    // return early with URL to resolve against base, if URL is absolute
+
+  var _result = _baseUrl.slice (0,_baseUrl.search (/[\/\\][^\/\\]*$/) + 1);
+    // remove everything after the last slash, but keep the last slash
+  while (_url) {
+    var
+      _slashPos = (_url.search (/[\/\\]/) + 1 || _url.length + 1) - 1,
+      _folderName = _url.slice (0,_slashPos)
+    ;
+    _result = _folderName == '..'
+      ? _result.slice (0,_result.search (/[\/\\][^\/\\]*[\/\\]$/) + 1) // remove end folder
+      : _result + _folderName + _url.charAt (_slashPos)
+    ;
+    _url = _url.slice (_slashPos + 1);
+  }
+  return _result;
+};
+</pre>
+		
+		<p><span class="allCaps">SCRUNCHED CODE</span></p>
+		
+		
+<pre class="sample-code">_a.toAbsolute=function(_b,_c){
+if(_a.from(_c).fullDomain)return _c;
+var _d=_b.slice(0,_b.search(/[\/\\][^\/\\]*$/)+1);
+while(_c){
+var
+ _e=(_c.search(/[\/\\]/)+1||_c.length+1)-1,
+_f=_c.slice(0,_e)
+;
+_d=_f=='..'
+?_d.slice(0,_d.search(/[\/\\][^\/\\]*[\/\\]$/)+1)
+:_d+_f+_c.charAt(_e)
+;
+_c=_c.slice(_e+1);
+}
+return _d;};
+</pre>
+		
+		<p>For a more in-depth discussion of the Scruncher code compression system, consult the explainer <a href="all-about-scrunching.html">All About Scrunching</a>.</p>
+	</div>
+	
+	<a name="16"></a>
+	<h1 class="heading1" title="16. Build Scripts"><span class="headingNumber"><a href="#16" title="16. Build Scripts">16</a>. </span>Build Scripts</h1>
+	<div class="contents1">
+		<p>The UIZE JavaScript Framework provides a system for developing build scripts that can be run by Windows Scripting Host, for automating build tasks.</p>
+		
+		<p>Several build scripts are included with the framework, performing such tasks as:</p>
+		
+		<table class="list">
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>recursing through the folders of a Web site project and generating scrunched (minified) versions of JavaScript files</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>recursing through the folders of a Web site project and building scrunched (minified) JavaScript library files that are comprised of multiple separate JavaScript module files that are listed inside library source files</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>iterating through the files of a designated JavaScript modules folder and compiling JavaScript template files into JavaScript modules</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>recursing through the folders of a Web site project and producing a report of all the string literals found within JavaScript files, for the purpose of aiding in internationalization</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>iterating through the JavaScript modules inside a designated JavaScript modules folder, extracting specially flagged documentation comments, and synthesizing these comments into Simple Doc documents for conversion into HTML documentation files</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>recursing through the folders of a Web site project and generating HTML documentation files from all Simple Doc files encountered</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>recursing through the folders of a Web site project and generating files from data contained inside all Simple Data files encountered, with the use of accompanying JavaScript template files</td></tr>
+		</table>
+		<p>For a more in-depth discussion of the build script system, consult the explainer <a href="javascript-build-scripts.html">JavaScript Build Scripts</a>.</p>
+	</div>
+	
+	<a name="17"></a>
+	<h1 class="heading1" title="17. More Features"><span class="headingNumber"><a href="#17" title="17. More Features">17</a>. </span>More Features</h1>
+	<div class="contents1">
+		<a name="17_1"></a>
+		<h2 class="heading2" title="17. More Features -&gt; 17.1. Working with JSON"><span class="headingNumber"><a href="#17" title="17. More Features">17</a>.<a href="#17_1" title="17. More Features -&gt; 17.1. Working with JSON">1</a>. </span>Working with JSON</h2>
+		<div class="contents2">
+			<p>The UIZE JavaScript Framework provides functionality for serializing data to the JSON format, and deserializing from the JSON format.</p>
+			
+			<p>JSON (<a href="http://en.wikipedia.org/wiki/Json" target="_blank" class="externalSiteLink">JavaScript Object Notation</a>) is a useful format for representing arbitrary data structures. JSON is often used as a format of choice for delivering responses to Ajax requests back to the client, since the response data can be easily deserialized in this format using a simple <code>eval</code> statement.</p>
+			
+			<p>Static methods are provided in the <code><a href="../reference/Uize.Json.html">Uize.Json</a></code> module for encoding to and decoding from the JSON format. The versatile <code>Uize.Json.to</code> method allows data to be encoded to JSON format with a variety of formatting options, allowing everything from compact output to <a href="http://en.wikipedia.org/wiki/Pretty_print" target="_blank" class="externalSiteLink">pretty-print</a> output, where you can govern indentation, optional key sorting behavior, key padding and alignment, quote character for string literals and keys, key quoting rules, etc.</p>
+			
+			<p>For a more in-depth discussion, consult the reference for the <code><a href="../reference/Uize.Json.html">Uize.Json</a></code> module.</p>
+		</div>
+		
+		<a name="17_2"></a>
+		<h2 class="heading2" title="17. More Features -&gt; 17.2. Working with Strings"><span class="headingNumber"><a href="#17" title="17. More Features">17</a>.<a href="#17_2" title="17. More Features -&gt; 17.2. Working with Strings">2</a>. </span>Working with Strings</h2>
+		<div class="contents2">
+			<p>The UIZE JavaScript Framework provides utility methods for working with strings in the <code><a href="../reference/Uize.String.html">Uize.String</a></code> module.</p>
+			
+			<p>There seems to be no limit to the number of different string manipulation utilities that might come in handy in one situation or another. However, the <code><a href="../reference/Uize.String.html">Uize.String</a></code> package module doesn't try to be all things to all people. In the interests of avoiding code bloat, the <code><a href="../reference/Uize.String.html">Uize.String</a></code> module provides some of the more frequently needed string utilities, such as trimming whitespace, repeating a string segment, indenting a block of lines, camelCasing consecutive words, etc. More esoteric features can be implemented in application code, your own modules, or in extension modules to the <code><a href="../reference/Uize.String.html">Uize.String</a></code> module.</p>
+			
+			<p>In the interests of code interoperability, extending native objects is not part of the design philosophy of the UIZE JavaScript Framework, so the string methods of the <code><a href="../reference/Uize.String.html">Uize.String</a></code> module are <b>not</b> added to the prototype of JavaScript's <code><a href="../javascript-reference/String.html">String</a></code> object. You're encouraged to use the native methods of JavaScript's <code><a href="../javascript-reference/String.html">String</a></code> object as much as possible, and look to the static methods of the <code><a href="../reference/Uize.String.html">Uize.String</a></code> module for other capabilities.</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">alert (
+  Uize.String.repeat ('-',70) + '\n' +
+  Uize.String.repeat ('Hello, world! ',5) + '\n' +
+  Uize.String.repeat ('=',70)
+);
+</pre>
+			
+			<p>The above example will display an alert dialog with the output...</p>
+			
+			
+<pre class="sample-code">----------------------------------------------------------------------
+Hello, world! Hello, world! Hello, world! Hello, world! Hello, world!
+======================================================================
+</pre>
+			
+			<p>For a more in-depth discussion, consult the reference for the <code><a href="../reference/Uize.String.html">Uize.String</a></code> module.</p>
+		</div>
+		
+		<a name="17_3"></a>
+		<h2 class="heading2" title="17. More Features -&gt; 17.3. Working with URLs"><span class="headingNumber"><a href="#17" title="17. More Features">17</a>.<a href="#17_3" title="17. More Features -&gt; 17.3. Working with URLs">3</a>. </span>Working with URLs</h2>
+		<div class="contents2">
+			<p>The UIZE JavaScript Framework provides utility methods for working with URLs in the <code><a href="../reference/Uize.Url.html">Uize.Url</a></code> module.</p>
+			
+			<p>URLs are highly relevant to browser based applications, but URLs also have value outside of this context. Therefore, utilities for working with URLs shouldn't be tied to the browser. The <code><a href="../reference/Uize.Url.html">Uize.Url</a></code> module can be used in other contexts, such as Windows Script Host, where one might want to use build scripts to build HTML pages for a Web site project, and you might need to manipulate URLs for generating HTML for links and the like. The URL utilities inside this module make it easier to: serialize a params object to a params / query string, parse params from a params / query string into an object hash, resolve a path and params object into a URL string, absolutize URLs, split URLs up into all their component pieces, etc.</p>
+			
+			<p>For a more in-depth discussion, consult the reference for the <code><a href="../reference/Uize.Url.html">Uize.Url</a></code> module.</p>
+		</div>
+		
+		<a name="17_4"></a>
+		<h2 class="heading2" title="17. More Features -&gt; 17.4. Working with Dates"><span class="headingNumber"><a href="#17" title="17. More Features">17</a>.<a href="#17_4" title="17. More Features -&gt; 17.4. Working with Dates">4</a>. </span>Working with Dates</h2>
+		<div class="contents2">
+			<p>The UIZE JavaScript Framework provides utility methods for working with dates in the <code><a href="../reference/Uize.Date.html">Uize.Date</a></code> module.</p>
+			
+			<p>In the interests of code interoperability, extending native objects is not part of the design philosophy of the UIZE JavaScript Framework, so the methods of the <code><a href="../reference/Uize.Date.html">Uize.Date</a></code> module are <b>not</b> added to the prototype of JavaScript's <code><a href="../javascript-reference/Date.html">Date</a></code> object. You're encouraged to use the native methods of JavaScript's <code><a href="../javascript-reference/Date.html">Date</a></code> object as much as possible, and look to the static methods of the <code><a href="../reference/Uize.Date.html">Uize.Date</a></code> module for other capabilities. The date utilities inside this module make it easier to: encode dates to the <code>ISO 8601</code> format (YYYY-MM-DD), decode dates from the <code>ISO 8601</code> format, test if a date is recent, determine the number of days in a specific month of a specific year, convert a length of time from one unit to another, etc.</p>
+			
+			<p>For a more in-depth discussion, consult the reference for the <code><a href="../reference/Uize.Date.html">Uize.Date</a></code> module.</p>
+		</div>
+		
+		<a name="17_5"></a>
+		<h2 class="heading2" title="17. More Features -&gt; 17.5. Working with Colors"><span class="headingNumber"><a href="#17" title="17. More Features">17</a>.<a href="#17_5" title="17. More Features -&gt; 17.5. Working with Colors">5</a>. </span>Working with Colors</h2>
+		<div class="contents2">
+			<p>The UIZE JavaScript Framework provides a comprehensive framework for working with colors, with support for color spaces, a wide variety of color encodings, a framework for named colors, extension modules that define additional color spaces and named colors, and extensions that provide utilities for manipulating colors.</p>
+			
+			<p>Support for colors is provided in the <code><a href="../reference/Uize.Color.html">Uize.Color</a></code> module and its various extension modules, which offer the following functionality...</p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>Color Encodings</code> - A framework is provided for defining color encodings, offering a consistent and seemless way to convert from one encoding to another - even if those encodings are associated with different color spaces. A wide variety of built-in color encodings provide many convenient ways to express color values. Additional color encodings can be defined in extension modules.</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>Color Spaces</code> - A framework is provided for defining color spaces and automatically handles conversion across color spaces. The <code>sRGB</code> and <code>HSL</code> color spaces are built into the <code><a href="../reference/Uize.Color.html">Uize.Color</a></code> module, and additional color spaces are defined in extension modules, such as the <code><a href="../reference/Uize.Color.xHsv.html">Uize.Color.xHsv</a></code> module that defines the <code>HSV</code> color space.</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>Named Colors</code> - A framework is provided for defining named colors. Once named colors are defined, color values can be specified using these names in all the methods of the <code><a href="../reference/Uize.Color.html">Uize.Color</a></code> object, its various extension modules, and any other modules that rely on the <code><a href="../reference/Uize.Color.html">Uize.Color</a></code> module for resolving color values. The seventeen named colors of the CSS 2.1 specification are built into the <code><a href="../reference/Uize.Color.html">Uize.Color</a></code> object, and the over one hundred named colors of the SVG 1.0 and CSS 3 specifications are defined in the <code><a href="../reference/Uize.Color.xSvgColors.html">Uize.Color.xSvgColors</a></code> extension module.</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>Color Manipulation</code> - Besides just being able to convert colors across encodings and color spaces, utilities are provided for blending two colors, mixing many colors, sorting colors, generating combination colors, generating random colors, testing for color equality, etc. These various color related utilities are provided in the <code><a href="../reference/Uize.Color.xUtil.html">Uize.Color.xUtil</a></code> extension module.</td></tr>
+			</table>
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">Uize.Fx.fadeStyle (
+  'myNodeId',
+  {borderColor:'cornflowerblue',backgroundColor:[255,255,0]},
+  {borderColor:Uize.Color.random (),backgroundColor:'hsv(300,100%,100%)'}
+);
+</pre>
+			
+			<p>In the above example, the <code>Uize.Fx.fadeStyle</code> static method of the <code><a href="../reference/Uize.Fx.html">Uize.Fx</a></code> module is being used to initiate a fade of the border and background colors for the node with the <code>id</code> of "myNodeId". The starting border color is specified using a named color that is defined in the <code><a href="../reference/Uize.Color.xSvgColors.html">Uize.Color.xSvgColors</a></code> extension. The starting background color is specified using the <code>RGB array</code> encoding that is built into the <code><a href="../reference/Uize.Color.html">Uize.Color</a></code> module. The ending border color is a random color generated using the <code>Uize.Color.random</code> static method implemented in the <code><a href="../reference/Uize.Color.xUtil.html">Uize.Color.xUtil</a></code> extension, and the ending background color is specified using the <code>HSV string</code> encoding defined inside the <code><a href="../reference/Uize.Color.xHsv.html">Uize.Color.xHsv</a></code> color space extension module. Color values can be specified with this flexibility in the <code>Uize.Fx.fadeStyle</code> method because the <code><a href="../reference/Uize.Fx.html">Uize.Fx</a></code> module uses the <code><a href="../reference/Uize.Color.html">Uize.Color</a></code> module for resolving color values.</p>
+			
+			<p>For a more in-depth discussion, consult the reference for the <code><a href="../reference/Uize.Color.html">Uize.Color</a></code> module.</p>
+		</div>
+		
+		<a name="17_6"></a>
+		<h2 class="heading2" title="17. More Features -&gt; 17.6. Working with Data Structures"><span class="headingNumber"><a href="#17" title="17. More Features">17</a>.<a href="#17_6" title="17. More Features -&gt; 17.6. Working with Data Structures">6</a>. </span>Working with Data Structures</h2>
+		<div class="contents2">
+			<p>The UIZE JavaScript Framework provides utility methods for working with various types of data structures in the <code><a href="../reference/Uize.Data.html">Uize.Data</a></code> module.</p>
+			
+			<p>In the interests of code interoperability, extending native objects is not part of the design philosophy of the UIZE JavaScript Framework, so the methods of the <code><a href="../reference/Uize.Data.html">Uize.Data</a></code> module are <b>not</b> added to the prototypes of JavaScript's native objects (such as the <code><a href="../javascript-reference/Array.html">Array</a></code> and <code><a href="../javascript-reference/Object.html">Object</a></code> natives). You're encouraged to use the methods of JavaScript's built-in object as much as possible, and look to the static methods of the <code><a href="../reference/Uize.Data.html">Uize.Data</a></code> module for other capabilities.</p>
+			
+			<p>Among other things, the data manipulation utilities inside this module make it easier to...</p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>test if two arbitrarily complex data structures are identical</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>find a record from an array of record objects that matches specified criteria</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>create lookup and reverse lookup objects from a specified object</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>get the values for a specific property from an array of record objects</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>get an array of the keys of an object's properties</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>get an array of the values of an object's properties</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>test if an object is empty</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>get the min or max values from an array of numbers</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>reorder the elements of an array (eg. reverse, inside out, jumbled, etc.)</td></tr>
+			</table>
+			<p>For a more in-depth discussion, consult the reference for the <code><a href="../reference/Uize.Data.html">Uize.Data</a></code> module.</p>
+		</div>
+	</div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

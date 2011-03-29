@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>TEST: Memory Leak | UIZE JavaScript Framework</title>
+</head>
+<body>
+
+<script type="text/javascript" src="../../js/Uize.Node.js"></script>
+
+<script type="text/javascript">
+
+function _wireDivClickEvent (_divNo) {
+	/* NOTES:
+		- a typical pattern for defining an event handler that can get you into trouble with IE and its circular reference memory leak bug
+		- two different ways to wire the click event: the traditional way, or the Uize.Node way
+	*/
+	var _div = Uize.Node.getById ('div' + _divNo);
+	Uize.Node.wire (_div,'click',function () {alert (_divNo)});
+	//_div.onclick = function () {alert (_divNo)};
+}
+var
+	_html = '',
+	_totalDivs = 3000
+;
+for (var _divNo = -1; ++_divNo < _totalDivs;) {
+	_html += '<div id="div' + _divNo + '">DIV NUMBER ' + _divNo + '</div>';
+}
+document.writeln (_html);
+
+for (var _divNo = -1; ++_divNo < _totalDivs;)
+	_wireDivClickEvent (_divNo)
+;
+
+</script>
+
+</body>
+</html>
+

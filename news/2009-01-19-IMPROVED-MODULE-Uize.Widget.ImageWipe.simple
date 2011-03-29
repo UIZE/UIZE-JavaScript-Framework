@@ -1,0 +1,20 @@
+The =Uize.Widget.ImageWipe= widget class has been improved in a number of ways.
+
+Wipe Presets Have Migrated
+	Wipe effect presets have been migrated from the =Uize.Widget.ImageWipe= module into the new =Uize.Widget.ImageWipe.xPresets= extension module.
+
+	This reduces the code size of the =Uize.Widget.ImageWipe= module and reduces page load for applications that don't need to use the entire set of wipe presets. An implication of this change is that you may need to require the =Uize.Widget.ImageWipe.xPresets= module in pages that were previously relying on the =Uize.Widget.ImageWipe.presets= static property being defined in the =Uize.Widget.ImageWipe= module. Wipe presets are still accessible from the =Uize.Widget.ImageWipe.presets= static property, but this property is now no longer defined in the =Uize.Widget.ImageWipe= module, but rather in the =Uize.Widget.ImageWipe.xPresets= extension.
+
+Bug Fixes
+	The following bugs have been fixed...
+
+	- a bug with handling of the =dissolve= set-get property that was causing opacity of panes to get left in a bad state when interrupting a fade with dissolve and initiating a fade without dissolve
+	- a bug with handling of the =allToFull= set-get property that was causing crud to be left on the right and bottom edges as a result of the previous image showing through because of an off-by-one error in calculation
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-01-19 - IMPROVED MODULE: Uize.Widget.ImageWipe
+....................................................................................

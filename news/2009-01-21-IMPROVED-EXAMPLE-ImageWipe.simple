@@ -1,0 +1,11 @@
+The [[../examples/image-wipe.html][ImageWipe example]] has been improved in a number of ways.
+
+A new tabbed interface provides you with a *"PRESETS"* tab for previewing the wide variety of wipe effect presets available, and a *"PARAMS"* tab for experimenting with the under-the-hood settings for the image wipe effect. Additionally, a whole bunch of new presets recently added to the new =Uize.Widget.ImageWipe.xPresets= extension module are now available in the *"PRESETS"* tab.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-01-21 - IMPROVED EXAMPLE: ImageWipe
+....................................................................................

@@ -1,0 +1,11 @@
+The =Uize.Discombobulator= module, with its somewhat bizarre, esoteric, and undocumented string munging functionality, has been migrated to under the =Uize.String= namespace, as =Uize.String.Discombobulator=, to get it out of the root =Uize= namespace.
+
+This change is not backwards compatible. The single user of this module (you know who you are) will have to change his code to use the new module name. Sorry (he says, apologizing to himself).
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-10-02 - MIGRATED MODULE: Uize.Discombobulator
+....................................................................................

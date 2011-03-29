@@ -1,0 +1,51 @@
+Methods Killed in Uize Base Class
+	In the =Uize= base class, the =MyClass.doOnceEvent= and =MyClass.hasEventFired= static methods, along with the =myInstance.doOnceEvent= and =myInstance.hasEventFired= instance methods, have all been *KILLED*.
+
+	The mechanism exposed through these methods was once used (long, long ago... in a land that time forgot), but has proven so uncompelling over the years that it is now not in use in even a single piece of code that can be found. The mechanism adds a memory burden to every single class, and every single instance of every single class, by maintaining an object hash (with event names as keys) reflecting all the events that have been fired at least once, thereby creating significant memory bloat for complex applications involving hundreds of instances that fire lots of events - not worth the cost, given how insufficiently compelling the feature is.
+
+	In the very few use cases where such a mechanism is desired, it can be coded up manually. Removing this mechanism achieves a not insignificant reduction in memory use in more complex pages and also achieves a minor performance improvement.
+
+SimpleDoc Improvements
+	For horizontal rules generated from SimpleDoc files, the =hr= tag now specifies the CSS class "thick" for thick horizontal rules, and the CSS class "thin" for thin horizontal rules.
+
+	All inline styling of the =hr= tag has been removed, leaving it up to the CSS to style the difference between thick and thin rules. A bug has been fixed in the =Uize.Simple= module that was causing HTML generated from SimpleDoc files to lose empty lines within sample code / example blocks.
+
+New valueOf Interface
+	A =valueOf= instance method has been implemented in the =Uize= base class. This method will be invoked automatically by JavaScript whenever an instance of a =Uize= subclass is involved in an expression.
+
+	This provides a shortcut to accessing the =value= set-get property for instances of classes that register this property. In such cases, you can use an instance reference in an expression - such as a mathematical expression, or a string concatenation - as though the object reference were a proxy for its value.
+
+New toString Interface
+	A =toString= instance method has been implemented in the =Uize= base class that provides a convenient and lightweight way to gather some information about instances of =Uize= subclasses during debugging and troubleshooting.
+
+	The string returned by this method provides a summary that includes an instance's class name and the state of its set-get properties. The =toString Intrinsic Method= is invoked automatically in certain contexts in order to convert an object to a string form, such as when alerting an object using the =alert= global function.
+
+IMPROVED MODULE: Uize.Url
+	Support for valueOf
+		The =Uize.Url.toParams= and =Uize.Url.resolve= static methods now support query param values that are objects that provide a =valueOf= interface (so, instances of all =Uize= subclasses). The =Uize.Url.toPiece= static method also supports this behavior with its single parameter.
+
+		EXAMPLE 1
+		...............................................................................
+		Uize.Url.toParams ({rating:ratingSliderWidget,comment:commentTextInputWidget});
+		...............................................................................
+
+		EXAMPLE 2
+		.............................................................
+		Uize.Url.Resolve (
+			'http://www.domain.com/svc/rating',
+			{rating:ratingSliderWidget,comment:commentTextInputWidget}
+		);
+		.............................................................
+
+	Uize.Url.resolve Supports Param Replacement
+		The =Uize.Url.resolve= static method now supports parameter replacement for URLs.
+
+		Basically, if the URL string provided contains query params that are also specified in a =urlParamsOBJ= parameter, then the param values contained in the =urlParamsOBJ= parameter will override those in the URL string.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2008-08-15 - Framework Changes
+....................................................................................

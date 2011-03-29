@@ -1,0 +1,11 @@
+- A new =insertionMode= set-get property implemented in the =Uize.Widget= base class provides a way for applications to control how a widget's HTML is inserted when the =built= set-get property is set to =false= and a non-empty value is specified for the =html= set-get property. For more details, consult the reference for the =Uize.Widget= class.
+- The [[../examples/slideshow-with-wipes.html][Slideshow With Wipes]] and [[../examples/slideshow.html][Slideshow]] examples have been updated to use JavaScript Template (.jst) files for building the HTML of the slideshow widget's UI.
+- A bug in the =Uize.Widget.Button= class that was affecting the Firefox 2 and Opera browsers has been fixed. Basically, using the =text= set-get property of a button widget instance to change a button's label text was causing a button to become non-responsive when clicking on the =text= implied node (but not other parts of the button).
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2008-11-13 - MINOR TWEAKS AND FIXES
+....................................................................................

@@ -1,0 +1,13 @@
+The new =Uize.Fx.xShadows= extension module implements support for fading / animating the values of both the =text-shadow= and =box-shadow= CSS3 style properties.
+
+This new module takes over from the now deprecated =Uize.Fx.xTextShadow= module. When the =Uize.Fx.xShadows= module is loaded, the =Uize.Fx.fadeStyle= method can be used to animate text shadow and box shadow along with all other supported CSS style properties.
+
+[[Uize.Fx.xShadows][LEARN MORE]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2010-04-18 - NEW MODULE: Uize.Fx.xShadows
+....................................................................................

@@ -1,0 +1,201 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Color Sort by RGB Proximity - HTML Source Code | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework HTML example source code"/>
+	<meta name="description" content="This is the source code for the Color Sort by RGB Proximity example"/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../../css/page.css"/>
+	<link rel="stylesheet" href="../../css/page.source.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../../index.html" title="UIZE JavaScript Framework home"></a>
+	SOURCE CODE: Color Sort by RGB Proximity
+	<div id="page-actions" class="pageActions">
+		<a href="../color-sort-by-rgb-proximity.html" class="buttonLink">VIEW EXAMPLE</a>
+	</div>
+</h1>
+
+<pre>
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+&lt;head&gt;
+  &lt;title&gt;Color Sort by RGB Proximity | JavaScript Examples | UIZE JavaScript Framework&lt;/title&gt;
+  &lt;meta name="keywords" content="featured color Uize.Color.xUtil"/&gt;
+  &lt;meta name="description" content="When you have a limited palette of colors, how can you sort the colors to find the closest matches to a desired color? This example shows you how."/&gt;
+  &lt;link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/&gt;
+  &lt;link rel="stylesheet" href="../css/page.css"/&gt;
+  &lt;link rel="stylesheet" href="../css/page.example.css"/&gt;
+  &lt;link rel="stylesheet" href="../css/widget.colorinfo.css"/&gt;
+  &lt;style tyle="text/css"&gt;
+    .colorSwatch {
+      width:1px;
+      height:340px;
+      float:left;
+      cursor:pointer;
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+&lt;script type="text/javascript" src="../js/Uize.js"&gt;&lt;/script&gt;
+
+&lt;h1 class="document-title"&gt;
+  &lt;a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"&gt;&lt;/a&gt;
+  &lt;a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow"&gt;JAVASCRIPT EXAMPLES&lt;/a&gt;
+  Color Sort by RGB Proximity
+  &lt;div id="page-actions" class="pageActions"&gt;
+    &lt;a href="source-code/color-sort-by-rgb-proximity.html" class="buttonLink"&gt;SOURCE&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/h1&gt;
+
+&lt;div class="main"&gt;
+  &lt;!-- explanation copy --&gt;
+
+  &lt;div class="explanation"&gt;
+    &lt;p&gt;This example demonstrates the proximity-based color sorting functionality of the UIZE JavaScript Framework, as implemented in the &lt;a href="../reference/Uize.Color.xUtil.html"&gt;&lt;code&gt;Uize.Color.xUtil&lt;/code&gt;&lt;/a&gt; module. On the right of the interface is a large rectangle, with a sorted array of colors. On the left of the interface is an RGB color picker, with sliders for selecting levels for the red, green, and blue color channels of an RGB color. As you use the sliders to change your desired color, the finite set of available colors is re-sorted so that the colors most like your desired color are rearranged to be on the left. Additionally, these better matching colors are displayed using wider bars so you can inspect them more closely to make a better choice between the candidates. Color sorting functionality is useful when assisting a user in finding a color from a fixed color palette that is closest to their preferred color.&lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;!-- "wireframe" for the UI --&gt;
+
+  &lt;table border="0" cellspacing="0" cellpadding="0" style="margin:auto;"&gt;
+    &lt;tr&gt;
+      &lt;td class="heading"&gt;Choose Color&lt;/td&gt;
+      &lt;td style="width:20px;"&gt;&lt;/td&gt;
+      &lt;td class="heading"&gt;Your Desired Color&lt;/td&gt;
+      &lt;td style="width:20px;"&gt;&lt;/td&gt;
+      &lt;td class="heading"&gt;Closest Matches From Available Colors (ie. limited color palette)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td id="page_desiredColor"&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;/td&gt;
+      &lt;td id="page-desiredColor" style="width:140px;"&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;/td&gt;
+      &lt;td id="page-colorSwatches" style="width:442px;"&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/table&gt;
+&lt;/div&gt;
+
+&lt;!-- JavaScript code to generate the color swatches --&gt;
+
+&lt;script type="text/javascript"&gt;
+
+Uize.module ({
+  required:[
+    'UizeDotCom.Page.Example.library',
+    'UizeDotCom.Page.Example',
+    'Uize.Color',
+    'Uize.Color.xUtil',
+    'Uize.Widget.ColorPicker',
+    'Uize.Widget.ColorInfo',
+    'Uize.Node',
+    'Uize.Node.Event',
+    'Uize.Tooltip',
+    'Uize.Fade.xFactory',
+    'Uize.Curve'
+  ],
+  builder:function () {
+    /*** create the example page widget ***/
+      var page = window.page = new UizeDotCom.Page.Example;
+
+    /*** sort colors and update swatches ***/
+      function sortColorSwatches () {
+        var desiredColorValue = page.children.desiredColor.get ('value');
+        page.setNodeStyle ('desiredColor',{backgroundColor:'#' + desiredColorValue});
+        Uize.Color.sort (colors,desiredColorValue);
+        for (var colorNo = -1; ++colorNo &lt; totalColors;)
+          page.setNodeStyle ('colorSwatch' + colorNo,{backgroundColor:colors [colorNo].to ()})
+        ;
+      }
+
+    /*** randomize colors ***/
+      var
+        totalColors = 200,
+        colors = []
+      ;
+      function randomizeColors () {
+        for (var colorNo = -1; ++colorNo &lt; totalColors;)
+          (colors [colorNo] || (colors [colorNo] = new Uize.Color).setEncoding ('RGB string')).random ()
+        ;
+        sortColorSwatches ();
+      }
+
+    /*** build the swatches HTML ***/
+      var
+        swatchesHtmlChunks = [],
+        swatchNodeName,
+        swatchNodeNames = []
+      ;
+      for (var colorNo = -1; ++colorNo &lt; totalColors;) {
+        swatchNodeNames.push (swatchNodeName = 'colorSwatch' + colorNo);
+        swatchesHtmlChunks.push (
+          '&lt;div id="page-' + swatchNodeName + '" class="colorSwatch" style="width:' + (colorNo &lt; 8 ? 16 : colorNo &lt; 16 ? 6 : colorNo &lt; 32 ? 4 : colorNo &lt; 64 ? 2 : 1) + 'px;"&gt;&lt;/div&gt;'
+        );
+      }
+
+    /*** add the RGB reference color picker ***/
+      page.addChild ('desiredColor',Uize.Widget.ColorPicker,{value:'00aaff',built:false})
+        .wire ('Changed.value',sortColorSwatches);
+
+    /*** add the color info widget ***/
+      var colorInfo = page.addChild ('colorInfo',Uize.Widget.ColorInfo);
+
+    /*** wire up the page widget ***/
+      page.wireUi ();
+
+    /*** initialization ***/
+      page.setNodeInnerHtml ('colorSwatches',swatchesHtmlChunks.join (''));
+
+      /*** wire up the swatch mouseover and click behaviors ***/
+        function updateColorInfo () {colorInfo.set ({value:this.style.backgroundColor})}
+        page.wireNode (
+          'colorSwatches',
+          {
+            mouseover:function () {Uize.Tooltip.showTooltip (colorInfo.getNode ())},
+            mouseout:function () {Uize.Tooltip.showTooltip (colorInfo.getNode (),false)},
+            click:function (event) {
+              var target = Uize.Node.Event.target (event);
+              Uize.Fade.fade (
+                function (value) {page.children.desiredColor.set ({value:Uize.Color.to (value,'hex')})},
+                [Uize.Color.to (page.children.desiredColor + '','RGB array')],
+                [Uize.Color.to (Uize.Node.getStyle (target,'backgroundColor'),'RGB array')],
+                1500,
+                {curve:Uize.Curve.easeInOutPow (4)}
+              );
+              updateColorInfo.apply (target);
+            }
+          }
+        );
+        page.wireNode (swatchNodeNames,'mouseover',updateColorInfo);
+
+      randomizeColors ();
+  }
+});
+
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+
+</pre>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.library',
+		'UizeDotCom.Page'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page).wireUi ()}
+});
+
+</script>
+
+</body></html>

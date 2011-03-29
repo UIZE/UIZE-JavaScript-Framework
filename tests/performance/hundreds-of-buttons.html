@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>PERFORMANCE TEST: Hundreds of Button Widgets | UIZE JavaScript Framework</title>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../../css/page.css"/>
+	<link rel="stylesheet" href="../../css/page.example.css"/>
+	<link rel="stylesheet" href="../../css/page.example.test.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../../index.html" title="UIZE JavaScript Framework home"></a>
+	PERFORMANCE TEST: Hundreds of Button Widgets
+	<div class="pageActions">
+		<a id="page-viewSource" href="javascript://" class="buttonLink">SOURCE</a>
+	</div>
+</h1>
+
+<div class="main">
+	<!-- explanation copy -->
+
+	<div class="explanation">
+		<p>This test examines the time that it takes to create and wire up hundreds instances of the <code>Uize.Widge.Button</code> class.</p>
+
+		<p>In the test, ...</p>
+	</div>
+
+	<!-- test results -->
+
+	<div class="testResults">
+		<div class="testResultsFooter">
+			<a id="page_performTest" class="button" href="javascript://">PERFORM TEST</a>
+		</div>
+		<div id="page-testResults"></div>
+	</div>
+
+	<div id="page-testNodes" style="height:200px; overflow:auto;"></div>
+</div>
+
+<!-- JavaScript code to wire up the page widget and define the test code -->
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Example.Test.library',
+		'Uize.Widget.Button'
+	],
+	builder:function () {
+		/*** create the example page widget ***/
+			var page = window.page = new UizeDotCom.Page.Example.Test;
+
+		/*** add a container widget for the buttons, and that is many levels deep ***/
+			var
+				_levelsDeep = 5,
+				_buttonContainer = page
+			;
+			for (var _levelNo = _levelsDeep; --_levelNo >= 0;)
+				_buttonContainer = _buttonContainer.addChild ('buttonContainer',Uize.Widget)
+			;
+
+		/*** define the test code by overriding the performTest method of the page widget ***/
+			page.performTest = function (_reportResults) {
+				var
+					_this = this,
+					_totalButtons = 1000,
+					_buttonNo
+				;
+				_this.executeFunctionsWithPause (
+					[
+						function () {
+							/*** generate markup for buttons and put into page ***/
+								var
+									_buttonsIdPrefix = _buttonContainer.get ('idPrefix') + '_button',
+									_htmlChunks = []
+								;
+								for (_buttonNo = -1; ++_buttonNo < _totalButtons;) {
+									_htmlChunks.push ('<a id="' + _buttonsIdPrefix + _buttonNo + '" href="javascript://" class="buttonLink">BUTTON ' + _buttonNo + '</a>');
+								}
+								_this.setNodeInnerHtml ('testNodes',_htmlChunks.join (''));
+
+							_buttonContainer.unwireUi (); // the container was wired along with the page widget
+						},
+						function () {
+							/*** measure duration for adding button child widgets ***/
+								for (_buttonNo = -1; ++_buttonNo < _totalButtons;) {
+									_buttonContainer.addChild ('button' + _buttonNo,Uize.Widget.Button);
+								}
+						},
+						function () {
+							/*** measure duration for wiring UI of the buttonContainer widget ***/
+								_buttonContainer.wireUi ();
+						},
+						function () {
+							/*** measure duration for unwiring UI of the buttonContainer widget ***/
+								_buttonContainer.unwireUi ();
+						},
+						function () {
+							/*** remove all the buttons ***/
+								for (_buttonNo = -1; ++_buttonNo < _totalButtons;) {
+									_buttonContainer.removeChild ('button' + _buttonNo);
+								}
+								_this.setNodeInnerHtml ('testNodes','');
+						}
+					],
+					1000,
+					function (_executionTimes) {
+						/*** report the results ***/
+							_reportResults (
+								'<h1>Durations</h1>\n' +
+								'<p><b>adding the button child widgets:</b> ' + _executionTimes [1] + 'ms</p>\n' +
+								'<p><b>wiring all the buttons:</b> ' + _executionTimes [2] + 'ms</p>\n' +
+								'<p><b>unwiring all the buttons:</b> ' + _executionTimes [3] + 'ms</p>\n' +
+								'<p><b>removing all the buttons:</b> ' + _executionTimes [4] + 'ms</p>\n'
+							);
+					}
+				);
+			};
+
+		/*** wire up the page widget ***/
+			page.wireUi ();
+	}
+});
+
+</script>
+
+</body>
+</html>
+

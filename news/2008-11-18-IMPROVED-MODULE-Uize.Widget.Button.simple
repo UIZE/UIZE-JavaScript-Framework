@@ -1,0 +1,11 @@
+The button widget, implemented in the =Uize.Widget.Button= class, has been modified to give the =active= display state precedence over the =grayed= display state.
+
+This means that if a button is selected (such as with a checkbox style button), then it will always be evident that the button is selected - even if the button becomes disabled. A checkbox style button could be disabled to prevent its selected state from being modified. Previously, if a checkbox style button was both selected and disabled, then it would only appear disabled (ie. it would appear unchecked, thereby falsely reflecting its value).
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2008-11-18 - IMPROVED MODULE: Uize.Widget.Button
+....................................................................................

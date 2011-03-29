@@ -1,0 +1,65 @@
+widgets
+	title: Calculator
+	urls
+		homepage: http://www.uize.com/widgets/calculator.html
+		web: http://www.uize.com/widgets/calculator/web.html
+	dimensions
+		webWidth: 240
+		webHeight: 314
+	description
+		short::
+			An easy to use calculator widget that you can embed in your Web sites and blogs, supporting all the operations you'd expect from a basic calculator.
+	features:>
+		BASIC NUMERICAL OPERATIONS: addition, subtraction, multiplication, division
+		MEMORY FEATURE: M+ (memory plus), M- (memory minus), MR (memory recall), and MC (memory clear)
+		CLEAR OPERATIONS: CE (clear entry), C (clear all)
+		EXTRA OPERATIONS: +/- (invert sign / polarity), square root
+		ENTRY USING KEYBOARD: digits 0 through 9, "." (decimal point), "%" (percent operation), "*" (multiply), "/" (divide), "+" (add), "-" (subtract), "Enter" or "=" (calculate result), "Esc" or "Spacebar" (clear all), "m" (memory plus)
+		BUTTON HIGHLIGHTING: buttons that correspond to keys that are being pressed on the keyboard are highlighted, to simulate the buttons being clicked
+		KEYBOARD FILTERING: invalid keys are filtered out
+		OPERATION COMPOUNDING: by using the "=" operation repeatedly (eg. "2 x 3 = = =" is the same as "2 x 3 x 3 x 3 =")
+		VERSATILE PERCENT FUNCTION: "85 % 50 =" (85 percent of 50), "50 x 85 %" (85 percent of 50), "15 + 12 %" (15 increased by 12 percent), "15 - 12 %" (15 decreased by 12 percent)
+		BUTTON STATE MANAGEMENT: buttons are disabled when their functions can't be used
+	author
+		name
+			first: Chris
+			last: van Rensburg
+		email: uize.javascript.framework@gmail.com
+		location: Redwood City
+		affiliation: UIZE JavaScript Framework
+	images
+		thumbnail120x60: http://www.uize.com/images/widgets/calculator-120x60.gif
+		thumbnail96x96: http://www.uize.com/images/widgets/calculator-96x96.gif
+		screenshot: http://www.uize.com/images/widgets/calculator.jpg
+	widgetClassModule: Uize.Widget.Calculator
+	widgetTemplateModule: Uize.Templates.Calculator
+:
+	title: Calendar
+	urls
+		homepage: http://www.uize.com/widgets/calendar.html
+		web: http://www.uize.com/widgets/calendar/web.html
+	dimensions
+		webWidth: 240
+		webHeight: 314
+	description
+		short::
+			An easy to use calendar widget that you can embed in your Web sites and blogs, that automatically shows the current date and the days in the month.
+	features:>
+		MONTH AND YEAR DISPLAY: the current month and year are displayed above the month grid
+		TODAY HIGHLIGHT: today's date is highlighted in the month grid (if it falls into the currently shown month and year)
+		MONTH NAVIGATION: see what days are in next month (or any other month) by navigating to the month using the convenient month navigation buttons
+		YEAR NAVIGATION: find a date in a month next year (or any other year) by navigating to the year using the convenient year navigation buttons
+		TASTEFUL DESIGN: the calendar widget is designed to look pleasing and professional, to make a smart addition to any Web page
+	author
+		name
+			first: Chris
+			last: van Rensburg
+		email: uize.javascript.framework@gmail.com
+		location: Redwood City
+		affiliation: UIZE JavaScript Framework
+	images
+		thumbnail120x60: http://www.uize.com/images/widgets/calendar-120x60.gif
+		thumbnail96x96: http://www.uize.com/images/widgets/calendar-96x96.gif
+		screenshot: http://www.uize.com/images/widgets/calendar.jpg
+	widgetClassModule: Uize.Widget.Calendar
+	widgetTemplateModule: Uize.Templates.Calendar

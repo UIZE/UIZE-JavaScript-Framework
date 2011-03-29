@@ -1,0 +1,486 @@
+Introduction
+	This document assumes that you are already familiar with [[http://en.wikipedia.org/wiki/Bookmarklet][bookmarklets]], how to set them up in your Web browser(s), and how to use them.
+
+	This document provides additional tips, along with some useful bookmarklets that should come in handy when doing development using the UIZE JavaScript Framework.
+
+### Bookmarklets That Open Widgets in Popup Windows
+	document...
+
+	Examples
+	- calculator widget
+	- calendar widget
+
+Useful Troubleshooting Bookmarklets
+	The bookmarklets described in this section serve as useful troubleshooting aids when developing Web applications using UIZE.
+
+	DELVE Bookmarklet
+		The DELVE Bookmarklet launches the DELVE tool in a separate window, set to inspect the Web page that is loaded in the active tab of the window where the bookmarklet was used.
+
+		BOOKMARKLET
+		================================================================================================================
+		................................................................................................................
+		<< HTML >>
+
+		code::
+			<a href="javascript:(function(){var _a=window.screen,_b=_a.width-50,_c=_a.height-100,_d=[&apos;&lt;html&gt;&apos;,&apos;&lt;head&gt;&lt;title&gt;DELVE&lt;/title&gt;&lt;/head&gt;&apos;,&apos;&lt;body&gt;&apos;,&apos;&lt;script src=&quot;http://www.uize.com/js/Uize.js&quot;&gt;&lt;/script&gt;&apos;,&apos;&lt;script type=&quot;text/javascript&quot;&gt;&apos;,&apos;Uize.module ({&apos;,&apos;required:\&apos;UizeDotCom.DelvePageWriter\&apos;,&apos;,&apos;builder:function () {&apos;,&apos;UizeDotCom.DelvePageWriter.initialize ();&apos;,&apos;}&apos;,&apos;});&apos;,&apos;&lt;/script&gt;&apos;,&apos;&lt;/body&gt;&apos;,&apos;&lt;/html&gt;&apos;].join(&apos;\n&apos;),_e=window.open(&apos;javascript:\&apos;&apos;+_d.replace(/&apos;/g,&apos;\\\&apos;&apos;)+&apos;\&apos;&apos;,&apos;reportPopup&apos;,[&apos;width=&apos;+_b,&apos;height=&apos;+_c,&apos;left=&apos;+Math.max((_a.width-_b-10)&gt;&gt;1,0),&apos;top=&apos;+Math.max((_a.height-_c-40)&gt;&gt;1,0),&apos;toolbar=no&apos;,&apos;location=no&apos;,&apos;directories=no&apos;,&apos;status=no&apos;,&apos;menubar=no&apos;,&apos;resizable=yes&apos;,&apos;scrollbars=no&apos;].join(&apos;,&apos;));_e.focus();})();">DELVE</a> &nbsp;&larr; drag the link to your bookmarks toolbar (or click it to try it now)
+		................................................................................................................
+		================================================================================================================
+
+		### scrunched, but pre-XML encoded
+			javascript:(function(){var _a=window.screen,_b=_a.width-50,_c=_a.height-100,_d=['<html>','<head><title>DELVE</title></head>','<body>','<script src="http://www.uize.com/js/Uize.js"></script>','<script type="text/javascript">','Uize.module ({','required:\'UizeDotCom.DelvePageWriter\',','builder:function () {','UizeDotCom.DelvePageWriter.initialize ();','}','});','</script>','</body>','</html>'].join('\n'),_e=window.open('javascript:\''+_d.replace(/'/g,'\\\'')+'\'','reportPopup',['width='+_b,'height='+_c,'left='+Math.max((_a.width-_b-10)>>1,0),'top='+Math.max((_a.height-_c-40)>>1,0),'toolbar=no','location=no','directories=no','status=no','menubar=no','resizable=yes','scrollbars=no'].join(','));_e.focus();})();
+
+		The DELVE tool can be used to *delve* into the inner workings of pages that use the UIZE JavaScript Framework. For more information on the DELVE tool, see the explainer [[using-the-delve-tool.html][Using the DELVE Tool]].
+
+		To use the bookmarklet, follow these simple steps...
+
+		+. Navigate in your Web browser to a page that you would like to inspect.
+
+		+. Launch the bookmarklet. Move the DELVE window out of the way so that it doesn't obscure the Web page you are inspecting. If you're lucky enough to be developing using two monitors, move the DELVE window to your secondary monitor and put it into full screen mode for maximum viewing pleasure.
+
+		+. Use DELVE to delve into what's going on in the page you're inspecting. If you're a first time user of DELVE and are not familiar with its features, read the explainer [[using-the-delve-tool.html][Using the DELVE Tool]] to learn more about it.
+
+		BOOKMARKLET SOURCE CODE
+		...........................................................................
+		(function () {
+			var
+				_screen = window.screen,
+				_width = _screen.width - 50,
+				_height = _screen.height - 100,
+				_html =
+					[
+						'<html>',
+							'<head><title>DELVE</title></head>',
+							'<body>',
+								'<script src="http://www.uize.com/js/Uize.js"></script>',
+								'<script type="text/javascript">',
+									'Uize.module ({',
+										'required:\'UizeDotCom.DelvePageWriter\',',
+										'builder:function () {',
+											'UizeDotCom.DelvePageWriter.initialize ();',
+										'}',
+									'});',
+								'</script>',
+							'</body>',
+						'</html>'
+					].join ('\n'),
+				_window = window.open (
+					'javascript:\'' + _html.replace (/'/g,'\\\'') + '\'',
+					'reportPopup',
+					[
+						'width=' + _width,
+						'height=' + _height,
+						'left=' + Math.max ((_screen.width - _width - 10) >> 1,0),
+						'top=' + Math.max ((_screen.height - _height - 40) >> 1,0),
+						'toolbar=no',
+						'location=no',
+						'directories=no',
+						'status=no',
+						'menubar=no',
+						'resizable=yes',
+						'scrollbars=no'
+					].join (',')
+				)
+			;
+			_window.focus ();
+		}) ();
+		...........................................................................
+
+	Module Reference Bookmarklet
+		BOOKMARKLET
+		================================================================================================================
+		................................................................................................................
+		<< HTML >>
+
+		code::
+			<a href="javascript:(function(){var _a=prompt(&apos;Enter a module name (eg. Uize.Array.Sort)...&apos;,&apos;&apos;);if(_a){var _b=1000,_c=750,_d=window.screen,_e=window.open(&apos;http://www.uize.com/reference/&apos;+_a+&apos;.html&apos;,&apos;uizeReference&apos;,[&apos;width=&apos;+_b,&apos;height=&apos;+_c,&apos;left=&apos;+Math.max((_d.width-_b-10)&gt;&gt;1,0),&apos;top=&apos;+Math.max((_d.height-_c-40)&gt;&gt;1,0),&apos;toolbar=no&apos;,&apos;location=no&apos;,&apos;directories=no&apos;,&apos;status=no&apos;,&apos;menubar=no&apos;,&apos;scrollbars=yes&apos;].join(&apos;,&apos;));_e.focus();}})();">MODULE REFERENCE</a> &nbsp;&larr; drag the link to your bookmarks toolbar (or click it to try it now)
+		................................................................................................................
+		================================================================================================================
+
+		### scrunched, but pre-XML encoded
+			javascript:(function(){var _a=prompt('Enter a module name (eg. Uize.Array.Sort)...','');if(_a){var _b=1000,_c=750,_d=window.screen,_e=window.open('http://www.uize.com/reference/'+_a+'.html','uizeReference',['width='+_b,'height='+_c,'left='+Math.max((_d.width-_b-10)>>1,0),'top='+Math.max((_d.height-_c-40)>>1,0),'toolbar=no','location=no','directories=no','status=no','menubar=no','scrollbars=yes'].join(','));_e.focus();}})();
+
+		BOOKMARKLET SOURCE CODE
+		...
+		(function () {
+			var _moduleName = prompt ('Enter a module name (eg. Uize.Array.Sort)...','');
+			if (_moduleName) {
+				var
+					_width = 1000,
+					_height = 750,
+					_screen = window.screen,
+					_window = window.open (
+						'http://www.uize.com/reference/' + _moduleName + '.html',
+						'uizeReference',
+						[
+							'width=' + _width,
+							'height=' + _height,
+							'left=' + Math.max ((_screen.width - _width - 10) >> 1,0),
+							'top=' + Math.max ((_screen.height - _height - 40) >> 1,0),
+							'toolbar=no',
+							'location=no',
+							'directories=no',
+							'status=no',
+							'menubar=no',
+							'scrollbars=yes'
+						].join (',')
+					)
+				;
+				_window.focus ();
+			}
+		}) ();
+		...
+
+	Built Modules Bookmarklet
+		The Built Modules Bookmarklet provides an easy way to see a list of all the JavaScript modules that have been built for the Web page in which the bookmarklet is used.
+
+		BOOKMARKLET
+		================================================================================================================
+		................................................................................................................
+		<< HTML >>
+
+		code::
+			<a href="javascript:(function(){function _a(_b){var _c=500,_d=600,_e=window.screen,_f=window.open(&apos;&apos;,&apos;reportPopup&apos;,[&apos;width=&apos;+_c,&apos;height=&apos;+_d,&apos;left=&apos;+Math.max((_e.width-_c-10)&gt;&gt;1,0),&apos;top=&apos;+Math.max((_e.height-_d-40)&gt;&gt;1,0),&apos;toolbar=no&apos;,&apos;location=no&apos;,&apos;directories=no&apos;,&apos;status=no&apos;,&apos;menubar=no&apos;,&apos;scrollbars=yes&apos;].join(&apos;,&apos;)),_g=_f.document;_g.open(&apos;text/html&apos;);_g.writeln(&apos;&lt;html&gt;&lt;body&gt;&lt;pre&gt;&apos;+_b.replace(/&lt;/g,&apos;&amp;lt;&apos;)+&apos;&lt;/pre&gt;&lt;/body&gt;&lt;/html&gt;&apos;);_g.close();_f.focus();}var _h=Uize.getModulesBuilt&amp;&amp;Uize.getModulesBuilt();if(!_h){_h=[];var _i=Uize.getModuleByName(&apos;*&apos;);for(var _j in _i)_h.push(_j);}_a(_h.join(&apos;\n&apos;));})();">BUILT MODULES</a> &nbsp;&larr; drag the link to your bookmarks toolbar (or click it to try it now)
+		................................................................................................................
+		================================================================================================================
+
+		### scrunched, but pre-XML encoded
+			javascript:(function(){function _a(_b){var _c=500,_d=600,_e=window.screen,_f=window.open('','reportPopup',['width='+_c,'height='+_d,'left='+Math.max((_e.width-_c-10)>>1,0),'top='+Math.max((_e.height-_d-40)>>1,0),'toolbar=no','location=no','directories=no','status=no','menubar=no','scrollbars=yes'].join(',')),_g=_f.document;_g.open('text/html');_g.writeln('<html><body><pre>'+_b.replace(/</g,'&lt;')+'</pre></body></html>');_g.close();_f.focus();}var _h=Uize.getModulesBuilt&&Uize.getModulesBuilt();if(!_h){_h=[];var _i=Uize.getModuleByName('*');for(var _j in _i)_h.push(_j);}_a(_h.join('\n'));})();
+
+		When you're on a Web page that is using the UIZE JavaScript Framework, using the Built Modules Bookmarklet will open a popup browser window containing a list of all the JavaScript modules built for the page, listed in the correct order of dependency. This might come in handy from time to time when you're unsure of what modules are loaded on a page, suspicious of what modules might be loaded that don't need to be loaded, or just curious about what's used on what kinds of pages.
+
+		The set of modules built for a page approximately reflects what modules the page uses, although there might be modules that are incorrectly required, or not in use because of the page's current state. Perusing the list of built modules might provide some clues to potential issues lurking in the code. When you want to know this information, the bookmarklet should be a more convenient approach than digging in the page's HTML or Firebug's DOM inspector, especially if modules are being scrunched together into single external JS library files, or even inlined in the page by a server-side dependency resolution mechanism.
+
+		BOOKMARKLET SOURCE CODE
+		.....................................................................................
+		(function () {
+			function _showReport (_report) {
+				var
+					_width = 500,
+					_height = 600,
+					_screen = window.screen,
+					_window = window.open (
+						'',
+						'reportPopup',
+						[
+							'width=' + _width,
+							'height=' + _height,
+							'left=' + Math.max ((_screen.width - _width - 10) >> 1,0),
+							'top=' + Math.max ((_screen.height - _height - 40) >> 1,0),
+							'toolbar=no',
+							'location=no',
+							'directories=no',
+							'status=no',
+							'menubar=no',
+							'scrollbars=yes'
+						].join (',')
+					),
+					_document = _window.document
+				;
+				_document.open ('text/html');
+				_document.writeln (
+					'<html><body><pre>' + _report.replace (/</g,'&lt;') + '</pre></body></html>'
+				);
+				_document.close ();
+				_window.focus ();
+			}
+			var _modulesBuilt = Uize.getModulesBuilt && Uize.getModulesBuilt ();
+				/* NOTE: Uize.getModulesBuilt is deprecated */
+			if (!_modulesBuilt) {
+				_modulesBuilt = [];
+				var _modulesByName = Uize.getModuleByName ('*');
+				for (var _moduleName in _modulesByName) _modulesBuilt.push (_moduleName);
+			}
+			_showReport (_modulesBuilt.join ('\n'));
+		}) ();
+		.....................................................................................
+
+	Lookup Widget From Node ID Bookmarklet
+		The Lookup Widget From Node ID Bookmarklet makes it easy to look up a widget on a Web page from the =id= of a DOM node, and see a detailed report containing the widget's full dereferencing path, the widget's class, its parentage information, and a summary of its state.
+
+		BOOKMARKLET
+		================================================================================================================
+		................................................................................................................
+		<< HTML >>
+
+		code::
+			<a href="javascript:(function(){function _a(_b){var _c=950,_d=700,_e=window.screen,_f=window.open(&apos;&apos;,&apos;reportPopup&apos;,[&apos;width=&apos;+_c,&apos;height=&apos;+_d,&apos;left=&apos;+Math.max((_e.width-_c-10)&gt;&gt;1,0),&apos;top=&apos;+Math.max((_e.height-_d-40)&gt;&gt;1,0),&apos;toolbar=no&apos;,&apos;location=no&apos;,&apos;directories=no&apos;,&apos;status=no&apos;,&apos;menubar=no&apos;,&apos;scrollbars=yes&apos;].join(&apos;,&apos;)),_g=_f.document;_g.open(&apos;text/html&apos;);_g.writeln(&apos;&lt;html&gt;&lt;body&gt;&lt;pre&gt;&apos;+_b.replace(/&lt;/g,&apos;&amp;lt;&apos;)+&apos;&lt;/pre&gt;&lt;/body&gt;&lt;/html&gt;&apos;);_g.close();_f.focus();}var _h=window.zPage||window.page;if(_h){var _i=prompt(&apos;Enter a DOM node id...&apos;,&apos;&apos;);if(_i){function _j(_k){if(_k.get(&apos;idPrefix&apos;)==_l){return _k;}else{var _m=_k.children;for(var _n in _m){var _o=_j(_m[_n]);if(_o)return _o;}}}function _p(_o){var _q=[];while(_o){_q.unshift(_o==_h?(_h==window.zPage?&apos;zPage&apos;:&apos;page&apos;):_o.get(&apos;name&apos;));_o=_o.parent}return _q.join(&apos;.children.&apos;);}var _r=_i.indexOf(&apos;-&apos;),_l=_r&gt; -1?_i.slice(0,_r):_i,_o=_j(_h),_k=_o.parent,_s=[];while(_k){_s.push(_p(_k)+&apos;  --  WIDGET CLASS: &apos;+_k.constructor.moduleName);_k=_k.parent;}if(_o){var _t=&apos;\n---------------------------------------------------------\n\n&apos;;_a(&apos;WIDGET PATH: &apos;+_p(_o)+&apos;\n&apos;+&apos;WIDGET CLASS: &apos;+_o.constructor.moduleName+&apos;\n&apos;+_t+&apos;WIDGET PARENTAGE:\n\n&apos;+(_s.length?_s.join(&apos;\n&apos;)+&apos;\n&apos;:&apos;no parents\n&apos;)+_t+&apos;WIDGET STATE SUMMARY:\n\n&apos;+_o.toString());}else{alert(&apos;The DOM node with the ID &quot;&apos;+_i+&apos;&quot; does not appear belong to a widget.&apos;);}}}else{alert(&apos;This page doesn\&apos;t have a page widget instance named &quot;page&quot; or &quot;zPage&quot;.&apos;);}})();">GET WIDGET FROM NODE ID</a> &nbsp;&larr; drag the link to your bookmarks toolbar (or click it to try it now)
+		................................................................................................................
+		================================================================================================================
+
+		### scrunched, but pre-XML encoded
+			javascript:(function(){function _a(_b){var _c=950,_d=700,_e=window.screen,_f=window.open('','reportPopup',['width='+_c,'height='+_d,'left='+Math.max((_e.width-_c-10)>>1,0),'top='+Math.max((_e.height-_d-40)>>1,0),'toolbar=no','location=no','directories=no','status=no','menubar=no','scrollbars=yes'].join(',')),_g=_f.document;_g.open('text/html');_g.writeln('<html><body><pre>'+_b.replace(/</g,'&lt;')+'</pre></body></html>');_g.close();_f.focus();}var _h=window.zPage||window.page;if(_h){var _i=prompt('Enter a DOM node id...','');if(_i){function _j(_k){if(_k.get('idPrefix')==_l){return _k;}else{var _m=_k.children;for(var _n in _m){var _o=_j(_m[_n]);if(_o)return _o;}}}function _p(_o){var _q=[];while(_o){_q.unshift(_o==_h?(_h==window.zPage?'zPage':'page'):_o.get('name'));_o=_o.parent}return _q.join('.children.');}var _r=_i.indexOf('-'),_l=_r> -1?_i.slice(0,_r):_i,_o=_j(_h),_k=_o.parent,_s=[];while(_k){_s.push(_p(_k)+'  --  WIDGET CLASS: '+_k.constructor.moduleName);_k=_k.parent;}if(_o){var _t='\n---------------------------------------------------------\n\n';_a('WIDGET PATH: '+_p(_o)+'\n'+'WIDGET CLASS: '+_o.constructor.moduleName+'\n'+_t+'WIDGET PARENTAGE:\n\n'+(_s.length?_s.join('\n')+'\n':'no parents\n')+_t+'WIDGET STATE SUMMARY:\n\n'+_o.toString());}else{alert('The DOM node with the ID "'+_i+'" does not appear belong to a widget.');}}}else{alert('This page doesn\'t have a page widget instance named "page" or "zPage".');}})();
+
+		You might be troubleshooting some issue on a page and you're digging through the HTML and find some node of interest. You can also use Firebug's Inspect Element feature to click on and select some node of interest. If the node has an =id= that makes it look like it's an implied node of some widget in the widget tree for the page, then you can use this bookmarklet to find the widget that owns the node.
+
+		To use the bookmarklet, follow these simple steps...
+
+		+. Locate the node of interest that you believe belongs to a widget, either by viewing the source of the page or by using a tool such as Firebug.
+
+		+. Grab the =id= for the DOM node of interest and provide it to the bookmarklet. Copy the node's =id=, then launch the bookmarklet (which can be on your browser toolbar somewhere). Enter the node =id= in the prompt that pops up.
+
+		+. Upon entering the node's =id= and hitting enter, the bookmarklet will scan through the page's widget tree to find the widget to which the node belongs. If it finds the widget, it will display a report in a popup window. The report will contain such information as the full dereferencing path for the widget (which you can copy-and-paste into Firebug's console, or otherwise use for further debugging goodness), the widget's class, parentage information for the widget, and a summary of the state of the widget's set-get properties.
+
+		Page Widget Expected
+			This bookmarklet assumes that the page has a single page widget instance that contains the page's widget tree, and that the page widget instance is accessible by a global identifier named either =page= (as is the general convention) or =zPage= (as is the convention for Zazzle's Web site).
+
+			If you wish to use this bookmarklet for a site that uses a different global identifier for the page widget instance on its pages, then you should create your own edited version of the bookmarklet and scrunch it using the [[../examples/javascript-scruncher.html][JavaScript Scruncher]] tool.
+
+		BOOKMARKLET SOURCE CODE
+		...............................................................................................
+		(function () {
+			function _showReport (_report) {
+				var
+					_width = 950,
+					_height = 700,
+					_screen = window.screen,
+					_window = window.open (
+						'',
+						'reportPopup',
+						[
+							'width=' + _width,
+							'height=' + _height,
+							'left=' + Math.max ((_screen.width - _width - 10) >> 1,0),
+							'top=' + Math.max ((_screen.height - _height - 40) >> 1,0),
+							'toolbar=no',
+							'location=no',
+							'directories=no',
+							'status=no',
+							'menubar=no',
+							'scrollbars=yes'
+						].join (',')
+					),
+					_document = _window.document
+				;
+				_document.open ('text/html');
+				_document.writeln (
+					'<html><body><pre>' + _report.replace (/</g,'&lt;') + '</pre></body></html>'
+				);
+				_document.close ();
+				_window.focus ();
+			}
+			var _pageWidget = window.zPage || window.page;
+			if (_pageWidget) {
+				var _nodeId = prompt ('Enter a DOM node id...','');
+				if (_nodeId) {
+					function _findWidgetWithIdPrefix (_parent) {
+						if (_parent.get ('idPrefix') == _idPrefix) {
+							return _parent;
+						} else {
+							var _children = _parent.children;
+							for (var _childName in _children) {
+								var _widget = _findWidgetWithIdPrefix (_children [_childName]);
+								if (_widget) return _widget;
+							}
+						}
+					}
+					function _getWidgetPath (_widget) {
+						var _widgetPath = [];
+						while (_widget) {
+							_widgetPath.unshift (
+								_widget == _pageWidget
+									? (_pageWidget == window.zPage ? 'zPage' : 'page')
+									: _widget.get ('name')
+							);
+							_widget = _widget.parent
+						}
+						return _widgetPath.join ('.children.');
+					}
+					var
+						_impliedNodePos = _nodeId.indexOf ('-'),
+						_idPrefix = _impliedNodePos > -1 ? _nodeId.slice (0,_impliedNodePos) : _nodeId,
+						_widget = _findWidgetWithIdPrefix (_pageWidget),
+						_parent = _widget.parent,
+						_parents = []
+					;
+					while (_parent) {
+						_parents.push (
+							_getWidgetPath (_parent) +
+							'  --  WIDGET CLASS: ' + _parent.constructor.moduleName
+						);
+						_parent = _parent.parent;
+					}
+					if (_widget) {
+						var _divider = '\n---------------------------------------------------------\n\n';
+						_showReport (
+							'WIDGET PATH: ' + _getWidgetPath (_widget) + '\n' +
+							'WIDGET CLASS: ' + _widget.constructor.moduleName + '\n' +
+							_divider +
+							'WIDGET PARENTAGE:\n\n' +
+							(_parents.length ? _parents.join ('\n') + '\n' : 'no parents\n') +
+							_divider +
+							'WIDGET STATE SUMMARY:\n\n' + _widget.toString ()
+						);
+					} else {
+						alert (
+							'The DOM node with the ID "' + _nodeId + '" does not appear belong to a widget.'
+						);
+					}
+				}
+			} else {
+				alert ('This page doesn\'t have a page widget instance named "page" or "zPage".');
+			}
+		}) ();
+		...............................................................................................
+
+	Flattened Widget Tree Bookmarklet
+		The Flattened Widget Tree Bookmarklet produces a report of all the widgets in the widget tree hierarchy for a Web page, in the form of a flattened list.
+
+		BOOKMARKLET
+		================================================================================================================
+		................................................................................................................
+		<< HTML >>
+
+		code::
+			<a href="javascript:(function(){function _a(_b){var _c=window.screen,_d=500,_e=600,_f=window.open(&apos;&apos;,&apos;reportPopup&apos;,[&apos;width=&apos;+_d,&apos;height=&apos;+_e,&apos;left=&apos;+Math.max((_c.width-_d-10)&gt;&gt;1,0),&apos;top=&apos;+Math.max((_c.height-_e-40)&gt;&gt;1,0),&apos;toolbar=no&apos;,&apos;location=no&apos;,&apos;directories=no&apos;,&apos;status=no&apos;,&apos;menubar=no&apos;,&apos;scrollbars=yes&apos;].join(&apos;,&apos;)),_g=_f.document;_g.open(&apos;text/html&apos;);_g.writeln(&apos;&lt;html&gt;&lt;body&gt;&lt;pre&gt;&apos;+_b.replace(/&lt;/g,&apos;&amp;lt;&apos;)+&apos;&lt;/pre&gt;&lt;/body&gt;&lt;/html&gt;&apos;);_g.close();_f.focus();}var _h=window.zPage||window.page;if(_h){var _i=[];function _j(_k,_l){_i.push(_l+=_k==_h?(_h==window.zPage?&apos;zPage&apos;:&apos;page&apos;):_k.get(&apos;name&apos;));_l+=&apos;.children.&apos;;var _m=_k.children;for(var _n in _m)_j(_m[_n],_l);}_j(_h,&apos;&apos;);_a(_i.join(&apos;\n&apos;));}else{alert(&apos;This page doesn\&apos;t have a page widget instance named &quot;page&quot; or &quot;zPage&quot;.&apos;);}})();">FLAT WIDGET TREE</a> &nbsp;&larr; drag the link to your bookmarks toolbar (or click it to try it now)
+		................................................................................................................
+		================================================================================================================
+
+		### scrunched, but pre-XML encoded
+			javascript:(function(){function _a(_b){var _c=window.screen,_d=500,_e=600,_f=window.open('','reportPopup',['width='+_d,'height='+_e,'left='+Math.max((_c.width-_d-10)>>1,0),'top='+Math.max((_c.height-_e-40)>>1,0),'toolbar=no','location=no','directories=no','status=no','menubar=no','scrollbars=yes'].join(',')),_g=_f.document;_g.open('text/html');_g.writeln('<html><body><pre>'+_b.replace(/</g,'&lt;')+'</pre></body></html>');_g.close();_f.focus();}var _h=window.zPage||window.page;if(_h){var _i=[];function _j(_k,_l){_i.push(_l+=_k==_h?(_h==window.zPage?'zPage':'page'):_k.get('name'));_l+='.children.';var _m=_k.children;for(var _n in _m)_j(_m[_n],_l);}_j(_h,'');_a(_i.join('\n'));}else{alert('This page doesn\'t have a page widget instance named "page" or "zPage".');}})();
+
+		When you use this bookmarklet on a page that has a page widget instance, the bookmarklet will traverse the entire widget tree for the page and produce a flattened list of all the widgets in a popup window. Each entry in the list is a full dereferencing path, which you can copy-and-paste into Firebug's console (or otherwise use) for further debugging goodness.
+
+		BOOKMARKLET SOURCE CODE
+		........................................................................................
+		(function () {
+			function _showReport (_report) {
+				var
+					_screen = window.screen,
+					_width = 500,
+					_height = 600,
+					_window = window.open (
+						'',
+						'reportPopup',
+						[
+							'width=' + _width,
+							'height=' + _height,
+							'left=' + Math.max ((_screen.width - _width - 10) >> 1,0),
+							'top=' + Math.max ((_screen.height - _height - 40) >> 1,0),
+							'toolbar=no',
+							'location=no',
+							'directories=no',
+							'status=no',
+							'menubar=no',
+							'scrollbars=yes'
+						].join (',')
+					),
+					_document = _window.document
+				;
+				_document.open ('text/html');
+				_document.writeln (
+					'<html><body><pre>' + _report.replace (/</g,'&lt;') + '</pre></body></html>'
+				);
+				_document.close ();
+				_window.focus ();
+			}
+			var _pageWidget = window.zPage || window.page;
+			if (_pageWidget) {
+				var _widgets = [];
+				function _processWidget (_widget,_widgetPath) {
+					_widgets.push (
+						_widgetPath += _widget == _pageWidget
+							? (_pageWidget == window.zPage ? 'zPage' : 'page')
+							: _widget.get ('name')
+					);
+					_widgetPath += '.children.';
+					var _children = _widget.children;
+					for (var _childName in _children)
+						_processWidget (_children [_childName],_widgetPath)
+					;
+				}
+				_processWidget (_pageWidget,'');
+				_showReport (_widgets.join ('\n'));
+			} else {
+				alert ('This page doesn\'t have a page widget instance named "page" or "zPage".');
+			}
+		}) ();
+		........................................................................................
+
+### Bookmarklets That Utilize UIZE JavaScript Framework
+	Inline Bookmarklet
+		Write the Bookmarklet's Code
+			SKELETON
+			...........................................................................................
+			(function () {
+				function _performBookmarkletAction () {
+					// do stuff
+				}
+				if (window.Uize)
+					_performBookmarkletAction ()
+				; else {
+					var _scriptNode = document.createElement ('script');
+					_scriptNode.src = 'http://www.uize.com/js/Uize.js';
+					if (_scriptNode.readyState)
+						_scriptNode.onreadystatechange = function () {
+							if (_scriptNode.readyState == 'loaded' || _scriptNode.readyState == 'complete')
+								_scriptNode.onreadystatechange = _performBookmarkletAction ()
+							;
+						}
+					; else
+						_scriptNode.onload = _performBookmarkletAction
+					;
+					document.body.appendChild (_scriptNode);
+				}
+			}) ();
+			...........................................................................................
+
+			EXAMPLE
+			...........................................................................................
+			(function () {
+				function _performBookmarkletAction () {
+					Uize.module ({
+						required:['Uize.Fade','Uize.Fade.xFactory','Uize.Curve.Rubber'],
+						builder:function () {
+							var _newTitle = document.title;
+							Uize.Fade.fade (
+								function (_value) {document.title = _newTitle.slice (0,_value)},
+								0,
+								_newTitle.length,
+								1000,
+								{quantization:1,curve:Uize.Curve.Rubber.easeOutBounce (4,1.5)}
+							)
+						}
+					})
+				}
+				if (window.Uize)
+					_performBookmarkletAction ()
+				; else {
+					var _scriptNode = document.createElement ('script');
+					_scriptNode.src = 'http://www.uize.com/js/Uize.js';
+					if (_scriptNode.readyState)
+						_scriptNode.onreadystatechange = function () {
+							if (_scriptNode.readyState == 'loaded' || _scriptNode.readyState == 'complete')
+								_scriptNode.onreadystatechange = _performBookmarkletAction ()
+							;
+						}
+					; else
+						_scriptNode.onload = _performBookmarkletAction
+					;
+					document.body.appendChild (_scriptNode);
+				}
+			}) ();
+			...........................................................................................
+
+		Bookmarkletize It
+			- scrunch the code
+			- add the "javascript:" prefix
+
+			SCRUNCHED BOOKMARKLET
+			............................................................................
+			javascript:(function(){function _a(){Uize.module({required:['Uize.Fade','Uize.Fade.xFactory','Uize.Curve.Rubber'],builder:function(){var _b=document.title;Uize.Fade.fade(function(_c){document.title=_b.slice(0,_c)},0,_b.length,1000,{quantization:1,curve:Uize.Curve.Rubber.easeOutBounce(4,1.5)})}})}if(window.Uize)_a();else{var _d=document.createElement('script');_d.src='http://www.uize.com/js/Uize.js';if(_d.readyState)_d.onreadystatechange=function(){if(_d.readyState=='loaded'||_d.readyState=='complete')_d.onreadystatechange=_a();};else _d.onload=_a;document.body.appendChild(_d);}})();
+			............................................................................
+
+		More Examples
+			document...
+
+	### Remote Bookmarklet
+		- allows bulky bookmarklet implementation to be kept in external script file
+		- add a script tag to the page that...
+			- checks to see if the bookmarklet's registered function is defined
+				- if so, call it
+				- if not, load in external script tag that defines function, wait for it to load, then call it
+
+		REMOTE SCRIPT SKELETON
+		...
+		...
+

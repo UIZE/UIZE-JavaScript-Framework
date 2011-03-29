@@ -1,0 +1,116 @@
+/*** general styling ***/
+	.slideshow {
+		border-collapse:collapse;
+		border:1px solid #899;
+	}
+	.slideshow .slideshowHeader {
+		background:#b7babf url(../images/title-bg-brushed-metal.jpg) repeat left top;
+	}
+	.slideshow .slideshowTitle {
+		font-family:Arial, Helvetica, Verdana;
+		font-size:11px;
+		color:#000;
+	}
+	.slideshow .slideshowSubtitle {
+		font-family:Arial, Helvetica, Verdana;
+		font-size:11px;
+		color:#666;
+	}
+
+/*** navigation buttons ***/
+	/*** styling common to all states ***/
+		.navButton, .navButton:link, .navButton:visited, .navButton:hover, .navButton:active {
+			display:block;
+			position:relative;
+			width:30px;
+			height:25px;
+			padding:0;
+			margin:1px;
+			border:1px solid #899;
+			text-decoration:none;
+			background:#c4cdd4 url(../images/button-bg.gif) left top repeat-x;
+		}
+		.navButton .arrow {
+			position:absolute;
+			left:0;
+			top:0;
+			width:100%;
+			height:100%;
+			background-repeat:no-repeat;
+			background-position:center center;
+			opacity:.5;
+			filter:alpha(opacity=50);
+		}
+	
+	/*** direction-specific styling (arrow images) ***/
+		/*** towards first ***/
+			.navButton .gotoFirst {
+				background-image:url(../images/nav-arrows/nav-arrow-horz-first.gif);
+			}
+			.navButton .gotoPrevious {
+				background-image:url(../images/nav-arrows/nav-arrow-horz-previous.gif);
+			}
+	
+		/*** towards last ***/
+			.navButton .gotoLast {
+				background-image:url(../images/nav-arrows/nav-arrow-horz-last.gif);
+			}
+			.navButton .gotoNext {
+				background-image:url(../images/nav-arrows/nav-arrow-horz-next.gif);
+			}
+	
+	/*** state-specific styling ***/
+		/*** grayed (disabled) ***/
+			.navButtonGrayed,
+			.navButtonGrayed:link,
+			.navButtonGrayed:visited,
+			.navButtonGrayed:hover,
+			.navButtonGrayed:active
+			{
+				background-position:left -300px;
+				border:1px solid #bbb;
+			}
+			.navButtonGrayed .arrow {
+				opacity:.15;
+				filter:alpha(opacity=15);
+			}
+	
+		/*** over (mouseover) ***/
+			.navButtonOver,
+			.navButtonOver:link,
+			.navButtonOver:visited,
+			.navButtonOver:hover,
+			.navButtonOver:active
+			{
+				border:solid 1px #777;
+				background-position:left -100px;
+			}
+	
+		/*** common styling to over & active ***/
+			.navButtonOver .arrow {
+				opacity:.8;
+				filter:alpha(opacity=80);
+			}
+			.navButtonActive .arrow {
+				opacity:.8;
+				filter:alpha(opacity=80);
+			}
+	
+		/*** active (mousedown) ***/
+			.navButtonActive,
+			.navButtonActive:link,
+			.navButtonActive:visited,
+			.navButtonActive:hover,
+			.navButtonActive:active
+			{
+				border:solid 1px #999;
+				background-position:left -200px;
+			}
+			/*** arrow shift ***/
+				.navButtonActive .towardsFirst {
+					background-position:40% center;
+				}
+				.navButtonActive .towardsLast {
+					background-position:60% center;
+				}
+

@@ -1,0 +1,77 @@
+/*** view ***/
+	.scrollyView {
+		overflow:hidden;
+		border:1px solid #9aa;
+		background:#fff;
+	}
+
+/*** buttons ***/
+	.scrollyButton, .scrollyButton:link, .scrollyButton:visited, .scrollyButton:hover, .scrollyButton:active {
+		margin:0;
+		padding:0;
+		position:relative;
+	}
+	.scrollyButton .arrow {
+		position:absolute;
+		left:0;
+		top:0;
+		width:100%;
+		height:100%;
+		background-repeat:no-repeat;
+		background-position:center center;
+		opacity:.5;
+		filter:alpha(opacity=50);
+	}
+	.buttonOver .arrow {
+		opacity:.7;
+		filter:alpha(opacity=70);
+	}
+	.buttonActive .arrow {
+		opacity:1;
+		filter:alpha(opacity=100);
+	}
+	.buttonGrayed .arrow {
+		opacity:.1;
+		filter:alpha(opacity=10);
+	}
+
+/*** horizontal scrolly ***/
+	.scrollyHorz .scrollyView {
+		float:left;
+		width:444px;
+		height:85px;
+		border-left:none;
+		border-right:none;
+		white-space:nowrap;
+	}
+	.scrollyHorz .scrollyButton {
+		width:24px;
+		height:85px;
+		float:left;
+	}
+	.scrollyHorz .scrollyButton .arrowLeft {
+		background-image:url(../examples/images/arrow-black-left.gif);
+	}
+	.scrollyHorz .scrollyButton .arrowRight {
+		background-image:url(../examples/images/arrow-black-right.gif);
+	}
+
+/*** vertical scrolly ***/
+	.scrollyVert .scrollyView {
+		width:115px;
+		height:324px;
+		border-top:none;
+		border-bottom:none;
+		white-space:nowrap;
+	}
+	.scrollyVert .scrollyButton {
+		width:115px;
+		height:24px;
+	}
+	.scrollyVert .scrollyButton .arrowUp {
+		background-image:url(../examples/images/arrow-black-up.gif);
+	}
+	.scrollyVert .scrollyButton .arrowDown {
+		background-image:url(../examples/images/arrow-black-down.gif);
+	}
+

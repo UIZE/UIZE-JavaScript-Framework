@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>setNodeValue on Multi-select - HTML Source Code | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework HTML example source code"/>
+	<meta name="description" content="This is the source code for the setNodeValue on Multi-select example"/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../../css/page.css"/>
+	<link rel="stylesheet" href="../../css/page.source.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../../index.html" title="UIZE JavaScript Framework home"></a>
+	SOURCE CODE: setNodeValue on Multi-select
+	<div id="page-actions" class="pageActions">
+		<a href="../set-node-value-multi-select.html" class="buttonLink">VIEW EXAMPLE</a>
+	</div>
+</h1>
+
+<pre>
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+&lt;head&gt;
+  &lt;title&gt;setNodeValue on Multi-select | JavaScript Examples | UIZE JavaScript Framework&lt;/title&gt;
+  &lt;meta name="keywords" content="form Uize.Widget"/&gt;
+  &lt;meta name="description" content="See a demo of the setNodeValue and getNodeValue instance methods being used to set and get the value for a multiple select style listbox form element."/&gt;
+  &lt;link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/&gt;
+  &lt;link rel="stylesheet" href="../css/page.css"/&gt;
+  &lt;link rel="stylesheet" href="../css/page.example.css"/&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+&lt;script type="text/javascript" src="../js/Uize.js"&gt;&lt;/script&gt;
+
+&lt;h1 class="document-title"&gt;
+  &lt;a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"&gt;&lt;/a&gt;
+  &lt;a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow"&gt;JAVASCRIPT EXAMPLES&lt;/a&gt;
+  setNodeValue on Multi-select
+  &lt;div id="page-actions" class="pageActions"&gt;
+    &lt;a href="source-code/set-node-value-multi-select.html" class="buttonLink"&gt;SOURCE&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/h1&gt;
+
+&lt;div class="main"&gt;
+  &lt;!-- explanation copy --&gt;
+
+  &lt;div class="explanation"&gt;
+    &lt;p&gt;This example demonstrates how the &lt;code&gt;setNodeValue&lt;/code&gt; instance method of the &lt;a href="../reference/Uize.Widget.html"&gt;&lt;code&gt;Uize.Widget&lt;/code&gt;&lt;/a&gt; base class can be used to conveniently set the value of a multi-select select tag (where its &lt;code&gt;multiple&lt;/code&gt; attribute is set to &lt;code&gt;'multiple'&lt;/code&gt;). Clicking on the buttons above the select element will select different combinations of options by calling the &lt;code&gt;setNodeValue&lt;/code&gt; method. The special value &lt;code&gt;''&lt;/code&gt; (empty string) clears the selection, and the special wildcard value &lt;code&gt;'*'&lt;/code&gt; selects all options. Under the select element is a display of some of its state that is kept up-to-date. Currently selected options are reflected in the result of the &lt;code&gt;page.getNodeValue ('select')&lt;/code&gt; method call. The value of the select element's &lt;code&gt;value&lt;/code&gt; and &lt;code&gt;selectedIndex&lt;/code&gt; properties are displayed as well, from which you will see that these properties of the element always reflect only the first of the selected options. In contrast, &lt;code&gt;getNodeValue&lt;/code&gt; provides the values of all the selected options, bundled into an array.&lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;!-- various form elements and a span --&gt;
+
+  &lt;center&gt;
+    &lt;a href="javascript://" class="buttonLink linkedJs" title="page.setNodeValue ('select',''); updateStateDisplay ()"&gt;Select None&lt;/a&gt;
+    &lt;a href="javascript://" class="buttonLink linkedJs" title="page.setNodeValue ('select','*'); updateStateDisplay ()"&gt;Select All&lt;/a&gt;
+    &lt;a href="javascript://" class="buttonLink linkedJs" title="page.setNodeValue ('select','Geothermal'); updateStateDisplay ()"&gt;Select Geothermal&lt;/a&gt;
+    &lt;a href="javascript://" class="buttonLink linkedJs" title="page.setNodeValue ('select',['Biofuel','Biomass']); updateStateDisplay ()"&gt;Select Chemically Derived&lt;/a&gt;
+    &lt;a href="javascript://" class="buttonLink linkedJs" title="page.setNodeValue ('select','Hydroelectricity,Wave,Tidal'); updateStateDisplay ()"&gt;Select Water Derived&lt;/a&gt;
+    &lt;a href="javascript://" class="buttonLink linkedJs" title="page.setNodeValue ('select',page.getNodeValue ('select').concat ('Wind')); updateStateDisplay ()"&gt;Add Wind&lt;/a&gt;
+
+    &lt;form style="margin-top:20px;" action="" method="GET"&gt;
+      &lt;div class="exampleSectionHeading" style="width:180px; margin-bottom:2px;"&gt;Renewable Energy&lt;/div&gt;
+      &lt;select id="page-select" multiple="multiple" size="8" style="width:180px;"&gt;
+        &lt;option value="Solar"&gt;Solar&lt;/option&gt;
+        &lt;option value="Wind"&gt;Wind&lt;/option&gt;
+        &lt;option value="Biofuel"&gt;Biofuel&lt;/option&gt;
+        &lt;option value="Hydroelectricity"&gt;Hydroelectricity&lt;/option&gt;
+        &lt;option value="Geothermal"&gt;Geothermal&lt;/option&gt;
+        &lt;option value="Biomass"&gt;Biomass&lt;/option&gt;
+        &lt;option value="Wave"&gt;Wave&lt;/option&gt;
+        &lt;option value="Tidal"&gt;Tidal&lt;/option&gt;
+      &lt;/select&gt;
+    &lt;/form&gt;
+  &lt;/center&gt;
+  &lt;br/&gt;
+
+  &lt;!-- programmatic interface examples --&gt;
+
+  &lt;div class="programmaticInterface"&gt;
+    &lt;p&gt;&lt;b&gt;page.getNodeValue ('select') == &lt;/b&gt; &lt;span id="page-valueFromGetNodeValue"&gt;&lt;/span&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;b&gt;page.getNode ('select').value == &lt;/b&gt; &lt;span id="page-valueFromNodesValueProperty"&gt;&lt;/span&gt;&lt;/p&gt;
+    &lt;p&gt;&lt;b&gt;page.getNode ('select').selectedIndex == &lt;/b&gt; &lt;span id="page-selectedIndex"&gt;&lt;/span&gt;&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- JavaScript code to wire up the page --&gt;
+
+&lt;script type="text/javascript"&gt;
+
+Uize.module ({
+  required:[
+    'UizeDotCom.Page.Example.library',
+    'UizeDotCom.Page.Example',
+    'Uize.Node',
+    'Uize.Json'
+  ],
+  builder:function () {
+    /*** create the example page widget ***/
+      var page = window.page = new UizeDotCom.Page.Example ({evaluator:function (code) {eval (code)}});
+
+    /*** functions for updating state display ***/
+      function updateStateDisplay () {
+        function setNodeValueAsJson (nodeName,value) {page.setNodeValue (nodeName,Uize.Json.to (value,'mini'))}
+        setNodeValueAsJson ('valueFromGetNodeValue',page.getNodeValue ('select'));
+        setNodeValueAsJson ('valueFromNodesValueProperty',page.getNode ('select').value);
+        setNodeValueAsJson ('selectedIndex',page.getNode ('select').selectedIndex);
+      }
+      page.wireNode ('select','change',updateStateDisplay);
+
+    /*** wire up the page widget ***/
+      page.wireUi ();
+
+    /*** initialization ***/
+      updateStateDisplay ();
+  }
+});
+
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+
+</pre>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.library',
+		'UizeDotCom.Page'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page).wireUi ()}
+});
+
+</script>
+
+</body></html>

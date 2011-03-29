@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2010-02-05 - IMPROVED MODULE: Uize.Widget.CollectionItem.Zooming | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="The implementation of the Uize.Widget.CollectionItem.Zooming module has been improved to provide a smoother experience in Apple Safari, Google Chrome, and other browsers based on the WebKit project."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2010.html" class="breadcrumb breadcrumbWithArrow">2010 NEWS</a>
+	2010-02-05 - IMPROVED MODULE: Uize.Widget.CollectionItem.Zooming
+
+</h1>
+
+<div class="main">
+<div class="contents0">
+	<p>The implementation of the <code><a href="../reference/Uize.Widget.CollectionItem.Zooming.html">Uize.Widget.CollectionItem.Zooming</a></code> module has been improved to provide a smoother experience in Apple Safari, Google Chrome, and other browsers based on the WebKit project.</p>
+	
+	<p>With the previous implementation approach, the zoom in effect would be jerky in some browsers the very first time that the zoom in effect was triggered for an instance. In worst case scenarios, there would be no zoom in effect visible at all, and the larger, pannable version of the image would appear abruptly when it had completed loading in. Even in such cases, though, on subsequent triggering the effect would be smooth. The new implementation approach addresses this problem and produces a zoom in effect that is smooth - from the first triggering of the effect for an instance - in Apple Safari, Google Chrome, and other browsers based on the WebKit project, while still remaining smooth in all other browsers.</p>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

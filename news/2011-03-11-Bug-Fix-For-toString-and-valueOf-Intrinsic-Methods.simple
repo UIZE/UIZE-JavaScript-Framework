@@ -1,0 +1,9 @@
+An Internet Explorer specific problem with the =toString intrinsic method= and the =valueOf intrinsic method=, that are specially implemented for =Uize= subclasses, has been fixed.
+
+The =toString intrinsic method= and the =valueOf intrinsic method= that are implemented in the =Uize= base class, and that provide a convenient way to serialize and see the value for instances of =Uize= subclasses while troubleshooting, were found to not be working in Internet Explorer. This had to do with a difference in how Microsoft's JavaScript interpreter treats the enumerability of the =toString= and =valueOf= properties. In non-Microsoft JavaScript interpreters, these properties are enumerable when they are assigned explicitly on an object, and not enumerable otherwise. In Microsoft's JavaScript interpreter, the properties are never enumerable, and this was preventing the values assigned for them on the =Uize= base class from being copied when creating subclasses. The fix was to always explicitly assign these properties directly on subclasses created from the =Uize= base class.
+
+....................................................................................
+<< metadata >>
+
+title: 2011-03-11 - Bug Fix For toString and valueOf Intrinsic Methods
+....................................................................................

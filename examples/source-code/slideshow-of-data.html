@@ -1,0 +1,207 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Slideshow of Data - HTML Source Code | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework HTML example source code"/>
+	<meta name="description" content="This is the source code for the Slideshow of Data example"/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../../css/page.css"/>
+	<link rel="stylesheet" href="../../css/page.source.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../../index.html" title="UIZE JavaScript Framework home"></a>
+	SOURCE CODE: Slideshow of Data
+	<div id="page-actions" class="pageActions">
+		<a href="../slideshow-of-data.html" class="buttonLink">VIEW EXAMPLE</a>
+	</div>
+</h1>
+
+<pre>
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+&lt;head&gt;
+  &lt;title&gt;Slideshow of Data | JavaScript Examples | UIZE JavaScript Framework&lt;/title&gt;
+  &lt;meta name="keywords" content="featured animation slideshow Uize.Widget.Bar Uize.Widget.Swap.Image Uize.Widget.SlideShow"/&gt;
+  &lt;meta name="description" content="Who says that a slideshow can only be used to display an image? See this demo - it uses a slideshow to display nutritional data for various fruits."/&gt;
+  &lt;link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/&gt;
+  &lt;link rel="stylesheet" href="../css/page.css"/&gt;
+  &lt;link rel="stylesheet" href="../css/page.example.css"/&gt;
+  &lt;link rel="stylesheet" href="../css/widget.slideshow.css"/&gt;
+  &lt;link rel="stylesheet" href="../css/widget.databar.css"/&gt;
+  &lt;style type="text/css"&gt;
+    /*** layout ***/
+      tr.headings td {
+        font-size:9px;
+        padding:3px;
+        border:none;
+      }
+  &lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+&lt;script type="text/javascript" src="../js/Uize.js"&gt;&lt;/script&gt;
+
+&lt;h1 class="document-title"&gt;
+  &lt;a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"&gt;&lt;/a&gt;
+  &lt;a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow"&gt;JAVASCRIPT EXAMPLES&lt;/a&gt;
+  Slideshow of Data
+  &lt;div id="page-actions" class="pageActions"&gt;
+    &lt;a href="source-code/slideshow-of-data.html" class="buttonLink"&gt;SOURCE&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/h1&gt;
+
+&lt;div class="main"&gt;
+  &lt;!-- explanation copy --&gt;
+
+  &lt;div class="explanation"&gt;
+    &lt;p&gt;One can be forgiven for thinking of a slideshow as being just about a series of photos. However, the &lt;a href="../reference/Uize.Widget.SlideShow.html"&gt;&lt;code&gt;Uize.Widget.SlideShow&lt;/code&gt;&lt;/a&gt; class is implemented to be generic, versatile, and agnostic as to the contents of the slides in the slide set. This makes it possible to have a slideshow focused on presenting data, where the data from each slide is represented by a series of widgets that are added as child widgets of the slideshow widget. In this example, a slideshow is presented of nutritional data for various fruits. Instances of &lt;a href="../reference/Uize.Widget.Bar.html"&gt;&lt;code&gt;Uize.Widget.Bar&lt;/code&gt;&lt;/a&gt; are used to represent the values of various nutritional properties. An instance of &lt;a href="../reference/Uize.Widget.Swap.Image.html"&gt;&lt;code&gt;Uize.Widget.Swap.Image&lt;/code&gt;&lt;/a&gt; is used to create a backdrop to the data bars that dissolves across transitions using a JavaScript animation effect.&lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;!-- the slide set is defined in an external library so it can be shared by several pages --&gt;
+
+  &lt;!-- slideshow HTML layout with UI to be wired up --&gt;
+
+  &lt;table class="slideshow" cellspacing="0" cellpadding="0" style="margin:auto;"&gt;
+    &lt;tr class="slideshowHeader" valign="top"&gt;
+      &lt;td align="left"&gt;
+        &lt;table border="0" cellspacing="0" cellpadding="0"&gt;
+          &lt;tr valign="top"&gt;
+            &lt;td&gt;&lt;a id="page_slideShow_first" class="navButton" href="javascript://"&gt;&lt;div class="arrow towardsFirst gotoFirst"&gt;&lt;/div&gt;&lt;/a&gt;&lt;/td&gt;
+            &lt;td&gt;&lt;a id="page_slideShow_previous" class="navButton" href="javascript://"&gt;&lt;div class="arrow towardsFirst gotoPrevious"&gt;&lt;/div&gt;&lt;/a&gt;&lt;/td&gt;
+          &lt;/tr&gt;
+        &lt;/table&gt;
+      &lt;/td&gt;
+      &lt;td align="center"&gt;
+        &lt;div id="page_slideShow-slide_name" style="font-family:Verdana; font-size:14px; text-transform:uppercase; letter-spacing:7px; margin-top:6px;"&gt;&amp;nbsp;&lt;/div&gt;
+      &lt;/td&gt;
+      &lt;td align="right"&gt;
+        &lt;table border="0" cellspacing="0" cellpadding="0"&gt;
+          &lt;tr valign="top"&gt;
+            &lt;td&gt;&lt;a id="page_slideShow_next" class="navButton" href="javascript://"&gt;&lt;div class="arrow towardsLast gotoNext"&gt;&lt;/div&gt;&lt;/a&gt;&lt;/td&gt;
+            &lt;td&gt;&lt;a id="page_slideShow_last" class="navButton" href="javascript://"&gt;&lt;div class="arrow towardsLast gotoLast"&gt;&lt;/div&gt;&lt;/a&gt;&lt;/td&gt;
+          &lt;/tr&gt;
+        &lt;/table&gt;
+      &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td colspan="3" align="center" valign="top" style="background:#000;"&gt;
+        &lt;div style="position:relative; width:695px; height:327px;"&gt;
+          &lt;!-- markup for the image swap widget --&gt;
+            &lt;div id="page_slideShow_slideImage" style="position:absolute; left:0px; top:0px; width:695px; height:327px; background:#000; z-index:1; text-align:left;"&gt;
+            &lt;/div&gt;
+
+          &lt;!-- markup for the bars widgets --&gt;
+            &lt;table cellspacing="2" cellpadding="0" style="position:absolute; left:0; top:0; z-index:2;"&gt;
+              &lt;tr class="headings"&gt;
+                &lt;td&gt;Calories&lt;/td&gt;
+                &lt;td&gt;Total Fat&lt;/td&gt;
+                &lt;td&gt;Sat. Fat&lt;/td&gt;
+                &lt;td&gt;Cholesterol&lt;/td&gt;
+                &lt;td&gt;Sodium&lt;/td&gt;
+                &lt;td&gt;Total Carbs&lt;/td&gt;
+                &lt;td&gt;Dietary Fiber&lt;/td&gt;
+                &lt;td&gt;Sugars&lt;/td&gt;
+                &lt;td&gt;Protein&lt;/td&gt;
+                &lt;td&gt;Calcium&lt;/td&gt;
+                &lt;td&gt;Potassium&lt;/td&gt;
+              &lt;/tr&gt;
+              &lt;tr&gt;
+                &lt;td id="page_slideShow_slideCalories"&gt;&lt;/td&gt;
+                &lt;td id="page_slideShow_slideTotalFat"&gt;&lt;/td&gt;
+                &lt;td id="page_slideShow_slideSaturatedFat"&gt;&lt;/td&gt;
+                &lt;td id="page_slideShow_slideCholesterol"&gt;&lt;/td&gt;
+                &lt;td id="page_slideShow_slideSodium"&gt;&lt;/td&gt;
+                &lt;td id="page_slideShow_slideTotalCarbs"&gt;&lt;/td&gt;
+                &lt;td id="page_slideShow_slideDietaryFiber"&gt;&lt;/td&gt;
+                &lt;td id="page_slideShow_slideSugars"&gt;&lt;/td&gt;
+                &lt;td id="page_slideShow_slideProtein"&gt;&lt;/td&gt;
+                &lt;td id="page_slideShow_slideCalcium"&gt;&lt;/td&gt;
+                &lt;td id="page_slideShow_slidePotassium"&gt;&lt;/td&gt;
+              &lt;/tr&gt;
+            &lt;/table&gt;
+        &lt;/div&gt;
+      &lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/table&gt;
+&lt;/div&gt;
+
+&lt;!-- JavaScript code to make the static slideshow HTML "come alive" --&gt;
+
+&lt;script type="text/javascript"&gt;
+
+Uize.module ({
+  required:[
+    'UizeDotCom.Page.Example.library',
+    'UizeDotCom.Page.Example',
+    'UizeDotCom.TestDataFruits',
+    'UizeDotCom.Templates.DataBar',
+    'Uize.Widget.Bar',
+    'Uize.Widget.Swap.Image',
+    'Uize.Widget.SlideShow'
+  ],
+  builder:function () {
+    /*** create the example page widget ***/
+      var page = window.page = new UizeDotCom.Page.Example;
+
+    /*** add the slide show child widget ***/
+      var slideShow = page.addChild ('slideShow',Uize.Widget.SlideShow,{slides:UizeDotCom.TestDataFruits ()});
+
+      /*** add the image wipe widget as a child widget to the slide show widget ***/
+        slideShow.addChild ('slideImage',Uize.Widget.Swap.Image,{width:695,height:327,built:false});
+
+    /*** add bar child widgets to the slideshow widget for displaying the nutritional data ***/
+      var
+        nutritionProperties = UizeDotCom.TestDataFruits.getNutritionProperties (),
+        nutritionPropertiesLength = nutritionProperties.length
+      ;
+      for (var propertyNo = -1; ++propertyNo &lt; nutritionPropertiesLength;) {
+        var propertyName = nutritionProperties [propertyNo];
+        slideShow.addChild (
+          'slide' + Uize.capFirstChar (propertyName),
+          Uize.Widget.Bar,
+          Uize.copyInto (
+            {
+              html:UizeDotCom.Templates.DataBar,
+              minValue:0,
+              maxValue:1,
+              increments:0,
+              built:false,
+              unit:UizeDotCom.TestDataFruits.getPropertyUnit (propertyName)
+            },
+            UizeDotCom.TestDataFruits.getValueBoundsForProperty (propertyName)
+          )
+        );
+      }
+
+    /*** wire up the page widget ***/
+      page.wireUi ();
+  }
+});
+
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+
+</pre>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.library',
+		'UizeDotCom.Page'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page).wireUi ()}
+});
+
+</script>
+
+</body></html>

@@ -1,0 +1,15 @@
+A number of issues have been addressed...
+
+- A workaround was implemented for an obscure issue with Firefox 2 where it would not always repaint an IFRAME-based modal dialog correctly when redisplaying the dialog, if the document had other elements beneath the dialog that used fixed positioning.
+- A bug in the =Uize.Scruncher= module, affecting regular expressions preceded by operators (eg. =if (!/^\d$/.test (sourceStr)) {...})=, has been fixed.
+- A strange bug in the =Uize.Color.hexStr= static method, that was causing erratic behaviors in the =Uize.Color= module in IE6, has been fixed.
+- A number of modules have been updated to deal with an obscure JavaScript parsing bug in Safari.
+- A bug in the =Uize.SimpleDoc= module, that was causing the inline linked text syntax to fail for paragraphs containing more than one link, has been fixed.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2008-10-27 - Bug Fixes
+....................................................................................

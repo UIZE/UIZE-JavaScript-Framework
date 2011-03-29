@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Calendar</title>
+	<meta name="viewport" content="width=320; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/>
+	<link rel="stylesheet" href="../../css/page.css"/>
+	<link rel="stylesheet" href="../../css/page.widget.css"/>
+	<link rel="stylesheet" href="../../css/page.widget.mobile.css"/>
+	<link rel="stylesheet" href="../../css/widget.calendar.css"/>
+	<link rel="stylesheet" href="../../css/widget.calendar.widgetstogo.css"/>
+	<link rel="stylesheet" href="../../css/widget.calendar.widgetstogo.mobile.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../../js/Uize.js"></script>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.WidgetToGoPage.Calendar.library',
+		'UizeDotCom.WidgetToGoPage'
+	],
+	builder:function () {
+		(
+			window.page = new UizeDotCom.WidgetToGoPage ({
+				title:'Calendar',
+				widgetClass:'Uize.Widget.Calendar',
+				widgetHtml:'Uize.Templates.Calendar'
+			})
+		).wireUi ();
+	}
+});
+
+</script>
+
+</body>
+</html>
+

@@ -1,0 +1,253 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Uize.Widget.SegmentDisplay | JavaScript Source Code | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework module source code"/>
+	<meta name="description" content="This is the JavaScript source code for the Uize.Widget.SegmentDisplay module of the UIZE JavaScript Framework"/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../../css/page.css"/>
+	<link rel="stylesheet" href="../../css/page.source.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../../index.html" title="UIZE JavaScript Framework home"></a>
+	SOURCE CODE: Uize.Widget.SegmentDisplay
+	<div class="pageActions">
+		<a href="../Uize.Widget.SegmentDisplay.html" class="buttonLink">VIEW REFERENCE</a>
+	</div>
+</h1>
+
+<pre>
+/*______________
+|       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
+|     /      /  |   ---------------------------------------------------
+|    /    O /   |    MODULE : Uize.Widget.SegmentDisplay Class
+|   /    / /    |
+|  /    / /  /| |    ONLINE : http://www.uize.com
+| /____/ /__/_| | COPYRIGHT : (c)2010-2011 UIZE
+|          /___ |   LICENSE : Available under MIT License or GNU General Public License
+|_______________|             http://www.uize.com/license.html
+*/
+
+/*ScruncherSettings Mappings="=c" LineCompacting="TRUE"*/
+
+/* Module Meta Data
+  type: Class
+  importance: 1
+  codeCompleteness: 100
+  testCompleteness: 0
+  docCompleteness: 1
+*/
+
+/*?
+  Introduction
+    The =Uize.Widget.SegmentDisplay= base class can be subclassed to create segment display widget classes for supporting different numbers of segments.
+
+    *DEVELOPERS:* `Chris van Rensburg`
+*/
+
+Uize.module ({
+  name:'Uize.Widget.SegmentDisplay',
+  required:[
+    'Uize.Data',
+    'Uize.Node.Classes'
+  ],
+  builder:function (_superclass) {
+    var
+      _class = _superclass.subclass (),
+      _classPrototype = _class.prototype
+    ;
+
+    /*** Variables for Performance Optimization ***/
+      var _Uize_Node_Classes_setState = Uize.Node.Classes.setState;
+
+    /*** Private Instance Methods ***/
+      _classPrototype._updateUiSegmentsState = function () {
+        var _this = this;
+        if (_this.isWired) {
+          var
+            _lastSegmentsState = _this._lastSegmentsState,
+            _segmentsState = _this._segmentsState
+          ;
+          _this.forEachSegment (
+            function (_segmentNo,_segmentCode,_segmentMask) {
+              var _segmentNewState = _segmentsState &amp; _segmentMask;
+              if (_lastSegmentsState == null || _segmentNewState != (_lastSegmentsState &amp; _segmentMask))
+                _Uize_Node_Classes_setState (
+                  _this.getNode ('segment' + _segmentCode),
+                  [_this._cssClassSegmentOff,_this._cssClassSegmentOn],
+                  !!_segmentNewState
+                )
+              ;
+            }
+          );
+          _this._lastSegmentsState = _segmentsState;
+        }
+      };
+
+    /*** Public Instance Methods ***/
+      _classPrototype.forEachSegment = function (_function) {
+        for (
+          var
+            _segmentNo = -1,
+            _segmentCodes = this.Class.segmentCodes,
+            _segmentCodesLength = _segmentCodes.length,
+            _segmentMask = 1 &lt;&lt; _segmentCodesLength
+          ;
+          ++_segmentNo &lt; _segmentCodesLength;
+        )
+          _function.call (this,_segmentNo,_segmentCodes [_segmentNo],_segmentMask = _segmentMask &gt;&gt; 1)
+        ;
+      };
+
+      _classPrototype.getSegmentState = function (_segmentNo) {
+        return !!(this._segmentsState &amp; (this.Class._firstSegmentMask &gt;&gt; _segmentNo));
+      };
+
+      _classPrototype.getSegmentsStateAsHex = function (_reverse) {
+        return this.Class.getSegmentsStateAsHex (this._segmentsState,_reverse);
+      };
+
+      _classPrototype.invertAllSegmentsState = function () {
+        this.set ({_segmentsState:this._segmentsState ^ this.Class._allSegmentsMask});
+      };
+
+      _classPrototype.setSegmentState = function (_segmentNo,_state) {
+        this.getSegmentState (_segmentNo) != _state &amp;&amp; this.toggleSegmentState (_segmentNo);
+      };
+
+      _classPrototype.setAllSegmentsState = function (_state) {
+        this.set ({_segmentsState:_state ? this.Class._allSegmentsMask : 0});
+      };
+
+      _classPrototype.toggleSegmentState = function (_segmentNo) {
+        this.set ({_segmentsState:this._segmentsState ^ (this.Class._firstSegmentMask &gt;&gt; _segmentNo)});
+      };
+
+      _classPrototype.updateUi = function () {
+        this._updateUiSegmentsState ();
+      };
+
+      _classPrototype.wireUi = function () {
+        var _this = this;
+        if (!_this.isWired) {
+          _this._lastSegmentsState = null;
+
+          _superclass.prototype.wireUi.call (_this);
+        }
+      };
+
+    /*** Private Static Methods ***/
+      _class._conformSegmentsState = function (_segmentsState) {
+        return Math.max (Math.round (_segmentsState),0) &amp; this._allSegmentsMask;
+      };
+
+    /*** Public Static Methods ***/
+      _class.configureDisplay = function (_segmentCodes,_valueToSegmentsStateLookup) {
+        var segmentCodesLength = (this.segmentCodes = _segmentCodes).length;
+        this.segmentsStateToValueLookup =
+          Uize.Data.getReverseLookup (this.valueToSegmentsStateLookup = _valueToSegmentsStateLookup)
+        ;
+        this._allSegmentsMask = (1 &lt;&lt; segmentCodesLength) - 1;
+        this._firstSegmentMask = 1 &lt;&lt; (segmentCodesLength - 1);
+        this._toHexExtraByteBit = 1 &lt;&lt; (Math.ceil (segmentCodesLength / 8) * 8);
+        /*?
+          ###
+            Public Static Properties
+              segmentCodes
+                document...
+
+              segmentsStateToValueLookup
+                document...
+
+              valueToSegmentsStateLookup
+                document...
+        */
+      };
+
+      _class.getSegmentsStateAsHex = function (_segmentsState,_reverse) {
+        _segmentsState = this._conformSegmentsState (_segmentsState);
+        if (_reverse) {
+          for (var _leftBitMask = this._firstSegmentMask, _rightBitMask = 1; _leftBitMask &gt; _rightBitMask;) {
+            if (!!(_segmentsState &amp; _leftBitMask) ^ !!(_segmentsState &amp; _rightBitMask))
+              _segmentsState = _segmentsState ^ _leftBitMask ^ _rightBitMask
+            ;
+            _leftBitMask = _leftBitMask &gt;&gt; 1;
+            _rightBitMask = _rightBitMask &lt;&lt; 1;
+          }
+        }
+        return '0x' + (_segmentsState | this._toHexExtraByteBit).toString (16).slice (1);
+      };
+
+      _class.getSegmentsStateFromValue = function (_value) {
+        if ((_value += '').length == 1) {
+          var
+            _valueToSegmentsStateLookup = this.valueToSegmentsStateLookup,
+            _segmentsState = _valueToSegmentsStateLookup [_value]
+          ;
+          if (_segmentsState == null) _segmentsState = _valueToSegmentsStateLookup [_value.toLowerCase ()];
+          if (_segmentsState == null) _segmentsState = _valueToSegmentsStateLookup [_value.toUpperCase ()];
+          return _segmentsState || 0;
+        } else {
+          return this._conformSegmentsState (_value);
+        }
+      };
+
+      _class.getValueFromSegmentsState = function (_segmentsState) {
+        return (
+          this.segmentsStateToValueLookup [_segmentsState = this._conformSegmentsState (_segmentsState)] ||
+          this.getSegmentsStateAsHex (_segmentsState)
+        );
+      };
+
+    /*** Register Properties ***/
+      _class.registerProperties ({
+        _cssClassSegmentOff:{
+          name:'cssClassSegmentOff',
+          value:'sevenSegSegmentOff'
+        },
+        _cssClassSegmentOn:{
+          name:'cssClassSegmentOn',
+          value:'sevenSegSegmentOn'
+        },
+        _segmentsState:{
+          name:'segmentsState',
+          conformer:function (_value) {return this.Class._conformSegmentsState (_value)},
+          onChange:[
+            function () {this.set ({_value:this.Class.getValueFromSegmentsState (this._segmentsState)})},
+            _classPrototype._updateUiSegmentsState
+          ]
+        },
+        _value:{
+          name:'value',
+          conformer:function (_value) {
+            return this.Class.getValueFromSegmentsState (this.Class.getSegmentsStateFromValue (_value));
+          },
+          onChange:function () {this.set ({_segmentsState:this.Class.getSegmentsStateFromValue (this._value)})}
+        }
+      });
+
+    return _class;
+  }
+});
+
+
+</pre>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.library',
+		'UizeDotCom.Page'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page).wireUi ()}
+});
+
+</script>
+
+</body></html>

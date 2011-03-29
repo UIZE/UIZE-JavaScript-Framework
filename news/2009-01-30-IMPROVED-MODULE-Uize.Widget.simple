@@ -1,0 +1,11 @@
+The =localize= instance method of the =Uize.Widget= base class has been improved with support for a new optional =tokenNamingSTR= parameter.
+
+The new optional =tokenNamingSTR= parameter allows for greater flexibility in token naming syntax (eg. square bracket enclosed tokens like =[tokenName]=, angle bracket enclosed tokens like =&lt;tokenName&gt;=, percent symbol enclosed tokens like =%tokenName%=, or anything that suits your application).
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-01-30 - IMPROVED MODULE: Uize.Widget
+....................................................................................

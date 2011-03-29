@@ -1,0 +1,11 @@
+The new [[../examples/swap-image.html][Uize.Widget.Swap.Image example]] demonstrates the image swap effect implemented in the =Uize.Widget.Swap.Image= class, as well as the many effect presets available in the =Uize.Widget.Swap.xPresets= extension module.
+
+A tabbed interface provides you with a *"PRESETS"* tab for previewing the wide variety of swap effect presets available, and a *"PARAMS"* tab for experimenting with the under-the-hood settings for the image swap effect.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-02-15 - NEW EXAMPLE: Uize.Widget.Swap.Image
+....................................................................................

@@ -1,0 +1,13 @@
+The new [[../examples/javascript-calculator-widget.html][JavaScript Calculator Widget]] example provides a demonstration of the =Uize.Widget.Calculator= widget class.
+
+The =Uize.Widget.Calculator= class implements UI for a basic calculator widget, with the basic functions you'd expect from an easy-to-use pocket calculator: division, multiplication, addition, subtraction, square root, a memory feature, and a versatile percent function that supports operations like =15 + 12%= (=15= increased by =12%=), =5000 - 2.3%= (=5000= reduced by =2.3%=), =50 * 85%= (=85= percent of =50=), and =85% 50 &#61;= (=85= percent of =50=). You can also use your regular keyboard to enter values <b>and</b> trigger operators by clicking in the display to focus the entry field and then typing. The corresponding buttons on the calculator keypad will be higlighted as you type in the entry field. For appreciators of CSS, the characters in the display are styled using the CSS3 =text-shadow= property to produce an LCD / neon glow. This can be seen in the newer browsers that support this property (such as Safari 4.x and Google Chrome 3.x).
+
+[[../examples/javascript-calculator-widget.html][CHECK IT OUT]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-10-20 - NEW EXAMPLE: JavaScript Calculator Widget
+....................................................................................

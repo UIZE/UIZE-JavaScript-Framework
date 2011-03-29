@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>PERFORMANCE TEST: Declared Function vs. Function Object | UIZE JavaScript Framework</title>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../../css/page.css"/>
+	<link rel="stylesheet" href="../../css/page.example.css"/>
+	<link rel="stylesheet" href="../../css/page.example.test.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../../index.html" title="UIZE JavaScript Framework home"></a>
+	PERFORMANCE TEST: Declared Function vs. Function Object
+	<div class="pageActions">
+		<a id="page-viewSource" href="javascript://" class="buttonLink">SOURCE</a>
+	</div>
+</h1>
+
+<div class="main">
+	<!-- explanation copy -->
+
+	<div class="explanation">
+		<p>This test investigates the performance of...</p>
+	</div>
+
+	<!-- test results -->
+
+	<div class="testResults">
+		<div class="testResultsFooter">
+			<a id="page_performTest" class="button" href="javascript://">PERFORM TEST</a>
+		</div>
+		<div id="page-testResults"></div>
+	</div>
+</div>
+
+<!-- JavaScript code to wire up the page widget and define the test code -->
+
+<script type="text/javascript">
+
+function globalFunctionDeclaredUsingFunctionKeyword (a,b) {return a * b}
+var globalFunctionCreatedUsingFunctionObject = new Function ('a','b','return a * b');
+
+Uize.module ({
+	required:'UizeDotCom.Page.Example.Test.library',
+	builder:function () {
+		/*** create the example page widget ***/
+			var page = window.page = new UizeDotCom.Page.Example.Test;
+
+		/*** define the test code by overriding the performTest method of the page widget ***/
+			page.performTest = function (_reportResults) {
+				var
+					_this = this,
+					_totalIterations = 100000,
+					_iterationNo
+				;
+				_this.executeFunctionsWithPause (
+					[
+						function () {
+							/*** time the duration for calling global function declared using function keyword ***/
+								for (_iterationNo = _totalIterations; --_iterationNo >= 0;) {
+									globalFunctionDeclaredUsingFunctionKeyword (10,20);
+									globalFunctionDeclaredUsingFunctionKeyword (10,20);
+									globalFunctionDeclaredUsingFunctionKeyword (10,20);
+									globalFunctionDeclaredUsingFunctionKeyword (10,20);
+									globalFunctionDeclaredUsingFunctionKeyword (10,20);
+									globalFunctionDeclaredUsingFunctionKeyword (10,20);
+									globalFunctionDeclaredUsingFunctionKeyword (10,20);
+									globalFunctionDeclaredUsingFunctionKeyword (10,20);
+									globalFunctionDeclaredUsingFunctionKeyword (10,20);
+									globalFunctionDeclaredUsingFunctionKeyword (10,20);
+								}
+						},
+						function () {
+							/*** time the duration for calling global function created using Function object ***/
+								for (_iterationNo = _totalIterations; --_iterationNo >= 0;) {
+									globalFunctionCreatedUsingFunctionObject (10,20);
+									globalFunctionCreatedUsingFunctionObject (10,20);
+									globalFunctionCreatedUsingFunctionObject (10,20);
+									globalFunctionCreatedUsingFunctionObject (10,20);
+									globalFunctionCreatedUsingFunctionObject (10,20);
+									globalFunctionCreatedUsingFunctionObject (10,20);
+									globalFunctionCreatedUsingFunctionObject (10,20);
+									globalFunctionCreatedUsingFunctionObject (10,20);
+									globalFunctionCreatedUsingFunctionObject (10,20);
+									globalFunctionCreatedUsingFunctionObject (10,20);
+								}
+						}
+					],
+					1500,
+					function (_executionTimes) {
+						/*** report the results ***/
+							_reportResults (
+								'<h1>Durations</h1>\n' +
+								'<p><b>global function declared using function keyword:</b> ' + _executionTimes [0] + 'ms</p>\n' +
+								'<p><b>global function created using Function object:</b> ' + _executionTimes [1] + 'ms</p>\n'
+							);
+					}
+				);
+			};
+
+		/*** wire up the page widget ***/
+			page.wireUi ();
+	}
+});
+
+</script>
+
+</body>
+</html>
+

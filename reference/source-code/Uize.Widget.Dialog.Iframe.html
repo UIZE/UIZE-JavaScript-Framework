@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Uize.Widget.Dialog.Iframe | JavaScript Source Code | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework module source code"/>
+	<meta name="description" content="This is the JavaScript source code for the Uize.Widget.Dialog.Iframe module of the UIZE JavaScript Framework"/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../../css/page.css"/>
+	<link rel="stylesheet" href="../../css/page.source.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../../index.html" title="UIZE JavaScript Framework home"></a>
+	SOURCE CODE: Uize.Widget.Dialog.Iframe
+	<div class="pageActions">
+		<a href="../Uize.Widget.Dialog.Iframe.html" class="buttonLink">VIEW REFERENCE</a>
+	</div>
+</h1>
+
+<pre>
+/*______________
+|       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
+|     /      /  |   ---------------------------------------------------
+|    /    O /   |    MODULE : Uize.Widget.Dialog.Iframe Class
+|   /    / /    |
+|  /    / /  /| |    ONLINE : http://www.uize.com
+| /____/ /__/_| | COPYRIGHT : (c)2006-2011 UIZE
+|          /___ |   LICENSE : Available under MIT License or GNU General Public License
+|_______________|             http://www.uize.com/license.html
+*/
+
+/*ScruncherSettings Mappings="=d" LineCompacting="TRUE"*/
+
+/* Module Meta Data
+  type: Class
+  importance: 4
+  codeCompleteness: 100
+  testCompleteness: 0
+  docCompleteness: 2
+*/
+
+/*?
+  Introduction
+    The =Uize.Widget.Dialog.Form= class extends its superclass with support for =iframe= dialogs, where the dialog's contents is a page loaded into an =iframe=.
+
+    *DEVELOPERS:* `Chris van Rensburg`, `Jan Borgersen`
+*/
+
+Uize.module ({
+  name:'Uize.Widget.Dialog.Iframe',
+  builder:function (_superclass) {
+    /*** Variables for Scruncher Optimization ***/
+      var
+        _true = true,
+        _false = false,
+        _null = null
+      ;
+
+    /*** Class Constructor ***/
+      var
+        _class = _superclass.subclass (
+          function () {
+            var _this = this;
+
+            /*** initialization ***/
+              function _setIframeUrl (_url) {
+                if (_url != _this._lastSetUrl) {
+                  _this._lastSetUrl = _url;
+                  var _contentWindow = _this.getContentWindow ();
+                  _contentWindow &amp;&amp; _contentWindow.location
+                    ? _contentWindow.location.replace (_url)
+                    : (_this.getNode ('content').src = _url)
+                  ;
+                }
+              }
+              _this.wire ({
+                'Before Show':
+                  function () {_setIframeUrl (Uize.isFunction (_this._url) ? _this._url () : _this._url)},
+                'After Hide':
+                  function () {_this._resetUrl &amp;&amp; _setIframeUrl ('about:blank')}
+              });
+          }
+        ),
+        _classPrototype = _class.prototype
+      ;
+
+    /*** Public Instance Methods ***/
+      _classPrototype.getContentWindow = function () {
+        return this.getNode ('content').contentWindow;
+      };
+
+    /*** Register Properties ***/
+      _class.registerProperties ({
+        _resetUrl:{
+          name:'resetUrl',
+          value:_true
+        },
+        _url:{
+          name:'url',
+          value:'' /* QUESTION: is it really necessary to initialize this property to an empty string? */
+        }
+      });
+
+    return _class;
+  }
+});
+
+
+</pre>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.library',
+		'UizeDotCom.Page'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page).wireUi ()}
+});
+
+</script>
+
+</body></html>

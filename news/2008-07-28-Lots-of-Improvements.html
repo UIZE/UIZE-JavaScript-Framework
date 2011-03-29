@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2008-07-28 - Lots of Improvements | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="The new Uize.String.indent static method lets you easily indent or unindent multi-line strings. The new Uize.String.repeat static method lets you easily repeat a specified string a specified number of times. The Uize.String.stripPadding static method has been renamed to simply Uize.String.trim (the old method name is deprecated and will still be supported for some time)."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2008.html" class="breadcrumb breadcrumbWithArrow">2008 NEWS</a>
+	2008-07-28 - Lots of Improvements
+
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="The new Uize.String.indent static method lets you easily indent or unindent multi-line strings. The new Uize.String.repeat static method lets you easily repeat a specified string a specified number of times. The Uize.String.stripPadding static method has been renamed to simply Uize.String.trim (the old method name is deprecated and will still be supported for some time).">1. IMPROVED MODULE: Uize.String</a></li>
+			<li><a href="#2" title="The new Uize.Node.Form package module has been added, providing functionality to facilitate working with forms.">2. NEW MODULE: Uize.Node.Form</a></li>
+			<li><a href="#3" title="A new performance test shows how the Uize.String.repeat method outperforms the typical implementation approach to repeating strings.">3. New Performance Tests</a></li>
+			<li><a href="#4" title="A new build script demonstrates how .js.jst JavaScript template files in a site project can be compiled into corresponding .js UIZE modules that can be used for generating markup for widgets and for other purposes.">4. JavaScript Template Compiler Build Script</a></li>
+			<li><a href="#5" title="A number of modules have been updated to use the myRegExp.test method in place of the myString.search method, for a small file size and performance win.">5. Small Optimizations</a></li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<a name="1"></a>
+	<h1 class="heading1" title="1. IMPROVED MODULE: Uize.String"><span class="headingNumber"><a href="#1" title="1. IMPROVED MODULE: Uize.String">1</a>. </span>IMPROVED MODULE: Uize.String</h1>
+	<div class="contents1">
+		<p>The new <code>Uize.String.indent</code> static method lets you easily indent or unindent multi-line strings. The new <code>Uize.String.repeat</code> static method lets you easily repeat a specified string a specified number of times. The <code>Uize.String.stripPadding</code> static method has been renamed to simply <code>Uize.String.trim</code> (the old method name is deprecated and will still be supported for some time).</p>
+	</div>
+	
+	<a name="2"></a>
+	<h1 class="heading1" title="2. NEW MODULE: Uize.Node.Form"><span class="headingNumber"><a href="#2" title="2. NEW MODULE: Uize.Node.Form">2</a>. </span>NEW MODULE: Uize.Node.Form</h1>
+	<div class="contents1">
+		<p>The new <code><a href="../reference/Uize.Node.Form.html">Uize.Node.Form</a></code> package module has been added, providing functionality to facilitate working with forms.</p>
+		
+		<p>The first <code>Uize.Node.Form.getValues</code> static method provides a convenient way to serialize the values of fields in a form (or form fields within any root node) to a JavaScript object hash.</p>
+	</div>
+	
+	<a name="3"></a>
+	<h1 class="heading1" title="3. New Performance Tests"><span class="headingNumber"><a href="#3" title="3. New Performance Tests">3</a>. </span>New Performance Tests</h1>
+	<div class="contents1">
+		<p>A new performance test shows how the <code>Uize.String.repeat</code> method outperforms the typical implementation approach to repeating strings.</p>
+	</div>
+	
+	<a name="4"></a>
+	<h1 class="heading1" title="4. JavaScript Template Compiler Build Script"><span class="headingNumber"><a href="#4" title="4. JavaScript Template Compiler Build Script">4</a>. </span>JavaScript Template Compiler Build Script</h1>
+	<div class="contents1">
+		<p>A new build script demonstrates how <code>.js.jst</code> JavaScript template files in a site project can be compiled into corresponding <code>.js</code> UIZE modules that can be used for generating markup for widgets and for other purposes.</p>
+	</div>
+	
+	<a name="5"></a>
+	<h1 class="heading1" title="5. Small Optimizations"><span class="headingNumber"><a href="#5" title="5. Small Optimizations">5</a>. </span>Small Optimizations</h1>
+	<div class="contents1">
+		<p>A number of modules have been updated to use the <code>myRegExp.test</code> method in place of the <code>myString.search</code> method, for a small file size and performance win.</p>
+	</div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

@@ -1,0 +1,13 @@
+The new =Uize.String.Builder= module implements an object to facilitate the building of very large strings, in a way that minimizes performance costs.
+
+Building strings using a traditional incremental concatenation approach using the =+&#61;= (incrementing assignment) operator can be slow in certain JavaScript interpreters when *very large* strings are being built. One way around this performance issue is to use an array to accumulate all the segments of a large string, and then concatenate all the elements of that array at the end of the string building process using the =Array= object's =join= instance method. The =Uize.String.Builder= object wraps this pattern up neatly into an object that also provides the benefit of =String= object parity that wouldn't otherwise be available in a manual array building process. In doing so, the =Uize.String.Builder= object can provide a substantial performance benefit in certain applications. This new module is comprehensively documented and unit tested.
+
+[[Uize.String.Builder][LEARN MORE]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2010-01-28 - NEW MODULE: Uize.String.Builder
+....................................................................................

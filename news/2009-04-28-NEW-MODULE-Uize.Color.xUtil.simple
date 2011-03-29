@@ -1,0 +1,13 @@
+The new =Uize.Color.xUtil= extension module extends the =Uize.Color= object by adding instance and static methods for mixing, blending, comparing, sorting, and otherwise working with colors.
+
+Using the =Uize.Color.xUtil= module, combination colors can be generated, arrays of colors can be sorted by their proximity to a reference color, two colors can be blended in varying degrees, colors can be randomized in their color space, two colors can be tested for equality, and an array of colors can be mixed together in equal amounts to create an average color.
+
+[[Uize.Color.xUtil][LEARN MORE]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-04-28 - NEW MODULE: Uize.Color.xUtil
+....................................................................................

@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>TEST: Table Sort Using head Node | UIZE JavaScript Framework</title>
+	<link rel="stylesheet" href="../../css/page.css"/>
+</head>
+
+<body>
+
+<!-- load in the necessary JavaScript libraries -->
+
+<script type="text/javascript" src="../../js/Uize.js"></script>
+<script type="text/javascript" src="../../js/Uize.Node.js"></script>
+<script type="text/javascript" src="../../js/Uize.Widget.js"></script>
+<script type="text/javascript" src="../../js/Uize.Widget.TableSort.js"></script>
+
+<!-- table of data to which Uize.Widget.TableSort object will be attached -->
+
+<table id="friendsTable" border="1" cellspacing="0" cellpadding="2" style="margin:auto;">
+	<tr>
+		<td colspan="8" align="center">Table of Friends</td>
+	</tr>
+	<tr bgcolor="#ccc" align="center">
+		<th>First Name</th>
+		<th>Last Name</th>
+		<th>Sex</th>
+		<th>Weight</th>
+		<th>Hair Color</th>
+		<th>Eye Color</th>
+		<th>Date of Birth</th>
+		<th>Known for How Long</th>
+	</tr>
+	<tr>
+		<td>John</td>
+		<td>Engelbrecht</td>
+		<td>male</td>
+		<td>189 lbs</td>
+		<td>brown, light</td>
+		<td>gray</td>
+		<td>May 5 1963</td>
+		<td>5 years</td>
+	</tr>
+	<tr>
+		<td>Alissa</td>
+		<td>Pierson</td>
+		<td>female</td>
+		<td>154 lbs</td>
+		<td>brown, dark</td>
+		<td>green</td>
+		<td>3/29/1972</td>
+		<td>2 years</td>
+	</tr>
+	<tr>
+		<td>Paul</td>
+		<td>McKinley</td>
+		<td>male</td>
+		<td>182 lbs</td>
+		<td>brown, graying</td>
+		<td>gray, blueish</td>
+		<td>1971/08/03</td>
+		<td>10 years</td>
+	</tr>
+	<tr>
+		<td>Khalid</td>
+		<td>Muhalijurinaikar</td>
+		<td>male</td>
+		<td>165 lbs</td>
+		<td>brown, dark</td>
+		<td>brown</td>
+		<td>15 December 1966</td>
+		<td>3 years</td>
+	</tr>
+	<tr>
+		<td>Diego Rodriguez</td>
+		<td>Velasquez</td>
+		<td>male</td>
+		<td>173 lbs</td>
+		<td>black</td>
+		<td>brown</td>
+		<td>7/3/70</td>
+		<td>4 years</td>
+	</tr>
+	<tr>
+		<td>Patricia</td>
+		<td>Gilby-Elderhans</td>
+		<td>female</td>
+		<td>191 lbs</td>
+		<td>blonde</td>
+		<td>blue green</td>
+		<td>1967/11/25</td>
+		<td>1 year</td>
+	</tr>
+	<tr>
+		<td>Jacob</td>
+		<td>Cromley</td>
+		<td>male</td>
+		<td>159 lbs</td>
+		<td>red</td>
+		<td>gray</td>
+		<td>10 February 1975</td>
+		<td>2 years</td>
+	</tr>
+	<tr>
+		<td>Vanessa</td>
+		<td>Vermuelen</td>
+		<td>female</td>
+		<td>152 lbs</td>
+		<td>brown, medium</td>
+		<td>blue</td>
+		<td>8/15/77</td>
+		<td>1 year</td>
+	</tr>
+	<tr>
+		<td>Shelley</td>
+		<td>Bronsworth</td>
+		<td>female</td>
+		<td>232 lbs</td>
+		<td>blonde, sandy</td>
+		<td>blue, grayish</td>
+		<td>17 March 1962</td>
+		<td>3 years</td>
+	</tr>
+	<tr>
+		<td>Richard</td>
+		<td>van Doren</td>
+		<td>male</td>
+		<td>149 lbs</td>
+		<td>brown</td>
+		<td>brown</td>
+		<td>October 23 1974</td>
+		<td>.5 years</td>
+	</tr>
+</table>
+
+<!-- JavaScript code to make the table sortable -->
+
+<script type="text/javascript">
+
+	/*** spawn (and automatically wire) the Uize.Widget.TableSort object ***/
+		Uize.Widget.TableSort.spawn ({idPrefix:'friendsTable'});
+
+</script>
+
+</body>
+</html>

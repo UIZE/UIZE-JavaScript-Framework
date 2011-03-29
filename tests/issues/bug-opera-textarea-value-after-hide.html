@@ -1,0 +1,28 @@
+<html>
+	<head>
+		<title>Opera textarea value bug</title>
+	</head>
+	<body>
+		<p>The bug demonstrated in this page is caused by the incorrect reporting of an HtmlTextAreaElement's value through its javascript value property. This bug appears when the HtmlTextAreaElement's clientHeight, clientWidth, offsetHeight, or offsetWidth are queried while its visibility is set to 'hidden.'</p>
+
+		<p>This page's javascript has already queried the HtmlTextAreaElement's clientHeight while its visibility is set to 'hidden.' To see the bug, enter text into the textarea and click the button. In Opera, the words "no value recovered" should replace "the value will appear here." In all other tested browsers (IE, Firefox, Chrome, Safari) those words will be replaced with whatever was written in the textarea.</p>
+		<textarea id="buggy" value=""></textarea>
+		<input type="button" onclick="getValue();" value="see textarea value"/>
+		<div id="value">the value will appear here</div>
+
+		<script type="text/javascript">
+			var buggyNode = document.getElementById('buggy');
+
+			function getValue () {
+				document.getElementById("value").innerHTML = buggyNode.value || 'no value recovered';
+			}
+
+			// the code that reveals the bug
+			buggyNode.style.visibility = 'hidden';
+			var catalyst = buggyNode.clientHeight;
+			buggyNode.style.visibility = 'inherit';
+
+		</script>
+	</body>
+</html>
+

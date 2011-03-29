@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2009-04-02 - IMPROVED MODULE: Uize.Widget | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="The Uize.Widget class has been improved in a number of ways."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2009.html" class="breadcrumb breadcrumbWithArrow">2009 NEWS</a>
+	2009-04-02 - IMPROVED MODULE: Uize.Widget
+
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="The node caching mechanism of the Uize.Widget class has been improved to reduce memory usage and improve performance.">1. Optimized Node Caching</a></li>
+			<li><a href="#2" title="The new getNodeStyle instance method returns the value of the specified style property (or style properties) for the specified implied node.">2. New Method: getNodeStyle</a></li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<p>The <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> class has been improved in a number of ways.</p>
+	
+	<a name="1"></a>
+	<h1 class="heading1" title="1. Optimized Node Caching"><span class="headingNumber"><a href="#1" title="1. Optimized Node Caching">1</a>. </span>Optimized Node Caching</h1>
+	<div class="contents1">
+		<p>The node caching mechanism of the <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> class has been improved to reduce memory usage and improve performance.</p>
+		
+		<p>Previously, references to implied nodes were cached using their full node <code>id</code> as key. This would produce large keys for complex pages with deep widget trees. Instead, now only the names of implied nodes are used as keys for cache lookup. This reduces memory usage and should improve lookup time, as the shorter keys can be hashed more rapidly.</p>
+	</div>
+	
+	<a name="2"></a>
+	<h1 class="heading1" title="2. New Method: getNodeStyle"><span class="headingNumber"><a href="#2" title="2. New Method: getNodeStyle">2</a>. </span>New Method: getNodeStyle</h1>
+	<div class="contents1">
+		<p>The new <code>getNodeStyle</code> instance method returns the value of the specified style property (or style properties) for the specified implied node.</p>
+		
+		<p>This method has been added to provide parity with the companion <code>setNodeStyle</code> instance method, and with the <code>Uize.Node.getStyle</code> and <code>Uize.Node.setStyle</code> static methods of the <code><a href="../reference/Uize.Node.html">Uize.Node</a></code> package.</p>
+	</div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

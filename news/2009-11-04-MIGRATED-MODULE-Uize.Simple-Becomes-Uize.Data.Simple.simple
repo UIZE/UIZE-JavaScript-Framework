@@ -1,0 +1,11 @@
+The =Uize.Simple= module has been migrated to under the =Uize.Data= namespace to become =Uize.Data.Simple=, to get it out of the root =Uize= namespace.
+
+This change is not backwards compatible, but is likely to affect only a very limited number of developers (probably not you). If you are using this module (unlikely), then you will have to change your code to reflect this change.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-11-04 - MIGRATED MODULE: Uize.Simple Becomes Uize.Data.Simple
+....................................................................................

@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2009-11-16 - New Support for Wiring Window Events | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="Wiring of events on the window object is now supported by both the Uize.Node and Uize.Widget modules."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2009.html" class="breadcrumb breadcrumbWithArrow">2009 NEWS</a>
+	2009-11-16 - New Support for Wiring Window Events
+
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="As a result of the improved support for wiring window object event handlers, the Document Loaded, Document Unload, Window Resized, and Window Scrolled static events of the Uize.Widget class have been deprecated.">1. Deprecated Static Events</a></li>
+			<li><a href="#2" title="The changes to these various methods offer the following benefits...">2. Benefits of This Change</a></li>
+			<li><a href="#3" title="For backwards compatibility, the deprecated Document Loaded, Document Unload, Window Resized, and Window Scrolled static events of the Uize.Widget class are all still supported, and will be supported for some time into the future.">3. Deprecated Events Still Supported</a></li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<p>Wiring of events on the <code>window</code> object is now supported by both the <code><a href="../reference/Uize.Node.html">Uize.Node</a></code> and <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> modules.</p>
+	
+	<p>Handlers can be wired for the <code>focus</code>, <code>blur</code>, <code>load</code>, <code>beforeunload</code>, <code>unload</code>, <code>resize</code>, and <code>scroll</code> events, using the <code>Uize.Node.wire</code> static method of the <code><a href="../reference/Uize.Node.html">Uize.Node</a></code> module, or the <code>wireNode</code> instance method of the <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> class. Similarly, handlers for these events can be unwired using the various node event unwiring methods of these two modules.</p>
+	
+	<a name="1"></a>
+	<h1 class="heading1" title="1. Deprecated Static Events"><span class="headingNumber"><a href="#1" title="1. Deprecated Static Events">1</a>. </span>Deprecated Static Events</h1>
+	<div class="contents1">
+		<p>As a result of the improved support for wiring <code>window</code> object event handlers, the <code>Document Loaded</code>, <code>Document Unload</code>, <code>Window Resized</code>, and <code>Window Scrolled</code> static events of the <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> class have been deprecated.</p>
+		
+		<p><span class="allCaps">INSTEAD OF...</span></p>
+		
+		
+<pre class="sample-code">Uize.Widget.wire (
+  'Window Resized',
+  function () {
+    // do something when window is resized
+  }
+);
+</pre>
+		
+		<p><span class="allCaps">USE...</span></p>
+		
+		
+<pre class="sample-code">Uize.Node.wire (
+  window,
+  'resize',
+  function () {
+    // do something when window is resized
+  }
+);
+</pre>
+		
+		<p><span class="allCaps">OR...</span></p>
+		
+		
+<pre class="sample-code">myWidget.wireNode (
+  window,
+  'resize',
+  function () {
+    // do something when window is resized
+  }
+);
+</pre>
+		
+		<p><span class="allCaps">OR, FOR MULTIPLE WIRINGS...</span></p>
+		
+		
+<pre class="sample-code">Uize.Node.wire (
+  window,
+  {
+    load:
+      function () {
+        // do something when document loads
+      },
+    scroll:
+      function () {
+        // do something when window / document is scrolled
+      }
+  }
+);
+</pre>
+	</div>
+	
+	<a name="2"></a>
+	<h1 class="heading1" title="2. Benefits of This Change"><span class="headingNumber"><a href="#2" title="2. Benefits of This Change">2</a>. </span>Benefits of This Change</h1>
+	<div class="contents1">
+		<p>The changes to these various methods offer the following benefits...</p>
+		
+		<table class="list">
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the new system provides support for wiring handlers for seven <code>window</code> events, while the previous system supported only four</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the new system is more inituitive, since more developers will be familiar with the names of the <code>window</code> object events than the custom static event names that were offered in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> class</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the new system relays the event object for the <code>window</code> event to the handler (previously not the case), and the handler is called as an instance method on the <code>window</code> object (previously not the case) - consistent with the behavior for wiring DOM nodes</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>events of the <code>window</code> object that are wired using the <code>wireNode</code> method inside a widget's <code>wireUi</code> method will be automatically unwired when calling the <code>unwireUi</code> method</td></tr>
+		</table>
+	</div>
+	
+	<a name="3"></a>
+	<h1 class="heading1" title="3. Deprecated Events Still Supported"><span class="headingNumber"><a href="#3" title="3. Deprecated Events Still Supported">3</a>. </span>Deprecated Events Still Supported</h1>
+	<div class="contents1">
+		<p>For backwards compatibility, the deprecated <code>Document Loaded</code>, <code>Document Unload</code>, <code>Window Resized</code>, and <code>Window Scrolled</code> static events of the <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> class are all still supported, and will be supported for some time into the future.</p>
+		
+		<p>All existing code using the deprecated events should continue to work as normal. It would be wise to progressively migrate code over to using the new methods.</p>
+	</div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

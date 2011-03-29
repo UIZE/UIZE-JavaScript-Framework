@@ -1,0 +1,24 @@
+The =Uize.Date= module has been improved, with fixes for a number of issues, improvements to a number of static methods, and the addition of a thorough set of unit tests in the new =Uize.Test.Uize.Date= unit tests module.
+
+Fixes
+	The following issues were discovered during the course of writing unit tests and have been fixed...
+
+	- The =Uize.Date.inRange= static method has been fixed to correctly support date range objects where the value of the =minValue= property is =undefined=, =null=, or not specified.
+	- A rounding bug in the =Uize.Date.isRecent= static method, that would cause this method to produce the incorrect result under certain conditions, has been fixed.
+	- A bug with the =Uize.Date.toIso8601= static method, where the month would always be off by one, has been fixed.
+
+Improvements
+	The following minor improvements have been made to static methods of the =Uize.Date= module...
+
+	- The =Uize.Date.format= static method has been improved with the addition of support for invalid dates for all substitution tokens (eg. =Uize.Date.format (new Date (NaN),'{YYYY}-{MM}-{DD}')= now produces the result ='????-??-??'=).
+	- The =Uize.Date.resolve= static method has been improved with the addition of support for dates specified as a milliseconds integer number.
+
+In addition to the above fixes and improvements, the =Uize.Date= module is now thoroughly unit tested by the newly created =Uize.Test.Uize.Date= unit tests module.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2010-04-12 - IMPROVED MODULE: Uize.Date
+....................................................................................

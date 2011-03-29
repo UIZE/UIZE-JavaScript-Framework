@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+	<ModulePrefs
+		title="Calendar"
+		title_url="http://www.uize.com/widgets/calendar.html"
+		description="An easy to use calendar widget that you can embed in your Web sites and blogs, that automatically shows the current date and the days in the month."
+		author="Chris van Rensburg"
+		author_email="uize.javascript.framework@gmail.com"
+		author_location="Redwood City"
+		author_affiliation="UIZE JavaScript Framework"
+		height="314"
+		screenshot="http://www.uize.com/images/widgets/calendar.jpg"
+		thumbnail="http://www.uize.com/images/widgets/calendar-120x60.gif"
+	/>
+	<Content
+		type="url"
+		href="http://www.uize.com/widgets/calendar/web.html"
+	/>
+</Module>

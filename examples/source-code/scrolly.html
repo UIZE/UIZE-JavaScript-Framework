@@ -1,0 +1,179 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Scrolly - HTML Source Code | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework HTML example source code"/>
+	<meta name="description" content="This is the source code for the Scrolly example"/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../../css/page.css"/>
+	<link rel="stylesheet" href="../../css/page.source.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../../index.html" title="UIZE JavaScript Framework home"></a>
+	SOURCE CODE: Scrolly
+	<div id="page-actions" class="pageActions">
+		<a href="../scrolly.html" class="buttonLink">VIEW EXAMPLE</a>
+	</div>
+</h1>
+
+<pre>
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+&lt;head&gt;
+  &lt;title&gt;Scrolly | JavaScript Examples | UIZE JavaScript Framework&lt;/title&gt;
+  &lt;meta name="keywords" content="featured animation Uize.Widget.Scrolly"/&gt;
+  &lt;meta name="description" content="See the scrolly widget in action, as it scrolls two sets of thumbnails - horizontal and vertical - with an accompanying JavaScript animation effect."/&gt;
+  &lt;link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/&gt;
+  &lt;link rel="stylesheet" href="../css/page.css"/&gt;
+  &lt;link rel="stylesheet" href="../css/page.example.css"/&gt;
+  &lt;link rel="stylesheet" href="../css/widget.scrolly.css"/&gt;
+  &lt;style type="text/css"&gt;
+    /*** styles for thumbnails ***/
+      a.thumbnail, a.thumbnail:link, a.thumbnail:visited, a.thumbnail:hover, a.thumbnail:active  {
+        border:none;
+      }
+      a.thumbnail img, a.thumbnail:link img, a.thumbnail:visited img {
+        background:#fff;
+        border:1px solid #aaa;
+        opacity:.9;
+        width:105px;
+        height:75px;
+        padding:0;
+        margin:2px;
+      }
+      a.thumbnail:hover img, a.thumbnail:active img {
+        border:1px solid #ccc;
+        opacity:1;
+      }
+
+    /*** scrolly overrides ***/
+      /*** horizontal scrolly ***/
+        .scrollyHorz .scrollyView a img {
+          margin-top:4px;
+          margin-bottom:4px;
+        }
+
+      /*** vertical scrolly ***/
+        .scrollyVert .scrollyView a {
+          display:block;
+        }
+        .scrollyVert .scrollyView a img {
+          margin-left:4px;
+          margin-right:4px;
+        }
+  &lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+&lt;script type="text/javascript" src="../js/Uize.js"&gt;&lt;/script&gt;
+
+&lt;h1 class="document-title"&gt;
+  &lt;a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"&gt;&lt;/a&gt;
+  &lt;a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow"&gt;JAVASCRIPT EXAMPLES&lt;/a&gt;
+  Scrolly
+  &lt;div id="page-actions" class="pageActions"&gt;
+    &lt;a href="source-code/scrolly.html" class="buttonLink"&gt;SOURCE&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/h1&gt;
+
+&lt;div class="main"&gt;
+  &lt;!-- explanation copy --&gt;
+
+  &lt;div class="explanation"&gt;
+    &lt;p&gt;In this example, two instances of &lt;a href="../reference/Uize.Widget.Scrolly.html"&gt;&lt;code&gt;Uize.Widget.Scrolly&lt;/code&gt;&lt;/a&gt; are created - one for a horizontal scrolly, and the other for a vertical scrolly. Click on the scrolly navigation buttons to scroll a scrolly's view node, one "page" at a time, with an accompanying JavaScript animation effect. &lt;b&gt;Shift-click&lt;/b&gt; on the navigation buttons to scroll all the way to the beginning or end. Also, because this example uses the &lt;a href="../reference/Uize.Widget.ThumbZoom.html"&gt;&lt;code&gt;Uize.Widget.ThumbZoom&lt;/code&gt;&lt;/a&gt; class, you can click on the thumbnails to get a zoom out preview.&lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;table&gt;
+    &lt;tr valign="top"&gt;
+      &lt;td&gt;
+        &lt;!-- HTML for the horizontal scrolly's UI --&gt;
+        &lt;div class="scrollyHorz"&gt;
+          &lt;a id="page_horzScrolly_left" href="javascript://" class="scrollyButton button"&gt;
+            &lt;div class="arrowLeft arrow"&gt;&lt;/div&gt;
+          &lt;/a&gt;
+          &lt;div id="page_horzScrolly-view" class="scrollyView"&gt;
+            &lt;a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228277244419896914&amp;max_dim=500" class="thumbnail"&gt;&lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228277244419896914&amp;max_dim=105" title="A Lighted Spot" alt=""/&gt;&lt;/a&gt;&lt;a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228109666540948246&amp;max_dim=500" class="thumbnail"&gt;&lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228109666540948246&amp;max_dim=105" title="Braving the Onslaught" alt=""/&gt;&lt;/a&gt;&lt;a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228745103279879745&amp;max_dim=500" class="thumbnail"&gt;&lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228745103279879745&amp;max_dim=105" title="Companion to a Sunset" alt=""/&gt;&lt;/a&gt;&lt;a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228866001826566384&amp;max_dim=500" class="thumbnail"&gt;&lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228866001826566384&amp;max_dim=105" title="Concrete Eternity" alt=""/&gt;&lt;/a&gt;&lt;a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228321774790917687&amp;max_dim=500" class="thumbnail"&gt;&lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228321774790917687&amp;max_dim=105" title="Corrugate It" alt=""/&gt;&lt;/a&gt;&lt;a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228463251413365530&amp;max_dim=500" class="thumbnail"&gt;&lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228463251413365530&amp;max_dim=105" title="Crank It Up" alt=""/&gt;&lt;/a&gt;&lt;a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228507796122097730&amp;max_dim=500" class="thumbnail"&gt;&lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228507796122097730&amp;max_dim=105" title="Driving Through the Rain" alt=""/&gt;&lt;/a&gt;&lt;a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228267745724726415&amp;max_dim=500" class="thumbnail"&gt;&lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228267745724726415&amp;max_dim=105" title="Flock of Clouds" alt=""/&gt;&lt;/a&gt;&lt;a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228937676589416694&amp;max_dim=500" class="thumbnail"&gt;&lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228937676589416694&amp;max_dim=105" title="Hail to the Opening" alt=""/&gt;&lt;/a&gt;&lt;a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228483162492178759&amp;max_dim=500" class="thumbnail"&gt;&lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228483162492178759&amp;max_dim=105" title="Heavens Open Over Pedro" alt=""/&gt;&lt;/a&gt;&lt;a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228855435929294206&amp;max_dim=500" class="thumbnail"&gt;&lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228855435929294206&amp;max_dim=105" title="Hook in the Wall" alt=""/&gt;&lt;/a&gt;&lt;a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228496639998196479&amp;max_dim=500" class="thumbnail"&gt;&lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228496639998196479&amp;max_dim=105" title="Huddling Together" alt=""/&gt;&lt;/a&gt;&lt;a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228623703668130129&amp;max_dim=500" class="thumbnail"&gt;&lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228623703668130129&amp;max_dim=105" title="Just a Visitor" alt=""/&gt;&lt;/a&gt;&lt;a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228897217554746467&amp;max_dim=500" class="thumbnail"&gt;&lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228897217554746467&amp;max_dim=105" title="Out the Bus Window" alt=""/&gt;&lt;/a&gt;&lt;a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228554379238024970&amp;max_dim=500" class="thumbnail"&gt;&lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228554379238024970&amp;max_dim=105" title="Pacifica Pier From Milagra"/&gt;&lt;/a&gt;&lt;a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228550194293355740&amp;max_dim=500" class="thumbnail"&gt;&lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228550194293355740&amp;max_dim=105" title="Pier Before the Storm" alt=""/&gt;&lt;/a&gt;
+          &lt;/div&gt;
+          &lt;a id="page_horzScrolly_right" href="javascript://" class="scrollyButton button"&gt;
+            &lt;div class="arrowRight arrow"&gt;&lt;/div&gt;
+          &lt;/a&gt;
+        &lt;/div&gt;
+      &lt;/td&gt;
+      &lt;td style="width:20px;"&gt;&lt;/td&gt;
+      &lt;td&gt;
+        &lt;!-- HTML for the vertical scrolly's UI --&gt;
+        &lt;div class="scrollyVert"&gt;
+          &lt;a id="page_vertScrolly_up" href="javascript://" class="scrollyButton button"&gt;
+            &lt;div class="arrowUp arrow"&gt;&lt;/div&gt;
+          &lt;/a&gt;
+          &lt;div id="page_vertScrolly-view" class="scrollyView"&gt;
+            &lt;a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228234695931308619&amp;max_dim=500" class="thumbnail"&gt;&lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228234695931308619&amp;max_dim=105" title="Rain Fall" alt=""/&gt;&lt;/a&gt;&lt;a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228580091324147918&amp;max_dim=500" class="thumbnail"&gt;&lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228580091324147918&amp;max_dim=105" title="Retirement Home" alt=""/&gt;&lt;/a&gt;&lt;a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228074575082103294&amp;max_dim=500" class="thumbnail"&gt;&lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228074575082103294&amp;max_dim=105" title="San Fran Sunset" alt=""/&gt;&lt;/a&gt;&lt;a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228118804591686444&amp;max_dim=500" class="thumbnail"&gt;&lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228118804591686444&amp;max_dim=105" title="San Mateo Sunset" alt=""/&gt;&lt;/a&gt;&lt;a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228948359037055649&amp;max_dim=500" class="thumbnail"&gt;&lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228948359037055649&amp;max_dim=105" title="Setting Below Clouds" alt=""/&gt;&lt;/a&gt;&lt;a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228026937512483785&amp;max_dim=500" class="thumbnail"&gt;&lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228026937512483785&amp;max_dim=105" title="Shadow of the Past" alt=""/&gt;&lt;/a&gt;&lt;a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228586025680090150&amp;max_dim=500" class="thumbnail"&gt;&lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228586025680090150&amp;max_dim=105" title="Stacks of Steel" alt=""/&gt;&lt;/a&gt;&lt;a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228888824201666423&amp;max_dim=500" class="thumbnail"&gt;&lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228888824201666423&amp;max_dim=105" title="Sun Sets Soon at Sweeney" alt=""/&gt;&lt;/a&gt;&lt;a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228484030353525473&amp;max_dim=500" class="thumbnail"&gt;&lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228484030353525473&amp;max_dim=105" title="Sun Through a Tree" alt=""/&gt;&lt;/a&gt;&lt;a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228859576507617417&amp;max_dim=500" class="thumbnail"&gt;&lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228859576507617417&amp;max_dim=105" title="Sweeney Ridge Sunset" alt=""/&gt;&lt;/a&gt;&lt;a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228620264277935845&amp;max_dim=500" class="thumbnail"&gt;&lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228620264277935845&amp;max_dim=105" title="Trees Meet Sky" alt=""/&gt;&lt;/a&gt;&lt;a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228786228006249323&amp;max_dim=500" class="thumbnail"&gt;&lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228786228006249323&amp;max_dim=105" title="Twins" alt=""/&gt;&lt;/a&gt;&lt;a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228225341102196754&amp;max_dim=500" class="thumbnail"&gt;&lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228225341102196754&amp;max_dim=105" title="Urban Heavens" alt=""/&gt;&lt;/a&gt;&lt;a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228568520270882657&amp;max_dim=500" class="thumbnail"&gt;&lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228568520270882657&amp;max_dim=105" title="Wave Abstract"/&gt;&lt;/a&gt;&lt;a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228213464916914087&amp;max_dim=500" class="thumbnail"&gt;&lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228213464916914087&amp;max_dim=105" title="Window Lean"/&gt;&lt;/a&gt;&lt;a href="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228734547884666866&amp;max_dim=500" class="thumbnail"&gt;&lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228734547884666866&amp;max_dim=105" title="Windswept and Alone"/&gt;&lt;/a&gt;
+          &lt;/div&gt;
+          &lt;a id="page_vertScrolly_down" href="javascript://" class="scrollyButton button"&gt;
+            &lt;div class="arrowDown arrow"&gt;&lt;/div&gt;
+          &lt;/a&gt;
+        &lt;/div&gt;
+      &lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/table&gt;
+&lt;/div&gt;
+
+&lt;!-- JavaScript code to wire up the scrollies and the "thumb zoom" behavior for the image thumbnails --&gt;
+
+&lt;script type="text/javascript"&gt;
+
+Uize.module ({
+  required:[
+    'UizeDotCom.Page.Example.library',
+    'UizeDotCom.Page.Example',
+    'Uize.Widget.Scrolly',
+    'Uize.Widget.ThumbZoom',
+    'Uize.Node',
+    'Uize.Curve.Rubber'
+  ],
+  builder:function () {
+    /*** create the example page widget ***/
+      var page = window.page = new UizeDotCom.Page.Example;
+
+    /*** add the scrolly child widgets ***/
+      page.addChild ('horzScrolly',Uize.Widget.Scrolly);
+      page.addChild ('vertScrolly',Uize.Widget.Scrolly);
+
+    /*** add the Uize.Widget.ThumbZoom child widget ***/
+      page.addChild (
+        'thumbZoom',
+        Uize.Widget.ThumbZoom,
+        {thumbNodes:{tagName:'A',className:'thumbnail'},imageValidator:null}
+      );
+
+    /*** wire up the page widget ***/
+      page.wireUi ();
+  }
+});
+
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+</pre>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.library',
+		'UizeDotCom.Page'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page).wireUi ()}
+});
+
+</script>
+
+</body></html>

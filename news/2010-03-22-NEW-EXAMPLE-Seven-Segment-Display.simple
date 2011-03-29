@@ -1,0 +1,13 @@
+The new [[../examples/seven-segment-display.html][Seven Segment Display]] example provides an interactive demonstration of the =Uize.Widget.SegmentDisplay.Seven= widget class.
+
+In this example, an instance of the =Uize.Widget.SegmentDisplay.Seven= widget class is used to wire up a seven segment display UI. The seven segment display is an old style of display device for displaying decimal numerals and a limited number of alphabetical characters (often utilizing LED or LCD electonics), which is often found in displays in pocket calculators, VHS and DVD players, digital watches, audio recording hardware, etc. The seven segment display shown in this example is interactive. You can choose a value to display by using the *"VALUE SELECTOR"* droplist. You can toggle the lit state of individual segments of the display by clicking directly on the segments of the display, or you can click on the binary digits in the ABCDEFG and GFEDCBA segments state tables. Various buttons are also provided in the *"SEGMENTS STATE"* pane to let you easily change the lit state of all segments at once. You can also animate the display state using the buttons in the *"ANIMATE VALUE"* pane.
+
+[[../examples/seven-segment-display.html][CHECK IT OUT]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2010-03-22 - NEW EXAMPLE: Seven Segment Display
+....................................................................................

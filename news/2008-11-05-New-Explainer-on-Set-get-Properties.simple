@@ -1,0 +1,13 @@
+A new explainer for the set-get property mechanism provides an exhaustive explanation of set-get properties and digs into the nuances of features such as =onChange= handlers, =conformer= functions, initial values, the =Changed.[propertyName]= virtual event, and more.
+
+Scores of examples are provided to illustrate the many facets of this powerful mechanism. Don't write a class for the UIZE JavaScript Framework without appreciating how to get the most out of set-get properties.
+
+[[../explainers/set-get-properties.html][CHECK IT OUT]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2008-11-05 - New Explainer on Set-get Properties
+....................................................................................

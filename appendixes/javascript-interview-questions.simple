@@ -1,0 +1,709 @@
+Introduction
+	The interview questions in this document are designed to explore aspects of a candidate's knowledge of, and familiarity with, the JavaScript language.
+
+	Some of the questions test whether a person has knowledge of some of the more esoteric facilities in the language, while some just test how a person can think outside the box and utilize their knowledge of the language to fashion solutions within given constraints / requirements. These questions are generally small enough in scope that they can be useful when interviewing candidates for a UI engineering position where strong JavaScript experience is required.
+
+	Even if you are not yourself interviewing for a position, or interviewing some other person for a position, you may still enjoy these brain teasers - as long as you have an appreciation for the JavaScript language.
+
+Questions
+	QUESTION: Aynchronous Processing of Array
+		Write a function to asynchronously iterate through and process the elements of a specified array.
+
+		REQUIREMENTS
+		- Your function should expect two parameters: the first being the array of items to process, and the second being a reference to an external function that should be called in order to process each item.
+		- The external function expects two parameters: the first being an item to process, and the second being a callback function that it will call once it has finished processing the item. The callback is important, because processing the item is asynchronous (eg. it may involve an AJAX request to a Web service). You don't have to implement the external function, and it's not particularly relevant what it does with each item.
+		- Your implementation must be encapsulated inside a function. You may not write other functions outside of it.
+		- Your implementation must not be destructive to the items array parameter.
+
+		COMPLETE
+		...........................................
+		function processItems (items,processItem) {
+			// FILL THIS IN
+		}
+		...........................................
+
+		See =ANSWER: Aynchronous Processing of Array=
+
+	QUESTION: Hex to Decimal Conversion
+		Write a function to accept a string that is a hex format number of any length and convert it to a decimal
+
+		COMPLETE
+		................................
+		function hexToDecimal (hexStr) {
+			// FILL THIS IN
+		}
+		................................
+
+		See =ANSWER: Hex to Decimal Conversion=
+
+	QUESTION: Remove Array Values
+		You have a master array of strings, where each element is a fruit name. You have a second array of fruit name strings, that is a list of fruits that should be removed from the fruits specified in the master array. For the purpose of the exercise, we will call the master array =fruits= and the second array =fruitsToRemove=. Write the function that will remove the values contained in =fruitsToRemove= from the array =fruits=.
+
+		COMPLETE
+		...............................................
+		function removeFruits (fruits,fruitsToRemove) {
+			// FILL THIS IN
+		}
+		...............................................
+
+		See =ANSWER: Remove Array Values=
+
+	QUESTION: Check if a String is Only Whitespace
+		Write a function - whose implementation is only a single statement - that will return =true= if a specified string consists of only whitespace.
+
+		.......................................
+		function isOnlyWhitespace (sourceStr) {
+			// FILL THIS IN
+		}
+		.......................................
+
+		See =ANSWER: Check if a String is Only Whitespace=
+
+	QUESTION: Push Onto Array
+		Write a function to push either a simple value or an array of values onto a specified array. For the purpose of the exercise, we will call the target array simply =array= and the stuff to push onto it (either a simple value or array) simply =toPush=. If =toPush= is a simple value, it should be pushed onto =array= as an element. If =toPush= is an array, all of its elements should be pushed onto =array=. Your solution should modify =array= (ie. not return a new array).
+
+		COMPLETE
+		.......................................
+		function pushOntoArray (array,toPush) {
+			// FILL THIS IN
+		}
+		.......................................
+
+		See =ANSWER: Push Onto Array=
+
+	QUESTION: Round a Positive Number
+		Write a function that will round a positive number - without using any built-in methods of the =Math= object (so, no =Math.round=, =Math.floor=, =Math.ceil=, etc.).
+
+		COMPLETE
+		.......................................
+		function roundPositiveNumber (number) {
+			// FILL THIS IN
+		}
+		.......................................
+
+		See =ANSWER: Round a Positive Number=
+
+	QUESTION: Do Stuff If Object Not Empty
+		Write a function that accepts an object and does some stuff, but only if the object has some properties in it (ie. it's not an empty object). The "some stuff" is not important and can just be a placeholder comment =// do some stuff=.
+
+		COMPLETE
+		..............................
+		function myFunction (object) {
+			// FILL THIS IN
+		}
+		..............................
+
+		See =ANSWER: Do Stuff If Object Not Empty=
+
+	QUESTION: Translation in One Statement
+		Write a function that translates a specified english word to a specified language.
+
+		REQUIREMENTS
+		- write a function that translates a specified english word to a specified language
+		- the dictionary contains translation for only the words "hello", "goodbye", and "thank you", for the languages French, Japanese, German, and Italian
+		- the function's implementation must be a single statement
+		- the language name can be specified in lower case, upper case, or mixed case
+		- the English word specified can be in lower case or upper case (or mixed), and leading spaces and trailing spaces should be ignored
+		- if an unrecognized language or word is specified, the function should return an empty string
+
+		COMPLETE
+		....................................
+		function translate (word,language) {
+			// FILL THIS IN
+		}
+		....................................
+
+		DICTIONARY
+		.................................
+		French
+			hello = bonjour
+			goodbye = au revoir
+			thank you = merci
+
+		Japanese
+			hello = konnichi wa
+			goodbye = sayounara
+			thank you = arigatou gozaimasu
+
+		German
+			hello = hallo
+			goodbye = auf wiedersehen
+			thank you = danke
+
+		Italian
+			hello = ciao
+			goodbye = arrivederci
+			thank you = grazie
+		.................................
+
+		See =ANSWER: Translation in One Statement=
+
+	QUESTION: Test For Rectangles Overlapping
+		Write a function that returns a boolean, indicating whether or not two rectangles overlap.
+
+		For the purpose of the exercise, the first rectangle is expressed as =aX= (left), =aY= (top), =aW= (width), and =aH= (height), and the second rectangle as =bX=, =bY=, =bW=, and =bH=. All measurements are in pixels.
+
+		COMPLETE
+		........................................................
+		function doRectanglesOverlap (aX,aY,aW,aH,bX,bY,bW,bH) {
+			// FILL THIS IN
+		}
+		........................................................
+
+		See =ANSWER: Test For Rectangles Overlapping=
+
+	QUESTION: Split List String, Using Comma
+		Given a string, =sourceStr=, write some code that will split this string using comma as your delimiter, and producing an empty array if the string is empty.
+
+		COMPLETE
+		.............................................
+		function splitListStrUsingComma (sourceStr) {
+			// FILL THIS IN
+		}
+		.............................................
+
+		See =ANSWER: Split List String, Using Comma=
+
+Answers
+	ANSWER: Aynchronous Processing of Array
+		The first instinct of a candidate might be to use a =for= loop.
+
+		This question is a good test of whether or not a candidate understands the implications of asynchronous coding. A typical first pass attempt will fail because a =for= loop will immediately spawn a whole bunch of calls to =processItem=. Upon realizing that a =for= loop isn't up to the task, the next test for the candidate is whether or not they understand the behavior and implications of closures.
+
+		SOLUTION
+		..........................................................................................
+		function processItems (items,processItem) {
+			var itemNo = -1;
+			(function next () {if (++itemNo < items.length) processItem (items [itemNo],next)}) ();
+		}
+		..........................................................................................
+
+		The above solution works because the =next= function is a closure, and so it gets to keep a discrete state for =itemNo= that it can use while iterating through the =items= array. The first thing the =next= function does when it is called is to do a bounds check to make sure the end of the =items= array has not been reached. The =itemNo= variable is initialized to =-1= because it will be incremented to =0= in the first call to =next=, using the prefix increment operator. The =next= closure is passed as the callback parameter in the call to the =processItem= asynchronous external function. When the =processItem= function calls =next= after an item is finished being processed, the =next= closure has access to the previous state for the =itemNo= variable.
+
+		What gets the ball rolling and kicks off the asynchronous iteration is the call of =next= immediately after it is declared, using the form =(function blah () {}) ()=. The parentheses around the function declaration are necessary in order to avoid a syntax error. The result of a function declaration is a reference to the function, so we can call it straight away by appending the =()=.
+
+		FOLLOW-ON QUESTION
+
+		What happens if you call =processItems= again with a different array while it is still busy iterating through an array from a previous call?
+
+	ANSWER: Hex to Decimal Conversion
+		Solutions Using Iteration
+			If the candidate doesn't realize there is a built-in facility for converting from hex to decimal, then they might fashion an answer by writing a loop to iterate through the characters of the string. This is fine, and could provide a good opportunity to gauge algorithm skills. Solutions like the following are respectable, if not the most concise.
+
+			SOLUTION 1
+			.................................................................................
+			function hexToDecimal (hexStr) {
+				var
+					hexToDecMap =
+						{0:0,1:1,2:2,3:3,4:4,5:5,6:6,7:7,8:8,9:9,a:10,b:11,c:12,d:13,e:14,f:15},
+					result = 0
+				;
+				hexStr = hexStr.toLowercase ();
+				for (var charNo = -1; ++charNo < hexStr.length;) {
+					result = result << 4 + hexToDecMap [hexStr [charNo]];
+				}
+				return result;
+			}
+			.................................................................................
+
+			SOLUTION 2
+			..................................................................
+			function hexToDecimal (hexStr) {
+				var
+					hexDigits = '0123456789abcdef',
+					result = 0
+				;
+				hexStr = hexStr.toLowercase ();
+				for (var charNo = -1; ++charNo < hexStr.length;) {
+					result = result << 4 + hexDigits.indexOf (hexStr [charNo]);
+				}
+				return _result;
+			}
+			..................................................................
+
+		Concise Solutions
+			................................
+			function hexToDecimal (hexStr) {
+				return parseInt (hexStr,16);
+			}
+			................................
+
+			In addition to the built-in =parseInt= function, with its optional base second parameter, the language also has support for hex formatting of numbers, and there are several ways of gaining access to that built in hex format support.
+
+			................................
+			function hexToDecimal (hexStr) {
+				return eval ('0x' + hexStr);
+			}
+			................................
+
+			...or...
+
+			.....................................
+			function hexToDecimal (hexStr) {
+				return new Number ('0x' + hexStr);
+			}
+			.....................................
+
+			...or...
+
+			................................
+			function hexToDecimal (hexStr) {
+				return +('0x' + hexStr);
+			}
+			................................
+
+			FOLLOW-ON QUESTION
+
+			Which of the above concise solutions would perform the best?
+
+			ANSWER
+
+			Probably the third one. The first invokes the interpreter to evaluate what could be arbitrary JavaScript code, so there is probably some overhead. The second involves object construction (and, therefore, a function call - albeit a native function). The third approach uses built-in type conversion facilities of the JavaScript language that are likely to perform the best (this has not been tested).
+
+			NOTES
+			- if the candidate goes straight to using a concise approach that uses built-in functionality, one might turn the question around the other way and ask how the candidate might write their own conversion algorithm from scratch.
+
+		Return to =QUESTION: Hex to Decimal Conversion=
+
+	ANSWER: Remove Array Values
+		Part 1
+			Write code that will return an array that is the master array minus all the fruits specific in the second array.
+
+			SOLUTION
+			...........................................................................
+			function removeFruits (fruits,fruitsToRemove) {
+				var
+					newFruits = [],
+					fruitsToRemoveHash = {}
+				;
+				for (var fruitNo = fruitsToRemove.length - 1; fruitNo >= 0; fruitNo--) {
+					fruitsToRemoveHash [fruitsToRemove [fruitNo]] = 1;
+				}
+				for (var fruitNo = -1; ++fruitNo < fruits.length;) {
+					var fruit = fruits [fruitNo];
+					if (!fruitsToRemoveHash [fruit]) newFruits.push (fruit);
+				}
+				return newFruits;
+			}
+			...........................................................................
+
+			NOTES
+			- Iterating in reverse does not affect the results of the first loop, but it offers slightly better performance.
+			- While it's not ideal if the candidate implements an O(n^2) solution, if they understand that that is obviously a very inefficient solution and are just doing it to get started, that's okay. An O(n^2) solution would involve iterating through the array of fruits to remove, and for each one iterating through the array of fruits and searching for the element to splice out.
+
+		Part 2
+			Now solve the same problem in just one *statement* for the function's implementation.
+
+			................................................................................................
+			function removeFruits (fruits,fruitsToRemove) {
+				return ('<' + fruits.join ('><') + '>').replace (new RegExp ('<' + fruitsToRemove.join ('>|<') + '>','g'),'').replace (/^<|>$/g,'').split ('><');
+			}
+			................................................................................................
+
+			NOTES
+			- The candidate will spend a good deal of futile time wondering if there is just a magical built-in method that will do it for them. This is healthy.
+			- After resigning to the fact that there is no magical method, the candidate will think of how they can use iterators and still have it be just one statement.
+			- It might require nudging to get the candidate to think outside of the realm of iterators and array methods, and not think of the problem as a problem of modifying an array (remember, the problem is not to modify the original array, but to return an array... and remember, there are specific constraints on the nature of the element values).
+			- Eventually the candidate should start thinking along the lines of using or'ed regular expression replacement followed by splitting to create a new array, but the snags along the way involve unsafe approaches that would replace "apple" in "pineapple", or "pear" in "avocado pear" (which is technically a fruit, by the way).
+
+		Return to =QUESTION: Remove Array Values=
+
+	ANSWER: Check if a String is Only Whitespace
+		Obvious Solution
+			Using a regular expression...
+
+			........................................
+			function isOnlyWhitespace (sourceStr) {
+				return sourceStr.search (/\S/) == -1;
+			}
+			........................................
+
+			...or...
+
+			.......................................
+			function isOnlyWhitespace (sourceStr) {
+				return !/\S/.test (sourceStr);
+			}
+			.......................................
+
+			...or...
+
+			.......................................
+			function isOnlyWhitespace (sourceStr) {
+				return /^\s*$/.test (sourceStr);
+			}
+			.......................................
+
+		The Twist
+			Now, solve the problem without using a regular expression.
+
+			.......................................
+			function isOnlyWhitespace (sourceStr) {
+				return !isNaN (+(sourceStr + ' 0'));
+			}
+			.......................................
+
+			...or...
+
+			.......................................
+			function isOnlyWhitespace (sourceStr) {
+				return _sourceStr + ' 0' == 0;
+			}
+			.......................................
+
+			WHY DOES THIS WORK?
+			According to the language specification, the valid format for a number does not permit spaces between characters, so if prefixing the string =' 0'= with the source string adds anything but additional leading whitespace, then the resultant string cannot be a number and one can test on this to conclude whether or not the source string contains only whitespace.
+
+		Return to =QUESTION: Check if a String is Only Whitespace=
+
+	ANSWER: Push Onto Array
+		Obvious Solution
+			A candidate may grapple for some time, wondering if there is some built-in way to do it. Then a candidate may wonder how it could be accomplished using methods of the =Array= object, like =concat= or =splice=. The =concat= method has the downside that it creates a new array as the result. The =splice= method has the downside that it takes an arbitrary number of optional parameters - being elements to splice in, but =toPush= is an array.
+
+			..............................................................
+			function pushOntoArray (array,toPush) {
+				if (toPush instanceof Array) {
+					for (var elementNo = -1; ++elementNo < toPush.length;) {
+						array.push (toPush [elementNo]);
+					}
+				} else {
+					array.push (toPush);
+				}
+			}
+			..............................................................
+
+			...or...
+
+			...........................................................
+			function pushOntoArray (array,toPush) {
+				if (!(toPush instanceof Array)) toPush = [toPush];
+				for (var elementNo = -1; ++elementNo < toPush.length;) {
+					array.push (toPush [elementNo]);
+				}
+			}
+			...........................................................
+
+		Efficient Solution
+			A healthy comprehension of the JavaScript language will lead a candidate to realize that the =call= and/or =apply= methods of the =Function= object could be useful in solving the problem. If not, pose the follow-on question: how could you write the function with just one statement in its implementation?
+
+			SOLUTION 1
+			.................................................................................
+			function pushOntoArray (array,toPush) {
+				Array.prototype.push.call (array,toPush instanceof Array ? toPush : [toPush]);
+			}
+			.................................................................................
+
+			SOLUTION 2
+			....................................................................................
+			function pushOntoArray (array,toPush) {
+				Array.prototype.push [toPush instanceof Array ? 'call' : 'apply'] (array,toPush);
+			}
+			....................................................................................
+
+			SOLUTION 3
+			............................................................................................
+			function pushOntoArray (array,toPush) {
+				toPush instanceof Array ? Array.prototype.push.call (array,toPush) : array.push (toPush);
+			}
+			............................................................................................
+
+			FOLLOW-ON QUESTION
+
+			Discuss the code size and performance differences between the above three solutions.
+
+		Return to =QUESTION: Push Onto Array=
+
+	ANSWER: Round a Positive Number
+		Rounding has the effect of producing an integer from a potentially floating point number. So, how else could you turn a floating point number to an integer?
+
+		.......................................
+		function roundPositiveNumber (number) {
+			return (number + .5) >> 0;
+		}
+		.......................................
+
+		...or...
+
+		.......................................
+		function roundPositiveNumber (number) {
+			return (number + .5) | 0;
+		}
+		.......................................
+
+		...or...
+
+		.......................................
+		function roundPositiveNumber (number) {
+			return parseInt (number + .5);
+		}
+		.......................................
+
+		...or...
+
+		.......................................
+		function roundPositiveNumber (number) {
+			return +(number + .5).toFixed (0);
+		}
+		.......................................
+
+		FOLLOW-ON QUESTION
+
+		Which of the above solutions would have the best performance?
+
+		ANSWER
+
+		Probably the first or second solutions, since they don't involve the overhead of performing any additional function or method calls.
+
+		ANOTHER FOLLOW-ON QUESTION
+
+		Without using a conditional statement (including ternary operators), build on the first solution to produce a solution that will round both positive *and* negative numbers.
+
+		SOLUTION
+		..............................................
+		function roundNumber (number) {
+			return (number | 0) + (number * 2 | 0) % 2;
+		}
+		..............................................
+
+		Explain why this works.
+
+		Return to =QUESTION: Round a Positive Number=
+
+	ANSWER: Do Stuff If Object Not Empty
+		The candidate is likely to follow a typical thought process of 1) determine if the object isn't empty, and 2) if the object isn't empty, then do the stuff. Hopefully the candidate will at least realize to use a =for...in= loop to determine if the object has contents.
+
+		TYPICAL SOLUTION
+		...................................
+		function myFunction (object) {
+			var objectHasProperties = false;
+			for (var prop in object) {
+				objectHasProperties = true;
+				break;
+			}
+			if (objectHasProperties) {
+				// do some stuff
+			}
+		}
+		...................................
+
+		CONCISE SOLUTION
+		...............................
+		function myFunction (_object) {
+			for (var prop in object) {
+				// do some stuff
+				break;
+			}
+		}
+		...............................
+
+		With the break statement at the end, and given the behavior of the =for...in= loop, the loop ends up acting as a conditional block.
+
+		Return to =QUESTION: Do Stuff If Object Not Empty=
+
+	ANSWER: Translation in One Statement
+		This hypothetical (and very non real world) exercise has the following objectives...
+
+		OBJECTIVES
+		- test basic knowledge of JSON syntax
+		- test basic problem solving skills (ie. arriving at conclusion to use two dimensional "hash tables")
+		- test skills in gathering and digesting/understanding requirements
+		- test comfort level with language model, with the use of immediate indexing into anonymous objects that are constructed as part of a more complex expression
+		- test familiarity with JavaScript's handling of conditionals (using the || operator in defaulting of values)
+		- test basic familiarity with regular expression syntax and some String class methods
+
+		SOLUTION
+		.....................................................
+		function translate (word,language) {
+			return (
+				(
+					{
+						french:{
+							hello:'bonjour',
+							googbye:'au revoir',
+							thankyou:'merci'
+						},
+						japanese:{
+							hello:'konnichi wa',
+							googbye:'sayounara',
+							thankyou:'arigatou gozaimasu'
+						},
+						german:{
+							hello:'hallo',
+							googbye:'auf wiedersehen',
+							thankyou:'danke'
+						},
+						italian:{
+							hello:'ciao',
+							googbye:'arrivederci',
+							thankyou:'grazie'
+						}
+					} [language.toLowerCase ()] || {}
+				) [word.toLowerCase ().replace (/s/g,'')] || ''
+			);
+		}
+		.....................................................
+
+		Return to =QUESTION: Translation in One Statement=
+
+	ANSWER: Test For Rectangles Overlapping
+		Thinking through how to test for overlapping rectangles can easily lead to a massive boolean expression that tests for all the possible permutations of corners of one rectangle falling within the other rectangle.
+
+		One way to express this line of thinking is to divide the problem into tests for each of the X- and Y- axes - for each axis testing both ends of the line segments of each rectangle to see if any falls within the line segment of the other rectangle. The result could look something like the following...
+
+		TYPICAL SOLUTION
+		..........................................................
+		function doRectanglesOverlap (aX,aY,aW,aH,bX,bY,bW,bH) {
+			(
+				(aX >= bX && aX <= bX + bW - 1) ||
+				(aX + aW - 1 >= bX && aX + aW - 1 <= bX + bW - 1) ||
+				(bX >= aX && bX <= aX + aW - 1) ||
+				(bX + bW - 1 >= aX && bX + bW - 1 <= aX + aW - 1)
+			) &&
+			(
+				(aY >= bY && aY <= bY + bH - 1) ||
+				(aY + aH - 1 >= bY && aY + aH - 1 <= bY + bH - 1) ||
+				(bY >= aY && bY <= aY + aH - 1) ||
+				(bY + bH - 1 >= aY && bY + bH - 1 <= aY + aH - 1)
+			)
+		}
+		..........................................................
+
+		As long as any end of any line segment falls within the line segment of the other rectangle on both axes, then the rectangles overlap. Problem is, this is a very bloated solution. Thinking about the problem differently leads to a more elegant solution.
+
+		CONCISE SOLUTION
+		...........................................................................................
+		function doRectanglesOverlap (aX,aY,aW,aH,bX,bY,bW,bH) {
+			return (
+				aX + aW - 1 >= bX && bX + bW - 1 >= aX &&
+				aY + aH - 1 >= bY && bY + bH - 1 >= aY
+			);
+		}
+		...........................................................................................
+
+		It's easier to understand this elegant (in its simplicity) solution by approaching it from the inverse...
+
+		The segments =[x1_lo, x1_hi]= and =[x2_lo, x2_hi]= don't overlap if:
+
+		..................................
+		(x1_hi < x2_lo) || (x1_lo > x2_hi)
+		..................................
+
+		If =x1_hi= is less than =x2_lo=, then clearly the whole segment =x1= is outside of segment =x2=, since =x1_lo= is lower in value than =x1_hi= and therefore guaranteed to also be lower in value than =x2_lo=...
+
+		CASE: =x1_hi= < =x2_lo=
+		....................................................
+		x1: ....|x1_lo---------x1_hi|.......................
+		x2: ...........................|x2_lo-------x2_hi|..
+		....................................................
+
+		Here, =x1_hi= < =x2_lo=, so =x1_lo= < =x2_lo= as well, and there's no overlap.
+
+		CASE: =x1_lo= > =x2_hi=
+		....................................................
+		x1: .........................|x1_lo---------x1_hi|..
+		x2: ....|x2_lo-------x2_hi|.........................
+		....................................................
+
+		Here, =x1_lo= > =x2_hi=, so =x1_hi= > =x2_hi= as well, and there's no overlap.
+
+		Now, if a segment doesn't *not* overlap, then it does overlap, so we NOT the expression (that we can easily understand) for the not overlapping case.
+
+		In other words, we take...
+
+		.............................................
+		!overlap = (x1_hi < x2_lo) || (x1_lo > x2_hi)
+		.............................................
+
+		...and treat is as an equation and NOT both sides, to get...
+
+		...............................................
+		overlap = !((x1_hi < x2_lo) || (x1_lo > x2_hi))
+		...............................................
+
+		If we distribute the NOT, using the rules of Boolean logic, we get...
+
+		..............................................
+		overlap = !(x1_hi < x2_lo) && !(x1_lo > x2_hi)
+		..............................................
+
+		...which further reduces to...
+
+		..............................................
+		overlap = (x1_hi >= x2_lo) && (x1_lo <= x2_hi)
+		..............................................
+
+		...which is the same as...
+
+		..............................................
+		overlap = (x1_hi >= x2_lo) && (x2_hi >= x1_lo)
+		..............................................
+
+		Given that our rectangle parameters are =aX=, =aW=, =bX=, and =bW=, the condition for testing the X-axis becomes...
+
+		......................................
+		aX + aW - 1 >= bX && bX + bW - 1 >= aX
+		......................................
+
+		Combined with the same test for the Y-axis, we get...
+
+		.........................................
+		aX + aW - 1 >= bX && bX + bW - 1 >= aX &&
+		aY + aH - 1 >= bY && bY + bH - 1 >= aY
+		.........................................
+
+		Short and sweet!
+
+		Return to =QUESTION: Test For Rectangles Overlapping=
+
+	ANSWER: Split List String, Using Comma
+		Hopefully the candidate will know about the =split= method of the =String= object, hopefully they will know it's signature, and hopefully they will know that the method always returns an array with at least one element.
+
+		Always returning at least one element can be problematic when parsing a list string that was produced by serializing an empty array. Of course, the =split= method doesn't know that the string doesn't represent a list with one element that is an empty string, but is instead supposed to represent an empty list. However, we might know that our original list array never contains empty string elements. So, we want a function that will give us an empty array for an empty string.
+
+		TYPICAL SOLUTION
+		.............................................
+		function splitListStrUsingComma (sourceStr) {
+			if (sourceStr == '') {
+				return [];
+			} else {
+				return sourceStr.split (',');
+			}
+		}
+		.............................................
+
+		A promising candidate will be aware of and comfortable with the ternary conditional operator - it will be a part of their bag of tricks. A promising candidate will also be aware of the shortcut for testing a string for empty / non-empty. Such a candidate might produce a more concise solution, as follows...
+
+		CONCISE SOLUTION
+		.................................................
+		function splitListStrUsingComma (sourceStr) {
+			return sourceStr ? sourceStr.split (',') : [];
+		}
+		.................................................
+
+		If the candidate doesn't produce the concise solution right off the bat, ask them how they might optimize their solution for size.
+
+		The Twist
+			If by this point you've established that the candidate has some promise, then you can unleash the next challenge: write a single line that will accomplish the same thing and that will only dereference the source string once!
+
+			THE TRICKY SOLUTION
+			........................................................................
+			function splitListStrUsingComma (sourceStr) {
+				return (sourceStr + ',').replace (/^,$/,'').split (',').slice (0,-1);
+			}
+			........................................................................
+
+			In this solution, we add an element to the list - from the perspective of the =split= method - by appending a "comma". Then we replace the entire string with an empty string *if* the string is only a comma. We split the string with comma as the delimiter, and then we remove the last element using the =slice= method of the =Array= object, specifying a negative value for its second parameter. For a single non-empty element, where the source string has no comma, the =slice= method ends up operating on an array with two elements - the last one being empty. In fact, for any non-empty source string, the last element ends up being the empty added element. But for the empty source string case, the =replace= results in there only being one element after the =split= is performed, and this element is removed by the =slice= - exactly the behavior we're after.
+
+			Naturally, one would never use such code in real life, but the aim of this question is to plumb the depths of a candidate's knowledge of the JavaScript language. There's a lot that the candidate needs to know in order to arrive at this solution. When the candidate is stuck in a locked room and the bomb is ticking, does the candidate have the MacGyver sense to use what's available to save the day? Does the candidate even know and understand what all is available for them to use? A good candidate will find the question's constraints an interesting puzzle and should not become frustrated / annoyed with the question.
+
+			EVEN BETTER TRICKY SOLUTION
+			....................................................................
+			function splitListStrUsingComma (sourceStr) {
+				return sourceStr.replace (/(.)$/,'$1,').split (',').slice (0,-1);
+			}
+			....................................................................
+
+			Here we're adding an extra element, only if the source string is non-empty. We append a comma to a non-empty string by using a regular expression that replaces the last character with that character followed by a comma.
+
+		Return to =QUESTION: Split List String, Using Comma=
+

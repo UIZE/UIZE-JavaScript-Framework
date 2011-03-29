@@ -1,0 +1,206 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Basic Mask - HTML Source Code | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework HTML example source code"/>
+	<meta name="description" content="This is the source code for the Basic Mask example"/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../../css/page.css"/>
+	<link rel="stylesheet" href="../../css/page.source.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../../index.html" title="UIZE JavaScript Framework home"></a>
+	SOURCE CODE: Basic Mask
+	<div id="page-actions" class="pageActions">
+		<a href="../mask.html" class="buttonLink">VIEW EXAMPLE</a>
+	</div>
+</h1>
+
+<pre>
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+&lt;head&gt;
+  &lt;title&gt;Basic Mask | JavaScript Examples | UIZE JavaScript Framework&lt;/title&gt;
+  &lt;meta name="keywords" content="animation widget Uize.Widget.Mask Uize.Fade.xFactory"/&gt;
+  &lt;meta name="description" content="See a mask widget being used to highlight an image in a layout. Switching to highlighting a different image is accompanied by a JavaScript animation."/&gt;
+  &lt;link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/&gt;
+  &lt;link rel="stylesheet" href="../css/page.css"/&gt;
+  &lt;link rel="stylesheet" href="../css/page.example.css"/&gt;
+  &lt;style type="text/css"&gt;
+    .photoPodGroup {
+      position:relative;
+      width:700px;
+      height:370px;
+      border:1px solid #888;
+      background:#ccc;
+      margin:10px auto 0 auto;
+      overflow:hidden;
+    }
+    .photoPod {
+      position:absolute;
+      background:#8ac;
+      border:solid 1px #fff;
+      font-size:11px;
+      font-family:Arial;
+      color:#000;
+      width:250px;
+      text-align:left;
+    }
+    .photoPod &gt; div {
+      margin:4px;
+    }
+    .photoPod h1 {
+      font-size:15px;
+      font-weight:bold;
+      text-align:center;
+      background:#000;
+      color:#fff;
+      margin:0px;
+    }
+    .photoPod img {
+      width:105px;
+      height:75px;
+      float:left;
+      margin-right:4px;
+      margin-bottom:4px;
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+&lt;script type="text/javascript" src="../js/Uize.js"&gt;&lt;/script&gt;
+
+&lt;h1 class="document-title"&gt;
+  &lt;a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"&gt;&lt;/a&gt;
+  &lt;a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow"&gt;JAVASCRIPT EXAMPLES&lt;/a&gt;
+  Basic Mask
+  &lt;div id="page-actions" class="pageActions"&gt;
+    &lt;a href="source-code/mask.html" class="buttonLink"&gt;SOURCE&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/h1&gt;
+
+&lt;div class="main"&gt;
+  &lt;!-- explanation copy --&gt;
+
+  &lt;div class="explanation"&gt;
+    &lt;p&gt;In this example, an instance of &lt;a href="../reference/Uize.Widget.Mask.html"&gt;&lt;code&gt;Uize.Widget.Mask&lt;/code&gt;&lt;/a&gt; has been created and positioned over the layout of images below. When you move the mouse over the buttons above the layout, the mask's coordinates are set so that the highlight area is positioned over the corresponding image and everything outside the image is masked out. An instance of the &lt;a href="../reference/Uize.Fade.html"&gt;&lt;code&gt;Uize.Fade&lt;/code&gt;&lt;/a&gt; class is used to create a JavaScript animation for a smooth transition to the new coordinates.&lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;center&gt;
+    &lt;div&gt;
+      &lt;a id="page-sunSetsSoonAtSweeneyLink" class="buttonLink" href="javascript://"&gt;Pink Pacifica Sunset&lt;/a&gt;
+      &lt;a id="page-flockOfCloudsLink" class="buttonLink" href="javascript://"&gt;Flock of Clouds&lt;/a&gt;
+      &lt;a id="page-drivingThroughTheRainLink" class="buttonLink" href="javascript://"&gt;Driving Through the Rain&lt;/a&gt;
+      &lt;a id="page-heavensOpenOverPedroLink" class="buttonLink" href="javascript://"&gt;Heavens Open Over Pedro&lt;/a&gt;
+      &lt;a id="page-photoPodGroupLink" class="buttonLink" href="javascript://"&gt;Show All&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/center&gt;
+
+  &lt;div id="page-photoPodGroup" class="photoPodGroup"&gt;
+    &lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228483162492178759&amp;max_dim=500" style="position:absolute; width:700px; height:500px; left:0px; top:0px;" alt=""/&gt;
+    &lt;div id="page-sunSetsSoonAtSweeney" class="photoPod" style="left:10px; top:10px;"&gt;
+      &lt;h1&gt;Sun Sets Soon at Sweeney&lt;/h1&gt;
+      &lt;div&gt;
+        &lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228888824201666423&amp;max_dim=105" alt=""/&gt;The sun bursts out beneath a bank of clouds in this sunset, seen from Sweeney Ridge in San Bruno, California. It casts a path of shimmering orange on the ocean and lights up the air between two hills.
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div id="page-heavensOpenOverPedro" class="photoPod" style="right:10px; bottom:10px;"&gt;
+      &lt;h1&gt;Heavens Open Over Pedro&lt;/h1&gt;
+      &lt;div&gt;
+        &lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228483162492178759&amp;max_dim=105" alt=""/&gt;On a stormy winter day in Pacifica, shafts of light burst through the blackened sky to warm the sands of Pedro Point beach.
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div id="page-flockOfClouds" class="photoPod" style="left:30px; bottom:10px;"&gt;
+      &lt;h1&gt;Flock of Clouds&lt;/h1&gt;
+      &lt;div&gt;
+        &lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228267745724726415&amp;max_dim=105" alt=""/&gt;It was on a trip to the U.S. Virgin Islands in the Caribbean that this majestic flock of fluffy clouds was spotted grazing across the clear turquoise waters hugging the shallow sandbanks of a nearby island. It seemed like I was witnessing a great migration from the high altitudes of my plane window seat.
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div id="page-drivingThroughTheRain" class="photoPod" style="right:90px; top:20px;"&gt;
+      &lt;h1&gt;Driving Through the Rain&lt;/h1&gt;
+      &lt;div&gt;
+        &lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228507796122097730&amp;max_dim=105" alt=""/&gt;I captured this evocative picture one day driving through a torrential downpour in San Bruno, California - towards Pacifica. I was, of course, in the passenger seat at the time (and not steering the car from it, either, for that matter). There's just something intensely moody about the colors and the motion blur effect in the picture that evokes those braving-the-storm feelings. It feels stark and looks blistering cold.
+      &lt;/div&gt;
+    &lt;/div&gt;
+
+    &lt;div id="page_mask" style="position:absolute; left:0px; top:0px; width:700px; height:400px; background:#022; opacity:.5; filter:alpha(opacity=50);"&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- JavaScript code to make the static HTML "come alive" --&gt;
+
+&lt;script type="text/javascript"&gt;
+
+Uize.module ({
+  required:[
+    'UizeDotCom.Page.Example.library',
+    'UizeDotCom.Page.Example',
+    'Uize.Node',
+    'Uize.Fade.xFactory',
+    'Uize.Widget.Mask'
+  ],
+  builder:function () {
+    /*** create the example page widget ***/
+      var page = window.page = new UizeDotCom.Page.Example;
+
+    function getNodeOffsetCoords (node) {
+      node = Uize.Node.getById (node);
+      return {left:node.offsetLeft,top:node.offsetTop,width:node.offsetWidth + 1,height:node.offsetHeight + 1};
+    }
+
+    /*** create the Uize.Widget.Mask instance ***/
+      var mask = page.addChild ('mask',Uize.Widget.Mask);
+      mask.set (getNodeOffsetCoords (mask.getNode ()));
+
+    /*** wire up the page widget ***/
+      page.wireUi ();
+
+    /*** wire up link mouseovers for moving mask position ***/
+      function wireLinkMouseover (linkId) {
+        var coords = getNodeOffsetCoords (linkId == 'photoPodGroup' ? mask.getNode () : page.getNode (linkId));
+        page.wireNode (
+          linkId + 'Link',
+          'mouseover',
+          function () {
+            Uize.Fade.fadeProperties (mask,null,coords,750,{curve:Uize.Fade.celeration (0,1),quantization:1});
+          }
+        );
+      }
+      wireLinkMouseover ('sunSetsSoonAtSweeney');
+      wireLinkMouseover ('flockOfClouds');
+      wireLinkMouseover ('drivingThroughTheRain');
+      wireLinkMouseover ('heavensOpenOverPedro');
+      wireLinkMouseover ('photoPodGroup');
+  }
+});
+
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+
+</pre>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.library',
+		'UizeDotCom.Page'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page).wireUi ()}
+});
+
+</script>
+
+</body></html>

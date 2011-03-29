@@ -1,0 +1,13 @@
+Documentation for the SimpleDoc [[../explainers/javascript-documentation-system.html][JavaScript Documentation System]] has been greatly improved and now explains in detail the various formatting rules, providing examples to accompany the explanations.
+
+SimpleDoc is a human readable, non-XML, indentation based document format for writing structured documents that provides a healthy set of formatting features, such as bolding, italicizing, linking, lists, sample code blocks, note headings, and more. All the documentation on the uize.com Web site is written using SimpleDoc, and the new documentation explains all about it.
+
+[[../explainers/javascript-documentation-system.html][CHECK IT OUT]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2008-12-20 - DOCUMENTATION: JavaScript Documentation System
+....................................................................................

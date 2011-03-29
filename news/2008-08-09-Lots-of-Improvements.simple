@@ -1,0 +1,38 @@
+NEW EXAMPLE: Generic Auto Tooltip
+	This new example demonstrates how the =Uize.Widget.AutoTooltip= class can be used to enhance links to external sites so that a summary info table is provided in a tooltip as you mouse over the links.
+
+	This example also demonstrates the use of a JavaScript template that has been pre-compiled to a JavaScript module by a build script.
+
+	[[../examples/auto-tooltip-generic.html][CHECK IT OUT]]
+
+IMPROVED MODULE: Uize.Wsh
+	The =Uize.Wsh= module has been improved with the addition of the new =alert= and =confirm= global functions.
+
+	These functions behave similarly to their namesakes found within the Web browser contex, and make it easier to troubleshoot build scripts that run within the Window Scripting Host context, and also easier to control script execution with the aid of user confirmations. In addition to these new functions, build script code used by the uize.com Web site has been factored out and made more generally available in the form of the new =Uize.Wsh.AutoScruncher= and =Uize.Wsh.CompileJstModules= modules.
+
+IMPROVED MODULE: Uize.String
+	The =Uize.String.splitInTwo= static method has been enhanced to support a regular expression as the splitter. A new =Uize.String.toCamel= static method has been added that lets you convert a space separated (or otherwise delimited) string to a camelCase formatted string.
+
+UPDATED TOOL: SimpleDoc Tester
+	The =SimpleDoc Tester= tool has been updated to have a more contemporary (and more usable) interface.
+
+	Play around with it to see how SimpleDoc formatted text is converted to HTML. The tool lets you edit the SimpleDoc source, view the generated HTML source, and preview the generated HTML document - all in an easy-to-use tabbed interface.
+
+	[[../examples/simple-doc-tester.html][CHECK IT OUT]]
+
+Miscellaneous Improvements
+	Various other improvements have been made, including...
+
+	- A problem was fixed with the =Uize.Tooltip= module that was causing the tooltip to sometimes shift position very quickly on first appearing, making the browser window appear to flicker. The problem was only occasionally seen, and seemed to affect Firefox more than Internet Explorer.
+	- The =Uize.Node.wireEvent= method has been enhanced to support a new =onmouserest= virtual event.
+	- The =Uize.Widget.AutoTooltip= module has been updated to offer a =dataKeyTransformer= set-get property that allows you to override the default camelCase transformation that is performed on data keys by the built-in dataDecoder.
+	- Documentation has been added for the =Uize.Node.getValue= and =Uize.Node.setValue= static methods.
+	- Various optimizations have been made to various modules.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2008-08-09 - Lots of Improvements
+....................................................................................

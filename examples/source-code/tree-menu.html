@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Tree Menu From JSON - HTML Source Code | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework HTML example source code"/>
+	<meta name="description" content="This is the source code for the Tree Menu From JSON example"/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../../css/page.css"/>
+	<link rel="stylesheet" href="../../css/page.source.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../../index.html" title="UIZE JavaScript Framework home"></a>
+	SOURCE CODE: Tree Menu From JSON
+	<div id="page-actions" class="pageActions">
+		<a href="../tree-menu.html" class="buttonLink">VIEW EXAMPLE</a>
+	</div>
+</h1>
+
+<pre>
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+&lt;head&gt;
+  &lt;title&gt;Tree Menu From JSON | JavaScript Examples | UIZE JavaScript Framework&lt;/title&gt;
+  &lt;meta name="keywords" content="featured widget menu Uize.Widget.Tree.Menu"/&gt;
+  &lt;meta name="description" content="See a demo of JavaScript menus, that can be easily built from a JSON object and can even be dynamically updated. These menus also support separators."/&gt;
+  &lt;link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/&gt;
+  &lt;link rel="stylesheet" href="../css/page.css"/&gt;
+  &lt;link rel="stylesheet" href="../css/page.example.css"/&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+&lt;script type="text/javascript" src="../js/Uize.js"&gt;&lt;/script&gt;
+
+&lt;h1 class="document-title"&gt;
+  &lt;a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"&gt;&lt;/a&gt;
+  &lt;a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow"&gt;JAVASCRIPT EXAMPLES&lt;/a&gt;
+  Tree Menu From JSON
+  &lt;div id="page-actions" class="pageActions"&gt;
+    &lt;a href="source-code/tree-menu.html" class="buttonLink"&gt;SOURCE&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/h1&gt;
+
+&lt;!-- load in the JavaScript libraries that define the animals and plants hierarchical menus --&gt;
+
+&lt;script type="text/javascript" src="js/animals.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="js/plants.js"&gt;&lt;/script&gt;
+
+&lt;div class="main"&gt;
+  &lt;!-- explanation copy --&gt;
+
+  &lt;div class="explanation"&gt;
+    &lt;p&gt;In this example, an instance of &lt;a href="../reference/Uize.Widget.Tree.Menu.html"&gt;&lt;code&gt;Uize.Widget.Tree.Menu&lt;/code&gt;&lt;/a&gt; is instantiated to produce a multi-level menu. The markup for the menu is generated when the widget is wired up. The structure for the markup is driven by a JSON data structure that is supplied to the &lt;code&gt;items&lt;/code&gt; set-get property of the widget. This data structure is purely for demonstration purposes, so none of the items have active links specified (ie. clicking does nothing). The generated markup does not contain any styling, and the decoration for the menu is controlled by separate CSS in the page. As you interact with the menu, notice how the selection path is highlighted as you go deeper into submenus. Lower down the page, below the menu, are some links that execute snippets of code to demonstrate the programmatic interface of the widget.&lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;div id="page_treeMenu-shell" style="height:200px;"&gt;&lt;/div&gt;
+
+  &lt;!-- programmatic interface examples --&gt;
+
+  &lt;div class="programmaticInterface"&gt;
+    &lt;ul&gt;
+      &lt;li&gt;
+        &lt;a href="javascript://" class="linkedJs"&gt;treeMenu.set ({items:animalsAndPlants})&lt;/a&gt;&lt;br/&gt;
+        &lt;ul&gt;
+          &lt;li&gt;&lt;a href="javascript://" class="linkedJs"&gt;treeMenu.collapseAllBut (['Animals','Wild Animals','Cats','Tiger'])&lt;/a&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href="javascript://" class="linkedJs"&gt;treeMenu.collapseAllBut (['Plants','Bushes and Shrubs','Hedges','Escallonia'])&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;a href="javascript://" class="linkedJs"&gt;treeMenu.set ({items:animals})&lt;/a&gt;&lt;br/&gt;
+        &lt;ul&gt;
+          &lt;li&gt;&lt;a href="javascript://" class="linkedJs"&gt;treeMenu.collapseAllBut (['Pets','Dogs','Large Breeds'])&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;
+        &lt;a href="javascript://" class="linkedJs"&gt;treeMenu.set ({items:plants})&lt;/a&gt;&lt;br/&gt;
+        &lt;ul&gt;
+          &lt;li&gt;&lt;a href="javascript://" class="linkedJs"&gt;treeMenu.collapseAllBut (['Trees','Deciduous'])&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;&lt;a href="javascript://" class="linkedJs"&gt;treeMenu.setExpandedDepth (0)&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- JavaScript code to create tree menu instance and insert and wire its UI --&gt;
+
+&lt;script type="text/javascript"&gt;
+
+Uize.module ({
+  required:[
+    'UizeDotCom.Page.Example.library',
+    'UizeDotCom.Page.Example',
+    'Uize.Widget.Tree.Menu',
+    'Uize.Node'
+  ],
+  builder:function () {
+    /*** create the example page widget ***/
+      var page = window.page = new UizeDotCom.Page.Example ({evaluator:function (code) {eval (code)}});
+
+    /*** add the tree menu child widget ***/
+      var
+        animalsAndPlants = [
+          {title:'Animals',items:animals},
+          {title:'-'},
+          {title:'Plants',items:plants}
+        ],
+        treeMenu = page.addChild (
+          'treeMenu',
+          Uize.Widget.Tree.Menu,
+          {
+            items:animalsAndPlants,
+            menuCssClass:'menuShell',
+            menuDividerClass:'divider',
+            menuItemActiveCssClass:'menuItemActive',
+            menuItemChildrenIndicatorCssClass:'menuItemWithChildren',
+            menuItemCssClass:'menuItem',
+            subMenuCssClass:'subMenuShell',
+            subMenuDividerClass:'divider',
+            subMenuItemActiveCssClass:'subMenuItemActive',
+            subMenuItemChildrenIndicatorCssClass:'subMenuItemWithChildren',
+            subMenuItemCssClass:'subMenuItem',
+            built:false
+          }
+        )
+      ;
+
+    /*** wire up the page widget ***/
+      page.wireUi ();
+  }
+});
+
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+
+</pre>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.library',
+		'UizeDotCom.Page'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page).wireUi ()}
+});
+
+</script>
+
+</body></html>

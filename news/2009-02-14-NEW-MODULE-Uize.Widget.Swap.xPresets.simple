@@ -1,0 +1,15 @@
+A plethora of effect presets for the =Uize.Widget.Swap= class have been made available in the new =Uize.Widget.Swap.xPresets= extension module.
+
+Presets in this new module include: =crossFade=, =fadeOutFadeIn=, =fadeOutPauseThenFadeIn=, =fadeWipeFromLeft=, =fadeWipeFromRight=, =fadeWipeHorizontalFromCenter=, =fadeWipeFromTop=, =fadeWipeFromBottom=, =fadeWipeVerticalFromCenter=, =fadeSlideInFromLeft=, =fadeSlideInFromRight=, =fadeSlideInFromTop=, =fadeSlideInFromBottom=, =fadeSlideInFromTopLeft=, =fadeSlideInFromTopRight=, =fadeSlideInFromBottomLeft=, =fadeSlideInFromBottomRight=, =fadeSlideOutSlideInLeft=, =fadeSlideOutSlideInRight=, =fadeSlideOutSlideInTop=, =fadeSlideOutSlideInBottom=, =fadeSlideOutSlideInTopLeft=, =fadeSlideOutSlideInTopRight=, =fadeSlideOutSlideInBottomLeft=, =fadeSlideOutSlideInBottomRight=, =wipeOutWipeInLeft=, =wipeOutWipeInRight=, =wipeOutWipeInTop=, =wipeOutWipeInBottom=, =wipeOutWipeInTopLeft=, =wipeOutWipeInTopRight=, =wipeOutWipeInBottomLeft=, =wipeOutWipeInBottomRight=, =wipeOutWipeInHorizontalCenter=, =wipeOutWipeInVerticalCenter=, =horizontalCrossSlideFromLeft=, =horizontalCrossSlideFromRight=, =verticalCrossSlideFromTop=, =verticalCrossSlideFromBottom=, =closeToCenterOpenFromCenter=, =poofPauseThenOpenFromCenter=, and =centerOpenCloseCrossFade=.
+
+The presets can be previewed *and tweaked* in the new [[../examples/swap-image.html][Uize.Widget.Swap.Image example]]. Full documentation and a description of all the presets is also available.
+
+[[Uize.Widget.Swap.xPresets][LEARN MORE]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-02-14 - NEW MODULE: Uize.Widget.Swap.xPresets
+....................................................................................

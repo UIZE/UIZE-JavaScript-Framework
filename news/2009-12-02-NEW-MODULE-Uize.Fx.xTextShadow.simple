@@ -1,0 +1,33 @@
+The new =Uize.Fx.xTextShadow= extension module implements support for animating the CSS3 =text-shadow= property, enabling a wide variety of stunning effects.
+
+Using this module, color, horizontal offset, vertical offset, and blur radius properties for an arbitrary number of text shadows can be animated between one state and another, making a vast array of interesting effects possible. Once the =Uize.Fx.xTextShadow= module has been loaded, the =Uize.Fx.fadeStyle= method of the =Uize.Fx= module can be used to fade/animate the properties of text shadows, as shown in the following example...
+
+EXAMPLE
+.........................................................................................
+Uize.Fx.fadeStyle (
+	'myNode',
+	{
+		color:'#fff',
+		backgroundColor:'#000',
+		textShadow:'#000 0px 0 0em, #000 0px 0 0em, #000 0px 0 0em, #000 0px 0 0em'
+	},
+	{
+		color:'#000',
+		backgroundColor:'#045',
+		textShadow:'#0ff -30px 0 .5em, #0ff 30px 0 .5em, #0f0 -20px 0 1em, #0f0 20px 0 1em'
+	},
+	500
+);
+.........................................................................................
+
+Furthermore, once the =Uize.Fx.xTextShadow= module has been loaded, all modules that use the =Uize.Fx= module in their implementation will get the benefit of being able to animate text shadows. For example, the =Uize.Widget.HoverFader= widget class, which uses the =Uize.Fx.fadeStyle= method in its implementation, will be able to support fading of text shadows and will support default and hover styles that contain text shadow properties. A good demonstration of this can be seen in the [[../examples/hover-fader-text-shadow-animation.html][Hover Fader Text Shadow Animation]] example.
+
+[[Uize.Fx.xTextShadow][LEARN MORE]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-12-02 - NEW MODULE: Uize.Fx.xTextShadow
+....................................................................................

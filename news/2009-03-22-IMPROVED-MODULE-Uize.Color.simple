@@ -1,0 +1,11 @@
+The =Uize.Color= module has been improved to now support an optional "#" prefix when specifying hex RGB color values.
+
+The =Uize.Color.blendHex=, =Uize.Color.rgbFromStyleStr=, and =Uize.Color.hexStrToRgb= static methods, and the the =setHex= instance method of the =Uize.Color.RgbColor= object now all support hex RGB color values with an optional "#" prefix (ie. so both =fff= *and* =#fff= are now accepted).
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-03-22 - IMPROVED MODULE: Uize.Color
+....................................................................................

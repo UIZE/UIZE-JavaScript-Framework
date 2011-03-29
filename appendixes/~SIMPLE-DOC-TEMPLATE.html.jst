@@ -1,0 +1,13 @@
+<%@
+	required ('UizeDotCom.Templates.SimpleDoc');
+	input ({title:'string',description:'string',body:'string'});
+%><%=
+	UizeDotCom.Templates.SimpleDoc.process ({
+		title:input.title,
+		section:'Appendixes',
+		description:input.description || 'This is an appendix document for the UIZE JavaScript Framework.',
+		pathToRoot:'../',
+		body:input.body
+	})
+%>
+

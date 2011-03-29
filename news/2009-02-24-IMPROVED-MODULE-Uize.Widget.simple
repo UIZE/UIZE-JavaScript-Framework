@@ -1,0 +1,43 @@
+The =localize= instance method (implemented in the =Uize.Widget= base class) has been changed to now always use ='{KEY}'= as default token naming syntax.
+
+This change means that simple type, array type, and object type substitutions now all behave the same way. Previously, object type substitutions would assume that the object's keys were exactly the tokens to be substituted. This meant that you would have to put the curly braces in the key names, as such...
+
+THE OLD WAY
+.........................................................................................
+myWidget.set ({localized:{welcomeMessage:'Welcome, {firstName} of {state}, {country}'}});
+var localWelcome = myWidget.localize (
+	'welcomeMessage',
+	{'{firstName}':'Chris','{state}':'California','{country}':'USA'}
+);
+.........................................................................................
+
+THE NEW WAY
+.........................................................................................
+myWidget.set ({localized:{welcomeMessage:'Welcome, {firstName} of {state}, {country}'}});
+var localWelcome = myWidget.localize (
+	'welcomeMessage',
+	{firstName:'Chris',state:'California',country:'USA'}
+);
+.........................................................................................
+
+This change is not backwards compatible, so if you have any cases of calling the =localize= instance method using an object containing substitutions, then you will either have to change the object keys or use the optional =tokenNamingSTR= parameter, as in...
+
+TO AVOID CHANGING KEY NAMES
+.........................................................................................
+myWidget.set ({localized:{welcomeMessage:'Welcome, {firstName} of {state}, {country}'}});
+var localWelcome = myWidget.localize (
+	'welcomeMessage',
+	{'{firstName}':'Chris','{state}':'California','{country}':'USA'},
+	'KEY'
+);
+.........................................................................................
+
+Specifying the value ='KEY'= for the =tokenNamingSTR= parameter means that the token name is exactly the key name, with no additional wrappers. So, in this case, the key ={firstName}= maps to the token ={firstName}= and *NOT* ={{firstName}}=. Using this mechanism for backwards compatibility is only compelling if the object containing the substitutions is coming from elsewhere (such as in a parameter value). Otherwise, it would be simpler just to change your code to remove the curly braces from the key names, resulting in a cleaner substitutions object.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-02-24 - IMPROVED MODULE: Uize.Widget
+....................................................................................

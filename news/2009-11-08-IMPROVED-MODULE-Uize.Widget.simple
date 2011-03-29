@@ -1,0 +1,65 @@
+The =Uize.Widget= module has been improved with the addition of the new =wireNode= instance method that replaces the now deprecated =wireNodeEvent= and =wireNodeEvents= instance methods, and with the addition of the new =unwireNode= instance method that replaces the now deprecated =unwireNodeEvent= instance method.
+
+DEPRECATED
+............................................................
+myWidget.wireNodeEvent    >> BECOMES >>  myWidget.wireNode
+myWidget.wireNodeEvents   >> BECOMES >>  myWidget.wireNode
+myWidget.unwireNodeEvent  >> BECOMES >>  myWidget.unwireNode
+............................................................
+
+New wireNode Instance Method
+	The new =wireNode= instance method takes over the role of both of the deprecated =wireNodeEvent= and =wireNodeEvents= instance methods.
+
+	The new method does this by supporting the parameter signatures of the two deprecated methods.
+
+	WIRE ONE EVENT
+	.......................................................................
+	myWidget.wireNode (impliedNodeSTRorBLOB,eventNameSTR,eventHandlerFUNC);
+	.......................................................................
+
+	WIRE ONE OR MORE EVENTS
+	....................................................................
+	myWidget.wireNode (impliedNodeSTRorBLOB,eventNamesToHandlersMapOBJ);
+	....................................................................
+
+	The signatures of the new method are more in harmony with the signatures of the =wire= instance method and =Uize.wire= static method of the =Uize= base class. Even though these methods apply to different event systems - the =Uize= event system and the DOM / node event system - the consistency in specifying events and handlers should improve readability (and writability) of code.
+
+New unwireNode Instance Method
+	The new =unwireNode= instance method takes over the role of the deprecated =unwireNodeEvent= instance method.
+
+	The new method improves upon the deprecated =unwireNodeEvent= method by adding support for unwiring multiple event wirings in a single method call. It does this by supporting an =eventNamesToHandlersMapOBJ= parameter that allows multiple event-name-to-handler mappings to be specified in an object, in exactly the same way as with the companion =wireNode= instance method.
+
+	UNWIRE ONE EVENT
+	.........................................................................
+	myWidget.unwireNode (impliedNodeSTRorBLOB,eventNameSTR,eventHandlerFUNC);
+	.........................................................................
+
+	UNWIRE ONE OR MORE EVENTS
+	......................................................................
+	myWidget.unwireNode (impliedNodeSTRorBLOB,eventNamesToHandlersMapOBJ);
+	......................................................................
+
+	The =unwireNode= method also supports unwiring events for multiple nodes in a single method call, using the =impliedNodeSTRorBLOB= parameter, where the deprecated =unwireNodeEvent= method only supported unwiring events for a single node at a time.
+
+	Most importantly, the new =unwireNode= method has parity with its =wireNode= counterpart. Actually, it supports a few more variations, but it supports all the variations that =wireNode= supports. So, if you can wire events using certain parameter values in the =wireNode= method, then you should be able to reverse the effect of calling =wireNode= with those parameter values by calling =unwireNode= with those same parameter values.
+
+Benefits of These Changes
+	The changes to these various methods offer the following benefits...
+
+	- the new method names are more concise (short 'n sweet, less to type, smaller code)
+	- the new methods are more versatile, supporting single or multiple event-to-handler mappings
+	- the signatures of the variations for the new methods are more in harmony with the event wiring and unwiring methods of the =Uize= base class, increasing consistency across the framework
+	- there is now finally parity between the new =wireNode= and =unwireNode= methods, where there wasn't before parity between the deprecated =wireNodeEvent=, =wireNodeEvents=, and =unwireNodeEvent= methods
+
+Deprecated Methods Still Supported
+	For backwards compatibility, the deprecated =wireNodeEvent=, =wireNodeEvents=, and =unwireNodeEvent= instance methods are all still supported, and will be supported for some time into the future.
+
+	All existing code using the deprecated methods should continue to work as normal. It would be wise to progressively migrate code over to using the new methods.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-11-08 - IMPROVED MODULE: Uize.Widget
+....................................................................................

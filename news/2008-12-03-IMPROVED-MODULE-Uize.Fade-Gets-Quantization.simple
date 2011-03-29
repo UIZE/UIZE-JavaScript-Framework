@@ -1,0 +1,11 @@
+The =Uize.Fade= module has been enhanced with the addition of highly flexible quantization functionality, in the form of the new =quantization= set-get property.
+
+This new property allows detailed control of the quantization steps for the interpolated values of a fade - even allowing different quantization steps for different components of arbitrarily compound fade values. Several modules (and examples) have been updated to take advantage of the new quantization feature in order to further improve their performance, including the =Uize.Widget.Scrolly= module and the =Mask= example.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2008-12-03 - IMPROVED MODULE: Uize.Fade Gets Quantization
+....................................................................................

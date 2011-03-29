@@ -1,0 +1,677 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Animate Size in JavaScript - HTML Source Code | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework HTML example source code"/>
+	<meta name="description" content="This is the source code for the Animate Size in JavaScript example"/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../../css/page.css"/>
+	<link rel="stylesheet" href="../../css/page.source.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../../index.html" title="UIZE JavaScript Framework home"></a>
+	SOURCE CODE: Animate Size in JavaScript
+	<div id="page-actions" class="pageActions">
+		<a href="../animate-size-in-javascript.html" class="buttonLink">VIEW EXAMPLE</a>
+	</div>
+</h1>
+
+<pre>
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+&lt;head&gt;
+  &lt;title&gt;Animate Size in JavaScript | JavaScript Examples | UIZE JavaScript Framework&lt;/title&gt;
+  &lt;meta name="keywords" content="animation Uize.Fx"/&gt;
+  &lt;meta name="description" content="See how to animate the size of an HTML element and how to apply amazingly realistic physics effects like easing, elasticity, bounce, and many more."/&gt;
+  &lt;link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/&gt;
+  &lt;link rel="stylesheet" href="../css/page.css"/&gt;
+  &lt;link rel="stylesheet" href="../css/page.example.css"/&gt;
+  &lt;link rel="stylesheet" href="../css/widget.tabs.css"/&gt;
+  &lt;link rel="stylesheet" href="css/selector-links.css"/&gt;
+  &lt;link rel="stylesheet" href="css/params-table.css"/&gt;
+  &lt;link rel="stylesheet" href="css/params-inspector.css"/&gt;
+  &lt;style type="text/css"&gt;
+    #page_paramsInspector-shell .tabShell {
+      width:400px;
+    }
+    #page_paramsInspector_curve {
+      width:320px;
+      height:251px;
+      font-size:12px;
+    }
+    #page_paramsInspector_preview {
+      width:386px;
+    }
+    .previewPaneShell {
+      position:relative;
+      width:300px;
+      height:300px;
+      border-width:30px;
+      border-style:solid;
+      cursor:not-allowed;
+    }
+    .previewPane, .previewPaneEventGrabber {
+      position:absolute;
+      left:0;
+      top:0;
+      width:100%;
+      height:100%;
+    }
+    .previewPane {
+      background:url(http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228761116399685951&amp;max_dim=500) no-repeat -2px -2px;
+    }
+    .previewPaneEventGrabber {
+      cursor:crosshair;
+    }
+    .objectToAnimate {
+      position:absolute;
+      left:150px;
+      top:150px;
+      width:0;
+      height:0;
+      border-radius:40px;
+      -moz-border-radius:40px;
+      -webkit-border-radius:40px;
+      background:url(http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228809332111558136&amp;max_dim=500) repeat -2px -2px;
+      box-shadow:10px 10px 10px rgba(0,0,0,.6);
+      -moz-box-shadow:10px 10px 10px rgba(0,0,0,.6);
+      -webkit-box-shadow:10px 10px 10px rgba(0,0,0,.6);
+    }
+    .objectToAnimateGhost {
+      opacity:.2;
+      filter:alpha(opacity=20);
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+&lt;script type="text/javascript" src="../js/Uize.js"&gt;&lt;/script&gt;
+
+&lt;h1 class="document-title"&gt;
+  &lt;a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"&gt;&lt;/a&gt;
+  &lt;a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow"&gt;JAVASCRIPT EXAMPLES&lt;/a&gt;
+  Animate Size in JavaScript
+  &lt;div id="page-actions" class="pageActions"&gt;
+    &lt;a href="source-code/animate-size-in-javascript.html" class="buttonLink"&gt;SOURCE&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/h1&gt;
+
+&lt;div class="main"&gt;
+  &lt;!-- explanation copy --&gt;
+
+  &lt;div class="explanation"&gt;
+    &lt;p&gt;In this example, the &lt;code&gt;Uize.Fx.fadeStyle&lt;/code&gt; method of the &lt;a href="../reference/Uize.Fx.html"&gt;&lt;code&gt;Uize.Fx&lt;/code&gt;&lt;/a&gt; module is animating the size of an object. Move the mouse around inside the brushed metal square and you'll see a faint preview for a new size for the object. Click and the object will animate to that new size. How the object transitions is decided by the curve(s) used. You can change the curve(s) by clicking on one of the links in the &lt;b&gt;"PRESETS"&lt;/b&gt; tab. When you choose a preset, a random new size will be chosen and the object will animate to that size using the new curve(s). To animate the object again, click a preset link repeatedly, or click the &lt;b&gt;"PREVIEW ANIMATION"&lt;/b&gt; button repeatedly, or click anywhere on the metal square. To fool around with a preset's settings, switch over to the &lt;b&gt;"PARAMS"&lt;/b&gt; tab to tweak values and click the &lt;b&gt;"PREVIEW ANIMATION"&lt;/b&gt; button to preview changes.&lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;!-- page layout's "wireframe" with slot for params inspector --&gt;
+
+  &lt;table border="0" cellspacing="0" cellpadding="4" style="margin:auto;"&gt;
+    &lt;tr valign="top"&gt;
+      &lt;td&gt;
+        &lt;div class="previewPaneShell insetBorderColor"&gt;
+          &lt;div id="page-previewPane" class="previewPane"&gt;
+            &lt;div id="page-objectToAnimate" class="objectToAnimate"&gt;&lt;/div&gt;
+            &lt;div id="page-objectToAnimateGhost" class="objectToAnimate objectToAnimateGhost"&gt;&lt;/div&gt;
+          &lt;/div&gt;
+          &lt;div id="page-previewPaneEventGrabber" class="previewPaneEventGrabber"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/td&gt;
+      &lt;td id="page_paramsInspector-shell"&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/table&gt;
+&lt;/div&gt;
+
+&lt;textarea id="page_paramsInspector-inlinePresets" style="display:none;"&gt;
+
+Linear
+  curve: null
+  duration: 300
+
+Picking Up Speed
+  curve: Uize.Curve.easeInPow (4)
+  duration: 500
+
+Really Slow to Get Started
+  curve: Uize.Curve.easeInPow (10)
+  duration: 1000
+
+Decelerating Towards the End
+  curve: Uize.Curve.easeOutPow (4)
+  duration: 500
+
+Decelerating to a Crawl at the End
+  curve: Uize.Curve.easeOutPow (10)
+  duration: 3000
+
+Starting Off Slow, Decelerating Towards the End
+  curve: Uize.Curve.easeInOutPow (7)
+  duration: 1000
+
+Taking a Breather in the Middle
+  curve: Uize.Curve.easeMiddlePow (4)
+  duration: 800
+
+Pull Back First
+  curve: Uize.Curve.Rubber.easeInBack (2)
+  duration: 600
+
+Overshoot at the End
+  curve: Uize.Curve.Rubber.easeOutBack (2)
+  duration: 600
+
+Pull Back First, Then Overshoot at the End
+  curve: Uize.Curve.Rubber.easeInOutBack (3)
+  duration: 800
+
+Gentle Elastic Ease Out
+  curve: Uize.Curve.Rubber.easeOutElastic (.3)
+  duration: 1500
+
+Super Elastic Ease Out
+  curve: Uize.Curve.Rubber.easeOutElastic (.1)
+  duration: 1500
+
+Loose and Sloppy Elastic
+  curve::
+    Uize.Curve.Mod.blend (
+      Uize.Curve.Rubber.easeOutElastic (.2),
+      Uize.Curve.Rubber.easeOutElastic (.1)
+    )
+  duration: 2800
+
+Pull and Release
+  curve::
+    Uize.Curve.Mod.repeat (
+      [
+        Uize.Curve.Mod.band (
+          Uize.Curve.easeOutPow (5),
+          1,
+          0,
+          -.3,
+          0
+        ),
+        Uize.Curve.Rubber.easeOutElastic (.1)
+      ],
+      2
+    )
+  duration: 2200
+
+Muffled Bounce
+  curve: Uize.Curve.Rubber.easeOutBounce (3,-4,1.7)
+  duration: 800
+
+More Bouncy
+  curve: Uize.Curve.Rubber.easeOutBounce (4,1.5)
+  duration: 1200
+
+Super Bouncy
+  curve: Uize.Curve.Rubber.easeOutBounce (9,4,1.25)
+  duration: 2000
+
+Decelerate Into Coin Settle Effect
+  curve::
+    Uize.Curve.Mod.bend (
+      Uize.Curve.Mod.rotate (
+        Uize.Curve.Mod.multiply (
+          Uize.Curve.easeInPow (3),
+          Uize.Curve.Mod.repeat (
+            Uize.Curve.easeInCircular (),
+            45,
+            0,
+            true
+          )
+        )
+      ),
+      2
+    )
+  duration: 4000
+
+Decelerate Into Bounce
+  curve::
+    Uize.Curve.Mod.repeat (
+      [
+        Uize.Curve.easeInSweetPow (1/5),
+        Uize.Curve.Rubber.easeOutBounce (4,2)
+      ],
+      2,
+      1
+    )
+  duration: 1300
+
+Ease Slowly Into Short Bounce
+  curve::
+    Uize.Curve.Mod.bend (
+      Uize.Curve.Rubber.easeOutBounce (10,-2,2,2.5),
+      Uize.Curve.easeInOutPow (2)
+    )
+  duration: 1500
+
+Third Time's a Charm
+  curve::
+    Uize.Curve.Rubber.easeInBounce (
+      3,
+      1.3,
+      1,
+      Uize.Curve.easeInCircular ()
+    )
+  duration: 2000
+
+Quickly to Middle, Pull Back, Then Quickly to End
+  curve::
+    Uize.Curve.Mod.blend (
+      Uize.Curve.easeInSweetPow (1/6),
+      Uize.Curve.easeOutSweetPow (1/12),
+      Uize.Curve.line (0,1)
+    )
+  duration: 1100
+
+Stop and Go, Stop and Go, Stop and Go
+  curve::
+    Uize.Curve.Mod.repeat (
+      Uize.Curve.easeInOutPow (3),
+      3,
+      1
+    )
+  duration: 1200
+
+Wobbling on its Way
+  curve::
+    Uize.Curve.Mod.redraw (
+      Uize.Curve.easeInOutPow (4),
+      12,
+      Uize.Curve.Rubber.easeInOutBack (4)
+    )
+  duration: 1700
+
+Bouncing on its Way
+  curve::
+    Uize.Curve.Mod.blend (
+      Uize.Curve.easeInPow (3),
+      Uize.Curve.easeOutPow (1.5),
+      Uize.Curve.Rubber.easeOutBounce (10,4,1.1)
+    )
+  duration: 3000
+
+Hopping on its Way
+  curve::
+    Uize.Curve.Mod.blend (
+      Uize.Curve.Mod.band (1,1,0,.8,0),
+      Uize.Curve.Mod.band (1,1,0,.8,1),
+      Uize.Curve.Rubber.easeOutBounce (
+        6,
+        Uize.Curve.Mod.band (1,0,0),
+        1,
+        -2
+      )
+    )
+  duration: 2500
+
+Horizontal First, Then Vertical
+  curve::
+    {
+      width:Uize.Curve.easeOutPow (10),
+      height:Uize.Curve.easeInPow (10)
+    }
+  duration: 500
+
+Vertical First, Then Horizontal
+  curve::
+    {
+      width:Uize.Curve.easeInPow (10),
+      height:Uize.Curve.easeOutPow (10)
+    }
+  duration: 500
+
+Elastic Horizontal First, Then Vertical
+  curve::
+    {
+      width:
+        Uize.Curve.Rubber.easeOutElastic (.5,2),
+      height:
+        Uize.Curve.Rubber.easeInElastic (.5,1.5)
+    }
+  duration: 750
+
+Elastic Vertical First, Then Horizontal
+  curve::
+    {
+      width:
+        Uize.Curve.Rubber.easeInElastic (.5,1.5),
+      height:
+        Uize.Curve.Rubber.easeOutElastic (.5,2)
+    }
+  duration: 750
+
+Snappy Elastic Vertical First, Then Horizontal
+  curve::
+    {
+      width:
+        Uize.Curve.Rubber.easeInElastic (1.2),
+      height:
+        Uize.Curve.Rubber.easeInOutElastic (.5)
+    }
+  duration: 500
+
+Alternating Horizontal and Vertical Swagger
+  curve::
+    {
+      width:
+        Uize.Curve.Mod.repeat (
+          Uize.Curve.easeInOutPow (3),
+          3,
+          1
+        ),
+      height:
+        Uize.Curve.Mod.repeat (
+          Uize.Curve.easeInOutPow (4),
+          5,
+          1
+        )
+    }
+  duration: 1200
+
+Alternating Horizontal and Vertical Stepping
+  curve::
+    {
+      width:
+        Uize.Curve.Mod.repeat (
+          Uize.Curve.Mod.band (1,.4,0),
+          4,
+          1
+        ),
+      height:
+        Uize.Curve.Mod.repeat (
+          Uize.Curve.Mod.band (1,.4,1),
+          4,
+          1
+        )
+    }
+  duration: 1400
+
+Nervous Horizontal and Vertical Wobbling
+  curve::
+    {
+      width:
+        Uize.Curve.Mod.redraw (
+          Uize.Curve.easeInOutPow (4),
+          12,
+          Uize.Curve.Rubber.easeInOutBack (4)
+        ),
+      height:
+        Uize.Curve.Mod.redraw (
+          Uize.Curve.easeInOutPow (5),
+          14,
+          Uize.Curve.Rubber.easeInOutBack (4)
+        )
+    }
+  duration: 1700
+
+Eccentric Elasticity Pounce
+  curve::
+    {
+      width:
+        Uize.Curve.easeOutPow (10),
+      height:
+        Uize.Curve.Rubber.easeOutElastic ()
+    }
+  duration: 500
+
+Jelly Wobble
+  curve::
+    {
+      width:
+        Uize.Curve.Mod.blend (
+          Uize.Curve.Rubber.easeOutElastic (.2),
+          Uize.Curve.Rubber.easeOutElastic (.1)
+        ),
+      height:
+        Uize.Curve.Mod.blend (
+          Uize.Curve.Rubber.easeOutElastic (.18),
+          Uize.Curve.Rubber.easeOutElastic (.12)
+        )
+    }
+  duration: 2800
+
+Hyperactive Excited Bouncing
+  curve::
+    {
+      width:
+        Uize.Curve.Rubber.easeOutBounce (4,3,1.5),
+      height:
+        Uize.Curve.Rubber.easeOutBounce (5,4,1)
+    }
+  duration: 750
+
+Horizontal Deceleration, Vertical Bouncing
+  curve::
+    {
+      width:Uize.Curve.easeOutPow (3),
+      height:
+        Uize.Curve.Mod.blend (
+          Uize.Curve.easeInPow (3),
+          Uize.Curve.easeOutPow (5),
+          Uize.Curve.Rubber.easeOutBounce (10,3,1.4)
+        )
+    }
+  duration: 3000
+
+Hectic Independent Horizontal and Vertical Bouncing
+  curve::
+    {
+      width:
+        Uize.Curve.Mod.blend (
+          Uize.Curve.easeInPow (3),
+          Uize.Curve.easeOutPow (5),
+          Uize.Curve.Rubber.easeOutBounce (10,3,1.5)
+        ),
+      height:
+        Uize.Curve.Mod.blend (
+          Uize.Curve.easeInPow (3),
+          Uize.Curve.easeOutPow (5),
+          Uize.Curve.Rubber.easeOutBounce (10,3,.5)
+        )
+    }
+  duration: 3000
+
+Horizontal to Vertical With Direction Change Twist
+  curve::
+    {
+      width:Uize.Curve.Rubber.easeOutBack (4),
+      height:Uize.Curve.Rubber.easeInBack (4)
+    }
+  duration: 700
+
+Horizontal to Vertical to Horizontal With Two Twists
+  curve::
+    {
+      width:Uize.Curve.Rubber.easeMiddleBack (5),
+      height:Uize.Curve.Rubber.easeInOutBack (5)
+    }
+  duration: 1200
+
+Ease Into Accelerating Direction Change Twirls
+  curve::
+    {
+      width:
+        Uize.Curve.Mod.bend (
+          Uize.Curve.Mod.blend (
+            Uize.Curve.Mod.repeat (
+              Uize.Curve.easeInOutCircular (),
+              5,
+              0,
+              true,
+              false
+            ),
+            1,
+            .5
+          ),
+          3
+        ),
+      height:
+        Uize.Curve.Mod.bend (
+          Uize.Curve.Mod.blend (
+            Uize.Curve.Mod.repeat (
+              Uize.Curve.easeInOutCircular (),
+              5,
+              0,
+              true,
+              false
+            ),
+            1,
+            .5
+          ),
+          4
+        )
+    }
+  duration: 1200
+
+&lt;/textarea&gt;
+
+&lt;!-- JavaScript code to make the static HTML "come alive" --&gt;
+
+&lt;script type="text/javascript"&gt;
+
+Uize.module ({
+  required:[
+    'UizeDotCom.Page.Example.library',
+    'UizeDotCom.Page.Example',
+    'UizeDotCom.ParamsInspector.InlinePresets',
+    'Uize.Curve',
+    'Uize.Curve.Rubber',
+    'Uize.Curve.Mod',
+    'Uize.Fx',
+    'Uize.Json',
+    'Uize.Node'
+  ],
+  builder:function () {
+    /*** create the example page widget ***/
+      var page = window.page = new UizeDotCom.Page.Example;
+
+    var minDimEachAxis = 40;
+
+    function getSizeAndPositionStyleProperties (dims) {
+      var previewPaneCoords = Uize.Node.getCoords (page.getNode ('previewPane'));
+      return {
+        left:(previewPaneCoords.width - dims.width) &gt;&gt; 1,
+        top:(previewPaneCoords.height - dims.height) &gt;&gt; 1,
+        width:dims.width,
+        height:dims.height
+      };
+    }
+
+    /*** code for positioning ghost ***/
+      function sizeGhost (dims) {
+        page.setNodeStyle ('objectToAnimateGhost',getSizeAndPositionStyleProperties (dims));
+      }
+
+    /*** create the params inspector widget ***/
+      var
+        lastCurve,
+        curveObject,
+        values
+      ;
+      function fadeSize (dims) {
+        sizeGhost (dims);
+        var curve = (values = page.children.paramsInspector.getValues ()).curve;
+        if (curve != lastCurve)
+          curveObject = Uize.Json.from (lastCurve = curve)
+        ;
+        Uize.Fx.fadeStyle (
+          page.getNode ('objectToAnimate'),
+          null,
+          getSizeAndPositionStyleProperties (dims),
+          +values.duration,
+          {
+            curve:
+              curveObject &amp;&amp;
+              (
+                Uize.isFunction (curveObject)
+                  ? curveObject
+                  : Uize.copyInto (
+                    {},
+                    curveObject,
+                    curveObject.width ? {left:curveObject.width} : null,
+                    curveObject.height ? {top:curveObject.height} : null
+                  )
+              )
+          }
+        );
+      }
+      page.addChild (
+        'paramsInspector',
+        UizeDotCom.ParamsInspector.InlinePresets,
+        {
+          params:{curve:'string-multiline',duration:'integer'},
+          previewButtonText:'PREVIEW ANIMATION',
+          settingsPropertyName:'curve'
+        }
+      ).wire (
+        'Preset Selected',
+        function () {
+          var previewPaneCoords = Uize.Node.getCoords (page.getNode ('previewPane'));
+          fadeSize ({
+            width:minDimEachAxis + Math.round (Math.random () * (previewPaneCoords.width - minDimEachAxis)),
+            height:minDimEachAxis + Math.round (Math.random () * (previewPaneCoords.height - minDimEachAxis))
+          });
+        }
+      );
+
+    /*** wire clicking on preview pane to trigger animation to new size ***/
+      function getDimPropertiesFromEvent (e) {
+        var
+          eventAbsPos = Uize.Node.getEventAbsPos (e),
+          previewPaneCoords = Uize.Node.getCoords (page.getNode ('previewPane'))
+        ;
+        return {
+          width:
+            Math.max (
+              Math.abs (previewPaneCoords.left + previewPaneCoords.width / 2 - eventAbsPos.left) * 2,
+              minDimEachAxis
+            ),
+          height:
+            Math.max (
+              Math.abs (previewPaneCoords.top + previewPaneCoords.height / 2 - eventAbsPos.top) * 2,
+              minDimEachAxis
+            )
+        };
+      }
+      page.wireNode (
+        'previewPaneEventGrabber',
+        {
+          click:function (e) {fadeSize (getDimPropertiesFromEvent (e))},
+          mousemove:function (e) {sizeGhost (getDimPropertiesFromEvent (e))}
+        }
+      );
+
+    /*** wire up the page widget ***/
+      page.wireUi ();
+  }
+});
+
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+
+</pre>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.library',
+		'UizeDotCom.Page'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page).wireUi ()}
+});
+
+</script>
+
+</body></html>

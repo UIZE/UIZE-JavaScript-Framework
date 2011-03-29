@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2008-12-16 - Performance Optimization | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="Some heavily hit methods in the UIZE JavaScript Framework have been optimized to improve their performance."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2008.html" class="breadcrumb breadcrumbWithArrow">2008 NEWS</a>
+	2008-12-16 - Performance Optimization
+
+</h1>
+
+<div class="main">
+<div class="contents0">
+	<p>Some heavily hit methods in the UIZE JavaScript Framework have been optimized to improve their performance.</p>
+	
+	<p>Some profiling indicated that complex client applications using the UIZE JavaScript Framework (like the <a href="http://www.zazzle.com" target="_blank" class="externalSiteLink">Zazzle Inc.</a> <a href="http://www.zazzle.com/cr/design/pt-shirt" target="_blank" class="externalSiteLink">shirt design tool</a>) tend to hit the <code>Uize.clone</code> static method quite heavily, so a little bit of code massaging was able to significantly improve the performance of that method by reducing the cost of recursion. The <code>Uize.Population</code> module - that gets used heavily for data driven population of UI widgets like droplists and scrolly based selectors - has been optimized to avoid using <code>try</code> and <code>eval</code>, resulting in a substantial performance improvement.</p>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

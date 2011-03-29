@@ -1,0 +1,11 @@
+The new =Uize.Widget.HoverFader= module makes it easy to wire up a specified set of nodes for a hover color fade effect.
+
+Why settle for merely a hover pseudoclass styling when you can wire up any set of nodes - such as menu links - with slick color fading effects? This class makes it easy to add some flare to boring menu links. Have any CSS color style properties faded when mousing over links, and leave a fading trail behind when moving the mouse across a menu's links. [[Uize.Widget.HoverFader][LEARN HOW]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-01-03 - NEW MODULE: Uize.Widget.HoverFader
+....................................................................................

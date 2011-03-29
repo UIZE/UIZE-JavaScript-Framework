@@ -1,0 +1,13 @@
+The new [[../examples/set-node-value-multi-select.html][setNodeValue on Multi-select]] example demonstrates how the =setNodeValue= instance method of the =Uize.Widget= base class can be used to conveniently set the value of a multi-select select tag (ie. where its =multiple= attribute is set to the value ='multiple'=).
+
+In this example, a multi-select form element lets you choose from a number of different types of renewable energy. A row of buttons above the select element lets you select different combinations of options. Clicking on any of the buttons has the effect of calling the <code>setNodeValue</code> method. Buttons are also provided for selecting all and selecting none, which call the <code>setNodeValue</code> method with special values. The special value <code>''</code> (empty string) clears the selection, and the special wildcard value <code>'*'</code> selects all options. Under the select element is a display of some of its state that is kept up-to-date.
+
+[[../examples/set-node-value-multi-select.html][CHECK IT OUT]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-08-31 - NEW EXAMPLE: setNodeValue on Multi-select
+....................................................................................

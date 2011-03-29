@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2009-04-16 - Uize.Color.RgbColor: setHex Deprecated | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="The setHex instance method of the Uize.Color.RgbColor object in the Uize.Color package has been deprecated in favor of the more versatile setColor instance method."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2009.html" class="breadcrumb breadcrumbWithArrow">2009 NEWS</a>
+	2009-04-16 - Uize.Color.RgbColor: setHex Deprecated
+
+</h1>
+
+<div class="main">
+<div class="contents0">
+	<p>The <code>setHex</code> instance method of the <code>Uize.Color.RgbColor</code> object in the <code><a href="../reference/Uize.Color.html">Uize.Color</a></code> package has been deprecated in favor of the more versatile <code>setColor</code> instance method.</p>
+	
+	<p>The new <code>setColor</code> method allows colors to be specified in a wide variety of different ways, consistent with the ways that initial color can be specified when using the constructor of the <code>Uize.Color.RgbColor</code> object.</p>
+	
+	<p><span class="allCaps">A FEW EXAMPLES</span></p>
+	
+	
+<pre class="sample-code">myRgbColor.setColor (136,136,136);
+myRgbColor.setColor ('#888888');
+myRgbColor.setColor ('888');
+myRgbColor.setColor ('Rgb(136,136,136)');
+myRgbColor.setColor ({red:136,green:136,blue:136});
+myRgbColor.setColor ([136,136,136]);
+myRgbColor.setColor (new Uize.Color.RgbColor (136,136,136));
+</pre>
+	
+	<p>The old <code>setHex</code> method is still supported.</p>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

@@ -1,0 +1,69 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>UizeDotCom.Templates.WidgetToGoTitle | JavaScript Source Code | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework module source code"/>
+	<meta name="description" content="This is the JavaScript source code for the UizeDotCom.Templates.WidgetToGoTitle module of the UIZE JavaScript Framework"/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../../css/page.css"/>
+	<link rel="stylesheet" href="../../css/page.source.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../../index.html" title="UIZE JavaScript Framework home"></a>
+	SOURCE CODE: UizeDotCom.Templates.WidgetToGoTitle
+	<div class="pageActions">
+		<a href="../UizeDotCom.Templates.WidgetToGoTitle.html" class="buttonLink">VIEW REFERENCE</a>
+	</div>
+</h1>
+
+<pre>
+/*
+  This is an automatically generated module, compiled from the JavaScript template file:
+    UizeDotCom.Templates.WidgetToGoTitle.js.jst
+*/
+
+/*ScruncherSettings Mappings="=" LineCompacting="TRUE"*/
+
+Uize.module ({
+  name:'UizeDotCom.Templates.WidgetToGoTitle',
+  builder:function () {
+    var _package = function () {};
+
+    /*** Public Static Methods ***/
+      _package.process = function (input) {
+        var output = [];
+        output.push ('&lt;div class="widgetHeader"&gt;\r\n  &lt;div id="',input .idPrefix,'_menu_selector" title="Click to show/hide widget options..." class="widgetTitle"&gt;\r\n    &lt;div class="logo"&gt;&lt;/div&gt;\r\n    &lt;div class="textShadow"&gt;',input .title,'&lt;/div&gt;\r\n    &lt;div class="textHighlight"&gt;',input .title,'&lt;/div&gt;\r\n    &lt;div class="textMain"&gt;',input .title,'&lt;/div&gt;\r\n  &lt;/div&gt;\r\n  &lt;div id="',input .idPrefix,'_menu-palette" class="subMenuShell"&gt;\r\n    &lt;a id="',input .idPrefix,'_menu-getThisWidget" href="javascript://" class="subMenuItem"&gt;GET THIS WIDGET&lt;/a&gt;\r\n    &lt;div class="divider"&gt;&lt;/div&gt;\r\n    &lt;a id="',input .idPrefix,'_menu-aboutThisWidget" href="javascript://" class="subMenuItem"&gt;About This Widget&lt;/a&gt;\r\n    &lt;a id="',input .idPrefix,'_menu-openInNewWindow" href="javascript://" class="subMenuItem"&gt;Open Widget in New Window&lt;/a&gt;\r\n    &lt;div class="divider"&gt;&lt;/div&gt;\r\n    &lt;a id="',input .idPrefix,'_menu-moreWidgets"  href="javascript://" class="subMenuItem"&gt;More UIZE Widgets...&lt;/a&gt;\r\n    &lt;a id="',input .idPrefix,'_menu-uize" href="javascript://" class="subMenuItem"&gt;UIZE JavaScript Framework&lt;/a&gt;\r\n  &lt;/div&gt;\r\n&lt;/div&gt;\r\n\r\n');
+        return output.join ('');
+      };
+
+    /*** Public Static Properties ***/
+      _package.input = {
+        idPrefix:'string',
+        title:'string'
+      };
+
+    return _package;
+  }
+});
+
+
+</pre>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.library',
+		'UizeDotCom.Page'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page).wireUi ()}
+});
+
+</script>
+
+</body></html>

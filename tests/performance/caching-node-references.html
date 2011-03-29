@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>PERFORMANCE TEST: Caching Node References | UIZE JavaScript Framework</title>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../../css/page.css"/>
+	<link rel="stylesheet" href="../../css/page.example.css"/>
+	<link rel="stylesheet" href="../../css/page.example.test.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../../index.html" title="UIZE JavaScript Framework home"></a>
+	PERFORMANCE TEST: Caching Node References
+	<div class="pageActions">
+		<a id="page-viewSource" href="javascript://" class="buttonLink">SOURCE</a>
+	</div>
+</h1>
+
+<div class="main">
+	<!-- explanation copy -->
+
+	<div class="explanation">
+		<p>This test page demonstrates that, in IE, implementing a caching system for references to nodes that will be referenced frequently offers a substantial and compelling performance benefit over simply repeatedly using the <code>document.getElementById</code> method on the node IDs. The difference is striking / alarming in IE, while not significant (using these test numbers) in Firefox or Safari.</p>
+
+		<p>In the test, HTML for 1000 DIVs is generated and inserted into the page. Then, an entire loop through all of the node IDs is performed 40 times. In the no caching test, the <code>document.getElementById</code> method is used for every node ID. In the caching test, the <code>document.getElementById</code> method is used only the first time in order to cache the node reference, after which the node reference for each node ID is retrieved from the JavaScript object cache instead.</p>
+	</div>
+
+	<!-- test results -->
+
+	<div class="testResults">
+		<div class="testResultsFooter">
+			<a id="page_performTest" class="button" href="javascript://">PERFORM TEST</a>
+		</div>
+		<div id="page-testResults"></div>
+	</div>
+
+	<div id="page-testNodes"></div>
+</div>
+
+<!-- JavaScript code to wire up the page widget and define the test code -->
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:'UizeDotCom.Page.Example.Test.library',
+	builder:function () {
+		/*** create the example page widget ***/
+			var page = window.page = new UizeDotCom.Page.Example.Test;
+
+		/*** define the test code by overriding the performTest method of the page widget ***/
+			page.performTest = function (_reportResults) {
+				var
+					_this = this,
+					_totalNodes = 1000,
+					_totalIterations = 40,
+					_iterationNo
+				;
+				_this.executeFunctionsWithPause (
+					[
+						function () {
+							/*** put the nodes into the page ***/
+								var _nodesHtmlChunks = [];
+								for (var _nodeNo = -1; ++_nodeNo < _totalNodes;)
+									_nodesHtmlChunks.push (
+										'<div id="nodeTestA' + _nodeNo + '" style="position:absolute; left:0px; top:0px; width:0px; height:0px;"></div>',
+										'<div id="nodeTestB' + _nodeNo + '" style="position:absolute; left:0px; top:0px; width:0px; height:0px;"></div>'
+									)
+								;
+								_this.setNodeInnerHtml ('testNodes',_nodesHtmlChunks.join (''));
+						},
+						function () {
+							/*** test with node caching ***/
+								var
+									_node,
+									_nodesCache = {}
+								;
+								for (_iterationNo = _totalIterations; --_iterationNo >= 0;) {
+									for (_nodeNo = -1; ++_nodeNo < _totalNodes;) {
+										var _nodeId = 'nodeTestA' + _nodeNo;
+										_node = _nodesCache [_nodeId];
+										if (!_node)
+											_node = _nodesCache [_nodeId] = document.getElementById (_nodeId)
+										;
+										_node;
+									}
+								}
+						},
+						function () {
+							/*** test with no caching ***/
+								for (_iterationNo = _totalIterations; --_iterationNo >= 0;) {
+									for (_nodeNo = -1; ++_nodeNo < _totalNodes;)
+										document.getElementById ('nodeTestB' + _nodeNo)
+									;
+								}
+						}
+					],
+					3000,
+					function (_executionTimes) {
+						/*** report the results ***/
+							_reportResults (
+								'<h1>Durations</h1>\n' +
+								'<p><b>caching node references:</b> ' + _executionTimes [1] + 'ms</p>\n' +
+								'<p><b>no caching of node references:</b> ' + _executionTimes [2] + 'ms</p>\n'
+							);
+					}
+				);
+			};
+
+		/*** wire up the page widget ***/
+			page.wireUi ();
+	}
+});
+
+</script>
+
+</body>
+</html>
+

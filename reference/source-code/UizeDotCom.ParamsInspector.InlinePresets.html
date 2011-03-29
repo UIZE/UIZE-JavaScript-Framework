@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>UizeDotCom.ParamsInspector.InlinePresets | JavaScript Source Code | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework module source code"/>
+	<meta name="description" content="This is the JavaScript source code for the UizeDotCom.ParamsInspector.InlinePresets module of the UIZE JavaScript Framework"/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../../css/page.css"/>
+	<link rel="stylesheet" href="../../css/page.source.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../../index.html" title="UIZE JavaScript Framework home"></a>
+	SOURCE CODE: UizeDotCom.ParamsInspector.InlinePresets
+	<div class="pageActions">
+		<a href="../UizeDotCom.ParamsInspector.InlinePresets.html" class="buttonLink">VIEW REFERENCE</a>
+	</div>
+</h1>
+
+<pre>
+/*______________
+|       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
+|     /      /  |   ---------------------------------------------------
+|    /    O /   |    MODULE : UizeDotCom.ParamsInspector.InlinePresets
+|   /    / /    |
+|  /    / /  /| |    ONLINE : http://www.uize.com
+| /____/ /__/_| | COPYRIGHT : (c)2009-2011 UIZE
+|          /___ |   LICENSE : Available under MIT License or GNU General Public License
+|_______________|             http://www.uize.com/license.html
+*/
+
+/*ScruncherSettings Mappings="=d" LineCompacting="TRUE"*/
+
+/*?
+  Introduction
+    A subclass of =UizeDotCom.ParamsInspector= that adds the ability to harvest the presets from an implied node whose inner HTML is formatted in the Simple Data format.
+
+    *DEVELOPERS:* `Chris van Rensburg`
+*/
+
+Uize.module ({
+  name:'UizeDotCom.ParamsInspector.InlinePresets',
+  required:'Uize.Data.Simple',
+  builder:function (_superclass) {
+    /*** Class Constructor ***/
+      var
+        _class = _superclass.subclass (
+          null,
+          function () {
+            var _this = this;
+
+            /*** harvest inline settings ***/
+              var _presets = Uize.Data.Simple.parse ({
+                simple:_this.getNode ('inlinePresets').innerHTML,
+                collapseChildren:true
+              });
+              _this.setNodeInnerHtml ('inlinePresets','');
+
+              /*** turn tabs into three spaces ***/
+                var _settingsPropertyName = _this._settingsPropertyName;
+                for (var _presetName in _presets) {
+                  var _preset = _presets [_presetName];
+                  _preset [_settingsPropertyName] = _preset [_settingsPropertyName].replace (/\t/g,'   ');
+                }
+
+              _this.set ({presets:_presets});
+            }
+        ),
+        _classPrototype = _class.prototype
+      ;
+
+    /*** Register Properties ***/
+      _class.registerProperties ({
+        _settingsPropertyName:'settingsPropertyName'
+      });
+
+    return _class;
+  }
+});
+
+
+</pre>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.library',
+		'UizeDotCom.Page'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page).wireUi ()}
+});
+
+</script>
+
+</body></html>

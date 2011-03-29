@@ -1,0 +1,11 @@
+Some heavily hit methods in the UIZE JavaScript Framework have been optimized to improve their performance.
+
+Some profiling indicated that complex client applications using the UIZE JavaScript Framework (like the `Zazzle Inc.` [[http://www.zazzle.com/cr/design/pt-shirt][shirt design tool]]) tend to hit the =Uize.clone= static method quite heavily, so a little bit of code massaging was able to significantly improve the performance of that method by reducing the cost of recursion. The =Uize.Population= module - that gets used heavily for data driven population of UI widgets like droplists and scrolly based selectors - has been optimized to avoid using =try= and =eval=, resulting in a substantial performance improvement.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2008-12-16 - Performance Optimization
+....................................................................................

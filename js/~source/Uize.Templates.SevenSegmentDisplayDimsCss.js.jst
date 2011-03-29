@@ -1,0 +1,72 @@
+<%
+	@input ({
+		segmentThickness:'integer',
+		displayWidth:'integer',
+		displayHeight:'integer',
+		segmentGap:'integer'
+	})
+%><%/* Module Meta Data
+	type: Template
+	importance: 1
+	codeCompleteness: 100
+	testCompleteness: 0
+	docCompleteness: 100
+*/%><%
+	var
+		_segmentThickness = input.segmentThickness,
+		_displayWidth = input.displayWidth,
+		_displayHeight = input.displayHeight,
+		_segmentGap = input.segmentGap,
+		_segmentThicknessDiv2 = _segmentThickness / 2,
+		_segmentThicknessPlusSegmentGap = _segmentThickness + _segmentGap
+	;
+%>
+.sevenSeg {
+	width:<%= _displayWidth %>px;
+	height:<%= _displayHeight %>px;
+}
+.sevenSegSegmentEnd {
+	border-width:<%= _segmentThicknessDiv2 %>px;
+}
+.sevenSegHorzSegment {
+	height:<%= _segmentThickness %>px;
+}
+.sevenSegHorzSegmentMiddle {
+	top:<%= _displayHeight / 2 - _segmentThicknessDiv2 %>px;
+}
+.sevenSegSegmentLeftEnd {
+	left:<%= _segmentGap %>px;
+}
+.sevenSegHorzSegment .sevenSegSegmentBar {
+	left:<%= _segmentThicknessPlusSegmentGap %>px;
+	right:<%= _segmentThicknessPlusSegmentGap %>px;
+}
+.sevenSegSegmentRightEnd {
+	right:<%= _segmentGap %>px;
+}
+.sevenSegVertSegment {
+	width:<%= _segmentThickness %>px;
+}
+.sevenSegSegmentTopEnd {
+	top:<%= _segmentGap %>px;
+}
+.sevenSegVertSegment .sevenSegSegmentBar {
+	top:<%= _segmentThicknessPlusSegmentGap %>px;
+	bottom:<%= _segmentThicknessPlusSegmentGap %>px;
+}
+.sevenSegSegmentBottomEnd {
+	bottom:<%= _segmentGap %>px;
+}
+.sevenSegVertSegmentTop .sevenSegSegmentBottomEnd {
+	bottom:<%= _segmentGap - _segmentThicknessDiv2 %>px;
+}
+.sevenSegVertSegmentTop  .sevenSegSegmentBar {
+	bottom:<%= _segmentGap + _segmentThicknessDiv2 %>px;
+}
+.sevenSegVertSegmentBottom .sevenSegSegmentTopEnd {
+	top:<%= _segmentGap - _segmentThicknessDiv2 %>px;
+}
+.sevenSegVertSegmentBottom  .sevenSegSegmentBar {
+	top:<%= _segmentGap + _segmentThicknessDiv2 %>px;
+}
+

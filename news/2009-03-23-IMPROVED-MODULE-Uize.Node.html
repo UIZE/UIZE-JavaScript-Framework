@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2009-03-23 - IMPROVED MODULE: Uize.Node | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="The Uize.Node module has been improved with the introduction of a new Uize.Node.getStyle static method to replace the now deprecated Uize.Node.getStyleAttribute method, and which provides parity with the companion Uize.Node.setStyle static method."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2009.html" class="breadcrumb breadcrumbWithArrow">2009 NEWS</a>
+	2009-03-23 - IMPROVED MODULE: Uize.Node
+
+</h1>
+
+<div class="main">
+<div class="contents0">
+	<p>The <code><a href="../reference/Uize.Node.html">Uize.Node</a></code> module has been improved with the introduction of a new <code>Uize.Node.getStyle</code> static method to replace the now deprecated <code>Uize.Node.getStyleAttribute</code> method, and which provides parity with the companion <code>Uize.Node.setStyle</code> static method.</p>
+	
+	<p><span class="allCaps">DEPRECATED</span></p>
+	
+	
+<pre class="sample-code">Uize.Node.getStyleAttribute  &gt;&gt; BECOMES &gt;&gt;  Uize.Node.getStyle
+</pre>
+	
+	<p>Some features of the new <code>Uize.Node.getStyle</code> method include...</p>
+	
+	<table class="list">
+	<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>it now correctly reports current values for the <code>margin</code>, <code>padding</code>, <code>borderColor</code>, and <code>borderWidth</code> style properties in Firefox</td></tr>
+	<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>it now accepts a style properties object which allows you to get the values of multiple style properties in a single call, and the result is returned in a style properties object that can then be supplied to the <code>Uize.Node.setStyle</code> static method</td></tr>
+	<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>it's more concisely named and provides parity with the companion <code>Uize.Node.setStyle</code> static method</td></tr>
+	</table>
+	<p>In order to maintain backwards compatibility with existing code, the deprecated <code>Uize.Node.getStyleAttribute</code> static method is still supported and will be for some time. Moreover, the new <code>Uize.Node.getStyle</code> method supports the same parameters as the deprecated <code>Uize.Node.getStyleAttribute</code> method.</p>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

@@ -1,0 +1,237 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Bars For Data Comparison | JavaScript Examples | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="featured animation Uize.Widget.Bar"/>
+	<meta name="description" content="See an example that uses bar widgets to create a dynamic bar chart to compare nutritional data for fruits, with slick JavaScript animation effects."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.example.css"/>
+	<style type="text/css">
+		/*** layout ***/
+			tr.headings td {
+				font-size:9px;
+				padding:3px;
+			}
+			#propertyOptions {
+				margin-bottom:10px;
+			}
+
+		/*** option button styling ***/
+			.barChart .button {
+				display:block;
+				text-align:center;
+				text-transform:uppercase;
+				letter-spacing:0;
+				font-size:10px;
+				width:95px;
+				margin:1px 0 3px 0;
+				padding:5px 0;
+			}
+	</style>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	<a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow">JAVASCRIPT EXAMPLES</a>
+	Bars For Data Comparison
+	<div id="page-actions" class="pageActions">
+		<a href="source-code/bars.html" class="buttonLink">SOURCE</a>
+	</div>
+</h1>
+
+<div class="main">
+	<!-- explanation copy -->
+
+	<div class="explanation">
+		<p>In this example, multiple instances of <a href="../reference/Uize.Widget.Bar.html"><code>Uize.Widget.Bar</code></a> are being used to display nutritional data for a set of fruits in a bar chart. An instance of <a href="../reference/Uize.Widget.Options.html"><code>Uize.Widget.Options</code></a> is used to wire up an option set on the left side of the bar chart, which lets you select which nutritional data is displayed by the chart. Hovering over an option temporarily fixes the chart to that data. To have the chart persist on a nutritional data type, click an option to select it. As you move the mouse over the various options to preview nutriotional data, an instance of <a href="../reference/Uize.Fade.html"><code>Uize.Fade</code></a> is used to animate the bars of the chart from their position for the previous data type to their new position for the new data type.</p>
+	</div>
+
+	<!-- HTML "wireframe" for sliders -->
+
+	<table cellspacing="3" cellpadding="0" style="margin:auto;" class="barChart">
+		<tr class="headings">
+			<td>Property</td>
+			<td>Apples</td>
+			<td>Avocados</td>
+			<td>Bananas</td>
+			<td>Dates</td>
+			<td>Grapefruits</td>
+			<td>Grapes</td>
+			<td>Mangos</td>
+			<td>Oranges</td>
+			<td>Pears</td>
+			<td>Plums</td>
+		</tr>
+		<tr>
+			<td id="page_propertyOptions"></td>
+			<td id="page_barApples"></td>
+			<td id="page_barAvocados"></td>
+			<td id="page_barBananas"></td>
+			<td id="page_barDates"></td>
+			<td id="page_barGrapefruits"></td>
+			<td id="page_barGrapes"></td>
+			<td id="page_barMangos"></td>
+			<td id="page_barOranges"></td>
+			<td id="page_barPears"></td>
+			<td id="page_barPlums"></td>
+		</tr>
+	</table>
+</div>
+
+<!-- JavaScript code to make the static bar HTML "come alive" -->
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Example.library',
+		'UizeDotCom.Page.Example',
+		'UizeDotCom.TestDataFruits',
+		'Uize.Widget.Bar',
+		'Uize.Fade',
+		'Uize.Widget.Options',
+		'Uize.Curve'
+	],
+	builder:function () {
+		/*** create the example page widget ***/
+			var page = window.page = new UizeDotCom.Page.Example;
+
+		/*** set the default UI HTML and other properties for all bar widgets ***/
+			Uize.Widget.Bar.set ({
+				html:
+					'<div style="position:relative; left:0; top:0; width:63px; height:304px; background:#344;">' +
+						'<div id="[#idPrefix]-track" style="position:absolute; left:2px; top:2px; width:59px; height:300px; background:[#fleshColor];">' +
+							'<div id="[#idPrefix]-empty" style="position:absolute; left:0; top:0; width:59px; height:300px;  background:#666; opacity:.9; filter:alpha(opacity=90);"></div>' +
+							'<div style="position:absolute; left:0; top:0; width:9%; height:100%; background:#fff; opacity:.5; filter:alpha(opacity=50);"></div>' +
+							'<div style="position:absolute; left:0; top:0; width:18%; height:100%; background:#fff; opacity:.3; filter:alpha(opacity=30);"></div>' +
+							'<div style="position:absolute; left:0; top:0; width:27%; height:100%; background:#fff; opacity:.1; filter:alpha(opacity=10);"></div>' +
+							'<div style="position:absolute; right:0; top:0; width:18%; height:100%; background:#000; opacity:.1; filter:alpha(opacity=10);"></div>' +
+							'<div style="position:absolute; right:0; top:0; width:12%; height:100%; background:#000; opacity:.2; filter:alpha(opacity=20);"></div>' +
+							'<div style="position:absolute; right:0; top:0; width:6%; height:100%; background:#000; opacity:.3; filter:alpha(opacity=30);"></div>' +
+							'<div id="[#idPrefix]-knob" style="position:absolute; left:0; top:0; width:59px; height:13px; border-bottom:2px solid #fc0; color:#fff; font-face:Arial; font-size:9px; text-align:center; background:#000;" border="0" hspace="0" vspace="0"></div>' +
+						'</div>' +
+					'</div>'
+				,
+				minValue:0,
+				maxValue:1,
+				increments:0
+			});
+
+		/*** global variables ***/
+			var
+				fruits = UizeDotCom.TestDataFruits (),
+				fruitsLength = Math.min (fruits.length,10)
+			;
+
+		function getFruitBarWidgetName (fruitNo) {return 'bar' + fruits [fruitNo].name}
+		function getFruitBar (fruitNo) {return page.children [getFruitBarWidgetName (fruitNo)]}
+
+		/*** add the bar child widget for each fruit ***/
+			for (var fruitNo = -1; ++fruitNo < fruitsLength;) {
+				page.addChild (
+					getFruitBarWidgetName (fruitNo),
+					Uize.Widget.Bar,
+					{
+						fleshColor:fruits [fruitNo].fleshColor,
+						built:false
+					}
+				);
+			}
+
+		/*** code to handle updating the bars when a property is selected ***/
+			var
+				propertyName,
+				fade = new Uize.Fade ({duration:700,curve:Uize.Curve.easeInOutPow (4)})
+			;
+			fade.wire ({
+				Start:
+					function () {
+						for (var fruitNo = -1; ++fruitNo < fruitsLength;)
+							getFruitBar (fruitNo).setNodeInnerHtml ('knob','')
+						;
+					},
+				'Changed.value':
+					function () {
+						var fadeValue = fade.valueOf ();
+						for (var fruitNo = -1; ++fruitNo < fruitsLength;)
+							getFruitBar (fruitNo).set ({value:fadeValue [fruitNo]})
+						;
+					},
+				Done:
+					function () {
+						var propertyUnit = UizeDotCom.TestDataFruits.getPropertyUnit (propertyName);
+						for (var fruitNo = -1; ++fruitNo < fruitsLength;)
+							getFruitBar (fruitNo).setNodeInnerHtml ('knob',fruits [fruitNo] [propertyName] + propertyUnit)
+						;
+					}
+			});
+
+			function selectProperty () {
+				propertyName = page.children.propertyOptions.get ('tentativeValue');
+				var
+					propertyValueBounds = UizeDotCom.TestDataFruits.getValueBoundsForProperty (propertyName),
+					propertyMinValue = propertyValueBounds.minValue,
+					propertyValueRange = propertyValueBounds.maxValue - propertyMinValue,
+					fadeValue = fade.get ('value'),
+					fadeValue = fade.valueOf (),
+					fadeStartValue = [],
+					fadeEndValue = []
+				;
+				for (var fruitNo = -1; ++fruitNo < fruitsLength;) {
+					var
+						fruit = fruits [fruitNo],
+						propertyValue = fruit [propertyName]
+					;
+					fadeStartValue [fruitNo] = typeof fadeValue == 'object' ? fadeValue [fruitNo] : 0;
+					fadeEndValue [fruitNo] = isNaN (propertyValue)
+						? 0
+						: (propertyValue - propertyMinValue) / propertyValueRange
+					;
+				}
+				fade.start ({
+					startValue:fadeStartValue,
+					endValue:fadeEndValue
+				});
+			}
+
+		/*** use first fruit to get properties and generate property selector options ***/
+			var
+				nutritionProperties = UizeDotCom.TestDataFruits.getNutritionProperties (),
+				nutritionPropertiesLength = nutritionProperties.length,
+				optionsHtml = ''
+			;
+			for (var propertyNo = -1; ++propertyNo < nutritionPropertiesLength;)
+				optionsHtml +=
+					'<a id="page_propertyOptions_option' + propertyNo + '" href="javascript://" class="button">' +
+						UizeDotCom.TestDataFruits.getPropertyDisplayName (nutritionProperties [propertyNo]) +
+					'</a>'
+			;
+			page.addChild (
+				'propertyOptions',
+				Uize.Widget.Options,
+				{
+					html:optionsHtml,
+					value:nutritionProperties [0],
+					values:nutritionProperties,
+					built:false
+				}
+			).wire ('Changed.tentativeValue',selectProperty);
+
+		/*** wire up the page widget ***/
+			page.wireUi ();
+
+		/*** initialize bars to reflect default selected property ***/
+			selectProperty ();
+	}
+});
+
+</script>
+
+</body>
+</html>
+

@@ -1,0 +1,224 @@
+body {
+	background-image:url(../images/fold-marker.gif);
+	background-repeat:repeat-x;
+	background-position:left 592px;
+	background-attachment:fixed;
+}
+.main {
+	padding-bottom:5px;
+	min-height:525px;
+}
+
+/*** headings ***/
+	tr .heading, tr.headings td, .exampleSectionHeading {
+		color:#fff;
+		background:#000 url(../images/heading-bg.gif) left top repeat-x;
+		text-align:center;
+		border:1px solid #444;
+	}
+	.exampleSectionHeading {
+		font-size:11px;
+		padding:2px 0;
+		letter-spacing:3px;
+		margin:10px 0;
+		text-transform:uppercase;
+	}
+	.fancyHeading {
+		color:#000;
+		background:#adbebf url(../images/brushed-metal.jpg) repeat-x left top;
+		font-size:12px;
+		text-align:center;
+		letter-spacing:3px;
+		text-transform:uppercase;
+		padding:8px 12px;
+		text-shadow:1px 1px 1px #fff, 1px 0 1px #fff;
+		border:1px solid #666;
+		border-bottom:none;
+		border-top-left-radius:10px;
+		-moz-border-radius-topleft:10px;
+		-webkit-border-top-left-radius:10px;
+		border-top-right-radius:10px;
+		-moz-border-radius-topright:10px;
+		-webkit-border-top-right-radius:10px;
+	}
+
+/*** miscellaneous ***/
+	.insetBackgroundColor {
+		background:#afb6b8;
+	}
+	.insetBorderColor {
+		border-color:#afb6b8;
+	}
+	.darkInsetBackgroundColor {
+		background:#818b8f;
+	}
+	.darkInsetBorderColor {
+		border-color:#818b8f;
+	}
+
+/*** explanation ***/
+	.explanation {
+		position:relative;
+		background:#c2c8ca url(../images/page-contents-bg.gif) repeat-x left top;
+		padding:3px 3px 3px 10px;
+		margin:0 10px 25px 10px;
+		border:1px solid #ccc;
+		border-radius:10px;
+		-moz-border-radius:10px;
+		-webkit-border-radius:10px;
+	}
+	.explanation p {
+		margin:5px 4px;
+		color:#444;
+	}
+
+/*** programmatic interface block ***/
+	.programmaticInterface {
+		padding:10px;
+		padding-right:3px;
+		margin:0 10px 0 10px;
+		background:#c9cfd6 url(../images/tree-menu-bg.gif) repeat-x left top;
+		border:3px solid #fff;
+		border-radius:10px;
+		-moz-border-radius:10px;
+		-webkit-border-radius:10px;
+	}
+	.programmaticInterface p {
+		margin:5px;
+	}
+	.programmaticInterface > ul {
+		padding-left:0;
+		margin:0;
+	}
+	.programmaticInterface ul li {
+		font-size:10px;
+		line-height:14px;
+		margin:0;
+	}
+	.programmaticInterface > ul li {
+		list-style-type:none;
+	}
+
+	/*** JavaScript links ***/
+		.programmaticInterface a,
+		.programmaticInterface a:link,
+		.programmaticInterface a:visited,
+		.programmaticInterface a:hover,
+		.programmaticInterface a:active {
+			white-space:nowrap;
+		}
+
+/*** examples tour styling ***/
+	/*** navigation buttons ***/
+		.tourButton, .tourButton:link, .tourButton:visited, .tourButton:hover, .tourButton:active {
+			display:block;
+			position:fixed;
+			top:255px;
+			width:45px;
+			height:77px;
+			border:none;
+			opacity:.3;
+			filter:alpha(opacity=30);
+		}
+		.tourButton:hover {
+			opacity:.5;
+			filter:alpha(opacity=50);
+		}
+		.tourButton:active {
+			opacity:.7;
+			filter:alpha(opacity=70);
+		}
+
+		/*** previous button ***/
+			.tourButtonPrevious {
+				left:35px;
+				background:url(../examples/images/tour-arrow-previous.gif) no-repeat right top;
+			}
+			.tourButtonPrevious:active {
+				background-position:left top;
+			}
+
+		/*** next button ***/
+			.tourButtonNext {
+				right:35px;
+				background:url(../examples/images/tour-arrow-next.gif) no-repeat left top;
+			}
+			.tourButtonNext:active {
+				background-position:right top;
+			}
+
+	/*** tour pages ***/
+		.tourPages {
+			position:fixed;
+			border-collapse:collapse;
+			width:100%;
+			height:10px;
+			left:0;
+			top:48px;
+		}
+		.tourPages td {
+			padding:0;
+		}
+		.tourPage, .tourPage:link, .tourPage:visited, .tourPage:hover, .tourPage:active {
+			display:block;
+			height:10px;
+			width:100%;
+			background:url(../examples/images/tour-page.gif) repeat-x left top;
+			border:none;
+		}
+		.tourPage:hover {
+			background-position:left -10px;
+		}
+		.tourPage:active,
+		.tourCurrentPage,
+		.tourCurrentPage:link,
+		.tourCurrentPage:visited,
+		.tourCurrentPage:hover,
+		.tourCurrentPage:active {
+			background-position:left -20px;
+		}
+
+	/*** tour page info tooltip ***/
+		.tourPageTooltip {
+			display:none;
+			font-size:11px;
+			padding:0;
+			width:186px;
+			border:3px solid #fff;
+			border-radius:10px;
+			-moz-border-radius:10px;
+			-webkit-border-radius:10px;
+			background:#adbebf url(../images/brushed-metal.jpg) repeat left top;
+		}
+		/*** annotations ***/
+			.tourPageTooltip .tourPageTitle {
+				font-size:11px;
+				font-weight:bold;
+				color:#000;
+				text-shadow:-1px -1px 1px #fff, -1px 1px 1px #fff, 1px -1px 1px #fff, 1px 1px 1px #fff;
+				padding:3px 5px 5px 5px;
+				width:176px;
+				text-align:center;
+			}
+			.tourPageTooltip .tourPageDescription, .tourPageTooltip .tourPageKeywords {
+				margin:5px;
+				margin-top:0;
+				padding:5px;
+			}
+			.tourPageTooltip .tourPageDescription {
+				color:#000;
+				border:1px solid #bcc;
+				background:#fff;
+				margin-bottom:0;
+			}
+			.tourPageTooltip .tourPageKeywords {
+				color:#245;
+				border:1px solid #fff;
+				background:#1e252e url(../images/tree-menu-bg.gif) repeat-x left top;
+				border-radius:0 0 5px 5px;
+				-moz-border-radius:0 0 5px 5px;
+				-webkit-border-bottom-left-radius:5px;
+				-webkit-border-bottom-right-radius:5px;
+				padding:1px 5px;
+			}
+

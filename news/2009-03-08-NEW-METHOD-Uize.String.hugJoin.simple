@@ -1,0 +1,20 @@
+The new =Uize.String.hugJoin= static method of the =Uize.String= module returns a string that is the concatenation of the specified array of items, where a prefix and suffix can be specified for hugging each item in the array, and where an optional separator can additionally be specified.
+
+EXAMPLE
+.......................................................
+var actions = ['view','reset','save','open','close'];
+alert (Uize.String.hugJoin (actions,'[ ',' ]',' -- '));
+.......................................................
+
+EXAMPLE - OUTPUT
+..........................................................
+[ view ] -- [ reset ] -- [ save ] -- [ open ] -- [ close ]
+..........................................................
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-03-08 - NEW METHOD: Uize.String.hugJoin
+....................................................................................

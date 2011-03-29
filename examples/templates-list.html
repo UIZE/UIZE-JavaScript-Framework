@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>List Template | JavaScript Examples | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="Uize.Templates.List"/>
+	<meta name="description" content="See a demo of a template JavaScript module - hand-written, rather than compiled from a JST file - used to generate a hierarchical list from JSON data."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.example.css"/>
+	<style type="text/css">
+		#page-listShell {
+			font-size:11px;
+			width:200px;
+			height:460px;
+			float:left;
+			overflow:auto;
+			margin-right:10px;
+			border:1px solid #9aa;
+			padding:10px;
+			margin-left:20px;
+			background:#c9cfd6 url(../images/tree-menu-bg.gif) repeat-x left top;
+		}
+		#page-listShell ul, #page-listShell ul li {
+			padding-left:0;
+			margin-left:10px;
+		}
+	</style>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	<a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow">JAVASCRIPT EXAMPLES</a>
+	List Template
+	<div id="page-actions" class="pageActions">
+		<a href="source-code/templates-list.html" class="buttonLink">SOURCE</a>
+	</div>
+</h1>
+
+<!-- load in the JavaScript libraries that define the animals and plants hierarchical lists -->
+
+<script type="text/javascript" src="js/animals.js"></script>
+<script type="text/javascript" src="js/plants.js"></script>
+
+<div class="main">
+	<div style="margin:auto; width:752px;">
+		<div id="page-listShell"></div>
+		<div style="width:500px; float:left;">
+			<!-- explanation copy -->
+
+			<div class="explanation">
+				<p>In this example, the <a href="../reference/Uize.Templates.List.html"><code>Uize.Templates.List</code></a> template is being used to populate a node in the page (to the left) with a hierarchical, unordered list that is built from a <code>JSON</code> data tree structure.</p>
+
+				<p>There's nothing in the node when the page loads - you should click on one of the linked JavaScript snippets below to build lists from different data sets. What you see in the JavaScript links is exactly the JavaScript code that will be executed when you click the links and that is responsible for building the list HTML and putting it into the page.</p>
+
+				<p>Now, it's just a list - nothing more. We're not dealing with an expandable/collapsible tree widget here - just a dead simple list generator template. JavaScript templates can be used to generate markup for widgets, or they can be used by build scripts to build HTML pages, or by server side JavaScript to generate HTML pages.</p>
+			</div>
+
+			<!-- programmatic interface examples -->
+
+			<div class="programmaticInterface" style="margin-top:0;">
+				<ul>
+					<li><a href="javascript://" class="linkedJs">page.setNodeInnerHtml ('listShell',Uize.Templates.List.process ({items:animals}))</a><br/><br/></li>
+					<li><a href="javascript://" class="linkedJs">page.setNodeInnerHtml ('listShell',Uize.Templates.List.process ({items:plants}))</a><br/><br/></li>
+					<li><a href="javascript://" class="linkedJs">page.setNodeInnerHtml ('listShell',Uize.Templates.List.process ({items:animalsAndPlants}))</a></li>
+				</ul>
+			</div>
+		</div>
+		<div style="clear:left;"></div>
+	</div>
+</div>
+
+<!-- JavaScript code to create tree list instance and insert and wire its UI -->
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Example.library',
+		'UizeDotCom.Page.Example',
+		'Uize.Templates.List'
+	],
+	builder:function () {
+		/*** create the example page widget ***/
+			var page = window.page = new UizeDotCom.Page.Example ({evaluator:function (code) {eval (code)}});
+
+		/*** add the tree list child widget ***/
+			var animalsAndPlants = [
+				{title:'Animals',items:animals},
+				{title:'Plants',items:plants}
+			];
+
+		/*** wire up the page widget ***/
+			page.wireUi ();
+	}
+});
+
+</script>
+
+</body>
+</html>
+

@@ -1,0 +1,11 @@
+The new =Uize.Coupler= class implements a mechanism for coupling two or more instances of any =Uize= subclass by synchronizing the values of a definable group of set-get properties.
+
+The =Uize.Coupler= class makes it easy to keep desired state synchronized between two or more instances. Coupled instances can be widget instances (ie. instances of =Uize.Widget= subclasses), but they do not have to be widgets. Coupled instances do not have to be of the same class - they only need to provide the same set-get properties that are to be synchronized between them. Using the =Uize.Coupler= class is easy: all you have to do is create an instance of it, specifying which properties of which instances you would like to be coupled together. To see an example of how the =Uize.Coupler= class is used, consult the [[../examples/collection-item-coupled-zooming.html][Coupled Zooming Collection Items]] example.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-07-01 - NEW MODULE: Uize.Coupler
+....................................................................................

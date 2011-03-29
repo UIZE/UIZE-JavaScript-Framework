@@ -1,0 +1,6 @@
+<%@ input ({idPrefix:'string',width:'number',height:'number'}) %>
+<%@ required ('UizeDotCom.Templates.SlideShow') %>
+<%@ startBlock ('viewHtml') %>
+<div id="<% .idPrefix %>_slideImage" style="position:relative; left:0px; top:0px; width:<% .width %>px; height:<% .height %>px; background:#000;">
+<%@ endBlock () %>
+<%= UizeDotCom.Templates.SlideShow.process ({idPrefix:input.idPrefix,viewHtml:viewHtml ()}) %>

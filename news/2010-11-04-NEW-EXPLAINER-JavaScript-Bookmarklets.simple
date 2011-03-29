@@ -1,0 +1,13 @@
+The new [[../explainers/javascript-bookmarklets.html][JavaScript Bookmarklets]] explainer provides some useful bookmarklets that should come in handy when doing development using the UIZE JavaScript Framework.
+
+To get things started, this new explainer provides three bookmarklets. The Built Modules Bookmarklet provides an easy way to see a list of all the JavaScript modules that have been built for the Web page in which the bookmarklet is used. The Lookup Widget From Node ID Bookmarklet makes it easy to look up a widget on a Web page from the id of a DOM node, and see a detailed report containing the widget's full dereferencing path, the widget's class, its parentage information, and a summary of its state. The Flattened Widget Tree Bookmarklet produces a report of all the widgets in the widget tree hierarchy for a Web page, in the form of a flattened list.
+
+[[../explainers/javascript-bookmarklets.html][LEARN MORE]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2010-11-04 - NEW EXPLAINER: JavaScript Bookmarklets
+....................................................................................

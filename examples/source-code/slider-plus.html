@@ -1,0 +1,127 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Slider Plus Buttons - HTML Source Code | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework HTML example source code"/>
+	<meta name="description" content="This is the source code for the Slider Plus Buttons example"/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../../css/page.css"/>
+	<link rel="stylesheet" href="../../css/page.source.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../../index.html" title="UIZE JavaScript Framework home"></a>
+	SOURCE CODE: Slider Plus Buttons
+	<div id="page-actions" class="pageActions">
+		<a href="../slider-plus.html" class="buttonLink">VIEW EXAMPLE</a>
+	</div>
+</h1>
+
+<pre>
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+&lt;head&gt;
+  &lt;title&gt;Slider Plus Buttons | JavaScript Examples | UIZE JavaScript Framework&lt;/title&gt;
+  &lt;meta name="keywords" content="widget Uize.Widget.Bar.Slider.Plus"/&gt;
+  &lt;meta name="description" content="See how to use a slider widget that has buttons for incrementing or decrementing the value, and buttons for selecting the maximum and minimum values."/&gt;
+  &lt;link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/&gt;
+  &lt;link rel="stylesheet" href="../css/page.css"/&gt;
+  &lt;link rel="stylesheet" href="../css/page.example.css"/&gt;
+  &lt;link rel="stylesheet" href="../css/widget.slideshow.css"/&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+&lt;script type="text/javascript" src="../js/Uize.js"&gt;&lt;/script&gt;
+
+&lt;h1 class="document-title"&gt;
+  &lt;a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"&gt;&lt;/a&gt;
+  &lt;a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow"&gt;JAVASCRIPT EXAMPLES&lt;/a&gt;
+  Slider Plus Buttons
+  &lt;div id="page-actions" class="pageActions"&gt;
+    &lt;a href="source-code/slider-plus.html" class="buttonLink"&gt;SOURCE&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/h1&gt;
+
+&lt;div class="main"&gt;
+  &lt;!-- explanation copy --&gt;
+
+  &lt;div class="explanation"&gt;
+    &lt;p&gt;In this example, an instance of &lt;a href="../reference/Uize.Widget.Bar.Slider.Plus.html"&gt;&lt;code&gt;Uize.Widget.Bar.Slider.Plus&lt;/code&gt;&lt;/a&gt; is being wired up. This widget class wires up additional buttons for incrementing the value in either direction, and for setting the value to either extreme of the slider's range. Notice how the appropriate buttons become disabled when you're at either extreme of the slider's range. This is true of both using the buttons to change the value and dragging the slider's knob. If you're dragging the knob, then hitting either of the extreme's of the range will disable buttons appropriately.&lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;!-- slider UI --&gt;
+
+  &lt;table border="0" cellspacing="2" cellpadding="0" style="margin:auto;" class="insetBackgroundColor"&gt;
+    &lt;tr valign="top"&gt;
+      &lt;td&gt;&lt;a id="page_slider_setToMin" class="navButton" href="javascript://"&gt;&lt;div class="arrow towardsFirst gotoFirst"&gt;&lt;/div&gt;&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;a id="page_slider_stepToMin" class="navButton" href="javascript://"&gt;&lt;div class="arrow towardsFirst gotoPrevious"&gt;&lt;/div&gt;&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;
+        &lt;div style="position:relative; left:0px; top:0px; width:319px; height:27px; background:#52575a;"&gt;
+          &lt;div id="page_slider-track" style="position:absolute; left:1px; top:1px; width:317px; height:25px; background:url(../js/Uize_Widget_Bar_Slider/track-bg-horizontal.gif); cursor:pointer;"&gt;
+            &lt;img id="page_slider-knob" src="../js/Uize_Widget_Bar_Slider/knob-horizontal.gif" style="position:absolute; left:0px; top:0px; width:25px; height:25px; cursor:pointer;" border="0" hspace="0" vspace="0" alt=""/&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/td&gt;
+      &lt;td&gt;&lt;a id="page_slider_stepToMax" class="navButton" href="javascript://"&gt;&lt;div class="arrow towardsLast gotoNext"&gt;&lt;/div&gt;&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;a id="page_slider_setToMax" class="navButton" href="javascript://"&gt;&lt;div class="arrow towardsLast gotoLast"&gt;&lt;/div&gt;&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/table&gt;
+&lt;/div&gt;
+
+&lt;!-- JavaScript code to make the static slider HTML "come alive" --&gt;
+
+&lt;script type="text/javascript"&gt;
+
+Uize.module ({
+  required:[
+    'UizeDotCom.Page.Example.library',
+    'UizeDotCom.Page.Example',
+    'Uize.Widget.Bar.Slider.Plus'
+  ],
+  builder:function () {
+    /*** create the example page widget ***/
+      var page = window.page = new UizeDotCom.Page.Example;
+
+    /*** add the slider child widget ***/
+      page.addChild (
+        'slider',
+        Uize.Widget.Bar.Slider.Plus,
+        {
+          minValue:0,
+          maxValue:200,
+          orientation:'horizontal',
+          built:false
+        }
+      );
+
+    /*** wire up the page widget ***/
+      page.wireUi ();
+  }
+});
+
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+
+</pre>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.library',
+		'UizeDotCom.Page'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page).wireUi ()}
+});
+
+</script>
+
+</body></html>

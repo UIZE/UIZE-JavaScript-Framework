@@ -1,0 +1,44 @@
+listings
+:
+	fullName: Chris van Rensburg
+	text::
+		While having done JavaScript framework development from the early days of the language, Chris has successfully maintained a low profile and slipped under the radar, while simultaneously urging the early Netscape pioneers to implement a plug-in architecture and event system for HTML documents, and influencing Macromedia to adopt ECMA-262 as the basis for ActionScript. In the formative years of JavaScript, Chris worked at Thomas Dolby's Beatnik, Inc., leading development of their object-oriented framework for interactive audio in Web pages, the Music Object API. Currently, Chris works for Zazzle Inc., standing alongside formidable engineering talent at the forefront of developing rich, featureful, and mission critical client applications for the Web 2.0 era. The UIZE JavaScript Framework, instigated by Chris, has formed the foundation for client-side interactivity on the Zazzle Web site.
+	link: http://www.tomkidding.com
+:
+	fullName: Ben Ilegbodu
+	text::
+		Ben has been programming the Web since the turn of the millennium, but wasn't introduced to the wonderful world of object-oriented JavaScript until his summer internship with the Yahoo! Frontpage &amp; MyY! Team, where he contributed the AutoComplete widget to the YUI JavaScript library. After receiving his B.S. in Computer Science from Stanford in 2006, he joined Zazzle while he finished his M.S. in Human-Computer Interaction in 2007.
+		At Zazzle he's contributed heavily to the user interface that drives the experience around creating and purchasing products on the site. He has developed quite a few Zazzle-specific JavaScript widgets on top of the UIZE JavaScript Framework, as well as contributed a handful of improvements to the framework itself.
+	link: http://www.benmvp.com
+:
+	fullName: Jan Borgersen
+	text::
+		Jan prefers to work in that space where art and technology intersect. He found a fabulous home to do this at Zazzle Inc., where he is building Zazzle's mission critical AJAX applications enabling artists to unleash their creativity with custom printing technologies. Jan has approximately ten years of software engineering experience, and he spent most of the Web 1.0 years as a Razorfish consultant. His varied projects have seen him lead development of the presentation-tier of www.cisco.com, build parts of the Attributes and Catalogs subsystem at eBay, and design the 20th Anniversary website for the MIDI Manufacturers Association (www.midi.org). Jan has run seminars at Cisco Systems on publishing accessible web content, and he has appeared on a panel at the Game Developers Conference discussing interactive audio technologies for the web. For the Web 2.0 era, Jan is now a key contributor to the UIZE JavaScript Framework.
+	link: http://www.hikingviking.com
+:
+	fullName: Tim Carter
+	text::
+		In 2005, a financially-strapped Stanford junior with little JavaScript experience accepted a Web developer position for the University's newly-admitted students website. Luckily for that junior, 2005-2006 witnessed the release and growth of several now-famous javascript frameworks such as script.aculo.us, YUI, and jQuery.
+		Using those resources as the foundation of his experience with JavaScript, Tim managed to turn his on-campus job into a summer internship at Zazzle, where he dove even further into the intricacies of the language with his introduction to Uize. Upon graduating in 2007, Tim took a full-time position at Zazzle, where he currently works on the user experience for newly-released products and Zazzle's product design tools.
+:
+	fullName: Bryan Hsueh
+	text::
+		Bryan has more than ten years of software development experience from various telecom and networking companies, including Fujitsu, Nortel and Nokia. He had worked on several management systems for optical, broadband and wireless network equipment. While at Nokia, he and his UI team had transformed the traditionally heavy UI client to a Web based application with rich user interaction using JavaScript, DHTML and AJAX.
+		Attracted by the latest Web 2.0 technologies, Bryan joined Zazzle Inc. where he has developed tools and platform for artists to promote their products on the internet, utilizing many great features in the UIZE JavaScript Framework.
+	link: http://www.linkedin.com/pub/6/4a4/58
+:
+	fullName: Guang-Yu Xu
+	text::
+		Guang dived into rich web client development in late 2000. From the get-go, object-oriented programming with JavaScript was the only way he knew how.
+		Tangoing with Navigator 4.75 and IE 4-5 for a few years, his ultimate goal was to make the web app look and behave the same as the existing desktop app.
+		When he came back to web development world in 2006, he found a new label for the old wine he loved - "ajax".
+		Since then, he had his hands dirty in Dojo and YUI/EXT toolkits before joining Zazzle and becoming a believer in Uize.
+	link: http://www.linkedin.com/pub/0/054/b2b
+:
+	fullName: Darren Luvaas
+	text::
+		Web designer, user experience engineer, front-end developer and guru-grade Photoshop user, Darren has been designing and building websites and web-based applications for more than ten years.
+		Darren's career in the Internet space began in higher education where his tenure as an authority on Accessible Web Design includes Stanford Univerity.
+		Darren's notable projects include the LEGO Discussion Boards, web-based applications for Procter &amp; Gamble, Wal-Mart, and, of course, Zazzle Inc. - where he currently pushes pixels with reckless abandon.
+	link: http://www.luvaas.com
+

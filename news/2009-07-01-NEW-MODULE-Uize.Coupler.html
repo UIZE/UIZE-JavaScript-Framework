@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2009-07-01 - NEW MODULE: Uize.Coupler | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="The new Uize.Coupler class implements a mechanism for coupling two or more instances of any Uize subclass by synchronizing the values of a definable group of set-get properties."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2009.html" class="breadcrumb breadcrumbWithArrow">2009 NEWS</a>
+	2009-07-01 - NEW MODULE: Uize.Coupler
+
+</h1>
+
+<div class="main">
+<div class="contents0">
+	<p>The new <code>Uize.Coupler</code> class implements a mechanism for coupling two or more instances of any <code><a href="../reference/Uize.html">Uize</a></code> subclass by synchronizing the values of a definable group of set-get properties.</p>
+	
+	<p>The <code>Uize.Coupler</code> class makes it easy to keep desired state synchronized between two or more instances. Coupled instances can be widget instances (ie. instances of <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> subclasses), but they do not have to be widgets. Coupled instances do not have to be of the same class - they only need to provide the same set-get properties that are to be synchronized between them. Using the <code>Uize.Coupler</code> class is easy: all you have to do is create an instance of it, specifying which properties of which instances you would like to be coupled together. To see an example of how the <code>Uize.Coupler</code> class is used, consult the <a href="../examples/collection-item-coupled-zooming.html">Coupled Zooming Collection Items</a> example.</p>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

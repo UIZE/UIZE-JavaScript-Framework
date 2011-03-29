@@ -1,0 +1,13 @@
+The new [[../examples/color-gradient-tool.html][Color Gradient Tool]] provides a UI for visualizing and experimenting with color gradients.
+
+By applying different [[Uize.Curve][curve functions]] to different color components, color gradients can range from basic color transitions to sophisticated spectral patterns. Using this tool, you can select a color gradient from a *"PRESETS"* tab. Upon selecting a color gradient preset, the color gradient will be previewed in a display area. The parameters for a color gradient can be tweaked inside a *"PARAMS"* tab, and those changes can then be previewed. Moving the mouse over the gradient preview will display a tooltip that contains information about the color being moused over, and clicking will provide the hex value of that color in a prompt dialog so it can be copied to the clipboard. So, this tool also provides a novel approach to a color picker UI, since it lets you choose a color from unique color spreads.
+
+[[../examples/color-gradient-tool.html][CHECK IT OUT]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2010-01-10 - NEW EXAMPLE: Color Gradient Tool
+....................................................................................

@@ -1,0 +1,11 @@
+The =RootClass= class, which dangled like a vestigial appendage on the code of the =Uize= module, has been neatly tucked away.
+
+Structurally, the code in the =RootClass= class has been folded into the implementation for the =Uize= base class. It used to be that the =Uize= class was a subclass of =RootClass=, a class which provided no more than a simple inheritance mechanism. This class was never used on its own. Consolidating this code into the =Uize= class' code reduced the scrunched size of the =Uize= module by almost 1KB, since the scrunched identifier prefix for the =Uize= class could be reduced from =a_= to just an underscore. Moreover, there is now one less link in the inheritance chain for all subclasses of the =Uize= base class, which should provide a small performance benefit.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-03-27 - IMPROVED MODULE: Uize
+....................................................................................

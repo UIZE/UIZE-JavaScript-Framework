@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>REPLACE THIS TEXT WITH EXAMPLE NAME | JavaScript Examples | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="REPLACE THIS TEXT WITH THE KEYWORDS FOR THE EXAMPLE"/>
+	<meta name="description" content="REPLACE THIS TEXT WITH THE 150 MAX CHARS DESCRIPTION FOR THE EXAMPLE"/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.example.css"/>
+	<!--
+		REPLACE THIS COMMENT WITH ADDITIONAL LINES OF LINK TAGS FOR EXTERNAL CSS, AS NEEDED
+	-->
+	<style type="text/css">
+		/*
+			REPLACE THIS COMMENT WITH PAGE SPECIFIC CSS FOR THIS EXAMPLE, OR REMOVE STYLE TAG IF NO PAGE SPECIFIC CSS
+		*/
+	</style>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	<a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow">JAVASCRIPT EXAMPLES</a>
+	REPLACE THIS TEXT WITH EXAMPLE NAME
+	<div id="page-actions" class="pageActions">
+		<a href="source-code/~example-template.html" class="buttonLink">SOURCE</a>
+	</div>
+</h1>
+
+<div class="main">
+	<!-- explanation copy -->
+
+	<div class="explanation">
+		<p>
+			<!-- REPLACE THE FOLLOWING DIV WITH THE EXPLANATION FOR THE EXAMPLE -->
+			<div style="padding:10px; font-size:40px; text-align:center;">
+				REPLACE THIS DIV WITH THE EXPLANATION FOR THE EXAMPLE
+			</div>
+		</p>
+	</div>
+
+	<!-- REPLACE THE FOLLOWING DIV WITH THE MAIN GUTS OF THE EXAMPLE -->
+	<div style="border:1px dotted #fff; padding:20px 15px; margin:15px; font-size:60px; text-align:center;">
+		REPLACE THIS DIV WITH THE MAIN GUTS OF THE EXAMPLE
+	</div>
+
+	<!-- programmatic interface examples -->
+
+	<div class="programmaticInterface">
+		<!-- REPLACE THE FOLLOWING DIV WITH PROGRAMMATIC LINKS FOR THE EXAMPLE -->
+		<div style="font-size:30px; text-align:center;">
+			REPLACE THIS DIV WITH PROGRAMMATIC LINKS FOR THE EXAMPLE, OR REMOVE THE DIV
+		</div>
+	</div>
+</div>
+
+<!-- JavaScript code to insert the calendar widget and wire up the page -->
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Example.library',
+		'UizeDotCom.Page.Example'
+		/*
+			REPLACE THIS COMMENT WITH A LIST OF MODULES REQUIRED SPECIFICALLY BY THIS EXAMPLE, OR REMOVE COMMENT
+		*/
+	],
+	builder:function () {
+		/*** create the example page widget ***/
+			var page = window.page = new UizeDotCom.Page.Example ({evaluator:function (code) {eval (code)}});
+
+		/*
+			REPLACE THIS COMMENT WITH SETUP CODE FOR THE EXAMPLE
+		*/
+
+		/*** wire up the page widget ***/
+			page.wireUi ();
+	}
+});
+
+</script>
+
+</body>
+</html>
+

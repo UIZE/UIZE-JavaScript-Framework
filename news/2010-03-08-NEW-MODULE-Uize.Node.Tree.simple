@@ -1,0 +1,13 @@
+The new =Uize.Node.Tree= module provides convenience methods for generating a tree data object by analyzing HTML on a page.
+
+A tree data object is an array, where each element of the array is a `Tree Item`. Because a Tree Item may itself contain a child Tree Data Object, specified by its =items= property, a Tree Data Object can be used to represent an arbitrarily complex, hierarchical structure for information. A Tree Data Object can be used in any number of ways, but is commonly used for building tree-based user interface elements such as contents lists, structured dropdown menus, etc. A number of widget class support data in the `Tree Data Object` format, such as the =Uize.Widget.Tree.List=, =Uize.Widget.Tree.Menu=, and =Uize.Widget.Tree.Select= classes. Outside of widgets, tree data objects can be used to drive the generation of HTML, in build scripts or Web applications, using [[../explainers/javascript-templates.html][JavaScript Templates]].
+
+[[Uize.Node.Tree][LEARN MORE]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2010-03-08 - NEW MODULE: Uize.Node.Tree
+....................................................................................

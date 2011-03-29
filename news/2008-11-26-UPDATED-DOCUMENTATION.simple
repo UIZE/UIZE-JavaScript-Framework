@@ -1,0 +1,9 @@
+Documentation has been added for the =Uize.toString=, =Uize.valueOf=, =Uize.capFirstChar=, =Uize.recordMatches=, and =Uize.module= static methods, and the =Uize.moduleLoader= static property of the =Uize= base class, as well as the =setNodeInnerHtml= instance method of the =Uize.Widget= base class.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2008-11-26 - UPDATED DOCUMENTATION
+....................................................................................

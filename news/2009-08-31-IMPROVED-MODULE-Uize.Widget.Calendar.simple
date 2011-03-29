@@ -1,0 +1,11 @@
+The =Uize.Widget.Calendar= module has been improved with the addition of the new =snapViewOnValueChange= set-get property, which lets you control whether or not the values of the =month= and =year= set-get properties should automatically be set when the value of the =value= set-get property changes.
+
+When this property is set to =true=, the =month= and =year= properties will be automatically set when the value of the =value= property changes, to ensure that the newly selected date is in view. In this mode, the values of the =month= and =year= properties can still be changed so that the currently selected date is not in view, but whenever the =value= property is next modified, the =month= and =year= properties will be "snapped back" to the month and year of the selected date.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-08-31 - IMPROVED MODULE: Uize.Widget.Calendar
+....................................................................................

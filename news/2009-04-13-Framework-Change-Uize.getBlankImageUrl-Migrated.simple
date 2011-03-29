@@ -1,0 +1,16 @@
+The =Uize.getBlankImageUrl= static method has been migrated from the =Uize= base class into the =Uize.Widget= class.
+
+This Web-specific method was misplaced in the =Uize= base class, so a more appropriate home was found for it. This change is not backwards compatible. Fortunately, this method is rarely used and the impact is minimal. Affected classes have been updated accordingly.
+
+MIGRATED
+........................................................................
+Uize.getBlankImageUrl ()  >> BECOMES >>  Uize.Widget.getBlankImageUrl ()
+........................................................................
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-04-13 - Framework Change: Uize.getBlankImageUrl Migrated
+....................................................................................

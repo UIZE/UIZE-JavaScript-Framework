@@ -1,0 +1,19 @@
+The various build scripts that are bundled with the UIZE JavaScript Framework download (used for the *uize.com* Web site project, and that you can use in your own Web site projects to automate certain build tasks) have been improved in a number of ways.
+
+- The build script JavaScript files that are located in the root folder of the *uize.com* Web site project are now all named with the prefix =_build-=. This results in them being grouped together in a folder listing and provides clearer organization.
+
+- The new =_build-env.json= file provides a means for configuring build environment variables that can be shared by the various build scripts, and allows the build scripts to be tailored to a particular Web site project without having to modify the build scripts, themselves.
+
+- It is now possible to easily do dry runs of the build scripts, simply by setting the new =dryRun= build environment variable to =true=.
+
+- The new =_build-strings-audit-report.js= build script recurses through all folders of a Web site project, harvests all the string literals from JavaScript files, filters them into different buckets depending on their likelihood of internationalizability, and produces a report with summaries for all the JavaScript files. This build script can be useful when internationalizing the JavaScript files of a Web site project.
+
+For more information about build scripts, consult the explainer [[../explainers/javascript-build-scripts.html][JavaScript Build Scripts]].
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-03-14 - Improved Build Scripts
+....................................................................................

@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Color Sorting Techniques | JavaScript Examples | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="Uize.Color.xUtil"/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.example.css"/>
+	<style tyle="text/css">
+		.colorSwatch {
+			width:80px;
+			height:9px;
+			float:left;
+		}
+	</style>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	<a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow">JAVASCRIPT EXAMPLES</a>
+	Color Sorting Techniques
+	<div id="page-actions" class="pageActions">
+		<a href="source-code/color-sorting-techniques.html" class="buttonLink">SOURCE</a>
+	</div>
+</h1>
+
+<div class="main">
+	<!-- explanation copy -->
+
+	<div class="explanation">
+		<p>Blah...</p>
+	</div>
+
+	<!-- wireframe for sortable color swatches -->
+
+	<div id="page-colorSwatches" style="width:480px; margin:auto;"></div>
+	<div style="clear:left;"></div>
+</div>
+
+<!-- JavaScript code to generate the color swatches -->
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Example.library',
+		'UizeDotCom.Page.Example',
+		'Uize.Color',
+		'Uize.Color.xUtil'
+	],
+	builder:function () {
+		/*** create the example page widget ***/
+			var page = window.page = new UizeDotCom.Page.Example;
+
+		/*** build the swatches HTML ***/
+			var swatchesHtmlChunks = [];
+
+			//var colors = Uize.Color.makeCombinations ('hsl(0,100,20)','hsl(20,70,70)',[6,6,6],[0,0,0]);
+			var colors = Uize.Color.makeCombinations ('rgb(255,100,50)','rgb(0,50,100)',[6,6,6],[0,0,0]);
+
+			//Uize.Color.sort (colors,'HSL');
+			for (var colorNo = -1, colorsLength = colors.length; ++colorNo < colorsLength;) {
+				var colorHex = colors [colorNo].to ('#hex');
+				swatchesHtmlChunks.push (
+					'<div class="colorSwatch" style="background:' + colorHex + ';" title="' + colorHex + '"></div>'
+				);
+			}
+
+		/*** wire up the page widget ***/
+			page.wireUi ();
+
+			page.setNodeInnerHtml ('colorSwatches',swatchesHtmlChunks.join (''));
+	}
+});
+
+</script>
+
+</body>
+</html>
+

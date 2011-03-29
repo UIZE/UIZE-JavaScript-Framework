@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2010-04-12 - IMPROVED MODULE: Uize.Date | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="The Uize.Date module has been improved, with fixes for a number of issues, improvements to a number of static methods, and the addition of a thorough set of unit tests in the new Uize.Test.Uize.Date unit tests module."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2010.html" class="breadcrumb breadcrumbWithArrow">2010 NEWS</a>
+	2010-04-12 - IMPROVED MODULE: Uize.Date
+
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="The following issues were discovered during the course of writing unit tests and have been fixed...">1. Fixes</a></li>
+			<li><a href="#2" title="The following minor improvements have been made to static methods of the Uize.Date module...">2. Improvements</a></li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<p>The <code><a href="../reference/Uize.Date.html">Uize.Date</a></code> module has been improved, with fixes for a number of issues, improvements to a number of static methods, and the addition of a thorough set of unit tests in the new <code><a href="../reference/Uize.Test.Uize.Date.html">Uize.Test.Uize.Date</a></code> unit tests module.</p>
+	
+	<a name="1"></a>
+	<h1 class="heading1" title="1. Fixes"><span class="headingNumber"><a href="#1" title="1. Fixes">1</a>. </span>Fixes</h1>
+	<div class="contents1">
+		<p>The following issues were discovered during the course of writing unit tests and have been fixed...</p>
+		
+		<table class="list">
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>The <code>Uize.Date.inRange</code> static method has been fixed to correctly support date range objects where the value of the <code>minValue</code> property is <code>undefined</code>, <code>null</code>, or not specified.</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>A rounding bug in the <code>Uize.Date.isRecent</code> static method, that would cause this method to produce the incorrect result under certain conditions, has been fixed.</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>A bug with the <code>Uize.Date.toIso8601</code> static method, where the month would always be off by one, has been fixed.</td></tr>
+		</table>
+	</div>
+	
+	<a name="2"></a>
+	<h1 class="heading1" title="2. Improvements"><span class="headingNumber"><a href="#2" title="2. Improvements">2</a>. </span>Improvements</h1>
+	<div class="contents1">
+		<p>The following minor improvements have been made to static methods of the <code><a href="../reference/Uize.Date.html">Uize.Date</a></code> module...</p>
+		
+		<table class="list">
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>The <code>Uize.Date.format</code> static method has been improved with the addition of support for invalid dates for all substitution tokens (eg. <code>Uize.Date.format (new Date (NaN),'{YYYY}-{MM}-{DD}')</code> now produces the result <code>'????-??-??'</code>).</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>The <code>Uize.Date.resolve</code> static method has been improved with the addition of support for dates specified as a milliseconds integer number.</td></tr>
+		</table>
+	</div>
+	
+	<p>In addition to the above fixes and improvements, the <code><a href="../reference/Uize.Date.html">Uize.Date</a></code> module is now thoroughly unit tested by the newly created <code><a href="../reference/Uize.Test.Uize.Date.html">Uize.Test.Uize.Date</a></code> unit tests module.</p>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

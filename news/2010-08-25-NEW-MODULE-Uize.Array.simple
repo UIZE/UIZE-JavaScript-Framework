@@ -1,0 +1,11 @@
+The new =Uize.Array= module defines a namespace for various modules that provide array specific functionality or utilities.
+
+To kick things off, the new =Uize.Array.Order= module under the =Uize.Array= namespace provides functionality for changing the order of elements in an array, with support for reversing, jumbling, specialized sorting, and more.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2010-08-25 - NEW MODULE: Uize.Array
+....................................................................................

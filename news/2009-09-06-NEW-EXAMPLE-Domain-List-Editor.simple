@@ -1,0 +1,13 @@
+The new [[../examples/domain-list-editor.html][Domain List Editor]] example demonstrates how the =Uize.Widget.ListEditor= class can be used to create an interface that lets the user build up a list of domain names.
+
+In the example, domains can be entered in the text input and then added by either pressing the enter key or clicking the <b>"ADD"</b> button. Domains can be removed by selecting them in the multi-select box and then pressing the delete key or clicking the <b>"REMOVE SELECT"</b> button. The example also includes a demonstration of some of the widget's programmatic interface, with an up-to-date display of the value of the widget's =list= set-get property, and some links for setting the value of this property.
+
+[[../examples/domain-list-editor.html][CHECK IT OUT]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-09-06 - NEW EXAMPLE: Domain List Editor
+....................................................................................

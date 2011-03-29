@@ -1,0 +1,77 @@
+<h1 class="document-title">
+	<a id="page-homeLink" href="index.html" title="UIZE JavaScript Framework home"></a>
+	<span class="breadcrumb breadcrumbWithArrow">DELVE</span>
+	<span id="page-windowInspected" class="windowInspected"></span>
+	<div class="pageActions">
+		<a id="page-refresh" href="javascript://" class="buttonLink" title="Re-synchronize to the page being inspected">REFRESH</a>
+		<a id="page-getWidgetFromNodeId" href="javascript://" class="buttonLink" title="Find the widget that owns a particular implied node">GET WIDGET FROM NODE ID</a>
+		<a id="page-help" href="javascript://" class="buttonLink" title="Tips on using the DELVE tool">HELP</a>
+		<a id="page-close" href="javascript://" class="buttonLink" title="Close the DELVE tool">X</a>
+	</div>
+</h1>
+
+<div id="infoTooltip" class="info-tooltip"></div>
+
+<div class="leftPane">
+	<div class="paneChrome">
+		<div class="paneInputOuterShell">
+			<div class="paneInputShell">
+				<select id="page-treeListDropdown" class="paneInput"></select>
+			</div>
+		</div>
+		<div class="treeListActions">
+			<a id="page-expandTreeListOneLevel" href="javascript://" title="expand the tree to just one level deep">1 level</a>
+			<span class="separator">|</span>
+			<a id="page-expandTreeListTwoLevels" href="javascript://" title="expand the tree to two levels deep">2 levels</a>
+			<span class="separator">|</span>
+			<a id="page-expandTreeListThreeLevels" href="javascript://" title="expand the tree to three levels deep">3 levels</a>
+			<span class="separator">|</span>
+			<a id="page-expandTreeListAll" href="javascript://" title="expand the entire tree">expand all</a>
+			<span class="separator">|</span>
+			<a id="page-getTreeListItemsAsReport" href="javascript://" title="get all the items as a plain text report in a popup window">as report</a>
+			<span class="separator">|</span>
+			<a id="page-getAllQueriesSummary" href="javascript://" title="get a summary of all available queries as a plain text report in a popup window">uber summary</a>
+		</div>
+		<div id="page_treeList-shell" class="tree-list-shell"></div>
+	</div>
+</div>
+<div class="rightPane">
+	<div class="paneChrome">
+		<div class="paneInputOuterShell">
+			<div class="paneInputShell">
+				<input id="page_objectEntry-input" type="text" class="paneInput"/>
+			</div>
+		</div>
+		<div class="tabShell">
+			<div class="tabStubShell">
+				<a id="page_objectInspectorTabs_option0" class="tabStub" href="javascript://">SUMMARY</a>
+				<a id="page_objectInspectorTabs_option1" class="tabStub" href="javascript://">STATE</a>
+				<a id="page_objectInspectorTabs_option2" class="tabStub" href="javascript://">FEATURES</a>
+				<a id="page_objectInspectorTabs_option3" class="tabStub" href="javascript://">DOCUMENTATION</a>
+				<a id="page_objectInspectorTabs_option4" class="tabStub" href="javascript://">EVENTS</a>
+				<br style="clear:left;"/>
+			</div>
+			<div class="tabBodyShell">
+				<div id="page_objectInspectorTabs-option0TabBody" class="tabBodyInactive">
+					<div id="page_objectInspectorSummary" class="tabBodyContentsShell objectInspectorSummary"></div>
+				</div>
+				<div id="page_objectInspectorTabs-option1TabBody" class="tabBodyInactive">
+					<div id="page_objectInspectorState" class="tabBodyContentsShell objectInspectorSummary"></div>
+				</div>
+				<div id="page_objectInspectorTabs-option2TabBody" class="tabBodyInactive">
+					<div id="page_objectInspectorFeatures" class="tabBodyContentsShell objectInspectorFeatures"></div>
+				</div>
+				<div id="page_objectInspectorTabs-option3TabBody" class="tabBodyInactive">
+					<div class="tabBodyContentsShell objectInspectorDocumentationShell">
+					<iframe id="page-documentation" src="javascript:'&lt;html&gt;&lt;body&gt;---&lt;/body&gt;&lt;/html&gt;'" class="objectInspectorDocumentation" frameborder="0"></iframe>
+				</div>
+				</div>
+				<div id="page_objectInspectorTabs-option4TabBody" class="tabBodyInactive">
+					<div id="page_objectInspectorEventsLog-messages" class="tabBodyContentsShell"></div>
+					<a id="page_objectInspectorEventsLog_clear" href="javascript://" class="objectInspectorEventsLogClearButton button">CLEAR</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+

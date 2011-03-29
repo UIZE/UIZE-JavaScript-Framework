@@ -1,0 +1,11 @@
+The [[../explainers/javascript-modules.html][JavaScript Modules]] explainer has been updated with new information on the *Alias Module* module type, and a new section exploring *Different Kinds of Module Loaders*.
+
+The new *Alias Module* section describes how an alias module can be used to provide backwards compatibility when module names change, and the new section *Different Kinds of Module Loaders* discusses how module loaders can be configured in non-browser contexts, such as WSH (Windows Script Host) and Adobe Photoshop. [[../explainers/javascript-modules.html][READ IT NOW]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-02-21 - IMPROVED DOCS: JavaScript Modules
+....................................................................................

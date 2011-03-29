@@ -1,0 +1,19 @@
+The new =Uize.Date.equal= static method of the =Uize.Date= module lets you easily test if two dates exist together within the same logical date range.
+
+For example, you can test to see if two dates are in the same week, the same month, the same quarter of the year, the same decade, etc. This method returns a boolean, indicating whether or not the two specified dates can be considered equal, according to the specified level of precision / accuracy.
+
+EXAMPLE
+.....................................................................................
+Uize.Data.equal ('2009/09/10 18:19:25','2009/08/01 01:51:47','week');        // false
+Uize.Data.equal ('2009/09/10 18:19:25','2009/08/01 01:51:47','month');       // false
+Uize.Data.equal ('2009/09/10 18:19:25','2009/08/01 01:51:47','quarter');     // true
+Uize.Data.equal ('2009/09/10 18:19:25','2009/08/01 01:51:47','year');        // true
+.....................................................................................
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-09-28 - NEW METHOD: Uize.Date.equal
+....................................................................................

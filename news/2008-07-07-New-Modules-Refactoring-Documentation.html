@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2008-07-07 - New Modules, Refactoring, Documentation | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="The JavaScript Scruncher tool has been updated and improved to have a tabbed interface, initial test data, an explanation, and contemporary coding style."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2008.html" class="breadcrumb breadcrumbWithArrow">2008 NEWS</a>
+	2008-07-07 - New Modules, Refactoring, Documentation
+
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="The JavaScript Scruncher tool has been updated and improved to have a tabbed interface, initial test data, an explanation, and contemporary coding style.">1. IMPROVED TOOL: Scruncher</a></li>
+			<li><a href="#2" title="A new Uize.Date utility module has been added, with static methods for displaying and parsing dates in ISO 8601 format and some other date-related utility methods. Documentation is complete.">2. NEW MODULE: Uize.Date</a></li>
+			<li><a href="#3" title="For the scrunched code modules of the UIZE JavaScript Framework, file size has been reduced by reducing the size of the comment headers (which were rather large previously).">3. General Improvements</a></li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<a name="1"></a>
+	<h1 class="heading1" title="1. IMPROVED TOOL: Scruncher"><span class="headingNumber"><a href="#1" title="1. IMPROVED TOOL: Scruncher">1</a>. </span>IMPROVED TOOL: Scruncher</h1>
+	<div class="contents1">
+		<p>The <a href="../examples/javascript-scruncher.html">JavaScript Scruncher tool</a> has been updated and improved to have a tabbed interface, initial test data, an explanation, and contemporary coding style.</p>
+		
+		<p>Additionally, the documentation about scrunching has been fleshed out and made more comprehensive in the explainer <a href="../explainers/all-about-scrunching.html">All About Scrunching</a>. Finally, reference documentation has been created for the <code><a href="../reference/Uize.Scruncher.html">Uize.Scruncher</a></code> module.</p>
+	</div>
+	
+	<a name="2"></a>
+	<h1 class="heading1" title="2. NEW MODULE: Uize.Date"><span class="headingNumber"><a href="#2" title="2. NEW MODULE: Uize.Date">2</a>. </span>NEW MODULE: Uize.Date</h1>
+	<div class="contents1">
+		<p>A new <code><a href="../reference/Uize.Date.html">Uize.Date</a></code> utility module has been added, with static methods for displaying and parsing dates in ISO 8601 format and some other date-related utility methods. <a href="../reference/Uize.Date.html">Documentation</a> is complete.</p>
+	</div>
+	
+	<a name="3"></a>
+	<h1 class="heading1" title="3. General Improvements"><span class="headingNumber"><a href="#3" title="3. General Improvements">3</a>. </span>General Improvements</h1>
+	<div class="contents1">
+		<p>For the scrunched code modules of the UIZE JavaScript Framework, file size has been reduced by reducing the size of the comment headers (which were rather large previously).</p>
+		
+		<p>The scrunched files now also contain the date that they were scrunched, embedded in the header comment, as an aid in troubleshooting. Build scripts for the building the scrunched files and documentation have been refactored to support module declarations and to leverage the module mechanism's dependency resolution. A new <code><a href="../reference/Uize.Wsh.html">Uize.Wsh</a></code> module, with code factored out of the build scripts, provides utility methods specific to Windows Script Host that facilitate processing files in directories.</p>
+	</div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

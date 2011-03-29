@@ -1,0 +1,49 @@
+<%
+	@required ([
+		'UizeDotCom.SiteMap',
+		'Uize.Templates.List'
+	])
+%><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Site Map | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework"/>
+	<meta name="description" content="This is the directory or site map for the UIZE JavaScript Framework"/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="css/page.css"/>
+	<link rel="stylesheet" href="css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="index.html" title="UIZE JavaScript Framework home"></a>
+	Site Map
+</h1>
+
+<div class="main">
+	<div class="preamble">This document provides a directory / site map for the UIZE JavaScript Framework.</div>
+	<div id="page_contents" class="contents-tree-shell">
+<%= Uize.Templates.List.process ({items:[{title:'Site Map',items:UizeDotCom.SiteMap ()}]}) %>
+	</div>
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:'UizeDotCom.Page.Doc.library',
+	builder:function () {
+		(window.page = new UizeDotCom.Page.Doc).wireUi ();
+
+		page.children.contents.collapseAllBut (['Site Map','Examples']);
+	}
+});
+
+</script>
+
+</body>
+</html>
+

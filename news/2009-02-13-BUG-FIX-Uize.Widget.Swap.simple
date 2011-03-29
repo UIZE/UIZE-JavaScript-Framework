@@ -1,0 +1,9 @@
+A bug has been fixed with handling of the =dissolve= set-get property that was causing opacity to get left in a bad state in certain cases when switching effect settings.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-02-13 - BUG FIX: Uize.Widget.Swap
+....................................................................................

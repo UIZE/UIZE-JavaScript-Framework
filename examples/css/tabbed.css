@@ -1,0 +1,18 @@
+#page_tabs {
+	width:97%;
+	margin:auto;
+}
+#page_tabs .tabBodyShell {
+	height:356px;
+}
+#page_tabs .tabBodyShell textarea {
+	font-family:courier;
+	font-size:10px;
+	width:98%;
+	height:355px;
+	padding:0;
+	margin:0;
+	margin-left:2%;
+	border:none;
+}
+

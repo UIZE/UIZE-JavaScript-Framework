@@ -1,0 +1,76 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2009-01-19 - IMPROVED MODULE: Uize.Widget.ImageWipe | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="The Uize.Widget.ImageWipe widget class has been improved in a number of ways."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2009.html" class="breadcrumb breadcrumbWithArrow">2009 NEWS</a>
+	2009-01-19 - IMPROVED MODULE: Uize.Widget.ImageWipe
+
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="Wipe effect presets have been migrated from the Uize.Widget.ImageWipe module into the new Uize.Widget.ImageWipe.xPresets extension module.">1. Wipe Presets Have Migrated</a></li>
+			<li><a href="#2" title="The following bugs have been fixed...">2. Bug Fixes</a></li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<p>The <code><a href="../reference/Uize.Widget.ImageWipe.html">Uize.Widget.ImageWipe</a></code> widget class has been improved in a number of ways.</p>
+	
+	<a name="1"></a>
+	<h1 class="heading1" title="1. Wipe Presets Have Migrated"><span class="headingNumber"><a href="#1" title="1. Wipe Presets Have Migrated">1</a>. </span>Wipe Presets Have Migrated</h1>
+	<div class="contents1">
+		<p>Wipe effect presets have been migrated from the <code><a href="../reference/Uize.Widget.ImageWipe.html">Uize.Widget.ImageWipe</a></code> module into the new <code><a href="../reference/Uize.Widget.ImageWipe.xPresets.html">Uize.Widget.ImageWipe.xPresets</a></code> extension module.</p>
+		
+		<p>This reduces the code size of the <code><a href="../reference/Uize.Widget.ImageWipe.html">Uize.Widget.ImageWipe</a></code> module and reduces page load for applications that don't need to use the entire set of wipe presets. An implication of this change is that you may need to require the <code><a href="../reference/Uize.Widget.ImageWipe.xPresets.html">Uize.Widget.ImageWipe.xPresets</a></code> module in pages that were previously relying on the <code>Uize.Widget.ImageWipe.presets</code> static property being defined in the <code><a href="../reference/Uize.Widget.ImageWipe.html">Uize.Widget.ImageWipe</a></code> module. Wipe presets are still accessible from the <code>Uize.Widget.ImageWipe.presets</code> static property, but this property is now no longer defined in the <code><a href="../reference/Uize.Widget.ImageWipe.html">Uize.Widget.ImageWipe</a></code> module, but rather in the <code><a href="../reference/Uize.Widget.ImageWipe.xPresets.html">Uize.Widget.ImageWipe.xPresets</a></code> extension.</p>
+	</div>
+	
+	<a name="2"></a>
+	<h1 class="heading1" title="2. Bug Fixes"><span class="headingNumber"><a href="#2" title="2. Bug Fixes">2</a>. </span>Bug Fixes</h1>
+	<div class="contents1">
+		<p>The following bugs have been fixed...</p>
+		
+		<table class="list">
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>a bug with handling of the <code>dissolve</code> set-get property that was causing opacity of panes to get left in a bad state when interrupting a fade with dissolve and initiating a fade without dissolve</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>a bug with handling of the <code>allToFull</code> set-get property that was causing crud to be left on the right and bottom edges as a result of the previous image showing through because of an off-by-one error in calculation</td></tr>
+		</table>
+	</div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

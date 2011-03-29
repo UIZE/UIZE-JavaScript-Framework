@@ -1,0 +1,13 @@
+A new [[../examples/collection-dynamic.html][Dynamic Collection example]] demonstrates how an instance of the =Uize.Widget.Collection.Dynamic= widget class can be used to wire up an editable grid of photos.
+
+In the example, you can 1) select items in the grid by clicking on them, 2) make a non-contiguous selection by ctrl-clicking on items, 3) make a range selection by clicking on one item and then shift-clicking on another, 4) clear the selection by clicking a *"SELECT NONE"* button, 5) select all items by clicking a *"SELECT ALL"* button, 6) remove a selection of items by clicking a *"REMOVE"* button, and 7) reposition a selection of items within the collection by click-and-dragging them.
+
+[[../examples/collection-dynamic.html][CHECK IT OUT]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2008-12-25 - NEW EXAMPLE: Dynamic Collection
+....................................................................................

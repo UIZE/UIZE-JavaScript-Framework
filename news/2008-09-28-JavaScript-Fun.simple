@@ -1,0 +1,13 @@
+A new page has been added that showcases some examples of JavaScript quirkiness and possibly counter-intuitive behavior.
+
+The page has been started off with a list of interesting expressions that are all true (ie. the result of the expressions is always the boolean value =true=), with accompanying explanations of why they're true. Some of the expressions are cute or ironic to look at. Others may just be plain puzzling to the uninitiated. All in all, some fun stuff to contemplate for anyone who appreciates the JavaScript language.
+
+[[../appendixes/javascript-fun.html][CHECK IT OUT]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2008-09-28 - JavaScript Fun
+....................................................................................

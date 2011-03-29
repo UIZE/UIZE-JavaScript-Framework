@@ -1,0 +1,228 @@
+Introduction
+	The UIZE JavaScript Framework provides a system for scrunching (minifying) JavaScript code - primarily to reduce its size, but also to obfuscate it.
+
+	What is Scrunching?
+		Scrunching is the process of reducing the size of JavaScript files (making them faster to load) through the use of a number of different techniques put together.
+
+		Obfuscation is an added bonus, if you are putting a significant investment into code development. Scrunching is referred to by some as "minifying". Yes, "minify" is a commonly used term these days, but the term "scrunch" has a proud tradition amongst its users. Besides, the term "scrunch" is more colorful and has so much more attitude to it.
+
+	Where is the Scruncher?
+		The UIZE JavaScript Scruncher is implemented in the =Uize.Scruncher= package (yes, the JavaScript Scruncher *is*, itself, written in JavaScript... and, yes, the JavaScript Scruncher *can* be used to scrunch itself).
+
+	How is the Scruncher Used?
+		Web Interface
+			You can take the Scruncher for a test drive by visiting the [[../examples/javascript-scruncher.html][JavaScript Scruncher]] tool page, where it's functionality is exposed through a simple Web interface.
+
+		Build Scripts
+			However, a much more likely way to use the Scuncher is by using it as part of a build script for a Web site.
+
+			By using Windows Script Host (or some other means of running JavaScript locally in your operating system of choice), you can iterate through the files in a Web site and use the Scruncher to process the appropriate JavaScript files. The project for the <b>uize.com</b> Web site, which is downloadable in its entirety, contains build scripts written for WSH that are demonstrative of how the Scruncher can be used in this way.
+
+		Scruncher Interface
+			For details on the Scruncher's programmatic interface, consult the reference for the =Uize.Scruncher= package.
+
+	History
+		The UIZE JavaScript Scruncher has a history that dates back to 1997, when Beatnik was one of the first companies to distribute scrunched versions of JavaScript API libraries that had private identifiers automatically reduced in size through enumeration.
+
+		The Scruncher was originally developed by Chris van Rensburg while working for Beatnik and was used primarily to reduce the size of the various JavaScript libraries that made up the Music Object API. Back then, very few people had the luxury of broadband Internet connections, and the ~60Kb unscrunched size of just the base library added too much to a page's load time. Thus, the Scruncher was born and was used to scrunch the close to 40 JavaScript libraries in the Music Object API for the remaining three years of this API's life. After Beatnik, the Scruncher was once again put to good use for scrunching the libraries in the JavaScript abstraction API of Pulse Entertainment's Player product.
+
+		These days, the Scruncher is being used to scrunch all the modules in the UIZE JavaScript Framework, as well as all the JavaScript modules used throughout the `Zazzle Inc.` Web site.
+
+	How Is File Size Reduced?
+		The Scruncher is able to reduce the size of JavaScript files by performing the following key operations...
+
+		Removes Unnecessary Whitespace
+			Line Indentation
+				Well structured code contains a significant number of indentation characters. These are usually tabs, but are sometimes spaces. Either way, with scrunching these are gone.
+
+			Unnecessary Spaces Between Tokens
+				Tidy and readable code usually contains nice whitespace characters to separate things that may not need whitespace to separate them.
+
+				This might be spaces around commas in parameter lists, it might be spaces between operators and operands, etc. Whatever it is, spaces that are not syntactically necessary are gone with scrunching.
+
+			Linebreaks
+				Yes, not that many people write code entirely on a single line.
+
+				To address this shortage of one line programmers, the Scruncher can deliver the ultimate one-liner, eliminating scores of unnecessary linebreak characters when the =LineCompacting= Scruncher setting is set to =TRUE=. Consecutive statements that are split among multiple lines will be stacked together on a single line, until a maximum line length - as specified by the =MaxLineLength= Scruncher setting - is reached.
+
+			All of this whitespace can be removed and still leave you with perfectly executable code.
+
+		Removes Comments
+			Well commented code can have a significant amount of commenting.
+
+			And if your code is documented for a system that automatically extracts documentation from the source files, then the percentage of a file's size that is commenting could be quite large. That commenting doesn't benefit the user of your code.
+
+		Renames Private Identifiers
+			It is only critical to preserve the names of identifiers if those identifiers are part of a public interface.
+
+			Otherwise, identifier names can be arbitrarily changed to anything not already in use for public identifiers, as long as all instances are changed accordingly. The Scruncher generates enumerated names for private identifiers that are flagged by having a specific prefix (see the =Mappings= Scruncher setting). For example, a private identifier like =_savingsFromRemovedWhitespace= could become just =b_a3=. Names of all identifiers that are not flagged as private are left intact.
+
+			IN MORE DETAIL
+
+			Identifiers beginning with a specified namespace prefix - as specified in the =Mappings= Scruncher setting - are reduced to multi-letter permutations, using the characters =a-z=, =A-Z=, and =0-9=. Using these characters in an up to two letter identifier scheme, for example, would give a possible of =62 + 62 * 62= identifiers (=3906=). The Scruncher uses as many characters as needed to represent scrunched identifiers.
+
+			Identifiers to be scrunched to a particular target namespace prefix are enumerated, and the number for each identifier is converted to an alphanumeric word using the aforementioned 62 identifier characters. Essentially, the base 62 is used for representing the enumerated values of scrunched identifiers. The prefix that flagged the identifier for scrunching is replaced with the target namespace prefix.
+
+Writing Scruncher-ready Code
+	Writing code that is Scruncher-ready can take a little bit of getting used to, but you'll find it won't be all that long before it comes as second nature.
+
+	That said, there are a number of practical considerations worth noting, as discussed below...
+
+	Sharing a Context
+		You might find yourself in a position where multiple code libraries that are intended to interoperate wish to share the same context.
+
+		Subclasses
+			A classic case of this is one module that is a base class and another module that is a subclass of that base class.
+
+			Both modules may wish to set private properties on instances, so the private identifiers from two separate modules would share the same context - the instance. Now, because the modules are scrunched independently and the private identifier enumeration dictionaries are not shared across separate scrunch operations, there is a possibility that differently named private identifiers may be named the same in their scrunched form. This would lead to unexpected behavior (ie. bugs), since two functionally different properties of an object now share the same memory and, therefore, the two scrunched modules would tread on other's toes.
+
+			To avoid this conflict scenario, the =Mappings= Scruncher settings can be used to put the scrunched forms of identifiers under separate namespaces (scrunched identifier prefix) unique to each module. For example, the baseclass could register a Scruncher mapping of ="&#61;b"=, as in...
+
+			...................................
+			/*ScruncherSettings Mappings="=b"*/
+			...................................
+
+			The above mapping means that all identifiers that start with nothing before an underscore (eg. =_savingsFromRemovedWhitespace=) are flagged for scrunching and would be mapped to scrunched identifiers that start with "b" before an underscore (eg. =b_a3=).
+
+			Now, a subclass could avoid conflicts with the scrunched identifiers of the base class by registering the Scruncher mapping of ="&#61;c"=, as in...
+
+			...................................
+			/*ScruncherSettings Mappings="=c"*/
+			...................................
+
+			You'll see a lot of this in the modules of the UIZE class hierarchy.
+
+		Global Identifiers
+			There might be times when multiple disparate modules need to set identifiers in a universally shared context.
+
+			This might be in the global namespace, the window object, the document object, or some HTML node on which modules wish to set expando properties. In such cases, the modules could provide mappings prefixed with a unique namespace path, as in...
+
+			........................................................
+			/*ScruncherSettings Mappings="=b,MyNamespace_MyModule"*/
+			........................................................
+
+			There are two mappings in the above example. The first mapping is for private identifiers to scrunch, where =&#95;[unscrunched identifier]= is mapped to =b&#95;[scrunched identifier]=. The second mapping is for global identifiers to scrunch, where =MyNamespace_MyModule_[unscrunched identifier]= is mapped to =MyNamespace_MyModule_[scrunched identifier]=. If this seems mysterious, consult the section on =Mappings= for a more in-depth explanation.
+
+Scruncher Settings
+	Settings for the Scruncher are embedded inside JavaScript files using a special comment syntax, as shown below...
+
+	.......................................................................................
+	/*ScruncherSettings [setting0Name]="[setting0Value]" [settingNName]="[settingNValue]"*/
+	.......................................................................................
+
+	The "ScruncherSettings" comment prefix can be used with both comment styles, but it *must* start immediately after the comment characters - there can be no whitespace. Neither the "ScruncherSettings" comment prefix nor any of the setting names are case-sensitive.
+
+	Possible Settings
+		KeepHeadComment
+			Specifies whether or not the head comment in the source code should be retained in the scrunched code.
+
+			When any of the values =TRUE=, =ON=, or =1= are specified for this setting, then the head comment will be kept. Keeping the head comment is the default behavior, since it is assumed that the head comment will contain version info, credits, links, copyright notices, licensing and distribution information, etc. The head comment can span multiple lines but should be of the following form...
+
+			...............................
+			/*
+				...full of heady goodness...
+				...full of heady goodness...
+				...full of heady goodness...
+				...full of heady goodness...
+			*/
+
+			// code begins here...
+			...............................
+
+			NOTES
+			- the default value is =TRUE=
+			- values for this setting are not case-sensitive
+
+		LineCompacting
+			Specifies whether or not linebreaks should be removed and multiple successives lines compacted onto a single line.
+
+			E=, =ON=, or =1= are specified for this setting, then line compacting will be enabled. For any other value that is specified, line compacting will be disabled. If line compacting is enabled, lines will only be able to grow to as large as is specified by the =MaxLineLength= setting.
+
+			NOTES
+			- the default value is =TRUE=
+			- values for this setting are not case-sensitive
+			- see also the =MaxLineLength= setting
+
+		Mappings
+			Specifies a series of namespace mappings, between identifiers flagged for scrunching and the namespace/prefix of their scrunched forms. The value of the =Mappings= setting should be of the syntax...
+
+			...............................................................................
+			[unscrunchedPrefix0]=[scrunchedPrefix0],[unscrunchedPrefixN]=[scrunchedPrefixN]
+			...............................................................................
+
+			There can be any number of mappings, although there is often only one. It is assumed that the prefixes are separated from identifier suffixes by an underscore character, and so the underscore should not be specified in the mapping.
+
+			EXAMPLE 1
+			...................................
+			/*ScruncherSettings Mappings="=b"*/
+			...................................
+
+			The above mapping means that all identifiers that start with nothing before an underscore (eg. =_savingsFromRemovedWhitespace=) are flagged for scrunching and would be mapped to scrunched identifiers that start with "b" before an underscore (eg. =b_a3=).
+
+			EXAMPLE 2
+			.....................................................
+			/*ScruncherSettings Mappings="MyNamespace_MyModule"*/
+			.....................................................
+
+			The above mapping means that all identifiers that start with =MyNamespace_MyModule= before an underscore (eg. =MyNamespace_MyModule_globalInitializerEnabled=) are flagged for scrunching and would be mapped to scrunched identifiers that also start with =MyNamespace_MyModule= before an underscore (eg. =MyNamespace_MyModule_a3=). Basically, when the scrunched prefix part of a mapping is omitted, then it is assumed to be the same as the unscrunched prefix. This kind of mapping is useful for global identifiers, where you want to keep a sufficiently specific namespace "path" to avoid collisions in the global namespace.
+
+			No Mappings
+				If you don't specify any mappings, the Scruncher will not scrunch identifier names. You will still get the benefit of file size reduction from removing whitespace and comments, however. For code that has not been written with identifier scrunching in mind, this is the safe way to use the Scruncher to scrunch such files and get some size reduction.
+
+			NOTES
+			- the default value is =''= (an empty string)
+
+		MaxLineLength
+			Specifies the maximum length, measured in characters, that lines should be allowed to grow when the =LineCompacting= setting is set to =TRUE=.
+
+			When =LineCompacting= is set to =FALSE=, then the value of the =MaxLineLength= setting is not relevant. If lines are broken because the maximum length is reached, they are broken at syntactically safe points.
+
+			NOTES
+			- the default value is =1024=
+			- see also the =LineCompacting= setting
+
+Tips and Tricks
+	Capture Dereferencings
+		If you are writing a module that will use some other package module and make several references to it to dereference static methods or properties, you can create a private variable in your module's scope that can capture the dereferencing of the package module you'll be using.
+
+		For example, let's say that you were writing a module that would use the =Uize.Template= package and would dereference its static methods many times over. To reduce the scrunched size of your module, you could define the variable =_Uize_Template= as follows...
+
+		..............................................
+		/*** Variables for Scruncher Optimization ***/
+			var _Uize_Template = Uize.Template;
+		..............................................
+
+		Now, in your module's code you would call methods as =_Uize_Template.compile=. This technique not only reduces the size of your scrunched code, but it also has the added benefit of not repeatedly dereferencing into =Uize= first in order to get =Template=. Now, if you found yourself also using a specific static method of a package repeatedly in your code, then you could simply create a private variable to capture a reference to it, as in...
+
+		.....................................................
+		/*** Variables for Scruncher Optimization ***/
+			var
+				_Uize_Template = Uize.Template,
+				_Uize_Template_compile = _Uize_Template.compile
+			;
+		.....................................................
+
+		IMPORTANT
+
+		Avoid using this technique for static-instance methods (methods that can be used as both static methods *and* instance methods), since often these methods use the =this= value to fork their implementation between static and instance mode, and capturing a reference and calling such methods as simply functions will result in them not receiving a useful value for =this=. Consult the reference for a specific module if you're unsure about a particular method.
+
+	Knowing Scrunched Identifier Names Inside Code
+		When you write code that is destined to be scrunched, there is no way of knowing or controlling exactly what the scrunched name of an identifier flagged for scrunching will be.
+
+		It will change depending on the number of identifiers being scrunched and the order in which they are encountered when scrunching. So, you would think therefore that it is impossible in your code to generate a function dynamically that has code that references identifiers that will be scrunched. However, there is a neat little trick that can be used in those rare cases where - for example - you have a private method and you want to dynamically generate code that will call it. You still want the method to be private, since you don't want it to be part of a public interface. But, because of some aspect of your implementation, you need to be able to call back in "from the outside".
+
+		To capture the name of a private identifier that is safe to use in both unscrunched *and* scrunched code, the following trick will work...
+
+		EXAMPLE
+		.......................................................
+		_classPrototype._myPrivateMethod = function () {
+			// ......
+			// ......
+			// ......
+		};
+
+		for (var _myPrivateMethodName in {_myPrivateMethod:1});
+		.......................................................
+
+		In the example above, the =for...in= loop will iterate only once and, after it has completed, the variable =_myPrivateMethodName= will be left with the name of the private method. Because of the way the scruncher works, the identifier =_myPrivateMethod= would be scrunched to the same new enumerated form in both the assignment of the private method as well as the object used in the =for...in= loop. So, in your unscrunched code the =_myPrivateMethodName= variable will have the value ='_myPrivateMethod'=, but in the scrunched code it may have a value like ='c_f'=. Either way, it's guaranteed to be the name of your private method.
+

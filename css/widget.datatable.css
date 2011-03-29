@@ -1,0 +1,53 @@
+table.data {
+	border-collapse:collapse;
+	background:#eceff3;
+}
+table.data tr td {
+	border:1px solid #aaa;
+	text-align:center;
+}
+table.data tr.title td, table.data tr.heading td {
+	color:#000;
+	text-shadow:1px 0 1px #fff;
+	background:#fff url(../images/title-bg-shiny.gif) left top repeat-x;
+	border-bottom:1px solid #888;
+	text-align:center;
+}
+table.data tr.title td {
+	font-size:12px;
+	text-transform:uppercase;
+	letter-spacing:4px;
+	padding:4px 0 5px 0;
+}
+table.data tr.heading td {
+	font-size:11px;
+	padding:3px 8px;
+	text-transform:uppercase;
+}
+
+/*** column heading highlight states ***/
+	table.data tr td.headingOver, table.data tr td.headingLit {
+		color:#000;
+		cursor:pointer;
+	}
+	table.data tr td.headingOver {
+		background:#ddd;
+	}
+	table.data tr td.headingLit {
+		background:#ccc;
+	}
+	table.data tr.rowOver td {
+		background:#fff;
+	}
+
+table.data tr.sectionSeparator td {
+	background:#bbb;
+	font-size:1px;
+	line-height:1px;
+}
+table.data tr.rowSeparator td {
+	background:#fff;
+	font-size:0;
+	line-height:1px;
+}
+

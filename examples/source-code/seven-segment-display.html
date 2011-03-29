@@ -1,0 +1,479 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Seven Segment Display - HTML Source Code | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework HTML example source code"/>
+	<meta name="description" content="This is the source code for the Seven Segment Display example"/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../../css/page.css"/>
+	<link rel="stylesheet" href="../../css/page.source.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../../index.html" title="UIZE JavaScript Framework home"></a>
+	SOURCE CODE: Seven Segment Display
+	<div id="page-actions" class="pageActions">
+		<a href="../seven-segment-display.html" class="buttonLink">VIEW EXAMPLE</a>
+	</div>
+</h1>
+
+<pre>
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+&lt;head&gt;
+  &lt;title&gt;Seven Segment Display | JavaScript Examples | UIZE JavaScript Framework&lt;/title&gt;
+  &lt;meta name="keywords" content="widget Uize.Widget.SegmentDisplay.Seven"/&gt;
+  &lt;meta name="description" content="See an interactive demonstration of a seven segment display widget, much like the classic LED / LCD digit displays on calculators and digital watches."/&gt;
+  &lt;link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/&gt;
+  &lt;link rel="stylesheet" href="../css/page.css"/&gt;
+  &lt;link rel="stylesheet" href="../css/page.example.css"/&gt;
+  &lt;link rel="stylesheet" href="../css/widget.segmentdisplay.seven.css"/&gt;
+  &lt;style type="text/css"&gt;
+    .main a.buttonLink,
+    .main a.buttonLink:link,
+    .main a.buttonLink:visited,
+    .main a.buttonLink:hover,
+    .main a.buttonLink:active {
+      display:block;
+      margin-bottom:2px;
+      padding:4px 10px 5px 10px;
+      border-radius:7px;
+      -moz-border-radius:7px;
+      -webkit-border-radius:7px;
+      text-transform:uppercase;
+      font-size:11px;
+    }
+
+    td.pane {
+      padding:8px;
+      background:#1e252e url(../images/page-contents-bg.gif) repeat-x left top;
+      border-left:1px solid #555;
+      border-right:1px solid #222;
+      border-bottom:1px solid #000;
+    }
+    td.paneSpacer {
+      width:10px;
+    }
+
+    /*** value selector heading ***/
+      .valueSelectorHeading {
+        font-size:11px;
+        color:#000;
+        text-align:center;
+        letter-spacing:2px;
+        background:#b7babf url(../images/title-bg-brushed-metal.jpg) repeat left top;
+        padding:0;
+        margin-top:4px;
+        border:1px solid #abb;
+      }
+
+    /*** segment tables ***/
+      .segmentTable {
+        margin-top:10px;
+      }
+      .segmentTable td {
+        text-align:center;
+      }
+      .segmentTable tr.heading td {
+        color:#fff;
+      }
+      .segmentTable tr.segmentValues td {
+        background:#fff;
+        border:1px solid #bcc;
+      }
+      .segmentTable tr.segmentsStateAsHex td {
+        font-family:Courier;
+        color:#000;
+        background:#b7babf url(../images/title-bg-brushed-metal.jpg) repeat left top;
+        border:1px solid #abb;
+      }
+
+    /*** segment labels ***/
+      table.segmentLabel {
+        position:absolute;
+        width:100%;
+        height:100%;
+        cursor:pointer;
+      }
+      table.segmentLabel td {
+        font-size:16px;
+        font-weight:bold;
+        color:#000;
+        text-align:center;
+      }
+  &lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+&lt;script type="text/javascript" src="../js/Uize.js"&gt;&lt;/script&gt;
+
+&lt;script type="text/javascript"&gt;
+
+var
+  segmentThickness = 26,
+  displayWidth = 164,
+  displayHeight = 246,
+  segmentGap = 1,
+  segmentThicknessDiv2 = segmentThickness / 2,
+  segmentThicknessPlusSegmentGap = segmentThickness + segmentGap,
+  styleTag =
+    '&lt;style type="text/css"&gt;\n' +
+    '  .sevenSeg {\n' +
+    '    width:' + displayWidth + 'px;\n' +
+    '    height:' + displayHeight + 'px;\n' +
+    '  }\n' +
+    '  .sevenSegSegmentEnd {\n' +
+    '    border-width:' + segmentThicknessDiv2 + 'px;\n' +
+    '  }\n' +
+    '  .sevenSegHorzSegment {\n' +
+    '    height:' + segmentThickness + 'px;\n' +
+    '  }\n' +
+    '  .sevenSegHorzSegmentMiddle {\n' +
+    '    top:' + (displayHeight / 2 - segmentThicknessDiv2) + 'px;\n' +
+    '  }\n' +
+    '  .sevenSegSegmentLeftEnd {\n' +
+    '    left:' + segmentGap + 'px;\n' +
+    '  }\n' +
+    '  .sevenSegHorzSegment .sevenSegSegmentBar {\n' +
+    '    left:' + segmentThicknessPlusSegmentGap + 'px;\n' +
+    '    right:' + segmentThicknessPlusSegmentGap + 'px;\n' +
+    '  }\n' +
+    '  .sevenSegSegmentRightEnd {\n' +
+    '    right:' + segmentGap + 'px;\n' +
+    '  }\n' +
+    '  .sevenSegVertSegment {\n' +
+    '    width:' + segmentThickness + 'px;\n' +
+    '  }\n' +
+    '  .sevenSegSegmentTopEnd {\n' +
+    '    top:' + segmentGap + 'px;\n' +
+    '  }\n' +
+    '  .sevenSegVertSegment .sevenSegSegmentBar {\n' +
+    '    top:' + segmentThicknessPlusSegmentGap + 'px;\n' +
+    '    bottom:' + segmentThicknessPlusSegmentGap + 'px;\n' +
+    '  }\n' +
+    '  .sevenSegSegmentBottomEnd {\n' +
+    '    bottom:' + segmentGap + 'px;\n' +
+    '  }\n' +
+    '  .sevenSegVertSegmentTop .sevenSegSegmentBottomEnd {\n' +
+    '    bottom:' + (segmentGap - segmentThicknessDiv2) + 'px;\n' +
+    '  }\n' +
+    '  .sevenSegVertSegmentTop  .sevenSegSegmentBar {\n' +
+    '    bottom:' + (segmentGap + segmentThicknessDiv2) + 'px;\n' +
+    '  }\n' +
+    '  .sevenSegVertSegmentBottom .sevenSegSegmentTopEnd {\n' +
+    '    top:' + (segmentGap - segmentThicknessDiv2) + 'px;\n' +
+    '  }\n' +
+    '  .sevenSegVertSegmentBottom  .sevenSegSegmentBar {\n' +
+    '    top:' + (segmentGap + segmentThicknessDiv2) + 'px;\n' +
+    '  }\n' +
+    '&lt;/style&gt;\n'
+;
+
+document.writeln (styleTag);
+
+&lt;/script&gt;
+
+&lt;h1 class="document-title"&gt;
+  &lt;a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"&gt;&lt;/a&gt;
+  &lt;a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow"&gt;JAVASCRIPT EXAMPLES&lt;/a&gt;
+  Seven Segment Display
+  &lt;div id="page-actions" class="pageActions"&gt;
+    &lt;a href="source-code/seven-segment-display.html" class="buttonLink"&gt;SOURCE&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/h1&gt;
+
+&lt;div class="main"&gt;
+  &lt;!-- explanation copy --&gt;
+
+  &lt;div class="explanation"&gt;
+    &lt;p&gt;In this example, an instance of the &lt;a href="../reference/Uize.Widget.SegmentDisplay.Seven.html"&gt;&lt;code&gt;Uize.Widget.SegmentDisplay.Seven&lt;/code&gt;&lt;/a&gt; widget class is being used to wire up a &lt;a href="http://en.wikipedia.org/wiki/Seven-segment_display" class="externalSiteLink" target="_top"&gt;seven segment display&lt;/a&gt; UI. The seven segment display is an old style of display device for displaying decimal numerals and a limited number of alphabetical characters (often utilizing LED or LCD electonics), which is often found in displays in pocket calculators, VHS and DVD players, digital watches, audio recording hardware, etc. The seven segment display shown in this example is interactive. You can choose a value to display by using the &lt;b&gt;"VALUE SELECTOR"&lt;/b&gt; droplist. You can toggle the lit state of individual segments of the display by clicking directly on the segments of the display, or you can click on the binary digits in the ABCDEFG and GFEDCBA segments state tables. Various buttons are also provided in the &lt;b&gt;"SEGMENTS STATE"&lt;/b&gt; pane to let you easily change the lit state of all segments at once. To see animations of the display state, use the buttons in the &lt;b&gt;"ANIMATE VALUE"&lt;/b&gt; pane to the right.&lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;!-- UI for seven segment display and interactive tests --&gt;
+    &lt;form&gt;
+    &lt;table cellspacing="0" style="margin:auto;"&gt;
+      &lt;tr&gt;
+        &lt;td class="fancyHeading"&gt;Display&lt;/td&gt;
+        &lt;td class="paneSpacer"&gt;&lt;/td&gt;
+        &lt;td class="fancyHeading"&gt;Segments State&lt;/td&gt;
+        &lt;td class="paneSpacer"&gt;&lt;/td&gt;
+        &lt;td class="fancyHeading"&gt;Animate Value&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr valign="top"&gt;
+        &lt;td class="pane" style="background:#000;"&gt;
+          &lt;div id="page_sevenSegmentDisplay-shell" style="padding:12px;"&gt;&lt;/div&gt;
+        &lt;/td&gt;
+        &lt;td class="paneSpacer"&gt;&lt;/td&gt;
+        &lt;td class="pane"&gt;
+          &lt;div class="valueSelectorHeading"&gt;VALUE SELECTOR&lt;/div&gt;
+          &lt;select id="page-valueSelector" style="width:100%;"&gt;&lt;/select&gt;
+          &lt;br/&gt;
+
+          &lt;table cellspacing="0" class="segmentTable" style="width:100%;"&gt;
+            &lt;tr class="heading"&gt;
+              &lt;td&gt;A&lt;/td&gt;
+              &lt;td&gt;B&lt;/td&gt;
+              &lt;td&gt;C&lt;/td&gt;
+              &lt;td&gt;D&lt;/td&gt;
+              &lt;td&gt;E&lt;/td&gt;
+              &lt;td&gt;F&lt;/td&gt;
+              &lt;td&gt;G&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr class="segmentValues"&gt;
+              &lt;td id="page-abcdefgSegmentsA"&gt;0&lt;/td&gt;
+              &lt;td id="page-abcdefgSegmentsB"&gt;0&lt;/td&gt;
+              &lt;td id="page-abcdefgSegmentsC"&gt;0&lt;/td&gt;
+              &lt;td id="page-abcdefgSegmentsD"&gt;0&lt;/td&gt;
+              &lt;td id="page-abcdefgSegmentsE"&gt;0&lt;/td&gt;
+              &lt;td id="page-abcdefgSegmentsF"&gt;0&lt;/td&gt;
+              &lt;td id="page-abcdefgSegmentsG"&gt;0&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr class="segmentsStateAsHex"&gt;
+              &lt;td id="page-abcdefgHex" colspan="7"&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+          &lt;/table&gt;
+
+          &lt;table cellspacing="0" class="segmentTable" style="width:100%; margin-bottom:10px;"&gt;
+            &lt;tr class="heading"&gt;
+              &lt;td&gt;G&lt;/td&gt;
+              &lt;td&gt;F&lt;/td&gt;
+              &lt;td&gt;E&lt;/td&gt;
+              &lt;td&gt;D&lt;/td&gt;
+              &lt;td&gt;C&lt;/td&gt;
+              &lt;td&gt;B&lt;/td&gt;
+              &lt;td&gt;A&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr class="segmentValues"&gt;
+              &lt;td id="page-gfedcbaSegmentsG"&gt;0&lt;/td&gt;
+              &lt;td id="page-gfedcbaSegmentsF"&gt;0&lt;/td&gt;
+              &lt;td id="page-gfedcbaSegmentsE"&gt;0&lt;/td&gt;
+              &lt;td id="page-gfedcbaSegmentsD"&gt;0&lt;/td&gt;
+              &lt;td id="page-gfedcbaSegmentsC"&gt;0&lt;/td&gt;
+              &lt;td id="page-gfedcbaSegmentsB"&gt;0&lt;/td&gt;
+              &lt;td id="page-gfedcbaSegmentsA"&gt;0&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr class="segmentsStateAsHex"&gt;
+              &lt;td id="page-gfedcbaHex" colspan="7"&gt;&lt;/td&gt;
+            &lt;/tr&gt;
+          &lt;/table&gt;
+
+          &lt;a id="page-allSegmentsOn" href="javascript://" class="buttonLink"&gt;all segments on&lt;/a&gt;
+          &lt;a id="page-allSegmentsOff" href="javascript://" class="buttonLink"&gt;all segments off&lt;/a&gt;
+          &lt;a id="page-invertSegmentsState" href="javascript://" class="buttonLink"&gt;invert all segments&lt;/a&gt;
+        &lt;/td&gt;
+        &lt;td class="paneSpacer"&gt;&lt;/td&gt;
+        &lt;td class="pane"&gt;
+          &lt;a id="page-animate0to9" href="javascript://" class="buttonLink "&gt;count up from 0 to 9&lt;/a&gt;
+          &lt;a id="page-animate9to0" href="javascript://" class="buttonLink "&gt;count down from 9 to 0&lt;/a&gt;
+          &lt;a id="page-animateAllSegmentsOn" href="javascript://" class="buttonLink "&gt;animate all segments on&lt;/a&gt;
+          &lt;a id="page-animateClockwise" href="javascript://" class="buttonLink "&gt;animate clockwise&lt;/a&gt;
+          &lt;a id="page-animateCounterClockwise" href="javascript://" class="buttonLink "&gt;animate counter-clockwise&lt;/a&gt;
+          &lt;a id="page-animateMoveUpwards" href="javascript://" class="buttonLink "&gt;animate move upwards&lt;/a&gt;
+          &lt;a id="page-animateMoveDownwards" href="javascript://" class="buttonLink "&gt;animate move downwards&lt;/a&gt;
+          &lt;a id="page-animEight" href="javascript://" class="buttonLink "&gt;anim-eight&lt;/a&gt;
+          &lt;a id="page-animateBlinky" href="javascript://" class="buttonLink "&gt;blinky&lt;/a&gt;
+          &lt;a id="page-animateThroughAll" href="javascript://" class="buttonLink "&gt;animate through all values&lt;/a&gt;
+        &lt;/td&gt;
+      &lt;/tr&gt;
+    &lt;/table&gt;
+    &lt;/form&gt;
+&lt;/div&gt;
+
+&lt;!-- JavaScript code to make the static slider HTML "come alive" --&gt;
+
+&lt;script type="text/javascript"&gt;
+
+Uize.module ({
+  required:[
+    'UizeDotCom.Page.Example.library',
+    'UizeDotCom.Page.Example',
+    'Uize.Widget.SegmentDisplay.Seven',
+    'Uize.Templates.SevenSegmentDisplay',
+    'Uize.Node',
+    'Uize.Fade',
+    'Uize.Fade.xFactory',
+    'Uize.Curve'
+  ],
+  builder:function () {
+    /*** create the example page widget ***/
+      var page = window.page = new UizeDotCom.Page.Example;
+
+    /*** build the values set for the value selector (before wiring the UI, so there's no UI updating) ***/
+      var
+        alphaValues = [],
+        miscCharValues = [],
+        hexValues = []
+      ;
+      for (var segmentsState = -1; ++segmentsState &lt; 128;) {
+        var value = Uize.Widget.SegmentDisplay.Seven.getValueFromSegmentsState (segmentsState);
+        (value.length &gt; 1 ? hexValues : /^[0-9a-zA-Z]$/.test (value) ? alphaValues : miscCharValues).push (value);
+      }
+      alphaValues.sort ();
+      var values = alphaValues.concat (miscCharValues,hexValues);
+
+    /*** add the Uize.Widget.SegmentDisplay.Seven child widget ***/
+      var sevenSegmentDisplay = page.addChild (
+        'sevenSegmentDisplay',
+        Uize.Widget.SegmentDisplay.Seven,
+        {html:Uize.Templates.SevenSegmentDisplay,built:false}
+      );
+
+    /*** wire up the page widget ***/
+      page.wireUi ();
+
+    /*** wire toggling behavior for individual segments of seven segment display ***/
+      sevenSegmentDisplay.forEachSegment (
+        function (segmentNo,segmentCode) {
+          var segmentNode = this.getNode ('segment' + segmentCode);
+          page.injectNodeHtml (
+            segmentNode,
+            '&lt;table cellspacing="0" cellpadding="0" class="segmentLabel"&gt;' +
+              '&lt;tr valign="center"&gt;' +
+                '&lt;td&gt;' + segmentCode + '&lt;/td&gt;' +
+              '&lt;/tr&gt;' +
+            '&lt;/table&gt;'
+          );
+          this.setNodeProperties (
+            segmentNode,
+            {title:'Segment ' + segmentCode + ' (click to toggle state)'}
+          );
+          this.wireNode (
+            segmentNode,
+            'click',
+            function () {sevenSegmentDisplay.toggleSegmentState (segmentNo)}
+          );
+        }
+      );
+
+    /*** wire up ABCDEFG and GFEDCBA segment tables ***/
+      function updateSegmentTables () {
+        sevenSegmentDisplay.forEachSegment (
+          function (segmentNo,segmentCode) {
+            page.setNodeInnerHtml (
+              ['abcdefgSegments' + segmentCode,'gfedcbaSegments' + segmentCode],
+              +this.getSegmentState (segmentNo)
+            );
+          }
+        );
+        page.setNodeInnerHtml ('abcdefgHex','HEX VALUE: ' + sevenSegmentDisplay.getSegmentsStateAsHex ());
+        page.setNodeInnerHtml ('gfedcbaHex','HEX VALUE: ' + sevenSegmentDisplay.getSegmentsStateAsHex (true));
+      }
+      sevenSegmentDisplay.forEachSegment (
+        function (segmentNo,segmentCode) {
+          var segmentNodeNames = ['abcdefgSegments' + segmentCode,'gfedcbaSegments' + segmentCode];
+          page.setNodeProperties (segmentNodeNames,{title:'Click to toggle state'});
+          page.setNodeStyle (segmentNodeNames,{cursor:'pointer'});
+          page.wireNode (
+            segmentNodeNames,
+            'click',
+            function () {sevenSegmentDisplay.toggleSegmentState (segmentNo)}
+          );
+        }
+      );
+
+    /*** populate and wire up value selector ***/
+      /*** populate values for the value selector ***/
+        var valueSelectorOptions = page.getNode ('valueSelector').options;
+        for (var valueNo = -1; ++valueNo &lt; 128;) {
+          var value = values [valueNo];
+          valueSelectorOptions [valueSelectorOptions.length] = new Option (
+            (
+              /^[0-9]$/.test (value)
+                ? 'digit'
+                : /^[a-z]$/.test (value)
+                  ? 'lowercase'
+                  : /^[A-Z]$/.test (value)
+                    ? 'capital'
+                    : value.length == 1
+                      ? 'punctuation'
+                      : 'hex'
+            ) + ': ' + value,
+            value
+          );
+        }
+  
+      /*** wire events for the value selector ***/
+        function syncSeventSegmentDisplayToValueSelector () {
+          sevenSegmentDisplay.set ({value:page.getNodeValue ('valueSelector')});
+        }
+        page.wireNode ('valueSelector','change',syncSeventSegmentDisplayToValueSelector);
+
+      /*** wire seven segment display widget to sync value selector ***/
+        sevenSegmentDisplay.wire (
+          'Changed.value',
+          function () {
+            page.setNodeValue ('valueSelector',sevenSegmentDisplay + '');
+            updateSegmentTables ();
+          }
+        );
+
+    /*** wire up all on, all off, and invert links ***/
+      page.wireNode ('allSegmentsOn','click',function () {sevenSegmentDisplay.setAllSegmentsState (1)});
+      page.wireNode ('allSegmentsOff','click',function () {sevenSegmentDisplay.setAllSegmentsState (0)});
+      page.wireNode ('invertSegmentsState','click',function () {sevenSegmentDisplay.invertAllSegmentsState ()});
+
+    /*** wire up animation links ***/
+      function wireAnimateThroughValuesLink (nodeName,values,duration,repeats) {
+        page.wireNode (
+          nodeName,
+          'click',
+          function () {
+            Uize.Fade.fade (
+              function (valueNo) {sevenSegmentDisplay.set ({value:values [valueNo]})},
+              0,
+              values.length - 1,
+              duration,
+              {
+                quantization:1,
+                curve:repeats &amp;&amp; repeats &gt; 1 ? Uize.Curve.saw (repeats,1) : null
+              }
+            );
+          }
+        );
+      }
+      wireAnimateThroughValuesLink ('animate0to9',[0,1,2,3,4,5,6,7,8,9],3000);
+      wireAnimateThroughValuesLink ('animate9to0',[9,8,7,6,5,4,3,2,1,0],3000);
+      wireAnimateThroughValuesLink ('animateAllSegmentsOn',[' ','0x40','0x60','7',']','0x7c','0','8'],3000);
+      wireAnimateThroughValuesLink ('animateClockwise',['0x40','0x20','0x10','_','i','0x02',],2000,5);
+      wireAnimateThroughValuesLink ('animateCounterClockwise',['0x40','0x02','i','_','0x10','0x20'],2000,5);
+      wireAnimateThroughValuesLink ('animateMoveUpwards',['_','0x14','-','0x22','0x40'],2000,5);
+      wireAnimateThroughValuesLink ('animateMoveDownwards',['0x40','0x22','-','0x14','_'],2000,5);
+      wireAnimateThroughValuesLink ('animEight',['_','i','-','0x20','0x40','0x02','-','0x10'],4000,5);
+      wireAnimateThroughValuesLink (
+        'animateBlinky',
+        ['0x06',' ','0x06',' ','0x06',' ','0x49',' ','0x49',' ','0x49',' ',1,' ',1,' ',1,' '],
+        2000
+      );
+      wireAnimateThroughValuesLink ('animateThroughAll',values,15000);
+
+    /*** initialize ***/
+      syncSeventSegmentDisplayToValueSelector ();
+  }
+});
+
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+
+</pre>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.library',
+		'UizeDotCom.Page'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page).wireUi ()}
+});
+
+</script>
+
+</body></html>

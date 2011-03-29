@@ -1,0 +1,18 @@
+Documentation has been added for...
+
+- the =Uize.Date.getDaysInMonth= and =Uize.Date.isLeapYear= static methods of the =Uize.Date= module
+- the =Uize.Node.Form= package module
+- the =buildHtml=, =inform=, =showNode=, and =unwireNodeEvent= instance methods, the =parent= instance property, the =localized= and =name= set-get properties, and the root and =shell= implied nodes of the =Uize.Widget= class
+
+The following corrections have been made...
+
+- an error in the JavaScript Widgets explainer has been corrected
+- inaccurate descriptions of the =value= and =values= set-get properties of the =Uize.Widget.Options= class have been corrected
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-04-15 - DOCUMENTATION UPDATES
+....................................................................................

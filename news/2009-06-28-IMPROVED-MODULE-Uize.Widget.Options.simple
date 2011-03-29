@@ -1,0 +1,14 @@
+The =Uize.Widget.Options= class has been improved with the addition of the =optionWidgetClass=, =optionWidgetProperties=, and =setValueOnMouseover= set-get properties, and the =forAll= instance method.
+
++. The newly added =optionWidgetClass= set-get property lets you specify the widget class that should be used for the option buttons.
++. The newly added =optionWidgetProperties= set-get property lets you specify values for set-get properties that should be used when creating option button child widgets.
++. The newly added =setValueOnMouseover= set-get property lets you specify whether or not the value of the =value= set-get property should be set when the user rests the mouse over an option, instead of the values of the =tentativeValue= and =tentativeValueNo= set-get properties.
++. The newly added =forAll= instance method is an iterator method that is provided as a convenience and that lets you iterate over all the option buttons for the instance.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-06-28 - IMPROVED MODULE: Uize.Widget.Options
+....................................................................................

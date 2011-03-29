@@ -1,0 +1,90 @@
+#page-index {
+	padding:0;
+	margin:0 15px;
+}
+
+/*** list items ***/
+	#page-index li div {
+		padding:10px 0;
+	}
+	#page-index li {
+		list-style-type:none;
+		list-style-position:inside;
+		border:2px solid #fff;
+		border-radius:10px;
+		-moz-border-radius:10px;
+		-webkit-border-radius:10px;
+		padding:0;
+		margin-bottom:10px;
+		background:#cfd3d9;
+	}
+	#page-index li .itemTitle {
+		background:#e6eaee;
+		padding:3px 0 5px 10px;
+		border-top-left-radius:8px;
+		-moz-border-radius-topleft:8px;
+		-webkit-border-top-left-radius:8px;
+		border-top-right-radius:8px;
+		-moz-border-radius-topright:8px;
+		-webkit-border-top-right-radius:8px;
+	}
+	#page-index li .itemBody {
+		padding:10px;
+	}
+	#page-index li a {
+		font-size:12px;
+		letter-spacing:1px;
+		margin-right:0;
+	}
+	#page-index li img.fileThumbnail {
+		float:right;
+		border:none;
+		width:96px;
+		height:96px;
+		background:#000;
+		margin-bottom:12px;
+		border:1px solid #aaa;
+		box-shadow:4px 4px 6px rgba(0,0,0,.5);
+		-moz-box-shadow:4px 4px 6px rgba(0,0,0,.5);
+		-webkit-box-shadow:4px 4px 6px rgba(0,0,0,.5);
+	}
+
+/*** arrow ***/
+	span.arrow {
+		font-size:9px;
+		padding:0 12px 0px 0;
+		background:transparent url(../images/icons/black-dotty-arrow-right.gif) no-repeat right top;
+	}
+
+/*** tour promo (for examples index pages) ***/
+	.tourPromo {
+		background:#e6ecec;
+		margin-top:10px;
+		padding:10px;
+		border-radius:10px;
+		-moz-border-radius:10px;
+		-webkit-border-radius:10px;
+		border:1px solid #abb;
+	}
+	.tourPromo .tourPromoHeading {
+		font-size:12px;
+		text-transform:uppercase;
+		letter-spacing:5px;
+		text-align:center;
+		padding:4px;
+		border:1px solid #abb;
+		border-radius:4px;
+		-moz-border-radius:4px;
+		-webkit-border-radius:4px;
+		background:#b7babf url(../images/title-bg-brushed-metal.jpg) repeat left top;
+	}
+	.tourPromo .tourPromoText {
+		font-size:11px;
+		letter-spacing:1px;
+		line-height:15px;
+		padding:7px 0 10px 0;
+	}
+	.tourPromo .buttonLink {
+		float:right;
+	}
+

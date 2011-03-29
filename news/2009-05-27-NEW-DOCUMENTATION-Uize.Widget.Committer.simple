@@ -1,0 +1,13 @@
+Reference documentation has been added for the =Uize.Widget.Committer= module.
+
+The =Uize.Widget.Committer= module implements a subclass of =Uize.Widget= that can be used for watching a set of properties and committing them when a button is clicked. In a common case, the set of properties being watched might be the =value= set-get properties of a bunch of form input widgets. The committer instance acts as a conduit or interface between the watched properties and the code that cares about watching them.
+
+[[Uize.Widget.Committer][LEARN MORE]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-05-27 - NEW DOCUMENTATION: Uize.Widget.Committer
+....................................................................................

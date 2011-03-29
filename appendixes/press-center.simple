@@ -1,0 +1,172 @@
+Introduction
+	This document offers materials that may be useful to anyone reviewing or reporting on the UIZE JavaScript Framework, including logo images and blurbs.
+
+Blurb
+	The following blurb can be used when describing / summarizing the UIZE JavaScript Framework. Use just the first paragraph, or use both paragraphs if a more extensive description is called for.
+
+	A BLURB ABOUT UIZE
+
+	The UIZE JavaScript Framework is a free-to-use, actively developed, open source, object-oriented, server-agnostic JavaScript framework designed to facilitate development of JavaScript based applications for a range of computing platforms and a range of host environments, including Rich Internet Applications built on Web standards supported by contemporary web browsers, build script applications written for Microsoft's Windows Script Host technology, and applications for other host environments that support the ECMA-262 standard upon which JavaScript is based, such as Adobe Photoshop with its ExtendScript system.
+
+	UIZE does not extend native objects, and supports interoperability with other libraries that adhere to this principle. UIZE is in active development, by a team of experienced programmers, and is used on zazzle.com - a high profile, consumer facing, e-commerce Web site. UIZE is server agnostic - so you can use it with any choice of server language and platform, including Java (Apache TomCat), C# (IIS / ASP.NET), Visual Basic (IIS / ASP), C/C++, Perl (Perl / Apache), PHP, Ruby (Ruby on Rails), Python, etc. UIZE implements systems for JavaScript Inheritance, JavaScript Events, JavaScript Modules, JavaScript Libraries, JavaScript Templates, JavaScript Widgets, JavaScript Localization, JavaScript Documentation, JavaScript Code Compression, JavaScript Build Scripts, and many more powerful capabilities.
+
+	MORE INFO
+
+	For more material to draw from when describing or reviewing the UIZE JavaScript Framework, consult the explainers [[../explainers/introduction-to-uize.html][Introduction to UIZE]] and [[../explainers/overview-of-features.html][Overview of Features]]. Feel free to hack and reuse any copy you may find in these documents, and any other documents throughout the *uize.com* Web site.
+
+Logo Images
+	License is provided for the use of the UIZE logo images listed below - in any material that refers to or discusses the UIZE JavaScript Framework (such as blog postings, forum postings, news postings, endorsements, promotional materials, etc.).
+
+	Small Sizes
+		........................................................
+		<< image >>
+
+		url: ../images/uize-25x25.gif
+		title: UIZE Logo
+		subtitle: 25x25
+		........................................................
+
+		........................................................
+		<< image >>
+
+		url: ../images/uize-logo-38x38.gif
+		title: UIZE Logo
+		subtitle: 38x38
+		........................................................
+
+		........................................................
+		<< image >>
+
+		url: ../images/uize-logo-40x40.gif
+		title: UIZE Logo
+		subtitle: 40x40
+		........................................................
+
+		........................................................
+		<< image >>
+
+		url: ../images/uize-logo-42x42.gif
+		title: UIZE Logo
+		subtitle: 42x42
+		........................................................
+
+		........................................................
+		<< image >>
+
+		url: ../images/uize-50x50.gif
+		title: UIZE Logo
+		subtitle: 50x50
+		........................................................
+
+	Medium and Large Sizes
+		........................................................
+		<< image >>
+
+		url: ../images/uize-100x100.gif
+		title: UIZE Logo
+		subtitle: 100x100
+		........................................................
+
+		........................................................
+		<< image >>
+
+		url: ../images/uize-200x200.gif
+		title: UIZE Logo
+		subtitle: 200x200
+		........................................................
+
+		........................................................
+		<< image >>
+
+		url: http://www.uize.com/images/uize-400x400.gif
+		title: UIZE Logo
+		subtitle: 400x400
+		........................................................
+
+	DOWNLOADING
+
+	To download an image, right-click on the links and choose the option from the contextual menu to save the link to your local machine. Or, if you click on a logo image to view it, you should be able to right click on the image and choose the option from the contextual menu to save the image to your local machine.
+
+Coverage
+	The UIZE JavaScript Framework has been covered and reviewed in influential Web 2.0 / Ajax community Web sites.
+
+	2010-01-13 - Virtual DOM Events (ajaxian.com)
+		Dion Almaer, co-founder of *ajaxian.com*, reports on the UIZE JavaScript Framework's support for a useful new construct called [[../reference/Uize.Node.VirtualEvent.html][Virtual DOM Events]].
+
+		Response to the article by readers is overwhelmingly positive, with a high rating from many votes and a healthy serving of lively comments and feedback. From the feedback, it is clear that the folks behind YUI are thinking along similar lines, although their "synthetic events" feature is not as fleshed out at the time, nor is it thoroughly documented like the UIZE Virtual DOM Events feature. This article struck a chord, and it took all of a day for developers behind jQuery to transcode the UIZE implementation and offer equivalent features. Well, you know what they say: "Imitation is the sincerest form of flattery". UIZE considers itself flattered. Dion links to two examples on the *uize.com* Web site in this article: the [[examples/edge-virtual-dom-events.html][Edge Virtual DOM Events]] and [[examples/virtual-dom-events.html][Virtual DOM Events]] examples.
+
+		[[http://ajaxian.com/archives/virtual-dom-events][READ ARTICLE]]
+
+	2009-11-13 - UIZE JavaScript Framework - part 2 (ASCII.jp)
+		Close on the heels of their first article on the UIZE JavaScript Framework, that provided a high level overview and introduction to the framework, the second article on the Japanese Web site ASCII.jp digs deeper, exploring the lush image wipe animation effects offered as part of the framework.
+
+		The writers do a great job of capturing snapshots of image wipes in progress to complement the sample code provided. Another nice look at the power of UIZE from ASCII.jp.
+
+		[[http://ascii.jp/elem/000/000/475/475252/][READ ARTICLE]]
+
+	2009-11-11 - Top 10 JavaScript Frameworks by Google (tripwiremagazine.com)
+		The UIZE JavaScript Framework gets a great billing in this article by the popular Tripwire Magazine Web site.
+
+		UIZE features seventh in the list of ten top JavaScript frameworks presented in this article, alongside the likes of jQuery, mootools, prototype, dojo Toolkit, script.aculo.us, ExtJS, YUI, Archetype, and qooxdoo. UIZE comes in just after Ext JS, and before YUI Library! Not a bad place to be at all.
+
+		[[http://www.tripwiremagazine.com/tools/developer-toolbox/top-10-javascript-frameworks-by-google.html][READ ARTICLE]]
+
+	2009-11-01 - UIZE JavaScript Framework - part 1 (ASCII.jp)
+		The Japanese Web site ASCII.jp provides a nice multi-page review of the UIZE JavaScript Framework, complete with their own samples.
+
+		This review provides an overview of the functionality of the framework, looks at a few of the examples provided on the uize.com Web site, discusses download and setup, and takes readers through the basic steps of setting up a page to use the framework, with an example provided that performs an images zoom animation upon loading. Overall, a very well considered and well written article.
+
+		[[http://ascii.jp/elem/000/000/466/466515/][READ ARTICLE]]
+
+	2009-08-11 - UIZE - An object oriented JavaScript framework (feedmyapp.com)
+		A basic FYI review piece on the UIZE JavaScript Framework on the Web 2.0 resources Web site *feedmyapp.com*.
+
+		[[http://www.feedmyapp.com/p/a/uize-an-object-oriented-javascript-framework/11990][READ ARTICLE]]
+
+	2009-08-04 - Curve Explorer: Visualize with Ease (ajaxian.com)
+		Dion Almaer of *ajaxian.com* fame reports on the release of the UIZE's [[../examples/curve-explorer.html][Curve Explorer tool]] - a tool that lets users experiment with and preview curve functions that can be used to drive animation effects.
+
+		From the article: "Chris Vanrensburg has created a curve explorer that gives you a nice visualization of curve functions which are used for animations (easing and the like)." It's fun to play with curves - especially if you can see them plotted as you tweak parameters, or see how they affect motion with an animation, or what they look like as a color gradient. This review explores some of the background behind the development of the curve explorer tool and discusses some of the design objectives. This article received overwhelmingly positive feedback from the community of Ajaxian readers.
+
+		[[http://www.ajaxian.com/archives/curve-explorer-visualize-with-ease][READ ARTICLE]]
+
+	2008-12-05 - Mozilla, Zazzle, and UIZE (ajaxian.com)
+		A very favorable review of Mozilla's integration with `Zazzle Inc.` for the creation of an online store featuring original creative interpretations of the Firefox brand by a community of designers.
+
+		From the article: "Zazzle is built on the UIZE (pronounced 'you-eyes') Ajax framework which we covered briefly in 2006 ... it's got a pretty nice website, docs, widgets, basic effects, an event system, and an inheritance system. We'll have to give it a closer look!"
+
+		[[http://ajaxian.com/archives/mozilla-zazzle-and-uize][READ ARTICLE]]
+
+	2008-12-01 - Usefull Javascript Frameworks (imindya.com)
+		UIZE featured in a list of 15 JavaScript frameworks, side by side with the likes of many notables such as Prototype + script.aculo.us, Moo Tools, jQuery, Dojo Toolkit, ASP.NET Ajax Framework, Google Web Toolkit, and YUI (Yahoo! User Interface Library).
+
+		[[http://imindya.com/?p=5][READ ARTICLE]]
+
+	2008-11-17 - Shopping cart zoom UI (ajaxian.com)
+		A very positive review of the innovative grid zoom feature that was rolled out in product grids across the entire `Zazzle Inc.` Web site, and that was built on the UIZE JavaScript Framework.
+
+		Community response was also very positive, with comments like "What's great about this implementation is that they quickly identified the Lightbox effect being problematic. Much too often we see sites use the Lightbox just because it's available and may semi-serve the purpose, ignoring all its faults. Kudos to Zazzle creating an effective solution that minimizes the 'cons' (such as 'minefields')."
+
+		[[http://ajaxian.com/archives/shopping-cart-zoom-ui][READ ARTICLE]]
+
+	2008-09-03 - 10 Promising JavaScript Frameworks (sixrevisions.com)
+		UIZE featured in a list of 10 up-and-coming JavaScript frameworks, including the likes of Adobe's Spry Framework for Ajax and qooxdoo.
+
+		From the article: "UIZE (pronounced 'you eyes') is another JavaScript framework the emphasizes the creation of full-on rich internet applications (RIA) as opposed to basic effects and widgets/components on a web page."
+
+		[[http://sixrevisions.com/javascript/promising_javascript_frameworks/][READ ARTICLE]]
+
+	2006-06-02 - UIZE: Javascript UI Toolkit (ajaxian.com)
+		A very early review of the UIZE JavaScript Framework, before it was fleshed out and made available as open source software.
+
+		From the article: "There are some nice widgets here... What's really neat, though, from an eye candy perspective, is the 'Wipe' effects - visual transitions from one image to another."
+
+		[[http://ajaxian.com/archives/uize-javascript-ui-toolkit][READ ARTICLE]]
+
+	2006-06-05 - UIZE (web2weblog.com)
+		A very brief mention of the UIZE JavaScript Framework on the site *web2weblog.com*, but featuring high praise for the great JavaScript animation effects available in the framework.
+
+		From the article: "A very impressive API hs been released recently : UIZE. Even if you just have a quick peek at the website you can see what it is all about : eye-candy without limits."
+
+		[[http://www.web2weblog.com/50226711/uize.php][READ ARTICLE]]
+

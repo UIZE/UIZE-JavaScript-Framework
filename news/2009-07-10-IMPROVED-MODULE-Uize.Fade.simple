@@ -1,0 +1,27 @@
+The =Uize.Fade= module has been improved with the addition of a new =curve= set-get property, a new =Uize.Fade.celeration= static method, and with a more robust implementation for the =inProgress= set-get property.
+
+New curve Set-get Property
+	The new =curve= set-get property lets you specify a curve function in order to achieve a wide variety of different kinds of non-linear fade effects, including effects like bounce, springiness, wobble, elasticity, etc.
+
+	When setting a value for the =curve= property, you can provide your own hand-rolled curve function, or you can pick from the many convenient curve function generators provided in the =Uize.Curve= and =Uize.Curve.Rubber= modules. Even more complex curve functions can be generated using the versatile curve function modifiers provided in the =Uize.Curve.Mod= module. Now there's no more excuse to have boring animations.
+
+Set-get Properties Deprecated
+	With the addition of the more versatile =curve= set-get property, the =acceleration= and =deceleration= set-get properties have been deprecated.
+
+	These properties are still supported for backwards compatibility, but will at some point be eliminated. Setting values for these properties will have the effect of creating a curve function using the new =Uize.Fade.celeration= static method and then setting the curve function created as the value of the new =curve= property.
+
+New Uize.Fade.celeration Static Method
+	With the introduction of the new =curve= set-get property and the deprecation of the =acceleration= and =deceleration= set-get properties, the new =Uize.Fade.celeration= static method has been introduced as a way of generating the same type of acceleration/deceleration curve functions that were implied by setting values of the =acceleration= and =deceleration= properties.
+
+More Robust inProgress Set-get Property
+	The implementation of the =inProgress= set-get property has been improved to be more robust.
+
+	It is now possible to start and stop fades simply by setting the value of the inProgress set-get property - one no longer has to use the =start= and =stop= instance methods. To start a fade you could use the statement =myFade.set ({inProgress:true})=, and to stop a fade you could use the statement =myFade.set ({inProgress:false})=. Using the =start= instance method can still be useful in some cases, as it has the effect of first stopping the current fade. You can also use its optional =fadePropertiesOBJ= parameter to specify properties for the new fade process.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-07-10 - IMPROVED MODULE: Uize.Fade
+....................................................................................

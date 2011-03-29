@@ -1,0 +1,146 @@
+.calendarContainer {
+	background:#adbebf url(../images/brushed-metal.jpg) repeat left top;
+	width:150px;
+	height:145px;
+	position:relative;
+	border:1px solid #abb;
+	border-color:#abb #899 #899 #abb;
+}
+
+.calendarContainer a,
+.calendarContainer a:link,
+.calendarContainer a:visited,
+.calendarContainer a:hover,
+.calendarContainer a:active {
+	text-decoration:none;
+	border:none;
+}
+
+/*** calendar controls ***/
+	.calendarControls {
+		background:#b7babf url(../images/title-bg-brushed-metal.jpg) repeat left top;
+	}
+	.calendarControls span {
+		display:inline;
+	}
+	.calendarControls .calendarIndicator {
+		display:block;
+		position:relative;
+		padding:5px 0 0 0;
+		text-align:center;
+		width:150px;
+		top:2px;
+		font-size:11px;
+	}
+	.calendarControl {
+		display:block;
+		position:absolute;
+		text-align:center;
+		height:15px;
+		width:15px;
+		top:2px;
+		color:#fff;
+	}
+
+	/*** styling common to year and month navigation ***/
+		.calendarControls .previousMonth,
+		.calendarControls .nextMonth,
+		.calendarControls .previousYear,
+		.calendarControls .nextYear {
+			top:5px;
+			font-size:13px;
+			color:#666;
+			text-shadow:0 -1px 2px #fff, 0 1px 2px #fff;
+		}
+		.calendarControls .previousMonthOver,
+		.calendarControls .previousMonthActive,
+		.calendarControls .previousYearOver,
+		.calendarControls .previousYearActive,
+		.calendarControls .nextMonthOver,
+		.calendarControls .nextMonthActive,
+		.calendarControls .nextYearOver,
+		.calendarControls .nextYearActive {
+			color:#333;
+			text-decoration:none;
+		}
+		.calendarControls .previousMonthActive,
+		.calendarControls .previousYearActive {
+			text-indent:-3px;
+		}
+		.calendarControls .nextMonthActive,
+		.calendarControls .nextYearActive {
+			text-indent:3px;
+		}
+		.calendarControls .previousMonthGrayed,
+		.calendarControls .nextMonthGrayed,
+		.calendarControls .previousYearGrayed,
+		.calendarControls .nextYearGrayed {
+			color:#bbb;
+			text-shadow:0 -1px 2px #eee, 0 1px 2px #eee;
+			text-decoration:none;
+		}
+
+	/*** styling specific to month navigation ***/
+		.calendarControls .previousMonth {
+			left:19px;
+		}
+		.calendarControls .nextMonth {
+			right:19px;
+		}
+
+	/*** styling specific to year navigation ***/
+		.calendarControls .previousYear,
+		.calendarControls .nextYear {
+			font-size:18px;
+			top:1px;
+		}
+		.calendarControls .previousYear {
+			left:4px;
+		}
+		.calendarControls .nextYear {
+			right:4px;
+		}
+
+/*** grid ***/
+	div.calendarGrid {
+		text-align:center;
+	}
+	div.calendarGrid td, .calendarGrid th {
+		padding:3px 5px;
+		font-size:11px;
+		font-weight:bold;
+		text-shadow:0 -1px 1px #fff, 0 1px 1px #fff;
+	}
+	div.calendarGrid td a {
+		color:#344;
+	}
+	.calendarGrid th {
+		background:#c4cdd4 url(../images/button-bg.gif) left top repeat-x;
+		border:1px solid #899;
+		color:#444;
+		text-shadow:0 -1px 1px #fff, 0 1px 1px #fff;
+	}
+	div.calendarGrid td a:hover {
+		background-color:#666;
+		color:#fff;
+		text-shadow:none;
+	}
+	div.calendarGrid td.selected a {
+		background-color:#ffa200;
+		color:#fff;
+		text-shadow:none;
+	}
+	div.calendarGrid td.grayed {
+		color:#899;
+		text-shadow:0 -1px 1px #eee, 0 1px 1px #eee;
+	}
+	table.calendarGrid {
+		margin:10px auto;
+		width:130px;
+		border-collapse:collapse;
+	}
+	table.calendarGrid td {
+		border:0px;
+		padding:0;
+	}
+

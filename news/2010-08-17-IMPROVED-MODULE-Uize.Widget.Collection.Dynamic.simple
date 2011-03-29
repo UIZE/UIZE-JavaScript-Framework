@@ -1,0 +1,13 @@
+The =Uize.Widget.Collection.Dynamic= module has been improved with the addition of support for the touch interface of Apple's iPad.
+
+With the updated version of this module, it is now possible to reorganize the items in a collection using the Apple iPad's touch interface. This is demonstrated in the [[../examples/collection-dynamic.html][Dynamic Collection]] example, which has been updated with selection checkboxes for the collection item widgets to allow non-contiguous selection of multiple items.
+
+[[../examples/collection-dynamic.html][CHECK IT OUT]] (on your iPad)
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2010-08-17 - IMPROVED MODULE: Uize.Widget.Collection.Dynamic
+....................................................................................

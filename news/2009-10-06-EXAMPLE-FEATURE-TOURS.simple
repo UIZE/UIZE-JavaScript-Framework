@@ -1,0 +1,30 @@
+A new feature on the *uize.com* Web site lets you go on a step by step tour through a series of examples that are grouped by theme or feature.
+
+The example tours can be found in the site map menu that pops open when you mouseover the UIZE logo at the top left of pages on the site, or from the [[../directory.html][site map page]] (under the section "Examples -> EXAMPLE TOURS, BY THEME...").
+
+THE THEMES
+
+- =featured= - This is a tour through all the featured examples (the same examples available under the *FEATURED EXAMPLES* submenu).
+- =animation= - This is a tour through examples that showcase some of the animation capabilities of the UIZE JavaScript Framework.
+- =color= - The examples in this tour showcase the color manipulation capabilities of the framework.
+- =all= - This tour lets you go through the entire catalog of examples available on the =uize.com= Web site (better brew up a fresh pot of coffee).
+
+TIPS
+
+Some things to consider when using the example / feature tours...
+
+- Don't be afraid to dive into a tour with lots of pages. There's no obligation to go all the way through the tours - you can quit any time you like.
+
+- To navigate from one page to the next (or back), use the gigantic arrows on either side of the pages. These arrows do not show up when normally loading example pages, but do show up when loading examples in the context of a tour.
+
+- There is a "thermometer" bar that will appear right underneath the title bar of the example pages, with a highlighted segment that shows you where you are in the tour. You can mouseover and click on other parts of the thermometer to navigate directly to other pages in the tour. You can click on the first segment of the thermometer to start back at the beginning of the tour, or you can click on the last segment to go to the last page of the tour.
+
+- At any stage in the tour, you can navigate out of the tour using the UIZE logo site map menu, or you can use the "SHARE THIS" panel on the left side of the window to share an example that you particularly like with friends, or on a blog, tweet, Facebook update, and such.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-10-06 - EXAMPLE / FEATURE TOURS
+....................................................................................

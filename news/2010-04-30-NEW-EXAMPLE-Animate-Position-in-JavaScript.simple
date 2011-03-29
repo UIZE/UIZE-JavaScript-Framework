@@ -1,0 +1,13 @@
+The new [[../examples/animate-position-in-javascript.html][Animate Position in JavaScript]] example shows how to animate the position of an HTML element and how to apply amazingly realistic motion effects like easing, elasticity, bounce, and many more.
+
+In the example, the =Uize.Fx.fadeStyle= method of the =Uize.Fx= module is animating the position of a silver sphere. You can click anywhere on a brushed metal square and the sphere will move to that position. How the sphere moves is decided by the curve(s) used by the =Uize.Fx.fadeStyle= method. You can change the curve(s) by selecting one of the many presets from the *"PRESETS"* tab. Upon choosing a preset, a random target position is chosen for the sphere, and the sphere is then animated to that position using the newly selected curve(s). The animation can be repeated by clicking a preset link repeatedly, or by clicking the *"PREVIEW ANIMATION"* button repeatedly, or by clicking anywhere on the metal square. The settings for a preset can be edited in the *"PARAMS"* tab, and the edited settings can be previewed by clicking on the *"PREVIEW ANIMATION"* button.
+
+[[../examples/animate-position-in-javascript.html][CHECK IT OUT]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2010-04-30 - NEW EXAMPLE: Animate Position in JavaScript
+....................................................................................

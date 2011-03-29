@@ -1,0 +1,90 @@
+Implied Nodes
+	The Four Display States
+		There are four display states associated with a button: normal, mouseover, selected, and playing. Each display state is made up of two nodes: a general UI node and a title container. The list below indicates the special =id= attribute values for the nodes of each state, where "[idPrefix]" is the value of the =idPrefix= set-get property...
+
+		Normal State
+
+			[idPrefix]
+				[must to document]
+
+			[idPrefix]Title
+				[must to document]
+
+		Mouseover State
+
+			[idPrefix]Over
+				[must to document]
+
+			[idPrefix]OverTitle
+				[must to document]
+
+		Selected State
+
+			[idPrefix]Lit
+				[must to document]
+
+			[idPrefix]LitTitle
+				[must to document]
+
+		Playing State
+
+			[idPrefix]Playing
+				[must to document]
+
+			[idPrefix]PlayingTitle
+				[must to document]
+
+	About the Title Nodes
+		Whenever the value of the =title= set-get property is modified for an instance, the title container nodes of the various display states for the button are filled with the value of the =title= property. The inner HTML of title container nodes is completely replaced, so these nodes should not contain any content that needs to persist in the button's UI. To protect from long titles spilling outside of a title container node, a clip region is set for the node using the values of the node's =width= and =height= CSS style properties.
+
+	General vs. Title Nodes
+		Whereas the title container nodes for a button are dynamically filled with the value of the =title= set-get property, the general UI node for each of a button's display states provides a way to have static layout nodes to embellish the various display states. The general UI nodes are not required for buttons. In UI designs where all the differentiation between a button's display states can be accomplished simply by using different CSS styles for the title container nodes of the various display states, you can just choose to not define HTML for the general UI nodes.
+
+	State Display Priority
+		The various button state nodes are not mutually exclusive, so multiple state nodes for a button may be displayed simultaneously under certain conditions. For example, mousing over a button will put that button into mouseover state. Clicking on the button will then put it into selected state. If clicking the button triggers some media to play, then the button may enter playing state. At this stage, the button will be in normal, mouseover, selected, and playing states simultaneously.
+
+		In order to achieve the appearance of only one state at a time being displayed for a button, all the state nodes for the button should be defined in such a way that they perfectly overlay and obscure one another. Then, you can use the principle of z ordering to determine the display priority for the various states. For example, if you wish the mouseover state to always take display priority over the selected state, then the nodes for the mouseover state should have a higher z order than the nodes for the selected state. This can be done either by explicitly setting values for these nodes' =z-index= CSS style property, or simply defining the HTML for the mouseover state after the HTML for the selected state in the document's order.
+
+		EXAMPLE
+
+		In the example below, HTML for all four display states is being defined. In this example, the selected state takes display priority over the mouseover state, while the playing state takes display priority over the selected state. This example code segment assumes that the style classes for the button's states have been defined in the head of the document or in an external stylesheet.
+
+		.................................................................................................
+
+		<div style="position:relative;">
+			<div id="myButton" class="button" style="position:absolute; left:0px; top:0px;">
+				<span id="myButtonTitle" class="buttonTitle"></span>
+			</div>
+			<div id="myButtonOver" class="buttonOver" style="position:absolute; left:0px; top:0px;">
+				<span id="myButtonOverTitle" class="buttonOverTitle"></span>
+			</div>
+			<div id="myButtonLit" class="buttonLit" style="position:absolute; left:0px; top:0px;">
+				<span id="myButtonLitTitle" class="buttonLitTitle"></span>
+			</div>
+			<div id="myButtonPlaying" class="buttonPlaying" style="position:absolute; left:0px; top:0px;">
+				<span id="myButtonPlayingTitle" class="buttonPlayingTitle"></span>
+			</div>
+		</div>
+		.................................................................................................
+
+	Suppressing State Display
+		It is not necessary to define HTML for every one of a button's possible states. It is perfectly valid to choose not to define HTML for one or more states that you don't wish to be displayed. For example, in a particular button UI design, you may wish to not have a selected display state, but only the normal and mouseover display states. In this case, simply don't define HTML for the button's selected and playing display states. You would typically always define HTML for at least the normal display state for all buttons, though.
+
+Inherited Instance and Static Methods
+	This class inherits from the =Uize= base class. Consequently, it inherits all the instance and static methods that comprise the mechanism for setting and getting property values, the mechanism for managing events, as well as other utility features. Consult the documentation for the =Uize= base class for detailed information on these methods, since they are not explained again in the documentation for this class.
+
+Instance Methods
+	wireUi
+		Lets you wire the UI for a button whose UI HTML is already in the page.
+
+		SYNTAX
+		...................
+		mySlider.wireUi ();
+		...................
+
+Instance Events
+	This class does not currently provide any instance events.
+
+Static Events
+	This class does not currently provide any static events.
+

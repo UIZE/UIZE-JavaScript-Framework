@@ -1,0 +1,24 @@
+Uize.Node.find
+	The functionality of the =Uize.Node.getByMatch= static method has been enhanced to support regular expression and function type node property tests, and it has been given the new name =Uize.Node.find= - short and sweet (and clear).
+
+	Being deprecated, the old name will still work for some time before it is given a proper burial. The enhanced method provides a lot more power in finding nodes in a document. The new capabilities have been comprehensively documented.
+
+Uize.Node.addEventHandler and Uize.Node.addEventHandlers Killed
+	The =Uize.Node.addEventHandler= and =Uize.Node.addEventHandlers= static methods, that were deprecated a very long time ago, have finally been given a proper burial in the dusty annals of source control.
+
+	If your code was still using these methods, you should be ashamed (chances are you weren't using them).
+
+Summary of Changes
+	.........................................................
+	Uize.Node.getByMatch        >> BECOMES >>  Uize.Node.find
+	Uize.Node.addEventHandler   >> BECOMES >>  !!! DEAD !!!
+	Uize.Node.addEventHandlers  >> BECOMES >>  !!! DEAD !!!
+	.........................................................
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2008-07-19 - IMPROVED MODULE: Uize.Node
+....................................................................................

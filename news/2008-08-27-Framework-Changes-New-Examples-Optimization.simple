@@ -1,0 +1,70 @@
+Decorated Confirm and Inform
+	The =Uize.Widget.Page= page widget class now provides an implementation for decorated confirm and inform (aka alert) modal dialogs.
+
+	All pages that use this class (or a subclass of this class) get the benefit of this functionality. Any widget that is on the widget tree of a page widget of this class (or a subclass) can use the decorated dialogs by calling its =confirm= and =inform= instance methods. The dialog widget itself is implemented in the new =Uize.Widget.Palette.Confirm= module.
+
+NEW EXAMPLE: Calendar
+	The new =Calendar= example provides a simple demonstration of the =Uize.Widget.Calendar= widget class and some aspects of its programmatic interface.
+
+	[[../examples/calendar.html][CHECK IT OUT]]
+
+NEW EXAMPLE: Calendar Controls Wikipedia
+	The new =Calendar Controls Wikipedia= example demonstrates how an instance of the calendar widget class (=Uize.Widget.Calendar=) can be wired up to let the user choose a date in time and then view Wikipedia reference information for that date inside an IFRAME document in the page.
+
+	[[../examples/calendar-controls-wikipedia.html][CHECK IT OUT]]
+
+NEW EXAMPLE: Decorated Confirm Dialog
+	The new =Decorated Confirm Dialog= example demonstrates the decorated confirm and inform (aka alert) modal dialog functionality that is implemented in the =Uize.Widget.Page= base class. The example demonstrates various forms that the decorated dialog can take, including customizable title, message, and state icon.
+
+	[[../examples/decorated-confirm.html][CHECK IT OUT]]
+
+IMPROVED MODULE: Uize.Json
+	The =Uize.Json= module now supports serializing of values that are date objects (ie. instances of JavaScript's built-in =Date= object).
+
+	Date values are serialized as a call to the =Date= constructor, with a value formatted in POSIX time (ie. milliseconds since January 1, 1970 UTC). This means that for objects serialized to JSON format and that contain values that are dates, they can be returned back to an in-memory representation using a simple JavaScript =eval=, since the =Date= constructor will be invoked to create true date objects.
+
+	EXAMPLE
+	.....................................
+	{
+		firstName:'Mary',
+		lastName:'Jackson',
+		dateOfBirth:new Date (20588354000)
+	}
+	.....................................
+
+OPTIMIZED MODULE: Uize.Widget
+	Several modifications have been made to the =Uize.Widget= class, including...
+
+	- The =useNewIdSyntax= set-get property, that was provided many moons back as a means of easing the transition over to the new id syntax for widgets and their implied nodes, has finally been completely killed. There are no longer any living widgets using the old id syntax. Any widgets that had not yet been converted over were either updated or killed. Removing this old facility clears out a little bit of cruft and extra complication from the code for the =Uize.Widget= class.
+	- The =wired= instance method now only returns the value of the =wired= set-get property and no longer accepts an optional parameter for setting the property's value. The ability to set using the optional parameter was not being used anywhere and, in the rare event that you may need to set the =wired= set-get property (not generally advisable), you can simply use =myWidget.set ({wired:wiredBOOL})=.
+	- The =htmlSubstitutions= set-get property has been *KILLED*. As it turns out, there are better alternatives for funneling data to HTML templates for widgets. When the =html= set-get property of a widget is a function or a compiled JavaScript template package, then the HTML generator function is supplied with the current state for all the widget's set-get properties.
+	- the =uiWired= alias for the =wired= set-get property, that had been kept around for backwards compatibility purposes, has finally, after way too many years, been *KILLED*. No code was found that still referenced the old alias.
+	- many miscellaneous small performance and code size optimizations have been made to the =Uize.Widget= class
+
+OPTIMIZED MODULE: Uize.Widget.Button
+	Several modifications have been made to the =Uize.Widget.Button= class, including...
+
+	- for button widgets added to other widgets using the =Uize.Widget.Button.addChildButton= stitch-in method, the ='Click'= instance event fired when such buttons are clicked no longer carries a =buttonId= property in the =event= object. Handlers of the ='Click'= event can, instead, use =event.source.get ('name')= to obtain the name of the button widget that fired the event, which is equivalent to the old =buttonId= approach. This is a rare use case, and all code was paying a small price for a convenience enjoyed by only a few. Various modules have been updated accordingly.
+	- various performance improvements have been made that benefit applications that use hundreds of button widget instances, like instances of =Uize.Widget.Options= that have large values arrays
+
+OPTIMIZED MODULE: Uize.Widget.Options
+	Several modifications have been made to the =Uize.Widget.Options= class, including...
+
+	- The ='Option Bed Event'= instance event has been eliminated. It was not found to be in use anywhere, and instances of =Uize.Widget.Options= with hundreds of options were paying a performance penalty.
+	- various performance improvements have been made that benefit applications that use instances that have large values arrays
+
+IMPROVED MODULE: Uize.Date
+	The =Uize.Date= module has been enhanced with the following new features...
+
+	- the new =Uize.Date.dayNames= static property provides an array of English names for the days of the week
+	- the new =Uize.Date.monthNames= static property provides an array of English names for the months of the year
+	- the new =Uize.Date.isLeapYear= static method provides a way of determining whether or not a specific year is a leap year
+	- the new =Uize.Date.getDaysInMonth= static method calculates the number of days in the specified month of the specified year
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2008-08-27 - Framework Changes, New Examples, Optimization
+....................................................................................

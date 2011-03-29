@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2011-03-05 - Deprecated Features of Uize.Widget.Tree Killed | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="A number of instance and static methods of the Uize.Widget.Tree module that were deprecated a year ago have finally been killed."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2011.html" class="breadcrumb breadcrumbWithArrow">2011 NEWS</a>
+	2011-03-05 - Deprecated Features of Uize.Widget.Tree Killed
+
+</h1>
+
+<div class="main">
+<div class="contents0">
+	<p>A number of instance and static methods of the <code><a href="../reference/Uize.Widget.Tree.html">Uize.Widget.Tree</a></code> module that were deprecated a year ago have finally been killed.</p>
+	
+	<p>The <code>getTreeFromList</code> and <code>getTreeFromPage</code> instance methods, along with the <code>Uize.Widget.Tree.getTreeFromList</code> and <code>Uize.Widget.Tree.getTreeFromPage</code> static methods, that were deprecated and migrated into the <code><a href="../reference/Uize.Node.Tree.html">Uize.Node.Tree</a></code> module, have been killed. To use these methods, you will now have to use the static methods of the <code><a href="../reference/Uize.Node.Tree.html">Uize.Node.Tree</a></code> module.</p>
+	
+	<p><span class="allCaps">KILLED</span></p>
+	
+	
+<pre class="sample-code">myTreeWidget.getTreeFromList (...)      &gt;&gt; NOW USE &gt;&gt;  Uize.Node.Tree.getTreeFromList (...)
+Uize.Widget.Tree.getTreeFromList (...)  &gt;&gt; NOW USE &gt;&gt;  Uize.Node.Tree.getTreeFromList (...)
+myTreeWidget.getTreeFromPage (...)      &gt;&gt; NOW USE &gt;&gt;  Uize.Node.Tree.getTreeFromPage (...)
+Uize.Widget.Tree.getTreeFromPage (...)  &gt;&gt; NOW USE &gt;&gt;  Uize.Node.Tree.getTreeFromPage (...)
+</pre>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

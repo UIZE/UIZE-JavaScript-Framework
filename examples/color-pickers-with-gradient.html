@@ -1,0 +1,106 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Color Pickers With Gradient | JavaScript Examples | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="color Uize.Widget.ColorPicker"/>
+	<meta name="description" content="See a demo of a dynamically generated color gradient, where the two end colors of the gradient can be modified using RGB color pickers with sliders."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.example.css"/>
+	<style type="text/css">
+		.swatch {
+			width:5px;
+			height:320px;
+		}
+	</style>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	<a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow">JAVASCRIPT EXAMPLES</a>
+	Color Pickers With Gradient
+	<div id="page-actions" class="pageActions">
+		<a href="source-code/color-pickers-with-gradient.html" class="buttonLink">SOURCE</a>
+	</div>
+</h1>
+
+<div class="main">
+	<!-- explanation copy -->
+
+	<div class="explanation">
+		<p>This example combines use of two <a href="../reference/Uize.Widget.ColorPicker.html"><code>Uize.Widget.ColorPicker</code></a> instances with a single <a href="../reference/Uize.Widget.ColorCube.html"><code>Uize.Widget.ColorCube</code></a> instance to display a gradient between two colors you select. The color cube is turned into a simple gradient display by setting the value of its <code>divisionsY</code> set-get property to <code>1</code>, and then using only the <code>colorTopLeft</code> and <code>colorTopRight</code> set-get properties to change the gradient's color poles.</p>
+	</div>
+
+	<!-- "wireframe" for the UI -->
+
+	<table border="0" cellspacing="0" cellpadding="0" style="margin:auto;">
+		<tr>
+			<td class="heading">Color 1</td>
+			<td class="heading">Uize.Widget.ColorCube Instance</td>
+			<td class="heading">Color 2</td>
+		</tr>
+		<tr>
+			<td id="page_colorTopLeftPicker" valign="top"></td>
+			<td id="page_colorCube" valign="top"></td>
+			<td id="page_colorTopRightPicker" valign="top"></td>
+		</tr>
+	</table>
+</div>
+
+<!-- JavaScript code to make the static HTML "come alive" -->
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Example.library',
+		'UizeDotCom.Page.Example',
+		'Uize.Widget.ColorPicker',
+		'Uize.Widget.ColorCube'
+	],
+	builder:function () {
+		/*** create the example page widget ***/
+			var page = window.page = new UizeDotCom.Page.Example;
+
+		/*** add the color cube child widget used for the gradient effect ***/
+			var colorCube = page.addChild (
+				'colorCube',
+				Uize.Widget.ColorCube,
+				{
+					divisionsX:100,
+					divisionsY:1,
+					colorTopLeft:'ffff00',
+					colorTopRight:'ff0000',
+					built:false
+				}
+			);
+
+		/*** add the color picker child widgets ***/
+			function setupColorPicker (colorName,initialValue) {
+				var colorPicker = page.addChild (
+					colorName + 'Picker',
+					Uize.Widget.ColorPicker,
+					{
+						value:colorCube.get (colorName),
+						built:false
+					}
+				);
+				colorPicker.wire ('Changed.value',function () {colorCube.set (colorName,colorPicker + '')});
+			}
+			setupColorPicker ('colorTopLeft');
+			setupColorPicker ('colorTopRight');
+
+		/*** wire up the page widget ***/
+			page.wireUi ();
+	}
+});
+
+</script>
+
+</body>
+</html>
+

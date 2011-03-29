@@ -1,0 +1,171 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Color Cube With Color Pickers - HTML Source Code | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework HTML example source code"/>
+	<meta name="description" content="This is the source code for the Color Cube With Color Pickers example"/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../../css/page.css"/>
+	<link rel="stylesheet" href="../../css/page.source.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../../index.html" title="UIZE JavaScript Framework home"></a>
+	SOURCE CODE: Color Cube With Color Pickers
+	<div id="page-actions" class="pageActions">
+		<a href="../color-cube-with-pickers.html" class="buttonLink">VIEW EXAMPLE</a>
+	</div>
+</h1>
+
+<pre>
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+&lt;head&gt;
+  &lt;title&gt;Color Cube With Color Pickers | JavaScript Examples | UIZE JavaScript Framework&lt;/title&gt;
+  &lt;meta name="keywords" content="color drag-and-drop touch ipad Uize.Widget.ColorCube.Draggable"/&gt;
+  &lt;meta name="description" content="See an example of a color grid, with RGB color pickers for editing corner colors, and the ability to click-and-drag in the grid to &amp;quot;smear&amp;quot; its colors."/&gt;
+  &lt;link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/&gt;
+  &lt;link rel="stylesheet" href="../css/page.css"/&gt;
+  &lt;link rel="stylesheet" href="../css/page.example.css"/&gt;
+  &lt;style type="text/css"&gt;
+    .swatch {
+      width:35px;
+      height:35px;
+      margin-left:1px;
+      margin-top:1px;
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+&lt;script type="text/javascript" src="../js/Uize.js"&gt;&lt;/script&gt;
+
+&lt;h1 class="document-title"&gt;
+  &lt;a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"&gt;&lt;/a&gt;
+  &lt;a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow"&gt;JAVASCRIPT EXAMPLES&lt;/a&gt;
+  Color Cube With Color Pickers
+  &lt;div id="page-actions" class="pageActions"&gt;
+    &lt;a href="source-code/color-cube-with-pickers.html" class="buttonLink"&gt;SOURCE&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/h1&gt;
+
+&lt;div class="main"&gt;
+  &lt;!-- explanation copy --&gt;
+
+  &lt;div class="explanation"&gt;
+    &lt;p&gt;In this example, an instance of &lt;a href="../reference/Uize.Widget.ColorCube.Draggable.html"&gt;&lt;code&gt;Uize.Widget.ColorCube.Draggable&lt;/code&gt;&lt;/a&gt; provides a draggable color cube widget that shows the interpolated colors between four corner colors. Click-and-drag inside the cube to "smudge" the color space in different directions. Instances of &lt;a href="../reference/Uize.Widget.ColorPicker.html"&gt;&lt;code&gt;Uize.Widget.ColorPicker&lt;/code&gt;&lt;/a&gt; are wired up at each corner for changing the colors using sliders. The sliders control the cube, but dragging inside the cube also controls the sliders. Event handlers wire the widgets bidirectionally so their values stay in sync. Click the "AGITATE" button to randomize the corner colors.&lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;!-- "wireframe" for the UI --&gt;
+
+  &lt;table border="0" cellspacing="0" cellpadding="3" style="margin:auto;"&gt;
+    &lt;tr&gt;
+      &lt;td id="page_colorTopLeft" valign="top"&gt;&lt;/td&gt;
+      &lt;td id="page_colorCube" rowspan="2"&gt;&lt;/td&gt;
+      &lt;td id="page_colorTopRight" valign="top"&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td id="page_colorBottomLeft" valign="bottom"&gt;&lt;/td&gt;
+      &lt;td id="page_colorBottomRight" valign="bottom"&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;/td&gt;
+      &lt;td align="center"&gt;&lt;a id="page-agitate" class="buttonLink" href="javascript://"&gt;AGITATE&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/table&gt;
+&lt;/div&gt;
+
+&lt;!-- JavaScript code to make the static HTML "come alive" --&gt;
+
+&lt;script type="text/javascript"&gt;
+
+Uize.module ({
+  required:[
+    'UizeDotCom.Page.Example.library',
+    'UizeDotCom.Page.Example',
+    'Uize.Color',
+    'Uize.Color.xUtil',
+    'Uize.Widget.ColorPicker',
+    'Uize.Widget.ColorCube.Draggable'
+  ],
+  builder:function () {
+    /*** create the example page widget ***/
+      var page = window.page = new UizeDotCom.Page.Example;
+
+    /*** create the Uize.Widget.ColorCube object ***/
+      page.addChild ('colorCube',Uize.Widget.ColorCube.Draggable,{built:false});
+
+      /*** agitation ***/
+        function agitate () {
+          page.children.colorCube.set ({
+            colorTopLeft:Uize.Color.random (),
+            colorTopRight:Uize.Color.random (),
+            colorBottomLeft:Uize.Color.random (),
+            colorBottomRight:Uize.Color.random ()
+          });
+        }
+
+      agitate ();
+
+    /*** wire up handling for the corner colors ***/
+      function setupColorCorner (colorName) {
+        var
+          colorCube = page.children.colorCube,
+          colorPicker = page.addChild (
+            colorName,
+            Uize.Widget.ColorPicker,
+            {
+              sliderWidth:33,
+              sliderHeight:110,
+              built:false
+            }
+          )
+        ;
+        /*** sync color picker to cube ***/
+          function syncColorPickerToCube () {colorPicker.set ({value:colorCube.get (colorName)})}
+          colorCube.wire ('Changed.' + colorName,syncColorPickerToCube);
+          syncColorPickerToCube ();
+
+        /*** sync cube to color picker ***/
+          colorPicker.wire ('Changed.value',function () {colorCube.set (colorName,colorPicker + '')});
+      }
+      setupColorCorner ('colorTopLeft');
+      setupColorCorner ('colorTopRight');
+      setupColorCorner ('colorBottomLeft');
+      setupColorCorner ('colorBottomRight');
+
+    /*** wire up the page widget ***/
+      page.wireUi ();
+
+    /*** wire agitate button ***/
+      page.wireNode ('agitate','click',agitate);
+  }
+});
+
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+
+</pre>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.library',
+		'UizeDotCom.Page'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page).wireUi ()}
+});
+
+</script>
+
+</body></html>

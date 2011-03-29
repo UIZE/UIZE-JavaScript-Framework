@@ -1,0 +1,11 @@
+<%@ input ({idPrefix:'string',title:'string',contents:'string'}) %>
+<%@ required (['UizeDotCom.Templates.Dialog','Uize.Templates.Calendar']) %>
+<%=
+	UizeDotCom.Templates.Dialog.process ({
+		idPrefix:input.idPrefix,
+		title:input.title,
+		contents:input.contents,
+		topLeftButtons:'<a id="' + input.idPrefix + '_keepOpen" class="dialogKeepOpenButton" title="Toggle Keep Open"></a>',
+		dialogClass:'dialogPalette'
+	})
+%>

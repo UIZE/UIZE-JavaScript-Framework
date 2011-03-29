@@ -1,0 +1,57 @@
+myInstance.objectName Eliminated
+	The =objectName= instance property of the =Uize= base class has been renamed to =instanceId=.
+
+	This is a seldom used property, so the chances of your code having used it are very slim. The old name has not been deprecated, but has been completely eliminated. Affected modules of the UIZE JavaScript Framework have been updated appropriately.
+
+myWidget.widgets Deprecated
+	The =widgets= instance property of the =Uize.Widget= base class has been deprecated in favor of the new =children= instance property, and the =addChild= and =removeChild= instance methods.
+
+	The =widgets= property was an object, having a =map= property which was an object hash of all of a widget's children, an =add= method which allowed child widgets to be added, and a =remove= method which allowed child widgets to be removed. The new interface is semantically more elegant.
+
+	SUMMARY
+	........................................................................
+	myWidget.widgets.map           >> BECOMES >>  myWidget.children
+	myWidget.widgets.add (...)     >> BECOMES >>  myWidget.addChild (...)
+	myWidget.widgets.remove (...)  >> BECOMES >>  myWidget.removeChild (...)
+	........................................................................
+
+	INSTEAD OF...
+	....................................................
+	myWidget.widgets.map.someChild.widgets.map.someChild
+	....................................................
+
+	USE...
+	..............................................
+	myWidget.children.someChild.children.someChild
+	..............................................
+
+	The =widgets= property has only been deprecated, so code that uses it will still work. However, code should be gradually refactored to use the new interface as the =widgets= property will be eliminated at some point in the future. Affected modules of the UIZE JavaScript Framework have been updated appropriately.
+
+Uize.DataFace Eliminated
+	The =Uize.DataFace= module has been eliminated and its two methods have been promoted to being first class citizens of the =Uize.Node= package.
+
+	Affected modules of the UIZE JavaScript Framework have been updated appropriately.
+
+	SUMMARY
+	.........................................................................
+	Uize.DataFace.setNodeValue (...)  >> BECOMES >>  Uize.Node.setValue (...)
+	Uize.DataFace.getNodeValue (...)  >> BECOMES >>  Uize.Node.getValue (...)
+	.........................................................................
+
+Uize.Node.getByNameOrId Deprecated
+	The =getByNameOrId= static method of the =Uize.Node= module has been deprecated in favor of an updated version of the =Uize.Node.getById= static method.
+
+	The way that =Uize.Node.getById= now works, if getting the node by id fails, an attempt will be made to get the node by name. As such, the =getById= method name is a slight misnomer, but its name may change in future as well to become more generic. The benefit of using the =Uize.Node.getById= method is that it implements support for node caching which can speed up performance in certain browsers.
+
+	SUMMARY
+	.....................................................................
+	Uize.Node.getByNameOrId (...)  >> BECOMES >>  Uize.Node.getById (...)
+	.....................................................................
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2008-05-28 - Framework Updates
+....................................................................................

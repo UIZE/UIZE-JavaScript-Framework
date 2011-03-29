@@ -1,0 +1,145 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>List Template - HTML Source Code | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework HTML example source code"/>
+	<meta name="description" content="This is the source code for the List Template example"/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../../css/page.css"/>
+	<link rel="stylesheet" href="../../css/page.source.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../../index.html" title="UIZE JavaScript Framework home"></a>
+	SOURCE CODE: List Template
+	<div id="page-actions" class="pageActions">
+		<a href="../templates-list.html" class="buttonLink">VIEW EXAMPLE</a>
+	</div>
+</h1>
+
+<pre>
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+&lt;head&gt;
+  &lt;title&gt;List Template | JavaScript Examples | UIZE JavaScript Framework&lt;/title&gt;
+  &lt;meta name="keywords" content="Uize.Templates.List"/&gt;
+  &lt;meta name="description" content="See a demo of a template JavaScript module - hand-written, rather than compiled from a JST file - used to generate a hierarchical list from JSON data."/&gt;
+  &lt;link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/&gt;
+  &lt;link rel="stylesheet" href="../css/page.css"/&gt;
+  &lt;link rel="stylesheet" href="../css/page.example.css"/&gt;
+  &lt;style type="text/css"&gt;
+    #page-listShell {
+      font-size:11px;
+      width:200px;
+      height:460px;
+      float:left;
+      overflow:auto;
+      margin-right:10px;
+      border:1px solid #9aa;
+      padding:10px;
+      margin-left:20px;
+      background:#c9cfd6 url(../images/tree-menu-bg.gif) repeat-x left top;
+    }
+    #page-listShell ul, #page-listShell ul li {
+      padding-left:0;
+      margin-left:10px;
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+&lt;script type="text/javascript" src="../js/Uize.js"&gt;&lt;/script&gt;
+
+&lt;h1 class="document-title"&gt;
+  &lt;a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"&gt;&lt;/a&gt;
+  &lt;a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow"&gt;JAVASCRIPT EXAMPLES&lt;/a&gt;
+  List Template
+  &lt;div id="page-actions" class="pageActions"&gt;
+    &lt;a href="source-code/templates-list.html" class="buttonLink"&gt;SOURCE&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/h1&gt;
+
+&lt;!-- load in the JavaScript libraries that define the animals and plants hierarchical lists --&gt;
+
+&lt;script type="text/javascript" src="js/animals.js"&gt;&lt;/script&gt;
+&lt;script type="text/javascript" src="js/plants.js"&gt;&lt;/script&gt;
+
+&lt;div class="main"&gt;
+  &lt;div style="margin:auto; width:752px;"&gt;
+    &lt;div id="page-listShell"&gt;&lt;/div&gt;
+    &lt;div style="width:500px; float:left;"&gt;
+      &lt;!-- explanation copy --&gt;
+
+      &lt;div class="explanation"&gt;
+        &lt;p&gt;In this example, the &lt;a href="../reference/Uize.Templates.List.html"&gt;&lt;code&gt;Uize.Templates.List&lt;/code&gt;&lt;/a&gt; template is being used to populate a node in the page (to the left) with a hierarchical, unordered list that is built from a &lt;code&gt;JSON&lt;/code&gt; data tree structure.&lt;/p&gt;
+
+        &lt;p&gt;There's nothing in the node when the page loads - you should click on one of the linked JavaScript snippets below to build lists from different data sets. What you see in the JavaScript links is exactly the JavaScript code that will be executed when you click the links and that is responsible for building the list HTML and putting it into the page.&lt;/p&gt;
+
+        &lt;p&gt;Now, it's just a list - nothing more. We're not dealing with an expandable/collapsible tree widget here - just a dead simple list generator template. JavaScript templates can be used to generate markup for widgets, or they can be used by build scripts to build HTML pages, or by server side JavaScript to generate HTML pages.&lt;/p&gt;
+      &lt;/div&gt;
+
+      &lt;!-- programmatic interface examples --&gt;
+
+      &lt;div class="programmaticInterface" style="margin-top:0;"&gt;
+        &lt;ul&gt;
+          &lt;li&gt;&lt;a href="javascript://" class="linkedJs"&gt;page.setNodeInnerHtml ('listShell',Uize.Templates.List.process ({items:animals}))&lt;/a&gt;&lt;br/&gt;&lt;br/&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href="javascript://" class="linkedJs"&gt;page.setNodeInnerHtml ('listShell',Uize.Templates.List.process ({items:plants}))&lt;/a&gt;&lt;br/&gt;&lt;br/&gt;&lt;/li&gt;
+          &lt;li&gt;&lt;a href="javascript://" class="linkedJs"&gt;page.setNodeInnerHtml ('listShell',Uize.Templates.List.process ({items:animalsAndPlants}))&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;div style="clear:left;"&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- JavaScript code to create tree list instance and insert and wire its UI --&gt;
+
+&lt;script type="text/javascript"&gt;
+
+Uize.module ({
+  required:[
+    'UizeDotCom.Page.Example.library',
+    'UizeDotCom.Page.Example',
+    'Uize.Templates.List'
+  ],
+  builder:function () {
+    /*** create the example page widget ***/
+      var page = window.page = new UizeDotCom.Page.Example ({evaluator:function (code) {eval (code)}});
+
+    /*** add the tree list child widget ***/
+      var animalsAndPlants = [
+        {title:'Animals',items:animals},
+        {title:'Plants',items:plants}
+      ];
+
+    /*** wire up the page widget ***/
+      page.wireUi ();
+  }
+});
+
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+
+</pre>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.library',
+		'UizeDotCom.Page'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page).wireUi ()}
+});
+
+</script>
+
+</body></html>

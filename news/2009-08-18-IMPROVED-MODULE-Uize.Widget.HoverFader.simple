@@ -1,0 +1,24 @@
+The =Uize.Widget.HoverFader= module has been improved with the addition of a new =fadeInOut= set-get property, special handling of the =reverse= fade property, and an improved =tickle= instance method that offers support for fade properties.
+
+New fadeInOut Set-get Property
+	The new =fadeInOut= set-get property lets you specify fade properties that are common to both the fade-in phase (ie. when mousing over a node) and the fade-out phase (ie. when mousing out of a node) of the hover fade effect.
+
+Special Handling for reverse Fade Property
+	The =reverse= fade property now has special handling in the context of the =Uize.Widget.HoverFader= class.
+
+	When specifying the value =true= for the =reverse= fade property, the =Uize.Widget.HoverFader= class swaps the values that it would normally use as the start and end values of the style fade for a node. This has the effect of only reversing the transition effect, but not the start and end style. This becomes more pronounced - and more compelling - when compound values are specified for the =curve= fade property, where reversing the effect of the curves produces interesting results.
+
+Improved tickle Instance Method
+	The =tickle= instance method has been improved with support for a new variation that takes a =fadePropertiesOBJ= parameter.
+
+	By specifying fade properties instead of an interval when calling the =tickle= instance method, it is possible to achieve non-linear "tickling" of the nodes of an instance. One can use the =curve= fade property so that the timing of the triggering of the fade-outs for the different =nodes= of the instance is not uniform. In addition, one can use the =reverse= fade property to control the order in which the tickling occurs, where specifying the value =true= will cause the tickling to start with the last node and end at the first node.
+
+[[Uize.Widget.HoverFader][LEARN MORE]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-08-18 - IMPROVED MODULE: Uize.Widget.HoverFader
+....................................................................................

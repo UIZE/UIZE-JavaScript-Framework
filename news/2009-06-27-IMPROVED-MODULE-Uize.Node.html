@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2009-06-27 - IMPROVED MODULE: Uize.Node | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="The Uize.Node module has been improved in a couple of ways."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2009.html" class="breadcrumb breadcrumbWithArrow">2009 NEWS</a>
+	2009-06-27 - IMPROVED MODULE: Uize.Node
+
+</h1>
+
+<div class="main">
+<div class="contents0">
+	<p>The <code><a href="../reference/Uize.Node.html">Uize.Node</a></code> module has been improved in a couple of ways.</p>
+	
+	<table class="list">
+	<tr valign="top"><td><span style="white-space:nowrap;">1. </span></td><td>The <code>Uize.Node.find</code> static method can now accept a node reference or an array of nodes as a parameter and will simply pass the value through rather than performing a find operation, making this method convenient to use in classes where either a find expression object or a node or array of nodes may be specified.</td></tr>
+	<tr valign="top"><td><span style="white-space:nowrap;">2. </span></td><td>The <code>Uize.Node.getCoords</code> static method has been improved to be more accurate for nodes contained inside nodes with non-zero borders.</td></tr>
+	</table>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

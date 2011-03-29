@@ -1,0 +1,17 @@
+The =Uize.Wsh= module has been improved in a number of ways.
+
+- The =Uize.Wsh.readFile= static method now supports simply a string parameter for the file path, as in =Uize.Wsh.readFile (filePathSTR)=.
+
+- The =fileSystemObject= property is now optional when calling the =Uize.Wsh.readFile=, =Uize.Wsh.writeFile=, and =Uize.Wsh.buildFiles= static methods.
+
+- The =Uize.Wsh.buildFiles= static method has been improved with the addition of the optional =dryRun= parameter that lets you run a build script with only logging of what build actions would be performed, with no file writing. Additionally, the =buildScriptName= parameter has been eliminated, since it is no longer needed as the =Uize.Wsh.buildFiles= can determine this from the =WScript.ScriptName= property provided by Windows Script Host.
+
+- The new =Uize.Wsh.fileExists= static method lets you test if a file at a specific file path exists.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-03-11 - IMPROVED MODULE: Uize.Wsh
+....................................................................................

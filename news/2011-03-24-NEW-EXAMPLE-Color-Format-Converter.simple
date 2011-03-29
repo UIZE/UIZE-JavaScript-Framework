@@ -1,0 +1,15 @@
+The new [[../examples/color-format-converter.html][Color Format Converter Tool]] lets you easily convert color values from one format to another.
+
+The tool lets you convert between [[http://en.wikipedia.org/wiki/Rgb][RGB]] (Red, Green, Blue) hex, RGB tuple, [[http://en.wikipedia.org/wiki/HSL_and_HSV][HSL]] (Hue, Saturation, Lightness), [[http://en.wikipedia.org/wiki/HSL_and_HSV][HSV]] (Hue, Saturation, Value), [[http://en.wikipedia.org/wiki/CMYK][CMYK]] (Cyan, Magenta, Yellow, Key), and [[http://www.w3.org/TR/css3-color/#svg-color][SVG]] color names. To convert a color from one format to another, one simply enters the color value into the text input that has the format that the color is in. As one types, all the other formats of the current color are updated dynamically. One can also edit the current color by using the red, green, and blue sliders of the RGB color picker, and one can see a more detailed preview of the current color in the color info widget.
+
+The *Color Format Converter Tool* is a good example of how the =Uize.Util.PropertyAdapter= class can be used to easily connect multiple set-get properties of different widget instances together, so that their values are kept synchronized. In this example, the =value= set-get property of all the text input widgets as well as the color info widget are synchronized to the central color picker widget, so that modifying the value for any one of the widgets causes all the other widgets to be synchronized to the new value. The example is also a good demonstration of the =Uize.Color.xHsv=, =Uize.Color.xCmyk=, and =Uize.Color.xSvgColors= color encoding extension modules.
+
+[[../examples/color-format-converter.html][CHECK IT OUT]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2011-03-24 - NEW EXAMPLE - Color Format Converter
+....................................................................................

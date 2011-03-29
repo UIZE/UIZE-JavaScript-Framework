@@ -1,0 +1,31 @@
+The UIZE JavaScript Framework has added support for the touch interface of Apple's iPad.
+
+Touch is the New Black
+	There's no denying the excitement surrounding Apple's new iPad device, and there is now likely to be a veritable flood of touch interface devices entering the market in response to their success.
+
+	Apple has already sold over three millions iPads in less than three months. Several other vendors have announced intentions to enter the market with their own competing tablet / slate devices. The touch interface is a trend that is solidly establishing itself. The UIZE JavaScript Framework is addressing this hot new trend by providing the abstractions necessary to make life easier for application developers.
+
+The Main Drag
+	To kick off this effort, the =Uize.Widget.Drag= module has been enhanced to now support touch interface events.
+
+	Because many other widgets are already written to use the =Uize.Widget.Drag= widget class, the improvements in this class automatically confer touch support to the widgets that use this class in their implementation. Examples of this are the =Uize.Widget.Resizer=,  =Uize.Widget.Resizer.Marquee=, =Uize.Widget.Bar.Slider=, =Uize.Widget.ColorCube.Draggable=, =Uize.Widget.Dialog=, =Uize.Widget.Drag.Move=, and =Uize.Widget.ImagePort.Draggable= classes.
+
+Take it For a Test Drive
+	What this all means is that, with the new and improved =Uize.Widget.Drag= class, selection marquees, sliders, dialogs, image ports, etc. are all now draggable on the Apple iPad - and they still behave as before with mouse / trackpad control.
+
+	So, if you have an iPad, swing by the [[http://www.uize.com][uize.com]] Web site and take a tour of the iPad examples (you'll find them under the *examples* menu). Or, if you're reading this page on your iPad (lucky you), then just follow the link below...
+
+	[[../examples/marquee.html?tour=ipad][iPad Examples / Touch Examples]]
+
+Multiple Simultaneous Drag
+	Benefits accrue from intelligent implementation, and the use of the =Uize.Widget.Drag= class is a prime example of this.
+
+	Because of the way that widgets use the =Uize.Widget.Drag= class to provide drag support, they automatically get the benefit of multi-touch drag. So, for example, in the [[../examples/drag-to-move.html][Drag-to-move]] example, you can use multiple fingers / hands to drag up to five image thumbnails at a time - all in completely different directions! In the [[../examples/marquee-modes.html][Different Marquee Modes]] example, you can drag multiple marquees around at the same time, or you can grab different resize handles on different marquees independently. And in the [[../examples/color-picker.html][Color Picker]] example, you can change the values for the red, green, and blue color channels of text color, background color, and border color independently - and simultaneously!
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2010-06-29 - UIZE Adds Support For Touch
+....................................................................................

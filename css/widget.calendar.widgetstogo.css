@@ -1,0 +1,98 @@
+.widgetHeader {
+	margin:auto;
+}
+.calendarContainer {
+	border:none;
+	background:#1E252E url(../images/widget-bg.gif) repeat-x left top;
+	padding-top:0;
+	width:239px;
+	height:267px;
+	margin:auto;
+}
+.calendarControls {
+	background:none;
+}
+.calendarControls .calendarIndicator {
+	background:#000 url(../images/title-bg.gif) repeat-x left -5px;
+	color:#ddd;
+	font-size:14px;
+	letter-spacing:3px;
+	width:239px;
+	height:32px;
+	padding-top:11px;
+}
+
+/*** overrides for year and month navigation ***/
+	/*** styling common to year and month navigation ***/
+		.calendarControls .previousMonth,
+		.calendarControls .nextMonth,
+		.calendarControls .previousYear,
+		.calendarControls .nextYear {
+			color:#bbb;
+			text-shadow:none;
+		}
+		.calendarControls .previousMonthOver,
+		.calendarControls .nextMonthOver,
+		.calendarControls .previousYearOver,
+		.calendarControls .nextYearOver {
+			color:#ddd;
+			text-decoration:none;
+			text-shadow:none;
+		}
+		.calendarControls .previousMonthActive,
+		.calendarControls .nextMonthActive,
+		.calendarControls .previousYearActive,
+		.calendarControls .nextYearActive {
+			color:#fff;
+			text-decoration:none;
+			text-shadow:none;
+		}
+		.calendarControls .previousMonthGrayed,
+		.calendarControls .nextMonthGrayed,
+		.calendarControls .previousYearGrayed,
+		.calendarControls .nextYearGrayed {
+			color:#333;
+			text-decoration:none;
+			text-shadow:none;
+		}
+
+	/*** styling specific to month navigation ***/
+		.calendarControls .previousMonth, .calendarControls .nextMonth {
+			top:13px;
+		}
+
+	/*** styling specific to year navigation ***/
+		.calendarControls .previousYear, .calendarControls .nextYear {
+			top:9px;
+		}
+
+/*** grid styling overrides ***/
+	table.calendarGrid {
+		width:230px;
+		margin-top:6px;
+		margin-bottom:0;
+	}
+	.calendarGrid th {
+		color:#ddd;
+		text-shadow:1px 1px 3px #000;
+		background:#567;
+	}
+	div.calendarGrid td {
+		border:1px solid #345;
+		font-size:19px;
+		padding:4px 0;
+	}
+	div.calendarGrid td, div.calendarGrid td a:hover, div.calendarGrid td.selected a, div.calendarGrid td.grayed {
+		text-shadow:2px 2px 5px #000;
+	}
+	div.calendarGrid td a {
+		color:#abc;
+	}
+	div.calendarGrid td a:hover {
+		background:#456;
+	}
+	div.calendarGrid td.selected, div.calendarGrid td.selected a {
+		background:#678;
+		color:#fff;
+	}
+

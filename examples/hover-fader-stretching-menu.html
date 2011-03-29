@@ -1,0 +1,246 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Hover Fader Stretching Menu | JavaScript Examples | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="animation widget menu Uize.Widget.HoverFader"/>
+	<meta name="description" content="Stretch the limits of what can be done with animated menus. Using JavaScript to animate CSS style properties can produce amazingly slick effects!"/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.example.css"/>
+	<style type="text/css">
+		.explanation {
+			margin-bottom:25px;
+		}
+		.menus {
+			position:relative;
+			float:left;
+			width:259px;
+			height:219px;
+		}
+		.menu {
+			position:absolute;
+			right:0;
+		}
+		.menuLink {
+			font-size:10px;
+			display:block;
+			position:relative;
+			width:150px;
+			margin-left:auto;
+			padding:4px 7px;
+			text-transform:uppercase;
+			text-align:right;
+			letter-spacing:2px;
+		}
+		.menuLink, .menuLink:link, .menuLink:visited, .menuLink:hover, .menuLink:active {
+			color:#000;
+			border:none;
+			border-right:5px solid #000;
+			margin-bottom:1px;
+			text-decoration:none;
+		}
+		.menuLink div.highlight {
+			position:absolute;
+			width:100%;
+			height:50%;
+			background:#fff;
+			left:0;
+			top:0;
+			opacity:.2;
+			filter:alpha(opacity=20);
+		}
+		.programmaticInterface {
+			float:left;
+			width:400px;
+			margin-top:0;
+		}
+	</style>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	<a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow">JAVASCRIPT EXAMPLES</a>
+	Hover Fader Stretching Menu
+	<div id="page-actions" class="pageActions">
+		<a href="source-code/hover-fader-stretching-menu.html" class="buttonLink">SOURCE</a>
+	</div>
+</h1>
+
+<div class="main">
+	<!-- explanation copy -->
+
+	<div class="explanation">
+		<p>In this example, an instance of the <a href="../reference/Uize.Widget.HoverFader.html"><code>Uize.Widget.HoverFader</code></a> widget class is being used to add a JavaScript animation stretching effect to a colorful navigation menu (seen below). This instance manages fading of values for the <code>width</code>, <code>letter-spacing</code>, and <code>border-right-color</code> CSS style properties for all links in the menu. Mouse over the links in the menu to experience the effect. Mousing over a link triggers an animation that increases its width and the letter spacing of its text. Additionally, the color for the five pixel right border is faded from black to white. In addition to the initial settings for the instance, a set of links to the right of the menu lets you preview different animation effects that can be achieved by simply setting different curves to control the fade in and fade out. Click on one of these links and the settings of the <code>fadeIn</code> and <code>fadeOut</code> set-get properties of the instance will be updated. The instance is "tickled" (by calling its <code>tickle</code> instance method), to give you an immediate preview of the new effect. Be sure, though, to also interact with the menu, since some subtleties of an effect may only become apparent when using the menu. Take a look at the source code for this page to see how the hover fader effect is configured for the menu. Looking at the code, you will notice that the <code>Uize.Widget.HoverFader</code> instance is created using the declarative syntax for widget adoption (notice the assignment of the <code>$page_menuHoverFader</code> property on the <code>window</code> object). It should be noted that the <a href="../reference/Uize.Curve.html"><code>Uize.Curve</code></a>, <a href="../reference/Uize.Curve.Mod.html"><code>Uize.Curve.Mod</code></a>, and <a href="../reference/Uize.Curve.Rubber.html"><code>Uize.Curve.Rubber</code></a> modules are only needed for the additional effects previews, and not the basic initial settings.</p>
+	</div>
+
+	<div style="width:700px; margin:auto;">
+		<div class="menus">
+			<div class="menu">
+				<a href="javascript://" class="menuLink" style="background:#77f;"><div class="highlight"></div>About Us</a>
+				<a href="javascript://" class="menuLink" style="background:#0c9;"><div class="highlight"></div>Products</a>
+				<a href="javascript://" class="menuLink" style="background:#eb3;"><div class="highlight"></div>Services</a>
+				<a href="javascript://" class="menuLink" style="background:#9c7;"><div class="highlight"></div>Technology</a>
+				<a href="javascript://" class="menuLink" style="background:#f96;"><div class="highlight"></div>Solutions</a>
+				<a href="javascript://" class="menuLink" style="background:#c6f;"><div class="highlight"></div>My Account</a>
+				<a href="javascript://" class="menuLink" style="background:#86f;"><div class="highlight"></div>Store Locator</a>
+				<a href="javascript://" class="menuLink" style="background:#f4c;"><div class="highlight"></div>Investors</a>
+				<a href="javascript://" class="menuLink" style="background:#f88;"><div class="highlight"></div>Support</a>
+				<a href="javascript://" class="menuLink" style="background:#79f;"><div class="highlight"></div>Contact Us</a>
+			</div>
+			<script type="text/javascript">
+				window.$page_menuHoverFader = {
+					widgetClass:'Uize.Widget.HoverFader',
+					nodes:{className:/\bmenuLink\b/},
+					defaultStyle:{width:150,letterSpacing:2,borderRightColor:'0'},
+					hoverStyle:{width:240,letterSpacing:9,borderRightColor:'f'}
+				};
+			</script>
+		</div>
+
+		<!-- programmatic interface examples -->
+
+		<div class="programmaticInterface">
+			<div style="margin-bottom:10px;">Try some different curves:</div>
+			<ul>
+				<li>
+					<a
+						href="javascript://"
+						class="linkedJs"
+						title="page.children.menuHoverFader.set ({fadeIn:{duration:250,curve:null},fadeOut:{duration:350,curve:null}}); page.children.menuHoverFader.tickle (50)"
+					>
+						PLAIN VANILLA - short linear fade in, short linear fade out
+					</a>
+				</li>
+				<li>
+					<a
+						href="javascript://"
+						class="linkedJs"
+						title="page.children.menuHoverFader.set ({fadeIn:{duration:1200,curve:Uize.Curve.Rubber.easeOutElastic (.2)},fadeOut:{duration:1000,curve:Uize.Curve.Rubber.easeOutBounce (5,-2,1.5)}}); page.children.menuHoverFader.tickle (50)"
+					>
+						JELLO - elastic fade in, and bouncy fade out
+					</a>
+				</li>
+				<li>
+					<a
+						href="javascript://"
+						class="linkedJs"
+						title="page.children.menuHoverFader.set ({fadeIn:{duration:900,curve:Uize.Curve.Rubber.easeOutElastic (.2)},fadeOut:{duration:700,curve:Uize.Curve.Rubber.easeOutElastic (.5)}}); page.children.menuHoverFader.tickle (50)"
+					>
+						GENTLE ELASTIC - easeOutElastic for fade in, easeOutElastic for fade out
+					</a>
+				</li>
+				<li>
+					<a
+						href="javascript://"
+						class="linkedJs"
+						title="page.children.menuHoverFader.set ({fadeIn:{duration:350,curve:Uize.Curve.easeMiddlePow (3)},fadeOut:{duration:800,curve:Uize.Curve.Rubber.easeInOutBounce (3,-2)}}); page.children.menuHoverFader.tickle (50)"
+					>
+						JERKY - notch-in-the-middle for fade in, and multiple resistance points for fade out
+					</a>
+				</li>
+				<li>
+					<a
+						href="javascript://"
+						class="linkedJs"
+						title="page.children.menuHoverFader.set ({fadeIn:{duration:500,curve:Uize.Curve.Rubber.easeOutBounce (3,-2)},fadeOut:{duration:500,curve:Uize.Curve.Rubber.easeOutBounce (3,-2)}}); page.children.menuHoverFader.tickle (50)"
+					>
+						GENTLE BOUNCE - muted bounce for fade in, and muted bounce for fade out
+					</a>
+				</li>
+				<li>
+					<a
+						href="javascript://"
+						class="linkedJs"
+						title="page.children.menuHoverFader.set ({fadeIn:{duration:500,curve:Uize.Curve.easeOutPow (5)},fadeOut:{duration:1500,curve:Uize.Curve.Rubber.easeOutBounce (8,4,1.3)}}); page.children.menuHoverFader.tickle (50)"
+					>
+						CRAZY BOUNCY - ease out for fade in, and extremely bouncy fade out
+					</a>
+				</li>
+				<li>
+					<a
+						href="javascript://"
+						class="linkedJs"
+						title="page.children.menuHoverFader.set ({fadeIn:{duration:500,curve:Uize.Curve.easeInOutPow (5)},fadeOut:{duration:500,curve:Uize.Curve.easeOutPow (6)}}); page.children.menuHoverFader.tickle (50)"
+					>
+						SNAPPY - fast easeInOutPow for fade in, fast easeOutPow for fade out
+					</a>
+				</li>
+				<li>
+					<a
+						href="javascript://"
+						class="linkedJs"
+						title="page.children.menuHoverFader.set ({fadeIn:{duration:450,curve:Uize.Curve.Rubber.easeOutBack (4)},fadeOut:{duration:200,curve:Uize.Curve.Rubber.easeInBack (5)}}); page.children.menuHoverFader.tickle (50)"
+					>
+						OVERSHOOT - easeOutBack for fade in, very quick easeInBack for fade out
+					</a>
+				</li>
+				<li>
+					<a
+						href="javascript://"
+						class="linkedJs"
+						title="page.children.menuHoverFader.set ({fadeIn:{duration:300,curve:Uize.Curve.Rubber.easeOutBounce (2,1,2)},fadeOut:{duration:800,curve:Uize.Curve.Rubber.easeOutBounce (6,-8,1.5)}}); page.children.menuHoverFader.tickle (50)"
+					>
+						FAST THUD - fast muted easeOutBounce for fade in and fade out
+					</a>
+				</li>
+				<li>
+					<a
+						href="javascript://"
+						class="linkedJs"
+						title="page.children.menuHoverFader.set ({fadeIn:{duration:300,curve:Uize.Curve.Rubber.easeOutBounce (2,1,2)},fadeOut:{duration:5000,curve:Uize.Curve.Rubber.easeOutBounce (3,2,1.3,Uize.Curve.Rubber.easeInBounce (4,2,1.5))}}); page.children.menuHoverFader.tickle (50)"
+					>
+						JUMPING BEAN MADNESS - muted bounce fade in, undying bounce fade out
+					</a>
+				</li>
+				<li>
+					<a
+						href="javascript://"
+						class="linkedJs"
+						title="page.children.menuHoverFader.set ({fadeIn:{duration:200,curve:Uize.Curve.easeMiddlePow (3)},fadeOut:{duration:1000,curve:Uize.Curve.Mod.redraw (Uize.Curve.easeInOutPow (4),12,Uize.Curve.Rubber.easeInOutBack (6))}}); page.children.menuHoverFader.tickle (50)"
+					>
+						SHUDDERS - fast easeMiddlePow for fade in, shuddery ease-in-out for fade out
+					</a>
+				</li>
+				<li>
+					<a
+						href="javascript://"
+						class="linkedJs"
+						title="page.children.menuHoverFader.set ({fadeIn:{duration:500,curve:{borderRightColor:Uize.Curve.saw (3,1)}},fadeOut:{duration:500,curve:{borderRightColor:Uize.Curve.Mod.band (.05,1)}}}); page.children.menuHoverFader.tickle (50)"
+					>
+						BLINKY - right border blinks during fade in, stays white till end during fade out
+					</a>
+				</li>
+			</ul>
+		</div>
+		<br style="clear:left;"/>
+	</div>
+</div>
+
+<!-- JavaScript code to make the static HTML "come alive" -->
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Example.library',
+		'UizeDotCom.Page.Example',
+
+		// these curve modules are only needed for the additional effects previews
+		'Uize.Curve',
+		'Uize.Curve.Rubber',
+		'Uize.Curve.Mod'
+	],
+	builder:function () {
+		(window.page = new UizeDotCom.Page.Example ({evaluator:function (code) {eval (code)}})).wireUi ();
+	}
+});
+
+</script>
+
+</body>
+</html>
+

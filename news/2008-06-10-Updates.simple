@@ -1,0 +1,32 @@
+JSON Prettifier Tool - IMPROVED
+	The JSON Prettifier tool has been improved to allow the configuration of serialization options, with convenient presets provided.
+
+	[[../examples/json-prettifier.html][CHECK IT OUT]]
+
+BUG FIX: Uize.Node.setValue and myWidget.setNodeValue
+	An IE-specific bug was found with the =Uize.Node.setValue= static method, which also affected the =setNodeValue= instance method of the =Uize.Widget= class.
+
+	A workaround was put in place for an issue in IE where =document.getElementById= will return a node that has the specified =id= value set for its =name= attribute but not its =id= attribute. The IE issue resulted in the two methods not working correctly for radio buttons. It is now fixed.
+
+MyClass.get () and myInstance.get ()
+	When no parameter is specified when calling either the =MyClass.get= static method or the =myInstance.get= instance method, then all the static or instance values, respectively, for the registered set-get properties will be returned.
+
+Uize.Widget - Changes to busy/enabled Mechanism
+	The =myWidget.isBusy= instance method has been *KILLED* in favor of the =busyInherited= set-get property. Similarly, the =myWidget.isEnabled= instance method has been *KILLED* in favor of the =enabledInherited= set-get property. The barely used =myWidget.checkInherited= instance method that was technically public but never used outside of the =Uize.Widget= base class has been *KILLED*.
+
+	The new interface is more in keeping with the state interface philosophy of the UIZE JavaScript Framework, and also allows you to leverage the event system to watch on changes in the busy and enabled states by using the ='Changed.busyInherited'= and ='Changed.enabledInherited'= instance events. Additionally, the new set-get properties are more semantically correct. It was always confusing that isBusy returned a boolean, while the =busy= set-get property could have the string value of ='inherit'=.
+
+	.......................................................................
+	myWidget.isBusy ()     >> BECOMES >>  myWidget.get ('busyInherited')
+	myWidget.isEnabled ()  >> BECOMES >>  myWidget.get ('enabledInherited')
+	.......................................................................
+
+	It's a little more to type in the cases where this functionality is used, but it's fewer methods for every widget instance.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2008-06-10 - Updates
+....................................................................................

@@ -1,0 +1,49 @@
+.dataBar {
+	position:relative;
+	left:0;
+	top:0;
+	width:59px;
+	height:301px;
+	border:1px solid #000;
+}
+.dataBar .dataBarTrack {
+	position:absolute;
+	left:0;
+	top:0;
+	width:100%;
+	height:100%;
+}
+.dataBar .dataBarTrack .dataBarTrackFull {
+	position:absolute;
+	left:0;
+	top:0;
+	width:100%;
+	height:100%;
+	background:#fff;
+	opacity:.3;
+	filter:alpha(opacity=30);
+}
+.dataBar .dataBarTrack .dataBarTrackEmpty {
+	position:absolute;
+	left:0;
+	top:0;
+	width:100%;
+	height:100%;
+	background:#000;
+	opacity:.4;
+	filter:alpha(opacity=40);
+}
+.dataBar .dataBarTrack .dataBarKnob {
+	position:absolute;
+	left:0;
+	top:0;
+	width:57px;
+	height:13px;
+	border:1px solid #888;
+	color:#000;
+	font-face:Arial;
+	font-size:9px;
+	text-align:center;
+	background:#fff;
+}
+

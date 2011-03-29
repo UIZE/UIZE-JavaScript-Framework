@@ -1,0 +1,85 @@
+/*** general ***/
+	body {
+		margin:0;
+		background:transparent;
+		overflow:hidden;
+	}
+
+/*** widget title and menu ***/
+	/*** title ***/
+		.widgetHeader {
+			width:225px;
+			padding:7px 7px 3px 7px;
+			background:#89a url(../images/widget-title-bg.gif) repeat-x left top;
+		}
+		.widgetTitle {
+			position:relative;
+			background:#89a url(../images/widget-title-bg.gif) repeat-x left top;
+			border:1px solid #000;
+			border-color:#bcd #345 #123 #678;
+			height:35px;
+			padding:0 0 0 60px;
+			cursor:pointer;
+		}
+		.widgetHeader .widgetTitle .textShadow,
+		.widgetHeader .widgetTitle .textHighlight,
+		.widgetHeader .widgetTitle .textMain
+		{
+			position:absolute;
+			font-size:20px;
+			letter-spacing:4px;
+			text-transform:uppercase;
+		}
+		.widgetHeader .widgetTitle .textHighlight {
+			left:41px;
+			top:4px;
+			color:#abc;
+			text-shadow:0 0 1px #fff;
+		}
+		.widgetHeader .widgetTitle .textMain {
+			left:42px;
+			top:5px;
+			color:#789;
+			text-shadow:0 0 1px #789;
+		}
+		.widgetHeader .widgetTitle .textShadow {
+			left:43px;
+			top:6px;
+			color:#123;
+			text-shadow:0 0 1px #123;
+		}
+		.widgetHeader .widgetTitle .logo {
+			position:absolute;
+			left:4px;
+			top:4px;
+			width:25px;
+			height:25px;
+			background:transparent url(../images/uize-25x25.gif) no-repeat center center;
+		}
+
+	/*** title highlight ***/
+		.widgetTitleOver {
+			background:#567;
+		}
+		.widgetTitleActive {
+			background:#000 url(../images/button-bg.gif) left top repeat-x;
+		}
+		.widgetHeader .widgetTitleActive .textMain {
+			color:#aaa;
+		}
+		.widgetHeader .widgetTitleActive .textHighlight {
+			display:none;
+		}
+		.widgetHeader .widgetTitleActive .textShadow {
+			display:none;
+		}
+
+	/*** menu ***/
+		.subMenuShell {
+			width:222px;
+		}
+		.subMenuShell .subMenuItem:hover {
+			color:#fff;
+			background-color:#456;
+		}
+

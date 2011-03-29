@@ -1,0 +1,13 @@
+The new =Uize.Data.NameValueRecords= module provides methods for converting between a hash object and an array with elements representing name-value pairs.
+
+A name/value records array is an array where each record in the array represents a name/value pair. Name/value pairs in a name/value records array can be either object type name/value records or array type name/value records. With object type name/value records, each record is an object containing properties for the name and value of a name/value pair. With array type name/value records, each record is an array containing elements for the name and value of a name/value pair. Converting from a name/value records array to a hash object is done using the =Uize.Data.NameValueRecords.toHash= static method. Converting from a hash object to a name/value records array is done using the =Uize.Data.NameValueRecords.fromHash= static method.
+
+This little utility module is comprehensively documented, and loads of examples are provided. [[Uize.Data.NameValueRecords][LEARN MORE]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-11-19 - NEW MODULE: Uize.Data.NameValueRecords
+....................................................................................

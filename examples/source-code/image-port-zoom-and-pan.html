@@ -1,0 +1,115 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Zoom and Pan - HTML Source Code | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework HTML example source code"/>
+	<meta name="description" content="This is the source code for the Zoom and Pan example"/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../../css/page.css"/>
+	<link rel="stylesheet" href="../../css/page.source.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../../index.html" title="UIZE JavaScript Framework home"></a>
+	SOURCE CODE: Zoom and Pan
+	<div id="page-actions" class="pageActions">
+		<a href="../image-port-zoom-and-pan.html" class="buttonLink">VIEW EXAMPLE</a>
+	</div>
+</h1>
+
+<pre>
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+&lt;head&gt;
+  &lt;title&gt;Zoom and Pan | JavaScript Examples | UIZE JavaScript Framework&lt;/title&gt;
+  &lt;meta name="keywords" content="widget zoom Uize.Widget.ImagePort.Draggable"/&gt;
+  &lt;meta name="description" content="See how a draggable image port lets you control zoom for an image in a view port by ctrl-clicking and dragging, or pan by just clicking and dragging."/&gt;
+  &lt;link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/&gt;
+  &lt;link rel="stylesheet" href="../css/page.css"/&gt;
+  &lt;link rel="stylesheet" href="../css/page.example.css"/&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+&lt;script type="text/javascript" src="../js/Uize.js"&gt;&lt;/script&gt;
+
+&lt;h1 class="document-title"&gt;
+  &lt;a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"&gt;&lt;/a&gt;
+  &lt;a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow"&gt;JAVASCRIPT EXAMPLES&lt;/a&gt;
+  Zoom and Pan
+  &lt;div id="page-actions" class="pageActions"&gt;
+    &lt;a href="source-code/image-port-zoom-and-pan.html" class="buttonLink"&gt;SOURCE&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/h1&gt;
+
+&lt;div class="main"&gt;
+  &lt;!-- explanation copy --&gt;
+
+  &lt;div class="explanation"&gt;
+    &lt;p&gt;In this example, an instance of the &lt;a href="../reference/Uize.Widget.ImagePort.Draggable.html"&gt;&lt;code&gt;Uize.Widget.ImagePort.Draggable&lt;/code&gt;&lt;/a&gt; class is created to display a large image inside a small image port and then to allow the user to zoom and pan the image inside the port using the mouse. To pan, simply click-and-drag inside the image port. The change zoom level, use the ctrl modifier key: ctrl-drag-up zooms in, and ctrl-drag-down zooms out.&lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;div id="page_imagePort" style="position:relative; width:700px; height:380px; overflow:hidden; background:#000; margin:auto; border:1px solid #555;"&gt;
+    &lt;img id="page_imagePort-image" src="http://upload.wikimedia.org/wikipedia/commons/9/9c/Aldrin_Apollo_11.jpg" style="width:2700px; height:2700px; position:absolute;" alt=""/&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- JavaScript code to activate the image port functionality --&gt;
+
+&lt;script type="text/javascript"&gt;
+
+Uize.module ({
+  required:[
+    'UizeDotCom.Page.Example.library',
+    'UizeDotCom.Page.Example',
+    'Uize.Widget.ImagePort.Draggable'
+  ],
+  builder:function () {
+    /*** create the example page widget ***/
+      var page = window.page = new UizeDotCom.Page.Example;
+
+    /*** add the draggable image port child widget ***/
+      page.addChild (
+        'imagePort',
+        Uize.Widget.ImagePort.Draggable,
+        {
+          maxSizingValue:10,
+          minSizingValue:1,
+          sizingLowerBound:'0',
+          sizingUpperBound:'fill',
+          sizingValue:1,
+          alignX:.5,
+          alignY:.5
+        }
+      );
+
+    /*** wire up the page widget ***/
+      page.wireUi ();
+  }
+});
+
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+
+</pre>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.library',
+		'UizeDotCom.Page'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page).wireUi ()}
+});
+
+</script>
+
+</body></html>

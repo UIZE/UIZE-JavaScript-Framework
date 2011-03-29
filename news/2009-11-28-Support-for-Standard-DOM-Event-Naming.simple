@@ -1,0 +1,38 @@
+The DOM event management system, implemented in the =Uize.Node= module, has been improved with the addition of support for standard DOM event naming.
+
+Prior to this change, DOM event names needed to be specified with the old school "on" prefix (as in =onclick=, =onmouseover=, =onmouseout=, etc.). Event names now do not need to be specified with this prefix, although the old school naming is still supported for backwards compatibility.
+
+Deprecated Event Names
+	Event names starting with the "on" prefix - such as =onclick=, =onmouseover=, =onmouseout=, etc. - have been deprecated.
+
+	INSTEAD OF...
+	...............................................................................
+	Uize.Node.wire ('myLinkTag','onclick',function () {alert ('You Clicked Me!')});
+	...............................................................................
+
+	USE...
+	.............................................................................
+	Uize.Node.wire ('myLinkTag','click',function () {alert ('You Clicked Me!')});
+	.............................................................................
+
+	Methods affected by this change include the =Uize.Node.wire=, =Uize.Node.unwire=, and =Uize.Node.unwireEventsByOwnerId= static methods of the =Uize.Node= module, and the =wireNode=, =unwireNode=, and =unwireNodeEventsByMatch= instance methods of the =Uize.Widget= class.
+
+Benefits of This Change
+	This change to the various DOM event management methods offers the following benefits...
+
+	- The new event names are consistent with the DOM event naming standard, as established in the [[http://www.w3.org/TR/DOM-Level-2-Events/events.html#Events-eventgroupings-htmlevents][DOM Level 2 Event Model]] and [[http://www.w3.org/TR/DOM-Level-3-Events/#event-definitions][DOM Level 3 Event Model]] specifications.
+	- The naming without the "on" prefix is consistent with the way that events are named in the =type= property of the event object.
+	- The new event names are more concise (short 'n sweet, less to type, smaller code).
+
+Deprecated Event Names Still Supported
+	For backwards compatibility, the deprecated event names with the "on" prefix are all still supported, and will be supported for some time into the future.
+
+	All existing code using the deprecated old school event names should continue to work as normal. It would be wise to progressively migrate code over to using the more concise and standards compliant event names.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-11-28 - Support for Standard DOM Event Naming
+....................................................................................

@@ -1,0 +1,17 @@
+The new =Uize.Fade.xSeries= module is an extension module that extends the =Uize.Fade= class by adding static and instance methods for interpolating a series of values between specified start and end values.
+
+The methods defined in the =Uize.Fade.xSeries= module utilize the =Uize.Fade= class to let you create arrays of interpolated values. Typically, the =Uize.Fade= class is used to produce time-based animations, but this class can also be used solely for its powerful value interpolation capabilities. The =getSeries= and =Uize.Fade.getSeries= methods defined in this extension module could be useful when using fades in non-time based applications, such as displaying values in a bar chart, fading colors over a series of elements, plotting positions for a series of elements, populating data sets, etc.
+
+[[Uize.Fade.xSeries][LEARN MORE]]
+
+IMPORTANT
+
+The functionality in the =Uize.Fade.xSeries= module was migrated out of the =Uize.Fade= module. This means that the =Uize.Fade= module no longer has =getSeries= and =Uize.Fade.getSeries= methods - you need to load the extension module to get these. The rationale for this change - that is *not backwards compatible* - is that the migrated functionality is esoteric and not often needed, and there's not a good reason why this functionality should add to the page weight for all pages that use =Uize.Fade=. Removing the code from =Uize.Fade= shaved about 300 bytes off of the scrunched size of the module.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-08-07 - NEW MODULE: Uize.Fade.xSeries
+....................................................................................

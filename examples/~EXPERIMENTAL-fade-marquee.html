@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Basic Marquee | JavaScript Examples | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="animation Uize.Widget.Resizer.Marquee Uize.Fade.xFactory"/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.example.css"/>
+	<style type="text/css">
+		input {
+			font-family:Courier;
+			font-size:12px;
+			width:30px;
+			height:15px;
+		}
+	</style>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	<a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow">JAVASCRIPT EXAMPLES</a>
+	Basic Marquee
+	<div id="page-actions" class="pageActions">
+		<a href="source-code/marquee.html" class="buttonLink">SOURCE</a>
+	</div>
+</h1>
+
+<div class="main">
+	<!-- explanation copy -->
+
+	<div class="explanation">
+		<p>In this basic example, an instance of <a href="../reference/Uize.Widget.Resizer.Marquee.html"><code>Uize.Widget.Resizer.Marquee</code></a> provides a very simple marquee widget. The marquee is configured so that it cannot be moved outside of its container node, by setting its <code>constrained</code> set-get property to <code>true</code>. It can be resized to an arbitrary aspect ratio, but it cannot be made smaller than 20x20, accomplished by setting the <code>minWidth</code> and <code>minHeight</code> set-get properties. A handler is registered for the <code>Position Changed</code> instance event, so that the coordinates of the marquee are displayed (in text inputs to the right) as you move and resize it. Additionally, a new marquee can be created by clicking and dragging in a fresh spot outside the marquee's current area.</p>
+	</div>
+
+	<!-- marquee UI wireframe -->
+
+	<div id="page_marquee" style="width:500px; height:250px; background:#888; position:relative; margin:auto; margin-bottom:10px;"></div>
+
+	<div class="programmaticInterface">
+		<ul>
+			<li>Current Position:
+				&nbsp;
+				LEFT: <span id="page-marqueePositionLeft"></span>
+				&nbsp;|&nbsp;
+				TOP: <span id="page-marqueePositionTop"></span>
+				&nbsp;|&nbsp;
+				WIDTH: <span id="page-marqueePositionWidth"></span>
+				&nbsp;|&nbsp;
+				HEIGHT: <span id="page-marqueePositionHeight"></span>
+			</li>
+		</ul>
+		<ul>
+			<li>Fade left Set-get Property (canonicalized to equivalent signature):
+				<ul>
+					<li><a href="javascript://" class="linkedJs">Uize.Fade.fade ({context:marquee,handler:'set'},{left:100},{left:0},2000,{quantization:1})</a></li>
+					<li><a href="javascript://" class="linkedJs">Uize.Fade.fadeProperty (marquee,'left',100,0,2000,{quantization:1})</a></li>
+					<li><a href="javascript://" class="linkedJs">Uize.Fade.fadeProperties (marquee,{left:100},{left:0},2000,{quantization:1})</a></li>
+					<li><a href="javascript://" class="linkedJs">Uize.Fade.fadeMethod (marquee,'set',{left:100},{left:0},2000,{quantization:1})</a></li>
+				</ul>
+			</li>
+			<li>Fade width Set-get Property (canonicalized to equivalent signature):
+				<ul>
+					<li><a href="javascript://" class="linkedJs">Uize.Fade.fade ({context:marquee,handler:'set'},{width:100},{width:200},3000,{quantization:1})</a></li>
+					<li><a href="javascript://" class="linkedJs">Uize.Fade.fadeProperty (marquee,'width',100,200,3000,{quantization:1})</a></li>
+					<li><a href="javascript://" class="linkedJs">Uize.Fade.fadeProperties (marquee,{width:100},{width:200},3000,{quantization:1})</a></li>
+					<li><a href="javascript://" class="linkedJs">Uize.Fade.fadeMethod (marquee,'set',{width:100},{width:200},3000,{quantization:1})</a></li>
+				</ul>
+			</li>
+			<li>Fade left & width Set-get Properties (canonicalized to equivalent signature):
+				<ul>
+					<li><a href="javascript://" class="linkedJs">Uize.Fade.fade ({context:marquee,handler:'set'},{left:100,width:100},{left:0,width:400},3000,{quantization:1})</a></li>
+					<li><a href="javascript://" class="linkedJs">Uize.Fade.fadeProperties (marquee,{left:100,width:100},{left:0,width:400},3000,{quantization:1})</a></li>
+					<li><a href="javascript://" class="linkedJs">Uize.Fade.fadeMethod (marquee,'set',{left:100,width:100},{left:0,width:400},3000,{quantization:1})</a></li>
+				</ul>
+			</li>
+			<li>Fade top & height Set-get Properties (canonicalized to equivalent signature):
+				<ul>
+					<li><a href="javascript://" class="linkedJs">Uize.Fade.fade ({context:marquee,handler:'set'},{top:100,height:50},{top:0,height:200},3000,{quantization:1})</a></li>
+					<li><a href="javascript://" class="linkedJs">Uize.Fade.fadeProperties (marquee,{top:100,height:50},{top:0,height:200},3000,{quantization:1})</a></li>
+					<li><a href="javascript://" class="linkedJs">Uize.Fade.fadeMethod (marquee,'set',{top:100,height:50},{top:0,height:200},3000,{quantization:1})</a></li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+</div>
+
+<!-- JavaScript code to make the static marquee HTML "come alive" -->
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Example.library',
+		'UizeDotCom.Page.Example',
+		'Uize.Widget.Resizer.Marquee',
+		'Uize.Fade.xFactory'
+	],
+	builder:function () {
+		/*** create the example page widget ***/
+			var page = window.page = new UizeDotCom.Page.Example ({evaluator:function (code) {eval (code)}});
+
+		/*** add the marquee child widget ***/
+			var marquee = page.addChild (
+				'marquee',
+				Uize.Widget.Resizer.Marquee,
+				{
+					//hideOtherHandlesInDrag:true,
+					constrain:true,
+					left:100,
+					top:100,
+					width:100,
+					height:100,
+					minWidth:20,
+					minHeight:20,
+					built:false
+				})
+			;
+
+		/*** display marquee position while dragging ***/
+			function displayMarqueePosition () {
+				page.setNodeValue ('marqueePositionLeft',marquee.get ('left'));
+				page.setNodeValue ('marqueePositionTop',marquee.get ('top'));
+				page.setNodeValue ('marqueePositionWidth',marquee.get ('width'));
+				page.setNodeValue ('marqueePositionHeight',marquee.get ('height'));
+			}
+			marquee.wire ('Position Changed',displayMarqueePosition);
+
+		/*** display marquee's initial position ***/
+			displayMarqueePosition ();
+
+		/*** wire up the page widget ***/
+			page.wireUi ();
+	}
+});
+
+</script>
+
+</body>
+</html>
+

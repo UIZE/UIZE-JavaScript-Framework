@@ -1,0 +1,11 @@
+Documentation has been added for the =Uize.Node.centerInWindow=, =Uize.Node.getEventAbsPos=, =Uize.Node.getOpacityStr=, Uize.Node.setAbsPos, and Uize.Node.setAbsPosAdjacentTo static methods, and the =Uize.Node.isIe=, =Uize.Node.isSafari=, and =Uize.Node.isMozilla= static properties of the =Uize.Node= module.
+
+[[Uize.Node][CHECK IT OUT]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2008-12-18 - NEW DOCUMENTATION: Uize.Node
+....................................................................................

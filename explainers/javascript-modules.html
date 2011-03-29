@@ -1,0 +1,1122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Javascript Modules | Documentation | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework Documentation "/>
+	<meta name="description" content="The UIZE JavaScript framework implements systems to facilitate modular programming, such as dependency resolution, dynamic module loading, and more."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../javascript-explainers.html" class="breadcrumb breadcrumbWithArrow">EXPLAINERS</a>
+	Javascript Modules
+
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="The UIZE JavaScript framework implements systems to facilitate modular programming, such as dependency resolution, dynamic module loading, and more.">1. Introduction</a></li>
+			<li><a href="#2" title="In the following example, a subclass module is being declared.">2. A Simple Example</a></li>
+			<li><a href="#3" title="The module mechanism is distinct from - but supportive of - the class inheritance mechanism.">3. A Mechanism All Of Its Own</a></li>
+			<li><a href="#4" title="The Uize.module static method allows you to declare a module in the UIZE JavaScript Framework.">4. Uize.module</a>
+				<ul>
+					<li><a href="#4_1" title="To be technically correct, the Uize.module method strictly takes just one parameter that is an object.">4.1. Parameters</a>
+						<ul>
+							<li><a href="#4_1_1" title="The name parameter lets you specify a name for the module.">4.1.1. name</a></li>
+							<li><a href="#4_1_2" title="The optional superclass parameter lets you specify the name of a module that should be used as the superclass for the new module being declared.">4.1.2. superclass</a></li>
+							<li><a href="#4_1_3" title="The required parameter lets you specify a list of modules that are required in order for the new module being declared to function effectively. In a twist of irony, the required parameter is optional.">4.1.3. required</a>
+								<ul>
+									<li><a href="#4_1_3_1" title="It is redundant to require a module that is implicitly required.">4.1.3.1. Don't Require Implicit Dependencies</a></li>
+									<li><a href="#4_1_3_2" title="Require only what a module immediately or directly needs.">4.1.3.2. Require Only Immediate Dependencies</a></li>
+									<li><a href="#4_1_3_3" title="Avoid circular dependencies between two or more modules.">4.1.3.3. Avoid Circular Dependencies</a></li>
+								</ul>
+							</li>
+							<li><a href="#4_1_4" title="The builder parameter lets you specify a function that will be responsible for building the module once all its dependencies have been satisfied.">4.1.4. builder</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li><a href="#5">5. Types of Modules</a>
+				<ul>
+					<li><a href="#5_1" title="A subclass module is a module of code intended to create a subclass.">5.1. Subclass Module</a></li>
+					<li><a href="#5_2" title="A package in the UIZE JavaScript Framework is often just a collection of helper static methods or data properties, and is not derived from a superclass.">5.2. Package Module</a></li>
+					<li><a href="#5_3" title="Extension modules are modules of code that extend on the implementation of a class or package.">5.3. Extension Module</a></li>
+					<li><a href="#5_4" title="Anonymous modules are modules where no name is specified.">5.4. Anonymous Module</a>
+						<ul>
+							<li><a href="#5_4_1" title="It is a common pattern to place page wiring code towards the bottom of the page. You could either ensure that all the modules needed by the page wiring code are already sourced in before the wiring code is encountered in the document, or you could place the wiring code inside an anonymous module declaration, as in the following example...">5.4.1. Page Wiring</a></li>
+							<li><a href="#5_4_2" title="It is also possible to use the Uize.module method to declare an anonymous module of code that is deeply nested inside the main module&apos;s implementation. This module of code can then require modules that aren&apos;t required by the main module.">5.4.2. Deferred Loading</a></li>
+						</ul>
+					</li>
+					<li><a href="#5_5" title="The Uize.module method can also be used to simply declare a namespace. This is useful when declaring modules under that namespace, where it is implicit that the namespace must exit.">5.5. Namespace Module</a></li>
+					<li><a href="#5_6" title="In the UIZE JavaScript Framework, JavaScript libraries are bundles of JavaScript modules.">5.6. Library Module</a></li>
+					<li><a href="#5_7" title="Alias modules are modules that map to other modules and that can be used for providing backwards compatibility when a class hierarchy changes.">5.7. Alias Module</a></li>
+					<li><a href="#5_8" title="Data modules are modules that only define data structures, so that such data structures can be used by other modules.">5.8. Data Module</a>
+						<ul>
+							<li><a href="#5_8_1" title="Data modules are a convenient means of representing data that is to be used by JavaScript code, offering the following key benefits...">5.8.1. Benefits of Data Modules</a></li>
+							<li><a href="#5_8_2" title="The general concept of a data module does not dictate any specific interface for such modules, but one simple approach is to make the data module a function that returns a reference to the data object, with caching so that subsequent calls don&apos;t create fresh objects.">5.8.2. One Implementation Approach</a></li>
+							<li><a href="#5_8_3" title="Deferring the construction of a data object, as shown in the section One Implementation Approach, offers benefits in Deferred Use of Memory as well as Deferred Use of CPU.">5.8.3. Benefits of Deferred Construction</a>
+								<ul>
+									<li><a href="#5_8_3_1" title="A key benefit of this approach, or any approach where the data object is accessed by a method call, is that the mere loading of the data module does not incur the cost of the data object being &quot;exploded&quot; into memory.">5.8.3.1. Deferred Use of Memory</a></li>
+									<li><a href="#5_8_3_2" title="In the same way that this approach offers the benefit of Deferred Use of Memory, this approach can also defer the CPU usage associated with building the data structure in memory.">5.8.3.2. Deferred Use of CPU</a></li>
+								</ul>
+							</li>
+							<li><a href="#5_8_4" title="Even with the approach where the data object is only built in memory when first requested, you can always still warm up the engine, so to speak, by calling the accessor early on in the code of a module that requires a data module.">5.8.4. Warming up the Engine</a></li>
+							<li><a href="#5_8_5" title="There are a number of other ways one could go about implementing data modules, as discussed below...">5.8.5. Other Implementation Approaches</a>
+								<ul>
+									<li><a href="#5_8_5_1" title="A data module could actually be a special type of Subclass Module, where the data module implements a subclass of some data object base class.">5.8.5.1. Subclass of Data Object Base Class</a></li>
+									<li><a href="#5_8_5_2" title="A data module could define a static property that is a reference to an instance of some data object class, or the module itself could be a reference to an instance of a data object class.">5.8.5.2. Instance of Data Object Class</a></li>
+									<li><a href="#5_8_5_3" title="A data module could simply be a package, with either a static property or an accessor method for accessing the data object, along with additional convenience querying methods.">5.8.5.3. Package With Static Methods</a></li>
+								</ul>
+							</li>
+							<li><a href="#5_8_6" title="There&apos;s no saying that data modules need to be static files - they can be dynamically generated.">5.8.6. Dynamically Generated Data Module</a></li>
+							<li><a href="#5_8_7" title="Because data modules can require other data modules, this opens up the possibility of creating data modules that build up more complex data structures by using shared data subsets defined in other data modules.">5.8.7. Composite Data Module</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li><a href="#6">6. Dynamically Loading Modules</a>
+				<ul>
+					<li><a href="#6_1" title="The Uize.moduleLoader static method can be overridden, allowing you to provide your own custom module loader.">6.1. Uize.moduleLoader</a></li>
+					<li><a href="#6_2" title="The Uize.moduleLoader static method has a default implementation.">6.2. Default Module Loader</a></li>
+					<li><a href="#6_3" title="The default module loader relies on the value of the Uize.moduleUrlTemplate static property to know where to locate the JavaScript files that define required modules.">6.3. Uize.moduleUrlTemplate</a></li>
+					<li><a href="#6_4" title="You can override the default implementation of the Uize.moduleLoader static method in order to define your own module loader.">6.4. Custom Module Loader</a></li>
+					<li><a href="#6_5" title="The module loader mechanism is flexible enough to allow modules to be loaded and dependencies resolved in a variety of different ways and in a variety of different contexts, such as the browser, WSH (Windows Script Host), and even exotic environments that support JavaScript like Adobe Photoshop.">6.5. Different Kinds of Module Loaders</a>
+						<ul>
+							<li><a href="#6_5_1" title="A script tag module loader is the default module loader built into the Uize base class.">6.5.1. Script Tag Module Loader (built-in default)</a></li>
+							<li><a href="#6_5_2" title="An Ajax based module loader can be registered to allow modules to be loaded through a Web service of your choosing.">6.5.2. Ajax Module Loader</a></li>
+							<li><a href="#6_5_3" title="Build scripts written for the WSH (Windows Script Host) context can register a module loader that uses the Scripting.FileSystemObject ActiveX control to load modules.">6.5.3. Windows Script Host Module Loader</a></li>
+							<li><a href="#6_5_4" title="It is even possible to register a module loader in Adobe Photoshop&apos;s JavaScript based scripting environment (.jsx files), which has its own facility for reading in files.">6.5.4. Adobe Photoshop Module Loader</a></li>
+						</ul>
+					</li>
+					<li><a href="#6_6" title="It is safe to require modules without worrying about whether or not those modules have already been loaded.">6.6. Pre-loaded Modules</a></li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<a name="1"></a>
+	<h1 class="heading1" title="1. Introduction"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>. </span>Introduction</h1>
+	<div class="contents1">
+		<p>The UIZE JavaScript framework implements systems to facilitate <a href="http://www.wikipedia.org/modular_programming" target="_blank" class="externalSiteLink">modular programming</a>, such as dependency resolution, dynamic module loading, and more.</p>
+		
+		<p>In the UIZE JavaScript Framework, packages, class files, class extensions, and other kinds of code modules are declared using the <code><a href="#4">Uize.module</a></code> static method. This method allows for the declaration of dependencies and helps with dependency resolution. A <code><a href="#4_1_4">builder</a></code> parameter lets you specify a function that will build the module. This gives the module mechanism control over when the module is built, allowing it resolve all declared dependencies before attempting to build the module.</p>
+	</div>
+	
+	<a name="2"></a>
+	<h1 class="heading1" title="2. A Simple Example"><span class="headingNumber"><a href="#2" title="2. A Simple Example">2</a>. </span>A Simple Example</h1>
+	<div class="contents1">
+		<p>In the following example, a subclass module is being declared.</p>
+		
+		<p><span class="allCaps">EXAMPLE</span></p>
+		
+		
+<pre class="sample-code">Uize.module ({
+  name:'Uize.Widget.MagView',
+  required:[
+    'Uize.Node',
+    'Uize.Fade',
+    'Uize.Widget.ImagePort'
+  ],
+  builder:function (_superclass) {
+    /*** Object Constructor ***/
+      var
+        _class = _superclass.subclass (
+          function () {
+            /*
+            ...SOME CODE HERE...
+            ...SOME CODE HERE...
+            ...SOME CODE HERE...
+            */
+          }
+        ),
+        _classPrototype = _class.prototype
+      ;
+
+    /*
+    ...SOME CODE HERE...
+    ...SOME CODE HERE...
+    ...SOME CODE HERE...
+    */
+
+    return _class;
+  }
+});
+</pre>
+		
+		<p>In the above example, the <code><a href="../reference/Uize.Widget.MagView.html">Uize.Widget.MagView</a></code> module is being declared. Its name is specified by the <code><a href="#4_1_1">name</a></code> parameter. The modules that it immediately requires in order to be built are listed in the <code><a href="#4_1_3">required</a></code> parameter. And the function that is responsible for building and returning a reference to the module is specified by the <code><a href="#4_1_4">builder</a></code> parameter.</p>
+		
+		<p>In this particular example, a subclass is being created. <code><a href="../reference/Uize.Widget.MagView.html">Uize.Widget.MagView</a></code> is a subclass of <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>. The builder function receives a reference to the superclass, uses it to create a subclass, and then returns a reference to that subclass. The <code><a href="#4">Uize.module</a></code> method takes the result returned by the builder function and assigns it to the property <code>MagView</code> of the <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> host. In this example, the host is assumed to be the superclass, since there is no value specified for the optional <code><a href="#4_1_2">superclass</a></code> parameter (more on that later).</p>
+	</div>
+	
+	<a name="3"></a>
+	<h1 class="heading1" title="3. A Mechanism All Of Its Own"><span class="headingNumber"><a href="#3" title="3. A Mechanism All Of Its Own">3</a>. </span>A Mechanism All Of Its Own</h1>
+	<div class="contents1">
+		<p>The module mechanism is distinct from - but supportive of - the class inheritance mechanism.</p>
+		
+		<p>It is worth emphasizing that the module mechanism is primarily a means of declaring dependencies for modules of code, and also facilitates building of the module when dependencies are satisfied. The module mechanism is supportive of subclassing, rather than being required for subclassing. Moreover, modules can be used to declare code that is neither a subclass nor a package. The module mechanism should, therefore, be considered orthogonal to the class inheritance mechanism of the UIZE JavaScript Framework.</p>
+	</div>
+	
+	<a name="4"></a>
+	<h1 class="heading1" title="4. Uize.module"><span class="headingNumber"><a href="#4" title="4. Uize.module">4</a>. </span>Uize.module</h1>
+	<div class="contents1">
+		<p>The <code><a href="#4">Uize.module</a></code> static method allows you to declare a module in the UIZE JavaScript Framework.</p>
+		
+		<p>Modules can be of a number of key types, as discussed in the section <code><a href="#5">Types of Modules</a></code>. In a common case, a module declaration is used to declare a subclass.</p>
+		
+		<p><span class="allCaps">SYNTAX</span></p>
+		
+		
+<pre class="sample-code">Uize.module ({
+  name:moduleNameSTR,           // omit for anonymous modules
+  superclass:superclassNameSTR, // omit for package modules, or if host is superclass
+  required:modulesSTRorARRAY,   // omit when only host and superclass are required
+  builder:builderFUNC           // omit for library modules and namespace modules
+});
+</pre>
+		
+		<a name="4_1"></a>
+		<h2 class="heading2" title="4. Uize.module -&gt; 4.1. Parameters"><span class="headingNumber"><a href="#4" title="4. Uize.module">4</a>.<a href="#4_1" title="4. Uize.module -&gt; 4.1. Parameters">1</a>. </span>Parameters</h2>
+		<div class="contents2">
+			<p>To be technically correct, the <code><a href="#4">Uize.module</a></code> method strictly takes just one parameter that is an object.</p>
+			
+			<p>This object should contain a number of properties, as shown in the syntax declaration. So all the "parameters" described below are actually properties of this one object bundle that the method accepts. For simplicity's sake, we will refer to these properties as parameters.</p>
+			
+			<a name="4_1_1"></a>
+			<h3 class="heading3" title="4. Uize.module -&gt; 4.1. Parameters -&gt; 4.1.1. name"><span class="headingNumber"><a href="#4" title="4. Uize.module">4</a>.<a href="#4_1" title="4. Uize.module -&gt; 4.1. Parameters">1</a>.<a href="#4_1_1" title="4. Uize.module -&gt; 4.1. Parameters -&gt; 4.1.1. name">1</a>. </span>name</h3>
+			<div class="contents3">
+				<p>The <code><a href="#4_1_1">name</a></code> parameter lets you specify a name for the module.</p>
+				
+				
+<pre class="sample-code">[host].[guest]
+</pre>
+				
+				<p>The name of a module is comprised of two parts: the "host", and the "guest". The "host" is essentially an object that acts as a host to the "guest", which is a property that is an object reference to the module.</p>
+				
+				<p>In the simple example of a module with the name <code>'Uize.Widget.MagView'</code>, the "host" is <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> and the "guest" is <code>MagView</code>. Essentially, the <code>MagView</code> property of the <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> module is a reference to the mag view module, which is fully dereferenced in code as <code><a href="../reference/Uize.Widget.MagView.html">Uize.Widget.MagView</a></code>. The "host" for a module is always the object path contained in the module name, up until the last segment, and the "guest" is always the last segment.</p>
+				
+				<p><span class="allCaps">NOTES</span></p>
+				
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>When no name is specified for a module, it is considered an <code><a href="#5_4">Anonymous Module</a></code>.</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>When the module name contains no "host" portion (as in the example <code>MyNamespace</code>), then the window object is taken as the host.</td></tr>
+				</table>
+			</div>
+			
+			<a name="4_1_2"></a>
+			<h3 class="heading3" title="4. Uize.module -&gt; 4.1. Parameters -&gt; 4.1.2. superclass"><span class="headingNumber"><a href="#4" title="4. Uize.module">4</a>.<a href="#4_1" title="4. Uize.module -&gt; 4.1. Parameters">1</a>.<a href="#4_1_2" title="4. Uize.module -&gt; 4.1. Parameters -&gt; 4.1.2. superclass">2</a>. </span>superclass</h3>
+			<div class="contents3">
+				<p>The optional <code><a href="#4_1_2">superclass</a></code> parameter lets you specify the name of a module that should be used as the superclass for the new module being declared.</p>
+				
+				<p>This parameter is useful for when the superclass is not the same as the host. This occurs often if the host is a namespace for a module that may be a subclass of some module from some other namespace. When no <code><a href="#4_1_2">superclass</a></code> parameter is specified, the host is assumed to be the superclass. An object reference to the superclass is passed as the only parameter to the builder function specified by the <code><a href="#4_1_4">builder</a></code> parameter.</p>
+				
+				<p><span class="allCaps">NOTES</span></p>
+				
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>This parameter is only applicable when declaring a <code><a href="#5_1">Subclass Module</a></code> and is meaningless when declaring modules of the other types discussed in the section <code><a href="#5">Types of Modules</a></code>.</td></tr>
+				</table>
+			</div>
+			
+			<a name="4_1_3"></a>
+			<h3 class="heading3" title="4. Uize.module -&gt; 4.1. Parameters -&gt; 4.1.3. required"><span class="headingNumber"><a href="#4" title="4. Uize.module">4</a>.<a href="#4_1" title="4. Uize.module -&gt; 4.1. Parameters">1</a>.<a href="#4_1_3" title="4. Uize.module -&gt; 4.1. Parameters -&gt; 4.1.3. required">3</a>. </span>required</h3>
+			<div class="contents3">
+				<p>The <code><a href="#4_1_3">required</a></code> parameter lets you specify a list of modules that are required in order for the new module being declared to function effectively. In a twist of irony, the <code><a href="#4_1_3">required</a></code> parameter is optional.</p>
+				
+				<p>The value of the <code><a href="#4_1_3">required</a></code> parameter can be a string, being a comma separated list of module names, or it can be an array of strings that are module names.</p>
+				
+				<p>For example, the following...</p>
+				
+				
+<pre class="sample-code">required:'Uize.Node,Uize.Color,Uize.Data,Uize.Fade'
+</pre>
+				
+				<p>...is equivalent to...</p>
+				
+				
+<pre class="sample-code">required:['Uize.Node','Uize.Color','Uize.Data','Uize.Fade']
+</pre>
+				
+				<p>Using the array form has the advantage of permitting prettiness, by allowing the required list to be spread across multiple lines, as follows...</p>
+				
+				
+<pre class="sample-code">required:[
+  'Uize.Node',
+  'Uize.Color',
+  'Uize.Data',
+  'Uize.Fade'
+]
+</pre>
+				
+				<a name="4_1_3_1"></a>
+				<h4 class="heading4" title="4. Uize.module -&gt; 4.1. Parameters -&gt; 4.1.3. required -&gt; 4.1.3.1. Don&apos;t Require Implicit Dependencies"><span class="headingNumber"><a href="#4" title="4. Uize.module">4</a>.<a href="#4_1" title="4. Uize.module -&gt; 4.1. Parameters">1</a>.<a href="#4_1_3" title="4. Uize.module -&gt; 4.1. Parameters -&gt; 4.1.3. required">3</a>.<a href="#4_1_3_1" title="4. Uize.module -&gt; 4.1. Parameters -&gt; 4.1.3. required -&gt; 4.1.3.1. Don&apos;t Require Implicit Dependencies">1</a>. </span>Don't Require Implicit Dependencies</h4>
+				<div class="contents4">
+					<p>It is redundant to require a module that is implicitly required.</p>
+					
+					<p><span class="allCaps">DON'T REQUIRE UIZE</span></p>
+					
+					<p>This should be obvious, since the <code><a href="../reference/Uize.html">Uize</a></code> module needs to already be defined in order to be able to call the <code><a href="#4">Uize.module</a></code> static method.</p>
+					
+					<p><span class="allCaps">DON'T REQUIRE HOST</span></p>
+					
+					<p>When declaring a named module, it is implicit that the host is required. So, for example, when declaring a module with the name <code>'Uize.Widget.MagView'</code>, it is implicit that the module <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> is required, and so that module does not need to be specified in a required list. The module could not be assigned as the property <code>MagView</code> on <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, were the latter module not already defined.</p>
+					
+					<p><span class="allCaps">DON'T REQUIRE SUPERCLASS</span></p>
+					
+					<p>Similarly, for a module that declares a subclass where the superclass is different to the host and is specified in the optional <code><a href="#4_1_2">superclass</a></code> parameter, the module that is specified as being the superclass does not need to be specified in the required list. Its requirement is a given.</p>
+				</div>
+				
+				<a name="4_1_3_2"></a>
+				<h4 class="heading4" title="4. Uize.module -&gt; 4.1. Parameters -&gt; 4.1.3. required -&gt; 4.1.3.2. Require Only Immediate Dependencies"><span class="headingNumber"><a href="#4" title="4. Uize.module">4</a>.<a href="#4_1" title="4. Uize.module -&gt; 4.1. Parameters">1</a>.<a href="#4_1_3" title="4. Uize.module -&gt; 4.1. Parameters -&gt; 4.1.3. required">3</a>.<a href="#4_1_3_2" title="4. Uize.module -&gt; 4.1. Parameters -&gt; 4.1.3. required -&gt; 4.1.3.2. Require Only Immediate Dependencies">2</a>. </span>Require Only Immediate Dependencies</h4>
+				<div class="contents4">
+					<p>Require only what a module immediately or directly needs.</p>
+					
+					<p><span class="allCaps">DON'T REQUIRE ON BEHALF OF REQUIRED MODULES</span></p>
+					
+					<p>It is neither necessary nor appropriate to include in the required list modules that are not immediately required by the current module but that you know are required by other modules that the current module requires.</p>
+					
+					<p>So, for example, if you're declaring a module that requires <code><a href="../reference/Uize.Widget.Bar.Slider.html">Uize.Widget.Bar.Slider</a></code>, it is only necessary for the required list to include <code>'Uize.Widget.Bar.Slider'</code>. It is <b>not</b> necessary - or appropriate - to include <code>'Uize.Widget.Bar'</code>, or any other modules that you know are needed by the <code><a href="../reference/Uize.Widget.Bar.Slider.html">Uize.Widget.Bar.Slider</a></code> module. It is not the responsibility of your module to resolve all the dependencies of other modules. It is the module mechanism's responsibility to do that for you, with the help of good required lists in the modules you require.</p>
+					
+					<p>So, leave it to the module declarations of other modules to require what they care about. It is the responsibility of the <code><a href="../reference/Uize.Widget.Bar.Slider.html">Uize.Widget.Bar.Slider</a></code> module, for example, to have a <code><a href="#4">Uize.module</a></code> declaration that lists its immediate requirements. Implementations of the modules you use can change over time. The dependencies of modules of code should remain encapsulated within those modules of code.</p>
+					
+					<p><span class="allCaps">DON'T REQUIRE DEFERRED DEPENDENCIES</span></p>
+					
+					<p>If the implementation of a module will, at some point in the execution of its code, dynamically load additional modules - possibly by using the <code><a href="#4">Uize.module</a></code> method to wrap a deeply nested, <code><a href="#5_4">Anonymous Module</a></code> of code - it is not necessary to include those modules needed later in the required list. It is only necessary to require the modules that are immediately needed in order for the module's implementation to function correctly.</p>
+					
+					<p><span class="allCaps">DO REQUIRE ALL IMMEDIATE DEPENDENCIES</span></p>
+					
+					<p>The corollary to the rule of "don't require on behalf of required modules", is don't <b>avoid</b> requiring modules that you immediately use - just because you know that other modules you're using require them.</p>
+					
+					<p>A prime example is the much used <code><a href="../reference/Uize.Node.html">Uize.Node</a></code> module. The <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> base class relies heavily upon the <code><a href="../reference/Uize.Node.html">Uize.Node</a></code> package in its implementation. Therefore, every widget that is a subclass of <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> is effectively requiring <code><a href="../reference/Uize.Node.html">Uize.Node</a></code>. However, even if you are declaring a module that is a subclass of <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> and the module's code directly accesses methods of <code><a href="../reference/Uize.Node.html">Uize.Node</a></code>, then the required list should include <code>'Uize.Node'</code>.</p>
+					
+					<p>It's a slippery slope when you start weaving too much knowledge about other module's implementations into your own implementation and building in questionable assumptions that may later break. For argument sake, the structure of the framework could change over time. In one scenario, a <code><a href="../reference/Uize.Node.html">Uize.Node</a></code> package may be kept for backwards compability while the <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> implementation may be migrated away from using it. You don't want assumptions about the implementation of the <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> base class to break all widgets implemented for the framework.</p>
+				</div>
+				
+				<a name="4_1_3_3"></a>
+				<h4 class="heading4" title="4. Uize.module -&gt; 4.1. Parameters -&gt; 4.1.3. required -&gt; 4.1.3.3. Avoid Circular Dependencies"><span class="headingNumber"><a href="#4" title="4. Uize.module">4</a>.<a href="#4_1" title="4. Uize.module -&gt; 4.1. Parameters">1</a>.<a href="#4_1_3" title="4. Uize.module -&gt; 4.1. Parameters -&gt; 4.1.3. required">3</a>.<a href="#4_1_3_3" title="4. Uize.module -&gt; 4.1. Parameters -&gt; 4.1.3. required -&gt; 4.1.3.3. Avoid Circular Dependencies">3</a>. </span>Avoid Circular Dependencies</h4>
+				<div class="contents4">
+					<p>Avoid circular dependencies between two or more modules.</p>
+					
+					<p>Circular dependencies are the module equivalent of an infinite loop - they will cause modules to never load. Let's consider an example where a module <code>MyNamespace.MyModule1</code> requires module <code>MyNamespace.MyModule2</code>, and where <code>MyNamespace.MyModule2</code> in turn requires <code>MyNamespace.MyModule1</code>...</p>
+					
+					<p>JAVASCRIPT MODULE FILE: MyNamespace.MyModule1.js</p>
+					
+					
+<pre class="sample-code">Uize.module ({
+  name:'MyNamespace.MyModule1',
+  required:'MyNamespace.MyModule2',
+  builder:function () {
+    // ...
+  }
+});
+</pre>
+					
+					<p>JAVASCRIPT MODULE FILE: MyNamespace.MyModule2.js</p>
+					
+					
+<pre class="sample-code">Uize.module ({
+  name:'MyNamespace.MyModule2',
+  required:'MyNamespace.MyModule1',
+  builder:function () {
+    // ...
+  }
+});
+</pre>
+					
+					<p>As you can see from the above two snippets of code, the two modules <code>MyNamespace.MyModule1</code> and <code>MyNamespace.MyModule2</code> require each other. Now, if we declare an anonymous module that requires <code>MyNamespace.MyModule1</code>, the code in its <code><a href="#4_1_4">builder</a></code> function will never execute...</p>
+					
+					
+<pre class="sample-code">Uize.module ({
+  required:'MyNamespace.MyModule1',
+  builder:function () {
+    alert ('I will never be executed. How ever so terribly sad!!!');
+  }
+});
+</pre>
+					
+					<p>From a certain perspective, not being executed might be considered a desirable outcome. However, when it comes to your code that you would like to be executed, it is frustrating to be thwarted by a dreaded circular dependency.</p>
+					
+					<p>It may seem obvious that circular dependencies are bad and should be avoided, but they can come up in quite an innocent way. Sometimes two closely coupled classes might use static methods from each other. And, were it not for the dependency resolution system, it might even be possible to load the two files without a problem if the static methods aren't needed during setup of the classes. However, the module loader mechanism doesn't appreciate this subtle nuance, so any module registered as being required in a module declaration will need to be loaded before the module is built.</p>
+					
+					<p>The only real solution to this impasse is to factor out the common code that is needed by both modules into one or more separate modules that can be required by both of the modules that were previously requiring each other. Fortunately, as it turns out, the end result may produce better factored code and a cleaner architecture.</p>
+				</div>
+			</div>
+			
+			<a name="4_1_4"></a>
+			<h3 class="heading3" title="4. Uize.module -&gt; 4.1. Parameters -&gt; 4.1.4. builder"><span class="headingNumber"><a href="#4" title="4. Uize.module">4</a>.<a href="#4_1" title="4. Uize.module -&gt; 4.1. Parameters">1</a>.<a href="#4_1_4" title="4. Uize.module -&gt; 4.1. Parameters -&gt; 4.1.4. builder">4</a>. </span>builder</h3>
+			<div class="contents3">
+				<p>The <code><a href="#4_1_4">builder</a></code> parameter lets you specify a function that will be responsible for building the module once all its dependencies have been satisfied.</p>
+				
+				<p>Except for in the case of an <code><a href="#5_4">Anonymous Module</a></code> (ie. where there is no value specified for the <code><a href="#4_1_1">name</a></code> parameter), the builder function should return a reference to the built module, so that the <code><a href="#4">Uize.module</a></code> method can assign this to the host. For anonymous modules, any returned value will simply be ignored. For a <code><a href="#5_1">Subclass Module</a></code> or an <code><a href="#5_3">Extension Module</a></code>, the builder function should expect to receive a parameter, which is a reference to the superclass or class being extended, respectively.</p>
+				
+				<p><span class="allCaps">NOTES</span></p>
+				
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>When declaring a <code><a href="#5_1">Subclass Module</a></code>, your builder function does not need to assign the subclass as a property on the host - the <code><a href="#4">Uize.module</a></code> method will take of this for you.</td></tr>
+				</table>
+			</div>
+		</div>
+	</div>
+	
+	<a name="5"></a>
+	<h1 class="heading1" title="5. Types of Modules"><span class="headingNumber"><a href="#5" title="5. Types of Modules">5</a>. </span>Types of Modules</h1>
+	<div class="contents1">
+		<a name="5_1"></a>
+		<h2 class="heading2" title="5. Types of Modules -&gt; 5.1. Subclass Module"><span class="headingNumber"><a href="#5" title="5. Types of Modules">5</a>.<a href="#5_1" title="5. Types of Modules -&gt; 5.1. Subclass Module">1</a>. </span>Subclass Module</h2>
+		<div class="contents2">
+			<p>A subclass module is a module of code intended to create a subclass.</p>
+			
+			<p>When declaring a subclass module, the superclass can be specified using the optional superclass parameter. If no superclass is specified, then the "host" is assumed to be the superclass. The builder function should expect to receive one parameter, being an object reference to the superclass. The builder function should return an object reference to the subclass it creates, so this can be assigned to the "host".</p>
+			
+			<p><span class="allCaps">SUBCLASS MODULE - EXAMPLE 1</span></p>
+			
+			
+<pre class="sample-code">Uize.module ({
+  name:'Uize.Widget.MyWidgetClass',
+  builder:function (_superclass) {
+    /*** Object Constructor ***/
+      var
+        _class = _superclass.subclass (
+          /*
+          ...SOME CODE HERE...
+          ...SOME CODE HERE...
+          ...SOME CODE HERE...
+          */
+        ),
+        _classPrototype = _class.prototype
+      ;
+
+    /*
+    ...SOME CODE HERE...
+    ...SOME CODE HERE...
+    ...SOME CODE HERE...
+    */
+
+    return _class;
+  }
+});
+</pre>
+			
+			<p>In the example above, the widget class <code>Uize.Widget.MyWidgetClass</code> is a subclass of <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>. It has a simple implementation and so doesn't have any requirements beyond the implicit requirement of the <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> superclass.</p>
+			
+			<p><span class="allCaps">SUBCLASS MODULE - EXAMPLE 2</span></p>
+			
+			
+<pre class="sample-code">Uize.module ({
+  name:'MyNamespace.MyWidgetClass',
+  superclass:'Uize.Widget',
+  builder:function (_superclass) {
+    /*** Object Constructor ***/
+      var
+        _class = _superclass.subclass (
+          /*
+          ...SOME CODE HERE...
+          ...SOME CODE HERE...
+          ...SOME CODE HERE...
+          */
+        ),
+        _classPrototype = _class.prototype
+      ;
+
+    /*
+    ...SOME CODE HERE...
+    ...SOME CODE HERE...
+    ...SOME CODE HERE...
+    */
+
+    return _class;
+  }
+});
+</pre>
+			
+			<p>In the example above, the class <code>MyNamespace.MyWidgetClass</code> is not a subclass of the module <code>MyNamespace</code>. Rather, <code>MyNamespace</code> is merely the "host" for the <code>MyWidgetClass</code> property, and <code>MyNamespace.MyWidgetClass</code> is a means of referencing the class in code. Therefore, the fact that <code>MyNamespace.MyWidgetClass</code> is a subclass of <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> needs to be declared explicitly using the optional <code><a href="#4_1_2">superclass</a></code> parameter.</p>
+			
+			<p><span class="allCaps">SUBCLASS MODULE - EXAMPLE 3</span></p>
+			
+			
+<pre class="sample-code">Uize.module ({
+  name:'MyNamespace.MyWidgetClass',
+  superclass:'Uize.Widget',
+  required:[
+    'Uize.Node',
+    'Uize.Fade'
+  ],
+  builder:function (_superclass) {
+    /*** Object Constructor ***/
+      var
+        _class = _superclass.subclass (
+          /*
+          ...SOME CODE HERE...
+          ...SOME CODE HERE...
+          ...SOME CODE HERE...
+          */
+        ),
+        _classPrototype = _class.prototype
+      ;
+
+    /*
+    ...SOME CODE HERE...
+    ...SOME CODE HERE...
+    ...SOME CODE HERE...
+    */
+
+    return _class;
+  }
+});
+</pre>
+			
+			<p>In the above example, the implementation of the <code>MyNamespace.MyWidgetClass</code> module has become more complex and it now requires the additional modules <code><a href="../reference/Uize.Node.html">Uize.Node</a></code> and <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code>. Notice, however, that the modules <code>MyNamespace</code> and <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> (the host and superclass, respectively) are not in the required list, since their requirement is implicit.</p>
+		</div>
+		
+		<a name="5_2"></a>
+		<h2 class="heading2" title="5. Types of Modules -&gt; 5.2. Package Module"><span class="headingNumber"><a href="#5" title="5. Types of Modules">5</a>.<a href="#5_2" title="5. Types of Modules -&gt; 5.2. Package Module">2</a>. </span>Package Module</h2>
+		<div class="contents2">
+			<p>A package in the UIZE JavaScript Framework is often just a collection of helper static methods or data properties, and is not derived from a superclass.</p>
+			
+			<p>So, when declaring packages, there is no meaning to the concept of superclass. This means that the optional <code><a href="#4_1_2">superclass</a></code> parameter would not be applicable. Additionally, the value that is passed as a parameter to the specified builder function would not be valuable, and so your builder function can simply have no parameters.</p>
+			
+			<p><span class="allCaps">PACKAGE MODULE</span></p>
+			
+			
+<pre class="sample-code">Uize.module ({
+  name:'Uize.Node',
+  builder:function () {
+    var _package = function () {};
+
+    /*
+    ...SOME CODE HERE...
+    ...SOME CODE HERE...
+    ...SOME CODE HERE...
+    */
+
+    return _package;
+  }
+});
+</pre>
+			
+			<p><span class="allCaps">IMPORTANT</span></p>
+			
+			<p>In the example above, notice how the package object being built by the builder function is initialized as an anonymous function. For the benefit of the inheritance mechanism of the UIZE JavaScript Framework, the package should be built upon a function and not an object. Making the package an object would result in deep cloning in certain cases of subclassing, and this is not desirable for performance reasons.</p>
+		</div>
+		
+		<a name="5_3"></a>
+		<h2 class="heading2" title="5. Types of Modules -&gt; 5.3. Extension Module"><span class="headingNumber"><a href="#5" title="5. Types of Modules">5</a>.<a href="#5_3" title="5. Types of Modules -&gt; 5.3. Extension Module">3</a>. </span>Extension Module</h2>
+		<div class="contents2">
+			<p>Extension modules are modules of code that extend on the implementation of a class or package.</p>
+			
+			<p><span class="allCaps">EXTENSION MODULE</span></p>
+			
+			
+<pre class="sample-code">Uize.module ({
+  name:'Uize.Widget.Bar.Slider.xSkin',
+  builder:function (_class) {
+    /*
+    ...SOME CODE HERE...
+    ...SOME CODE HERE...
+    ...SOME CODE HERE...
+    */
+  }
+});
+</pre>
+			
+			<p>In the above example, the module <code><a href="../reference/Uize.Widget.Bar.Slider.xSkin.html">Uize.Widget.Bar.Slider.xSkin</a></code> is extending the module <code><a href="../reference/Uize.Widget.Bar.Slider.html">Uize.Widget.Bar.Slider</a></code>. The implementation of the module's builder function will use the <code>_class</code> parameter that is passed to it, which is a reference to the <code><a href="../reference/Uize.Widget.Bar.Slider.html">Uize.Widget.Bar.Slider</a></code> class, and will assign new properties on it (or otherwise modify it).</p>
+			
+			<p>Since no valus is returned by the <code><a href="#4_1_4">builder</a></code> function, the value <code>function () {}</code> (a dummy function) will be assigned to the <code>xSkin</code> property of the <code><a href="../reference/Uize.Widget.Bar.Slider.html">Uize.Widget.Bar.Slider</a></code> module, resulting in the valid object path of <code><a href="../reference/Uize.Widget.Bar.Slider.xSkin.html">Uize.Widget.Bar.Slider.xSkin</a></code>. This will ensure that if the module is required and has already been built, then the <code><a href="#4">Uize.module</a></code> method will detect this, because the property <code>xSkin</code> will exist on the <code><a href="../reference/Uize.Widget.Bar.Slider.html">Uize.Widget.Bar.Slider</a></code> object and dereferencing the object path <code><a href="../reference/Uize.Widget.Bar.Slider.xSkin.html">Uize.Widget.Bar.Slider.xSkin</a></code> will resolve to something defined, and the <code><a href="#4">Uize.module</a></code> method won't attempt to load the module.</p>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>As a naming convention, the guest name of an extension is prefixed with a lowercase "x", but this is merely a convention and not a requirement.</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>As with a <code><a href="#5_2">Package Module</a></code>, there is no meaning to the concept of superclass and, therefore, the optional <code><a href="#4_1_2">superclass</a></code> parameter is not applicable.</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>For semantic reasons, the parameter taken by the builder function should be called something like <code>_class</code> in the case of extending a class, and <code>_package</code> in the case of extending a package. It would work, but <b>not</b> be semantically meaningful, to call the parameter <code>_superclass</code>.</td></tr>
+			</table>
+		</div>
+		
+		<a name="5_4"></a>
+		<h2 class="heading2" title="5. Types of Modules -&gt; 5.4. Anonymous Module"><span class="headingNumber"><a href="#5" title="5. Types of Modules">5</a>.<a href="#5_4" title="5. Types of Modules -&gt; 5.4. Anonymous Module">4</a>. </span>Anonymous Module</h2>
+		<div class="contents2">
+			<p>Anonymous modules are modules where no name is specified.</p>
+			
+			<p>They are useful when declaring isolated modules of code that have dependencies on other modules that may not already be defined by the time that the anonymous module declaration is encountered. Once the <code><a href="#4">Uize.module</a></code> method has resolved the anonymous module's dependencies, the module's builder function will be executed.</p>
+			
+			<p>When not providing a <code><a href="#4_1_1">name</a></code> parameter value in the <code><a href="#4">Uize.module</a></code> method call, the result of the module's <code><a href="#4_1_4">builder</a></code> function will not be assigned to a host. Without a name for the module, there can be no host, so the value returned by the builder function is effectively ignored (ie. there is no point in returning a value).</p>
+			
+			<a name="5_4_1"></a>
+			<h3 class="heading3" title="5. Types of Modules -&gt; 5.4. Anonymous Module -&gt; 5.4.1. Page Wiring"><span class="headingNumber"><a href="#5" title="5. Types of Modules">5</a>.<a href="#5_4" title="5. Types of Modules -&gt; 5.4. Anonymous Module">4</a>.<a href="#5_4_1" title="5. Types of Modules -&gt; 5.4. Anonymous Module -&gt; 5.4.1. Page Wiring">1</a>. </span>Page Wiring</h3>
+			<div class="contents3">
+				<p>It is a common pattern to place page wiring code towards the bottom of the page. You could either ensure that all the modules needed by the page wiring code are already sourced in before the wiring code is encountered in the document, or you could place the wiring code inside an anonymous module declaration, as in the following example...</p>
+				
+				<p><span class="allCaps">ANONYMOUS MODULE</span></p>
+				
+				
+<pre class="sample-code">Uize.module ({
+  required:[
+    'Uize.Node',
+    'Uize.Widget.ImagePort',
+    'Uize.Widget.Bar.Slider.xSkin',
+    'Uize.Widget.Resizer.Marquee'
+  ],
+  builder:function () {
+    /*
+    ...PAGE WIRING CODE HERE...
+    ...PAGE WIRING CODE HERE...
+    ...PAGE WIRING CODE HERE...
+    */
+  }
+});
+</pre>
+				
+				<p>In the above example, the page wiring code will only execute once the <code><a href="../reference/Uize.Node.html">Uize.Node</a></code>, <code><a href="../reference/Uize.Widget.ImagePort.html">Uize.Widget.ImagePort</a></code>, <code><a href="../reference/Uize.Widget.Bar.Slider.xSkin.html">Uize.Widget.Bar.Slider.xSkin</a></code>, and <code><a href="../reference/Uize.Widget.Resizer.Marquee.html">Uize.Widget.Resizer.Marquee</a></code> modules, along with all of their required modules, have been loaded in and built.</p>
+			</div>
+			
+			<a name="5_4_2"></a>
+			<h3 class="heading3" title="5. Types of Modules -&gt; 5.4. Anonymous Module -&gt; 5.4.2. Deferred Loading"><span class="headingNumber"><a href="#5" title="5. Types of Modules">5</a>.<a href="#5_4" title="5. Types of Modules -&gt; 5.4. Anonymous Module">4</a>.<a href="#5_4_2" title="5. Types of Modules -&gt; 5.4. Anonymous Module -&gt; 5.4.2. Deferred Loading">2</a>. </span>Deferred Loading</h3>
+			<div class="contents3">
+				<p>It is also possible to use the <code><a href="#4">Uize.module</a></code> method to declare an anonymous module of code that is deeply nested inside the main module's implementation. This module of code can then require modules that aren't required by the main module.</p>
+				
+				<p>This technique is useful for sections of code that may only be encountered under unique and less common conditions, and where always requiring the modules that that code needs at the main module level would add unnecessary load in typical use cases. This approach can be used to defer the loading of modules until when they're truly needed. The drawback to this approach is that there might be some latency between a user interaction and a response to the user, but the overal load reduction for normal use may make this a compelling tradeoff.</p>
+			</div>
+		</div>
+		
+		<a name="5_5"></a>
+		<h2 class="heading2" title="5. Types of Modules -&gt; 5.5. Namespace Module"><span class="headingNumber"><a href="#5" title="5. Types of Modules">5</a>.<a href="#5_5" title="5. Types of Modules -&gt; 5.5. Namespace Module">5</a>. </span>Namespace Module</h2>
+		<div class="contents2">
+			<p>The <code><a href="#4">Uize.module</a></code> method can also be used to simply declare a namespace. This is useful when declaring modules under that namespace, where it is implicit that the namespace must exit.</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">Uize.module ({
+  name:'MyNamespace.MyWidgetClass',
+  superclass:'Uize.Widget',
+  builder:function (_superclass) {
+    /*** Object Constructor ***/
+      var
+        _class = _superclass.subclass (
+          /*
+          ...SOME CODE HERE...
+          ...SOME CODE HERE...
+          ...SOME CODE HERE...
+          */
+        ),
+        _classPrototype = _class.prototype
+      ;
+
+    /*
+    ...SOME CODE HERE...
+    ...SOME CODE HERE...
+    ...SOME CODE HERE...
+    */
+
+    return _class;
+  }
+});
+</pre>
+			
+			<p>In the above example, it is implicit that <code>MyNamespace</code> must exist, so that the property <code>MyWidgetClass</code> can be assigned on it. Therefore, the module declaration will try to resolve this dependency, if <code>MyNamespace</code> is not already defined. The <code><a href="#4">Uize.module</a></code> method will try to load the module <code>MyNamespace</code>. If <code>MyNamespace</code> is intended to truly be just a namespace and have zero implementation "guts", then you can declare the namespace in a namespace module, as simply...</p>
+			
+			<p><span class="allCaps">NAMESPACE MODULE</span></p>
+			
+			
+<pre class="sample-code">Uize.module ({name:'MyNamespace'});
+</pre>
+			
+			<p>Since no <code><a href="#4_1_4">builder</a></code> function is specified in this module declaration, the <code><a href="#4">Uize.module</a></code> method will simply assign <code>function () {}</code> (a dummy function) to the namespace. If the module name has no "host" portion (as in this example), then the "guest" (<code>MyNamespace</code> in this example) is assigned as a property on the window object. Namespaces can have a "host", however, as in the following example...</p>
+			
+			<p><span class="allCaps">SUBNAMESPACE MODULE</span></p>
+			
+			
+<pre class="sample-code">Uize.module ({name:'MyNamespace.MySubNamespace'});
+</pre>
+		</div>
+		
+		<a name="5_6"></a>
+		<h2 class="heading2" title="5. Types of Modules -&gt; 5.6. Library Module"><span class="headingNumber"><a href="#5" title="5. Types of Modules">5</a>.<a href="#5_6" title="5. Types of Modules -&gt; 5.6. Library Module">6</a>. </span>Library Module</h2>
+		<div class="contents2">
+			<p>In the UIZE JavaScript Framework, JavaScript libraries are bundles of JavaScript modules.</p>
+			
+			<p>Think of a JavaScript module as like a book, where the various methods and properties of the module make up the "pages" of the book. A library is a collection of books. So, in this metaphor, a JavaScript library file is a collection of JavaScript modules, bundled together into a single file. JavaScript libraries offer a performance benefit for pages, by reducing the number of HTTP requests needed in order for the page to have all the JavaScript modules it needs - especially important for pages with rich client interactivity that may use dozens of different modules.</p>
+			
+			<p>The source version of a JavaScript library lists the modules that should be included in the built version of the file, but doesn't include any actual code from those modules. The built version of a JavaScript library includes the scrunched versions of all the JavaScript modules that are listed in the source version of the library. JavaScript libraries are built by a special built script.</p>
+			
+			<p>Now, a library module is a special kind of JavaScript library file that declares itself as a module by including a module declaration, in addition to the special Library Contents comment that lists the JavaScript modules that should be bundled in the built version of the file, as in the following example...</p>
+			
+			<p><span class="allCaps">LIBRARY MODULE</span></p>
+			
+			
+<pre class="sample-code">/* Library Contents
+  Uize.Node
+  Uize.Fade
+  Uize.Xml
+  Uize.Tooltip
+  Uize.Widget
+  Uize.Widget.Page
+  Uize.Widget.Tree
+  Uize.Widget.Tree.List
+  UizeDotCom
+  UizeDotCom.Page
+  UizeDotCom.Page.Doc
+*/
+
+Uize.module ({name:'UizeDotCom.Page.Doc.library'});
+</pre>
+			
+			<p>The above example shows the contents of the source version of the library module <code>UizeDotCom.Page.Doc.library.js</code>. Notice how all that the module declaration does is to define the namespace for the library. When a JavaScript library file includes a module declaration that declares a namespace for the library file, then that library file can be required as a module, and requiring it will result in it being dynamically loaded in by the module loader mechanism - if it is not already loaded. Using this approach, the library module can simply be added to the <code><a href="#4_1_3">required</a></code> list of the anonymous module declaration that sets up the page widget instance in the page.</p>
+			
+			<p>For a detailed discussion of JavaScript library files and how they can be used to improve the performance of Web pages, consult the explainer <a href="javascript-libraries.html">JavaScript Libraries</a>.</p>
+		</div>
+		
+		<a name="5_7"></a>
+		<h2 class="heading2" title="5. Types of Modules -&gt; 5.7. Alias Module"><span class="headingNumber"><a href="#5" title="5. Types of Modules">5</a>.<a href="#5_7" title="5. Types of Modules -&gt; 5.7. Alias Module">7</a>. </span>Alias Module</h2>
+		<div class="contents2">
+			<p>Alias modules are modules that map to other modules and that can be used for providing backwards compatibility when a class hierarchy changes.</p>
+			
+			<p>There will come a time - when working on large enough a codebase - where a section of the overal class hierarchy might change as a result of code refactoring. In such cases, it might be desirable to provide backwards compatibility to the code that is using the classes / modules that are being moved or renamed. This approach makes it easier to contemplate and to manage otherwise disruptive structural changes in a class hierarchy.</p>
+			
+			<p>Let's consider the example where a module is to be renamed. In our example, the module <code>MyNamespace.OldClassName</code> will change its name to <code>MyNamespace.NewClassName</code>. Problem is, there is already tons of code that is using the <code>MyNamespace.OldClassName</code> class - some of which may not even be in your power to update. To manage this change, and to ensure that the code using <code>MyNamespace.OldClassName</code> doesn't break without finding and changing all references to the old name, a temporary alias module can be declared as follows...</p>
+			
+			<p><span class="allCaps">ALIAS MODULE</span></p>
+			
+			
+<pre class="sample-code">Uize.module ({
+  name:'MyNamespace.OldClassName',
+  required:'MyNamespace.NewClassName',
+  builder:function () {return MyNamespace.NewClassName}
+});
+</pre>
+			
+			<p>In this declaration for the now defunct <code>MyNamespace.OldClassName</code> module, the shiny new <code>MyNamespace.NewClassName</code> module is declared as a <code><a href="#4_1_3">required</a></code> module. So, old code that may still be requiring and using the <code>MyNamespace.OldClassName</code> module will be indirectly requiring the newer <code>MyNamespace.NewClassName</code> module. Once the <code>MyNamespace.NewClassName</code> module has been loaded, the <code><a href="#4_1_4">builder</a></code> function of the alias module will execute. All it does is return a reference to the newer <code>MyNamespace.NewClassName</code> module. So, requiring and creating an instance of the <code>MyNamespace.OldClassName</code> class is effectively the same as requiring and creating an instance of the <code>MyNamespace.NewClassName</code> class.</p>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>You can use the same trick with a <code><a href="#5_2">Package Module</a></code> or an <code><a href="#5_3">Extension Module</a></code>.</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>For backwards compatibility, old code can continue to use alias modules, but using them will add additional links in the dependency chain, and this will have a performance cost if modules are loaded in discretely. So, bottom line, it would be better to migrate code away from using alias modules as soon as is possible.</td></tr>
+			</table>
+		</div>
+		
+		<a name="5_8"></a>
+		<h2 class="heading2" title="5. Types of Modules -&gt; 5.8. Data Module"><span class="headingNumber"><a href="#5" title="5. Types of Modules">5</a>.<a href="#5_8" title="5. Types of Modules -&gt; 5.8. Data Module">8</a>. </span>Data Module</h2>
+		<div class="contents2">
+			<p>Data modules are modules that only define data structures, so that such data structures can be used by other modules.</p>
+			
+			<a name="5_8_1"></a>
+			<h3 class="heading3" title="5. Types of Modules -&gt; 5.8. Data Module -&gt; 5.8.1. Benefits of Data Modules"><span class="headingNumber"><a href="#5" title="5. Types of Modules">5</a>.<a href="#5_8" title="5. Types of Modules -&gt; 5.8. Data Module">8</a>.<a href="#5_8_1" title="5. Types of Modules -&gt; 5.8. Data Module -&gt; 5.8.1. Benefits of Data Modules">1</a>. </span>Benefits of Data Modules</h3>
+			<div class="contents3">
+				<p>Data modules are a convenient means of representing data that is to be used by JavaScript code, offering the following key benefits...</p>
+				
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><b>Can be Required</b> - As modules, data modules can be required by other types of modules and can, therefore, be loaded by the module loader mechanism, which can obviate the need to load data through XHR requests, providing one way of delivering data for cross-site scripting (XSS) while also allowing data to be loaded from local files by Web pages that are run locally.</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><b>Can Require</b> - As modules, data modules can require other data modules, allowing more complex data structures to be built up using shared subsets of data that are defined in other data modules (see <a href="#5_8_7">Composite Data Module</a>). Furthermore, data modules can use other modules for programmatic generation of data, or for the expanding of compressed data.</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><b>Can be Generated Dynamically</b> - Data modules can be generated dynamically by server side code (see <a href="#5_8_6">Dynamically Generated Data Module</a>), allowing the module loader mechanism to be used as an alternative to traditional approaches to XSS (Cross-Site Scripting) data requests.</td></tr>
+				</table>
+			</div>
+			
+			<a name="5_8_2"></a>
+			<h3 class="heading3" title="5. Types of Modules -&gt; 5.8. Data Module -&gt; 5.8.2. One Implementation Approach"><span class="headingNumber"><a href="#5" title="5. Types of Modules">5</a>.<a href="#5_8" title="5. Types of Modules -&gt; 5.8. Data Module">8</a>.<a href="#5_8_2" title="5. Types of Modules -&gt; 5.8. Data Module -&gt; 5.8.2. One Implementation Approach">2</a>. </span>One Implementation Approach</h3>
+			<div class="contents3">
+				<p>The general concept of a data module does not dictate any specific interface for such modules, but one simple approach is to make the data module a function that returns a reference to the data object, with caching so that subsequent calls don't create fresh objects.</p>
+				
+				<p>Consider the following skeleton for such a data module...</p>
+				
+				<p><span class="allCaps">SKELETON</span></p>
+				
+				
+<pre class="sample-code">Uize.module ({
+  name:'MyNamespace.MyDataModule',
+  builder:function () {
+    var _cachedData; // cached copy of data object, so it doesn't get created over and over
+
+    return function (_getCopy) {
+      if (_cachedData &amp;&amp; !_getCopy) return _cachedData;
+
+      var _data = {
+        // ... ... ...
+        // DATA OBJECT
+        // ... ... ...
+      };
+      return _getCopy ? _data : (_cachedData = _data);
+    };
+  }
+});
+</pre>
+				
+				<p>The above skeleton can be used as a template for creating data modules. This example defines the data module <code>MyNamespace.MyDataModule</code>. The <code><a href="#4_1_4">builder</a></code> returns a function, which is then assigned as the <code>MyDataModule</code> property of the object <code>MyNamespace</code>. This means that the <code>MyNamespace.MyDataModule</code> module is actually a function that returns a data object and should, therefore, be used in the form <code>MyNamespace.MyDataModule ()</code>.</p>
+				
+				<p>Now, in order to avoid contructing and returning a fresh data object each time this function is called, the function implements a simple caching mechanism, using the <code>_cachedData</code> variable that is defined in its enclosing scope. If this variable has a non-null value at the time that the <code>MyNamespace.MyDataModule</code> function is called, then this value is simply returned. Otherwise, or if the value <code>true</code> is specified for the optional <code>_getCopy</code> parameter, then the data object is constructed and cached as necessary. As mentioned, an optional <code>_getCopy</code> parameter allows fresh copies of the object to be made when calling the <code>MyNamespace.MyDataModule</code> function, in case using a shared copy is not desired.</p>
+				
+				<p>To see a real world example of this approach in use, take a look at the <code><a href="../reference/UizeDotCom.TestDataPhotos.html">UizeDotCom.TestDataPhotos</a></code> data module that is used by the <b>uize.com</b> Web site.</p>
+			</div>
+			
+			<a name="5_8_3"></a>
+			<h3 class="heading3" title="5. Types of Modules -&gt; 5.8. Data Module -&gt; 5.8.3. Benefits of Deferred Construction"><span class="headingNumber"><a href="#5" title="5. Types of Modules">5</a>.<a href="#5_8" title="5. Types of Modules -&gt; 5.8. Data Module">8</a>.<a href="#5_8_3" title="5. Types of Modules -&gt; 5.8. Data Module -&gt; 5.8.3. Benefits of Deferred Construction">3</a>. </span>Benefits of Deferred Construction</h3>
+			<div class="contents3">
+				<p>Deferring the construction of a data object, as shown in the section <a href="#5_8_2">One Implementation Approach</a>, offers benefits in <a href="#5_8_3_1">Deferred Use of Memory</a> as well as <a href="#5_8_3_2">Deferred Use of CPU</a>.</p>
+				
+				<a name="5_8_3_1"></a>
+				<h4 class="heading4" title="5. Types of Modules -&gt; 5.8. Data Module -&gt; 5.8.3. Benefits of Deferred Construction -&gt; 5.8.3.1. Deferred Use of Memory"><span class="headingNumber"><a href="#5" title="5. Types of Modules">5</a>.<a href="#5_8" title="5. Types of Modules -&gt; 5.8. Data Module">8</a>.<a href="#5_8_3" title="5. Types of Modules -&gt; 5.8. Data Module -&gt; 5.8.3. Benefits of Deferred Construction">3</a>.<a href="#5_8_3_1" title="5. Types of Modules -&gt; 5.8. Data Module -&gt; 5.8.3. Benefits of Deferred Construction -&gt; 5.8.3.1. Deferred Use of Memory">1</a>. </span>Deferred Use of Memory</h4>
+				<div class="contents4">
+					<p>A key benefit of this approach, or any approach where the data object is accessed by a method call, is that the mere loading of the data module does not incur the cost of the data object being "exploded" into memory.</p>
+					
+					<p>Instead, memory for storing the data structure can be allocated at the time that the data is first requested by calling the accessor. If it is never requested, because specific application state does not cause the data to be needed, then the memory needed to represent the data internally can remain available for other purposes.</p>
+				</div>
+				
+				<a name="5_8_3_2"></a>
+				<h4 class="heading4" title="5. Types of Modules -&gt; 5.8. Data Module -&gt; 5.8.3. Benefits of Deferred Construction -&gt; 5.8.3.2. Deferred Use of CPU"><span class="headingNumber"><a href="#5" title="5. Types of Modules">5</a>.<a href="#5_8" title="5. Types of Modules -&gt; 5.8. Data Module">8</a>.<a href="#5_8_3" title="5. Types of Modules -&gt; 5.8. Data Module -&gt; 5.8.3. Benefits of Deferred Construction">3</a>.<a href="#5_8_3_2" title="5. Types of Modules -&gt; 5.8. Data Module -&gt; 5.8.3. Benefits of Deferred Construction -&gt; 5.8.3.2. Deferred Use of CPU">2</a>. </span>Deferred Use of CPU</h4>
+				<div class="contents4">
+					<p>In the same way that this approach offers the benefit of <a href="#5_8_3_1">Deferred Use of Memory</a>, this approach can also defer the CPU usage associated with building the data structure in memory.</p>
+					
+					<p>This deferral becomes even more pronounced if the data structure is large and complex, or if building the data object requires any programmatic / algorithmic construction, programmatic expanding of compressed data, or the cloning of data subsets obtained from other data modules (see <a href="#5_8_7">Composite Data Module</a>). Instead, the performance impact of this construction can be deferred until when (and if) the data is truly needed.</p>
+					
+					<p>A good demonstration of this principle can be found in the <code><a href="../reference/UizeDotCom.SiteMap.html">UizeDotCom.SiteMap</a></code> module that defines the contents tree of the <b>uize.com</b> Web site. This module performs various types of programmatic data construction in order to reduce the module's file size. This file size reduction comes at the expense of slightly increased CPU usage, but the construction of the site contents tree is deferred until the user activates the site's contents tree menu, so this cost does not hurt the initial load time for pages that use the site menu control.</p>
+				</div>
+			</div>
+			
+			<a name="5_8_4"></a>
+			<h3 class="heading3" title="5. Types of Modules -&gt; 5.8. Data Module -&gt; 5.8.4. Warming up the Engine"><span class="headingNumber"><a href="#5" title="5. Types of Modules">5</a>.<a href="#5_8" title="5. Types of Modules -&gt; 5.8. Data Module">8</a>.<a href="#5_8_4" title="5. Types of Modules -&gt; 5.8. Data Module -&gt; 5.8.4. Warming up the Engine">4</a>. </span>Warming up the Engine</h3>
+			<div class="contents3">
+				<p>Even with the approach where the data object is only built in memory when first requested, you can always still warm up the engine, so to speak, by calling the accessor early on in the code of a module that requires a data module.</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">Uize.module ({
+  required:'MyNamespace.MyDataModule',
+  builder:function () {
+    MyNamespace.MyDataModule ();  // causes data object to be constructed and cached
+
+    // DO THE REST OF THE STUFF
+    // ... ... ... ... ... ...
+    // ... ... ... ... ... ...
+    // ... ... ... ... ... ...
+  }
+});
+</pre>
+				
+				<p>In the above example, an anonymous module is being declared that requires the <code>MyNamespace.MyDataModule</code> data module that we defined in the skeleton shown in the section <a href="#5_8_2">One Implementation Approach</a>. The code inside the <code><a href="#4_1_4">builder</a></code> function for this anonymous module calls the <code>MyNamespace.MyDataModule</code> function immediately in order to cause the <code>MyNamespace.MyDataModule</code> data module to construct its data object. That way, the object will be ready when later code tries to access it. Notice how the <code>MyNamespace.MyDataModule ()</code> statement is not assigning the result to any variable. The assumption is that later code was already accessing the data object using a <code>MyNamespace.MyDataModule</code> function call, and the early call is only intended to invoke pre-construction of the object in memory.</p>
+				
+				<p>This technique is more relevant in cases where there might be a greater delay in construction for large data structures, and where a one time delay in some later code is actually undesirable.</p>
+			</div>
+			
+			<a name="5_8_5"></a>
+			<h3 class="heading3" title="5. Types of Modules -&gt; 5.8. Data Module -&gt; 5.8.5. Other Implementation Approaches"><span class="headingNumber"><a href="#5" title="5. Types of Modules">5</a>.<a href="#5_8" title="5. Types of Modules -&gt; 5.8. Data Module">8</a>.<a href="#5_8_5" title="5. Types of Modules -&gt; 5.8. Data Module -&gt; 5.8.5. Other Implementation Approaches">5</a>. </span>Other Implementation Approaches</h3>
+			<div class="contents3">
+				<p>There are a number of other ways one could go about implementing data modules, as discussed below...</p>
+				
+				<a name="5_8_5_1"></a>
+				<h4 class="heading4" title="5. Types of Modules -&gt; 5.8. Data Module -&gt; 5.8.5. Other Implementation Approaches -&gt; 5.8.5.1. Subclass of Data Object Base Class"><span class="headingNumber"><a href="#5" title="5. Types of Modules">5</a>.<a href="#5_8" title="5. Types of Modules -&gt; 5.8. Data Module">8</a>.<a href="#5_8_5" title="5. Types of Modules -&gt; 5.8. Data Module -&gt; 5.8.5. Other Implementation Approaches">5</a>.<a href="#5_8_5_1" title="5. Types of Modules -&gt; 5.8. Data Module -&gt; 5.8.5. Other Implementation Approaches -&gt; 5.8.5.1. Subclass of Data Object Base Class">1</a>. </span>Subclass of Data Object Base Class</h4>
+				<div class="contents4">
+					<p>A data module could actually be a special type of <a href="#5_1">Subclass Module</a>, where the data module implements a subclass of some data object base class.</p>
+					
+					<p>In such an approach, the data object base class could provide static accessor methods that are inherited by subclasses. The base class may not be used for its instance features, and it may not be anticipated that instances would be created of the data object subclass. Alternatively, it may be intended that instances be created of a data object, and instance methods inherited from the base class could then provide ways to query or otherwise work with the data structure.</p>
+				</div>
+				
+				<a name="5_8_5_2"></a>
+				<h4 class="heading4" title="5. Types of Modules -&gt; 5.8. Data Module -&gt; 5.8.5. Other Implementation Approaches -&gt; 5.8.5.2. Instance of Data Object Class"><span class="headingNumber"><a href="#5" title="5. Types of Modules">5</a>.<a href="#5_8" title="5. Types of Modules -&gt; 5.8. Data Module">8</a>.<a href="#5_8_5" title="5. Types of Modules -&gt; 5.8. Data Module -&gt; 5.8.5. Other Implementation Approaches">5</a>.<a href="#5_8_5_2" title="5. Types of Modules -&gt; 5.8. Data Module -&gt; 5.8.5. Other Implementation Approaches -&gt; 5.8.5.2. Instance of Data Object Class">2</a>. </span>Instance of Data Object Class</h4>
+				<div class="contents4">
+					<p>A data module could define a static property that is a reference to an instance of some data object class, or the module itself could be a reference to an instance of a data object class.</p>
+					
+					<p>In such a case, instance methods of the data object class could provide ways to query or otherwise work with the data structure set for an instance of the class.</p>
+				</div>
+				
+				<a name="5_8_5_3"></a>
+				<h4 class="heading4" title="5. Types of Modules -&gt; 5.8. Data Module -&gt; 5.8.5. Other Implementation Approaches -&gt; 5.8.5.3. Package With Static Methods"><span class="headingNumber"><a href="#5" title="5. Types of Modules">5</a>.<a href="#5_8" title="5. Types of Modules -&gt; 5.8. Data Module">8</a>.<a href="#5_8_5" title="5. Types of Modules -&gt; 5.8. Data Module -&gt; 5.8.5. Other Implementation Approaches">5</a>.<a href="#5_8_5_3" title="5. Types of Modules -&gt; 5.8. Data Module -&gt; 5.8.5. Other Implementation Approaches -&gt; 5.8.5.3. Package With Static Methods">3</a>. </span>Package With Static Methods</h4>
+				<div class="contents4">
+					<p>A data module could simply be a package, with either a static property or an accessor method for accessing the data object, along with additional convenience querying methods.</p>
+					
+					<p>This approach is similar to the approach described in the section <a href="#5_8_2">One Implementation Approach</a>, but introduces the idea of offering additional static methods for working with the data object defined in the module. Such methods could be specifically tailored to the type of data that the module defines, such that they're not likely to be offered in some other shared module.</p>
+				</div>
+			</div>
+			
+			<a name="5_8_6"></a>
+			<h3 class="heading3" title="5. Types of Modules -&gt; 5.8. Data Module -&gt; 5.8.6. Dynamically Generated Data Module"><span class="headingNumber"><a href="#5" title="5. Types of Modules">5</a>.<a href="#5_8" title="5. Types of Modules -&gt; 5.8. Data Module">8</a>.<a href="#5_8_6" title="5. Types of Modules -&gt; 5.8. Data Module -&gt; 5.8.6. Dynamically Generated Data Module">6</a>. </span>Dynamically Generated Data Module</h3>
+			<div class="contents3">
+				<p>There's no saying that data modules need to be static files - they can be dynamically generated.</p>
+				
+				<p>Data modules can be dynamically generated from data stored in some other data format, such as CSV (Comma Separated Values), SimpleData, XML, etc. Furthermore, data modules can be generated in a number of different ways. For example, they can be generated dynamically by the server in response to an HTTP request. Alternatively, they can be generated by <a href="javascript-build-scripts.html">JavaScript Build Scripts</a> as part of a Web site build process. A good example of this is the <code><a href="../reference/UizeDotCom.ModulesTree.html">UizeDotCom.ModulesTree</a></code> module that defines the tree of all the JavaScript modules contained inside the modules folder of the <b>uize.com</b> Web site.</p>
+			</div>
+			
+			<a name="5_8_7"></a>
+			<h3 class="heading3" title="5. Types of Modules -&gt; 5.8. Data Module -&gt; 5.8.7. Composite Data Module"><span class="headingNumber"><a href="#5" title="5. Types of Modules">5</a>.<a href="#5_8" title="5. Types of Modules -&gt; 5.8. Data Module">8</a>.<a href="#5_8_7" title="5. Types of Modules -&gt; 5.8. Data Module -&gt; 5.8.7. Composite Data Module">7</a>. </span>Composite Data Module</h3>
+			<div class="contents3">
+				<p>Because data modules can require other data modules, this opens up the possibility of creating data modules that build up more complex data structures by using shared data subsets defined in other data modules.</p>
+				
+				<p>In the example below, three data modules are being declared. The <code>MyNamespace.EngineeringEmployees</code> data module defines an array of employee information records for members of an engineering department. Similarly, the <code>MyNamespace.FinanceEmployees</code> data module defines an array of employee information records for members of a finance department. Finally, the <code>MyNamespace.AllEmployees</code> data modules combines the data from both the <code>MyNamespace.EngineeringEmployees</code> and <code>MyNamespace.FinanceEmployees</code> data modules in order to define an array of employee information records for all employees.</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">Uize.module ({name:'MyNamespace'});  // declare MyNamespace namespace
+
+
+// declare module with data records for engineering employees
+
+Uize.module ({
+  name:'MyNamespace.EngineeringEmployees',
+  builder:function () {
+    var _cachedData;
+
+    return function (_getCopy) {
+      if (_cachedData &amp;&amp; !_getCopy) return _cachedData;
+
+      var _data = [
+        {firstName:'John',lastName:'Wilkey',department:'engineering'},
+        {firstName:'Nick',lastName:'Arendsen',department:'engineering'},
+        {firstName:'Mark',lastName:'Strathley',department:'engineering'}
+      ];
+      return _getCopy ? _data : (_cachedData = _data);
+    };
+  }
+});
+
+
+// declare module with data records for finance employees
+
+Uize.module ({
+  name:'MyNamespace.FinanceEmployees',
+  builder:function () {
+    var _cachedData;
+
+    return function (_getCopy) {
+      if (_cachedData &amp;&amp; !_getCopy) return _cachedData;
+
+      var _data = [
+        {firstName:'Marie',lastName:'Stevenson',department:'finance'},
+        {firstName:'Craig',lastName:'Pollack',department:'finance'}
+      ];
+      return _getCopy ? _data : (_cachedData = _data);
+    };
+  }
+});
+
+
+// declare module that combines data for engineering and finance employees
+
+Uize.module ({
+  name:'MyNamespace.AllEmployees',
+  required:[
+    'MyNamespace.EngineeringEmployees',
+    'MyNamespace.FinanceEmployees'
+  ],
+  builder:function () {
+    var _cachedData;
+
+    return function (_getCopy) {
+      if (_cachedData &amp;&amp; !_getCopy) return _cachedData;
+
+      var _data = [].concat (
+        MyNamespace.EngineeringEmployees (true),
+        MyNamespace.FinanceEmployees (true)
+      );
+      return _getCopy ? _data : (_cachedData = _data);
+    };
+  }
+});
+
+
+// declare anonymous module that requires all employees module and alerts its contents
+
+Uize.module ({
+  required:[
+    'MyNamespace.AllEmployees',
+    'Uize.Json'
+  ],
+  builder:function () {
+    alert (Uize.Json.to (MyNamespace.AllEmployees ()));
+  }
+});
+</pre>
+				
+				<p>Looking at the code, notice how each of the three data modules follows the convention described in the section <a href="#5_8_2">One Implementation Approach</a>. The accessor for each data module supports the optional <code>_getCopy</code> parameter. This parameter is being used in the accessor function for the <code>MyNamespace.AllEmployees</code> module, where the value <code>true</code> is being specified in order to ensure that the data structure defined in this module does not share references to the data objects from the other two modules.</p>
+				
+				<p>Avoiding shared references may or may not be an important consideration, depending on how the data is intended to be used. In this particular approach, modifying a data object returned by the <code>MyNamespace.FinanceEmployees</code> accessor would not affect the data object returned by the <code>MyNamespace.AllEmployees</code> accessor, because the accessor function in the <code>MyNamespace.AllEmployees</code> module guarantees that it has discrete copies of the data defined by the <code>MyNamespace.EngineeringEmployees</code> and <code>MyNamespace.FinanceEmployees</code> modules.</p>
+				
+				<p>For further reference, a good example of a <a href="#5_8_7">Composite Data Module</a> is the <code><a href="../reference/UizeDotCom.SiteMap.html">UizeDotCom.SiteMap</a></code> module that defines the contents tree of the <b>uize.com</b> Web site. This module makes use of the <code><a href="../reference/UizeDotCom.ModulesTree.html">UizeDotCom.ModulesTree</a></code> <a href="#5_8_6">Dynamically Generated Data Module</a> that defines the tree of all the JavaScript modules contained inside the modules folder of the <b>uize.com</b> Web site.</p>
+			</div>
+		</div>
+	</div>
+	
+	<a name="6"></a>
+	<h1 class="heading1" title="6. Dynamically Loading Modules"><span class="headingNumber"><a href="#6" title="6. Dynamically Loading Modules">6</a>. </span>Dynamically Loading Modules</h1>
+	<div class="contents1">
+		<a name="6_1"></a>
+		<h2 class="heading2" title="6. Dynamically Loading Modules -&gt; 6.1. Uize.moduleLoader"><span class="headingNumber"><a href="#6" title="6. Dynamically Loading Modules">6</a>.<a href="#6_1" title="6. Dynamically Loading Modules -&gt; 6.1. Uize.moduleLoader">1</a>. </span>Uize.moduleLoader</h2>
+		<div class="contents2">
+			<p>The <code><a href="#6_1">Uize.moduleLoader</a></code> static method can be overridden, allowing you to provide your own custom module loader.</p>
+			
+			<p>This is useful if you plan to use a Web service accessed through AJAX to load JavaScript modules.</p>
+		</div>
+		
+		<a name="6_2"></a>
+		<h2 class="heading2" title="6. Dynamically Loading Modules -&gt; 6.2. Default Module Loader"><span class="headingNumber"><a href="#6" title="6. Dynamically Loading Modules">6</a>.<a href="#6_2" title="6. Dynamically Loading Modules -&gt; 6.2. Default Module Loader">2</a>. </span>Default Module Loader</h2>
+		<div class="contents2">
+			<p>The <code><a href="#6_1">Uize.moduleLoader</a></code> static method has a default implementation.</p>
+			
+			<p>The default module loader implementation supports dynamic loading of JavaScript modules using a technique that involves insertion of <code>script</code> tags into the document.</p>
+		</div>
+		
+		<a name="6_3"></a>
+		<h2 class="heading2" title="6. Dynamically Loading Modules -&gt; 6.3. Uize.moduleUrlTemplate"><span class="headingNumber"><a href="#6" title="6. Dynamically Loading Modules">6</a>.<a href="#6_3" title="6. Dynamically Loading Modules -&gt; 6.3. Uize.moduleUrlTemplate">3</a>. </span>Uize.moduleUrlTemplate</h2>
+		<div class="contents2">
+			<p>The default module loader relies on the value of the <code><a href="#6_3">Uize.moduleUrlTemplate</a></code> static property to know where to locate the JavaScript files that define required modules.</p>
+			
+			<p>The value of this property should be a string containing the token <code>[#modulePath]</code>, which will be replaced with a path that is derived from the name of the module to be loaded.</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">Uize.moduleUrlTemplate = 'http://www.somedomain.com/js/[#modulePath]';
+</pre>
+			
+			<p>In the above example, if the module <code><a href="../reference/Uize.Widget.MagView.html">Uize.Widget.MagView</a></code> needed to be loaded, the module path of "Uize.Widget.MagView.js" would be derived from the module name and would be substituted for the <code>[#modulePath]</code> token, to produce the URL "http://www.somedomain.com/js/Uize.Widget.MagView.js".</p>
+			
+			<p>When the <code><a href="../reference/Uize.html">Uize</a></code> module is initially loaded, the value of <code><a href="#6_3">Uize.moduleUrlTemplate</a></code> static property will be set to a path from which the Uize.js file is loaded. This is accomplished by scanning through the document's DOM to find a script node that references the "Uize.js" JavaScript file. This approach usually works well and it is, therefore, usually <b>not</b> necessary to set a value for this property in order for the default module loader to work.</p>
+			
+			<p>There might be cases, however, when the code for the <code><a href="../reference/Uize.html">Uize</a></code> base class is included into a single <a href="javascript-libraries.html">JavaScript library</a> file that is not named "Uize.js". In such cases, it will be necessary to set a value for the <code><a href="#6_3">Uize.moduleUrlTemplate</a></code> static property that is consistent with your server environment and where the UIZE JavaScript Framework's JavaScript files are located.</p>
+		</div>
+		
+		<a name="6_4"></a>
+		<h2 class="heading2" title="6. Dynamically Loading Modules -&gt; 6.4. Custom Module Loader"><span class="headingNumber"><a href="#6" title="6. Dynamically Loading Modules">6</a>.<a href="#6_4" title="6. Dynamically Loading Modules -&gt; 6.4. Custom Module Loader">4</a>. </span>Custom Module Loader</h2>
+		<div class="contents2">
+			<p>You can override the default implementation of the <code><a href="#6_1">Uize.moduleLoader</a></code> static method in order to define your own module loader.</p>
+			
+			<p>The value of this property should be a function. The function should expect to receive two parameters, being the name of the module to load, and a function that should be called once the module's code has been loaded. The callback function expects to receive one parameter, being the module's code as a string value.</p>
+		</div>
+		
+		<a name="6_5"></a>
+		<h2 class="heading2" title="6. Dynamically Loading Modules -&gt; 6.5. Different Kinds of Module Loaders"><span class="headingNumber"><a href="#6" title="6. Dynamically Loading Modules">6</a>.<a href="#6_5" title="6. Dynamically Loading Modules -&gt; 6.5. Different Kinds of Module Loaders">5</a>. </span>Different Kinds of Module Loaders</h2>
+		<div class="contents2">
+			<p>The module loader mechanism is flexible enough to allow modules to be loaded and dependencies resolved in a variety of different ways and in a variety of different contexts, such as the browser, WSH (Windows Script Host), and even exotic environments that support JavaScript like Adobe Photoshop.</p>
+			
+			<a name="6_5_1"></a>
+			<h3 class="heading3" title="6. Dynamically Loading Modules -&gt; 6.5. Different Kinds of Module Loaders -&gt; 6.5.1. Script Tag Module Loader (built-in default)"><span class="headingNumber"><a href="#6" title="6. Dynamically Loading Modules">6</a>.<a href="#6_5" title="6. Dynamically Loading Modules -&gt; 6.5. Different Kinds of Module Loaders">5</a>.<a href="#6_5_1" title="6. Dynamically Loading Modules -&gt; 6.5. Different Kinds of Module Loaders -&gt; 6.5.1. Script Tag Module Loader (built-in default)">1</a>. </span>Script Tag Module Loader (built-in default)</h3>
+			<div class="contents3">
+				<p>A <code>script</code> tag module loader is the default module loader built into the <code><a href="../reference/Uize.html">Uize</a></code> base class.</p>
+				
+				<p>This module loader mechanism makes use of the browser's behavior of automatically loading external JavaScript files whenever script tags linking to external JavaScript files are added to the document's DOM.</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">Uize.moduleLoader = function (_moduleToLoad,_callback) {
+  _callback ();
+  var _scriptNode = document.createElement ('script');
+  _scriptNode.src =
+    Uize.moduleUrlTemplate.replace ('[#modulePath]',_moduleToLoad + '.js')
+  ;
+  document.body.appendChild (_scriptNode);
+};
+</pre>
+				
+				<p>In the above example, the callback is called immediately with no code, since a script tag will be inserted into the document and the browser will, itself, load and execute the code. Upon the callback being called, the module loader mechanism recognizes that the module is not defined after the <code>moduleLoader</code> is executed and assumes that it must wait for the module - and all its dependencies - to load asynchronously.</p>
+			</div>
+			
+			<a name="6_5_2"></a>
+			<h3 class="heading3" title="6. Dynamically Loading Modules -&gt; 6.5. Different Kinds of Module Loaders -&gt; 6.5.2. Ajax Module Loader"><span class="headingNumber"><a href="#6" title="6. Dynamically Loading Modules">6</a>.<a href="#6_5" title="6. Dynamically Loading Modules -&gt; 6.5. Different Kinds of Module Loaders">5</a>.<a href="#6_5_2" title="6. Dynamically Loading Modules -&gt; 6.5. Different Kinds of Module Loaders -&gt; 6.5.2. Ajax Module Loader">2</a>. </span>Ajax Module Loader</h3>
+			<div class="contents3">
+				<p>An Ajax based module loader can be registered to allow modules to be loaded through a Web service of your choosing.</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">Uize.moduleLoader = function (_moduleToLoad,_callback) {
+  _this._commObject.request ({
+    url:[_this.get ('env').service + 'getjs',{filename:_moduleToLoad + '.js'}],
+    returnType:'json',
+    requestMethod:'GET',
+    callback:_callback
+  });
+};
+</pre>
+			</div>
+			
+			<a name="6_5_3"></a>
+			<h3 class="heading3" title="6. Dynamically Loading Modules -&gt; 6.5. Different Kinds of Module Loaders -&gt; 6.5.3. Windows Script Host Module Loader"><span class="headingNumber"><a href="#6" title="6. Dynamically Loading Modules">6</a>.<a href="#6_5" title="6. Dynamically Loading Modules -&gt; 6.5. Different Kinds of Module Loaders">5</a>.<a href="#6_5_3" title="6. Dynamically Loading Modules -&gt; 6.5. Different Kinds of Module Loaders -&gt; 6.5.3. Windows Script Host Module Loader">3</a>. </span>Windows Script Host Module Loader</h3>
+			<div class="contents3">
+				<p>Build scripts written for the WSH (Windows Script Host) context can register a module loader that uses the <code>Scripting.FileSystemObject</code> ActiveX control to load modules.</p>
+				
+				<p>The many build scripts used by the uize.com Web site make use of a module loader that works in the WSH context and that allows the build scripts to register and have their dependencies resolved in just the same way as you would expect when writing code for the Web browser context.</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">var _fileSystemObject = new ActiveXObject ('Scripting.FileSystemObject');
+function moduleLoader (_moduleToLoad,_callback) {
+  var
+    _moduleToLoadFile =
+      _fileSystemObject.OpenTextFile ('js/~source/' + _moduleToLoad + '.js',1),
+    _moduleToLoadCode = _moduleToLoadFile.ReadAll ()
+  ;
+  _moduleToLoadFile.Close ();
+  _callback (_moduleToLoadCode);
+}
+moduleLoader ('Uize',function (_moduleToLoadCode) {eval (_moduleToLoadCode)});
+Uize.moduleLoader = moduleLoader;
+</pre>
+				
+				<p>The module loader is implemented inside the build script. When the build script is executed, <code><a href="../reference/Uize.html">Uize</a></code> is not yet defined. So, you find yourself in somewhat of a <a href="http://en.wikipedia.org/wiki/Catch-22" target="_blank" class="externalSiteLink">Catch-22</a> situation. You can't rely on a module loader defined in the <code><a href="../reference/Uize.html">Uize</a></code> module to load in the <code><a href="../reference/Uize.html">Uize</a></code> module, since it's not yet loaded. So, to break this impasse we define a <code>moduleLoader</code> function inside the build script, use this function to load the <code><a href="../reference/Uize.html">Uize</a></code> module, eval the loaded <code><a href="../reference/Uize.html">Uize</a></code> module's code, and then finally register the function as the module loader by overriding the <code><a href="#6_1">Uize.moduleLoader</a></code> static method. From here on, modules can be declared using the <code><a href="#4">Uize.module</a></code> static method, and the module loader mechanism is now set up to resolve all dependencies and load modules as needed using the <code>Scripting.FileSystemObject</code> ActiveX control.</p>
+			</div>
+			
+			<a name="6_5_4"></a>
+			<h3 class="heading3" title="6. Dynamically Loading Modules -&gt; 6.5. Different Kinds of Module Loaders -&gt; 6.5.4. Adobe Photoshop Module Loader"><span class="headingNumber"><a href="#6" title="6. Dynamically Loading Modules">6</a>.<a href="#6_5" title="6. Dynamically Loading Modules -&gt; 6.5. Different Kinds of Module Loaders">5</a>.<a href="#6_5_4" title="6. Dynamically Loading Modules -&gt; 6.5. Different Kinds of Module Loaders -&gt; 6.5.4. Adobe Photoshop Module Loader">4</a>. </span>Adobe Photoshop Module Loader</h3>
+			<div class="contents3">
+				<p>It is even possible to register a module loader in Adobe Photoshop's JavaScript based scripting environment (.jsx files), which has its own facility for reading in files.</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">function moduleLoader (_moduleToLoad,_callback) {
+  var _moduleToLoadFile = new File ('/C/uize/js/~source/' + _moduleToLoad + '.js');
+  _moduleToLoadFile.open ('r');
+  var _moduleToLoadCode = _moduleToLoadFile.read ();
+  _moduleToLoadFile.close ();
+  _callback (_moduleToLoadCode);
+}
+moduleLoader ('Uize',function (_moduleToLoadCode) {eval (_moduleToLoadCode)});
+Uize.moduleLoader = moduleLoader;
+</pre>
+				
+				<p>The approach for the Adobe Photoshop context is somewhat similar to the approach for the <code><a href="#6_5_3">Windows Script Host Module Loader</a></code>, where the <code>moduleLoader</code> function is first used to load the <code><a href="../reference/Uize.html">Uize</a></code> module to get the ball rolling, and then this function is used to override the <code><a href="#6_1">Uize.moduleLoader</a></code> static method. You just have to get the fire started, so to speak. Once the <code><a href="#6_1">Uize.moduleLoader</a></code> method is overridden, then the script running inside Photoshop can require and use modules of the UIZE JavaScript Framework in just the same way as you would expect when writing code for the Web browser context.</p>
+			</div>
+		</div>
+		
+		<a name="6_6"></a>
+		<h2 class="heading2" title="6. Dynamically Loading Modules -&gt; 6.6. Pre-loaded Modules"><span class="headingNumber"><a href="#6" title="6. Dynamically Loading Modules">6</a>.<a href="#6_6" title="6. Dynamically Loading Modules -&gt; 6.6. Pre-loaded Modules">6</a>. </span>Pre-loaded Modules</h2>
+		<div class="contents2">
+			<p>It is safe to require modules without worrying about whether or not those modules have already been loaded.</p>
+			
+			<p>When relying upon the dynamic loading of modules, one does not need to worry about whether modules are already defined or loaded by some other code by the time your module declaration is encountered. The <code><a href="#4">Uize.module</a></code> method does the sensible thing of not attempting to load modules that have already been loaded. Therefore, one should always feel confident to use module declarations and declare required modules appropriately. For performance reasons, you can always choose to pre-load modules with explicit script tags in a page, so that they are already loaded by the time a module declaration that might require them is encountered.</p>
+		</div>
+	</div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

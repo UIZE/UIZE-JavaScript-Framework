@@ -1,0 +1,545 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Creating A New Uize Example Page | Documentation | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework Documentation "/>
+	<meta name="description" content="This document provides guidelines and advice for the development of new UIZE example pages and tools, to be followed by developers of the UIZE JavaScript Framework."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../javascript-explainers.html" class="breadcrumb breadcrumbWithArrow">EXPLAINERS</a>
+	Creating A New Uize Example Page
+
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="This document provides guidelines and advice for the development of new UIZE example pages and tools, to be followed by developers of the UIZE JavaScript Framework.">1. Introduction</a></li>
+			<li><a href="#2">2. What Type of Example Page Are You Creating?</a>
+				<ul>
+					<li><a href="#2_1" title="document...">2.1. Module Showcases</a></li>
+					<li><a href="#2_2" title="document...">2.2. Widget Showcases</a></li>
+					<li><a href="#2_3" title="document...">2.3. Behavior or Feature Showcases</a></li>
+					<li><a href="#2_4" title="document...">2.4. Demo Applications</a></li>
+					<li><a href="#2_5" title="document...">2.5. Tools</a></li>
+				</ul>
+			</li>
+			<li><a href="#3" title="When implementing your new UIZE example page, there are a number of considerations to keep in mind.">3. Implement the Example Page</a>
+				<ul>
+					<li><a href="#3_1" title="Find an appropriate existing example page or tool to use as a starting point / skeleton for your new example page or tool.">3.1. Find an Example Page to Use as a Template</a></li>
+					<li><a href="#3_2" title="Be sure to be aware of the recommended coding conventions for JavaScript code. For a refresher, consult the JavaScript Code Conventions appendix.">3.2. Follow the Coding Style Guide</a></li>
+					<li><a href="#3_3" title="Make sure to optimize your code for both performance and code size. To learn some useful optimization tips and tricks, consult the JavaScript Optimization appendix.">3.3. Write Optimized Code</a></li>
+				</ul>
+			</li>
+			<li><a href="#4">4. Location and Filename</a>
+				<ul>
+					<li><a href="#4_1" title="Example pages are all located at the root level of the &quot;examples&quot; folder - examples are not organized into subfolders.">4.1. Location</a></li>
+					<li><a href="#4_2" title="The filename for an example page should be derived from the Title of the page, according to the following scheme...">4.2. Filename</a>
+						<ul>
+							<li><a href="#4_2_1" title="Example pages that are still under development and that are not yet ready for primetime release can be distinguished from released example pages by adding a &quot;~&quot; (tilde) character as a prefix.">4.2.1. Unreleased Example Pages</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li><a href="#5" title="Examples pages created for the UIZE JavaScript Framework should satisfy the following requirements...">5. Example Page Requirements</a>
+				<ul>
+					<li><a href="#5_1" title="The text of the title tag of an example page or tool should conform to the following format...">5.1. Title</a>
+						<ul>
+							<li><a href="#5_1_1" title="Put some careful thought into the creation of the value for the [example name] token, since it gets used in other places...">5.1.1. Additional Use of Example Name</a></li>
+						</ul>
+					</li>
+					<li><a href="#5_2">5.2. Meta Description</a>
+						<ul>
+							<li><a href="#5_2_1" title="- make sure it is no more than 150 characters in length">5.2.1. - create an enticing description for the description meta tag</a></li>
+						</ul>
+					</li>
+					<li><a href="#5_3">5.3. Meta Keywords</a>
+						<ul>
+							<li><a href="#5_3_1" title="- only choose keywords if the example is a particularly exemplary showcase for that keyword, not if it just barely exhibits the quality or qualities represented by the keywords (provide an example of this principle)">5.3.1. - add the appropriate combination of keywords to the keywords meta tag</a></li>
+							<li><a href="#5_3_2">5.3.2. Category Keywords</a>
+								<ul>
+									<li><a href="#5_3_2_1" title="- animation">5.3.2.1. - choose from one or more of the following keywords</a></li>
+								</ul>
+							</li>
+							<li><a href="#5_3_3" title="document...">5.3.3. Module Name Keywords</a></li>
+						</ul>
+					</li>
+					<li><a href="#5_4">5.4. Main Layout</a>
+						<ul>
+							<li><a href="#5_4_1">5.4.1. Explanation</a>
+								<ul>
+									<li><a href="#5_4_1_1" title="- with instructions to the user where appropriate so that things that are not always self-evident are not missed by the user">5.4.1.1. - example should always contain a reasonable length explanation</a>
+										<ul>
+											<li><a href="#5_4_1_1_1" title="- explanation should link to the module (or modules) that are the focus of the example">5.4.1.1.1. - module links</a></li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+							<li><a href="#5_4_2" title="- main content of example should not be so large as to prevent the entire example from being visible inside a 1024x768 window, even if explanation has to be scrolled out of view. There can be exceptions to this guideline.">5.4.2. Main Content</a></li>
+							<li><a href="#5_4_3" title="- where appropriate, examples should contain demos of programmatic interface, ideally below main content of example">5.4.3. Programmatic Interface Demos</a></li>
+						</ul>
+					</li>
+					<li><a href="#5_5">5.5. Maximum Dimensions</a>
+						<ul>
+							<li><a href="#5_5_1" title="On a 1024x768 display with the browser maximized, an example page should never require horizontal scrolling.">5.5.1. Avoid Horizontal Scrolling</a></li>
+							<li><a href="#5_5_2" title="On a 1024x768 display with the browser maximized, an example page should ideally not require vertical scrolling.">5.5.2. Avoid Vertical Scrolling, Where Possible</a>
+								<ul>
+									<li><a href="#5_5_2_1" title="The styling of example pages includes a dotted marker line that indicates the maximum height for the combined contents of an example page.">5.5.2.1. Maximum Height Marker</a></li>
+									<li><a href="#5_5_2_2" title="Avoiding vertical scrolling in example pages offers the following important benefits...">5.5.2.2. Benefits of No Vertical Scrolling</a></li>
+									<li><a href="#5_5_2_3" title="There will always be a few cases where it is just not possible to avoid vertical scrolling and still produce a viable example page.">5.5.2.3. When Vertical Scrolling is Necessary</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li><a href="#5_6" title="document...">5.6. Comments</a></li>
+					<li><a href="#5_7" title="- refer to the HTML Style Guide">5.7. Conform to the HTML Style Guide</a></li>
+				</ul>
+			</li>
+			<li><a href="#6" title="When you create a new example page, various build scripts perform some functions for you automatically.">6. What's Done for You Automatically</a>
+				<ul>
+					<li><a href="#6_1" title="For every example page (excluding Unreleased Example Pages), a corresponding source code page is automatically generated.">6.1. Source Code Pages Built Automatically</a></li>
+					<li><a href="#6_2" title="Every example page you create (excluding Unreleased Example Pages) is automatically listed in appropriate example index pages, using the Title, Meta Description, and Meta Keywords you provided for the example.">6.2. Listing in Various Index Pages</a>
+						<ul>
+							<li><a href="#6_2_1" title="Using the Category Keywords contained in the Meta Keywords you provide for an example page, the page will be listed in the index page for each of the specified Category Keywords.">6.2.1. Examples By Keyword Listings</a></li>
+							<li><a href="#6_2_2" title="Using the Module Name Keywords, if any, contained in the Meta Keywords you provide for an example page, the page will be listed in the appropriate place(s) in the tree menu on the JavaScript Examples, By Module page.">6.2.2. Examples By Module Name Listing</a></li>
+							<li><a href="#6_2_3" title="Every example page you create (excluding Unreleased Example Pages) is automatically listed in the JavaScript Examples page, which lists all examples.">6.2.3. All Examples Listing</a></li>
+						</ul>
+					</li>
+					<li><a href="#6_3" title="The example pages listed in any of the Examples By Keyword Listings, as well as the All Examples Listing, can be viewed in a step-by-step tour (see example), so any example page you create will be available in at least one tour, and possibly more (depending on how many Category Keywords you supply).">6.3. Example Tours</a></li>
+				</ul>
+			</li>
+			<li><a href="#7" title="document...">7. Announce a New Example Page or Tool</a></li>
+			<li><a href="#8" title="Developers using the UIZE JavaScript Framework will use the example pages you create to learn how to use the framework or the UIZE modules that you develop that are showcased by your example pages.">8. Revisit This Explainer, As Needed</a></li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<a name="1"></a>
+	<h1 class="heading1" title="1. Introduction"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>. </span>Introduction</h1>
+	<div class="contents1">
+		<p>This document provides guidelines and advice for the development of new UIZE example pages and tools, to be followed by developers of the UIZE JavaScript Framework.</p>
+	</div>
+	
+	<a name="2"></a>
+	<h1 class="heading1" title="2. What Type of Example Page Are You Creating?"><span class="headingNumber"><a href="#2" title="2. What Type of Example Page Are You Creating?">2</a>. </span>What Type of Example Page Are You Creating?</h1>
+	<div class="contents1">
+		<a name="2_1"></a>
+		<h2 class="heading2" title="2. What Type of Example Page Are You Creating? -&gt; 2.1. Module Showcases"><span class="headingNumber"><a href="#2" title="2. What Type of Example Page Are You Creating?">2</a>.<a href="#2_1" title="2. What Type of Example Page Are You Creating? -&gt; 2.1. Module Showcases">1</a>. </span>Module Showcases</h2>
+		<div class="contents2">
+			<p>document...</p>
+		</div>
+		
+		<a name="2_2"></a>
+		<h2 class="heading2" title="2. What Type of Example Page Are You Creating? -&gt; 2.2. Widget Showcases"><span class="headingNumber"><a href="#2" title="2. What Type of Example Page Are You Creating?">2</a>.<a href="#2_2" title="2. What Type of Example Page Are You Creating? -&gt; 2.2. Widget Showcases">2</a>. </span>Widget Showcases</h2>
+		<div class="contents2">
+			<p>document...</p>
+		</div>
+		
+		<a name="2_3"></a>
+		<h2 class="heading2" title="2. What Type of Example Page Are You Creating? -&gt; 2.3. Behavior or Feature Showcases"><span class="headingNumber"><a href="#2" title="2. What Type of Example Page Are You Creating?">2</a>.<a href="#2_3" title="2. What Type of Example Page Are You Creating? -&gt; 2.3. Behavior or Feature Showcases">3</a>. </span>Behavior or Feature Showcases</h2>
+		<div class="contents2">
+			<p>document...</p>
+		</div>
+		
+		<a name="2_4"></a>
+		<h2 class="heading2" title="2. What Type of Example Page Are You Creating? -&gt; 2.4. Demo Applications"><span class="headingNumber"><a href="#2" title="2. What Type of Example Page Are You Creating?">2</a>.<a href="#2_4" title="2. What Type of Example Page Are You Creating? -&gt; 2.4. Demo Applications">4</a>. </span>Demo Applications</h2>
+		<div class="contents2">
+			<p>document...</p>
+		</div>
+		
+		<a name="2_5"></a>
+		<h2 class="heading2" title="2. What Type of Example Page Are You Creating? -&gt; 2.5. Tools"><span class="headingNumber"><a href="#2" title="2. What Type of Example Page Are You Creating?">2</a>.<a href="#2_5" title="2. What Type of Example Page Are You Creating? -&gt; 2.5. Tools">5</a>. </span>Tools</h2>
+		<div class="contents2">
+			<p>document...</p>
+		</div>
+	</div>
+	
+	<a name="3"></a>
+	<h1 class="heading1" title="3. Implement the Example Page"><span class="headingNumber"><a href="#3" title="3. Implement the Example Page">3</a>. </span>Implement the Example Page</h1>
+	<div class="contents1">
+		<p>When implementing your new UIZE example page, there are a number of considerations to keep in mind.</p>
+		
+		<a name="3_1"></a>
+		<h2 class="heading2" title="3. Implement the Example Page -&gt; 3.1. Find an Example Page to Use as a Template"><span class="headingNumber"><a href="#3" title="3. Implement the Example Page">3</a>.<a href="#3_1" title="3. Implement the Example Page -&gt; 3.1. Find an Example Page to Use as a Template">1</a>. </span>Find an Example Page to Use as a Template</h2>
+		<div class="contents2">
+			<p>Find an appropriate existing example page or tool to use as a starting point / skeleton for your new example page or tool.</p>
+			
+			<p><a href="../examples/~example-template.html">~example-template.html</a></p>
+		</div>
+		
+		<a name="3_2"></a>
+		<h2 class="heading2" title="3. Implement the Example Page -&gt; 3.2. Follow the Coding Style Guide"><span class="headingNumber"><a href="#3" title="3. Implement the Example Page">3</a>.<a href="#3_2" title="3. Implement the Example Page -&gt; 3.2. Follow the Coding Style Guide">2</a>. </span>Follow the Coding Style Guide</h2>
+		<div class="contents2">
+			<p>Be sure to be aware of the recommended coding conventions for JavaScript code. For a refresher, consult the <a href="../appendixes/javascript-code-conventions.html">JavaScript Code Conventions</a> appendix.</p>
+		</div>
+		
+		<a name="3_3"></a>
+		<h2 class="heading2" title="3. Implement the Example Page -&gt; 3.3. Write Optimized Code"><span class="headingNumber"><a href="#3" title="3. Implement the Example Page">3</a>.<a href="#3_3" title="3. Implement the Example Page -&gt; 3.3. Write Optimized Code">3</a>. </span>Write Optimized Code</h2>
+		<div class="contents2">
+			<p>Make sure to optimize your code for both performance and code size. To learn some useful optimization tips and tricks, consult the <a href="../appendixes/javascript-optimization.html">JavaScript Optimization</a> appendix.</p>
+		</div>
+	</div>
+	
+	<a name="4"></a>
+	<h1 class="heading1" title="4. Location and Filename"><span class="headingNumber"><a href="#4" title="4. Location and Filename">4</a>. </span>Location and Filename</h1>
+	<div class="contents1">
+		<a name="4_1"></a>
+		<h2 class="heading2" title="4. Location and Filename -&gt; 4.1. Location"><span class="headingNumber"><a href="#4" title="4. Location and Filename">4</a>.<a href="#4_1" title="4. Location and Filename -&gt; 4.1. Location">1</a>. </span>Location</h2>
+		<div class="contents2">
+			<p>Example pages are all located at the <b>root level</b> of the "examples" folder - examples are <b>not</b> organized into subfolders.</p>
+		</div>
+		
+		<a name="4_2"></a>
+		<h2 class="heading2" title="4. Location and Filename -&gt; 4.2. Filename"><span class="headingNumber"><a href="#4" title="4. Location and Filename">4</a>.<a href="#4_2" title="4. Location and Filename -&gt; 4.2. Filename">2</a>. </span>Filename</h2>
+		<div class="contents2">
+			<p>The filename for an example page should be derived from the <a href="#5_1">Title</a> of the page, according to the following scheme...</p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>use the first portion up to the first " | " separator</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>lowercase all the characters</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>replace all occurrences of one or more non-word characters with a "-" (hyphen) character</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>append the <code>.html</code> file extension</td></tr>
+			</table>
+			<p><span class="allCaps">EXAMPLE PAGE TITLE</span></p>
+			
+			
+<pre class="sample-code">Hover Fader Text Shadow Animation | JavaScript Examples | UIZE JavaScript Framework
+</pre>
+			
+			<p><span class="allCaps">EXAMPLE PAGE FILENAME</span></p>
+			
+			
+<pre class="sample-code">hover-fader-text-shadow-animation.html
+</pre>
+			
+			<p>As you can see from the above example, we have taken the "Hover Fader Text Shadow Animation" text from the example page's <a href="#5_1">Title</a>, then we have lowercased all the letters, replaced non-word characters (only spaces in this case) with hyphens, and then appended the <code>.html</code> file extension. The result is the filename <code>hover-fader-text-shadow-animation.html</code>.</p>
+			
+			<p>There are some exceptions to this rule, but most of these exceptions are legacy - going forward, all filenames for example pages should be derived from their <a href="#5_1">Title</a>.</p>
+			
+			<a name="4_2_1"></a>
+			<h3 class="heading3" title="4. Location and Filename -&gt; 4.2. Filename -&gt; 4.2.1. Unreleased Example Pages"><span class="headingNumber"><a href="#4" title="4. Location and Filename">4</a>.<a href="#4_2" title="4. Location and Filename -&gt; 4.2. Filename">2</a>.<a href="#4_2_1" title="4. Location and Filename -&gt; 4.2. Filename -&gt; 4.2.1. Unreleased Example Pages">1</a>. </span>Unreleased Example Pages</h3>
+			<div class="contents3">
+				<p>Example pages that are still under development and that are not yet ready for primetime release can be distinguished from released example pages by adding a "~" (tilde) character as a prefix.</p>
+				
+				<p>For one thing, the tilde prefix makes all the example pages still under development clump together in a sort of the <code>examples</code> folder's contents. This is useful in easily seeing which examples are still works in progress. More importantly, however, the tilde prefix is observed by any build scripts that iterate through the contents of the <code>examples</code> folder to create example index pages, example source pages, and the like.</p>
+			</div>
+		</div>
+	</div>
+	
+	<a name="5"></a>
+	<h1 class="heading1" title="5. Example Page Requirements"><span class="headingNumber"><a href="#5" title="5. Example Page Requirements">5</a>. </span>Example Page Requirements</h1>
+	<div class="contents1">
+		<p>Examples pages created for the UIZE JavaScript Framework should satisfy the following requirements...</p>
+		
+		<a name="5_1"></a>
+		<h2 class="heading2" title="5. Example Page Requirements -&gt; 5.1. Title"><span class="headingNumber"><a href="#5" title="5. Example Page Requirements">5</a>.<a href="#5_1" title="5. Example Page Requirements -&gt; 5.1. Title">1</a>. </span>Title</h2>
+		<div class="contents2">
+			<p>The text of the <code><a href="#5_1">title</a></code> tag of an example page or tool should conform to the following format...</p>
+			
+			<p><span class="allCaps">EXAMPLE TITLE FORMAT</span></p>
+			
+			
+<pre class="sample-code">[example name] | JavaScript Examples | UIZE JavaScript Framework
+</pre>
+			
+			<p>A value for the <code>[example name]</code> token should conform to the following rules...</p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>should be in <a href="http://en.wikipedia.org/wiki/Title_case#Headings_and_publication_titles" target="_blank" class="externalSiteLink">title case</a></td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>should, ideally, be no more than 64 characters long</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>should not contain the "|" (pipe) character</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>may contain non-word characters (except "|")</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>should include words that capture / express essential aspects of the example</td></tr>
+			</table>
+			<p><span class="allCaps">TITLE EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">Hover Fader Text Shadow Animation | JavaScript Examples | UIZE JavaScript Framework
+</pre>
+			
+			<p>In the above example, our example title has the text "Hover Fader Text Shadow Animation" for the <code>[example name]</code> token.</p>
+			
+			<a name="5_1_1"></a>
+			<h3 class="heading3" title="5. Example Page Requirements -&gt; 5.1. Title -&gt; 5.1.1. Additional Use of Example Name"><span class="headingNumber"><a href="#5" title="5. Example Page Requirements">5</a>.<a href="#5_1" title="5. Example Page Requirements -&gt; 5.1. Title">1</a>.<a href="#5_1_1" title="5. Example Page Requirements -&gt; 5.1. Title -&gt; 5.1.1. Additional Use of Example Name">1</a>. </span>Additional Use of Example Name</h3>
+			<div class="contents3">
+				<p>Put some careful thought into the creation of the value for the <code>[example name]</code> token, since it gets used in other places...</p>
+				
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>By convention, the <code>[example name]</code> value is used in deriving a <a href="#4_2">Filename</a> for the example page.</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>The <code>[example name]</code> value is extracted by build scripts that then use it as the title / link text for examples in index pages that list examples by keyword, module, etc.</td></tr>
+				</table>
+			</div>
+		</div>
+		
+		<a name="5_2"></a>
+		<h2 class="heading2" title="5. Example Page Requirements -&gt; 5.2. Meta Description"><span class="headingNumber"><a href="#5" title="5. Example Page Requirements">5</a>.<a href="#5_2" title="5. Example Page Requirements -&gt; 5.2. Meta Description">2</a>. </span>Meta Description</h2>
+		<div class="contents2">
+			<a name="5_2_1"></a>
+			<h3 class="heading3" title="5. Example Page Requirements -&gt; 5.2. Meta Description -&gt; 5.2.1. - create an enticing description for the description meta tag"><span class="headingNumber"><a href="#5" title="5. Example Page Requirements">5</a>.<a href="#5_2" title="5. Example Page Requirements -&gt; 5.2. Meta Description">2</a>.<a href="#5_2_1" title="5. Example Page Requirements -&gt; 5.2. Meta Description -&gt; 5.2.1. - create an enticing description for the description meta tag">1</a>. </span>- create an enticing description for the description meta tag</h3>
+			<div class="contents3">
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>make sure it is no more than 150 characters in length</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>use the SEO tag editor widget</td></tr>
+				</table>
+			</div>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>make sure the example</td></tr>
+			</table>
+		</div>
+		
+		<a name="5_3"></a>
+		<h2 class="heading2" title="5. Example Page Requirements -&gt; 5.3. Meta Keywords"><span class="headingNumber"><a href="#5" title="5. Example Page Requirements">5</a>.<a href="#5_3" title="5. Example Page Requirements -&gt; 5.3. Meta Keywords">3</a>. </span>Meta Keywords</h2>
+		<div class="contents2">
+			<a name="5_3_1"></a>
+			<h3 class="heading3" title="5. Example Page Requirements -&gt; 5.3. Meta Keywords -&gt; 5.3.1. - add the appropriate combination of keywords to the keywords meta tag"><span class="headingNumber"><a href="#5" title="5. Example Page Requirements">5</a>.<a href="#5_3" title="5. Example Page Requirements -&gt; 5.3. Meta Keywords">3</a>.<a href="#5_3_1" title="5. Example Page Requirements -&gt; 5.3. Meta Keywords -&gt; 5.3.1. - add the appropriate combination of keywords to the keywords meta tag">1</a>. </span>- add the appropriate combination of keywords to the keywords meta tag</h3>
+			<div class="contents3">
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>only choose keywords if the example is a particularly exemplary showcase for that keyword, not if it just barely exhibits the quality or qualities represented by the keywords (provide an example of this principle)</td></tr>
+				</table>
+			</div>
+			
+			<a name="5_3_2"></a>
+			<h3 class="heading3" title="5. Example Page Requirements -&gt; 5.3. Meta Keywords -&gt; 5.3.2. Category Keywords"><span class="headingNumber"><a href="#5" title="5. Example Page Requirements">5</a>.<a href="#5_3" title="5. Example Page Requirements -&gt; 5.3. Meta Keywords">3</a>.<a href="#5_3_2" title="5. Example Page Requirements -&gt; 5.3. Meta Keywords -&gt; 5.3.2. Category Keywords">2</a>. </span>Category Keywords</h3>
+			<div class="contents3">
+				<a name="5_3_2_1"></a>
+				<h4 class="heading4" title="5. Example Page Requirements -&gt; 5.3. Meta Keywords -&gt; 5.3.2. Category Keywords -&gt; 5.3.2.1. - choose from one or more of the following keywords"><span class="headingNumber"><a href="#5" title="5. Example Page Requirements">5</a>.<a href="#5_3" title="5. Example Page Requirements -&gt; 5.3. Meta Keywords">3</a>.<a href="#5_3_2" title="5. Example Page Requirements -&gt; 5.3. Meta Keywords -&gt; 5.3.2. Category Keywords">2</a>.<a href="#5_3_2_1" title="5. Example Page Requirements -&gt; 5.3. Meta Keywords -&gt; 5.3.2. Category Keywords -&gt; 5.3.2.1. - choose from one or more of the following keywords">1</a>. </span>- choose from one or more of the following keywords</h4>
+				<div class="contents4">
+					<table class="list">
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>animation</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>color</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>drag-and-drop</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>form</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>ipad</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>menu</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>slideshow</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>tool</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>touch</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>widget</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>zoom</td></tr>
+					</table>
+				</div>
+			</div>
+			
+			<a name="5_3_3"></a>
+			<h3 class="heading3" title="5. Example Page Requirements -&gt; 5.3. Meta Keywords -&gt; 5.3.3. Module Name Keywords"><span class="headingNumber"><a href="#5" title="5. Example Page Requirements">5</a>.<a href="#5_3" title="5. Example Page Requirements -&gt; 5.3. Meta Keywords">3</a>.<a href="#5_3_3" title="5. Example Page Requirements -&gt; 5.3. Meta Keywords -&gt; 5.3.3. Module Name Keywords">3</a>. </span>Module Name Keywords</h3>
+			<div class="contents3">
+				<p>document...</p>
+			</div>
+		</div>
+		
+		<a name="5_4"></a>
+		<h2 class="heading2" title="5. Example Page Requirements -&gt; 5.4. Main Layout"><span class="headingNumber"><a href="#5" title="5. Example Page Requirements">5</a>.<a href="#5_4" title="5. Example Page Requirements -&gt; 5.4. Main Layout">4</a>. </span>Main Layout</h2>
+		<div class="contents2">
+			<a name="5_4_1"></a>
+			<h3 class="heading3" title="5. Example Page Requirements -&gt; 5.4. Main Layout -&gt; 5.4.1. Explanation"><span class="headingNumber"><a href="#5" title="5. Example Page Requirements">5</a>.<a href="#5_4" title="5. Example Page Requirements -&gt; 5.4. Main Layout">4</a>.<a href="#5_4_1" title="5. Example Page Requirements -&gt; 5.4. Main Layout -&gt; 5.4.1. Explanation">1</a>. </span>Explanation</h3>
+			<div class="contents3">
+				<a name="5_4_1_1"></a>
+				<h4 class="heading4" title="5. Example Page Requirements -&gt; 5.4. Main Layout -&gt; 5.4.1. Explanation -&gt; 5.4.1.1. - example should always contain a reasonable length explanation"><span class="headingNumber"><a href="#5" title="5. Example Page Requirements">5</a>.<a href="#5_4" title="5. Example Page Requirements -&gt; 5.4. Main Layout">4</a>.<a href="#5_4_1" title="5. Example Page Requirements -&gt; 5.4. Main Layout -&gt; 5.4.1. Explanation">1</a>.<a href="#5_4_1_1" title="5. Example Page Requirements -&gt; 5.4. Main Layout -&gt; 5.4.1. Explanation -&gt; 5.4.1.1. - example should always contain a reasonable length explanation">1</a>. </span>- example should always contain a reasonable length explanation</h4>
+				<div class="contents4">
+					<table class="list">
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>with instructions to the user where appropriate so that things that are not always self-evident are not missed by the user</td></tr>
+					</table>
+					<a name="5_4_1_1_1"></a>
+					<h5 class="heading5" title="5. Example Page Requirements -&gt; 5.4. Main Layout -&gt; 5.4.1. Explanation -&gt; 5.4.1.1. - example should always contain a reasonable length explanation -&gt; 5.4.1.1.1. - module links"><span class="headingNumber"><a href="#5" title="5. Example Page Requirements">5</a>.<a href="#5_4" title="5. Example Page Requirements -&gt; 5.4. Main Layout">4</a>.<a href="#5_4_1" title="5. Example Page Requirements -&gt; 5.4. Main Layout -&gt; 5.4.1. Explanation">1</a>.<a href="#5_4_1_1" title="5. Example Page Requirements -&gt; 5.4. Main Layout -&gt; 5.4.1. Explanation -&gt; 5.4.1.1. - example should always contain a reasonable length explanation">1</a>.<a href="#5_4_1_1_1" title="5. Example Page Requirements -&gt; 5.4. Main Layout -&gt; 5.4.1. Explanation -&gt; 5.4.1.1. - example should always contain a reasonable length explanation -&gt; 5.4.1.1.1. - module links">1</a>. </span>- module links</h5>
+					<div class="contents5">
+						<table class="list">
+						<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>explanation should link to the module (or modules) that are the focus of the example</td></tr>
+						<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>don't need to link to all modules used by the example's code (if your example happens to use Uize.Node in a rather mundane way and merely in support of the main crux of the example, then it's not terribly compelling to call the user's attention to this)</td></tr>
+						</table>
+					</div>
+					
+					<table class="list">
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>inline code, such as static and instance method names, or the names of set-get properties, etc. should be enclosed in the <code>code</code> tag</td></tr>
+					</table>
+				</div>
+			</div>
+			
+			<a name="5_4_2"></a>
+			<h3 class="heading3" title="5. Example Page Requirements -&gt; 5.4. Main Layout -&gt; 5.4.2. Main Content"><span class="headingNumber"><a href="#5" title="5. Example Page Requirements">5</a>.<a href="#5_4" title="5. Example Page Requirements -&gt; 5.4. Main Layout">4</a>.<a href="#5_4_2" title="5. Example Page Requirements -&gt; 5.4. Main Layout -&gt; 5.4.2. Main Content">2</a>. </span>Main Content</h3>
+			<div class="contents3">
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>main content of example should not be so large as to prevent the entire example from being visible inside a 1024x768 window, even if explanation has to be scrolled out of view. There can be exceptions to this guideline.</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>find a way with the layout of the examples to put space around active draggable UI, to minimize the risk of drag taking the mouse outside the window and resulting in the sticky drag effect</td></tr>
+				</table>
+			</div>
+			
+			<a name="5_4_3"></a>
+			<h3 class="heading3" title="5. Example Page Requirements -&gt; 5.4. Main Layout -&gt; 5.4.3. Programmatic Interface Demos"><span class="headingNumber"><a href="#5" title="5. Example Page Requirements">5</a>.<a href="#5_4" title="5. Example Page Requirements -&gt; 5.4. Main Layout">4</a>.<a href="#5_4_3" title="5. Example Page Requirements -&gt; 5.4. Main Layout -&gt; 5.4.3. Programmatic Interface Demos">3</a>. </span>Programmatic Interface Demos</h3>
+			<div class="contents3">
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>where appropriate, examples should contain demos of programmatic interface, ideally below main content of example</td></tr>
+				</table>
+			</div>
+		</div>
+		
+		<a name="5_5"></a>
+		<h2 class="heading2" title="5. Example Page Requirements -&gt; 5.5. Maximum Dimensions"><span class="headingNumber"><a href="#5" title="5. Example Page Requirements">5</a>.<a href="#5_5" title="5. Example Page Requirements -&gt; 5.5. Maximum Dimensions">5</a>. </span>Maximum Dimensions</h2>
+		<div class="contents2">
+			<a name="5_5_1"></a>
+			<h3 class="heading3" title="5. Example Page Requirements -&gt; 5.5. Maximum Dimensions -&gt; 5.5.1. Avoid Horizontal Scrolling"><span class="headingNumber"><a href="#5" title="5. Example Page Requirements">5</a>.<a href="#5_5" title="5. Example Page Requirements -&gt; 5.5. Maximum Dimensions">5</a>.<a href="#5_5_1" title="5. Example Page Requirements -&gt; 5.5. Maximum Dimensions -&gt; 5.5.1. Avoid Horizontal Scrolling">1</a>. </span>Avoid Horizontal Scrolling</h3>
+			<div class="contents3">
+				<p>On a 1024x768 display with the browser maximized, an example page should never require horizontal scrolling.</p>
+				
+				<p>The styling of the <b>uize.com</b> Web site imposes a maximum width of <code>780</code> pixels on the main content area for all pages, including example pages. The <a href="#5_4">Main Layout</a> for an example should be designed to fit within that width.</p>
+			</div>
+			
+			<a name="5_5_2"></a>
+			<h3 class="heading3" title="5. Example Page Requirements -&gt; 5.5. Maximum Dimensions -&gt; 5.5.2. Avoid Vertical Scrolling, Where Possible"><span class="headingNumber"><a href="#5" title="5. Example Page Requirements">5</a>.<a href="#5_5" title="5. Example Page Requirements -&gt; 5.5. Maximum Dimensions">5</a>.<a href="#5_5_2" title="5. Example Page Requirements -&gt; 5.5. Maximum Dimensions -&gt; 5.5.2. Avoid Vertical Scrolling, Where Possible">2</a>. </span>Avoid Vertical Scrolling, Where Possible</h3>
+			<div class="contents3">
+				<p>On a 1024x768 display with the browser maximized, an example page should ideally not require vertical scrolling.</p>
+				
+				<p>This requirement is not as important as the requirement to <a href="#5_5_1">Avoid Horizontal Scrolling</a>, but it preferable that example pages not require vertical scrolling. Where possible, modify the various elements of the <a href="#5_4">Main Layout</a> (such as the <a href="#5_4_1">Explanation</a> text, the <a href="#5_4_2">Main Content</a>, and the <a href="#5_4_3">Programmatic Interface Demos</a>) as needed to ensure that the combined height does not introduce vertical scrolling.</p>
+				
+				<a name="5_5_2_1"></a>
+				<h4 class="heading4" title="5. Example Page Requirements -&gt; 5.5. Maximum Dimensions -&gt; 5.5.2. Avoid Vertical Scrolling, Where Possible -&gt; 5.5.2.1. Maximum Height Marker"><span class="headingNumber"><a href="#5" title="5. Example Page Requirements">5</a>.<a href="#5_5" title="5. Example Page Requirements -&gt; 5.5. Maximum Dimensions">5</a>.<a href="#5_5_2" title="5. Example Page Requirements -&gt; 5.5. Maximum Dimensions -&gt; 5.5.2. Avoid Vertical Scrolling, Where Possible">2</a>.<a href="#5_5_2_1" title="5. Example Page Requirements -&gt; 5.5. Maximum Dimensions -&gt; 5.5.2. Avoid Vertical Scrolling, Where Possible -&gt; 5.5.2.1. Maximum Height Marker">1</a>. </span>Maximum Height Marker</h4>
+				<div class="contents4">
+					<p>The styling of example pages includes a dotted marker line that indicates the maximum height for the combined contents of an example page.</p>
+					
+					<p>The <a href="#5_5_2_1">Maximum Height Marker</a> is subtle so as to not be too intrusive for those viewing the examples, but it's easy enough to spot when you're designing an example page. The position of the marker takes into account a worst case scenario of a browser with a lot of vertical chrome - window title bar, window menu bar, location bar, personal bookmarks bar, developer toolbar, and tabs. So, if your example page fits above that fold line, chances are there'll be enough breathing room to avoid scrolling on most notebook and netbook displays, and ample room to view the entire example in Safari on an iPad.</p>
+				</div>
+				
+				<a name="5_5_2_2"></a>
+				<h4 class="heading4" title="5. Example Page Requirements -&gt; 5.5. Maximum Dimensions -&gt; 5.5.2. Avoid Vertical Scrolling, Where Possible -&gt; 5.5.2.2. Benefits of No Vertical Scrolling"><span class="headingNumber"><a href="#5" title="5. Example Page Requirements">5</a>.<a href="#5_5" title="5. Example Page Requirements -&gt; 5.5. Maximum Dimensions">5</a>.<a href="#5_5_2" title="5. Example Page Requirements -&gt; 5.5. Maximum Dimensions -&gt; 5.5.2. Avoid Vertical Scrolling, Where Possible">2</a>.<a href="#5_5_2_2" title="5. Example Page Requirements -&gt; 5.5. Maximum Dimensions -&gt; 5.5.2. Avoid Vertical Scrolling, Where Possible -&gt; 5.5.2.2. Benefits of No Vertical Scrolling">2</a>. </span>Benefits of No Vertical Scrolling</h4>
+				<div class="contents4">
+					<p>Avoiding vertical scrolling in example pages offers the following important benefits...</p>
+					
+					<table class="list">
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><b>Improved User Experience</b> - By avoiding vertical scrolling wherever possible, the user experience of taking a tour through a series of examples is improved - the user gets to see in a single glance the overal layout / structure of the example to get the gist of what's going on, and the interation of stepping through multiple examples to find an example of interest is not punctuated by messing with scrolling to see if there's anything of interest below the fold.</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><b>Easier Screenshots</b> - Avoiding vertical scrolling increases the chances of an example's entire UI fitting nicely into a screenshot, and thumbnails used to represent the example can better capture what's offered in the example.</td></tr>
+					</table>
+				</div>
+				
+				<a name="5_5_2_3"></a>
+				<h4 class="heading4" title="5. Example Page Requirements -&gt; 5.5. Maximum Dimensions -&gt; 5.5.2. Avoid Vertical Scrolling, Where Possible -&gt; 5.5.2.3. When Vertical Scrolling is Necessary"><span class="headingNumber"><a href="#5" title="5. Example Page Requirements">5</a>.<a href="#5_5" title="5. Example Page Requirements -&gt; 5.5. Maximum Dimensions">5</a>.<a href="#5_5_2" title="5. Example Page Requirements -&gt; 5.5. Maximum Dimensions -&gt; 5.5.2. Avoid Vertical Scrolling, Where Possible">2</a>.<a href="#5_5_2_3" title="5. Example Page Requirements -&gt; 5.5. Maximum Dimensions -&gt; 5.5.2. Avoid Vertical Scrolling, Where Possible -&gt; 5.5.2.3. When Vertical Scrolling is Necessary">3</a>. </span>When Vertical Scrolling is Necessary</h4>
+				<div class="contents4">
+					<p>There will always be a few cases where it is just not possible to avoid vertical scrolling and still produce a viable example page.</p>
+					
+					<p>Some example pages that have more content than can fit above the <a href="#5_5_2_1">Maximum Height Marker</a> include...</p>
+					
+					<table class="list">
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><a href="../examples/collection-dynamic.html">Dynamic Collection</a></td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><a href="../examples/hover-fader-for-thumbnails.html"> Hover Fader for Thumbnails</a></td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><a href="../examples/populating-photo-details.html">Populating Photo Details</a></td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><a href="../examples/sortable-color-table.html"> Uize.Widget.ThumbZoom</a></td></tr>
+					</table>
+					<p>Apart from exceptional cases like those listed above, the overwhelming majority of the example pages are designed very deliberately so that their entire contents fits into a 1024x768 browser window without requiring vertical or horizontal scrollbars.</p>
+					
+					<p>Whenever working on an example page where vertical scrolling may be necessary, consider the following guidelines...</p>
+					
+					<table class="list">
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>The <a href="#5_4_2">Main Content</a> of an example page should never be pushed below or deep into the <a href="#5_5_2_1">Maximum Height Marker</a> because the <a href="#5_4_1">Explanation</a> is too long.</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>If the <a href="#5_4_2">Main Content</a> of an example page <b>must</b> extend beneath the <a href="#5_5_2_1">Maximum Height Marker</a>, make sure at least to fit a compelling portion of the <a href="#5_4_2">Main Content</a> above the <a href="#5_5_2_1">Maximum Height Marker</a>, so that the user viewing the example can at least get a good sense of what it offers at first glance - there must be something sufficiently juicy within plain view.</td></tr>
+					</table>
+				</div>
+			</div>
+		</div>
+		
+		<a name="5_6"></a>
+		<h2 class="heading2" title="5. Example Page Requirements -&gt; 5.6. Comments"><span class="headingNumber"><a href="#5" title="5. Example Page Requirements">5</a>.<a href="#5_6" title="5. Example Page Requirements -&gt; 5.6. Comments">6</a>. </span>Comments</h2>
+		<div class="contents2">
+			<p>document...</p>
+			
+			<p>Comment the Example Page Source</p>
+		</div>
+		
+		<a name="5_7"></a>
+		<h2 class="heading2" title="5. Example Page Requirements -&gt; 5.7. Conform to the HTML Style Guide"><span class="headingNumber"><a href="#5" title="5. Example Page Requirements">5</a>.<a href="#5_7" title="5. Example Page Requirements -&gt; 5.7. Conform to the HTML Style Guide">7</a>. </span>Conform to the HTML Style Guide</h2>
+		<div class="contents2">
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>refer to the HTML Style Guide</td></tr>
+			</table>
+		</div>
+	</div>
+	
+	<a name="6"></a>
+	<h1 class="heading1" title="6. What&apos;s Done for You Automatically"><span class="headingNumber"><a href="#6" title="6. What&apos;s Done for You Automatically">6</a>. </span>What's Done for You Automatically</h1>
+	<div class="contents1">
+		<p>When you create a new example page, various build scripts perform some functions for you automatically.</p>
+		
+		<a name="6_1"></a>
+		<h2 class="heading2" title="6. What&apos;s Done for You Automatically -&gt; 6.1. Source Code Pages Built Automatically"><span class="headingNumber"><a href="#6" title="6. What&apos;s Done for You Automatically">6</a>.<a href="#6_1" title="6. What&apos;s Done for You Automatically -&gt; 6.1. Source Code Pages Built Automatically">1</a>. </span>Source Code Pages Built Automatically</h2>
+		<div class="contents2">
+			<p>For every example page (excluding <a href="#4_2_1">Unreleased Example Pages</a>), a corresponding source code page is automatically generated.</p>
+			
+			<p>Generated source code pages are all placed within the <code>examples/source-code</code> folder, and the filename for each source code page is identical to the filename of its corresponding example.</p>
+		</div>
+		
+		<a name="6_2"></a>
+		<h2 class="heading2" title="6. What&apos;s Done for You Automatically -&gt; 6.2. Listing in Various Index Pages"><span class="headingNumber"><a href="#6" title="6. What&apos;s Done for You Automatically">6</a>.<a href="#6_2" title="6. What&apos;s Done for You Automatically -&gt; 6.2. Listing in Various Index Pages">2</a>. </span>Listing in Various Index Pages</h2>
+		<div class="contents2">
+			<p>Every example page you create (excluding <a href="#4_2_1">Unreleased Example Pages</a>) is automatically listed in appropriate example index pages, using the <a href="#5_1">Title</a>, <a href="#5_2">Meta Description</a>, and <a href="#5_3">Meta Keywords</a> you provided for the example.</p>
+			
+			<a name="6_2_1"></a>
+			<h3 class="heading3" title="6. What&apos;s Done for You Automatically -&gt; 6.2. Listing in Various Index Pages -&gt; 6.2.1. Examples By Keyword Listings"><span class="headingNumber"><a href="#6" title="6. What&apos;s Done for You Automatically">6</a>.<a href="#6_2" title="6. What&apos;s Done for You Automatically -&gt; 6.2. Listing in Various Index Pages">2</a>.<a href="#6_2_1" title="6. What&apos;s Done for You Automatically -&gt; 6.2. Listing in Various Index Pages -&gt; 6.2.1. Examples By Keyword Listings">1</a>. </span>Examples By Keyword Listings</h3>
+			<div class="contents3">
+				<p>Using the <a href="#5_3_2">Category Keywords</a> contained in the <a href="#5_3">Meta Keywords</a> you provide for an example page, the page will be listed in the index page for each of the specified <a href="#5_3_2">Category Keywords</a>.</p>
+			</div>
+			
+			<a name="6_2_2"></a>
+			<h3 class="heading3" title="6. What&apos;s Done for You Automatically -&gt; 6.2. Listing in Various Index Pages -&gt; 6.2.2. Examples By Module Name Listing"><span class="headingNumber"><a href="#6" title="6. What&apos;s Done for You Automatically">6</a>.<a href="#6_2" title="6. What&apos;s Done for You Automatically -&gt; 6.2. Listing in Various Index Pages">2</a>.<a href="#6_2_2" title="6. What&apos;s Done for You Automatically -&gt; 6.2. Listing in Various Index Pages -&gt; 6.2.2. Examples By Module Name Listing">2</a>. </span>Examples By Module Name Listing</h3>
+			<div class="contents3">
+				<p>Using the <a href="#5_3_3">Module Name Keywords</a>, if any, contained in the <a href="#5_3">Meta Keywords</a> you provide for an example page, the page will be listed in the appropriate place(s) in the tree menu on the <a href="../javascript-examples-by-module.html">JavaScript Examples, By Module</a> page.</p>
+			</div>
+			
+			<a name="6_2_3"></a>
+			<h3 class="heading3" title="6. What&apos;s Done for You Automatically -&gt; 6.2. Listing in Various Index Pages -&gt; 6.2.3. All Examples Listing"><span class="headingNumber"><a href="#6" title="6. What&apos;s Done for You Automatically">6</a>.<a href="#6_2" title="6. What&apos;s Done for You Automatically -&gt; 6.2. Listing in Various Index Pages">2</a>.<a href="#6_2_3" title="6. What&apos;s Done for You Automatically -&gt; 6.2. Listing in Various Index Pages -&gt; 6.2.3. All Examples Listing">3</a>. </span>All Examples Listing</h3>
+			<div class="contents3">
+				<p>Every example page you create (excluding <a href="#4_2_1">Unreleased Example Pages</a>) is automatically listed in the <a href="../javascript-examples.html">JavaScript Examples</a> page, which lists all examples.</p>
+			</div>
+		</div>
+		
+		<a name="6_3"></a>
+		<h2 class="heading2" title="6. What&apos;s Done for You Automatically -&gt; 6.3. Example Tours"><span class="headingNumber"><a href="#6" title="6. What&apos;s Done for You Automatically">6</a>.<a href="#6_3" title="6. What&apos;s Done for You Automatically -&gt; 6.3. Example Tours">3</a>. </span>Example Tours</h2>
+		<div class="contents2">
+			<p>The example pages listed in any of the <a href="#6_2_1">Examples By Keyword Listings</a>, as well as the <a href="#6_2_3">All Examples Listing</a>, can be viewed in a step-by-step tour (<a href="../javascript-feature-tours.html?tour=all">see example</a>), so any example page you create will be available in at least one tour, and possibly more (depending on how many <a href="#5_3_2">Category Keywords</a> you supply).</p>
+		</div>
+	</div>
+	
+	<a name="7"></a>
+	<h1 class="heading1" title="7. Announce a New Example Page or Tool"><span class="headingNumber"><a href="#7" title="7. Announce a New Example Page or Tool">7</a>. </span>Announce a New Example Page or Tool</h1>
+	<div class="contents1">
+		<p>document...</p>
+	</div>
+	
+	<a name="8"></a>
+	<h1 class="heading1" title="8. Revisit This Explainer, As Needed"><span class="headingNumber"><a href="#8" title="8. Revisit This Explainer, As Needed">8</a>. </span>Revisit This Explainer, As Needed</h1>
+	<div class="contents1">
+		<p>Developers using the UIZE JavaScript Framework will use the example pages you create to learn how to use the framework or the UIZE modules that you develop that are showcased by your example pages.</p>
+		
+		<p>Therefore, take the process of creating example pages seriously. Don't be afraid to revisit this document as a refresher when adding a new example page, and as a last step / checklist before finally committing your new example page to the framework. If it takes a few minutes to skim through this document and see if you've forgotten or missed anything, it might be a few minutes well spent.</p>
+	</div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

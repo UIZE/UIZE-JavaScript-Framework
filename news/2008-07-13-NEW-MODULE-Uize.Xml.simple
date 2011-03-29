@@ -1,0 +1,11 @@
+A new =Uize.Xml= utility module has been added, with static methods for serializing objects to attributes strings, decoding attributes strings into attributes objects, and encoding and decoding attribute values.
+
+In time, more features related to dealing with data in XML format will be added to this package. Documentation is complete.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2008-07-13 - NEW MODULE: Uize.Xml
+....................................................................................

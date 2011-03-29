@@ -1,0 +1,10 @@
+Uize.Data - New Methods
+	The new =Uize.Data.getColumn= static method lets you get all the values for a specified column of a record set. The new =Uize.Data.findRecords= static method lets you get an array containing all the records of a specified record set that match the specified match criteria.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2008-06-27 - New Features
+....................................................................................

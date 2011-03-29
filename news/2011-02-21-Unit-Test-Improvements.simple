@@ -1,0 +1,26 @@
+Unit tests for the UIZE JavaScript Framework have been improved in a number of ways, as outlined below...
+
+UIZE Unit Tests Example Now Tests All Modules
+	The [[../examples/uize-unit-tests.html][UIZE Unit Tests]] example has been improved to now offer tests for all modules of the UIZE JavaScript Framework - even modules for which no dedicated test modules have been written.
+
+	For any module for which no dedicated test module has been written, a dynamically created test is provided as a fallback to test that, at the very least, the module can be successfully loaded and built without encountering syntax errors or runtime errors while building. These dynamically created minimal tests are indicated with an asterisk in the list of tests that can be performed.
+
+Module References Integrated With Unit Tests
+	Reference pages for modules of the UIZE JavaScript Framework are now integrated with the UIZE Unit Tests example.
+
+	A new *"TEST"* button in the titlebar for each module reference now lets you instantly execute the unit tests for the module. Clicking the *"TEST"* button takes you to the [[../examples/uize-unit-tests.html][UIZE Unit Tests]] example and automatically loads and runs the test for the module. Because the `UIZE Unit Tests example now tests all modules`, even modules for which no dedicated unit test modules have been created can be tested in a minimal way to ensure that they can at least be successfully loaded and built (ie. there are no blocking syntax errors or runtime errors while building them). For the module references for test modules, themselves, clicking on the *"TEST"* button will simply run the test module (test modules, of course, are not tested with further test modules - that would just be silly).
+
+Running Unit Test Build Scripts Now Outputs Log Files
+	Running unit tests using the =Uize.Wsh.BuildUtils.runUnitTests= static method of the =Uize.Wsh.BuildUtils= module now writes out a log file once the tests have been run.
+
+	In the case of all unit tests succeeding, the log file will contain a summary of all the tests that were performed, for the entire test tree. This summary is in much the same format as the log that is seen on the [[../examples/uize-unit-tests.html][UIZE Unit Tests]] page, and includes durations for each of the tests. In the case of a test failing somewhere in the test tree, the log file will contain only summary information for all the tests that succeeded, up until the test that failed, followed by a detailed synopsis for the test that failed. For performance type tests, the log file can be useful as a way of analysing the durations for various tests.
+
+	Because the =Uize.Wsh.BuildUtils.runUnitTests= method is used by the unit test build scripts (ie. =_run-test-module.js=, =_run-unit-tests-scrunched.js=, and =_run-unit-tests-source.js=), running any of these build scripts will output a log file once the tests have been run. The log file will be named the same as the build script, but with a =.log= file extension instead of the =.js= file extension of the build script.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2011-02-21 - Unit Test Improvements
+....................................................................................

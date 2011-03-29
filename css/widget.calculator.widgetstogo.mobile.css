@@ -1,0 +1,26 @@
+/*** overrides for 320x480 viewport ***/
+	.calculator {
+		width:311px;
+		height:480px;
+	}
+	.calculator .button {
+		width:36px;
+		height:40px;
+		font-size:33px;
+		line-height:35px;
+	}
+	.calculator .entry, .calculator .entry:focus {
+		width:298px;
+		height:55px;
+		font-size:47px;
+		line-height:47px;
+	}
+	.calculator .operatorButtonClearEntry .button,
+	.calculator .operatorButtonClear .button,
+	.calculator .operatorButtonNegate .button,
+	.calculator .memoryButton .button
+	{
+		font-size:23px;
+		line-height:36px;
+	}
+

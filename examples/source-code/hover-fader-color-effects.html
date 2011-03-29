@@ -1,0 +1,933 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Hover Fader Color Effects - HTML Source Code | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework HTML example source code"/>
+	<meta name="description" content="This is the source code for the Hover Fader Color Effects example"/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../../css/page.css"/>
+	<link rel="stylesheet" href="../../css/page.source.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../../index.html" title="UIZE JavaScript Framework home"></a>
+	SOURCE CODE: Hover Fader Color Effects
+	<div id="page-actions" class="pageActions">
+		<a href="../hover-fader-color-effects.html" class="buttonLink">VIEW EXAMPLE</a>
+	</div>
+</h1>
+
+<pre>
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+&lt;head&gt;
+  &lt;title&gt;Hover Fader Color Effects | JavaScript Examples | UIZE JavaScript Framework&lt;/title&gt;
+  &lt;meta name="keywords" content="featured color animation menu Uize.Widget.HoverFader"/&gt;
+  &lt;meta name="description" content="Who needs boring menus when you can have stunning menu animations that will have your users mesmerized! You have to see these effects to believe them."/&gt;
+  &lt;link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/&gt;
+  &lt;link rel="stylesheet" href="../css/page.css"/&gt;
+  &lt;link rel="stylesheet" href="../css/page.example.css"/&gt;
+  &lt;link rel="stylesheet" href="../css/widget.tabs.css"/&gt;
+  &lt;link rel="stylesheet" href="css/selector-links.css"/&gt;
+  &lt;link rel="stylesheet" href="css/params-table.css"/&gt;
+  &lt;link rel="stylesheet" href="css/params-inspector.css"/&gt;
+  &lt;style type="text/css"&gt;
+    #page_paramsInspector-shell .tabShell {
+      width:480px;
+    }
+    #page_paramsInspector_settings {
+      width:400px;
+      height:286px;
+      font-size:12px;
+    }
+    #page_paramsInspector_preview {
+      width:466px;
+    }
+    .menuLinks {
+      position:relative;
+      width:200px;
+      background:#364040;
+      padding:10px;
+      padding-bottom:5px;
+    }
+    .menuLink, .menuLink:link, .menuLink:visited, .menuLink:hover, .menuLink:active {
+      display:block;
+      font-size:12px;
+      text-transform:uppercase;
+      letter-spacing:4px;
+      color:#bbb;
+      background:#000;
+      border:2px solid #555;
+      width:182px;
+      padding:5px 7px;
+      margin-bottom:5px;
+      text-decoration:none;
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+&lt;script type="text/javascript" src="../js/Uize.js"&gt;&lt;/script&gt;
+
+&lt;h1 class="document-title"&gt;
+  &lt;a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"&gt;&lt;/a&gt;
+  &lt;a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow"&gt;JAVASCRIPT EXAMPLES&lt;/a&gt;
+  Hover Fader Color Effects
+  &lt;div id="page-actions" class="pageActions"&gt;
+    &lt;a href="source-code/hover-fader-color-effects.html" class="buttonLink"&gt;SOURCE&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/h1&gt;
+
+&lt;div class="main"&gt;
+  &lt;!-- explanation copy --&gt;
+
+  &lt;div class="explanation"&gt;
+    &lt;p&gt;In this example, an instance of the &lt;a href="../reference/Uize.Widget.HoverFader.html"&gt;&lt;code&gt;Uize.Widget.HoverFader&lt;/code&gt;&lt;/a&gt; class is wiring up a slick JavaScript animation effect to the links in a menu (to the left). A list of links in the &lt;b&gt;"PRESETS"&lt;/b&gt; tab lets you preview effect presets. When you choose a preset, the &lt;code&gt;Uize.Widget.HoverFader&lt;/code&gt; instance will be configured with those settings, and will be automatically "tickled" to demo the settings. Be sure to also interact with the menu, since "tickling" only demos the fade-out phase, and some effects are interesting in their fade-in phase. To fool around with the settings for a preset, switch over to the &lt;b&gt;"PARAMS"&lt;/b&gt; tab to tweak values and click the &lt;b&gt;"PREVIEW HOVER FADER SETTINGS"&lt;/b&gt; button to preview changes.&lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;!-- page layout's "wireframe" with slot for params inspector --&gt;
+
+  &lt;table border="0" cellspacing="0" cellpadding="4" style="margin:auto;"&gt;
+    &lt;tr valign="top"&gt;
+      &lt;td&gt;
+        &lt;div class="menuLinks"&gt;
+          &lt;a href="javascript://" class="menuLink"&gt;About Us&lt;/a&gt;
+          &lt;a href="javascript://" class="menuLink"&gt;Products&lt;/a&gt;
+          &lt;a href="javascript://" class="menuLink"&gt;Services&lt;/a&gt;
+          &lt;a href="javascript://" class="menuLink"&gt;Technology&lt;/a&gt;
+          &lt;a href="javascript://" class="menuLink"&gt;Solutions&lt;/a&gt;
+          &lt;a href="javascript://" class="menuLink"&gt;My Account&lt;/a&gt;
+          &lt;a href="javascript://" class="menuLink"&gt;Store Locator&lt;/a&gt;
+          &lt;a href="javascript://" class="menuLink"&gt;Investors&lt;/a&gt;
+          &lt;a href="javascript://" class="menuLink"&gt;Support&lt;/a&gt;
+          &lt;a href="javascript://" class="menuLink"&gt;Contact Us&lt;/a&gt;
+        &lt;/div&gt;
+      &lt;/td&gt;
+      &lt;td id="page_paramsInspector-shell"&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/table&gt;
+&lt;/div&gt;
+
+&lt;textarea id="page_paramsInspector-inlinePresets" style="display:none;"&gt;
+
+Blue Border Ghost Tail That Wobbles / Oscillates
+  settings::
+    {
+      defaultStyle:{
+        color:'b',
+        backgroundColor:'0',
+        borderTopColor:'0',
+        borderLeftColor:'0',
+        borderRightColor:'0',
+        borderBottomColor:'0'
+      },
+      hoverStyle:{
+        color:'b',
+        backgroundColor:'0',
+        borderTopColor:'5af',
+        borderLeftColor:'5af',
+        borderRightColor:'5af',
+        borderBottomColor:'5af'
+      },
+      fadeIn:{duration:500},
+      fadeOut:{
+        duration:2000,
+        curve:{
+          borderLeftColor:
+            Uize.Curve.Mod.blend (
+              10,
+              1,
+              Uize.Curve.Mod.bend (
+                Uize.Curve.Mod.repeat (1,25,0,1),
+                4
+              )
+            ),
+          borderTopColor:
+            Uize.Curve.Mod.blend (
+              10,
+              1,
+              Uize.Curve.Mod.bend (
+                Uize.Curve.Mod.repeat (1,25,0,1),
+                3.5
+              )
+            ),
+          borderRightColor:
+            Uize.Curve.Mod.blend (
+              10,
+              1,
+              Uize.Curve.Mod.bend (
+                Uize.Curve.Mod.repeat (1,25,0,1),
+                3
+              )
+            ),
+          borderBottomColor:
+            Uize.Curve.Mod.blend (
+              10,
+              1,
+              Uize.Curve.Mod.bend (
+                Uize.Curve.Mod.repeat (1,25,0,1),
+                2.5
+              )
+            )
+        }
+      }
+    }
+
+Fade to Black on White
+  settings::
+    {
+      defaultStyle:
+        {color:'b',backgroundColor:'0',borderColor:'5'},
+      hoverStyle:
+        {color:'0',backgroundColor:'f',borderColor:'f'},
+      fadeIn:{duration:250},
+      fadeOut:{duration:1000}
+    }
+
+Hot Background Fade In, Cool Background Fade Out
+  settings::
+    {
+      defaultStyle:
+        {color:'b',backgroundColor:'0',borderColor:'0'},
+      hoverStyle:
+        {color:'0',backgroundColor:'f',borderColor:'0'},
+      fadeInOut:{
+        curve:{
+          backgroundColor:[
+            Uize.Curve.Mod.band (1,.5,0),
+            Uize.Curve.Mod.band (1,.5,.5),
+            Uize.Curve.Mod.band (1,.5,1)
+          ]
+        }
+      },
+      fadeIn:{duration:500},
+      fadeOut:{duration:1250,reverse:false}
+    }
+
+Cool Background Fade In, Hot Background Fade Out
+  settings::
+    {
+      defaultStyle:
+        {color:'b',backgroundColor:'0',borderColor:'0'},
+      hoverStyle:
+        {color:'0',backgroundColor:'f',borderColor:'0'},
+      fadeInOut:{
+        curve:{
+          backgroundColor:[
+            Uize.Curve.Mod.band (1,.5,1),
+            Uize.Curve.Mod.band (1,.5,.5),
+            Uize.Curve.Mod.band (1,.5,0)
+          ]
+        }
+      },
+      fadeIn:{duration:500},
+      fadeOut:{duration:1250,reverse:false}
+    }
+
+Sunrise and Sunset, Bg and Border Through Yellows and Reds
+  settings::
+    {
+      defaultStyle:
+        {color:'b',backgroundColor:'0',borderColor:'0'},
+      hoverStyle:
+        {color:'0',backgroundColor:'f',borderColor:'f'},
+      fadeInOut:{
+        curve:{
+          backgroundColor:[
+            Uize.Curve.Mod.band (1,1/3,2/3),
+            Uize.Curve.Mod.band (3,1/3,1/3),
+            Uize.Curve.Mod.band (1,1/3,0)
+          ],
+          borderColor:[
+            Uize.Curve.Mod.band (3,1/3,2/3),
+            Uize.Curve.Mod.band (-2,1/3,1/3),
+            Uize.Curve.Mod.band (1,1/3,0)
+          ]
+        },
+        reverse:true
+      },
+      fadeIn:{duration:750},
+      fadeOut:{duration:1500}
+    }
+
+A Fading Fusion of Fuchsia and Morning Glory
+  settings::
+    {
+      defaultStyle:{
+        color:'b',
+        backgroundColor:'0',
+        borderLeftColor:'0',
+        borderTopColor:'0',
+        borderRightColor:'0',
+        borderBottomColor:'0'
+      },
+      hoverStyle:{
+        color:'0',
+        backgroundColor:'f',
+        borderLeftColor:'f',
+        borderTopColor:'f',
+        borderRightColor:'f',
+        borderBottomColor:'f'
+      },
+      fadeInOut:{
+        duration:1250,
+        curve:{
+          color:Uize.Curve.easeInPow (6),
+          borderLeftColor:[
+            Uize.Curve.easeInOutPow (8),
+            Uize.Curve.easeInPow (2),
+            Uize.Curve.easeInPow (3)
+          ],
+          borderTopColor:[
+            Uize.Curve.easeMiddlePow (4),
+            Uize.Curve.easeInPow (3),
+            Uize.Curve.easeMiddlePow (8)
+          ],
+          borderRightColor:[
+            Uize.Curve.easeInOutPow (8),
+            Uize.Curve.easeInPow (3),
+            Uize.Curve.easeMiddlePow (5)
+          ],
+          borderBottomColor:[
+            Uize.Curve.easeInOutPow (4),
+            Uize.Curve.easeInPow (9),
+            Uize.Curve.easeMiddlePow (2)
+          ],
+          backgroundColor:[
+            Uize.Curve.easeInOutPow (2),
+            Uize.Curve.easeInPow (4),
+            Uize.Curve.easeMiddlePow (7)
+          ]
+        }
+      },
+      fadeIn:{duration:300}
+    }
+
+Flickering Pastels Background Color Fade Out
+  settings::
+    {
+      defaultStyle:
+        {color:'b',backgroundColor:'0',borderColor:'0'},
+      hoverStyle:
+        {color:'0',backgroundColor:'f',borderColor:'f'},
+      fadeIn:{duration:500},
+      fadeOut:{
+        duration:1250,
+        curve:{
+          backgroundColor:[
+            Uize.Curve.saw (3,.25),
+            Uize.Curve.saw (5,.25),
+            Uize.Curve.saw (7,.25)
+          ]
+        }
+      }
+    }
+
+Spectral Background Fade Out
+  settings::
+    {
+      defaultStyle:
+        {color:'b',backgroundColor:'0',borderColor:'0'},
+      hoverStyle:
+        {color:'0',backgroundColor:'f',borderColor:'0'},
+      fadeIn:{duration:500},
+      fadeOut:{
+        duration:1250,
+        curve:{
+          backgroundColor:[
+            Uize.Curve.Rubber.easeOutBounce (4,1,3),
+            Uize.Curve.Rubber.easeOutBounce (3,2,-1.5),
+            Uize.Curve.Rubber.easeOutBounce (3,6,1)
+          ]
+        },
+        reverse:true
+      }
+    }
+
+Peaches and Plums Fade Out
+  settings::
+    {
+      defaultStyle:
+        {color:'b',backgroundColor:'0',borderColor:'0'},
+      hoverStyle:
+        {color:'0',backgroundColor:'f',borderColor:'f'},
+      fadeInOut:{
+        curve:{
+          backgroundColor:[
+            Uize.Curve.Rubber.easeOutBounce (10,1,3),
+            Uize.Curve.Rubber.easeOutBounce (10,1.5,3.2),
+            Uize.Curve.Rubber.easeOutBounce (10,-2,3.4)
+          ],
+          borderColor:[
+            Uize.Curve.Rubber.easeOutBounce (3,2,4),
+            Uize.Curve.Rubber.easeOutBounce (3,3,4.2),
+            Uize.Curve.Rubber.easeOutBounce (3,-2,4.4)
+          ]
+        }
+      },
+      fadeIn:{duration:350},
+      fadeOut:{duration:1500}
+    }
+
+Shadow After Head, With Tinges of Blue in Tail
+  settings::
+    {
+      defaultStyle:
+        {color:'b',backgroundColor:'0',borderColor:'0'},
+      hoverStyle:
+        {color:'0',backgroundColor:'f',borderColor:'f'},
+      fadeIn:{duration:500},
+      fadeOut:{
+        duration:1250,
+        curve:{
+          borderColor:
+            Uize.Curve.Mod.blend (
+              Uize.Curve.Mod.bend (
+                Uize.Curve.Mod.repeat (
+                  Uize.Curve.easeInOutSine (),
+                  3,
+                  0,
+                  true
+                ),
+                -3.9
+              ),
+              1,
+              Uize.Curve.linear
+            ),
+          backgroundColor:[
+            Uize.Curve.Mod.blend (
+              Uize.Curve.Mod.bend (
+                Uize.Curve.Mod.repeat (
+                  Uize.Curve.easeInOutSine (),
+                  3,
+                  0,
+                  true
+                ),
+                -3
+              ),
+              1,
+              Uize.Curve.linear
+            ),
+            Uize.Curve.Mod.blend (
+              Uize.Curve.Mod.bend (
+                Uize.Curve.Mod.repeat (
+                  Uize.Curve.easeInOutSine (),
+                  3,
+                  0,
+                  true
+                ),
+                -3.3
+              ),
+              1,
+              Uize.Curve.linear
+            ),
+            Uize.Curve.Mod.blend (
+              Uize.Curve.Mod.bend (
+                Uize.Curve.Mod.repeat (
+                  Uize.Curve.easeInOutSine (),
+                  3,
+                  0,
+                  true
+                ),
+                -3.5
+              ),
+              1,
+              Uize.Curve.linear
+            )
+          ]
+        }
+      }
+    }
+
+Prismatic Border (each side has different color transition)
+  settings::
+    {
+      defaultStyle:{
+        color:'b',
+        backgroundColor:'0',
+        borderTopColor:'0',
+        borderLeftColor:'0',
+        borderRightColor:'0',
+        borderBottomColor:'0'
+      },
+      hoverStyle:{
+        color:'b',
+        backgroundColor:'0',
+        borderTopColor:'c',
+        borderLeftColor:'c',
+        borderRightColor:'c',
+        borderBottomColor:'c'
+      },
+      fadeInOut:{
+        curve:{
+          borderTopColor:[
+            Uize.Curve.Mod.band (1,.5,0),
+            Uize.Curve.Mod.band (1,.5,.5),
+            Uize.Curve.Mod.band (1,.5,1)
+          ],
+          borderRightColor:[
+            Uize.Curve.Mod.band (1,.5,1),
+            Uize.Curve.Mod.band (1,.5,.5),
+            Uize.Curve.Mod.band (1,.5,0)
+          ],
+          borderBottomColor:[
+            Uize.Curve.Mod.band (1,.5,.5),
+            Uize.Curve.Mod.band (1,.5,0),
+            Uize.Curve.Mod.band (1,.5,1)
+          ],
+          borderLeftColor:[
+            Uize.Curve.Mod.band (1,.5,.5),
+            Uize.Curve.Mod.band (1,.5,1),
+            Uize.Curve.Mod.band (1,.5,0)
+          ]
+        }
+      },
+      fadeIn:{duration:500},
+      fadeOut:{duration:1250,reverse:false}
+    }
+
+Blueish Border, Clockwise Fade In, Counter-Clockwise Fade Out
+  settings::
+    {
+      defaultStyle:{
+        color:'b',
+        backgroundColor:'0',
+        borderTopColor:'0',
+        borderLeftColor:'0',
+        borderRightColor:'0',
+        borderBottomColor:'0'
+      },
+      hoverStyle:{
+        color:'f',
+        backgroundColor:'247',
+        borderTopColor:'06a',
+        borderLeftColor:'5af',
+        borderRightColor:'139',
+        borderBottomColor:'136'
+      },
+      fadeInOut:{
+        curve:{
+          backgroundColor:Uize.Curve.resolve (-3),
+          borderLeftColor:Uize.Curve.Mod.band (1,.25,0),
+          borderTopColor:Uize.Curve.Mod.band (1,.25,1/3),
+          borderRightColor:Uize.Curve.Mod.band (1,.25,2/3),
+          borderBottomColor:Uize.Curve.Mod.band (1,.25,1)
+        }
+      },
+      fadeIn:{duration:700},
+      fadeOut:{duration:1000}
+    }
+
+Orange Border Blink Three Times, Then Background Lighten
+  settings::
+    {
+      defaultStyle:{
+        color:'b',
+        borderColor:'0',
+        backgroundColor:'0'
+      },
+      hoverStyle:{
+        color:'fd9',
+        borderColor:'ffa200',
+        backgroundColor:'752'
+      },
+      fadeIn:{
+        duration:1500,
+        curve:{
+          borderColor:
+            Uize.Curve.Mod.band (
+              Uize.Curve.Mod.repeat (1,5,0,true),
+              1/3,
+              0
+            ),
+          backgroundColor:Uize.Curve.Mod.band (1,2/3,1)
+        }
+      },
+      fadeOut:{duration:1250}
+    }
+
+Light Green Border Slowing Blinking, Late Background Fade In
+  settings::
+    {
+      defaultStyle:{
+        color:'b',
+        backgroundColor:'0',
+        borderColor:'0'
+      },
+      hoverStyle:{
+        color:'0',
+        backgroundColor:'afc',
+        borderColor:'afc'
+      },
+      fadeIn:{
+        duration:1500,
+        curve:{
+          backgroundColor:Uize.Curve.resolve (-9),
+          color:Uize.Curve.resolve (-6),
+          borderColor:Uize.Curve.Mod.bend (
+            Uize.Curve.Mod.blend (
+              Uize.Curve.Mod.repeat (1,17,0,1),
+              Uize.Curve.linear,
+              Uize.Curve.resolve (-3)
+            ),
+            -3
+          )
+        }
+      },
+      fadeOut:{duration:1500}
+    }
+
+Gold Ingots, Bevel And Background Fade at Different Rates
+  settings::
+    {
+      defaultStyle:{
+        color:'b',
+        backgroundColor:'0',
+        borderTopColor:'0',
+        borderLeftColor:'0',
+        borderRightColor:'0',
+        borderBottomColor:'0'
+      },
+      hoverStyle:{
+        color:'0',
+        backgroundColor:'eb4',
+        borderTopColor:'eb4',
+        borderLeftColor:'eb4',
+        borderRightColor:'eb4',
+        borderBottomColor:'eb4'
+      },
+      fadeInOut:{
+        curve:{
+          color:Uize.Curve.resolve (-2),
+          borderLeftColor:Uize.Curve.Mod.band (1,.25,1/3),
+          borderTopColor:Uize.Curve.Mod.band (1,.25,0),
+          borderRightColor:Uize.Curve.Mod.band (1,.25,1/3),
+          borderBottomColor:Uize.Curve.Mod.band (1,.25,1)
+        }
+      },
+      fadeIn:{duration:700},
+      fadeOut:{duration:1500}
+    }
+
+Bronze to Gold Ingot Alchemy
+  settings::
+    {
+      defaultStyle:{
+        color:'eda',
+        backgroundColor:'753',
+        borderTopColor:'974',
+        borderLeftColor:'974',
+        borderRightColor:'642',
+        borderBottomColor:'642'
+      },
+      hoverStyle:{
+        color:'0',
+        backgroundColor:'eb4',
+        borderTopColor:'fd8',
+        borderLeftColor:'fec',
+        borderRightColor:'972',
+        borderBottomColor:'972'
+      },
+      fadeInOut:{
+        curve:{
+          color:Uize.Curve.resolve (-2),
+          borderLeftColor:Uize.Curve.Mod.band (1,.25,1/3),
+          borderTopColor:Uize.Curve.Mod.band (1,.25,0),
+          borderRightColor:Uize.Curve.Mod.band (1,.25,1/3),
+          borderBottomColor:Uize.Curve.Mod.band (1,.25,1)
+        }
+      },
+      fadeIn:{duration:250},
+      fadeOut:{duration:1000}
+    }
+
+3.5 Slow Blue Background Throbs on Fade In
+  settings::
+    {
+      defaultStyle:{
+        color:'b',
+        backgroundColor:'0',
+        borderColor:'0'
+      },
+      hoverStyle:{
+        color:'7cf',
+        backgroundColor:'246',
+        borderColor:'248'
+      },
+      fadeIn:{
+        duration:4000,
+        curve:Uize.Curve.Mod.repeat (1,7,0,true)
+      },
+      fadeOut:{duration:1000}
+    }
+
+Flickery Spectral Border Color Fade Out
+  settings::
+    {
+      defaultStyle:{
+        color:'b',
+        backgroundColor:'0',
+        borderTopColor:'0',
+        borderLeftColor:'0',
+        borderRightColor:'0',
+        borderBottomColor:'0'
+      },
+      hoverStyle:{
+        color:'b',
+        backgroundColor:'0',
+        borderTopColor:'c',
+        borderLeftColor:'c',
+        borderRightColor:'c',
+        borderBottomColor:'c'
+      },
+      fadeIn:{duration:500},
+      fadeOut:{
+        duration:1500,
+        curve:{
+          borderTopColor:[
+            Uize.Curve.saw (5,.25),
+            Uize.Curve.saw (7,.25),
+            Uize.Curve.saw (11,.25)
+          ],
+          borderRightColor:[
+            Uize.Curve.saw (3,.25),
+            Uize.Curve.saw (13,.25),
+            Uize.Curve.saw (6,.25)
+          ],
+          borderBottomColor:[
+            Uize.Curve.saw (4,.25),
+            Uize.Curve.saw (9,.25),
+            Uize.Curve.saw (15,.25)
+          ],
+          borderLeftColor:[
+            Uize.Curve.saw (11,.25),
+            Uize.Curve.saw (13,.25),
+            Uize.Curve.saw (8,.25)
+          ]
+        }
+      }
+    }
+
+Aqua Flickery Border Fade Out
+  settings::
+    {
+      defaultStyle:{
+        color:'b',
+        backgroundColor:'0',
+        borderTopColor:'0',
+        borderLeftColor:'0',
+        borderRightColor:'0',
+        borderBottomColor:'0'
+      },
+      hoverStyle:{
+        color:'b',
+        backgroundColor:'0',
+        borderTopColor:'09f',
+        borderLeftColor:'0ff',
+        borderRightColor:'0ca',
+        borderBottomColor:'099'
+      },
+      fadeIn:{duration:500},
+      fadeOut:{
+        duration:1500,
+        curve:{
+          borderLeftColor:Uize.Curve.saw (13,.2),
+          borderTopColor:Uize.Curve.saw (17,.2),
+          borderRightColor:Uize.Curve.saw (19,.2),
+          borderBottomColor:Uize.Curve.saw (23,.2)
+        }
+      }
+    }
+
+Aqua Border, Oscillating Tail Slows Down Towards End
+  settings::
+    {
+      defaultStyle:{
+        color:'b',
+        backgroundColor:'0',
+        borderTopColor:'0',
+        borderLeftColor:'0',
+        borderRightColor:'0',
+        borderBottomColor:'0'
+      },
+      hoverStyle:{
+        color:'b',
+        backgroundColor:'0',
+        borderTopColor:'0ab',
+        borderLeftColor:'0ab',
+        borderRightColor:'0ab',
+        borderBottomColor:'0ab'
+      },
+      fadeIn:{duration:500},
+      fadeOut:{
+        duration:4000,
+        curve:{
+          borderLeftColor:
+            Uize.Curve.Mod.blend (
+              4,
+              Uize.Curve.easeMiddlePow (4),
+              Uize.Curve.Mod.bend (
+                Uize.Curve.Mod.repeat (1,25,0,1),
+                -4
+              )
+            ),
+          borderTopColor:
+            Uize.Curve.Mod.blend (
+              4,
+              Uize.Curve.easeMiddlePow (4),
+              Uize.Curve.Mod.bend (
+                Uize.Curve.Mod.repeat (1,25,0,1),
+                -3.5
+              )
+            ),
+          borderRightColor:
+            Uize.Curve.Mod.blend (
+              4,
+              Uize.Curve.easeMiddlePow (4),
+              Uize.Curve.Mod.bend (
+                Uize.Curve.Mod.repeat (1,25,0,1),
+                -3
+              )
+            ),
+          borderBottomColor:
+            Uize.Curve.Mod.blend (
+              4,
+              Uize.Curve.easeMiddlePow (4),
+              Uize.Curve.Mod.bend (
+                Uize.Curve.Mod.repeat (1,25,0,1),
+                -2.5
+              )
+            )
+        }
+      }
+    }
+
+Wobbly Shape Fade Out
+  settings::
+    {
+      defaultStyle:{
+        color:'b',
+        backgroundColor:'0',
+        borderTopColor:'0',
+        borderLeftColor:'0',
+        borderRightColor:'0',
+        borderBottomColor:'0'
+      },
+      hoverStyle:{
+        color:'0',
+        backgroundColor:'f',
+        borderTopColor:'f',
+        borderLeftColor:'f',
+        borderRightColor:'f',
+        borderBottomColor:'f'
+      },
+      fadeIn:{duration:500},
+      fadeOut:{
+        duration:2000,
+        curve:{
+          borderTopColor:Uize.Curve.makeEaseOut (
+            Uize.Curve.Mod.multiply (
+              Uize.Curve.Mod.repeat (1,11,0,true),
+              1
+            )
+          ),
+          borderRightColor:Uize.Curve.makeEaseOut (
+            Uize.Curve.Mod.multiply (
+              Uize.Curve.Mod.repeat (1,13,0,true),
+              1
+            )
+          ),
+          borderBottomColor:Uize.Curve.makeEaseOut (
+            Uize.Curve.Mod.multiply (
+              Uize.Curve.Mod.repeat (1,15,0,true),
+              1
+            )
+          ),
+          borderLeftColor:Uize.Curve.makeEaseOut (
+            Uize.Curve.Mod.multiply (
+              Uize.Curve.Mod.repeat (1,17,0,true),
+              1
+            )
+          )
+        }
+      }
+    }
+
+&lt;/textarea&gt;
+
+&lt;!-- JavaScript code to make the static HTML "come alive" --&gt;
+
+&lt;script type="text/javascript"&gt;
+
+Uize.module ({
+  required:[
+    'UizeDotCom.Page.Example.library',
+    'UizeDotCom.Page.Example',
+    'UizeDotCom.ParamsInspector.InlinePresets',
+    'Uize.Curve',
+    'Uize.Curve.Rubber',
+    'Uize.Curve.Mod',
+    'Uize.Widget.HoverFader',
+    'Uize.Json'
+  ],
+  builder:function () {
+    /*** create the example page widget ***/
+      var page = window.page = new UizeDotCom.Page.Example;
+
+    /*** create the hover fader instance ***/
+      page.addChild ('hoverFader',Uize.Widget.HoverFader,{nodes:{className:/\bmenuLink\b/}});
+
+    /*** create the params inspector widget ***/
+      var lastSettings;
+      page.addChild (
+        'paramsInspector',
+        UizeDotCom.ParamsInspector.InlinePresets,
+        {
+          params:{settings:'string-multiline'},
+          previewButtonText:'PREVIEW HOVER FADER SETTINGS',
+          settingsPropertyName:'settings'
+        }
+      ).wire (
+        'Preset Selected',
+        function () {
+          var settings = page.children.paramsInspector.getValues ().settings;
+          if (settings != lastSettings)
+            page.children.hoverFader.set (
+              Uize.copyInto ({fadeInOut:null,fadeIn:null,fadeOut:null},Uize.Json.from (lastSettings = settings))
+            )
+          ;
+          page.children.hoverFader.tickle ({duration:600,curve:Uize.Curve.resolve (1.3)});
+        }
+      );
+
+    /*** wire up the page widget ***/
+      page.wireUi ();
+  }
+});
+
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+
+</pre>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.library',
+		'UizeDotCom.Page'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page).wireUi ()}
+});
+
+</script>
+
+</body></html>

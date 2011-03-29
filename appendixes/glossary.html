@@ -1,0 +1,201 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Glossary | Appendixes | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework Appendixes "/>
+	<meta name="description" content="This document is a glossary of terms that are used throughout the documentation for the UIZE JavaScript Framework."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	Glossary
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="This document is a glossary of terms that are used throughout the documentation for the UIZE JavaScript Framework.">1. Introduction</a></li>
+			<li><a href="#2">2. Terms</a>
+				<ul>
+					<li><a href="#2_1" title="The pattern of using lambda closure to combine asynchronous function calls into a conditional execution flow.">2.1. Asynconditional</a></li>
+					<li><a href="#2_2" title="A JavaScript file that provides the controller logic for a page and that is typically named the same as the page&apos;s source file, but with the page file&apos;s extension replaced with the .js extension.">2.2. code beside</a></li>
+					<li><a href="#2_3" title="A mechanism called a Circular Reference Isolation System is employed in the event wiring mechanism of the Uize.Node package and acts to isolate DOM nodes from their true event handler code, thereby avoiding all circular references and possible DOM node memory leaks in Internet Explorer 6.">2.3. CRIS</a></li>
+					<li><a href="#2_4" title="In the context of the UIZE JavaScript Framework, the term &quot;fade&quot; is used to refer to an automated interpolation of a value between a start value and an end value.">2.4. fade</a></li>
+					<li><a href="#2_5" title="GLUE, which stands for Glue Logic Upon Elements, is a core principle of the UIZE JavaScript Framework.">2.5. GLUE</a></li>
+					<li><a href="#2_6" title="In the UIZE JavaScript Framework, all widgets can have a set of implied nodes - DOM nodes that are expected to be in the document for the widget and that will be wired up to represent state and potentially allow user control of state.">2.6. Implied Node</a></li>
+					<li><a href="#2_7" title="In the UIZE JavaScript Framework, JavaScript libraries are bundles of JavaScript modules.">2.7. JavaScript Library</a></li>
+					<li><a href="#2_8" title="In the UIZE JavaScript Framework, classes, packages, and extensions are implemented in JavaScript modules.">2.8. JavaScript Module</a></li>
+					<li><a href="#2_9" title="A node blob is a concept that exists in the Uize.Node and Uize.Widget classes, whereby one ore more DOM nodes can be specified using an arbitrarily complex data structure.">2.9. Node Blob</a></li>
+					<li><a href="#2_10" title="A contraction of the word &quot;paremeterless&quot;, meaning without parameters or having no parameters. A paramless function is a function that accepts no parameters / arguments.">2.10. Paramless</a></li>
+					<li><a href="#2_11" title="The practice of maintaining thin interfaces wherever possible and not exposing something publicly until there is a compelling need for it and it is well thought out.">2.11. Thinterface</a></li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<a name="1"></a>
+	<h1 class="heading1" title="1. Introduction"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>. </span>Introduction</h1>
+	<div class="contents1">
+		<p>This document is a glossary of terms that are used throughout the documentation for the UIZE JavaScript Framework.</p>
+	</div>
+	
+	<a name="2"></a>
+	<h1 class="heading1" title="2. Terms"><span class="headingNumber"><a href="#2" title="2. Terms">2</a>. </span>Terms</h1>
+	<div class="contents1">
+		<a name="2_1"></a>
+		<h2 class="heading2" title="2. Terms -&gt; 2.1. Asynconditional"><span class="headingNumber"><a href="#2" title="2. Terms">2</a>.<a href="#2_1" title="2. Terms -&gt; 2.1. Asynconditional">1</a>. </span>Asynconditional</h2>
+		<div class="contents2">
+			<p>The pattern of using lambda closure to combine asynchronous function calls into a conditional execution flow.</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">function doSomethingAsynchronous (callback) {
+  /*
+    do something asynchronous (like AJAX request),
+    then call callback function
+  */
+}
+
+if (needToDoSomethingAsynchronous) {
+  doSomethingAsynchronous (continuation);
+} else {
+  continuation ();
+}
+function continuation () {
+  /*
+    do all the rest of the cool
+    stuff that will make the world
+    a better place for future generations
+  */
+}
+</pre>
+		</div>
+		
+		<a name="2_2"></a>
+		<h2 class="heading2" title="2. Terms -&gt; 2.2. code beside"><span class="headingNumber"><a href="#2" title="2. Terms">2</a>.<a href="#2_2" title="2. Terms -&gt; 2.2. code beside">2</a>. </span>code beside</h2>
+		<div class="contents2">
+			<p>A JavaScript file that provides the controller logic for a page and that is typically named the same as the page's source file, but with the page file's extension replaced with the <code>.js</code> extension.</p>
+			
+			<p>For example, in the .NET world, an aspx page will typically pair a <code>.aspx</code> page file with a <code>.aspx.cs</code> code behind file. If such a page also had substantial JavaScript controller logic - sufficient to warrant putting it in an external JavaScript file - then that JavaScript file would sit alongside the other two files, named as...</p>
+			
+			<p><span class="allCaps">.NET EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">myfolder/mypage.aspx
+myfolder/mypage.aspx.cs
+myfolder/mypage.js
+</pre>
+			
+			<p>Or, in the PHP world...</p>
+			
+			<p><span class="allCaps">PHP EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">myfolder/mypage.php
+myfolder/mypage.js
+</pre>
+		</div>
+		
+		<a name="2_3"></a>
+		<h2 class="heading2" title="2. Terms -&gt; 2.3. CRIS"><span class="headingNumber"><a href="#2" title="2. Terms">2</a>.<a href="#2_3" title="2. Terms -&gt; 2.3. CRIS">3</a>. </span>CRIS</h2>
+		<div class="contents2">
+			<p>A mechanism called a Circular Reference Isolation System is employed in the event wiring mechanism of the <code><a href="../reference/Uize.Node.html">Uize.Node</a></code> package and acts to isolate DOM nodes from their true event handler code, thereby avoiding all circular references and possible DOM node memory leaks in Internet Explorer 6.</p>
+		</div>
+		
+		<a name="2_4"></a>
+		<h2 class="heading2" title="2. Terms -&gt; 2.4. fade"><span class="headingNumber"><a href="#2" title="2. Terms">2</a>.<a href="#2_4" title="2. Terms -&gt; 2.4. fade">4</a>. </span>fade</h2>
+		<div class="contents2">
+			<p>In the context of the UIZE JavaScript Framework, the term "fade" is used to refer to an automated interpolation of a value between a start value and an end value.</p>
+			
+			<p>Accordingly, other terms that are synonymous with "fade" include "animation", "morph" or "morphing", "tween" or "tweening", "effects", "automation", and such like. The term "fade" is a generic term that can refer to time-based fades as well as non-time-based fades. Moreover, a "fade" does not need to control a property that is manifested visually, but could also control things unseen.</p>
+		</div>
+		
+		<a name="2_5"></a>
+		<h2 class="heading2" title="2. Terms -&gt; 2.5. GLUE"><span class="headingNumber"><a href="#2" title="2. Terms">2</a>.<a href="#2_5" title="2. Terms -&gt; 2.5. GLUE">5</a>. </span>GLUE</h2>
+		<div class="contents2">
+			<p>GLUE, which stands for Glue Logic Upon Elements, is a core principle of the UIZE JavaScript Framework.</p>
+			
+			<p>At its heart, GLUE aims to aid the Web interface design process by decoupling the interface skin development from the interface functionality development. Widgets in the UIZE JavaScript Framework employ this core principle.</p>
+		</div>
+		
+		<a name="2_6"></a>
+		<h2 class="heading2" title="2. Terms -&gt; 2.6. Implied Node"><span class="headingNumber"><a href="#2" title="2. Terms">2</a>.<a href="#2_6" title="2. Terms -&gt; 2.6. Implied Node">6</a>. </span>Implied Node</h2>
+		<div class="contents2">
+			<p>In the UIZE JavaScript Framework, all widgets can have a set of implied nodes - DOM nodes that are expected to be in the document for the widget and that will be wired up to represent state and potentially allow user control of state.</p>
+			
+			<p>This is part of the "contract" between a UIZE widget's JavaScript code and its markup in the document. (credit goes to Jan Borgersen for suggesting the term "implied node")</p>
+		</div>
+		
+		<a name="2_7"></a>
+		<h2 class="heading2" title="2. Terms -&gt; 2.7. JavaScript Library"><span class="headingNumber"><a href="#2" title="2. Terms">2</a>.<a href="#2_7" title="2. Terms -&gt; 2.7. JavaScript Library">7</a>. </span>JavaScript Library</h2>
+		<div class="contents2">
+			<p>In the UIZE JavaScript Framework, JavaScript libraries are bundles of JavaScript modules.</p>
+			
+			<p>Think of a JavaScript module as like a book, where the various methods and properties of the module make up the "pages" of the book. A library is a collection of books. So, in this metaphor, a JavaScript library file is a collection of JavaScript modules, bundled together into a single file. JavaScript libraries offer a performance benefit for pages, by reducing the number of HTTP requests needed in order for the page to have all the JavaScript modules it needs.</p>
+			
+			<p>For more information on JavaScript libraries, consult the explainer <a href="../explainers/javascript-libraries.html">JavaScript Libraries</a>.</p>
+		</div>
+		
+		<a name="2_8"></a>
+		<h2 class="heading2" title="2. Terms -&gt; 2.8. JavaScript Module"><span class="headingNumber"><a href="#2" title="2. Terms">2</a>.<a href="#2_8" title="2. Terms -&gt; 2.8. JavaScript Module">8</a>. </span>JavaScript Module</h2>
+		<div class="contents2">
+			<p>In the UIZE JavaScript Framework, classes, packages, and extensions are implemented in JavaScript modules.</p>
+			
+			<p>JavaScript modules are typically implemented in external JavaScript files - usually with one module defined per file. The UIZE JavaScript Framework reserves the term "library" to refer to collections of modules. To improve page load performance, many JavaScript modules can be bundled together in a single <a href="#2_7">JavaScript Library</a> file.</p>
+			
+			<p>For more information on JavaScript libraries, consult the explainer <a href="../explainers/javascript-modules.html">JavaScript Modules</a>.</p>
+		</div>
+		
+		<a name="2_9"></a>
+		<h2 class="heading2" title="2. Terms -&gt; 2.9. Node Blob"><span class="headingNumber"><a href="#2" title="2. Terms">2</a>.<a href="#2_9" title="2. Terms -&gt; 2.9. Node Blob">9</a>. </span>Node Blob</h2>
+		<div class="contents2">
+			<p>A node blob is a concept that exists in the <code><a href="../reference/Uize.Node.html">Uize.Node</a></code> and <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> classes, whereby one ore more DOM nodes can be specified using an arbitrarily complex data structure.</p>
+			
+			<p>Such a data structure may employ an arbitrary mix of objects, arrays, and simple values that are node references or strings representing node ID's.</p>
+		</div>
+		
+		<a name="2_10"></a>
+		<h2 class="heading2" title="2. Terms -&gt; 2.10. Paramless"><span class="headingNumber"><a href="#2" title="2. Terms">2</a>.<a href="#2_10" title="2. Terms -&gt; 2.10. Paramless">10</a>. </span>Paramless</h2>
+		<div class="contents2">
+			<p>A <a href="http://en.wikipedia.org/wiki/Contraction_(grammar)" target="_blank" class="externalSiteLink">contraction</a> of the word "paremeterless", meaning without parameters or having no parameters. A paramless function is a function that accepts no parameters / arguments.</p>
+		</div>
+		
+		<a name="2_11"></a>
+		<h2 class="heading2" title="2. Terms -&gt; 2.11. Thinterface"><span class="headingNumber"><a href="#2" title="2. Terms">2</a>.<a href="#2_11" title="2. Terms -&gt; 2.11. Thinterface">11</a>. </span>Thinterface</h2>
+		<div class="contents2">
+			<p>The practice of maintaining thin interfaces wherever possible and not exposing something publicly until there is a compelling need for it and it is well thought out.</p>
+		</div>
+	</div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

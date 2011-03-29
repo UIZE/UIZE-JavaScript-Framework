@@ -1,0 +1,158 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>enabled/busy in Widget Tree - HTML Source Code | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework HTML example source code"/>
+	<meta name="description" content="This is the source code for the enabled/busy in Widget Tree example"/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../../css/page.css"/>
+	<link rel="stylesheet" href="../../css/page.source.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../../index.html" title="UIZE JavaScript Framework home"></a>
+	SOURCE CODE: enabled/busy in Widget Tree
+	<div id="page-actions" class="pageActions">
+		<a href="../enabled-busy-in-widget-tree.html" class="buttonLink">VIEW EXAMPLE</a>
+	</div>
+</h1>
+
+<pre>
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+&lt;head&gt;
+  &lt;title&gt;enabled/busy in Widget Tree | JavaScript Examples | UIZE JavaScript Framework&lt;/title&gt;
+  &lt;meta name="keywords" content="Uize.Widget"/&gt;
+  &lt;meta name="description" content="See a demonstration of the busy and enabled mechanisms of the widget base class, and how busy and enabled state can be inherited within a widget tree."/&gt;
+  &lt;link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/&gt;
+  &lt;link rel="stylesheet" href="../css/page.css"/&gt;
+  &lt;link rel="stylesheet" href="../css/page.example.css"/&gt;
+  &lt;style type="text/css"&gt;
+    .widgetShell {
+      border:1px solid #ccc;
+      margin:8px;
+      padding:0;
+    }
+    .widgetShell .heading {
+      text-align:center;
+      font-size:10px;
+      letter-spacing:3px;
+      padding:2px;
+      background:#000;
+      color:#fff;
+    }
+    .widgetShell .body {
+      color:#000;
+      padding:8px;
+      padding-left:20px;
+      padding-right:20px;
+    }
+    #page_testWidget .body {
+      background:#888;
+    }
+    #page_testWidget_childTestWidget0 .body, #page_testWidget_childTestWidget1 .body {
+      background:#aaa;
+    }
+    #page_testWidget_childTestWidget0_childTestWidget0 .body,
+    #page_testWidget_childTestWidget0_childTestWidget1 .body {
+      background:#ddd;
+    }
+  &lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+&lt;script type="text/javascript" src="../js/Uize.js"&gt;&lt;/script&gt;
+
+&lt;h1 class="document-title"&gt;
+  &lt;a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"&gt;&lt;/a&gt;
+  &lt;a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow"&gt;JAVASCRIPT EXAMPLES&lt;/a&gt;
+  enabled/busy in Widget Tree
+  &lt;div id="page-actions" class="pageActions"&gt;
+    &lt;a href="source-code/enabled-busy-in-widget-tree.html" class="buttonLink"&gt;SOURCE&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/h1&gt;
+
+&lt;div class="main"&gt;
+  &lt;!-- explanation copy --&gt;
+
+  &lt;div class="explanation"&gt;
+    &lt;p&gt;This example demonstrates how the &lt;code&gt;enabled&lt;/code&gt; and &lt;code&gt;busy&lt;/code&gt; set-get properties behave in a hierarchical tree of widgets. In the example, a widget tree is created from instances of a dummy &lt;a href="../reference/UizeDotCom.TestWidget.html"&gt;&lt;code&gt;UizeDotCom.TestWidget&lt;/code&gt;&lt;/a&gt; class. The root widget has two child widgets of the same class, and one of those children has a further two children of the same class. The widget exposes controls for &lt;code&gt;enabled&lt;/code&gt; and &lt;code&gt;busy&lt;/code&gt;, and provides two buttons to demonstrate the effect of different combinations of enabled and busy at different levels of the tree. Tweak the values to see how the inheritance for these properties operates.&lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;!-- HTML "wireframe" for widget tree --&gt;
+
+  &lt;div id="page_testWidget"&gt;&lt;/div&gt;
+
+  &lt;!-- programmatic interface examples --&gt;
+
+  &lt;div class="programmaticInterface"&gt;
+    ACTIONS ON ROOT WIDGET:
+    &amp;nbsp;
+    &lt;a href="javascript://" class="linkedJs" title="testWidget.resetEnabledAndBusy ()"&gt;RESET TREE&lt;/a&gt;
+    &amp;nbsp;|&amp;nbsp;
+    &lt;a href="javascript://" class="linkedJs" title="testWidget.set ({enabled:testWidget.get ('enabled') === false ? 'inherit' : false})"&gt;TOGGLE ENABLED&lt;/a&gt;
+    &amp;nbsp;|&amp;nbsp;
+    &lt;a href="javascript://" class="linkedJs" title="testWidget.set ({busy:testWidget.get ('busy') === true ? 'inherit' : true})"&gt;TOGGLE BUSY&lt;/a&gt;
+    &amp;nbsp;|&amp;nbsp;
+    &lt;a href="javascript://" class="linkedJs" title="beBusyForSomeTime ()"&gt;BUSY FOR 4 SECONDS&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- JavaScript code to make the static HTML "come alive" --&gt;
+
+&lt;script type="text/javascript"&gt;
+
+Uize.module ({
+  required:[
+    'UizeDotCom.Page.Example.library',
+    'UizeDotCom.Page.Example',
+    'UizeDotCom.TestWidget'
+  ],
+  builder:function () {
+    /*** create the example page widget ***/
+      var page = window.page = new UizeDotCom.Page.Example ({evaluator:function (code) {eval (code)}});
+
+    function beBusyForSomeTime () {
+      testWidget.set ({busy:true});
+      setTimeout (function () {testWidget.set ({busy:'inherit'})},4000);
+    }
+
+    /*** add the UizeDotCom.TestWidget child widget ***/
+      UizeDotCom.TestWidget.set ({built:false});
+      var testWidget = page.addChild ('testWidget',UizeDotCom.TestWidget);
+        testWidget.addChild ('childTestWidget0',UizeDotCom.TestWidget);
+          testWidget.children.childTestWidget0.addChild ('childTestWidget0',UizeDotCom.TestWidget);
+          testWidget.children.childTestWidget0.addChild ('childTestWidget1',UizeDotCom.TestWidget);
+        testWidget.addChild ('childTestWidget1',UizeDotCom.TestWidget);
+
+    /*** wire up the page widget ***/
+      page.wireUi ();
+  }
+});
+
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+
+</pre>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.library',
+		'UizeDotCom.Page'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page).wireUi ()}
+});
+
+</script>
+
+</body></html>

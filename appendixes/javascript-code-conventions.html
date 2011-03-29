@@ -1,0 +1,646 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Javascript Code Conventions | Appendixes | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework Appendixes "/>
+	<meta name="description" content="This document outlines code conventions for the JavaScript language, recommended for application development using the UIZE JavaScript Framework."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	Javascript Code Conventions
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="This document outlines code conventions for the JavaScript language, recommended for application development using the UIZE JavaScript Framework.">1. Introduction</a></li>
+			<li><a href="#2">2. Syntax</a>
+				<ul>
+					<li><a href="#2_1">2.1. Always Use Single Quotes For String Literals</a>
+						<ul>
+							<li><a href="#2_1_1" title="Being a language that is used most often (yet not always) in the context of a Web browser, and being that JavaScript is often used to construct HTML snippets for output into a document, it is a sensible convention to always use single quotes for string literals in JavaScript code. This allows HTML tag attributes, in HTML that is being constructed by the JavaScript, to use double quotes - withou...">2.1.1. A Sensible Convention</a></li>
+							<li><a href="#2_1_2" title="Sticking to using the same quotes for all string literals makes it easier to refactor code, since one can do a simple text search rather than having to do a regular expression search (which is slower and requires more thought). The worst side effect of using inconsistent quotes for string literals is that a person refactoring code might assume that only one kind of quoting is used (or may be la...">2.1.2. Consistency For Sanity</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li><a href="#3">3. Naming Conventions</a>
+				<ul>
+					<li><a href="#3_1" title="All identifiers use &quot;Camel Case&quot; (otherwise known as &quot;Inner Caps&quot;). For class names, the first letter is capitalized as well, but for all other identifiers the first letter is lower case.">3.1. Camel Case / Inner Caps</a></li>
+					<li><a href="#3_2" title="As a general rule, identifiers should be named in such a way that type should be clear from the identifier&apos;s name and/or context of use. For example, it&apos;s pretty clear from an identifier name like propertyName that it is a string, or from elementNo that it is an integer.">3.2. Denoting Type</a>
+						<ul>
+							<li><a href="#3_2_1" title="Wherever possible and where it is semantically correct, use the suffix &quot;Name&quot; (eg. formFieldName, paramName, objectName, propertyName). It is implicit from such a suffix that the variable is a string type.">3.2.1. Strings</a></li>
+							<li><a href="#3_2_2" title="A common convention is to use the suffix &quot;No&quot; (eg. elementNo) in iterator names to indicate that the identifier is an integer.">3.2.2. Numbers</a></li>
+							<li><a href="#3_2_3" title="Typically, Boolean identifier names contain a word (such as is, must, can, are, etc.) that indicates that the identifier is a Boolean, while still forming a readable name.">3.2.3. Booleans</a></li>
+						</ul>
+					</li>
+					<li><a href="#3_3" title="Identifiers for private and local scope properties and methods are prefixed with an underscore. This flags these identifiers for scrunching.">3.3. Private Identifiers</a></li>
+					<li><a href="#3_4" title="The convention things-thingNo-thing is used throughout the UIZE JavaScript Framework code, where &quot;things&quot; is an array of something, &quot;thingNo&quot; is an integer used in an iterator loop through the array, and &quot;thing&quot; is the value of the current element of the array inside the iterator implementation.">3.4. Arrays and Iteration</a></li>
+					<li><a href="#3_5" title="Similar to the convention illustrated in the Arrays and Iteration section, the convention things-thingName-thing is also used throughout the UIZE JavaScript Framework code, where &quot;things&quot; is an object hash, &quot;thingName&quot; is the key used in a for...in iterator loop through the hash, and &quot;thing&quot; is the value for the current key of the hash inside the iterator implementation.">3.5. Objects and Iteration</a></li>
+					<li><a href="#3_6" title="When you adopt a particular convention for naming something, apply that same convention to similar things. If necessary, reference back to previous code to see how you referred previously to the same kind of thing that you&apos;re currently dealing with. When you establish a language pattern in your code, it becomes easier for others to pick it up and more rapidly understand new code written by you.">3.6. Consistency</a>
+						<ul>
+							<li><a href="#3_6_1" title="Equivalent naming also makes your code more &quot;portable&quot;, since code that is moved during refactoring is then more likely to be consistent / compatible in its variable naming with any new context into which it is placed. For example, whenever possible, name a local variable that will be passed as a parameter to a function the same as the name for the parameter in the function.">3.6.1. Equivalent Names for Equivalent Things</a></li>
+						</ul>
+					</li>
+					<li><a href="#3_7" title="Strive to make code self-explanatory. Ideally, the code is its own documentation. The UIZE JavaScript Framework makes extensive use of long identifier names. Private identifier names will get scrunched and become very short for the production environment, so don&apos;t worry about the impact of verbose naming on code size.">3.7. Verbose and Self-explanatory</a></li>
+					<li><a href="#3_8" title="By convention, UIZE subclasses are assigned as static properties of their superclass. So, for example, the Widget subclass of Uize is available as the static property Uize.Widget, and the Bar subclass of Uize.Widget is available as the static property Uize.Widget.Bar. So, the names used to access classes denotes their inheritance relationship. Of course, any class may, in its implementation, us...">3.8. Inheritance and Class Naming</a></li>
+					<li><a href="#3_9">3.9. Library Filenames</a>
+						<ul>
+							<li><a href="#3_9_1" title="JavaScript library files that implement Classes and packages are named according to the class or package names, with the addition of the &quot;.js&quot; file extension. So, for example, the Uize.Widget.Bar class is implemented in the JavaScript file named Uize.Widget.Bar.js. Similarly, the Uize.Node package is implemented in the JavaScript file named Uize.Node.js.">3.9.1. Classes and Packages</a></li>
+							<li><a href="#3_9_2" title="Extensions to UIZE classes are named as properties of the class name, with the addition of the extension descriptor prefix &quot;x&quot;, of the form [Class].x[Descriptor], where the descriptor denotes the type of functionality that is provided in the extension. So, for example, the extension to the Uize.Widget.Bar.Slider class that provides markup generation support for a basic skin is named Uize.Widget...">3.9.2. Extensions</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li><a href="#4">4. Layout</a>
+				<ul>
+					<li><a href="#4_1" title="Major code sections and top level function blocks are separated using just a single blank line.">4.1. Separating Code Blocks</a></li>
+					<li><a href="#4_2" title="Rather than creating a function and only calling it in one place in order to break your code into logical blocks, just use a section comment and indent all the code to which it applies and which belongs to that logical section.">4.2. Section Headings</a></li>
+					<li><a href="#4_3">4.3. Indentation</a>
+						<ul>
+							<li><a href="#4_3_1" title="Function implementations, conditional code blocks and any other multi-line brace-enclosed code blocks are indented using one tab.">4.3.1. One Tab Per Scope Contents</a></li>
+							<li><a href="#4_3_2" title="When adding a comment line/header that is descriptive of a block of code that follows, indent that code one level under the comment. That way, when unfolding a document you can reveal the section comments first before revealing all the code in those sections.">4.3.2. One Tab Under Section Comments</a></li>
+						</ul>
+					</li>
+					<li><a href="#4_4" title="Code in the UIZE JavaScript Framework follows the convention of placing the open brace at the end of the opening line, rather than on its own new line. This is not an uncommon convention and has the benefit of allowing more actual code to be seen in the same vertical space without substantially compromising the readability of overall form of the code, since the contents of the block is still in...">4.4. Open Brace At End Of Opening Line</a></li>
+					<li><a href="#4_5" title="When multiple variables are to be assigned in the same area, they are consolidated into a single comma-separated compound var statement, where the actual assignment block is indented. This has the benefit of reducing the delivered code size, because there aren&apos;t repeated var keywords - something that is important to a language that is delivered to the client over HTTP.">4.5. Compound Var Statements</a></li>
+					<li><a href="#4_6" title="Following is an example of how indentation is used within the declaration of a JSON object (ie. literal syntax for object creation).">4.6. JSON Declarations</a></li>
+				</ul>
+			</li>
+			<li><a href="#5">5. Structural</a>
+				<ul>
+					<li><a href="#5_1" title="Don&apos;t be afraid of using nested functions, many levels of indentation, or creating large function bodies. The folding features of most modern editors and the high resolutions of modern displays makes this a breeze.">5.1. Encapsulate Wherever Possible</a></li>
+					<li><a href="#5_2" title="When returning a value from a function, have a single return at the end of the function. This has the following benefits...">5.2. Single Return Point</a></li>
+					<li><a href="#5_3" title="Avoid using cascading if...else statements when simply setting a value for a single Boolean variable. Instead, resolve the conditional logic down to a single expression using Boolean operators and the ternary conditional operator. In order to maintain readability, span the expression over multiple lines and use indentation to denote the conditional structure, in a similar manner as one would ob...">5.3. Resolve Conditionals Into Expressions Whenever Possible</a></li>
+					<li><a href="#5_4" title="Don&apos;t put in place a lot of protection code to handle each and every conceivable misuse of your code. Don&apos;t check for a multitude bad conditions and return friendly error messages for cases that are likely to be application bugs in any event. There is simply not the room for that. Assume that the developer is using the code correctly. If not, they will have to debug using debugging software or ...">5.4. Don't Protect Unless It's Really Worthwhile</a></li>
+				</ul>
+			</li>
+			<li><a href="#6">6. Interfaces</a>
+				<ul>
+					<li><a href="#6_1" title="Make your interfaces only as wide as they need to be in order to meet the initial objectives, unless you feel really certain that a feature you expose that won&apos;t be used immediately is very likely to be used in the future. When in doubt, don&apos;t expose it. Your code can always be refactored in the future to widen the interface.">6.1. Start Narrow</a></li>
+					<li><a href="#6_2" title="For public methods that can accept large parameter sets, or parameter sets that seem likely to be extended in the future, accept a single parameters object as a parameter. This allows the user of the interface to set values for the parameters by name. This has many benefits...">6.2. Parameter Objects</a></li>
+					<li><a href="#6_3" title="Avoid implementing classes in such a way that there can&apos;t be multiple instances co-existing in a fully functional manner in the same context - even if it seems unlikely that there will be multiple instances. If multiple instances can&apos;t be created in the same context, it&apos;s not a class and should be implemented instead as a package.">6.3. Write Classes to be Multi-instance</a></li>
+					<li><a href="#6_4" title="When implementing a class, avoid referencing global variables in the page and thereby creating implicit (and likely to be forgotten about) dependencies between a class and its host context. Avoid creating the requirement that a particular global variable be set in a page. Instead, provide a configuration interface using static or instance properties or methods of the class and make it the burde...">6.4. Don't Access Globals From a Class</a></li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<a name="1"></a>
+	<h1 class="heading1" title="1. Introduction"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>. </span>Introduction</h1>
+	<div class="contents1">
+		<p>This document outlines code conventions for the JavaScript language, recommended for application development using the UIZE JavaScript Framework.</p>
+		
+		<p>As much as possible, detailed rationales are provided along with examples. The code conventions recommended in this document are designed to balance various interests, including code readability, code performance, and code size, amongst others.</p>
+	</div>
+	
+	<a name="2"></a>
+	<h1 class="heading1" title="2. Syntax"><span class="headingNumber"><a href="#2" title="2. Syntax">2</a>. </span>Syntax</h1>
+	<div class="contents1">
+		<a name="2_1"></a>
+		<h2 class="heading2" title="2. Syntax -&gt; 2.1. Always Use Single Quotes For String Literals"><span class="headingNumber"><a href="#2" title="2. Syntax">2</a>.<a href="#2_1" title="2. Syntax -&gt; 2.1. Always Use Single Quotes For String Literals">1</a>. </span>Always Use Single Quotes For String Literals</h2>
+		<div class="contents2">
+			<a name="2_1_1"></a>
+			<h3 class="heading3" title="2. Syntax -&gt; 2.1. Always Use Single Quotes For String Literals -&gt; 2.1.1. A Sensible Convention"><span class="headingNumber"><a href="#2" title="2. Syntax">2</a>.<a href="#2_1" title="2. Syntax -&gt; 2.1. Always Use Single Quotes For String Literals">1</a>.<a href="#2_1_1" title="2. Syntax -&gt; 2.1. Always Use Single Quotes For String Literals -&gt; 2.1.1. A Sensible Convention">1</a>. </span>A Sensible Convention</h3>
+			<div class="contents3">
+				<p>Being a language that is used most often (yet not always) in the context of a Web browser, and being that JavaScript is often used to construct HTML snippets for output into a document, it is a sensible convention to always use single quotes for string literals in JavaScript code. This allows HTML tag attributes, in HTML that is being constructed by the JavaScript, to use double quotes - without having to worry about escaping them.</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">function getImgTagHtml (url,width,height) {
+  return '&lt;img src="' + url + '" width="' + width + '" height="' + height + '"/&gt;';
+}
+</pre>
+			</div>
+			
+			<a name="2_1_2"></a>
+			<h3 class="heading3" title="2. Syntax -&gt; 2.1. Always Use Single Quotes For String Literals -&gt; 2.1.2. Consistency For Sanity"><span class="headingNumber"><a href="#2" title="2. Syntax">2</a>.<a href="#2_1" title="2. Syntax -&gt; 2.1. Always Use Single Quotes For String Literals">1</a>.<a href="#2_1_2" title="2. Syntax -&gt; 2.1. Always Use Single Quotes For String Literals -&gt; 2.1.2. Consistency For Sanity">2</a>. </span>Consistency For Sanity</h3>
+			<div class="contents3">
+				<p>Sticking to using the same quotes for all string literals makes it easier to refactor code, since one can do a simple text search rather than having to do a regular expression search (which is slower and requires more thought). The worst side effect of using inconsistent quotes for string literals is that a person refactoring code might assume that only one kind of quoting is used (or may be lazy), and then only finds and changes the string literals quoted in one way but misses identical strings quoted the other way, thereby breeding bugs in the code.</p>
+				
+				<p>Now, there will come times when string literals will want to contain single quotes in their contents. To adhere to the consistency rule, these string literals should still be single quoted and the single quotes inside their contents should be escaped. Fortunately, this case doesn not arise often enough for the consistency rule to be terribly cumbersome. The alternative is to become lax about it, thereby forcing anyone doing refactoring to use regular expressions to be safe. As soon as you start having to use regular expressions for such searches, you're going to have to start escaping characters that are regular expression operators, like "(", ")", "+", "*", "?", "[", "]", "\", "^", "$", "|", ".". And what a royal pain that is!</p>
+			</div>
+		</div>
+	</div>
+	
+	<a name="3"></a>
+	<h1 class="heading1" title="3. Naming Conventions"><span class="headingNumber"><a href="#3" title="3. Naming Conventions">3</a>. </span>Naming Conventions</h1>
+	<div class="contents1">
+		<a name="3_1"></a>
+		<h2 class="heading2" title="3. Naming Conventions -&gt; 3.1. Camel Case / Inner Caps"><span class="headingNumber"><a href="#3" title="3. Naming Conventions">3</a>.<a href="#3_1" title="3. Naming Conventions -&gt; 3.1. Camel Case / Inner Caps">1</a>. </span>Camel Case / Inner Caps</h2>
+		<div class="contents2">
+			<p>All identifiers use "Camel Case" (otherwise known as "Inner Caps"). For class names, the first letter is capitalized as well, but for all other identifiers the first letter is lower case.</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">var
+  _class = Uize.Subclass = Uize.subclass (
+    function () {
+      this._myPrivateInstanceProperty = 0;
+    }
+  ),
+  _classPrototype = _class.prototype
+;
+
+/*** Private Instance Methods ***/
+  _classPrototype._privateInstanceMethod = function () {
+    ...
+    ...
+  };
+
+/*** Public Instance Methods ***/
+  _classPrototype.publicInstanceMethod = function () {
+    ...
+    ...
+  };
+</pre>
+			
+			<p><span class="allCaps">NO EXCEPTIONS</span></p>
+			
+			<p>For identifier names - just so that there is never any confusion, doubt, or inconsistency - <b>no exception is made</b> for traditionally capitalized acronyms that might form parts of identifier names.</p>
+			
+			<p>Listed below are some examples of identifiers to illustrate this point...</p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>nodeInnerHtml</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>xmlHttpRequestObject</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>wireUi</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>sourceStr</td></tr>
+			</table>
+			<p>By adhering to this rule, there is never any ugliness when concatenating acronyms anywhere inside identifier names.</p>
+		</div>
+		
+		<a name="3_2"></a>
+		<h2 class="heading2" title="3. Naming Conventions -&gt; 3.2. Denoting Type"><span class="headingNumber"><a href="#3" title="3. Naming Conventions">3</a>.<a href="#3_2" title="3. Naming Conventions -&gt; 3.2. Denoting Type">2</a>. </span>Denoting Type</h2>
+		<div class="contents2">
+			<p>As a general rule, identifiers should be named in such a way that type should be clear from the identifier's name and/or context of use. For example, it's pretty clear from an identifier name like <code>propertyName</code> that it is a string, or from <code>elementNo</code> that it is an integer.</p>
+			
+			<p>Hungarian notation (where a type prefix is prepended to identifier names) is generally discouraged. When it is desirable to explicitly denote type in an identifier name, code in the UIZE JavaScript Framework follows the convention of appending a type indicator such as <code>Str</code> (as in <code>userInfoStr</code>) or <code>Obj</code> (as in <code>userProfileObj</code>).</p>
+			
+			<a name="3_2_1"></a>
+			<h3 class="heading3" title="3. Naming Conventions -&gt; 3.2. Denoting Type -&gt; 3.2.1. Strings"><span class="headingNumber"><a href="#3" title="3. Naming Conventions">3</a>.<a href="#3_2" title="3. Naming Conventions -&gt; 3.2. Denoting Type">2</a>.<a href="#3_2_1" title="3. Naming Conventions -&gt; 3.2. Denoting Type -&gt; 3.2.1. Strings">1</a>. </span>Strings</h3>
+			<div class="contents3">
+				<p>Wherever possible and where it is semantically correct, use the suffix "Name" (eg. formFieldName, paramName, objectName, propertyName). It is implicit from such a suffix that the variable is a string type.</p>
+				
+				<p>A common convention is to use the suffix "Str" (eg. field</p>
+			</div>
+			
+			<a name="3_2_2"></a>
+			<h3 class="heading3" title="3. Naming Conventions -&gt; 3.2. Denoting Type -&gt; 3.2.2. Numbers"><span class="headingNumber"><a href="#3" title="3. Naming Conventions">3</a>.<a href="#3_2" title="3. Naming Conventions -&gt; 3.2. Denoting Type">2</a>.<a href="#3_2_2" title="3. Naming Conventions -&gt; 3.2. Denoting Type -&gt; 3.2.2. Numbers">2</a>. </span>Numbers</h3>
+			<div class="contents3">
+				<p>A common convention is to use the suffix "No" (eg. <code>elementNo</code>) in iterator names to indicate that the identifier is an integer.</p>
+			</div>
+			
+			<a name="3_2_3"></a>
+			<h3 class="heading3" title="3. Naming Conventions -&gt; 3.2. Denoting Type -&gt; 3.2.3. Booleans"><span class="headingNumber"><a href="#3" title="3. Naming Conventions">3</a>.<a href="#3_2" title="3. Naming Conventions -&gt; 3.2. Denoting Type">2</a>.<a href="#3_2_3" title="3. Naming Conventions -&gt; 3.2. Denoting Type -&gt; 3.2.3. Booleans">3</a>. </span>Booleans</h3>
+			<div class="contents3">
+				<p>Typically, Boolean identifier names contain a word (such as <code>is</code>, <code>must</code>, <code>can</code>, <code>are</code>, etc.) that indicates that the identifier is a Boolean, while still forming a readable name.</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">isEnabled
+canBeSet
+mustShow
+areIdentical
+</pre>
+				
+				<p>Generally, as long as it is clear from its name that an identifier holds Boolean state, the name does not need a formal type denoter.</p>
+				
+				<p><span class="allCaps">EXAMPLES</span></p>
+				
+				
+<pre class="sample-code">foundMatch
+moveAllowed
+settable
+draggable
+</pre>
+			</div>
+		</div>
+		
+		<a name="3_3"></a>
+		<h2 class="heading2" title="3. Naming Conventions -&gt; 3.3. Private Identifiers"><span class="headingNumber"><a href="#3" title="3. Naming Conventions">3</a>.<a href="#3_3" title="3. Naming Conventions -&gt; 3.3. Private Identifiers">3</a>. </span>Private Identifiers</h2>
+		<div class="contents2">
+			<p>Identifiers for private and local scope properties and methods are prefixed with an underscore. This flags these identifiers for scrunching.</p>
+			
+			<p>See the example for <code><a href="#3_1">Camel Case / Inner Caps</a></code>.</p>
+		</div>
+		
+		<a name="3_4"></a>
+		<h2 class="heading2" title="3. Naming Conventions -&gt; 3.4. Arrays and Iteration"><span class="headingNumber"><a href="#3" title="3. Naming Conventions">3</a>.<a href="#3_4" title="3. Naming Conventions -&gt; 3.4. Arrays and Iteration">4</a>. </span>Arrays and Iteration</h2>
+		<div class="contents2">
+			<p>The convention <code>things-thingNo-thing</code> is used throughout the UIZE JavaScript Framework code, where "things" is an array of something, "thingNo" is an integer used in an iterator loop through the array, and "thing" is the value of the current element of the array inside the iterator implementation.</p>
+			
+			<p>Substitute "thing" with the name of whatever type of thing you would like. For example, let's substitute "node" for "thing"...</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">for (var _nodeNo = -1; ++_nodeNo &lt; _nodes.length;) {
+  var _node = _nodes [_nodeNo];
+  ...
+}
+</pre>
+		</div>
+		
+		<a name="3_5"></a>
+		<h2 class="heading2" title="3. Naming Conventions -&gt; 3.5. Objects and Iteration"><span class="headingNumber"><a href="#3" title="3. Naming Conventions">3</a>.<a href="#3_5" title="3. Naming Conventions -&gt; 3.5. Objects and Iteration">5</a>. </span>Objects and Iteration</h2>
+		<div class="contents2">
+			<p>Similar to the convention illustrated in the <code><a href="#3_4">Arrays and Iteration</a></code> section, the convention <code>things-thingName-thing</code> is also used throughout the UIZE JavaScript Framework code, where "things" is an object hash, "thingName" is the key used in a <code>for...in</code> iterator loop through the hash, and "thing" is the value for the current key of the hash inside the iterator implementation.</p>
+			
+			<p>Substitute "thing" with the name of whatever type of thing you would like. For example, let's substitute "widget" for "thing"...</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">for (var _widgetName in _widgets) {
+  var _widget = _widgets [_widgetName];
+  ...
+}
+</pre>
+		</div>
+		
+		<a name="3_6"></a>
+		<h2 class="heading2" title="3. Naming Conventions -&gt; 3.6. Consistency"><span class="headingNumber"><a href="#3" title="3. Naming Conventions">3</a>.<a href="#3_6" title="3. Naming Conventions -&gt; 3.6. Consistency">6</a>. </span>Consistency</h2>
+		<div class="contents2">
+			<p>When you adopt a particular convention for naming something, apply that same convention to similar things. If necessary, reference back to previous code to see how you referred previously to the same kind of thing that you're currently dealing with. When you establish a language pattern in your code, it becomes easier for others to pick it up and more rapidly understand new code written by you.</p>
+			
+			<a name="3_6_1"></a>
+			<h3 class="heading3" title="3. Naming Conventions -&gt; 3.6. Consistency -&gt; 3.6.1. Equivalent Names for Equivalent Things"><span class="headingNumber"><a href="#3" title="3. Naming Conventions">3</a>.<a href="#3_6" title="3. Naming Conventions -&gt; 3.6. Consistency">6</a>.<a href="#3_6_1" title="3. Naming Conventions -&gt; 3.6. Consistency -&gt; 3.6.1. Equivalent Names for Equivalent Things">1</a>. </span>Equivalent Names for Equivalent Things</h3>
+			<div class="contents3">
+				<p>Equivalent naming also makes your code more "portable", since code that is moved during refactoring is then more likely to be consistent / compatible in its variable naming with any new context into which it is placed. For example, whenever possible, name a local variable that will be passed as a parameter to a function the same as the name for the parameter in the function.</p>
+				
+				
+<pre class="sample-code">function myFunction1 () {
+  var _date;
+  myFunction2 (_date);
+}
+
+function myFunction2 (_date) {
+
+}
+</pre>
+				
+				<p>This makes it easier to opt later to transplant code from a function to inline where the function was previously being called. As code changes, the number of times some set of logic is used can change. Following this convention eases the removal of a block of code into a separate function, or the replacement of the separate function's code back into a place where it was being called.</p>
+			</div>
+		</div>
+		
+		<a name="3_7"></a>
+		<h2 class="heading2" title="3. Naming Conventions -&gt; 3.7. Verbose and Self-explanatory"><span class="headingNumber"><a href="#3" title="3. Naming Conventions">3</a>.<a href="#3_7" title="3. Naming Conventions -&gt; 3.7. Verbose and Self-explanatory">7</a>. </span>Verbose and Self-explanatory</h2>
+		<div class="contents2">
+			<p>Strive to make code self-explanatory. Ideally, the code is its own documentation. The UIZE JavaScript Framework makes extensive use of long identifier names. Private identifier names will get scrunched and become very short for the production environment, so don't worry about the impact of verbose naming on code size.</p>
+			
+			<p>Avoid short and generic iterator names in favor of descriptive iterator names that serve to reinforce the action of the code on reading. So, for example, instead of just using <code>i</code> and <code>j</code>, use <code>rowNo</code> and <code>columnNo</code>.</p>
+			
+			<p>Avoid arbitrary and/or obtuse abbreviation of words. So, for example, don't use <code>bkgdClr</code> when you could just use <code>backgroundColor</code>. Identifiers that are explicit and use full words emphasize their meaning in the context of the code.</p>
+		</div>
+		
+		<a name="3_8"></a>
+		<h2 class="heading2" title="3. Naming Conventions -&gt; 3.8. Inheritance and Class Naming"><span class="headingNumber"><a href="#3" title="3. Naming Conventions">3</a>.<a href="#3_8" title="3. Naming Conventions -&gt; 3.8. Inheritance and Class Naming">8</a>. </span>Inheritance and Class Naming</h2>
+		<div class="contents2">
+			<p>By convention, UIZE subclasses are assigned as static properties of their superclass. So, for example, the <code>Widget</code> subclass of <code><a href="../reference/Uize.html">Uize</a></code> is available as the static property <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, and the <code>Bar</code> subclass of <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> is available as the static property <code><a href="../reference/Uize.Widget.Bar.html">Uize.Widget.Bar</a></code>. So, the names used to access classes denotes their inheritance relationship. Of course, any class may, in its implementation, use multiple orthogonal helper classes, and this cannot be conveyed in its naming.</p>
+			
+			<p>The exception to this rule is the various packages that are assigned as static properties of the <code><a href="../reference/Uize.html">Uize</a></code> base class, even though these packages aren't classes and don't actually inherit from <code>Uize. This is done merely to place these packages in the =Uize</code> namespace and avoid polluting the global namespace. Examples of these are the <code><a href="../reference/Uize.Node.html">Uize.Node</a></code> and <code><a href="../reference/Uize.Data.html">Uize.Data</a></code> packages.</p>
+		</div>
+		
+		<a name="3_9"></a>
+		<h2 class="heading2" title="3. Naming Conventions -&gt; 3.9. Library Filenames"><span class="headingNumber"><a href="#3" title="3. Naming Conventions">3</a>.<a href="#3_9" title="3. Naming Conventions -&gt; 3.9. Library Filenames">9</a>. </span>Library Filenames</h2>
+		<div class="contents2">
+			<a name="3_9_1"></a>
+			<h3 class="heading3" title="3. Naming Conventions -&gt; 3.9. Library Filenames -&gt; 3.9.1. Classes and Packages"><span class="headingNumber"><a href="#3" title="3. Naming Conventions">3</a>.<a href="#3_9" title="3. Naming Conventions -&gt; 3.9. Library Filenames">9</a>.<a href="#3_9_1" title="3. Naming Conventions -&gt; 3.9. Library Filenames -&gt; 3.9.1. Classes and Packages">1</a>. </span>Classes and Packages</h3>
+			<div class="contents3">
+				<p>JavaScript library files that implement Classes and packages are named according to the class or package names, with the addition of the ".js" file extension. So, for example, the <code><a href="../reference/Uize.Widget.Bar.html">Uize.Widget.Bar</a></code> class is implemented in the JavaScript file named <code>Uize.Widget.Bar.js</code>. Similarly, the <code><a href="../reference/Uize.Node.html">Uize.Node</a></code> package is implemented in the JavaScript file named <code>Uize.Node.js</code>.</p>
+			</div>
+			
+			<a name="3_9_2"></a>
+			<h3 class="heading3" title="3. Naming Conventions -&gt; 3.9. Library Filenames -&gt; 3.9.2. Extensions"><span class="headingNumber"><a href="#3" title="3. Naming Conventions">3</a>.<a href="#3_9" title="3. Naming Conventions -&gt; 3.9. Library Filenames">9</a>.<a href="#3_9_2" title="3. Naming Conventions -&gt; 3.9. Library Filenames -&gt; 3.9.2. Extensions">2</a>. </span>Extensions</h3>
+			<div class="contents3">
+				<p>Extensions to UIZE classes are named as properties of the class name, with the addition of the extension descriptor prefix "x", of the form <code>[Class].x[Descriptor]</code>, where the descriptor denotes the type of functionality that is provided in the extension. So, for example, the extension to the <code><a href="../reference/Uize.Widget.Bar.Slider.html">Uize.Widget.Bar.Slider</a></code> class that provides markup generation support for a basic skin is named <code>Uize.Widget.Bar.Slider.xSkin.js</code>.</p>
+			</div>
+		</div>
+	</div>
+	
+	<a name="4"></a>
+	<h1 class="heading1" title="4. Layout"><span class="headingNumber"><a href="#4" title="4. Layout">4</a>. </span>Layout</h1>
+	<div class="contents1">
+		<a name="4_1"></a>
+		<h2 class="heading2" title="4. Layout -&gt; 4.1. Separating Code Blocks"><span class="headingNumber"><a href="#4" title="4. Layout">4</a>.<a href="#4_1" title="4. Layout -&gt; 4.1. Separating Code Blocks">1</a>. </span>Separating Code Blocks</h2>
+		<div class="contents2">
+			<p>Major code sections and top level function blocks are separated using just a single blank line.</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">/*** Private Instance Methods ***/
+  _classPrototype._privateInstanceMethod1 = function () {
+    ...
+    ...
+  };
+
+  _classPrototype._privateInstanceMethod2 = function () {
+    ...
+    ...
+  };
+
+/*** Public Instance Methods ***/
+  _classPrototype.publicInstanceMethod1 = function () {
+    ...
+    ...
+  };
+
+  _classPrototype.publicInstanceMethod2 = function () {
+    ...
+    ...
+  };
+</pre>
+			
+			<p>In the above example, the "Private Instance Methods" and "Public Instance Methods" comment headers denote major code sections.</p>
+		</div>
+		
+		<a name="4_2"></a>
+		<h2 class="heading2" title="4. Layout -&gt; 4.2. Section Headings"><span class="headingNumber"><a href="#4" title="4. Layout">4</a>.<a href="#4_2" title="4. Layout -&gt; 4.2. Section Headings">2</a>. </span>Section Headings</h2>
+		<div class="contents2">
+			<p>Rather than creating a function and only calling it in one place in order to break your code into logical blocks, just use a section comment and indent all the code to which it applies and which belongs to that logical section.</p>
+		</div>
+		
+		<a name="4_3"></a>
+		<h2 class="heading2" title="4. Layout -&gt; 4.3. Indentation"><span class="headingNumber"><a href="#4" title="4. Layout">4</a>.<a href="#4_3" title="4. Layout -&gt; 4.3. Indentation">3</a>. </span>Indentation</h2>
+		<div class="contents2">
+			<a name="4_3_1"></a>
+			<h3 class="heading3" title="4. Layout -&gt; 4.3. Indentation -&gt; 4.3.1. One Tab Per Scope Contents"><span class="headingNumber"><a href="#4" title="4. Layout">4</a>.<a href="#4_3" title="4. Layout -&gt; 4.3. Indentation">3</a>.<a href="#4_3_1" title="4. Layout -&gt; 4.3. Indentation -&gt; 4.3.1. One Tab Per Scope Contents">1</a>. </span>One Tab Per Scope Contents</h3>
+			<div class="contents3">
+				<p>Function implementations, conditional code blocks and any other multi-line brace-enclosed code blocks are indented using one tab.</p>
+				
+				<p><span class="allCaps">EXAMPLES</span></p>
+				
+				
+<pre class="sample-code">function myFunction () {
+  ...
+  ...
+}
+
+if (myBoolean) {
+  ...
+  ...
+} else {
+  ...
+  ...
+}
+
+try {
+  ...
+  ...
+} catch (_error) {
+  ...
+  ...
+}
+</pre>
+			</div>
+			
+			<a name="4_3_2"></a>
+			<h3 class="heading3" title="4. Layout -&gt; 4.3. Indentation -&gt; 4.3.2. One Tab Under Section Comments"><span class="headingNumber"><a href="#4" title="4. Layout">4</a>.<a href="#4_3" title="4. Layout -&gt; 4.3. Indentation">3</a>.<a href="#4_3_2" title="4. Layout -&gt; 4.3. Indentation -&gt; 4.3.2. One Tab Under Section Comments">2</a>. </span>One Tab Under Section Comments</h3>
+			<div class="contents3">
+				<p>When adding a comment line/header that is descriptive of a block of code that follows, indent that code one level under the comment. That way, when unfolding a document you can reveal the section comments first before revealing all the code in those sections.</p>
+				
+				<p>If you start off writing an implementation from pseudo-code or descriptive bullet items, those bullet items may be well suited to becoming the section headers and then capture in the code's comments how the algorithm or solution was originally thought about and derived.</p>
+			</div>
+		</div>
+		
+		<a name="4_4"></a>
+		<h2 class="heading2" title="4. Layout -&gt; 4.4. Open Brace At End Of Opening Line"><span class="headingNumber"><a href="#4" title="4. Layout">4</a>.<a href="#4_4" title="4. Layout -&gt; 4.4. Open Brace At End Of Opening Line">4</a>. </span>Open Brace At End Of Opening Line</h2>
+		<div class="contents2">
+			<p>Code in the UIZE JavaScript Framework follows the convention of placing the open brace at the end of the opening line, rather than on its own new line. This is not an uncommon convention and has the benefit of allowing more actual code to be seen in the same vertical space without substantially compromising the readability of overall form of the code, since the contents of the block is still indented and the closing brace lines up with the opening line.</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">function myFunction () {
+  ...
+  ...
+}
+</pre>
+		</div>
+		
+		<a name="4_5"></a>
+		<h2 class="heading2" title="4. Layout -&gt; 4.5. Compound Var Statements"><span class="headingNumber"><a href="#4" title="4. Layout">4</a>.<a href="#4_5" title="4. Layout -&gt; 4.5. Compound Var Statements">5</a>. </span>Compound Var Statements</h2>
+		<div class="contents2">
+			<p>When multiple variables are to be assigned in the same area, they are consolidated into a single comma-separated compound <code>var</code> statement, where the actual assignment block is indented. This has the benefit of reducing the delivered code size, because there aren't repeated <code>var</code> keywords - something that is important to a language that is delivered to the client over HTTP.</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">var
+  myVariable1 = "myValue1",
+  myVariable2 = "myValue2",
+  myVariable3 = "myValue3",
+  myVariable4 = "myValue4",
+  myVariable5 = "myValue5"
+;
+</pre>
+		</div>
+		
+		<a name="4_6"></a>
+		<h2 class="heading2" title="4. Layout -&gt; 4.6. JSON Declarations"><span class="headingNumber"><a href="#4" title="4. Layout">4</a>.<a href="#4_6" title="4. Layout -&gt; 4.6. JSON Declarations">6</a>. </span>JSON Declarations</h2>
+		<div class="contents2">
+			<p>Following is an example of how indentation is used within the declaration of a JSON object (ie. literal syntax for object creation).</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">{
+  property1Name:property1Value,
+  property2Name:property2Value,
+  property3Name:[
+    element1Value,
+    element2Value,
+    element3Value,
+    {
+      property1Name:property1Value,
+      property2Name:property2Value,
+      property3Name:property3Value,
+    },
+    [
+      element1Value,
+      element2Value,
+      element3Value
+    ]
+  ],
+  property4Value:{
+    property1Name:property1Value,
+    property2Name:property2Value,
+    property3Name:property3Value,
+  }
+}
+</pre>
+		</div>
+	</div>
+	
+	<a name="5"></a>
+	<h1 class="heading1" title="5. Structural"><span class="headingNumber"><a href="#5" title="5. Structural">5</a>. </span>Structural</h1>
+	<div class="contents1">
+		<a name="5_1"></a>
+		<h2 class="heading2" title="5. Structural -&gt; 5.1. Encapsulate Wherever Possible"><span class="headingNumber"><a href="#5" title="5. Structural">5</a>.<a href="#5_1" title="5. Structural -&gt; 5.1. Encapsulate Wherever Possible">1</a>. </span>Encapsulate Wherever Possible</h2>
+		<div class="contents2">
+			<p>Don't be afraid of using nested functions, many levels of indentation, or creating large function bodies. The folding features of most modern editors and the high resolutions of modern displays makes this a breeze.</p>
+			
+			<p>In many respects it is more ideal to encapsulate helper functions within the exact scope in which they are used, rather than polluting a scope level higher up. That way, anyone trying to discover the code will only encounter the code of an encapsulated helper function once they dig into the function that uses it and doesn't need to be confronted with it any sooner (progressive disclosure).</p>
+			
+			<p>Additionally, the closure feature of JavaScript allows scope of a containing function to be available to a closed function, where typically one might pass lots of state parameters back and forth.</p>
+		</div>
+		
+		<a name="5_2"></a>
+		<h2 class="heading2" title="5. Structural -&gt; 5.2. Single Return Point"><span class="headingNumber"><a href="#5" title="5. Structural">5</a>.<a href="#5_2" title="5. Structural -&gt; 5.2. Single Return Point">2</a>. </span>Single Return Point</h2>
+		<div class="contents2">
+			<p>When returning a value from a function, have a single return at the end of the function. This has the following benefits...</p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>ensures that the visual structure of the code reflects the logical conditional structure of the code, something that is more pertinent with more complex conditional structures</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>makes it easier to start debugging a function by first of all alerting the value before it is returned, rather than having to place tracing statements in all the possible places where the code could return from the function</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>less of a dead end for extending the code, since in order to add any additional code that should execute before returning from the function, you would either have to add the some code before every return, or unravel all the return statements and refactor the code to use a single return anyway</td></tr>
+			</table>
+			<p><span class="allCaps">INSTEAD OF...</span></p>
+			
+			
+<pre class="sample-code">function getAnimalNameFromCode (animalCode) {
+  if (animalCode == 105693) {
+    return "pig";
+  } else if (animalCode == 958697) {
+    return "dog";
+  } else if (animalCode == 452856) {
+    return "aardvark";
+  } else if (animalCode == 396410) {
+    return "elephant";
+  } else {
+    return null;
+  }
+}
+</pre>
+			
+			<p><span class="allCaps">USE...</span></p>
+			
+			
+<pre class="sample-code">function getAnimalNameFromCode (animalCode) {
+  var animalName = null;
+  if (animalCode == 105693) {
+    animalName = "pig";
+  } else if (animalCode == 958697) {
+    animalName = "dog";
+  } else if (animalCode == 452856) {
+    animalName = "aardvark";
+  } else if (animalCode == 396410) {
+    animalName = "elephant";
+  }
+  return animalName;
+}
+</pre>
+		</div>
+		
+		<a name="5_3"></a>
+		<h2 class="heading2" title="5. Structural -&gt; 5.3. Resolve Conditionals Into Expressions Whenever Possible"><span class="headingNumber"><a href="#5" title="5. Structural">5</a>.<a href="#5_3" title="5. Structural -&gt; 5.3. Resolve Conditionals Into Expressions Whenever Possible">3</a>. </span>Resolve Conditionals Into Expressions Whenever Possible</h2>
+		<div class="contents2">
+			<p>Avoid using cascading <code>if...else</code> statements when simply setting a value for a single Boolean variable. Instead, resolve the conditional logic down to a single expression using Boolean operators and the ternary conditional operator. In order to maintain readability, span the expression over multiple lines and use indentation to denote the conditional structure, in a similar manner as one would obtain visual structure when indenting a complex <code>if...else</code> block.</p>
+		</div>
+		
+		<a name="5_4"></a>
+		<h2 class="heading2" title="5. Structural -&gt; 5.4. Don&apos;t Protect Unless It&apos;s Really Worthwhile"><span class="headingNumber"><a href="#5" title="5. Structural">5</a>.<a href="#5_4" title="5. Structural -&gt; 5.4. Don&apos;t Protect Unless It&apos;s Really Worthwhile">4</a>. </span>Don't Protect Unless It's Really Worthwhile</h2>
+		<div class="contents2">
+			<p>Don't put in place a lot of protection code to handle each and every conceivable misuse of your code. Don't check for a multitude bad conditions and return friendly error messages for cases that are likely to be application bugs in any event. There is simply not the room for that. Assume that the developer is using the code correctly. If not, they will have to debug using debugging software or any other means at their disposal. Only put in dedicated error handling for likely runtime scenarios that are not likely to be the result of bad application code.</p>
+		</div>
+	</div>
+	
+	<a name="6"></a>
+	<h1 class="heading1" title="6. Interfaces"><span class="headingNumber"><a href="#6" title="6. Interfaces">6</a>. </span>Interfaces</h1>
+	<div class="contents1">
+		<a name="6_1"></a>
+		<h2 class="heading2" title="6. Interfaces -&gt; 6.1. Start Narrow"><span class="headingNumber"><a href="#6" title="6. Interfaces">6</a>.<a href="#6_1" title="6. Interfaces -&gt; 6.1. Start Narrow">1</a>. </span>Start Narrow</h2>
+		<div class="contents2">
+			<p>Make your interfaces only as wide as they need to be in order to meet the initial objectives, unless you feel <b>really</b> certain that a feature you expose that won't be used immediately is <b>very</b> likely to be used in the future. When in doubt, don't expose it. Your code can always be refactored in the future to widen the interface.</p>
+			
+			<p>Making features public prematurely runs the risk of use of immaturely developed code that then creates backwards compatibility headaches in the future when you have a better idea of how something should be implemented. Keeping as much as possible internal and private offers the maximum freedom to refactor implementations without disrupting users of an interface.</p>
+		</div>
+		
+		<a name="6_2"></a>
+		<h2 class="heading2" title="6. Interfaces -&gt; 6.2. Parameter Objects"><span class="headingNumber"><a href="#6" title="6. Interfaces">6</a>.<a href="#6_2" title="6. Interfaces -&gt; 6.2. Parameter Objects">2</a>. </span>Parameter Objects</h2>
+		<div class="contents2">
+			<p>For public methods that can accept large parameter sets, or parameter sets that seem likely to be extended in the future, accept a single parameters object as a parameter. This allows the user of the interface to set values for the parameters by name. This has many benefits...</p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>each time a method is used in this way, the meaning of the parameters is reinforced in the mind of the user</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>looking at and understanding code is much easier, since the parameters used in a call are named in the call</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the order of the parameter declaration is no longer important</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>new parameters can be added to the function without having to worry about how putting the new parameter in the "right spot" might break all existing code, since there is no longer an order</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>any parameter can be made optional, with commonsense defaulting when it is not set</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>naming of parameters is then functionally very similar to attributes of HTML tags, a model of thinking that is very familiar to Web developers and therefore to developers who approach an API that deals with dynamic Web-based application</td></tr>
+			</table>
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">_classPrototype.publicInstanceMethod = function (_params) {
+  ...
+  ...
+  if (_params.param1Name) {
+    ...
+    ...
+  }
+  ...
+  ...
+};
+
+myObjectInstance.publicInstanceMethod ({
+  param1Name:"param1Value",
+  param2Name:"param2Value",
+  ...
+  ...
+  paramNName:"paramNValue"
+});
+
+</pre>
+		</div>
+		
+		<a name="6_3"></a>
+		<h2 class="heading2" title="6. Interfaces -&gt; 6.3. Write Classes to be Multi-instance"><span class="headingNumber"><a href="#6" title="6. Interfaces">6</a>.<a href="#6_3" title="6. Interfaces -&gt; 6.3. Write Classes to be Multi-instance">3</a>. </span>Write Classes to be Multi-instance</h2>
+		<div class="contents2">
+			<p>Avoid implementing classes in such a way that there can't be multiple instances co-existing in a fully functional manner in the same context - even if it seems unlikely that there will be multiple instances. If multiple instances can't be created in the same context, it's not a class and should be implemented instead as a package.</p>
+		</div>
+		
+		<a name="6_4"></a>
+		<h2 class="heading2" title="6. Interfaces -&gt; 6.4. Don&apos;t Access Globals From a Class"><span class="headingNumber"><a href="#6" title="6. Interfaces">6</a>.<a href="#6_4" title="6. Interfaces -&gt; 6.4. Don&apos;t Access Globals From a Class">4</a>. </span>Don't Access Globals From a Class</h2>
+		<div class="contents2">
+			<p>When implementing a class, avoid referencing global variables in the page and thereby creating implicit (and likely to be forgotten about) dependencies between a class and its host context. Avoid creating the requirement that a particular global variable be set in a page. Instead, provide a configuration interface using static or instance properties or methods of the class and make it the burden of the page to configure the class or an instance of the class.</p>
+		</div>
+	</div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

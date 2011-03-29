@@ -1,0 +1,13 @@
+The new [[../examples/collection-item-zooming.html][Zooming Collection Item]] example demonstrates use of the =Uize.Widget.CollectionItem.Zooming= widget class.
+
+In the example, the =Uize.Widget.CollectionItem.Zooming= widget class is being used to add an animated zoom in effect to a set of thumbnails. If you mouseover one of the images and rest the mouse, the zoom in behavior will be activated. Once zoomed in, moving the mouse lets you pan up and down and left and right inside the view port. The =Uize.Widget.CollectionItem.Zooming= class is typically used in the context of a =Uize.Widget.Collection= instance, but it doesn't have to be, and can stand on its own and still provide the zoom in behavior. In this particular example, there is one =Uize.Widget.CollectionItem.Zooming= instance per image, and the six instances are created using the declarative spawning mechanism.
+
+[[../examples/collection-item-zooming.html][CHECK IT OUT]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-06-17 - NEW EXAMPLE: Zooming Collection Item
+....................................................................................

@@ -1,0 +1,15 @@
+A section has been added to the [[../explainers/javascript-modules.html][JavaScript Modules]] explainer discussing ways to use JavaScript modules to package data in a special type of module called a data module.
+
+Data modules are modules that only define data structures, and are a convenient means of representing data that is to be used by JavaScript code. As modules, data modules can be required by other types of modules, and can therefore be loaded by the module loader mechanism, which can obviate the need to load data through XMLHttpRequest requests, providing one way of delivering data for cross-site scripting (XSS) while also allowing data to be loaded from local files by Web pages that are run locally. As modules, data modules can require other data modules, allowing more complex data structures to be built up using shared subsets of data that are defined in other data modules (see Composite Data Module).
+
+Furthermore, data modules can use other modules for programmatic generation of data, or for the expanding of compressed data. Data modules can be generated dynamically by server side code (see Dynamically Generated Data Module), allowing the module loader mechanism to be used as an alternative to traditional approaches to XSS (Cross-Site Scripting) data requests.
+
+The newly added documentation discusses various aspects of data modules, including one suggested implementation approach, a few other possible implementation approaches, the benefits of deferred construction of data objects, dynamically generated data modules, and composite data modules. To read this new documentation in full, consult the [[../explainers/javascript-modules.html][JavaScript Modules]] explainer and browse to the `Data Module` subsection under the section `Types of Modules`.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2010-01-20 - NEW DOCUMENTATION: Data Module
+....................................................................................

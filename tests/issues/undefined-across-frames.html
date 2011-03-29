@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>TEST: Undefined Across Frames | UIZE JavaScript Framework</title>
+	<link rel="stylesheet" href="../../css/page.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript">
+
+var _undefined;
+function functionInHostDocument (_paramThatShouldBeUndefined) {
+	alert ('Undefined values across frames match exactly...\n\n' + (_paramThatShouldBeUndefined === _undefined));
+}
+
+</script>
+
+<p>This test demonstrates that undefined values from different frames match exactly in a strict equality operator. So, there is no window context specific difference in the undefined values.</p>
+
+<p>In the test, a variable exists in a host document that has an undefined value. In an iframe, another variable exists that has an undefined value. When a link in the iframe is clicked, the value of the variable from the iframe is passed as a parameter value in a call to a function that exists in the host document. In this function, the passed parameter is compared in a strict equality expression with the host document's undefined variable</p>
+
+<p>What this test establishes is that it is always safe to use a strict comparison against a variable that is known to be undefined (instead of using the typeof operator) in order to determine if values are undefined, even if those values originate from a different frame. This is an important thing to establish, because there is an issue with the <b>instanceof</b> operator where using the operator fails to produce the expected result if an instance of an object is passed from a different frame or window.</p>
+
+<center>
+	<iframe src="undefined-across-frames-iframe.html" style="width:700px; height:150px; border:1px solid #000;"></iframe>
+</center>
+
+</body>
+</html>
+

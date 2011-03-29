@@ -1,0 +1,35 @@
+The =Uize.Color= module has been improved in a number of ways.
+
+Improved Uize.Color.RgbColor Constructor
+	The constructor of the =Uize.Color.RgbColor= object has been improved to allow initial color to be specified in a wide variety of ways.
+
+	Initial color can be specified as:
+
+	- three discrete parameters for each of red, green, and blue (eg. =136,136,136=)
+	- a CSS style property value, hex formatted or =Rgb(...)= formatted (eg. ='#888888'= or ='Rgb(136,136,136)'=)
+	- a single object parameter containing =red=, =green=, and =blue= properties (eg. ={red:136,green:136,blue:136}=)
+	- a single array parameter containing three elements for each of red, green, and blue (eg. =[136,136,136]=)
+	- a single number parameter specifying gray level (eg. =136=)
+	- a single =Uize.Color.RgbColor= object parameter, to be used as a source for initial color (eg. =new Uize.Color.RgbColor (136)=)
+	- no parameters, in which case black is the initial color (eg. =new Uize.Color.RgbColor=)
+
+DEPRECATED: Uize.Color.rgbFromStyleStr
+	The =Uize.Color.rgbFromStyleStr= static method of the =Uize.Color= module has been deprecated and has been replaced by an improved version of the =Uize.Color.RgbColor= object with a more flexible constructor that allows initial color to be specified in a wide variety of ways.
+
+	INSTEAD OF...
+	.........................................................
+	rgbColorOBJ = Uize.Color.rgbFromStyleStr (styleColorSTR);
+	.........................................................
+
+	USE...
+	......................................................
+	rgbColorOBJ = new Uize.Color.RgbColor (styleColorSTR);
+	......................................................
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-03-31 - IMPROVED MODULE: Uize.Color
+....................................................................................

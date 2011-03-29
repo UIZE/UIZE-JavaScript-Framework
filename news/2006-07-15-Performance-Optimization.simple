@@ -1,0 +1,9 @@
+Various changes have been made to the event mechanism of the =Uize= base class in order to improve performance during event heavy interactions, such as automated fades and drag-and-drop.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2006-07-15 - Performance Optimization
+....................................................................................

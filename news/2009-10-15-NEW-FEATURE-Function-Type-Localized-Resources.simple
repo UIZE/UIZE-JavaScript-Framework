@@ -1,0 +1,20 @@
+A new feature of the [[../explainers/javascript-localization.html][JavaScript Localization]] system allows localized resources to be functions, allowing for the creation of more sophisticated localized resources with conditional logic.
+
+Typically, a localized resource will be a string. In some cases, such strings will have substitution tokens and the =localize= method will need to be called with one or more substitution values. In exceptional cases, plain old token substitution may not be adequate and more sophisticated string construction may be necessary. In such cases, a function type resource can be used.
+
+Function type resources offer the following benefits...
+
+- They are interchangeable with string type resources, without the code that calls the =localize= method having to know a resource's type.
+- Called as an instance method on the instance for which the resource is being localized, a function type resource gets access to the state and methods of the instance, which it can use in forming its localized string result.
+- Function type resources can be used to implement forking of resources, based upon inputs or instance state.
+- Because JavaScript templates can be compiled to functions, function type resources essentially allow you to use JavaScript templates as a part of your localization solution.
+
+For more information, consult the section `Function Type Localized Resources` of the [[../explainers/javascript-localization.html][JavaScript Localization]] explainer.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-10-15 - NEW FEATURE: Function Type Localized Resources
+....................................................................................

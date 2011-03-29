@@ -1,0 +1,870 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Javascript Inheritance | Documentation | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework Documentation "/>
+	<meta name="description" content="The UIZE JavaScript Framework implements a system for class inheritance that makes subclassing and object-oriented programming possible in JavaScript."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../javascript-explainers.html" class="breadcrumb breadcrumbWithArrow">EXPLAINERS</a>
+	Javascript Inheritance
+
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="The UIZE JavaScript Framework implements a system for class inheritance that makes subclassing and object-oriented programming possible in JavaScript.">1. Introduction</a></li>
+			<li><a href="#2" title="Subclassing is very easy in the UIZE JavaScript Framework. Creating a fresh subclass is as simple as the following statement...">2. It's Easy</a></li>
+			<li><a href="#3" title="The power of classes built using the UIZE JavaScript Framework is derived from the Uize base class.">3. Where It's Implemented</a></li>
+			<li><a href="#4" title="Each class that you create using the framework inherits the subclass static method, so you can easily make further subclasses of them.">4. Fleshing Out a Subclass</a>
+				<ul>
+					<li><a href="#4_1" title="Adding instance methods and properties to a subclass involves assigning properties on the subclass&apos; prototype object.">4.1. Adding Instance Methods and Properties</a></li>
+					<li><a href="#4_2" title="Adding instance methods and properties to a subclass involves assigning properties on the subclass&apos; prototype object.">4.2. Adding Static Methods and Properties</a></li>
+					<li><a href="#4_3" title="You can register one or more set-get properties for a subclass, using the Uize.registerProperties static method.">4.3. Adding Set-get Properties</a>
+						<ul>
+							<li><a href="#4_3_1" title="Set-get properties registered for a class are inherited when creating a subclass.">4.3.1. Inheriting Set-get Properties</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li><a href="#5">5. Overriding a Superclass</a>
+				<ul>
+					<li><a href="#5_1" title="Overriding instance methods and properties of a superclass is easy. It&apos;s just a matter of re-assigning.">5.1. Overriding Instance Methods and Properties</a></li>
+					<li><a href="#5_2" title="Overriding static methods and properties of a superclass is easy. It&apos;s just a matter of re-assigning.">5.2. Overriding Static Methods and Properties</a>
+						<ul>
+							<li><a href="#5_2_1" title="One may implement a class in such a way that a static method is intended to be overrided by a subclass. And in such cases, one may also wish the superclass&apos; implementation to be guaranteed to always use the subclass&apos; version of the static method.">5.2.1. Calling a Subclass Version of a Static Method</a>
+								<ul>
+									<li><a href="#5_2_1_1" title="Within an instance method&apos;s implementation, one can use the Class instance property to reference the actual class of the instance - even in the superclass&apos; code - as in...">5.2.1.1. The Instance Method Case</a></li>
+									<li><a href="#5_2_1_2" title="Within a static method&apos;s implementation, one can use the this keyword to reference the actual class - even in the superclass&apos; code - as in...">5.2.1.2. The Static Method Case</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li><a href="#5_3" title="The initial value for a set-get property inherited from a superclass can be overrided by calling the Uize.set static method on the subclass.">5.3. Overriding Set-get Property Values</a></li>
+				</ul>
+			</li>
+			<li><a href="#6" title="By convention, private methods and properties - both instance and static - are distinguished from public methods and properties by prefixing their names with an underscore.">6. Private vs. Public</a>
+				<ul>
+					<li><a href="#6_1" title="Sometimes, for size optimization, it can be helpful to assign a private reference to a public instance method.">6.1. Private and Public References</a></li>
+				</ul>
+			</li>
+			<li><a href="#7" title="Unless otherwise specified, all static features - methods as well as properties - of a Uize subclass are inherited in turn by their subclasses.">7. Non-inheritable Statics</a>
+				<ul>
+					<li><a href="#7_1" title="The MyClass.nonInheritableStatics static property is a lookup object, automatically created for a class, in which you can register the static features (methods or properties) of the class that should not be inherited when that class is subclassed.">7.1. The MyClass.nonInheritableStatics Static Property</a>
+						<ul>
+							<li><a href="#7_1_1" title="When a class is created, the MyClass.nonInheritableStatics static property is automatically initialized on that class to a fresh object with the value {nonInheritableStatics:1}.">7.1.1. nonInheritableStatics is a Non-inheritable Static</a></li>
+						</ul>
+					</li>
+					<li><a href="#7_2" title="All types of static features of a class can be registered as non-inheritable - methods as well as properties.">7.2. All Types of Statics Can Be Non-inheritable</a></li>
+					<li><a href="#7_3" title="A good case for making a static method non-inheritable is if it is really just a utility function that happens to be stashed in a class&apos; namespace.">7.3. Utility Functions Need Not Be Inheritable</a></li>
+					<li><a href="#7_4" title="Whenever a static method or property is intended to be unique to its class context, and it is also desirable for that method or property to be inherited by subclasses, then it should not be registered as non-inheritable.">7.4. When Statics Should Be Inheritable</a></li>
+					<li><a href="#7_5" title="All static features of modules of the UIZE JavaScript Framework are noted as being either inheritable or non-inheritable in the reference documentation for those features.">7.5. Inheritability of Static Features is Noted in Module References</a></li>
+				</ul>
+			</li>
+			<li><a href="#8" title="When an instance of a UIZE class is created, construction involves three phases: the alphastructor phase, the set-get property initialization phase, and the omegastructor phase.">8. Phases of Construction</a>
+				<ul>
+					<li><a href="#8_1" title="The alphastructor is a function that is executed before the set-get properties for an instance are initialized, and before the omegastructor function is executed.">8.1. alphastructor</a></li>
+					<li><a href="#8_2" title="The omegastructor is a function that is executed after the alphastructor function is executed, and after the set-get properties for an instance are initialized.">8.2. omegastructor</a></li>
+				</ul>
+			</li>
+			<li><a href="#9">9. Dissecting a Subclass Module</a>
+				<ul>
+					<li><a href="#9_1" title="Let&apos;s take a look at a skeleton of a subclass module, and then explore various aspects of it.">9.1. An Example</a></li>
+					<li><a href="#9_2" title="A reference to the superclass is provided as the parameter to the builder function. By convention, this is named _superclass.">9.2. The Superclass Reference</a></li>
+					<li><a href="#9_3" title="A reference to the newly created subclass is kept in a variable. By convention, this variable is named _class.">9.3. Keeping a Class Reference</a></li>
+					<li><a href="#9_4" title="A reference to the class&apos; prototype property is stored in a _classPrototype variable.">9.4. Keeping a Prototype Reference</a></li>
+					<li><a href="#9_5" title="Using the _classPrototype reference, an instance method can be assigned for the class.">9.5. Assigning an Instance Method</a></li>
+					<li><a href="#9_6" title="Using the _class reference, a static method can be assigned for the class.">9.6. Assigning a Static Method</a></li>
+					<li><a href="#9_7" title="Set-get properties are registered for a class by calling the Uize.registerProperties static method that is inherited from the Uize base class.">9.7. Registering Set-get Properties</a></li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<a name="1"></a>
+	<h1 class="heading1" title="1. Introduction"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>. </span>Introduction</h1>
+	<div class="contents1">
+		<p>The UIZE JavaScript Framework implements a system for class inheritance that makes subclassing and object-oriented programming possible in JavaScript.</p>
+	</div>
+	
+	<a name="2"></a>
+	<h1 class="heading1" title="2. It&apos;s Easy"><span class="headingNumber"><a href="#2" title="2. It&apos;s Easy">2</a>. </span>It's Easy</h1>
+	<div class="contents1">
+		<p>Subclassing is very easy in the UIZE JavaScript Framework. Creating a fresh subclass is as simple as the following statement...</p>
+		
+		
+<pre class="sample-code">var MySubclass = MySuperclass.subclass ();
+</pre>
+	</div>
+	
+	<a name="3"></a>
+	<h1 class="heading1" title="3. Where It&apos;s Implemented"><span class="headingNumber"><a href="#3" title="3. Where It&apos;s Implemented">3</a>. </span>Where It's Implemented</h1>
+	<div class="contents1">
+		<p>The power of classes built using the UIZE JavaScript Framework is derived from the <code><a href="../reference/Uize.html">Uize</a></code> base class.</p>
+		
+		<p>All classes inherit directly - or indirectly - from this class. While the <code><a href="../reference/Uize.html">Uize</a></code> base class module is not tiny, the core of the inheritance mechanism itself is quite tiny and is encapsulated in a non-public class called <code>Root</code> that is, technically, the superclass for the <code><a href="../reference/Uize.html">Uize</a></code> class. What makes the <code><a href="../reference/Uize.html">Uize</a></code> module larger is that it provides not only an inheritance mechanism, but also a <a href="javascript-event-system.html">JavaScript Event System</a>, a <a href="set-get-properties.html">Set-get Properties</a> system, a <a href="javascript-modules.html">JavaScript Modules</a> system, and scores of utility methods.</p>
+	</div>
+	
+	<a name="4"></a>
+	<h1 class="heading1" title="4. Fleshing Out a Subclass"><span class="headingNumber"><a href="#4" title="4. Fleshing Out a Subclass">4</a>. </span>Fleshing Out a Subclass</h1>
+	<div class="contents1">
+		<p>Each class that you create using the framework inherits the <code>subclass</code> static method, so you can easily make further subclasses of them.</p>
+		
+		<p><span class="allCaps">EXAMPLE</span></p>
+		
+		
+<pre class="sample-code">var MyClass = Uize.subclass ();       // create a class
+MyClass.prototype.foo = 'bar';        // create an instance property for the class
+
+var MySubclass = MyClass.subclass (); // subclass the class
+mySubclassInstance = new MySubclass;  // create an instance of the subclass
+
+alert (mySubclassInstance.foo);       // alert the subclass instance's foo property
+</pre>
+		
+		<p>In this example, <code>MyClass</code> is a plain vanilla subclass of the <code><a href="../reference/Uize.html">Uize</a></code> base class. The property <code>foo</code> is assigned on its <code>prototype</code> and is shared by all instances. Now, a subclass of <code>MyClass</code> is created, by the name of <code>MySubclass</code>. An instance of <code>MySubclass</code> is created, and the value of its <code>foo</code> property is alerted. Unsurprisingly, what shows up in the alert dialog is the text "bar". Naturally, meaningful classes are a little more complex than this, but this demonstrates the basics.</p>
+		
+		<p>The <code><a href="../reference/Uize.html">Uize</a></code> base class provides a mechanism for inheriting instance methods and properties assigned on a superclass' prototype, static methods and properties assigned on the superclass (unless they are registered as <a href="#7">non-inheritable statics</a>), and set-get properties registered on the superclass using the <code>registerProperties</code> static method. The inheritance system that is implemented in the <code><a href="../reference/Uize.html">Uize</a></code> base class overcomes some of the weaknesses of a superficial prototype-based approach to inheritance, but we'll get into that a little bit later.</p>
+		
+		<p>Once you have a subclass, you can modify it by assigning values on its <code>prototype</code> object, adding static methods or properties to the subclass, and registering set-get properties or overriding the initial values of inherited set-get properties.</p>
+		
+		<a name="4_1"></a>
+		<h2 class="heading2" title="4. Fleshing Out a Subclass -&gt; 4.1. Adding Instance Methods and Properties"><span class="headingNumber"><a href="#4" title="4. Fleshing Out a Subclass">4</a>.<a href="#4_1" title="4. Fleshing Out a Subclass -&gt; 4.1. Adding Instance Methods and Properties">1</a>. </span>Adding Instance Methods and Properties</h2>
+		<div class="contents2">
+			<p>Adding instance methods and properties to a subclass involves assigning properties on the subclass' prototype object.</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">var MyClass = Uize.subclass ();                     // create a class
+MyClass.prototype.myInstanceProperty = 'value';     // create an instance property
+MyClass.prototype.myInstanceMethod = function () {  // create an instance method
+  // do stuff
+};
+</pre>
+			
+			<p>In the UIZE JavaScript Framework, instance methods and properties added to the prototype object of a class are copied to the prototype object of a subclass when creating that subclass. After a subclass is created, modifying the prototype object of its superclass has no effect on that subclass.</p>
+		</div>
+		
+		<a name="4_2"></a>
+		<h2 class="heading2" title="4. Fleshing Out a Subclass -&gt; 4.2. Adding Static Methods and Properties"><span class="headingNumber"><a href="#4" title="4. Fleshing Out a Subclass">4</a>.<a href="#4_2" title="4. Fleshing Out a Subclass -&gt; 4.2. Adding Static Methods and Properties">2</a>. </span>Adding Static Methods and Properties</h2>
+		<div class="contents2">
+			<p>Adding instance methods and properties to a subclass involves assigning properties on the subclass' prototype object.</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">var MyClass = Uize.subclass ();         // create a class
+MyClass.myStaticProperty = 'value';     // create a static property
+MyClass.myStaticMethod = function () {  // create a static method
+  // do stuff
+};
+</pre>
+			
+			<p><span class="allCaps">IMPORTANT</span></p>
+			
+			<p>In the UIZE JavaScript Framework, static methods and properties assigned on a class are copied to a subclass when creating that subclass (unless they are registered as <a href="#7">non-inheritable statics</a>). After a subclass is created, modifying the static methods and properties of the superclass has no effect on that subclass.</p>
+		</div>
+		
+		<a name="4_3"></a>
+		<h2 class="heading2" title="4. Fleshing Out a Subclass -&gt; 4.3. Adding Set-get Properties"><span class="headingNumber"><a href="#4" title="4. Fleshing Out a Subclass">4</a>.<a href="#4_3" title="4. Fleshing Out a Subclass -&gt; 4.3. Adding Set-get Properties">3</a>. </span>Adding Set-get Properties</h2>
+		<div class="contents2">
+			<p>You can register one or more set-get properties for a subclass, using the <code>Uize.registerProperties</code> static method.</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">var MyClass = Uize.subclass ();  // create a class
+MyClass.registerProperties ({    // register one or more set-get properties
+  _mySetGetProperty:{
+    name:'mySetGetProperty',
+    onChange:function () {
+      // code to handle a change in the property's value
+    },
+    value:'initialValue'
+  }
+});
+</pre>
+			
+			<a name="4_3_1"></a>
+			<h3 class="heading3" title="4. Fleshing Out a Subclass -&gt; 4.3. Adding Set-get Properties -&gt; 4.3.1. Inheriting Set-get Properties"><span class="headingNumber"><a href="#4" title="4. Fleshing Out a Subclass">4</a>.<a href="#4_3" title="4. Fleshing Out a Subclass -&gt; 4.3. Adding Set-get Properties">3</a>.<a href="#4_3_1" title="4. Fleshing Out a Subclass -&gt; 4.3. Adding Set-get Properties -&gt; 4.3.1. Inheriting Set-get Properties">1</a>. </span>Inheriting Set-get Properties</h3>
+			<div class="contents3">
+				<p>Set-get properties registered for a class are inherited when creating a subclass.</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">var MyClass = Uize.subclass ();       // create a class
+MyClass.registerProperties ({         // register the "foo" set-get property
+  _foo:{
+    name:'foo',
+    onChange:function () {
+      // code to handle a change in foo's value
+    },
+    value:'initial value for foo'
+  }
+});
+
+var MySubclass = MyClass.subclass (); // create a subclass
+MySubclass.registerProperties ({      // register the "bar" set-get property
+  _bar:{
+    name:'bar',
+    onChange:function () {
+      // code to handle a change in bar's value
+    },
+    value:'initial value for bar'
+  }
+});
+</pre>
+				
+				<p>After the above code has executed, the class <code>MySubclass</code> will have the two set-get properties <code>foo</code> and <code>bar</code>.</p>
+			</div>
+		</div>
+	</div>
+	
+	<a name="5"></a>
+	<h1 class="heading1" title="5. Overriding a Superclass"><span class="headingNumber"><a href="#5" title="5. Overriding a Superclass">5</a>. </span>Overriding a Superclass</h1>
+	<div class="contents1">
+		<a name="5_1"></a>
+		<h2 class="heading2" title="5. Overriding a Superclass -&gt; 5.1. Overriding Instance Methods and Properties"><span class="headingNumber"><a href="#5" title="5. Overriding a Superclass">5</a>.<a href="#5_1" title="5. Overriding a Superclass -&gt; 5.1. Overriding Instance Methods and Properties">1</a>. </span>Overriding Instance Methods and Properties</h2>
+		<div class="contents2">
+			<p>Overriding instance methods and properties of a superclass is easy. It's just a matter of re-assigning.</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">var MyClass = Uize.subclass ();            // create a class
+MyClass.prototype.foo = function () {      // create an instance method
+  alert ('bar');
+};
+
+var MySubclass = MyClass.subclass ();      // subclass the class
+MySubclass.prototype.foo = function () {   // override inherited instance method
+  alert ('foo');
+  MyClass.prototype.foo.call (this);      // call foo method on superclass
+};
+
+myClassInstance = new MyClass;             // create an instance of the class
+myClassInstance.foo ();                    // call foo method on instance of class
+
+mySubclassInstance = new MySubclass;       // create an instance of the subclass
+mySubclassInstance.foo ();                 // call foo method on instance of subclass
+</pre>
+			
+			<p>In this example, the <code>foo</code> instance method of the subclass has been overrided so that it first alerts the text "foo" and then calls the <code>foo</code> method implementation from the superclass and alerts the text "bar".</p>
+			
+			<p>Typically, the code that implements the methods of a subclass is near (or in the same scope as) the code that creates the subclass, so the subclass knows its superclass. When you start to digging into subclass modules, you will encounter this reference to the superclass in the form of the <code>_superclass</code> variable (named such by convention).</p>
+		</div>
+		
+		<a name="5_2"></a>
+		<h2 class="heading2" title="5. Overriding a Superclass -&gt; 5.2. Overriding Static Methods and Properties"><span class="headingNumber"><a href="#5" title="5. Overriding a Superclass">5</a>.<a href="#5_2" title="5. Overriding a Superclass -&gt; 5.2. Overriding Static Methods and Properties">2</a>. </span>Overriding Static Methods and Properties</h2>
+		<div class="contents2">
+			<p>Overriding static methods and properties of a superclass is easy. It's just a matter of re-assigning.</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">var MyClass = Uize.subclass ();            // create a class
+MyClass.myStaticMethod = function () {     // create a static method
+  alert ('foo');
+};
+
+var MySubclass = MyClass.subclass ();      // subclass the class
+MySubclass.myStaticMethod = function () {  // override inherited static method
+  alert ('bar');
+};
+
+myClass.myStaticMethod ();                 // call myStaticMethod on MyClass
+mySubclass.myStaticMethod ();              // call myStaticMethod on MySubclass
+</pre>
+			
+			<p>In this example, <code>MySubclass</code> is a subclass of <code>MyClass</code>, and both classes have a static method <code>myStaticMethod</code>. By subclassing <code>MyClass</code>, <code>MySubclass</code> inherits the implementation of <code>myStaticMethod</code> from <code>MyClass</code>. Re-assigning the <code>myStaticMethod</code> property of <code>MySubclass</code> overrides the inherited implementation without affecting <code>MyClass</code>. So, calling <code>myStaticMethod</code> on <code>MyClass</code> will product the text "foo" in an alert dialog, while calling <code>myStaticMethod</code> on <code>MySubclass</code> will product the text "bar" in an alert dialog.</p>
+			
+			<a name="5_2_1"></a>
+			<h3 class="heading3" title="5. Overriding a Superclass -&gt; 5.2. Overriding Static Methods and Properties -&gt; 5.2.1. Calling a Subclass Version of a Static Method"><span class="headingNumber"><a href="#5" title="5. Overriding a Superclass">5</a>.<a href="#5_2" title="5. Overriding a Superclass -&gt; 5.2. Overriding Static Methods and Properties">2</a>.<a href="#5_2_1" title="5. Overriding a Superclass -&gt; 5.2. Overriding Static Methods and Properties -&gt; 5.2.1. Calling a Subclass Version of a Static Method">1</a>. </span>Calling a Subclass Version of a Static Method</h3>
+			<div class="contents3">
+				<p>One may implement a class in such a way that a static method is intended to be overrided by a subclass. And in such cases, one may also wish the superclass' implementation to be guaranteed to always use the subclass' version of the static method.</p>
+				
+				<p>Calling a subclass' version of a static method can be done in two ways, depending on whether the code is in the implementation for an instance method or for a static method of the superclass.</p>
+				
+				<a name="5_2_1_1"></a>
+				<h4 class="heading4" title="5. Overriding a Superclass -&gt; 5.2. Overriding Static Methods and Properties -&gt; 5.2.1. Calling a Subclass Version of a Static Method -&gt; 5.2.1.1. The Instance Method Case"><span class="headingNumber"><a href="#5" title="5. Overriding a Superclass">5</a>.<a href="#5_2" title="5. Overriding a Superclass -&gt; 5.2. Overriding Static Methods and Properties">2</a>.<a href="#5_2_1" title="5. Overriding a Superclass -&gt; 5.2. Overriding Static Methods and Properties -&gt; 5.2.1. Calling a Subclass Version of a Static Method">1</a>.<a href="#5_2_1_1" title="5. Overriding a Superclass -&gt; 5.2. Overriding Static Methods and Properties -&gt; 5.2.1. Calling a Subclass Version of a Static Method -&gt; 5.2.1.1. The Instance Method Case">1</a>. </span>The Instance Method Case</h4>
+				<div class="contents4">
+					<p>Within an instance method's implementation, one can use the <code>Class</code> instance property to reference the actual class of the instance - even in the superclass' code - as in...</p>
+					
+					
+<pre class="sample-code">MyClass.prototype.myInstanceMethod = function () {
+  this.Class.myStaticMethod (); // call myStaticMethod static method on subclass
+};
+</pre>
+					
+					<p>Now, in the case of an instance of <code>MyClass</code>, the <code>myStaticMethod</code> static method will be called on <code>MyClass</code>. However, in the case of an instance of <code>MySubclass</code> (that is a subclass of <code>MyClass</code>), the <code>myStaticMethod</code> static method will be called on <code>MySubclass</code>, even though the <code>myInstanceMethod</code> instance method is implemented by <code>MyClass</code>. If <code>MySubclass</code> didn't override the implementation inherited from <code>MyClass</code>, then there will be no difference in the outcome.</p>
+					
+					<p>Let's take a look at an example...</p>
+					
+					<p><span class="allCaps">EXAMPLE</span></p>
+					
+					
+<pre class="sample-code">MyClass = Uize.subclass ();                // create a class
+MyClass.myStaticMethod = function () {     // create a static method
+  alert ('MyClass');
+};
+MyClass.myInstanceMethod = function () {   // create an instance method
+  this.Class.myStaticMethod ();
+};
+
+MySubclass = MyClass.subclass ();          // subclass the class
+MySubclass.myStaticMethod = function () {  // override inherited static method
+  alert ('MySubclass');
+};
+
+var _mySubclassInstance = new MySubclass;  // create instance of MySubclass
+mySubclassInstance.myInstanceMethod ();    // call myInstanceMethod
+</pre>
+					
+					<p>In this example, <code>MyClass</code> implements the static method <code>MyClass.myStaticMethod</code>. Now, <code>MySubclass</code> overrides the implementation of <code>myStaticMethod</code> inherited from <code>MyClass</code>. The implementation of <code>myInstanceMethod</code> (inherited from <code>MyClass</code>) uses the <code>Class</code> property to get a reference to the actual class of an instance on which the method is being called. So, when this method is called on the instance of <code>MySubclass</code> named <code>mySubclassInstance</code>, the overrided form of <code>myStaticMethod</code> (implemented by <code>MySubclass</code>) is called, resulting in the text "MySubclass" being displayed in the alert dialog - <b>not</b> the text "MyClass".</p>
+				</div>
+				
+				<a name="5_2_1_2"></a>
+				<h4 class="heading4" title="5. Overriding a Superclass -&gt; 5.2. Overriding Static Methods and Properties -&gt; 5.2.1. Calling a Subclass Version of a Static Method -&gt; 5.2.1.2. The Static Method Case"><span class="headingNumber"><a href="#5" title="5. Overriding a Superclass">5</a>.<a href="#5_2" title="5. Overriding a Superclass -&gt; 5.2. Overriding Static Methods and Properties">2</a>.<a href="#5_2_1" title="5. Overriding a Superclass -&gt; 5.2. Overriding Static Methods and Properties -&gt; 5.2.1. Calling a Subclass Version of a Static Method">1</a>.<a href="#5_2_1_2" title="5. Overriding a Superclass -&gt; 5.2. Overriding Static Methods and Properties -&gt; 5.2.1. Calling a Subclass Version of a Static Method -&gt; 5.2.1.2. The Static Method Case">2</a>. </span>The Static Method Case</h4>
+				<div class="contents4">
+					<p>Within a static method's implementation, one can use the <code>this</code> keyword to reference the actual class - even in the superclass' code - as in...</p>
+					
+					
+<pre class="sample-code">MyClass.myStaticMethod = function () {
+  this.myOtherStaticMethod ();
+};
+</pre>
+					
+					<p>Let's take a look at an example...</p>
+					
+					<p><span class="allCaps">EXAMPLE</span></p>
+					
+					
+<pre class="sample-code">MyClass = Uize.subclass ();                     // create a class
+MyClass.myStaticMethod = function () {          // create a static method
+  this.myOtherStaticMethod ();
+};
+MyClass.myOtherStaticMethod = function () {     // create another static method
+  alert ('MyClass');
+};
+
+MySubclass = MyClass.subclass ();               // subclass the class
+MySubclass.myOtherStaticMethod = function () {  // override inherited static method
+  alert ('MySubclass');
+};
+
+MySubclass.myStaticMethod ();                   // call inherited static method
+</pre>
+					
+					<p>In this example, <code>MyClass</code> implements the two static methods <code>MyClass.myStaticMethod</code> and <code>MyClass.myOtherStaticMethod</code>. The implementation of <code>MyClass.myStaticMethod</code> wants to always call the subclass' version of <code>myOtherStaticMethod</code>. So, instead of calling it as <code>MyClass.myOtherStaticMethod ()</code>, it calls it as <code>this.myOtherStaticMethod ()</code>. If <code>myStaticMethod</code> is called on <code>MyClass</code>, then <code>this</code> will be a reference to <code>MyClass</code>. However, if <code>myStaticMethod</code> is called on <code>MySubclass</code>, then <code>this</code> will be a reference to <code>MySubclass</code>. Consequently, using <code>this</code> guarantees that the subclass' version will be called. In this example, <code>MySubclass</code> overrides the implementation of <code>myOtherStaticMethod</code> inherited from <code>MyClass</code>, so the statement <code>MySubclass.myStaticMethod ()</code> will result in the text "MySubclass" being displayed in the alert dialog - <b>not</b> the text "MyClass".</p>
+				</div>
+			</div>
+		</div>
+		
+		<a name="5_3"></a>
+		<h2 class="heading2" title="5. Overriding a Superclass -&gt; 5.3. Overriding Set-get Property Values"><span class="headingNumber"><a href="#5" title="5. Overriding a Superclass">5</a>.<a href="#5_3" title="5. Overriding a Superclass -&gt; 5.3. Overriding Set-get Property Values">3</a>. </span>Overriding Set-get Property Values</h2>
+		<div class="contents2">
+			<p>The initial value for a set-get property inherited from a superclass can be overrided by calling the <code>Uize.set</code> static method on the subclass.</p>
+			
+			<p>The initial value for a set-get property is registered by specifying the <code>value</code> property in the profile for the set-get property, as follows...</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">var MyClass = Uize.subclass ();        // create a class
+MyClass.registerProperties ({          // register the foo set-get property
+  _foo:{
+    name:'foo',
+    onChange:function () {
+      // code to handle a change in foo's value
+    },
+    value:'bar'
+  }
+});
+
+var _myClassInstance = new MyClass;    // create instance of MyClass
+alert (_myClassInstance.get ('foo'));  // alert value of foo set-get property
+</pre>
+			
+			<p>In the above example, the text "bar" will be displayed in the alert dialog.</p>
+			
+			<p>Now, the initial value for the <code>foo</code> set-get property inherited from <code>MyClass</code> can be overrided in a subclass, as follows...</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">var MyClass = Uize.subclass ();            // create a class
+MyClass.registerProperties ({              // register the foo set-get property
+  _foo:{
+    name:'foo',
+    onChange:function () {
+      // code to handle a change in foo's value
+    },
+    value:'bar'
+  }
+});
+
+var MySubclass = MyClass.subclass ();      // subclass the class
+MySubclass.set ({foo:'NOT BAR'});          // override initial value for foo
+
+var _mySubclassInstance = new MySubclass;  // create instance of MySubclass
+alert (_mySubclassInstance.get ('foo'));   // alert value of foo set-get property
+</pre>
+			
+			<p>In this example, we have now created a subclass of <code>MyClass</code> named <code>MySubclass</code>. The new subclass inherits the <code>foo</code> set-get property, along with its initial value of <code>'bar'</code> that is registered in <code>MyClass</code>. The <code>MySubclass.set</code> static method is then used to change the initial value of this set-get property to <code>'NOT BAR'</code>. Now, the fresh instance of <code>MySubclass</code> that is created, named <code>_mySubclassInstance</code>, will have the initial value <code>'NOT BAR'</code> for its <code>foo</code> set-get property, and the alert dialog will display this text.</p>
+		</div>
+	</div>
+	
+	<a name="6"></a>
+	<h1 class="heading1" title="6. Private vs. Public"><span class="headingNumber"><a href="#6" title="6. Private vs. Public">6</a>. </span>Private vs. Public</h1>
+	<div class="contents1">
+		<p>By convention, private methods and properties - both instance and static - are distinguished from public methods and properties by prefixing their names with an underscore.</p>
+		
+		<p><span class="allCaps">EXAMPLE</span></p>
+		
+		
+<pre class="sample-code">_classPrototype.myPublicInstanceMethod = function () {    // public instance method
+  // do stuff
+};
+_class.myPublicStaticMethod = function () {               // public static method
+  // do stuff
+};
+
+_classPrototype._myPrivateInstanceMethod = function () {  // private instance method
+  // do stuff
+};
+_class._myPrivateStaticMethod = function () {             // private static method
+  // do stuff
+};
+</pre>
+		
+		<p>Technically, such private methods and properties are not thoroughly private and can be accessed as public methods or properties. However, because their names will be changed by the Scruncher when the code is scrunched to minimize its size, one cannot reliably access these methods and properties. This is a kind of "soft privacy".</p>
+		
+		<p><span class="allCaps">IMPORTANT</span></p>
+		
+		<p>When creating subclasses, it is important not to access methods or properties defined in the superclass with private names. The code will work when it is unscrunched, but there is no guarantee <b>what</b> your subclass will be accessing when all the code is scrunched.</p>
+		
+		<a name="6_1"></a>
+		<h2 class="heading2" title="6. Private vs. Public -&gt; 6.1. Private and Public References"><span class="headingNumber"><a href="#6" title="6. Private vs. Public">6</a>.<a href="#6_1" title="6. Private vs. Public -&gt; 6.1. Private and Public References">1</a>. </span>Private and Public References</h2>
+		<div class="contents2">
+			<p>Sometimes, for size optimization, it can be helpful to assign a private reference to a public instance method.</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">_classPrototype.myInstanceMethod = _classPrototype._myInstanceMethod = function () {
+  // do stuff
+};
+</pre>
+			
+			<p>In this example, the private instance method <code>_myInstanceMethod</code> is mapped to the public instance method <code>myInstanceMethod</code>. Inside the class' implementation, the private name can be used. This is useful if there will be many calls - in the class' implementation - to an instance method that's publicly accessible, as the private name will be reduced in size by the Scruncher.</p>
+			
+			<p><span class="allCaps">IMPORTANT</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Be careful when using this technique, because using a private reference to a public instance method doesn't ensure that a class' implementation will be calling a subclass' override of the instance method, since the subclass won't assign a value for the private identifier.</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>This technique is not useful for public instance properties that are expected to be assigned through the public interface, since assigning a value using the public name will not assign that same value to the private version.</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>This technique <b>could</b> be used for public instance properties that are intended to be read only and are not intended to be set outside of the class' implementation code. The technique <b>could</b> also be used if the value of the property was an object and was never intended to be changed, even if the contents of the object is expected to be modified by code outside of the class' implementation.</td></tr>
+			</table>
+		</div>
+	</div>
+	
+	<a name="7"></a>
+	<h1 class="heading1" title="7. Non-inheritable Statics"><span class="headingNumber"><a href="#7" title="7. Non-inheritable Statics">7</a>. </span>Non-inheritable Statics</h1>
+	<div class="contents1">
+		<p>Unless otherwise specified, all static features - methods as well as properties - of a <code><a href="../reference/Uize.html">Uize</a></code> subclass are inherited in turn by their subclasses.</p>
+		
+		<p>There are times, however, when there is no compelling reason for a static feature of a class to be inherited by its subclasses. In fact, in some cases too many inherited static features can just clutter subclasses in the class hierarchy with cruft that they neither need nor care about. In such cases, the inheritance system of the UIZE JavaScript Framework provides a way to "register" static features of a class as being non-inheritable. This is done using the <code>MyClass.nonInheritableStatics</code> static property.</p>
+		
+		<a name="7_1"></a>
+		<h2 class="heading2" title="7. Non-inheritable Statics -&gt; 7.1. The MyClass.nonInheritableStatics Static Property"><span class="headingNumber"><a href="#7" title="7. Non-inheritable Statics">7</a>.<a href="#7_1" title="7. Non-inheritable Statics -&gt; 7.1. The MyClass.nonInheritableStatics Static Property">1</a>. </span>The MyClass.nonInheritableStatics Static Property</h2>
+		<div class="contents2">
+			<p>The <code>MyClass.nonInheritableStatics</code> static property is a lookup object, automatically created for a class, in which you can register the static features (methods or properties) of the class that should <b>not</b> be inherited when that class is subclassed.</p>
+			
+			<p>Each property of the <code>Uize.nonInheritableStatics</code> lookup object represents a single static feature of the class that should not be inherited by subclasses, where the name of each property should be the name of a static feature (excluding the module name), and the value of each property should be a truthy value (such as <code>true</code>, <code>1</code>, <code>'foo'</code>, <code>[]</code>, <code>{}</code>, etc.). After a class has been created, non-inheritable statics can be registered for that class by assigning properties to the class' <code>MyClass.nonInheritableStatics</code> static property, as shown in the example below...</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">MyClass = Uize.subclass ();
+MyClass.someUtilityFunction = function () {
+  // do something of great utility
+};
+MyClass.nonInheritableStatics.someUtilityFunction = 1;
+
+MyClassSubclass = MyClass.subclass ();
+alert (MyClassSubclass.someUtilityFunction); // alerts the text "undefined"
+</pre>
+			
+			<p>In the above example, the <code>MyClass.someUtilityFunction</code> static method of the class <code>MyClass</code> has been registered as a non-inheritable static. This is done by the statement <code>MyClass.nonInheritableStatics.someUtilityFunction &#61; 1</code>. Now, when the <code>MyClassSubclass</code> class is created by calling the <code>MyClass.subclass</code> method, the new subclass that is created does not get the <code>someUtilityFunction</code> static feature. Therefore, the <code>alert</code> statement displays the text "undefined" in the alert dialog.</p>
+			
+			<a name="7_1_1"></a>
+			<h3 class="heading3" title="7. Non-inheritable Statics -&gt; 7.1. The MyClass.nonInheritableStatics Static Property -&gt; 7.1.1. nonInheritableStatics is a Non-inheritable Static"><span class="headingNumber"><a href="#7" title="7. Non-inheritable Statics">7</a>.<a href="#7_1" title="7. Non-inheritable Statics -&gt; 7.1. The MyClass.nonInheritableStatics Static Property">1</a>.<a href="#7_1_1" title="7. Non-inheritable Statics -&gt; 7.1. The MyClass.nonInheritableStatics Static Property -&gt; 7.1.1. nonInheritableStatics is a Non-inheritable Static">1</a>. </span>nonInheritableStatics is a Non-inheritable Static</h3>
+			<div class="contents3">
+				<p>When a class is created, the <code>MyClass.nonInheritableStatics</code> static property is automatically initialized on that class to a fresh object with the value <code>{nonInheritableStatics:1}</code>.</p>
+				
+				<p>This initial mapping means that the <code>MyClass.nonInheritableStatics</code> static property is, itself, not inheritable by subclasses - subclasses get their own fresh object. So, in our example, when the <code>MyClassSubclass</code> subclass is created, its fresh <code>MyClassSubclass.nonInheritableStatics</code> property does <b>not</b> have an entry for the <code>someUtilityFunction</code> static feature, because it does not have that static feature and the contents of the <code>MyClass.someUtilityFunction</code> object is not inherited by the <code>MyClassSubclass</code> class.</p>
+			</div>
+		</div>
+		
+		<a name="7_2"></a>
+		<h2 class="heading2" title="7. Non-inheritable Statics -&gt; 7.2. All Types of Statics Can Be Non-inheritable"><span class="headingNumber"><a href="#7" title="7. Non-inheritable Statics">7</a>.<a href="#7_2" title="7. Non-inheritable Statics -&gt; 7.2. All Types of Statics Can Be Non-inheritable">2</a>. </span>All Types of Statics Can Be Non-inheritable</h2>
+		<div class="contents2">
+			<p>All types of static features of a class can be registered as non-inheritable - methods as well as properties.</p>
+			
+			<p>Registering static properties as non-inheritable is accomplished in the same way as for static methods. Consider the following example...</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">MyClass = Uize.subclass ();
+MyClass.someStaticProperty = 'foo';
+MyClass.nonInheritableStatics.someStaticProperty = 1;
+
+MyClassSubclass = MyClass.subclass ();
+alert (MyClassSubclass.someStaticProperty); // alerts the text "undefined"
+</pre>
+			
+			<p>In the above example, the alert dialog would display the text "undefined", because the <code>MyClass.someStaticProperty</code> static property of the class <code>MyClass</code> has been registered as non-inheritable, so it is not inherited by the <code>MyClassSubclass</code> class that is created by subclassing <code>MyClass</code>.</p>
+		</div>
+		
+		<a name="7_3"></a>
+		<h2 class="heading2" title="7. Non-inheritable Statics -&gt; 7.3. Utility Functions Need Not Be Inheritable"><span class="headingNumber"><a href="#7" title="7. Non-inheritable Statics">7</a>.<a href="#7_3" title="7. Non-inheritable Statics -&gt; 7.3. Utility Functions Need Not Be Inheritable">3</a>. </span>Utility Functions Need Not Be Inheritable</h2>
+		<div class="contents2">
+			<p>A good case for making a static method non-inheritable is if it is really just a utility function that happens to be stashed in a class' namespace.</p>
+			
+			<p>Static methods that are really just utility or helper functions don't care about the context on which they are called. They just happen to be called on a class as a context because they are assigned as properties on a class. Take, for example, the <code>Uize.copyInto</code> static method of the <code><a href="../reference/Uize.html">Uize</a></code> base class. You may be calling it on the <code><a href="../reference/Uize.html">Uize</a></code> context, but this utility function's implementation doesn't even reference the <code>this</code> keyword - it just doesn't care about the context on which it is called. You could, in fact, assigne this static method to a local variable and then call it using that local variable, and it would behave in just the same way as if it were being called on the class. Consider the following example...</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">var
+  copyInto = Uize.copyInto,
+  foo = {}
+;
+copyInto (foo,{bar:'IT WORKS'});
+alert (foo.bar);  // alerts the text "IT WORKS"
+</pre>
+			
+			<p>In the above example, our local variable <code>copyInto</code> is a function reference. When that local variable is used to call the function in order to copy the property <code>bar</code> into the object <code>foo</code>, everything works just fine. The <code>alert</code> statement alerts the value of the <code>bar</code> property that was successfully copied into the <code>foo</code> object. Because the <code>Uize.copyInto</code> static method doesn't operate on a <code><a href="../reference/Uize.html">Uize</a></code> subclass or need a <code><a href="../reference/Uize.html">Uize</a></code> subclass as its context when it is called, there's no compelling reason for it to be inheritable, and so it is not.</p>
+		</div>
+		
+		<a name="7_4"></a>
+		<h2 class="heading2" title="7. Non-inheritable Statics -&gt; 7.4. When Statics Should Be Inheritable"><span class="headingNumber"><a href="#7" title="7. Non-inheritable Statics">7</a>.<a href="#7_4" title="7. Non-inheritable Statics -&gt; 7.4. When Statics Should Be Inheritable">4</a>. </span>When Statics Should Be Inheritable</h2>
+		<div class="contents2">
+			<p>Whenever a static method or property is intended to be unique to its class context, and it is also desirable for that method or property to be inherited by subclasses, then it should <b>not</b> be registered as non-inheritable.</p>
+			
+			<p>Examples of some static methods in the <code><a href="../reference/Uize.html">Uize</a></code> base class that are inheritable are the <code>Uize.set</code>, <code>Uize.get</code>, <code>Uize.toggle</code>, <code>Uize.fire</code>, <code>Uize.wire</code>, <code>Uize.subclass</code>, and <code>Uize.registerProperties</code> methods. All of these methods act on the class context. So, for example, calling <code>Uize.subclass</code> is different to calling <code>Uize.Widget.subclass</code>. The <code>Uize.subclass</code> method, which is inherited by all <code><a href="../reference/Uize.html">Uize</a></code> subclasses, uses the context of the class on which it is called. Calling the <code>Uize.subclass</code> method returns a subclass of <code><a href="../reference/Uize.html">Uize</a></code>, while calling the <code>Uize.Widget.subclass</code> method returns a subclass of <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> - even though both of these methods reference the same function for their implementation (in other words, the statement <code>alert (Uize.subclass &#61;&#61; Uize.Widget.subclass)</code> would alert the text "true").</p>
+		</div>
+		
+		<a name="7_5"></a>
+		<h2 class="heading2" title="7. Non-inheritable Statics -&gt; 7.5. Inheritability of Static Features is Noted in Module References"><span class="headingNumber"><a href="#7" title="7. Non-inheritable Statics">7</a>.<a href="#7_5" title="7. Non-inheritable Statics -&gt; 7.5. Inheritability of Static Features is Noted in Module References">5</a>. </span>Inheritability of Static Features is Noted in Module References</h2>
+		<div class="contents2">
+			<p>All static features of modules of the UIZE JavaScript Framework are noted as being either inheritable or non-inheritable in the reference documentation for those features.</p>
+			
+			<p>The inheritability of the static features of a module is noted in the IMPLEMENTATION INFO notes of the reference documentation for the features in the module's reference. So, for example, if you went to the reference documentation for the <code>Uize.set</code> static method of the <code><a href="../reference/Uize.html">Uize</a></code> class, you would see it noted that the feature is inherited by subclasses. In contrast, if you went to the reference documentation for the <code>Uize.copyInto</code> static method of the <code><a href="../reference/Uize.html">Uize</a></code> class, you would see it noted that the feature is <b>not</b> inherited by subclasses.</p>
+		</div>
+	</div>
+	
+	<a name="8"></a>
+	<h1 class="heading1" title="8. Phases of Construction"><span class="headingNumber"><a href="#8" title="8. Phases of Construction">8</a>. </span>Phases of Construction</h1>
+	<div class="contents1">
+		<p>When an instance of a UIZE class is created, construction involves three phases: the <code><a href="#8_1">alphastructor</a></code> phase, the set-get property initialization phase, and the <code><a href="#8_2">omegastructor</a></code> phase.</p>
+		
+		<a name="8_1"></a>
+		<h2 class="heading2" title="8. Phases of Construction -&gt; 8.1. alphastructor"><span class="headingNumber"><a href="#8" title="8. Phases of Construction">8</a>.<a href="#8_1" title="8. Phases of Construction -&gt; 8.1. alphastructor">1</a>. </span>alphastructor</h2>
+		<div class="contents2">
+			<p>The alphastructor is a function that is executed before the set-get properties for an instance are initialized, and before the <code><a href="#8_2">omegastructor</a></code> function is executed.</p>
+			
+			<p>An alphastructor is registered by specifying a value for the first parameter when calling the <code>subclass</code> static method on the superclass.</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">var MyClass = Uize.subclass (
+  function () {
+    this._someArray = [];
+  }
+);
+</pre>
+			
+			<p>Code inside the alphastructor can set up private "scaffolding" type properties that need to be already in existence by the time any of the set-get properties are initialized. This allows <code>onChange</code> handlers for the set-get properties to count on certain foundation having been built.</p>
+			
+			<p>Because of when it is executed, code inside the alphastructor function cannot rely on the instance's set-get properties being initialized to the values passed to the constructor.</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">var
+  MyClass = Uize.subclass (
+    function () {
+      alert (this.get ('foo'));
+    }
+  ),
+  myClass = new MyClass ({foo:'bar'})
+;
+</pre>
+			
+			<p>In this example, when the new instance of <code>MyClass</code> is created with the value <code>'bar'</code> specified for its <code>foo</code> set-get property, the alert inside the alphastructor will display the value <code>undefined</code>. This is by design and is an important nuance to take note of.</p>
+		</div>
+		
+		<a name="8_2"></a>
+		<h2 class="heading2" title="8. Phases of Construction -&gt; 8.2. omegastructor"><span class="headingNumber"><a href="#8" title="8. Phases of Construction">8</a>.<a href="#8_2" title="8. Phases of Construction -&gt; 8.2. omegastructor">2</a>. </span>omegastructor</h2>
+		<div class="contents2">
+			<p>The <code><a href="#8_2">omegastructor</a></code> is a function that is executed after the <code><a href="#8_1">alphastructor</a></code> function is executed, and after the set-get properties for an instance are initialized.</p>
+		</div>
+	</div>
+	
+	<a name="9"></a>
+	<h1 class="heading1" title="9. Dissecting a Subclass Module"><span class="headingNumber"><a href="#9" title="9. Dissecting a Subclass Module">9</a>. </span>Dissecting a Subclass Module</h1>
+	<div class="contents1">
+		<a name="9_1"></a>
+		<h2 class="heading2" title="9. Dissecting a Subclass Module -&gt; 9.1. An Example"><span class="headingNumber"><a href="#9" title="9. Dissecting a Subclass Module">9</a>.<a href="#9_1" title="9. Dissecting a Subclass Module -&gt; 9.1. An Example">1</a>. </span>An Example</h2>
+		<div class="contents2">
+			<p>Let's take a look at a skeleton of a subclass module, and then explore various aspects of it.</p>
+			
+			<p><span class="allCaps">SUBCLASS MODULE EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">Uize.module ({
+  name:'Uize.Subclass',
+  builder:function (_superclass) {
+    /*** Class Constructor ***/
+      var
+        _class = _superclass.subclass (
+          null, // typically don't need to do anything in the alphastructor
+          function () {
+            var _this = this;
+
+            /*** Private Instance Properties ***/
+              _this._privateInstanceProperty = 0;
+          }
+        ),
+        _classPrototype = _class.prototype
+      ;
+
+    /*** Private Instance Methods ***/
+      _classPrototype._privateInstanceMethod = function () {
+        var _this = this;
+        // implementation for this method
+      };
+
+    /*** Public Instance Methods ***/
+      _classPrototype.publicInstanceMethod = function () {
+        var _this = this;
+        // implementation for this method
+      };
+
+    /*** Private Static-instance Methods ***/
+      _class._privateStaticInstanceMethod =
+      _classPrototype._privateStaticInstanceMethod = function () {
+        // implementation for this method
+      };
+
+    /*** Public Static-instance Methods ***/
+      _class.publicStaticInstanceMethod =
+      _classPrototype.publicStaticInstanceMethod = function () {
+        // implementation for this method
+      };
+
+    /*** Public Static Methods ***/
+      _class.publicStaticMethod = function () {
+        // implementation for this method
+      };
+
+    /*** Register Properties ***/
+      _class.registerProperties ({
+        _property1:'property1', // minimalistic approach to registering a property
+        _property2:{
+          name:'property2',
+          onChange:function () {
+            // do something when the value of this property changes
+          },
+          value:0
+        }
+      });
+
+    return _class;
+  }
+});
+</pre>
+			
+			<p>NOTE: If you're not familiar with module declarations in the UIZE JavaScript Framework, consult the explainer <a href="javascript-modules.html">JavaScript Modules</a>.</p>
+		</div>
+		
+		<a name="9_2"></a>
+		<h2 class="heading2" title="9. Dissecting a Subclass Module -&gt; 9.2. The Superclass Reference"><span class="headingNumber"><a href="#9" title="9. Dissecting a Subclass Module">9</a>.<a href="#9_2" title="9. Dissecting a Subclass Module -&gt; 9.2. The Superclass Reference">2</a>. </span>The Superclass Reference</h2>
+		<div class="contents2">
+			<p>A reference to the superclass is provided as the parameter to the <code>builder</code> function. By convention, this is named <code>_superclass</code>.</p>
+			
+			<p>This variable can then be used when creating the subclass, as in...</p>
+			
+			
+<pre class="sample-code">var _class = _superclass.subclass ();
+</pre>
+			
+			<p>The superclass reference can also be used when calling a superclass' version of an instance method, as in...</p>
+			
+			
+<pre class="sample-code">_classPrototype.wireUi = function () {
+  var _this = this;
+  if (!_this.isWired) {
+    // do the wiring stuff
+
+    _superclass.prototype.wireUi.call (_this); // call superclass version of wireUi
+  }
+};
+</pre>
+		</div>
+		
+		<a name="9_3"></a>
+		<h2 class="heading2" title="9. Dissecting a Subclass Module -&gt; 9.3. Keeping a Class Reference"><span class="headingNumber"><a href="#9" title="9. Dissecting a Subclass Module">9</a>.<a href="#9_3" title="9. Dissecting a Subclass Module -&gt; 9.3. Keeping a Class Reference">3</a>. </span>Keeping a Class Reference</h2>
+		<div class="contents2">
+			<p>A reference to the newly created subclass is kept in a variable. By convention, this variable is named <code>_class</code>.</p>
+			
+			
+<pre class="sample-code">var _class = _superclass.subclass ();
+</pre>
+			
+			<p>This variable can then be used when assigning static methods and properties, as in...</p>
+			
+			
+<pre class="sample-code">_class.myStaticMethod = function () {
+  // do stuff
+};
+</pre>
+			
+			<p>...or when registering set-get properties, as in...</p>
+			
+			
+<pre class="sample-code">_class.registerProperties ({
+  // profiles for the set-get properties
+});
+</pre>
+			
+			<p>The reference to the newly created class is returned at the end of the <code>builder</code> function, as in...</p>
+			
+			
+<pre class="sample-code">return _class;
+</pre>
+		</div>
+		
+		<a name="9_4"></a>
+		<h2 class="heading2" title="9. Dissecting a Subclass Module -&gt; 9.4. Keeping a Prototype Reference"><span class="headingNumber"><a href="#9" title="9. Dissecting a Subclass Module">9</a>.<a href="#9_4" title="9. Dissecting a Subclass Module -&gt; 9.4. Keeping a Prototype Reference">4</a>. </span>Keeping a Prototype Reference</h2>
+		<div class="contents2">
+			<p>A reference to the class' prototype property is stored in a <code>_classPrototype</code> variable.</p>
+			
+			
+<pre class="sample-code">var _classPrototype = _class.prototype;
+</pre>
+			
+			<p>This variable can then be used when assigning instance methods and properties that are to be shared by all instances, as in...</p>
+			
+			
+<pre class="sample-code">_classPrototype.myInstanceMethod = function () {
+  // do stuff
+};
+</pre>
+		</div>
+		
+		<a name="9_5"></a>
+		<h2 class="heading2" title="9. Dissecting a Subclass Module -&gt; 9.5. Assigning an Instance Method"><span class="headingNumber"><a href="#9" title="9. Dissecting a Subclass Module">9</a>.<a href="#9_5" title="9. Dissecting a Subclass Module -&gt; 9.5. Assigning an Instance Method">5</a>. </span>Assigning an Instance Method</h2>
+		<div class="contents2">
+			<p>Using the <code>_classPrototype</code> reference, an instance method can be assigned for the class.</p>
+			
+			
+<pre class="sample-code">_classPrototype.myInstanceMethod = function () {
+  // do stuff
+};
+</pre>
+			
+			<p><span class="allCaps">IMPORTANT</span></p>
+			
+			<p>It is easy to fall into the trap of ommitting the semi-colon when assigning an anonymous function to a property of the prototype object. Even though there is a function declaration, it is used as part of an assignment statement, and an assignment statement should end with a semi-colon. Leaving the semi-colon out will produce no symptoms until you scrunch the code and then another statement butts right up against your assignment, producing a syntax error. So, don't forget the semi-colon.</p>
+		</div>
+		
+		<a name="9_6"></a>
+		<h2 class="heading2" title="9. Dissecting a Subclass Module -&gt; 9.6. Assigning a Static Method"><span class="headingNumber"><a href="#9" title="9. Dissecting a Subclass Module">9</a>.<a href="#9_6" title="9. Dissecting a Subclass Module -&gt; 9.6. Assigning a Static Method">6</a>. </span>Assigning a Static Method</h2>
+		<div class="contents2">
+			<p>Using the <code>_class</code> reference, a static method can be assigned for the class.</p>
+			
+			
+<pre class="sample-code">_class.myStaticMethod = function () {
+  // do stuff
+};
+</pre>
+			
+			<p>In cases where you wish a static method to <b>not</b> be inheritable by subclasses of your class, you can register the method as non-inheritable as follows...</p>
+			
+			
+<pre class="sample-code">_class.myStaticMethod = function () {
+  // do stuff
+};
+_class.nonInheritableStatics.myStaticMethod = 1;
+</pre>
+			
+			<p>For a more in-depth discussion, see the section <a href="#7">Non-inheritable Statics</a>.</p>
+		</div>
+		
+		<a name="9_7"></a>
+		<h2 class="heading2" title="9. Dissecting a Subclass Module -&gt; 9.7. Registering Set-get Properties"><span class="headingNumber"><a href="#9" title="9. Dissecting a Subclass Module">9</a>.<a href="#9_7" title="9. Dissecting a Subclass Module -&gt; 9.7. Registering Set-get Properties">7</a>. </span>Registering Set-get Properties</h2>
+		<div class="contents2">
+			<p>Set-get properties are registered for a class by calling the <code>Uize.registerProperties</code> static method that is inherited from the <code><a href="../reference/Uize.html">Uize</a></code> base class.</p>
+			
+			<p>The <code>Uize.registerProperties</code> static method lets you register one or more set-get properties in a single call to the method. The single parameter that the <code>Uize.registerProperties</code> static method takes is an object containing profiles for all the set-get properties being registered, where each key is the private name for a set-get property, and where each value is either the public name - or an object providing a complete profile - for the set-get property.</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">_class.registerProperties ({
+  _property1:'property1', // minimalistic approach to registering a property
+  _property2:{
+    name:'property2',
+    onChange:function () {
+      // do something when the value of this property changes
+    },
+    value:0
+  }
+});
+</pre>
+			
+			<p>In the above example, the set-get property with the public name <code>property1</code> is being mapped to the private identifier <code>_property1</code>. It is not technically necessary that the private name be the public name prefixed with an underscore - this is simply a convention that is followed. Because no object is used to specify the profile for this set-get property, there is no <code>onChange</code> handler registered, and the initial value is <code>undefined</code>. By contrast, the <code>property2</code> set-get property is registered with a profile object that specifies an <code>onChange</code> handler function and an initial value of <code>0</code>.</p>
+		</div>
+	</div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

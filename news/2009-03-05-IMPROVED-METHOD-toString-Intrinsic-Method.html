@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2009-03-05 - IMPROVED METHOD: toString Intrinsic Method | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="The toString Intrinsic Method that is implemented in the Uize base class has been improved to better support package modules and also to do a better job of representing set-get property values that are class or package references when producing summaries for instances or classes."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2009.html" class="breadcrumb breadcrumbWithArrow">2009 NEWS</a>
+	2009-03-05 - IMPROVED METHOD: toString Intrinsic Method
+
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="The toString Intrinsic Method now is implemented for package modules that are declared using the Uize.module static method.">1. Support for Package Modules</a></li>
+			<li><a href="#2" title="The toString Intrinsic Method now does a better job of representing set-get property values that are class or package references when producing summaries for instances or classes.">2. Better Summaries for Instances and Classes</a></li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<p>The <code>toString Intrinsic Method</code> that is implemented in the <code><a href="../reference/Uize.html">Uize</a></code> base class has been improved to better support package modules and also to do a better job of representing set-get property values that are class or package references when producing summaries for instances or classes.</p>
+	
+	<a name="1"></a>
+	<h1 class="heading1" title="1. Support for Package Modules"><span class="headingNumber"><a href="#1" title="1. Support for Package Modules">1</a>. </span>Support for Package Modules</h1>
+	<div class="contents1">
+		<p>The <code>toString Intrinsic Method</code> now is implemented for package modules that are declared using the <code>Uize.module</code> static method.</p>
+		
+		<p>This means that alerting the value of a package using JavaScript's built-in <code>alert</code> function now produces a more useful result.</p>
+		
+		<p><span class="allCaps">EXAMPLE</span></p>
+		
+		
+<pre class="sample-code">alert (Uize.Node);
+</pre>
+		
+		<p><span class="allCaps">PREVIOUSLY</span></p>
+		
+		
+<pre class="sample-code">[object Function]
+</pre>
+		
+		<p><span class="allCaps">NOW</span></p>
+		
+		
+<pre class="sample-code">[package Uize.Node]
+</pre>
+	</div>
+	
+	<a name="2"></a>
+	<h1 class="heading1" title="2. Better Summaries for Instances and Classes"><span class="headingNumber"><a href="#2" title="2. Better Summaries for Instances and Classes">2</a>. </span>Better Summaries for Instances and Classes</h1>
+	<div class="contents1">
+		<p>The <code>toString Intrinsic Method</code> now does a better job of representing set-get property values that are class or package references when producing summaries for instances or classes.</p>
+		
+		<p><span class="allCaps">EXAMPLE</span></p>
+		
+		
+<pre class="sample-code">widget = new Uize.Widget;
+widget.set ({
+  aClass:Uize.Widget,
+  aPackage:Uize.Node
+});
+alert (widget);
+</pre>
+		
+		<p><span class="allCaps">PREVIOUSLY</span></p>
+		
+		
+<pre class="sample-code">[object Uize.Widget]
+
+aClass : [object Function]
+aPackage : [object Function]
+... ... ...
+... ... ...
+... ... ...
+</pre>
+		
+		<p><span class="allCaps">NOW</span></p>
+		
+		
+<pre class="sample-code">[object Uize.Widget]
+
+aClass : [class Uize.Widget]
+aPackage : [package Uize.Node]
+... ... ...
+... ... ...
+... ... ...
+</pre>
+	</div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

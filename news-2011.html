@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2011 News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework"/>
+	<meta name="description" content="This is the news archive for the UIZE JavaScript Framework for the year 2011."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="css/page.css"/>
+	<link rel="stylesheet" href="css/page.simpledoc.css"/>
+	<link rel="stylesheet" href="css/page.index.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="index.html" title="UIZE JavaScript Framework home"></a>
+	2011 News
+</h1>
+
+<div class="main">
+
+<div class="preamble">
+	This is the news archive for the UIZE JavaScript Framework for the year 2011.
+	
+</div>
+
+<ul id="page-index">
+	<li>
+		<div class="itemTitle"><a href="news/2011-03-24-NEW-EXAMPLE-Color-Format-Converter.html">2011-03-24 - NEW EXAMPLE - Color Format Converter</a><span class="arrow">&nbsp;</span></div>
+		<div class="itemBody">The new Color Format Converter Tool lets you easily convert color values from one format to another.</div>
+	</li>
+	<li>
+		<div class="itemTitle"><a href="news/2011-03-23-NEW-MODULE-Uize.Util.PropertyAdapter.html">2011-03-23 - NEW MODULE: Uize.Util.PropertyAdapter</a><span class="arrow">&nbsp;</span></div>
+		<div class="itemBody">The new Uize.Util.PropertyAdapter module implements a mechanism for connecting two set-get properties together, with optional bi-directional value adapter code.</div>
+	</li>
+	<li>
+		<div class="itemTitle"><a href="news/2011-03-11-Bug-Fix-For-toString-and-valueOf-Intrinsic-Methods.html">2011-03-11 - Bug Fix For toString and valueOf Intrinsic Methods</a><span class="arrow">&nbsp;</span></div>
+		<div class="itemBody">An Internet Explorer specific problem with the toString intrinsic method and the valueOf intrinsic method, that are specially implemented for Uize subclasses, has been fixed.</div>
+	</li>
+	<li>
+		<div class="itemTitle"><a href="news/2011-03-10-Improved-Process-for-Announcing-News.html">2011-03-10 - Improved Process for Announcing News</a><span class="arrow">&nbsp;</span></div>
+		<div class="itemBody">For developers of the UIZE JavaScript Framework, the process for adding news announcements has been improved and simplified, so that all that is required is to create a .simple file for a news item, and then the build process for the site will do the rest.</div>
+	</li>
+	<li>
+		<div class="itemTitle"><a href="news/2011-03-05-Deprecated-Features-of-Uize.Widget.Tree-Killed.html">2011-03-05 - Deprecated Features of Uize.Widget.Tree Killed</a><span class="arrow">&nbsp;</span></div>
+		<div class="itemBody">A number of instance and static methods of the Uize.Widget.Tree module that were deprecated a year ago have finally been killed.</div>
+	</li>
+	<li>
+		<div class="itemTitle"><a href="news/2011-02-21-Unit-Test-Improvements.html">2011-02-21 - Unit Test Improvements</a><span class="arrow">&nbsp;</span></div>
+		<div class="itemBody">Unit tests for the UIZE JavaScript Framework have been improved in a number of ways, as outlined below...</div>
+	</li>
+	<li>
+		<div class="itemTitle"><a href="news/2011-02-11-New-ajax-Method-in-Uize.Widget.html">2011-02-11 - New ajax Method in Uize.Widget</a><span class="arrow">&nbsp;</span></div>
+		<div class="itemBody">The Uize.Widget module has been improved with the addition of the new ajax instance method.</div>
+	</li>
+	<li>
+		<div class="itemTitle"><a href="news/2011-01-31-Major-Improvements-to-Module-References.html">2011-01-31 - Major Improvements to Module References</a><span class="arrow">&nbsp;</span></div>
+		<div class="itemBody">Reference documentation for modules of the UIZE JavaScript Framework has been substantially improved, with the addition of automatically generated documentation for features of modules for which no documentation has explicitly been written.</div>
+	</li>
+	<li>
+		<div class="itemTitle"><a href="news/2011-01-22-FRAMEWORK-CHANGE-Non-inheritable-Statics.html">2011-01-22 - FRAMEWORK CHANGE: Non-inheritable Statics</a><span class="arrow">&nbsp;</span></div>
+		<div class="itemBody">A number of static methods that are implemented in the Uize base class, and that have (up until now) been inherited by all subclasses of Uize, are now no longer inheritable.</div>
+	</li>
+	<li>
+		<div class="itemTitle"><a href="news/2011-01-01-Documentation-System-Improvements.html">2011-01-01 - Documentation System Improvements</a><span class="arrow">&nbsp;</span></div>
+		<div class="itemBody">The JavaScript Documentation System, that is used to produce all the documentation for the UIZE JavaScript Framework, has been improved in a number of ways.</div>
+	</li>
+</ul>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Index'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Index).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+

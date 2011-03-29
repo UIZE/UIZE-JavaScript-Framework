@@ -1,0 +1,273 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Javascript Fun | Appendixes | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework Appendixes "/>
+	<meta name="description" content="This document explores some of the more unusual idiosyncracies of the JavaScript language, some of which may trip you up if you&apos;re not aware of them. "/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	Javascript Fun
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="This document explores some of the more unusual idiosyncracies of the JavaScript language, some of which may trip you up if you&apos;re not aware of them. ">1. Introduction</a></li>
+			<li><a href="#2" title="Following is a list of expressions that are all true (ie. the result of the expressions is always the boolean value true). Some of the expressions are cute or ironic to look at. Others may just be plain puzzling to the uninitiated. Explanations appear below the expressions...">2. Curious Expressions</a></li>
+			<li><a href="#3" title="- &quot;uize&quot; is the traditional Scottish spelling of the word &quot;use&quot;.">3. UIZE Trivia</a></li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<a name="1"></a>
+	<h1 class="heading1" title="1. Introduction"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>. </span>Introduction</h1>
+	<div class="contents1">
+		<p>This document explores some of the more unusual idiosyncracies of the JavaScript language, some of which may trip you up if you're not aware of them. </p>
+	</div>
+	
+	<a name="2"></a>
+	<h1 class="heading1" title="2. Curious Expressions"><span class="headingNumber"><a href="#2" title="2. Curious Expressions">2</a>. </span>Curious Expressions</h1>
+	<div class="contents1">
+		<p>Following is a list of expressions that are all true (ie. the result of the expressions is always the boolean value <code>true</code>). Some of the expressions are cute or ironic to look at. Others may just be plain puzzling to the uninitiated. Explanations appear below the expressions...</p>
+		
+		
+<pre class="sample-code">(7 / 100) * 100 != 7
+</pre>
+		
+		<p>Because of the way that JavaScript represents floating point numbers internally, the expression <code>(7 / 100) * 100</code> actually produces the result <code>7.000000000000001</code>. It's not often that humans are better at computation than computers, but this would be one such occasion.</p>
+		
+		
+<pre class="sample-code">100000000000000000000 + 1 == 100000000000000000000 - 1
+</pre>
+		
+		<p>Another artifact of JavaScript's rather weak internal representation of numbers. <code>100000000000000000000</code> is represented internally as a floating point number that can be expressed in scientific notation as <code>1e+20</code>. Given the precision of JavaScript's floating point number representation, <code>1e+20 + 1</code> is equivalent to <code>1e+20 - 1</code>.</p>
+		
+		
+<pre class="sample-code">typeof null == 'object' &amp;&amp; !(null instanceof Object)
+</pre>
+		
+		<p>This one is a bit hard to explain, especially in light of the fact that the statement <code>typeof new String () &#61;&#61; 'object' && new String () instanceof Object</code> is true.</p>
+		
+		
+<pre class="sample-code">typeof NaN == 'number'
+</pre>
+		
+		<p>Yeah, so in JavaScript <code>NaN</code> is a special value for the <code>number</code> type. So, the expression is technically correct, if appearing a little contradictory on the surface.</p>
+		
+		
+<pre class="sample-code">typeof !NaN == 'boolean'
+</pre>
+		
+		<p>For the purposes of boolean logic, notting <code>NaN</code> produces the boolean value <code>true</code>. This is not to say that <code>NaN</code> is equivalent to the boolean value <code>false</code>, though. One could make the argument that it would be more correct for coercing <code>NaN</code> to a boolean type to produce the result <code>NaB</code> (Not a Boolean), but JavaScript has no such concept of a boolean value that is in the paradoxical state of being neither <code>true</code> nor <code>false</code>, or both, or an indeterminate one.</p>
+		
+		
+<pre class="sample-code">NaN * 2 != 2 * NaN
+</pre>
+		
+		<p>Yeah, so this one just seems plain wrong on the surface. Why would swapping the two operands make a difference? Swapping operands in a multiplication, we have been taught, does not affect the outcome. So, then, shouldn't the two sides be equal? The trick comes in the odd behavior in JavaScript that the value <code>NaN</code> is not equal to itself. So, it turns out that both sides in the boolean expression <b>do</b> produce the same result: they both produce the result <code>NaN</code>. But, because <code>NaN !&#61; NaN</code>, so the two sides - while having the same value - are not equal.</p>
+		
+		
+<pre class="sample-code">(NaN != NaN) &amp;&amp; !(NaN &lt; NaN) &amp;&amp; !(NaN &gt; NaN)
+</pre>
+		
+		<p>Ok, so if <code>NaN</code> is not equal to itself, then it must be either greater than itself, or less than itself, right? Ummmm, yeah. Well, not really. Even though <code>NaN</code> is not equal to iself, it is also not less than or, conversely, (and by implication) greater than itself. This falls squarely into the category of <code>strange but true</code>. Robert Ripley would be proud.</p>
+		
+		
+<pre class="sample-code">(NaN &amp;&amp; !NaN) != (!NaN &amp;&amp; NaN)
+</pre>
+		
+		<p>So, both <code>NaN && !NaN</code> and <code>!NaN && NaN</code> produce the result <code>NaN</code>. Now, because <code>NaN</code> is not equal to itself, the two seemingly equivalent boolean expressions turn out not to be equivalent - even though they produce the same result. This is kind of a "paraphrasing" of the <code>NaN &#42; 2 !&#61; 2 &#42; NaN</code> case.</p>
+		
+		
+<pre class="sample-code">(1 != NaN) &amp;&amp; (1 == !NaN)
+</pre>
+		
+		<p>Just because <code>1</code> is not equal to <code>NaN</code>, it doesn't follow that <code>1</code> should equal <code>!NaN</code>. It's just a luck that the subtle underlying logic resembles a simplistic logic in this case. <code>1</code> is not equal to <code>NaN</code> because nothing is equal to <code>NaN</code>, but the reason <code>1</code> is equal to <code>!NaN</code> is because notting <code>NaN</code> produces the boolean value <code>true</code>, and <code>1</code> is equivalent to <code>true</code> in a non-strict equality operation.</p>
+		
+		
+<pre class="sample-code">isNaN (true) == false
+</pre>
+		
+		<p>Yeah, so you may have been lulled into thinking that a boolean is not a number. Seems perfectly reasonable, eh? Well, not so fast! The <code>isNaN</code> function coerces its single argument to a number type by invoking the argument value's <code>valueOf</code> instrinsic method. Now, for boolean type values, the built-in <code>valueOf</code> converts the boolean value <code>false</code> to <code>0</code> and the value <code>true</code> to <code>1</code>. At this point, the <code>isNaN</code> function is dealing with a value that has been resolved to a number, so it returns <code>false</code>. Not exactly what you might expect (kind of like life).</p>
+		
+		
+<pre class="sample-code">isNaN (new Boolean) != (typeof new Boolean != 'number')
+</pre>
+		
+		<p>This is kind of a restatement of the previous example. While <code>isNaN (new Boolean)</code> produces the result <code>false</code>, <code>typeof new Boolean !&#61; 'number'</code> produces the result <code>true</code>.</p>
+		
+		
+<pre class="sample-code">isNaN (NaN) == !isNaN (!NaN)
+</pre>
+		
+		<p>So, <code>NaN</code> is definitely not a number, so <code>isNaN (NaN)</code> produces the result <code>true</code>. Now, as shown earlier, <code>!NaN</code> produces the result <code>true</code>. So, <code>isNaN (!NaN)</code> produces the result <code>false</code> because - as also shown earlier - the <code>isNaN</code> function coerces a boolean argument to a number and, therefore, returns <code>false</code>. Now, notting that produces <code>true</code>. So, the two sides of the equality operation are <code>true</code> and equal. But it's not because the "inner" and "outer" nots in the right hand expression "cancel" each other out, or anything quite that simplistic.</p>
+		
+		
+<pre class="sample-code">isNaN (true) == isNaN (false)
+</pre>
+		
+		<p>The <code>isNaN</code> function always returns <code>false</code> when receiving a boolean argument, so the both sides of the equality operation are <code>false</code> and, therefore, equal.</p>
+		
+		
+<pre class="sample-code">isNaN (5) == isNaN (isNaN (5))
+</pre>
+		
+		<p>On the left side of the equality, the number <code>5</code> is being tested for not a number, which unsurprisingly produces the result <code>false</code>. On the right side, there is an extra layer of <code>isNaN</code>. The inner test produces the value <code>false</code>, like the left side. The outer test also produces the value <code>false</code>, because the <code>isNaN</code> function returns <code>false</code> if it is supplied with a boolean argument. So, adding the extra layer of <code>isNaN</code> keeps the value <code>false</code> and both sides of the equality are equivalent.</p>
+		
+		
+<pre class="sample-code">isNaN (new Number) == isNaN (isNaN (isNaN (isNaN (isNaN (isNaN (isNaN (new Number)))))))
+</pre>
+		
+		<p>You can extrapolate from the previous example, of course. It really doesn't matter how many layers of <code>isNaN</code> you add to the right side. Value's still gonna stay <code>false</code>.</p>
+		
+		
+<pre class="sample-code">isNaN (NaN) != isNaN (isNaN (NaN))
+</pre>
+		
+		<p>Unlike the previous two examples, the same cannot be said for testing <code>NaN</code> for not a number. In this case, the left side produces <code>true</code>, but on the right side the inner test produces <code>true</code> while the outer test then produces <code>false</code>.</p>
+		
+		
+<pre class="sample-code">isNaN ('5') == false
+</pre>
+		
+		<p>Hmmmmmmmmmm....... just like you might have thought that a boolean was not a number, you might also have thought that a string is not a number. Once again, because the <code>isNaN</code> function invokes the <code>valueOf</code> instrinsic method on its argument to coerce a number, the string <code>'5'</code> is successfully coerced to the number <code>5</code>, and so <code>isNaN ('5')</code> returns <code>false</code>.</p>
+		
+		
+<pre class="sample-code">isNaN ('five') == true
+</pre>
+		
+		<p>Not all strings are created equal. You may have been taught that five is a number, but JavaScript doesn't think so. Apparently, nobody taught JavaScript to read English. Coercing the string value <code>'five'</code> to a number produces the value <code>NaN</code>, which - while not equal to itself - at least tests true for not being a number.</p>
+		
+		
+<pre class="sample-code">isNaN (!'a number') == false
+</pre>
+		
+		<p>Ok, so this one is just trying to be too cute for its own good. It says quite emphatically <code>!'a number'</code>, so shouldn't JavaScript pay attention and oblige by testing true for not a number? Well, that's about as ridiculous as expecting that the expression <code>isNaN ('I am a number, damn you')</code> should produce the result <code>false</code>. As it turns out, notting any non-empty string produces the boolean value <code>false</code>, because a non-empty string is considered equivalent to <code>true</code>. Now, as shown earlier, the <code>isNaN</code> function tests false for any boolean argument, because the boolean argument is successfully coerced to <code>0</code> or <code>1</code>.</p>
+		
+		
+<pre class="sample-code">isNaN (!!'a number') == false
+</pre>
+		
+		<p>Yeah, so don't think that adding another not before the <code>!'a number'</code> will change the outcome. You're still supplying a boolean argument to the <code>isNaN</code> function. You could also express this as <code>isNaN (!'a number') &#61;&#61; isNaN (!!'a number')</code>.</p>
+		
+		
+<pre class="sample-code">(null + null == 0) &amp;&amp; (0 + 0 == 0) &amp;&amp; (null + null != null)
+</pre>
+		
+		<p>So, if <code>null + null</code> is equal to <code>0</code>, then <code>null</code> seems like it's being treated as <code>0</code>. So, why isn't <code>null + null</code> equal to <code>null</code>? After all, we know that <code>0 + 0</code> is equal to <code>0</code>. What's going on? Simple. The value <code>null</code> is coerced to the number value <code>0</code> when used in a numerical operation (such as summing), but it is not coerced when involved in an equality test. The value <code>0</code> is not considered equivalent to <code>null</code>.</p>
+		
+		
+<pre class="sample-code">(0 != null) &amp;&amp; (!0 == !null)
+</pre>
+		
+		<p>As shown earlier, the value <code>0</code> is not considered equivalent to the value <code>null</code> in equality tests. However, notting both <code>0</code> and <code>null</code> produces the result <code>true</code>. So, while <code>0</code> is not equivalent to <code>null</code>, <code>!0</code> <b>is</b> equivalent to <code>!null</code>.</p>
+		
+		
+<pre class="sample-code">(+null == +false) &amp;&amp; (null != false)
+</pre>
+		
+		<p>Similar to the previous example, both <code>null</code> and <code>false</code> resolve to <code>0</code> when coerced to a number, but are not considered equivalent when compared to each other in an equality type operation.</p>
+		
+		
+<pre class="sample-code">true == false + 1
+</pre>
+		
+		<p>Adding <code>1</code> to <code>false</code> makes it <code>true</code>? Well, actually, adding <code>1</code> to <code>false</code> first coerces <code>false</code> to the number <code>0</code> and then produces the result <code>1</code> upon adding <code>1</code>. Now, <code>1</code> is considered equivalent to <code>true</code> when involved in an equality operation.</p>
+		
+		
+<pre class="sample-code">(typeof true == 'boolean') &amp;&amp; (!typeof true == false)
+</pre>
+		
+		<p>Well, it's obvious that the type of the value <code>true</code> is <code>'boolean'</code>. Now, <code>'boolean'</code> is a string value, and notting any non-empty string produces the result <code>false</code>, so <code>!typeof true</code> gives you <code>false</code>.</p>
+		
+		
+<pre class="sample-code">typeof new Boolean == 'object'
+</pre>
+		
+		<p>This just doesn't seem to make sense, unless you understand what's going on. You might be tempted to think that <code>typeof new Boolean</code> should give you <code>'boolean'</code>. As it turns out, the type of value that is created using JavaScript's <code><a href="../javascript-reference/Boolean.html">Boolean</a></code> core object is not the same as the type of a variable assigned with a simple boolean value. When using the <code><a href="../javascript-reference/Boolean.html">Boolean</a></code> core object to construct an object, you get just that: an object, and <b>not</b> a primitive boolean value.</p>
+		
+		
+<pre class="sample-code">typeof !new Boolean == 'boolean'
+</pre>
+		
+		<p>To add irony to the mix, if you not an instance of the <code><a href="../javascript-reference/Boolean.html">Boolean</a></code> core object and then get the type of that result, you then get <code>'boolean'</code>. On the surface, it may be strange to look at. Basically, notting any object in JavaScript produces the result <code>false</code>, which <b>is</b> a boolean type value, so <code>typeof !new Boolean</code> is <code>'boolean'</code>.</p>
+		
+		
+<pre class="sample-code">typeof typeof undefined == 'string'
+</pre>
+		
+		<p>So, the inner <code>typeof</code> operation produces a result that is a string, even if its value is <code>'undefined'</code>. Therefore, the outer <code>typeof</code> operation produces the result <code>'string'</code>.</p>
+		
+		
+<pre class="sample-code">typeof window.defined == 'undefined'
+</pre>
+		
+		<p>So, this is not guaranteed to always be the case, but it's a good bet that the <code>window</code> object doesn't have a property defined called <code>defined</code>. So, it looks like a contradiction, but it's about as weak an apparent contradiction as saying <code>var number &#61; 'string'</code>.</p>
+		
+		
+<pre class="sample-code">typeof (window.undefined = 'defined') == 'string'
+</pre>
+		
+		<p>If you want to just get mad with trying to confuse the issue. Nuff said.</p>
+		
+		
+<pre class="sample-code">(typeof function () {} == 'function') &amp;&amp; (typeof function () {} () == 'undefined')
+</pre>
+		
+		<p>So, naturally the type of an empty anonymous function is <code>'function'</code>. But, if you add parentheses right after the empty function declaration, then you are essentially calling the function immediately after declaring it. Because the function is empty, it returns the result <code>undefined</code>, the type of which is the string <code>'undefined'</code>.</p>
+		
+		
+<pre class="sample-code">(Infinity * 0 != 0) &amp;&amp; (Infinity * 0 != Infinity) &amp;&amp; (Infinity * 0 != NaN)
+</pre>
+		
+		<p>So, what exactly do you get when you multiply infinity by zero. You may initially think you should get zero. Not so. Do you get infinity? No. Do you get <code>NaN</code>? No? Then what?!?!? Infinity multiplied by zero is not equal to anything then? Kind of. So, actually, you <b>do</b> get <code>NaN</code>. And, as shown earlier, <code>NaN</code> is not equal to itself, so <code>Infinity * 0 !&#61; NaN</code> is true.</p>
+		
+		
+<pre class="sample-code">!new Boolean (false) == false
+</pre>
+		
+		<p>Seems like when you not <code>false</code> you should get <code>true</code>. Problem is, in this case you're not notting the primitive value <code>false</code> but an instance of JavaScript's <code><a href="../javascript-reference/Boolean.html">Boolean</a></code> core object instantiated with the value <code>false</code>. Notting any object in JavaScript produces the boolean value <code>false</code>. This behavior would appear to make the <code><a href="../javascript-reference/Boolean.html">Boolean</a></code> core object less compelling, since an instance of this object is not interchangeable with a variable set to a primitive boolean value.</p>
+	</div>
+	
+	<a name="3"></a>
+	<h1 class="heading1" title="3. UIZE Trivia"><span class="headingNumber"><a href="#3" title="3. UIZE Trivia">3</a>. </span>UIZE Trivia</h1>
+	<div class="contents1">
+		<table class="list">
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>"uize" is the traditional Scottish spelling of the word "use".</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>"UIZE" is the call sign of the Russian Federation ship <a href="http://www.rs-head.spb.ru/en/regbook/file_shipa/63/630139_e.htm" target="_blank" class="externalSiteLink">BESSTRASHNYY</a>, a rescue and salvage vessel built around 1963.</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Ironically, the <a href="http://bit.ly" target="_blank" class="externalSiteLink">bit.ly</a> short URL <a href="http://bit.ly/UiZe" target="_blank" class="externalSiteLink">http://bit.ly/UiZe</a> links to an article about interceptors in Flex.</td></tr>
+		</table>
+	</div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

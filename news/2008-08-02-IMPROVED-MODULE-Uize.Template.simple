@@ -1,0 +1,15 @@
+Compiler Directives
+	The =Uize.Template= module now supports compiler directives which are executed at compile time for JavaScript templates.
+
+	Perhaps the most intriguing of the supported directives are the =@startBlock= and =@endBlock= block directives, which let you define template blocks that generate their own discrete output. This opens up interesting possibilities in allowing JavaScript templates to use other, previously compiled JavaScript templates in generating their output.
+
+JST Compiler Build Script
+	A new build script has been created to find =.js.jst= JavaScript template files and compile them into =.js= modules that can then be required and used by other JavaScript code in generating HTML and other content.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2008-08-02 - IMPROVED MODULE: Uize.Template
+....................................................................................

@@ -1,0 +1,407 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Date | JavaScript Reference | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework JavaScript Reference "/>
+	<meta name="description" content="document..."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../javascript-reference.html" class="breadcrumb breadcrumbWithArrow">JAVASCRIPT REFERENCE</a>
+	Date
+
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="document...">1. Introduction</a></li>
+			<li><a href="#2" title="DIFFERENT USAGES">2. Constructor</a></li>
+			<li><a href="#3">3. Instance Methods</a>
+				<ul>
+					<li><a href="#3_1" title="&lt;&lt; &gt;&gt;&#10;">3.1. getDate</a></li>
+					<li><a href="#3_2" title="&lt;&lt; &gt;&gt;&#10;">3.2. getDay</a></li>
+					<li><a href="#3_3" title="&lt;&lt; &gt;&gt;&#10;">3.3. getFullYear</a></li>
+					<li><a href="#3_4" title="&lt;&lt; &gt;&gt;&#10;">3.4. getHours</a></li>
+					<li><a href="#3_5" title="&lt;&lt; &gt;&gt;&#10;">3.5. getMilliseconds</a></li>
+					<li><a href="#3_6" title="&lt;&lt; &gt;&gt;&#10;">3.6. getMinutes</a></li>
+					<li><a href="#3_7" title="&lt;&lt; &gt;&gt;&#10;">3.7. getMonth</a></li>
+					<li><a href="#3_8" title="&lt;&lt; &gt;&gt;&#10;">3.8. getSeconds</a></li>
+					<li><a href="#3_9" title="&lt;&lt; &gt;&gt;&#10;">3.9. getTime</a></li>
+					<li><a href="#3_10" title="&lt;&lt; &gt;&gt;&#10;">3.10. getTimezoneOffset</a></li>
+					<li><a href="#3_11" title="&lt;&lt; &gt;&gt;&#10;">3.11. getUTCDate</a></li>
+					<li><a href="#3_12" title="&lt;&lt; &gt;&gt;&#10;">3.12. getUTCDay</a></li>
+					<li><a href="#3_13" title="&lt;&lt; &gt;&gt;&#10;">3.13. getUTCFullYear</a></li>
+					<li><a href="#3_14" title="&lt;&lt; &gt;&gt;&#10;">3.14. getUTCHours</a></li>
+					<li><a href="#3_15" title="&lt;&lt; &gt;&gt;&#10;">3.15. getUTCMilliseconds</a></li>
+					<li><a href="#3_16" title="&lt;&lt; &gt;&gt;&#10;">3.16. getUTCMinutes</a></li>
+					<li><a href="#3_17" title="&lt;&lt; &gt;&gt;&#10;">3.17. getUTCMonth</a></li>
+					<li><a href="#3_18" title="&lt;&lt; &gt;&gt;&#10;">3.18. getUTCSeconds</a></li>
+					<li><a href="#3_19" title="&lt;&lt; &gt;&gt;&#10;">3.19. getYear</a></li>
+					<li><a href="#3_20" title="&lt;&lt; &gt;&gt;&#10;">3.20. setDate</a></li>
+					<li><a href="#3_21" title="&lt;&lt; &gt;&gt;&#10;">3.21. setFullYear</a></li>
+					<li><a href="#3_22" title="&lt;&lt; &gt;&gt;&#10;">3.22. setHours</a></li>
+					<li><a href="#3_23" title="&lt;&lt; &gt;&gt;&#10;">3.23. setMilliseconds</a></li>
+					<li><a href="#3_24" title="&lt;&lt; &gt;&gt;&#10;">3.24. setMinutes</a></li>
+					<li><a href="#3_25" title="&lt;&lt; &gt;&gt;&#10;">3.25. setMonth</a></li>
+					<li><a href="#3_26" title="&lt;&lt; &gt;&gt;&#10;">3.26. setSeconds</a></li>
+					<li><a href="#3_27" title="&lt;&lt; &gt;&gt;&#10;">3.27. setTime</a></li>
+					<li><a href="#3_28" title="&lt;&lt; &gt;&gt;&#10;">3.28. setUTCDate</a></li>
+					<li><a href="#3_29" title="&lt;&lt; &gt;&gt;&#10;">3.29. setUTCFullYear</a></li>
+					<li><a href="#3_30" title="&lt;&lt; &gt;&gt;&#10;">3.30. setUTCHours</a></li>
+					<li><a href="#3_31" title="&lt;&lt; &gt;&gt;&#10;">3.31. setUTCMilliseconds</a></li>
+					<li><a href="#3_32" title="&lt;&lt; &gt;&gt;&#10;">3.32. setUTCMinutes</a></li>
+					<li><a href="#3_33" title="&lt;&lt; &gt;&gt;&#10;">3.33. setUTCMonth</a></li>
+					<li><a href="#3_34" title="&lt;&lt; &gt;&gt;&#10;">3.34. setUTCSeconds</a></li>
+					<li><a href="#3_35" title="&lt;&lt; &gt;&gt;&#10;">3.35. toDateString</a></li>
+					<li><a href="#3_36" title="&lt;&lt; &gt;&gt;&#10;">3.36. toLocaleDateString</a></li>
+					<li><a href="#3_37" title="&lt;&lt; &gt;&gt;&#10;">3.37. toLocaleString</a></li>
+					<li><a href="#3_38" title="&lt;&lt; &gt;&gt;&#10;">3.38. toLocaleTimeString</a></li>
+					<li><a href="#3_39" title="&lt;&lt; &gt;&gt;&#10;">3.39. toTimeString</a></li>
+					<li><a href="#3_40" title="&lt;&lt; &gt;&gt;&#10;">3.40. toUTCString</a></li>
+					<li><a href="#3_41" title="&lt;&lt; &gt;&gt;&#10;">3.41. valueOf</a></li>
+				</ul>
+			</li>
+			<li><a href="#4">4. Instance Properties</a>
+				<ul>
+					<li><a href="#4_1" title="&lt;&lt; &gt;&gt;&#10;">4.1. constructor</a></li>
+				</ul>
+			</li>
+			<li><a href="#5">5. Static Methods</a>
+				<ul>
+					<li><a href="#5_1" title="&lt;&lt; &gt;&gt;&#10;">5.1. Date.apply</a></li>
+					<li><a href="#5_2" title="&lt;&lt; &gt;&gt;&#10;">5.2. Date.call</a></li>
+					<li><a href="#5_3" title="&lt;&lt; &gt;&gt;&#10;">5.3. Date.parse</a></li>
+					<li><a href="#5_4" title="&lt;&lt; &gt;&gt;&#10;">5.4. Date.toString</a></li>
+					<li><a href="#5_5" title="&lt;&lt; &gt;&gt;&#10;">5.5. Date.UTC</a></li>
+					<li><a href="#5_6" title="&lt;&lt; &gt;&gt;&#10;">5.6. Date.valueOf</a></li>
+				</ul>
+			</li>
+			<li><a href="#6">6. Static Properties</a>
+				<ul>
+					<li><a href="#6_1" title="&lt;&lt; &gt;&gt;&#10;">6.1. Date.constructor</a></li>
+					<li><a href="#6_2" title="&lt;&lt; &gt;&gt;&#10;">6.2. Date.length</a></li>
+					<li><a href="#6_3" title="&lt;&lt; &gt;&gt;&#10;">6.3. Date.prototype</a></li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<a name="1"></a>
+	<h1 class="heading1" title="1. Introduction"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>. </span>Introduction</h1>
+	<div class="contents1">
+		<p>document...</p>
+	</div>
+	
+	<a name="2"></a>
+	<h1 class="heading1" title="2. Constructor"><span class="headingNumber"><a href="#2" title="2. Constructor">2</a>. </span>Constructor</h1>
+	<div class="contents1">
+		<p><span class="allCaps">DIFFERENT USAGES</span></p>
+		
+		<p></p>
+	</div>
+	
+	<a name="3"></a>
+	<h1 class="heading1" title="3. Instance Methods"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>. </span>Instance Methods</h1>
+	<div class="contents1">
+		<a name="3_1"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.1. getDate"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_1" title="3. Instance Methods -&gt; 3.1. getDate">1</a>. </span>getDate</h2>
+		<div class="contents2">
+		</div>
+		
+		<a name="3_2"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.2. getDay"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_2" title="3. Instance Methods -&gt; 3.2. getDay">2</a>. </span>getDay</h2>
+		<div class="contents2">
+		</div>
+		
+		<a name="3_3"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.3. getFullYear"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_3" title="3. Instance Methods -&gt; 3.3. getFullYear">3</a>. </span>getFullYear</h2>
+		<div class="contents2">
+		</div>
+		
+		<a name="3_4"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.4. getHours"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_4" title="3. Instance Methods -&gt; 3.4. getHours">4</a>. </span>getHours</h2>
+		<div class="contents2">
+		</div>
+		
+		<a name="3_5"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.5. getMilliseconds"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_5" title="3. Instance Methods -&gt; 3.5. getMilliseconds">5</a>. </span>getMilliseconds</h2>
+		<div class="contents2">
+		</div>
+		
+		<a name="3_6"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.6. getMinutes"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_6" title="3. Instance Methods -&gt; 3.6. getMinutes">6</a>. </span>getMinutes</h2>
+		<div class="contents2">
+		</div>
+		
+		<a name="3_7"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.7. getMonth"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_7" title="3. Instance Methods -&gt; 3.7. getMonth">7</a>. </span>getMonth</h2>
+		<div class="contents2">
+		</div>
+		
+		<a name="3_8"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.8. getSeconds"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_8" title="3. Instance Methods -&gt; 3.8. getSeconds">8</a>. </span>getSeconds</h2>
+		<div class="contents2">
+		</div>
+		
+		<a name="3_9"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.9. getTime"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_9" title="3. Instance Methods -&gt; 3.9. getTime">9</a>. </span>getTime</h2>
+		<div class="contents2">
+		</div>
+		
+		<a name="3_10"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.10. getTimezoneOffset"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_10" title="3. Instance Methods -&gt; 3.10. getTimezoneOffset">10</a>. </span>getTimezoneOffset</h2>
+		<div class="contents2">
+		</div>
+		
+		<a name="3_11"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.11. getUTCDate"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_11" title="3. Instance Methods -&gt; 3.11. getUTCDate">11</a>. </span>getUTCDate</h2>
+		<div class="contents2">
+		</div>
+		
+		<a name="3_12"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.12. getUTCDay"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_12" title="3. Instance Methods -&gt; 3.12. getUTCDay">12</a>. </span>getUTCDay</h2>
+		<div class="contents2">
+		</div>
+		
+		<a name="3_13"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.13. getUTCFullYear"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_13" title="3. Instance Methods -&gt; 3.13. getUTCFullYear">13</a>. </span>getUTCFullYear</h2>
+		<div class="contents2">
+		</div>
+		
+		<a name="3_14"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.14. getUTCHours"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_14" title="3. Instance Methods -&gt; 3.14. getUTCHours">14</a>. </span>getUTCHours</h2>
+		<div class="contents2">
+		</div>
+		
+		<a name="3_15"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.15. getUTCMilliseconds"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_15" title="3. Instance Methods -&gt; 3.15. getUTCMilliseconds">15</a>. </span>getUTCMilliseconds</h2>
+		<div class="contents2">
+		</div>
+		
+		<a name="3_16"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.16. getUTCMinutes"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_16" title="3. Instance Methods -&gt; 3.16. getUTCMinutes">16</a>. </span>getUTCMinutes</h2>
+		<div class="contents2">
+		</div>
+		
+		<a name="3_17"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.17. getUTCMonth"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_17" title="3. Instance Methods -&gt; 3.17. getUTCMonth">17</a>. </span>getUTCMonth</h2>
+		<div class="contents2">
+		</div>
+		
+		<a name="3_18"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.18. getUTCSeconds"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_18" title="3. Instance Methods -&gt; 3.18. getUTCSeconds">18</a>. </span>getUTCSeconds</h2>
+		<div class="contents2">
+		</div>
+		
+		<a name="3_19"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.19. getYear"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_19" title="3. Instance Methods -&gt; 3.19. getYear">19</a>. </span>getYear</h2>
+		<div class="contents2">
+		</div>
+		
+		<a name="3_20"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.20. setDate"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_20" title="3. Instance Methods -&gt; 3.20. setDate">20</a>. </span>setDate</h2>
+		<div class="contents2">
+		</div>
+		
+		<a name="3_21"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.21. setFullYear"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_21" title="3. Instance Methods -&gt; 3.21. setFullYear">21</a>. </span>setFullYear</h2>
+		<div class="contents2">
+		</div>
+		
+		<a name="3_22"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.22. setHours"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_22" title="3. Instance Methods -&gt; 3.22. setHours">22</a>. </span>setHours</h2>
+		<div class="contents2">
+		</div>
+		
+		<a name="3_23"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.23. setMilliseconds"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_23" title="3. Instance Methods -&gt; 3.23. setMilliseconds">23</a>. </span>setMilliseconds</h2>
+		<div class="contents2">
+		</div>
+		
+		<a name="3_24"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.24. setMinutes"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_24" title="3. Instance Methods -&gt; 3.24. setMinutes">24</a>. </span>setMinutes</h2>
+		<div class="contents2">
+		</div>
+		
+		<a name="3_25"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.25. setMonth"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_25" title="3. Instance Methods -&gt; 3.25. setMonth">25</a>. </span>setMonth</h2>
+		<div class="contents2">
+		</div>
+		
+		<a name="3_26"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.26. setSeconds"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_26" title="3. Instance Methods -&gt; 3.26. setSeconds">26</a>. </span>setSeconds</h2>
+		<div class="contents2">
+		</div>
+		
+		<a name="3_27"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.27. setTime"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_27" title="3. Instance Methods -&gt; 3.27. setTime">27</a>. </span>setTime</h2>
+		<div class="contents2">
+		</div>
+		
+		<a name="3_28"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.28. setUTCDate"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_28" title="3. Instance Methods -&gt; 3.28. setUTCDate">28</a>. </span>setUTCDate</h2>
+		<div class="contents2">
+		</div>
+		
+		<a name="3_29"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.29. setUTCFullYear"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_29" title="3. Instance Methods -&gt; 3.29. setUTCFullYear">29</a>. </span>setUTCFullYear</h2>
+		<div class="contents2">
+		</div>
+		
+		<a name="3_30"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.30. setUTCHours"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_30" title="3. Instance Methods -&gt; 3.30. setUTCHours">30</a>. </span>setUTCHours</h2>
+		<div class="contents2">
+		</div>
+		
+		<a name="3_31"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.31. setUTCMilliseconds"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_31" title="3. Instance Methods -&gt; 3.31. setUTCMilliseconds">31</a>. </span>setUTCMilliseconds</h2>
+		<div class="contents2">
+		</div>
+		
+		<a name="3_32"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.32. setUTCMinutes"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_32" title="3. Instance Methods -&gt; 3.32. setUTCMinutes">32</a>. </span>setUTCMinutes</h2>
+		<div class="contents2">
+		</div>
+		
+		<a name="3_33"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.33. setUTCMonth"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_33" title="3. Instance Methods -&gt; 3.33. setUTCMonth">33</a>. </span>setUTCMonth</h2>
+		<div class="contents2">
+		</div>
+		
+		<a name="3_34"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.34. setUTCSeconds"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_34" title="3. Instance Methods -&gt; 3.34. setUTCSeconds">34</a>. </span>setUTCSeconds</h2>
+		<div class="contents2">
+		</div>
+		
+		<a name="3_35"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.35. toDateString"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_35" title="3. Instance Methods -&gt; 3.35. toDateString">35</a>. </span>toDateString</h2>
+		<div class="contents2">
+		</div>
+		
+		<a name="3_36"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.36. toLocaleDateString"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_36" title="3. Instance Methods -&gt; 3.36. toLocaleDateString">36</a>. </span>toLocaleDateString</h2>
+		<div class="contents2">
+		</div>
+		
+		<a name="3_37"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.37. toLocaleString"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_37" title="3. Instance Methods -&gt; 3.37. toLocaleString">37</a>. </span>toLocaleString</h2>
+		<div class="contents2">
+		</div>
+		
+		<a name="3_38"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.38. toLocaleTimeString"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_38" title="3. Instance Methods -&gt; 3.38. toLocaleTimeString">38</a>. </span>toLocaleTimeString</h2>
+		<div class="contents2">
+		</div>
+		
+		<a name="3_39"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.39. toTimeString"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_39" title="3. Instance Methods -&gt; 3.39. toTimeString">39</a>. </span>toTimeString</h2>
+		<div class="contents2">
+		</div>
+		
+		<a name="3_40"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.40. toUTCString"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_40" title="3. Instance Methods -&gt; 3.40. toUTCString">40</a>. </span>toUTCString</h2>
+		<div class="contents2">
+		</div>
+		
+		<a name="3_41"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.41. valueOf"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_41" title="3. Instance Methods -&gt; 3.41. valueOf">41</a>. </span>valueOf</h2>
+		<div class="contents2">
+		</div>
+	</div>
+	
+	<a name="4"></a>
+	<h1 class="heading1" title="4. Instance Properties"><span class="headingNumber"><a href="#4" title="4. Instance Properties">4</a>. </span>Instance Properties</h1>
+	<div class="contents1">
+		<a name="4_1"></a>
+		<h2 class="heading2" title="4. Instance Properties -&gt; 4.1. constructor"><span class="headingNumber"><a href="#4" title="4. Instance Properties">4</a>.<a href="#4_1" title="4. Instance Properties -&gt; 4.1. constructor">1</a>. </span>constructor</h2>
+		<div class="contents2">
+		</div>
+	</div>
+	
+	<a name="5"></a>
+	<h1 class="heading1" title="5. Static Methods"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>. </span>Static Methods</h1>
+	<div class="contents1">
+		<a name="5_1"></a>
+		<h2 class="heading2" title="5. Static Methods -&gt; 5.1. Date.apply"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_1" title="5. Static Methods -&gt; 5.1. Date.apply">1</a>. </span>Date.apply</h2>
+		<div class="contents2">
+		</div>
+		
+		<a name="5_2"></a>
+		<h2 class="heading2" title="5. Static Methods -&gt; 5.2. Date.call"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_2" title="5. Static Methods -&gt; 5.2. Date.call">2</a>. </span>Date.call</h2>
+		<div class="contents2">
+		</div>
+		
+		<a name="5_3"></a>
+		<h2 class="heading2" title="5. Static Methods -&gt; 5.3. Date.parse"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_3" title="5. Static Methods -&gt; 5.3. Date.parse">3</a>. </span>Date.parse</h2>
+		<div class="contents2">
+		</div>
+		
+		<a name="5_4"></a>
+		<h2 class="heading2" title="5. Static Methods -&gt; 5.4. Date.toString"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_4" title="5. Static Methods -&gt; 5.4. Date.toString">4</a>. </span>Date.toString</h2>
+		<div class="contents2">
+		</div>
+		
+		<a name="5_5"></a>
+		<h2 class="heading2" title="5. Static Methods -&gt; 5.5. Date.UTC"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_5" title="5. Static Methods -&gt; 5.5. Date.UTC">5</a>. </span>Date.UTC</h2>
+		<div class="contents2">
+		</div>
+		
+		<a name="5_6"></a>
+		<h2 class="heading2" title="5. Static Methods -&gt; 5.6. Date.valueOf"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_6" title="5. Static Methods -&gt; 5.6. Date.valueOf">6</a>. </span>Date.valueOf</h2>
+		<div class="contents2">
+		</div>
+	</div>
+	
+	<a name="6"></a>
+	<h1 class="heading1" title="6. Static Properties"><span class="headingNumber"><a href="#6" title="6. Static Properties">6</a>. </span>Static Properties</h1>
+	<div class="contents1">
+		<a name="6_1"></a>
+		<h2 class="heading2" title="6. Static Properties -&gt; 6.1. Date.constructor"><span class="headingNumber"><a href="#6" title="6. Static Properties">6</a>.<a href="#6_1" title="6. Static Properties -&gt; 6.1. Date.constructor">1</a>. </span>Date.constructor</h2>
+		<div class="contents2">
+		</div>
+		
+		<a name="6_2"></a>
+		<h2 class="heading2" title="6. Static Properties -&gt; 6.2. Date.length"><span class="headingNumber"><a href="#6" title="6. Static Properties">6</a>.<a href="#6_2" title="6. Static Properties -&gt; 6.2. Date.length">2</a>. </span>Date.length</h2>
+		<div class="contents2">
+		</div>
+		
+		<a name="6_3"></a>
+		<h2 class="heading2" title="6. Static Properties -&gt; 6.3. Date.prototype"><span class="headingNumber"><a href="#6" title="6. Static Properties">6</a>.<a href="#6_3" title="6. Static Properties -&gt; 6.3. Date.prototype">3</a>. </span>Date.prototype</h2>
+		<div class="contents2">
+		</div>
+	</div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

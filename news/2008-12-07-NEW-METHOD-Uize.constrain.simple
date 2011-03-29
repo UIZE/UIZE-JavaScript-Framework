@@ -1,0 +1,11 @@
+The new =Uize.constrain= static method provides a convenient way to constrain a number within specified lower and upper limits.
+
+This method is implemented for performance and avoids calling the =Math.min= and =Math.max= methods, using ternary conditionals instead. Because this method is implemented in the =Uize= base class, it is conveniently available to all subclasses of =Uize= (including all subclasses of the =Uize.Widget= base class).
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2008-12-07 - NEW METHOD: Uize.constrain
+....................................................................................

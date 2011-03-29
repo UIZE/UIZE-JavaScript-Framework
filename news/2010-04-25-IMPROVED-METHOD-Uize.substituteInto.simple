@@ -1,0 +1,32 @@
+The =Uize.substituteInto= static method, implemented in the =Uize= base class has been improved to be more robust.
+
+Because of the way it was previously implemented, the =Uize.substituteInto= method would perform further substitutions into values previously substituted into the source string. This could result in some odd and unexpected behaviors in the unlikely event that the value for one substitution contained the token name for another substitution. Consider the following example...
+
+EXAMPLE
+.....................................................................
+Uize.substituteInto ('[#token1]',{token1:'[#token2]',token2:'FAIL'});
+.....................................................................
+
+RESULT WITH OLD BEHAVIOR
+......
+'FAIL'
+......
+
+RESULT WITH NEW BEHAVIOR
+...........
+'[#token2]'
+...........
+
+With the old behavior, the =token1= substitution would be performed first, and then the =token2= substitution would be performed on the modified string. Given the source string in this example, that would result in the string ='[#token2]'. Upon the subsequent =token2= substitution, the final result would be ='FAIL'=. What's worse, this behavior would be impacted by the order that the substitutions are defined in the substitutions object. If the =token2= property were defined before the =token1= property, then the result would be different.
+
+With the new implementation, token substitution is not multi-pass, so there is not the possibility of one substitution value affecting the subsitution of other values. In our example, the result with the new behavior would correctly be ='[#token2]'=, and ='FAIL'= is not contained in the result because the source string did not contain a token for the =token2= substitution.
+
+In addition to this improvement, the =Uize.substituteInto= method is also now fully unit tested, and its documentation has been updated to be more comprehensive and accurate.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2010-04-25 - IMPROVED METHOD: Uize.substituteInto
+....................................................................................

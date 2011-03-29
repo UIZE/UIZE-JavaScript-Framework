@@ -1,0 +1,23 @@
+Various modules have been migrated out of the root of the =Uize= namespace.
+
+The =Uize.SimpleDoc= and =Uize.DocSucker= modules have been migrated into the new =Uize.Doc= namespace, as the modules =Uize.Doc.Simple= and =Uize.Doc.Sucker=, respectively. The =Uize.Coupler= and =Uize.Cycle= modules have been migrated into the new =Uize.Util= namespace, as the modules =Uize.Util.Coupler= and =Uize.Util.Cycle=, respectively. All modules, build scripts, examples, and documentation in the UIZE JavaScript Framework have been updated accordingly.
+
+MIGRATED
+................................................
+Uize.DocSucker  >> BECOMES >>  Uize.Doc.Sucker
+Uize.SimpleDoc  >> BECOMES >>  Uize.Doc.Simple
+Uize.Coupler    >> BECOMES >>  Uize.Util.Coupler
+Uize.Cycle      >> BECOMES >>  Uize.Util.Cycle
+................................................
+
+NOT BACKWARDS COMPATIBLE
+
+The decision was made to *not* make this change backwards compatible, since the migrated modules were considered sufficiently esoteric. If you have any code that used these modules, you will have to update your code to use the modules by their new names. Other than the name change, the functionality of the modules has not changed.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2010-01-22 - MIGRATED MODULES
+....................................................................................

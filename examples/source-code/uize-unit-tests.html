@@ -1,0 +1,372 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>UIZE Unit Tests - HTML Source Code | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework HTML example source code"/>
+	<meta name="description" content="This is the source code for the UIZE Unit Tests example"/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../../css/page.css"/>
+	<link rel="stylesheet" href="../../css/page.source.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../../index.html" title="UIZE JavaScript Framework home"></a>
+	SOURCE CODE: UIZE Unit Tests
+	<div id="page-actions" class="pageActions">
+		<a href="../uize-unit-tests.html" class="buttonLink">VIEW EXAMPLE</a>
+	</div>
+</h1>
+
+<pre>
+&lt;!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"&gt;
+&lt;html xmlns="http://www.w3.org/1999/xhtml"&gt;
+&lt;head&gt;
+  &lt;title&gt;UIZE Unit Tests | JavaScript Examples | UIZE JavaScript Framework&lt;/title&gt;
+  &lt;meta name="keywords" content="Uize.Test Uize.Widget.Log"/&gt;
+  &lt;meta name="description" content="See how to run the various unit tests of the UIZE JavaScript Framework. Run a unit test and watch as the test runner chunks through its tests."/&gt;
+  &lt;link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/&gt;
+  &lt;link rel="stylesheet" href="../css/page.css"/&gt;
+  &lt;link rel="stylesheet" href="../css/page.example.css"/&gt;
+  &lt;link rel="stylesheet" href="../css/widget.log.css"/&gt;
+  &lt;style type="text/css"&gt;
+    .testControl {
+      width:740px;
+      margin:auto;
+      padding:10px;
+      background:#becacd url(../images/page-contents-bg.gif) repeat-x left top;
+      border:1px solid #899;
+    }
+    .testControl .testControlButton {
+      display:block;
+      width:70px;
+      margin:auto;
+      float:left;
+    }
+    .log {
+      width:756px;
+      margin:0;
+    }
+    .log .logMessages {
+      height:200px;
+    }
+
+    /*** progress bar ***/
+      .progressBarShell {
+        width:729px;
+        height:35px;
+        padding:3px;
+        border:1px solid #bcc;
+        margin:auto;
+        margin-top:10px;
+        background:#fff;
+      }
+      .progressBar {
+        position:relative;
+        width:100%;
+        height:100%;
+      }
+      .progressBar .progressBarTrack,
+      .progressBar .progressBarTrack .progressBarTrackBg,
+      .progressBar .progressBarTrack .progressBarTrackFull,
+      .progressBar .progressBarTrack .progressBarTrackEmpty,
+      .progressBar .progressBarTrack .progressBarStatusText
+      {
+        position:absolute;
+        left:0;
+        top:0;
+        width:100%;
+        height:100%;
+      }
+      .progressBar .progressBarTrack .progressBarTrackBg {
+        background:#000 url(../images/title-bg.gif) repeat-x left top;
+      }
+      .progressBar .progressBarTrack .progressBarTrackFull {
+        background:#0f0;
+        opacity:.55;
+        filter:alpha(opacity=55);
+      }
+      .progressBar .progressBarTrack .progressBarTrackEmpty {
+        background:#ddd;
+        opacity:.2;
+        filter:alpha(opacity=20);
+      }
+      .progressBar .progressBarTrack .progressBarStatusText {
+        font-size:16px;
+        letter-spacing:2px;
+        color:#fff;
+        text-shadow:
+          -1px -1px 0 rgba(0,0,0,.4),
+          -1px 1px 0 rgba(0,0,0,.4),
+          1px -1px 0 rgba(0,0,0,.4),
+          1px 1px 0 rgba(0,0,0,.4)
+        ;
+        text-align:center;
+        line-height:30px;
+      }
+  &lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+&lt;script type="text/javascript" src="../js/Uize.js"&gt;&lt;/script&gt;
+
+&lt;h1 class="document-title"&gt;
+  &lt;a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"&gt;&lt;/a&gt;
+  &lt;a href="../javascript-examples.html" class="breadcrumb breadcrumbWithArrow"&gt;JAVASCRIPT EXAMPLES&lt;/a&gt;
+  UIZE Unit Tests
+  &lt;div id="page-actions" class="pageActions"&gt;
+    &lt;a href="source-code/uize-unit-tests.html" class="buttonLink"&gt;SOURCE&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/h1&gt;
+
+&lt;div class="main"&gt;
+  &lt;!-- explanation copy --&gt;
+
+  &lt;div class="explanation"&gt;
+    &lt;p&gt;This example lets you select and run any of the tests of the UIZE JavaScript Framework. Use the test selector to choose your test (an asterisk indicates a minimal load-module-and-build-it test that has been dynamically created because no dedicated test exists for a module). On selecting a test, the test will be loaded dynamically, during which time the &lt;b&gt;"START"&lt;/b&gt; and &lt;b&gt;"STOP"&lt;/b&gt; buttons will be disabled. After it has loaded, the buttons will be enabled again. Use the &lt;b&gt;"START"&lt;/b&gt; button to start running the selected test. While the test is being performed, the progress bar will be updated to show how far you are through the test. Also, the log will be written to with details of the test's progress. You can stop the test at any time using the &lt;b&gt;"STOP"&lt;/b&gt; button. If the test fails, test execution will be aborted and a synopsis of the failure will be displayed in a dialog. To run the entire test suite for the UIZE JavaScript Framework, select the &lt;b&gt;"RUN ALL MODULE TESTS"&lt;/b&gt; option.&lt;/p&gt;
+  &lt;/div&gt;
+
+  &lt;!-- button --&gt;
+
+  &lt;div class="testControl"&gt;
+    &lt;div style="float:left; line-height:22px; margin-right:5px;"&gt;SELECT A TEST:&lt;/div&gt;
+    &lt;select id="page-testSelector" style="float:left; margin-right:15px;"&gt;&lt;/select&gt;
+    &lt;div id="page_startTests" class="testControlButton button"&gt;&lt;span id="page_startTests-text"&gt;START&lt;/span&gt;&lt;/div&gt;
+    &lt;div id="page_stopTests" class="testControlButton button"&gt;&lt;span id="page_stopTests-text"&gt;STOP&lt;/span&gt;&lt;/div&gt;
+    &lt;br style="clear:left;"/&gt;
+
+    &lt;div id="page_progressBar-shell" class="progressBarShell"&gt;
+      &lt;div id="page_progressBar" class="progressBar"&gt;
+        &lt;div id="page_progressBar-track" class="progressBarTrack"&gt;
+          &lt;div class="progressBarTrackBg"&gt;&lt;/div&gt;
+          &lt;div id="page_progressBar-full" class="progressBarTrackFull"&gt;&lt;/div&gt;
+          &lt;div id="page_progressBar-empty" class="progressBarTrackEmpty"&gt;&lt;/div&gt;
+          &lt;div id="page_progressBar-statusText" class="progressBarStatusText"&gt;&lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+
+  &lt;div style="height:4px;"&gt;&lt;/div&gt;
+
+  &lt;div id="page_log-shell" style="width:762px; margin:0 auto;"&gt;&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- JavaScript code to make the HTML "come alive" --&gt;
+
+&lt;script type="text/javascript"&gt;
+
+Uize.module ({
+  required:[
+    'UizeDotCom.Page.Example.library',
+    'UizeDotCom.Page.Example',
+    'Uize.Widget.Button',
+    'Uize.Widget.Bar',
+    'Uize.Widget.Log',
+    'Uize.Templates.Log',
+    'Uize.String',
+    'UizeDotCom.ModulesTree',
+    'Uize.Data',
+    'Uize.Data.PathsTree',
+    'Uize.Url',
+    'Uize.Test'
+  ],
+  builder:function () {
+    var
+      runAllModuleTests = 'RUN ALL MODULE TESTS',
+      RunAllTests,
+      testSuiteClass,
+      testSuite,
+      totalTests,
+      currentTestNo
+    ;
+
+    /*** prepare list of all modules to test ***/
+      var
+        nonTestModulesTree = UizeDotCom.ModulesTree (),
+        testsSubTree = nonTestModulesTree.Uize.Test,
+        testNames = [],
+        testNamesExcludingLibraries = []
+      ;
+      delete nonTestModulesTree.Uize.Test;
+      var testsSubTreeLookup = Uize.Data.getLookup (Uize.Data.PathsTree.toList (testsSubTree));
+      for (
+        var
+          testNo = -1,
+          testNames =
+            Uize.Data.getKeys (
+              Uize.copyInto (
+                Uize.Data.getLookup (Uize.Data.PathsTree.toList (nonTestModulesTree)),
+                testsSubTreeLookup
+              )
+            ).sort (),
+          testNamesLength = testNames.length,
+          testName
+        ;
+        ++testNo &lt; testNamesLength;
+      )
+        (testName = testNames [testNo]) != 'Performance' &amp;&amp; // ignore the Uize.Test.Performance namespace module
+        testName.lastIndexOf ('library') != testName.length - 7 &amp;&amp; // ignore .library modules
+          testNamesExcludingLibraries.push (testName)
+      ;
+      testNames = testNamesExcludingLibraries;
+
+    /*** create the example page widget ***/
+      var page = window.page = new UizeDotCom.Page.Example;
+
+    /*** add the progress bar widget ***/
+      var progressBar = page.addChild (
+        'progressBar',
+        Uize.Widget.Bar,
+        {minValue:0,maxValue:1,increments:0,orientation:'horizontal'}
+      );
+
+    /*** add the start and stop buttons ***/
+      page.addChild ('startTests',Uize.Widget.Button,{enabled:false}).wire (
+        'Click',
+        function () {
+          prepareToRunTests ();
+          testSuite.run ();
+        }
+      );
+      page.addChild ('stopTests',Uize.Widget.Button,{enabled:false}).wire (
+        'Click',
+        function () {testSuite.stop ()}
+      );
+
+    /*** add the log widget ***/
+      var log = page.addChild ('log',Uize.Widget.Log,{built:false,html:Uize.Templates.Log,title:'TEST LOG'});
+
+    /*** wire up the page widget ***/
+      page.wireUi ();
+
+    /*** prepare to run tests ***/
+      function prepareToRunTests () {
+        currentTestNo = 0;
+        updateProgressBar ();
+        log.clear ();
+      }
+
+    /*** update progress bar status text ***/
+      function updateProgressBar () {
+        progressBar.set ({value:currentTestNo / (totalTests || 1)})
+        page.children.progressBar.setNodeValue (
+          'statusText',
+          currentTestNo + ' of ' + (totalTests || 0) + ' tests completed'
+        );
+      }
+
+    /*** handle selection of test ***/
+      function setWidgetsEnabled (mustEnable) {
+        var enabled = mustEnable ? 'inherit' : false;
+        page.children.startTests.set ({enabled:enabled});
+        page.children.stopTests.set ({enabled:enabled});
+      }
+      function selectTest (callback) {
+        function instantiateTestSuite (testSuiteClass) {
+          setWidgetsEnabled (true);
+          totalTests = (testSuite = new testSuiteClass).getTotalTests ();
+          prepareToRunTests ();
+          testSuite.wire ({
+            Start:
+              function (e) {
+                log.log (Uize.String.repeat ('...',e.source.getDepth ()) + e.source.get ('title'));
+              },
+            Done:
+              function (e) {
+                var
+                  test = e.source,
+                  reasonForFailure = test.get ('reasonForFailure')
+                ;
+                currentTestNo++;
+                updateProgressBar ();
+                log.log (
+                  Uize.String.repeat ('...',test.getDepth () + 1) +
+                  (
+                    test.get ('result')
+                      ? ('PASSED!!! (duration: ' + test.get ('duration') + 'ms)')
+                      : ('*** FAILED *** ' + (reasonForFailure || ''))
+                  )
+                );
+                reasonForFailure &amp;&amp; alert (test.getSynopsis ());
+              }
+          });
+          callback &amp;&amp; callback ();
+        }
+
+        testSuite &amp;&amp; testSuite.stop ();
+        setWidgetsEnabled (false);
+        prepareToRunTests ();
+        var testName = page.getNodeValue ('testSelector');
+        if (testName == runAllModuleTests) {
+          if (!RunAllTests) {
+            var test = [];
+            for (var testNo = -1, testNamesLength = testNames.length, testName; ++testNo &lt; testNamesLength;)
+              /^Performance(\..*)?$/.test (testName = testNames [testNo]) ||
+                test.push (
+                  testsSubTreeLookup [testName]
+                    ? Uize.Test.testModuleTest ('Uize.Test.' + testName)
+                    : Uize.Test.requiredModulesTest (testName)
+                )
+            ;
+            RunAllTests = Uize.Test.declare ({title:'UIZE Unit Tests',test:test});
+          }
+          instantiateTestSuite (RunAllTests);
+        } else if (testsSubTreeLookup [testName]) {
+          var testModuleName = 'Uize.Test.' + testName;
+          Uize.module ({
+            required:testModuleName,
+            builder:function () {instantiateTestSuite (eval (testModuleName))}
+          });
+        } else {
+          instantiateTestSuite (Uize.Test.requiredModulesTest (testName));
+        }
+      }
+      page.wireNode ('testSelector','change',function () {selectTest ()});
+
+    /*** initialize ***/
+      /*** populate test selector ***/
+        var
+          testSelector = page.getNode ('testSelector'),
+          testSelectorOptions = testSelector.options
+        ;
+        testSelectorOptions [testSelectorOptions.length] = new Option (runAllModuleTests,runAllModuleTests);
+        for (var testNo = -1, testNamesLength = testNames.length, testName; ++testNo &lt; testNamesLength;)
+          testSelectorOptions [testSelectorOptions.length] = new Option (
+            ((testName = testNames [testNo])) + (testsSubTreeLookup [testName] ? '' : ' *'),
+            testName
+          )
+        ;
+
+      /*** initialize test selector, using runtest query param ***/
+        var runTest = Uize.Url.fromParams (location.href).runtest;
+        page.setNodeValue ('testSelector',runTest || runAllModuleTests);
+        selectTest (function () {runTest &amp;&amp; testSuite.run ()});
+  }
+});
+
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+
+
+</pre>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.library',
+		'UizeDotCom.Page'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page).wireUi ()}
+});
+
+</script>
+
+</body></html>

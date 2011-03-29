@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2009-09-23 - IMPROVED MODULE: Uize.Date | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="The Uize.Date module has been improved with the addition of the Uize.Date.format, Uize.Date.getRangeAround, and Uize.Date.inRange static methods, and an improved implementation for the Uize.Date.resolve static method."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2009.html" class="breadcrumb breadcrumbWithArrow">2009 NEWS</a>
+	2009-09-23 - IMPROVED MODULE: Uize.Date
+
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="The versatile new Uize.Date.format static method provides a way to format a date in a wide variety of different ways.">1. New Uize.Date.format Static Method</a></li>
+			<li><a href="#2" title="The new Uize.Date.getRangeAround static method provides a way to get a &quot;neat&quot; date range of a specified range size around a specified date.">2. New Uize.Date.getRangeAround Static Method</a></li>
+			<li><a href="#3" title="The new Uize.Date.inRange static method returns a boolean, indicating whether or not the specified date is within the specified date range.">3. New Uize.Date.inRange Static Method</a></li>
+			<li><a href="#4" title="The Uize.Date.resolve static method has been improved with the addition of a new optional defaultDateANYTYPE parameter which lets you specify the default value to be used for when the date value being resolved is &apos;&apos; (empty string), null, or undefined.">4. Improved Uize.Date.resolve Static Method</a></li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<p>The <code><a href="../reference/Uize.Date.html">Uize.Date</a></code> module has been improved with the addition of the <code>Uize.Date.format</code>, <code>Uize.Date.getRangeAround</code>, and <code>Uize.Date.inRange</code> static methods, and an improved implementation for the <code>Uize.Date.resolve</code> static method.</p>
+	
+	<a name="1"></a>
+	<h1 class="heading1" title="1. New Uize.Date.format Static Method"><span class="headingNumber"><a href="#1" title="1. New Uize.Date.format Static Method">1</a>. </span>New Uize.Date.format Static Method</h1>
+	<div class="contents1">
+		<p>The versatile new <code>Uize.Date.format</code> static method provides a way to format a date in a wide variety of different ways.</p>
+		
+		<p><span class="allCaps">EXAMPLES</span></p>
+		
+		
+<pre class="sample-code">var date = 'Thu Sep 10 2009 18:19:25';
+
+Uize.Date.format (date,'{YY}-{MM}-{DD}');
+  // RESULT : 08-02-29
+
+Uize.Date.format (date,'{YYYY}/{MM}/{DD}');
+  // RESULT : 2008/02/29
+
+Uize.Date.format (date,'{dayNo}{dayNoSuffix} {monthName} {YYYY}');
+  // RESULT : 29th February 2009
+</pre>
+	</div>
+	
+	<a name="2"></a>
+	<h1 class="heading1" title="2. New Uize.Date.getRangeAround Static Method"><span class="headingNumber"><a href="#2" title="2. New Uize.Date.getRangeAround Static Method">2</a>. </span>New Uize.Date.getRangeAround Static Method</h1>
+	<div class="contents1">
+		<p>The new <code>Uize.Date.getRangeAround</code> static method provides a way to get a "neat" date range of a specified range size around a specified date.</p>
+		
+		<p>This method can be used to obtain the date range for the week around a specified date, the month around a date, the quarter around a date, the year around a date, etc. The date range is specified by a <code>dateRangeOBJ</code> type value, with <code>minValue</code> and <code>maxValue</code> properties indicating the start date and end date of the date range, respectively.</p>
+		
+		<p><span class="allCaps">EXAMPLE</span></p>
+		
+		
+<pre class="sample-code">Uize.Date.getRangeAround ('Thu Sep 10 2009 18:19:25','month');
+// minValue: Tue Sep 01 2009 00:00:00 (and 0 milliseconds)
+// maxValue: Wed Sep 30 2009 23:59:59 (and 999 milliseconds)
+</pre>
+	</div>
+	
+	<a name="3"></a>
+	<h1 class="heading1" title="3. New Uize.Date.inRange Static Method"><span class="headingNumber"><a href="#3" title="3. New Uize.Date.inRange Static Method">3</a>. </span>New Uize.Date.inRange Static Method</h1>
+	<div class="contents1">
+		<p>The new <code>Uize.Date.inRange</code> static method returns a boolean, indicating whether or not the specified date is within the specified date range.</p>
+		
+		<p><span class="allCaps">EXAMPLE</span></p>
+		
+		
+<pre class="sample-code">Uize.Date.inRange (             // produces the result false
+  '2009/09/23 00:00:00',
+  {minValue:'2009/09/23 00:00:01',maxValue:'2009/09/23 23:59:59'}
+);
+</pre>
+	</div>
+	
+	<a name="4"></a>
+	<h1 class="heading1" title="4. Improved Uize.Date.resolve Static Method"><span class="headingNumber"><a href="#4" title="4. Improved Uize.Date.resolve Static Method">4</a>. </span>Improved Uize.Date.resolve Static Method</h1>
+	<div class="contents1">
+		<p>The <code>Uize.Date.resolve</code> static method has been improved with the addition of a new optional <code>defaultDateANYTYPE</code> parameter which lets you specify the default value to be used for when the date value being resolved is <code>''</code> (empty string), <code>null</code>, or <code>undefined</code>.</p>
+	</div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

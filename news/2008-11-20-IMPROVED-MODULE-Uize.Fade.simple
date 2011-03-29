@@ -1,0 +1,11 @@
+The =Uize.Fade= module now supports non-time based fades.
+
+Essentially, this works the same as when you are doing time-based fades - except that one does not use the =start= and =stop= instance methods. Instead, after creating a fade instance, one can then set the value of the =progress= set-get property to a floating point number in the range of =0= to =1=, where =0= represents the start point of the fade, and =1= represents the end point of the fade. Upon setting the =progress= value, the =value= set-get property will automatically be updated to the correct interpolated value for that point in the fade's progress. This allows one to harness the =Uize.Fade= class' interpolation of compound values, as well as its support for =acceleration= and =deceleration=, for such varied uses as fading colors over a series of elements, plotting positions for a series of elements, etc.
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2008-11-20 - IMPROVED MODULE: Uize.Fade
+....................................................................................

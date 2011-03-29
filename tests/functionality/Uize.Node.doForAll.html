@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>TEST: Uize.Node.doForAll | UIZE JavaScript Framework</title>
+</head>
+<body>
+
+<script type="text/javascript" src="../../js/Uize.js"></script>
+<script type="text/javascript" src="../../js/Uize.Node.js"></script>
+
+<div id="node1" style="position:absolute; visibility:hidden; background:#fff; border:solid 1px #000;"></div>
+<br/><br/>
+<div id="node2" style="position:absolute; visibility:hidden; background:#fff; border:solid 1px #000;"></div>
+<br/><br/>
+<div id="node3" style="position:absolute; visibility:hidden; background:#fff; border:solid 1px #000;"></div>
+<br/><br/>
+
+<script type="text/javascript">
+
+var _nodeBlob = {blah:'node1',other:['node2',{spludge:'node3'}]};
+Uize.Node.setInnerHtml (_nodeBlob,'blah');
+Uize.Node.wire (
+	_nodeBlob,
+	{
+		mouseover:function () {this.style.background = '#f00'},
+		mouseout:function () {this.style.background = '#fff'},
+		click:function () {alert ('hello')}
+	}
+);
+Uize.Node.show (_nodeBlob);
+Uize.Node.showInLayoutFlow (_nodeBlob);
+
+</script>
+
+</body>
+</html>
+

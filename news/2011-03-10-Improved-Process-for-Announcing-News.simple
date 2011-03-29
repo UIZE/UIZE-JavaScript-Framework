@@ -1,0 +1,31 @@
+For developers of the UIZE JavaScript Framework, the process for adding news announcements has been improved and simplified, so that all that is required is to create a *.simple* file for a news item, and then the build process for the site will do the rest.
+
+New Build Process Responsibilities
+	With this change, the build process now automatically performs the following steps...
+
+	- automatically creates an index page of news items for each year for which there are news items
+
+	- updates the "NEWS" pod on the home page (this involves updating the heading for the pod to have the date of the most recent news item, incorporating a summary of the past 10 or so news items in the list, and linking each news item in the list to the corresponding page for the news item)
+
+	- generates the *latest-news.html* and *latest-news.rss* files, to have summaries for the past 50 or so news items, linked to the corresponding pages for the news items
+
+Benefits of This Change
+	This change provides the following benefits...
+
+	- A news page now exists for every single news item, thereby dealing with the issue in the past of news items sometimes not having URLs (or having the same URL as other news items, because the URL was of a module that changed and not the detailed description of the change), which was particularly problematic for the *latest-news.rss* RSS feed.
+
+	- A dedicated page for every news item means that now more pages with interesting content and less dilution of the content are visible to search engines, resulting in greater SEO value from making news announcements.
+
+	- It is longer necessary to manually update the *index.html* page. Sometimes, updating the date in the heading of the "NEWS" pod would get overlooked. Also, finding the intro paragraph for a news item in the *latest-news.html* page in order to copy its HTML to be pasted into the "NEWS" pod was irritating, and deleting the last item in the "NEWS" pod in order to keep its size down was irritating. All these steps associated with manually updating the *index.html* page have been eliminated.
+
+	- The items in the "NEWS" pod on the *index.html* page now all link to the more detailed explanation for the news items, whereas previously some don't even link and the only way to see the full text of a news item was to hunt for it in the *latest-news.html* file.
+
+	- Seeing the list of all news items for a year is now no longer quite as daunting, because the news index page looks like the index pages for the module references and the examples, so only a title and brief description is provided in the page for each news item, with the more detailed description for each news item in the dedicated separate pages.
+
+	- On transitioning to a new year, the seldom performed (and, therefore, easily forgotten) process of creating a new news archive for the year that has passed, and shuffling news items around across pages, is no longer necessary, since the index pages for news items are now automatically generated.
+
+........................................................
+<< metadata >>
+
+title: 2011-03-10 - Improved Process for Announcing News
+........................................................

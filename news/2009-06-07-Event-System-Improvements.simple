@@ -1,0 +1,67 @@
+The event system of the UIZE JavaScript Framework has been improved with `More Concisely Named Methods` and the addition of a `Dedicated Event Relay Facility`.
+
+More Concisely Named Methods
+	Various event management methods have been deprecated in favor of more versatile and more concisely named versions.
+
+	Instance Methods Deprecated
+		A number of instance methods of the =Uize= class have been deprecated.
+
+		................................................................
+		myInstance.addEventHandler      >> BECOMES >>  myInstance.wire
+		myInstance.addEventHandlers     >> BECOMES >>  myInstance.wire
+		myInstance.fireEvent            >> BECOMES >>  myInstance.fire
+		myInstance.removeEventHandler   >> BECOMES >>  myInstance.unwire
+		myInstance.removeEventHandlers  >> BECOMES >>  myInstance.unwire
+		................................................................
+
+		The single and multiple handler instance methods have been combined. So, both =addEventHandler= and =addEventHandlers= are replaced with just =wire=, which provides variations for both single handler and multiple handler usage. The same applies to the =removeEventHandler= and =removeEventHandlers= methods, which have both been replaced with just =unwire=. With this change, there are now three event management instance methods: =fire=, =wire=, and =unwire=.
+
+	Static Methods Deprecated
+		A number of static methods of the =Uize= class have been deprecated.
+
+		..........................................................
+		MyClass.addEventHandler      >> BECOMES >>  MyClass.wire
+		MyClass.addEventHandlers     >> BECOMES >>  MyClass.wire
+		MyClass.fireEvent            >> BECOMES >>  MyClass.fire
+		MyClass.removeEventHandler   >> BECOMES >>  MyClass.unwire
+		MyClass.removeEventHandlers  >> BECOMES >>  MyClass.unwire
+		..........................................................
+
+		The single and multiple handler static methods have been combined. So, both =Uize.addEventHandler= and =Uize.addEventHandlers= are replaced with just =Uize.wire=, which provides variations for both single handler and multiple handler usage. The same applies to the =Uize.removeEventHandler= and =Uize.removeEventHandlers= methods, which have both been replaced with just =Uize.unwire=. With this change, there are now three event management static methods: =Uize.fire=, =Uize.wire=, and =Uize.unwire=.
+
+	Deprecated Methods Still Supported
+		For backwards compatibility, the deprecated event management methods are still supported, and will be supported for some time into the future.
+
+		All existing code using the deprecated methods should continue to work as normal. It would be wise to progressively migrate code over to using the new methods.
+
+Dedicated Event Relay Facility
+	A dedicated facility has been added for relaying events from one class or instance to another.
+
+	To relay an event to a =Uize= subclass or an instance of a =Uize= subclass, simple specify a reference to the class or instance as the handler for the event you wish to relay, as shown in the example below.
+
+	INSTEAD OF...
+	....................................................
+	myWidget.wire (
+		'Some Crazy Event',
+		function (_event) {myWidget.parent.fire (_event)}
+	);
+	....................................................
+
+	USE...
+	...................................................
+	myWidget.wire ('Some Crazy Event',myWidget.parent);
+	...................................................
+
+	Object handlers added in this way can be removed by using the =unwire= instance method and the =Uize.unwire= static method, just as with any other type of handler, as in...
+
+	.....................................................
+	myWidget.unwire ('Some Crazy Event',myWidget.parent);
+	.....................................................
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-06-07 - Event System Improvements
+....................................................................................

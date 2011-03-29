@@ -1,0 +1,18 @@
+The =nextMonth=, =previousMonth=, =nextYear=, and =previousYear= instance methods of the =Uize.Widget.Calendar= class have been killed.
+
+This change is not backwards compatible. In the unlikely event that you would want to programmatically advance the month or year of a =Uize.Widget.Calendar= instance, you can easily do so by using the =set= and =get= instance methods, as in...
+
+......................................................................................
+myCalendar.nextMonth ()      ->  myCalendar.set ({month:myCalendar.get ('month') + 1})
+myCalendar.previousMonth ()  ->  myCalendar.set ({month:myCalendar.get ('month') - 1})
+myCalendar.nextYear ()       ->  myCalendar.set ({year:myCalendar.get ('year') + 1})
+myCalendar.previousYear ()   ->  myCalendar.set ({year:myCalendar.get ('year') - 1})
+......................................................................................
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-07-05 - UPDATED MODULE: Uize.Widget.Calendar
+....................................................................................

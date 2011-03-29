@@ -1,0 +1,13 @@
+Reference documentation has been added for the =Uize.Widget.Scrolly= module.
+
+The =Uize.Widget.Scrolly= module defines a widget class, that is a subclass of the =Uize.Widget= class, and that provides an animated scrolling behavior for the contents of a =view= implied node. It supports horizontal scrolling, vertical scrolling, or both horiztonal and vertical scrolling together in the same instance. User interface and programmatic means are provided for controlling the scroll position of an instance. And for the convenience of application code, a full complement of read-only set-get properties provides a state summary for scrolly instances.
+
+[[Uize.Widget.Scrolly][LEARN MORE]]
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2009-05-29 - NEW DOCUMENTATION: Uize.Widget.Scrolly
+....................................................................................

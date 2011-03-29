@@ -1,0 +1,1246 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Uize.Curve | Documentation | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework Documentation Uize.Curve module reference documentation"/>
+	<meta name="description" content="The Uize.Curve module provides a namespace and services for curve related modules, and provides a number of useful built-in curve function generators."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../javascript-modules-index.html" class="breadcrumb breadcrumbWithArrow">MODULES</a>
+	<a href="Uize.html" title="View reference for Uize" class="breadcrumb">Uize</a>.<a href="Uize.Curve.html" title="View reference for Uize.Curve" class="breadcrumb">Curve</a>
+	<div class="pageActions">
+		<a id="page-search" href="javascript://" class="buttonLink" title="Search for references to this module...">SEARCH</a><a id="page-examples" href="javascript://" class="buttonLink" title="View examples for this module...">EXAMPLES</a><a href="source-code/Uize.Curve.html" class="buttonLink" title="View the JavaScript source code for this module...">SOURCE</a><a id="page-test" href="javascript://" class="buttonLink" title="Test this module...">TEST</a>
+	</div>
+
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="The Uize.Curve module provides a namespace and services for curve related modules, and provides a number of useful built-in curve function generators.">1. Introduction</a>
+				<ul>
+					<li><a href="#1_1" title="The Uize.Curve module provides built-in curve function generators for power easing curves, &quot;sweetened&quot; power easing curves, sinusoidal easing curves, circular easing curves, exponential easing curves, and basic straight line curves.">1.1. In a Nutshell</a></li>
+					<li><a href="#1_2" title="The following example pages are good showcases for the Uize.Curve module...">1.2. Examples</a></li>
+					<li><a href="#1_3" title="The Uize.Curve module defines the Uize.Curve package under the Uize namespace.">1.3. Implementation Info</a>
+						<ul>
+							<li><a href="#1_3_1" title="The features listed in this section have been introduced in this module.">1.3.1. Features Introduced in This Module</a></li>
+							<li><a href="#1_3_2" title="No features have been overridden in this module.">1.3.2. Features Overridden in This Module</a></li>
+							<li><a href="#1_3_3" title="This module has no inherited features.">1.3.3. Features Inherited From Other Modules</a></li>
+							<li><a href="#1_3_4" title="Uize.Curve.Mod | Uize.Curve.Rubber">1.3.4. Modules Directly Under This Namespace</a></li>
+							<li><a href="#1_3_5" title="There is no dedicated unit tests module for the Uize.Curve module.">1.3.5. Unit Tests</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li><a href="#2">2. Static Methods</a>
+				<ul>
+					<li><a href="#2_1" title="Returns a floating point number, that is the blend between the two specified floating point numbers, using the specified blend amount.">2.1. Uize.Curve.blendFloats</a></li>
+					<li><a href="#2_2" title="Circular easing in - accelerating from zero velocity.">2.2. Uize.Curve.easeInCircular</a></li>
+					<li><a href="#2_3" title="Exponential easing in - accelerating from zero velocity.">2.3. Uize.Curve.easeInExpo</a></li>
+					<li><a href="#2_4" title="Circular easing in/out - acceleration until halfway, then deceleration.">2.4. Uize.Curve.easeInOutCircular</a></li>
+					<li><a href="#2_5" title="Exponential easing in/out - accelerating until halfway, then decelerating.">2.5. Uize.Curve.easeInOutExpo</a></li>
+					<li><a href="#2_6" title="Power easing in/out - acceleration until halfway, then deceleration, where the power can be specified.">2.6. Uize.Curve.easeInOutPow</a></li>
+					<li><a href="#2_7" title="Sinusoidal easing in/out - accelerating until halfway, then decelerating.">2.7. Uize.Curve.easeInOutSine</a></li>
+					<li><a href="#2_8" title="Sweetened power easing in/out - acceleration until halfway, then deceleration, where the power can be specified.">2.8. Uize.Curve.easeInOutSweetPow</a></li>
+					<li><a href="#2_9" title="Power easing in - accelerating from zero velocity, where the power can be specified.">2.9. Uize.Curve.easeInPow</a></li>
+					<li><a href="#2_10" title="Sinusoidal easing in - accelerating from zero velocity.">2.10. Uize.Curve.easeInSine</a></li>
+					<li><a href="#2_11" title="Sweetened power easing in - accelerating from zero velocity, where the power can be specified.">2.11. Uize.Curve.easeInSweetPow</a></li>
+					<li><a href="#2_12" title="Circular easing in the middle - deceleration until halfway, then acceleration.">2.12. Uize.Curve.easeMiddleCircular</a></li>
+					<li><a href="#2_13" title="Exponential easing in the middle - decelerating until halfway, then accelerating.">2.13. Uize.Curve.easeMiddleExpo</a></li>
+					<li><a href="#2_14" title="Power easing in the middle - deceleration until halfway, then acceleration, where the power can be specified.">2.14. Uize.Curve.easeMiddlePow</a></li>
+					<li><a href="#2_15" title="Sinusoidal easing in the middle - decelerating until halfway, then accelerating.">2.15. Uize.Curve.easeMiddleSine</a></li>
+					<li><a href="#2_16" title="Sweetened power easing in the middle - deceleration until halfway, then acceleration, where the power can be specified.">2.16. Uize.Curve.easeMiddleSweetPow</a></li>
+					<li><a href="#2_17" title="Circular easing out - decelerating to zero velocity.">2.17. Uize.Curve.easeOutCircular</a></li>
+					<li><a href="#2_18" title="Exponential easing out - decelerating to zero velocity.">2.18. Uize.Curve.easeOutExpo</a></li>
+					<li><a href="#2_19" title="Power easing out - decelerating to zero velocity, where the power can be specified.">2.19. Uize.Curve.easeOutPow</a></li>
+					<li><a href="#2_20" title="Sinusoidal easing out - decelerating to zero velocity.">2.20. Uize.Curve.easeOutSine</a></li>
+					<li><a href="#2_21" title="Sweetened power easing out - decelerating to zero velocity, where the power can be specified.">2.21. Uize.Curve.easeOutSweetPow</a></li>
+					<li><a href="#2_22" title="Returns a curve function, being a linear curve between the specified start and end values.">2.22. Uize.Curve.line</a></li>
+					<li><a href="#2_23" title="A simple linear curve function (ie. NOT a curve function generator) that merely returns the value that is passed into it.">2.23. Uize.Curve.linear</a></li>
+					<li><a href="#2_24" title="Return a blender function, that will use the specified curve function when blending between two values.">2.24. Uize.Curve.makeBlender</a></li>
+					<li><a href="#2_25" title="Returns an ease-in-out curve function, that uses the specified ease-in curve function to produce a two phase curve that has an ease-in phase followed by an ease-out phase.">2.25. Uize.Curve.makeEaseInOut</a></li>
+					<li><a href="#2_26" title="Returns an ease-in-the-middle curve function, that uses the specified ease-in curve function to produce a two phase curve that has an ease-out phase followed by an ease-in phase.">2.26. Uize.Curve.makeEaseMiddle</a></li>
+					<li><a href="#2_27" title="Returns an ease-out curve function, that is the 180 degree rotated version of the specified ease-in curve function.">2.27. Uize.Curve.makeEaseOut</a></li>
+					<li><a href="#2_28" title="Makes static methods for generating an ease-in curve function, ease-out curve function, ease-in-out curve function, and ease-in-the-middle curve function, using the specified ease-in curve function generator.">2.28. Uize.Curve.makeEasingCurveGenerators</a>
+						<ul>
+							<li><a href="#2_28_1" title="The Uize.Curve.makeEasingCurveGenerators method supports the following parameters...">2.28.1. Parameters</a>
+								<ul>
+									<li><a href="#2_28_1_1" title="A string, specifying the suffix of the method names for the four static methods that are created.">2.28.1.1. methodNameSuffixSTR</a></li>
+									<li><a href="#2_28_1_2" title="A function, being the curve function generator for the ease-in curve function from which you would like to derive the ease-in, ease-out, ease-in-out, and ease-middle curve function generator static methods.">2.28.1.2. easeInCurveGeneratorFUNC</a></li>
+									<li><a href="#2_28_1_3" title="An object, specifying the context for the curve function generators.">2.28.1.3. contextOBJ</a></li>
+								</ul>
+							</li>
+							<li><a href="#2_28_2" title="The following examples illustrate different uses of the Uize.Curve.makeEasingCurveGenerators method...">2.28.2. Examples</a></li>
+							<li><a href="#2_28_3" title="As an optimization, the Uize.Curve.makeEasingCurveGenerators method caches the results of the paramless calls to the curve functions generators that it creates.">2.28.3. Caching of Paramless Versions</a></li>
+						</ul>
+					</li>
+					<li><a href="#2_29" title="Resolves the specified curve function or power curve value to a curve function and returns it.">2.29. Uize.Curve.resolve</a>
+						<ul>
+							<li><a href="#2_29_1" title="The Uize.Curve.resolve method supports the following parameters...">2.29.1. Parameters</a>
+								<ul>
+									<li><a href="#2_29_1_1" title="A curve function, or a number that should be used to generate a power curve function.">2.29.1.1. curveFUNCorFLOAT</a></li>
+									<li><a href="#2_29_1_2" title="A curve function, or a number that should be used to generate a power curve function, that should be used as the default curve if the value null or undefined is specified for the curveFUNCorFLOAT parameter.">2.29.1.2. defaultCurveFUNCorFLOAT</a></li>
+									<li><a href="#2_29_1_3" title="A boolean, specifying whether or not the &quot;sweetened&quot; versions of the power curve functions should be used when a number is specified for the curveFUNCorFLOAT parameter.">2.29.1.3. sweetBOOL</a></li>
+									<li><a href="#2_29_1_4" title="An integer, specifying whether or not numerical values for the curveFUNCorFLOAT parameter should be negated (ie. multiplied by -1).">2.29.1.4. polarityINT</a></li>
+								</ul>
+							</li>
+							<li><a href="#2_29_2" title="VARIATION 1">2.29.2. Variations</a></li>
+						</ul>
+					</li>
+					<li><a href="#2_30" title="Returns a sawtooth curve function, where the number of teeth and the amount of the sawtooth effect can be specified.">2.30. Uize.Curve.saw</a></li>
+				</ul>
+			</li>
+			<li><a href="#3">3. Static Properties</a>
+				<ul>
+					<li><a href="#3_1" title="IMPLEMENTATION INFO">3.1. Uize.Curve.moduleName</a></li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<a name="1"></a>
+	<h1 class="heading1" title="1. Introduction"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>. </span>Introduction</h1>
+	<div class="contents1">
+		<p>The <code>Uize.Curve</code> module provides a namespace and services for curve related modules, and provides a number of useful built-in curve function generators.</p>
+		
+		<p><b>DEVELOPERS:</b> <a href="http://www.tomkidding.com" target="_blank" class="externalSiteLink">Chris van Rensburg</a>, with thanks to <a href="http://www.robertpenner.com" target="_blank" class="externalSiteLink">Robert Penner</a> for his easing equations work</p>
+		
+		<p>The <code>Uize.Curve</code> module defines a namespace for other curve related modules (such as the <code><a href="../reference/Uize.Curve.Rubber.html">Uize.Curve.Rubber</a></code> and <code><a href="../reference/Uize.Curve.Mod.html">Uize.Curve.Mod</a></code> modules), that provides some basic services that are useful for creating such curve related modules, and that also provides a number of the more commonly used curve function generators as built-ins.</p>
+		
+		<a name="1_1"></a>
+		<h2 class="heading2" title="1. Introduction -&gt; 1.1. In a Nutshell"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. In a Nutshell">1</a>. </span>In a Nutshell</h2>
+		<div class="contents2">
+			<p>The <code>Uize.Curve</code> module provides built-in curve function generators for power easing curves, "sweetened" power easing curves, sinusoidal easing curves, circular easing curves, exponential easing curves, and basic straight line curves.</p>
+			
+			<p>This module also provides curve function modifiers for making ease-out, ease-in-out, and ease-in-the-middle curve functions from ease-in curve functions, as well as a method for making ease-in, ease-out, ease-in-out, and ease-in-the-middle curve function generators from an ease-in curve function generator. Finally, miscellaneous services are provided that are useful for other curve related modules, such as the <code><a href="#2_23">Uize.Curve.linear</a></code> curve function, <code><a href="#2_29">Uize.Curve.resolve</a></code> static method, etc.</p>
+			
+			<p><span class="allCaps">BACKGROUND READING</span></p>
+			
+			<p>For an in-depth discussion on animation in the UIZE JavaScript Framework, and for a discussion on how this module fits into the larger picture, consult the explainer <a href="../explainers/javascript-animation-and-effects.html">JavaScript Animation and Effects</a> and read through the section Curves.</p>
+		</div>
+		
+		<a name="1_2"></a>
+		<h2 class="heading2" title="1. Introduction -&gt; 1.2. Examples"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Examples">2</a>. </span>Examples</h2>
+		<div class="contents2">
+			<p>The following example pages are good showcases for the <code>Uize.Curve</code> module...</p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><a href="../examples/curve-explorer.html">Curve Explorer</a> - Add pizazz to JavaScript animations - bounce, easing, elasticity, and more. Visualize and experiment with preset curve functions. Or create your own!</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><a href="../examples/fade-css-style-across-nodes.html">Fade CSS Style Across Nodes</a> - See how CSS style properties can be faded across a series of nodes to create color gradient effects you wouldn't think possible without using images.</td></tr>
+			</table>
+			<p><span class="allCaps">SEARCH FOR EXAMPLES</span></p>
+			
+			<p>Use the link below to search for example pages on the <b>uize.com</b> Web site that reference the <code>Uize.Curve</code> module...</p>
+			
+			<p><a href="http://www.google.com/search?hl=en&safe=off&domains=uize.com%2Fexamples&sitesearch=uize.com%2Fexamples&q=%22Uize.Curve%22" target="_blank" class="externalSiteLink">SEARCH</a></p>
+		</div>
+		
+		<a name="1_3"></a>
+		<h2 class="heading2" title="1. Introduction -&gt; 1.3. Implementation Info"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_3" title="1. Introduction -&gt; 1.3. Implementation Info">3</a>. </span>Implementation Info</h2>
+		<div class="contents2">
+			<p>The <code>Uize.Curve</code> module defines the <code>Uize.Curve</code> package under the <code><a href="../reference/Uize.html">Uize</a></code> namespace.</p>
+			
+			<a name="1_3_1"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.3. Implementation Info -&gt; 1.3.1. Features Introduced in This Module"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_3" title="1. Introduction -&gt; 1.3. Implementation Info">3</a>.<a href="#1_3_1" title="1. Introduction -&gt; 1.3. Implementation Info -&gt; 1.3.1. Features Introduced in This Module">1</a>. </span>Features Introduced in This Module</h3>
+			<div class="contents3">
+				<p>The features listed in this section have been introduced in this module.</p>
+				
+				<p><span class="allCaps">STATIC METHODS</span></p>
+				
+				<p><code><a href="#2_1">Uize.Curve.blendFloats</a></code> | <code><a href="#2_2">Uize.Curve.easeInCircular</a></code> | <code><a href="#2_3">Uize.Curve.easeInExpo</a></code> | <code><a href="#2_4">Uize.Curve.easeInOutCircular</a></code> | <code><a href="#2_5">Uize.Curve.easeInOutExpo</a></code> | <code><a href="#2_6">Uize.Curve.easeInOutPow</a></code> | <code><a href="#2_7">Uize.Curve.easeInOutSine</a></code> | <code><a href="#2_8">Uize.Curve.easeInOutSweetPow</a></code> | <code><a href="#2_9">Uize.Curve.easeInPow</a></code> | <code><a href="#2_10">Uize.Curve.easeInSine</a></code> | <code><a href="#2_11">Uize.Curve.easeInSweetPow</a></code> | <code><a href="#2_12">Uize.Curve.easeMiddleCircular</a></code> | <code><a href="#2_13">Uize.Curve.easeMiddleExpo</a></code> | <code><a href="#2_14">Uize.Curve.easeMiddlePow</a></code> | <code><a href="#2_15">Uize.Curve.easeMiddleSine</a></code> | <code><a href="#2_16">Uize.Curve.easeMiddleSweetPow</a></code> | <code><a href="#2_17">Uize.Curve.easeOutCircular</a></code> | <code><a href="#2_18">Uize.Curve.easeOutExpo</a></code> | <code><a href="#2_19">Uize.Curve.easeOutPow</a></code> | <code><a href="#2_20">Uize.Curve.easeOutSine</a></code> | <code><a href="#2_21">Uize.Curve.easeOutSweetPow</a></code> | <code><a href="#2_22">Uize.Curve.line</a></code> | <code><a href="#2_23">Uize.Curve.linear</a></code> | <code><a href="#2_24">Uize.Curve.makeBlender</a></code> | <code><a href="#2_25">Uize.Curve.makeEaseInOut</a></code> | <code><a href="#2_26">Uize.Curve.makeEaseMiddle</a></code> | <code><a href="#2_27">Uize.Curve.makeEaseOut</a></code> | <code><a href="#2_28">Uize.Curve.makeEasingCurveGenerators</a></code> | <code><a href="#2_29">Uize.Curve.resolve</a></code> | <code><a href="#2_30">Uize.Curve.saw</a></code></p>
+				
+				<p><span class="allCaps">STATIC PROPERTIES</span></p>
+				
+				<p><code><a href="#3_1">Uize.Curve.moduleName</a></code></p>
+			</div>
+			
+			<a name="1_3_2"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.3. Implementation Info -&gt; 1.3.2. Features Overridden in This Module"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_3" title="1. Introduction -&gt; 1.3. Implementation Info">3</a>.<a href="#1_3_2" title="1. Introduction -&gt; 1.3. Implementation Info -&gt; 1.3.2. Features Overridden in This Module">2</a>. </span>Features Overridden in This Module</h3>
+			<div class="contents3">
+				<p>No features have been overridden in this module.</p>
+			</div>
+			
+			<a name="1_3_3"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.3. Implementation Info -&gt; 1.3.3. Features Inherited From Other Modules"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_3" title="1. Introduction -&gt; 1.3. Implementation Info">3</a>.<a href="#1_3_3" title="1. Introduction -&gt; 1.3. Implementation Info -&gt; 1.3.3. Features Inherited From Other Modules">3</a>. </span>Features Inherited From Other Modules</h3>
+			<div class="contents3">
+				<p>This module has no inherited features.</p>
+			</div>
+			
+			<a name="1_3_4"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.3. Implementation Info -&gt; 1.3.4. Modules Directly Under This Namespace"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_3" title="1. Introduction -&gt; 1.3. Implementation Info">3</a>.<a href="#1_3_4" title="1. Introduction -&gt; 1.3. Implementation Info -&gt; 1.3.4. Modules Directly Under This Namespace">4</a>. </span>Modules Directly Under This Namespace</h3>
+			<div class="contents3">
+				<p><code><a href="../reference/Uize.Curve.Mod.html">Uize.Curve.Mod</a></code> | <code><a href="../reference/Uize.Curve.Rubber.html">Uize.Curve.Rubber</a></code></p>
+			</div>
+			
+			<a name="1_3_5"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.3. Implementation Info -&gt; 1.3.5. Unit Tests"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_3" title="1. Introduction -&gt; 1.3. Implementation Info">3</a>.<a href="#1_3_5" title="1. Introduction -&gt; 1.3. Implementation Info -&gt; 1.3.5. Unit Tests">5</a>. </span>Unit Tests</h3>
+			<div class="contents3">
+				<p>There is no dedicated unit tests module for the <code>Uize.Curve</code> module.</p>
+			</div>
+		</div>
+	</div>
+	
+	<a name="2"></a>
+	<h1 class="heading1" title="2. Static Methods"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>. </span>Static Methods</h1>
+	<div class="contents1">
+		<a name="2_1"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.1. Uize.Curve.blendFloats"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_1" title="2. Static Methods -&gt; 2.1. Uize.Curve.blendFloats">1</a>. </span>Uize.Curve.blendFloats</h2>
+		<div class="contents2">
+			<p>Returns a floating point number, that is the blend between the two specified floating point numbers, using the specified blend amount.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">blendedFLOAT = Uize.Curve.blendFloats (value1FLOAT,value2FLOAT,blend0to1FLOAT);
+</pre>
+			
+			<p>When the value <code>0</code> is specified for the <code>blend0to1FLOAT</code> parameter, the value of the <code>value1FLOAT</code> parameter will be returned. When the value <code>1</code> is specified for <code>blend0to1FLOAT</code>, then the value of <code>value2FLOAT</code> will be returned. And when the value <code>.5</code> is specified for <code>blend0to1FLOAT</code>, then the returned value will be an equal blend between the values of <code>value1FLOAT</code> and <code>value2FLOAT</code>. The blend between the values of <code>value1FLOAT</code> and <code>value2FLOAT</code>, as specified by the <code>blend0to1FLOAT</code> parameter, is a simple linear interpolation.</p>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#2_24">Uize.Curve.makeBlender</a></code> static method</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_2"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.2. Uize.Curve.easeInCircular"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_2" title="2. Static Methods -&gt; 2.2. Uize.Curve.easeInCircular">2</a>. </span>Uize.Curve.easeInCircular</h2>
+		<div class="contents2">
+			<p>Circular easing in - accelerating from zero velocity.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">curveFUNC = Uize.Curve.easeInCircular ();
+</pre>
+			
+			<p><span class="allCaps">VARIATION</span></p>
+			
+			
+<pre class="sample-code">curveFUNC = Uize.Curve.easeInCircular (powerFLOAT);
+</pre>
+			
+			<p>When the optional <code>powerFLOAT</code> parameter is specified, a curve function can be generated that is not perfectly circular but still has the property of being symmetrical with respect to the diagonal that runs from bottom left to top right. When the <code>powerFLOAT</code> parameter is not specified, the value <code>2</code> is used as its default. Values higher than <code>2</code> will produce curves that bend down towards the bottom right corner, and positive values lower than <code>2</code> will produce curves that bend upwards towards the top left corner (<code>0</code> being the most extreme). The value <code>1</code> will produce a linear curve, and values between <code>1</code> and <code>2</code> will produce curves that are between perfectly linear and perfectly circular.</p>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the companion <code><a href="#2_17">Uize.Curve.easeOutCircular</a></code>, <code><a href="#2_4">Uize.Curve.easeInOutCircular</a></code>, and <code><a href="#2_12">Uize.Curve.easeMiddleCircular</a></code> static methods</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>thanks to <a href="http://www.robertpenner.com" target="_blank" class="externalSiteLink">Robert Penner</a> for his original implementation</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_3"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.3. Uize.Curve.easeInExpo"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_3" title="2. Static Methods -&gt; 2.3. Uize.Curve.easeInExpo">3</a>. </span>Uize.Curve.easeInExpo</h2>
+		<div class="contents2">
+			<p>Exponential easing in - accelerating from zero velocity.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">curveFUNC = Uize.Curve.easeInExpo ();
+</pre>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the companion <code><a href="#2_18">Uize.Curve.easeOutExpo</a></code>, <code><a href="#2_5">Uize.Curve.easeInOutExpo</a></code>, and <code><a href="#2_13">Uize.Curve.easeMiddleExpo</a></code> static methods</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>thanks to <a href="http://www.robertpenner.com" target="_blank" class="externalSiteLink">Robert Penner</a> for his original implementation</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_4"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.4. Uize.Curve.easeInOutCircular"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_4" title="2. Static Methods -&gt; 2.4. Uize.Curve.easeInOutCircular">4</a>. </span>Uize.Curve.easeInOutCircular</h2>
+		<div class="contents2">
+			<p>Circular easing in/out - acceleration until halfway, then deceleration.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">curveFUNC = Uize.Curve.easeInOutCircular ();
+</pre>
+			
+			<p><span class="allCaps">VARIATION</span></p>
+			
+			
+<pre class="sample-code">curveFUNC = Uize.Curve.easeInOutCircular (powerFLOAT);
+</pre>
+			
+			<p>When the optional <code>powerFLOAT</code> parameter is specified, a curve function can be generated that is not perfectly circular but still has the property of being symmetrical with respect to the diagonal that runs from bottom left to top right. When the <code>powerFLOAT</code> parameter is not specified, the value <code>2</code> is used as its default. Values higher than <code>2</code> and positive values lower than <code>2</code> will produce curves that bend more extremely towards the corners. The value <code>1</code> will produce a linear curve, and values between <code>1</code> and <code>2</code> will produce curves that are between perfectly linear and perfectly circular.</p>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the companion <code><a href="#2_2">Uize.Curve.easeInCircular</a></code>, <code><a href="#2_2">Uize.Curve.easeInCircular</a></code>, and <code><a href="#2_12">Uize.Curve.easeMiddleCircular</a></code> static methods</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>thanks to <a href="http://www.robertpenner.com" target="_blank" class="externalSiteLink">Robert Penner</a> for his original implementation</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_5"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.5. Uize.Curve.easeInOutExpo"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_5" title="2. Static Methods -&gt; 2.5. Uize.Curve.easeInOutExpo">5</a>. </span>Uize.Curve.easeInOutExpo</h2>
+		<div class="contents2">
+			<p>Exponential easing in/out - accelerating until halfway, then decelerating.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">curveFUNC = Uize.Curve.easeInOutExpo ();
+</pre>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the companion <code><a href="#2_3">Uize.Curve.easeInExpo</a></code>, <code><a href="#2_18">Uize.Curve.easeOutExpo</a></code>, and <code><a href="#2_13">Uize.Curve.easeMiddleExpo</a></code> static methods</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>thanks to <a href="http://www.robertpenner.com" target="_blank" class="externalSiteLink">Robert Penner</a> for his original implementation</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_6"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.6. Uize.Curve.easeInOutPow"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_6" title="2. Static Methods -&gt; 2.6. Uize.Curve.easeInOutPow">6</a>. </span>Uize.Curve.easeInOutPow</h2>
+		<div class="contents2">
+			<p>Power easing in/out - acceleration until halfway, then deceleration, where the power can be specified.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">curveFUNC = Uize.Curve.easeInOutPow (powerFLOAT);
+</pre>
+			
+			<p>This method returns optimized curve functions for the powers <code>.5</code> (square root), <code>1</code> (linear), <code>2</code> (squared / quadratic), <code>3</code> (cubic), <code>4</code> (quartic), and <code>5</code> (quintic).</p>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#2_8">Uize.Curve.easeInOutSweetPow</a></code> curve function generator</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the companion <code><a href="#2_9">Uize.Curve.easeInPow</a></code>, <code><a href="#2_19">Uize.Curve.easeOutPow</a></code>, and <code><a href="#2_14">Uize.Curve.easeMiddlePow</a></code> static methods</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_7"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.7. Uize.Curve.easeInOutSine"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_7" title="2. Static Methods -&gt; 2.7. Uize.Curve.easeInOutSine">7</a>. </span>Uize.Curve.easeInOutSine</h2>
+		<div class="contents2">
+			<p>Sinusoidal easing in/out - accelerating until halfway, then decelerating.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">curveFUNC = Uize.Curve.easeInOutSine ();
+</pre>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the companion <code><a href="#2_10">Uize.Curve.easeInSine</a></code>, <code><a href="#2_20">Uize.Curve.easeOutSine</a></code>, and <code><a href="#2_15">Uize.Curve.easeMiddleSine</a></code> static methods</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>thanks to <a href="http://www.robertpenner.com" target="_blank" class="externalSiteLink">Robert Penner</a> for his original implementation</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_8"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.8. Uize.Curve.easeInOutSweetPow"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_8" title="2. Static Methods -&gt; 2.8. Uize.Curve.easeInOutSweetPow">8</a>. </span>Uize.Curve.easeInOutSweetPow</h2>
+		<div class="contents2">
+			<p>Sweetened power easing in/out - acceleration until halfway, then deceleration, where the power can be specified.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">curveFUNC = Uize.Curve.easeInOutSweetPow (powerFLOAT);
+</pre>
+			
+			<p>A standard power curve is "sweetened" by blending it equally with the 180 degree rotated version of its corresponding inverse power curve, producing a curve that is closer to being circular.</p>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#2_6">Uize.Curve.easeInOutPow</a></code> curve function generator</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the companion <code><a href="#2_11">Uize.Curve.easeInSweetPow</a></code>, <code><a href="#2_21">Uize.Curve.easeOutSweetPow</a></code>, and <code><a href="#2_16">Uize.Curve.easeMiddleSweetPow</a></code> static methods</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_9"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.9. Uize.Curve.easeInPow"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_9" title="2. Static Methods -&gt; 2.9. Uize.Curve.easeInPow">9</a>. </span>Uize.Curve.easeInPow</h2>
+		<div class="contents2">
+			<p>Power easing in - accelerating from zero velocity, where the power can be specified.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">curveFUNC = Uize.Curve.easeInPow (powerFLOAT);
+</pre>
+			
+			<p>This method returns optimized curve functions for the powers <code>.5</code> (square root), <code>1</code> (linear), <code>2</code> (squared / quadratic), <code>3</code> (cubic), <code>4</code> (quartic), and <code>5</code> (quintic).</p>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#2_11">Uize.Curve.easeInSweetPow</a></code> curve function generator</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the companion <code><a href="#2_19">Uize.Curve.easeOutPow</a></code>, <code><a href="#2_6">Uize.Curve.easeInOutPow</a></code>, and <code><a href="#2_14">Uize.Curve.easeMiddlePow</a></code> static methods</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_10"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.10. Uize.Curve.easeInSine"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_10" title="2. Static Methods -&gt; 2.10. Uize.Curve.easeInSine">10</a>. </span>Uize.Curve.easeInSine</h2>
+		<div class="contents2">
+			<p>Sinusoidal easing in - accelerating from zero velocity.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">curveFUNC = Uize.Curve.easeInSine ();
+</pre>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the companion <code><a href="#2_20">Uize.Curve.easeOutSine</a></code>, <code><a href="#2_7">Uize.Curve.easeInOutSine</a></code>, and <code><a href="#2_15">Uize.Curve.easeMiddleSine</a></code> static methods</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>thanks to <a href="http://www.robertpenner.com" target="_blank" class="externalSiteLink">Robert Penner</a> for his original implementation</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_11"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.11. Uize.Curve.easeInSweetPow"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_11" title="2. Static Methods -&gt; 2.11. Uize.Curve.easeInSweetPow">11</a>. </span>Uize.Curve.easeInSweetPow</h2>
+		<div class="contents2">
+			<p>Sweetened power easing in - accelerating from zero velocity, where the power can be specified.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">curveFUNC = Uize.Curve.easeInSweetPow (powerFLOAT);
+</pre>
+			
+			<p>A standard power curve is "sweetened" by blending it equally with the 180 degree rotated version of its corresponding inverse power curve, producing a curve that is closer to being circular.</p>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#2_9">Uize.Curve.easeInPow</a></code> curve function generator</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the companion <code><a href="#2_21">Uize.Curve.easeOutSweetPow</a></code>, <code><a href="#2_8">Uize.Curve.easeInOutSweetPow</a></code>, and <code><a href="#2_16">Uize.Curve.easeMiddleSweetPow</a></code> static methods</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_12"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.12. Uize.Curve.easeMiddleCircular"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_12" title="2. Static Methods -&gt; 2.12. Uize.Curve.easeMiddleCircular">12</a>. </span>Uize.Curve.easeMiddleCircular</h2>
+		<div class="contents2">
+			<p>Circular easing in the middle - deceleration until halfway, then acceleration.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">curveFUNC = Uize.Curve.easeMiddleCircular ();
+</pre>
+			
+			<p><span class="allCaps">VARIATION</span></p>
+			
+			
+<pre class="sample-code">curveFUNC = Uize.Curve.easeMiddleCircular (powerFLOAT);
+</pre>
+			
+			<p>When the optional <code>powerFLOAT</code> parameter is specified, a curve function can be generated that is not perfectly circular but still has the property of being symmetrical with respect to the diagonal that runs from bottom left to top right. When the <code>powerFLOAT</code> parameter is not specified, the value <code>2</code> is used as its default. Values higher than <code>2</code> and positive values lower than <code>2</code> will produce curves that bend more extremely towards the corners. The value <code>1</code> will produce a linear curve, and values between <code>1</code> and <code>2</code> will produce curves that are between perfectly linear and perfectly circular.</p>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the companion <code><a href="#2_2">Uize.Curve.easeInCircular</a></code>, <code><a href="#2_17">Uize.Curve.easeOutCircular</a></code>, and <code><a href="#2_4">Uize.Curve.easeInOutCircular</a></code> static methods</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>thanks to <a href="http://www.robertpenner.com" target="_blank" class="externalSiteLink">Robert Penner</a> for his original implementation</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_13"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.13. Uize.Curve.easeMiddleExpo"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_13" title="2. Static Methods -&gt; 2.13. Uize.Curve.easeMiddleExpo">13</a>. </span>Uize.Curve.easeMiddleExpo</h2>
+		<div class="contents2">
+			<p>Exponential easing in the middle - decelerating until halfway, then accelerating.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">curveFUNC = Uize.Curve.easeMiddleExpo ();
+</pre>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the companion <code><a href="#2_3">Uize.Curve.easeInExpo</a></code>, <code><a href="#2_18">Uize.Curve.easeOutExpo</a></code>, and <code><a href="#2_5">Uize.Curve.easeInOutExpo</a></code> static methods</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>thanks to <a href="http://www.robertpenner.com" target="_blank" class="externalSiteLink">Robert Penner</a> for his original implementation</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_14"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.14. Uize.Curve.easeMiddlePow"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_14" title="2. Static Methods -&gt; 2.14. Uize.Curve.easeMiddlePow">14</a>. </span>Uize.Curve.easeMiddlePow</h2>
+		<div class="contents2">
+			<p>Power easing in the middle - deceleration until halfway, then acceleration, where the power can be specified.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">curveFUNC = Uize.Curve.easeMiddlePow (powerFLOAT);
+</pre>
+			
+			<p>This method returns optimized curve functions for the powers <code>.5</code> (square root), <code>1</code> (linear), <code>2</code> (squared / quadratic), <code>3</code> (cubic), <code>4</code> (quartic), and <code>5</code> (quintic).</p>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#2_16">Uize.Curve.easeMiddleSweetPow</a></code> curve function generator</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the companion <code><a href="#2_9">Uize.Curve.easeInPow</a></code>, <code><a href="#2_19">Uize.Curve.easeOutPow</a></code>, and <code><a href="#2_6">Uize.Curve.easeInOutPow</a></code> static methods</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_15"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.15. Uize.Curve.easeMiddleSine"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_15" title="2. Static Methods -&gt; 2.15. Uize.Curve.easeMiddleSine">15</a>. </span>Uize.Curve.easeMiddleSine</h2>
+		<div class="contents2">
+			<p>Sinusoidal easing in the middle - decelerating until halfway, then accelerating.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">curveFUNC = Uize.Curve.easeMiddleSine ();
+</pre>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the companion <code><a href="#2_10">Uize.Curve.easeInSine</a></code>, <code><a href="#2_20">Uize.Curve.easeOutSine</a></code>, and <code><a href="#2_7">Uize.Curve.easeInOutSine</a></code> static methods</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>thanks to <a href="http://www.robertpenner.com" target="_blank" class="externalSiteLink">Robert Penner</a> for his original implementation</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_16"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.16. Uize.Curve.easeMiddleSweetPow"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_16" title="2. Static Methods -&gt; 2.16. Uize.Curve.easeMiddleSweetPow">16</a>. </span>Uize.Curve.easeMiddleSweetPow</h2>
+		<div class="contents2">
+			<p>Sweetened power easing in the middle - deceleration until halfway, then acceleration, where the power can be specified.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">curveFUNC = Uize.Curve.easeMiddleSweetPow (powerFLOAT);
+</pre>
+			
+			<p>A standard power curve is "sweetened" by blending it equally with the 180 degree rotated version of its corresponding inverse power curve, producing a curve that is closer to being circular.</p>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#2_14">Uize.Curve.easeMiddlePow</a></code> curve function generator</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the companion <code><a href="#2_11">Uize.Curve.easeInSweetPow</a></code>, <code><a href="#2_21">Uize.Curve.easeOutSweetPow</a></code>, and <code><a href="#2_8">Uize.Curve.easeInOutSweetPow</a></code> static methods</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_17"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.17. Uize.Curve.easeOutCircular"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_17" title="2. Static Methods -&gt; 2.17. Uize.Curve.easeOutCircular">17</a>. </span>Uize.Curve.easeOutCircular</h2>
+		<div class="contents2">
+			<p>Circular easing out - decelerating to zero velocity.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">curveFUNC = Uize.Curve.easeOutCircular ();
+</pre>
+			
+			<p><span class="allCaps">VARIATION</span></p>
+			
+			
+<pre class="sample-code">curveFUNC = Uize.Curve.easeOutCircular (powerFLOAT);
+</pre>
+			
+			<p>When the optional <code>powerFLOAT</code> parameter is specified, a curve function can be generated that is not perfectly circular but still has the property of being symmetrical with respect to the diagonal that runs from bottom left to top right. When the <code>powerFLOAT</code> parameter is not specified, the value <code>2</code> is used as its default. Values higher than <code>2</code> will produce curves that bend upwards towards the top left corner, and positive values lower than <code>2</code> will produce curves that bend downwards towards the bottom right corner (<code>0</code> being the most extreme). The value <code>1</code> will produce a linear curve, and values between <code>1</code> and <code>2</code> will produce curves that are between perfectly linear and perfectly circular.</p>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the companion <code><a href="#2_2">Uize.Curve.easeInCircular</a></code>, <code><a href="#2_4">Uize.Curve.easeInOutCircular</a></code>, and <code><a href="#2_12">Uize.Curve.easeMiddleCircular</a></code> static methods</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>thanks to <a href="http://www.robertpenner.com" target="_blank" class="externalSiteLink">Robert Penner</a> for his original implementation</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_18"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.18. Uize.Curve.easeOutExpo"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_18" title="2. Static Methods -&gt; 2.18. Uize.Curve.easeOutExpo">18</a>. </span>Uize.Curve.easeOutExpo</h2>
+		<div class="contents2">
+			<p>Exponential easing out - decelerating to zero velocity.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">curveFUNC = Uize.Curve.easeOutExpo ();
+</pre>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the companion <code><a href="#2_3">Uize.Curve.easeInExpo</a></code>, <code><a href="#2_5">Uize.Curve.easeInOutExpo</a></code>, and <code><a href="#2_13">Uize.Curve.easeMiddleExpo</a></code> static methods</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>thanks to <a href="http://www.robertpenner.com" target="_blank" class="externalSiteLink">Robert Penner</a> for his original implementation</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_19"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.19. Uize.Curve.easeOutPow"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_19" title="2. Static Methods -&gt; 2.19. Uize.Curve.easeOutPow">19</a>. </span>Uize.Curve.easeOutPow</h2>
+		<div class="contents2">
+			<p>Power easing out - decelerating to zero velocity, where the power can be specified.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">curveFUNC = Uize.Curve.easeOutPow (powerFLOAT);
+</pre>
+			
+			<p>This method returns optimized curve functions for the powers <code>.5</code> (square root), <code>1</code> (linear), <code>2</code> (squared / quadratic), <code>3</code> (cubic), <code>4</code> (quartic), and <code>5</code> (quintic).</p>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#2_21">Uize.Curve.easeOutSweetPow</a></code> curve function generator</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the companion <code><a href="#2_9">Uize.Curve.easeInPow</a></code>, <code><a href="#2_6">Uize.Curve.easeInOutPow</a></code>, and <code><a href="#2_14">Uize.Curve.easeMiddlePow</a></code> static methods</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_20"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.20. Uize.Curve.easeOutSine"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_20" title="2. Static Methods -&gt; 2.20. Uize.Curve.easeOutSine">20</a>. </span>Uize.Curve.easeOutSine</h2>
+		<div class="contents2">
+			<p>Sinusoidal easing out - decelerating to zero velocity.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">curveFUNC = Uize.Curve.easeOutSine ();
+</pre>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the companion <code><a href="#2_10">Uize.Curve.easeInSine</a></code>, <code><a href="#2_7">Uize.Curve.easeInOutSine</a></code>, and <code><a href="#2_15">Uize.Curve.easeMiddleSine</a></code> static methods</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>thanks to <a href="http://www.robertpenner.com" target="_blank" class="externalSiteLink">Robert Penner</a> for his original implementation</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_21"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.21. Uize.Curve.easeOutSweetPow"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_21" title="2. Static Methods -&gt; 2.21. Uize.Curve.easeOutSweetPow">21</a>. </span>Uize.Curve.easeOutSweetPow</h2>
+		<div class="contents2">
+			<p>Sweetened power easing out - decelerating to zero velocity, where the power can be specified.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">curveFUNC = Uize.Curve.easeOutSweetPow (powerFLOAT);
+</pre>
+			
+			<p>A standard power curve is "sweetened" by blending it equally with the 180 degree rotated version of its corresponding inverse power curve, producing a curve that is closer to being circular.</p>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#2_19">Uize.Curve.easeOutPow</a></code> curve function generator</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the companion <code><a href="#2_11">Uize.Curve.easeInSweetPow</a></code>, <code><a href="#2_8">Uize.Curve.easeInOutSweetPow</a></code>, and <code><a href="#2_16">Uize.Curve.easeMiddleSweetPow</a></code> static methods</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_22"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.22. Uize.Curve.line"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_22" title="2. Static Methods -&gt; 2.22. Uize.Curve.line">22</a>. </span>Uize.Curve.line</h2>
+		<div class="contents2">
+			<p>Returns a curve function, being a linear curve between the specified start and end values.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">curveFUNC = Uize.Curve.line (startValue0to1FLOAT,endValue0to1FLOAT);
+</pre>
+			
+			<p>This method allows you to create curve functions that don't observe the Start At 0, End At 1 rule of curve functions, so it is not always appropriate for use in controlling fades. This method is more useful for creating value ranges that can be supplied to curve function modifiers that accept value ranges for parameters. Consider the following example of using the <code>Uize.Curve.Mod.blend</code> static method...</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">Uize.Curve.Mod.blend (
+  Uize.Curve.easeOutPow (4),  // ease-out power curve function
+  Uize.Curve.saw (20,.5),     // sawtooth curve function with 20 teeth
+  Uize.Curve.line (.25,.75)   // line starting at .25 and ending at .75
+)
+</pre>
+			
+			<p>In the above example, a quartic ease-out power curve function is being blended with a sawtooth curve function with twenty teeth. The <code><a href="#2_22">Uize.Curve.line</a></code> method is being used to create a value range from <code>.25</code> to <code>.75</code> to control the blend between the two curve functions across the range of input values. At the input value of <code>0</code>, the blend between the curves will be <code>.25</code>. At the input value of <code>1</code>, the blend between the curves will be <code>.75</code>. At the input value of <code>.5</code>, the blend between the curves will be <code>.5</code> (the midpoint value of the line curve).</p>
+			
+			<p><span class="allCaps">VARIATION 1</span></p>
+			
+			
+<pre class="sample-code">curveFUNC = Uize.Curve.line (startValue0to1FLOAT);
+</pre>
+			
+			<p>When no <code>endValue0to1FLOAT</code> parameter is specified (or if the same value is specified for both the <code>startValue0to1FLOAT</code> and <code>endValue0to1FLOAT</code> parameters), then the curve function returned will be for a flat line that is always at the specified start value (ie. it starts at the start value and ends at the start value).</p>
+			
+			<p><span class="allCaps">VARIATION 2</span></p>
+			
+			
+<pre class="sample-code">curveFUNC = Uize.Curve.line ();
+</pre>
+			
+			<p>When no parameters are specified (or if the value <code>0</code> is specified for the <code>startValue0to1FLOAT</code> parameter and the value <code>1</code> is specified for the <code>endValue0to1FLOAT</code> parameter), then a reference to <code><a href="#2_23">Uize.Curve.linear</a></code> (a linear curve function) will be returned.</p>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#2_23">Uize.Curve.linear</a></code> static method</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_23"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.23. Uize.Curve.linear"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_23" title="2. Static Methods -&gt; 2.23. Uize.Curve.linear">23</a>. </span>Uize.Curve.linear</h2>
+		<div class="contents2">
+			<p>A simple linear curve function (ie. <b>NOT</b> a curve function generator) that merely returns the value that is passed into it.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">valueANYTYPE = Uize.Curve.linear (valueANYTYPE);
+</pre>
+			
+			<p>This method / curve function is useful for curve function modifiers that expect curve functions as parameters. One is not likely to call this method directly, but instead supply it - by reference - as a parameter to other methods.</p>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#2_22">Uize.Curve.line</a></code> static method</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_24"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.24. Uize.Curve.makeBlender"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_24" title="2. Static Methods -&gt; 2.24. Uize.Curve.makeBlender">24</a>. </span>Uize.Curve.makeBlender</h2>
+		<div class="contents2">
+			<p>Return a blender function, that will use the specified curve function when blending between two values.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">blenderFUNC = Uize.Curve.makeBlender (curveFUNCorFLOAT);
+</pre>
+			
+			<p>The blender function that is returned by this method has the same signature as the <code><a href="#2_1">Uize.Curve.blendFloats</a></code> static method and accepts three parameters: <code>value1FLOAT</code>, <code>value2FLOAT</code>, and <code>blend0to1FLOAT</code>.</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">var
+  bouncyBlender = Uize.Curve.makeBlender (Uize.Curve.Rubber.easeOutBounce (4,2)),
+  middleOfBounceValue = bouncyBlender (0,255,.5)  // result is 90.4438142188662
+;
+</pre>
+			
+			<p>In the above example, the <code>middleOfBounceValue</code> variable will be left with the value <code>90.4438142188662</code>, being the value halfway between <code>0</code> and <code>255</code> on an extra bouncy ease-out bounce curve with four bounces.</p>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#2_1">Uize.Curve.blendFloats</a></code> static method</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>numerical values for the <code><a href="#2_29_1_1">curveFUNCorFLOAT</a></code> parameter are resolved to curve functions using the <code><a href="#2_29">Uize.Curve.resolve</a></code> static method</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_25"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.25. Uize.Curve.makeEaseInOut"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_25" title="2. Static Methods -&gt; 2.25. Uize.Curve.makeEaseInOut">25</a>. </span>Uize.Curve.makeEaseInOut</h2>
+		<div class="contents2">
+			<p>Returns an ease-in-out curve function, that uses the specified ease-in curve function to produce a two phase curve that has an ease-in phase followed by an ease-out phase.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">easeInOutCurveFUNC = Uize.Curve.makeEaseInOut (easeInCurveFUNC);
+</pre>
+			
+			<p>Assuming that the curve function specified by the <code>easeInCurveFUNC</code> parameter is truly for an ease-in curve function, then the curve function that is returned by this method will effectively be an ease-in-out curve function.</p>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#2_27">Uize.Curve.makeEaseOut</a></code>, <code><a href="#2_26">Uize.Curve.makeEaseMiddle</a></code>, and <code><a href="#2_28">Uize.Curve.makeEasingCurveGenerators</a></code> static methods</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_26"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.26. Uize.Curve.makeEaseMiddle"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_26" title="2. Static Methods -&gt; 2.26. Uize.Curve.makeEaseMiddle">26</a>. </span>Uize.Curve.makeEaseMiddle</h2>
+		<div class="contents2">
+			<p>Returns an ease-in-the-middle curve function, that uses the specified ease-in curve function to produce a two phase curve that has an ease-out phase followed by an ease-in phase.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">easeMiddleCurveFUNC = Uize.Curve.makeEaseMiddle (easeInCurveFUNC);
+</pre>
+			
+			<p>Assuming that the curve function specified by the <code>easeInCurveFUNC</code> parameter is truly for an ease-in curve function, then the curve function that is returned by this method will effectively be an ease-in-the-middle curve function.</p>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#2_27">Uize.Curve.makeEaseOut</a></code>, <code><a href="#2_25">Uize.Curve.makeEaseInOut</a></code>, and <code><a href="#2_28">Uize.Curve.makeEasingCurveGenerators</a></code> static methods</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_27"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.27. Uize.Curve.makeEaseOut"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_27" title="2. Static Methods -&gt; 2.27. Uize.Curve.makeEaseOut">27</a>. </span>Uize.Curve.makeEaseOut</h2>
+		<div class="contents2">
+			<p>Returns an ease-out curve function, that is the 180 degree rotated version of the specified ease-in curve function.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">easeOutCurveFUNC = Uize.Curve.makeEaseOut (easeInCurveFUNC);
+</pre>
+			
+			<p>Assuming that the curve function specified by the <code>easeInCurveFUNC</code> parameter is truly for an ease-in curve function, then the curve function that is returned by this method will effectively be an ease-out curve function.</p>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#2_25">Uize.Curve.makeEaseInOut</a></code>, <code><a href="#2_26">Uize.Curve.makeEaseMiddle</a></code>, and <code><a href="#2_28">Uize.Curve.makeEasingCurveGenerators</a></code> static methods</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_28"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.28. Uize.Curve.makeEasingCurveGenerators"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_28" title="2. Static Methods -&gt; 2.28. Uize.Curve.makeEasingCurveGenerators">28</a>. </span>Uize.Curve.makeEasingCurveGenerators</h2>
+		<div class="contents2">
+			<p>Makes static methods for generating an ease-in curve function, ease-out curve function, ease-in-out curve function, and ease-in-the-middle curve function, using the specified ease-in curve function generator.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">Uize.Curve.makeEasingCurveGenerators (
+  methodNameSuffixSTR,
+  easeInCurveGeneratorFUNC,
+  contextOBJ
+);
+</pre>
+			
+			<p>This method is provided as a convenience to make it easier to spawn easing curve function generators for different types of curves. The <code>Uize.Curve</code> module, itself, uses this method to create its many curve function generator methods, as does the <code><a href="../reference/Uize.Curve.Rubber.html">Uize.Curve.Rubber</a></code> module.</p>
+			
+			<a name="2_28_1"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.28. Uize.Curve.makeEasingCurveGenerators -&gt; 2.28.1. Parameters"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_28" title="2. Static Methods -&gt; 2.28. Uize.Curve.makeEasingCurveGenerators">28</a>.<a href="#2_28_1" title="2. Static Methods -&gt; 2.28. Uize.Curve.makeEasingCurveGenerators -&gt; 2.28.1. Parameters">1</a>. </span>Parameters</h3>
+			<div class="contents3">
+				<p>The <code><a href="#2_28">Uize.Curve.makeEasingCurveGenerators</a></code> method supports the following parameters...</p>
+				
+				<a name="2_28_1_1"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.28. Uize.Curve.makeEasingCurveGenerators -&gt; 2.28.1. Parameters -&gt; 2.28.1.1. methodNameSuffixSTR"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_28" title="2. Static Methods -&gt; 2.28. Uize.Curve.makeEasingCurveGenerators">28</a>.<a href="#2_28_1" title="2. Static Methods -&gt; 2.28. Uize.Curve.makeEasingCurveGenerators -&gt; 2.28.1. Parameters">1</a>.<a href="#2_28_1_1" title="2. Static Methods -&gt; 2.28. Uize.Curve.makeEasingCurveGenerators -&gt; 2.28.1. Parameters -&gt; 2.28.1.1. methodNameSuffixSTR">1</a>. </span>methodNameSuffixSTR</h4>
+				<div class="contents4">
+					<p>A string, specifying the suffix of the method names for the four static methods that are created.</p>
+					
+					<p>The static methods created by this method are named with the prefixes "easeIn", "easeOut", "easeInOut", and "easeMiddle". When creating easing curve function generators in a context that will have other curve function generators, the suffix allows you to distinguish between the curve function generators for different types of curves. The first letter of the specified suffix is uppercased before appending it to the method name prefixes.</p>
+					
+					<p>For example, with the methods <code><a href="#2_10">Uize.Curve.easeInSine</a></code>, <code><a href="#2_20">Uize.Curve.easeOutSine</a></code>, <code><a href="#2_7">Uize.Curve.easeInOutSine</a></code>, and <code><a href="#2_15">Uize.Curve.easeMiddleSine</a></code>, the value used for <code><a href="#2_28_1_1">methodNameSuffixSTR</a></code> would be <code>'Sine'</code> (or <code>'sine'</code>). With the methods <code><a href="#2_3">Uize.Curve.easeInExpo</a></code>, <code><a href="#2_18">Uize.Curve.easeOutExpo</a></code>, <code><a href="#2_5">Uize.Curve.easeInOutExpo</a></code>, and <code><a href="#2_13">Uize.Curve.easeMiddleExpo</a></code>, the value used for <code><a href="#2_28_1_1">methodNameSuffixSTR</a></code> would be <code>'Expo'</code> (or <code>'expo'</code>).</p>
+				</div>
+				
+				<a name="2_28_1_2"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.28. Uize.Curve.makeEasingCurveGenerators -&gt; 2.28.1. Parameters -&gt; 2.28.1.2. easeInCurveGeneratorFUNC"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_28" title="2. Static Methods -&gt; 2.28. Uize.Curve.makeEasingCurveGenerators">28</a>.<a href="#2_28_1" title="2. Static Methods -&gt; 2.28. Uize.Curve.makeEasingCurveGenerators -&gt; 2.28.1. Parameters">1</a>.<a href="#2_28_1_2" title="2. Static Methods -&gt; 2.28. Uize.Curve.makeEasingCurveGenerators -&gt; 2.28.1. Parameters -&gt; 2.28.1.2. easeInCurveGeneratorFUNC">2</a>. </span>easeInCurveGeneratorFUNC</h4>
+				<div class="contents4">
+					<p>A function, being the curve function generator for the ease-in curve function from which you would like to derive the ease-in, ease-out, ease-in-out, and ease-middle curve function generator static methods.</p>
+				</div>
+				
+				<a name="2_28_1_3"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.28. Uize.Curve.makeEasingCurveGenerators -&gt; 2.28.1. Parameters -&gt; 2.28.1.3. contextOBJ"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_28" title="2. Static Methods -&gt; 2.28. Uize.Curve.makeEasingCurveGenerators">28</a>.<a href="#2_28_1" title="2. Static Methods -&gt; 2.28. Uize.Curve.makeEasingCurveGenerators -&gt; 2.28.1. Parameters">1</a>.<a href="#2_28_1_3" title="2. Static Methods -&gt; 2.28. Uize.Curve.makeEasingCurveGenerators -&gt; 2.28.1. Parameters -&gt; 2.28.1.3. contextOBJ">3</a>. </span>contextOBJ</h4>
+				<div class="contents4">
+					<p>An object, specifying the context for the curve function generators.</p>
+					
+					<p>This parameter is optional - when a value is not specified for it, its value will be defaulted to <code>Uize.Curve</code>. Using this parameter, you could assign the curve function generators to a module other than <code>Uize.Curve</code>. For example, the <code><a href="../reference/Uize.Curve.Rubber.html">Uize.Curve.Rubber</a></code> module uses the <code><a href="#2_28">Uize.Curve.makeEasingCurveGenerators</a></code> method to create its curve function generators and specifies a reference to <code><a href="../reference/Uize.Curve.Rubber.html">Uize.Curve.Rubber</a></code> as the value for the <code><a href="#2_28_1_3">contextOBJ</a></code> parameter.</p>
+					
+					<p><span class="allCaps">TIP</span></p>
+					
+					<p>If you wish to assign the curve function generators on the actual ease-in curve function generator, then you can specify the curve function generator as the value for the <code><a href="#2_28_1_3">contextOBJ</a></code> parameter and then specify the value <code>''</code> (empty string) for the <code><a href="#2_28_1_1">methodNameSuffixSTR</a></code> parameter.</p>
+				</div>
+			</div>
+			
+			<a name="2_28_2"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.28. Uize.Curve.makeEasingCurveGenerators -&gt; 2.28.2. Examples"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_28" title="2. Static Methods -&gt; 2.28. Uize.Curve.makeEasingCurveGenerators">28</a>.<a href="#2_28_2" title="2. Static Methods -&gt; 2.28. Uize.Curve.makeEasingCurveGenerators -&gt; 2.28.2. Examples">2</a>. </span>Examples</h3>
+			<div class="contents3">
+				<p>The following examples illustrate different uses of the <code><a href="#2_28">Uize.Curve.makeEasingCurveGenerators</a></code> method...</p>
+				
+				<p><span class="allCaps">EXAMPLE 1</span></p>
+				
+				
+<pre class="sample-code">Uize.Curve.makeEasingCurveGenerators (
+  'Power',
+  function (power) {
+    if (power == null) power = 2;
+    return function (value) {return Math.pow (value,power)};
+  }
+);
+
+// now you can call the newly created static methods...
+
+Uize.Curve.easeInPower ();
+Uize.Curve.easeInPower (2);
+Uize.Curve.easeOutPower (3);
+Uize.Curve.easeInOutPower (2.5);
+Uize.Curve.easeMiddlePower (3.1);
+</pre>
+				
+				<p>In the above example, the traditional approach is being used to create easing curve function generators that are accessed off of the <code>Uize.Curve</code> module (the default context). Because the value <code>'Power'</code> is specified for the <code><a href="#2_28_1_1">methodNameSuffixSTR</a></code> parameter, the created methods names are <code>easeInPower</code>, <code>easeOutPower</code>, <code>easeInOutPower</code>, and <code>easeMiddlePower</code>.</p>
+				
+				<p><span class="allCaps">EXAMPLE 2</span></p>
+				
+				
+<pre class="sample-code">function powerCurve (power) {
+  if (power == null) power = 2;
+  return function (value) {return Math.pow (value,power)};
+};
+Uize.Curve.makeEasingCurveGenerators ('',powerCurve,powerCurve);
+
+// now you can call the newly created static methods...
+
+powerCurve.easeIn ();   // equivalent to powerCurve (2)
+powerCurve.easeIn (2);  // equivalent to powerCurve (2)
+powerCurve.easeOut (3);
+powerCurve.eastInOut (2.5);
+powerCurve.easeMiddle (3.1);
+</pre>
+				
+				<p>In the above example, the ease-in curve function generator is being used as the context for the easing curve function generators. This is done by specifying the <code>powerCurve</code> function not only as the value for the <code><a href="#2_28_1_2">easeInCurveGeneratorFUNC</a></code> parameter, but also as the value for the <code><a href="#2_28_1_3">contextOBJ</a></code> parameter. Then, specifying the value <code>''</code> (empty string) for the <code><a href="#2_28_1_1">methodNameSuffixSTR</a></code> parameter means that the methods accessed off of <code>powerCurve</code> are named simply <code>easeIn</code>, <code>easeOut</code>, <code>easeInOut</code>, and <code>easeMiddle</code>.</p>
+			</div>
+			
+			<a name="2_28_3"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.28. Uize.Curve.makeEasingCurveGenerators -&gt; 2.28.3. Caching of Paramless Versions"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_28" title="2. Static Methods -&gt; 2.28. Uize.Curve.makeEasingCurveGenerators">28</a>.<a href="#2_28_3" title="2. Static Methods -&gt; 2.28. Uize.Curve.makeEasingCurveGenerators -&gt; 2.28.3. Caching of Paramless Versions">3</a>. </span>Caching of Paramless Versions</h3>
+			<div class="contents3">
+				<p>As an optimization, the <code><a href="#2_28">Uize.Curve.makeEasingCurveGenerators</a></code> method caches the results of the paramless calls to the curve functions generators that it creates.</p>
+				
+				<p>This means that the statement <code>Uize.Curve.easeOutPow ()</code> will always return a reference to the same curve function - for a quadratic ease-out curve. In contrast, the statement <code>Uize.Curve.easeOutPow (3)</code> will always return different curve functions - even though they will always do the same thing (ie. produce a cubic ease-out curve).</p>
+			</div>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#2_27">Uize.Curve.makeEaseOut</a></code>, <code><a href="#2_25">Uize.Curve.makeEaseInOut</a></code>, and <code><a href="#2_26">Uize.Curve.makeEaseMiddle</a></code> static methods</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_29"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.29. Uize.Curve.resolve"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_29" title="2. Static Methods -&gt; 2.29. Uize.Curve.resolve">29</a>. </span>Uize.Curve.resolve</h2>
+		<div class="contents2">
+			<p>Resolves the specified curve function or power curve value to a curve function and returns it.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">curveFUNC = Uize.Curve.resolve (
+  curveFUNCorFLOAT,         // value to be resolved to a curve function (optional)
+  defaultCurveFUNCorFLOAT,  // default curve function or power (optional)
+  sweetBOOL,                // use sweetened power curve functions (optional)
+  polarityINT               // polarity, in case negating is desired (optional)
+);
+</pre>
+			
+			<p>This method can be useful when implementing your own curve function generators - for either complex curves or for curve function modifiers - and when such curve function generators wish to support the numerical shorthand for specifying power curve functions for parameters that are curve functions.</p>
+			
+			<p>A good example of this is the <code>Uize.Curve.Mod.bend</code> static method of the <code><a href="../reference/Uize.Curve.Mod.html">Uize.Curve.Mod</a></code> module. This method accepts a curve and then bends it horizontally and/or vertically, using specified curves for both horizontal and vertical bending. In most simple cases, power curve functions are effective for achieving smooth / regular bending. The <code>Uize.Curve.Mod.bend</code> method supports numerical values for its <code>horzBendFLOATorFUNC</code> and <code>vertBendFLOATorFUNC</code> parameters (a convenience provided to applications that wish to use the method), and its implementation uses the <code><a href="#2_29">Uize.Curve.resolve</a></code> method to resolve these numerical values to actual curve functions.</p>
+			
+			<a name="2_29_1"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.29. Uize.Curve.resolve -&gt; 2.29.1. Parameters"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_29" title="2. Static Methods -&gt; 2.29. Uize.Curve.resolve">29</a>.<a href="#2_29_1" title="2. Static Methods -&gt; 2.29. Uize.Curve.resolve -&gt; 2.29.1. Parameters">1</a>. </span>Parameters</h3>
+			<div class="contents3">
+				<p>The <code><a href="#2_29">Uize.Curve.resolve</a></code> method supports the following parameters...</p>
+				
+				<a name="2_29_1_1"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.29. Uize.Curve.resolve -&gt; 2.29.1. Parameters -&gt; 2.29.1.1. curveFUNCorFLOAT"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_29" title="2. Static Methods -&gt; 2.29. Uize.Curve.resolve">29</a>.<a href="#2_29_1" title="2. Static Methods -&gt; 2.29. Uize.Curve.resolve -&gt; 2.29.1. Parameters">1</a>.<a href="#2_29_1_1" title="2. Static Methods -&gt; 2.29. Uize.Curve.resolve -&gt; 2.29.1. Parameters -&gt; 2.29.1.1. curveFUNCorFLOAT">1</a>. </span>curveFUNCorFLOAT</h4>
+				<div class="contents4">
+					<p>A curve function, or a number that should be used to generate a power curve function.</p>
+					
+					<p>Handling for different types of values is as follows...</p>
+					
+					<table class="list">
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><b>function</b> - When a function is specified, it will simply be returned as is.</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><b>array</b> - When an array is specified, it will simply be returned as is.</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><b>positive number</b> - When a positive number is specified, then an ease-out power curve function will be returned of that power. For example, the statement <code>Uize.Curve.resolve (3)</code> would be equivalent to the statement <code>Uize.Curve.easeOutPow (3)</code> (provided the value <code>true</code> is <b>not</b> specified for the optional <code><a href="#2_29_1_3">sweetBOOL</a></code> parameter, and the value <code>-1</code> is <b>not</b> specified for the optional <code><a href="#2_29_1_4">polarityINT</a></code> parameter).</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><b>negative number</b> - When a negative number is specified, then an ease-in power curve function will be returned of the negative of that power. For example, the statement <code>Uize.Curve.resolve (-3)</code> would be equivalent to the statement <code>Uize.Curve.easeInPow (3)</code> (provided the value <code>true</code> is <b>not</b> specified for the optional <code><a href="#2_29_1_3">sweetBOOL</a></code> parameter, and the value <code>-1</code> is <b>not</b> specified for the optional <code><a href="#2_29_1_4">polarityINT</a></code> parameter).</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><b>-1, 0, or 1</b> - When either of the values <code>-1</code>, <code>0</code>, or <code>1</code> is specified, then a reference to <code><a href="#2_23">Uize.Curve.linear</a></code> (a linear curve function) will be returned.</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><b>not defined</b> - When either of the values <code>null</code> or <code>undefined</code> is specified, then the <code><a href="#2_29_1_1">curveFUNCorFLOAT</a></code> parameter will be defaulted to the value of the optional <code><a href="#2_29_1_2">defaultCurveFUNCorFLOAT</a></code> parameter.</td></tr>
+					</table>
+				</div>
+				
+				<a name="2_29_1_2"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.29. Uize.Curve.resolve -&gt; 2.29.1. Parameters -&gt; 2.29.1.2. defaultCurveFUNCorFLOAT"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_29" title="2. Static Methods -&gt; 2.29. Uize.Curve.resolve">29</a>.<a href="#2_29_1" title="2. Static Methods -&gt; 2.29. Uize.Curve.resolve -&gt; 2.29.1. Parameters">1</a>.<a href="#2_29_1_2" title="2. Static Methods -&gt; 2.29. Uize.Curve.resolve -&gt; 2.29.1. Parameters -&gt; 2.29.1.2. defaultCurveFUNCorFLOAT">2</a>. </span>defaultCurveFUNCorFLOAT</h4>
+				<div class="contents4">
+					<p>A curve function, or a number that should be used to generate a power curve function, that should be used as the default curve if the value <code>null</code> or <code>undefined</code> is specified for the <code><a href="#2_29_1_1">curveFUNCorFLOAT</a></code> parameter.</p>
+					
+					<p>When the optional <code><a href="#2_29_1_2">defaultCurveFUNCorFLOAT</a></code> parameter is specified, a curve other than a linear curve can be used as the default. When the <code><a href="#2_29_1_2">defaultCurveFUNCorFLOAT</a></code> parameter is not specified, <code><a href="#2_23">Uize.Curve.linear</a></code> (a linear curve function) will be used as the default curve.</p>
+				</div>
+				
+				<a name="2_29_1_3"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.29. Uize.Curve.resolve -&gt; 2.29.1. Parameters -&gt; 2.29.1.3. sweetBOOL"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_29" title="2. Static Methods -&gt; 2.29. Uize.Curve.resolve">29</a>.<a href="#2_29_1" title="2. Static Methods -&gt; 2.29. Uize.Curve.resolve -&gt; 2.29.1. Parameters">1</a>.<a href="#2_29_1_3" title="2. Static Methods -&gt; 2.29. Uize.Curve.resolve -&gt; 2.29.1. Parameters -&gt; 2.29.1.3. sweetBOOL">3</a>. </span>sweetBOOL</h4>
+				<div class="contents4">
+					<p>A boolean, specifying whether or not the "sweetened" versions of the power curve functions should be used when a number is specified for the <code><a href="#2_29_1_1">curveFUNCorFLOAT</a></code> parameter.</p>
+					
+					<table class="list">
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>false</code> - When the value <code>false</code> is specified, the <code><a href="#2_9">Uize.Curve.easeInPow</a></code> static method will be used for resolving negative number values of <code><a href="#2_29_1_1">curveFUNCorFLOAT</a></code>, and the <code><a href="#2_19">Uize.Curve.easeOutPow</a></code> static method will be used for resolving positive number values of <code><a href="#2_29_1_1">curveFUNCorFLOAT</a></code>.</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>true</code> - When the value <code>true</code> is specified, the <code><a href="#2_11">Uize.Curve.easeInSweetPow</a></code> static method will be used for resolving negative number values of <code><a href="#2_29_1_1">curveFUNCorFLOAT</a></code>, and the <code><a href="#2_21">Uize.Curve.easeOutSweetPow</a></code> static method will be used for resolving positive number values of <code><a href="#2_29_1_1">curveFUNCorFLOAT</a></code>.</td></tr>
+					</table>
+					<p>When the optional <code><a href="#2_29_1_3">sweetBOOL</a></code> parameter is not specified, its value will be defaulted to <code>false</code>.</p>
+				</div>
+				
+				<a name="2_29_1_4"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.29. Uize.Curve.resolve -&gt; 2.29.1. Parameters -&gt; 2.29.1.4. polarityINT"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_29" title="2. Static Methods -&gt; 2.29. Uize.Curve.resolve">29</a>.<a href="#2_29_1" title="2. Static Methods -&gt; 2.29. Uize.Curve.resolve -&gt; 2.29.1. Parameters">1</a>.<a href="#2_29_1_4" title="2. Static Methods -&gt; 2.29. Uize.Curve.resolve -&gt; 2.29.1. Parameters -&gt; 2.29.1.4. polarityINT">4</a>. </span>polarityINT</h4>
+				<div class="contents4">
+					<p>An integer, specifying whether or not numerical values for the <code><a href="#2_29_1_1">curveFUNCorFLOAT</a></code> parameter should be negated (ie. multiplied by <code>-1</code>).</p>
+					
+					<table class="list">
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>1</code> - When the value <code>1</code> is specified, numerical values for <code><a href="#2_29_1_1">curveFUNCorFLOAT</a></code> will be unaltered.</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>-1</code> - When the value <code>-1</code> is specified, numerical values for <code><a href="#2_29_1_1">curveFUNCorFLOAT</a></code> will be negated.</td></tr>
+					</table>
+					<p>When the optional <code><a href="#2_29_1_4">polarityINT</a></code> parameter is not specified, its value will be defaulted to <code>1</code>.</p>
+				</div>
+			</div>
+			
+			<a name="2_29_2"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.29. Uize.Curve.resolve -&gt; 2.29.2. Variations"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_29" title="2. Static Methods -&gt; 2.29. Uize.Curve.resolve">29</a>.<a href="#2_29_2" title="2. Static Methods -&gt; 2.29. Uize.Curve.resolve -&gt; 2.29.2. Variations">2</a>. </span>Variations</h3>
+			<div class="contents3">
+				<p><span class="allCaps">VARIATION 1</span></p>
+				
+				
+<pre class="sample-code">curveFUNC = Uize.Curve.resolve (curveFUNCorFLOAT,defaultCurveFUNCorFLOATsweetBOOL);
+</pre>
+				
+				<p>When the optional <code><a href="#2_29_1_4">polarityINT</a></code> parameter is not specified, its value will be defaulted to <code>1</code> and there will be no polarity inversion when a number is specified for the <code><a href="#2_29_1_1">curveFUNCorFLOAT</a></code> parameter.</p>
+				
+				<p><span class="allCaps">VARIATION 2</span></p>
+				
+				
+<pre class="sample-code">curveFUNC = Uize.Curve.resolve (curveFUNCorFLOAT,defaultCurveFUNCorFLOAT);
+</pre>
+				
+				<p>When the optional <code><a href="#2_29_1_3">sweetBOOL</a></code> parameter is not specified, its value will be defaulted to <code>false</code> and the standard power curve function generators <code><a href="#2_9">Uize.Curve.easeInPow</a></code> and <code><a href="#2_19">Uize.Curve.easeOutPow</a></code> will be used when a number is specified for the <code><a href="#2_29_1_1">curveFUNCorFLOAT</a></code> parameter.</p>
+				
+				<p><span class="allCaps">VARIATION 3</span></p>
+				
+				
+<pre class="sample-code">curveFUNC = Uize.Curve.resolve (curveFUNCorFLOAT);
+</pre>
+				
+				<p>When the optional <code><a href="#2_29_1_2">defaultCurveFUNCorFLOAT</a></code> parameter is not specified, its value will be defaulted to <code><a href="#2_23">Uize.Curve.linear</a></code> and a linear curve function will be returned when the values <code>null</code> or <code>undefined</code> are specified for the <code><a href="#2_29_1_1">curveFUNCorFLOAT</a></code> parameter.</p>
+				
+				<p><span class="allCaps">VARIATION 4</span></p>
+				
+				
+<pre class="sample-code">curveFUNC = Uize.Curve.resolve ();
+</pre>
+				
+				<p>When no parameters are specified, then a linear curve function (a reference to <code><a href="#2_23">Uize.Curve.linear</a></code>) will be returned.</p>
+			</div>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_30"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.30. Uize.Curve.saw"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_30" title="2. Static Methods -&gt; 2.30. Uize.Curve.saw">30</a>. </span>Uize.Curve.saw</h2>
+		<div class="contents2">
+			<p>Returns a sawtooth curve function, where the number of teeth and the amount of the sawtooth effect can be specified.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">curveFUNC = Uize.Curve.saw (repeatsINT,amount0to1FLOAT);
+</pre>
+			
+			<p><span class="allCaps">PARAMETERS</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>repeatsINT</code> - controls the number of "teeth" in the sawtooth curve.</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>amount0to1FLOAT</code> - a floating point number in the range of <code>0</code> to <code>1</code>. Specifying the value <code>0</code> for this parameter will produce a curve function for a simple linear curve, specifying the value <code>1</code> will produce a curve function where each tooth reaches all the way from <code>0</code> up to <code>1</code>, and specifying  the value <code>.5</code> will produce an equal blend between a linear curve and a harsh sawtooth pattern. Any other values will produce different blends between fully linear and fully sawtooth.</td></tr>
+			</table>
+			<p><span class="allCaps">VARIATION</span></p>
+			
+			
+<pre class="sample-code">curveFUNC = Uize.Curve.saw (repeatsINT);
+</pre>
+			
+			<p>When no <code>amount0to1FLOAT</code> parameter is specified, the value <code>1</code> is used as the default. This produces a harsh sawtooth curve function, with each tooth using the full vertical range of <code>0</code> to <code>1</code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+	</div>
+	
+	<a name="3"></a>
+	<h1 class="heading1" title="3. Static Properties"><span class="headingNumber"><a href="#3" title="3. Static Properties">3</a>. </span>Static Properties</h1>
+	<div class="contents1">
+		<a name="3_1"></a>
+		<h2 class="heading2" title="3. Static Properties -&gt; 3.1. Uize.Curve.moduleName"><span class="headingNumber"><a href="#3" title="3. Static Properties">3</a>.<a href="#3_1" title="3. Static Properties -&gt; 3.1. Uize.Curve.moduleName">1</a>. </span>Uize.Curve.moduleName</h2>
+		<div class="contents2">
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+	</div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+
