@@ -18,7 +18,7 @@ Introduction
 		- and much more...
 
 	Where You Will Find Them
-		The build scripts are located at the root of the UIZE JavaScript Framework Web site (ie. in the =uize_framework= folder).
+		The build scripts are located at the root of the UIZE JavaScript Framework Web site (ie. in the =UIZE-JavaScript-Framework= folder).
 
 		The build script files are JavaScript files (with the =.js= extension) with names that all start with a "_" (underscore) character, as in...
 
@@ -34,7 +34,7 @@ Introduction
 		Not all the build scripts will necessarily be useful for your own Web site project. In particular, the `Build Pages from Simple Doc` and `UIZE Site Build Pages from Source Code` build scripts are intended primarily for the uize.com Web site, although you are welcome to hack them to meet your needs or use them as a reference when `Writing Your Own Build Scripts`.
 
 	Where They Should Go
-		To use the build scripts in your own Web site project, you should copy them from the =uize_framework= root folder into the root folder of your project.
+		To use the build scripts in your own Web site project, you should copy them from the =UIZE-JavaScript-Framework= root folder into the root folder of your project.
 
 		Must Have the Build Script Setup
 			Be sure to copy the =_build-script-setup.js= file along with the desired build scripts (for more info, see the section `Build Script Setup`).
@@ -94,23 +94,23 @@ Introduction
 				The snippet below shows some of the log file generated from running the `Build JST Modules` build script...
 
 				LOG FILE SNIPPET
-				...................................................................................
-				***** C:\~uize\uize_framework\js\~source\Uize.Templates.Calendar.js.jst
-					TARGET FILE: C:\~uize\uize_framework\js\~source\Uize.Templates.Calendar.js
+				.............................................................................................
+				***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Templates.Calendar.js.jst
+					TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Templates.Calendar.js
 					BUILT (WAS OUT OF DATE), BUILD DURATION: 16ms
 
-				***** C:\~uize\uize_framework\js\~source\Uize.Templates.Collection.js.jst
-					TARGET FILE: C:\~uize\uize_framework\js\~source\Uize.Templates.Collection.js
+				***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Templates.Collection.js.jst
+					TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Templates.Collection.js
 					BUILT (DIDN'T EXIST), BUILD DURATION: 0ms
 
-				C:\~uize\uize_framework\js\~source\Uize.Templates.CollectionItem.js.jst
-					TARGET FILE: C:\~uize\uize_framework\js\~source\Uize.Templates.CollectionItem.js
+				C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Templates.CollectionItem.js.jst
+					TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Templates.CollectionItem.js
 					no action, file is current
 
-				***** C:\~uize\uize_framework\js\~source\Uize.Templates.HashTable.js.jst
-					TARGET FILE: C:\~uize\uize_framework\js\~source\Uize.Templates.HashTable.js
+				***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Templates.HashTable.js.jst
+					TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Templates.HashTable.js
 					BUILT (WAS OUT OF DATE), BUILD DURATION: 15ms
-				...................................................................................
+				.............................................................................................
 
 				NOTES
 				- For files that were built, the source URL is prefixed with a series of asterisks to make these entries stand out from the rest of the log file's contents. This makes it easier to scan the file with your eyes for build actions.
@@ -122,9 +122,9 @@ Introduction
 				For example, the `Build Scrunched` build script provides a Scruncher report for every JavaScript file that was scrunched. The snippet below shows some of the log file generated from running this build script...
 
 				LOG FILE SNIPPET
-				..............................................................
-				***** C:\~uize\uize_framework\js\~source\Uize.Color.js
-					TARGET FILE: C:\~uize\uize_framework\js\Uize.Color.js
+				.........................................................................
+				***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Color.js
+					TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Color.js
 					BUILT (DIDN'T EXIST), BUILD DURATION: 156ms
 						Unique Identifiers Scrunched: 46
 						Incidences of Identifiers Scrunched: 193
@@ -138,8 +138,8 @@ Introduction
 
 						FINAL SIZE: 1777
 
-				***** C:\~uize\uize_framework\js\~source\Uize.Comm.Ajax.js
-					TARGET FILE: C:\~uize\uize_framework\js\Uize.Comm.Ajax.js
+				***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Comm.Ajax.js
+					TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Comm.Ajax.js
 					BUILT (WAS OUT OF DATE), BUILD DURATION: 47ms
 						Unique Identifiers Scrunched: 15
 						Incidences of Identifiers Scrunched: 83
@@ -153,10 +153,10 @@ Introduction
 
 						FINAL SIZE: 1269
 
-				C:\~uize\uize_framework\js\~source\Uize.Comm.Iframe.js
-					TARGET FILE: C:\~uize\uize_framework\js\Uize.Comm.Iframe.js
+				C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Comm.Iframe.js
+					TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\Uize.Comm.Iframe.js
 					no action, file is current
-				..............................................................
+				.........................................................................
 
 The Build Scripts
 	The UIZE JavaScript Framework download comes bundled with a score of convenient, ready-to-go build scripts that will immediately be useful to your project built on top of the UIZE JavaScript Framework.
@@ -169,7 +169,7 @@ The Build Scripts
 
 		The folder that contains the UIZE JavaScript modules (as well as your own JavaScript modules built on top of the UIZE JavaScript Framework), and that is pointed to by the =moduleFolderPath= build environment variable, may contain JavaScript templates that are to be compiled to JavaScript template modules. Once compiled to regular JavaScript modules, they can then be used and required by other JavaScript modules - just like any module.
 
-		The Build JST Modules build script provides a convenient way to automate the compilation of JavaScript template modules. If you look through the =uize_framework/js/~source= folder in the download of the UIZE JavaScript Framework, you will notice a number of =.js.jst= files under the =UizeDotCom.Templates= namespace. Many of these JST modules are HTML generators for widgets. Others are used by build scripts, such as, for example, the =UizeDotCom.Templates.IndexPage.js.jst= JavaScript template, which is used by the build scripts that build the various index pages for the *uize.com* Web site.
+		The Build JST Modules build script provides a convenient way to automate the compilation of JavaScript template modules. If you look through the =UIZE-JavaScript-Framework/js/~source= folder in the download of the UIZE JavaScript Framework, you will notice a number of =.js.jst= files under the =UizeDotCom.Templates= namespace. Many of these JST modules are HTML generators for widgets. Others are used by build scripts, such as, for example, the =UizeDotCom.Templates.IndexPage.js.jst= JavaScript template, which is used by the build scripts that build the various index pages for the *uize.com* Web site.
 
 		The files generated by this script are JavaScript modules that can then be scrunched - along with all other JavaScript modules - by the `Build Scrunched` build script. For this reason, after making a change to any JavaScript template (=.js.jst=) files, one should first run the Build JST Modules build script before running the `Build Scrunched` build script, or otherwise your scrunched JavaScript template modules will not be up-to-date.
 
@@ -301,12 +301,12 @@ The Build Scripts
 		LIKELY INTERNATIONALIZABLE STRINGS
 			This category includes strings that are not filtered out into either the `NON-INTERNATIONALIZABLE STRINGS` or `LIKELY NON-INTERNATIONALIZABLE STRINGS` categories and that contain three adjacent, space separated words, where the middle word is all lowecase.
 
-		Below is a snippet from the log file after the Build Strings Audit Report build script was run inside the =uize_framework= folder of the *uize.com* Web site project...
+		Below is a snippet from the log file after the Build Strings Audit Report build script was run inside the =UIZE-JavaScript-Framework= folder of the *uize.com* Web site project...
 
 		LOG FILE SNIPPET
-		...........................................................................
-		***** C:\~uize\uize_framework\js\~source\Uize.Widget.TableSort.js
-			TARGET FILE: C:\~uize\uize_framework\js\~source\Uize.Widget.TableSort.js
+		......................................................................................
+		***** C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.TableSort.js
+			TARGET FILE: C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Widget.TableSort.js
 			BUILT (ALWAYS BUILD), BUILD DURATION: 188ms
 				NON-INTERNATIONALIZABLE STRINGS
 					 --- 92,101,189
@@ -332,7 +332,7 @@ The Build Scripts
 				LIKELY INTERNATIONALIZABLE STRINGS
 					Click to sort in ascending order --- 352
 					Click to sort in descending order --- 357
-		...........................................................................
+		......................................................................................
 
 		A few things to notice about the format...
 
@@ -411,7 +411,7 @@ Build Script Setup
 				var _setupFile = new ActiveXObject ('Scripting.FileSystemObject').OpenTextFile (
 					'_build-script-setup.js',1
 				);
-				eval (_setupFile.ReadAll ()) ({pathToRoot:'uize_framework\\'});
+				eval (_setupFile.ReadAll ()) ({pathToRoot:'UIZE-JavaScript-Framework\\'});
 				_setupFile.Close ();
 
 			Uize.module ({
@@ -420,7 +420,7 @@ Build Script Setup
 			});
 			...................................................................................
 
-			In the boilerplate block, the statement =eval (_setupFile.ReadAll ()) ({pathToRoot:'uize_framework\\'});= calls the setup function, passing a params object with the value ='uize_framework\\'= specified for the =pathToRoot= property. When no params object is specified, or when the =pathToRoot= property is omitted from the params object, then this property is defaulted to =''= (empty string). In this example, explicitly specifying the value ='uize_framework\\'= causes the module loader defined inside the =_build-script-setup.js= file to prepend the path "uize_framework\" to the path for every module that it loads. Assuming that the folder "uize_framework" contains the UIZE JavaScript Framework, then the above configuration of the `Build Script Setup` would be appropriate for a script that resides in, and is to be run from, a parent folder of the "uize_framework" folder.
+			In the boilerplate block, the statement =eval (_setupFile.ReadAll ()) ({pathToRoot:'UIZE-JavaScript-Framework\\'});= calls the setup function, passing a params object with the value ='UIZE-JavaScript-Framework\\'= specified for the =pathToRoot= property. When no params object is specified, or when the =pathToRoot= property is omitted from the params object, then this property is defaulted to =''= (empty string). In this example, explicitly specifying the value ='UIZE-JavaScript-Framework\\'= causes the module loader defined inside the =_build-script-setup.js= file to prepend the path "UIZE-JavaScript-Framework\" to the path for every module that it loads. Assuming that the folder "UIZE-JavaScript-Framework" contains the UIZE JavaScript Framework, then the above configuration of the `Build Script Setup` would be appropriate for a script that resides in, and is to be run from, a parent folder of the "UIZE-JavaScript-Framework" folder.
 
 Build Environment Variables
 	You may have to configure the build scripts to work in your Web site project's environment by modifying the build environment variables.

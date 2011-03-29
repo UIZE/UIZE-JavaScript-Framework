@@ -2044,7 +2044,7 @@ SimpleDoc Previewing Utility
 	Using the utility in Windows is dead easy - just follow these simple steps...
 
 	+. Load a *.simple* file (or a *.js* file containing SimpleDoc documentation comments) into the text editor of your choice.
-	+. Drag that same file onto the *_test-simpledoc.js* script file that is located at the root of the UIZE JavaScript Framework's *uize_framework* folder (assuming you've already downloaded and unzipped the latest version of the framework).
+	+. Drag that same file onto the *_test-simpledoc.js* script file that is located at the root of the UIZE JavaScript Framework's *UIZE-JavaScript-Framework* folder (assuming you've already downloaded and unzipped the latest version of the framework).
 	+. After dropping the file onto the SimpleDoc previewing utility, an alert dialog will be displayed, informing you that the file is now being watched for modifications by the utility.
 	+. Click the OK button in the alert dialog and an Internet Explorer browser window will be opened up, which will contain a styled preview of the HTML generated from the SimpleDoc documentation.
 	+. Now you can proceed with editing the file in your text editor, and watch as the preview is automatically updated in the browser window each time you save your changes.

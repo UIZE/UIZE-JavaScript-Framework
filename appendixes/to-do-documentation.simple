@@ -146,8 +146,8 @@ Kill acceleration and deceleration
 
 	Pages still to update...
 
-	- C:/~uize/uize_framework/examples/hover-fader-for-thumbnails.html
-	- C:/~uize/uize_framework/examples/fading-links.html
+	- C:/~uize/UIZE-JavaScript-Framework/examples/hover-fader-for-thumbnails.html
+	- C:/~uize/UIZE-JavaScript-Framework/examples/fading-links.html
 
 Explainers to Update
 	JavaScript Build Scripts
@@ -177,7 +177,7 @@ iPad issues
 			- for example and module source code pages, width of pages causes titlebar to be tiny, since default is to scale page so there is no horizontal scrolling
 
 Bugs
-	file:///C:/~uize/uize_framework/examples/slideshow-of-data.html
+	file:///C:/~uize/UIZE-JavaScript-Framework/examples/slideshow-of-data.html
 		- data bars don't have any space around them (has to do with IE8's handling of cellspacing attribute of table)
 	- weird bug with slideshow with wipes, where if you navigate forward and then back (or vice versa), it starts coming up with bogus wipe effect settings. Is this a side effect of the code that picks a new random wipe each slide? Or is this a side effect of recent loop optimizations? Seems like it may have to do with the images for the various panes being cached. Maybe something about the load handler behavior. Doesn't seem reproducable at all when going straight through - regardless of direction. Flipping back and forth between two images, however, causes corruption of the effects.
 	- Chrome: issue with thumbzoom in some examples (zoomed image disappears as soon as its zoomed out)
@@ -659,12 +659,12 @@ Overview
 
 For All Examples
 	- add explanation copy
-		C:/~uize/uize_framework/examples/hierarchical-selector.html
-		C:/~uize/uize_framework/examples/two-hierarchical-selectors.html
-		C:/~uize/uize_framework/examples/button-types.html
+		C:/~uize/UIZE-JavaScript-Framework/examples/hierarchical-selector.html
+		C:/~uize/UIZE-JavaScript-Framework/examples/two-hierarchical-selectors.html
+		C:/~uize/UIZE-JavaScript-Framework/examples/button-types.html
 
-		C:/~uize/uize_framework/examples/button-toggle.html
-		C:/~uize/uize_framework/examples/swap-image-png.html -- mention "JavaScript animation"
+		C:/~uize/UIZE-JavaScript-Framework/examples/button-toggle.html
+		C:/~uize/UIZE-JavaScript-Framework/examples/swap-image-png.html -- mention "JavaScript animation"
 
 	- for examples that should wait until all images are loaded (eg. sequenced show), for now use Uize.Widget's "Document Loaded" event as a proxy for detecting that state
 
