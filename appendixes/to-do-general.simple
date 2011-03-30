@@ -1,3 +1,5 @@
+This document lists to do tasks that relate to the UIZE JavaScript Framework in general - not relating to the documentation or the site (see [[to-do-documentation.html][TO DO - Documentation]]), or specific JavaScript modules (see [[to-do-modules.html][TO DO - Modules]]).
+
 Client Services
 	- unit conversion (possible to implement this on the client side, but might be appropriate to migrate such a service to server side at some stage, and in such a case it would be desirable to allow for such a migration in a way that doesn't heavily impact the code using such a service)
 

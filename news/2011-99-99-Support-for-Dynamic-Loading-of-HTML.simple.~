@@ -1,9 +1,0 @@
-The =Uize.Widget.Page= module has been improved with the addition of two new methods for facilitating the dynamic loading of HTML: the =loadHtmlIntoNode= instance method and the =loadHtml= hook method.
-
-
-
-....................................................................................
-<< metadata >>
-
-title: 9999-99-99 - Support for Dynamic Loading of HTML
-....................................................................................

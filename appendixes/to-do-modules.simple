@@ -1,3 +1,5 @@
+This document lists to do tasks related to specific JavaScript modules of the UIZE JavaScript Framework.
+
 Uize
 	Safe Privates
 		A new system to support safe private properties and methods - for both instance as well as static private properties and methods.
@@ -265,7 +267,7 @@ Uize.Array
 		- Uize.Array.Order.binary
 		- Uize.Array.Order.evensOdds
 		- Uize.Array.Order.oddsEvens
-	
+
 		Primary, Secondary, or Even Tertiary Ordering?
 			In other words, perhaps any reordering should be able have a chunk size, which could be larger than one element, and when it is, then the chunks can themselves be ordered according to secondary ordering.
 
@@ -1586,10 +1588,29 @@ Uize.Web.ImageLoader
 		- average load time
 
 Uize.Widget
-	- more versatile wireNode method
+	Support children Property for Declarative Syntax
+		Support the =children= property for the object that is used to declare data for a widget (declarative syntax for widget data), to allow data to be declared also for that widget's child widgets - all in the same data object.
 
+		EXAMPLE
+		.......................
+		$page = {
+			env:{
+				...
+			},
+			children:{
+				someChildWidget:{
+					...
+				}
+			}
+		}
+		.......................
+
+	More Versatile wireNode Method
+		Support an array of event name/event handler pairs.
+
+		SYNTAX
 		................................................................................
-		widget.wireNode (
+		myWidget.wireNode (
 			'nodeName',
 			[
 				'event1Name',handler,
@@ -1706,6 +1727,7 @@ Uize.Widget
 	- flushNodeCache: update to support flushing by node reference, and for multiple nodes in a blob
 	- deferred wiring/building mechanism
 		- generalized mechanism for deferring building and/or wiring UI of non-displayed widgets
+
 	- deprecate insertUi in favor of built property
 		- PROBLEM: can't rely on wireUi as single gatekeeper because it gets overrided by subclasses, unless you try to tuck the logic into the conditional check and change its semantics...
 			................................................................................
@@ -1727,13 +1749,18 @@ Uize.Widget
 				- if widget UI needs to be built
 				- if wiring should be deferred because root node is not visible
 
-		- implement backwards compatible as
+		- implement backwards compatibility as...
 			................................................................................
 			insertUi = function () {
 				this.set ({_built:_false)
 				this.wireUi ();
 			};
 			................................................................................
+
+	New Mode for Building HTML
+		Support a new mode for building the HTML for a widget, where the template for a widget does not build the HTML for all child widgets, but has inputs or tokens for the HTML of all child widgets, and where the HTML for child widgets is built independently first before being supplied to the template for the widget.
+
+		If all widgets on a widget tree are put into this mode for building their HTML, then building the HTML for a page can be a depth first recursive process. This is a cleaner model, because it doesn't require the template for a given widget to use template for child widgets in order to generate HTML, but the template for any widget is only required to generate HTML for itself and what it directly knows about.
 
 	- deep state
 		- a way to retrieve state all the way through a widget tree
@@ -1844,6 +1871,7 @@ Uize.Widget.Browser
 	- go button next to location field provides another way to commit entered URL
 
 Uize.Widget.Button
+	- fix the bug that Ben had seen with the class names not being updated correctly in his example with radio button widgets
 	- performance optimization idea: only wire up additional events (click, mousedown, mouseup, mouseout) on mouseover
 	- double-click actions for buttons
 	- state->node map to allow different naming schemes? (grayed vs. dimmed, etc.)
@@ -2686,11 +2714,14 @@ Uize.Widget.Options.Tabbed
 Uize.Widget.Page
 	- right now, the implementation of useDialog has support for component loading that is a functionality specific to zazzle.com and that is dependent on the loadComponentIntoNode method implemented in Zazzle.Page. Either find a way to make this generic and configurable, or provide some hooks so that this code can migrate back into Zazzle.Page.
 	- there is an ugly reference to productType that is Zazzle-specific. Find a way to migrate this out.
-	- with the declaration syntax for widget adoption, devise a way to have code that executes as part of the adoption process (possibly allow value of $ variable to be a function?)
+
+	New Mechanism For Widget Adoption
+		With the declarative syntax for widget adoption, devise a way to have code that executes as part of the adoption process (possibly allow value of $ variable to be a function?).
+
+		CONSIDERATIONS
 		- must cater to cases where HTML is to be a template module
 		- must cater to case where data needed by widget instance is defined in separate module, or needs to be somehow computed
 
-	New Mechanism For Widget Adoption
 		Existing Syntax
 			EXAMPLE
 			......................................................

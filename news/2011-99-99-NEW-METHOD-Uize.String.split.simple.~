@@ -1,9 +1,0 @@
-a split method that behaves according to the ECMA-262 specification, and that splits strings correctly in IE and WSH
-
-
-
-....................................................................................
-<< metadata >>
-
-title: 9999-99-99 - NEW METHOD: Uize.String.split
-....................................................................................

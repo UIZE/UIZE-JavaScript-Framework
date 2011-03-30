@@ -281,7 +281,8 @@ Uize.module ({
 								items:[
 									_appendix ('TO DO - Modules'),
 									_appendix ('TO DO - Documentation'),
-									_appendix ('TO DO - General')
+									_appendix ('TO DO - General'),
+									_appendix ('TO DO - News Announcements')
 								]
 							}
 							/*

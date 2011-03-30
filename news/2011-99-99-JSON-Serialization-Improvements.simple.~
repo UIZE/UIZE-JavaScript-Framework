@@ -1,9 +1,0 @@
-The =Uize.Json= module has been improved to now serialize JavaScript objects to strict JSON format, according to the specification at [[http://www.json.org][json.org]].
-
-
-
-....................................................................................
-<< metadata >>
-
-title: 9999-99-99 - JSON Serialization Improvements
-....................................................................................

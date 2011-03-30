@@ -1,0 +1,47 @@
+This document lists news official announcements that need to be created for developments that have already taken place.
+
+NEW MODULE: Uize.Color.xCmyk
+	Announce new CMYK color space extension module.
+
+JSON Serialization Improvements
+	The =Uize.Json= module has been improved to now serialize JavaScript objects to strict JSON format, according to the specification at [[http://www.json.org][json.org]].
+
+Unit Test Build Scripts Made Generic
+	=_run-unit-tests-scrunched.js=, and =_run-unit-tests-source.js=
+
+	RENAMED
+	..............................................................................
+	_run-uize-unit-tests-scrunched.js  >> BECOMES >>  _run-unit-tests-scrunched.js
+	_run-uize-unit-tests-source.js     >> BECOMES >>  _run-unit-tests-source.js
+	..............................................................................
+
+NEW METHOD: Uize.String.split
+	A split method that behaves according to the ECMA-262 specification, and that splits strings correctly in IE and WSH.
+
+NEW MODULE: Uize.Util.Oop
+	Announce.
+
+Support for Dynamic Loading of HTML
+	The =Uize.Widget.Page= module has been improved with the addition of two new methods for facilitating the dynamic loading of HTML: the =loadHtmlIntoNode= instance method and the =loadHtml= hook method.
+
+NEW MODULE: Uize.Widget.SegmentDisplay.Seven
+	Announce this new widget.
+
+NEW MODULE: Uize.Widget.SegmentDisplay
+	Announce this new widget.
+
+NEW MODULE: Uize.Widget.ColorInfo
+	Announce this new widget.
+
+NEW MODULE: Uize.Widget.EdgeHugger
+	Announce this new widget.
+
+IMPROVED MODULE: Uize.Wsh.AutoScruncher
+	Announce configurable handling of head comments.
+
+NEW PERFORMANCE TEST: Loop Optimization Approaches
+	Announce (but refactor as performance test module first).
+
+BROWSER BUG: Text Area Borked After Hiding and Getting Offset Dim
+	Announce bug that Tim discovered.
+
