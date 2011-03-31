@@ -143,7 +143,6 @@ Uize.module ({
 									- the initial value is =undefined=
 						*/
 				],
-				value:null,
 				valueFormatter:function (_value) {return Uize.Date.Formatter.format (_value,this._displayFormat)}
 			});
 

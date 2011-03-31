@@ -170,9 +170,7 @@ Uize.module ({
 							;
 
 						/*** create buttons ***/
-							function _dismiss (_dismissalEvent) {
-								_this.fire (_dismissalEvent).abort || _this.set ({_shown:_false});
-							}
+							function _dismiss (_dismissalEvent) { _this._dismiss(_dismissalEvent) }
 							_this._addChildButton ('close',function () {_dismiss ('Close')});
 								/*?
 									Child Widgets
@@ -244,6 +242,10 @@ Uize.module ({
 
 		/*** Private Instance Methods ***/
 			_classPrototype._addChildButton = _Uize_Widget.Button.addChildButton;
+			
+			_classPrototype._dismiss = function (_dismissalEvent) {
+				this.fire (_dismissalEvent).abort || this.set ({_shown:_false})
+			};
 
 			var _updateUiPositionIfShown = _classPrototype._updateUiPositionIfShown = function () {
 				var _this = this;
@@ -276,15 +278,20 @@ Uize.module ({
 							_Uize_Node.centerInWindow (_rootNode)
 						;
 						if (_mooringNode) {
-							var _mooringCoords = _Uize_Node.getCoords (_mooringNode);
-							_Uize_Node.setStyle (
-								_rootNode,
-								Uize.copyInto (
-									{},
-									_offsetX != _undefined ? {left:_mooringCoords.left + _offsetX} : _undefined,
-									_offsetY != _undefined ? {top:_mooringCoords.top + _offsetY} : _undefined
-								)
-							);
+							if (_offsetX == 'adjacent' || _offsetY == 'adjacent') {
+								_Uize_Node.setAbsPosAdjacentTo (_rootNode, _mooringNode);
+							}
+							else {
+								var _mooringCoords = _Uize_Node.getCoords (_mooringNode);
+								_Uize_Node.setStyle (
+									_rootNode,
+									Uize.copyInto (
+										{},
+										_offsetX != _undefined ? {left:_mooringCoords.left + _offsetX} : _undefined,
+										_offsetY != _undefined ? {top:_mooringCoords.top + _offsetY} : _undefined
+									)
+								);
+							}
 						}
 					}
 				}
@@ -346,6 +353,12 @@ Uize.module ({
 				if (!_this.isWired) {
 					_this.wireNode (window,'resize',function () {_this._updateUiPositionIfShown ()});
 					_this._drag.set ({node:_this.getNode ('title')});
+					
+					_this.wireNode(
+						'shield',
+						'click',
+						function() { _this._dismissOnShieldClick && _this._dismiss ('Close') }
+					);
 
 					/*** fetch values for defaultTitle, defaultOkText, and defaultCancelText from markup ***/
 						function _initializeDefaultProperty (_defaultPropertyName,_widget,_impliedNodeName) {
@@ -458,6 +471,20 @@ Uize.module ({
 								- see the companion =title= set-get property
 								- when the =title= set-get property is set to a non-empty string, then =defaultTitle= will have no effect
 								- the initial value is =undefined=
+					*/
+				},
+				_dismissOnShieldClick:{
+					name:'dismissOnShieldClick',
+					value:_false
+					/*?
+						Set-get Properties
+							dismissOnShieldClick
+								An boolean, specifying whether or not clicking =shield= implied node should close the dialog.
+
+								A "chromeless" dialog may be desired in some case in order to display a palette without the visual clutter of title and button bars. In this case, there may not be a =close= button, so clicking outside of the dialog (on the =shield= implied node) would be one way to close the dialog.
+
+								NOTES
+								- the initial value is =false=
 					*/
 				},
 				_height:{

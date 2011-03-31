@@ -30,8 +30,7 @@ Uize.module ({
 	name:'Uize.Widget.FilteredInput',
 	required:[
 		'Uize.Widget.FilterGroups',
-		'Uize.Util.Coupler',
-		'Uize.Widget.Button.FullLink'
+		'Uize.Util.Coupler'
 	],
 	builder:function (_superclass) {
 		/*** Variables for Scruncher Optimization ***/
@@ -70,9 +69,16 @@ Uize.module ({
 
 						new Uize.Util.Coupler({
 							instances:[_inputWidget, _this],
-							properties:['value', 'valueDetails']
+							properties:['value']
 						});
 						
+						// sync any changes to the input's valueDetails
+						_inputWidget.wire(
+							'Changed.valueDetails',
+							function() { _this.set({_valueDetails:_inputWidget.get('valueDetails')}) }
+						);
+						
+						// pass along filter changes to the input widget
 						_filterGroupsWidget.wire(
 							'Changed.value',
 							function() { _inputWidget.set({filter:_filterGroupsWidget.valueOf()})}
@@ -81,42 +87,10 @@ Uize.module ({
 				)
 			;
 
-		/*** Public Methods ***/
-			_class.prototype.wireUi = function () {
-				var _this = this;
-				
-				if (!_this.isWired) {
-					var _fullLinksData = _this._fullLinks;
-					
-					if (_fullLinksData) {
-						function _setUpFullLink(_fullLinkNo) {
-							_this.addChild (
-								'fullLink' + _fullLinkNo,
-								Uize.Widget.Button.FullLink,
-								_fullLinksData[_fullLinkNo]
-							).wire(
-								'Click',
-								function(_event) {
-									// TODO: launch full dialog
-									console.log('full dialog: ' + _event.source.get('label'));
-								}
-							)
-						}
-						
-						for (var _fullLinkNo = -1; ++_fullLinkNo < _fullLinksData.length;)
-							_setUpFullLink(_fullLinkNo)
-						;
-					}
-
-					_superclass.prototype.wireUi.call (_this);
-				}
-			};
-
 		/*** Register Properties ***/
 			_class.registerProperties ({
 				_filter:'filter',
 				_filters:'filters',
-				_fullLinks:'fullLinks',
 				_inputWidgetClass:'inputWidgetClass',
 				_inputWidgetProperties:'inputWidgetProperties',
 				_value:{

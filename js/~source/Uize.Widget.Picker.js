@@ -23,7 +23,7 @@
 	Introduction
 		The =Uize.Widget.Picker= class acts as a base class for value picker widget classes, such as the =Uize.Widget.Picker.Date= class.
 
-		*DEVELOPERS:* `Chris van Rensburg`
+		*DEVELOPERS:* `Chris van Rensburg`, `Ben Ilegbodu`
 
 		### In a Nutshell
 			- deferred loading of picker dialog, including loading of JavaScript modules, building and insertion of HTML markup for widget, and wiring up of picker dialog widget, so that many picker instances can be created on a page without adding siginificant load to the page.
@@ -37,14 +37,17 @@ Uize.module ({
 	name:'Uize.Widget.Picker',
 	superclass:'Uize.Widget.FormElement',
 	required:[
-		'Uize.Widget.Button',
+		'Uize.Widget.Button.ValueDisplay',
 		'Uize.Node.Event'
 	],
 	builder:function (_superclass) {
+		/*** Variables for Scruncher Optimization ***/
+			var _null = null;
+			
 		/*** Class Constructor ***/
 			var
 				_class = _superclass.subclass (
-					null,
+					_null,
 					function () {
 						var _this = this;
 
@@ -55,9 +58,12 @@ Uize.module ({
 								_mooringNodeDims = Uize.Node.getDimensions (_mooringNode)
 							;
 							function _possiblyFocus () {
-								_this._allowManualEntry && _this.set({focused:true});
+								_this._allowManualEntry && _this.set({focused:true})
 							}
 							_this.callInherited ('useDialog') ({
+								component:_this._dialogComponent
+									? Uize.copyInto(_this._dialogComponent, {value:_this.get('value')})
+									: _null,
 								widgetClassName:_this._dialogWidgetClass,
 								widgetProperties:
 									Uize.copyInto (
@@ -67,12 +73,16 @@ Uize.module ({
 											offsetX:_mooringNodeDims.width >> 1,
 											offsetY:_mooringNodeDims.height >> 1
 										},
+										_this.getDialogWidgetProperties(),
 										_this.get ((_this._pipedProperties || []).concat ('value'))
 									),
-								submitHandler:function (_value,_event) {
+								submitHandler:function (_valueInfo,_event) {
+									var _value = _valueInfo.value;
+
 									_this.set ({
+										_valueDetails:_valueInfo.valueDetails,
 										value:
-											_value != null
+											_value != _null
 												? (_this._valueFormatter ? _this._valueFormatter.call (_this,_value) : _value)
 												: ''
 									});
@@ -101,7 +111,11 @@ Uize.module ({
 							);
 
 						/*** add selector button */
-							_this.addChild ('selector',Uize.Widget.Button).wire ('Click',_pickValue);
+							_this.addChild (
+								'selector',
+								_this._selectorButtonWidgetClass || Uize.Widget.Button.ValueDisplay,
+								_this._selectorButtonWidgetProperties
+							).wire ('Click',_pickValue);
 								/*?
 									Child Widgets
 										selector
@@ -111,6 +125,9 @@ Uize.module ({
 				),
 				_classPrototype = _class.prototype
 			;
+			
+		/*** Public Methods ***/
+			_classPrototype.getDialogWidgetProperties = function() { return _null };
 
 		/*** Register Properties ***/
 			_class.registerProperties ({
@@ -135,6 +152,7 @@ Uize.module ({
 								- the initial value is =true=
 					*/
 				},
+				_dialogComponent:'dialogComponent',
 				_pipedProperties:'pipedProperties',
 					/*?
 						Set-get Properties
@@ -144,6 +162,17 @@ Uize.module ({
 								NOTES
 								- the initial value is =undefined=
 					*/
+				_selectorButtonWidgetClass:'selectorButtonWidgetClass',
+				_selectorButtonWidgetProperties:'selectorButtonWidgetProperties',
+				_valueDetails:{
+					name:'valueDetails',
+					onChange:function() {
+						var _selector = this.children.selector;
+
+						_selector
+							&& _selector.set({valueDetails:this._valueDetails});
+					}
+				},
 				_valueFormatter:'valueFormatter'
 					/*?
 						Set-get Properties
@@ -152,11 +181,6 @@ Uize.module ({
 									NOTES
 									- the initial value is =undefined=
 					*/
-			});
-
-		/*** Override Initial Values for Inherited Set-Get Properties ***/
-			_class.set ({
-				value:null
 			});
 
 		return _class;

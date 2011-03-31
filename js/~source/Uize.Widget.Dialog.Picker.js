@@ -57,10 +57,15 @@ Uize.module ({
 
 						/*** submit value ***/
 							function _fireSubmissionComplete (_keepOpen) {
+								var _valueWidget = _this.children.value;
+
 								_this._submittedValue = _true;
 								_this.fire ({
 									name:'Submission Complete',
-									result:_this.children.value.valueOf (),
+									result:{
+										value:_valueWidget.valueOf (),
+										valueDetails:_valueWidget.get('valueDetails')
+									},
 									keepOpen:_keepOpen
 									/*?
 										Instance Events

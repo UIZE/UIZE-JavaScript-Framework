@@ -41,7 +41,7 @@ Uize.module ({
 						_this.wire ({
 							'Changed.busyInherited':_updateUiState,
 							'Changed.enabledInherited':_updateUiState,
-							'Changed.valueDetails':function() { _this._updateUiValueDetails() }
+							'Changed.valueDetails':function() { _this._updateUiSelectorValueDetails() }
 						});
 
 					}
@@ -54,7 +54,7 @@ Uize.module ({
 				this.isWired && this.setNodeProperties('input', _nodeProperties)
 			};
 			
-			_classPrototype._updateUiValueDetails = function() {
+			_classPrototype._updateUiSelectorValueDetails = function() {
 				var
 					_this = this,
 					_valueDetails = _this.get('valueDetails')
@@ -92,7 +92,7 @@ Uize.module ({
 			_classPrototype.updateUi = function () {
 				var _this = this;
 				if (_this.isWired) {
-					_this._updateUiValueDetails();
+					_this._updateUiSelectorValueDetails();
 					_this._updateUiSelected();
 					_this._updateUiState();
 					_superclass.prototype.updateUi.call (_this);

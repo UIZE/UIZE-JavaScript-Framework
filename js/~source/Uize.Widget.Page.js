@@ -515,7 +515,10 @@ Uize.module ({
 								alwaysReplace:_false
 							},
 							Uize.copyInto ({cp:_componentProfile.name},_componentProfile.params),
-							_createDialogWidget
+							{
+								cache:'memory',
+								callback:_createDialogWidget
+							}
 						)
 						: _createDialogWidget ()
 					;

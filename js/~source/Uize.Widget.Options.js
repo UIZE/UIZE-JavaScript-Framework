@@ -36,12 +36,15 @@ Uize.module ({
 	required:'Uize.Widget.Button',
 	builder:function (_superclass) {
 		/*** Variables for Scruncher Optimization ***/
-			var _undefined;
+			var
+				_null = null,
+				_undefined
+			;
 
 		/*** Class Constructor ***/
 			var
 				_class = _superclass.subclass (
-					null,
+					_null,
 					function () {
 						/*** Private Instance Properties ***/
 							this._lastValueNo = -1;
@@ -113,6 +116,39 @@ Uize.module ({
 							...........................................................
 				*/
 			};
+			
+			_classPrototype.getOptionProperties = function(_valueNo, _valueObject) {
+				return _null
+			};
+				/*?
+					Instance Methods
+						getOptionProperties
+							A hook method for subclasses to provide additional set-get properties to add to the general =optionWidgetProperties= for a specific child option button widget. The base implementation returns =null=.
+							
+							SYNTAX
+							...................................................................................
+							optionPropertiesOBJ = myInstance.getOptionProperties (valueNoINT, valueObjectOBJ);
+							...................................................................................
+							
+							=valueNoINT= contains the child widget button index. =valueObjectOBJ= is the object in the =values= set-get property at index =valueNoINT=.
+							
+							This hook method is useful when a =Uize.Widget.Options= subclass wants specific data from each value object within the =values= set-get property passed to the option button child widget when it is created. This data is added to the =optionWidgetProperties= which are common accross all option buton child widgets.
+							
+							EXAMPLE
+							...........................................................................................
+							_class.prototype.getOptionProperties = function(valueNo, valueObject) {
+								return Uize.copyInto(
+									_superclass.prototype.getOptionProperties.call (this, valueNo, valueObject) || {},
+									{
+										value:valueObject.name,
+										valueDetails:valueObject.valueDetails
+									}
+								);
+							};
+							...........................................................................................
+							
+							In the above example, the =getOptionProperties= hook method was overridden in a subclass to add =value= and =valueDetails= properties to the set-get properties that will be set on the option button child widget. These values are retrieved from the =valueObjectOBJ=.
+				*/
 
 			_classPrototype.updateUi = function () {
 				var _this = this;
@@ -139,7 +175,7 @@ Uize.module ({
 						_restoreValueTimeout, _tentativeValueTimeout
 					;
 					function _restoreValue () {
-						_restoreValueTimeout = null;
+						_restoreValueTimeout = _null;
 						_this.set ({
 							_tentativeValue:_this._value,
 							_tentativeValueNo:_this._valueNo
@@ -165,9 +201,11 @@ Uize.module ({
 						_this.addChild (
 							'option' + _valueNo,
 							_optionWidgetClass,
-							_valueObject.enabled === false
-								? Uize.copyInto ({},_optionWidgetProperties,{enabled:false})
-								: _optionWidgetProperties
+							Uize.copyInto (
+								{},
+								_optionWidgetProperties,
+								_this.getOptionProperties(_valueNo, _valueObject)
+							)
 						)
 							.wire (
 								'*',
@@ -240,7 +278,7 @@ Uize.module ({
 										!_childNodeId.indexOf (_idPrefix) &&
 										(_child = _children [_childNodeId.slice (_idPrefixLength + 1)])
 									)
-										_child.set ({nodeMap:{'':_childNode,shell:null,bed:null}})
+										_child.set ({nodeMap:{'':_childNode,shell:_null,bed:_null}})
 									;
 								}
 							}
@@ -276,7 +314,7 @@ Uize.module ({
 
 								NOTES
 								- see the companion =optionWidgetClass= set-get property
-								- the initial value is =false=
+								- the initial value is =undefined=
 					*/
 				_setValueOnMouseover:'setValueOnMouseover',
 					/*?
@@ -306,7 +344,7 @@ Uize.module ({
 				},
 				_tentativeValue:{
 					name:'tentativeValue',
-					value:null
+					value:_null
 					/*?
 						Set-get Properties
 							tentativeValue
@@ -339,7 +377,7 @@ Uize.module ({
 						_this._updateValueNo ();
 						_this.set ({_tentativeValueNo:_this._valueNo,_tentativeValue:_this._value});
 					},
-					value:null
+					value:_null
 					/*?
 						Set-get Properties
 							value

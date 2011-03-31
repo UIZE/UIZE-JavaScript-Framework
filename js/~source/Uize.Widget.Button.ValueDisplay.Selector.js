@@ -4,7 +4,7 @@
 |    /    O /   |    MODULE : Uize.Widget.Button.ValueDisplay.Selector Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
-| /____/ /__/_| | COPYRIGHT : (c)2010-2011 UIZE
+| /____/ /__/_| | COPYRIGHT : (c)2011 UIZE
 |          /___ |   LICENSE : Available under MIT License or GNU General Public License
 |_______________|             http://www.uize.com/license.html
 */
@@ -28,10 +28,7 @@
 
 Uize.module ({
 	name:'Uize.Widget.Button.ValueDisplay.Selector',
-	required:[
-		'Uize.Widget.ValueDisplay.Selector',
-		'Uize.Util.Coupler'
-	],
+	required:'Uize.Widget.ValueDisplay.Selector',
 	builder:function (_superclass) {
 		/*** Class Constructor ***/
 			var _class = _superclass.subclass (
@@ -42,15 +39,18 @@ Uize.module ({
 						_selectorValueDisplay = _this.children.valueDisplay
 					;
 					
-					new Uize.Util.Coupler({
-						instances:[_this, _selectorValueDisplay],
-						properties:['selected']
+					function _setSelected() { _selectorValueDisplay.set({selected:_this.get('selected')}) }
+					function _setTentativeSelected() {
+						var _state = _this.get('state');
+						_selectorValueDisplay.set({tentativeSelected:_state == 'over' || _state == 'down'})
+					}
+					_this.wire({
+						'Changed.selected':_setSelected,
+						'Changed.state':_setTentativeSelected
 					});
 					
-					_this.wire(
-						'Changed.state',
-						function() { _selectorValueDisplay.set({tentativeSelected:_this.get('state') == 'over'}) }
-					);
+					_setSelected();
+					_setTentativeSelected();
 				}
 			);
 
