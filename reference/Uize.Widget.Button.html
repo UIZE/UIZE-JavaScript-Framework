@@ -37,7 +37,7 @@
 							<li><a href="#1_2_1" title="The features listed in this section have been introduced in this module.">1.2.1. Features Introduced in This Module</a></li>
 							<li><a href="#1_2_2" title="The features listed in this section have been overridden in this module.">1.2.2. Features Overridden in This Module</a></li>
 							<li><a href="#1_2_3" title="The features listed in this section have been inherited from other modules.">1.2.3. Features Inherited From Other Modules</a></li>
-							<li><a href="#1_2_4" title="Uize.Widget.Button.Checkbox | Uize.Widget.Button.Toggle">1.2.4. Modules Directly Under This Namespace</a></li>
+							<li><a href="#1_2_4" title="Uize.Widget.Button.Checkbox | Uize.Widget.Button.Filter | Uize.Widget.Button.Toggle | Uize.Widget.Button.ValueDisplay">1.2.4. Modules Directly Under This Namespace</a></li>
 							<li><a href="#1_2_5" title="There is no dedicated unit tests module for the Uize.Widget.Button module.">1.2.5. Unit Tests</a></li>
 						</ul>
 					</li>
@@ -99,7 +99,8 @@
 					<li><a href="#5_24" title="NOTES">5.24. statePrecedence</a></li>
 					<li><a href="#5_25" title="A string, whose value will be used to set the value of the innerHTML property of the text Implied Node.">5.25. text</a></li>
 					<li><a href="#5_26" title="An object reference to a DOM node, or a string whose value is the id for a DOM node, that should be displayed as a tooltip for the instance whenever the user mouses over the Root Node and the instance is in a state where clicking on this node would have an action.">5.26. tooltip</a></li>
-					<li><a href="#5_27" title="Inherited from Uize.Widget.">5.27. wired</a></li>
+					<li><a href="#5_27" title="Inherited from Uize.">5.27. value</a></li>
+					<li><a href="#5_28" title="Inherited from Uize.Widget.">5.28. wired</a></li>
 				</ul>
 			</li>
 			<li><a href="#6">6. Instance Methods</a>
@@ -254,7 +255,7 @@
 				
 				<p><span class="allCaps">SET-GET PROPERTIES</span></p>
 				
-				<p><code><a href="#5_2">built</a></code> | <code><a href="#5_3">busy</a></code> | <code><a href="#5_4">busyInherited</a></code> | <code><a href="#5_8">container</a></code> | <code><a href="#5_9">enabled</a></code> | <code><a href="#5_10">enabledInherited</a></code> | <code><a href="#5_13">html</a></code> | <code><a href="#5_14">idPrefix</a></code> | <code><a href="#5_15">idPrefixConstruction</a></code> | <code><a href="#5_16">insertionMode</a></code> | <code><a href="#5_17">localized</a></code> | <code><a href="#5_19">name</a></code> | <code><a href="#5_20">nodeMap</a></code> | <code><a href="#5_27">wired</a></code></p>
+				<p><code><a href="#5_2">built</a></code> | <code><a href="#5_3">busy</a></code> | <code><a href="#5_4">busyInherited</a></code> | <code><a href="#5_8">container</a></code> | <code><a href="#5_9">enabled</a></code> | <code><a href="#5_10">enabledInherited</a></code> | <code><a href="#5_13">html</a></code> | <code><a href="#5_14">idPrefix</a></code> | <code><a href="#5_15">idPrefixConstruction</a></code> | <code><a href="#5_16">insertionMode</a></code> | <code><a href="#5_17">localized</a></code> | <code><a href="#5_19">name</a></code> | <code><a href="#5_20">nodeMap</a></code> | <code><a href="#5_27">value</a></code> | <code><a href="#5_28">wired</a></code></p>
 				
 				<p><span class="allCaps">STATIC METHODS</span></p>
 				
@@ -268,7 +269,7 @@
 			<a name="1_2_4"></a>
 			<h3 class="heading3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.4. Modules Directly Under This Namespace"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>.<a href="#1_2_4" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.4. Modules Directly Under This Namespace">4</a>. </span>Modules Directly Under This Namespace</h3>
 			<div class="contents3">
-				<p><code><a href="../reference/Uize.Widget.Button.Checkbox.html">Uize.Widget.Button.Checkbox</a></code> | <code><a href="#8_9">Uize.Widget.Button.Toggle</a></code></p>
+				<p><code><a href="../reference/Uize.Widget.Button.Checkbox.html">Uize.Widget.Button.Checkbox</a></code> | <code><a href="../reference/Uize.Widget.Button.Filter.html">Uize.Widget.Button.Filter</a></code> | <code><a href="#8_9">Uize.Widget.Button.Toggle</a></code> | <code><a href="../reference/Uize.Widget.Button.ValueDisplay.html">Uize.Widget.Button.ValueDisplay</a></code></p>
 			</div>
 			
 			<a name="1_2_5"></a>
@@ -878,7 +879,19 @@ MyWidgetClass.prototype._addChildButton = Uize.Widget.Button.addChildButton;
 		</div>
 		
 		<a name="5_27"></a>
-		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.27. wired"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_27" title="5. Set-get Properties -&gt; 5.27. wired">27</a>. </span>wired</h2>
+		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.27. value"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_27" title="5. Set-get Properties -&gt; 5.27. value">27</a>. </span>value</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="5_28"></a>
+		<h2 class="heading2" title="5. Set-get Properties -&gt; 5.28. wired"><span class="headingNumber"><a href="#5" title="5. Set-get Properties">5</a>.<a href="#5_28" title="5. Set-get Properties -&gt; 5.28. wired">28</a>. </span>wired</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			

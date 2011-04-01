@@ -103,25 +103,8 @@ Uize.module ({
                 */
 
             /*** add the clearAll, restoreInitial, and restorePrevious buttons ***/
-              function _setAllValues (_valuesSource) {
-                var
-                  _watchedProperties = _this._watchedProperties,
-                  _committedValues = _this._committedValues,
-                  _newValues = _this.get (_valuesSource + 'Values')
-                ;
-                for (var _watchedPropertyAlias in _committedValues) {
-                  var
-                    _watchedPropertyProfile = _watchedProperties [_watchedPropertyAlias],
-                    _propertySetObject = {}
-                  ;
-                  _propertySetObject [_watchedPropertyProfile.name] =
-                    _newValues ? _newValues [_watchedPropertyAlias] : ''
-                  ;
-                  _watchedPropertyProfile.instance.set (_propertySetObject);
-                }
-              }
               _this._clearAllButton =
-                _this._addChildButton ('clearAll',function () {_setAllValues ('clear')})
+                _this._addChildButton ('clearAll',function () {_this.clearAll()})
                 /*?
                   Child Widgets
                     clearAll
@@ -134,7 +117,7 @@ Uize.module ({
                 */
               ;
               _this._restoreInitialButton =
-                _this._addChildButton ('restoreInitial',function () {_setAllValues ('initial')})
+                _this._addChildButton ('restoreInitial',function () {_this.restoreInitial()})
                 /*?
                   Child Widgets
                     restoreInitial
@@ -147,7 +130,7 @@ Uize.module ({
                 */
               ;
               _this._restorePreviousButton =
-                _this._addChildButton ('restorePrevious',function () {_setAllValues ('committed')})
+                _this._addChildButton ('restorePrevious',function () {_this.restorePrevious()})
                 /*?
                   Child Widgets
                     restorePrevious
@@ -168,7 +151,27 @@ Uize.module ({
       _classPrototype._addChildButton = Uize.Widget.Button.addChildButton;
 
       _classPrototype._clearAutoCommitTimeout = function () {
-        this._autoCommitTimeout &amp;&amp; clearTimeout (this._autoCommitTimeout);
+        if (this._autoCommitTimeout) clearTimeout (this._autoCommitTimeout);
+      };
+
+      _classPrototype._setAllValues = function (_valuesSource) {
+        var
+          _this = this,
+          _watchedProperties = _this._watchedProperties,
+          _committedValues = _this._committedValues,
+          _newValues = _this.get (_valuesSource + 'Values'),
+          _undefined
+        ;
+        for (var _watchedPropertyAlias in _committedValues) {
+          var
+            _watchedPropertyProfile = _watchedProperties [_watchedPropertyAlias],
+            _propertySetObject = {}
+          ;
+          _watchedPropertyProfile.instance.set (
+            _watchedPropertyProfile.name,
+            _newValues &amp;&amp; _newValues [_watchedPropertyAlias] != _undefined ? _newValues [_watchedPropertyAlias] : ''
+          );
+        }
       };
 
       _classPrototype._updateSummaryStateProperties = function () {
@@ -185,17 +188,17 @@ Uize.module ({
         ;
         for (var _watchedPropertyAlias in _committedValues) {
           var _uncommittedValue = _uncommittedValues [_watchedPropertyAlias];
-          if (!_anyNotCommitted &amp;&amp; _uncommittedValue !== _committedValues [_watchedPropertyAlias])
-            _anyNotCommitted = _true
+          if (!_anyNotCommitted)
+            _anyNotCommitted = _uncommittedValue !== _committedValues [_watchedPropertyAlias]
           ;
-          if (!_anyNotInitial &amp;&amp; _uncommittedValue !== _initialValues [_watchedPropertyAlias])
-            _anyNotInitial = _true
+          if (!_anyNotInitial)
+            _anyNotInitial = _uncommittedValue !== _initialValues [_watchedPropertyAlias]
           ;
-          if (_allClear &amp;&amp; _uncommittedValue != '')
-            _allClear = _false
+          if (_allClear)
+            _allClear =  _uncommittedValue == ''
           ;
-          if (_allValid &amp;&amp; !_watchedProperties [_watchedPropertyAlias].instance.get ('isValid'))
-            _allValid = _false
+          if (_allValid)
+            _allValid = _watchedProperties [_watchedPropertyAlias].instance.get ('isValid') === _true
           ;
         }
         _this.set ({
@@ -207,7 +210,43 @@ Uize.module ({
         });
       };
 
+      _classPrototype._watchProperty = function (_watchedPropertyAlias,_watchedPropertyProfile) {
+        var
+          _this = this,
+          _watchedPropertyInstance = _watchedPropertyProfile.instance,
+          _watchedPropertyName = _watchedPropertyProfile.name
+        ;
+
+        // any events that get wired here need to be unwired in _classPrototype.removeWatchedProperties.
+        _watchedPropertyInstance.wire (
+          'Changed.' + _watchedPropertyName,
+          function () {
+            _this._uncommittedValues [_watchedPropertyAlias] =
+              _watchedPropertyInstance.get (_watchedPropertyName)
+            ;
+            _this.fire ('Changed.uncommittedValues');
+            _this._updateSummaryStateProperties ();
+
+            /*** handling for the auto-commit behavior ***/
+              if (_this._readyToCommit &amp;&amp; _this._autoCommitDelay) {
+                _this._clearAutoCommitTimeout ();
+                _this._autoCommitTimeout = setTimeout (
+                  function () {_this.commit ()},
+                  _this._autoCommitDelay
+                )
+              }
+          }
+        );
+        _watchedPropertyInstance.wire('Changed.isValid', function() { _this._updateSummaryStateProperties () });
+
+        // here is where we would add the profile to the watchedProperties property, but since this method is called by the onChange handler to watchedProperties, then it's already there. And, in the odd case that it's not, then the caller can add the profile itself.
+      };
+
     /*** Public Instance Methods ***/
+      _classPrototype.clearAll = function() {
+        this._setAllValues ('clear')
+      };
+
       _classPrototype.commit = function () {
         var _this = this;
         _this._clearAutoCommitTimeout ();
@@ -238,6 +277,159 @@ Uize.module ({
               NOTES
               - see the related =commit button= child widget
         */
+      };
+
+      _classPrototype.addWatchedProperties = function (_propertiesToWatch) {
+        var
+          _currIdx = -1,
+          _propertiesToWatchLength = _propertiesToWatch ? _propertiesToWatch.length : 0,
+          _this = this,
+          _committedValues = {},
+          _uncommittedValues = {},
+          _initialValues = {},
+          _propertiesAdded = {}
+        ;
+
+        for (;++_currIdx &lt; _propertiesToWatchLength;) {
+          var
+            _propertyToWatch = _propertiesToWatch [_currIdx]
+          ;
+          if (_propertyToWatch) {
+            var
+              _alias = _propertyToWatch.alias,
+              _name = _propertyToWatch.name,
+              _instance = _propertyToWatch.instance,
+              _watchedPropertyProfile = {instance:_instance, name:_name}
+            ;
+
+            _propertiesAdded [_alias] = _watchedPropertyProfile;
+            _this._watchProperty (_alias, _watchedPropertyProfile);
+            _committedValues [_alias] =
+            _uncommittedValues [_alias] =
+            _initialValues [_alias] =
+              _instance.get (_name)
+            ;
+          }
+        }
+
+        // don't let the onChange handler fire
+        Uize.copyInto (_this._watchedProperties || (_this._watchedProperties = {}), _propertiesAdded);
+
+        _this.set ({
+          _committedValues:Uize.copyInto (_this._committedValues, _committedValues),
+          _uncommittedValues:Uize.copyInto (_this._uncommittedValues, _uncommittedValues),
+          _initialValues:Uize.copyInto (_this._initialValues, _initialValues)
+        });
+        _this._updateSummaryStateProperties ();
+
+        _this.fire ({
+          name:'Watched Properties Added',
+          properties:_propertiesAdded
+        });
+
+        /*?
+          Instance Methods
+            addWatchedProperties
+              Adds a watched property to the =watchedProperties= property of the instance.
+
+              SYNTAX
+              ......................................
+              myCommitter.addWatchedProperties (
+                [
+                  {
+                    alias:'aliasString',
+                    instance:'instanceObject',
+                    name:'nameString'
+                  }
+                ]
+              );
+              ......................................
+
+              PARAMS
+              ....................................................................................................................
+              _propertiesToWatch:_propertiesARR      // an array whose elements represent the widgets and properties to watch
+
+              The elements of the _propertiesToWatch array should be objects of the following format:
+              {
+                alias:'aliasSTR'        // a string, to be used as a key in the =_watchedProperties= hash
+                instance:'instanceOBJ'      // a Uize instance object containing the property to be watched
+                name:'nameSTR'          // the public property alias of the property to be watched
+              }
+              ....................................................................................................................
+
+              Adding a new property directly to the =watchedProperties= object will not trigger the methods that wire up the events that do the watching. Similarly, using the =set= method to assign a new object (with the new properties to watch) to the =watchedProperties= property will not unwire the aforementioned events from the previous object.
+
+        */
+      };
+
+      _classPrototype.removeWatchedProperties = function (_watchedPropertyAliasesToRemove) {
+        var
+          _currIdx = -1,
+          _propertiesRemoved = {},
+          _watchedPropertyAliasesToRemoveLength = _watchedPropertyAliasesToRemove ? _watchedPropertyAliasesToRemove.length : 0,
+          _this = this,
+          _committedValues = _this._committedValues,
+          _initialValues = _this._initialValues,
+          _uncommittedValues = _this._uncommittedValues,
+          _watchedProperties = _this._watchedProperties
+        ;
+
+        for (;++_currIdx &lt; _watchedPropertyAliasesToRemoveLength;) {
+          var
+            _watchedPropertyAlias = _watchedPropertyAliasesToRemove [_currIdx],
+            _watchedPropertyProfile = _watchedProperties [_watchedPropertyAlias]
+          ;
+
+          if (_watchedPropertyProfile) {
+            var
+              _watchedPropertyInstance = _watchedPropertyProfile.instance
+            ;
+
+            // any events that are wired to the watched property instance in _classPrototype._watchProperty needs to be unwired here.
+            _watchedPropertyInstance.unwire ('Changed.isValid');
+            _watchedPropertyInstance.unwire ('Changed.' + _watchedPropertyProfile.name);
+
+            delete _watchedProperties [_watchedPropertyAlias];
+            delete _committedValues [_watchedPropertyAlias];
+            delete _uncommittedValues [_watchedPropertyAlias];
+            delete _initialValues [_watchedPropertyAlias];
+
+            _propertiesRemoved [_watchedPropertyAlias] = _watchedPropertyProfile;
+          }
+        }
+
+        _this._updateSummaryStateProperties ();
+
+        _this.fire ({
+          name:'Watched Properties Removed',
+          properties:_propertiesRemoved
+        });
+
+        /*?
+          Instance Methods
+            removeWatchedProperties
+              Removes the watched properties with aliases matching the values passed into the method from the =watchedProperties= property.
+
+              SYNTAX
+              ..............................................................
+              myCommitter.removeWatchedProperties (['alias1',...,'aliasN']);
+              ..............................................................
+
+              PARAMS
+              ..................................................................
+              _watchedPropertyAliasesToRemove:_watchedPropertyAliasesToRemoveARR      // an array of strings where the elements are aliases that denote which property profiles should be deleted from the =watchedProperties= object
+              ..................................................................
+
+              Removing watched properties from the =watchedProperties= object directly will not unwire any events that were added by the committer. Calling this method will.
+        */
+      };
+
+      _classPrototype.restoreInitial = function() {
+        this._setAllValues ('initial')
+      };
+
+      _classPrototype.restorePrevious = function() {
+        this._setAllValues ('committed')
       };
 
     /*** Register Properties ***/
@@ -405,40 +597,17 @@ Uize.module ({
               _uncommittedValues = {},
               _initialValues = {}
             ;
-            if (_watchedProperties) {
-              function _watchProperty (_watchedPropertyAlias,_watchedPropertyProfile) {
-                var
-                  _watchedPropertyInstance = _watchedPropertyProfile.instance,
-                  _watchedPropertyName = _watchedPropertyProfile.name
-                ;
+            if (_watchedProperties)
+              for (var _watchedPropertyAlias in _watchedProperties) {
+                var _watchedPropertyProfile = _watchedProperties [_watchedPropertyAlias];
                 _committedValues [_watchedPropertyAlias] =
                 _uncommittedValues [_watchedPropertyAlias] =
                 _initialValues [_watchedPropertyAlias] =
-                  _watchedPropertyInstance.get (_watchedPropertyName)
+                  _watchedPropertyProfile.instance.get (_watchedPropertyProfile.name)
                 ;
-                _watchedPropertyInstance.wire (
-                  'Changed.' + _watchedPropertyName,
-                  function () {
-                    _this._uncommittedValues [_watchedPropertyAlias] =
-                      _watchedPropertyInstance.get (_watchedPropertyName)
-                    ;
-                    _this._updateSummaryStateProperties ();
-
-                    /*** handling for the auto-commit behavior ***/
-                      if (_this._readyToCommit &amp;&amp; _this._autoCommitDelay) {
-                        _this._clearAutoCommitTimeout ();
-                        _this._autoCommitTimeout = setTimeout (
-                          function () {_this.commit ()},
-                          _this._autoCommitDelay
-                        )
-                      }
-                  }
-                );
+                _this._watchProperty (_watchedPropertyAlias,_watchedPropertyProfile);
               }
-              for (var _watchedPropertyAlias in _watchedProperties)
-                _watchProperty (_watchedPropertyAlias,_watchedProperties [_watchedPropertyAlias])
-              ;
-            }
+
             _this.set ({
               _committedValues:_committedValues,
               _initialValues:_initialValues,

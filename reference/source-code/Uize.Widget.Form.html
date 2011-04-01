@@ -116,7 +116,7 @@ Uize.module ({
                     Ok:function() { _this._submit() }
                   });
 
-                  // if form widget is add as child of another form, then it can't be using normal
+                  // if form widget is added as child of another form, then it can't be using normal
                   // submit since it's part of a bigger form
                   _childElement.isForm
                     &amp;&amp; _childElement.set({_useNormalSubmit:_false})
@@ -372,6 +372,8 @@ Uize.module ({
                 'submit',
                 function (_event) {
                   Uize.Node.Event.preventDefault(_event);
+                  // NOTE: this will fire before any events on the form elements
+                  // to sync their values
                   _this._submit();
                 }
               );

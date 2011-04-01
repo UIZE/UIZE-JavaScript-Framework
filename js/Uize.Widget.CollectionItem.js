@@ -1,5 +1,5 @@
 /*
-	UIZE JAVASCRIPT FRAMEWORK 2011-03-08
+	UIZE JAVASCRIPT FRAMEWORK 2011-04-01
 
 	http://www.uize.com/reference/Uize.Widget.CollectionItem.html
 	Available under MIT License or GNU General Public License -- http://www.uize.com/license.html

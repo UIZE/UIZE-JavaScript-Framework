@@ -55,19 +55,35 @@ Uize.module ({
   required:'Uize.Widget.Button.ValueDisplay.Selector',
   builder:function (_superclass) {
     /*** Class Constructor ***/
-      var _class = _superclass.subclass (
-        null,
-        function() {
-          var _this = this;
-          
-          // TODO: Add sort &amp; search child widgets
-          
-          _this.wire(
-            'Changed.value',
-            function() { _this.set({_valueDetails:_this.get('values')[_this.get('valueNo')]}) }
-          );
-        }
-      );
+      var
+        _class = _superclass.subclass (
+          null,
+          function() {
+            var _this = this;
+            
+            // TODO: Add sort &amp; search child widgets
+            _this.wire(
+              'Changed.value',
+              function() {
+                _this.set({
+                  _valueDetails:_this.children['option' + _this.get('valueNo')].get('valueDetails')
+                }) 
+              }
+            );
+          }
+        )
+      ;
+    
+    /*** Public Methods ***/
+      _class.prototype.getOptionProperties = function(_valueNo, _valueObject) {
+        return Uize.copyInto(
+          _superclass.prototype.getOptionProperties.call (this, _valueNo, _valueObject) || {},
+          {
+            value:_valueObject.name,
+            valueDetails:_valueObject.valueDetails
+          }
+        )
+      };
 
     /*** Register Properties ***/
       _class.registerProperties ({

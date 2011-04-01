@@ -798,13 +798,6 @@
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/Uize.Widget.Button.FullLink.js</loc>
-		<codesearch:codesearch>
-			<codesearch:filetype>javascript</codesearch:filetype>
-			<codesearch:license>GPL</codesearch:license>
-		</codesearch:codesearch>
-	</url>
-	<url>
 		<loc>http://www.uize.com/js/~source/Uize.Widget.Button.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
@@ -967,6 +960,13 @@
 	</url>
 	<url>
 		<loc>http://www.uize.com/js/~source/Uize.Widget.Dialog.Picker.Date.js</loc>
+		<codesearch:codesearch>
+			<codesearch:filetype>javascript</codesearch:filetype>
+			<codesearch:license>GPL</codesearch:license>
+		</codesearch:codesearch>
+	</url>
+	<url>
+		<loc>http://www.uize.com/js/~source/Uize.Widget.Dialog.Picker.FilteredInput.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
@@ -1282,13 +1282,6 @@
 	</url>
 	<url>
 		<loc>http://www.uize.com/js/~source/Uize.Widget.Picker.js</loc>
-		<codesearch:codesearch>
-			<codesearch:filetype>javascript</codesearch:filetype>
-			<codesearch:license>GPL</codesearch:license>
-		</codesearch:codesearch>
-	</url>
-	<url>
-		<loc>http://www.uize.com/js/~source/Uize.Widget.Picker.Selector.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>

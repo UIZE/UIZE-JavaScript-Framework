@@ -28,7 +28,7 @@
 |    /    O /   |    MODULE : Uize.Widget.InlinePicker.FilteredInput Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
-| /____/ /__/_| | COPYRIGHT : (c)2009-2011 UIZE
+| /____/ /__/_| | COPYRIGHT : (c)2011 UIZE
 |          /___ |   LICENSE : Available under MIT License or GNU General Public License
 |_______________|             http://www.uize.com/license.html
 */
@@ -64,14 +64,13 @@ Uize.module ({
       _class.registerProperties ({
         _filter:'filter',
         _filters:'filters',
-        _fullLinks:'fullLinks',
         _inputWidgetClass:'inputWidgetClass',
         _inputWidgetProperties:'inputWidgetProperties'
       });
 
     /*** Override Initial Values for Inherited Set-Get Properties ***/
       _class.set ({
-        pipedProperties:['inputWidgetClass', 'inputWidgetProperties', 'filter', 'filters', 'fullLinks'],
+        pipedProperties:['inputWidgetClass', 'inputWidgetProperties', 'filter', 'filters'],
         valueDisplayWidgetClass:Uize.Widget.ValueDisplay.Selector,
         valueWidgetClass:Uize.Widget.FilteredInput
       });

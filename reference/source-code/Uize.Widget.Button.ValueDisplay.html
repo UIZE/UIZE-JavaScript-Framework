@@ -28,7 +28,7 @@
 |    /    O /   |    MODULE : Uize.Widget.Button.ValueDisplay Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
-| /____/ /__/_| | COPYRIGHT : (c)2010-2011 UIZE
+| /____/ /__/_| | COPYRIGHT : (c)2011 UIZE
 |          /___ |   LICENSE : Available under MIT License or GNU General Public License
 |_______________|             http://www.uize.com/license.html
 */
@@ -52,35 +52,50 @@
 
 Uize.module ({
   name:'Uize.Widget.Button.ValueDisplay',
-  required:[
-    'Uize.Widget.ValueDisplay',
-    'Uize.Util.Coupler'
-  ],
   builder:function (_superclass) {
     /*** Class Constructor ***/
       var _class = _superclass.subclass (
         null,
         function() {
-          var
-            _this = this,
-            _valueDisplay = _this.addChild(
+          var _this = this;
+          
+          _this._valueDisplayWidgetClass
+            &amp;&amp; _this.addChild(
               'valueDisplay',
-              _this._valueDisplayWidgetClass || Uize.Widget.ValueDisplay,
-              _this._valueDisplayWidgetProperties
+              _this._valueDisplayWidgetClass,
+              Uize.copyInto(
+                {
+                  value:_this._value,
+                  valueDetails:_this._valueDetails
+                },
+                _this._valueDisplayWidgetProperties
+              )
             )
           ;
-
-          new Uize.Util.Coupler({
-            instances:[_this, _valueDisplay],
-            properties:['value', 'valueDetails']
-          });
         }
       );
 
     /*** Register Properties ***/
+      function _handleValueAndValueDetailsChange() {
+        var _valueDisplay = this.children.valueDisplay;
+
+        _valueDisplay
+          &amp;&amp; _valueDisplay.set({
+            value:this._value,
+            valueDetails:this._valueDetails
+          })
+        ;
+      }
+    
       _class.registerProperties ({
-        _value:'value',
-        _valueDetails:'valueDetails',
+        _value:{
+          name:'value',
+          onChange:_handleValueAndValueDetailsChange
+        },
+        _valueDetails:{
+          name:'valueDetails',
+          onChange:_handleValueAndValueDetailsChange
+        },
         _valueDisplayWidgetClass:'valueDisplayWidgetClass',
         _valueDisplayWidgetProperties:'valueDisplayWidgetProperties'
       });
