@@ -53,6 +53,11 @@ Uize.module ({
 								curve:Uize.Fade.celeration (0,1),
 								duration:500
 							});
+
+						_this.wire (
+							'Changed.value',
+							function () { _this._updateUiTabBodies (_true) }
+						);
 					}
 				),
 				_classPrototype = _class.prototype
@@ -64,7 +69,7 @@ Uize.module ({
 			};
 
 			_classPrototype._getTabBodyNode = function (_valueOrValueNo) {
-				return this.getNode ('option' + this._resolveToValueNo (_valueOrValueNo) + 'TabBody');
+				return this.getNode ('option' + this._resolveToValueNo (_valueOrValueNo) + 'TabBody')
 			};
 
 			_classPrototype._updateUiOptionToggle = function(_optionNo, _isVisible) {
@@ -80,48 +85,52 @@ Uize.module ({
 			};
 
 			_classPrototype._updateUiTabBodies = function (_showAnimation) {
-				var
-					_this = this,
-					_valueNo = _this.get('valueNo'),
-					_buttonHeights = _this._buttonHeights,
-					_buttonHeightsLength = _buttonHeights.length,
-					_top = 0
-				;
-				if( _showAnimation ) {
-					if( _valueNo != _this._lastShownTabBodyNo ) {
-						_this.fade.stop();
-						_this._growingNode = _this._getTabBodyNode( _valueNo );
-						_this._shrinkingNode = _this._getTabBodyNode( _this._lastShownTabBodyNo );
+				var _this = this;
 
+				if (_this.isWired) {
+					var
+						_valueNo = _this.get('valueNo'),
+						_buttonHeights = _this._buttonHeights,
+						_buttonHeightsLength = _buttonHeights.length,
+						_top = 0
+					;
+
+					if( _showAnimation ) {
+						if( _valueNo != _this._lastShownTabBodyNo ) {
+							_this.fade.stop();
+							_this._growingNode = _this._getTabBodyNode( _valueNo );
+							_this._shrinkingNode = _this._getTabBodyNode( _this._lastShownTabBodyNo );
+
+							for (var _tabNo = -1; ++_tabNo < _buttonHeightsLength;) {
+								_this.displayNode( _this._getTabBodyNode(_tabNo), (_tabNo == _valueNo || _tabNo == _this._lastShownTabBodyNo) );
+								_this._updateUiOptionToggle(_tabNo, _valueNo == _tabNo);
+							}
+
+							_this.setNodeStyle(_this._growingNode, {height:1});
+							_this.setNodeStyle(_this._shrinkingNode,{height:_this._maxTabHeight});
+							_this.fade.start();
+						}
+					} else {
 						for (var _tabNo = -1; ++_tabNo < _buttonHeightsLength;) {
-							_this.displayNode( _this._getTabBodyNode(_tabNo), (_tabNo == _valueNo || _tabNo == _this._lastShownTabBodyNo) );
+							var _tabNode = _this._getTabBodyNode( _tabNo );
+							_this.getOptionButton( _tabNo ).setNodeStyle('',{top:_top});
+							_top += _buttonHeights[ _tabNo ];
+							if( _valueNo == _tabNo ) {
+								_this.displayNode(_tabNode);
+								_this.setNodeStyle(_tabNode,{top:_top,height:_this._maxTabHeight});
+								_top += _this._maxTabHeight;
+							} else {
+								_this.displayNode(_tabNode,_false);
+							}
 							_this._updateUiOptionToggle(_tabNo, _valueNo == _tabNo);
 						}
-
-						_this.setNodeStyle(_this._growingNode, {height:1});
-						_this.setNodeStyle(_this._shrinkingNode,{height:_this._maxTabHeight});
-						_this.fade.start();
-					}
-				} else {
-					for (var _tabNo = -1; ++_tabNo < _buttonHeightsLength;) {
-						var _tabNode = _this._getTabBodyNode( _tabNo );
-						_this.getOptionButton( _tabNo ).setNodeStyle('',{top:_top});
-						_top += _buttonHeights[ _tabNo ];
-						if( _valueNo == _tabNo ) {
-							_this.displayNode(_tabNode);
-							_this.setNodeStyle(_tabNode,{top:_top,height:_this._maxTabHeight});
-							_top += _this._maxTabHeight;
-						} else {
-							_this.displayNode(_tabNode,_false);
-						}
-						_this._updateUiOptionToggle(_tabNo, _valueNo == _tabNo);
 					}
 				}
 			};
 
 		/*** Public Instance Methods ***/
 			_classPrototype.getOptionButton = function (_valueOrValueNo) {
-				return this.children ['option' + this._resolveToValueNo (_valueOrValueNo)];
+				return this.children ['option' + this._resolveToValueNo (_valueOrValueNo)]
 			};
 
 			_classPrototype.tabExists = function (_valueOrValueNo) {
@@ -218,10 +227,6 @@ Uize.module ({
 								_this.setNodeStyle(_this._shrinkingNode, {overflow:_shrinkingNodeOverflow});
 								_this._lastShownTabBodyNo = _this.get('valueNo');
 							}
-						});
-
-						_this.wire ('Changed.value',function () {
-							_this._updateUiTabBodies (_true);
 						});
 
 						_this._updateUiTabBodies (_false);
