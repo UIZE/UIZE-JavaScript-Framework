@@ -1,8 +1,5 @@
 This document lists news official announcements that need to be created for developments that have already taken place.
 
-NEW MODULE: Uize.Color.xCmyk
-	Announce new CMYK color space extension module.
-
 JSON Serialization Improvements
 	The =Uize.Json= module has been improved to now serialize JavaScript objects to strict JSON format, according to the specification at [[http://www.json.org][json.org]].
 

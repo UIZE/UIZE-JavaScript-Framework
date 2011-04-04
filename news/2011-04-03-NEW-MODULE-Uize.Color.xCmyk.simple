@@ -1,0 +1,21 @@
+The new =Uize.Color.xCmyk= module extends the =Uize.Color= object by adding a profile for the =CMYK= color space, and by providing encodings for this color space.
+
+The =Uize.Color.colorSpaces.CMYK= property - defined in the new =Uize.Color.xCmyk= extension - provides a profile for the [[http://en.wikipedia.org/wiki/Cmyk][CMYK]] (Cyan, Magenta, Yellow, Key) color space. The CMYK color model is a subtractive color model used to describe the printing process. Some examples of CMYK formatted colors can be viewed at [[http://www.december.com/html/spec/colorcmyk.html]].
+
+The =Uize.Color.xCmyk= module defines the following color encodings...
+
+- =CMYK array= - Colors are encoded as an array, containing four elements for cyan, magenta, yellow, and key components of the color, whose values may be floating point numbers in the range of =0= to =100= (eg. the color chartreuse is encoded as =[50,0,100,0]=).
+
+- =CMYK object= - Colors are encoded as an object, containing =cyan=, =magenta=, =yellow=, and =key= properties, whose values may be floating point numbers in the range of =0= to =100= (eg. the color chartreuse is encoded as ={cyan:50,magenta:0,yellow:100,key:0}=).
+
+- =CMYK string= - Colors are encoded as a =Cmyk(...)= formatted 4-tuple string (eg. the color chartreuse is encoded as ='cmyk(50%,0%,100%,0%)'=).
+
+Because the =Uize.Color.xCmyk= module extends the =Uize.Color= object, and because the =Uize.Color= object is used by the =Uize.Fx= module in resolving color values when performing effects, loading the =Uize.Color.xCmyk= module will allow code to specify colors in the =CMYK= color space when using the methods of the =Uize.Fx= module.
+
+[[Uize.Color.xCmyk][LEARN MORE]]
+
+....................................................................................
+<< metadata >>
+
+title: 2011-04-03 - NEW MODULE: Uize.Color.xCmyk
+....................................................................................

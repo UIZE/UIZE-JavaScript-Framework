@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2011-04-03 - NEW MODULE: Uize.Color.xCmyk | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="The new Uize.Color.xCmyk module extends the Uize.Color object by adding a profile for the CMYK color space, and by providing encodings for this color space."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2011.html" class="breadcrumb breadcrumbWithArrow">2011 NEWS</a>
+	2011-04-03 - NEW MODULE: Uize.Color.xCmyk
+
+</h1>
+
+<div class="main">
+<div class="contents0">
+	<p>The new <code><a href="../reference/Uize.Color.xCmyk.html">Uize.Color.xCmyk</a></code> module extends the <code><a href="../reference/Uize.Color.html">Uize.Color</a></code> object by adding a profile for the <code>CMYK</code> color space, and by providing encodings for this color space.</p>
+	
+	<p>The <code>Uize.Color.colorSpaces.CMYK</code> property - defined in the new <code><a href="../reference/Uize.Color.xCmyk.html">Uize.Color.xCmyk</a></code> extension - provides a profile for the <a href="http://en.wikipedia.org/wiki/Cmyk" target="_blank" class="externalSiteLink">CMYK</a> (Cyan, Magenta, Yellow, Key) color space. The CMYK color model is a subtractive color model used to describe the printing process. Some examples of CMYK formatted colors can be viewed at <a href="http://www.december.com/html/spec/colorcmyk.html" target="_blank" class="externalSiteLink">http://www.december.com/html/spec/colorcmyk.html</a>.</p>
+	
+	<p>The <code><a href="../reference/Uize.Color.xCmyk.html">Uize.Color.xCmyk</a></code> module defines the following color encodings...</p>
+	
+	<table class="list">
+	<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>CMYK array</code> - Colors are encoded as an array, containing four elements for cyan, magenta, yellow, and key components of the color, whose values may be floating point numbers in the range of <code>0</code> to <code>100</code> (eg. the color chartreuse is encoded as <code>[50,0,100,0]</code>).</td></tr>
+	<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>CMYK object</code> - Colors are encoded as an object, containing <code>cyan</code>, <code>magenta</code>, <code>yellow</code>, and <code>key</code> properties, whose values may be floating point numbers in the range of <code>0</code> to <code>100</code> (eg. the color chartreuse is encoded as <code>{cyan:50,magenta:0,yellow:100,key:0}</code>).</td></tr>
+	<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>CMYK string</code> - Colors are encoded as a <code>Cmyk(...)</code> formatted 4-tuple string (eg. the color chartreuse is encoded as <code>'cmyk(50%,0%,100%,0%)'</code>).</td></tr>
+	</table>
+	<p>Because the <code><a href="../reference/Uize.Color.xCmyk.html">Uize.Color.xCmyk</a></code> module extends the <code><a href="../reference/Uize.Color.html">Uize.Color</a></code> object, and because the <code><a href="../reference/Uize.Color.html">Uize.Color</a></code> object is used by the <code><a href="../reference/Uize.Fx.html">Uize.Fx</a></code> module in resolving color values when performing effects, loading the <code><a href="../reference/Uize.Color.xCmyk.html">Uize.Color.xCmyk</a></code> module will allow code to specify colors in the <code>CMYK</code> color space when using the methods of the <code><a href="../reference/Uize.Fx.html">Uize.Fx</a></code> module.</p>
+	
+	<p><a href="../reference/Uize.Color.xCmyk.html">LEARN MORE</a></p>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+
