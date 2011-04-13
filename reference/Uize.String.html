@@ -52,7 +52,27 @@
 					<li><a href="#2_5" title="Returns a string, that is the concatenation of the two specified strings, limited to the specified maximum length, and such that the suffix string takes precedence if any characters must be lost in order to limit the length of the resulting string.">2.5. Uize.String.joinUsingSuffixPriority</a></li>
 					<li><a href="#2_6" title="Returns a string, that is the specified source string limited to the specified maximum length.">2.6. Uize.String.limitLength</a></li>
 					<li><a href="#2_7" title="Returns a string, that is the specified source string repeated the specified number of times.">2.7. Uize.String.repeat</a></li>
-					<li><a href="#2_8" title="document...">2.8. Uize.String.split</a></li>
+					<li><a href="#2_8" title="Splits the specified string value into an array of string elements, using the specified splitter string or regular expression.">2.8. Uize.String.split</a>
+						<ul>
+							<li><a href="#2_8_1" title="As you may be aware, JavaScript&apos;s built-in String object provides a split instance method.">2.8.1. Why Not Use the split Instance Method?</a></li>
+							<li><a href="#2_8_2">2.8.2. Examples</a>
+								<ul>
+									<li><a href="#2_8_2_1" title="In this example, a string containing a list of fruit names separated by single semi-colons is being split using a string type splitter that is a single semi-colon.">2.8.2.1. Splitting Words Delimited by a Semi-colon</a></li>
+									<li><a href="#2_8_2_2" title="In this example, a string containing a list of fruit names separated by various different delimiters that are one or more non-word characters is being split using a regular expression splitter that matches on one or more non-word characters.">2.8.2.2. Splitting Words Delimited by One or More Non-Word Characters</a></li>
+									<li><a href="#2_8_2_3" title="In this example, a multi-line string is being split using a regular expression that supports a variety of different EOL (End Of Line) styles.">2.8.2.3. Splitting A Multi-line String Into Separate Lines</a></li>
+									<li><a href="#2_8_2_4" title="Because the Uize.String.split method is a strict implementation of the ECMA-262 specification for the split instance method of JavaScript&apos;s String object, it supports including the regular expression captures in the returned array.">2.8.2.4. Splitting Using a Regular Expression And Getting Captures</a></li>
+									<li><a href="#2_8_2_5" title="Because the Uize.String.split method includes captures from a regular expression splitter in the returned array, an extra step is needed if you wish to use parentheses for grouping in a regular expression but don&apos;t wish the captures to be included in the result array.">2.8.2.5. Splitting Using a Regular Expression And Ignoring Captures</a></li>
+								</ul>
+							</li>
+							<li><a href="#2_8_3" title="The splitter string or regular expression match is not included in the string elements of the returned array.">2.8.3. Splitter Ommitted From Result</a></li>
+							<li><a href="#2_8_4" title="The Uize.String.split method is implemented in strict accordance with the ECMA-262 specification (ie. the JavaScript language specification).">2.8.4. Compensates for Poor Implementations</a>
+								<ul>
+									<li><a href="#2_8_4_1" title="Microsoft&apos;s JScript interpreter exhibits an issue where empty split values are omitted when a regular expression splitter is used (but not when a string splitter is used).">2.8.4.1. Incorrect Dropping of Empty Split Values</a></li>
+									<li><a href="#2_8_4_2" title="While the split instance method of JavaScript&apos;s built-in String object is supposed to include captures from a regular expression splitter in the returned array, this behavior is not supported by some JavaScript interpreters - notably Microsoft&apos;s JScript interpreter.">2.8.4.2. Incorrect Omission of Captures in the Result Array</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
 					<li><a href="#2_9" title="Returns an array of exactly two elements, representing the two segments of the specified source string after splitting it using the specified splitter string.">2.9. Uize.String.splitInTwo</a></li>
 					<li><a href="#2_10" title="Returns a boolean, indicating whether or not the specified source string starts with the specified substring.">2.10. Uize.String.startsWith</a></li>
 					<li><a href="#2_11" title="Returns a string, that is the specified source string converted to a camelCase formatted string.">2.11. Uize.String.toCamel</a></li>
@@ -465,7 +485,143 @@ Uize.String.limitLength ('012345678901234567',15);  // returns '012345678901...'
 		<a name="2_8"></a>
 		<h2 class="heading2" title="2. Static Methods -&gt; 2.8. Uize.String.split"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_8" title="2. Static Methods -&gt; 2.8. Uize.String.split">8</a>. </span>Uize.String.split</h2>
 		<div class="contents2">
-			<p>document...</p>
+			<p>Splits the specified string value into an array of string elements, using the specified splitter string or regular expression.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">splitPartsARRAY = Uize.String.split (sourceSTR,splitterSTRorREGEXP);
+</pre>
+			
+			<a name="2_8_1"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.8. Uize.String.split -&gt; 2.8.1. Why Not Use the split Instance Method?"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_8" title="2. Static Methods -&gt; 2.8. Uize.String.split">8</a>.<a href="#2_8_1" title="2. Static Methods -&gt; 2.8. Uize.String.split -&gt; 2.8.1. Why Not Use the split Instance Method?">1</a>. </span>Why Not Use the split Instance Method?</h3>
+			<div class="contents3">
+				<p>As you may be aware, JavaScript's built-in <code><a href="../javascript-reference/String.html">String</a></code> object provides a <code>split</code> instance method.</p>
+				
+				<p>Unfortunately, this method has poor implementations in some JavaScript interpreters that may lead to well written code behaving inconcistently and exhibiting buggy behavior in the faulty interpreters. The <code><a href="#2_8">Uize.String.split</a></code> method <a href="#2_8_4">compensates for poor implementations</a> by providing an implementation that is in strict accordance with the ECMA-262 specification.</p>
+			</div>
+			
+			<a name="2_8_2"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.8. Uize.String.split -&gt; 2.8.2. Examples"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_8" title="2. Static Methods -&gt; 2.8. Uize.String.split">8</a>.<a href="#2_8_2" title="2. Static Methods -&gt; 2.8. Uize.String.split -&gt; 2.8.2. Examples">2</a>. </span>Examples</h3>
+			<div class="contents3">
+				<a name="2_8_2_1"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.8. Uize.String.split -&gt; 2.8.2. Examples -&gt; 2.8.2.1. Splitting Words Delimited by a Semi-colon"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_8" title="2. Static Methods -&gt; 2.8. Uize.String.split">8</a>.<a href="#2_8_2" title="2. Static Methods -&gt; 2.8. Uize.String.split -&gt; 2.8.2. Examples">2</a>.<a href="#2_8_2_1" title="2. Static Methods -&gt; 2.8. Uize.String.split -&gt; 2.8.2. Examples -&gt; 2.8.2.1. Splitting Words Delimited by a Semi-colon">1</a>. </span>Splitting Words Delimited by a Semi-colon</h4>
+				<div class="contents4">
+					<p>In this example, a string containing a list of fruit names separated by single semi-colons is being split using a string type splitter that is a single semi-colon.</p>
+					
+					<p><span class="allCaps">EXAMPLE</span></p>
+					
+					
+<pre class="sample-code">fruits = Uize.String.split ('apple;orange;pear;peach;strawberry;watermelon',';');
+</pre>
+					
+					<p>After the above statement has been executed, the value of the <code>fruits</code> variable will be the array <code>['apple','orange','pear','peach','strawberry','watermelon']</code>.</p>
+				</div>
+				
+				<a name="2_8_2_2"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.8. Uize.String.split -&gt; 2.8.2. Examples -&gt; 2.8.2.2. Splitting Words Delimited by One or More Non-Word Characters"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_8" title="2. Static Methods -&gt; 2.8. Uize.String.split">8</a>.<a href="#2_8_2" title="2. Static Methods -&gt; 2.8. Uize.String.split -&gt; 2.8.2. Examples">2</a>.<a href="#2_8_2_2" title="2. Static Methods -&gt; 2.8. Uize.String.split -&gt; 2.8.2. Examples -&gt; 2.8.2.2. Splitting Words Delimited by One or More Non-Word Characters">2</a>. </span>Splitting Words Delimited by One or More Non-Word Characters</h4>
+				<div class="contents4">
+					<p>In this example, a string containing a list of fruit names separated by various different delimiters that are one or more non-word characters is being split using a regular expression splitter that matches on one or more non-word characters.</p>
+					
+					<p><span class="allCaps">EXAMPLE</span></p>
+					
+					
+<pre class="sample-code">fruits = Uize.String.split ('apple-|-orange,pear;peach&lt;&gt;strawberry...watermelon',/\W+/);
+</pre>
+					
+					<p>After the above statement has been executed, the value of the <code>fruits</code> variable will be the array <code>['apple','orange','pear','peach','strawberry','watermelon']</code>.</p>
+				</div>
+				
+				<a name="2_8_2_3"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.8. Uize.String.split -&gt; 2.8.2. Examples -&gt; 2.8.2.3. Splitting A Multi-line String Into Separate Lines"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_8" title="2. Static Methods -&gt; 2.8. Uize.String.split">8</a>.<a href="#2_8_2" title="2. Static Methods -&gt; 2.8. Uize.String.split -&gt; 2.8.2. Examples">2</a>.<a href="#2_8_2_3" title="2. Static Methods -&gt; 2.8. Uize.String.split -&gt; 2.8.2. Examples -&gt; 2.8.2.3. Splitting A Multi-line String Into Separate Lines">3</a>. </span>Splitting A Multi-line String Into Separate Lines</h4>
+				<div class="contents4">
+					<p>In this example, a multi-line string is being split using a regular expression that supports a variety of different EOL (End Of Line) styles.</p>
+					
+					<p><span class="allCaps">EXAMPLE</span></p>
+					
+					
+<pre class="sample-code">lines = Uize.String.split ('line 1\rline 2\nline 3\r\nline 4',/\r\n|[\r\n]/);
+</pre>
+					
+					<p>After the above statement has been executed, the value of the <code>lines</code> variable will be the array <code>['line 1','line 2','line 3','line 4']</code>. The regular expression being used to split the multi-line string supports three different EOL styles: a carriage return (the <code>'\r'</code> character) followed by a line feed (the <code>'\n'</code> character), just a single carriage return character, or just a single line feed character.</p>
+				</div>
+				
+				<a name="2_8_2_4"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.8. Uize.String.split -&gt; 2.8.2. Examples -&gt; 2.8.2.4. Splitting Using a Regular Expression And Getting Captures"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_8" title="2. Static Methods -&gt; 2.8. Uize.String.split">8</a>.<a href="#2_8_2" title="2. Static Methods -&gt; 2.8. Uize.String.split -&gt; 2.8.2. Examples">2</a>.<a href="#2_8_2_4" title="2. Static Methods -&gt; 2.8. Uize.String.split -&gt; 2.8.2. Examples -&gt; 2.8.2.4. Splitting Using a Regular Expression And Getting Captures">4</a>. </span>Splitting Using a Regular Expression And Getting Captures</h4>
+				<div class="contents4">
+					<p>Because the <code><a href="#2_8">Uize.String.split</a></code> method is a strict implementation of the ECMA-262 specification for the <code>split</code> instance method of JavaScript's <code><a href="../javascript-reference/String.html">String</a></code> object, it supports including the regular expression captures in the returned array.</p>
+					
+					<p>So, for example, if we were <a href="#2_8_2_3">splitting a multi-line string into separate lines</a> and wanted to capture the specific line ending characters used for each of the lines (they may be inconcistent across all the lines of the multi-line string), then we can use the unique behavior of the <code><a href="#2_8">Uize.String.split</a></code> method as follows...</p>
+					
+					<p><span class="allCaps">EXAMPLE</span></p>
+					
+					
+<pre class="sample-code">lines = Uize.String.split ('line 1\rline 2\nline 3\r\nline 4',/(\r\n|[\r\n])/);
+</pre>
+					
+					<p>After the above statement has been executed, the value of the <code>lines</code> variable will be the array <code>['line 1','\r','line 2','\n','line 3','\r\n','line 4']</code>. Because the entire splitter regular expression is inside a capture (ie. the parentheses), the entire matched splitter is included in the returned array for each line of the multi-line string. When the <code><a href="#2_8">Uize.String.split</a></code> method builds up the result array, it follows the array element for each split part with elements for all the captures in the regular expression, in the order in which the captures occur in the regular expression.</p>
+				</div>
+				
+				<a name="2_8_2_5"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.8. Uize.String.split -&gt; 2.8.2. Examples -&gt; 2.8.2.5. Splitting Using a Regular Expression And Ignoring Captures"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_8" title="2. Static Methods -&gt; 2.8. Uize.String.split">8</a>.<a href="#2_8_2" title="2. Static Methods -&gt; 2.8. Uize.String.split -&gt; 2.8.2. Examples">2</a>.<a href="#2_8_2_5" title="2. Static Methods -&gt; 2.8. Uize.String.split -&gt; 2.8.2. Examples -&gt; 2.8.2.5. Splitting Using a Regular Expression And Ignoring Captures">5</a>. </span>Splitting Using a Regular Expression And Ignoring Captures</h4>
+				<div class="contents4">
+					<p>Because the <code><a href="#2_8">Uize.String.split</a></code> method includes captures from a regular expression splitter in the returned array, an extra step is needed if you wish to use parentheses for grouping in a regular expression but don't wish the captures to be included in the result array.</p>
+					
+					<p><span class="allCaps">EXAMPLE</span></p>
+					
+					
+<pre class="sample-code">words = Uize.String.split ('solar&lt;_-_&gt;power&lt;_-_-_&gt;will&lt;_-_-_-_&gt;win',/&lt;(?:-=)+-&gt;/);
+</pre>
+					
+					<p>After the above statement has been executed, the value of the <code>words</code> variable will be the array <code>['solar','power','will','win']</code>. The regular expression is using a group to allow matching of one or more of the substring <code>'-&#61;'</code>. However, we don't want those matched characters to pollute the result array - we only want the words that are split out from the string. To accomplish this, we use a feature of regular expressions that allows a group to not be treated as a capture, simply by prefixing the contents of the group expression (ie. the stuff inside the group's parentheses) with the special characters <code>?:</code> - this tells the regular expression engine to not capture the characters matched by the group.</p>
+				</div>
+			</div>
+			
+			<a name="2_8_3"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.8. Uize.String.split -&gt; 2.8.3. Splitter Ommitted From Result"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_8" title="2. Static Methods -&gt; 2.8. Uize.String.split">8</a>.<a href="#2_8_3" title="2. Static Methods -&gt; 2.8. Uize.String.split -&gt; 2.8.3. Splitter Ommitted From Result">3</a>. </span>Splitter Ommitted From Result</h3>
+			<div class="contents3">
+				<p>The splitter string or regular expression match is not included in the string elements of the returned array.</p>
+				
+				<p>So, for example, the statement <code>Uize.String.split ('foo#bar','#')</code> would return the array value <code>['foo','bar']</code> - the splitter, which is a <code>'#'</code> (pound) character string literal in this case, is stripped from the values of the returned array elements.</p>
+				
+				<p>With a regular expression splitter, the entire substring matched by the regular expression will be omitted. So, for example, the statement <code>Uize.String.split ('foo####bar',/#+/)</code> would return the array value <code>['foo','bar']</code> - the splitter, which is a <code>/#+/</code> (one or more pound characters) regular expression in this case, strips out all the contiguous pound characters from the values of the returned array elements.</p>
+				
+				<p>The only way to include the substring matched by a splitter is to use a regular expression splitter and to enclose the entire regular expression in parentheses - this invokes the behavior of including regular expression captures in the result array. The matched substrings are still not included as part of the split values, but as separate elements of the result array - between the elements for the split values (see the example <a href="#2_8_2_4">Splitting Using a Regular Expression And Getting Captures</a>).</p>
+			</div>
+			
+			<a name="2_8_4"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.8. Uize.String.split -&gt; 2.8.4. Compensates for Poor Implementations"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_8" title="2. Static Methods -&gt; 2.8. Uize.String.split">8</a>.<a href="#2_8_4" title="2. Static Methods -&gt; 2.8. Uize.String.split -&gt; 2.8.4. Compensates for Poor Implementations">4</a>. </span>Compensates for Poor Implementations</h3>
+			<div class="contents3">
+				<p>The <code><a href="#2_8">Uize.String.split</a></code> method is implemented in strict accordance with the ECMA-262 specification (ie. the JavaScript language specification).</p>
+				
+				<p>The <code><a href="#2_8">Uize.String.split</a></code> method addresses poor implementations of the <code>split</code> instance method of JavaScript's built-in <code><a href="../javascript-reference/String.html">String</a></code> object in some JavaScript interpreters, such as Microsoft's JScript interpreter that is used by Internet Explorer and WSH (Windows Script Host). Specifically, the <code><a href="#2_8">Uize.String.split</a></code> method addresses two known issues when using a regular expression splitter: <a href="#2_8_4_1">incorrect dropping of empty split values</a> and <a href="#2_8_4_2">incorrect omission of captures in the result array</a>.</p>
+				
+				<a name="2_8_4_1"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.8. Uize.String.split -&gt; 2.8.4. Compensates for Poor Implementations -&gt; 2.8.4.1. Incorrect Dropping of Empty Split Values"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_8" title="2. Static Methods -&gt; 2.8. Uize.String.split">8</a>.<a href="#2_8_4" title="2. Static Methods -&gt; 2.8. Uize.String.split -&gt; 2.8.4. Compensates for Poor Implementations">4</a>.<a href="#2_8_4_1" title="2. Static Methods -&gt; 2.8. Uize.String.split -&gt; 2.8.4. Compensates for Poor Implementations -&gt; 2.8.4.1. Incorrect Dropping of Empty Split Values">1</a>. </span>Incorrect Dropping of Empty Split Values</h4>
+				<div class="contents4">
+					<p>Microsoft's JScript interpreter exhibits an issue where empty split values are omitted when a regular expression splitter is used (but not when a string splitter is used).</p>
+					
+					<p><span class="allCaps">EXAMPLE</span></p>
+					
+					
+<pre class="sample-code">result = 'foo,,bar'.split (/,/);
+</pre>
+					
+					<p>In the above example, a string is being split using a regular expression splitter that matches a single comma. In compliant JavaScript interpreters, the above statement would produce a result array with the value <code>['foo','','bar']</code> - exactly the same result as if you used a simple string splitter (ie. <code>'foo,,bar'.split (',')</code>).</p>
+					
+					<p>For a reason that is hard to fathom, the JScript interpreter omits the second empty string element to produce, instead, the result <code>['foo','bar']</code>. It's hard to justify or defend this implementation choice, as it wreaks havoc with using the <code>split</code> instance method to parse lists of values that were serialized using the <code><a href="../javascript-reference/Array.html">Array</a></code> object's <code>join</code> instance method, and where some of the values were empty strings.</p>
+					
+					<p>The <code><a href="#2_8">Uize.String.split</a></code> method fixes this issue, so it can be used in Internet Explorer and WSH (Windows Script Host) to safely split strings using a regular expression splitter.</p>
+				</div>
+				
+				<a name="2_8_4_2"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.8. Uize.String.split -&gt; 2.8.4. Compensates for Poor Implementations -&gt; 2.8.4.2. Incorrect Omission of Captures in the Result Array"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_8" title="2. Static Methods -&gt; 2.8. Uize.String.split">8</a>.<a href="#2_8_4" title="2. Static Methods -&gt; 2.8. Uize.String.split -&gt; 2.8.4. Compensates for Poor Implementations">4</a>.<a href="#2_8_4_2" title="2. Static Methods -&gt; 2.8. Uize.String.split -&gt; 2.8.4. Compensates for Poor Implementations -&gt; 2.8.4.2. Incorrect Omission of Captures in the Result Array">2</a>. </span>Incorrect Omission of Captures in the Result Array</h4>
+				<div class="contents4">
+					<p>While the <code>split</code> instance method of JavaScript's built-in <code><a href="../javascript-reference/String.html">String</a></code> object is supposed to include captures from a regular expression splitter in the returned array, this behavior is not supported by some JavaScript interpreters - notably Microsoft's JScript interpreter.</p>
+					
+					<p>This means that the statement <code>'line 1\rline 2\nline 3\r\nline 4'.split (/(\r\n|[\r\n])/)</code> would return the result array <code>['line 1','line 2','line 3','line 4']</code> in the JScript interpreter, and not the array <code>['line 1','\r','line 2','\n','line 3','\r\n','line 4']</code> as it should. The <code><a href="#2_8">Uize.String.split</a></code> method fixes this issue, so it can be used in Internet Explorer and WSH (Windows Script Host) to safely split strings using a regular expression splitter.</p>
+				</div>
+			</div>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			

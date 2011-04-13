@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2011-04-12 - NEW METHOD: Uize.String.split | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="The new Uize.String.split method, implemented in the Uize.String module, splits a string into an array of elements using the specified splitter string or regular expression, in strict accordance with the ECMA-262 language&apos;s specified behavior for the String object&apos;s split instance method."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2011.html" class="breadcrumb breadcrumbWithArrow">2011 NEWS</a>
+	2011-04-12 - NEW METHOD: Uize.String.split
+
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="Microsoft&apos;s JScript interpreter exhibits an issue where empty split values are omitted when a regular expression splitter is used (but not when a string splitter is used).">1. Incorrect Dropping of Empty Split Values</a></li>
+			<li><a href="#2" title="While the split instance method of JavaScript&apos;s built-in String object is supposed to include captures from a regular expression splitter in the returned array, this behavior is not supported by some JavaScript interpreters - notably Microsoft&apos;s JScript interpreter.">2. Incorrect Omission of Captures in the Result Array</a></li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<p>The new <code>Uize.String.split</code> method, implemented in the <code><a href="../reference/Uize.String.html">Uize.String</a></code> module, splits a string into an array of elements using the specified splitter string or regular expression, in strict accordance with the ECMA-262 language's specified behavior for the <code><a href="../javascript-reference/String.html">String</a></code> object's <code>split</code> instance method.</p>
+	
+	<p>As you may be aware, JavaScript's built-in <code><a href="../javascript-reference/String.html">String</a></code> object provides a <code>split</code> instance method. Unfortunately, this method has poor implementations in some JavaScript interpreters, such as Microsoft's JScript interpreter that is used by Internet Explorer and WSH (Windows Script Host), and such poor implementations may lead to well written code behaving inconcistently and exhibiting buggy behavior in the faulty interpreters.</p>
+	
+	<p>The <code>Uize.String.split</code> method addresses this issue, so it can be used in Internet Explorer and WSH (Windows Script Host) to safely split strings using a regular expression splitter. Specifically, the <code>Uize.String.split</code> method addresses two known issues when using a regular expression splitter: <a href="#1">incorrect dropping of empty split values</a> and <a href="#2">incorrect omission of captures in the result array</a>.</p>
+	
+	<a name="1"></a>
+	<h1 class="heading1" title="1. Incorrect Dropping of Empty Split Values"><span class="headingNumber"><a href="#1" title="1. Incorrect Dropping of Empty Split Values">1</a>. </span>Incorrect Dropping of Empty Split Values</h1>
+	<div class="contents1">
+		<p>Microsoft's JScript interpreter exhibits an issue where empty split values are omitted when a regular expression splitter is used (but not when a string splitter is used).</p>
+		
+		<p><span class="allCaps">EXAMPLE</span></p>
+		
+		
+<pre class="sample-code">result = 'foo,,bar'.split (/,/);
+</pre>
+		
+		<p>In the above example, a string is being split using a regular expression splitter that matches a single comma. In compliant JavaScript interpreters, the above statement would produce a result array with the value <code>['foo','','bar']</code> - exactly the same result as if you used a simple string splitter (ie. <code>'foo,,bar'.split (',')</code>).</p>
+		
+		<p>For a reason that is hard to fathom, the JScript interpreter omits the second empty string element to produce, instead, the result <code>['foo','bar']</code>. It's hard to justify or defend this implementation choice, as it wreaks havoc with using the <code>split</code> instance method to parse lists of values that were serialized using the <code><a href="../javascript-reference/Array.html">Array</a></code> object's <code>join</code> instance method, and where some of the values were empty strings.</p>
+		
+		<p>The <code>Uize.String.split</code> method fixes this issue, so it can be used in Internet Explorer and WSH (Windows Script Host) to safely split strings using a regular expression splitter.</p>
+	</div>
+	
+	<a name="2"></a>
+	<h1 class="heading1" title="2. Incorrect Omission of Captures in the Result Array"><span class="headingNumber"><a href="#2" title="2. Incorrect Omission of Captures in the Result Array">2</a>. </span>Incorrect Omission of Captures in the Result Array</h1>
+	<div class="contents1">
+		<p>While the <code>split</code> instance method of JavaScript's built-in <code><a href="../javascript-reference/String.html">String</a></code> object is supposed to include captures from a regular expression splitter in the returned array, this behavior is not supported by some JavaScript interpreters - notably Microsoft's JScript interpreter.</p>
+		
+		<p>This means that the statement <code>'line 1\rline 2\nline 3\r\nline 4'.split (/(\r\n|[\r\n])/)</code> would return the result array <code>['line 1','line 2','line 3','line 4']</code> in the JScript interpreter, and not the array <code>['line 1','\r','line 2','\n','line 3','\r\n','line 4']</code> as it should. The <code>Uize.String.split</code> method fixes this issue, so it can be used in Internet Explorer and WSH (Windows Script Host) to safely split strings using a regular expression splitter.</p>
+	</div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

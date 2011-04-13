@@ -78,12 +78,24 @@ Uize.module ({
         return this.tabExists (_value) &amp;&amp; this.getOptionButton (_value).get ('enabled')
       };
 
+      _classPrototype._updateTabBodyClass = function(_valueNo, _currentValueNo) {
+        var _this = this;
+
+        if (_valueNo &gt; -1)
+          _this.setNodeProperties (
+            _this._getTabBodyNode (_valueNo),
+            {className:_valueNo == _currentValueNo ? _this._bodyClassActive : _this._bodyClassInactive}
+          )
+        ;
+      };
+
       _classPrototype._updateUiTabContent = function () {
         var _this = this;
         if (_this.isWired) {
           var _currentValueNo = _this.get ('valueNo');
           if (_this._tabCanBeSelected (_currentValueNo)) {
-            _this.updateUiTabState (_this._lastShownTabBodyNo,_this._lastShownTabBodyNo = _currentValueNo);
+            _this.updateUiTabState (_this._lastShownTabBodyNo,_currentValueNo);
+            _this._lastShownTabBodyNo = _currentValueNo;
           } else {
             for (
               var  _valueNo = -1, _values = _this.get ('values'), _valuesLength = _values.length;
@@ -120,17 +132,8 @@ Uize.module ({
       };
 
       _classPrototype.updateUiTabState = function (_lastShownTabBodyNo,_currentValueNo) {
-        var _this = this;
-        function _updateTabBodyClass (_valueNo) {
-          _valueNo &gt; -1 &amp;&amp;
-            _this.setNodeProperties (
-              _this._getTabBodyNode (_valueNo),
-              {className:_valueNo == _currentValueNo ? _this._bodyClassActive : _this._bodyClassInactive}
-            )
-          ;
-        }
-        _updateTabBodyClass (_lastShownTabBodyNo);
-        _updateTabBodyClass (_currentValueNo);
+        this._updateTabBodyClass (_lastShownTabBodyNo, _currentValueNo);
+        this._updateTabBodyClass (_currentValueNo, _currentValueNo);
       };
 
       _classPrototype.wireUi = function () {
@@ -138,8 +141,13 @@ Uize.module ({
         if (!_this.isWired) {
           _superclass.prototype.wireUi.call (_this);
 
-          _this._lastShownTabBodyNo = _this.get ('valueNo');
-          _this._updateUiTabContent ();
+          var _valueNo = _this.get ('valueNo');
+
+          _this._lastShownTabBodyNo = _valueNo;
+
+          for (var _tabNo = 0; _tabNo &lt; _this.get('values').length; _tabNo++)
+            _this._updateTabBodyClass(_tabNo, _valueNo)
+          ;
         }
       };
 
