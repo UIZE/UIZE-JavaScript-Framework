@@ -43,7 +43,7 @@ Uize.module ({
 					9:1, 10:1, 11:1, 12:1, 13:1, 32:1, 160:1, 8192:1, 8193:1, 8194:1, 8195:1, 8196:1, 8197:1, 8198:1, 8199:1, 8200:1, 8201:1, 8202:1, 8203:1, 8232:1, 8233:1, 12288:1
 				},
 				_hasSplitUsingRegExpIssue =
-					'--'.split (/-/) != 3 ||                  // incorrectly collapsing consecutive empty string values
+					'a,,b'.split (/,/) != 3 ||                // incorrectly dropping empty string values
 					'1-2'.split (/(-)/).join ('|') != '1|-|2' // not storing captures in result array
 			;
 
@@ -449,7 +449,103 @@ Uize.module ({
 				/*?
 					Static Methods
 						Uize.String.split
-							document...
+							Splits the specified string value into an array of string elements, using the specified splitter string or regular expression.
+
+							SYNTAX
+							....................................................................
+							splitPartsARRAY = Uize.String.split (sourceSTR,splitterSTRorREGEXP);
+							....................................................................
+
+							Why Not Use the split Instance Method?
+								As you may be aware, JavaScript's built-in =String= object provides a =split= instance method.
+
+								Unfortunately, this method has poor implementations in some JavaScript interpreters that may lead to well written code behaving inconcistently and exhibiting buggy behavior in the faulty interpreters. The =Uize.String.split= method `compensates for poor implementations` by providing an implementation that is in strict accordance with the ECMA-262 specification.
+
+							Examples
+								Splitting Words Delimited by a Semi-colon
+									In this example, a string containing a list of fruit names separated by single semi-colons is being split using a string type splitter that is a single semi-colon.
+
+									EXAMPLE
+									.................................................................................
+									fruits = Uize.String.split ('apple;orange;pear;peach;strawberry;watermelon',';');
+									.................................................................................
+
+									After the above statement has been executed, the value of the =fruits= variable will be the array =['apple','orange','pear','peach','strawberry','watermelon']=.
+
+								Splitting Words Delimited by One or More Non-Word Characters
+									In this example, a string containing a list of fruit names separated by various different delimiters that are one or more non-word characters is being split using a regular expression splitter that matches on one or more non-word characters.
+
+									EXAMPLE
+									........................................................................................
+									fruits = Uize.String.split ('apple-|-orange,pear;peach<>strawberry...watermelon',/\W+/);
+									........................................................................................
+
+									After the above statement has been executed, the value of the =fruits= variable will be the array =['apple','orange','pear','peach','strawberry','watermelon']=.
+
+								Splitting A Multi-line String Into Separate Lines
+									In this example, a multi-line string is being split using a regular expression that supports a variety of different EOL (End Of Line) styles.
+
+									EXAMPLE
+									.............................................................................
+									lines = Uize.String.split ('line 1\rline 2\nline 3\r\nline 4',/\r\n|[\r\n]/);
+									.............................................................................
+
+									After the above statement has been executed, the value of the =lines= variable will be the array =['line 1','line 2','line 3','line 4']=. The regular expression being used to split the multi-line string supports three different EOL styles: a carriage return (the ='\r'= character) followed by a line feed (the ='\n'= character), just a single carriage return character, or just a single line feed character.
+
+								Splitting Using a Regular Expression And Getting Captures
+									Because the =Uize.String.split= method is a strict implementation of the ECMA-262 specification for the =split= instance method of JavaScript's =String= object, it supports including the regular expression captures in the returned array.
+
+									So, for example, if we were `splitting a multi-line string into separate lines` and wanted to capture the specific line ending characters used for each of the lines (they may be inconcistent across all the lines of the multi-line string), then we can use the unique behavior of the =Uize.String.split= method as follows...
+
+									EXAMPLE
+									...............................................................................
+									lines = Uize.String.split ('line 1\rline 2\nline 3\r\nline 4',/(\r\n|[\r\n])/);
+									...............................................................................
+
+									After the above statement has been executed, the value of the =lines= variable will be the array =['line 1','\r','line 2','\n','line 3','\r\n','line 4']=. Because the entire splitter regular expression is inside a capture (ie. the parentheses), the entire matched splitter is included in the returned array for each line of the multi-line string. When the =Uize.String.split= method builds up the result array, it follows the array element for each split part with elements for all the captures in the regular expression, in the order in which the captures occur in the regular expression.
+
+								Splitting Using a Regular Expression And Ignoring Captures
+									Because the =Uize.String.split= method includes captures from a regular expression splitter in the returned array, an extra step is needed if you wish to use parentheses for grouping in a regular expression but don't wish the captures to be included in the result array.
+
+									EXAMPLE
+									..................................................................................
+									words = Uize.String.split ('solar<_-_>power<_-_-_>will<_-_-_-_>win',/<(?:-=)+->/);
+									..................................................................................
+
+									After the above statement has been executed, the value of the =words= variable will be the array =['solar','power','will','win']=. The regular expression is using a group to allow matching of one or more of the substring ='-&#61;'=. However, we don't want those matched characters to pollute the result array - we only want the words that are split out from the string. To accomplish this, we use a feature of regular expressions that allows a group to not be treated as a capture, simply by prefixing the contents of the group expression (ie. the stuff inside the group's parentheses) with the special characters =?:= - this tells the regular expression engine to not capture the characters matched by the group.
+
+							Splitter Ommitted From Result
+								The splitter string or regular expression match is not included in the string elements of the returned array.
+
+								So, for example, the statement =Uize.String.split ('foo#bar','#')= would return the array value =['foo','bar']= - the splitter, which is a ='#'= (pound) character string literal in this case, is stripped from the values of the returned array elements.
+
+								With a regular expression splitter, the entire substring matched by the regular expression will be omitted. So, for example, the statement =Uize.String.split ('foo####bar',/#+/)= would return the array value =['foo','bar']= - the splitter, which is a =/#+/= (one or more pound characters) regular expression in this case, strips out all the contiguous pound characters from the values of the returned array elements.
+
+								The only way to include the substring matched by a splitter is to use a regular expression splitter and to enclose the entire regular expression in parentheses - this invokes the behavior of including regular expression captures in the result array. The matched substrings are still not included as part of the split values, but as separate elements of the result array - between the elements for the split values (see the example `Splitting Using a Regular Expression And Getting Captures`).
+
+							Compensates for Poor Implementations
+								The =Uize.String.split= method is implemented in strict accordance with the ECMA-262 specification (ie. the JavaScript language specification).
+
+								The =Uize.String.split= method addresses poor implementations of the =split= instance method of JavaScript's built-in =String= object in some JavaScript interpreters, such as Microsoft's JScript interpreter that is used by Internet Explorer and WSH (Windows Script Host). Specifically, the =Uize.String.split= method addresses two known issues when using a regular expression splitter: `incorrect dropping of empty split values` and `incorrect omission of captures in the result array`.
+
+								Incorrect Dropping of Empty Split Values
+									Microsoft's JScript interpreter exhibits an issue where empty split values are omitted when a regular expression splitter is used (but not when a string splitter is used).
+
+									EXAMPLE
+									................................
+									result = 'foo,,bar'.split (/,/);
+									................................
+
+									In the above example, a string is being split using a regular expression splitter that matches a single comma. In compliant JavaScript interpreters, the above statement would produce a result array with the value =['foo','','bar']= - exactly the same result as if you used a simple string splitter (ie. ='foo,,bar'.split (',')=).
+
+									For a reason that is hard to fathom, the JScript interpreter omits the second empty string element to produce, instead, the result =['foo','bar']=. It's hard to justify or defend this implementation choice, as it wreaks havoc with using the =split= instance method to parse lists of values that were serialized using the =Array= object's =join= instance method, and where some of the values were empty strings.
+
+									The =Uize.String.split= method fixes this issue, so it can be used in Internet Explorer and WSH (Windows Script Host) to safely split strings using a regular expression splitter.
+
+								Incorrect Omission of Captures in the Result Array
+									While the =split= instance method of JavaScript's built-in =String= object is supposed to include captures from a regular expression splitter in the returned array, this behavior is not supported by some JavaScript interpreters - notably Microsoft's JScript interpreter.
+
+									This means that the statement ='line 1\rline 2\nline 3\r\nline 4'.split (/(\r\n|[\r\n])/)= would return the result array =['line 1','line 2','line 3','line 4']= in the JScript interpreter, and not the array =['line 1','\r','line 2','\n','line 3','\r\n','line 4']= as it should. The =Uize.String.split= method fixes this issue, so it can be used in Internet Explorer and WSH (Windows Script Host) to safely split strings using a regular expression splitter.
 
 							NOTES
 							- compare to the =Uize.String.splitInTwo= static method

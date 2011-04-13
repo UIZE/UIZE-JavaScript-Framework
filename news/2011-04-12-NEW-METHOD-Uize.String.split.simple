@@ -1,0 +1,30 @@
+The new =Uize.String.split= method, implemented in the =Uize.String= module, splits a string into an array of elements using the specified splitter string or regular expression, in strict accordance with the ECMA-262 language's specified behavior for the =String= object's =split= instance method.
+
+As you may be aware, JavaScript's built-in =String= object provides a =split= instance method. Unfortunately, this method has poor implementations in some JavaScript interpreters, such as Microsoft's JScript interpreter that is used by Internet Explorer and WSH (Windows Script Host), and such poor implementations may lead to well written code behaving inconcistently and exhibiting buggy behavior in the faulty interpreters.
+
+The =Uize.String.split= method addresses this issue, so it can be used in Internet Explorer and WSH (Windows Script Host) to safely split strings using a regular expression splitter. Specifically, the =Uize.String.split= method addresses two known issues when using a regular expression splitter: `incorrect dropping of empty split values` and `incorrect omission of captures in the result array`.
+
+Incorrect Dropping of Empty Split Values
+	Microsoft's JScript interpreter exhibits an issue where empty split values are omitted when a regular expression splitter is used (but not when a string splitter is used).
+
+	EXAMPLE
+	................................
+	result = 'foo,,bar'.split (/,/);
+	................................
+
+	In the above example, a string is being split using a regular expression splitter that matches a single comma. In compliant JavaScript interpreters, the above statement would produce a result array with the value =['foo','','bar']= - exactly the same result as if you used a simple string splitter (ie. ='foo,,bar'.split (',')=).
+
+	For a reason that is hard to fathom, the JScript interpreter omits the second empty string element to produce, instead, the result =['foo','bar']=. It's hard to justify or defend this implementation choice, as it wreaks havoc with using the =split= instance method to parse lists of values that were serialized using the =Array= object's =join= instance method, and where some of the values were empty strings.
+
+	The =Uize.String.split= method fixes this issue, so it can be used in Internet Explorer and WSH (Windows Script Host) to safely split strings using a regular expression splitter.
+
+Incorrect Omission of Captures in the Result Array
+	While the =split= instance method of JavaScript's built-in =String= object is supposed to include captures from a regular expression splitter in the returned array, this behavior is not supported by some JavaScript interpreters - notably Microsoft's JScript interpreter.
+
+	This means that the statement ='line 1\rline 2\nline 3\r\nline 4'.split (/(\r\n|[\r\n])/)= would return the result array =['line 1','line 2','line 3','line 4']= in the JScript interpreter, and not the array =['line 1','\r','line 2','\n','line 3','\r\n','line 4']= as it should. The =Uize.String.split= method fixes this issue, so it can be used in Internet Explorer and WSH (Windows Script Host) to safely split strings using a regular expression splitter.
+
+....................................................................................
+<< metadata >>
+
+title: 2011-04-12 - NEW METHOD: Uize.String.split
+....................................................................................

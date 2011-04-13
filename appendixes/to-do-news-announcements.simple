@@ -12,9 +12,6 @@ Unit Test Build Scripts Made Generic
 	_run-uize-unit-tests-source.js     >> BECOMES >>  _run-unit-tests-source.js
 	..............................................................................
 
-NEW METHOD: Uize.String.split
-	A split method that behaves according to the ECMA-262 specification, and that splits strings correctly in IE and WSH.
-
 NEW MODULE: Uize.Util.Oop
 	Announce.
 
