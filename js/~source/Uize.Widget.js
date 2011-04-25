@@ -56,7 +56,15 @@ Uize.module ({
 		/*** Class Constructor ***/
 			var
 				_class = _superclass.subclass (
-					function () {
+					function (_properties) {
+						var _idPrefix = _properties && _properties.idPrefix;
+						if (_idPrefix) {
+							var _declarativeWidgetProperties =
+								this._harvestDeclarativeWidgetProperties (_idPrefix,_properties.parent)
+							;
+							_declarativeWidgetProperties && Uize.copyInto (_properties,_declarativeWidgetProperties);
+						}
+
 						/*** Public Instance Properties ***/
 							this.children = this._children = {
 								/*?
@@ -80,38 +88,61 @@ Uize.module ({
 				_classPrototype = _class.prototype
 			;
 
-		/*** Utility Functions ***/
-			function _getDeclarativeSyntaxData (_idPrefix,_parent) {
+		/*** Private Instance Methods ***/
+			_classPrototype._harvestDeclarativeWidgetProperties = function (_idPrefix,_parent) {
 				var
-					_result,
-					_declarativeSyntaxDataVariableName
+					_properties,
+					_globalVariableName
 				;
 				if (
 					_idPrefix &&
-					window [_declarativeSyntaxDataVariableName = '$' + _idPrefix] &&
+					(_properties = window [_globalVariableName = '$' + _idPrefix]) &&
+					typeof _properties == 'object' &&
 					(!_parent || _idPrefix != _parent._idPrefix)
 						/* NOTE:
 							There are still some widgets that are implemented using child widgets where the idPrefix of the child widgets is set to that of the parent widget, and we don't want the global qualifier properties being applied to those child widgets, so we check for this condition.
 						*/
 				) {
-					_result = window [_declarativeSyntaxDataVariableName];
-					window [_declarativeSyntaxDataVariableName] = _undefined;
+					window [_globalVariableName] = _undefined;
 						/* NOTE:
-							Once we've harvested the global qualifier properties, we clean them up so that they don't continue taking up space in memory.
+							We've harvested the global variable for the declarative widget properties, so we set it to undefined so there aren't lingering references to the data lying around (which could impact memory usage).
 						*/
+					var _children = _properties.children;
+					if (_children && typeof _children == 'object') {
+						for (var _childName in _children) {
+							var
+								_childProperties = _children [_childName],
+								_childIdPrefix = _childProperties.idPrefix
+							;
+							if (_childProperties.idPrefixConstruction != 'same as parent')
+								window [
+									'$' + this._constructIdPrefix (
+										_idPrefix,_childIdPrefix,_childName,_childIdPrefix ? 'explicit' : _undefined
+									)
+								] = _childProperties
+							;
+						}
+					}
+					delete _properties.children;
+					delete _properties.widgetClass;
+				} else {
+					_properties = _undefined;
 				}
-				return _result;
-			}
+				return _properties;
+			};
 
-		/*** Private Instance Methods ***/
-			_classPrototype._applyDeclarativeSyntaxDataIfPresent = function () {
-				var _declarativeSyntaxData = _getDeclarativeSyntaxData (this._idPrefix,this.parent);
-				_declarativeSyntaxData && this.set (_declarativeSyntaxData);
+			_classPrototype._applyDeclarativeWidgetProperties =
+			_classPrototype.applyDeclarativeWidgetProperties = function () {
+				var
+					_this = this,
+					_declarativeWidgetProperties = _this._harvestDeclarativeWidgetProperties (_this._idPrefix,_this.parent)
+				;
+				_declarativeWidgetProperties && _this.set (_declarativeWidgetProperties);
 			};
 
 			_classPrototype._constructIdPrefix = function (_parentIdPrefix,_childIdPrefix,_childName,_idPrefixConstruction) {
 				return (
-					(_idPrefixConstruction == _concatenated || !_idPrefixConstruction) && _parentIdPrefix != _undefined
+					(!_idPrefixConstruction || _idPrefixConstruction == _concatenated) && _parentIdPrefix != _undefined
 						? (_parentIdPrefix + (_childName !== '' ? '_' : '') + _childName)
 						: (_idPrefixConstruction == 'same as parent' ? _parentIdPrefix : _childIdPrefix)
 				);
@@ -1289,18 +1320,13 @@ Uize.module ({
 							_childIdPrefixConstruction = _child._idPrefixConstruction
 						;
 					}
-					if (!_childIdPrefixConstruction)
-						_childIdPrefixConstruction = _childIdPrefix == _undefined ? _concatenated : 'explicit'
-					;
-					_properties.idPrefixConstruction = _childIdPrefixConstruction;
-					var _declarativeSyntaxData = _getDeclarativeSyntaxData (
-						_properties.idPrefix = _this._constructIdPrefix (
-							_idPrefix,_childIdPrefix,_childName,_childIdPrefixConstruction
-						),
-						_this
-					)
-					_declarativeSyntaxData && Uize.copyInto (_properties,_declarativeSyntaxData);
-					_properties.name = _childName;
+					_properties.idPrefix = _this._constructIdPrefix (
+						_idPrefix,
+						_childIdPrefix,
+						_properties.name = _childName,
+						_properties.idPrefixConstruction =
+							_childIdPrefixConstruction || (_childIdPrefix == _undefined ? _concatenated : 'explicit')
+					);
 					_child && _child.set (_properties);
 					return _this._children [_childName] = _child || new _childInstanceOrClass (_properties);
 					/*?
@@ -1587,7 +1613,7 @@ Uize.module ({
 
 				_classPrototype.wireUi = function () {
 					if (!this.isWired) {
-						this._applyDeclarativeSyntaxDataIfPresent ();
+						this._applyDeclarativeWidgetProperties ();
 						this.set ({wired:_true});
 
 						/*** wire or insert UI of children ***/
@@ -1915,7 +1941,7 @@ Uize.module ({
 						;
 						_this._nodeCache = _null;
 						if (_idPrefix != _undefined) {
-							_this._applyDeclarativeSyntaxDataIfPresent ();
+							_this._applyDeclarativeWidgetProperties ();
 
 							/*** set the idPrefix for every child widget that doesn't have a value set for this property ***/
 								var
