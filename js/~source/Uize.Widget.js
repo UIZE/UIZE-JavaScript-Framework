@@ -57,16 +57,23 @@ Uize.module ({
 			var
 				_class = _superclass.subclass (
 					function (_properties) {
-						var _idPrefix = _properties && _properties.idPrefix;
-						if (_idPrefix) {
-							var _declarativeWidgetProperties =
-								this._harvestDeclarativeWidgetProperties (_idPrefix,_properties.parent)
-							;
-							_declarativeWidgetProperties && Uize.copyInto (_properties,_declarativeWidgetProperties);
+						var _this = this;
+
+						if (_properties) {
+							/*** try to harvest declarative widget properties ***/
+								var _declarativeWidgetProperties =
+									_this._harvestDeclarativeWidgetProperties (_properties.idPrefix,_properties.parent)
+								;
+								_declarativeWidgetProperties && Uize.copyInto (_properties,_declarativeWidgetProperties);
+
+							delete _properties.widgetClass;
 						}
 
+						/*** Private Instance Properties ***/
+							_this._unappliedChildrenProperties = {};
+
 						/*** Public Instance Properties ***/
-							this.children = this._children = {
+							_this.children = _this._children = {
 								/*?
 									Instance Properties
 										children
@@ -94,7 +101,7 @@ Uize.module ({
 					_properties,
 					_globalVariableName
 				;
-				if (
+				(
 					_idPrefix &&
 					(_properties = window [_globalVariableName = '$' + _idPrefix]) &&
 					typeof _properties == 'object' &&
@@ -102,37 +109,17 @@ Uize.module ({
 						/* NOTE:
 							There are still some widgets that are implemented using child widgets where the idPrefix of the child widgets is set to that of the parent widget, and we don't want the global qualifier properties being applied to those child widgets, so we check for this condition.
 						*/
-				) {
-					window [_globalVariableName] = _undefined;
+				)
+					? (window [_globalVariableName] = _undefined)
 						/* NOTE:
 							We've harvested the global variable for the declarative widget properties, so we set it to undefined so there aren't lingering references to the data lying around (which could impact memory usage).
 						*/
-					var _children = _properties.children;
-					if (_children && typeof _children == 'object') {
-						for (var _childName in _children) {
-							var
-								_childProperties = _children [_childName],
-								_childIdPrefix = _childProperties.idPrefix
-							;
-							if (_childProperties.idPrefixConstruction != 'same as parent')
-								window [
-									'$' + this._constructIdPrefix (
-										_idPrefix,_childIdPrefix,_childName,_childIdPrefix ? 'explicit' : _undefined
-									)
-								] = _childProperties
-							;
-						}
-					}
-					delete _properties.children;
-					delete _properties.widgetClass;
-				} else {
-					_properties = _undefined;
-				}
+					: (_properties = _undefined)
+				;
 				return _properties;
 			};
 
-			_classPrototype._applyDeclarativeWidgetProperties =
-			_classPrototype.applyDeclarativeWidgetProperties = function () {
+			_classPrototype._applyDeclarativeWidgetProperties = function () {
 				var
 					_this = this,
 					_declarativeWidgetProperties = _this._harvestDeclarativeWidgetProperties (_this._idPrefix,_this.parent)
@@ -1327,6 +1314,17 @@ Uize.module ({
 						_properties.idPrefixConstruction =
 							_childIdPrefixConstruction || (_childIdPrefix == _undefined ? _concatenated : 'explicit')
 					);
+
+					/*** apply unapplied data for child (set through children set-get property) ***/
+						var
+							_unappliedChildrenProperties = _this._unappliedChildrenProperties,
+							_unappliedChildrenPropertiesForChild = _unappliedChildrenProperties [_childName]
+						;
+						if (_unappliedChildrenPropertiesForChild) {
+							Uize.copyInto (_properties,_unappliedChildrenPropertiesForChild);
+							delete _unappliedChildrenProperties [_childName];
+						}
+
 					_child && _child.set (_properties);
 					return _this._children [_childName] = _child || new _childInstanceOrClass (_properties);
 					/*?
@@ -1828,6 +1826,25 @@ Uize.module ({
 								- see also the =busy= set-get property
 								- see also the =getInherited= instance method
 					*/
+				},
+				_children:{
+					name:'children',
+					conformer:function (_value) {
+						if (_value) {
+							var
+								_children = this._children,
+								_unappliedChildrenProperties = this._unappliedChildrenProperties
+							;
+							for (var _childName in _value) {
+								var _childProperties = _value [_childName];
+								_children [_childName]
+									? _children [_childName].set (_childProperties)
+									: _unappliedChildrenProperties [_childName] = _childProperties
+								;
+							}
+						}
+						return this._children;
+					}
 				},
 				_container:'container',
 					/*?

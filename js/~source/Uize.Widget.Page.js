@@ -190,9 +190,7 @@ Uize.module ({
 						Uize.module ({
 							required:_requiredModules,
 							builder:function () {
-								/*** assign declarative widget properties variable for page widget, with children to adopt ***/
-									_window ['$' + _idPrefix] = {children:_childrenToAdoptTree};
-									_this.applyDeclarativeWidgetProperties ();
+								_this.set ({children:_childrenToAdoptTree});
 
 								/*** recurse tree, adopting all widgets ***/
 									_traverseChildrenToAdoptTree (
@@ -200,13 +198,10 @@ Uize.module ({
 											var _child = _parent.children [_childName];
 											if (!_child) {
 												var _widgetClass = eval (_childProperties.widgetClass || 'Uize.Widget');
-												if (_childName.charCodeAt (0) == 36 && _childName.charCodeAt (1) == 36) {
-													delete _childProperties.widgetClass;
-													delete _childProperties.children;
-													_child = _widgetClass.spawn (_childProperties,_parent);
-												} else {
-													_child = _parent.addChild (_childName,_widgetClass);
-												}
+												_child = _childName.charCodeAt (0) == 36 && _childName.charCodeAt (1) == 36
+													? _widgetClass.spawn (_childProperties,_parent)
+													: _parent.addChild (_childName,_widgetClass)
+												;
 											}
 											return _child;
 										},
