@@ -793,7 +793,7 @@ New Examples to Create
 			- declarative syntax for page's child widgets
 
 	Uize.Widget.TableSort
-		- example showing how multiple table are made sortable with a single spawning declarative
+		- example showing how multiple table are made sortable with a single spawning declaration
 
 	Uize.Tooltip
 

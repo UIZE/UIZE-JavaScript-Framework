@@ -641,7 +641,11 @@
 			</li>
 			<li><a href="#48">48. Uize.Widget</a>
 				<ul>
-					<li><a href="#48_1" title="Support the children property for the object that is used to declare data for a widget (declarative syntax for widget data), to allow data to be declared also for that widget&apos;s child widgets - all in the same data object.">48.1. Support children Property for Declarative Syntax</a></li>
+					<li><a href="#48_1" title="The children set-get property provides a way to access a widget&apos;s various child widgets, and also provides a versatile way to distribute state to the child widgets or invoke the creation of child widgets.">48.1. New children Set-get Property</a>
+						<ul>
+							<li><a href="#48_1_1" title="Support the children property for the object that is used to declare data for a widget (declarative syntax for widget data), to allow data to be declared also for that widget&apos;s child widgets - all in the same data object.">48.1.1. children Set-get Property Supported for Declarative Syntax</a></li>
+						</ul>
+					</li>
 					<li><a href="#48_2" title="Support an array of event name/event handler pairs.">48.2. More Versatile wireNode Method</a></li>
 					<li><a href="#48_3">48.3. - UI Updater Mechanism</a>
 						<ul>
@@ -3947,13 +3951,20 @@ _package.oneOf = function (_values,_default) {
 	<h1 class="heading1" title="48. Uize.Widget"><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>. </span>Uize.Widget</h1>
 	<div class="contents1">
 		<a name="48_1"></a>
-		<h2 class="heading2" title="48. Uize.Widget -&gt; 48.1. Support children Property for Declarative Syntax"><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_1" title="48. Uize.Widget -&gt; 48.1. Support children Property for Declarative Syntax">1</a>. </span>Support children Property for Declarative Syntax</h2>
+		<h2 class="heading2" title="48. Uize.Widget -&gt; 48.1. New children Set-get Property"><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_1" title="48. Uize.Widget -&gt; 48.1. New children Set-get Property">1</a>. </span>New children Set-get Property</h2>
 		<div class="contents2">
-			<p>Support the <code>children</code> property for the object that is used to declare data for a widget (declarative syntax for widget data), to allow data to be declared also for that widget's child widgets - all in the same data object.</p>
+			<p>The <code>children</code> set-get property provides a way to access a widget's various child widgets, and also provides a versatile way to distribute state to the child widgets or invoke the creation of child widgets.</p>
 			
-			<p><span class="allCaps">EXAMPLE</span></p>
+			<p>When the value of the <code>children</code> set-get property is set, a conformer processes the value and attempts to consume it. If the value is an object, then the properties of the object are to be properties objects for child widgets of the widget, and the conformer attempts to distribute those properties objects to the corresponding child widgets. For any properties objects for which there are no corresponding child widgets, they are retained in order to potentially be used later when a child widget that does correspond is added, at which time the properties for the child widget will be supplied as overrides to the properties specified by the code adding the child widget.</p>
 			
-			
+			<a name="48_1_1"></a>
+			<h3 class="heading3" title="48. Uize.Widget -&gt; 48.1. New children Set-get Property -&gt; 48.1.1. children Set-get Property Supported for Declarative Syntax"><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_1" title="48. Uize.Widget -&gt; 48.1. New children Set-get Property">1</a>.<a href="#48_1_1" title="48. Uize.Widget -&gt; 48.1. New children Set-get Property -&gt; 48.1.1. children Set-get Property Supported for Declarative Syntax">1</a>. </span>children Set-get Property Supported for Declarative Syntax</h3>
+			<div class="contents3">
+				<p>Support the <code>children</code> property for the object that is used to declare data for a widget (declarative syntax for widget data), to allow data to be declared also for that widget's child widgets - all in the same data object.</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
 <pre class="sample-code">$page = {
   env:{
     ...
@@ -3965,6 +3976,7 @@ _package.oneOf = function (_values,_default) {
   }
 }
 </pre>
+			</div>
 		</div>
 		
 		<a name="48_2"></a>

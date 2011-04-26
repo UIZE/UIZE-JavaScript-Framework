@@ -80,9 +80,24 @@ Uize.module ({
     /*** Class Constructor ***/
       var
         _class = _superclass.subclass (
-          function () {
+          function (_properties) {
+            var _this = this;
+
+            if (_properties) {
+              /*** try to harvest declarative widget properties ***/
+                var _declarativeWidgetProperties =
+                  _this._harvestDeclarativeWidgetProperties (_properties.idPrefix,_properties.parent)
+                ;
+                _declarativeWidgetProperties &amp;&amp; Uize.copyInto (_properties,_declarativeWidgetProperties);
+
+              delete _properties.widgetClass;
+            }
+
+            /*** Private Instance Properties ***/
+              _this._unappliedChildrenProperties = {};
+
             /*** Public Instance Properties ***/
-              this.children = this._children = {
+              _this.children = _this._children = {
                 /*?
                   Instance Properties
                     children
@@ -105,29 +120,40 @@ Uize.module ({
       ;
 
     /*** Private Instance Methods ***/
-      _classPrototype._applyGlobalQualifierPropertiesIfPresent = function () {
-        /* NOTE:
-          normally, I would create a local variable like _idPrefix first thing, to avoid repeated dereferencing of this._idPrefix, but in this instance the code is optimized for the common case where there are no global qualifiers present, so that we're not always creating a local variable when most of the time there might only be one use of its value
-        */
-        if (
-          window ['$' + this._idPrefix] &amp;&amp;
-          (!this.parent || this._idPrefix != this.parent._idPrefix)
+      _classPrototype._harvestDeclarativeWidgetProperties = function (_idPrefix,_parent) {
+        var
+          _properties,
+          _globalVariableName
+        ;
+        (
+          _idPrefix &amp;&amp;
+          (_properties = window [_globalVariableName = '$' + _idPrefix]) &amp;&amp;
+          typeof _properties == 'object' &amp;&amp;
+          (!_parent || _idPrefix != _parent._idPrefix)
             /* NOTE:
               There are still some widgets that are implemented using child widgets where the idPrefix of the child widgets is set to that of the parent widget, and we don't want the global qualifier properties being applied to those child widgets, so we check for this condition.
             */
-        ) {
-          var _globalQualifierName = '$' + this._idPrefix;
-          this.set (window [_globalQualifierName]);
-          window [_globalQualifierName] = _undefined;
+        )
+          ? (window [_globalVariableName] = _undefined)
             /* NOTE:
-              once we've applied the global qualifier properties, we clean them up so that they don't continue taking up space in memory
+              We've harvested the global variable for the declarative widget properties, so we set it to undefined so there aren't lingering references to the data lying around (which could impact memory usage).
             */
-        }
+          : (_properties = _undefined)
+        ;
+        return _properties;
+      };
+
+      _classPrototype._applyDeclarativeWidgetProperties = function () {
+        var
+          _this = this,
+          _declarativeWidgetProperties = _this._harvestDeclarativeWidgetProperties (_this._idPrefix,_this.parent)
+        ;
+        _declarativeWidgetProperties &amp;&amp; _this.set (_declarativeWidgetProperties);
       };
 
       _classPrototype._constructIdPrefix = function (_parentIdPrefix,_childIdPrefix,_childName,_idPrefixConstruction) {
         return (
-          (_idPrefixConstruction == _concatenated || !_idPrefixConstruction) &amp;&amp; _parentIdPrefix != _undefined
+          (!_idPrefixConstruction || _idPrefixConstruction == _concatenated) &amp;&amp; _parentIdPrefix != _undefined
             ? (_parentIdPrefix + (_childName !== '' ? '_' : '') + _childName)
             : (_idPrefixConstruction == 'same as parent' ? _parentIdPrefix : _childIdPrefix)
         );
@@ -1305,14 +1331,24 @@ Uize.module ({
               _childIdPrefixConstruction = _child._idPrefixConstruction
             ;
           }
-          if (!_childIdPrefixConstruction)
-            _childIdPrefixConstruction = _childIdPrefix == _undefined ? _concatenated : 'explicit'
-          ;
-          _properties.idPrefixConstruction = _childIdPrefixConstruction;
           _properties.idPrefix = _this._constructIdPrefix (
-            _idPrefix,_childIdPrefix,_childName,_childIdPrefixConstruction
+            _idPrefix,
+            _childIdPrefix,
+            _properties.name = _childName,
+            _properties.idPrefixConstruction =
+              _childIdPrefixConstruction || (_childIdPrefix == _undefined ? _concatenated : 'explicit')
           );
-          _properties.name = _childName;
+
+          /*** apply unapplied data for child (set through children set-get property) ***/
+            var
+              _unappliedChildrenProperties = _this._unappliedChildrenProperties,
+              _unappliedChildrenPropertiesForChild = _unappliedChildrenProperties [_childName]
+            ;
+            if (_unappliedChildrenPropertiesForChild) {
+              Uize.copyInto (_properties,_unappliedChildrenPropertiesForChild);
+              delete _unappliedChildrenProperties [_childName];
+            }
+
           _child &amp;&amp; _child.set (_properties);
           return _this._children [_childName] = _child || new _childInstanceOrClass (_properties);
           /*?
@@ -1599,7 +1635,7 @@ Uize.module ({
 
         _classPrototype.wireUi = function () {
           if (!this.isWired) {
-            this._applyGlobalQualifierPropertiesIfPresent ();
+            this._applyDeclarativeWidgetProperties ();
             this.set ({wired:_true});
 
             /*** wire or insert UI of children ***/
@@ -1815,6 +1851,25 @@ Uize.module ({
                 - see also the =getInherited= instance method
           */
         },
+        _children:{
+          name:'children',
+          conformer:function (_value) {
+            if (_value) {
+              var
+                _children = this._children,
+                _unappliedChildrenProperties = this._unappliedChildrenProperties
+              ;
+              for (var _childName in _value) {
+                var _childProperties = _value [_childName];
+                _children [_childName]
+                  ? _children [_childName].set (_childProperties)
+                  : _unappliedChildrenProperties [_childName] = _childProperties
+                ;
+              }
+            }
+            return this._children;
+          }
+        },
         _container:'container',
           /*?
             Set-get Properties
@@ -1927,7 +1982,7 @@ Uize.module ({
             ;
             _this._nodeCache = _null;
             if (_idPrefix != _undefined) {
-              _this._applyGlobalQualifierPropertiesIfPresent ();
+              _this._applyDeclarativeWidgetProperties ();
 
               /*** set the idPrefix for every child widget that doesn't have a value set for this property ***/
                 var

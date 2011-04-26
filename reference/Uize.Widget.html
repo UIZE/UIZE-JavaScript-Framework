@@ -125,35 +125,35 @@
 					<li><a href="#4_1" title="A boolean, indicating whether or not a specific child widget&apos;s UI has already been built and inserted into the DOM by the time that its parent widget wires up the child widgets.">4.1. built</a></li>
 					<li><a href="#4_2" title="A boolean, indicating whether or not the widget is busy.">4.2. busy</a></li>
 					<li><a href="#4_3" title="A boolean, indicating whether or not the instance is busy. A widget subclass can use this set-get property when performing UI updates in order to reflect a busy state.">4.3. busyInherited</a></li>
-					<li><a href="#4_4" title="A string, representing the ID of a container node, or an object reference to a container node, into which the HTML for a widget should be inserted when the insertUi instance method is called.">4.4. container</a></li>
-					<li><a href="#4_5" title="A boolean, specifying whether or not the widget is enabled.">4.5. enabled</a></li>
-					<li><a href="#4_6" title="A boolean, indicating whether or not the instance is enabled. A widget subclass can use this set-get property when performing UI updates in order to reflect a disabled state.">4.6. enabledInherited</a></li>
-					<li><a href="#4_7" title="A string, function, object, or boolean value, specifying the HTML that should be inserted into the document by the insertUi instance method.">4.7. html</a>
+					<li><a href="#4_4" title="IMPLEMENTATION INFO">4.4. children</a></li>
+					<li><a href="#4_5" title="A string, representing the ID of a container node, or an object reference to a container node, into which the HTML for a widget should be inserted when the insertUi instance method is called.">4.5. container</a></li>
+					<li><a href="#4_6" title="A boolean, specifying whether or not the widget is enabled.">4.6. enabled</a></li>
+					<li><a href="#4_7" title="A boolean, indicating whether or not the instance is enabled. A widget subclass can use this set-get property when performing UI updates in order to reflect a disabled state.">4.7. enabledInherited</a></li>
+					<li><a href="#4_8" title="A string, function, object, or boolean value, specifying the HTML that should be inserted into the document by the insertUi instance method.">4.8. html</a>
 						<ul>
-							<li><a href="#4_7_1" title="The following value types are supported for the html set-get property...">4.7.1. Values Types</a>
+							<li><a href="#4_8_1" title="The following value types are supported for the html set-get property...">4.8.1. Values Types</a>
 								<ul>
-									<li><a href="#4_7_1_1" title="Lets you specify a template string for the HTML of a widget.">4.7.1.1. String</a></li>
-									<li><a href="#4_7_1_2" title="Lets you specify a generator function for a widget&apos;s markup.">4.7.1.2. Function</a></li>
-									<li><a href="#4_7_1_3" title="Lets you supply a JavaScript Template Module as the HTML generator for a widget.">4.7.1.3. Object</a></li>
-									<li><a href="#4_7_1_4" title="Lets you embed a JavaScript Template inside a widget&apos;s markup, which will then be used for generating the widget&apos;s UI.">4.7.1.4. Boolean</a></li>
+									<li><a href="#4_8_1_1" title="Lets you specify a template string for the HTML of a widget.">4.8.1.1. String</a></li>
+									<li><a href="#4_8_1_2" title="Lets you specify a generator function for a widget&apos;s markup.">4.8.1.2. Function</a></li>
+									<li><a href="#4_8_1_3" title="Lets you supply a JavaScript Template Module as the HTML generator for a widget.">4.8.1.3. Object</a></li>
+									<li><a href="#4_8_1_4" title="Lets you embed a JavaScript Template inside a widget&apos;s markup, which will then be used for generating the widget&apos;s UI.">4.8.1.4. Boolean</a></li>
 								</ul>
 							</li>
-							<li><a href="#4_7_2" title="When a generator function is called, it is supplied with an object that contains the current state of the set-get properties for the widget instance.">4.7.2. HTML Generator Input</a></li>
+							<li><a href="#4_8_2" title="When a generator function is called, it is supplied with an object that contains the current state of the set-get properties for the widget instance.">4.8.2. HTML Generator Input</a></li>
 						</ul>
 					</li>
-					<li><a href="#4_8" title="A string, specifying the ID prefix to be used when resolving implied nodes and child widgets to DOM node references.">4.8. idPrefix</a></li>
-					<li><a href="#4_9" title="A string, specifying the mode of construction of the value for the idPrefix set-get property.">4.9. idPrefixConstruction</a></li>
-					<li><a href="#4_10" title="A string, specifying the injection mode that should be used when inserting the HTML for a widget into the page.">4.10. insertionMode</a>
+					<li><a href="#4_9" title="A string, specifying the ID prefix to be used when resolving implied nodes and child widgets to DOM node references.">4.9. idPrefix</a></li>
+					<li><a href="#4_10" title="A string, specifying the mode of construction of the value for the idPrefix set-get property.">4.10. idPrefixConstruction</a></li>
+					<li><a href="#4_11" title="A string, specifying the injection mode that should be used when inserting the HTML for a widget into the page.">4.11. insertionMode</a>
 						<ul>
-							<li><a href="#4_10_1" title="The possible values for the insertionMode set-get property are the same as the valid values for the injectModeSTR parameter of the Uize.Node.injectHtml static method: &apos;inner bottom&apos;, &apos;inner top&apos;, &apos;outer bottom&apos;, &apos;outer top&apos;, &apos;inner replace&apos;, and &apos;outer replace&apos;. For a more in-depth discussion of insertion modes and how they behave, consult the reference for the Uize.Node.injectHtml static method.">4.10.1. Values</a></li>
+							<li><a href="#4_11_1" title="The possible values for the insertionMode set-get property are the same as the valid values for the injectModeSTR parameter of the Uize.Node.injectHtml static method: &apos;inner bottom&apos;, &apos;inner top&apos;, &apos;outer bottom&apos;, &apos;outer top&apos;, &apos;inner replace&apos;, and &apos;outer replace&apos;. For a more in-depth discussion of insertion modes and how they behave, consult the reference for the Uize.Node.injectHtml static method.">4.11.1. Values</a></li>
 						</ul>
 					</li>
-					<li><a href="#4_11" title="An object which, if defined, lets you specify localized strings that can be accessed using the localized instance method.">4.11. localized</a></li>
-					<li><a href="#4_12" title="A read-only string, specifying the name of the widget if it is added as a child widget of another widget by calling the addChild instance method on that other widget.">4.12. name</a></li>
-					<li><a href="#4_13" title="An object which, if defined, lets you provide override mappings for implied nodes. Each property&apos;s name-value pair is a single implied node mapping, where the property name is the natural name (as implemented in the widget subclass) for the implied node, and where the property value is the override (which can be either an alternate node name, or an actual node reference).">4.13. nodeMap</a></li>
-					<li><a href="#4_14" title="The implementation for a decorated confirmation dialog.">4.14. showConfirm</a></li>
-					<li><a href="#4_15" title="The implementation for a decorated inform (ie. alert) dialog.">4.15. showInform</a></li>
-					<li><a href="#4_16" title="Inherited from Uize.">4.16. value</a></li>
+					<li><a href="#4_12" title="An object which, if defined, lets you specify localized strings that can be accessed using the localized instance method.">4.12. localized</a></li>
+					<li><a href="#4_13" title="A read-only string, specifying the name of the widget if it is added as a child widget of another widget by calling the addChild instance method on that other widget.">4.13. name</a></li>
+					<li><a href="#4_14" title="An object which, if defined, lets you provide override mappings for implied nodes. Each property&apos;s name-value pair is a single implied node mapping, where the property name is the natural name (as implemented in the widget subclass) for the implied node, and where the property value is the override (which can be either an alternate node name, or an actual node reference).">4.14. nodeMap</a></li>
+					<li><a href="#4_15" title="The implementation for a decorated confirmation dialog.">4.15. showConfirm</a></li>
+					<li><a href="#4_16" title="The implementation for a decorated inform (ie. alert) dialog.">4.16. showInform</a></li>
 					<li><a href="#4_17" title="A boolean, indicating whether or not the widget&apos;s UI has been wired up. This property is set to true after the wireUi instance method has been called on a widget and all its child widgets.">4.17. wired</a></li>
 				</ul>
 			</li>
@@ -255,7 +255,7 @@
 				
 				<p><span class="allCaps">SET-GET PROPERTIES</span></p>
 				
-				<p><code><a href="#4_1">built</a></code> | <code><a href="#4_2">busy</a></code> | <code><a href="#4_3">busyInherited</a></code> | <code><a href="#4_4">container</a></code> | <code><a href="#4_5">enabled</a></code> | <code><a href="#4_6">enabledInherited</a></code> | <code><a href="#4_7">html</a></code> | <code><a href="#4_8">idPrefix</a></code> | <code><a href="#4_9">idPrefixConstruction</a></code> | <code><a href="#4_10">insertionMode</a></code> | <code><a href="#4_11">localized</a></code> | <code><a href="#4_12">name</a></code> | <code><a href="#4_13">nodeMap</a></code> | <code><a href="#4_17">wired</a></code></p>
+				<p><code><a href="#4_1">built</a></code> | <code><a href="#4_2">busy</a></code> | <code><a href="#4_3">busyInherited</a></code> | <code><a href="#2_1">children</a></code> | <code><a href="#4_5">container</a></code> | <code><a href="#4_6">enabled</a></code> | <code><a href="#4_7">enabledInherited</a></code> | <code><a href="#4_8">html</a></code> | <code><a href="#4_9">idPrefix</a></code> | <code><a href="#4_10">idPrefixConstruction</a></code> | <code><a href="#4_11">insertionMode</a></code> | <code><a href="#4_12">localized</a></code> | <code><a href="#4_13">name</a></code> | <code><a href="#4_14">nodeMap</a></code> | <code><a href="#4_17">wired</a></code></p>
 				
 				<p><span class="allCaps">STATIC METHODS</span></p>
 				
@@ -292,10 +292,6 @@
 				<p><span class="allCaps">INSTANCE METHODS</span></p>
 				
 				<p><code><a href="#3_7">fire</a></code> | <code><a href="#3_9">get</a></code> | <code><a href="#3_25">set</a></code> | <code><a href="#3_34">toggle</a></code> | <code><a href="#3_35">unwire</a></code> | <code><a href="#3_40">wire</a></code></p>
-				
-				<p><span class="allCaps">SET-GET PROPERTIES</span></p>
-				
-				<p><code><a href="#4_16">value</a></code></p>
 				
 				<p><span class="allCaps">STATIC METHODS</span></p>
 				
@@ -433,7 +429,7 @@ mySlideShow.children.next
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>returns a reference to the child widget instance that was added</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the value of the <code>childWidgetNameSTR</code> can be <code>null</code> or <code>undefined</code> if a value is specified for the <code><a href="#4_12">name</a></code> property in the <code>childWidgetPropertiesOBJ</code> parameter</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the value of the <code>childWidgetNameSTR</code> can be <code>null</code> or <code>undefined</code> if a value is specified for the <code><a href="#4_13">name</a></code> property in the <code>childWidgetPropertiesOBJ</code> parameter</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#3_22">removeChild</a></code> instance method, and the <code><a href="#2_1">children</a></code> instance property</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -581,9 +577,9 @@ mySlideShow.children.next
 <pre class="sample-code">myWidget.buildHtml ();
 </pre>
 			
-			<p>HTML for a widget instance is generated by using the instance's <code><a href="#4_7">html</a></code> set-get property. If the value of the <code><a href="#4_7">html</a></code> property is a function, or is an object with a <code>process</code> property whose value is a function, then the HTML generator function will be supplied with the current state of the instance's set-get properties as input - in the form of a single input object.</p>
+			<p>HTML for a widget instance is generated by using the instance's <code><a href="#4_8">html</a></code> set-get property. If the value of the <code><a href="#4_8">html</a></code> property is a function, or is an object with a <code>process</code> property whose value is a function, then the HTML generator function will be supplied with the current state of the instance's set-get properties as input - in the form of a single input object.</p>
 			
-			<p>The generated HTML for the widget is inserted into a node in the document, according to a series of fallbacks. Priority is given to the <code><a href="#4_4">container</a></code> set-get property. If <code><a href="#4_4">container</a></code> is set to <code>null</code> or <code>undefined</code>, then the <code><a href="#5_2">shell</a></code> implied node is considered. If the <code><a href="#5_2">shell</a></code> implied node is not present, then the <a href="#5_1">Root Node</a> is considered. If no <a href="#5_1">Root Node</a> is present, then the HTML is inserted at the bottom of the document's body.</p>
+			<p>The generated HTML for the widget is inserted into a node in the document, according to a series of fallbacks. Priority is given to the <code><a href="#4_5">container</a></code> set-get property. If <code><a href="#4_5">container</a></code> is set to <code>null</code> or <code>undefined</code>, then the <code><a href="#5_2">shell</a></code> implied node is considered. If the <code><a href="#5_2">shell</a></code> implied node is not present, then the <a href="#5_1">Root Node</a> is considered. If no <a href="#5_1">Root Node</a> is present, then the HTML is inserted at the bottom of the document's body.</p>
 			
 			<p>This method always builds the HTML for a widget instance and does not consider the value of the instance's <code><a href="#4_1">built</a></code> set-get property. Moreover, after this method has been called, the <code><a href="#4_1">built</a></code> set-get property will be set to <code>true</code>.</p>
 			
@@ -1004,9 +1000,9 @@ mySlideShow.children.next
 			<a name="3_16_1"></a>
 			<h3 class="heading3" title="3. Instance Methods -&gt; 3.16. inform -&gt; 3.16.1. How It Works"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_16" title="3. Instance Methods -&gt; 3.16. inform">16</a>.<a href="#3_16_1" title="3. Instance Methods -&gt; 3.16. inform -&gt; 3.16.1. How It Works">1</a>. </span>How It Works</h3>
 			<div class="contents3">
-				<p>Strictly speaking, the parameters supported by the <code>paramsOBJ</code> parameter are determined by the specific implementation of inform. Technically, what happens when the <code><a href="#3_16">inform</a></code> instance method is called is that the widget finds the nearest parent up the parent chain that provides an implementation for the <code><a href="#4_15">showInform</a></code> instance method.</p>
+				<p>Strictly speaking, the parameters supported by the <code>paramsOBJ</code> parameter are determined by the specific implementation of inform. Technically, what happens when the <code><a href="#3_16">inform</a></code> instance method is called is that the widget finds the nearest parent up the parent chain that provides an implementation for the <code><a href="#4_16">showInform</a></code> instance method.</p>
 				
-				<p>Typically, <code><a href="#4_15">showInform</a></code> is implemented at the page widget level, but it can also be overrided by parent widgets closer to the widget on which the <code><a href="#3_16">inform</a></code> instance method is called. If no <code><a href="#4_15">showInform</a></code> implementation is provided, anywhere up the parent chain, then the browser's default <code>alert global function</code> is used.</p>
+				<p>Typically, <code><a href="#4_16">showInform</a></code> is implemented at the page widget level, but it can also be overrided by parent widgets closer to the widget on which the <code><a href="#3_16">inform</a></code> instance method is called. If no <code><a href="#4_16">showInform</a></code> implementation is provided, anywhere up the parent chain, then the browser's default <code>alert global function</code> is used.</p>
 				
 				<p>Because a decorated HTML implementation is asynchronous in its behavior, the inform logic must be coded asynchronously by providing a callback handler through the <code>callback</code> parameter - even in the case where this class resorts to using the built-in <code>alert global function</code>.</p>
 			</div>
@@ -1233,9 +1229,9 @@ var localWelcome = myWidget.localize (
 			<a name="3_21_1"></a>
 			<h3 class="heading3" title="3. Instance Methods -&gt; 3.21. localize -&gt; 3.21.1. Providence"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_21" title="3. Instance Methods -&gt; 3.21. localize">21</a>.<a href="#3_21_1" title="3. Instance Methods -&gt; 3.21. localize -&gt; 3.21.1. Providence">1</a>. </span>Providence</h3>
 			<div class="contents3">
-				<p>An important feature of the <code><a href="#3_21">localize</a></code> method is its ability to go up the parent chain of a widget to find the nearest parent widget that provides a value for the specified resource in its <code><a href="#4_11">localized</a></code> set-get property.</p>
+				<p>An important feature of the <code><a href="#3_21">localize</a></code> method is its ability to go up the parent chain of a widget to find the nearest parent widget that provides a value for the specified resource in its <code><a href="#4_12">localized</a></code> set-get property.</p>
 				
-				<p>This allows localized resources to be registered with the top-most parent widget in a page - the page widget - if that is what proves most convenient for the application. Additionally, a parent widget might define a value for a localized resource which is overrided by a child widget's <code><a href="#4_11">localized</a></code> resources map.</p>
+				<p>This allows localized resources to be registered with the top-most parent widget in a page - the page widget - if that is what proves most convenient for the application. Additionally, a parent widget might define a value for a localized resource which is overrided by a child widget's <code><a href="#4_12">localized</a></code> resources map.</p>
 				
 				<p><span class="allCaps">EXAMPLE</span></p>
 				
@@ -1261,7 +1257,7 @@ var localWelcome = myWidget.localize ('welcomeMessage',['Chris','California','US
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#4_11">localized</a></code> set-get property.</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#4_12">localized</a></code> set-get property.</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -1286,7 +1282,7 @@ var localWelcome = myWidget.localize ('welcomeMessage',['Chris','California','US
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#3_1">addChild</a></code> instance method, and the <code><a href="#2_1">children</a></code> instance property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#3_1">addChild</a></code> instance method, and the <code><a href="#4_4">children</a></code> instance property</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -1542,7 +1538,7 @@ var localWelcome = myWidget.localize ('welcomeMessage',['Chris','California','US
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>you can use the <code><a href="#3_32">setNodeValue</a></code> instance method to set values on readonly form elements</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the corresponding <code><a href="#3_13">getNodeValue</a></code> instance method</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the <code><a href="#4_16">value</a></code> parameter can be an object that implements a <code>valueOf</code> interface (such as an instance of a <code><a href="../reference/Uize.html">Uize</a></code> subclass that implements the <code><a href="#4_16">value</a></code> set-get property)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the <code>value</code> parameter can be an object that implements a <code>valueOf</code> interface (such as an instance of a <code><a href="../reference/Uize.html">Uize</a></code> subclass that implements the <code>value</code> set-get property)</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code>Uize.Node.setValue</code> static method</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -2024,7 +2020,7 @@ myWidget.unwireNode (
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>true</code></td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this set-get property has a significantly different effect to the <code><a href="#4_5">enabled</a></code> set-get property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this set-get property has a significantly different effect to the <code><a href="#4_6">enabled</a></code> set-get property</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -2055,7 +2051,17 @@ myWidget.unwireNode (
 		</div>
 		
 		<a name="4_4"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.4. container"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_4" title="4. Set-get Properties -&gt; 4.4. container">4</a>. </span>container</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.4. children"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_4" title="4. Set-get Properties -&gt; 4.4. children">4</a>. </span>children</h2>
+		<div class="contents2">
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_5"></a>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.5. container"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_5" title="4. Set-get Properties -&gt; 4.5. container">5</a>. </span>container</h2>
 		<div class="contents2">
 			<p>A string, representing the ID of a container node, or an object reference to a container node, into which the HTML for a widget should be inserted when the <code><a href="#3_19">insertUi</a></code> instance method is called.</p>
 			
@@ -2071,8 +2077,8 @@ myWidget.unwireNode (
 			</table>
 		</div>
 		
-		<a name="4_5"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.5. enabled"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_5" title="4. Set-get Properties -&gt; 4.5. enabled">5</a>. </span>enabled</h2>
+		<a name="4_6"></a>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.6. enabled"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_6" title="4. Set-get Properties -&gt; 4.6. enabled">6</a>. </span>enabled</h2>
 		<div class="contents2">
 			<p>A boolean, specifying whether or not the widget is enabled.</p>
 			
@@ -2091,18 +2097,18 @@ myWidget.unwireNode (
 			</table>
 		</div>
 		
-		<a name="4_6"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.6. enabledInherited"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_6" title="4. Set-get Properties -&gt; 4.6. enabledInherited">6</a>. </span>enabledInherited</h2>
+		<a name="4_7"></a>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.7. enabledInherited"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_7" title="4. Set-get Properties -&gt; 4.7. enabledInherited">7</a>. </span>enabledInherited</h2>
 		<div class="contents2">
 			<p>A boolean, indicating whether or not the instance is enabled. A widget subclass can use this set-get property when performing UI updates in order to reflect a disabled state.</p>
 			
-			<p>This property will be set to <code>true</code> if the <code><a href="#4_5">enabled</a></code> set-get property is set to <code>true</code>, or if <code><a href="#4_5">enabled</a></code> is set to <code>'inherit'</code> and the inherited value resolves to either <code>'inherit'</code> or <code>true</code>.</p>
+			<p>This property will be set to <code>true</code> if the <code><a href="#4_6">enabled</a></code> set-get property is set to <code>true</code>, or if <code><a href="#4_6">enabled</a></code> is set to <code>'inherit'</code> and the inherited value resolves to either <code>'inherit'</code> or <code>true</code>.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>true</code></td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#4_5">enabled</a></code> set-get property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#4_6">enabled</a></code> set-get property</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#3_10">getInherited</a></code> instance method</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -2112,40 +2118,40 @@ myWidget.unwireNode (
 			</table>
 		</div>
 		
-		<a name="4_7"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.7. html"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_7" title="4. Set-get Properties -&gt; 4.7. html">7</a>. </span>html</h2>
+		<a name="4_8"></a>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.8. html"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_8" title="4. Set-get Properties -&gt; 4.8. html">8</a>. </span>html</h2>
 		<div class="contents2">
 			<p>A string, function, object, or boolean value, specifying the HTML that should be inserted into the document by the <code><a href="#3_19">insertUi</a></code> instance method.</p>
 			
-			<a name="4_7_1"></a>
-			<h3 class="heading3" title="4. Set-get Properties -&gt; 4.7. html -&gt; 4.7.1. Values Types"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_7" title="4. Set-get Properties -&gt; 4.7. html">7</a>.<a href="#4_7_1" title="4. Set-get Properties -&gt; 4.7. html -&gt; 4.7.1. Values Types">1</a>. </span>Values Types</h3>
+			<a name="4_8_1"></a>
+			<h3 class="heading3" title="4. Set-get Properties -&gt; 4.8. html -&gt; 4.8.1. Values Types"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_8" title="4. Set-get Properties -&gt; 4.8. html">8</a>.<a href="#4_8_1" title="4. Set-get Properties -&gt; 4.8. html -&gt; 4.8.1. Values Types">1</a>. </span>Values Types</h3>
 			<div class="contents3">
-				<p>The following value types are supported for the <code><a href="#4_7">html</a></code> set-get property...</p>
+				<p>The following value types are supported for the <code><a href="#4_8">html</a></code> set-get property...</p>
 				
-				<a name="4_7_1_1"></a>
-				<h4 class="heading4" title="4. Set-get Properties -&gt; 4.7. html -&gt; 4.7.1. Values Types -&gt; 4.7.1.1. String"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_7" title="4. Set-get Properties -&gt; 4.7. html">7</a>.<a href="#4_7_1" title="4. Set-get Properties -&gt; 4.7. html -&gt; 4.7.1. Values Types">1</a>.<a href="#4_7_1_1" title="4. Set-get Properties -&gt; 4.7. html -&gt; 4.7.1. Values Types -&gt; 4.7.1.1. String">1</a>. </span>String</h4>
+				<a name="4_8_1_1"></a>
+				<h4 class="heading4" title="4. Set-get Properties -&gt; 4.8. html -&gt; 4.8.1. Values Types -&gt; 4.8.1.1. String"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_8" title="4. Set-get Properties -&gt; 4.8. html">8</a>.<a href="#4_8_1" title="4. Set-get Properties -&gt; 4.8. html -&gt; 4.8.1. Values Types">1</a>.<a href="#4_8_1_1" title="4. Set-get Properties -&gt; 4.8. html -&gt; 4.8.1. Values Types -&gt; 4.8.1.1. String">1</a>. </span>String</h4>
 				<div class="contents4">
 					<p>Lets you specify a template string for the HTML of a widget.</p>
 					
 					<p>A string value specified for this property may contain tokens of the form <code>[#setGetPropertyName]</code>, which will be substituted by the values of the corresponding set-get properties of the widget.</p>
 				</div>
 				
-				<a name="4_7_1_2"></a>
-				<h4 class="heading4" title="4. Set-get Properties -&gt; 4.7. html -&gt; 4.7.1. Values Types -&gt; 4.7.1.2. Function"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_7" title="4. Set-get Properties -&gt; 4.7. html">7</a>.<a href="#4_7_1" title="4. Set-get Properties -&gt; 4.7. html -&gt; 4.7.1. Values Types">1</a>.<a href="#4_7_1_2" title="4. Set-get Properties -&gt; 4.7. html -&gt; 4.7.1. Values Types -&gt; 4.7.1.2. Function">2</a>. </span>Function</h4>
+				<a name="4_8_1_2"></a>
+				<h4 class="heading4" title="4. Set-get Properties -&gt; 4.8. html -&gt; 4.8.1. Values Types -&gt; 4.8.1.2. Function"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_8" title="4. Set-get Properties -&gt; 4.8. html">8</a>.<a href="#4_8_1" title="4. Set-get Properties -&gt; 4.8. html -&gt; 4.8.1. Values Types">1</a>.<a href="#4_8_1_2" title="4. Set-get Properties -&gt; 4.8. html -&gt; 4.8.1. Values Types -&gt; 4.8.1.2. Function">2</a>. </span>Function</h4>
 				<div class="contents4">
 					<p>Lets you specify a generator function for a widget's markup.</p>
 					
-					<p>A function that you register as an HTML generator for your widget using the <code><a href="#4_7">html</a></code> set-get property should expect to receive one parameter, being an object containing the <a href="#4_7_2">HTML Generator Input</a>. The function should return a string, being the generated HTML markup for the widget. While the generator function can use the values in the <a href="#4_7_2">HTML Generator Input</a> object when constructing the HTML for the widget, the string returned by the function may also contain tokens of the form <code>[#setGetPropertyName]</code>, which will be substituted by the values of the corresponding set-get properties of the widget.</p>
+					<p>A function that you register as an HTML generator for your widget using the <code><a href="#4_8">html</a></code> set-get property should expect to receive one parameter, being an object containing the <a href="#4_8_2">HTML Generator Input</a>. The function should return a string, being the generated HTML markup for the widget. While the generator function can use the values in the <a href="#4_8_2">HTML Generator Input</a> object when constructing the HTML for the widget, the string returned by the function may also contain tokens of the form <code>[#setGetPropertyName]</code>, which will be substituted by the values of the corresponding set-get properties of the widget.</p>
 				</div>
 				
-				<a name="4_7_1_3"></a>
-				<h4 class="heading4" title="4. Set-get Properties -&gt; 4.7. html -&gt; 4.7.1. Values Types -&gt; 4.7.1.3. Object"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_7" title="4. Set-get Properties -&gt; 4.7. html">7</a>.<a href="#4_7_1" title="4. Set-get Properties -&gt; 4.7. html -&gt; 4.7.1. Values Types">1</a>.<a href="#4_7_1_3" title="4. Set-get Properties -&gt; 4.7. html -&gt; 4.7.1. Values Types -&gt; 4.7.1.3. Object">3</a>. </span>Object</h4>
+				<a name="4_8_1_3"></a>
+				<h4 class="heading4" title="4. Set-get Properties -&gt; 4.8. html -&gt; 4.8.1. Values Types -&gt; 4.8.1.3. Object"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_8" title="4. Set-get Properties -&gt; 4.8. html">8</a>.<a href="#4_8_1" title="4. Set-get Properties -&gt; 4.8. html -&gt; 4.8.1. Values Types">1</a>.<a href="#4_8_1_3" title="4. Set-get Properties -&gt; 4.8. html -&gt; 4.8.1. Values Types -&gt; 4.8.1.3. Object">3</a>. </span>Object</h4>
 				<div class="contents4">
 					<p>Lets you supply a JavaScript Template Module as the HTML generator for a widget.</p>
 					
-					<p>When specifying an object for this property, the object should contain a <code>process</code> property that is a generator function. That generator function should expect to receive one parameter, being an object containing the <a href="#4_7_2">HTML Generator Input</a>. The function should return a string, being the generated HTML markup for the widget. The string returned will <b>not</b> be processed any further and will be inserted into the document as is, so it is the reponsibility of the generator function in this case to stitch in any values it cares to from the <a href="#4_7_2">HTML Generator Input</a>.</p>
+					<p>When specifying an object for this property, the object should contain a <code>process</code> property that is a generator function. That generator function should expect to receive one parameter, being an object containing the <a href="#4_8_2">HTML Generator Input</a>. The function should return a string, being the generated HTML markup for the widget. The string returned will <b>not</b> be processed any further and will be inserted into the document as is, so it is the reponsibility of the generator function in this case to stitch in any values it cares to from the <a href="#4_8_2">HTML Generator Input</a>.</p>
 					
-					<p>Now, typically an object specified for the <code><a href="#4_7">html</a></code> set-get property will be a JavaScript Template Module, but you can supply any object - the only requirement is that it have a <code>process</code> property that is a generator function. Since the function type value for the <code><a href="#4_7">html</a></code> set-get property results in the string returned by the function being processed further with token substitution, using the object type is one way to dodge that extra processing if it's not desired - without actually having to create a full-blown JavaScript Template Module.</p>
+					<p>Now, typically an object specified for the <code><a href="#4_8">html</a></code> set-get property will be a JavaScript Template Module, but you can supply any object - the only requirement is that it have a <code>process</code> property that is a generator function. Since the function type value for the <code><a href="#4_8">html</a></code> set-get property results in the string returned by the function being processed further with token substitution, using the object type is one way to dodge that extra processing if it's not desired - without actually having to create a full-blown JavaScript Template Module.</p>
 					
 					<p><span class="allCaps">INSTEAD OF...</span></p>
 					
@@ -2160,17 +2166,17 @@ myWidget.unwireNode (
 </pre>
 				</div>
 				
-				<a name="4_7_1_4"></a>
-				<h4 class="heading4" title="4. Set-get Properties -&gt; 4.7. html -&gt; 4.7.1. Values Types -&gt; 4.7.1.4. Boolean"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_7" title="4. Set-get Properties -&gt; 4.7. html">7</a>.<a href="#4_7_1" title="4. Set-get Properties -&gt; 4.7. html -&gt; 4.7.1. Values Types">1</a>.<a href="#4_7_1_4" title="4. Set-get Properties -&gt; 4.7. html -&gt; 4.7.1. Values Types -&gt; 4.7.1.4. Boolean">4</a>. </span>Boolean</h4>
+				<a name="4_8_1_4"></a>
+				<h4 class="heading4" title="4. Set-get Properties -&gt; 4.8. html -&gt; 4.8.1. Values Types -&gt; 4.8.1.4. Boolean"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_8" title="4. Set-get Properties -&gt; 4.8. html">8</a>.<a href="#4_8_1" title="4. Set-get Properties -&gt; 4.8. html -&gt; 4.8.1. Values Types">1</a>.<a href="#4_8_1_4" title="4. Set-get Properties -&gt; 4.8. html -&gt; 4.8.1. Values Types -&gt; 4.8.1.4. Boolean">4</a>. </span>Boolean</h4>
 				<div class="contents4">
 					<p>Lets you embed a JavaScript Template inside a widget's markup, which will then be used for generating the widget's UI.</p>
 					
-					<p>When the boolean value <code>true</code> is set for this property, and if the <code><a href="../reference/Uize.Template.html">Uize.Template</a></code> module is loaded, then the <code>Uize.Widget</code> class will attempt to find a <code>script</code> tag inside the container, shell, or <a href="#5_1">Root Node</a> of the widget with the type "text/jst" (JavaScript Template). If such a <code>script</code> tag is found, then its contents will be compiled by the <code><a href="../reference/Uize.Template.html">Uize.Template</a></code> module and the resulting JST module will be set on the <code><a href="#4_7">html</a></code> set-get property.</p>
+					<p>When the boolean value <code>true</code> is set for this property, and if the <code><a href="../reference/Uize.Template.html">Uize.Template</a></code> module is loaded, then the <code>Uize.Widget</code> class will attempt to find a <code>script</code> tag inside the container, shell, or <a href="#5_1">Root Node</a> of the widget with the type "text/jst" (JavaScript Template). If such a <code>script</code> tag is found, then its contents will be compiled by the <code><a href="../reference/Uize.Template.html">Uize.Template</a></code> module and the resulting JST module will be set on the <code><a href="#4_8">html</a></code> set-get property.</p>
 				</div>
 			</div>
 			
-			<a name="4_7_2"></a>
-			<h3 class="heading3" title="4. Set-get Properties -&gt; 4.7. html -&gt; 4.7.2. HTML Generator Input"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_7" title="4. Set-get Properties -&gt; 4.7. html">7</a>.<a href="#4_7_2" title="4. Set-get Properties -&gt; 4.7. html -&gt; 4.7.2. HTML Generator Input">2</a>. </span>HTML Generator Input</h3>
+			<a name="4_8_2"></a>
+			<h3 class="heading3" title="4. Set-get Properties -&gt; 4.8. html -&gt; 4.8.2. HTML Generator Input"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_8" title="4. Set-get Properties -&gt; 4.8. html">8</a>.<a href="#4_8_2" title="4. Set-get Properties -&gt; 4.8. html -&gt; 4.8.2. HTML Generator Input">2</a>. </span>HTML Generator Input</h3>
 			<div class="contents3">
 				<p>When a generator function is called, it is supplied with an object that contains the current state of the set-get properties for the widget instance.</p>
 				
@@ -2195,15 +2201,15 @@ myWidget.unwireNode (
 			</table>
 		</div>
 		
-		<a name="4_8"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.8. idPrefix"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_8" title="4. Set-get Properties -&gt; 4.8. idPrefix">8</a>. </span>idPrefix</h2>
+		<a name="4_9"></a>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.9. idPrefix"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_9" title="4. Set-get Properties -&gt; 4.9. idPrefix">9</a>. </span>idPrefix</h2>
 		<div class="contents2">
 			<p>A string, specifying the ID prefix to be used when resolving implied nodes and child widgets to DOM node references.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#4_9">idPrefixConstruction</a></code> set-get property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#4_10">idPrefixConstruction</a></code> set-get property</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>undefined</code></td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -2213,25 +2219,25 @@ myWidget.unwireNode (
 			</table>
 		</div>
 		
-		<a name="4_9"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.9. idPrefixConstruction"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_9" title="4. Set-get Properties -&gt; 4.9. idPrefixConstruction">9</a>. </span>idPrefixConstruction</h2>
+		<a name="4_10"></a>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.10. idPrefixConstruction"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_10" title="4. Set-get Properties -&gt; 4.10. idPrefixConstruction">10</a>. </span>idPrefixConstruction</h2>
 		<div class="contents2">
-			<p>A string, specifying the mode of construction of the value for the <code><a href="#4_8">idPrefix</a></code> set-get property.</p>
+			<p>A string, specifying the mode of construction of the value for the <code><a href="#4_9">idPrefix</a></code> set-get property.</p>
 			
-			<p>The value of the <code><a href="#4_9">idPrefixConstruction</a></code> property is used when the value of the <code><a href="#4_8">idPrefix</a></code> property is constructed. This happens either at the time that a widget is added as a child widget of a parent widget using the <code><a href="#3_1">addChild</a></code> instance method, or when the <code><a href="#4_8">idPrefix</a></code> value of a child widget's parent widget is modified <b>after</b> it has already been added as a child.</p>
+			<p>The value of the <code><a href="#4_10">idPrefixConstruction</a></code> property is used when the value of the <code><a href="#4_9">idPrefix</a></code> property is constructed. This happens either at the time that a widget is added as a child widget of a parent widget using the <code><a href="#3_1">addChild</a></code> instance method, or when the <code><a href="#4_9">idPrefix</a></code> value of a child widget's parent widget is modified <b>after</b> it has already been added as a child.</p>
 			
 			<p><span class="allCaps">VALUES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>'same as parent'</code> - When <code><a href="#4_9">idPrefixConstruction</a></code> is set to <code>'same as parent'</code>, the <code><a href="#4_8">idPrefix</a></code> property will be set to the value of a widget's parent widget whenever the <code><a href="#4_8">idPrefix</a></code> value needs to be constructed.</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>'concatenated'</code> - When <code><a href="#4_9">idPrefixConstruction</a></code> is set to <code>'concatenated'</code>, the <code><a href="#4_8">idPrefix</a></code> property will be constructed using the <code><a href="#4_8">idPrefix</a></code> value of a widget's parent widget as a prefix, and using the value of the widget's <code><a href="#4_12">name</a></code> property as a suffix, with the prefix and suffix separated by a "_" (underscore) character. For example, if a button widget has the name <code>'selectAll'</code>, and its parent widget has the <code><a href="#4_8">idPrefix</a></code> value of <code>'page_collection'</code>, then the <code><a href="#4_8">idPrefix</a></code> value produced for the button widget using this <code><a href="#4_9">idPrefixConstruction</a></code> mode would be <code>'page_collection_selectAll'</code>.</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>'explicit'</code> - When <code><a href="#4_9">idPrefixConstruction</a></code> is set to <code>'explicit'</code>, an explicit value specified for a widget's <code><a href="#4_8">idPrefix</a></code> property will be used throughout the lifetime of the widget, and the <code><a href="#4_8">idPrefix</a></code> will not be otherwise derived.</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>undefined</code> (the default value) - When <code><a href="#4_9">idPrefixConstruction</a></code> is set to <code>undefined</code>, the behavior for the value <code>'concatenated'</code> will be used (ie. the value <code>undefined</code> is equivalent to the value <code>'concatenated'</code>).</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>'same as parent'</code> - When <code><a href="#4_10">idPrefixConstruction</a></code> is set to <code>'same as parent'</code>, the <code><a href="#4_9">idPrefix</a></code> property will be set to the value of a widget's parent widget whenever the <code><a href="#4_9">idPrefix</a></code> value needs to be constructed.</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>'concatenated'</code> - When <code><a href="#4_10">idPrefixConstruction</a></code> is set to <code>'concatenated'</code>, the <code><a href="#4_9">idPrefix</a></code> property will be constructed using the <code><a href="#4_9">idPrefix</a></code> value of a widget's parent widget as a prefix, and using the value of the widget's <code><a href="#4_13">name</a></code> property as a suffix, with the prefix and suffix separated by a "_" (underscore) character. For example, if a button widget has the name <code>'selectAll'</code>, and its parent widget has the <code><a href="#4_9">idPrefix</a></code> value of <code>'page_collection'</code>, then the <code><a href="#4_9">idPrefix</a></code> value produced for the button widget using this <code><a href="#4_10">idPrefixConstruction</a></code> mode would be <code>'page_collection_selectAll'</code>.</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>'explicit'</code> - When <code><a href="#4_10">idPrefixConstruction</a></code> is set to <code>'explicit'</code>, an explicit value specified for a widget's <code><a href="#4_9">idPrefix</a></code> property will be used throughout the lifetime of the widget, and the <code><a href="#4_9">idPrefix</a></code> will not be otherwise derived.</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>undefined</code> (the default value) - When <code><a href="#4_10">idPrefixConstruction</a></code> is set to <code>undefined</code>, the behavior for the value <code>'concatenated'</code> will be used (ie. the value <code>undefined</code> is equivalent to the value <code>'concatenated'</code>).</td></tr>
 			</table>
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#4_8">idPrefix</a></code> set-get property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#4_9">idPrefix</a></code> set-get property</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>undefined</code> (equivalent to the value <code>'concatenated'</code>)</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -2241,12 +2247,12 @@ myWidget.unwireNode (
 			</table>
 		</div>
 		
-		<a name="4_10"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.10. insertionMode"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_10" title="4. Set-get Properties -&gt; 4.10. insertionMode">10</a>. </span>insertionMode</h2>
+		<a name="4_11"></a>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.11. insertionMode"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_11" title="4. Set-get Properties -&gt; 4.11. insertionMode">11</a>. </span>insertionMode</h2>
 		<div class="contents2">
 			<p>A string, specifying the injection mode that should be used when inserting the HTML for a widget into the page.</p>
 			
-			<p>This property works in conjunction with the <code><a href="#4_1">built</a></code>, <code><a href="#4_4">container</a></code>, and <code><a href="#4_7">html</a></code> set-get properties. If the value for the <code><a href="#4_1">built</a></code> property is <code>true</code> for a widget instance, then <code><a href="#4_10">insertionMode</a></code> is not applicable. But if the value for <code><a href="#4_1">built</a></code> is <code>false</code>, then the HTML generated using the <code><a href="#4_7">html</a></code> set-get property will be injected into a container node specified by the <code><a href="#4_4">container</a></code> set-get property (or the <code><a href="#5_2">shell</a></code> implied node, or the <a href="#5_1">Root Node</a> of the widget instance, or the document's body, whichever is non-null) using the mode specified by <code><a href="#4_10">insertionMode</a></code>.</p>
+			<p>This property works in conjunction with the <code><a href="#4_1">built</a></code>, <code><a href="#4_5">container</a></code>, and <code><a href="#4_8">html</a></code> set-get properties. If the value for the <code><a href="#4_1">built</a></code> property is <code>true</code> for a widget instance, then <code><a href="#4_11">insertionMode</a></code> is not applicable. But if the value for <code><a href="#4_1">built</a></code> is <code>false</code>, then the HTML generated using the <code><a href="#4_8">html</a></code> set-get property will be injected into a container node specified by the <code><a href="#4_5">container</a></code> set-get property (or the <code><a href="#5_2">shell</a></code> implied node, or the <a href="#5_1">Root Node</a> of the widget instance, or the document's body, whichever is non-null) using the mode specified by <code><a href="#4_11">insertionMode</a></code>.</p>
 			
 			<p><span class="allCaps">EXAMPLE</span></p>
 			
@@ -2265,19 +2271,19 @@ myWidget.unwireNode (
 			
 			<p>In the above example, an instance of the <code><a href="../reference/Uize.Widget.Bar.Slider.html">Uize.Widget.Bar.Slider</a></code> class will have its HTML generated by the template module <code>MySiteNamespace.Templates.Slider</code> and then inserted into the container node <code>quantityUiShell</code>, using the <code>'inner bottom'</code> insertion mode. This means that if the <code>quantityUiShell</code> node already contained contents, that contents will not be replaced by insertion of the widget's HTML, but the widget's HTML will be inserted at the bottom - under the existing contents.</p>
 			
-			<a name="4_10_1"></a>
-			<h3 class="heading3" title="4. Set-get Properties -&gt; 4.10. insertionMode -&gt; 4.10.1. Values"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_10" title="4. Set-get Properties -&gt; 4.10. insertionMode">10</a>.<a href="#4_10_1" title="4. Set-get Properties -&gt; 4.10. insertionMode -&gt; 4.10.1. Values">1</a>. </span>Values</h3>
+			<a name="4_11_1"></a>
+			<h3 class="heading3" title="4. Set-get Properties -&gt; 4.11. insertionMode -&gt; 4.11.1. Values"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_11" title="4. Set-get Properties -&gt; 4.11. insertionMode">11</a>.<a href="#4_11_1" title="4. Set-get Properties -&gt; 4.11. insertionMode -&gt; 4.11.1. Values">1</a>. </span>Values</h3>
 			<div class="contents3">
-				<p>The possible values for the <code><a href="#4_10">insertionMode</a></code> set-get property are the same as the valid values for the <code>injectModeSTR</code> parameter of the <code>Uize.Node.injectHtml</code> static method: <code>'inner bottom'</code>, <code>'inner top'</code>, <code>'outer bottom'</code>, <code>'outer top'</code>, <code>'inner replace'</code>, and <code>'outer replace'</code>. For a more in-depth discussion of insertion modes and how they behave, consult the reference for the <code>Uize.Node.injectHtml</code> static method.</p>
+				<p>The possible values for the <code><a href="#4_11">insertionMode</a></code> set-get property are the same as the valid values for the <code>injectModeSTR</code> parameter of the <code>Uize.Node.injectHtml</code> static method: <code>'inner bottom'</code>, <code>'inner top'</code>, <code>'outer bottom'</code>, <code>'outer top'</code>, <code>'inner replace'</code>, and <code>'outer replace'</code>. For a more in-depth discussion of insertion modes and how they behave, consult the reference for the <code>Uize.Node.injectHtml</code> static method.</p>
 				
-				<p>If the value of the <code><a href="#4_10">insertionMode</a></code> set-get property is <code>null</code>, <code>undefined</code>, or an empty string, then an insertion mode is chosen automatically based upon the node that the HTML is being inserted into: <code>'inner replace'</code> if a container node is specified, and <code>'inner bottom'</code> into the document body if no container node is specified or if the document body is specified for the container.</p>
+				<p>If the value of the <code><a href="#4_11">insertionMode</a></code> set-get property is <code>null</code>, <code>undefined</code>, or an empty string, then an insertion mode is chosen automatically based upon the node that the HTML is being inserted into: <code>'inner replace'</code> if a container node is specified, and <code>'inner bottom'</code> into the document body if no container node is specified or if the document body is specified for the container.</p>
 			</div>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>undefined</code> (which results in default auto behavior)</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#4_1">built</a></code>, <code><a href="#4_4">container</a></code>, and <code><a href="#4_7">html</a></code> set-get properties</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#4_1">built</a></code>, <code><a href="#4_5">container</a></code>, and <code><a href="#4_8">html</a></code> set-get properties</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -2286,10 +2292,10 @@ myWidget.unwireNode (
 			</table>
 		</div>
 		
-		<a name="4_11"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.11. localized"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_11" title="4. Set-get Properties -&gt; 4.11. localized">11</a>. </span>localized</h2>
+		<a name="4_12"></a>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.12. localized"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_12" title="4. Set-get Properties -&gt; 4.12. localized">12</a>. </span>localized</h2>
 		<div class="contents2">
-			<p>An object which, if defined, lets you specify localized strings that can be accessed using the <code><a href="#4_11">localized</a></code> instance method.</p>
+			<p>An object which, if defined, lets you specify localized strings that can be accessed using the <code><a href="#4_12">localized</a></code> instance method.</p>
 			
 			<p><span class="allCaps">EXAMPLE</span></p>
 			
@@ -2318,8 +2324,8 @@ var localWelcome = myWidget.localize (
 			</table>
 		</div>
 		
-		<a name="4_12"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.12. name"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_12" title="4. Set-get Properties -&gt; 4.12. name">12</a>. </span>name</h2>
+		<a name="4_13"></a>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.13. name"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_13" title="4. Set-get Properties -&gt; 4.13. name">13</a>. </span>name</h2>
 		<div class="contents2">
 			<p>A read-only string, specifying the name of the widget if it is added as a child widget of another widget by calling the <code><a href="#3_1">addChild</a></code> instance method on that other widget.</p>
 			
@@ -2338,8 +2344,8 @@ var localWelcome = myWidget.localize (
 			</table>
 		</div>
 		
-		<a name="4_13"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.13. nodeMap"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_13" title="4. Set-get Properties -&gt; 4.13. nodeMap">13</a>. </span>nodeMap</h2>
+		<a name="4_14"></a>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.14. nodeMap"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_14" title="4. Set-get Properties -&gt; 4.14. nodeMap">14</a>. </span>nodeMap</h2>
 		<div class="contents2">
 			<p>An object which, if defined, lets you provide override mappings for implied nodes. Each property's name-value pair is a single implied node mapping, where the property name is the natural name (as implemented in the widget subclass) for the implied node, and where the property value is the override (which can be either an alternate node name, or an actual node reference).</p>
 			
@@ -2355,8 +2361,8 @@ var localWelcome = myWidget.localize (
 			</table>
 		</div>
 		
-		<a name="4_14"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.14. showConfirm"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_14" title="4. Set-get Properties -&gt; 4.14. showConfirm">14</a>. </span>showConfirm</h2>
+		<a name="4_15"></a>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.15. showConfirm"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_15" title="4. Set-get Properties -&gt; 4.15. showConfirm">15</a>. </span>showConfirm</h2>
 		<div class="contents2">
 			<p>The implementation for a decorated confirmation dialog.</p>
 			
@@ -2367,12 +2373,12 @@ var localWelcome = myWidget.localize (
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>undefined</code></td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the <code><a href="#3_5">confirm</a></code> instance method</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the companion <code><a href="#4_15">showInform</a></code> instance method</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the companion <code><a href="#4_16">showInform</a></code> instance method</td></tr>
 			</table>
 		</div>
 		
-		<a name="4_15"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.15. showInform"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_15" title="4. Set-get Properties -&gt; 4.15. showInform">15</a>. </span>showInform</h2>
+		<a name="4_16"></a>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.16. showInform"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_16" title="4. Set-get Properties -&gt; 4.16. showInform">16</a>. </span>showInform</h2>
 		<div class="contents2">
 			<p>The implementation for a decorated inform (ie. alert) dialog.</p>
 			
@@ -2383,19 +2389,7 @@ var localWelcome = myWidget.localize (
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>undefined</code></td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the <code><a href="#3_16">inform</a></code> instance method</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the companion <code><a href="#4_14">showConfirm</a></code> instance method</td></tr>
-			</table>
-		</div>
-		
-		<a name="4_16"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.16. value"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_16" title="4. Set-get Properties -&gt; 4.16. value">16</a>. </span>value</h2>
-		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
-			
-			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
-			
-			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the companion <code><a href="#4_15">showConfirm</a></code> instance method</td></tr>
 			</table>
 		</div>
 		
@@ -2426,7 +2420,7 @@ var localWelcome = myWidget.localize (
 		<div class="contents2">
 			<p>The optional <a href="#5_1">Root Node</a> of a widget is the implied node with the name <code>''</code> (empty string).</p>
 			
-			<p>The <code>id</code> for the root node of a widget instance is the value of that instance's <code><a href="#4_8">idPrefix</a></code> set-get property - there is no "-" (hyphen) separating the <code><a href="#4_8">idPrefix</a></code> and the empty implied node name. So, for an instance of the slider class with its <code><a href="#4_8">idPrefix</a></code> set to the value <code>'mySlider'</code>, the id of that instance's root node would be just <code>mySlider</code>.</p>
+			<p>The <code>id</code> for the root node of a widget instance is the value of that instance's <code><a href="#4_9">idPrefix</a></code> set-get property - there is no "-" (hyphen) separating the <code><a href="#4_9">idPrefix</a></code> and the empty implied node name. So, for an instance of the slider class with its <code><a href="#4_9">idPrefix</a></code> set to the value <code>'mySlider'</code>, the id of that instance's root node would be just <code>mySlider</code>.</p>
 			
 			<p>A reference to the root node can be obtained by either specifying the value <code>''</code> (empty string) or no <code>impliedNodeSTRorBLOB</code> parameter when calling the <code><a href="#3_11">getNode</a></code> instance method, as in...</p>
 			
@@ -2553,7 +2547,7 @@ var alsoTheRootNode = myWidget.getNode ('');
 			<div class="contents3">
 				<p>The <code>propertiesOBJ</code> parameter is an object, containing values for the set-get properties of the widget class of which instances are being spawned.</p>
 				
-				<p>Besides the required <code><a href="#4_8">idPrefix</a></code> property (see <a href="#6_6_3">Special Meaning of idPrefix</a>), the <code>propertiesOBJ</code> parameter may contain values for any of the other set-get properties of the widget class on which this method is being called.</p>
+				<p>Besides the required <code><a href="#4_9">idPrefix</a></code> property (see <a href="#6_6_3">Special Meaning of idPrefix</a>), the <code>propertiesOBJ</code> parameter may contain values for any of the other set-get properties of the widget class on which this method is being called.</p>
 			</div>
 			
 			<a name="6_6_3"></a>
@@ -2563,15 +2557,15 @@ var alsoTheRootNode = myWidget.getNode ('');
 				
 				<p>A value for "idPrefix" must be specified, otherwise the <code><a href="#6_6">Uize.Widget.spawn</a></code> method will not work correctly. The value of this property identifies one or more DOM nodes for which the widget instances should be spawned, and may be a DOM node reference, a string representing the <code>id</code> of a DOM node, an array of DOM node references, or a find expression object that will be used with the <code>Uize.Node.find</code> static method to find the DOM nodes.</p>
 				
-				<p>Once the value of the "idPrefix" property has been resolved to one or more DOM nodes, an instance of the widget class on which the method is called will be created for each of the DOM nodes. For each widget instance that is created, the actual <code><a href="#4_8">idPrefix</a></code> value for the instance will be derived from the <code>id</code> attribute of the DOM node for which the instance is being created. For this reason, the DOM nodes represented by the "idPrefix" property should be the root nodes for the widget instances that will be spawned.</p>
+				<p>Once the value of the "idPrefix" property has been resolved to one or more DOM nodes, an instance of the widget class on which the method is called will be created for each of the DOM nodes. For each widget instance that is created, the actual <code><a href="#4_9">idPrefix</a></code> value for the instance will be derived from the <code>id</code> attribute of the DOM node for which the instance is being created. For this reason, the DOM nodes represented by the "idPrefix" property should be the root nodes for the widget instances that will be spawned.</p>
 			</div>
 			
 			<a name="6_6_4"></a>
 			<h3 class="heading3" title="6. Static Methods -&gt; 6.6. Uize.Widget.spawn -&gt; 6.6.4. Child Widget Naming"><span class="headingNumber"><a href="#6" title="6. Static Methods">6</a>.<a href="#6_6" title="6. Static Methods -&gt; 6.6. Uize.Widget.spawn">6</a>.<a href="#6_6_4" title="6. Static Methods -&gt; 6.6. Uize.Widget.spawn -&gt; 6.6.4. Child Widget Naming">4</a>. </span>Child Widget Naming</h3>
 			<div class="contents3">
-				<p>When spawned widgets are added as child widgets of a specified parent widget, the names of the child widget are - if possible - derived using the value of the <code><a href="#4_8">idPrefix</a></code> set-get property of the parent widget and the value of the <code>id</code> attribute for the DOM node for which a widget instance is being spawned.</p>
+				<p>When spawned widgets are added as child widgets of a specified parent widget, the names of the child widget are - if possible - derived using the value of the <code><a href="#4_9">idPrefix</a></code> set-get property of the parent widget and the value of the <code>id</code> attribute for the DOM node for which a widget instance is being spawned.</p>
 				
-				<p>For example, if the <code>id</code> attribute of a DOM node for which a widget is to be spawned has the value "page_item0", and if the parent widget of the spawned widget is a page widget instance with the <code><a href="#4_8">idPrefix</a></code> value of <code>'page'</code>, then the spawned widget will be added as the child named "item0".</p>
+				<p>For example, if the <code>id</code> attribute of a DOM node for which a widget is to be spawned has the value "page_item0", and if the parent widget of the spawned widget is a page widget instance with the <code><a href="#4_9">idPrefix</a></code> value of <code>'page'</code>, then the spawned widget will be added as the child named "item0".</p>
 			</div>
 			
 			<a name="6_6_5"></a>
@@ -2594,7 +2588,7 @@ var alsoTheRootNode = myWidget.getNode ('');
 				
 				<p>In the above example, instances of the <code><a href="../reference/Uize.Widget.CollectionItem.Zooming.html">Uize.Widget.CollectionItem.Zooming</a></code> widget class are being spawned - one for each of the nodes obtained by evaluating the find expression object <code>{root:'thumbnails',tagName:'A',className:'thumbnail'}</code>.</p>
 				
-				<p>Besides the <code><a href="#4_8">idPrefix</a></code> value here that identifies the DOM nodes for which the <code><a href="../reference/Uize.Widget.CollectionItem.Zooming.html">Uize.Widget.CollectionItem.Zooming</a></code> instances should be created, the values specified for the <code>previewZoomUrl</code> and <code>zoomPower</code> set-get properties of this widget class are common for all instances that are spawned. Finally, the <code>parentWidgetOBJ</code> parameter is used here to attach the spawned instances as children of a page widget instance.</p>
+				<p>Besides the <code><a href="#4_9">idPrefix</a></code> value here that identifies the DOM nodes for which the <code><a href="../reference/Uize.Widget.CollectionItem.Zooming.html">Uize.Widget.CollectionItem.Zooming</a></code> instances should be created, the values specified for the <code>previewZoomUrl</code> and <code>zoomPower</code> set-get properties of this widget class are common for all instances that are spawned. Finally, the <code>parentWidgetOBJ</code> parameter is used here to attach the spawned instances as children of a page widget instance.</p>
 			</div>
 			
 			<p><span class="allCaps">NOTES</span></p>
