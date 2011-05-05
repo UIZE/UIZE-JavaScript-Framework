@@ -1588,28 +1588,6 @@ Uize.Web.ImageLoader
 		- average load time
 
 Uize.Widget
-	New children Set-get Property
-		The =children= set-get property provides a way to access a widget's various child widgets, and also provides a versatile way to distribute state to the child widgets or invoke the creation of child widgets.
-
-		When the value of the =children= set-get property is set, a conformer processes the value and attempts to consume it. If the value is an object, then the properties of the object are to be properties objects for child widgets of the widget, and the conformer attempts to distribute those properties objects to the corresponding child widgets. For any properties objects for which there are no corresponding child widgets, they are retained in order to potentially be used later when a child widget that does correspond is added, at which time the properties for the child widget will be supplied as overrides to the properties specified by the code adding the child widget.
-
-		children Set-get Property Supported for Declarative Syntax
-			Support the =children= property for the object that is used to declare data for a widget (declarative syntax for widget data), to allow data to be declared also for that widget's child widgets - all in the same data object.
-
-			EXAMPLE
-			.......................
-			$page = {
-				env:{
-					...
-				},
-				children:{
-					someChildWidget:{
-						...
-					}
-				}
-			}
-			.......................
-
 	More Versatile wireNode Method
 		Support an array of event name/event handler pairs.
 

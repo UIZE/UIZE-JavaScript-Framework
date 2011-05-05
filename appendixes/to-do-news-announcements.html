@@ -29,12 +29,13 @@
 					<li><a href="#1_2">1.2. Improvements</a>
 						<ul>
 							<li><a href="#1_2_1" title="Widget properties are picked up as early as possible, so that the property values can be available even to code written for the alphastructor of a widget class.">1.2.1. Widget Properties Are Picked Up Early</a></li>
-							<li><a href="#1_2_2" title="Widget properties can now contain properties for child widgets">1.2.2. Widget Properties Can Address Widget Trees</a></li>
+							<li><a href="#1_2_2" title="Widget properties specified for a widget using the declarative syntax can also contain widget properties for any or all of the widget&apos;s child widgets, or even child widgets of the widget&apos;s child widgets - all the way down to the deepest child widgets in the widget&apos;s widget tree.">1.2.2. Widget Properties Can Address Widget Trees</a></li>
 							<li><a href="#1_2_3" title="The Uize.Widget base class has always supported a children instance property, but this instance property has now been turned into a special set-get property.">1.2.3. New children Set-get Property</a>
 								<ul>
-									<li><a href="#1_2_3_1" title="The new children set-get property allows properties to be distributed to all the children of a widget. Consider the following example...">1.2.3.1. Children Property Allows Deep Setting</a></li>
-									<li><a href="#1_2_3_2" title="document...">1.2.3.2. Children Property Allows Deferred Pickup</a></li>
-									<li><a href="#1_2_3_3" title="document...">1.2.3.3. Setting Doesn't Create or Destroy Children</a></li>
+									<li><a href="#1_2_3_1" title="The new children set-get property allows properties to be distributed to all the children of a widget. Consider the following example...">1.2.3.1. The children Set-get Property Allows Deep Setting</a></li>
+									<li><a href="#1_2_3_2" title="The special behavior of the children set-get property allows widget properties to be specified for a child widget even before that child widget has been created.">1.2.3.2. The children Set-get Children Property Allows Deferred Pickup</a></li>
+									<li><a href="#1_2_3_3" title="Along with using the children set-get property in the constructor of a widget instance, when calling the instance&apos;s set method, or in a widget adoption declaration, the children set-get property can also be used in the declarative syntax for widget properties.">1.2.3.3. The children Set-get Property is Respected in the Declarative Syntax</a></li>
+									<li><a href="#1_2_3_4" title="Setting the value of the children set-get property is handled in a special way and has no effect on the actual child widgets for a widget, nor does it affect the value or contents of the children instance property.">1.2.3.4. Setting Doesn't Create or Destroy Children</a></li>
 								</ul>
 							</li>
 						</ul>
@@ -90,14 +91,14 @@
   var page = new Uize.Widget.Page; // the default idPrefix is "page"
 
 /*** declarative syntax widget properties for widget not yet created ***/
-  window.$page_myWidget = {foo:'bar'}; // for the "myWidget" child widget of the page widget
+  window.$page_myWidget = {foo:'bar'}; // for the "myWidget" child widget
 
 /*** create a test widget class ***/
   var MyWidgetClass = Uize.Widget.subclass (
     /*** the alphastructor ***/
       function (_properties) {
         alert (_properties.foo);   // alerts the text "bar"
-        alert (this.get ('foo'));  // alerts the text "undefined" (because set hasn't happened yet)
+        alert (this.get ('foo'));  // alerts the text "undefined" (set hasn't happened)
       },
     /*** the omegastructor ***/
       function (_properties) {
@@ -117,7 +118,7 @@ page.addChild ('myWidget'Uize.Widget);
 			<a name="1_2_2"></a>
 			<h3 class="heading3" title="1. Improved Declarative Widget Properties -&gt; 1.2. Improvements -&gt; 1.2.2. Widget Properties Can Address Widget Trees"><span class="headingNumber"><a href="#1" title="1. Improved Declarative Widget Properties">1</a>.<a href="#1_2" title="1. Improved Declarative Widget Properties -&gt; 1.2. Improvements">2</a>.<a href="#1_2_2" title="1. Improved Declarative Widget Properties -&gt; 1.2. Improvements -&gt; 1.2.2. Widget Properties Can Address Widget Trees">2</a>. </span>Widget Properties Can Address Widget Trees</h3>
 			<div class="contents3">
-				<p>Widget properties can now contain properties for child widgets</p>
+				<p>Widget properties specified for a widget using the declarative syntax can also contain widget properties for any or all of the widget's child widgets, or even child widgets of the widget's child widgets - all the way down to the deepest child widgets in the widget's widget tree.</p>
 			</div>
 			
 			<a name="1_2_3"></a>
@@ -126,50 +127,25 @@ page.addChild ('myWidget'Uize.Widget);
 				<p>The <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> base class has always supported a <code>children</code> instance property, but this instance property has now been turned into a special set-get property.</p>
 				
 				<a name="1_2_3_1"></a>
-				<h4 class="heading4" title="1. Improved Declarative Widget Properties -&gt; 1.2. Improvements -&gt; 1.2.3. New children Set-get Property -&gt; 1.2.3.1. Children Property Allows Deep Setting"><span class="headingNumber"><a href="#1" title="1. Improved Declarative Widget Properties">1</a>.<a href="#1_2" title="1. Improved Declarative Widget Properties -&gt; 1.2. Improvements">2</a>.<a href="#1_2_3" title="1. Improved Declarative Widget Properties -&gt; 1.2. Improvements -&gt; 1.2.3. New children Set-get Property">3</a>.<a href="#1_2_3_1" title="1. Improved Declarative Widget Properties -&gt; 1.2. Improvements -&gt; 1.2.3. New children Set-get Property -&gt; 1.2.3.1. Children Property Allows Deep Setting">1</a>. </span>Children Property Allows Deep Setting</h4>
+				<h4 class="heading4" title="1. Improved Declarative Widget Properties -&gt; 1.2. Improvements -&gt; 1.2.3. New children Set-get Property -&gt; 1.2.3.1. The children Set-get Property Allows Deep Setting"><span class="headingNumber"><a href="#1" title="1. Improved Declarative Widget Properties">1</a>.<a href="#1_2" title="1. Improved Declarative Widget Properties -&gt; 1.2. Improvements">2</a>.<a href="#1_2_3" title="1. Improved Declarative Widget Properties -&gt; 1.2. Improvements -&gt; 1.2.3. New children Set-get Property">3</a>.<a href="#1_2_3_1" title="1. Improved Declarative Widget Properties -&gt; 1.2. Improvements -&gt; 1.2.3. New children Set-get Property -&gt; 1.2.3.1. The children Set-get Property Allows Deep Setting">1</a>. </span>The children Set-get Property Allows Deep Setting</h4>
 				<div class="contents4">
 					<p>The new <code>children</code> set-get property allows properties to be distributed to all the children of a widget. Consider the following example...</p>
 					
 					<p><span class="allCaps">EXAMPLE</span></p>
 					
 					
-<pre class="sample-code">var
-  page = new Uize.Widget.Page,
-  rgbSliders = page.addChild ('rgbSliders',Uize.Widget)
-;
+<pre class="sample-code">/*** build up a widget tree under the page widget ***/
+  var
+    page = new Uize.Widget.Page,
+    rgbSliders = page.addChild ('rgbSliders',Uize.Widget)
+  ;
 
-rgbSliders.addChild ('sliderR',Uize.Widget.Bar.Slider);
-rgbSliders.addChild ('sliderG',Uize.Widget.Bar.Slider);
-rgbSliders.addChild ('sliderB',Uize.Widget.Bar.Slider);
+  rgbSliders.addChild ('sliderR',Uize.Widget.Bar.Slider);
+  rgbSliders.addChild ('sliderG',Uize.Widget.Bar.Slider);
+  rgbSliders.addChild ('sliderB',Uize.Widget.Bar.Slider);
 
-page.set ({
-  children:{
-    rgbSlider:{
-      children:{
-        sliderR:{value:127},
-        sliderG:{value:255},
-        sliderB:{value:0}
-      }
-    }
-  }
-});
-</pre>
-					
-					<p>If the <code>sliderR</code>, <code>sliderG</code>, and <code>sliderB</code> slider widgets together represented an RGB color value, then the above code would initialize them to represent the color chartreuse.</p>
-					
-					<p>Now, this is admittedly not a terribly compelling example of how to use the special behavior of the <code>children</code> set-get property, but it demonstrates the basic principle.</p>
-				</div>
-				
-				<a name="1_2_3_2"></a>
-				<h4 class="heading4" title="1. Improved Declarative Widget Properties -&gt; 1.2. Improvements -&gt; 1.2.3. New children Set-get Property -&gt; 1.2.3.2. Children Property Allows Deferred Pickup"><span class="headingNumber"><a href="#1" title="1. Improved Declarative Widget Properties">1</a>.<a href="#1_2" title="1. Improved Declarative Widget Properties -&gt; 1.2. Improvements">2</a>.<a href="#1_2_3" title="1. Improved Declarative Widget Properties -&gt; 1.2. Improvements -&gt; 1.2.3. New children Set-get Property">3</a>.<a href="#1_2_3_2" title="1. Improved Declarative Widget Properties -&gt; 1.2. Improvements -&gt; 1.2.3. New children Set-get Property -&gt; 1.2.3.2. Children Property Allows Deferred Pickup">2</a>. </span>Children Property Allows Deferred Pickup</h4>
-				<div class="contents4">
-					<p>document...</p>
-					
-					<p><span class="allCaps">EXAMPLE</span></p>
-					
-					
-<pre class="sample-code">var
-  page = new Uize.Widget.Page ({
+/*** now, set values for the deepest widgets in the widget tree ***/
+  page.set ({
     children:{
       rgbSlider:{
         children:{
@@ -179,20 +155,90 @@ page.set ({
         }
       }
     }
-  }),
-  rgbSliders = page.addChild ('rgbSliders',Uize.Widget)
-;
-
-rgbSliders.addChild ('sliderR',Uize.Widget.Bar.Slider);
-rgbSliders.addChild ('sliderG',Uize.Widget.Bar.Slider);
-rgbSliders.addChild ('sliderB',Uize.Widget.Bar.Slider);
+  });
 </pre>
+					
+					<p>If the <code>sliderR</code>, <code>sliderG</code>, and <code>sliderB</code> slider widgets together represented an RGB color value, then the above code would initialize them to represent the color chartreuse.</p>
+					
+					<p>Now, this is admittedly not a terribly compelling example of how to use the special behavior of the <code>children</code> set-get property, but it demonstrates the basic principle.</p>
+				</div>
+				
+				<a name="1_2_3_2"></a>
+				<h4 class="heading4" title="1. Improved Declarative Widget Properties -&gt; 1.2. Improvements -&gt; 1.2.3. New children Set-get Property -&gt; 1.2.3.2. The children Set-get Children Property Allows Deferred Pickup"><span class="headingNumber"><a href="#1" title="1. Improved Declarative Widget Properties">1</a>.<a href="#1_2" title="1. Improved Declarative Widget Properties -&gt; 1.2. Improvements">2</a>.<a href="#1_2_3" title="1. Improved Declarative Widget Properties -&gt; 1.2. Improvements -&gt; 1.2.3. New children Set-get Property">3</a>.<a href="#1_2_3_2" title="1. Improved Declarative Widget Properties -&gt; 1.2. Improvements -&gt; 1.2.3. New children Set-get Property -&gt; 1.2.3.2. The children Set-get Children Property Allows Deferred Pickup">2</a>. </span>The children Set-get Children Property Allows Deferred Pickup</h4>
+				<div class="contents4">
+					<p>The special behavior of the <code>children</code> set-get property allows widget properties to be specified for a child widget even before that child widget has been created.</p>
+					
+					<p><span class="allCaps">EXAMPLE</span></p>
+					
+					
+<pre class="sample-code">/*** create a page widget, specifying properties for child widgets not yet created ***/
+  var page = new Uize.Widget.Page ({
+    children:{
+      rgbSlider:{
+        children:{
+          sliderR:{value:127},
+          sliderG:{value:255},
+          sliderB:{value:0}
+        }
+      }
+    }
+  });
+
+/*** now, create the child widgets for which properties were specified earlier ***/
+  var rgbSliders = page.addChild ('rgbSliders',Uize.Widget);
+
+  rgbSliders.addChild ('sliderR',Uize.Widget.Bar.Slider);
+  rgbSliders.addChild ('sliderG',Uize.Widget.Bar.Slider);
+  rgbSliders.addChild ('sliderB',Uize.Widget.Bar.Slider);
+</pre>
+					
+					<p>In the above example, a page widget is being created and a value is being specified for its <code>children</code> set-get property that is defining widget properties for child widgets in the page widget's widget tree that have not yet been created. Then, after the fact, a widget tree is fleshed out for the page widget, with child widgets that correspond to the structure of the object specified for the <code>children</code> set-get property when the page widget instance was created. Because of the special way that the <code>children</code> set-get property works, the widget properties defined earlier are "picked up" by the child widgets when they are created.</p>
 				</div>
 				
 				<a name="1_2_3_3"></a>
-				<h4 class="heading4" title="1. Improved Declarative Widget Properties -&gt; 1.2. Improvements -&gt; 1.2.3. New children Set-get Property -&gt; 1.2.3.3. Setting Doesn&apos;t Create or Destroy Children"><span class="headingNumber"><a href="#1" title="1. Improved Declarative Widget Properties">1</a>.<a href="#1_2" title="1. Improved Declarative Widget Properties -&gt; 1.2. Improvements">2</a>.<a href="#1_2_3" title="1. Improved Declarative Widget Properties -&gt; 1.2. Improvements -&gt; 1.2.3. New children Set-get Property">3</a>.<a href="#1_2_3_3" title="1. Improved Declarative Widget Properties -&gt; 1.2. Improvements -&gt; 1.2.3. New children Set-get Property -&gt; 1.2.3.3. Setting Doesn&apos;t Create or Destroy Children">3</a>. </span>Setting Doesn't Create or Destroy Children</h4>
+				<h4 class="heading4" title="1. Improved Declarative Widget Properties -&gt; 1.2. Improvements -&gt; 1.2.3. New children Set-get Property -&gt; 1.2.3.3. The children Set-get Property is Respected in the Declarative Syntax"><span class="headingNumber"><a href="#1" title="1. Improved Declarative Widget Properties">1</a>.<a href="#1_2" title="1. Improved Declarative Widget Properties -&gt; 1.2. Improvements">2</a>.<a href="#1_2_3" title="1. Improved Declarative Widget Properties -&gt; 1.2. Improvements -&gt; 1.2.3. New children Set-get Property">3</a>.<a href="#1_2_3_3" title="1. Improved Declarative Widget Properties -&gt; 1.2. Improvements -&gt; 1.2.3. New children Set-get Property -&gt; 1.2.3.3. The children Set-get Property is Respected in the Declarative Syntax">3</a>. </span>The children Set-get Property is Respected in the Declarative Syntax</h4>
 				<div class="contents4">
-					<p>document...</p>
+					<p>Along with using the <code>children</code> set-get property in the constructor of a widget instance, when calling the instance's <code>set</code> method, or in a widget adoption declaration, the <code>children</code> set-get property can also be used in the declarative syntax for widget properties.</p>
+					
+					<p><span class="allCaps">EXAMPLE</span></p>
+					
+					
+<pre class="sample-code">/*** declare widget properties for a page widget ***/
+  window.$page = {
+    children:{
+      rgbSlider:{
+        children:{
+          sliderR:{value:127},
+          sliderG:{value:255},
+          sliderB:{value:0}
+        }
+      }
+    }
+  };
+
+/*** now, create the page widget and build a widget tree under it ***/
+  var
+    page = new Uize.Widget.Page,
+    rgbSliders = page.addChild ('rgbSliders',Uize.Widget)
+  ;
+  rgbSliders.addChild ('sliderR',Uize.Widget.Bar.Slider);
+  rgbSliders.addChild ('sliderG',Uize.Widget.Bar.Slider);
+  rgbSliders.addChild ('sliderB',Uize.Widget.Bar.Slider);
+</pre>
+					
+					<p>In the above example, a the <code>$page</code> property is being defined on the <code>window</code> object. Because the default <code>idPrefix</code> of the page widget is <code>'page'</code>, the <code>$page</code> property is effectively declaring widget properties for the page widget.</p>
+					
+					<p>In our example, the page widget is created later. What you'll notice is that the value of the <code>$page</code> property contains a <code>children</code> property, which is an object containing a single <code>rgbSlider</code> property. This is declaring widget properties for the <code>rgbSlider</code> child widget of the page widget. Furthermore, the <code>rgbSlider</code> property is an object containing its own <code>children</code> property, which is declaring widget properties for the <code>sliderR</code>, <code>sliderG</code>, and <code>sliderB</code> child widgets of the <code>rgbSlider</code> child widget.</p>
+					
+					<p>So, the widget properties declared for a widget using the declarative syntax may contain widget properties for any or all of the child widgets of the widget - all the way down to the deepest child widgets in the widget's widget tree.</p>
+				</div>
+				
+				<a name="1_2_3_4"></a>
+				<h4 class="heading4" title="1. Improved Declarative Widget Properties -&gt; 1.2. Improvements -&gt; 1.2.3. New children Set-get Property -&gt; 1.2.3.4. Setting Doesn&apos;t Create or Destroy Children"><span class="headingNumber"><a href="#1" title="1. Improved Declarative Widget Properties">1</a>.<a href="#1_2" title="1. Improved Declarative Widget Properties -&gt; 1.2. Improvements">2</a>.<a href="#1_2_3" title="1. Improved Declarative Widget Properties -&gt; 1.2. Improvements -&gt; 1.2.3. New children Set-get Property">3</a>.<a href="#1_2_3_4" title="1. Improved Declarative Widget Properties -&gt; 1.2. Improvements -&gt; 1.2.3. New children Set-get Property -&gt; 1.2.3.4. Setting Doesn&apos;t Create or Destroy Children">4</a>. </span>Setting Doesn't Create or Destroy Children</h4>
+				<div class="contents4">
+					<p>Setting the value of the <code>children</code> set-get property is handled in a special way and has no effect on the actual child widgets for a widget, nor does it affect the value or contents of the <code>children</code> instance property.</p>
+					
+					<p>When you set a value for the <code>children</code> set-get property, the widget instance tries to distribute any specified child widget properties to the widget's current child widgets. If widget properties are specified for a child that does not yet exist, that child widget is not created. Instead, the unapplied child widget properties are remembered. If a child widget is added later and its name corresponds to the name of a child widget for which unapplied widget properties have been remembered, then those widget properties are applied at the time of creating the child widget (for more details, see the section <a href="#1_2_3_2">The children Set-get Children Property Allows Deferred Pickup</a>).</p>
 				</div>
 			</div>
 		</div>

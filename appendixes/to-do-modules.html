@@ -641,67 +641,62 @@
 			</li>
 			<li><a href="#48">48. Uize.Widget</a>
 				<ul>
-					<li><a href="#48_1" title="The children set-get property provides a way to access a widget&apos;s various child widgets, and also provides a versatile way to distribute state to the child widgets or invoke the creation of child widgets.">48.1. New children Set-get Property</a>
+					<li><a href="#48_1" title="Support an array of event name/event handler pairs.">48.1. More Versatile wireNode Method</a></li>
+					<li><a href="#48_2">48.2. - UI Updater Mechanism</a>
 						<ul>
-							<li><a href="#48_1_1" title="Support the children property for the object that is used to declare data for a widget (declarative syntax for widget data), to allow data to be declared also for that widget&apos;s child widgets - all in the same data object.">48.1.1. children Set-get Property Supported for Declarative Syntax</a></li>
-						</ul>
-					</li>
-					<li><a href="#48_2" title="Support an array of event name/event handler pairs.">48.2. More Versatile wireNode Method</a></li>
-					<li><a href="#48_3">48.3. - UI Updater Mechanism</a>
-						<ul>
-							<li><a href="#48_3_1" title="- register which properties updaters cover">48.3.1. - register updaters</a></li>
-							<li><a href="#48_3_2" title="- viewed properties are properties whose values are reflected somehow in the view">48.3.2. - viewed properties</a></li>
-							<li><a href="#48_3_3" title="- if the widget is able to update its view, then the appropriate updaters are executed in order to synchronize the view to the new values of the viewed properties">48.3.3. - when the values of viewed properties change, one of two things can happen...</a></li>
-							<li><a href="#48_3_4" title="- a UI Updater can serve multipled viewed properties">48.3.4. - UI Updater</a></li>
-							<li><a href="#48_3_5">48.3.5. - questions to resolve</a>
+							<li><a href="#48_2_1" title="- register which properties updaters cover">48.2.1. - register updaters</a></li>
+							<li><a href="#48_2_2" title="- viewed properties are properties whose values are reflected somehow in the view">48.2.2. - viewed properties</a></li>
+							<li><a href="#48_2_3" title="- if the widget is able to update its view, then the appropriate updaters are executed in order to synchronize the view to the new values of the viewed properties">48.2.3. - when the values of viewed properties change, one of two things can happen...</a></li>
+							<li><a href="#48_2_4" title="- a UI Updater can serve multipled viewed properties">48.2.4. - UI Updater</a></li>
+							<li><a href="#48_2_5">48.2.5. - questions to resolve</a>
 								<ul>
-									<li><a href="#48_3_5_1" title="- how does the subclass flag the property as viewed?">48.3.5.1. - what if a property is not viewed by a superclass but *is* viewed by a subclass?</a></li>
+									<li><a href="#48_2_5_1" title="- how does the subclass flag the property as viewed?">48.2.5.1. - what if a property is not viewed by a superclass but *is* viewed by a subclass?</a></li>
 								</ul>
 							</li>
-							<li><a href="#48_3_6" title="- registered UI updaters can automatically be not called when the UI cannot be updated (because of the widget not being seen, for example)">48.3.6. - Benefits</a></li>
+							<li><a href="#48_2_6" title="- registered UI updaters can automatically be not called when the UI cannot be updated (because of the widget not being seen, for example)">48.2.6. - Benefits</a></li>
 						</ul>
 					</li>
-					<li><a href="#48_4" title="- what would the impact of this change be?">48.4. - should wired be set to true only after wiring of child widgets?</a></li>
-					<li><a href="#48_5" title="- returns the name of an implied node, deduced from its id (implied node doesn&apos;t have to exist in the DOM)">48.5. - getImpliedNodeName (impliedNodeIdSTR) or getImpliedNodeName (impliedNodeOBJ)</a></li>
-					<li><a href="#48_6" title="- returns the id of an implied node, built from its name (implied node doesn&apos;t have to exist in the DOM)">48.6. - getImpliedNodeId (impliedNodeSTR) or getImpliedNodeId (impliedNodeOBJ)</a></li>
-					<li><a href="#48_7" title="- the connection is bi-directional (changing the child widget&apos;s value or node&apos;s value updates set-get property, and changing set-get property value updates child widget&apos;s or node&apos;s value)">48.7. - a way of easily binding any set-get property to either a child widget (or any widget) or an implied node</a></li>
-					<li><a href="#48_8" title="- a general mechanism for widgets to have reasons registered for why they are disabled. Then, a tooltip could display this reason (or reasons) on mousing over the widget, or a dialog with the reason (or reasons) could be displayed when trying to interact with the widget (eg. clicking or mousing down on it)">48.8. - disabled reason mechanism</a></li>
-					<li><a href="#48_9">48.9. - node cache improvements</a>
+					<li><a href="#48_3" title="- what would the impact of this change be?">48.3. - should wired be set to true only after wiring of child widgets?</a></li>
+					<li><a href="#48_4" title="- returns the name of an implied node, deduced from its id (implied node doesn&apos;t have to exist in the DOM)">48.4. - getImpliedNodeName (impliedNodeIdSTR) or getImpliedNodeName (impliedNodeOBJ)</a></li>
+					<li><a href="#48_5" title="- returns the id of an implied node, built from its name (implied node doesn&apos;t have to exist in the DOM)">48.5. - getImpliedNodeId (impliedNodeSTR) or getImpliedNodeId (impliedNodeOBJ)</a></li>
+					<li><a href="#48_6" title="- the connection is bi-directional (changing the child widget&apos;s value or node&apos;s value updates set-get property, and changing set-get property value updates child widget&apos;s or node&apos;s value)">48.6. - a way of easily binding any set-get property to either a child widget (or any widget) or an implied node</a></li>
+					<li><a href="#48_7" title="- a general mechanism for widgets to have reasons registered for why they are disabled. Then, a tooltip could display this reason (or reasons) on mousing over the widget, or a dialog with the reason (or reasons) could be displayed when trying to interact with the widget (eg. clicking or mousing down on it)">48.7. - disabled reason mechanism</a></li>
+					<li><a href="#48_8">48.8. - node cache improvements</a>
 						<ul>
-							<li><a href="#48_9_1" title="- never">48.9.1. - different caching levels</a></li>
-							<li><a href="#48_9_2" title="- cache null result">48.9.2. - possible caching switch</a></li>
+							<li><a href="#48_8_1" title="- never">48.8.1. - different caching levels</a></li>
+							<li><a href="#48_8_2" title="- cache null result">48.8.2. - possible caching switch</a></li>
 						</ul>
 					</li>
-					<li><a href="#48_10">48.10. - new semantics for getInherited, callInherited, getProvider</a>
+					<li><a href="#48_9">48.9. - new semantics for getInherited, callInherited, getProvider</a>
 						<ul>
-							<li><a href="#48_10_1" title="callInherited -&gt; callProvided">48.10.1. - new names</a></li>
+							<li><a href="#48_9_1" title="callInherited -&gt; callProvided">48.9.1. - new names</a></li>
 						</ul>
 					</li>
-					<li><a href="#48_11" title="- generalized mechanism for deferring building and/or wiring UI of non-displayed widgets">48.11. - deferred wiring/building mechanism</a></li>
-					<li><a href="#48_12">48.12. - deprecate insertUi in favor of built property</a>
+					<li><a href="#48_10" title="- generalized mechanism for deferring building and/or wiring UI of non-displayed widgets">48.10. - deferred wiring/building mechanism</a></li>
+					<li><a href="#48_11">48.11. - deprecate insertUi in favor of built property</a>
 						<ul>
-							<li><a href="#48_12_1" title="if (!_this.wired ()) {&#10;	// wire stuff up&#10;}&#10;">48.12.1. - PROBLEM: can't rely on wireUi as single gatekeeper because it gets overrided by subclasses, unless you try to tuck the logic into the conditional check and change its semantics...</a>
+							<li><a href="#48_11_1" title="if (!_this.wired ()) {&#10;	// wire stuff up&#10;}&#10;">48.11.1. - PROBLEM: can't rely on wireUi as single gatekeeper because it gets overrided by subclasses, unless you try to tuck the logic into the conditional check and change its semantics...</a>
 								<ul>
-									<li><a href="#48_12_1_1" title="- if not already wired">48.12.1.1. here, prepareToWire can check...</a></li>
+									<li><a href="#48_11_1_1" title="- if not already wired">48.11.1.1. here, prepareToWire can check...</a></li>
 								</ul>
 							</li>
-							<li><a href="#48_12_2" title="insertUi = function () {&#10;	this.set ({_built:_false)&#10;	this.wireUi ();&#10;};&#10;">48.12.2. - implement backwards compatibility as...</a></li>
+							<li><a href="#48_11_2" title="insertUi = function () {&#10;	this.set ({_built:_false)&#10;	this.wireUi ();&#10;};&#10;">48.11.2. - implement backwards compatibility as...</a></li>
 						</ul>
 					</li>
-					<li><a href="#48_13" title="Support a new mode for building the HTML for a widget, where the template for a widget does not build the HTML for all child widgets, but has inputs or tokens for the HTML of all child widgets, and where the HTML for child widgets is built independently first before being supplied to the template for the widget.">48.13. New Mode for Building HTML</a></li>
-					<li><a href="#48_14" title="- a way to retrieve state all the way through a widget tree">48.14. - deep state</a></li>
-					<li><a href="#48_15">48.15. - idea: provide a way to expose all Uize.Node methods through Uize.Widget, without having to create instance methods for each...</a>
+					<li><a href="#48_12" title="Support a new mode for building the HTML for a widget, where the template for a widget does not build the HTML for all child widgets, but has inputs or tokens for the HTML of all child widgets, and where the HTML for child widgets is built independently first before being supplied to the template for the widget.">48.12. New Mode for Building HTML</a></li>
+					<li><a href="#48_13" title="- a way to retrieve state all the way through a widget tree">48.13. - deep state</a></li>
+					<li><a href="#48_14">48.14. - idea: provide a way to expose all Uize.Node methods through Uize.Widget, without having to create instance methods for each...</a>
 						<ul>
-							<li><a href="#48_15_1" title="_this.node (nodeName,&apos;methodName&apos;,param1,param2,...)&#10;a_a.node (nodeName,&apos;methodName&apos;,param1,param2,...)&#10;">48.15.1. eg.</a></li>
-							<li><a href="#48_15_2" title="- makes the code a tiny bit shorter">48.15.2. - benefits</a></li>
+							<li><a href="#48_14_1" title="_this.node (nodeName,&apos;methodName&apos;,param1,param2,...)&#10;a_a.node (nodeName,&apos;methodName&apos;,param1,param2,...)&#10;">48.14.1. eg.</a></li>
+							<li><a href="#48_14_2" title="- makes the code a tiny bit shorter">48.14.2. - benefits</a></li>
 						</ul>
 					</li>
-					<li><a href="#48_16" title="- keep in mind that more instance methods means more time copying when subclassing">48.16. - expose more Uize.Node methods as node-related methods (in order of priority)</a>
+					<li><a href="#48_15" title="- keep in mind that more instance methods means more time copying when subclassing">48.15. - expose more Uize.Node methods as node-related methods (in order of priority)</a>
 						<ul>
-							<li><a href="#48_16_1" title="function _makeNodeMethod (_methodPrefix,_methodSuffix) {&#10;	_classPrototype [_methodPrefix + &apos;Node&apos; + _methodSuffix]  new Function (&apos;arguments [0]  this.getNode (arguments [0]); return Uize.Node.&apos; + _methodPrefix + _methodSuffix + &apos;.apply (0,arguments)&apos;);&#10;}&#10;&#10;_makeNodeMethod (&apos;set&apos;,&apos;Value&apos;); // creates setNodeValue&#10;_makeNodeMethod (&apos;get&apos;,&apos;Style&apos;); // creates getNodeStyle&#10;">48.16.1. - dynamically construct such methods, in order to avoid adding too much to code size</a></li>
+							<li><a href="#48_15_1" title="function _makeNodeMethod (_methodPrefix,_methodSuffix) {&#10;	_classPrototype [_methodPrefix + &apos;Node&apos; + _methodSuffix]  new Function (&apos;arguments [0]  this.getNode (arguments [0]); return Uize.Node.&apos; + _methodPrefix + _methodSuffix + &apos;.apply (0,arguments)&apos;);&#10;}&#10;&#10;_makeNodeMethod (&apos;set&apos;,&apos;Value&apos;); // creates setNodeValue&#10;_makeNodeMethod (&apos;get&apos;,&apos;Style&apos;); // creates getNodeStyle&#10;">48.15.1. - dynamically construct such methods, in order to avoid adding too much to code size</a></li>
 						</ul>
 					</li>
-					<li><a href="#48_17" title="- Uize.Widget.Drag">48.17. - solve the problem of some widget classes being used only for their static methods and not their full functionality. Perhaps some helper method functionality should be separated out into packages that can be used outside of the context of widgets. As a general rule, if some functionality might be useful without widgets being involved, then it should be implemented in a separate package module.</a></li>
+					<li><a href="#48_16" title="- Uize.Widget.Drag">48.16. - solve the problem of some widget classes being used only for their static methods and not their full functionality. Perhaps some helper method functionality should be separated out into packages that can be used outside of the context of widgets. As a general rule, if some functionality might be useful without widgets being involved, then it should be implemented in a separate package module.</a></li>
 				</ul>
 			</li>
 			<li><a href="#49" title="- handle case of nodes being changed in &quot;mid flight&quot;">49. Uize.Widget.AutoTooltip</a></li>
@@ -2452,6 +2447,12 @@ _target = _sourceAndTarget._target;
 				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the link is in a subsection of that section</td></tr>
 				</table>
 			</div>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>to allow for disambiguation of sections that would like to have the same displayed title</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>to allow for linking of singular and plural forms</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>to allow for abbreviations or alternate forms</td></tr>
+			</table>
 		</div>
 		
 		<a name="19_2"></a>
@@ -3951,36 +3952,7 @@ _package.oneOf = function (_values,_default) {
 	<h1 class="heading1" title="48. Uize.Widget"><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>. </span>Uize.Widget</h1>
 	<div class="contents1">
 		<a name="48_1"></a>
-		<h2 class="heading2" title="48. Uize.Widget -&gt; 48.1. New children Set-get Property"><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_1" title="48. Uize.Widget -&gt; 48.1. New children Set-get Property">1</a>. </span>New children Set-get Property</h2>
-		<div class="contents2">
-			<p>The <code>children</code> set-get property provides a way to access a widget's various child widgets, and also provides a versatile way to distribute state to the child widgets or invoke the creation of child widgets.</p>
-			
-			<p>When the value of the <code>children</code> set-get property is set, a conformer processes the value and attempts to consume it. If the value is an object, then the properties of the object are to be properties objects for child widgets of the widget, and the conformer attempts to distribute those properties objects to the corresponding child widgets. For any properties objects for which there are no corresponding child widgets, they are retained in order to potentially be used later when a child widget that does correspond is added, at which time the properties for the child widget will be supplied as overrides to the properties specified by the code adding the child widget.</p>
-			
-			<a name="48_1_1"></a>
-			<h3 class="heading3" title="48. Uize.Widget -&gt; 48.1. New children Set-get Property -&gt; 48.1.1. children Set-get Property Supported for Declarative Syntax"><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_1" title="48. Uize.Widget -&gt; 48.1. New children Set-get Property">1</a>.<a href="#48_1_1" title="48. Uize.Widget -&gt; 48.1. New children Set-get Property -&gt; 48.1.1. children Set-get Property Supported for Declarative Syntax">1</a>. </span>children Set-get Property Supported for Declarative Syntax</h3>
-			<div class="contents3">
-				<p>Support the <code>children</code> property for the object that is used to declare data for a widget (declarative syntax for widget data), to allow data to be declared also for that widget's child widgets - all in the same data object.</p>
-				
-				<p><span class="allCaps">EXAMPLE</span></p>
-				
-				
-<pre class="sample-code">$page = {
-  env:{
-    ...
-  },
-  children:{
-    someChildWidget:{
-      ...
-    }
-  }
-}
-</pre>
-			</div>
-		</div>
-		
-		<a name="48_2"></a>
-		<h2 class="heading2" title="48. Uize.Widget -&gt; 48.2. More Versatile wireNode Method"><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_2" title="48. Uize.Widget -&gt; 48.2. More Versatile wireNode Method">2</a>. </span>More Versatile wireNode Method</h2>
+		<h2 class="heading2" title="48. Uize.Widget -&gt; 48.1. More Versatile wireNode Method"><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_1" title="48. Uize.Widget -&gt; 48.1. More Versatile wireNode Method">1</a>. </span>More Versatile wireNode Method</h2>
 		<div class="contents2">
 			<p>Support an array of event name/event handler pairs.</p>
 			
@@ -3998,11 +3970,11 @@ _package.oneOf = function (_values,_default) {
 </pre>
 		</div>
 		
-		<a name="48_3"></a>
-		<h2 class="heading2" title="48. Uize.Widget -&gt; 48.3. - UI Updater Mechanism"><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_3" title="48. Uize.Widget -&gt; 48.3. - UI Updater Mechanism">3</a>. </span>- UI Updater Mechanism</h2>
+		<a name="48_2"></a>
+		<h2 class="heading2" title="48. Uize.Widget -&gt; 48.2. - UI Updater Mechanism"><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_2" title="48. Uize.Widget -&gt; 48.2. - UI Updater Mechanism">2</a>. </span>- UI Updater Mechanism</h2>
 		<div class="contents2">
-			<a name="48_3_1"></a>
-			<h3 class="heading3" title="48. Uize.Widget -&gt; 48.3. - UI Updater Mechanism -&gt; 48.3.1. - register updaters"><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_3" title="48. Uize.Widget -&gt; 48.3. - UI Updater Mechanism">3</a>.<a href="#48_3_1" title="48. Uize.Widget -&gt; 48.3. - UI Updater Mechanism -&gt; 48.3.1. - register updaters">1</a>. </span>- register updaters</h3>
+			<a name="48_2_1"></a>
+			<h3 class="heading3" title="48. Uize.Widget -&gt; 48.2. - UI Updater Mechanism -&gt; 48.2.1. - register updaters"><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_2" title="48. Uize.Widget -&gt; 48.2. - UI Updater Mechanism">2</a>.<a href="#48_2_1" title="48. Uize.Widget -&gt; 48.2. - UI Updater Mechanism -&gt; 48.2.1. - register updaters">1</a>. </span>- register updaters</h3>
 			<div class="contents3">
 				<table class="list">
 				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>register which properties updaters cover</td></tr>
@@ -4010,8 +3982,8 @@ _package.oneOf = function (_values,_default) {
 				</table>
 			</div>
 			
-			<a name="48_3_2"></a>
-			<h3 class="heading3" title="48. Uize.Widget -&gt; 48.3. - UI Updater Mechanism -&gt; 48.3.2. - viewed properties"><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_3" title="48. Uize.Widget -&gt; 48.3. - UI Updater Mechanism">3</a>.<a href="#48_3_2" title="48. Uize.Widget -&gt; 48.3. - UI Updater Mechanism -&gt; 48.3.2. - viewed properties">2</a>. </span>- viewed properties</h3>
+			<a name="48_2_2"></a>
+			<h3 class="heading3" title="48. Uize.Widget -&gt; 48.2. - UI Updater Mechanism -&gt; 48.2.2. - viewed properties"><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_2" title="48. Uize.Widget -&gt; 48.2. - UI Updater Mechanism">2</a>.<a href="#48_2_2" title="48. Uize.Widget -&gt; 48.2. - UI Updater Mechanism -&gt; 48.2.2. - viewed properties">2</a>. </span>- viewed properties</h3>
 			<div class="contents3">
 				<table class="list">
 				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>viewed properties are properties whose values are reflected somehow in the view</td></tr>
@@ -4019,8 +3991,8 @@ _package.oneOf = function (_values,_default) {
 				</table>
 			</div>
 			
-			<a name="48_3_3"></a>
-			<h3 class="heading3" title="48. Uize.Widget -&gt; 48.3. - UI Updater Mechanism -&gt; 48.3.3. - when the values of viewed properties change, one of two things can happen..."><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_3" title="48. Uize.Widget -&gt; 48.3. - UI Updater Mechanism">3</a>.<a href="#48_3_3" title="48. Uize.Widget -&gt; 48.3. - UI Updater Mechanism -&gt; 48.3.3. - when the values of viewed properties change, one of two things can happen...">3</a>. </span>- when the values of viewed properties change, one of two things can happen...</h3>
+			<a name="48_2_3"></a>
+			<h3 class="heading3" title="48. Uize.Widget -&gt; 48.2. - UI Updater Mechanism -&gt; 48.2.3. - when the values of viewed properties change, one of two things can happen..."><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_2" title="48. Uize.Widget -&gt; 48.2. - UI Updater Mechanism">2</a>.<a href="#48_2_3" title="48. Uize.Widget -&gt; 48.2. - UI Updater Mechanism -&gt; 48.2.3. - when the values of viewed properties change, one of two things can happen...">3</a>. </span>- when the values of viewed properties change, one of two things can happen...</h3>
 			<div class="contents3">
 				<table class="list">
 				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>if the widget is able to update its view, then the appropriate updaters are executed in order to synchronize the view to the new values of the viewed properties</td></tr>
@@ -4028,8 +4000,8 @@ _package.oneOf = function (_values,_default) {
 				</table>
 			</div>
 			
-			<a name="48_3_4"></a>
-			<h3 class="heading3" title="48. Uize.Widget -&gt; 48.3. - UI Updater Mechanism -&gt; 48.3.4. - UI Updater"><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_3" title="48. Uize.Widget -&gt; 48.3. - UI Updater Mechanism">3</a>.<a href="#48_3_4" title="48. Uize.Widget -&gt; 48.3. - UI Updater Mechanism -&gt; 48.3.4. - UI Updater">4</a>. </span>- UI Updater</h3>
+			<a name="48_2_4"></a>
+			<h3 class="heading3" title="48. Uize.Widget -&gt; 48.2. - UI Updater Mechanism -&gt; 48.2.4. - UI Updater"><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_2" title="48. Uize.Widget -&gt; 48.2. - UI Updater Mechanism">2</a>.<a href="#48_2_4" title="48. Uize.Widget -&gt; 48.2. - UI Updater Mechanism -&gt; 48.2.4. - UI Updater">4</a>. </span>- UI Updater</h3>
 			<div class="contents3">
 				<table class="list">
 				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>a UI Updater can serve multipled viewed properties</td></tr>
@@ -4037,11 +4009,11 @@ _package.oneOf = function (_values,_default) {
 				</table>
 			</div>
 			
-			<a name="48_3_5"></a>
-			<h3 class="heading3" title="48. Uize.Widget -&gt; 48.3. - UI Updater Mechanism -&gt; 48.3.5. - questions to resolve"><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_3" title="48. Uize.Widget -&gt; 48.3. - UI Updater Mechanism">3</a>.<a href="#48_3_5" title="48. Uize.Widget -&gt; 48.3. - UI Updater Mechanism -&gt; 48.3.5. - questions to resolve">5</a>. </span>- questions to resolve</h3>
+			<a name="48_2_5"></a>
+			<h3 class="heading3" title="48. Uize.Widget -&gt; 48.2. - UI Updater Mechanism -&gt; 48.2.5. - questions to resolve"><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_2" title="48. Uize.Widget -&gt; 48.2. - UI Updater Mechanism">2</a>.<a href="#48_2_5" title="48. Uize.Widget -&gt; 48.2. - UI Updater Mechanism -&gt; 48.2.5. - questions to resolve">5</a>. </span>- questions to resolve</h3>
 			<div class="contents3">
-				<a name="48_3_5_1"></a>
-				<h4 class="heading4" title="48. Uize.Widget -&gt; 48.3. - UI Updater Mechanism -&gt; 48.3.5. - questions to resolve -&gt; 48.3.5.1. - what if a property is not viewed by a superclass but *is* viewed by a subclass?"><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_3" title="48. Uize.Widget -&gt; 48.3. - UI Updater Mechanism">3</a>.<a href="#48_3_5" title="48. Uize.Widget -&gt; 48.3. - UI Updater Mechanism -&gt; 48.3.5. - questions to resolve">5</a>.<a href="#48_3_5_1" title="48. Uize.Widget -&gt; 48.3. - UI Updater Mechanism -&gt; 48.3.5. - questions to resolve -&gt; 48.3.5.1. - what if a property is not viewed by a superclass but *is* viewed by a subclass?">1</a>. </span>- what if a property is not viewed by a superclass but *is* viewed by a subclass?</h4>
+				<a name="48_2_5_1"></a>
+				<h4 class="heading4" title="48. Uize.Widget -&gt; 48.2. - UI Updater Mechanism -&gt; 48.2.5. - questions to resolve -&gt; 48.2.5.1. - what if a property is not viewed by a superclass but *is* viewed by a subclass?"><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_2" title="48. Uize.Widget -&gt; 48.2. - UI Updater Mechanism">2</a>.<a href="#48_2_5" title="48. Uize.Widget -&gt; 48.2. - UI Updater Mechanism -&gt; 48.2.5. - questions to resolve">5</a>.<a href="#48_2_5_1" title="48. Uize.Widget -&gt; 48.2. - UI Updater Mechanism -&gt; 48.2.5. - questions to resolve -&gt; 48.2.5.1. - what if a property is not viewed by a superclass but *is* viewed by a subclass?">1</a>. </span>- what if a property is not viewed by a superclass but *is* viewed by a subclass?</h4>
 				<div class="contents4">
 					<table class="list">
 					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>how does the subclass flag the property as viewed?</td></tr>
@@ -4090,8 +4062,8 @@ _class.registerUiUpdater (
 			
 			<p>When you register a UI updater, the UI updater system makes sure that Changed.[propertyName] event handlers are registered for all the properties that the UI updater serves. If values for any viewed properties are changed, then the UI updater system should execute registered UI updaters if possible, or flag the viewed properties whose values have changed as needing synchronization.</p>
 			
-			<a name="48_3_6"></a>
-			<h3 class="heading3" title="48. Uize.Widget -&gt; 48.3. - UI Updater Mechanism -&gt; 48.3.6. - Benefits"><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_3" title="48. Uize.Widget -&gt; 48.3. - UI Updater Mechanism">3</a>.<a href="#48_3_6" title="48. Uize.Widget -&gt; 48.3. - UI Updater Mechanism -&gt; 48.3.6. - Benefits">6</a>. </span>- Benefits</h3>
+			<a name="48_2_6"></a>
+			<h3 class="heading3" title="48. Uize.Widget -&gt; 48.2. - UI Updater Mechanism -&gt; 48.2.6. - Benefits"><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_2" title="48. Uize.Widget -&gt; 48.2. - UI Updater Mechanism">2</a>.<a href="#48_2_6" title="48. Uize.Widget -&gt; 48.2. - UI Updater Mechanism -&gt; 48.2.6. - Benefits">6</a>. </span>- Benefits</h3>
 			<div class="contents3">
 				<table class="list">
 				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>registered UI updaters can automatically be <b>not</b> called when the UI cannot be updated (because of the widget not being seen, for example)</td></tr>
@@ -4101,8 +4073,8 @@ _class.registerUiUpdater (
 			</div>
 		</div>
 		
-		<a name="48_4"></a>
-		<h2 class="heading2" title="48. Uize.Widget -&gt; 48.4. - should wired be set to true only after wiring of child widgets?"><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_4" title="48. Uize.Widget -&gt; 48.4. - should wired be set to true only after wiring of child widgets?">4</a>. </span>- should wired be set to true only after wiring of child widgets?</h2>
+		<a name="48_3"></a>
+		<h2 class="heading2" title="48. Uize.Widget -&gt; 48.3. - should wired be set to true only after wiring of child widgets?"><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_3" title="48. Uize.Widget -&gt; 48.3. - should wired be set to true only after wiring of child widgets?">3</a>. </span>- should wired be set to true only after wiring of child widgets?</h2>
 		<div class="contents2">
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>what would the impact of this change be?</td></tr>
@@ -4114,8 +4086,8 @@ _class.registerUiUpdater (
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>should there be generic focus and blur methods of Uize.Widget, with overridded implementation in Uize.Widget.FormElement</td></tr>
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>for nodeMap and nodeCache, should use lookup that sets valueOf and toString properties to undefined, otherwise an implied node with either of those names will have problems</td></tr>
 		</table>
-		<a name="48_5"></a>
-		<h2 class="heading2" title="48. Uize.Widget -&gt; 48.5. - getImpliedNodeName (impliedNodeIdSTR) or getImpliedNodeName (impliedNodeOBJ)"><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_5" title="48. Uize.Widget -&gt; 48.5. - getImpliedNodeName (impliedNodeIdSTR) or getImpliedNodeName (impliedNodeOBJ)">5</a>. </span>- getImpliedNodeName (impliedNodeIdSTR) or getImpliedNodeName (impliedNodeOBJ)</h2>
+		<a name="48_4"></a>
+		<h2 class="heading2" title="48. Uize.Widget -&gt; 48.4. - getImpliedNodeName (impliedNodeIdSTR) or getImpliedNodeName (impliedNodeOBJ)"><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_4" title="48. Uize.Widget -&gt; 48.4. - getImpliedNodeName (impliedNodeIdSTR) or getImpliedNodeName (impliedNodeOBJ)">4</a>. </span>- getImpliedNodeName (impliedNodeIdSTR) or getImpliedNodeName (impliedNodeOBJ)</h2>
 		<div class="contents2">
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>returns the name of an implied node, deduced from its id (implied node doesn't have to exist in the DOM)</td></tr>
@@ -4123,8 +4095,8 @@ _class.registerUiUpdater (
 			</table>
 		</div>
 		
-		<a name="48_6"></a>
-		<h2 class="heading2" title="48. Uize.Widget -&gt; 48.6. - getImpliedNodeId (impliedNodeSTR) or getImpliedNodeId (impliedNodeOBJ)"><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_6" title="48. Uize.Widget -&gt; 48.6. - getImpliedNodeId (impliedNodeSTR) or getImpliedNodeId (impliedNodeOBJ)">6</a>. </span>- getImpliedNodeId (impliedNodeSTR) or getImpliedNodeId (impliedNodeOBJ)</h2>
+		<a name="48_5"></a>
+		<h2 class="heading2" title="48. Uize.Widget -&gt; 48.5. - getImpliedNodeId (impliedNodeSTR) or getImpliedNodeId (impliedNodeOBJ)"><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_5" title="48. Uize.Widget -&gt; 48.5. - getImpliedNodeId (impliedNodeSTR) or getImpliedNodeId (impliedNodeOBJ)">5</a>. </span>- getImpliedNodeId (impliedNodeSTR) or getImpliedNodeId (impliedNodeOBJ)</h2>
 		<div class="contents2">
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>returns the id of an implied node, built from its name (implied node doesn't have to exist in the DOM)</td></tr>
@@ -4135,27 +4107,27 @@ _class.registerUiUpdater (
 		<table class="list">
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>getNodeProperty (to use Uize.Node.getProperty)</td></tr>
 		</table>
-		<a name="48_7"></a>
-		<h2 class="heading2" title="48. Uize.Widget -&gt; 48.7. - a way of easily binding any set-get property to either a child widget (or any widget) or an implied node"><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_7" title="48. Uize.Widget -&gt; 48.7. - a way of easily binding any set-get property to either a child widget (or any widget) or an implied node">7</a>. </span>- a way of easily binding any set-get property to either a child widget (or any widget) or an implied node</h2>
+		<a name="48_6"></a>
+		<h2 class="heading2" title="48. Uize.Widget -&gt; 48.6. - a way of easily binding any set-get property to either a child widget (or any widget) or an implied node"><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_6" title="48. Uize.Widget -&gt; 48.6. - a way of easily binding any set-get property to either a child widget (or any widget) or an implied node">6</a>. </span>- a way of easily binding any set-get property to either a child widget (or any widget) or an implied node</h2>
 		<div class="contents2">
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the connection is bi-directional (changing the child widget's value or node's value updates set-get property, and changing set-get property value updates child widget's or node's value)</td></tr>
 			</table>
 		</div>
 		
-		<a name="48_8"></a>
-		<h2 class="heading2" title="48. Uize.Widget -&gt; 48.8. - disabled reason mechanism"><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_8" title="48. Uize.Widget -&gt; 48.8. - disabled reason mechanism">8</a>. </span>- disabled reason mechanism</h2>
+		<a name="48_7"></a>
+		<h2 class="heading2" title="48. Uize.Widget -&gt; 48.7. - disabled reason mechanism"><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_7" title="48. Uize.Widget -&gt; 48.7. - disabled reason mechanism">7</a>. </span>- disabled reason mechanism</h2>
 		<div class="contents2">
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>a general mechanism for widgets to have reasons registered for why they are disabled. Then, a tooltip could display this reason (or reasons) on mousing over the widget, or a dialog with the reason (or reasons) could be displayed when trying to interact with the widget (eg. clicking or mousing down on it)</td></tr>
 			</table>
 		</div>
 		
-		<a name="48_9"></a>
-		<h2 class="heading2" title="48. Uize.Widget -&gt; 48.9. - node cache improvements"><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_9" title="48. Uize.Widget -&gt; 48.9. - node cache improvements">9</a>. </span>- node cache improvements</h2>
+		<a name="48_8"></a>
+		<h2 class="heading2" title="48. Uize.Widget -&gt; 48.8. - node cache improvements"><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_8" title="48. Uize.Widget -&gt; 48.8. - node cache improvements">8</a>. </span>- node cache improvements</h2>
 		<div class="contents2">
-			<a name="48_9_1"></a>
-			<h3 class="heading3" title="48. Uize.Widget -&gt; 48.9. - node cache improvements -&gt; 48.9.1. - different caching levels"><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_9" title="48. Uize.Widget -&gt; 48.9. - node cache improvements">9</a>.<a href="#48_9_1" title="48. Uize.Widget -&gt; 48.9. - node cache improvements -&gt; 48.9.1. - different caching levels">1</a>. </span>- different caching levels</h3>
+			<a name="48_8_1"></a>
+			<h3 class="heading3" title="48. Uize.Widget -&gt; 48.8. - node cache improvements -&gt; 48.8.1. - different caching levels"><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_8" title="48. Uize.Widget -&gt; 48.8. - node cache improvements">8</a>.<a href="#48_8_1" title="48. Uize.Widget -&gt; 48.8. - node cache improvements -&gt; 48.8.1. - different caching levels">1</a>. </span>- different caching levels</h3>
 			<div class="contents3">
 				<table class="list">
 				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>never</td></tr>
@@ -4164,8 +4136,8 @@ _class.registerUiUpdater (
 				</table>
 			</div>
 			
-			<a name="48_9_2"></a>
-			<h3 class="heading3" title="48. Uize.Widget -&gt; 48.9. - node cache improvements -&gt; 48.9.2. - possible caching switch"><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_9" title="48. Uize.Widget -&gt; 48.9. - node cache improvements">9</a>.<a href="#48_9_2" title="48. Uize.Widget -&gt; 48.9. - node cache improvements -&gt; 48.9.2. - possible caching switch">2</a>. </span>- possible caching switch</h3>
+			<a name="48_8_2"></a>
+			<h3 class="heading3" title="48. Uize.Widget -&gt; 48.8. - node cache improvements -&gt; 48.8.2. - possible caching switch"><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_8" title="48. Uize.Widget -&gt; 48.8. - node cache improvements">8</a>.<a href="#48_8_2" title="48. Uize.Widget -&gt; 48.8. - node cache improvements -&gt; 48.8.2. - possible caching switch">2</a>. </span>- possible caching switch</h3>
 			<div class="contents3">
 				<table class="list">
 				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>cache null result</td></tr>
@@ -4176,11 +4148,11 @@ _class.registerUiUpdater (
 		<table class="list">
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>idea: when html property is a function, supply it with outer dimensions, based on shell size</td></tr>
 		</table>
-		<a name="48_10"></a>
-		<h2 class="heading2" title="48. Uize.Widget -&gt; 48.10. - new semantics for getInherited, callInherited, getProvider"><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_10" title="48. Uize.Widget -&gt; 48.10. - new semantics for getInherited, callInherited, getProvider">10</a>. </span>- new semantics for getInherited, callInherited, getProvider</h2>
+		<a name="48_9"></a>
+		<h2 class="heading2" title="48. Uize.Widget -&gt; 48.9. - new semantics for getInherited, callInherited, getProvider"><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_9" title="48. Uize.Widget -&gt; 48.9. - new semantics for getInherited, callInherited, getProvider">9</a>. </span>- new semantics for getInherited, callInherited, getProvider</h2>
 		<div class="contents2">
-			<a name="48_10_1"></a>
-			<h3 class="heading3" title="48. Uize.Widget -&gt; 48.10. - new semantics for getInherited, callInherited, getProvider -&gt; 48.10.1. - new names"><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_10" title="48. Uize.Widget -&gt; 48.10. - new semantics for getInherited, callInherited, getProvider">10</a>.<a href="#48_10_1" title="48. Uize.Widget -&gt; 48.10. - new semantics for getInherited, callInherited, getProvider -&gt; 48.10.1. - new names">1</a>. </span>- new names</h3>
+			<a name="48_9_1"></a>
+			<h3 class="heading3" title="48. Uize.Widget -&gt; 48.9. - new semantics for getInherited, callInherited, getProvider -&gt; 48.9.1. - new names"><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_9" title="48. Uize.Widget -&gt; 48.9. - new semantics for getInherited, callInherited, getProvider">9</a>.<a href="#48_9_1" title="48. Uize.Widget -&gt; 48.9. - new semantics for getInherited, callInherited, getProvider -&gt; 48.9.1. - new names">1</a>. </span>- new names</h3>
 			<div class="contents3">
 				<p>callInherited -> callProvided</p>
 				
@@ -4206,19 +4178,19 @@ _class.registerUiUpdater (
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>removeNode method: update to support removing multiple nodes</td></tr>
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>flushNodeCache: update to support flushing by node reference, and for multiple nodes in a blob</td></tr>
 		</table>
-		<a name="48_11"></a>
-		<h2 class="heading2" title="48. Uize.Widget -&gt; 48.11. - deferred wiring/building mechanism"><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_11" title="48. Uize.Widget -&gt; 48.11. - deferred wiring/building mechanism">11</a>. </span>- deferred wiring/building mechanism</h2>
+		<a name="48_10"></a>
+		<h2 class="heading2" title="48. Uize.Widget -&gt; 48.10. - deferred wiring/building mechanism"><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_10" title="48. Uize.Widget -&gt; 48.10. - deferred wiring/building mechanism">10</a>. </span>- deferred wiring/building mechanism</h2>
 		<div class="contents2">
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>generalized mechanism for deferring building and/or wiring UI of non-displayed widgets</td></tr>
 			</table>
 		</div>
 		
-		<a name="48_12"></a>
-		<h2 class="heading2" title="48. Uize.Widget -&gt; 48.12. - deprecate insertUi in favor of built property"><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_12" title="48. Uize.Widget -&gt; 48.12. - deprecate insertUi in favor of built property">12</a>. </span>- deprecate insertUi in favor of built property</h2>
+		<a name="48_11"></a>
+		<h2 class="heading2" title="48. Uize.Widget -&gt; 48.11. - deprecate insertUi in favor of built property"><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_11" title="48. Uize.Widget -&gt; 48.11. - deprecate insertUi in favor of built property">11</a>. </span>- deprecate insertUi in favor of built property</h2>
 		<div class="contents2">
-			<a name="48_12_1"></a>
-			<h3 class="heading3" title="48. Uize.Widget -&gt; 48.12. - deprecate insertUi in favor of built property -&gt; 48.12.1. - PROBLEM: can&apos;t rely on wireUi as single gatekeeper because it gets overrided by subclasses, unless you try to tuck the logic into the conditional check and change its semantics..."><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_12" title="48. Uize.Widget -&gt; 48.12. - deprecate insertUi in favor of built property">12</a>.<a href="#48_12_1" title="48. Uize.Widget -&gt; 48.12. - deprecate insertUi in favor of built property -&gt; 48.12.1. - PROBLEM: can&apos;t rely on wireUi as single gatekeeper because it gets overrided by subclasses, unless you try to tuck the logic into the conditional check and change its semantics...">1</a>. </span>- PROBLEM: can't rely on wireUi as single gatekeeper because it gets overrided by subclasses, unless you try to tuck the logic into the conditional check and change its semantics...</h3>
+			<a name="48_11_1"></a>
+			<h3 class="heading3" title="48. Uize.Widget -&gt; 48.11. - deprecate insertUi in favor of built property -&gt; 48.11.1. - PROBLEM: can&apos;t rely on wireUi as single gatekeeper because it gets overrided by subclasses, unless you try to tuck the logic into the conditional check and change its semantics..."><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_11" title="48. Uize.Widget -&gt; 48.11. - deprecate insertUi in favor of built property">11</a>.<a href="#48_11_1" title="48. Uize.Widget -&gt; 48.11. - deprecate insertUi in favor of built property -&gt; 48.11.1. - PROBLEM: can&apos;t rely on wireUi as single gatekeeper because it gets overrided by subclasses, unless you try to tuck the logic into the conditional check and change its semantics...">1</a>. </span>- PROBLEM: can't rely on wireUi as single gatekeeper because it gets overrided by subclasses, unless you try to tuck the logic into the conditional check and change its semantics...</h3>
 			<div class="contents3">
 				
 <pre class="sample-code">if (!_this.wired ()) {
@@ -4234,8 +4206,8 @@ _class.registerUiUpdater (
 }
 </pre>
 				
-				<a name="48_12_1_1"></a>
-				<h4 class="heading4" title="48. Uize.Widget -&gt; 48.12. - deprecate insertUi in favor of built property -&gt; 48.12.1. - PROBLEM: can&apos;t rely on wireUi as single gatekeeper because it gets overrided by subclasses, unless you try to tuck the logic into the conditional check and change its semantics... -&gt; 48.12.1.1. here, prepareToWire can check..."><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_12" title="48. Uize.Widget -&gt; 48.12. - deprecate insertUi in favor of built property">12</a>.<a href="#48_12_1" title="48. Uize.Widget -&gt; 48.12. - deprecate insertUi in favor of built property -&gt; 48.12.1. - PROBLEM: can&apos;t rely on wireUi as single gatekeeper because it gets overrided by subclasses, unless you try to tuck the logic into the conditional check and change its semantics...">1</a>.<a href="#48_12_1_1" title="48. Uize.Widget -&gt; 48.12. - deprecate insertUi in favor of built property -&gt; 48.12.1. - PROBLEM: can&apos;t rely on wireUi as single gatekeeper because it gets overrided by subclasses, unless you try to tuck the logic into the conditional check and change its semantics... -&gt; 48.12.1.1. here, prepareToWire can check...">1</a>. </span>here, prepareToWire can check...</h4>
+				<a name="48_11_1_1"></a>
+				<h4 class="heading4" title="48. Uize.Widget -&gt; 48.11. - deprecate insertUi in favor of built property -&gt; 48.11.1. - PROBLEM: can&apos;t rely on wireUi as single gatekeeper because it gets overrided by subclasses, unless you try to tuck the logic into the conditional check and change its semantics... -&gt; 48.11.1.1. here, prepareToWire can check..."><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_11" title="48. Uize.Widget -&gt; 48.11. - deprecate insertUi in favor of built property">11</a>.<a href="#48_11_1" title="48. Uize.Widget -&gt; 48.11. - deprecate insertUi in favor of built property -&gt; 48.11.1. - PROBLEM: can&apos;t rely on wireUi as single gatekeeper because it gets overrided by subclasses, unless you try to tuck the logic into the conditional check and change its semantics...">1</a>.<a href="#48_11_1_1" title="48. Uize.Widget -&gt; 48.11. - deprecate insertUi in favor of built property -&gt; 48.11.1. - PROBLEM: can&apos;t rely on wireUi as single gatekeeper because it gets overrided by subclasses, unless you try to tuck the logic into the conditional check and change its semantics... -&gt; 48.11.1.1. here, prepareToWire can check...">1</a>. </span>here, prepareToWire can check...</h4>
 				<div class="contents4">
 					<table class="list">
 					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>if not already wired</td></tr>
@@ -4245,8 +4217,8 @@ _class.registerUiUpdater (
 				</div>
 			</div>
 			
-			<a name="48_12_2"></a>
-			<h3 class="heading3" title="48. Uize.Widget -&gt; 48.12. - deprecate insertUi in favor of built property -&gt; 48.12.2. - implement backwards compatibility as..."><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_12" title="48. Uize.Widget -&gt; 48.12. - deprecate insertUi in favor of built property">12</a>.<a href="#48_12_2" title="48. Uize.Widget -&gt; 48.12. - deprecate insertUi in favor of built property -&gt; 48.12.2. - implement backwards compatibility as...">2</a>. </span>- implement backwards compatibility as...</h3>
+			<a name="48_11_2"></a>
+			<h3 class="heading3" title="48. Uize.Widget -&gt; 48.11. - deprecate insertUi in favor of built property -&gt; 48.11.2. - implement backwards compatibility as..."><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_11" title="48. Uize.Widget -&gt; 48.11. - deprecate insertUi in favor of built property">11</a>.<a href="#48_11_2" title="48. Uize.Widget -&gt; 48.11. - deprecate insertUi in favor of built property -&gt; 48.11.2. - implement backwards compatibility as...">2</a>. </span>- implement backwards compatibility as...</h3>
 			<div class="contents3">
 				
 <pre class="sample-code">insertUi = function () {
@@ -4257,16 +4229,16 @@ _class.registerUiUpdater (
 			</div>
 		</div>
 		
-		<a name="48_13"></a>
-		<h2 class="heading2" title="48. Uize.Widget -&gt; 48.13. New Mode for Building HTML"><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_13" title="48. Uize.Widget -&gt; 48.13. New Mode for Building HTML">13</a>. </span>New Mode for Building HTML</h2>
+		<a name="48_12"></a>
+		<h2 class="heading2" title="48. Uize.Widget -&gt; 48.12. New Mode for Building HTML"><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_12" title="48. Uize.Widget -&gt; 48.12. New Mode for Building HTML">12</a>. </span>New Mode for Building HTML</h2>
 		<div class="contents2">
 			<p>Support a new mode for building the HTML for a widget, where the template for a widget does not build the HTML for all child widgets, but has inputs or tokens for the HTML of all child widgets, and where the HTML for child widgets is built independently first before being supplied to the template for the widget.</p>
 			
 			<p>If all widgets on a widget tree are put into this mode for building their HTML, then building the HTML for a page can be a depth first recursive process. This is a cleaner model, because it doesn't require the template for a given widget to use template for child widgets in order to generate HTML, but the template for any widget is only required to generate HTML for itself and what it directly knows about.</p>
 		</div>
 		
-		<a name="48_14"></a>
-		<h2 class="heading2" title="48. Uize.Widget -&gt; 48.14. - deep state"><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_14" title="48. Uize.Widget -&gt; 48.14. - deep state">14</a>. </span>- deep state</h2>
+		<a name="48_13"></a>
+		<h2 class="heading2" title="48. Uize.Widget -&gt; 48.13. - deep state"><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_13" title="48. Uize.Widget -&gt; 48.13. - deep state">13</a>. </span>- deep state</h2>
 		<div class="contents2">
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>a way to retrieve state all the way through a widget tree</td></tr>
@@ -4283,11 +4255,11 @@ _class.registerUiUpdater (
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>consider an alternative to bubble:true, that allows all events to bubble if any widget up the parent chain of a particular widget cares to listen to a specific event coming from deep within</td></tr>
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>a generic way for a widget to be informed if it is being revealed as a result of a parent node in the DOM changing its display state or something else</td></tr>
 		</table>
-		<a name="48_15"></a>
-		<h2 class="heading2" title="48. Uize.Widget -&gt; 48.15. - idea: provide a way to expose all Uize.Node methods through Uize.Widget, without having to create instance methods for each..."><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_15" title="48. Uize.Widget -&gt; 48.15. - idea: provide a way to expose all Uize.Node methods through Uize.Widget, without having to create instance methods for each...">15</a>. </span>- idea: provide a way to expose all Uize.Node methods through Uize.Widget, without having to create instance methods for each...</h2>
+		<a name="48_14"></a>
+		<h2 class="heading2" title="48. Uize.Widget -&gt; 48.14. - idea: provide a way to expose all Uize.Node methods through Uize.Widget, without having to create instance methods for each..."><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_14" title="48. Uize.Widget -&gt; 48.14. - idea: provide a way to expose all Uize.Node methods through Uize.Widget, without having to create instance methods for each...">14</a>. </span>- idea: provide a way to expose all Uize.Node methods through Uize.Widget, without having to create instance methods for each...</h2>
 		<div class="contents2">
-			<a name="48_15_1"></a>
-			<h3 class="heading3" title="48. Uize.Widget -&gt; 48.15. - idea: provide a way to expose all Uize.Node methods through Uize.Widget, without having to create instance methods for each... -&gt; 48.15.1. eg."><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_15" title="48. Uize.Widget -&gt; 48.15. - idea: provide a way to expose all Uize.Node methods through Uize.Widget, without having to create instance methods for each...">15</a>.<a href="#48_15_1" title="48. Uize.Widget -&gt; 48.15. - idea: provide a way to expose all Uize.Node methods through Uize.Widget, without having to create instance methods for each... -&gt; 48.15.1. eg.">1</a>. </span>eg.</h3>
+			<a name="48_14_1"></a>
+			<h3 class="heading3" title="48. Uize.Widget -&gt; 48.14. - idea: provide a way to expose all Uize.Node methods through Uize.Widget, without having to create instance methods for each... -&gt; 48.14.1. eg."><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_14" title="48. Uize.Widget -&gt; 48.14. - idea: provide a way to expose all Uize.Node methods through Uize.Widget, without having to create instance methods for each...">14</a>.<a href="#48_14_1" title="48. Uize.Widget -&gt; 48.14. - idea: provide a way to expose all Uize.Node methods through Uize.Widget, without having to create instance methods for each... -&gt; 48.14.1. eg.">1</a>. </span>eg.</h3>
 			<div class="contents3">
 				
 <pre class="sample-code">_this.node (nodeName,'methodName',param1,param2,...)
@@ -4302,8 +4274,8 @@ a_a.methodName (a_a.getNode (nodeName),param1,param2,...)
 </pre>
 			</div>
 			
-			<a name="48_15_2"></a>
-			<h3 class="heading3" title="48. Uize.Widget -&gt; 48.15. - idea: provide a way to expose all Uize.Node methods through Uize.Widget, without having to create instance methods for each... -&gt; 48.15.2. - benefits"><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_15" title="48. Uize.Widget -&gt; 48.15. - idea: provide a way to expose all Uize.Node methods through Uize.Widget, without having to create instance methods for each...">15</a>.<a href="#48_15_2" title="48. Uize.Widget -&gt; 48.15. - idea: provide a way to expose all Uize.Node methods through Uize.Widget, without having to create instance methods for each... -&gt; 48.15.2. - benefits">2</a>. </span>- benefits</h3>
+			<a name="48_14_2"></a>
+			<h3 class="heading3" title="48. Uize.Widget -&gt; 48.14. - idea: provide a way to expose all Uize.Node methods through Uize.Widget, without having to create instance methods for each... -&gt; 48.14.2. - benefits"><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_14" title="48. Uize.Widget -&gt; 48.14. - idea: provide a way to expose all Uize.Node methods through Uize.Widget, without having to create instance methods for each...">14</a>.<a href="#48_14_2" title="48. Uize.Widget -&gt; 48.14. - idea: provide a way to expose all Uize.Node methods through Uize.Widget, without having to create instance methods for each... -&gt; 48.14.2. - benefits">2</a>. </span>- benefits</h3>
 			<div class="contents3">
 				<table class="list">
 				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>makes the code a tiny bit shorter</td></tr>
@@ -4313,8 +4285,8 @@ a_a.methodName (a_a.getNode (nodeName),param1,param2,...)
 			</div>
 		</div>
 		
-		<a name="48_16"></a>
-		<h2 class="heading2" title="48. Uize.Widget -&gt; 48.16. - expose more Uize.Node methods as node-related methods (in order of priority)"><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_16" title="48. Uize.Widget -&gt; 48.16. - expose more Uize.Node methods as node-related methods (in order of priority)">16</a>. </span>- expose more Uize.Node methods as node-related methods (in order of priority)</h2>
+		<a name="48_15"></a>
+		<h2 class="heading2" title="48. Uize.Widget -&gt; 48.15. - expose more Uize.Node methods as node-related methods (in order of priority)"><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_15" title="48. Uize.Widget -&gt; 48.15. - expose more Uize.Node methods as node-related methods (in order of priority)">15</a>. </span>- expose more Uize.Node methods as node-related methods (in order of priority)</h2>
 		<div class="contents2">
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>keep in mind that more instance methods means more time copying when subclassing</td></tr>
@@ -4327,8 +4299,8 @@ a_a.methodName (a_a.getNode (nodeName),param1,param2,...)
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>injectHtml => injectNodeHtml</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>showInLayoutFlow => showNodeInLayoutFlow</td></tr>
 			</table>
-			<a name="48_16_1"></a>
-			<h3 class="heading3" title="48. Uize.Widget -&gt; 48.16. - expose more Uize.Node methods as node-related methods (in order of priority) -&gt; 48.16.1. - dynamically construct such methods, in order to avoid adding too much to code size"><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_16" title="48. Uize.Widget -&gt; 48.16. - expose more Uize.Node methods as node-related methods (in order of priority)">16</a>.<a href="#48_16_1" title="48. Uize.Widget -&gt; 48.16. - expose more Uize.Node methods as node-related methods (in order of priority) -&gt; 48.16.1. - dynamically construct such methods, in order to avoid adding too much to code size">1</a>. </span>- dynamically construct such methods, in order to avoid adding too much to code size</h3>
+			<a name="48_15_1"></a>
+			<h3 class="heading3" title="48. Uize.Widget -&gt; 48.15. - expose more Uize.Node methods as node-related methods (in order of priority) -&gt; 48.15.1. - dynamically construct such methods, in order to avoid adding too much to code size"><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_15" title="48. Uize.Widget -&gt; 48.15. - expose more Uize.Node methods as node-related methods (in order of priority)">15</a>.<a href="#48_15_1" title="48. Uize.Widget -&gt; 48.15. - expose more Uize.Node methods as node-related methods (in order of priority) -&gt; 48.15.1. - dynamically construct such methods, in order to avoid adding too much to code size">1</a>. </span>- dynamically construct such methods, in order to avoid adding too much to code size</h3>
 			<div class="contents3">
 				
 <pre class="sample-code">function _makeNodeMethod (_methodPrefix,_methodSuffix) {
@@ -4346,8 +4318,8 @@ _makeNodeMethod ('get','Style'); // creates getNodeStyle
 			</div>
 		</div>
 		
-		<a name="48_17"></a>
-		<h2 class="heading2" title="48. Uize.Widget -&gt; 48.17. - solve the problem of some widget classes being used only for their static methods and not their full functionality. Perhaps some helper method functionality should be separated out into packages that can be used outside of the context of widgets. As a general rule, if some functionality might be useful without widgets being involved, then it should be implemented in a separate package module."><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_17" title="48. Uize.Widget -&gt; 48.17. - solve the problem of some widget classes being used only for their static methods and not their full functionality. Perhaps some helper method functionality should be separated out into packages that can be used outside of the context of widgets. As a general rule, if some functionality might be useful without widgets being involved, then it should be implemented in a separate package module.">17</a>. </span>- solve the problem of some widget classes being used only for their static methods and not their full functionality. Perhaps some helper method functionality should be separated out into packages that can be used outside of the context of widgets. As a general rule, if some functionality might be useful without widgets being involved, then it should be implemented in a separate package module.</h2>
+		<a name="48_16"></a>
+		<h2 class="heading2" title="48. Uize.Widget -&gt; 48.16. - solve the problem of some widget classes being used only for their static methods and not their full functionality. Perhaps some helper method functionality should be separated out into packages that can be used outside of the context of widgets. As a general rule, if some functionality might be useful without widgets being involved, then it should be implemented in a separate package module."><span class="headingNumber"><a href="#48" title="48. Uize.Widget">48</a>.<a href="#48_16" title="48. Uize.Widget -&gt; 48.16. - solve the problem of some widget classes being used only for their static methods and not their full functionality. Perhaps some helper method functionality should be separated out into packages that can be used outside of the context of widgets. As a general rule, if some functionality might be useful without widgets being involved, then it should be implemented in a separate package module.">16</a>. </span>- solve the problem of some widget classes being used only for their static methods and not their full functionality. Perhaps some helper method functionality should be separated out into packages that can be used outside of the context of widgets. As a general rule, if some functionality might be useful without widgets being involved, then it should be implemented in a separate package module.</h2>
 		<div class="contents2">
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Uize.Widget.Drag</td></tr>

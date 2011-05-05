@@ -1,5 +1,28 @@
 This document lists news official announcements that need to be created for developments that have already taken place.
 
+### digest this copy from to-do-modules, if it makes sense (or kill, if it's now redundant)...
+	New children Set-get Property
+		The =children= set-get property provides a way to access a widget's various child widgets, and also provides a versatile way to distribute state to the child widgets or invoke the creation of child widgets.
+
+		When the value of the =children= set-get property is set, a conformer processes the value and attempts to consume it. If the value is an object, then the properties of the object are to be properties objects for child widgets of the widget, and the conformer attempts to distribute those properties objects to the corresponding child widgets. For any properties objects for which there are no corresponding child widgets, they are retained in order to potentially be used later when a child widget that does correspond is added, at which time the properties for the child widget will be supplied as overrides to the properties specified by the code adding the child widget.
+
+		children Set-get Property Supported for Declarative Syntax
+			Support the =children= property for the object that is used to declare data for a widget (declarative syntax for widget data), to allow data to be declared also for that widget's child widgets - all in the same data object.
+
+			EXAMPLE
+			.......................
+			$page = {
+				env:{
+					...
+				},
+				children:{
+					someChildWidget:{
+						...
+					}
+				}
+			}
+			.......................
+
 Improved Declarative Widget Properties
 	The declarative syntax for widget properties has been improved to cover more cases.
 
@@ -50,19 +73,19 @@ Improved Declarative Widget Properties
 			Provided that a widget is instantiated with an =idPrefix= specified (which happens automatically when adding a widget as a child widget of another widget), code in the =Uize.Widget= base class will look for the presence of the global variable for the declarative widget properties. If the variable is present, the properties will be harvested and stitched in to the properties object that is used to set the initial state of the widget instance and that is also available as a parameter to the alphastructor and omegastructor functions of a widget class.
 
 			EXAMPLE
-			.......................................................................................................
+			..............................................................................................
 			/*** create a page widget ***/
 				var page = new Uize.Widget.Page; // the default idPrefix is "page"
 
 			/*** declarative syntax widget properties for widget not yet created ***/
-				window.$page_myWidget = {foo:'bar'}; // for the "myWidget" child widget of the page widget
+				window.$page_myWidget = {foo:'bar'}; // for the "myWidget" child widget
 
 			/*** create a test widget class ***/
 				var MyWidgetClass = Uize.Widget.subclass (
 					/*** the alphastructor ***/
 						function (_properties) {
 							alert (_properties.foo);   // alerts the text "bar"
-							alert (this.get ('foo'));  // alerts the text "undefined" (because set hasn't happened yet)
+							alert (this.get ('foo'));  // alerts the text "undefined" (set hasn't happened)
 						},
 					/*** the omegastructor ***/
 						function (_properties) {
@@ -72,56 +95,35 @@ Improved Declarative Widget Properties
 				);
 
 			page.addChild ('myWidget'Uize.Widget);
-			.......................................................................................................
+			..............................................................................................
 
 			The above example illustrates how the widget properties that are defined for a widget (using the declarative syntax) before the widget is actually created are available as early as the alphastructor of the widget. Because the alphastructor of the =Uize.Widget= base class executes before the alphastructor of the =MyWidgetClass= subclass, the declarative widget properties can be harvested and stitched into the properties parameter that is passed to both the alphastructor and omegastructor, so that the harvested properties are available during the construction code of subclasses.
 
 			What's important to note in this example is that the stitched in properties, just like any properties specified explicitly when instantiating a widget, are not yet set on the instance - that happens between the alphastructor and omegastructor. So, using the =get= instance method to query the value of the =foo= property in the alphastructor yields the value =undefined=, while doing the same query inside the omegastructor yields the value ='bar'=.
 
 		Widget Properties Can Address Widget Trees
-			Widget properties can now contain properties for child widgets
+			Widget properties specified for a widget using the declarative syntax can also contain widget properties for any or all of the widget's child widgets, or even child widgets of the widget's child widgets - all the way down to the deepest child widgets in the widget's widget tree.
 
 		New children Set-get Property
 			The =Uize.Widget= base class has always supported a =children= instance property, but this instance property has now been turned into a special set-get property.
 
-			Children Property Allows Deep Setting
+			The children Set-get Property Allows Deep Setting
 				The new =children= set-get property allows properties to be distributed to all the children of a widget. Consider the following example...
 
 				EXAMPLE
-				........................................................
-				var
-					page = new Uize.Widget.Page,
-					rgbSliders = page.addChild ('rgbSliders',Uize.Widget)
-				;
+				....................................................................
+				/*** build up a widget tree under the page widget ***/
+					var
+						page = new Uize.Widget.Page,
+						rgbSliders = page.addChild ('rgbSliders',Uize.Widget)
+					;
 
-				rgbSliders.addChild ('sliderR',Uize.Widget.Bar.Slider);
-				rgbSliders.addChild ('sliderG',Uize.Widget.Bar.Slider);
-				rgbSliders.addChild ('sliderB',Uize.Widget.Bar.Slider);
+					rgbSliders.addChild ('sliderR',Uize.Widget.Bar.Slider);
+					rgbSliders.addChild ('sliderG',Uize.Widget.Bar.Slider);
+					rgbSliders.addChild ('sliderB',Uize.Widget.Bar.Slider);
 
-				page.set ({
-					children:{
-						rgbSlider:{
-							children:{
-								sliderR:{value:127},
-								sliderG:{value:255},
-								sliderB:{value:0}
-							}
-						}
-					}
-				});
-				........................................................
-
-				If the =sliderR=, =sliderG=, and =sliderB= slider widgets together represented an RGB color value, then the above code would initialize them to represent the color chartreuse.
-
-				Now, this is admittedly not a terribly compelling example of how to use the special behavior of the =children= set-get property, but it demonstrates the basic principle.
-
-			Children Property Allows Deferred Pickup
-				document...
-
-				EXAMPLE
-				........................................................
-				var
-					page = new Uize.Widget.Page ({
+				/*** now, set values for the deepest widgets in the widget tree ***/
+					page.set ({
 						children:{
 							rgbSlider:{
 								children:{
@@ -131,18 +133,79 @@ Improved Declarative Widget Properties
 								}
 							}
 						}
-					}),
-					rgbSliders = page.addChild ('rgbSliders',Uize.Widget)
-				;
+					});
+				....................................................................
 
-				rgbSliders.addChild ('sliderR',Uize.Widget.Bar.Slider);
-				rgbSliders.addChild ('sliderG',Uize.Widget.Bar.Slider);
-				rgbSliders.addChild ('sliderB',Uize.Widget.Bar.Slider);
-				........................................................
+				If the =sliderR=, =sliderG=, and =sliderB= slider widgets together represented an RGB color value, then the above code would initialize them to represent the color chartreuse.
+
+				Now, this is admittedly not a terribly compelling example of how to use the special behavior of the =children= set-get property, but it demonstrates the basic principle.
+
+			The children Set-get Children Property Allows Deferred Pickup
+				The special behavior of the =children= set-get property allows widget properties to be specified for a child widget even before that child widget has been created.
+
+				EXAMPLE
+				.......................................................................................
+				/*** create a page widget, specifying properties for child widgets not yet created ***/
+					var page = new Uize.Widget.Page ({
+						children:{
+							rgbSlider:{
+								children:{
+									sliderR:{value:127},
+									sliderG:{value:255},
+									sliderB:{value:0}
+								}
+							}
+						}
+					});
+
+				/*** now, create the child widgets for which properties were specified earlier ***/
+					var rgbSliders = page.addChild ('rgbSliders',Uize.Widget);
+
+					rgbSliders.addChild ('sliderR',Uize.Widget.Bar.Slider);
+					rgbSliders.addChild ('sliderG',Uize.Widget.Bar.Slider);
+					rgbSliders.addChild ('sliderB',Uize.Widget.Bar.Slider);
+				.......................................................................................
+
+				In the above example, a page widget is being created and a value is being specified for its =children= set-get property that is defining widget properties for child widgets in the page widget's widget tree that have not yet been created. Then, after the fact, a widget tree is fleshed out for the page widget, with child widgets that correspond to the structure of the object specified for the =children= set-get property when the page widget instance was created. Because of the special way that the =children= set-get property works, the widget properties defined earlier are "picked up" by the child widgets when they are created.
+
+			The children Set-get Property is Respected in the Declarative Syntax
+				Along with using the =children= set-get property in the constructor of a widget instance, when calling the instance's =set= method, or in a widget adoption declaration, the =children= set-get property can also be used in the declarative syntax for widget properties.
+
+				EXAMPLE
+				......................................................................
+				/*** declare widget properties for a page widget ***/
+					window.$page = {
+						children:{
+							rgbSlider:{
+								children:{
+									sliderR:{value:127},
+									sliderG:{value:255},
+									sliderB:{value:0}
+								}
+							}
+						}
+					};
+
+				/*** now, create the page widget and build a widget tree under it ***/
+					var
+						page = new Uize.Widget.Page,
+						rgbSliders = page.addChild ('rgbSliders',Uize.Widget)
+					;
+					rgbSliders.addChild ('sliderR',Uize.Widget.Bar.Slider);
+					rgbSliders.addChild ('sliderG',Uize.Widget.Bar.Slider);
+					rgbSliders.addChild ('sliderB',Uize.Widget.Bar.Slider);
+				......................................................................
+
+				In the above example, a the =$page= property is being defined on the =window= object. Because the default =idPrefix= of the page widget is ='page'=, the =$page= property is effectively declaring widget properties for the page widget.
+
+				In our example, the page widget is created later. What you'll notice is that the value of the =$page= property contains a =children= property, which is an object containing a single =rgbSlider= property. This is declaring widget properties for the =rgbSlider= child widget of the page widget. Furthermore, the =rgbSlider= property is an object containing its own =children= property, which is declaring widget properties for the =sliderR=, =sliderG=, and =sliderB= child widgets of the =rgbSlider= child widget.
+
+				So, the widget properties declared for a widget using the declarative syntax may contain widget properties for any or all of the child widgets of the widget - all the way down to the deepest child widgets in the widget's widget tree.
 
 			Setting Doesn't Create or Destroy Children
-				document...
+				Setting the value of the =children= set-get property is handled in a special way and has no effect on the actual child widgets for a widget, nor does it affect the value or contents of the =children= instance property.
 
+				When you set a value for the =children= set-get property, the widget instance tries to distribute any specified child widget properties to the widget's current child widgets. If widget properties are specified for a child that does not yet exist, that child widget is not created. Instead, the unapplied child widget properties are remembered. If a child widget is added later and its name corresponds to the name of a child widget for which unapplied widget properties have been remembered, then those widget properties are applied at the time of creating the child widget (for more details, see the section `The children Set-get Children Property Allows Deferred Pickup`).
 
 JSON Serialization Improvements
 	The =Uize.Json= module has been improved to now serialize JavaScript objects to strict JSON format, according to the specification at [[http://www.json.org][json.org]].
