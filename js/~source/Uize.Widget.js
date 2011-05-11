@@ -79,7 +79,7 @@ Uize.module ({
 										children ~~ children Instance Property
 											An object, each of whose properties is a reference to one of a widget's child widgets.
 
-											For example, an instance of the =Uize.Widget.SlideShow= class may have child widgets that can be referenced as follows...
+											For example, an instance of the =Uize.Widget.SlideShow= class assigned to the variable =mySlideShow= may have child widgets that can be referenced as follows...
 
 											.............................
 											mySlideShow.children.first
@@ -94,7 +94,7 @@ Uize.module ({
 												One should not directly modify the contents of the =children= object, but should only do this through the child widget management methods.
 
 											The Special children set-get Property
-												The =children= instance property also has a companion set-get property of the same name, but which has a special behavior.
+												The =children= instance property has a companion set-get property of the same name, but which has a special behavior.
 
 												The `children set-get property` provides a convenient way to distribute widget properties to any or all of a widget's child widgets.
 
@@ -1862,7 +1862,9 @@ Uize.module ({
 					/*?
 						Set-get Properties
 							children ~~ children Set-get Property
-								A special set-get property that provides a way to distribute widget properties to any or all of a widget's child widgets.
+								A special set-get property that provides a way to distribute widget properties to any or all of the widget's child widgets, or even child widgets of the widget's child widgets - all the way down to the deepest child widgets in the widget's widget tree.
+
+								For a detailed discussion of the =children= set-get property, consult the [[../explainers/javascript-widgets.html][JavaScript Widgets]] explainer and read through specifically the section entitled "The children Set-get Property".
 
 								NOTES
 								- see also the companion `children instance property`

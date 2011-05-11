@@ -215,6 +215,10 @@ Uize.module({
 						var _children = _data.children;
 						if (_children.length) {
 							/*** collapse all same-named sections at this level ***/
+								/* TODO:
+									- must support section titles possibly containing aliases
+									- section titles with the same display name but different aliases should be merged so that a single title exists with the union of all the aliases
+								*/
 								var _sectionsByTitle = Uize.Data.getLookup (_undefined,0,true); // safe empty lookup object
 								for (var _childNo = -1; ++_childNo < _children.length;) {
 									var

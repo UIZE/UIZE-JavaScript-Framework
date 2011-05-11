@@ -36,8 +36,8 @@ Uize.module ({
 		(
 			window.page = new UizeDotCom.WidgetToGoPage ({
 				title:<%= _widget.title -> json %>,
-				widgetClass:<%= _widget.widgetClassModule -> json %>,
-				widgetHtml:<%= _widget.widgetTemplateModule -> json %>
+				widgetToGoClass:<%= _widget.widgetClassModule -> json %>,
+				widgetToGoHtml:<%= _widget.widgetTemplateModule -> json %>
 			})
 		).wireUi ();
 	}

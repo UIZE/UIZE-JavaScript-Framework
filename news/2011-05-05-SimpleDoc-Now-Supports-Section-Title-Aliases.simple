@@ -36,6 +36,50 @@ Considerations When Linking Using Aliases
 Use Cases For Section Title Aliases
 	`Section title aliases` can be useful in a number of real world situations, including `disambiguating links to sections with the same title`, `linking using opposite of singular or plural form`, and `linking using abbreviations or alternate forms`.
 
+	Linking Using Opposite of Singular or Plural Form
+		While you can generally just link to a section by using its title in a sentence with the `backticks` syntax for linking, sometimes a section's title is not in the desirable singular or plural form.
+
+		If a section's title is singular and you need to use a plural form in a sentence, or if a section's title is plural and you need to use a singular form in a sentence, then you can use the `section title aliases` feature to specify the alternate form as a section title alias.
+
+		EXAMPLE
+		.................................................................
+		Child Widgets ~~ Child Widget
+			Documentation explaining what child widgets are all about.
+
+		Some Other Section
+			For every `child widget` that one adds to a parent widget, ...
+		.................................................................
+
+		In the above example, "Child Widgets" is the desired display title for a section, but a sentence wishes to link to the section using a singular form that is grammatically correct in the context. While you could always use the `square brackets` syntax in this case, by specifying the section title as the section link and specifying the singular form as the linked text, this can become cumbersome if there are many sentences that would like to link to the section using the singular form. Instead, we specify the singular form as the section title alias for the section. Then we can use the more convenient `backticks` syntax with the singular form alias.
+
+		HOW IT LOOKS
+			Child Widgets ~~ Child Widget
+				Documentation explaining what child widgets are all about.
+
+			Some Other Section
+				For every `child widget` that one adds to a parent widget, ...
+
+	Linking Using Abbreviations or Alternate Forms
+		Similar to the case of `linking using opposite of singular or plural form`, it is sometimes desirable to link to a section with linked text that differs from the section's title.
+
+		Of course, you can always just use the `square brackets` syntax in such cases and specify the alternate form as the linked text, but the `section title aliases` feature makes it very easy to specify the alternate form as an alias for a section and then link to the section using the more convenient `backticks` syntax for linking.
+
+		EXAMPLE
+		..............................................................................
+		What is Ajax? ~~ Ajax
+			Ajax is a technology that has become a staple for Web 2.0 applications, ...
+
+		Developing Ajax Applications
+			In order to incorporate `Ajax` into one's Web applications, ...
+		..............................................................................
+
+		HOW IT LOOKS
+			What is Ajax? ~~ Ajax
+				Ajax is a technology that has become a staple for Web 2.0 applications, ...
+
+			Developing Ajax Applications
+				In order to incorporate `Ajax` into one's Web applications, ...
+
 	Disambiguating Links to Sections With the Same Title
 		When situations arise where multiple sections of a SimpleDoc document are to have the same display title, unique `section title aliases` can be specified for the different sections so that it is still possible to unambiguously link to the sections from other parts of the document.
 
@@ -109,51 +153,6 @@ Use Cases For Section Title Aliases
 
 						NOTES
 						- see the companion [[children instance property][children]] instance property
-
-	Linking Using Opposite of Singular or Plural Form
-		While you can generally just link to a section by using its title in a sentence with the `backticks` syntax for linking, sometimes a section's title is not in the desirable singular or plural form.
-
-		If a section's title is singular and you need to use a plural form in a sentence, or if a section's title is plural and you need to use a singular form in a sentence, then you can use the `section title aliases` feature to specify the alternate form as a section title alias.
-
-		EXAMPLE
-		.................................................................
-		Child Widgets ~~ Child Widget
-			Documentation explaining what child widgets are all about.
-
-		Some Other Section
-			For every `child widget` that one adds to a parent widget, ...
-		.................................................................
-
-		In the above example, "Child Widgets" is the desired display title for a section, but a sentence wishes to link to the section using a singular form that is grammatically correct in the context. While you could always use the `square brackets` syntax in this case, by specifying the section title as the section link and specifying the singular form as the linked text, this can become cumbersome if there are many sentences that would like to link to the section using the singular form. Instead, we specify the singular form as the section title alias for the section. Then we can use the more convenient `backticks` syntax with the singular form alias.
-
-		HOW IT LOOKS
-			Child Widgets ~~ Child Widget
-				Documentation explaining what child widgets are all about.
-
-			Some Other Section
-				For every `child widget` that one adds to a parent widget, ...
-
-	Linking Using Abbreviations or Alternate Forms
-		Similar to the case of `linking using opposite of singular or plural form`, it is sometimes desirable to link to a section with linked text that differs from the section's title.
-
-		Of course, you can always just use the `square brackets` syntax in such cases and specify the alternate form as the linked text, but the `section title aliases` feature makes it very easy to specify the alternate form as an alias for a section and then link to the section using the more convenient `backticks` syntax for linking.
-
-		EXAMPLE
-		..............................................................................
-		What is Ajax? ~~ Ajax
-			Ajax is a technology that has become a staple for Web 2.0 applications, ...
-
-		Developing Ajax Applications
-			In order to incorporate `Ajax` into one's Web applications, ...
-		..............................................................................
-
-		HOW IT LOOKS
-			What is Ajax? ~~ Ajax
-				Ajax is a technology that has become a staple for Web 2.0 applications, ...
-
-			Developing Ajax Applications
-				In order to incorporate `Ajax` into one's Web applications, ...
-
 
 ....................................................................................
 << metadata >>

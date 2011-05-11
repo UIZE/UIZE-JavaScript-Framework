@@ -49,7 +49,7 @@
 					<li><a href="#2_1" title="An object, each of whose properties is a reference to one of a widget&apos;s child widgets.">2.1. children</a>
 						<ul>
 							<li><a href="#2_1_1" title="The contents of the children object is managed by the various instance methods of the Uize.Widget class, such as the addChild and removeChild methods.">2.1.1. Don't Directly Modify the children Object</a></li>
-							<li><a href="#2_1_2" title="The children instance property also has a companion set-get property of the same name, but which has a special behavior.">2.1.2. The Special children set-get Property</a></li>
+							<li><a href="#2_1_2" title="The children instance property has a companion set-get property of the same name, but which has a special behavior.">2.1.2. The Special children set-get Property</a></li>
 						</ul>
 					</li>
 					<li><a href="#2_2" title="An alternate way of accessing the value of the wired set-get property, that doesn&apos;t require using the get instance method.">2.2. isWired</a></li>
@@ -131,7 +131,7 @@
 					<li><a href="#4_2" title="A boolean, indicating whether or not the widget is busy.">4.2. busy</a></li>
 					<li><a href="#4_3" title="A boolean, indicating whether or not the instance is busy. A widget subclass can use this set-get property when performing UI updates in order to reflect a busy state.">4.3. busyInherited</a></li>
 					<li><a href="#4_4" title="IMPLEMENTATION INFO">4.4. children</a></li>
-					<li><a href="#4_5" title="A special set-get property that provides a way to distribute widget properties to any or all of a widget&apos;s child widgets.">4.5. children</a></li>
+					<li><a href="#4_5" title="A special set-get property that provides a way to distribute widget properties to any or all of the widget&apos;s child widgets, or even child widgets of the widget&apos;s child widgets - all the way down to the deepest child widgets in the widget&apos;s widget tree.">4.5. children</a></li>
 					<li><a href="#4_6" title="A string, representing the ID of a container node, or an object reference to a container node, into which the HTML for a widget should be inserted when the insertUi instance method is called.">4.6. container</a></li>
 					<li><a href="#4_7" title="A boolean, specifying whether or not the widget is enabled.">4.7. enabled</a></li>
 					<li><a href="#4_8" title="A boolean, indicating whether or not the instance is enabled. A widget subclass can use this set-get property when performing UI updates in order to reflect a disabled state.">4.8. enabledInherited</a></li>
@@ -326,7 +326,7 @@
 		<div class="contents2">
 			<p>An object, each of whose properties is a reference to one of a widget's child widgets.</p>
 			
-			<p>For example, an instance of the <code><a href="../reference/Uize.Widget.SlideShow.html">Uize.Widget.SlideShow</a></code> class may have child widgets that can be referenced as follows...</p>
+			<p>For example, an instance of the <code><a href="../reference/Uize.Widget.SlideShow.html">Uize.Widget.SlideShow</a></code> class assigned to the variable <code>mySlideShow</code> may have child widgets that can be referenced as follows...</p>
 			
 			
 <pre class="sample-code">mySlideShow.children.first
@@ -346,7 +346,7 @@ mySlideShow.children.next
 			<a name="2_1_2"></a>
 			<h3 class="heading3" title="2. Instance Properties -&gt; 2.1. children -&gt; 2.1.2. The Special children set-get Property"><span class="headingNumber"><a href="#2" title="2. Instance Properties">2</a>.<a href="#2_1" title="2. Instance Properties -&gt; 2.1. children">1</a>.<a href="#2_1_2" title="2. Instance Properties -&gt; 2.1. children -&gt; 2.1.2. The Special children set-get Property">2</a>. </span>The Special children set-get Property</h3>
 			<div class="contents3">
-				<p>The <code><a href="#2_1">children</a></code> instance property also has a companion set-get property of the same name, but which has a special behavior.</p>
+				<p>The <code><a href="#2_1">children</a></code> instance property has a companion set-get property of the same name, but which has a special behavior.</p>
 				
 				<p>The <a href="#4_5">children set-get property</a> provides a convenient way to distribute widget properties to any or all of a widget's child widgets.</p>
 			</div>
@@ -2089,7 +2089,9 @@ myWidget.unwireNode (
 		<a name="4_5"></a>
 		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.5. children"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_5" title="4. Set-get Properties -&gt; 4.5. children">5</a>. </span>children</h2>
 		<div class="contents2">
-			<p>A special set-get property that provides a way to distribute widget properties to any or all of a widget's child widgets.</p>
+			<p>A special set-get property that provides a way to distribute widget properties to any or all of the widget's child widgets, or even child widgets of the widget's child widgets - all the way down to the deepest child widgets in the widget's widget tree.</p>
+			
+			<p>For a detailed discussion of the <code><a href="#4_5">children</a></code> set-get property, consult the <a href="../explainers/javascript-widgets.html">JavaScript Widgets</a> explainer and read through specifically the section entitled "The children Set-get Property".</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
