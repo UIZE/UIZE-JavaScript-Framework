@@ -656,7 +656,7 @@ Answers
 		Return to =QUESTION: Test For Rectangles Overlapping=
 
 	ANSWER: Split List String, Using Comma
-		Hopefully the candidate will know about the =split= method of the =String= object, hopefully they will know it's signature, and hopefully they will know that the method always returns an array with at least one element.
+		Hopefully the candidate will know about the =split= method of the =String= object, hopefully they will know its signature, and hopefully they will know that the method always returns an array with at least one element.
 
 		Always returning at least one element can be problematic when parsing a list string that was produced by serializing an empty array. Of course, the =split= method doesn't know that the string doesn't represent a list with one element that is an empty string, but is instead supposed to represent an empty list. However, we might know that our original list array never contains empty string elements. So, we want a function that will give us an empty array for an empty string.
 

@@ -78,7 +78,11 @@
 					<li><a href="#2_22" title="Lets you declare a module in the UIZE JavaScript Framework.">2.22. Uize.module</a></li>
 					<li><a href="#2_23" title="IMPLEMENTATION INFO">2.23. Uize.moduleLoader</a></li>
 					<li><a href="#2_24" title="IMPLEMENTATION INFO">2.24. Uize.moduleUrlResolver</a></li>
-					<li><a href="#2_25" title="Returns an object, that is the specified key and value, paired up together in the same object.">2.25. Uize.pairUp</a></li>
+					<li><a href="#2_25" title="Returns an object, that is the specified key and value, paired up together in the same object.">2.25. Uize.pairUp</a>
+						<ul>
+							<li><a href="#2_25_1" title="The Uize.pairUp method is particularly useful when an object needs to be created from a key/value pair, where the key name is either dynamically generated in an expression or is supplied via a parameter.">2.25.1. Why This Method is Useful</a></li>
+						</ul>
+					</li>
 					<li><a href="#2_26" title="Returns a boolean, indicating whether or not the specified record&apos;s contents is a superset of the contents of the specified match object.">2.26. Uize.recordMatches</a></li>
 					<li><a href="#2_27" title="Lets you register properties for the class.">2.27. Uize.registerProperties</a></li>
 					<li><a href="#2_28" title="Lets you set the initial value for one of the class&apos;s set-get properties.">2.28. Uize.set</a></li>
@@ -1206,7 +1210,7 @@ Uize.isIn ([0,1,2,3,4,5],'3',false,false);  // returns true
 <pre class="sample-code">keyValueOBJ = Uize.pairUp (keySTRorNUM,valueANYTYPE);
 </pre>
 			
-			<p><span class="allCaps">EXAMPLE 1</span></p>
+			<p><span class="allCaps">EXAMPLE</span></p>
 			
 			
 <pre class="sample-code">Uize.pairUp ('foo','bar');  // returns the object {foo:'bar'}
@@ -1214,27 +1218,45 @@ Uize.pairUp (0,'zero');     // returns the object {0:'zero'}
 Uize.pairUp (1,true);       // returns the object {1:true}
 </pre>
 			
-			<p>The <code><a href="#2_25">Uize.pairUp</a></code> method is useful when an object needs to be created from a key/value pair, where the key name is either dynamically generated in an expression or is supplied via a parameter. Using the <code><a href="#2_25">Uize.pairUp</a></code> method can collapse three statements into a single statement, as follows...</p>
-			
-			<p><span class="allCaps">INSTEAD OF</span></p>
+			<p><span class="allCaps">VARIATION</span></p>
 			
 			
+<pre class="sample-code">keyValueOBJ = Uize.pairUp (
+  key1STRorNUM,value1ANYTYPE,
+  key2STRorNUM,value2ANYTYPE,
+  ...,
+  keyNSTRorNUM,valueNANYTYPE
+);
+</pre>
+			
+			<p>When an arbitrary number of arguments are specified for the <code><a href="#2_25">Uize.pairUp</a></code> method, then the method will pair up all the arguments as key/value pairs to form a single object, where all the even index arguments are treated as the keys, and where all the odd index arguments are treated as the values. For example, the statement <code>Uize.pairUp ('foo','bar','hello','world')</code> would return the object <code>{foo:'bar',hello:'world'}</code>.</p>
+			
+			<a name="2_25_1"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.25. Uize.pairUp -&gt; 2.25.1. Why This Method is Useful"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_25" title="2. Static Methods -&gt; 2.25. Uize.pairUp">25</a>.<a href="#2_25_1" title="2. Static Methods -&gt; 2.25. Uize.pairUp -&gt; 2.25.1. Why This Method is Useful">1</a>. </span>Why This Method is Useful</h3>
+			<div class="contents3">
+				<p>The <code><a href="#2_25">Uize.pairUp</a></code> method is particularly useful when an object needs to be created from a key/value pair, where the key name is either dynamically generated in an expression or is supplied via a parameter.</p>
+				
+				<p>Using the <code><a href="#2_25">Uize.pairUp</a></code> method can collapse three statements into a single statement, as follows...</p>
+				
+				<p><span class="allCaps">INSTEAD OF</span></p>
+				
+				
 <pre class="sample-code">var object = {};
 object [key] = value;
 doSomethingWithAnObject (object);
 </pre>
-			
-			<p><span class="allCaps">USE...</span></p>
-			
-			
+				
+				<p><span class="allCaps">USE...</span></p>
+				
+				
 <pre class="sample-code">doSomethingWithAnObject (Uize.pairUp (key,value));
 </pre>
-			
-			<p>Let's consider a real world example...</p>
-			
-			<p><span class="allCaps">EXAMPLE 2</span></p>
-			
-			
+				
+				<p>Let's consider a real world example...</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
 <pre class="sample-code">function fadeNodeBorderColor (node,edge,startColor,endColor) {
   var styleProperty = 'border' + edge + 'Color';
   Uize.Fx.fadeStyle (
@@ -1245,8 +1267,11 @@ doSomethingWithAnObject (object);
   );
 }
 </pre>
-			
-			<p>In the above example, a function is being defined that will fade the border color of the specified edge of the specified node, from the specified start color to the specified end color. The value of the <code>edge</code> property needs to determine which style property needs to be faded. Now, we're using the <code>Uize.Fx.fadeStyle</code> static method of the <code><a href="../reference/Uize.Fx.html">Uize.Fx</a></code> module to perform the border color animation. This method can fade values for one or more style properties, and the start and end values for the style properties are specified in style property objects. Here we need to create start and end style objects where the style property to be faded is dynamically generated using the <code>edge</code> parameter. As you will see from the code, the <code><a href="#2_25">Uize.pairUp</a></code> method does this for us nicely.</p>
+				
+				<p>In the above example, a function is being defined that will fade the border color of the specified edge of the specified node, from the specified start color to the specified end color. The value of the <code>edge</code> property needs to determine which style property needs to be faded.</p>
+				
+				<p>Now, we're using the <code>Uize.Fx.fadeStyle</code> static method of the <code><a href="../reference/Uize.Fx.html">Uize.Fx</a></code> module to perform the border color animation. This method can fade values for one or more style properties, and the start and end values for the style properties are specified in style property objects. Here we need to create start and end style objects where the style property to be faded is dynamically generated using the <code>edge</code> parameter. As you will see from the code, the <code><a href="#2_25">Uize.pairUp</a></code> method does this for us nicely.</p>
+			</div>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			

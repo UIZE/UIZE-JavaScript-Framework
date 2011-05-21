@@ -313,7 +313,31 @@ Uize.module ({
             ['Test that the value can be a boolean',['key',false],{key:false}],
             ['Test that the value can be undefined',['key',undefined],{key:undefined}],
             ['Test that the value can be null',['key',null],{key:null}],
-            ['Test that the value can be an object',['key',{propName:'propValue'}],{key:{propName:'propValue'}}]
+            ['Test that the value can be an object',['key',{propName:'propValue'}],{key:{propName:'propValue'}}],
+            ['Test that an arbitrary number of arguments is supported',
+              [
+                'string','foo',
+                'number',42,
+                'boolean',false,
+                'regexp',/\d+/,
+                'undefined',undefined,
+                'null',null,
+                'NaN',NaN,
+                'object',{},
+                'array',[]
+              ],
+              {
+                'string':'foo',
+                'number':42,
+                'boolean':false,
+                'regexp':/\d+/,
+                'undefined':undefined,
+                'null':null,
+                'NaN':NaN,
+                'object':{},
+                'array':[]
+              }
+            ]
           ]],
           ['Uize.substituteInto',[
             ['Test that calling with no parameters produces an empty string',

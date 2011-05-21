@@ -1,0 +1,161 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2011-05-21 - JSON Serialization Improvements | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="The Uize.Json module has been improved with the addition of two convenient presets for serializing JavaScript objects to strict JSON format, according to the specification at json.org."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2011.html" class="breadcrumb breadcrumbWithArrow">2011 NEWS</a>
+	2011-05-21 - JSON Serialization Improvements
+
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="To allow you to serialize JavaScript objects in strict accordance with the JSON specification (to be found at json.org), the Uize.Json module provides convenient encoding presets for strict encoding.">1. Strict JSON Serialization</a>
+				<ul>
+					<li><a href="#1_1" title="The Uize.Json module provides two encoding presets for strict encoding - the strict encoding preset and the miniStrict encoding preset - both of which ensure that all object keys are quoted, and that both object keys and string values are quoted using double quotes.">1.1. Encoding Presets for Strict Encoding</a>
+						<ul>
+							<li><a href="#1_1_1" title="The &apos;strict&apos; preset produces strict JSON serialization with pretty indentation and linebreaks.">1.1.1. The strict Encoding Preset</a></li>
+							<li><a href="#1_1_2" title="The &apos;miniStrict&apos; preset produces strict JSON serialization that is as compact as possible, with no linebreaks or indentation.">1.1.2. The miniStrict Encoding Preset</a></li>
+						</ul>
+					</li>
+					<li><a href="#1_2" title="If you don&apos;t specify the optional encoding parameter when calling the Uize.Json.to method, the encoding defaults to &apos;nice&apos; - strict serialization is not the default.">1.2. Strict Serialization is Not the Default</a>
+						<ul>
+							<li><a href="#1_2_1" title="Serializing a value to JSON using a strict encoding is appropriate when the serialized data is to be consumed by a JSON parser that only supports strict JSON syntax, such as a JSON parser provided for a server language like PHP.">1.2.1. When To Be Strict</a></li>
+							<li><a href="#1_2_2" title="Serializing a value to JSON using a non-strict encoding may be preferable when using the serialized data for debugging purposes, logging purposes, or as a part of build processes.">1.2.2. When Not To Be Strict</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<p>The <code><a href="../reference/Uize.Json.html">Uize.Json</a></code> module has been improved with the addition of two convenient presets for serializing JavaScript objects to strict JSON format, according to the specification at <a href="http://www.json.org" target="_blank" class="externalSiteLink">json.org</a>.</p>
+	
+	<a name="1"></a>
+	<h1 class="heading1" title="1. Strict JSON Serialization"><span class="headingNumber"><a href="#1" title="1. Strict JSON Serialization">1</a>. </span>Strict JSON Serialization</h1>
+	<div class="contents1">
+		<p>To allow you to serialize JavaScript objects in strict accordance with the JSON specification (to be found at <a href="http://www.json.org" target="_blank" class="externalSiteLink">json.org</a>), the <code><a href="../reference/Uize.Json.html">Uize.Json</a></code> module provides convenient <a href="#1_1">encoding presets for strict encoding</a>.</p>
+		
+		<a name="1_1"></a>
+		<h2 class="heading2" title="1. Strict JSON Serialization -&gt; 1.1. Encoding Presets for Strict Encoding"><span class="headingNumber"><a href="#1" title="1. Strict JSON Serialization">1</a>.<a href="#1_1" title="1. Strict JSON Serialization -&gt; 1.1. Encoding Presets for Strict Encoding">1</a>. </span>Encoding Presets for Strict Encoding</h2>
+		<div class="contents2">
+			<p>The <code><a href="../reference/Uize.Json.html">Uize.Json</a></code> module provides two encoding presets for strict encoding - <a href="#1_1_1">the strict encoding preset</a> and <a href="#1_1_2">the miniStrict encoding preset</a> - both of which ensure that all object keys are quoted, and that both object keys and string values are quoted using double quotes.</p>
+			
+			<a name="1_1_1"></a>
+			<h3 class="heading3" title="1. Strict JSON Serialization -&gt; 1.1. Encoding Presets for Strict Encoding -&gt; 1.1.1. The strict Encoding Preset"><span class="headingNumber"><a href="#1" title="1. Strict JSON Serialization">1</a>.<a href="#1_1" title="1. Strict JSON Serialization -&gt; 1.1. Encoding Presets for Strict Encoding">1</a>.<a href="#1_1_1" title="1. Strict JSON Serialization -&gt; 1.1. Encoding Presets for Strict Encoding -&gt; 1.1.1. The strict Encoding Preset">1</a>. </span>The strict Encoding Preset</h3>
+			<div class="contents3">
+				<p>The <code>'strict'</code> preset produces strict JSON serialization with pretty indentation and linebreaks.</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">Uize.Json.to (
+  {
+    prop1:true,
+    prop2:'foo',
+    prop3:42
+  },
+  'strict'
+);
+</pre>
+				
+				<p><span class="allCaps">RESULT</span></p>
+				
+				
+<pre class="sample-code">{
+  "prop1":true,
+  "prop2":"foo",
+  "prop3":42
+}
+</pre>
+			</div>
+			
+			<a name="1_1_2"></a>
+			<h3 class="heading3" title="1. Strict JSON Serialization -&gt; 1.1. Encoding Presets for Strict Encoding -&gt; 1.1.2. The miniStrict Encoding Preset"><span class="headingNumber"><a href="#1" title="1. Strict JSON Serialization">1</a>.<a href="#1_1" title="1. Strict JSON Serialization -&gt; 1.1. Encoding Presets for Strict Encoding">1</a>.<a href="#1_1_2" title="1. Strict JSON Serialization -&gt; 1.1. Encoding Presets for Strict Encoding -&gt; 1.1.2. The miniStrict Encoding Preset">2</a>. </span>The miniStrict Encoding Preset</h3>
+			<div class="contents3">
+				<p>The <code>'miniStrict'</code> preset produces strict JSON serialization that is as compact as possible, with no linebreaks or indentation.</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">Uize.Json.to (
+  {
+    prop1:true,
+    prop2:'foo',
+    prop3:42
+  },
+  'miniStrict'
+);
+</pre>
+				
+				<p><span class="allCaps">RESULT</span></p>
+				
+				
+<pre class="sample-code">{"prop1":true,"prop2":"foo","prop3":42}
+</pre>
+			</div>
+		</div>
+		
+		<a name="1_2"></a>
+		<h2 class="heading2" title="1. Strict JSON Serialization -&gt; 1.2. Strict Serialization is Not the Default"><span class="headingNumber"><a href="#1" title="1. Strict JSON Serialization">1</a>.<a href="#1_2" title="1. Strict JSON Serialization -&gt; 1.2. Strict Serialization is Not the Default">2</a>. </span>Strict Serialization is Not the Default</h2>
+		<div class="contents2">
+			<p>If you don't specify the optional encoding parameter when calling the <code>Uize.Json.to</code> method, the encoding defaults to <code>'nice'</code> - strict serialization is not the default.</p>
+			
+			<p>Generally, when serializing values for debugging purposes, logging purposes, or as a part of build processes, it's more convenient to have your objects serialized in a neater and more readable form - without all the unnecessary and heavy double quotes around object keys. So, if you want strict JSON serialization, you must explicitly specify one of the two <a href="#1_1">encoding presets for strict encoding</a>.</p>
+			
+			<a name="1_2_1"></a>
+			<h3 class="heading3" title="1. Strict JSON Serialization -&gt; 1.2. Strict Serialization is Not the Default -&gt; 1.2.1. When To Be Strict"><span class="headingNumber"><a href="#1" title="1. Strict JSON Serialization">1</a>.<a href="#1_2" title="1. Strict JSON Serialization -&gt; 1.2. Strict Serialization is Not the Default">2</a>.<a href="#1_2_1" title="1. Strict JSON Serialization -&gt; 1.2. Strict Serialization is Not the Default -&gt; 1.2.1. When To Be Strict">1</a>. </span>When To Be Strict</h3>
+			<div class="contents3">
+				<p>Serializing a value to JSON using a strict encoding is appropriate when the serialized data is to be consumed by a JSON parser that only supports strict JSON syntax, such as a JSON parser provided for a server language like PHP.</p>
+			</div>
+			
+			<a name="1_2_2"></a>
+			<h3 class="heading3" title="1. Strict JSON Serialization -&gt; 1.2. Strict Serialization is Not the Default -&gt; 1.2.2. When Not To Be Strict"><span class="headingNumber"><a href="#1" title="1. Strict JSON Serialization">1</a>.<a href="#1_2" title="1. Strict JSON Serialization -&gt; 1.2. Strict Serialization is Not the Default">2</a>.<a href="#1_2_2" title="1. Strict JSON Serialization -&gt; 1.2. Strict Serialization is Not the Default -&gt; 1.2.2. When Not To Be Strict">2</a>. </span>When Not To Be Strict</h3>
+			<div class="contents3">
+				<p>Serializing a value to JSON using a non-strict encoding may be preferable when using the serialized data for debugging purposes, logging purposes, or as a part of build processes.</p>
+				
+				<p>In such cases, strict JSON may be too heavy, ugly, or unnatural. For example, if you wanted to serialize some data and then plug the serialized data directly into some JavaScript module, you probably won't be wanting the forced quoting around object keys or the use of double quotes for quoting keys and string values - it's more traditional to use single quotes for quoting strings in JavaScript code.</p>
+			</div>
+		</div>
+	</div>
+	
+	<p>For a refresher on JSON serialization options, consult the reference for the <code><a href="../reference/Uize.Json.html">Uize.Json</a></code> module.</p>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

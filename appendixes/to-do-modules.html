@@ -25,47 +25,46 @@
 		<ul>
 			<li><a href="#1">1. Uize</a>
 				<ul>
-					<li><a href="#1_1" title="A new system to support safe private properties and methods - for both instance as well as static private properties and methods.">1.1. Safe Privates</a></li>
-					<li><a href="#1_2" title="Provide a way in the Uize base class to bind two set-get properties together, in order to keep their values synchronized.">1.2. Property Bindings</a></li>
-					<li><a href="#1_3" title="Copy ability, for initial values of set-get properties that are arrays or objects.">1.3. Copy Ability for Set-get Properties</a></li>
-					<li><a href="#1_4" title="Lets you conveniently create a function / method caller, where you can specify context, function, and arguments.">1.4. Uize.makeCaller</a></li>
-					<li><a href="#1_5">1.5. Uize.constrain</a>
+					<li><a href="#1_1" title="Provide a way in the Uize base class to bind two set-get properties together, in order to keep their values synchronized.">1.1. Property Bindings</a></li>
+					<li><a href="#1_2" title="Copy ability, for initial values of set-get properties that are arrays or objects.">1.2. Copy Ability for Set-get Properties</a></li>
+					<li><a href="#1_3" title="Lets you conveniently create a function / method caller, where you can specify context, function, and arguments.">1.3. Uize.makeCaller</a></li>
+					<li><a href="#1_4">1.4. Uize.constrain</a>
 						<ul>
-							<li><a href="#1_5_1" title="Support a wrap flag, so that constrained values can be made to wrap around within the constraining range, rather than always only hitting up against the edges.">1.5.1. Support a wrap flag</a></li>
+							<li><a href="#1_4_1" title="Support a wrap flag, so that constrained values can be made to wrap around within the constraining range, rather than always only hitting up against the edges.">1.4.1. Support a wrap flag</a></li>
 						</ul>
 					</li>
-					<li><a href="#1_6">1.6. Uize.indexIn</a>
+					<li><a href="#1_5">1.5. Uize.indexIn</a>
 						<ul>
-							<li><a href="#1_6_1" title="For object type source, could find key whose value matches, and return undefined (or null?) if value not found in object.">1.6.1. Support Object Source</a></li>
-							<li><a href="#1_6_2" title="For simple type source, could do string index.">1.6.2. Support Simple Type Source</a></li>
+							<li><a href="#1_5_1" title="For object type source, could find key whose value matches, and return undefined (or null?) if value not found in object.">1.5.1. Support Object Source</a></li>
+							<li><a href="#1_5_2" title="For simple type source, could do string index.">1.5.2. Support Simple Type Source</a></li>
 						</ul>
 					</li>
-					<li><a href="#1_7">1.7. Uize.module</a>
+					<li><a href="#1_6">1.6. Uize.module</a>
 						<ul>
-							<li><a href="#1_7_1" title="How can code require a module that is not in the modules directory (like a code beside)?">1.7.1. Support Code Besides in Module Loader</a></li>
+							<li><a href="#1_6_1" title="How can code require a module that is not in the modules directory (like a code beside)?">1.6.1. Support Code Besides in Module Loader</a></li>
 						</ul>
 					</li>
-					<li><a href="#1_8" title="Consider a facility to support multiple inheritance (may involve creating a merge service for merging data from one object into another, since it should be possible to merge additional features of a different class into an already created class, and perhaps that merge feature would also be used in the _subclass function&apos;s implementation).">1.8. Multiple Inheritance</a></li>
-					<li><a href="#1_9">1.9. Library Modules</a>
+					<li><a href="#1_7" title="Consider a facility to support multiple inheritance (may involve creating a merge service for merging data from one object into another, since it should be possible to merge additional features of a different class into an already created class, and perhaps that merge feature would also be used in the _subclass function&apos;s implementation).">1.7. Multiple Inheritance</a></li>
+					<li><a href="#1_8">1.8. Library Modules</a>
 						<ul>
-							<li><a href="#1_9_1" title="Can library modules that are outside the modules directory require modules that are outside the modules directory?">1.9.1. Library of Dispersed Modules</a></li>
+							<li><a href="#1_8_1" title="Can library modules that are outside the modules directory require modules that are outside the modules directory?">1.8.1. Library of Dispersed Modules</a></li>
 						</ul>
 					</li>
-					<li><a href="#1_10" title="Variation on constructor, where specifying a non-object for the properties has the effect of setting the value property.">1.10. Handle Simple Type in Place of Constructor Properties</a></li>
-					<li><a href="#1_11" title="Handle recursion in Uize.clone (how to generate properties that are references to other parts of structure in same relationship as the equivalent property in the cloning source???)">1.11. Uize.clone and Recursion</a></li>
-					<li><a href="#1_12">1.12. Improvements to Property Mechanism</a>
+					<li><a href="#1_9" title="Variation on constructor, where specifying a non-object for the properties has the effect of setting the value property.">1.9. Handle Simple Type in Place of Constructor Properties</a></li>
+					<li><a href="#1_10" title="Handle recursion in Uize.clone (how to generate properties that are references to other parts of structure in same relationship as the equivalent property in the cloning source???)">1.10. Uize.clone and Recursion</a></li>
+					<li><a href="#1_11">1.11. Improvements to Property Mechanism</a>
 						<ul>
-							<li><a href="#1_12_1">1.12.1. New Profile Features</a>
+							<li><a href="#1_11_1">1.11.1. New Profile Features</a>
 								<ul>
-									<li><a href="#1_12_1_1" title="Basic types...">1.12.1.1. type</a></li>
-									<li><a href="#1_12_1_2" title="Different types of validators...">1.12.1.2. validator</a></li>
+									<li><a href="#1_11_1_1" title="Basic types...">1.11.1.1. type</a></li>
+									<li><a href="#1_11_1_2" title="Different types of validators...">1.11.1.2. validator</a></li>
 								</ul>
 							</li>
 						</ul>
 					</li>
-					<li><a href="#1_13" title="- optimize for successive substitution on the same source using the same form of map (but different values, of course)">1.13. Uize.substituteInto</a></li>
-					<li><a href="#1_14" title="- to indicate that the instance has been constructed">1.14. constructed Property</a></li>
-					<li><a href="#1_15" title="_this.doIn (_superclass,&apos;wireUi&apos;);&#10;&#10;_class.doSuper (_this,&apos;wireUi&apos;);&#10;_class.useSuper (_this,&apos;wireUi&apos;);&#10;_class.callSuper (_this,&apos;wireUi&apos;);&#10;&#10;_superclass.on (_this,&apos;wireUi&apos;);&#10;_superclass.my (_this,&apos;wireUi&apos;);&#10;_superclass.doOn (_this,&apos;wireUi&apos;);&#10;_superclass.doMy (_this,&apos;wireUi&apos;);&#10;_superclass.useMy (_this,&apos;wireUi&apos;);&#10;_superclass.proto (_this,&apos;wireUi&apos;);&#10;_superclass.useMine (_this,&apos;wireUi&apos;);&#10;">1.15. - new and more concise semantics for calling methods on superclass</a></li>
+					<li><a href="#1_12" title="- optimize for successive substitution on the same source using the same form of map (but different values, of course)">1.12. Uize.substituteInto</a></li>
+					<li><a href="#1_13" title="- to indicate that the instance has been constructed">1.13. constructed Property</a></li>
+					<li><a href="#1_14" title="_this.doIn (_superclass,&apos;wireUi&apos;);&#10;&#10;_class.doSuper (_this,&apos;wireUi&apos;);&#10;_class.useSuper (_this,&apos;wireUi&apos;);&#10;_class.callSuper (_this,&apos;wireUi&apos;);&#10;&#10;_superclass.on (_this,&apos;wireUi&apos;);&#10;_superclass.my (_this,&apos;wireUi&apos;);&#10;_superclass.doOn (_this,&apos;wireUi&apos;);&#10;_superclass.doMy (_this,&apos;wireUi&apos;);&#10;_superclass.useMy (_this,&apos;wireUi&apos;);&#10;_superclass.proto (_this,&apos;wireUi&apos;);&#10;_superclass.useMine (_this,&apos;wireUi&apos;);&#10;">1.14. - new and more concise semantics for calling methods on superclass</a></li>
 				</ul>
 			</li>
 			<li><a href="#2">2. Uize.Array</a>
@@ -293,34 +292,31 @@
 					</li>
 				</ul>
 			</li>
-			<li><a href="#18">18. Uize.Debug</a>
-				<ul>
-					<li><a href="#18_1" title="- provide a generic log service">18.1. - a package to facilitate logging and debugging of all Uize subclasses</a></li>
-				</ul>
-			</li>
+			<li><a href="#18" title="Implement a package to facilitate logging and debugging of all Uize subclasses.">18. Uize.Debug</a></li>
 			<li><a href="#19">19. Uize.Doc.Simple</a>
 				<ul>
-					<li><a href="#19_1" title="- multiple branch disambiguation syntax (eg. Section : Section : Section)">19.1. - improved automatic linking behavior</a>
+					<li><a href="#19_1" title="An issue right now with the section title aliases feature is that multiple sections with the same display title but different aliases are not canonicalized into the same section.">19.1. Fix issue with section title aliases and canonicalization</a></li>
+					<li><a href="#19_2" title="- multiple branch disambiguation syntax (eg. Section : Section : Section)">19.2. - improved automatic linking behavior</a>
 						<ul>
-							<li><a href="#19_1_1">19.1.1. - warnings</a>
+							<li><a href="#19_2_1">19.2.1. - warnings</a>
 								<ul>
-									<li><a href="#19_1_1_1">19.1.1.1. - for any ambiguity in links to sections of same name</a>
+									<li><a href="#19_2_1_1">19.2.1.1. - for any ambiguity in links to sections of same name</a>
 										<ul>
-											<li><a href="#19_1_1_1_1" title="- link text">19.1.1.1.1. - could be a log of how such ambiguities were resolved</a></li>
+											<li><a href="#19_2_1_1_1" title="- link text">19.2.1.1.1. - could be a log of how such ambiguities were resolved</a></li>
 										</ul>
 									</li>
 								</ul>
 							</li>
-							<li><a href="#19_1_2" title="- the link is in a much later paragraph in that section">19.1.2. - should never link to the section within that same section, unless...</a></li>
+							<li><a href="#19_2_2" title="- the link is in a much later paragraph in that section">19.2.2. - should never link to the section within that same section, unless...</a></li>
 						</ul>
 					</li>
-					<li><a href="#19_2">19.2. - table improvements</a>
+					<li><a href="#19_3">19.3. - table improvements</a>
 						<ul>
-							<li><a href="#19_2_1" title="- support for horizontal alignment for columns">19.2.1. - add ability to formally describe individual columns</a></li>
+							<li><a href="#19_3_1" title="- support for horizontal alignment for columns">19.3.1. - add ability to formally describe individual columns</a></li>
 						</ul>
 					</li>
-					<li><a href="#19_3" title="- nested inline formatting">19.3. - formatting issues</a></li>
-					<li><a href="#19_4" title="- no way to disambiguate for intra-document linking purposes when an instance method and a set-get property have the same name (happens with wired in doc for Uize.Widget, for example)">19.4. Problems</a></li>
+					<li><a href="#19_4" title="- nested inline formatting">19.4. - formatting issues</a></li>
+					<li><a href="#19_5" title="- no way to disambiguate for intra-document linking purposes when an instance method and a set-get property have the same name (happens with wired in doc for Uize.Widget, for example)">19.5. Problems</a></li>
 				</ul>
 			</li>
 			<li><a href="#20">20. Uize.Doc.Sucker</a>
@@ -1028,59 +1024,7 @@
 	<h1 class="heading1" title="1. Uize"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>. </span>Uize</h1>
 	<div class="contents1">
 		<a name="1_1"></a>
-		<h2 class="heading2" title="1. Uize -&gt; 1.1. Safe Privates"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_1" title="1. Uize -&gt; 1.1. Safe Privates">1</a>. </span>Safe Privates</h2>
-		<div class="contents2">
-			<p>A new system to support safe private properties and methods - for both instance as well as static private properties and methods.</p>
-			
-			<p><span class="allCaps">EXAMPLE 1</span></p>
-			
-			
-<pre class="sample-code">/*** create variables for mapping between pretty name of privates and generated names ***/
-  var _ = _class.priv ({
-    _myProperty:1,
-    _myMethod:1
-  });
-
-_classPrototype [_._myProperty] = 'blah';        // declaring instance property
-_classPrototype [_._myMethod] = function () {};  // declaring instance method
-
-alert (this [_._myProperty]); // accessing instance property
-this [_._myMethod] ();        // calling instance method
-</pre>
-			
-			<p><span class="allCaps">EXAMPLE 2</span></p>
-			
-			
-<pre class="sample-code">/*** create variables for mapping between pretty name of privates and generated names ***/
-  var
-    _ = _class.priv ({
-      _myProperty:1,
-      _myMethod:1
-    }),
-    _myProperty = _._myProperty,
-    _myMethod = _._myMethod
-  ;
-
-_classPrototype [_myProperty] = 'blah';        // declaring instance property
-_classPrototype [_myMethod] = function () {};  // declaring instance method
-
-alert (this [_myProperty]); // accessing instance property
-this [_myMethod] ();        // calling instance method
-</pre>
-			
-			<p><span class="allCaps">ISSUES</span></p>
-			
-			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>all accesses and assignments of privates involve an additional variable lookup step, and dereferencing with the result of an expression (so, precompilation benefits are lost)</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>"lookup" of private names involves accessing variables in a higher scope than point of access, so performance cost</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>names must be generated for all privates, which adds setup code</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>makes it harder to do impromptu assignments of privates</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>accessing set-get properties via their private names becomes rather inconvenient, and their private names must be registered in an extra step</td></tr>
-			</table>
-		</div>
-		
-		<a name="1_2"></a>
-		<h2 class="heading2" title="1. Uize -&gt; 1.2. Property Bindings"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_2" title="1. Uize -&gt; 1.2. Property Bindings">2</a>. </span>Property Bindings</h2>
+		<h2 class="heading2" title="1. Uize -&gt; 1.1. Property Bindings"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_1" title="1. Uize -&gt; 1.1. Property Bindings">1</a>. </span>Property Bindings</h2>
 		<div class="contents2">
 			<p>Provide a way in the <code><a href="#1">Uize</a></code> base class to bind two set-get properties together, in order to keep their values synchronized.</p>
 			
@@ -1113,16 +1057,16 @@ this [_myMethod] ();        // calling instance method
 			</table>
 		</div>
 		
-		<a name="1_3"></a>
-		<h2 class="heading2" title="1. Uize -&gt; 1.3. Copy Ability for Set-get Properties"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_3" title="1. Uize -&gt; 1.3. Copy Ability for Set-get Properties">3</a>. </span>Copy Ability for Set-get Properties</h2>
+		<a name="1_2"></a>
+		<h2 class="heading2" title="1. Uize -&gt; 1.2. Copy Ability for Set-get Properties"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_2" title="1. Uize -&gt; 1.2. Copy Ability for Set-get Properties">2</a>. </span>Copy Ability for Set-get Properties</h2>
 		<div class="contents2">
 			<p>Copy ability, for initial values of set-get properties that are arrays or objects.</p>
 			
 			<p>Have a property that can be specified in a set-get property's profile, which can be used to cause properties whose initial values are object types to be initialized by cloning the initial value rather than simply setting a reference to a shared object.</p>
 		</div>
 		
-		<a name="1_4"></a>
-		<h2 class="heading2" title="1. Uize -&gt; 1.4. Uize.makeCaller"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_4" title="1. Uize -&gt; 1.4. Uize.makeCaller">4</a>. </span>Uize.makeCaller</h2>
+		<a name="1_3"></a>
+		<h2 class="heading2" title="1. Uize -&gt; 1.3. Uize.makeCaller"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_3" title="1. Uize -&gt; 1.3. Uize.makeCaller">3</a>. </span>Uize.makeCaller</h2>
 		<div class="contents2">
 			<p>Lets you conveniently create a function / method caller, where you can specify context, function, and arguments.</p>
 			
@@ -1154,11 +1098,11 @@ this [_myMethod] ();        // calling instance method
 </pre>
 		</div>
 		
-		<a name="1_5"></a>
-		<h2 class="heading2" title="1. Uize -&gt; 1.5. Uize.constrain"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_5" title="1. Uize -&gt; 1.5. Uize.constrain">5</a>. </span>Uize.constrain</h2>
+		<a name="1_4"></a>
+		<h2 class="heading2" title="1. Uize -&gt; 1.4. Uize.constrain"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_4" title="1. Uize -&gt; 1.4. Uize.constrain">4</a>. </span>Uize.constrain</h2>
 		<div class="contents2">
-			<a name="1_5_1"></a>
-			<h3 class="heading3" title="1. Uize -&gt; 1.5. Uize.constrain -&gt; 1.5.1. Support a wrap flag"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_5" title="1. Uize -&gt; 1.5. Uize.constrain">5</a>.<a href="#1_5_1" title="1. Uize -&gt; 1.5. Uize.constrain -&gt; 1.5.1. Support a wrap flag">1</a>. </span>Support a wrap flag</h3>
+			<a name="1_4_1"></a>
+			<h3 class="heading3" title="1. Uize -&gt; 1.4. Uize.constrain -&gt; 1.4.1. Support a wrap flag"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_4" title="1. Uize -&gt; 1.4. Uize.constrain">4</a>.<a href="#1_4_1" title="1. Uize -&gt; 1.4. Uize.constrain -&gt; 1.4.1. Support a wrap flag">1</a>. </span>Support a wrap flag</h3>
 			<div class="contents3">
 				<p>Support a wrap flag, so that constrained values can be made to wrap around within the constraining range, rather than always only hitting up against the edges.</p>
 				
@@ -1178,19 +1122,19 @@ return ((value - min) % maxMinDelta + maxMinDelta) % maxMinDelta + min;
 			</div>
 		</div>
 		
-		<a name="1_6"></a>
-		<h2 class="heading2" title="1. Uize -&gt; 1.6. Uize.indexIn"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_6" title="1. Uize -&gt; 1.6. Uize.indexIn">6</a>. </span>Uize.indexIn</h2>
+		<a name="1_5"></a>
+		<h2 class="heading2" title="1. Uize -&gt; 1.5. Uize.indexIn"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_5" title="1. Uize -&gt; 1.5. Uize.indexIn">5</a>. </span>Uize.indexIn</h2>
 		<div class="contents2">
-			<a name="1_6_1"></a>
-			<h3 class="heading3" title="1. Uize -&gt; 1.6. Uize.indexIn -&gt; 1.6.1. Support Object Source"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_6" title="1. Uize -&gt; 1.6. Uize.indexIn">6</a>.<a href="#1_6_1" title="1. Uize -&gt; 1.6. Uize.indexIn -&gt; 1.6.1. Support Object Source">1</a>. </span>Support Object Source</h3>
+			<a name="1_5_1"></a>
+			<h3 class="heading3" title="1. Uize -&gt; 1.5. Uize.indexIn -&gt; 1.5.1. Support Object Source"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_5" title="1. Uize -&gt; 1.5. Uize.indexIn">5</a>.<a href="#1_5_1" title="1. Uize -&gt; 1.5. Uize.indexIn -&gt; 1.5.1. Support Object Source">1</a>. </span>Support Object Source</h3>
 			<div class="contents3">
 				<p>For object type source, could find key whose value matches, and return undefined (or null?) if value not found in object.</p>
 				
 				<p>In this mode, <code>fromEndBOOL</code> parameter could control direction for iterating through the keys of the object.</p>
 			</div>
 			
-			<a name="1_6_2"></a>
-			<h3 class="heading3" title="1. Uize -&gt; 1.6. Uize.indexIn -&gt; 1.6.2. Support Simple Type Source"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_6" title="1. Uize -&gt; 1.6. Uize.indexIn">6</a>.<a href="#1_6_2" title="1. Uize -&gt; 1.6. Uize.indexIn -&gt; 1.6.2. Support Simple Type Source">2</a>. </span>Support Simple Type Source</h3>
+			<a name="1_5_2"></a>
+			<h3 class="heading3" title="1. Uize -&gt; 1.5. Uize.indexIn -&gt; 1.5.2. Support Simple Type Source"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_5" title="1. Uize -&gt; 1.5. Uize.indexIn">5</a>.<a href="#1_5_2" title="1. Uize -&gt; 1.5. Uize.indexIn -&gt; 1.5.2. Support Simple Type Source">2</a>. </span>Support Simple Type Source</h3>
 			<div class="contents3">
 				<p>For simple type source, could do string index.</p>
 				
@@ -1198,11 +1142,11 @@ return ((value - min) % maxMinDelta + maxMinDelta) % maxMinDelta + min;
 			</div>
 		</div>
 		
-		<a name="1_7"></a>
-		<h2 class="heading2" title="1. Uize -&gt; 1.7. Uize.module"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_7" title="1. Uize -&gt; 1.7. Uize.module">7</a>. </span>Uize.module</h2>
+		<a name="1_6"></a>
+		<h2 class="heading2" title="1. Uize -&gt; 1.6. Uize.module"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_6" title="1. Uize -&gt; 1.6. Uize.module">6</a>. </span>Uize.module</h2>
 		<div class="contents2">
-			<a name="1_7_1"></a>
-			<h3 class="heading3" title="1. Uize -&gt; 1.7. Uize.module -&gt; 1.7.1. Support Code Besides in Module Loader"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_7" title="1. Uize -&gt; 1.7. Uize.module">7</a>.<a href="#1_7_1" title="1. Uize -&gt; 1.7. Uize.module -&gt; 1.7.1. Support Code Besides in Module Loader">1</a>. </span>Support Code Besides in Module Loader</h3>
+			<a name="1_6_1"></a>
+			<h3 class="heading3" title="1. Uize -&gt; 1.6. Uize.module -&gt; 1.6.1. Support Code Besides in Module Loader"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_6" title="1. Uize -&gt; 1.6. Uize.module">6</a>.<a href="#1_6_1" title="1. Uize -&gt; 1.6. Uize.module -&gt; 1.6.1. Support Code Besides in Module Loader">1</a>. </span>Support Code Besides in Module Loader</h3>
 			<div class="contents3">
 				<p>How can code require a module that is not in the modules directory (like a code beside)?</p>
 				
@@ -1210,24 +1154,24 @@ return ((value - min) % maxMinDelta + maxMinDelta) % maxMinDelta + min;
 			</div>
 		</div>
 		
-		<a name="1_8"></a>
-		<h2 class="heading2" title="1. Uize -&gt; 1.8. Multiple Inheritance"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_8" title="1. Uize -&gt; 1.8. Multiple Inheritance">8</a>. </span>Multiple Inheritance</h2>
+		<a name="1_7"></a>
+		<h2 class="heading2" title="1. Uize -&gt; 1.7. Multiple Inheritance"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_7" title="1. Uize -&gt; 1.7. Multiple Inheritance">7</a>. </span>Multiple Inheritance</h2>
 		<div class="contents2">
 			<p>Consider a facility to support multiple inheritance (may involve creating a merge service for merging data from one object into another, since it should be possible to merge additional features of a different class into an already created class, and perhaps that merge feature would also be used in the _subclass function's implementation).</p>
 		</div>
 		
-		<a name="1_9"></a>
-		<h2 class="heading2" title="1. Uize -&gt; 1.9. Library Modules"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_9" title="1. Uize -&gt; 1.9. Library Modules">9</a>. </span>Library Modules</h2>
+		<a name="1_8"></a>
+		<h2 class="heading2" title="1. Uize -&gt; 1.8. Library Modules"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_8" title="1. Uize -&gt; 1.8. Library Modules">8</a>. </span>Library Modules</h2>
 		<div class="contents2">
-			<a name="1_9_1"></a>
-			<h3 class="heading3" title="1. Uize -&gt; 1.9. Library Modules -&gt; 1.9.1. Library of Dispersed Modules"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_9" title="1. Uize -&gt; 1.9. Library Modules">9</a>.<a href="#1_9_1" title="1. Uize -&gt; 1.9. Library Modules -&gt; 1.9.1. Library of Dispersed Modules">1</a>. </span>Library of Dispersed Modules</h3>
+			<a name="1_8_1"></a>
+			<h3 class="heading3" title="1. Uize -&gt; 1.8. Library Modules -&gt; 1.8.1. Library of Dispersed Modules"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_8" title="1. Uize -&gt; 1.8. Library Modules">8</a>.<a href="#1_8_1" title="1. Uize -&gt; 1.8. Library Modules -&gt; 1.8.1. Library of Dispersed Modules">1</a>. </span>Library of Dispersed Modules</h3>
 			<div class="contents3">
 				<p>Can library modules that are outside the modules directory require modules that are outside the modules directory?</p>
 			</div>
 		</div>
 		
-		<a name="1_10"></a>
-		<h2 class="heading2" title="1. Uize -&gt; 1.10. Handle Simple Type in Place of Constructor Properties"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_10" title="1. Uize -&gt; 1.10. Handle Simple Type in Place of Constructor Properties">10</a>. </span>Handle Simple Type in Place of Constructor Properties</h2>
+		<a name="1_9"></a>
+		<h2 class="heading2" title="1. Uize -&gt; 1.9. Handle Simple Type in Place of Constructor Properties"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_9" title="1. Uize -&gt; 1.9. Handle Simple Type in Place of Constructor Properties">9</a>. </span>Handle Simple Type in Place of Constructor Properties</h2>
 		<div class="contents2">
 			<p>Variation on constructor, where specifying a non-object for the properties has the effect of setting the value property.</p>
 			
@@ -1250,20 +1194,20 @@ new Uize.Widget.Bar.Slider (50);          // old form
 </pre>
 		</div>
 		
-		<a name="1_11"></a>
-		<h2 class="heading2" title="1. Uize -&gt; 1.11. Uize.clone and Recursion"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_11" title="1. Uize -&gt; 1.11. Uize.clone and Recursion">11</a>. </span>Uize.clone and Recursion</h2>
+		<a name="1_10"></a>
+		<h2 class="heading2" title="1. Uize -&gt; 1.10. Uize.clone and Recursion"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_10" title="1. Uize -&gt; 1.10. Uize.clone and Recursion">10</a>. </span>Uize.clone and Recursion</h2>
 		<div class="contents2">
 			<p>Handle recursion in Uize.clone (how to generate properties that are references to other parts of structure in same relationship as the equivalent property in the cloning source???)</p>
 		</div>
 		
-		<a name="1_12"></a>
-		<h2 class="heading2" title="1. Uize -&gt; 1.12. Improvements to Property Mechanism"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_12" title="1. Uize -&gt; 1.12. Improvements to Property Mechanism">12</a>. </span>Improvements to Property Mechanism</h2>
+		<a name="1_11"></a>
+		<h2 class="heading2" title="1. Uize -&gt; 1.11. Improvements to Property Mechanism"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_11" title="1. Uize -&gt; 1.11. Improvements to Property Mechanism">11</a>. </span>Improvements to Property Mechanism</h2>
 		<div class="contents2">
-			<a name="1_12_1"></a>
-			<h3 class="heading3" title="1. Uize -&gt; 1.12. Improvements to Property Mechanism -&gt; 1.12.1. New Profile Features"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_12" title="1. Uize -&gt; 1.12. Improvements to Property Mechanism">12</a>.<a href="#1_12_1" title="1. Uize -&gt; 1.12. Improvements to Property Mechanism -&gt; 1.12.1. New Profile Features">1</a>. </span>New Profile Features</h3>
+			<a name="1_11_1"></a>
+			<h3 class="heading3" title="1. Uize -&gt; 1.11. Improvements to Property Mechanism -&gt; 1.11.1. New Profile Features"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_11" title="1. Uize -&gt; 1.11. Improvements to Property Mechanism">11</a>.<a href="#1_11_1" title="1. Uize -&gt; 1.11. Improvements to Property Mechanism -&gt; 1.11.1. New Profile Features">1</a>. </span>New Profile Features</h3>
 			<div class="contents3">
-				<a name="1_12_1_1"></a>
-				<h4 class="heading4" title="1. Uize -&gt; 1.12. Improvements to Property Mechanism -&gt; 1.12.1. New Profile Features -&gt; 1.12.1.1. type"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_12" title="1. Uize -&gt; 1.12. Improvements to Property Mechanism">12</a>.<a href="#1_12_1" title="1. Uize -&gt; 1.12. Improvements to Property Mechanism -&gt; 1.12.1. New Profile Features">1</a>.<a href="#1_12_1_1" title="1. Uize -&gt; 1.12. Improvements to Property Mechanism -&gt; 1.12.1. New Profile Features -&gt; 1.12.1.1. type">1</a>. </span>type</h4>
+				<a name="1_11_1_1"></a>
+				<h4 class="heading4" title="1. Uize -&gt; 1.11. Improvements to Property Mechanism -&gt; 1.11.1. New Profile Features -&gt; 1.11.1.1. type"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_11" title="1. Uize -&gt; 1.11. Improvements to Property Mechanism">11</a>.<a href="#1_11_1" title="1. Uize -&gt; 1.11. Improvements to Property Mechanism -&gt; 1.11.1. New Profile Features">1</a>.<a href="#1_11_1_1" title="1. Uize -&gt; 1.11. Improvements to Property Mechanism -&gt; 1.11.1. New Profile Features -&gt; 1.11.1.1. type">1</a>. </span>type</h4>
 				<div class="contents4">
 					<p>Basic types...</p>
 					
@@ -1281,8 +1225,8 @@ new Uize.Widget.Bar.Slider (50);          // old form
 					</table>
 				</div>
 				
-				<a name="1_12_1_2"></a>
-				<h4 class="heading4" title="1. Uize -&gt; 1.12. Improvements to Property Mechanism -&gt; 1.12.1. New Profile Features -&gt; 1.12.1.2. validator"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_12" title="1. Uize -&gt; 1.12. Improvements to Property Mechanism">12</a>.<a href="#1_12_1" title="1. Uize -&gt; 1.12. Improvements to Property Mechanism -&gt; 1.12.1. New Profile Features">1</a>.<a href="#1_12_1_2" title="1. Uize -&gt; 1.12. Improvements to Property Mechanism -&gt; 1.12.1. New Profile Features -&gt; 1.12.1.2. validator">2</a>. </span>validator</h4>
+				<a name="1_11_1_2"></a>
+				<h4 class="heading4" title="1. Uize -&gt; 1.11. Improvements to Property Mechanism -&gt; 1.11.1. New Profile Features -&gt; 1.11.1.2. validator"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_11" title="1. Uize -&gt; 1.11. Improvements to Property Mechanism">11</a>.<a href="#1_11_1" title="1. Uize -&gt; 1.11. Improvements to Property Mechanism -&gt; 1.11.1. New Profile Features">1</a>.<a href="#1_11_1_2" title="1. Uize -&gt; 1.11. Improvements to Property Mechanism -&gt; 1.11.1. New Profile Features -&gt; 1.11.1.2. validator">2</a>. </span>validator</h4>
 				<div class="contents4">
 					<p>Different types of validators...</p>
 					
@@ -1300,16 +1244,16 @@ new Uize.Widget.Bar.Slider (50);          // old form
 			</table>
 		</div>
 		
-		<a name="1_13"></a>
-		<h2 class="heading2" title="1. Uize -&gt; 1.13. Uize.substituteInto"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_13" title="1. Uize -&gt; 1.13. Uize.substituteInto">13</a>. </span>Uize.substituteInto</h2>
+		<a name="1_12"></a>
+		<h2 class="heading2" title="1. Uize -&gt; 1.12. Uize.substituteInto"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_12" title="1. Uize -&gt; 1.12. Uize.substituteInto">12</a>. </span>Uize.substituteInto</h2>
 		<div class="contents2">
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>optimize for successive substitution on the same source using the same form of map (but different values, of course)</td></tr>
 			</table>
 		</div>
 		
-		<a name="1_14"></a>
-		<h2 class="heading2" title="1. Uize -&gt; 1.14. constructed Property"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_14" title="1. Uize -&gt; 1.14. constructed Property">14</a>. </span>constructed Property</h2>
+		<a name="1_13"></a>
+		<h2 class="heading2" title="1. Uize -&gt; 1.13. constructed Property"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_13" title="1. Uize -&gt; 1.13. constructed Property">13</a>. </span>constructed Property</h2>
 		<div class="contents2">
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>to indicate that the instance has been constructed</td></tr>
@@ -1323,8 +1267,8 @@ new Uize.Widget.Bar.Slider (50);          // old form
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>idea: originator of a property set knows that the property is being set, so doesn't want to be informed of a change in the value? A way to provide an ID for the originator of a set? The basic ongoing problem is when multiple sources want to be able to change and also be informed of changes in a particular property. How does one make this more efficient and eliminate multiple redundant execution triggered by events?</td></tr>
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>idea: a way to track whether a user originated an event. Sufficient to check on the presence of domEvent property? domEvent property should be propagated all the way up.</td></tr>
 		</table>
-		<a name="1_15"></a>
-		<h2 class="heading2" title="1. Uize -&gt; 1.15. - new and more concise semantics for calling methods on superclass"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_15" title="1. Uize -&gt; 1.15. - new and more concise semantics for calling methods on superclass">15</a>. </span>- new and more concise semantics for calling methods on superclass</h2>
+		<a name="1_14"></a>
+		<h2 class="heading2" title="1. Uize -&gt; 1.14. - new and more concise semantics for calling methods on superclass"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_14" title="1. Uize -&gt; 1.14. - new and more concise semantics for calling methods on superclass">14</a>. </span>- new and more concise semantics for calling methods on superclass</h2>
 		<div class="contents2">
 			
 <pre class="sample-code">_this.doIn (_superclass,'wireUi');
@@ -2393,33 +2337,41 @@ _target = _sourceAndTarget._target;
 	<a name="18"></a>
 	<h1 class="heading1" title="18. Uize.Debug"><span class="headingNumber"><a href="#18" title="18. Uize.Debug">18</a>. </span>Uize.Debug</h1>
 	<div class="contents1">
-		<a name="18_1"></a>
-		<h2 class="heading2" title="18. Uize.Debug -&gt; 18.1. - a package to facilitate logging and debugging of all Uize subclasses"><span class="headingNumber"><a href="#18" title="18. Uize.Debug">18</a>.<a href="#18_1" title="18. Uize.Debug -&gt; 18.1. - a package to facilitate logging and debugging of all Uize subclasses">1</a>. </span>- a package to facilitate logging and debugging of all Uize subclasses</h2>
-		<div class="contents2">
-			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>provide a generic log service</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>ability to trace method calls, events, property value changes, etc. (provide multiple levels of filters)</td></tr>
-			</table>
-		</div>
+		<p>Implement a package to facilitate logging and debugging of all Uize subclasses.</p>
+		
+		<p>The module should provide the following...</p>
+		
+		<table class="list">
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>a generic log service</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the ability to trace method calls, events, property value changes, etc. (provide multiple levels of filters)</td></tr>
+		</table>
 	</div>
 	
 	<a name="19"></a>
 	<h1 class="heading1" title="19. Uize.Doc.Simple"><span class="headingNumber"><a href="#19" title="19. Uize.Doc.Simple">19</a>. </span>Uize.Doc.Simple</h1>
 	<div class="contents1">
 		<a name="19_1"></a>
-		<h2 class="heading2" title="19. Uize.Doc.Simple -&gt; 19.1. - improved automatic linking behavior"><span class="headingNumber"><a href="#19" title="19. Uize.Doc.Simple">19</a>.<a href="#19_1" title="19. Uize.Doc.Simple -&gt; 19.1. - improved automatic linking behavior">1</a>. </span>- improved automatic linking behavior</h2>
+		<h2 class="heading2" title="19. Uize.Doc.Simple -&gt; 19.1. Fix issue with section title aliases and canonicalization"><span class="headingNumber"><a href="#19" title="19. Uize.Doc.Simple">19</a>.<a href="#19_1" title="19. Uize.Doc.Simple -&gt; 19.1. Fix issue with section title aliases and canonicalization">1</a>. </span>Fix issue with section title aliases and canonicalization</h2>
+		<div class="contents2">
+			<p>An issue right now with the section title aliases feature is that multiple sections with the same display title but different aliases are not canonicalized into the same section.</p>
+			
+			<p>This is because the canonicalization is done using the unaltered section title - complete with its section aliases. So, two sections that are ostensibly the same but that have different aliases are not viewed as the same because their titles including aliases are not identical. The solution would be to detect aliases in the title and canonicalize using just the displayed portion of the title.</p>
+		</div>
+		
+		<a name="19_2"></a>
+		<h2 class="heading2" title="19. Uize.Doc.Simple -&gt; 19.2. - improved automatic linking behavior"><span class="headingNumber"><a href="#19" title="19. Uize.Doc.Simple">19</a>.<a href="#19_2" title="19. Uize.Doc.Simple -&gt; 19.2. - improved automatic linking behavior">2</a>. </span>- improved automatic linking behavior</h2>
 		<div class="contents2">
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>multiple branch disambiguation syntax (eg. Section : Section : Section)</td></tr>
 			</table>
-			<a name="19_1_1"></a>
-			<h3 class="heading3" title="19. Uize.Doc.Simple -&gt; 19.1. - improved automatic linking behavior -&gt; 19.1.1. - warnings"><span class="headingNumber"><a href="#19" title="19. Uize.Doc.Simple">19</a>.<a href="#19_1" title="19. Uize.Doc.Simple -&gt; 19.1. - improved automatic linking behavior">1</a>.<a href="#19_1_1" title="19. Uize.Doc.Simple -&gt; 19.1. - improved automatic linking behavior -&gt; 19.1.1. - warnings">1</a>. </span>- warnings</h3>
+			<a name="19_2_1"></a>
+			<h3 class="heading3" title="19. Uize.Doc.Simple -&gt; 19.2. - improved automatic linking behavior -&gt; 19.2.1. - warnings"><span class="headingNumber"><a href="#19" title="19. Uize.Doc.Simple">19</a>.<a href="#19_2" title="19. Uize.Doc.Simple -&gt; 19.2. - improved automatic linking behavior">2</a>.<a href="#19_2_1" title="19. Uize.Doc.Simple -&gt; 19.2. - improved automatic linking behavior -&gt; 19.2.1. - warnings">1</a>. </span>- warnings</h3>
 			<div class="contents3">
-				<a name="19_1_1_1"></a>
-				<h4 class="heading4" title="19. Uize.Doc.Simple -&gt; 19.1. - improved automatic linking behavior -&gt; 19.1.1. - warnings -&gt; 19.1.1.1. - for any ambiguity in links to sections of same name"><span class="headingNumber"><a href="#19" title="19. Uize.Doc.Simple">19</a>.<a href="#19_1" title="19. Uize.Doc.Simple -&gt; 19.1. - improved automatic linking behavior">1</a>.<a href="#19_1_1" title="19. Uize.Doc.Simple -&gt; 19.1. - improved automatic linking behavior -&gt; 19.1.1. - warnings">1</a>.<a href="#19_1_1_1" title="19. Uize.Doc.Simple -&gt; 19.1. - improved automatic linking behavior -&gt; 19.1.1. - warnings -&gt; 19.1.1.1. - for any ambiguity in links to sections of same name">1</a>. </span>- for any ambiguity in links to sections of same name</h4>
+				<a name="19_2_1_1"></a>
+				<h4 class="heading4" title="19. Uize.Doc.Simple -&gt; 19.2. - improved automatic linking behavior -&gt; 19.2.1. - warnings -&gt; 19.2.1.1. - for any ambiguity in links to sections of same name"><span class="headingNumber"><a href="#19" title="19. Uize.Doc.Simple">19</a>.<a href="#19_2" title="19. Uize.Doc.Simple -&gt; 19.2. - improved automatic linking behavior">2</a>.<a href="#19_2_1" title="19. Uize.Doc.Simple -&gt; 19.2. - improved automatic linking behavior -&gt; 19.2.1. - warnings">1</a>.<a href="#19_2_1_1" title="19. Uize.Doc.Simple -&gt; 19.2. - improved automatic linking behavior -&gt; 19.2.1. - warnings -&gt; 19.2.1.1. - for any ambiguity in links to sections of same name">1</a>. </span>- for any ambiguity in links to sections of same name</h4>
 				<div class="contents4">
-					<a name="19_1_1_1_1"></a>
-					<h5 class="heading5" title="19. Uize.Doc.Simple -&gt; 19.1. - improved automatic linking behavior -&gt; 19.1.1. - warnings -&gt; 19.1.1.1. - for any ambiguity in links to sections of same name -&gt; 19.1.1.1.1. - could be a log of how such ambiguities were resolved"><span class="headingNumber"><a href="#19" title="19. Uize.Doc.Simple">19</a>.<a href="#19_1" title="19. Uize.Doc.Simple -&gt; 19.1. - improved automatic linking behavior">1</a>.<a href="#19_1_1" title="19. Uize.Doc.Simple -&gt; 19.1. - improved automatic linking behavior -&gt; 19.1.1. - warnings">1</a>.<a href="#19_1_1_1" title="19. Uize.Doc.Simple -&gt; 19.1. - improved automatic linking behavior -&gt; 19.1.1. - warnings -&gt; 19.1.1.1. - for any ambiguity in links to sections of same name">1</a>.<a href="#19_1_1_1_1" title="19. Uize.Doc.Simple -&gt; 19.1. - improved automatic linking behavior -&gt; 19.1.1. - warnings -&gt; 19.1.1.1. - for any ambiguity in links to sections of same name -&gt; 19.1.1.1.1. - could be a log of how such ambiguities were resolved">1</a>. </span>- could be a log of how such ambiguities were resolved</h5>
+					<a name="19_2_1_1_1"></a>
+					<h5 class="heading5" title="19. Uize.Doc.Simple -&gt; 19.2. - improved automatic linking behavior -&gt; 19.2.1. - warnings -&gt; 19.2.1.1. - for any ambiguity in links to sections of same name -&gt; 19.2.1.1.1. - could be a log of how such ambiguities were resolved"><span class="headingNumber"><a href="#19" title="19. Uize.Doc.Simple">19</a>.<a href="#19_2" title="19. Uize.Doc.Simple -&gt; 19.2. - improved automatic linking behavior">2</a>.<a href="#19_2_1" title="19. Uize.Doc.Simple -&gt; 19.2. - improved automatic linking behavior -&gt; 19.2.1. - warnings">1</a>.<a href="#19_2_1_1" title="19. Uize.Doc.Simple -&gt; 19.2. - improved automatic linking behavior -&gt; 19.2.1. - warnings -&gt; 19.2.1.1. - for any ambiguity in links to sections of same name">1</a>.<a href="#19_2_1_1_1" title="19. Uize.Doc.Simple -&gt; 19.2. - improved automatic linking behavior -&gt; 19.2.1. - warnings -&gt; 19.2.1.1. - for any ambiguity in links to sections of same name -&gt; 19.2.1.1.1. - could be a log of how such ambiguities were resolved">1</a>. </span>- could be a log of how such ambiguities were resolved</h5>
 					<div class="contents5">
 						<table class="list">
 						<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>link text</td></tr>
@@ -2439,8 +2391,8 @@ _target = _sourceAndTarget._target;
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>should never link the same item more than once in the same paragraph</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>should ideally never link to the same URL / anchor more than once in the same section (unless, perhaps there was at least one deeper section between the new occurrence and the last occurrence)</td></tr>
 			</table>
-			<a name="19_1_2"></a>
-			<h3 class="heading3" title="19. Uize.Doc.Simple -&gt; 19.1. - improved automatic linking behavior -&gt; 19.1.2. - should never link to the section within that same section, unless..."><span class="headingNumber"><a href="#19" title="19. Uize.Doc.Simple">19</a>.<a href="#19_1" title="19. Uize.Doc.Simple -&gt; 19.1. - improved automatic linking behavior">1</a>.<a href="#19_1_2" title="19. Uize.Doc.Simple -&gt; 19.1. - improved automatic linking behavior -&gt; 19.1.2. - should never link to the section within that same section, unless...">2</a>. </span>- should never link to the section within that same section, unless...</h3>
+			<a name="19_2_2"></a>
+			<h3 class="heading3" title="19. Uize.Doc.Simple -&gt; 19.2. - improved automatic linking behavior -&gt; 19.2.2. - should never link to the section within that same section, unless..."><span class="headingNumber"><a href="#19" title="19. Uize.Doc.Simple">19</a>.<a href="#19_2" title="19. Uize.Doc.Simple -&gt; 19.2. - improved automatic linking behavior">2</a>.<a href="#19_2_2" title="19. Uize.Doc.Simple -&gt; 19.2. - improved automatic linking behavior -&gt; 19.2.2. - should never link to the section within that same section, unless...">2</a>. </span>- should never link to the section within that same section, unless...</h3>
 			<div class="contents3">
 				<table class="list">
 				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the link is in a much later paragraph in that section</td></tr>
@@ -2449,11 +2401,11 @@ _target = _sourceAndTarget._target;
 			</div>
 		</div>
 		
-		<a name="19_2"></a>
-		<h2 class="heading2" title="19. Uize.Doc.Simple -&gt; 19.2. - table improvements"><span class="headingNumber"><a href="#19" title="19. Uize.Doc.Simple">19</a>.<a href="#19_2" title="19. Uize.Doc.Simple -&gt; 19.2. - table improvements">2</a>. </span>- table improvements</h2>
+		<a name="19_3"></a>
+		<h2 class="heading2" title="19. Uize.Doc.Simple -&gt; 19.3. - table improvements"><span class="headingNumber"><a href="#19" title="19. Uize.Doc.Simple">19</a>.<a href="#19_3" title="19. Uize.Doc.Simple -&gt; 19.3. - table improvements">3</a>. </span>- table improvements</h2>
 		<div class="contents2">
-			<a name="19_2_1"></a>
-			<h3 class="heading3" title="19. Uize.Doc.Simple -&gt; 19.2. - table improvements -&gt; 19.2.1. - add ability to formally describe individual columns"><span class="headingNumber"><a href="#19" title="19. Uize.Doc.Simple">19</a>.<a href="#19_2" title="19. Uize.Doc.Simple -&gt; 19.2. - table improvements">2</a>.<a href="#19_2_1" title="19. Uize.Doc.Simple -&gt; 19.2. - table improvements -&gt; 19.2.1. - add ability to formally describe individual columns">1</a>. </span>- add ability to formally describe individual columns</h3>
+			<a name="19_3_1"></a>
+			<h3 class="heading3" title="19. Uize.Doc.Simple -&gt; 19.3. - table improvements -&gt; 19.3.1. - add ability to formally describe individual columns"><span class="headingNumber"><a href="#19" title="19. Uize.Doc.Simple">19</a>.<a href="#19_3" title="19. Uize.Doc.Simple -&gt; 19.3. - table improvements">3</a>.<a href="#19_3_1" title="19. Uize.Doc.Simple -&gt; 19.3. - table improvements -&gt; 19.3.1. - add ability to formally describe individual columns">1</a>. </span>- add ability to formally describe individual columns</h3>
 			<div class="contents3">
 				<table class="list">
 				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>support for horizontal alignment for columns</td></tr>
@@ -2473,8 +2425,8 @@ _target = _sourceAndTarget._target;
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>need a more robust solution for defining bullet lists, particularly to allow nested lists, and nested contents within lists</td></tr>
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>conversion of special characters to HTML entities</td></tr>
 		</table>
-		<a name="19_3"></a>
-		<h2 class="heading2" title="19. Uize.Doc.Simple -&gt; 19.3. - formatting issues"><span class="headingNumber"><a href="#19" title="19. Uize.Doc.Simple">19</a>.<a href="#19_3" title="19. Uize.Doc.Simple -&gt; 19.3. - formatting issues">3</a>. </span>- formatting issues</h2>
+		<a name="19_4"></a>
+		<h2 class="heading2" title="19. Uize.Doc.Simple -&gt; 19.4. - formatting issues"><span class="headingNumber"><a href="#19" title="19. Uize.Doc.Simple">19</a>.<a href="#19_4" title="19. Uize.Doc.Simple -&gt; 19.4. - formatting issues">4</a>. </span>- formatting issues</h2>
 		<div class="contents2">
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>nested inline formatting</td></tr>
@@ -2485,8 +2437,8 @@ _target = _sourceAndTarget._target;
 			</table>
 		</div>
 		
-		<a name="19_4"></a>
-		<h2 class="heading2" title="19. Uize.Doc.Simple -&gt; 19.4. Problems"><span class="headingNumber"><a href="#19" title="19. Uize.Doc.Simple">19</a>.<a href="#19_4" title="19. Uize.Doc.Simple -&gt; 19.4. Problems">4</a>. </span>Problems</h2>
+		<a name="19_5"></a>
+		<h2 class="heading2" title="19. Uize.Doc.Simple -&gt; 19.5. Problems"><span class="headingNumber"><a href="#19" title="19. Uize.Doc.Simple">19</a>.<a href="#19_5" title="19. Uize.Doc.Simple -&gt; 19.5. Problems">5</a>. </span>Problems</h2>
 		<div class="contents2">
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>no way to disambiguate for intra-document linking purposes when an instance method and a set-get property have the same name (happens with <code>wired</code> in doc for Uize.Widget, for example)</td></tr>

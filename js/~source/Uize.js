@@ -780,36 +780,34 @@
 			};
 
 			_class.unwire = _classPrototype.unwire = function (_eventNameOrEventsMap,_handler) {
-				var _this = this;
-				if (typeof _eventNameOrEventsMap == _typeObject && _eventNameOrEventsMap) {
-					for (var _eventName in _eventNameOrEventsMap)
-						_this.unwire (_eventName,_eventNameOrEventsMap [_eventName])
-					;
-				} else {
-					_this._abstractEventName (
-						_eventNameOrEventsMap,
-						function (_eventName) {
-							var _eventHandlers = _this._eventHandlers;
-							if (_eventHandlers) {
+				var
+					_this = this,
+					_eventHandlers = _this._eventHandlers
+				;
+				if (_eventHandlers) {
+					if (typeof _eventNameOrEventsMap == _typeObject && _eventNameOrEventsMap) {
+						for (var _eventName in _eventNameOrEventsMap)
+							_this.unwire (_eventName,_eventNameOrEventsMap [_eventName])
+						;
+					} else {
+						_this._abstractEventName (
+							_eventNameOrEventsMap,
+							function (_eventName) {
 								var _handlersForEventName = _eventHandlers [_eventName];
 								if (_handlersForEventName) {
 									if (_handler) {
 										/* TO DO:
 											this is a candidate for factoring out as a generally useful array manipulation method: removeAllOfValue
 										*/
-										var _handlerNo = 0;
-										while (_handlerNo < _handlersForEventName.length) {
-											_handlersForEventName [_handlerNo]._originalHandler == _handler
-												? _handlersForEventName.splice (_handlerNo,1)
-												: _handlerNo++
-											;
-										}
+										for (var _handlerNo = _handlersForEventName.length; --_handlerNo >= 0;)
+											_handlersForEventName [_handlerNo]._originalHandler == _handler && _handlersForEventName.splice (_handlerNo,1)
+										;
 									}
 									(_handler && _handlersForEventName.length) || delete _eventHandlers [_eventName];
 								}
 							}
-						}
-					);
+						);
+					}
 				}
 				/*?
 					Instance Methods
@@ -2293,8 +2291,18 @@
 		_classNonInheritableStatics.moduleUrlResolver = 1;
 
 		var _pairUp = _class.pairUp = function (_key,_value) {
-			var _result = {};
-			_result [_key] = _value;
+			var
+				_result = {},
+				_arguments = arguments,
+				_argumentsLength = _arguments.length
+			;
+			if (_argumentsLength < 3) {
+				_result [_key] = _value;
+			} else {
+				for (var _argumentNo = -2; (_argumentNo += 2) < _argumentsLength;)
+					_result [_arguments [_argumentNo]] = _arguments [_argumentNo + 1]
+				;
+			}
 			return _result;
 			/*?
 				Static Methods
@@ -2306,43 +2314,60 @@
 						keyValueOBJ = Uize.pairUp (keySTRorNUM,valueANYTYPE);
 						.....................................................
 
-						EXAMPLE 1
+						EXAMPLE
 						.............................................................
 						Uize.pairUp ('foo','bar');  // returns the object {foo:'bar'}
 						Uize.pairUp (0,'zero');     // returns the object {0:'zero'}
 						Uize.pairUp (1,true);       // returns the object {1:true}
 						.............................................................
 
-						The =Uize.pairUp= method is useful when an object needs to be created from a key/value pair, where the key name is either dynamically generated in an expression or is supplied via a parameter. Using the =Uize.pairUp= method can collapse three statements into a single statement, as follows...
+						VARIATION
+						..............................
+						keyValueOBJ = Uize.pairUp (
+							key1STRorNUM,value1ANYTYPE,
+							key2STRorNUM,value2ANYTYPE,
+							...,
+							keyNSTRorNUM,valueNANYTYPE
+						);
+						..............................
 
-						INSTEAD OF
-						.................................
-						var object = {};
-						object [key] = value;
-						doSomethingWithAnObject (object);
-						.................................
+						When an arbitrary number of arguments are specified for the =Uize.pairUp= method, then the method will pair up all the arguments as key/value pairs to form a single object, where all the even index arguments are treated as the keys, and where all the odd index arguments are treated as the values. For example, the statement =Uize.pairUp ('foo','bar','hello','world')= would return the object ={foo:'bar',hello:'world'}=.
 
-						USE...
-						..................................................
-						doSomethingWithAnObject (Uize.pairUp (key,value));
-						..................................................
+						Why This Method is Useful
+							The =Uize.pairUp= method is particularly useful when an object needs to be created from a key/value pair, where the key name is either dynamically generated in an expression or is supplied via a parameter.
 
-						Let's consider a real world example...
+							Using the =Uize.pairUp= method can collapse three statements into a single statement, as follows...
 
-						EXAMPLE 2
-						..............................................................
-						function fadeNodeBorderColor (node,edge,startColor,endColor) {
-							var styleProperty = 'border' + edge + 'Color';
-							Uize.Fx.fadeStyle (
-								node,
-								Uize.pairUp (styleProperty,startColor),
-								Uize.pairUp (styleProperty,endColor),
-								1000
-							);
-						}
-						..............................................................
+							INSTEAD OF
+							.................................
+							var object = {};
+							object [key] = value;
+							doSomethingWithAnObject (object);
+							.................................
 
-						In the above example, a function is being defined that will fade the border color of the specified edge of the specified node, from the specified start color to the specified end color. The value of the =edge= property needs to determine which style property needs to be faded. Now, we're using the =Uize.Fx.fadeStyle= static method of the =Uize.Fx= module to perform the border color animation. This method can fade values for one or more style properties, and the start and end values for the style properties are specified in style property objects. Here we need to create start and end style objects where the style property to be faded is dynamically generated using the =edge= parameter. As you will see from the code, the =Uize.pairUp= method does this for us nicely.
+							USE...
+							..................................................
+							doSomethingWithAnObject (Uize.pairUp (key,value));
+							..................................................
+
+							Let's consider a real world example...
+
+							EXAMPLE
+							..............................................................
+							function fadeNodeBorderColor (node,edge,startColor,endColor) {
+								var styleProperty = 'border' + edge + 'Color';
+								Uize.Fx.fadeStyle (
+									node,
+									Uize.pairUp (styleProperty,startColor),
+									Uize.pairUp (styleProperty,endColor),
+									1000
+								);
+							}
+							..............................................................
+
+							In the above example, a function is being defined that will fade the border color of the specified edge of the specified node, from the specified start color to the specified end color. The value of the =edge= property needs to determine which style property needs to be faded.
+
+							Now, we're using the =Uize.Fx.fadeStyle= static method of the =Uize.Fx= module to perform the border color animation. This method can fade values for one or more style properties, and the start and end values for the style properties are specified in style property objects. Here we need to create start and end style objects where the style property to be faded is dynamically generated using the =edge= parameter. As you will see from the code, the =Uize.pairUp= method does this for us nicely.
 			*/
 		};
 		_classNonInheritableStatics.pairUp = 1;

@@ -1,47 +1,20 @@
 This document lists to do tasks relating to the documentation and Web site for the UIZE JavaScript Framework.
 
-Document Inner Classes
-	Document the pattern of creating inner classes.
-
-	Private Inner Classes
-		Push dependencies of inner class(es) into =required= list of host class or module.
-
-		EXAMPLE
-		..................................................................
-		Uize.module ({
-			name:'MySite.MyClass',
-			required:[
-				'MySite.Widget',  // required as base class of inner class
-				'Uize.Data'       // required for inner class
-			],
-			builder:function () {
-				/*** create the inner class ***/
-					var _MyInnerClass = MySite.Widget.subclass ();
-					// code here to further create the inner class
-
-				/*** build the class ***/
-					// code here to build the main class for the module
-			}
-		});
-		..................................................................
-
-	Public Inner Classes
-		Don't do them, because they're too problematic.
-
-	Can't Have Inner Subclasses
-		Because the inner subclass would require the host module as its base class, and it would not be built before trying to declare the module for the inner subclass.
-
 Issues With Auto-generated Documentation
-	- static properties whose values are functions are regarded as static methods
-		- perhaps in such cases such features should just get documented and referred to as static methods
-		- in the future, it should be possible to register a feature as a static property, but where the type of the property can be function
+	Function Type Static Properties Regarded as Static Methods
+		Static properties whose values are functions are regarded as static methods.
+
+		Perhaps in such cases such features should just get documented and referred to as static methods. In the future, however, it should be possible to register a feature as a static property, but where the type of the property can be function, through a formal feature registration mechanism.
 
 	Extension Modules Mess Things Up
 		Documenting extension modules can mess things up.
 
 		Loading extension modules in the documentation build script in order to document them can have the side effect of modifying a class, and other modules that are subclasses of the modified class that are then documented later appear to have features that they really do not have, because they've inherited the features that were extended on their base class by loading and documenting the extension module.
 
-	- set-get properties whose initial values are objects or arrays are incorrectly indicated as having been overridden in a module that inherits the feature, simply because the initial value in the subclass is a clone of the initial value in the base class
+	Set-get Properties With Object Initial Values Treated as Overridden
+		Set-get properties whose initial values are objects or arrays are incorrectly indicated as having been overridden in a module that inherits the feature.
+
+		This is simply because the initial value in the subclass is a clone of the initial value in the base class and not a shared reference. The initial value is a clone because the whole property definition is a clone. Not sure what the solution is.
 
 SimpleDoc Previewing Utility
 	- eliminate alert dialog when first starting up
@@ -153,14 +126,11 @@ Kill acceleration and deceleration
 
 Explainers to Update
 	JavaScript Build Scripts
-		Add Head Comments Into
+		Add Head Comments Info
 			Update JavaScript Build Scripts explainer with info about head comments...
 
 			- Head Comments
 			- scrunchedHeadComments
-
-	JavaScript Widgets
-		- Declarative Syntax for Widget Data
 
 Finish "Creating a New UIZE Example Page" Explainer
 
@@ -187,7 +157,6 @@ Bugs
 	- IE7: Hover Fader Stretching Menu - weird flickering with some presets, screwy sticky shifting of entire menu with other presets
 
 Doc Improvements
-	- integrate examples into reference doc
 	- integrate module meta data into reference doc
 	- link references to static methods and properties (eg. =Uize.clone=) to appropriate sections of reference documents
 		- will need to settle on naming scheme for anchors for doc sections
@@ -303,7 +272,7 @@ Upcoming Releases
 
 - explain about layer library modules (as used by the *uize.com* Web site)
 
-Pull all Images from Zazzle...
+Pull All Images from Zazzle...
 	- use more product images from Zazzle for slideshow widgets and such
 		- have slideshows and such, containing UIZE merch product images
 
@@ -538,14 +507,42 @@ Explainer: JavaScript Modules
 
 	- discuss Uize.moduleUrlResolver
 
-	- implementing "inner classes" within modules
-
-
+	Document Inner Classes
+		Document the pattern of creating inner classes.
+	
+		Private Inner Classes
+			Push dependencies of inner class(es) into =required= list of host class or module.
+	
+			EXAMPLE
+			..................................................................
+			Uize.module ({
+				name:'MySite.MyClass',
+				required:[
+					'MySite.Widget',  // required as base class of inner class
+					'Uize.Data'       // required for inner class
+				],
+				builder:function () {
+					/*** create the inner class ***/
+						var _MyInnerClass = MySite.Widget.subclass ();
+						// code here to further create the inner class
+	
+					/*** build the class ***/
+						// code here to build the main class for the module
+				}
+			});
+			..................................................................
+	
+		Public Inner Classes
+			Don't do them, because they're too problematic.
+	
+		Can't Have Inner Subclasses
+			Because the inner subclass would require the host module as its base class, and it would not be built before trying to declare the module for the inner subclass.
+	
 Miscellaneous
 	Novel map Method
-		.........................................................
+		....................................................................
 		Uize.Data.map ('key > 1 ? this [key - 2] + this [key - 1] : key',30)
-		.........................................................
+		....................................................................
 
 		Can't do this with JavaScript 1.6's map method (or the map methods in any other framework), because the map function can't reference the newly created target array.
 

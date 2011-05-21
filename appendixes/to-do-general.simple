@@ -1,5 +1,318 @@
 This document lists to do tasks that relate to the UIZE JavaScript Framework in general - not relating to the documentation or the site (see [[to-do-documentation.html][TO DO - Documentation]]), or specific JavaScript modules (see [[to-do-modules.html][TO DO - Modules]]).
 
+General Drag and Drop Framework
+	Virtual dom events to mimic new HTML5 dnd events.
+
+Types for Properties
+	Can be used by interpolation code (such as fades).
+
+Safe Privates
+	A new system to support safe private properties and methods - for both instance as well as static private properties and methods.
+
+	EXAMPLE
+	..........................................................................................
+	/*** create variables for mapping between pretty name of privates and generated names ***/
+		var
+			_myProperty = _class.priv ('myProperty'),
+			_myMethod = _class.priv ('myMethod')
+		});
+
+	_classPrototype [_myProperty] = 'blah';        // declaring instance property
+	_classPrototype [_myMethod] = function () {};  // declaring instance method
+
+	alert (this [_myProperty]); // accessing instance property
+	this [_myMethod] ();        // calling instance method
+	..........................................................................................
+
+	ISSUES
+	- all accesses and assignments of privates involve an additional variable lookup step, and dereferencing with the result of an expression (so, some precompilation benefits are lost)
+	- "lookup" of private names involves accessing variables in a higher scope than point of access, so performance cost
+	- names must be generated for all privates, which adds setup code
+	- makes it a little bit harder to do impromptu assignments of privates
+	- accessing set-get properties via their private names becomes rather inconvenient, and their private names must be registered in an extra step
+
+	QUESTIONS
+	- how does one provide private names for set-get properties? Provide an example.
+	- should multiple calls to the =priv= method on the same class for the same named private always return the same result? If so, this would suggest that external code could probe around and easily discover the internal name for a private.
+	- how is the mapping / registry of privates for a class inherited by a subclass? Does it have to be?
+
+Mixins
+	Add support for mix-ins.
+
+	Mixing in would...
+	- copy all properties of the prototype
+	- copy all static properties
+	- copy in all information of registered properties
+
+	ISSUES
+	- namespace conflict for all instance properties
+
+Version Support in Module Mechanism
+	Requirements
+		Support the following...
+			- ability to have multiple versions of UIZE on the same page
+			- ability to have different versions of the same module on the same page
+			- ability for modules to have dependencies on specific versions of other modules
+			- it must still be possible for a module to declare itself and then be available as a required module for other modules that are subsequently declared in the same scope
+
+	- possible approach...
+
+		VARIATION 1
+		...............................................................
+		Uize.module ({
+			required:[
+				'Uize.Curve',     // end up getting version 2, let's say
+				'Uize.Curve.Mod'  // end up getting version 3, let's say
+			],
+			builder:function (_superclass,m) {
+				// referencing required modules inside this scope...
+				m ('Uize.Curve')...
+				m ('Uize.Curve.Mod')...
+			}
+		});
+		...............................................................
+
+		VARIATION 2
+		...............................................................
+		Uize.module ({
+			required:{
+				_Uize_Curve:'Uize.Curve',         // end up getting version 2, let's say
+				_Uize_Curve_Mod:'Uize.Curve.Mod'  // end up getting version 3, let's say
+			},
+			builder:function (_superclass,m) {
+				// referencing required modules inside this scope...
+				m._Uize_Curve ()...
+				m._Uize_Curve_Mod ()...
+			}
+		});
+		...............................................................
+
+	- declaring information about a module variation
+
+
+		EXAMPLE
+		...............................................................
+		Uize.module ({
+			name:'Uize.Widget.FooBar',
+			version:'2',
+			builder:function (_super,m) {
+				// build the module
+			}
+		});
+		...............................................................
+
+	- requiring specific versions of modules...
+
+		VARIATION 1
+		...............................................................
+		Uize.module ({
+			required:[
+				'Uize.Curve[2]',      // require version 2 of this module
+				'Uize.Curve.Mod[3-]'  // require version 3 or higher of this module
+			],
+			builder:function (_superclass,m) {
+				// referencing required modules inside this scope...
+				m ('Uize.Curve[2]')...
+				m ('Uize.Curve.Mod')...
+			}
+		});
+		...............................................................
+
+		VARIATION 2
+		...............................................................
+		Uize.module ({
+			required:{
+				_Uize_Curve:'Uize.Curve[2]',          // require version 2 of this module
+				_Uize_Curve_Mod:'Uize.Curve.Mod[3-]'  // require version 3 or higher of this module
+			},
+			builder:function (_superclass,m) {
+				// referencing required modules inside this scope...
+				m._Uize_Curve ()...
+				m._Uize_Curve_Mod ()...
+			}
+		});
+		...............................................................
+
+	- requiring a variation of a module using a custom match...
+
+		EXAMPLE
+		...............................................................
+		Uize.module ({
+			required:{
+				_Uize_Curve:{
+					name:'Uize.Curve',
+					version:/^2.[1|2](\..*)?$/  // require versions 2.1 and subversions, or 2,2 and subversions
+				}
+			},
+			builder:function (_superclass,m) {
+				// referencing required modules inside this scope...
+				_Uize_Curve ()...
+			}
+		});
+		...............................................................
+
+	In a Nutshell
+		- modules declare themselves and provide meta data (such as version number) that can be used to uniquely identify / disambiguate the module when requiring the module in other modules
+		- when a module requires another module, it can provide additional information over and above the required module's name that can be used to identify the module, should multiple variations of the required module be loaded concurrently
+		- when a module is declared, all information identifying the module is stored in a global registry. Different variations of the same named module can be loaded concurrently, and the identifying information
+
+		NOTES
+		- it should be possible to use multiple versions of the framework at the same time
+		- two variations of the same named module cannot be loaded in the same scope and have all the same other identifying information (such as version)
+		- specifying a version number in the module name string is a shorthand way of specifying both a name and version properties
+
+	Ideas
+		- it should be possible to load a module and have the module be defined without actually building it
+		- it should be possible to determine all the modules that have been loaded
+		- building a module should not have side effects outside of the definition of the module, such that building a module but not accessing it can affect the way other code behaves in such a way that other code relies upon those side effects and it becomes impossible to defer the building of the module until the first access to it without breaking code
+
+	Module Registry
+
+		Querying the Module Registry
+			Discovering the Loaded Modules
+
+			Getting a Module Profile
+				After a module has been loaded, the module registry can be queried to obtain a profile for the loaded module - even before the module has been built.
+
+				Obtaining a module profile for a module is done by calling the getProfile method on the module registry, as follows...
+
+				EXAMPLE
+				.............................................
+				Uize.modules.getProfile ('Uize.Widget.Page');
+				.............................................
+
+				Module Profile is Persisted
+					After a module has been built, it is still possible to query the `module registry` to get the profile for the module in order to find out more about it.
+
+					The name, superclass, required list, version, etc. are all persisted in the module registry. In the case of a class module, the profile for a module is assigned to the =moduleProfile= property of the module, so it is not necessary to use the `module registry` interface. However, in the case of a module where it is not appropriate to stitch in properties (such as data modules), `Getting a Module Profile` must be done through the `module registry` interface.
+
+	Module Meta Data
+		EXAMPLE
+		...............................................................
+		Uize.module ({
+			name:'Uize.Widget.FooBar',
+			version:'2',
+			experiment:'performance-optimized',
+			builder:function (_super,m) {
+				// build the module
+			}
+		});
+		...............................................................
+
+	Loading of Modules
+		General principles
+			- it is not the responsibility of the code requiring a module to specify how the module should be obtained
+			- when a module is obtained, "where" is merely a qualifier to how, and how the location is specified will depend on the method of retrieval
+
+		Loader Configuration
+			Configuration of the module loading mechanism is independent of how modules are declared or required and is environment specific.
+
+	EXAMPLE 1
+	..............................................................................
+	Uize.module ({
+		name:'Uize.Widget.Droplist',
+		superclass:'Uize.Widget',
+		required:{
+			_Uize_Widget_PopupPalette:'Uize.Widget.PopupPalette[2.*]',
+			_Uize_Widget_FormElement:'Uize.Widget.FormElement'
+		},
+		builder:function (_superclass,m) {
+			/*** Class Constructor ***/
+				var
+					_class = _superclass.subclass (
+						_null,
+						function () {
+							this.addChild ('popupPalette',m._Uize_Widget_PopupPalette ());
+							this.addChild ('input',m._Uize_Widget_FormElement ());
+						}
+				;
+
+				return _class;
+		}
+	});
+	..............................................................................
+
+	EXAMPLE 2
+	..............................................................................
+	Uize.module ({
+		name:'Uize.Widget.Droplist',
+		superclass:'Uize.Widget',
+		required:[
+			'Uize.Widget.PopupPalette',
+			'Uize.Widget.FormElement'
+		},
+		builder:function (_superclass,m) {
+			/*** Class Constructor ***/
+				var
+					_class = _superclass.subclass (
+						_null,
+						function () {
+							this.addChild ('popupPalette',m ('Uize.Widget.PopupPalette'));
+							this.addChild ('input',m ('Uize.Widget.FormElement'));
+						}
+				;
+
+				return _class;
+		}
+	});
+	..............................................................................
+
+	Module Variations
+		Variations vs Versions
+			The system should generally support the notion of a variation of a module, rather than specifically versions.
+
+			Versions are a narrower application of the more general variation system.
+
+		Variation File Naming
+			In order for multiple variations of the same module to coexist alongside one another in the file system, the different variations must have different filenames.
+
+			While a required module qualifier can provide matching criteria that can be used to test if an existing loaded variation of the module matches the criteria, an explicit fallback must be specified in the event that no matching variation can be found in the currently loaded modules.
+
+	Module Specifier
+		A module specifier identifies a specific module, by name alone, or by a combination of name and an additional `variation qualifier`.
+
+	Variation Qualifier
+		A variation qualifier is a specialized kind of value matcher that is applied to all loaded modules to find a module that matches certain criteria.
+
+		Variation Qualifier for Specifying Version
+			In the simplest form, a `variation qualifier` can be used to indicate an acceptable version or versions for a module.
+
+			EXAMPLE
+			....................................................................................................
+			Uize.module ({
+				required:{
+					_Uize_Curve:{
+						name:'Uize.Curve',
+						version:/^2.[1|2](\..*)?$/  // require versions 2.1 and subversions, or 2,2 and subversions
+					}
+				},
+				builder:function (_superclass,m) {
+					// referencing required modules inside this scope...
+					_Uize_Curve ()...
+				}
+			});
+			....................................................................................................
+
+	Issues to Address
+		- if one has a reference to a module, such as in a tool like the Delve tool, how does one determine what the filename of a module is for the purpose of linking to reference documentation?
+		- if a `variation qualifier` is used to indicate a very specific variation of a module, and if that variation is not yet loaded, how does the module loader mechanism know where to obtain a variation that matches the criteria of the `variation qualifier`?
+
+Function Argument Validation
+	Provide a facility that can optionally be used for function argument validation.
+
+	An easy way to define validator logic that can be used to validate the arguments of a function call. It sounds kind of like a test, so maybe some convenience features to allow easily creating an arguments test.
+
+	Method Signature Validation as Optional Layer
+		Possibly a way generally to have method signature validation as a separate optional layer of code.
+
+		As a Separate Module
+			Maybe a separate module that can accompany the main module?
+
+		Validation Code Inside the Main Module
+			Maybe the validation code is inside the main module, but can be optimized / compiled out for scrunched production code?
+
+			There are some benefits to the validation code being inside the main module's implementation. A traditional approach here would be to have a compiler flag / directive that could affect whether or not the validation is included / enabled.
+
 Client Services
 	- unit conversion (possible to implement this on the client side, but might be appropriate to migrate such a service to server side at some stage, and in such a case it would be desirable to allow for such a migration in a way that doesn't heavily impact the code using such a service)
 
@@ -538,15 +851,6 @@ Code Development (in order of priority)
 		- perhaps onChange handlers should get the previous value for the property as a parameter
 
 	- high-minded ideas
-		- support for mix-ins
-			mixing in would...
-				...copy all properties of the prototype
-				...copy all static properties
-				...copy in all information of registered properties
-
-			ISSUES
-				- namespace conflict for all instance properties
-
 		- drag a value from any widget to any other widget that supports or has a child that supports the value as part of its interface
 		- an easy way to bind two widgets to each other, so that values are syncronized
 		- an orthogonal effect system that does not require widget code to implement effects

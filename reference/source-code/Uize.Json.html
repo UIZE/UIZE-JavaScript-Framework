@@ -40,7 +40,7 @@
   importance: 7
   codeCompleteness: 100
   testCompleteness: 0
-  docCompleteness: 90
+  docCompleteness: 92
 */
 
 /*?
@@ -50,6 +50,69 @@
     *DEVELOPERS:* `Chris van Rensburg`
 
     The =Uize.Json= module provides versatile serializaton options to permit a wide array of results, from prettified JSON (with linebreaks, indentation, key sorting, etc.) to compact (efficient for AJAX communication).
+
+    Strict JSON Serialization
+      To allow you to serialize JavaScript objects in strict accordance with the JSON specification (to be found at [[http://www.json.org][json.org]]), the =Uize.Json= module provides convenient `encoding presets for strict encoding`.
+
+      Encoding Presets for Strict Encoding
+        The =Uize.Json= module provides two encoding presets for strict encoding - `the strict encoding preset` and `the miniStrict encoding preset` - both of which ensure that all object keys are quoted, and that both object keys and string values are quoted using double quotes.
+
+        The strict Encoding Preset
+          The ='strict'= preset produces strict JSON serialization with pretty indentation and linebreaks.
+
+          EXAMPLE
+          ..................
+          Uize.Json.to (
+            {
+              prop1:true,
+              prop2:'foo',
+              prop3:42
+            },
+            'strict'
+          );
+          ..................
+
+          RESULT
+          .................
+          {
+            "prop1":true,
+            "prop2":"foo",
+            "prop3":42
+          }
+          .................
+
+        The miniStrict Encoding Preset
+          The ='miniStrict'= preset produces strict JSON serialization that is as compact as possible, with no linebreaks or indentation.
+
+          EXAMPLE
+          ..................
+          Uize.Json.to (
+            {
+              prop1:true,
+              prop2:'foo',
+              prop3:42
+            },
+            'miniStrict'
+          );
+          ..................
+
+          RESULT
+          .......................................
+          {"prop1":true,"prop2":"foo","prop3":42}
+          .......................................
+
+      Strict Serialization is Not the Default
+        If you don't specify the optional encoding parameter when calling the =Uize.Json.to= method, the encoding defaults to ='nice'= - strict serialization is not the default.
+
+        Generally, when serializing values for debugging purposes, logging purposes, or as a part of build processes, it's more convenient to have your objects serialized in a neater and more readable form - without all the unnecessary and heavy double quotes around object keys. So, if you want strict JSON serialization, you must explicitly specify one of the two `encoding presets for strict encoding`.
+
+        When To Be Strict
+          Serializing a value to JSON using a strict encoding is appropriate when the serialized data is to be consumed by a JSON parser that only supports strict JSON syntax, such as a JSON parser provided for a server language like PHP.
+
+        When Not To Be Strict
+          Serializing a value to JSON using a non-strict encoding may be preferable when using the serialized data for debugging purposes, logging purposes, or as a part of build processes.
+
+          In such cases, strict JSON may be too heavy, ugly, or unnatural. For example, if you wanted to serialize some data and then plug the serialized data directly into some JavaScript module, you probably won't be wanting the forced quoting around object keys or the use of double quotes for quoting keys and string values - it's more traditional to use single quotes for quoting strings in JavaScript code.
 */
 
 Uize.module ({
@@ -525,16 +588,120 @@ Uize.module ({
               Uize.Json.encodingOptionsPresets
                 Available Presets
                   Uize.Json.encodingOptionsPresets.mini
-                    document...
+                    This `encoding options preset` can be used to serialize values to the most compact non-strict JSON form.
+
+                    This encoding preset is useful when serializing objects that are to be stored in string form somewhere, or that are to be sent "over the wire". The *mini* preset will minimize storage space needed to store serialized objects and bandwidth needed to send serialized objects over a network. The *mini* preset minimizes size by serializing objects without using any whitespace - no linebreaks, indentation, or key padding.
+
+                    EXAMPLE
+                    ...............................................
+                    {foo:'bar',hello:'world',subObject:{foo:'bar'}}
+                    ...............................................
+
+                    The =Uize.Json.encodingOptionsPresets.mini= preset defines the following encoding options...
+
+                    SETTINGS
+                    .........................
+                    {
+                      indentChars:'',
+                      keyAlign:'left',
+                      keyDelimiter:':',
+                      linebreakChars:'',
+                      padKeys:false,
+                      quoteChar:'\'',
+                      sortKeys:false,
+                      whenToQuoteKeys:'auto'
+                    }
+                    .........................
 
                   Uize.Json.encodingOptionsPresets.miniStrict
-                    document...
+                    This `encoding options preset` can be used to serialize values to the most compact strict JSON form.
+
+                    This encoding preset is useful when you want all the benefits of the =Uize.Json.encodingOptionsPresets.mini= preset, but where you also need objects to be serialized using `strict JSON serialization` (possibly because some parts of the system only support deserializing objects that are in strict JSON form).
+
+                    EXAMPLE
+                    .......................................................
+                    {"foo":"bar","hello":"world","subObject":{"foo":"bar"}}
+                    .......................................................
+
+                    The =Uize.Json.encodingOptionsPresets.miniStrict= preset defines the following encoding options...
+
+                    SETTINGS
+                    ...........................
+                    {
+                      indentChars:'',
+                      keyAlign:'left',
+                      keyDelimiter:':',
+                      linebreakChars:'',
+                      padKeys:false,
+                      quoteChar:'"',
+                      sortKeys:false,
+                      whenToQuoteKeys:'always'
+                    }
+                    ...........................
 
                   Uize.Json.encodingOptionsPresets.nice
-                    document...
+                    This `encoding options preset` can be used to serialize values to a human readable non-strict JSON form.
+
+                    This encoding preset is useful when serializing objects that are to be displayed (possibly for debugging or troubleshooting purposes), or that are to be incorporated into files that should be human readable (possibly as part of a build process). The *nice* preset spreads object properties over multiple lines and indents lines to indicate hierarchical structure.
+
+                    EXAMPLE
+                    .................
+                    {
+                      foo:'bar',
+                      hello:'world',
+                      subObject:{
+                        foo:'bar'
+                      }
+                    }
+                    .................
+
+                    The =Uize.Json.encodingOptionsPresets.nice= preset defines the following encoding options...
+
+                    SETTINGS
+                    .........................
+                    {
+                      indentChars:'\t',
+                      keyAlign:'left',
+                      keyDelimiter:':',
+                      linebreakChars:'\n',
+                      padKeys:false,
+                      quoteChar:'\'',
+                      sortKeys:false,
+                      whenToQuoteKeys:'auto'
+                    }
+                    .........................
 
                   Uize.Json.encodingOptionsPresets.strict
-                    document...
+                    This `encoding options preset` can be used to serialize values to a human readable strict JSON form.
+
+                    This encoding preset is useful when you want all the benefits of the =Uize.Json.encodingOptionsPresets.nice= preset, but where you also need objects to be serialized using `strict JSON serialization` (possibly because some parts of the system only support deserializing objects that are in strict JSON form).
+
+                    EXAMPLE
+                    ...................
+                    {
+                      "foo":"bar",
+                      "hello":"world",
+                      "subObject":{
+                        "foo":"bar"
+                      }
+                    }
+                    ...................
+
+                    The =Uize.Json.encodingOptionsPresets.strict= preset defines the following encoding options...
+
+                    SETTINGS
+                    ...........................
+                    {
+                      indentChars:'\t',
+                      keyAlign:'left',
+                      keyDelimiter:':',
+                      linebreakChars:'\n',
+                      padKeys:false,
+                      quoteChar:'"',
+                      sortKeys:false,
+                      whenToQuoteKeys:'always'
+                    }
+                    ...........................
           */
         }
       ;
