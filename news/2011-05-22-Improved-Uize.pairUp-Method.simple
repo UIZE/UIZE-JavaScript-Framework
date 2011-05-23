@@ -1,0 +1,39 @@
+The =Uize.pairUp= method, implemented in the =Uize= base class, has been improved with support for two new variations.
+
+Previously, the =Uize.pairUp= method was limited to simply creating an object by combining the specified key and value - it only accepted two parameters and could only ever be used to pair up one key and one value to form a new object. With the latest improvement, the =Uize.pair= method now also supports an arbitrary number of arguments, or a single argument that is an array. These two new variations provide a convenient way to pair up any number of key/value pairs to form an object.
+
+VARIATION 1
+..............................
+keyValueOBJ = Uize.pairUp (
+	key1STRorNUM,value1ANYTYPE,
+	key2STRorNUM,value2ANYTYPE,
+	...,
+	keyNSTRorNUM,valueNANYTYPE
+);
+..............................
+
+When an arbitrary number of arguments are specified for the =Uize.pairUp= method, then the method will pair up all the arguments as key/value pairs to form a single object, where all the even index arguments are treated as the keys, and where all the odd index arguments are treated as the values. For example, the statement =Uize.pairUp ('foo','bar','hello','world')= would return the object ={foo:'bar',hello:'world'}=.
+
+VARIATION 2
+..................................................
+keyValueOBJ = Uize.pairUp (keyAndValuePairsARRAY);
+..................................................
+
+When a =keyAndValuePairsARRAY= parameter is specified when calling the =Uize.pairUp= method, then the =Uize.pairUp= method operates on the array in the same way as it would an arbitrary number of arguments. For example, the statement =Uize.pairUp (['foo','bar','hello','world'])= would return the object ={foo:'bar',hello:'world'}=. Therefore, if you have an array that represents a set of key / value pairs, you can call the =Uize.pairUp= method to combine the keys and values together to form an object without having to resort to using the =apply= method in order to use the arbitrary arguments variation of the =Uize.pairUp= method.
+
+INSTEAD OF...
+...........................................
+Uize.pairUp.apply (0,myKeyValuePairsArray);
+...........................................
+
+USE...
+...................................
+Uize.pairUp (myKeyValuePairsArray);
+...................................
+
+
+....................................................................................
+<< metadata >>
+
+title: 2011-05-22 - Improved Uize.pairUp Method
+....................................................................................

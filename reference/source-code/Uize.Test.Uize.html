@@ -337,6 +337,32 @@ Uize.module ({
                 'object':{},
                 'array':[]
               }
+            ],
+            ['Test that if there is only one argument whose value is an array, then that array is treated as the arguments list',
+              [
+                [
+                  'string','foo',
+                  'number',42,
+                  'boolean',false,
+                  'regexp',/\d+/,
+                  'undefined',undefined,
+                  'null',null,
+                  'NaN',NaN,
+                  'object',{},
+                  'array',[]
+                ]
+              ],
+              {
+                'string':'foo',
+                'number':42,
+                'boolean':false,
+                'regexp':/\d+/,
+                'undefined':undefined,
+                'null':null,
+                'NaN':NaN,
+                'object':{},
+                'array':[]
+              }
             ]
           ]],
           ['Uize.substituteInto',[

@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2011-05-22 - Improved Uize.pairUp Method | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="The Uize.pairUp method, implemented in the Uize base class, has been improved with support for two new variations."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2011.html" class="breadcrumb breadcrumbWithArrow">2011 NEWS</a>
+	2011-05-22 - Improved Uize.pairUp Method
+
+</h1>
+
+<div class="main">
+<div class="contents0">
+	<p>The <code>Uize.pairUp</code> method, implemented in the <code><a href="../reference/Uize.html">Uize</a></code> base class, has been improved with support for two new variations.</p>
+	
+	<p>Previously, the <code>Uize.pairUp</code> method was limited to simply creating an object by combining the specified key and value - it only accepted two parameters and could only ever be used to pair up one key and one value to form a new object. With the latest improvement, the <code>Uize.pair</code> method now also supports an arbitrary number of arguments, or a single argument that is an array. These two new variations provide a convenient way to pair up any number of key/value pairs to form an object.</p>
+	
+	<p><span class="allCaps">VARIATION 1</span></p>
+	
+	
+<pre class="sample-code">keyValueOBJ = Uize.pairUp (
+  key1STRorNUM,value1ANYTYPE,
+  key2STRorNUM,value2ANYTYPE,
+  ...,
+  keyNSTRorNUM,valueNANYTYPE
+);
+</pre>
+	
+	<p>When an arbitrary number of arguments are specified for the <code>Uize.pairUp</code> method, then the method will pair up all the arguments as key/value pairs to form a single object, where all the even index arguments are treated as the keys, and where all the odd index arguments are treated as the values. For example, the statement <code>Uize.pairUp ('foo','bar','hello','world')</code> would return the object <code>{foo:'bar',hello:'world'}</code>.</p>
+	
+	<p><span class="allCaps">VARIATION 2</span></p>
+	
+	
+<pre class="sample-code">keyValueOBJ = Uize.pairUp (keyAndValuePairsARRAY);
+</pre>
+	
+	<p>When a <code>keyAndValuePairsARRAY</code> parameter is specified when calling the <code>Uize.pairUp</code> method, then the <code>Uize.pairUp</code> method operates on the array in the same way as it would an arbitrary number of arguments. For example, the statement <code>Uize.pairUp (['foo','bar','hello','world'])</code> would return the object <code>{foo:'bar',hello:'world'}</code>. Therefore, if you have an array that represents a set of key / value pairs, you can call the <code>Uize.pairUp</code> method to combine the keys and values together to form an object without having to resort to using the <code>apply</code> method in order to use the arbitrary arguments variation of the <code>Uize.pairUp</code> method.</p>
+	
+	<p><span class="allCaps">INSTEAD OF...</span></p>
+	
+	
+<pre class="sample-code">Uize.pairUp.apply (0,myKeyValuePairsArray);
+</pre>
+	
+	<p><span class="allCaps">USE...</span></p>
+	
+	
+<pre class="sample-code">Uize.pairUp (myKeyValuePairsArray);
+</pre>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

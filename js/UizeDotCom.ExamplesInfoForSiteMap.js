@@ -1,5 +1,5 @@
 /*
-	UIZE Web Site 2011-05-21
+	UIZE Web Site 2011-05-22
 
 	http://www.uize.com/reference/UizeDotCom.ExamplesInfoForSiteMap.html
 	Available under MIT License or GNU General Public License -- http://www.uize.com/license.html

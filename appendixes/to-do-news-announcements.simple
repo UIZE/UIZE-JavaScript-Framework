@@ -3,9 +3,6 @@ This document lists news official announcements that need to be created for deve
 Event System Unit Tests
 	document...
 
-Improved Uize.pairUp Method
-	document...
-
 Unit Test Build Scripts Made Generic
 	=_run-unit-tests-scrunched.js=, and =_run-unit-tests-source.js=
 

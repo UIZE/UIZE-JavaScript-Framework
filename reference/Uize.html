@@ -1218,7 +1218,7 @@ Uize.pairUp (0,'zero');     // returns the object {0:'zero'}
 Uize.pairUp (1,true);       // returns the object {1:true}
 </pre>
 			
-			<p><span class="allCaps">VARIATION</span></p>
+			<p><span class="allCaps">VARIATION 1</span></p>
 			
 			
 <pre class="sample-code">keyValueOBJ = Uize.pairUp (
@@ -1230,6 +1230,26 @@ Uize.pairUp (1,true);       // returns the object {1:true}
 </pre>
 			
 			<p>When an arbitrary number of arguments are specified for the <code><a href="#2_25">Uize.pairUp</a></code> method, then the method will pair up all the arguments as key/value pairs to form a single object, where all the even index arguments are treated as the keys, and where all the odd index arguments are treated as the values. For example, the statement <code>Uize.pairUp ('foo','bar','hello','world')</code> would return the object <code>{foo:'bar',hello:'world'}</code>.</p>
+			
+			<p><span class="allCaps">VARIATION 2</span></p>
+			
+			
+<pre class="sample-code">keyValueOBJ = Uize.pairUp (keyAndValuePairsARRAY);
+</pre>
+			
+			<p>When a <code>keyAndValuePairsARRAY</code> parameter is specified when calling the <code><a href="#2_25">Uize.pairUp</a></code> method, then the <code><a href="#2_25">Uize.pairUp</a></code> method operates on the array in the same way as it would an arbitrary number of arguments. For example, the statement <code>Uize.pairUp (['foo','bar','hello','world'])</code> would return the object <code>{foo:'bar',hello:'world'}</code>. Therefore, if you have an array that represents a set of key / value pairs, you can call the <code><a href="#2_25">Uize.pairUp</a></code> method to combine the keys and values together to form an object without having to resort to using the <code>apply</code> method in order to use the arbitrary arguments variation of the <code><a href="#2_25">Uize.pairUp</a></code> method.</p>
+			
+			<p><span class="allCaps">INSTEAD OF...</span></p>
+			
+			
+<pre class="sample-code">Uize.pairUp.apply (0,myKeyValuePairsArray);
+</pre>
+			
+			<p><span class="allCaps">USE...</span></p>
+			
+			
+<pre class="sample-code">Uize.pairUp (myKeyValuePairsArray);
+</pre>
 			
 			<a name="2_25_1"></a>
 			<h3 class="heading3" title="2. Static Methods -&gt; 2.25. Uize.pairUp -&gt; 2.25.1. Why This Method is Useful"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_25" title="2. Static Methods -&gt; 2.25. Uize.pairUp">25</a>.<a href="#2_25_1" title="2. Static Methods -&gt; 2.25. Uize.pairUp -&gt; 2.25.1. Why This Method is Useful">1</a>. </span>Why This Method is Useful</h3>

@@ -2290,14 +2290,14 @@
 		};
 		_classNonInheritableStatics.moduleUrlResolver = 1;
 
-		var _pairUp = _class.pairUp = function (_key,_value) {
+		var _pairUp = _class.pairUp = function (_firstArg) {
 			var
 				_result = {},
-				_arguments = arguments,
+				_arguments = arguments.length == 1 && _isArray (_firstArg) ? _firstArg : arguments,
 				_argumentsLength = _arguments.length
 			;
 			if (_argumentsLength < 3) {
-				_result [_key] = _value;
+				_result [_arguments [0]] = _arguments [1];
 			} else {
 				for (var _argumentNo = -2; (_argumentNo += 2) < _argumentsLength;)
 					_result [_arguments [_argumentNo]] = _arguments [_argumentNo + 1]
@@ -2321,7 +2321,7 @@
 						Uize.pairUp (1,true);       // returns the object {1:true}
 						.............................................................
 
-						VARIATION
+						VARIATION 1
 						..............................
 						keyValueOBJ = Uize.pairUp (
 							key1STRorNUM,value1ANYTYPE,
@@ -2332,6 +2332,23 @@
 						..............................
 
 						When an arbitrary number of arguments are specified for the =Uize.pairUp= method, then the method will pair up all the arguments as key/value pairs to form a single object, where all the even index arguments are treated as the keys, and where all the odd index arguments are treated as the values. For example, the statement =Uize.pairUp ('foo','bar','hello','world')= would return the object ={foo:'bar',hello:'world'}=.
+
+						VARIATION 2
+						..................................................
+						keyValueOBJ = Uize.pairUp (keyAndValuePairsARRAY);
+						..................................................
+
+						When a =keyAndValuePairsARRAY= parameter is specified when calling the =Uize.pairUp= method, then the =Uize.pairUp= method operates on the array in the same way as it would an arbitrary number of arguments. For example, the statement =Uize.pairUp (['foo','bar','hello','world'])= would return the object ={foo:'bar',hello:'world'}=. Therefore, if you have an array that represents a set of key / value pairs, you can call the =Uize.pairUp= method to combine the keys and values together to form an object without having to resort to using the =apply= method in order to use the arbitrary arguments variation of the =Uize.pairUp= method.
+
+						INSTEAD OF...
+						...........................................
+						Uize.pairUp.apply (0,myKeyValuePairsArray);
+						...........................................
+
+						USE...
+						...................................
+						Uize.pairUp (myKeyValuePairsArray);
+						...................................
 
 						Why This Method is Useful
 							The =Uize.pairUp= method is particularly useful when an object needs to be created from a key/value pair, where the key name is either dynamically generated in an expression or is supplied via a parameter.
