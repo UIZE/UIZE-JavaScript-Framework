@@ -15,7 +15,7 @@
 	type: Class
 	importance: 10
 	codeCompleteness: 100
-	testCompleteness: 8
+	testCompleteness: 23
 	docCompleteness: 90
 */
 
@@ -1414,19 +1414,15 @@
 		_classNonInheritableStatics.constrain = 1;
 
 		var _copyInto = _class.copyInto = function (_targetObject,_sourceObject) {
-			if (typeof _sourceObject == _typeObject && _sourceObject) {
+			if (_targetObject && _sourceObject && typeof _sourceObject == _typeObject) {
 				for (var _propertyName in _sourceObject)
 					_targetObject [_propertyName] = _sourceObject [_propertyName]
 				;
 			}
 			if (arguments.length > 2) {
-				for (var _sourceObjectNo = 0; ++_sourceObjectNo < arguments.length;) {
-					if (typeof (_sourceObject = arguments [_sourceObjectNo]) == _typeObject && _sourceObject) {
-						for (var _propertyName in _sourceObject)
-							_targetObject [_propertyName] = _sourceObject [_propertyName]
-						;
-					}
-				}
+				for (var _sourceObjectNo = 0; ++_sourceObjectNo < arguments.length;)
+					_copyInto (_targetObject,arguments [_sourceObjectNo])
+				;
 			}
 			return _targetObject;
 			/*?
@@ -1495,7 +1491,7 @@
 		_classNonInheritableStatics.copyInto = 1;
 
 		_class.callOn = function (_object,_method,_arguments) {
-			if (!_object) return;
+			if (_object == _undefined) return;
 			_arguments || (_arguments = _sacredEmptyArray);
 			var
 				_methodIsString = typeof _method == _typeString,
@@ -1521,7 +1517,9 @@
 					}
 				}
 			}
-			_callOn (_object);
+			if (_methodIsString || _methodIsFunction)
+				_callOn (_object)
+			;
 			/*?
 				Static Methods
 					Uize.callOn
@@ -1885,25 +1883,25 @@
 		_classNonInheritableStatics.recordMatches = 1;
 
 		_class.findRecordNo = function (_records,_match,_defaultNoIfNoMatch) {
-			var _result = _class.isNumber (_defaultNoIfNoMatch) ? _defaultNoIfNoMatch : -1;
 			if (_records) {
 				for (var _recordNo = -1, _recordsLength = _records.length; ++_recordNo < _recordsLength;) {
-					if (_recordMatches (_records [_recordNo],_match)) {
-						_result = _recordNo;
-						break;
-					}
+					if (_recordMatches (_records [_recordNo],_match))
+						return _recordNo
+					;
 				}
 			}
-			return _result;
+			return _defaultNoIfNoMatch == _null || isNaN (_defaultNoIfNoMatch -= 0) ? -1 : _defaultNoIfNoMatch;
 			/*?
 				Static Methods
 					Uize.findRecordNo
-						Returns an integer, indicating the index in the specified records array of the first record whose contents is a superset of the contents of the specified match object. If no matching record can be found, then this method will return the value =-1=.
+						Returns an integer, indicating the index in the specified records array of the first record whose contents is a superset of the contents of the specified match object.
 
 						SYNTAX
 						........................................................
 						recordNoINT = Uize.findRecordNo (recordsARRAY,matchOBJ);
 						........................................................
+
+						If no matching record can be found, then this method will return the value =-1=, unless the optional =defaultNoNONNULL= parameter is specified.
 
 						EXAMPLE
 						........................................................................................
@@ -1936,6 +1934,13 @@
 
 						In the above example, the variable =greenAppleRecordNo= will have the value =2=.
 
+						VARIATION
+						.........................................................................
+						recordNoINT = Uize.findRecordNo (recordsARRAY,matchOBJ,defaultNoNONNULL);
+						.........................................................................
+
+						When the optional =defaultNoNONNULL= parameter is specified, then the value of this parameter, coerced to a number, will be returned as the result if no match is found. If the value =null= or =undefined= is specified for the =defaultNoNONNULL= parameter, or if its value coerced to a number produces the special value =NaN=, then it will be treated as =-1=.
+
 						NOTES
 						- this method uses strict matching, so the statement =Uize.findRecordNo ([{index:'0'},{index:'1'}],{index:1})= will return =-1=
 						- see also the related =Uize.findRecord= and =Uize.recordMatches= static methods
@@ -1944,8 +1949,11 @@
 		_classNonInheritableStatics.findRecordNo = 1;
 
 		_class.findRecord = function (_records,_match,_defaultNoIfNoMatch) {
-			var _recordNo = _class.findRecordNo (_records,_match,_defaultNoIfNoMatch);
-			return _recordNo > -1 ? _records [_recordNo] : null;
+			return (
+				_records != _null && (_recordNo = _class.findRecordNo (_records,_match,_defaultNoIfNoMatch)) > -1
+					? _records [_recordNo]
+					: null
+			);
 			/*?
 				Static Methods
 					Uize.findRecord
