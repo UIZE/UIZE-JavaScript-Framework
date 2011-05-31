@@ -14,7 +14,7 @@
 /* Module Meta Data
 	type: Test
 	importance: 8
-	codeCompleteness: 23
+	codeCompleteness: 28
 	testCompleteness: 100
 	docCompleteness: 100
 */
@@ -1351,16 +1351,234 @@ Uize.module ({
 							]
 					]],
 					['Uize.callOn',[
-						/*
-							- Test that specifying null for the object results in no action
-							- Test that specifying undefined for the object results in no action
-							- Test that specifying null for the method results in no action
-							- Test that specifying undefined for the method is handled without failure
-							- Test that specifying a number value for the method is handled without failure
-							- Test that specifying a boolean value for the method is handled without failure
-							- Test that specifing an object value for the method is handled without failure
-							- Test that specifing an array value for the method is handled without failure
-						*/
+						{
+							title:'Test that specifying null for the object results in no action',
+							test:function () {
+								var success = true;
+								Uize.callOn (null,function () {success = false});
+								return success;
+							}
+						},
+						{
+							title:'Test that specifying undefined for the object results in no action',
+							test:function () {
+								var success = true;
+								Uize.callOn (undefined,function () {success = false});
+								return success;
+							}
+						},
+						{
+							title:
+								'Test that specifying a value for method that is neither a string nor a function results in no error being produced',
+							test:function () {
+								var _target = new Uize;
+								Uize.callOn (_target);
+								Uize.callOn (_target,null);
+								Uize.callOn (_target,undefined);
+								Uize.callOn (_target,42);
+								Uize.callOn (_target,true);
+								Uize.callOn (_target,{});
+								Uize.callOn (_target,[]);
+								return true;
+							}
+						},
+						{
+							title:
+								'Test that specifying a function as the method and an instance as the target results in the function being called as an instance method on the instance',
+							test:function () {
+								var
+									_target = new Uize,
+									_success = false
+								;
+								Uize.callOn (_target,function () {_success = this == _target});
+								return _success;
+							}
+						},
+						{
+							title:
+								'Test that when the optional arguments parameter is not specified, the arguments are defaulted to an empty array',
+							test:function () {
+								var
+									_target = new Uize,
+									_success = false
+								;
+								Uize.callOn (_target,function () {_success = arguments.length == 0});
+								return _success;
+							}
+						},
+						{
+							title:
+								'Test that when the optional arguments parameter is specified, those arguments are passed in the call correctly',
+							test:function () {
+								var
+									_target = new Uize,
+									_success = false
+								;
+								Uize.callOn (
+									_target,
+									function () {
+										_success =
+											arguments.length == 3 &&
+											arguments [0] === 'foo' &&
+											arguments [1] === 42 &&
+											arguments [2] === true
+										;
+									},
+									['foo',42,true]
+								);
+								return _success;
+							}
+						},
+						{
+							title:
+								'Test that specifying the target as an instance and the method as a string does not result in an error being produced when the method is not defined on the instance',
+							test:function () {
+								var
+									_target = new Uize,
+									_bogusMethodName = 'SOME-BOGUS-METHOD-NAME'
+								;
+								delete _target [_bogusMethodName];
+								Uize.callOn (_target,_bogusMethodName);
+								return true;
+							}
+						},
+						{
+							title:
+								'Test that specifying the target as an instance and the method as a string results in the specified method being called as an instance method on the instance',
+							test:function () {
+								var
+									_target = new Uize,
+									_success = false
+								;
+								_target.someSillyMethodName = function () {
+									_success =
+										this == _target &&
+										arguments.length == 3 &&
+										arguments [0] === 'foo' &&
+										arguments [1] === 42 &&
+										arguments [2] === true
+									;
+								};
+								Uize.callOn (_target,'someSillyMethodName',['foo',42,true]);
+								return true;
+							}
+						},
+						{
+							title:
+								'Test that specifying an array as the target results in the method being called correctly on all elements of the array',
+							test:function () {
+								var
+									_callLog = [],
+									_DummyClass = Uize.subclass (),
+									_testArguments = ['foo',42,true],
+									_subTarget0 = new _DummyClass ({name:'subTarget0'}),
+									_subTarget1 = new _DummyClass ({name:'subTarget1'}),
+									_subTarget2 = new _DummyClass ({name:'subTarget2'}),
+									_target = [_subTarget0,_subTarget1,_subTarget2]
+								;
+								Uize.callOn (
+									_target,
+									function () {
+										_callLog.push ({
+											_name:this.get ('name'),
+											_arguments:[].concat.apply ([],arguments)
+										});
+									},
+									_testArguments
+								);
+								return this.expect (
+									[
+										{_name:'subTarget0',_arguments:_testArguments},
+										{_name:'subTarget1',_arguments:_testArguments},
+										{_name:'subTarget2',_arguments:_testArguments}
+									],
+									_callLog
+								);
+							}
+						},
+						{
+							title:
+								'Test that specifying an object as the target results in the method being called correctly on all property values of the object',
+							test:function () {
+								var
+									_callLog = [],
+									_DummyClass = Uize.subclass (),
+									_testArguments = ['foo',42,true],
+									_subTarget0 = new _DummyClass ({name:'subTarget0'}),
+									_subTarget1 = new _DummyClass ({name:'subTarget1'}),
+									_subTarget2 = new _DummyClass ({name:'subTarget2'}),
+									_target = {foo:_subTarget0,bar:_subTarget1,helloworld:_subTarget2}
+								;
+								Uize.callOn (
+									_target,
+									function () {
+										_callLog.push ({
+											_name:this.get ('name'),
+											_arguments:[].concat.apply ([],arguments)
+										});
+									},
+									_testArguments
+								);
+								return this.expect (
+									[
+										{_name:'subTarget0',_arguments:_testArguments},
+										{_name:'subTarget1',_arguments:_testArguments},
+										{_name:'subTarget2',_arguments:_testArguments}
+									],
+									_callLog
+								);
+							}
+						},
+						{
+							title:'Test that recursion is handled correctly when the target is a complex data structure',
+							test:function () {
+								var
+									_expectedCallLog = [],
+									_actualCallLog = [],
+									_DummyClass = Uize.subclass (),
+									_testArguments = ['foo',42,true],
+									_subTargetNo = -1
+								;
+								function _getNextSubTarget () {
+									var _subTargetName = 'subTarget' + ++_subTargetNo;
+									_expectedCallLog.push ({
+										_name:_subTargetName,
+										_arguments:_testArguments
+									});
+									return new _DummyClass ({name:_subTargetName});
+								}
+								var _target = {
+									foo:_getNextSubTarget (),
+									bar:[ // array nested in an object
+										_getNextSubTarget (),
+										{ // object nested in an array
+											hello:_getNextSubTarget (),
+											there:{ // object nested in an object
+												silly:_getNextSubTarget (),
+												sausage:_getNextSubTarget ()
+											},
+											world:_getNextSubTarget ()
+										},
+										[ // array nested in an array
+											_getNextSubTarget (),
+											_getNextSubTarget ()
+										]
+									],
+									blah:_getNextSubTarget ()
+								};
+								Uize.callOn (
+									_target,
+									function () {
+										_actualCallLog.push ({
+											_name:this.get ('name'),
+											_arguments:[].concat.apply ([],arguments)
+										});
+									},
+									_testArguments
+								);
+								return this.expect (_expectedCallLog,_actualCallLog);
+							}
+						}
 					]],
 
 					['Uize.fire',[

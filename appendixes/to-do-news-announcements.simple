@@ -1,18 +1,5 @@
 This document lists news official announcements that need to be created for developments that have already taken place.
 
-More Uize Base Class Unit Tests
-
-	Event System Unit Tests
-		=fire=, =wire=, =unwire= instance methods
-		=Uize.fire=, =Uize.wire=, =Uize.unwire= static methods
-
-	Static Methods
-		- =Uize.copyInto=
-		- =Uize.escapeRegExpLiteral=
-		- =Uize.recordMatches=
-		- =Uize.findRecordNo=
-		- =Uize.findRecord=
-
 Unit Test Build Scripts Made Generic
 	=_run-unit-tests-scrunched.js=, and =_run-unit-tests-source.js=
 

@@ -53,7 +53,7 @@
 					<li><a href="#2_6" title="SYNTAX">2.6. Uize.defaultNull</a></li>
 					<li><a href="#2_7" title="Returns a string, being the specified source string escaped so that it can be used as a literal match when constructing a regular expression string.">2.7. Uize.escapeRegExpLiteral</a></li>
 					<li><a href="#2_8" title="Returns the first record in the specified records array whose contents is a superset of the contents of the specified match object. If no matching record can be found, then this method will return the value null.">2.8. Uize.findRecord</a></li>
-					<li><a href="#2_9" title="Returns an integer, indicating the index in the specified records array of the first record whose contents is a superset of the contents of the specified match object. If no matching record can be found, then this method will return the value -1.">2.9. Uize.findRecordNo</a></li>
+					<li><a href="#2_9" title="Returns an integer, indicating the index in the specified records array of the first record whose contents is a superset of the contents of the specified match object.">2.9. Uize.findRecordNo</a></li>
 					<li><a href="#2_10" title="Lets you fire a static event for the class.">2.10. Uize.fire</a></li>
 					<li><a href="#2_11" title="Lets you query the initial value for one of the class&apos;s set-get properties.">2.11. Uize.get</a></li>
 					<li><a href="#2_12" title="Returns a string value, being an ID that is globally unique in the current window context.">2.12. Uize.getGuid</a></li>
@@ -650,13 +650,15 @@ Uize.copyInto (targetObject,sourceObject1,sourceObject2);
 		<a name="2_9"></a>
 		<h2 class="heading2" title="2. Static Methods -&gt; 2.9. Uize.findRecordNo"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_9" title="2. Static Methods -&gt; 2.9. Uize.findRecordNo">9</a>. </span>Uize.findRecordNo</h2>
 		<div class="contents2">
-			<p>Returns an integer, indicating the index in the specified records array of the first record whose contents is a superset of the contents of the specified match object. If no matching record can be found, then this method will return the value <code>-1</code>.</p>
+			<p>Returns an integer, indicating the index in the specified records array of the first record whose contents is a superset of the contents of the specified match object.</p>
 			
 			<p><span class="allCaps">SYNTAX</span></p>
 			
 			
 <pre class="sample-code">recordNoINT = Uize.findRecordNo (recordsARRAY,matchOBJ);
 </pre>
+			
+			<p>If no matching record can be found, then this method will return the value <code>-1</code>, unless the optional <code>defaultNoNONNULL</code> parameter is specified.</p>
 			
 			<p><span class="allCaps">EXAMPLE</span></p>
 			
@@ -689,6 +691,14 @@ Uize.copyInto (targetObject,sourceObject1,sourceObject2);
 </pre>
 			
 			<p>In the above example, the variable <code>greenAppleRecordNo</code> will have the value <code>2</code>.</p>
+			
+			<p><span class="allCaps">VARIATION</span></p>
+			
+			
+<pre class="sample-code">recordNoINT = Uize.findRecordNo (recordsARRAY,matchOBJ,defaultNoNONNULL);
+</pre>
+			
+			<p>When the optional <code>defaultNoNONNULL</code> parameter is specified, then the value of this parameter, coerced to a number, will be returned as the result if no match is found. If the value <code>null</code> or <code>undefined</code> is specified for the <code>defaultNoNONNULL</code> parameter, or if its value coerced to a number produces the special value <code>NaN</code>, then it will be treated as <code>-1</code>.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			

@@ -75,6 +75,12 @@ Uize
 			// what about max < min?
 			.......................................................................
 
+	Uize.callOn
+		Support Instances of Non-Uize Classes
+			Add support for using the =Uize.callOn= method on a target that is an instance of a class that is not a =Uize= subclass.
+
+			For example, it should be possible to use the =Uize.callOn= method on instances of the =Date= object, or any of the other JavaScript built-in objects. It should also be possible to use the method on instances of custom objects. Basically, if the target is an object and its constructor is not =Object=, then it should be treated as an instance and not an object containing a collection of subtargets. The one thing to consider in testing for non-Object constructor is simple instances of the =Object= object that originate from a different window or an iframe.
+
 	Uize.indexIn
 		Support Object Source
 			For object type source, could find key whose value matches, and return undefined (or null?) if value not found in object.

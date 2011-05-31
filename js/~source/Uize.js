@@ -15,7 +15,7 @@
 	type: Class
 	importance: 10
 	codeCompleteness: 100
-	testCompleteness: 23
+	testCompleteness: 28
 	docCompleteness: 90
 */
 
@@ -1490,35 +1490,35 @@
 		};
 		_classNonInheritableStatics.copyInto = 1;
 
-		_class.callOn = function (_object,_method,_arguments) {
-			if (_object == _undefined) return;
+		_class.callOn = function (_target,_method,_arguments) {
+			if (_target == _undefined) return;
 			_arguments || (_arguments = _sacredEmptyArray);
 			var
 				_methodIsString = typeof _method == _typeString,
 				_methodIsFunction = !_methodIsString && _isFunction (_method)
 			;
-			function _callOn (_object) {
-				if (_object && typeof _object == _typeObject) {
-					if (_isArray (_object)) {
-						for (var _subObjectNo = -1, _totalSubObjects = _object.length; ++_subObjectNo < _totalSubObjects;)
-							_callOn (_object [_subObjectNo])
+			function _callOn (_target) {
+				if (_target && typeof _target == _typeObject) {
+					if (_isArray (_target)) {
+						for (var _targetNo = -1, _targetLength = _target.length; ++_targetNo < _targetLength;)
+							_callOn (_target [_targetNo])
 						;
 					} else {
-						var _methodIsStringAndIsInObject = _methodIsString && _isFunction (_object [_method]);
-						if (_isInstance (_object) || _methodIsStringAndIsInObject) {
+						var _methodIsStringAndIsInObject = _methodIsString && _isFunction (_target [_method]);
+						if (_isInstance (_target)) {
 							if (_methodIsFunction || _methodIsStringAndIsInObject)
-								(_methodIsFunction ? _method : _object [_method]).apply (_object,_arguments)
+								(_methodIsFunction ? _method : _target [_method]).apply (_target,_arguments)
 							;
 						} else {
-							for (var _subObjectName in _object)
-								_callOn (_object [_subObjectName])
+							for (var _property in _target)
+								_callOn (_target [_property])
 							;
 						}
 					}
 				}
 			}
 			if (_methodIsString || _methodIsFunction)
-				_callOn (_object)
+				_callOn (_target)
 			;
 			/*?
 				Static Methods
