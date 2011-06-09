@@ -1,0 +1,72 @@
+The =Uize.Json= module has been improved with the addition of two convenient presets for serializing JavaScript objects to strict JSON format, according to the specification at [[http://www.json.org][json.org]].
+
+Strict JSON Serialization
+	To allow you to serialize JavaScript objects in strict accordance with the JSON specification (to be found at [[http://www.json.org][json.org]]), the =Uize.Json= module provides convenient `encoding presets for strict encoding`.
+
+	Encoding Presets for Strict Encoding
+		The =Uize.Json= module provides two encoding presets for strict encoding - `the strict encoding preset` and `the miniStrict encoding preset` - both of which ensure that all object keys are quoted, and that both object keys and string values are quoted using double quotes.
+
+		The strict Encoding Preset
+			The ='strict'= preset produces strict JSON serialization with pretty indentation and linebreaks.
+
+			EXAMPLE
+			..................
+			Uize.Json.to (
+				{
+					prop1:true,
+					prop2:'foo',
+					prop3:42
+				},
+				'strict'
+			);
+			..................
+
+			RESULT
+			.................
+			{
+				"prop1":true,
+				"prop2":"foo",
+				"prop3":42
+			}
+			.................
+
+		The miniStrict Encoding Preset
+			The ='miniStrict'= preset produces strict JSON serialization that is as compact as possible, with no linebreaks or indentation.
+
+			EXAMPLE
+			..................
+			Uize.Json.to (
+				{
+					prop1:true,
+					prop2:'foo',
+					prop3:42
+				},
+				'miniStrict'
+			);
+			..................
+
+			RESULT
+			.......................................
+			{"prop1":true,"prop2":"foo","prop3":42}
+			.......................................
+
+	Strict Serialization is Not the Default
+		If you don't specify the optional encoding parameter when calling the =Uize.Json.to= method, the encoding defaults to ='nice'= - strict serialization is not the default.
+
+		Generally, when serializing values for debugging purposes, logging purposes, or as a part of build processes, it's more convenient to have your objects serialized in a neater and more readable form - without all the unnecessary and heavy double quotes around object keys. So, if you want strict JSON serialization, you must explicitly specify one of the two `encoding presets for strict encoding`.
+
+		When To Be Strict
+			Serializing a value to JSON using a strict encoding is appropriate when the serialized data is to be consumed by a JSON parser that only supports strict JSON syntax, such as a JSON parser provided for a server language like PHP.
+
+		When Not To Be Strict
+			Serializing a value to JSON using a non-strict encoding may be preferable when using the serialized data for debugging purposes, logging purposes, or as a part of build processes.
+
+			In such cases, strict JSON may be too heavy, ugly, or unnatural. For example, if you wanted to serialize some data and then plug the serialized data directly into some JavaScript module, you probably won't be wanting the forced quoting around object keys or the use of double quotes for quoting keys and string values - it's more traditional to use single quotes for quoting strings in JavaScript code.
+
+For a refresher on JSON serialization options, consult the reference for the =Uize.Json= module.
+
+....................................................................................
+<< metadata >>
+
+title: 2011-05-21 - JSON Serialization Improvements
+....................................................................................

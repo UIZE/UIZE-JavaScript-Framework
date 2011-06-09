@@ -55,6 +55,7 @@ Uize.module({
 				_listItemPrefixRegExp = new RegExp (
 					'^([<\\(\\{\\[]*\\s*' + _orderingStyleRegExpStr + '?\\s*[>\\)\\}\\]]*\\s*' + _bulletCharRegExpStr + '*\\s+)'
 				),
+				_sectionAliasesRegExp = /\s*~{2,}\s*/,
 				_objectTypeRegExp = /^\s*<<\s*([^<]*?)\s*>>\s*[\n\r]/,
 				_builtInObjectTemplates = {
 					html:function (_input) {
@@ -140,13 +141,13 @@ Uize.module({
 			;
 
 		/*** Utility Functions ***/
-		var _sectionIdToPathMap = {};
-		function _getSectionPathFromId (_sectionId) {
-			return (
-				_sectionIdToPathMap [_sectionId] ||
-				(_sectionIdToPathMap [_sectionId] = Uize.Data.map ('+value',_sectionId.split ('_')))
-			);
-		}
+			var _sectionIdToPathMap = {};
+			function _getSectionPathFromId (_sectionId) {
+				return (
+					_sectionIdToPathMap [_sectionId] ||
+					(_sectionIdToPathMap [_sectionId] = Uize.Data.map ('+value',_sectionId.split ('_')))
+				);
+			}
 
 		/*** Public Static Methods ***/
 			var _build = _package.build = function (_params) {
@@ -214,6 +215,10 @@ Uize.module({
 						var _children = _data.children;
 						if (_children.length) {
 							/*** collapse all same-named sections at this level ***/
+								/* TODO:
+									- must support section titles possibly containing aliases
+									- section titles with the same display name but different aliases should be merged so that a single title exists with the union of all the aliases
+								*/
 								var _sectionsByTitle = Uize.Data.getLookup (_undefined,0,true); // safe empty lookup object
 								for (var _childNo = -1; ++_childNo < _children.length;) {
 									var
@@ -276,9 +281,6 @@ Uize.module({
 						_allSectionTitlesLowerCase = Uize.Data.getLookup (_undefined,0,true),
 						_sectionNoByLevel = [0]
 					;
-					function _addSectionToLookup (_lookup,_sectionTitle,_sectionId) {
-						(_lookup [_sectionTitle] || (_lookup [_sectionTitle] = [])).push (_sectionId);
-					}
 					function _getSectionIdFromLookup (_lookup,_sectionTitle,_localSectionPath) {
 						var _sectionId = _lookup [_sectionTitle];
 						if (_sectionId) {
@@ -340,18 +342,40 @@ Uize.module({
 						var _children = _data.children;
 						if (_children.length) {
 							_sectionNoByLevel [_level]++;
-							var
-								_value = _data.value + '',
-								_sectionId = _level
-									? _parentSectionId + (_parentSectionId && '_') + _sectionNoByLevel [_level]
-									: ''
+							var _sectionId = _level
+								? _parentSectionId + (_parentSectionId && '_') + _sectionNoByLevel [_level]
+								: ''
 							;
-							_addSectionToLookup (_allSectionTitles,_value,_sectionId);
-							_addSectionToLookup (_allSectionTitlesLowerCase,_value.toLowerCase (),_sectionId);
-							_sectionNoByLevel [_level + 1] = 0;
-							for (var _childNo = -1, _childrenLength = _children.length; ++_childNo < _childrenLength;)
-								_buildAllSectionTitles (_children [_childNo],_level + 1,_sectionId)
-							;
+							/*** add section aliases (and lower case versions) to lookup for intra-document linking ***/
+								for (
+									var
+										_sectionAliasNo = -1,
+										_sectionAliases = (_data.value + '').split (_sectionAliasesRegExp),
+										_sectionAliasesLength = _sectionAliases.length,
+										_sectionAlias,
+										_sectionAliasLowerCase
+									;
+									++_sectionAliasNo < _sectionAliasesLength;
+								) {
+									(
+										_allSectionTitles [_sectionAlias = _sectionAliases [_sectionAliasNo]] ||
+										(_allSectionTitles [_sectionAlias] = [])
+									).push (
+										_sectionId
+									);
+									(
+										_allSectionTitlesLowerCase [_sectionAliasLowerCase = _sectionAlias.toLowerCase ()] ||
+										(_allSectionTitlesLowerCase [_sectionAliasLowerCase] = [])
+									).push (
+										_sectionId
+									);
+								}
+
+							/*** build section titles for deeper levels ***/
+								_sectionNoByLevel [_level + 1] = 0;
+								for (var _childNo = -1, _childrenLength = _children.length; ++_childNo < _childrenLength;)
+									_buildAllSectionTitles (_children [_childNo],_level + 1,_sectionId)
+								;
 						}
 					}
 					_buildAllSectionTitles (_data,0,'');
@@ -652,6 +676,8 @@ Uize.module({
 						_closeListIfNeeded ();
 						_sectionPath [_level - 1]++;
 						var
+							_aliasDelimiterPos = _value.search (_sectionAliasesRegExp),
+							_headingSansAliases = _aliasDelimiterPos > -1 ? _value.slice (0,_aliasDelimiterPos) : _value,
 							_cssClassLevel = Math.min (_level,_maxCssClassLevel),
 							_hasNumbering = _level > 0 && true /* TO DO: add switch for numbering at some point */,
 							_headingPrefix = _hasNumbering ? _sectionPath.join ('_') : '',
@@ -660,7 +686,7 @@ Uize.module({
 									_sectionPath.length
 										? _sectionPath.join (_headingNumberingDelimiter) + _headingNumberingSeparator
 										: ''
-								) + _value,
+								) + _headingSansAliases,
 							_headingPath = (_parentHeadingPath ? (_parentHeadingPath + ' -> ') : '') + _headingTitle,
 							_headingPathAsTitleAttribute = ' title="' + Uize.Xml.toAttributeValue (_headingPath) + '"',
 							_headingDisplayPrefix = _hasNumbering
@@ -699,7 +725,7 @@ Uize.module({
 											? '<span class="headingNumber">' + _headingNumber + '</span>'
 											: ''
 									) +
-									_value +
+									_headingSansAliases +
 								'</' + _hTag + '>'
 							);
 						}

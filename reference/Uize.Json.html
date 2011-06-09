@@ -31,14 +31,30 @@
 		<ul>
 			<li><a href="#1" title="The Uize.Json module provides versatile methods for serializing and deserializing objects to and from the JSON (JavaScript Object Notation) format.">1. Introduction</a>
 				<ul>
-					<li><a href="#1_1" title="The following example pages are good showcases for the Uize.Json module...">1.1. Examples</a></li>
-					<li><a href="#1_2" title="The Uize.Json module defines the Uize.Json package under the Uize namespace.">1.2. Implementation Info</a>
+					<li><a href="#1_1" title="To allow you to serialize JavaScript objects in strict accordance with the JSON specification (to be found at json.org), the Uize.Json module provides convenient encoding presets for strict encoding.">1.1. Strict JSON Serialization</a>
 						<ul>
-							<li><a href="#1_2_1" title="The features listed in this section have been introduced in this module.">1.2.1. Features Introduced in This Module</a></li>
-							<li><a href="#1_2_2" title="No features have been overridden in this module.">1.2.2. Features Overridden in This Module</a></li>
-							<li><a href="#1_2_3" title="This module has no inherited features.">1.2.3. Features Inherited From Other Modules</a></li>
-							<li><a href="#1_2_4" title="There are no modules directly under this namespace.">1.2.4. Modules Directly Under This Namespace</a></li>
-							<li><a href="#1_2_5" title="There is no dedicated unit tests module for the Uize.Json module.">1.2.5. Unit Tests</a></li>
+							<li><a href="#1_1_1" title="The Uize.Json module provides two encoding presets for strict encoding - the strict encoding preset and the miniStrict encoding preset - both of which ensure that all object keys are quoted, and that both object keys and string values are quoted using double quotes.">1.1.1. Encoding Presets for Strict Encoding</a>
+								<ul>
+									<li><a href="#1_1_1_1" title="The &apos;strict&apos; preset produces strict JSON serialization with pretty indentation and linebreaks.">1.1.1.1. The strict Encoding Preset</a></li>
+									<li><a href="#1_1_1_2" title="The &apos;miniStrict&apos; preset produces strict JSON serialization that is as compact as possible, with no linebreaks or indentation.">1.1.1.2. The miniStrict Encoding Preset</a></li>
+								</ul>
+							</li>
+							<li><a href="#1_1_2" title="If you don&apos;t specify the optional encoding parameter when calling the Uize.Json.to method, the encoding defaults to &apos;nice&apos; - strict serialization is not the default.">1.1.2. Strict Serialization is Not the Default</a>
+								<ul>
+									<li><a href="#1_1_2_1" title="Serializing a value to JSON using a strict encoding is appropriate when the serialized data is to be consumed by a JSON parser that only supports strict JSON syntax, such as a JSON parser provided for a server language like PHP.">1.1.2.1. When To Be Strict</a></li>
+									<li><a href="#1_1_2_2" title="Serializing a value to JSON using a non-strict encoding may be preferable when using the serialized data for debugging purposes, logging purposes, or as a part of build processes.">1.1.2.2. When Not To Be Strict</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li><a href="#1_2" title="The following example pages are good showcases for the Uize.Json module...">1.2. Examples</a></li>
+					<li><a href="#1_3" title="The Uize.Json module defines the Uize.Json package under the Uize namespace.">1.3. Implementation Info</a>
+						<ul>
+							<li><a href="#1_3_1" title="The features listed in this section have been introduced in this module.">1.3.1. Features Introduced in This Module</a></li>
+							<li><a href="#1_3_2" title="No features have been overridden in this module.">1.3.2. Features Overridden in This Module</a></li>
+							<li><a href="#1_3_3" title="This module has no inherited features.">1.3.3. Features Inherited From Other Modules</a></li>
+							<li><a href="#1_3_4" title="There are no modules directly under this namespace.">1.3.4. Modules Directly Under This Namespace</a></li>
+							<li><a href="#1_3_5" title="There is no dedicated unit tests module for the Uize.Json module.">1.3.5. Unit Tests</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -66,10 +82,10 @@
 						<ul>
 							<li><a href="#3_1_1">3.1.1. Available Presets</a>
 								<ul>
-									<li><a href="#3_1_1_1" title="document...">3.1.1.1. Uize.Json.encodingOptionsPresets.mini</a></li>
-									<li><a href="#3_1_1_2" title="document...">3.1.1.2. Uize.Json.encodingOptionsPresets.miniStrict</a></li>
-									<li><a href="#3_1_1_3" title="document...">3.1.1.3. Uize.Json.encodingOptionsPresets.nice</a></li>
-									<li><a href="#3_1_1_4" title="document...">3.1.1.4. Uize.Json.encodingOptionsPresets.strict</a></li>
+									<li><a href="#3_1_1_1" title="This encoding options preset can be used to serialize values to the most compact non-strict JSON form.">3.1.1.1. Uize.Json.encodingOptionsPresets.mini</a></li>
+									<li><a href="#3_1_1_2" title="This encoding options preset can be used to serialize values to the most compact strict JSON form.">3.1.1.2. Uize.Json.encodingOptionsPresets.miniStrict</a></li>
+									<li><a href="#3_1_1_3" title="This encoding options preset can be used to serialize values to a human readable non-strict JSON form.">3.1.1.3. Uize.Json.encodingOptionsPresets.nice</a></li>
+									<li><a href="#3_1_1_4" title="This encoding options preset can be used to serialize values to a human readable strict JSON form.">3.1.1.4. Uize.Json.encodingOptionsPresets.strict</a></li>
 								</ul>
 							</li>
 						</ul>
@@ -93,7 +109,95 @@
 		<p>The <code>Uize.Json</code> module provides versatile serializaton options to permit a wide array of results, from prettified JSON (with linebreaks, indentation, key sorting, etc.) to compact (efficient for AJAX communication).</p>
 		
 		<a name="1_1"></a>
-		<h2 class="heading2" title="1. Introduction -&gt; 1.1. Examples"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. Examples">1</a>. </span>Examples</h2>
+		<h2 class="heading2" title="1. Introduction -&gt; 1.1. Strict JSON Serialization"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. Strict JSON Serialization">1</a>. </span>Strict JSON Serialization</h2>
+		<div class="contents2">
+			<p>To allow you to serialize JavaScript objects in strict accordance with the JSON specification (to be found at <a href="http://www.json.org" target="_blank" class="externalSiteLink">json.org</a>), the <code>Uize.Json</code> module provides convenient <a href="#1_1_1">encoding presets for strict encoding</a>.</p>
+			
+			<a name="1_1_1"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.1. Strict JSON Serialization -&gt; 1.1.1. Encoding Presets for Strict Encoding"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. Strict JSON Serialization">1</a>.<a href="#1_1_1" title="1. Introduction -&gt; 1.1. Strict JSON Serialization -&gt; 1.1.1. Encoding Presets for Strict Encoding">1</a>. </span>Encoding Presets for Strict Encoding</h3>
+			<div class="contents3">
+				<p>The <code>Uize.Json</code> module provides two encoding presets for strict encoding - <a href="#1_1_1_1">the strict encoding preset</a> and <a href="#1_1_1_2">the miniStrict encoding preset</a> - both of which ensure that all object keys are quoted, and that both object keys and string values are quoted using double quotes.</p>
+				
+				<a name="1_1_1_1"></a>
+				<h4 class="heading4" title="1. Introduction -&gt; 1.1. Strict JSON Serialization -&gt; 1.1.1. Encoding Presets for Strict Encoding -&gt; 1.1.1.1. The strict Encoding Preset"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. Strict JSON Serialization">1</a>.<a href="#1_1_1" title="1. Introduction -&gt; 1.1. Strict JSON Serialization -&gt; 1.1.1. Encoding Presets for Strict Encoding">1</a>.<a href="#1_1_1_1" title="1. Introduction -&gt; 1.1. Strict JSON Serialization -&gt; 1.1.1. Encoding Presets for Strict Encoding -&gt; 1.1.1.1. The strict Encoding Preset">1</a>. </span>The strict Encoding Preset</h4>
+				<div class="contents4">
+					<p>The <code>'strict'</code> preset produces strict JSON serialization with pretty indentation and linebreaks.</p>
+					
+					<p><span class="allCaps">EXAMPLE</span></p>
+					
+					
+<pre class="sample-code">Uize.Json.to (
+  {
+    prop1:true,
+    prop2:'foo',
+    prop3:42
+  },
+  'strict'
+);
+</pre>
+					
+					<p><span class="allCaps">RESULT</span></p>
+					
+					
+<pre class="sample-code">{
+  "prop1":true,
+  "prop2":"foo",
+  "prop3":42
+}
+</pre>
+				</div>
+				
+				<a name="1_1_1_2"></a>
+				<h4 class="heading4" title="1. Introduction -&gt; 1.1. Strict JSON Serialization -&gt; 1.1.1. Encoding Presets for Strict Encoding -&gt; 1.1.1.2. The miniStrict Encoding Preset"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. Strict JSON Serialization">1</a>.<a href="#1_1_1" title="1. Introduction -&gt; 1.1. Strict JSON Serialization -&gt; 1.1.1. Encoding Presets for Strict Encoding">1</a>.<a href="#1_1_1_2" title="1. Introduction -&gt; 1.1. Strict JSON Serialization -&gt; 1.1.1. Encoding Presets for Strict Encoding -&gt; 1.1.1.2. The miniStrict Encoding Preset">2</a>. </span>The miniStrict Encoding Preset</h4>
+				<div class="contents4">
+					<p>The <code>'miniStrict'</code> preset produces strict JSON serialization that is as compact as possible, with no linebreaks or indentation.</p>
+					
+					<p><span class="allCaps">EXAMPLE</span></p>
+					
+					
+<pre class="sample-code">Uize.Json.to (
+  {
+    prop1:true,
+    prop2:'foo',
+    prop3:42
+  },
+  'miniStrict'
+);
+</pre>
+					
+					<p><span class="allCaps">RESULT</span></p>
+					
+					
+<pre class="sample-code">{"prop1":true,"prop2":"foo","prop3":42}
+</pre>
+				</div>
+			</div>
+			
+			<a name="1_1_2"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.1. Strict JSON Serialization -&gt; 1.1.2. Strict Serialization is Not the Default"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. Strict JSON Serialization">1</a>.<a href="#1_1_2" title="1. Introduction -&gt; 1.1. Strict JSON Serialization -&gt; 1.1.2. Strict Serialization is Not the Default">2</a>. </span>Strict Serialization is Not the Default</h3>
+			<div class="contents3">
+				<p>If you don't specify the optional encoding parameter when calling the <code><a href="#2_2">Uize.Json.to</a></code> method, the encoding defaults to <code>'nice'</code> - strict serialization is not the default.</p>
+				
+				<p>Generally, when serializing values for debugging purposes, logging purposes, or as a part of build processes, it's more convenient to have your objects serialized in a neater and more readable form - without all the unnecessary and heavy double quotes around object keys. So, if you want strict JSON serialization, you must explicitly specify one of the two <a href="#1_1_1">encoding presets for strict encoding</a>.</p>
+				
+				<a name="1_1_2_1"></a>
+				<h4 class="heading4" title="1. Introduction -&gt; 1.1. Strict JSON Serialization -&gt; 1.1.2. Strict Serialization is Not the Default -&gt; 1.1.2.1. When To Be Strict"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. Strict JSON Serialization">1</a>.<a href="#1_1_2" title="1. Introduction -&gt; 1.1. Strict JSON Serialization -&gt; 1.1.2. Strict Serialization is Not the Default">2</a>.<a href="#1_1_2_1" title="1. Introduction -&gt; 1.1. Strict JSON Serialization -&gt; 1.1.2. Strict Serialization is Not the Default -&gt; 1.1.2.1. When To Be Strict">1</a>. </span>When To Be Strict</h4>
+				<div class="contents4">
+					<p>Serializing a value to JSON using a strict encoding is appropriate when the serialized data is to be consumed by a JSON parser that only supports strict JSON syntax, such as a JSON parser provided for a server language like PHP.</p>
+				</div>
+				
+				<a name="1_1_2_2"></a>
+				<h4 class="heading4" title="1. Introduction -&gt; 1.1. Strict JSON Serialization -&gt; 1.1.2. Strict Serialization is Not the Default -&gt; 1.1.2.2. When Not To Be Strict"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. Strict JSON Serialization">1</a>.<a href="#1_1_2" title="1. Introduction -&gt; 1.1. Strict JSON Serialization -&gt; 1.1.2. Strict Serialization is Not the Default">2</a>.<a href="#1_1_2_2" title="1. Introduction -&gt; 1.1. Strict JSON Serialization -&gt; 1.1.2. Strict Serialization is Not the Default -&gt; 1.1.2.2. When Not To Be Strict">2</a>. </span>When Not To Be Strict</h4>
+				<div class="contents4">
+					<p>Serializing a value to JSON using a non-strict encoding may be preferable when using the serialized data for debugging purposes, logging purposes, or as a part of build processes.</p>
+					
+					<p>In such cases, strict JSON may be too heavy, ugly, or unnatural. For example, if you wanted to serialize some data and then plug the serialized data directly into some JavaScript module, you probably won't be wanting the forced quoting around object keys or the use of double quotes for quoting keys and string values - it's more traditional to use single quotes for quoting strings in JavaScript code.</p>
+				</div>
+			</div>
+		</div>
+		
+		<a name="1_2"></a>
+		<h2 class="heading2" title="1. Introduction -&gt; 1.2. Examples"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Examples">2</a>. </span>Examples</h2>
 		<div class="contents2">
 			<p>The following example pages are good showcases for the <code>Uize.Json</code> module...</p>
 			
@@ -107,13 +211,13 @@
 			<p><a href="http://www.google.com/search?hl=en&safe=off&domains=uize.com%2Fexamples&sitesearch=uize.com%2Fexamples&q=%22Uize.Json%22" target="_blank" class="externalSiteLink">SEARCH</a></p>
 		</div>
 		
-		<a name="1_2"></a>
-		<h2 class="heading2" title="1. Introduction -&gt; 1.2. Implementation Info"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>. </span>Implementation Info</h2>
+		<a name="1_3"></a>
+		<h2 class="heading2" title="1. Introduction -&gt; 1.3. Implementation Info"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_3" title="1. Introduction -&gt; 1.3. Implementation Info">3</a>. </span>Implementation Info</h2>
 		<div class="contents2">
 			<p>The <code>Uize.Json</code> module defines the <code>Uize.Json</code> package under the <code><a href="../reference/Uize.html">Uize</a></code> namespace.</p>
 			
-			<a name="1_2_1"></a>
-			<h3 class="heading3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.1. Features Introduced in This Module"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>.<a href="#1_2_1" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.1. Features Introduced in This Module">1</a>. </span>Features Introduced in This Module</h3>
+			<a name="1_3_1"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.3. Implementation Info -&gt; 1.3.1. Features Introduced in This Module"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_3" title="1. Introduction -&gt; 1.3. Implementation Info">3</a>.<a href="#1_3_1" title="1. Introduction -&gt; 1.3. Implementation Info -&gt; 1.3.1. Features Introduced in This Module">1</a>. </span>Features Introduced in This Module</h3>
 			<div class="contents3">
 				<p>The features listed in this section have been introduced in this module.</p>
 				
@@ -126,26 +230,26 @@
 				<p><code><a href="#3_1">Uize.Json.encodingOptionsPresets</a></code> | <code><a href="#3_2">Uize.Json.moduleName</a></code></p>
 			</div>
 			
-			<a name="1_2_2"></a>
-			<h3 class="heading3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.2. Features Overridden in This Module"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>.<a href="#1_2_2" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.2. Features Overridden in This Module">2</a>. </span>Features Overridden in This Module</h3>
+			<a name="1_3_2"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.3. Implementation Info -&gt; 1.3.2. Features Overridden in This Module"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_3" title="1. Introduction -&gt; 1.3. Implementation Info">3</a>.<a href="#1_3_2" title="1. Introduction -&gt; 1.3. Implementation Info -&gt; 1.3.2. Features Overridden in This Module">2</a>. </span>Features Overridden in This Module</h3>
 			<div class="contents3">
 				<p>No features have been overridden in this module.</p>
 			</div>
 			
-			<a name="1_2_3"></a>
-			<h3 class="heading3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.3. Features Inherited From Other Modules"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>.<a href="#1_2_3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.3. Features Inherited From Other Modules">3</a>. </span>Features Inherited From Other Modules</h3>
+			<a name="1_3_3"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.3. Implementation Info -&gt; 1.3.3. Features Inherited From Other Modules"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_3" title="1. Introduction -&gt; 1.3. Implementation Info">3</a>.<a href="#1_3_3" title="1. Introduction -&gt; 1.3. Implementation Info -&gt; 1.3.3. Features Inherited From Other Modules">3</a>. </span>Features Inherited From Other Modules</h3>
 			<div class="contents3">
 				<p>This module has no inherited features.</p>
 			</div>
 			
-			<a name="1_2_4"></a>
-			<h3 class="heading3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.4. Modules Directly Under This Namespace"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>.<a href="#1_2_4" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.4. Modules Directly Under This Namespace">4</a>. </span>Modules Directly Under This Namespace</h3>
+			<a name="1_3_4"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.3. Implementation Info -&gt; 1.3.4. Modules Directly Under This Namespace"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_3" title="1. Introduction -&gt; 1.3. Implementation Info">3</a>.<a href="#1_3_4" title="1. Introduction -&gt; 1.3. Implementation Info -&gt; 1.3.4. Modules Directly Under This Namespace">4</a>. </span>Modules Directly Under This Namespace</h3>
 			<div class="contents3">
 				<p>There are no modules directly under this namespace.</p>
 			</div>
 			
-			<a name="1_2_5"></a>
-			<h3 class="heading3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.5. Unit Tests"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>.<a href="#1_2_5" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.5. Unit Tests">5</a>. </span>Unit Tests</h3>
+			<a name="1_3_5"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.3. Implementation Info -&gt; 1.3.5. Unit Tests"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_3" title="1. Introduction -&gt; 1.3. Implementation Info">3</a>.<a href="#1_3_5" title="1. Introduction -&gt; 1.3. Implementation Info -&gt; 1.3.5. Unit Tests">5</a>. </span>Unit Tests</h3>
 			<div class="contents3">
 				<p>There is no dedicated unit tests module for the <code>Uize.Json</code> module.</p>
 			</div>
@@ -441,25 +545,137 @@
 				<a name="3_1_1_1"></a>
 				<h4 class="heading4" title="3. Static Properties -&gt; 3.1. Uize.Json.encodingOptionsPresets -&gt; 3.1.1. Available Presets -&gt; 3.1.1.1. Uize.Json.encodingOptionsPresets.mini"><span class="headingNumber"><a href="#3" title="3. Static Properties">3</a>.<a href="#3_1" title="3. Static Properties -&gt; 3.1. Uize.Json.encodingOptionsPresets">1</a>.<a href="#3_1_1" title="3. Static Properties -&gt; 3.1. Uize.Json.encodingOptionsPresets -&gt; 3.1.1. Available Presets">1</a>.<a href="#3_1_1_1" title="3. Static Properties -&gt; 3.1. Uize.Json.encodingOptionsPresets -&gt; 3.1.1. Available Presets -&gt; 3.1.1.1. Uize.Json.encodingOptionsPresets.mini">1</a>. </span>Uize.Json.encodingOptionsPresets.mini</h4>
 				<div class="contents4">
-					<p>document...</p>
+					<p>This encoding options preset can be used to serialize values to the most compact non-strict JSON form.</p>
+					
+					<p>This encoding preset is useful when serializing objects that are to be stored in string form somewhere, or that are to be sent "over the wire". The <b>mini</b> preset will minimize storage space needed to store serialized objects and bandwidth needed to send serialized objects over a network. The <b>mini</b> preset minimizes size by serializing objects without using any whitespace - no linebreaks, indentation, or key padding.</p>
+					
+					<p><span class="allCaps">EXAMPLE</span></p>
+					
+					
+<pre class="sample-code">{foo:'bar',hello:'world',subObject:{foo:'bar'}}
+</pre>
+					
+					<p>The <code><a href="#3_1_1_1">Uize.Json.encodingOptionsPresets.mini</a></code> preset defines the following encoding options...</p>
+					
+					<p><span class="allCaps">SETTINGS</span></p>
+					
+					
+<pre class="sample-code">{
+  indentChars:'',
+  keyAlign:'left',
+  keyDelimiter:':',
+  linebreakChars:'',
+  padKeys:false,
+  quoteChar:'\'',
+  sortKeys:false,
+  whenToQuoteKeys:'auto'
+}
+</pre>
 				</div>
 				
 				<a name="3_1_1_2"></a>
 				<h4 class="heading4" title="3. Static Properties -&gt; 3.1. Uize.Json.encodingOptionsPresets -&gt; 3.1.1. Available Presets -&gt; 3.1.1.2. Uize.Json.encodingOptionsPresets.miniStrict"><span class="headingNumber"><a href="#3" title="3. Static Properties">3</a>.<a href="#3_1" title="3. Static Properties -&gt; 3.1. Uize.Json.encodingOptionsPresets">1</a>.<a href="#3_1_1" title="3. Static Properties -&gt; 3.1. Uize.Json.encodingOptionsPresets -&gt; 3.1.1. Available Presets">1</a>.<a href="#3_1_1_2" title="3. Static Properties -&gt; 3.1. Uize.Json.encodingOptionsPresets -&gt; 3.1.1. Available Presets -&gt; 3.1.1.2. Uize.Json.encodingOptionsPresets.miniStrict">2</a>. </span>Uize.Json.encodingOptionsPresets.miniStrict</h4>
 				<div class="contents4">
-					<p>document...</p>
+					<p>This encoding options preset can be used to serialize values to the most compact strict JSON form.</p>
+					
+					<p>This encoding preset is useful when you want all the benefits of the <code><a href="#3_1_1_1">Uize.Json.encodingOptionsPresets.mini</a></code> preset, but where you also need objects to be serialized using <a href="#1_1">strict JSON serialization</a> (possibly because some parts of the system only support deserializing objects that are in strict JSON form).</p>
+					
+					<p><span class="allCaps">EXAMPLE</span></p>
+					
+					
+<pre class="sample-code">{"foo":"bar","hello":"world","subObject":{"foo":"bar"}}
+</pre>
+					
+					<p>The <code><a href="#3_1_1_2">Uize.Json.encodingOptionsPresets.miniStrict</a></code> preset defines the following encoding options...</p>
+					
+					<p><span class="allCaps">SETTINGS</span></p>
+					
+					
+<pre class="sample-code">{
+  indentChars:'',
+  keyAlign:'left',
+  keyDelimiter:':',
+  linebreakChars:'',
+  padKeys:false,
+  quoteChar:'"',
+  sortKeys:false,
+  whenToQuoteKeys:'always'
+}
+</pre>
 				</div>
 				
 				<a name="3_1_1_3"></a>
 				<h4 class="heading4" title="3. Static Properties -&gt; 3.1. Uize.Json.encodingOptionsPresets -&gt; 3.1.1. Available Presets -&gt; 3.1.1.3. Uize.Json.encodingOptionsPresets.nice"><span class="headingNumber"><a href="#3" title="3. Static Properties">3</a>.<a href="#3_1" title="3. Static Properties -&gt; 3.1. Uize.Json.encodingOptionsPresets">1</a>.<a href="#3_1_1" title="3. Static Properties -&gt; 3.1. Uize.Json.encodingOptionsPresets -&gt; 3.1.1. Available Presets">1</a>.<a href="#3_1_1_3" title="3. Static Properties -&gt; 3.1. Uize.Json.encodingOptionsPresets -&gt; 3.1.1. Available Presets -&gt; 3.1.1.3. Uize.Json.encodingOptionsPresets.nice">3</a>. </span>Uize.Json.encodingOptionsPresets.nice</h4>
 				<div class="contents4">
-					<p>document...</p>
+					<p>This encoding options preset can be used to serialize values to a human readable non-strict JSON form.</p>
+					
+					<p>This encoding preset is useful when serializing objects that are to be displayed (possibly for debugging or troubleshooting purposes), or that are to be incorporated into files that should be human readable (possibly as part of a build process). The <b>nice</b> preset spreads object properties over multiple lines and indents lines to indicate hierarchical structure.</p>
+					
+					<p><span class="allCaps">EXAMPLE</span></p>
+					
+					
+<pre class="sample-code">{
+  foo:'bar',
+  hello:'world',
+  subObject:{
+    foo:'bar'
+  }
+}
+</pre>
+					
+					<p>The <code><a href="#3_1_1_3">Uize.Json.encodingOptionsPresets.nice</a></code> preset defines the following encoding options...</p>
+					
+					<p><span class="allCaps">SETTINGS</span></p>
+					
+					
+<pre class="sample-code">{
+  indentChars:'\t',
+  keyAlign:'left',
+  keyDelimiter:':',
+  linebreakChars:'\n',
+  padKeys:false,
+  quoteChar:'\'',
+  sortKeys:false,
+  whenToQuoteKeys:'auto'
+}
+</pre>
 				</div>
 				
 				<a name="3_1_1_4"></a>
 				<h4 class="heading4" title="3. Static Properties -&gt; 3.1. Uize.Json.encodingOptionsPresets -&gt; 3.1.1. Available Presets -&gt; 3.1.1.4. Uize.Json.encodingOptionsPresets.strict"><span class="headingNumber"><a href="#3" title="3. Static Properties">3</a>.<a href="#3_1" title="3. Static Properties -&gt; 3.1. Uize.Json.encodingOptionsPresets">1</a>.<a href="#3_1_1" title="3. Static Properties -&gt; 3.1. Uize.Json.encodingOptionsPresets -&gt; 3.1.1. Available Presets">1</a>.<a href="#3_1_1_4" title="3. Static Properties -&gt; 3.1. Uize.Json.encodingOptionsPresets -&gt; 3.1.1. Available Presets -&gt; 3.1.1.4. Uize.Json.encodingOptionsPresets.strict">4</a>. </span>Uize.Json.encodingOptionsPresets.strict</h4>
 				<div class="contents4">
-					<p>document...</p>
+					<p>This encoding options preset can be used to serialize values to a human readable strict JSON form.</p>
+					
+					<p>This encoding preset is useful when you want all the benefits of the <code><a href="#3_1_1_3">Uize.Json.encodingOptionsPresets.nice</a></code> preset, but where you also need objects to be serialized using <a href="#1_1">strict JSON serialization</a> (possibly because some parts of the system only support deserializing objects that are in strict JSON form).</p>
+					
+					<p><span class="allCaps">EXAMPLE</span></p>
+					
+					
+<pre class="sample-code">{
+  "foo":"bar",
+  "hello":"world",
+  "subObject":{
+    "foo":"bar"
+  }
+}
+</pre>
+					
+					<p>The <code><a href="#3_1_1_4">Uize.Json.encodingOptionsPresets.strict</a></code> preset defines the following encoding options...</p>
+					
+					<p><span class="allCaps">SETTINGS</span></p>
+					
+					
+<pre class="sample-code">{
+  indentChars:'\t',
+  keyAlign:'left',
+  keyDelimiter:':',
+  linebreakChars:'\n',
+  padKeys:false,
+  quoteChar:'"',
+  sortKeys:false,
+  whenToQuoteKeys:'always'
+}
+</pre>
 				</div>
 			</div>
 			

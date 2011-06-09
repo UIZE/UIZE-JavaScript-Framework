@@ -3,7 +3,7 @@
 <head>
 	<title>Javascript Documentation System | Documentation | UIZE JavaScript Framework</title>
 	<meta name="keywords" content="UIZE JavaScript Framework Documentation "/>
-	<meta name="description" content="The UIZE JavaScript Framework implements a system for building HTML from documentation that is written in a Wikitext like format called Simple Doc."/>
+	<meta name="description" content="The UIZE JavaScript Framework implements a system for building HTML from documentation that is written in a Wikitext like format called SimpleDoc."/>
 	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
 	<link rel="stylesheet" href="../css/page.css"/>
 	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
@@ -26,7 +26,7 @@
 <ul>
 	<li>Contents
 		<ul>
-			<li><a href="#1" title="The UIZE JavaScript Framework implements a system for building HTML from documentation that is written in a Wikitext like format called Simple Doc.">1. Introduction</a>
+			<li><a href="#1" title="The UIZE JavaScript Framework implements a system for building HTML from documentation that is written in a Wikitext like format called SimpleDoc.">1. Introduction</a>
 				<ul>
 					<li><a href="#1_1" title="SimpleDoc is a human readable, non-XML, indentation based document format for writing structured documents.">1.1. In a Nutshell</a></li>
 					<li><a href="#1_2" title="SimpleDoc has numerous compelling features...">1.2. Key Features</a></li>
@@ -41,13 +41,93 @@
 			</li>
 			<li><a href="#2" title="Document structure is achieved with indentation.">2. Document Sections</a>
 				<ul>
-					<li><a href="#2_1">2.1. This is a Section</a>
+					<li><a href="#2_1">2.1. HOW IT LOOKS</a>
 						<ul>
-							<li><a href="#2_1_1" title="This is some text in the subsection. This is some text in the subsection. This is some text in the subsection. This is some text in the subsection. This is some text in the subsection. This is some text in the subsection. This is some text in the subsection. This is some text in the subsection. This is some text in the subsection. This is some text in the subsection. This is some text in the su...">2.1.1. This is a Subsection</a></li>
-							<li><a href="#2_1_2">2.1.2. This is Another Subsection</a>
+							<li><a href="#2_1_1">2.1.1. This is a Section</a>
 								<ul>
-									<li><a href="#2_1_2_1" title="Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here.">2.1.2.1. This is Just Crazy</a></li>
-									<li><a href="#2_1_2_2" title="Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here.">2.1.2.2. This is Just Even Crazier</a></li>
+									<li><a href="#2_1_1_1" title="This is some text in the subsection. This is some text in the subsection. This is some text in the subsection. This is some text in the subsection. This is some text in the subsection. This is some text in the subsection. This is some text in the subsection. This is some text in the subsection. This is some text in the subsection. This is some text in the subsection. This is some text in the su...">2.1.1.1. This is a Subsection</a></li>
+									<li><a href="#2_1_1_2">2.1.1.2. This is Another Subsection</a>
+										<ul>
+											<li><a href="#2_1_1_2_1" title="Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here.">2.1.1.2.1. This is Just Crazy</a></li>
+											<li><a href="#2_1_1_2_2" title="Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here.">2.1.1.2.2. This is Just Even Crazier</a></li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li><a href="#2_2" title="SimpleDoc provides an easy way to specify section title aliases for sections, where the aliases are not displayed but allow sections to be easily linked to by their aliases from other parts of the document.">2.2. Section Title Aliases</a>
+						<ul>
+							<li><a href="#2_2_1" title="Any number of section title aliases can be specified for a section, simply by placing the aliases on the same line as the section title, with all the aliases separated using the delimiter pattern of one or more consecutive &quot;~&quot; (tilde) characters surrounded by optional whitespace padding.">2.2.1. Section Titles Can Have Multiple Aliases</a>
+								<ul>
+									<li><a href="#2_2_1_1">2.2.1.1. HOW IT LOOKS</a>
+										<ul>
+											<li><a href="#2_2_1_1_1" title="This is some text in the section.">2.2.1.1.1. Example Section</a></li>
+											<li><a href="#2_2_1_1_2" title="Now link to the example section by its aliases: alias 1, alias 2, and alias N.">2.2.1.1.2. Some Other Section</a></li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+							<li><a href="#2_2_2" title="When section title aliases are specified for a section title, they are never displayed in the HTML document that is generated from a SimpleDoc document.">2.2.2. Aliases Not Displayed</a></li>
+							<li><a href="#2_2_3" title="When using section title aliases to link to sections, all the same rules apply that would normally apply for displayed section titles.">2.2.3. Considerations When Linking Using Aliases</a></li>
+							<li><a href="#2_2_4" title="Section title aliases can be useful in a number of real world situations, including disambiguating links to sections with the same title, linking using opposite of singular or plural form, and linking using abbreviations or alternate forms.">2.2.4. Use Cases For Section Title Aliases</a>
+								<ul>
+									<li><a href="#2_2_4_1" title="While you can generally just link to a section by using its title in a sentence with the backticks syntax for linking, sometimes a section&apos;s title is not in the desirable singular or plural form.">2.2.4.1. Linking Using Opposite of Singular or Plural Form</a>
+										<ul>
+											<li><a href="#2_2_4_1_1">2.2.4.1.1. HOW IT LOOKS</a>
+												<ul>
+													<li><a href="#2_2_4_1_1_1" title="Documentation explaining what child widgets are all about.">2.2.4.1.1.1. Child Widgets</a></li>
+													<li><a href="#2_2_4_1_1_2" title="For every child widget that one adds to a parent widget, ...">2.2.4.1.1.2. Some Other Section</a></li>
+												</ul>
+											</li>
+										</ul>
+									</li>
+									<li><a href="#2_2_4_2" title="Similar to the case of linking using opposite of singular or plural form, it is sometimes desirable to link to a section with linked text that differs from the section&apos;s title.">2.2.4.2. Linking Using Abbreviations or Alternate Forms</a>
+										<ul>
+											<li><a href="#2_2_4_2_1">2.2.4.2.1. HOW IT LOOKS</a>
+												<ul>
+													<li><a href="#2_2_4_2_1_1" title="Ajax is a technology that has become a staple for Web 2.0 applications, ...">2.2.4.2.1.1. What is Ajax?</a></li>
+													<li><a href="#2_2_4_2_1_2" title="In order to incorporate Ajax into one&apos;s Web applications, ...">2.2.4.2.1.2. Developing Ajax Applications</a></li>
+												</ul>
+											</li>
+										</ul>
+									</li>
+									<li><a href="#2_2_4_3" title="When situations arise where multiple sections of a SimpleDoc document are to have the same display title, unique section title aliases can be specified for the different sections so that it is still possible to unambiguously link to the sections from other parts of the document.">2.2.4.3. Disambiguating Links to Sections With the Same Title</a>
+										<ul>
+											<li><a href="#2_2_4_3_1">2.2.4.3.1. HOW IT LOOKS</a>
+												<ul>
+													<li><a href="#2_2_4_3_1_1">2.2.4.3.1.1. Instance Properties</a>
+														<ul>
+															<li><a href="#2_2_4_3_1_1_1" title="Documentation for the children instance property.">2.2.4.3.1.1.1. children</a></li>
+														</ul>
+													</li>
+													<li><a href="#2_2_4_3_1_2">2.2.4.3.1.2. Set-get Properties</a>
+														<ul>
+															<li><a href="#2_2_4_3_1_2_1" title="Documentation for the children set-get property.">2.2.4.3.1.2.1. children</a></li>
+														</ul>
+													</li>
+												</ul>
+											</li>
+											<li><a href="#2_2_4_3_2" title="Using the square brackets syntax for links, it is possible to link ambiguous display titles using unambiguous section title aliases.">2.2.4.3.2. Section Title Aliases and Square Brackets Links</a>
+												<ul>
+													<li><a href="#2_2_4_3_2_1">2.2.4.3.2.1. HOW IT LOOKS</a>
+														<ul>
+															<li><a href="#2_2_4_3_2_1_1">2.2.4.3.2.1.1. Instance Properties</a>
+																<ul>
+																	<li><a href="#2_2_4_3_2_1_1_1" title="Documentation for the children instance property.">2.2.4.3.2.1.1.1. children</a></li>
+																</ul>
+															</li>
+															<li><a href="#2_2_4_3_2_1_2">2.2.4.3.2.1.2. Set-get Properties</a>
+																<ul>
+																	<li><a href="#2_2_4_3_2_1_2_1" title="Documentation for the children set-get property.">2.2.4.3.2.1.2.1. children</a></li>
+																</ul>
+															</li>
+														</ul>
+													</li>
+												</ul>
+											</li>
+										</ul>
+									</li>
 								</ul>
 							</li>
 						</ul>
@@ -133,40 +213,62 @@
 								</ul>
 							</li>
 							<li><a href="#7_4_3" title="Text that is formatted as inline code is automatically linked to a section in the same document, if there is a section whose heading exactly matches the text inside the equals signs.">7.4.3. Automatically Linked Inline Code</a></li>
-							<li><a href="#7_4_4" title="There are a number of considerations that should be kept in mind when doing section linking in SimpleDoc documents.">7.4.4. Considerations</a>
+							<li><a href="#7_4_4" title="Linking to sections using section title aliases is handled in the exact same manner as for the regular section titles that don&apos;t have aliases.">7.4.4. Linking Using Section Title Aliases</a>
 								<ul>
-									<li><a href="#7_4_4_1" title="When multiple sections share the same name, auto linked text links to the one of those same named sections that is nearest to the link.">7.4.4.1. Linking to the Nearest of Same Named Sections</a>
+									<li><a href="#7_4_4_1">7.4.4.1. HOW IT LOOKS</a>
 										<ul>
-											<li><a href="#7_4_4_1_1">7.4.4.1.1. MyClass.foo</a>
-												<ul>
-													<li><a href="#7_4_4_1_1_1" title="This section describes the parameters for the MyClass.foo method.">7.4.4.1.1.1. Parameters</a></li>
-													<li><a href="#7_4_4_1_1_2" title="For a refresher, refer back to the Parameters section.">7.4.4.1.1.2. In-depth</a></li>
-												</ul>
-											</li>
-											<li><a href="#7_4_4_1_2">7.4.4.1.2. MyClass.bar</a>
-												<ul>
-													<li><a href="#7_4_4_1_2_1" title="This section describes the parameters for the MyClass.bar method.">7.4.4.1.2.1. Parameters</a></li>
-													<li><a href="#7_4_4_1_2_2" title="For a refresher, refer back to the Parameters section.">7.4.4.1.2.2. In-depth</a></li>
-												</ul>
-											</li>
-											<li><a href="#7_4_4_1_3" title="Even with the smart behavior of linking to the nearest of same named sections when multiple sections share the same name, ambiguities can still arise that are not resolved correctly.">7.4.4.1.3. Ambiguities Can Still Arise</a></li>
+											<li><a href="#7_4_4_1_1" title="This is a section that has a section title alias.">7.4.4.1.1. The Section</a></li>
+											<li><a href="#7_4_4_1_2" title="Here are some links to the section, using the section title alias of the section...">7.4.4.1.2. Some Other Section</a></li>
 										</ul>
 									</li>
-									<li><a href="#7_4_4_2" title="When specifying the section that your text should link to, avoid having any leading or trailing spaces in the section title.">7.4.4.2. Whitespace Considerations</a></li>
-									<li><a href="#7_4_4_3" title="Links to sections in SimpleDoc documents are case insensitive, which allows linked section names to be used more naturally in sentences.">7.4.4.3. Section Linking is Case-insensitive</a>
+								</ul>
+							</li>
+							<li><a href="#7_4_5" title="There are a number of considerations that should be kept in mind when doing section linking in SimpleDoc documents.">7.4.5. Linking Considerations</a>
+								<ul>
+									<li><a href="#7_4_5_1" title="When multiple sections share the same name, auto linked text links to the one of those same named sections that is nearest to the link.">7.4.5.1. Linking to the Nearest of Same Named Sections</a>
 										<ul>
-											<li><a href="#7_4_4_3_1" title="Here is some profound (or not) stuff inside the first section.">7.4.4.3.1. The First Section</a></li>
-											<li><a href="#7_4_4_3_2" title="Here are some links to the first section, using different case...">7.4.4.3.2. The Second Section</a></li>
-											<li><a href="#7_4_4_3_3" title="When a document contains multiple sections that are named the same but are only different in their case, exact case matches take priority with any links to those sections - even taking priority over the behavior of linking to the nearest of same named sections.">7.4.4.3.3. Exact Case Matches Take Priority</a>
+											<li><a href="#7_4_5_1_1">7.4.5.1.1. HOW IT LOOKS</a>
 												<ul>
-													<li><a href="#7_4_4_3_3_1">7.4.4.3.3.1. Constants</a>
+													<li><a href="#7_4_5_1_1_1">7.4.5.1.1.1. MyClass.foo</a>
 														<ul>
-															<li><a href="#7_4_4_3_3_1_1" title="This is the reference for the constant.">7.4.4.3.3.1.1. INITIALIZED</a></li>
+															<li><a href="#7_4_5_1_1_1_1" title="This section describes the parameters for the MyClass.foo method.">7.4.5.1.1.1.1. Parameters</a></li>
+															<li><a href="#7_4_5_1_1_1_2" title="For a refresher, refer back to the Parameters section.">7.4.5.1.1.1.2. In-depth</a></li>
 														</ul>
 													</li>
-													<li><a href="#7_4_4_3_3_2">7.4.4.3.3.2. Instance Properties</a>
+													<li><a href="#7_4_5_1_1_2">7.4.5.1.1.2. MyClass.bar</a>
 														<ul>
-															<li><a href="#7_4_4_3_3_2_1" title="This is the reference for the instance property.">7.4.4.3.3.2.1. initialized</a></li>
+															<li><a href="#7_4_5_1_1_2_1" title="This section describes the parameters for the MyClass.bar method.">7.4.5.1.1.2.1. Parameters</a></li>
+															<li><a href="#7_4_5_1_1_2_2" title="For a refresher, refer back to the Parameters section.">7.4.5.1.1.2.2. In-depth</a></li>
+														</ul>
+													</li>
+												</ul>
+											</li>
+											<li><a href="#7_4_5_1_2" title="Even with the smart behavior of linking to the nearest of same named sections when multiple sections share the same name, ambiguities can still arise that are not resolved correctly.">7.4.5.1.2. Ambiguities Can Still Arise</a></li>
+										</ul>
+									</li>
+									<li><a href="#7_4_5_2" title="When specifying the section that your text should link to, avoid having any leading or trailing spaces in the section title.">7.4.5.2. Whitespace Considerations</a></li>
+									<li><a href="#7_4_5_3" title="Links to sections in SimpleDoc documents are case insensitive, which allows linked section names to be used more naturally in sentences.">7.4.5.3. Section Linking is Case-insensitive</a>
+										<ul>
+											<li><a href="#7_4_5_3_1">7.4.5.3.1. HOW IT LOOKS</a>
+												<ul>
+													<li><a href="#7_4_5_3_1_1" title="Here is some profound (or not) stuff inside the first section.">7.4.5.3.1.1. The First Section</a></li>
+													<li><a href="#7_4_5_3_1_2" title="Here are some links to the first section, using different case...">7.4.5.3.1.2. The Second Section</a></li>
+												</ul>
+											</li>
+											<li><a href="#7_4_5_3_2" title="When a document contains multiple sections that are named the same but are only different in their case, exact case matches take priority with any links to those sections - even taking priority over the behavior of linking to the nearest of same named sections.">7.4.5.3.2. Exact Case Matches Take Priority</a>
+												<ul>
+													<li><a href="#7_4_5_3_2_1">7.4.5.3.2.1. HOW IT LOOKS</a>
+														<ul>
+															<li><a href="#7_4_5_3_2_1_1">7.4.5.3.2.1.1. Constants</a>
+																<ul>
+																	<li><a href="#7_4_5_3_2_1_1_1" title="This is the reference for the constant.">7.4.5.3.2.1.1.1. INITIALIZED</a></li>
+																</ul>
+															</li>
+															<li><a href="#7_4_5_3_2_1_2">7.4.5.3.2.1.2. Instance Properties</a>
+																<ul>
+																	<li><a href="#7_4_5_3_2_1_2_1" title="This is the reference for the instance property.">7.4.5.3.2.1.2.1. initialized</a></li>
+																</ul>
+															</li>
 														</ul>
 													</li>
 												</ul>
@@ -175,11 +277,11 @@
 									</li>
 								</ul>
 							</li>
-							<li><a href="#7_4_5" title="For any section link that is not matched to a section in the document, the link&apos;s text is not linked or decorated (backticks and double square brackets are removed).">7.4.5. Dead Section Links</a>
+							<li><a href="#7_4_6" title="For any section link that is not matched to a section in the document, the link&apos;s text is not linked or decorated (backticks and double square brackets are removed).">7.4.6. Dead Section Links</a>
 								<ul>
-									<li><a href="#7_4_5_1" title="SOURCE">7.4.5.1. Example 1</a></li>
-									<li><a href="#7_4_5_2" title="SOURCE">7.4.5.2. Example 2</a></li>
-									<li><a href="#7_4_5_3" title="SOURCE">7.4.5.3. Example 3</a></li>
+									<li><a href="#7_4_6_1" title="SOURCE">7.4.6.1. Example 1</a></li>
+									<li><a href="#7_4_6_2" title="SOURCE">7.4.6.2. Example 2</a></li>
+									<li><a href="#7_4_6_3" title="SOURCE">7.4.6.3. Example 3</a></li>
 								</ul>
 							</li>
 						</ul>
@@ -300,7 +402,7 @@
 	<a name="1"></a>
 	<h1 class="heading1" title="1. Introduction"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>. </span>Introduction</h1>
 	<div class="contents1">
-		<p>The UIZE JavaScript Framework implements a system for building HTML from documentation that is written in a Wikitext like format called Simple Doc.</p>
+		<p>The UIZE JavaScript Framework implements a system for building HTML from documentation that is written in a Wikitext like format called SimpleDoc.</p>
 		
 		<p>This document describes the SimpleDoc documentation system and its various formatting rules.</p>
 		
@@ -446,32 +548,290 @@ Section Two
       Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here.
 </pre>
 		
-		<p><span class="allCaps">HOW IT LOOKS</span></p>
-		
 		<a name="2_1"></a>
-		<h2 class="heading2" title="2. Document Sections -&gt; 2.1. This is a Section"><span class="headingNumber"><a href="#2" title="2. Document Sections">2</a>.<a href="#2_1" title="2. Document Sections -&gt; 2.1. This is a Section">1</a>. </span>This is a Section</h2>
+		<h2 class="heading2" title="2. Document Sections -&gt; 2.1. HOW IT LOOKS"><span class="headingNumber"><a href="#2" title="2. Document Sections">2</a>.<a href="#2_1" title="2. Document Sections -&gt; 2.1. HOW IT LOOKS">1</a>. </span>HOW IT LOOKS</h2>
 		<div class="contents2">
 			<a name="2_1_1"></a>
-			<h3 class="heading3" title="2. Document Sections -&gt; 2.1. This is a Section -&gt; 2.1.1. This is a Subsection"><span class="headingNumber"><a href="#2" title="2. Document Sections">2</a>.<a href="#2_1" title="2. Document Sections -&gt; 2.1. This is a Section">1</a>.<a href="#2_1_1" title="2. Document Sections -&gt; 2.1. This is a Section -&gt; 2.1.1. This is a Subsection">1</a>. </span>This is a Subsection</h3>
+			<h3 class="heading3" title="2. Document Sections -&gt; 2.1. HOW IT LOOKS -&gt; 2.1.1. This is a Section"><span class="headingNumber"><a href="#2" title="2. Document Sections">2</a>.<a href="#2_1" title="2. Document Sections -&gt; 2.1. HOW IT LOOKS">1</a>.<a href="#2_1_1" title="2. Document Sections -&gt; 2.1. HOW IT LOOKS -&gt; 2.1.1. This is a Section">1</a>. </span>This is a Section</h3>
 			<div class="contents3">
-				<p>This is some text in the subsection. This is some text in the subsection. This is some text in the subsection. This is some text in the subsection. This is some text in the subsection. This is some text in the subsection. This is some text in the subsection. This is some text in the subsection. This is some text in the subsection. This is some text in the subsection. This is some text in the subsection. This is some text in the subsection.</p>
-			</div>
-			
-			<a name="2_1_2"></a>
-			<h3 class="heading3" title="2. Document Sections -&gt; 2.1. This is a Section -&gt; 2.1.2. This is Another Subsection"><span class="headingNumber"><a href="#2" title="2. Document Sections">2</a>.<a href="#2_1" title="2. Document Sections -&gt; 2.1. This is a Section">1</a>.<a href="#2_1_2" title="2. Document Sections -&gt; 2.1. This is a Section -&gt; 2.1.2. This is Another Subsection">2</a>. </span>This is Another Subsection</h3>
-			<div class="contents3">
-				<a name="2_1_2_1"></a>
-				<h4 class="heading4" title="2. Document Sections -&gt; 2.1. This is a Section -&gt; 2.1.2. This is Another Subsection -&gt; 2.1.2.1. This is Just Crazy"><span class="headingNumber"><a href="#2" title="2. Document Sections">2</a>.<a href="#2_1" title="2. Document Sections -&gt; 2.1. This is a Section">1</a>.<a href="#2_1_2" title="2. Document Sections -&gt; 2.1. This is a Section -&gt; 2.1.2. This is Another Subsection">2</a>.<a href="#2_1_2_1" title="2. Document Sections -&gt; 2.1. This is a Section -&gt; 2.1.2. This is Another Subsection -&gt; 2.1.2.1. This is Just Crazy">1</a>. </span>This is Just Crazy</h4>
+				<a name="2_1_1_1"></a>
+				<h4 class="heading4" title="2. Document Sections -&gt; 2.1. HOW IT LOOKS -&gt; 2.1.1. This is a Section -&gt; 2.1.1.1. This is a Subsection"><span class="headingNumber"><a href="#2" title="2. Document Sections">2</a>.<a href="#2_1" title="2. Document Sections -&gt; 2.1. HOW IT LOOKS">1</a>.<a href="#2_1_1" title="2. Document Sections -&gt; 2.1. HOW IT LOOKS -&gt; 2.1.1. This is a Section">1</a>.<a href="#2_1_1_1" title="2. Document Sections -&gt; 2.1. HOW IT LOOKS -&gt; 2.1.1. This is a Section -&gt; 2.1.1.1. This is a Subsection">1</a>. </span>This is a Subsection</h4>
 				<div class="contents4">
-					<p>Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here.</p>
-					
-					<p>Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here.</p>
+					<p>This is some text in the subsection. This is some text in the subsection. This is some text in the subsection. This is some text in the subsection. This is some text in the subsection. This is some text in the subsection. This is some text in the subsection. This is some text in the subsection. This is some text in the subsection. This is some text in the subsection. This is some text in the subsection. This is some text in the subsection.</p>
 				</div>
 				
-				<a name="2_1_2_2"></a>
-				<h4 class="heading4" title="2. Document Sections -&gt; 2.1. This is a Section -&gt; 2.1.2. This is Another Subsection -&gt; 2.1.2.2. This is Just Even Crazier"><span class="headingNumber"><a href="#2" title="2. Document Sections">2</a>.<a href="#2_1" title="2. Document Sections -&gt; 2.1. This is a Section">1</a>.<a href="#2_1_2" title="2. Document Sections -&gt; 2.1. This is a Section -&gt; 2.1.2. This is Another Subsection">2</a>.<a href="#2_1_2_2" title="2. Document Sections -&gt; 2.1. This is a Section -&gt; 2.1.2. This is Another Subsection -&gt; 2.1.2.2. This is Just Even Crazier">2</a>. </span>This is Just Even Crazier</h4>
+				<a name="2_1_1_2"></a>
+				<h4 class="heading4" title="2. Document Sections -&gt; 2.1. HOW IT LOOKS -&gt; 2.1.1. This is a Section -&gt; 2.1.1.2. This is Another Subsection"><span class="headingNumber"><a href="#2" title="2. Document Sections">2</a>.<a href="#2_1" title="2. Document Sections -&gt; 2.1. HOW IT LOOKS">1</a>.<a href="#2_1_1" title="2. Document Sections -&gt; 2.1. HOW IT LOOKS -&gt; 2.1.1. This is a Section">1</a>.<a href="#2_1_1_2" title="2. Document Sections -&gt; 2.1. HOW IT LOOKS -&gt; 2.1.1. This is a Section -&gt; 2.1.1.2. This is Another Subsection">2</a>. </span>This is Another Subsection</h4>
 				<div class="contents4">
-					<p>Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here.</p>
+					<a name="2_1_1_2_1"></a>
+					<h5 class="heading5" title="2. Document Sections -&gt; 2.1. HOW IT LOOKS -&gt; 2.1.1. This is a Section -&gt; 2.1.1.2. This is Another Subsection -&gt; 2.1.1.2.1. This is Just Crazy"><span class="headingNumber"><a href="#2" title="2. Document Sections">2</a>.<a href="#2_1" title="2. Document Sections -&gt; 2.1. HOW IT LOOKS">1</a>.<a href="#2_1_1" title="2. Document Sections -&gt; 2.1. HOW IT LOOKS -&gt; 2.1.1. This is a Section">1</a>.<a href="#2_1_1_2" title="2. Document Sections -&gt; 2.1. HOW IT LOOKS -&gt; 2.1.1. This is a Section -&gt; 2.1.1.2. This is Another Subsection">2</a>.<a href="#2_1_1_2_1" title="2. Document Sections -&gt; 2.1. HOW IT LOOKS -&gt; 2.1.1. This is a Section -&gt; 2.1.1.2. This is Another Subsection -&gt; 2.1.1.2.1. This is Just Crazy">1</a>. </span>This is Just Crazy</h5>
+					<div class="contents5">
+						<p>Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here.</p>
+						
+						<p>Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here.</p>
+					</div>
+					
+					<a name="2_1_1_2_2"></a>
+					<h5 class="heading5" title="2. Document Sections -&gt; 2.1. HOW IT LOOKS -&gt; 2.1.1. This is a Section -&gt; 2.1.1.2. This is Another Subsection -&gt; 2.1.1.2.2. This is Just Even Crazier"><span class="headingNumber"><a href="#2" title="2. Document Sections">2</a>.<a href="#2_1" title="2. Document Sections -&gt; 2.1. HOW IT LOOKS">1</a>.<a href="#2_1_1" title="2. Document Sections -&gt; 2.1. HOW IT LOOKS -&gt; 2.1.1. This is a Section">1</a>.<a href="#2_1_1_2" title="2. Document Sections -&gt; 2.1. HOW IT LOOKS -&gt; 2.1.1. This is a Section -&gt; 2.1.1.2. This is Another Subsection">2</a>.<a href="#2_1_1_2_2" title="2. Document Sections -&gt; 2.1. HOW IT LOOKS -&gt; 2.1.1. This is a Section -&gt; 2.1.1.2. This is Another Subsection -&gt; 2.1.1.2.2. This is Just Even Crazier">2</a>. </span>This is Just Even Crazier</h5>
+					<div class="contents5">
+						<p>Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here.</p>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<a name="2_2"></a>
+		<h2 class="heading2" title="2. Document Sections -&gt; 2.2. Section Title Aliases"><span class="headingNumber"><a href="#2" title="2. Document Sections">2</a>.<a href="#2_2" title="2. Document Sections -&gt; 2.2. Section Title Aliases">2</a>. </span>Section Title Aliases</h2>
+		<div class="contents2">
+			<p>SimpleDoc provides an easy way to specify section title aliases for sections, where the aliases are not displayed but allow sections to be easily linked to by their aliases from other parts of the document.</p>
+			
+			<a name="2_2_1"></a>
+			<h3 class="heading3" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.1. Section Titles Can Have Multiple Aliases"><span class="headingNumber"><a href="#2" title="2. Document Sections">2</a>.<a href="#2_2" title="2. Document Sections -&gt; 2.2. Section Title Aliases">2</a>.<a href="#2_2_1" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.1. Section Titles Can Have Multiple Aliases">1</a>. </span>Section Titles Can Have Multiple Aliases</h3>
+			<div class="contents3">
+				<p>Any number of section title aliases can be specified for a section, simply by placing the aliases on the same line as the section title, with all the aliases separated using the delimiter pattern of one or more consecutive "~" (tilde) characters surrounded by optional whitespace padding.</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">Example Section ~~ Alias 1 ~~ Alias 2 ~~ Alias N
+  This is some text in the section.
+
+Some Other Section
+  Now link to the `example section` by its aliases: `alias 1`, `alias 2`, and `alias N`.
+</pre>
+				
+				<p>In the above example, the section "Example Section" has three section title aliases specified for it: "Alias 1", "Alias 2", and "Alias N". While only the "Example Section" portion will be displayed in the HTML document that is generated from the SimpleDoc document, the aliases can be used when linking to the section from other parts of the document, as can be seen in the first paragraph of the section "Some Other Section".</p>
+				
+				<a name="2_2_1_1"></a>
+				<h4 class="heading4" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.1. Section Titles Can Have Multiple Aliases -&gt; 2.2.1.1. HOW IT LOOKS"><span class="headingNumber"><a href="#2" title="2. Document Sections">2</a>.<a href="#2_2" title="2. Document Sections -&gt; 2.2. Section Title Aliases">2</a>.<a href="#2_2_1" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.1. Section Titles Can Have Multiple Aliases">1</a>.<a href="#2_2_1_1" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.1. Section Titles Can Have Multiple Aliases -&gt; 2.2.1.1. HOW IT LOOKS">1</a>. </span>HOW IT LOOKS</h4>
+				<div class="contents4">
+					<a name="2_2_1_1_1"></a>
+					<h5 class="heading5" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.1. Section Titles Can Have Multiple Aliases -&gt; 2.2.1.1. HOW IT LOOKS -&gt; 2.2.1.1.1. Example Section"><span class="headingNumber"><a href="#2" title="2. Document Sections">2</a>.<a href="#2_2" title="2. Document Sections -&gt; 2.2. Section Title Aliases">2</a>.<a href="#2_2_1" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.1. Section Titles Can Have Multiple Aliases">1</a>.<a href="#2_2_1_1" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.1. Section Titles Can Have Multiple Aliases -&gt; 2.2.1.1. HOW IT LOOKS">1</a>.<a href="#2_2_1_1_1" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.1. Section Titles Can Have Multiple Aliases -&gt; 2.2.1.1. HOW IT LOOKS -&gt; 2.2.1.1.1. Example Section">1</a>. </span>Example Section</h5>
+					<div class="contents5">
+						<p>This is some text in the section.</p>
+					</div>
+					
+					<a name="2_2_1_1_2"></a>
+					<h5 class="heading5" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.1. Section Titles Can Have Multiple Aliases -&gt; 2.2.1.1. HOW IT LOOKS -&gt; 2.2.1.1.2. Some Other Section"><span class="headingNumber"><a href="#2" title="2. Document Sections">2</a>.<a href="#2_2" title="2. Document Sections -&gt; 2.2. Section Title Aliases">2</a>.<a href="#2_2_1" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.1. Section Titles Can Have Multiple Aliases">1</a>.<a href="#2_2_1_1" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.1. Section Titles Can Have Multiple Aliases -&gt; 2.2.1.1. HOW IT LOOKS">1</a>.<a href="#2_2_1_1_2" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.1. Section Titles Can Have Multiple Aliases -&gt; 2.2.1.1. HOW IT LOOKS -&gt; 2.2.1.1.2. Some Other Section">2</a>. </span>Some Other Section</h5>
+					<div class="contents5">
+						<p>Now link to the <a href="#2_2_1_1_1">example section</a> by its aliases: <a href="#2_2_1_1_1">alias 1</a>, <a href="#2_2_1_1_1">alias 2</a>, and <a href="#2_2_1_1_1">alias N</a>.</p>
+					</div>
+				</div>
+			</div>
+			
+			<a name="2_2_2"></a>
+			<h3 class="heading3" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.2. Aliases Not Displayed"><span class="headingNumber"><a href="#2" title="2. Document Sections">2</a>.<a href="#2_2" title="2. Document Sections -&gt; 2.2. Section Title Aliases">2</a>.<a href="#2_2_2" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.2. Aliases Not Displayed">2</a>. </span>Aliases Not Displayed</h3>
+			<div class="contents3">
+				<p>When <a href="#2_2">section title aliases</a> are specified for a section title, they are never displayed in the HTML document that is generated from a SimpleDoc document.</p>
+				
+				<p>Only the first portion of the title - up until the first alias delimiter - is displayed.</p>
+			</div>
+			
+			<a name="2_2_3"></a>
+			<h3 class="heading3" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.3. Considerations When Linking Using Aliases"><span class="headingNumber"><a href="#2" title="2. Document Sections">2</a>.<a href="#2_2" title="2. Document Sections -&gt; 2.2. Section Title Aliases">2</a>.<a href="#2_2_3" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.3. Considerations When Linking Using Aliases">3</a>. </span>Considerations When Linking Using Aliases</h3>
+			<div class="contents3">
+				<p>When using <a href="#2_2">section title aliases</a> to link to sections, all the same rules apply that would normally apply for displayed section titles.</p>
+				
+				<p>This means that the same rules for case and whitespace apply and you should keep these in mind when linking using aliases. For more details, see the section <a href="#7_4_5">Linking Considerations</a>.</p>
+			</div>
+			
+			<a name="2_2_4"></a>
+			<h3 class="heading3" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases"><span class="headingNumber"><a href="#2" title="2. Document Sections">2</a>.<a href="#2_2" title="2. Document Sections -&gt; 2.2. Section Title Aliases">2</a>.<a href="#2_2_4" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases">4</a>. </span>Use Cases For Section Title Aliases</h3>
+			<div class="contents3">
+				<p><a href="#2_2">Section title aliases</a> can be useful in a number of real world situations, including <a href="#2_2_4_3">disambiguating links to sections with the same title</a>, <a href="#2_2_4_1">linking using opposite of singular or plural form</a>, and <a href="#2_2_4_2">linking using abbreviations or alternate forms</a>.</p>
+				
+				<a name="2_2_4_1"></a>
+				<h4 class="heading4" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.1. Linking Using Opposite of Singular or Plural Form"><span class="headingNumber"><a href="#2" title="2. Document Sections">2</a>.<a href="#2_2" title="2. Document Sections -&gt; 2.2. Section Title Aliases">2</a>.<a href="#2_2_4" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases">4</a>.<a href="#2_2_4_1" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.1. Linking Using Opposite of Singular or Plural Form">1</a>. </span>Linking Using Opposite of Singular or Plural Form</h4>
+				<div class="contents4">
+					<p>While you can generally just link to a section by using its title in a sentence with the <a href="#7_1">backticks</a> syntax for linking, sometimes a section's title is not in the desirable singular or plural form.</p>
+					
+					<p>If a section's title is singular and you need to use a plural form in a sentence, or if a section's title is plural and you need to use a singular form in a sentence, then you can use the <a href="#2_2">section title aliases</a> feature to specify the alternate form as a section title alias.</p>
+					
+					<p><span class="allCaps">EXAMPLE</span></p>
+					
+					
+<pre class="sample-code">Child Widgets ~~ Child Widget
+  Documentation explaining what child widgets are all about.
+
+Some Other Section
+  For every `child widget` that one adds to a parent widget, ...
+</pre>
+					
+					<p>In the above example, "Child Widgets" is the desired display title for a section, but a sentence wishes to link to the section using a singular form that is grammatically correct in the context. While you could always use the <a href="#7_2">square brackets</a> syntax in this case, by specifying the section title as the section link and specifying the singular form as the linked text, this can become cumbersome if there are many sentences that would like to link to the section using the singular form. Instead, we specify the singular form as the section title alias for the section. Then we can use the more convenient <a href="#7_1">backticks</a> syntax with the singular form alias.</p>
+					
+					<a name="2_2_4_1_1"></a>
+					<h5 class="heading5" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.1. Linking Using Opposite of Singular or Plural Form -&gt; 2.2.4.1.1. HOW IT LOOKS"><span class="headingNumber"><a href="#2" title="2. Document Sections">2</a>.<a href="#2_2" title="2. Document Sections -&gt; 2.2. Section Title Aliases">2</a>.<a href="#2_2_4" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases">4</a>.<a href="#2_2_4_1" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.1. Linking Using Opposite of Singular or Plural Form">1</a>.<a href="#2_2_4_1_1" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.1. Linking Using Opposite of Singular or Plural Form -&gt; 2.2.4.1.1. HOW IT LOOKS">1</a>. </span>HOW IT LOOKS</h5>
+					<div class="contents5">
+						<a name="2_2_4_1_1_1"></a>
+						<h5 class="heading6" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.1. Linking Using Opposite of Singular or Plural Form -&gt; 2.2.4.1.1. HOW IT LOOKS -&gt; 2.2.4.1.1.1. Child Widgets"><span class="headingNumber"><a href="#2" title="2. Document Sections">2</a>.<a href="#2_2" title="2. Document Sections -&gt; 2.2. Section Title Aliases">2</a>.<a href="#2_2_4" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases">4</a>.<a href="#2_2_4_1" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.1. Linking Using Opposite of Singular or Plural Form">1</a>.<a href="#2_2_4_1_1" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.1. Linking Using Opposite of Singular or Plural Form -&gt; 2.2.4.1.1. HOW IT LOOKS">1</a>.<a href="#2_2_4_1_1_1" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.1. Linking Using Opposite of Singular or Plural Form -&gt; 2.2.4.1.1. HOW IT LOOKS -&gt; 2.2.4.1.1.1. Child Widgets">1</a>. </span>Child Widgets</h5>
+						<div class="contents6">
+							<p>Documentation explaining what child widgets are all about.</p>
+						</div>
+						
+						<a name="2_2_4_1_1_2"></a>
+						<h5 class="heading6" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.1. Linking Using Opposite of Singular or Plural Form -&gt; 2.2.4.1.1. HOW IT LOOKS -&gt; 2.2.4.1.1.2. Some Other Section"><span class="headingNumber"><a href="#2" title="2. Document Sections">2</a>.<a href="#2_2" title="2. Document Sections -&gt; 2.2. Section Title Aliases">2</a>.<a href="#2_2_4" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases">4</a>.<a href="#2_2_4_1" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.1. Linking Using Opposite of Singular or Plural Form">1</a>.<a href="#2_2_4_1_1" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.1. Linking Using Opposite of Singular or Plural Form -&gt; 2.2.4.1.1. HOW IT LOOKS">1</a>.<a href="#2_2_4_1_1_2" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.1. Linking Using Opposite of Singular or Plural Form -&gt; 2.2.4.1.1. HOW IT LOOKS -&gt; 2.2.4.1.1.2. Some Other Section">2</a>. </span>Some Other Section</h5>
+						<div class="contents6">
+							<p>For every <a href="#2_2_4_1_1_1">child widget</a> that one adds to a parent widget, ...</p>
+						</div>
+					</div>
+				</div>
+				
+				<a name="2_2_4_2"></a>
+				<h4 class="heading4" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.2. Linking Using Abbreviations or Alternate Forms"><span class="headingNumber"><a href="#2" title="2. Document Sections">2</a>.<a href="#2_2" title="2. Document Sections -&gt; 2.2. Section Title Aliases">2</a>.<a href="#2_2_4" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases">4</a>.<a href="#2_2_4_2" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.2. Linking Using Abbreviations or Alternate Forms">2</a>. </span>Linking Using Abbreviations or Alternate Forms</h4>
+				<div class="contents4">
+					<p>Similar to the case of <a href="#2_2_4_1">linking using opposite of singular or plural form</a>, it is sometimes desirable to link to a section with linked text that differs from the section's title.</p>
+					
+					<p>Of course, you can always just use the <a href="#7_2">square brackets</a> syntax in such cases and specify the alternate form as the linked text, but the <a href="#2_2">section title aliases</a> feature makes it very easy to specify the alternate form as an alias for a section and then link to the section using the more convenient <a href="#7_1">backticks</a> syntax for linking.</p>
+					
+					<p><span class="allCaps">EXAMPLE</span></p>
+					
+					
+<pre class="sample-code">What is Ajax? ~~ Ajax
+  Ajax is a technology that has become a staple for Web 2.0 applications, ...
+
+Developing Ajax Applications
+  In order to incorporate `Ajax` into one's Web applications, ...
+</pre>
+					
+					<a name="2_2_4_2_1"></a>
+					<h5 class="heading5" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.2. Linking Using Abbreviations or Alternate Forms -&gt; 2.2.4.2.1. HOW IT LOOKS"><span class="headingNumber"><a href="#2" title="2. Document Sections">2</a>.<a href="#2_2" title="2. Document Sections -&gt; 2.2. Section Title Aliases">2</a>.<a href="#2_2_4" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases">4</a>.<a href="#2_2_4_2" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.2. Linking Using Abbreviations or Alternate Forms">2</a>.<a href="#2_2_4_2_1" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.2. Linking Using Abbreviations or Alternate Forms -&gt; 2.2.4.2.1. HOW IT LOOKS">1</a>. </span>HOW IT LOOKS</h5>
+					<div class="contents5">
+						<a name="2_2_4_2_1_1"></a>
+						<h5 class="heading6" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.2. Linking Using Abbreviations or Alternate Forms -&gt; 2.2.4.2.1. HOW IT LOOKS -&gt; 2.2.4.2.1.1. What is Ajax?"><span class="headingNumber"><a href="#2" title="2. Document Sections">2</a>.<a href="#2_2" title="2. Document Sections -&gt; 2.2. Section Title Aliases">2</a>.<a href="#2_2_4" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases">4</a>.<a href="#2_2_4_2" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.2. Linking Using Abbreviations or Alternate Forms">2</a>.<a href="#2_2_4_2_1" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.2. Linking Using Abbreviations or Alternate Forms -&gt; 2.2.4.2.1. HOW IT LOOKS">1</a>.<a href="#2_2_4_2_1_1" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.2. Linking Using Abbreviations or Alternate Forms -&gt; 2.2.4.2.1. HOW IT LOOKS -&gt; 2.2.4.2.1.1. What is Ajax?">1</a>. </span>What is Ajax?</h5>
+						<div class="contents6">
+							<p>Ajax is a technology that has become a staple for Web 2.0 applications, ...</p>
+						</div>
+						
+						<a name="2_2_4_2_1_2"></a>
+						<h5 class="heading6" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.2. Linking Using Abbreviations or Alternate Forms -&gt; 2.2.4.2.1. HOW IT LOOKS -&gt; 2.2.4.2.1.2. Developing Ajax Applications"><span class="headingNumber"><a href="#2" title="2. Document Sections">2</a>.<a href="#2_2" title="2. Document Sections -&gt; 2.2. Section Title Aliases">2</a>.<a href="#2_2_4" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases">4</a>.<a href="#2_2_4_2" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.2. Linking Using Abbreviations or Alternate Forms">2</a>.<a href="#2_2_4_2_1" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.2. Linking Using Abbreviations or Alternate Forms -&gt; 2.2.4.2.1. HOW IT LOOKS">1</a>.<a href="#2_2_4_2_1_2" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.2. Linking Using Abbreviations or Alternate Forms -&gt; 2.2.4.2.1. HOW IT LOOKS -&gt; 2.2.4.2.1.2. Developing Ajax Applications">2</a>. </span>Developing Ajax Applications</h5>
+						<div class="contents6">
+							<p>In order to incorporate <a href="#2_2_4_2_1_1">Ajax</a> into one's Web applications, ...</p>
+						</div>
+					</div>
+				</div>
+				
+				<a name="2_2_4_3"></a>
+				<h4 class="heading4" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.3. Disambiguating Links to Sections With the Same Title"><span class="headingNumber"><a href="#2" title="2. Document Sections">2</a>.<a href="#2_2" title="2. Document Sections -&gt; 2.2. Section Title Aliases">2</a>.<a href="#2_2_4" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases">4</a>.<a href="#2_2_4_3" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.3. Disambiguating Links to Sections With the Same Title">3</a>. </span>Disambiguating Links to Sections With the Same Title</h4>
+				<div class="contents4">
+					<p>When situations arise where multiple sections of a SimpleDoc document are to have the same display title, unique <a href="#2_2">section title aliases</a> can be specified for the different sections so that it is still possible to unambiguously link to the sections from other parts of the document.</p>
+					
+					<p><span class="allCaps">EXAMPLE</span></p>
+					
+					
+<pre class="sample-code">Instance Properties
+  children ~~ children Instance Property
+    Documentation for the children instance property.
+
+    NOTES
+    - see the companion `children set-get property`
+
+Set-get Properties
+  children ~~ children Set-get Property
+    Documentation for the children set-get property.
+
+    NOTES
+    - see the companion `children instance property`
+</pre>
+					
+					<p>In the above example, there are two sections with the display title "children" - one is for the instance property and the other is for the set-get property. Because the "children Instance Property" and "children Set-get Property" aliases are specified, it is possible for the sections to cross-link to each other, simply by enclosing the aliases in <a href="#7_1">backticks</a>.</p>
+					
+					<a name="2_2_4_3_1"></a>
+					<h5 class="heading5" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.3. Disambiguating Links to Sections With the Same Title -&gt; 2.2.4.3.1. HOW IT LOOKS"><span class="headingNumber"><a href="#2" title="2. Document Sections">2</a>.<a href="#2_2" title="2. Document Sections -&gt; 2.2. Section Title Aliases">2</a>.<a href="#2_2_4" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases">4</a>.<a href="#2_2_4_3" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.3. Disambiguating Links to Sections With the Same Title">3</a>.<a href="#2_2_4_3_1" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.3. Disambiguating Links to Sections With the Same Title -&gt; 2.2.4.3.1. HOW IT LOOKS">1</a>. </span>HOW IT LOOKS</h5>
+					<div class="contents5">
+						<a name="2_2_4_3_1_1"></a>
+						<h5 class="heading6" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.3. Disambiguating Links to Sections With the Same Title -&gt; 2.2.4.3.1. HOW IT LOOKS -&gt; 2.2.4.3.1.1. Instance Properties"><span class="headingNumber"><a href="#2" title="2. Document Sections">2</a>.<a href="#2_2" title="2. Document Sections -&gt; 2.2. Section Title Aliases">2</a>.<a href="#2_2_4" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases">4</a>.<a href="#2_2_4_3" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.3. Disambiguating Links to Sections With the Same Title">3</a>.<a href="#2_2_4_3_1" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.3. Disambiguating Links to Sections With the Same Title -&gt; 2.2.4.3.1. HOW IT LOOKS">1</a>.<a href="#2_2_4_3_1_1" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.3. Disambiguating Links to Sections With the Same Title -&gt; 2.2.4.3.1. HOW IT LOOKS -&gt; 2.2.4.3.1.1. Instance Properties">1</a>. </span>Instance Properties</h5>
+						<div class="contents6">
+							<a name="2_2_4_3_1_1_1"></a>
+							<h5 class="heading7" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.3. Disambiguating Links to Sections With the Same Title -&gt; 2.2.4.3.1. HOW IT LOOKS -&gt; 2.2.4.3.1.1. Instance Properties -&gt; 2.2.4.3.1.1.1. children"><span class="headingNumber"><a href="#2" title="2. Document Sections">2</a>.<a href="#2_2" title="2. Document Sections -&gt; 2.2. Section Title Aliases">2</a>.<a href="#2_2_4" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases">4</a>.<a href="#2_2_4_3" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.3. Disambiguating Links to Sections With the Same Title">3</a>.<a href="#2_2_4_3_1" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.3. Disambiguating Links to Sections With the Same Title -&gt; 2.2.4.3.1. HOW IT LOOKS">1</a>.<a href="#2_2_4_3_1_1" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.3. Disambiguating Links to Sections With the Same Title -&gt; 2.2.4.3.1. HOW IT LOOKS -&gt; 2.2.4.3.1.1. Instance Properties">1</a>.<a href="#2_2_4_3_1_1_1" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.3. Disambiguating Links to Sections With the Same Title -&gt; 2.2.4.3.1. HOW IT LOOKS -&gt; 2.2.4.3.1.1. Instance Properties -&gt; 2.2.4.3.1.1.1. children">1</a>. </span>children</h5>
+							<div class="contents7">
+								<p>Documentation for the children instance property.</p>
+								
+								<p><span class="allCaps">NOTES</span></p>
+								
+								<table class="list">
+								<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <a href="#2_2_4_3_1_2_1">children set-get property</a></td></tr>
+								</table>
+							</div>
+						</div>
+						
+						<a name="2_2_4_3_1_2"></a>
+						<h5 class="heading6" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.3. Disambiguating Links to Sections With the Same Title -&gt; 2.2.4.3.1. HOW IT LOOKS -&gt; 2.2.4.3.1.2. Set-get Properties"><span class="headingNumber"><a href="#2" title="2. Document Sections">2</a>.<a href="#2_2" title="2. Document Sections -&gt; 2.2. Section Title Aliases">2</a>.<a href="#2_2_4" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases">4</a>.<a href="#2_2_4_3" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.3. Disambiguating Links to Sections With the Same Title">3</a>.<a href="#2_2_4_3_1" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.3. Disambiguating Links to Sections With the Same Title -&gt; 2.2.4.3.1. HOW IT LOOKS">1</a>.<a href="#2_2_4_3_1_2" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.3. Disambiguating Links to Sections With the Same Title -&gt; 2.2.4.3.1. HOW IT LOOKS -&gt; 2.2.4.3.1.2. Set-get Properties">2</a>. </span>Set-get Properties</h5>
+						<div class="contents6">
+							<a name="2_2_4_3_1_2_1"></a>
+							<h5 class="heading7" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.3. Disambiguating Links to Sections With the Same Title -&gt; 2.2.4.3.1. HOW IT LOOKS -&gt; 2.2.4.3.1.2. Set-get Properties -&gt; 2.2.4.3.1.2.1. children"><span class="headingNumber"><a href="#2" title="2. Document Sections">2</a>.<a href="#2_2" title="2. Document Sections -&gt; 2.2. Section Title Aliases">2</a>.<a href="#2_2_4" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases">4</a>.<a href="#2_2_4_3" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.3. Disambiguating Links to Sections With the Same Title">3</a>.<a href="#2_2_4_3_1" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.3. Disambiguating Links to Sections With the Same Title -&gt; 2.2.4.3.1. HOW IT LOOKS">1</a>.<a href="#2_2_4_3_1_2" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.3. Disambiguating Links to Sections With the Same Title -&gt; 2.2.4.3.1. HOW IT LOOKS -&gt; 2.2.4.3.1.2. Set-get Properties">2</a>.<a href="#2_2_4_3_1_2_1" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.3. Disambiguating Links to Sections With the Same Title -&gt; 2.2.4.3.1. HOW IT LOOKS -&gt; 2.2.4.3.1.2. Set-get Properties -&gt; 2.2.4.3.1.2.1. children">1</a>. </span>children</h5>
+							<div class="contents7">
+								<p>Documentation for the children set-get property.</p>
+								
+								<p><span class="allCaps">NOTES</span></p>
+								
+								<table class="list">
+								<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <a href="#2_2_4_3_1_1_1">children instance property</a></td></tr>
+								</table>
+							</div>
+						</div>
+					</div>
+					
+					<a name="2_2_4_3_2"></a>
+					<h5 class="heading5" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.3. Disambiguating Links to Sections With the Same Title -&gt; 2.2.4.3.2. Section Title Aliases and Square Brackets Links"><span class="headingNumber"><a href="#2" title="2. Document Sections">2</a>.<a href="#2_2" title="2. Document Sections -&gt; 2.2. Section Title Aliases">2</a>.<a href="#2_2_4" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases">4</a>.<a href="#2_2_4_3" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.3. Disambiguating Links to Sections With the Same Title">3</a>.<a href="#2_2_4_3_2" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.3. Disambiguating Links to Sections With the Same Title -&gt; 2.2.4.3.2. Section Title Aliases and Square Brackets Links">2</a>. </span>Section Title Aliases and Square Brackets Links</h5>
+					<div class="contents5">
+						<p>Using the <a href="#7_2">square brackets</a> syntax for links, it is possible to link ambiguous display titles using unambiguous <a href="#2_2">section title aliases</a>.</p>
+						
+						<p><span class="allCaps">EXAMPLE</span></p>
+						
+						
+<pre class="sample-code">Instance Properties
+  children ~~ children Instance Property
+    Documentation for the children instance property.
+
+    NOTES
+    - see the companion [[children set-get property][children]] set-get property
+
+Set-get Properties
+  children ~~ children Set-get Property
+    Documentation for the children set-get property.
+
+    NOTES
+    - see the companion [[children instance property][children]] instance property
+</pre>
+						
+						<p>In the above example, two sections have the same display title. In each section, we're cross-linking to the other section, but only linking the ambiguous display title in each case. We accomplish this by using the <a href="#7_2">square brackets</a> syntax for links and specifying the unambiguous <a href="#2_2">section title aliases</a> as the link part and the ambiguous section titles as the linked text part.</p>
+						
+						<a name="2_2_4_3_2_1"></a>
+						<h5 class="heading6" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.3. Disambiguating Links to Sections With the Same Title -&gt; 2.2.4.3.2. Section Title Aliases and Square Brackets Links -&gt; 2.2.4.3.2.1. HOW IT LOOKS"><span class="headingNumber"><a href="#2" title="2. Document Sections">2</a>.<a href="#2_2" title="2. Document Sections -&gt; 2.2. Section Title Aliases">2</a>.<a href="#2_2_4" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases">4</a>.<a href="#2_2_4_3" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.3. Disambiguating Links to Sections With the Same Title">3</a>.<a href="#2_2_4_3_2" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.3. Disambiguating Links to Sections With the Same Title -&gt; 2.2.4.3.2. Section Title Aliases and Square Brackets Links">2</a>.<a href="#2_2_4_3_2_1" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.3. Disambiguating Links to Sections With the Same Title -&gt; 2.2.4.3.2. Section Title Aliases and Square Brackets Links -&gt; 2.2.4.3.2.1. HOW IT LOOKS">1</a>. </span>HOW IT LOOKS</h5>
+						<div class="contents6">
+							<a name="2_2_4_3_2_1_1"></a>
+							<h5 class="heading7" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.3. Disambiguating Links to Sections With the Same Title -&gt; 2.2.4.3.2. Section Title Aliases and Square Brackets Links -&gt; 2.2.4.3.2.1. HOW IT LOOKS -&gt; 2.2.4.3.2.1.1. Instance Properties"><span class="headingNumber"><a href="#2" title="2. Document Sections">2</a>.<a href="#2_2" title="2. Document Sections -&gt; 2.2. Section Title Aliases">2</a>.<a href="#2_2_4" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases">4</a>.<a href="#2_2_4_3" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.3. Disambiguating Links to Sections With the Same Title">3</a>.<a href="#2_2_4_3_2" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.3. Disambiguating Links to Sections With the Same Title -&gt; 2.2.4.3.2. Section Title Aliases and Square Brackets Links">2</a>.<a href="#2_2_4_3_2_1" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.3. Disambiguating Links to Sections With the Same Title -&gt; 2.2.4.3.2. Section Title Aliases and Square Brackets Links -&gt; 2.2.4.3.2.1. HOW IT LOOKS">1</a>.<a href="#2_2_4_3_2_1_1" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.3. Disambiguating Links to Sections With the Same Title -&gt; 2.2.4.3.2. Section Title Aliases and Square Brackets Links -&gt; 2.2.4.3.2.1. HOW IT LOOKS -&gt; 2.2.4.3.2.1.1. Instance Properties">1</a>. </span>Instance Properties</h5>
+							<div class="contents7">
+								<a name="2_2_4_3_2_1_1_1"></a>
+								<h5 class="heading8" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.3. Disambiguating Links to Sections With the Same Title -&gt; 2.2.4.3.2. Section Title Aliases and Square Brackets Links -&gt; 2.2.4.3.2.1. HOW IT LOOKS -&gt; 2.2.4.3.2.1.1. Instance Properties -&gt; 2.2.4.3.2.1.1.1. children"><span class="headingNumber"><a href="#2" title="2. Document Sections">2</a>.<a href="#2_2" title="2. Document Sections -&gt; 2.2. Section Title Aliases">2</a>.<a href="#2_2_4" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases">4</a>.<a href="#2_2_4_3" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.3. Disambiguating Links to Sections With the Same Title">3</a>.<a href="#2_2_4_3_2" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.3. Disambiguating Links to Sections With the Same Title -&gt; 2.2.4.3.2. Section Title Aliases and Square Brackets Links">2</a>.<a href="#2_2_4_3_2_1" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.3. Disambiguating Links to Sections With the Same Title -&gt; 2.2.4.3.2. Section Title Aliases and Square Brackets Links -&gt; 2.2.4.3.2.1. HOW IT LOOKS">1</a>.<a href="#2_2_4_3_2_1_1" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.3. Disambiguating Links to Sections With the Same Title -&gt; 2.2.4.3.2. Section Title Aliases and Square Brackets Links -&gt; 2.2.4.3.2.1. HOW IT LOOKS -&gt; 2.2.4.3.2.1.1. Instance Properties">1</a>.<a href="#2_2_4_3_2_1_1_1" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.3. Disambiguating Links to Sections With the Same Title -&gt; 2.2.4.3.2. Section Title Aliases and Square Brackets Links -&gt; 2.2.4.3.2.1. HOW IT LOOKS -&gt; 2.2.4.3.2.1.1. Instance Properties -&gt; 2.2.4.3.2.1.1.1. children">1</a>. </span>children</h5>
+								<div class="contents8">
+									<p>Documentation for the children instance property.</p>
+									
+									<p><span class="allCaps">NOTES</span></p>
+									
+									<table class="list">
+									<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <a href="#2_2_4_3_2_1_2_1">children</a> set-get property</td></tr>
+									</table>
+								</div>
+							</div>
+							
+							<a name="2_2_4_3_2_1_2"></a>
+							<h5 class="heading7" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.3. Disambiguating Links to Sections With the Same Title -&gt; 2.2.4.3.2. Section Title Aliases and Square Brackets Links -&gt; 2.2.4.3.2.1. HOW IT LOOKS -&gt; 2.2.4.3.2.1.2. Set-get Properties"><span class="headingNumber"><a href="#2" title="2. Document Sections">2</a>.<a href="#2_2" title="2. Document Sections -&gt; 2.2. Section Title Aliases">2</a>.<a href="#2_2_4" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases">4</a>.<a href="#2_2_4_3" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.3. Disambiguating Links to Sections With the Same Title">3</a>.<a href="#2_2_4_3_2" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.3. Disambiguating Links to Sections With the Same Title -&gt; 2.2.4.3.2. Section Title Aliases and Square Brackets Links">2</a>.<a href="#2_2_4_3_2_1" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.3. Disambiguating Links to Sections With the Same Title -&gt; 2.2.4.3.2. Section Title Aliases and Square Brackets Links -&gt; 2.2.4.3.2.1. HOW IT LOOKS">1</a>.<a href="#2_2_4_3_2_1_2" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.3. Disambiguating Links to Sections With the Same Title -&gt; 2.2.4.3.2. Section Title Aliases and Square Brackets Links -&gt; 2.2.4.3.2.1. HOW IT LOOKS -&gt; 2.2.4.3.2.1.2. Set-get Properties">2</a>. </span>Set-get Properties</h5>
+							<div class="contents7">
+								<a name="2_2_4_3_2_1_2_1"></a>
+								<h5 class="heading8" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.3. Disambiguating Links to Sections With the Same Title -&gt; 2.2.4.3.2. Section Title Aliases and Square Brackets Links -&gt; 2.2.4.3.2.1. HOW IT LOOKS -&gt; 2.2.4.3.2.1.2. Set-get Properties -&gt; 2.2.4.3.2.1.2.1. children"><span class="headingNumber"><a href="#2" title="2. Document Sections">2</a>.<a href="#2_2" title="2. Document Sections -&gt; 2.2. Section Title Aliases">2</a>.<a href="#2_2_4" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases">4</a>.<a href="#2_2_4_3" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.3. Disambiguating Links to Sections With the Same Title">3</a>.<a href="#2_2_4_3_2" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.3. Disambiguating Links to Sections With the Same Title -&gt; 2.2.4.3.2. Section Title Aliases and Square Brackets Links">2</a>.<a href="#2_2_4_3_2_1" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.3. Disambiguating Links to Sections With the Same Title -&gt; 2.2.4.3.2. Section Title Aliases and Square Brackets Links -&gt; 2.2.4.3.2.1. HOW IT LOOKS">1</a>.<a href="#2_2_4_3_2_1_2" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.3. Disambiguating Links to Sections With the Same Title -&gt; 2.2.4.3.2. Section Title Aliases and Square Brackets Links -&gt; 2.2.4.3.2.1. HOW IT LOOKS -&gt; 2.2.4.3.2.1.2. Set-get Properties">2</a>.<a href="#2_2_4_3_2_1_2_1" title="2. Document Sections -&gt; 2.2. Section Title Aliases -&gt; 2.2.4. Use Cases For Section Title Aliases -&gt; 2.2.4.3. Disambiguating Links to Sections With the Same Title -&gt; 2.2.4.3.2. Section Title Aliases and Square Brackets Links -&gt; 2.2.4.3.2.1. HOW IT LOOKS -&gt; 2.2.4.3.2.1.2. Set-get Properties -&gt; 2.2.4.3.2.1.2.1. children">1</a>. </span>children</h5>
+								<div class="contents8">
+									<p>Documentation for the children set-get property.</p>
+									
+									<p><span class="allCaps">NOTES</span></p>
+									
+									<table class="list">
+									<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <a href="#2_2_4_3_2_1_1_1">children</a> instance property</td></tr>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -1353,12 +1713,64 @@ WHAT YOU CAN'T DO INSIDE SAMPLE CODE BLOCKS
 			</div>
 			
 			<a name="7_4_4"></a>
-			<h3 class="heading3" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations"><span class="headingNumber"><a href="#7" title="7. Links">7</a>.<a href="#7_4" title="7. Links -&gt; 7.4. Links to Sections">4</a>.<a href="#7_4_4" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations">4</a>. </span>Considerations</h3>
+			<h3 class="heading3" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Linking Using Section Title Aliases"><span class="headingNumber"><a href="#7" title="7. Links">7</a>.<a href="#7_4" title="7. Links -&gt; 7.4. Links to Sections">4</a>.<a href="#7_4_4" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Linking Using Section Title Aliases">4</a>. </span>Linking Using Section Title Aliases</h3>
+			<div class="contents3">
+				<p>Linking to sections using <a href="#2_2">section title aliases</a> is handled in the exact same manner as for the regular section titles that don't have aliases.</p>
+				
+				<p>So, if a <a href="#2_2">section title alias</a> is defined for a section, then you can link to the section using the alias in any one of the supported linking styles, such as the <a href="#7_1">backticks</a> syntax or the <a href="#7_2">square brackets</a> syntax. Consider the following example...</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">The Section ~~ The Section Title Alias
+  This is a section that has a section title alias.
+
+Some Other Section
+  Here are some links to `the section`, using the section title alias of the section...
+
+  - Backticks (case preserved) - `The Section Title Alias`
+  - Backticks (case differs) - `the section title alias`
+  - Square Brackets (case preserved) - [[The Section Title Alias]]
+  - Square Brackets (case differs) - [[THE SECTION TITLE ALIAS]]
+  - Square Brackets (with alternate linked text) - [[The Section Title Alias][LINK TEXT]]
+  - Inline Code (case preserved) - =The Section Title Alias=
+  - Inline Code (case differs) - =the section title alias=
+</pre>
+				
+				<a name="7_4_4_1"></a>
+				<h4 class="heading4" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Linking Using Section Title Aliases -&gt; 7.4.4.1. HOW IT LOOKS"><span class="headingNumber"><a href="#7" title="7. Links">7</a>.<a href="#7_4" title="7. Links -&gt; 7.4. Links to Sections">4</a>.<a href="#7_4_4" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Linking Using Section Title Aliases">4</a>.<a href="#7_4_4_1" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Linking Using Section Title Aliases -&gt; 7.4.4.1. HOW IT LOOKS">1</a>. </span>HOW IT LOOKS</h4>
+				<div class="contents4">
+					<a name="7_4_4_1_1"></a>
+					<h5 class="heading5" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Linking Using Section Title Aliases -&gt; 7.4.4.1. HOW IT LOOKS -&gt; 7.4.4.1.1. The Section"><span class="headingNumber"><a href="#7" title="7. Links">7</a>.<a href="#7_4" title="7. Links -&gt; 7.4. Links to Sections">4</a>.<a href="#7_4_4" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Linking Using Section Title Aliases">4</a>.<a href="#7_4_4_1" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Linking Using Section Title Aliases -&gt; 7.4.4.1. HOW IT LOOKS">1</a>.<a href="#7_4_4_1_1" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Linking Using Section Title Aliases -&gt; 7.4.4.1. HOW IT LOOKS -&gt; 7.4.4.1.1. The Section">1</a>. </span>The Section</h5>
+					<div class="contents5">
+						<p>This is a section that has a section title alias.</p>
+					</div>
+					
+					<a name="7_4_4_1_2"></a>
+					<h5 class="heading5" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Linking Using Section Title Aliases -&gt; 7.4.4.1. HOW IT LOOKS -&gt; 7.4.4.1.2. Some Other Section"><span class="headingNumber"><a href="#7" title="7. Links">7</a>.<a href="#7_4" title="7. Links -&gt; 7.4. Links to Sections">4</a>.<a href="#7_4_4" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Linking Using Section Title Aliases">4</a>.<a href="#7_4_4_1" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Linking Using Section Title Aliases -&gt; 7.4.4.1. HOW IT LOOKS">1</a>.<a href="#7_4_4_1_2" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Linking Using Section Title Aliases -&gt; 7.4.4.1. HOW IT LOOKS -&gt; 7.4.4.1.2. Some Other Section">2</a>. </span>Some Other Section</h5>
+					<div class="contents5">
+						<p>Here are some links to <a href="#7_4_4_1_1">the section</a>, using the section title alias of the section...</p>
+						
+						<table class="list">
+						<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Backticks (case preserved) - <a href="#7_4_4_1_1">The Section Title Alias</a></td></tr>
+						<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Backticks (case differs) - <a href="#7_4_4_1_1">the section title alias</a></td></tr>
+						<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Square Brackets (case preserved) - <a href="#7_4_4_1_1">The Section Title Alias</a></td></tr>
+						<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Square Brackets (case differs) - <a href="#7_4_4_1_1">THE SECTION TITLE ALIAS</a></td></tr>
+						<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Square Brackets (with alternate linked text) - <a href="#7_4_4_1_1">LINK TEXT</a></td></tr>
+						<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Inline Code (case preserved) - <code><a href="#7_4_4_1_1">The Section Title Alias</a></code></td></tr>
+						<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Inline Code (case differs) - <code><a href="#7_4_4_1_1">the section title alias</a></code></td></tr>
+						</table>
+					</div>
+				</div>
+			</div>
+			
+			<a name="7_4_5"></a>
+			<h3 class="heading3" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations"><span class="headingNumber"><a href="#7" title="7. Links">7</a>.<a href="#7_4" title="7. Links -&gt; 7.4. Links to Sections">4</a>.<a href="#7_4_5" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations">5</a>. </span>Linking Considerations</h3>
 			<div class="contents3">
 				<p>There are a number of considerations that should be kept in mind when doing section linking in SimpleDoc documents.</p>
 				
-				<a name="7_4_4_1"></a>
-				<h4 class="heading4" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations -&gt; 7.4.4.1. Linking to the Nearest of Same Named Sections"><span class="headingNumber"><a href="#7" title="7. Links">7</a>.<a href="#7_4" title="7. Links -&gt; 7.4. Links to Sections">4</a>.<a href="#7_4_4" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations">4</a>.<a href="#7_4_4_1" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations -&gt; 7.4.4.1. Linking to the Nearest of Same Named Sections">1</a>. </span>Linking to the Nearest of Same Named Sections</h4>
+				<a name="7_4_5_1"></a>
+				<h4 class="heading4" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.1. Linking to the Nearest of Same Named Sections"><span class="headingNumber"><a href="#7" title="7. Links">7</a>.<a href="#7_4" title="7. Links -&gt; 7.4. Links to Sections">4</a>.<a href="#7_4_5" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations">5</a>.<a href="#7_4_5_1" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.1. Linking to the Nearest of Same Named Sections">1</a>. </span>Linking to the Nearest of Same Named Sections</h4>
 				<div class="contents4">
 					<p>When multiple sections share the same name, auto linked text links to the one of those same named sections that is nearest to the link.</p>
 					
@@ -1388,61 +1800,61 @@ MyClass.bar
 					
 					<p>You can see how this works below, where you'll notice that the links to the "Parameters" sections automatically do what you'd expect of them...</p>
 					
-					<p><span class="allCaps">HOW IT LOOKS</span></p>
-					
-					<hr class="thick"/>
-					<a name="7_4_4_1_1"></a>
-					<h5 class="heading5" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations -&gt; 7.4.4.1. Linking to the Nearest of Same Named Sections -&gt; 7.4.4.1.1. MyClass.foo"><span class="headingNumber"><a href="#7" title="7. Links">7</a>.<a href="#7_4" title="7. Links -&gt; 7.4. Links to Sections">4</a>.<a href="#7_4_4" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations">4</a>.<a href="#7_4_4_1" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations -&gt; 7.4.4.1. Linking to the Nearest of Same Named Sections">1</a>.<a href="#7_4_4_1_1" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations -&gt; 7.4.4.1. Linking to the Nearest of Same Named Sections -&gt; 7.4.4.1.1. MyClass.foo">1</a>. </span>MyClass.foo</h5>
+					<a name="7_4_5_1_1"></a>
+					<h5 class="heading5" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.1. Linking to the Nearest of Same Named Sections -&gt; 7.4.5.1.1. HOW IT LOOKS"><span class="headingNumber"><a href="#7" title="7. Links">7</a>.<a href="#7_4" title="7. Links -&gt; 7.4. Links to Sections">4</a>.<a href="#7_4_5" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations">5</a>.<a href="#7_4_5_1" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.1. Linking to the Nearest of Same Named Sections">1</a>.<a href="#7_4_5_1_1" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.1. Linking to the Nearest of Same Named Sections -&gt; 7.4.5.1.1. HOW IT LOOKS">1</a>. </span>HOW IT LOOKS</h5>
 					<div class="contents5">
-						<a name="7_4_4_1_1_1"></a>
-						<h5 class="heading6" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations -&gt; 7.4.4.1. Linking to the Nearest of Same Named Sections -&gt; 7.4.4.1.1. MyClass.foo -&gt; 7.4.4.1.1.1. Parameters"><span class="headingNumber"><a href="#7" title="7. Links">7</a>.<a href="#7_4" title="7. Links -&gt; 7.4. Links to Sections">4</a>.<a href="#7_4_4" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations">4</a>.<a href="#7_4_4_1" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations -&gt; 7.4.4.1. Linking to the Nearest of Same Named Sections">1</a>.<a href="#7_4_4_1_1" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations -&gt; 7.4.4.1. Linking to the Nearest of Same Named Sections -&gt; 7.4.4.1.1. MyClass.foo">1</a>.<a href="#7_4_4_1_1_1" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations -&gt; 7.4.4.1. Linking to the Nearest of Same Named Sections -&gt; 7.4.4.1.1. MyClass.foo -&gt; 7.4.4.1.1.1. Parameters">1</a>. </span>Parameters</h5>
+						<a name="7_4_5_1_1_1"></a>
+						<h5 class="heading6" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.1. Linking to the Nearest of Same Named Sections -&gt; 7.4.5.1.1. HOW IT LOOKS -&gt; 7.4.5.1.1.1. MyClass.foo"><span class="headingNumber"><a href="#7" title="7. Links">7</a>.<a href="#7_4" title="7. Links -&gt; 7.4. Links to Sections">4</a>.<a href="#7_4_5" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations">5</a>.<a href="#7_4_5_1" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.1. Linking to the Nearest of Same Named Sections">1</a>.<a href="#7_4_5_1_1" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.1. Linking to the Nearest of Same Named Sections -&gt; 7.4.5.1.1. HOW IT LOOKS">1</a>.<a href="#7_4_5_1_1_1" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.1. Linking to the Nearest of Same Named Sections -&gt; 7.4.5.1.1. HOW IT LOOKS -&gt; 7.4.5.1.1.1. MyClass.foo">1</a>. </span>MyClass.foo</h5>
 						<div class="contents6">
-							<p>This section describes the parameters for the <code><a href="#7_4_4_1_1">MyClass.foo</a></code> method.</p>
+							<a name="7_4_5_1_1_1_1"></a>
+							<h5 class="heading7" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.1. Linking to the Nearest of Same Named Sections -&gt; 7.4.5.1.1. HOW IT LOOKS -&gt; 7.4.5.1.1.1. MyClass.foo -&gt; 7.4.5.1.1.1.1. Parameters"><span class="headingNumber"><a href="#7" title="7. Links">7</a>.<a href="#7_4" title="7. Links -&gt; 7.4. Links to Sections">4</a>.<a href="#7_4_5" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations">5</a>.<a href="#7_4_5_1" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.1. Linking to the Nearest of Same Named Sections">1</a>.<a href="#7_4_5_1_1" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.1. Linking to the Nearest of Same Named Sections -&gt; 7.4.5.1.1. HOW IT LOOKS">1</a>.<a href="#7_4_5_1_1_1" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.1. Linking to the Nearest of Same Named Sections -&gt; 7.4.5.1.1. HOW IT LOOKS -&gt; 7.4.5.1.1.1. MyClass.foo">1</a>.<a href="#7_4_5_1_1_1_1" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.1. Linking to the Nearest of Same Named Sections -&gt; 7.4.5.1.1. HOW IT LOOKS -&gt; 7.4.5.1.1.1. MyClass.foo -&gt; 7.4.5.1.1.1.1. Parameters">1</a>. </span>Parameters</h5>
+							<div class="contents7">
+								<p>This section describes the parameters for the <code><a href="#7_4_5_1_1_1">MyClass.foo</a></code> method.</p>
+							</div>
+							
+							<a name="7_4_5_1_1_1_2"></a>
+							<h5 class="heading7" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.1. Linking to the Nearest of Same Named Sections -&gt; 7.4.5.1.1. HOW IT LOOKS -&gt; 7.4.5.1.1.1. MyClass.foo -&gt; 7.4.5.1.1.1.2. In-depth"><span class="headingNumber"><a href="#7" title="7. Links">7</a>.<a href="#7_4" title="7. Links -&gt; 7.4. Links to Sections">4</a>.<a href="#7_4_5" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations">5</a>.<a href="#7_4_5_1" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.1. Linking to the Nearest of Same Named Sections">1</a>.<a href="#7_4_5_1_1" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.1. Linking to the Nearest of Same Named Sections -&gt; 7.4.5.1.1. HOW IT LOOKS">1</a>.<a href="#7_4_5_1_1_1" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.1. Linking to the Nearest of Same Named Sections -&gt; 7.4.5.1.1. HOW IT LOOKS -&gt; 7.4.5.1.1.1. MyClass.foo">1</a>.<a href="#7_4_5_1_1_1_2" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.1. Linking to the Nearest of Same Named Sections -&gt; 7.4.5.1.1. HOW IT LOOKS -&gt; 7.4.5.1.1.1. MyClass.foo -&gt; 7.4.5.1.1.1.2. In-depth">2</a>. </span>In-depth</h5>
+							<div class="contents7">
+								<p>For a refresher, refer back to the <a href="#7_4_5_1_1_1_1">Parameters</a> section.</p>
+							</div>
 						</div>
 						
-						<a name="7_4_4_1_1_2"></a>
-						<h5 class="heading6" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations -&gt; 7.4.4.1. Linking to the Nearest of Same Named Sections -&gt; 7.4.4.1.1. MyClass.foo -&gt; 7.4.4.1.1.2. In-depth"><span class="headingNumber"><a href="#7" title="7. Links">7</a>.<a href="#7_4" title="7. Links -&gt; 7.4. Links to Sections">4</a>.<a href="#7_4_4" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations">4</a>.<a href="#7_4_4_1" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations -&gt; 7.4.4.1. Linking to the Nearest of Same Named Sections">1</a>.<a href="#7_4_4_1_1" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations -&gt; 7.4.4.1. Linking to the Nearest of Same Named Sections -&gt; 7.4.4.1.1. MyClass.foo">1</a>.<a href="#7_4_4_1_1_2" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations -&gt; 7.4.4.1. Linking to the Nearest of Same Named Sections -&gt; 7.4.4.1.1. MyClass.foo -&gt; 7.4.4.1.1.2. In-depth">2</a>. </span>In-depth</h5>
+						<a name="7_4_5_1_1_2"></a>
+						<h5 class="heading6" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.1. Linking to the Nearest of Same Named Sections -&gt; 7.4.5.1.1. HOW IT LOOKS -&gt; 7.4.5.1.1.2. MyClass.bar"><span class="headingNumber"><a href="#7" title="7. Links">7</a>.<a href="#7_4" title="7. Links -&gt; 7.4. Links to Sections">4</a>.<a href="#7_4_5" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations">5</a>.<a href="#7_4_5_1" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.1. Linking to the Nearest of Same Named Sections">1</a>.<a href="#7_4_5_1_1" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.1. Linking to the Nearest of Same Named Sections -&gt; 7.4.5.1.1. HOW IT LOOKS">1</a>.<a href="#7_4_5_1_1_2" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.1. Linking to the Nearest of Same Named Sections -&gt; 7.4.5.1.1. HOW IT LOOKS -&gt; 7.4.5.1.1.2. MyClass.bar">2</a>. </span>MyClass.bar</h5>
 						<div class="contents6">
-							<p>For a refresher, refer back to the <a href="#7_4_4_1_1_1">Parameters</a> section.</p>
+							<a name="7_4_5_1_1_2_1"></a>
+							<h5 class="heading7" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.1. Linking to the Nearest of Same Named Sections -&gt; 7.4.5.1.1. HOW IT LOOKS -&gt; 7.4.5.1.1.2. MyClass.bar -&gt; 7.4.5.1.1.2.1. Parameters"><span class="headingNumber"><a href="#7" title="7. Links">7</a>.<a href="#7_4" title="7. Links -&gt; 7.4. Links to Sections">4</a>.<a href="#7_4_5" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations">5</a>.<a href="#7_4_5_1" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.1. Linking to the Nearest of Same Named Sections">1</a>.<a href="#7_4_5_1_1" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.1. Linking to the Nearest of Same Named Sections -&gt; 7.4.5.1.1. HOW IT LOOKS">1</a>.<a href="#7_4_5_1_1_2" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.1. Linking to the Nearest of Same Named Sections -&gt; 7.4.5.1.1. HOW IT LOOKS -&gt; 7.4.5.1.1.2. MyClass.bar">2</a>.<a href="#7_4_5_1_1_2_1" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.1. Linking to the Nearest of Same Named Sections -&gt; 7.4.5.1.1. HOW IT LOOKS -&gt; 7.4.5.1.1.2. MyClass.bar -&gt; 7.4.5.1.1.2.1. Parameters">1</a>. </span>Parameters</h5>
+							<div class="contents7">
+								<p>This section describes the parameters for the <code><a href="#7_4_5_1_1_2">MyClass.bar</a></code> method.</p>
+							</div>
+							
+							<a name="7_4_5_1_1_2_2"></a>
+							<h5 class="heading7" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.1. Linking to the Nearest of Same Named Sections -&gt; 7.4.5.1.1. HOW IT LOOKS -&gt; 7.4.5.1.1.2. MyClass.bar -&gt; 7.4.5.1.1.2.2. In-depth"><span class="headingNumber"><a href="#7" title="7. Links">7</a>.<a href="#7_4" title="7. Links -&gt; 7.4. Links to Sections">4</a>.<a href="#7_4_5" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations">5</a>.<a href="#7_4_5_1" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.1. Linking to the Nearest of Same Named Sections">1</a>.<a href="#7_4_5_1_1" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.1. Linking to the Nearest of Same Named Sections -&gt; 7.4.5.1.1. HOW IT LOOKS">1</a>.<a href="#7_4_5_1_1_2" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.1. Linking to the Nearest of Same Named Sections -&gt; 7.4.5.1.1. HOW IT LOOKS -&gt; 7.4.5.1.1.2. MyClass.bar">2</a>.<a href="#7_4_5_1_1_2_2" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.1. Linking to the Nearest of Same Named Sections -&gt; 7.4.5.1.1. HOW IT LOOKS -&gt; 7.4.5.1.1.2. MyClass.bar -&gt; 7.4.5.1.1.2.2. In-depth">2</a>. </span>In-depth</h5>
+							<div class="contents7">
+								<p>For a refresher, refer back to the <a href="#7_4_5_1_1_2_1">Parameters</a> section.</p>
+							</div>
 						</div>
 					</div>
 					
-					<a name="7_4_4_1_2"></a>
-					<h5 class="heading5" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations -&gt; 7.4.4.1. Linking to the Nearest of Same Named Sections -&gt; 7.4.4.1.2. MyClass.bar"><span class="headingNumber"><a href="#7" title="7. Links">7</a>.<a href="#7_4" title="7. Links -&gt; 7.4. Links to Sections">4</a>.<a href="#7_4_4" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations">4</a>.<a href="#7_4_4_1" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations -&gt; 7.4.4.1. Linking to the Nearest of Same Named Sections">1</a>.<a href="#7_4_4_1_2" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations -&gt; 7.4.4.1. Linking to the Nearest of Same Named Sections -&gt; 7.4.4.1.2. MyClass.bar">2</a>. </span>MyClass.bar</h5>
+					<a name="7_4_5_1_2"></a>
+					<h5 class="heading5" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.1. Linking to the Nearest of Same Named Sections -&gt; 7.4.5.1.2. Ambiguities Can Still Arise"><span class="headingNumber"><a href="#7" title="7. Links">7</a>.<a href="#7_4" title="7. Links -&gt; 7.4. Links to Sections">4</a>.<a href="#7_4_5" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations">5</a>.<a href="#7_4_5_1" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.1. Linking to the Nearest of Same Named Sections">1</a>.<a href="#7_4_5_1_2" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.1. Linking to the Nearest of Same Named Sections -&gt; 7.4.5.1.2. Ambiguities Can Still Arise">2</a>. </span>Ambiguities Can Still Arise</h5>
 					<div class="contents5">
-						<a name="7_4_4_1_2_1"></a>
-						<h5 class="heading6" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations -&gt; 7.4.4.1. Linking to the Nearest of Same Named Sections -&gt; 7.4.4.1.2. MyClass.bar -&gt; 7.4.4.1.2.1. Parameters"><span class="headingNumber"><a href="#7" title="7. Links">7</a>.<a href="#7_4" title="7. Links -&gt; 7.4. Links to Sections">4</a>.<a href="#7_4_4" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations">4</a>.<a href="#7_4_4_1" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations -&gt; 7.4.4.1. Linking to the Nearest of Same Named Sections">1</a>.<a href="#7_4_4_1_2" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations -&gt; 7.4.4.1. Linking to the Nearest of Same Named Sections -&gt; 7.4.4.1.2. MyClass.bar">2</a>.<a href="#7_4_4_1_2_1" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations -&gt; 7.4.4.1. Linking to the Nearest of Same Named Sections -&gt; 7.4.4.1.2. MyClass.bar -&gt; 7.4.4.1.2.1. Parameters">1</a>. </span>Parameters</h5>
-						<div class="contents6">
-							<p>This section describes the parameters for the <code><a href="#7_4_4_1_2">MyClass.bar</a></code> method.</p>
-						</div>
-						
-						<a name="7_4_4_1_2_2"></a>
-						<h5 class="heading6" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations -&gt; 7.4.4.1. Linking to the Nearest of Same Named Sections -&gt; 7.4.4.1.2. MyClass.bar -&gt; 7.4.4.1.2.2. In-depth"><span class="headingNumber"><a href="#7" title="7. Links">7</a>.<a href="#7_4" title="7. Links -&gt; 7.4. Links to Sections">4</a>.<a href="#7_4_4" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations">4</a>.<a href="#7_4_4_1" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations -&gt; 7.4.4.1. Linking to the Nearest of Same Named Sections">1</a>.<a href="#7_4_4_1_2" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations -&gt; 7.4.4.1. Linking to the Nearest of Same Named Sections -&gt; 7.4.4.1.2. MyClass.bar">2</a>.<a href="#7_4_4_1_2_2" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations -&gt; 7.4.4.1. Linking to the Nearest of Same Named Sections -&gt; 7.4.4.1.2. MyClass.bar -&gt; 7.4.4.1.2.2. In-depth">2</a>. </span>In-depth</h5>
-						<div class="contents6">
-							<p>For a refresher, refer back to the <a href="#7_4_4_1_2_1">Parameters</a> section.</p>
-						</div>
-					</div>
-					
-					<hr class="thick"/>
-					<a name="7_4_4_1_3"></a>
-					<h5 class="heading5" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations -&gt; 7.4.4.1. Linking to the Nearest of Same Named Sections -&gt; 7.4.4.1.3. Ambiguities Can Still Arise"><span class="headingNumber"><a href="#7" title="7. Links">7</a>.<a href="#7_4" title="7. Links -&gt; 7.4. Links to Sections">4</a>.<a href="#7_4_4" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations">4</a>.<a href="#7_4_4_1" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations -&gt; 7.4.4.1. Linking to the Nearest of Same Named Sections">1</a>.<a href="#7_4_4_1_3" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations -&gt; 7.4.4.1. Linking to the Nearest of Same Named Sections -&gt; 7.4.4.1.3. Ambiguities Can Still Arise">3</a>. </span>Ambiguities Can Still Arise</h5>
-					<div class="contents5">
-						<p>Even with the smart behavior of <a href="#7_4_4_1">linking to the nearest of same named sections</a> when multiple sections share the same name, ambiguities can still arise that are not resolved correctly.</p>
+						<p>Even with the smart behavior of <a href="#7_4_5_1">linking to the nearest of same named sections</a> when multiple sections share the same name, ambiguities can still arise that are not resolved correctly.</p>
 						
 						<p>In the rare occasions where the automagic handling of same named sections in section linking does <b>not</b> produce the intended linking, the only guaranteed way around this is to use unique headings for these problem cases - there is currently no way to explicitly disambiguate individual links.</p>
 					</div>
 				</div>
 				
-				<a name="7_4_4_2"></a>
-				<h4 class="heading4" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations -&gt; 7.4.4.2. Whitespace Considerations"><span class="headingNumber"><a href="#7" title="7. Links">7</a>.<a href="#7_4" title="7. Links -&gt; 7.4. Links to Sections">4</a>.<a href="#7_4_4" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations">4</a>.<a href="#7_4_4_2" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations -&gt; 7.4.4.2. Whitespace Considerations">2</a>. </span>Whitespace Considerations</h4>
+				<a name="7_4_5_2"></a>
+				<h4 class="heading4" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.2. Whitespace Considerations"><span class="headingNumber"><a href="#7" title="7. Links">7</a>.<a href="#7_4" title="7. Links -&gt; 7.4. Links to Sections">4</a>.<a href="#7_4_5" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations">5</a>.<a href="#7_4_5_2" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.2. Whitespace Considerations">2</a>. </span>Whitespace Considerations</h4>
 				<div class="contents4">
 					<p>When specifying the section that your text should link to, avoid having any leading or trailing spaces in the section title.</p>
 					
 					<p>Additionally, whitespace separating words in the section title you specify should match the whitespace separating words in the actual heading of the section you're trying to link to.</p>
 				</div>
 				
-				<a name="7_4_4_3"></a>
-				<h4 class="heading4" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations -&gt; 7.4.4.3. Section Linking is Case-insensitive"><span class="headingNumber"><a href="#7" title="7. Links">7</a>.<a href="#7_4" title="7. Links -&gt; 7.4. Links to Sections">4</a>.<a href="#7_4_4" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations">4</a>.<a href="#7_4_4_3" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations -&gt; 7.4.4.3. Section Linking is Case-insensitive">3</a>. </span>Section Linking is Case-insensitive</h4>
+				<a name="7_4_5_3"></a>
+				<h4 class="heading4" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.3. Section Linking is Case-insensitive"><span class="headingNumber"><a href="#7" title="7. Links">7</a>.<a href="#7_4" title="7. Links -&gt; 7.4. Links to Sections">4</a>.<a href="#7_4_5" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations">5</a>.<a href="#7_4_5_3" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.3. Section Linking is Case-insensitive">3</a>. </span>Section Linking is Case-insensitive</h4>
 				<div class="contents4">
 					<p><a href="#7_4">Links to sections</a> in SimpleDoc documents are case insensitive, which allows linked section names to be used more naturally in sentences.</p>
 					
@@ -1466,32 +1878,32 @@ The Second Section
 					
 					<p>You can see how this works below, where you'll notice that all the links to the first section work as desired, even though they all have different case, and two of the section links don't match the real case of the first section's heading.</p>
 					
-					<p><span class="allCaps">HOW IT LOOKS</span></p>
-					
-					<hr class="thick"/>
-					<a name="7_4_4_3_1"></a>
-					<h5 class="heading5" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations -&gt; 7.4.4.3. Section Linking is Case-insensitive -&gt; 7.4.4.3.1. The First Section"><span class="headingNumber"><a href="#7" title="7. Links">7</a>.<a href="#7_4" title="7. Links -&gt; 7.4. Links to Sections">4</a>.<a href="#7_4_4" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations">4</a>.<a href="#7_4_4_3" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations -&gt; 7.4.4.3. Section Linking is Case-insensitive">3</a>.<a href="#7_4_4_3_1" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations -&gt; 7.4.4.3. Section Linking is Case-insensitive -&gt; 7.4.4.3.1. The First Section">1</a>. </span>The First Section</h5>
+					<a name="7_4_5_3_1"></a>
+					<h5 class="heading5" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.3. Section Linking is Case-insensitive -&gt; 7.4.5.3.1. HOW IT LOOKS"><span class="headingNumber"><a href="#7" title="7. Links">7</a>.<a href="#7_4" title="7. Links -&gt; 7.4. Links to Sections">4</a>.<a href="#7_4_5" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations">5</a>.<a href="#7_4_5_3" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.3. Section Linking is Case-insensitive">3</a>.<a href="#7_4_5_3_1" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.3. Section Linking is Case-insensitive -&gt; 7.4.5.3.1. HOW IT LOOKS">1</a>. </span>HOW IT LOOKS</h5>
 					<div class="contents5">
-						<p>Here is some profound (or not) stuff inside the first section.</p>
-					</div>
-					
-					<a name="7_4_4_3_2"></a>
-					<h5 class="heading5" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations -&gt; 7.4.4.3. Section Linking is Case-insensitive -&gt; 7.4.4.3.2. The Second Section"><span class="headingNumber"><a href="#7" title="7. Links">7</a>.<a href="#7_4" title="7. Links -&gt; 7.4. Links to Sections">4</a>.<a href="#7_4_4" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations">4</a>.<a href="#7_4_4_3" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations -&gt; 7.4.4.3. Section Linking is Case-insensitive">3</a>.<a href="#7_4_4_3_2" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations -&gt; 7.4.4.3. Section Linking is Case-insensitive -&gt; 7.4.4.3.2. The Second Section">2</a>. </span>The Second Section</h5>
-					<div class="contents5">
-						<p>Here are some links to the first section, using different case...</p>
+						<a name="7_4_5_3_1_1"></a>
+						<h5 class="heading6" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.3. Section Linking is Case-insensitive -&gt; 7.4.5.3.1. HOW IT LOOKS -&gt; 7.4.5.3.1.1. The First Section"><span class="headingNumber"><a href="#7" title="7. Links">7</a>.<a href="#7_4" title="7. Links -&gt; 7.4. Links to Sections">4</a>.<a href="#7_4_5" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations">5</a>.<a href="#7_4_5_3" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.3. Section Linking is Case-insensitive">3</a>.<a href="#7_4_5_3_1" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.3. Section Linking is Case-insensitive -&gt; 7.4.5.3.1. HOW IT LOOKS">1</a>.<a href="#7_4_5_3_1_1" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.3. Section Linking is Case-insensitive -&gt; 7.4.5.3.1. HOW IT LOOKS -&gt; 7.4.5.3.1.1. The First Section">1</a>. </span>The First Section</h5>
+						<div class="contents6">
+							<p>Here is some profound (or not) stuff inside the first section.</p>
+						</div>
 						
-						<table class="list">
-						<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>This is a link to <a href="#7_4_4_3_1">the first section</a> (using all lowercase).</td></tr>
-						<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>This is a link to <a href="#7_4_4_3_1">The First Section</a> (using the section's real case).</td></tr>
-						<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>This is a link to <a href="#7_4_4_3_1">THE FIRST SECTION</a> (using all uppercase).</td></tr>
-						</table>
+						<a name="7_4_5_3_1_2"></a>
+						<h5 class="heading6" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.3. Section Linking is Case-insensitive -&gt; 7.4.5.3.1. HOW IT LOOKS -&gt; 7.4.5.3.1.2. The Second Section"><span class="headingNumber"><a href="#7" title="7. Links">7</a>.<a href="#7_4" title="7. Links -&gt; 7.4. Links to Sections">4</a>.<a href="#7_4_5" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations">5</a>.<a href="#7_4_5_3" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.3. Section Linking is Case-insensitive">3</a>.<a href="#7_4_5_3_1" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.3. Section Linking is Case-insensitive -&gt; 7.4.5.3.1. HOW IT LOOKS">1</a>.<a href="#7_4_5_3_1_2" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.3. Section Linking is Case-insensitive -&gt; 7.4.5.3.1. HOW IT LOOKS -&gt; 7.4.5.3.1.2. The Second Section">2</a>. </span>The Second Section</h5>
+						<div class="contents6">
+							<p>Here are some links to the first section, using different case...</p>
+							
+							<table class="list">
+							<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>This is a link to <a href="#7_4_5_3_1_1">the first section</a> (using all lowercase).</td></tr>
+							<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>This is a link to <a href="#7_4_5_3_1_1">The First Section</a> (using the section's real case).</td></tr>
+							<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>This is a link to <a href="#7_4_5_3_1_1">THE FIRST SECTION</a> (using all uppercase).</td></tr>
+							</table>
+						</div>
 					</div>
 					
-					<hr class="thick"/>
-					<a name="7_4_4_3_3"></a>
-					<h5 class="heading5" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations -&gt; 7.4.4.3. Section Linking is Case-insensitive -&gt; 7.4.4.3.3. Exact Case Matches Take Priority"><span class="headingNumber"><a href="#7" title="7. Links">7</a>.<a href="#7_4" title="7. Links -&gt; 7.4. Links to Sections">4</a>.<a href="#7_4_4" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations">4</a>.<a href="#7_4_4_3" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations -&gt; 7.4.4.3. Section Linking is Case-insensitive">3</a>.<a href="#7_4_4_3_3" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations -&gt; 7.4.4.3. Section Linking is Case-insensitive -&gt; 7.4.4.3.3. Exact Case Matches Take Priority">3</a>. </span>Exact Case Matches Take Priority</h5>
+					<a name="7_4_5_3_2"></a>
+					<h5 class="heading5" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.3. Section Linking is Case-insensitive -&gt; 7.4.5.3.2. Exact Case Matches Take Priority"><span class="headingNumber"><a href="#7" title="7. Links">7</a>.<a href="#7_4" title="7. Links -&gt; 7.4. Links to Sections">4</a>.<a href="#7_4_5" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations">5</a>.<a href="#7_4_5_3" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.3. Section Linking is Case-insensitive">3</a>.<a href="#7_4_5_3_2" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.3. Section Linking is Case-insensitive -&gt; 7.4.5.3.2. Exact Case Matches Take Priority">2</a>. </span>Exact Case Matches Take Priority</h5>
 					<div class="contents5">
-						<p>When a document contains multiple sections that are named the same but are only different in their case, exact case matches take priority with any links to those sections - even taking priority over the behavior of <a href="#7_4_4_1">linking to the nearest of same named sections</a>.</p>
+						<p>When a document contains multiple sections that are named the same but are only different in their case, exact case matches take priority with any links to those sections - even taking priority over the behavior of <a href="#7_4_5_1">linking to the nearest of same named sections</a>.</p>
 						
 						<p>Matching the section title specified in a section link to an actual section in the document is done using a two phase approach, with a first attempt at matching the specified section title to a section's actual heading done in a case sensitive way, and with a fallback to performing a case-insensitive match. The benefit to the two phase matching approach, rather than always just doing a case-insensitive match, is that the system can still support situations where case may be important - where different sections that you may wish to link to have headings that are the same except for their case.</p>
 						
@@ -1515,56 +1927,56 @@ Instance Properties
     - compare to the =INITIALIZED= constant
 </pre>
 						
-						<p>You can see how this works below, where you'll notice that the cross-referencing links between the reference for the constant and the instance property work as desired - even though <a href="#7_4_4_3">section linking is case-insensitive</a>. And, clearly the behavior of <a href="#7_4_4_1">linking to the nearest of same named sections</a> is taking a back seat, or the links in the NOTES sections would just link straight to the sections containing them.</p>
+						<p>You can see how this works below, where you'll notice that the cross-referencing links between the reference for the constant and the instance property work as desired - even though <a href="#7_4_5_3">section linking is case-insensitive</a>. And, clearly the behavior of <a href="#7_4_5_1">linking to the nearest of same named sections</a> is taking a back seat, or the links in the NOTES sections would just link straight to the sections containing them.</p>
 						
-						<p><span class="allCaps">HOW IT LOOKS...</span></p>
-						
-						<hr class="thick"/>
-						<a name="7_4_4_3_3_1"></a>
-						<h5 class="heading6" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations -&gt; 7.4.4.3. Section Linking is Case-insensitive -&gt; 7.4.4.3.3. Exact Case Matches Take Priority -&gt; 7.4.4.3.3.1. Constants"><span class="headingNumber"><a href="#7" title="7. Links">7</a>.<a href="#7_4" title="7. Links -&gt; 7.4. Links to Sections">4</a>.<a href="#7_4_4" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations">4</a>.<a href="#7_4_4_3" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations -&gt; 7.4.4.3. Section Linking is Case-insensitive">3</a>.<a href="#7_4_4_3_3" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations -&gt; 7.4.4.3. Section Linking is Case-insensitive -&gt; 7.4.4.3.3. Exact Case Matches Take Priority">3</a>.<a href="#7_4_4_3_3_1" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations -&gt; 7.4.4.3. Section Linking is Case-insensitive -&gt; 7.4.4.3.3. Exact Case Matches Take Priority -&gt; 7.4.4.3.3.1. Constants">1</a>. </span>Constants</h5>
+						<a name="7_4_5_3_2_1"></a>
+						<h5 class="heading6" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.3. Section Linking is Case-insensitive -&gt; 7.4.5.3.2. Exact Case Matches Take Priority -&gt; 7.4.5.3.2.1. HOW IT LOOKS"><span class="headingNumber"><a href="#7" title="7. Links">7</a>.<a href="#7_4" title="7. Links -&gt; 7.4. Links to Sections">4</a>.<a href="#7_4_5" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations">5</a>.<a href="#7_4_5_3" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.3. Section Linking is Case-insensitive">3</a>.<a href="#7_4_5_3_2" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.3. Section Linking is Case-insensitive -&gt; 7.4.5.3.2. Exact Case Matches Take Priority">2</a>.<a href="#7_4_5_3_2_1" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.3. Section Linking is Case-insensitive -&gt; 7.4.5.3.2. Exact Case Matches Take Priority -&gt; 7.4.5.3.2.1. HOW IT LOOKS">1</a>. </span>HOW IT LOOKS</h5>
 						<div class="contents6">
-							<a name="7_4_4_3_3_1_1"></a>
-							<h5 class="heading7" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations -&gt; 7.4.4.3. Section Linking is Case-insensitive -&gt; 7.4.4.3.3. Exact Case Matches Take Priority -&gt; 7.4.4.3.3.1. Constants -&gt; 7.4.4.3.3.1.1. INITIALIZED"><span class="headingNumber"><a href="#7" title="7. Links">7</a>.<a href="#7_4" title="7. Links -&gt; 7.4. Links to Sections">4</a>.<a href="#7_4_4" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations">4</a>.<a href="#7_4_4_3" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations -&gt; 7.4.4.3. Section Linking is Case-insensitive">3</a>.<a href="#7_4_4_3_3" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations -&gt; 7.4.4.3. Section Linking is Case-insensitive -&gt; 7.4.4.3.3. Exact Case Matches Take Priority">3</a>.<a href="#7_4_4_3_3_1" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations -&gt; 7.4.4.3. Section Linking is Case-insensitive -&gt; 7.4.4.3.3. Exact Case Matches Take Priority -&gt; 7.4.4.3.3.1. Constants">1</a>.<a href="#7_4_4_3_3_1_1" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations -&gt; 7.4.4.3. Section Linking is Case-insensitive -&gt; 7.4.4.3.3. Exact Case Matches Take Priority -&gt; 7.4.4.3.3.1. Constants -&gt; 7.4.4.3.3.1.1. INITIALIZED">1</a>. </span>INITIALIZED</h5>
+							<a name="7_4_5_3_2_1_1"></a>
+							<h5 class="heading7" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.3. Section Linking is Case-insensitive -&gt; 7.4.5.3.2. Exact Case Matches Take Priority -&gt; 7.4.5.3.2.1. HOW IT LOOKS -&gt; 7.4.5.3.2.1.1. Constants"><span class="headingNumber"><a href="#7" title="7. Links">7</a>.<a href="#7_4" title="7. Links -&gt; 7.4. Links to Sections">4</a>.<a href="#7_4_5" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations">5</a>.<a href="#7_4_5_3" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.3. Section Linking is Case-insensitive">3</a>.<a href="#7_4_5_3_2" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.3. Section Linking is Case-insensitive -&gt; 7.4.5.3.2. Exact Case Matches Take Priority">2</a>.<a href="#7_4_5_3_2_1" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.3. Section Linking is Case-insensitive -&gt; 7.4.5.3.2. Exact Case Matches Take Priority -&gt; 7.4.5.3.2.1. HOW IT LOOKS">1</a>.<a href="#7_4_5_3_2_1_1" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.3. Section Linking is Case-insensitive -&gt; 7.4.5.3.2. Exact Case Matches Take Priority -&gt; 7.4.5.3.2.1. HOW IT LOOKS -&gt; 7.4.5.3.2.1.1. Constants">1</a>. </span>Constants</h5>
 							<div class="contents7">
-								<p>This is the reference for the constant.</p>
-								
-								<p><span class="allCaps">NOTES</span></p>
-								
-								<table class="list">
-								<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#7_4_4_3_3_2_1">initialized</a></code> instance property</td></tr>
-								</table>
+								<a name="7_4_5_3_2_1_1_1"></a>
+								<h5 class="heading8" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.3. Section Linking is Case-insensitive -&gt; 7.4.5.3.2. Exact Case Matches Take Priority -&gt; 7.4.5.3.2.1. HOW IT LOOKS -&gt; 7.4.5.3.2.1.1. Constants -&gt; 7.4.5.3.2.1.1.1. INITIALIZED"><span class="headingNumber"><a href="#7" title="7. Links">7</a>.<a href="#7_4" title="7. Links -&gt; 7.4. Links to Sections">4</a>.<a href="#7_4_5" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations">5</a>.<a href="#7_4_5_3" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.3. Section Linking is Case-insensitive">3</a>.<a href="#7_4_5_3_2" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.3. Section Linking is Case-insensitive -&gt; 7.4.5.3.2. Exact Case Matches Take Priority">2</a>.<a href="#7_4_5_3_2_1" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.3. Section Linking is Case-insensitive -&gt; 7.4.5.3.2. Exact Case Matches Take Priority -&gt; 7.4.5.3.2.1. HOW IT LOOKS">1</a>.<a href="#7_4_5_3_2_1_1" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.3. Section Linking is Case-insensitive -&gt; 7.4.5.3.2. Exact Case Matches Take Priority -&gt; 7.4.5.3.2.1. HOW IT LOOKS -&gt; 7.4.5.3.2.1.1. Constants">1</a>.<a href="#7_4_5_3_2_1_1_1" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.3. Section Linking is Case-insensitive -&gt; 7.4.5.3.2. Exact Case Matches Take Priority -&gt; 7.4.5.3.2.1. HOW IT LOOKS -&gt; 7.4.5.3.2.1.1. Constants -&gt; 7.4.5.3.2.1.1.1. INITIALIZED">1</a>. </span>INITIALIZED</h5>
+								<div class="contents8">
+									<p>This is the reference for the constant.</p>
+									
+									<p><span class="allCaps">NOTES</span></p>
+									
+									<table class="list">
+									<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#7_4_5_3_2_1_2_1">initialized</a></code> instance property</td></tr>
+									</table>
+								</div>
+							</div>
+							
+							<a name="7_4_5_3_2_1_2"></a>
+							<h5 class="heading7" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.3. Section Linking is Case-insensitive -&gt; 7.4.5.3.2. Exact Case Matches Take Priority -&gt; 7.4.5.3.2.1. HOW IT LOOKS -&gt; 7.4.5.3.2.1.2. Instance Properties"><span class="headingNumber"><a href="#7" title="7. Links">7</a>.<a href="#7_4" title="7. Links -&gt; 7.4. Links to Sections">4</a>.<a href="#7_4_5" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations">5</a>.<a href="#7_4_5_3" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.3. Section Linking is Case-insensitive">3</a>.<a href="#7_4_5_3_2" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.3. Section Linking is Case-insensitive -&gt; 7.4.5.3.2. Exact Case Matches Take Priority">2</a>.<a href="#7_4_5_3_2_1" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.3. Section Linking is Case-insensitive -&gt; 7.4.5.3.2. Exact Case Matches Take Priority -&gt; 7.4.5.3.2.1. HOW IT LOOKS">1</a>.<a href="#7_4_5_3_2_1_2" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.3. Section Linking is Case-insensitive -&gt; 7.4.5.3.2. Exact Case Matches Take Priority -&gt; 7.4.5.3.2.1. HOW IT LOOKS -&gt; 7.4.5.3.2.1.2. Instance Properties">2</a>. </span>Instance Properties</h5>
+							<div class="contents7">
+								<a name="7_4_5_3_2_1_2_1"></a>
+								<h5 class="heading8" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.3. Section Linking is Case-insensitive -&gt; 7.4.5.3.2. Exact Case Matches Take Priority -&gt; 7.4.5.3.2.1. HOW IT LOOKS -&gt; 7.4.5.3.2.1.2. Instance Properties -&gt; 7.4.5.3.2.1.2.1. initialized"><span class="headingNumber"><a href="#7" title="7. Links">7</a>.<a href="#7_4" title="7. Links -&gt; 7.4. Links to Sections">4</a>.<a href="#7_4_5" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations">5</a>.<a href="#7_4_5_3" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.3. Section Linking is Case-insensitive">3</a>.<a href="#7_4_5_3_2" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.3. Section Linking is Case-insensitive -&gt; 7.4.5.3.2. Exact Case Matches Take Priority">2</a>.<a href="#7_4_5_3_2_1" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.3. Section Linking is Case-insensitive -&gt; 7.4.5.3.2. Exact Case Matches Take Priority -&gt; 7.4.5.3.2.1. HOW IT LOOKS">1</a>.<a href="#7_4_5_3_2_1_2" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.3. Section Linking is Case-insensitive -&gt; 7.4.5.3.2. Exact Case Matches Take Priority -&gt; 7.4.5.3.2.1. HOW IT LOOKS -&gt; 7.4.5.3.2.1.2. Instance Properties">2</a>.<a href="#7_4_5_3_2_1_2_1" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Linking Considerations -&gt; 7.4.5.3. Section Linking is Case-insensitive -&gt; 7.4.5.3.2. Exact Case Matches Take Priority -&gt; 7.4.5.3.2.1. HOW IT LOOKS -&gt; 7.4.5.3.2.1.2. Instance Properties -&gt; 7.4.5.3.2.1.2.1. initialized">1</a>. </span>initialized</h5>
+								<div class="contents8">
+									<p>This is the reference for the instance property.</p>
+									
+									<p><span class="allCaps">NOTES</span></p>
+									
+									<table class="list">
+									<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#7_4_5_3_2_1_1_1">INITIALIZED</a></code> constant</td></tr>
+									</table>
+								</div>
 							</div>
 						</div>
 						
-						<a name="7_4_4_3_3_2"></a>
-						<h5 class="heading6" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations -&gt; 7.4.4.3. Section Linking is Case-insensitive -&gt; 7.4.4.3.3. Exact Case Matches Take Priority -&gt; 7.4.4.3.3.2. Instance Properties"><span class="headingNumber"><a href="#7" title="7. Links">7</a>.<a href="#7_4" title="7. Links -&gt; 7.4. Links to Sections">4</a>.<a href="#7_4_4" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations">4</a>.<a href="#7_4_4_3" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations -&gt; 7.4.4.3. Section Linking is Case-insensitive">3</a>.<a href="#7_4_4_3_3" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations -&gt; 7.4.4.3. Section Linking is Case-insensitive -&gt; 7.4.4.3.3. Exact Case Matches Take Priority">3</a>.<a href="#7_4_4_3_3_2" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations -&gt; 7.4.4.3. Section Linking is Case-insensitive -&gt; 7.4.4.3.3. Exact Case Matches Take Priority -&gt; 7.4.4.3.3.2. Instance Properties">2</a>. </span>Instance Properties</h5>
-						<div class="contents6">
-							<a name="7_4_4_3_3_2_1"></a>
-							<h5 class="heading7" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations -&gt; 7.4.4.3. Section Linking is Case-insensitive -&gt; 7.4.4.3.3. Exact Case Matches Take Priority -&gt; 7.4.4.3.3.2. Instance Properties -&gt; 7.4.4.3.3.2.1. initialized"><span class="headingNumber"><a href="#7" title="7. Links">7</a>.<a href="#7_4" title="7. Links -&gt; 7.4. Links to Sections">4</a>.<a href="#7_4_4" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations">4</a>.<a href="#7_4_4_3" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations -&gt; 7.4.4.3. Section Linking is Case-insensitive">3</a>.<a href="#7_4_4_3_3" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations -&gt; 7.4.4.3. Section Linking is Case-insensitive -&gt; 7.4.4.3.3. Exact Case Matches Take Priority">3</a>.<a href="#7_4_4_3_3_2" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations -&gt; 7.4.4.3. Section Linking is Case-insensitive -&gt; 7.4.4.3.3. Exact Case Matches Take Priority -&gt; 7.4.4.3.3.2. Instance Properties">2</a>.<a href="#7_4_4_3_3_2_1" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.4. Considerations -&gt; 7.4.4.3. Section Linking is Case-insensitive -&gt; 7.4.4.3.3. Exact Case Matches Take Priority -&gt; 7.4.4.3.3.2. Instance Properties -&gt; 7.4.4.3.3.2.1. initialized">1</a>. </span>initialized</h5>
-							<div class="contents7">
-								<p>This is the reference for the instance property.</p>
-								
-								<p><span class="allCaps">NOTES</span></p>
-								
-								<table class="list">
-								<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#7_4_4_3_3_1_1">INITIALIZED</a></code> constant</td></tr>
-								</table>
-							</div>
-						</div>
-						
-						<hr class="thick"/>
-						<p>And, of course, in the event that there are multiple sections whose names are exact case matches for a particular section link, then the actual section that is linked to will be determined by the behavior of <a href="#7_4_4_1">linking to the nearest of same named sections</a>. The same rule applies if there are no exact case matches but multiple case-insensitive matches.</p>
+						<p>And, of course, in the event that there are multiple sections whose names are exact case matches for a particular section link, then the actual section that is linked to will be determined by the behavior of <a href="#7_4_5_1">linking to the nearest of same named sections</a>. The same rule applies if there are no exact case matches but multiple case-insensitive matches.</p>
 					</div>
 				</div>
 			</div>
 			
-			<a name="7_4_5"></a>
-			<h3 class="heading3" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Dead Section Links"><span class="headingNumber"><a href="#7" title="7. Links">7</a>.<a href="#7_4" title="7. Links -&gt; 7.4. Links to Sections">4</a>.<a href="#7_4_5" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Dead Section Links">5</a>. </span>Dead Section Links</h3>
+			<a name="7_4_6"></a>
+			<h3 class="heading3" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.6. Dead Section Links"><span class="headingNumber"><a href="#7" title="7. Links">7</a>.<a href="#7_4" title="7. Links -&gt; 7.4. Links to Sections">4</a>.<a href="#7_4_6" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.6. Dead Section Links">6</a>. </span>Dead Section Links</h3>
 			<div class="contents3">
 				<p>For any section link that is not matched to a section in the document, the link's text is not linked or decorated (backticks and double square brackets are removed).</p>
 				
-				<a name="7_4_5_1"></a>
-				<h4 class="heading4" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Dead Section Links -&gt; 7.4.5.1. Example 1"><span class="headingNumber"><a href="#7" title="7. Links">7</a>.<a href="#7_4" title="7. Links -&gt; 7.4. Links to Sections">4</a>.<a href="#7_4_5" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Dead Section Links">5</a>.<a href="#7_4_5_1" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Dead Section Links -&gt; 7.4.5.1. Example 1">1</a>. </span>Example 1</h4>
+				<a name="7_4_6_1"></a>
+				<h4 class="heading4" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.6. Dead Section Links -&gt; 7.4.6.1. Example 1"><span class="headingNumber"><a href="#7" title="7. Links">7</a>.<a href="#7_4" title="7. Links -&gt; 7.4. Links to Sections">4</a>.<a href="#7_4_6" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.6. Dead Section Links">6</a>.<a href="#7_4_6_1" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.6. Dead Section Links -&gt; 7.4.6.1. Example 1">1</a>. </span>Example 1</h4>
 				<div class="contents4">
 					<p><span class="allCaps">SOURCE</span></p>
 					
@@ -1577,8 +1989,8 @@ Instance Properties
 					<p>For more info, see the section Non-existent Section.</p>
 				</div>
 				
-				<a name="7_4_5_2"></a>
-				<h4 class="heading4" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Dead Section Links -&gt; 7.4.5.2. Example 2"><span class="headingNumber"><a href="#7" title="7. Links">7</a>.<a href="#7_4" title="7. Links -&gt; 7.4. Links to Sections">4</a>.<a href="#7_4_5" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Dead Section Links">5</a>.<a href="#7_4_5_2" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Dead Section Links -&gt; 7.4.5.2. Example 2">2</a>. </span>Example 2</h4>
+				<a name="7_4_6_2"></a>
+				<h4 class="heading4" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.6. Dead Section Links -&gt; 7.4.6.2. Example 2"><span class="headingNumber"><a href="#7" title="7. Links">7</a>.<a href="#7_4" title="7. Links -&gt; 7.4. Links to Sections">4</a>.<a href="#7_4_6" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.6. Dead Section Links">6</a>.<a href="#7_4_6_2" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.6. Dead Section Links -&gt; 7.4.6.2. Example 2">2</a>. </span>Example 2</h4>
 				<div class="contents4">
 					<p><span class="allCaps">SOURCE</span></p>
 					
@@ -1591,8 +2003,8 @@ Instance Properties
 					<p>For more info, see the section Non-existent Section.</p>
 				</div>
 				
-				<a name="7_4_5_3"></a>
-				<h4 class="heading4" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Dead Section Links -&gt; 7.4.5.3. Example 3"><span class="headingNumber"><a href="#7" title="7. Links">7</a>.<a href="#7_4" title="7. Links -&gt; 7.4. Links to Sections">4</a>.<a href="#7_4_5" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Dead Section Links">5</a>.<a href="#7_4_5_3" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.5. Dead Section Links -&gt; 7.4.5.3. Example 3">3</a>. </span>Example 3</h4>
+				<a name="7_4_6_3"></a>
+				<h4 class="heading4" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.6. Dead Section Links -&gt; 7.4.6.3. Example 3"><span class="headingNumber"><a href="#7" title="7. Links">7</a>.<a href="#7_4" title="7. Links -&gt; 7.4. Links to Sections">4</a>.<a href="#7_4_6" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.6. Dead Section Links">6</a>.<a href="#7_4_6_3" title="7. Links -&gt; 7.4. Links to Sections -&gt; 7.4.6. Dead Section Links -&gt; 7.4.6.3. Example 3">3</a>. </span>Example 3</h4>
 				<div class="contents4">
 					<p><span class="allCaps">SOURCE</span></p>
 					

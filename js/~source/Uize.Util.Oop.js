@@ -13,10 +13,10 @@
 
 /* Module Meta Data
 	type: Class
-	importance: 8
-	codeCompleteness: 0
+	importance: 7
+	codeCompleteness: 80
 	testCompleteness: 0
-	docCompleteness: 0
+	docCompleteness: 10
 */
 
 /*?

@@ -91,7 +91,8 @@ Uize.module ({
 				_callback = _callback || Object;
 				var
 					_this = this,
-					_idPrefix = _this.get ('idPrefix')
+					_idPrefix = _this.get ('idPrefix'),
+					_window = window
 				;
 				function _mergeCopyInto (_targetObject,_sourceObject) {
 					var
@@ -115,14 +116,14 @@ Uize.module ({
 						_hasChildrenToAdopt = _false,
 						_childPropertiesPrefix = '$' + _idPrefix + '_',
 						_childPropertiesPrefixLength = _childPropertiesPrefix.length,
-						_propertyValue
+						_widgetProperties
 					;
-					for (var _propertyName in window) {
+					for (var _propertyName in _window) {
 						if (
 							_propertyName.charAt (0) == '$' && /* reduce impact of this feature with quick elimination */
 							_propertyName.substr (0,_childPropertiesPrefixLength) == _childPropertiesPrefix &&
-							typeof (_propertyValue = window [_propertyName]) == 'object' && _propertyValue &&
-							_propertyValue.widgetClass
+							typeof (_widgetProperties = _window [_propertyName]) == 'object' && _widgetProperties &&
+							_widgetProperties.widgetClass
 						) {
 							_hasChildrenToAdopt = _true;
 							for (
@@ -130,25 +131,23 @@ Uize.module ({
 									_widgetLevelNo = -1,
 									_levelChildren = _childrenToAdoptTree,
 									_widgetLevels = _propertyName.substr (_childPropertiesPrefixLength).split ('_'),
+									_widgetLevelName,
 									_widgetLevelsLength = _widgetLevels.length
 								;
 								++_widgetLevelNo < _widgetLevelsLength;
 							) {
-								var
-									_widgetLevelName = _widgetLevels [_widgetLevelNo],
-									_levelWidget = _levelChildren [_widgetLevelName]
-								;
+								var _levelWidget = _levelChildren [_widgetLevelName = _widgetLevels [_widgetLevelNo]];
 								if (_widgetLevelNo < _widgetLevelsLength - 1) {
-									if (!_levelWidget)
-										_levelWidget = _levelChildren [_widgetLevelName] = {}
+									_levelChildren =
+										(_levelWidget || (_levelWidget = _levelChildren [_widgetLevelName] = {})).children ||
+										(_levelWidget.children = {})
 									;
-									_levelChildren = _levelWidget.children || (_levelWidget.children = {});
 								} else {
 									_levelWidget
-										? _mergeCopyInto (_levelWidget,_propertyValue)
-										: (_levelChildren [_widgetLevelName] = _propertyValue)
+										? _mergeCopyInto (_levelWidget,_widgetProperties)
+										: (_levelChildren [_widgetLevelName] = _widgetProperties)
 									;
-									window [_propertyName] = _undefined;
+									_window [_propertyName] = _undefined;
 								}
 							}
 						}
@@ -191,29 +190,27 @@ Uize.module ({
 						Uize.module ({
 							required:_requiredModules,
 							builder:function () {
-								_traverseChildrenToAdoptTree (
-									function (_parent,_childName,_childProperties) {
-										var
-											_child = _parent.children [_childName],
-											_widgetClass = _childProperties.widgetClass || Uize.Widget
-										;
-										delete _childProperties.widgetClass;
-										delete _childProperties.children;
-										_child
-											? _child.set (_childProperties)
-											: (
+								_this.set ({children:_childrenToAdoptTree});
+
+								/*** recurse tree, adopting all widgets ***/
+									_traverseChildrenToAdoptTree (
+										function (_parent,_childName,_childProperties) {
+											var _child = _parent.children [_childName];
+											if (!_child) {
+												var _widgetClass = eval (_childProperties.widgetClass || 'Uize.Widget');
 												_child = _childName.charCodeAt (0) == 36 && _childName.charCodeAt (1) == 36
-													? eval (_widgetClass).spawn (_childProperties,_parent)
-													: _parent.addChild (_childName,eval (_widgetClass),_childProperties)
-											)
-										;
-										return _child;
-									},
-									_this.isWired ? function (_child) {Uize.callOn (_child,'insertOrWireUi')} : 0
-										/* NOTE:
-											Don't wire adopted child widgets if page widget isn't wired yet (this code could be executed before the page widget is wired if all modules required by adopted children are already loaded, and the builder for this anonymous module is executed immediately).
-										*/
-								);
+													? _widgetClass.spawn (_childProperties,_parent)
+													: _parent.addChild (_childName,_widgetClass)
+												;
+											}
+											return _child;
+										},
+										_this.isWired && function (_child) {Uize.callOn (_child,'insertOrWireUi')}
+											/* NOTE:
+												Don't wire adopted child widgets if page widget isn't wired yet (this code could be executed before the page widget is wired if all modules required by adopted children are already loaded, and the builder for this anonymous module is executed immediately).
+											*/
+									);
+
 								_callback ();
 							}
 						});

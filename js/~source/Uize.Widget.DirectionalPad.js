@@ -4,7 +4,7 @@
 |    /    O /   |    MODULE : Uize.Widget.DirectionalPad Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
-| /____/ /__/_| | COPYRIGHT : (c)2003-2011 UIZE
+| /____/ /__/_| | COPYRIGHT : (c)2005-2011 UIZE
 |          /___ |   LICENSE : Available under MIT License or GNU General Public License
 |_______________|             http://www.uize.com/license.html
 */
@@ -13,10 +13,10 @@
 
 /* Module Meta Data
 	type: Class
-	importance: 9
-	codeCompleteness: 0
+	importance: 1
+	codeCompleteness: 100
 	testCompleteness: 0
-	docCompleteness: 0
+	docCompleteness: 15
 */
 
 /*?
@@ -138,6 +138,7 @@ Uize.module ({
 						Set-get properties
 							mode
 								A string with (currently) two valid values: 'mini' or 'full'. 'mini' mode will only show the buttons controlling the four cardinal directions. 'full' mode will show all the buttons. =mode= is set to 'full' by default.
+
 							expanded
 								Inherited from =Uize.Widget=, =expanded= accepts a fourth value in addition to true, false, and 'inherit': an object with a format described below.
 

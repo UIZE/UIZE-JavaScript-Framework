@@ -1,5 +1,5 @@
 Introduction
-	The UIZE JavaScript Framework implements a system for building HTML from documentation that is written in a Wikitext like format called Simple Doc.
+	The UIZE JavaScript Framework implements a system for building HTML from documentation that is written in a Wikitext like format called SimpleDoc.
 
 	This document describes the SimpleDoc documentation system and its various formatting rules.
 
@@ -120,18 +120,173 @@ Document Sections
 	......................
 
 	HOW IT LOOKS
-	This is a Section
-		This is a Subsection
-			This is some text in the subsection. This is some text in the subsection. This is some text in the subsection. This is some text in the subsection. This is some text in the subsection. This is some text in the subsection. This is some text in the subsection. This is some text in the subsection. This is some text in the subsection. This is some text in the subsection. This is some text in the subsection. This is some text in the subsection.
+		This is a Section
+			This is a Subsection
+				This is some text in the subsection. This is some text in the subsection. This is some text in the subsection. This is some text in the subsection. This is some text in the subsection. This is some text in the subsection. This is some text in the subsection. This is some text in the subsection. This is some text in the subsection. This is some text in the subsection. This is some text in the subsection. This is some text in the subsection.
 
-		This is Another Subsection
-			This is Just Crazy
-				Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here.
+			This is Another Subsection
+				This is Just Crazy
+					Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here.
 
-				Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here.
+					Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here.
 
-			This is Just Even Crazier
-				Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here.
+				This is Just Even Crazier
+					Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here. Stuff inside here.
+
+	Section Title Aliases ~~ Section Title Alias
+		SimpleDoc provides an easy way to specify section title aliases for sections, where the aliases are not displayed but allow sections to be easily linked to by their aliases from other parts of the document.
+
+		Section Titles Can Have Multiple Aliases
+			Any number of section title aliases can be specified for a section, simply by placing the aliases on the same line as the section title, with all the aliases separated using the delimiter pattern of one or more consecutive "~" (tilde) characters surrounded by optional whitespace padding.
+
+			EXAMPLE
+			.........................................................................................
+			Example Section ~~ Alias 1 ~~ Alias 2 ~~ Alias N
+				This is some text in the section.
+
+			Some Other Section
+				Now link to the `example section` by its aliases: `alias 1`, `alias 2`, and `alias N`.
+			.........................................................................................
+
+			In the above example, the section "Example Section" has three section title aliases specified for it: "Alias 1", "Alias 2", and "Alias N". While only the "Example Section" portion will be displayed in the HTML document that is generated from the SimpleDoc document, the aliases can be used when linking to the section from other parts of the document, as can be seen in the first paragraph of the section "Some Other Section".
+
+			HOW IT LOOKS
+				Example Section ~~ Alias 1 ~~ Alias 2 ~~ Alias N
+					This is some text in the section.
+
+				Some Other Section
+					Now link to the `example section` by its aliases: `alias 1`, `alias 2`, and `alias N`.
+
+		Aliases Not Displayed
+			When `section title aliases` are specified for a section title, they are never displayed in the HTML document that is generated from a SimpleDoc document.
+
+			Only the first portion of the title - up until the first alias delimiter - is displayed.
+
+		Considerations When Linking Using Aliases
+			When using `section title aliases` to link to sections, all the same rules apply that would normally apply for displayed section titles.
+
+			This means that the same rules for case and whitespace apply and you should keep these in mind when linking using aliases. For more details, see the section `Linking Considerations`.
+
+		Use Cases For Section Title Aliases
+			`Section title aliases` can be useful in a number of real world situations, including `disambiguating links to sections with the same title`, `linking using opposite of singular or plural form`, and `linking using abbreviations or alternate forms`.
+
+			Linking Using Opposite of Singular or Plural Form
+				While you can generally just link to a section by using its title in a sentence with the `backticks` syntax for linking, sometimes a section's title is not in the desirable singular or plural form.
+
+				If a section's title is singular and you need to use a plural form in a sentence, or if a section's title is plural and you need to use a singular form in a sentence, then you can use the `section title aliases` feature to specify the alternate form as a section title alias.
+
+				EXAMPLE
+				.................................................................
+				Child Widgets ~~ Child Widget
+					Documentation explaining what child widgets are all about.
+
+				Some Other Section
+					For every `child widget` that one adds to a parent widget, ...
+				.................................................................
+
+				In the above example, "Child Widgets" is the desired display title for a section, but a sentence wishes to link to the section using a singular form that is grammatically correct in the context. While you could always use the `square brackets` syntax in this case, by specifying the section title as the section link and specifying the singular form as the linked text, this can become cumbersome if there are many sentences that would like to link to the section using the singular form. Instead, we specify the singular form as the section title alias for the section. Then we can use the more convenient `backticks` syntax with the singular form alias.
+
+				HOW IT LOOKS
+					Child Widgets ~~ Child Widget
+						Documentation explaining what child widgets are all about.
+
+					Some Other Section
+						For every `child widget` that one adds to a parent widget, ...
+
+			Linking Using Abbreviations or Alternate Forms
+				Similar to the case of `linking using opposite of singular or plural form`, it is sometimes desirable to link to a section with linked text that differs from the section's title.
+
+				Of course, you can always just use the `square brackets` syntax in such cases and specify the alternate form as the linked text, but the `section title aliases` feature makes it very easy to specify the alternate form as an alias for a section and then link to the section using the more convenient `backticks` syntax for linking.
+
+				EXAMPLE
+				..............................................................................
+				What is Ajax? ~~ Ajax
+					Ajax is a technology that has become a staple for Web 2.0 applications, ...
+
+				Developing Ajax Applications
+					In order to incorporate `Ajax` into one's Web applications, ...
+				..............................................................................
+
+				HOW IT LOOKS
+					What is Ajax? ~~ Ajax
+						Ajax is a technology that has become a staple for Web 2.0 applications, ...
+
+					Developing Ajax Applications
+						In order to incorporate `Ajax` into one's Web applications, ...
+
+			Disambiguating Links to Sections With the Same Title
+				When situations arise where multiple sections of a SimpleDoc document are to have the same display title, unique `section title aliases` can be specified for the different sections so that it is still possible to unambiguously link to the sections from other parts of the document.
+
+				EXAMPLE
+				......................................................
+				Instance Properties
+					children ~~ children Instance Property
+						Documentation for the children instance property.
+
+						NOTES
+						- see the companion `children set-get property`
+
+				Set-get Properties
+					children ~~ children Set-get Property
+						Documentation for the children set-get property.
+
+						NOTES
+						- see the companion `children instance property`
+				......................................................
+
+				In the above example, there are two sections with the display title "children" - one is for the instance property and the other is for the set-get property. Because the "children Instance Property" and "children Set-get Property" aliases are specified, it is possible for the sections to cross-link to each other, simply by enclosing the aliases in `backticks`.
+
+				HOW IT LOOKS
+					Instance Properties
+						children ~~ children Instance Property
+							Documentation for the children instance property.
+
+							NOTES
+							- see the companion `children set-get property`
+
+					Set-get Properties
+						children ~~ children Set-get Property
+							Documentation for the children set-get property.
+
+							NOTES
+							- see the companion `children instance property`
+
+				Section Title Aliases and Square Brackets Links
+					Using the `square brackets` syntax for links, it is possible to link ambiguous display titles using unambiguous `section title aliases`.
+
+					EXAMPLE
+					....................................................................................
+					Instance Properties
+						children ~~ children Instance Property
+							Documentation for the children instance property.
+
+							NOTES
+							- see the companion [[children set-get property][children]] set-get property
+
+					Set-get Properties
+						children ~~ children Set-get Property
+							Documentation for the children set-get property.
+
+							NOTES
+							- see the companion [[children instance property][children]] instance property
+					....................................................................................
+
+					In the above example, two sections have the same display title. In each section, we're cross-linking to the other section, but only linking the ambiguous display title in each case. We accomplish this by using the `square brackets` syntax for links and specifying the unambiguous `section title aliases` as the link part and the ambiguous section titles as the linked text part.
+
+					HOW IT LOOKS
+						Instance Properties
+							children ~~ children Instance Property
+								Documentation for the children instance property.
+
+								NOTES
+								- see the companion [[children set-get property][children]] set-get property
+
+						Set-get Properties
+							children ~~ children Set-get Property
+								Documentation for the children set-get property.
+
+								NOTES
+								- see the companion [[children instance property][children]] instance property
 
 Paragraphs
 	A paragraph is a line of text that is not a section heading, a list item, or a note heading.
@@ -769,7 +924,44 @@ Links
 			HOW IT LOOKS
 			Learn more about formatting for =Sample Code Blocks=
 
-		Considerations
+		Linking Using Section Title Aliases
+			Linking to sections using `section title aliases` is handled in the exact same manner as for the regular section titles that don't have aliases.
+
+			So, if a `section title alias` is defined for a section, then you can link to the section using the alias in any one of the supported linking styles, such as the `backticks` syntax or the `square brackets` syntax. Consider the following example...
+
+			EXAMPLE
+			............................................................................................
+			The Section ~~ The Section Title Alias
+				This is a section that has a section title alias.
+
+			Some Other Section
+				Here are some links to `the section`, using the section title alias of the section...
+
+				- Backticks (case preserved) - `The Section Title Alias`
+				- Backticks (case differs) - `the section title alias`
+				- Square Brackets (case preserved) - [[The Section Title Alias]]
+				- Square Brackets (case differs) - [[THE SECTION TITLE ALIAS]]
+				- Square Brackets (with alternate linked text) - [[The Section Title Alias][LINK TEXT]]
+				- Inline Code (case preserved) - =The Section Title Alias=
+				- Inline Code (case differs) - =the section title alias=
+			............................................................................................
+
+			HOW IT LOOKS
+				The Section ~~ The Section Title Alias
+					This is a section that has a section title alias.
+
+				Some Other Section
+					Here are some links to `the section`, using the section title alias of the section...
+
+					- Backticks (case preserved) - `The Section Title Alias`
+					- Backticks (case differs) - `the section title alias`
+					- Square Brackets (case preserved) - [[The Section Title Alias]]
+					- Square Brackets (case differs) - [[THE SECTION TITLE ALIAS]]
+					- Square Brackets (with alternate linked text) - [[The Section Title Alias][LINK TEXT]]
+					- Inline Code (case preserved) - =The Section Title Alias=
+					- Inline Code (case differs) - =the section title alias=
+
+		Linking Considerations
 			There are a number of considerations that should be kept in mind when doing section linking in SimpleDoc documents.
 
 			Linking to the Nearest of Same Named Sections
@@ -801,24 +993,19 @@ Links
 				You can see how this works below, where you'll notice that the links to the "Parameters" sections automatically do what you'd expect of them...
 
 				HOW IT LOOKS
+					MyClass.foo
+						Parameters
+							This section describes the parameters for the =MyClass.foo= method.
 
-				=========================================================================================================
+						In-depth
+							For a refresher, refer back to the `Parameters` section.
 
-				MyClass.foo
-					Parameters
-						This section describes the parameters for the =MyClass.foo= method.
+					MyClass.bar
+						Parameters
+							This section describes the parameters for the =MyClass.bar= method.
 
-					In-depth
-						For a refresher, refer back to the `Parameters` section.
-
-				MyClass.bar
-					Parameters
-						This section describes the parameters for the =MyClass.bar= method.
-
-					In-depth
-						For a refresher, refer back to the `Parameters` section.
-
-				=========================================================================================================
+						In-depth
+							For a refresher, refer back to the `Parameters` section.
 
 				Ambiguities Can Still Arise
 					Even with the smart behavior of `linking to the nearest of same named sections` when multiple sections share the same name, ambiguities can still arise that are not resolved correctly.
@@ -853,20 +1040,15 @@ Links
 				You can see how this works below, where you'll notice that all the links to the first section work as desired, even though they all have different case, and two of the section links don't match the real case of the first section's heading.
 
 				HOW IT LOOKS
+					The First Section
+						Here is some profound (or not) stuff inside the first section.
 
-				=========================================================================================================
+					The Second Section
+						Here are some links to the first section, using different case...
 
-				The First Section
-					Here is some profound (or not) stuff inside the first section.
-
-				The Second Section
-					Here are some links to the first section, using different case...
-
-					- This is a link to `the first section` (using all lowercase).
-					- This is a link to `The First Section` (using the section's real case).
-					- This is a link to `THE FIRST SECTION` (using all uppercase).
-
-				=========================================================================================================
+						- This is a link to `the first section` (using all lowercase).
+						- This is a link to `The First Section` (using the section's real case).
+						- This is a link to `THE FIRST SECTION` (using all uppercase).
 
 				Exact Case Matches Take Priority
 					When a document contains multiple sections that are named the same but are only different in their case, exact case matches take priority with any links to those sections - even taking priority over the behavior of `linking to the nearest of same named sections`.
@@ -894,25 +1076,20 @@ Links
 
 					You can see how this works below, where you'll notice that the cross-referencing links between the reference for the constant and the instance property work as desired - even though `section linking is case-insensitive`. And, clearly the behavior of `linking to the nearest of same named sections` is taking a back seat, or the links in the NOTES sections would just link straight to the sections containing them.
 
-					HOW IT LOOKS...
+					HOW IT LOOKS
+						Constants
+							INITIALIZED
+								This is the reference for the constant.
 
-					======================================================================================================
+								NOTES
+								- compare to the =initialized= instance property
 
-					Constants
-						INITIALIZED
-							This is the reference for the constant.
+						Instance Properties
+							initialized
+								This is the reference for the instance property.
 
-							NOTES
-							- compare to the =initialized= instance property
-
-					Instance Properties
-						initialized
-							This is the reference for the instance property.
-
-							NOTES
-							- compare to the =INITIALIZED= constant
-
-					======================================================================================================
+								NOTES
+								- compare to the =INITIALIZED= constant
 
 					And, of course, in the event that there are multiple sections whose names are exact case matches for a particular section link, then the actual section that is linked to will be determined by the behavior of `linking to the nearest of same named sections`. The same rule applies if there are no exact case matches but multiple case-insensitive matches.
 

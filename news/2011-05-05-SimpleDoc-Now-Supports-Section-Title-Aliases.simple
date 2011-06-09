@@ -1,0 +1,161 @@
+The SimpleDoc format, a  Wikitext like document format for easily writing structured documents, has added support for section title aliases.
+
+SimpleDoc provides an easy way to specify section title aliases for sections, where the aliases are not displayed but allow sections to be easily linked to by their aliases from other parts of the document.
+
+Section Titles Can Have Multiple Aliases
+	Any number of section title aliases can be specified for a section, simply by placing the aliases on the same line as the section title, with all the aliases separated using the delimiter pattern of one or more consecutive "~" (tilde) characters surrounded by optional whitespace padding.
+
+	EXAMPLE
+	.........................................................................................
+	Example Section ~~ Alias 1 ~~ Alias 2 ~~ Alias N
+		This is some text in the section.
+
+	Some Other Section
+		Now link to the `example section` by its aliases: `alias 1`, `alias 2`, and `alias N`.
+	.........................................................................................
+
+	In the above example, the section "Example Section" has three section title aliases specified for it: "Alias 1", "Alias 2", and "Alias N". While only the "Example Section" portion will be displayed in the HTML document that is generated from the SimpleDoc document, the aliases can be used when linking to the section from other parts of the document, as can be seen in the first paragraph of the section "Some Other Section".
+
+	HOW IT LOOKS
+		Example Section ~~ Alias 1 ~~ Alias 2 ~~ Alias N
+			This is some text in the section.
+
+		Some Other Section
+			Now link to the `example section` by its aliases: `alias 1`, `alias 2`, and `alias N`.
+
+Aliases Not Displayed
+	When `section title aliases` are specified for a section title, they are never displayed in the HTML document that is generated from a SimpleDoc document.
+
+	Only the first portion of the title - up until the first alias delimiter - is displayed.
+
+Considerations When Linking Using Aliases
+	When using `section title aliases` to link to sections, all the same rules apply that would normally apply for displayed section titles.
+
+	This means that the same rules for case and whitespace apply and you should keep these in mind when linking using aliases.
+
+Use Cases For Section Title Aliases
+	`Section title aliases` can be useful in a number of real world situations, including `disambiguating links to sections with the same title`, `linking using opposite of singular or plural form`, and `linking using abbreviations or alternate forms`.
+
+	Linking Using Opposite of Singular or Plural Form
+		While you can generally just link to a section by using its title in a sentence with the `backticks` syntax for linking, sometimes a section's title is not in the desirable singular or plural form.
+
+		If a section's title is singular and you need to use a plural form in a sentence, or if a section's title is plural and you need to use a singular form in a sentence, then you can use the `section title aliases` feature to specify the alternate form as a section title alias.
+
+		EXAMPLE
+		.................................................................
+		Child Widgets ~~ Child Widget
+			Documentation explaining what child widgets are all about.
+
+		Some Other Section
+			For every `child widget` that one adds to a parent widget, ...
+		.................................................................
+
+		In the above example, "Child Widgets" is the desired display title for a section, but a sentence wishes to link to the section using a singular form that is grammatically correct in the context. While you could always use the `square brackets` syntax in this case, by specifying the section title as the section link and specifying the singular form as the linked text, this can become cumbersome if there are many sentences that would like to link to the section using the singular form. Instead, we specify the singular form as the section title alias for the section. Then we can use the more convenient `backticks` syntax with the singular form alias.
+
+		HOW IT LOOKS
+			Child Widgets ~~ Child Widget
+				Documentation explaining what child widgets are all about.
+
+			Some Other Section
+				For every `child widget` that one adds to a parent widget, ...
+
+	Linking Using Abbreviations or Alternate Forms
+		Similar to the case of `linking using opposite of singular or plural form`, it is sometimes desirable to link to a section with linked text that differs from the section's title.
+
+		Of course, you can always just use the `square brackets` syntax in such cases and specify the alternate form as the linked text, but the `section title aliases` feature makes it very easy to specify the alternate form as an alias for a section and then link to the section using the more convenient `backticks` syntax for linking.
+
+		EXAMPLE
+		..............................................................................
+		What is Ajax? ~~ Ajax
+			Ajax is a technology that has become a staple for Web 2.0 applications, ...
+
+		Developing Ajax Applications
+			In order to incorporate `Ajax` into one's Web applications, ...
+		..............................................................................
+
+		HOW IT LOOKS
+			What is Ajax? ~~ Ajax
+				Ajax is a technology that has become a staple for Web 2.0 applications, ...
+
+			Developing Ajax Applications
+				In order to incorporate `Ajax` into one's Web applications, ...
+
+	Disambiguating Links to Sections With the Same Title
+		When situations arise where multiple sections of a SimpleDoc document are to have the same display title, unique `section title aliases` can be specified for the different sections so that it is still possible to unambiguously link to the sections from other parts of the document.
+
+		EXAMPLE
+		......................................................
+		Instance Properties
+			children ~~ children Instance Property
+				Documentation for the children instance property.
+
+				NOTES
+				- see the companion `children set-get property`
+
+		Set-get Properties
+			children ~~ children Set-get Property
+				Documentation for the children set-get property.
+
+				NOTES
+				- see the companion `children instance property`
+		......................................................
+
+		In the above example, there are two sections with the display title "children" - one is for the instance property and the other is for the set-get property. Because the "children Instance Property" and "children Set-get Property" aliases are specified, it is possible for the sections to cross-link to each other, simply by enclosing the aliases in `backticks`.
+
+		HOW IT LOOKS
+			Instance Properties
+				children ~~ children Instance Property
+					Documentation for the children instance property.
+
+					NOTES
+					- see the companion `children set-get property`
+
+			Set-get Properties
+				children ~~ children Set-get Property
+					Documentation for the children set-get property.
+
+					NOTES
+					- see the companion `children instance property`
+
+		Section Title Aliases and Square Brackets Links
+			Using the `square brackets` syntax for links, it is possible to link ambiguous display titles using unambiguous `section title aliases`.
+
+			EXAMPLE
+			....................................................................................
+			Instance Properties
+				children ~~ children Instance Property
+					Documentation for the children instance property.
+
+					NOTES
+					- see the companion [[children set-get property][children]] set-get property
+
+			Set-get Properties
+				children ~~ children Set-get Property
+					Documentation for the children set-get property.
+
+					NOTES
+					- see the companion [[children instance property][children]] instance property
+			....................................................................................
+
+			In the above example, two sections have the same display title. In each section, we're cross-linking to the other section, but only linking the ambiguous display title in each case. We accomplish this by using the `square brackets` syntax for links and specifying the unambiguous `section title aliases` as the link part and the ambiguous section titles as the linked text part.
+
+			HOW IT LOOKS
+				Instance Properties
+					children ~~ children Instance Property
+						Documentation for the children instance property.
+
+						NOTES
+						- see the companion [[children set-get property][children]] set-get property
+
+				Set-get Properties
+					children ~~ children Set-get Property
+						Documentation for the children set-get property.
+
+						NOTES
+						- see the companion [[children instance property][children]] instance property
+
+....................................................................................
+<< metadata >>
+
+title: 2011-05-05 - SimpleDoc Now Supports Section Title Aliases
+....................................................................................

@@ -59,7 +59,7 @@ Uize.module ({
          if (input.mobile) {
         output.push ('\r\n  &lt;link rel="stylesheet" href="../../css/widget.',_widgetName,'.widgetstogo.mobile.css"/&gt;');
          }
-        output.push ('\r\n&lt;/head&gt;\r\n\r\n&lt;body&gt;\r\n\r\n&lt;script type="text/javascript" src="../../js/Uize.js"&gt;&lt;/script&gt;\r\n\r\n&lt;script type="text/javascript"&gt;\r\n\r\nUize.module ({\r\n  required:[\r\n    \'UizeDotCom.WidgetToGoPage.',Uize.capFirstChar (_widgetName),'.library\',\r\n    \'UizeDotCom.WidgetToGoPage\'\r\n  ],\r\n  builder:function () {\r\n    (\r\n      window.page = new UizeDotCom.WidgetToGoPage ({\r\n        title:',Uize.Json.to (_widget.title),',\r\n        widgetClass:',Uize.Json.to (_widget.widgetClassModule),',\r\n        widgetHtml:',Uize.Json.to (_widget.widgetTemplateModule),'\r\n      })\r\n    ).wireUi ();\r\n  }\r\n});\r\n\r\n&lt;/script&gt;\r\n\r\n&lt;/body&gt;\r\n&lt;/html&gt;\r\n\r\n');
+        output.push ('\r\n&lt;/head&gt;\r\n\r\n&lt;body&gt;\r\n\r\n&lt;script type="text/javascript" src="../../js/Uize.js"&gt;&lt;/script&gt;\r\n\r\n&lt;script type="text/javascript"&gt;\r\n\r\nUize.module ({\r\n  required:[\r\n    \'UizeDotCom.WidgetToGoPage.',Uize.capFirstChar (_widgetName),'.library\',\r\n    \'UizeDotCom.WidgetToGoPage\'\r\n  ],\r\n  builder:function () {\r\n    (\r\n      window.page = new UizeDotCom.WidgetToGoPage ({\r\n        title:',Uize.Json.to (_widget.title),',\r\n        widgetToGoClass:',Uize.Json.to (_widget.widgetClassModule),',\r\n        widgetToGoHtml:',Uize.Json.to (_widget.widgetTemplateModule),'\r\n      })\r\n    ).wireUi ();\r\n  }\r\n});\r\n\r\n&lt;/script&gt;\r\n\r\n&lt;/body&gt;\r\n&lt;/html&gt;\r\n\r\n');
         return output.join ('');
       };
 

@@ -1,0 +1,23 @@
+More Uize Base Class Unit Tests
+	To help ensure the robustness and stability of the UIZE JavaScript Framework over time, more unit tests have been created for the =Uize= base class.
+
+	Event System Unit Tests
+		The powerful event system of the UIZE JavaScript Framework, implemented in the =Uize= base class, is now thoroughly unit tested.
+
+		This includes thorough unit tests for the =fire=, =wire=, and =unwire= instance methods, as well as the =Uize.fire=, =Uize.wire=, and =Uize.unwire= static methods.
+
+	Other Static Method Unit Tests
+		In addition to adding a thorough set of unit tests for the event system, unit tests have been added for the following static methods...
+
+		- =Uize.copyInto=
+		- =Uize.escapeRegExpLiteral=
+		- =Uize.recordMatches=
+		- =Uize.findRecordNo=
+		- =Uize.findRecord=
+		- =Uize.callOn=
+
+....................................................................................
+<< metadata >>
+
+title: 2011-05-31 - More Uize Base Class Unit Tests
+....................................................................................

@@ -7,7 +7,7 @@
 		<description>UIZE JavaScript Framework (AJAX, RIA, widgets, JSON, OOP, Class Inheritance, XMLHttpRequest, DOM manipulation, and all that stuff)</description>
 		<language>en-us</language>
 		<copyright>© 1996-2008 UIZE</copyright>
-		<pubDate>Wed, 13 Apr 2011 04:26:31 UT</pubDate>
+		<pubDate>Tue, 31 May 2011 09:26:08 UT</pubDate>
 		<ttl>10080</ttl>
 		<image>
 			<title>UIZE JavaScript Framework | Latest News</title>
@@ -18,6 +18,46 @@
 			<description>UIZE JavaScript Framework (AJAX, RIA, widgets, JSON, OOP, Class Inheritance, XMLHttpRequest, DOM manipulation, and all that stuff)</description>
 		</image>
 		<atom10:link xmlns:atom10="http://www.w3.org/2005/Atom" rel="self" href="http://www.uize.com/latest-news.rss" type="application/rss+xml" />
+		<item>
+			<title>2011-05-31 - More Uize Base Class Unit Tests</title>
+			<link>http://www.uize.com/news/2011-05-31-More-Uize-Base-Class-Unit-Tests.html</link>
+			<guid>http://www.uize.com/news/2011-05-31-More-Uize-Base-Class-Unit-Tests.html</guid>
+			<description>To help ensure the robustness and stability of the UIZE JavaScript Framework over time, more unit tests have been created for the Uize base class.</description>
+			<pubDate>Tue, 31 May 2011 07:00:00 UT</pubDate>
+			<feedburner:origLink>http://www.uize.com/news/2011-05-31-More-Uize-Base-Class-Unit-Tests.html</feedburner:origLink>
+		</item>
+		<item>
+			<title>2011-05-22 - Improved Uize.pairUp Method</title>
+			<link>http://www.uize.com/news/2011-05-22-Improved-Uize.pairUp-Method.html</link>
+			<guid>http://www.uize.com/news/2011-05-22-Improved-Uize.pairUp-Method.html</guid>
+			<description>The Uize.pairUp method, implemented in the Uize base class, has been improved with support for two new variations.</description>
+			<pubDate>Sun, 22 May 2011 07:00:00 UT</pubDate>
+			<feedburner:origLink>http://www.uize.com/news/2011-05-22-Improved-Uize.pairUp-Method.html</feedburner:origLink>
+		</item>
+		<item>
+			<title>2011-05-21 - JSON Serialization Improvements</title>
+			<link>http://www.uize.com/news/2011-05-21-JSON-Serialization-Improvements.html</link>
+			<guid>http://www.uize.com/news/2011-05-21-JSON-Serialization-Improvements.html</guid>
+			<description>The Uize.Json module has been improved with the addition of two convenient presets for serializing JavaScript objects to strict JSON format, according to the specification at json.org.</description>
+			<pubDate>Sat, 21 May 2011 07:00:00 UT</pubDate>
+			<feedburner:origLink>http://www.uize.com/news/2011-05-21-JSON-Serialization-Improvements.html</feedburner:origLink>
+		</item>
+		<item>
+			<title>2011-05-11 - Improved Declarative Widget Properties</title>
+			<link>http://www.uize.com/news/2011-05-11-Improved-Declarative-Widget-Properties.html</link>
+			<guid>http://www.uize.com/news/2011-05-11-Improved-Declarative-Widget-Properties.html</guid>
+			<description>The declarative syntax for widget properties has been improved to cover more cases.</description>
+			<pubDate>Wed, 11 May 2011 07:00:00 UT</pubDate>
+			<feedburner:origLink>http://www.uize.com/news/2011-05-11-Improved-Declarative-Widget-Properties.html</feedburner:origLink>
+		</item>
+		<item>
+			<title>2011-05-05 - SimpleDoc Now Supports Section Title Aliases</title>
+			<link>http://www.uize.com/news/2011-05-05-SimpleDoc-Now-Supports-Section-Title-Aliases.html</link>
+			<guid>http://www.uize.com/news/2011-05-05-SimpleDoc-Now-Supports-Section-Title-Aliases.html</guid>
+			<description>The SimpleDoc format, a  Wikitext like document format for easily writing structured documents, has added support for section title aliases.</description>
+			<pubDate>Thu, 5 May 2011 07:00:00 UT</pubDate>
+			<feedburner:origLink>http://www.uize.com/news/2011-05-05-SimpleDoc-Now-Supports-Section-Title-Aliases.html</feedburner:origLink>
+		</item>
 		<item>
 			<title>2011-04-12 - NEW METHOD: Uize.String.split</title>
 			<link>http://www.uize.com/news/2011-04-12-NEW-METHOD-Uize.String.split.html</link>
@@ -377,46 +417,6 @@
 			<description>The new Uize.escapeRegExpLiteral static method of the Uize base class provides a convenient way to escape regular expression special characters inside a string that is to be used as a literal match in a regular expression.</description>
 			<pubDate>Sun, 16 May 2010 07:00:00 UT</pubDate>
 			<feedburner:origLink>http://www.uize.com/news/2010-05-16-NEW-METHOD-Uize.escapeRegExpLiteral.html</feedburner:origLink>
-		</item>
-		<item>
-			<title>2010-05-16 - Deprecated Methods Killed</title>
-			<link>http://www.uize.com/news/2010-05-16-Deprecated-Methods-Killed.html</link>
-			<guid>http://www.uize.com/news/2010-05-16-Deprecated-Methods-Killed.html</guid>
-			<description>A number of methods of the Uize.Color and Uize.Node modules that were deprecated back in the first half of 2009 have finally been killed.</description>
-			<pubDate>Sun, 16 May 2010 07:00:00 UT</pubDate>
-			<feedburner:origLink>http://www.uize.com/news/2010-05-16-Deprecated-Methods-Killed.html</feedburner:origLink>
-		</item>
-		<item>
-			<title>2010-04-30 - NEW EXAMPLE: Animate Position in JavaScript</title>
-			<link>http://www.uize.com/news/2010-04-30-NEW-EXAMPLE-Animate-Position-in-JavaScript.html</link>
-			<guid>http://www.uize.com/news/2010-04-30-NEW-EXAMPLE-Animate-Position-in-JavaScript.html</guid>
-			<description>The new Animate Position in JavaScript example shows how to animate the position of an HTML element and how to apply amazingly realistic motion effects like easing, elasticity, bounce, and many more.</description>
-			<pubDate>Fri, 30 Apr 2010 07:00:00 UT</pubDate>
-			<feedburner:origLink>http://www.uize.com/news/2010-04-30-NEW-EXAMPLE-Animate-Position-in-JavaScript.html</feedburner:origLink>
-		</item>
-		<item>
-			<title>2010-04-25 - IMPROVED METHOD: Uize.substituteInto</title>
-			<link>http://www.uize.com/news/2010-04-25-IMPROVED-METHOD-Uize.substituteInto.html</link>
-			<guid>http://www.uize.com/news/2010-04-25-IMPROVED-METHOD-Uize.substituteInto.html</guid>
-			<description>The Uize.substituteInto static method, implemented in the Uize base class has been improved to be more robust.</description>
-			<pubDate>Sun, 25 Apr 2010 07:00:00 UT</pubDate>
-			<feedburner:origLink>http://www.uize.com/news/2010-04-25-IMPROVED-METHOD-Uize.substituteInto.html</feedburner:origLink>
-		</item>
-		<item>
-			<title>2010-04-18 - NEW MODULE: Uize.Fx.xShadows</title>
-			<link>http://www.uize.com/news/2010-04-18-NEW-MODULE-Uize.Fx.xShadows.html</link>
-			<guid>http://www.uize.com/news/2010-04-18-NEW-MODULE-Uize.Fx.xShadows.html</guid>
-			<description>The new Uize.Fx.xShadows extension module implements support for fading / animating the values of both the text-shadow and box-shadow CSS3 style properties.</description>
-			<pubDate>Sun, 18 Apr 2010 07:00:00 UT</pubDate>
-			<feedburner:origLink>http://www.uize.com/news/2010-04-18-NEW-MODULE-Uize.Fx.xShadows.html</feedburner:origLink>
-		</item>
-		<item>
-			<title>2010-04-18 - NEW EXAMPLE: Animated Buttons with Box Shadow</title>
-			<link>http://www.uize.com/news/2010-04-18-NEW-EXAMPLE-Animated-Buttons-with-Box-Shadow.html</link>
-			<guid>http://www.uize.com/news/2010-04-18-NEW-EXAMPLE-Animated-Buttons-with-Box-Shadow.html</guid>
-			<description>The new Animated Buttons with Box Shadow example demonstrates the UIZE JavaScript Framework&amp;apos;s ability to animate values for the box-shadow CSS3 style property.</description>
-			<pubDate>Sun, 18 Apr 2010 07:00:00 UT</pubDate>
-			<feedburner:origLink>http://www.uize.com/news/2010-04-18-NEW-EXAMPLE-Animated-Buttons-with-Box-Shadow.html</feedburner:origLink>
 		</item>
 	</channel>
 </rss>

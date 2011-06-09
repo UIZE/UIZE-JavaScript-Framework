@@ -39,7 +39,7 @@
   type: Class
   importance: 10
   codeCompleteness: 100
-  testCompleteness: 8
+  testCompleteness: 28
   docCompleteness: 90
 */
 
@@ -804,36 +804,34 @@
       };
 
       _class.unwire = _classPrototype.unwire = function (_eventNameOrEventsMap,_handler) {
-        var _this = this;
-        if (typeof _eventNameOrEventsMap == _typeObject &amp;&amp; _eventNameOrEventsMap) {
-          for (var _eventName in _eventNameOrEventsMap)
-            _this.unwire (_eventName,_eventNameOrEventsMap [_eventName])
-          ;
-        } else {
-          _this._abstractEventName (
-            _eventNameOrEventsMap,
-            function (_eventName) {
-              var _eventHandlers = _this._eventHandlers;
-              if (_eventHandlers) {
+        var
+          _this = this,
+          _eventHandlers = _this._eventHandlers
+        ;
+        if (_eventHandlers) {
+          if (typeof _eventNameOrEventsMap == _typeObject &amp;&amp; _eventNameOrEventsMap) {
+            for (var _eventName in _eventNameOrEventsMap)
+              _this.unwire (_eventName,_eventNameOrEventsMap [_eventName])
+            ;
+          } else {
+            _this._abstractEventName (
+              _eventNameOrEventsMap,
+              function (_eventName) {
                 var _handlersForEventName = _eventHandlers [_eventName];
                 if (_handlersForEventName) {
                   if (_handler) {
                     /* TO DO:
                       this is a candidate for factoring out as a generally useful array manipulation method: removeAllOfValue
                     */
-                    var _handlerNo = 0;
-                    while (_handlerNo &lt; _handlersForEventName.length) {
-                      _handlersForEventName [_handlerNo]._originalHandler == _handler
-                        ? _handlersForEventName.splice (_handlerNo,1)
-                        : _handlerNo++
-                      ;
-                    }
+                    for (var _handlerNo = _handlersForEventName.length; --_handlerNo &gt;= 0;)
+                      _handlersForEventName [_handlerNo]._originalHandler == _handler &amp;&amp; _handlersForEventName.splice (_handlerNo,1)
+                    ;
                   }
                   (_handler &amp;&amp; _handlersForEventName.length) || delete _eventHandlers [_eventName];
                 }
               }
-            }
-          );
+            );
+          }
         }
         /*?
           Instance Methods
@@ -1440,19 +1438,15 @@
     _classNonInheritableStatics.constrain = 1;
 
     var _copyInto = _class.copyInto = function (_targetObject,_sourceObject) {
-      if (typeof _sourceObject == _typeObject &amp;&amp; _sourceObject) {
+      if (_targetObject &amp;&amp; _sourceObject &amp;&amp; typeof _sourceObject == _typeObject) {
         for (var _propertyName in _sourceObject)
           _targetObject [_propertyName] = _sourceObject [_propertyName]
         ;
       }
       if (arguments.length &gt; 2) {
-        for (var _sourceObjectNo = 0; ++_sourceObjectNo &lt; arguments.length;) {
-          if (typeof (_sourceObject = arguments [_sourceObjectNo]) == _typeObject &amp;&amp; _sourceObject) {
-            for (var _propertyName in _sourceObject)
-              _targetObject [_propertyName] = _sourceObject [_propertyName]
-            ;
-          }
-        }
+        for (var _sourceObjectNo = 0; ++_sourceObjectNo &lt; arguments.length;)
+          _copyInto (_targetObject,arguments [_sourceObjectNo])
+        ;
       }
       return _targetObject;
       /*?
@@ -1520,34 +1514,36 @@
     };
     _classNonInheritableStatics.copyInto = 1;
 
-    _class.callOn = function (_object,_method,_arguments) {
-      if (!_object) return;
+    _class.callOn = function (_target,_method,_arguments) {
+      if (_target == _undefined) return;
       _arguments || (_arguments = _sacredEmptyArray);
       var
         _methodIsString = typeof _method == _typeString,
         _methodIsFunction = !_methodIsString &amp;&amp; _isFunction (_method)
       ;
-      function _callOn (_object) {
-        if (_object &amp;&amp; typeof _object == _typeObject) {
-          if (_isArray (_object)) {
-            for (var _subObjectNo = -1, _totalSubObjects = _object.length; ++_subObjectNo &lt; _totalSubObjects;)
-              _callOn (_object [_subObjectNo])
+      function _callOn (_target) {
+        if (_target &amp;&amp; typeof _target == _typeObject) {
+          if (_isArray (_target)) {
+            for (var _targetNo = -1, _targetLength = _target.length; ++_targetNo &lt; _targetLength;)
+              _callOn (_target [_targetNo])
             ;
           } else {
-            var _methodIsStringAndIsInObject = _methodIsString &amp;&amp; _isFunction (_object [_method]);
-            if (_isInstance (_object) || _methodIsStringAndIsInObject) {
+            var _methodIsStringAndIsInObject = _methodIsString &amp;&amp; _isFunction (_target [_method]);
+            if (_isInstance (_target)) {
               if (_methodIsFunction || _methodIsStringAndIsInObject)
-                (_methodIsFunction ? _method : _object [_method]).apply (_object,_arguments)
+                (_methodIsFunction ? _method : _target [_method]).apply (_target,_arguments)
               ;
             } else {
-              for (var _subObjectName in _object)
-                _callOn (_object [_subObjectName])
+              for (var _property in _target)
+                _callOn (_target [_property])
               ;
             }
           }
         }
       }
-      _callOn (_object);
+      if (_methodIsString || _methodIsFunction)
+        _callOn (_target)
+      ;
       /*?
         Static Methods
           Uize.callOn
@@ -1911,25 +1907,25 @@
     _classNonInheritableStatics.recordMatches = 1;
 
     _class.findRecordNo = function (_records,_match,_defaultNoIfNoMatch) {
-      var _result = _class.isNumber (_defaultNoIfNoMatch) ? _defaultNoIfNoMatch : -1;
       if (_records) {
         for (var _recordNo = -1, _recordsLength = _records.length; ++_recordNo &lt; _recordsLength;) {
-          if (_recordMatches (_records [_recordNo],_match)) {
-            _result = _recordNo;
-            break;
-          }
+          if (_recordMatches (_records [_recordNo],_match))
+            return _recordNo
+          ;
         }
       }
-      return _result;
+      return _defaultNoIfNoMatch == _null || isNaN (_defaultNoIfNoMatch -= 0) ? -1 : _defaultNoIfNoMatch;
       /*?
         Static Methods
           Uize.findRecordNo
-            Returns an integer, indicating the index in the specified records array of the first record whose contents is a superset of the contents of the specified match object. If no matching record can be found, then this method will return the value =-1=.
+            Returns an integer, indicating the index in the specified records array of the first record whose contents is a superset of the contents of the specified match object.
 
             SYNTAX
             ........................................................
             recordNoINT = Uize.findRecordNo (recordsARRAY,matchOBJ);
             ........................................................
+
+            If no matching record can be found, then this method will return the value =-1=, unless the optional =defaultNoNONNULL= parameter is specified.
 
             EXAMPLE
             ........................................................................................
@@ -1962,6 +1958,13 @@
 
             In the above example, the variable =greenAppleRecordNo= will have the value =2=.
 
+            VARIATION
+            .........................................................................
+            recordNoINT = Uize.findRecordNo (recordsARRAY,matchOBJ,defaultNoNONNULL);
+            .........................................................................
+
+            When the optional =defaultNoNONNULL= parameter is specified, then the value of this parameter, coerced to a number, will be returned as the result if no match is found. If the value =null= or =undefined= is specified for the =defaultNoNONNULL= parameter, or if its value coerced to a number produces the special value =NaN=, then it will be treated as =-1=.
+
             NOTES
             - this method uses strict matching, so the statement =Uize.findRecordNo ([{index:'0'},{index:'1'}],{index:1})= will return =-1=
             - see also the related =Uize.findRecord= and =Uize.recordMatches= static methods
@@ -1970,8 +1973,11 @@
     _classNonInheritableStatics.findRecordNo = 1;
 
     _class.findRecord = function (_records,_match,_defaultNoIfNoMatch) {
-      var _recordNo = _class.findRecordNo (_records,_match,_defaultNoIfNoMatch);
-      return _recordNo &gt; -1 ? _records [_recordNo] : null;
+      return (
+        _records != _null &amp;&amp; (_recordNo = _class.findRecordNo (_records,_match,_defaultNoIfNoMatch)) &gt; -1
+          ? _records [_recordNo]
+          : null
+      );
       /*?
         Static Methods
           Uize.findRecord
@@ -2316,9 +2322,19 @@
     };
     _classNonInheritableStatics.moduleUrlResolver = 1;
 
-    var _pairUp = _class.pairUp = function (_key,_value) {
-      var _result = {};
-      _result [_key] = _value;
+    var _pairUp = _class.pairUp = function (_firstArg) {
+      var
+        _result = {},
+        _arguments = arguments.length == 1 &amp;&amp; _isArray (_firstArg) ? _firstArg : arguments,
+        _argumentsLength = _arguments.length
+      ;
+      if (_argumentsLength &lt; 3) {
+        _result [_arguments [0]] = _arguments [1];
+      } else {
+        for (var _argumentNo = -2; (_argumentNo += 2) &lt; _argumentsLength;)
+          _result [_arguments [_argumentNo]] = _arguments [_argumentNo + 1]
+        ;
+      }
       return _result;
       /*?
         Static Methods
@@ -2330,43 +2346,77 @@
             keyValueOBJ = Uize.pairUp (keySTRorNUM,valueANYTYPE);
             .....................................................
 
-            EXAMPLE 1
+            EXAMPLE
             .............................................................
             Uize.pairUp ('foo','bar');  // returns the object {foo:'bar'}
             Uize.pairUp (0,'zero');     // returns the object {0:'zero'}
             Uize.pairUp (1,true);       // returns the object {1:true}
             .............................................................
 
-            The =Uize.pairUp= method is useful when an object needs to be created from a key/value pair, where the key name is either dynamically generated in an expression or is supplied via a parameter. Using the =Uize.pairUp= method can collapse three statements into a single statement, as follows...
+            VARIATION 1
+            ..............................
+            keyValueOBJ = Uize.pairUp (
+              key1STRorNUM,value1ANYTYPE,
+              key2STRorNUM,value2ANYTYPE,
+              ...,
+              keyNSTRorNUM,valueNANYTYPE
+            );
+            ..............................
 
-            INSTEAD OF
-            .................................
-            var object = {};
-            object [key] = value;
-            doSomethingWithAnObject (object);
-            .................................
+            When an arbitrary number of arguments are specified for the =Uize.pairUp= method, then the method will pair up all the arguments as key/value pairs to form a single object, where all the even index arguments are treated as the keys, and where all the odd index arguments are treated as the values. For example, the statement =Uize.pairUp ('foo','bar','hello','world')= would return the object ={foo:'bar',hello:'world'}=.
+
+            VARIATION 2
+            ..................................................
+            keyValueOBJ = Uize.pairUp (keyAndValuePairsARRAY);
+            ..................................................
+
+            When a =keyAndValuePairsARRAY= parameter is specified when calling the =Uize.pairUp= method, then the =Uize.pairUp= method operates on the array in the same way as it would an arbitrary number of arguments. For example, the statement =Uize.pairUp (['foo','bar','hello','world'])= would return the object ={foo:'bar',hello:'world'}=. Therefore, if you have an array that represents a set of key / value pairs, you can call the =Uize.pairUp= method to combine the keys and values together to form an object without having to resort to using the =apply= method in order to use the arbitrary arguments variation of the =Uize.pairUp= method.
+
+            INSTEAD OF...
+            ...........................................
+            Uize.pairUp.apply (0,myKeyValuePairsArray);
+            ...........................................
 
             USE...
-            ..................................................
-            doSomethingWithAnObject (Uize.pairUp (key,value));
-            ..................................................
+            ...................................
+            Uize.pairUp (myKeyValuePairsArray);
+            ...................................
 
-            Let's consider a real world example...
+            Why This Method is Useful
+              The =Uize.pairUp= method is particularly useful when an object needs to be created from a key/value pair, where the key name is either dynamically generated in an expression or is supplied via a parameter.
 
-            EXAMPLE 2
-            ..............................................................
-            function fadeNodeBorderColor (node,edge,startColor,endColor) {
-              var styleProperty = 'border' + edge + 'Color';
-              Uize.Fx.fadeStyle (
-                node,
-                Uize.pairUp (styleProperty,startColor),
-                Uize.pairUp (styleProperty,endColor),
-                1000
-              );
-            }
-            ..............................................................
+              Using the =Uize.pairUp= method can collapse three statements into a single statement, as follows...
 
-            In the above example, a function is being defined that will fade the border color of the specified edge of the specified node, from the specified start color to the specified end color. The value of the =edge= property needs to determine which style property needs to be faded. Now, we're using the =Uize.Fx.fadeStyle= static method of the =Uize.Fx= module to perform the border color animation. This method can fade values for one or more style properties, and the start and end values for the style properties are specified in style property objects. Here we need to create start and end style objects where the style property to be faded is dynamically generated using the =edge= parameter. As you will see from the code, the =Uize.pairUp= method does this for us nicely.
+              INSTEAD OF
+              .................................
+              var object = {};
+              object [key] = value;
+              doSomethingWithAnObject (object);
+              .................................
+
+              USE...
+              ..................................................
+              doSomethingWithAnObject (Uize.pairUp (key,value));
+              ..................................................
+
+              Let's consider a real world example...
+
+              EXAMPLE
+              ..............................................................
+              function fadeNodeBorderColor (node,edge,startColor,endColor) {
+                var styleProperty = 'border' + edge + 'Color';
+                Uize.Fx.fadeStyle (
+                  node,
+                  Uize.pairUp (styleProperty,startColor),
+                  Uize.pairUp (styleProperty,endColor),
+                  1000
+                );
+              }
+              ..............................................................
+
+              In the above example, a function is being defined that will fade the border color of the specified edge of the specified node, from the specified start color to the specified end color. The value of the =edge= property needs to determine which style property needs to be faded.
+
+              Now, we're using the =Uize.Fx.fadeStyle= static method of the =Uize.Fx= module to perform the border color animation. This method can fade values for one or more style properties, and the start and end values for the style properties are specified in style property objects. Here we need to create start and end style objects where the style property to be faded is dynamically generated using the =edge= parameter. As you will see from the code, the =Uize.pairUp= method does this for us nicely.
       */
     };
     _classNonInheritableStatics.pairUp = 1;

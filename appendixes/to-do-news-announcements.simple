@@ -1,8 +1,5 @@
 This document lists news official announcements that need to be created for developments that have already taken place.
 
-JSON Serialization Improvements
-	The =Uize.Json= module has been improved to now serialize JavaScript objects to strict JSON format, according to the specification at [[http://www.json.org][json.org]].
-
 Unit Test Build Scripts Made Generic
 	=_run-unit-tests-scrunched.js=, and =_run-unit-tests-source.js=
 
