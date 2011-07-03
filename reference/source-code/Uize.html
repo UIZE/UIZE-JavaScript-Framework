@@ -1063,12 +1063,21 @@
         /* NOTE:
           Yes, there are functions _isInstance, _getClass, and _getPropertyPrivateName that could be used (and were at one point), but this code needs to be tuned for performance since set is a touch point in so many places.
         */
-        if (arguments.length == 2)
+        if (arguments.length &gt; 1)
           /* NOTE:
-            - support for set (propertyName,propertyValue)
-            - in this form, _properties is actually the property name, and the second argument is the value to set
+            - support for...
+              set (propertyName,propertyValue)
+
+              or...
+
+              set (
+                property1Name,property1Value,
+                property2Name,property2Value,
+                ...
+                propertyNName,propertyNValue
+              )
           */
-          _properties = _pairUp (_properties,arguments [1])
+          _properties = _pairUp.apply (0,arguments)
         ;
         var
           _this = this,
@@ -1162,8 +1171,7 @@
               var _handlerNo = -1, _onChangeHandlersLength = _onChangeHandlers.length;
               ++_handlerNo &lt; _onChangeHandlersLength;
             ) {
-              var _onChangeHandler = _onChangeHandlers [_handlerNo];
-              delete _onChangeHandler [_onChangeHandlerAddedFlagName];
+              delete (_onChangeHandler = _onChangeHandlers [_handlerNo]) [_onChangeHandlerAddedFlagName];
               _onChangeHandler.call (_this,_propertiesBeingSet);
             }
           }
@@ -1244,7 +1252,7 @@
               );
               .....................................
 
-              VARIATION
+              VARIATION 1
               ......................................................
               myInstance.set (propertyNameSTR,propertyValueANYTYPE);
               ......................................................
@@ -1259,6 +1267,18 @@
               ...............................................................
 
               In the above example, a generic incrementer instance method is being implemented. It receives a =_propertyName= parameter that specifies the set-get property to increment, and it passes the value of this parameter as the first parameter in the call to the set method.
+
+              VARIATION 2
+              ..........................................
+              myInstance.set (
+                property1NameSTR,property1ValueANYTYPE,
+                property2NameSTR,property2ValueANYTYPE,
+                ...,
+                propertyNNameSTR,propertyNValueANYTYPE
+              );
+              ..........................................
+
+              This variation allows values for an arbitrary number of set-get properties to be set in a single call to the =set= method, by specifying the names and values of the properties using an arbitrary number of name-value pair arguments, where even numbered arguments are property names and odd numbered arguments are property values. This variation makes it possible to use expressions or the values of variables for specifying the names of the properties to set.
 
               NOTES
               - see also the =get= instance method
@@ -1285,7 +1305,7 @@
               );
               .....................................
 
-              VARIATION
+              VARIATION 1
               ................................................
               Uize.set (propertyNameSTR,propertyValueANYTYPE);
               ................................................
@@ -1300,6 +1320,18 @@
               ...............................................................
 
               In the above example, a generic incrementer static method is being implemented. It receives a =_propertyName= parameter that specifies the set-get property to increment, and it passes the value of this parameter as the first parameter in the call to the set method.
+
+              VARIATION 2
+              ..........................................
+              Uize.set (
+                property1NameSTR,property1ValueANYTYPE,
+                property2NameSTR,property2ValueANYTYPE,
+                ...,
+                propertyNNameSTR,propertyNValueANYTYPE
+              );
+              ..........................................
+
+              This variation allows initial values for an arbitrary number of set-get properties to be set in a single call to the =set= method, by specifying the names and values of the properties using an arbitrary number of name-value pair arguments, where even numbered arguments are property names and odd numbered arguments are property values. This variation makes it possible to use expressions or the values of variables for specifying the names of the properties to set.
 
               NOTES
               - see also the =Uize.get= static method

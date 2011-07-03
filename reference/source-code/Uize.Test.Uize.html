@@ -93,6 +93,12 @@ Uize.module ({
       ]
     ;
 
+    /*** create dummy class with value interface ***/
+      var _ClassWithValueInterface = Uize.subclass ();
+      _ClassWithValueInterface.registerProperties ({
+        _value:'value'
+      });
+
     function _cloneObjectTest (_title,_class,_instantiationValue) {
       return {
         title:_title,
@@ -182,7 +188,7 @@ Uize.module ({
               _eventSource.wire ('testEvent',function () {_coverageAndOrder.push ('handler1')});
               _eventSource.wire ('testEvent',function () {_coverageAndOrder.push ('handler2')});
               _eventSource.fire ('testEvent');
-              return _coverageAndOrder + '' == 'handler1,handler2';
+              return this.expect ('handler1,handler2',_coverageAndOrder + '');
             }
           },
           {
@@ -198,7 +204,7 @@ Uize.module ({
               _eventSource.wire ('testEvent',function () {_coverageAndOrder.push ('handler3')});
               _eventSource.wire ('testEvent',function () {_coverageAndOrder.push ('handler4')});
               _eventSource.fire ('testEvent');
-              return _coverageAndOrder + '' == 'handler1,handler2,handler3,handler4';
+              return this.expect ('handler1,handler2,handler3,handler4',_coverageAndOrder + '');
             }
           },
           {
@@ -330,7 +336,7 @@ Uize.module ({
               _eventSource.wire ('testEvent',function () {_coverageAndOrder.push ('handler3')});
               _eventSource.unwire ('testEvent',_handler2);
               _eventSource.fire ('testEvent');
-              return _coverageAndOrder + '' == 'handler1,handler3';
+              return this.expect ('handler1,handler3',_coverageAndOrder + '');
             }
           },
           {
@@ -417,7 +423,7 @@ Uize.module ({
               _eventSource.unwire ('*',_handler1);
               _eventSource.fire ('testEvent');
 
-              return _coverageAndOrder + '' == 'handler1,handler2,handler3,handler2,handler3';
+              return this.expect ('handler1,handler2,handler3,handler2,handler3',_coverageAndOrder + '');
             }
           },
           _isInstance
@@ -456,7 +462,7 @@ Uize.module ({
                       function () {_coverageAndOrder.push ('sourceParentHandler')}
                     );
                     _eventSource.fire ({name:'testEvent',bubble:true});
-                    return _coverageAndOrder + '' == 'sourceHandler,sourceParentHandler';
+                    return this.expect ('sourceHandler,sourceParentHandler',_coverageAndOrder + '');
                   }
                 },
                 {
@@ -489,7 +495,7 @@ Uize.module ({
                       function () {_coverageAndOrder.push (_expectedCoverageAndOrder [2])}
                     );
                     _eventSource.fire ({name:'testEvent',bubble:true});
-                    return _coverageAndOrder + '' == _expectedCoverageAndOrder + '';
+                    return this.expect (_expectedCoverageAndOrder + '',_coverageAndOrder + '');
                   }
                 },
                 {
@@ -569,7 +575,7 @@ Uize.module ({
                       function () {_coverageAndOrder.push ('sourceParentParentHandler')}
                     );
                     _eventSource.fire ({name:'testEvent',bubble:true});
-                    return _coverageAndOrder + '' == 'sourceHandler,sourceParentHandler';
+                    return this.expect ('sourceHandler,sourceParentHandler',_coverageAndOrder + '');
                   }
                 },
                 {
@@ -642,11 +648,170 @@ Uize.module ({
                       function () {_coverageAndOrder.push ('sourceParentHandler')}
                     );
                     _eventSource.fire ({name:'testEvent',bubble:true});
-                    return _coverageAndOrder + '' == 'sourceHandler';
+                    return this.expect ('sourceHandler',_coverageAndOrder + '');
                   }
                 }
               ]
             }
+        ]
+      };
+    }
+
+    function _setMethodTest (_title,_isInstance) {
+      return {
+        title:_title,
+        test:[
+          {
+            title:'Test that values can be set for multiple properties by calling the set method with a single argument, which is an object containing an arbitrary number of property name to property value mappings',
+            test:function () {
+              var _Subclass = Uize.subclass ();
+              _Subclass.registerProperties ({
+                _property1:'property1',
+                _property2:'property2',
+                _property3:'property3'
+              });
+              var _testContext = _isInstance ? new _Subclass : _Subclass;
+              _testContext.set ({
+                property1:'property1Value',
+                property2:'property2Value',
+                property3:'property3Value'
+              });
+              return (
+                this.expect ('property1Value',_testContext._property1) &amp;&amp;
+                this.expect ('property2Value',_testContext._property2) &amp;&amp;
+                this.expect ('property3Value',_testContext._property3)
+              );
+            }
+          },
+          {
+            title:'Test that a value can be set for a single property by calling the set method with two arguments, where the first argument is the property\'s name and the second is the property\'s value',
+            test:function () {
+              var _Subclass = Uize.subclass ();
+              _Subclass.registerProperties ({_property1:'property1'});
+              var _testContext = _isInstance ? new _Subclass : _Subclass;
+              _testContext.set ('property1','property1Value');
+              return this.expect ('property1Value',_testContext._property1);
+            }
+          },
+          {
+            title:'Test that values can be set for multiple properties by calling the set method with more than two arguments, where the arguments are property name-value pairs',
+            test:function () {
+              var _Subclass = Uize.subclass ();
+              _Subclass.registerProperties ({
+                _property1:'property1',
+                _property2:'property2',
+                _property3:'property3'
+              });
+              var _testContext = _isInstance ? new _Subclass : _Subclass;
+              _testContext.set (
+                'property1','property1Value',
+                'property2','property2Value',
+                'property3','property3Value'
+              );
+              return (
+                this.expect ('property1Value',_testContext._property1) &amp;&amp;
+                this.expect ('property2Value',_testContext._property2) &amp;&amp;
+                this.expect ('property3Value',_testContext._property3)
+              );
+            }
+          },
+          {
+            title:'Test that, when a private name for a set-get property is different from its publice name, the set method does not set a value for a property using the public name of the set-get property',
+            test:function () {
+              var _Subclass = Uize.subclass ();
+              _Subclass.registerProperties ({_property1:'property1'});
+              var _testContext = _isInstance ? new _Subclass : _Subclass;
+              _testContext.set ('property1','property1Value');
+              return this.expect (undefined,_testContext.property1);
+            }
+          }
+        ]
+      };
+    }
+
+    function _getMethodTest (_title,_isInstance) {
+      /*
+        - test that set-get properties can be accessed directly by their private names
+      */
+      return {
+        title:_title,
+        test:[
+          {
+            title:'Test that the value of a single set-get property can be obtained by calling the get method with a single string argument, specifying the name of the property',
+            test:function () {
+              var _Subclass = Uize.subclass ();
+              _Subclass.registerProperties ({
+                _property1:{
+                  name:'property1',
+                  value:'property1Value'
+                },
+                _property2:{
+                  name:'property2',
+                  value:'property2Value'
+                }
+              });
+              var _testContext = _isInstance ? new _Subclass : _Subclass;
+              return this.expect ('property1Value',_testContext.get ('property1'));
+            }
+          },
+          {
+            title:'Test that values can be obtained for multiple properties by calling the get method with a single argument, which is a list of property names',
+            test:function () {
+              var _Subclass = Uize.subclass ();
+              _Subclass.registerProperties ({
+                _property1:{
+                  name:'property1',
+                  value:'property1Value'
+                },
+                _property2:{
+                  name:'property2',
+                  value:'property2Value'
+                },
+                _property3:{
+                  name:'property3',
+                  value:'property3Value'
+                }
+              });
+              var _testContext = _isInstance ? new _Subclass : _Subclass;
+              return this.expect (
+                {
+                  property1:'property1Value',
+                  property2:'property2Value',
+                  property3:'property3Value'
+                },
+                _testContext.get (['property1','property2','property3'])
+              );
+            }
+          },
+          {
+            title:'Test that values can be obtained for all properties by calling the get method with no arguments',
+            test:function () {
+              var _Subclass = Uize.subclass ();
+              _Subclass.registerProperties ({
+                _property1:{
+                  name:'property1',
+                  value:'property1Value'
+                },
+                _property2:{
+                  name:'property2',
+                  value:'property2Value'
+                },
+                _property3:{
+                  name:'property3',
+                  value:'property3Value'
+                }
+              });
+              var _testContext = _isInstance ? new _Subclass : _Subclass;
+              return this.expect (
+                {
+                  property1:'property1Value',
+                  property2:'property2Value',
+                  property3:'property3Value'
+                },
+                _testContext.get ()
+              );
+            }
+          }
         ]
       };
     }
@@ -961,7 +1126,7 @@ Uize.module ({
                 {
                   int:5,neg:-5,float:5.5,nan:NaN,infinity:Infinity,
                   'true':true,'false':false,
-                  obj:new Uize ({value:'OBJECT'}),
+                  obj:new _ClassWithValueInterface ({value:'OBJECT'}),
                   'null':null,'undefined':undefined
                 }
               ],
@@ -1012,7 +1177,7 @@ Uize.module ({
               'tRussiae'
             ],
             ['Test that the source for substituting into can be an object that implements a value interface',
-              [new Uize ({value:'My name is [#name].'}),{name:'Eric'}],
+              [new _ClassWithValueInterface ({value:'My name is [#name].'}),{name:'Eric'}],
               'My name is Eric.'
             ],
             ['Test that the source for substituting into can be an array, whose elements will be concatenated',
@@ -1188,11 +1353,11 @@ Uize.module ({
               1
             ],
             ['Test that specifying an object value for the default number results in it being coerced to a number',
-              [[{foo:'boo'},{foo:'bar'},{foo:'foo'}],{foo:'woo'},new Uize ({value:5})],
+              [[{foo:'boo'},{foo:'bar'},{foo:'foo'}],{foo:'woo'},new _ClassWithValueInterface ({value:5})],
               5
             ],
             ['Test that specifying an object value for the default number that cannot be coerced to a number results in the value -1 being used for the default number',
-              [[{foo:'boo'},{foo:'bar'},{foo:'foo'}],{foo:'woo'},new Uize ({value:'blah'})],
+              [[{foo:'boo'},{foo:'bar'},{foo:'foo'}],{foo:'woo'},new _ClassWithValueInterface ({value:'blah'})],
               -1
             ],
             ['Test that the index of the first matching record is returned when the match matches a record',
@@ -1615,12 +1780,16 @@ Uize.module ({
             // NOTE: this method is thoroughly tested by the event system tests (so, no more tests here)
           ]],
           ['Uize.registerProperties',[
+            // NOTE: this method is thoroughly tested by the properties system tests (so, no more tests here)
           ]],
           ['Uize.get',[
+            // NOTE: this method is thoroughly tested by the properties system tests (so, no more tests here)
           ]],
           ['Uize.set',[
+            // NOTE: this method is thoroughly tested by the properties system tests (so, no more tests here)
           ]],
           ['Uize.toggle',[
+            // NOTE: this method is thoroughly tested by the properties system tests (so, no more tests here)
           ]],
           ['Uize.toString',[
           ]],
@@ -1636,6 +1805,601 @@ Uize.module ({
           test:[
             _eventsSystemTest ('Test that the event system works for instances',true),
             _eventsSystemTest ('Test that the event system works for classes',false)
+          ]
+        },
+        {
+          title:'Test the set-get properties system',
+          test:[
+            {
+              title:'Test registering set-get properties',
+              test:[
+                /*
+                  - test the minimal profile syntax for registering a set-get property
+                  - test the complete profile syntax for registering a set-get property
+                  - test that multiple properties can be registered in a single call to the registerProperty method, and that minimal and complete profiles can be combined
+                  - test that the public name of a set-get property is defaulted when no value is specified for the name property in the property profile
+                  - test that set-get properties can be registered in an ad hoc fashion, by specifying values for unregistered properties when calling the constructor
+                  - test that set-get properties can be registered in an ad hoc fashion, by setting values for unregistered properties using the set method
+                */
+              ]
+            },
+            {
+              title:'Test setting values for set-get properties for instances and classes',
+              test:[
+                _setMethodTest ('Test that the set method works for instances',true),
+                _setMethodTest ('Test that the set method works for classes',false)
+              ]
+            },
+            {
+              title:'Test getting values for set-get properties for instances and classes',
+              test:[
+                _getMethodTest ('Test that the get method works for instances',true),
+                _getMethodTest ('Test that the get method works for classes',false)
+              ]
+            },
+            {
+              title:'Test the initial value facility',
+              test:[
+                {
+                  title:'Test that when no initial value is specified for a set-get property, the property\'s initial value is undefined',
+                  test:function () {
+                    var _Subclass = Uize.subclass ();
+                    _Subclass.registerProperties ({
+                      _myProperty:{name:'myProperty'}
+                    });
+                    var _instance = new _Subclass;
+                    return this.expect (undefined,_instance.get ('myProperty'));
+                  }
+                },
+                {
+                  title:'Test that specifying a value property in a set-get property\'s profile when registering it has the effect of setting the initial value for that property for new instances that are created',
+                  test:function () {
+                    var _Subclass = Uize.subclass ();
+                    _Subclass.registerProperties ({
+                      _myProperty:{
+                        name:'myProperty',
+                        value:'initial value'
+                      }
+                    });
+                    var _instance = new _Subclass;
+                    return this.expect ('initial value',_instance.get ('myProperty'));
+                  }
+                },
+                {
+                  title:'Test that null is supported as an initial value for a set-get property and that it is not treated the same as undefined',
+                  test:function () {
+                    var _Subclass = Uize.subclass ();
+                    _Subclass.registerProperties ({
+                      _myProperty:{
+                        name:'myProperty',
+                        value:null
+                      }
+                    });
+                    var _instance = new _Subclass;
+                    return this.expect (null,_instance.get ('myProperty'));
+                  }
+                },
+                {
+                  title:'Test that the initial value registered for a property is returned as the result when querying the value of that set-get property on the class',
+                  test:function () {
+                    var _Subclass = Uize.subclass ();
+                    _Subclass.registerProperties ({
+                      _myProperty:{
+                        name:'myProperty',
+                        value:'initial value'
+                      }
+                    });
+                    return this.expect ('initial value',_Subclass.get ('myProperty'));
+                  }
+                },
+                {
+                  title:'Test that setting the value for a set-get property on the class has the effect of setting the initial value for the property',
+                  test:function () {
+                    var _Subclass = Uize.subclass ();
+                    _Subclass.registerProperties ({
+                      _myProperty:{name:'myProperty'}
+                    });
+                    _Subclass.set ({myProperty:'initial value'});
+                    var _instance = new _Subclass;
+                    return this.expect ('initial value',_instance.get ('myProperty'));
+                  }
+                },
+                {
+                  title:'Test that setting the value for a set-get property on the class does not affect the value of the property for instances that have already been created',
+                  test:function () {
+                    var _Subclass = Uize.subclass ();
+                    _Subclass.registerProperties ({
+                      _myProperty:{
+                        name:'myProperty',
+                        value:'initial value'
+                      }
+                    });
+                    var _instance = new _Subclass;
+                    _Subclass.set ({myProperty:'new initial value'});
+                    return this.expect ('initial value',_instance.get ('myProperty'));
+                  }
+                }
+              ]
+            },
+            {
+              title:'Test the onChange handlers mechanism',
+              test:[
+                {
+                  title:'Test that an onChange handler for a set-get property is executed on the very first change of the value of that property that occurs during construction of the instance',
+                  test:function () {
+                    var
+                      _Subclass = Uize.subclass (),
+                      _onChangeHandlerCount = 0
+                    ;
+                    _Subclass.registerProperties ({
+                      _myProperty:{
+                        name:'myProperty',
+                        value:'initial value',
+                        onChange:function () {_onChangeHandlerCount++}
+                      }
+                    });
+                    var _instance = new _Subclass;
+                    return this.expect (1,_onChangeHandlerCount);
+                  }
+                },
+                {
+                  title:'Test that an onChange handler for a set-get property is only executed once upon construction when a value specified for the property in the constructor differs from the property\'s initial value',
+                  test:function () {
+                    var
+                      _Subclass = Uize.subclass (),
+                      _onChangeHandlerCount = 0
+                    ;
+                    _Subclass.registerProperties ({
+                      _myProperty:{
+                        name:'myProperty',
+                        value:'initial value',
+                        onChange:function () {_onChangeHandlerCount++}
+                      }
+                    });
+                    var _instance = new _Subclass ({myProperty:'new value'});
+                    return this.expect (1,_onChangeHandlerCount);
+                  }
+                },
+                {
+                  title:'Test that an onChange handler is only executed when the value of a set-get property has actually changed as a result of a set - not on non-changing sets',
+                  test:function () {
+                    var
+                      _Subclass = Uize.subclass (),
+                      _onChangeCount = 0
+                    ;
+                    _Subclass.registerProperties ({
+                      _myProperty:{
+                        name:'myProperty',
+                        value:'initial value',
+                        onChange:function () {_onChangeCount++}
+                      }
+                    });
+                    var _instance = new _Subclass;
+                    _instance.set ({myProperty:'initial value'});
+                    _instance.set ({myProperty:'new value'});
+                    _instance.set ({myProperty:'new value'});
+                    return this.expect (2,_onChangeCount);
+                  }
+                },
+                {
+                  title:'Test that an onChange handler is called as a method on the instance that owns the set-get property',
+                  test:function () {
+                    var
+                      _Subclass = Uize.subclass (),
+                      _contextForCallingOnChange
+                    ;
+                    _Subclass.registerProperties ({
+                      _myProperty:{
+                        name:'myProperty',
+                        value:'initial value',
+                        onChange:function () {_contextForCallingOnChange = this}
+                      }
+                    });
+                    var _instance = new _Subclass;
+                    return this.expect (_instance,_contextForCallingOnChange);
+                  }
+                },
+                {
+                  title:'Test that the value of the set-get property has already changed by the time that an onChange handler is called',
+                  test:function () {
+                    var
+                      _Subclass = Uize.subclass (),
+                      _valueOfPropertyWhenOnChangeCalled
+                    ;
+                    _Subclass.registerProperties ({
+                      _myProperty:{
+                        name:'myProperty',
+                        value:'initial value',
+                        onChange:function () {
+                          _valueOfPropertyWhenOnChangeCalled = this.get ('myProperty');
+                        }
+                      }
+                    });
+                    var _instance = new _Subclass;
+                    _instance.set ({myProperty:'new value'});
+                    return this.expect ('new value',_valueOfPropertyWhenOnChangeCalled);
+                  }
+                },
+                {
+                  title:'Test that an onChange handler can be specified by a string, where that string specifies the name of a method that must be defined for the instance',
+                  test:function () {
+                    var
+                      _Subclass = Uize.subclass (),
+                      _onChangeCount = 0
+                    ;
+                    _Subclass.prototype.someMethod = function () {_onChangeCount++};
+                    _Subclass.registerProperties ({
+                      _myProperty:{
+                        name:'myProperty',
+                        value:'initial value',
+                        onChange:'someMethod'
+                      }
+                    });
+                    var _instance = new _Subclass;
+                    _instance.set ({myProperty:'new value'});
+                    return this.expect (2,_onChangeCount);
+                  }
+                },
+                {
+                  title:'Test that an array of multiple onChange handlers can be specified for a set-get property, and that all of them are executed, in the order in which they appear in the array',
+                  test:function () {
+                    var
+                      _Subclass = Uize.subclass (),
+                      _coverageAndOrder = []
+                    ;
+                    _Subclass.registerProperties ({
+                      _myProperty:{
+                        name:'myProperty',
+                        value:'initial value',
+                        onChange:[
+                          function () {_coverageAndOrder.push ('onChangeHandler1')},
+                          function () {_coverageAndOrder.push ('onChangeHandler2')},
+                          function () {_coverageAndOrder.push ('onChangeHandler3')}
+                        ]
+                      }
+                    });
+                    var _instance = new _Subclass;
+                    return this.expect (
+                      'onChangeHandler1,onChangeHandler2,onChangeHandler3',
+                      _coverageAndOrder + ''
+                    );
+                  }
+                },
+                {
+                  title:'Test that an array of multiple onChange handlers may contain a mix of handlers specified by function reference, handlers specified by method name, and nested lists of handlers',
+                  test:function () {
+                    var
+                      _Subclass = Uize.subclass (),
+                      _coverageAndOrder = []
+                    ;
+                    _Subclass.prototype.someMethod1 = function () {
+                      _coverageAndOrder.push ('onChangeHandlerSpecifiedByString1');
+                    };
+                    _Subclass.prototype.someMethod2 = function () {
+                      _coverageAndOrder.push ('onChangeHandlerSpecifiedByString2');
+                    };
+                    _Subclass.registerProperties ({
+                      _myProperty:{
+                        name:'myProperty',
+                        value:'initial value',
+                        onChange:[
+                          function () {_coverageAndOrder.push ('onChangeSpecifiedByFunction1')},
+                          function () {_coverageAndOrder.push ('onChangeSpecifiedByFunction2')},
+                          function () {_coverageAndOrder.push ('onChangeSpecifiedByFunction3')},
+                          'someMethod1',
+                          [
+                            function () {_coverageAndOrder.push ('onChangeSpecifiedByFunction4')},
+                            'someMethod2',
+                            function () {_coverageAndOrder.push ('onChangeSpecifiedByFunction5')}
+                          ]
+                        ]
+                      }
+                    });
+                    var _instance = new _Subclass;
+                    return this.expect (
+                      [
+                        'onChangeSpecifiedByFunction1',
+                        'onChangeSpecifiedByFunction2',
+                        'onChangeSpecifiedByFunction3',
+                        'onChangeHandlerSpecifiedByString1',
+                        'onChangeSpecifiedByFunction4',
+                        'onChangeHandlerSpecifiedByString2',
+                        'onChangeSpecifiedByFunction5'
+                      ],
+                      _coverageAndOrder
+                    );
+                  }
+                },
+                {
+                  title:'Test that all onChange handlers receive a single argument when it is called, which is an object containing the conformed values for all properties being set (not just those that have changed value)',
+                  test:function () {
+                    var
+                      _Subclass = Uize.subclass (),
+                      _argumentsForBarOnChangeHandler,
+                      _argumentsForMyPropertyOnChangeHandler1,
+                      _argumentsForMyPropertyOnChangeHandler2,
+                      _propertiesBeingSet = {
+                        foo:'the value of foo',
+                        bar:'the new value of bar',
+                        myProperty:'new value'
+                      }
+                    ;
+                    function _copyArguments (arguments) {
+                      var _result = [];
+                      _result.push.apply (_result,arguments);
+                      return _result;
+                    }
+                    _Subclass.registerProperties ({
+                      _foo:{
+                        name:'foo',
+                        value:'the value of foo'
+                      },
+                      bar:{
+                        name:'bar',
+                        value:'the value of bar',
+                        onChange:function () {
+                          _argumentsForBarOnChangeHandler = _copyArguments (arguments);
+                        }
+                      },
+                      helloWorld:{
+                        name:'helloWorld',
+                        value:'Hello, world!'
+                      },
+                      _myProperty:{
+                        name:'myProperty',
+                        value:'initial value',
+                        onChange:[
+                          function () {
+                            _argumentsForMyPropertyOnChangeHandler1 = _copyArguments (arguments);
+                          },
+                          function () {
+                            _argumentsForMyPropertyOnChangeHandler2 = _copyArguments (arguments);
+                          }
+                        ]
+                      }
+                    });
+                    var _instance = new _Subclass;
+                    _instance.set (_propertiesBeingSet);
+                    return (
+                      this.expect ([_propertiesBeingSet],_argumentsForBarOnChangeHandler) &amp;&amp;
+                      this.expect ([_propertiesBeingSet],_argumentsForMyPropertyOnChangeHandler1) &amp;&amp;
+                      this.expect ([_propertiesBeingSet],_argumentsForMyPropertyOnChangeHandler2)
+                    );
+                  }
+                },
+                {
+                  title:'Test that onChange handlers are called for all set-get properties that have changed value in the course of the same set call',
+                  test:function () {
+                    var
+                      _Subclass = Uize.subclass (),
+                      _onChangeHandlerCountForBar,
+                      _onChangeHandlerCountForHelloWorld,
+                      _onChangeHandlerCountForMyProperty,
+                      _coverageAndOrder = []
+                    ;
+                    _Subclass.registerProperties ({
+                      _foo:{
+                        name:'foo',
+                        value:'the value of foo'
+                      },
+                      bar:{
+                        name:'bar',
+                        value:'the value of bar',
+                        onChange:function () {_onChangeHandlerCountForBar++}
+                      },
+                      helloWorld:{
+                        name:'helloWorld',
+                        value:'Hello, world!',
+                        onChange:function () {_onChangeHandlerCountForHelloWorld++}
+                      },
+                      _myProperty:{
+                        name:'myProperty',
+                        value:'initial value',
+                        onChange:function () {_onChangeHandlerCountForMyProperty++}
+                      }
+                    });
+                    var _instance = new _Subclass;
+                    _onChangeHandlerCountForBar = _onChangeHandlerCountForHelloWorld = _onChangeHandlerCountForMyProperty = 0;
+                    _instance.set ({
+                      foo:'new value of foo',
+                      bar:'the new value of bar',
+                      helloWorld:'Hello, world!',
+                      myProperty:'new value of myProperty'
+                    });
+                    return (
+                      this.expect (1,_onChangeHandlerCountForBar) &amp;&amp;
+                      this.expect (0,_onChangeHandlerCountForHelloWorld) &amp;&amp;
+                      this.expect (1,_onChangeHandlerCountForMyProperty)
+                    );
+                  }
+                },
+                {
+                  title:'Test that an onChange handler is not called for any instances of a class when the value of the set-get property is set on the class',
+                  test:function () {
+                    var
+                      _Subclass = Uize.subclass (),
+                      _onChangeCount = 0
+                    ;
+                    _Subclass.registerProperties ({
+                      _myProperty:{
+                        name:'myProperty',
+                        value:'initial value',
+                        onChange:function () {_onChangeCount++}
+                      }
+                    });
+                    var
+                      _instance1 = new _Subclass,
+                      _instance2 = new _Subclass,
+                      _instance3 = new _Subclass,
+                      _onChangeCountAfterCreatingInstances = _onChangeCount;
+                    ;
+                    _onChangeCount = 0;
+                    _Subclass.set ({myProperty:'new initial value'});
+                    return _onChangeCountAfterCreatingInstances == 3 &amp;&amp; _onChangeCount == 0;
+                  }
+                },
+                {
+                  title:'Test that a set-get property\'s onChange handler is only called for an instance of the class whose value for the property has changed (ie. no contamination across instances)',
+                  test:function () {
+                    var
+                      _Subclass = Uize.subclass (),
+                      _coverageAndOrder = []
+                    ;
+                    _Subclass.registerProperties ({
+                      _name:'name',
+                      _myProperty:{
+                        name:'myProperty',
+                        value:'initial value',
+                        onChange:function () {_coverageAndOrder.push (this.get ('name'))}
+                      }
+                    });
+                    var
+                      _instance1 = new _Subclass ({name:'instance1'}),
+                      _instance2 = new _Subclass ({name:'instance2'}),
+                      _instance3 = new _Subclass ({name:'instance3'})
+                    ;
+                    _coverageAndOrder = [];
+                    _instance2.set ({myProperty:'new value'});
+                    return this.expect (['instance2'],_coverageAndOrder);
+                  }
+                },
+                {
+                  title:'Test that an onChange handler is only executed if the value of a set-get property has changed after being conformed, and not just if the pre-conformed value is different from the current value',
+                  test:function () {
+                    var
+                      _Subclass = Uize.subclass (),
+                      _valuesWhenOnChangeCalled = []
+                    ;
+                    _Subclass.registerProperties ({
+                      _name:'name',
+                      _myProperty:{
+                        name:'myProperty',
+                        value:0,
+                        conformer:function (_value) {
+                          return Math.max (Math.min (_value,100),0);
+                        },
+                        onChange:function () {
+                          _valuesWhenOnChangeCalled.push (this.get ('myProperty'));
+                        }
+                      }
+                    });
+                    var _instance = new _Subclass;
+                    _instance.set ({myProperty:-10});
+                    _instance.set ({myProperty:10});
+                    _instance.set ({myProperty:10});
+                    _instance.set ({myProperty:100});
+                    _instance.set ({myProperty:200});
+                    _instance.set ({myProperty:-200});
+                    _instance.set ({myProperty:0});
+                    return this.expect ([0,10,100,0],_valuesWhenOnChangeCalled);
+                  }
+                },
+                {
+                  title:'Test that when the same onChange handler is registered for multiple set-get properties, it is only executed once - even if the values of all those properties change during a set',
+                  test:function () {
+                    var
+                      _Subclass = Uize.subclass (),
+                      _onChangeHandlerSpecifiedByStringCount = 0,
+                      _onChangeHandlerSpecifiedByFunctionCount = 0
+                    ;
+                    _Subclass.prototype.someMethod = function () {_onChangeHandlerSpecifiedByStringCount++};
+                    function _onChangeHandlerFunction () {_onChangeHandlerSpecifiedByFunctionCount++};
+                    _Subclass.registerProperties ({
+                      _myProperty1:{
+                        name:'myProperty1',
+                        value:'initial value',
+                        onChange:[
+                          'someMethod',
+                          _onChangeHandlerFunction
+                        ]
+                      },
+                      _myProperty2:{
+                        name:'myProperty2',
+                        value:'initial value',
+                        onChange:[
+                          'someMethod',
+                          _onChangeHandlerFunction
+                        ]
+                      },
+                      _myProperty3:{
+                        name:'myProperty3',
+                        value:'initial value',
+                        onChange:[
+                          'someMethod',
+                          _onChangeHandlerFunction
+                        ]
+                      }
+                    });
+                    var _instance = new _Subclass;
+                    _instance.set ({
+                      myProperty1:'new value',
+                      myProperty2:'new value',
+                      myProperty3:'new value'
+                    });
+                    return (
+                      this.expect (2,_onChangeHandlerSpecifiedByStringCount) &amp;&amp;
+                      this.expect (2,_onChangeHandlerSpecifiedByFunctionCount)
+                    );
+                  }
+                }
+                /*
+                  - test that the execute once optimization for onChange handlers shared across properties does not prevent an onChange handler from executing on subsequent sets (ie. cleanup occurs correctly)
+                */
+              ]
+            },
+            {
+              title:'Test the conformer mechanism',
+              test:[
+                /*
+                  - test that a set-get property's conformer function is called with a single argument, that is the value being set for the property
+                  - test that the value returned by a conformer function is treated as the new value to be set for the property
+                  - test that a set-get property's conformer function is executed before the value of the property has changed
+                  - test that a set-get property's conformer function is called before its onChange handlers are called
+                  - test that, if a set-get property's value does not change as a result of the action of a conformer, then the property's onChange handlers are not executed
+                  - test that a conformer is called as a method on the instance that owns the set-get property
+                */
+              ]
+            },
+            {
+              title:'Test the Changed.[propertyName] event mechanism',
+              test:[
+                /*
+                  - Test that the Changed.[propertyName] event for a property is not fired when the property's value is set but doesn't change value
+                  - Test that the Changed.[propertyName] event for a property is fired when the property's value changes
+                  - Test that the Changed.[propertyName] events are fired only after all the onChange handlers are executed
+                  - Test that the Changed.* event is fired only once when multiple set-get properties have changed value
+                  - Test that a handler can be wired for a Changed.[propertyName] event even before the property is registered
+                    - Test that wiring a handler for a Changed.[propertyName] event for a property that has not been registered causes no harm
+                    - Test that a handler can be wired for a Changed.[propertyName] event for a property that is not yet registered, and that it will get executed when the property is later registered and its value changes
+                */
+              ]
+            },
+            {
+              title:'Test the alias mechanism',
+              test:[
+                /*
+                  - Test that a set-get property can have multiple aliases, and that its value can be set through any of those aliases
+                  - Test that a set-get property's value can be accessed using any of its registered aliases
+                  - Test that getting the values for all set-get properties results in the values of set-get properties with aliases being reported only through their canonical (non-alias) names
+                  - Test that a handler that is wired for a set-get property using an alias name is respected
+                  - Test that a handler that is wired for a set-get property using an alias name can be unwired using any of its other alias names, or its canonical name
+                */
+              ]
+            },
+            {
+              title:'Test the special value set-get property',
+              test:[
+                /*
+                  - Test that the valueOf method of an instance returns the value of the special value set-get property for the instance
+                  - Test that the valueOf method of a class returns the value of the special value set-get property for the class (ie. the initial value for the value set-get property)
+                */
+              ]
+            }
+            /*
+              - test that values specified for set-get properties when calling a class' constructor are respected
+              - test set-get properties and inheritance
+                - test that set-get properties are inherited by subclasses
+            */
           ]
         },
         {
