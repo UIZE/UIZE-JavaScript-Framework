@@ -1,0 +1,31 @@
+The =Uize.set= static method and the =set= instance method, implemented in the =Uize= base class, have been improved to support an arbitrary number of arguments, allowing the values for multiple set-get properties to be specified as name-value pair arguments.
+
+SYNTAX - INSTANCE
+..........................................
+myInstance.set (
+	property1NameSTR,property1ValueANYTYPE,
+	property2NameSTR,property2ValueANYTYPE,
+	...,
+	propertyNNameSTR,propertyNValueANYTYPE
+);
+..........................................
+
+SYNTAX - STATIC / CLASS
+..........................................
+Uize.set (
+	property1NameSTR,property1ValueANYTYPE,
+	property2NameSTR,property2ValueANYTYPE,
+	...,
+	propertyNNameSTR,propertyNValueANYTYPE
+);
+..........................................
+
+This new variation, supported for both the =set= instance method and the =Uize.set= static method, allows values for an arbitrary number of set-get properties to be set in a single call to the =set= method, by specifying the names and values of the properties using an arbitrary number of name-value pair arguments, where even numbered arguments are property names and odd numbered arguments are property values. This variation makes it possible to use expressions or the values of variables for specifying the names of the properties to set.
+
+The new variations of the set method are fully document and unit tested.
+
+....................................................................................
+<< metadata >>
+
+title: 2011-07-03 - Improved set Method in the Uize Base Class
+....................................................................................

@@ -1,6 +1,128 @@
 This document lists to do tasks related to specific JavaScript modules of the UIZE JavaScript Framework.
 
 Uize
+	Conditions
+		The whenever Instance Method
+			EXAMPLES
+			...............................................
+			myWidget.whenever (
+				function (theme) {return theme == 'bottle'},
+				function () {
+					// do stuff whenever condition is met
+				}
+			);
+	
+			myWidget.whenever (
+				'theme == "bottle"',
+				function () {
+					// do stuff whenever condition is met
+				}
+			);
+			...............................................
+
+		The once Instance Method
+			EXAMPLE
+			..........................................................
+			myWidget.once (
+				'totalSelected  > 5',
+				function () {
+					// do stuff once condition is met for the first time
+				}
+			);
+			..........................................................
+
+	Properties Expressions
+		SYNTAX
+		......................................................................
+		propertiesExpressionFUNC = Uize.propertiesExpression (expressionFUNC);
+		......................................................................
+
+		INSTEAD OF...
+		.......................................................
+		function (object) {
+			return object.get ('width') * object.get ('height');
+		}
+		.......................................................
+
+		USE...
+		...................................................
+		Uize.propertiesExpression (
+			function (width,height) {return width * height};
+		}
+		...................................................
+		
+	Derived Properties
+		A derived property is a special type of set-get property whose value is derived from the values of other set-get properties of the same instance.
+
+		EXAMPLE
+		...........................................................................................................
+		_class.registerProperties ({
+			_allSelected:{
+				name:'allSelected',
+				derived:function (totalSelected,totalItems) {return totalSelected > 0 && totalSelected == totalItems}
+			},
+			_oneSelected:{
+				name:'oneSelected',
+				derived:function (totalSelected) {return totalSelected == 1}
+			},
+			_someSelected:{
+				name:'someSelected',
+				derived:function (totalSelected) {return totalSelected > 0}
+			},
+			_totalSelected:{
+				name:'totalSelected',
+				value:0
+			},
+			_totalItems:{
+				name:'totalItems',
+				value:0
+			}
+		});
+		...........................................................................................................
+
+		In the above example, the =allSelected=, =oneSelected=, and =someSelected= set-get properties are all derived properties. A set-get property is indicated as being a derived property by the presence of the =derived= property in the property profile. The =derived= property serves both to indicate that a set-get property is derived, as well to provide the deriver function that indicates from which other set-get properties the derived property is derived and how to calculate the derived value.
+
+		Implementation Questions
+			How Are Derived Properties Inherited
+				Currently, profiles for set-get properties are inherited through cloning of the definition objects.
+
+				If dynamically generated summary information is needed to improve the performance of derived properties, when will this summary information be generated for a class? And how is the information regenerated if it is invalidated by the subsequent registration of more derived properties.
+
+		Implementation Approaches
+			Exloding Out the Properties Being Set
+				With this approach, setting values for derived set-get properties is worked into the process of setting values for properties that affect derived properties, by exploding out the properties being set to included all affected derived properties.
+
+				After setting values for the set-get properties that are being set explicitly, and before executing onChange handlers for any set-get properties whose values have changed, the registered set-get properties are scanned for derived set-get properties that may be affected by the properties being set explicitly. If any derived set-get properties *are* affected by any of the set-get properties whose values have changed, then values are computed for those derived properties and their values are set. This process is repeated to address set- get properties that are derived from derived properties whose values may have changed. The process is repeated until there are no longer any derived properties that are affected and that have not had new values computed.
+
+				Advantages
+					document...
+
+				Disadvantages
+					document...
+
+			Single Level Derived Property Batching
+				With this approach, values for all directly affected derived set-get properties are set in a batch set that occurs before =onChange= handlers are executed for the set-get properties being explicitly set.
+
+			Using onChange Handler Merchanism
+				With this approach, when a derived set-get property is registed, an onChange handler is registered with any property from which the derived property is derived.
+
+				Advantages
+					- uses the existing optimization built into the =onChange= handlers mechanism
+					- matches the way values for derived set-get properties are currently being updated
+
+				Disadvantages
+					- involves a separate set for each derived set-get property whose value changes
+					- requires management of =onChange= handlers and dealing with situations where set-get properties are re-registered
+
+				Issues to Deal With
+					Re-registering a Non-derived Set-get Property
+						How does one deal with re-registering a set-get property that affects a derived set-get property?
+
+						Currently, everything gets blown away when re-registering a set-get property. This means that the =onChange= handler that was added to the set-get property at the time of registering the set-get property that is derived from it will get blown away, and the relationship of the derived property to the property from which it is derived will get blown away.
+
+					Re-registering a Derived Set-get Property
+						How does one deal with re-registering a derived set-get property, where the new profile for the derived property defines a different relationship properties from which it is derived?
+
 	Property Bindings
 		Provide a way in the =Uize= base class to bind two set-get properties together, in order to keep their values synchronized.
 
@@ -1546,6 +1668,22 @@ Uize.Util.Coupler
 
 Uize.Util.Cycle
 	- instead of start / stop methods, just use property interface (ie. inProgress property)
+
+Uize.Util.ValueDeriver
+	EXAMPLE
+	.............................
+	new Uize.Util.ValueDeriver ({
+		inputs:{
+			a:foo,
+			b:bar
+		},
+		deriver:function (a,b) {
+			return a + b;
+		},
+		output:{
+		}
+	});
+	.............................
 
 Uize.Web.ImageLoader
 	- a class that manages loading state for one or more images

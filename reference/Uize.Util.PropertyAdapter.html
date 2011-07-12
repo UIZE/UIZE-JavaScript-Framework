@@ -131,8 +131,7 @@
 					<li><a href="#2_1" title="A boolean, indicating whether or not the connection is active and the properties specified by the propertyA and propertyB set-get properties are connected together.">2.1. connected</a></li>
 					<li><a href="#2_2" title="A property specifier, specifying the instance and the property for property A.">2.2. propertyA</a></li>
 					<li><a href="#2_3" title="A property specifier, specifying the instance and the property for property B.">2.3. propertyB</a></li>
-					<li><a href="#2_4" title="Inherited from Uize.">2.4. value</a></li>
-					<li><a href="#2_5" title="An object, specifying a value adapter that should be used to translate the value of property A to a value for property B, or vice versa.">2.5. valueAdapter</a></li>
+					<li><a href="#2_4" title="An object, specifying a value adapter that should be used to translate the value of property A to a value for property B, or vice versa.">2.4. valueAdapter</a></li>
 				</ul>
 			</li>
 			<li><a href="#3">3. Instance Methods</a>
@@ -293,7 +292,7 @@
 						<a name="1_1_2_1_3_3"></a>
 						<h5 class="heading6" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two Set-get Properties -&gt; 1.1.2.1.3. Property Specifier -&gt; 1.1.2.1.3.3. Property Specifier Instance Form"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. In a Nutshell">1</a>.<a href="#1_1_2" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features">2</a>.<a href="#1_1_2_1" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two Set-get Properties">1</a>.<a href="#1_1_2_1_3" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two Set-get Properties -&gt; 1.1.2.1.3. Property Specifier">3</a>.<a href="#1_1_2_1_3_3" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.1. Two Set-get Properties -&gt; 1.1.2.1.3. Property Specifier -&gt; 1.1.2.1.3.3. Property Specifier Instance Form">3</a>. </span>Property Specifier Instance Form</h5>
 						<div class="contents6">
-							<p>In the special case where one wishes to specify the <code><a href="#2_4">value</a></code> property of an instance of a <code><a href="../reference/Uize.html">Uize</a></code> subclass, the property can be specified simply by specifying a reference to the instance.</p>
+							<p>In the special case where one wishes to specify the <code>value</code> property of an instance of a <code><a href="../reference/Uize.html">Uize</a></code> subclass, the property can be specified simply by specifying a reference to the instance.</p>
 							
 							<p><span class="allCaps">SYNTAX</span></p>
 							
@@ -301,7 +300,7 @@
 <pre class="sample-code">instanceOBJ  // reference to an instance of a Uize subclass
 </pre>
 							
-							<p>It is a fairly common use case to connect the <code><a href="#2_4">value</a></code> property of two instances to one another using a property adapter. For such cases, specifying just the instances for each of the properties is a convenient shorthand.</p>
+							<p>It is a fairly common use case to connect the <code>value</code> property of two instances to one another using a property adapter. For such cases, specifying just the instances for each of the properties is a convenient shorthand.</p>
 						</div>
 						
 						<a name="1_1_2_1_3_4"></a>
@@ -309,7 +308,7 @@
 						<div class="contents6">
 							<p>When using a <a href="#1_1_2_1_3">property specifier</a> to specify a value for either of the <code><a href="#2_2">propertyA</a></code> or <code><a href="#2_3">propertyB</a></code> set-get properties, the <a href="#1_1_2_1_3">property specifier</a> is resolved to the canonical <a href="#1_1_2_1_3_1">property specifier object form</a> using a versatile conformer.</p>
 							
-							<p>Because the values of the <code><a href="#2_2">propertyA</a></code> or <code><a href="#2_3">propertyB</a></code> set-get properties are conformed, a <a href="#1_1_2_1_3">property specifier</a> expressed in either the <a href="#1_1_2_1_3_2">property specifier array form</a> or the <a href="#1_1_2_1_3_3">property specifier instance form</a> will not be stored internally in those alternate forms, but will instead for conformed to the canonical <a href="#1_1_2_1_3_1">property specifier object form</a>.</p>
+							<p>Because the values of the <code><a href="#2_2">propertyA</a></code> or <code><a href="#2_3">propertyB</a></code> set-get properties are conformed, a <a href="#1_1_2_1_3">property specifier</a> expressed in either the <a href="#1_1_2_1_3_2">property specifier array form</a> or the <a href="#1_1_2_1_3_3">property specifier instance form</a> will not be stored internally in those alternate forms, but will instead be conformed to the canonical <a href="#1_1_2_1_3_1">property specifier object form</a>.</p>
 						</div>
 					</div>
 				</div>
@@ -382,7 +381,7 @@
 });
 </pre>
 							
-							<p>In the above example, a property adapter is being used to connect the <code><a href="#2_4">value</a></code> set-get properties of two text input widgets (instances of the <code><a href="../reference/Uize.Widget.TextInput.html">Uize.Widget.TextInput</a></code> class): <code>numberTextInput</code> and <code>numberSquaredTextInput</code>. A value adapter is specified to maintain a relationship where the value of the <code>numberSquaredTextInput</code> instance is the square of the value of the <code>numberTextInput</code> instance and, conversely, where the value of the <code>numberTextInput</code> instance is the square root of the <code>numberSquaredTextInput</code> instance.</p>
+							<p>In the above example, a property adapter is being used to connect the <code>value</code> set-get properties of two text input widgets (instances of the <code><a href="../reference/Uize.Widget.TextInput.html">Uize.Widget.TextInput</a></code> class): <code>numberTextInput</code> and <code>numberSquaredTextInput</code>. A value adapter is specified to maintain a relationship where the value of the <code>numberSquaredTextInput</code> instance is the square of the value of the <code>numberTextInput</code> instance and, conversely, where the value of the <code>numberTextInput</code> instance is the square root of the <code>numberSquaredTextInput</code> instance.</p>
 						</div>
 						
 						<a name="1_1_2_2_4_2"></a>
@@ -400,7 +399,7 @@
 });
 </pre>
 							
-							<p>In the above example, a property adapter is being used to connect the <code><a href="#2_4">value</a></code> set-get properties of two text input widgets (instances of the <code><a href="../reference/Uize.Widget.TextInput.html">Uize.Widget.TextInput</a></code> class): <code>colorAsHexTextInput</code> and <code>colorAsRgbTextInput</code>. A value adapter is specified to maintain a relationship where the values of the <code>colorAsHexTextInput</code> and <code>colorAsRgbTextInput</code> instances represent the same color, but where the value of the <code>colorAsHexTextInput</code> instance is the color encoded in hex format (eg. <code>#ffa500</code> for orange), and the value of the the <code>colorAsRgbTextInput</code> instance is the color encoded in RGB tuple format (eg. <code>rgb(255,165,0)</code> for orange). In this example, we're fortunate enough to be able to use the <code>Uize.Color.adapter</code> static method of the <code><a href="../reference/Uize.Color.html">Uize.Color</a></code> object to generate a <a href="#1_1_2_2">value adapter</a> that will adapt a color value between the two encodings <code>'#hex'</code> and <code>'RGB string'</code>.</p>
+							<p>In the above example, a property adapter is being used to connect the <code>value</code> set-get properties of two text input widgets (instances of the <code><a href="../reference/Uize.Widget.TextInput.html">Uize.Widget.TextInput</a></code> class): <code>colorAsHexTextInput</code> and <code>colorAsRgbTextInput</code>. A value adapter is specified to maintain a relationship where the values of the <code>colorAsHexTextInput</code> and <code>colorAsRgbTextInput</code> instances represent the same color, but where the value of the <code>colorAsHexTextInput</code> instance is the color encoded in hex format (eg. <code>#ffa500</code> for orange), and the value of the the <code>colorAsRgbTextInput</code> instance is the color encoded in RGB tuple format (eg. <code>rgb(255,165,0)</code> for orange). In this example, we're fortunate enough to be able to use the <code>Uize.Color.adapter</code> static method of the <code><a href="../reference/Uize.Color.html">Uize.Color</a></code> object to generate a <a href="#1_1_2_2">value adapter</a> that will adapt a color value between the two encodings <code>'#hex'</code> and <code>'RGB string'</code>.</p>
 						</div>
 					</div>
 					
@@ -441,7 +440,7 @@
 						
 						<table class="list">
 						<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the value of the <code><a href="#2_1">connected</a></code> set-get property becomes <code>false</code></td></tr>
-						<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the value of any of the <code><a href="#2_2">propertyA</a></code>, <code><a href="#2_3">propertyB</a></code>, or <code><a href="#2_5">valueAdapter</a></code> set-get properties is changed (if the value of neither the <code><a href="#2_2">propertyA</a></code> nor <code><a href="#2_3">propertyB</a></code> set-get property is <code>null</code> or <code>undefined</code> after the change, then disconnection will occur right before the <a href="#1_1_2_3_1">initial connection</a> that occurs for the new configuration of connected properties and/or <a href="#1_1_2_2">value adapter</a>)</td></tr>
+						<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the value of any of the <code><a href="#2_2">propertyA</a></code>, <code><a href="#2_3">propertyB</a></code>, or <code><a href="#2_4">valueAdapter</a></code> set-get properties is changed (if the value of neither the <code><a href="#2_2">propertyA</a></code> nor <code><a href="#2_3">propertyB</a></code> set-get property is <code>null</code> or <code>undefined</code> after the change, then disconnection will occur right before the <a href="#1_1_2_3_1">initial connection</a> that occurs for the new configuration of connected properties and/or <a href="#1_1_2_2">value adapter</a>)</td></tr>
 						</table>
 					</div>
 				</div>
@@ -451,7 +450,7 @@
 				<div class="contents4">
 					<p>Synchronization is when the value of one of the <a href="#1_1_2_1">two set-get properties</a> that are connected through a property adapter instance changes, and the value of the other property in the pair is updated in order to keep it synchronized with the one that changed.</p>
 					
-					<p>When <a href="#1_1_2_1">two set-get properties</a> are specified for a property adapter instance, but that instance's <code><a href="#2_1">connected</a></code> set-get property is set to <code>false</code>, then synchronization will not be performed if the value of either of the <a href="#1_1_2_1">two set-get properties</a> is modified. Whenever synchronization is performed, the value of the <code><a href="#2_5">valueAdapter</a></code> set-get property is taken into consideration (see <a href="#1_1_2_2_5">How a Value Adapter is Used</a>).</p>
+					<p>When <a href="#1_1_2_1">two set-get properties</a> are specified for a property adapter instance, but that instance's <code><a href="#2_1">connected</a></code> set-get property is set to <code>false</code>, then synchronization will not be performed if the value of either of the <a href="#1_1_2_1">two set-get properties</a> is modified. Whenever synchronization is performed, the value of the <code><a href="#2_4">valueAdapter</a></code> set-get property is taken into consideration (see <a href="#1_1_2_2_5">How a Value Adapter is Used</a>).</p>
 					
 					<a name="1_1_2_4_1"></a>
 					<h5 class="heading5" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.4. Synchronization -&gt; 1.1.2.4.1. Property A to Property B Synchronization"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. In a Nutshell">1</a>.<a href="#1_1_2" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features">2</a>.<a href="#1_1_2_4" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.4. Synchronization">4</a>.<a href="#1_1_2_4_1" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.2. Features -&gt; 1.1.2.4. Synchronization -&gt; 1.1.2.4.1. Property A to Property B Synchronization">1</a>. </span>Property A to Property B Synchronization</h5>
@@ -506,7 +505,7 @@
 					<div class="contents5">
 						<p>The <code>Uize.Util.PropertyAdapter</code> class supports dynamically changing the <a href="#1_1_2_2">value adapter</a> that is used to transform values when performing <a href="#1_1_2_4">synchronization</a> from <a href="#1_1_2_1_1">property A</a> to <a href="#1_1_2_1_2">property B</a>, and vice versa.</p>
 						
-						<p>Changing the <a href="#1_1_2_2">value adapter</a> that is used by a property adapter instance is as simple as setting the value of the instance's <code><a href="#2_5">valueAdapter</a></code> set-get property. When dynamically changing the <a href="#1_1_2_2">value adapter</a>, <a href="#1_1_2_3_2">disconnection</a> will occur for any previously connected properties, after which <a href="#1_1_2_3_1">initial connection</a> will occur for the new configuration of properties and value adapter.</p>
+						<p>Changing the <a href="#1_1_2_2">value adapter</a> that is used by a property adapter instance is as simple as setting the value of the instance's <code><a href="#2_4">valueAdapter</a></code> set-get property. When dynamically changing the <a href="#1_1_2_2">value adapter</a>, <a href="#1_1_2_3_2">disconnection</a> will occur for any previously connected properties, after which <a href="#1_1_2_3_1">initial connection</a> will occur for the new configuration of properties and value adapter.</p>
 					</div>
 				</div>
 				
@@ -620,7 +619,7 @@
 				
 				<p><span class="allCaps">SET-GET PROPERTIES</span></p>
 				
-				<p><code><a href="#2_1">connected</a></code> | <code><a href="#2_2">propertyA</a></code> | <code><a href="#2_3">propertyB</a></code> | <code><a href="#2_5">valueAdapter</a></code></p>
+				<p><code><a href="#2_1">connected</a></code> | <code><a href="#2_2">propertyA</a></code> | <code><a href="#2_3">propertyB</a></code> | <code><a href="#2_4">valueAdapter</a></code></p>
 			</div>
 			
 			<a name="1_3_2"></a>
@@ -645,10 +644,6 @@
 				<p><span class="allCaps">INSTANCE METHODS</span></p>
 				
 				<p><code><a href="#3_1">fire</a></code> | <code><a href="#3_2">get</a></code> | <code><a href="#3_3">kill</a></code> | <code><a href="#3_4">set</a></code> | <code><a href="#3_5">toggle</a></code> | <code><a href="#3_6">unwire</a></code> | <code><a href="#3_7">wire</a></code></p>
-				
-				<p><span class="allCaps">SET-GET PROPERTIES</span></p>
-				
-				<p><code><a href="#2_4">value</a></code></p>
 				
 				<p><span class="allCaps">STATIC METHODS</span></p>
 				
@@ -732,19 +727,7 @@
 		</div>
 		
 		<a name="2_4"></a>
-		<h2 class="heading2" title="2. Set-get Properties -&gt; 2.4. value"><span class="headingNumber"><a href="#2" title="2. Set-get Properties">2</a>.<a href="#2_4" title="2. Set-get Properties -&gt; 2.4. value">4</a>. </span>value</h2>
-		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
-			
-			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
-			
-			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
-			</table>
-		</div>
-		
-		<a name="2_5"></a>
-		<h2 class="heading2" title="2. Set-get Properties -&gt; 2.5. valueAdapter"><span class="headingNumber"><a href="#2" title="2. Set-get Properties">2</a>.<a href="#2_5" title="2. Set-get Properties -&gt; 2.5. valueAdapter">5</a>. </span>valueAdapter</h2>
+		<h2 class="heading2" title="2. Set-get Properties -&gt; 2.4. valueAdapter"><span class="headingNumber"><a href="#2" title="2. Set-get Properties">2</a>.<a href="#2_4" title="2. Set-get Properties -&gt; 2.4. valueAdapter">4</a>. </span>valueAdapter</h2>
 		<div class="contents2">
 			<p>An object, specifying a <a href="#1_1_2_2">value adapter</a> that should be used to translate the value of <a href="#1_1_2_1_1">property A</a> to a value for <a href="#1_1_2_1_2">property B</a>, or vice versa.</p>
 			

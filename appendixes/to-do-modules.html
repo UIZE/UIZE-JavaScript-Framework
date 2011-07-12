@@ -25,51 +25,83 @@
 		<ul>
 			<li><a href="#1">1. Uize</a>
 				<ul>
-					<li><a href="#1_1" title="Provide a way in the Uize base class to bind two set-get properties together, in order to keep their values synchronized.">1.1. Property Bindings</a></li>
-					<li><a href="#1_2" title="Copy ability, for initial values of set-get properties that are arrays or objects.">1.2. Copy Ability for Set-get Properties</a></li>
-					<li><a href="#1_3" title="Lets you conveniently create a function / method caller, where you can specify context, function, and arguments.">1.3. Uize.makeCaller</a></li>
-					<li><a href="#1_4">1.4. Uize.constrain</a>
+					<li><a href="#1_1" title="A derived property is a special type of set-get property whose value is derived from the values of other set-get properties of the same instance.">1.1. Derived Properties</a>
 						<ul>
-							<li><a href="#1_4_1" title="Support a wrap flag, so that constrained values can be made to wrap around within the constraining range, rather than always only hitting up against the edges.">1.4.1. Support a wrap flag</a></li>
-						</ul>
-					</li>
-					<li><a href="#1_5">1.5. Uize.callOn</a>
-						<ul>
-							<li><a href="#1_5_1" title="Add support for using the Uize.callOn method on a target that is an instance of a class that is not a Uize subclass.">1.5.1. Support Instances of Non-Uize Classes</a></li>
-						</ul>
-					</li>
-					<li><a href="#1_6">1.6. Uize.indexIn</a>
-						<ul>
-							<li><a href="#1_6_1" title="For object type source, could find key whose value matches, and return undefined (or null?) if value not found in object.">1.6.1. Support Object Source</a></li>
-							<li><a href="#1_6_2" title="For simple type source, could do string index.">1.6.2. Support Simple Type Source</a></li>
-						</ul>
-					</li>
-					<li><a href="#1_7">1.7. Uize.module</a>
-						<ul>
-							<li><a href="#1_7_1" title="How can code require a module that is not in the modules directory (like a code beside)?">1.7.1. Support Code Besides in Module Loader</a></li>
-						</ul>
-					</li>
-					<li><a href="#1_8" title="Consider a facility to support multiple inheritance (may involve creating a merge service for merging data from one object into another, since it should be possible to merge additional features of a different class into an already created class, and perhaps that merge feature would also be used in the _subclass function&apos;s implementation).">1.8. Multiple Inheritance</a></li>
-					<li><a href="#1_9">1.9. Library Modules</a>
-						<ul>
-							<li><a href="#1_9_1" title="Can library modules that are outside the modules directory require modules that are outside the modules directory?">1.9.1. Library of Dispersed Modules</a></li>
-						</ul>
-					</li>
-					<li><a href="#1_10" title="Variation on constructor, where specifying a non-object for the properties has the effect of setting the value property.">1.10. Handle Simple Type in Place of Constructor Properties</a></li>
-					<li><a href="#1_11" title="Handle recursion in Uize.clone (how to generate properties that are references to other parts of structure in same relationship as the equivalent property in the cloning source???)">1.11. Uize.clone and Recursion</a></li>
-					<li><a href="#1_12">1.12. Improvements to Property Mechanism</a>
-						<ul>
-							<li><a href="#1_12_1">1.12.1. New Profile Features</a>
+							<li><a href="#1_1_1">1.1.1. Implementation Questions</a>
 								<ul>
-									<li><a href="#1_12_1_1" title="Basic types...">1.12.1.1. type</a></li>
-									<li><a href="#1_12_1_2" title="Different types of validators...">1.12.1.2. validator</a></li>
+									<li><a href="#1_1_1_1" title="Currently, profiles for set-get properties are inherited through cloning of the definition objects.">1.1.1.1. How Are Derived Properties Inherited</a></li>
+								</ul>
+							</li>
+							<li><a href="#1_1_2">1.1.2. Implementation Approaches</a>
+								<ul>
+									<li><a href="#1_1_2_1" title="With this approach, setting values for derived set-get properties is worked into the process of setting values for properties that affect derived properties, by exploding out the properties being set to included all affected derived properties.">1.1.2.1. Exloding Out the Properties Being Set</a>
+										<ul>
+											<li><a href="#1_1_2_1_1" title="document...">1.1.2.1.1. Advantages</a></li>
+											<li><a href="#1_1_2_1_2" title="document...">1.1.2.1.2. Disadvantages</a></li>
+										</ul>
+									</li>
+									<li><a href="#1_1_2_2" title="With this approach, values for all directly affected derived set-get properties are set in a batch set that occurs before onChange handlers are executed for the set-get properties being explicitly set.">1.1.2.2. Single Level Derived Property Batching</a></li>
+									<li><a href="#1_1_2_3" title="With this approach, when a derived set-get property is registed, an onChange handler is registered with any property from which the derived property is derived.">1.1.2.3. Using onChange Handler Merchanism</a>
+										<ul>
+											<li><a href="#1_1_2_3_1" title="- uses the existing optimization built into the onChange handlers mechanism">1.1.2.3.1. Advantages</a></li>
+											<li><a href="#1_1_2_3_2" title="- involves a separate set for each derived set-get property whose value changes">1.1.2.3.2. Disadvantages</a></li>
+											<li><a href="#1_1_2_3_3">1.1.2.3.3. Issues to Deal With</a>
+												<ul>
+													<li><a href="#1_1_2_3_3_1" title="How does one deal with re-registering a set-get property that affects a derived set-get property?">1.1.2.3.3.1. Re-registering a Non-derived Set-get Property</a></li>
+													<li><a href="#1_1_2_3_3_2" title="How does one deal with re-registering a derived set-get property, where the new profile for the derived property defines a different relationship properties from which it is derived?">1.1.2.3.3.2. Re-registering a Derived Set-get Property</a></li>
+												</ul>
+											</li>
+										</ul>
+									</li>
 								</ul>
 							</li>
 						</ul>
 					</li>
-					<li><a href="#1_13" title="- optimize for successive substitution on the same source using the same form of map (but different values, of course)">1.13. Uize.substituteInto</a></li>
-					<li><a href="#1_14" title="- to indicate that the instance has been constructed">1.14. constructed Property</a></li>
-					<li><a href="#1_15" title="_this.doIn (_superclass,&apos;wireUi&apos;);&#10;&#10;_class.doSuper (_this,&apos;wireUi&apos;);&#10;_class.useSuper (_this,&apos;wireUi&apos;);&#10;_class.callSuper (_this,&apos;wireUi&apos;);&#10;&#10;_superclass.on (_this,&apos;wireUi&apos;);&#10;_superclass.my (_this,&apos;wireUi&apos;);&#10;_superclass.doOn (_this,&apos;wireUi&apos;);&#10;_superclass.doMy (_this,&apos;wireUi&apos;);&#10;_superclass.useMy (_this,&apos;wireUi&apos;);&#10;_superclass.proto (_this,&apos;wireUi&apos;);&#10;_superclass.useMine (_this,&apos;wireUi&apos;);&#10;">1.15. - new and more concise semantics for calling methods on superclass</a></li>
+					<li><a href="#1_2" title="Provide a way in the Uize base class to bind two set-get properties together, in order to keep their values synchronized.">1.2. Property Bindings</a></li>
+					<li><a href="#1_3" title="Copy ability, for initial values of set-get properties that are arrays or objects.">1.3. Copy Ability for Set-get Properties</a></li>
+					<li><a href="#1_4" title="Lets you conveniently create a function / method caller, where you can specify context, function, and arguments.">1.4. Uize.makeCaller</a></li>
+					<li><a href="#1_5">1.5. Uize.constrain</a>
+						<ul>
+							<li><a href="#1_5_1" title="Support a wrap flag, so that constrained values can be made to wrap around within the constraining range, rather than always only hitting up against the edges.">1.5.1. Support a wrap flag</a></li>
+						</ul>
+					</li>
+					<li><a href="#1_6">1.6. Uize.callOn</a>
+						<ul>
+							<li><a href="#1_6_1" title="Add support for using the Uize.callOn method on a target that is an instance of a class that is not a Uize subclass.">1.6.1. Support Instances of Non-Uize Classes</a></li>
+						</ul>
+					</li>
+					<li><a href="#1_7">1.7. Uize.indexIn</a>
+						<ul>
+							<li><a href="#1_7_1" title="For object type source, could find key whose value matches, and return undefined (or null?) if value not found in object.">1.7.1. Support Object Source</a></li>
+							<li><a href="#1_7_2" title="For simple type source, could do string index.">1.7.2. Support Simple Type Source</a></li>
+						</ul>
+					</li>
+					<li><a href="#1_8">1.8. Uize.module</a>
+						<ul>
+							<li><a href="#1_8_1" title="How can code require a module that is not in the modules directory (like a code beside)?">1.8.1. Support Code Besides in Module Loader</a></li>
+						</ul>
+					</li>
+					<li><a href="#1_9" title="Consider a facility to support multiple inheritance (may involve creating a merge service for merging data from one object into another, since it should be possible to merge additional features of a different class into an already created class, and perhaps that merge feature would also be used in the _subclass function&apos;s implementation).">1.9. Multiple Inheritance</a></li>
+					<li><a href="#1_10">1.10. Library Modules</a>
+						<ul>
+							<li><a href="#1_10_1" title="Can library modules that are outside the modules directory require modules that are outside the modules directory?">1.10.1. Library of Dispersed Modules</a></li>
+						</ul>
+					</li>
+					<li><a href="#1_11" title="Variation on constructor, where specifying a non-object for the properties has the effect of setting the value property.">1.11. Handle Simple Type in Place of Constructor Properties</a></li>
+					<li><a href="#1_12" title="Handle recursion in Uize.clone (how to generate properties that are references to other parts of structure in same relationship as the equivalent property in the cloning source???)">1.12. Uize.clone and Recursion</a></li>
+					<li><a href="#1_13">1.13. Improvements to Property Mechanism</a>
+						<ul>
+							<li><a href="#1_13_1">1.13.1. New Profile Features</a>
+								<ul>
+									<li><a href="#1_13_1_1" title="Basic types...">1.13.1.1. type</a></li>
+									<li><a href="#1_13_1_2" title="Different types of validators...">1.13.1.2. validator</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li><a href="#1_14" title="- optimize for successive substitution on the same source using the same form of map (but different values, of course)">1.14. Uize.substituteInto</a></li>
+					<li><a href="#1_15" title="- to indicate that the instance has been constructed">1.15. constructed Property</a></li>
+					<li><a href="#1_16" title="_this.doIn (_superclass,&apos;wireUi&apos;);&#10;&#10;_class.doSuper (_this,&apos;wireUi&apos;);&#10;_class.useSuper (_this,&apos;wireUi&apos;);&#10;_class.callSuper (_this,&apos;wireUi&apos;);&#10;&#10;_superclass.on (_this,&apos;wireUi&apos;);&#10;_superclass.my (_this,&apos;wireUi&apos;);&#10;_superclass.doOn (_this,&apos;wireUi&apos;);&#10;_superclass.doMy (_this,&apos;wireUi&apos;);&#10;_superclass.useMy (_this,&apos;wireUi&apos;);&#10;_superclass.proto (_this,&apos;wireUi&apos;);&#10;_superclass.useMine (_this,&apos;wireUi&apos;);&#10;">1.16. - new and more concise semantics for calling methods on superclass</a></li>
 				</ul>
 			</li>
 			<li><a href="#2">2. Uize.Array</a>
@@ -1029,7 +1061,126 @@
 	<h1 class="heading1" title="1. Uize"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>. </span>Uize</h1>
 	<div class="contents1">
 		<a name="1_1"></a>
-		<h2 class="heading2" title="1. Uize -&gt; 1.1. Property Bindings"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_1" title="1. Uize -&gt; 1.1. Property Bindings">1</a>. </span>Property Bindings</h2>
+		<h2 class="heading2" title="1. Uize -&gt; 1.1. Derived Properties"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_1" title="1. Uize -&gt; 1.1. Derived Properties">1</a>. </span>Derived Properties</h2>
+		<div class="contents2">
+			<p>A derived property is a special type of set-get property whose value is derived from the values of other set-get properties of the same instance.</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">_class.registerProperties ({
+  _allSelected:{
+    name:'allSelected',
+    derived:function (totalSelected,totalItems) {return totalSelected &gt; 0 &amp;&amp; totalSelected == totalItems}
+  },
+  _oneSelected:{
+    name:'oneSelected',
+    derived:function (totalSelected) {return totalSelected == 1}
+  },
+  _someSelected:{
+    name:'someSelected',
+    derived:function (totalSelected) {return totalSelected &gt; 0}
+  },
+  _totalSelected:{
+    name:'totalSelected',
+    value:0
+  },
+  _totalItems:{
+    name:'totalItems',
+    value:0
+  }
+});
+</pre>
+			
+			<p>In the above example, the <code>allSelected</code>, <code>oneSelected</code>, and <code>someSelected</code> set-get properties are all derived properties. A set-get property is indicated as being a derived property by the presence of the <code>derived</code> property in the property profile. The <code>derived</code> property serves both to indicate that a set-get property is derived, as well to provide the deriver function that indicates from which other set-get properties the derived property is derived and how to calculate the derived value.</p>
+			
+			<a name="1_1_1"></a>
+			<h3 class="heading3" title="1. Uize -&gt; 1.1. Derived Properties -&gt; 1.1.1. Implementation Questions"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_1" title="1. Uize -&gt; 1.1. Derived Properties">1</a>.<a href="#1_1_1" title="1. Uize -&gt; 1.1. Derived Properties -&gt; 1.1.1. Implementation Questions">1</a>. </span>Implementation Questions</h3>
+			<div class="contents3">
+				<a name="1_1_1_1"></a>
+				<h4 class="heading4" title="1. Uize -&gt; 1.1. Derived Properties -&gt; 1.1.1. Implementation Questions -&gt; 1.1.1.1. How Are Derived Properties Inherited"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_1" title="1. Uize -&gt; 1.1. Derived Properties">1</a>.<a href="#1_1_1" title="1. Uize -&gt; 1.1. Derived Properties -&gt; 1.1.1. Implementation Questions">1</a>.<a href="#1_1_1_1" title="1. Uize -&gt; 1.1. Derived Properties -&gt; 1.1.1. Implementation Questions -&gt; 1.1.1.1. How Are Derived Properties Inherited">1</a>. </span>How Are Derived Properties Inherited</h4>
+				<div class="contents4">
+					<p>Currently, profiles for set-get properties are inherited through cloning of the definition objects.</p>
+					
+					<p>If dynamically generated summary information is needed to improve the performance of derived properties, when will this summary information be generated for a class? And how is the information regenerated if it is invalidated by the subsequent registration of more derived properties.</p>
+				</div>
+			</div>
+			
+			<a name="1_1_2"></a>
+			<h3 class="heading3" title="1. Uize -&gt; 1.1. Derived Properties -&gt; 1.1.2. Implementation Approaches"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_1" title="1. Uize -&gt; 1.1. Derived Properties">1</a>.<a href="#1_1_2" title="1. Uize -&gt; 1.1. Derived Properties -&gt; 1.1.2. Implementation Approaches">2</a>. </span>Implementation Approaches</h3>
+			<div class="contents3">
+				<a name="1_1_2_1"></a>
+				<h4 class="heading4" title="1. Uize -&gt; 1.1. Derived Properties -&gt; 1.1.2. Implementation Approaches -&gt; 1.1.2.1. Exloding Out the Properties Being Set"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_1" title="1. Uize -&gt; 1.1. Derived Properties">1</a>.<a href="#1_1_2" title="1. Uize -&gt; 1.1. Derived Properties -&gt; 1.1.2. Implementation Approaches">2</a>.<a href="#1_1_2_1" title="1. Uize -&gt; 1.1. Derived Properties -&gt; 1.1.2. Implementation Approaches -&gt; 1.1.2.1. Exloding Out the Properties Being Set">1</a>. </span>Exloding Out the Properties Being Set</h4>
+				<div class="contents4">
+					<p>With this approach, setting values for derived set-get properties is worked into the process of setting values for properties that affect derived properties, by exploding out the properties being set to included all affected derived properties.</p>
+					
+					<p>After setting values for the set-get properties that are being set explicitly, and before executing onChange handlers for any set-get properties whose values have changed, the registered set-get properties are scanned for derived set-get properties that may be affected by the properties being set explicitly. If any derived set-get properties <b>are</b> affected by any of the set-get properties whose values have changed, then values are computed for those derived properties and their values are set. This process is repeated to address set- get properties that are derived from derived properties whose values may have changed. The process is repeated until there are no longer any derived properties that are affected and that have not had new values computed.</p>
+					
+					<a name="1_1_2_1_1"></a>
+					<h5 class="heading5" title="1. Uize -&gt; 1.1. Derived Properties -&gt; 1.1.2. Implementation Approaches -&gt; 1.1.2.1. Exloding Out the Properties Being Set -&gt; 1.1.2.1.1. Advantages"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_1" title="1. Uize -&gt; 1.1. Derived Properties">1</a>.<a href="#1_1_2" title="1. Uize -&gt; 1.1. Derived Properties -&gt; 1.1.2. Implementation Approaches">2</a>.<a href="#1_1_2_1" title="1. Uize -&gt; 1.1. Derived Properties -&gt; 1.1.2. Implementation Approaches -&gt; 1.1.2.1. Exloding Out the Properties Being Set">1</a>.<a href="#1_1_2_1_1" title="1. Uize -&gt; 1.1. Derived Properties -&gt; 1.1.2. Implementation Approaches -&gt; 1.1.2.1. Exloding Out the Properties Being Set -&gt; 1.1.2.1.1. Advantages">1</a>. </span>Advantages</h5>
+					<div class="contents5">
+						<p>document...</p>
+					</div>
+					
+					<a name="1_1_2_1_2"></a>
+					<h5 class="heading5" title="1. Uize -&gt; 1.1. Derived Properties -&gt; 1.1.2. Implementation Approaches -&gt; 1.1.2.1. Exloding Out the Properties Being Set -&gt; 1.1.2.1.2. Disadvantages"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_1" title="1. Uize -&gt; 1.1. Derived Properties">1</a>.<a href="#1_1_2" title="1. Uize -&gt; 1.1. Derived Properties -&gt; 1.1.2. Implementation Approaches">2</a>.<a href="#1_1_2_1" title="1. Uize -&gt; 1.1. Derived Properties -&gt; 1.1.2. Implementation Approaches -&gt; 1.1.2.1. Exloding Out the Properties Being Set">1</a>.<a href="#1_1_2_1_2" title="1. Uize -&gt; 1.1. Derived Properties -&gt; 1.1.2. Implementation Approaches -&gt; 1.1.2.1. Exloding Out the Properties Being Set -&gt; 1.1.2.1.2. Disadvantages">2</a>. </span>Disadvantages</h5>
+					<div class="contents5">
+						<p>document...</p>
+					</div>
+				</div>
+				
+				<a name="1_1_2_2"></a>
+				<h4 class="heading4" title="1. Uize -&gt; 1.1. Derived Properties -&gt; 1.1.2. Implementation Approaches -&gt; 1.1.2.2. Single Level Derived Property Batching"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_1" title="1. Uize -&gt; 1.1. Derived Properties">1</a>.<a href="#1_1_2" title="1. Uize -&gt; 1.1. Derived Properties -&gt; 1.1.2. Implementation Approaches">2</a>.<a href="#1_1_2_2" title="1. Uize -&gt; 1.1. Derived Properties -&gt; 1.1.2. Implementation Approaches -&gt; 1.1.2.2. Single Level Derived Property Batching">2</a>. </span>Single Level Derived Property Batching</h4>
+				<div class="contents4">
+					<p>With this approach, values for all directly affected derived set-get properties are set in a batch set that occurs before <code>onChange</code> handlers are executed for the set-get properties being explicitly set.</p>
+				</div>
+				
+				<a name="1_1_2_3"></a>
+				<h4 class="heading4" title="1. Uize -&gt; 1.1. Derived Properties -&gt; 1.1.2. Implementation Approaches -&gt; 1.1.2.3. Using onChange Handler Merchanism"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_1" title="1. Uize -&gt; 1.1. Derived Properties">1</a>.<a href="#1_1_2" title="1. Uize -&gt; 1.1. Derived Properties -&gt; 1.1.2. Implementation Approaches">2</a>.<a href="#1_1_2_3" title="1. Uize -&gt; 1.1. Derived Properties -&gt; 1.1.2. Implementation Approaches -&gt; 1.1.2.3. Using onChange Handler Merchanism">3</a>. </span>Using onChange Handler Merchanism</h4>
+				<div class="contents4">
+					<p>With this approach, when a derived set-get property is registed, an onChange handler is registered with any property from which the derived property is derived.</p>
+					
+					<a name="1_1_2_3_1"></a>
+					<h5 class="heading5" title="1. Uize -&gt; 1.1. Derived Properties -&gt; 1.1.2. Implementation Approaches -&gt; 1.1.2.3. Using onChange Handler Merchanism -&gt; 1.1.2.3.1. Advantages"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_1" title="1. Uize -&gt; 1.1. Derived Properties">1</a>.<a href="#1_1_2" title="1. Uize -&gt; 1.1. Derived Properties -&gt; 1.1.2. Implementation Approaches">2</a>.<a href="#1_1_2_3" title="1. Uize -&gt; 1.1. Derived Properties -&gt; 1.1.2. Implementation Approaches -&gt; 1.1.2.3. Using onChange Handler Merchanism">3</a>.<a href="#1_1_2_3_1" title="1. Uize -&gt; 1.1. Derived Properties -&gt; 1.1.2. Implementation Approaches -&gt; 1.1.2.3. Using onChange Handler Merchanism -&gt; 1.1.2.3.1. Advantages">1</a>. </span>Advantages</h5>
+					<div class="contents5">
+						<table class="list">
+						<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>uses the existing optimization built into the <code>onChange</code> handlers mechanism</td></tr>
+						<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>matches the way values for derived set-get properties are currently being updated</td></tr>
+						</table>
+					</div>
+					
+					<a name="1_1_2_3_2"></a>
+					<h5 class="heading5" title="1. Uize -&gt; 1.1. Derived Properties -&gt; 1.1.2. Implementation Approaches -&gt; 1.1.2.3. Using onChange Handler Merchanism -&gt; 1.1.2.3.2. Disadvantages"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_1" title="1. Uize -&gt; 1.1. Derived Properties">1</a>.<a href="#1_1_2" title="1. Uize -&gt; 1.1. Derived Properties -&gt; 1.1.2. Implementation Approaches">2</a>.<a href="#1_1_2_3" title="1. Uize -&gt; 1.1. Derived Properties -&gt; 1.1.2. Implementation Approaches -&gt; 1.1.2.3. Using onChange Handler Merchanism">3</a>.<a href="#1_1_2_3_2" title="1. Uize -&gt; 1.1. Derived Properties -&gt; 1.1.2. Implementation Approaches -&gt; 1.1.2.3. Using onChange Handler Merchanism -&gt; 1.1.2.3.2. Disadvantages">2</a>. </span>Disadvantages</h5>
+					<div class="contents5">
+						<table class="list">
+						<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>involves a separate set for each derived set-get property whose value changes</td></tr>
+						<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>requires management of <code>onChange</code> handlers and dealing with situations where set-get properties are re-registered</td></tr>
+						</table>
+					</div>
+					
+					<a name="1_1_2_3_3"></a>
+					<h5 class="heading5" title="1. Uize -&gt; 1.1. Derived Properties -&gt; 1.1.2. Implementation Approaches -&gt; 1.1.2.3. Using onChange Handler Merchanism -&gt; 1.1.2.3.3. Issues to Deal With"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_1" title="1. Uize -&gt; 1.1. Derived Properties">1</a>.<a href="#1_1_2" title="1. Uize -&gt; 1.1. Derived Properties -&gt; 1.1.2. Implementation Approaches">2</a>.<a href="#1_1_2_3" title="1. Uize -&gt; 1.1. Derived Properties -&gt; 1.1.2. Implementation Approaches -&gt; 1.1.2.3. Using onChange Handler Merchanism">3</a>.<a href="#1_1_2_3_3" title="1. Uize -&gt; 1.1. Derived Properties -&gt; 1.1.2. Implementation Approaches -&gt; 1.1.2.3. Using onChange Handler Merchanism -&gt; 1.1.2.3.3. Issues to Deal With">3</a>. </span>Issues to Deal With</h5>
+					<div class="contents5">
+						<a name="1_1_2_3_3_1"></a>
+						<h5 class="heading6" title="1. Uize -&gt; 1.1. Derived Properties -&gt; 1.1.2. Implementation Approaches -&gt; 1.1.2.3. Using onChange Handler Merchanism -&gt; 1.1.2.3.3. Issues to Deal With -&gt; 1.1.2.3.3.1. Re-registering a Non-derived Set-get Property"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_1" title="1. Uize -&gt; 1.1. Derived Properties">1</a>.<a href="#1_1_2" title="1. Uize -&gt; 1.1. Derived Properties -&gt; 1.1.2. Implementation Approaches">2</a>.<a href="#1_1_2_3" title="1. Uize -&gt; 1.1. Derived Properties -&gt; 1.1.2. Implementation Approaches -&gt; 1.1.2.3. Using onChange Handler Merchanism">3</a>.<a href="#1_1_2_3_3" title="1. Uize -&gt; 1.1. Derived Properties -&gt; 1.1.2. Implementation Approaches -&gt; 1.1.2.3. Using onChange Handler Merchanism -&gt; 1.1.2.3.3. Issues to Deal With">3</a>.<a href="#1_1_2_3_3_1" title="1. Uize -&gt; 1.1. Derived Properties -&gt; 1.1.2. Implementation Approaches -&gt; 1.1.2.3. Using onChange Handler Merchanism -&gt; 1.1.2.3.3. Issues to Deal With -&gt; 1.1.2.3.3.1. Re-registering a Non-derived Set-get Property">1</a>. </span>Re-registering a Non-derived Set-get Property</h5>
+						<div class="contents6">
+							<p>How does one deal with re-registering a set-get property that affects a derived set-get property?</p>
+							
+							<p>Currently, everything gets blown away when re-registering a set-get property. This means that the <code>onChange</code> handler that was added to the set-get property at the time of registering the set-get property that is derived from it will get blown away, and the relationship of the derived property to the property from which it is derived will get blown away.</p>
+						</div>
+						
+						<a name="1_1_2_3_3_2"></a>
+						<h5 class="heading6" title="1. Uize -&gt; 1.1. Derived Properties -&gt; 1.1.2. Implementation Approaches -&gt; 1.1.2.3. Using onChange Handler Merchanism -&gt; 1.1.2.3.3. Issues to Deal With -&gt; 1.1.2.3.3.2. Re-registering a Derived Set-get Property"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_1" title="1. Uize -&gt; 1.1. Derived Properties">1</a>.<a href="#1_1_2" title="1. Uize -&gt; 1.1. Derived Properties -&gt; 1.1.2. Implementation Approaches">2</a>.<a href="#1_1_2_3" title="1. Uize -&gt; 1.1. Derived Properties -&gt; 1.1.2. Implementation Approaches -&gt; 1.1.2.3. Using onChange Handler Merchanism">3</a>.<a href="#1_1_2_3_3" title="1. Uize -&gt; 1.1. Derived Properties -&gt; 1.1.2. Implementation Approaches -&gt; 1.1.2.3. Using onChange Handler Merchanism -&gt; 1.1.2.3.3. Issues to Deal With">3</a>.<a href="#1_1_2_3_3_2" title="1. Uize -&gt; 1.1. Derived Properties -&gt; 1.1.2. Implementation Approaches -&gt; 1.1.2.3. Using onChange Handler Merchanism -&gt; 1.1.2.3.3. Issues to Deal With -&gt; 1.1.2.3.3.2. Re-registering a Derived Set-get Property">2</a>. </span>Re-registering a Derived Set-get Property</h5>
+						<div class="contents6">
+							<p>How does one deal with re-registering a derived set-get property, where the new profile for the derived property defines a different relationship properties from which it is derived?</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<a name="1_2"></a>
+		<h2 class="heading2" title="1. Uize -&gt; 1.2. Property Bindings"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_2" title="1. Uize -&gt; 1.2. Property Bindings">2</a>. </span>Property Bindings</h2>
 		<div class="contents2">
 			<p>Provide a way in the <code><a href="#1">Uize</a></code> base class to bind two set-get properties together, in order to keep their values synchronized.</p>
 			
@@ -1062,16 +1213,16 @@
 			</table>
 		</div>
 		
-		<a name="1_2"></a>
-		<h2 class="heading2" title="1. Uize -&gt; 1.2. Copy Ability for Set-get Properties"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_2" title="1. Uize -&gt; 1.2. Copy Ability for Set-get Properties">2</a>. </span>Copy Ability for Set-get Properties</h2>
+		<a name="1_3"></a>
+		<h2 class="heading2" title="1. Uize -&gt; 1.3. Copy Ability for Set-get Properties"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_3" title="1. Uize -&gt; 1.3. Copy Ability for Set-get Properties">3</a>. </span>Copy Ability for Set-get Properties</h2>
 		<div class="contents2">
 			<p>Copy ability, for initial values of set-get properties that are arrays or objects.</p>
 			
 			<p>Have a property that can be specified in a set-get property's profile, which can be used to cause properties whose initial values are object types to be initialized by cloning the initial value rather than simply setting a reference to a shared object.</p>
 		</div>
 		
-		<a name="1_3"></a>
-		<h2 class="heading2" title="1. Uize -&gt; 1.3. Uize.makeCaller"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_3" title="1. Uize -&gt; 1.3. Uize.makeCaller">3</a>. </span>Uize.makeCaller</h2>
+		<a name="1_4"></a>
+		<h2 class="heading2" title="1. Uize -&gt; 1.4. Uize.makeCaller"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_4" title="1. Uize -&gt; 1.4. Uize.makeCaller">4</a>. </span>Uize.makeCaller</h2>
 		<div class="contents2">
 			<p>Lets you conveniently create a function / method caller, where you can specify context, function, and arguments.</p>
 			
@@ -1103,11 +1254,11 @@
 </pre>
 		</div>
 		
-		<a name="1_4"></a>
-		<h2 class="heading2" title="1. Uize -&gt; 1.4. Uize.constrain"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_4" title="1. Uize -&gt; 1.4. Uize.constrain">4</a>. </span>Uize.constrain</h2>
+		<a name="1_5"></a>
+		<h2 class="heading2" title="1. Uize -&gt; 1.5. Uize.constrain"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_5" title="1. Uize -&gt; 1.5. Uize.constrain">5</a>. </span>Uize.constrain</h2>
 		<div class="contents2">
-			<a name="1_4_1"></a>
-			<h3 class="heading3" title="1. Uize -&gt; 1.4. Uize.constrain -&gt; 1.4.1. Support a wrap flag"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_4" title="1. Uize -&gt; 1.4. Uize.constrain">4</a>.<a href="#1_4_1" title="1. Uize -&gt; 1.4. Uize.constrain -&gt; 1.4.1. Support a wrap flag">1</a>. </span>Support a wrap flag</h3>
+			<a name="1_5_1"></a>
+			<h3 class="heading3" title="1. Uize -&gt; 1.5. Uize.constrain -&gt; 1.5.1. Support a wrap flag"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_5" title="1. Uize -&gt; 1.5. Uize.constrain">5</a>.<a href="#1_5_1" title="1. Uize -&gt; 1.5. Uize.constrain -&gt; 1.5.1. Support a wrap flag">1</a>. </span>Support a wrap flag</h3>
 			<div class="contents3">
 				<p>Support a wrap flag, so that constrained values can be made to wrap around within the constraining range, rather than always only hitting up against the edges.</p>
 				
@@ -1127,31 +1278,31 @@ return ((value - min) % maxMinDelta + maxMinDelta) % maxMinDelta + min;
 			</div>
 		</div>
 		
-		<a name="1_5"></a>
-		<h2 class="heading2" title="1. Uize -&gt; 1.5. Uize.callOn"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_5" title="1. Uize -&gt; 1.5. Uize.callOn">5</a>. </span>Uize.callOn</h2>
+		<a name="1_6"></a>
+		<h2 class="heading2" title="1. Uize -&gt; 1.6. Uize.callOn"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_6" title="1. Uize -&gt; 1.6. Uize.callOn">6</a>. </span>Uize.callOn</h2>
 		<div class="contents2">
-			<a name="1_5_1"></a>
-			<h3 class="heading3" title="1. Uize -&gt; 1.5. Uize.callOn -&gt; 1.5.1. Support Instances of Non-Uize Classes"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_5" title="1. Uize -&gt; 1.5. Uize.callOn">5</a>.<a href="#1_5_1" title="1. Uize -&gt; 1.5. Uize.callOn -&gt; 1.5.1. Support Instances of Non-Uize Classes">1</a>. </span>Support Instances of Non-Uize Classes</h3>
+			<a name="1_6_1"></a>
+			<h3 class="heading3" title="1. Uize -&gt; 1.6. Uize.callOn -&gt; 1.6.1. Support Instances of Non-Uize Classes"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_6" title="1. Uize -&gt; 1.6. Uize.callOn">6</a>.<a href="#1_6_1" title="1. Uize -&gt; 1.6. Uize.callOn -&gt; 1.6.1. Support Instances of Non-Uize Classes">1</a>. </span>Support Instances of Non-Uize Classes</h3>
 			<div class="contents3">
-				<p>Add support for using the <code><a href="#1_5">Uize.callOn</a></code> method on a target that is an instance of a class that is not a <code><a href="#1">Uize</a></code> subclass.</p>
+				<p>Add support for using the <code><a href="#1_6">Uize.callOn</a></code> method on a target that is an instance of a class that is not a <code><a href="#1">Uize</a></code> subclass.</p>
 				
-				<p>For example, it should be possible to use the <code><a href="#1_5">Uize.callOn</a></code> method on instances of the <code><a href="../javascript-reference/Date.html">Date</a></code> object, or any of the other JavaScript built-in objects. It should also be possible to use the method on instances of custom objects. Basically, if the target is an object and its constructor is not <code><a href="../javascript-reference/Object.html">Object</a></code>, then it should be treated as an instance and not an object containing a collection of subtargets. The one thing to consider in testing for non-Object constructor is simple instances of the <code><a href="../javascript-reference/Object.html">Object</a></code> object that originate from a different window or an iframe.</p>
+				<p>For example, it should be possible to use the <code><a href="#1_6">Uize.callOn</a></code> method on instances of the <code><a href="../javascript-reference/Date.html">Date</a></code> object, or any of the other JavaScript built-in objects. It should also be possible to use the method on instances of custom objects. Basically, if the target is an object and its constructor is not <code><a href="../javascript-reference/Object.html">Object</a></code>, then it should be treated as an instance and not an object containing a collection of subtargets. The one thing to consider in testing for non-Object constructor is simple instances of the <code><a href="../javascript-reference/Object.html">Object</a></code> object that originate from a different window or an iframe.</p>
 			</div>
 		</div>
 		
-		<a name="1_6"></a>
-		<h2 class="heading2" title="1. Uize -&gt; 1.6. Uize.indexIn"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_6" title="1. Uize -&gt; 1.6. Uize.indexIn">6</a>. </span>Uize.indexIn</h2>
+		<a name="1_7"></a>
+		<h2 class="heading2" title="1. Uize -&gt; 1.7. Uize.indexIn"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_7" title="1. Uize -&gt; 1.7. Uize.indexIn">7</a>. </span>Uize.indexIn</h2>
 		<div class="contents2">
-			<a name="1_6_1"></a>
-			<h3 class="heading3" title="1. Uize -&gt; 1.6. Uize.indexIn -&gt; 1.6.1. Support Object Source"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_6" title="1. Uize -&gt; 1.6. Uize.indexIn">6</a>.<a href="#1_6_1" title="1. Uize -&gt; 1.6. Uize.indexIn -&gt; 1.6.1. Support Object Source">1</a>. </span>Support Object Source</h3>
+			<a name="1_7_1"></a>
+			<h3 class="heading3" title="1. Uize -&gt; 1.7. Uize.indexIn -&gt; 1.7.1. Support Object Source"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_7" title="1. Uize -&gt; 1.7. Uize.indexIn">7</a>.<a href="#1_7_1" title="1. Uize -&gt; 1.7. Uize.indexIn -&gt; 1.7.1. Support Object Source">1</a>. </span>Support Object Source</h3>
 			<div class="contents3">
 				<p>For object type source, could find key whose value matches, and return undefined (or null?) if value not found in object.</p>
 				
 				<p>In this mode, <code>fromEndBOOL</code> parameter could control direction for iterating through the keys of the object.</p>
 			</div>
 			
-			<a name="1_6_2"></a>
-			<h3 class="heading3" title="1. Uize -&gt; 1.6. Uize.indexIn -&gt; 1.6.2. Support Simple Type Source"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_6" title="1. Uize -&gt; 1.6. Uize.indexIn">6</a>.<a href="#1_6_2" title="1. Uize -&gt; 1.6. Uize.indexIn -&gt; 1.6.2. Support Simple Type Source">2</a>. </span>Support Simple Type Source</h3>
+			<a name="1_7_2"></a>
+			<h3 class="heading3" title="1. Uize -&gt; 1.7. Uize.indexIn -&gt; 1.7.2. Support Simple Type Source"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_7" title="1. Uize -&gt; 1.7. Uize.indexIn">7</a>.<a href="#1_7_2" title="1. Uize -&gt; 1.7. Uize.indexIn -&gt; 1.7.2. Support Simple Type Source">2</a>. </span>Support Simple Type Source</h3>
 			<div class="contents3">
 				<p>For simple type source, could do string index.</p>
 				
@@ -1159,11 +1310,11 @@ return ((value - min) % maxMinDelta + maxMinDelta) % maxMinDelta + min;
 			</div>
 		</div>
 		
-		<a name="1_7"></a>
-		<h2 class="heading2" title="1. Uize -&gt; 1.7. Uize.module"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_7" title="1. Uize -&gt; 1.7. Uize.module">7</a>. </span>Uize.module</h2>
+		<a name="1_8"></a>
+		<h2 class="heading2" title="1. Uize -&gt; 1.8. Uize.module"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_8" title="1. Uize -&gt; 1.8. Uize.module">8</a>. </span>Uize.module</h2>
 		<div class="contents2">
-			<a name="1_7_1"></a>
-			<h3 class="heading3" title="1. Uize -&gt; 1.7. Uize.module -&gt; 1.7.1. Support Code Besides in Module Loader"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_7" title="1. Uize -&gt; 1.7. Uize.module">7</a>.<a href="#1_7_1" title="1. Uize -&gt; 1.7. Uize.module -&gt; 1.7.1. Support Code Besides in Module Loader">1</a>. </span>Support Code Besides in Module Loader</h3>
+			<a name="1_8_1"></a>
+			<h3 class="heading3" title="1. Uize -&gt; 1.8. Uize.module -&gt; 1.8.1. Support Code Besides in Module Loader"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_8" title="1. Uize -&gt; 1.8. Uize.module">8</a>.<a href="#1_8_1" title="1. Uize -&gt; 1.8. Uize.module -&gt; 1.8.1. Support Code Besides in Module Loader">1</a>. </span>Support Code Besides in Module Loader</h3>
 			<div class="contents3">
 				<p>How can code require a module that is not in the modules directory (like a code beside)?</p>
 				
@@ -1171,24 +1322,24 @@ return ((value - min) % maxMinDelta + maxMinDelta) % maxMinDelta + min;
 			</div>
 		</div>
 		
-		<a name="1_8"></a>
-		<h2 class="heading2" title="1. Uize -&gt; 1.8. Multiple Inheritance"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_8" title="1. Uize -&gt; 1.8. Multiple Inheritance">8</a>. </span>Multiple Inheritance</h2>
+		<a name="1_9"></a>
+		<h2 class="heading2" title="1. Uize -&gt; 1.9. Multiple Inheritance"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_9" title="1. Uize -&gt; 1.9. Multiple Inheritance">9</a>. </span>Multiple Inheritance</h2>
 		<div class="contents2">
 			<p>Consider a facility to support multiple inheritance (may involve creating a merge service for merging data from one object into another, since it should be possible to merge additional features of a different class into an already created class, and perhaps that merge feature would also be used in the _subclass function's implementation).</p>
 		</div>
 		
-		<a name="1_9"></a>
-		<h2 class="heading2" title="1. Uize -&gt; 1.9. Library Modules"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_9" title="1. Uize -&gt; 1.9. Library Modules">9</a>. </span>Library Modules</h2>
+		<a name="1_10"></a>
+		<h2 class="heading2" title="1. Uize -&gt; 1.10. Library Modules"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_10" title="1. Uize -&gt; 1.10. Library Modules">10</a>. </span>Library Modules</h2>
 		<div class="contents2">
-			<a name="1_9_1"></a>
-			<h3 class="heading3" title="1. Uize -&gt; 1.9. Library Modules -&gt; 1.9.1. Library of Dispersed Modules"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_9" title="1. Uize -&gt; 1.9. Library Modules">9</a>.<a href="#1_9_1" title="1. Uize -&gt; 1.9. Library Modules -&gt; 1.9.1. Library of Dispersed Modules">1</a>. </span>Library of Dispersed Modules</h3>
+			<a name="1_10_1"></a>
+			<h3 class="heading3" title="1. Uize -&gt; 1.10. Library Modules -&gt; 1.10.1. Library of Dispersed Modules"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_10" title="1. Uize -&gt; 1.10. Library Modules">10</a>.<a href="#1_10_1" title="1. Uize -&gt; 1.10. Library Modules -&gt; 1.10.1. Library of Dispersed Modules">1</a>. </span>Library of Dispersed Modules</h3>
 			<div class="contents3">
 				<p>Can library modules that are outside the modules directory require modules that are outside the modules directory?</p>
 			</div>
 		</div>
 		
-		<a name="1_10"></a>
-		<h2 class="heading2" title="1. Uize -&gt; 1.10. Handle Simple Type in Place of Constructor Properties"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_10" title="1. Uize -&gt; 1.10. Handle Simple Type in Place of Constructor Properties">10</a>. </span>Handle Simple Type in Place of Constructor Properties</h2>
+		<a name="1_11"></a>
+		<h2 class="heading2" title="1. Uize -&gt; 1.11. Handle Simple Type in Place of Constructor Properties"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_11" title="1. Uize -&gt; 1.11. Handle Simple Type in Place of Constructor Properties">11</a>. </span>Handle Simple Type in Place of Constructor Properties</h2>
 		<div class="contents2">
 			<p>Variation on constructor, where specifying a non-object for the properties has the effect of setting the value property.</p>
 			
@@ -1211,20 +1362,20 @@ new Uize.Widget.Bar.Slider (50);          // old form
 </pre>
 		</div>
 		
-		<a name="1_11"></a>
-		<h2 class="heading2" title="1. Uize -&gt; 1.11. Uize.clone and Recursion"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_11" title="1. Uize -&gt; 1.11. Uize.clone and Recursion">11</a>. </span>Uize.clone and Recursion</h2>
+		<a name="1_12"></a>
+		<h2 class="heading2" title="1. Uize -&gt; 1.12. Uize.clone and Recursion"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_12" title="1. Uize -&gt; 1.12. Uize.clone and Recursion">12</a>. </span>Uize.clone and Recursion</h2>
 		<div class="contents2">
 			<p>Handle recursion in Uize.clone (how to generate properties that are references to other parts of structure in same relationship as the equivalent property in the cloning source???)</p>
 		</div>
 		
-		<a name="1_12"></a>
-		<h2 class="heading2" title="1. Uize -&gt; 1.12. Improvements to Property Mechanism"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_12" title="1. Uize -&gt; 1.12. Improvements to Property Mechanism">12</a>. </span>Improvements to Property Mechanism</h2>
+		<a name="1_13"></a>
+		<h2 class="heading2" title="1. Uize -&gt; 1.13. Improvements to Property Mechanism"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_13" title="1. Uize -&gt; 1.13. Improvements to Property Mechanism">13</a>. </span>Improvements to Property Mechanism</h2>
 		<div class="contents2">
-			<a name="1_12_1"></a>
-			<h3 class="heading3" title="1. Uize -&gt; 1.12. Improvements to Property Mechanism -&gt; 1.12.1. New Profile Features"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_12" title="1. Uize -&gt; 1.12. Improvements to Property Mechanism">12</a>.<a href="#1_12_1" title="1. Uize -&gt; 1.12. Improvements to Property Mechanism -&gt; 1.12.1. New Profile Features">1</a>. </span>New Profile Features</h3>
+			<a name="1_13_1"></a>
+			<h3 class="heading3" title="1. Uize -&gt; 1.13. Improvements to Property Mechanism -&gt; 1.13.1. New Profile Features"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_13" title="1. Uize -&gt; 1.13. Improvements to Property Mechanism">13</a>.<a href="#1_13_1" title="1. Uize -&gt; 1.13. Improvements to Property Mechanism -&gt; 1.13.1. New Profile Features">1</a>. </span>New Profile Features</h3>
 			<div class="contents3">
-				<a name="1_12_1_1"></a>
-				<h4 class="heading4" title="1. Uize -&gt; 1.12. Improvements to Property Mechanism -&gt; 1.12.1. New Profile Features -&gt; 1.12.1.1. type"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_12" title="1. Uize -&gt; 1.12. Improvements to Property Mechanism">12</a>.<a href="#1_12_1" title="1. Uize -&gt; 1.12. Improvements to Property Mechanism -&gt; 1.12.1. New Profile Features">1</a>.<a href="#1_12_1_1" title="1. Uize -&gt; 1.12. Improvements to Property Mechanism -&gt; 1.12.1. New Profile Features -&gt; 1.12.1.1. type">1</a>. </span>type</h4>
+				<a name="1_13_1_1"></a>
+				<h4 class="heading4" title="1. Uize -&gt; 1.13. Improvements to Property Mechanism -&gt; 1.13.1. New Profile Features -&gt; 1.13.1.1. type"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_13" title="1. Uize -&gt; 1.13. Improvements to Property Mechanism">13</a>.<a href="#1_13_1" title="1. Uize -&gt; 1.13. Improvements to Property Mechanism -&gt; 1.13.1. New Profile Features">1</a>.<a href="#1_13_1_1" title="1. Uize -&gt; 1.13. Improvements to Property Mechanism -&gt; 1.13.1. New Profile Features -&gt; 1.13.1.1. type">1</a>. </span>type</h4>
 				<div class="contents4">
 					<p>Basic types...</p>
 					
@@ -1242,8 +1393,8 @@ new Uize.Widget.Bar.Slider (50);          // old form
 					</table>
 				</div>
 				
-				<a name="1_12_1_2"></a>
-				<h4 class="heading4" title="1. Uize -&gt; 1.12. Improvements to Property Mechanism -&gt; 1.12.1. New Profile Features -&gt; 1.12.1.2. validator"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_12" title="1. Uize -&gt; 1.12. Improvements to Property Mechanism">12</a>.<a href="#1_12_1" title="1. Uize -&gt; 1.12. Improvements to Property Mechanism -&gt; 1.12.1. New Profile Features">1</a>.<a href="#1_12_1_2" title="1. Uize -&gt; 1.12. Improvements to Property Mechanism -&gt; 1.12.1. New Profile Features -&gt; 1.12.1.2. validator">2</a>. </span>validator</h4>
+				<a name="1_13_1_2"></a>
+				<h4 class="heading4" title="1. Uize -&gt; 1.13. Improvements to Property Mechanism -&gt; 1.13.1. New Profile Features -&gt; 1.13.1.2. validator"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_13" title="1. Uize -&gt; 1.13. Improvements to Property Mechanism">13</a>.<a href="#1_13_1" title="1. Uize -&gt; 1.13. Improvements to Property Mechanism -&gt; 1.13.1. New Profile Features">1</a>.<a href="#1_13_1_2" title="1. Uize -&gt; 1.13. Improvements to Property Mechanism -&gt; 1.13.1. New Profile Features -&gt; 1.13.1.2. validator">2</a>. </span>validator</h4>
 				<div class="contents4">
 					<p>Different types of validators...</p>
 					
@@ -1261,16 +1412,16 @@ new Uize.Widget.Bar.Slider (50);          // old form
 			</table>
 		</div>
 		
-		<a name="1_13"></a>
-		<h2 class="heading2" title="1. Uize -&gt; 1.13. Uize.substituteInto"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_13" title="1. Uize -&gt; 1.13. Uize.substituteInto">13</a>. </span>Uize.substituteInto</h2>
+		<a name="1_14"></a>
+		<h2 class="heading2" title="1. Uize -&gt; 1.14. Uize.substituteInto"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_14" title="1. Uize -&gt; 1.14. Uize.substituteInto">14</a>. </span>Uize.substituteInto</h2>
 		<div class="contents2">
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>optimize for successive substitution on the same source using the same form of map (but different values, of course)</td></tr>
 			</table>
 		</div>
 		
-		<a name="1_14"></a>
-		<h2 class="heading2" title="1. Uize -&gt; 1.14. constructed Property"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_14" title="1. Uize -&gt; 1.14. constructed Property">14</a>. </span>constructed Property</h2>
+		<a name="1_15"></a>
+		<h2 class="heading2" title="1. Uize -&gt; 1.15. constructed Property"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_15" title="1. Uize -&gt; 1.15. constructed Property">15</a>. </span>constructed Property</h2>
 		<div class="contents2">
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>to indicate that the instance has been constructed</td></tr>
@@ -1284,8 +1435,8 @@ new Uize.Widget.Bar.Slider (50);          // old form
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>idea: originator of a property set knows that the property is being set, so doesn't want to be informed of a change in the value? A way to provide an ID for the originator of a set? The basic ongoing problem is when multiple sources want to be able to change and also be informed of changes in a particular property. How does one make this more efficient and eliminate multiple redundant execution triggered by events?</td></tr>
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>idea: a way to track whether a user originated an event. Sufficient to check on the presence of domEvent property? domEvent property should be propagated all the way up.</td></tr>
 		</table>
-		<a name="1_15"></a>
-		<h2 class="heading2" title="1. Uize -&gt; 1.15. - new and more concise semantics for calling methods on superclass"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_15" title="1. Uize -&gt; 1.15. - new and more concise semantics for calling methods on superclass">15</a>. </span>- new and more concise semantics for calling methods on superclass</h2>
+		<a name="1_16"></a>
+		<h2 class="heading2" title="1. Uize -&gt; 1.16. - new and more concise semantics for calling methods on superclass"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_16" title="1. Uize -&gt; 1.16. - new and more concise semantics for calling methods on superclass">16</a>. </span>- new and more concise semantics for calling methods on superclass</h2>
 		<div class="contents2">
 			
 <pre class="sample-code">_this.doIn (_superclass,'wireUi');

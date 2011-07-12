@@ -1419,7 +1419,7 @@ doSomethingWithAnObject (object);
 );
 </pre>
 			
-			<p><span class="allCaps">VARIATION</span></p>
+			<p><span class="allCaps">VARIATION 1</span></p>
 			
 			
 <pre class="sample-code">Uize.set (propertyNameSTR,propertyValueANYTYPE);
@@ -1436,6 +1436,19 @@ doSomethingWithAnObject (object);
 </pre>
 			
 			<p>In the above example, a generic incrementer static method is being implemented. It receives a <code>_propertyName</code> parameter that specifies the set-get property to increment, and it passes the value of this parameter as the first parameter in the call to the set method.</p>
+			
+			<p><span class="allCaps">VARIATION 2</span></p>
+			
+			
+<pre class="sample-code">Uize.set (
+  property1NameSTR,property1ValueANYTYPE,
+  property2NameSTR,property2ValueANYTYPE,
+  ...,
+  propertyNNameSTR,propertyNValueANYTYPE
+);
+</pre>
+			
+			<p>This variation allows initial values for an arbitrary number of set-get properties to be set in a single call to the <code><a href="#3_4">set</a></code> method, by specifying the names and values of the properties using an arbitrary number of name-value pair arguments, where even numbered arguments are property names and odd numbered arguments are property values. This variation makes it possible to use expressions or the values of variables for specifying the names of the properties to set.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
@@ -2202,7 +2215,7 @@ Uize.set ({myProperty:!Uize.get ('myProperty')});
 );
 </pre>
 			
-			<p><span class="allCaps">VARIATION</span></p>
+			<p><span class="allCaps">VARIATION 1</span></p>
 			
 			
 <pre class="sample-code">myInstance.set (propertyNameSTR,propertyValueANYTYPE);
@@ -2219,6 +2232,19 @@ Uize.set ({myProperty:!Uize.get ('myProperty')});
 </pre>
 			
 			<p>In the above example, a generic incrementer instance method is being implemented. It receives a <code>_propertyName</code> parameter that specifies the set-get property to increment, and it passes the value of this parameter as the first parameter in the call to the set method.</p>
+			
+			<p><span class="allCaps">VARIATION 2</span></p>
+			
+			
+<pre class="sample-code">myInstance.set (
+  property1NameSTR,property1ValueANYTYPE,
+  property2NameSTR,property2ValueANYTYPE,
+  ...,
+  propertyNNameSTR,propertyNValueANYTYPE
+);
+</pre>
+			
+			<p>This variation allows values for an arbitrary number of set-get properties to be set in a single call to the <code><a href="#3_4">set</a></code> method, by specifying the names and values of the properties using an arbitrary number of name-value pair arguments, where even numbered arguments are property names and odd numbered arguments are property values. This variation makes it possible to use expressions or the values of variables for specifying the names of the properties to set.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
