@@ -1084,60 +1084,60 @@
 					) {
 						_propertyPrivateName = _propertyProfile._privateName;
 						_propertyPublicName = _propertyProfile._publicName;
-
-						if (_isInstance)
-							(_propertiesBeingSet || (_propertiesBeingSet = {})) [_propertyPublicName] =
-								_propertyProfile._conformer
-									? (
-										/*** if there's a registered conformer, execute it and adjust the value ***/
-										_propertyValue = _propertyProfile._conformer.call (
-											_this,_propertyValue,_this [_propertyPrivateName]
-										)
-									)
-									: _propertyValue
-						;
-
-						if (_propertyValue !== _this [_propertyPrivateName]) {
-							if (_isInstance) {
-								/*** build up list of events to fire for 'Changed.' event handlers ***/
-									_hasChangedDotStarHandlers && (
-										(_propertiesForChangedDotStar || (_propertiesForChangedDotStar = {}))
-											[_propertyPublicName] = _propertyValue
-									);
-									_hasChangedHandlers && _hasChangedHandlers [_propertyPublicName] &&
-										(_changedEventsToFire || (_changedEventsToFire = [])).push (_propertyPublicName)
-									;
-								/*** build up list of onChange handlers to execute ***/
-									function _processOnChangeHandler (_onChangeHandler) {
-										if (_isFunction (_onChangeHandler)) {
-											if (!_onChangeHandlers) {
-												_onChangeHandlers = [];
-												_onChangeHandlerAddedFlagName = _this.instanceId + '_handlerAlreadyAdded';
-											}
-											if (!_onChangeHandler [_onChangeHandlerAddedFlagName]) {
-												_onChangeHandler [_onChangeHandlerAddedFlagName] = 1;
-												_onChangeHandlers.push (_onChangeHandler);
-											}
-										} else if (typeof _onChangeHandler == _typeString) {
-											_processOnChangeHandler (_this [_onChangeHandler]);
-										} else if (_isArray (_onChangeHandler)) {
-											for (
-												var _handlerNo = -1, _onChangeHandlerLength = _onChangeHandler.length;
-												++_handlerNo < _onChangeHandlerLength;
-											)
-												_processOnChangeHandler (_onChangeHandler [_handlerNo])
-											;
-										}
-									}
-									_propertyProfile._onChange && _processOnChangeHandler (_propertyProfile._onChange);
-							}
-							_this [_propertyPrivateName] = _propertyValue;
-						}
 					} else {
-						_this [_propertyPublicOrPrivateName] = _propertyValue;
-						(_propertiesToRegister || (_propertiesToRegister = {})) [_propertyPublicOrPrivateName] =
-							_propertyPublicOrPrivateName
+						(_propertiesToRegister || (_propertiesToRegister = {})) [
+							_propertyPrivateName = _propertyPublicName = _propertyPublicOrPrivateName
+						] =
+							_propertyProfile = {}
 						;
+					}
+					if (_isInstance)
+						(_propertiesBeingSet || (_propertiesBeingSet = {})) [_propertyPublicName] =
+							_propertyProfile._conformer
+								? (
+									/*** if there's a registered conformer, execute it and adjust the value ***/
+									_propertyValue = _propertyProfile._conformer.call (
+										_this,_propertyValue,_this [_propertyPrivateName]
+									)
+								)
+								: _propertyValue
+					;
+
+					if (_propertyValue !== _this [_propertyPrivateName]) {
+						if (_isInstance) {
+							/*** build up list of events to fire for 'Changed.' event handlers ***/
+								_hasChangedDotStarHandlers && (
+									(_propertiesForChangedDotStar || (_propertiesForChangedDotStar = {}))
+										[_propertyPublicName] = _propertyValue
+								);
+								_hasChangedHandlers && _hasChangedHandlers [_propertyPublicName] &&
+									(_changedEventsToFire || (_changedEventsToFire = [])).push (_propertyPublicName)
+								;
+							/*** build up list of onChange handlers to execute ***/
+								function _processOnChangeHandler (_onChangeHandler) {
+									if (_isFunction (_onChangeHandler)) {
+										if (!_onChangeHandlers) {
+											_onChangeHandlers = [];
+											_onChangeHandlerAddedFlagName = _this.instanceId + '_handlerAlreadyAdded';
+										}
+										if (!_onChangeHandler [_onChangeHandlerAddedFlagName]) {
+											_onChangeHandler [_onChangeHandlerAddedFlagName] = 1;
+											_onChangeHandlers.push (_onChangeHandler);
+										}
+									} else if (typeof _onChangeHandler == _typeString) {
+										_processOnChangeHandler (_this [_onChangeHandler]);
+									} else if (_isArray (_onChangeHandler)) {
+										for (
+											var _handlerNo = -1, _onChangeHandlerLength = _onChangeHandler.length;
+											++_handlerNo < _onChangeHandlerLength;
+										)
+											_processOnChangeHandler (_onChangeHandler [_handlerNo])
+										;
+									}
+								}
+								_propertyProfile._onChange && _processOnChangeHandler (_propertyProfile._onChange);
+						}
+						_this [_propertyPrivateName] = _propertyValue;
 					}
 				}
 				_propertiesToRegister && _class.registerProperties (_propertiesToRegister);
