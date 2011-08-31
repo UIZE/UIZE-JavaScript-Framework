@@ -2519,10 +2519,6 @@ Uize.module ({
 											_myPropertyValuesWhenConformerCalled = [],
 											_expectedPropertyValuesWhenConformerCalled = [undefined,5]
 										;
-										_expectedPropertyValuesWhenConformerCalled [0] = undefined;
-											/* HACK!!!
-												Stupid MS JScript again. Must adapt Uize.Data.identical to deal with issue of undefined elements literal syntax declaration of arrays not showing up in for...in loops. Add a unit test for this specific case in Uize.Test.Uize.Data.
-											*/
 										_Subclass.registerProperties ({
 											myProperty:{
 												conformer:function (_newValue) {

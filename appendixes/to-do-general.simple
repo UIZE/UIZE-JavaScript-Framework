@@ -42,7 +42,7 @@ Mixins
 	Mixing in would...
 	- copy all properties of the prototype
 	- copy all static properties
-	- copy in all information of registered properties
+	- copy in all information of registered set-get properties
 
 	ISSUES
 	- namespace conflict for all instance properties
@@ -296,6 +296,38 @@ Version Support in Module Mechanism
 	Issues to Address
 		- if one has a reference to a module, such as in a tool like the Delve tool, how does one determine what the filename of a module is for the purpose of linking to reference documentation?
 		- if a `variation qualifier` is used to indicate a very specific variation of a module, and if that variation is not yet loaded, how does the module loader mechanism know where to obtain a variation that matches the criteria of the `variation qualifier`?
+
+JavaScript Language Unit Tests
+	Implement unit tests for all features of the JavaScript language.
+
+	For In Loops And Undefined Array Elements
+		In several versions of Microsoft's JScript interpreter, if an array is initialized using the literal syntax (ie. =['value 1','value 2','value 3']=), then any element whose value is initialized to =undefined= will not be encountered in a =for...in= loop.
+
+		EXAMPLE
+		....................................
+		var
+			keysHash = {},
+			myArray = ['foo',undefined,'bar']
+		;
+		for (key in myArray) {
+			keysHash [key] = true;
+		}
+		alert (keysHash [1]);
+		....................................
+
+		In the above example, the =alert= statement would alert the value =undefined= in interpreters that exhibit the problematic behavior. This behavior could cause problems when using a =for...in= loop to compare arrays to see if their elements and custom properties are identical.
+
+		A test can be written for this issue as follows...
+
+		TEST
+		..............................................................
+		var _hasIssueWithForInLoopsAndUndefinedArrayElements = true;
+		for (var _key in [undefined]) {
+			if (_key == 0)
+				_hasIssueWithForInLoopsAndUndefinedArrayElements = false
+			;
+		}
+		..............................................................
 
 Function Argument Validation
 	Provide a facility that can optionally be used for function argument validation.

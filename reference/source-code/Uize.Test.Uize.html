@@ -184,7 +184,7 @@ Uize.module ({
             }
           },
           {
-            title:                                           
+            title:
               'Test that firing an event for which two handlers are registered results in the handlers being exucuted in the order registered',
             test:function () {
               var
@@ -2543,10 +2543,6 @@ Uize.module ({
                       _myPropertyValuesWhenConformerCalled = [],
                       _expectedPropertyValuesWhenConformerCalled = [undefined,5]
                     ;
-                    _expectedPropertyValuesWhenConformerCalled [0] = undefined;
-                      /* HACK!!!
-                        Stupid MS JScript again. Must adapt Uize.Data.identical to deal with issue of undefined elements literal syntax declaration of arrays not showing up in for...in loops. Add a unit test for this specific case in Uize.Test.Uize.Data.
-                      */
                     _Subclass.registerProperties ({
                       myProperty:{
                         conformer:function (_newValue) {
@@ -2660,15 +2656,15 @@ Uize.module ({
                       myProperty1:{
                         value:'myProperty1 initial value',
                         onChange:[
-                          function () {_coverageAndOrder.push ('myProperty1 onChange handler 1')}, 
-                          function () {_coverageAndOrder.push ('myProperty1 onChange handler 2')} 
+                          function () {_coverageAndOrder.push ('myProperty1 onChange handler 1')},
+                          function () {_coverageAndOrder.push ('myProperty1 onChange handler 2')}
                         ]
                       },
                       myProperty2:{
                         value:'myProperty2 initial value',
                         onChange:[
-                          function () {_coverageAndOrder.push ('myProperty2 onChange handler 1')}, 
-                          function () {_coverageAndOrder.push ('myProperty2 onChange handler 2')} 
+                          function () {_coverageAndOrder.push ('myProperty2 onChange handler 1')},
+                          function () {_coverageAndOrder.push ('myProperty2 onChange handler 2')}
                         ]
                       }
                     });
@@ -2744,7 +2740,7 @@ Uize.module ({
                     ;
                     _Subclass.registerProperties ({myProperty:{}});
                     var _instance = new _Subclass;
-                    
+
                     function _makeHandler (_handlerNo) {
                       return function () {
                         _coverageAndOrder.push (
@@ -2939,15 +2935,15 @@ Uize.module ({
                       myProperty1:{
                         value:'myProperty1 initial value',
                         onChange:[
-                          function () {_coverageAndOrder.push ('myProperty1 onChange handler 1')}, 
-                          function () {_coverageAndOrder.push ('myProperty1 onChange handler 2')} 
+                          function () {_coverageAndOrder.push ('myProperty1 onChange handler 1')},
+                          function () {_coverageAndOrder.push ('myProperty1 onChange handler 2')}
                         ]
                       },
                       myProperty2:{
                         value:'myProperty2 initial value',
                         onChange:[
-                          function () {_coverageAndOrder.push ('myProperty2 onChange handler 1')}, 
-                          function () {_coverageAndOrder.push ('myProperty2 onChange handler 2')} 
+                          function () {_coverageAndOrder.push ('myProperty2 onChange handler 1')},
+                          function () {_coverageAndOrder.push ('myProperty2 onChange handler 2')}
                         ]
                       }
                     });
@@ -2990,7 +2986,7 @@ Uize.module ({
                     ;
                     _Subclass.registerProperties ({myProperty:{}});
                     var _instance = new _Subclass;
-                    
+
                     function _makeHandler (_handlerNo) {
                       return function () {
                         _coverageAndOrder.push (
@@ -3291,7 +3287,7 @@ Uize.module ({
                 {
                   title:
                     'Test that the canonical names of set-get properties are used for the properties object that is provided in the event object for Changed.* events',
-                  test:function () { 
+                  test:function () {
                     var
                       _Subclass = Uize.subclass (),
                       _changedDotStarEventObjectPropertiesLog = [],

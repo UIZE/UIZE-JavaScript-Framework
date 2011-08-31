@@ -648,6 +648,19 @@ Uize.module ({
 						_typesMatch = _typeofObject1 == typeof _object2,
 						_object1IsObject = _typeofObject1 == 'object'
 					;
+					function _compareObjectsForIdentical () {
+						if (_identical = _package.getTotalKeys (_object1) == _package.getTotalKeys (_object2)) {
+							for (var _propertyName in _object1) {
+								if (
+									!(_propertyName in _object2) ||
+									!_areIdentical (_object1 [_propertyName],_object2 [_propertyName])
+								) {
+									_identical = _false;
+									break;
+								}
+							}
+						}
+					}
 					if (_typesMatch && _object1IsObject && _object1 && _object2) {
 						var _object1Constructor = _object1.constructor;
 						if (_object1 == _object2) {
@@ -664,19 +677,54 @@ Uize.module ({
 								/* NOTE:
 									Coercion to string invokes valueOf or toString, depending on the object type (toString for RegExp), which covers Date, String, Number, Boolean, and RegExp. Calling valueOf, while more performant for some object types, doesn't cover the case for RegExp (since valueOf returns a reference to the object), and it doesn't cover the case of two Number instances with the value NaN, since valueOf would return NaN and NaN is not equal to NaN (whereas, 'NaN' is equal to 'NaN')
 								*/
-							} else if (
-								_identical =
-									(typeof _object1.length != 'number' || _object1.length === _object2.length) &&
-									_package.getTotalKeys (_object1) == _package.getTotalKeys (_object2)
-							) {
-								for (var _propertyName in _object1) {
-									if (
-										!(_propertyName in _object2) ||
-										!_areIdentical (_object1 [_propertyName],_object2 [_propertyName])
-									) {
-										_identical = _false;
-										break;
+							} else {
+								if (typeof _object1.splice == 'function' && typeof _object2.splice == 'function') {
+									/* NOTES:
+										To compare arrays for their contents being identical, we first test that their lengths are the same. If this test passes, we use a standard iterator to iterate through the arrays to compare their elements.
+
+										If the values of elements are identical between the arrays, then we go on to test the custom properties (if any exist). Most importantly, we don't use a for...in loop to iterate through both elements and custom properties, partly for performance reasons, but mostly because of an unfortunate behavior in Microsoft's JScript interpreter.
+
+										In several versions of Microsoft's JScript interpreter, if an array is initialized using the literal syntax (ie. ['value 1','value 2','value 3']), then any element whose value is initialized to undefined will not be encountered in a for...in loop.
+
+										EXAMPLE
+										.....................................
+										var
+											keysHash = {},
+											myArray = ['foo',undefined,'bar']
+										;
+										for (key in myArray) {
+											keysHash [key] = true;
+										}
+										alert (keysHash [1]);
+										.....................................
+
+										In the above example, the alert statement would alert the value undefined in interpreters that exhibit the problematic behavior.
+
+										This behavior would cause a problem if we were using a for...in loop to compare arrays for identical elements and custom properties. So, instead, we compare elements and custom properties separately. In order to compare only custom properties, we splice out the elements of the arrays so we can do a for...in loop to compare the custom properties without encountering the array elements in the loop. After we've compared custom properties, we then restore the spliced elements.
+									*/
+									if (_identical = _object1.length == _object2.length) {
+										for (var _elementNo = _object1.length; --_elementNo >= 0;) {
+											if (!_areIdentical (_object1 [_elementNo],_object2 [_elementNo])) {
+												_identical = _false;
+												break;
+											}
+										}
+										if (_identical) {
+											/*** remove array elements and store ***/
+												var
+													_object1Elements = _object1.splice (0,Infinity),
+													_object2Elements = _object2.splice (0,Infinity)
+												;
+
+											_compareObjectsForIdentical ();
+
+											/*** restore removed elements to arrays ***/
+												_object1.push.apply (_object1,_object1Elements);
+												_object2.push.apply (_object2,_object2Elements);
+										}
 									}
+								} else {
+									_compareObjectsForIdentical ();
 								}
 							}
 						}
