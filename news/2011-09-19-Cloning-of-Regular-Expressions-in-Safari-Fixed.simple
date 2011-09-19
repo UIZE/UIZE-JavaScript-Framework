@@ -1,0 +1,20 @@
+A minor issue that was discovered in Safari with the =Uize.clone= method when cloning regular expressions (ie. instances of the =RegExp= object) has been fixed.
+
+Because of a behavior in Safari's JavaScript interpreter, cloning a regular expression using the =Uize.clone= method was not actually creating a clone but was simply returning a reference to the =RegExp= instance that was to be cloned. A workaround was put in place for the Safari behavior, and cloning regular expressions using the =Uize.clone= method now works in all major browsers.
+
+EXAMPLE
+......................................................................................
+var
+	regExp = /^\d+$/,
+	clonedRegExp = Uize.clone (myRegExp)
+;
+alert (clonedRegExp !== regExp && clonedRegExp + '' == regExp + '');  // alerts "true"
+......................................................................................
+
+In the above example, the =alert= statement will display the text "true". This is because the variable =clonedRegExp= will not be a reference to the same regular expression instance as the =regExp= variable, because it is a clone. However, if both regular expressions are serialized to strings by coercion, then their serialized values will be identical, because =clonedRegExp= is a perfect clone of =regExp=.
+
+....................................................................................
+<< metadata >>
+
+title: 2011-09-19 - Cloning of Regular Expressions in Safari Fixed
+....................................................................................

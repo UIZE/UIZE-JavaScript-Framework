@@ -1,5 +1,74 @@
 This document lists news official announcements that need to be created for developments that have already taken place.
 
+### Updates for Internet Explorer 9
+	Issues Addressed
+		Broken Example Pages and Uize.Node.getStyle
+			The =Uize.Node.getStyle= static method, implemented in the =Uize.Node= module, has been updated to work in Internet Explorer 9.
+	
+			The incompatibility issue with IE9 was breaking all example pages on the *uize.com* Web site. This issue has been addressed and the examples all load nicely now in IE9.
+
+		Broken Drag and Drop in IE9
+
+		Buttons With Incorrect Cursors in Examples
+			- fix to Uize.Node.showClickable static method to use ='pointer'= instead of old ='hand'= value
+			- still support ='hand'= for versions of Internet Explorer earlier than version 9
+			- various examples were affected
+				- examples with dialogs
+			- new Uize.Node.ieMajorVersion static property
+
+		Various Fixes
+			- banner animation / reveal on the home page was all screwed up
+
+		Broken Styling in Sliders Examples
+			- some examples with sliders are not observing slider theme properties correctly
+				- basic bevel
+				file:///C:/~uize/UIZE-JavaScript-Framework/examples/sliders-in-color-blender.html
+				file:///C:/~uize/UIZE-JavaScript-Framework/examples/slider-built-in-skin.html?tour=all
+
+			- problem was manifesting as incorrect size for slider knobs and incorrect thickness of borders
+
+			- this was because of a refactoring of the ad hoc registration of set-get properties that introduced a subtle but undesirable change in behavior for registering set-get properties in an ad hoc fashion by setting values for unregistering set-get properties on the class
+
+	Outstanding Issues
+		- examples not working correctly
+			- opacity fades are not working correctly
+				- the share-this-page sidebar
+			- coupled zooming collection items
+				- right side image is breaking when zooming in (could this be a Zazzle broken image type deal?)
+			- file:///C:/~uize/UIZE-JavaScript-Framework/examples/swap-deck.html
+				- opacity stuff seems really broken (related to opacity issues seen in other examples?)
+			- various slideshows are broken (opacity issues messing these up?)
+				file:///C:/~uize/UIZE-JavaScript-Framework/examples/swap-image-cycle.html
+				file:///C:/~uize/UIZE-JavaScript-Framework/examples/slideshow-mantle.html
+				file:///C:/~uize/UIZE-JavaScript-Framework/examples/slideshow.html
+				file:///C:/~uize/UIZE-JavaScript-Framework/examples/slideshow-with-dissolve.html
+				file:///C:/~uize/UIZE-JavaScript-Framework/examples/slideshow-with-wipes.html
+				file:///C:/~uize/UIZE-JavaScript-Framework/examples/image-wipe.html
+				file:///C:/~uize/UIZE-JavaScript-Framework/examples/swap-image.html
+			- SimpleDoc tester is hosed (perhaps not reading indentation correctly? linebreak handling?)
+			- there is a weird flickering behavior in the 3D viewer example
+				- seems to go away after each frames has been displayed at least once (perhaps should use visibiliy:hidden instead of display:none?)
+				- probably is an optimization in IE where the images are not being loaded until the frames are first displayed
+			- misc
+				file:///C:/~uize/UIZE-JavaScript-Framework/examples/two-hierarchical-selectors.html
+
+		- SimpleDoc issues doc
+			- bullets in bullet lists not positioned correctly
+
+	On the Positive Side
+		many examples that were developed to showcase CSS3 features and that only worked fully in FF, Chrome, Safari, and Opera, now work nicely in IE9. We see rounded corners, we see box shadows, but no text shadows yet (boo).
+
+### Fixed Broken Images in Example Pages
+	- broken images in various examples
+		file:///C:/~uize/UIZE-JavaScript-Framework/examples/auto-tooltip-photo-info.html
+		file:///C:/~uize/UIZE-JavaScript-Framework/examples/drag-to-move.html
+		file:///C:/~uize/UIZE-JavaScript-Framework/examples/collection-dynamic.html
+		file:///C:/~uize/UIZE-JavaScript-Framework/examples/mag-view.html
+		file:///C:/~uize/UIZE-JavaScript-Framework/examples/scrolly-carousel.html
+		file:///C:/~uize/UIZE-JavaScript-Framework/examples/thumbzoom.html
+		file:///C:/~uize/UIZE-JavaScript-Framework/examples/collection-item-zooming-with-image-switching.html
+		file:///C:/~uize/UIZE-JavaScript-Framework/examples/collection-item-zooming.html
+
 Unit Test Build Scripts Made Generic
 	=_run-unit-tests-scrunched.js=, and =_run-unit-tests-source.js=
 

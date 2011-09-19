@@ -1,0 +1,32 @@
+A problem that was discovered with the set-get properties mechanism and its support for ad hoc registration of properties has been fixed.
+
+Refactoring of the set-get properties mechanism a while back introduced a subtle but undesirable behavior change in the registering of ad hoc properties. This problem has been fixed and unit tests have been written to ensure that the new behavior is protected from accidental breakage going forward. According to the new behavior, when a set-get property is registered in an ad hoc fashion by setting a value for that property on a class, then that value becomes the initial value for that set-get property. On the other hand, if a set-get property is registered in an ad hoc fashion by setting a value for that property on an instance, then the initial value for that property is =undefined=, so that new instances of the class that are created do not get the instance-specific value for the instance that prompted the property registration.
+
+EXAMPLE
+....................................................................................
+var MyClass = Uize.subclass ();
+
+/*** ad hoc registration by setting value on class ***/
+	MyClass.set ({foo:'bar'});
+	var myInstance = new MyClass;
+	alert (myInstance.get ('foo'));  // alerts the text "bar"
+
+/*** ad hoc registration by setting value on instance ***/
+	myInstance.set ({hello: 'world'});
+	var
+		myOtherInstance = new MyClass,
+		allPropertiesOfMyOtherInstance = myOtherInstance.get ()
+	;
+	alert ('hello' in allPropertiesOfMyOtherInstance)  // alerts the text "true"
+	alert (allPropertiesOfMyOtherInstance.hello)       // alerts the text "undefined"
+....................................................................................
+
+In the above example, after we create the class =MyClass=, we register the set-get property =foo= in an ad hoc fashion by setting a value for it on the class. This has the effect of both registering the property and setting its initial value for all instances of the class that are created going forward. So, when we alert the value of the expression =myInstance.get ('foo')=, we see the text "bar" displayed.
+
+However, when we then register the property =hello= in an ad hoc fashion by setting a value for it on the instance =myInstance=, and we then create a new instance =myOtherInstance= of =MyClass=, we see that the new instance does have the set-get property =hello= but that its value is =undefined=. The =get= instance method returns an object containing the values of all the set-get properties when it is called with no arguments, as it was in this example.
+
+....................................................................................
+<< metadata >>
+
+title: 2011-09-17 - Ad Hoc Property Registration Fixed
+....................................................................................

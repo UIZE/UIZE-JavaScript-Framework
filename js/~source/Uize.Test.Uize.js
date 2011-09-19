@@ -1462,7 +1462,7 @@ Uize.module ({
 							_cloneObjectTest (
 								'Test that cloning an instance of the RegExp object is handled correctly',
 								RegExp,
-								new RegExp ('^\\s+$','gi')
+								new RegExp ('^\\s+$','gim')
 							),
 							_cloneObjectTest (
 								'Test that cloning an instance of the Date object is handled correctly',
@@ -1891,15 +1891,25 @@ Uize.module ({
 								},
 								{
 									title:
-										'Test that set-get properties can be registered in an ad hoc fashion, by setting values for unregistered properties using the set method',
+										'Test that set-get properties can be registered in an ad hoc fashion, by setting values for unregistered properties using the set instance method',
 									test:function () {
 										var
 											_Subclass = Uize.subclass (),
-											_instance1 = new _Subclass ({foo:'bar'})
+											_instance1 = new _Subclass
 										;
 										_instance1.set ({foo:'bar'});
 										var _instance2 = new _Subclass;
 										return this.expect ({foo:undefined},_instance2.get ());
+									}
+								},
+								{
+									title:
+										'Test that set-get properties can be registered in an ad hoc fashion, by setting values for unregistered properties using the set static method',
+									test:function () {
+										var _Subclass = Uize.subclass ();
+										_Subclass.set ({foo:'bar'});
+										var _instance = new _Subclass;
+										return this.expect ({foo:'bar'},_instance.get ());
 									}
 								},
 								{

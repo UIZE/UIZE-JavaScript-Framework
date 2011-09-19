@@ -75,6 +75,12 @@ Uize.module ({
 					_dateRangeWithoutBounds = {}
 		;
 
+		/*** create dummy class with value interface ***/
+			var _ClassWithValueInterface = Uize.subclass ();
+			_ClassWithValueInterface.registerProperties ({
+				_value:'value'
+			});
+
 		function _resolveShouldReturnNowTest (_testTitle,_arguments) {
 			return {
 				title:_testTitle,
@@ -259,7 +265,11 @@ Uize.module ({
 							7200
 						],
 						['Test that the values for all the parameters can be Uize class instances',
-							[new Uize ({value:'2'}),new Uize ({value:'hours'}),new Uize ({value:'seconds'})],
+							[
+								new _ClassWithValueInterface ({value:'2'}),
+								new _ClassWithValueInterface ({value:'hours'}),
+								new _ClassWithValueInterface ({value:'seconds'})
+							],
 							7200
 						]
 					]],

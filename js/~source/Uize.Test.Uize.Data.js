@@ -44,6 +44,12 @@ Uize.module ({
 		_sparselyPopulatedArray [2] = 1;
 		_sparselyPopulatedArray [7] = 2;
 
+		/*** create dummy class with value interface ***/
+			var _ClassWithValueInterface = Uize.subclass ();
+			_ClassWithValueInterface.registerProperties ({
+				_value:'value'
+			});
+
 		function _arrayMethodTargetTest (
 			_hostName,
 			_methodName,
@@ -540,7 +546,7 @@ Uize.module ({
 						['Test that undefined is considered empty',[undefined],true],
 						['Test that NaN is considered empty',[NaN],true],
 						['Test that class instance with empty value set-get property is considered empty',
-							[new Uize ({value:0})],
+							[new _ClassWithValueInterface ({value:0})],
 							true
 						],
 						['Test that a non-empty object is not considered empty',[{blah:0}],false],
@@ -560,7 +566,7 @@ Uize.module ({
 						//['Test that a regular expression is not considered empty',[/^.+$/],false],
 						['Test that a function (even an empty one) is not considered empty',function () {},false],
 						['Test that class instance with non-empty value set-get property is not considered empty',
-							[new Uize ({value:1})],
+							[new _ClassWithValueInterface ({value:1})],
 							false
 						]
 					]],

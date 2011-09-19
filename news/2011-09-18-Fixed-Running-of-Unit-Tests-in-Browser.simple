@@ -1,0 +1,9 @@
+A problem that was causing the [[../uize-unit-tests.html][UIZE Unit Tests]] page to fail to run the test suite for UIZE has been fixed.
+
+The [[../uize-unit-tests.html][UIZE Unit Tests]] page was failing to run the test suite for UIZE, even though the test suite could be run within Windows Script Host just fine, and even though all the unit tests were passing in WSH. The cause of this problem was a change in the =Uize.Test= module that broke its support for asynchronous running of tests (running of the tests in the Windows Script Host context is synchronous). This problem has been fixed and the unit tests can once again be run inside Web browsers. To validate the changes, the unit test page was loaded up in the major browsers and the test suite was verified to run and pass all tests in Internet Explorer, Firefox, Safari, Chrome, and Opera.
+
+....................................................................................
+<< metadata >>
+
+title: 2011-09-18 - Fixed Running of Unit Tests in Browser
+....................................................................................

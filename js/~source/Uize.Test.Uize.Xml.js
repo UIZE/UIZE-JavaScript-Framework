@@ -29,6 +29,12 @@
 Uize.module ({
 	name:'Uize.Test.Uize.Xml',
 	builder:function () {
+		/*** create dummy class with value interface ***/
+			var _ClassWithValueInterface = Uize.subclass ();
+			_ClassWithValueInterface.registerProperties ({
+				_value:'value'
+			});
+
 		return Uize.Test.declare ({
 			title:'Test for Uize.Xml Module',
 			test:[
@@ -112,7 +118,7 @@ Uize.module ({
 							'SOLAR POWER'
 						],
 						['Test that a Uize class instance is coerced to a string before being encoded',
-							[new Uize ({value:'SOLAR POWER'})],
+							[new _ClassWithValueInterface ({value:'SOLAR POWER'})],
 							'SOLAR POWER'
 						]
 					]],
@@ -170,7 +176,7 @@ Uize.module ({
 							'SOLAR POWER'
 						],
 						['Test that a Uize class instance is coerced to a string before being decoded',
-							[new Uize ({value:'SOLAR POWER'})],
+							[new _ClassWithValueInterface ({value:'SOLAR POWER'})],
 							'SOLAR POWER'
 						]
 					]],
@@ -240,7 +246,7 @@ Uize.module ({
 								stringObj:new String ('hello'),
 								numberObj:new Number (42),
 								boolObj:new Boolean (false),
-								uizeInstance:new Uize ({value:'hello'}),
+								uizeInstance:new _ClassWithValueInterface ({value:'hello'}),
 								undefinedValue:undefined,
 								nullValue:null,
 								array:[1,2,3,4]

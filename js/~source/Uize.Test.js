@@ -1282,7 +1282,7 @@ Uize.module ({
 							- see the companion =Done= instance event
 				*/
 				function _updateResultProperty () {
-					if (_testResult !== _true && _testResult !== _undefined)
+					if (_testResult !== _true && _testResult !== _undefined && _testResult != _isAsync)
 						_testResult = _false
 					;
 					_this.set ({_result:_testResult});

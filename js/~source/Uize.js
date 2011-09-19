@@ -73,14 +73,21 @@
 
 			/*** clone instances of RegExp, Date, String, Number, Boolean ***/
 				if (
-					_constructor == RegExp ||
 					_constructor == Date ||
 					_constructor == String ||
 					_constructor == Number ||
 					_constructor == Boolean
-				)
+				) {
 					return new _constructor (_value.valueOf ())
-				;
+				} else if (_constructor == RegExp) {
+					/* NOTE: Workaround for a Safari issue
+						Firstly, the valueOf method of the RegExp object simply returns a reference to the instance on which it is called. Secondly, in the JavaScript interpreters in most browsers, instantiating a new RegExp object using another RegExp instance as the constructor argument results in a clone being created. Unfortunately, Safari simply returns a reference to the RegExp instance passed to the constructor. Therefore, we have to do a more laborious clone operation for regular expressions, in order to please safari.
+					*/
+					return new RegExp (
+						_value.source,
+						(_value.global ? 'g' : '') + (_value.ignoreCase ? 'i' : '') + (_value.multiline ? 'm' : '')
+					);
+				};
 
 			/*** for arrays and simple objects, iterate through and clone elements / properties ***/
 				var
@@ -1088,7 +1095,7 @@
 						(_propertiesToRegister || (_propertiesToRegister = {})) [
 							_propertyPrivateName = _propertyPublicName = _propertyPublicOrPrivateName
 						] =
-							_propertyProfile = {}
+							_propertyProfile = _isInstance ? {} : {value:_propertyValue}
 						;
 					}
 					if (_isInstance)
