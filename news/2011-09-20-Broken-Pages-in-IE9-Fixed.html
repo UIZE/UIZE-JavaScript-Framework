@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2011-09-20 - Broken Pages in IE9 Fixed | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="An issue that was breaking pages of the uize.com Web site in IE9 has been fixed."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2011.html" class="breadcrumb breadcrumbWithArrow">2011 NEWS</a>
+	2011-09-20 - Broken Pages in IE9 Fixed
+
+</h1>
+
+<div class="main">
+<div class="contents0">
+	<p>An issue that was breaking pages of the <b>uize.com</b> Web site in IE9 has been fixed.</p>
+	
+	<p>Testing in Microsoft Internet Explorer 9 revealed an issue that was breaking pages in the <b>uize.com</b> Web site, including reference pages, explainers, and example pages. This problem was first pointed out by Tim Carter (thanks for the find, Tim). The issue related to the "share this" panel that hugs the left side of pages and that uses an opacity animation effect. This effect was ultimately relying on the <code>Uize.Node.getStyle</code> static method of the <code><a href="../reference/Uize.Node.html">Uize.Node</a></code> module, and this method was tracked down as being the culprit in the breakage. The method broke as a result of a change in behavior in IE9.</p>
+	
+	<p>The <code>Uize.Node.getStyle</code> method has been updated to handle the new behavior in IE9 and pages of the <b>uize.com</b> site now function with all their interactivity. The opacity animation of the "share this" panel is still wonky in IE9, and this will be fixed in an upcoming update.</p>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

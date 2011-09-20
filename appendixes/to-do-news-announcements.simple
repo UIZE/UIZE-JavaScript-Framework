@@ -2,11 +2,6 @@ This document lists news official announcements that need to be created for deve
 
 ### Updates for Internet Explorer 9
 	Issues Addressed
-		Broken Example Pages and Uize.Node.getStyle
-			The =Uize.Node.getStyle= static method, implemented in the =Uize.Node= module, has been updated to work in Internet Explorer 9.
-	
-			The incompatibility issue with IE9 was breaking all example pages on the *uize.com* Web site. This issue has been addressed and the examples all load nicely now in IE9.
-
 		Broken Drag and Drop in IE9
 
 		Buttons With Incorrect Cursors in Examples
