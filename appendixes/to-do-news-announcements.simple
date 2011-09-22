@@ -1,20 +1,8 @@
-This document lists news official announcements that need to be created for developments that have already taken place.
+This document lists official news announcements that need to be created for developments that have already taken place.
 
 ### Updates for Internet Explorer 9
 	Issues Addressed
-		Broken Drag and Drop in IE9
-
-		Buttons With Incorrect Cursors in Examples
-			- fix to Uize.Node.showClickable static method to use ='pointer'= instead of old ='hand'= value
-			- still support ='hand'= for versions of Internet Explorer earlier than version 9
-			- various examples were affected
-				- examples with dialogs
-			- new Uize.Node.ieMajorVersion static property
-
-		Various Fixes
-			- banner animation / reveal on the home page was all screwed up
-
-		Broken Styling in Sliders Examples
+		Broken Styling in Sliders Examples Fixed
 			- some examples with sliders are not observing slider theme properties correctly
 				- basic bevel
 				file:///C:/~uize/UIZE-JavaScript-Framework/examples/sliders-in-color-blender.html
@@ -24,6 +12,16 @@ This document lists news official announcements that need to be created for deve
 
 			- this was because of a refactoring of the ad hoc registration of set-get properties that introduced a subtle but undesirable change in behavior for registering set-get properties in an ad hoc fashion by setting values for unregistering set-get properties on the class
 
+		Buttons With Incorrect Cursor in IE9 Fixed
+			- fix to Uize.Node.showClickable static method to use ='pointer'= instead of old ='hand'= value
+			- still support ='hand'= for versions of Internet Explorer earlier than version 9
+			- various examples were affected
+				- examples with dialogs
+			- new Uize.Node.ieMajorVersion static property
+
+		Homepage Banner Animation Fixed in IE9
+			- banner animation / reveal on the home page was all screwed up
+
 	Outstanding Issues
 		- examples not working correctly
 			- opacity fades are not working correctly
@@ -31,7 +29,7 @@ This document lists news official announcements that need to be created for deve
 			- coupled zooming collection items
 				- right side image is breaking when zooming in (could this be a Zazzle broken image type deal?)
 			- file:///C:/~uize/UIZE-JavaScript-Framework/examples/swap-deck.html
-				- opacity stuff seems really broken (related to opacity issues seen in other examples?)
+				- opacity stuff seems really broken (related to opacity issues seen in other examples? or related to broken Zazzle images?)
 			- various slideshows are broken (opacity issues messing these up?)
 				file:///C:/~uize/UIZE-JavaScript-Framework/examples/swap-image-cycle.html
 				file:///C:/~uize/UIZE-JavaScript-Framework/examples/slideshow-mantle.html
@@ -47,7 +45,7 @@ This document lists news official announcements that need to be created for deve
 			- misc
 				file:///C:/~uize/UIZE-JavaScript-Framework/examples/two-hierarchical-selectors.html
 
-		- SimpleDoc issues doc
+		- SimpleDoc issues
 			- bullets in bullet lists not positioned correctly
 
 	On the Positive Side
