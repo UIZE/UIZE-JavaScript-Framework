@@ -2,6 +2,10 @@ This document lists official news announcements that need to be created for deve
 
 ### Updates for Internet Explorer 9
 	Issues Addressed
+		Broken Images in Various Examples Fixed
+			- slideshows, auto tooltips, collection dynamic, etc.
+			- issue had to do with an API change made by Zazzle for their poster prints product refresh
+
 		Broken Styling in Sliders Examples Fixed
 			- some examples with sliders are not observing slider theme properties correctly
 				- basic bevel
@@ -12,36 +16,19 @@ This document lists official news announcements that need to be created for deve
 
 			- this was because of a refactoring of the ad hoc registration of set-get properties that introduced a subtle but undesirable change in behavior for registering set-get properties in an ad hoc fashion by setting values for unregistering set-get properties on the class
 
-		Buttons With Incorrect Cursor in IE9 Fixed
-			- fix to Uize.Node.showClickable static method to use ='pointer'= instead of old ='hand'= value
-			- still support ='hand'= for versions of Internet Explorer earlier than version 9
-			- various examples were affected
-				- examples with dialogs
-			- new Uize.Node.ieMajorVersion static property
-
 		Homepage Banner Animation Fixed in IE9
 			- banner animation / reveal on the home page was all screwed up
 
+		Fixed Flickering Issue in IE9 in 3D Rotation Viewer Examples
+			- had to do with using display:block display:none and displayNode for showing frames, rather than visibility:hidden visibility:visible showNode, and IE9 has an optimization where some first time cost of loading and/or rendering is deferred for objects that are initially display:none. Switching to using visibility fixed the flickering issue.
+
 	Outstanding Issues
 		- examples not working correctly
-			- opacity fades are not working correctly
+			- opacity fades are not working correctly in some examples
 				- the share-this-page sidebar
-			- coupled zooming collection items
-				- right side image is breaking when zooming in (could this be a Zazzle broken image type deal?)
-			- file:///C:/~uize/UIZE-JavaScript-Framework/examples/swap-deck.html
-				- opacity stuff seems really broken (related to opacity issues seen in other examples? or related to broken Zazzle images?)
-			- various slideshows are broken (opacity issues messing these up?)
-				file:///C:/~uize/UIZE-JavaScript-Framework/examples/swap-image-cycle.html
-				file:///C:/~uize/UIZE-JavaScript-Framework/examples/slideshow-mantle.html
-				file:///C:/~uize/UIZE-JavaScript-Framework/examples/slideshow.html
-				file:///C:/~uize/UIZE-JavaScript-Framework/examples/slideshow-with-dissolve.html
-				file:///C:/~uize/UIZE-JavaScript-Framework/examples/slideshow-with-wipes.html
-				file:///C:/~uize/UIZE-JavaScript-Framework/examples/image-wipe.html
-				file:///C:/~uize/UIZE-JavaScript-Framework/examples/swap-image.html
+				- homepage had issue, until workaround added
+				- seems to happen when CSS rule applies base opacity setting
 			- SimpleDoc tester is hosed (perhaps not reading indentation correctly? linebreak handling?)
-			- there is a weird flickering behavior in the 3D viewer example
-				- seems to go away after each frames has been displayed at least once (perhaps should use visibiliy:hidden instead of display:none?)
-				- probably is an optimization in IE where the images are not being loaded until the frames are first displayed
 			- misc
 				file:///C:/~uize/UIZE-JavaScript-Framework/examples/two-hierarchical-selectors.html
 

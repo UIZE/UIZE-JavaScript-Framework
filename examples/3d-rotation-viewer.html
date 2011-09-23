@@ -20,7 +20,7 @@
 		}
 		.rotationViewer img {
 			position:absolute;
-			display:none;
+			visibility:hidden;
 			left:0;
 			top:0;
 			width:100%;
@@ -130,8 +130,8 @@ Uize.module ({
 				rotation = ((newRotation % 360) + 360) % 360;
 				var frameNo = 1 + Math.round (rotation / 360 * (totalFrames - 1));
 				if (frameNo != lastFrameNo) {
-					rotationViewer.displayNode ('frame'+ lastFrameNo,false);
-					rotationViewer.displayNode ('frame'+ (lastFrameNo = frameNo));
+					rotationViewer.showNode ('frame'+ lastFrameNo,false);
+					rotationViewer.showNode ('frame'+ (lastFrameNo = frameNo));
 				}
 			}
 			rotationViewer.wire ({

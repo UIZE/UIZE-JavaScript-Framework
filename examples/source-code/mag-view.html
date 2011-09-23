@@ -151,7 +151,7 @@
   &lt;!-- mag view UI wireframe --&gt;
 
   &lt;div id="page_magView" class="magViewShell"&gt;
-    &lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228026937512483785&amp;max_dim=350" alt="Shadow of the Past"/&gt;
+    &lt;img src="http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;view=front&amp;pid=228026937512483785&amp;max_dim=350" alt="Shadow of the Past"/&gt;
     &lt;div id="page_magView-highlight" class="magViewHighlight"&gt;
       &lt;div class="magViewHighlightFill"&gt;&lt;/div&gt;
       &lt;div class="magViewHighlightBorder1"&gt;&lt;/div&gt;
@@ -203,7 +203,7 @@ Uize.module ({
         'magView',
         Uize.Widget.MagView,
         {
-          magImageLowResUrl:'http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;pid=228026937512483785&amp;max_dim=350',
+          magImageLowResUrl:'http://rlv.zcache.com/isapi/designall.dll?action=realview&amp;rvtype=pre&amp;view=front&amp;pid=228026937512483785&amp;max_dim=350',
           magImageHighResUrl:function (_magPower) {
             return (
               this.get ('magImageLowResUrl').replace ('max_dim=350','max_dim=' + Math.round (350 * _magPower))
