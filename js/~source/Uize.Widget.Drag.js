@@ -46,11 +46,16 @@ Uize.module ({
 		/*** Global Variables ***/
 			var
 				_dragShield,
-				_useFixedPositioningForShield =
-					typeof navigator != 'undefined' &&
-					(!_isIe || navigator.appVersion.indexOf ('MSIE 6') == -1) &&
-					navigator.userAgent.indexOf ('Firefox/2') < 0
+				_hasStickyDragIssue = _false,
+				_useFixedPositioningForShield = _false
 			;
+			if (typeof navigator != 'undefined') {
+				var _ieMajorVersion = _Uize_Node.ieMajorVersion;
+				_hasStickyDragIssue = _isIe && _ieMajorVersion < 9;
+				_useFixedPositioningForShield =
+					(!_isIe || _ieMajorVersion > 6) && navigator.userAgent.indexOf ('Firefox/2') < 0
+				;
+			}
 
 		/*** Class Constructor ***/
 			var
@@ -291,7 +296,7 @@ Uize.module ({
 						}
 						document.onmousemove = function (_event) {
 							_event || (_event = window.event);
-							_isIe && _event.button == 0
+							_hasStickyDragIssue && _event.button == 0
 								? _this._inDrag && _cleanupAfterMouseDrag (_event)
 									/* NOTE:
 										when the user mouses up outside of the document area, the onmouseup event is not fired, so this is a way to catch the next mouse move inside the document where no mouse button is depressed -- can't do this in Firefox, because Firefox doesn't update the value of the button property for each onmousemove event

@@ -1,0 +1,15 @@
+An issue that was breaking the drag-and-drop functionality of the =Uize.Widget.Drag= class in IE9 has been fixed.
+
+Testing in Microsoft Internet Explorer 9 revealed an issue that was breaking the drag-and-drop functionality of the =Uize.Widget.Drag= class in IE9. This problem was first pointed out by Tim Carter. The issue was being caused by a workaround for a "sticky drag" issue that happens in some older browsers, where clicking down and dragging the mouse outside the browser window and then releasing the mouse button would cause the drag operation to get stuck in the dragging state when mousing back into the browser window - even with the mouse button no longer being held down.
+
+Now, this workaround was being applied for all Internet Explorer versions, and was relying on the behavior in versions of IE prior to IE9 of reporting the mouse button being clicked in the =button= property of the event object, using the values =1= (left button), =2= (middle button), =4= (right button), or sums of these values when multiple buttons are pressed, or =0= when no button is pressed. With the new behavior in IE9, which conforms to the arguably retarded W3C standard for the =button= property (I usually like standards), the value =0= for the =button= property indicates that the left button is being pressed, and there is no value like =-1= to indicate that no button is being pressed. It is hard to argue that the value =0= shouldn't be used to indicate that no button is pressed, especially since it is the most convenient for a simple truthy test (eg. =if (event.button) {doShit ()}=).
+
+Fortunately, the workaround for the "sticky drag" issue is no longer needed in IE9, because IE9 does a respectable job of firing the necessary events to result in a drag operation being canceled when the mouse button is released while the pointer is outside the browser window. So, to avoid the whole ugly issue of trying to deal with the new reporting of mouse buttons being pressed, the workaround is now conditionalized for only older versions of IE (may they all die soon).
+
+With the latest update to the =Uize.Widget.Drag= class, the drag-and-drop examples once again work and the world is a happy place of draggable sliders, marquees, image ports, dynamic collections, 3D rotation viewers, etc.
+
+....................................................................................
+<< metadata >>
+
+title: 2011-09-21 - Broken Drag-and-drop in IE9 Fixed
+....................................................................................

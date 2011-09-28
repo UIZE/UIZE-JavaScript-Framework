@@ -174,10 +174,11 @@
 			</li>
 			<li><a href="#3">3. Static Properties</a>
 				<ul>
-					<li><a href="#3_1" title="A boolean, indicating whether or not the browser is a version of Microsoft Internet Explorer.">3.1. Uize.Node.isIe</a></li>
-					<li><a href="#3_2" title="A boolean, indicating whether or not the browser is a version of Mozilla Firefox.">3.2. Uize.Node.isMozilla</a></li>
-					<li><a href="#3_3" title="A boolean, indicating whether or not the browser is a version of Apple Safari.">3.3. Uize.Node.isSafari</a></li>
-					<li><a href="#3_4" title="IMPLEMENTATION INFO">3.4. Uize.Node.moduleName</a></li>
+					<li><a href="#3_1" title="A number, indicating the major version of the Microsoft Internet Explorer browser being used, or the value 0 if the brower is not Internet Explorer.">3.1. Uize.Node.ieMajorVersion</a></li>
+					<li><a href="#3_2" title="A boolean, indicating whether or not the browser is a version of Microsoft Internet Explorer.">3.2. Uize.Node.isIe</a></li>
+					<li><a href="#3_3" title="A boolean, indicating whether or not the browser is a version of Mozilla Firefox.">3.3. Uize.Node.isMozilla</a></li>
+					<li><a href="#3_4" title="A boolean, indicating whether or not the browser is a version of Apple Safari.">3.4. Uize.Node.isSafari</a></li>
+					<li><a href="#3_5" title="IMPLEMENTATION INFO">3.5. Uize.Node.moduleName</a></li>
 				</ul>
 			</li>
 		</ul>
@@ -264,7 +265,7 @@ Uize.Node.show ([topButtons,bottomButtons],true);
 				
 				<p><span class="allCaps">STATIC PROPERTIES</span></p>
 				
-				<p><code><a href="#3_1">Uize.Node.isIe</a></code> | <code><a href="#3_2">Uize.Node.isMozilla</a></code> | <code><a href="#3_3">Uize.Node.isSafari</a></code> | <code><a href="#3_4">Uize.Node.moduleName</a></code></p>
+				<p><code><a href="#3_1">Uize.Node.ieMajorVersion</a></code> | <code><a href="#3_2">Uize.Node.isIe</a></code> | <code><a href="#3_3">Uize.Node.isMozilla</a></code> | <code><a href="#3_4">Uize.Node.isSafari</a></code> | <code><a href="#3_5">Uize.Node.moduleName</a></code></p>
 			</div>
 			
 			<a name="1_3_2"></a>
@@ -2093,14 +2094,15 @@ Uize.Node.wire (nodeBLOB,eventNamesToHandlersMapOBJ,ownerIdSTR);
 	<h1 class="heading1" title="3. Static Properties"><span class="headingNumber"><a href="#3" title="3. Static Properties">3</a>. </span>Static Properties</h1>
 	<div class="contents1">
 		<a name="3_1"></a>
-		<h2 class="heading2" title="3. Static Properties -&gt; 3.1. Uize.Node.isIe"><span class="headingNumber"><a href="#3" title="3. Static Properties">3</a>.<a href="#3_1" title="3. Static Properties -&gt; 3.1. Uize.Node.isIe">1</a>. </span>Uize.Node.isIe</h2>
+		<h2 class="heading2" title="3. Static Properties -&gt; 3.1. Uize.Node.ieMajorVersion"><span class="headingNumber"><a href="#3" title="3. Static Properties">3</a>.<a href="#3_1" title="3. Static Properties -&gt; 3.1. Uize.Node.ieMajorVersion">1</a>. </span>Uize.Node.ieMajorVersion</h2>
 		<div class="contents2">
-			<p>A boolean, indicating whether or not the browser is a version of Microsoft Internet Explorer.</p>
+			<p>A number, indicating the major version of the Microsoft Internet Explorer browser being used, or the value <code>0</code> if the brower is not Internet Explorer.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#3_3">Uize.Node.isSafari</a></code> and <code><a href="#3_2">Uize.Node.isMozilla</a></code> static properties</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#3_2">Uize.Node.isIe</a></code> static property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#3_4">Uize.Node.isSafari</a></code> and <code><a href="#3_3">Uize.Node.isMozilla</a></code> static properties</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -2110,14 +2112,15 @@ Uize.Node.wire (nodeBLOB,eventNamesToHandlersMapOBJ,ownerIdSTR);
 		</div>
 		
 		<a name="3_2"></a>
-		<h2 class="heading2" title="3. Static Properties -&gt; 3.2. Uize.Node.isMozilla"><span class="headingNumber"><a href="#3" title="3. Static Properties">3</a>.<a href="#3_2" title="3. Static Properties -&gt; 3.2. Uize.Node.isMozilla">2</a>. </span>Uize.Node.isMozilla</h2>
+		<h2 class="heading2" title="3. Static Properties -&gt; 3.2. Uize.Node.isIe"><span class="headingNumber"><a href="#3" title="3. Static Properties">3</a>.<a href="#3_2" title="3. Static Properties -&gt; 3.2. Uize.Node.isIe">2</a>. </span>Uize.Node.isIe</h2>
 		<div class="contents2">
-			<p>A boolean, indicating whether or not the browser is a version of Mozilla Firefox.</p>
+			<p>A boolean, indicating whether or not the browser is a version of Microsoft Internet Explorer.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#3_1">Uize.Node.isIe</a></code> and <code><a href="#3_3">Uize.Node.isSafari</a></code> static properties</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#3_1">Uize.Node.ieMajorVersion</a></code> static property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#3_4">Uize.Node.isSafari</a></code> and <code><a href="#3_3">Uize.Node.isMozilla</a></code> static properties</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -2127,14 +2130,14 @@ Uize.Node.wire (nodeBLOB,eventNamesToHandlersMapOBJ,ownerIdSTR);
 		</div>
 		
 		<a name="3_3"></a>
-		<h2 class="heading2" title="3. Static Properties -&gt; 3.3. Uize.Node.isSafari"><span class="headingNumber"><a href="#3" title="3. Static Properties">3</a>.<a href="#3_3" title="3. Static Properties -&gt; 3.3. Uize.Node.isSafari">3</a>. </span>Uize.Node.isSafari</h2>
+		<h2 class="heading2" title="3. Static Properties -&gt; 3.3. Uize.Node.isMozilla"><span class="headingNumber"><a href="#3" title="3. Static Properties">3</a>.<a href="#3_3" title="3. Static Properties -&gt; 3.3. Uize.Node.isMozilla">3</a>. </span>Uize.Node.isMozilla</h2>
 		<div class="contents2">
-			<p>A boolean, indicating whether or not the browser is a version of Apple Safari.</p>
+			<p>A boolean, indicating whether or not the browser is a version of Mozilla Firefox.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#3_1">Uize.Node.isIe</a></code> and <code><a href="#3_2">Uize.Node.isMozilla</a></code> static properties</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#3_2">Uize.Node.isIe</a></code> and <code><a href="#3_4">Uize.Node.isSafari</a></code> static properties</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -2144,7 +2147,24 @@ Uize.Node.wire (nodeBLOB,eventNamesToHandlersMapOBJ,ownerIdSTR);
 		</div>
 		
 		<a name="3_4"></a>
-		<h2 class="heading2" title="3. Static Properties -&gt; 3.4. Uize.Node.moduleName"><span class="headingNumber"><a href="#3" title="3. Static Properties">3</a>.<a href="#3_4" title="3. Static Properties -&gt; 3.4. Uize.Node.moduleName">4</a>. </span>Uize.Node.moduleName</h2>
+		<h2 class="heading2" title="3. Static Properties -&gt; 3.4. Uize.Node.isSafari"><span class="headingNumber"><a href="#3" title="3. Static Properties">3</a>.<a href="#3_4" title="3. Static Properties -&gt; 3.4. Uize.Node.isSafari">4</a>. </span>Uize.Node.isSafari</h2>
+		<div class="contents2">
+			<p>A boolean, indicating whether or not the browser is a version of Apple Safari.</p>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#3_2">Uize.Node.isIe</a></code> and <code><a href="#3_3">Uize.Node.isMozilla</a></code> static properties</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_5"></a>
+		<h2 class="heading2" title="3. Static Properties -&gt; 3.5. Uize.Node.moduleName"><span class="headingNumber"><a href="#3" title="3. Static Properties">3</a>.<a href="#3_5" title="3. Static Properties -&gt; 3.5. Uize.Node.moduleName">5</a>. </span>Uize.Node.moduleName</h2>
 		<div class="contents2">
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			

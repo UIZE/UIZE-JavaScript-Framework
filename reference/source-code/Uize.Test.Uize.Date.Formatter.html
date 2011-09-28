@@ -110,6 +110,12 @@ Uize.module ({
           _testDateTimeIsJustBeforeMidnight = _newDate (2001,1,1,23,59,59,999)
     ;
 
+    /*** create dummy class with value interface ***/
+      var _ClassWithValueInterface = Uize.subclass ();
+      _ClassWithValueInterface.registerProperties ({
+        _value:'value'
+      });
+
     return Uize.Test.declare ({
       title:'Test for Uize.Date.Formatter Module',
       test:[
@@ -1343,23 +1349,23 @@ Uize.module ({
 
             /*** test support for objects that implement valueOf interface ***/
               ['Test that a date specified as a Date object instance is handled correctly',
-                [new Uize ({value:_testDate})],
+                [new _ClassWithValueInterface ({value:_testDate})],
                 _testDate
               ],
               ['Test that specifying the value null for the date to parse produces the value undefined',
-                [new Uize ({value:null})],
+                [new _ClassWithValueInterface ({value:null})],
                 undefined
               ],
               ['Test that specifying an empty string for the date to parse produces the value undefined',
-                [new Uize ({value:''})],
+                [new _ClassWithValueInterface ({value:''})],
                 undefined
               ],
               ['Test that a date specified as a number is handled correctly',
-                [new Uize ({value:+_testDate})],
+                [new _ClassWithValueInterface ({value:+_testDate})],
                 _testDate
               ],
               ['Test that a date specified as a number is handled correctly',
-                [new Uize ({value:'2001-09-11'}),'{YYYY}-{MM}-{DD}'],
+                [new _ClassWithValueInterface ({value:'2001-09-11'}),'{YYYY}-{MM}-{DD}'],
                 _newDate (2001,9,11)
               ],
 

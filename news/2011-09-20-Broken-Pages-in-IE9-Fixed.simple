@@ -1,0 +1,11 @@
+An issue that was breaking pages of the *uize.com* Web site in IE9 has been fixed.
+
+Testing in Microsoft Internet Explorer 9 revealed an issue that was breaking pages in the *uize.com* Web site, including reference pages, explainers, and example pages. This problem was first pointed out by Tim Carter (thanks for the find, Tim). The issue related to the "share this" panel that hugs the left side of pages and that uses an opacity animation effect. This effect was ultimately relying on the =Uize.Node.getStyle= static method of the =Uize.Node= module, and this method was tracked down as being the culprit in the breakage. The method broke as a result of a change in behavior in IE9.
+
+The =Uize.Node.getStyle= method has been updated to handle the new behavior in IE9 and pages of the *uize.com* site now function with all their interactivity. The opacity animation of the "share this" panel is still wonky in IE9, and this will be fixed in an upcoming update.
+
+....................................................................................
+<< metadata >>
+
+title: 2011-09-20 - Broken Pages in IE9 Fixed
+....................................................................................

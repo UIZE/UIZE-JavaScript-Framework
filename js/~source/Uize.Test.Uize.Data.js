@@ -44,6 +44,12 @@ Uize.module ({
 		_sparselyPopulatedArray [2] = 1;
 		_sparselyPopulatedArray [7] = 2;
 
+		/*** create dummy class with value interface ***/
+			var _ClassWithValueInterface = Uize.subclass ();
+			_ClassWithValueInterface.registerProperties ({
+				_value:'value'
+			});
+
 		function _arrayMethodTargetTest (
 			_hostName,
 			_methodName,
@@ -461,6 +467,18 @@ Uize.module ({
 									[new Array (10),new Array (10)],
 									true
 								],
+								{
+									title:
+										'Test workaround for issue in versions of Microsoft\'s JScript interpreter, where the for...in loop skips elements whose values are specified as undefined when an array is initialized using the array literal syntax',
+									test:function () {
+										var
+											_array1 = [undefined,undefined,undefined],
+											_array2 = [undefined,undefined,undefined]
+										;
+										_array2 [0] = undefined;
+										return Uize.Data.identical (_array1,_array2);
+									}
+								},
 								['Test that object is identical to itself',
 									[_identicalTestObjectA,_identicalTestObjectA],
 									true
@@ -479,6 +497,19 @@ Uize.module ({
 									[[1,2],[1,2,3]],
 									false
 								],
+								{
+									title:
+										'Test that two arrays with identical elements but different custom properties are not considered identical',
+									test:function () {
+										var
+											_array1 = [1,2,3,4,5],
+											_array2 = _array1.concat ()
+										;
+										_array1.foo = 'bar';
+										_array2.hello = 'world';
+										return !Uize.Data.identical (_array1,_array2);
+									}
+								},
 								['Test that two objects with different properties are not identical',
 									[{foo:1},{foo:1,bar:2}],
 									false
@@ -515,7 +546,7 @@ Uize.module ({
 						['Test that undefined is considered empty',[undefined],true],
 						['Test that NaN is considered empty',[NaN],true],
 						['Test that class instance with empty value set-get property is considered empty',
-							[new Uize ({value:0})],
+							[new _ClassWithValueInterface ({value:0})],
 							true
 						],
 						['Test that a non-empty object is not considered empty',[{blah:0}],false],
@@ -535,7 +566,7 @@ Uize.module ({
 						//['Test that a regular expression is not considered empty',[/^.+$/],false],
 						['Test that a function (even an empty one) is not considered empty',function () {},false],
 						['Test that class instance with non-empty value set-get property is not considered empty',
-							[new Uize ({value:1})],
+							[new _ClassWithValueInterface ({value:1})],
 							false
 						]
 					]],

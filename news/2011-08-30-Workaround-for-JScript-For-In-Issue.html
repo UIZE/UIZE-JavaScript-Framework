@@ -1,0 +1,101 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2011-08-30 - Workaround for JScript For In Issue | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="An issue was discovered with the way that Microsoft&apos;s JScript interpreter, which is used in Internet Explorer and Windows Script Host, iterates through arrays in for...in loops."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2011.html" class="breadcrumb breadcrumbWithArrow">2011 NEWS</a>
+	2011-08-30 - Workaround for JScript For In Issue
+
+</h1>
+
+<div class="main">
+<div class="contents0">
+	<p>An issue was discovered with the way that Microsoft's JScript interpreter, which is used in Internet Explorer and Windows Script Host, iterates through arrays in <code>for...in</code> loops.</p>
+	
+	<p>Essentially, when an array is populated using literal syntax (eg. <code>[0,1,2,3]</code>), and the value <code>undefined</code> is explicitly specified for some of the elements, then the elements whose values are set to <code>undefined</code> will not be encountered in a <code>for...in</code> loop.</p>
+	
+	<p><span class="allCaps">EXAMPLE</span></p>
+	
+	
+<pre class="sample-code">var
+  keysHash = {},
+  myArray = ['foo',undefined,'bar'] // element 1 is explicitly initialized to undefined
+;
+for (key in myArray) {
+  keysHash [key] = true;
+}
+alert (keysHash [1]);
+</pre>
+	
+	<p>In the above example, the <code>alert</code> statement would alert the value <code>undefined</code> in interpreters that exhibit the problematic behavior. This is because element one is not treated as enumerable by JScript in this case. Curiously, however, if the value <code>undefined</code> is explicitly assigned to the element, then JScript <b>will</b> treat the element as enumerable and it will be encountered in a <code>for...in</code> loop.</p>
+	
+	<p><span class="allCaps">EXAMPLE</span></p>
+	
+	
+<pre class="sample-code">var
+  keysHash = {},
+  myArray = ['foo',undefined,'bar']
+;
+
+myArray [1] = undefined; // explicitly assigning the value undefined
+
+for (key in myArray) {
+  keysHash [key] = true;
+}
+alert (keysHash [1]);
+</pre>
+	
+	<p>In the above example, the <code>alert</code> statement alerts the value <code>true</code> - even in interpreters that exhibit the problematic behavior.</p>
+	
+	<p>It's not clear why the literal syntax initialization produces a sparsely populated array in JScript when some elements are initialized to <code>undefined</code>. Regardless of the rationale, this inconsistent behavior causes a problem when using a <code>for...in</code> loop to compare arrays for identical elements and custom properties, as was the case with the previous implementation of the <code>Uize.Data.identical</code> method defined in the <code><a href="../reference/Uize.Data.html">Uize.Data</a></code> module.</p>
+	
+	<p>Consider the following example...</p>
+	
+	<p><span class="allCaps">EXAMPLE</span></p>
+	
+	
+<pre class="sample-code">var
+  array1 = ['foo',undefined,'bar'],
+  array2 = []
+;
+array2 [0] = 'foo';
+array2 [1] = undefined;
+array2 [2] = 'bar';
+
+alert (Uize.Data.identical (array1,array2));  // alerted the value false before the workaround
+</pre>
+	
+	<p>A workaround was put in place to instead compare elements and custom properties in separate passes. With this workaround, the two arrays in the above example would be considered identical when running in JScript.</p>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

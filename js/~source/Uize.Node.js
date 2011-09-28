@@ -73,6 +73,12 @@ Uize.module ({
 				_true = true,
 				_false = false,
 				_null = null,
+				_hidden = 'hidden',
+				_Uize_copyInto = Uize.copyInto
+			;
+
+		/*** Global Variables ***/
+			var
 				_isBrowser = typeof navigator != 'undefined',
 				_navigator = _isBrowser ? navigator : {userAgent:'',appName:''},
 				_userAgent = _navigator.userAgent.toLowerCase (),
@@ -81,8 +87,8 @@ Uize.module ({
 				_isMozilla = _userAgent.indexOf ('gecko') > -1,
 				_isOpera = _userAgent.indexOf ('opera') > -1,
 				_isMozillaOrOpera = _isMozilla || _isOpera,
-				_hidden = 'hidden',
-				_Uize_copyInto = Uize.copyInto
+				_ieMajorVersion = +(_isIe && (_userAgent.match (/MSIE\s*(\d+)/i) || [0,0]) [1]),
+				_useHandForPointerCursor = _isIe && _ieMajorVersion < 9
 			;
 
 		/*** Utility Functions ***/
@@ -785,7 +791,7 @@ Uize.module ({
 								;
 							}
 							if (_opacityInIe) {
-								var _match = _value.match (/alpha\s*\(\s*opacity\s*=([^\)]*)\)/i);
+								var _match = (_value || '').match (/alpha\s*\(\s*opacity\s*=([^\)]*)\)/i);
 								_value = _match ? _match [1] / 100 : 1;
 							}
 						}
@@ -1915,7 +1921,12 @@ Uize.module ({
 			_package.showClickable = function (_nodeBlob,_clickable) {
 				_setStyle (
 					_nodeBlob,
-					{cursor:_clickable || _clickable === _undefined ? (_isIe ? 'hand' : 'pointer') : 'default'}
+					{
+						cursor:
+							_clickable || _clickable === _undefined
+								? (_useHandForPointerCursor ? 'hand' : 'pointer')
+								: 'default'
+					}
 				);
 				/*?
 					Static Methods
@@ -2478,6 +2489,17 @@ Uize.module ({
 				*/
 
 		/*** Public Static Properties ***/
+			_package.ieMajorVersion = _ieMajorVersion;
+				/*?
+					Static Properties
+						Uize.Node.ieMajorVersion
+							A number, indicating the major version of the Microsoft Internet Explorer browser being used, or the value =0= if the brower is not Internet Explorer.
+
+							NOTES
+							- see the related =Uize.Node.isIe= static property
+							- see also the =Uize.Node.isSafari= and =Uize.Node.isMozilla= static properties
+				*/
+
 			_package.isIe = _isIe;
 				/*?
 					Static Properties
@@ -2485,6 +2507,7 @@ Uize.module ({
 							A boolean, indicating whether or not the browser is a version of Microsoft Internet Explorer.
 
 							NOTES
+							- see the related =Uize.Node.ieMajorVersion= static property
 							- see also the =Uize.Node.isSafari= and =Uize.Node.isMozilla= static properties
 				*/
 

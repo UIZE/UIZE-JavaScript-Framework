@@ -75,173 +75,178 @@
 					<li><a href="#5_14" title="- if one has a reference to a module, such as in a tool like the Delve tool, how does one determine what the filename of a module is for the purpose of linking to reference documentation?">5.14. Issues to Address</a></li>
 				</ul>
 			</li>
-			<li><a href="#6" title="Provide a facility that can optionally be used for function argument validation.">6. Function Argument Validation</a>
+			<li><a href="#6" title="Implement unit tests for all features of the JavaScript language.">6. JavaScript Language Unit Tests</a>
 				<ul>
-					<li><a href="#6_1" title="Possibly a way generally to have method signature validation as a separate optional layer of code.">6.1. Method Signature Validation as Optional Layer</a>
+					<li><a href="#6_1" title="In several versions of Microsoft&apos;s JScript interpreter, if an array is initialized using the literal syntax (ie. [&apos;value 1&apos;,&apos;value 2&apos;,&apos;value 3&apos;]), then any element whose value is initialized to undefined will not be encountered in a for...in loop.">6.1. For In Loops And Undefined Array Elements</a></li>
+				</ul>
+			</li>
+			<li><a href="#7" title="Provide a facility that can optionally be used for function argument validation.">7. Function Argument Validation</a>
+				<ul>
+					<li><a href="#7_1" title="Possibly a way generally to have method signature validation as a separate optional layer of code.">7.1. Method Signature Validation as Optional Layer</a>
 						<ul>
-							<li><a href="#6_1_1" title="Maybe a separate module that can accompany the main module?">6.1.1. As a Separate Module</a></li>
-							<li><a href="#6_1_2" title="Maybe the validation code is inside the main module, but can be optimized / compiled out for scrunched production code?">6.1.2. Validation Code Inside the Main Module</a></li>
+							<li><a href="#7_1_1" title="Maybe a separate module that can accompany the main module?">7.1.1. As a Separate Module</a></li>
+							<li><a href="#7_1_2" title="Maybe the validation code is inside the main module, but can be optimized / compiled out for scrunched production code?">7.1.2. Validation Code Inside the Main Module</a></li>
 						</ul>
 					</li>
 				</ul>
 			</li>
-			<li><a href="#7" title="- unit conversion (possible to implement this on the client side, but might be appropriate to migrate such a service to server side at some stage, and in such a case it would be desirable to allow for such a migration in a way that doesn&apos;t heavily impact the code using such a service)">7. Client Services</a>
+			<li><a href="#8" title="- unit conversion (possible to implement this on the client side, but might be appropriate to migrate such a service to server side at some stage, and in such a case it would be desirable to allow for such a migration in a way that doesn&apos;t heavily impact the code using such a service)">8. Client Services</a>
 				<ul>
-					<li><a href="#7_1" title="BEFORE">7.1. Example 1</a></li>
-					<li><a href="#7_2" title="BEFORE">7.2. Example 2</a></li>
-					<li><a href="#7_3">7.3. What All Can Services Replace or Do?</a>
+					<li><a href="#8_1" title="BEFORE">8.1. Example 1</a></li>
+					<li><a href="#8_2" title="BEFORE">8.2. Example 2</a></li>
+					<li><a href="#8_3">8.3. What All Can Services Replace or Do?</a>
 						<ul>
-							<li><a href="#7_3_1" title="- should something like a login service">7.3.1. - things like ensureLoggedIn & ensure (becomes login and services)</a></li>
+							<li><a href="#8_3_1" title="- should something like a login service">8.3.1. - things like ensureLoggedIn & ensure (becomes login and services)</a></li>
 						</ul>
 					</li>
-					<li><a href="#7_4" title="Look at the example of enableProfile.">7.4. Dynamically Load Client Code Supporting Service</a></li>
-					<li><a href="#7_5" title="SYNTAX">7.5. Zazzle Specific Registration of Services</a></li>
-					<li><a href="#7_6" title="If implemented in Uize.Comm, can get the benefit of its client caching mechanism. How could one get that benefit using a different approach? (such as implementing in performAjax in page widget subclass)">7.6. Caching?</a></li>
+					<li><a href="#8_4" title="Look at the example of enableProfile.">8.4. Dynamically Load Client Code Supporting Service</a></li>
+					<li><a href="#8_5" title="SYNTAX">8.5. Zazzle Specific Registration of Services</a></li>
+					<li><a href="#8_6" title="If implemented in Uize.Comm, can get the benefit of its client caching mechanism. How could one get that benefit using a different approach? (such as implementing in performAjax in page widget subclass)">8.6. Caching?</a></li>
 				</ul>
 			</li>
-			<li><a href="#8">8. Test Improvements</a>
+			<li><a href="#9">9. Test Improvements</a>
 				<ul>
-					<li><a href="#8_1">8.1. Make Unit Test Build Scripts Generic</a>
+					<li><a href="#9_1">9.1. Make Unit Test Build Scripts Generic</a>
 						<ul>
-							<li><a href="#8_1_1" title="Have shareable code that can take a list of module names, and dynamically add tests for modules for which no dedicated test modules have been created.">8.1.1. Shareable Code to Dynamically Add Tests</a></li>
+							<li><a href="#9_1_1" title="Have shareable code that can take a list of module names, and dynamically add tests for modules for which no dedicated test modules have been created.">9.1.1. Shareable Code to Dynamically Add Tests</a></li>
 						</ul>
 					</li>
-					<li><a href="#8_2">8.2. Clean Up Tests</a>
+					<li><a href="#9_2">9.2. Clean Up Tests</a>
 						<ul>
-							<li><a href="#8_2_1" title="Performance tests that aren&apos;t browser dependent should be turned into true test modules.">8.2.1. Make Performance Tests Legit</a></li>
+							<li><a href="#9_2_1" title="Performance tests that aren&apos;t browser dependent should be turned into true test modules.">9.2.1. Make Performance Tests Legit</a></li>
 						</ul>
 					</li>
-					<li><a href="#8_3" title="It would be better for tests to exist under a different namespace than Uize.Test, so that the Uize.Test namespace can be reserved for test subclasses for special types of tests.">8.3. Put Tests Into Separate Uize.Tests Namespace</a></li>
-					<li><a href="#8_4" title="Consider testing the loading of modules in isolation of other modules, in order to determine that modules correctly declare their dependencies, without having missing declared dependencies masked by other modules that were loaded and built before them that shared some of their dependencies.">8.4. For Unit Test Build Scripts</a></li>
-					<li><a href="#8_5" title="It would be nice if the build script could also test code besides and other JavaScript files throughout the folder hierarchy of a site, rather than just testing the modules.">8.5. Test All JavaScript Files</a></li>
+					<li><a href="#9_3" title="It would be better for tests to exist under a different namespace than Uize.Test, so that the Uize.Test namespace can be reserved for test subclasses for special types of tests.">9.3. Put Tests Into Separate Uize.Tests Namespace</a></li>
+					<li><a href="#9_4" title="Consider testing the loading of modules in isolation of other modules, in order to determine that modules correctly declare their dependencies, without having missing declared dependencies masked by other modules that were loaded and built before them that shared some of their dependencies.">9.4. For Unit Test Build Scripts</a></li>
+					<li><a href="#9_5" title="It would be nice if the build script could also test code besides and other JavaScript files throughout the folder hierarchy of a site, rather than just testing the modules.">9.5. Test All JavaScript Files</a></li>
 				</ul>
 			</li>
-			<li><a href="#9" title="- a lot of widgets have to synchronize state to implied nodes">9. Node as a Widget</a></li>
-			<li><a href="#10" title="- Uize.Test.Uize.Template">10. Test Modules to Implement Next...</a></li>
-			<li><a href="#11" title="Migrate mergeCopyInto to Uize base class, so it can be used by Uize.Widget.Page and other modules.">11. Factor Out mergeCopy</a></li>
-			<li><a href="#12" title="- a function that is flagged as a value modifier">12. Value Modifier Function</a>
+			<li><a href="#10" title="- a lot of widgets have to synchronize state to implied nodes">10. Node as a Widget</a></li>
+			<li><a href="#11" title="- Uize.Test.Uize.Template">11. Test Modules to Implement Next...</a></li>
+			<li><a href="#12" title="Migrate mergeCopyInto to Uize base class, so it can be used by Uize.Widget.Page and other modules.">12. Factor Out mergeCopy</a></li>
+			<li><a href="#13" title="- a function that is flagged as a value modifier">13. Value Modifier Function</a>
 				<ul>
-					<li><a href="#12_1" title="- myInstance.set">12.1. - good candidates for methods to support value modifiers...</a></li>
-					<li><a href="#12_2" title="slider.set ({value:slider + 10})&#10;slider.set ({value:Uize.modifier.plus (10)})&#10;slider.set ({value:Uize.modifier.toggle (&apos;!&apos;)})&#10;slider.set ({value:Uize.modifier (&apos;*&apos;,10)})&#10;slider.set ({value:Uize [&apos;*&apos;] (10)})&#10;slider.set ({value:Uize (&apos;*&apos;,10)})&#10;&#10;slider.set ({value:Uize.mods.multiply (10)})&#10;&#10;Uize.modifier (&apos;+&apos;,10)&#10;&#10;Uize._.plus (10)&#10;Uize._.minus (5)&#10;Uize.mod (&apos;+&apos;,10)&#10;Uize.mod (Math.round)&#10;&#10;Uize.modi...">12.2. Possible Semantics</a></li>
+					<li><a href="#13_1" title="- myInstance.set">13.1. - good candidates for methods to support value modifiers...</a></li>
+					<li><a href="#13_2" title="slider.set ({value:slider + 10})&#10;slider.set ({value:Uize.modifier.plus (10)})&#10;slider.set ({value:Uize.modifier.toggle (&apos;!&apos;)})&#10;slider.set ({value:Uize.modifier (&apos;*&apos;,10)})&#10;slider.set ({value:Uize [&apos;*&apos;] (10)})&#10;slider.set ({value:Uize (&apos;*&apos;,10)})&#10;&#10;slider.set ({value:Uize.mods.multiply (10)})&#10;&#10;Uize.modifier (&apos;+&apos;,10)&#10;&#10;Uize._.plus (10)&#10;Uize._.minus (5)&#10;Uize.mod (&apos;+&apos;,10)&#10;Uize.mod (Math.round)&#10;&#10;Uize.modi...">13.2. Possible Semantics</a></li>
 				</ul>
 			</li>
-			<li><a href="#13">13. Profiling Support</a>
+			<li><a href="#14">14. Profiling Support</a>
 				<ul>
-					<li><a href="#13_1">13.1. - a means for getting reports of the time that certain operations take on a page</a>
+					<li><a href="#14_1">14.1. - a means for getting reports of the time that certain operations take on a page</a>
 						<ul>
-							<li><a href="#13_1_1" title="- time for building each module">13.1.1. - module building time</a></li>
-							<li><a href="#13_1_2" title="- construction time">13.1.2. - for widget instances (stored on each instance)...</a>
+							<li><a href="#14_1_1" title="- time for building each module">14.1.1. - module building time</a></li>
+							<li><a href="#14_1_2" title="- construction time">14.1.2. - for widget instances (stored on each instance)...</a>
 								<ul>
-									<li><a href="#13_1_2_1" title="- total wiring time">13.1.2.1. - wiring time</a></li>
-									<li><a href="#13_1_2_2" title="- total number of instances">13.1.2.2. - inspect by module</a></li>
+									<li><a href="#14_1_2_1" title="- total wiring time">14.1.2.1. - wiring time</a></li>
+									<li><a href="#14_1_2_2" title="- total number of instances">14.1.2.2. - inspect by module</a></li>
 								</ul>
 							</li>
 						</ul>
 					</li>
 				</ul>
 			</li>
-			<li><a href="#14">14. Performance Questions...</a>
+			<li><a href="#15">15. Performance Questions...</a>
 				<ul>
-					<li><a href="#14_1" title="- there appears to be, with assign-to-end being faster, but it is not significant. In building an array of 1,000,000 elements, it can make a difference of up to 2 seconds. Difference is most pronounced in IE. At scales of 1000 elements, it makes a difference of just 1 or 2 ms. The assign-to-end approach adds to code size a tiny bit, requires maintaining a separate array length counter variable,...">14.1. - is there any difference between array.push (element) and array [array.length] = element ?</a></li>
-					<li><a href="#14_2" title="- doesn&apos;t appear to make that much difference in cases of many lookups. Optimizing it out for most lookups might help a little bit, but it&apos;s not that compelling.">14.2. - when getting a reference to a node, does it hurt to fall back to document.getElementsByName?</a></li>
-					<li><a href="#14_3" title="function doSomething (value) {&#10;	...&#10;}&#10;doSomething (&apos;value1&apos;);&#10;doSomething (&apos;value2&apos;);&#10;doSomething (&apos;value3&apos;);&#10;doSomething (&apos;value4&apos;);&#10;">14.3. - what's the performance difference between...</a></li>
+					<li><a href="#15_1" title="- there appears to be, with assign-to-end being faster, but it is not significant. In building an array of 1,000,000 elements, it can make a difference of up to 2 seconds. Difference is most pronounced in IE. At scales of 1000 elements, it makes a difference of just 1 or 2 ms. The assign-to-end approach adds to code size a tiny bit, requires maintaining a separate array length counter variable,...">15.1. - is there any difference between array.push (element) and array [array.length] = element ?</a></li>
+					<li><a href="#15_2" title="- doesn&apos;t appear to make that much difference in cases of many lookups. Optimizing it out for most lookups might help a little bit, but it&apos;s not that compelling.">15.2. - when getting a reference to a node, does it hurt to fall back to document.getElementsByName?</a></li>
+					<li><a href="#15_3" title="function doSomething (value) {&#10;	...&#10;}&#10;doSomething (&apos;value1&apos;);&#10;doSomething (&apos;value2&apos;);&#10;doSomething (&apos;value3&apos;);&#10;doSomething (&apos;value4&apos;);&#10;">15.3. - what's the performance difference between...</a></li>
 				</ul>
 			</li>
-			<li><a href="#15">15. Idea for Handling Functions That May Be Asynchronous</a>
+			<li><a href="#16">16. Idea for Handling Functions That May Be Asynchronous</a>
 				<ul>
-					<li><a href="#15_1" title="function blah (param1,param2,param3,_returnResult) {&#10;	var _returnResult = arguments.callee.returnResult || _returnResult;&#10;	delete arguments.callee.returnResult;&#10;&#10;	doAsyncStuff (&#10;		function () {&#10;			_returnResult (result);&#10;		}&#10;	);&#10;&#10;	arguments.callee.isAsync = true;&#10;}&#10;&#10;function callAsAsync (_functionToCall,_args,_returnResult) {&#10;	_functionToCall.returnResult = _returnResult;&#10;	var&#10;		result = _funct...">15.1. - approach 1</a></li>
-					<li><a href="#15_2" title="function isValidUser (_user) {&#10;	var _result = new Async;&#10;&#10;	doAsyncUserValidation ({&#10;		user:_user,&#10;		callback:function (_isValidUser) {&#10;			_result.returnResult&#10;				? _result.returnResult (_isValidUser)&#10;				: (_result = _isValidUser)&#10;			;&#10;		}&#10;	});&#10;&#10;	return _result;&#10;}&#10;&#10;function callAsAsync (_functionToCall,_args,_returnResult) {&#10;	var _result = _functionToCall.apply (0,_args);&#10;	_result instanceof A...">15.2. - approach 2</a></li>
+					<li><a href="#16_1" title="function blah (param1,param2,param3,_returnResult) {&#10;	var _returnResult = arguments.callee.returnResult || _returnResult;&#10;	delete arguments.callee.returnResult;&#10;&#10;	doAsyncStuff (&#10;		function () {&#10;			_returnResult (result);&#10;		}&#10;	);&#10;&#10;	arguments.callee.isAsync = true;&#10;}&#10;&#10;function callAsAsync (_functionToCall,_args,_returnResult) {&#10;	_functionToCall.returnResult = _returnResult;&#10;	var&#10;		result = _funct...">16.1. - approach 1</a></li>
+					<li><a href="#16_2" title="function isValidUser (_user) {&#10;	var _result = new Async;&#10;&#10;	doAsyncUserValidation ({&#10;		user:_user,&#10;		callback:function (_isValidUser) {&#10;			_result.returnResult&#10;				? _result.returnResult (_isValidUser)&#10;				: (_result = _isValidUser)&#10;			;&#10;		}&#10;	});&#10;&#10;	return _result;&#10;}&#10;&#10;function callAsAsync (_functionToCall,_args,_returnResult) {&#10;	var _result = _functionToCall.apply (0,_args);&#10;	_result instanceof A...">16.2. - approach 2</a></li>
 				</ul>
 			</li>
-			<li><a href="#16" title="- generic I18N resource string dependency system">16. - the most challenging and difficult problems to solve</a></li>
-			<li><a href="#17" title="- in most cases, should not require code changes">17. Generic Solution for Tracking</a></li>
-			<li><a href="#18" title="Make sure that all setting of properties is done through the set method (ie. no more adhoc setting by assigning using the private name). Use a regular expression to search through the code.">18. Only Use set Method For Changing Property Values</a>
+			<li><a href="#17" title="- generic I18N resource string dependency system">17. - the most challenging and difficult problems to solve</a></li>
+			<li><a href="#18" title="- in most cases, should not require code changes">18. Generic Solution for Tracking</a></li>
+			<li><a href="#19" title="Make sure that all setting of properties is done through the set method (ie. no more adhoc setting by assigning using the private name). Use a regular expression to search through the code.">19. Only Use set Method For Changing Property Values</a>
 				<ul>
-					<li><a href="#18_1" title="To find most cases...">18.1. How to Find Offending Cases</a></li>
-					<li><a href="#18_2">18.2. Issues found</a>
+					<li><a href="#19_1" title="To find most cases...">19.1. How to Find Offending Cases</a></li>
+					<li><a href="#19_2">19.2. Issues found</a>
 						<ul>
-							<li><a href="#18_2_1" title="width and height being set when ratio locked - in onChange handler, so need to do some tricky dance moves.">18.2.1. Zazzle.ControlCustomShape</a></li>
-							<li><a href="#18_2_2" title="This one&apos;s tricky, assuming that a bunch of thought has already done into why it is the way it is.">18.2.2. Zazzle.ControlPoptions</a></li>
-							<li><a href="#18_2_3" title="Another tricky one...">18.2.3. Zazzle.ControlPoptionsShared</a></li>
+							<li><a href="#19_2_1" title="width and height being set when ratio locked - in onChange handler, so need to do some tricky dance moves.">19.2.1. Zazzle.ControlCustomShape</a></li>
+							<li><a href="#19_2_2" title="This one&apos;s tricky, assuming that a bunch of thought has already done into why it is the way it is.">19.2.2. Zazzle.ControlPoptions</a></li>
+							<li><a href="#19_2_3" title="Another tricky one...">19.2.3. Zazzle.ControlPoptionsShared</a></li>
 						</ul>
 					</li>
 				</ul>
 			</li>
-			<li><a href="#19" title="- a simple value, to which the value being tested should be compared for equality">19. - factor out code for validating a value, where the validator can be...</a>
+			<li><a href="#20" title="- a simple value, to which the value being tested should be compared for equality">20. - factor out code for validating a value, where the validator can be...</a>
 				<ul>
-					<li><a href="#19_1" title="- C:/thesource/z.1/www.zazzle.com/trunk/z.2/js/library/Zazzle.FormElement.js">19.1. - could be used...</a></li>
+					<li><a href="#20_1" title="- C:/thesource/z.1/www.zazzle.com/trunk/z.2/js/library/Zazzle.FormElement.js">20.1. - could be used...</a></li>
 				</ul>
 			</li>
-			<li><a href="#20">20. - should factor out code to set HTML for frame or iframe (best implementation so far in Simple Doc Tester)</a>
+			<li><a href="#21">21. - should factor out code to set HTML for frame or iframe (best implementation so far in Simple Doc Tester)</a>
 				<ul>
-					<li><a href="#20_1">20.1. - while at it, should factor out code for replacing contents of any window, and move into Uize.Node.setInnerHtml? Or Uize.Node.injectHtml? Or should there be a window utilities package?</a>
+					<li><a href="#21_1">21.1. - while at it, should factor out code for replacing contents of any window, and move into Uize.Node.setInnerHtml? Or Uize.Node.injectHtml? Or should there be a window utilities package?</a>
 						<ul>
-							<li><a href="#20_1_1" title="Uize.Browser.Window.write (window,content)">20.1.1. Uize.Browser.Window.write</a></li>
-							<li><a href="#20_1_2" title="Uize.Browser.Window.center (window)">20.1.2. Uize.Browser.Window.center</a></li>
-							<li><a href="#20_1_3" title="Uize.Browser.Window.resize (windowOBJ,width,height,positionX,positionY)">20.1.3. Uize.Browser.Window.resize</a></li>
+							<li><a href="#21_1_1" title="Uize.Browser.Window.write (window,content)">21.1.1. Uize.Browser.Window.write</a></li>
+							<li><a href="#21_1_2" title="Uize.Browser.Window.center (window)">21.1.2. Uize.Browser.Window.center</a></li>
+							<li><a href="#21_1_3" title="Uize.Browser.Window.resize (windowOBJ,width,height,positionX,positionY)">21.1.3. Uize.Browser.Window.resize</a></li>
 						</ul>
 					</li>
 				</ul>
 			</li>
-			<li><a href="#21" title="- Uize.Node.getById -&gt; Uize.Node.byId or Uize.Node.id or just Uize.Node">21. Proposed Shortenings</a></li>
-			<li><a href="#22" title="Solving fundamental problems in useful, convenient, friendly, understandable ways">22. Key Aspects of a Framework</a></li>
-			<li><a href="#23">23. - Uize.Delayed</a>
+			<li><a href="#22" title="- Uize.Node.getById -&gt; Uize.Node.byId or Uize.Node.id or just Uize.Node">22. Proposed Shortenings</a></li>
+			<li><a href="#23" title="Solving fundamental problems in useful, convenient, friendly, understandable ways">23. Key Aspects of a Framework</a></li>
+			<li><a href="#24">24. - Uize.Delayed</a>
 				<ul>
-					<li><a href="#23_1" title="_classPrototype.cancel = function () {&#10;	if (_this._timeout) {&#10;		clearTimeout (_this._timeout);&#10;		_this._timeout = _null;&#10;	}&#10;}&#10;_classPrototype.perform (_actionFunction) { // support optional delay param&#10;	var&#10;		_this = this,&#10;		_delay = _this._delay&#10;	;&#10;	_this.cancel ();&#10;	_delay ? (_this._timeout = setTimeout (_actionFunction,_delay)) : _actionFunction ();&#10;};&#10;">23.1. Portion of Implementation</a></li>
-					<li><a href="#23_2" title="Uize.caller = function (_context,_method,_params,_delay) {&#10;	function _callMethod () {&#10;		var _function  typeof _method = &apos;string&apos; ? _context [_method] : _method;&#10;		_function.callerThis = this;&#10;		_function.callerArguments = arguments;&#10;		var _result = _params ? _function.apply (_context,_params) : _function.call (_context);&#10;		delete _function.callerThis;&#10;		delete _function.callerArguments;&#10;		retur...">23.2. Another Possible Implementation</a></li>
-					<li><a href="#23_3">23.3. Sample Usage</a>
+					<li><a href="#24_1" title="_classPrototype.cancel = function () {&#10;	if (_this._timeout) {&#10;		clearTimeout (_this._timeout);&#10;		_this._timeout = _null;&#10;	}&#10;}&#10;_classPrototype.perform (_actionFunction) { // support optional delay param&#10;	var&#10;		_this = this,&#10;		_delay = _this._delay&#10;	;&#10;	_this.cancel ();&#10;	_delay ? (_this._timeout = setTimeout (_actionFunction,_delay)) : _actionFunction ();&#10;};&#10;">24.1. Portion of Implementation</a></li>
+					<li><a href="#24_2" title="Uize.caller = function (_context,_method,_params,_delay) {&#10;	function _callMethod () {&#10;		var _function  typeof _method = &apos;string&apos; ? _context [_method] : _method;&#10;		_function.callerThis = this;&#10;		_function.callerArguments = arguments;&#10;		var _result = _params ? _function.apply (_context,_params) : _function.call (_context);&#10;		delete _function.callerThis;&#10;		delete _function.callerArguments;&#10;		retur...">24.2. Another Possible Implementation</a></li>
+					<li><a href="#24_3">24.3. Sample Usage</a>
 						<ul>
-							<li><a href="#23_3_1" title="_this._delayedAction = new Uize.Delayed ({delay:1000});&#10;_this.wireNode (&#10;	node,&#10;	{&#10;		mouseover:function () {_this._delayed.perform (function () {_this.doSomething ()})},&#10;		mouseout:function () {_this._delayed.cancel ()}&#10;	}&#10;);&#10;">23.3.1. Approach 1</a></li>
-							<li><a href="#23_3_2" title="var _delayedCaller = Uize.caller (_this,&apos;doSomething&apos;,null,1000);&#10;_this.wireNode (&#10;	node,&#10;	{&#10;		mouseover:_delayedCaller,&#10;		mouseout:function () {_delayedCaller.cancel ()}&#10;	}&#10;);&#10;">23.3.2. Approach 2</a></li>
+							<li><a href="#24_3_1" title="_this._delayedAction = new Uize.Delayed ({delay:1000});&#10;_this.wireNode (&#10;	node,&#10;	{&#10;		mouseover:function () {_this._delayed.perform (function () {_this.doSomething ()})},&#10;		mouseout:function () {_this._delayed.cancel ()}&#10;	}&#10;);&#10;">24.3.1. Approach 1</a></li>
+							<li><a href="#24_3_2" title="var _delayedCaller = Uize.caller (_this,&apos;doSomething&apos;,null,1000);&#10;_this.wireNode (&#10;	node,&#10;	{&#10;		mouseover:_delayedCaller,&#10;		mouseout:function () {_delayedCaller.cancel ()}&#10;	}&#10;);&#10;">24.3.2. Approach 2</a></li>
 						</ul>
 					</li>
-					<li><a href="#23_4" title="function () {_this.setNodeStyle (&apos;blah&apos;,{color:&apos;#000&apos;})}&#10;Uize.caller (_this,&apos;setNodeStyle,[&apos;blah&apos;,{color:&apos;#000&apos;}])&#10;&#10;Uize.defer&#10;">23.4. Thoughts</a></li>
+					<li><a href="#24_4" title="function () {_this.setNodeStyle (&apos;blah&apos;,{color:&apos;#000&apos;})}&#10;Uize.caller (_this,&apos;setNodeStyle,[&apos;blah&apos;,{color:&apos;#000&apos;}])&#10;&#10;Uize.defer&#10;">24.4. Thoughts</a></li>
 				</ul>
 			</li>
-			<li><a href="#24" title="Implement more unobtrusive features, where no JS is needed inside markup, such as...">24. More Unobtrusive JavaScript Features</a>
+			<li><a href="#25" title="Implement more unobtrusive features, where no JS is needed inside markup, such as...">25. More Unobtrusive JavaScript Features</a>
 				<ul>
-					<li><a href="#24_1" title="- a lightweight way to get expand/collapse behavior into documents, without having to instantiate widgets">24.1. - expand/collapse</a></li>
+					<li><a href="#25_1" title="- a lightweight way to get expand/collapse behavior into documents, without having to instantiate widgets">25.1. - expand/collapse</a></li>
 				</ul>
 			</li>
-			<li><a href="#25">25. Code Development (in order of priority)</a>
+			<li><a href="#26">26. Code Development (in order of priority)</a>
 				<ul>
-					<li><a href="#25_1" title="- some events that were being fired in the onChange handlers were not being fired right at the end, but now they in effect are because of the way the Changed.[propertyName] event mechanism is implemented. Could this cause any weird order of execution problems?">25.1. **** property changed events refactoring</a></li>
-					<li><a href="#25_2" title="- drag a value from any widget to any other widget that supports or has a child that supports the value as part of its interface">25.2. - high-minded ideas</a></li>
-					<li><a href="#25_3" title="- use prototype for set-get properties?">25.3. - memory usage optimizations</a></li>
-					<li><a href="#25_4" title="- a way to avoid calling onChange handlers at construction time">25.4. - performance optimizations</a></li>
-					<li><a href="#25_5" title="MyClass.subclass ({&#10;	alphastructor:{&#10;	},&#10;	omegastructor:{&#10;	},&#10;	instanceMethods:{&#10;	},&#10;	staticMethods:{&#10;	},&#10;	instaticMethods:{&#10;	},&#10;	setGetProperties:{&#10;	}&#10;});&#10;">25.5. - new subclassing syntax</a></li>
-					<li><a href="#25_6">25.6. widget ID scheme refactoring</a>
+					<li><a href="#26_1" title="- some events that were being fired in the onChange handlers were not being fired right at the end, but now they in effect are because of the way the Changed.[propertyName] event mechanism is implemented. Could this cause any weird order of execution problems?">26.1. **** property changed events refactoring</a></li>
+					<li><a href="#26_2" title="- drag a value from any widget to any other widget that supports or has a child that supports the value as part of its interface">26.2. - high-minded ideas</a></li>
+					<li><a href="#26_3" title="- use prototype for set-get properties?">26.3. - memory usage optimizations</a></li>
+					<li><a href="#26_4" title="- a way to avoid calling onChange handlers at construction time">26.4. - performance optimizations</a></li>
+					<li><a href="#26_5" title="MyClass.subclass ({&#10;	alphastructor:{&#10;	},&#10;	omegastructor:{&#10;	},&#10;	instanceMethods:{&#10;	},&#10;	staticMethods:{&#10;	},&#10;	instaticMethods:{&#10;	},&#10;	setGetProperties:{&#10;	}&#10;});&#10;">26.5. - new subclassing syntax</a></li>
+					<li><a href="#26_6">26.6. widget ID scheme refactoring</a>
 						<ul>
-							<li><a href="#25_6_1" title="- possibly come up with a different term for the root node of a widget (since we still have shell references in identifiers in various places, possibly just &quot;root&quot; instead of &quot;shell&quot;)">25.6.1. other...</a></li>
+							<li><a href="#26_6_1" title="- possibly come up with a different term for the root node of a widget (since we still have shell references in identifiers in various places, possibly just &quot;root&quot; instead of &quot;shell&quot;)">26.6.1. other...</a></li>
 						</ul>
 					</li>
-					<li><a href="#25_7" title="a convenient way to automatically overlay a border fade on images in a document">25.7. image border fade overlay</a></li>
-					<li><a href="#25_8" title="overlay for stock price chart images to highlight date and price at date">25.8. Graphing DHTML</a></li>
-					<li><a href="#25_9" title="an easy way to display words using character set table images">25.9. Image Letters Widget (Uize.Widget.Spritext)</a></li>
-					<li><a href="#25_10" title="for documents with sections of extra in-depth information that most users may not be interested. Allows the information to be available and read in the context of the larger document with an extra click, but without creating an overly heavy read for most users">25.10. Auto-wired hide-reveal mechanism</a></li>
-					<li><a href="#25_11" title="a convenient way to have a rating value translated into a graphic of stars (whole and fractional). Could this be accomplished with a generalized bar / slider widget that has stars as its fullness bg?">25.11. Stars Rating Widget</a></li>
-					<li><a href="#25_12" title="- mode to automatically detect links to larger images and wire to open correctly sized. Frill where linked thumbnail &quot;throbs&quot; outwardly to suggest enlarging.">25.12. Utility routine to easily make a bunch of links open in a new window</a></li>
-					<li><a href="#25_13" title="Simply put in image tags in your page, let the auto-viewer present the images to the user in a professional layout">25.13. Auto-viewer for Images</a></li>
-					<li><a href="#25_14" title="- facilitate multiple controls controlling the same data (eg. two buttons for the same action) -- might be two different object instances linked in some way">25.14. IDEAS</a></li>
-					<li><a href="#25_15" title="- takes an image and splits it up into puzzle fragments and then lets the user drag and drop them in place">25.15. Puzzle Game</a></li>
+					<li><a href="#26_7" title="a convenient way to automatically overlay a border fade on images in a document">26.7. image border fade overlay</a></li>
+					<li><a href="#26_8" title="overlay for stock price chart images to highlight date and price at date">26.8. Graphing DHTML</a></li>
+					<li><a href="#26_9" title="an easy way to display words using character set table images">26.9. Image Letters Widget (Uize.Widget.Spritext)</a></li>
+					<li><a href="#26_10" title="for documents with sections of extra in-depth information that most users may not be interested. Allows the information to be available and read in the context of the larger document with an extra click, but without creating an overly heavy read for most users">26.10. Auto-wired hide-reveal mechanism</a></li>
+					<li><a href="#26_11" title="a convenient way to have a rating value translated into a graphic of stars (whole and fractional). Could this be accomplished with a generalized bar / slider widget that has stars as its fullness bg?">26.11. Stars Rating Widget</a></li>
+					<li><a href="#26_12" title="- mode to automatically detect links to larger images and wire to open correctly sized. Frill where linked thumbnail &quot;throbs&quot; outwardly to suggest enlarging.">26.12. Utility routine to easily make a bunch of links open in a new window</a></li>
+					<li><a href="#26_13" title="Simply put in image tags in your page, let the auto-viewer present the images to the user in a professional layout">26.13. Auto-viewer for Images</a></li>
+					<li><a href="#26_14" title="- facilitate multiple controls controlling the same data (eg. two buttons for the same action) -- might be two different object instances linked in some way">26.14. IDEAS</a></li>
+					<li><a href="#26_15" title="- takes an image and splits it up into puzzle fragments and then lets the user drag and drop them in place">26.15. Puzzle Game</a></li>
 				</ul>
 			</li>
-			<li><a href="#26">26. BUGS</a>
+			<li><a href="#27">27. BUGS</a>
 				<ul>
-					<li><a href="#26_1">26.1. General</a>
+					<li><a href="#27_1">27.1. General</a>
 						<ul>
-							<li><a href="#26_1_1" title="- when disabled or selected, busy cursor doesn&apos;t display">26.1.1. - examples/button-types.html - nodes type button</a></li>
+							<li><a href="#27_1_1" title="- when disabled or selected, busy cursor doesn&apos;t display">27.1.1. - examples/button-types.html - nodes type button</a></li>
 						</ul>
 					</li>
-					<li><a href="#26_2" title="- in the button-types example, the frames style button does not fire the &quot;Click&quot; event (seems to have something to do with the mousedown event handler&apos;s execution)">26.2. Firefox</a></li>
-					<li><a href="#26_3" title="- for all behaviors that are modified using the Ctrl key, should also be modified by the metaKey (for Mac users)">26.3. Safari</a>
+					<li><a href="#27_2" title="- in the button-types example, the frames style button does not fire the &quot;Click&quot; event (seems to have something to do with the mousedown event handler&apos;s execution)">27.2. Firefox</a></li>
+					<li><a href="#27_3" title="- for all behaviors that are modified using the Ctrl key, should also be modified by the metaKey (for Mac users)">27.3. Safari</a>
 						<ul>
-							<li><a href="#26_3_1" title="no way to initiate Ctrl modifier key behaviors">26.3.1. ...ImagePort.Draggable</a></li>
-							<li><a href="#26_3_2" title="extremely slow">26.3.2. Color Pickers With Gradient example</a></li>
-							<li><a href="#26_3_3" title="- zoom out effect is very choppy">26.3.3. ThumbZoom</a></li>
+							<li><a href="#27_3_1" title="no way to initiate Ctrl modifier key behaviors">27.3.1. ...ImagePort.Draggable</a></li>
+							<li><a href="#27_3_2" title="extremely slow">27.3.2. Color Pickers With Gradient example</a></li>
+							<li><a href="#27_3_3" title="- zoom out effect is very choppy">27.3.3. ThumbZoom</a></li>
 						</ul>
 					</li>
-					<li><a href="#26_4" title="- &quot;Uize.WiseLoad Example&quot;: mouseover opacity effect on thumbnails not working (and trying to enable it using filter:alpha(opacity=...) was completely hosing my machine)">26.4. IE (in order of priority)</a></li>
+					<li><a href="#27_4" title="- &quot;Uize.WiseLoad Example&quot;: mouseover opacity effect on thumbnails not working (and trying to enable it using filter:alpha(opacity=...) was completely hosing my machine)">27.4. IE (in order of priority)</a></li>
 				</ul>
 			</li>
 		</ul>
@@ -313,7 +318,7 @@ this [_myMethod] ();        // calling instance method
 		<table class="list">
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>copy all properties of the prototype</td></tr>
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>copy all static properties</td></tr>
-		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>copy in all information of registered properties</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>copy in all information of registered set-get properties</td></tr>
 		</table>
 		<p><span class="allCaps">ISSUES</span></p>
 		
@@ -662,25 +667,65 @@ this [_myMethod] ();        // calling instance method
 	</div>
 	
 	<a name="6"></a>
-	<h1 class="heading1" title="6. Function Argument Validation"><span class="headingNumber"><a href="#6" title="6. Function Argument Validation">6</a>. </span>Function Argument Validation</h1>
+	<h1 class="heading1" title="6. JavaScript Language Unit Tests"><span class="headingNumber"><a href="#6" title="6. JavaScript Language Unit Tests">6</a>. </span>JavaScript Language Unit Tests</h1>
+	<div class="contents1">
+		<p>Implement unit tests for all features of the JavaScript language.</p>
+		
+		<a name="6_1"></a>
+		<h2 class="heading2" title="6. JavaScript Language Unit Tests -&gt; 6.1. For In Loops And Undefined Array Elements"><span class="headingNumber"><a href="#6" title="6. JavaScript Language Unit Tests">6</a>.<a href="#6_1" title="6. JavaScript Language Unit Tests -&gt; 6.1. For In Loops And Undefined Array Elements">1</a>. </span>For In Loops And Undefined Array Elements</h2>
+		<div class="contents2">
+			<p>In several versions of Microsoft's JScript interpreter, if an array is initialized using the literal syntax (ie. <code>['value 1','value 2','value 3']</code>), then any element whose value is initialized to <code>undefined</code> will not be encountered in a <code>for...in</code> loop.</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">var
+  keysHash = {},
+  myArray = ['foo',undefined,'bar']
+;
+for (key in myArray) {
+  keysHash [key] = true;
+}
+alert (keysHash [1]);
+</pre>
+			
+			<p>In the above example, the <code>alert</code> statement would alert the value <code>undefined</code> in interpreters that exhibit the problematic behavior. This behavior could cause problems when using a <code>for...in</code> loop to compare arrays to see if their elements and custom properties are identical.</p>
+			
+			<p>A test can be written for this issue as follows...</p>
+			
+			<p><span class="allCaps">TEST</span></p>
+			
+			
+<pre class="sample-code">var _hasIssueWithForInLoopsAndUndefinedArrayElements = true;
+for (var _key in [undefined]) {
+  if (_key == 0)
+    _hasIssueWithForInLoopsAndUndefinedArrayElements = false
+  ;
+}
+</pre>
+		</div>
+	</div>
+	
+	<a name="7"></a>
+	<h1 class="heading1" title="7. Function Argument Validation"><span class="headingNumber"><a href="#7" title="7. Function Argument Validation">7</a>. </span>Function Argument Validation</h1>
 	<div class="contents1">
 		<p>Provide a facility that can optionally be used for function argument validation.</p>
 		
 		<p>An easy way to define validator logic that can be used to validate the arguments of a function call. It sounds kind of like a test, so maybe some convenience features to allow easily creating an arguments test.</p>
 		
-		<a name="6_1"></a>
-		<h2 class="heading2" title="6. Function Argument Validation -&gt; 6.1. Method Signature Validation as Optional Layer"><span class="headingNumber"><a href="#6" title="6. Function Argument Validation">6</a>.<a href="#6_1" title="6. Function Argument Validation -&gt; 6.1. Method Signature Validation as Optional Layer">1</a>. </span>Method Signature Validation as Optional Layer</h2>
+		<a name="7_1"></a>
+		<h2 class="heading2" title="7. Function Argument Validation -&gt; 7.1. Method Signature Validation as Optional Layer"><span class="headingNumber"><a href="#7" title="7. Function Argument Validation">7</a>.<a href="#7_1" title="7. Function Argument Validation -&gt; 7.1. Method Signature Validation as Optional Layer">1</a>. </span>Method Signature Validation as Optional Layer</h2>
 		<div class="contents2">
 			<p>Possibly a way generally to have method signature validation as a separate optional layer of code.</p>
 			
-			<a name="6_1_1"></a>
-			<h3 class="heading3" title="6. Function Argument Validation -&gt; 6.1. Method Signature Validation as Optional Layer -&gt; 6.1.1. As a Separate Module"><span class="headingNumber"><a href="#6" title="6. Function Argument Validation">6</a>.<a href="#6_1" title="6. Function Argument Validation -&gt; 6.1. Method Signature Validation as Optional Layer">1</a>.<a href="#6_1_1" title="6. Function Argument Validation -&gt; 6.1. Method Signature Validation as Optional Layer -&gt; 6.1.1. As a Separate Module">1</a>. </span>As a Separate Module</h3>
+			<a name="7_1_1"></a>
+			<h3 class="heading3" title="7. Function Argument Validation -&gt; 7.1. Method Signature Validation as Optional Layer -&gt; 7.1.1. As a Separate Module"><span class="headingNumber"><a href="#7" title="7. Function Argument Validation">7</a>.<a href="#7_1" title="7. Function Argument Validation -&gt; 7.1. Method Signature Validation as Optional Layer">1</a>.<a href="#7_1_1" title="7. Function Argument Validation -&gt; 7.1. Method Signature Validation as Optional Layer -&gt; 7.1.1. As a Separate Module">1</a>. </span>As a Separate Module</h3>
 			<div class="contents3">
 				<p>Maybe a separate module that can accompany the main module?</p>
 			</div>
 			
-			<a name="6_1_2"></a>
-			<h3 class="heading3" title="6. Function Argument Validation -&gt; 6.1. Method Signature Validation as Optional Layer -&gt; 6.1.2. Validation Code Inside the Main Module"><span class="headingNumber"><a href="#6" title="6. Function Argument Validation">6</a>.<a href="#6_1" title="6. Function Argument Validation -&gt; 6.1. Method Signature Validation as Optional Layer">1</a>.<a href="#6_1_2" title="6. Function Argument Validation -&gt; 6.1. Method Signature Validation as Optional Layer -&gt; 6.1.2. Validation Code Inside the Main Module">2</a>. </span>Validation Code Inside the Main Module</h3>
+			<a name="7_1_2"></a>
+			<h3 class="heading3" title="7. Function Argument Validation -&gt; 7.1. Method Signature Validation as Optional Layer -&gt; 7.1.2. Validation Code Inside the Main Module"><span class="headingNumber"><a href="#7" title="7. Function Argument Validation">7</a>.<a href="#7_1" title="7. Function Argument Validation -&gt; 7.1. Method Signature Validation as Optional Layer">1</a>.<a href="#7_1_2" title="7. Function Argument Validation -&gt; 7.1. Method Signature Validation as Optional Layer -&gt; 7.1.2. Validation Code Inside the Main Module">2</a>. </span>Validation Code Inside the Main Module</h3>
 			<div class="contents3">
 				<p>Maybe the validation code is inside the main module, but can be optimized / compiled out for scrunched production code?</p>
 				
@@ -689,8 +734,8 @@ this [_myMethod] ();        // calling instance method
 		</div>
 	</div>
 	
-	<a name="7"></a>
-	<h1 class="heading1" title="7. Client Services"><span class="headingNumber"><a href="#7" title="7. Client Services">7</a>. </span>Client Services</h1>
+	<a name="8"></a>
+	<h1 class="heading1" title="8. Client Services"><span class="headingNumber"><a href="#8" title="8. Client Services">8</a>. </span>Client Services</h1>
 	<div class="contents1">
 		<table class="list">
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>unit conversion (possible to implement this on the client side, but might be appropriate to migrate such a service to server side at some stage, and in such a case it would be desirable to allow for such a migration in a way that doesn't heavily impact the code using such a service)</td></tr>
@@ -698,8 +743,8 @@ this [_myMethod] ();        // calling instance method
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Uize.Widget.Page.MySite subclass implements performAjax</td></tr>
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>myWidget.ajax ({action:'convert',fromUnit:'inches',toUnit:''})</td></tr>
 		</table>
-		<a name="7_1"></a>
-		<h2 class="heading2" title="7. Client Services -&gt; 7.1. Example 1"><span class="headingNumber"><a href="#7" title="7. Client Services">7</a>.<a href="#7_1" title="7. Client Services -&gt; 7.1. Example 1">1</a>. </span>Example 1</h2>
+		<a name="8_1"></a>
+		<h2 class="heading2" title="8. Client Services -&gt; 8.1. Example 1"><span class="headingNumber"><a href="#8" title="8. Client Services">8</a>.<a href="#8_1" title="8. Client Services -&gt; 8.1. Example 1">1</a>. </span>Example 1</h2>
 		<div class="contents2">
 			<p><span class="allCaps">BEFORE</span></p>
 			
@@ -718,8 +763,8 @@ myWidget.service ('login',function () {});
 </pre>
 		</div>
 		
-		<a name="7_2"></a>
-		<h2 class="heading2" title="7. Client Services -&gt; 7.2. Example 2"><span class="headingNumber"><a href="#7" title="7. Client Services">7</a>.<a href="#7_2" title="7. Client Services -&gt; 7.2. Example 2">2</a>. </span>Example 2</h2>
+		<a name="8_2"></a>
+		<h2 class="heading2" title="8. Client Services -&gt; 8.2. Example 2"><span class="headingNumber"><a href="#8" title="8. Client Services">8</a>.<a href="#8_2" title="8. Client Services -&gt; 8.2. Example 2">2</a>. </span>Example 2</h2>
 		<div class="contents2">
 			<p><span class="allCaps">BEFORE</span></p>
 			
@@ -738,11 +783,11 @@ myWidget.service ('enableProfile',function () {});
 </pre>
 		</div>
 		
-		<a name="7_3"></a>
-		<h2 class="heading2" title="7. Client Services -&gt; 7.3. What All Can Services Replace or Do?"><span class="headingNumber"><a href="#7" title="7. Client Services">7</a>.<a href="#7_3" title="7. Client Services -&gt; 7.3. What All Can Services Replace or Do?">3</a>. </span>What All Can Services Replace or Do?</h2>
+		<a name="8_3"></a>
+		<h2 class="heading2" title="8. Client Services -&gt; 8.3. What All Can Services Replace or Do?"><span class="headingNumber"><a href="#8" title="8. Client Services">8</a>.<a href="#8_3" title="8. Client Services -&gt; 8.3. What All Can Services Replace or Do?">3</a>. </span>What All Can Services Replace or Do?</h2>
 		<div class="contents2">
-			<a name="7_3_1"></a>
-			<h3 class="heading3" title="7. Client Services -&gt; 7.3. What All Can Services Replace or Do? -&gt; 7.3.1. - things like ensureLoggedIn &amp; ensure (becomes login and services)"><span class="headingNumber"><a href="#7" title="7. Client Services">7</a>.<a href="#7_3" title="7. Client Services -&gt; 7.3. What All Can Services Replace or Do?">3</a>.<a href="#7_3_1" title="7. Client Services -&gt; 7.3. What All Can Services Replace or Do? -&gt; 7.3.1. - things like ensureLoggedIn &amp; ensure (becomes login and services)">1</a>. </span>- things like ensureLoggedIn & ensure (becomes login and services)</h3>
+			<a name="8_3_1"></a>
+			<h3 class="heading3" title="8. Client Services -&gt; 8.3. What All Can Services Replace or Do? -&gt; 8.3.1. - things like ensureLoggedIn &amp; ensure (becomes login and services)"><span class="headingNumber"><a href="#8" title="8. Client Services">8</a>.<a href="#8_3" title="8. Client Services -&gt; 8.3. What All Can Services Replace or Do?">3</a>.<a href="#8_3_1" title="8. Client Services -&gt; 8.3. What All Can Services Replace or Do? -&gt; 8.3.1. - things like ensureLoggedIn &amp; ensure (becomes login and services)">1</a>. </span>- things like ensureLoggedIn & ensure (becomes login and services)</h3>
 			<div class="contents3">
 				<table class="list">
 				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>should something like a login service</td></tr>
@@ -756,16 +801,16 @@ myWidget.service ('enableProfile',function () {});
 			</table>
 		</div>
 		
-		<a name="7_4"></a>
-		<h2 class="heading2" title="7. Client Services -&gt; 7.4. Dynamically Load Client Code Supporting Service"><span class="headingNumber"><a href="#7" title="7. Client Services">7</a>.<a href="#7_4" title="7. Client Services -&gt; 7.4. Dynamically Load Client Code Supporting Service">4</a>. </span>Dynamically Load Client Code Supporting Service</h2>
+		<a name="8_4"></a>
+		<h2 class="heading2" title="8. Client Services -&gt; 8.4. Dynamically Load Client Code Supporting Service"><span class="headingNumber"><a href="#8" title="8. Client Services">8</a>.<a href="#8_4" title="8. Client Services -&gt; 8.4. Dynamically Load Client Code Supporting Service">4</a>. </span>Dynamically Load Client Code Supporting Service</h2>
 		<div class="contents2">
 			<p>Look at the example of enableProfile.</p>
 			
 			<p>Benefit of being able to dynamically load code supporting client side execution of portions of the service.</p>
 		</div>
 		
-		<a name="7_5"></a>
-		<h2 class="heading2" title="7. Client Services -&gt; 7.5. Zazzle Specific Registration of Services"><span class="headingNumber"><a href="#7" title="7. Client Services">7</a>.<a href="#7_5" title="7. Client Services -&gt; 7.5. Zazzle Specific Registration of Services">5</a>. </span>Zazzle Specific Registration of Services</h2>
+		<a name="8_5"></a>
+		<h2 class="heading2" title="8. Client Services -&gt; 8.5. Zazzle Specific Registration of Services"><span class="headingNumber"><a href="#8" title="8. Client Services">8</a>.<a href="#8_5" title="8. Client Services -&gt; 8.5. Zazzle Specific Registration of Services">5</a>. </span>Zazzle Specific Registration of Services</h2>
 		<div class="contents2">
 			<p><span class="allCaps">SYNTAX</span></p>
 			
@@ -805,21 +850,21 @@ myWidget.service ('enableProfile',function () {});
 </pre>
 		</div>
 		
-		<a name="7_6"></a>
-		<h2 class="heading2" title="7. Client Services -&gt; 7.6. Caching?"><span class="headingNumber"><a href="#7" title="7. Client Services">7</a>.<a href="#7_6" title="7. Client Services -&gt; 7.6. Caching?">6</a>. </span>Caching?</h2>
+		<a name="8_6"></a>
+		<h2 class="heading2" title="8. Client Services -&gt; 8.6. Caching?"><span class="headingNumber"><a href="#8" title="8. Client Services">8</a>.<a href="#8_6" title="8. Client Services -&gt; 8.6. Caching?">6</a>. </span>Caching?</h2>
 		<div class="contents2">
 			<p>If implemented in Uize.Comm, can get the benefit of its client caching mechanism. How could one get that benefit using a different approach? (such as implementing in performAjax in page widget subclass)</p>
 		</div>
 	</div>
 	
-	<a name="8"></a>
-	<h1 class="heading1" title="8. Test Improvements"><span class="headingNumber"><a href="#8" title="8. Test Improvements">8</a>. </span>Test Improvements</h1>
+	<a name="9"></a>
+	<h1 class="heading1" title="9. Test Improvements"><span class="headingNumber"><a href="#9" title="9. Test Improvements">9</a>. </span>Test Improvements</h1>
 	<div class="contents1">
-		<a name="8_1"></a>
-		<h2 class="heading2" title="8. Test Improvements -&gt; 8.1. Make Unit Test Build Scripts Generic"><span class="headingNumber"><a href="#8" title="8. Test Improvements">8</a>.<a href="#8_1" title="8. Test Improvements -&gt; 8.1. Make Unit Test Build Scripts Generic">1</a>. </span>Make Unit Test Build Scripts Generic</h2>
+		<a name="9_1"></a>
+		<h2 class="heading2" title="9. Test Improvements -&gt; 9.1. Make Unit Test Build Scripts Generic"><span class="headingNumber"><a href="#9" title="9. Test Improvements">9</a>.<a href="#9_1" title="9. Test Improvements -&gt; 9.1. Make Unit Test Build Scripts Generic">1</a>. </span>Make Unit Test Build Scripts Generic</h2>
 		<div class="contents2">
-			<a name="8_1_1"></a>
-			<h3 class="heading3" title="8. Test Improvements -&gt; 8.1. Make Unit Test Build Scripts Generic -&gt; 8.1.1. Shareable Code to Dynamically Add Tests"><span class="headingNumber"><a href="#8" title="8. Test Improvements">8</a>.<a href="#8_1" title="8. Test Improvements -&gt; 8.1. Make Unit Test Build Scripts Generic">1</a>.<a href="#8_1_1" title="8. Test Improvements -&gt; 8.1. Make Unit Test Build Scripts Generic -&gt; 8.1.1. Shareable Code to Dynamically Add Tests">1</a>. </span>Shareable Code to Dynamically Add Tests</h3>
+			<a name="9_1_1"></a>
+			<h3 class="heading3" title="9. Test Improvements -&gt; 9.1. Make Unit Test Build Scripts Generic -&gt; 9.1.1. Shareable Code to Dynamically Add Tests"><span class="headingNumber"><a href="#9" title="9. Test Improvements">9</a>.<a href="#9_1" title="9. Test Improvements -&gt; 9.1. Make Unit Test Build Scripts Generic">1</a>.<a href="#9_1_1" title="9. Test Improvements -&gt; 9.1. Make Unit Test Build Scripts Generic -&gt; 9.1.1. Shareable Code to Dynamically Add Tests">1</a>. </span>Shareable Code to Dynamically Add Tests</h3>
 			<div class="contents3">
 				<p>Have shareable code that can take a list of module names, and dynamically add tests for modules for which no dedicated test modules have been created.</p>
 				
@@ -827,11 +872,11 @@ myWidget.service ('enableProfile',function () {});
 			</div>
 		</div>
 		
-		<a name="8_2"></a>
-		<h2 class="heading2" title="8. Test Improvements -&gt; 8.2. Clean Up Tests"><span class="headingNumber"><a href="#8" title="8. Test Improvements">8</a>.<a href="#8_2" title="8. Test Improvements -&gt; 8.2. Clean Up Tests">2</a>. </span>Clean Up Tests</h2>
+		<a name="9_2"></a>
+		<h2 class="heading2" title="9. Test Improvements -&gt; 9.2. Clean Up Tests"><span class="headingNumber"><a href="#9" title="9. Test Improvements">9</a>.<a href="#9_2" title="9. Test Improvements -&gt; 9.2. Clean Up Tests">2</a>. </span>Clean Up Tests</h2>
 		<div class="contents2">
-			<a name="8_2_1"></a>
-			<h3 class="heading3" title="8. Test Improvements -&gt; 8.2. Clean Up Tests -&gt; 8.2.1. Make Performance Tests Legit"><span class="headingNumber"><a href="#8" title="8. Test Improvements">8</a>.<a href="#8_2" title="8. Test Improvements -&gt; 8.2. Clean Up Tests">2</a>.<a href="#8_2_1" title="8. Test Improvements -&gt; 8.2. Clean Up Tests -&gt; 8.2.1. Make Performance Tests Legit">1</a>. </span>Make Performance Tests Legit</h3>
+			<a name="9_2_1"></a>
+			<h3 class="heading3" title="9. Test Improvements -&gt; 9.2. Clean Up Tests -&gt; 9.2.1. Make Performance Tests Legit"><span class="headingNumber"><a href="#9" title="9. Test Improvements">9</a>.<a href="#9_2" title="9. Test Improvements -&gt; 9.2. Clean Up Tests">2</a>.<a href="#9_2_1" title="9. Test Improvements -&gt; 9.2. Clean Up Tests -&gt; 9.2.1. Make Performance Tests Legit">1</a>. </span>Make Performance Tests Legit</h3>
 			<div class="contents3">
 				<p>Performance tests that aren't browser dependent should be turned into true test modules.</p>
 				
@@ -849,22 +894,22 @@ myWidget.service ('enableProfile',function () {});
 			</table>
 		</div>
 		
-		<a name="8_3"></a>
-		<h2 class="heading2" title="8. Test Improvements -&gt; 8.3. Put Tests Into Separate Uize.Tests Namespace"><span class="headingNumber"><a href="#8" title="8. Test Improvements">8</a>.<a href="#8_3" title="8. Test Improvements -&gt; 8.3. Put Tests Into Separate Uize.Tests Namespace">3</a>. </span>Put Tests Into Separate Uize.Tests Namespace</h2>
+		<a name="9_3"></a>
+		<h2 class="heading2" title="9. Test Improvements -&gt; 9.3. Put Tests Into Separate Uize.Tests Namespace"><span class="headingNumber"><a href="#9" title="9. Test Improvements">9</a>.<a href="#9_3" title="9. Test Improvements -&gt; 9.3. Put Tests Into Separate Uize.Tests Namespace">3</a>. </span>Put Tests Into Separate Uize.Tests Namespace</h2>
 		<div class="contents2">
 			<p>It would be better for tests to exist under a different namespace than <code><a href="../reference/Uize.Test.html">Uize.Test</a></code>, so that the <code><a href="../reference/Uize.Test.html">Uize.Test</a></code> namespace can be reserved for test subclasses for special types of tests.</p>
 		</div>
 		
-		<a name="8_4"></a>
-		<h2 class="heading2" title="8. Test Improvements -&gt; 8.4. For Unit Test Build Scripts"><span class="headingNumber"><a href="#8" title="8. Test Improvements">8</a>.<a href="#8_4" title="8. Test Improvements -&gt; 8.4. For Unit Test Build Scripts">4</a>. </span>For Unit Test Build Scripts</h2>
+		<a name="9_4"></a>
+		<h2 class="heading2" title="9. Test Improvements -&gt; 9.4. For Unit Test Build Scripts"><span class="headingNumber"><a href="#9" title="9. Test Improvements">9</a>.<a href="#9_4" title="9. Test Improvements -&gt; 9.4. For Unit Test Build Scripts">4</a>. </span>For Unit Test Build Scripts</h2>
 		<div class="contents2">
 			<p>Consider testing the loading of modules in isolation of other modules, in order to determine that modules correctly declare their dependencies, without having missing declared dependencies masked by other modules that were loaded and built before them that shared some of their dependencies.</p>
 			
 			<p>This approach would still not be foolproof, however, since merely loading and building a module can't determine that all modules that are needed are declared in the <code>required</code> list, since some required modules may only be accessed during runtime execution of some code within a module.</p>
 		</div>
 		
-		<a name="8_5"></a>
-		<h2 class="heading2" title="8. Test Improvements -&gt; 8.5. Test All JavaScript Files"><span class="headingNumber"><a href="#8" title="8. Test Improvements">8</a>.<a href="#8_5" title="8. Test Improvements -&gt; 8.5. Test All JavaScript Files">5</a>. </span>Test All JavaScript Files</h2>
+		<a name="9_5"></a>
+		<h2 class="heading2" title="9. Test Improvements -&gt; 9.5. Test All JavaScript Files"><span class="headingNumber"><a href="#9" title="9. Test Improvements">9</a>.<a href="#9_5" title="9. Test Improvements -&gt; 9.5. Test All JavaScript Files">5</a>. </span>Test All JavaScript Files</h2>
 		<div class="contents2">
 			<p>It would be nice if the build script could also test code besides and other JavaScript files throughout the folder hierarchy of a site, rather than just testing the modules.</p>
 			
@@ -872,8 +917,8 @@ myWidget.service ('enableProfile',function () {});
 		</div>
 	</div>
 	
-	<a name="9"></a>
-	<h1 class="heading1" title="9. Node as a Widget"><span class="headingNumber"><a href="#9" title="9. Node as a Widget">9</a>. </span>Node as a Widget</h1>
+	<a name="10"></a>
+	<h1 class="heading1" title="10. Node as a Widget"><span class="headingNumber"><a href="#10" title="10. Node as a Widget">10</a>. </span>Node as a Widget</h1>
 	<div class="contents1">
 		<table class="list">
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>a lot of widgets have to synchronize state to implied nodes</td></tr>
@@ -890,8 +935,8 @@ myWidget.service ('enableProfile',function () {});
 		</table>
 	</div>
 	
-	<a name="10"></a>
-	<h1 class="heading1" title="10. Test Modules to Implement Next..."><span class="headingNumber"><a href="#10" title="10. Test Modules to Implement Next...">10</a>. </span>Test Modules to Implement Next...</h1>
+	<a name="11"></a>
+	<h1 class="heading1" title="11. Test Modules to Implement Next..."><span class="headingNumber"><a href="#11" title="11. Test Modules to Implement Next...">11</a>. </span>Test Modules to Implement Next...</h1>
 	<div class="contents1">
 		<table class="list">
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="../reference/Uize.Test.Uize.Template.html">Uize.Test.Uize.Template</a></code></td></tr>
@@ -906,21 +951,21 @@ myWidget.service ('enableProfile',function () {});
 		</table>
 	</div>
 	
-	<a name="11"></a>
-	<h1 class="heading1" title="11. Factor Out mergeCopy"><span class="headingNumber"><a href="#11" title="11. Factor Out mergeCopy">11</a>. </span>Factor Out mergeCopy</h1>
+	<a name="12"></a>
+	<h1 class="heading1" title="12. Factor Out mergeCopy"><span class="headingNumber"><a href="#12" title="12. Factor Out mergeCopy">12</a>. </span>Factor Out mergeCopy</h1>
 	<div class="contents1">
 		<p>Migrate mergeCopyInto to Uize base class, so it can be used by Uize.Widget.Page and other modules.</p>
 	</div>
 	
-	<a name="12"></a>
-	<h1 class="heading1" title="12. Value Modifier Function"><span class="headingNumber"><a href="#12" title="12. Value Modifier Function">12</a>. </span>Value Modifier Function</h1>
+	<a name="13"></a>
+	<h1 class="heading1" title="13. Value Modifier Function"><span class="headingNumber"><a href="#13" title="13. Value Modifier Function">13</a>. </span>Value Modifier Function</h1>
 	<div class="contents1">
 		<table class="list">
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>a function that is flagged as a value modifier</td></tr>
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>it is up to each function or method to determine if they will support value modifiers or not</td></tr>
 		</table>
-		<a name="12_1"></a>
-		<h2 class="heading2" title="12. Value Modifier Function -&gt; 12.1. - good candidates for methods to support value modifiers..."><span class="headingNumber"><a href="#12" title="12. Value Modifier Function">12</a>.<a href="#12_1" title="12. Value Modifier Function -&gt; 12.1. - good candidates for methods to support value modifiers...">1</a>. </span>- good candidates for methods to support value modifiers...</h2>
+		<a name="13_1"></a>
+		<h2 class="heading2" title="13. Value Modifier Function -&gt; 13.1. - good candidates for methods to support value modifiers..."><span class="headingNumber"><a href="#13" title="13. Value Modifier Function">13</a>.<a href="#13_1" title="13. Value Modifier Function -&gt; 13.1. - good candidates for methods to support value modifiers...">1</a>. </span>- good candidates for methods to support value modifiers...</h2>
 		<div class="contents2">
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>myInstance.set</td></tr>
@@ -936,8 +981,8 @@ myWidget.service ('enableProfile',function () {});
 		<table class="list">
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>makes sense where the value for which a value modifier is being specified is intended to specify a value for something for which a current value is known</td></tr>
 		</table>
-		<a name="12_2"></a>
-		<h2 class="heading2" title="12. Value Modifier Function -&gt; 12.2. Possible Semantics"><span class="headingNumber"><a href="#12" title="12. Value Modifier Function">12</a>.<a href="#12_2" title="12. Value Modifier Function -&gt; 12.2. Possible Semantics">2</a>. </span>Possible Semantics</h2>
+		<a name="13_2"></a>
+		<h2 class="heading2" title="13. Value Modifier Function -&gt; 13.2. Possible Semantics"><span class="headingNumber"><a href="#13" title="13. Value Modifier Function">13</a>.<a href="#13_2" title="13. Value Modifier Function -&gt; 13.2. Possible Semantics">2</a>. </span>Possible Semantics</h2>
 		<div class="contents2">
 			
 <pre class="sample-code">slider.set ({value:slider + 10})
@@ -964,14 +1009,14 @@ Uize.mod.multiply (10)
 		</div>
 	</div>
 	
-	<a name="13"></a>
-	<h1 class="heading1" title="13. Profiling Support"><span class="headingNumber"><a href="#13" title="13. Profiling Support">13</a>. </span>Profiling Support</h1>
+	<a name="14"></a>
+	<h1 class="heading1" title="14. Profiling Support"><span class="headingNumber"><a href="#14" title="14. Profiling Support">14</a>. </span>Profiling Support</h1>
 	<div class="contents1">
-		<a name="13_1"></a>
-		<h2 class="heading2" title="13. Profiling Support -&gt; 13.1. - a means for getting reports of the time that certain operations take on a page"><span class="headingNumber"><a href="#13" title="13. Profiling Support">13</a>.<a href="#13_1" title="13. Profiling Support -&gt; 13.1. - a means for getting reports of the time that certain operations take on a page">1</a>. </span>- a means for getting reports of the time that certain operations take on a page</h2>
+		<a name="14_1"></a>
+		<h2 class="heading2" title="14. Profiling Support -&gt; 14.1. - a means for getting reports of the time that certain operations take on a page"><span class="headingNumber"><a href="#14" title="14. Profiling Support">14</a>.<a href="#14_1" title="14. Profiling Support -&gt; 14.1. - a means for getting reports of the time that certain operations take on a page">1</a>. </span>- a means for getting reports of the time that certain operations take on a page</h2>
 		<div class="contents2">
-			<a name="13_1_1"></a>
-			<h3 class="heading3" title="13. Profiling Support -&gt; 13.1. - a means for getting reports of the time that certain operations take on a page -&gt; 13.1.1. - module building time"><span class="headingNumber"><a href="#13" title="13. Profiling Support">13</a>.<a href="#13_1" title="13. Profiling Support -&gt; 13.1. - a means for getting reports of the time that certain operations take on a page">1</a>.<a href="#13_1_1" title="13. Profiling Support -&gt; 13.1. - a means for getting reports of the time that certain operations take on a page -&gt; 13.1.1. - module building time">1</a>. </span>- module building time</h3>
+			<a name="14_1_1"></a>
+			<h3 class="heading3" title="14. Profiling Support -&gt; 14.1. - a means for getting reports of the time that certain operations take on a page -&gt; 14.1.1. - module building time"><span class="headingNumber"><a href="#14" title="14. Profiling Support">14</a>.<a href="#14_1" title="14. Profiling Support -&gt; 14.1. - a means for getting reports of the time that certain operations take on a page">1</a>.<a href="#14_1_1" title="14. Profiling Support -&gt; 14.1. - a means for getting reports of the time that certain operations take on a page -&gt; 14.1.1. - module building time">1</a>. </span>- module building time</h3>
 			<div class="contents3">
 				<table class="list">
 				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>time for building each module</td></tr>
@@ -979,14 +1024,14 @@ Uize.mod.multiply (10)
 				</table>
 			</div>
 			
-			<a name="13_1_2"></a>
-			<h3 class="heading3" title="13. Profiling Support -&gt; 13.1. - a means for getting reports of the time that certain operations take on a page -&gt; 13.1.2. - for widget instances (stored on each instance)..."><span class="headingNumber"><a href="#13" title="13. Profiling Support">13</a>.<a href="#13_1" title="13. Profiling Support -&gt; 13.1. - a means for getting reports of the time that certain operations take on a page">1</a>.<a href="#13_1_2" title="13. Profiling Support -&gt; 13.1. - a means for getting reports of the time that certain operations take on a page -&gt; 13.1.2. - for widget instances (stored on each instance)...">2</a>. </span>- for widget instances (stored on each instance)...</h3>
+			<a name="14_1_2"></a>
+			<h3 class="heading3" title="14. Profiling Support -&gt; 14.1. - a means for getting reports of the time that certain operations take on a page -&gt; 14.1.2. - for widget instances (stored on each instance)..."><span class="headingNumber"><a href="#14" title="14. Profiling Support">14</a>.<a href="#14_1" title="14. Profiling Support -&gt; 14.1. - a means for getting reports of the time that certain operations take on a page">1</a>.<a href="#14_1_2" title="14. Profiling Support -&gt; 14.1. - a means for getting reports of the time that certain operations take on a page -&gt; 14.1.2. - for widget instances (stored on each instance)...">2</a>. </span>- for widget instances (stored on each instance)...</h3>
 			<div class="contents3">
 				<table class="list">
 				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>construction time</td></tr>
 				</table>
-				<a name="13_1_2_1"></a>
-				<h4 class="heading4" title="13. Profiling Support -&gt; 13.1. - a means for getting reports of the time that certain operations take on a page -&gt; 13.1.2. - for widget instances (stored on each instance)... -&gt; 13.1.2.1. - wiring time"><span class="headingNumber"><a href="#13" title="13. Profiling Support">13</a>.<a href="#13_1" title="13. Profiling Support -&gt; 13.1. - a means for getting reports of the time that certain operations take on a page">1</a>.<a href="#13_1_2" title="13. Profiling Support -&gt; 13.1. - a means for getting reports of the time that certain operations take on a page -&gt; 13.1.2. - for widget instances (stored on each instance)...">2</a>.<a href="#13_1_2_1" title="13. Profiling Support -&gt; 13.1. - a means for getting reports of the time that certain operations take on a page -&gt; 13.1.2. - for widget instances (stored on each instance)... -&gt; 13.1.2.1. - wiring time">1</a>. </span>- wiring time</h4>
+				<a name="14_1_2_1"></a>
+				<h4 class="heading4" title="14. Profiling Support -&gt; 14.1. - a means for getting reports of the time that certain operations take on a page -&gt; 14.1.2. - for widget instances (stored on each instance)... -&gt; 14.1.2.1. - wiring time"><span class="headingNumber"><a href="#14" title="14. Profiling Support">14</a>.<a href="#14_1" title="14. Profiling Support -&gt; 14.1. - a means for getting reports of the time that certain operations take on a page">1</a>.<a href="#14_1_2" title="14. Profiling Support -&gt; 14.1. - a means for getting reports of the time that certain operations take on a page -&gt; 14.1.2. - for widget instances (stored on each instance)...">2</a>.<a href="#14_1_2_1" title="14. Profiling Support -&gt; 14.1. - a means for getting reports of the time that certain operations take on a page -&gt; 14.1.2. - for widget instances (stored on each instance)... -&gt; 14.1.2.1. - wiring time">1</a>. </span>- wiring time</h4>
 				<div class="contents4">
 					<table class="list">
 					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>total wiring time</td></tr>
@@ -998,8 +1043,8 @@ Uize.mod.multiply (10)
 				<table class="list">
 				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>inspect by widget tree</td></tr>
 				</table>
-				<a name="13_1_2_2"></a>
-				<h4 class="heading4" title="13. Profiling Support -&gt; 13.1. - a means for getting reports of the time that certain operations take on a page -&gt; 13.1.2. - for widget instances (stored on each instance)... -&gt; 13.1.2.2. - inspect by module"><span class="headingNumber"><a href="#13" title="13. Profiling Support">13</a>.<a href="#13_1" title="13. Profiling Support -&gt; 13.1. - a means for getting reports of the time that certain operations take on a page">1</a>.<a href="#13_1_2" title="13. Profiling Support -&gt; 13.1. - a means for getting reports of the time that certain operations take on a page -&gt; 13.1.2. - for widget instances (stored on each instance)...">2</a>.<a href="#13_1_2_2" title="13. Profiling Support -&gt; 13.1. - a means for getting reports of the time that certain operations take on a page -&gt; 13.1.2. - for widget instances (stored on each instance)... -&gt; 13.1.2.2. - inspect by module">2</a>. </span>- inspect by module</h4>
+				<a name="14_1_2_2"></a>
+				<h4 class="heading4" title="14. Profiling Support -&gt; 14.1. - a means for getting reports of the time that certain operations take on a page -&gt; 14.1.2. - for widget instances (stored on each instance)... -&gt; 14.1.2.2. - inspect by module"><span class="headingNumber"><a href="#14" title="14. Profiling Support">14</a>.<a href="#14_1" title="14. Profiling Support -&gt; 14.1. - a means for getting reports of the time that certain operations take on a page">1</a>.<a href="#14_1_2" title="14. Profiling Support -&gt; 14.1. - a means for getting reports of the time that certain operations take on a page -&gt; 14.1.2. - for widget instances (stored on each instance)...">2</a>.<a href="#14_1_2_2" title="14. Profiling Support -&gt; 14.1. - a means for getting reports of the time that certain operations take on a page -&gt; 14.1.2. - for widget instances (stored on each instance)... -&gt; 14.1.2.2. - inspect by module">2</a>. </span>- inspect by module</h4>
 				<div class="contents4">
 					<table class="list">
 					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>total number of instances</td></tr>
@@ -1013,19 +1058,19 @@ Uize.mod.multiply (10)
 		</div>
 	</div>
 	
-	<a name="14"></a>
-	<h1 class="heading1" title="14. Performance Questions..."><span class="headingNumber"><a href="#14" title="14. Performance Questions...">14</a>. </span>Performance Questions...</h1>
+	<a name="15"></a>
+	<h1 class="heading1" title="15. Performance Questions..."><span class="headingNumber"><a href="#15" title="15. Performance Questions...">15</a>. </span>Performance Questions...</h1>
 	<div class="contents1">
-		<a name="14_1"></a>
-		<h2 class="heading2" title="14. Performance Questions... -&gt; 14.1. - is there any difference between array.push (element) and array [array.length] = element ?"><span class="headingNumber"><a href="#14" title="14. Performance Questions...">14</a>.<a href="#14_1" title="14. Performance Questions... -&gt; 14.1. - is there any difference between array.push (element) and array [array.length] = element ?">1</a>. </span>- is there any difference between array.push (element) and array [array.length] = element ?</h2>
+		<a name="15_1"></a>
+		<h2 class="heading2" title="15. Performance Questions... -&gt; 15.1. - is there any difference between array.push (element) and array [array.length] = element ?"><span class="headingNumber"><a href="#15" title="15. Performance Questions...">15</a>.<a href="#15_1" title="15. Performance Questions... -&gt; 15.1. - is there any difference between array.push (element) and array [array.length] = element ?">1</a>. </span>- is there any difference between array.push (element) and array [array.length] = element ?</h2>
 		<div class="contents2">
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>there appears to be, with assign-to-end being faster, but it is not significant. In building an array of 1,000,000 elements, it can make a difference of up to 2 seconds. Difference is most pronounced in IE. At scales of 1000 elements, it makes a difference of just 1 or 2 ms. The assign-to-end approach adds to code size a tiny bit, requires maintaining a separate array length counter variable, and doesn't offer the convenience of pushing multiple elements in a single statement. Assign-to-end with accessing the length property is definitely not advisable, since that would eat into the performance benefit and more significantly add to code size.</td></tr>
 			</table>
 		</div>
 		
-		<a name="14_2"></a>
-		<h2 class="heading2" title="14. Performance Questions... -&gt; 14.2. - when getting a reference to a node, does it hurt to fall back to document.getElementsByName?"><span class="headingNumber"><a href="#14" title="14. Performance Questions...">14</a>.<a href="#14_2" title="14. Performance Questions... -&gt; 14.2. - when getting a reference to a node, does it hurt to fall back to document.getElementsByName?">2</a>. </span>- when getting a reference to a node, does it hurt to fall back to document.getElementsByName?</h2>
+		<a name="15_2"></a>
+		<h2 class="heading2" title="15. Performance Questions... -&gt; 15.2. - when getting a reference to a node, does it hurt to fall back to document.getElementsByName?"><span class="headingNumber"><a href="#15" title="15. Performance Questions...">15</a>.<a href="#15_2" title="15. Performance Questions... -&gt; 15.2. - when getting a reference to a node, does it hurt to fall back to document.getElementsByName?">2</a>. </span>- when getting a reference to a node, does it hurt to fall back to document.getElementsByName?</h2>
 		<div class="contents2">
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>doesn't appear to make that much difference in cases of many lookups. Optimizing it out for most lookups might help a little bit, but it's not that compelling.</td></tr>
@@ -1036,8 +1081,8 @@ Uize.mod.multiply (10)
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>does setting a style property on a node always incur a cost, even if the value you're setting is the current value? If so, does accessing and testing before setting improve performance?</td></tr>
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>what's the performance difference between Math.round (myNumber) and (myNumber + .5) >> 0 ?</td></tr>
 		</table>
-		<a name="14_3"></a>
-		<h2 class="heading2" title="14. Performance Questions... -&gt; 14.3. - what&apos;s the performance difference between..."><span class="headingNumber"><a href="#14" title="14. Performance Questions...">14</a>.<a href="#14_3" title="14. Performance Questions... -&gt; 14.3. - what&apos;s the performance difference between...">3</a>. </span>- what's the performance difference between...</h2>
+		<a name="15_3"></a>
+		<h2 class="heading2" title="15. Performance Questions... -&gt; 15.3. - what&apos;s the performance difference between..."><span class="headingNumber"><a href="#15" title="15. Performance Questions...">15</a>.<a href="#15_3" title="15. Performance Questions... -&gt; 15.3. - what&apos;s the performance difference between...">3</a>. </span>- what's the performance difference between...</h2>
 		<div class="contents2">
 			
 <pre class="sample-code">function doSomething (value) {
@@ -1069,11 +1114,11 @@ doSomething ('value4');
 		</div>
 	</div>
 	
-	<a name="15"></a>
-	<h1 class="heading1" title="15. Idea for Handling Functions That May Be Asynchronous"><span class="headingNumber"><a href="#15" title="15. Idea for Handling Functions That May Be Asynchronous">15</a>. </span>Idea for Handling Functions That May Be Asynchronous</h1>
+	<a name="16"></a>
+	<h1 class="heading1" title="16. Idea for Handling Functions That May Be Asynchronous"><span class="headingNumber"><a href="#16" title="16. Idea for Handling Functions That May Be Asynchronous">16</a>. </span>Idea for Handling Functions That May Be Asynchronous</h1>
 	<div class="contents1">
-		<a name="15_1"></a>
-		<h2 class="heading2" title="15. Idea for Handling Functions That May Be Asynchronous -&gt; 15.1. - approach 1"><span class="headingNumber"><a href="#15" title="15. Idea for Handling Functions That May Be Asynchronous">15</a>.<a href="#15_1" title="15. Idea for Handling Functions That May Be Asynchronous -&gt; 15.1. - approach 1">1</a>. </span>- approach 1</h2>
+		<a name="16_1"></a>
+		<h2 class="heading2" title="16. Idea for Handling Functions That May Be Asynchronous -&gt; 16.1. - approach 1"><span class="headingNumber"><a href="#16" title="16. Idea for Handling Functions That May Be Asynchronous">16</a>.<a href="#16_1" title="16. Idea for Handling Functions That May Be Asynchronous -&gt; 16.1. - approach 1">1</a>. </span>- approach 1</h2>
 		<div class="contents2">
 			
 <pre class="sample-code">function blah (param1,param2,param3,_returnResult) {
@@ -1110,8 +1155,8 @@ function handleReturn (result) {
 </pre>
 		</div>
 		
-		<a name="15_2"></a>
-		<h2 class="heading2" title="15. Idea for Handling Functions That May Be Asynchronous -&gt; 15.2. - approach 2"><span class="headingNumber"><a href="#15" title="15. Idea for Handling Functions That May Be Asynchronous">15</a>.<a href="#15_2" title="15. Idea for Handling Functions That May Be Asynchronous -&gt; 15.2. - approach 2">2</a>. </span>- approach 2</h2>
+		<a name="16_2"></a>
+		<h2 class="heading2" title="16. Idea for Handling Functions That May Be Asynchronous -&gt; 16.2. - approach 2"><span class="headingNumber"><a href="#16" title="16. Idea for Handling Functions That May Be Asynchronous">16</a>.<a href="#16_2" title="16. Idea for Handling Functions That May Be Asynchronous -&gt; 16.2. - approach 2">2</a>. </span>- approach 2</h2>
 		<div class="contents2">
 			
 <pre class="sample-code">function isValidUser (_user) {
@@ -1153,8 +1198,8 @@ function callAsAsync (_functionToCall,_args,_returnResult) {
 		</div>
 	</div>
 	
-	<a name="16"></a>
-	<h1 class="heading1" title="16. - the most challenging and difficult problems to solve"><span class="headingNumber"><a href="#16" title="16. - the most challenging and difficult problems to solve">16</a>. </span>- the most challenging and difficult problems to solve</h1>
+	<a name="17"></a>
+	<h1 class="heading1" title="17. - the most challenging and difficult problems to solve"><span class="headingNumber"><a href="#17" title="17. - the most challenging and difficult problems to solve">17</a>. </span>- the most challenging and difficult problems to solve</h1>
 	<div class="contents1">
 		<table class="list">
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>generic I18N resource string dependency system</td></tr>
@@ -1164,8 +1209,8 @@ function callAsAsync (_functionToCall,_args,_returnResult) {
 		</table>
 	</div>
 	
-	<a name="17"></a>
-	<h1 class="heading1" title="17. Generic Solution for Tracking"><span class="headingNumber"><a href="#17" title="17. Generic Solution for Tracking">17</a>. </span>Generic Solution for Tracking</h1>
+	<a name="18"></a>
+	<h1 class="heading1" title="18. Generic Solution for Tracking"><span class="headingNumber"><a href="#18" title="18. Generic Solution for Tracking">18</a>. </span>Generic Solution for Tracking</h1>
 	<div class="contents1">
 		<table class="list">
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>in most cases, should not require code changes</td></tr>
@@ -1177,13 +1222,13 @@ function callAsAsync (_functionToCall,_args,_returnResult) {
 		</table>
 	</div>
 	
-	<a name="18"></a>
-	<h1 class="heading1" title="18. Only Use set Method For Changing Property Values"><span class="headingNumber"><a href="#18" title="18. Only Use set Method For Changing Property Values">18</a>. </span>Only Use set Method For Changing Property Values</h1>
+	<a name="19"></a>
+	<h1 class="heading1" title="19. Only Use set Method For Changing Property Values"><span class="headingNumber"><a href="#19" title="19. Only Use set Method For Changing Property Values">19</a>. </span>Only Use set Method For Changing Property Values</h1>
 	<div class="contents1">
 		<p>Make sure that all setting of properties is done through the set method (ie. no more adhoc setting by assigning using the private name). Use a regular expression to search through the code.</p>
 		
-		<a name="18_1"></a>
-		<h2 class="heading2" title="18. Only Use set Method For Changing Property Values -&gt; 18.1. How to Find Offending Cases"><span class="headingNumber"><a href="#18" title="18. Only Use set Method For Changing Property Values">18</a>.<a href="#18_1" title="18. Only Use set Method For Changing Property Values -&gt; 18.1. How to Find Offending Cases">1</a>. </span>How to Find Offending Cases</h2>
+		<a name="19_1"></a>
+		<h2 class="heading2" title="19. Only Use set Method For Changing Property Values -&gt; 19.1. How to Find Offending Cases"><span class="headingNumber"><a href="#19" title="19. Only Use set Method For Changing Property Values">19</a>.<a href="#19_1" title="19. Only Use set Method For Changing Property Values -&gt; 19.1. How to Find Offending Cases">1</a>. </span>How to Find Offending Cases</h2>
 		<div class="contents2">
 			<p>To find most cases...</p>
 			
@@ -1196,11 +1241,11 @@ function callAsAsync (_functionToCall,_args,_returnResult) {
 			<p>...or write a build script that scans through JS files, determines private names of registered properties, and then uses those names in generated regular expressions to find direct assignments.</p>
 		</div>
 		
-		<a name="18_2"></a>
-		<h2 class="heading2" title="18. Only Use set Method For Changing Property Values -&gt; 18.2. Issues found"><span class="headingNumber"><a href="#18" title="18. Only Use set Method For Changing Property Values">18</a>.<a href="#18_2" title="18. Only Use set Method For Changing Property Values -&gt; 18.2. Issues found">2</a>. </span>Issues found</h2>
+		<a name="19_2"></a>
+		<h2 class="heading2" title="19. Only Use set Method For Changing Property Values -&gt; 19.2. Issues found"><span class="headingNumber"><a href="#19" title="19. Only Use set Method For Changing Property Values">19</a>.<a href="#19_2" title="19. Only Use set Method For Changing Property Values -&gt; 19.2. Issues found">2</a>. </span>Issues found</h2>
 		<div class="contents2">
-			<a name="18_2_1"></a>
-			<h3 class="heading3" title="18. Only Use set Method For Changing Property Values -&gt; 18.2. Issues found -&gt; 18.2.1. Zazzle.ControlCustomShape"><span class="headingNumber"><a href="#18" title="18. Only Use set Method For Changing Property Values">18</a>.<a href="#18_2" title="18. Only Use set Method For Changing Property Values -&gt; 18.2. Issues found">2</a>.<a href="#18_2_1" title="18. Only Use set Method For Changing Property Values -&gt; 18.2. Issues found -&gt; 18.2.1. Zazzle.ControlCustomShape">1</a>. </span>Zazzle.ControlCustomShape</h3>
+			<a name="19_2_1"></a>
+			<h3 class="heading3" title="19. Only Use set Method For Changing Property Values -&gt; 19.2. Issues found -&gt; 19.2.1. Zazzle.ControlCustomShape"><span class="headingNumber"><a href="#19" title="19. Only Use set Method For Changing Property Values">19</a>.<a href="#19_2" title="19. Only Use set Method For Changing Property Values -&gt; 19.2. Issues found">2</a>.<a href="#19_2_1" title="19. Only Use set Method For Changing Property Values -&gt; 19.2. Issues found -&gt; 19.2.1. Zazzle.ControlCustomShape">1</a>. </span>Zazzle.ControlCustomShape</h3>
 			<div class="contents3">
 				<p><code>width</code> and <code>height</code> being set when ratio locked - in onChange handler, so need to do some tricky dance moves.</p>
 				
@@ -1211,8 +1256,8 @@ function callAsAsync (_functionToCall,_args,_returnResult) {
 </pre>
 			</div>
 			
-			<a name="18_2_2"></a>
-			<h3 class="heading3" title="18. Only Use set Method For Changing Property Values -&gt; 18.2. Issues found -&gt; 18.2.2. Zazzle.ControlPoptions"><span class="headingNumber"><a href="#18" title="18. Only Use set Method For Changing Property Values">18</a>.<a href="#18_2" title="18. Only Use set Method For Changing Property Values -&gt; 18.2. Issues found">2</a>.<a href="#18_2_2" title="18. Only Use set Method For Changing Property Values -&gt; 18.2. Issues found -&gt; 18.2.2. Zazzle.ControlPoptions">2</a>. </span>Zazzle.ControlPoptions</h3>
+			<a name="19_2_2"></a>
+			<h3 class="heading3" title="19. Only Use set Method For Changing Property Values -&gt; 19.2. Issues found -&gt; 19.2.2. Zazzle.ControlPoptions"><span class="headingNumber"><a href="#19" title="19. Only Use set Method For Changing Property Values">19</a>.<a href="#19_2" title="19. Only Use set Method For Changing Property Values -&gt; 19.2. Issues found">2</a>.<a href="#19_2_2" title="19. Only Use set Method For Changing Property Values -&gt; 19.2. Issues found -&gt; 19.2.2. Zazzle.ControlPoptions">2</a>. </span>Zazzle.ControlPoptions</h3>
 			<div class="contents3">
 				<p>This one's tricky, assuming that a bunch of thought has already done into why it is the way it is.</p>
 				
@@ -1223,8 +1268,8 @@ function callAsAsync (_functionToCall,_args,_returnResult) {
 </pre>
 			</div>
 			
-			<a name="18_2_3"></a>
-			<h3 class="heading3" title="18. Only Use set Method For Changing Property Values -&gt; 18.2. Issues found -&gt; 18.2.3. Zazzle.ControlPoptionsShared"><span class="headingNumber"><a href="#18" title="18. Only Use set Method For Changing Property Values">18</a>.<a href="#18_2" title="18. Only Use set Method For Changing Property Values -&gt; 18.2. Issues found">2</a>.<a href="#18_2_3" title="18. Only Use set Method For Changing Property Values -&gt; 18.2. Issues found -&gt; 18.2.3. Zazzle.ControlPoptionsShared">3</a>. </span>Zazzle.ControlPoptionsShared</h3>
+			<a name="19_2_3"></a>
+			<h3 class="heading3" title="19. Only Use set Method For Changing Property Values -&gt; 19.2. Issues found -&gt; 19.2.3. Zazzle.ControlPoptionsShared"><span class="headingNumber"><a href="#19" title="19. Only Use set Method For Changing Property Values">19</a>.<a href="#19_2" title="19. Only Use set Method For Changing Property Values -&gt; 19.2. Issues found">2</a>.<a href="#19_2_3" title="19. Only Use set Method For Changing Property Values -&gt; 19.2. Issues found -&gt; 19.2.3. Zazzle.ControlPoptionsShared">3</a>. </span>Zazzle.ControlPoptionsShared</h3>
 			<div class="contents3">
 				<p>Another tricky one...</p>
 				
@@ -1237,8 +1282,8 @@ function callAsAsync (_functionToCall,_args,_returnResult) {
 		</div>
 	</div>
 	
-	<a name="19"></a>
-	<h1 class="heading1" title="19. - factor out code for validating a value, where the validator can be..."><span class="headingNumber"><a href="#19" title="19. - factor out code for validating a value, where the validator can be...">19</a>. </span>- factor out code for validating a value, where the validator can be...</h1>
+	<a name="20"></a>
+	<h1 class="heading1" title="20. - factor out code for validating a value, where the validator can be..."><span class="headingNumber"><a href="#20" title="20. - factor out code for validating a value, where the validator can be...">20</a>. </span>- factor out code for validating a value, where the validator can be...</h1>
 	<div class="contents1">
 		<table class="list">
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>a simple value, to which the value being tested should be compared for equality</td></tr>
@@ -1247,8 +1292,8 @@ function callAsAsync (_functionToCall,_args,_returnResult) {
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>null or undefined, indicating that no test should be performed</td></tr>
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>an optional parameter, indicating whether or not equality, strict equality, or dynamic (or some better name) mode should be used</td></tr>
 		</table>
-		<a name="19_1"></a>
-		<h2 class="heading2" title="19. - factor out code for validating a value, where the validator can be... -&gt; 19.1. - could be used..."><span class="headingNumber"><a href="#19" title="19. - factor out code for validating a value, where the validator can be...">19</a>.<a href="#19_1" title="19. - factor out code for validating a value, where the validator can be... -&gt; 19.1. - could be used...">1</a>. </span>- could be used...</h2>
+		<a name="20_1"></a>
+		<h2 class="heading2" title="20. - factor out code for validating a value, where the validator can be... -&gt; 20.1. - could be used..."><span class="headingNumber"><a href="#20" title="20. - factor out code for validating a value, where the validator can be...">20</a>.<a href="#20_1" title="20. - factor out code for validating a value, where the validator can be... -&gt; 20.1. - could be used...">1</a>. </span>- could be used...</h2>
 		<div class="contents2">
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>C:/thesource/z.1/www.zazzle.com/trunk/z.2/js/library/Zazzle.FormElement.js</td></tr>
@@ -1258,14 +1303,14 @@ function callAsAsync (_functionToCall,_args,_returnResult) {
 		</div>
 	</div>
 	
-	<a name="20"></a>
-	<h1 class="heading1" title="20. - should factor out code to set HTML for frame or iframe (best implementation so far in Simple Doc Tester)"><span class="headingNumber"><a href="#20" title="20. - should factor out code to set HTML for frame or iframe (best implementation so far in Simple Doc Tester)">20</a>. </span>- should factor out code to set HTML for frame or iframe (best implementation so far in Simple Doc Tester)</h1>
+	<a name="21"></a>
+	<h1 class="heading1" title="21. - should factor out code to set HTML for frame or iframe (best implementation so far in Simple Doc Tester)"><span class="headingNumber"><a href="#21" title="21. - should factor out code to set HTML for frame or iframe (best implementation so far in Simple Doc Tester)">21</a>. </span>- should factor out code to set HTML for frame or iframe (best implementation so far in Simple Doc Tester)</h1>
 	<div class="contents1">
-		<a name="20_1"></a>
-		<h2 class="heading2" title="20. - should factor out code to set HTML for frame or iframe (best implementation so far in Simple Doc Tester) -&gt; 20.1. - while at it, should factor out code for replacing contents of any window, and move into Uize.Node.setInnerHtml? Or Uize.Node.injectHtml? Or should there be a window utilities package?"><span class="headingNumber"><a href="#20" title="20. - should factor out code to set HTML for frame or iframe (best implementation so far in Simple Doc Tester)">20</a>.<a href="#20_1" title="20. - should factor out code to set HTML for frame or iframe (best implementation so far in Simple Doc Tester) -&gt; 20.1. - while at it, should factor out code for replacing contents of any window, and move into Uize.Node.setInnerHtml? Or Uize.Node.injectHtml? Or should there be a window utilities package?">1</a>. </span>- while at it, should factor out code for replacing contents of any window, and move into Uize.Node.setInnerHtml? Or Uize.Node.injectHtml? Or should there be a window utilities package?</h2>
+		<a name="21_1"></a>
+		<h2 class="heading2" title="21. - should factor out code to set HTML for frame or iframe (best implementation so far in Simple Doc Tester) -&gt; 21.1. - while at it, should factor out code for replacing contents of any window, and move into Uize.Node.setInnerHtml? Or Uize.Node.injectHtml? Or should there be a window utilities package?"><span class="headingNumber"><a href="#21" title="21. - should factor out code to set HTML for frame or iframe (best implementation so far in Simple Doc Tester)">21</a>.<a href="#21_1" title="21. - should factor out code to set HTML for frame or iframe (best implementation so far in Simple Doc Tester) -&gt; 21.1. - while at it, should factor out code for replacing contents of any window, and move into Uize.Node.setInnerHtml? Or Uize.Node.injectHtml? Or should there be a window utilities package?">1</a>. </span>- while at it, should factor out code for replacing contents of any window, and move into Uize.Node.setInnerHtml? Or Uize.Node.injectHtml? Or should there be a window utilities package?</h2>
 		<div class="contents2">
-			<a name="20_1_1"></a>
-			<h3 class="heading3" title="20. - should factor out code to set HTML for frame or iframe (best implementation so far in Simple Doc Tester) -&gt; 20.1. - while at it, should factor out code for replacing contents of any window, and move into Uize.Node.setInnerHtml? Or Uize.Node.injectHtml? Or should there be a window utilities package? -&gt; 20.1.1. Uize.Browser.Window.write"><span class="headingNumber"><a href="#20" title="20. - should factor out code to set HTML for frame or iframe (best implementation so far in Simple Doc Tester)">20</a>.<a href="#20_1" title="20. - should factor out code to set HTML for frame or iframe (best implementation so far in Simple Doc Tester) -&gt; 20.1. - while at it, should factor out code for replacing contents of any window, and move into Uize.Node.setInnerHtml? Or Uize.Node.injectHtml? Or should there be a window utilities package?">1</a>.<a href="#20_1_1" title="20. - should factor out code to set HTML for frame or iframe (best implementation so far in Simple Doc Tester) -&gt; 20.1. - while at it, should factor out code for replacing contents of any window, and move into Uize.Node.setInnerHtml? Or Uize.Node.injectHtml? Or should there be a window utilities package? -&gt; 20.1.1. Uize.Browser.Window.write">1</a>. </span>Uize.Browser.Window.write</h3>
+			<a name="21_1_1"></a>
+			<h3 class="heading3" title="21. - should factor out code to set HTML for frame or iframe (best implementation so far in Simple Doc Tester) -&gt; 21.1. - while at it, should factor out code for replacing contents of any window, and move into Uize.Node.setInnerHtml? Or Uize.Node.injectHtml? Or should there be a window utilities package? -&gt; 21.1.1. Uize.Browser.Window.write"><span class="headingNumber"><a href="#21" title="21. - should factor out code to set HTML for frame or iframe (best implementation so far in Simple Doc Tester)">21</a>.<a href="#21_1" title="21. - should factor out code to set HTML for frame or iframe (best implementation so far in Simple Doc Tester) -&gt; 21.1. - while at it, should factor out code for replacing contents of any window, and move into Uize.Node.setInnerHtml? Or Uize.Node.injectHtml? Or should there be a window utilities package?">1</a>.<a href="#21_1_1" title="21. - should factor out code to set HTML for frame or iframe (best implementation so far in Simple Doc Tester) -&gt; 21.1. - while at it, should factor out code for replacing contents of any window, and move into Uize.Node.setInnerHtml? Or Uize.Node.injectHtml? Or should there be a window utilities package? -&gt; 21.1.1. Uize.Browser.Window.write">1</a>. </span>Uize.Browser.Window.write</h3>
 			<div class="contents3">
 				<p>Uize.Browser.Window.write (window,content)</p>
 				
@@ -1274,16 +1319,16 @@ function callAsAsync (_functionToCall,_args,_returnResult) {
 			
 			<p>Uize.Browser.Window.launch</p>
 			
-			<a name="20_1_2"></a>
-			<h3 class="heading3" title="20. - should factor out code to set HTML for frame or iframe (best implementation so far in Simple Doc Tester) -&gt; 20.1. - while at it, should factor out code for replacing contents of any window, and move into Uize.Node.setInnerHtml? Or Uize.Node.injectHtml? Or should there be a window utilities package? -&gt; 20.1.2. Uize.Browser.Window.center"><span class="headingNumber"><a href="#20" title="20. - should factor out code to set HTML for frame or iframe (best implementation so far in Simple Doc Tester)">20</a>.<a href="#20_1" title="20. - should factor out code to set HTML for frame or iframe (best implementation so far in Simple Doc Tester) -&gt; 20.1. - while at it, should factor out code for replacing contents of any window, and move into Uize.Node.setInnerHtml? Or Uize.Node.injectHtml? Or should there be a window utilities package?">1</a>.<a href="#20_1_2" title="20. - should factor out code to set HTML for frame or iframe (best implementation so far in Simple Doc Tester) -&gt; 20.1. - while at it, should factor out code for replacing contents of any window, and move into Uize.Node.setInnerHtml? Or Uize.Node.injectHtml? Or should there be a window utilities package? -&gt; 20.1.2. Uize.Browser.Window.center">2</a>. </span>Uize.Browser.Window.center</h3>
+			<a name="21_1_2"></a>
+			<h3 class="heading3" title="21. - should factor out code to set HTML for frame or iframe (best implementation so far in Simple Doc Tester) -&gt; 21.1. - while at it, should factor out code for replacing contents of any window, and move into Uize.Node.setInnerHtml? Or Uize.Node.injectHtml? Or should there be a window utilities package? -&gt; 21.1.2. Uize.Browser.Window.center"><span class="headingNumber"><a href="#21" title="21. - should factor out code to set HTML for frame or iframe (best implementation so far in Simple Doc Tester)">21</a>.<a href="#21_1" title="21. - should factor out code to set HTML for frame or iframe (best implementation so far in Simple Doc Tester) -&gt; 21.1. - while at it, should factor out code for replacing contents of any window, and move into Uize.Node.setInnerHtml? Or Uize.Node.injectHtml? Or should there be a window utilities package?">1</a>.<a href="#21_1_2" title="21. - should factor out code to set HTML for frame or iframe (best implementation so far in Simple Doc Tester) -&gt; 21.1. - while at it, should factor out code for replacing contents of any window, and move into Uize.Node.setInnerHtml? Or Uize.Node.injectHtml? Or should there be a window utilities package? -&gt; 21.1.2. Uize.Browser.Window.center">2</a>. </span>Uize.Browser.Window.center</h3>
 			<div class="contents3">
 				<p>Uize.Browser.Window.center (window)</p>
 				
 				<p>Uize.Browser.Window.center ()</p>
 			</div>
 			
-			<a name="20_1_3"></a>
-			<h3 class="heading3" title="20. - should factor out code to set HTML for frame or iframe (best implementation so far in Simple Doc Tester) -&gt; 20.1. - while at it, should factor out code for replacing contents of any window, and move into Uize.Node.setInnerHtml? Or Uize.Node.injectHtml? Or should there be a window utilities package? -&gt; 20.1.3. Uize.Browser.Window.resize"><span class="headingNumber"><a href="#20" title="20. - should factor out code to set HTML for frame or iframe (best implementation so far in Simple Doc Tester)">20</a>.<a href="#20_1" title="20. - should factor out code to set HTML for frame or iframe (best implementation so far in Simple Doc Tester) -&gt; 20.1. - while at it, should factor out code for replacing contents of any window, and move into Uize.Node.setInnerHtml? Or Uize.Node.injectHtml? Or should there be a window utilities package?">1</a>.<a href="#20_1_3" title="20. - should factor out code to set HTML for frame or iframe (best implementation so far in Simple Doc Tester) -&gt; 20.1. - while at it, should factor out code for replacing contents of any window, and move into Uize.Node.setInnerHtml? Or Uize.Node.injectHtml? Or should there be a window utilities package? -&gt; 20.1.3. Uize.Browser.Window.resize">3</a>. </span>Uize.Browser.Window.resize</h3>
+			<a name="21_1_3"></a>
+			<h3 class="heading3" title="21. - should factor out code to set HTML for frame or iframe (best implementation so far in Simple Doc Tester) -&gt; 21.1. - while at it, should factor out code for replacing contents of any window, and move into Uize.Node.setInnerHtml? Or Uize.Node.injectHtml? Or should there be a window utilities package? -&gt; 21.1.3. Uize.Browser.Window.resize"><span class="headingNumber"><a href="#21" title="21. - should factor out code to set HTML for frame or iframe (best implementation so far in Simple Doc Tester)">21</a>.<a href="#21_1" title="21. - should factor out code to set HTML for frame or iframe (best implementation so far in Simple Doc Tester) -&gt; 21.1. - while at it, should factor out code for replacing contents of any window, and move into Uize.Node.setInnerHtml? Or Uize.Node.injectHtml? Or should there be a window utilities package?">1</a>.<a href="#21_1_3" title="21. - should factor out code to set HTML for frame or iframe (best implementation so far in Simple Doc Tester) -&gt; 21.1. - while at it, should factor out code for replacing contents of any window, and move into Uize.Node.setInnerHtml? Or Uize.Node.injectHtml? Or should there be a window utilities package? -&gt; 21.1.3. Uize.Browser.Window.resize">3</a>. </span>Uize.Browser.Window.resize</h3>
 			<div class="contents3">
 				<p>Uize.Browser.Window.resize (windowOBJ,width,height,positionX,positionY)</p>
 				
@@ -1296,8 +1341,8 @@ function callAsAsync (_functionToCall,_args,_returnResult) {
 		</div>
 	</div>
 	
-	<a name="21"></a>
-	<h1 class="heading1" title="21. Proposed Shortenings"><span class="headingNumber"><a href="#21" title="21. Proposed Shortenings">21</a>. </span>Proposed Shortenings</h1>
+	<a name="22"></a>
+	<h1 class="heading1" title="22. Proposed Shortenings"><span class="headingNumber"><a href="#22" title="22. Proposed Shortenings">22</a>. </span>Proposed Shortenings</h1>
 	<div class="contents1">
 		<table class="list">
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Uize.Node.getById -> Uize.Node.byId or Uize.Node.id or just Uize.Node</td></tr>
@@ -1305,8 +1350,8 @@ function callAsAsync (_functionToCall,_args,_returnResult) {
 		</table>
 	</div>
 	
-	<a name="22"></a>
-	<h1 class="heading1" title="22. Key Aspects of a Framework"><span class="headingNumber"><a href="#22" title="22. Key Aspects of a Framework">22</a>. </span>Key Aspects of a Framework</h1>
+	<a name="23"></a>
+	<h1 class="heading1" title="23. Key Aspects of a Framework"><span class="headingNumber"><a href="#23" title="23. Key Aspects of a Framework">23</a>. </span>Key Aspects of a Framework</h1>
 	<div class="contents1">
 		<p>Solving fundamental problems in useful, convenient, friendly, understandable ways</p>
 		
@@ -1325,11 +1370,11 @@ function callAsAsync (_functionToCall,_args,_returnResult) {
 		</table>
 	</div>
 	
-	<a name="23"></a>
-	<h1 class="heading1" title="23. - Uize.Delayed"><span class="headingNumber"><a href="#23" title="23. - Uize.Delayed">23</a>. </span>- Uize.Delayed</h1>
+	<a name="24"></a>
+	<h1 class="heading1" title="24. - Uize.Delayed"><span class="headingNumber"><a href="#24" title="24. - Uize.Delayed">24</a>. </span>- Uize.Delayed</h1>
 	<div class="contents1">
-		<a name="23_1"></a>
-		<h2 class="heading2" title="23. - Uize.Delayed -&gt; 23.1. Portion of Implementation"><span class="headingNumber"><a href="#23" title="23. - Uize.Delayed">23</a>.<a href="#23_1" title="23. - Uize.Delayed -&gt; 23.1. Portion of Implementation">1</a>. </span>Portion of Implementation</h2>
+		<a name="24_1"></a>
+		<h2 class="heading2" title="24. - Uize.Delayed -&gt; 24.1. Portion of Implementation"><span class="headingNumber"><a href="#24" title="24. - Uize.Delayed">24</a>.<a href="#24_1" title="24. - Uize.Delayed -&gt; 24.1. Portion of Implementation">1</a>. </span>Portion of Implementation</h2>
 		<div class="contents2">
 			
 <pre class="sample-code">_classPrototype.cancel = function () {
@@ -1349,8 +1394,8 @@ _classPrototype.perform (_actionFunction) { // support optional delay param
 </pre>
 		</div>
 		
-		<a name="23_2"></a>
-		<h2 class="heading2" title="23. - Uize.Delayed -&gt; 23.2. Another Possible Implementation"><span class="headingNumber"><a href="#23" title="23. - Uize.Delayed">23</a>.<a href="#23_2" title="23. - Uize.Delayed -&gt; 23.2. Another Possible Implementation">2</a>. </span>Another Possible Implementation</h2>
+		<a name="24_2"></a>
+		<h2 class="heading2" title="24. - Uize.Delayed -&gt; 24.2. Another Possible Implementation"><span class="headingNumber"><a href="#24" title="24. - Uize.Delayed">24</a>.<a href="#24_2" title="24. - Uize.Delayed -&gt; 24.2. Another Possible Implementation">2</a>. </span>Another Possible Implementation</h2>
 		<div class="contents2">
 			
 <pre class="sample-code">Uize.caller = function (_context,_method,_params,_delay) {
@@ -1384,11 +1429,11 @@ _classPrototype.perform (_actionFunction) { // support optional delay param
 </pre>
 		</div>
 		
-		<a name="23_3"></a>
-		<h2 class="heading2" title="23. - Uize.Delayed -&gt; 23.3. Sample Usage"><span class="headingNumber"><a href="#23" title="23. - Uize.Delayed">23</a>.<a href="#23_3" title="23. - Uize.Delayed -&gt; 23.3. Sample Usage">3</a>. </span>Sample Usage</h2>
+		<a name="24_3"></a>
+		<h2 class="heading2" title="24. - Uize.Delayed -&gt; 24.3. Sample Usage"><span class="headingNumber"><a href="#24" title="24. - Uize.Delayed">24</a>.<a href="#24_3" title="24. - Uize.Delayed -&gt; 24.3. Sample Usage">3</a>. </span>Sample Usage</h2>
 		<div class="contents2">
-			<a name="23_3_1"></a>
-			<h3 class="heading3" title="23. - Uize.Delayed -&gt; 23.3. Sample Usage -&gt; 23.3.1. Approach 1"><span class="headingNumber"><a href="#23" title="23. - Uize.Delayed">23</a>.<a href="#23_3" title="23. - Uize.Delayed -&gt; 23.3. Sample Usage">3</a>.<a href="#23_3_1" title="23. - Uize.Delayed -&gt; 23.3. Sample Usage -&gt; 23.3.1. Approach 1">1</a>. </span>Approach 1</h3>
+			<a name="24_3_1"></a>
+			<h3 class="heading3" title="24. - Uize.Delayed -&gt; 24.3. Sample Usage -&gt; 24.3.1. Approach 1"><span class="headingNumber"><a href="#24" title="24. - Uize.Delayed">24</a>.<a href="#24_3" title="24. - Uize.Delayed -&gt; 24.3. Sample Usage">3</a>.<a href="#24_3_1" title="24. - Uize.Delayed -&gt; 24.3. Sample Usage -&gt; 24.3.1. Approach 1">1</a>. </span>Approach 1</h3>
 			<div class="contents3">
 				
 <pre class="sample-code">_this._delayedAction = new Uize.Delayed ({delay:1000});
@@ -1402,8 +1447,8 @@ _this.wireNode (
 </pre>
 			</div>
 			
-			<a name="23_3_2"></a>
-			<h3 class="heading3" title="23. - Uize.Delayed -&gt; 23.3. Sample Usage -&gt; 23.3.2. Approach 2"><span class="headingNumber"><a href="#23" title="23. - Uize.Delayed">23</a>.<a href="#23_3" title="23. - Uize.Delayed -&gt; 23.3. Sample Usage">3</a>.<a href="#23_3_2" title="23. - Uize.Delayed -&gt; 23.3. Sample Usage -&gt; 23.3.2. Approach 2">2</a>. </span>Approach 2</h3>
+			<a name="24_3_2"></a>
+			<h3 class="heading3" title="24. - Uize.Delayed -&gt; 24.3. Sample Usage -&gt; 24.3.2. Approach 2"><span class="headingNumber"><a href="#24" title="24. - Uize.Delayed">24</a>.<a href="#24_3" title="24. - Uize.Delayed -&gt; 24.3. Sample Usage">3</a>.<a href="#24_3_2" title="24. - Uize.Delayed -&gt; 24.3. Sample Usage -&gt; 24.3.2. Approach 2">2</a>. </span>Approach 2</h3>
 			<div class="contents3">
 				
 <pre class="sample-code">var _delayedCaller = Uize.caller (_this,'doSomething',null,1000);
@@ -1418,8 +1463,8 @@ _this.wireNode (
 			</div>
 		</div>
 		
-		<a name="23_4"></a>
-		<h2 class="heading2" title="23. - Uize.Delayed -&gt; 23.4. Thoughts"><span class="headingNumber"><a href="#23" title="23. - Uize.Delayed">23</a>.<a href="#23_4" title="23. - Uize.Delayed -&gt; 23.4. Thoughts">4</a>. </span>Thoughts</h2>
+		<a name="24_4"></a>
+		<h2 class="heading2" title="24. - Uize.Delayed -&gt; 24.4. Thoughts"><span class="headingNumber"><a href="#24" title="24. - Uize.Delayed">24</a>.<a href="#24_4" title="24. - Uize.Delayed -&gt; 24.4. Thoughts">4</a>. </span>Thoughts</h2>
 		<div class="contents2">
 			
 <pre class="sample-code">function () {_this.setNodeStyle ('blah',{color:'#000'})}
@@ -1443,16 +1488,16 @@ Uize.defer
 		</div>
 	</div>
 	
-	<a name="24"></a>
-	<h1 class="heading1" title="24. More Unobtrusive JavaScript Features"><span class="headingNumber"><a href="#24" title="24. More Unobtrusive JavaScript Features">24</a>. </span>More Unobtrusive JavaScript Features</h1>
+	<a name="25"></a>
+	<h1 class="heading1" title="25. More Unobtrusive JavaScript Features"><span class="headingNumber"><a href="#25" title="25. More Unobtrusive JavaScript Features">25</a>. </span>More Unobtrusive JavaScript Features</h1>
 	<div class="contents1">
 		<p>Implement more unobtrusive features, where no JS is needed inside markup, such as...</p>
 		
 		<table class="list">
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>links that are flagged to pop open windows (perhaps with target="[some window name]")</td></tr>
 		</table>
-		<a name="24_1"></a>
-		<h2 class="heading2" title="24. More Unobtrusive JavaScript Features -&gt; 24.1. - expand/collapse"><span class="headingNumber"><a href="#24" title="24. More Unobtrusive JavaScript Features">24</a>.<a href="#24_1" title="24. More Unobtrusive JavaScript Features -&gt; 24.1. - expand/collapse">1</a>. </span>- expand/collapse</h2>
+		<a name="25_1"></a>
+		<h2 class="heading2" title="25. More Unobtrusive JavaScript Features -&gt; 25.1. - expand/collapse"><span class="headingNumber"><a href="#25" title="25. More Unobtrusive JavaScript Features">25</a>.<a href="#25_1" title="25. More Unobtrusive JavaScript Features -&gt; 25.1. - expand/collapse">1</a>. </span>- expand/collapse</h2>
 		<div class="contents2">
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>a lightweight way to get expand/collapse behavior into documents, without having to instantiate widgets</td></tr>
@@ -1460,11 +1505,11 @@ Uize.defer
 		</div>
 	</div>
 	
-	<a name="25"></a>
-	<h1 class="heading1" title="25. Code Development (in order of priority)"><span class="headingNumber"><a href="#25" title="25. Code Development (in order of priority)">25</a>. </span>Code Development (in order of priority)</h1>
+	<a name="26"></a>
+	<h1 class="heading1" title="26. Code Development (in order of priority)"><span class="headingNumber"><a href="#26" title="26. Code Development (in order of priority)">26</a>. </span>Code Development (in order of priority)</h1>
 	<div class="contents1">
-		<a name="25_1"></a>
-		<h2 class="heading2" title="25. Code Development (in order of priority) -&gt; 25.1. **** property changed events refactoring"><span class="headingNumber"><a href="#25" title="25. Code Development (in order of priority)">25</a>.<a href="#25_1" title="25. Code Development (in order of priority) -&gt; 25.1. **** property changed events refactoring">1</a>. </span>**** property changed events refactoring</h2>
+		<a name="26_1"></a>
+		<h2 class="heading2" title="26. Code Development (in order of priority) -&gt; 26.1. **** property changed events refactoring"><span class="headingNumber"><a href="#26" title="26. Code Development (in order of priority)">26</a>.<a href="#26_1" title="26. Code Development (in order of priority) -&gt; 26.1. **** property changed events refactoring">1</a>. </span>**** property changed events refactoring</h2>
 		<div class="contents2">
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>some events that were being fired in the onChange handlers were not being fired right at the end, but now they in effect are because of the way the Changed.[propertyName] event mechanism is implemented. Could this cause any weird order of execution problems?</td></tr>
@@ -1474,8 +1519,8 @@ Uize.defer
 			</table>
 		</div>
 		
-		<a name="25_2"></a>
-		<h2 class="heading2" title="25. Code Development (in order of priority) -&gt; 25.2. - high-minded ideas"><span class="headingNumber"><a href="#25" title="25. Code Development (in order of priority)">25</a>.<a href="#25_2" title="25. Code Development (in order of priority) -&gt; 25.2. - high-minded ideas">2</a>. </span>- high-minded ideas</h2>
+		<a name="26_2"></a>
+		<h2 class="heading2" title="26. Code Development (in order of priority) -&gt; 26.2. - high-minded ideas"><span class="headingNumber"><a href="#26" title="26. Code Development (in order of priority)">26</a>.<a href="#26_2" title="26. Code Development (in order of priority) -&gt; 26.2. - high-minded ideas">2</a>. </span>- high-minded ideas</h2>
 		<div class="contents2">
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>drag a value from any widget to any other widget that supports or has a child that supports the value as part of its interface</td></tr>
@@ -1485,24 +1530,24 @@ Uize.defer
 			</table>
 		</div>
 		
-		<a name="25_3"></a>
-		<h2 class="heading2" title="25. Code Development (in order of priority) -&gt; 25.3. - memory usage optimizations"><span class="headingNumber"><a href="#25" title="25. Code Development (in order of priority)">25</a>.<a href="#25_3" title="25. Code Development (in order of priority) -&gt; 25.3. - memory usage optimizations">3</a>. </span>- memory usage optimizations</h2>
+		<a name="26_3"></a>
+		<h2 class="heading2" title="26. Code Development (in order of priority) -&gt; 26.3. - memory usage optimizations"><span class="headingNumber"><a href="#26" title="26. Code Development (in order of priority)">26</a>.<a href="#26_3" title="26. Code Development (in order of priority) -&gt; 26.3. - memory usage optimizations">3</a>. </span>- memory usage optimizations</h2>
 		<div class="contents2">
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>use prototype for set-get properties?</td></tr>
 			</table>
 		</div>
 		
-		<a name="25_4"></a>
-		<h2 class="heading2" title="25. Code Development (in order of priority) -&gt; 25.4. - performance optimizations"><span class="headingNumber"><a href="#25" title="25. Code Development (in order of priority)">25</a>.<a href="#25_4" title="25. Code Development (in order of priority) -&gt; 25.4. - performance optimizations">4</a>. </span>- performance optimizations</h2>
+		<a name="26_4"></a>
+		<h2 class="heading2" title="26. Code Development (in order of priority) -&gt; 26.4. - performance optimizations"><span class="headingNumber"><a href="#26" title="26. Code Development (in order of priority)">26</a>.<a href="#26_4" title="26. Code Development (in order of priority) -&gt; 26.4. - performance optimizations">4</a>. </span>- performance optimizations</h2>
 		<div class="contents2">
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>a way to avoid calling onChange handlers at construction time</td></tr>
 			</table>
 		</div>
 		
-		<a name="25_5"></a>
-		<h2 class="heading2" title="25. Code Development (in order of priority) -&gt; 25.5. - new subclassing syntax"><span class="headingNumber"><a href="#25" title="25. Code Development (in order of priority)">25</a>.<a href="#25_5" title="25. Code Development (in order of priority) -&gt; 25.5. - new subclassing syntax">5</a>. </span>- new subclassing syntax</h2>
+		<a name="26_5"></a>
+		<h2 class="heading2" title="26. Code Development (in order of priority) -&gt; 26.5. - new subclassing syntax"><span class="headingNumber"><a href="#26" title="26. Code Development (in order of priority)">26</a>.<a href="#26_5" title="26. Code Development (in order of priority) -&gt; 26.5. - new subclassing syntax">5</a>. </span>- new subclassing syntax</h2>
 		<div class="contents2">
 			
 <pre class="sample-code">MyClass.subclass ({
@@ -1522,11 +1567,11 @@ Uize.defer
 </pre>
 		</div>
 		
-		<a name="25_6"></a>
-		<h2 class="heading2" title="25. Code Development (in order of priority) -&gt; 25.6. widget ID scheme refactoring"><span class="headingNumber"><a href="#25" title="25. Code Development (in order of priority)">25</a>.<a href="#25_6" title="25. Code Development (in order of priority) -&gt; 25.6. widget ID scheme refactoring">6</a>. </span>widget ID scheme refactoring</h2>
+		<a name="26_6"></a>
+		<h2 class="heading2" title="26. Code Development (in order of priority) -&gt; 26.6. widget ID scheme refactoring"><span class="headingNumber"><a href="#26" title="26. Code Development (in order of priority)">26</a>.<a href="#26_6" title="26. Code Development (in order of priority) -&gt; 26.6. widget ID scheme refactoring">6</a>. </span>widget ID scheme refactoring</h2>
 		<div class="contents2">
-			<a name="25_6_1"></a>
-			<h3 class="heading3" title="25. Code Development (in order of priority) -&gt; 25.6. widget ID scheme refactoring -&gt; 25.6.1. other..."><span class="headingNumber"><a href="#25" title="25. Code Development (in order of priority)">25</a>.<a href="#25_6" title="25. Code Development (in order of priority) -&gt; 25.6. widget ID scheme refactoring">6</a>.<a href="#25_6_1" title="25. Code Development (in order of priority) -&gt; 25.6. widget ID scheme refactoring -&gt; 25.6.1. other...">1</a>. </span>other...</h3>
+			<a name="26_6_1"></a>
+			<h3 class="heading3" title="26. Code Development (in order of priority) -&gt; 26.6. widget ID scheme refactoring -&gt; 26.6.1. other..."><span class="headingNumber"><a href="#26" title="26. Code Development (in order of priority)">26</a>.<a href="#26_6" title="26. Code Development (in order of priority) -&gt; 26.6. widget ID scheme refactoring">6</a>.<a href="#26_6_1" title="26. Code Development (in order of priority) -&gt; 26.6. widget ID scheme refactoring -&gt; 26.6.1. other...">1</a>. </span>other...</h3>
 			<div class="contents3">
 				<table class="list">
 				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>possibly come up with a different term for the root node of a widget (since we still have shell references in identifiers in various places, possibly just "root" instead of "shell")</td></tr>
@@ -1534,42 +1579,42 @@ Uize.defer
 			</div>
 		</div>
 		
-		<a name="25_7"></a>
-		<h2 class="heading2" title="25. Code Development (in order of priority) -&gt; 25.7. image border fade overlay"><span class="headingNumber"><a href="#25" title="25. Code Development (in order of priority)">25</a>.<a href="#25_7" title="25. Code Development (in order of priority) -&gt; 25.7. image border fade overlay">7</a>. </span>image border fade overlay</h2>
+		<a name="26_7"></a>
+		<h2 class="heading2" title="26. Code Development (in order of priority) -&gt; 26.7. image border fade overlay"><span class="headingNumber"><a href="#26" title="26. Code Development (in order of priority)">26</a>.<a href="#26_7" title="26. Code Development (in order of priority) -&gt; 26.7. image border fade overlay">7</a>. </span>image border fade overlay</h2>
 		<div class="contents2">
 			<p>a convenient way to automatically overlay a border fade on images in a document</p>
 		</div>
 		
 		<p>Uize.TextOutline: a little class to make it easy to create an outline effect around text, so that it can be legible when against a background of a similar tone (ie. insufficient contrast)</p>
 		
-		<a name="25_8"></a>
-		<h2 class="heading2" title="25. Code Development (in order of priority) -&gt; 25.8. Graphing DHTML"><span class="headingNumber"><a href="#25" title="25. Code Development (in order of priority)">25</a>.<a href="#25_8" title="25. Code Development (in order of priority) -&gt; 25.8. Graphing DHTML">8</a>. </span>Graphing DHTML</h2>
+		<a name="26_8"></a>
+		<h2 class="heading2" title="26. Code Development (in order of priority) -&gt; 26.8. Graphing DHTML"><span class="headingNumber"><a href="#26" title="26. Code Development (in order of priority)">26</a>.<a href="#26_8" title="26. Code Development (in order of priority) -&gt; 26.8. Graphing DHTML">8</a>. </span>Graphing DHTML</h2>
 		<div class="contents2">
 			<p>overlay for stock price chart images to highlight date and price at date</p>
 		</div>
 		
-		<a name="25_9"></a>
-		<h2 class="heading2" title="25. Code Development (in order of priority) -&gt; 25.9. Image Letters Widget (Uize.Widget.Spritext)"><span class="headingNumber"><a href="#25" title="25. Code Development (in order of priority)">25</a>.<a href="#25_9" title="25. Code Development (in order of priority) -&gt; 25.9. Image Letters Widget (Uize.Widget.Spritext)">9</a>. </span>Image Letters Widget (Uize.Widget.Spritext)</h2>
+		<a name="26_9"></a>
+		<h2 class="heading2" title="26. Code Development (in order of priority) -&gt; 26.9. Image Letters Widget (Uize.Widget.Spritext)"><span class="headingNumber"><a href="#26" title="26. Code Development (in order of priority)">26</a>.<a href="#26_9" title="26. Code Development (in order of priority) -&gt; 26.9. Image Letters Widget (Uize.Widget.Spritext)">9</a>. </span>Image Letters Widget (Uize.Widget.Spritext)</h2>
 		<div class="contents2">
 			<p>an easy way to display words using character set table images</p>
 		</div>
 		
-		<a name="25_10"></a>
-		<h2 class="heading2" title="25. Code Development (in order of priority) -&gt; 25.10. Auto-wired hide-reveal mechanism"><span class="headingNumber"><a href="#25" title="25. Code Development (in order of priority)">25</a>.<a href="#25_10" title="25. Code Development (in order of priority) -&gt; 25.10. Auto-wired hide-reveal mechanism">10</a>. </span>Auto-wired hide-reveal mechanism</h2>
+		<a name="26_10"></a>
+		<h2 class="heading2" title="26. Code Development (in order of priority) -&gt; 26.10. Auto-wired hide-reveal mechanism"><span class="headingNumber"><a href="#26" title="26. Code Development (in order of priority)">26</a>.<a href="#26_10" title="26. Code Development (in order of priority) -&gt; 26.10. Auto-wired hide-reveal mechanism">10</a>. </span>Auto-wired hide-reveal mechanism</h2>
 		<div class="contents2">
 			<p>for documents with sections of extra in-depth information that most users may not be interested. Allows the information to be available and read in the context of the larger document with an extra click, but without creating an overly heavy read for most users</p>
 		</div>
 		
-		<a name="25_11"></a>
-		<h2 class="heading2" title="25. Code Development (in order of priority) -&gt; 25.11. Stars Rating Widget"><span class="headingNumber"><a href="#25" title="25. Code Development (in order of priority)">25</a>.<a href="#25_11" title="25. Code Development (in order of priority) -&gt; 25.11. Stars Rating Widget">11</a>. </span>Stars Rating Widget</h2>
+		<a name="26_11"></a>
+		<h2 class="heading2" title="26. Code Development (in order of priority) -&gt; 26.11. Stars Rating Widget"><span class="headingNumber"><a href="#26" title="26. Code Development (in order of priority)">26</a>.<a href="#26_11" title="26. Code Development (in order of priority) -&gt; 26.11. Stars Rating Widget">11</a>. </span>Stars Rating Widget</h2>
 		<div class="contents2">
 			<p>a convenient way to have a rating value translated into a graphic of stars (whole and fractional). Could this be accomplished with a generalized bar / slider widget that has stars as its fullness bg?</p>
 		</div>
 		
 		<p>Suggest / Auto-complete Widget</p>
 		
-		<a name="25_12"></a>
-		<h2 class="heading2" title="25. Code Development (in order of priority) -&gt; 25.12. Utility routine to easily make a bunch of links open in a new window"><span class="headingNumber"><a href="#25" title="25. Code Development (in order of priority)">25</a>.<a href="#25_12" title="25. Code Development (in order of priority) -&gt; 25.12. Utility routine to easily make a bunch of links open in a new window">12</a>. </span>Utility routine to easily make a bunch of links open in a new window</h2>
+		<a name="26_12"></a>
+		<h2 class="heading2" title="26. Code Development (in order of priority) -&gt; 26.12. Utility routine to easily make a bunch of links open in a new window"><span class="headingNumber"><a href="#26" title="26. Code Development (in order of priority)">26</a>.<a href="#26_12" title="26. Code Development (in order of priority) -&gt; 26.12. Utility routine to easily make a bunch of links open in a new window">12</a>. </span>Utility routine to easily make a bunch of links open in a new window</h2>
 		<div class="contents2">
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>mode to automatically detect links to larger images and wire to open correctly sized. Frill where linked thumbnail "throbs" outwardly to suggest enlarging.</td></tr>
@@ -1577,8 +1622,8 @@ Uize.defer
 			</table>
 		</div>
 		
-		<a name="25_13"></a>
-		<h2 class="heading2" title="25. Code Development (in order of priority) -&gt; 25.13. Auto-viewer for Images"><span class="headingNumber"><a href="#25" title="25. Code Development (in order of priority)">25</a>.<a href="#25_13" title="25. Code Development (in order of priority) -&gt; 25.13. Auto-viewer for Images">13</a>. </span>Auto-viewer for Images</h2>
+		<a name="26_13"></a>
+		<h2 class="heading2" title="26. Code Development (in order of priority) -&gt; 26.13. Auto-viewer for Images"><span class="headingNumber"><a href="#26" title="26. Code Development (in order of priority)">26</a>.<a href="#26_13" title="26. Code Development (in order of priority) -&gt; 26.13. Auto-viewer for Images">13</a>. </span>Auto-viewer for Images</h2>
 		<div class="contents2">
 			<p>Simply put in image tags in your page, let the auto-viewer present the images to the user in a professional layout</p>
 			
@@ -1587,8 +1632,8 @@ Uize.defer
 			</table>
 		</div>
 		
-		<a name="25_14"></a>
-		<h2 class="heading2" title="25. Code Development (in order of priority) -&gt; 25.14. IDEAS"><span class="headingNumber"><a href="#25" title="25. Code Development (in order of priority)">25</a>.<a href="#25_14" title="25. Code Development (in order of priority) -&gt; 25.14. IDEAS">14</a>. </span>IDEAS</h2>
+		<a name="26_14"></a>
+		<h2 class="heading2" title="26. Code Development (in order of priority) -&gt; 26.14. IDEAS"><span class="headingNumber"><a href="#26" title="26. Code Development (in order of priority)">26</a>.<a href="#26_14" title="26. Code Development (in order of priority) -&gt; 26.14. IDEAS">14</a>. </span>IDEAS</h2>
 		<div class="contents2">
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>facilitate multiple controls controlling the same data (eg. two buttons for the same action) -- might be two different object instances linked in some way</td></tr>
@@ -1596,8 +1641,8 @@ Uize.defer
 			</table>
 		</div>
 		
-		<a name="25_15"></a>
-		<h2 class="heading2" title="25. Code Development (in order of priority) -&gt; 25.15. Puzzle Game"><span class="headingNumber"><a href="#25" title="25. Code Development (in order of priority)">25</a>.<a href="#25_15" title="25. Code Development (in order of priority) -&gt; 25.15. Puzzle Game">15</a>. </span>Puzzle Game</h2>
+		<a name="26_15"></a>
+		<h2 class="heading2" title="26. Code Development (in order of priority) -&gt; 26.15. Puzzle Game"><span class="headingNumber"><a href="#26" title="26. Code Development (in order of priority)">26</a>.<a href="#26_15" title="26. Code Development (in order of priority) -&gt; 26.15. Puzzle Game">15</a>. </span>Puzzle Game</h2>
 		<div class="contents2">
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>takes an image and splits it up into puzzle fragments and then lets the user drag and drop them in place</td></tr>
@@ -1620,14 +1665,14 @@ Uize.defer
 		</table>
 	</div>
 	
-	<a name="26"></a>
-	<h1 class="heading1" title="26. BUGS"><span class="headingNumber"><a href="#26" title="26. BUGS">26</a>. </span>BUGS</h1>
+	<a name="27"></a>
+	<h1 class="heading1" title="27. BUGS"><span class="headingNumber"><a href="#27" title="27. BUGS">27</a>. </span>BUGS</h1>
 	<div class="contents1">
-		<a name="26_1"></a>
-		<h2 class="heading2" title="26. BUGS -&gt; 26.1. General"><span class="headingNumber"><a href="#26" title="26. BUGS">26</a>.<a href="#26_1" title="26. BUGS -&gt; 26.1. General">1</a>. </span>General</h2>
+		<a name="27_1"></a>
+		<h2 class="heading2" title="27. BUGS -&gt; 27.1. General"><span class="headingNumber"><a href="#27" title="27. BUGS">27</a>.<a href="#27_1" title="27. BUGS -&gt; 27.1. General">1</a>. </span>General</h2>
 		<div class="contents2">
-			<a name="26_1_1"></a>
-			<h3 class="heading3" title="26. BUGS -&gt; 26.1. General -&gt; 26.1.1. - examples/button-types.html - nodes type button"><span class="headingNumber"><a href="#26" title="26. BUGS">26</a>.<a href="#26_1" title="26. BUGS -&gt; 26.1. General">1</a>.<a href="#26_1_1" title="26. BUGS -&gt; 26.1. General -&gt; 26.1.1. - examples/button-types.html - nodes type button">1</a>. </span>- examples/button-types.html - nodes type button</h3>
+			<a name="27_1_1"></a>
+			<h3 class="heading3" title="27. BUGS -&gt; 27.1. General -&gt; 27.1.1. - examples/button-types.html - nodes type button"><span class="headingNumber"><a href="#27" title="27. BUGS">27</a>.<a href="#27_1" title="27. BUGS -&gt; 27.1. General">1</a>.<a href="#27_1_1" title="27. BUGS -&gt; 27.1. General -&gt; 27.1.1. - examples/button-types.html - nodes type button">1</a>. </span>- examples/button-types.html - nodes type button</h3>
 			<div class="contents3">
 				<table class="list">
 				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>when disabled or selected, busy cursor doesn't display</td></tr>
@@ -1636,16 +1681,16 @@ Uize.defer
 			</div>
 		</div>
 		
-		<a name="26_2"></a>
-		<h2 class="heading2" title="26. BUGS -&gt; 26.2. Firefox"><span class="headingNumber"><a href="#26" title="26. BUGS">26</a>.<a href="#26_2" title="26. BUGS -&gt; 26.2. Firefox">2</a>. </span>Firefox</h2>
+		<a name="27_2"></a>
+		<h2 class="heading2" title="27. BUGS -&gt; 27.2. Firefox"><span class="headingNumber"><a href="#27" title="27. BUGS">27</a>.<a href="#27_2" title="27. BUGS -&gt; 27.2. Firefox">2</a>. </span>Firefox</h2>
 		<div class="contents2">
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>in the button-types example, the frames style button does not fire the "Click" event (seems to have something to do with the mousedown event handler's execution)</td></tr>
 			</table>
 		</div>
 		
-		<a name="26_3"></a>
-		<h2 class="heading2" title="26. BUGS -&gt; 26.3. Safari"><span class="headingNumber"><a href="#26" title="26. BUGS">26</a>.<a href="#26_3" title="26. BUGS -&gt; 26.3. Safari">3</a>. </span>Safari</h2>
+		<a name="27_3"></a>
+		<h2 class="heading2" title="27. BUGS -&gt; 27.3. Safari"><span class="headingNumber"><a href="#27" title="27. BUGS">27</a>.<a href="#27_3" title="27. BUGS -&gt; 27.3. Safari">3</a>. </span>Safari</h2>
 		<div class="contents2">
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>for all behaviors that are modified using the Ctrl key, should also be modified by the metaKey (for Mac users)</td></tr>
@@ -1653,20 +1698,20 @@ Uize.defer
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the ThumbZoom class zoom out effect is not centering in the window when the window is scrolled</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>after an image has zoomed out, there is a brief moment where the shield displays all solid before the opacity kicks in</td></tr>
 			</table>
-			<a name="26_3_1"></a>
-			<h3 class="heading3" title="26. BUGS -&gt; 26.3. Safari -&gt; 26.3.1. ...ImagePort.Draggable"><span class="headingNumber"><a href="#26" title="26. BUGS">26</a>.<a href="#26_3" title="26. BUGS -&gt; 26.3. Safari">3</a>.<a href="#26_3_1" title="26. BUGS -&gt; 26.3. Safari -&gt; 26.3.1. ...ImagePort.Draggable">1</a>. </span>...ImagePort.Draggable</h3>
+			<a name="27_3_1"></a>
+			<h3 class="heading3" title="27. BUGS -&gt; 27.3. Safari -&gt; 27.3.1. ...ImagePort.Draggable"><span class="headingNumber"><a href="#27" title="27. BUGS">27</a>.<a href="#27_3" title="27. BUGS -&gt; 27.3. Safari">3</a>.<a href="#27_3_1" title="27. BUGS -&gt; 27.3. Safari -&gt; 27.3.1. ...ImagePort.Draggable">1</a>. </span>...ImagePort.Draggable</h3>
 			<div class="contents3">
 				<p>no way to initiate Ctrl modifier key behaviors</p>
 			</div>
 			
-			<a name="26_3_2"></a>
-			<h3 class="heading3" title="26. BUGS -&gt; 26.3. Safari -&gt; 26.3.2. Color Pickers With Gradient example"><span class="headingNumber"><a href="#26" title="26. BUGS">26</a>.<a href="#26_3" title="26. BUGS -&gt; 26.3. Safari">3</a>.<a href="#26_3_2" title="26. BUGS -&gt; 26.3. Safari -&gt; 26.3.2. Color Pickers With Gradient example">2</a>. </span>Color Pickers With Gradient example</h3>
+			<a name="27_3_2"></a>
+			<h3 class="heading3" title="27. BUGS -&gt; 27.3. Safari -&gt; 27.3.2. Color Pickers With Gradient example"><span class="headingNumber"><a href="#27" title="27. BUGS">27</a>.<a href="#27_3" title="27. BUGS -&gt; 27.3. Safari">3</a>.<a href="#27_3_2" title="27. BUGS -&gt; 27.3. Safari -&gt; 27.3.2. Color Pickers With Gradient example">2</a>. </span>Color Pickers With Gradient example</h3>
 			<div class="contents3">
 				<p>extremely slow</p>
 			</div>
 			
-			<a name="26_3_3"></a>
-			<h3 class="heading3" title="26. BUGS -&gt; 26.3. Safari -&gt; 26.3.3. ThumbZoom"><span class="headingNumber"><a href="#26" title="26. BUGS">26</a>.<a href="#26_3" title="26. BUGS -&gt; 26.3. Safari">3</a>.<a href="#26_3_3" title="26. BUGS -&gt; 26.3. Safari -&gt; 26.3.3. ThumbZoom">3</a>. </span>ThumbZoom</h3>
+			<a name="27_3_3"></a>
+			<h3 class="heading3" title="27. BUGS -&gt; 27.3. Safari -&gt; 27.3.3. ThumbZoom"><span class="headingNumber"><a href="#27" title="27. BUGS">27</a>.<a href="#27_3" title="27. BUGS -&gt; 27.3. Safari">3</a>.<a href="#27_3_3" title="27. BUGS -&gt; 27.3. Safari -&gt; 27.3.3. ThumbZoom">3</a>. </span>ThumbZoom</h3>
 			<div class="contents3">
 				<table class="list">
 				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>zoom out effect is very choppy</td></tr>
@@ -1678,8 +1723,8 @@ Uize.defer
 			</div>
 		</div>
 		
-		<a name="26_4"></a>
-		<h2 class="heading2" title="26. BUGS -&gt; 26.4. IE (in order of priority)"><span class="headingNumber"><a href="#26" title="26. BUGS">26</a>.<a href="#26_4" title="26. BUGS -&gt; 26.4. IE (in order of priority)">4</a>. </span>IE (in order of priority)</h2>
+		<a name="27_4"></a>
+		<h2 class="heading2" title="27. BUGS -&gt; 27.4. IE (in order of priority)"><span class="headingNumber"><a href="#27" title="27. BUGS">27</a>.<a href="#27_4" title="27. BUGS -&gt; 27.4. IE (in order of priority)">4</a>. </span>IE (in order of priority)</h2>
 		<div class="contents2">
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>"Uize.WiseLoad Example": mouseover opacity effect on thumbnails not working (and trying to enable it using filter:alpha(opacity=...) was completely hosing my machine)</td></tr>

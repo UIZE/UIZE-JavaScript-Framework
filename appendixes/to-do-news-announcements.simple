@@ -1,4 +1,53 @@
-This document lists news official announcements that need to be created for developments that have already taken place.
+This document lists official news announcements that need to be created for developments that have already taken place.
+
+### Updates for Internet Explorer 9
+	Issues Addressed
+		Broken Images in Various Examples Fixed
+			- slideshows, auto tooltips, collection dynamic, etc.
+			- issue had to do with an API change made by Zazzle for their poster prints product refresh
+
+		Broken Styling in Sliders Examples Fixed
+			- some examples with sliders are not observing slider theme properties correctly
+				- basic bevel
+				file:///C:/~uize/UIZE-JavaScript-Framework/examples/sliders-in-color-blender.html
+				file:///C:/~uize/UIZE-JavaScript-Framework/examples/slider-built-in-skin.html?tour=all
+
+			- problem was manifesting as incorrect size for slider knobs and incorrect thickness of borders
+
+			- this was because of a refactoring of the ad hoc registration of set-get properties that introduced a subtle but undesirable change in behavior for registering set-get properties in an ad hoc fashion by setting values for unregistering set-get properties on the class
+
+		Homepage Banner Animation Fixed in IE9
+			- banner animation / reveal on the home page was all screwed up
+
+		Fixed Flickering Issue in IE9 in 3D Rotation Viewer Examples
+			- had to do with using display:block display:none and displayNode for showing frames, rather than visibility:hidden visibility:visible showNode, and IE9 has an optimization where some first time cost of loading and/or rendering is deferred for objects that are initially display:none. Switching to using visibility fixed the flickering issue.
+
+	Outstanding Issues
+		- examples not working correctly
+			- opacity fades are not working correctly in some examples
+				- the share-this-page sidebar
+				- homepage had issue, until workaround added
+				- seems to happen when CSS rule applies base opacity setting
+			- SimpleDoc tester is hosed (perhaps not reading indentation correctly? linebreak handling?)
+			- misc
+				file:///C:/~uize/UIZE-JavaScript-Framework/examples/two-hierarchical-selectors.html
+
+		- SimpleDoc issues
+			- bullets in bullet lists not positioned correctly
+
+	On the Positive Side
+		many examples that were developed to showcase CSS3 features and that only worked fully in FF, Chrome, Safari, and Opera, now work nicely in IE9. We see rounded corners, we see box shadows, but no text shadows yet (boo).
+
+### Fixed Broken Images in Example Pages
+	- broken images in various examples
+		file:///C:/~uize/UIZE-JavaScript-Framework/examples/auto-tooltip-photo-info.html
+		file:///C:/~uize/UIZE-JavaScript-Framework/examples/drag-to-move.html
+		file:///C:/~uize/UIZE-JavaScript-Framework/examples/collection-dynamic.html
+		file:///C:/~uize/UIZE-JavaScript-Framework/examples/mag-view.html
+		file:///C:/~uize/UIZE-JavaScript-Framework/examples/scrolly-carousel.html
+		file:///C:/~uize/UIZE-JavaScript-Framework/examples/thumbzoom.html
+		file:///C:/~uize/UIZE-JavaScript-Framework/examples/collection-item-zooming-with-image-switching.html
+		file:///C:/~uize/UIZE-JavaScript-Framework/examples/collection-item-zooming.html
 
 Unit Test Build Scripts Made Generic
 	=_run-unit-tests-scrunched.js=, and =_run-unit-tests-source.js=

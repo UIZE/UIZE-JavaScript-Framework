@@ -1,0 +1,59 @@
+An issue was discovered with the way that Microsoft's JScript interpreter, which is used in Internet Explorer and Windows Script Host, iterates through arrays in =for...in= loops.
+
+Essentially, when an array is populated using literal syntax (eg. =[0,1,2,3]=), and the value =undefined= is explicitly specified for some of the elements, then the elements whose values are set to =undefined= will not be encountered in a =for...in= loop.
+
+EXAMPLE
+........................................................................................
+var
+	keysHash = {},
+	myArray = ['foo',undefined,'bar'] // element 1 is explicitly initialized to undefined
+;
+for (key in myArray) {
+	keysHash [key] = true;
+}
+alert (keysHash [1]);
+........................................................................................
+
+In the above example, the =alert= statement would alert the value =undefined= in interpreters that exhibit the problematic behavior. This is because element one is not treated as enumerable by JScript in this case. Curiously, however, if the value =undefined= is explicitly assigned to the element, then JScript *will* treat the element as enumerable and it will be encountered in a =for...in= loop.
+
+EXAMPLE
+....................................................................
+var
+	keysHash = {},
+	myArray = ['foo',undefined,'bar']
+;
+
+myArray [1] = undefined; // explicitly assigning the value undefined
+
+for (key in myArray) {
+	keysHash [key] = true;
+}
+alert (keysHash [1]);
+....................................................................
+
+In the above example, the =alert= statement alerts the value =true= - even in interpreters that exhibit the problematic behavior.
+
+It's not clear why the literal syntax initialization produces a sparsely populated array in JScript when some elements are initialized to =undefined=. Regardless of the rationale, this inconsistent behavior causes a problem when using a =for...in= loop to compare arrays for identical elements and custom properties, as was the case with the previous implementation of the =Uize.Data.identical= method defined in the =Uize.Data= module.
+
+Consider the following example...
+
+EXAMPLE
+..............................................................................................
+var
+	array1 = ['foo',undefined,'bar'],
+	array2 = []
+;
+array2 [0] = 'foo';
+array2 [1] = undefined;
+array2 [2] = 'bar';
+
+alert (Uize.Data.identical (array1,array2));  // alerted the value false before the workaround
+..............................................................................................
+
+A workaround was put in place to instead compare elements and custom properties in separate passes. With this workaround, the two arrays in the above example would be considered identical when running in JScript.
+
+....................................................................................
+<< metadata >>
+
+title: 2011-08-30 - Workaround for JScript For In Issue
+....................................................................................

@@ -39,8 +39,6 @@
 			}
 			.mantle img {
 				position:absolute;
-				opacity:.01;
-				filter:alpha(opacity=1);
 			}
 
 			/*** home link ***/
@@ -330,7 +328,7 @@
 
 <div class="mantleBg">
 	<div class="mantle">
-		<img id="page-mantleImage" src="images/mantle6.jpg" alt="UIZE JavaScript Framework"/>
+		<img id="page-mantleImage" src="images/mantle6.jpg" alt="UIZE JavaScript Framework" style="clip:rect(0,0,0,0);"/>
 		<a id="page-homeLink" href="directory.html" title="UIZE JavaScript Framework home"></a>
 	</div>
 </div>
@@ -489,18 +487,18 @@
 		</div>
 	</div>
 
-	<div class="pod podNews">		<a href="latest-news.html" class="podHeading">News - 2011-07-03</a>
+	<div class="pod podNews">		<a href="latest-news.html" class="podHeading">News - 2011-09-22</a>
 		<ul>
+			<li>An issue that was causing button widgets to not have the correct mouse cursor when mousing over them in IE9 has been fixed. [<a href="news/2011-09-22-Buttons-With-Incorrect-Styling-in-IE9-Fixed.html">read more</a>]</li>
+			<li>An issue that was breaking the drag-and-drop functionality of the Uize.Widget.Drag class in IE9 has been fixed. [<a href="news/2011-09-21-Broken-Drag-and-drop-in-IE9-Fixed.html">read more</a>]</li>
+			<li>An issue that was breaking pages of the uize.com Web site in IE9 has been fixed. [<a href="news/2011-09-20-Broken-Pages-in-IE9-Fixed.html">read more</a>]</li>
+			<li>A minor issue that was discovered in Safari with the Uize.clone method when cloning regular expressions (ie. instances of the RegExp object) has been fixed. [<a href="news/2011-09-19-Cloning-of-Regular-Expressions-in-Safari-Fixed.html">read more</a>]</li>
+			<li>A problem that was causing the UIZE Unit Tests page to fail to run the test suite for UIZE has been fixed. [<a href="news/2011-09-18-Fixed-Running-of-Unit-Tests-in-Browser.html">read more</a>]</li>
+			<li>A problem that was discovered with the set-get properties mechanism and its support for ad hoc registration of properties has been fixed. [<a href="news/2011-09-17-Ad-Hoc-Property-Registration-Fixed.html">read more</a>]</li>
+			<li>An issue was discovered with the way that Microsoft&apos;s JScript interpreter, which is used in Internet Explorer and Windows Script Host, iterates through arrays in for...in loops. [<a href="news/2011-08-30-Workaround-for-JScript-For-In-Issue.html">read more</a>]</li>
+			<li>Thorough unit tests have been created for the set-get properties feature implemented in the Uize base class. [<a href="news/2011-07-26-Thorough-Set-get-Properties-Unit-Tests.html">read more</a>]</li>
 			<li>The Uize.set static method and the set instance method, implemented in the Uize base class, have been improved to support an arbitrary number of arguments, allowing the values for multiple set-get properties to be specified as name-value pair arguments. [<a href="news/2011-07-03-Improved-set-Method-in-the-Uize-Base-Class.html">read more</a>]</li>
 			<li>To help ensure the robustness and stability of the UIZE JavaScript Framework over time, more unit tests have been created for the Uize base class. [<a href="news/2011-05-31-More-Uize-Base-Class-Unit-Tests.html">read more</a>]</li>
-			<li>The Uize.pairUp method, implemented in the Uize base class, has been improved with support for two new variations. [<a href="news/2011-05-22-Improved-Uize.pairUp-Method.html">read more</a>]</li>
-			<li>The Uize.Json module has been improved with the addition of two convenient presets for serializing JavaScript objects to strict JSON format, according to the specification at json.org. [<a href="news/2011-05-21-JSON-Serialization-Improvements.html">read more</a>]</li>
-			<li>The declarative syntax for widget properties has been improved to cover more cases. [<a href="news/2011-05-11-Improved-Declarative-Widget-Properties.html">read more</a>]</li>
-			<li>The SimpleDoc format, a  Wikitext like document format for easily writing structured documents, has added support for section title aliases. [<a href="news/2011-05-05-SimpleDoc-Now-Supports-Section-Title-Aliases.html">read more</a>]</li>
-			<li>The new Uize.String.split method, implemented in the Uize.String module, splits a string into an array of elements using the specified splitter string or regular expression, in strict accordance with the ECMA-262 language&apos;s specified behavior for the String object&apos;s split instance method. [<a href="news/2011-04-12-NEW-METHOD-Uize.String.split.html">read more</a>]</li>
-			<li>The new Uize.Color.xCmyk module extends the Uize.Color object by adding a profile for the CMYK color space, and by providing encodings for this color space. [<a href="news/2011-04-03-NEW-MODULE-Uize.Color.xCmyk.html">read more</a>]</li>
-			<li>The UIZE JavaScript Framework is now available on GitHub, so anybody can now fork the project to their heart&apos;s content. [<a href="news/2011-03-29-Uize-on-GitHub.html">read more</a>]</li>
-			<li>The new Color Format Converter Tool lets you easily convert color values from one format to another. [<a href="news/2011-03-24-NEW-EXAMPLE-Color-Format-Converter.html">read more</a>]</li>
 		</ul>
 		<center>
 			<a href="latest-news.html" style="font-weight:bold; font-size:12px; padding-right:16px; background:transparent url(js/Uize_Widget_Tree_List/arrows-orange-collapsed.gif) no-repeat right center;">MORE LATEST NEWS</a>

@@ -1,0 +1,11 @@
+Thorough unit tests have been created for the set-get properties feature implemented in the =Uize= base class.
+
+The set-get properties feature is a critical part of the feature set of the UIZE JavaScript Framework. Because this feature is relied upon so heavily throughout the codebase, comprehensive unit tests are called for. Therefore, unit tests have been added to the =Uize.Test.Uize= test module in order to test the expected behaviors of this feature under an exhaustive array of conditions.
+
+To learn more about set-get properties, consult the [[../explainers/set-get-properties.html][Set-get Properties explainer]].
+
+....................................................................................
+<< metadata >>
+
+title: 2011-07-26 - Thorough Set-get Properties Unit Tests
+....................................................................................

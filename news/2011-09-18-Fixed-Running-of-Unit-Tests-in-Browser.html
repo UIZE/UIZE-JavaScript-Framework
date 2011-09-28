@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2011-09-18 - Fixed Running of Unit Tests in Browser | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="A problem that was causing the UIZE Unit Tests page to fail to run the test suite for UIZE has been fixed."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2011.html" class="breadcrumb breadcrumbWithArrow">2011 NEWS</a>
+	2011-09-18 - Fixed Running of Unit Tests in Browser
+
+</h1>
+
+<div class="main">
+<div class="contents0">
+	<p>A problem that was causing the <a href="../uize-unit-tests.html">UIZE Unit Tests</a> page to fail to run the test suite for UIZE has been fixed.</p>
+	
+	<p>The <a href="../uize-unit-tests.html">UIZE Unit Tests</a> page was failing to run the test suite for UIZE, even though the test suite could be run within Windows Script Host just fine, and even though all the unit tests were passing in WSH. The cause of this problem was a change in the <code><a href="../reference/Uize.Test.html">Uize.Test</a></code> module that broke its support for asynchronous running of tests (running of the tests in the Windows Script Host context is synchronous). This problem has been fixed and the unit tests can once again be run inside Web browsers. To validate the changes, the unit test page was loaded up in the major browsers and the test suite was verified to run and pass all tests in Internet Explorer, Firefox, Safari, Chrome, and Opera.</p>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

@@ -1,0 +1,13 @@
+An issue that was causing button widgets to not have the correct mouse cursor when mousing over them in IE9 has been fixed.
+
+Testing of the examples of the *uize.com* Web site in IE9 revealed an issue with the mouse cursor for button widgets. This issue was caused by a specific change in behavior in IE9, which now only supports the standard =pointer= value for the =cursor= style property, and no longer supports the defunct =hand= value for this property that was required for older versions of IE.
+
+This problem was surfacing with button widgets because the =Uize.Widget.Button= class relies on the =Uize.Node.showClickable= static method of the =Uize.Node= module. The =Uize.Node.showClickable= method, in turn, was always conditionalized to use the =hand= value for Internet Explorer browsers. In order to fix the issue, the IE conditionalization is now limited to major versions earlier than IE9. As part of this fix, the =Uize.Node= module also now provides the =Uize.Node.ieMajorVersion= static property.
+
+With this change, button widgets in the *uize.com* examples should now correctly show the "hand" cursor when mousing over them in IE9, to indicate that they are clickable (unless they are disabled, of course).
+
+....................................................................................
+<< metadata >>
+
+title: 2011-09-22 - Buttons With Incorrect Styling in IE9 Fixed
+....................................................................................

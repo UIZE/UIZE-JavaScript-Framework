@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2011-09-19 - Cloning of Regular Expressions in Safari Fixed | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="A minor issue that was discovered in Safari with the Uize.clone method when cloning regular expressions (ie. instances of the RegExp object) has been fixed."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2011.html" class="breadcrumb breadcrumbWithArrow">2011 NEWS</a>
+	2011-09-19 - Cloning of Regular Expressions in Safari Fixed
+
+</h1>
+
+<div class="main">
+<div class="contents0">
+	<p>A minor issue that was discovered in Safari with the <code>Uize.clone</code> method when cloning regular expressions (ie. instances of the <code><a href="../javascript-reference/RegExp.html">RegExp</a></code> object) has been fixed.</p>
+	
+	<p>Because of a behavior in Safari's JavaScript interpreter, cloning a regular expression using the <code>Uize.clone</code> method was not actually creating a clone but was simply returning a reference to the <code><a href="../javascript-reference/RegExp.html">RegExp</a></code> instance that was to be cloned. A workaround was put in place for the Safari behavior, and cloning regular expressions using the <code>Uize.clone</code> method now works in all major browsers.</p>
+	
+	<p><span class="allCaps">EXAMPLE</span></p>
+	
+	
+<pre class="sample-code">var
+  regExp = /^\d+$/,
+  clonedRegExp = Uize.clone (myRegExp)
+;
+alert (clonedRegExp !== regExp &amp;&amp; clonedRegExp + '' == regExp + '');  // alerts "true"
+</pre>
+	
+	<p>In the above example, the <code>alert</code> statement will display the text "true". This is because the variable <code>clonedRegExp</code> will not be a reference to the same regular expression instance as the <code>regExp</code> variable, because it is a clone. However, if both regular expressions are serialized to strings by coercion, then their serialized values will be identical, because <code>clonedRegExp</code> is a perfect clone of <code>regExp</code>.</p>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

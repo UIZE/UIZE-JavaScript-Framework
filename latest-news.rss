@@ -7,7 +7,7 @@
 		<description>UIZE JavaScript Framework (AJAX, RIA, widgets, JSON, OOP, Class Inheritance, XMLHttpRequest, DOM manipulation, and all that stuff)</description>
 		<language>en-us</language>
 		<copyright>© 1996-2008 UIZE</copyright>
-		<pubDate>Sun, 3 Jul 2011 19:15:31 UT</pubDate>
+		<pubDate>Fri, 23 Sep 2011 06:46:48 UT</pubDate>
 		<ttl>10080</ttl>
 		<image>
 			<title>UIZE JavaScript Framework | Latest News</title>
@@ -18,6 +18,70 @@
 			<description>UIZE JavaScript Framework (AJAX, RIA, widgets, JSON, OOP, Class Inheritance, XMLHttpRequest, DOM manipulation, and all that stuff)</description>
 		</image>
 		<atom10:link xmlns:atom10="http://www.w3.org/2005/Atom" rel="self" href="http://www.uize.com/latest-news.rss" type="application/rss+xml" />
+		<item>
+			<title>2011-09-22 - Buttons With Incorrect Styling in IE9 Fixed</title>
+			<link>http://www.uize.com/news/2011-09-22-Buttons-With-Incorrect-Styling-in-IE9-Fixed.html</link>
+			<guid>http://www.uize.com/news/2011-09-22-Buttons-With-Incorrect-Styling-in-IE9-Fixed.html</guid>
+			<description>An issue that was causing button widgets to not have the correct mouse cursor when mousing over them in IE9 has been fixed.</description>
+			<pubDate>Thu, 22 Sep 2011 07:00:00 UT</pubDate>
+			<feedburner:origLink>http://www.uize.com/news/2011-09-22-Buttons-With-Incorrect-Styling-in-IE9-Fixed.html</feedburner:origLink>
+		</item>
+		<item>
+			<title>2011-09-21 - Broken Drag-and-drop in IE9 Fixed</title>
+			<link>http://www.uize.com/news/2011-09-21-Broken-Drag-and-drop-in-IE9-Fixed.html</link>
+			<guid>http://www.uize.com/news/2011-09-21-Broken-Drag-and-drop-in-IE9-Fixed.html</guid>
+			<description>An issue that was breaking the drag-and-drop functionality of the Uize.Widget.Drag class in IE9 has been fixed.</description>
+			<pubDate>Wed, 21 Sep 2011 07:00:00 UT</pubDate>
+			<feedburner:origLink>http://www.uize.com/news/2011-09-21-Broken-Drag-and-drop-in-IE9-Fixed.html</feedburner:origLink>
+		</item>
+		<item>
+			<title>2011-09-20 - Broken Pages in IE9 Fixed</title>
+			<link>http://www.uize.com/news/2011-09-20-Broken-Pages-in-IE9-Fixed.html</link>
+			<guid>http://www.uize.com/news/2011-09-20-Broken-Pages-in-IE9-Fixed.html</guid>
+			<description>An issue that was breaking pages of the uize.com Web site in IE9 has been fixed.</description>
+			<pubDate>Tue, 20 Sep 2011 07:00:00 UT</pubDate>
+			<feedburner:origLink>http://www.uize.com/news/2011-09-20-Broken-Pages-in-IE9-Fixed.html</feedburner:origLink>
+		</item>
+		<item>
+			<title>2011-09-19 - Cloning of Regular Expressions in Safari Fixed</title>
+			<link>http://www.uize.com/news/2011-09-19-Cloning-of-Regular-Expressions-in-Safari-Fixed.html</link>
+			<guid>http://www.uize.com/news/2011-09-19-Cloning-of-Regular-Expressions-in-Safari-Fixed.html</guid>
+			<description>A minor issue that was discovered in Safari with the Uize.clone method when cloning regular expressions (ie. instances of the RegExp object) has been fixed.</description>
+			<pubDate>Mon, 19 Sep 2011 07:00:00 UT</pubDate>
+			<feedburner:origLink>http://www.uize.com/news/2011-09-19-Cloning-of-Regular-Expressions-in-Safari-Fixed.html</feedburner:origLink>
+		</item>
+		<item>
+			<title>2011-09-18 - Fixed Running of Unit Tests in Browser</title>
+			<link>http://www.uize.com/news/2011-09-18-Fixed-Running-of-Unit-Tests-in-Browser.html</link>
+			<guid>http://www.uize.com/news/2011-09-18-Fixed-Running-of-Unit-Tests-in-Browser.html</guid>
+			<description>A problem that was causing the UIZE Unit Tests page to fail to run the test suite for UIZE has been fixed.</description>
+			<pubDate>Sun, 18 Sep 2011 07:00:00 UT</pubDate>
+			<feedburner:origLink>http://www.uize.com/news/2011-09-18-Fixed-Running-of-Unit-Tests-in-Browser.html</feedburner:origLink>
+		</item>
+		<item>
+			<title>2011-09-17 - Ad Hoc Property Registration Fixed</title>
+			<link>http://www.uize.com/news/2011-09-17-Ad-Hoc-Property-Registration-Fixed.html</link>
+			<guid>http://www.uize.com/news/2011-09-17-Ad-Hoc-Property-Registration-Fixed.html</guid>
+			<description>A problem that was discovered with the set-get properties mechanism and its support for ad hoc registration of properties has been fixed.</description>
+			<pubDate>Sat, 17 Sep 2011 07:00:00 UT</pubDate>
+			<feedburner:origLink>http://www.uize.com/news/2011-09-17-Ad-Hoc-Property-Registration-Fixed.html</feedburner:origLink>
+		</item>
+		<item>
+			<title>2011-08-30 - Workaround for JScript For In Issue</title>
+			<link>http://www.uize.com/news/2011-08-30-Workaround-for-JScript-For-In-Issue.html</link>
+			<guid>http://www.uize.com/news/2011-08-30-Workaround-for-JScript-For-In-Issue.html</guid>
+			<description>An issue was discovered with the way that Microsoft&amp;apos;s JScript interpreter, which is used in Internet Explorer and Windows Script Host, iterates through arrays in for...in loops.</description>
+			<pubDate>Tue, 30 Aug 2011 07:00:00 UT</pubDate>
+			<feedburner:origLink>http://www.uize.com/news/2011-08-30-Workaround-for-JScript-For-In-Issue.html</feedburner:origLink>
+		</item>
+		<item>
+			<title>2011-07-26 - Thorough Set-get Properties Unit Tests</title>
+			<link>http://www.uize.com/news/2011-07-26-Thorough-Set-get-Properties-Unit-Tests.html</link>
+			<guid>http://www.uize.com/news/2011-07-26-Thorough-Set-get-Properties-Unit-Tests.html</guid>
+			<description>Thorough unit tests have been created for the set-get properties feature implemented in the Uize base class.</description>
+			<pubDate>Tue, 26 Jul 2011 07:00:00 UT</pubDate>
+			<feedburner:origLink>http://www.uize.com/news/2011-07-26-Thorough-Set-get-Properties-Unit-Tests.html</feedburner:origLink>
+		</item>
 		<item>
 			<title>2011-07-03 - Improved set Method in the Uize Base Class</title>
 			<link>http://www.uize.com/news/2011-07-03-Improved-set-Method-in-the-Uize-Base-Class.html</link>
@@ -353,70 +417,6 @@
 			<description>The new Button example provides a demonstration of the features of the Uize.Widget.Button widget class.</description>
 			<pubDate>Wed, 7 Jul 2010 07:00:00 UT</pubDate>
 			<feedburner:origLink>http://www.uize.com/news/2010-07-07-NEW-EXAMPLE-Button.html</feedburner:origLink>
-		</item>
-		<item>
-			<title>2010-07-07 - IMPROVED MODULE: Uize.Date.Formatter</title>
-			<link>http://www.uize.com/news/2010-07-07-IMPROVED-MODULE-Uize.Date.Formatter.html</link>
-			<guid>http://www.uize.com/news/2010-07-07-IMPROVED-MODULE-Uize.Date.Formatter.html</guid>
-			<description>The Uize.Date.Formatter module has been improved with the addition of the new {zzz} and {milliseconds} tokens.</description>
-			<pubDate>Wed, 7 Jul 2010 07:00:00 UT</pubDate>
-			<feedburner:origLink>http://www.uize.com/news/2010-07-07-IMPROVED-MODULE-Uize.Date.Formatter.html</feedburner:origLink>
-		</item>
-		<item>
-			<title>2010-06-29 - UIZE Adds Support For Touch</title>
-			<link>http://www.uize.com/news/2010-06-29-UIZE-Adds-Support-For-Touch.html</link>
-			<guid>http://www.uize.com/news/2010-06-29-UIZE-Adds-Support-For-Touch.html</guid>
-			<description>The UIZE JavaScript Framework has added support for the touch interface of Apple&amp;apos;s iPad.</description>
-			<pubDate>Tue, 29 Jun 2010 07:00:00 UT</pubDate>
-			<feedburner:origLink>http://www.uize.com/news/2010-06-29-UIZE-Adds-Support-For-Touch.html</feedburner:origLink>
-		</item>
-		<item>
-			<title>2010-06-28 - UIZE Web Site Revamp</title>
-			<link>http://www.uize.com/news/2010-06-28-UIZE-Web-Site-Revamp.html</link>
-			<guid>http://www.uize.com/news/2010-06-28-UIZE-Web-Site-Revamp.html</guid>
-			<description>The uize.com Web site has been updated with a bright new look and usability improvements for the Apple iPad.</description>
-			<pubDate>Mon, 28 Jun 2010 07:00:00 UT</pubDate>
-			<feedburner:origLink>http://www.uize.com/news/2010-06-28-UIZE-Web-Site-Revamp.html</feedburner:origLink>
-		</item>
-		<item>
-			<title>2010-06-15 - Deprecated Event Management Methods Killed</title>
-			<link>http://www.uize.com/news/2010-06-15-Deprecated-Event-Management-Methods-Killed.html</link>
-			<guid>http://www.uize.com/news/2010-06-15-Deprecated-Event-Management-Methods-Killed.html</guid>
-			<description>A number of instance and static event management methods of the Uize base class that were deprecated back in early June of 2009 have finally been killed.</description>
-			<pubDate>Tue, 15 Jun 2010 07:00:00 UT</pubDate>
-			<feedburner:origLink>http://www.uize.com/news/2010-06-15-Deprecated-Event-Management-Methods-Killed.html</feedburner:origLink>
-		</item>
-		<item>
-			<title>2010-06-07 - NEW MODULE: Uize.Date.Formatter</title>
-			<link>http://www.uize.com/news/2010-06-07-NEW-MODULE-Uize.Date.Formatter.html</link>
-			<guid>http://www.uize.com/news/2010-06-07-NEW-MODULE-Uize.Date.Formatter.html</guid>
-			<description>The new Uize.Date.Formatter module provides methods for formatting and parsing date strings, supporting a wide variety of different formatting options.</description>
-			<pubDate>Mon, 7 Jun 2010 07:00:00 UT</pubDate>
-			<feedburner:origLink>http://www.uize.com/news/2010-06-07-NEW-MODULE-Uize.Date.Formatter.html</feedburner:origLink>
-		</item>
-		<item>
-			<title>2010-06-07 - MIGRATED METHODS: Uize.Date.format, Uize.Date.toPretty</title>
-			<link>http://www.uize.com/news/2010-06-07-MIGRATED-METHODS-Uize.Date.format-Uize.Date.toPretty.html</link>
-			<guid>http://www.uize.com/news/2010-06-07-MIGRATED-METHODS-Uize.Date.format-Uize.Date.toPretty.html</guid>
-			<description>The Uize.Date.format and Uize.Date.toPretty static methods of the Uize.Date module have been migrated into the new Uize.Date.Formatter module.</description>
-			<pubDate>Mon, 7 Jun 2010 07:00:00 UT</pubDate>
-			<feedburner:origLink>http://www.uize.com/news/2010-06-07-MIGRATED-METHODS-Uize.Date.format-Uize.Date.toPretty.html</feedburner:origLink>
-		</item>
-		<item>
-			<title>2010-06-07 - Improved Date Picker Widget</title>
-			<link>http://www.uize.com/news/2010-06-07-Improved-Date-Picker-Widget.html</link>
-			<guid>http://www.uize.com/news/2010-06-07-Improved-Date-Picker-Widget.html</guid>
-			<description>The date picker widget, implemented in the Uize.Widget.Picker.Date module, has been improved to correctly support date entry in a wide variety of different formats.</description>
-			<pubDate>Mon, 7 Jun 2010 07:00:00 UT</pubDate>
-			<feedburner:origLink>http://www.uize.com/news/2010-06-07-Improved-Date-Picker-Widget.html</feedburner:origLink>
-		</item>
-		<item>
-			<title>2010-05-18 - NEW EXAMPLE: Animate Size in JavaScript</title>
-			<link>http://www.uize.com/news/2010-05-18-NEW-EXAMPLE-Animate-Size-in-JavaScript.html</link>
-			<guid>http://www.uize.com/news/2010-05-18-NEW-EXAMPLE-Animate-Size-in-JavaScript.html</guid>
-			<description>The new Animate Size in JavaScript example shows how to animate the size of an HTML element and how to apply amazingly realistic motion effects like easing, elasticity, bounce, and many more.</description>
-			<pubDate>Tue, 18 May 2010 07:00:00 UT</pubDate>
-			<feedburner:origLink>http://www.uize.com/news/2010-05-18-NEW-EXAMPLE-Animate-Size-in-JavaScript.html</feedburner:origLink>
 		</item>
 	</channel>
 </rss>
