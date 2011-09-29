@@ -23,7 +23,7 @@
 	Introduction
 		The =Uize.Node= module facilitates [[http://en.wikipedia.org/wiki/Document_Object_Model][DOM]] manipulation, with support for finding nodes, and querying and modifying their properties, CSS styling, and more.
 
-		*DEVELOPERS:* `Chris van Rensburg`
+		*DEVELOPERS:* `Chris van Rensburg`, `Vinson Chuong`
 
 		Features
 			Node Blob
@@ -83,6 +83,10 @@ Uize.module ({
 				_navigator = _isBrowser ? navigator : {userAgent:'',appName:''},
 				_userAgent = _navigator.userAgent.toLowerCase (),
 				_isIe = _navigator.appName == 'Microsoft Internet Explorer',
+				_ieInnerHtmlReadOnly = {
+					TABLE:_true, THEAD:_true, TFOOT:_true, TBODY:_true, TR:_true, COL:_true, COLGRPUP:_true,
+					FRAMESET:_true, HEAD:_true, HTML:_true, STYLE:_true, TITLE:_true
+				},
 				_isSafari = _userAgent.indexOf ('applewebkit') > -1,
 				_isMozilla = _userAgent.indexOf ('gecko') > -1,
 				_isOpera = _userAgent.indexOf ('opera') > -1,
@@ -567,6 +571,7 @@ Uize.module ({
 					_width = 0,
 					_height = 0,
 					_seen = _true,
+					_percentSeen = 100,
 					_documentElement = _getDocumentScrollElement (),
 					_windowDims = _getDimensions (window)
 				;
@@ -612,7 +617,13 @@ Uize.module ({
 					var
 						_nodeVisible = _seen = !_nodeHidden (_node),
 						_offsetParent = _node,
-						_currentNode = _node
+						_currentNode = _node,
+						_windowWidth = _windowDims.width,
+						_windowHeight = _windowDims.height,
+						_documentElementScrollLeft = _documentElement.scrollLeft,
+						_documentElementScrollTop = _documentElement.scrollTop,
+						_documentElementRight = _documentElementScrollLeft + _windowWidth,
+						_documentElementBottom = _documentElementScrollTop + _windowHeight
 					;
 					while (_currentNode.parentNode && typeof _currentNode.parentNode != 'unknown') {
 						var
@@ -664,8 +675,17 @@ Uize.module ({
 						if (_seen)
 							_seen = _doRectanglesOverlap (
 								_x,_y,_width,_height,
-								_documentElement.scrollLeft,_documentElement.scrollTop,_windowDims.width,_windowDims.height
+								_documentElementScrollLeft,_documentElementScrollTop,_windowWidth,_windowHeight
 							)
+						;
+
+						// if the node is seen, calculate how much of its area is seen
+						_percentSeen = _seen ?
+							((Math.min (_x + _width, _documentElementRight) - Math.min (Math.max (_x, _documentElementScrollLeft), _documentElementRight))
+								* (Math.min (_y + _height, _documentElementBottom) - Math.min (Math.max (_y, _documentElementScrollTop), _documentElementBottom)))
+								/ (_width * _height)
+								* 100 :
+							0
 						;
 				}
 				return {
@@ -678,7 +698,8 @@ Uize.module ({
 					top:_y,
 					right:_x + _width - 1,
 					bottom:_y + _height - 1,
-					seen:_seen
+					seen:_seen,
+					percentSeen:_percentSeen
 				};
 				/*?
 					Static Methods
@@ -997,7 +1018,12 @@ Uize.module ({
 			};
 
 			_package.injectHtml = function (_nodeBlob,_htmlToInject,_mode) {
-				var _isInnerReplace, _isOuterReplace, _isInnerTop, _isOuterTop, _isOuterBottom, _isInnerBottom;
+				var
+					_isInnerReplace, _isOuterReplace, _isInnerTop, _isOuterTop, _isOuterBottom, _isInnerBottom,
+					_areNodes =
+						Uize.isArray (_htmlToInject) ||
+						(_isNode (_htmlToInject) && (_htmlToInject = [_htmlToInject]))
+				;
 				(
 					(_isInnerReplace = _mode == 'inner replace') ||
 					(_isOuterReplace = _mode == 'outer replace') ||
@@ -1006,35 +1032,52 @@ Uize.module ({
 					(_isOuterBottom = _mode == 'outer bottom') ||
 					(_isInnerBottom = _true)
 				);
-				_htmlToInject += ''; // coerce to a string value by invoking valueOf method
+				_areNodes || (_htmlToInject += ''); // coerce to a string value by invoking valueOf method
+
 				_doForAll (
 					_nodeBlob,
 					function (_node) {
 						var _nodeChildNodes = _node.childNodes;
 						function _htmlHasScript (_html) {
-							return _html && /<script/i.test (_html);
+							return _html && /<script/i.test (_html)
 						}
 						function _htmlToInjectHasScript () {
-							return _htmlHasScript (_htmlToInject);
+							return _htmlHasScript (_htmlToInject)
 						}
 						if (
 							(_isInnerReplace || (!_nodeChildNodes.length && (_isInnerTop || _isInnerBottom))) &&
+							!_isNode &&
 							!_htmlToInjectHasScript ()
 						) {
 							_node.innerHTML = _htmlToInject;
-						} else if (_isOuterReplace && _isIe && !_htmlToInjectHasScript ()) {
+						} else if (_isOuterReplace && _isIe && !_isNode && !_htmlToInjectHasScript ()) {
 							_node.outerHTML = _htmlToInject;
 						} else {
-							if (_isInnerReplace) _node.innerHTML = '';
+							if (_isInnerReplace)
+								if (_isIe && _ieInnerHtmlReadOnly [_node.tagName]) {
+									var _newNode = _node.cloneNode ();
+									_node.replaceNode (_newNode);
+									_node = _newNode;
+								} else
+									_node.innerHTML = '';
+							if (_areNodes) {
+								var _nodesToInject = [];
+								for (var _nodeNo = -1, _nodesLength = _htmlToInject.length; ++_nodeNo < _nodesLength;)
+									_nodesToInject.push (_htmlToInject [_nodeNo].cloneNode (_true));
+							} else {
 							var _dummyNode = document.createElement ('DIV');
-							_dummyNode.innerHTML = _htmlToInject;
+								_dummyNode.innerHTML = '<i>e</i>'	// fix for IE NoScope issue (http://www.thecssninja.com/javascript/noscope)
+									+ _htmlToInject
+								;
+								var _nodesToInject = _dummyNode.childNodes
+							}
 							var
 								_nodeToInsertBefore = _isInnerTop
 									? _nodeChildNodes [0]
 									: _isOuterBottom ? _node.nextSibling : _node
 								,
-								_nodesToInject = _dummyNode.childNodes,
-								_nodeParentNode = _node.parentNode
+								_nodeParentNode = _node.parentNode,
+								_nodesToSkip = +!_areNodes // IE NoScope fix not needed when given dom nodes
 							;
 							function _fixCrippledScripts (_node) {
 								if (_node.tagName == 'SCRIPT') {
@@ -1063,8 +1106,10 @@ Uize.module ({
 									;
 								}
 							}
-							while (_nodesToInject.length) {
-								var _childNodeToInject = _nodesToInject [0];
+							while (_nodesToInject.length > _nodesToSkip) {
+								var _childNodeToInject = _areNodes ?
+									_nodesToInject.shift () :
+									_nodesToInject [_nodesToSkip];
 								if (_isInnerBottom || _isInnerReplace) {
 									_node.appendChild (_childNodeToInject);
 								} else if (_isInnerTop) {
@@ -1080,7 +1125,7 @@ Uize.module ({
 										: _nodeParentNode.appendChild (_childNodeToInject)
 									;
 								}
-								_fixCrippledScripts (_childNodeToInject);
+								_areNodes || _fixCrippledScripts (_childNodeToInject); // Assume if given nodes that the proper fixes have already been applied
 							}
 							_isOuterReplace && _nodeParentNode.removeChild (_node);
 						}
@@ -1089,7 +1134,7 @@ Uize.module ({
 				/*?
 					Static Methods
 						Uize.Node.injectHtml
-							Injects the specified HTML markup into the specified `Node Blob`.
+							Injects the specified HTML into the specified `Node Blob`.
 
 							The action of this method is different to simply setting the =innerHTML= property in that it does not replace the existing contents, but instead adds to it.
 
@@ -1098,7 +1143,7 @@ Uize.module ({
 							Uize.Node.injectHtml (nodeBLOB,htmlSTRorOBJ);
 							.............................................
 
-							The =htmlSTRorOBJ= parameter can be a string containing the HTML you wish to inject, or it can be any object that implements a =valueOf= interface (such as an instance of a =Uize= subclass that implements the =value= set-get property).
+							The =htmlSTRorOBJ= parameter can be a DOM node, an array of DOM nodes, a string containing the HTML you wish to inject, or it can be any object that implements a =valueOf= interface (such as an instance of a =Uize= subclass that implements the =value= set-get property).
 
 							VARIATION
 							...........................................................
