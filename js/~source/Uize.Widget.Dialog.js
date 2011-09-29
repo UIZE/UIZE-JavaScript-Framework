@@ -50,7 +50,7 @@ Uize.module ({
 				_sacredEmptyObject = {},
 				_zIndexSlots = {},
 				_totalShown = 0,
-				_browserHasSelectShowThroughIssue = Uize.Node.isIe && navigator.appVersion.indexOf ('MSIE 6') > -1
+				_browserHasSelectShowThroughIssue = _Uize_Node.ieMajorVersion == 6
 			;
 
 		/*** Class Constructor ***/
@@ -247,7 +247,7 @@ Uize.module ({
 				this.fire (_dismissalEvent).abort || this.set ({_shown:_false})
 			};
 
-			var _updateUiPositionIfShown = _classPrototype._updateUiPositionIfShown = function () {
+			var _updateUiPositionIfShown = _classPrototype._updateUiPositionIfShown = _classPrototype.updateUiPositionIfShown = function () {
 				var _this = this;
 				if (_this.isWired && _this._shown && !_this._inDrag) {
 					_Uize_Widget_Drag.resizeShield (_this.getNode ('shield'));
@@ -345,7 +345,13 @@ Uize.module ({
 				_classPrototype.atEndOfOmegaStructor = _classPrototype.afterWireUi = function () {};
 
 			_classPrototype.updateUi = function () {
-				this._updateUiTitle ();
+				var _this = this;
+
+				if (_this.isWired) {
+					_this._updateUiTitle ();
+
+					_superclass.prototype.updateUi.call(_this);
+				}
 			};
 
 			_classPrototype.wireUi = function () {
@@ -489,7 +495,10 @@ Uize.module ({
 				},
 				_height:{
 					name:'height',
-					onChange:_updateUiDimsIfShown
+					onChange:[
+						_updateUiDimsIfShown,
+						_updateUiPositionIfShown
+					]
 					/*?
 						Set-get Properties
 							height
@@ -612,7 +621,7 @@ Uize.module ({
 				_shieldOpacity:{
 					name:'shieldOpacity',
 					onChange:function () {
-						this._shieldShown && this.set ({_currentShieldOpacity:this._shieldOpacity});
+						this._shieldShown && this.set ({_currentShieldOpacity:this._shieldOpacity})
 					},
 					value:.3
 					/*?
@@ -633,7 +642,7 @@ Uize.module ({
 							if (_this._shieldShown) {
 								if (_browserHasSelectShowThroughIssue && _this.getNode ('shield')) {
 									var _ie6SelectHackShield = _this.getNode ('ie6SelectHackShield');
-									if (!_this.getNode ('ie6SelectHackShield')) {
+									if (!_this._dismissOnShieldClick && !_this.getNode ('ie6SelectHackShield')) {
 										_this.flushNodeCache ('ie6SelectHackShield');
 										_this.injectNodeHtml (
 											'shield',
@@ -769,7 +778,10 @@ Uize.module ({
 				},
 				_width:{
 					name:'width',
-					onChange:_updateUiDimsIfShown
+					onChange:[
+						_updateUiDimsIfShown,
+						_updateUiPositionIfShown
+					]
 					/*?
 						Set-get Properties
 							width

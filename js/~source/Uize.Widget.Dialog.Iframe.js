@@ -66,7 +66,8 @@ Uize.module ({
 
 		/*** Public Instance Methods ***/
 			_classPrototype.getContentWindow = function () {
-				return this.getNode ('content').contentWindow;
+				var _contentNode = this.getNode ('content');
+				return _contentNode ? _contentNode.contentWindow : _null;
 			};
 
 		/*** Register Properties ***/
