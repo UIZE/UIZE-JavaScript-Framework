@@ -33,6 +33,13 @@ Uize.module ({
 		'Uize.Node.Classes'
 	],
 	builder:function (_superclass) {
+		/*** Variables for Scruncher Optimization ***/
+			var
+				_true = true,
+				_false = false,
+				_Uize_Node_Classes = Uize.Node.Classes
+			;
+			
 		/*** Class Constructor ***/
 			var
 				_class = _superclass.subclass (),
@@ -44,7 +51,7 @@ Uize.module ({
 				var _this = this;
 
 				_this.isWired
-					&& Uize.Node.Classes.setState(
+					&& _Uize_Node_Classes.setState(
 						_this.getNode('options'),
 						['', _this._expandedCssClass],
 						_this._expanded
@@ -52,16 +59,68 @@ Uize.module ({
 				;
 			};
 			
+			_classPrototype._updateUiFilterVisibility = function() {
+				var
+					_this = this,
+					_allZero = _true
+				;
+				
+				_this.isWired
+					&& _this.forAll(
+						function(_filterWidget) {
+							var
+								_filterCount = _filterWidget.get('count'),
+								_displayFilter = !_this._hideWhenZero
+									|| _filterCount
+							;
+							
+							_filterWidget.displayNode('', _displayFilter);
+							_filterWidget.set({enabled:!_filterCount ? _false : 'inherit'});
+							
+							if (_displayFilter)
+								_allZero = _false;
+						}
+					)
+				;
+				
+				_this.displayNode('', !_allZero && _this.get('values').length > 1);
+			};
+			
 			_classPrototype._updateUiTitle = function() {
 				this.isWired && this.setNodeInnerHtml('title', this._title)
 			};
 
 		/*** Public Instance Methods ***/
+			_classPrototype.updateCounts = function(_counts) {
+				var
+					_this = this,
+					_countsLength = _counts.length
+				;
+				
+				if (_this.isWired) {
+					// NOTE: the count parameter for each filter in the values set
+					// will be out of sync...
+					
+					_counts
+						&& _countsLength
+						&& _this.forAll(
+							function(_filterWidget, _filterNo) {
+								_filterNo < _countsLength
+									&& _filterWidget.set({count:_counts[_filterNo]})
+							}
+						)
+					;
+					
+					_this._updateUiFilterVisibility();
+				}
+			};
+		
 			_classPrototype.updateUi = function () {
 				var _this = this;
 				if (_this.isWired) {
 					_this._updateUiTitle();
 					_this._updateUiExpanded();
+					_this._updateUiFilterVisibility();
 					_superclass.prototype.updateUi.call (_this);
 				}
 			};
@@ -71,12 +130,17 @@ Uize.module ({
 				_expanded:{
 					name:'expanded',
 					onChange:_classPrototype._updateUiExpanded,
-					value:false
+					value:_false
 				},
 				_expandedCssClass:{
 					name:'expandedCssClass',
 					onChange:_classPrototype._updateUiExpanded,
 					value:''
+				},
+				_hideWhenZero:{
+					name:'hideWhenZero',
+					onChange:_classPrototype._updateUiFilterVisibility,
+					value:_true
 				},
 				_title:{
 					name:'title',
@@ -87,7 +151,8 @@ Uize.module ({
 
 		/*** Override Initial Values for Inherited Set-Get Properties ***/
 			_class.set ({
-				optionWidgetClass:Uize.Widget.Button.Filter
+				optionWidgetClass:Uize.Widget.Button.Filter,
+				ensureValueInValues:_true
 			});
 
 		return _class;
