@@ -114,9 +114,13 @@ Uize.module ({
 					onChange:function () {
 						var _this = this;
 						if (_this._playing) {
+						if (_this._interSlideTime && _this._interSlideTime < 0) {							
+							_this.set({ playing: false });
+						} else {
 							_this._clearResumeTimeout ();
 							_this._clearAutoAdvanceTimeout ();
 							_this._autoAdvanceTimeout = setTimeout (function () {_this._autoAdvance ()},_this._interSlideTime);
+						}
 						} else {
 							_this._clearAutoAdvanceTimeout ();
 							_this._clearResumeTimeout ();
