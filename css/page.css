@@ -396,8 +396,6 @@
 		-moz-border-radius:10px;
 		-webkit-border-radius:10px;
 		z-index:1;
-		opacity:.01;
-		filter:alpha(opacity=1);
 	}
 	.shareThisPanel .shareThisHeading, .shareThisPanel .shareThisFooter {
 		font-size:10px;

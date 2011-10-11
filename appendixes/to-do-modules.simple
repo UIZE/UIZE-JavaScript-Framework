@@ -1,5 +1,30 @@
 This document lists to do tasks related to specific JavaScript modules of the UIZE JavaScript Framework.
 
+## TO FILE
+	Uize.safe = function (_function) {
+		return function () {try {_function.apply (this,arguments)} catch (_error) {}};
+	};
+
+	Uize.cycleCalls = function () {
+		var
+			_functionNo = 0,
+			_arguments = arguments,
+			_totalFunctions = arguments.length
+		;
+		return function () {
+			_arguments [_functionNo].apply (this,arguments);
+			_functionNo = (_functionNo + 1) % _totalFunctions;
+		};
+	}
+	
+	function (value) {return _function ('foo','bar',value,'hello')}
+	
+	js. (_function,['foo','bar',0,'hello'],2)
+	
+	js.makeCaller (Math.pow,[0,2],0);
+	
+	function (value) {return Math.pow (value,2)}
+
 Uize
 	Conditions
 		The whenever Instance Method

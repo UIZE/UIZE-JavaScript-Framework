@@ -1,0 +1,22 @@
+Various JavaScript examples on the *uize.com* Web site that had become victims to bit rot have been restored to their former glory.
+
+Broken Styling in Sliders Examples Fixed
+	A number of the JavaScript examples that use slider widgets (ie. instances of the =Uize.Widget.Bar.Slider= class) that had been broken by a change in the set-get properties mechanism have now been fixed.
+
+	The problem with the slider examples was manifesting as incorrect size for slider knobs and incorrect thickness of borders. The cause of the problem was a refactoring of the ad hoc registration of set-get properties that introduced a subtle but undesirable change in behavior for registering set-get properties in an ad hoc fashion by setting values for unregistering set-get properties on the class. The earlier behavior of the set-get properties mechanism has been restored and unit tests have been written to ensure compliance going forward.
+
+Fixed Flickering Issue in IE9 in 3D Rotation Viewer Examples
+	An issue with flickering in the [[../examples/3d-rotation-viewer.html][3D Rotation Viewer]] example that was seen in IE9 has been fixed.
+
+	The cause of the issue had to do with the use of the =displayNode= instance method of the =Uize.Widget= class for showing frames of the 3D rotation. For the 3D frame DOM nodes that were not yet visible and whose =display= style property was set to =none=, IE9 was not loading and/or setting up the image object, probably as part of general smart performance optimization of the browser. The negative side effect of the optimization was that the frames would not be immediately visible when rotating to them, causing a one time flickering effect as the view was rotated. Switching to using the =visibility= style property (by using the =showNode= instance method of the =Uize.Widget= class) fixed the flickering issue.
+
+Broken Images in Various Examples Fixed
+	A number of JavaScript examples that were displaying broken images have been fixed, including numerous slideshow examples and examples using image thumbnails.
+
+	The cause of the problem was a change in an image API that was made by Zazzle as part of their poster prints product refresh (yes, many of the images used in the examples are hosted on *zazzle.com*). URLs for the broken images have been updated to use the new query parameters and the images now display correctly in the examples. There still remains a couple of examples with images that are broken because of a different issue, and these examples will be fixed in a future release. 
+ 
+....................................................................................
+<< metadata >>
+
+title: 2011-10-11 - Various Broken Examples Fixed
+....................................................................................

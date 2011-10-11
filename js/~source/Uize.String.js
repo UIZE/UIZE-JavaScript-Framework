@@ -444,7 +444,12 @@ Uize.module ({
 						return _splitter.test ('') ? [] : [''];
 					}
 				} else {
-					return _sourceStr.split (_splitter,_limit);
+					var _arguments = [_splitter + '',_limit];
+					/* NOTE:
+						We coerce the splitter to a string, because Firefox 6 introduced an issue where an undefined splitter was no longer being treated as the string "undefined", where all other JS interpreters do handle it this way. FF6 doesn't even seem to default an undefined splitter to ",", but just doesn't split the source string at all with this value.
+					*/
+					_arguments.length = arguments.length - 1;
+					return _sourceStr.split.apply (_sourceStr,_arguments);
 				}
 				/*?
 					Static Methods

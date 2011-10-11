@@ -210,6 +210,7 @@
 			}
 			table.list .bullet {
 				padding-left:15px;
+				line-height:15px;
 				background:url(../js/Uize_Widget_Tree_List/arrows-orange-bullet.gif) no-repeat 3px center;
 			}
 
