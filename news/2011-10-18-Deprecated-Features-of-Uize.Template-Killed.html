@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2011-10-18 - Deprecated Features of Uize.Template Killed | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="The Uize.Template.encoders and Uize.Template.decoders static properties of the Uize.Template module, that were deprecated back in April of 2010, have finally been killed."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2011.html" class="breadcrumb breadcrumbWithArrow">2011 NEWS</a>
+	2011-10-18 - Deprecated Features of Uize.Template Killed
+
+</h1>
+
+<div class="main">
+<div class="contents0">
+	<p>The <code>Uize.Template.encoders</code> and <code>Uize.Template.decoders</code> static properties of the <code><a href="../reference/Uize.Template.html">Uize.Template</a></code> module, that were deprecated back in April of 2010, have finally been killed.</p>
+	
+	<p>The deprecated <code>Uize.Template.encoders</code> and <code>Uize.Template.decoders</code> static properties were replaced with the better conceived <code>Uize.Template.encodings</code> static property. Code that may have been written to access the <code>Uize.Template.encoders</code> and/or <code>Uize.Template.decoders</code> properties will need to be updated in order to continue working after this latest change. Fortunately, accessing these two properties was a somewhat esoteric use case, so it is unlikely that killing them will affect much - if any - code.</p>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

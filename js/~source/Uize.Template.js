@@ -133,11 +133,7 @@
 
 Uize.module ({
 	name:'Uize.Template',
-	required:[
-		'Uize.Url',   // DEPRECATED (see documentation)
-		'Uize.Json',  // DEPRECATED (see documentation)
-		'Uize.String'
-	],
+	required:'Uize.String',
 	builder:function () {
 		/*** Variables for Scruncher Optimization ***/
 			var
@@ -729,83 +725,74 @@ Uize.module ({
 									The benefit of using the =Uize.Template.decode= method is that it does the reverse mapping for you, which is especially useful if you have a specific `Encodings Chain` stored in some string variable and you want to easily encode to and decode from that compound encoding.
 					*/
 
-			var
-				_encoders = _package.encoders = {}, // DEPRECATED (see documentation)
-				_decoders = _package.decoders = {}, // DEPRECATED (see documentation)
-				_defineStandardEncoding = _package.defineStandardEncoding = function (
-					_encodingName,_moduleName,_encoderMethodName,_decoderMethodName
-				) {
-					var
-						_decoderCallPrefix = _moduleName + '.' + _decoderMethodName + ' (',
-						_encoderCallPrefix = _moduleName + '.' + _encoderMethodName + ' ('
-					;
-					if (_moduleName == 'Uize.Json' || _moduleName == 'Uize.Url') { // DEPRECATED (see documentation)
-						var _module = eval (_moduleName);
-						_encoders [_encodingName] = {encoder:_module [_encoderMethodName]};
-						_decoders [_encodingName] = {decoder:_module [_decoderMethodName]};
-					}
-					_package.encodings [_encodingName] = {
-						to:{
-							required:_moduleName,
-							expansion:function (_valueStr,_optionsStr) {
-								return _encoderCallPrefix + _valueStr + (_optionsStr && ',') + _optionsStr + ')'
-							}
-						},
-						from:{
-							required:_moduleName,
-							expansion:function (_valueStr,_optionsStr) {
-								return _decoderCallPrefix + _valueStr + (_optionsStr && ',') + _optionsStr + ')'
-							}
+			var _defineStandardEncoding = _package.defineStandardEncoding = function (
+				_encodingName,_moduleName,_encoderMethodName,_decoderMethodName
+			) {
+				var
+					_decoderCallPrefix = _moduleName + '.' + _decoderMethodName + ' (',
+					_encoderCallPrefix = _moduleName + '.' + _encoderMethodName + ' ('
+				;
+				_package.encodings [_encodingName] = {
+					to:{
+						required:_moduleName,
+						expansion:function (_valueStr,_optionsStr) {
+							return _encoderCallPrefix + _valueStr + (_optionsStr && ',') + _optionsStr + ')'
 						}
-					};
-					/*?
-						Static Methods
-							Uize.Template.defineStandardEncoding
-								Lets you conveniently extend the =Uize.Template= module by defining a new `Standard Encoding`.
+					},
+					from:{
+						required:_moduleName,
+						expansion:function (_valueStr,_optionsStr) {
+							return _decoderCallPrefix + _valueStr + (_optionsStr && ',') + _optionsStr + ')'
+						}
+					}
+				};
+				/*?
+					Static Methods
+						Uize.Template.defineStandardEncoding
+							Lets you conveniently extend the =Uize.Template= module by defining a new `Standard Encoding`.
 
-								SYNTAX
-								......................................................................................
-								Uize.Template.defineStandardEncoding (
-									encodingNameSTR,       // name of the encoding
-									moduleNameSTR,         // name of module containing the encoder and decoder methods
-									encoderMethodNameSTR,  // name of the encoder static method
-									decoderMethodNameSTR   // name of the decoder static method
-								);
-								......................................................................................
+							SYNTAX
+							......................................................................................
+							Uize.Template.defineStandardEncoding (
+								encodingNameSTR,       // name of the encoding
+								moduleNameSTR,         // name of module containing the encoder and decoder methods
+								encoderMethodNameSTR,  // name of the encoder static method
+								decoderMethodNameSTR   // name of the decoder static method
+							);
+							......................................................................................
 
-								The =Uize.Template.defineStandardEncoding= method provides a shortcut way of defining an encoding for the common case where the encoding's encoder and decoder functions are static methods of the same module. Instead of having to specify the whole `Encoding Profile` structure, the =Uize.Template.defineStandardEncoding= method takes care of building it for you, from the details you provide in the =encodingNameSTR=, =moduleNameSTR=, =encoderMethodNameSTR=, and =decoderMethodNameSTR= parameters.
+							The =Uize.Template.defineStandardEncoding= method provides a shortcut way of defining an encoding for the common case where the encoding's encoder and decoder functions are static methods of the same module. Instead of having to specify the whole `Encoding Profile` structure, the =Uize.Template.defineStandardEncoding= method takes care of building it for you, from the details you provide in the =encodingNameSTR=, =moduleNameSTR=, =encoderMethodNameSTR=, and =decoderMethodNameSTR= parameters.
 
-								Parameters
-									encodingNameSTR
-										A string, specifying the name of the encoding.
+							Parameters
+								encodingNameSTR
+									A string, specifying the name of the encoding.
 
-										The value of the =encodingNameSTR= parameter will be used as the name of the property assigned on the =Uize.Template.encodings= object to store the `Encoding Profile` for the newly defined encoding.
+									The value of the =encodingNameSTR= parameter will be used as the name of the property assigned on the =Uize.Template.encodings= object to store the `Encoding Profile` for the newly defined encoding.
 
-									moduleNameSTR
-										A string, specifying the name of the module that contains the encoder and decoder methods for the encoding.
+								moduleNameSTR
+									A string, specifying the name of the module that contains the encoder and decoder methods for the encoding.
 
-									encoderMethodNameSTR
-										A string, specifying the name of the static method that is to be used for encoding, and that is defined inside the module specified by the =moduleNameSTR= parameter.
+								encoderMethodNameSTR
+									A string, specifying the name of the static method that is to be used for encoding, and that is defined inside the module specified by the =moduleNameSTR= parameter.
 
-										The value of this parameter should not include the module name specified in the =moduleNameSTR= parameter. For example, for the static method =Uize.Json.to=, the value ='to'= should be specified for the =encoderMethodNameSTR= parameter.
+									The value of this parameter should not include the module name specified in the =moduleNameSTR= parameter. For example, for the static method =Uize.Json.to=, the value ='to'= should be specified for the =encoderMethodNameSTR= parameter.
 
-									decoderMethodNameSTR
-										A string, specifying the name of the static method that is to be used for decoding, and that is defined inside the module specified by the =moduleNameSTR= parameter.
+								decoderMethodNameSTR
+									A string, specifying the name of the static method that is to be used for decoding, and that is defined inside the module specified by the =moduleNameSTR= parameter.
 
-										The value of this parameter should not include the module name specified in the =moduleNameSTR= parameter. For example, for the static method =Uize.Json.from=, the value ='from'= should be specified for the =decoderMethodNameSTR= parameter.
+									The value of this parameter should not include the module name specified in the =moduleNameSTR= parameter. For example, for the static method =Uize.Json.from=, the value ='from'= should be specified for the =decoderMethodNameSTR= parameter.
 
-								EXAMPLE
-								......................................................................
-								Uize.Template.defineStandardEncoding ('json','Uize.Json','to','from');
-								......................................................................
+							EXAMPLE
+							......................................................................
+							Uize.Template.defineStandardEncoding ('json','Uize.Json','to','from');
+							......................................................................
 
-								The above example defines the =json= `Standard Encoding`. The value of the =encodingNameSTR= parameter is ='json'=. The value of the =moduleNameSTR= parameter is ='Uize.Json'=, because the =Uize.Json= module is the module that contains the encoder and decoder methods for this encoding. The value of the =encoderMethodNameSTR= parameter is ='to'=, because the =Uize.Json.to= static method is to be used for encoding. Similarly, the value of the =decoderMethodNameSTR= parameter is ='from'=, because the =Uize.Json.from= static method is to be used for decoding.
+							The above example defines the =json= `Standard Encoding`. The value of the =encodingNameSTR= parameter is ='json'=. The value of the =moduleNameSTR= parameter is ='Uize.Json'=, because the =Uize.Json= module is the module that contains the encoder and decoder methods for this encoding. The value of the =encoderMethodNameSTR= parameter is ='to'=, because the =Uize.Json.to= static method is to be used for encoding. Similarly, the value of the =decoderMethodNameSTR= parameter is ='from'=, because the =Uize.Json.from= static method is to be used for decoding.
 
-								NOTES
-								- see the related =Uize.Template.encodings= static property
-					*/
-				}
-			;
+							NOTES
+							- see the related =Uize.Template.encodings= static property
+				*/
+			};
 
 		/*** Public Static Properties ***/
 			_package.encodings = {};
@@ -958,7 +945,6 @@ Uize.module ({
 			_package.encodings.miniJson.to.expansion =
 				function (_valueStr) {return 'Uize.Json.to (' + _valueStr + ',\'mini\')'}
 			;
-			_encoders.miniJson.encoder = function (_toEncode) {return Uize.Json.to (_toEncode,'mini')}; // DEPRECATED (see documentation)
 				/*?
 					Static Properties
 						Uize.Template.encodings
@@ -1365,41 +1351,6 @@ Uize.module ({
 							NOTES
 							- the =urlPiece= encoding is defined by the =Uize.Template.encodings.urlPiece= static property
 							- see the related =url= and =urlParams= encodings
-				*/
-
-			/*** deprecated old style encoders and decoders (for backwards compatibility) ***/
-				/*?
-					Deprecated Features
-						Uize.Template.encoders -- DEPRECATED 2010-04-15
-							This static property has been deprecated in favor of the improved =Uize.Template.encodings= static property.
-
-							Uize.Template.encoders.json -- DEPRECATED 2010-04-15
-								This encoder function has been deprecated and has been subsumed by the new =Uize.Template.encodings.json= `Encoding Profile`.
-
-							Uize.Template.encoders.miniJson -- DEPRECATED 2010-04-15
-								This encoder function has been deprecated and has been subsumed by the new =Uize.Template.encodings.miniJson= `Encoding Profile`.
-
-							Uize.Template.encoders.url -- DEPRECATED 2010-04-15
-								This encoder function has been deprecated and has been subsumed by the new =Uize.Template.encodings.url= `Encoding Profile`.
-
-							Uize.Template.encoders.urlParams -- DEPRECATED 2010-04-15
-								This encoder function has been deprecated and has been subsumed by the new =Uize.Template.encodings.urlParams= `Encoding Profile`.
-
-							Uize.Template.encoders.urlPiece -- DEPRECATED 2010-04-15
-								This encoder function has been deprecated and has been subsumed by the new =Uize.Template.encodings.urlPiece= `Encoding Profile`.
-
-						Uize.Template.decoders
-							Uize.Template.decoders.json -- DEPRECATED 2010-04-15
-								This encoder function has been deprecated and has been subsumed by the new =Uize.Template.encodings.json= `Encoding Profile`.
-
-							Uize.Template.decoders.miniJson -- DEPRECATED 2010-04-15
-								This encoder function has been deprecated and has been subsumed by the new =Uize.Template.encodings.miniJson= `Encoding Profile`.
-
-							Uize.Template.decoders.urlParams -- DEPRECATED 2010-04-15
-								This encoder function has been deprecated and has been subsumed by the new =Uize.Template.encodings.urlParams= `Encoding Profile`.
-
-							Uize.Template.decoders.urlPiece -- DEPRECATED 2010-04-15
-								This encoder function has been deprecated and has been subsumed by the new =Uize.Template.encodings.urlPiece= `Encoding Profile`.
 				*/
 
 		return _package;

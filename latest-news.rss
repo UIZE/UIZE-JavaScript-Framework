@@ -7,7 +7,7 @@
 		<description>UIZE JavaScript Framework (AJAX, RIA, widgets, JSON, OOP, Class Inheritance, XMLHttpRequest, DOM manipulation, and all that stuff)</description>
 		<language>en-us</language>
 		<copyright>© 1996-2008 UIZE</copyright>
-		<pubDate>Tue, 11 Oct 2011 14:50:06 UT</pubDate>
+		<pubDate>Wed, 19 Oct 2011 05:00:46 UT</pubDate>
 		<ttl>10080</ttl>
 		<image>
 			<title>UIZE JavaScript Framework | Latest News</title>
@@ -18,6 +18,14 @@
 			<description>UIZE JavaScript Framework (AJAX, RIA, widgets, JSON, OOP, Class Inheritance, XMLHttpRequest, DOM manipulation, and all that stuff)</description>
 		</image>
 		<atom10:link xmlns:atom10="http://www.w3.org/2005/Atom" rel="self" href="http://www.uize.com/latest-news.rss" type="application/rss+xml" />
+		<item>
+			<title>2011-10-18 - Deprecated Features of Uize.Template Killed</title>
+			<link>http://www.uize.com/news/2011-10-18-Deprecated-Features-of-Uize.Template-Killed.html</link>
+			<guid>http://www.uize.com/news/2011-10-18-Deprecated-Features-of-Uize.Template-Killed.html</guid>
+			<description>The Uize.Template.encoders and Uize.Template.decoders static properties of the Uize.Template module, that were deprecated back in April of 2010, have finally been killed.</description>
+			<pubDate>Tue, 18 Oct 2011 07:00:00 UT</pubDate>
+			<feedburner:origLink>http://www.uize.com/news/2011-10-18-Deprecated-Features-of-Uize.Template-Killed.html</feedburner:origLink>
+		</item>
 		<item>
 			<title>2011-10-11 - Various Broken Examples Fixed</title>
 			<link>http://www.uize.com/news/2011-10-11-Various-Broken-Examples-Fixed.html</link>
@@ -409,14 +417,6 @@
 			<description>The new Uize.Widget.Log.InstanceEvents module implements a log interface for logging the instance events of an instance of a Uize subclass.</description>
 			<pubDate>Wed, 7 Jul 2010 07:00:00 UT</pubDate>
 			<feedburner:origLink>http://www.uize.com/news/2010-07-07-NEW-MODULE-Uize.Widget.Log.InstanceEvents.html</feedburner:origLink>
-		</item>
-		<item>
-			<title>2010-07-07 - NEW MODULE: Uize.Widget.Log</title>
-			<link>http://www.uize.com/news/2010-07-07-NEW-MODULE-Uize.Widget.Log.html</link>
-			<guid>http://www.uize.com/news/2010-07-07-NEW-MODULE-Uize.Widget.Log.html</guid>
-			<description>The new Uize.Widget.Log module implements a very basic logging widget, to serve as a base class for more specialized logging widget subclasses.</description>
-			<pubDate>Wed, 7 Jul 2010 07:00:00 UT</pubDate>
-			<feedburner:origLink>http://www.uize.com/news/2010-07-07-NEW-MODULE-Uize.Widget.Log.html</feedburner:origLink>
 		</item>
 	</channel>
 </rss>

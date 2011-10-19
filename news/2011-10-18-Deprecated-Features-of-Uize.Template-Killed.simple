@@ -1,0 +1,9 @@
+The =Uize.Template.encoders= and =Uize.Template.decoders= static properties of the =Uize.Template= module, that were deprecated back in April of 2010, have finally been killed.
+
+The deprecated =Uize.Template.encoders= and =Uize.Template.decoders= static properties were replaced with the better conceived =Uize.Template.encodings= static property. Code that may have been written to access the =Uize.Template.encoders= and/or =Uize.Template.decoders= properties will need to be updated in order to continue working after this latest change. Fortunately, accessing these two properties was a somewhat esoteric use case, so it is unlikely that killing them will affect much - if any - code.
+
+....................................................................................
+<< metadata >>
+
+title: 2011-10-18 - Deprecated Features of Uize.Template Killed
+....................................................................................
