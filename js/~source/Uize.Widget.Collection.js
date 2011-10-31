@@ -23,7 +23,7 @@
 	Introduction
 		The =Uize.Widget.Collection= class manages a collection of items, with support for managing selected state, and methods for manipulating the collection.
 
-		*DEVELOPERS:* `Chris van Rensburg`, `Jan Borgersen`, `Guang-yu Xu`
+		*DEVELOPERS:* `Chris van Rensburg`, `Jan Borgersen`, `Guang-yu Xu`, `Vinson Chuong`
 
 		In a Nutshell
 			The =Uize.Widget.Collection= class implements a widget for managing a collection of items, with support for managing selected state of items (including non-contiguous selection, range selection, and controls for selecting all, selecting none, and removing selected items), and methods by which application code can manipulate the collection.
@@ -418,6 +418,34 @@ Uize.module ({
 						Uize.copyInto (_widgetProperties,_this.getItemWidgetProperties ())
 					)
 				;
+
+				_this.wireItemWidget (_itemWidget);
+				_this._itemWidgets.push (_itemWidget);
+				_this.isWired && _itemWidget.insertOrWireUi ();
+				return _itemWidget;
+				/*?
+					Instance Methods
+						addItemWidget
+							Lets you add an item widget to the collection, returning a reference to the item widget added.
+
+							SYNTAX
+							.....................................................................................
+							itemWidgetOBJ = myInstance.addItemWidget (itemWidgetNameSTR,itemWidgetPropertiesOBJ);
+							.....................................................................................
+
+							The value of the =itemWidgetNameSTR= parameter should be the widget name for the item widget that will be added as a child of the collection widget. The value of this parameter can be any string, so long as it doesn't collide with the names of existing child widgets of the collection widget, including the various button widgets of the class, and other existing item widgets. A value for this parameter can be generated using the =makeItemWidgetName= hook method.
+
+							The value of the =itemWidgetPropertiesOBJ= parameter should be an object containing the values for set-get properties of the item widget to be created. This object will be modified by the =addItemWidget= method, by copying in the properties of the object returned by the =getItemWidgetProperties= hook method.
+
+							NOTES
+							- see the related =makeItemWidgetName= hook method
+							- see the related =wireItemWidget= hook method
+				*/
+			};
+
+			_classPrototype.wireItemWidget = function (_itemWidget) {
+				var _this = this;
+
 				_itemWidget.wire ({
 					'Changed.selected':
 						function () {
@@ -463,6 +491,17 @@ Uize.module ({
 								;
 							}
 						},
+					'Item Changed':
+						function () {
+							var
+								_index,
+								_itemWidgets = _this._itemWidgets
+							;
+							for (var widgetNo = -1; ++widgetNo < _itemWidgets.length;)
+								if (_itemWidgets[widgetNo] == _itemWidget) _index = widgetNo;
+							_this._items [_index] = Uize.clone (_itemWidget.get ('properties'));
+							_this._fireItemsChangedEvent ()
+						},
 					Remove:
 						function (_event) {
 							_this._removeWithConfirm (
@@ -473,27 +512,17 @@ Uize.module ({
 							);
 						}
 				});
-				_this._itemWidgets.push (_itemWidget);
-				_this.isWired && _itemWidget.insertOrWireUi ();
-				return _itemWidget;
+			};
 				/*?
 					Instance Methods
-						addItemWidget
-							Lets you add an item widget to the collection, returning a reference to the item widget added.
+						wireItemWidget
+							A hook allowing subclasses to post-process new item widgets
 
 							SYNTAX
 							.....................................................................................
-							itemWidgetOBJ = myInstance.addItemWidget (itemWidgetNameSTR,itemWidgetPropertiesOBJ);
+							myInstance.wireItemWidget (itemWidgetOBJ);
 							.....................................................................................
-
-							The value of the =itemWidgetNameSTR= parameter should be the widget name for the item widget that will be added as a child of the collection widget. The value of this parameter can be any string, so long as it doesn't collide with the names of existing child widgets of the collection widget, including the various button widgets of the class, and other existing item widgets. A value for this parameter can be generated using the =makeItemWidgetName= hook method.
-
-							The value of the =itemWidgetPropertiesOBJ= parameter should be an object containing the values for set-get properties of the item widget to be created. This object will be modified by the =addItemWidget= method, by copying in the properties of the object returned by the =getItemWidgetProperties= hook method.
-
-							NOTES
-							- see the related =makeItemWidgetName= hook method
 				*/
-			};
 
 			_classPrototype.forAll = _classPrototype._forAll = function (_function) {
 				for (
@@ -839,6 +868,7 @@ Uize.module ({
 				;
 				if (_itemWidgetsRemovedLength == _itemWidgetsLength) {
 					_this._removeAllItemsUiAndWidget ();
+					_items.length = 0;
 				} else {
 					/*** find the items(s) in the array and remove ***/
 						_itemWidgetsRemoved = [];
@@ -1056,18 +1086,23 @@ Uize.module ({
 					name:'items',
 					value:[],
 					onChange:function () {
-						var _this = this;
+						var
+							_this = this,
+							_items = _this._items
+						;
 
 						/** first remove the old items UI **/
 							_this._removeAllItemsUiAndWidget();
 
 						/*** create item widgets ***/
+							if (_items) {
 							for (
-								var _itemNo = -1, _items = _this._items, _itemsLength = _items.length;
+									var _itemNo = -1, _itemsLength = _items.length;
 								++_itemNo < _itemsLength;
 							) {
 								var _item = _items [_itemNo];
 								_this.addItemWidget (_this.makeItemWidgetName (_item),{properties:_item});
+							}
 							}
 
 						_this._fireItemsChangedEvent ();

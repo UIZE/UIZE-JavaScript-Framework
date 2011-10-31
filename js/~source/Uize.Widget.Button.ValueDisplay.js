@@ -21,7 +21,7 @@
 
 /*?
 	Introduction
-		The =Uize.Widget.Button.ValueDisplay= widget provides the base functionality for connecting a =Uize.Widget.Button= widget (or subclass) to a =Uize.Widget.ValueDisplay= widget (or subclass).
+		The =Uize.Widget.Button.ValueDisplay= widget provides the base functionality for button widget that wants to display details about a value.
 
 		*DEVELOPERS:* `Ben Ilegbodu`
 */
@@ -30,50 +30,16 @@ Uize.module ({
 	name:'Uize.Widget.Button.ValueDisplay',
 	builder:function (_superclass) {
 		/*** Class Constructor ***/
-			var _class = _superclass.subclass (
-				null,
-				function() {
-					var _this = this;
-					
-					_this._valueDisplayWidgetClass
-						&& _this.addChild(
-							'valueDisplay',
-							_this._valueDisplayWidgetClass,
-							Uize.copyInto(
-								{
-									value:_this._value,
-									valueDetails:_this._valueDetails
-								},
-								_this._valueDisplayWidgetProperties
-							)
-						)
-					;
-				}
-			);
+			var _class = _superclass.subclass ();
 
 		/*** Register Properties ***/
-			function _handleValueAndValueDetailsChange() {
-				var _valueDisplay = this.children.valueDisplay;
-
-				_valueDisplay
-					&& _valueDisplay.set({
-						value:this._value,
-						valueDetails:this._valueDetails
-					})
-				;
-			}
-		
 			_class.registerProperties ({
-				_value:{
-					name:'value',
-					onChange:_handleValueAndValueDetailsChange
-				},
+				_defaultValueDetails:'defaultValueDetails',
+				_value:'value',
 				_valueDetails:{
 					name:'valueDetails',
-					onChange:_handleValueAndValueDetailsChange
-				},
-				_valueDisplayWidgetClass:'valueDisplayWidgetClass',
-				_valueDisplayWidgetProperties:'valueDisplayWidgetProperties'
+					conformer:function(_valueDetails) { return _valueDetails || this._defaultValueDetails }
+				}
 			});
 
 		return _class;

@@ -91,7 +91,8 @@ Uize.module ({
 						mouseout:['','Out'],
 						mousedown:['down','Down'],
 						mouseup:['over','Up'],
-						click:['over','Click']
+						click:['over','Click'],
+						dblclick:['over','Double Click']
 					}
 			;
 
@@ -99,11 +100,11 @@ Uize.module ({
 			_classPrototype._tooltipShown = _false;
 
 		/*** Private Instance Methods ***/
-			_classPrototype._isClickable = function () {
+			_classPrototype._isClickable = function (_ignoreSelected) {
 				var _this = this;
 				return !!(
 					_this.get ('enabledInherited') && !_this.get ('busyInherited') &&
-					(!_this._selected || _this._clickToDeselect || _this._allowClickWhenSelected)
+					(_ignoreSelected || !_this._selected || _this._clickToDeselect || _this._allowClickWhenSelected)
 				);
 			};
 
@@ -231,7 +232,7 @@ Uize.module ({
 					var
 						_domEventType = _domEvent.type,
 						_isClickEvent = _domEventType == 'click',
-						_isClickable = _this._isClickable ()
+						_isClickable = _this._isClickable (_domEventType == 'dblclick')
 					;
 
 					/*** deferred wiring of other events (for performance) ***/
@@ -243,7 +244,8 @@ Uize.module ({
 								{
 									mouseout:_setStateAndFireEvent,
 									mousedown:_setStateAndFireEvent,
-									mouseup:_setStateAndFireEvent
+									mouseup:_setStateAndFireEvent,
+									dblclick:_setStateAndFireEvent
 								}
 							);
 						}
@@ -261,7 +263,15 @@ Uize.module ({
 									This event is fired after the related =Up= instance event. When this event is fired, the value of the =state= set-get property will be ='over'=. The event object for this event will have a =domEvent= property that is a reference to the browser event object associated to the event on the DOM node. This =domEvent= object can be used to determine what modifier keys were being used, along with other properties of the event.
 
 									NOTES
-									- see the companion =Down=, =Out=, =Over=, and =Up= instance events
+									- see the companion =Double Click=, =Down=, =Out=, =Over=, and =Up= instance events
+
+								Double Click
+									An instance event that is fired when the user double clicks the instance's =Root Node=.
+
+									This event is fired after the related =Up= and =Click= instance events. When this event is fired, the value of the =state= set-get property will be ='over'=. The event object for this event will have a =domEvent= property that is a reference to the browser event object associated to the event on the DOM node. This =domEvent= object can be used to determine what modifier keys were being used, along with other properties of the event.
+
+									NOTES
+									- see the companion =Click=, =Down=, =Out=, =Over=, and =Up= instance events
 
 								Down
 									An instance event that is fired when the user mouses down on the instance's =Root Node=.
@@ -269,7 +279,7 @@ Uize.module ({
 									When this event is fired, the value of the =state= set-get property will be ='down'=. The event object for this event will have a =domEvent= property that is a reference to the browser event object associated to the event on the DOM node. This =domEvent= object can be used to determine what modifier keys were being used, along with other properties of the event.
 
 									NOTES
-									- see the companion =Click=, =Out=, =Over=, and =Up= instance events
+									- see the companion =Click=, =Double Click=, =Out=, =Over=, and =Up= instance events
 
 								Out
 									An instance event that is fired when the user mouses out of the instance's =Root Node=.
@@ -277,7 +287,7 @@ Uize.module ({
 									When this event is fired, the value of the =state= set-get property will be =''= (empty string). The event object for this event will have a =domEvent= property that is a reference to the browser event object associated to the event on the DOM node. This =domEvent= object can be used to determine what modifier keys were being used, along with other properties of the event.
 
 									NOTES
-									- see the companion =Click=, =Down=, =Over=, and =Up= instance events
+									- see the companion =Click=, =Double Click=, =Down=, =Over=, and =Up= instance events
 
 								Over
 									An instance event that is fired when the user mouses over the instance's =Root Node=.
@@ -285,7 +295,7 @@ Uize.module ({
 									When this event is fired, the value of the =state= set-get property will be ='over'=. The event object for this event will have a =domEvent= property that is a reference to the browser event object associated to the event on the DOM node. This =domEvent= object can be used to determine what modifier keys were being used, along with other properties of the event.
 
 									NOTES
-									- see the companion =Click=, =Down=, =Out=, and =Up= instance events
+									- see the companion =Click=, =Double Click=, =Down=, =Out=, and =Up= instance events
 
 								Up
 									An instance event that is fired when the user mouses up after first having moused down on the instance's =Root Node=.
@@ -293,7 +303,7 @@ Uize.module ({
 									This event is fired before the related =Click= instance event. When this event is fired, the value of the =state= set-get property will be ='over'=. The event object for this event will have a =domEvent= property that is a reference to the browser event object associated to the event on the DOM node. This =domEvent= object can be used to determine what modifier keys were being used, along with other properties of the event.
 
 									NOTES
-									- see the companion =Click=, =Down=, =Out=, and =Over= instance events
+									- see the companion =Click=, =Double Click=, =Down=, =Out=, and =Over= instance events
 						*/
 						_isClickEvent && (_this._selected ? _this._clickToDeselect : _this._clickToSelect) &&
 							_this.set ({_selected:!_this._selected})
@@ -304,8 +314,10 @@ Uize.module ({
 
 		/*** Public Instance Methods ***/
 			_classPrototype.updateUi = function () {
+				if (this.isWired) {
 				this._updateUiState ();
 				this._updateUiText ();
+				}
 			};
 
 			_classPrototype.wireUi = function () {
@@ -341,13 +353,10 @@ Uize.module ({
 									click:_setStateAndFireEvent
 								}
 							);
-
 						/*** initialize text value if undefined ***/
-							if (_this._text == _undefined) {
-								var _textNode = _this.getNode ('text');
-
-								_textNode && _this.set ({_text:_textNode.innerHtml});
-							}
+							_this._text == _undefined
+								&& _this.set ({_text:_this.getNodeValue('text')})
+							;
 
 						_superclass.prototype.wireUi.call (_this);
 					}

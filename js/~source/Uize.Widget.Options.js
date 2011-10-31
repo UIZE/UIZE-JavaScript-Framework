@@ -37,6 +37,7 @@ Uize.module ({
 	builder:function (_superclass) {
 		/*** Variables for Scruncher Optimization ***/
 			var
+				_false = false,
 				_null = null,
 				_undefined
 			;
@@ -55,10 +56,23 @@ Uize.module ({
 			;
 
 		/*** Private Instance Methods ***/
+			_classPrototype._updateUiOptionSelected = function() {
+				var _this = this;
+				if (_this.isWired && _this._valueNo != _this._lastValueNo) {
+					function _setOptionSelected (_optionNo,_selected) {
+						_optionNo >= 0 &&
+							Uize.callOn (_this.children ['option' + _optionNo],'set',[{selected:_selected}])
+						;
+					}
+					_setOptionSelected (_this._lastValueNo,_false);
+					_setOptionSelected (_this._lastValueNo = _this._valueNo,true);
+				}
+			};
+		
 			_classPrototype._updateValueNo = function () {
 				var _this = this;
 				_this.set ({_valueNo:_this.getValueNoFromValue (_this._value)});
-				_this.updateUi ();
+				_this._updateUiOptionSelected ();
 			};
 
 		/*** Public Instance Methods ***/
@@ -67,7 +81,7 @@ Uize.module ({
 					var _valueNo = -1, _valuesLength = this._values.length, _children = this.children;
 					++_valueNo < _valuesLength;
 				)
-					if (_function (_children ['option' + _valueNo],_valueNo) === false) break;
+					if (_function (_children ['option' + _valueNo],_valueNo) === _false) break;
 				;
 				/*?
 					Instance Methods
@@ -101,7 +115,7 @@ Uize.module ({
 						? (
 							typeof _values [0] == 'object'
 								? Uize.findRecordNo (_values,{name:_value})
-								: Uize.indexIn (_values,_value,false,false)
+								: Uize.indexIn (_values,_value,_false,_false)
 						)
 						: -1
 				);
@@ -152,14 +166,9 @@ Uize.module ({
 
 			_classPrototype.updateUi = function () {
 				var _this = this;
-				if (_this.isWired && _this._valueNo != _this._lastValueNo) {
-					function _setOptionSelected (_optionNo,_selected) {
-						_optionNo >= 0 &&
-							Uize.callOn (_this.children ['option' + _optionNo],'set',[{selected:_selected}])
-						;
-					}
-					_setOptionSelected (_this._lastValueNo,false);
-					_setOptionSelected (_this._lastValueNo = _this._valueNo,true);
+				if (_this.isWired) {
+					_this._updateUiOptionSelected();
+					_superclass.prototype.updateUi.call(_this);
 				}
 			};
 
@@ -290,7 +299,37 @@ Uize.module ({
 			};
 
 		/*** Register Properties ***/
+			function _getValidValue(_value) {
+				var
+					_this = this,
+					_values = this._values
+				;
+				
+				return (
+					!_this._ensureValueInValues || !_values || !_values.length || _this.getValueNoFromValue(_value) > -1
+						? _value
+						: (typeof _values[0] == 'object' ? _values[0].name : _values[0])
+				);
+			}
 			_class.registerProperties ({
+				_ensureValueInValues:{
+					name:'ensureValueInValues',
+					onChange:function() {
+						var _this = this;
+						_this.set({_value:_getValidValue.call(_this, _this._value)});
+					},
+					value:_false
+					/*?
+						Set-get Properties
+							ensureValueInValues
+								A boolean, indicating whether or not the value of the =value= set-get property should be one of the values within the =values= set-get property.
+
+								When this property is set to =true=, the =value= set-get property will be enforced to be within the =values= set-get property. If the =value= set-get property is set with a value not within the =values= set-get property, the first value within the =values= set-get property will be chosen. When this is property is set to =false=, the value is no longer restricted to be one of the values within the =values= set-get property.
+
+								NOTES
+								- the initial value is =false=
+					*/
+				},
 				_optionWidgetClass:'optionWidgetClass',
 					/*?
 						Set-get Properties
@@ -372,6 +411,7 @@ Uize.module ({
 				},
 				_value:{
 					name:'value',
+					conformer:_getValidValue,
 					onChange:function () {
 						var _this = this;
 						_this._updateValueNo ();
@@ -414,7 +454,7 @@ Uize.module ({
 								_this.removeChild ('option' + _valueNo)
 							;
 							_this.unwireUi ();
-							_this.get ('html') != _undefined && _this.set ({built:false});
+							_this.get ('html') != _undefined && _this.set ({built:_false});
 							_this.insertOrWireUi ();
 						}
 					},

@@ -57,32 +57,39 @@ Uize.module ({
 
 						/*** submit value ***/
 							function _fireSubmissionComplete (_keepOpen) {
-								var _valueWidget = _this.children.value;
+								var
+									_valueWidget = _this.children.value,
+									_valueDetails = _valueWidget.get('valueDetails'),
+									_undefined
+								;
 
 								_this._submittedValue = _true;
-								_this.fire ({
-									name:'Submission Complete',
-									result:{
-										value:_valueWidget.valueOf (),
-										valueDetails:_valueWidget.get('valueDetails')
-									},
-									keepOpen:_keepOpen
-									/*?
-										Instance Events
-											Submission Complete
-												document...
-									*/
-								});
+								
+								_this.fireSubmissionComplete(
+									_keepOpen,
+									Uize.copyInto(
+										{value:_valueWidget.valueOf ()},
+										_valueDetails !== _undefined
+											? {valueDetails:_valueDetails}
+											: _undefined
+									)
+								);
 							}
 
 						/*** add the value child widget ***/
 							_this.addChild ('value',_this._valueWidgetClass).wire (
 								'Changed.value',
 								function () {
-									if (_this.get ('shown') && !_this._beforeShow) {
+									!_this._beforeShow
+										// Changed.value will be fired prior to Changed.valueDetails, so break flow so that the valueDetails can be synced before the 'Submission Complete' event is fired
+										&& setTimeout(
+											function() {
 										_fireSubmissionComplete (_this._keepOpen);
 										_this._keepOpen || _this.set ({shown:_false});
-									}
+											},
+											0
+										)
+									;
 								}
 								/*?
 									Child Widget
@@ -103,13 +110,18 @@ Uize.module ({
 							);
 
 						/*** add event handlers ***/
+							function _handleDismiss() {
+								_this._submittedValue
+									&& _this.fire ({
+											name:'Submission Complete',
+											result:{value:_this._initialValue}
+										})
+								;
+							}
 							_this.wire ({
 								Ok:function () {_fireSubmissionComplete ()},
-								Cancel:function () {
-									_this._submittedValue &&
-										_this.fire ({name:'Submission Complete',result:_this._initialValue})
-									;
-								},
+								Cancel:_handleDismiss,
+								Close:_handleDismiss,
 								'Before Show':function () {
 									/* WORKAROUND:
 										Ideally, the dialog class would have a state set-get property to indicate whether or not the dialog is actually shown, versus it just being desired to be shown because the shown set-get property is set to true.
@@ -134,7 +146,25 @@ Uize.module ({
 
 		/*** Private Instance Methods ***/
 			_classPrototype._updateUiKeepOpenState = function () {
-				this._widgetsAdded && this.children.keepOpen.set ({selected:this._keepOpen});
+				this._widgetsAdded && this.children.keepOpen.set ({selected:this._keepOpen})
+			};
+			
+		/*** Public Instance Methods ***/
+			_classPrototype.fireSubmissionComplete = function(_keepOpen, _result) {
+				var _this = this;
+
+				_this.get ('shown')
+					&& _this.fire ({
+						name:'Submission Complete',
+						result:_result,
+						keepOpen:_keepOpen
+						/*?
+							Instance Events
+								Submission Complete
+									document...
+						*/
+					})
+				;
 			};
 
 		/*** Register Properties ***/
@@ -153,6 +183,7 @@ Uize.module ({
 					*/
 				},
 				_valueWidgetClass:'valueWidgetClass',
+				_picker:'picker',
 				_pipedProperties:'pipedProperties',
 					/*?
 						Set-get Properties

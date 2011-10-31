@@ -60,7 +60,7 @@ Uize.module ({
 				}
 			};
 			
-			_classPrototype._updateUiState = function() {
+			_classPrototype._updateUiFeaturedState = function() {
 				var _this = this;
 				
 				_this.isWired
@@ -77,7 +77,7 @@ Uize.module ({
 				var _this = this;
 				if (_this.isWired) {
 					_this._updateUiLabel();
-					_this._updateUiState();
+					_this._updateUiFeaturedState();
 					_superclass.prototype.updateUi.call (_this);
 				}
 			};
@@ -90,11 +90,11 @@ Uize.module ({
 				},
 				_featured:{
 					name:'featured',
-					onChange:_classPrototype._updateUiState
+					onChange:_classPrototype._updateUiFeaturedState
 				},
 				_featuredCssClass:{
 					name:'featuredCssClass',
-					onChange:_classPrototype._updateUiState,
+					onChange:_classPrototype._updateUiFeaturedState,
 					value:''
 				},
 				_label:{

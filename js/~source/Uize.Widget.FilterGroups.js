@@ -55,18 +55,26 @@ Uize.module ({
 			;
 			
 		/*** Private Methods ***/
+			_classPrototype._forAll = function(_function) {
+				for (
+					var _valueNo = -1, _valuesLength = this._values.length, _children = this.children;
+					++_valueNo < _valuesLength;
+				)
+					if (_function (_children ['filterGroup' + _valueNo],_valueNo) === false) break;
+				;
+			};
+		
 			_classPrototype._updateSelectedFilters = function() {
 				var _this = this;
 				
 				if (_this.isWired) {
 					var _selectedFilters = [];
 					
-					for (var _filterGroupNo = -1; ++_filterGroupNo < _this._values.length;) {
-						var _selectedFilter = _this.children['filterGroup' + _filterGroupNo].valueOf();
-						
-						_selectedFilter != _null
-							&& _selectedFilters.push(_selectedFilter);
-					}
+					_this._forAll(
+						function(_filterGroupWidget) {
+							_selectedFilters.push(_filterGroupWidget.valueOf())
+						}
+					);
 					
 					if (!Uize.Data.clones(_selectedFilters, _this._previousSelectedFilters)) {
 						_this._previousSelectedFilters = _selectedFilters;
@@ -85,29 +93,46 @@ Uize.module ({
 						_children = _this.children,
 						_selectedFilterLookup = {}
 					;
-					
-					for (var _filterGroupNo = -1; ++_filterGroupNo < _filterGroupsData.length;) {
-						var
-							_filterGroupWidget = _children['filterGroup' + _filterGroupNo],
-							_filterToSet = _null
-						;
-						
-						for (var _selectedFilterNo = -1; ++_selectedFilterNo < _selectedFilters.length;) {
-							var _selectedFilter = _selectedFilters[_selectedFilterNo];
-
-							if (!_selectedFilterLookup[_selectedFilter] && _filterGroupWidget.getValueNoFromValue(_selectedFilter) > -1) {
-								_filterToSet = _selectedFilter;
-								_selectedFilterLookup[_selectedFilter] = _true;
-								break;
+					_this._forAll(
+						function(_filterGroupWidget) {
+							var _filterToSet = _null;
+							
+							for (var _selectedFilterNo = -1; ++_selectedFilterNo < _selectedFilters.length;) {
+								var _selectedFilter = _selectedFilters[_selectedFilterNo];
+	
+								if (!_selectedFilterLookup[_selectedFilter] && _filterGroupWidget.getValueNoFromValue(_selectedFilter) > -1) {
+									_filterToSet = _selectedFilter;
+									_selectedFilterLookup[_selectedFilter] = _true;
+									break;
+								}
 							}
+							
+							_filterGroupWidget.set({value:_filterToSet});
 						}
-						
-						_filterGroupWidget.set({value:_filterToSet});
-					}
+					);
 				}
 			};
 
 		/*** Public Methods ***/
+			_classPrototype.updateCounts = function(_counts) {
+				var
+					_this = this,
+					_countsLength = _counts.length
+				;
+				
+				if (_this.isWired) {
+					_counts
+						&& _countsLength
+						&& _this._forAll(
+							function(_filterGroupWidget, _filterGroupNo) {
+								_filterGroupNo < _countsLength
+									&& _filterGroupWidget.updateCounts(_counts[_filterGroupNo])
+							}
+						)
+					;
+				}
+			};
+		
 			_classPrototype.wireUi = function () {
 				var _this = this;
 				
@@ -121,7 +146,7 @@ Uize.module ({
 						_this.addChild (
 							'filterGroup' + _filterGroupNo,
 							Uize.Widget.Options.FilterGroup,
-							_filterGroupsData[_filterGroupNo]
+							Uize.clone(_filterGroupsData[_filterGroupNo])
 						).wire(
 							'Changed.value',
 							function() { _this._updateSelectedFilters() }
@@ -141,7 +166,7 @@ Uize.module ({
 					name:'allowMultiple',
 					onChange:function() {
 						var _this = this;
-						
+
 						!_this._allowMultiple
 							&& _this._value.length > 1
 							&& _this.set({_value:_this._value.splice(0,1)})
@@ -152,7 +177,8 @@ Uize.module ({
 				_value:{
 					name:'value',
 					conformer:function(_value) {
-						return this._allowMultiple || _value.length == 1 ? _value : _value.splice(0,1)
+						_value = Uize.isArray(_value) ? _value : [];
+						return this._allowMultiple || _value.length == 1 ? _value : _value.splice(0,1);
 					},
 					onChange:_classPrototype._setFilterGroupsSelectedFilter,
 					value:[]

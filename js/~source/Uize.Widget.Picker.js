@@ -54,7 +54,7 @@ Uize.module ({
 						function _pickValue () {
 							_this.set({focused:false});
 							var
-								_mooringNode = _this.children.selector.getNode () || _this.getNode ('input'),
+								_mooringNode = _this.getMooringNode(),
 								_mooringNodeDims = Uize.Node.getDimensions (_mooringNode)
 							;
 							function _possiblyFocus () {
@@ -68,7 +68,8 @@ Uize.module ({
 								widgetProperties:
 									Uize.copyInto (
 										{
-											name:'dialog' + _this._dialogWidgetClass.replace (/\./g,''),
+											name:_this._dialogName || 'dialog' + _this._dialogWidgetClass.replace (/\./g,''),
+											picker:_this,
 											mooringNode:_mooringNode,
 											offsetX:_mooringNodeDims.width >> 1,
 											offsetY:_mooringNodeDims.height >> 1
@@ -77,16 +78,8 @@ Uize.module ({
 										_this.get ((_this._pipedProperties || []).concat ('value'))
 									),
 								submitHandler:function (_valueInfo,_event) {
-									var _value = _valueInfo.value;
-
-									_this.set ({
-										_valueDetails:_valueInfo.valueDetails,
-										value:
-											_value != _null
-												? (_this._valueFormatter ? _this._valueFormatter.call (_this,_value) : _value)
-												: ''
-									});
-									_event.keepOpen || _possiblyFocus ();
+									_this.handleDialogSubmit(_valueInfo);
+									_event && _event.keepOpen || _possiblyFocus ();
 								},
 								dismissHandler:_possiblyFocus
 							});
@@ -129,17 +122,34 @@ Uize.module ({
 		/*** Public Methods ***/
 			_classPrototype.getDialogWidgetProperties = function() { return _null };
 
+			_classPrototype.getMooringNode = function() {
+				return this.children.selector.getNode () || this.getNode ('input')
+			};
+			
+			_classPrototype.handleDialogSubmit = function(_valueInfo) {
+				var
+					_this = this,
+					_value = _valueInfo.value,
+					_valueDetails = _valueInfo.valueDetails,
+					_undefined
+				;
+
+				_this.set(
+					Uize.copyInto(
+						{},
+						_valueDetails !== _undefined ? {valueDetails:_valueDetails} : _undefined,
+						_value !== _undefined
+							? ({
+								value:_value != _null
+									? (_this._valueFormatter ? _this._valueFormatter.call (_this,_value) : _value)
+									: ''
+							}) : _undefined
+					)
+				);
+			};
+
 		/*** Register Properties ***/
 			_class.registerProperties ({
-				_dialogWidgetClass:'dialogWidgetClass',
-					/*?
-						Set-get Properties
-							dialogWidgetClass
-								document...
-
-								NOTES
-								- the initial value is =undefined=
-					*/
 				_allowManualEntry:{
 					name:'allowManualEntry',
 					value:true
@@ -153,6 +163,16 @@ Uize.module ({
 					*/
 				},
 				_dialogComponent:'dialogComponent',
+				_dialogName:'dialogName',
+				_dialogWidgetClass:'dialogWidgetClass',
+					/*?
+						Set-get Properties
+							dialogWidgetClass
+								document...
+
+								NOTES
+								- the initial value is =undefined=
+					*/
 				_pipedProperties:'pipedProperties',
 					/*?
 						Set-get Properties
@@ -181,6 +201,11 @@ Uize.module ({
 									NOTES
 									- the initial value is =undefined=
 					*/
+			});
+
+		/*** Override Initial Values for Inherited Set-Get Properties ***/
+			_class.set ({
+				value:_null
 			});
 
 		return _class;

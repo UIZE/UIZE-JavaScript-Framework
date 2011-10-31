@@ -23,7 +23,7 @@
 	Introduction
 		The =Uize.Widget.FormElement= class serves as a wrapper class in order to provide an interface for any form element (input, select, textarea, etc).
 
-		*DEVELOPERS:* `Tim Carter`, `Chris van Rensburg`, `Ben Ilegbodu`
+		*DEVELOPERS:* `Tim Carter`, `Chris van Rensburg`, `Ben Ilegbodu`, `Vinson Chuong`
 */
 
 Uize.module ({
@@ -71,6 +71,7 @@ Uize.module ({
 
 						_this._warningWidget = _warningWidget;
 						_this._isInitialized = _true;
+						_this._lastKeyDown = -1;
 					}
 				),
 				_classPrototype = _class.prototype
@@ -141,6 +142,11 @@ Uize.module ({
 			};
 
 		/*** Public Methods ***/
+			// NOTE: can be overidden by subclasses
+			_classPrototype.fireOkOnEnter = function () {return _true};
+
+			_classPrototype.checkIsEmpty = function() { return this._value == _null || this._value == '' };
+			
 			_classPrototype.checkWarningShown = _classPrototype._checkWarningShown = function() {
 				var
 					_this = this,
@@ -172,8 +178,9 @@ Uize.module ({
 			// To be overridden as necessary by subclasses (should return an array)
 			_classPrototype.getMoreValidators = _undefined;
 
-			// NOTE: can be overidden by subclasses
-			_classPrototype.checkIsEmpty = function() { return this._value == _null || this._value == '' };
+			_classPrototype.getRootNode = function() {
+				return this.getNode() || this.getNode('input')
+			};
 
 			_classPrototype.restore = function() {
 				this.set({
@@ -281,43 +288,25 @@ Uize.module ({
 
 						var
 							_eventsToWire = {
-								blur:function (_event) {
+								blur:function () {
 									_setValue();
 									_this.set({_focused:_false});
 								},
-								focus:function (_event) { _this.set({_focused:_true}) },
+								focus:function () { _this.set({_focused:_true}) },
 								click:function (_event) {
 									_setValue();
 									_fireClick (_event);
+								},
+								keydown:function (_event) {
+									_this._lastKeyDown = _event.keyCode;
+									_fire ('Key Down', _event);
 								}
 							}
 						;
 
 						// Build up events to wire
 						switch (_this._type) {
-							case 'text':
-							case 'textarea':
-							case 'password':
-								_eventsToWire.keyup = function (_event) {
-									if (Uize.Node.Event.isKeyEnter (_event) && _this._type != 'textarea') {
-										_setValue ();
-										_fire ('Ok', _event);
-									}
-									else if (Uize.Node.Event.isKeyEscape (_event)) {
-										_this._updateUiValue();		// replace with old (saved) value
-										_fire ('Cancel', _event);
-										_inputNode.blur();
-									}
-									else {
-										_this.set({
-											_tentativeValue:_this.getNodeValue(_inputNode),
-											_isFinished:_false
-										});
-									}
-
-									_fireKeyUp (_event);
-								};
-								_eventsToWire.click = _fireClick;
+							case 'checkbox':
 								break;
 
 							case 'radio':	// operates on a group of like-named radio buttons, but one has to have the implied node id
@@ -343,13 +332,44 @@ Uize.module ({
 									_setValue ();
 									_fireKeyUp (_event);
 								};
+								_eventsToWire.click = _fireClick;
+								break;
+
+							default: // text, password, HTML5 text input, textarea, etc...
+								_eventsToWire.keyup = function (_event) {
+									// NOTE: When inputting Kanji, it's standard to use the enter button to choose kanji characters.
+									// So everytime a user wants to type a multi-kanji word, 'Ok' would fire (which could ultimately
+									// cause a form submission, which would be bad). So now the check to see if we should fire 'Ok'
+									// checks to see if both keydown AND keyup are ENTER (since when you type kanji, you keydown on
+									// a non-enter key, do stuff, then keyup to continue).
+									if (_this._type != 'textarea' && _this._lastKeyDown == _event.keyCode && Uize.Node.Event.isKeyEnter (_event)) {
+										_setValue ();
+										_this.fireOkOnEnter()
+											&& _fire ('Ok', _event)
+										;
+									}
+									else if (Uize.Node.Event.isKeyEscape (_event)) {
+										_this._updateUiValue();		// replace with old (saved) value
+										_fire ('Cancel', _event);
+										_inputNode.blur();
+									}
+									else {
+										_this.set({
+											_tentativeValue:_this.getNodeValue(_inputNode),
+											_isFinished:_false
+										});
+									}
+
+									_fireKeyUp (_event);
+								};
+								_eventsToWire.click = _fireClick;
 								break;
 						}
 
 						_this.wireNode(_inputNode, _eventsToWire);
 
 						// if no value was set, then grab the value from the node
-						_this._value == _undefined
+						_this._value === _undefined
 							? _setValue(_true)
 							: _this._updateUiValue()
 						;
@@ -393,11 +413,17 @@ Uize.module ({
 						if (_this.isWired) {
 							var _inputNode = _this._getInputNode();
 
+							try {
 							_inputNode &&
 								(Uize.Node.isNode(_inputNode) ? _inputNode : _inputNode[0])[
 									_this._focused ? 'focus' : 'blur'
 								]()
 							;
+
+								// synch up the value with the UI, in case conformer had changed a UI value to something that already matched the programmatic value
+								_this.setNodeValue('input', _this._value);
+							}
+							catch(_ex) {}
 						}
 					},
 					value:_false
@@ -508,8 +534,8 @@ Uize.module ({
 							&& _this._validate();
 
 						_this._updateUiValue();
-					},
-					value:_null
+					}/*,
+					value:_null*/
 				},
 				_valueConformer:'valueConformer',
 				_warningAllowed:{
