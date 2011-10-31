@@ -23,7 +23,7 @@
 	Introduction
 		The =Uize.Widget.Stretchy= class implements a widget with long and short views, and controls for toggling between them with an accompanying animation.
 
-		*DEVELOPERS:* `Jan Borgersen`
+		*DEVELOPERS:* `Jan Borgersen`, `Michael Cheng`
 */
 
 Uize.module ({
@@ -119,7 +119,11 @@ Uize.module ({
 								endValue:_shortHeight
 							});
 						}
-						_this.wireNode ('expand','click',_showLong);
+						_this.wireNode ('expand', 'click',
+							function() {
+								_this.fire ({name:'Expand', handler:_showLong}).handled || _showLong();
+							}
+						);
 						_this.wireNode ('contract','click',_showShort);
 
 					_superclass.prototype.wireUi.call (_this);

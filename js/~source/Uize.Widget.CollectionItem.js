@@ -71,6 +71,7 @@ Uize.module ({
 											- the markup for this child widget is optional, and a given implementation of this widget in HTML does not need to offer a =select= button
 								*/
 							).set ({
+								clickToSelect:_true,
 								clickToDeselect:_true
 							});
 							_this._setSelectorState ();
@@ -172,7 +173,7 @@ Uize.module ({
 			};
 
 			_classPrototype._selectItem = function (_domEvent,_forceToggle) {
-				this.fire ({name:'Click Selected',domEvent:_domEvent,forceToggle:_forceToggle});
+				this.fire ({name:'Click Selected',domEvent:_domEvent,forceToggle:_forceToggle})
 				/*?
 					Instance Events
 						Click Selected
@@ -183,7 +184,10 @@ Uize.module ({
 			};
 
 			_classPrototype._setSelectorState = function () {
-				this.children.select.set ({selected:this._selected});
+				var
+					_selectButton = this.children.select
+				;
+				_selectButton.get ('state') != 'over' && _selectButton.set ({selected:this._selected});
 			};
 
 		/*** Public Instance Methods ***/

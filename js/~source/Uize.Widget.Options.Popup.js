@@ -63,6 +63,8 @@ Uize.module ({
 								}
 							}
 						);
+						
+						_this.wire('Changed.value', function() { _this.updateUi() });
 					}
 				),
 				_classPrototype = _class.prototype

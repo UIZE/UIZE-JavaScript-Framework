@@ -9,7 +9,7 @@
 |_______________|             http://www.uize.com/license.html
 */
 
-/*ScruncherSettings Mappings="=d" LineCompacting="TRUE"*/
+/*ScruncherSettings Mappings="=c_a" LineCompacting="TRUE"*/
 
 Uize.module ({
 	name:'Uize.Widget.Page.xDeferredLinks',

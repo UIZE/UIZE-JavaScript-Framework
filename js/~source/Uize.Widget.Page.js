@@ -47,6 +47,7 @@ Uize.module ({
 			var
 				_true = true,
 				_false = false,
+				_null = null,
 				_undefined,
 				_Uize_Node = Uize.Node
 			;
@@ -54,7 +55,7 @@ Uize.module ({
 		/*** Class Constructor ***/
 			var
 				_class = _superclass.subclass (
-					null,
+					_null,
 					function() { _class.xDeferredLinks && this.wireDeferredLinks() }
 				),
 				_classPrototype = _class.prototype
@@ -62,7 +63,7 @@ Uize.module ({
 
 		/*** Utility Functions ***/
 			function _getCallbackFromDirectives (_directives) {
-				return (Uize.isFunction (_directives) && _directives) || _directives.callback || Object;
+				return (Uize.isFunction (_directives) && _directives) || (_directives && _directives.callback) || Object
 			}
 
 		/*** Private Instance Methods ***/
@@ -77,8 +78,8 @@ Uize.module ({
 						message:(_params.message + '').replace (/\n/g,'<br/>'),
 						mode:_mode,
 						state:_params.state || _defaultState,
-						okText:_params.okText || null,
-						cancelText:_params.cancelText || null
+						okText:_params.okText || _null,
+						cancelText:_params.cancelText || _null
 					},
 					submitHandler:function (_confirmed) {
 						var _handler = _params.callback || (_confirmed ? _params.yesHandler : _params.noHandler);
@@ -390,10 +391,6 @@ Uize.module ({
 			};
 
 			_classPrototype.useDialog = function (_params) {
-				/* TO DO:
-					- may want to also track to see if people move dialogs, or other interactions
-					- should track dismiss events
-				*/
 				var
 					_this = this,
 					_dialogWidgetProperties = Uize.copyInto ({},_this._dialogProperties,_params.widgetProperties),
@@ -413,14 +410,6 @@ Uize.module ({
 						params:Uize.copyInto ({idPrefix:_rootNodeId},_component.params)
 					};
 				}
-				function _trackDialogEvent (_extra) {
-					var _productType = _this.get ('productType');
-					_dialogWidget.fire ({
-						name:'Track Event',
-						extra:_extra + (_productType ? (' (' + _productType + ')') : ''),
-						bubble:_true
-					});
-				}
 				function _showDialog (_loadType) {
 					setTimeout(
 						/* NOTE:
@@ -436,6 +425,12 @@ Uize.module ({
 								var _handlerParams = [_event];
 								_callHandler (_event.name.toLowerCase () + 'Handler',_handlerParams);
 								_callHandler ('dismissHandler',_handlerParams);
+							}
+							function _handleShownOrHide(_event) {
+								_this.fire({
+									name:'Dialog ' + _event.name,
+									dialogWidget:_event.source
+								})
 							}
 							/*** store handlers as properties of widget, in order to be able to remove them on reuse ***/
 								/* WORKAROUND:
@@ -458,13 +453,16 @@ Uize.module ({
 									'Submission Complete':
 										function (_event) {_callHandler ('submitHandler',[_event.result,_event])},
 									Close:_handleCloseOrCancel,
-									Cancel:_handleCloseOrCancel
+									Cancel:_handleCloseOrCancel,
+									'Before Show':_handleShownOrHide,
+									'After Show':_handleShownOrHide,
+									'Before Hide':_handleShownOrHide,
+									'After Hide':_handleShownOrHide
 								};
 								_dialogWidget.wire (_dialogWidget.eventHandlersForUseDialog);
 
 							_dialogWidget.set (_dialogWidgetProperties);
 							_dialogWidget.set ({shown:_true});
-							_trackDialogEvent (_loadType);
 						},
 						0
 					);

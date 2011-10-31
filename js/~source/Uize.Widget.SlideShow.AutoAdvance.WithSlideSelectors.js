@@ -53,9 +53,9 @@ Uize.module ({
 
 							/*** keep slideshow synchronized to options widget ***/
 								_options.wire (
-									'Changed.tentativeValue',
+									'Changed.value',
 									function () {
-										var _tentativeValue = _options.get ('tentativeValue');
+										var _tentativeValue = _options.get('value');
 										if (_tentativeValue != _this.get ('slideNo')) {
 											_this.stopThenResume ();
 											_this.set ({slideNo:_tentativeValue});
