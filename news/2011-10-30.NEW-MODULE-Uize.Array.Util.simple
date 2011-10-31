@@ -1,0 +1,15 @@
+The new =Uize.Array.Util= module provides a home for miscellaneous array utility methods that are not yet deemed ready for promototion to the =Uize.Array= or =Uize= modules.
+
+To kick things off, the =Uize.Array.Util= module comes with the =Uize.Array.Util.flatten=, =Uize.Array.Util.replaceContents=, and =Uize.Array.Util.swapContents= static methods.
+
+- The =Uize.Array.Util.flatten= method flattens an array that may contain nested arrays to a specified depth (infinite depth is the default).
+- The =Uize.Array.Util.replaceContents= method provides an easy way to replace the entire contents of one array with the contents of another array.
+- The =Uize.Array.Util.swapContents= method provides an easy way to swap the contents of two arrays.
+
+All methods of the new =Uize.Array.Util= module are thoroughly tested by the unit test module =Uize.Test.Uize.Array.Util=, and the module is fully documented.
+
+....................................................................................
+<< metadata >>
+
+title: 2011-10-30 - NEW MODULE: Uize.Array.Util
+....................................................................................

@@ -16,16 +16,67 @@ This document lists to do tasks related to specific JavaScript modules of the UI
 			_functionNo = (_functionNo + 1) % _totalFunctions;
 		};
 	}
-	
+
 	function (value) {return _function ('foo','bar',value,'hello')}
 	
-	js. (_function,['foo','bar',0,'hello'],2)
+	Uize.makeCaller (_function,['foo','bar',0,'hello'],2)
 	
-	js.makeCaller (Math.pow,[0,2],0);
+	Uize.makeCaller (Math.pow,[0,2],0);
 	
 	function (value) {return Math.pow (value,2)}
 
 Uize
+	Quick Win Additions
+		- Uize.indexOf
+			- uses indexIn
+		- Uize.lastIndexOf
+			- uses indexIn
+		- Uize.indexIn
+			- add support for object
+			- fall back to using built-in indexOf or lastIndexOf Array method, when they are present and when comparison is strict
+			- add support for source being a string
+		- Uize.ensureIn
+			- checks to see if an element is present, and adds it if not
+			- supports adding at beginning or adding at end
+		- Uize.extend
+			- alias of copyInto
+		- Uize.require
+			- alias to anonymous module with required
+		- Uize.isObject
+		- Uize.isString
+		- Uize.ensureArray
+			- ensures that the value is an array
+			- if the value is already an array, then it is simply returned
+			- if the value is an arguments object, then an array is created from it
+			- if the value is any other type, then a new array is returned with the value as its single element
+		- Uize.isArrayLike
+		- Uize.isBoolean
+		- Uize.isNully
+		- Uize.isEmpty
+			- promoted from Uize.Data.isEmpty
+		- Uize.keys
+			- promoted from Uize.Data.getKeys
+		- Uize.values
+			- promoted from Uize.Data.getValues
+		- Uize.totalKeys
+			- promoted from Uize.Data.getTotalKeys
+		- Uize.min
+			- promoted from Uize.Data.min
+		- Uize.max
+			- promoted from Uize.Data.max
+		- Uize.emptyOut
+			- promoted from Uize.Data.emptyOut
+		- Uize.lookup
+			- promoted from Uize.Data.getLookup
+		- Uize.reverseLookup
+			- promoted from Uize.Data.getReverseLookup
+		- Uize.truthy
+			- returns true if the value is truthy
+			- useful for methods that accept value matchers
+		- Uize.falsy
+			- returns true is the value is falsy
+			- useful for methods that accept value matchers
+
 	Conditions
 		The whenever Instance Method
 			EXAMPLES
@@ -177,34 +228,119 @@ Uize
 
 		Have a property that can be specified in a set-get property's profile, which can be used to cause properties whose initial values are object types to be initialized by cloning the initial value rather than simply setting a reference to a shared object.
 
-	Uize.makeCaller
+	Uize.methodCall
 		Lets you conveniently create a function / method caller, where you can specify context, function, and arguments.
 
 		IMPLEMENTATION
 		................................................................................
-		Uize.makeCaller = function (_context,_function,_arguments) {
-			var _caller = new Function (
-				'var m=arguments.callee;' +
-				'return m.f.apply(' +
-					(_context ? 'm.c' : 'this') +
-					(
-						(
-							_arguments = _arguments === _undefined
-								? _sacredEmptyArray
-								: Uize.isArray (_arguments) ? _arguments : [_arguments]
-						).length
-							? ',arguments.length?m.a.concat.apply(m.a,arguments):m.a'
-								// IMPORTANT: CAN'T USE CONCAT BECAUSE OF ARRAY FLATTENING WHEN ARGUMENTS ARE ARRAYS!!!
-							: ',arguments'
-					) +
-				')'
+		Uize.methodCall = function (_context,_function,_arguments,_extraArgsMapping) {
+			var _hasExtraArgsMapping = _extraArgsMapping != _undefined;
+			if (_hasExtraArgsMapping)
+				_arguments = _arguments ? _arguments.concat () : []
+			;
+			if (typeof _function == 'string')
+				_function = _context [_function]
+			;
+			return (
+				_hasExtraArgsMapping
+					? (
+						typeof _extraArgsMapping == 'number'
+							? function () {
+								_arguments [_extraArgsMapping] = arguments [0];
+								return _function.apply (_context,_arguments);
+							}
+							: function () {
+								for (
+									var _argumentNo = -1, _argumentsLength = arguments.length;
+									++_argumentNo < _argumentsLength;
+								)
+									_arguments [_extraArgsMapping [_argumentNo]] = arguments [_argumentNo]
+								;
+								return _function.apply (_context,_arguments);
+							}
+					)
+					: _arguments && _arguments.length
+						? function () {return _function.apply (_context,_arguments)}
+						: function () {return _function.call (_context)}
 			);
-			_caller.c = _context;
-			_caller.f = typeof _function == 'string' ? _context [_function] : _function;
-			_caller.a = _arguments;
-			return _caller;
+		};
+
+		Uize.functionCall = function (_function,_arguments,_extraArgsMapping) {
+			return Uize.methodCall (0,_function,_arguments,_extraArgsMapping);
 		};
 		................................................................................
+			
+		EXAMPLE
+		.......................................................
+		var
+			xSquared = Uize.functionCall (Math.pow,[0,2],0),
+			3ToPowerX = Uize.functionCall (Math.pow,[3,0],1)
+		;
+		.......................................................
+
+		INSTEAD OF...
+		.....................................................
+		var 3ToPowerX = function (x) {return Math.pow (3,x)};
+		.....................................................
+
+		USE...
+		.....................................................
+		var 3ToPowerX = Uize.functionCall (Math.pow,[3,0],1);
+		.....................................................
+
+	Uize.watchMethod
+		...................................................................
+		Uize.watchFunction = function (_function,_before,_after) {
+			return function () {
+				_before && _before (this,arguments);
+				var _result = _watched.apply (this,arguments);
+				_after && _after (this,arguments,_result);
+				return _result;
+			};
+		};
+
+		Uize.watchMethod = function (_context,_methodName,_before,_after) {
+			if (!Uize.isInstance (_context))
+				_context = _context.prototype
+			;
+			var
+				_watched = _context [_methodName],
+				_watcher = _context [_methodName] = Uize.watchFunction (_watched)
+			;
+			return {
+				watch: function () {_context [_methodName] = _watcher},
+				unwatch: function () {_context [_methodName] = _watched}
+			};
+		};
+		...................................................................
+
+	Uize.memoize
+		............................................................................
+		Uize.memoize = function (_function) {
+			var _resultsCache = {};
+			return function () {
+				var _cacheKey = Uize.Json.to (arguments);
+				return (
+					_cacheKey in _resultsCache
+						? _resultsCache [_cacheKey]
+						: (_resultsCache [_cacheKey] = _function.apply (this,arguments))
+				);
+			};
+		};
+
+		Uize.memoizeMethod = function (_context,_methodName) {
+			// ...
+		};
+		............................................................................
+
+		- add ability to memoize a method (memoizeMethod)
+		- consider supporting ability to dynamically unmemoize / turn memoization on or off
+		- expose more granular memoization cache methods to allow functions to cache more discriminately
+		- for basic memoization, support an optional function that can test the arguments values to determine whether or not memoization should be used for the specific call
+		- consider supporting functions that may be asynchronous (ie. use callbacks)
+		- support ability to clear entire cache
+		- support ability to invalidate cache for a specific set of argument values
+		- idea: ability to count time saved as a result of memoization (ie. keep track of number of times particular argument sets are encountered, and how long it took for first calculation)
 
 	Uize.constrain
 		Support a wrap flag
@@ -331,22 +467,11 @@ Uize
 		................................................................................
 
 Uize.Array
-	Uize.Array.flatten
-		................................................................................
-		Uize.Array.flatten = function (array) {
-			var oldArrayLength;
-			do {
-				oldArrayLength = array.length;
-				array = array.concat.apply ([],array);
-			} while (array.length != oldArrayLength);
-			return array;
-		};
-		................................................................................
-
 	Uize.Array.Matching
 		Uize.Array.Matching.countMatching
-		Uize.Array.Matching.removeMatching
-		Uize.Array.Matching.retainMatching
+		Uize.Array.Matching.keepMatching
+		Uize.Array.Matching.tossMatching
+		Uize.Array.Matching.eachMatching
 
 		- model the interface for this package on the interface for the Uize.String.Lines package
 		- should this be more general and able to apply to both arrays or objects?
@@ -400,15 +525,29 @@ Uize.Array
 			- support for optional sort value comparison function
 				This allows more sophisticated sorts. For example, with an alphanumerical (as opposed to ASCIIbetical) sort, the sort value generator function may do the work of parsing each element value into a set of number and non-number segments, and then the value comparison function can deal with comparing two sort values that may have different structure. In other words, the sort values generated cannot be compared by a simple a < b logical comparison.
 
-	Uize.Array.Uniques
-		Uize.Array.Uniques.getUniques
-		Uize.Array.Uniques.getOccurrences
-		Uize.Array.Uniques.getOccurrencesLookup
+		- add support for subsorts
+		- Uize.Array.Sort.insert
+
+	Uize.Array.Dupes
+		Uize.Array.Dupes.dedupe
+			- returns an array containing only unique values
+		Uize.Array.Dupes.getDupes
+		Uize.Array.Dupes.getValueCount
+			- returns the number of occurrences of the specified value
+		Uize.Array.Dupes.getValueCounts
+			- returns a lookup array of counts per value
 
 	Uize.Array.Util
-		Uize.Array.Util.ensureValueIn
-			if the specified element is not in the specified source array, then it is added (configurable whether to prepend or append, but default is to append)
-		Uize.Array.Util.swap -- what does this do?
+		Uize.Array.Util.ensureIn
+			- if the specified element is not in the specified source array, then it is added (configurable whether to prepend or append, but default is to append)
+		Uize.Array.Util.chunk
+			- returns a chunk of the specified source array of the specified size
+		Uize.Array.Util.first
+			- returns the specified number of elements at the head of the specified source array
+			- when no length parameter is specified, returns the first element of the array
+		Uize.Array.Util.last
+			- returns the specified number of elements at the tail of the specified source array
+			- when no length parameter is specified, returns the last element of the array
 
 Uize.Color
 	- support for % unit in "RGB string" decoder (eg. rgb(100%,50%,25%))

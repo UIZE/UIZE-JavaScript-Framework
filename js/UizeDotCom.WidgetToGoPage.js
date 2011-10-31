@@ -1,5 +1,5 @@
 /*
-	UIZE Web Site 2011-05-10
+	UIZE Web Site 2011-10-23
 
 	http://www.uize.com/reference/UizeDotCom.WidgetToGoPage.html
 	Available under MIT License or GNU General Public License -- http://www.uize.com/license.html

@@ -36,37 +36,59 @@
 			</li>
 			<li><a href="#2">2. Uize</a>
 				<ul>
-					<li><a href="#2_1">2.1. Conditions</a>
+					<li><a href="#2_1">2.1. Quick Win Additions</a>
 						<ul>
-							<li><a href="#2_1_1" title="EXAMPLES">2.1.1. The whenever Instance Method</a></li>
-							<li><a href="#2_1_2" title="EXAMPLE">2.1.2. The once Instance Method</a></li>
+							<li><a href="#2_1_1" title="- uses indexIn">2.1.1. - Uize.indexOf</a></li>
+							<li><a href="#2_1_2" title="- uses indexIn">2.1.2. - Uize.lastIndexOf</a></li>
+							<li><a href="#2_1_3" title="- add support for object">2.1.3. - Uize.indexIn</a></li>
+							<li><a href="#2_1_4" title="- checks to see if an element is present, and adds it if not">2.1.4. - Uize.ensureIn</a></li>
+							<li><a href="#2_1_5" title="- alias of copyInto">2.1.5. - Uize.extend</a></li>
+							<li><a href="#2_1_6" title="- alias to anonymous module with required">2.1.6. - Uize.require</a></li>
+							<li><a href="#2_1_7" title="- ensures that the value is an array">2.1.7. - Uize.ensureArray</a></li>
+							<li><a href="#2_1_8" title="- promoted from Uize.Data.isEmpty">2.1.8. - Uize.isEmpty</a></li>
+							<li><a href="#2_1_9" title="- promoted from Uize.Data.getKeys">2.1.9. - Uize.keys</a></li>
+							<li><a href="#2_1_10" title="- promoted from Uize.Data.getValues">2.1.10. - Uize.values</a></li>
+							<li><a href="#2_1_11" title="- promoted from Uize.Data.getTotalKeys">2.1.11. - Uize.totalKeys</a></li>
+							<li><a href="#2_1_12" title="- promoted from Uize.Data.min">2.1.12. - Uize.min</a></li>
+							<li><a href="#2_1_13" title="- promoted from Uize.Data.max">2.1.13. - Uize.max</a></li>
+							<li><a href="#2_1_14" title="- promoted from Uize.Data.emptyOut">2.1.14. - Uize.emptyOut</a></li>
+							<li><a href="#2_1_15" title="- promoted from Uize.Data.getLookup">2.1.15. - Uize.lookup</a></li>
+							<li><a href="#2_1_16" title="- promoted from Uize.Data.getReverseLookup">2.1.16. - Uize.reverseLookup</a></li>
+							<li><a href="#2_1_17" title="- returns true if the value is truthy">2.1.17. - Uize.truthy</a></li>
+							<li><a href="#2_1_18" title="- returns true is the value is falsy">2.1.18. - Uize.falsy</a></li>
 						</ul>
 					</li>
-					<li><a href="#2_2" title="SYNTAX">2.2. Properties Expressions</a></li>
-					<li><a href="#2_3" title="A derived property is a special type of set-get property whose value is derived from the values of other set-get properties of the same instance.">2.3. Derived Properties</a>
+					<li><a href="#2_2">2.2. Conditions</a>
 						<ul>
-							<li><a href="#2_3_1">2.3.1. Implementation Questions</a>
+							<li><a href="#2_2_1" title="EXAMPLES">2.2.1. The whenever Instance Method</a></li>
+							<li><a href="#2_2_2" title="EXAMPLE">2.2.2. The once Instance Method</a></li>
+						</ul>
+					</li>
+					<li><a href="#2_3" title="SYNTAX">2.3. Properties Expressions</a></li>
+					<li><a href="#2_4" title="A derived property is a special type of set-get property whose value is derived from the values of other set-get properties of the same instance.">2.4. Derived Properties</a>
+						<ul>
+							<li><a href="#2_4_1">2.4.1. Implementation Questions</a>
 								<ul>
-									<li><a href="#2_3_1_1" title="Currently, profiles for set-get properties are inherited through cloning of the definition objects.">2.3.1.1. How Are Derived Properties Inherited</a></li>
+									<li><a href="#2_4_1_1" title="Currently, profiles for set-get properties are inherited through cloning of the definition objects.">2.4.1.1. How Are Derived Properties Inherited</a></li>
 								</ul>
 							</li>
-							<li><a href="#2_3_2">2.3.2. Implementation Approaches</a>
+							<li><a href="#2_4_2">2.4.2. Implementation Approaches</a>
 								<ul>
-									<li><a href="#2_3_2_1" title="With this approach, setting values for derived set-get properties is worked into the process of setting values for properties that affect derived properties, by exploding out the properties being set to included all affected derived properties.">2.3.2.1. Exloding Out the Properties Being Set</a>
+									<li><a href="#2_4_2_1" title="With this approach, setting values for derived set-get properties is worked into the process of setting values for properties that affect derived properties, by exploding out the properties being set to included all affected derived properties.">2.4.2.1. Exloding Out the Properties Being Set</a>
 										<ul>
-											<li><a href="#2_3_2_1_1" title="document...">2.3.2.1.1. Advantages</a></li>
-											<li><a href="#2_3_2_1_2" title="document...">2.3.2.1.2. Disadvantages</a></li>
+											<li><a href="#2_4_2_1_1" title="document...">2.4.2.1.1. Advantages</a></li>
+											<li><a href="#2_4_2_1_2" title="document...">2.4.2.1.2. Disadvantages</a></li>
 										</ul>
 									</li>
-									<li><a href="#2_3_2_2" title="With this approach, values for all directly affected derived set-get properties are set in a batch set that occurs before onChange handlers are executed for the set-get properties being explicitly set.">2.3.2.2. Single Level Derived Property Batching</a></li>
-									<li><a href="#2_3_2_3" title="With this approach, when a derived set-get property is registed, an onChange handler is registered with any property from which the derived property is derived.">2.3.2.3. Using onChange Handler Merchanism</a>
+									<li><a href="#2_4_2_2" title="With this approach, values for all directly affected derived set-get properties are set in a batch set that occurs before onChange handlers are executed for the set-get properties being explicitly set.">2.4.2.2. Single Level Derived Property Batching</a></li>
+									<li><a href="#2_4_2_3" title="With this approach, when a derived set-get property is registed, an onChange handler is registered with any property from which the derived property is derived.">2.4.2.3. Using onChange Handler Merchanism</a>
 										<ul>
-											<li><a href="#2_3_2_3_1" title="- uses the existing optimization built into the onChange handlers mechanism">2.3.2.3.1. Advantages</a></li>
-											<li><a href="#2_3_2_3_2" title="- involves a separate set for each derived set-get property whose value changes">2.3.2.3.2. Disadvantages</a></li>
-											<li><a href="#2_3_2_3_3">2.3.2.3.3. Issues to Deal With</a>
+											<li><a href="#2_4_2_3_1" title="- uses the existing optimization built into the onChange handlers mechanism">2.4.2.3.1. Advantages</a></li>
+											<li><a href="#2_4_2_3_2" title="- involves a separate set for each derived set-get property whose value changes">2.4.2.3.2. Disadvantages</a></li>
+											<li><a href="#2_4_2_3_3">2.4.2.3.3. Issues to Deal With</a>
 												<ul>
-													<li><a href="#2_3_2_3_3_1" title="How does one deal with re-registering a set-get property that affects a derived set-get property?">2.3.2.3.3.1. Re-registering a Non-derived Set-get Property</a></li>
-													<li><a href="#2_3_2_3_3_2" title="How does one deal with re-registering a derived set-get property, where the new profile for the derived property defines a different relationship properties from which it is derived?">2.3.2.3.3.2. Re-registering a Derived Set-get Property</a></li>
+													<li><a href="#2_4_2_3_3_1" title="How does one deal with re-registering a set-get property that affects a derived set-get property?">2.4.2.3.3.1. Re-registering a Non-derived Set-get Property</a></li>
+													<li><a href="#2_4_2_3_3_2" title="How does one deal with re-registering a derived set-get property, where the new profile for the derived property defines a different relationship properties from which it is derived?">2.4.2.3.3.2. Re-registering a Derived Set-get Property</a></li>
 												</ul>
 											</li>
 										</ul>
@@ -75,90 +97,100 @@
 							</li>
 						</ul>
 					</li>
-					<li><a href="#2_4" title="Provide a way in the Uize base class to bind two set-get properties together, in order to keep their values synchronized.">2.4. Property Bindings</a></li>
-					<li><a href="#2_5" title="Copy ability, for initial values of set-get properties that are arrays or objects.">2.5. Copy Ability for Set-get Properties</a></li>
-					<li><a href="#2_6" title="Lets you conveniently create a function / method caller, where you can specify context, function, and arguments.">2.6. Uize.makeCaller</a></li>
-					<li><a href="#2_7">2.7. Uize.constrain</a>
+					<li><a href="#2_5" title="Provide a way in the Uize base class to bind two set-get properties together, in order to keep their values synchronized.">2.5. Property Bindings</a></li>
+					<li><a href="#2_6" title="Copy ability, for initial values of set-get properties that are arrays or objects.">2.6. Copy Ability for Set-get Properties</a></li>
+					<li><a href="#2_7" title="Lets you conveniently create a function / method caller, where you can specify context, function, and arguments.">2.7. Uize.methodCall</a></li>
+					<li><a href="#2_8" title="Uize.watchFunction = function (_function,_before,_after) {&#10;	return function () {&#10;		_before &amp;&amp; _before (this,arguments);&#10;		var _result = _watched.apply (this,arguments);&#10;		_after &amp;&amp; _after (this,arguments,_result);&#10;		return _result;&#10;	};&#10;};&#10;&#10;Uize.watchMethod = function (_context,_methodName,_before,_after) {&#10;	if (!Uize.isInstance (_context))&#10;		_context = _context.prototype&#10;	;&#10;	var&#10;		_watched = _c...">2.8. Uize.watchMethod</a></li>
+					<li><a href="#2_9" title="Uize.memoize = function (_function) {&#10;	var _resultsCache = {};&#10;	return function () {&#10;		var _cacheKey = Uize.Json.to (arguments);&#10;		return (&#10;			_cacheKey in _resultsCache&#10;				? _resultsCache [_cacheKey]&#10;				: (_resultsCache [_cacheKey] = _function.apply (this,arguments))&#10;		);&#10;	};&#10;};&#10;&#10;Uize.memoizeMethod = function (_context,_methodName) {&#10;	// ...&#10;};&#10;">2.9. Uize.memoize</a></li>
+					<li><a href="#2_10">2.10. Uize.constrain</a>
 						<ul>
-							<li><a href="#2_7_1" title="Support a wrap flag, so that constrained values can be made to wrap around within the constraining range, rather than always only hitting up against the edges.">2.7.1. Support a wrap flag</a></li>
+							<li><a href="#2_10_1" title="Support a wrap flag, so that constrained values can be made to wrap around within the constraining range, rather than always only hitting up against the edges.">2.10.1. Support a wrap flag</a></li>
 						</ul>
 					</li>
-					<li><a href="#2_8">2.8. Uize.callOn</a>
+					<li><a href="#2_11">2.11. Uize.callOn</a>
 						<ul>
-							<li><a href="#2_8_1" title="Add support for using the Uize.callOn method on a target that is an instance of a class that is not a Uize subclass.">2.8.1. Support Instances of Non-Uize Classes</a></li>
+							<li><a href="#2_11_1" title="Add support for using the Uize.callOn method on a target that is an instance of a class that is not a Uize subclass.">2.11.1. Support Instances of Non-Uize Classes</a></li>
 						</ul>
 					</li>
-					<li><a href="#2_9">2.9. Uize.indexIn</a>
+					<li><a href="#2_12">2.12. Uize.indexIn</a>
 						<ul>
-							<li><a href="#2_9_1" title="For object type source, could find key whose value matches, and return undefined (or null?) if value not found in object.">2.9.1. Support Object Source</a></li>
-							<li><a href="#2_9_2" title="For simple type source, could do string index.">2.9.2. Support Simple Type Source</a></li>
+							<li><a href="#2_12_1" title="For object type source, could find key whose value matches, and return undefined (or null?) if value not found in object.">2.12.1. Support Object Source</a></li>
+							<li><a href="#2_12_2" title="For simple type source, could do string index.">2.12.2. Support Simple Type Source</a></li>
 						</ul>
 					</li>
-					<li><a href="#2_10">2.10. Uize.module</a>
+					<li><a href="#2_13">2.13. Uize.module</a>
 						<ul>
-							<li><a href="#2_10_1" title="How can code require a module that is not in the modules directory (like a code beside)?">2.10.1. Support Code Besides in Module Loader</a></li>
+							<li><a href="#2_13_1" title="How can code require a module that is not in the modules directory (like a code beside)?">2.13.1. Support Code Besides in Module Loader</a></li>
 						</ul>
 					</li>
-					<li><a href="#2_11" title="Consider a facility to support multiple inheritance (may involve creating a merge service for merging data from one object into another, since it should be possible to merge additional features of a different class into an already created class, and perhaps that merge feature would also be used in the _subclass function&apos;s implementation).">2.11. Multiple Inheritance</a></li>
-					<li><a href="#2_12">2.12. Library Modules</a>
+					<li><a href="#2_14" title="Consider a facility to support multiple inheritance (may involve creating a merge service for merging data from one object into another, since it should be possible to merge additional features of a different class into an already created class, and perhaps that merge feature would also be used in the _subclass function&apos;s implementation).">2.14. Multiple Inheritance</a></li>
+					<li><a href="#2_15">2.15. Library Modules</a>
 						<ul>
-							<li><a href="#2_12_1" title="Can library modules that are outside the modules directory require modules that are outside the modules directory?">2.12.1. Library of Dispersed Modules</a></li>
+							<li><a href="#2_15_1" title="Can library modules that are outside the modules directory require modules that are outside the modules directory?">2.15.1. Library of Dispersed Modules</a></li>
 						</ul>
 					</li>
-					<li><a href="#2_13" title="Variation on constructor, where specifying a non-object for the properties has the effect of setting the value property.">2.13. Handle Simple Type in Place of Constructor Properties</a></li>
-					<li><a href="#2_14" title="Handle recursion in Uize.clone (how to generate properties that are references to other parts of structure in same relationship as the equivalent property in the cloning source???)">2.14. Uize.clone and Recursion</a></li>
-					<li><a href="#2_15">2.15. Improvements to Property Mechanism</a>
+					<li><a href="#2_16" title="Variation on constructor, where specifying a non-object for the properties has the effect of setting the value property.">2.16. Handle Simple Type in Place of Constructor Properties</a></li>
+					<li><a href="#2_17" title="Handle recursion in Uize.clone (how to generate properties that are references to other parts of structure in same relationship as the equivalent property in the cloning source???)">2.17. Uize.clone and Recursion</a></li>
+					<li><a href="#2_18">2.18. Improvements to Property Mechanism</a>
 						<ul>
-							<li><a href="#2_15_1">2.15.1. New Profile Features</a>
+							<li><a href="#2_18_1">2.18.1. New Profile Features</a>
 								<ul>
-									<li><a href="#2_15_1_1" title="Basic types...">2.15.1.1. type</a></li>
-									<li><a href="#2_15_1_2" title="Different types of validators...">2.15.1.2. validator</a></li>
+									<li><a href="#2_18_1_1" title="Basic types...">2.18.1.1. type</a></li>
+									<li><a href="#2_18_1_2" title="Different types of validators...">2.18.1.2. validator</a></li>
 								</ul>
 							</li>
 						</ul>
 					</li>
-					<li><a href="#2_16" title="- optimize for successive substitution on the same source using the same form of map (but different values, of course)">2.16. Uize.substituteInto</a></li>
-					<li><a href="#2_17" title="- to indicate that the instance has been constructed">2.17. constructed Property</a></li>
-					<li><a href="#2_18" title="_this.doIn (_superclass,&apos;wireUi&apos;);&#10;&#10;_class.doSuper (_this,&apos;wireUi&apos;);&#10;_class.useSuper (_this,&apos;wireUi&apos;);&#10;_class.callSuper (_this,&apos;wireUi&apos;);&#10;&#10;_superclass.on (_this,&apos;wireUi&apos;);&#10;_superclass.my (_this,&apos;wireUi&apos;);&#10;_superclass.doOn (_this,&apos;wireUi&apos;);&#10;_superclass.doMy (_this,&apos;wireUi&apos;);&#10;_superclass.useMy (_this,&apos;wireUi&apos;);&#10;_superclass.proto (_this,&apos;wireUi&apos;);&#10;_superclass.useMine (_this,&apos;wireUi&apos;);&#10;">2.18. - new and more concise semantics for calling methods on superclass</a></li>
+					<li><a href="#2_19" title="- optimize for successive substitution on the same source using the same form of map (but different values, of course)">2.19. Uize.substituteInto</a></li>
+					<li><a href="#2_20" title="- to indicate that the instance has been constructed">2.20. constructed Property</a></li>
+					<li><a href="#2_21" title="_this.doIn (_superclass,&apos;wireUi&apos;);&#10;&#10;_class.doSuper (_this,&apos;wireUi&apos;);&#10;_class.useSuper (_this,&apos;wireUi&apos;);&#10;_class.callSuper (_this,&apos;wireUi&apos;);&#10;&#10;_superclass.on (_this,&apos;wireUi&apos;);&#10;_superclass.my (_this,&apos;wireUi&apos;);&#10;_superclass.doOn (_this,&apos;wireUi&apos;);&#10;_superclass.doMy (_this,&apos;wireUi&apos;);&#10;_superclass.useMy (_this,&apos;wireUi&apos;);&#10;_superclass.proto (_this,&apos;wireUi&apos;);&#10;_superclass.useMine (_this,&apos;wireUi&apos;);&#10;">2.21. - new and more concise semantics for calling methods on superclass</a></li>
 				</ul>
 			</li>
 			<li><a href="#3">3. Uize.Array</a>
 				<ul>
-					<li><a href="#3_1" title="Uize.Array.flatten = function (array) {&#10;	var oldArrayLength;&#10;	do {&#10;		oldArrayLength = array.length;&#10;		array = array.concat.apply ([],array);&#10;	} while (array.length != oldArrayLength);&#10;	return array;&#10;};&#10;">3.1. Uize.Array.flatten</a></li>
-					<li><a href="#3_2" title="Uize.Array.Matching.countMatching">3.2. Uize.Array.Matching</a></li>
-					<li><a href="#3_3">3.3. Uize.Array.Order</a>
+					<li><a href="#3_1" title="Uize.Array.Matching.countMatching">3.1. Uize.Array.Matching</a></li>
+					<li><a href="#3_2">3.2. Uize.Array.Order</a>
 						<ul>
-							<li><a href="#3_3_1" title="- reorders the array in a binary search pattern">3.3.1. New 'binary' Mode for Uize.Array.Order.reorder</a></li>
-							<li><a href="#3_3_2" title="1,2,3,4,5,6,7">3.3.2. New 'evens odds' Mode for Uize.Array.Order.reorder</a>
+							<li><a href="#3_2_1" title="- reorders the array in a binary search pattern">3.2.1. New 'binary' Mode for Uize.Array.Order.reorder</a></li>
+							<li><a href="#3_2_2" title="1,2,3,4,5,6,7">3.2.2. New 'evens odds' Mode for Uize.Array.Order.reorder</a>
 								<ul>
-									<li><a href="#3_3_2_1" title="1,2,3,4,5,6,7">3.3.2.1. - is this a special case of a more general algorithm? What about every third?</a></li>
+									<li><a href="#3_2_2_1" title="1,2,3,4,5,6,7">3.2.2.1. - is this a special case of a more general algorithm? What about every third?</a></li>
 								</ul>
 							</li>
-							<li><a href="#3_3_3" title="1,2,3,4,5,6,7">3.3.3. New 'odds evens' Mode for Uize.Array.Order.reorder</a></li>
-							<li><a href="#3_3_4" title="In other words, perhaps any reordering should be able have a chunk size, which could be larger than one element, and when it is, then the chunks can themselves be ordered according to secondary ordering.">3.3.4. Primary, Secondary, or Even Tertiary Ordering?</a></li>
+							<li><a href="#3_2_3" title="1,2,3,4,5,6,7">3.2.3. New 'odds evens' Mode for Uize.Array.Order.reorder</a></li>
+							<li><a href="#3_2_4" title="In other words, perhaps any reordering should be able have a chunk size, which could be larger than one element, and when it is, then the chunks can themselves be ordered according to secondary ordering.">3.2.4. Primary, Secondary, or Even Tertiary Ordering?</a></li>
 						</ul>
 					</li>
-					<li><a href="#3_4" title="Uize.Array.Records.getColumn -- migrated from Uize.Data.getColumn">3.4. Uize.Array.Records</a>
+					<li><a href="#3_3" title="Uize.Array.Records.getColumn -- migrated from Uize.Data.getColumn">3.3. Uize.Array.Records</a>
 						<ul>
-							<li><a href="#3_4_1" title="delete all records that match (with configurable match function)">3.4.1. Uize.Array.Records.removeMatching</a></li>
-							<li><a href="#3_4_2" title="delete all records that match (with configurable match function)">3.4.2. Uize.Array.Records.retainMatching</a></li>
+							<li><a href="#3_3_1" title="delete all records that match (with configurable match function)">3.3.1. Uize.Array.Records.removeMatching</a></li>
+							<li><a href="#3_3_2" title="delete all records that match (with configurable match function)">3.3.2. Uize.Array.Records.retainMatching</a></li>
 						</ul>
 					</li>
-					<li><a href="#3_5">3.5. Uize.Array.Sort</a>
+					<li><a href="#3_4">3.4. Uize.Array.Sort</a>
 						<ul>
-							<li><a href="#3_5_1" title="- a sophisticated, human / intuituve alphanumeric sort">3.5.1. Uize.Array.Sort.alphaNum</a></li>
-							<li><a href="#3_5_2">3.5.2. Uize.Array.Sort.sortBy</a>
+							<li><a href="#3_4_1" title="- a sophisticated, human / intuituve alphanumeric sort">3.4.1. Uize.Array.Sort.alphaNum</a></li>
+							<li><a href="#3_4_2">3.4.2. Uize.Array.Sort.sortBy</a>
 								<ul>
-									<li><a href="#3_5_2_1" title="- sort value generator can be an array of sort value generators?">3.5.2.1. - support for secondary, tertiary sorts</a></li>
-									<li><a href="#3_5_2_2" title="This allows more sophisticated sorts. For example, with an alphanumerical (as opposed to ASCIIbetical) sort, the sort value generator function may do the work of parsing each element value into a set of number and non-number segments, and then the value comparison function can deal with comparing two sort values that may have different structure. In other words, the sort values generated cannot...">3.5.2.2. - support for optional sort value comparison function</a></li>
+									<li><a href="#3_4_2_1" title="- sort value generator can be an array of sort value generators?">3.4.2.1. - support for secondary, tertiary sorts</a></li>
+									<li><a href="#3_4_2_2" title="This allows more sophisticated sorts. For example, with an alphanumerical (as opposed to ASCIIbetical) sort, the sort value generator function may do the work of parsing each element value into a set of number and non-number segments, and then the value comparison function can deal with comparing two sort values that may have different structure. In other words, the sort values generated cannot...">3.4.2.2. - support for optional sort value comparison function</a></li>
 								</ul>
 							</li>
 						</ul>
 					</li>
-					<li><a href="#3_6" title="Uize.Array.Uniques.getUniques">3.6. Uize.Array.Uniques</a></li>
-					<li><a href="#3_7">3.7. Uize.Array.Util</a>
+					<li><a href="#3_5">3.5. Uize.Array.Dupes</a>
 						<ul>
-							<li><a href="#3_7_1" title="if the specified element is not in the specified source array, then it is added (configurable whether to prepend or append, but default is to append)">3.7.1. Uize.Array.Util.ensureValueIn</a></li>
+							<li><a href="#3_5_1" title="- returns an array containing only unique values">3.5.1. Uize.Array.Dupes.dedupe</a></li>
+							<li><a href="#3_5_2" title="- returns the number of occurrences of the specified value">3.5.2. Uize.Array.Dupes.getValueCount</a></li>
+							<li><a href="#3_5_3" title="- returns a lookup array of counts per value">3.5.3. Uize.Array.Dupes.getValueCounts</a></li>
+						</ul>
+					</li>
+					<li><a href="#3_6">3.6. Uize.Array.Util</a>
+						<ul>
+							<li><a href="#3_6_1" title="- if the specified element is not in the specified source array, then it is added (configurable whether to prepend or append, but default is to append)">3.6.1. Uize.Array.Util.ensureIn</a></li>
+							<li><a href="#3_6_2" title="- returns a chunk of the specified source array of the specified size">3.6.2. Uize.Array.Util.chunk</a></li>
+							<li><a href="#3_6_3" title="- returns the specified number of elements at the head of the specified source array">3.6.3. Uize.Array.Util.first</a></li>
+							<li><a href="#3_6_4" title="- returns the specified number of elements at the tail of the specified source array">3.6.4. Uize.Array.Util.last</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -1117,9 +1149,9 @@
 		
 		<p>function (value) {return _function ('foo','bar',value,'hello')}</p>
 		
-		<p>js. (_function,['foo','bar',0,'hello'],2)</p>
+		<p>Uize.makeCaller (_function,['foo','bar',0,'hello'],2)</p>
 		
-		<p>js.makeCaller (Math.pow,[0,2],0);</p>
+		<p>Uize.makeCaller (Math.pow,[0,2],0);</p>
 		
 		<p>function (value) {return Math.pow (value,2)}</p>
 	</div>
@@ -1128,10 +1160,175 @@
 	<h1 class="heading1" title="2. Uize"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>. </span>Uize</h1>
 	<div class="contents1">
 		<a name="2_1"></a>
-		<h2 class="heading2" title="2. Uize -&gt; 2.1. Conditions"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_1" title="2. Uize -&gt; 2.1. Conditions">1</a>. </span>Conditions</h2>
+		<h2 class="heading2" title="2. Uize -&gt; 2.1. Quick Win Additions"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_1" title="2. Uize -&gt; 2.1. Quick Win Additions">1</a>. </span>Quick Win Additions</h2>
 		<div class="contents2">
 			<a name="2_1_1"></a>
-			<h3 class="heading3" title="2. Uize -&gt; 2.1. Conditions -&gt; 2.1.1. The whenever Instance Method"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_1" title="2. Uize -&gt; 2.1. Conditions">1</a>.<a href="#2_1_1" title="2. Uize -&gt; 2.1. Conditions -&gt; 2.1.1. The whenever Instance Method">1</a>. </span>The whenever Instance Method</h3>
+			<h3 class="heading3" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.1. - Uize.indexOf"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_1" title="2. Uize -&gt; 2.1. Quick Win Additions">1</a>.<a href="#2_1_1" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.1. - Uize.indexOf">1</a>. </span>- Uize.indexOf</h3>
+			<div class="contents3">
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>uses indexIn</td></tr>
+				</table>
+			</div>
+			
+			<a name="2_1_2"></a>
+			<h3 class="heading3" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.2. - Uize.lastIndexOf"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_1" title="2. Uize -&gt; 2.1. Quick Win Additions">1</a>.<a href="#2_1_2" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.2. - Uize.lastIndexOf">2</a>. </span>- Uize.lastIndexOf</h3>
+			<div class="contents3">
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>uses indexIn</td></tr>
+				</table>
+			</div>
+			
+			<a name="2_1_3"></a>
+			<h3 class="heading3" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.3. - Uize.indexIn"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_1" title="2. Uize -&gt; 2.1. Quick Win Additions">1</a>.<a href="#2_1_3" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.3. - Uize.indexIn">3</a>. </span>- Uize.indexIn</h3>
+			<div class="contents3">
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>add support for object</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>fall back to using built-in indexOf or lastIndexOf Array method, when they are present and when comparison is strict</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>add support for source being a string</td></tr>
+				</table>
+			</div>
+			
+			<a name="2_1_4"></a>
+			<h3 class="heading3" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.4. - Uize.ensureIn"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_1" title="2. Uize -&gt; 2.1. Quick Win Additions">1</a>.<a href="#2_1_4" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.4. - Uize.ensureIn">4</a>. </span>- Uize.ensureIn</h3>
+			<div class="contents3">
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>checks to see if an element is present, and adds it if not</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>supports adding at beginning or adding at end</td></tr>
+				</table>
+			</div>
+			
+			<a name="2_1_5"></a>
+			<h3 class="heading3" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.5. - Uize.extend"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_1" title="2. Uize -&gt; 2.1. Quick Win Additions">1</a>.<a href="#2_1_5" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.5. - Uize.extend">5</a>. </span>- Uize.extend</h3>
+			<div class="contents3">
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>alias of copyInto</td></tr>
+				</table>
+			</div>
+			
+			<a name="2_1_6"></a>
+			<h3 class="heading3" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.6. - Uize.require"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_1" title="2. Uize -&gt; 2.1. Quick Win Additions">1</a>.<a href="#2_1_6" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.6. - Uize.require">6</a>. </span>- Uize.require</h3>
+			<div class="contents3">
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>alias to anonymous module with required</td></tr>
+				</table>
+			</div>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Uize.isObject</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Uize.isString</td></tr>
+			</table>
+			<a name="2_1_7"></a>
+			<h3 class="heading3" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.7. - Uize.ensureArray"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_1" title="2. Uize -&gt; 2.1. Quick Win Additions">1</a>.<a href="#2_1_7" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.7. - Uize.ensureArray">7</a>. </span>- Uize.ensureArray</h3>
+			<div class="contents3">
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>ensures that the value is an array</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>if the value is already an array, then it is simply returned</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>if the value is an arguments object, then an array is created from it</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>if the value is any other type, then a new array is returned with the value as its single element</td></tr>
+				</table>
+			</div>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Uize.isArrayLike</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Uize.isBoolean</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Uize.isNully</td></tr>
+			</table>
+			<a name="2_1_8"></a>
+			<h3 class="heading3" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.8. - Uize.isEmpty"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_1" title="2. Uize -&gt; 2.1. Quick Win Additions">1</a>.<a href="#2_1_8" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.8. - Uize.isEmpty">8</a>. </span>- Uize.isEmpty</h3>
+			<div class="contents3">
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>promoted from Uize.Data.isEmpty</td></tr>
+				</table>
+			</div>
+			
+			<a name="2_1_9"></a>
+			<h3 class="heading3" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.9. - Uize.keys"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_1" title="2. Uize -&gt; 2.1. Quick Win Additions">1</a>.<a href="#2_1_9" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.9. - Uize.keys">9</a>. </span>- Uize.keys</h3>
+			<div class="contents3">
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>promoted from Uize.Data.getKeys</td></tr>
+				</table>
+			</div>
+			
+			<a name="2_1_10"></a>
+			<h3 class="heading3" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.10. - Uize.values"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_1" title="2. Uize -&gt; 2.1. Quick Win Additions">1</a>.<a href="#2_1_10" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.10. - Uize.values">10</a>. </span>- Uize.values</h3>
+			<div class="contents3">
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>promoted from Uize.Data.getValues</td></tr>
+				</table>
+			</div>
+			
+			<a name="2_1_11"></a>
+			<h3 class="heading3" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.11. - Uize.totalKeys"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_1" title="2. Uize -&gt; 2.1. Quick Win Additions">1</a>.<a href="#2_1_11" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.11. - Uize.totalKeys">11</a>. </span>- Uize.totalKeys</h3>
+			<div class="contents3">
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>promoted from Uize.Data.getTotalKeys</td></tr>
+				</table>
+			</div>
+			
+			<a name="2_1_12"></a>
+			<h3 class="heading3" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.12. - Uize.min"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_1" title="2. Uize -&gt; 2.1. Quick Win Additions">1</a>.<a href="#2_1_12" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.12. - Uize.min">12</a>. </span>- Uize.min</h3>
+			<div class="contents3">
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>promoted from Uize.Data.min</td></tr>
+				</table>
+			</div>
+			
+			<a name="2_1_13"></a>
+			<h3 class="heading3" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.13. - Uize.max"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_1" title="2. Uize -&gt; 2.1. Quick Win Additions">1</a>.<a href="#2_1_13" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.13. - Uize.max">13</a>. </span>- Uize.max</h3>
+			<div class="contents3">
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>promoted from Uize.Data.max</td></tr>
+				</table>
+			</div>
+			
+			<a name="2_1_14"></a>
+			<h3 class="heading3" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.14. - Uize.emptyOut"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_1" title="2. Uize -&gt; 2.1. Quick Win Additions">1</a>.<a href="#2_1_14" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.14. - Uize.emptyOut">14</a>. </span>- Uize.emptyOut</h3>
+			<div class="contents3">
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>promoted from Uize.Data.emptyOut</td></tr>
+				</table>
+			</div>
+			
+			<a name="2_1_15"></a>
+			<h3 class="heading3" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.15. - Uize.lookup"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_1" title="2. Uize -&gt; 2.1. Quick Win Additions">1</a>.<a href="#2_1_15" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.15. - Uize.lookup">15</a>. </span>- Uize.lookup</h3>
+			<div class="contents3">
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>promoted from Uize.Data.getLookup</td></tr>
+				</table>
+			</div>
+			
+			<a name="2_1_16"></a>
+			<h3 class="heading3" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.16. - Uize.reverseLookup"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_1" title="2. Uize -&gt; 2.1. Quick Win Additions">1</a>.<a href="#2_1_16" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.16. - Uize.reverseLookup">16</a>. </span>- Uize.reverseLookup</h3>
+			<div class="contents3">
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>promoted from Uize.Data.getReverseLookup</td></tr>
+				</table>
+			</div>
+			
+			<a name="2_1_17"></a>
+			<h3 class="heading3" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.17. - Uize.truthy"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_1" title="2. Uize -&gt; 2.1. Quick Win Additions">1</a>.<a href="#2_1_17" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.17. - Uize.truthy">17</a>. </span>- Uize.truthy</h3>
+			<div class="contents3">
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>returns true if the value is truthy</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>useful for methods that accept value matchers</td></tr>
+				</table>
+			</div>
+			
+			<a name="2_1_18"></a>
+			<h3 class="heading3" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.18. - Uize.falsy"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_1" title="2. Uize -&gt; 2.1. Quick Win Additions">1</a>.<a href="#2_1_18" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.18. - Uize.falsy">18</a>. </span>- Uize.falsy</h3>
+			<div class="contents3">
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>returns true is the value is falsy</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>useful for methods that accept value matchers</td></tr>
+				</table>
+			</div>
+		</div>
+		
+		<a name="2_2"></a>
+		<h2 class="heading2" title="2. Uize -&gt; 2.2. Conditions"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_2" title="2. Uize -&gt; 2.2. Conditions">2</a>. </span>Conditions</h2>
+		<div class="contents2">
+			<a name="2_2_1"></a>
+			<h3 class="heading3" title="2. Uize -&gt; 2.2. Conditions -&gt; 2.2.1. The whenever Instance Method"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_2" title="2. Uize -&gt; 2.2. Conditions">2</a>.<a href="#2_2_1" title="2. Uize -&gt; 2.2. Conditions -&gt; 2.2.1. The whenever Instance Method">1</a>. </span>The whenever Instance Method</h3>
 			<div class="contents3">
 				<p><span class="allCaps">EXAMPLES</span></p>
 				
@@ -1152,8 +1349,8 @@ myWidget.whenever (
 </pre>
 			</div>
 			
-			<a name="2_1_2"></a>
-			<h3 class="heading3" title="2. Uize -&gt; 2.1. Conditions -&gt; 2.1.2. The once Instance Method"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_1" title="2. Uize -&gt; 2.1. Conditions">1</a>.<a href="#2_1_2" title="2. Uize -&gt; 2.1. Conditions -&gt; 2.1.2. The once Instance Method">2</a>. </span>The once Instance Method</h3>
+			<a name="2_2_2"></a>
+			<h3 class="heading3" title="2. Uize -&gt; 2.2. Conditions -&gt; 2.2.2. The once Instance Method"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_2" title="2. Uize -&gt; 2.2. Conditions">2</a>.<a href="#2_2_2" title="2. Uize -&gt; 2.2. Conditions -&gt; 2.2.2. The once Instance Method">2</a>. </span>The once Instance Method</h3>
 			<div class="contents3">
 				<p><span class="allCaps">EXAMPLE</span></p>
 				
@@ -1168,8 +1365,8 @@ myWidget.whenever (
 			</div>
 		</div>
 		
-		<a name="2_2"></a>
-		<h2 class="heading2" title="2. Uize -&gt; 2.2. Properties Expressions"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_2" title="2. Uize -&gt; 2.2. Properties Expressions">2</a>. </span>Properties Expressions</h2>
+		<a name="2_3"></a>
+		<h2 class="heading2" title="2. Uize -&gt; 2.3. Properties Expressions"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_3" title="2. Uize -&gt; 2.3. Properties Expressions">3</a>. </span>Properties Expressions</h2>
 		<div class="contents2">
 			<p><span class="allCaps">SYNTAX</span></p>
 			
@@ -1194,8 +1391,8 @@ myWidget.whenever (
 </pre>
 		</div>
 		
-		<a name="2_3"></a>
-		<h2 class="heading2" title="2. Uize -&gt; 2.3. Derived Properties"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_3" title="2. Uize -&gt; 2.3. Derived Properties">3</a>. </span>Derived Properties</h2>
+		<a name="2_4"></a>
+		<h2 class="heading2" title="2. Uize -&gt; 2.4. Derived Properties"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_4" title="2. Uize -&gt; 2.4. Derived Properties">4</a>. </span>Derived Properties</h2>
 		<div class="contents2">
 			<p>A derived property is a special type of set-get property whose value is derived from the values of other set-get properties of the same instance.</p>
 			
@@ -1228,11 +1425,11 @@ myWidget.whenever (
 			
 			<p>In the above example, the <code>allSelected</code>, <code>oneSelected</code>, and <code>someSelected</code> set-get properties are all derived properties. A set-get property is indicated as being a derived property by the presence of the <code>derived</code> property in the property profile. The <code>derived</code> property serves both to indicate that a set-get property is derived, as well to provide the deriver function that indicates from which other set-get properties the derived property is derived and how to calculate the derived value.</p>
 			
-			<a name="2_3_1"></a>
-			<h3 class="heading3" title="2. Uize -&gt; 2.3. Derived Properties -&gt; 2.3.1. Implementation Questions"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_3" title="2. Uize -&gt; 2.3. Derived Properties">3</a>.<a href="#2_3_1" title="2. Uize -&gt; 2.3. Derived Properties -&gt; 2.3.1. Implementation Questions">1</a>. </span>Implementation Questions</h3>
+			<a name="2_4_1"></a>
+			<h3 class="heading3" title="2. Uize -&gt; 2.4. Derived Properties -&gt; 2.4.1. Implementation Questions"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_4" title="2. Uize -&gt; 2.4. Derived Properties">4</a>.<a href="#2_4_1" title="2. Uize -&gt; 2.4. Derived Properties -&gt; 2.4.1. Implementation Questions">1</a>. </span>Implementation Questions</h3>
 			<div class="contents3">
-				<a name="2_3_1_1"></a>
-				<h4 class="heading4" title="2. Uize -&gt; 2.3. Derived Properties -&gt; 2.3.1. Implementation Questions -&gt; 2.3.1.1. How Are Derived Properties Inherited"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_3" title="2. Uize -&gt; 2.3. Derived Properties">3</a>.<a href="#2_3_1" title="2. Uize -&gt; 2.3. Derived Properties -&gt; 2.3.1. Implementation Questions">1</a>.<a href="#2_3_1_1" title="2. Uize -&gt; 2.3. Derived Properties -&gt; 2.3.1. Implementation Questions -&gt; 2.3.1.1. How Are Derived Properties Inherited">1</a>. </span>How Are Derived Properties Inherited</h4>
+				<a name="2_4_1_1"></a>
+				<h4 class="heading4" title="2. Uize -&gt; 2.4. Derived Properties -&gt; 2.4.1. Implementation Questions -&gt; 2.4.1.1. How Are Derived Properties Inherited"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_4" title="2. Uize -&gt; 2.4. Derived Properties">4</a>.<a href="#2_4_1" title="2. Uize -&gt; 2.4. Derived Properties -&gt; 2.4.1. Implementation Questions">1</a>.<a href="#2_4_1_1" title="2. Uize -&gt; 2.4. Derived Properties -&gt; 2.4.1. Implementation Questions -&gt; 2.4.1.1. How Are Derived Properties Inherited">1</a>. </span>How Are Derived Properties Inherited</h4>
 				<div class="contents4">
 					<p>Currently, profiles for set-get properties are inherited through cloning of the definition objects.</p>
 					
@@ -1240,42 +1437,42 @@ myWidget.whenever (
 				</div>
 			</div>
 			
-			<a name="2_3_2"></a>
-			<h3 class="heading3" title="2. Uize -&gt; 2.3. Derived Properties -&gt; 2.3.2. Implementation Approaches"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_3" title="2. Uize -&gt; 2.3. Derived Properties">3</a>.<a href="#2_3_2" title="2. Uize -&gt; 2.3. Derived Properties -&gt; 2.3.2. Implementation Approaches">2</a>. </span>Implementation Approaches</h3>
+			<a name="2_4_2"></a>
+			<h3 class="heading3" title="2. Uize -&gt; 2.4. Derived Properties -&gt; 2.4.2. Implementation Approaches"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_4" title="2. Uize -&gt; 2.4. Derived Properties">4</a>.<a href="#2_4_2" title="2. Uize -&gt; 2.4. Derived Properties -&gt; 2.4.2. Implementation Approaches">2</a>. </span>Implementation Approaches</h3>
 			<div class="contents3">
-				<a name="2_3_2_1"></a>
-				<h4 class="heading4" title="2. Uize -&gt; 2.3. Derived Properties -&gt; 2.3.2. Implementation Approaches -&gt; 2.3.2.1. Exloding Out the Properties Being Set"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_3" title="2. Uize -&gt; 2.3. Derived Properties">3</a>.<a href="#2_3_2" title="2. Uize -&gt; 2.3. Derived Properties -&gt; 2.3.2. Implementation Approaches">2</a>.<a href="#2_3_2_1" title="2. Uize -&gt; 2.3. Derived Properties -&gt; 2.3.2. Implementation Approaches -&gt; 2.3.2.1. Exloding Out the Properties Being Set">1</a>. </span>Exloding Out the Properties Being Set</h4>
+				<a name="2_4_2_1"></a>
+				<h4 class="heading4" title="2. Uize -&gt; 2.4. Derived Properties -&gt; 2.4.2. Implementation Approaches -&gt; 2.4.2.1. Exloding Out the Properties Being Set"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_4" title="2. Uize -&gt; 2.4. Derived Properties">4</a>.<a href="#2_4_2" title="2. Uize -&gt; 2.4. Derived Properties -&gt; 2.4.2. Implementation Approaches">2</a>.<a href="#2_4_2_1" title="2. Uize -&gt; 2.4. Derived Properties -&gt; 2.4.2. Implementation Approaches -&gt; 2.4.2.1. Exloding Out the Properties Being Set">1</a>. </span>Exloding Out the Properties Being Set</h4>
 				<div class="contents4">
 					<p>With this approach, setting values for derived set-get properties is worked into the process of setting values for properties that affect derived properties, by exploding out the properties being set to included all affected derived properties.</p>
 					
 					<p>After setting values for the set-get properties that are being set explicitly, and before executing onChange handlers for any set-get properties whose values have changed, the registered set-get properties are scanned for derived set-get properties that may be affected by the properties being set explicitly. If any derived set-get properties <b>are</b> affected by any of the set-get properties whose values have changed, then values are computed for those derived properties and their values are set. This process is repeated to address set- get properties that are derived from derived properties whose values may have changed. The process is repeated until there are no longer any derived properties that are affected and that have not had new values computed.</p>
 					
-					<a name="2_3_2_1_1"></a>
-					<h5 class="heading5" title="2. Uize -&gt; 2.3. Derived Properties -&gt; 2.3.2. Implementation Approaches -&gt; 2.3.2.1. Exloding Out the Properties Being Set -&gt; 2.3.2.1.1. Advantages"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_3" title="2. Uize -&gt; 2.3. Derived Properties">3</a>.<a href="#2_3_2" title="2. Uize -&gt; 2.3. Derived Properties -&gt; 2.3.2. Implementation Approaches">2</a>.<a href="#2_3_2_1" title="2. Uize -&gt; 2.3. Derived Properties -&gt; 2.3.2. Implementation Approaches -&gt; 2.3.2.1. Exloding Out the Properties Being Set">1</a>.<a href="#2_3_2_1_1" title="2. Uize -&gt; 2.3. Derived Properties -&gt; 2.3.2. Implementation Approaches -&gt; 2.3.2.1. Exloding Out the Properties Being Set -&gt; 2.3.2.1.1. Advantages">1</a>. </span>Advantages</h5>
+					<a name="2_4_2_1_1"></a>
+					<h5 class="heading5" title="2. Uize -&gt; 2.4. Derived Properties -&gt; 2.4.2. Implementation Approaches -&gt; 2.4.2.1. Exloding Out the Properties Being Set -&gt; 2.4.2.1.1. Advantages"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_4" title="2. Uize -&gt; 2.4. Derived Properties">4</a>.<a href="#2_4_2" title="2. Uize -&gt; 2.4. Derived Properties -&gt; 2.4.2. Implementation Approaches">2</a>.<a href="#2_4_2_1" title="2. Uize -&gt; 2.4. Derived Properties -&gt; 2.4.2. Implementation Approaches -&gt; 2.4.2.1. Exloding Out the Properties Being Set">1</a>.<a href="#2_4_2_1_1" title="2. Uize -&gt; 2.4. Derived Properties -&gt; 2.4.2. Implementation Approaches -&gt; 2.4.2.1. Exloding Out the Properties Being Set -&gt; 2.4.2.1.1. Advantages">1</a>. </span>Advantages</h5>
 					<div class="contents5">
 						<p>document...</p>
 					</div>
 					
-					<a name="2_3_2_1_2"></a>
-					<h5 class="heading5" title="2. Uize -&gt; 2.3. Derived Properties -&gt; 2.3.2. Implementation Approaches -&gt; 2.3.2.1. Exloding Out the Properties Being Set -&gt; 2.3.2.1.2. Disadvantages"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_3" title="2. Uize -&gt; 2.3. Derived Properties">3</a>.<a href="#2_3_2" title="2. Uize -&gt; 2.3. Derived Properties -&gt; 2.3.2. Implementation Approaches">2</a>.<a href="#2_3_2_1" title="2. Uize -&gt; 2.3. Derived Properties -&gt; 2.3.2. Implementation Approaches -&gt; 2.3.2.1. Exloding Out the Properties Being Set">1</a>.<a href="#2_3_2_1_2" title="2. Uize -&gt; 2.3. Derived Properties -&gt; 2.3.2. Implementation Approaches -&gt; 2.3.2.1. Exloding Out the Properties Being Set -&gt; 2.3.2.1.2. Disadvantages">2</a>. </span>Disadvantages</h5>
+					<a name="2_4_2_1_2"></a>
+					<h5 class="heading5" title="2. Uize -&gt; 2.4. Derived Properties -&gt; 2.4.2. Implementation Approaches -&gt; 2.4.2.1. Exloding Out the Properties Being Set -&gt; 2.4.2.1.2. Disadvantages"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_4" title="2. Uize -&gt; 2.4. Derived Properties">4</a>.<a href="#2_4_2" title="2. Uize -&gt; 2.4. Derived Properties -&gt; 2.4.2. Implementation Approaches">2</a>.<a href="#2_4_2_1" title="2. Uize -&gt; 2.4. Derived Properties -&gt; 2.4.2. Implementation Approaches -&gt; 2.4.2.1. Exloding Out the Properties Being Set">1</a>.<a href="#2_4_2_1_2" title="2. Uize -&gt; 2.4. Derived Properties -&gt; 2.4.2. Implementation Approaches -&gt; 2.4.2.1. Exloding Out the Properties Being Set -&gt; 2.4.2.1.2. Disadvantages">2</a>. </span>Disadvantages</h5>
 					<div class="contents5">
 						<p>document...</p>
 					</div>
 				</div>
 				
-				<a name="2_3_2_2"></a>
-				<h4 class="heading4" title="2. Uize -&gt; 2.3. Derived Properties -&gt; 2.3.2. Implementation Approaches -&gt; 2.3.2.2. Single Level Derived Property Batching"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_3" title="2. Uize -&gt; 2.3. Derived Properties">3</a>.<a href="#2_3_2" title="2. Uize -&gt; 2.3. Derived Properties -&gt; 2.3.2. Implementation Approaches">2</a>.<a href="#2_3_2_2" title="2. Uize -&gt; 2.3. Derived Properties -&gt; 2.3.2. Implementation Approaches -&gt; 2.3.2.2. Single Level Derived Property Batching">2</a>. </span>Single Level Derived Property Batching</h4>
+				<a name="2_4_2_2"></a>
+				<h4 class="heading4" title="2. Uize -&gt; 2.4. Derived Properties -&gt; 2.4.2. Implementation Approaches -&gt; 2.4.2.2. Single Level Derived Property Batching"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_4" title="2. Uize -&gt; 2.4. Derived Properties">4</a>.<a href="#2_4_2" title="2. Uize -&gt; 2.4. Derived Properties -&gt; 2.4.2. Implementation Approaches">2</a>.<a href="#2_4_2_2" title="2. Uize -&gt; 2.4. Derived Properties -&gt; 2.4.2. Implementation Approaches -&gt; 2.4.2.2. Single Level Derived Property Batching">2</a>. </span>Single Level Derived Property Batching</h4>
 				<div class="contents4">
 					<p>With this approach, values for all directly affected derived set-get properties are set in a batch set that occurs before <code>onChange</code> handlers are executed for the set-get properties being explicitly set.</p>
 				</div>
 				
-				<a name="2_3_2_3"></a>
-				<h4 class="heading4" title="2. Uize -&gt; 2.3. Derived Properties -&gt; 2.3.2. Implementation Approaches -&gt; 2.3.2.3. Using onChange Handler Merchanism"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_3" title="2. Uize -&gt; 2.3. Derived Properties">3</a>.<a href="#2_3_2" title="2. Uize -&gt; 2.3. Derived Properties -&gt; 2.3.2. Implementation Approaches">2</a>.<a href="#2_3_2_3" title="2. Uize -&gt; 2.3. Derived Properties -&gt; 2.3.2. Implementation Approaches -&gt; 2.3.2.3. Using onChange Handler Merchanism">3</a>. </span>Using onChange Handler Merchanism</h4>
+				<a name="2_4_2_3"></a>
+				<h4 class="heading4" title="2. Uize -&gt; 2.4. Derived Properties -&gt; 2.4.2. Implementation Approaches -&gt; 2.4.2.3. Using onChange Handler Merchanism"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_4" title="2. Uize -&gt; 2.4. Derived Properties">4</a>.<a href="#2_4_2" title="2. Uize -&gt; 2.4. Derived Properties -&gt; 2.4.2. Implementation Approaches">2</a>.<a href="#2_4_2_3" title="2. Uize -&gt; 2.4. Derived Properties -&gt; 2.4.2. Implementation Approaches -&gt; 2.4.2.3. Using onChange Handler Merchanism">3</a>. </span>Using onChange Handler Merchanism</h4>
 				<div class="contents4">
 					<p>With this approach, when a derived set-get property is registed, an onChange handler is registered with any property from which the derived property is derived.</p>
 					
-					<a name="2_3_2_3_1"></a>
-					<h5 class="heading5" title="2. Uize -&gt; 2.3. Derived Properties -&gt; 2.3.2. Implementation Approaches -&gt; 2.3.2.3. Using onChange Handler Merchanism -&gt; 2.3.2.3.1. Advantages"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_3" title="2. Uize -&gt; 2.3. Derived Properties">3</a>.<a href="#2_3_2" title="2. Uize -&gt; 2.3. Derived Properties -&gt; 2.3.2. Implementation Approaches">2</a>.<a href="#2_3_2_3" title="2. Uize -&gt; 2.3. Derived Properties -&gt; 2.3.2. Implementation Approaches -&gt; 2.3.2.3. Using onChange Handler Merchanism">3</a>.<a href="#2_3_2_3_1" title="2. Uize -&gt; 2.3. Derived Properties -&gt; 2.3.2. Implementation Approaches -&gt; 2.3.2.3. Using onChange Handler Merchanism -&gt; 2.3.2.3.1. Advantages">1</a>. </span>Advantages</h5>
+					<a name="2_4_2_3_1"></a>
+					<h5 class="heading5" title="2. Uize -&gt; 2.4. Derived Properties -&gt; 2.4.2. Implementation Approaches -&gt; 2.4.2.3. Using onChange Handler Merchanism -&gt; 2.4.2.3.1. Advantages"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_4" title="2. Uize -&gt; 2.4. Derived Properties">4</a>.<a href="#2_4_2" title="2. Uize -&gt; 2.4. Derived Properties -&gt; 2.4.2. Implementation Approaches">2</a>.<a href="#2_4_2_3" title="2. Uize -&gt; 2.4. Derived Properties -&gt; 2.4.2. Implementation Approaches -&gt; 2.4.2.3. Using onChange Handler Merchanism">3</a>.<a href="#2_4_2_3_1" title="2. Uize -&gt; 2.4. Derived Properties -&gt; 2.4.2. Implementation Approaches -&gt; 2.4.2.3. Using onChange Handler Merchanism -&gt; 2.4.2.3.1. Advantages">1</a>. </span>Advantages</h5>
 					<div class="contents5">
 						<table class="list">
 						<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>uses the existing optimization built into the <code>onChange</code> handlers mechanism</td></tr>
@@ -1283,8 +1480,8 @@ myWidget.whenever (
 						</table>
 					</div>
 					
-					<a name="2_3_2_3_2"></a>
-					<h5 class="heading5" title="2. Uize -&gt; 2.3. Derived Properties -&gt; 2.3.2. Implementation Approaches -&gt; 2.3.2.3. Using onChange Handler Merchanism -&gt; 2.3.2.3.2. Disadvantages"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_3" title="2. Uize -&gt; 2.3. Derived Properties">3</a>.<a href="#2_3_2" title="2. Uize -&gt; 2.3. Derived Properties -&gt; 2.3.2. Implementation Approaches">2</a>.<a href="#2_3_2_3" title="2. Uize -&gt; 2.3. Derived Properties -&gt; 2.3.2. Implementation Approaches -&gt; 2.3.2.3. Using onChange Handler Merchanism">3</a>.<a href="#2_3_2_3_2" title="2. Uize -&gt; 2.3. Derived Properties -&gt; 2.3.2. Implementation Approaches -&gt; 2.3.2.3. Using onChange Handler Merchanism -&gt; 2.3.2.3.2. Disadvantages">2</a>. </span>Disadvantages</h5>
+					<a name="2_4_2_3_2"></a>
+					<h5 class="heading5" title="2. Uize -&gt; 2.4. Derived Properties -&gt; 2.4.2. Implementation Approaches -&gt; 2.4.2.3. Using onChange Handler Merchanism -&gt; 2.4.2.3.2. Disadvantages"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_4" title="2. Uize -&gt; 2.4. Derived Properties">4</a>.<a href="#2_4_2" title="2. Uize -&gt; 2.4. Derived Properties -&gt; 2.4.2. Implementation Approaches">2</a>.<a href="#2_4_2_3" title="2. Uize -&gt; 2.4. Derived Properties -&gt; 2.4.2. Implementation Approaches -&gt; 2.4.2.3. Using onChange Handler Merchanism">3</a>.<a href="#2_4_2_3_2" title="2. Uize -&gt; 2.4. Derived Properties -&gt; 2.4.2. Implementation Approaches -&gt; 2.4.2.3. Using onChange Handler Merchanism -&gt; 2.4.2.3.2. Disadvantages">2</a>. </span>Disadvantages</h5>
 					<div class="contents5">
 						<table class="list">
 						<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>involves a separate set for each derived set-get property whose value changes</td></tr>
@@ -1292,19 +1489,19 @@ myWidget.whenever (
 						</table>
 					</div>
 					
-					<a name="2_3_2_3_3"></a>
-					<h5 class="heading5" title="2. Uize -&gt; 2.3. Derived Properties -&gt; 2.3.2. Implementation Approaches -&gt; 2.3.2.3. Using onChange Handler Merchanism -&gt; 2.3.2.3.3. Issues to Deal With"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_3" title="2. Uize -&gt; 2.3. Derived Properties">3</a>.<a href="#2_3_2" title="2. Uize -&gt; 2.3. Derived Properties -&gt; 2.3.2. Implementation Approaches">2</a>.<a href="#2_3_2_3" title="2. Uize -&gt; 2.3. Derived Properties -&gt; 2.3.2. Implementation Approaches -&gt; 2.3.2.3. Using onChange Handler Merchanism">3</a>.<a href="#2_3_2_3_3" title="2. Uize -&gt; 2.3. Derived Properties -&gt; 2.3.2. Implementation Approaches -&gt; 2.3.2.3. Using onChange Handler Merchanism -&gt; 2.3.2.3.3. Issues to Deal With">3</a>. </span>Issues to Deal With</h5>
+					<a name="2_4_2_3_3"></a>
+					<h5 class="heading5" title="2. Uize -&gt; 2.4. Derived Properties -&gt; 2.4.2. Implementation Approaches -&gt; 2.4.2.3. Using onChange Handler Merchanism -&gt; 2.4.2.3.3. Issues to Deal With"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_4" title="2. Uize -&gt; 2.4. Derived Properties">4</a>.<a href="#2_4_2" title="2. Uize -&gt; 2.4. Derived Properties -&gt; 2.4.2. Implementation Approaches">2</a>.<a href="#2_4_2_3" title="2. Uize -&gt; 2.4. Derived Properties -&gt; 2.4.2. Implementation Approaches -&gt; 2.4.2.3. Using onChange Handler Merchanism">3</a>.<a href="#2_4_2_3_3" title="2. Uize -&gt; 2.4. Derived Properties -&gt; 2.4.2. Implementation Approaches -&gt; 2.4.2.3. Using onChange Handler Merchanism -&gt; 2.4.2.3.3. Issues to Deal With">3</a>. </span>Issues to Deal With</h5>
 					<div class="contents5">
-						<a name="2_3_2_3_3_1"></a>
-						<h5 class="heading6" title="2. Uize -&gt; 2.3. Derived Properties -&gt; 2.3.2. Implementation Approaches -&gt; 2.3.2.3. Using onChange Handler Merchanism -&gt; 2.3.2.3.3. Issues to Deal With -&gt; 2.3.2.3.3.1. Re-registering a Non-derived Set-get Property"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_3" title="2. Uize -&gt; 2.3. Derived Properties">3</a>.<a href="#2_3_2" title="2. Uize -&gt; 2.3. Derived Properties -&gt; 2.3.2. Implementation Approaches">2</a>.<a href="#2_3_2_3" title="2. Uize -&gt; 2.3. Derived Properties -&gt; 2.3.2. Implementation Approaches -&gt; 2.3.2.3. Using onChange Handler Merchanism">3</a>.<a href="#2_3_2_3_3" title="2. Uize -&gt; 2.3. Derived Properties -&gt; 2.3.2. Implementation Approaches -&gt; 2.3.2.3. Using onChange Handler Merchanism -&gt; 2.3.2.3.3. Issues to Deal With">3</a>.<a href="#2_3_2_3_3_1" title="2. Uize -&gt; 2.3. Derived Properties -&gt; 2.3.2. Implementation Approaches -&gt; 2.3.2.3. Using onChange Handler Merchanism -&gt; 2.3.2.3.3. Issues to Deal With -&gt; 2.3.2.3.3.1. Re-registering a Non-derived Set-get Property">1</a>. </span>Re-registering a Non-derived Set-get Property</h5>
+						<a name="2_4_2_3_3_1"></a>
+						<h5 class="heading6" title="2. Uize -&gt; 2.4. Derived Properties -&gt; 2.4.2. Implementation Approaches -&gt; 2.4.2.3. Using onChange Handler Merchanism -&gt; 2.4.2.3.3. Issues to Deal With -&gt; 2.4.2.3.3.1. Re-registering a Non-derived Set-get Property"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_4" title="2. Uize -&gt; 2.4. Derived Properties">4</a>.<a href="#2_4_2" title="2. Uize -&gt; 2.4. Derived Properties -&gt; 2.4.2. Implementation Approaches">2</a>.<a href="#2_4_2_3" title="2. Uize -&gt; 2.4. Derived Properties -&gt; 2.4.2. Implementation Approaches -&gt; 2.4.2.3. Using onChange Handler Merchanism">3</a>.<a href="#2_4_2_3_3" title="2. Uize -&gt; 2.4. Derived Properties -&gt; 2.4.2. Implementation Approaches -&gt; 2.4.2.3. Using onChange Handler Merchanism -&gt; 2.4.2.3.3. Issues to Deal With">3</a>.<a href="#2_4_2_3_3_1" title="2. Uize -&gt; 2.4. Derived Properties -&gt; 2.4.2. Implementation Approaches -&gt; 2.4.2.3. Using onChange Handler Merchanism -&gt; 2.4.2.3.3. Issues to Deal With -&gt; 2.4.2.3.3.1. Re-registering a Non-derived Set-get Property">1</a>. </span>Re-registering a Non-derived Set-get Property</h5>
 						<div class="contents6">
 							<p>How does one deal with re-registering a set-get property that affects a derived set-get property?</p>
 							
 							<p>Currently, everything gets blown away when re-registering a set-get property. This means that the <code>onChange</code> handler that was added to the set-get property at the time of registering the set-get property that is derived from it will get blown away, and the relationship of the derived property to the property from which it is derived will get blown away.</p>
 						</div>
 						
-						<a name="2_3_2_3_3_2"></a>
-						<h5 class="heading6" title="2. Uize -&gt; 2.3. Derived Properties -&gt; 2.3.2. Implementation Approaches -&gt; 2.3.2.3. Using onChange Handler Merchanism -&gt; 2.3.2.3.3. Issues to Deal With -&gt; 2.3.2.3.3.2. Re-registering a Derived Set-get Property"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_3" title="2. Uize -&gt; 2.3. Derived Properties">3</a>.<a href="#2_3_2" title="2. Uize -&gt; 2.3. Derived Properties -&gt; 2.3.2. Implementation Approaches">2</a>.<a href="#2_3_2_3" title="2. Uize -&gt; 2.3. Derived Properties -&gt; 2.3.2. Implementation Approaches -&gt; 2.3.2.3. Using onChange Handler Merchanism">3</a>.<a href="#2_3_2_3_3" title="2. Uize -&gt; 2.3. Derived Properties -&gt; 2.3.2. Implementation Approaches -&gt; 2.3.2.3. Using onChange Handler Merchanism -&gt; 2.3.2.3.3. Issues to Deal With">3</a>.<a href="#2_3_2_3_3_2" title="2. Uize -&gt; 2.3. Derived Properties -&gt; 2.3.2. Implementation Approaches -&gt; 2.3.2.3. Using onChange Handler Merchanism -&gt; 2.3.2.3.3. Issues to Deal With -&gt; 2.3.2.3.3.2. Re-registering a Derived Set-get Property">2</a>. </span>Re-registering a Derived Set-get Property</h5>
+						<a name="2_4_2_3_3_2"></a>
+						<h5 class="heading6" title="2. Uize -&gt; 2.4. Derived Properties -&gt; 2.4.2. Implementation Approaches -&gt; 2.4.2.3. Using onChange Handler Merchanism -&gt; 2.4.2.3.3. Issues to Deal With -&gt; 2.4.2.3.3.2. Re-registering a Derived Set-get Property"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_4" title="2. Uize -&gt; 2.4. Derived Properties">4</a>.<a href="#2_4_2" title="2. Uize -&gt; 2.4. Derived Properties -&gt; 2.4.2. Implementation Approaches">2</a>.<a href="#2_4_2_3" title="2. Uize -&gt; 2.4. Derived Properties -&gt; 2.4.2. Implementation Approaches -&gt; 2.4.2.3. Using onChange Handler Merchanism">3</a>.<a href="#2_4_2_3_3" title="2. Uize -&gt; 2.4. Derived Properties -&gt; 2.4.2. Implementation Approaches -&gt; 2.4.2.3. Using onChange Handler Merchanism -&gt; 2.4.2.3.3. Issues to Deal With">3</a>.<a href="#2_4_2_3_3_2" title="2. Uize -&gt; 2.4. Derived Properties -&gt; 2.4.2. Implementation Approaches -&gt; 2.4.2.3. Using onChange Handler Merchanism -&gt; 2.4.2.3.3. Issues to Deal With -&gt; 2.4.2.3.3.2. Re-registering a Derived Set-get Property">2</a>. </span>Re-registering a Derived Set-get Property</h5>
 						<div class="contents6">
 							<p>How does one deal with re-registering a derived set-get property, where the new profile for the derived property defines a different relationship properties from which it is derived?</p>
 						</div>
@@ -1313,8 +1510,8 @@ myWidget.whenever (
 			</div>
 		</div>
 		
-		<a name="2_4"></a>
-		<h2 class="heading2" title="2. Uize -&gt; 2.4. Property Bindings"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_4" title="2. Uize -&gt; 2.4. Property Bindings">4</a>. </span>Property Bindings</h2>
+		<a name="2_5"></a>
+		<h2 class="heading2" title="2. Uize -&gt; 2.5. Property Bindings"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_5" title="2. Uize -&gt; 2.5. Property Bindings">5</a>. </span>Property Bindings</h2>
 		<div class="contents2">
 			<p>Provide a way in the <code><a href="#2">Uize</a></code> base class to bind two set-get properties together, in order to keep their values synchronized.</p>
 			
@@ -1347,52 +1544,148 @@ myWidget.whenever (
 			</table>
 		</div>
 		
-		<a name="2_5"></a>
-		<h2 class="heading2" title="2. Uize -&gt; 2.5. Copy Ability for Set-get Properties"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_5" title="2. Uize -&gt; 2.5. Copy Ability for Set-get Properties">5</a>. </span>Copy Ability for Set-get Properties</h2>
+		<a name="2_6"></a>
+		<h2 class="heading2" title="2. Uize -&gt; 2.6. Copy Ability for Set-get Properties"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_6" title="2. Uize -&gt; 2.6. Copy Ability for Set-get Properties">6</a>. </span>Copy Ability for Set-get Properties</h2>
 		<div class="contents2">
 			<p>Copy ability, for initial values of set-get properties that are arrays or objects.</p>
 			
 			<p>Have a property that can be specified in a set-get property's profile, which can be used to cause properties whose initial values are object types to be initialized by cloning the initial value rather than simply setting a reference to a shared object.</p>
 		</div>
 		
-		<a name="2_6"></a>
-		<h2 class="heading2" title="2. Uize -&gt; 2.6. Uize.makeCaller"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_6" title="2. Uize -&gt; 2.6. Uize.makeCaller">6</a>. </span>Uize.makeCaller</h2>
+		<a name="2_7"></a>
+		<h2 class="heading2" title="2. Uize -&gt; 2.7. Uize.methodCall"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_7" title="2. Uize -&gt; 2.7. Uize.methodCall">7</a>. </span>Uize.methodCall</h2>
 		<div class="contents2">
 			<p>Lets you conveniently create a function / method caller, where you can specify context, function, and arguments.</p>
 			
 			<p><span class="allCaps">IMPLEMENTATION</span></p>
 			
 			
-<pre class="sample-code">Uize.makeCaller = function (_context,_function,_arguments) {
-  var _caller = new Function (
-    'var m=arguments.callee;' +
-    'return m.f.apply(' +
-      (_context ? 'm.c' : 'this') +
-      (
-        (
-          _arguments = _arguments === _undefined
-            ? _sacredEmptyArray
-            : Uize.isArray (_arguments) ? _arguments : [_arguments]
-        ).length
-          ? ',arguments.length?m.a.concat.apply(m.a,arguments):m.a'
-            // IMPORTANT: CAN'T USE CONCAT BECAUSE OF ARRAY FLATTENING WHEN ARGUMENTS ARE ARRAYS!!!
-          : ',arguments'
-      ) +
-    ')'
+<pre class="sample-code">Uize.methodCall = function (_context,_function,_arguments,_extraArgsMapping) {
+  var _hasExtraArgsMapping = _extraArgsMapping != _undefined;
+  if (_hasExtraArgsMapping)
+    _arguments = _arguments ? _arguments.concat () : []
+  ;
+  if (typeof _function == 'string')
+    _function = _context [_function]
+  ;
+  return (
+    _hasExtraArgsMapping
+      ? (
+        typeof _extraArgsMapping == 'number'
+          ? function () {
+            _arguments [_extraArgsMapping] = arguments [0];
+            return _function.apply (_context,_arguments);
+          }
+          : function () {
+            for (
+              var _argumentNo = -1, _argumentsLength = arguments.length;
+              ++_argumentNo &lt; _argumentsLength;
+            )
+              _arguments [_extraArgsMapping [_argumentNo]] = arguments [_argumentNo]
+            ;
+            return _function.apply (_context,_arguments);
+          }
+      )
+      : _arguments &amp;&amp; _arguments.length
+        ? function () {return _function.apply (_context,_arguments)}
+        : function () {return _function.call (_context)}
   );
-  _caller.c = _context;
-  _caller.f = typeof _function == 'string' ? _context [_function] : _function;
-  _caller.a = _arguments;
-  return _caller;
+};
+
+Uize.functionCall = function (_function,_arguments,_extraArgsMapping) {
+  return Uize.methodCall (0,_function,_arguments,_extraArgsMapping);
+};
+</pre>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">var
+  xSquared = Uize.functionCall (Math.pow,[0,2],0),
+  3ToPowerX = Uize.functionCall (Math.pow,[3,0],1)
+;
+</pre>
+			
+			<p><span class="allCaps">INSTEAD OF...</span></p>
+			
+			
+<pre class="sample-code">var 3ToPowerX = function (x) {return Math.pow (3,x)};
+</pre>
+			
+			<p><span class="allCaps">USE...</span></p>
+			
+			
+<pre class="sample-code">var 3ToPowerX = Uize.functionCall (Math.pow,[3,0],1);
+</pre>
+		</div>
+		
+		<a name="2_8"></a>
+		<h2 class="heading2" title="2. Uize -&gt; 2.8. Uize.watchMethod"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_8" title="2. Uize -&gt; 2.8. Uize.watchMethod">8</a>. </span>Uize.watchMethod</h2>
+		<div class="contents2">
+			
+<pre class="sample-code">Uize.watchFunction = function (_function,_before,_after) {
+  return function () {
+    _before &amp;&amp; _before (this,arguments);
+    var _result = _watched.apply (this,arguments);
+    _after &amp;&amp; _after (this,arguments,_result);
+    return _result;
+  };
+};
+
+Uize.watchMethod = function (_context,_methodName,_before,_after) {
+  if (!Uize.isInstance (_context))
+    _context = _context.prototype
+  ;
+  var
+    _watched = _context [_methodName],
+    _watcher = _context [_methodName] = Uize.watchFunction (_watched)
+  ;
+  return {
+    watch: function () {_context [_methodName] = _watcher},
+    unwatch: function () {_context [_methodName] = _watched}
+  };
 };
 </pre>
 		</div>
 		
-		<a name="2_7"></a>
-		<h2 class="heading2" title="2. Uize -&gt; 2.7. Uize.constrain"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_7" title="2. Uize -&gt; 2.7. Uize.constrain">7</a>. </span>Uize.constrain</h2>
+		<a name="2_9"></a>
+		<h2 class="heading2" title="2. Uize -&gt; 2.9. Uize.memoize"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_9" title="2. Uize -&gt; 2.9. Uize.memoize">9</a>. </span>Uize.memoize</h2>
 		<div class="contents2">
-			<a name="2_7_1"></a>
-			<h3 class="heading3" title="2. Uize -&gt; 2.7. Uize.constrain -&gt; 2.7.1. Support a wrap flag"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_7" title="2. Uize -&gt; 2.7. Uize.constrain">7</a>.<a href="#2_7_1" title="2. Uize -&gt; 2.7. Uize.constrain -&gt; 2.7.1. Support a wrap flag">1</a>. </span>Support a wrap flag</h3>
+			
+<pre class="sample-code">Uize.memoize = function (_function) {
+  var _resultsCache = {};
+  return function () {
+    var _cacheKey = Uize.Json.to (arguments);
+    return (
+      _cacheKey in _resultsCache
+        ? _resultsCache [_cacheKey]
+        : (_resultsCache [_cacheKey] = _function.apply (this,arguments))
+    );
+  };
+};
+
+Uize.memoizeMethod = function (_context,_methodName) {
+  // ...
+};
+</pre>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>add ability to memoize a method (memoizeMethod)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>consider supporting ability to dynamically unmemoize / turn memoization on or off</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>expose more granular memoization cache methods to allow functions to cache more discriminately</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>for basic memoization, support an optional function that can test the arguments values to determine whether or not memoization should be used for the specific call</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>consider supporting functions that may be asynchronous (ie. use callbacks)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>support ability to clear entire cache</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>support ability to invalidate cache for a specific set of argument values</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>idea: ability to count time saved as a result of memoization (ie. keep track of number of times particular argument sets are encountered, and how long it took for first calculation)</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_10"></a>
+		<h2 class="heading2" title="2. Uize -&gt; 2.10. Uize.constrain"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_10" title="2. Uize -&gt; 2.10. Uize.constrain">10</a>. </span>Uize.constrain</h2>
+		<div class="contents2">
+			<a name="2_10_1"></a>
+			<h3 class="heading3" title="2. Uize -&gt; 2.10. Uize.constrain -&gt; 2.10.1. Support a wrap flag"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_10" title="2. Uize -&gt; 2.10. Uize.constrain">10</a>.<a href="#2_10_1" title="2. Uize -&gt; 2.10. Uize.constrain -&gt; 2.10.1. Support a wrap flag">1</a>. </span>Support a wrap flag</h3>
 			<div class="contents3">
 				<p>Support a wrap flag, so that constrained values can be made to wrap around within the constraining range, rather than always only hitting up against the edges.</p>
 				
@@ -1412,31 +1705,31 @@ return ((value - min) % maxMinDelta + maxMinDelta) % maxMinDelta + min;
 			</div>
 		</div>
 		
-		<a name="2_8"></a>
-		<h2 class="heading2" title="2. Uize -&gt; 2.8. Uize.callOn"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_8" title="2. Uize -&gt; 2.8. Uize.callOn">8</a>. </span>Uize.callOn</h2>
+		<a name="2_11"></a>
+		<h2 class="heading2" title="2. Uize -&gt; 2.11. Uize.callOn"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_11" title="2. Uize -&gt; 2.11. Uize.callOn">11</a>. </span>Uize.callOn</h2>
 		<div class="contents2">
-			<a name="2_8_1"></a>
-			<h3 class="heading3" title="2. Uize -&gt; 2.8. Uize.callOn -&gt; 2.8.1. Support Instances of Non-Uize Classes"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_8" title="2. Uize -&gt; 2.8. Uize.callOn">8</a>.<a href="#2_8_1" title="2. Uize -&gt; 2.8. Uize.callOn -&gt; 2.8.1. Support Instances of Non-Uize Classes">1</a>. </span>Support Instances of Non-Uize Classes</h3>
+			<a name="2_11_1"></a>
+			<h3 class="heading3" title="2. Uize -&gt; 2.11. Uize.callOn -&gt; 2.11.1. Support Instances of Non-Uize Classes"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_11" title="2. Uize -&gt; 2.11. Uize.callOn">11</a>.<a href="#2_11_1" title="2. Uize -&gt; 2.11. Uize.callOn -&gt; 2.11.1. Support Instances of Non-Uize Classes">1</a>. </span>Support Instances of Non-Uize Classes</h3>
 			<div class="contents3">
-				<p>Add support for using the <code><a href="#2_8">Uize.callOn</a></code> method on a target that is an instance of a class that is not a <code><a href="#2">Uize</a></code> subclass.</p>
+				<p>Add support for using the <code><a href="#2_11">Uize.callOn</a></code> method on a target that is an instance of a class that is not a <code><a href="#2">Uize</a></code> subclass.</p>
 				
-				<p>For example, it should be possible to use the <code><a href="#2_8">Uize.callOn</a></code> method on instances of the <code><a href="../javascript-reference/Date.html">Date</a></code> object, or any of the other JavaScript built-in objects. It should also be possible to use the method on instances of custom objects. Basically, if the target is an object and its constructor is not <code><a href="../javascript-reference/Object.html">Object</a></code>, then it should be treated as an instance and not an object containing a collection of subtargets. The one thing to consider in testing for non-Object constructor is simple instances of the <code><a href="../javascript-reference/Object.html">Object</a></code> object that originate from a different window or an iframe.</p>
+				<p>For example, it should be possible to use the <code><a href="#2_11">Uize.callOn</a></code> method on instances of the <code><a href="../javascript-reference/Date.html">Date</a></code> object, or any of the other JavaScript built-in objects. It should also be possible to use the method on instances of custom objects. Basically, if the target is an object and its constructor is not <code><a href="../javascript-reference/Object.html">Object</a></code>, then it should be treated as an instance and not an object containing a collection of subtargets. The one thing to consider in testing for non-Object constructor is simple instances of the <code><a href="../javascript-reference/Object.html">Object</a></code> object that originate from a different window or an iframe.</p>
 			</div>
 		</div>
 		
-		<a name="2_9"></a>
-		<h2 class="heading2" title="2. Uize -&gt; 2.9. Uize.indexIn"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_9" title="2. Uize -&gt; 2.9. Uize.indexIn">9</a>. </span>Uize.indexIn</h2>
+		<a name="2_12"></a>
+		<h2 class="heading2" title="2. Uize -&gt; 2.12. Uize.indexIn"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_12" title="2. Uize -&gt; 2.12. Uize.indexIn">12</a>. </span>Uize.indexIn</h2>
 		<div class="contents2">
-			<a name="2_9_1"></a>
-			<h3 class="heading3" title="2. Uize -&gt; 2.9. Uize.indexIn -&gt; 2.9.1. Support Object Source"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_9" title="2. Uize -&gt; 2.9. Uize.indexIn">9</a>.<a href="#2_9_1" title="2. Uize -&gt; 2.9. Uize.indexIn -&gt; 2.9.1. Support Object Source">1</a>. </span>Support Object Source</h3>
+			<a name="2_12_1"></a>
+			<h3 class="heading3" title="2. Uize -&gt; 2.12. Uize.indexIn -&gt; 2.12.1. Support Object Source"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_12" title="2. Uize -&gt; 2.12. Uize.indexIn">12</a>.<a href="#2_12_1" title="2. Uize -&gt; 2.12. Uize.indexIn -&gt; 2.12.1. Support Object Source">1</a>. </span>Support Object Source</h3>
 			<div class="contents3">
 				<p>For object type source, could find key whose value matches, and return undefined (or null?) if value not found in object.</p>
 				
 				<p>In this mode, <code>fromEndBOOL</code> parameter could control direction for iterating through the keys of the object.</p>
 			</div>
 			
-			<a name="2_9_2"></a>
-			<h3 class="heading3" title="2. Uize -&gt; 2.9. Uize.indexIn -&gt; 2.9.2. Support Simple Type Source"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_9" title="2. Uize -&gt; 2.9. Uize.indexIn">9</a>.<a href="#2_9_2" title="2. Uize -&gt; 2.9. Uize.indexIn -&gt; 2.9.2. Support Simple Type Source">2</a>. </span>Support Simple Type Source</h3>
+			<a name="2_12_2"></a>
+			<h3 class="heading3" title="2. Uize -&gt; 2.12. Uize.indexIn -&gt; 2.12.2. Support Simple Type Source"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_12" title="2. Uize -&gt; 2.12. Uize.indexIn">12</a>.<a href="#2_12_2" title="2. Uize -&gt; 2.12. Uize.indexIn -&gt; 2.12.2. Support Simple Type Source">2</a>. </span>Support Simple Type Source</h3>
 			<div class="contents3">
 				<p>For simple type source, could do string index.</p>
 				
@@ -1444,11 +1737,11 @@ return ((value - min) % maxMinDelta + maxMinDelta) % maxMinDelta + min;
 			</div>
 		</div>
 		
-		<a name="2_10"></a>
-		<h2 class="heading2" title="2. Uize -&gt; 2.10. Uize.module"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_10" title="2. Uize -&gt; 2.10. Uize.module">10</a>. </span>Uize.module</h2>
+		<a name="2_13"></a>
+		<h2 class="heading2" title="2. Uize -&gt; 2.13. Uize.module"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_13" title="2. Uize -&gt; 2.13. Uize.module">13</a>. </span>Uize.module</h2>
 		<div class="contents2">
-			<a name="2_10_1"></a>
-			<h3 class="heading3" title="2. Uize -&gt; 2.10. Uize.module -&gt; 2.10.1. Support Code Besides in Module Loader"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_10" title="2. Uize -&gt; 2.10. Uize.module">10</a>.<a href="#2_10_1" title="2. Uize -&gt; 2.10. Uize.module -&gt; 2.10.1. Support Code Besides in Module Loader">1</a>. </span>Support Code Besides in Module Loader</h3>
+			<a name="2_13_1"></a>
+			<h3 class="heading3" title="2. Uize -&gt; 2.13. Uize.module -&gt; 2.13.1. Support Code Besides in Module Loader"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_13" title="2. Uize -&gt; 2.13. Uize.module">13</a>.<a href="#2_13_1" title="2. Uize -&gt; 2.13. Uize.module -&gt; 2.13.1. Support Code Besides in Module Loader">1</a>. </span>Support Code Besides in Module Loader</h3>
 			<div class="contents3">
 				<p>How can code require a module that is not in the modules directory (like a code beside)?</p>
 				
@@ -1456,24 +1749,24 @@ return ((value - min) % maxMinDelta + maxMinDelta) % maxMinDelta + min;
 			</div>
 		</div>
 		
-		<a name="2_11"></a>
-		<h2 class="heading2" title="2. Uize -&gt; 2.11. Multiple Inheritance"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_11" title="2. Uize -&gt; 2.11. Multiple Inheritance">11</a>. </span>Multiple Inheritance</h2>
+		<a name="2_14"></a>
+		<h2 class="heading2" title="2. Uize -&gt; 2.14. Multiple Inheritance"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_14" title="2. Uize -&gt; 2.14. Multiple Inheritance">14</a>. </span>Multiple Inheritance</h2>
 		<div class="contents2">
 			<p>Consider a facility to support multiple inheritance (may involve creating a merge service for merging data from one object into another, since it should be possible to merge additional features of a different class into an already created class, and perhaps that merge feature would also be used in the _subclass function's implementation).</p>
 		</div>
 		
-		<a name="2_12"></a>
-		<h2 class="heading2" title="2. Uize -&gt; 2.12. Library Modules"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_12" title="2. Uize -&gt; 2.12. Library Modules">12</a>. </span>Library Modules</h2>
+		<a name="2_15"></a>
+		<h2 class="heading2" title="2. Uize -&gt; 2.15. Library Modules"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_15" title="2. Uize -&gt; 2.15. Library Modules">15</a>. </span>Library Modules</h2>
 		<div class="contents2">
-			<a name="2_12_1"></a>
-			<h3 class="heading3" title="2. Uize -&gt; 2.12. Library Modules -&gt; 2.12.1. Library of Dispersed Modules"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_12" title="2. Uize -&gt; 2.12. Library Modules">12</a>.<a href="#2_12_1" title="2. Uize -&gt; 2.12. Library Modules -&gt; 2.12.1. Library of Dispersed Modules">1</a>. </span>Library of Dispersed Modules</h3>
+			<a name="2_15_1"></a>
+			<h3 class="heading3" title="2. Uize -&gt; 2.15. Library Modules -&gt; 2.15.1. Library of Dispersed Modules"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_15" title="2. Uize -&gt; 2.15. Library Modules">15</a>.<a href="#2_15_1" title="2. Uize -&gt; 2.15. Library Modules -&gt; 2.15.1. Library of Dispersed Modules">1</a>. </span>Library of Dispersed Modules</h3>
 			<div class="contents3">
 				<p>Can library modules that are outside the modules directory require modules that are outside the modules directory?</p>
 			</div>
 		</div>
 		
-		<a name="2_13"></a>
-		<h2 class="heading2" title="2. Uize -&gt; 2.13. Handle Simple Type in Place of Constructor Properties"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_13" title="2. Uize -&gt; 2.13. Handle Simple Type in Place of Constructor Properties">13</a>. </span>Handle Simple Type in Place of Constructor Properties</h2>
+		<a name="2_16"></a>
+		<h2 class="heading2" title="2. Uize -&gt; 2.16. Handle Simple Type in Place of Constructor Properties"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_16" title="2. Uize -&gt; 2.16. Handle Simple Type in Place of Constructor Properties">16</a>. </span>Handle Simple Type in Place of Constructor Properties</h2>
 		<div class="contents2">
 			<p>Variation on constructor, where specifying a non-object for the properties has the effect of setting the value property.</p>
 			
@@ -1496,20 +1789,20 @@ new Uize.Widget.Bar.Slider (50);          // old form
 </pre>
 		</div>
 		
-		<a name="2_14"></a>
-		<h2 class="heading2" title="2. Uize -&gt; 2.14. Uize.clone and Recursion"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_14" title="2. Uize -&gt; 2.14. Uize.clone and Recursion">14</a>. </span>Uize.clone and Recursion</h2>
+		<a name="2_17"></a>
+		<h2 class="heading2" title="2. Uize -&gt; 2.17. Uize.clone and Recursion"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_17" title="2. Uize -&gt; 2.17. Uize.clone and Recursion">17</a>. </span>Uize.clone and Recursion</h2>
 		<div class="contents2">
 			<p>Handle recursion in Uize.clone (how to generate properties that are references to other parts of structure in same relationship as the equivalent property in the cloning source???)</p>
 		</div>
 		
-		<a name="2_15"></a>
-		<h2 class="heading2" title="2. Uize -&gt; 2.15. Improvements to Property Mechanism"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_15" title="2. Uize -&gt; 2.15. Improvements to Property Mechanism">15</a>. </span>Improvements to Property Mechanism</h2>
+		<a name="2_18"></a>
+		<h2 class="heading2" title="2. Uize -&gt; 2.18. Improvements to Property Mechanism"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_18" title="2. Uize -&gt; 2.18. Improvements to Property Mechanism">18</a>. </span>Improvements to Property Mechanism</h2>
 		<div class="contents2">
-			<a name="2_15_1"></a>
-			<h3 class="heading3" title="2. Uize -&gt; 2.15. Improvements to Property Mechanism -&gt; 2.15.1. New Profile Features"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_15" title="2. Uize -&gt; 2.15. Improvements to Property Mechanism">15</a>.<a href="#2_15_1" title="2. Uize -&gt; 2.15. Improvements to Property Mechanism -&gt; 2.15.1. New Profile Features">1</a>. </span>New Profile Features</h3>
+			<a name="2_18_1"></a>
+			<h3 class="heading3" title="2. Uize -&gt; 2.18. Improvements to Property Mechanism -&gt; 2.18.1. New Profile Features"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_18" title="2. Uize -&gt; 2.18. Improvements to Property Mechanism">18</a>.<a href="#2_18_1" title="2. Uize -&gt; 2.18. Improvements to Property Mechanism -&gt; 2.18.1. New Profile Features">1</a>. </span>New Profile Features</h3>
 			<div class="contents3">
-				<a name="2_15_1_1"></a>
-				<h4 class="heading4" title="2. Uize -&gt; 2.15. Improvements to Property Mechanism -&gt; 2.15.1. New Profile Features -&gt; 2.15.1.1. type"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_15" title="2. Uize -&gt; 2.15. Improvements to Property Mechanism">15</a>.<a href="#2_15_1" title="2. Uize -&gt; 2.15. Improvements to Property Mechanism -&gt; 2.15.1. New Profile Features">1</a>.<a href="#2_15_1_1" title="2. Uize -&gt; 2.15. Improvements to Property Mechanism -&gt; 2.15.1. New Profile Features -&gt; 2.15.1.1. type">1</a>. </span>type</h4>
+				<a name="2_18_1_1"></a>
+				<h4 class="heading4" title="2. Uize -&gt; 2.18. Improvements to Property Mechanism -&gt; 2.18.1. New Profile Features -&gt; 2.18.1.1. type"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_18" title="2. Uize -&gt; 2.18. Improvements to Property Mechanism">18</a>.<a href="#2_18_1" title="2. Uize -&gt; 2.18. Improvements to Property Mechanism -&gt; 2.18.1. New Profile Features">1</a>.<a href="#2_18_1_1" title="2. Uize -&gt; 2.18. Improvements to Property Mechanism -&gt; 2.18.1. New Profile Features -&gt; 2.18.1.1. type">1</a>. </span>type</h4>
 				<div class="contents4">
 					<p>Basic types...</p>
 					
@@ -1527,8 +1820,8 @@ new Uize.Widget.Bar.Slider (50);          // old form
 					</table>
 				</div>
 				
-				<a name="2_15_1_2"></a>
-				<h4 class="heading4" title="2. Uize -&gt; 2.15. Improvements to Property Mechanism -&gt; 2.15.1. New Profile Features -&gt; 2.15.1.2. validator"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_15" title="2. Uize -&gt; 2.15. Improvements to Property Mechanism">15</a>.<a href="#2_15_1" title="2. Uize -&gt; 2.15. Improvements to Property Mechanism -&gt; 2.15.1. New Profile Features">1</a>.<a href="#2_15_1_2" title="2. Uize -&gt; 2.15. Improvements to Property Mechanism -&gt; 2.15.1. New Profile Features -&gt; 2.15.1.2. validator">2</a>. </span>validator</h4>
+				<a name="2_18_1_2"></a>
+				<h4 class="heading4" title="2. Uize -&gt; 2.18. Improvements to Property Mechanism -&gt; 2.18.1. New Profile Features -&gt; 2.18.1.2. validator"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_18" title="2. Uize -&gt; 2.18. Improvements to Property Mechanism">18</a>.<a href="#2_18_1" title="2. Uize -&gt; 2.18. Improvements to Property Mechanism -&gt; 2.18.1. New Profile Features">1</a>.<a href="#2_18_1_2" title="2. Uize -&gt; 2.18. Improvements to Property Mechanism -&gt; 2.18.1. New Profile Features -&gt; 2.18.1.2. validator">2</a>. </span>validator</h4>
 				<div class="contents4">
 					<p>Different types of validators...</p>
 					
@@ -1546,16 +1839,16 @@ new Uize.Widget.Bar.Slider (50);          // old form
 			</table>
 		</div>
 		
-		<a name="2_16"></a>
-		<h2 class="heading2" title="2. Uize -&gt; 2.16. Uize.substituteInto"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_16" title="2. Uize -&gt; 2.16. Uize.substituteInto">16</a>. </span>Uize.substituteInto</h2>
+		<a name="2_19"></a>
+		<h2 class="heading2" title="2. Uize -&gt; 2.19. Uize.substituteInto"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_19" title="2. Uize -&gt; 2.19. Uize.substituteInto">19</a>. </span>Uize.substituteInto</h2>
 		<div class="contents2">
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>optimize for successive substitution on the same source using the same form of map (but different values, of course)</td></tr>
 			</table>
 		</div>
 		
-		<a name="2_17"></a>
-		<h2 class="heading2" title="2. Uize -&gt; 2.17. constructed Property"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_17" title="2. Uize -&gt; 2.17. constructed Property">17</a>. </span>constructed Property</h2>
+		<a name="2_20"></a>
+		<h2 class="heading2" title="2. Uize -&gt; 2.20. constructed Property"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_20" title="2. Uize -&gt; 2.20. constructed Property">20</a>. </span>constructed Property</h2>
 		<div class="contents2">
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>to indicate that the instance has been constructed</td></tr>
@@ -1569,8 +1862,8 @@ new Uize.Widget.Bar.Slider (50);          // old form
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>idea: originator of a property set knows that the property is being set, so doesn't want to be informed of a change in the value? A way to provide an ID for the originator of a set? The basic ongoing problem is when multiple sources want to be able to change and also be informed of changes in a particular property. How does one make this more efficient and eliminate multiple redundant execution triggered by events?</td></tr>
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>idea: a way to track whether a user originated an event. Sufficient to check on the presence of domEvent property? domEvent property should be propagated all the way up.</td></tr>
 		</table>
-		<a name="2_18"></a>
-		<h2 class="heading2" title="2. Uize -&gt; 2.18. - new and more concise semantics for calling methods on superclass"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_18" title="2. Uize -&gt; 2.18. - new and more concise semantics for calling methods on superclass">18</a>. </span>- new and more concise semantics for calling methods on superclass</h2>
+		<a name="2_21"></a>
+		<h2 class="heading2" title="2. Uize -&gt; 2.21. - new and more concise semantics for calling methods on superclass"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_21" title="2. Uize -&gt; 2.21. - new and more concise semantics for calling methods on superclass">21</a>. </span>- new and more concise semantics for calling methods on superclass</h2>
 		<div class="contents2">
 			
 <pre class="sample-code">_this.doIn (_superclass,'wireUi');
@@ -1594,28 +1887,15 @@ _superclass.useMine (_this,'wireUi');
 	<h1 class="heading1" title="3. Uize.Array"><span class="headingNumber"><a href="#3" title="3. Uize.Array">3</a>. </span>Uize.Array</h1>
 	<div class="contents1">
 		<a name="3_1"></a>
-		<h2 class="heading2" title="3. Uize.Array -&gt; 3.1. Uize.Array.flatten"><span class="headingNumber"><a href="#3" title="3. Uize.Array">3</a>.<a href="#3_1" title="3. Uize.Array -&gt; 3.1. Uize.Array.flatten">1</a>. </span>Uize.Array.flatten</h2>
-		<div class="contents2">
-			
-<pre class="sample-code">Uize.Array.flatten = function (array) {
-  var oldArrayLength;
-  do {
-    oldArrayLength = array.length;
-    array = array.concat.apply ([],array);
-  } while (array.length != oldArrayLength);
-  return array;
-};
-</pre>
-		</div>
-		
-		<a name="3_2"></a>
-		<h2 class="heading2" title="3. Uize.Array -&gt; 3.2. Uize.Array.Matching"><span class="headingNumber"><a href="#3" title="3. Uize.Array">3</a>.<a href="#3_2" title="3. Uize.Array -&gt; 3.2. Uize.Array.Matching">2</a>. </span>Uize.Array.Matching</h2>
+		<h2 class="heading2" title="3. Uize.Array -&gt; 3.1. Uize.Array.Matching"><span class="headingNumber"><a href="#3" title="3. Uize.Array">3</a>.<a href="#3_1" title="3. Uize.Array -&gt; 3.1. Uize.Array.Matching">1</a>. </span>Uize.Array.Matching</h2>
 		<div class="contents2">
 			<p>Uize.Array.Matching.countMatching</p>
 			
-			<p>Uize.Array.Matching.removeMatching</p>
+			<p>Uize.Array.Matching.keepMatching</p>
 			
-			<p>Uize.Array.Matching.retainMatching</p>
+			<p>Uize.Array.Matching.tossMatching</p>
+			
+			<p>Uize.Array.Matching.eachMatching</p>
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>model the interface for this package on the interface for the Uize.String.Lines package</td></tr>
@@ -1623,11 +1903,11 @@ _superclass.useMine (_this,'wireUi');
 			</table>
 		</div>
 		
-		<a name="3_3"></a>
-		<h2 class="heading2" title="3. Uize.Array -&gt; 3.3. Uize.Array.Order"><span class="headingNumber"><a href="#3" title="3. Uize.Array">3</a>.<a href="#3_3" title="3. Uize.Array -&gt; 3.3. Uize.Array.Order">3</a>. </span>Uize.Array.Order</h2>
+		<a name="3_2"></a>
+		<h2 class="heading2" title="3. Uize.Array -&gt; 3.2. Uize.Array.Order"><span class="headingNumber"><a href="#3" title="3. Uize.Array">3</a>.<a href="#3_2" title="3. Uize.Array -&gt; 3.2. Uize.Array.Order">2</a>. </span>Uize.Array.Order</h2>
 		<div class="contents2">
-			<a name="3_3_1"></a>
-			<h3 class="heading3" title="3. Uize.Array -&gt; 3.3. Uize.Array.Order -&gt; 3.3.1. New &apos;binary&apos; Mode for Uize.Array.Order.reorder"><span class="headingNumber"><a href="#3" title="3. Uize.Array">3</a>.<a href="#3_3" title="3. Uize.Array -&gt; 3.3. Uize.Array.Order">3</a>.<a href="#3_3_1" title="3. Uize.Array -&gt; 3.3. Uize.Array.Order -&gt; 3.3.1. New &apos;binary&apos; Mode for Uize.Array.Order.reorder">1</a>. </span>New 'binary' Mode for Uize.Array.Order.reorder</h3>
+			<a name="3_2_1"></a>
+			<h3 class="heading3" title="3. Uize.Array -&gt; 3.2. Uize.Array.Order -&gt; 3.2.1. New &apos;binary&apos; Mode for Uize.Array.Order.reorder"><span class="headingNumber"><a href="#3" title="3. Uize.Array">3</a>.<a href="#3_2" title="3. Uize.Array -&gt; 3.2. Uize.Array.Order">2</a>.<a href="#3_2_1" title="3. Uize.Array -&gt; 3.2. Uize.Array.Order -&gt; 3.2.1. New &apos;binary&apos; Mode for Uize.Array.Order.reorder">1</a>. </span>New 'binary' Mode for Uize.Array.Order.reorder</h3>
 			<div class="contents3">
 				<table class="list">
 				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>reorders the array in a binary search pattern</td></tr>
@@ -1641,8 +1921,8 @@ _superclass.useMine (_this,'wireUi');
 				</table>
 			</div>
 			
-			<a name="3_3_2"></a>
-			<h3 class="heading3" title="3. Uize.Array -&gt; 3.3. Uize.Array.Order -&gt; 3.3.2. New &apos;evens odds&apos; Mode for Uize.Array.Order.reorder"><span class="headingNumber"><a href="#3" title="3. Uize.Array">3</a>.<a href="#3_3" title="3. Uize.Array -&gt; 3.3. Uize.Array.Order">3</a>.<a href="#3_3_2" title="3. Uize.Array -&gt; 3.3. Uize.Array.Order -&gt; 3.3.2. New &apos;evens odds&apos; Mode for Uize.Array.Order.reorder">2</a>. </span>New 'evens odds' Mode for Uize.Array.Order.reorder</h3>
+			<a name="3_2_2"></a>
+			<h3 class="heading3" title="3. Uize.Array -&gt; 3.2. Uize.Array.Order -&gt; 3.2.2. New &apos;evens odds&apos; Mode for Uize.Array.Order.reorder"><span class="headingNumber"><a href="#3" title="3. Uize.Array">3</a>.<a href="#3_2" title="3. Uize.Array -&gt; 3.2. Uize.Array.Order">2</a>.<a href="#3_2_2" title="3. Uize.Array -&gt; 3.2. Uize.Array.Order -&gt; 3.2.2. New &apos;evens odds&apos; Mode for Uize.Array.Order.reorder">2</a>. </span>New 'evens odds' Mode for Uize.Array.Order.reorder</h3>
 			<div class="contents3">
 				<p>1,2,3,4,5,6,7</p>
 				
@@ -1651,8 +1931,8 @@ _superclass.useMine (_this,'wireUi');
 				<table class="list">
 				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>what about 'evens reverse odds'?</td></tr>
 				</table>
-				<a name="3_3_2_1"></a>
-				<h4 class="heading4" title="3. Uize.Array -&gt; 3.3. Uize.Array.Order -&gt; 3.3.2. New &apos;evens odds&apos; Mode for Uize.Array.Order.reorder -&gt; 3.3.2.1. - is this a special case of a more general algorithm? What about every third?"><span class="headingNumber"><a href="#3" title="3. Uize.Array">3</a>.<a href="#3_3" title="3. Uize.Array -&gt; 3.3. Uize.Array.Order">3</a>.<a href="#3_3_2" title="3. Uize.Array -&gt; 3.3. Uize.Array.Order -&gt; 3.3.2. New &apos;evens odds&apos; Mode for Uize.Array.Order.reorder">2</a>.<a href="#3_3_2_1" title="3. Uize.Array -&gt; 3.3. Uize.Array.Order -&gt; 3.3.2. New &apos;evens odds&apos; Mode for Uize.Array.Order.reorder -&gt; 3.3.2.1. - is this a special case of a more general algorithm? What about every third?">1</a>. </span>- is this a special case of a more general algorithm? What about every third?</h4>
+				<a name="3_2_2_1"></a>
+				<h4 class="heading4" title="3. Uize.Array -&gt; 3.2. Uize.Array.Order -&gt; 3.2.2. New &apos;evens odds&apos; Mode for Uize.Array.Order.reorder -&gt; 3.2.2.1. - is this a special case of a more general algorithm? What about every third?"><span class="headingNumber"><a href="#3" title="3. Uize.Array">3</a>.<a href="#3_2" title="3. Uize.Array -&gt; 3.2. Uize.Array.Order">2</a>.<a href="#3_2_2" title="3. Uize.Array -&gt; 3.2. Uize.Array.Order -&gt; 3.2.2. New &apos;evens odds&apos; Mode for Uize.Array.Order.reorder">2</a>.<a href="#3_2_2_1" title="3. Uize.Array -&gt; 3.2. Uize.Array.Order -&gt; 3.2.2. New &apos;evens odds&apos; Mode for Uize.Array.Order.reorder -&gt; 3.2.2.1. - is this a special case of a more general algorithm? What about every third?">1</a>. </span>- is this a special case of a more general algorithm? What about every third?</h4>
 				<div class="contents4">
 					<p>1,2,3,4,5,6,7</p>
 					
@@ -1664,8 +1944,8 @@ _superclass.useMine (_this,'wireUi');
 				</div>
 			</div>
 			
-			<a name="3_3_3"></a>
-			<h3 class="heading3" title="3. Uize.Array -&gt; 3.3. Uize.Array.Order -&gt; 3.3.3. New &apos;odds evens&apos; Mode for Uize.Array.Order.reorder"><span class="headingNumber"><a href="#3" title="3. Uize.Array">3</a>.<a href="#3_3" title="3. Uize.Array -&gt; 3.3. Uize.Array.Order">3</a>.<a href="#3_3_3" title="3. Uize.Array -&gt; 3.3. Uize.Array.Order -&gt; 3.3.3. New &apos;odds evens&apos; Mode for Uize.Array.Order.reorder">3</a>. </span>New 'odds evens' Mode for Uize.Array.Order.reorder</h3>
+			<a name="3_2_3"></a>
+			<h3 class="heading3" title="3. Uize.Array -&gt; 3.2. Uize.Array.Order -&gt; 3.2.3. New &apos;odds evens&apos; Mode for Uize.Array.Order.reorder"><span class="headingNumber"><a href="#3" title="3. Uize.Array">3</a>.<a href="#3_2" title="3. Uize.Array -&gt; 3.2. Uize.Array.Order">2</a>.<a href="#3_2_3" title="3. Uize.Array -&gt; 3.2. Uize.Array.Order -&gt; 3.2.3. New &apos;odds evens&apos; Mode for Uize.Array.Order.reorder">3</a>. </span>New 'odds evens' Mode for Uize.Array.Order.reorder</h3>
 			<div class="contents3">
 				<p>1,2,3,4,5,6,7</p>
 				
@@ -1681,8 +1961,8 @@ _superclass.useMine (_this,'wireUi');
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Uize.Array.Order.evensOdds</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Uize.Array.Order.oddsEvens</td></tr>
 			</table>
-			<a name="3_3_4"></a>
-			<h3 class="heading3" title="3. Uize.Array -&gt; 3.3. Uize.Array.Order -&gt; 3.3.4. Primary, Secondary, or Even Tertiary Ordering?"><span class="headingNumber"><a href="#3" title="3. Uize.Array">3</a>.<a href="#3_3" title="3. Uize.Array -&gt; 3.3. Uize.Array.Order">3</a>.<a href="#3_3_4" title="3. Uize.Array -&gt; 3.3. Uize.Array.Order -&gt; 3.3.4. Primary, Secondary, or Even Tertiary Ordering?">4</a>. </span>Primary, Secondary, or Even Tertiary Ordering?</h3>
+			<a name="3_2_4"></a>
+			<h3 class="heading3" title="3. Uize.Array -&gt; 3.2. Uize.Array.Order -&gt; 3.2.4. Primary, Secondary, or Even Tertiary Ordering?"><span class="headingNumber"><a href="#3" title="3. Uize.Array">3</a>.<a href="#3_2" title="3. Uize.Array -&gt; 3.2. Uize.Array.Order">2</a>.<a href="#3_2_4" title="3. Uize.Array -&gt; 3.2. Uize.Array.Order -&gt; 3.2.4. Primary, Secondary, or Even Tertiary Ordering?">4</a>. </span>Primary, Secondary, or Even Tertiary Ordering?</h3>
 			<div class="contents3">
 				<p>In other words, perhaps any reordering should be able have a chunk size, which could be larger than one element, and when it is, then the chunks can themselves be ordered according to secondary ordering.</p>
 				
@@ -1690,31 +1970,31 @@ _superclass.useMine (_this,'wireUi');
 			</div>
 		</div>
 		
-		<a name="3_4"></a>
-		<h2 class="heading2" title="3. Uize.Array -&gt; 3.4. Uize.Array.Records"><span class="headingNumber"><a href="#3" title="3. Uize.Array">3</a>.<a href="#3_4" title="3. Uize.Array -&gt; 3.4. Uize.Array.Records">4</a>. </span>Uize.Array.Records</h2>
+		<a name="3_3"></a>
+		<h2 class="heading2" title="3. Uize.Array -&gt; 3.3. Uize.Array.Records"><span class="headingNumber"><a href="#3" title="3. Uize.Array">3</a>.<a href="#3_3" title="3. Uize.Array -&gt; 3.3. Uize.Array.Records">3</a>. </span>Uize.Array.Records</h2>
 		<div class="contents2">
 			<p>Uize.Array.Records.getColumn -- migrated from Uize.Data.getColumn</p>
 			
 			<p>Uize.Array.Records.findRows -- migrated from Uize.Data.findRows</p>
 			
-			<a name="3_4_1"></a>
-			<h3 class="heading3" title="3. Uize.Array -&gt; 3.4. Uize.Array.Records -&gt; 3.4.1. Uize.Array.Records.removeMatching"><span class="headingNumber"><a href="#3" title="3. Uize.Array">3</a>.<a href="#3_4" title="3. Uize.Array -&gt; 3.4. Uize.Array.Records">4</a>.<a href="#3_4_1" title="3. Uize.Array -&gt; 3.4. Uize.Array.Records -&gt; 3.4.1. Uize.Array.Records.removeMatching">1</a>. </span>Uize.Array.Records.removeMatching</h3>
+			<a name="3_3_1"></a>
+			<h3 class="heading3" title="3. Uize.Array -&gt; 3.3. Uize.Array.Records -&gt; 3.3.1. Uize.Array.Records.removeMatching"><span class="headingNumber"><a href="#3" title="3. Uize.Array">3</a>.<a href="#3_3" title="3. Uize.Array -&gt; 3.3. Uize.Array.Records">3</a>.<a href="#3_3_1" title="3. Uize.Array -&gt; 3.3. Uize.Array.Records -&gt; 3.3.1. Uize.Array.Records.removeMatching">1</a>. </span>Uize.Array.Records.removeMatching</h3>
 			<div class="contents3">
 				<p>delete all records that match (with configurable match function)</p>
 			</div>
 			
-			<a name="3_4_2"></a>
-			<h3 class="heading3" title="3. Uize.Array -&gt; 3.4. Uize.Array.Records -&gt; 3.4.2. Uize.Array.Records.retainMatching"><span class="headingNumber"><a href="#3" title="3. Uize.Array">3</a>.<a href="#3_4" title="3. Uize.Array -&gt; 3.4. Uize.Array.Records">4</a>.<a href="#3_4_2" title="3. Uize.Array -&gt; 3.4. Uize.Array.Records -&gt; 3.4.2. Uize.Array.Records.retainMatching">2</a>. </span>Uize.Array.Records.retainMatching</h3>
+			<a name="3_3_2"></a>
+			<h3 class="heading3" title="3. Uize.Array -&gt; 3.3. Uize.Array.Records -&gt; 3.3.2. Uize.Array.Records.retainMatching"><span class="headingNumber"><a href="#3" title="3. Uize.Array">3</a>.<a href="#3_3" title="3. Uize.Array -&gt; 3.3. Uize.Array.Records">3</a>.<a href="#3_3_2" title="3. Uize.Array -&gt; 3.3. Uize.Array.Records -&gt; 3.3.2. Uize.Array.Records.retainMatching">2</a>. </span>Uize.Array.Records.retainMatching</h3>
 			<div class="contents3">
 				<p>delete all records that match (with configurable match function)</p>
 			</div>
 		</div>
 		
-		<a name="3_5"></a>
-		<h2 class="heading2" title="3. Uize.Array -&gt; 3.5. Uize.Array.Sort"><span class="headingNumber"><a href="#3" title="3. Uize.Array">3</a>.<a href="#3_5" title="3. Uize.Array -&gt; 3.5. Uize.Array.Sort">5</a>. </span>Uize.Array.Sort</h2>
+		<a name="3_4"></a>
+		<h2 class="heading2" title="3. Uize.Array -&gt; 3.4. Uize.Array.Sort"><span class="headingNumber"><a href="#3" title="3. Uize.Array">3</a>.<a href="#3_4" title="3. Uize.Array -&gt; 3.4. Uize.Array.Sort">4</a>. </span>Uize.Array.Sort</h2>
 		<div class="contents2">
-			<a name="3_5_1"></a>
-			<h3 class="heading3" title="3. Uize.Array -&gt; 3.5. Uize.Array.Sort -&gt; 3.5.1. Uize.Array.Sort.alphaNum"><span class="headingNumber"><a href="#3" title="3. Uize.Array">3</a>.<a href="#3_5" title="3. Uize.Array -&gt; 3.5. Uize.Array.Sort">5</a>.<a href="#3_5_1" title="3. Uize.Array -&gt; 3.5. Uize.Array.Sort -&gt; 3.5.1. Uize.Array.Sort.alphaNum">1</a>. </span>Uize.Array.Sort.alphaNum</h3>
+			<a name="3_4_1"></a>
+			<h3 class="heading3" title="3. Uize.Array -&gt; 3.4. Uize.Array.Sort -&gt; 3.4.1. Uize.Array.Sort.alphaNum"><span class="headingNumber"><a href="#3" title="3. Uize.Array">3</a>.<a href="#3_4" title="3. Uize.Array -&gt; 3.4. Uize.Array.Sort">4</a>.<a href="#3_4_1" title="3. Uize.Array -&gt; 3.4. Uize.Array.Sort -&gt; 3.4.1. Uize.Array.Sort.alphaNum">1</a>. </span>Uize.Array.Sort.alphaNum</h3>
 			<div class="contents3">
 				<table class="list">
 				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>a sophisticated, human / intuituve alphanumeric sort</td></tr>
@@ -1722,45 +2002,96 @@ _superclass.useMine (_this,'wireUi');
 				</table>
 			</div>
 			
-			<a name="3_5_2"></a>
-			<h3 class="heading3" title="3. Uize.Array -&gt; 3.5. Uize.Array.Sort -&gt; 3.5.2. Uize.Array.Sort.sortBy"><span class="headingNumber"><a href="#3" title="3. Uize.Array">3</a>.<a href="#3_5" title="3. Uize.Array -&gt; 3.5. Uize.Array.Sort">5</a>.<a href="#3_5_2" title="3. Uize.Array -&gt; 3.5. Uize.Array.Sort -&gt; 3.5.2. Uize.Array.Sort.sortBy">2</a>. </span>Uize.Array.Sort.sortBy</h3>
+			<a name="3_4_2"></a>
+			<h3 class="heading3" title="3. Uize.Array -&gt; 3.4. Uize.Array.Sort -&gt; 3.4.2. Uize.Array.Sort.sortBy"><span class="headingNumber"><a href="#3" title="3. Uize.Array">3</a>.<a href="#3_4" title="3. Uize.Array -&gt; 3.4. Uize.Array.Sort">4</a>.<a href="#3_4_2" title="3. Uize.Array -&gt; 3.4. Uize.Array.Sort -&gt; 3.4.2. Uize.Array.Sort.sortBy">2</a>. </span>Uize.Array.Sort.sortBy</h3>
 			<div class="contents3">
-				<a name="3_5_2_1"></a>
-				<h4 class="heading4" title="3. Uize.Array -&gt; 3.5. Uize.Array.Sort -&gt; 3.5.2. Uize.Array.Sort.sortBy -&gt; 3.5.2.1. - support for secondary, tertiary sorts"><span class="headingNumber"><a href="#3" title="3. Uize.Array">3</a>.<a href="#3_5" title="3. Uize.Array -&gt; 3.5. Uize.Array.Sort">5</a>.<a href="#3_5_2" title="3. Uize.Array -&gt; 3.5. Uize.Array.Sort -&gt; 3.5.2. Uize.Array.Sort.sortBy">2</a>.<a href="#3_5_2_1" title="3. Uize.Array -&gt; 3.5. Uize.Array.Sort -&gt; 3.5.2. Uize.Array.Sort.sortBy -&gt; 3.5.2.1. - support for secondary, tertiary sorts">1</a>. </span>- support for secondary, tertiary sorts</h4>
+				<a name="3_4_2_1"></a>
+				<h4 class="heading4" title="3. Uize.Array -&gt; 3.4. Uize.Array.Sort -&gt; 3.4.2. Uize.Array.Sort.sortBy -&gt; 3.4.2.1. - support for secondary, tertiary sorts"><span class="headingNumber"><a href="#3" title="3. Uize.Array">3</a>.<a href="#3_4" title="3. Uize.Array -&gt; 3.4. Uize.Array.Sort">4</a>.<a href="#3_4_2" title="3. Uize.Array -&gt; 3.4. Uize.Array.Sort -&gt; 3.4.2. Uize.Array.Sort.sortBy">2</a>.<a href="#3_4_2_1" title="3. Uize.Array -&gt; 3.4. Uize.Array.Sort -&gt; 3.4.2. Uize.Array.Sort.sortBy -&gt; 3.4.2.1. - support for secondary, tertiary sorts">1</a>. </span>- support for secondary, tertiary sorts</h4>
 				<div class="contents4">
 					<table class="list">
 					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>sort value generator can be an array of sort value generators?</td></tr>
 					</table>
 				</div>
 				
-				<a name="3_5_2_2"></a>
-				<h4 class="heading4" title="3. Uize.Array -&gt; 3.5. Uize.Array.Sort -&gt; 3.5.2. Uize.Array.Sort.sortBy -&gt; 3.5.2.2. - support for optional sort value comparison function"><span class="headingNumber"><a href="#3" title="3. Uize.Array">3</a>.<a href="#3_5" title="3. Uize.Array -&gt; 3.5. Uize.Array.Sort">5</a>.<a href="#3_5_2" title="3. Uize.Array -&gt; 3.5. Uize.Array.Sort -&gt; 3.5.2. Uize.Array.Sort.sortBy">2</a>.<a href="#3_5_2_2" title="3. Uize.Array -&gt; 3.5. Uize.Array.Sort -&gt; 3.5.2. Uize.Array.Sort.sortBy -&gt; 3.5.2.2. - support for optional sort value comparison function">2</a>. </span>- support for optional sort value comparison function</h4>
+				<a name="3_4_2_2"></a>
+				<h4 class="heading4" title="3. Uize.Array -&gt; 3.4. Uize.Array.Sort -&gt; 3.4.2. Uize.Array.Sort.sortBy -&gt; 3.4.2.2. - support for optional sort value comparison function"><span class="headingNumber"><a href="#3" title="3. Uize.Array">3</a>.<a href="#3_4" title="3. Uize.Array -&gt; 3.4. Uize.Array.Sort">4</a>.<a href="#3_4_2" title="3. Uize.Array -&gt; 3.4. Uize.Array.Sort -&gt; 3.4.2. Uize.Array.Sort.sortBy">2</a>.<a href="#3_4_2_2" title="3. Uize.Array -&gt; 3.4. Uize.Array.Sort -&gt; 3.4.2. Uize.Array.Sort.sortBy -&gt; 3.4.2.2. - support for optional sort value comparison function">2</a>. </span>- support for optional sort value comparison function</h4>
 				<div class="contents4">
 					<p>This allows more sophisticated sorts. For example, with an alphanumerical (as opposed to ASCIIbetical) sort, the sort value generator function may do the work of parsing each element value into a set of number and non-number segments, and then the value comparison function can deal with comparing two sort values that may have different structure. In other words, the sort values generated cannot be compared by a simple a < b logical comparison.</p>
 				</div>
 			</div>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>add support for subsorts</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Uize.Array.Sort.insert</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_5"></a>
+		<h2 class="heading2" title="3. Uize.Array -&gt; 3.5. Uize.Array.Dupes"><span class="headingNumber"><a href="#3" title="3. Uize.Array">3</a>.<a href="#3_5" title="3. Uize.Array -&gt; 3.5. Uize.Array.Dupes">5</a>. </span>Uize.Array.Dupes</h2>
+		<div class="contents2">
+			<a name="3_5_1"></a>
+			<h3 class="heading3" title="3. Uize.Array -&gt; 3.5. Uize.Array.Dupes -&gt; 3.5.1. Uize.Array.Dupes.dedupe"><span class="headingNumber"><a href="#3" title="3. Uize.Array">3</a>.<a href="#3_5" title="3. Uize.Array -&gt; 3.5. Uize.Array.Dupes">5</a>.<a href="#3_5_1" title="3. Uize.Array -&gt; 3.5. Uize.Array.Dupes -&gt; 3.5.1. Uize.Array.Dupes.dedupe">1</a>. </span>Uize.Array.Dupes.dedupe</h3>
+			<div class="contents3">
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>returns an array containing only unique values</td></tr>
+				</table>
+			</div>
+			
+			<p>Uize.Array.Dupes.getDupes</p>
+			
+			<a name="3_5_2"></a>
+			<h3 class="heading3" title="3. Uize.Array -&gt; 3.5. Uize.Array.Dupes -&gt; 3.5.2. Uize.Array.Dupes.getValueCount"><span class="headingNumber"><a href="#3" title="3. Uize.Array">3</a>.<a href="#3_5" title="3. Uize.Array -&gt; 3.5. Uize.Array.Dupes">5</a>.<a href="#3_5_2" title="3. Uize.Array -&gt; 3.5. Uize.Array.Dupes -&gt; 3.5.2. Uize.Array.Dupes.getValueCount">2</a>. </span>Uize.Array.Dupes.getValueCount</h3>
+			<div class="contents3">
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>returns the number of occurrences of the specified value</td></tr>
+				</table>
+			</div>
+			
+			<a name="3_5_3"></a>
+			<h3 class="heading3" title="3. Uize.Array -&gt; 3.5. Uize.Array.Dupes -&gt; 3.5.3. Uize.Array.Dupes.getValueCounts"><span class="headingNumber"><a href="#3" title="3. Uize.Array">3</a>.<a href="#3_5" title="3. Uize.Array -&gt; 3.5. Uize.Array.Dupes">5</a>.<a href="#3_5_3" title="3. Uize.Array -&gt; 3.5. Uize.Array.Dupes -&gt; 3.5.3. Uize.Array.Dupes.getValueCounts">3</a>. </span>Uize.Array.Dupes.getValueCounts</h3>
+			<div class="contents3">
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>returns a lookup array of counts per value</td></tr>
+				</table>
+			</div>
 		</div>
 		
 		<a name="3_6"></a>
-		<h2 class="heading2" title="3. Uize.Array -&gt; 3.6. Uize.Array.Uniques"><span class="headingNumber"><a href="#3" title="3. Uize.Array">3</a>.<a href="#3_6" title="3. Uize.Array -&gt; 3.6. Uize.Array.Uniques">6</a>. </span>Uize.Array.Uniques</h2>
+		<h2 class="heading2" title="3. Uize.Array -&gt; 3.6. Uize.Array.Util"><span class="headingNumber"><a href="#3" title="3. Uize.Array">3</a>.<a href="#3_6" title="3. Uize.Array -&gt; 3.6. Uize.Array.Util">6</a>. </span>Uize.Array.Util</h2>
 		<div class="contents2">
-			<p>Uize.Array.Uniques.getUniques</p>
-			
-			<p>Uize.Array.Uniques.getOccurrences</p>
-			
-			<p>Uize.Array.Uniques.getOccurrencesLookup</p>
-		</div>
-		
-		<a name="3_7"></a>
-		<h2 class="heading2" title="3. Uize.Array -&gt; 3.7. Uize.Array.Util"><span class="headingNumber"><a href="#3" title="3. Uize.Array">3</a>.<a href="#3_7" title="3. Uize.Array -&gt; 3.7. Uize.Array.Util">7</a>. </span>Uize.Array.Util</h2>
-		<div class="contents2">
-			<a name="3_7_1"></a>
-			<h3 class="heading3" title="3. Uize.Array -&gt; 3.7. Uize.Array.Util -&gt; 3.7.1. Uize.Array.Util.ensureValueIn"><span class="headingNumber"><a href="#3" title="3. Uize.Array">3</a>.<a href="#3_7" title="3. Uize.Array -&gt; 3.7. Uize.Array.Util">7</a>.<a href="#3_7_1" title="3. Uize.Array -&gt; 3.7. Uize.Array.Util -&gt; 3.7.1. Uize.Array.Util.ensureValueIn">1</a>. </span>Uize.Array.Util.ensureValueIn</h3>
+			<a name="3_6_1"></a>
+			<h3 class="heading3" title="3. Uize.Array -&gt; 3.6. Uize.Array.Util -&gt; 3.6.1. Uize.Array.Util.ensureIn"><span class="headingNumber"><a href="#3" title="3. Uize.Array">3</a>.<a href="#3_6" title="3. Uize.Array -&gt; 3.6. Uize.Array.Util">6</a>.<a href="#3_6_1" title="3. Uize.Array -&gt; 3.6. Uize.Array.Util -&gt; 3.6.1. Uize.Array.Util.ensureIn">1</a>. </span>Uize.Array.Util.ensureIn</h3>
 			<div class="contents3">
-				<p>if the specified element is not in the specified source array, then it is added (configurable whether to prepend or append, but default is to append)</p>
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>if the specified element is not in the specified source array, then it is added (configurable whether to prepend or append, but default is to append)</td></tr>
+				</table>
 			</div>
 			
-			<p>Uize.Array.Util.swap -- what does this do?</p>
+			<a name="3_6_2"></a>
+			<h3 class="heading3" title="3. Uize.Array -&gt; 3.6. Uize.Array.Util -&gt; 3.6.2. Uize.Array.Util.chunk"><span class="headingNumber"><a href="#3" title="3. Uize.Array">3</a>.<a href="#3_6" title="3. Uize.Array -&gt; 3.6. Uize.Array.Util">6</a>.<a href="#3_6_2" title="3. Uize.Array -&gt; 3.6. Uize.Array.Util -&gt; 3.6.2. Uize.Array.Util.chunk">2</a>. </span>Uize.Array.Util.chunk</h3>
+			<div class="contents3">
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>returns a chunk of the specified source array of the specified size</td></tr>
+				</table>
+			</div>
+			
+			<a name="3_6_3"></a>
+			<h3 class="heading3" title="3. Uize.Array -&gt; 3.6. Uize.Array.Util -&gt; 3.6.3. Uize.Array.Util.first"><span class="headingNumber"><a href="#3" title="3. Uize.Array">3</a>.<a href="#3_6" title="3. Uize.Array -&gt; 3.6. Uize.Array.Util">6</a>.<a href="#3_6_3" title="3. Uize.Array -&gt; 3.6. Uize.Array.Util -&gt; 3.6.3. Uize.Array.Util.first">3</a>. </span>Uize.Array.Util.first</h3>
+			<div class="contents3">
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>returns the specified number of elements at the head of the specified source array</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>when no length parameter is specified, returns the first element of the array</td></tr>
+				</table>
+			</div>
+			
+			<a name="3_6_4"></a>
+			<h3 class="heading3" title="3. Uize.Array -&gt; 3.6. Uize.Array.Util -&gt; 3.6.4. Uize.Array.Util.last"><span class="headingNumber"><a href="#3" title="3. Uize.Array">3</a>.<a href="#3_6" title="3. Uize.Array -&gt; 3.6. Uize.Array.Util">6</a>.<a href="#3_6_4" title="3. Uize.Array -&gt; 3.6. Uize.Array.Util -&gt; 3.6.4. Uize.Array.Util.last">4</a>. </span>Uize.Array.Util.last</h3>
+			<div class="contents3">
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>returns the specified number of elements at the tail of the specified source array</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>when no length parameter is specified, returns the last element of the array</td></tr>
+				</table>
+			</div>
 		</div>
 	</div>
 	

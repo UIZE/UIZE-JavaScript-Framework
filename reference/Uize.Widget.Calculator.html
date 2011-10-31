@@ -156,23 +156,24 @@
 					<li><a href="#4_2" title="Inherited from Uize.Widget.">4.2. built</a></li>
 					<li><a href="#4_3" title="Inherited from Uize.Widget.">4.3. busy</a></li>
 					<li><a href="#4_4" title="Inherited from Uize.Widget.">4.4. busyInherited</a></li>
-					<li><a href="#4_5" title="A read-only boolean, indicating whether or not the very next entered digit should clear the current value of the entry child widget.">4.5. clearOnNextDigit</a></li>
-					<li><a href="#4_6" title="Inherited from Uize.Widget.">4.6. container</a></li>
-					<li><a href="#4_7" title="Inherited from Uize.Widget.">4.7. enabled</a></li>
-					<li><a href="#4_8" title="Inherited from Uize.Widget.">4.8. enabledInherited</a></li>
-					<li><a href="#4_9" title="Inherited from Uize.Widget.">4.9. html</a></li>
-					<li><a href="#4_10" title="Inherited from Uize.Widget.">4.10. idPrefix</a></li>
-					<li><a href="#4_11" title="Inherited from Uize.Widget.">4.11. idPrefixConstruction</a></li>
-					<li><a href="#4_12" title="Inherited from Uize.Widget.">4.12. insertionMode</a></li>
-					<li><a href="#4_13" title="Inherited from Uize.Widget.">4.13. localized</a></li>
-					<li><a href="#4_14" title="A number, representing the current value of the calculator&apos;s memory function.">4.14. memory</a></li>
-					<li><a href="#4_15" title="Inherited from Uize.Widget.">4.15. name</a></li>
-					<li><a href="#4_16" title="Inherited from Uize.Widget.">4.16. nodeMap</a></li>
-					<li><a href="#4_17" title="A read-only number, representing the first operand in the currently pending binary operation.">4.17. operandA</a></li>
-					<li><a href="#4_18" title="A read-only number, representing the second operand in the currently pending binary operation.">4.18. operandB</a></li>
-					<li><a href="#4_19" title="A string, representing the currently pending binary operation.">4.19. operator</a></li>
-					<li><a href="#4_20" title="A number, representing the result of the calculation performed by the widget.">4.20. value</a></li>
-					<li><a href="#4_21" title="Inherited from Uize.Widget.">4.21. wired</a></li>
+					<li><a href="#4_5" title="Inherited from Uize.Widget.">4.5. children</a></li>
+					<li><a href="#4_6" title="A read-only boolean, indicating whether or not the very next entered digit should clear the current value of the entry child widget.">4.6. clearOnNextDigit</a></li>
+					<li><a href="#4_7" title="Inherited from Uize.Widget.">4.7. container</a></li>
+					<li><a href="#4_8" title="Inherited from Uize.Widget.">4.8. enabled</a></li>
+					<li><a href="#4_9" title="Inherited from Uize.Widget.">4.9. enabledInherited</a></li>
+					<li><a href="#4_10" title="Inherited from Uize.Widget.">4.10. html</a></li>
+					<li><a href="#4_11" title="Inherited from Uize.Widget.">4.11. idPrefix</a></li>
+					<li><a href="#4_12" title="Inherited from Uize.Widget.">4.12. idPrefixConstruction</a></li>
+					<li><a href="#4_13" title="Inherited from Uize.Widget.">4.13. insertionMode</a></li>
+					<li><a href="#4_14" title="Inherited from Uize.Widget.">4.14. localized</a></li>
+					<li><a href="#4_15" title="A number, representing the current value of the calculator&apos;s memory function.">4.15. memory</a></li>
+					<li><a href="#4_16" title="Inherited from Uize.Widget.">4.16. name</a></li>
+					<li><a href="#4_17" title="Inherited from Uize.Widget.">4.17. nodeMap</a></li>
+					<li><a href="#4_18" title="A read-only number, representing the first operand in the currently pending binary operation.">4.18. operandA</a></li>
+					<li><a href="#4_19" title="A read-only number, representing the second operand in the currently pending binary operation.">4.19. operandB</a></li>
+					<li><a href="#4_20" title="A string, representing the currently pending binary operation.">4.20. operator</a></li>
+					<li><a href="#4_21" title="A number, representing the result of the calculation performed by the widget.">4.21. value</a></li>
+					<li><a href="#4_22" title="Inherited from Uize.Widget.">4.22. wired</a></li>
 				</ul>
 			</li>
 			<li><a href="#5">5. Instance Methods</a>
@@ -292,7 +293,7 @@
 				
 				<p><span class="allCaps">SET-GET PROPERTIES</span></p>
 				
-				<p><code><a href="#4_1">activeOperand</a></code> | <code><a href="#4_5">clearOnNextDigit</a></code> | <code><a href="#4_14">memory</a></code> | <code><a href="#4_17">operandA</a></code> | <code><a href="#4_18">operandB</a></code> | <code><a href="#4_19">operator</a></code></p>
+				<p><code><a href="#4_1">activeOperand</a></code> | <code><a href="#4_6">clearOnNextDigit</a></code> | <code><a href="#4_15">memory</a></code> | <code><a href="#4_18">operandA</a></code> | <code><a href="#4_19">operandB</a></code> | <code><a href="#4_20">operator</a></code> | <code><a href="#4_21">value</a></code></p>
 			</div>
 			
 			<a name="1_2_2"></a>
@@ -305,10 +306,6 @@
 				<p><span class="allCaps">INSTANCE METHODS</span></p>
 				
 				<p><code><a href="#5_42">wireUi</a></code></p>
-				
-				<p><span class="allCaps">SET-GET PROPERTIES</span></p>
-				
-				<p><code><a href="#4_20">value</a></code></p>
 				
 				<p><span class="allCaps">STATIC PROPERTIES</span></p>
 				
@@ -332,7 +329,7 @@
 				
 				<p><span class="allCaps">SET-GET PROPERTIES</span></p>
 				
-				<p><code><a href="#4_2">built</a></code> | <code><a href="#4_3">busy</a></code> | <code><a href="#4_4">busyInherited</a></code> | <code><a href="#4_6">container</a></code> | <code><a href="#4_7">enabled</a></code> | <code><a href="#4_8">enabledInherited</a></code> | <code><a href="#4_9">html</a></code> | <code><a href="#4_10">idPrefix</a></code> | <code><a href="#4_11">idPrefixConstruction</a></code> | <code><a href="#4_12">insertionMode</a></code> | <code><a href="#4_13">localized</a></code> | <code><a href="#4_15">name</a></code> | <code><a href="#4_16">nodeMap</a></code> | <code><a href="#4_21">wired</a></code></p>
+				<p><code><a href="#4_2">built</a></code> | <code><a href="#4_3">busy</a></code> | <code><a href="#4_4">busyInherited</a></code> | <code><a href="#4_5">children</a></code> | <code><a href="#4_7">container</a></code> | <code><a href="#4_8">enabled</a></code> | <code><a href="#4_9">enabledInherited</a></code> | <code><a href="#4_10">html</a></code> | <code><a href="#4_11">idPrefix</a></code> | <code><a href="#4_12">idPrefixConstruction</a></code> | <code><a href="#4_13">insertionMode</a></code> | <code><a href="#4_14">localized</a></code> | <code><a href="#4_16">name</a></code> | <code><a href="#4_17">nodeMap</a></code> | <code><a href="#4_22">wired</a></code></p>
 				
 				<p><span class="allCaps">STATIC METHODS</span></p>
 				
@@ -422,7 +419,7 @@
 				<div class="contents4">
 					<p>It <b>is</b> possible to get invalid characters into the <code><a href="#3_15">entry</a></code> value using the paste function (typically <code>Ctrl-v</code>).</p>
 					
-					<p>When the <code><a href="#4_20">value</a></code> of the <code><a href="#3_15">entry</a></code> widget is not a well formed number, then the calculator will enter the <a href="#2_9_1">Error State</a>.</p>
+					<p>When the <code><a href="#4_21">value</a></code> of the <code><a href="#3_15">entry</a></code> widget is not a well formed number, then the calculator will enter the <a href="#2_9_1">Error State</a>.</p>
 				</div>
 				
 				<a name="2_2_3_3"></a>
@@ -514,7 +511,7 @@
 		<div class="contents2">
 			<p>Binary operators are operators that require two operands, an example of which is multiplication.</p>
 			
-			<p>The <code>Uize.Widget.Calculator</code> class supports the binary operators <code><a href="#3_1">add</a></code>, <code><a href="#3_26">subtract</a></code>, <code><a href="#3_21">multiply</a></code>, and <code><a href="#3_14">divide</a></code>. Additionally, this class implements a <a href="#2_8">Versatile Percent Function</a> that behaves as a binary operator in different ways under different conditions. Binary operations are performed by entering a number (<code><a href="#4_17">operandA</a></code>), then clicking the a binary <code><a href="#4_19">operator</a></code> button, entering a second number (<code><a href="#4_18">operandB</a></code>), then clicking the <code><a href="#3_16">equals</a></code> button to calculate the result.</p>
+			<p>The <code>Uize.Widget.Calculator</code> class supports the binary operators <code><a href="#3_1">add</a></code>, <code><a href="#3_26">subtract</a></code>, <code><a href="#3_21">multiply</a></code>, and <code><a href="#3_14">divide</a></code>. Additionally, this class implements a <a href="#2_8">Versatile Percent Function</a> that behaves as a binary operator in different ways under different conditions. Binary operations are performed by entering a number (<code><a href="#4_18">operandA</a></code>), then clicking the a binary <code><a href="#4_20">operator</a></code> button, entering a second number (<code><a href="#4_19">operandB</a></code>), then clicking the <code><a href="#3_16">equals</a></code> button to calculate the result.</p>
 			
 			<a name="2_4_1"></a>
 			<h3 class="heading3" title="2. Key Features -&gt; 2.4. Binary Operators -&gt; 2.4.1. Partial Binary Operations"><span class="headingNumber"><a href="#2" title="2. Key Features">2</a>.<a href="#2_4" title="2. Key Features -&gt; 2.4. Binary Operators">4</a>.<a href="#2_4_1" title="2. Key Features -&gt; 2.4. Binary Operators -&gt; 2.4.1. Partial Binary Operations">1</a>. </span>Partial Binary Operations</h3>
@@ -532,7 +529,7 @@
 			
 			<p>The way that the <code>Uize.Widget.Calculator</code> implements unary operators, they operate on the current value of the active operand, without triggering <a href="#2_6">Operation Completion</a> for pending binary operations. This is useful, and also the way that most regular physical calculators behave. This allows you to perform calculations like three times the square root of sixteen, as <code>3 x 16 &radic; &#61;</code>. In this example, the <code><a href="#3_25">squareRoot</a></code> operator operates on the second operand without triggering completion of the pending multiplication. This allows you to compound the unary operation. For example, you could calculate three times the fourth root of sixteen, as <code>3 x 16 &radic; &radic; &#61;</code>. For more info, see the section <a href="#2_7_1">Compounding Unary Operations</a>.</p>
 			
-			<p>Apart from the <code><a href="#3_25">squareRoot</a></code> function, another example of a unary operator is the <code><a href="#3_22">negate</a></code> function, which inverts the sign of the current <code><a href="#3_15">entry</a></code> value. The <code><a href="#3_20">memoryRecall</a></code> function could also be considered a kind of unary operator, although it completely replaces the current <code><a href="#3_15">entry</a></code> value with the current value of the calculator's <code><a href="#4_14">memory</a></code>.</p>
+			<p>Apart from the <code><a href="#3_25">squareRoot</a></code> function, another example of a unary operator is the <code><a href="#3_22">negate</a></code> function, which inverts the sign of the current <code><a href="#3_15">entry</a></code> value. The <code><a href="#3_20">memoryRecall</a></code> function could also be considered a kind of unary operator, although it completely replaces the current <code><a href="#3_15">entry</a></code> value with the current value of the calculator's <code><a href="#4_15">memory</a></code>.</p>
 		</div>
 		
 		<a name="2_6"></a>
@@ -546,7 +543,7 @@
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>clicking either the <code><a href="#3_19">memoryPlus</a></code> or <code><a href="#3_18">memoryMinus</a></code> button, or pressing the "m" key (for memory plus) when the <code><a href="#3_15">entry</a></code> child widget's input field is focused</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>clicking the <code><a href="#3_23">percent</a></code> button, or pressing the "%" key when the <code><a href="#3_15">entry</a></code> child widget's input field is focused</td></tr>
 			</table>
-			<p>When a binary operation is completed, the value of the <code><a href="#4_1">activeOperand</a></code> set-get property is set to <code>'operandA'</code> and the <code><a href="#4_17">operandA</a></code> set-get property is used to store the result of the operation. This leaves the value of the <code><a href="#4_18">operandB</a></code> property unaltered so that it can be reused on subsequent compoundings of the operation. For more info, see the section <a href="#2_7">Operation Compounding</a>.</p>
+			<p>When a binary operation is completed, the value of the <code><a href="#4_1">activeOperand</a></code> set-get property is set to <code>'operandA'</code> and the <code><a href="#4_18">operandA</a></code> set-get property is used to store the result of the operation. This leaves the value of the <code><a href="#4_19">operandB</a></code> property unaltered so that it can be reused on subsequent compoundings of the operation. For more info, see the section <a href="#2_7">Operation Compounding</a>.</p>
 		</div>
 		
 		<a name="2_7"></a>
@@ -573,7 +570,7 @@
 			<div class="contents3">
 				<p>Compounding a binary operation is done by repeatedly triggering the calculator's <code><a href="#3_16">equals</a></code> operation - just like with a regular physical calculator.</p>
 				
-				<p>As soon as a binary operation is completed (see <a href="#2_6">Operation Completion</a>), it can then be compounded by clicking the <code><a href="#3_16">equals</a></code> button again. Upon each successive compounding, the new result is displayed in the <code><a href="#3_15">entry</a></code> field and is set as the value of the <code><a href="#4_17">operandA</a></code> set-get property, leaving the value of the <code><a href="#4_18">operandB</a></code> property unaltered so that it can be reused on subsequent compoundings of the operation.</p>
+				<p>As soon as a binary operation is completed (see <a href="#2_6">Operation Completion</a>), it can then be compounded by clicking the <code><a href="#3_16">equals</a></code> button again. Upon each successive compounding, the new result is displayed in the <code><a href="#3_15">entry</a></code> field and is set as the value of the <code><a href="#4_18">operandA</a></code> set-get property, leaving the value of the <code><a href="#4_19">operandB</a></code> property unaltered so that it can be reused on subsequent compoundings of the operation.</p>
 				
 				<p>So, for example, setting up the binary operation <code>3 x 1.25</code> and then clicking the <code><a href="#3_16">equals</a></code> button three times would be equivalent to the operation <code>3 x 1.25 x 1.25 x 1.25 &#61;</code>. On each successive clicking of the <code><a href="#3_16">equals</a></code> button you would compound the operation of multiplying the current value in the <code><a href="#3_15">entry</a></code> widget by the value <code>1.25</code>. All binary operations can be compounded in this way. A compelling application of the compounding feature is compounding of percent operations (for more info, see the section <a href="#2_8_3">Percent Operation Compounding</a>).</p>
 				
@@ -627,7 +624,7 @@
 			<a name="2_8_1"></a>
 			<h3 class="heading3" title="2. Key Features -&gt; 2.8. Versatile Percent Function -&gt; 2.8.1. Percent As Setup For Multiplication"><span class="headingNumber"><a href="#2" title="2. Key Features">2</a>.<a href="#2_8" title="2. Key Features -&gt; 2.8. Versatile Percent Function">8</a>.<a href="#2_8_1" title="2. Key Features -&gt; 2.8. Versatile Percent Function -&gt; 2.8.1. Percent As Setup For Multiplication">1</a>. </span>Percent As Setup For Multiplication</h3>
 			<div class="contents3">
-				<p>When there is either no pending binary operation, or when there is a completed binary operation that can be compounded, then the <code><a href="#3_23">percent</a></code> function has the effect of dividing the current <code><a href="#3_15">entry</a></code> value by <code>100</code> and setting up a <code><a href="#3_21">multiply</a></code> operation (ie. setting the value of the <code><a href="#4_19">operator</a></code> set-get property to <code>'multiply'</code>).</p>
+				<p>When there is either no pending binary operation, or when there is a completed binary operation that can be compounded, then the <code><a href="#3_23">percent</a></code> function has the effect of dividing the current <code><a href="#3_15">entry</a></code> value by <code>100</code> and setting up a <code><a href="#3_21">multiply</a></code> operation (ie. setting the value of the <code><a href="#4_20">operator</a></code> set-get property to <code>'multiply'</code>).</p>
 				
 				<p>This behavior allows calculations such as...</p>
 				
@@ -742,9 +739,9 @@
 			<p>The following button enabling/disabling rules apply...</p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the <code><a href="#3_16">equals</a></code> button is disabled when there is no pending or completed binary operation (ie. the value of the <code><a href="#4_19">operator</a></code> set-get property is <code>undefined</code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the <code><a href="#3_16">equals</a></code> button is disabled when there is no pending or completed binary operation (ie. the value of the <code><a href="#4_20">operator</a></code> set-get property is <code>undefined</code>)</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>all buttons - except those that can be used to enter a new value, or that are not affected by the <a href="#2_9_1">Error State</a> (such as the <code><a href="#3_17">memoryClear</a></code> button) - will be disabled when the calculator widget is in the <a href="#2_9_1">Error State</a></td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the <code><a href="#3_20">memoryRecall</a></code> and <code><a href="#3_17">memoryClear</a></code> buttons are disabled when the memory is clear (ie. the value of the <code><a href="#4_14">memory</a></code> set-get property is <code>undefined</code>), and will be enabled whenever the calculator's memory is storing a value (<code><a href="#4_14">memory</a></code> is not <code>undefined</code>) - regardless of other state of the calculator widget</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the <code><a href="#3_20">memoryRecall</a></code> and <code><a href="#3_17">memoryClear</a></code> buttons are disabled when the memory is clear (ie. the value of the <code><a href="#4_15">memory</a></code> set-get property is <code>undefined</code>), and will be enabled whenever the calculator's memory is storing a value (<code><a href="#4_15">memory</a></code> is not <code>undefined</code>) - regardless of other state of the calculator widget</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the <code><a href="#3_2">clear</a></code> and <code><a href="#3_3">clearEntry</a></code> buttons are always enabled</td></tr>
 			</table>
 			<a name="2_9_1"></a>
@@ -785,7 +782,7 @@
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>completes any pending binary operation (see the section <a href="#2_6">Operation Completion</a>)</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>sets the value of the <code><a href="#4_19">operator</a></code> set-get property to <code>'add'</code></td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>sets the value of the <code><a href="#4_20">operator</a></code> set-get property to <code>'add'</code></td></tr>
 			</table>
 			<p>This button's function can also be triggered using the "+" (addition / plus character) key on the keyboard (for more info, see the section <a href="#2_2">Using the Regular Keyboard</a>).</p>
 			
@@ -807,9 +804,9 @@
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>sets the value of the <code><a href="#3_15">entry</a></code> child widget to <code>0</code></td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>sets the value of the <code><a href="#4_17">operandA</a></code> set-get property to <code>0</code></td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>sets the value of the <code><a href="#4_18">operandB</a></code> set-get property to <code>undefined</code></td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>sets the value of the <code><a href="#4_19">operator</a></code> set-get property to <code>undefined</code></td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>sets the value of the <code><a href="#4_18">operandA</a></code> set-get property to <code>0</code></td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>sets the value of the <code><a href="#4_19">operandB</a></code> set-get property to <code>undefined</code></td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>sets the value of the <code><a href="#4_20">operator</a></code> set-get property to <code>undefined</code></td></tr>
 			</table>
 			<p>This button's function can also be triggered using the <code>Esc</code> or <code>Spacebar</code> keys on the keyboard (for more info, see the section <a href="#2_2">Using the Regular Keyboard</a>). To clear only the current entry in the <code><a href="#3_15">entry</a></code> child widget, the <code><a href="#3_3">clearEntry</a></code> button can be used.</p>
 			
@@ -983,7 +980,7 @@
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>completes any pending binary operation (see the section <a href="#2_6">Operation Completion</a>)</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>sets the value of the <code><a href="#4_19">operator</a></code> set-get property to <code>'divide'</code></td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>sets the value of the <code><a href="#4_20">operator</a></code> set-get property to <code>'divide'</code></td></tr>
 			</table>
 			<p>This button's function can also be triggered using the "/" (division / forward slash character) key on the keyboard (for more info, see the section <a href="#2_2">Using the Regular Keyboard</a>).</p>
 			
@@ -1014,16 +1011,16 @@
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>completes the pending binary operation (see the section <a href="#2_6">Operation Completion</a>), or compounds an already completed binary operation (see the section <a href="#2_7_2">Compounding Binary Operations</a>)</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>sets the value of the <code><a href="#4_1">activeOperand</a></code> set-get property to <code>'operandA'</code></td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>sets the value of the <code><a href="#4_17">operandA</a></code> set-get property and the value of the <code><a href="#3_15">entry</a></code> child widget to the result of the calculation</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>sets the value of the <code><a href="#4_18">operandA</a></code> set-get property and the value of the <code><a href="#3_15">entry</a></code> child widget to the result of the calculation</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>sets the value of the <code><a href="#4_1">activeOperand</a></code> set-get property to <code>'operandA'</code></td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>sets the value of the <code><a href="#4_5">clearOnNextDigit</a></code> set-get property to <code>true</code></td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>sets the value of the <code><a href="#4_6">clearOnNextDigit</a></code> set-get property to <code>true</code></td></tr>
 			</table>
 			<p>This button's function can also be triggered by a number of other interactions with the calculator widget (for more info, see the section <a href="#2_6">Operation Completion</a>).</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this button will be disabled if the calculator is in the <a href="#2_9_1">Error State</a>, or if there is not a pending or completed binary operation (ie. the value of the <code><a href="#4_19">operator</a></code> set-get property is <code>undefined</code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this button will be disabled if the calculator is in the <a href="#2_9_1">Error State</a>, or if there is not a pending or completed binary operation (ie. the value of the <code><a href="#4_20">operator</a></code> set-get property is <code>undefined</code>)</td></tr>
 			</table>
 		</div>
 		
@@ -1035,14 +1032,14 @@
 			<p>Clicking the <code><a href="#3_17">memoryClear</a></code> button has the following effects...</p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>sets the value of the <code><a href="#4_14">memory</a></code> set-get property to <code>undefined</code></td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>sets the value of the <code><a href="#4_5">clearOnNextDigit</a></code> set-get property to <code>true</code></td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>sets the value of the <code><a href="#4_15">memory</a></code> set-get property to <code>undefined</code></td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>sets the value of the <code><a href="#4_6">clearOnNextDigit</a></code> set-get property to <code>true</code></td></tr>
 			</table>
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#3_19">memoryPlus</a></code>, <code><a href="#3_18">memoryMinus</a></code>, and <code><a href="#3_20">memoryRecall</a></code> child widgets</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this button will be disabled if there is no value in the calculator's memory (ie. the value of the <code><a href="#4_14">memory</a></code> set-get property is <code>undefined</code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this button will be disabled if there is no value in the calculator's memory (ie. the value of the <code><a href="#4_15">memory</a></code> set-get property is <code>undefined</code>)</td></tr>
 			</table>
 		</div>
 		
@@ -1055,8 +1052,8 @@
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>completes any pending binary operation (see the section <a href="#2_6">Operation Completion</a>)</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>sets the value of the <code><a href="#4_14">memory</a></code> set-get property to its current value minus the value of the <code><a href="#3_15">entry</a></code> child widget</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>sets the value of the <code><a href="#4_5">clearOnNextDigit</a></code> set-get property to <code>true</code></td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>sets the value of the <code><a href="#4_15">memory</a></code> set-get property to its current value minus the value of the <code><a href="#3_15">entry</a></code> child widget</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>sets the value of the <code><a href="#4_6">clearOnNextDigit</a></code> set-get property to <code>true</code></td></tr>
 			</table>
 			<p><span class="allCaps">NOTES</span></p>
 			
@@ -1076,8 +1073,8 @@
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>completes any pending binary operation (see the section <a href="#2_6">Operation Completion</a>)</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>sets the value of the <code><a href="#4_14">memory</a></code> set-get property to its current value plus the value of the <code><a href="#3_15">entry</a></code> child widget</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>sets the value of the <code><a href="#4_5">clearOnNextDigit</a></code> set-get property to <code>true</code></td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>sets the value of the <code><a href="#4_15">memory</a></code> set-get property to its current value plus the value of the <code><a href="#3_15">entry</a></code> child widget</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>sets the value of the <code><a href="#4_6">clearOnNextDigit</a></code> set-get property to <code>true</code></td></tr>
 			</table>
 			<p><span class="allCaps">NOTES</span></p>
 			
@@ -1096,14 +1093,14 @@
 			<p>Clicking the <code><a href="#3_20">memoryRecall</a></code> button has the following effects...</p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>sets the value of the <code><a href="#3_15">entry</a></code> child widget to the value of the <code><a href="#4_14">memory</a></code> set-get property</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>sets the value of the <code><a href="#4_5">clearOnNextDigit</a></code> set-get property to <code>true</code></td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>sets the value of the <code><a href="#3_15">entry</a></code> child widget to the value of the <code><a href="#4_15">memory</a></code> set-get property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>sets the value of the <code><a href="#4_6">clearOnNextDigit</a></code> set-get property to <code>true</code></td></tr>
 			</table>
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#3_19">memoryPlus</a></code>, <code><a href="#3_18">memoryMinus</a></code>, and <code><a href="#3_17">memoryClear</a></code> child widgets</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this button will be disabled if there is no value in the calculator's memory (ie. the value of the <code><a href="#4_14">memory</a></code> set-get property is <code>undefined</code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this button will be disabled if there is no value in the calculator's memory (ie. the value of the <code><a href="#4_15">memory</a></code> set-get property is <code>undefined</code>)</td></tr>
 			</table>
 		</div>
 		
@@ -1116,7 +1113,7 @@
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>completes any pending binary operation (see the section <a href="#2_6">Operation Completion</a>)</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>sets the value of the <code><a href="#4_19">operator</a></code> set-get property to <code>'multiply'</code></td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>sets the value of the <code><a href="#4_20">operator</a></code> set-get property to <code>'multiply'</code></td></tr>
 			</table>
 			<p>This button's function can also be triggered using the "&#42;" (multiply / star / asterisk character) key on the keyboard (for more info, see the section <a href="#2_2">Using the Regular Keyboard</a>).</p>
 			
@@ -1192,13 +1189,13 @@
 		<div class="contents2">
 			<p>An instance of the <code><a href="../reference/Uize.Widget.Button.html">Uize.Widget.Button</a></code> class, that lets the user set up the subtraction binary operation.</p>
 			
-			<p>If a binary operation has already been set up (ie. the value of the <code><a href="#4_19">operator</a></code> set-get property is no longer <code>undefined</code>) but a value has not yet been entered for the second operand (ie. the <code><a href="#4_18">operandB</a></code> set-get property is still set to <code>undefined</code>), then clicking this button will make it behave as a negation operation. For more info on this behavior, see the section <a href="#2_3_2">Subtraction as Negation</a>.</p>
+			<p>If a binary operation has already been set up (ie. the value of the <code><a href="#4_20">operator</a></code> set-get property is no longer <code>undefined</code>) but a value has not yet been entered for the second operand (ie. the <code><a href="#4_19">operandB</a></code> set-get property is still set to <code>undefined</code>), then clicking this button will make it behave as a negation operation. For more info on this behavior, see the section <a href="#2_3_2">Subtraction as Negation</a>.</p>
 			
 			<p>Otherwise, clicking the <code><a href="#3_26">subtract</a></code> button has the following effects...</p>
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>completes any pending binary operation (see the section <a href="#2_6">Operation Completion</a>)</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>sets the value of the <code><a href="#4_19">operator</a></code> set-get property to <code>'subtract'</code></td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>sets the value of the <code><a href="#4_20">operator</a></code> set-get property to <code>'subtract'</code></td></tr>
 			</table>
 			<p>This button's function can also be triggered using the "-" (minus / dash / hyphen character) key on the keyboard (for more info, see the section <a href="#2_2">Using the Regular Keyboard</a>).</p>
 			
@@ -1220,13 +1217,13 @@
 		<div class="contents2">
 			<p>A read-only string, indicating the active operand in the currently pending binary operation.</p>
 			
-			<p>Possible values for this property are <code>'operandA'</code> and <code>'operandB'</code>. The value of this property is automatically updated when the value of the <code><a href="#4_19">operator</a></code> set-get property is modified, and its value is automatically set to <code>'operandA'</code> whenever a pending binary operation is completed. The value of the <code><a href="#4_1">activeOperand</a></code> property determines which of the <code><a href="#4_17">operandA</a></code> and <code><a href="#4_18">operandB</a></code> set-get properties will be synchronized to the value of the <code><a href="#3_15">entry</a></code> child widget.</p>
+			<p>Possible values for this property are <code>'operandA'</code> and <code>'operandB'</code>. The value of this property is automatically updated when the value of the <code><a href="#4_20">operator</a></code> set-get property is modified, and its value is automatically set to <code>'operandA'</code> whenever a pending binary operation is completed. The value of the <code><a href="#4_1">activeOperand</a></code> property determines which of the <code><a href="#4_18">operandA</a></code> and <code><a href="#4_19">operandB</a></code> set-get properties will be synchronized to the value of the <code><a href="#3_15">entry</a></code> child widget.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this property is read-only</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#4_17">operandA</a></code>, <code><a href="#4_18">operandB</a></code>, and <code><a href="#4_19">operator</a></code> set-get properties</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#4_18">operandA</a></code>, <code><a href="#4_19">operandB</a></code>, and <code><a href="#4_20">operator</a></code> set-get properties</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>'operandA'</code></td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -1273,7 +1270,19 @@
 		</div>
 		
 		<a name="4_5"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.5. clearOnNextDigit"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_5" title="4. Set-get Properties -&gt; 4.5. clearOnNextDigit">5</a>. </span>clearOnNextDigit</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.5. children"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_5" title="4. Set-get Properties -&gt; 4.5. children">5</a>. </span>children</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_6"></a>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.6. clearOnNextDigit"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_6" title="4. Set-get Properties -&gt; 4.6. clearOnNextDigit">6</a>. </span>clearOnNextDigit</h2>
 		<div class="contents2">
 			<p>A read-only boolean, indicating whether or not the very next entered digit should clear the current value of the <code><a href="#3_15">entry</a></code> child widget.</p>
 			
@@ -1298,20 +1307,8 @@
 			</table>
 		</div>
 		
-		<a name="4_6"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.6. container"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_6" title="4. Set-get Properties -&gt; 4.6. container">6</a>. </span>container</h2>
-		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
-			
-			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
-			
-			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
-			</table>
-		</div>
-		
 		<a name="4_7"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.7. enabled"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_7" title="4. Set-get Properties -&gt; 4.7. enabled">7</a>. </span>enabled</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.7. container"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_7" title="4. Set-get Properties -&gt; 4.7. container">7</a>. </span>container</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1323,7 +1320,7 @@
 		</div>
 		
 		<a name="4_8"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.8. enabledInherited"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_8" title="4. Set-get Properties -&gt; 4.8. enabledInherited">8</a>. </span>enabledInherited</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.8. enabled"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_8" title="4. Set-get Properties -&gt; 4.8. enabled">8</a>. </span>enabled</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1335,7 +1332,7 @@
 		</div>
 		
 		<a name="4_9"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.9. html"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_9" title="4. Set-get Properties -&gt; 4.9. html">9</a>. </span>html</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.9. enabledInherited"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_9" title="4. Set-get Properties -&gt; 4.9. enabledInherited">9</a>. </span>enabledInherited</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1347,7 +1344,7 @@
 		</div>
 		
 		<a name="4_10"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.10. idPrefix"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_10" title="4. Set-get Properties -&gt; 4.10. idPrefix">10</a>. </span>idPrefix</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.10. html"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_10" title="4. Set-get Properties -&gt; 4.10. html">10</a>. </span>html</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1359,7 +1356,7 @@
 		</div>
 		
 		<a name="4_11"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.11. idPrefixConstruction"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_11" title="4. Set-get Properties -&gt; 4.11. idPrefixConstruction">11</a>. </span>idPrefixConstruction</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.11. idPrefix"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_11" title="4. Set-get Properties -&gt; 4.11. idPrefix">11</a>. </span>idPrefix</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1371,7 +1368,7 @@
 		</div>
 		
 		<a name="4_12"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.12. insertionMode"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_12" title="4. Set-get Properties -&gt; 4.12. insertionMode">12</a>. </span>insertionMode</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.12. idPrefixConstruction"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_12" title="4. Set-get Properties -&gt; 4.12. idPrefixConstruction">12</a>. </span>idPrefixConstruction</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1383,7 +1380,7 @@
 		</div>
 		
 		<a name="4_13"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.13. localized"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_13" title="4. Set-get Properties -&gt; 4.13. localized">13</a>. </span>localized</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.13. insertionMode"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_13" title="4. Set-get Properties -&gt; 4.13. insertionMode">13</a>. </span>insertionMode</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1395,7 +1392,19 @@
 		</div>
 		
 		<a name="4_14"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.14. memory"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_14" title="4. Set-get Properties -&gt; 4.14. memory">14</a>. </span>memory</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.14. localized"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_14" title="4. Set-get Properties -&gt; 4.14. localized">14</a>. </span>localized</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_15"></a>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.15. memory"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_15" title="4. Set-get Properties -&gt; 4.15. memory">15</a>. </span>memory</h2>
 		<div class="contents2">
 			<p>A number, representing the current value of the calculator's memory function.</p>
 			
@@ -1413,20 +1422,8 @@
 			</table>
 		</div>
 		
-		<a name="4_15"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.15. name"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_15" title="4. Set-get Properties -&gt; 4.15. name">15</a>. </span>name</h2>
-		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
-			
-			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
-			
-			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
-			</table>
-		</div>
-		
 		<a name="4_16"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.16. nodeMap"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_16" title="4. Set-get Properties -&gt; 4.16. nodeMap">16</a>. </span>nodeMap</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.16. name"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_16" title="4. Set-get Properties -&gt; 4.16. name">16</a>. </span>name</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1438,40 +1435,30 @@
 		</div>
 		
 		<a name="4_17"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.17. operandA"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_17" title="4. Set-get Properties -&gt; 4.17. operandA">17</a>. </span>operandA</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.17. nodeMap"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_17" title="4. Set-get Properties -&gt; 4.17. nodeMap">17</a>. </span>nodeMap</h2>
 		<div class="contents2">
-			<p>A read-only number, representing the first operand in the currently pending binary operation.</p>
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
-			<p>When the value of the <code><a href="#4_1">activeOperand</a></code> set-get property is set to <code>'operandA'</code>, then the value of the <code><a href="#3_15">entry</a></code> child widget will be reflected in the <code><a href="#4_17">operandA</a></code> property. This means that the value of <code><a href="#4_17">operandA</a></code> would update as the user enters a value - either using the buttons of the calculator or the keys of their keyboard.</p>
-			
-			<p><span class="allCaps">NOTES</span></p>
-			
-			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this property is read-only</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the comapanion <code><a href="#4_18">operandB</a></code> set-get property</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#4_1">activeOperand</a></code> and <code><a href="#4_19">operator</a></code> set-get properties</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>undefined</code></td></tr>
-			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
 			</table>
 		</div>
 		
 		<a name="4_18"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.18. operandB"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_18" title="4. Set-get Properties -&gt; 4.18. operandB">18</a>. </span>operandB</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.18. operandA"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_18" title="4. Set-get Properties -&gt; 4.18. operandA">18</a>. </span>operandA</h2>
 		<div class="contents2">
-			<p>A read-only number, representing the second operand in the currently pending binary operation.</p>
+			<p>A read-only number, representing the first operand in the currently pending binary operation.</p>
 			
-			<p>When the value of the <code><a href="#4_1">activeOperand</a></code> set-get property is set to <code>'operandB'</code>, then the value of the <code><a href="#3_15">entry</a></code> child widget will be reflected in the <code><a href="#4_18">operandB</a></code> property. This means that the value of <code><a href="#4_18">operandB</a></code> would update as the user enters a value - either using the buttons of the calculator or the keys of their keyboard.</p>
+			<p>When the value of the <code><a href="#4_1">activeOperand</a></code> set-get property is set to <code>'operandA'</code>, then the value of the <code><a href="#3_15">entry</a></code> child widget will be reflected in the <code><a href="#4_18">operandA</a></code> property. This means that the value of <code><a href="#4_18">operandA</a></code> would update as the user enters a value - either using the buttons of the calculator or the keys of their keyboard.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this property is read-only</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the comapanion <code><a href="#4_17">operandA</a></code> set-get property</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#4_1">activeOperand</a></code> and <code><a href="#4_19">operator</a></code> set-get properties</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the comapanion <code><a href="#4_19">operandB</a></code> set-get property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#4_1">activeOperand</a></code> and <code><a href="#4_20">operator</a></code> set-get properties</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>undefined</code></td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -1482,18 +1469,18 @@
 		</div>
 		
 		<a name="4_19"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.19. operator"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_19" title="4. Set-get Properties -&gt; 4.19. operator">19</a>. </span>operator</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.19. operandB"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_19" title="4. Set-get Properties -&gt; 4.19. operandB">19</a>. </span>operandB</h2>
 		<div class="contents2">
-			<p>A string, representing the currently pending binary operation.</p>
+			<p>A read-only number, representing the second operand in the currently pending binary operation.</p>
 			
-			<p>Possible values for this property are: <code>'divide'</code>, <code>'multiply'</code>, <code>'subtract'</code>, <code>'add'</code>, and <code>undefined</code> (no currently pending binary operation).</p>
-			
-			<p>Whenever the value of this property is changed, the value of the <code><a href="#4_18">operandB</a></code> set-get property will be set to <code>undefined</code>, and the value of the <code><a href="#4_1">activeOperand</a></code> set-get property will be set to either <code>'operandA'</code> if <code><a href="#4_19">operator</a></code> is set to <code>undefined</code>, or <code>'operandB'</code> if <code><a href="#4_19">operator</a></code> is set to one of the supported string values.</p>
+			<p>When the value of the <code><a href="#4_1">activeOperand</a></code> set-get property is set to <code>'operandB'</code>, then the value of the <code><a href="#3_15">entry</a></code> child widget will be reflected in the <code><a href="#4_19">operandB</a></code> property. This means that the value of <code><a href="#4_19">operandB</a></code> would update as the user enters a value - either using the buttons of the calculator or the keys of their keyboard.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#4_1">activeOperand</a></code>, <code><a href="#4_17">operandA</a></code>, and <code><a href="#4_18">operandB</a></code> set-get properties</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this property is read-only</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the comapanion <code><a href="#4_18">operandA</a></code> set-get property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#4_1">activeOperand</a></code> and <code><a href="#4_20">operator</a></code> set-get properties</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>undefined</code></td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -1504,25 +1491,47 @@
 		</div>
 		
 		<a name="4_20"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.20. value"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_20" title="4. Set-get Properties -&gt; 4.20. value">20</a>. </span>value</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.20. operator"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_20" title="4. Set-get Properties -&gt; 4.20. operator">20</a>. </span>operator</h2>
+		<div class="contents2">
+			<p>A string, representing the currently pending binary operation.</p>
+			
+			<p>Possible values for this property are: <code>'divide'</code>, <code>'multiply'</code>, <code>'subtract'</code>, <code>'add'</code>, and <code>undefined</code> (no currently pending binary operation).</p>
+			
+			<p>Whenever the value of this property is changed, the value of the <code><a href="#4_19">operandB</a></code> set-get property will be set to <code>undefined</code>, and the value of the <code><a href="#4_1">activeOperand</a></code> set-get property will be set to either <code>'operandA'</code> if <code><a href="#4_20">operator</a></code> is set to <code>undefined</code>, or <code>'operandB'</code> if <code><a href="#4_20">operator</a></code> is set to one of the supported string values.</p>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#4_1">activeOperand</a></code>, <code><a href="#4_18">operandA</a></code>, and <code><a href="#4_19">operandB</a></code> set-get properties</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>undefined</code></td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_21"></a>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.21. value"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_21" title="4. Set-get Properties -&gt; 4.21. value">21</a>. </span>value</h2>
 		<div class="contents2">
 			<p>A number, representing the result of the calculation performed by the widget.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#4_1">activeOperand</a></code>, <code><a href="#4_17">operandA</a></code>, and <code><a href="#4_18">operandB</a></code> set-get properties</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#4_1">activeOperand</a></code>, <code><a href="#4_18">operandA</a></code>, and <code><a href="#4_19">operandB</a></code> set-get properties</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the initial value is <code>0</code></td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an override of an inherited feature (implementation is in this module, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
 			</table>
 		</div>
 		
-		<a name="4_21"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.21. wired"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_21" title="4. Set-get Properties -&gt; 4.21. wired">21</a>. </span>wired</h2>
+		<a name="4_22"></a>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.22. wired"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_22" title="4. Set-get Properties -&gt; 4.22. wired">22</a>. </span>wired</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			

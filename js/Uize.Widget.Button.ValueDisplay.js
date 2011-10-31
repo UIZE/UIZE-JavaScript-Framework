@@ -1,5 +1,5 @@
 /*
-	UIZE JAVASCRIPT FRAMEWORK 2011-04-01
+	UIZE JAVASCRIPT FRAMEWORK 2011-10-23
 
 	http://www.uize.com/reference/Uize.Widget.Button.ValueDisplay.html
 	Available under MIT License or GNU General Public License -- http://www.uize.com/license.html

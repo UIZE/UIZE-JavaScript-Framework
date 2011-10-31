@@ -6,7 +6,8 @@ Uize.module ({
 				Uize:{
 					Array:{
 						Order:0,
-						Sort:0
+						Sort:0,
+						Util:0
 					},
 					Color:{
 						xCmyk:0,
@@ -88,7 +89,8 @@ Uize.module ({
 						Uize:{
 							Array:{
 								Order:0,
-								Sort:0
+								Sort:0,
+								Util:0
 							},
 							Data:{
 								Csv:0,

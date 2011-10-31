@@ -495,10 +495,10 @@ Test Modules to Implement Next...
 Factor Out mergeCopy
 	Migrate mergeCopyInto to Uize base class, so it can be used by Uize.Widget.Page and other modules.
 
-Value Modifier Function
-	- a function that is flagged as a value modifier
-	- it is up to each function or method to determine if they will support value modifiers or not
-	- good candidates for methods to support value modifiers...
+Value Transformer Function
+	- a function that is flagged as a value transformer
+	- it is up to each function or method to determine if they will support value transformers or not
+	- good candidates for methods to support value transformers...
 		- myInstance.set
 		- MyClass.set
 		- Uize.Fade.fadeProperty
@@ -507,32 +507,138 @@ Value Modifier Function
 		- Uize.Node.setStyle, myWidget.setNodeStyle
 		- Uize.Node.setProperty, myWidget.setNodeProperty
 
-	- makes sense where the value for which a value modifier is being specified is intended to specify a value for something for which a current value is known
+	- makes sense where the value for which a value transformer is being specified is intended to specify a value for something for which a current value is known
 
-	Possible Semantics
-
+	Semantics
 		.........................................................
-		slider.set ({value:slider + 10})
-		slider.set ({value:Uize.modifier.plus (10)})
-		slider.set ({value:Uize.modifier.toggle ('!')})
-		slider.set ({value:Uize.modifier ('*',10)})
-		slider.set ({value:Uize ['*'] (10)})
-		slider.set ({value:Uize ('*',10)})
+		// plus value transformer
+		slider.set ({value:Uize.add.x (10)});
+		slider.set ({value:Uize.x ('x + 10')});
+		slider.set ({value:Uize.x (function (x) {return x + 10}}));
 
-		slider.set ({value:Uize.mods.multiply (10)})
+		// boolean toggle value transformer
+		slider.set ({value:Uize.toggle})
+		slider.set ({value:Uize.x ('!x')})
+		slider.set ({value:Uize.x (function (x) {return !x})})
 
-		Uize.modifier ('+',10)
+		// multiply value transformer
+		slider.set ({value:Uize.multiply.x (10)});
+		slider.set ({value:Uize.x ('x * 10')});
+		slider.set ({value:Uize.x (function (x) {return x * 10})});
 
-		Uize._.plus (10)
-		Uize._.minus (5)
-		Uize.mod ('+',10)
-		Uize.mod (Math.round)
+		Uize.multiply.x (10)
+		Uize.x ('x * 10')
+		function (x) {return x * 10}
 
-		Uize.modifier ('*',10)
-		Uize.mod ('*',10)
+		Uize.add.x (10)
+		Uize.x ('x + 10')
+		function (x) {return x + 10}
 
-		Uize.mod.multiply (10)
+		Uize.subtract.x (10)
+		Uize.x ('x - 10')
+		function (x) {return x - 10}
+
+		Uize.divide.x (10)
+		Uize.x ('x / 10')
+		function (x) {return x / 10}
+
+		Uize.mod.x (10)
+		Uize.x ('x % 10')
+		function (x) {return x % 10}
+
+		Uize.toggle
+		Uize.x ('!x')
+		function (x) {return !x}
+
+		Uize.round
+		Uize.x (Math.round)
+		Uize.x ('Math.round (x)');
+		function (x) {return Math.round (x)}
 		.........................................................
+
+	Behavior
+		- for any set-get property that is not defined in its property profile as allowing function type values, a function value specified as the new value for the property in a call to the set method will be treated as a value transformer on the current value of the property
+		- for any set-get property that is defined in its property profile as allowing function type values, but that is not defined as allowing value transformer function values, a function value that is a value transformer function and that is specified as the new value for the property in a call to the set method will be treated as a value transformer on the current value of the property
+		- for any set-get property that is defined in its property profile as allowing function type values and that is also defined as allowing value transformer function values, a function value that is a value transformer function and that is specified as the new value for the property in a call to the set method will simply be set as the new value for that property
+
+	Possible Implementation
+		................................................................................
+		function _makeValueTransformer (_functon,_extraArguments) {
+			var _valueTransformer = _extraArguments && _extraArguments.length
+				? function (x) {return _functon.apply (this,[x].concat (_extraArguments))}
+				: function (x) {return _functon.call (this,x)}
+			;
+			_valueTransformer.isValueTransformer = true;
+			return _valueTransformer;
+		}
+		................................................................................
+
+		....................................................................................................
+		var _cachedValueTransformers = {};
+		Uize.x = function (_unresolvedValueTransformer) {
+			var _valueTransformer = _unresolvedValueTransformer;
+			if (typeof _valueTransformer == 'function') {
+				if (!_valueTransformer.isValueTransformer)
+					_valueTransformer = _makeValueTransformer (
+						_functon,
+						arguments.length > 1 && Array.prototype.slice.call (arguments,1)
+					)
+				;
+			} else {
+				_valueTransformer = _cachedValueTransformers [_unresolvedValueTransformer += ''];
+				if (!_valueTransformer) {
+					_valueTransformer = _cachedValueTransformers [_unresolvedValueTransformer] = new Function (
+						'x',
+						'return ' + _unresolvedValueTransformer
+					);
+					_valueTransformer.isValueTransformer = true;
+				}
+			}
+			return _valueTransformer;
+		};
+		....................................................................................................
+
+		...............................................................................
+		function _x () {return _makeValueTransformer (this,arguments)}
+		Uize.exify = function (_function,_wrapOriginal) {
+			var _arity = _function.arity || _function.length;
+			if (_wrapOriginal) {
+				var _originalFunction = _function;
+				_function = function () {return _originalFunction.apply (this,arguments};
+			}
+			if (_arity < 2) _function.isValueTransformer = true;
+			_function.x = _x;
+			return _function;
+		};
+		...............................................................................
+
+		...
+		// define
+		Uize.divide = Uize.exify (function (x,denominator) {return x / denominator});
+
+		// use
+		Uize.divide (10,2);
+		Uize.divide.x (2);
+
+		// define
+		Uize.round = Uize.exify (Math.round,true); // wrap original, so as not to modify native function's properties
+
+		// define
+		Uize.isType = Uize.exify (function (x,type) {return typeof x == type});
+
+		// use
+		Uize.isNumber = Uize.isType.x ('number');
+		Uize.isString = Uize.isType.x ('string');
+		...
+
+		...
+		Uize.makeCaller (Uize.isType,[0,'number'],[0])
+		Uize.isTypeOf.x ('number')
+		...
+
+		...
+		_makeExify ('divide',function (x,value) {return x / value});
+		...
 
 Profiling Support
 	- a means for getting reports of the time that certain operations take on a page

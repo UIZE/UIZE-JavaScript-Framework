@@ -124,10 +124,12 @@
 			<li><a href="#10" title="- a lot of widgets have to synchronize state to implied nodes">10. Node as a Widget</a></li>
 			<li><a href="#11" title="- Uize.Test.Uize.Template">11. Test Modules to Implement Next...</a></li>
 			<li><a href="#12" title="Migrate mergeCopyInto to Uize base class, so it can be used by Uize.Widget.Page and other modules.">12. Factor Out mergeCopy</a></li>
-			<li><a href="#13" title="- a function that is flagged as a value modifier">13. Value Modifier Function</a>
+			<li><a href="#13" title="- a function that is flagged as a value transformer">13. Value Transformer Function</a>
 				<ul>
-					<li><a href="#13_1" title="- myInstance.set">13.1. - good candidates for methods to support value modifiers...</a></li>
-					<li><a href="#13_2" title="slider.set ({value:slider + 10})&#10;slider.set ({value:Uize.modifier.plus (10)})&#10;slider.set ({value:Uize.modifier.toggle (&apos;!&apos;)})&#10;slider.set ({value:Uize.modifier (&apos;*&apos;,10)})&#10;slider.set ({value:Uize [&apos;*&apos;] (10)})&#10;slider.set ({value:Uize (&apos;*&apos;,10)})&#10;&#10;slider.set ({value:Uize.mods.multiply (10)})&#10;&#10;Uize.modifier (&apos;+&apos;,10)&#10;&#10;Uize._.plus (10)&#10;Uize._.minus (5)&#10;Uize.mod (&apos;+&apos;,10)&#10;Uize.mod (Math.round)&#10;&#10;Uize.modi...">13.2. Possible Semantics</a></li>
+					<li><a href="#13_1" title="- myInstance.set">13.1. - good candidates for methods to support value transformers...</a></li>
+					<li><a href="#13_2" title="// plus value transformer&#10;slider.set ({value:Uize.add.x (10)});&#10;slider.set ({value:Uize.x (&apos;x + 10&apos;)});&#10;slider.set ({value:Uize.x (function (x) {return x + 10}}));&#10;&#10;// boolean toggle value transformer&#10;slider.set ({value:Uize.toggle})&#10;slider.set ({value:Uize.x (&apos;!x&apos;)})&#10;slider.set ({value:Uize.x (function (x) {return !x})})&#10;&#10;// multiply value transformer&#10;slider.set ({value:Uize.multiply.x (10)});...">13.2. Semantics</a></li>
+					<li><a href="#13_3" title="- for any set-get property that is not defined in its property profile as allowing function type values, a function value specified as the new value for the property in a call to the set method will be treated as a value transformer on the current value of the property">13.3. Behavior</a></li>
+					<li><a href="#13_4" title="function _makeValueTransformer (_functon,_extraArguments) {&#10;	var _valueTransformer = _extraArguments &amp;&amp; _extraArguments.length&#10;		? function (x) {return _functon.apply (this,[x].concat (_extraArguments))}&#10;		: function (x) {return _functon.call (this,x)}&#10;	;&#10;	_valueTransformer.isValueTransformer = true;&#10;	return _valueTransformer;&#10;}&#10;">13.4. Possible Implementation</a></li>
 				</ul>
 			</li>
 			<li><a href="#14">14. Profiling Support</a>
@@ -958,14 +960,14 @@ myWidget.service ('enableProfile',function () {});
 	</div>
 	
 	<a name="13"></a>
-	<h1 class="heading1" title="13. Value Modifier Function"><span class="headingNumber"><a href="#13" title="13. Value Modifier Function">13</a>. </span>Value Modifier Function</h1>
+	<h1 class="heading1" title="13. Value Transformer Function"><span class="headingNumber"><a href="#13" title="13. Value Transformer Function">13</a>. </span>Value Transformer Function</h1>
 	<div class="contents1">
 		<table class="list">
-		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>a function that is flagged as a value modifier</td></tr>
-		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>it is up to each function or method to determine if they will support value modifiers or not</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>a function that is flagged as a value transformer</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>it is up to each function or method to determine if they will support value transformers or not</td></tr>
 		</table>
 		<a name="13_1"></a>
-		<h2 class="heading2" title="13. Value Modifier Function -&gt; 13.1. - good candidates for methods to support value modifiers..."><span class="headingNumber"><a href="#13" title="13. Value Modifier Function">13</a>.<a href="#13_1" title="13. Value Modifier Function -&gt; 13.1. - good candidates for methods to support value modifiers...">1</a>. </span>- good candidates for methods to support value modifiers...</h2>
+		<h2 class="heading2" title="13. Value Transformer Function -&gt; 13.1. - good candidates for methods to support value transformers..."><span class="headingNumber"><a href="#13" title="13. Value Transformer Function">13</a>.<a href="#13_1" title="13. Value Transformer Function -&gt; 13.1. - good candidates for methods to support value transformers...">1</a>. </span>- good candidates for methods to support value transformers...</h2>
 		<div class="contents2">
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>myInstance.set</td></tr>
@@ -979,32 +981,147 @@ myWidget.service ('enableProfile',function () {});
 		</div>
 		
 		<table class="list">
-		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>makes sense where the value for which a value modifier is being specified is intended to specify a value for something for which a current value is known</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>makes sense where the value for which a value transformer is being specified is intended to specify a value for something for which a current value is known</td></tr>
 		</table>
 		<a name="13_2"></a>
-		<h2 class="heading2" title="13. Value Modifier Function -&gt; 13.2. Possible Semantics"><span class="headingNumber"><a href="#13" title="13. Value Modifier Function">13</a>.<a href="#13_2" title="13. Value Modifier Function -&gt; 13.2. Possible Semantics">2</a>. </span>Possible Semantics</h2>
+		<h2 class="heading2" title="13. Value Transformer Function -&gt; 13.2. Semantics"><span class="headingNumber"><a href="#13" title="13. Value Transformer Function">13</a>.<a href="#13_2" title="13. Value Transformer Function -&gt; 13.2. Semantics">2</a>. </span>Semantics</h2>
 		<div class="contents2">
 			
-<pre class="sample-code">slider.set ({value:slider + 10})
-slider.set ({value:Uize.modifier.plus (10)})
-slider.set ({value:Uize.modifier.toggle ('!')})
-slider.set ({value:Uize.modifier ('*',10)})
-slider.set ({value:Uize ['*'] (10)})
-slider.set ({value:Uize ('*',10)})
+<pre class="sample-code">// plus value transformer
+slider.set ({value:Uize.add.x (10)});
+slider.set ({value:Uize.x ('x + 10')});
+slider.set ({value:Uize.x (function (x) {return x + 10}}));
 
-slider.set ({value:Uize.mods.multiply (10)})
+// boolean toggle value transformer
+slider.set ({value:Uize.toggle})
+slider.set ({value:Uize.x ('!x')})
+slider.set ({value:Uize.x (function (x) {return !x})})
 
-Uize.modifier ('+',10)
+// multiply value transformer
+slider.set ({value:Uize.multiply.x (10)});
+slider.set ({value:Uize.x ('x * 10')});
+slider.set ({value:Uize.x (function (x) {return x * 10})});
 
-Uize._.plus (10)
-Uize._.minus (5)
-Uize.mod ('+',10)
-Uize.mod (Math.round)
+Uize.multiply.x (10)
+Uize.x ('x * 10')
+function (x) {return x * 10}
 
-Uize.modifier ('*',10)
-Uize.mod ('*',10)
+Uize.add.x (10)
+Uize.x ('x + 10')
+function (x) {return x + 10}
 
-Uize.mod.multiply (10)
+Uize.subtract.x (10)
+Uize.x ('x - 10')
+function (x) {return x - 10}
+
+Uize.divide.x (10)
+Uize.x ('x / 10')
+function (x) {return x / 10}
+
+Uize.mod.x (10)
+Uize.x ('x % 10')
+function (x) {return x % 10}
+
+Uize.toggle
+Uize.x ('!x')
+function (x) {return !x}
+
+Uize.round
+Uize.x (Math.round)
+Uize.x ('Math.round (x)');
+function (x) {return Math.round (x)}
+</pre>
+		</div>
+		
+		<a name="13_3"></a>
+		<h2 class="heading2" title="13. Value Transformer Function -&gt; 13.3. Behavior"><span class="headingNumber"><a href="#13" title="13. Value Transformer Function">13</a>.<a href="#13_3" title="13. Value Transformer Function -&gt; 13.3. Behavior">3</a>. </span>Behavior</h2>
+		<div class="contents2">
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>for any set-get property that is not defined in its property profile as allowing function type values, a function value specified as the new value for the property in a call to the set method will be treated as a value transformer on the current value of the property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>for any set-get property that is defined in its property profile as allowing function type values, but that is not defined as allowing value transformer function values, a function value that is a value transformer function and that is specified as the new value for the property in a call to the set method will be treated as a value transformer on the current value of the property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>for any set-get property that is defined in its property profile as allowing function type values and that is also defined as allowing value transformer function values, a function value that is a value transformer function and that is specified as the new value for the property in a call to the set method will simply be set as the new value for that property</td></tr>
+			</table>
+		</div>
+		
+		<a name="13_4"></a>
+		<h2 class="heading2" title="13. Value Transformer Function -&gt; 13.4. Possible Implementation"><span class="headingNumber"><a href="#13" title="13. Value Transformer Function">13</a>.<a href="#13_4" title="13. Value Transformer Function -&gt; 13.4. Possible Implementation">4</a>. </span>Possible Implementation</h2>
+		<div class="contents2">
+			
+<pre class="sample-code">function _makeValueTransformer (_functon,_extraArguments) {
+  var _valueTransformer = _extraArguments &amp;&amp; _extraArguments.length
+    ? function (x) {return _functon.apply (this,[x].concat (_extraArguments))}
+    : function (x) {return _functon.call (this,x)}
+  ;
+  _valueTransformer.isValueTransformer = true;
+  return _valueTransformer;
+}
+</pre>
+			
+			
+<pre class="sample-code">var _cachedValueTransformers = {};
+Uize.x = function (_unresolvedValueTransformer) {
+  var _valueTransformer = _unresolvedValueTransformer;
+  if (typeof _valueTransformer == 'function') {
+    if (!_valueTransformer.isValueTransformer)
+      _valueTransformer = _makeValueTransformer (
+        _functon,
+        arguments.length &gt; 1 &amp;&amp; Array.prototype.slice.call (arguments,1)
+      )
+    ;
+  } else {
+    _valueTransformer = _cachedValueTransformers [_unresolvedValueTransformer += ''];
+    if (!_valueTransformer) {
+      _valueTransformer = _cachedValueTransformers [_unresolvedValueTransformer] = new Function (
+        'x',
+        'return ' + _unresolvedValueTransformer
+      );
+      _valueTransformer.isValueTransformer = true;
+    }
+  }
+  return _valueTransformer;
+};
+</pre>
+			
+			
+<pre class="sample-code">function _x () {return _makeValueTransformer (this,arguments)}
+Uize.exify = function (_function,_wrapOriginal) {
+  var _arity = _function.arity || _function.length;
+  if (_wrapOriginal) {
+    var _originalFunction = _function;
+    _function = function () {return _originalFunction.apply (this,arguments};
+  }
+  if (_arity &lt; 2) _function.isValueTransformer = true;
+  _function.x = _x;
+  return _function;
+};
+</pre>
+			
+			
+<pre class="sample-code">// define
+Uize.divide = Uize.exify (function (x,denominator) {return x / denominator});
+
+// use
+Uize.divide (10,2);
+Uize.divide.x (2);
+
+// define
+Uize.round = Uize.exify (Math.round,true); // wrap original, so as not to modify native function's properties
+
+// define
+Uize.isType = Uize.exify (function (x,type) {return typeof x == type});
+
+// use
+Uize.isNumber = Uize.isType.x ('number');
+Uize.isString = Uize.isType.x ('string');
+</pre>
+			
+			
+<pre class="sample-code">Uize.makeCaller (Uize.isType,[0,'number'],[0])
+Uize.isTypeOf.x ('number')
+</pre>
+			
+			
+<pre class="sample-code">_makeExify ('divide',function (x,value) {return x / value});
 </pre>
 		</div>
 	</div>

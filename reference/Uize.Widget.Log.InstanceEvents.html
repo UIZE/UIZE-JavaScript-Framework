@@ -62,21 +62,21 @@
 					<li><a href="#2_1" title="Inherited from Uize.Widget.">2.1. built</a></li>
 					<li><a href="#2_2" title="Inherited from Uize.Widget.">2.2. busy</a></li>
 					<li><a href="#2_3" title="Inherited from Uize.Widget.">2.3. busyInherited</a></li>
-					<li><a href="#2_4" title="Inherited from Uize.Widget.">2.4. container</a></li>
-					<li><a href="#2_5" title="Inherited from Uize.Widget.">2.5. enabled</a></li>
-					<li><a href="#2_6" title="Inherited from Uize.Widget.">2.6. enabledInherited</a></li>
-					<li><a href="#2_7" title="Inherited from Uize.Widget.">2.7. html</a></li>
-					<li><a href="#2_8" title="Inherited from Uize.Widget.">2.8. idPrefix</a></li>
-					<li><a href="#2_9" title="Inherited from Uize.Widget.">2.9. idPrefixConstruction</a></li>
-					<li><a href="#2_10" title="Inherited from Uize.Widget.">2.10. insertionMode</a></li>
-					<li><a href="#2_11" title="An object reference, specifying the instance of a Uize subclass for which instance events should be logged.">2.11. instance</a></li>
-					<li><a href="#2_12" title="Inherited from Uize.Widget.Log.">2.12. isEmpty</a></li>
-					<li><a href="#2_13" title="IMPLEMENTATION INFO">2.13. localized</a></li>
-					<li><a href="#2_14" title="Inherited from Uize.Widget.">2.14. name</a></li>
-					<li><a href="#2_15" title="Inherited from Uize.Widget.">2.15. nodeMap</a></li>
-					<li><a href="#2_16" title="Inherited from Uize.Widget.Log.">2.16. showTimestamp</a></li>
-					<li><a href="#2_17" title="Inherited from Uize.Widget.Log.">2.17. timestampFormat</a></li>
-					<li><a href="#2_18" title="Inherited from Uize.">2.18. value</a></li>
+					<li><a href="#2_4" title="Inherited from Uize.Widget.">2.4. children</a></li>
+					<li><a href="#2_5" title="Inherited from Uize.Widget.">2.5. container</a></li>
+					<li><a href="#2_6" title="Inherited from Uize.Widget.">2.6. enabled</a></li>
+					<li><a href="#2_7" title="Inherited from Uize.Widget.">2.7. enabledInherited</a></li>
+					<li><a href="#2_8" title="Inherited from Uize.Widget.">2.8. html</a></li>
+					<li><a href="#2_9" title="Inherited from Uize.Widget.">2.9. idPrefix</a></li>
+					<li><a href="#2_10" title="Inherited from Uize.Widget.">2.10. idPrefixConstruction</a></li>
+					<li><a href="#2_11" title="Inherited from Uize.Widget.">2.11. insertionMode</a></li>
+					<li><a href="#2_12" title="An object reference, specifying the instance of a Uize subclass for which instance events should be logged.">2.12. instance</a></li>
+					<li><a href="#2_13" title="Inherited from Uize.Widget.Log.">2.13. isEmpty</a></li>
+					<li><a href="#2_14" title="IMPLEMENTATION INFO">2.14. localized</a></li>
+					<li><a href="#2_15" title="Inherited from Uize.Widget.">2.15. name</a></li>
+					<li><a href="#2_16" title="Inherited from Uize.Widget.">2.16. nodeMap</a></li>
+					<li><a href="#2_17" title="Inherited from Uize.Widget.Log.">2.17. showTimestamp</a></li>
+					<li><a href="#2_18" title="Inherited from Uize.Widget.Log.">2.18. timestampFormat</a></li>
 					<li><a href="#2_19" title="Inherited from Uize.Widget.">2.19. wired</a></li>
 				</ul>
 			</li>
@@ -182,7 +182,7 @@
 			<a name="1_1_1"></a>
 			<h3 class="heading3" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.1. Logging an Instance&apos;s Events"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. In a Nutshell">1</a>.<a href="#1_1_1" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.1. Logging an Instance&apos;s Events">1</a>. </span>Logging an Instance's Events</h3>
 			<div class="contents3">
-				<p>To log instance events for an instance of the <code>Uize.Widget.Log.InstanceEvents</code> class, set the log instance's <code><a href="#2_11">instance</a></code> set-get property to be a reference to the instance whose events you want to log.</p>
+				<p>To log instance events for an instance of the <code>Uize.Widget.Log.InstanceEvents</code> class, set the log instance's <code><a href="#2_12">instance</a></code> set-get property to be a reference to the instance whose events you want to log.</p>
 				
 				<p>That may sound like a mouthful, but it's a lot simpler than it may sound. Consider the following example...</p>
 				
@@ -193,7 +193,7 @@
 page.addChild ('sliderEventsLog',Uize.Widget.Log.InstanceEvents,{instance:slider});
 </pre>
 				
-				<p>In the above example, a slider widget is being added as a child widget of the page widget (which is assumed to already exist). Then, an instance of the <code>Uize.Widget.Log.InstanceEvents</code> class is also being added as a child widget of the page widget. To have the instance events from the slider widget logged to the instance events logger widget, its <code><a href="#2_11">instance</a></code> property is set to be a reference to the slider widget. It's really that simple. The above code snippet, of course, assumes that the page widget instance was created earlier, and that the HTML page in which this code runs has all the necessary HTML markup for the UI's of the slider and log widgets.</p>
+				<p>In the above example, a slider widget is being added as a child widget of the page widget (which is assumed to already exist). Then, an instance of the <code>Uize.Widget.Log.InstanceEvents</code> class is also being added as a child widget of the page widget. To have the instance events from the slider widget logged to the instance events logger widget, its <code><a href="#2_12">instance</a></code> property is set to be a reference to the slider widget. It's really that simple. The above code snippet, of course, assumes that the page widget instance was created earlier, and that the HTML page in which this code runs has all the necessary HTML markup for the UI's of the slider and log widgets.</p>
 			</div>
 			
 			<a name="1_1_2"></a>
@@ -229,15 +229,15 @@ page.addChild ('sliderEventsLog',Uize.Widget.Log.InstanceEvents,{instance:slider
 			<div class="contents3">
 				<p>The <code>Uize.Widget.Log.InstanceEvents</code> class supports dynamic switching of the instance for which events are being logged.</p>
 				
-				<p>The value of a log widget's <code><a href="#2_11">instance</a></code> set-get property can be changed at any time. If the value of the <code><a href="#2_11">instance</a></code> property is changed after the log widget's UI has already been wired up, then any logged instance events from a previous instance that was being watched will be cleared from the log.</p>
+				<p>The value of a log widget's <code><a href="#2_12">instance</a></code> set-get property can be changed at any time. If the value of the <code><a href="#2_12">instance</a></code> property is changed after the log widget's UI has already been wired up, then any logged instance events from a previous instance that was being watched will be cleared from the log.</p>
 			</div>
 			
 			<a name="1_1_5"></a>
 			<h3 class="heading3" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.5. Nothing to Watch"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. In a Nutshell">1</a>.<a href="#1_1_5" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.5. Nothing to Watch">5</a>. </span>Nothing to Watch</h3>
 			<div class="contents3">
-				<p>When a log widget's <code><a href="#2_11">instance</a></code> set-get property is set to the value <code>null</code> or <code>undefined</code>, then no instance will be watched.</p>
+				<p>When a log widget's <code><a href="#2_12">instance</a></code> set-get property is set to the value <code>null</code> or <code>undefined</code>, then no instance will be watched.</p>
 				
-				<p>If the <code><a href="#2_11">instance</a></code> property is set to <code>null</code> or <code>undefined</code> after the log was already wired up and watching instance events for some instance, then the log will be cleared and no more messages will be displayed until the <code><a href="#2_11">instance</a></code> property is once again set to a reference to a <code><a href="../reference/Uize.html">Uize</a></code> subclass.</p>
+				<p>If the <code><a href="#2_12">instance</a></code> property is set to <code>null</code> or <code>undefined</code> after the log was already wired up and watching instance events for some instance, then the log will be cleared and no more messages will be displayed until the <code><a href="#2_12">instance</a></code> property is once again set to a reference to a <code><a href="../reference/Uize.html">Uize</a></code> subclass.</p>
 			</div>
 		</div>
 		
@@ -269,7 +269,7 @@ page.addChild ('sliderEventsLog',Uize.Widget.Log.InstanceEvents,{instance:slider
 				
 				<p><span class="allCaps">SET-GET PROPERTIES</span></p>
 				
-				<p><code><a href="#2_11">instance</a></code></p>
+				<p><code><a href="#2_12">instance</a></code></p>
 			</div>
 			
 			<a name="1_3_2"></a>
@@ -281,7 +281,7 @@ page.addChild ('sliderEventsLog',Uize.Widget.Log.InstanceEvents,{instance:slider
 				
 				<p><span class="allCaps">SET-GET PROPERTIES</span></p>
 				
-				<p><code><a href="#2_13">localized</a></code></p>
+				<p><code><a href="#2_14">localized</a></code></p>
 				
 				<p><span class="allCaps">STATIC PROPERTIES</span></p>
 				
@@ -305,7 +305,7 @@ page.addChild ('sliderEventsLog',Uize.Widget.Log.InstanceEvents,{instance:slider
 				
 				<p><span class="allCaps">SET-GET PROPERTIES</span></p>
 				
-				<p><code><a href="#2_1">built</a></code> | <code><a href="#2_2">busy</a></code> | <code><a href="#2_3">busyInherited</a></code> | <code><a href="#2_4">container</a></code> | <code><a href="#2_5">enabled</a></code> | <code><a href="#2_6">enabledInherited</a></code> | <code><a href="#2_7">html</a></code> | <code><a href="#2_8">idPrefix</a></code> | <code><a href="#2_9">idPrefixConstruction</a></code> | <code><a href="#2_10">insertionMode</a></code> | <code><a href="#2_12">isEmpty</a></code> | <code><a href="#2_14">name</a></code> | <code><a href="#2_15">nodeMap</a></code> | <code><a href="#2_16">showTimestamp</a></code> | <code><a href="#2_17">timestampFormat</a></code> | <code><a href="#2_18">value</a></code> | <code><a href="#2_19">wired</a></code></p>
+				<p><code><a href="#2_1">built</a></code> | <code><a href="#2_2">busy</a></code> | <code><a href="#2_3">busyInherited</a></code> | <code><a href="#2_4">children</a></code> | <code><a href="#2_5">container</a></code> | <code><a href="#2_6">enabled</a></code> | <code><a href="#2_7">enabledInherited</a></code> | <code><a href="#2_8">html</a></code> | <code><a href="#2_9">idPrefix</a></code> | <code><a href="#2_10">idPrefixConstruction</a></code> | <code><a href="#2_11">insertionMode</a></code> | <code><a href="#2_13">isEmpty</a></code> | <code><a href="#2_15">name</a></code> | <code><a href="#2_16">nodeMap</a></code> | <code><a href="#2_17">showTimestamp</a></code> | <code><a href="#2_18">timestampFormat</a></code> | <code><a href="#2_19">wired</a></code></p>
 				
 				<p><span class="allCaps">STATIC METHODS</span></p>
 				
@@ -370,7 +370,7 @@ page.addChild ('sliderEventsLog',Uize.Widget.Log.InstanceEvents,{instance:slider
 		</div>
 		
 		<a name="2_4"></a>
-		<h2 class="heading2" title="2. Set-get Properties -&gt; 2.4. container"><span class="headingNumber"><a href="#2" title="2. Set-get Properties">2</a>.<a href="#2_4" title="2. Set-get Properties -&gt; 2.4. container">4</a>. </span>container</h2>
+		<h2 class="heading2" title="2. Set-get Properties -&gt; 2.4. children"><span class="headingNumber"><a href="#2" title="2. Set-get Properties">2</a>.<a href="#2_4" title="2. Set-get Properties -&gt; 2.4. children">4</a>. </span>children</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -382,7 +382,7 @@ page.addChild ('sliderEventsLog',Uize.Widget.Log.InstanceEvents,{instance:slider
 		</div>
 		
 		<a name="2_5"></a>
-		<h2 class="heading2" title="2. Set-get Properties -&gt; 2.5. enabled"><span class="headingNumber"><a href="#2" title="2. Set-get Properties">2</a>.<a href="#2_5" title="2. Set-get Properties -&gt; 2.5. enabled">5</a>. </span>enabled</h2>
+		<h2 class="heading2" title="2. Set-get Properties -&gt; 2.5. container"><span class="headingNumber"><a href="#2" title="2. Set-get Properties">2</a>.<a href="#2_5" title="2. Set-get Properties -&gt; 2.5. container">5</a>. </span>container</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -394,7 +394,7 @@ page.addChild ('sliderEventsLog',Uize.Widget.Log.InstanceEvents,{instance:slider
 		</div>
 		
 		<a name="2_6"></a>
-		<h2 class="heading2" title="2. Set-get Properties -&gt; 2.6. enabledInherited"><span class="headingNumber"><a href="#2" title="2. Set-get Properties">2</a>.<a href="#2_6" title="2. Set-get Properties -&gt; 2.6. enabledInherited">6</a>. </span>enabledInherited</h2>
+		<h2 class="heading2" title="2. Set-get Properties -&gt; 2.6. enabled"><span class="headingNumber"><a href="#2" title="2. Set-get Properties">2</a>.<a href="#2_6" title="2. Set-get Properties -&gt; 2.6. enabled">6</a>. </span>enabled</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -406,7 +406,7 @@ page.addChild ('sliderEventsLog',Uize.Widget.Log.InstanceEvents,{instance:slider
 		</div>
 		
 		<a name="2_7"></a>
-		<h2 class="heading2" title="2. Set-get Properties -&gt; 2.7. html"><span class="headingNumber"><a href="#2" title="2. Set-get Properties">2</a>.<a href="#2_7" title="2. Set-get Properties -&gt; 2.7. html">7</a>. </span>html</h2>
+		<h2 class="heading2" title="2. Set-get Properties -&gt; 2.7. enabledInherited"><span class="headingNumber"><a href="#2" title="2. Set-get Properties">2</a>.<a href="#2_7" title="2. Set-get Properties -&gt; 2.7. enabledInherited">7</a>. </span>enabledInherited</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -418,7 +418,7 @@ page.addChild ('sliderEventsLog',Uize.Widget.Log.InstanceEvents,{instance:slider
 		</div>
 		
 		<a name="2_8"></a>
-		<h2 class="heading2" title="2. Set-get Properties -&gt; 2.8. idPrefix"><span class="headingNumber"><a href="#2" title="2. Set-get Properties">2</a>.<a href="#2_8" title="2. Set-get Properties -&gt; 2.8. idPrefix">8</a>. </span>idPrefix</h2>
+		<h2 class="heading2" title="2. Set-get Properties -&gt; 2.8. html"><span class="headingNumber"><a href="#2" title="2. Set-get Properties">2</a>.<a href="#2_8" title="2. Set-get Properties -&gt; 2.8. html">8</a>. </span>html</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -430,7 +430,7 @@ page.addChild ('sliderEventsLog',Uize.Widget.Log.InstanceEvents,{instance:slider
 		</div>
 		
 		<a name="2_9"></a>
-		<h2 class="heading2" title="2. Set-get Properties -&gt; 2.9. idPrefixConstruction"><span class="headingNumber"><a href="#2" title="2. Set-get Properties">2</a>.<a href="#2_9" title="2. Set-get Properties -&gt; 2.9. idPrefixConstruction">9</a>. </span>idPrefixConstruction</h2>
+		<h2 class="heading2" title="2. Set-get Properties -&gt; 2.9. idPrefix"><span class="headingNumber"><a href="#2" title="2. Set-get Properties">2</a>.<a href="#2_9" title="2. Set-get Properties -&gt; 2.9. idPrefix">9</a>. </span>idPrefix</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -442,7 +442,7 @@ page.addChild ('sliderEventsLog',Uize.Widget.Log.InstanceEvents,{instance:slider
 		</div>
 		
 		<a name="2_10"></a>
-		<h2 class="heading2" title="2. Set-get Properties -&gt; 2.10. insertionMode"><span class="headingNumber"><a href="#2" title="2. Set-get Properties">2</a>.<a href="#2_10" title="2. Set-get Properties -&gt; 2.10. insertionMode">10</a>. </span>insertionMode</h2>
+		<h2 class="heading2" title="2. Set-get Properties -&gt; 2.10. idPrefixConstruction"><span class="headingNumber"><a href="#2" title="2. Set-get Properties">2</a>.<a href="#2_10" title="2. Set-get Properties -&gt; 2.10. idPrefixConstruction">10</a>. </span>idPrefixConstruction</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -454,43 +454,7 @@ page.addChild ('sliderEventsLog',Uize.Widget.Log.InstanceEvents,{instance:slider
 		</div>
 		
 		<a name="2_11"></a>
-		<h2 class="heading2" title="2. Set-get Properties -&gt; 2.11. instance"><span class="headingNumber"><a href="#2" title="2. Set-get Properties">2</a>.<a href="#2_11" title="2. Set-get Properties -&gt; 2.11. instance">11</a>. </span>instance</h2>
-		<div class="contents2">
-			<p>An object reference, specifying the instance of a <code><a href="../reference/Uize.html">Uize</a></code> subclass for which instance events should be logged.</p>
-			
-			<p>The value of the <code><a href="#2_11">instance</a></code> set-get property can be a reference to an instance of <b>any</b> <code><a href="../reference/Uize.html">Uize</a></code> subclass  - not just widget classes (see <a href="#1_1_3">Watch Any Instance</a>). The value of the <code><a href="#2_11">instance</a></code> set-get property can be changed at any time - even after the log widget has already been wired up (see <a href="#1_1_4">Dynamic Switching</a>). When the <code><a href="#2_11">instance</a></code> property is set to the value <code>null</code> or <code>undefined</code>, then no instance will be watched (see <a href="#1_1_5">Nothing to Watch</a>).</p>
-			
-			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
-			
-			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
-			</table>
-		</div>
-		
-		<a name="2_12"></a>
-		<h2 class="heading2" title="2. Set-get Properties -&gt; 2.12. isEmpty"><span class="headingNumber"><a href="#2" title="2. Set-get Properties">2</a>.<a href="#2_12" title="2. Set-get Properties -&gt; 2.12. isEmpty">12</a>. </span>isEmpty</h2>
-		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.Widget.Log.html">Uize.Widget.Log</a></code>.</p>
-			
-			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
-			
-			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.Log.html">Uize.Widget.Log</a></code>, first introduced in <code><a href="../reference/Uize.Widget.Log.html">Uize.Widget.Log</a></code>)</td></tr>
-			</table>
-		</div>
-		
-		<a name="2_13"></a>
-		<h2 class="heading2" title="2. Set-get Properties -&gt; 2.13. localized"><span class="headingNumber"><a href="#2" title="2. Set-get Properties">2</a>.<a href="#2_13" title="2. Set-get Properties -&gt; 2.13. localized">13</a>. </span>localized</h2>
-		<div class="contents2">
-			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
-			
-			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an override of an inherited feature (implementation is in this module, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
-			</table>
-		</div>
-		
-		<a name="2_14"></a>
-		<h2 class="heading2" title="2. Set-get Properties -&gt; 2.14. name"><span class="headingNumber"><a href="#2" title="2. Set-get Properties">2</a>.<a href="#2_14" title="2. Set-get Properties -&gt; 2.14. name">14</a>. </span>name</h2>
+		<h2 class="heading2" title="2. Set-get Properties -&gt; 2.11. insertionMode"><span class="headingNumber"><a href="#2" title="2. Set-get Properties">2</a>.<a href="#2_11" title="2. Set-get Properties -&gt; 2.11. insertionMode">11</a>. </span>insertionMode</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -501,8 +465,44 @@ page.addChild ('sliderEventsLog',Uize.Widget.Log.InstanceEvents,{instance:slider
 			</table>
 		</div>
 		
+		<a name="2_12"></a>
+		<h2 class="heading2" title="2. Set-get Properties -&gt; 2.12. instance"><span class="headingNumber"><a href="#2" title="2. Set-get Properties">2</a>.<a href="#2_12" title="2. Set-get Properties -&gt; 2.12. instance">12</a>. </span>instance</h2>
+		<div class="contents2">
+			<p>An object reference, specifying the instance of a <code><a href="../reference/Uize.html">Uize</a></code> subclass for which instance events should be logged.</p>
+			
+			<p>The value of the <code><a href="#2_12">instance</a></code> set-get property can be a reference to an instance of <b>any</b> <code><a href="../reference/Uize.html">Uize</a></code> subclass  - not just widget classes (see <a href="#1_1_3">Watch Any Instance</a>). The value of the <code><a href="#2_12">instance</a></code> set-get property can be changed at any time - even after the log widget has already been wired up (see <a href="#1_1_4">Dynamic Switching</a>). When the <code><a href="#2_12">instance</a></code> property is set to the value <code>null</code> or <code>undefined</code>, then no instance will be watched (see <a href="#1_1_5">Nothing to Watch</a>).</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_13"></a>
+		<h2 class="heading2" title="2. Set-get Properties -&gt; 2.13. isEmpty"><span class="headingNumber"><a href="#2" title="2. Set-get Properties">2</a>.<a href="#2_13" title="2. Set-get Properties -&gt; 2.13. isEmpty">13</a>. </span>isEmpty</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.Log.html">Uize.Widget.Log</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.Log.html">Uize.Widget.Log</a></code>, first introduced in <code><a href="../reference/Uize.Widget.Log.html">Uize.Widget.Log</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_14"></a>
+		<h2 class="heading2" title="2. Set-get Properties -&gt; 2.14. localized"><span class="headingNumber"><a href="#2" title="2. Set-get Properties">2</a>.<a href="#2_14" title="2. Set-get Properties -&gt; 2.14. localized">14</a>. </span>localized</h2>
+		<div class="contents2">
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an override of an inherited feature (implementation is in this module, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			</table>
+		</div>
+		
 		<a name="2_15"></a>
-		<h2 class="heading2" title="2. Set-get Properties -&gt; 2.15. nodeMap"><span class="headingNumber"><a href="#2" title="2. Set-get Properties">2</a>.<a href="#2_15" title="2. Set-get Properties -&gt; 2.15. nodeMap">15</a>. </span>nodeMap</h2>
+		<h2 class="heading2" title="2. Set-get Properties -&gt; 2.15. name"><span class="headingNumber"><a href="#2" title="2. Set-get Properties">2</a>.<a href="#2_15" title="2. Set-get Properties -&gt; 2.15. name">15</a>. </span>name</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -514,19 +514,19 @@ page.addChild ('sliderEventsLog',Uize.Widget.Log.InstanceEvents,{instance:slider
 		</div>
 		
 		<a name="2_16"></a>
-		<h2 class="heading2" title="2. Set-get Properties -&gt; 2.16. showTimestamp"><span class="headingNumber"><a href="#2" title="2. Set-get Properties">2</a>.<a href="#2_16" title="2. Set-get Properties -&gt; 2.16. showTimestamp">16</a>. </span>showTimestamp</h2>
+		<h2 class="heading2" title="2. Set-get Properties -&gt; 2.16. nodeMap"><span class="headingNumber"><a href="#2" title="2. Set-get Properties">2</a>.<a href="#2_16" title="2. Set-get Properties -&gt; 2.16. nodeMap">16</a>. </span>nodeMap</h2>
 		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.Widget.Log.html">Uize.Widget.Log</a></code>.</p>
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.Log.html">Uize.Widget.Log</a></code>, first introduced in <code><a href="../reference/Uize.Widget.Log.html">Uize.Widget.Log</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
 			</table>
 		</div>
 		
 		<a name="2_17"></a>
-		<h2 class="heading2" title="2. Set-get Properties -&gt; 2.17. timestampFormat"><span class="headingNumber"><a href="#2" title="2. Set-get Properties">2</a>.<a href="#2_17" title="2. Set-get Properties -&gt; 2.17. timestampFormat">17</a>. </span>timestampFormat</h2>
+		<h2 class="heading2" title="2. Set-get Properties -&gt; 2.17. showTimestamp"><span class="headingNumber"><a href="#2" title="2. Set-get Properties">2</a>.<a href="#2_17" title="2. Set-get Properties -&gt; 2.17. showTimestamp">17</a>. </span>showTimestamp</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.Log.html">Uize.Widget.Log</a></code>.</p>
 			
@@ -538,14 +538,14 @@ page.addChild ('sliderEventsLog',Uize.Widget.Log.InstanceEvents,{instance:slider
 		</div>
 		
 		<a name="2_18"></a>
-		<h2 class="heading2" title="2. Set-get Properties -&gt; 2.18. value"><span class="headingNumber"><a href="#2" title="2. Set-get Properties">2</a>.<a href="#2_18" title="2. Set-get Properties -&gt; 2.18. value">18</a>. </span>value</h2>
+		<h2 class="heading2" title="2. Set-get Properties -&gt; 2.18. timestampFormat"><span class="headingNumber"><a href="#2" title="2. Set-get Properties">2</a>.<a href="#2_18" title="2. Set-get Properties -&gt; 2.18. timestampFormat">18</a>. </span>timestampFormat</h2>
 		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
+			<p>Inherited from <code><a href="../reference/Uize.Widget.Log.html">Uize.Widget.Log</a></code>.</p>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.Log.html">Uize.Widget.Log</a></code>, first introduced in <code><a href="../reference/Uize.Widget.Log.html">Uize.Widget.Log</a></code>)</td></tr>
 			</table>
 		</div>
 		
@@ -576,7 +576,7 @@ page.addChild ('sliderEventsLog',Uize.Widget.Log.InstanceEvents,{instance:slider
 		<div class="contents2">
 			<p>A localizable string, that will be logged as a log message whenever there is no valid object to watch events on (see <a href="#1_1_5">Nothing to Watch</a>).</p>
 			
-			<p>In order for the instance to have a valid object to watch events on, the value of the <code><a href="#2_11">instance</a></code> set-get property must be either a reference to an instance of a <code><a href="../reference/Uize.html">Uize</a></code> subclass, or a referece to a <code><a href="../reference/Uize.html">Uize</a></code> subclass.</p>
+			<p>In order for the instance to have a valid object to watch events on, the value of the <code><a href="#2_12">instance</a></code> set-get property must be either a reference to an instance of a <code><a href="../reference/Uize.html">Uize</a></code> subclass, or a referece to a <code><a href="../reference/Uize.html">Uize</a></code> subclass.</p>
 		</div>
 		
 		<a name="3_3"></a>

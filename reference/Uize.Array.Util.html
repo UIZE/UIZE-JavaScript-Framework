@@ -1,0 +1,347 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Uize.Array.Util | Documentation | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework Documentation Uize.Array.Util module reference documentation"/>
+	<meta name="description" content="The Uize.Array.Util module provides a number of miscellaneous utility methods for manipulating arrays."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../javascript-modules-index.html" class="breadcrumb breadcrumbWithArrow">MODULES</a>
+	<a href="Uize.html" title="View reference for Uize" class="breadcrumb">Uize</a>.<a href="Uize.Array.html" title="View reference for Uize.Array" class="breadcrumb">Array</a>.<a href="Uize.Array.Util.html" title="View reference for Uize.Array.Util" class="breadcrumb">Util</a>
+	<div class="pageActions">
+		<a id="page-search" href="javascript://" class="buttonLink" title="Search for references to this module...">SEARCH</a><a id="page-examples" href="javascript://" class="buttonLink" title="View examples for this module...">EXAMPLES</a><a href="source-code/Uize.Array.Util.html" class="buttonLink" title="View the JavaScript source code for this module...">SOURCE</a><a id="page-test" href="javascript://" class="buttonLink" title="Test this module...">TEST</a>
+	</div>
+
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="The Uize.Array.Util module provides a number of miscellaneous utility methods for manipulating arrays.">1. Introduction</a>
+				<ul>
+					<li><a href="#1_1" title="There are no dedicated showcase example pages for the Uize.Array.Util module.">1.1. Examples</a></li>
+					<li><a href="#1_2" title="The Uize.Array.Util module defines the Uize.Array.Util package under the Uize.Array namespace.">1.2. Implementation Info</a>
+						<ul>
+							<li><a href="#1_2_1" title="The features listed in this section have been introduced in this module.">1.2.1. Features Introduced in This Module</a></li>
+							<li><a href="#1_2_2" title="No features have been overridden in this module.">1.2.2. Features Overridden in This Module</a></li>
+							<li><a href="#1_2_3" title="This module has no inherited features.">1.2.3. Features Inherited From Other Modules</a></li>
+							<li><a href="#1_2_4" title="There are no modules directly under this namespace.">1.2.4. Modules Directly Under This Namespace</a></li>
+							<li><a href="#1_2_5" title="The Uize.Array.Util module is unit tested by the Uize.Test.Uize.Array.Util test module.">1.2.5. Unit Tests</a></li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+			<li><a href="#2">2. Static Methods</a>
+				<ul>
+					<li><a href="#2_1" title="Flattens the elements of the specified source array and returns the flattened array.">2.1. Uize.Array.Util.flatten</a>
+						<ul>
+							<li><a href="#2_1_1">2.1.1. Examples</a>
+								<ul>
+									<li><a href="#2_1_1_1" title="When the value 1 is specified for the optional depthINT parameter, then the source array will be flattened one level deep.">2.1.1.1. Flatten an Array to One Level Deep</a></li>
+									<li><a href="#2_1_1_2" title="When the value 2 is specified for the optional depthINT parameter, then the source array will be flattened one level deep.">2.1.1.2. Flatten an Array to Two Levels Deep</a></li>
+									<li><a href="#2_1_1_3" title="When the optional depthINT parameter is not specified, then the source array will be flattened to infinite depth (ie. until all elements are no longer arrays).">2.1.1.3. Flatten an Array to Infinite Depth</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li><a href="#2_2" title="Replaces the contents of the first array with the contents of the second array, and returns a reference to the first array.">2.2. Uize.Array.Util.replaceContents</a></li>
+					<li><a href="#2_3" title="Swaps the contents of the two specified arrays, and returns a reference to the first array.">2.3. Uize.Array.Util.swapContents</a></li>
+				</ul>
+			</li>
+			<li><a href="#3">3. Static Properties</a>
+				<ul>
+					<li><a href="#3_1" title="IMPLEMENTATION INFO">3.1. Uize.Array.Util.moduleName</a></li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<a name="1"></a>
+	<h1 class="heading1" title="1. Introduction"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>. </span>Introduction</h1>
+	<div class="contents1">
+		<p>The <code>Uize.Array.Util</code> module provides a number of miscellaneous utility methods for manipulating arrays.</p>
+		
+		<p><b>DEVELOPERS:</b> <a href="http://www.tomkidding.com" target="_blank" class="externalSiteLink">Chris van Rensburg</a></p>
+		
+		<a name="1_1"></a>
+		<h2 class="heading2" title="1. Introduction -&gt; 1.1. Examples"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. Examples">1</a>. </span>Examples</h2>
+		<div class="contents2">
+			<p>There are no dedicated showcase example pages for the <code>Uize.Array.Util</code> module.</p>
+			
+			<p><span class="allCaps">SEARCH FOR EXAMPLES</span></p>
+			
+			<p>Use the link below to search for example pages on the <b>uize.com</b> Web site that reference the <code>Uize.Array.Util</code> module...</p>
+			
+			<p><a href="http://www.google.com/search?hl=en&safe=off&domains=uize.com%2Fexamples&sitesearch=uize.com%2Fexamples&q=%22Uize.Array.Util%22" target="_blank" class="externalSiteLink">SEARCH</a></p>
+		</div>
+		
+		<a name="1_2"></a>
+		<h2 class="heading2" title="1. Introduction -&gt; 1.2. Implementation Info"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>. </span>Implementation Info</h2>
+		<div class="contents2">
+			<p>The <code>Uize.Array.Util</code> module defines the <code>Uize.Array.Util</code> package under the <code><a href="../reference/Uize.Array.html">Uize.Array</a></code> namespace.</p>
+			
+			<a name="1_2_1"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.1. Features Introduced in This Module"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>.<a href="#1_2_1" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.1. Features Introduced in This Module">1</a>. </span>Features Introduced in This Module</h3>
+			<div class="contents3">
+				<p>The features listed in this section have been introduced in this module.</p>
+				
+				<p><span class="allCaps">STATIC METHODS</span></p>
+				
+				<p><code><a href="#2_1">Uize.Array.Util.flatten</a></code> | <code><a href="#2_2">Uize.Array.Util.replaceContents</a></code> | <code><a href="#2_3">Uize.Array.Util.swapContents</a></code></p>
+				
+				<p><span class="allCaps">STATIC PROPERTIES</span></p>
+				
+				<p><code><a href="#3_1">Uize.Array.Util.moduleName</a></code></p>
+			</div>
+			
+			<a name="1_2_2"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.2. Features Overridden in This Module"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>.<a href="#1_2_2" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.2. Features Overridden in This Module">2</a>. </span>Features Overridden in This Module</h3>
+			<div class="contents3">
+				<p>No features have been overridden in this module.</p>
+			</div>
+			
+			<a name="1_2_3"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.3. Features Inherited From Other Modules"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>.<a href="#1_2_3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.3. Features Inherited From Other Modules">3</a>. </span>Features Inherited From Other Modules</h3>
+			<div class="contents3">
+				<p>This module has no inherited features.</p>
+			</div>
+			
+			<a name="1_2_4"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.4. Modules Directly Under This Namespace"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>.<a href="#1_2_4" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.4. Modules Directly Under This Namespace">4</a>. </span>Modules Directly Under This Namespace</h3>
+			<div class="contents3">
+				<p>There are no modules directly under this namespace.</p>
+			</div>
+			
+			<a name="1_2_5"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.5. Unit Tests"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>.<a href="#1_2_5" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.5. Unit Tests">5</a>. </span>Unit Tests</h3>
+			<div class="contents3">
+				<p>The <code>Uize.Array.Util</code> module is unit tested by the <code><a href="../reference/Uize.Test.Uize.Array.Util.html">Uize.Test.Uize.Array.Util</a></code> test module.</p>
+			</div>
+		</div>
+	</div>
+	
+	<a name="2"></a>
+	<h1 class="heading1" title="2. Static Methods"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>. </span>Static Methods</h1>
+	<div class="contents1">
+		<a name="2_1"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.1. Uize.Array.Util.flatten"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_1" title="2. Static Methods -&gt; 2.1. Uize.Array.Util.flatten">1</a>. </span>Uize.Array.Util.flatten</h2>
+		<div class="contents2">
+			<p>Flattens the elements of the specified source array and returns the flattened array.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">flattenedARRAY = Uize.Array.Util.flatten (sourceARRAY,depthINT,targetARRAYorBOOL);
+</pre>
+			
+			<p><span class="allCaps">VARIATION 1</span></p>
+			
+			
+<pre class="sample-code">flattenedARRAY = Uize.Array.Util.flatten (sourceARRAY,depthINT);
+</pre>
+			
+			<p>When the optional <code>depthINT</code> parameter is specified, then the depth level to which the source array should be flattened can be controlled. When the value <code>0</code> is specified for this parameter, the source array will remain unflattened. When the value <code>1</code> is specified, then this method will <a href="#2_1_1_1">flatten an array to one level deep</a>. When the value <code>2</code> is specified, then this method will <a href="#2_1_1_2">flatten an array to two levels deep</a>. When the <code>depthINT</code> parameter is not specified, then this method will <a href="#2_1_1_3">flatten an array to infinite depth</a>.</p>
+			
+			<p><span class="allCaps">VARIATION 2</span></p>
+			
+			
+<pre class="sample-code">flattenedARRAY = Uize.Array.Util.flatten (sourceARRAY,depthINT,targetARRAYorBOOL);
+</pre>
+			
+			<p>When the optional <code>targetARRAYorBOOL</code> parameter is specified, then the target for the flattened contents of the source array can be controlled. When the value <code>true</code> is specified for the <code>targetARRAYorBOOL</code> parameter, then the target for the flattened contents of the source array will be a new array and the source array will not be modified. When the <code>false</code> is specified for the <code>targetARRAYorBOOL</code> parameter, then the flattened contents of the source array will replace the unflattened contents of the source array. When an array is specified for the <code>targetARRAYorBOOL</code> parameter, then the flattened contents of the source array will replace the contents of the specified target array.</p>
+			
+			<a name="2_1_1"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.1. Uize.Array.Util.flatten -&gt; 2.1.1. Examples"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_1" title="2. Static Methods -&gt; 2.1. Uize.Array.Util.flatten">1</a>.<a href="#2_1_1" title="2. Static Methods -&gt; 2.1. Uize.Array.Util.flatten -&gt; 2.1.1. Examples">1</a>. </span>Examples</h3>
+			<div class="contents3">
+				<a name="2_1_1_1"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.1. Uize.Array.Util.flatten -&gt; 2.1.1. Examples -&gt; 2.1.1.1. Flatten an Array to One Level Deep"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_1" title="2. Static Methods -&gt; 2.1. Uize.Array.Util.flatten">1</a>.<a href="#2_1_1" title="2. Static Methods -&gt; 2.1. Uize.Array.Util.flatten -&gt; 2.1.1. Examples">1</a>.<a href="#2_1_1_1" title="2. Static Methods -&gt; 2.1. Uize.Array.Util.flatten -&gt; 2.1.1. Examples -&gt; 2.1.1.1. Flatten an Array to One Level Deep">1</a>. </span>Flatten an Array to One Level Deep</h4>
+				<div class="contents4">
+					<p>When the value <code>1</code> is specified for the optional <code>depthINT</code> parameter, then the source array will be flattened one level deep.</p>
+					
+					<p><span class="allCaps">EXAMPLE</span></p>
+					
+					
+<pre class="sample-code">Uize.Array.Util.flatten ([0,[1,[2,[3,[4,[5,[6,6],5],4],3],2],1],0],1);
+</pre>
+					
+					<p><span class="allCaps">RESULT</span></p>
+					
+					
+<pre class="sample-code">[0,1,[2,[3,[4,[5,[6,6],5],4],3],2],1,0]
+</pre>
+				</div>
+				
+				<a name="2_1_1_2"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.1. Uize.Array.Util.flatten -&gt; 2.1.1. Examples -&gt; 2.1.1.2. Flatten an Array to Two Levels Deep"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_1" title="2. Static Methods -&gt; 2.1. Uize.Array.Util.flatten">1</a>.<a href="#2_1_1" title="2. Static Methods -&gt; 2.1. Uize.Array.Util.flatten -&gt; 2.1.1. Examples">1</a>.<a href="#2_1_1_2" title="2. Static Methods -&gt; 2.1. Uize.Array.Util.flatten -&gt; 2.1.1. Examples -&gt; 2.1.1.2. Flatten an Array to Two Levels Deep">2</a>. </span>Flatten an Array to Two Levels Deep</h4>
+				<div class="contents4">
+					<p>When the value <code>2</code> is specified for the optional <code>depthINT</code> parameter, then the source array will be flattened one level deep.</p>
+					
+					<p><span class="allCaps">EXAMPLE</span></p>
+					
+					
+<pre class="sample-code">Uize.Array.Util.flatten ([0,[1,[2,[3,[4,[5,[6,6],5],4],3],2],1],0],2);
+</pre>
+					
+					<p><span class="allCaps">RESULT</span></p>
+					
+					
+<pre class="sample-code">[0,1,2,[3,[4,[5,[6,6],5],4],3],2,1,0]
+</pre>
+				</div>
+				
+				<a name="2_1_1_3"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.1. Uize.Array.Util.flatten -&gt; 2.1.1. Examples -&gt; 2.1.1.3. Flatten an Array to Infinite Depth"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_1" title="2. Static Methods -&gt; 2.1. Uize.Array.Util.flatten">1</a>.<a href="#2_1_1" title="2. Static Methods -&gt; 2.1. Uize.Array.Util.flatten -&gt; 2.1.1. Examples">1</a>.<a href="#2_1_1_3" title="2. Static Methods -&gt; 2.1. Uize.Array.Util.flatten -&gt; 2.1.1. Examples -&gt; 2.1.1.3. Flatten an Array to Infinite Depth">3</a>. </span>Flatten an Array to Infinite Depth</h4>
+				<div class="contents4">
+					<p>When the optional <code>depthINT</code> parameter is not specified, then the source array will be flattened to infinite depth (ie. until all elements are no longer arrays).</p>
+					
+					<p><span class="allCaps">EXAMPLE</span></p>
+					
+					
+<pre class="sample-code">Uize.Array.Util.flatten ([0,[1,[2,[3,[4,[5,[6,6],5],4],3],2],1],0]);
+</pre>
+					
+					<p><span class="allCaps">RESULT</span></p>
+					
+					
+<pre class="sample-code">[0,1,2,3,4,5,6,6,5,4,3,2,1,0]
+</pre>
+				</div>
+			</div>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_2"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.2. Uize.Array.Util.replaceContents"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_2" title="2. Static Methods -&gt; 2.2. Uize.Array.Util.replaceContents">2</a>. </span>Uize.Array.Util.replaceContents</h2>
+		<div class="contents2">
+			<p>Replaces the contents of the first array with the contents of the second array, and returns a reference to the first array.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">array1ARRAY = Uize.Array.Util.replaceContents (array1ARRAY,array2ARRAY);
+</pre>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">var
+  foods = ['bacon','sausage','omelette'],
+  vegetables = ['potato','beans','mushrooms']
+;
+Uize.Array.Util.replaceContents (foods,vegetables);
+alert (foods); // displays the text "potato,beans,mushrooms"
+</pre>
+			
+			<p>In the above example, the contents of the <code>foods</code> array (which clearly contains some rather unhealthy food types) is being replaced with the contents of the healthier <code>vegetables</code> array. When the value of the <code>foods</code> array is then alerted, we see the text "potato,beans,mushrooms".</p>
+			
+			<p><span class="allCaps">VARIATION</span></p>
+			
+			
+<pre class="sample-code">array1ARRAY = Uize.Array.Util.replaceContents (array1ARRAY);
+</pre>
+			
+			<p>When no <code>array2ARRAY</code> parameter is specified, or if the value <code>undefined</code> or <code>null</code> is specified for the <code>array2ARRAY</code> parameter, then the array specified by the <code>array1ARRAY</code> parameter will be emptied out.</p>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#2_3">Uize.Array.Util.swapContents</a></code> static method</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_3"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.3. Uize.Array.Util.swapContents"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_3" title="2. Static Methods -&gt; 2.3. Uize.Array.Util.swapContents">3</a>. </span>Uize.Array.Util.swapContents</h2>
+		<div class="contents2">
+			<p>Swaps the contents of the two specified arrays, and returns a reference to the first array.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">array1ARRAY = Uize.Array.Util.swapContents (array1ARRAY,array2ARRAY);
+</pre>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">var
+  healthyFoods = ['bacon','sausage','omelette'],
+  unhealthyFoods = ['potato','beans','mushrooms']
+;
+Uize.Array.Util.swapContents (healthyFoods,unhealthyFoods);
+alert (healthyFoods);    // displays the text "potato,beans,mushrooms"
+alert (unhealthyFoods);  // displays the text "bacon,sausage,omelette"
+</pre>
+			
+			<p>In the above example, the contents of the <code>healthyFoods</code> and <code>unhealthyFoods</code> arrays are clearly mixed up. In order to correct this, the contents of the two arrays can be swapped. We can't just swap the variable references around, since other code may already have references to the arrays. What we really want to do is fix their contents. We can do this using the <code><a href="#2_3">Uize.Array.Util.swapContents</a></code> method.</p>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#2_2">Uize.Array.Util.replaceContents</a></code> static method</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+	</div>
+	
+	<a name="3"></a>
+	<h1 class="heading1" title="3. Static Properties"><span class="headingNumber"><a href="#3" title="3. Static Properties">3</a>. </span>Static Properties</h1>
+	<div class="contents1">
+		<a name="3_1"></a>
+		<h2 class="heading2" title="3. Static Properties -&gt; 3.1. Uize.Array.Util.moduleName"><span class="headingNumber"><a href="#3" title="3. Static Properties">3</a>.<a href="#3_1" title="3. Static Properties -&gt; 3.1. Uize.Array.Util.moduleName">1</a>. </span>Uize.Array.Util.moduleName</h2>
+		<div class="contents2">
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+	</div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+
