@@ -1,9 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<title>Uize.Widget.Dialog.Picker.FilteredInput | JavaScript Source Code | UIZE JavaScript Framework</title>
+	<title>Uize.Widget.Dialog.Picker.Palette | JavaScript Source Code | UIZE JavaScript Framework</title>
 	<meta name="keywords" content="UIZE JavaScript Framework module source code"/>
-	<meta name="description" content="This is the JavaScript source code for the Uize.Widget.Dialog.Picker.FilteredInput module of the UIZE JavaScript Framework"/>
+	<meta name="description" content="This is the JavaScript source code for the Uize.Widget.Dialog.Picker.Palette module of the UIZE JavaScript Framework"/>
 	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
 	<link rel="stylesheet" href="../../css/page.css"/>
 	<link rel="stylesheet" href="../../css/page.source.css"/>
@@ -15,9 +15,9 @@
 
 <h1 class="document-title">
 	<a id="page-homeLink" href="../../index.html" title="UIZE JavaScript Framework home"></a>
-	SOURCE CODE: Uize.Widget.Dialog.Picker.FilteredInput
+	SOURCE CODE: Uize.Widget.Dialog.Picker.Palette
 	<div class="pageActions">
-		<a href="../Uize.Widget.Dialog.Picker.FilteredInput.html" class="buttonLink">VIEW REFERENCE</a>
+		<a href="../Uize.Widget.Dialog.Picker.Palette.html" class="buttonLink">VIEW REFERENCE</a>
 	</div>
 </h1>
 
@@ -25,10 +25,10 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Widget.Dialog.Picker.FilteredInput
+|    /    O /   |    MODULE : Uize.Widget.Dialog.Picker.Palette
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
-| /____/ /__/_| | COPYRIGHT : (c)2009-2011 UIZE
+| /____/ /__/_| | COPYRIGHT : (c)2011 UIZE
 |          /___ |   LICENSE : Available under MIT License or GNU General Public License
 |_______________|             http://www.uize.com/license.html
 */
@@ -37,7 +37,7 @@
 
 /* Module Meta Data
   type: Class
-  importance: 5
+  importance: 4
   codeCompleteness: 50
   testCompleteness: 0
   docCompleteness: 0
@@ -45,14 +45,14 @@
 
 /*?
   Introduction
-    The =Uize.Widget.Dialog.Picker.FilteredInput= widget lets the user select a value from a modal dialog containing a filtered input widget.
+    The =Uize.Widget.Dialog.Picker.Palette= widget is a thin base class for picker dialog widgets that act as a droplist palette.
 
     *DEVELOPERS:* `Ben Ilegbodu`
 */
 
 Uize.module ({
-  name:'Uize.Widget.Dialog.Picker.FilteredInput',
-  required:'Uize.Widget.FilteredInput',
+  name:'Uize.Widget.Dialog.Picker.Palette',
+  required:'Uize.Util.Coupler',
   builder:function (_superclass) {
     /*** Class Constructor ***/
       var _class = _superclass.subclass (
@@ -60,14 +60,27 @@ Uize.module ({
         function() {
           var _this = this;
           
+          // Sync tentativeValue &amp; tentativeValueDetails back and forth with value widget
+          new Uize.Util.Coupler({
+            instances:[_this, _this.children.value],
+            properties:['tentativeValue', 'tentativeValueDetails']
+          });
+          
           _this.wire(
             'After Show',
             function() {
-              _this._minWidth
-                &amp;&amp; _this.setNodeStyle(
+              _this.children.value.updateUi();
+              if (_this._minWidth) {
+                _this.setNodeStyle (
                   '',
                   {minWidth:_this._minWidth}
-                )
+                );
+                Uize.Node.ieMajorVersion &lt;= 7
+                  &amp;&amp; _this.setNodeStyle (
+                    'valueShell',
+                    {minWidth:_this._minWidth}
+                  );
+              }
             }
           );
         }
@@ -75,17 +88,33 @@ Uize.module ({
 
     /*** Register Properties ***/
       _class.registerProperties ({
-        _filter:'filter',
-        _filters:'filters',
-        _inputWidgetClass:'inputWidgetClass',
-        _inputWidgetProperties:'inputWidgetProperties',
-        _minWidth:'minWidth'
+        _minWidth:'minWidth',
+        _tentativeValue:{
+          name:'tentativeValue',
+          onChange:function() {
+            var _this = this;
+            
+            // Changed.tentativeValue could be fired prior to Changed.tentativeValueDetails, so break flow so that the tentativeValueDetails can be synced before the 'Submission Complete' event is fired
+            setTimeout(
+              function() {
+                _this.fireSubmissionComplete (
+                  true,
+                  {
+                    tentativeValue:_this._tentativeValue,
+                    tentativeValueDetails:_this._tentativeValueDetails
+                  }
+                )
+              },
+              0
+            );
+          },
+          value:null
+        },
+        _tentativeValueDetails:'tentativeValueDetails'
       });
 
     /*** Override Initial Values for Inherited Set-Get Properties ***/
       _class.set ({
-        valueWidgetClass:Uize.Widget.FilteredInput,
-        pipedProperties:['inputWidgetClass', 'inputWidgetProperties', 'filter', 'filters'],
         dismissOnShieldClick:true
       });
 

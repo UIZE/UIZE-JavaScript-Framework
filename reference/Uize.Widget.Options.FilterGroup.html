@@ -86,10 +86,11 @@
 					<li><a href="#2_39" title="Inherited from Uize.Widget.">2.39. unwireNode</a></li>
 					<li><a href="#2_40" title="Inherited from Uize.Widget.">2.40. unwireNodeEventsByMatch</a></li>
 					<li><a href="#2_41" title="Inherited from Uize.Widget.">2.41. unwireUi</a></li>
-					<li><a href="#2_42" title="IMPLEMENTATION INFO">2.42. updateUi</a></li>
-					<li><a href="#2_43" title="Inherited from Uize.">2.43. wire</a></li>
-					<li><a href="#2_44" title="Inherited from Uize.Widget.">2.44. wireNode</a></li>
-					<li><a href="#2_45" title="Inherited from Uize.Widget.Options, but introduced in Uize.Widget.">2.45. wireUi</a></li>
+					<li><a href="#2_42" title="IMPLEMENTATION INFO">2.42. updateCounts</a></li>
+					<li><a href="#2_43" title="IMPLEMENTATION INFO">2.43. updateUi</a></li>
+					<li><a href="#2_44" title="Inherited from Uize.">2.44. wire</a></li>
+					<li><a href="#2_45" title="Inherited from Uize.Widget.">2.45. wireNode</a></li>
+					<li><a href="#2_46" title="Inherited from Uize.Widget.Options, but introduced in Uize.Widget.">2.46. wireUi</a></li>
 				</ul>
 			</li>
 			<li><a href="#3">3. Instance Properties</a>
@@ -107,26 +108,28 @@
 					<li><a href="#4_5" title="Inherited from Uize.Widget.">4.5. container</a></li>
 					<li><a href="#4_6" title="Inherited from Uize.Widget.">4.6. enabled</a></li>
 					<li><a href="#4_7" title="Inherited from Uize.Widget.">4.7. enabledInherited</a></li>
-					<li><a href="#4_8" title="IMPLEMENTATION INFO">4.8. expanded</a></li>
-					<li><a href="#4_9" title="IMPLEMENTATION INFO">4.9. expandedCssClass</a></li>
-					<li><a href="#4_10" title="Inherited from Uize.Widget.">4.10. html</a></li>
-					<li><a href="#4_11" title="Inherited from Uize.Widget.">4.11. idPrefix</a></li>
-					<li><a href="#4_12" title="Inherited from Uize.Widget.">4.12. idPrefixConstruction</a></li>
-					<li><a href="#4_13" title="Inherited from Uize.Widget.">4.13. insertionMode</a></li>
-					<li><a href="#4_14" title="Inherited from Uize.Widget.">4.14. localized</a></li>
-					<li><a href="#4_15" title="Inherited from Uize.Widget.">4.15. name</a></li>
-					<li><a href="#4_16" title="Inherited from Uize.Widget.">4.16. nodeMap</a></li>
-					<li><a href="#4_17" title="IMPLEMENTATION INFO">4.17. optionWidgetClass</a></li>
-					<li><a href="#4_18" title="Inherited from Uize.Widget.Options.">4.18. optionWidgetProperties</a></li>
-					<li><a href="#4_19" title="Inherited from Uize.Widget.Options.">4.19. setValueOnMouseover</a></li>
-					<li><a href="#4_20" title="Inherited from Uize.Widget.Options.">4.20. tentativeRestTime</a></li>
-					<li><a href="#4_21" title="Inherited from Uize.Widget.Options.">4.21. tentativeValue</a></li>
-					<li><a href="#4_22" title="Inherited from Uize.Widget.Options.">4.22. tentativeValueNo</a></li>
-					<li><a href="#4_23" title="IMPLEMENTATION INFO">4.23. title</a></li>
-					<li><a href="#4_24" title="Inherited from Uize.Widget.Options.">4.24. value</a></li>
-					<li><a href="#4_25" title="Inherited from Uize.Widget.Options.">4.25. valueNo</a></li>
-					<li><a href="#4_26" title="IMPLEMENTATION INFO">4.26. values</a></li>
-					<li><a href="#4_27" title="Inherited from Uize.Widget.">4.27. wired</a></li>
+					<li><a href="#4_8" title="IMPLEMENTATION INFO">4.8. ensureValueInValues</a></li>
+					<li><a href="#4_9" title="IMPLEMENTATION INFO">4.9. expanded</a></li>
+					<li><a href="#4_10" title="IMPLEMENTATION INFO">4.10. expandedCssClass</a></li>
+					<li><a href="#4_11" title="IMPLEMENTATION INFO">4.11. hideWhenZero</a></li>
+					<li><a href="#4_12" title="Inherited from Uize.Widget.">4.12. html</a></li>
+					<li><a href="#4_13" title="Inherited from Uize.Widget.">4.13. idPrefix</a></li>
+					<li><a href="#4_14" title="Inherited from Uize.Widget.">4.14. idPrefixConstruction</a></li>
+					<li><a href="#4_15" title="Inherited from Uize.Widget.">4.15. insertionMode</a></li>
+					<li><a href="#4_16" title="Inherited from Uize.Widget.">4.16. localized</a></li>
+					<li><a href="#4_17" title="Inherited from Uize.Widget.">4.17. name</a></li>
+					<li><a href="#4_18" title="Inherited from Uize.Widget.">4.18. nodeMap</a></li>
+					<li><a href="#4_19" title="IMPLEMENTATION INFO">4.19. optionWidgetClass</a></li>
+					<li><a href="#4_20" title="Inherited from Uize.Widget.Options.">4.20. optionWidgetProperties</a></li>
+					<li><a href="#4_21" title="Inherited from Uize.Widget.Options.">4.21. setValueOnMouseover</a></li>
+					<li><a href="#4_22" title="Inherited from Uize.Widget.Options.">4.22. tentativeRestTime</a></li>
+					<li><a href="#4_23" title="Inherited from Uize.Widget.Options.">4.23. tentativeValue</a></li>
+					<li><a href="#4_24" title="Inherited from Uize.Widget.Options.">4.24. tentativeValueNo</a></li>
+					<li><a href="#4_25" title="IMPLEMENTATION INFO">4.25. title</a></li>
+					<li><a href="#4_26" title="Inherited from Uize.Widget.Options.">4.26. value</a></li>
+					<li><a href="#4_27" title="Inherited from Uize.Widget.Options.">4.27. valueNo</a></li>
+					<li><a href="#4_28" title="IMPLEMENTATION INFO">4.28. values</a></li>
+					<li><a href="#4_29" title="Inherited from Uize.Widget.">4.29. wired</a></li>
 				</ul>
 			</li>
 			<li><a href="#5">5. Static Methods</a>
@@ -189,9 +192,13 @@
 			<div class="contents3">
 				<p>The features listed in this section have been introduced in this module.</p>
 				
+				<p><span class="allCaps">INSTANCE METHODS</span></p>
+				
+				<p><code><a href="#2_42">updateCounts</a></code></p>
+				
 				<p><span class="allCaps">SET-GET PROPERTIES</span></p>
 				
-				<p><code><a href="#4_8">expanded</a></code> | <code><a href="#4_9">expandedCssClass</a></code> | <code><a href="#4_23">title</a></code></p>
+				<p><code><a href="#4_9">expanded</a></code> | <code><a href="#4_10">expandedCssClass</a></code> | <code><a href="#4_11">hideWhenZero</a></code> | <code><a href="#4_25">title</a></code></p>
 			</div>
 			
 			<a name="1_2_2"></a>
@@ -203,11 +210,11 @@
 				
 				<p><span class="allCaps">INSTANCE METHODS</span></p>
 				
-				<p><code><a href="#2_42">updateUi</a></code></p>
+				<p><code><a href="#2_43">updateUi</a></code></p>
 				
 				<p><span class="allCaps">SET-GET PROPERTIES</span></p>
 				
-				<p><code><a href="#4_17">optionWidgetClass</a></code> | <code><a href="#4_26">values</a></code></p>
+				<p><code><a href="#4_8">ensureValueInValues</a></code> | <code><a href="#4_19">optionWidgetClass</a></code> | <code><a href="#4_28">values</a></code></p>
 				
 				<p><span class="allCaps">STATIC PROPERTIES</span></p>
 				
@@ -223,7 +230,7 @@
 				
 				<p><span class="allCaps">INSTANCE METHODS</span></p>
 				
-				<p><code><a href="#2_1">addChild</a></code> | <code><a href="#2_2">ajax</a></code> | <code><a href="#2_3">buildHtml</a></code> | <code><a href="#2_4">callInherited</a></code> | <code><a href="#2_5">confirm</a></code> | <code><a href="#2_6">displayNode</a></code> | <code><a href="#2_7">fire</a></code> | <code><a href="#2_8">flushNodeCache</a></code> | <code><a href="#2_9">forAll</a></code> | <code><a href="#2_10">get</a></code> | <code><a href="#2_11">getInherited</a></code> | <code><a href="#2_12">getNode</a></code> | <code><a href="#2_13">getNodeStyle</a></code> | <code><a href="#2_14">getNodeValue</a></code> | <code><a href="#2_15">getOptionProperties</a></code> | <code><a href="#2_16">getProvider</a></code> | <code><a href="#2_17">getValueNoFromValue</a></code> | <code><a href="#2_18">globalizeNode</a></code> | <code><a href="#2_19">inform</a></code> | <code><a href="#2_20">injectNodeHtml</a></code> | <code><a href="#2_21">insertOrWireUi</a></code> | <code><a href="#2_22">insertUi</a></code> | <code><a href="#2_23">kill</a></code> | <code><a href="#2_24">localize</a></code> | <code><a href="#2_25">removeChild</a></code> | <code><a href="#2_26">removeNode</a></code> | <code><a href="#2_27">removeUi</a></code> | <code><a href="#2_28">set</a></code> | <code><a href="#2_29">setInherited</a></code> | <code><a href="#2_30">setNodeClipRect</a></code> | <code><a href="#2_31">setNodeInnerHtml</a></code> | <code><a href="#2_32">setNodeOpacity</a></code> | <code><a href="#2_33">setNodeProperties</a></code> | <code><a href="#2_34">setNodeStyle</a></code> | <code><a href="#2_35">setNodeValue</a></code> | <code><a href="#2_36">showNode</a></code> | <code><a href="#2_37">toggle</a></code> | <code><a href="#2_38">unwire</a></code> | <code><a href="#2_39">unwireNode</a></code> | <code><a href="#2_40">unwireNodeEventsByMatch</a></code> | <code><a href="#2_41">unwireUi</a></code> | <code><a href="#2_43">wire</a></code> | <code><a href="#2_44">wireNode</a></code> | <code><a href="#2_45">wireUi</a></code></p>
+				<p><code><a href="#2_1">addChild</a></code> | <code><a href="#2_2">ajax</a></code> | <code><a href="#2_3">buildHtml</a></code> | <code><a href="#2_4">callInherited</a></code> | <code><a href="#2_5">confirm</a></code> | <code><a href="#2_6">displayNode</a></code> | <code><a href="#2_7">fire</a></code> | <code><a href="#2_8">flushNodeCache</a></code> | <code><a href="#2_9">forAll</a></code> | <code><a href="#2_10">get</a></code> | <code><a href="#2_11">getInherited</a></code> | <code><a href="#2_12">getNode</a></code> | <code><a href="#2_13">getNodeStyle</a></code> | <code><a href="#2_14">getNodeValue</a></code> | <code><a href="#2_15">getOptionProperties</a></code> | <code><a href="#2_16">getProvider</a></code> | <code><a href="#2_17">getValueNoFromValue</a></code> | <code><a href="#2_18">globalizeNode</a></code> | <code><a href="#2_19">inform</a></code> | <code><a href="#2_20">injectNodeHtml</a></code> | <code><a href="#2_21">insertOrWireUi</a></code> | <code><a href="#2_22">insertUi</a></code> | <code><a href="#2_23">kill</a></code> | <code><a href="#2_24">localize</a></code> | <code><a href="#2_25">removeChild</a></code> | <code><a href="#2_26">removeNode</a></code> | <code><a href="#2_27">removeUi</a></code> | <code><a href="#2_28">set</a></code> | <code><a href="#2_29">setInherited</a></code> | <code><a href="#2_30">setNodeClipRect</a></code> | <code><a href="#2_31">setNodeInnerHtml</a></code> | <code><a href="#2_32">setNodeOpacity</a></code> | <code><a href="#2_33">setNodeProperties</a></code> | <code><a href="#2_34">setNodeStyle</a></code> | <code><a href="#2_35">setNodeValue</a></code> | <code><a href="#2_36">showNode</a></code> | <code><a href="#2_37">toggle</a></code> | <code><a href="#2_38">unwire</a></code> | <code><a href="#2_39">unwireNode</a></code> | <code><a href="#2_40">unwireNodeEventsByMatch</a></code> | <code><a href="#2_41">unwireUi</a></code> | <code><a href="#2_44">wire</a></code> | <code><a href="#2_45">wireNode</a></code> | <code><a href="#2_46">wireUi</a></code></p>
 				
 				<p><span class="allCaps">INSTANCE PROPERTIES</span></p>
 				
@@ -231,7 +238,7 @@
 				
 				<p><span class="allCaps">SET-GET PROPERTIES</span></p>
 				
-				<p><code><a href="#4_1">built</a></code> | <code><a href="#4_2">busy</a></code> | <code><a href="#4_3">busyInherited</a></code> | <code><a href="#4_4">children</a></code> | <code><a href="#4_5">container</a></code> | <code><a href="#4_6">enabled</a></code> | <code><a href="#4_7">enabledInherited</a></code> | <code><a href="#4_10">html</a></code> | <code><a href="#4_11">idPrefix</a></code> | <code><a href="#4_12">idPrefixConstruction</a></code> | <code><a href="#4_13">insertionMode</a></code> | <code><a href="#4_14">localized</a></code> | <code><a href="#4_15">name</a></code> | <code><a href="#4_16">nodeMap</a></code> | <code><a href="#4_18">optionWidgetProperties</a></code> | <code><a href="#4_19">setValueOnMouseover</a></code> | <code><a href="#4_20">tentativeRestTime</a></code> | <code><a href="#4_21">tentativeValue</a></code> | <code><a href="#4_22">tentativeValueNo</a></code> | <code><a href="#4_24">value</a></code> | <code><a href="#4_25">valueNo</a></code> | <code><a href="#4_27">wired</a></code></p>
+				<p><code><a href="#4_1">built</a></code> | <code><a href="#4_2">busy</a></code> | <code><a href="#4_3">busyInherited</a></code> | <code><a href="#4_4">children</a></code> | <code><a href="#4_5">container</a></code> | <code><a href="#4_6">enabled</a></code> | <code><a href="#4_7">enabledInherited</a></code> | <code><a href="#4_12">html</a></code> | <code><a href="#4_13">idPrefix</a></code> | <code><a href="#4_14">idPrefixConstruction</a></code> | <code><a href="#4_15">insertionMode</a></code> | <code><a href="#4_16">localized</a></code> | <code><a href="#4_17">name</a></code> | <code><a href="#4_18">nodeMap</a></code> | <code><a href="#4_20">optionWidgetProperties</a></code> | <code><a href="#4_21">setValueOnMouseover</a></code> | <code><a href="#4_22">tentativeRestTime</a></code> | <code><a href="#4_23">tentativeValue</a></code> | <code><a href="#4_24">tentativeValueNo</a></code> | <code><a href="#4_26">value</a></code> | <code><a href="#4_27">valueNo</a></code> | <code><a href="#4_29">wired</a></code></p>
 				
 				<p><span class="allCaps">STATIC METHODS</span></p>
 				
@@ -752,7 +759,17 @@
 		</div>
 		
 		<a name="2_42"></a>
-		<h2 class="heading2" title="2. Instance Methods -&gt; 2.42. updateUi"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_42" title="2. Instance Methods -&gt; 2.42. updateUi">42</a>. </span>updateUi</h2>
+		<h2 class="heading2" title="2. Instance Methods -&gt; 2.42. updateCounts"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_42" title="2. Instance Methods -&gt; 2.42. updateCounts">42</a>. </span>updateCounts</h2>
+		<div class="contents2">
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_43"></a>
+		<h2 class="heading2" title="2. Instance Methods -&gt; 2.43. updateUi"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_43" title="2. Instance Methods -&gt; 2.43. updateUi">43</a>. </span>updateUi</h2>
 		<div class="contents2">
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -761,8 +778,8 @@
 			</table>
 		</div>
 		
-		<a name="2_43"></a>
-		<h2 class="heading2" title="2. Instance Methods -&gt; 2.43. wire"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_43" title="2. Instance Methods -&gt; 2.43. wire">43</a>. </span>wire</h2>
+		<a name="2_44"></a>
+		<h2 class="heading2" title="2. Instance Methods -&gt; 2.44. wire"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_44" title="2. Instance Methods -&gt; 2.44. wire">44</a>. </span>wire</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
 			
@@ -773,8 +790,8 @@
 			</table>
 		</div>
 		
-		<a name="2_44"></a>
-		<h2 class="heading2" title="2. Instance Methods -&gt; 2.44. wireNode"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_44" title="2. Instance Methods -&gt; 2.44. wireNode">44</a>. </span>wireNode</h2>
+		<a name="2_45"></a>
+		<h2 class="heading2" title="2. Instance Methods -&gt; 2.45. wireNode"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_45" title="2. Instance Methods -&gt; 2.45. wireNode">45</a>. </span>wireNode</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -785,8 +802,8 @@
 			</table>
 		</div>
 		
-		<a name="2_45"></a>
-		<h2 class="heading2" title="2. Instance Methods -&gt; 2.45. wireUi"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_45" title="2. Instance Methods -&gt; 2.45. wireUi">45</a>. </span>wireUi</h2>
+		<a name="2_46"></a>
+		<h2 class="heading2" title="2. Instance Methods -&gt; 2.46. wireUi"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_46" title="2. Instance Methods -&gt; 2.46. wireUi">46</a>. </span>wireUi</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.Options.html">Uize.Widget.Options</a></code>, but introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -914,17 +931,17 @@
 		</div>
 		
 		<a name="4_8"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.8. expanded"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_8" title="4. Set-get Properties -&gt; 4.8. expanded">8</a>. </span>expanded</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.8. ensureValueInValues"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_8" title="4. Set-get Properties -&gt; 4.8. ensureValueInValues">8</a>. </span>ensureValueInValues</h2>
 		<div class="contents2">
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an override of an inherited feature (implementation is in this module, first introduced in <code><a href="../reference/Uize.Widget.Options.html">Uize.Widget.Options</a></code>)</td></tr>
 			</table>
 		</div>
 		
 		<a name="4_9"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.9. expandedCssClass"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_9" title="4. Set-get Properties -&gt; 4.9. expandedCssClass">9</a>. </span>expandedCssClass</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.9. expanded"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_9" title="4. Set-get Properties -&gt; 4.9. expanded">9</a>. </span>expanded</h2>
 		<div class="contents2">
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -934,31 +951,27 @@
 		</div>
 		
 		<a name="4_10"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.10. html"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_10" title="4. Set-get Properties -&gt; 4.10. html">10</a>. </span>html</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.10. expandedCssClass"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_10" title="4. Set-get Properties -&gt; 4.10. expandedCssClass">10</a>. </span>expandedCssClass</h2>
 		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
-			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
 			</table>
 		</div>
 		
 		<a name="4_11"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.11. idPrefix"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_11" title="4. Set-get Properties -&gt; 4.11. idPrefix">11</a>. </span>idPrefix</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.11. hideWhenZero"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_11" title="4. Set-get Properties -&gt; 4.11. hideWhenZero">11</a>. </span>hideWhenZero</h2>
 		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
-			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
 			</table>
 		</div>
 		
 		<a name="4_12"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.12. idPrefixConstruction"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_12" title="4. Set-get Properties -&gt; 4.12. idPrefixConstruction">12</a>. </span>idPrefixConstruction</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.12. html"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_12" title="4. Set-get Properties -&gt; 4.12. html">12</a>. </span>html</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -970,7 +983,7 @@
 		</div>
 		
 		<a name="4_13"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.13. insertionMode"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_13" title="4. Set-get Properties -&gt; 4.13. insertionMode">13</a>. </span>insertionMode</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.13. idPrefix"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_13" title="4. Set-get Properties -&gt; 4.13. idPrefix">13</a>. </span>idPrefix</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -982,7 +995,7 @@
 		</div>
 		
 		<a name="4_14"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.14. localized"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_14" title="4. Set-get Properties -&gt; 4.14. localized">14</a>. </span>localized</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.14. idPrefixConstruction"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_14" title="4. Set-get Properties -&gt; 4.14. idPrefixConstruction">14</a>. </span>idPrefixConstruction</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -994,7 +1007,7 @@
 		</div>
 		
 		<a name="4_15"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.15. name"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_15" title="4. Set-get Properties -&gt; 4.15. name">15</a>. </span>name</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.15. insertionMode"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_15" title="4. Set-get Properties -&gt; 4.15. insertionMode">15</a>. </span>insertionMode</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1006,7 +1019,7 @@
 		</div>
 		
 		<a name="4_16"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.16. nodeMap"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_16" title="4. Set-get Properties -&gt; 4.16. nodeMap">16</a>. </span>nodeMap</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.16. localized"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_16" title="4. Set-get Properties -&gt; 4.16. localized">16</a>. </span>localized</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1018,7 +1031,31 @@
 		</div>
 		
 		<a name="4_17"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.17. optionWidgetClass"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_17" title="4. Set-get Properties -&gt; 4.17. optionWidgetClass">17</a>. </span>optionWidgetClass</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.17. name"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_17" title="4. Set-get Properties -&gt; 4.17. name">17</a>. </span>name</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_18"></a>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.18. nodeMap"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_18" title="4. Set-get Properties -&gt; 4.18. nodeMap">18</a>. </span>nodeMap</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_19"></a>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.19. optionWidgetClass"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_19" title="4. Set-get Properties -&gt; 4.19. optionWidgetClass">19</a>. </span>optionWidgetClass</h2>
 		<div class="contents2">
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -1027,32 +1064,8 @@
 			</table>
 		</div>
 		
-		<a name="4_18"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.18. optionWidgetProperties"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_18" title="4. Set-get Properties -&gt; 4.18. optionWidgetProperties">18</a>. </span>optionWidgetProperties</h2>
-		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.Widget.Options.html">Uize.Widget.Options</a></code>.</p>
-			
-			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
-			
-			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.Options.html">Uize.Widget.Options</a></code>, first introduced in <code><a href="../reference/Uize.Widget.Options.html">Uize.Widget.Options</a></code>)</td></tr>
-			</table>
-		</div>
-		
-		<a name="4_19"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.19. setValueOnMouseover"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_19" title="4. Set-get Properties -&gt; 4.19. setValueOnMouseover">19</a>. </span>setValueOnMouseover</h2>
-		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.Widget.Options.html">Uize.Widget.Options</a></code>.</p>
-			
-			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
-			
-			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.Options.html">Uize.Widget.Options</a></code>, first introduced in <code><a href="../reference/Uize.Widget.Options.html">Uize.Widget.Options</a></code>)</td></tr>
-			</table>
-		</div>
-		
 		<a name="4_20"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.20. tentativeRestTime"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_20" title="4. Set-get Properties -&gt; 4.20. tentativeRestTime">20</a>. </span>tentativeRestTime</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.20. optionWidgetProperties"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_20" title="4. Set-get Properties -&gt; 4.20. optionWidgetProperties">20</a>. </span>optionWidgetProperties</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.Options.html">Uize.Widget.Options</a></code>.</p>
 			
@@ -1064,7 +1077,7 @@
 		</div>
 		
 		<a name="4_21"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.21. tentativeValue"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_21" title="4. Set-get Properties -&gt; 4.21. tentativeValue">21</a>. </span>tentativeValue</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.21. setValueOnMouseover"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_21" title="4. Set-get Properties -&gt; 4.21. setValueOnMouseover">21</a>. </span>setValueOnMouseover</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.Options.html">Uize.Widget.Options</a></code>.</p>
 			
@@ -1076,7 +1089,7 @@
 		</div>
 		
 		<a name="4_22"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.22. tentativeValueNo"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_22" title="4. Set-get Properties -&gt; 4.22. tentativeValueNo">22</a>. </span>tentativeValueNo</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.22. tentativeRestTime"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_22" title="4. Set-get Properties -&gt; 4.22. tentativeRestTime">22</a>. </span>tentativeRestTime</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.Options.html">Uize.Widget.Options</a></code>.</p>
 			
@@ -1088,17 +1101,19 @@
 		</div>
 		
 		<a name="4_23"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.23. title"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_23" title="4. Set-get Properties -&gt; 4.23. title">23</a>. </span>title</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.23. tentativeValue"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_23" title="4. Set-get Properties -&gt; 4.23. tentativeValue">23</a>. </span>tentativeValue</h2>
 		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.Options.html">Uize.Widget.Options</a></code>.</p>
+			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.Options.html">Uize.Widget.Options</a></code>, first introduced in <code><a href="../reference/Uize.Widget.Options.html">Uize.Widget.Options</a></code>)</td></tr>
 			</table>
 		</div>
 		
 		<a name="4_24"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.24. value"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_24" title="4. Set-get Properties -&gt; 4.24. value">24</a>. </span>value</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.24. tentativeValueNo"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_24" title="4. Set-get Properties -&gt; 4.24. tentativeValueNo">24</a>. </span>tentativeValueNo</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.Options.html">Uize.Widget.Options</a></code>.</p>
 			
@@ -1110,7 +1125,17 @@
 		</div>
 		
 		<a name="4_25"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.25. valueNo"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_25" title="4. Set-get Properties -&gt; 4.25. valueNo">25</a>. </span>valueNo</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.25. title"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_25" title="4. Set-get Properties -&gt; 4.25. title">25</a>. </span>title</h2>
+		<div class="contents2">
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_26"></a>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.26. value"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_26" title="4. Set-get Properties -&gt; 4.26. value">26</a>. </span>value</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.Options.html">Uize.Widget.Options</a></code>.</p>
 			
@@ -1121,8 +1146,20 @@
 			</table>
 		</div>
 		
-		<a name="4_26"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.26. values"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_26" title="4. Set-get Properties -&gt; 4.26. values">26</a>. </span>values</h2>
+		<a name="4_27"></a>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.27. valueNo"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_27" title="4. Set-get Properties -&gt; 4.27. valueNo">27</a>. </span>valueNo</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.Options.html">Uize.Widget.Options</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.Options.html">Uize.Widget.Options</a></code>, first introduced in <code><a href="../reference/Uize.Widget.Options.html">Uize.Widget.Options</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_28"></a>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.28. values"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_28" title="4. Set-get Properties -&gt; 4.28. values">28</a>. </span>values</h2>
 		<div class="contents2">
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -1131,8 +1168,8 @@
 			</table>
 		</div>
 		
-		<a name="4_27"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.27. wired"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_27" title="4. Set-get Properties -&gt; 4.27. wired">27</a>. </span>wired</h2>
+		<a name="4_29"></a>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.29. wired"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_29" title="4. Set-get Properties -&gt; 4.29. wired">29</a>. </span>wired</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			

@@ -86,9 +86,10 @@
 					<li><a href="#2_39" title="Inherited from Uize.Widget.">2.39. unwireNodeEventsByMatch</a></li>
 					<li><a href="#2_40" title="Inherited from Uize.Widget.">2.40. unwireUi</a></li>
 					<li><a href="#2_41" title="IMPLEMENTATION INFO">2.41. updateUi</a></li>
-					<li><a href="#2_42" title="Inherited from Uize.">2.42. wire</a></li>
-					<li><a href="#2_43" title="Inherited from Uize.Widget.">2.43. wireNode</a></li>
-					<li><a href="#2_44" title="Inherited from Uize.Widget.Dialog, but introduced in Uize.Widget.">2.44. wireUi</a></li>
+					<li><a href="#2_42" title="Inherited from Uize.Widget.Dialog.">2.42. updateUiPositionIfShown</a></li>
+					<li><a href="#2_43" title="Inherited from Uize.">2.43. wire</a></li>
+					<li><a href="#2_44" title="Inherited from Uize.Widget.">2.44. wireNode</a></li>
+					<li><a href="#2_45" title="Inherited from Uize.Widget.Dialog, but introduced in Uize.Widget.">2.45. wireUi</a></li>
 				</ul>
 			</li>
 			<li><a href="#3">3. Instance Properties</a>
@@ -229,7 +230,7 @@
 				
 				<p><span class="allCaps">INSTANCE METHODS</span></p>
 				
-				<p><code><a href="#2_1">addChild</a></code> | <code><a href="#2_2">afterWireUi</a></code> | <code><a href="#2_3">ajax</a></code> | <code><a href="#2_4">atEndOfOmegaStructor</a></code> | <code><a href="#2_5">buildHtml</a></code> | <code><a href="#2_6">callInherited</a></code> | <code><a href="#2_7">confirm</a></code> | <code><a href="#2_8">displayNode</a></code> | <code><a href="#2_9">fire</a></code> | <code><a href="#2_10">flushNodeCache</a></code> | <code><a href="#2_11">get</a></code> | <code><a href="#2_12">getInherited</a></code> | <code><a href="#2_13">getNode</a></code> | <code><a href="#2_14">getNodeStyle</a></code> | <code><a href="#2_15">getNodeValue</a></code> | <code><a href="#2_16">getProvider</a></code> | <code><a href="#2_17">globalizeNode</a></code> | <code><a href="#2_18">inform</a></code> | <code><a href="#2_19">injectNodeHtml</a></code> | <code><a href="#2_20">insertOrWireUi</a></code> | <code><a href="#2_21">insertUi</a></code> | <code><a href="#2_22">kill</a></code> | <code><a href="#2_23">localize</a></code> | <code><a href="#2_24">removeChild</a></code> | <code><a href="#2_25">removeNode</a></code> | <code><a href="#2_26">removeUi</a></code> | <code><a href="#2_27">set</a></code> | <code><a href="#2_28">setInherited</a></code> | <code><a href="#2_29">setNodeClipRect</a></code> | <code><a href="#2_30">setNodeInnerHtml</a></code> | <code><a href="#2_31">setNodeOpacity</a></code> | <code><a href="#2_32">setNodeProperties</a></code> | <code><a href="#2_33">setNodeStyle</a></code> | <code><a href="#2_34">setNodeValue</a></code> | <code><a href="#2_35">showNode</a></code> | <code><a href="#2_36">toggle</a></code> | <code><a href="#2_37">unwire</a></code> | <code><a href="#2_38">unwireNode</a></code> | <code><a href="#2_39">unwireNodeEventsByMatch</a></code> | <code><a href="#2_40">unwireUi</a></code> | <code><a href="#2_42">wire</a></code> | <code><a href="#2_43">wireNode</a></code> | <code><a href="#2_44">wireUi</a></code></p>
+				<p><code><a href="#2_1">addChild</a></code> | <code><a href="#2_2">afterWireUi</a></code> | <code><a href="#2_3">ajax</a></code> | <code><a href="#2_4">atEndOfOmegaStructor</a></code> | <code><a href="#2_5">buildHtml</a></code> | <code><a href="#2_6">callInherited</a></code> | <code><a href="#2_7">confirm</a></code> | <code><a href="#2_8">displayNode</a></code> | <code><a href="#2_9">fire</a></code> | <code><a href="#2_10">flushNodeCache</a></code> | <code><a href="#2_11">get</a></code> | <code><a href="#2_12">getInherited</a></code> | <code><a href="#2_13">getNode</a></code> | <code><a href="#2_14">getNodeStyle</a></code> | <code><a href="#2_15">getNodeValue</a></code> | <code><a href="#2_16">getProvider</a></code> | <code><a href="#2_17">globalizeNode</a></code> | <code><a href="#2_18">inform</a></code> | <code><a href="#2_19">injectNodeHtml</a></code> | <code><a href="#2_20">insertOrWireUi</a></code> | <code><a href="#2_21">insertUi</a></code> | <code><a href="#2_22">kill</a></code> | <code><a href="#2_23">localize</a></code> | <code><a href="#2_24">removeChild</a></code> | <code><a href="#2_25">removeNode</a></code> | <code><a href="#2_26">removeUi</a></code> | <code><a href="#2_27">set</a></code> | <code><a href="#2_28">setInherited</a></code> | <code><a href="#2_29">setNodeClipRect</a></code> | <code><a href="#2_30">setNodeInnerHtml</a></code> | <code><a href="#2_31">setNodeOpacity</a></code> | <code><a href="#2_32">setNodeProperties</a></code> | <code><a href="#2_33">setNodeStyle</a></code> | <code><a href="#2_34">setNodeValue</a></code> | <code><a href="#2_35">showNode</a></code> | <code><a href="#2_36">toggle</a></code> | <code><a href="#2_37">unwire</a></code> | <code><a href="#2_38">unwireNode</a></code> | <code><a href="#2_39">unwireNodeEventsByMatch</a></code> | <code><a href="#2_40">unwireUi</a></code> | <code><a href="#2_42">updateUiPositionIfShown</a></code> | <code><a href="#2_43">wire</a></code> | <code><a href="#2_44">wireNode</a></code> | <code><a href="#2_45">wireUi</a></code></p>
 				
 				<p><span class="allCaps">INSTANCE PROPERTIES</span></p>
 				
@@ -756,7 +757,19 @@
 		</div>
 		
 		<a name="2_42"></a>
-		<h2 class="heading2" title="2. Instance Methods -&gt; 2.42. wire"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_42" title="2. Instance Methods -&gt; 2.42. wire">42</a>. </span>wire</h2>
+		<h2 class="heading2" title="2. Instance Methods -&gt; 2.42. updateUiPositionIfShown"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_42" title="2. Instance Methods -&gt; 2.42. updateUiPositionIfShown">42</a>. </span>updateUiPositionIfShown</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.Dialog.html">Uize.Widget.Dialog</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.Dialog.html">Uize.Widget.Dialog</a></code>, first introduced in <code><a href="../reference/Uize.Widget.Dialog.html">Uize.Widget.Dialog</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_43"></a>
+		<h2 class="heading2" title="2. Instance Methods -&gt; 2.43. wire"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_43" title="2. Instance Methods -&gt; 2.43. wire">43</a>. </span>wire</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
 			
@@ -767,8 +780,8 @@
 			</table>
 		</div>
 		
-		<a name="2_43"></a>
-		<h2 class="heading2" title="2. Instance Methods -&gt; 2.43. wireNode"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_43" title="2. Instance Methods -&gt; 2.43. wireNode">43</a>. </span>wireNode</h2>
+		<a name="2_44"></a>
+		<h2 class="heading2" title="2. Instance Methods -&gt; 2.44. wireNode"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_44" title="2. Instance Methods -&gt; 2.44. wireNode">44</a>. </span>wireNode</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -779,8 +792,8 @@
 			</table>
 		</div>
 		
-		<a name="2_44"></a>
-		<h2 class="heading2" title="2. Instance Methods -&gt; 2.44. wireUi"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_44" title="2. Instance Methods -&gt; 2.44. wireUi">44</a>. </span>wireUi</h2>
+		<a name="2_45"></a>
+		<h2 class="heading2" title="2. Instance Methods -&gt; 2.45. wireUi"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_45" title="2. Instance Methods -&gt; 2.45. wireUi">45</a>. </span>wireUi</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.Dialog.html">Uize.Widget.Dialog</a></code>, but introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			

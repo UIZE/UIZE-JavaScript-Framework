@@ -52,10 +52,11 @@
 			<li><a href="#3">3. Instance Events</a>
 				<ul>
 					<li><a href="#3_1" title="An instance event that is fired when the user clicks the instance&apos;s Root Node.">3.1. Click</a></li>
-					<li><a href="#3_2" title="An instance event that is fired when the user mouses down on the instance&apos;s Root Node.">3.2. Down</a></li>
-					<li><a href="#3_3" title="An instance event that is fired when the user mouses out of the instance&apos;s Root Node.">3.3. Out</a></li>
-					<li><a href="#3_4" title="An instance event that is fired when the user mouses over the instance&apos;s Root Node.">3.4. Over</a></li>
-					<li><a href="#3_5" title="An instance event that is fired when the user mouses up after first having moused down on the instance&apos;s Root Node.">3.5. Up</a></li>
+					<li><a href="#3_2" title="An instance event that is fired when the user double clicks the instance&apos;s Root Node.">3.2. Double Click</a></li>
+					<li><a href="#3_3" title="An instance event that is fired when the user mouses down on the instance&apos;s Root Node.">3.3. Down</a></li>
+					<li><a href="#3_4" title="An instance event that is fired when the user mouses out of the instance&apos;s Root Node.">3.4. Out</a></li>
+					<li><a href="#3_5" title="An instance event that is fired when the user mouses over the instance&apos;s Root Node.">3.5. Over</a></li>
+					<li><a href="#3_6" title="An instance event that is fired when the user mouses up after first having moused down on the instance&apos;s Root Node.">3.6. Up</a></li>
 				</ul>
 			</li>
 			<li><a href="#4">4. Static Properties</a>
@@ -320,17 +321,31 @@
 		<div class="contents2">
 			<p>An instance event that is fired when the user clicks the instance's <code><a href="#2_1">Root Node</a></code>.</p>
 			
-			<p>This event is fired after the related <code><a href="#3_5">Up</a></code> instance event. When this event is fired, the value of the <code><a href="#5_24">state</a></code> set-get property will be <code>'over'</code>. The event object for this event will have a <code>domEvent</code> property that is a reference to the browser event object associated to the event on the DOM node. This <code>domEvent</code> object can be used to determine what modifier keys were being used, along with other properties of the event.</p>
+			<p>This event is fired after the related <code><a href="#3_6">Up</a></code> instance event. When this event is fired, the value of the <code><a href="#5_24">state</a></code> set-get property will be <code>'over'</code>. The event object for this event will have a <code>domEvent</code> property that is a reference to the browser event object associated to the event on the DOM node. This <code>domEvent</code> object can be used to determine what modifier keys were being used, along with other properties of the event.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#3_2">Down</a></code>, <code><a href="#3_3">Out</a></code>, <code><a href="#3_4">Over</a></code>, and <code><a href="#3_5">Up</a></code> instance events</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#3_2">Double Click</a></code>, <code><a href="#3_3">Down</a></code>, <code><a href="#3_4">Out</a></code>, <code><a href="#3_5">Over</a></code>, and <code><a href="#3_6">Up</a></code> instance events</td></tr>
 			</table>
 		</div>
 		
 		<a name="3_2"></a>
-		<h2 class="heading2" title="3. Instance Events -&gt; 3.2. Down"><span class="headingNumber"><a href="#3" title="3. Instance Events">3</a>.<a href="#3_2" title="3. Instance Events -&gt; 3.2. Down">2</a>. </span>Down</h2>
+		<h2 class="heading2" title="3. Instance Events -&gt; 3.2. Double Click"><span class="headingNumber"><a href="#3" title="3. Instance Events">3</a>.<a href="#3_2" title="3. Instance Events -&gt; 3.2. Double Click">2</a>. </span>Double Click</h2>
+		<div class="contents2">
+			<p>An instance event that is fired when the user double clicks the instance's <code><a href="#2_1">Root Node</a></code>.</p>
+			
+			<p>This event is fired after the related <code><a href="#3_6">Up</a></code> and <code><a href="#3_1">Click</a></code> instance events. When this event is fired, the value of the <code><a href="#5_24">state</a></code> set-get property will be <code>'over'</code>. The event object for this event will have a <code>domEvent</code> property that is a reference to the browser event object associated to the event on the DOM node. This <code>domEvent</code> object can be used to determine what modifier keys were being used, along with other properties of the event.</p>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#3_1">Click</a></code>, <code><a href="#3_3">Down</a></code>, <code><a href="#3_4">Out</a></code>, <code><a href="#3_5">Over</a></code>, and <code><a href="#3_6">Up</a></code> instance events</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_3"></a>
+		<h2 class="heading2" title="3. Instance Events -&gt; 3.3. Down"><span class="headingNumber"><a href="#3" title="3. Instance Events">3</a>.<a href="#3_3" title="3. Instance Events -&gt; 3.3. Down">3</a>. </span>Down</h2>
 		<div class="contents2">
 			<p>An instance event that is fired when the user mouses down on the instance's <code><a href="#2_1">Root Node</a></code>.</p>
 			
@@ -339,12 +354,12 @@
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#3_1">Click</a></code>, <code><a href="#3_3">Out</a></code>, <code><a href="#3_4">Over</a></code>, and <code><a href="#3_5">Up</a></code> instance events</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#3_1">Click</a></code>, <code><a href="#3_2">Double Click</a></code>, <code><a href="#3_4">Out</a></code>, <code><a href="#3_5">Over</a></code>, and <code><a href="#3_6">Up</a></code> instance events</td></tr>
 			</table>
 		</div>
 		
-		<a name="3_3"></a>
-		<h2 class="heading2" title="3. Instance Events -&gt; 3.3. Out"><span class="headingNumber"><a href="#3" title="3. Instance Events">3</a>.<a href="#3_3" title="3. Instance Events -&gt; 3.3. Out">3</a>. </span>Out</h2>
+		<a name="3_4"></a>
+		<h2 class="heading2" title="3. Instance Events -&gt; 3.4. Out"><span class="headingNumber"><a href="#3" title="3. Instance Events">3</a>.<a href="#3_4" title="3. Instance Events -&gt; 3.4. Out">4</a>. </span>Out</h2>
 		<div class="contents2">
 			<p>An instance event that is fired when the user mouses out of the instance's <code><a href="#2_1">Root Node</a></code>.</p>
 			
@@ -353,12 +368,12 @@
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#3_1">Click</a></code>, <code><a href="#3_2">Down</a></code>, <code><a href="#3_4">Over</a></code>, and <code><a href="#3_5">Up</a></code> instance events</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#3_1">Click</a></code>, <code><a href="#3_2">Double Click</a></code>, <code><a href="#3_3">Down</a></code>, <code><a href="#3_5">Over</a></code>, and <code><a href="#3_6">Up</a></code> instance events</td></tr>
 			</table>
 		</div>
 		
-		<a name="3_4"></a>
-		<h2 class="heading2" title="3. Instance Events -&gt; 3.4. Over"><span class="headingNumber"><a href="#3" title="3. Instance Events">3</a>.<a href="#3_4" title="3. Instance Events -&gt; 3.4. Over">4</a>. </span>Over</h2>
+		<a name="3_5"></a>
+		<h2 class="heading2" title="3. Instance Events -&gt; 3.5. Over"><span class="headingNumber"><a href="#3" title="3. Instance Events">3</a>.<a href="#3_5" title="3. Instance Events -&gt; 3.5. Over">5</a>. </span>Over</h2>
 		<div class="contents2">
 			<p>An instance event that is fired when the user mouses over the instance's <code><a href="#2_1">Root Node</a></code>.</p>
 			
@@ -367,12 +382,12 @@
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#3_1">Click</a></code>, <code><a href="#3_2">Down</a></code>, <code><a href="#3_3">Out</a></code>, and <code><a href="#3_5">Up</a></code> instance events</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#3_1">Click</a></code>, <code><a href="#3_2">Double Click</a></code>, <code><a href="#3_3">Down</a></code>, <code><a href="#3_4">Out</a></code>, and <code><a href="#3_6">Up</a></code> instance events</td></tr>
 			</table>
 		</div>
 		
-		<a name="3_5"></a>
-		<h2 class="heading2" title="3. Instance Events -&gt; 3.5. Up"><span class="headingNumber"><a href="#3" title="3. Instance Events">3</a>.<a href="#3_5" title="3. Instance Events -&gt; 3.5. Up">5</a>. </span>Up</h2>
+		<a name="3_6"></a>
+		<h2 class="heading2" title="3. Instance Events -&gt; 3.6. Up"><span class="headingNumber"><a href="#3" title="3. Instance Events">3</a>.<a href="#3_6" title="3. Instance Events -&gt; 3.6. Up">6</a>. </span>Up</h2>
 		<div class="contents2">
 			<p>An instance event that is fired when the user mouses up after first having moused down on the instance's <code><a href="#2_1">Root Node</a></code>.</p>
 			
@@ -381,7 +396,7 @@
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#3_1">Click</a></code>, <code><a href="#3_2">Down</a></code>, <code><a href="#3_3">Out</a></code>, and <code><a href="#3_4">Over</a></code> instance events</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#3_1">Click</a></code>, <code><a href="#3_2">Double Click</a></code>, <code><a href="#3_3">Down</a></code>, <code><a href="#3_4">Out</a></code>, and <code><a href="#3_5">Over</a></code> instance events</td></tr>
 			</table>
 		</div>
 	</div>
@@ -875,7 +890,7 @@ MyWidgetClass.prototype._addChildButton = Uize.Widget.Button.addChildButton;
 		<div class="contents2">
 			<p>An object reference to a DOM node, or a string whose value is the <code>id</code> for a DOM node, that should be displayed as a tooltip for the instance whenever the user mouses over the <code><a href="#2_1">Root Node</a></code> and the instance is in a state where clicking on this node would have an action.</p>
 			
-			<p>Clicking on the <code><a href="#2_1">Root Node</a></code> would have an action when the following conditions are met: the <code><a href="#3_4">over</a></code> set-get property is set to <code>true</code>, the <code><a href="#5_11">enabledInherited</a></code> set-get property is set to <code>true</code>, the <code><a href="#5_23">selected</a></code> set-get property is set to <code>false</code>, and the instance is wired.</p>
+			<p>Clicking on the <code><a href="#2_1">Root Node</a></code> would have an action when the following conditions are met: the <code><a href="#3_5">over</a></code> set-get property is set to <code>true</code>, the <code><a href="#5_11">enabledInherited</a></code> set-get property is set to <code>true</code>, the <code><a href="#5_23">selected</a></code> set-get property is set to <code>false</code>, and the instance is wired.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			

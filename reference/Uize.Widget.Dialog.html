@@ -163,9 +163,10 @@
 					<li><a href="#7_39" title="Inherited from Uize.Widget.">7.39. unwireNodeEventsByMatch</a></li>
 					<li><a href="#7_40" title="Inherited from Uize.Widget.">7.40. unwireUi</a></li>
 					<li><a href="#7_41" title="IMPLEMENTATION INFO">7.41. updateUi</a></li>
-					<li><a href="#7_42" title="Inherited from Uize.">7.42. wire</a></li>
-					<li><a href="#7_43" title="Inherited from Uize.Widget.">7.43. wireNode</a></li>
-					<li><a href="#7_44" title="IMPLEMENTATION INFO">7.44. wireUi</a></li>
+					<li><a href="#7_42" title="IMPLEMENTATION INFO">7.42. updateUiPositionIfShown</a></li>
+					<li><a href="#7_43" title="Inherited from Uize.">7.43. wire</a></li>
+					<li><a href="#7_44" title="Inherited from Uize.Widget.">7.44. wireNode</a></li>
+					<li><a href="#7_45" title="IMPLEMENTATION INFO">7.45. wireUi</a></li>
 				</ul>
 			</li>
 			<li><a href="#8">8. Static Methods</a>
@@ -233,7 +234,7 @@
 				
 				<p><span class="allCaps">INSTANCE METHODS</span></p>
 				
-				<p><code><a href="#7_2">afterWireUi</a></code> | <code><a href="#7_4">atEndOfOmegaStructor</a></code></p>
+				<p><code><a href="#7_2">afterWireUi</a></code> | <code><a href="#7_4">atEndOfOmegaStructor</a></code> | <code><a href="#7_42">updateUiPositionIfShown</a></code></p>
 				
 				<p><span class="allCaps">SET-GET PROPERTIES</span></p>
 				
@@ -249,7 +250,7 @@
 				
 				<p><span class="allCaps">INSTANCE METHODS</span></p>
 				
-				<p><code><a href="#7_41">updateUi</a></code> | <code><a href="#7_44">wireUi</a></code></p>
+				<p><code><a href="#7_41">updateUi</a></code> | <code><a href="#7_45">wireUi</a></code></p>
 				
 				<p><span class="allCaps">STATIC PROPERTIES</span></p>
 				
@@ -265,7 +266,7 @@
 				
 				<p><span class="allCaps">INSTANCE METHODS</span></p>
 				
-				<p><code><a href="#7_1">addChild</a></code> | <code><a href="#7_3">ajax</a></code> | <code><a href="#7_5">buildHtml</a></code> | <code><a href="#7_6">callInherited</a></code> | <code><a href="#7_7">confirm</a></code> | <code><a href="#7_8">displayNode</a></code> | <code><a href="#7_9">fire</a></code> | <code><a href="#7_10">flushNodeCache</a></code> | <code><a href="#7_11">get</a></code> | <code><a href="#7_12">getInherited</a></code> | <code><a href="#7_13">getNode</a></code> | <code><a href="#7_14">getNodeStyle</a></code> | <code><a href="#7_15">getNodeValue</a></code> | <code><a href="#7_16">getProvider</a></code> | <code><a href="#7_17">globalizeNode</a></code> | <code><a href="#7_18">inform</a></code> | <code><a href="#7_19">injectNodeHtml</a></code> | <code><a href="#7_20">insertOrWireUi</a></code> | <code><a href="#7_21">insertUi</a></code> | <code><a href="#7_22">kill</a></code> | <code><a href="#7_23">localize</a></code> | <code><a href="#7_24">removeChild</a></code> | <code><a href="#7_25">removeNode</a></code> | <code><a href="#7_26">removeUi</a></code> | <code><a href="#7_27">set</a></code> | <code><a href="#7_28">setInherited</a></code> | <code><a href="#7_29">setNodeClipRect</a></code> | <code><a href="#7_30">setNodeInnerHtml</a></code> | <code><a href="#7_31">setNodeOpacity</a></code> | <code><a href="#7_32">setNodeProperties</a></code> | <code><a href="#7_33">setNodeStyle</a></code> | <code><a href="#7_34">setNodeValue</a></code> | <code><a href="#7_35">showNode</a></code> | <code><a href="#7_36">toggle</a></code> | <code><a href="#7_37">unwire</a></code> | <code><a href="#7_38">unwireNode</a></code> | <code><a href="#7_39">unwireNodeEventsByMatch</a></code> | <code><a href="#7_40">unwireUi</a></code> | <code><a href="#7_42">wire</a></code> | <code><a href="#7_43">wireNode</a></code></p>
+				<p><code><a href="#7_1">addChild</a></code> | <code><a href="#7_3">ajax</a></code> | <code><a href="#7_5">buildHtml</a></code> | <code><a href="#7_6">callInherited</a></code> | <code><a href="#7_7">confirm</a></code> | <code><a href="#7_8">displayNode</a></code> | <code><a href="#7_9">fire</a></code> | <code><a href="#7_10">flushNodeCache</a></code> | <code><a href="#7_11">get</a></code> | <code><a href="#7_12">getInherited</a></code> | <code><a href="#7_13">getNode</a></code> | <code><a href="#7_14">getNodeStyle</a></code> | <code><a href="#7_15">getNodeValue</a></code> | <code><a href="#7_16">getProvider</a></code> | <code><a href="#7_17">globalizeNode</a></code> | <code><a href="#7_18">inform</a></code> | <code><a href="#7_19">injectNodeHtml</a></code> | <code><a href="#7_20">insertOrWireUi</a></code> | <code><a href="#7_21">insertUi</a></code> | <code><a href="#7_22">kill</a></code> | <code><a href="#7_23">localize</a></code> | <code><a href="#7_24">removeChild</a></code> | <code><a href="#7_25">removeNode</a></code> | <code><a href="#7_26">removeUi</a></code> | <code><a href="#7_27">set</a></code> | <code><a href="#7_28">setInherited</a></code> | <code><a href="#7_29">setNodeClipRect</a></code> | <code><a href="#7_30">setNodeInnerHtml</a></code> | <code><a href="#7_31">setNodeOpacity</a></code> | <code><a href="#7_32">setNodeProperties</a></code> | <code><a href="#7_33">setNodeStyle</a></code> | <code><a href="#7_34">setNodeValue</a></code> | <code><a href="#7_35">showNode</a></code> | <code><a href="#7_36">toggle</a></code> | <code><a href="#7_37">unwire</a></code> | <code><a href="#7_38">unwireNode</a></code> | <code><a href="#7_39">unwireNodeEventsByMatch</a></code> | <code><a href="#7_40">unwireUi</a></code> | <code><a href="#7_43">wire</a></code> | <code><a href="#7_44">wireNode</a></code></p>
 				
 				<p><span class="allCaps">INSTANCE PROPERTIES</span></p>
 				
@@ -1635,7 +1636,17 @@
 		</div>
 		
 		<a name="7_42"></a>
-		<h2 class="heading2" title="7. Instance Methods -&gt; 7.42. wire"><span class="headingNumber"><a href="#7" title="7. Instance Methods">7</a>.<a href="#7_42" title="7. Instance Methods -&gt; 7.42. wire">42</a>. </span>wire</h2>
+		<h2 class="heading2" title="7. Instance Methods -&gt; 7.42. updateUiPositionIfShown"><span class="headingNumber"><a href="#7" title="7. Instance Methods">7</a>.<a href="#7_42" title="7. Instance Methods -&gt; 7.42. updateUiPositionIfShown">42</a>. </span>updateUiPositionIfShown</h2>
+		<div class="contents2">
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="7_43"></a>
+		<h2 class="heading2" title="7. Instance Methods -&gt; 7.43. wire"><span class="headingNumber"><a href="#7" title="7. Instance Methods">7</a>.<a href="#7_43" title="7. Instance Methods -&gt; 7.43. wire">43</a>. </span>wire</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
 			
@@ -1646,8 +1657,8 @@
 			</table>
 		</div>
 		
-		<a name="7_43"></a>
-		<h2 class="heading2" title="7. Instance Methods -&gt; 7.43. wireNode"><span class="headingNumber"><a href="#7" title="7. Instance Methods">7</a>.<a href="#7_43" title="7. Instance Methods -&gt; 7.43. wireNode">43</a>. </span>wireNode</h2>
+		<a name="7_44"></a>
+		<h2 class="heading2" title="7. Instance Methods -&gt; 7.44. wireNode"><span class="headingNumber"><a href="#7" title="7. Instance Methods">7</a>.<a href="#7_44" title="7. Instance Methods -&gt; 7.44. wireNode">44</a>. </span>wireNode</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1658,8 +1669,8 @@
 			</table>
 		</div>
 		
-		<a name="7_44"></a>
-		<h2 class="heading2" title="7. Instance Methods -&gt; 7.44. wireUi"><span class="headingNumber"><a href="#7" title="7. Instance Methods">7</a>.<a href="#7_44" title="7. Instance Methods -&gt; 7.44. wireUi">44</a>. </span>wireUi</h2>
+		<a name="7_45"></a>
+		<h2 class="heading2" title="7. Instance Methods -&gt; 7.45. wireUi"><span class="headingNumber"><a href="#7" title="7. Instance Methods">7</a>.<a href="#7_45" title="7. Instance Methods -&gt; 7.45. wireUi">45</a>. </span>wireUi</h2>
 		<div class="contents2">
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			

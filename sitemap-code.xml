@@ -742,6 +742,13 @@
 		</codesearch:codesearch>
 	</url>
 	<url>
+		<loc>http://www.uize.com/js/~source/Uize.Widget.AutoSuggest.js</loc>
+		<codesearch:codesearch>
+			<codesearch:filetype>javascript</codesearch:filetype>
+			<codesearch:license>GPL</codesearch:license>
+		</codesearch:codesearch>
+	</url>
+	<url>
 		<loc>http://www.uize.com/js/~source/Uize.Widget.AutoTooltip.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
@@ -882,6 +889,13 @@
 		</codesearch:codesearch>
 	</url>
 	<url>
+		<loc>http://www.uize.com/js/~source/Uize.Widget.Collection.Dynamic.Table.js</loc>
+		<codesearch:codesearch>
+			<codesearch:filetype>javascript</codesearch:filetype>
+			<codesearch:license>GPL</codesearch:license>
+		</codesearch:codesearch>
+	</url>
+	<url>
 		<loc>http://www.uize.com/js/~source/Uize.Widget.Collection.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
@@ -980,14 +994,21 @@
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/Uize.Widget.Dialog.Picker.FilteredInput.js</loc>
+		<loc>http://www.uize.com/js/~source/Uize.Widget.Dialog.Picker.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/Uize.Widget.Dialog.Picker.js</loc>
+		<loc>http://www.uize.com/js/~source/Uize.Widget.Dialog.Picker.Palette.js</loc>
+		<codesearch:codesearch>
+			<codesearch:filetype>javascript</codesearch:filetype>
+			<codesearch:license>GPL</codesearch:license>
+		</codesearch:codesearch>
+	</url>
+	<url>
+		<loc>http://www.uize.com/js/~source/Uize.Widget.Dialog.Picker.Palette.Selector.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
@@ -1022,20 +1043,6 @@
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/Uize.Widget.Droplist.js</loc>
-		<codesearch:codesearch>
-			<codesearch:filetype>javascript</codesearch:filetype>
-			<codesearch:license>GPL</codesearch:license>
-		</codesearch:codesearch>
-	</url>
-	<url>
-		<loc>http://www.uize.com/js/~source/Uize.Widget.Droplist.Navigate.js</loc>
-		<codesearch:codesearch>
-			<codesearch:filetype>javascript</codesearch:filetype>
-			<codesearch:license>GPL</codesearch:license>
-		</codesearch:codesearch>
-	</url>
-	<url>
 		<loc>http://www.uize.com/js/~source/Uize.Widget.EdgeHugger.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
@@ -1044,13 +1051,6 @@
 	</url>
 	<url>
 		<loc>http://www.uize.com/js/~source/Uize.Widget.EggTimer.js</loc>
-		<codesearch:codesearch>
-			<codesearch:filetype>javascript</codesearch:filetype>
-			<codesearch:license>GPL</codesearch:license>
-		</codesearch:codesearch>
-	</url>
-	<url>
-		<loc>http://www.uize.com/js/~source/Uize.Widget.FilteredInput.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
@@ -1093,6 +1093,13 @@
 	</url>
 	<url>
 		<loc>http://www.uize.com/js/~source/Uize.Widget.FormElement.js</loc>
+		<codesearch:codesearch>
+			<codesearch:filetype>javascript</codesearch:filetype>
+			<codesearch:license>GPL</codesearch:license>
+		</codesearch:codesearch>
+	</url>
+	<url>
+		<loc>http://www.uize.com/js/~source/Uize.Widget.FormElement.Select.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
@@ -1155,14 +1162,14 @@
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/Uize.Widget.InlinePicker.FilteredInput.js</loc>
+		<loc>http://www.uize.com/js/~source/Uize.Widget.InlinePicker.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/Uize.Widget.InlinePicker.js</loc>
+		<loc>http://www.uize.com/js/~source/Uize.Widget.InlinePicker.Selector.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
@@ -1288,13 +1295,6 @@
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/Uize.Widget.Picker.FilteredInput.js</loc>
-		<codesearch:codesearch>
-			<codesearch:filetype>javascript</codesearch:filetype>
-			<codesearch:license>GPL</codesearch:license>
-		</codesearch:codesearch>
-	</url>
-	<url>
 		<loc>http://www.uize.com/js/~source/Uize.Widget.Picker.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
@@ -1302,7 +1302,14 @@
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/Uize.Widget.Picker.SelectorOld.js</loc>
+		<loc>http://www.uize.com/js/~source/Uize.Widget.Picker.Palette.js</loc>
+		<codesearch:codesearch>
+			<codesearch:filetype>javascript</codesearch:filetype>
+			<codesearch:license>GPL</codesearch:license>
+		</codesearch:codesearch>
+	</url>
+	<url>
+		<loc>http://www.uize.com/js/~source/Uize.Widget.Picker.Palette.Selector.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
@@ -1352,13 +1359,6 @@
 	</url>
 	<url>
 		<loc>http://www.uize.com/js/~source/Uize.Widget.SegmentDisplay.Seven.js</loc>
-		<codesearch:codesearch>
-			<codesearch:filetype>javascript</codesearch:filetype>
-			<codesearch:license>GPL</codesearch:license>
-		</codesearch:codesearch>
-	</url>
-	<url>
-		<loc>http://www.uize.com/js/~source/Uize.Widget.SelectorOption.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
@@ -1478,20 +1478,6 @@
 	</url>
 	<url>
 		<loc>http://www.uize.com/js/~source/Uize.Widget.Tree.Select.js</loc>
-		<codesearch:codesearch>
-			<codesearch:filetype>javascript</codesearch:filetype>
-			<codesearch:license>GPL</codesearch:license>
-		</codesearch:codesearch>
-	</url>
-	<url>
-		<loc>http://www.uize.com/js/~source/Uize.Widget.ValueDisplay.js</loc>
-		<codesearch:codesearch>
-			<codesearch:filetype>javascript</codesearch:filetype>
-			<codesearch:license>GPL</codesearch:license>
-		</codesearch:codesearch>
-	</url>
-	<url>
-		<loc>http://www.uize.com/js/~source/Uize.Widget.ValueDisplay.Selector.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>

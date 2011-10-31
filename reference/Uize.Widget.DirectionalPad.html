@@ -46,7 +46,7 @@
 			<li><a href="#2">2. Set-get properties</a>
 				<ul>
 					<li><a href="#2_1" title="A string with (currently) two valid values: &apos;mini&apos; or &apos;full&apos;. &apos;mini&apos; mode will only show the buttons controlling the four cardinal directions. &apos;full&apos; mode will show all the buttons. mode is set to &apos;full&apos; by default.">2.1. mode</a></li>
-					<li><a href="#2_2" title="Inherited from Uize.Widget, expanded accepts a fourth value in addition to true, false, and &apos;inherit&apos;: an object with a format described below.">2.2. expanded</a></li>
+					<li><a href="#2_2" title="Inherited from Uize.Widget, enabled accepts a fourth value in addition to true, false, and &apos;inherit&apos;: an object with a format described below.">2.2. enabled</a></li>
 				</ul>
 			</li>
 			<li><a href="#3">3. Instance Methods</a>
@@ -89,7 +89,7 @@
 					<li><a href="#3_36" title="Inherited from Uize.Widget.">3.36. unwireNode</a></li>
 					<li><a href="#3_37" title="Inherited from Uize.Widget.">3.37. unwireNodeEventsByMatch</a></li>
 					<li><a href="#3_38" title="Inherited from Uize.Widget.">3.38. unwireUi</a></li>
-					<li><a href="#3_39" title="Inherited from Uize.Widget.">3.39. updateUi</a></li>
+					<li><a href="#3_39" title="IMPLEMENTATION INFO">3.39. updateUi</a></li>
 					<li><a href="#3_40" title="Inherited from Uize.">3.40. wire</a></li>
 					<li><a href="#3_41" title="Inherited from Uize.Widget.">3.41. wireNode</a></li>
 					<li><a href="#3_42" title="IMPLEMENTATION INFO">3.42. wireUi</a></li>
@@ -195,7 +195,7 @@
 				
 				<p><span class="allCaps">INSTANCE METHODS</span></p>
 				
-				<p><code><a href="#3_42">wireUi</a></code></p>
+				<p><code><a href="#3_39">updateUi</a></code> | <code><a href="#3_42">wireUi</a></code></p>
 				
 				<p><span class="allCaps">STATIC PROPERTIES</span></p>
 				
@@ -211,7 +211,7 @@
 				
 				<p><span class="allCaps">INSTANCE METHODS</span></p>
 				
-				<p><code><a href="#3_1">addChild</a></code> | <code><a href="#3_2">ajax</a></code> | <code><a href="#3_3">buildHtml</a></code> | <code><a href="#3_4">callInherited</a></code> | <code><a href="#3_5">confirm</a></code> | <code><a href="#3_6">displayNode</a></code> | <code><a href="#3_7">fire</a></code> | <code><a href="#3_8">flushNodeCache</a></code> | <code><a href="#3_9">get</a></code> | <code><a href="#3_10">getInherited</a></code> | <code><a href="#3_11">getNode</a></code> | <code><a href="#3_12">getNodeStyle</a></code> | <code><a href="#3_13">getNodeValue</a></code> | <code><a href="#3_14">getProvider</a></code> | <code><a href="#3_15">globalizeNode</a></code> | <code><a href="#3_16">inform</a></code> | <code><a href="#3_17">injectNodeHtml</a></code> | <code><a href="#3_18">insertOrWireUi</a></code> | <code><a href="#3_19">insertUi</a></code> | <code><a href="#3_20">kill</a></code> | <code><a href="#3_21">localize</a></code> | <code><a href="#3_22">removeChild</a></code> | <code><a href="#3_23">removeNode</a></code> | <code><a href="#3_24">removeUi</a></code> | <code><a href="#3_25">set</a></code> | <code><a href="#3_26">setInherited</a></code> | <code><a href="#3_27">setNodeClipRect</a></code> | <code><a href="#3_28">setNodeInnerHtml</a></code> | <code><a href="#3_29">setNodeOpacity</a></code> | <code><a href="#3_30">setNodeProperties</a></code> | <code><a href="#3_31">setNodeStyle</a></code> | <code><a href="#3_32">setNodeValue</a></code> | <code><a href="#3_33">showNode</a></code> | <code><a href="#3_34">toggle</a></code> | <code><a href="#3_35">unwire</a></code> | <code><a href="#3_36">unwireNode</a></code> | <code><a href="#3_37">unwireNodeEventsByMatch</a></code> | <code><a href="#3_38">unwireUi</a></code> | <code><a href="#3_39">updateUi</a></code> | <code><a href="#3_40">wire</a></code> | <code><a href="#3_41">wireNode</a></code></p>
+				<p><code><a href="#3_1">addChild</a></code> | <code><a href="#3_2">ajax</a></code> | <code><a href="#3_3">buildHtml</a></code> | <code><a href="#3_4">callInherited</a></code> | <code><a href="#3_5">confirm</a></code> | <code><a href="#3_6">displayNode</a></code> | <code><a href="#3_7">fire</a></code> | <code><a href="#3_8">flushNodeCache</a></code> | <code><a href="#3_9">get</a></code> | <code><a href="#3_10">getInherited</a></code> | <code><a href="#3_11">getNode</a></code> | <code><a href="#3_12">getNodeStyle</a></code> | <code><a href="#3_13">getNodeValue</a></code> | <code><a href="#3_14">getProvider</a></code> | <code><a href="#3_15">globalizeNode</a></code> | <code><a href="#3_16">inform</a></code> | <code><a href="#3_17">injectNodeHtml</a></code> | <code><a href="#3_18">insertOrWireUi</a></code> | <code><a href="#3_19">insertUi</a></code> | <code><a href="#3_20">kill</a></code> | <code><a href="#3_21">localize</a></code> | <code><a href="#3_22">removeChild</a></code> | <code><a href="#3_23">removeNode</a></code> | <code><a href="#3_24">removeUi</a></code> | <code><a href="#3_25">set</a></code> | <code><a href="#3_26">setInherited</a></code> | <code><a href="#3_27">setNodeClipRect</a></code> | <code><a href="#3_28">setNodeInnerHtml</a></code> | <code><a href="#3_29">setNodeOpacity</a></code> | <code><a href="#3_30">setNodeProperties</a></code> | <code><a href="#3_31">setNodeStyle</a></code> | <code><a href="#3_32">setNodeValue</a></code> | <code><a href="#3_33">showNode</a></code> | <code><a href="#3_34">toggle</a></code> | <code><a href="#3_35">unwire</a></code> | <code><a href="#3_36">unwireNode</a></code> | <code><a href="#3_37">unwireNodeEventsByMatch</a></code> | <code><a href="#3_38">unwireUi</a></code> | <code><a href="#3_40">wire</a></code> | <code><a href="#3_41">wireNode</a></code></p>
 				
 				<p><span class="allCaps">INSTANCE PROPERTIES</span></p>
 				
@@ -219,7 +219,7 @@
 				
 				<p><span class="allCaps">SET-GET PROPERTIES</span></p>
 				
-				<p><code><a href="#5_1">built</a></code> | <code><a href="#5_2">busy</a></code> | <code><a href="#5_3">busyInherited</a></code> | <code><a href="#5_4">children</a></code> | <code><a href="#5_5">container</a></code> | <code><a href="#5_6">enabled</a></code> | <code><a href="#5_7">enabledInherited</a></code> | <code><a href="#5_8">html</a></code> | <code><a href="#5_9">idPrefix</a></code> | <code><a href="#5_10">idPrefixConstruction</a></code> | <code><a href="#5_11">insertionMode</a></code> | <code><a href="#5_12">localized</a></code> | <code><a href="#5_14">name</a></code> | <code><a href="#5_15">nodeMap</a></code> | <code><a href="#5_16">wired</a></code></p>
+				<p><code><a href="#5_1">built</a></code> | <code><a href="#5_2">busy</a></code> | <code><a href="#5_3">busyInherited</a></code> | <code><a href="#5_4">children</a></code> | <code><a href="#5_5">container</a></code> | <code><a href="#2_2">enabled</a></code> | <code><a href="#5_7">enabledInherited</a></code> | <code><a href="#5_8">html</a></code> | <code><a href="#5_9">idPrefix</a></code> | <code><a href="#5_10">idPrefixConstruction</a></code> | <code><a href="#5_11">insertionMode</a></code> | <code><a href="#5_12">localized</a></code> | <code><a href="#5_14">name</a></code> | <code><a href="#5_15">nodeMap</a></code> | <code><a href="#5_16">wired</a></code></p>
 				
 				<p><span class="allCaps">STATIC METHODS</span></p>
 				
@@ -254,15 +254,15 @@
 		</div>
 		
 		<a name="2_2"></a>
-		<h2 class="heading2" title="2. Set-get properties -&gt; 2.2. expanded"><span class="headingNumber"><a href="#2" title="2. Set-get properties">2</a>.<a href="#2_2" title="2. Set-get properties -&gt; 2.2. expanded">2</a>. </span>expanded</h2>
+		<h2 class="heading2" title="2. Set-get properties -&gt; 2.2. enabled"><span class="headingNumber"><a href="#2" title="2. Set-get properties">2</a>.<a href="#2_2" title="2. Set-get properties -&gt; 2.2. enabled">2</a>. </span>enabled</h2>
 		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, <code><a href="#2_2">expanded</a></code> accepts a fourth value in addition to true, false, and 'inherit': an object with a format described below.</p>
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, <code><a href="#2_2">enabled</a></code> accepts a fourth value in addition to true, false, and 'inherit': an object with a format described below.</p>
 			
 			<p><span class="allCaps">SYNTAX</span></p>
 			
 			
 <pre class="sample-code">_directionalPad.set ({
-  expanded:{
+  enabled:{
     defaultValue:true,
     north:false,
     south:false,
@@ -272,7 +272,7 @@
 });
 </pre>
 			
-			<p>The <code><a href="#2_2">expanded</a></code> property object value is a dictionary whose keys are either 'defaultValue' or the names of the <code>Uize.Widget.DirectionalPad</code> instance's child widgets. If the child widget is not mentioned in the dictionary, then its value will be set to whatever is specified by 'defaultValue'. If 'defaultValue' is undefined then the child widget's enabled state will not change.</p>
+			<p>The <code><a href="#2_2">enabled</a></code> property object value is a dictionary whose keys are either 'defaultValue' or the names of the <code>Uize.Widget.DirectionalPad</code> instance's child widgets. If the child widget is not mentioned in the dictionary, then its value will be set to whatever is specified by 'defaultValue'. If 'defaultValue' is undefined then the child widget's enabled state will not change.</p>
 		</div>
 	</div>
 	
@@ -738,12 +738,10 @@
 		<a name="3_39"></a>
 		<h2 class="heading2" title="3. Instance Methods -&gt; 3.39. updateUi"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_39" title="3. Instance Methods -&gt; 3.39. updateUi">39</a>. </span>updateUi</h2>
 		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
-			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an override of an inherited feature (implementation is in this module, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
 			</table>
 		</div>
 		

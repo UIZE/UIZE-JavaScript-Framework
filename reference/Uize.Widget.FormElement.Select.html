@@ -1,9 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<title>Uize.Widget.Picker.FilteredInput | Documentation | UIZE JavaScript Framework</title>
-	<meta name="keywords" content="UIZE JavaScript Framework Documentation Uize.Widget.Picker.FilteredInput module reference documentation"/>
-	<meta name="description" content="The Uize.Widget.Picker.FilteredInput class implements a filtered input picker widget, using a deferred loaded filtered input picker modal dialog to let the user select from an input."/>
+	<title>Uize.Widget.FormElement.Select | Documentation | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework Documentation Uize.Widget.FormElement.Select module reference documentation"/>
+	<meta name="description" content="The Uize.Widget.FormElement.Select class serves a wrapper class in order to provide a beter programmable interface to a &lt;select&gt; form element."/>
 	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
 	<link rel="stylesheet" href="../css/page.css"/>
 	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
@@ -17,9 +17,9 @@
 	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
 	
 	<a href="../javascript-modules-index.html" class="breadcrumb breadcrumbWithArrow">MODULES</a>
-	<a href="Uize.html" title="View reference for Uize" class="breadcrumb">Uize</a>.<a href="Uize.Widget.html" title="View reference for Uize.Widget" class="breadcrumb">Widget</a>.<a href="Uize.Widget.Picker.html" title="View reference for Uize.Widget.Picker" class="breadcrumb">Picker</a>.<a href="Uize.Widget.Picker.FilteredInput.html" title="View reference for Uize.Widget.Picker.FilteredInput" class="breadcrumb">FilteredInput</a>
+	<a href="Uize.html" title="View reference for Uize" class="breadcrumb">Uize</a>.<a href="Uize.Widget.html" title="View reference for Uize.Widget" class="breadcrumb">Widget</a>.<a href="Uize.Widget.FormElement.html" title="View reference for Uize.Widget.FormElement" class="breadcrumb">FormElement</a>.<a href="Uize.Widget.FormElement.Select.html" title="View reference for Uize.Widget.FormElement.Select" class="breadcrumb">Select</a>
 	<div class="pageActions">
-		<a id="page-search" href="javascript://" class="buttonLink" title="Search for references to this module...">SEARCH</a><a id="page-examples" href="javascript://" class="buttonLink" title="View examples for this module...">EXAMPLES</a><a href="source-code/Uize.Widget.Picker.FilteredInput.html" class="buttonLink" title="View the JavaScript source code for this module...">SOURCE</a><a id="page-test" href="javascript://" class="buttonLink" title="Test this module...">TEST</a>
+		<a id="page-search" href="javascript://" class="buttonLink" title="Search for references to this module...">SEARCH</a><a id="page-examples" href="javascript://" class="buttonLink" title="View examples for this module...">EXAMPLES</a><a href="source-code/Uize.Widget.FormElement.Select.html" class="buttonLink" title="View the JavaScript source code for this module...">SOURCE</a><a id="page-test" href="javascript://" class="buttonLink" title="Test this module...">TEST</a>
 	</div>
 
 </h1>
@@ -29,16 +29,16 @@
 <ul>
 	<li>Contents
 		<ul>
-			<li><a href="#1" title="The Uize.Widget.Picker.FilteredInput class implements a filtered input picker widget, using a deferred loaded filtered input picker modal dialog to let the user select from an input.">1. Introduction</a>
+			<li><a href="#1" title="The Uize.Widget.FormElement.Select class serves a wrapper class in order to provide a beter programmable interface to a &lt;select&gt; form element.">1. Introduction</a>
 				<ul>
-					<li><a href="#1_1" title="There are no dedicated showcase example pages for the Uize.Widget.Picker.FilteredInput module.">1.1. Examples</a></li>
-					<li><a href="#1_2" title="The Uize.Widget.Picker.FilteredInput module defines the Uize.Widget.Picker.FilteredInput class, which is a subclass of Uize.Widget.Picker.">1.2. Implementation Info</a>
+					<li><a href="#1_1" title="There are no dedicated showcase example pages for the Uize.Widget.FormElement.Select module.">1.1. Examples</a></li>
+					<li><a href="#1_2" title="The Uize.Widget.FormElement.Select module defines the Uize.Widget.FormElement.Select class, which is a subclass of Uize.Widget.FormElement.">1.2. Implementation Info</a>
 						<ul>
 							<li><a href="#1_2_1" title="The features listed in this section have been introduced in this module.">1.2.1. Features Introduced in This Module</a></li>
 							<li><a href="#1_2_2" title="The features listed in this section have been overridden in this module.">1.2.2. Features Overridden in This Module</a></li>
 							<li><a href="#1_2_3" title="The features listed in this section have been inherited from other modules.">1.2.3. Features Inherited From Other Modules</a></li>
 							<li><a href="#1_2_4" title="There are no modules directly under this namespace.">1.2.4. Modules Directly Under This Namespace</a></li>
-							<li><a href="#1_2_5" title="There is no dedicated unit tests module for the Uize.Widget.Picker.FilteredInput module.">1.2.5. Unit Tests</a></li>
+							<li><a href="#1_2_5" title="There is no dedicated unit tests module for the Uize.Widget.FormElement.Select module.">1.2.5. Unit Tests</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -54,44 +54,45 @@
 					<li><a href="#2_7" title="Inherited from Uize.Widget.">2.7. confirm</a></li>
 					<li><a href="#2_8" title="Inherited from Uize.Widget.">2.8. displayNode</a></li>
 					<li><a href="#2_9" title="Inherited from Uize.">2.9. fire</a></li>
-					<li><a href="#2_10" title="Inherited from Uize.Widget.">2.10. flushNodeCache</a></li>
-					<li><a href="#2_11" title="Inherited from Uize.">2.11. get</a></li>
-					<li><a href="#2_12" title="IMPLEMENTATION INFO">2.12. getDialogWidgetProperties</a></li>
+					<li><a href="#2_10" title="Inherited from Uize.Widget.FormElement.">2.10. fireOkOnEnter</a></li>
+					<li><a href="#2_11" title="Inherited from Uize.Widget.">2.11. flushNodeCache</a></li>
+					<li><a href="#2_12" title="Inherited from Uize.">2.12. get</a></li>
 					<li><a href="#2_13" title="Inherited from Uize.Widget.">2.13. getInherited</a></li>
 					<li><a href="#2_14" title="Inherited from Uize.Widget.">2.14. getNode</a></li>
 					<li><a href="#2_15" title="Inherited from Uize.Widget.">2.15. getNodeStyle</a></li>
 					<li><a href="#2_16" title="Inherited from Uize.Widget.">2.16. getNodeValue</a></li>
 					<li><a href="#2_17" title="Inherited from Uize.Widget.">2.17. getProvider</a></li>
-					<li><a href="#2_18" title="Inherited from Uize.Widget.">2.18. globalizeNode</a></li>
-					<li><a href="#2_19" title="Inherited from Uize.Widget.">2.19. inform</a></li>
-					<li><a href="#2_20" title="Inherited from Uize.Widget.">2.20. injectNodeHtml</a></li>
-					<li><a href="#2_21" title="Inherited from Uize.Widget.">2.21. insertOrWireUi</a></li>
-					<li><a href="#2_22" title="Inherited from Uize.Widget.">2.22. insertUi</a></li>
-					<li><a href="#2_23" title="Inherited from Uize.Widget, but introduced in Uize.">2.23. kill</a></li>
-					<li><a href="#2_24" title="Inherited from Uize.Widget.">2.24. localize</a></li>
-					<li><a href="#2_25" title="Inherited from Uize.Widget.">2.25. removeChild</a></li>
-					<li><a href="#2_26" title="Inherited from Uize.Widget.">2.26. removeNode</a></li>
-					<li><a href="#2_27" title="Inherited from Uize.Widget.">2.27. removeUi</a></li>
-					<li><a href="#2_28" title="Inherited from Uize.Widget.FormElement.">2.28. restore</a></li>
-					<li><a href="#2_29" title="Inherited from Uize.">2.29. set</a></li>
-					<li><a href="#2_30" title="Inherited from Uize.Widget.">2.30. setInherited</a></li>
-					<li><a href="#2_31" title="Inherited from Uize.Widget.">2.31. setNodeClipRect</a></li>
-					<li><a href="#2_32" title="Inherited from Uize.Widget.">2.32. setNodeInnerHtml</a></li>
-					<li><a href="#2_33" title="Inherited from Uize.Widget.">2.33. setNodeOpacity</a></li>
-					<li><a href="#2_34" title="Inherited from Uize.Widget.">2.34. setNodeProperties</a></li>
-					<li><a href="#2_35" title="Inherited from Uize.Widget.">2.35. setNodeStyle</a></li>
-					<li><a href="#2_36" title="Inherited from Uize.Widget.">2.36. setNodeValue</a></li>
-					<li><a href="#2_37" title="Inherited from Uize.Widget.">2.37. showNode</a></li>
-					<li><a href="#2_38" title="Inherited from Uize.">2.38. toggle</a></li>
-					<li><a href="#2_39" title="Inherited from Uize.">2.39. unwire</a></li>
-					<li><a href="#2_40" title="Inherited from Uize.Widget.">2.40. unwireNode</a></li>
-					<li><a href="#2_41" title="Inherited from Uize.Widget.">2.41. unwireNodeEventsByMatch</a></li>
-					<li><a href="#2_42" title="Inherited from Uize.Widget.">2.42. unwireUi</a></li>
-					<li><a href="#2_43" title="IMPLEMENTATION INFO">2.43. updateUi</a></li>
-					<li><a href="#2_44" title="Inherited from Uize.Widget.FormElement.">2.44. validate</a></li>
-					<li><a href="#2_45" title="Inherited from Uize.">2.45. wire</a></li>
-					<li><a href="#2_46" title="Inherited from Uize.Widget.">2.46. wireNode</a></li>
-					<li><a href="#2_47" title="Inherited from Uize.Widget.FormElement, but introduced in Uize.Widget.">2.47. wireUi</a></li>
+					<li><a href="#2_18" title="Inherited from Uize.Widget.FormElement.">2.18. getRootNode</a></li>
+					<li><a href="#2_19" title="Inherited from Uize.Widget.">2.19. globalizeNode</a></li>
+					<li><a href="#2_20" title="Inherited from Uize.Widget.">2.20. inform</a></li>
+					<li><a href="#2_21" title="Inherited from Uize.Widget.">2.21. injectNodeHtml</a></li>
+					<li><a href="#2_22" title="Inherited from Uize.Widget.">2.22. insertOrWireUi</a></li>
+					<li><a href="#2_23" title="Inherited from Uize.Widget.">2.23. insertUi</a></li>
+					<li><a href="#2_24" title="Inherited from Uize.Widget, but introduced in Uize.">2.24. kill</a></li>
+					<li><a href="#2_25" title="Inherited from Uize.Widget.">2.25. localize</a></li>
+					<li><a href="#2_26" title="Inherited from Uize.Widget.">2.26. removeChild</a></li>
+					<li><a href="#2_27" title="Inherited from Uize.Widget.">2.27. removeNode</a></li>
+					<li><a href="#2_28" title="Inherited from Uize.Widget.">2.28. removeUi</a></li>
+					<li><a href="#2_29" title="Inherited from Uize.Widget.FormElement.">2.29. restore</a></li>
+					<li><a href="#2_30" title="Inherited from Uize.">2.30. set</a></li>
+					<li><a href="#2_31" title="Inherited from Uize.Widget.">2.31. setInherited</a></li>
+					<li><a href="#2_32" title="Inherited from Uize.Widget.">2.32. setNodeClipRect</a></li>
+					<li><a href="#2_33" title="Inherited from Uize.Widget.">2.33. setNodeInnerHtml</a></li>
+					<li><a href="#2_34" title="Inherited from Uize.Widget.">2.34. setNodeOpacity</a></li>
+					<li><a href="#2_35" title="Inherited from Uize.Widget.">2.35. setNodeProperties</a></li>
+					<li><a href="#2_36" title="Inherited from Uize.Widget.">2.36. setNodeStyle</a></li>
+					<li><a href="#2_37" title="Inherited from Uize.Widget.">2.37. setNodeValue</a></li>
+					<li><a href="#2_38" title="Inherited from Uize.Widget.">2.38. showNode</a></li>
+					<li><a href="#2_39" title="Inherited from Uize.">2.39. toggle</a></li>
+					<li><a href="#2_40" title="Inherited from Uize.">2.40. unwire</a></li>
+					<li><a href="#2_41" title="Inherited from Uize.Widget.">2.41. unwireNode</a></li>
+					<li><a href="#2_42" title="Inherited from Uize.Widget.">2.42. unwireNodeEventsByMatch</a></li>
+					<li><a href="#2_43" title="Inherited from Uize.Widget.">2.43. unwireUi</a></li>
+					<li><a href="#2_44" title="Inherited from Uize.Widget.FormElement, but introduced in Uize.Widget.">2.44. updateUi</a></li>
+					<li><a href="#2_45" title="Inherited from Uize.Widget.FormElement.">2.45. validate</a></li>
+					<li><a href="#2_46" title="Inherited from Uize.">2.46. wire</a></li>
+					<li><a href="#2_47" title="Inherited from Uize.Widget.">2.47. wireNode</a></li>
+					<li><a href="#2_48" title="IMPLEMENTATION INFO">2.48. wireUi</a></li>
 				</ul>
 			</li>
 			<li><a href="#3">3. Instance Properties</a>
@@ -103,74 +104,64 @@
 			</li>
 			<li><a href="#4">4. Set-get Properties</a>
 				<ul>
-					<li><a href="#4_1" title="Inherited from Uize.Widget.Picker.">4.1. allowManualEntry</a></li>
-					<li><a href="#4_2" title="Inherited from Uize.Widget.">4.2. built</a></li>
-					<li><a href="#4_3" title="Inherited from Uize.Widget.">4.3. busy</a></li>
-					<li><a href="#4_4" title="Inherited from Uize.Widget.">4.4. busyInherited</a></li>
-					<li><a href="#4_5" title="Inherited from Uize.Widget.">4.5. children</a></li>
-					<li><a href="#4_6" title="Inherited from Uize.Widget.">4.6. container</a></li>
-					<li><a href="#4_7" title="Inherited from Uize.Widget.Picker.">4.7. dialogComponent</a></li>
-					<li><a href="#4_8" title="IMPLEMENTATION INFO">4.8. dialogWidgetClass</a></li>
-					<li><a href="#4_9" title="Inherited from Uize.Widget.FormElement.">4.9. elementName</a></li>
-					<li><a href="#4_10" title="Inherited from Uize.Widget.">4.10. enabled</a></li>
-					<li><a href="#4_11" title="Inherited from Uize.Widget.">4.11. enabledInherited</a></li>
-					<li><a href="#4_12" title="Inherited from Uize.Widget.FormElement.">4.12. errorClassName</a></li>
-					<li><a href="#4_13" title="IMPLEMENTATION INFO">4.13. filter</a></li>
-					<li><a href="#4_14" title="IMPLEMENTATION INFO">4.14. filters</a></li>
-					<li><a href="#4_15" title="Inherited from Uize.Widget.FormElement.">4.15. focused</a></li>
-					<li><a href="#4_16" title="Inherited from Uize.Widget.">4.16. html</a></li>
-					<li><a href="#4_17" title="Inherited from Uize.Widget.">4.17. idPrefix</a></li>
-					<li><a href="#4_18" title="Inherited from Uize.Widget.">4.18. idPrefixConstruction</a></li>
-					<li><a href="#4_19" title="IMPLEMENTATION INFO">4.19. inputWidgetClass</a></li>
-					<li><a href="#4_20" title="IMPLEMENTATION INFO">4.20. inputWidgetProperties</a></li>
-					<li><a href="#4_21" title="Inherited from Uize.Widget.">4.21. insertionMode</a></li>
-					<li><a href="#4_22" title="Inherited from Uize.Widget.FormElement.">4.22. isDirty</a></li>
-					<li><a href="#4_23" title="Inherited from Uize.Widget.FormElement.">4.23. isDirtyInherited</a></li>
-					<li><a href="#4_24" title="Inherited from Uize.Widget.FormElement.">4.24. isEmpty</a></li>
-					<li><a href="#4_25" title="Inherited from Uize.Widget.FormElement.">4.25. isFinished</a></li>
-					<li><a href="#4_26" title="Inherited from Uize.Widget.FormElement.">4.26. isValid</a></li>
-					<li><a href="#4_27" title="Inherited from Uize.Widget.">4.27. localized</a></li>
-					<li><a href="#4_28" title="Inherited from Uize.Widget.">4.28. name</a></li>
-					<li><a href="#4_29" title="Inherited from Uize.Widget.">4.29. nodeMap</a></li>
-					<li><a href="#4_30" title="IMPLEMENTATION INFO">4.30. pipedProperties</a></li>
-					<li><a href="#4_31" title="IMPLEMENTATION INFO">4.31. selectorButtonWidgetClass</a></li>
-					<li><a href="#4_32" title="Inherited from Uize.Widget.Picker.">4.32. selectorButtonWidgetProperties</a></li>
-					<li><a href="#4_33" title="Inherited from Uize.Widget.FormElement.">4.33. tentativeValue</a></li>
-					<li><a href="#4_34" title="Inherited from Uize.Widget.FormElement.">4.34. type</a></li>
-					<li><a href="#4_35" title="Inherited from Uize.Widget.FormElement.">4.35. validateWhen</a></li>
-					<li><a href="#4_36" title="Inherited from Uize.Widget.FormElement.">4.36. validator</a></li>
-					<li><a href="#4_37" title="Inherited from Uize.Widget.FormElement.">4.37. value</a></li>
-					<li><a href="#4_38" title="Inherited from Uize.Widget.FormElement.">4.38. valueConformer</a></li>
-					<li><a href="#4_39" title="Inherited from Uize.Widget.Picker.">4.39. valueDetails</a></li>
-					<li><a href="#4_40" title="Inherited from Uize.Widget.Picker.">4.40. valueFormatter</a></li>
-					<li><a href="#4_41" title="Inherited from Uize.Widget.FormElement.">4.41. warningAllowed</a></li>
-					<li><a href="#4_42" title="Inherited from Uize.Widget.FormElement.">4.42. warningAllowedInherited</a></li>
-					<li><a href="#4_43" title="Inherited from Uize.Widget.FormElement.">4.43. warningMessage</a></li>
-					<li><a href="#4_44" title="Inherited from Uize.Widget.FormElement.">4.44. warningMessageProperties</a></li>
-					<li><a href="#4_45" title="Inherited from Uize.Widget.FormElement.">4.45. warningShown</a></li>
-					<li><a href="#4_46" title="Inherited from Uize.Widget.FormElement.">4.46. warningShownWhen</a></li>
-					<li><a href="#4_47" title="Inherited from Uize.Widget.">4.47. wired</a></li>
+					<li><a href="#4_1" title="Inherited from Uize.Widget.">4.1. built</a></li>
+					<li><a href="#4_2" title="Inherited from Uize.Widget.">4.2. busy</a></li>
+					<li><a href="#4_3" title="Inherited from Uize.Widget.">4.3. busyInherited</a></li>
+					<li><a href="#4_4" title="Inherited from Uize.Widget.">4.4. children</a></li>
+					<li><a href="#4_5" title="Inherited from Uize.Widget.">4.5. container</a></li>
+					<li><a href="#4_6" title="Inherited from Uize.Widget.FormElement.">4.6. elementName</a></li>
+					<li><a href="#4_7" title="Inherited from Uize.Widget.">4.7. enabled</a></li>
+					<li><a href="#4_8" title="Inherited from Uize.Widget.">4.8. enabledInherited</a></li>
+					<li><a href="#4_9" title="Inherited from Uize.Widget.FormElement.">4.9. errorClassName</a></li>
+					<li><a href="#4_10" title="Inherited from Uize.Widget.FormElement.">4.10. focused</a></li>
+					<li><a href="#4_11" title="Inherited from Uize.Widget.">4.11. html</a></li>
+					<li><a href="#4_12" title="Inherited from Uize.Widget.">4.12. idPrefix</a></li>
+					<li><a href="#4_13" title="Inherited from Uize.Widget.">4.13. idPrefixConstruction</a></li>
+					<li><a href="#4_14" title="Inherited from Uize.Widget.">4.14. insertionMode</a></li>
+					<li><a href="#4_15" title="Inherited from Uize.Widget.FormElement.">4.15. isDirty</a></li>
+					<li><a href="#4_16" title="Inherited from Uize.Widget.FormElement.">4.16. isDirtyInherited</a></li>
+					<li><a href="#4_17" title="Inherited from Uize.Widget.FormElement.">4.17. isEmpty</a></li>
+					<li><a href="#4_18" title="Inherited from Uize.Widget.FormElement.">4.18. isFinished</a></li>
+					<li><a href="#4_19" title="Inherited from Uize.Widget.FormElement.">4.19. isValid</a></li>
+					<li><a href="#4_20" title="Inherited from Uize.Widget.">4.20. localized</a></li>
+					<li><a href="#4_21" title="Inherited from Uize.Widget.">4.21. name</a></li>
+					<li><a href="#4_22" title="Inherited from Uize.Widget.">4.22. nodeMap</a></li>
+					<li><a href="#4_23" title="Inherited from Uize.Widget.FormElement.">4.23. tentativeValue</a></li>
+					<li><a href="#4_24" title="Inherited from Uize.Widget.FormElement.">4.24. type</a></li>
+					<li><a href="#4_25" title="Inherited from Uize.Widget.FormElement.">4.25. validateWhen</a></li>
+					<li><a href="#4_26" title="Inherited from Uize.Widget.FormElement.">4.26. validator</a></li>
+					<li><a href="#4_27" title="Inherited from Uize.Widget.FormElement.">4.27. value</a></li>
+					<li><a href="#4_28" title="Inherited from Uize.Widget.FormElement.">4.28. valueConformer</a></li>
+					<li><a href="#4_29" title="IMPLEMENTATION INFO">4.29. valueNo</a></li>
+					<li><a href="#4_30" title="IMPLEMENTATION INFO">4.30. values</a></li>
+					<li><a href="#4_31" title="Inherited from Uize.Widget.FormElement.">4.31. warningAllowed</a></li>
+					<li><a href="#4_32" title="Inherited from Uize.Widget.FormElement.">4.32. warningAllowedInherited</a></li>
+					<li><a href="#4_33" title="Inherited from Uize.Widget.FormElement.">4.33. warningMessage</a></li>
+					<li><a href="#4_34" title="Inherited from Uize.Widget.FormElement.">4.34. warningMessageProperties</a></li>
+					<li><a href="#4_35" title="Inherited from Uize.Widget.FormElement.">4.35. warningShown</a></li>
+					<li><a href="#4_36" title="Inherited from Uize.Widget.FormElement.">4.36. warningShownWhen</a></li>
+					<li><a href="#4_37" title="Inherited from Uize.Widget.">4.37. wired</a></li>
 				</ul>
 			</li>
 			<li><a href="#5">5. Static Methods</a>
 				<ul>
-					<li><a href="#5_1" title="Inherited from Uize.">5.1. Uize.Widget.Picker.FilteredInput.fire</a></li>
-					<li><a href="#5_2" title="Inherited from Uize.">5.2. Uize.Widget.Picker.FilteredInput.get</a></li>
-					<li><a href="#5_3" title="Inherited from Uize.Widget.">5.3. Uize.Widget.Picker.FilteredInput.getBlankImageUrl</a></li>
-					<li><a href="#5_4" title="Inherited from Uize.">5.4. Uize.Widget.Picker.FilteredInput.registerProperties</a></li>
-					<li><a href="#5_5" title="Inherited from Uize.">5.5. Uize.Widget.Picker.FilteredInput.set</a></li>
-					<li><a href="#5_6" title="Inherited from Uize.Widget.">5.6. Uize.Widget.Picker.FilteredInput.spawn</a></li>
-					<li><a href="#5_7" title="Inherited from Uize.">5.7. Uize.Widget.Picker.FilteredInput.subclass</a></li>
-					<li><a href="#5_8" title="Inherited from Uize.">5.8. Uize.Widget.Picker.FilteredInput.toggle</a></li>
-					<li><a href="#5_9" title="Inherited from Uize.">5.9. Uize.Widget.Picker.FilteredInput.unwire</a></li>
-					<li><a href="#5_10" title="Inherited from Uize.">5.10. Uize.Widget.Picker.FilteredInput.wire</a></li>
+					<li><a href="#5_1" title="Inherited from Uize.">5.1. Uize.Widget.FormElement.Select.fire</a></li>
+					<li><a href="#5_2" title="Inherited from Uize.">5.2. Uize.Widget.FormElement.Select.get</a></li>
+					<li><a href="#5_3" title="Inherited from Uize.Widget.">5.3. Uize.Widget.FormElement.Select.getBlankImageUrl</a></li>
+					<li><a href="#5_4" title="Inherited from Uize.">5.4. Uize.Widget.FormElement.Select.registerProperties</a></li>
+					<li><a href="#5_5" title="Inherited from Uize.">5.5. Uize.Widget.FormElement.Select.set</a></li>
+					<li><a href="#5_6" title="Inherited from Uize.Widget.">5.6. Uize.Widget.FormElement.Select.spawn</a></li>
+					<li><a href="#5_7" title="Inherited from Uize.">5.7. Uize.Widget.FormElement.Select.subclass</a></li>
+					<li><a href="#5_8" title="Inherited from Uize.">5.8. Uize.Widget.FormElement.Select.toggle</a></li>
+					<li><a href="#5_9" title="Inherited from Uize.">5.9. Uize.Widget.FormElement.Select.unwire</a></li>
+					<li><a href="#5_10" title="Inherited from Uize.">5.10. Uize.Widget.FormElement.Select.wire</a></li>
 				</ul>
 			</li>
 			<li><a href="#6">6. Static Properties</a>
 				<ul>
-					<li><a href="#6_1" title="Inherited from Uize.Widget.">6.1. Uize.Widget.Picker.FilteredInput.isWired</a></li>
-					<li><a href="#6_2" title="IMPLEMENTATION INFO">6.2. Uize.Widget.Picker.FilteredInput.moduleName</a></li>
-					<li><a href="#6_3" title="IMPLEMENTATION INFO">6.3. Uize.Widget.Picker.FilteredInput.nonInheritableStatics</a></li>
+					<li><a href="#6_1" title="Inherited from Uize.Widget.">6.1. Uize.Widget.FormElement.Select.isWired</a></li>
+					<li><a href="#6_2" title="IMPLEMENTATION INFO">6.2. Uize.Widget.FormElement.Select.moduleName</a></li>
+					<li><a href="#6_3" title="IMPLEMENTATION INFO">6.3. Uize.Widget.FormElement.Select.nonInheritableStatics</a></li>
 				</ul>
 			</li>
 		</ul>
@@ -182,30 +173,30 @@
 	<a name="1"></a>
 	<h1 class="heading1" title="1. Introduction"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>. </span>Introduction</h1>
 	<div class="contents1">
-		<p>The <code>Uize.Widget.Picker.FilteredInput</code> class implements a filtered input picker widget, using a deferred loaded filtered input picker modal dialog to let the user select from an input.</p>
+		<p>The <code>Uize.Widget.FormElement.Select</code> class serves a wrapper class in order to provide a beter programmable interface to a <select> form element.</p>
 		
 		<p><b>DEVELOPERS:</b> <a href="http://www.benmvp.com" target="_blank" class="externalSiteLink">Ben Ilegbodu</a></p>
 		
 		<a name="1_1"></a>
 		<h2 class="heading2" title="1. Introduction -&gt; 1.1. Examples"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. Examples">1</a>. </span>Examples</h2>
 		<div class="contents2">
-			<p>There are no dedicated showcase example pages for the <code>Uize.Widget.Picker.FilteredInput</code> module.</p>
+			<p>There are no dedicated showcase example pages for the <code>Uize.Widget.FormElement.Select</code> module.</p>
 			
 			<p><span class="allCaps">SEARCH FOR EXAMPLES</span></p>
 			
-			<p>Use the link below to search for example pages on the <b>uize.com</b> Web site that reference the <code>Uize.Widget.Picker.FilteredInput</code> module...</p>
+			<p>Use the link below to search for example pages on the <b>uize.com</b> Web site that reference the <code>Uize.Widget.FormElement.Select</code> module...</p>
 			
-			<p><a href="http://www.google.com/search?hl=en&safe=off&domains=uize.com%2Fexamples&sitesearch=uize.com%2Fexamples&q=%22Uize.Widget.Picker.FilteredInput%22" target="_blank" class="externalSiteLink">SEARCH</a></p>
+			<p><a href="http://www.google.com/search?hl=en&safe=off&domains=uize.com%2Fexamples&sitesearch=uize.com%2Fexamples&q=%22Uize.Widget.FormElement.Select%22" target="_blank" class="externalSiteLink">SEARCH</a></p>
 		</div>
 		
 		<a name="1_2"></a>
 		<h2 class="heading2" title="1. Introduction -&gt; 1.2. Implementation Info"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>. </span>Implementation Info</h2>
 		<div class="contents2">
-			<p>The <code>Uize.Widget.Picker.FilteredInput</code> module defines the <code>Uize.Widget.Picker.FilteredInput</code> class, which is a subclass of <code><a href="../reference/Uize.Widget.Picker.html">Uize.Widget.Picker</a></code>.</p>
+			<p>The <code>Uize.Widget.FormElement.Select</code> module defines the <code>Uize.Widget.FormElement.Select</code> class, which is a subclass of <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>.</p>
 			
 			<p><span class="allCaps">INHERITANCE CHAIN</span></p>
 			
-			<p><code><a href="../reference/Uize.html">Uize</a></code> -> <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> -> <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code> -> <code><a href="../reference/Uize.Widget.Picker.html">Uize.Widget.Picker</a></code> -> <code>Uize.Widget.Picker.FilteredInput</code></p>
+			<p><code><a href="../reference/Uize.html">Uize</a></code> -> <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> -> <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code> -> <code>Uize.Widget.FormElement.Select</code></p>
 			
 			<a name="1_2_1"></a>
 			<h3 class="heading3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.1. Features Introduced in This Module"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>.<a href="#1_2_1" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.1. Features Introduced in This Module">1</a>. </span>Features Introduced in This Module</h3>
@@ -214,7 +205,7 @@
 				
 				<p><span class="allCaps">SET-GET PROPERTIES</span></p>
 				
-				<p><code><a href="#4_13">filter</a></code> | <code><a href="#4_14">filters</a></code> | <code><a href="#4_19">inputWidgetClass</a></code> | <code><a href="#4_20">inputWidgetProperties</a></code></p>
+				<p><code><a href="#4_29">valueNo</a></code> | <code><a href="#4_30">values</a></code></p>
 			</div>
 			
 			<a name="1_2_2"></a>
@@ -226,15 +217,11 @@
 				
 				<p><span class="allCaps">INSTANCE METHODS</span></p>
 				
-				<p><code><a href="#2_12">getDialogWidgetProperties</a></code> | <code><a href="#2_43">updateUi</a></code></p>
-				
-				<p><span class="allCaps">SET-GET PROPERTIES</span></p>
-				
-				<p><code><a href="#4_8">dialogWidgetClass</a></code> | <code><a href="#4_30">pipedProperties</a></code> | <code><a href="#4_31">selectorButtonWidgetClass</a></code></p>
+				<p><code><a href="#2_48">wireUi</a></code></p>
 				
 				<p><span class="allCaps">STATIC PROPERTIES</span></p>
 				
-				<p><code><a href="#6_2">Uize.Widget.Picker.FilteredInput.moduleName</a></code> | <code><a href="#6_3">Uize.Widget.Picker.FilteredInput.nonInheritableStatics</a></code></p>
+				<p><code><a href="#6_2">Uize.Widget.FormElement.Select.moduleName</a></code> | <code><a href="#6_3">Uize.Widget.FormElement.Select.nonInheritableStatics</a></code></p>
 			</div>
 			
 			<a name="1_2_3"></a>
@@ -246,7 +233,7 @@
 				
 				<p><span class="allCaps">INSTANCE METHODS</span></p>
 				
-				<p><code><a href="#2_1">addChild</a></code> | <code><a href="#2_2">ajax</a></code> | <code><a href="#2_3">buildHtml</a></code> | <code><a href="#2_4">callInherited</a></code> | <code><a href="#2_5">checkIsEmpty</a></code> | <code><a href="#2_6">checkWarningShown</a></code> | <code><a href="#2_7">confirm</a></code> | <code><a href="#2_8">displayNode</a></code> | <code><a href="#2_9">fire</a></code> | <code><a href="#2_10">flushNodeCache</a></code> | <code><a href="#2_11">get</a></code> | <code><a href="#2_13">getInherited</a></code> | <code><a href="#2_14">getNode</a></code> | <code><a href="#2_15">getNodeStyle</a></code> | <code><a href="#2_16">getNodeValue</a></code> | <code><a href="#2_17">getProvider</a></code> | <code><a href="#2_18">globalizeNode</a></code> | <code><a href="#2_19">inform</a></code> | <code><a href="#2_20">injectNodeHtml</a></code> | <code><a href="#2_21">insertOrWireUi</a></code> | <code><a href="#2_22">insertUi</a></code> | <code><a href="#2_23">kill</a></code> | <code><a href="#2_24">localize</a></code> | <code><a href="#2_25">removeChild</a></code> | <code><a href="#2_26">removeNode</a></code> | <code><a href="#2_27">removeUi</a></code> | <code><a href="#2_28">restore</a></code> | <code><a href="#2_29">set</a></code> | <code><a href="#2_30">setInherited</a></code> | <code><a href="#2_31">setNodeClipRect</a></code> | <code><a href="#2_32">setNodeInnerHtml</a></code> | <code><a href="#2_33">setNodeOpacity</a></code> | <code><a href="#2_34">setNodeProperties</a></code> | <code><a href="#2_35">setNodeStyle</a></code> | <code><a href="#2_36">setNodeValue</a></code> | <code><a href="#2_37">showNode</a></code> | <code><a href="#2_38">toggle</a></code> | <code><a href="#2_39">unwire</a></code> | <code><a href="#2_40">unwireNode</a></code> | <code><a href="#2_41">unwireNodeEventsByMatch</a></code> | <code><a href="#2_42">unwireUi</a></code> | <code><a href="#2_44">validate</a></code> | <code><a href="#2_45">wire</a></code> | <code><a href="#2_46">wireNode</a></code> | <code><a href="#2_47">wireUi</a></code></p>
+				<p><code><a href="#2_1">addChild</a></code> | <code><a href="#2_2">ajax</a></code> | <code><a href="#2_3">buildHtml</a></code> | <code><a href="#2_4">callInherited</a></code> | <code><a href="#2_5">checkIsEmpty</a></code> | <code><a href="#2_6">checkWarningShown</a></code> | <code><a href="#2_7">confirm</a></code> | <code><a href="#2_8">displayNode</a></code> | <code><a href="#2_9">fire</a></code> | <code><a href="#2_10">fireOkOnEnter</a></code> | <code><a href="#2_11">flushNodeCache</a></code> | <code><a href="#2_12">get</a></code> | <code><a href="#2_13">getInherited</a></code> | <code><a href="#2_14">getNode</a></code> | <code><a href="#2_15">getNodeStyle</a></code> | <code><a href="#2_16">getNodeValue</a></code> | <code><a href="#2_17">getProvider</a></code> | <code><a href="#2_18">getRootNode</a></code> | <code><a href="#2_19">globalizeNode</a></code> | <code><a href="#2_20">inform</a></code> | <code><a href="#2_21">injectNodeHtml</a></code> | <code><a href="#2_22">insertOrWireUi</a></code> | <code><a href="#2_23">insertUi</a></code> | <code><a href="#2_24">kill</a></code> | <code><a href="#2_25">localize</a></code> | <code><a href="#2_26">removeChild</a></code> | <code><a href="#2_27">removeNode</a></code> | <code><a href="#2_28">removeUi</a></code> | <code><a href="#2_29">restore</a></code> | <code><a href="#2_30">set</a></code> | <code><a href="#2_31">setInherited</a></code> | <code><a href="#2_32">setNodeClipRect</a></code> | <code><a href="#2_33">setNodeInnerHtml</a></code> | <code><a href="#2_34">setNodeOpacity</a></code> | <code><a href="#2_35">setNodeProperties</a></code> | <code><a href="#2_36">setNodeStyle</a></code> | <code><a href="#2_37">setNodeValue</a></code> | <code><a href="#2_38">showNode</a></code> | <code><a href="#2_39">toggle</a></code> | <code><a href="#2_40">unwire</a></code> | <code><a href="#2_41">unwireNode</a></code> | <code><a href="#2_42">unwireNodeEventsByMatch</a></code> | <code><a href="#2_43">unwireUi</a></code> | <code><a href="#2_44">updateUi</a></code> | <code><a href="#2_45">validate</a></code> | <code><a href="#2_46">wire</a></code> | <code><a href="#2_47">wireNode</a></code></p>
 				
 				<p><span class="allCaps">INSTANCE PROPERTIES</span></p>
 				
@@ -254,15 +241,15 @@
 				
 				<p><span class="allCaps">SET-GET PROPERTIES</span></p>
 				
-				<p><code><a href="#4_1">allowManualEntry</a></code> | <code><a href="#4_2">built</a></code> | <code><a href="#4_3">busy</a></code> | <code><a href="#4_4">busyInherited</a></code> | <code><a href="#4_5">children</a></code> | <code><a href="#4_6">container</a></code> | <code><a href="#4_7">dialogComponent</a></code> | <code><a href="#4_9">elementName</a></code> | <code><a href="#4_10">enabled</a></code> | <code><a href="#4_11">enabledInherited</a></code> | <code><a href="#4_12">errorClassName</a></code> | <code><a href="#4_15">focused</a></code> | <code><a href="#4_16">html</a></code> | <code><a href="#4_17">idPrefix</a></code> | <code><a href="#4_18">idPrefixConstruction</a></code> | <code><a href="#4_21">insertionMode</a></code> | <code><a href="#4_22">isDirty</a></code> | <code><a href="#4_23">isDirtyInherited</a></code> | <code><a href="#4_24">isEmpty</a></code> | <code><a href="#4_25">isFinished</a></code> | <code><a href="#4_26">isValid</a></code> | <code><a href="#4_27">localized</a></code> | <code><a href="#4_28">name</a></code> | <code><a href="#4_29">nodeMap</a></code> | <code><a href="#4_32">selectorButtonWidgetProperties</a></code> | <code><a href="#4_33">tentativeValue</a></code> | <code><a href="#4_34">type</a></code> | <code><a href="#4_35">validateWhen</a></code> | <code><a href="#4_36">validator</a></code> | <code><a href="#4_37">value</a></code> | <code><a href="#4_38">valueConformer</a></code> | <code><a href="#4_39">valueDetails</a></code> | <code><a href="#4_40">valueFormatter</a></code> | <code><a href="#4_41">warningAllowed</a></code> | <code><a href="#4_42">warningAllowedInherited</a></code> | <code><a href="#4_43">warningMessage</a></code> | <code><a href="#4_44">warningMessageProperties</a></code> | <code><a href="#4_45">warningShown</a></code> | <code><a href="#4_46">warningShownWhen</a></code> | <code><a href="#4_47">wired</a></code></p>
+				<p><code><a href="#4_1">built</a></code> | <code><a href="#4_2">busy</a></code> | <code><a href="#4_3">busyInherited</a></code> | <code><a href="#4_4">children</a></code> | <code><a href="#4_5">container</a></code> | <code><a href="#4_6">elementName</a></code> | <code><a href="#4_7">enabled</a></code> | <code><a href="#4_8">enabledInherited</a></code> | <code><a href="#4_9">errorClassName</a></code> | <code><a href="#4_10">focused</a></code> | <code><a href="#4_11">html</a></code> | <code><a href="#4_12">idPrefix</a></code> | <code><a href="#4_13">idPrefixConstruction</a></code> | <code><a href="#4_14">insertionMode</a></code> | <code><a href="#4_15">isDirty</a></code> | <code><a href="#4_16">isDirtyInherited</a></code> | <code><a href="#4_17">isEmpty</a></code> | <code><a href="#4_18">isFinished</a></code> | <code><a href="#4_19">isValid</a></code> | <code><a href="#4_20">localized</a></code> | <code><a href="#4_21">name</a></code> | <code><a href="#4_22">nodeMap</a></code> | <code><a href="#4_23">tentativeValue</a></code> | <code><a href="#4_24">type</a></code> | <code><a href="#4_25">validateWhen</a></code> | <code><a href="#4_26">validator</a></code> | <code><a href="#4_27">value</a></code> | <code><a href="#4_28">valueConformer</a></code> | <code><a href="#4_31">warningAllowed</a></code> | <code><a href="#4_32">warningAllowedInherited</a></code> | <code><a href="#4_33">warningMessage</a></code> | <code><a href="#4_34">warningMessageProperties</a></code> | <code><a href="#4_35">warningShown</a></code> | <code><a href="#4_36">warningShownWhen</a></code> | <code><a href="#4_37">wired</a></code></p>
 				
 				<p><span class="allCaps">STATIC METHODS</span></p>
 				
-				<p><code><a href="#5_1">Uize.Widget.Picker.FilteredInput.fire</a></code> | <code><a href="#5_2">Uize.Widget.Picker.FilteredInput.get</a></code> | <code><a href="#5_3">Uize.Widget.Picker.FilteredInput.getBlankImageUrl</a></code> | <code><a href="#5_4">Uize.Widget.Picker.FilteredInput.registerProperties</a></code> | <code><a href="#5_5">Uize.Widget.Picker.FilteredInput.set</a></code> | <code><a href="#5_6">Uize.Widget.Picker.FilteredInput.spawn</a></code> | <code><a href="#5_7">Uize.Widget.Picker.FilteredInput.subclass</a></code> | <code><a href="#5_8">Uize.Widget.Picker.FilteredInput.toggle</a></code> | <code><a href="#5_9">Uize.Widget.Picker.FilteredInput.unwire</a></code> | <code><a href="#5_10">Uize.Widget.Picker.FilteredInput.wire</a></code></p>
+				<p><code><a href="#5_1">Uize.Widget.FormElement.Select.fire</a></code> | <code><a href="#5_2">Uize.Widget.FormElement.Select.get</a></code> | <code><a href="#5_3">Uize.Widget.FormElement.Select.getBlankImageUrl</a></code> | <code><a href="#5_4">Uize.Widget.FormElement.Select.registerProperties</a></code> | <code><a href="#5_5">Uize.Widget.FormElement.Select.set</a></code> | <code><a href="#5_6">Uize.Widget.FormElement.Select.spawn</a></code> | <code><a href="#5_7">Uize.Widget.FormElement.Select.subclass</a></code> | <code><a href="#5_8">Uize.Widget.FormElement.Select.toggle</a></code> | <code><a href="#5_9">Uize.Widget.FormElement.Select.unwire</a></code> | <code><a href="#5_10">Uize.Widget.FormElement.Select.wire</a></code></p>
 				
 				<p><span class="allCaps">STATIC PROPERTIES</span></p>
 				
-				<p><code><a href="#6_1">Uize.Widget.Picker.FilteredInput.isWired</a></code></p>
+				<p><code><a href="#6_1">Uize.Widget.FormElement.Select.isWired</a></code></p>
 			</div>
 			
 			<a name="1_2_4"></a>
@@ -274,7 +261,7 @@
 			<a name="1_2_5"></a>
 			<h3 class="heading3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.5. Unit Tests"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>.<a href="#1_2_5" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.5. Unit Tests">5</a>. </span>Unit Tests</h3>
 			<div class="contents3">
-				<p>There is no dedicated unit tests module for the <code>Uize.Widget.Picker.FilteredInput</code> module.</p>
+				<p>There is no dedicated unit tests module for the <code>Uize.Widget.FormElement.Select</code> module.</p>
 			</div>
 		</div>
 	</div>
@@ -391,7 +378,19 @@
 		</div>
 		
 		<a name="2_10"></a>
-		<h2 class="heading2" title="2. Instance Methods -&gt; 2.10. flushNodeCache"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_10" title="2. Instance Methods -&gt; 2.10. flushNodeCache">10</a>. </span>flushNodeCache</h2>
+		<h2 class="heading2" title="2. Instance Methods -&gt; 2.10. fireOkOnEnter"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_10" title="2. Instance Methods -&gt; 2.10. fireOkOnEnter">10</a>. </span>fireOkOnEnter</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>, first introduced in <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_11"></a>
+		<h2 class="heading2" title="2. Instance Methods -&gt; 2.11. flushNodeCache"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_11" title="2. Instance Methods -&gt; 2.11. flushNodeCache">11</a>. </span>flushNodeCache</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -402,8 +401,8 @@
 			</table>
 		</div>
 		
-		<a name="2_11"></a>
-		<h2 class="heading2" title="2. Instance Methods -&gt; 2.11. get"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_11" title="2. Instance Methods -&gt; 2.11. get">11</a>. </span>get</h2>
+		<a name="2_12"></a>
+		<h2 class="heading2" title="2. Instance Methods -&gt; 2.12. get"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_12" title="2. Instance Methods -&gt; 2.12. get">12</a>. </span>get</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
 			
@@ -411,16 +410,6 @@
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
-			</table>
-		</div>
-		
-		<a name="2_12"></a>
-		<h2 class="heading2" title="2. Instance Methods -&gt; 2.12. getDialogWidgetProperties"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_12" title="2. Instance Methods -&gt; 2.12. getDialogWidgetProperties">12</a>. </span>getDialogWidgetProperties</h2>
-		<div class="contents2">
-			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
-			
-			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an override of an inherited feature (implementation is in this module, first introduced in <code><a href="../reference/Uize.Widget.Picker.html">Uize.Widget.Picker</a></code>)</td></tr>
 			</table>
 		</div>
 		
@@ -485,19 +474,19 @@
 		</div>
 		
 		<a name="2_18"></a>
-		<h2 class="heading2" title="2. Instance Methods -&gt; 2.18. globalizeNode"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_18" title="2. Instance Methods -&gt; 2.18. globalizeNode">18</a>. </span>globalizeNode</h2>
+		<h2 class="heading2" title="2. Instance Methods -&gt; 2.18. getRootNode"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_18" title="2. Instance Methods -&gt; 2.18. getRootNode">18</a>. </span>getRootNode</h2>
 		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			<p>Inherited from <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>.</p>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>, first introduced in <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>)</td></tr>
 			</table>
 		</div>
 		
 		<a name="2_19"></a>
-		<h2 class="heading2" title="2. Instance Methods -&gt; 2.19. inform"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_19" title="2. Instance Methods -&gt; 2.19. inform">19</a>. </span>inform</h2>
+		<h2 class="heading2" title="2. Instance Methods -&gt; 2.19. globalizeNode"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_19" title="2. Instance Methods -&gt; 2.19. globalizeNode">19</a>. </span>globalizeNode</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -509,7 +498,7 @@
 		</div>
 		
 		<a name="2_20"></a>
-		<h2 class="heading2" title="2. Instance Methods -&gt; 2.20. injectNodeHtml"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_20" title="2. Instance Methods -&gt; 2.20. injectNodeHtml">20</a>. </span>injectNodeHtml</h2>
+		<h2 class="heading2" title="2. Instance Methods -&gt; 2.20. inform"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_20" title="2. Instance Methods -&gt; 2.20. inform">20</a>. </span>inform</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -521,7 +510,7 @@
 		</div>
 		
 		<a name="2_21"></a>
-		<h2 class="heading2" title="2. Instance Methods -&gt; 2.21. insertOrWireUi"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_21" title="2. Instance Methods -&gt; 2.21. insertOrWireUi">21</a>. </span>insertOrWireUi</h2>
+		<h2 class="heading2" title="2. Instance Methods -&gt; 2.21. injectNodeHtml"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_21" title="2. Instance Methods -&gt; 2.21. injectNodeHtml">21</a>. </span>injectNodeHtml</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -533,7 +522,7 @@
 		</div>
 		
 		<a name="2_22"></a>
-		<h2 class="heading2" title="2. Instance Methods -&gt; 2.22. insertUi"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_22" title="2. Instance Methods -&gt; 2.22. insertUi">22</a>. </span>insertUi</h2>
+		<h2 class="heading2" title="2. Instance Methods -&gt; 2.22. insertOrWireUi"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_22" title="2. Instance Methods -&gt; 2.22. insertOrWireUi">22</a>. </span>insertOrWireUi</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -545,19 +534,7 @@
 		</div>
 		
 		<a name="2_23"></a>
-		<h2 class="heading2" title="2. Instance Methods -&gt; 2.23. kill"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_23" title="2. Instance Methods -&gt; 2.23. kill">23</a>. </span>kill</h2>
-		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, but introduced in <code><a href="../reference/Uize.html">Uize</a></code>.</p>
-			
-			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
-			
-			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
-			</table>
-		</div>
-		
-		<a name="2_24"></a>
-		<h2 class="heading2" title="2. Instance Methods -&gt; 2.24. localize"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_24" title="2. Instance Methods -&gt; 2.24. localize">24</a>. </span>localize</h2>
+		<h2 class="heading2" title="2. Instance Methods -&gt; 2.23. insertUi"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_23" title="2. Instance Methods -&gt; 2.23. insertUi">23</a>. </span>insertUi</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -568,8 +545,20 @@
 			</table>
 		</div>
 		
+		<a name="2_24"></a>
+		<h2 class="heading2" title="2. Instance Methods -&gt; 2.24. kill"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_24" title="2. Instance Methods -&gt; 2.24. kill">24</a>. </span>kill</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, but introduced in <code><a href="../reference/Uize.html">Uize</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			</table>
+		</div>
+		
 		<a name="2_25"></a>
-		<h2 class="heading2" title="2. Instance Methods -&gt; 2.25. removeChild"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_25" title="2. Instance Methods -&gt; 2.25. removeChild">25</a>. </span>removeChild</h2>
+		<h2 class="heading2" title="2. Instance Methods -&gt; 2.25. localize"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_25" title="2. Instance Methods -&gt; 2.25. localize">25</a>. </span>localize</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -581,7 +570,7 @@
 		</div>
 		
 		<a name="2_26"></a>
-		<h2 class="heading2" title="2. Instance Methods -&gt; 2.26. removeNode"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_26" title="2. Instance Methods -&gt; 2.26. removeNode">26</a>. </span>removeNode</h2>
+		<h2 class="heading2" title="2. Instance Methods -&gt; 2.26. removeChild"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_26" title="2. Instance Methods -&gt; 2.26. removeChild">26</a>. </span>removeChild</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -593,7 +582,7 @@
 		</div>
 		
 		<a name="2_27"></a>
-		<h2 class="heading2" title="2. Instance Methods -&gt; 2.27. removeUi"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_27" title="2. Instance Methods -&gt; 2.27. removeUi">27</a>. </span>removeUi</h2>
+		<h2 class="heading2" title="2. Instance Methods -&gt; 2.27. removeNode"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_27" title="2. Instance Methods -&gt; 2.27. removeNode">27</a>. </span>removeNode</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -605,31 +594,7 @@
 		</div>
 		
 		<a name="2_28"></a>
-		<h2 class="heading2" title="2. Instance Methods -&gt; 2.28. restore"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_28" title="2. Instance Methods -&gt; 2.28. restore">28</a>. </span>restore</h2>
-		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>.</p>
-			
-			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
-			
-			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>, first introduced in <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>)</td></tr>
-			</table>
-		</div>
-		
-		<a name="2_29"></a>
-		<h2 class="heading2" title="2. Instance Methods -&gt; 2.29. set"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_29" title="2. Instance Methods -&gt; 2.29. set">29</a>. </span>set</h2>
-		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
-			
-			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
-			
-			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
-			</table>
-		</div>
-		
-		<a name="2_30"></a>
-		<h2 class="heading2" title="2. Instance Methods -&gt; 2.30. setInherited"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_30" title="2. Instance Methods -&gt; 2.30. setInherited">30</a>. </span>setInherited</h2>
+		<h2 class="heading2" title="2. Instance Methods -&gt; 2.28. removeUi"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_28" title="2. Instance Methods -&gt; 2.28. removeUi">28</a>. </span>removeUi</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -640,8 +605,32 @@
 			</table>
 		</div>
 		
+		<a name="2_29"></a>
+		<h2 class="heading2" title="2. Instance Methods -&gt; 2.29. restore"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_29" title="2. Instance Methods -&gt; 2.29. restore">29</a>. </span>restore</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>, first introduced in <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_30"></a>
+		<h2 class="heading2" title="2. Instance Methods -&gt; 2.30. set"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_30" title="2. Instance Methods -&gt; 2.30. set">30</a>. </span>set</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			</table>
+		</div>
+		
 		<a name="2_31"></a>
-		<h2 class="heading2" title="2. Instance Methods -&gt; 2.31. setNodeClipRect"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_31" title="2. Instance Methods -&gt; 2.31. setNodeClipRect">31</a>. </span>setNodeClipRect</h2>
+		<h2 class="heading2" title="2. Instance Methods -&gt; 2.31. setInherited"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_31" title="2. Instance Methods -&gt; 2.31. setInherited">31</a>. </span>setInherited</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -653,7 +642,7 @@
 		</div>
 		
 		<a name="2_32"></a>
-		<h2 class="heading2" title="2. Instance Methods -&gt; 2.32. setNodeInnerHtml"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_32" title="2. Instance Methods -&gt; 2.32. setNodeInnerHtml">32</a>. </span>setNodeInnerHtml</h2>
+		<h2 class="heading2" title="2. Instance Methods -&gt; 2.32. setNodeClipRect"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_32" title="2. Instance Methods -&gt; 2.32. setNodeClipRect">32</a>. </span>setNodeClipRect</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -665,7 +654,7 @@
 		</div>
 		
 		<a name="2_33"></a>
-		<h2 class="heading2" title="2. Instance Methods -&gt; 2.33. setNodeOpacity"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_33" title="2. Instance Methods -&gt; 2.33. setNodeOpacity">33</a>. </span>setNodeOpacity</h2>
+		<h2 class="heading2" title="2. Instance Methods -&gt; 2.33. setNodeInnerHtml"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_33" title="2. Instance Methods -&gt; 2.33. setNodeInnerHtml">33</a>. </span>setNodeInnerHtml</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -677,7 +666,7 @@
 		</div>
 		
 		<a name="2_34"></a>
-		<h2 class="heading2" title="2. Instance Methods -&gt; 2.34. setNodeProperties"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_34" title="2. Instance Methods -&gt; 2.34. setNodeProperties">34</a>. </span>setNodeProperties</h2>
+		<h2 class="heading2" title="2. Instance Methods -&gt; 2.34. setNodeOpacity"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_34" title="2. Instance Methods -&gt; 2.34. setNodeOpacity">34</a>. </span>setNodeOpacity</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -689,7 +678,7 @@
 		</div>
 		
 		<a name="2_35"></a>
-		<h2 class="heading2" title="2. Instance Methods -&gt; 2.35. setNodeStyle"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_35" title="2. Instance Methods -&gt; 2.35. setNodeStyle">35</a>. </span>setNodeStyle</h2>
+		<h2 class="heading2" title="2. Instance Methods -&gt; 2.35. setNodeProperties"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_35" title="2. Instance Methods -&gt; 2.35. setNodeProperties">35</a>. </span>setNodeProperties</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -701,7 +690,7 @@
 		</div>
 		
 		<a name="2_36"></a>
-		<h2 class="heading2" title="2. Instance Methods -&gt; 2.36. setNodeValue"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_36" title="2. Instance Methods -&gt; 2.36. setNodeValue">36</a>. </span>setNodeValue</h2>
+		<h2 class="heading2" title="2. Instance Methods -&gt; 2.36. setNodeStyle"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_36" title="2. Instance Methods -&gt; 2.36. setNodeStyle">36</a>. </span>setNodeStyle</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -713,7 +702,7 @@
 		</div>
 		
 		<a name="2_37"></a>
-		<h2 class="heading2" title="2. Instance Methods -&gt; 2.37. showNode"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_37" title="2. Instance Methods -&gt; 2.37. showNode">37</a>. </span>showNode</h2>
+		<h2 class="heading2" title="2. Instance Methods -&gt; 2.37. setNodeValue"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_37" title="2. Instance Methods -&gt; 2.37. setNodeValue">37</a>. </span>setNodeValue</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -725,19 +714,19 @@
 		</div>
 		
 		<a name="2_38"></a>
-		<h2 class="heading2" title="2. Instance Methods -&gt; 2.38. toggle"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_38" title="2. Instance Methods -&gt; 2.38. toggle">38</a>. </span>toggle</h2>
+		<h2 class="heading2" title="2. Instance Methods -&gt; 2.38. showNode"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_38" title="2. Instance Methods -&gt; 2.38. showNode">38</a>. </span>showNode</h2>
 		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
 			</table>
 		</div>
 		
 		<a name="2_39"></a>
-		<h2 class="heading2" title="2. Instance Methods -&gt; 2.39. unwire"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_39" title="2. Instance Methods -&gt; 2.39. unwire">39</a>. </span>unwire</h2>
+		<h2 class="heading2" title="2. Instance Methods -&gt; 2.39. toggle"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_39" title="2. Instance Methods -&gt; 2.39. toggle">39</a>. </span>toggle</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
 			
@@ -749,19 +738,19 @@
 		</div>
 		
 		<a name="2_40"></a>
-		<h2 class="heading2" title="2. Instance Methods -&gt; 2.40. unwireNode"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_40" title="2. Instance Methods -&gt; 2.40. unwireNode">40</a>. </span>unwireNode</h2>
+		<h2 class="heading2" title="2. Instance Methods -&gt; 2.40. unwire"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_40" title="2. Instance Methods -&gt; 2.40. unwire">40</a>. </span>unwire</h2>
 		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
 			</table>
 		</div>
 		
 		<a name="2_41"></a>
-		<h2 class="heading2" title="2. Instance Methods -&gt; 2.41. unwireNodeEventsByMatch"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_41" title="2. Instance Methods -&gt; 2.41. unwireNodeEventsByMatch">41</a>. </span>unwireNodeEventsByMatch</h2>
+		<h2 class="heading2" title="2. Instance Methods -&gt; 2.41. unwireNode"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_41" title="2. Instance Methods -&gt; 2.41. unwireNode">41</a>. </span>unwireNode</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -773,7 +762,7 @@
 		</div>
 		
 		<a name="2_42"></a>
-		<h2 class="heading2" title="2. Instance Methods -&gt; 2.42. unwireUi"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_42" title="2. Instance Methods -&gt; 2.42. unwireUi">42</a>. </span>unwireUi</h2>
+		<h2 class="heading2" title="2. Instance Methods -&gt; 2.42. unwireNodeEventsByMatch"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_42" title="2. Instance Methods -&gt; 2.42. unwireNodeEventsByMatch">42</a>. </span>unwireNodeEventsByMatch</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -785,41 +774,7 @@
 		</div>
 		
 		<a name="2_43"></a>
-		<h2 class="heading2" title="2. Instance Methods -&gt; 2.43. updateUi"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_43" title="2. Instance Methods -&gt; 2.43. updateUi">43</a>. </span>updateUi</h2>
-		<div class="contents2">
-			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
-			
-			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an override of an inherited feature (implementation is in this module, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
-			</table>
-		</div>
-		
-		<a name="2_44"></a>
-		<h2 class="heading2" title="2. Instance Methods -&gt; 2.44. validate"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_44" title="2. Instance Methods -&gt; 2.44. validate">44</a>. </span>validate</h2>
-		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>.</p>
-			
-			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
-			
-			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>, first introduced in <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>)</td></tr>
-			</table>
-		</div>
-		
-		<a name="2_45"></a>
-		<h2 class="heading2" title="2. Instance Methods -&gt; 2.45. wire"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_45" title="2. Instance Methods -&gt; 2.45. wire">45</a>. </span>wire</h2>
-		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
-			
-			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
-			
-			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
-			</table>
-		</div>
-		
-		<a name="2_46"></a>
-		<h2 class="heading2" title="2. Instance Methods -&gt; 2.46. wireNode"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_46" title="2. Instance Methods -&gt; 2.46. wireNode">46</a>. </span>wireNode</h2>
+		<h2 class="heading2" title="2. Instance Methods -&gt; 2.43. unwireUi"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_43" title="2. Instance Methods -&gt; 2.43. unwireUi">43</a>. </span>unwireUi</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -830,8 +785,8 @@
 			</table>
 		</div>
 		
-		<a name="2_47"></a>
-		<h2 class="heading2" title="2. Instance Methods -&gt; 2.47. wireUi"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_47" title="2. Instance Methods -&gt; 2.47. wireUi">47</a>. </span>wireUi</h2>
+		<a name="2_44"></a>
+		<h2 class="heading2" title="2. Instance Methods -&gt; 2.44. updateUi"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_44" title="2. Instance Methods -&gt; 2.44. updateUi">44</a>. </span>updateUi</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>, but introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -839,6 +794,52 @@
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_45"></a>
+		<h2 class="heading2" title="2. Instance Methods -&gt; 2.45. validate"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_45" title="2. Instance Methods -&gt; 2.45. validate">45</a>. </span>validate</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>, first introduced in <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_46"></a>
+		<h2 class="heading2" title="2. Instance Methods -&gt; 2.46. wire"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_46" title="2. Instance Methods -&gt; 2.46. wire">46</a>. </span>wire</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_47"></a>
+		<h2 class="heading2" title="2. Instance Methods -&gt; 2.47. wireNode"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_47" title="2. Instance Methods -&gt; 2.47. wireNode">47</a>. </span>wireNode</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_48"></a>
+		<h2 class="heading2" title="2. Instance Methods -&gt; 2.48. wireUi"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_48" title="2. Instance Methods -&gt; 2.48. wireUi">48</a>. </span>wireUi</h2>
+		<div class="contents2">
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an override of an inherited feature (implementation is in this module, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
 			</table>
 		</div>
 	</div>
@@ -887,19 +888,19 @@
 	<h1 class="heading1" title="4. Set-get Properties"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>. </span>Set-get Properties</h1>
 	<div class="contents1">
 		<a name="4_1"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.1. allowManualEntry"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_1" title="4. Set-get Properties -&gt; 4.1. allowManualEntry">1</a>. </span>allowManualEntry</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.1. built"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_1" title="4. Set-get Properties -&gt; 4.1. built">1</a>. </span>built</h2>
 		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.Widget.Picker.html">Uize.Widget.Picker</a></code>.</p>
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.Picker.html">Uize.Widget.Picker</a></code>, first introduced in <code><a href="../reference/Uize.Widget.Picker.html">Uize.Widget.Picker</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
 			</table>
 		</div>
 		
 		<a name="4_2"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.2. built"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_2" title="4. Set-get Properties -&gt; 4.2. built">2</a>. </span>built</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.2. busy"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_2" title="4. Set-get Properties -&gt; 4.2. busy">2</a>. </span>busy</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -911,7 +912,7 @@
 		</div>
 		
 		<a name="4_3"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.3. busy"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_3" title="4. Set-get Properties -&gt; 4.3. busy">3</a>. </span>busy</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.3. busyInherited"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_3" title="4. Set-get Properties -&gt; 4.3. busyInherited">3</a>. </span>busyInherited</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -923,7 +924,7 @@
 		</div>
 		
 		<a name="4_4"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.4. busyInherited"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_4" title="4. Set-get Properties -&gt; 4.4. busyInherited">4</a>. </span>busyInherited</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.4. children"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_4" title="4. Set-get Properties -&gt; 4.4. children">4</a>. </span>children</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -935,7 +936,7 @@
 		</div>
 		
 		<a name="4_5"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.5. children"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_5" title="4. Set-get Properties -&gt; 4.5. children">5</a>. </span>children</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.5. container"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_5" title="4. Set-get Properties -&gt; 4.5. container">5</a>. </span>container</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -947,7 +948,19 @@
 		</div>
 		
 		<a name="4_6"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.6. container"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_6" title="4. Set-get Properties -&gt; 4.6. container">6</a>. </span>container</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.6. elementName"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_6" title="4. Set-get Properties -&gt; 4.6. elementName">6</a>. </span>elementName</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>, first introduced in <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_7"></a>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.7. enabled"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_7" title="4. Set-get Properties -&gt; 4.7. enabled">7</a>. </span>enabled</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -958,30 +971,20 @@
 			</table>
 		</div>
 		
-		<a name="4_7"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.7. dialogComponent"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_7" title="4. Set-get Properties -&gt; 4.7. dialogComponent">7</a>. </span>dialogComponent</h2>
-		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.Widget.Picker.html">Uize.Widget.Picker</a></code>.</p>
-			
-			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
-			
-			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.Picker.html">Uize.Widget.Picker</a></code>, first introduced in <code><a href="../reference/Uize.Widget.Picker.html">Uize.Widget.Picker</a></code>)</td></tr>
-			</table>
-		</div>
-		
 		<a name="4_8"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.8. dialogWidgetClass"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_8" title="4. Set-get Properties -&gt; 4.8. dialogWidgetClass">8</a>. </span>dialogWidgetClass</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.8. enabledInherited"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_8" title="4. Set-get Properties -&gt; 4.8. enabledInherited">8</a>. </span>enabledInherited</h2>
 		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an override of an inherited feature (implementation is in this module, first introduced in <code><a href="../reference/Uize.Widget.Picker.html">Uize.Widget.Picker</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
 			</table>
 		</div>
 		
 		<a name="4_9"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.9. elementName"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_9" title="4. Set-get Properties -&gt; 4.9. elementName">9</a>. </span>elementName</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.9. errorClassName"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_9" title="4. Set-get Properties -&gt; 4.9. errorClassName">9</a>. </span>errorClassName</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>.</p>
 			
@@ -993,19 +996,19 @@
 		</div>
 		
 		<a name="4_10"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.10. enabled"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_10" title="4. Set-get Properties -&gt; 4.10. enabled">10</a>. </span>enabled</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.10. focused"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_10" title="4. Set-get Properties -&gt; 4.10. focused">10</a>. </span>focused</h2>
 		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			<p>Inherited from <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>.</p>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>, first introduced in <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>)</td></tr>
 			</table>
 		</div>
 		
 		<a name="4_11"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.11. enabledInherited"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_11" title="4. Set-get Properties -&gt; 4.11. enabledInherited">11</a>. </span>enabledInherited</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.11. html"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_11" title="4. Set-get Properties -&gt; 4.11. html">11</a>. </span>html</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1017,39 +1020,43 @@
 		</div>
 		
 		<a name="4_12"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.12. errorClassName"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_12" title="4. Set-get Properties -&gt; 4.12. errorClassName">12</a>. </span>errorClassName</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.12. idPrefix"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_12" title="4. Set-get Properties -&gt; 4.12. idPrefix">12</a>. </span>idPrefix</h2>
 		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>.</p>
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>, first introduced in <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
 			</table>
 		</div>
 		
 		<a name="4_13"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.13. filter"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_13" title="4. Set-get Properties -&gt; 4.13. filter">13</a>. </span>filter</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.13. idPrefixConstruction"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_13" title="4. Set-get Properties -&gt; 4.13. idPrefixConstruction">13</a>. </span>idPrefixConstruction</h2>
 		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
 			</table>
 		</div>
 		
 		<a name="4_14"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.14. filters"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_14" title="4. Set-get Properties -&gt; 4.14. filters">14</a>. </span>filters</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.14. insertionMode"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_14" title="4. Set-get Properties -&gt; 4.14. insertionMode">14</a>. </span>insertionMode</h2>
 		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
 			</table>
 		</div>
 		
 		<a name="4_15"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.15. focused"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_15" title="4. Set-get Properties -&gt; 4.15. focused">15</a>. </span>focused</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.15. isDirty"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_15" title="4. Set-get Properties -&gt; 4.15. isDirty">15</a>. </span>isDirty</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>.</p>
 			
@@ -1061,31 +1068,55 @@
 		</div>
 		
 		<a name="4_16"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.16. html"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_16" title="4. Set-get Properties -&gt; 4.16. html">16</a>. </span>html</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.16. isDirtyInherited"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_16" title="4. Set-get Properties -&gt; 4.16. isDirtyInherited">16</a>. </span>isDirtyInherited</h2>
 		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			<p>Inherited from <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>.</p>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>, first introduced in <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>)</td></tr>
 			</table>
 		</div>
 		
 		<a name="4_17"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.17. idPrefix"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_17" title="4. Set-get Properties -&gt; 4.17. idPrefix">17</a>. </span>idPrefix</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.17. isEmpty"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_17" title="4. Set-get Properties -&gt; 4.17. isEmpty">17</a>. </span>isEmpty</h2>
 		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			<p>Inherited from <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>.</p>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>, first introduced in <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>)</td></tr>
 			</table>
 		</div>
 		
 		<a name="4_18"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.18. idPrefixConstruction"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_18" title="4. Set-get Properties -&gt; 4.18. idPrefixConstruction">18</a>. </span>idPrefixConstruction</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.18. isFinished"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_18" title="4. Set-get Properties -&gt; 4.18. isFinished">18</a>. </span>isFinished</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>, first introduced in <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_19"></a>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.19. isValid"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_19" title="4. Set-get Properties -&gt; 4.19. isValid">19</a>. </span>isValid</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>, first introduced in <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_20"></a>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.20. localized"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_20" title="4. Set-get Properties -&gt; 4.20. localized">20</a>. </span>localized</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1096,28 +1127,8 @@
 			</table>
 		</div>
 		
-		<a name="4_19"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.19. inputWidgetClass"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_19" title="4. Set-get Properties -&gt; 4.19. inputWidgetClass">19</a>. </span>inputWidgetClass</h2>
-		<div class="contents2">
-			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
-			
-			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
-			</table>
-		</div>
-		
-		<a name="4_20"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.20. inputWidgetProperties"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_20" title="4. Set-get Properties -&gt; 4.20. inputWidgetProperties">20</a>. </span>inputWidgetProperties</h2>
-		<div class="contents2">
-			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
-			
-			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
-			</table>
-		</div>
-		
 		<a name="4_21"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.21. insertionMode"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_21" title="4. Set-get Properties -&gt; 4.21. insertionMode">21</a>. </span>insertionMode</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.21. name"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_21" title="4. Set-get Properties -&gt; 4.21. name">21</a>. </span>name</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1129,19 +1140,19 @@
 		</div>
 		
 		<a name="4_22"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.22. isDirty"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_22" title="4. Set-get Properties -&gt; 4.22. isDirty">22</a>. </span>isDirty</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.22. nodeMap"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_22" title="4. Set-get Properties -&gt; 4.22. nodeMap">22</a>. </span>nodeMap</h2>
 		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>.</p>
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>, first introduced in <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
 			</table>
 		</div>
 		
 		<a name="4_23"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.23. isDirtyInherited"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_23" title="4. Set-get Properties -&gt; 4.23. isDirtyInherited">23</a>. </span>isDirtyInherited</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.23. tentativeValue"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_23" title="4. Set-get Properties -&gt; 4.23. tentativeValue">23</a>. </span>tentativeValue</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>.</p>
 			
@@ -1153,7 +1164,7 @@
 		</div>
 		
 		<a name="4_24"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.24. isEmpty"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_24" title="4. Set-get Properties -&gt; 4.24. isEmpty">24</a>. </span>isEmpty</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.24. type"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_24" title="4. Set-get Properties -&gt; 4.24. type">24</a>. </span>type</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>.</p>
 			
@@ -1165,7 +1176,7 @@
 		</div>
 		
 		<a name="4_25"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.25. isFinished"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_25" title="4. Set-get Properties -&gt; 4.25. isFinished">25</a>. </span>isFinished</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.25. validateWhen"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_25" title="4. Set-get Properties -&gt; 4.25. validateWhen">25</a>. </span>validateWhen</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>.</p>
 			
@@ -1177,7 +1188,7 @@
 		</div>
 		
 		<a name="4_26"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.26. isValid"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_26" title="4. Set-get Properties -&gt; 4.26. isValid">26</a>. </span>isValid</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.26. validator"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_26" title="4. Set-get Properties -&gt; 4.26. validator">26</a>. </span>validator</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>.</p>
 			
@@ -1189,75 +1200,75 @@
 		</div>
 		
 		<a name="4_27"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.27. localized"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_27" title="4. Set-get Properties -&gt; 4.27. localized">27</a>. </span>localized</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.27. value"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_27" title="4. Set-get Properties -&gt; 4.27. value">27</a>. </span>value</h2>
 		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			<p>Inherited from <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>.</p>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>, first introduced in <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>)</td></tr>
 			</table>
 		</div>
 		
 		<a name="4_28"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.28. name"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_28" title="4. Set-get Properties -&gt; 4.28. name">28</a>. </span>name</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.28. valueConformer"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_28" title="4. Set-get Properties -&gt; 4.28. valueConformer">28</a>. </span>valueConformer</h2>
 		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			<p>Inherited from <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>.</p>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>, first introduced in <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>)</td></tr>
 			</table>
 		</div>
 		
 		<a name="4_29"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.29. nodeMap"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_29" title="4. Set-get Properties -&gt; 4.29. nodeMap">29</a>. </span>nodeMap</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.29. valueNo"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_29" title="4. Set-get Properties -&gt; 4.29. valueNo">29</a>. </span>valueNo</h2>
 		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
-			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
 			</table>
 		</div>
 		
 		<a name="4_30"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.30. pipedProperties"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_30" title="4. Set-get Properties -&gt; 4.30. pipedProperties">30</a>. </span>pipedProperties</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.30. values"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_30" title="4. Set-get Properties -&gt; 4.30. values">30</a>. </span>values</h2>
 		<div class="contents2">
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an override of an inherited feature (implementation is in this module, first introduced in <code><a href="../reference/Uize.Widget.Picker.html">Uize.Widget.Picker</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
 			</table>
 		</div>
 		
 		<a name="4_31"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.31. selectorButtonWidgetClass"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_31" title="4. Set-get Properties -&gt; 4.31. selectorButtonWidgetClass">31</a>. </span>selectorButtonWidgetClass</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.31. warningAllowed"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_31" title="4. Set-get Properties -&gt; 4.31. warningAllowed">31</a>. </span>warningAllowed</h2>
 		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>.</p>
+			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an override of an inherited feature (implementation is in this module, first introduced in <code><a href="../reference/Uize.Widget.Picker.html">Uize.Widget.Picker</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>, first introduced in <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>)</td></tr>
 			</table>
 		</div>
 		
 		<a name="4_32"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.32. selectorButtonWidgetProperties"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_32" title="4. Set-get Properties -&gt; 4.32. selectorButtonWidgetProperties">32</a>. </span>selectorButtonWidgetProperties</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.32. warningAllowedInherited"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_32" title="4. Set-get Properties -&gt; 4.32. warningAllowedInherited">32</a>. </span>warningAllowedInherited</h2>
 		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.Widget.Picker.html">Uize.Widget.Picker</a></code>.</p>
+			<p>Inherited from <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>.</p>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.Picker.html">Uize.Widget.Picker</a></code>, first introduced in <code><a href="../reference/Uize.Widget.Picker.html">Uize.Widget.Picker</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>, first introduced in <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>)</td></tr>
 			</table>
 		</div>
 		
 		<a name="4_33"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.33. tentativeValue"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_33" title="4. Set-get Properties -&gt; 4.33. tentativeValue">33</a>. </span>tentativeValue</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.33. warningMessage"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_33" title="4. Set-get Properties -&gt; 4.33. warningMessage">33</a>. </span>warningMessage</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>.</p>
 			
@@ -1269,7 +1280,7 @@
 		</div>
 		
 		<a name="4_34"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.34. type"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_34" title="4. Set-get Properties -&gt; 4.34. type">34</a>. </span>type</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.34. warningMessageProperties"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_34" title="4. Set-get Properties -&gt; 4.34. warningMessageProperties">34</a>. </span>warningMessageProperties</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>.</p>
 			
@@ -1281,7 +1292,7 @@
 		</div>
 		
 		<a name="4_35"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.35. validateWhen"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_35" title="4. Set-get Properties -&gt; 4.35. validateWhen">35</a>. </span>validateWhen</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.35. warningShown"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_35" title="4. Set-get Properties -&gt; 4.35. warningShown">35</a>. </span>warningShown</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>.</p>
 			
@@ -1293,7 +1304,7 @@
 		</div>
 		
 		<a name="4_36"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.36. validator"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_36" title="4. Set-get Properties -&gt; 4.36. validator">36</a>. </span>validator</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.36. warningShownWhen"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_36" title="4. Set-get Properties -&gt; 4.36. warningShownWhen">36</a>. </span>warningShownWhen</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>.</p>
 			
@@ -1305,127 +1316,7 @@
 		</div>
 		
 		<a name="4_37"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.37. value"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_37" title="4. Set-get Properties -&gt; 4.37. value">37</a>. </span>value</h2>
-		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>.</p>
-			
-			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
-			
-			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>, first introduced in <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>)</td></tr>
-			</table>
-		</div>
-		
-		<a name="4_38"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.38. valueConformer"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_38" title="4. Set-get Properties -&gt; 4.38. valueConformer">38</a>. </span>valueConformer</h2>
-		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>.</p>
-			
-			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
-			
-			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>, first introduced in <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>)</td></tr>
-			</table>
-		</div>
-		
-		<a name="4_39"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.39. valueDetails"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_39" title="4. Set-get Properties -&gt; 4.39. valueDetails">39</a>. </span>valueDetails</h2>
-		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.Widget.Picker.html">Uize.Widget.Picker</a></code>.</p>
-			
-			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
-			
-			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.Picker.html">Uize.Widget.Picker</a></code>, first introduced in <code><a href="../reference/Uize.Widget.Picker.html">Uize.Widget.Picker</a></code>)</td></tr>
-			</table>
-		</div>
-		
-		<a name="4_40"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.40. valueFormatter"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_40" title="4. Set-get Properties -&gt; 4.40. valueFormatter">40</a>. </span>valueFormatter</h2>
-		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.Widget.Picker.html">Uize.Widget.Picker</a></code>.</p>
-			
-			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
-			
-			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.Picker.html">Uize.Widget.Picker</a></code>, first introduced in <code><a href="../reference/Uize.Widget.Picker.html">Uize.Widget.Picker</a></code>)</td></tr>
-			</table>
-		</div>
-		
-		<a name="4_41"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.41. warningAllowed"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_41" title="4. Set-get Properties -&gt; 4.41. warningAllowed">41</a>. </span>warningAllowed</h2>
-		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>.</p>
-			
-			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
-			
-			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>, first introduced in <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>)</td></tr>
-			</table>
-		</div>
-		
-		<a name="4_42"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.42. warningAllowedInherited"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_42" title="4. Set-get Properties -&gt; 4.42. warningAllowedInherited">42</a>. </span>warningAllowedInherited</h2>
-		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>.</p>
-			
-			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
-			
-			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>, first introduced in <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>)</td></tr>
-			</table>
-		</div>
-		
-		<a name="4_43"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.43. warningMessage"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_43" title="4. Set-get Properties -&gt; 4.43. warningMessage">43</a>. </span>warningMessage</h2>
-		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>.</p>
-			
-			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
-			
-			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>, first introduced in <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>)</td></tr>
-			</table>
-		</div>
-		
-		<a name="4_44"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.44. warningMessageProperties"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_44" title="4. Set-get Properties -&gt; 4.44. warningMessageProperties">44</a>. </span>warningMessageProperties</h2>
-		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>.</p>
-			
-			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
-			
-			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>, first introduced in <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>)</td></tr>
-			</table>
-		</div>
-		
-		<a name="4_45"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.45. warningShown"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_45" title="4. Set-get Properties -&gt; 4.45. warningShown">45</a>. </span>warningShown</h2>
-		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>.</p>
-			
-			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
-			
-			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>, first introduced in <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>)</td></tr>
-			</table>
-		</div>
-		
-		<a name="4_46"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.46. warningShownWhen"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_46" title="4. Set-get Properties -&gt; 4.46. warningShownWhen">46</a>. </span>warningShownWhen</h2>
-		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>.</p>
-			
-			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
-			
-			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>, first introduced in <code><a href="../reference/Uize.Widget.FormElement.html">Uize.Widget.FormElement</a></code>)</td></tr>
-			</table>
-		</div>
-		
-		<a name="4_47"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.47. wired"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_47" title="4. Set-get Properties -&gt; 4.47. wired">47</a>. </span>wired</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.37. wired"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_37" title="4. Set-get Properties -&gt; 4.37. wired">37</a>. </span>wired</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1441,7 +1332,7 @@
 	<h1 class="heading1" title="5. Static Methods"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>. </span>Static Methods</h1>
 	<div class="contents1">
 		<a name="5_1"></a>
-		<h2 class="heading2" title="5. Static Methods -&gt; 5.1. Uize.Widget.Picker.FilteredInput.fire"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_1" title="5. Static Methods -&gt; 5.1. Uize.Widget.Picker.FilteredInput.fire">1</a>. </span>Uize.Widget.Picker.FilteredInput.fire</h2>
+		<h2 class="heading2" title="5. Static Methods -&gt; 5.1. Uize.Widget.FormElement.Select.fire"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_1" title="5. Static Methods -&gt; 5.1. Uize.Widget.FormElement.Select.fire">1</a>. </span>Uize.Widget.FormElement.Select.fire</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
 			
@@ -1454,7 +1345,7 @@
 		</div>
 		
 		<a name="5_2"></a>
-		<h2 class="heading2" title="5. Static Methods -&gt; 5.2. Uize.Widget.Picker.FilteredInput.get"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_2" title="5. Static Methods -&gt; 5.2. Uize.Widget.Picker.FilteredInput.get">2</a>. </span>Uize.Widget.Picker.FilteredInput.get</h2>
+		<h2 class="heading2" title="5. Static Methods -&gt; 5.2. Uize.Widget.FormElement.Select.get"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_2" title="5. Static Methods -&gt; 5.2. Uize.Widget.FormElement.Select.get">2</a>. </span>Uize.Widget.FormElement.Select.get</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
 			
@@ -1467,7 +1358,7 @@
 		</div>
 		
 		<a name="5_3"></a>
-		<h2 class="heading2" title="5. Static Methods -&gt; 5.3. Uize.Widget.Picker.FilteredInput.getBlankImageUrl"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_3" title="5. Static Methods -&gt; 5.3. Uize.Widget.Picker.FilteredInput.getBlankImageUrl">3</a>. </span>Uize.Widget.Picker.FilteredInput.getBlankImageUrl</h2>
+		<h2 class="heading2" title="5. Static Methods -&gt; 5.3. Uize.Widget.FormElement.Select.getBlankImageUrl"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_3" title="5. Static Methods -&gt; 5.3. Uize.Widget.FormElement.Select.getBlankImageUrl">3</a>. </span>Uize.Widget.FormElement.Select.getBlankImageUrl</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1480,7 +1371,7 @@
 		</div>
 		
 		<a name="5_4"></a>
-		<h2 class="heading2" title="5. Static Methods -&gt; 5.4. Uize.Widget.Picker.FilteredInput.registerProperties"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_4" title="5. Static Methods -&gt; 5.4. Uize.Widget.Picker.FilteredInput.registerProperties">4</a>. </span>Uize.Widget.Picker.FilteredInput.registerProperties</h2>
+		<h2 class="heading2" title="5. Static Methods -&gt; 5.4. Uize.Widget.FormElement.Select.registerProperties"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_4" title="5. Static Methods -&gt; 5.4. Uize.Widget.FormElement.Select.registerProperties">4</a>. </span>Uize.Widget.FormElement.Select.registerProperties</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
 			
@@ -1493,7 +1384,7 @@
 		</div>
 		
 		<a name="5_5"></a>
-		<h2 class="heading2" title="5. Static Methods -&gt; 5.5. Uize.Widget.Picker.FilteredInput.set"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_5" title="5. Static Methods -&gt; 5.5. Uize.Widget.Picker.FilteredInput.set">5</a>. </span>Uize.Widget.Picker.FilteredInput.set</h2>
+		<h2 class="heading2" title="5. Static Methods -&gt; 5.5. Uize.Widget.FormElement.Select.set"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_5" title="5. Static Methods -&gt; 5.5. Uize.Widget.FormElement.Select.set">5</a>. </span>Uize.Widget.FormElement.Select.set</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
 			
@@ -1506,7 +1397,7 @@
 		</div>
 		
 		<a name="5_6"></a>
-		<h2 class="heading2" title="5. Static Methods -&gt; 5.6. Uize.Widget.Picker.FilteredInput.spawn"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_6" title="5. Static Methods -&gt; 5.6. Uize.Widget.Picker.FilteredInput.spawn">6</a>. </span>Uize.Widget.Picker.FilteredInput.spawn</h2>
+		<h2 class="heading2" title="5. Static Methods -&gt; 5.6. Uize.Widget.FormElement.Select.spawn"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_6" title="5. Static Methods -&gt; 5.6. Uize.Widget.FormElement.Select.spawn">6</a>. </span>Uize.Widget.FormElement.Select.spawn</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1519,7 +1410,7 @@
 		</div>
 		
 		<a name="5_7"></a>
-		<h2 class="heading2" title="5. Static Methods -&gt; 5.7. Uize.Widget.Picker.FilteredInput.subclass"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_7" title="5. Static Methods -&gt; 5.7. Uize.Widget.Picker.FilteredInput.subclass">7</a>. </span>Uize.Widget.Picker.FilteredInput.subclass</h2>
+		<h2 class="heading2" title="5. Static Methods -&gt; 5.7. Uize.Widget.FormElement.Select.subclass"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_7" title="5. Static Methods -&gt; 5.7. Uize.Widget.FormElement.Select.subclass">7</a>. </span>Uize.Widget.FormElement.Select.subclass</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
 			
@@ -1532,7 +1423,7 @@
 		</div>
 		
 		<a name="5_8"></a>
-		<h2 class="heading2" title="5. Static Methods -&gt; 5.8. Uize.Widget.Picker.FilteredInput.toggle"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_8" title="5. Static Methods -&gt; 5.8. Uize.Widget.Picker.FilteredInput.toggle">8</a>. </span>Uize.Widget.Picker.FilteredInput.toggle</h2>
+		<h2 class="heading2" title="5. Static Methods -&gt; 5.8. Uize.Widget.FormElement.Select.toggle"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_8" title="5. Static Methods -&gt; 5.8. Uize.Widget.FormElement.Select.toggle">8</a>. </span>Uize.Widget.FormElement.Select.toggle</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
 			
@@ -1545,7 +1436,7 @@
 		</div>
 		
 		<a name="5_9"></a>
-		<h2 class="heading2" title="5. Static Methods -&gt; 5.9. Uize.Widget.Picker.FilteredInput.unwire"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_9" title="5. Static Methods -&gt; 5.9. Uize.Widget.Picker.FilteredInput.unwire">9</a>. </span>Uize.Widget.Picker.FilteredInput.unwire</h2>
+		<h2 class="heading2" title="5. Static Methods -&gt; 5.9. Uize.Widget.FormElement.Select.unwire"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_9" title="5. Static Methods -&gt; 5.9. Uize.Widget.FormElement.Select.unwire">9</a>. </span>Uize.Widget.FormElement.Select.unwire</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
 			
@@ -1558,7 +1449,7 @@
 		</div>
 		
 		<a name="5_10"></a>
-		<h2 class="heading2" title="5. Static Methods -&gt; 5.10. Uize.Widget.Picker.FilteredInput.wire"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_10" title="5. Static Methods -&gt; 5.10. Uize.Widget.Picker.FilteredInput.wire">10</a>. </span>Uize.Widget.Picker.FilteredInput.wire</h2>
+		<h2 class="heading2" title="5. Static Methods -&gt; 5.10. Uize.Widget.FormElement.Select.wire"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_10" title="5. Static Methods -&gt; 5.10. Uize.Widget.FormElement.Select.wire">10</a>. </span>Uize.Widget.FormElement.Select.wire</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
 			
@@ -1575,7 +1466,7 @@
 	<h1 class="heading1" title="6. Static Properties"><span class="headingNumber"><a href="#6" title="6. Static Properties">6</a>. </span>Static Properties</h1>
 	<div class="contents1">
 		<a name="6_1"></a>
-		<h2 class="heading2" title="6. Static Properties -&gt; 6.1. Uize.Widget.Picker.FilteredInput.isWired"><span class="headingNumber"><a href="#6" title="6. Static Properties">6</a>.<a href="#6_1" title="6. Static Properties -&gt; 6.1. Uize.Widget.Picker.FilteredInput.isWired">1</a>. </span>Uize.Widget.Picker.FilteredInput.isWired</h2>
+		<h2 class="heading2" title="6. Static Properties -&gt; 6.1. Uize.Widget.FormElement.Select.isWired"><span class="headingNumber"><a href="#6" title="6. Static Properties">6</a>.<a href="#6_1" title="6. Static Properties -&gt; 6.1. Uize.Widget.FormElement.Select.isWired">1</a>. </span>Uize.Widget.FormElement.Select.isWired</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1588,7 +1479,7 @@
 		</div>
 		
 		<a name="6_2"></a>
-		<h2 class="heading2" title="6. Static Properties -&gt; 6.2. Uize.Widget.Picker.FilteredInput.moduleName"><span class="headingNumber"><a href="#6" title="6. Static Properties">6</a>.<a href="#6_2" title="6. Static Properties -&gt; 6.2. Uize.Widget.Picker.FilteredInput.moduleName">2</a>. </span>Uize.Widget.Picker.FilteredInput.moduleName</h2>
+		<h2 class="heading2" title="6. Static Properties -&gt; 6.2. Uize.Widget.FormElement.Select.moduleName"><span class="headingNumber"><a href="#6" title="6. Static Properties">6</a>.<a href="#6_2" title="6. Static Properties -&gt; 6.2. Uize.Widget.FormElement.Select.moduleName">2</a>. </span>Uize.Widget.FormElement.Select.moduleName</h2>
 		<div class="contents2">
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -1599,7 +1490,7 @@
 		</div>
 		
 		<a name="6_3"></a>
-		<h2 class="heading2" title="6. Static Properties -&gt; 6.3. Uize.Widget.Picker.FilteredInput.nonInheritableStatics"><span class="headingNumber"><a href="#6" title="6. Static Properties">6</a>.<a href="#6_3" title="6. Static Properties -&gt; 6.3. Uize.Widget.Picker.FilteredInput.nonInheritableStatics">3</a>. </span>Uize.Widget.Picker.FilteredInput.nonInheritableStatics</h2>
+		<h2 class="heading2" title="6. Static Properties -&gt; 6.3. Uize.Widget.FormElement.Select.nonInheritableStatics"><span class="headingNumber"><a href="#6" title="6. Static Properties">6</a>.<a href="#6_3" title="6. Static Properties -&gt; 6.3. Uize.Widget.FormElement.Select.nonInheritableStatics">3</a>. </span>Uize.Widget.FormElement.Select.nonInheritableStatics</h2>
 		<div class="contents2">
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			

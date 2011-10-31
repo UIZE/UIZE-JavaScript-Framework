@@ -47,13 +47,20 @@
   Introduction
     The =Uize.Widget.FormElement.Text= class is a subclass of =Uize.Widget.FormElement= to provide specific functionality for text input form elements.
 
-    *DEVELOPERS:* `Tim Carter`, `Ben Ilegbodu`
+    *DEVELOPERS:* `Tim Carter`, `Ben Ilegbodu`, `Vinson Chuong`
 */
 
 
 Uize.module ({
   name:'Uize.Widget.FormElement.Text',
+  required:'Uize.Node',
   builder:function(_superclass) {
+    /*** Variables for Scruncher Optimization ***/
+      var
+        _supportsPlaceholder = typeof document != 'undefined'
+          &amp;&amp; 'placeholder' in document.createElement('input')
+      ;
+    
     /*** Class Constructor ***/
       var
         _class = _superclass.subclass(
@@ -66,23 +73,24 @@ Uize.module ({
               function() {
                 var
                   _focused = _this.get('focused'),
-                  _defaultValue = _this._defaultValue,
+                  _placeholder = _this._placeholder,
                   _value = _this.get('value')
                 ;
 
-                if (_defaultValue) {
-                  function _setValue(_newValue) { _this.set({value:_newValue}) }
+                if (_placeholder &amp;&amp; !_supportsPlaceholder) {
+                  function _setText (_newText) { _this.isWired &amp;&amp; _this.setNodeValue ('input', _newText) }
 
-                  if (_focused &amp;&amp; _value == _defaultValue)
-                    _setValue('');
+                  if (_focused &amp;&amp; _value == _placeholder)
+                    _setText ('');
                   else if (!_focused &amp;&amp; !_value)
-                    _setValue(_defaultValue)
+                    _setText (_placeholder)
                 }
 
                 if (_this.isWired &amp;&amp; _focused) {
                   var
                     _inputNode = _this.getNode('input'),
-                    _valueLength = _inputNode.value ? _inputNode.value.length : 0
+                    _inputNodeValue = _this.getNodeValue(_inputNode),
+                    _valueLength = _inputNodeValue ? _inputNodeValue.length : 0
                   ;
 
                   if (_valueLength &gt; 0) {
@@ -111,24 +119,102 @@ Uize.module ({
 
         _this._moreValidators = [
           function(_value) {
-            var _valueLength = _value ? _value.length : 0;
+            var
+              _valueString = _value + '',
+              _valueLength = _value != null ? _valueString.length : 0
+            ;
 
             return _valueLength &gt;= _this._minLength &amp;&amp; _valueLength &lt;= _this._maxLength;
           }
         ];
       };
 
+      _classPrototype._updateUiPlaceholder = function() {
+        this.isWired
+          &amp;&amp; _supportsPlaceholder
+          &amp;&amp; this.setNodeProperties('input', {placeholder:this._placeholder})
+      };
+
     /*** Public Instance Methods ***/
       _classPrototype.checkIsEmpty = function() {
         return _superclass.prototype.checkIsEmpty.call (this)
-          || this.get('value') == this._defaultValue
+          || this.get('value') == this._placeholder
+      };
+
+      _classPrototype.getCaretPosition = function () {
+        var
+          _this = this,
+          _input = _this.getNode ('input')
+        ;
+
+        if (_this.isWired &amp;&amp; _this.get ('focused')) {
+          if (Uize.Node.isIe) {
+            var _sel = document.selection.createRange ();
+            _sel.moveStart ('character', -_this.get ('tentativeValue').length);
+            return _sel.text.length;
+          } else {
+            return _input.selectionStart;
+          }
+        } else {
+          return -1;
+        }
+      };
+
+      _classPrototype.setCaretPosition = function (_position) {
+        var
+          _this = this,
+          _input = _this.getNode ('input')
+        ;
+
+        if (_this.isWired &amp;&amp; _this.get ('focused')) {
+          if (Uize.Node.isIe) {
+            var _range = _input.createTextRange ();
+            _range.collapse (true);
+            _range.moveEnd ('character', _position);
+            _range.moveStart ('character', _position);
+            _range.select ();
+          } else
+            _input.setSelectionRange (_position, _position);
+        }
       };
 
       _classPrototype.getMoreValidators = function() { return this._moreValidators };
 
+      _classPrototype.updateUi = function() {
+        if (this.isWired) {
+          this._updateUiPlaceholder();
+          _superclass.prototype.updateUi.call(this);
+        }
+      };
+
+      _classPrototype.wireUi = function () {
+        var _this = this;
+
+        if (!_this.isWired) {
+          var
+            _placeholder = _this._placeholder,
+            _input = _this.getNode ('input')
+          ;
+
+          // Set input placeholder
+          if (_placeholder) {
+            if (_supportsPlaceholder)
+              _this.setNodeProperties (_input, {placeholder:_placeholder});
+            else 
+              _this.set ('value', _placeholder);
+          }
+
+          _superclass.prototype.wireUi.call(_this);
+        }
+      };
+
     /*** Register Properties ***/
       _class.registerProperties ({
-        _defaultValue:'defaultValue',
+        _placeholder:{
+          name:'placeholder|defaultValue',
+          onChange:_classPrototype._updateUiPlaceholder,
+          value:''
+        },
         _minLength:{
           name:'minLength',
           onChange:_classPrototype._updateMoreValidators,

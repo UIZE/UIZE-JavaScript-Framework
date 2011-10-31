@@ -1,9 +1,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<title>Uize.Widget.InlinePicker.FilteredInput | JavaScript Source Code | UIZE JavaScript Framework</title>
+	<title>Uize.Widget.InlinePicker.Selector | JavaScript Source Code | UIZE JavaScript Framework</title>
 	<meta name="keywords" content="UIZE JavaScript Framework module source code"/>
-	<meta name="description" content="This is the JavaScript source code for the Uize.Widget.InlinePicker.FilteredInput module of the UIZE JavaScript Framework"/>
+	<meta name="description" content="This is the JavaScript source code for the Uize.Widget.InlinePicker.Selector module of the UIZE JavaScript Framework"/>
 	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
 	<link rel="stylesheet" href="../../css/page.css"/>
 	<link rel="stylesheet" href="../../css/page.source.css"/>
@@ -15,9 +15,9 @@
 
 <h1 class="document-title">
 	<a id="page-homeLink" href="../../index.html" title="UIZE JavaScript Framework home"></a>
-	SOURCE CODE: Uize.Widget.InlinePicker.FilteredInput
+	SOURCE CODE: Uize.Widget.InlinePicker.Selector
 	<div class="pageActions">
-		<a href="../Uize.Widget.InlinePicker.FilteredInput.html" class="buttonLink">VIEW REFERENCE</a>
+		<a href="../Uize.Widget.InlinePicker.Selector.html" class="buttonLink">VIEW REFERENCE</a>
 	</div>
 </h1>
 
@@ -25,7 +25,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize.Widget.InlinePicker.FilteredInput Class
+|    /    O /   |    MODULE : Uize.Widget.InlinePicker.Selector Class
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2011 UIZE
@@ -37,42 +37,59 @@
 
 /* Module Meta Data
   type: Class
-  importance: 6
+  importance: 4
   codeCompleteness: 100
   testCompleteness: 0
-  docCompleteness: 7
+  docCompleteness: 0
 */
 
 /*?
   Introduction
-    The =Uize.Widget.InlinePicker.FilteredInput= class implements an inline filtered input picker.
+    The =Uize.Widget.InlinePicker.Selector= class provides functionality for inline picker widgets that require selection from a set of values (like a radio button list)
 
     *DEVELOPERS:* `Ben Ilegbodu`
 */
 
 Uize.module ({
-  name:'Uize.Widget.InlinePicker.FilteredInput',
+  name:'Uize.Widget.InlinePicker.Selector',
   required:[
-    'Uize.Widget.FilteredInput',
-    'Uize.Widget.ValueDisplay.Selector'
+    'Uize.Widget.Options.Selector',
+    'Uize.Widget.Button.ValueDisplay.Selector',
+    'Uize.Util.Coupler'
   ],
   builder:function (_superclass) {
     /*** Class Constructor ***/
-      var _class = _superclass.subclass ();
+      var _class = _superclass.subclass (
+        null,
+        function() {
+          new Uize.Util.Coupler({
+            instances:[this, this.children.value],
+            properties:['valueNo', 'tentativeValueNo']
+          })
+        }
+      );
 
     /*** Register Properties ***/
       _class.registerProperties ({
-        _filter:'filter',
-        _filters:'filters',
-        _inputWidgetClass:'inputWidgetClass',
-        _inputWidgetProperties:'inputWidgetProperties'
+        _tentativeValueNo:{  // read-only
+          name:'tentativeValueNo',
+          value:-1
+        },
+        _valueNo:{
+          name:'valueNo',  // read-only
+          value:-1
+        },
+        _values:{
+          name:'values',
+          value:[]
+        }
       });
 
     /*** Override Initial Values for Inherited Set-Get Properties ***/
       _class.set ({
-        pipedProperties:['inputWidgetClass', 'inputWidgetProperties', 'filter', 'filters'],
-        valueDisplayWidgetClass:Uize.Widget.ValueDisplay.Selector,
-        valueWidgetClass:Uize.Widget.FilteredInput
+        pipedProperties:['values'],
+        valueDisplayWidgetClass:Uize.Widget.Button.ValueDisplay.Selector,
+        valueWidgetClass:Uize.Widget.Options.Selector
       });
 
     return _class;

@@ -94,7 +94,8 @@ Uize.module ({
               _this = this,
               _committer = _this.addChild('committer', _Uize_Widget.Committer, {watchedProperties:{}}),
               _formWarnings = _this.addChild('formWarnings', _Uize_Widget.FormWarnings, {watchedElements:[]}),
-              _elements = _this.addChild('elements', _Uize_Widget.FormElements)
+              _elements = _this.addChild('elements', _Uize_Widget.FormElements),
+              _undefined
             ;
 
             // Save private instance references
@@ -113,7 +114,27 @@ Uize.module ({
                       _childElement.get('isDirtyInherited')
                         &amp;&amp; _this.set({_isDirty:_true})
                     },
-                    Ok:function() { _this._submit() }
+                    Ok:function() { _this._submit() },
+                    'Changed.focused':function() {
+                      // NOTE: so unfortunately the browsers support an autofill feature that
+                      // will prepopulate fields, but it doesn't fire onChange events for
+                      // each field.  So when we blur a text field, we ensure that all of the
+                      // programmatic values for fields match the DOM values
+                      !_childElement.get('focused')
+                        &amp;&amp; _this._foreachElement(
+                          function(_element, _elementName, _elementIsForm) {
+                            if (!_elementIsForm) {
+                              var _nodeValue = _element.getNodeValue('input');
+
+                              _nodeValue !== _undefined
+                                &amp;&amp; _element.valueOf() != _nodeValue
+                                &amp;&amp; _element.set({value:_nodeValue})
+                              ;
+                            }
+                          }
+                        )
+                      ;
+                    }
                   });
 
                   // if form widget is added as child of another form, then it can't be using normal
@@ -169,7 +190,7 @@ Uize.module ({
           for (var _elementName in _elements) {
             var _element = _elements[_elementName];
 
-            _function(_element, _element.get('name'), _element._isForm);
+            _function(_element, _element.get('name'), _element.isForm);
           }
         }
       };
@@ -441,8 +462,10 @@ Uize.module ({
           onChange:function() {
             var _this = this;
 
-            _this._isSubmitting &amp;&amp; _this._committer
-              &amp;&amp; _this._committer.commit();
+            _this._isSubmitting
+              &amp;&amp; _this._committer
+              &amp;&amp; _this._committer.commit()
+            ;
 
             // do we still need this??
             _this._isValid == _false

@@ -1,0 +1,7 @@
+/*
+	UIZE JAVASCRIPT FRAMEWORK 2011-10-31
+
+	http://www.uize.com/reference/Uize.Widget.Collection.Dynamic.Table.html
+	Available under MIT License or GNU General Public License -- http://www.uize.com/license.html
+*/
+Uize.module({name:'Uize.Widget.Collection.Dynamic.Table',builder:function(f_a){var f_b=f_a.subclass(),f_c=f_b.prototype;f_c.processItemTemplate=function(f_d){var f_e=this;return function(f_f){var f_g=document.createElement('DIV');f_g.innerHTML='<table><tbody>'+f_a.prototype.processItemTemplate.call(f_e,f_d)(f_f)+'</tbody></table>';var f_h=f_g.firstChild.firstChild.childNodes,f_i=[];for(var f_j= -1,f_k=f_h.length;++f_j<f_k;)f_i.push(f_h[f_j]);return f_i;};};return f_b;}});

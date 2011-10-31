@@ -67,10 +67,9 @@ Uize.module ({
             var _this = this;
             /*** Private Instance Properties ***/
               _this._currentItemNo = 0;
-              _this._imagesLoaded = [];
+              _this._imagesLoaded = {};
           }
-        ),
-        _classPrototype = _class.prototype
+        )
       ;
 
     /*** Register Properties ***/
@@ -123,11 +122,14 @@ Uize.module ({
                   if (_Uize_Node.isIe &amp;&amp; /\.png$/i.test (_this._src)) {
                     _nextItemImg.style.filter = 'progid:DXImageTransform.Microsoft.AlphaImageLoader(src=\'' + _this._src + '\', sizingMethod=\'crop\')';
                     _nextItemImg.src = _class.getBlankImageUrl ();
-                    _nextItemImg.width = _image._width;
-                    _nextItemImg.height = _image._height;
-                  } else {
-                    _nextItemImg.src = _this._src;
                   }
+                  else {
+                    _nextItemImg.src = _this._src;
+                    _nextItemImg.style.filter = null;
+                  }
+
+                  _nextItemImg.width = _image._width;
+                  _nextItemImg.height = _image._height;
                 }
               }
               if (_this._imagesLoaded [_this._src]) {

@@ -94,7 +94,7 @@
 							<li><a href="#2_12_7" title="For all other HTML tags, this method returns value of the node&apos;s innerHTML property, with various characters decoded from HTML entities to reverse the effects of using the Uize.Node.setValue static method.">2.12.7. Other HTML Tags</a></li>
 						</ul>
 					</li>
-					<li><a href="#2_13" title="Injects the specified HTML markup into the specified Node Blob.">2.13. Uize.Node.injectHtml</a>
+					<li><a href="#2_13" title="Injects the specified HTML into the specified Node Blob.">2.13. Uize.Node.injectHtml</a>
 						<ul>
 							<li><a href="#2_13_1" title="- &apos;inner bottom&apos; - HTML will be injected inside the node, after all of its contents">2.13.1. Injection Modes</a></li>
 						</ul>
@@ -192,7 +192,7 @@
 	<div class="contents1">
 		<p>The <code>Uize.Node</code> module facilitates <a href="http://en.wikipedia.org/wiki/Document_Object_Model" target="_blank" class="externalSiteLink">DOM</a> manipulation, with support for finding nodes, and querying and modifying their properties, CSS styling, and more.</p>
 		
-		<p><b>DEVELOPERS:</b> <a href="http://www.tomkidding.com" target="_blank" class="externalSiteLink">Chris van Rensburg</a></p>
+		<p><b>DEVELOPERS:</b> <a href="http://www.tomkidding.com" target="_blank" class="externalSiteLink">Chris van Rensburg</a>, Vinson Chuong</p>
 		
 		<a name="1_1"></a>
 		<h2 class="heading2" title="1. Introduction -&gt; 1.1. Features"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. Features">1</a>. </span>Features</h2>
@@ -924,7 +924,7 @@ Uize.Node.setStyle ('node4',Uize.Node.getStyle ('node3',styleProperties));
 		<a name="2_13"></a>
 		<h2 class="heading2" title="2. Static Methods -&gt; 2.13. Uize.Node.injectHtml"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_13" title="2. Static Methods -&gt; 2.13. Uize.Node.injectHtml">13</a>. </span>Uize.Node.injectHtml</h2>
 		<div class="contents2">
-			<p>Injects the specified HTML markup into the specified <a href="#1_1_1">Node Blob</a>.</p>
+			<p>Injects the specified HTML into the specified <a href="#1_1_1">Node Blob</a>.</p>
 			
 			<p>The action of this method is different to simply setting the <code>innerHTML</code> property in that it does not replace the existing contents, but instead adds to it.</p>
 			
@@ -934,7 +934,7 @@ Uize.Node.setStyle ('node4',Uize.Node.getStyle ('node3',styleProperties));
 <pre class="sample-code">Uize.Node.injectHtml (nodeBLOB,htmlSTRorOBJ);
 </pre>
 			
-			<p>The <code>htmlSTRorOBJ</code> parameter can be a string containing the HTML you wish to inject, or it can be any object that implements a <code>valueOf</code> interface (such as an instance of a <code><a href="../reference/Uize.html">Uize</a></code> subclass that implements the <code>value</code> set-get property).</p>
+			<p>The <code>htmlSTRorOBJ</code> parameter can be a DOM node, an array of DOM nodes, a string containing the HTML you wish to inject, or it can be any object that implements a <code>valueOf</code> interface (such as an instance of a <code><a href="../reference/Uize.html">Uize</a></code> subclass that implements the <code>value</code> set-get property).</p>
 			
 			<p><span class="allCaps">VARIATION</span></p>
 			

@@ -47,7 +47,7 @@
   Introduction
     The =Uize.Widget.Fleeting= class implements a fleeting message behavior with a configurable display lifespan and a JavaScript animation fade out effect.
 
-    *DEVELOPERS:* `Jan Borgersen`
+    *DEVELOPERS:* `Jan Borgersen`, `Ben Ilegbodu`
 */
 
 Uize.module ({
@@ -57,7 +57,8 @@ Uize.module ({
     /*** Variables for Scruncher Optimization ***/
       var
         _true = true,
-        _false = false
+        _false = false,
+        _undefined
       ;
 
     /*** Class Constructor ***/
@@ -73,19 +74,16 @@ Uize.module ({
                 duration:750
               });
               _this._showFade.wire ({
-                Start:
-                  function () {
-                    if( _this._shown )
-                      _this.displayNode ('',_this._shown);
+                Start:function () {
+                  _this._shown
+                    &amp;&amp; _this.displayNode ('',_this._shown)
                   },
-                'Changed.value':
-                  function () {
-                    _this.setNodeOpacity ('',_this._showFade);
+                'Changed.value':function () {
+                  _this.setNodeOpacity ('', _this._showFade)
                   },
-                Done:
-                  function () {
-                    if( !_this._shown )
-                      _this.displayNode ('',_this._shown);
+                Done:function () {
+                  !_this._shown
+                    &amp;&amp; _this.displayNode ('', _this._shown)
                   }
               });
           }
@@ -93,14 +91,55 @@ Uize.module ({
         _classPrototype = _class.prototype
       ;
 
+    /*** Private Instance Methods ***/
+      _classPrototype._updateUiText = function () {
+        this._text != _undefined &amp;&amp; this.isWired &amp;&amp; this.setNodeInnerHtml ('text',this._text);
+        /*?
+          Implied Nodes
+            text Implied Node
+              An optional node whose contents will be replaced with the value of the =text= set-get property, if this property's value is not =null= or =undefined=.
+
+              The =innerHTML= value of the =text Implied Node= will be updated to reflect the value of the =text= set-get property whenever the value of this property is changed, is not =null= or =undefined=, and the instance is wired up.
+
+              NOTES
+              - this implied node is optional
+        */
+      };
+
     /*** Public Instance Methods ***/
       _classPrototype.show = function () {
         var _this = this;
+
         if (_this._lifeTimeout != null) {
           clearTimeout (_this._timeout);
           _this._timeout = null;
         }
+
         _this.set ({_shown:_true});
+      };
+
+      _classPrototype.updateUi = function () {
+        var _this = this;
+        
+        if (_this.isWired) {
+          _this._updateUiText ();
+          _superclass.prototype.updateUi.call (_this);
+        }
+      };
+
+      _classPrototype.wireUi = function () {
+        var _this = this;
+        if (!_this.isWired) {
+          var _rootNode = _this._rootNode = _this.getNode ();
+          if (_rootNode) {
+            /*** initialize text value if undefined ***/
+              _this._text == _undefined
+                &amp;&amp; _this.set ({_text:_this.getNodeValue('text')})
+              ;
+
+            _superclass.prototype.wireUi.call (_this);
+          }
+        }
       };
 
     /*** Register Properties ***/
@@ -117,20 +156,42 @@ Uize.module ({
           name:'shown',
           onChange:function () {
             var _this = this;
-            _this._shown &amp;&amp; _this.fire ('Before Show');
+            
+            if (_this.isWired) {
+              _this._shown
+                &amp;&amp; _this.fire ('Before Show');
+  
             _this._showFade.start ({
               startValue: _this._shown ? 0 : _this._maxOpacity,
-              endValue: _this._shown ? _this._maxOpacity : 0,
-              curve:Uize.Fade.celeration (0,1)
+                endValue:_this._shown ? _this._maxOpacity : 0
             });
-            if( _this._shown ) {
-              _this._lifeTimeout = setTimeout( function() {
-                  _this.set({shown:false});
-                }, _this._lifeSpan);
+              
+              if (_this._shown)
+                _this._lifeTimeout = setTimeout(
+                  function() { _this.set({_shown:_false}) },
+                  _this._lifeSpan
+                )
+              ;
+              
+              !_this._shown
+                &amp;&amp; _this.fire('After Hide');
             }
-            !_this._shown &amp;&amp; _this.fire('After Hide');
           },
           value:_false
+        },
+        _text:{
+          name:'text',
+          onChange:_classPrototype._updateUiText
+          /*?
+            Set-get Properties
+              text
+                A string, whose value will be used to set the value of the =innerHTML= property of the =text Implied Node=.
+
+                The =innerHTML= value of the =text Implied Node= will be updated to reflect the value of the =text= set-get property whenever the value of this property is changed, is not =null= or =undefined=, and the instance is wired up.
+
+                NOTES
+                - the initial value is =undefined=
+          */
         }
       });
 

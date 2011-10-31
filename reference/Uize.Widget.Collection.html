@@ -134,8 +134,9 @@
 					<li><a href="#4_51" title="Inherited from Uize.Widget.">4.51. unwireUi</a></li>
 					<li><a href="#4_52" title="IMPLEMENTATION INFO">4.52. updateUi</a></li>
 					<li><a href="#4_53" title="Inherited from Uize.">4.53. wire</a></li>
-					<li><a href="#4_54" title="Inherited from Uize.Widget.">4.54. wireNode</a></li>
-					<li><a href="#4_55" title="Inherited from Uize.Widget.">4.55. wireUi</a></li>
+					<li><a href="#4_54" title="A hook allowing subclasses to post-process new item widgets">4.54. wireItemWidget</a></li>
+					<li><a href="#4_55" title="Inherited from Uize.Widget.">4.55. wireNode</a></li>
+					<li><a href="#4_56" title="Inherited from Uize.Widget.">4.56. wireUi</a></li>
 				</ul>
 			</li>
 			<li><a href="#5">5. Instance Events</a>
@@ -222,7 +223,7 @@
 	<div class="contents1">
 		<p>The <code>Uize.Widget.Collection</code> class manages a collection of items, with support for managing selected state, and methods for manipulating the collection.</p>
 		
-		<p><b>DEVELOPERS:</b> <a href="http://www.tomkidding.com" target="_blank" class="externalSiteLink">Chris van Rensburg</a>, <a href="http://www.hikingviking.com" target="_blank" class="externalSiteLink">Jan Borgersen</a>, Guang-yu Xu</p>
+		<p><b>DEVELOPERS:</b> <a href="http://www.tomkidding.com" target="_blank" class="externalSiteLink">Chris van Rensburg</a>, <a href="http://www.hikingviking.com" target="_blank" class="externalSiteLink">Jan Borgersen</a>, Guang-yu Xu, Vinson Chuong</p>
 		
 		<a name="1_1"></a>
 		<h2 class="heading2" title="1. Introduction -&gt; 1.1. In a Nutshell"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. In a Nutshell">1</a>. </span>In a Nutshell</h2>
@@ -331,7 +332,7 @@
 				
 				<p><span class="allCaps">INSTANCE METHODS</span></p>
 				
-				<p><code><a href="#4_2">addControlButton</a></code> | <code><a href="#4_3">addItemWidget</a></code> | <code><a href="#4_9">finishRemove</a></code> | <code><a href="#4_12">forAll</a></code> | <code><a href="#4_15">getItemWidgetProperties</a></code> | <code><a href="#4_19">getPropertyForItems</a></code> | <code><a href="#4_20">getPropertyForSelected</a></code> | <code><a href="#4_22">getSelected</a></code> | <code><a href="#4_30">makeItemWidgetName</a></code> | <code><a href="#4_31">remove</a></code> | <code><a href="#4_35">selectAll</a></code> | <code><a href="#4_36">selectNone</a></code> | <code><a href="#4_37">selectRange</a></code></p>
+				<p><code><a href="#4_2">addControlButton</a></code> | <code><a href="#4_3">addItemWidget</a></code> | <code><a href="#4_9">finishRemove</a></code> | <code><a href="#4_12">forAll</a></code> | <code><a href="#4_15">getItemWidgetProperties</a></code> | <code><a href="#4_19">getPropertyForItems</a></code> | <code><a href="#4_20">getPropertyForSelected</a></code> | <code><a href="#4_22">getSelected</a></code> | <code><a href="#4_30">makeItemWidgetName</a></code> | <code><a href="#4_31">remove</a></code> | <code><a href="#4_35">selectAll</a></code> | <code><a href="#4_36">selectNone</a></code> | <code><a href="#4_37">selectRange</a></code> | <code><a href="#4_54">wireItemWidget</a></code></p>
 				
 				<p><span class="allCaps">SET-GET PROPERTIES</span></p>
 				
@@ -363,7 +364,7 @@
 				
 				<p><span class="allCaps">INSTANCE METHODS</span></p>
 				
-				<p><code><a href="#4_1">addChild</a></code> | <code><a href="#4_4">ajax</a></code> | <code><a href="#4_5">buildHtml</a></code> | <code><a href="#4_6">callInherited</a></code> | <code><a href="#4_7">confirm</a></code> | <code><a href="#4_8">displayNode</a></code> | <code><a href="#4_10">fire</a></code> | <code><a href="#4_11">flushNodeCache</a></code> | <code><a href="#4_13">get</a></code> | <code><a href="#4_14">getInherited</a></code> | <code><a href="#4_16">getNode</a></code> | <code><a href="#4_17">getNodeStyle</a></code> | <code><a href="#4_18">getNodeValue</a></code> | <code><a href="#4_21">getProvider</a></code> | <code><a href="#4_23">globalizeNode</a></code> | <code><a href="#4_24">inform</a></code> | <code><a href="#4_25">injectNodeHtml</a></code> | <code><a href="#4_26">insertOrWireUi</a></code> | <code><a href="#4_27">insertUi</a></code> | <code><a href="#4_28">kill</a></code> | <code><a href="#4_29">localize</a></code> | <code><a href="#4_32">removeChild</a></code> | <code><a href="#4_33">removeNode</a></code> | <code><a href="#4_34">removeUi</a></code> | <code><a href="#4_38">set</a></code> | <code><a href="#4_39">setInherited</a></code> | <code><a href="#4_40">setNodeClipRect</a></code> | <code><a href="#4_41">setNodeInnerHtml</a></code> | <code><a href="#4_42">setNodeOpacity</a></code> | <code><a href="#4_43">setNodeProperties</a></code> | <code><a href="#4_44">setNodeStyle</a></code> | <code><a href="#4_45">setNodeValue</a></code> | <code><a href="#4_46">showNode</a></code> | <code><a href="#4_47">toggle</a></code> | <code><a href="#4_48">unwire</a></code> | <code><a href="#4_49">unwireNode</a></code> | <code><a href="#4_50">unwireNodeEventsByMatch</a></code> | <code><a href="#4_51">unwireUi</a></code> | <code><a href="#4_53">wire</a></code> | <code><a href="#4_54">wireNode</a></code> | <code><a href="#4_55">wireUi</a></code></p>
+				<p><code><a href="#4_1">addChild</a></code> | <code><a href="#4_4">ajax</a></code> | <code><a href="#4_5">buildHtml</a></code> | <code><a href="#4_6">callInherited</a></code> | <code><a href="#4_7">confirm</a></code> | <code><a href="#4_8">displayNode</a></code> | <code><a href="#4_10">fire</a></code> | <code><a href="#4_11">flushNodeCache</a></code> | <code><a href="#4_13">get</a></code> | <code><a href="#4_14">getInherited</a></code> | <code><a href="#4_16">getNode</a></code> | <code><a href="#4_17">getNodeStyle</a></code> | <code><a href="#4_18">getNodeValue</a></code> | <code><a href="#4_21">getProvider</a></code> | <code><a href="#4_23">globalizeNode</a></code> | <code><a href="#4_24">inform</a></code> | <code><a href="#4_25">injectNodeHtml</a></code> | <code><a href="#4_26">insertOrWireUi</a></code> | <code><a href="#4_27">insertUi</a></code> | <code><a href="#4_28">kill</a></code> | <code><a href="#4_29">localize</a></code> | <code><a href="#4_32">removeChild</a></code> | <code><a href="#4_33">removeNode</a></code> | <code><a href="#4_34">removeUi</a></code> | <code><a href="#4_38">set</a></code> | <code><a href="#4_39">setInherited</a></code> | <code><a href="#4_40">setNodeClipRect</a></code> | <code><a href="#4_41">setNodeInnerHtml</a></code> | <code><a href="#4_42">setNodeOpacity</a></code> | <code><a href="#4_43">setNodeProperties</a></code> | <code><a href="#4_44">setNodeStyle</a></code> | <code><a href="#4_45">setNodeValue</a></code> | <code><a href="#4_46">showNode</a></code> | <code><a href="#4_47">toggle</a></code> | <code><a href="#4_48">unwire</a></code> | <code><a href="#4_49">unwireNode</a></code> | <code><a href="#4_50">unwireNodeEventsByMatch</a></code> | <code><a href="#4_51">unwireUi</a></code> | <code><a href="#4_53">wire</a></code> | <code><a href="#4_55">wireNode</a></code> | <code><a href="#4_56">wireUi</a></code></p>
 				
 				<p><span class="allCaps">INSTANCE PROPERTIES</span></p>
 				
@@ -606,6 +607,7 @@ buttonOBJ = myInstance.addControlButton (buttonNameSTR,eventNameSTR);
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#4_30">makeItemWidgetName</a></code> hook method</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#4_54">wireItemWidget</a></code> hook method</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -1524,7 +1526,25 @@ var productIds = myCollection.getPropertyForItems ('productId',myCollection.item
 		</div>
 		
 		<a name="4_54"></a>
-		<h2 class="heading2" title="4. Instance Methods -&gt; 4.54. wireNode"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_54" title="4. Instance Methods -&gt; 4.54. wireNode">54</a>. </span>wireNode</h2>
+		<h2 class="heading2" title="4. Instance Methods -&gt; 4.54. wireItemWidget"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_54" title="4. Instance Methods -&gt; 4.54. wireItemWidget">54</a>. </span>wireItemWidget</h2>
+		<div class="contents2">
+			<p>A hook allowing subclasses to post-process new item widgets</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">myInstance.wireItemWidget (itemWidgetOBJ);
+</pre>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_55"></a>
+		<h2 class="heading2" title="4. Instance Methods -&gt; 4.55. wireNode"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_55" title="4. Instance Methods -&gt; 4.55. wireNode">55</a>. </span>wireNode</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1535,8 +1555,8 @@ var productIds = myCollection.getPropertyForItems ('productId',myCollection.item
 			</table>
 		</div>
 		
-		<a name="4_55"></a>
-		<h2 class="heading2" title="4. Instance Methods -&gt; 4.55. wireUi"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_55" title="4. Instance Methods -&gt; 4.55. wireUi">55</a>. </span>wireUi</h2>
+		<a name="4_56"></a>
+		<h2 class="heading2" title="4. Instance Methods -&gt; 4.56. wireUi"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_56" title="4. Instance Methods -&gt; 4.56. wireUi">56</a>. </span>wireUi</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			

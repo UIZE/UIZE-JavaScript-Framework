@@ -3,7 +3,7 @@
 <head>
 	<title>Uize.Widget.Button.ValueDisplay | Documentation | UIZE JavaScript Framework</title>
 	<meta name="keywords" content="UIZE JavaScript Framework Documentation Uize.Widget.Button.ValueDisplay module reference documentation"/>
-	<meta name="description" content="The Uize.Widget.Button.ValueDisplay widget provides the base functionality for connecting a Uize.Widget.Button widget (or subclass) to a Uize.Widget.ValueDisplay widget (or subclass)."/>
+	<meta name="description" content="The Uize.Widget.Button.ValueDisplay widget provides the base functionality for button widget that wants to display details about a value."/>
 	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
 	<link rel="stylesheet" href="../css/page.css"/>
 	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
@@ -29,7 +29,7 @@
 <ul>
 	<li>Contents
 		<ul>
-			<li><a href="#1" title="The Uize.Widget.Button.ValueDisplay widget provides the base functionality for connecting a Uize.Widget.Button widget (or subclass) to a Uize.Widget.ValueDisplay widget (or subclass).">1. Introduction</a>
+			<li><a href="#1" title="The Uize.Widget.Button.ValueDisplay widget provides the base functionality for button widget that wants to display details about a value.">1. Introduction</a>
 				<ul>
 					<li><a href="#1_1" title="There are no dedicated showcase example pages for the Uize.Widget.Button.ValueDisplay module.">1.1. Examples</a></li>
 					<li><a href="#1_2" title="The Uize.Widget.Button.ValueDisplay module defines the Uize.Widget.Button.ValueDisplay class, which is a subclass of Uize.Widget.Button.">1.2. Implementation Info</a>
@@ -106,29 +106,28 @@
 					<li><a href="#4_7" title="Inherited from Uize.Widget.Button.">4.7. clickToDeselect</a></li>
 					<li><a href="#4_8" title="Inherited from Uize.Widget.Button.">4.8. clickToSelect</a></li>
 					<li><a href="#4_9" title="Inherited from Uize.Widget.">4.9. container</a></li>
-					<li><a href="#4_10" title="Inherited from Uize.Widget.">4.10. enabled</a></li>
-					<li><a href="#4_11" title="Inherited from Uize.Widget.">4.11. enabledInherited</a></li>
-					<li><a href="#4_12" title="Inherited from Uize.Widget.Button.">4.12. followLink</a></li>
-					<li><a href="#4_13" title="IMPLEMENTATION INFO">4.13. frameOrder</a></li>
-					<li><a href="#4_14" title="Inherited from Uize.Widget.">4.14. html</a></li>
-					<li><a href="#4_15" title="Inherited from Uize.Widget.">4.15. idPrefix</a></li>
-					<li><a href="#4_16" title="Inherited from Uize.Widget.">4.16. idPrefixConstruction</a></li>
-					<li><a href="#4_17" title="Inherited from Uize.Widget.">4.17. insertionMode</a></li>
-					<li><a href="#4_18" title="Inherited from Uize.Widget.">4.18. localized</a></li>
-					<li><a href="#4_19" title="Inherited from Uize.Widget.Button.">4.19. mode</a></li>
-					<li><a href="#4_20" title="Inherited from Uize.Widget.">4.20. name</a></li>
-					<li><a href="#4_21" title="Inherited from Uize.Widget.">4.21. nodeMap</a></li>
-					<li><a href="#4_22" title="Inherited from Uize.Widget.Button.">4.22. playing</a></li>
-					<li><a href="#4_23" title="Inherited from Uize.Widget.Button.">4.23. selected</a></li>
-					<li><a href="#4_24" title="Inherited from Uize.Widget.Button.">4.24. state</a></li>
-					<li><a href="#4_25" title="IMPLEMENTATION INFO">4.25. statePrecedence</a></li>
-					<li><a href="#4_26" title="Inherited from Uize.Widget.Button.">4.26. text</a></li>
-					<li><a href="#4_27" title="Inherited from Uize.Widget.Button.">4.27. tooltip</a></li>
-					<li><a href="#4_28" title="IMPLEMENTATION INFO">4.28. value</a></li>
-					<li><a href="#4_29" title="IMPLEMENTATION INFO">4.29. valueDetails</a></li>
-					<li><a href="#4_30" title="IMPLEMENTATION INFO">4.30. valueDisplayWidgetClass</a></li>
-					<li><a href="#4_31" title="IMPLEMENTATION INFO">4.31. valueDisplayWidgetProperties</a></li>
-					<li><a href="#4_32" title="Inherited from Uize.Widget.">4.32. wired</a></li>
+					<li><a href="#4_10" title="IMPLEMENTATION INFO">4.10. defaultValueDetails</a></li>
+					<li><a href="#4_11" title="Inherited from Uize.Widget.">4.11. enabled</a></li>
+					<li><a href="#4_12" title="Inherited from Uize.Widget.">4.12. enabledInherited</a></li>
+					<li><a href="#4_13" title="Inherited from Uize.Widget.Button.">4.13. followLink</a></li>
+					<li><a href="#4_14" title="IMPLEMENTATION INFO">4.14. frameOrder</a></li>
+					<li><a href="#4_15" title="Inherited from Uize.Widget.">4.15. html</a></li>
+					<li><a href="#4_16" title="Inherited from Uize.Widget.">4.16. idPrefix</a></li>
+					<li><a href="#4_17" title="Inherited from Uize.Widget.">4.17. idPrefixConstruction</a></li>
+					<li><a href="#4_18" title="Inherited from Uize.Widget.">4.18. insertionMode</a></li>
+					<li><a href="#4_19" title="Inherited from Uize.Widget.">4.19. localized</a></li>
+					<li><a href="#4_20" title="Inherited from Uize.Widget.Button.">4.20. mode</a></li>
+					<li><a href="#4_21" title="Inherited from Uize.Widget.">4.21. name</a></li>
+					<li><a href="#4_22" title="Inherited from Uize.Widget.">4.22. nodeMap</a></li>
+					<li><a href="#4_23" title="Inherited from Uize.Widget.Button.">4.23. playing</a></li>
+					<li><a href="#4_24" title="Inherited from Uize.Widget.Button.">4.24. selected</a></li>
+					<li><a href="#4_25" title="Inherited from Uize.Widget.Button.">4.25. state</a></li>
+					<li><a href="#4_26" title="IMPLEMENTATION INFO">4.26. statePrecedence</a></li>
+					<li><a href="#4_27" title="Inherited from Uize.Widget.Button.">4.27. text</a></li>
+					<li><a href="#4_28" title="Inherited from Uize.Widget.Button.">4.28. tooltip</a></li>
+					<li><a href="#4_29" title="IMPLEMENTATION INFO">4.29. value</a></li>
+					<li><a href="#4_30" title="IMPLEMENTATION INFO">4.30. valueDetails</a></li>
+					<li><a href="#4_31" title="Inherited from Uize.Widget.">4.31. wired</a></li>
 				</ul>
 			</li>
 			<li><a href="#5">5. Static Methods</a>
@@ -162,7 +161,7 @@
 	<a name="1"></a>
 	<h1 class="heading1" title="1. Introduction"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>. </span>Introduction</h1>
 	<div class="contents1">
-		<p>The <code>Uize.Widget.Button.ValueDisplay</code> widget provides the base functionality for connecting a <code><a href="../reference/Uize.Widget.Button.html">Uize.Widget.Button</a></code> widget (or subclass) to a <code><a href="../reference/Uize.Widget.ValueDisplay.html">Uize.Widget.ValueDisplay</a></code> widget (or subclass).</p>
+		<p>The <code>Uize.Widget.Button.ValueDisplay</code> widget provides the base functionality for button widget that wants to display details about a value.</p>
 		
 		<p><b>DEVELOPERS:</b> <a href="http://www.benmvp.com" target="_blank" class="externalSiteLink">Ben Ilegbodu</a></p>
 		
@@ -194,7 +193,7 @@
 				
 				<p><span class="allCaps">SET-GET PROPERTIES</span></p>
 				
-				<p><code><a href="#4_28">value</a></code> | <code><a href="#4_29">valueDetails</a></code> | <code><a href="#4_30">valueDisplayWidgetClass</a></code> | <code><a href="#4_31">valueDisplayWidgetProperties</a></code></p>
+				<p><code><a href="#4_10">defaultValueDetails</a></code> | <code><a href="#4_29">value</a></code> | <code><a href="#4_30">valueDetails</a></code></p>
 			</div>
 			
 			<a name="1_2_2"></a>
@@ -206,7 +205,7 @@
 				
 				<p><span class="allCaps">SET-GET PROPERTIES</span></p>
 				
-				<p><code><a href="#4_13">frameOrder</a></code> | <code><a href="#4_25">statePrecedence</a></code></p>
+				<p><code><a href="#4_14">frameOrder</a></code> | <code><a href="#4_26">statePrecedence</a></code></p>
 				
 				<p><span class="allCaps">STATIC PROPERTIES</span></p>
 				
@@ -230,7 +229,7 @@
 				
 				<p><span class="allCaps">SET-GET PROPERTIES</span></p>
 				
-				<p><code><a href="#4_1">allowClickWhenSelected</a></code> | <code><a href="#4_2">built</a></code> | <code><a href="#4_3">busy</a></code> | <code><a href="#4_4">busyInherited</a></code> | <code><a href="#4_5">children</a></code> | <code><a href="#4_6">classNamingForStates</a></code> | <code><a href="#4_7">clickToDeselect</a></code> | <code><a href="#4_8">clickToSelect</a></code> | <code><a href="#4_9">container</a></code> | <code><a href="#4_10">enabled</a></code> | <code><a href="#4_11">enabledInherited</a></code> | <code><a href="#4_12">followLink</a></code> | <code><a href="#4_14">html</a></code> | <code><a href="#4_15">idPrefix</a></code> | <code><a href="#4_16">idPrefixConstruction</a></code> | <code><a href="#4_17">insertionMode</a></code> | <code><a href="#4_18">localized</a></code> | <code><a href="#4_19">mode</a></code> | <code><a href="#4_20">name</a></code> | <code><a href="#4_21">nodeMap</a></code> | <code><a href="#4_22">playing</a></code> | <code><a href="#4_23">selected</a></code> | <code><a href="#4_24">state</a></code> | <code><a href="#4_26">text</a></code> | <code><a href="#4_27">tooltip</a></code> | <code><a href="#4_32">wired</a></code></p>
+				<p><code><a href="#4_1">allowClickWhenSelected</a></code> | <code><a href="#4_2">built</a></code> | <code><a href="#4_3">busy</a></code> | <code><a href="#4_4">busyInherited</a></code> | <code><a href="#4_5">children</a></code> | <code><a href="#4_6">classNamingForStates</a></code> | <code><a href="#4_7">clickToDeselect</a></code> | <code><a href="#4_8">clickToSelect</a></code> | <code><a href="#4_9">container</a></code> | <code><a href="#4_11">enabled</a></code> | <code><a href="#4_12">enabledInherited</a></code> | <code><a href="#4_13">followLink</a></code> | <code><a href="#4_15">html</a></code> | <code><a href="#4_16">idPrefix</a></code> | <code><a href="#4_17">idPrefixConstruction</a></code> | <code><a href="#4_18">insertionMode</a></code> | <code><a href="#4_19">localized</a></code> | <code><a href="#4_20">mode</a></code> | <code><a href="#4_21">name</a></code> | <code><a href="#4_22">nodeMap</a></code> | <code><a href="#4_23">playing</a></code> | <code><a href="#4_24">selected</a></code> | <code><a href="#4_25">state</a></code> | <code><a href="#4_27">text</a></code> | <code><a href="#4_28">tooltip</a></code> | <code><a href="#4_31">wired</a></code></p>
 				
 				<p><span class="allCaps">STATIC METHODS</span></p>
 				
@@ -903,19 +902,17 @@
 		</div>
 		
 		<a name="4_10"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.10. enabled"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_10" title="4. Set-get Properties -&gt; 4.10. enabled">10</a>. </span>enabled</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.10. defaultValueDetails"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_10" title="4. Set-get Properties -&gt; 4.10. defaultValueDetails">10</a>. </span>defaultValueDetails</h2>
 		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
-			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
 			</table>
 		</div>
 		
 		<a name="4_11"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.11. enabledInherited"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_11" title="4. Set-get Properties -&gt; 4.11. enabledInherited">11</a>. </span>enabledInherited</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.11. enabled"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_11" title="4. Set-get Properties -&gt; 4.11. enabled">11</a>. </span>enabled</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -927,29 +924,7 @@
 		</div>
 		
 		<a name="4_12"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.12. followLink"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_12" title="4. Set-get Properties -&gt; 4.12. followLink">12</a>. </span>followLink</h2>
-		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.Widget.Button.html">Uize.Widget.Button</a></code>.</p>
-			
-			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
-			
-			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.Button.html">Uize.Widget.Button</a></code>, first introduced in <code><a href="../reference/Uize.Widget.Button.html">Uize.Widget.Button</a></code>)</td></tr>
-			</table>
-		</div>
-		
-		<a name="4_13"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.13. frameOrder"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_13" title="4. Set-get Properties -&gt; 4.13. frameOrder">13</a>. </span>frameOrder</h2>
-		<div class="contents2">
-			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
-			
-			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an override of an inherited feature (implementation is in this module, first introduced in <code><a href="../reference/Uize.Widget.Button.html">Uize.Widget.Button</a></code>)</td></tr>
-			</table>
-		</div>
-		
-		<a name="4_14"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.14. html"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_14" title="4. Set-get Properties -&gt; 4.14. html">14</a>. </span>html</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.12. enabledInherited"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_12" title="4. Set-get Properties -&gt; 4.12. enabledInherited">12</a>. </span>enabledInherited</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -960,8 +935,30 @@
 			</table>
 		</div>
 		
+		<a name="4_13"></a>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.13. followLink"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_13" title="4. Set-get Properties -&gt; 4.13. followLink">13</a>. </span>followLink</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.Button.html">Uize.Widget.Button</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.Button.html">Uize.Widget.Button</a></code>, first introduced in <code><a href="../reference/Uize.Widget.Button.html">Uize.Widget.Button</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_14"></a>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.14. frameOrder"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_14" title="4. Set-get Properties -&gt; 4.14. frameOrder">14</a>. </span>frameOrder</h2>
+		<div class="contents2">
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an override of an inherited feature (implementation is in this module, first introduced in <code><a href="../reference/Uize.Widget.Button.html">Uize.Widget.Button</a></code>)</td></tr>
+			</table>
+		</div>
+		
 		<a name="4_15"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.15. idPrefix"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_15" title="4. Set-get Properties -&gt; 4.15. idPrefix">15</a>. </span>idPrefix</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.15. html"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_15" title="4. Set-get Properties -&gt; 4.15. html">15</a>. </span>html</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -973,7 +970,7 @@
 		</div>
 		
 		<a name="4_16"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.16. idPrefixConstruction"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_16" title="4. Set-get Properties -&gt; 4.16. idPrefixConstruction">16</a>. </span>idPrefixConstruction</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.16. idPrefix"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_16" title="4. Set-get Properties -&gt; 4.16. idPrefix">16</a>. </span>idPrefix</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -985,7 +982,7 @@
 		</div>
 		
 		<a name="4_17"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.17. insertionMode"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_17" title="4. Set-get Properties -&gt; 4.17. insertionMode">17</a>. </span>insertionMode</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.17. idPrefixConstruction"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_17" title="4. Set-get Properties -&gt; 4.17. idPrefixConstruction">17</a>. </span>idPrefixConstruction</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -997,7 +994,7 @@
 		</div>
 		
 		<a name="4_18"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.18. localized"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_18" title="4. Set-get Properties -&gt; 4.18. localized">18</a>. </span>localized</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.18. insertionMode"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_18" title="4. Set-get Properties -&gt; 4.18. insertionMode">18</a>. </span>insertionMode</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1009,19 +1006,7 @@
 		</div>
 		
 		<a name="4_19"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.19. mode"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_19" title="4. Set-get Properties -&gt; 4.19. mode">19</a>. </span>mode</h2>
-		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.Widget.Button.html">Uize.Widget.Button</a></code>.</p>
-			
-			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
-			
-			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.Button.html">Uize.Widget.Button</a></code>, first introduced in <code><a href="../reference/Uize.Widget.Button.html">Uize.Widget.Button</a></code>)</td></tr>
-			</table>
-		</div>
-		
-		<a name="4_20"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.20. name"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_20" title="4. Set-get Properties -&gt; 4.20. name">20</a>. </span>name</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.19. localized"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_19" title="4. Set-get Properties -&gt; 4.19. localized">19</a>. </span>localized</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1032,8 +1017,20 @@
 			</table>
 		</div>
 		
+		<a name="4_20"></a>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.20. mode"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_20" title="4. Set-get Properties -&gt; 4.20. mode">20</a>. </span>mode</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.Button.html">Uize.Widget.Button</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.Button.html">Uize.Widget.Button</a></code>, first introduced in <code><a href="../reference/Uize.Widget.Button.html">Uize.Widget.Button</a></code>)</td></tr>
+			</table>
+		</div>
+		
 		<a name="4_21"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.21. nodeMap"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_21" title="4. Set-get Properties -&gt; 4.21. nodeMap">21</a>. </span>nodeMap</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.21. name"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_21" title="4. Set-get Properties -&gt; 4.21. name">21</a>. </span>name</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1045,19 +1042,19 @@
 		</div>
 		
 		<a name="4_22"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.22. playing"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_22" title="4. Set-get Properties -&gt; 4.22. playing">22</a>. </span>playing</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.22. nodeMap"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_22" title="4. Set-get Properties -&gt; 4.22. nodeMap">22</a>. </span>nodeMap</h2>
 		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.Widget.Button.html">Uize.Widget.Button</a></code>.</p>
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.Button.html">Uize.Widget.Button</a></code>, first introduced in <code><a href="../reference/Uize.Widget.Button.html">Uize.Widget.Button</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
 			</table>
 		</div>
 		
 		<a name="4_23"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.23. selected"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_23" title="4. Set-get Properties -&gt; 4.23. selected">23</a>. </span>selected</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.23. playing"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_23" title="4. Set-get Properties -&gt; 4.23. playing">23</a>. </span>playing</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.Button.html">Uize.Widget.Button</a></code>.</p>
 			
@@ -1069,7 +1066,7 @@
 		</div>
 		
 		<a name="4_24"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.24. state"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_24" title="4. Set-get Properties -&gt; 4.24. state">24</a>. </span>state</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.24. selected"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_24" title="4. Set-get Properties -&gt; 4.24. selected">24</a>. </span>selected</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.Button.html">Uize.Widget.Button</a></code>.</p>
 			
@@ -1081,17 +1078,7 @@
 		</div>
 		
 		<a name="4_25"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.25. statePrecedence"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_25" title="4. Set-get Properties -&gt; 4.25. statePrecedence">25</a>. </span>statePrecedence</h2>
-		<div class="contents2">
-			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
-			
-			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an override of an inherited feature (implementation is in this module, first introduced in <code><a href="../reference/Uize.Widget.Button.html">Uize.Widget.Button</a></code>)</td></tr>
-			</table>
-		</div>
-		
-		<a name="4_26"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.26. text"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_26" title="4. Set-get Properties -&gt; 4.26. text">26</a>. </span>text</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.25. state"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_25" title="4. Set-get Properties -&gt; 4.25. state">25</a>. </span>state</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.Button.html">Uize.Widget.Button</a></code>.</p>
 			
@@ -1102,8 +1089,18 @@
 			</table>
 		</div>
 		
+		<a name="4_26"></a>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.26. statePrecedence"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_26" title="4. Set-get Properties -&gt; 4.26. statePrecedence">26</a>. </span>statePrecedence</h2>
+		<div class="contents2">
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an override of an inherited feature (implementation is in this module, first introduced in <code><a href="../reference/Uize.Widget.Button.html">Uize.Widget.Button</a></code>)</td></tr>
+			</table>
+		</div>
+		
 		<a name="4_27"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.27. tooltip"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_27" title="4. Set-get Properties -&gt; 4.27. tooltip">27</a>. </span>tooltip</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.27. text"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_27" title="4. Set-get Properties -&gt; 4.27. text">27</a>. </span>text</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.Button.html">Uize.Widget.Button</a></code>.</p>
 			
@@ -1115,17 +1112,19 @@
 		</div>
 		
 		<a name="4_28"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.28. value"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_28" title="4. Set-get Properties -&gt; 4.28. value">28</a>. </span>value</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.28. tooltip"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_28" title="4. Set-get Properties -&gt; 4.28. tooltip">28</a>. </span>tooltip</h2>
 		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.Button.html">Uize.Widget.Button</a></code>.</p>
+			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.Button.html">Uize.Widget.Button</a></code>, first introduced in <code><a href="../reference/Uize.Widget.Button.html">Uize.Widget.Button</a></code>)</td></tr>
 			</table>
 		</div>
 		
 		<a name="4_29"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.29. valueDetails"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_29" title="4. Set-get Properties -&gt; 4.29. valueDetails">29</a>. </span>valueDetails</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.29. value"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_29" title="4. Set-get Properties -&gt; 4.29. value">29</a>. </span>value</h2>
 		<div class="contents2">
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -1135,7 +1134,7 @@
 		</div>
 		
 		<a name="4_30"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.30. valueDisplayWidgetClass"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_30" title="4. Set-get Properties -&gt; 4.30. valueDisplayWidgetClass">30</a>. </span>valueDisplayWidgetClass</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.30. valueDetails"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_30" title="4. Set-get Properties -&gt; 4.30. valueDetails">30</a>. </span>valueDetails</h2>
 		<div class="contents2">
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -1145,17 +1144,7 @@
 		</div>
 		
 		<a name="4_31"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.31. valueDisplayWidgetProperties"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_31" title="4. Set-get Properties -&gt; 4.31. valueDisplayWidgetProperties">31</a>. </span>valueDisplayWidgetProperties</h2>
-		<div class="contents2">
-			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
-			
-			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
-			</table>
-		</div>
-		
-		<a name="4_32"></a>
-		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.32. wired"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_32" title="4. Set-get Properties -&gt; 4.32. wired">32</a>. </span>wired</h2>
+		<h2 class="heading2" title="4. Set-get Properties -&gt; 4.31. wired"><span class="headingNumber"><a href="#4" title="4. Set-get Properties">4</a>.<a href="#4_31" title="4. Set-get Properties -&gt; 4.31. wired">31</a>. </span>wired</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
