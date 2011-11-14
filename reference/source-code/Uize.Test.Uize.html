@@ -38,7 +38,7 @@
 /* Module Meta Data
   type: Test
   importance: 8
-  codeCompleteness: 28
+  codeCompleteness: 38
   testCompleteness: 100
   docCompleteness: 100
 */
@@ -90,8 +90,11 @@ Uize.module ({
       _complexArrayDataStructure = [
         _oneLevelDeepTestObjectForCloning,
         _oneLevelDeepTestArrayForCloning
-      ]
+      ],
+      _sparselyPopulatedArray = []
     ;
+    _sparselyPopulatedArray [2] = 1;
+    _sparselyPopulatedArray [7] = 2;
 
     /*** create dummy class with value interface ***/
       var _ClassWithValueInterface = Uize.subclass ();
@@ -903,6 +906,165 @@ Uize.module ({
               10
             ]
           ]],
+          ['Uize.inRange',[
+            ['Test that a number that is lower than the lower bound of a range is not considered in range',
+              [-50,100,0],
+              false
+            ],
+            ['Test that a number that is at the lower bound of a range is considered in range',
+              [0,100,0],
+              true
+            ],
+            ['Test that a number that is between the lower and upper bounds of a range is considered in range',
+              [50,100,0],
+              true
+            ],
+            ['Test that a number that is at the upper bound of a range is considered in range',
+              [100,100,0],
+              true
+            ],
+            ['Test that a number that is higher than the upper bound of a range is not considered in range',
+              [150,100,0],
+              false
+            ],
+
+            /*** test support for date values ***/
+              ['Test that a date that falls before the lower bound of a date range is not considered in range',
+                [new Date ('01/01/1999'),new Date ('01/01/2000'),new Date ('01/01/2010')],
+                false
+              ],
+              ['Test that a date that is at the lower bound of a date range is considered in range',
+                [new Date ('01/01/2000'),new Date ('01/01/2000'),new Date ('01/01/2010')],
+                true
+              ],
+              ['Test that a date that is between the lower and upper bounds of a date range is considered in range',
+                [new Date ('01/01/2005'),new Date ('01/01/2000'),new Date ('01/01/2010')],
+                true
+              ],
+              ['Test that a date that is at the upper bound of a date range is considered in range',
+                [new Date ('01/01/2010'),new Date ('01/01/2000'),new Date ('01/01/2010')],
+                true
+              ],
+              ['Test that a date that falls after the upper bound of a date range is not considered in range',
+                [new Date ('01/01/2011'),new Date ('01/01/2000'),new Date ('01/01/2010')],
+                false
+              ],
+
+            /*** test support for object's with valueOf implemented ***/
+              ['Test that an object whose value is lower than the lower bound of a range is not considered in range',
+                [
+                  new _ClassWithValueInterface ({value:-50}),
+                  new _ClassWithValueInterface ({value:0}),
+                  new _ClassWithValueInterface ({value:100})
+                ],
+                false
+              ],
+              ['Test that an object whose value is at the lower bound of a range is considered in range',
+                [
+                  new _ClassWithValueInterface ({value:0}),
+                  new _ClassWithValueInterface ({value:0}),
+                  new _ClassWithValueInterface ({value:100})
+                ],
+                true
+              ],
+              ['Test that an object whose value is between the lower and upper bounds of a range is considered in range',
+                [
+                  new _ClassWithValueInterface ({value:50}),
+                  new _ClassWithValueInterface ({value:0}),
+                  new _ClassWithValueInterface ({value:100})
+                ],
+                true
+              ],
+              ['Test that an object whose value is at the upper bound of a range is considered in range',
+                [
+                  new _ClassWithValueInterface ({value:100}),
+                  new _ClassWithValueInterface ({value:0}),
+                  new _ClassWithValueInterface ({value:100})
+                ],
+                true
+              ],
+              ['Test that an object whose value is higher than the upper bound of a range is not considered in range',
+                [
+                  new _ClassWithValueInterface ({value:150}),
+                  new _ClassWithValueInterface ({value:0}),
+                  new _ClassWithValueInterface ({value:100})
+                ],
+                false
+              ],
+
+            /*** test support for strings ***/
+              ['Test that a string that falls before the lower bound of a string range is not considered in range',
+                ['a','b','y'],
+                false
+              ],
+              ['Test that a string that is at the lower bound of a string range is considered in range',
+                ['b','b','y'],
+                true
+              ],
+              ['Test that a string that is between the lower and upper bounds of a string range is considered in range',
+                ['m','b','y'],
+                true
+              ],
+              ['Test that a string that is at the upper bound of a string range is considered in range',
+                ['y','b','y'],
+                true
+              ],
+              ['Test that a string that falls after the upper bound of a string range is not considered in range',
+                ['z','b','y'],
+                false
+              ],
+
+            /*** test support for reversed range bounds ***/
+              ['Test that, when the bounds of a range are reversed, a value that is lower than the lower bound of the range is not considered in range',
+                [-50,100,0],
+                false
+              ],
+              ['Test that, when the bounds of a range are reversed, a value that is at the lower bound of the range is considered in range',
+                [0,100,0],
+                true
+              ],
+              ['Test that, when the bounds of a range are reversed, a value that is between the lower and upper bounds of the range is considered in range',
+                [50,100,0],
+                true
+              ],
+              ['Test that, when the bounds of a range are reversed, a value that is at the upper bound of the range is considered in range',
+                [100,100,0],
+                true
+              ],
+              ['Test that, when the bounds of a range are reversed, a value that is higher than the upper bound of the range is not considered in range',
+                [150,100,0],
+                false
+              ]
+          ]],
+          ['Uize.defaultNully',[
+            ['Test that the value null is defaulted',[null,'foo'],'foo'],
+            ['Test that the value undefined is defaulted',[undefined,'foo'],'foo'],
+            ['Test that the boolean value false is not defaulted',[false,'foo'],false],
+            ['Test that an empty string is not defaulted',['','foo'],''],
+            ['Test that the number value 0 is not defaulted',[0,'foo'],0],
+            ['Test that the special value NaN is not defaulted',[NaN,'foo'],NaN],
+            {
+              title:'Test that an object type value is not defaulted',
+              test:function () {
+                var _object = {};
+                return this.expectSameAs (_object,Uize.defaultNully (_object,'foo'));
+              }
+            },
+            {
+              title:'Test that an array type value is not defaulted',
+              test:function () {
+                var _array = [];
+                return this.expectSameAs (_array,Uize.defaultNully (_array,'foo'));
+              }
+            },
+            {
+              title:'Test that a function type value is not defaulted',
+              test:function () {
+                var _function = function () {};
+                return this.expectSameAs (_function,Uize.defaultNully (_function,'foo'));
+              }
+            }
+          ]],
           ['Uize.isArray',[
             ['Test that calling with no parameters returns false',[],false],
             ['Test that the value undefined is not regarded as an array',undefined,false],
@@ -937,10 +1099,115 @@ Uize.module ({
             ['Test that the special value NaN is not regarded as a number',NaN,false],
             ['Test that a Number object instance is not regarded as a number',new Number (5),false]
           ]],
+          ['Uize.isString',[
+            ['Test that calling with no parameters returns false',[],false],
+            ['Test that the value undefined is not regarded as a string',undefined,false],
+            ['Test that the value null is not regarded as a string',null,false],
+            ['Test that a boolean type value is not regarded as a string',true,false],
+            ['Test that a Boolean object instance is not regarded as a string',new Boolean (true),false],
+            ['Test that an object is not regarded as a string',{},false],
+            ['Test that an array is not regarded as a string',[[]],false],
+            ['Test that a function is not regarded as a string',function () {},false],
+            ['Test that a regular expression instance is not regarded as a string',/\d+/,false],
+            ['Test that a non-empty string value is regarded as a string','foo',true],
+            ['Test that an empty string value is regarded as a string','',true],
+            ['Test that a String object instance is not regarded as a string',new String ('foo'),false]
+          ]],
+          ['Uize.isBoolean',[
+            ['Test that calling with no parameters returns false',[],false],
+            ['Test that the value undefined is not regarded as a boolean',undefined,false],
+            ['Test that the value null is not regarded as a boolean',null,false],
+            ['Test that a string value is not regarded as a boolean','foo',false],
+            ['Test that an object is not regarded as a boolean',{},false],
+            ['Test that an array is not regarded as a boolean',[[]],false],
+            ['Test that a function is not regarded as a boolean',function () {},false],
+            ['Test that a regular expression instance is not regarded as a boolean',/\d+/,false],
+            ['Test that the boolean value false is regarded as a boolean',false,true],
+            ['Test that the boolean value true is regarded as a boolean',true,true],
+            ['Test that a Boolean object instance is not regarded as a boolean',new Boolean (true),false]
+          ]],
+          ['Uize.isFunction',[
+            ['Test that calling with no parameters returns false',[],false],
+            ['Test that the value undefined is not regarded as a function',undefined,false],
+            ['Test that the value null is not regarded as a function',null,false],
+            ['Test that a string value is not regarded as a function','foo',false],
+            ['Test that a boolean value is not regarded as a function',true,false],
+            ['Test that a number value is not regarded as a function',42,false],
+            ['Test that an object is not regarded as a function',{},false],
+            ['Test that an array is not regarded as a function',[[]],false],
+            ['Test that a regular expression instance is not regarded as a function',/\d+/,false],
+            ['Test that a function *is* regarded as a function',function () {},true]
+          ]],
+          ['Uize.isNully',[
+            ['Test that calling with no parameters returns true',[],true],
+            ['Test that the value undefined is regarded as being nully',undefined,true],
+            ['Test that the value null is regarded as being nully',null,true],
+            ['Test that a string value is not regarded as being nully','',false],
+            ['Test that a boolean value is not regarded as being nully',false,false],
+            ['Test that a number value is not regarded as being nully',0,false],
+            ['Test that the special value NaN is not regarded as being nully',NaN,false],
+            ['Test that an object is not regarded as being nully',{},false],
+            ['Test that an array is not regarded as being nully',[[]],false],
+            ['Test that a function is not regarded as being nully',function () {},false],
+            ['Test that a regular expression instance is not regarded as being nully',/\d+/,false]
+          ]],
+          ['Uize.isObject',[
+            ['Test that calling with no parameters returns false',[],false],
+            ['Test that the value undefined is not regarded as being an object',undefined,false],
+            ['Test that the value null is not regarded as being an object',null,false],
+            ['Test that a string value is not regarded as being an object','foo',false],
+            ['Test that a boolean value is not regarded as being an object',true,false],
+            ['Test that a number value is not regarded as being an object',42,false],
+            ['Test that the special value NaN is not regarded as being an object',NaN,false],
+            ['Test that a function is not regarded as being an object',function () {},false],
+            ['Test that an object *is* regarded as being an object',{},true],
+            ['Test that an array is regarded as being an object',[[]],true],
+            ['Test that a regular expression instance is regarded as being an object',/\d+/,true],
+            ['Test that a String object instance is regarded as being an object',new String (''),true],
+            ['Test that a Boolean object instance is regarded as being an object',new Boolean (false),true],
+            ['Test that a Number object instance is regarded as being an object',new Number (0),true]
+          ]],
+          ['Uize.isPlainObject',[
+            ['Test that calling with no parameters returns false',[],false],
+            ['Test that the value undefined is not regarded as being a plain object',undefined,false],
+            ['Test that the value null is not regarded as being a plain object',null,false],
+            ['Test that a string value is not regarded as being a plain object','foo',false],
+            ['Test that a boolean value is not regarded as being a plain object',true,false],
+            ['Test that a number value is not regarded as being a plain object',42,false],
+            ['Test that the special value NaN is not regarded as being a plain object',NaN,false],
+            ['Test that a function is not regarded as being a plain object',function () {},false],
+            ['Test that a plain object *is* regarded as being a plain object',{},true],
+            ['Test that an array is not regarded as being a plain object',[[]],false],
+            ['Test that a regular expression instance is not regarded as being a plain object',/\d+/,false],
+            ['Test that a String object instance is not regarded as being a plain object',new String (''),false],
+            ['Test that a Boolean object instance is not regarded as being a plain object',new Boolean (false),false],
+            ['Test that a Number object instance is not regarded as being a plain object',new Number (0),false],
+            ['Test that a Uize class instance is not regarded as being a plain object',new Uize,false]
+          ]],
+          ['Uize.isPrimitive',[
+            ['Test that calling with no parameters returns false',[],false],
+            ['Test that the value undefined is not regarded as being an object',undefined,false],
+            ['Test that the value null is not regarded as being an object',null,false],
+            ['Test that a string value is regarded as being a primitive','',true],
+            ['Test that a boolean value is regarded as being a primitive',false,true],
+            ['Test that a number value is regarded as being a primitive',0,true],
+            ['Test that the special value NaN is regarded as being a primitive',NaN,true],
+            ['Test that a function is not regarded as being a primitive',function () {},false],
+            ['Test that an object is not regarded as being a primitive',{},false],
+            ['Test that an array is not regarded as being a primitive',[[]],false],
+            ['Test that a regular expression instance is not regarded as being a primitive',/\d+/,false],
+            ['Test that a String object instance is not regarded as being a primitive',new String ('foo'),false],
+            ['Test that a Boolean object instance is not regarded as being a primitive',new Boolean (true),false],
+            ['Test that a Number object instance is not regarded as being a primitive',new Number (42),false]
+          ]],
           ['Uize.escapeRegExpLiteral',[
             ['Test that all of the regular expression special characters are escaped correctly',
               '^$|{}[]()?.*+\\',
               '\\^\\$\\|\\{\\}\\[\\]\\(\\)\\?\\.\\*\\+\\\\'
+            ],
+            ['Test that characters that are not regular expression special characters are not escaped',
+              'foobar,:;\'"~`&lt;&gt;/!@#%&amp;_-=',
+              'foobar,:;\'"~`&lt;&gt;/!@#%&amp;_-='
             ]
           ]],
           ['Uize.copyInto',
@@ -1286,9 +1553,13 @@ Uize.module ({
               [[],1],
               false
             ],
-            ['Test that the strictEqualityBOOL parameter ia observed correctly',
+            ['Test that the value false for the strictEqualityBOOL parameter ia observed correctly',
               [[0,1],'1',false],
               true
+            ],
+            ['Test that the value true for the strictEqualityBOOL parameter ia observed correctly',
+              [[0,1],'1',true],
+              false
             ],
             ['Test that the strictEqualityBOOL parameter is defaulted to true, as designed',
               [[0,1],'1'],
@@ -1297,6 +1568,111 @@ Uize.module ({
             ['Test that false is returned when the value is not found in the source array',
               [[0,1],2],
               false
+            ],
+
+            /*** test support for object source ***/
+              ['Test that true is returned when the source is an object, and the value is the value of one of the source object\'s properties',
+                [{foo:'bar',hello:'world'},'bar'],
+                true
+              ],
+              ['Test that false is returned when the source is an object, and the value is not one of the object\'s propertes\' values',
+                [{foo:'bar',hello:'world'},'blah'],
+                false
+              ],
+              ['Test that the value false for the strictEqualityBOOL parameter ia observed correctly when the source is an object',
+                [{prop1:0,prop2:1},'1',false],
+                true
+              ],
+              ['Test that the value true for the strictEqualityBOOL parameter ia observed correctly when the source is an object',
+                [{prop1:0,prop2:1},'1',true],
+                false
+              ]
+          ]],
+          ['Uize.isEmpty',[
+            ['Test that empty object is considered empty',[{}],true],
+            ['Test that empty array is considered empty',[[]],true],
+            ['Test that empty string is considered empty',[''],true],
+            ['Test that String object initialized to empty string is considered empty',[new String ('')],true],
+            ['Test that the number zero is considered empty',[0],true],
+            ['Test that Number object initialized to zero is considered empty',[new Number (0)],true],
+            ['Test that the boolean false is considered empty',[false],true],
+            ['Test that Boolean object initialized to false is considered empty',[new Boolean (false)],true],
+            ['Test that null is considered empty',[null],true],
+            ['Test that undefined is considered empty',[undefined],true],
+            ['Test that NaN is considered empty',[NaN],true],
+            ['Test that class instance with empty value set-get property is considered empty',
+              [new _ClassWithValueInterface ({value:0})],
+              true
+            ],
+            ['Test that a non-empty object is not considered empty',[{blah:0}],false],
+            ['Test that a non-empty array is not considered empty',[['blah']],false],
+            ['Test that a non-empty string is not considered empty',['blah'],false],
+            ['Test that String object initialized to non-empty string is not considered empty',
+              [new String ('foo')],
+              false
+            ],
+            ['Test that a non-zero number is not considered empty',[1],false],
+            ['Test that Number object initialized to non-zero number is not considered empty',
+              [new Number (1)],
+              false
+            ],
+            ['Test that the boolean true is not considered empty',[true],false],
+            ['Test that Boolean object initialized to true is not considered empty',[new Boolean (true)],false],
+            //['Test that a regular expression is not considered empty',[/^.+$/],false],
+            ['Test that a function (even an empty one) is not considered empty',function () {},false],
+            ['Test that class instance with non-empty value set-get property is not considered empty',
+              [new _ClassWithValueInterface ({value:1})],
+              false
+            ]
+          ]],
+          ['Uize.emptyOut',[
+            {
+              title:'Test that emptying out an already empty array produces that same empty array as the result',
+              test:function () {
+                var
+                  _source = [],
+                  _result = Uize.emptyOut (_source)
+                ;
+                return this.expect (true,_source == _result) &amp;&amp; this.expect (_source,_result);
+              }
+            },
+            {
+              title:'Test that emptying out an already empty object produces that same empty object as the result',
+              test:function () {
+                var
+                  _source = {},
+                  _result = Uize.emptyOut (_source)
+                ;
+                return this.expect (true,_source == _result) &amp;&amp; this.expect (_source,_result);
+              }
+            },
+            {
+              title:'Test that emptying out an array with contents produces that same array with no contents as the result',
+              test:function () {
+                var
+                  _source = [1,2,3,4,5],
+                  _result = Uize.emptyOut (_source)
+                ;
+                return this.expect (true,_source == _result) &amp;&amp; this.expect (_source,[]);
+              }
+            },
+            {
+              title:'Test that emptying out an object with contents produces that same object with no contents as the result',
+              test:function () {
+                var
+                  _source = {foo:1,bar:1},
+                  _result = Uize.emptyOut (_source)
+                ;
+                return this.expect (true,_source == _result) &amp;&amp; this.expect (_source,{});
+              }
+            },
+            ['Test that specifying the value null for the source produces the value null as the result',
+              null,
+              null
+            ],
+            ['Test that specifying the value undefined for the source produces the value undefined as the result',
+              undefined,
+              undefined
             ]
           ]],
           ['Uize.recordMatches',[
@@ -1781,7 +2157,199 @@ Uize.module ({
                 );
                 return this.expect (_expectedCallLog,_actualCallLog);
               }
+            },
+            {
+              title:'Test that a function can be called as a method on values that are primitives or instances of objects that are not Uize subclasses',
+              test:function () {
+                var
+                  _values = [true,42,'foo',NaN,new Date ('01/01/2011'),/\d+/],
+                  _valuesCoercedToString = [],
+                  _valuesSeenByFunctionCoercedToString = []
+                ;
+                for (var _valueNo = -1, _valuesLength = _values.length; ++_valueNo &lt; _valuesLength;)
+                  _valuesCoercedToString.push (_values [_valueNo] + '')
+                ;
+                Uize.callOn (_values,function () {_valuesSeenByFunctionCoercedToString.push (this + '')});
+                return this.expect (_valuesCoercedToString,_valuesSeenByFunctionCoercedToString);
+              }
             }
+          ]],
+          ['Uize.keys',[
+            ['Test that an object\'s keys are reported correctly',[{foo:1,bar:2}],['foo','bar']],
+            ['Test that a populated array\'s keys are reported correctly',[['a','b','c','d']],['0','1','2','3']],
+            ['Test that a sparsely populated array\'s keys are reported correctly',
+              [_sparselyPopulatedArray],
+              ['2','7']
+            ],
+            ['Test that a non-zero length array that is unpopulated has no keys',[new Array (5)],[]],
+            ['Test that an empty array has no keys',[[]],[]],
+            ['Test that an empty object has no keys',[{}],[]],
+            ['Test that null has no keys',null,[]],
+            ['Test that undefined has no keys',undefined,[]],
+            ['Test that a boolean value has no keys',false,[]],
+            ['Test that a number value has no keys',5,[]],
+            ['Test that a string value has no keys','hello',[]]
+          ]],
+          ['Uize.totalKeys',[
+            ['Test that an object\'s total keys are reported correctly',[{foo:1,bar:2}],2],
+            ['Test that a populated array\'s total keys are reported correctly',[['a','b','c','d']],4],
+            ['Test that a sparsely populated array\'s total keys are reported correctly',
+              [_sparselyPopulatedArray],
+              2
+            ],
+            ['Test that a non-zero length array that is unpopulated has 0 keys',[new Array (5)],0],
+            ['Test that an empty array has 0 keys',[[]],0],
+            ['Test that an empty object has 0 keys',[{}],0],
+            ['Test that null has 0 keys',null,0],
+            ['Test that undefined has 0 keys',undefined,0],
+            ['Test that a boolean value has 0 keys',false,0],
+            ['Test that a number value has 0 keys',5,0],
+            ['Test that a string value has 0 keys','hello',0]
+          ]],
+          ['Uize.values',[
+            ['Test that an object\'s values are reported correctly',[{foo:1,bar:2}],[1,2]],
+            ['Test that a populated array\'s values are reported correctly',
+              [['a','b','c','d']],
+              ['a','b','c','d']
+            ],
+            {
+              title:'Test that getting values for an array simply returns the array',
+              test:function () {return Uize.values (_sparselyPopulatedArray) == _sparselyPopulatedArray}
+            },
+            ['Test that a sparsely populated array\'s values are reported correctly',
+              [_sparselyPopulatedArray],
+              _sparselyPopulatedArray
+            ],
+            ['Test that a non-zero length array that is unpopulated has no values',
+              [new Array (5)],
+              new Array (5)
+            ],
+            ['Test that an empty array has no values',[[]],[]],
+            ['Test that an empty object has no values',[{}],[]],
+            ['Test that null has no values',null,[]],
+            ['Test that undefined has no values',undefined,[]],
+            ['Test that a boolean value has no values',false,[]],
+            ['Test that a number value has no values',5,[]],
+            ['Test that a string value has no values','hello',[]]
+          ]],
+          ['Uize.lookup',[
+            ['Test that true is the default value for the lookupValue paramter',
+              [['foo','bar']],
+              {foo:true,bar:true}
+            ],
+            ['Test that default can be specified as a value for the lookupValue paramter',
+              [['foo','bar'],undefined],
+              {foo:undefined,bar:undefined}
+            ],
+            ['Test that a values array with duplicate values is handled correctly',
+              [['foo','foo','bar','bar']],
+              {foo:true,bar:true}
+            ],
+            ['Test that a values array with different types of values is handled correctly',
+              [['','string',true,4.01,NaN,Infinity,null,undefined],1],
+              {'':1,'string':1,'true':1,'4.01':1,'NaN':1,'Infinity':1,'null':1,'undefined':1}
+            ],
+            ['Test that an empty values array produces an empty lookup object',
+              [[]],
+              {}
+            ],
+            ['Test that a sparsely populated values array produces a lookup object with a single "undefined" key for all the missing/undefined element values',
+              [_sparselyPopulatedArray],
+              {1:true,2:true,'undefined':true}
+            ],
+            ['Test that a non-zero length values array that is unpopulated produces a lookup object with a single "undefined" key for all the undefined element values',
+              [new Array (5)],
+              {'undefined':true}
+            ]
+          ]],
+          ['Uize.reverseLookup',[
+            ['Test that calling with no parameter produces an empty object',
+              [],
+              {}
+            ],
+            ['Test that calling with the value null specified produces an empty object',
+              [null],
+              {}
+            ],
+            ['Test that calling with the value undefined specified produces an empty object',
+              [undefined],
+              {}
+            ],
+            ['Test that an object with no duplicate values is handled correctly',
+              [{foo:1,bar:2}],
+              {1:'foo',2:'bar'}
+            ],
+            ['Test that an object with duplicate values is handled as expected (last mapping wins)',
+              [{foo:1,bar:1}],
+              {1:'bar'}
+            ],
+            ['Test that an empty object produces an empty reverse lookup object',
+              [{}],
+              {}
+            ],
+            ['Test that an object with different types of values is handled correctly',
+              [{prop1:'',prop2:'string',prop3:true,prop4:4.01,prop5:NaN,prop6:Infinity,prop7:null,prop8:undefined}],
+              {'':'prop1','string':'prop2','true':'prop3','4.01':'prop4','NaN':'prop5',Infinity:'prop6','null':'prop7','undefined':'prop8'}
+            ],
+            ['Test that an array can be specified as a source object',
+              [['foo','bar']],
+              {foo:'0',bar:'1'}
+            ],
+            ['Test that an empty array produces an empty reverse lookup object',
+              [{}],
+              {}
+            ],
+            ['Test that a sparsely populated values array produces a reverse lookup object with no "undefined" key for missing/undefined element values',
+              [_sparselyPopulatedArray],
+              {1:'2',2:'7'}
+            ],
+            ['Test that a non-zero length values array that is unpopulated produces an empty reverse lookup object',
+              [new Array (5)],
+              {}
+            ],
+            ['Test that null produces an empty reverse lookup object',null,{}],
+            ['Test that undefined produces an empty reverse lookup object',undefined,{}],
+            ['Test that a boolean value produces an empty reverse lookup object',false,{}],
+            ['Test that a number value produces an empty reverse lookup object',5,{}],
+            ['Test that a string value produces an empty reverse lookup object','hello',{}]
+          ]],
+          ['Uize.max',[
+            ['Test that the maximum value from an object is reported correctly',[{foo:1,bar:2}],2],
+            ['Test that the maximum value from an array is reported correctly',[[1,2]],2],
+            ['Test that the maximum value from a sparsely populated array is NaN',
+              [_sparselyPopulatedArray],
+              NaN
+            ],
+            ['Test that the maximum value from a non-zero length array that is unpopulated is NaN',
+              [new Array (5)],
+              NaN
+            ],
+            ['Test that the maximum value from an empty array is -Infinity',[[]],-Infinity],
+            ['Test that the maximum value from an empty object is -Infinity',[{}],-Infinity],
+            ['Test that the maximum value from null is -Infinity',null,-Infinity],
+            ['Test that the maximum value from undefined is -Infinity',undefined,-Infinity],
+            ['Test that the maximum value from a boolean value is -Infinity',false,-Infinity],
+            ['Test that the maximum value from a number value is -Infinity',5,-Infinity],
+            ['Test that the maximum value from a string value is -Infinity','hello',-Infinity]
+          ]],
+          ['Uize.min',[
+            ['Test that the minimum value from an object is reported correctly',[{foo:1,bar:2}],1],
+            ['Test that the minimum value from an array is reported correctly',[[1,2]],1],
+            ['Test that the minimum value from a sparsely populated array is NaN',
+              [_sparselyPopulatedArray],
+              NaN
+            ],
+            ['Test that the minimum value from a non-zero length array that is unpopulated is NaN',
+              [new Array (5)],
+              NaN
+            ],
+            ['Test that the minimum value from an empty array is Infinity',[[]],Infinity],
+            ['Test that the minimum value from an empty object is Infinity',[{}],Infinity],
+            ['Test that the minimum value from null is Infinity',null,Infinity],
+            ['Test that the minimum value from undefined is Infinity',undefined,Infinity],
+            ['Test that the minimum value from a boolean value is Infinity',false,Infinity],
+            ['Test that the minimum value from a number value is Infinity',5,Infinity],
+            ['Test that the minimum value from a string value is Infinity','hello',Infinity]
           ]],
 
           ['Uize.fire',[

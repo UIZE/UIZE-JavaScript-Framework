@@ -67,7 +67,6 @@ Uize.module ({
     'UizeDotCom.Page.Example',
     'Uize.Widget.ImageWipe.xPresets',
     'Uize.Widget.SlideShow',
-    'Uize.Data',
     'Uize.Array.Order',
     'UizeDotCom.TestDataPhotos',
     'UizeDotCom.Templates.SlideShow.Wipes'
@@ -95,7 +94,7 @@ Uize.module ({
     /*** code for cycling the wipe effects ***/
       /* TO DO: this should be factored out for greater ease */
       var
-        imageWipePresetNames = Uize.Array.Order.jumble (Uize.Data.getKeys (Uize.Widget.ImageWipe.presets)),
+        imageWipePresetNames = Uize.Array.Order.jumble (Uize.keys (Uize.Widget.ImageWipe.presets)),
         imageWipePresetNo = -1
       ;
       slideShow.wire (

@@ -29,7 +29,6 @@
 Uize.module ({
 	name:'Uize.Data.Simple',
 	required:[
-		'Uize.Data',
 		'Uize.String',
 		'Uize.String.Lines'
 	],
@@ -373,7 +372,7 @@ Uize.module ({
 				delete _data.value;
 				if (_dataChildren) {
 					var
-						_properties = Uize.Data.getLookup (_undefined,0,true), // safe empty lookup object
+						_properties = Uize.lookup (_undefined,0,true), // safe empty lookup object
 						_totalProperties = 0
 					;
 					for (var _childNo = -1, _dataChildrenLength = _dataChildren.length; ++_childNo < _dataChildrenLength;) {

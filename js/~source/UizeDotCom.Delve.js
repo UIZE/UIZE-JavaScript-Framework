@@ -53,12 +53,12 @@ Uize.module ({
 			var
 				_sacredEmptyObject = {},
 				_notInitialized = {},
-				_knownUizeModulesLookup = Uize.Data.getLookup (
+				_knownUizeModulesLookup = Uize.lookup (
 					Uize.Data.PathsTree.toList (UizeDotCom.ModulesTree (),'.'),
 					1,
 					true
 				),
-				_javaScriptBuiltInObjectsLookup = Uize.Data.getLookup (
+				_javaScriptBuiltInObjectsLookup = Uize.lookup (
 					['Array','Boolean','Function','Number','Object','RegExp','String','Window','XMLHttpRequest'],
 					1,
 					true
@@ -92,7 +92,7 @@ Uize.module ({
 											var
 												_childNo = -1,
 												_children = _widget.children,
-												_childNames = Uize.Data.getKeys (_children).sort (),
+												_childNames = Uize.keys (_children).sort (),
 												_childNamesLength = _childNames.length
 											;
 											++_childNo < _childNamesLength;
@@ -119,7 +119,7 @@ Uize.module ({
 								var
 									_this = this,
 									_instancesPerWidgetClassMap = _this._getInstancesPerWidgetClassMap (),
-									_widgetClasses = Uize.Data.getKeys (_instancesPerWidgetClassMap)
+									_widgetClasses = Uize.keys (_instancesPerWidgetClassMap)
 								;
 
 								/*** sort widget classes, from those with most instance to those with least instances ***/
@@ -237,7 +237,7 @@ Uize.module ({
 							_title:'Widgets for which localized strings are specified',
 							_itemsGenerator:function () {
 								return this._getMatchingWidgetsTreeListItems (
-									function (_widget) {return !Uize.Data.isEmpty (_widget.get ('localized'))}
+									function (_widget) {return !Uize.isEmpty (_widget.get ('localized'))}
 								);
 							}
 						},
@@ -245,7 +245,7 @@ Uize.module ({
 							_title:'Widgets that have some remapped DOM nodes',
 							_itemsGenerator:function () {
 								return this._getMatchingWidgetsTreeListItems (
-									function (_widget) {return !Uize.Data.isEmpty (_widget.get ('nodeMap'))}
+									function (_widget) {return !Uize.isEmpty (_widget.get ('nodeMap'))}
 								);
 							}
 						},
@@ -543,14 +543,12 @@ Uize.module ({
 					;
 					while (_parent = _parent.parent) _depth++;
 					_tooltipData ['depth in tree'] = _depth || 'this is the root widget';
-					_tooltipData.children =
-						Uize.Data.getTotalKeys (_object.children) || 'no children'
-					;
+					_tooltipData.children = Uize.totalKeys (_object.children) || 'no children';
 					_tooltipData.siblings =
-						(_object.parent && (Uize.Data.getTotalKeys (_object.parent.children) - 1)) || 'no siblings'
+						(_object.parent && (Uize.totalKeys (_object.parent.children) - 1)) || 'no siblings'
 					;
 					_tooltipData ['localized strings'] =
-						Uize.Data.getTotalKeys (_object.get ('localized')) || 'no localized strings'
+						Uize.totalKeys (_object.get ('localized')) || 'no localized strings'
 					;
 					_tooltipData ['DOM nodes'] = _this._getWidgetNodesInfo (_object)._summary;
 				} else if (_whatItIs == 'class') {
@@ -1124,7 +1122,7 @@ Uize.module ({
 									_nodesInfo = _this._getWidgetNodesInfo (_object),
 									_nodeCache = _nodesInfo._nodeCache,
 									_allNodesMap = _nodesInfo._allNodesMap,
-									_nodeNames = Uize.Data.getKeys (_allNodesMap).sort (),
+									_nodeNames = Uize.keys (_allNodesMap).sort (),
 									_getNodeMethodCallPrefix = _this._getWidgetPath (_object) + '.getNode (\''
 								;
 								_addTabContentsSection (
@@ -1180,7 +1178,7 @@ Uize.module ({
 							/*** determine localized strings ***/
 								var
 									_localized = _object.get ('localized'),
-									_stringNames = Uize.Data.getKeys (_localized).sort (),
+									_stringNames = Uize.keys (_localized).sort (),
 									_localizeMethodCallPrefix = _objectInspectedPath + '.localize ('
 								;
 								function _getLocalizeMethodCall (_stringName) {
@@ -1363,7 +1361,7 @@ Uize.module ({
 							var
 								_propertyNo = -1,
 								_propertyValues = _object.get (),
-								_properties = Uize.Data.getKeys (_propertyValues).sort (),
+								_properties = Uize.keys (_propertyValues).sort (),
 								_propertiesLength = _properties.length,
 								_propertyGetMethodCallPrefix = _objectInspectedPath + '.get (\'',
 								_propertySetMethodCallPrefix = _objectInspectedPath + '.set (\'',

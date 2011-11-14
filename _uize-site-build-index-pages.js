@@ -101,7 +101,7 @@ Uize.module ({
 				Uize.Wsh.BuildUtils.writeDataModule (
 					env.moduleFolderPath,'UizeDotCom.ExamplesInfoForSiteMap',
 					{
-						keywords:Uize.Data.getKeys (_examplesByKeyword).slice (1).sort (), // slice removes the '' keyword
+						keywords:Uize.keys (_examplesByKeyword).slice (1).sort (), // slice removes the '' keyword
 						tools:
 							Uize.Data.map (
 								function (_value) {return Uize.Data.filter (_value,['title','path'])},

@@ -17,65 +17,45 @@ This document lists to do tasks related to specific JavaScript modules of the UI
 		};
 	}
 
-	function (value) {return _function ('foo','bar',value,'hello')}
-	
-	Uize.makeCaller (_function,['foo','bar',0,'hello'],2)
-	
-	Uize.makeCaller (Math.pow,[0,2],0);
-	
-	function (value) {return Math.pow (value,2)}
-
 Uize
-	Quick Win Additions
-		- Uize.indexOf
-			- uses indexIn
-		- Uize.lastIndexOf
-			- uses indexIn
+	Quick Win Additions (in order of priority / usefulness)
+		- Uize.map
+			- promoted from Uize.Data.map, but with modified signature to make array first
+		- Uize.indexOf, Uize.lastIndexOf
+			- essentially derived from indexIn, but adapted to also operate on strings and to use built-in indexOf when possible and supported by JavaScript built-in objects (ie. newer versions of JavaScript)
 		- Uize.indexIn
-			- add support for object
-			- fall back to using built-in indexOf or lastIndexOf Array method, when they are present and when comparison is strict
-			- add support for source being a string
-		- Uize.ensureIn
-			- checks to see if an element is present, and adds it if not
-			- supports adding at beginning or adding at end
-		- Uize.extend
-			- alias of copyInto
+			- adapt to add support for object (ie. which key has specified value)
+			- adapt to fall back to using built-in indexOf or lastIndexOf Array method, when they are present and when comparison is strict
+			- adapt to add support for source being a string
+
 		- Uize.require
-			- alias to anonymous module with required
-		- Uize.isObject
-		- Uize.isString
-		- Uize.ensureArray
-			- ensures that the value is an array
-			- if the value is already an array, then it is simply returned
-			- if the value is an arguments object, then an array is created from it
-			- if the value is any other type, then a new array is returned with the value as its single element
-		- Uize.isArrayLike
-		- Uize.isBoolean
-		- Uize.isNully
-		- Uize.isEmpty
-			- promoted from Uize.Data.isEmpty
-		- Uize.keys
-			- promoted from Uize.Data.getKeys
-		- Uize.values
-			- promoted from Uize.Data.getValues
-		- Uize.totalKeys
-			- promoted from Uize.Data.getTotalKeys
-		- Uize.min
-			- promoted from Uize.Data.min
-		- Uize.max
-			- promoted from Uize.Data.max
-		- Uize.emptyOut
-			- promoted from Uize.Data.emptyOut
-		- Uize.lookup
-			- promoted from Uize.Data.getLookup
-		- Uize.reverseLookup
-			- promoted from Uize.Data.getReverseLookup
-		- Uize.truthy
-			- returns true if the value is truthy
-			- useful for methods that accept value matchers
-		- Uize.falsy
-			- returns true is the value is falsy
-			- useful for methods that accept value matchers
+			- alias to anonymous module with required (to make the simple case of requiring a module deeper in code more convenient & intuitive)
+
+		LATER
+			- Uize.extend
+				- alias of copyInto, for those who are more comfortable with the extend semantic
+			- Uize.isArrayLike
+				- different name, like isListy or isIterable?
+				- checks to see if value is object and has length property, to ensure object can have any Array method called or applied on it (most native implementations only require a basic / minimal Array like interface to work)
+			- Uize.ensureArray
+				- ensures that the value is an array
+				- if the value is already an array, then it is simply returned
+				- if the value is an arguments object, then an array is created from it
+				- if the value is any other type, then a new array is returned with the value as its single element
+				- this is useful for methods that want to be versatile and support simple value types in addition to arrays, but want to normalize to array of one element for purpose of implementation code
+
+			- Uize.ensureIn
+				- checks to see if an element is present, and adds it if not
+				- supports adding at beginning or adding at end, with optional where parameter
+
+			- Uize.isStringy
+				- returns true if the value is either a string primitive or an instance of a String object or "subclass"
+			- Uize.isTruthy
+				- returns true if the value is truthy
+				- useful for methods that accept value matchers
+			- Uize.isFalsy
+				- returns true is the value is falsy
+				- useful for methods that accept value matchers
 
 	Conditions
 		The whenever Instance Method
@@ -87,7 +67,7 @@ Uize
 					// do stuff whenever condition is met
 				}
 			);
-	
+
 			myWidget.whenever (
 				'theme == "bottle"',
 				function () {
@@ -126,7 +106,7 @@ Uize
 			function (width,height) {return width * height};
 		}
 		...................................................
-		
+
 	Derived Properties
 		A derived property is a special type of set-get property whose value is derived from the values of other set-get properties of the same instance.
 
@@ -228,12 +208,33 @@ Uize
 
 		Have a property that can be specified in a set-get property's profile, which can be used to cause properties whose initial values are object types to be initialized by cloning the initial value rather than simply setting a reference to a shared object.
 
-	Uize.methodCall
+	Uize.willCall
 		Lets you conveniently create a function / method caller, where you can specify context, function, and arguments.
+
+		- names considered
+			- callback
+			- callerOf
+			- willCall
+			- performer
+			- willDo
+			- asCall
+			- toCall
+			- will
+			- perform
+			- callProxy
+			- callAgent
+			- funcCaller
+			- funcAgent
+			- funcProxy
+			- handler
+			- asHandler
+			- asContext
+			- makeCaller
+			- doer
 
 		IMPLEMENTATION
 		................................................................................
-		Uize.methodCall = function (_context,_function,_arguments,_extraArgsMapping) {
+		Uize.willCall = function (_context,_function,_arguments,_extraArgsMapping) {
 			var _hasExtraArgsMapping = _extraArgsMapping != _undefined;
 			if (_hasExtraArgsMapping)
 				_arguments = _arguments ? _arguments.concat () : []
@@ -249,15 +250,17 @@ Uize
 								_arguments [_extraArgsMapping] = arguments [0];
 								return _function.apply (_context,_arguments);
 							}
+
+							// loop should be driven by _extraArgsMapping - not incoming arguments?
+							// what about incoming arguments for which there are no mappings (ie. beyond end of mapping array)
 							: function () {
-								for (
-									var _argumentNo = -1, _argumentsLength = arguments.length;
-									++_argumentNo < _argumentsLength;
-								)
+								for (var _argumentNo = arguments.length; --_argumentNo >= 0;)
 									_arguments [_extraArgsMapping [_argumentNo]] = arguments [_argumentNo]
 								;
 								return _function.apply (_context,_arguments);
 							}
+
+
 					)
 					: _arguments && _arguments.length
 						? function () {return _function.apply (_context,_arguments)}
@@ -266,17 +269,17 @@ Uize
 		};
 
 		Uize.functionCall = function (_function,_arguments,_extraArgsMapping) {
-			return Uize.methodCall (0,_function,_arguments,_extraArgsMapping);
+			return Uize.willCall (0,_function,_arguments,_extraArgsMapping);
 		};
 		................................................................................
-			
+
 		EXAMPLE
-		.......................................................
+		...............................................
 		var
-			xSquared = Uize.functionCall (Math.pow,[0,2],0),
-			3ToPowerX = Uize.functionCall (Math.pow,[3,0],1)
+			xSquared = Uize.willCall (Math.pow,[0,2],0),
+			3ToPowerX = Uize.willCall (Math.pow,[3,0],1)
 		;
-		.......................................................
+		...............................................
 
 		INSTEAD OF...
 		.....................................................
@@ -284,9 +287,9 @@ Uize
 		.....................................................
 
 		USE...
-		.....................................................
-		var 3ToPowerX = Uize.functionCall (Math.pow,[3,0],1);
-		.....................................................
+		.................................................
+		var 3ToPowerX = Uize.willCall (Math.pow,[3,0],1);
+		.................................................
 
 	Uize.watchMethod
 		...................................................................
@@ -357,6 +360,12 @@ Uize
 			return ((value - min) % maxMinDelta + maxMinDelta) % maxMinDelta + min;
 			// what about max < min?
 			.......................................................................
+
+		Unbounded
+			Support either or both of the min and max boundaries being =null= or =undefined=.
+
+	- Uize.lookup & Uize.reverseLookup
+		- for =Uize.lookup=, support mode with no parameters that returns an empty safe lookup
 
 	Uize.callOn
 		Support Instances of Non-Uize Classes
@@ -529,17 +538,14 @@ Uize.Array
 		- Uize.Array.Sort.insert
 
 	Uize.Array.Dupes
-		Uize.Array.Dupes.dedupe
-			- returns an array containing only unique values
 		Uize.Array.Dupes.getDupes
+			- returns an array of dupe info objects
 		Uize.Array.Dupes.getValueCount
 			- returns the number of occurrences of the specified value
 		Uize.Array.Dupes.getValueCounts
 			- returns a lookup array of counts per value
 
 	Uize.Array.Util
-		Uize.Array.Util.ensureIn
-			- if the specified element is not in the specified source array, then it is added (configurable whether to prepend or append, but default is to append)
 		Uize.Array.Util.chunk
 			- returns a chunk of the specified source array of the specified size
 		Uize.Array.Util.first
@@ -882,7 +888,7 @@ Uize.Data
 			if (_keysMayChange && _target == _source)
 				_source = Uize.isArray (_source) ? _source.concat () : Uize.copyInto ({},_source)
 			;
-			_target != _source && _emptyOutTarget && Uize.Data.emptyOut (_target);
+			_target != _source && _emptyOutTarget && Uize.emptyOut (_target);
 			return {source:_source,target:_target};
 		};
 		................................................................................
@@ -895,11 +901,8 @@ Uize.Data
 		_target = _sourceAndTarget._target;
 		................................................................................
 
-	- Uize.Data.getLookup & Uize.Data.getReverseLookup
-		- must deal with the fact that valueOf and toString are on the prototype of Object
-		- for Uize.Data.getLookup, support mode with no parameters that returns an empty object (but with valueOf and toString set to undefined)
-	- Uize.Data.doPropertiesSetsMatch
-		returns true if two objects have the same set of properties
+	- Uize.Data.structuresMatch
+		returns true if two objects have the same set of properties and structure
 
 	- Uize.Data.filter
 		- support for new filter types
@@ -921,11 +924,19 @@ Uize.Data
 			- can two instances of classes that support the value interface simply be compared by their respective values?
 			- can two instances of any Uize subclass simply be compared by the values of all their set-get properties?
 
-	- implement Uize.Data.hasRecursion method?
+	- Uize.Data.conjoined
+		- improve implementation to use object tagging technique employed in Uize.Array.Dupes
+
+	- Uize.Data.hasCircularity
+		- tests to see if the object contains circular references / reference loops
+		- for implementation, use object tagging
+
 	- Uize.Data.map
 		- support string for _source?
 	- Uize.Data.mapKeys
 		- lets you rename keys in an object
+	- Uise.Data.mapKeyValues
+		- lets you rename keys and transform values in an object
 
 Uize.Data.Csv
 	- test performance of parser using regular expressions
@@ -1384,28 +1395,6 @@ Uize.Is
 			Uize.Is.instanceOf (Uize.Widget.FormElement,myInstance)
 			Uize.Is.instanceOf (Uize.Widget.FormElement) (myInstance)
 			Uize.Is.instanceOf.tester (Uize.Widget.FormElement)
-			Uize.curry (Uize.Is.instanceOf,Uize.Widget.FormElement)
-			Uize.Is.instanceOf.curry (Uize.Widget.FormElement)
-
-			Uize.bind (Uize.Is,'instanceOf',[Uize.Widget.FormElement])
-
-
-			Uize.makeCaller (context,method,params)
-
-			Uize.Widget.setNodeValue.bind ()
-
-			myInstance.methodCaller ('setNodeValue',['value','']);
-
-			Uize.bind (myInstance,'setNodeValue',['value',''])
-			Uize.delegate (myInstance,'setNodeValue',['value',''])
-			Uize.performer (myInstance,'setNodeValue',['value',''])
-			Uize.makeCaller (myInstance,'setNodeValue',['value',''])
-			Uize.methodCaller (myInstance,'setNodeValue',['value',''])
-			Uize.functionCaller (myInstance,'setNodeValue',['value',''])
-			Uize.methodProxy (myInstance,'setNodeValue',['value',''])
-
-			myInstance.setNodeValue.bind (myInstance,['value',''])
-			Uize.Widget.setNodeValue.bind (myInstance,['value',''])
 			................................................................................
 
 Uize.Matcher
@@ -1433,6 +1422,7 @@ Uize.Json
 	- perhaps optimize the mini option for higher performance, possibly avoiding recursion?
 	- rely on new JSON object that's supported in FF3.5 and IE8 for mini mode
 	- a safe mode that will neutralize </script> and other HTML tags inside string literals by escaping the less than sign as \x3c
+	- for strict mode, must exclude object properties whose values are undefined, null, function, non-simple object, and possibly more prohibited value types (refer to JSON spec online) - probably easier just to include only sanctioned value types (primitives, and simple objects and arrays)
 
 Uize.Node
 	- Uize.Node.setValue & Uize.Node.getValue

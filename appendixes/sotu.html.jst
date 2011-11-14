@@ -133,8 +133,8 @@
 	function getColumnMinMax (columnName) {
 		var columnValues = Uize.Data.getColumn (modules,columnName);
 		return {
-			min:Uize.Data.min (columnValues),
-			max:Uize.Data.max (columnValues)
+			min:Uize.min (columnValues),
+			max:Uize.max (columnValues)
 		};
 	}
 	function getPercentThroughRange (value,rangeMinMax) {

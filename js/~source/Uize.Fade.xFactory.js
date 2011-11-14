@@ -39,7 +39,8 @@ Uize.module ({
 			var
 				_true = true,
 				_false = false,
-				_undefined
+				_undefined,
+				_Uize_totalKeys = Uize.totalKeys
 			;
 
 		/*** Global Variables ***/
@@ -135,14 +136,6 @@ Uize.module ({
 									}
 								}
 							} else {
-								function _getTotalKeys (_object) {
-									/* NOTE:
-										yes, there's a Uize.Data.getTotalKeys method, but I don't want this module to have to require the Uize.Data module merely for that trivial method
-									*/
-									var _result = 0;
-									for (var _key in _object) _result++;
-									return _result;
-								}
 								function _doSignaturesMatch (_startValue,_endValue,_newFadeStartValue,_newFadeEndValue) {
 									/* NOTE: this code is loosely based on Uize.Data.identical */
 									var _signaturesMatch;
@@ -158,7 +151,7 @@ Uize.module ({
 															? _startValue.length === _newFadeStartValue.length
 															: _true
 													) &&
-													_getTotalKeys (_startValue) == _getTotalKeys (_newFadeStartValue)
+													_Uize_totalKeys (_startValue) == _Uize_totalKeys (_newFadeStartValue)
 												)
 												: _true
 									) {

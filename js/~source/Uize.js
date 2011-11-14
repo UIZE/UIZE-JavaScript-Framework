@@ -15,13 +15,63 @@
 	type: Class
 	importance: 10
 	codeCompleteness: 100
-	testCompleteness: 28
-	docCompleteness: 90
+	testCompleteness: 38
+	docCompleteness: 93
 */
 
 /*?
 	Introduction
 		The =Uize= class is the base class from which many of the classes in the UIZE JavaScript Framework inherit.
+
+		Key Features
+			Utility Belt Methods
+				Value Testing Methods
+					The =Uize= module provides a number of static methods for performing commonly useful tests on values.
+
+					- =Uize.inRange= - tests if value is within specified value range
+					- =Uize.isArray= - tests if value is an array
+					- =Uize.isBoolean= - tests if value is a boolean
+					- =Uize.isEmpty= - tests if an object or array is empty, or if a non-object value is "falsy"
+					- =Uize.isFunction= - tests if value is a function reference
+					- =Uize.isInstance= - tests if value is an instance of a =Uize= subclass
+					- =Uize.isNully= - tests if value is =null= or =undefined=
+					- =Uize.isNumber= - tests if value is a number (and not =NaN)
+					- =Uize.isObject= - tests if value is non-null and an object
+					- =Uize.isPlainObject=- tests if value is a plain object (an instance of JavaScript's built-in =Object= object)
+					- =Uize.isPrimitive= - tests if value is a JavaScript primitive (ie. string, number, or boolean)
+					- =Uize.isString= - tests if value is a string
+
+				Basic Data Utilities
+					The =Uize= module provides a number of static methods for performing basic data manipulation operations.
+
+					- =Uize.clone= - clones a value, and creates deep clones of object or array type values
+					- =Uize.copyInto= - copies the values of properties from one or more source objects into a target object
+					- =Uize.emptyOut= - empties out the contents of an object or array
+					- =Uize.findRecord= - finds the first record in a records array that matches specified criteria
+					- =Uize.findRecordNo= - returns the index of the first record in a records array that matches specified criteria
+					- =Uize.indexIn= - returns the index of a value in a values array
+					- =Uize.isIn= - tests if a value is in a specified array or object
+					- =Uize.keys= - returns an array containing the names of the properties (ie. keys) in an object
+					- =Uize.lookup= - creates a lookup object from an array of values
+					- =Uize.max= - returns the largest value in a values array
+					- =Uize.min= - returns the smallest value in a values array
+					- =Uize.pairUp= - uses a list of key/value pairs to form an object
+					- =Uize.recordMatches= - determines if a record object matches the specified criteria
+					- =Uize.reverseLookup= - creates a reverse lookup from a specified lookup object or values array
+					- =Uize.totalKeys= - counts the number of keys in an object (essentially the number of properties)
+					- =Uize.values= - returns an array containing the values of the properties in an object
+
+				Useful Value Transformers
+
+					- =Uize.capFirstChar= - capitalizes the first character of a string
+					- =Uize.constrain= - constrains a value to a specified range
+					- =Uize.defaultNully= - defaults a value to the specified default, if the value is nully (ie. =null= or =undefined=)
+					- =Uize.escapeRegExpLiteral= - escapes a string so that it can be used as a literal match portion of a regular expression string
+					- =Uize.substituteInto= - substitutes the specified values into the specified string using token replacement
+
+				Iterator Methods
+
+					- =Uize.callOn= - calls a method on all values of properties in an object or elements of an array
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
@@ -45,7 +95,6 @@
 			_uizeGuids = 0,
 			_sacredEmptyArray = [],
 			_sacredEmptyObject = {},
-			_simpleTypesMap = {string:1,number:1,'boolean':1}, // boolean is a reserved word in Adobe's scripting world
 			_modulePathToken = '[#modulePath]',
 			_scriptParentNode
 		;
@@ -173,19 +222,20 @@
 				if (this.get) {
 					var
 						_properties = this.get (),
-						_propertiesLines = []
+						_propertiesLines = [],
+						_propertyValue
 					;
-					for (var _propertyName in _properties) {
-						var _propertyValue = _properties [_propertyName];
+					for (var _propertyName in _properties)
 						_propertiesLines.push (
 							_propertyName + ' : ' +
 							(
-								_propertyValue && (_isInstance (_propertyValue) || _isFunction (_propertyValue))
+								(_propertyValue = _properties [_propertyName]) &&
+								(_isInstance (_propertyValue) || _isFunction (_propertyValue))
 									? _getObjectTypeName (_propertyValue)
 									: _propertyValue
 							)
-						);
-					}
+						)
+					;
 					_result += '\n\n' + _propertiesLines.sort ().join ('\n');
 				}
 				return _result;
@@ -467,6 +517,11 @@
 	/*** Utility Functions ***/
 		function _getClass (_instanceOrClass) {return _instanceOrClass.Class || _instanceOrClass}
 
+		function _nonInheritableStatic (_name,_value) {
+			_classNonInheritableStatics [_name] = 1;
+			return _class [_name] = _value;
+		}
+
 	/*** Module Loading Mechanism ***/
 		var
 			_moduleLoadHandlers = {},
@@ -557,7 +612,7 @@
 							);
 						}
 					);
-				} else if (typeof _eventNameOrEventsMap == _typeObject && _eventNameOrEventsMap) {
+				} else if (_isObject (_eventNameOrEventsMap)) {
 					for (var _eventName in _eventNameOrEventsMap)
 						this.wire (_eventName,_eventNameOrEventsMap [_eventName])
 					;
@@ -792,7 +847,7 @@
 					_eventHandlers = _this._eventHandlers
 				;
 				if (_eventHandlers) {
-					if (typeof _eventNameOrEventsMap == _typeObject && _eventNameOrEventsMap) {
+					if (_isObject (_eventNameOrEventsMap)) {
 						for (var _eventName in _eventNameOrEventsMap)
 							_this.unwire (_eventName,_eventNameOrEventsMap [_eventName])
 						;
@@ -986,7 +1041,7 @@
 				for (var _propertyPrivateName in _propertyProfiles) {
 					var
 						_propertyData = _propertyProfiles [_propertyPrivateName],
-						_propertyDataIsObject = typeof _propertyData == _typeObject,
+						_propertyDataIsObject = _isObject (_propertyData),
 						_propertyPublicName =
 							(_propertyDataIsObject ? _propertyData.name : _propertyData) || _propertyPrivateName,
 						_propertyPrimaryPublicName = _propertyPublicName,
@@ -1381,8 +1436,11 @@
 		};
 
 	/*** Public Static Methods ***/
-		_class.capFirstChar = function (_sourceStr) {
-			return _sourceStr.charAt (0).toUpperCase () + _sourceStr.slice (1);
+		_nonInheritableStatic (
+			'capFirstChar',
+			function (_sourceStr) {
+				return _sourceStr.charAt (0).toUpperCase () + _sourceStr.slice (1);
+			}
 			/*?
 				Static Methods
 					Uize.capFirstChar
@@ -1411,59 +1469,168 @@
 						- this method is implemented in the =Uize= base class rather than the =Uize.String= module because it is generally useful in many other modules and =Uize= subclasses that don't otherwise want to require the entire =Uize.String= module
 						- if the first character of the source string is already capitalized, then the returned value will be the same as the source string
 			*/
-		};
-		_classNonInheritableStatics.capFirstChar = 1;
+		);
 
-		_class.clone = _clone;
-		_classNonInheritableStatics.clone = 1;
+		_nonInheritableStatic ('clone',_clone);
 
-		_class.constrain = function (_value,_limitA,_limitB) {
-			/* NOTES:
-				- deliberately not using Math.max and Math.min (to avoid function calls, for performance)
-				- deliberately not factored out (for performance, and doesn't save that much code size, anyway)
-			*/
-			return (
-				_limitA < _limitB
-					? (_value < _limitA ? _limitA : _value > _limitB ? _limitB : _value)
-					: (_value < _limitB ? _limitB : _value > _limitA ? _limitA : _value)
-			);
+		_nonInheritableStatic (
+			'constrain',
+			function (_value,_limitA,_limitB) {
+				/* NOTES:
+					- deliberately not using Math.max and Math.min
+						- to avoid function calls, for performance
+						- also, max and min coerce values to number, so this method wouldn't support strings, dates, etc.
+					- deliberately not factored out (for performance, and doesn't save that much code size, anyway)
+				*/
+				return (
+					_limitA < _limitB
+						? (_value < _limitA ? _limitA : _value > _limitB ? _limitB : _value)
+						: (_value < _limitB ? _limitB : _value > _limitA ? _limitA : _value)
+				);
+			}
 			/*?
 				Static Methods
 					Uize.constrain
-						Returns a number, being the result of constraining the specified number within the specified lower and upper limits.
+						Returns a value, being the result of constraining the specified value within the specified lower and upper limits.
 
 						SYNTAX
-						............................................................................
-						constrainedValueNUM = Uize.constrain (valueNUM,lowerLimitNUM,upperLimitNUM);
-						............................................................................
+						............................................................................................
+						constrainedValueANYTYPE = Uize.constrain (valueANYTYPE,lowerLimitANYTYPE,upperLimitANYTYPE);
+						............................................................................................
 
-						It is acceptable for the value of the =lowerLimitNUM= parameter to be greater than the value of the =upperLimitNUM= parameter, and the value of the =valueNUM= parameter will still be constrained within the specified range - even if the lower and upper limits are swapped. So, for example, the statement =Uize.constrain (percent,0,100)= would be equivalent to =Uize.constrain (percent,100,0)=.
+						It is acceptable for the value of the =lowerLimitANYTYPE= parameter to be greater than the value of the =upperLimitANYTYPE= parameter, and the value of the =valueANYTYPE= parameter will still be constrained within the specified range - even if the lower and upper limits are swapped. So, for example, the statement =Uize.constrain (percent,0,100)= would be equivalent to =Uize.constrain (percent,100,0)=.
 
-						TIP
+						EXAMPLES
+						.............................................................
+						// number constraining
+						Uize.constrain (-50,0,100);   // returns 0
+						Uize.constrain (-50,100,0);   // returns 0
+						Uize.constrain (0,0,100);     // returns 0
+						Uize.constrain (50,0,100);    // returns 50
+						Uize.constrain (100,0,100);   // returns 100
+						Uize.constrain (150,0,100);   // returns 100
 
-						While there is no dedicated method to test whether a number falls within a given range, you can accomplish that pretty easily using the =Uize.constrain= method, by testing whether or not the constrained value is the same as the original, as in...
+						// constraining with value types that are coerced to number
+						Uize.constrain (              // returns new Uize ({value:0})
+							new Uize ({value:-50}),    // coerced to -50
+							new Uize ({value:0}),      // coerced to 0
+							new Uize ({value:1000})    // coerced to 100
+						);
 
-						........................................................................
-						if (valueToTest != Uize.constrain (valueToTest,lowerLimit,upperLimit)) {
-							// handle case of valueToTest being outside of valid range
-						}
-						........................................................................
+						// constraining with strings values
+						Uize.constrain ('a','b','y'); // returns 'b'
+						Uize.constrain ('m','b','y'); // returns 'm'
+						Uize.constrain ('z','b','y'); // returns 'y'
+						.............................................................
+
+						NOTES
+						- see the related =Uize.inRange= static method
 			*/
-		};
-		_classNonInheritableStatics.constrain = 1;
+		);
 
-		var _copyInto = _class.copyInto = function (_targetObject,_sourceObject) {
-			if (_targetObject && _sourceObject && typeof _sourceObject == _typeObject) {
-				for (var _propertyName in _sourceObject)
-					_targetObject [_propertyName] = _sourceObject [_propertyName]
-				;
+		_nonInheritableStatic (
+			'inRange',
+			function (_value,_limitA,_limitB) {return _value == _class.constrain (_value,_limitA,_limitB)}
+			/*?
+				Static Methods
+					Uize.inRange
+						Returns a boolean, indicating whether or not the specified value lies within the specified lower and upper limits.
+
+						SYNTAX
+						..............................................................................
+						inRangeBOOL = Uize.inRange (valueANYTYPE,lowerLimitANYTYPE,upperLimitANYTYPE);
+						..............................................................................
+
+						It is acceptable for the value of the =lowerLimitANYTYPE= parameter to be greater than the value of the =upperLimitANYTYPE= parameter, and the value of the =valueANYTYPE= parameter will still be constrained within the specified range - even if the lower and upper limits are swapped. So, for example, the statement =Uize.inRange (percent,0,100)= would be equivalent to =Uize.inRange (percent,100,0)=.
+
+						EXAMPLES
+						..............................................................
+						// number constraining
+						Uize.inRange (-50,0,100);   // returns false
+						Uize.inRange (-50,100,0);   // returns false
+						Uize.inRange (0,0,100);     // returns true
+						Uize.inRange (50,0,100);    // returns true
+						Uize.inRange (100,0,100);   // returns true
+						Uize.inRange (150,0,100);   // returns false
+
+						// inRange testing with value types that are coerced to number
+						Uize.inRange (              // returns false
+							new Uize ({value:-50}),  // coerced to -50
+							new Uize ({value:0}),    // coerced to 0
+							new Uize ({value:1000})  // coerced to 100
+						);
+
+						// inRange testing with strings values
+						Uize.inRange ('a','b','y'); // returns false
+						Uize.inRange ('a','m','y'); // returns false
+						Uize.inRange ('z','b','y'); // returns false
+
+						// in Range testing with dates
+						Uize.inRange (              // returns false
+							new Date ('01/01/1999'),
+							new Date ('01/01/2000'),
+							new Date ('01/01/2010')
+						);
+						Uize.inRange (              // returns true
+							new Date ('01/01/2005'),
+							new Date ('01/01/2000'),
+							new Date ('01/01/2010')
+						);
+						Uize.inRange (              // returns false
+							new Date ('01/01/2011'),
+							new Date ('01/01/2000'),
+							new Date ('01/01/2010')
+						);
+						..............................................................
+
+						Support for Different Value Types
+							Because the =Uize.inRange= method uses JavaScript's less than and greater than operators, values specified for the value being tested and the value range's boundaries can be of any type that can be compared using these operators.
+
+							That means that the =Uize.inRange= automatically supports testing number types values, string type values, =Date= object instances, and instances of any object type that implements the =valueOf intrinsic method=, such as instances of =Uize= subclasses that implement the value interface. So, all the following examples are legitimate usages of the =Uize.inRange= method.
+
+							EXAMPLES
+							............................................................
+							// testing a number against a number range
+							Uize.inRange (-50,0,100);
+
+							// testing a string against a string range
+							Uize.inRange ('a','b','y');
+
+							// testing a date against a date range
+							Uize.inRange (
+								new Date ('01/01/1999'),
+								new Date ('01/01/2000'),
+								new Date ('01/01/2010')
+							);
+
+							// testing an object against a range expressed using objects
+							Uize.inRange (              // testing
+								new Uize ({value:-50}),  // coerced to -50
+								new Uize ({value:0}),    // coerced to 0
+								new Uize ({value:1000})  // coerced to 100
+							);
+							............................................................
+
+						NOTES
+						- see the related =Uize.constrain= static method
+			*/
+		);
+
+		var _copyInto = _nonInheritableStatic (
+			'copyInto',
+			function (_targetObject,_sourceObject) {
+				if (_targetObject && _isObject (_sourceObject)) {
+					for (var _propertyName in _sourceObject)
+						_targetObject [_propertyName] = _sourceObject [_propertyName]
+					;
+				}
+				if (arguments.length > 2) {
+					for (var _sourceObjectNo = 0; ++_sourceObjectNo < arguments.length;)
+						_copyInto (_targetObject,arguments [_sourceObjectNo])
+					;
+				}
+				return _targetObject;
 			}
-			if (arguments.length > 2) {
-				for (var _sourceObjectNo = 0; ++_sourceObjectNo < arguments.length;)
-					_copyInto (_targetObject,arguments [_sourceObjectNo])
-				;
-			}
-			return _targetObject;
 			/*?
 				Static Methods
 					Uize.copyInto
@@ -1526,47 +1693,45 @@
 						NOTES
 						- Source object parameters whose values are not objects will simply not be copied into the target object. This is a useful behavior, as it allows one to mix conditional copies into a single call to =Uize.copyInto= by using the ternary operator to select between a source object and the value =null=.
 			*/
-		};
-		_classNonInheritableStatics.copyInto = 1;
+		);
 
-		_class.callOn = function (_target,_method,_arguments) {
-			if (_target == _undefined) return;
-			_arguments || (_arguments = _sacredEmptyArray);
-			var
-				_methodIsString = typeof _method == _typeString,
-				_methodIsFunction = !_methodIsString && _isFunction (_method)
-			;
-			function _callOn (_target) {
-				if (_target && typeof _target == _typeObject) {
-					if (_isArray (_target)) {
-						for (var _targetNo = -1, _targetLength = _target.length; ++_targetNo < _targetLength;)
-							_callOn (_target [_targetNo])
-						;
-					} else {
-						var _methodIsStringAndIsInObject = _methodIsString && _isFunction (_target [_method]);
-						if (_isInstance (_target)) {
-							if (_methodIsFunction || _methodIsStringAndIsInObject)
-								(_methodIsFunction ? _method : _target [_method]).apply (_target,_arguments)
+		_nonInheritableStatic (
+			'callOn',
+			function (_target,_method,_arguments) {
+				if (_target == _undefined) return;
+				_arguments || (_arguments = _sacredEmptyArray);
+				var
+					_methodIsString = _isString (_method),
+					_methodIsFunction = !_methodIsString && _isFunction (_method)
+				;
+				function _callOn (_target) {
+					if (_target != _undefined) {
+						if (_isArray (_target)) {
+							for (var _targetNo = -1, _targetLength = _target.length; ++_targetNo < _targetLength;)
+								_callOn (_target [_targetNo])
 							;
-						} else {
+						} else if (_isPlainObject (_target)) {
 							for (var _property in _target)
 								_callOn (_target [_property])
 							;
+						} else if (_methodIsFunction || (_methodIsString && _isFunction (_target [_method]))) {
+							(_methodIsFunction ? _method : _target [_method]).apply (_target,_arguments);
 						}
 					}
 				}
+				if (_methodIsString || _methodIsFunction)
+					_callOn (_target)
+				;
 			}
-			if (_methodIsString || _methodIsFunction)
-				_callOn (_target)
-			;
 			/*?
 				Static Methods
 					Uize.callOn
-						Recurses through the arbitrarily complex object specified, calling the specified method on all values that are instances of =Uize= subclasses, or that are objects that have a property whose name matches the method name specified and whose value is a function.
+						Recurses through the arbitrarily complex object specified, calling the specified method on all values that are not nully (=null= or =undefined=).
 
-						This sounds like a mouthfull, but in a nutshell it allows the following kinds of things...
-						- specifying a function that should be called as a method on a specified set of instances
-						- specifying the name of a method that should be called on a specified set of instances
+						This method allows the following...
+
+						- specifying a function that should be called as a method on a specified set of values
+						- specifying the name of a method that should be called on a specified set of values
 
 						SYNTAX
 						................................................
@@ -1599,6 +1764,23 @@
 						.................................
 
 						This method is most compelling when an object or array contains a dynamic set of instances on which a specific method needs to be called, or on which a specified function needs to be called as a method.
+
+						EXAMPLE
+						...........................................................
+						var dates = [
+							new Date ('05/10/1986'),
+							new Date ('01/12/1992'),
+							new Date ('10/04/2003'),
+							new Date ('07/01/2010')
+						];
+
+						Uize.callOn (
+							dates,
+							function () {this.setFullYear (this.getFullYear () - 1)}
+						);
+						...........................................................
+
+						In the above example, the call of the =Uize.callOn= method would shift all the dates in the =dates= array back by a year.
 
 						VARIATION 1
 						...............................................................
@@ -1649,23 +1831,47 @@
 						Uize.callOn (page.children.possiblyNonExistentChildWidget,'insertUi');
 						......................................................................
 			*/
-		};
-		_classNonInheritableStatics.callOn = 1;
+		);
 
-		_class.defaultNull = function (_value,_default) {
-			return _value != _undefined ? _value : _default;
+		_nonInheritableStatic (
+			'defaultNully',
+			function (_value,_default) {return _value != _undefined ? _value : _default}
 			/*?
 				Static Methods
-					Uize.defaultNull
-						SYNTAX
-						.......................................................................
-						defaultedValueANYTYPE = Uize.defaultNull (valueANYTYPE,defaultANYTYPE);
-						.......................................................................
-			*/
-		};
-		_classNonInheritableStatics.defaultNull = 1;
+					Uize.defaultNully
+						Returns the specified default value if the first argument is nully (ie. its value is =null= or =undefined=).
 
-		_class.getModuleByName = _getModuleByName;
+						SYNTAX
+						........................................................................
+						defaultedValueANYTYPE = Uize.defaultNully (valueANYTYPE,defaultANYTYPE);
+						........................................................................
+
+						In JavaScript, the values =null= and =undefined= are technically different, but in many instances in your code you may wish to treat them as equivalent, often when you are defaulting arguments of functions or properties of objects. While you can test to see if a value is either =null= or =undefined= by simply comparing the value to =undefined= in a loose equality (eg. =if (myValue &#61;&#61; undefined) {...}=), certain tools like =jslint= may complain about that, forcing you to do two explicit strict equality checks (as in =if (myValue &#61;&#61;&#61; null || myValue &#61;&#61;&#61; undefined) {...}=). The =Uize.defaultNully= method provides a convenient way to perform this type of test and defaulting.
+
+						INSTEAD OF...
+						...........................................................
+						function (myArgument0,myArgument1) {
+							if (myArgument0 === null || myArgument0 === undefined) {
+								myArgument0 = 'some default value';
+							}
+							// do more stuff
+						}
+						...........................................................
+
+						USE...
+						......................................................................
+						function (myArgument0,myArgument1) {
+							myArgument0 = Uize.defaultNully (myArgument0,'some default value');
+							// do more stuff
+						}
+						......................................................................
+
+						NOTES
+						- see the related =Uize.isNully= static method
+			*/
+		);
+
+		_nonInheritableStatic ('getModuleByName',_getModuleByName);
 			/*?
 				Static Methods
 					Uize.getModuleByName
@@ -1710,19 +1916,21 @@
 
 						After the above code has been executed, the =modulesBuilt= array will contain the names of all the modules that have been built, listed in the order in which they were built.
 			*/
-		_classNonInheritableStatics.getModuleByName = 1;
 
-		_class.indexIn = function (_array,_value,_fromEnd,_strict) {
-			if (_isArray (_array)) {
-				_strict = _strict !== _false;
-				for (var _lastIndex = _array.length - 1, _elementNo = _lastIndex + 1, _result; --_elementNo >= 0;) {
-					var _element = _array [_result = _fromEnd ? _elementNo : _lastIndex - _elementNo];
-					if (_strict ? _element === _value : _element == _value)
-						return _result
-					;
+		_nonInheritableStatic (
+			'indexIn',
+			function (_array,_value,_fromEnd,_strict) {
+				if (_isArray (_array)) {
+					_strict = _strict !== _false;
+					for (var _lastIndex = _array.length - 1, _elementNo = _lastIndex + 1, _result; --_elementNo >= 0;) {
+						var _element = _array [_result = _fromEnd ? _elementNo : _lastIndex - _elementNo];
+						if (_strict ? _element === _value : _element == _value)
+							return _result
+						;
+					}
 				}
+				return -1;
 			}
-			return -1;
 			/*?
 				Static Methods
 					Uize.indexIn
@@ -1762,11 +1970,487 @@
 						NOTES
 						- see also the related =Uize.isIn= static method
 			*/
-		};
-		_classNonInheritableStatics.indexIn = 1;
+		);
 
-		var _isArray = _class.isArray = function (_object) {
-			return _object instanceof Array || (!!_object && _isFunction (_object.splice));
+		_nonInheritableStatic (
+			'keys',
+			function (_object) {
+				var _result = [];
+				if (!_isString (_object))
+					for (var _key in _object) _result.push (_key)
+				;
+				return _result;
+			}
+			/*?
+				Static Methods
+					Uize.keys
+						Returns an array, representing the keys (property names) of the specified object.
+
+						SYNTAX
+						..................................
+						keysARRAY = Uize.keys (objectOBJ);
+						..................................
+
+						EXAMPLE
+						........................................
+						var
+							personRecord = {
+								firstName:'John',
+								lastName:'Wilkey',
+								addressStreet:'1 Shiny House Way',
+								addressCity:'Richville',
+								addressState:'CA',
+								addressZip:'91234'
+							},
+							myKeys = Uize.keys (personRecord)
+						;
+						........................................
+
+						After the above code has executed, the =myKeys= variable will have the value =['firstName', 'lastName', 'addressStreet', 'addressCity', 'addressState', 'addressZip']=.
+
+						NOTES
+						- when the value of =objectOBJ= parameter is =null= or =undefined=, an empty array will be returned
+			*/
+		);
+
+		_nonInheritableStatic (
+			'totalKeys',
+			function (_object) {
+				var _result = 0;
+				if (!_isString (_object))
+					for (var _key in _object) _result++
+				;
+				return _result;
+			}
+			/*?
+				Static Methods
+					Uize.totalKeys
+						Returns an integer, representing the total number of keys in the specified object.
+
+						SYNTAX
+						..........................................
+						totalKeysINT = Uize.totalKeys (objectOBJ);
+						..........................................
+
+						Using the =Uize.totalKeys= method to determine the number of keys an object has is more efficient than using the expression =Uize.keys (myObject).length=, because the =Uize.totalKeys= method doesn't populate an array. Furthermore, to determine if an object is empty, you *could* use the expression =!Uize.totalKeys (myObject)=, but it would be more efficient to use the convenient =Uize.isEmpty= static method.
+
+						NOTES
+						- when the value of =objectOBJ= parameter is =null= or =undefined=, the value =0= will be returned
+			*/
+		);
+
+		var _values = _nonInheritableStatic (
+			'values',
+			function (_object) {
+				if (_isArray (_object)) return _object;
+				var _result = [];
+				if (!_isString (_object))
+					for (var _key in _object) _result.push (_object [_key])
+				;
+				return _result;
+			}
+			/*?
+				Static Methods
+					Uize.values
+						Returns an array, representing the property values of the specified object.
+
+						SYNTAX
+						......................................
+						valuesARRAY = Uize.values (objectOBJ);
+						......................................
+
+						EXAMPLE
+						.........................................
+						var
+							personRecord = {
+								firstName:'John',
+								lastName:'Wilkey',
+								addressStreet:'1 Shiny House Way',
+								addressCity:'Richville',
+								addressState:'CA',
+								addressZip:'91234'
+							},
+							myValues = Uize.keys (personRecord)
+						;
+						.........................................
+
+						After the above code has executed, the =myValues= variable will have the value =['John', 'Wilkey', '1 Shiny House Way', 'Richville', 'CA', '91234']=.
+
+						VARIATION
+						........................................
+						valuesARRAY = Uize.values (objectARRAY);
+						........................................
+
+						When an =objectARRAY= parameter is specified in place of an =objectOBJ= parameter, then the value of the =objectARRAY= parameter will be returned as the result. This behavior makes this method useful for canonicalizing what could be an object or an array to an array of values.
+
+						NOTES
+						- when the value of =objectOBJ= parameter is =null= or =undefined=, an empty array will be returned
+			*/
+		);
+
+		_nonInheritableStatic (
+			'min',
+			function (_object) {return Math.min.apply (0,_class.values (_object))}
+			/*?
+				Static Methods
+					Uize.min
+						Returns the minimum value from the specified array or object.
+
+						SYNTAX
+						..............................................
+						var minValueNUM = Uize.min (valuesARRAYorOBJ);
+						..............................................
+
+						When an object is specified for the =valuesARRAYorOBJ= parameter, then the minimum property value in the object will be returned.
+
+						EXAMPLE
+						..................................................
+						var
+							employeeSalaries = {
+								'John Anderson':80000,
+								'Peter Hendriks':56000,
+								'Jacob Previn':75000,
+								'Scarlet Sjedsondorf':63000
+							},
+							minEmployeeSalary = Uize.min (employeeSalaries)
+						;
+						..................................................
+
+						In the above example, the variable =minEmployeeSalary= will be left with the value =56000=.
+
+						NOTES
+						- if any of the values are not a number, then this method will return the value =NaN=
+						- see the companion =Uize.max= static method
+			*/
+		);
+
+		_nonInheritableStatic (
+			'max',
+			function (_object) {return Math.max.apply (0,_class.values (_object))}
+			/*?
+				Static Methods
+					Uize.max
+						Returns the maximum value from the specified array or object.
+
+						SYNTAX
+						..............................................
+						var maxValueNUM = Uize.max (valuesARRAYorOBJ);
+						..............................................
+
+						When an object is specified for the =valuesARRAYorOBJ= parameter, then the maximum property value in the object will be returned.
+
+						EXAMPLE
+						..................................................
+						var
+							employeeSalaries = {
+								'John Anderson':80000,
+								'Peter Hendriks':56000,
+								'Jacob Previn':75000,
+								'Scarlet Sjedsondorf':63000
+							},
+							maxEmployeeSalary = Uize.max (employeeSalaries)
+						;
+						..................................................
+
+						In the above example, the variable =maxEmployeeSalary= will be left with the value =80000=.
+
+						NOTES
+						- if any of the values are not a number, then this method will return the value =NaN=
+						- see the companion =Uize.min= static method
+			*/
+		);
+
+		_nonInheritableStatic (
+			'reverseLookup',
+			function (_object,_safe) {
+				var _lookup = _class.lookup (_null,0,_safe);
+				if (!_isString (_object))
+					for (var _key in _object) _lookup [_object [_key] + ''] = _key
+				;
+				return _lookup;
+			}
+			/*?
+				Static Methods
+					Uize.reverseLookup
+						Returns a reverse lookup object, where each key is a value from the specified source object, and where the value for each key is the associated key from the specified source.
+
+						SYNTAX
+						................................................
+						reverseLookupOBJ = Uize.reverseLookup (hashOBJ);
+						................................................
+
+						EXAMPLE 1
+						...............................................................................
+						var
+							htmlEntities = {quot:34, amp:38, lt:60, gt:62, nbsp:160, copy:169, reg:174},
+							htmlEntitiesReverseLookup = Uize.reverseLookup (htmlEntities)
+						;
+						...............................................................................
+
+						After the above code is executed, the value of the =htmlEntitiesReverseLookup= variable will be an object with the contents...
+
+						..........................................................................
+						{34:'quot', 38:'amp', 60:'lt', 62:'gt', 160:'nbsp', 169:'copy', 174:'reg'}
+						..........................................................................
+
+						By creating a reverse lookup, this code can lookup up an entity's character code from its name, or its name from its character code.
+
+						VARIATION
+						....................................................
+						reverseLookupOBJ = Uize.reverseLookup (valuesARRAY);
+						....................................................
+
+						The =Uize.reverseLookup= method can also be used to create a reverse lookup object for an array. When a =valuesARRAY= parameter is specified in place of the =hashOBJ= parameter, a reverse lookup object is generated where each of the values in the array is a key in the object, and the value corresponding to each key is the index of the value in the array.
+
+						EXAMPLE 2
+						..........................................................................
+						var
+							frontRunnerLineup = [
+								'John Backsberg',
+								'Adrian Gullipeg',
+								'Sasha Djenduriba',
+								'Clark Holstrom',
+								'Michael Anderson',
+								'Henry Pratt',
+								'Jacob Zimbalist',
+								'Steven P. McLoughlan',
+								'Chris Gates',
+								'Richard Crumb'
+							],
+							frontRunnerLineupReverseLookup = Uize.reverseLookup (frontRunnerLineup)
+						;
+						..........................................................................
+
+						After the above code is executed, the value of the =frontRunnerLineupReverseLookup= variable will be an object with the contents...
+
+						............................
+						[
+							'John Backsberg':0,
+							'Adrian Gullipeg':1,
+							'Sasha Djenduriba':2,
+							'Clark Holstrom':3,
+							'Michael Anderson':4,
+							'Henry Pratt':5,
+							'Jacob Zimbalist':6,
+							'Steven P. McLoughlan':7,
+							'Chris Gates':8,
+							'Richard Crumb':9
+						]
+						............................
+
+						Now the code can look up a front-runner from the front-runner lineup using an index, or the code can determine if a particular person is in the front-runner lineup and what their finishing place is using the generated reverse lookup.
+			*/
+		);
+
+		_nonInheritableStatic (
+			'lookup',
+			function (_values,_lookupValue,_safe) {
+				var _lookup = _safe
+					? {constructor:_undefined,toLocaleString:_undefined,toString:_undefined,valueOf:_undefined}
+					: {}
+				;
+				if (arguments.length == 1) _lookupValue = _true;
+				if (_values != _undefined) {
+					for (var _valueNo = -1, _valuesLength = _values.length; ++_valueNo < _valuesLength;)
+						_lookup [_values [_valueNo]] = _lookupValue
+					;
+				}
+				return _lookup;
+			}
+			/*?
+				Static Methods
+					Uize.lookup
+						Returns a lookup object, where each key is a value from the specified values array.
+
+						SYNTAX
+						......................................
+						lookupOBJ = Uize.lookup (valuesARRAY);
+						......................................
+
+						EXAMPLE
+						...............................................................
+						var
+							fruits = ['apple','peach','pear','banana','orange','mango'],
+							fruitsLookup = Uize.lookup (fruits)
+						;
+						...............................................................
+
+						After the above code is executed, the value of the =fruitsLookup= variable will be an object with the contents...
+
+						.........................................................................
+						{apple:true, peach:true, pear:true, banana:true, orange:true, mango:true}
+						.........................................................................
+
+						VARIATION
+						.........................................................
+						lookupOBJ = Uize.lookup (valuesARRAY,lookupValueANYTYPE);
+						.........................................................
+
+						By default, the =Uize.lookup= method creates an object whose properties all have the boolean value =true=. The optional =lookupValueANYTYPE= parameter lets you specify the value that should be assigned to each of the properties in the lookup object.
+
+						EXAMPLE
+						...............................................................
+						var
+							fruits = ['apple','peach','pear','banana','orange','mango'],
+							fruitsLookup = Uize.lookup (fruits,1)
+						;
+						...............................................................
+
+						In the above example, the value =1= is being specified for the optional =lookupValueANYTYPE=. After the above code is executed, the value of the =fruitsLookup= variable will be an object with the contents...
+
+						.......................................................
+						{apple:1, peach:1, pear:1, banana:1, orange:1, mango:1}
+						.......................................................
+
+						A Real World Example
+							Creating a lookup object is useful when repeatedly checking to see if values are in a defined values set. Looping through that defined values set array for each of the lookups would result in poor performance if the set of values to scan through is large, and if the lookup is being performed frequently.
+
+							Let's consider an example...
+
+							............................................................
+							function getValuesInMasterList (values,masterList) {
+								var result = [];
+								for (var valueNo = -1; ++valueNo < values.length;) {
+									var value = values [valueNo];
+									if (Uize.isIn (masterList,value)) result.push (value);
+								}
+								return result;
+							}
+							............................................................
+
+							In the above example, a =getValuesInMasterList= function is being defined. This function accepts two parameters: an array of values, and a master list of values. The function returns an array, containing all the values from the values array that are present in the master list of values. The way it's implemented, on each iteration of the loop through the values array the =Uize.isIn= static method is being used to determined if the current value is in the master list array. This provides less than optimal performance, since the complexity is O(n2).
+
+							Using the =Uize.lookup= static method, a more efficient solution can be fashioned, as follows...
+
+							.........................................................
+							function getValuesInMasterList (values,masterList) {
+								var
+									result = [],
+									masterListLookup = Uize.lookup (masterList)
+								;
+								for (var valueNo = -1; ++valueNo < values.length;) {
+									var value = values [valueNo];
+									if (masterListLookup [value]) result.push (value);
+								}
+								return result;
+							}
+							.........................................................
+
+							In the improved version, a lookup object (aka hash table) is created before the loop. Then, in the loop, all that is needed to see if a value being inspected is in the master list is to do a simple dereference into the lookup object, using the value as the key / property name. Here the complexity is O(n), since indexing into the lookup object is constant time.
+			*/
+		);
+
+		var _isObject = _nonInheritableStatic (
+			'isObject',
+			function (_value) {return !!_value && typeof _value == _typeObject}
+			/*?
+				Static Methods
+					Uize.isObject
+						Returns a boolean, indicating whether or not the specified value is an object.
+
+						SYNTAX
+						............................................
+						isObjectBOOL = Uize.isObject (valueANYTYPE);
+						............................................
+
+						Using JavaScript's built-in =typeof= operator, the type of the value =null= is reported as being ='object'=. This can be less than useful when trying to conditionalize code to operate on object type values by dereferencing properties, as attempting to dereference properties off the value =null= will produce JavaScript errors. The =Uize.isObject= method provides a more useful and semantically more intuitive way of testing if a value is a non-null object.
+
+						INSTEAD OF...
+						.....................................................
+						if (typeof myValue == 'object' && myValue !== null) {
+							// ...
+						}
+						.....................................................
+
+						USE...
+						..............................
+						if (Uize.isObject (myValue)) {
+							// ...
+						}
+						..............................
+
+						Note that because arrays in JavaScript are derived from the language's built-in =Object= object, array values are reported as being objects by this method.
+
+						EXAMPLES
+						......................................................
+						Uize.isObject ({foo:'bar'});          // returns true
+						Uize.isObject (['foo','bar']);        // returns true
+						Uize.isObject (new Boolean (false));  // returns true
+						Uize.isObject (new String ('foo'));   // returns true
+						Uize.isObject (new Number (5));       // returns true
+						Uize.isObject (new Date);             // returns true
+						Uize.isObject (new Uize.Widget);      // returns true
+
+						Uize.isObject (null);                 // returns false
+						Uize.isObject (undefined);            // returns false
+						Uize.isObject ();                     // returns false
+						Uize.isObject (5);                    // returns false
+						Uize.isObject (NaN);                  // returns false
+						Uize.isObject ('foo');                // returns false
+						Uize.isObject (true);                 // returns false
+						Uize.isObject (function () {});       // returns false
+						......................................................
+
+						NOTES
+						- compare to the =Uize.isNully= and =Uize.isPlainObject= static methods
+						- see also the other `Value Testing Methods`
+			*/
+		);
+
+		var _isPlainObject = _nonInheritableStatic (
+			'isPlainObject',
+			function (_value) {
+				return (
+					_value != _undefined &&
+					(_value.constructor == Object || _value.constructor.prototype.hasOwnProperty ('hasOwnProperty'))
+					/* NOTE:
+						For plain object instances that originate from a different window or IFRAME, and where the constructor will be a discrete Object object from that other context, we test if the constructor's prototype has 'hasOwnProperty' as an own property, which is only true of the Object object, unless people are screwing around with overriding basic language features like this (not so likely).
+					*/
+				);
+			}
+			/*?
+				Static Methods
+					Uize.isPlainObject
+						Returns a boolean, indicating whether or not the specified value is a plain object (an instance of JavaScript's built-in =Object= object).
+
+						SYNTAX
+						......................................................
+						isPlainObjectBOOL = Uize.isPlainObject (valueANYTYPE);
+						......................................................
+
+						Plain objects are often used as very simple data structures in JavaScript. Sometimes it is desirable to conditionalize the behavior of a function or method, based upon whether an object type value is a plain data structure object or an instance of a custom object (such as an instance of a =Date= object, or an instance of a =Uize= subclass). In such cases, the =Uize.isPlainObject= method provides a convenient way to detect if a value is a reference to a plain object.
+
+						EXAMPLES
+						...........................................................
+						Uize.isPlainObject ({});                   // returns true
+						Uize.isPlainObject ({foo:'bar'});          // returns true
+						Uize.isPlainObject (new Object ());        // returns true
+
+						Uize.isPlainObject (['foo','bar']);        // returns false
+						Uize.isPlainObject (new Boolean (false));  // returns false
+						Uize.isPlainObject (new String ('foo'));   // returns false
+						Uize.isPlainObject (new Number (5));       // returns false
+						Uize.isPlainObject (new Date);             // returns false
+						Uize.isPlainObject (new Uize.Widget);      // returns false
+						Uize.isPlainObject (null);                 // returns false
+						Uize.isPlainObject (undefined);            // returns false
+						Uize.isPlainObject ();                     // returns false
+						Uize.isPlainObject (5);                    // returns false
+						Uize.isPlainObject (NaN);                  // returns false
+						Uize.isPlainObject ('foo');                // returns false
+						Uize.isPlainObject (true);                 // returns false
+						Uize.isPlainObject (function () {});       // returns false
+						...........................................................
+
+						NOTES
+						- compare to the =Uize.isObject= static method
+						- see also the other `Value Testing Methods`
+			*/
+		);
+
+		var _isArray = _nonInheritableStatic (
+			'isArray',
+			function (_value) {return _value instanceof Array || (!!_value && _isFunction (_value.splice))}
 			/*?
 				Static Methods
 					Uize.isArray
@@ -1781,21 +2465,23 @@
 
 						NOTES
 						- an object having a property named =splice= whose value is of type =function= will be regarded as an array by this method
-						- see the related =Uize.isFunction= and =Uize.isNumber= static methods
+						- see also the other `Value Testing Methods`
 			*/
-		};
-		_classNonInheritableStatics.isArray = 1;
+		);
 
-		var _isFunction = _class.isFunction = function (_value) {
-			var _constructor = _value != _undefined && _value.constructor;
-			return !!(_constructor && _constructor == _constructor.constructor);
-			/* NOTES:
-				- for some inexplicable reason, typeof RegExp is 'function' in FF and Safari, so we avoid using typeof in our test
-				- in Internet Explorer, references to functions defined in another window fail in a "typeof value == 'function'" test, so we avoid using typeof
-				- in many browsers, references to functions defined in another window will fail on a test of "value instanceof Function", because the Function constructor for the function in the other window is discrete from the Function object of the window in which the test is being performed
-				- the constructor of the Function object is the Function object, so if the constructor for a value is the same as constructor's constructor, then the value must be a function
-				- in Internet Explorer, certain object constructors, such as HTMLBodyElement, are reported as object with the typeof operator, and their constructor is reported as undefined (rather than a native function wrapper), so we test to make sure that the constructor is defined (or there would be JavaScript errors produced when testing those objects)
-			*/
+		var _isFunction = _nonInheritableStatic (
+			'isFunction',
+			function (_value) {
+				var _constructor = _value != _undefined && _value.constructor;
+				return !!(_constructor && _constructor == _constructor.constructor);
+				/* NOTES:
+					- for some inexplicable reason, typeof RegExp is 'function' in FF and Safari, so we avoid using typeof in our test
+					- in Internet Explorer, references to functions defined in another window fail in a "typeof value == 'function'" test, so we avoid using typeof
+					- in many browsers, references to functions defined in another window will fail on a test of "value instanceof Function", because the Function constructor for the function in the other window is discrete from the Function object of the window in which the test is being performed
+					- the constructor of the Function object is the Function object, so if the constructor for a value is the same as constructor's constructor, then the value must be a function
+					- in Internet Explorer, certain object constructors, such as HTMLBodyElement, are reported as object with the typeof operator, and their constructor is reported as undefined (rather than a native function wrapper), so we test to make sure that the constructor is defined (or there would be JavaScript errors produced when testing those objects)
+				*/
+			}
 			/*?
 				Static Methods
 					Uize.isFunction
@@ -1826,13 +2512,13 @@
 							Furthermore, references to functions defined in another window will fail in a test of "instanceof Function", because the =Function= constructor for the function that was defined in the other window is discrete from the =Function= object belonging to the window in which the test is being performed. This behavior may seem unfortunate in this one sense, but it is important in the sense of not allowing contamination across windows and possible interoperability and security issues. If your code is expecting functions that may originate from a different window, then it is better to use the =Uize.isFunction= method in testing for function type values, because the =Uize.isFunction= method handles the aforementioned issues.
 
 						NOTES
-						- see the related =Uize.isArray= and =Uize.isNumber= static methods
+						- see also the other `Value Testing Methods`
 			*/
-		};
-		_classNonInheritableStatics.isFunction = 1;
+		);
 
-		_class.isNumber = function (_value) {
-			return typeof _value == _typeNumber && !isNaN (_value);
+		_nonInheritableStatic (
+			'isNumber',
+			function (_value) {return typeof _value == _typeNumber && !isNaN (_value)}
 			/*?
 				Static Methods
 					Uize.isNumber
@@ -1843,51 +2529,322 @@
 						isNumberBOOL = Uize.isNumber (valueANYTYPE);
 						............................................
 
-						This method is a useful abstraction to deal with the fact that the division of zero by zero in JavaScript yields a special kind of value know as =NaN=. Unfortunately, in the implementation of this special value, the result chosen for when the =typeof= operator is applied to it is ='number' (ie. =typeof NaN &#61;&#61; 'number'= yields =true=). The =Uize.isNumber= method checks that both the type of the parameter is ='number'= and also that the parameter is not =NaN=.
+						This method is a useful abstraction to deal with the fact that the division of zero by zero in JavaScript yields a special kind of value know as =NaN=. Unfortunately, in the implementation of this special value, the result chosen for when the =typeof= operator is applied to it is ='number'= (ie. =typeof NaN &#61;&#61; 'number'= produces =true=). The =Uize.isNumber= method checks that both the type of the parameter is ='number'= and also that the parameter is not =NaN=.
+
+						Also note that this method tests if the specified value is a number primitive, so this method will return =false= if the value being tested is an instance of JavaScript's built-in =Number= object.
 
 						NOTES
-						- see the related =Uize.isArray= and =Uize.isFunction= static methods
+						- see also the other `Value Testing Methods`
 			*/
-		};
-		_classNonInheritableStatics.isNumber = 1;
+		);
 
-		_class.isIn = function (_array,_value,_strict) {
-			return _class.indexIn (_array,_value,false,_strict) > -1;
+		var _isString = _nonInheritableStatic (
+			'isString',
+			function (_value) {return typeof _value == _typeString}
+			/*?
+				Static Methods
+					Uize.isString
+						Returns a boolean, indicating whether or not the specified value is a string.
+
+						SYNTAX
+						............................................
+						isStringBOOL = Uize.isString (valueANYTYPE);
+						............................................
+
+						This method tests if the specified value is a string primitive, so this method will return =false= if the value being tested is an instance of JavaScript's built-in =String= object.
+
+						EXAMPLES
+						......................................................
+						Uize.isString ('foo');                // returns true
+						Uize.isString ('');                   // returns true
+
+						Uize.isString (new String ('foo'));   // returns false
+						Uize.isString (5);                    // returns false
+						Uize.isString (NaN);                  // returns false
+						Uize.isString (true);                 // returns false
+						Uize.isString (null);                 // returns false
+						Uize.isString (undefined);            // returns false
+						Uize.isString ();                     // returns false
+						Uize.isString ({foo:'bar'});          // returns false
+						Uize.isString (['foo','bar']);        // returns false
+						Uize.isString (new Uize.Widget);      // returns false
+						Uize.isString (function () {});       // returns false
+						// etc.
+						......................................................
+
+						NOTES
+						- see also the other `Value Testing Methods`
+			*/
+		);
+
+		_nonInheritableStatic (
+			'isBoolean',
+			function (_value) {return typeof _value == _typeBoolean}
+			/*?
+				Static Methods
+					Uize.isBoolean
+						Returns a boolean, indicating whether or not the specified value is a boolean.
+
+						SYNTAX
+						..............................................
+						isBooleanBOOL = Uize.isBoolean (valueANYTYPE);
+						..............................................
+
+						This method tests if the specified value is a boolean primitive, so this method will return =false= if the value being tested is an instance of JavaScript's built-in =Boolean= object.
+
+						EXAMPLES
+						.......................................................
+						Uize.isBoolean (true);                 // returns true
+						Uize.isBoolean (false);                // returns true
+
+						Uize.isBoolean (new Boolean (true));   // returns false
+						Uize.isBoolean ('true');               // returns false
+						Uize.isBoolean (5);                    // returns false
+						Uize.isBoolean (NaN);                  // returns false
+						Uize.isBoolean (null);                 // returns false
+						Uize.isBoolean (undefined);            // returns false
+						Uize.isBoolean ();                     // returns false
+						Uize.isBoolean ({foo:'bar'});          // returns false
+						Uize.isBoolean (['foo','bar']);        // returns false
+						Uize.isBoolean (new Uize.Widget);      // returns false
+						Uize.isBoolean (function () {});       // returns false
+						// etc.
+						.......................................................
+
+						NOTES
+						- see also the other `Value Testing Methods`
+			*/
+		);
+
+		_nonInheritableStatic (
+			'isNully',
+			function (_value) {return _value == _undefined}
+			/*?
+				Static Methods
+					Uize.isNully
+						Returns a boolean, indicating whether or not the specified value is =null= or =undefined=.
+
+						SYNTAX
+						..........................................
+						isNullyBOOL = Uize.isNully (valueANYTYPE);
+						..........................................
+
+						In JavaScript, the values =null= and =undefined= are technically different, but in many instances in your code you may wish to treat them as equivalent, often when you are defaulting arguments of functions or properties of objects. Now, you can test to see if a value is either =null= or =undefined= by simply comparing the value to =undefined= in a loose equality (eg. =if (myValue &#61;&#61; undefined) {...}=), but certain tools like =jslint= may complain about that, forcing you to do two explicit strict equality checks (as in =if (myValue &#61;&#61;&#61; null || myValue &#61;&#61;&#61; undefined) {...}=). This can be tedious when you have a long deferencing, so the =Uize.isNully= method can be useful and more concise in such cases.
+
+						INSTEAD OF...
+						........................................................................................
+						if (myObject.subObject.property === null || myObject.subObject.property === undefined) {
+							// ...
+						}
+						........................................................................................
+
+						USE...
+						.................................................
+						if (Uize.isNully (myObject.subObject.property)) {
+							// ...
+						}
+						.................................................
+
+						NOTES
+						- compare to the =Uize.isObject= static method
+						- see the related =Uize.defaultNully= static method
+						- see also the other `Value Testing Methods`
+			*/
+		);
+
+		var _isPrimitive = _nonInheritableStatic (
+			'isPrimitive',
+			function (_value) {
+				if (_value == _undefined) return _false;
+				var _typeofValue = typeof _value;
+				return _typeofValue == _typeString || _typeofValue == _typeNumber || _typeofValue == _typeBoolean;
+			}
+			/*?
+				Static Methods
+					Uize.isPrimitive
+						Returns a boolean, indicating whether or not the specified value is one of JavaScript's built-in primitive types: string, boolean, or number.
+
+						SYNTAX
+						..................................................
+						isPrimitiveBOOL = Uize.isPrimitive (valueANYTYPE);
+						..................................................
+
+						EXAMPLES
+						.........................................................
+						Uize.isPrimitive (true);                 // returns true
+						Uize.isPrimitive (false);                // returns true
+						Uize.isPrimitive ('foo');                // returns true
+						Uize.isPrimitive ('');                   // returns true
+						Uize.isPrimitive (42);                   // returns true
+						Uize.isPrimitive (0);                    // returns true
+
+						Uize.isPrimitive (new Boolean (true));   // returns false
+						Uize.isPrimitive (new String (foo));     // returns false
+						Uize.isPrimitive (new Number (42));      // returns false
+						Uize.isPrimitive (null);                 // returns false
+						Uize.isPrimitive (undefined);            // returns false
+						Uize.isPrimitive ();                     // returns false
+						Uize.isPrimitive ({foo:'bar'});          // returns false
+						Uize.isPrimitive (['foo','bar']);        // returns false
+						Uize.isPrimitive (new Uize.Widget);      // returns false
+						Uize.isPrimitive (function () {});       // returns false
+						// etc.
+						.........................................................
+
+						NOTES
+						- see also the other `Value Testing Methods`
+			*/
+		);
+
+		_nonInheritableStatic (
+			'isIn',
+			function (_source,_value,_strict) {return _class.indexIn (_values (_source),_value,_false,_strict) > -1}
 			/*?
 				Static Methods
 					Uize.isIn
-						Returns a boolean, indicating whether or not the specified value can be found within the specified array.
+						Returns a boolean, indicating whether or not the specified value can be found within the specified array (or values of an object's properties).
 
 						SYNTAX
-						................................................
-						isInBOOL = Uize.isIn (sourceARRAY,valueANYTYPE);
-						................................................
+						.....................................................
+						isInBOOL = Uize.isIn (sourceARRAYorOBJ,valueANYTYPE);
+						.....................................................
 
 						VARIATION
-						...................................................................
-						isInBOOL = Uize.isIn (sourceARRAY,valueANYTYPE,strictEqualityBOOL);
-						...................................................................
+						........................................................................
+						isInBOOL = Uize.isIn (sourceARRAYorOBJ,valueANYTYPE,strictEqualityBOOL);
+						........................................................................
 
-						By default, this method tests for a match using strict equality. When the value =false= is specified for the optional =strictEqualityBOOL= parameter, then this method will test for a match using loose equality (ie. where the string value ='1'= would be considered equal to the number value =1=).
+						By default, this method tests for a match using strict equality. When the value =false= is specified for the optional =strictEqualityBOOL= parameter, then this method will test for a match using loose equality (ie. where the string value ='1'= would be considered equal to the number value =1=, or the number value =0= would be considered equal to the boolean value =false=).
 
 						EXAMPLE
-						............................................................
-						Uize.isIn ([0,1,2,3,4,5],'3');              // returns false
-						Uize.isIn ([0,1,2,3,4,5],'3',false,false);  // returns true
-						............................................................
+						.......................................................................................
+						Uize.isIn ([0,1,2,3,4,5],'3');               // returns false
+						Uize.isIn ([0,1,2,3,4,5],'3',false);         // returns true
+						Uize.isIn ({prop1:'foo',prop2:1},'foo');     // returns true
+						Uize.isIn ({prop1:'foo',prop2:1},'1');       // returns false
+						Uize.isIn ({prop1:'foo',prop2:1},'1',false); // returns true (non-strict equality test)
+						.......................................................................................
 
 						NOTES
 						- see also the related =Uize.indexIn= static method
+						- see also the other `Value Testing Methods`
 			*/
-		};
-		_classNonInheritableStatics.isIn = 1;
+		);
 
-		var _recordMatches = _class.recordMatches = function (_record,_match) {
-			if (!_record) return !_match;
-			for (var _propertyName in _match) {
-				if (_record [_propertyName] !== _match [_propertyName]) return _false;
+		_nonInheritableStatic (
+			'isEmpty',
+			function (_object) {
+				if (_isObject (_object) && _object.constructor != _sacredEmptyObject.constructor)
+					_object = _object.valueOf ()
+				;
+				if (_isObject (_object)) {
+					if (_isArray (_object)) return !_object.length;
+					for (var _key in _object) return _false;
+					return _true;
+				}
+				return !_object;
 			}
-			return _true;
+			/*?
+				Static Methods
+					Uize.isEmpty
+						Returns a boolean, indicating whether or not the specified object or array is empty.
+
+						SYNTAX
+						..........................................
+						isEmptyBOOL = Uize.isEmpty (valueANYTYPE);
+						..........................................
+
+						The =valueANYTYPE= parameter can be an =Object= reference, an =Array= reference, a =Function= reference, or any other type. For object type values that are references to =Object= instances, the =Uize.isEmpty= method returns =true= if the object has no keys. For an array type value, =Uize.isEmpty= returns =true= if the array has no elements (ie. a length of =0=). For any other type of value, =Uize.isEmpty= returns =true= if the value is equivalent to =false=.
+
+						EXAMPLES
+						.....................................................
+						Uize.isEmpty ({});                   // returns true
+						Uize.isEmpty ([]);                   // returns true
+						Uize.isEmpty ('');                   // returns true
+						Uize.isEmpty (0);                    // returns true
+						Uize.isEmpty (false);                // returns true
+						Uize.isEmpty (null);                 // returns true
+						Uize.isEmpty (undefined);            // returns true
+						Uize.isEmpty (NaN);                  // returns true
+
+						Uize.isEmpty ({blah:0});             // returns false
+						Uize.isEmpty (['blah']);             // returns false
+						Uize.isEmpty ('blah');               // returns false
+						Uize.isEmpty (1);                    // returns false
+						Uize.isEmpty (true);                 // returns false
+						Uize.isEmpty (function () {});       // returns false
+						.....................................................
+
+						For object type values that are references to instances of objects *other* than =Object= (such as the =String=, =Boolean=, and =Number= objects, or =Uize= subclasses), the object type value will first be resolved to a value by calling the =valueOf Instrinsic Method= of the object, and this resolved value will then be evaluated according the rules described above. Consider the following examples...
+
+						EXAMPLES
+						.....................................................
+						Uize.isEmpty (new String (''));      // returns true
+						Uize.isEmpty (new Number (0));       // returns true
+						Uize.isEmpty (new Boolean (false));  // returns true
+						Uize.isEmpty (new Uize ({value:0}))  // returns true
+
+						Uize.isEmpty (new String ('blah'));  // returns false
+						Uize.isEmpty (new Number (0));       // returns false
+						Uize.isEmpty (new Boolean (true));   // returns false
+						Uize.isEmpty (new Uize ({value:1}))  // returns false
+						.....................................................
+
+						Using =Uize.isEmpty (objectOrArray)= has better performance than the expression =!Uize.totalKeys (objectOrArray)=, because the latter expression iterates through all the keys of the object or elements of the array to count the total.
+
+						NOTES
+						- compare to the =Uize.emptyOut= static method
+						- see also the other `Value Testing Methods`
+			*/
+		);
+
+		_nonInheritableStatic (
+			'emptyOut',
+			function (_source) {
+				if (_isObject (_source)) {
+					if (_isArray (_source)) {
+						_source.length = 0;
+					} else {
+						for (var _property in _source)
+							delete _source [_property]
+						;
+					}
+				}
+				return _source;
+			}
+			/*?
+				Static Methods
+					Uize.emptyOut
+						Empties out the specified source object or array and returns a reference to the source.
+
+						SYNTAX
+						....................................................
+						sourceOBJorARRAY = Uize.emptyOut (sourceOBJorARRAY);
+						....................................................
+
+						Using this method to empty out an array is equivalent to setting the array's length to =0=, while using this method to empty out an object results in all the object's properties being deleted. When the value =null= or =undefined= is specified for the =sourceOBJorARRAY= parameter, then this method will do nothing and simply return the value of the =sourceOBJorARRAY= parameter.
+
+						EXAMPLE
+						..........................................................
+						Uize.copyInto (Uize.emptyOut (userData),userDataDefaults);
+						..........................................................
+
+						In the above example, a =userData= object has accumulated a large amount of user data and we wish to reset it to some initial default state. Because references to the object may be shared by many parts of an application's code, we want to re-initiatialize it by modifying its contents, restoring its state to that of the =userDataDefaults= object. The =Uize.emptyOut= method lets us first empty out the object, after which it is passed as the source for the =Uize.copyInto= method call where we copy back in the contents of the =userDataDefaults= object.
+
+						NOTES
+						- compare to the =Uize.isEmpty= static method
+			*/
+		);
+
+		var _recordMatches = _nonInheritableStatic (
+			'recordMatches',
+			function (_record,_match) {
+				if (!_record) return !_match;
+				for (var _propertyName in _match) {
+					if (_record [_propertyName] !== _match [_propertyName]) return _false;
+				}
+				return _true;
+			}
 			/*?
 				Static Methods
 					Uize.recordMatches
@@ -1918,18 +2875,20 @@
 						- this method uses strict matching, so the statement =Uize.recordMatches ({index:'1'},{index:1})= will return =false=
 						- see also the related =Uize.findRecord= and =Uize.findRecordNo= static methods
 			*/
-		};
-		_classNonInheritableStatics.recordMatches = 1;
+		);
 
-		_class.findRecordNo = function (_records,_match,_defaultNoIfNoMatch) {
-			if (_records) {
-				for (var _recordNo = -1, _recordsLength = _records.length; ++_recordNo < _recordsLength;) {
-					if (_recordMatches (_records [_recordNo],_match))
-						return _recordNo
-					;
+		_nonInheritableStatic (
+			'findRecordNo',
+			function (_records,_match,_defaultNoIfNoMatch) {
+				if (_records) {
+					for (var _recordNo = -1, _recordsLength = _records.length; ++_recordNo < _recordsLength;) {
+						if (_recordMatches (_records [_recordNo],_match))
+							return _recordNo
+						;
+					}
 				}
+				return _defaultNoIfNoMatch == _null || isNaN (_defaultNoIfNoMatch -= 0) ? -1 : _defaultNoIfNoMatch;
 			}
-			return _defaultNoIfNoMatch == _null || isNaN (_defaultNoIfNoMatch -= 0) ? -1 : _defaultNoIfNoMatch;
 			/*?
 				Static Methods
 					Uize.findRecordNo
@@ -1984,15 +2943,17 @@
 						- this method uses strict matching, so the statement =Uize.findRecordNo ([{index:'0'},{index:'1'}],{index:1})= will return =-1=
 						- see also the related =Uize.findRecord= and =Uize.recordMatches= static methods
 			*/
-		};
-		_classNonInheritableStatics.findRecordNo = 1;
+		);
 
-		_class.findRecord = function (_records,_match,_defaultNoIfNoMatch) {
-			return (
-				_records != _null && (_recordNo = _class.findRecordNo (_records,_match,_defaultNoIfNoMatch)) > -1
-					? _records [_recordNo]
-					: null
-			);
+		_nonInheritableStatic (
+			'findRecord',
+			function (_records,_match,_defaultNoIfNoMatch) {
+				return (
+					_records != _null && (_recordNo = _class.findRecordNo (_records,_match,_defaultNoIfNoMatch)) > -1
+						? _records [_recordNo]
+						: null
+				);
+			}
 			/*?
 				Static Methods
 					Uize.findRecord
@@ -2008,11 +2969,11 @@
 						NOTES
 						- this method uses strict matching, so the statement =Uize.findRecord ([{index:'0'},{index:'1'}],{index:1})= will return =null=
 			*/
-		};
-		_classNonInheritableStatics.findRecord = 1;
+		);
 
-		var _getGuid = _class.getGuid = function () {
-			return 'uizeGuid' + _uizeGuids++;
+		var _getGuid = _nonInheritableStatic (
+			'getGuid',
+			function () {return 'uizeGuid' + _uizeGuids++}
 			/*?
 				Static Methods
 					Uize.getGuid
@@ -2025,36 +2986,41 @@
 
 						When an instance of a =Uize= subclass is created, its =instanceId= instance property is set to a value returned by this method. This method may also be useful in the implementations of subclasses, in situations where it is necessary to stash something in a context shared by different modules of code that need to be able to interoperate without conflicts.
 			*/
-		};
-		_classNonInheritableStatics.getGuid = 1;
+		);
 
-		var _getPathToLibrary = _class.getPathToLibrary = function (_moduleFilename,_moduleToken) {
-			if (
-				typeof document != 'undefined' && document.getElementsByTagName
-				/* NOTE:
-					Adobe's ExtendScript implements a document object, so the presence of this object is by itself not a good enough indication that we're running in a Web browser. So, we test for getElementsByTagName as well.
-				*/
-			) {
-				for (
-					var
-						_scriptTagNo = -1,
-						_scriptTags = document.getElementsByTagName ('SCRIPT'),
-						_scriptTagsLength = _scriptTags.length,
-						_scriptSrc,
-						_moduleFilenamePos
-					;
-					++_scriptTagNo < _scriptTagsLength;
+		var _getPathToLibrary = _nonInheritableStatic (
+			'getPathToLibrary',
+			function (_moduleFilename,_moduleToken) {
+				if (
+					typeof document != 'undefined' && document.getElementsByTagName
+					/* NOTE:
+						Adobe's ExtendScript implements a document object, so the presence of this object is by itself not a good enough indication that we're running in a Web browser. So, we test for getElementsByTagName as well.
+					*/
 				) {
-					if ((_moduleFilenamePos = (_scriptSrc = _scriptTags [_scriptTagNo].src).indexOf (_moduleFilename)) > -1)
-						return (
-							_moduleToken
-								? _scriptSrc.replace (_moduleFilename,_moduleToken)
-								: _scriptSrc.slice (0,_scriptSrc.lastIndexOf ('/',_moduleFilenamePos) + 1)
+					for (
+						var
+							_scriptTagNo = -1,
+							_scriptTags = document.getElementsByTagName ('SCRIPT'),
+							_scriptTagsLength = _scriptTags.length,
+							_scriptSrc,
+							_moduleFilenamePos
+						;
+						++_scriptTagNo < _scriptTagsLength;
+					) {
+						if (
+							(_moduleFilenamePos = (_scriptSrc = _scriptTags [_scriptTagNo].src).indexOf (_moduleFilename))
+							> -1
 						)
-					;
+							return (
+								_moduleToken
+									? _scriptSrc.replace (_moduleFilename,_moduleToken)
+									: _scriptSrc.slice (0,_scriptSrc.lastIndexOf ('/',_moduleFilenamePos) + 1)
+							)
+						;
+					}
 				}
+				return '';
 			}
-			return '';
 			/*?
 				Static Methods
 					Uize.getPathToLibrary
@@ -2090,10 +3056,11 @@
 						NOTES
 						- see also the =Uize.pathToResources= static property
 			*/
-		};
-		_classNonInheritableStatics.getPathToLibrary = 1;
+		);
 
-		var _globalEval = _class.globalEval = new _Function ('toEval','return eval (toEval)');
+		var _globalEval = _nonInheritableStatic (
+			'globalEval',
+			new _Function ('toEval','return eval (toEval)')
 			/* NOTE:
 				another alternative to this approach is to use the Function object to create a function in a deeper scope and then call it there, thus avoiding pollution of the global namespace (but how is the performance of that approach versus eval?)
 			*/
@@ -2113,10 +3080,11 @@
 
 						The =Uize.globalEval= method lets you guarantee that code you wish to be eval'ed in the global scope *is* eval'ed in the global scope.
 			*/
-		_classNonInheritableStatics.globalEval = 1;
+		);
 
-		var _isInstance = _class.isInstance = function (_object) {
-			return !!(_object && _object.Class);
+		var _isInstance = _nonInheritableStatic (
+			'isInstance',
+			function (_object) {return !!(_object && _object.Class)}
 			/*?
 				Static Methods
 					Uize.isInstance
@@ -2128,108 +3096,117 @@
 						......................................................
 
 						This method can be useful when implementing methods that may be called on a class as well as on an instance of a class.
+
+						NOTES
+						- see also the other `Value Testing Methods`
 			*/
-		};
-		_classNonInheritableStatics.isInstance = 1;
+		);
 
-		_class.module = function (_params) {
-			var
-				_name = _params.name || '',
-				_host = _name.substr (0,_name.lastIndexOf ('.')),
-				_superclass = _params.superclass || _host,
-				_required = _params.required || [],
-				_modulesToLoad = []
-			;
-			_moduleLoadHandlers [_name] || (_moduleLoadHandlers [_name] = []);
-				/* NOTE:
-					If a named module is declared inline, and another module requires that module further down in the same page, then that subsequent module declaration will know to wait on the successful building of the first module, because the presence of a handlers array for a particular module is regarded as an indication that code is busy waiting on building of that module. This behavior also supports library modules, where individual modules are declared inline inside the library module.
-				*/
-			if (typeof _required == _typeString) _required = _required.split (',');
-			_host && _required.push (_host);
-			_superclass != _host && _required.push (_superclass);
+		_nonInheritableStatic (
+			'module',
+			function (_params) {
+				var
+					_name = _params.name || '',
+					_host = _name.substr (0,_name.lastIndexOf ('.')),
+					_superclass = _params.superclass || _host,
+					_required = _params.required || [],
+					_modulesToLoad = []
+				;
+				_moduleLoadHandlers [_name] || (_moduleLoadHandlers [_name] = []);
+					/* NOTE:
+						If a named module is declared inline, and another module requires that module further down in the same page, then that subsequent module declaration will know to wait on the successful building of the first module, because the presence of a handlers array for a particular module is regarded as an indication that code is busy waiting on building of that module. This behavior also supports library modules, where individual modules are declared inline inside the library module.
+					*/
+				if (_isString (_required)) _required = _required.split (',');
+				_host && _required.push (_host);
+				_superclass != _host && _required.push (_superclass);
 
-			/*** determine which required modules are not already loaded ***/
-				for (var _requiredNo = -1, _requiredLength = _required.length; ++_requiredNo < _requiredLength;) {
-					var _requiredModule = _required [_requiredNo];
-					_requiredModule && !_getModuleByName (_requiredModule) && _modulesToLoad.push (_requiredModule);
-				}
-
-			/*** load modules (if necessary) ***/
-				function _buildModule () {
-					var
-						_builder = _params.builder,
-						_module = _builder && _builder (_getModuleByName (_superclass))
-					;
-					_name &&
-						(new _Function ('m',_name + '=m')) (_module = _modulesByName [_name] = _module || function () {})
-					;
-					if (_isFunction (_module)) {
-						_module.moduleName = _name;
-						if (!_module.subclass)
-							/* NOTE:
-								if the module is not a Uize class (like a package or something else), assign the toString instrinsic method, because it won't be obtained by subclassing (since there is none)
-							*/
-							_module.toString = _toString
+				/*** determine which required modules are not already loaded ***/
+					for (
+						var _requiredNo = -1, _requiredLength = _required.length, _requiredModule;
+						++_requiredNo < _requiredLength;
+					) {
+						(_requiredModule = _required [_requiredNo]) && !_getModuleByName (_requiredModule) &&
+							_modulesToLoad.push (_requiredModule)
 						;
 					}
-					_handleModuleLoaded (_name);
-				}
-				var _modulesToLoadLength = _modulesToLoad.length;
-				if (_modulesToLoadLength) {
-					var _moduleLoader = _class.moduleLoader;
-					if (_moduleLoader) {
-						var _moduleToLoadNo = -1;
-						function _loadNextModule () {
-							_moduleToLoadNo++;
-							if (_moduleToLoadNo < _modulesToLoadLength) {
-								var _moduleToLoad = _modulesToLoad [_moduleToLoadNo];
-								_getModuleByName (_moduleToLoad)
-									? _loadNextModule ()
-									: _moduleLoadHandlers [_moduleToLoad]
-										? _moduleLoadHandlers [_moduleToLoad].push (_loadNextModule)
-										: _moduleLoader (
-											_moduleToLoad,
-											function (_moduleToLoadCode) {
-												if (_getModuleByName (_moduleToLoad)) {
-													_loadNextModule ();
-													/* NOTE:
-														This additional check is important, because another asynchronous chain could have resulted in this module becoming loaded in between the call to _moduleLoader and the response.
-													*/
-												} else {
-													_moduleToLoadCode && _globalEval (_moduleToLoadCode);
+
+				/*** load modules (if necessary) ***/
+					function _buildModule () {
+						var
+							_builder = _params.builder,
+							_module = _builder && _builder (_getModuleByName (_superclass))
+						;
+						_name &&
+							(new _Function ('m',_name + '=m')) (_module = _modulesByName [_name] = _module || function () {})
+						;
+						if (_isFunction (_module)) {
+							_module.moduleName = _name;
+							if (!_module.subclass)
+								/* NOTE:
+									if the module is not a Uize class (like a package or something else), assign the toString instrinsic method, because it won't be obtained by subclassing (since there is none)
+								*/
+								_module.toString = _toString
+							;
+						}
+						_handleModuleLoaded (_name);
+					}
+					var _modulesToLoadLength = _modulesToLoad.length;
+					if (_modulesToLoadLength) {
+						var _moduleLoader = _class.moduleLoader;
+						if (_moduleLoader) {
+							var _moduleToLoadNo = -1;
+							function _loadNextModule () {
+								_moduleToLoadNo++;
+								if (_moduleToLoadNo < _modulesToLoadLength) {
+									var _moduleToLoad = _modulesToLoad [_moduleToLoadNo];
+									_getModuleByName (_moduleToLoad)
+										? _loadNextModule ()
+										: _moduleLoadHandlers [_moduleToLoad]
+											? _moduleLoadHandlers [_moduleToLoad].push (_loadNextModule)
+											: _moduleLoader (
+												_moduleToLoad,
+												function (_moduleToLoadCode) {
 													if (_getModuleByName (_moduleToLoad)) {
-														_handleModuleLoaded (_moduleToLoad);
 														_loadNextModule ();
+														/* NOTE:
+															This additional check is important, because another asynchronous chain could have resulted in this module becoming loaded in between the call to _moduleLoader and the response.
+														*/
 													} else {
-														(
-															_moduleLoadHandlers [_moduleToLoad] ||
-															(_moduleLoadHandlers [_moduleToLoad] = [])
-														).push (_loadNextModule);
+														_moduleToLoadCode && _globalEval (_moduleToLoadCode);
+														if (_getModuleByName (_moduleToLoad)) {
+															_handleModuleLoaded (_moduleToLoad);
+															_loadNextModule ();
+														} else {
+															(
+																_moduleLoadHandlers [_moduleToLoad] ||
+																(_moduleLoadHandlers [_moduleToLoad] = [])
+															).push (_loadNextModule);
+														}
 													}
 												}
-											}
-										)
-								;
-							} else {
-								_buildModule ();
+											)
+									;
+								} else {
+									_buildModule ();
+								}
 							}
-						}
-						_loadNextModule ();
-					} else {
-						/*
-							OK, so the alert is problematic at this point because there are some modules that are only used for their static methods, and in that usage the dependencies that they would have, if one was creating instances of them, do not apply, yet these dependencies are now being imposed on pages that use these modules.
+							_loadNextModule ();
+						} else {
+							/*
+								OK, so the alert is problematic at this point because there are some modules that are only used for their static methods, and in that usage the dependencies that they would have, if one was creating instances of them, do not apply, yet these dependencies are now being imposed on pages that use these modules.
 
-							alert (
-								'The following modules are required, but have not been loaded...\n\n' +
-								_modulesToLoad.join (', ') + '\n\n' +
-								'As a result, this application may not function correctly.'
-							);
-						*/
+								alert (
+									'The following modules are required, but have not been loaded...\n\n' +
+									_modulesToLoad.join (', ') + '\n\n' +
+									'As a result, this application may not function correctly.'
+								);
+							*/
+							_buildModule ();
+						}
+					} else {
 						_buildModule ();
 					}
-				} else {
-					_buildModule ();
-				}
+			}
 			/*?
 				Static Methods
 					Uize.module
@@ -2250,24 +3227,26 @@
 						NOTES
 						- see also the =Uize.moduleLoader= static method and the =Uize.moduleUrlTemplate= static property
 			*/
-		};
-		_classNonInheritableStatics.module = 1;
+		);
 
-		_class.moduleLoader = function (_moduleToLoad,_callback) {
-			_callback ();
-				/* NOTE:
-					by returning no code, the modules loader code sees that the module is not defined after eval'ing the empty string and is tricked into thinking that the module had further dependencies, when in actual fact a script tag was put into the page. The effect is that a callback is registered by the modules loader code so that when the module is successfully declared and built through its Uize.module call, then any stalled module loading is continued.
-				*/
+		_nonInheritableStatic (
+			'moduleLoader',
+			function (_moduleToLoad,_callback) {
+				_callback ();
+					/* NOTE:
+						by returning no code, the modules loader code sees that the module is not defined after eval'ing the empty string and is tricked into thinking that the module had further dependencies, when in actual fact a script tag was put into the page. The effect is that a callback is registered by the modules loader code so that when the module is successfully declared and built through its Uize.module call, then any stalled module loading is continued.
+					*/
 
-			/*** insert the script tag ***/
-				var _scriptNode = document.createElement ('script');
-				_scriptNode.type = 'text/javascript';
-				_scriptNode.src = _class.moduleUrlResolver (_moduleToLoad);
-				(_scriptParentNode || (_scriptParentNode = document.getElementsByTagName ('HEAD') [0])).appendChild (
-					_scriptNode
-				);
+				/*** insert the script tag ***/
+					var _scriptNode = document.createElement ('script');
+					_scriptNode.type = 'text/javascript';
+					_scriptNode.src = _class.moduleUrlResolver (_moduleToLoad);
+					(_scriptParentNode || (_scriptParentNode = document.getElementsByTagName ('HEAD') [0])).appendChild (
+						_scriptNode
+					);
+			}
 			/*?
-				Static Properties
+				Static Methods
 					Uize.moduleLoader
 						Loads the specified JavaScript module (specified by its module name) and calls the specified callback function once the module has been loaded.
 
@@ -2298,19 +3277,22 @@
 						- see also the =Uize.module= static method
 						- see the related =Uize.moduleUrlResolver= static method and the =Uize.moduleUrlTemplate= static property
 			*/
-		};
-		_classNonInheritableStatics.moduleLoader = 1;
+		);
 
-		_class.moduleUrlResolver = function (_moduleName) {
-			return _class.moduleUrlTemplate.replace (_modulePathToken,_moduleName + '.js');
+		_nonInheritableStatic (
+			'moduleUrlResolver',
+			function (_moduleName) {
+				return _class.moduleUrlTemplate.replace (_modulePathToken,_moduleName + '.js');
+			}
 			/*?
-				Static Properties
+				Static Methods
 					Uize.moduleUrlResolver
 						Returns a string, representing the URL path from where the specified JavaScript module (specified by its module name) can be loaded.
 
 						SYNTAX
-						...
-						...
+						......................................................
+						moduleUrlSTR = Uize.moduleUrlResolver (moduleNameSTR);
+						......................................................
 
 						By overriding this static method, you have the flexibility to have different types of modules load from different locations. A classic example would be loading modules of the UIZE JavaScript Framework from a shared CDN (Content Delivery Network) location, while loading modules that are in your own Web site's namespace from the same machine that serves the pages. Consider the following example...
 
@@ -2334,23 +3316,25 @@
 						NOTES
 						- see the related =Uize.moduleLoader= static method and the =Uize.moduleUrlTemplate= static property
 			*/
-		};
-		_classNonInheritableStatics.moduleUrlResolver = 1;
+		);
 
-		var _pairUp = _class.pairUp = function (_firstArg) {
-			var
-				_result = {},
-				_arguments = arguments.length == 1 && _isArray (_firstArg) ? _firstArg : arguments,
-				_argumentsLength = _arguments.length
-			;
-			if (_argumentsLength < 3) {
-				_result [_arguments [0]] = _arguments [1];
-			} else {
-				for (var _argumentNo = -2; (_argumentNo += 2) < _argumentsLength;)
-					_result [_arguments [_argumentNo]] = _arguments [_argumentNo + 1]
+		var _pairUp = _nonInheritableStatic (
+			'pairUp',
+			function (_firstArg) {
+				var
+					_result = {},
+					_arguments = arguments.length == 1 && _isArray (_firstArg) ? _firstArg : arguments,
+					_argumentsLength = _arguments.length
 				;
+				if (_argumentsLength < 3) {
+					_result [_arguments [0]] = _arguments [1];
+				} else {
+					for (var _argumentNo = -2; (_argumentNo += 2) < _argumentsLength;)
+						_result [_arguments [_argumentNo]] = _arguments [_argumentNo + 1]
+					;
+				}
+				return _result;
 			}
-			return _result;
 			/*?
 				Static Methods
 					Uize.pairUp
@@ -2433,11 +3417,13 @@
 
 							Now, we're using the =Uize.Fx.fadeStyle= static method of the =Uize.Fx= module to perform the border color animation. This method can fade values for one or more style properties, and the start and end values for the style properties are specified in style property objects. Here we need to create start and end style objects where the style property to be faded is dynamically generated using the =edge= parameter. As you will see from the code, the =Uize.pairUp= method does this for us nicely.
 			*/
-		};
-		_classNonInheritableStatics.pairUp = 1;
+		);
 
-		var _escapeRegExpLiteral = _class.escapeRegExpLiteral = function (_literal) {
-			return _literal.replace (/([\^\$\|\{\}\[\]\(\)\?\.\*\+\\])/g,'\\$1');
+		var _escapeRegExpLiteral = _nonInheritableStatic (
+			'escapeRegExpLiteral',
+			function (_literal) {
+				return _literal.replace (/([\^\$\|\{\}\[\]\(\)\?\.\*\+\\])/g,'\\$1');
+			}
 			/*?
 				Static Methods
 					Uize.escapeRegExpLiteral
@@ -2466,32 +3452,34 @@
 
 						The =Uize.escapeRegExpLiteral= method can be used to escape any string that is to be treated as a literal match - even literals that are to be combined with other regular expression logic to form more complex regular expressions.
 			*/
-		};
-		_classNonInheritableStatics.escapeRegExpLiteral = 1;
+		);
 
-		var _substituteInto = _class.substituteInto = function (_source,_substitutions,_tokenNaming) {
-			if (!(_source = _source == _undefined ? '' : _source + '') || _substitutions == _undefined)
-				return _source
-			;
-			if (_simpleTypesMap [typeof _substitutions])
-				_substitutions = [_substitutions]
-			;
-			var
-				_tokenOpenerAndCloser = (_tokenNaming || '[#KEY]').split ('KEY'),
-				_substitutionsForRegExp = []
-			;
-			for (var _substitution in _substitutions)
-				_substitutionsForRegExp.push (_escapeRegExpLiteral (_substitution))
-			;
-			return _source.replace (
-				new RegExp (
-					_escapeRegExpLiteral (_tokenOpenerAndCloser [0]) +
-					'(' + _substitutionsForRegExp.join ('|') + ')' +
-					_escapeRegExpLiteral (_tokenOpenerAndCloser [1]),
-					'g'
-				),
-				function (_token,_substitution) {return _substitutions [_substitution] + ''}
-			);
+		var _substituteInto = _nonInheritableStatic (
+			'substituteInto',
+			function (_source,_substitutions,_tokenNaming) {
+				if (!(_source = _source == _undefined ? '' : _source + '') || _substitutions == _undefined)
+					return _source
+				;
+				if (_isPrimitive (_substitutions))
+					_substitutions = [_substitutions]
+				;
+				var
+					_tokenOpenerAndCloser = (_tokenNaming || '[#KEY]').split ('KEY'),
+					_substitutionsForRegExp = []
+				;
+				for (var _substitution in _substitutions)
+					_substitutionsForRegExp.push (_escapeRegExpLiteral (_substitution))
+				;
+				return _source.replace (
+					new RegExp (
+						_escapeRegExpLiteral (_tokenOpenerAndCloser [0]) +
+						'(' + _substitutionsForRegExp.join ('|') + ')' +
+						_escapeRegExpLiteral (_tokenOpenerAndCloser [1]),
+						'g'
+					),
+					function (_token,_substitution) {return _substitutions [_substitution] + ''}
+				);
+			}
 			/*?
 				Static Methods
 					Uize.substituteInto
@@ -2773,8 +3761,7 @@
 						- token names are case-sensitive
 						- token names are space-sensitive (ie. padding around key names is not ignored)
 			*/
-		};
-		_classNonInheritableStatics.substituteInto = 1;
+		);
 
 		/*** Inheritance Mechanism ***/
 			function _createSubclass (_class,_alphastructor,_omegastructor) {
@@ -2877,7 +3864,18 @@
 							/*?
 								Static Properties
 									Uize.superclass
-										document...
+										A reference to the class' superclass.
+
+										SYNTAX
+										....................................
+										superclassOBJ = classOBJ.superclass;
+										....................................
+
+										EXAMPLE
+										............................................................................
+										var MyWidgetClass = Uize.Widget.subclass ();
+										alert (MyWidgetClass.superclass == Uize.Widget); // displays the text "true"
+										............................................................................
 							*/
 
 					/*** Non-inherited Public Static Methods ***/
@@ -2939,7 +3937,7 @@
 		_class.moduleName = 'Uize';
 
 	/*** Public Static Properties ***/
-		_class.moduleUrlTemplate = _getPathToLibrary ('Uize.js',_modulePathToken);
+		_nonInheritableStatic ('moduleUrlTemplate',_getPathToLibrary ('Uize.js',_modulePathToken));
 			/*?
 				Static Properties
 					Uize.moduleUrlTemplate
@@ -2956,9 +3954,8 @@
 						- see also the =Uize.module= and =Uize.moduleLoader= static methods
 						- this static property is not inherited by subclasses
 			*/
-		_classNonInheritableStatics.moduleUrlTemplate = 1;
 
-		_class.pathToResources = _getPathToLibrary ('Uize.js');
+		_nonInheritableStatic ('pathToResources',_getPathToLibrary ('Uize.js'));
 			/*?
 				Static Properties
 					Uize.pathToResources
@@ -2971,5 +3968,4 @@
 						NOTES
 						- this static property is not inherited by subclasses
 			*/
-		_classNonInheritableStatics.pathToResources = 1;
 }) ();

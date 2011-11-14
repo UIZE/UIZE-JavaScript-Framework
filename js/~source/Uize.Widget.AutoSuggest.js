@@ -324,7 +324,7 @@ Uize.module({
 				;
 
 				if (_separators) {
-					_separators = _Uize_Data.getLookup(Uize.isArray(_separators) ? _separators : [_separators]);
+					_separators = Uize.lookup(Uize.isArray(_separators) ? _separators : [_separators]);
 					_quotes =
 						_quotes ?
 							_Uize_Data.NameValueRecords.toHash(
@@ -460,7 +460,7 @@ Uize.module({
 								(_suggestions || _this._addAndWireSuggestions()).set({
 									tentativeValue: _null,
 									tentativeValueNo: -1,
-									values: Uize.Data.map(
+									values: _Uize_Data.map(
 										function (_suggestion) {
 											var
 												_term = _suggestion.fullWord,
@@ -764,7 +764,7 @@ Uize.module({
 				_responseAdapter: {
 					name: 'responseAdapter',
 					value: function (_normalizedQuery, _response) {
-						return Uize.Data.map(
+						return _Uize_Data.map(
 								function (_term) {
 									return {
 										prefix: _emptyString,

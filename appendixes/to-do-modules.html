@@ -36,26 +36,23 @@
 			</li>
 			<li><a href="#2">2. Uize</a>
 				<ul>
-					<li><a href="#2_1">2.1. Quick Win Additions</a>
+					<li><a href="#2_1">2.1. Quick Win Additions (in order of priority / usefulness)</a>
 						<ul>
-							<li><a href="#2_1_1" title="- uses indexIn">2.1.1. - Uize.indexOf</a></li>
-							<li><a href="#2_1_2" title="- uses indexIn">2.1.2. - Uize.lastIndexOf</a></li>
-							<li><a href="#2_1_3" title="- add support for object">2.1.3. - Uize.indexIn</a></li>
-							<li><a href="#2_1_4" title="- checks to see if an element is present, and adds it if not">2.1.4. - Uize.ensureIn</a></li>
-							<li><a href="#2_1_5" title="- alias of copyInto">2.1.5. - Uize.extend</a></li>
-							<li><a href="#2_1_6" title="- alias to anonymous module with required">2.1.6. - Uize.require</a></li>
-							<li><a href="#2_1_7" title="- ensures that the value is an array">2.1.7. - Uize.ensureArray</a></li>
-							<li><a href="#2_1_8" title="- promoted from Uize.Data.isEmpty">2.1.8. - Uize.isEmpty</a></li>
-							<li><a href="#2_1_9" title="- promoted from Uize.Data.getKeys">2.1.9. - Uize.keys</a></li>
-							<li><a href="#2_1_10" title="- promoted from Uize.Data.getValues">2.1.10. - Uize.values</a></li>
-							<li><a href="#2_1_11" title="- promoted from Uize.Data.getTotalKeys">2.1.11. - Uize.totalKeys</a></li>
-							<li><a href="#2_1_12" title="- promoted from Uize.Data.min">2.1.12. - Uize.min</a></li>
-							<li><a href="#2_1_13" title="- promoted from Uize.Data.max">2.1.13. - Uize.max</a></li>
-							<li><a href="#2_1_14" title="- promoted from Uize.Data.emptyOut">2.1.14. - Uize.emptyOut</a></li>
-							<li><a href="#2_1_15" title="- promoted from Uize.Data.getLookup">2.1.15. - Uize.lookup</a></li>
-							<li><a href="#2_1_16" title="- promoted from Uize.Data.getReverseLookup">2.1.16. - Uize.reverseLookup</a></li>
-							<li><a href="#2_1_17" title="- returns true if the value is truthy">2.1.17. - Uize.truthy</a></li>
-							<li><a href="#2_1_18" title="- returns true is the value is falsy">2.1.18. - Uize.falsy</a></li>
+							<li><a href="#2_1_1" title="- promoted from Uize.Data.map, but with modified signature to make array first">2.1.1. - Uize.map</a></li>
+							<li><a href="#2_1_2" title="- essentially derived from indexIn, but adapted to also operate on strings and to use built-in indexOf when possible and supported by JavaScript built-in objects (ie. newer versions of JavaScript)">2.1.2. - Uize.indexOf, Uize.lastIndexOf</a></li>
+							<li><a href="#2_1_3" title="- adapt to add support for object (ie. which key has specified value)">2.1.3. - Uize.indexIn</a></li>
+							<li><a href="#2_1_4" title="- alias to anonymous module with required (to make the simple case of requiring a module deeper in code more convenient &amp; intuitive)">2.1.4. - Uize.require</a></li>
+							<li><a href="#2_1_5">2.1.5. LATER</a>
+								<ul>
+									<li><a href="#2_1_5_1" title="- alias of copyInto, for those who are more comfortable with the extend semantic">2.1.5.1. - Uize.extend</a></li>
+									<li><a href="#2_1_5_2" title="- different name, like isListy or isIterable?">2.1.5.2. - Uize.isArrayLike</a></li>
+									<li><a href="#2_1_5_3" title="- ensures that the value is an array">2.1.5.3. - Uize.ensureArray</a></li>
+									<li><a href="#2_1_5_4" title="- checks to see if an element is present, and adds it if not">2.1.5.4. - Uize.ensureIn</a></li>
+									<li><a href="#2_1_5_5" title="- returns true if the value is either a string primitive or an instance of a String object or &quot;subclass&quot;">2.1.5.5. - Uize.isStringy</a></li>
+									<li><a href="#2_1_5_6" title="- returns true if the value is truthy">2.1.5.6. - Uize.isTruthy</a></li>
+									<li><a href="#2_1_5_7" title="- returns true is the value is falsy">2.1.5.7. - Uize.isFalsy</a></li>
+								</ul>
+							</li>
 						</ul>
 					</li>
 					<li><a href="#2_2">2.2. Conditions</a>
@@ -99,51 +96,57 @@
 					</li>
 					<li><a href="#2_5" title="Provide a way in the Uize base class to bind two set-get properties together, in order to keep their values synchronized.">2.5. Property Bindings</a></li>
 					<li><a href="#2_6" title="Copy ability, for initial values of set-get properties that are arrays or objects.">2.6. Copy Ability for Set-get Properties</a></li>
-					<li><a href="#2_7" title="Lets you conveniently create a function / method caller, where you can specify context, function, and arguments.">2.7. Uize.methodCall</a></li>
+					<li><a href="#2_7" title="Lets you conveniently create a function / method caller, where you can specify context, function, and arguments.">2.7. Uize.willCall</a>
+						<ul>
+							<li><a href="#2_7_1" title="- callback">2.7.1. - names considered</a></li>
+						</ul>
+					</li>
 					<li><a href="#2_8" title="Uize.watchFunction = function (_function,_before,_after) {&#10;	return function () {&#10;		_before &amp;&amp; _before (this,arguments);&#10;		var _result = _watched.apply (this,arguments);&#10;		_after &amp;&amp; _after (this,arguments,_result);&#10;		return _result;&#10;	};&#10;};&#10;&#10;Uize.watchMethod = function (_context,_methodName,_before,_after) {&#10;	if (!Uize.isInstance (_context))&#10;		_context = _context.prototype&#10;	;&#10;	var&#10;		_watched = _c...">2.8. Uize.watchMethod</a></li>
 					<li><a href="#2_9" title="Uize.memoize = function (_function) {&#10;	var _resultsCache = {};&#10;	return function () {&#10;		var _cacheKey = Uize.Json.to (arguments);&#10;		return (&#10;			_cacheKey in _resultsCache&#10;				? _resultsCache [_cacheKey]&#10;				: (_resultsCache [_cacheKey] = _function.apply (this,arguments))&#10;		);&#10;	};&#10;};&#10;&#10;Uize.memoizeMethod = function (_context,_methodName) {&#10;	// ...&#10;};&#10;">2.9. Uize.memoize</a></li>
 					<li><a href="#2_10">2.10. Uize.constrain</a>
 						<ul>
 							<li><a href="#2_10_1" title="Support a wrap flag, so that constrained values can be made to wrap around within the constraining range, rather than always only hitting up against the edges.">2.10.1. Support a wrap flag</a></li>
+							<li><a href="#2_10_2" title="Support either or both of the min and max boundaries being null or undefined.">2.10.2. Unbounded</a></li>
 						</ul>
 					</li>
-					<li><a href="#2_11">2.11. Uize.callOn</a>
+					<li><a href="#2_11" title="- for Uize.lookup, support mode with no parameters that returns an empty safe lookup">2.11. - Uize.lookup & Uize.reverseLookup</a></li>
+					<li><a href="#2_12">2.12. Uize.callOn</a>
 						<ul>
-							<li><a href="#2_11_1" title="Add support for using the Uize.callOn method on a target that is an instance of a class that is not a Uize subclass.">2.11.1. Support Instances of Non-Uize Classes</a></li>
+							<li><a href="#2_12_1" title="Add support for using the Uize.callOn method on a target that is an instance of a class that is not a Uize subclass.">2.12.1. Support Instances of Non-Uize Classes</a></li>
 						</ul>
 					</li>
-					<li><a href="#2_12">2.12. Uize.indexIn</a>
+					<li><a href="#2_13">2.13. Uize.indexIn</a>
 						<ul>
-							<li><a href="#2_12_1" title="For object type source, could find key whose value matches, and return undefined (or null?) if value not found in object.">2.12.1. Support Object Source</a></li>
-							<li><a href="#2_12_2" title="For simple type source, could do string index.">2.12.2. Support Simple Type Source</a></li>
+							<li><a href="#2_13_1" title="For object type source, could find key whose value matches, and return undefined (or null?) if value not found in object.">2.13.1. Support Object Source</a></li>
+							<li><a href="#2_13_2" title="For simple type source, could do string index.">2.13.2. Support Simple Type Source</a></li>
 						</ul>
 					</li>
-					<li><a href="#2_13">2.13. Uize.module</a>
+					<li><a href="#2_14">2.14. Uize.module</a>
 						<ul>
-							<li><a href="#2_13_1" title="How can code require a module that is not in the modules directory (like a code beside)?">2.13.1. Support Code Besides in Module Loader</a></li>
+							<li><a href="#2_14_1" title="How can code require a module that is not in the modules directory (like a code beside)?">2.14.1. Support Code Besides in Module Loader</a></li>
 						</ul>
 					</li>
-					<li><a href="#2_14" title="Consider a facility to support multiple inheritance (may involve creating a merge service for merging data from one object into another, since it should be possible to merge additional features of a different class into an already created class, and perhaps that merge feature would also be used in the _subclass function&apos;s implementation).">2.14. Multiple Inheritance</a></li>
-					<li><a href="#2_15">2.15. Library Modules</a>
+					<li><a href="#2_15" title="Consider a facility to support multiple inheritance (may involve creating a merge service for merging data from one object into another, since it should be possible to merge additional features of a different class into an already created class, and perhaps that merge feature would also be used in the _subclass function&apos;s implementation).">2.15. Multiple Inheritance</a></li>
+					<li><a href="#2_16">2.16. Library Modules</a>
 						<ul>
-							<li><a href="#2_15_1" title="Can library modules that are outside the modules directory require modules that are outside the modules directory?">2.15.1. Library of Dispersed Modules</a></li>
+							<li><a href="#2_16_1" title="Can library modules that are outside the modules directory require modules that are outside the modules directory?">2.16.1. Library of Dispersed Modules</a></li>
 						</ul>
 					</li>
-					<li><a href="#2_16" title="Variation on constructor, where specifying a non-object for the properties has the effect of setting the value property.">2.16. Handle Simple Type in Place of Constructor Properties</a></li>
-					<li><a href="#2_17" title="Handle recursion in Uize.clone (how to generate properties that are references to other parts of structure in same relationship as the equivalent property in the cloning source???)">2.17. Uize.clone and Recursion</a></li>
-					<li><a href="#2_18">2.18. Improvements to Property Mechanism</a>
+					<li><a href="#2_17" title="Variation on constructor, where specifying a non-object for the properties has the effect of setting the value property.">2.17. Handle Simple Type in Place of Constructor Properties</a></li>
+					<li><a href="#2_18" title="Handle recursion in Uize.clone (how to generate properties that are references to other parts of structure in same relationship as the equivalent property in the cloning source???)">2.18. Uize.clone and Recursion</a></li>
+					<li><a href="#2_19">2.19. Improvements to Property Mechanism</a>
 						<ul>
-							<li><a href="#2_18_1">2.18.1. New Profile Features</a>
+							<li><a href="#2_19_1">2.19.1. New Profile Features</a>
 								<ul>
-									<li><a href="#2_18_1_1" title="Basic types...">2.18.1.1. type</a></li>
-									<li><a href="#2_18_1_2" title="Different types of validators...">2.18.1.2. validator</a></li>
+									<li><a href="#2_19_1_1" title="Basic types...">2.19.1.1. type</a></li>
+									<li><a href="#2_19_1_2" title="Different types of validators...">2.19.1.2. validator</a></li>
 								</ul>
 							</li>
 						</ul>
 					</li>
-					<li><a href="#2_19" title="- optimize for successive substitution on the same source using the same form of map (but different values, of course)">2.19. Uize.substituteInto</a></li>
-					<li><a href="#2_20" title="- to indicate that the instance has been constructed">2.20. constructed Property</a></li>
-					<li><a href="#2_21" title="_this.doIn (_superclass,&apos;wireUi&apos;);&#10;&#10;_class.doSuper (_this,&apos;wireUi&apos;);&#10;_class.useSuper (_this,&apos;wireUi&apos;);&#10;_class.callSuper (_this,&apos;wireUi&apos;);&#10;&#10;_superclass.on (_this,&apos;wireUi&apos;);&#10;_superclass.my (_this,&apos;wireUi&apos;);&#10;_superclass.doOn (_this,&apos;wireUi&apos;);&#10;_superclass.doMy (_this,&apos;wireUi&apos;);&#10;_superclass.useMy (_this,&apos;wireUi&apos;);&#10;_superclass.proto (_this,&apos;wireUi&apos;);&#10;_superclass.useMine (_this,&apos;wireUi&apos;);&#10;">2.21. - new and more concise semantics for calling methods on superclass</a></li>
+					<li><a href="#2_20" title="- optimize for successive substitution on the same source using the same form of map (but different values, of course)">2.20. Uize.substituteInto</a></li>
+					<li><a href="#2_21" title="- to indicate that the instance has been constructed">2.21. constructed Property</a></li>
+					<li><a href="#2_22" title="_this.doIn (_superclass,&apos;wireUi&apos;);&#10;&#10;_class.doSuper (_this,&apos;wireUi&apos;);&#10;_class.useSuper (_this,&apos;wireUi&apos;);&#10;_class.callSuper (_this,&apos;wireUi&apos;);&#10;&#10;_superclass.on (_this,&apos;wireUi&apos;);&#10;_superclass.my (_this,&apos;wireUi&apos;);&#10;_superclass.doOn (_this,&apos;wireUi&apos;);&#10;_superclass.doMy (_this,&apos;wireUi&apos;);&#10;_superclass.useMy (_this,&apos;wireUi&apos;);&#10;_superclass.proto (_this,&apos;wireUi&apos;);&#10;_superclass.useMine (_this,&apos;wireUi&apos;);&#10;">2.22. - new and more concise semantics for calling methods on superclass</a></li>
 				</ul>
 			</li>
 			<li><a href="#3">3. Uize.Array</a>
@@ -180,17 +183,16 @@
 					</li>
 					<li><a href="#3_5">3.5. Uize.Array.Dupes</a>
 						<ul>
-							<li><a href="#3_5_1" title="- returns an array containing only unique values">3.5.1. Uize.Array.Dupes.dedupe</a></li>
+							<li><a href="#3_5_1" title="- returns an array of dupe info objects">3.5.1. Uize.Array.Dupes.getDupes</a></li>
 							<li><a href="#3_5_2" title="- returns the number of occurrences of the specified value">3.5.2. Uize.Array.Dupes.getValueCount</a></li>
 							<li><a href="#3_5_3" title="- returns a lookup array of counts per value">3.5.3. Uize.Array.Dupes.getValueCounts</a></li>
 						</ul>
 					</li>
 					<li><a href="#3_6">3.6. Uize.Array.Util</a>
 						<ul>
-							<li><a href="#3_6_1" title="- if the specified element is not in the specified source array, then it is added (configurable whether to prepend or append, but default is to append)">3.6.1. Uize.Array.Util.ensureIn</a></li>
-							<li><a href="#3_6_2" title="- returns a chunk of the specified source array of the specified size">3.6.2. Uize.Array.Util.chunk</a></li>
-							<li><a href="#3_6_3" title="- returns the specified number of elements at the head of the specified source array">3.6.3. Uize.Array.Util.first</a></li>
-							<li><a href="#3_6_4" title="- returns the specified number of elements at the tail of the specified source array">3.6.4. Uize.Array.Util.last</a></li>
+							<li><a href="#3_6_1" title="- returns a chunk of the specified source array of the specified size">3.6.1. Uize.Array.Util.chunk</a></li>
+							<li><a href="#3_6_2" title="- returns the specified number of elements at the head of the specified source array">3.6.2. Uize.Array.Util.first</a></li>
+							<li><a href="#3_6_3" title="- returns the specified number of elements at the tail of the specified source array">3.6.3. Uize.Array.Util.last</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -298,28 +300,30 @@
 						</ul>
 					</li>
 					<li><a href="#14_2" title="_package.resolveSourceAndTarget = function (_source,_target,_targetDefault,_keysMayChange,_emptyOutTarget) {&#10;	if (_target = _undefined) _target = _targetDefault;&#10;	if (typeof _source == &apos;number&apos;) {&#10;		_source = new Array (_source);&#10;		if (typeof _target ! &apos;object&apos;) _target  _source;&#10;	} else if (typeof _target != &apos;object&apos;) {&#10;		_target = !_target ? _source : Uize.isArray (_source) ? [] : {};&#10;	}&#10;	if ...">14.2. Uize.Data.resolveSourceAndTarget</a></li>
-					<li><a href="#14_3" title="- must deal with the fact that valueOf and toString are on the prototype of Object">14.3. - Uize.Data.getLookup & Uize.Data.getReverseLookup</a></li>
-					<li><a href="#14_4" title="returns true if two objects have the same set of properties">14.4. - Uize.Data.doPropertiesSetsMatch</a></li>
-					<li><a href="#14_5">14.5. - Uize.Data.filter</a>
+					<li><a href="#14_3" title="returns true if two objects have the same set of properties and structure">14.3. - Uize.Data.structuresMatch</a></li>
+					<li><a href="#14_4">14.4. - Uize.Data.filter</a>
 						<ul>
-							<li><a href="#14_5_1">14.5.1. - support for new filter types</a>
+							<li><a href="#14_4_1">14.4.1. - support for new filter types</a>
 								<ul>
-									<li><a href="#14_5_1_1" title="- when regular expression is specified for filter, properties are filtered that match the regular expression">14.5.1.1. - regular expression type filter</a></li>
-									<li><a href="#14_5_1_2" title="- when function is specified for filter, function receives property name and must return boolean indicating match">14.5.1.2. - function type filter</a></li>
-									<li><a href="#14_5_1_3" title="- filter source object to have only properties contained in filter object">14.5.1.3. - object type filter</a></li>
-									<li><a href="#14_5_1_4" title="- only permit the exactly matching property name? How else would this be handled?">14.5.1.4. - string type filter</a></li>
-									<li><a href="#14_5_1_5" title="- already supported, but need to change implementation? Change implementation for performance, or code size?">14.5.1.5. - array -- CHANGE IMPLEMENTATION?</a></li>
+									<li><a href="#14_4_1_1" title="- when regular expression is specified for filter, properties are filtered that match the regular expression">14.4.1.1. - regular expression type filter</a></li>
+									<li><a href="#14_4_1_2" title="- when function is specified for filter, function receives property name and must return boolean indicating match">14.4.1.2. - function type filter</a></li>
+									<li><a href="#14_4_1_3" title="- filter source object to have only properties contained in filter object">14.4.1.3. - object type filter</a></li>
+									<li><a href="#14_4_1_4" title="- only permit the exactly matching property name? How else would this be handled?">14.4.1.4. - string type filter</a></li>
+									<li><a href="#14_4_1_5" title="- already supported, but need to change implementation? Change implementation for performance, or code size?">14.4.1.5. - array -- CHANGE IMPLEMENTATION?</a></li>
 								</ul>
 							</li>
 						</ul>
 					</li>
-					<li><a href="#14_6" title="- handle recursion (safeguard against infinite loops). Do this by marking objects / arrays as encountered?">14.6. - Uize.Data.identical</a>
+					<li><a href="#14_5" title="- handle recursion (safeguard against infinite loops). Do this by marking objects / arrays as encountered?">14.5. - Uize.Data.identical</a>
 						<ul>
-							<li><a href="#14_6_1" title="- can two instances of classes that support the value interface simply be compared by their respective values?">14.6.1. - how to support comparison of Uize subclass instances? Is there a meaningful way to do this?</a></li>
+							<li><a href="#14_5_1" title="- can two instances of classes that support the value interface simply be compared by their respective values?">14.5.1. - how to support comparison of Uize subclass instances? Is there a meaningful way to do this?</a></li>
 						</ul>
 					</li>
-					<li><a href="#14_7" title="- support string for _source?">14.7. - Uize.Data.map</a></li>
-					<li><a href="#14_8" title="- lets you rename keys in an object">14.8. - Uize.Data.mapKeys</a></li>
+					<li><a href="#14_6" title="- improve implementation to use object tagging technique employed in Uize.Array.Dupes">14.6. - Uize.Data.conjoined</a></li>
+					<li><a href="#14_7" title="- tests to see if the object contains circular references / reference loops">14.7. - Uize.Data.hasCircularity</a></li>
+					<li><a href="#14_8" title="- support string for _source?">14.8. - Uize.Data.map</a></li>
+					<li><a href="#14_9" title="- lets you rename keys in an object">14.9. - Uize.Data.mapKeys</a></li>
+					<li><a href="#14_10" title="- lets you rename keys and transform values in an object">14.10. - Uise.Data.mapKeyValues</a></li>
 				</ul>
 			</li>
 			<li><a href="#15" title="- test performance of parser using regular expressions">15. Uize.Data.Csv</a></li>
@@ -502,7 +506,7 @@
 						<ul>
 							<li><a href="#29_2_1" title="Uize.Is.inRange (0,100,value)&#10;">29.2.1. - test</a></li>
 							<li><a href="#29_2_2" title="function (value) {return Uize.Is.inRange (0,100,value)}&#10;&#10;Uize.Is.inRange.fn (0,100)&#10;Uize.Is.inRange.tester (0,100)&#10;Uize.Is.inRange.test (0,100)&#10;Uize.Is.inRange.match (0,100)&#10;Uize.Is.inRange.matcher (0,100)&#10;Uize.Is.inRange.value (0,100)&#10;&#10;Uize.Is.inRange.make (0,100)&#10;Uize.Is.inRange.capture (0,100)&#10;Uize.Is.inRange.freeze (0,100)&#10;&#10;Uize.Is.inRange._(0,100)&#10;Uize.Is.inRange [&apos;...&apos;] (0,100)&#10;Uize.Is.in...">29.2.2. - make tester</a></li>
-							<li><a href="#29_2_3" title="Uize.Is.instanceOf (Uize.Widget.FormElement,myInstance)&#10;Uize.Is.instanceOf (Uize.Widget.FormElement) (myInstance)&#10;Uize.Is.instanceOf.tester (Uize.Widget.FormElement)&#10;Uize.curry (Uize.Is.instanceOf,Uize.Widget.FormElement)&#10;Uize.Is.instanceOf.curry (Uize.Widget.FormElement)&#10;&#10;Uize.bind (Uize.Is,&apos;instanceOf&apos;,[Uize.Widget.FormElement])&#10;&#10;&#10;Uize.makeCaller (context,method,params)&#10;&#10;Uize.Widget.setNodeVa...">29.2.3. - more thoughts on make tester</a></li>
+							<li><a href="#29_2_3" title="Uize.Is.instanceOf (Uize.Widget.FormElement,myInstance)&#10;Uize.Is.instanceOf (Uize.Widget.FormElement) (myInstance)&#10;Uize.Is.instanceOf.tester (Uize.Widget.FormElement)&#10;">29.2.3. - more thoughts on make tester</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -1146,181 +1150,114 @@
 		</div>
 		
 		<p>}</p>
-		
-		<p>function (value) {return _function ('foo','bar',value,'hello')}</p>
-		
-		<p>Uize.makeCaller (_function,['foo','bar',0,'hello'],2)</p>
-		
-		<p>Uize.makeCaller (Math.pow,[0,2],0);</p>
-		
-		<p>function (value) {return Math.pow (value,2)}</p>
 	</div>
 	
 	<a name="2"></a>
 	<h1 class="heading1" title="2. Uize"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>. </span>Uize</h1>
 	<div class="contents1">
 		<a name="2_1"></a>
-		<h2 class="heading2" title="2. Uize -&gt; 2.1. Quick Win Additions"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_1" title="2. Uize -&gt; 2.1. Quick Win Additions">1</a>. </span>Quick Win Additions</h2>
+		<h2 class="heading2" title="2. Uize -&gt; 2.1. Quick Win Additions (in order of priority / usefulness)"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_1" title="2. Uize -&gt; 2.1. Quick Win Additions (in order of priority / usefulness)">1</a>. </span>Quick Win Additions (in order of priority / usefulness)</h2>
 		<div class="contents2">
 			<a name="2_1_1"></a>
-			<h3 class="heading3" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.1. - Uize.indexOf"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_1" title="2. Uize -&gt; 2.1. Quick Win Additions">1</a>.<a href="#2_1_1" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.1. - Uize.indexOf">1</a>. </span>- Uize.indexOf</h3>
+			<h3 class="heading3" title="2. Uize -&gt; 2.1. Quick Win Additions (in order of priority / usefulness) -&gt; 2.1.1. - Uize.map"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_1" title="2. Uize -&gt; 2.1. Quick Win Additions (in order of priority / usefulness)">1</a>.<a href="#2_1_1" title="2. Uize -&gt; 2.1. Quick Win Additions (in order of priority / usefulness) -&gt; 2.1.1. - Uize.map">1</a>. </span>- Uize.map</h3>
 			<div class="contents3">
 				<table class="list">
-				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>uses indexIn</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>promoted from Uize.Data.map, but with modified signature to make array first</td></tr>
 				</table>
 			</div>
 			
 			<a name="2_1_2"></a>
-			<h3 class="heading3" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.2. - Uize.lastIndexOf"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_1" title="2. Uize -&gt; 2.1. Quick Win Additions">1</a>.<a href="#2_1_2" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.2. - Uize.lastIndexOf">2</a>. </span>- Uize.lastIndexOf</h3>
+			<h3 class="heading3" title="2. Uize -&gt; 2.1. Quick Win Additions (in order of priority / usefulness) -&gt; 2.1.2. - Uize.indexOf, Uize.lastIndexOf"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_1" title="2. Uize -&gt; 2.1. Quick Win Additions (in order of priority / usefulness)">1</a>.<a href="#2_1_2" title="2. Uize -&gt; 2.1. Quick Win Additions (in order of priority / usefulness) -&gt; 2.1.2. - Uize.indexOf, Uize.lastIndexOf">2</a>. </span>- Uize.indexOf, Uize.lastIndexOf</h3>
 			<div class="contents3">
 				<table class="list">
-				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>uses indexIn</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>essentially derived from indexIn, but adapted to also operate on strings and to use built-in indexOf when possible and supported by JavaScript built-in objects (ie. newer versions of JavaScript)</td></tr>
 				</table>
 			</div>
 			
 			<a name="2_1_3"></a>
-			<h3 class="heading3" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.3. - Uize.indexIn"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_1" title="2. Uize -&gt; 2.1. Quick Win Additions">1</a>.<a href="#2_1_3" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.3. - Uize.indexIn">3</a>. </span>- Uize.indexIn</h3>
+			<h3 class="heading3" title="2. Uize -&gt; 2.1. Quick Win Additions (in order of priority / usefulness) -&gt; 2.1.3. - Uize.indexIn"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_1" title="2. Uize -&gt; 2.1. Quick Win Additions (in order of priority / usefulness)">1</a>.<a href="#2_1_3" title="2. Uize -&gt; 2.1. Quick Win Additions (in order of priority / usefulness) -&gt; 2.1.3. - Uize.indexIn">3</a>. </span>- Uize.indexIn</h3>
 			<div class="contents3">
 				<table class="list">
-				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>add support for object</td></tr>
-				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>fall back to using built-in indexOf or lastIndexOf Array method, when they are present and when comparison is strict</td></tr>
-				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>add support for source being a string</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>adapt to add support for object (ie. which key has specified value)</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>adapt to fall back to using built-in indexOf or lastIndexOf Array method, when they are present and when comparison is strict</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>adapt to add support for source being a string</td></tr>
 				</table>
 			</div>
 			
 			<a name="2_1_4"></a>
-			<h3 class="heading3" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.4. - Uize.ensureIn"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_1" title="2. Uize -&gt; 2.1. Quick Win Additions">1</a>.<a href="#2_1_4" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.4. - Uize.ensureIn">4</a>. </span>- Uize.ensureIn</h3>
+			<h3 class="heading3" title="2. Uize -&gt; 2.1. Quick Win Additions (in order of priority / usefulness) -&gt; 2.1.4. - Uize.require"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_1" title="2. Uize -&gt; 2.1. Quick Win Additions (in order of priority / usefulness)">1</a>.<a href="#2_1_4" title="2. Uize -&gt; 2.1. Quick Win Additions (in order of priority / usefulness) -&gt; 2.1.4. - Uize.require">4</a>. </span>- Uize.require</h3>
 			<div class="contents3">
 				<table class="list">
-				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>checks to see if an element is present, and adds it if not</td></tr>
-				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>supports adding at beginning or adding at end</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>alias to anonymous module with required (to make the simple case of requiring a module deeper in code more convenient & intuitive)</td></tr>
 				</table>
 			</div>
 			
 			<a name="2_1_5"></a>
-			<h3 class="heading3" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.5. - Uize.extend"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_1" title="2. Uize -&gt; 2.1. Quick Win Additions">1</a>.<a href="#2_1_5" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.5. - Uize.extend">5</a>. </span>- Uize.extend</h3>
+			<h3 class="heading3" title="2. Uize -&gt; 2.1. Quick Win Additions (in order of priority / usefulness) -&gt; 2.1.5. LATER"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_1" title="2. Uize -&gt; 2.1. Quick Win Additions (in order of priority / usefulness)">1</a>.<a href="#2_1_5" title="2. Uize -&gt; 2.1. Quick Win Additions (in order of priority / usefulness) -&gt; 2.1.5. LATER">5</a>. </span>LATER</h3>
 			<div class="contents3">
-				<table class="list">
-				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>alias of copyInto</td></tr>
-				</table>
-			</div>
-			
-			<a name="2_1_6"></a>
-			<h3 class="heading3" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.6. - Uize.require"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_1" title="2. Uize -&gt; 2.1. Quick Win Additions">1</a>.<a href="#2_1_6" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.6. - Uize.require">6</a>. </span>- Uize.require</h3>
-			<div class="contents3">
-				<table class="list">
-				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>alias to anonymous module with required</td></tr>
-				</table>
-			</div>
-			
-			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Uize.isObject</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Uize.isString</td></tr>
-			</table>
-			<a name="2_1_7"></a>
-			<h3 class="heading3" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.7. - Uize.ensureArray"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_1" title="2. Uize -&gt; 2.1. Quick Win Additions">1</a>.<a href="#2_1_7" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.7. - Uize.ensureArray">7</a>. </span>- Uize.ensureArray</h3>
-			<div class="contents3">
-				<table class="list">
-				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>ensures that the value is an array</td></tr>
-				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>if the value is already an array, then it is simply returned</td></tr>
-				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>if the value is an arguments object, then an array is created from it</td></tr>
-				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>if the value is any other type, then a new array is returned with the value as its single element</td></tr>
-				</table>
-			</div>
-			
-			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Uize.isArrayLike</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Uize.isBoolean</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Uize.isNully</td></tr>
-			</table>
-			<a name="2_1_8"></a>
-			<h3 class="heading3" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.8. - Uize.isEmpty"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_1" title="2. Uize -&gt; 2.1. Quick Win Additions">1</a>.<a href="#2_1_8" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.8. - Uize.isEmpty">8</a>. </span>- Uize.isEmpty</h3>
-			<div class="contents3">
-				<table class="list">
-				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>promoted from Uize.Data.isEmpty</td></tr>
-				</table>
-			</div>
-			
-			<a name="2_1_9"></a>
-			<h3 class="heading3" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.9. - Uize.keys"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_1" title="2. Uize -&gt; 2.1. Quick Win Additions">1</a>.<a href="#2_1_9" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.9. - Uize.keys">9</a>. </span>- Uize.keys</h3>
-			<div class="contents3">
-				<table class="list">
-				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>promoted from Uize.Data.getKeys</td></tr>
-				</table>
-			</div>
-			
-			<a name="2_1_10"></a>
-			<h3 class="heading3" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.10. - Uize.values"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_1" title="2. Uize -&gt; 2.1. Quick Win Additions">1</a>.<a href="#2_1_10" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.10. - Uize.values">10</a>. </span>- Uize.values</h3>
-			<div class="contents3">
-				<table class="list">
-				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>promoted from Uize.Data.getValues</td></tr>
-				</table>
-			</div>
-			
-			<a name="2_1_11"></a>
-			<h3 class="heading3" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.11. - Uize.totalKeys"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_1" title="2. Uize -&gt; 2.1. Quick Win Additions">1</a>.<a href="#2_1_11" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.11. - Uize.totalKeys">11</a>. </span>- Uize.totalKeys</h3>
-			<div class="contents3">
-				<table class="list">
-				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>promoted from Uize.Data.getTotalKeys</td></tr>
-				</table>
-			</div>
-			
-			<a name="2_1_12"></a>
-			<h3 class="heading3" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.12. - Uize.min"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_1" title="2. Uize -&gt; 2.1. Quick Win Additions">1</a>.<a href="#2_1_12" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.12. - Uize.min">12</a>. </span>- Uize.min</h3>
-			<div class="contents3">
-				<table class="list">
-				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>promoted from Uize.Data.min</td></tr>
-				</table>
-			</div>
-			
-			<a name="2_1_13"></a>
-			<h3 class="heading3" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.13. - Uize.max"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_1" title="2. Uize -&gt; 2.1. Quick Win Additions">1</a>.<a href="#2_1_13" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.13. - Uize.max">13</a>. </span>- Uize.max</h3>
-			<div class="contents3">
-				<table class="list">
-				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>promoted from Uize.Data.max</td></tr>
-				</table>
-			</div>
-			
-			<a name="2_1_14"></a>
-			<h3 class="heading3" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.14. - Uize.emptyOut"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_1" title="2. Uize -&gt; 2.1. Quick Win Additions">1</a>.<a href="#2_1_14" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.14. - Uize.emptyOut">14</a>. </span>- Uize.emptyOut</h3>
-			<div class="contents3">
-				<table class="list">
-				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>promoted from Uize.Data.emptyOut</td></tr>
-				</table>
-			</div>
-			
-			<a name="2_1_15"></a>
-			<h3 class="heading3" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.15. - Uize.lookup"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_1" title="2. Uize -&gt; 2.1. Quick Win Additions">1</a>.<a href="#2_1_15" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.15. - Uize.lookup">15</a>. </span>- Uize.lookup</h3>
-			<div class="contents3">
-				<table class="list">
-				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>promoted from Uize.Data.getLookup</td></tr>
-				</table>
-			</div>
-			
-			<a name="2_1_16"></a>
-			<h3 class="heading3" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.16. - Uize.reverseLookup"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_1" title="2. Uize -&gt; 2.1. Quick Win Additions">1</a>.<a href="#2_1_16" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.16. - Uize.reverseLookup">16</a>. </span>- Uize.reverseLookup</h3>
-			<div class="contents3">
-				<table class="list">
-				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>promoted from Uize.Data.getReverseLookup</td></tr>
-				</table>
-			</div>
-			
-			<a name="2_1_17"></a>
-			<h3 class="heading3" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.17. - Uize.truthy"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_1" title="2. Uize -&gt; 2.1. Quick Win Additions">1</a>.<a href="#2_1_17" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.17. - Uize.truthy">17</a>. </span>- Uize.truthy</h3>
-			<div class="contents3">
-				<table class="list">
-				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>returns true if the value is truthy</td></tr>
-				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>useful for methods that accept value matchers</td></tr>
-				</table>
-			</div>
-			
-			<a name="2_1_18"></a>
-			<h3 class="heading3" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.18. - Uize.falsy"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_1" title="2. Uize -&gt; 2.1. Quick Win Additions">1</a>.<a href="#2_1_18" title="2. Uize -&gt; 2.1. Quick Win Additions -&gt; 2.1.18. - Uize.falsy">18</a>. </span>- Uize.falsy</h3>
-			<div class="contents3">
-				<table class="list">
-				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>returns true is the value is falsy</td></tr>
-				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>useful for methods that accept value matchers</td></tr>
-				</table>
+				<a name="2_1_5_1"></a>
+				<h4 class="heading4" title="2. Uize -&gt; 2.1. Quick Win Additions (in order of priority / usefulness) -&gt; 2.1.5. LATER -&gt; 2.1.5.1. - Uize.extend"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_1" title="2. Uize -&gt; 2.1. Quick Win Additions (in order of priority / usefulness)">1</a>.<a href="#2_1_5" title="2. Uize -&gt; 2.1. Quick Win Additions (in order of priority / usefulness) -&gt; 2.1.5. LATER">5</a>.<a href="#2_1_5_1" title="2. Uize -&gt; 2.1. Quick Win Additions (in order of priority / usefulness) -&gt; 2.1.5. LATER -&gt; 2.1.5.1. - Uize.extend">1</a>. </span>- Uize.extend</h4>
+				<div class="contents4">
+					<table class="list">
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>alias of copyInto, for those who are more comfortable with the extend semantic</td></tr>
+					</table>
+				</div>
+				
+				<a name="2_1_5_2"></a>
+				<h4 class="heading4" title="2. Uize -&gt; 2.1. Quick Win Additions (in order of priority / usefulness) -&gt; 2.1.5. LATER -&gt; 2.1.5.2. - Uize.isArrayLike"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_1" title="2. Uize -&gt; 2.1. Quick Win Additions (in order of priority / usefulness)">1</a>.<a href="#2_1_5" title="2. Uize -&gt; 2.1. Quick Win Additions (in order of priority / usefulness) -&gt; 2.1.5. LATER">5</a>.<a href="#2_1_5_2" title="2. Uize -&gt; 2.1. Quick Win Additions (in order of priority / usefulness) -&gt; 2.1.5. LATER -&gt; 2.1.5.2. - Uize.isArrayLike">2</a>. </span>- Uize.isArrayLike</h4>
+				<div class="contents4">
+					<table class="list">
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>different name, like isListy or isIterable?</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>checks to see if value is object and has length property, to ensure object can have any Array method called or applied on it (most native implementations only require a basic / minimal Array like interface to work)</td></tr>
+					</table>
+				</div>
+				
+				<a name="2_1_5_3"></a>
+				<h4 class="heading4" title="2. Uize -&gt; 2.1. Quick Win Additions (in order of priority / usefulness) -&gt; 2.1.5. LATER -&gt; 2.1.5.3. - Uize.ensureArray"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_1" title="2. Uize -&gt; 2.1. Quick Win Additions (in order of priority / usefulness)">1</a>.<a href="#2_1_5" title="2. Uize -&gt; 2.1. Quick Win Additions (in order of priority / usefulness) -&gt; 2.1.5. LATER">5</a>.<a href="#2_1_5_3" title="2. Uize -&gt; 2.1. Quick Win Additions (in order of priority / usefulness) -&gt; 2.1.5. LATER -&gt; 2.1.5.3. - Uize.ensureArray">3</a>. </span>- Uize.ensureArray</h4>
+				<div class="contents4">
+					<table class="list">
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>ensures that the value is an array</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>if the value is already an array, then it is simply returned</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>if the value is an arguments object, then an array is created from it</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>if the value is any other type, then a new array is returned with the value as its single element</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is useful for methods that want to be versatile and support simple value types in addition to arrays, but want to normalize to array of one element for purpose of implementation code</td></tr>
+					</table>
+				</div>
+				
+				<a name="2_1_5_4"></a>
+				<h4 class="heading4" title="2. Uize -&gt; 2.1. Quick Win Additions (in order of priority / usefulness) -&gt; 2.1.5. LATER -&gt; 2.1.5.4. - Uize.ensureIn"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_1" title="2. Uize -&gt; 2.1. Quick Win Additions (in order of priority / usefulness)">1</a>.<a href="#2_1_5" title="2. Uize -&gt; 2.1. Quick Win Additions (in order of priority / usefulness) -&gt; 2.1.5. LATER">5</a>.<a href="#2_1_5_4" title="2. Uize -&gt; 2.1. Quick Win Additions (in order of priority / usefulness) -&gt; 2.1.5. LATER -&gt; 2.1.5.4. - Uize.ensureIn">4</a>. </span>- Uize.ensureIn</h4>
+				<div class="contents4">
+					<table class="list">
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>checks to see if an element is present, and adds it if not</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>supports adding at beginning or adding at end, with optional where parameter</td></tr>
+					</table>
+				</div>
+				
+				<a name="2_1_5_5"></a>
+				<h4 class="heading4" title="2. Uize -&gt; 2.1. Quick Win Additions (in order of priority / usefulness) -&gt; 2.1.5. LATER -&gt; 2.1.5.5. - Uize.isStringy"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_1" title="2. Uize -&gt; 2.1. Quick Win Additions (in order of priority / usefulness)">1</a>.<a href="#2_1_5" title="2. Uize -&gt; 2.1. Quick Win Additions (in order of priority / usefulness) -&gt; 2.1.5. LATER">5</a>.<a href="#2_1_5_5" title="2. Uize -&gt; 2.1. Quick Win Additions (in order of priority / usefulness) -&gt; 2.1.5. LATER -&gt; 2.1.5.5. - Uize.isStringy">5</a>. </span>- Uize.isStringy</h4>
+				<div class="contents4">
+					<table class="list">
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>returns true if the value is either a string primitive or an instance of a String object or "subclass"</td></tr>
+					</table>
+				</div>
+				
+				<a name="2_1_5_6"></a>
+				<h4 class="heading4" title="2. Uize -&gt; 2.1. Quick Win Additions (in order of priority / usefulness) -&gt; 2.1.5. LATER -&gt; 2.1.5.6. - Uize.isTruthy"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_1" title="2. Uize -&gt; 2.1. Quick Win Additions (in order of priority / usefulness)">1</a>.<a href="#2_1_5" title="2. Uize -&gt; 2.1. Quick Win Additions (in order of priority / usefulness) -&gt; 2.1.5. LATER">5</a>.<a href="#2_1_5_6" title="2. Uize -&gt; 2.1. Quick Win Additions (in order of priority / usefulness) -&gt; 2.1.5. LATER -&gt; 2.1.5.6. - Uize.isTruthy">6</a>. </span>- Uize.isTruthy</h4>
+				<div class="contents4">
+					<table class="list">
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>returns true if the value is truthy</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>useful for methods that accept value matchers</td></tr>
+					</table>
+				</div>
+				
+				<a name="2_1_5_7"></a>
+				<h4 class="heading4" title="2. Uize -&gt; 2.1. Quick Win Additions (in order of priority / usefulness) -&gt; 2.1.5. LATER -&gt; 2.1.5.7. - Uize.isFalsy"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_1" title="2. Uize -&gt; 2.1. Quick Win Additions (in order of priority / usefulness)">1</a>.<a href="#2_1_5" title="2. Uize -&gt; 2.1. Quick Win Additions (in order of priority / usefulness) -&gt; 2.1.5. LATER">5</a>.<a href="#2_1_5_7" title="2. Uize -&gt; 2.1. Quick Win Additions (in order of priority / usefulness) -&gt; 2.1.5. LATER -&gt; 2.1.5.7. - Uize.isFalsy">7</a>. </span>- Uize.isFalsy</h4>
+				<div class="contents4">
+					<table class="list">
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>returns true is the value is falsy</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>useful for methods that accept value matchers</td></tr>
+					</table>
+				</div>
 			</div>
 		</div>
 		
@@ -1553,14 +1490,40 @@ myWidget.whenever (
 		</div>
 		
 		<a name="2_7"></a>
-		<h2 class="heading2" title="2. Uize -&gt; 2.7. Uize.methodCall"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_7" title="2. Uize -&gt; 2.7. Uize.methodCall">7</a>. </span>Uize.methodCall</h2>
+		<h2 class="heading2" title="2. Uize -&gt; 2.7. Uize.willCall"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_7" title="2. Uize -&gt; 2.7. Uize.willCall">7</a>. </span>Uize.willCall</h2>
 		<div class="contents2">
 			<p>Lets you conveniently create a function / method caller, where you can specify context, function, and arguments.</p>
+			
+			<a name="2_7_1"></a>
+			<h3 class="heading3" title="2. Uize -&gt; 2.7. Uize.willCall -&gt; 2.7.1. - names considered"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_7" title="2. Uize -&gt; 2.7. Uize.willCall">7</a>.<a href="#2_7_1" title="2. Uize -&gt; 2.7. Uize.willCall -&gt; 2.7.1. - names considered">1</a>. </span>- names considered</h3>
+			<div class="contents3">
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>callback</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>callerOf</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>willCall</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>performer</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>willDo</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>asCall</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>toCall</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>will</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>perform</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>callProxy</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>callAgent</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>funcCaller</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>funcAgent</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>funcProxy</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>handler</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>asHandler</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>asContext</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>makeCaller</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>doer</td></tr>
+				</table>
+			</div>
 			
 			<p><span class="allCaps">IMPLEMENTATION</span></p>
 			
 			
-<pre class="sample-code">Uize.methodCall = function (_context,_function,_arguments,_extraArgsMapping) {
+<pre class="sample-code">Uize.willCall = function (_context,_function,_arguments,_extraArgsMapping) {
   var _hasExtraArgsMapping = _extraArgsMapping != _undefined;
   if (_hasExtraArgsMapping)
     _arguments = _arguments ? _arguments.concat () : []
@@ -1576,15 +1539,17 @@ myWidget.whenever (
             _arguments [_extraArgsMapping] = arguments [0];
             return _function.apply (_context,_arguments);
           }
+
+          // loop should be driven by _extraArgsMapping - not incoming arguments?
+          // what about incoming arguments for which there are no mappings (ie. beyond end of mapping array)
           : function () {
-            for (
-              var _argumentNo = -1, _argumentsLength = arguments.length;
-              ++_argumentNo &lt; _argumentsLength;
-            )
+            for (var _argumentNo = arguments.length; --_argumentNo &gt;= 0;)
               _arguments [_extraArgsMapping [_argumentNo]] = arguments [_argumentNo]
             ;
             return _function.apply (_context,_arguments);
           }
+
+
       )
       : _arguments &amp;&amp; _arguments.length
         ? function () {return _function.apply (_context,_arguments)}
@@ -1593,7 +1558,7 @@ myWidget.whenever (
 };
 
 Uize.functionCall = function (_function,_arguments,_extraArgsMapping) {
-  return Uize.methodCall (0,_function,_arguments,_extraArgsMapping);
+  return Uize.willCall (0,_function,_arguments,_extraArgsMapping);
 };
 </pre>
 			
@@ -1601,8 +1566,8 @@ Uize.functionCall = function (_function,_arguments,_extraArgsMapping) {
 			
 			
 <pre class="sample-code">var
-  xSquared = Uize.functionCall (Math.pow,[0,2],0),
-  3ToPowerX = Uize.functionCall (Math.pow,[3,0],1)
+  xSquared = Uize.willCall (Math.pow,[0,2],0),
+  3ToPowerX = Uize.willCall (Math.pow,[3,0],1)
 ;
 </pre>
 			
@@ -1615,7 +1580,7 @@ Uize.functionCall = function (_function,_arguments,_extraArgsMapping) {
 			<p><span class="allCaps">USE...</span></p>
 			
 			
-<pre class="sample-code">var 3ToPowerX = Uize.functionCall (Math.pow,[3,0],1);
+<pre class="sample-code">var 3ToPowerX = Uize.willCall (Math.pow,[3,0],1);
 </pre>
 		</div>
 		
@@ -1703,33 +1668,47 @@ return ((value - min) % maxMinDelta + maxMinDelta) % maxMinDelta + min;
 // what about max &lt; min?
 </pre>
 			</div>
-		</div>
-		
-		<a name="2_11"></a>
-		<h2 class="heading2" title="2. Uize -&gt; 2.11. Uize.callOn"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_11" title="2. Uize -&gt; 2.11. Uize.callOn">11</a>. </span>Uize.callOn</h2>
-		<div class="contents2">
-			<a name="2_11_1"></a>
-			<h3 class="heading3" title="2. Uize -&gt; 2.11. Uize.callOn -&gt; 2.11.1. Support Instances of Non-Uize Classes"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_11" title="2. Uize -&gt; 2.11. Uize.callOn">11</a>.<a href="#2_11_1" title="2. Uize -&gt; 2.11. Uize.callOn -&gt; 2.11.1. Support Instances of Non-Uize Classes">1</a>. </span>Support Instances of Non-Uize Classes</h3>
+			
+			<a name="2_10_2"></a>
+			<h3 class="heading3" title="2. Uize -&gt; 2.10. Uize.constrain -&gt; 2.10.2. Unbounded"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_10" title="2. Uize -&gt; 2.10. Uize.constrain">10</a>.<a href="#2_10_2" title="2. Uize -&gt; 2.10. Uize.constrain -&gt; 2.10.2. Unbounded">2</a>. </span>Unbounded</h3>
 			<div class="contents3">
-				<p>Add support for using the <code><a href="#2_11">Uize.callOn</a></code> method on a target that is an instance of a class that is not a <code><a href="#2">Uize</a></code> subclass.</p>
-				
-				<p>For example, it should be possible to use the <code><a href="#2_11">Uize.callOn</a></code> method on instances of the <code><a href="../javascript-reference/Date.html">Date</a></code> object, or any of the other JavaScript built-in objects. It should also be possible to use the method on instances of custom objects. Basically, if the target is an object and its constructor is not <code><a href="../javascript-reference/Object.html">Object</a></code>, then it should be treated as an instance and not an object containing a collection of subtargets. The one thing to consider in testing for non-Object constructor is simple instances of the <code><a href="../javascript-reference/Object.html">Object</a></code> object that originate from a different window or an iframe.</p>
+				<p>Support either or both of the min and max boundaries being <code>null</code> or <code>undefined</code>.</p>
 			</div>
 		</div>
 		
+		<a name="2_11"></a>
+		<h2 class="heading2" title="2. Uize -&gt; 2.11. - Uize.lookup &amp; Uize.reverseLookup"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_11" title="2. Uize -&gt; 2.11. - Uize.lookup &amp; Uize.reverseLookup">11</a>. </span>- Uize.lookup & Uize.reverseLookup</h2>
+		<div class="contents2">
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>for <code>Uize.lookup</code>, support mode with no parameters that returns an empty safe lookup</td></tr>
+			</table>
+		</div>
+		
 		<a name="2_12"></a>
-		<h2 class="heading2" title="2. Uize -&gt; 2.12. Uize.indexIn"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_12" title="2. Uize -&gt; 2.12. Uize.indexIn">12</a>. </span>Uize.indexIn</h2>
+		<h2 class="heading2" title="2. Uize -&gt; 2.12. Uize.callOn"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_12" title="2. Uize -&gt; 2.12. Uize.callOn">12</a>. </span>Uize.callOn</h2>
 		<div class="contents2">
 			<a name="2_12_1"></a>
-			<h3 class="heading3" title="2. Uize -&gt; 2.12. Uize.indexIn -&gt; 2.12.1. Support Object Source"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_12" title="2. Uize -&gt; 2.12. Uize.indexIn">12</a>.<a href="#2_12_1" title="2. Uize -&gt; 2.12. Uize.indexIn -&gt; 2.12.1. Support Object Source">1</a>. </span>Support Object Source</h3>
+			<h3 class="heading3" title="2. Uize -&gt; 2.12. Uize.callOn -&gt; 2.12.1. Support Instances of Non-Uize Classes"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_12" title="2. Uize -&gt; 2.12. Uize.callOn">12</a>.<a href="#2_12_1" title="2. Uize -&gt; 2.12. Uize.callOn -&gt; 2.12.1. Support Instances of Non-Uize Classes">1</a>. </span>Support Instances of Non-Uize Classes</h3>
+			<div class="contents3">
+				<p>Add support for using the <code><a href="#2_12">Uize.callOn</a></code> method on a target that is an instance of a class that is not a <code><a href="#2">Uize</a></code> subclass.</p>
+				
+				<p>For example, it should be possible to use the <code><a href="#2_12">Uize.callOn</a></code> method on instances of the <code><a href="../javascript-reference/Date.html">Date</a></code> object, or any of the other JavaScript built-in objects. It should also be possible to use the method on instances of custom objects. Basically, if the target is an object and its constructor is not <code><a href="../javascript-reference/Object.html">Object</a></code>, then it should be treated as an instance and not an object containing a collection of subtargets. The one thing to consider in testing for non-Object constructor is simple instances of the <code><a href="../javascript-reference/Object.html">Object</a></code> object that originate from a different window or an iframe.</p>
+			</div>
+		</div>
+		
+		<a name="2_13"></a>
+		<h2 class="heading2" title="2. Uize -&gt; 2.13. Uize.indexIn"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_13" title="2. Uize -&gt; 2.13. Uize.indexIn">13</a>. </span>Uize.indexIn</h2>
+		<div class="contents2">
+			<a name="2_13_1"></a>
+			<h3 class="heading3" title="2. Uize -&gt; 2.13. Uize.indexIn -&gt; 2.13.1. Support Object Source"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_13" title="2. Uize -&gt; 2.13. Uize.indexIn">13</a>.<a href="#2_13_1" title="2. Uize -&gt; 2.13. Uize.indexIn -&gt; 2.13.1. Support Object Source">1</a>. </span>Support Object Source</h3>
 			<div class="contents3">
 				<p>For object type source, could find key whose value matches, and return undefined (or null?) if value not found in object.</p>
 				
 				<p>In this mode, <code>fromEndBOOL</code> parameter could control direction for iterating through the keys of the object.</p>
 			</div>
 			
-			<a name="2_12_2"></a>
-			<h3 class="heading3" title="2. Uize -&gt; 2.12. Uize.indexIn -&gt; 2.12.2. Support Simple Type Source"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_12" title="2. Uize -&gt; 2.12. Uize.indexIn">12</a>.<a href="#2_12_2" title="2. Uize -&gt; 2.12. Uize.indexIn -&gt; 2.12.2. Support Simple Type Source">2</a>. </span>Support Simple Type Source</h3>
+			<a name="2_13_2"></a>
+			<h3 class="heading3" title="2. Uize -&gt; 2.13. Uize.indexIn -&gt; 2.13.2. Support Simple Type Source"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_13" title="2. Uize -&gt; 2.13. Uize.indexIn">13</a>.<a href="#2_13_2" title="2. Uize -&gt; 2.13. Uize.indexIn -&gt; 2.13.2. Support Simple Type Source">2</a>. </span>Support Simple Type Source</h3>
 			<div class="contents3">
 				<p>For simple type source, could do string index.</p>
 				
@@ -1737,11 +1716,11 @@ return ((value - min) % maxMinDelta + maxMinDelta) % maxMinDelta + min;
 			</div>
 		</div>
 		
-		<a name="2_13"></a>
-		<h2 class="heading2" title="2. Uize -&gt; 2.13. Uize.module"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_13" title="2. Uize -&gt; 2.13. Uize.module">13</a>. </span>Uize.module</h2>
+		<a name="2_14"></a>
+		<h2 class="heading2" title="2. Uize -&gt; 2.14. Uize.module"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_14" title="2. Uize -&gt; 2.14. Uize.module">14</a>. </span>Uize.module</h2>
 		<div class="contents2">
-			<a name="2_13_1"></a>
-			<h3 class="heading3" title="2. Uize -&gt; 2.13. Uize.module -&gt; 2.13.1. Support Code Besides in Module Loader"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_13" title="2. Uize -&gt; 2.13. Uize.module">13</a>.<a href="#2_13_1" title="2. Uize -&gt; 2.13. Uize.module -&gt; 2.13.1. Support Code Besides in Module Loader">1</a>. </span>Support Code Besides in Module Loader</h3>
+			<a name="2_14_1"></a>
+			<h3 class="heading3" title="2. Uize -&gt; 2.14. Uize.module -&gt; 2.14.1. Support Code Besides in Module Loader"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_14" title="2. Uize -&gt; 2.14. Uize.module">14</a>.<a href="#2_14_1" title="2. Uize -&gt; 2.14. Uize.module -&gt; 2.14.1. Support Code Besides in Module Loader">1</a>. </span>Support Code Besides in Module Loader</h3>
 			<div class="contents3">
 				<p>How can code require a module that is not in the modules directory (like a code beside)?</p>
 				
@@ -1749,24 +1728,24 @@ return ((value - min) % maxMinDelta + maxMinDelta) % maxMinDelta + min;
 			</div>
 		</div>
 		
-		<a name="2_14"></a>
-		<h2 class="heading2" title="2. Uize -&gt; 2.14. Multiple Inheritance"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_14" title="2. Uize -&gt; 2.14. Multiple Inheritance">14</a>. </span>Multiple Inheritance</h2>
+		<a name="2_15"></a>
+		<h2 class="heading2" title="2. Uize -&gt; 2.15. Multiple Inheritance"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_15" title="2. Uize -&gt; 2.15. Multiple Inheritance">15</a>. </span>Multiple Inheritance</h2>
 		<div class="contents2">
 			<p>Consider a facility to support multiple inheritance (may involve creating a merge service for merging data from one object into another, since it should be possible to merge additional features of a different class into an already created class, and perhaps that merge feature would also be used in the _subclass function's implementation).</p>
 		</div>
 		
-		<a name="2_15"></a>
-		<h2 class="heading2" title="2. Uize -&gt; 2.15. Library Modules"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_15" title="2. Uize -&gt; 2.15. Library Modules">15</a>. </span>Library Modules</h2>
+		<a name="2_16"></a>
+		<h2 class="heading2" title="2. Uize -&gt; 2.16. Library Modules"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_16" title="2. Uize -&gt; 2.16. Library Modules">16</a>. </span>Library Modules</h2>
 		<div class="contents2">
-			<a name="2_15_1"></a>
-			<h3 class="heading3" title="2. Uize -&gt; 2.15. Library Modules -&gt; 2.15.1. Library of Dispersed Modules"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_15" title="2. Uize -&gt; 2.15. Library Modules">15</a>.<a href="#2_15_1" title="2. Uize -&gt; 2.15. Library Modules -&gt; 2.15.1. Library of Dispersed Modules">1</a>. </span>Library of Dispersed Modules</h3>
+			<a name="2_16_1"></a>
+			<h3 class="heading3" title="2. Uize -&gt; 2.16. Library Modules -&gt; 2.16.1. Library of Dispersed Modules"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_16" title="2. Uize -&gt; 2.16. Library Modules">16</a>.<a href="#2_16_1" title="2. Uize -&gt; 2.16. Library Modules -&gt; 2.16.1. Library of Dispersed Modules">1</a>. </span>Library of Dispersed Modules</h3>
 			<div class="contents3">
 				<p>Can library modules that are outside the modules directory require modules that are outside the modules directory?</p>
 			</div>
 		</div>
 		
-		<a name="2_16"></a>
-		<h2 class="heading2" title="2. Uize -&gt; 2.16. Handle Simple Type in Place of Constructor Properties"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_16" title="2. Uize -&gt; 2.16. Handle Simple Type in Place of Constructor Properties">16</a>. </span>Handle Simple Type in Place of Constructor Properties</h2>
+		<a name="2_17"></a>
+		<h2 class="heading2" title="2. Uize -&gt; 2.17. Handle Simple Type in Place of Constructor Properties"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_17" title="2. Uize -&gt; 2.17. Handle Simple Type in Place of Constructor Properties">17</a>. </span>Handle Simple Type in Place of Constructor Properties</h2>
 		<div class="contents2">
 			<p>Variation on constructor, where specifying a non-object for the properties has the effect of setting the value property.</p>
 			
@@ -1789,20 +1768,20 @@ new Uize.Widget.Bar.Slider (50);          // old form
 </pre>
 		</div>
 		
-		<a name="2_17"></a>
-		<h2 class="heading2" title="2. Uize -&gt; 2.17. Uize.clone and Recursion"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_17" title="2. Uize -&gt; 2.17. Uize.clone and Recursion">17</a>. </span>Uize.clone and Recursion</h2>
+		<a name="2_18"></a>
+		<h2 class="heading2" title="2. Uize -&gt; 2.18. Uize.clone and Recursion"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_18" title="2. Uize -&gt; 2.18. Uize.clone and Recursion">18</a>. </span>Uize.clone and Recursion</h2>
 		<div class="contents2">
 			<p>Handle recursion in Uize.clone (how to generate properties that are references to other parts of structure in same relationship as the equivalent property in the cloning source???)</p>
 		</div>
 		
-		<a name="2_18"></a>
-		<h2 class="heading2" title="2. Uize -&gt; 2.18. Improvements to Property Mechanism"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_18" title="2. Uize -&gt; 2.18. Improvements to Property Mechanism">18</a>. </span>Improvements to Property Mechanism</h2>
+		<a name="2_19"></a>
+		<h2 class="heading2" title="2. Uize -&gt; 2.19. Improvements to Property Mechanism"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_19" title="2. Uize -&gt; 2.19. Improvements to Property Mechanism">19</a>. </span>Improvements to Property Mechanism</h2>
 		<div class="contents2">
-			<a name="2_18_1"></a>
-			<h3 class="heading3" title="2. Uize -&gt; 2.18. Improvements to Property Mechanism -&gt; 2.18.1. New Profile Features"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_18" title="2. Uize -&gt; 2.18. Improvements to Property Mechanism">18</a>.<a href="#2_18_1" title="2. Uize -&gt; 2.18. Improvements to Property Mechanism -&gt; 2.18.1. New Profile Features">1</a>. </span>New Profile Features</h3>
+			<a name="2_19_1"></a>
+			<h3 class="heading3" title="2. Uize -&gt; 2.19. Improvements to Property Mechanism -&gt; 2.19.1. New Profile Features"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_19" title="2. Uize -&gt; 2.19. Improvements to Property Mechanism">19</a>.<a href="#2_19_1" title="2. Uize -&gt; 2.19. Improvements to Property Mechanism -&gt; 2.19.1. New Profile Features">1</a>. </span>New Profile Features</h3>
 			<div class="contents3">
-				<a name="2_18_1_1"></a>
-				<h4 class="heading4" title="2. Uize -&gt; 2.18. Improvements to Property Mechanism -&gt; 2.18.1. New Profile Features -&gt; 2.18.1.1. type"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_18" title="2. Uize -&gt; 2.18. Improvements to Property Mechanism">18</a>.<a href="#2_18_1" title="2. Uize -&gt; 2.18. Improvements to Property Mechanism -&gt; 2.18.1. New Profile Features">1</a>.<a href="#2_18_1_1" title="2. Uize -&gt; 2.18. Improvements to Property Mechanism -&gt; 2.18.1. New Profile Features -&gt; 2.18.1.1. type">1</a>. </span>type</h4>
+				<a name="2_19_1_1"></a>
+				<h4 class="heading4" title="2. Uize -&gt; 2.19. Improvements to Property Mechanism -&gt; 2.19.1. New Profile Features -&gt; 2.19.1.1. type"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_19" title="2. Uize -&gt; 2.19. Improvements to Property Mechanism">19</a>.<a href="#2_19_1" title="2. Uize -&gt; 2.19. Improvements to Property Mechanism -&gt; 2.19.1. New Profile Features">1</a>.<a href="#2_19_1_1" title="2. Uize -&gt; 2.19. Improvements to Property Mechanism -&gt; 2.19.1. New Profile Features -&gt; 2.19.1.1. type">1</a>. </span>type</h4>
 				<div class="contents4">
 					<p>Basic types...</p>
 					
@@ -1820,8 +1799,8 @@ new Uize.Widget.Bar.Slider (50);          // old form
 					</table>
 				</div>
 				
-				<a name="2_18_1_2"></a>
-				<h4 class="heading4" title="2. Uize -&gt; 2.18. Improvements to Property Mechanism -&gt; 2.18.1. New Profile Features -&gt; 2.18.1.2. validator"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_18" title="2. Uize -&gt; 2.18. Improvements to Property Mechanism">18</a>.<a href="#2_18_1" title="2. Uize -&gt; 2.18. Improvements to Property Mechanism -&gt; 2.18.1. New Profile Features">1</a>.<a href="#2_18_1_2" title="2. Uize -&gt; 2.18. Improvements to Property Mechanism -&gt; 2.18.1. New Profile Features -&gt; 2.18.1.2. validator">2</a>. </span>validator</h4>
+				<a name="2_19_1_2"></a>
+				<h4 class="heading4" title="2. Uize -&gt; 2.19. Improvements to Property Mechanism -&gt; 2.19.1. New Profile Features -&gt; 2.19.1.2. validator"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_19" title="2. Uize -&gt; 2.19. Improvements to Property Mechanism">19</a>.<a href="#2_19_1" title="2. Uize -&gt; 2.19. Improvements to Property Mechanism -&gt; 2.19.1. New Profile Features">1</a>.<a href="#2_19_1_2" title="2. Uize -&gt; 2.19. Improvements to Property Mechanism -&gt; 2.19.1. New Profile Features -&gt; 2.19.1.2. validator">2</a>. </span>validator</h4>
 				<div class="contents4">
 					<p>Different types of validators...</p>
 					
@@ -1839,16 +1818,16 @@ new Uize.Widget.Bar.Slider (50);          // old form
 			</table>
 		</div>
 		
-		<a name="2_19"></a>
-		<h2 class="heading2" title="2. Uize -&gt; 2.19. Uize.substituteInto"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_19" title="2. Uize -&gt; 2.19. Uize.substituteInto">19</a>. </span>Uize.substituteInto</h2>
+		<a name="2_20"></a>
+		<h2 class="heading2" title="2. Uize -&gt; 2.20. Uize.substituteInto"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_20" title="2. Uize -&gt; 2.20. Uize.substituteInto">20</a>. </span>Uize.substituteInto</h2>
 		<div class="contents2">
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>optimize for successive substitution on the same source using the same form of map (but different values, of course)</td></tr>
 			</table>
 		</div>
 		
-		<a name="2_20"></a>
-		<h2 class="heading2" title="2. Uize -&gt; 2.20. constructed Property"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_20" title="2. Uize -&gt; 2.20. constructed Property">20</a>. </span>constructed Property</h2>
+		<a name="2_21"></a>
+		<h2 class="heading2" title="2. Uize -&gt; 2.21. constructed Property"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_21" title="2. Uize -&gt; 2.21. constructed Property">21</a>. </span>constructed Property</h2>
 		<div class="contents2">
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>to indicate that the instance has been constructed</td></tr>
@@ -1862,8 +1841,8 @@ new Uize.Widget.Bar.Slider (50);          // old form
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>idea: originator of a property set knows that the property is being set, so doesn't want to be informed of a change in the value? A way to provide an ID for the originator of a set? The basic ongoing problem is when multiple sources want to be able to change and also be informed of changes in a particular property. How does one make this more efficient and eliminate multiple redundant execution triggered by events?</td></tr>
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>idea: a way to track whether a user originated an event. Sufficient to check on the presence of domEvent property? domEvent property should be propagated all the way up.</td></tr>
 		</table>
-		<a name="2_21"></a>
-		<h2 class="heading2" title="2. Uize -&gt; 2.21. - new and more concise semantics for calling methods on superclass"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_21" title="2. Uize -&gt; 2.21. - new and more concise semantics for calling methods on superclass">21</a>. </span>- new and more concise semantics for calling methods on superclass</h2>
+		<a name="2_22"></a>
+		<h2 class="heading2" title="2. Uize -&gt; 2.22. - new and more concise semantics for calling methods on superclass"><span class="headingNumber"><a href="#2" title="2. Uize">2</a>.<a href="#2_22" title="2. Uize -&gt; 2.22. - new and more concise semantics for calling methods on superclass">22</a>. </span>- new and more concise semantics for calling methods on superclass</h2>
 		<div class="contents2">
 			
 <pre class="sample-code">_this.doIn (_superclass,'wireUi');
@@ -2030,14 +2009,12 @@ _superclass.useMine (_this,'wireUi');
 		<h2 class="heading2" title="3. Uize.Array -&gt; 3.5. Uize.Array.Dupes"><span class="headingNumber"><a href="#3" title="3. Uize.Array">3</a>.<a href="#3_5" title="3. Uize.Array -&gt; 3.5. Uize.Array.Dupes">5</a>. </span>Uize.Array.Dupes</h2>
 		<div class="contents2">
 			<a name="3_5_1"></a>
-			<h3 class="heading3" title="3. Uize.Array -&gt; 3.5. Uize.Array.Dupes -&gt; 3.5.1. Uize.Array.Dupes.dedupe"><span class="headingNumber"><a href="#3" title="3. Uize.Array">3</a>.<a href="#3_5" title="3. Uize.Array -&gt; 3.5. Uize.Array.Dupes">5</a>.<a href="#3_5_1" title="3. Uize.Array -&gt; 3.5. Uize.Array.Dupes -&gt; 3.5.1. Uize.Array.Dupes.dedupe">1</a>. </span>Uize.Array.Dupes.dedupe</h3>
+			<h3 class="heading3" title="3. Uize.Array -&gt; 3.5. Uize.Array.Dupes -&gt; 3.5.1. Uize.Array.Dupes.getDupes"><span class="headingNumber"><a href="#3" title="3. Uize.Array">3</a>.<a href="#3_5" title="3. Uize.Array -&gt; 3.5. Uize.Array.Dupes">5</a>.<a href="#3_5_1" title="3. Uize.Array -&gt; 3.5. Uize.Array.Dupes -&gt; 3.5.1. Uize.Array.Dupes.getDupes">1</a>. </span>Uize.Array.Dupes.getDupes</h3>
 			<div class="contents3">
 				<table class="list">
-				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>returns an array containing only unique values</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>returns an array of dupe info objects</td></tr>
 				</table>
 			</div>
-			
-			<p>Uize.Array.Dupes.getDupes</p>
 			
 			<a name="3_5_2"></a>
 			<h3 class="heading3" title="3. Uize.Array -&gt; 3.5. Uize.Array.Dupes -&gt; 3.5.2. Uize.Array.Dupes.getValueCount"><span class="headingNumber"><a href="#3" title="3. Uize.Array">3</a>.<a href="#3_5" title="3. Uize.Array -&gt; 3.5. Uize.Array.Dupes">5</a>.<a href="#3_5_2" title="3. Uize.Array -&gt; 3.5. Uize.Array.Dupes -&gt; 3.5.2. Uize.Array.Dupes.getValueCount">2</a>. </span>Uize.Array.Dupes.getValueCount</h3>
@@ -2060,23 +2037,15 @@ _superclass.useMine (_this,'wireUi');
 		<h2 class="heading2" title="3. Uize.Array -&gt; 3.6. Uize.Array.Util"><span class="headingNumber"><a href="#3" title="3. Uize.Array">3</a>.<a href="#3_6" title="3. Uize.Array -&gt; 3.6. Uize.Array.Util">6</a>. </span>Uize.Array.Util</h2>
 		<div class="contents2">
 			<a name="3_6_1"></a>
-			<h3 class="heading3" title="3. Uize.Array -&gt; 3.6. Uize.Array.Util -&gt; 3.6.1. Uize.Array.Util.ensureIn"><span class="headingNumber"><a href="#3" title="3. Uize.Array">3</a>.<a href="#3_6" title="3. Uize.Array -&gt; 3.6. Uize.Array.Util">6</a>.<a href="#3_6_1" title="3. Uize.Array -&gt; 3.6. Uize.Array.Util -&gt; 3.6.1. Uize.Array.Util.ensureIn">1</a>. </span>Uize.Array.Util.ensureIn</h3>
-			<div class="contents3">
-				<table class="list">
-				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>if the specified element is not in the specified source array, then it is added (configurable whether to prepend or append, but default is to append)</td></tr>
-				</table>
-			</div>
-			
-			<a name="3_6_2"></a>
-			<h3 class="heading3" title="3. Uize.Array -&gt; 3.6. Uize.Array.Util -&gt; 3.6.2. Uize.Array.Util.chunk"><span class="headingNumber"><a href="#3" title="3. Uize.Array">3</a>.<a href="#3_6" title="3. Uize.Array -&gt; 3.6. Uize.Array.Util">6</a>.<a href="#3_6_2" title="3. Uize.Array -&gt; 3.6. Uize.Array.Util -&gt; 3.6.2. Uize.Array.Util.chunk">2</a>. </span>Uize.Array.Util.chunk</h3>
+			<h3 class="heading3" title="3. Uize.Array -&gt; 3.6. Uize.Array.Util -&gt; 3.6.1. Uize.Array.Util.chunk"><span class="headingNumber"><a href="#3" title="3. Uize.Array">3</a>.<a href="#3_6" title="3. Uize.Array -&gt; 3.6. Uize.Array.Util">6</a>.<a href="#3_6_1" title="3. Uize.Array -&gt; 3.6. Uize.Array.Util -&gt; 3.6.1. Uize.Array.Util.chunk">1</a>. </span>Uize.Array.Util.chunk</h3>
 			<div class="contents3">
 				<table class="list">
 				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>returns a chunk of the specified source array of the specified size</td></tr>
 				</table>
 			</div>
 			
-			<a name="3_6_3"></a>
-			<h3 class="heading3" title="3. Uize.Array -&gt; 3.6. Uize.Array.Util -&gt; 3.6.3. Uize.Array.Util.first"><span class="headingNumber"><a href="#3" title="3. Uize.Array">3</a>.<a href="#3_6" title="3. Uize.Array -&gt; 3.6. Uize.Array.Util">6</a>.<a href="#3_6_3" title="3. Uize.Array -&gt; 3.6. Uize.Array.Util -&gt; 3.6.3. Uize.Array.Util.first">3</a>. </span>Uize.Array.Util.first</h3>
+			<a name="3_6_2"></a>
+			<h3 class="heading3" title="3. Uize.Array -&gt; 3.6. Uize.Array.Util -&gt; 3.6.2. Uize.Array.Util.first"><span class="headingNumber"><a href="#3" title="3. Uize.Array">3</a>.<a href="#3_6" title="3. Uize.Array -&gt; 3.6. Uize.Array.Util">6</a>.<a href="#3_6_2" title="3. Uize.Array -&gt; 3.6. Uize.Array.Util -&gt; 3.6.2. Uize.Array.Util.first">2</a>. </span>Uize.Array.Util.first</h3>
 			<div class="contents3">
 				<table class="list">
 				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>returns the specified number of elements at the head of the specified source array</td></tr>
@@ -2084,8 +2053,8 @@ _superclass.useMine (_this,'wireUi');
 				</table>
 			</div>
 			
-			<a name="3_6_4"></a>
-			<h3 class="heading3" title="3. Uize.Array -&gt; 3.6. Uize.Array.Util -&gt; 3.6.4. Uize.Array.Util.last"><span class="headingNumber"><a href="#3" title="3. Uize.Array">3</a>.<a href="#3_6" title="3. Uize.Array -&gt; 3.6. Uize.Array.Util">6</a>.<a href="#3_6_4" title="3. Uize.Array -&gt; 3.6. Uize.Array.Util -&gt; 3.6.4. Uize.Array.Util.last">4</a>. </span>Uize.Array.Util.last</h3>
+			<a name="3_6_3"></a>
+			<h3 class="heading3" title="3. Uize.Array -&gt; 3.6. Uize.Array.Util -&gt; 3.6.3. Uize.Array.Util.last"><span class="headingNumber"><a href="#3" title="3. Uize.Array">3</a>.<a href="#3_6" title="3. Uize.Array -&gt; 3.6. Uize.Array.Util">6</a>.<a href="#3_6_3" title="3. Uize.Array -&gt; 3.6. Uize.Array.Util -&gt; 3.6.3. Uize.Array.Util.last">3</a>. </span>Uize.Array.Util.last</h3>
 			<div class="contents3">
 				<table class="list">
 				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>returns the specified number of elements at the tail of the specified source array</td></tr>
@@ -2634,7 +2603,7 @@ Uize.Data.safeLookup = function (_lookup,_key) {
   if (_keysMayChange &amp;&amp; _target == _source)
     _source = Uize.isArray (_source) ? _source.concat () : Uize.copyInto ({},_source)
   ;
-  _target != _source &amp;&amp; _emptyOutTarget &amp;&amp; Uize.Data.emptyOut (_target);
+  _target != _source &amp;&amp; _emptyOutTarget &amp;&amp; Uize.emptyOut (_target);
   return {source:_source,target:_target};
 };
 </pre>
@@ -2649,60 +2618,51 @@ _target = _sourceAndTarget._target;
 		</div>
 		
 		<a name="14_3"></a>
-		<h2 class="heading2" title="14. Uize.Data -&gt; 14.3. - Uize.Data.getLookup &amp; Uize.Data.getReverseLookup"><span class="headingNumber"><a href="#14" title="14. Uize.Data">14</a>.<a href="#14_3" title="14. Uize.Data -&gt; 14.3. - Uize.Data.getLookup &amp; Uize.Data.getReverseLookup">3</a>. </span>- Uize.Data.getLookup & Uize.Data.getReverseLookup</h2>
+		<h2 class="heading2" title="14. Uize.Data -&gt; 14.3. - Uize.Data.structuresMatch"><span class="headingNumber"><a href="#14" title="14. Uize.Data">14</a>.<a href="#14_3" title="14. Uize.Data -&gt; 14.3. - Uize.Data.structuresMatch">3</a>. </span>- Uize.Data.structuresMatch</h2>
 		<div class="contents2">
-			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>must deal with the fact that valueOf and toString are on the prototype of Object</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>for Uize.Data.getLookup, support mode with no parameters that returns an empty object (but with valueOf and toString set to undefined)</td></tr>
-			</table>
+			<p>returns true if two objects have the same set of properties and structure</p>
 		</div>
 		
 		<a name="14_4"></a>
-		<h2 class="heading2" title="14. Uize.Data -&gt; 14.4. - Uize.Data.doPropertiesSetsMatch"><span class="headingNumber"><a href="#14" title="14. Uize.Data">14</a>.<a href="#14_4" title="14. Uize.Data -&gt; 14.4. - Uize.Data.doPropertiesSetsMatch">4</a>. </span>- Uize.Data.doPropertiesSetsMatch</h2>
+		<h2 class="heading2" title="14. Uize.Data -&gt; 14.4. - Uize.Data.filter"><span class="headingNumber"><a href="#14" title="14. Uize.Data">14</a>.<a href="#14_4" title="14. Uize.Data -&gt; 14.4. - Uize.Data.filter">4</a>. </span>- Uize.Data.filter</h2>
 		<div class="contents2">
-			<p>returns true if two objects have the same set of properties</p>
-		</div>
-		
-		<a name="14_5"></a>
-		<h2 class="heading2" title="14. Uize.Data -&gt; 14.5. - Uize.Data.filter"><span class="headingNumber"><a href="#14" title="14. Uize.Data">14</a>.<a href="#14_5" title="14. Uize.Data -&gt; 14.5. - Uize.Data.filter">5</a>. </span>- Uize.Data.filter</h2>
-		<div class="contents2">
-			<a name="14_5_1"></a>
-			<h3 class="heading3" title="14. Uize.Data -&gt; 14.5. - Uize.Data.filter -&gt; 14.5.1. - support for new filter types"><span class="headingNumber"><a href="#14" title="14. Uize.Data">14</a>.<a href="#14_5" title="14. Uize.Data -&gt; 14.5. - Uize.Data.filter">5</a>.<a href="#14_5_1" title="14. Uize.Data -&gt; 14.5. - Uize.Data.filter -&gt; 14.5.1. - support for new filter types">1</a>. </span>- support for new filter types</h3>
+			<a name="14_4_1"></a>
+			<h3 class="heading3" title="14. Uize.Data -&gt; 14.4. - Uize.Data.filter -&gt; 14.4.1. - support for new filter types"><span class="headingNumber"><a href="#14" title="14. Uize.Data">14</a>.<a href="#14_4" title="14. Uize.Data -&gt; 14.4. - Uize.Data.filter">4</a>.<a href="#14_4_1" title="14. Uize.Data -&gt; 14.4. - Uize.Data.filter -&gt; 14.4.1. - support for new filter types">1</a>. </span>- support for new filter types</h3>
 			<div class="contents3">
-				<a name="14_5_1_1"></a>
-				<h4 class="heading4" title="14. Uize.Data -&gt; 14.5. - Uize.Data.filter -&gt; 14.5.1. - support for new filter types -&gt; 14.5.1.1. - regular expression type filter"><span class="headingNumber"><a href="#14" title="14. Uize.Data">14</a>.<a href="#14_5" title="14. Uize.Data -&gt; 14.5. - Uize.Data.filter">5</a>.<a href="#14_5_1" title="14. Uize.Data -&gt; 14.5. - Uize.Data.filter -&gt; 14.5.1. - support for new filter types">1</a>.<a href="#14_5_1_1" title="14. Uize.Data -&gt; 14.5. - Uize.Data.filter -&gt; 14.5.1. - support for new filter types -&gt; 14.5.1.1. - regular expression type filter">1</a>. </span>- regular expression type filter</h4>
+				<a name="14_4_1_1"></a>
+				<h4 class="heading4" title="14. Uize.Data -&gt; 14.4. - Uize.Data.filter -&gt; 14.4.1. - support for new filter types -&gt; 14.4.1.1. - regular expression type filter"><span class="headingNumber"><a href="#14" title="14. Uize.Data">14</a>.<a href="#14_4" title="14. Uize.Data -&gt; 14.4. - Uize.Data.filter">4</a>.<a href="#14_4_1" title="14. Uize.Data -&gt; 14.4. - Uize.Data.filter -&gt; 14.4.1. - support for new filter types">1</a>.<a href="#14_4_1_1" title="14. Uize.Data -&gt; 14.4. - Uize.Data.filter -&gt; 14.4.1. - support for new filter types -&gt; 14.4.1.1. - regular expression type filter">1</a>. </span>- regular expression type filter</h4>
 				<div class="contents4">
 					<table class="list">
 					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>when regular expression is specified for filter, properties are filtered that match the regular expression</td></tr>
 					</table>
 				</div>
 				
-				<a name="14_5_1_2"></a>
-				<h4 class="heading4" title="14. Uize.Data -&gt; 14.5. - Uize.Data.filter -&gt; 14.5.1. - support for new filter types -&gt; 14.5.1.2. - function type filter"><span class="headingNumber"><a href="#14" title="14. Uize.Data">14</a>.<a href="#14_5" title="14. Uize.Data -&gt; 14.5. - Uize.Data.filter">5</a>.<a href="#14_5_1" title="14. Uize.Data -&gt; 14.5. - Uize.Data.filter -&gt; 14.5.1. - support for new filter types">1</a>.<a href="#14_5_1_2" title="14. Uize.Data -&gt; 14.5. - Uize.Data.filter -&gt; 14.5.1. - support for new filter types -&gt; 14.5.1.2. - function type filter">2</a>. </span>- function type filter</h4>
+				<a name="14_4_1_2"></a>
+				<h4 class="heading4" title="14. Uize.Data -&gt; 14.4. - Uize.Data.filter -&gt; 14.4.1. - support for new filter types -&gt; 14.4.1.2. - function type filter"><span class="headingNumber"><a href="#14" title="14. Uize.Data">14</a>.<a href="#14_4" title="14. Uize.Data -&gt; 14.4. - Uize.Data.filter">4</a>.<a href="#14_4_1" title="14. Uize.Data -&gt; 14.4. - Uize.Data.filter -&gt; 14.4.1. - support for new filter types">1</a>.<a href="#14_4_1_2" title="14. Uize.Data -&gt; 14.4. - Uize.Data.filter -&gt; 14.4.1. - support for new filter types -&gt; 14.4.1.2. - function type filter">2</a>. </span>- function type filter</h4>
 				<div class="contents4">
 					<table class="list">
 					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>when function is specified for filter, function receives property name and must return boolean indicating match</td></tr>
 					</table>
 				</div>
 				
-				<a name="14_5_1_3"></a>
-				<h4 class="heading4" title="14. Uize.Data -&gt; 14.5. - Uize.Data.filter -&gt; 14.5.1. - support for new filter types -&gt; 14.5.1.3. - object type filter"><span class="headingNumber"><a href="#14" title="14. Uize.Data">14</a>.<a href="#14_5" title="14. Uize.Data -&gt; 14.5. - Uize.Data.filter">5</a>.<a href="#14_5_1" title="14. Uize.Data -&gt; 14.5. - Uize.Data.filter -&gt; 14.5.1. - support for new filter types">1</a>.<a href="#14_5_1_3" title="14. Uize.Data -&gt; 14.5. - Uize.Data.filter -&gt; 14.5.1. - support for new filter types -&gt; 14.5.1.3. - object type filter">3</a>. </span>- object type filter</h4>
+				<a name="14_4_1_3"></a>
+				<h4 class="heading4" title="14. Uize.Data -&gt; 14.4. - Uize.Data.filter -&gt; 14.4.1. - support for new filter types -&gt; 14.4.1.3. - object type filter"><span class="headingNumber"><a href="#14" title="14. Uize.Data">14</a>.<a href="#14_4" title="14. Uize.Data -&gt; 14.4. - Uize.Data.filter">4</a>.<a href="#14_4_1" title="14. Uize.Data -&gt; 14.4. - Uize.Data.filter -&gt; 14.4.1. - support for new filter types">1</a>.<a href="#14_4_1_3" title="14. Uize.Data -&gt; 14.4. - Uize.Data.filter -&gt; 14.4.1. - support for new filter types -&gt; 14.4.1.3. - object type filter">3</a>. </span>- object type filter</h4>
 				<div class="contents4">
 					<table class="list">
 					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>filter source object to have only properties contained in filter object</td></tr>
 					</table>
 				</div>
 				
-				<a name="14_5_1_4"></a>
-				<h4 class="heading4" title="14. Uize.Data -&gt; 14.5. - Uize.Data.filter -&gt; 14.5.1. - support for new filter types -&gt; 14.5.1.4. - string type filter"><span class="headingNumber"><a href="#14" title="14. Uize.Data">14</a>.<a href="#14_5" title="14. Uize.Data -&gt; 14.5. - Uize.Data.filter">5</a>.<a href="#14_5_1" title="14. Uize.Data -&gt; 14.5. - Uize.Data.filter -&gt; 14.5.1. - support for new filter types">1</a>.<a href="#14_5_1_4" title="14. Uize.Data -&gt; 14.5. - Uize.Data.filter -&gt; 14.5.1. - support for new filter types -&gt; 14.5.1.4. - string type filter">4</a>. </span>- string type filter</h4>
+				<a name="14_4_1_4"></a>
+				<h4 class="heading4" title="14. Uize.Data -&gt; 14.4. - Uize.Data.filter -&gt; 14.4.1. - support for new filter types -&gt; 14.4.1.4. - string type filter"><span class="headingNumber"><a href="#14" title="14. Uize.Data">14</a>.<a href="#14_4" title="14. Uize.Data -&gt; 14.4. - Uize.Data.filter">4</a>.<a href="#14_4_1" title="14. Uize.Data -&gt; 14.4. - Uize.Data.filter -&gt; 14.4.1. - support for new filter types">1</a>.<a href="#14_4_1_4" title="14. Uize.Data -&gt; 14.4. - Uize.Data.filter -&gt; 14.4.1. - support for new filter types -&gt; 14.4.1.4. - string type filter">4</a>. </span>- string type filter</h4>
 				<div class="contents4">
 					<table class="list">
 					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>only permit the exactly matching property name? How else would this be handled?</td></tr>
 					</table>
 				</div>
 				
-				<a name="14_5_1_5"></a>
-				<h4 class="heading4" title="14. Uize.Data -&gt; 14.5. - Uize.Data.filter -&gt; 14.5.1. - support for new filter types -&gt; 14.5.1.5. - array -- CHANGE IMPLEMENTATION?"><span class="headingNumber"><a href="#14" title="14. Uize.Data">14</a>.<a href="#14_5" title="14. Uize.Data -&gt; 14.5. - Uize.Data.filter">5</a>.<a href="#14_5_1" title="14. Uize.Data -&gt; 14.5. - Uize.Data.filter -&gt; 14.5.1. - support for new filter types">1</a>.<a href="#14_5_1_5" title="14. Uize.Data -&gt; 14.5. - Uize.Data.filter -&gt; 14.5.1. - support for new filter types -&gt; 14.5.1.5. - array -- CHANGE IMPLEMENTATION?">5</a>. </span>- array -- CHANGE IMPLEMENTATION?</h4>
+				<a name="14_4_1_5"></a>
+				<h4 class="heading4" title="14. Uize.Data -&gt; 14.4. - Uize.Data.filter -&gt; 14.4.1. - support for new filter types -&gt; 14.4.1.5. - array -- CHANGE IMPLEMENTATION?"><span class="headingNumber"><a href="#14" title="14. Uize.Data">14</a>.<a href="#14_4" title="14. Uize.Data -&gt; 14.4. - Uize.Data.filter">4</a>.<a href="#14_4_1" title="14. Uize.Data -&gt; 14.4. - Uize.Data.filter -&gt; 14.4.1. - support for new filter types">1</a>.<a href="#14_4_1_5" title="14. Uize.Data -&gt; 14.4. - Uize.Data.filter -&gt; 14.4.1. - support for new filter types -&gt; 14.4.1.5. - array -- CHANGE IMPLEMENTATION?">5</a>. </span>- array -- CHANGE IMPLEMENTATION?</h4>
 				<div class="contents4">
 					<table class="list">
 					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>already supported, but need to change implementation? Change implementation for performance, or code size?</td></tr>
@@ -2715,14 +2675,14 @@ _target = _sourceAndTarget._target;
 			</table>
 		</div>
 		
-		<a name="14_6"></a>
-		<h2 class="heading2" title="14. Uize.Data -&gt; 14.6. - Uize.Data.identical"><span class="headingNumber"><a href="#14" title="14. Uize.Data">14</a>.<a href="#14_6" title="14. Uize.Data -&gt; 14.6. - Uize.Data.identical">6</a>. </span>- Uize.Data.identical</h2>
+		<a name="14_5"></a>
+		<h2 class="heading2" title="14. Uize.Data -&gt; 14.5. - Uize.Data.identical"><span class="headingNumber"><a href="#14" title="14. Uize.Data">14</a>.<a href="#14_5" title="14. Uize.Data -&gt; 14.5. - Uize.Data.identical">5</a>. </span>- Uize.Data.identical</h2>
 		<div class="contents2">
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>handle recursion (safeguard against infinite loops). Do this by marking objects / arrays as encountered?</td></tr>
 			</table>
-			<a name="14_6_1"></a>
-			<h3 class="heading3" title="14. Uize.Data -&gt; 14.6. - Uize.Data.identical -&gt; 14.6.1. - how to support comparison of Uize subclass instances? Is there a meaningful way to do this?"><span class="headingNumber"><a href="#14" title="14. Uize.Data">14</a>.<a href="#14_6" title="14. Uize.Data -&gt; 14.6. - Uize.Data.identical">6</a>.<a href="#14_6_1" title="14. Uize.Data -&gt; 14.6. - Uize.Data.identical -&gt; 14.6.1. - how to support comparison of Uize subclass instances? Is there a meaningful way to do this?">1</a>. </span>- how to support comparison of Uize subclass instances? Is there a meaningful way to do this?</h3>
+			<a name="14_5_1"></a>
+			<h3 class="heading3" title="14. Uize.Data -&gt; 14.5. - Uize.Data.identical -&gt; 14.5.1. - how to support comparison of Uize subclass instances? Is there a meaningful way to do this?"><span class="headingNumber"><a href="#14" title="14. Uize.Data">14</a>.<a href="#14_5" title="14. Uize.Data -&gt; 14.5. - Uize.Data.identical">5</a>.<a href="#14_5_1" title="14. Uize.Data -&gt; 14.5. - Uize.Data.identical -&gt; 14.5.1. - how to support comparison of Uize subclass instances? Is there a meaningful way to do this?">1</a>. </span>- how to support comparison of Uize subclass instances? Is there a meaningful way to do this?</h3>
 			<div class="contents3">
 				<table class="list">
 				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>can two instances of classes that support the value interface simply be compared by their respective values?</td></tr>
@@ -2731,22 +2691,44 @@ _target = _sourceAndTarget._target;
 			</div>
 		</div>
 		
-		<table class="list">
-		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>implement Uize.Data.hasRecursion method?</td></tr>
-		</table>
+		<a name="14_6"></a>
+		<h2 class="heading2" title="14. Uize.Data -&gt; 14.6. - Uize.Data.conjoined"><span class="headingNumber"><a href="#14" title="14. Uize.Data">14</a>.<a href="#14_6" title="14. Uize.Data -&gt; 14.6. - Uize.Data.conjoined">6</a>. </span>- Uize.Data.conjoined</h2>
+		<div class="contents2">
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>improve implementation to use object tagging technique employed in Uize.Array.Dupes</td></tr>
+			</table>
+		</div>
+		
 		<a name="14_7"></a>
-		<h2 class="heading2" title="14. Uize.Data -&gt; 14.7. - Uize.Data.map"><span class="headingNumber"><a href="#14" title="14. Uize.Data">14</a>.<a href="#14_7" title="14. Uize.Data -&gt; 14.7. - Uize.Data.map">7</a>. </span>- Uize.Data.map</h2>
+		<h2 class="heading2" title="14. Uize.Data -&gt; 14.7. - Uize.Data.hasCircularity"><span class="headingNumber"><a href="#14" title="14. Uize.Data">14</a>.<a href="#14_7" title="14. Uize.Data -&gt; 14.7. - Uize.Data.hasCircularity">7</a>. </span>- Uize.Data.hasCircularity</h2>
+		<div class="contents2">
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>tests to see if the object contains circular references / reference loops</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>for implementation, use object tagging</td></tr>
+			</table>
+		</div>
+		
+		<a name="14_8"></a>
+		<h2 class="heading2" title="14. Uize.Data -&gt; 14.8. - Uize.Data.map"><span class="headingNumber"><a href="#14" title="14. Uize.Data">14</a>.<a href="#14_8" title="14. Uize.Data -&gt; 14.8. - Uize.Data.map">8</a>. </span>- Uize.Data.map</h2>
 		<div class="contents2">
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>support string for _source?</td></tr>
 			</table>
 		</div>
 		
-		<a name="14_8"></a>
-		<h2 class="heading2" title="14. Uize.Data -&gt; 14.8. - Uize.Data.mapKeys"><span class="headingNumber"><a href="#14" title="14. Uize.Data">14</a>.<a href="#14_8" title="14. Uize.Data -&gt; 14.8. - Uize.Data.mapKeys">8</a>. </span>- Uize.Data.mapKeys</h2>
+		<a name="14_9"></a>
+		<h2 class="heading2" title="14. Uize.Data -&gt; 14.9. - Uize.Data.mapKeys"><span class="headingNumber"><a href="#14" title="14. Uize.Data">14</a>.<a href="#14_9" title="14. Uize.Data -&gt; 14.9. - Uize.Data.mapKeys">9</a>. </span>- Uize.Data.mapKeys</h2>
 		<div class="contents2">
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>lets you rename keys in an object</td></tr>
+			</table>
+		</div>
+		
+		<a name="14_10"></a>
+		<h2 class="heading2" title="14. Uize.Data -&gt; 14.10. - Uise.Data.mapKeyValues"><span class="headingNumber"><a href="#14" title="14. Uize.Data">14</a>.<a href="#14_10" title="14. Uize.Data -&gt; 14.10. - Uise.Data.mapKeyValues">10</a>. </span>- Uise.Data.mapKeyValues</h2>
+		<div class="contents2">
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>lets you rename keys and transform values in an object</td></tr>
 			</table>
 		</div>
 	</div>
@@ -3622,28 +3604,6 @@ Uize.Is.inRange ['?'] (0,100)
 <pre class="sample-code">Uize.Is.instanceOf (Uize.Widget.FormElement,myInstance)
 Uize.Is.instanceOf (Uize.Widget.FormElement) (myInstance)
 Uize.Is.instanceOf.tester (Uize.Widget.FormElement)
-Uize.curry (Uize.Is.instanceOf,Uize.Widget.FormElement)
-Uize.Is.instanceOf.curry (Uize.Widget.FormElement)
-
-Uize.bind (Uize.Is,'instanceOf',[Uize.Widget.FormElement])
-
-
-Uize.makeCaller (context,method,params)
-
-Uize.Widget.setNodeValue.bind ()
-
-myInstance.methodCaller ('setNodeValue',['value','']);
-
-Uize.bind (myInstance,'setNodeValue',['value',''])
-Uize.delegate (myInstance,'setNodeValue',['value',''])
-Uize.performer (myInstance,'setNodeValue',['value',''])
-Uize.makeCaller (myInstance,'setNodeValue',['value',''])
-Uize.methodCaller (myInstance,'setNodeValue',['value',''])
-Uize.functionCaller (myInstance,'setNodeValue',['value',''])
-Uize.methodProxy (myInstance,'setNodeValue',['value',''])
-
-myInstance.setNodeValue.bind (myInstance,['value',''])
-Uize.Widget.setNodeValue.bind (myInstance,['value',''])
 </pre>
 			</div>
 		</div>
@@ -3683,6 +3643,7 @@ Uize.Conformer.toRange (1,100) (5);     // creates a conformer, uses it immediat
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>perhaps optimize the mini option for higher performance, possibly avoiding recursion?</td></tr>
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>rely on new JSON object that's supported in FF3.5 and IE8 for mini mode</td></tr>
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>a safe mode that will neutralize </script> and other HTML tags inside string literals by escaping the less than sign as \x3c</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>for strict mode, must exclude object properties whose values are undefined, null, function, non-simple object, and possibly more prohibited value types (refer to JSON spec online) - probably easier just to include only sanctioned value types (primitives, and simple objects and arrays)</td></tr>
 		</table>
 	</div>
 	

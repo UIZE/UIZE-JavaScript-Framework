@@ -52,10 +52,7 @@
 
 Uize.module ({
   name:'Uize.Widget.SegmentDisplay',
-  required:[
-    'Uize.Data',
-    'Uize.Node.Classes'
-  ],
+  required:'Uize.Node.Classes',
   builder:function (_superclass) {
     var
       _class = _superclass.subclass (),
@@ -150,7 +147,7 @@ Uize.module ({
       _class.configureDisplay = function (_segmentCodes,_valueToSegmentsStateLookup) {
         var segmentCodesLength = (this.segmentCodes = _segmentCodes).length;
         this.segmentsStateToValueLookup =
-          Uize.Data.getReverseLookup (this.valueToSegmentsStateLookup = _valueToSegmentsStateLookup)
+          Uize.reverseLookup (this.valueToSegmentsStateLookup = _valueToSegmentsStateLookup)
         ;
         this._allSegmentsMask = (1 &lt;&lt; segmentCodesLength) - 1;
         this._firstSegmentMask = 1 &lt;&lt; (segmentCodesLength - 1);

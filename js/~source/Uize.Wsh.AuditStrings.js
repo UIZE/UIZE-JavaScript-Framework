@@ -129,7 +129,7 @@ Uize.module ({
 					_sourceFolderName = _params.sourceFolderName
 				;
 				if (!_nonI18nStringsDictionaryLookup)
-					_nonI18nStringsDictionaryLookup = Uize.Data.getLookup (_nonI18nStringsDictionary)
+					_nonI18nStringsDictionaryLookup = Uize.lookup (_nonI18nStringsDictionary)
 				;
 				Uize.Wsh.buildFiles (
 					Uize.copyInto (
@@ -144,7 +144,7 @@ Uize.module ({
 								var
 									_scruncherResult = Uize.Scruncher.scrunch (_sourceFileText,{AUDITSTRINGS:true}),
 									_stringsMap = _scruncherResult.stringsMap,
-									_strings = Uize.Data.getKeys (_stringsMap),
+									_strings = Uize.keys (_stringsMap),
 									_nonI18nStrings = [],
 									_likelyNonI18nStrings = [],
 									_possibleI18nStrings = [],

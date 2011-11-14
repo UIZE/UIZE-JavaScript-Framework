@@ -109,7 +109,6 @@
 Uize.module ({
 	name:'Uize.Widget.ListEditor',
 	required:[
-		'Uize.Data',
 		'Uize.Widget.Button',
 		'Uize.Widget.TextInput',
 		'Uize.Node.Event'
@@ -353,8 +352,8 @@ Uize.module ({
 							/* or, if there was a filter out option in Uize.Data.filter...
 								_this.setNodeValue (
 									_listNode,
-									Uize.Data.getKeys (
-										Uize.Data.filter (Uize.Data.getLookup (_list),_this._lastDisplayedList,true)
+									Uize.keys (
+										Uize.Data.filter (Uize.lookup (_list),_this._lastDisplayedList,true)
 									)
 								)
 							*/

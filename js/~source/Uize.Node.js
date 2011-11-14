@@ -74,7 +74,8 @@ Uize.module ({
 				_false = false,
 				_null = null,
 				_hidden = 'hidden',
-				_Uize_copyInto = Uize.copyInto
+				_Uize_copyInto = Uize.copyInto,
+				_Uize_isPrimitive = Uize.isPrimitive
 			;
 
 		/*** Global Variables ***/
@@ -152,7 +153,6 @@ Uize.module ({
 				_wirings = _package._wirings = {},
 				_wiringIdsByOwnerId = {},
 				_totalWirings = 0,
-				_simpleTypesMap = {string:1,number:1,boolean:1},
 				_mousePos = {clientX:0,clientY:0,pageX:0,pageY:0}
 			;
 
@@ -367,12 +367,12 @@ Uize.module ({
 				/*** narrow down node pool, consuming root, id, name, and tagName tests, where possible ***/
 					if (_root) {
 						var _tagName = _unusedProperties.tagName;
-						if ('id' in _unusedProperties && _simpleTypesMap [typeof _unusedProperties.id]) {
+						if ('id' in _unusedProperties && _Uize_isPrimitive (_unusedProperties.id)) {
 							/* NOTE: optimization for when id is specified and has a simple value */
 							var _node = _getElementById (_unusedProperties.id);
 							_node && _nodePool.push (_node);
 							delete _unusedProperties.id;
-						} else if ('name' in _unusedProperties && _simpleTypesMap [typeof _unusedProperties.name]) {
+						} else if ('name' in _unusedProperties && _Uize_isPrimitive (_unusedProperties.name)) {
 							/* NOTE: optimization for when name is specified and has a simple value */
 							_nodePool = _document.getElementsByName (_unusedProperties.name);
 							delete _unusedProperties.name;
@@ -380,7 +380,7 @@ Uize.module ({
 							/* NOTE:
 								populate the node pool using getElementsByTagName, with optimization for when tagName is specified and has a simple value
 							*/
-							var _tagNameIsSimplyType = _simpleTypesMap [typeof _tagName];
+							var _tagNameIsSimplyType = _Uize_isPrimitive (_tagName);
 							_tagNameIsSimplyType && delete _unusedProperties.tagName;
 							_nodePool = _root.getElementsByTagName (_tagName && _tagNameIsSimplyType ? _tagName : '*');
 							_root = _null;
@@ -420,7 +420,7 @@ Uize.module ({
 								;
 								if (
 									!(
-										_simpleTypesMap [typeof _test]
+										_Uize_isPrimitive (_test)
 											? _nodePropertyValue == _test
 											: (
 												_test instanceof RegExp

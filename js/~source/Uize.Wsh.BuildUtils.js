@@ -33,7 +33,6 @@ Uize.module ({
 	required:[
 		'Uize.Url',
 		'Uize.Template',
-		'Uize.Data',
 		'Uize.Data.Simple',
 		'Uize.String',
 		'Uize.String.Lines',
@@ -160,7 +159,7 @@ Uize.module ({
 						},
 						_getFilenameFromPath
 					).sort (),
-					_modulesLookup = Uize.Data.getLookup (_modules)
+					_modulesLookup = Uize.lookup (_modules)
 				;
 
 				/*** build list of modules in dependency order ***/

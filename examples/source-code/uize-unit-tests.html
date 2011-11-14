@@ -170,7 +170,6 @@ Uize.module ({
     'Uize.Templates.Log',
     'Uize.String',
     'UizeDotCom.ModulesTree',
-    'Uize.Data',
     'Uize.Data.PathsTree',
     'Uize.Url',
     'Uize.Test'
@@ -193,14 +192,14 @@ Uize.module ({
         testNamesExcludingLibraries = []
       ;
       delete nonTestModulesTree.Uize.Test;
-      var testsSubTreeLookup = Uize.Data.getLookup (Uize.Data.PathsTree.toList (testsSubTree));
+      var testsSubTreeLookup = Uize.lookup (Uize.Data.PathsTree.toList (testsSubTree));
       for (
         var
           testNo = -1,
           testNames =
-            Uize.Data.getKeys (
+            Uize.keys (
               Uize.copyInto (
-                Uize.Data.getLookup (Uize.Data.PathsTree.toList (nonTestModulesTree)),
+                Uize.lookup (Uize.Data.PathsTree.toList (nonTestModulesTree)),
                 testsSubTreeLookup
               )
             ).sort (),

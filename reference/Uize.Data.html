@@ -47,19 +47,15 @@
 				<ul>
 					<li><a href="#2_1" title="Returns a boolean, indicating whether or not the two specified objects are identical clones of one another.">2.1. Uize.Data.clones</a></li>
 					<li><a href="#2_2" title="Returns a boolean, indicating whether or not the two specified objects share any object references.">2.2. Uize.Data.conjoined</a></li>
-					<li><a href="#2_3" title="Empties out the specified source object or array and returns a reference to the source.">2.3. Uize.Data.emptyOut</a></li>
+					<li><a href="#2_3" title="IMPLEMENTATION INFO">2.3. Uize.Data.emptyOut</a></li>
 					<li><a href="#2_4" title="Returns an object with only the properties of the source object that are specified by an array of property names.">2.4. Uize.Data.filter</a></li>
 					<li><a href="#2_5" title="Returns an array of records from the specified record set that match the specified criteria.">2.5. Uize.Data.findRecords</a></li>
 					<li><a href="#2_6" title="Returns an array of the values for the specified column of the specified record set.">2.6. Uize.Data.getColumn</a></li>
-					<li><a href="#2_7" title="Returns an array, representing the keys (property names) of the specified object.">2.7. Uize.Data.getKeys</a></li>
-					<li><a href="#2_8" title="Returns a lookup object, where each key is a value from the specified values array.">2.8. Uize.Data.getLookup</a>
-						<ul>
-							<li><a href="#2_8_1" title="Creating a lookup object is useful when repeatedly checking to see if values are in a defined values set. Looping through that defined values set array for each of the lookups would result in poor performance if the set of values to scan through is large, and if the lookup is being performed frequently.">2.8.1. A Real World Example</a></li>
-						</ul>
-					</li>
-					<li><a href="#2_9" title="Returns a reverse lookup object, where each key is a value from the specified source object, and where the value for each key is the associated key from the specified source.">2.9. Uize.Data.getReverseLookup</a></li>
-					<li><a href="#2_10" title="Returns an integer, representing the total number of keys in the specified object.">2.10. Uize.Data.getTotalKeys</a></li>
-					<li><a href="#2_11" title="Returns an array, representing the property values of the specified object.">2.11. Uize.Data.getValues</a></li>
+					<li><a href="#2_7" title="IMPLEMENTATION INFO">2.7. Uize.Data.getKeys</a></li>
+					<li><a href="#2_8" title="IMPLEMENTATION INFO">2.8. Uize.Data.getLookup</a></li>
+					<li><a href="#2_9" title="IMPLEMENTATION INFO">2.9. Uize.Data.getReverseLookup</a></li>
+					<li><a href="#2_10" title="IMPLEMENTATION INFO">2.10. Uize.Data.getTotalKeys</a></li>
+					<li><a href="#2_11" title="IMPLEMENTATION INFO">2.11. Uize.Data.getValues</a></li>
 					<li><a href="#2_12" title="Returns a boolean, indicating whether or not the two specified objects are identical in their contents.">2.12. Uize.Data.identical</a>
 						<ul>
 							<li><a href="#2_12_1" title="An object, with multiple optional properties, specifying the criteria this method should use when comparing the two objects.">2.12.1. optionsOBJ</a>
@@ -71,7 +67,7 @@
 						</ul>
 					</li>
 					<li><a href="#2_13" title="Returns an object that represents the key-value intersection / commonality between the two specified objects.">2.13. Uize.Data.intersection</a></li>
-					<li><a href="#2_14" title="Returns a boolean, indicating whether or not the specified object or array is empty.">2.14. Uize.Data.isEmpty</a></li>
+					<li><a href="#2_14" title="IMPLEMENTATION INFO">2.14. Uize.Data.isEmpty</a></li>
 					<li><a href="#2_15" title="Iterates through the specified array (or object), executing the specified mapper expression or function for each element (or object property), and packages the results into an array (or object).">2.15. Uize.Data.map</a>
 						<ul>
 							<li><a href="#2_15_1" title="The Uize.Data.map static method provides some key improvements over the Array object&apos;s map method in JavaScript 1.6 (which is not supported in all browsers)...">2.15.1. Key Benefits</a></li>
@@ -101,13 +97,13 @@
 									<li><a href="#2_15_3_15" title="Uize.Data.map (&apos;console.log (value)&apos;,logArray);&#10;">2.15.3.15. Output elements of a log array to the `Firebug` console on separate lines...</a></li>
 									<li><a href="#2_15_3_16" title="Uize.Data.map (&apos;console.log (key + &quot;: &quot; + value)&apos;,logArray);&#10;">2.15.3.16. Output elements of a log array to the `Firebug` console on separate lines, with line numbers...</a></li>
 									<li><a href="#2_15_3_17" title="var coordsStyleProperties = Uize.Data.map (&apos;value + &quot;px&quot;&apos;,coords);&#10;&#10;// EXAMPLE&#10;// this... {left:0,top:50,width:100,height:175}&#10;// produces this... {left:&apos;0px&apos;,top:&apos;50px&apos;,width:&apos;100px&apos;,height:&apos;175px&apos;}&#10;">2.15.3.17. Gets a style properties object from a pure number coords object...</a></li>
-									<li><a href="#2_15_3_18" title="var maxStringLength = Uize.Data.max (Uize.Data.map (&apos;value.length&apos;,stringsArray));&#10;">2.15.3.18. Gets the length of the longest string in an array of strings....</a></li>
+									<li><a href="#2_15_3_18" title="var maxStringLength = Uize.max (Uize.Data.map (&apos;value.length&apos;,stringsArray));&#10;">2.15.3.18. Gets the length of the longest string in an array of strings....</a></li>
 								</ul>
 							</li>
 						</ul>
 					</li>
-					<li><a href="#2_16" title="Returns the maximum value from the specified array or object.">2.16. Uize.Data.max</a></li>
-					<li><a href="#2_17" title="Returns the minimum value from the specified array or object.">2.17. Uize.Data.min</a></li>
+					<li><a href="#2_16" title="IMPLEMENTATION INFO">2.16. Uize.Data.max</a></li>
+					<li><a href="#2_17" title="IMPLEMENTATION INFO">2.17. Uize.Data.min</a></li>
 				</ul>
 			</li>
 			<li><a href="#3">3. Static Properties</a>
@@ -239,29 +235,6 @@
 		<a name="2_3"></a>
 		<h2 class="heading2" title="2. Static Methods -&gt; 2.3. Uize.Data.emptyOut"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_3" title="2. Static Methods -&gt; 2.3. Uize.Data.emptyOut">3</a>. </span>Uize.Data.emptyOut</h2>
 		<div class="contents2">
-			<p>Empties out the specified source object or array and returns a reference to the source.</p>
-			
-			<p><span class="allCaps">SYNTAX</span></p>
-			
-			
-<pre class="sample-code">sourceOBJorARRAY = Uize.Data.emptyOut (sourceOBJorARRAY);
-</pre>
-			
-			<p>Using this method to empty out an array is equivalent to setting the array's length to <code>0</code>, while using this method to empty out an object results in all the object's properties being deleted. When the value <code>null</code> or <code>undefined</code> is specified for the <code>sourceOBJorARRAY</code> parameter, then this method will do nothing and simply return the value of the <code>sourceOBJorARRAY</code> parameter.</p>
-			
-			<p><span class="allCaps">EXAMPLE</span></p>
-			
-			
-<pre class="sample-code">Uize.copyInto (Uize.Data.emptyOut (userData),userDataDefaults);
-</pre>
-			
-			<p>In the above example, a <code>userData</code> object has accumulated a large amount of user data and we wish to reset it to some initial default state. Because references to the object may be shared by many parts of an application's code, we want to re-initiatialize it by modifying its contents, restoring its state to that of the <code>userDataDefaults</code> object. The <code><a href="#2_3">Uize.Data.emptyOut</a></code> method lets us first empty out the object, after which it is passed as the source for the <code>Uize.copyInto</code> method call where we copy back in the contents of the <code>userDataDefaults</code> object.</p>
-			
-			<p><span class="allCaps">NOTES</span></p>
-			
-			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#2_14">Uize.Data.isEmpty</a></code> static method</td></tr>
-			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
@@ -469,37 +442,6 @@ Uize.Node.setStyle (
 		<a name="2_7"></a>
 		<h2 class="heading2" title="2. Static Methods -&gt; 2.7. Uize.Data.getKeys"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_7" title="2. Static Methods -&gt; 2.7. Uize.Data.getKeys">7</a>. </span>Uize.Data.getKeys</h2>
 		<div class="contents2">
-			<p>Returns an array, representing the keys (property names) of the specified object.</p>
-			
-			<p><span class="allCaps">SYNTAX</span></p>
-			
-			
-<pre class="sample-code">keysARRAY = Uize.Data.getKeys (objectOBJ);
-</pre>
-			
-			<p><span class="allCaps">EXAMPLE</span></p>
-			
-			
-<pre class="sample-code">var
-  personRecord = {
-    firstName:'John',
-    lastName:'Wilkey',
-    addressStreet:'1 Shiny House Way',
-    addressCity:'Richville',
-    addressState:'CA',
-    addressZip:'91234'
-  },
-  myKeys = Uize.getKeys (personRecord)
-;
-</pre>
-			
-			<p>After the above code has executed, the <code>myKeys</code> variable will have the value <code>['firstName', 'lastName', 'addressStreet', 'addressCity', 'addressState', 'addressZip']</code>.</p>
-			
-			<p><span class="allCaps">NOTES</span></p>
-			
-			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>when the value of <code>objectOBJ</code> parameter is <code>null</code> or <code>undefined</code>, an empty array will be returned</td></tr>
-			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
@@ -510,91 +452,6 @@ Uize.Node.setStyle (
 		<a name="2_8"></a>
 		<h2 class="heading2" title="2. Static Methods -&gt; 2.8. Uize.Data.getLookup"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_8" title="2. Static Methods -&gt; 2.8. Uize.Data.getLookup">8</a>. </span>Uize.Data.getLookup</h2>
 		<div class="contents2">
-			<p>Returns a lookup object, where each key is a value from the specified values array.</p>
-			
-			<p><span class="allCaps">SYNTAX</span></p>
-			
-			
-<pre class="sample-code">lookupOBJ = Uize.Data.getLookup (valuesARRAY);
-</pre>
-			
-			<p><span class="allCaps">EXAMPLE</span></p>
-			
-			
-<pre class="sample-code">var
-  fruits = ['apple','peach','pear','banana','orange','mango'],
-  fruitsLookup = Uize.Data.getLookup (fruits)
-;
-</pre>
-			
-			<p>After the above code is executed, the value of the <code>fruitsLookup</code> variable will be an object with the contents...</p>
-			
-			
-<pre class="sample-code">{apple:true, peach:true, pear:true, banana:true, orange:true, mango:true}
-</pre>
-			
-			<p><span class="allCaps">VARIATION</span></p>
-			
-			
-<pre class="sample-code">lookupOBJ = Uize.Data.getLookup (valuesARRAY,lookupValueANYTYPE);
-</pre>
-			
-			<p>By default, the <code><a href="#2_8">Uize.Data.getLookup</a></code> method creates an object whose properties all have the boolean value <code>true</code>. The optional <code>lookupValueANYTYPE</code> parameter lets you specify the value that should be assigned to each of the properties in the lookup object.</p>
-			
-			<p><span class="allCaps">EXAMPLE</span></p>
-			
-			
-<pre class="sample-code">var
-  fruits = ['apple','peach','pear','banana','orange','mango'],
-  fruitsLookup = Uize.Data.getLookup (fruits,1)
-;
-</pre>
-			
-			<p>In the above example, the value <code>1</code> is being specified for the optional <code>lookupValueANYTYPE</code>. After the above code is executed, the value of the <code>fruitsLookup</code> variable will be an object with the contents...</p>
-			
-			
-<pre class="sample-code">{apple:1, peach:1, pear:1, banana:1, orange:1, mango:1}
-</pre>
-			
-			<a name="2_8_1"></a>
-			<h3 class="heading3" title="2. Static Methods -&gt; 2.8. Uize.Data.getLookup -&gt; 2.8.1. A Real World Example"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_8" title="2. Static Methods -&gt; 2.8. Uize.Data.getLookup">8</a>.<a href="#2_8_1" title="2. Static Methods -&gt; 2.8. Uize.Data.getLookup -&gt; 2.8.1. A Real World Example">1</a>. </span>A Real World Example</h3>
-			<div class="contents3">
-				<p>Creating a lookup object is useful when repeatedly checking to see if values are in a defined values set. Looping through that defined values set array for each of the lookups would result in poor performance if the set of values to scan through is large, and if the lookup is being performed frequently.</p>
-				
-				<p>Let's consider an example...</p>
-				
-				
-<pre class="sample-code">function getValuesInMasterList (values,masterList) {
-  var result = [];
-  for (var valueNo = -1; ++valueNo &lt; values.length;) {
-    var value = values [valueNo];
-    if (Uize.isIn (masterList,value)) result.push (value);
-  }
-  return result;
-}
-</pre>
-				
-				<p>In the above example, a <code>getValuesInMasterList</code> function is being defined. This function accepts two parameters: an array of values, and a master list of values. The function returns an array, containing all the values from the values array that are present in the master list of values. The way it's implemented, on each iteration of the loop through the values array the <code>Uize.isIn</code> static method is being used to determined if the current value is in the master list array. This provides less than optimal performance, since the complexity is O(n2).</p>
-				
-				<p>Using the <code><a href="#2_8">Uize.Data.getLookup</a></code> static method, a more efficient solution can be fashioned, as follows...</p>
-				
-				
-<pre class="sample-code">function getValuesInMasterList (values,masterList) {
-  var
-    result = [],
-    masterListLookup = Uize.Data.getLookup (masterList)
-  ;
-  for (var valueNo = -1; ++valueNo &lt; values.length;) {
-    var value = values [valueNo];
-    if (masterListLookup [value]) result.push (value);
-  }
-  return result;
-}
-</pre>
-				
-				<p>In the improved version, a lookup object (aka hash table) is created before the loop. Then, in the loop, all that is needed to see if a value being inspected is in the master list is to do a simple dereference into the lookup object, using the value as the key / property name. Here the complexity is O(n), since indexing into the lookup object is constant time.</p>
-			</div>
-			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
@@ -605,78 +462,6 @@ Uize.Node.setStyle (
 		<a name="2_9"></a>
 		<h2 class="heading2" title="2. Static Methods -&gt; 2.9. Uize.Data.getReverseLookup"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_9" title="2. Static Methods -&gt; 2.9. Uize.Data.getReverseLookup">9</a>. </span>Uize.Data.getReverseLookup</h2>
 		<div class="contents2">
-			<p>Returns a reverse lookup object, where each key is a value from the specified source object, and where the value for each key is the associated key from the specified source.</p>
-			
-			<p><span class="allCaps">SYNTAX</span></p>
-			
-			
-<pre class="sample-code">reverseLookupOBJ = Uize.Data.getReverseLookup (hashOBJ);
-</pre>
-			
-			<p><span class="allCaps">EXAMPLE 1</span></p>
-			
-			
-<pre class="sample-code">var
-  htmlEntities = {quot:34, amp:38, lt:60, gt:62, nbsp:160, copy:169, reg:174},
-  htmlEntitiesReverseLookup = Uize.Data.getReverseLookup (htmlEntities)
-;
-</pre>
-			
-			<p>After the above code is executed, the value of the <code>htmlEntitiesReverseLookup</code> variable will be an object with the contents...</p>
-			
-			
-<pre class="sample-code">{34:'quot', 38:'amp', 60:'lt', 62:'gt', 160:'nbsp', 169:'copy', 174:'reg'}
-</pre>
-			
-			<p>By creating a reverse lookup, this code can lookup up an entity's character code from its name, or its name from its character code.</p>
-			
-			<p><span class="allCaps">VARIATION</span></p>
-			
-			
-<pre class="sample-code">reverseLookupOBJ = Uize.Data.getReverseLookup (valuesARRAY);
-</pre>
-			
-			<p>The <code><a href="#2_9">Uize.Data.getReverseLookup</a></code> method can also be used to create a reverse lookup object for an array. When a <code>valuesARRAY</code> parameter is specified in place of the <code>hashOBJ</code> parameter, a reverse lookup object is generated where each of the values in the array is a key in the object, and the value corresponding to each key is the index of the value in the array.</p>
-			
-			<p><span class="allCaps">EXAMPLE 2</span></p>
-			
-			
-<pre class="sample-code">var
-  frontRunnerLineup = [
-    'John Backsberg',
-    'Adrian Gullipeg',
-    'Sasha Djenduriba',
-    'Clark Holstrom',
-    'Michael Anderson',
-    'Henry Pratt',
-    'Jacob Zimbalist',
-    'Steven P. McLoughlan',
-    'Chris Gates',
-    'Richard Crumb'
-  ],
-  frontRunnerLineupReverseLookup = Uize.Data.getReverseLookup (frontRunnerLineup)
-;
-</pre>
-			
-			<p>After the above code is executed, the value of the <code>frontRunnerLineupReverseLookup</code> variable will be an object with the contents...</p>
-			
-			
-<pre class="sample-code">[
-  'John Backsberg':0,
-  'Adrian Gullipeg':1,
-  'Sasha Djenduriba':2,
-  'Clark Holstrom':3,
-  'Michael Anderson':4,
-  'Henry Pratt':5,
-  'Jacob Zimbalist':6,
-  'Steven P. McLoughlan':7,
-  'Chris Gates':8,
-  'Richard Crumb':9
-]
-</pre>
-			
-			<p>Now the code can look up a front-runner from the front-runner lineup using an index, or the code can determine if a particular person is in the front-runner lineup and what their finishing place is using the generated reverse lookup.</p>
-			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
@@ -687,21 +472,6 @@ Uize.Node.setStyle (
 		<a name="2_10"></a>
 		<h2 class="heading2" title="2. Static Methods -&gt; 2.10. Uize.Data.getTotalKeys"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_10" title="2. Static Methods -&gt; 2.10. Uize.Data.getTotalKeys">10</a>. </span>Uize.Data.getTotalKeys</h2>
 		<div class="contents2">
-			<p>Returns an integer, representing the total number of keys in the specified object.</p>
-			
-			<p><span class="allCaps">SYNTAX</span></p>
-			
-			
-<pre class="sample-code">totalKeysINT = Uize.Data.getTotalKeys (objectOBJ);
-</pre>
-			
-			<p>Using the <code><a href="#2_10">Uize.Data.getTotalKeys</a></code> method to determine the number of keys an object has is more efficient than using the expression <code>Uize.Data.getKeys (myObject).length</code>, because the <code><a href="#2_10">Uize.Data.getTotalKeys</a></code> method doesn't populate an array. Furthermore, to determine if an object is empty, you <b>could</b> use the expression <code>!Uize.Data.getTotalKeys (myObject)</code>, but it would be more efficient to use the convenient <code><a href="#2_14">Uize.Data.isEmpty</a></code> static method.</p>
-			
-			<p><span class="allCaps">NOTES</span></p>
-			
-			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>when the value of <code>objectOBJ</code> parameter is <code>null</code> or <code>undefined</code>, the value <code>0</code> will be returned</td></tr>
-			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
@@ -712,45 +482,6 @@ Uize.Node.setStyle (
 		<a name="2_11"></a>
 		<h2 class="heading2" title="2. Static Methods -&gt; 2.11. Uize.Data.getValues"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_11" title="2. Static Methods -&gt; 2.11. Uize.Data.getValues">11</a>. </span>Uize.Data.getValues</h2>
 		<div class="contents2">
-			<p>Returns an array, representing the property values of the specified object.</p>
-			
-			<p><span class="allCaps">SYNTAX</span></p>
-			
-			
-<pre class="sample-code">valuesARRAY = Uize.Data.getValues (objectOBJ);
-</pre>
-			
-			<p><span class="allCaps">EXAMPLE</span></p>
-			
-			
-<pre class="sample-code">var
-  personRecord = {
-    firstName:'John',
-    lastName:'Wilkey',
-    addressStreet:'1 Shiny House Way',
-    addressCity:'Richville',
-    addressState:'CA',
-    addressZip:'91234'
-  },
-  myValues = Uize.getKeys (personRecord)
-;
-</pre>
-			
-			<p>After the above code has executed, the <code>myValues</code> variable will have the value <code>['John', 'Wilkey', '1 Shiny House Way', 'Richville', 'CA', '91234']</code>.</p>
-			
-			<p><span class="allCaps">VARIATION</span></p>
-			
-			
-<pre class="sample-code">valuesARRAY = Uize.Data.getValues (objectARRAY);
-</pre>
-			
-			<p>When an <code>objectARRAY</code> parameter is specified in place of an <code>objectOBJ</code> parameter, then the value of the <code>objectARRAY</code> parameter will be returned as the result. This behavior makes this method useful for canonicalizing what could be an object or an array to an array of values.</p>
-			
-			<p><span class="allCaps">NOTES</span></p>
-			
-			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>when the value of <code>objectOBJ</code> parameter is <code>null</code> or <code>undefined</code>, an empty array will be returned</td></tr>
-			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
@@ -877,60 +608,6 @@ Uize.Node.setStyle (
 		<a name="2_14"></a>
 		<h2 class="heading2" title="2. Static Methods -&gt; 2.14. Uize.Data.isEmpty"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_14" title="2. Static Methods -&gt; 2.14. Uize.Data.isEmpty">14</a>. </span>Uize.Data.isEmpty</h2>
 		<div class="contents2">
-			<p>Returns a boolean, indicating whether or not the specified object or array is empty.</p>
-			
-			<p><span class="allCaps">SYNTAX</span></p>
-			
-			
-<pre class="sample-code">isEmptyBOOL = Uize.Data.isEmpty (valueANYTYPE);
-</pre>
-			
-			<p>The <code>valueANYTYPE</code> parameter can be an <code><a href="../javascript-reference/Object.html">Object</a></code> reference, an <code><a href="../javascript-reference/Array.html">Array</a></code> reference, a <code><a href="../javascript-reference/Function.html">Function</a></code> reference, or any other type. For object type values that are references to <code><a href="../javascript-reference/Object.html">Object</a></code> instances, the <code><a href="#2_14">Uize.Data.isEmpty</a></code> method returns <code>true</code> if the object has no keys. For an array type value, <code><a href="#2_14">Uize.Data.isEmpty</a></code> returns <code>true</code> if the array has no elements (ie. a length of <code>0</code>). For any other type of value, <code><a href="#2_14">Uize.Data.isEmpty</a></code> returns <code>true</code> if the value is equivalent to <code>false</code>.</p>
-			
-			<p><span class="allCaps">EXAMPLES</span></p>
-			
-			
-<pre class="sample-code">Uize.Data.isEmpty ({});                   // returns true
-Uize.Data.isEmpty ([]);                   // returns true
-Uize.Data.isEmpty ('');                   // returns true
-Uize.Data.isEmpty (0);                    // returns true
-Uize.Data.isEmpty (false);                // returns true
-Uize.Data.isEmpty (null);                 // returns true
-Uize.Data.isEmpty (undefined);            // returns true
-Uize.Data.isEmpty (NaN);                  // returns true
-
-Uize.Data.isEmpty ({blah:0});             // returns false
-Uize.Data.isEmpty (['blah']);             // returns false
-Uize.Data.isEmpty ('blah');               // returns false
-Uize.Data.isEmpty (1);                    // returns false
-Uize.Data.isEmpty (true);                 // returns false
-Uize.Data.isEmpty (function () {});       // returns false
-</pre>
-			
-			<p>For object type values that are references to instances of objects <b>other</b> than <code><a href="../javascript-reference/Object.html">Object</a></code> (such as the <code><a href="../javascript-reference/String.html">String</a></code>, <code><a href="../javascript-reference/Boolean.html">Boolean</a></code>, and <code><a href="../javascript-reference/Number.html">Number</a></code> objects, or <code><a href="../reference/Uize.html">Uize</a></code> subclasses), the object type value will first be resolved to a value by calling the <code>valueOf Instrinsic Method</code> of the object, and this resolved value will then be evaluated according the rules described above. Consider the following examples...</p>
-			
-			<p><span class="allCaps">EXAMPLES</span></p>
-			
-			
-<pre class="sample-code">Uize.Data.isEmpty (new String (''));      // returns true
-Uize.Data.isEmpty (new Number (0));       // returns true
-Uize.Data.isEmpty (new Boolean (false));  // returns true
-Uize.Data.isEmpty (new Uize ({value:0}))  // returns true
-
-Uize.Data.isEmpty (new String ('blah'));  // returns false
-Uize.Data.isEmpty (new Number (0));       // returns false
-Uize.Data.isEmpty (new Boolean (true));   // returns false
-Uize.Data.isEmpty (new Uize ({value:1}))  // returns false
-</pre>
-			
-			<p>Using <code>Uize.Data.isEmpty (objectOrArray)</code> has better performance than the expression <code>!Uize.Data.getTotalKeys (objectOrArray)</code>, because the latter expression iterates through all the keys of the object or elements of the array to count the total.</p>
-			
-			<p><span class="allCaps">NOTES</span></p>
-			
-			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the related <code><a href="#2_10">Uize.Data.getTotalKeys</a></code> static method</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#2_3">Uize.Data.emptyOut</a></code> static method</td></tr>
-			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
@@ -1225,7 +902,7 @@ for (var elementNo = -1; ++elementNo &lt; 100;) {
 				<h4 class="heading4" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.18. Gets the length of the longest string in an array of strings...."><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_15" title="2. Static Methods -&gt; 2.15. Uize.Data.map">15</a>.<a href="#2_15_3" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples">3</a>.<a href="#2_15_3_18" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.18. Gets the length of the longest string in an array of strings....">18</a>. </span>Gets the length of the longest string in an array of strings....</h4>
 				<div class="contents4">
 					
-<pre class="sample-code">var maxStringLength = Uize.Data.max (Uize.Data.map ('value.length',stringsArray));
+<pre class="sample-code">var maxStringLength = Uize.max (Uize.Data.map ('value.length',stringsArray));
 </pre>
 				</div>
 			</div>
@@ -1240,38 +917,6 @@ for (var elementNo = -1; ++elementNo &lt; 100;) {
 		<a name="2_16"></a>
 		<h2 class="heading2" title="2. Static Methods -&gt; 2.16. Uize.Data.max"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_16" title="2. Static Methods -&gt; 2.16. Uize.Data.max">16</a>. </span>Uize.Data.max</h2>
 		<div class="contents2">
-			<p>Returns the maximum value from the specified array or object.</p>
-			
-			<p><span class="allCaps">SYNTAX</span></p>
-			
-			
-<pre class="sample-code">var maxValueNUM = Uize.Data.max (valuesARRAYorOBJ);
-</pre>
-			
-			<p>When an object is specified for the <code>valuesARRAYorOBJ</code> parameter, then the maximum property value in the object will be returned.</p>
-			
-			<p><span class="allCaps">EXAMPLE</span></p>
-			
-			
-<pre class="sample-code">var
-  employeeSalaries = {
-    'John Anderson':80000,
-    'Peter Hendriks':56000,
-    'Jacob Previn':75000,
-    'Scarlet Sjedsondorf':63000
-  },
-  maxEmployeeSalary = Uize.Data.max (employeeSalaries)
-;
-</pre>
-			
-			<p>In the above example, the variable <code>maxEmployeeSalary</code> will be left with the value <code>80000</code>.</p>
-			
-			<p><span class="allCaps">NOTES</span></p>
-			
-			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>if any of the values are not a number, then this method will return the value <code>NaN</code></td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#2_17">Uize.Data.min</a></code> static method</td></tr>
-			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
@@ -1282,38 +927,6 @@ for (var elementNo = -1; ++elementNo &lt; 100;) {
 		<a name="2_17"></a>
 		<h2 class="heading2" title="2. Static Methods -&gt; 2.17. Uize.Data.min"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_17" title="2. Static Methods -&gt; 2.17. Uize.Data.min">17</a>. </span>Uize.Data.min</h2>
 		<div class="contents2">
-			<p>Returns the minimum value from the specified array or object.</p>
-			
-			<p><span class="allCaps">SYNTAX</span></p>
-			
-			
-<pre class="sample-code">var minValueNUM = Uize.Data.min (valuesARRAYorOBJ);
-</pre>
-			
-			<p>When an object is specified for the <code>valuesARRAYorOBJ</code> parameter, then the minimum property value in the object will be returned.</p>
-			
-			<p><span class="allCaps">EXAMPLE</span></p>
-			
-			
-<pre class="sample-code">var
-  employeeSalaries = {
-    'John Anderson':80000,
-    'Peter Hendriks':56000,
-    'Jacob Previn':75000,
-    'Scarlet Sjedsondorf':63000
-  },
-  minEmployeeSalary = Uize.Data.min (employeeSalaries)
-;
-</pre>
-			
-			<p>In the above example, the variable <code>minEmployeeSalary</code> will be left with the value <code>56000</code>.</p>
-			
-			<p><span class="allCaps">NOTES</span></p>
-			
-			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>if any of the values are not a number, then this method will return the value <code>NaN</code></td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#2_16">Uize.Data.max</a></code> static method</td></tr>
-			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">

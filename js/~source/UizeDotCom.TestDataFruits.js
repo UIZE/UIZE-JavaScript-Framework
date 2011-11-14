@@ -332,8 +332,8 @@ Uize.module ({
 				var
 					_fruits = _package (),
 					_valuesForProperty = Uize.Data.getColumn (_fruits,_propertyName),
-					_minValue = Uize.Data.min (_valuesForProperty),
-					_maxValue = Uize.Data.max (_valuesForProperty)
+					_minValue = Uize.min (_valuesForProperty),
+					_maxValue = Uize.max (_valuesForProperty)
 				;
 				return {minValue:_minValue,maxValue:_maxValue + (_maxValue == _minValue ? 1 : 0)};
 			};

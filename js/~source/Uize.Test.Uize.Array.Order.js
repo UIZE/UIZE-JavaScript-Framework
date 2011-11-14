@@ -28,10 +28,7 @@
 
 Uize.module ({
 	name:'Uize.Test.Uize.Array.Order',
-	required:[
-		'Uize.Data',
-		'Uize.Test.Uize.Data'
-	],
+	required:'Uize.Test.Uize.Data',
 	builder:function () {
 		function _arrayMethodTargetTest (_methodName,_sourceArrayContents,_expectedTargetArrayContents) {
 			return Uize.Test.Uize.Data.arrayMethodTargetTest (
@@ -58,7 +55,7 @@ Uize.module ({
 									_elementsLength = _elements.length,
 									_jumbledArray = Uize.Array.Order.jumble (_elements),
 									_result = _jumbledArray.length == _elementsLength,
-									_jumbledArrayLookup = Uize.Data.getLookup (_jumbledArray)
+									_jumbledArrayLookup = Uize.lookup (_jumbledArray)
 								;
 								for (var _elementNo = -1; _result && ++_elementNo < _elementsLength;)
 									_result = _jumbledArrayLookup [_elements [_elementNo]]

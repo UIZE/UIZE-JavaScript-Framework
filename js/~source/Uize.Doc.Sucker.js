@@ -327,7 +327,7 @@ Uize.module({
 								)
 									_moduleNode = _moduleNode [_moduleNameParts [_moduleNamePartNo]]
 								;
-								var _modulesUnderNamespace = Uize.Data.getKeys (_moduleNode);
+								var _modulesUnderNamespace = Uize.keys (_moduleNode);
 								_simpleDocChunks.push (
 									'\t\tModules Directly Under This Namespace\n' +
 									'\t\t\t' +

@@ -5,6 +5,7 @@ Uize.module ({
 			return {
 				Uize:{
 					Array:{
+						Dupes:0,
 						Order:0,
 						Sort:0,
 						Util:0
@@ -88,6 +89,7 @@ Uize.module ({
 						},
 						Uize:{
 							Array:{
+								Dupes:0,
 								Order:0,
 								Sort:0,
 								Util:0

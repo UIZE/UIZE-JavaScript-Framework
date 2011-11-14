@@ -67,8 +67,7 @@ Uize.module({
 	name:'Uize.Scruncher',
 	required:[
 		'Uize.Xml',
-		'Uize.String',
-		'Uize.Data'
+		'Uize.String'
 	],
 	builder:function () {
 		/*** Variables for Scruncher Optimization ***/
@@ -80,7 +79,7 @@ Uize.module({
 
 		/*** Utility Functions ***/
 			function _makeCharLookup (_charsStr,_lookupValue) {
-				return Uize.Data.getLookup (_charsStr.split (''),_lookupValue != null ? _lookupValue : _true);
+				return Uize.lookup (_charsStr.split (''),_lookupValue != null ? _lookupValue : _true);
 			}
 
 			function _stringToBoolean (_value) {

@@ -1,0 +1,58 @@
+The =Uize= base module has been given a boost with the addition of a slew of convenient utility belt features.
+
+Promotion of Methods That Have Proven Their Worth
+	Many of the utility belt features that are new to the =Uize= module may be familiar to seasoned UIZE developers, since many of them already existed in very similar forms in the =Uize.Data= module and have now been promoted to the =Uize= base module so that they can be more easily accessible.
+
+	UIZE has evolved over time. Periodically, features that have gathered dust and turned out to be more esoteric than initially thought are relegated to deeper modules within the framework. And sometimes the opposite occurs. This is an occasion where methods in a deeper module have proven useful enough in everyday development that it makes sense to promote them to a shallower module, in this case the base module.
+
+New Additions
+	Besides the numerous methods of the =Uize.Data= module that have been promoted to =Uize=, a number of fresh methods have been added.
+
+	Fresh methods include the =Uize.inRange=, =Uize.isNully=, =Uize.isObject=, =Uize.isPlainObject=, =Uize.isString=, =Uize.isBoolean=, =Uize.isPrimitive=, and =Uize.defaultNully= static methods.
+
+Improved Methods
+	In the course of adding the new utility belt methods, a few of the previously existing methods have been improved.
+
+	Improved methods include...
+
+	- =Uize.isIn= - now supports testing if a value is the value of one of an object's properties (previously only supported testing if a value was in an array, but now you can test if a value is in an object)
+	- =Uize.callOn= - now supports calling a method on values that are not just =Uize= class instances (as long as those values are not =null= or =undefined=), so =Uize.callOn= can now be used to call a method on a list of strings, booleans, numbers, =Date= object instances, etc.
+
+All the New Utility Belt Methods
+	The full list of utility belt methods that are new to the =Uize= module is as follows...
+
+	- =Uize.inRange= - tests if a value is within a specified value range (new method)
+	- =Uize.keys= - returns an array containing the names of the properties (ie. keys) in an object (promoted from =Uize.Data.getKeys=, shortened for brevity / convenience)
+	- =Uize.values= - returns an array containing the values of the properties in an object (promoted from =Uize.Data.getValues=, shortened for brevity / convenience)
+	- =Uize.totalKeys= - counts the number of keys in an object (promoted from =Uize.Data.getTotalKeys=, shortened for brevity / convenience)
+	- =Uize.min= - returns the largest value in a values array (promoted from =Uize.Data.min=)
+	- =Uize.max= - returns the smallest value in a values array (promoted from =Uize.Data.max=)
+	- =Uize.lookup= - creates a lookup object from an array of values (promoted from =Uize.Data.getLookup=, shortened for brevity / convenience)
+	- =Uize.reverseLookup= - creates a reverse lookup from a specified lookup object or values array (promoted from =Uize.Data.getReverseLookup=, shortened for brevity / convenience)
+	- =Uize.isObject= - tests if a value is non-null and an object (added for consistency with other type checking methods, but also checks for non-null)
+	- =Uize.isPlainObject= - tests if a value is a plain object, meaning an instance of JavaScript's built-in =Object= object (new method)
+	- =Uize.isString= - tests if a value is a string (added for consistency with other type checking methods)
+	- =Uize.isBoolean= - tests if a value is a boolean (aded for consistency with other type checking methods)
+	- =Uize.isNully= - tests if a value is =null= or =undefined= (new method)
+	- =Uize.isPrimitive= - tests if a value is a JavaScript primitive, meaning a string, number, or boolean (new method)
+	- =Uize.isEmpty= - tests if an object or array is empty, or if a non-object value is "falsy" (promoted from =Uize.Data.isEmpty=)
+	- =Uize.emptyOut= - empties out the contents of an object or array (promoted from =Uize.Data.emptyOut=)
+
+Deprecated Uize.Data Methods
+	As a consequence of being promoted to the =Uize= base module, all the promoted methods have been deprecated from the =Uize.Data= module.
+
+	Deprecation means that the methods are officially on death row, but they'll be there for about a year before being eliminated. So, the promoted methods can still be used by their old names as they existed in the =Uize.Data= module - those methods in the =Uize.Data= module are now simply references to the methods as they now exist in the =Uize= module, since the signatures of the methods did not change.
+
+	Uize Modules Updated
+		All =Uize= modules that used any of the promoted =Uize.Data= methods have been updated to use the new equivalents in the =Uize= module.
+
+	Update Your Modules
+		The promoted =Uize.Data= method are deprecated and still supported for some time, but they will go away eventually and you should updated your modules to use the new equivalents in the =Uize= module as soon as you can.
+
+		When you do update your modules, check after making your changes if the module you're updating still needs to have a dependency on the =Uize.Data= module. If your module only depended on the =Uize.Data= module to use a single method in that module which happens to be one of those promoted to the =Uize= base module, then the module shouldn't require =Uize.Data= after being updated.
+
+....................................................................................
+<< metadata >>
+
+title: 2011-11-13 - New Utility Belt Features
+....................................................................................

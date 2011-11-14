@@ -786,7 +786,7 @@ Uize.module ({
 				};
 
 				_classPrototype.expectNonEmpty = function (_value) {
-					return this._expectSuccess (!Uize.Data.isEmpty (_value),'non-empty',_valueToJsonSerializer (_value));
+					return this._expectSuccess (!Uize.isEmpty (_value),'non-empty',_valueToJsonSerializer (_value));
 					/*?
 						Instance Methods
 							expectNonEmpty
@@ -982,7 +982,7 @@ Uize.module ({
 
 				_classPrototype.expectNoRepeats = function (_value) {
 					return this._expectSuccess (
-						Uize.Data.getTotalKeys (Uize.Data.getLookup (_value)) == _value.length,
+						Uize.totalKeys (Uize.lookup (_value)) == _value.length,
 						'array with no repeated values',
 						_valueToJsonSerializer (_value)
 					);

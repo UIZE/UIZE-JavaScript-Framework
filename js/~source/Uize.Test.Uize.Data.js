@@ -38,11 +38,8 @@ Uize.module ({
 			_identicalTestObjectB = {
 				aString:'blah',
 				anArray:[1,2,3]
-			},
-			_sparselyPopulatedArray = []
+			}
 		;
-		_sparselyPopulatedArray [2] = 1;
-		_sparselyPopulatedArray [7] = 2;
 
 		/*** create dummy class with value interface ***/
 			var _ClassWithValueInterface = Uize.subclass ();
@@ -533,93 +530,6 @@ Uize.module ({
 								true
 							]
 					]],
-					['Uize.Data.isEmpty',[
-						['Test that empty object is considered empty',[{}],true],
-						['Test that empty array is considered empty',[[]],true],
-						['Test that empty string is considered empty',[''],true],
-						['Test that String object initialized to empty string is considered empty',[new String ('')],true],
-						['Test that the number zero is considered empty',[0],true],
-						['Test that Number object initialized to zero is considered empty',[new Number (0)],true],
-						['Test that the boolean false is considered empty',[false],true],
-						['Test that Boolean object initialized to false is considered empty',[new Boolean (false)],true],
-						['Test that null is considered empty',[null],true],
-						['Test that undefined is considered empty',[undefined],true],
-						['Test that NaN is considered empty',[NaN],true],
-						['Test that class instance with empty value set-get property is considered empty',
-							[new _ClassWithValueInterface ({value:0})],
-							true
-						],
-						['Test that a non-empty object is not considered empty',[{blah:0}],false],
-						['Test that a non-empty array is not considered empty',[['blah']],false],
-						['Test that a non-empty string is not considered empty',['blah'],false],
-						['Test that String object initialized to non-empty string is not considered empty',
-							[new String ('foo')],
-							false
-						],
-						['Test that a non-zero number is not considered empty',[1],false],
-						['Test that Number object initialized to non-zero number is not considered empty',
-							[new Number (1)],
-							false
-						],
-						['Test that the boolean true is not considered empty',[true],false],
-						['Test that Boolean object initialized to true is not considered empty',[new Boolean (true)],false],
-						//['Test that a regular expression is not considered empty',[/^.+$/],false],
-						['Test that a function (even an empty one) is not considered empty',function () {},false],
-						['Test that class instance with non-empty value set-get property is not considered empty',
-							[new _ClassWithValueInterface ({value:1})],
-							false
-						]
-					]],
-					['Uize.Data.emptyOut',[
-						{
-							title:'Test that emptying out an already empty array produces that same empty array as the result',
-							test:function () {
-								var
-									_source = [],
-									_result = Uize.Data.emptyOut (_source)
-								;
-								return this.expect (true,_source == _result) && this.expect (_source,_result);
-							}
-						},
-						{
-							title:'Test that emptying out an already empty object produces that same empty object as the result',
-							test:function () {
-								var
-									_source = {},
-									_result = Uize.Data.emptyOut (_source)
-								;
-								return this.expect (true,_source == _result) && this.expect (_source,_result);
-							}
-						},
-						{
-							title:'Test that emptying out an array with contents produces that same array with no contents as the result',
-							test:function () {
-								var
-									_source = [1,2,3,4,5],
-									_result = Uize.Data.emptyOut (_source)
-								;
-								return this.expect (true,_source == _result) && this.expect (_source,[]);
-							}
-						},
-						{
-							title:'Test that emptying out an object with contents produces that same object with no contents as the result',
-							test:function () {
-								var
-									_source = {foo:1,bar:1},
-									_result = Uize.Data.emptyOut (_source)
-								;
-								return this.expect (true,_source == _result) && this.expect (_source,{});
-							}
-						},
-						['Test that specifying the value null for the source produces the value null as the result',
-							null,
-							null
-						],
-						['Test that specifying the value undefined for the source produces the value undefined as the result',
-							undefined,
-							undefined
-						]
-					]],
 					['Uize.Data.filter',[
 						['Test that calling with no parameter produces an empty object',
 							[],
@@ -750,144 +660,59 @@ Uize.module ({
 							['engineering','finance']
 						]
 					]],
+					['Uize.Data.isEmpty',[
+						{
+							title:'Test that this method is simply a reference to the Uize.keys method',
+							test:function () {return this.expectSameAs (Uize.isEmpty,Uize.Data.isEmpty)}
+						}
+					]],
+					['Uize.Data.emptyOut',[
+						{
+							title:'Test that this method is simply a reference to the Uize.emptyOut method',
+							test:function () {return this.expectSameAs (Uize.emptyOut,Uize.Data.emptyOut)}
+						}
+					]],
 					['Uize.Data.getKeys',[
-						['Test that an object\'s keys are reported correctly',[{foo:1,bar:2}],['foo','bar']],
-						['Test that a populated array\'s keys are reported correctly',[['a','b','c','d']],['0','1','2','3']],
-						['Test that a sparsely populated array\'s keys are reported correctly',
-							[_sparselyPopulatedArray],
-							['2','7']
-						],
-						['Test that a non-zero length array that is unpopulated has no keys',[new Array (5)],[]],
-						['Test that an empty array has no keys',[[]],[]],
-						['Test that an empty object has no keys',[{}],[]],
-						['Test that null has no keys',null,[]],
-						['Test that undefined has no keys',undefined,[]],
-						['Test that a boolean value has no keys',false,[]],
-						['Test that a number value has no keys',5,[]],
-						['Test that a string value has no keys','hello',[]]
+						{
+							title:'Test that this method is simply a reference to the Uize.keys method',
+							test:function () {return this.expectSameAs (Uize.keys,Uize.Data.getKeys)}
+						}
 					]],
 					['Uize.Data.getTotalKeys',[
-						['Test that an object\'s total keys are reported correctly',[{foo:1,bar:2}],2],
-						['Test that a populated array\'s total keys are reported correctly',[['a','b','c','d']],4],
-						['Test that a sparsely populated array\'s total keys are reported correctly',
-							[_sparselyPopulatedArray],
-							2
-						],
-						['Test that a non-zero length array that is unpopulated has 0 keys',[new Array (5)],0],
-						['Test that an empty array has 0 keys',[[]],0],
-						['Test that an empty object has 0 keys',[{}],0],
-						['Test that null has 0 keys',null,0],
-						['Test that undefined has 0 keys',undefined,0],
-						['Test that a boolean value has 0 keys',false,0],
-						['Test that a number value has 0 keys',5,0],
-						['Test that a string value has 0 keys','hello',0]
+						{
+							title:'Test that this method is simply a reference to the Uize.totalKeys method',
+							test:function () {return this.expectSameAs (Uize.totalKeys,Uize.Data.getTotalKeys)}
+						}
 					]],
 					['Uize.Data.getValues',[
-						['Test that an object\'s values are reported correctly',[{foo:1,bar:2}],[1,2]],
-						['Test that a populated array\'s values are reported correctly',
-							[['a','b','c','d']],
-							['a','b','c','d']
-						],
 						{
-							title:'Test that getting values for an array simply returns the array',
-							test:function () {return Uize.Data.getValues (_sparselyPopulatedArray) == _sparselyPopulatedArray}
-						},
-						['Test that a sparsely populated array\'s values are reported correctly',
-							[_sparselyPopulatedArray],
-							_sparselyPopulatedArray
-						],
-						['Test that a non-zero length array that is unpopulated has no values',
-							[new Array (5)],
-							new Array (5)
-						],
-						['Test that an empty array has no values',[[]],[]],
-						['Test that an empty object has no values',[{}],[]],
-						['Test that null has no values',null,[]],
-						['Test that undefined has no values',undefined,[]],
-						['Test that a boolean value has no values',false,[]],
-						['Test that a number value has no values',5,[]],
-						['Test that a string value has no values','hello',[]]
+							title:'Test that this method is simply a reference to the Uize.values method',
+							test:function () {return this.expectSameAs (Uize.values,Uize.Data.getValues)}
+						}
 					]],
 					['Uize.Data.getLookup',[
-						['Test that true is the default value for the lookupValue paramter',
-							[['foo','bar']],
-							{foo:true,bar:true}
-						],
-						['Test that default can be specified as a value for the lookupValue paramter',
-							[['foo','bar'],undefined],
-							{foo:undefined,bar:undefined}
-						],
-						['Test that a values array with duplicate values is handled correctly',
-							[['foo','foo','bar','bar']],
-							{foo:true,bar:true}
-						],
-						['Test that a values array with different types of values is handled correctly',
-							[['','string',true,4.01,NaN,Infinity,null,undefined],1],
-							{'':1,'string':1,'true':1,'4.01':1,'NaN':1,'Infinity':1,'null':1,'undefined':1}
-						],
-						['Test that an empty values array produces an empty lookup object',
-							[[]],
-							{}
-						],
-						['Test that a sparsely populated values array produces a lookup object with a single "undefined" key for all the missing/undefined element values',
-							[_sparselyPopulatedArray],
-							{1:true,2:true,'undefined':true}
-						],
-						['Test that a non-zero length values array that is unpopulated produces a lookup object with a single "undefined" key for all the undefined element values',
-							[new Array (5)],
-							{'undefined':true}
-						]
+						{
+							title:'Test that this method is simply a reference to the Uize.lookup method',
+							test:function () {return this.expectSameAs (Uize.lookup,Uize.Data.getLookup)}
+						}
 					]],
 					['Uize.Data.getReverseLookup',[
-						['Test that calling with no parameter produces an empty object',
-							[],
-							{}
-						],
-						['Test that calling with the value null specified produces an empty object',
-							[null],
-							{}
-						],
-						['Test that calling with the value undefined specified produces an empty object',
-							[undefined],
-							{}
-						],
-						['Test that an object with no duplicate values is handled correctly',
-							[{foo:1,bar:2}],
-							{1:'foo',2:'bar'}
-						],
-						['Test that an object with duplicate values is handled as expected (last mapping wins)',
-							[{foo:1,bar:1}],
-							{1:'bar'}
-						],
-						['Test that an empty object produces an empty reverse lookup object',
-							[{}],
-							{}
-						],
-						['Test that an object with different types of values is handled correctly',
-							[{prop1:'',prop2:'string',prop3:true,prop4:4.01,prop5:NaN,prop6:Infinity,prop7:null,prop8:undefined}],
-							{'':'prop1','string':'prop2','true':'prop3','4.01':'prop4','NaN':'prop5',Infinity:'prop6','null':'prop7','undefined':'prop8'}
-						],
-						['Test that an array can be specified as a source object',
-							[['foo','bar']],
-							{foo:'0',bar:'1'}
-						],
-						['Test that an empty array produces an empty reverse lookup object',
-							[{}],
-							{}
-						],
-						['Test that a sparsely populated values array produces a reverse lookup object with no "undefined" key for missing/undefined element values',
-							[_sparselyPopulatedArray],
-							{1:'2',2:'7'}
-						],
-						['Test that a non-zero length values array that is unpopulated produces an empty reverse lookup object',
-							[new Array (5)],
-							{}
-						],
-						['Test that null produces an empty reverse lookup object',null,{}],
-						['Test that undefined produces an empty reverse lookup object',undefined,{}],
-						['Test that a boolean value produces an empty reverse lookup object',false,{}],
-						['Test that a number value produces an empty reverse lookup object',5,{}],
-						['Test that a string value produces an empty reverse lookup object','hello',{}]
+						{
+							title:'Test that this method is simply a reference to the Uize.reverseLookup method',
+							test:function () {return this.expectSameAs (Uize.reverseLookup,Uize.Data.getReverseLookup)}
+						}
+					]],
+					['Uize.Data.max',[
+						{
+							title:'Test that this method is simply a reference to the Uize.max method',
+							test:function () {return this.expectSameAs (Uize.max,Uize.Data.max)}
+						}
+					]],
+					['Uize.Data.min',[
+						{
+							title:'Test that this method is simply a reference to the Uize.min method',
+							test:function () {return this.expectSameAs (Uize.min,Uize.Data.min)}
+						}
 					]],
 					['Uize.Data.intersection',[
 						['Test that calling with no parameters produces an empty object',
@@ -926,44 +751,6 @@ Uize.module ({
 							[['foo','bar',true,null],['hello','bar','kitty',null]],
 							{1:'bar',3:null}
 						]
-					]],
-					['Uize.Data.max',[
-						['Test that the maximum value from an object is reported correctly',[{foo:1,bar:2}],2],
-						['Test that the maximum value from an array is reported correctly',[[1,2]],2],
-						['Test that the maximum value from a sparsely populated array is NaN',
-							[_sparselyPopulatedArray],
-							NaN
-						],
-						['Test that the maximum value from a non-zero length array that is unpopulated is NaN',
-							[new Array (5)],
-							NaN
-						],
-						['Test that the maximum value from an empty array is -Infinity',[[]],-Infinity],
-						['Test that the maximum value from an empty object is -Infinity',[{}],-Infinity],
-						['Test that the maximum value from null is -Infinity',null,-Infinity],
-						['Test that the maximum value from undefined is -Infinity',undefined,-Infinity],
-						['Test that the maximum value from a boolean value is -Infinity',false,-Infinity],
-						['Test that the maximum value from a number value is -Infinity',5,-Infinity],
-						['Test that the maximum value from a string value is -Infinity','hello',-Infinity]
-					]],
-					['Uize.Data.min',[
-						['Test that the minimum value from an object is reported correctly',[{foo:1,bar:2}],1],
-						['Test that the minimum value from an array is reported correctly',[[1,2]],1],
-						['Test that the minimum value from a sparsely populated array is NaN',
-							[_sparselyPopulatedArray],
-							NaN
-						],
-						['Test that the minimum value from a non-zero length array that is unpopulated is NaN',
-							[new Array (5)],
-							NaN
-						],
-						['Test that the minimum value from an empty array is Infinity',[[]],Infinity],
-						['Test that the minimum value from an empty object is Infinity',[{}],Infinity],
-						['Test that the minimum value from null is Infinity',null,Infinity],
-						['Test that the minimum value from undefined is Infinity',undefined,Infinity],
-						['Test that the minimum value from a boolean value is Infinity',false,Infinity],
-						['Test that the minimum value from a number value is Infinity',5,Infinity],
-						['Test that the minimum value from a string value is Infinity','hello',Infinity]
 					]],
 					['Uize.Data.map',[
 						['Test that function mapper gets element value as a parameter correctly',

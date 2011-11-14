@@ -1347,7 +1347,7 @@ Uize.module ({
 							delete _unappliedChildrenData [_childName];
 						}
 
-					alert (_childName + '\n............\n' + Uize.Data.getKeys (_properties));
+					alert (_childName + '\n............\n' + Uize.keys (_properties));
 
 					_properties.name = _childName;
 					_child && _child.set (_properties);

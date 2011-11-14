@@ -187,7 +187,12 @@ Uize.module ({
 							_indentPrefix + (_itemLinesAdded++ ? '' : _startPrefix) + _itemValue + (_appendComma ? ',' : '')
 						);
 					}
-					if (_item == _undefined /* null, undefined */ || _typeofItem == 'number' || _typeofItem == 'boolean') {
+					if (
+						_item == _undefined /* null, undefined */ ||
+						_typeofItem == 'number' ||
+						_typeofItem == 'boolean' ||
+						_typeofItem == 'function'
+					) {
 						_addSerializedItemLine (_item,_appendComma);
 					} else if (_typeofItem == _string) {
 						_addSerializedItemLine (_getQuotedStr (_item),_appendComma);

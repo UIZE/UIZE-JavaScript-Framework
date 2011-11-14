@@ -218,12 +218,12 @@ Uize.module({
         }
         var
           _data = _params.data,
-          _urlDictionary = Uize.copyInto (Uize.Data.getLookup (_undefined,0,true),_params.urlDictionary),
+          _urlDictionary = Uize.copyInto (Uize.lookup (_undefined,0,true),_params.urlDictionary),
           _pathToRoot = _params.pathToRoot || '',
           _indentChars = _defaultedStringParam ('indentChars','\t'),
           _headingNumberingSeparator = _defaultedStringParam ('headingNumberingSeparator','. '),
           _headingNumberingDelimiter = _defaultedStringParam ('headingNumberingDelimiter','.'),
-          _maxCssClassLevel = Uize.defaultNull (_params.maxCssClassLevel,9),
+          _maxCssClassLevel = Uize.defaultNully (_params.maxCssClassLevel,9),
           _sectionPath = [],
           _levelListItemNos = [0],
           _docLines = [],
@@ -243,7 +243,7 @@ Uize.module({
                   - must support section titles possibly containing aliases
                   - section titles with the same display name but different aliases should be merged so that a single title exists with the union of all the aliases
                 */
-                var _sectionsByTitle = Uize.Data.getLookup (_undefined,0,true); // safe empty lookup object
+                var _sectionsByTitle = Uize.lookup (_undefined,0,true); // safe empty lookup object
                 for (var _childNo = -1; ++_childNo &lt; _children.length;) {
                   var
                     _child = _children [_childNo],
@@ -279,7 +279,7 @@ Uize.module({
         /*** support for sorting of peer sections ***/
           var _sectionsToSort = _params.sectionsToSort;
           if (_sectionsToSort) {
-            var _sectionsToSortLookup = Uize.Data.getLookup (_sectionsToSort);
+            var _sectionsToSortLookup = Uize.lookup (_sectionsToSort);
             function _sortPeerSections (_data) {
               var
                 _children = _data.children,
@@ -301,8 +301,8 @@ Uize.module({
         /*** support code for intra-document section links ***/
           // populate lookups with all section titles from all levels
           var
-            _allSectionTitles = Uize.Data.getLookup (_undefined,0,true),
-            _allSectionTitlesLowerCase = Uize.Data.getLookup (_undefined,0,true),
+            _allSectionTitles = Uize.lookup (_undefined,0,true),
+            _allSectionTitlesLowerCase = Uize.lookup (_undefined,0,true),
             _sectionNoByLevel = [0]
           ;
           function _getSectionIdFromLookup (_lookup,_sectionTitle,_localSectionPath) {

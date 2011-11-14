@@ -614,7 +614,7 @@ Uize.module ({
 					_columns = !_firstRow
 						? []
 						: _rowTypeIsObject
-							? Uize.Data.getKeys (_firstRow)
+							? Uize.keys (_firstRow)
 							: Uize.Data.map ('key',_firstRow.length)
 				;
 				var _totalColumns = _columns.length;
