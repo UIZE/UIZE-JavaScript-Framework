@@ -135,19 +135,18 @@ Uize.module ({
 				*/
 			};
 
-			var _keyNameToKeyCodeMap = {
-				Backspace:8,Delete:46,Insert:45,
-				Enter:13,Escape:27,
-				Space:32,Tab:9,
-				PageUp:33,PageDown:34,End:35,Home:36,
-				LeftArrow:37,RightArrow:39,UpArrow:38,DownArrow:40
-			};
-			function _makeIsKeyMethod (_keyName,_keyCode) {
-				_package ['isKey' + _keyName] = function (_event) {return _package.keyCode (_event) == _keyCode};
-			}
-			for (var _keyName in _keyNameToKeyCodeMap)
-				_makeIsKeyMethod (_keyName,_keyNameToKeyCodeMap [_keyName])
-			;
+			Uize.map (
+				{
+					Backspace:8,Delete:46,Insert:45,
+					Enter:13,Escape:27,
+					Space:32,Tab:9,
+					PageUp:33,PageDown:34,End:35,Home:36,
+					LeftArrow:37,RightArrow:39,UpArrow:38,DownArrow:40
+				},
+				function (_keyCode,_keyName) {
+					_package ['isKey' + _keyName] = function (_event) {return _package.keyCode (_event) == _keyCode};
+				}
+			);
 			/*?
 				Static Methods
 					Uize.Node.Event.isKeyBackspace

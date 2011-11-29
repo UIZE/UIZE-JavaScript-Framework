@@ -34,6 +34,7 @@ All the New Utility Belt Methods
 	- =Uize.isString= - tests if a value is a string (added for consistency with other type checking methods)
 	- =Uize.isBoolean= - tests if a value is a boolean (aded for consistency with other type checking methods)
 	- =Uize.isNully= - tests if a value is =null= or =undefined= (new method)
+	- =Uize.defaultNull= - defaults a value to the specified default, if the value is =null= or =undefined= (new method)
 	- =Uize.isPrimitive= - tests if a value is a JavaScript primitive, meaning a string, number, or boolean (new method)
 	- =Uize.isEmpty= - tests if an object or array is empty, or if a non-object value is "falsy" (promoted from =Uize.Data.isEmpty=)
 	- =Uize.emptyOut= - empties out the contents of an object or array (promoted from =Uize.Data.emptyOut=)

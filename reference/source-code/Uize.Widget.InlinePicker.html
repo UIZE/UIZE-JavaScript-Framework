@@ -133,29 +133,22 @@ Uize.module ({
               ;
             }
             
-            /* unwire previous piped properties */
-              if (_previousPipedProperties)
-                for (var _previousPipedPropertiesNo = -1; ++_previousPipedPropertiesNo &lt; _previousPipedProperties.length;)
-                  _this.unwire(
-                    _buildChangedEventName(_previousPipedProperties[_previousPipedPropertiesNo]),
-                    _pipeChangedEvent
-                  )
-                ;
-            
-            /* wire new piped properties */
-              if (_pipedProperties) {
-                function _wireChangedProperty(_propertyName) {
-                  _this.wire(
-                    _buildChangedEventName(_propertyName),
-                    _pipeChangedEvent
-                  )
+            /*** unwire previous piped properties ***/
+              Uize.forEach (
+                _previousPipedProperties,
+                function (_pipedProperty) {
+                  _this.unwire (_buildChangedEventName (_pipedProperty),_pipeChangedEvent);
                 }
-                
-                for (var _pipedPropertyNo = -1; ++_pipedPropertyNo &lt; _pipedProperties.length;)
-                  _wireChangedProperty(_pipedProperties[_pipedPropertyNo])
-                ;
-              }
-            
+              );
+
+            /*** wire new piped properties ***/
+              Uize.forEach (
+                _pipedProperties,
+                function (_pipedProperty) {
+                  _this.wire (_buildChangedEventName(_pipedProperty),_pipeChangedEvent);
+                }
+              );
+
             _this._previousPipedProperties = _this._pipedProperties;
           }
         },

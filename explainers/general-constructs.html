@@ -31,7 +31,7 @@
 				<ul>
 					<li><a href="#2_1" title="A Value Transformer Function is a Value Transformer specified in the form of a function.">2.1. Value Transformer Function</a>
 						<ul>
-							<li><a href="#2_1_1" title="A Value Transformer Function can be supplied as a parameter to any method that supports a Value Transformer Function, such as the Uize.Data.map static method of the Uize.Data module. Consider the following example...">2.1.1. Using a Value Transformer Function</a></li>
+							<li><a href="#2_1_1" title="A Value Transformer Function can be supplied as a parameter to any method that supports a Value Transformer Function, such as the Uize.map static method. Consider the following example...">2.1.1. Using a Value Transformer Function</a></li>
 							<li><a href="#2_1_2" title="The value input parameter for a Value Transformer Function can be named anything - it does not need to be named value. Consider the following example...">2.1.2. Value Parameter Can Be Named Anything</a></li>
 						</ul>
 					</li>
@@ -48,7 +48,7 @@
 							<li><a href="#2_3_2" title="The Uize.String.Lines.modify static method of the Uize.String.Lines module supports a Value Transformer for the line modifier that processes each line of a multi-line string.">2.3.2. The Uize.String.Lines.modify Method</a></li>
 							<li><a href="#2_3_3" title="A Value Transformer can always be used in place of a Value and Key Transformer.">2.3.3. Using a Value Transformer in Place of a Value and Key Transformer</a>
 								<ul>
-									<li><a href="#2_3_3_1" title="While the Uize.Data.map method of the Uize.Data module expects a Value and Key Transformer, a Value Transformer can be supplied instead.">2.3.3.1. The Uize.Data.map Method</a></li>
+									<li><a href="#2_3_3_1" title="While the Uize.map method expects a Value and Key Transformer, a Value Transformer can be supplied instead.">2.3.3.1. The Uize.map Method</a></li>
 									<li><a href="#2_3_3_2" title="The Uize.Array.Sort.sortBy method of the Uize.Array.Sort module expects a Value and Key Transformer, but a Value Transformer can be supplied instead. Consider the following example...">2.3.3.2. The Uize.Array.Sort.sortBy Method</a></li>
 								</ul>
 							</li>
@@ -84,10 +84,10 @@
 			</li>
 			<li><a href="#4" title="A Value Conformer is code (specified as a Value Conformer Function) that transforms a value so that it conforms to certain criteria.">4. Value Conformer</a>
 				<ul>
-					<li><a href="#4_1" title="Value conformers can have a variety of different uses - they can be used as conformers for set-get properties, or they can be supplied to map functions (such as Uize.Data.map).">4.1. Applications of Value Conformers</a></li>
+					<li><a href="#4_1" title="Value conformers can have a variety of different uses - they can be used as conformers for set-get properties, or they can be supplied to map functions (such as Uize.map).">4.1. Applications of Value Conformers</a></li>
 					<li><a href="#4_2" title="A Value Conformer Function is a Value Conformer specified in the form of a function.">4.2. Value Conformer Function</a>
 						<ul>
-							<li><a href="#4_2_1" title="A Value Conformer Function can be supplied as a parameter to any method that supports a Value Transformer Function, such as the Uize.Data.map static method of the Uize.Data module. Consider the following example...">4.2.1. Using a Value Conformer Function</a>
+							<li><a href="#4_2_1" title="A Value Conformer Function can be supplied as a parameter to any method that supports a Value Transformer Function, such as the Uize.map static method. Consider the following example...">4.2.1. Using a Value Conformer Function</a>
 								<ul>
 									<li><a href="#4_2_1_1" title="A Value Conformer Function can be specified for the conformer property in the profile of a set-get property. Consider the following example...">4.2.1.1. Conformers for Set-get Properties</a></li>
 								</ul>
@@ -145,7 +145,7 @@
 			<a name="2_1_1"></a>
 			<h3 class="heading3" title="2. Value Transformer -&gt; 2.1. Value Transformer Function -&gt; 2.1.1. Using a Value Transformer Function"><span class="headingNumber"><a href="#2" title="2. Value Transformer">2</a>.<a href="#2_1" title="2. Value Transformer -&gt; 2.1. Value Transformer Function">1</a>.<a href="#2_1_1" title="2. Value Transformer -&gt; 2.1. Value Transformer Function -&gt; 2.1.1. Using a Value Transformer Function">1</a>. </span>Using a Value Transformer Function</h3>
 			<div class="contents3">
-				<p>A <a href="#2_1">Value Transformer Function</a> can be supplied as a parameter to any method that supports a Value Transformer Function, such as the <code>Uize.Data.map</code> static method of the <code><a href="../reference/Uize.Data.html">Uize.Data</a></code> module. Consider the following example...</p>
+				<p>A <a href="#2_1">Value Transformer Function</a> can be supplied as a parameter to any method that supports a Value Transformer Function, such as the <code>Uize.map</code> static method. Consider the following example...</p>
 				
 				<p><span class="allCaps">EXAMPLE</span></p>
 				
@@ -154,10 +154,10 @@
   return value * value * value;
 }
 
-var myValuesCubed = Uize.Data.map (cubed,myValues);
+var myValuesCubed = Uize.map (myValues,cubed);
 </pre>
 				
-				<p>The <code>Uize.Data.map</code> method accepts a Value and Key Transformer for its first parameter and a source array as its second. It iterates through all the elements of the source array, calling the Value and Key Transformer for each element. With the transformed element values returned by the Value and Key Transformer, the method populates a new array.</p>
+				<p>The <code>Uize.map</code> method accepts a Value and Key Transformer for its first parameter and a source array as its second. It iterates through all the elements of the source array, calling the Value and Key Transformer for each element. With the transformed element values returned by the Value and Key Transformer, the method populates a new array.</p>
 				
 				<p>In this example we are supplying a <a href="#2">Value Transformer</a> in place of a Value and Key Transformer (see <a href="#2_3_3">Using a Value Transformer in Place of a Value and Key Transformer</a>), which just means that the additional key / index information for the elements will be ignored. The variable <code>myValuesCubed</code>, in this case, will contain the cubes of all the values in the <code>myValues</code> source array.</p>
 			</div>
@@ -274,9 +274,9 @@ Uize.String.Lines.modify (multiLineStr,limitStringLengthTo100Chars);
 				<p>In such cases, the key that is supplied as the second parameter to the Value Transformer that is only expecting a single parameter will simply be ignored - the transformed value that it returns will only be influenced by the value and not the key.</p>
 				
 				<a name="2_3_3_1"></a>
-				<h4 class="heading4" title="2. Value Transformer -&gt; 2.3. Using Value Transformers -&gt; 2.3.3. Using a Value Transformer in Place of a Value and Key Transformer -&gt; 2.3.3.1. The Uize.Data.map Method"><span class="headingNumber"><a href="#2" title="2. Value Transformer">2</a>.<a href="#2_3" title="2. Value Transformer -&gt; 2.3. Using Value Transformers">3</a>.<a href="#2_3_3" title="2. Value Transformer -&gt; 2.3. Using Value Transformers -&gt; 2.3.3. Using a Value Transformer in Place of a Value and Key Transformer">3</a>.<a href="#2_3_3_1" title="2. Value Transformer -&gt; 2.3. Using Value Transformers -&gt; 2.3.3. Using a Value Transformer in Place of a Value and Key Transformer -&gt; 2.3.3.1. The Uize.Data.map Method">1</a>. </span>The Uize.Data.map Method</h4>
+				<h4 class="heading4" title="2. Value Transformer -&gt; 2.3. Using Value Transformers -&gt; 2.3.3. Using a Value Transformer in Place of a Value and Key Transformer -&gt; 2.3.3.1. The Uize.map Method"><span class="headingNumber"><a href="#2" title="2. Value Transformer">2</a>.<a href="#2_3" title="2. Value Transformer -&gt; 2.3. Using Value Transformers">3</a>.<a href="#2_3_3" title="2. Value Transformer -&gt; 2.3. Using Value Transformers -&gt; 2.3.3. Using a Value Transformer in Place of a Value and Key Transformer">3</a>.<a href="#2_3_3_1" title="2. Value Transformer -&gt; 2.3. Using Value Transformers -&gt; 2.3.3. Using a Value Transformer in Place of a Value and Key Transformer -&gt; 2.3.3.1. The Uize.map Method">1</a>. </span>The Uize.map Method</h4>
 				<div class="contents4">
-					<p>While the <code>Uize.Data.map</code> method of the <code><a href="../reference/Uize.Data.html">Uize.Data</a></code> module expects a Value and Key Transformer, a <a href="#2">Value Transformer</a> can be supplied instead.</p>
+					<p>While the <code>Uize.map</code> method expects a Value and Key Transformer, a <a href="#2">Value Transformer</a> can be supplied instead.</p>
 					
 					<p>To see an example that illustrates this, consult the section <a href="#2_1_1">Using a Value Transformer Function</a>.</p>
 				</div>
@@ -316,11 +316,11 @@ var
     {width:1.4,height:5},
     {width:3,height:4}
   ],
-  rectAreas = Uize.Data.map (computeArea,rects)
+  rectAreas = Uize.map (rects,computeArea)
 ;
 </pre>
 				
-				<p>In the above example, the <code>computeArea</code> function defines a <a href="#2">Value Transformer</a> that transforms an input value that is expected to be an object with <code>width</code> and <code>height</code> properties, into an area value that is computed as the product of the <code>width</code> and <code>height</code> properties. This value transformer is then supplied to the <code>Uize.Data.map</code> method, which is used to produce an array containing the areas computed from the rectangle objects inside the <code>rects</code> array. After the above code has been executed, the statement <code>alert (rectAreas)</code> would display the text "50,7,12" in the alert dialog.</p>
+				<p>In the above example, the <code>computeArea</code> function defines a <a href="#2">Value Transformer</a> that transforms an input value that is expected to be an object with <code>width</code> and <code>height</code> properties, into an area value that is computed as the product of the <code>width</code> and <code>height</code> properties. This value transformer is then supplied to the <code>Uize.map</code> method, which is used to produce an array containing the areas computed from the rectangle objects inside the <code>rects</code> array. After the above code has been executed, the statement <code>alert (rectAreas)</code> would display the text "50,7,12" in the alert dialog.</p>
 			</div>
 		</div>
 	</div>
@@ -464,7 +464,7 @@ myString = Uize.String.Lines.removeMatching (myString,isOnlyWhitespace);
 		<a name="4_1"></a>
 		<h2 class="heading2" title="4. Value Conformer -&gt; 4.1. Applications of Value Conformers"><span class="headingNumber"><a href="#4" title="4. Value Conformer">4</a>.<a href="#4_1" title="4. Value Conformer -&gt; 4.1. Applications of Value Conformers">1</a>. </span>Applications of Value Conformers</h2>
 		<div class="contents2">
-			<p>Value conformers can have a variety of different uses - they can be used as conformers for set-get properties, or they can be supplied to map functions (such as <code>Uize.Data.map</code>).</p>
+			<p>Value conformers can have a variety of different uses - they can be used as conformers for set-get properties, or they can be supplied to map functions (such as <code>Uize.map</code>).</p>
 			
 			<p>Among other things, value conformers can be used to...</p>
 			
@@ -499,15 +499,15 @@ myString = Uize.String.Lines.removeMatching (myString,isOnlyWhitespace);
 			<a name="4_2_1"></a>
 			<h3 class="heading3" title="4. Value Conformer -&gt; 4.2. Value Conformer Function -&gt; 4.2.1. Using a Value Conformer Function"><span class="headingNumber"><a href="#4" title="4. Value Conformer">4</a>.<a href="#4_2" title="4. Value Conformer -&gt; 4.2. Value Conformer Function">2</a>.<a href="#4_2_1" title="4. Value Conformer -&gt; 4.2. Value Conformer Function -&gt; 4.2.1. Using a Value Conformer Function">1</a>. </span>Using a Value Conformer Function</h3>
 			<div class="contents3">
-				<p>A <a href="#4_2">Value Conformer Function</a> can be supplied as a parameter to any method that supports a <a href="#2_1">Value Transformer Function</a>, such as the <code>Uize.Data.map</code> static method of the <code><a href="../reference/Uize.Data.html">Uize.Data</a></code> module. Consider the following example...</p>
+				<p>A <a href="#4_2">Value Conformer Function</a> can be supplied as a parameter to any method that supports a <a href="#2_1">Value Transformer Function</a>, such as the <code>Uize.map</code> static method. Consider the following example...</p>
 				
 				<p><span class="allCaps">EXAMPLE</span></p>
 				
 				
-<pre class="sample-code">Uize.Data.map (Math.round,myNumbersArray,false);
+<pre class="sample-code">Uize.map (myNumbersArray,Math.round,false);
 </pre>
 				
-				<p>In the above example, the <code>Math.round</code> static method of JavaScript's built-in <code><a href="../javascript-reference/Math.html">Math</a></code> object is being used as a value conformer with the <code>Uize.Data.map</code> method in order to conform all the number values in an array to integer values. The third parameter of the <code>Uize.Data.map</code> method specifies the target for the mapped values, where the value <code>false</code> indicates that the values should <b>not</b> be populated into a new array but should replace the values in the source array.</p>
+				<p>In the above example, the <code>Math.round</code> static method of JavaScript's built-in <code><a href="../javascript-reference/Math.html">Math</a></code> object is being used as a value conformer with the <code>Uize.map</code> method in order to conform all the number values in an array to integer values. The third parameter of the <code>Uize.map</code> method specifies the target for the mapped values, where the value <code>false</code> indicates that the values should <b>not</b> be populated into a new array but should replace the values in the source array.</p>
 				
 				<a name="4_2_1_1"></a>
 				<h4 class="heading4" title="4. Value Conformer -&gt; 4.2. Value Conformer Function -&gt; 4.2.1. Using a Value Conformer Function -&gt; 4.2.1.1. Conformers for Set-get Properties"><span class="headingNumber"><a href="#4" title="4. Value Conformer">4</a>.<a href="#4_2" title="4. Value Conformer -&gt; 4.2. Value Conformer Function">2</a>.<a href="#4_2_1" title="4. Value Conformer -&gt; 4.2. Value Conformer Function -&gt; 4.2.1. Using a Value Conformer Function">1</a>.<a href="#4_2_1_1" title="4. Value Conformer -&gt; 4.2. Value Conformer Function -&gt; 4.2.1. Using a Value Conformer Function -&gt; 4.2.1.1. Conformers for Set-get Properties">1</a>. </span>Conformers for Set-get Properties</h4>

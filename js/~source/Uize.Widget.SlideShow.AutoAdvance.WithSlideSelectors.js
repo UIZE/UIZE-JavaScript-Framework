@@ -28,10 +28,7 @@
 
 Uize.module ({
 	name:'Uize.Widget.SlideShow.AutoAdvance.WithSlideSelectors',
-	required:[
-		'Uize.Widget.Options',
-		'Uize.Data'
-	],
+	required:'Uize.Widget.Options',
 	builder:function (_superclass) {
 		/*** Variables for Scruncher Optimization ***/
 
@@ -78,7 +75,7 @@ Uize.module ({
 			_classPrototype._updateOptionsValueAndValues = function () {
 				this.children.options.set ({
 					value:this.get ('slideNo'),
-					values:Uize.Data.map ('key',this.get ('totalSlides'))
+					values:Uize.map (this.get ('totalSlides'),'key')
 				});
 			};
 

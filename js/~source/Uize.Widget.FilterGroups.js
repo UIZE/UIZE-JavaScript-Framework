@@ -38,7 +38,7 @@ Uize.module ({
 				_true = true,
 				_null = null
 			;
-			
+
 		/*** Class Constructor ***/
 			var
 				_class = _superclass.subclass (
@@ -53,7 +53,7 @@ Uize.module ({
 				),
 				_classPrototype = _class.prototype
 			;
-			
+
 		/*** Private Methods ***/
 			_classPrototype._forAll = function(_function) {
 				for (
@@ -63,29 +63,29 @@ Uize.module ({
 					if (_function (_children ['filterGroup' + _valueNo],_valueNo) === false) break;
 				;
 			};
-		
+
 			_classPrototype._updateSelectedFilters = function() {
 				var _this = this;
-				
+
 				if (_this.isWired) {
 					var _selectedFilters = [];
-					
+
 					_this._forAll(
 						function(_filterGroupWidget) {
 							_selectedFilters.push(_filterGroupWidget.valueOf())
 						}
 					);
-					
+
 					if (!Uize.Data.clones(_selectedFilters, _this._previousSelectedFilters)) {
 						_this._previousSelectedFilters = _selectedFilters;
 						_this.set({_value:_selectedFilters});
 					}
 				}
 			};
-			
+
 			_classPrototype._setFilterGroupsSelectedFilter = function() {
 				var _this = this;
-				
+
 				if (_this.isWired) {
 					var
 						_selectedFilters = _this._value,
@@ -96,17 +96,19 @@ Uize.module ({
 					_this._forAll(
 						function(_filterGroupWidget) {
 							var _filterToSet = _null;
-							
+
 							for (var _selectedFilterNo = -1; ++_selectedFilterNo < _selectedFilters.length;) {
 								var _selectedFilter = _selectedFilters[_selectedFilterNo];
-	
-								if (!_selectedFilterLookup[_selectedFilter] && _filterGroupWidget.getValueNoFromValue(_selectedFilter) > -1) {
+								if (
+									!_selectedFilterLookup[_selectedFilter] &&
+									_filterGroupWidget.getValueNoFromValue(_selectedFilter) > -1
+								) {
 									_filterToSet = _selectedFilter;
 									_selectedFilterLookup[_selectedFilter] = _true;
 									break;
 								}
 							}
-							
+
 							_filterGroupWidget.set({value:_filterToSet});
 						}
 					);
@@ -119,7 +121,7 @@ Uize.module ({
 					_this = this,
 					_countsLength = _counts.length
 				;
-				
+
 				if (_this.isWired) {
 					_counts
 						&& _countsLength
@@ -132,16 +134,16 @@ Uize.module ({
 					;
 				}
 			};
-		
+
 			_classPrototype.wireUi = function () {
 				var _this = this;
-				
+
 				if (!_this.isWired) {
 					var
 						_selectedFilters = _this._value,
 						_filterGroupsData = _this._values
 					;
-					
+
 					for (var _filterGroupNo = -1; ++_filterGroupNo < _filterGroupsData.length;)
 						_this.addChild (
 							'filterGroup' + _filterGroupNo,
@@ -154,7 +156,7 @@ Uize.module ({
 					;
 
 					_superclass.prototype.wireUi.call (_this);
-					
+
 					_this._setFilterGroupsSelectedFilter();
 					_this._updateSelectedFilters();
 				}

@@ -131,41 +131,47 @@ Uize.module ({
           );
 
           if (_hasMultiplePages) {
-          function _enable(_pageButtonName, _mustEnable) { _children[_pageButtonName].set({enabled:_mustEnable ? 'inherit' : _mustEnable}) }
-          function _display(_pageButtonName, _mustDisplay) { _children[_pageButtonName].displayNode('', _mustDisplay) }
-            function _setText(_pageButtonName, _text) { _children[_pageButtonName].set({text:_text}) }
+            function _enable(_pageButtonName, _mustEnable) {
+              _children[_pageButtonName].set({enabled:_mustEnable ? 'inherit' : _mustEnable})
+            }
+            function _display(_pageButtonName, _mustDisplay) {
+              _children[_pageButtonName].displayNode('', _mustDisplay)
+            }
+            function _setText(_pageButtonName, _text) {
+              _children[_pageButtonName].set({text:_text})
+            }
 
-          _enable('prev', _value &gt; 1);
-          _enable('next', _value &lt; _maxPages);
+            _enable('prev', _value &gt; 1);
+            _enable('next', _value &lt; _maxPages);
 
-          _display('first', _value &gt; 1);
-          _display('last', _value &lt; _maxPages);
+            _display('first', _value &gt; 1);
+            _display('last', _value &lt; _maxPages);
             _setText('last', _maxPages);
 
-          var _pagesStart = _this._calculatePagesStart();
+            var _pagesStart = _this._calculatePagesStart();
 
             _this.displayNode('less', _pagesStart &gt; (1 + _this._showFirstPage));
             _this.displayNode('more', (_pagesStart + _this._numPagesToShow) &lt; (_maxPages - _this._showLastPage));
 
-          for (var _pageNo = -1; ++_pageNo &lt; _this._numPagesToShow;) {
-            var
-              _pageName = 'page' + _pageNo,
+            for (var _pageNo = -1; ++_pageNo &lt; _this._numPagesToShow;) {
+              var
+                _pageName = 'page' + _pageNo,
                 _pageLinkNode = _children[_pageName].getNode(),
-              _pageNumber = _pagesStart + _pageNo,
-              _isCurrentPage = _pageNumber == _value
-            ;
+                _pageNumber = _pagesStart + _pageNo,
+                _isCurrentPage = _pageNumber == _value
+              ;
 
               _setText(
                 _pageName,
-              _isCurrentPage
-                ? _this.localize('selectedPage', {page:_pageNumber}) || _pageNumber
-                : _pageNumber
-            );
-            //_enable(_pageName, _pageNumber != _value);
-            _display(_pageName, _pageNumber == _value || _pageNumber &lt;= (_maxPages - _this._showLastPage));
+                _isCurrentPage
+                  ? _this.localize('selectedPage', {page:_pageNumber}) || _pageNumber
+                  : _pageNumber
+              );
+              //_enable(_pageName, _pageNumber != _value);
+              _display(_pageName, _pageNumber == _value || _pageNumber &lt;= (_maxPages - _this._showLastPage));
               Uize.Node.Classes.setState(_pageLinkNode, _this._classSelected, _isCurrentPage);
+            }
           }
-              }
         }
       };
 

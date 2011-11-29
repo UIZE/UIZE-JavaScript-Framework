@@ -116,14 +116,11 @@ Uize.module ({
 				var _this = this;
 				if (!_this.isWired) {
 					_superclass.prototype.wireUi.call (_this);
-
-					var _valueNo = _this.get ('valueNo');
-
-					_this._lastShownTabBodyNo = _valueNo;
-
-					for (var _tabNo = 0; _tabNo < _this.get('values').length; _tabNo++)
-						_this._updateTabBodyClass(_tabNo, _valueNo)
-					;
+					var _valueNo = _this._lastShownTabBodyNo = _this.get ('valueNo');
+					Uize.forEach (
+						_this.get ('values'),
+						function (_value,_tabNo) {_this._updateTabBodyClass (_tabNo, _valueNo)}
+					);
 				}
 			};
 

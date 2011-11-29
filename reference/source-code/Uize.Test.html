@@ -1246,15 +1246,8 @@ Uize.module ({
       };
 
       _classPrototype.stop = function () {
-        var
-          _this = this,
-          _subtests = _this._test
-        ;
-        if (Uize.isArray (_subtests)) {
-          for (var _subtestNo = -1, _subtestsLength = _subtests.length; ++_subtestNo &lt; _subtestsLength;)
-            _subtests [_subtestNo].stop ()
-          ;
-        }
+        var _this = this;
+        Uize.isArray (_this._test) &amp;&amp; Uize.callOn (_this._test,'stop');
         _this.set ({_inProgress:false});
         /*?
           Instance Methods
@@ -1858,19 +1851,20 @@ Uize.module ({
         };
 
         _class.staticMethodsTest = function (_staticMethodsTest) {
-          var _test = [];
-          for (
-            var _staticMethodTestNo = -1, _staticMethodsTestLength = _staticMethodsTest.length;
-            ++_staticMethodTestNo &lt; _staticMethodsTestLength;
-          ) {
-            var _staticMethodTest = _staticMethodsTest [_staticMethodTestNo];
-            _test.push (
-              Uize.isArray (_staticMethodTest)
-                ? this.staticMethodTest.apply (this,_staticMethodTest)
-                : _staticMethodTest
-            );
-          }
-          return this.declare ({title:'Static Method Tests',test:_test});
+          var _this = this;
+          return _this.declare ({
+            title:'Static Method Tests',
+            test:Uize.map (
+              _staticMethodsTest,
+              function (_staticMethodTest) {
+                return (
+                  Uize.isArray (_staticMethodTest)
+                    ? _this.staticMethodTest.apply (_this,_staticMethodTest)
+                    : _staticMethodTest
+                );
+              }
+            )
+          });
           /*?
             Static Methods
               Uize.Test.staticMethodsTest
@@ -2039,14 +2033,14 @@ Uize.module ({
         };
 
         _class.testSuite = function (_testSuiteTitle,_testSuiteModules) {
-          var _test = [];
-          for (
-            var _testSuiteModuleNo = -1, _testSuiteModulesLength = _testSuiteModules.length;
-            ++_testSuiteModuleNo &lt; _testSuiteModulesLength;
-          )
-            _test.push (this.testModuleTest (_testSuiteModules [_testSuiteModuleNo]))
-          ;
-          return this.declare ({title:_testSuiteTitle,test:_test});
+          var _this = this;
+          return _this.declare ({
+            title:_testSuiteTitle,
+            test:Uize.map (
+              _testSuiteModules,
+              function (_testSuiteModule) {return _this.testModuleTest (_testSuiteModule)}
+            )
+          });
           /*?
             Static Methods
               Uize.Test.testSuite
@@ -2213,21 +2207,18 @@ Uize.module ({
           name:'test',
           conformer:function (_value) {
             if (Uize.isArray (_value)) {
-              var _subtests = _value;
-              _value = [];
-              for (var _subtestNo = -1, _subtestsLength = _subtests.length; ++_subtestNo &lt; _subtestsLength;)
-                _value.push (new _subtests [_subtestNo] ({parent:this}))
-                /*?
-                  Instance Properties
-                    parent
-                      A reference to the =Uize.Test= instance that serves as the parent for the test instance.
+              var _this = this;
+              _value = Uize.map (_value,function (_subtest) {return new _subtest ({parent:_this})});
+              /*?
+                Instance Properties
+                  parent
+                    A reference to the =Uize.Test= instance that serves as the parent for the test instance.
 
-                      A test instance is parented when it is instantiated by its parent test. The root test in a test tree is never parented, and so the value of the =parent= property for the root test remains =undefined=.
+                    A test instance is parented when it is instantiated by its parent test. The root test in a test tree is never parented, and so the value of the =parent= property for the root test remains =undefined=.
 
-                      NOTES
-                      - the initial value is =undefined=
-                */
-              ;
+                    NOTES
+                    - the initial value is =undefined=
+              */
             }
             return _value;
           }

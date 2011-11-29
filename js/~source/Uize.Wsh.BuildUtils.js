@@ -216,12 +216,7 @@ Uize.module ({
 											if (_requiredMatch [4]) {
 												var _required = [];
 												try {_required = eval ('(' + _requiredMatch [4] + ')')} catch (_error) {}
-												for (
-													var _requireNo = -1, _requiredLength = _required.length;
-													++_requireNo < _requiredLength;
-												)
-													_addModuleAndDependencies (_required [_requireNo])
-												;
+												Uize.forEach (_required,_addModuleAndDependencies);
 											} else {
 												_addModuleAndDependencies (_requiredMatch [3]);
 											}
@@ -232,34 +227,35 @@ Uize.module ({
 							}
 						}
 					}
-					for (var _moduleNo = -1, _modulesLength = _modules.length, _moduleName; ++_moduleNo < _modulesLength;)
-						_testModuleRegExp.test (_moduleName = _modules [_moduleNo]) || // ignore, if module is a test module
-							_addModuleAndDependencies (_moduleName)
+					Uize.forEach (
+						_modules,
+						function (_moduleName) { // ignore test modules
+							_testModuleRegExp.test (_moduleName) || _addModuleAndDependencies (_moduleName);
+						}
+					);
+
+				/*** build unit test suite ***/
+					var
+						_correspondingTestModuleName,
+						_unitTestSuite = Uize.Test.declare ({
+							title:'Unit Tests Suite',
+							test:Uize.map (
+								_modulesInDependencyOrder,
+								function (_moduleName) {
+									return (
+										_modulesLookup [
+											_correspondingTestModuleName =
+												_moduleName.match (/([^\.]*)(\.|$)/) [1] + '.Test.' + _moduleName
+										]
+											? Uize.Test.testModuleTest (_correspondingTestModuleName)
+											: Uize.Test.requiredModulesTest (_moduleName)
+									);
+								}
+							)
+						})
 					;
 
-				/*** build test suite ***/
-					var _test = [];
-					for (
-						var
-							_moduleNo = -1,
-							_modulesLength = (_modules = _modulesInDependencyOrder).length,
-							_moduleName,
-							_correspondingTestModuleName
-						;
-						++_moduleNo < _modulesLength;
-					) {
-						_moduleName = _modules [_moduleNo];
-						_test.push (
-							_modulesLookup [
-								_correspondingTestModuleName =
-									_moduleName.match (/([^\.]*)(\.|$)/) [1] + '.Test.' + _moduleName
-							]
-								? Uize.Test.testModuleTest (_correspondingTestModuleName)
-								: Uize.Test.requiredModulesTest (_moduleName)
-						);
-					}
-
-				_package.runUnitTests (Uize.Test.declare ({title:'Unit Tests Suite',test:_test}));
+				_package.runUnitTests (_unitTestSuite);
 			};
 
 			_package.runUnitTests = function (_unitTestsClass) {

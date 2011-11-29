@@ -68,47 +68,28 @@
 					</li>
 					<li><a href="#2_13" title="Returns an object that represents the key-value intersection / commonality between the two specified objects.">2.13. Uize.Data.intersection</a></li>
 					<li><a href="#2_14" title="IMPLEMENTATION INFO">2.14. Uize.Data.isEmpty</a></li>
-					<li><a href="#2_15" title="Iterates through the specified array (or object), executing the specified mapper expression or function for each element (or object property), and packages the results into an array (or object).">2.15. Uize.Data.map</a>
-						<ul>
-							<li><a href="#2_15_1" title="The Uize.Data.map static method provides some key improvements over the Array object&apos;s map method in JavaScript 1.6 (which is not supported in all browsers)...">2.15.1. Key Benefits</a></li>
-							<li><a href="#2_15_2">2.15.2. Parameters</a>
-								<ul>
-									<li><a href="#2_15_2_1" title="Lets you specify a mapper expression or function, for mapping the value of the current element of the source array or the current property of the source object to a new value.">2.15.2.1. mapperSTRorFUNC</a></li>
-									<li><a href="#2_15_2_2" title="Lets you specify the source array or object, or the length of a fresh array, with which the Uize.Data.map method should map new values.">2.15.2.2. sourceARRAYorOBJorINT</a></li>
-									<li><a href="#2_15_2_3" title="Lets you specify where the result of the mapper should be packaged.">2.15.2.3. targetARRAYorOBJorBOOL</a></li>
-								</ul>
-							</li>
-							<li><a href="#2_15_3" title="Following are a bunch of examples, demonstrating just a sampling of what&apos;s possible using the Uize.Data.map method...">2.15.3. More Examples</a>
-								<ul>
-									<li><a href="#2_15_3_1" title="Uize.Data.map (&apos;+value&apos;,array,false);&#10;">2.15.3.1. Coerce all elements of an array to being numbers, modifying the source array...</a></li>
-									<li><a href="#2_15_3_2" title="Uize.Data.map (&apos;value + &quot;&quot;&apos;,array,false);&#10;">2.15.3.2. Coerce all elements of an array to being strings, modifying the source array...</a></li>
-									<li><a href="#2_15_3_3" title="Uize.Data.map (&apos;value || &quot;--- no answer provided ---&quot;&apos;,surveyQuestions,false);&#10;">2.15.3.3. Default all empty string properties of an object to some value, modifying the source object...</a></li>
-									<li><a href="#2_15_3_4" title="var uppercased = Uize.Data.map (&apos;value.toUpperCase ()&apos;,array);&#10;">2.15.3.4. Return an array of all the elements in the source array uppercased...</a></li>
-									<li><a href="#2_15_3_5" title="Uize.Data.map (&apos;&quot;prefix_&quot; + value&apos;,array,false);&#10;">2.15.3.5. Add a prefix to all the string elements of an array, modifying the source array...</a></li>
-									<li><a href="#2_15_3_6" title="var copyOfFoo = Uize.Data.map (&apos;value&apos;,foo);&#10;">2.15.3.6. Create a cheap (ie. not deep) copy of an object...</a></li>
-									<li><a href="#2_15_3_7" title="var range0to99 = Uize.Data.map (&apos;key&apos;,100);&#10;">2.15.3.7. Seed an array of 100 elements with the value range 0 to 99...</a></li>
-									<li><a href="#2_15_3_8" title="var range1to100 = Uize.Data.map (&apos;key + 1&apos;,100);&#10;">2.15.3.8. Seed an array of 100 elements with the value range 1 to 100...</a></li>
-									<li><a href="#2_15_3_9" title="var squaresOf0to99 = Uize.Data.map (&apos;Math.sqrt (key)&apos;,100);&#10;">2.15.3.9. Create an array of the square roots of 0 to 99...</a></li>
-									<li><a href="#2_15_3_10" title="var squaresOfArray = Uize.Data.map (Math.sqrt,array);&#10;">2.15.3.10. Create an array of the square roots of the values in the source array...</a></li>
-									<li><a href="#2_15_3_11" title="var capLetters = Uize.Data.map (&apos;String.fromCharCode (65 + key)&apos;,26);&#10;">2.15.3.11. Create an array of all the capital letters of the alphabet...</a></li>
-									<li><a href="#2_15_3_12" title="var powersOf2 = Uize.Data.map (&apos;Math.pow (2,key)&apos;,10);&#10;">2.15.3.12. Create a fresh array of 10 elements that are the first ten powers of 2...</a></li>
-									<li><a href="#2_15_3_13" title="var fibonacci = Uize.Data.map (&apos;key &gt; 1 ? this [key - 2] + this [key - 1] : key&apos;,30);&#10;">2.15.3.13. Creates an array of the first 30 numbers in the Fibonacci series...</a></li>
-									<li><a href="#2_15_3_14" title="var smoothed = Uize.Data.map (&#10;	&apos;key &amp;&amp; key &lt; this.length - 1 ? (this [key-1] + value + this [key+1]) / 3 : value&apos;,&#10;	array&#10;);&#10;">2.15.3.14. Smooth an array of values by averaging against adjacent neighbors...</a></li>
-									<li><a href="#2_15_3_15" title="Uize.Data.map (&apos;console.log (value)&apos;,logArray);&#10;">2.15.3.15. Output elements of a log array to the `Firebug` console on separate lines...</a></li>
-									<li><a href="#2_15_3_16" title="Uize.Data.map (&apos;console.log (key + &quot;: &quot; + value)&apos;,logArray);&#10;">2.15.3.16. Output elements of a log array to the `Firebug` console on separate lines, with line numbers...</a></li>
-									<li><a href="#2_15_3_17" title="var coordsStyleProperties = Uize.Data.map (&apos;value + &quot;px&quot;&apos;,coords);&#10;&#10;// EXAMPLE&#10;// this... {left:0,top:50,width:100,height:175}&#10;// produces this... {left:&apos;0px&apos;,top:&apos;50px&apos;,width:&apos;100px&apos;,height:&apos;175px&apos;}&#10;">2.15.3.17. Gets a style properties object from a pure number coords object...</a></li>
-									<li><a href="#2_15_3_18" title="var maxStringLength = Uize.max (Uize.Data.map (&apos;value.length&apos;,stringsArray));&#10;">2.15.3.18. Gets the length of the longest string in an array of strings....</a></li>
-								</ul>
-							</li>
-						</ul>
-					</li>
+					<li><a href="#2_15" title="IMPLEMENTATION INFO">2.15. Uize.Data.map</a></li>
 					<li><a href="#2_16" title="IMPLEMENTATION INFO">2.16. Uize.Data.max</a></li>
 					<li><a href="#2_17" title="IMPLEMENTATION INFO">2.17. Uize.Data.min</a></li>
 				</ul>
 			</li>
-			<li><a href="#3">3. Static Properties</a>
+			<li><a href="#3">3. Deprecated Features</a>
 				<ul>
-					<li><a href="#3_1" title="IMPLEMENTATION INFO">3.1. Uize.Data.moduleName</a></li>
+					<li><a href="#3_1" title="The Uize.Data.emptyOut static method has been deprecated in favor of the newly added Uize.emptyOut static method of the Uize base module.">3.1. Uize.Data.emptyOut -- DEPRECATED 2011-11-13</a></li>
+					<li><a href="#3_2" title="The Uize.Data.getKeys static method has been deprecated in favor of the newly added Uize.keys static method of the Uize base module.">3.2. Uize.Data.getKeys -- DEPRECATED 2011-11-13</a></li>
+					<li><a href="#3_3" title="The Uize.Data.getLookup static method has been deprecated in favor of the newly added Uize.lookup static method of the Uize base module.">3.3. Uize.Data.getLookup -- DEPRECATED 2011-11-13</a></li>
+					<li><a href="#3_4" title="The Uize.Data.getReverseLookup static method has been deprecated in favor of the newly added Uize.reverseLookup static method of the Uize base module.">3.4. Uize.Data.getReverseLookup -- DEPRECATED 2011-11-13</a></li>
+					<li><a href="#3_5" title="The Uize.Data.getTotalKeys static method has been deprecated in favor of the newly added Uize.totalKeys static method of the Uize base module.">3.5. Uize.Data.getTotalKeys -- DEPRECATED 2011-11-13</a></li>
+					<li><a href="#3_6" title="The Uize.Data.getValues static method has been deprecated in favor of the newly added Uize.values static method of the Uize base module.">3.6. Uize.Data.getValues -- DEPRECATED 2011-11-13</a></li>
+					<li><a href="#3_7" title="The Uize.Data.isEmpty static method has been deprecated in favor of the newly added Uize.isEmpty static method of the Uize base module.">3.7. Uize.Data.isEmpty -- DEPRECATED 2011-11-13</a></li>
+					<li><a href="#3_8" title="The Uize.Data.map static method has been deprecated in favor of the newly added Uize.map static method of the Uize base module.">3.8. Uize.Data.map -- DEPRECATED 2011-11-27</a></li>
+					<li><a href="#3_9" title="The Uize.Data.max static method has been deprecated in favor of the newly added Uize.max static method of the Uize base module.">3.9. Uize.Data.max -- DEPRECATED 2011-11-13</a></li>
+					<li><a href="#3_10" title="The Uize.Data.min static method has been deprecated in favor of the newly added Uize.min static method of the Uize base module.">3.10. Uize.Data.min -- DEPRECATED 2011-11-13</a></li>
+				</ul>
+			</li>
+			<li><a href="#4">4. Static Properties</a>
+				<ul>
+					<li><a href="#4_1" title="IMPLEMENTATION INFO">4.1. Uize.Data.moduleName</a></li>
 				</ul>
 			</li>
 		</ul>
@@ -152,7 +133,7 @@
 				
 				<p><span class="allCaps">STATIC PROPERTIES</span></p>
 				
-				<p><code><a href="#3_1">Uize.Data.moduleName</a></code></p>
+				<p><code><a href="#4_1">Uize.Data.moduleName</a></code></p>
 			</div>
 			
 			<a name="1_2_2"></a>
@@ -618,295 +599,6 @@ Uize.Node.setStyle (
 		<a name="2_15"></a>
 		<h2 class="heading2" title="2. Static Methods -&gt; 2.15. Uize.Data.map"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_15" title="2. Static Methods -&gt; 2.15. Uize.Data.map">15</a>. </span>Uize.Data.map</h2>
 		<div class="contents2">
-			<p>Iterates through the specified array (or object), executing the specified mapper expression or function for each element (or object property), and packages the results into an array (or object).</p>
-			
-			<p><span class="allCaps">SYNTAX</span></p>
-			
-			
-<pre class="sample-code">mappedARRAYorOBJ = Uize.Data.map (mapperSTRorFUNC,sourceARRAYorOBJorINT);
-</pre>
-			
-			<p>The <code><a href="#2_15">Uize.Data.map</a></code> method is very vertatile and can be used to accomplish a wide array of different tasks. Sure, you could do all the things you could do with <code><a href="#2_15">Uize.Data.map</a></code> by writing your own loops. This method serves as a convenience, making certain operations more concise in application code.</p>
-			
-			<p>The example below - which takes a source array of strings and produces a new array of those strings uppercased - illustrates the difference between writing your own iterator and using the <code><a href="#2_15">Uize.Data.map</a></code> method.</p>
-			
-			<p><span class="allCaps">INSTEAD OF...</span></p>
-			
-			
-<pre class="sample-code">var newArray = [];
-for (var elementNo = -1; ++elementNo &lt; sourceArray.length;) {
-  newArray.push (sourceArray [elementNo].toUpperCase ());
-}
-</pre>
-			
-			<p><span class="allCaps">USE...</span></p>
-			
-			
-<pre class="sample-code">var newArray = Uize.Data.map ('value.toUpperCase ()',sourceArray);
-</pre>
-			
-			<p><span class="allCaps">OR USING A FUNCTION...</span></p>
-			
-			
-<pre class="sample-code">var newArray = Uize.Data.map (
-  function (value) {return value.toUpperCase ()},sourceArray
-);
-</pre>
-			
-			<p>Another example below - which generates an array seeded with the values 0 to 99 - further illustrates the convenience of the <code><a href="#2_15">Uize.Data.map</a></code> method...</p>
-			
-			<p><span class="allCaps">INSTEAD OF...</span></p>
-			
-			
-<pre class="sample-code">var newArray = [];
-for (var elementNo = -1; ++elementNo &lt; 100;) {
-  newArray.push (elementNo);
-}
-</pre>
-			
-			<p><span class="allCaps">USE...</span></p>
-			
-			
-<pre class="sample-code">var newArray = Uize.Data.map ('key',100);
-</pre>
-			
-			<p><span class="allCaps">OR USING A FUNCTION...</span></p>
-			
-			
-<pre class="sample-code">var newArray = Uize.Data.map (function (value,key) {return key},100);
-</pre>
-			
-			<a name="2_15_1"></a>
-			<h3 class="heading3" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.1. Key Benefits"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_15" title="2. Static Methods -&gt; 2.15. Uize.Data.map">15</a>.<a href="#2_15_1" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.1. Key Benefits">1</a>. </span>Key Benefits</h3>
-			<div class="contents3">
-				<p>The <code><a href="#2_15">Uize.Data.map</a></code> static method provides some key improvements over the <code><a href="../javascript-reference/Array.html">Array</a></code> object's map method in JavaScript 1.6 (which is not supported in all browsers)...</p>
-				
-				<table class="list">
-				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>can operate on objects as well as arrays</td></tr>
-				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>supports a more concise mapper expression string, as well as supporting a function</td></tr>
-				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>can optionally modify the source array or object</td></tr>
-				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>allows easy creation of a fresh source array for mapping, by specifying an array length</td></tr>
-				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>lets you specify an explicit target, where mapped values should be written</td></tr>
-				</table>
-			</div>
-			
-			<p><span class="allCaps">VARIATION</span></p>
-			
-			
-<pre class="sample-code">mappedARRAYorOBJ = Uize.Data.map (
-  mapperSTRorFUNC,
-  sourceARRAYorOBJorINT,
-  targetARRAYorOBJorBOOL
-);
-</pre>
-			
-			<p>By default, the <code><a href="#2_15">Uize.Data.map</a></code> method maps values of the source array or object and packages the result into a new array or object. Specifying the optional <code><a href="#2_15_2_3">targetARRAYorOBJorBOOL</a></code> parameter allows you to explicitly specify a target for the operation, into which the mapped values will be packaged.</p>
-			
-			<a name="2_15_2"></a>
-			<h3 class="heading3" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.2. Parameters"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_15" title="2. Static Methods -&gt; 2.15. Uize.Data.map">15</a>.<a href="#2_15_2" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.2. Parameters">2</a>. </span>Parameters</h3>
-			<div class="contents3">
-				<a name="2_15_2_1"></a>
-				<h4 class="heading4" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.2. Parameters -&gt; 2.15.2.1. mapperSTRorFUNC"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_15" title="2. Static Methods -&gt; 2.15. Uize.Data.map">15</a>.<a href="#2_15_2" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.2. Parameters">2</a>.<a href="#2_15_2_1" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.2. Parameters -&gt; 2.15.2.1. mapperSTRorFUNC">1</a>. </span>mapperSTRorFUNC</h4>
-				<div class="contents4">
-					<p>Lets you specify a mapper expression or function, for mapping the value of the current element of the source array or the current property of the source object to a new value.</p>
-					
-					<p><span class="allCaps">VALUES</span></p>
-					
-					<table class="list">
-					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>When a <b>string</b> value is specified, then the JavaScript expression specified in the string will be compiled to a mapper function that will then be used for each iteration. An expression specified for this parameter must be a complete JavaScript expression (it may not be arbitrary, multi-statement chunks of code) following the same requirements of any expression that you might place on the right-hand side of an assignment statement. Within the context of your expression, the identifiers <code>this</code>, <code>key</code>, and <code>value</code> are defined, where <code>this</code> is a reference to the source array or object, <code>key</code> is the index of the current element of the source array or the name of the current property of the source object, and where <code>value</code> is the value of the current element of the source array or the current property of the source object.</td></tr>
-					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>When a <b>function</b> reference is specified, then the specified function will be called during each iteration. The function you specify should expect to receive two parameters: <code>value</code> and <code>key</code>. If you don't care about the key, then you can omit the second parameter and only have one parameter declared in your function's argument list. The mapper function is called as an instance method on the source array or object, so the <code>this</code> keyword can be used to access the source array or object for querying the values of other elements or properties.</td></tr>
-					</table>
-				</div>
-				
-				<a name="2_15_2_2"></a>
-				<h4 class="heading4" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.2. Parameters -&gt; 2.15.2.2. sourceARRAYorOBJorINT"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_15" title="2. Static Methods -&gt; 2.15. Uize.Data.map">15</a>.<a href="#2_15_2" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.2. Parameters">2</a>.<a href="#2_15_2_2" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.2. Parameters -&gt; 2.15.2.2. sourceARRAYorOBJorINT">2</a>. </span>sourceARRAYorOBJorINT</h4>
-				<div class="contents4">
-					<p>Lets you specify the source array or object, or the length of a fresh array, with which the <code><a href="#2_15">Uize.Data.map</a></code> method should map new values.</p>
-					
-					<p><span class="allCaps">VALUES</span></p>
-					
-					<table class="list">
-					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>When an <b>array</b> is specified, then the <code><a href="#2_15">Uize.Data.map</a></code> method will iterate through the elements of the array.</td></tr>
-					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>When an <b>object</b> is specified, then the <code><a href="#2_15">Uize.Data.map</a></code> method will iterate through the properties of the object.</td></tr>
-					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>When a <b>positive integer</b> is specified, then the <code><a href="#2_15">Uize.Data.map</a></code> method will create a fresh array of the length specified by this parameter and then iterate through that array. This is a convenient facility for seeding arrays of some desired length with automatically generated values.</td></tr>
-					</table>
-				</div>
-				
-				<a name="2_15_2_3"></a>
-				<h4 class="heading4" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.2. Parameters -&gt; 2.15.2.3. targetARRAYorOBJorBOOL"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_15" title="2. Static Methods -&gt; 2.15. Uize.Data.map">15</a>.<a href="#2_15_2" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.2. Parameters">2</a>.<a href="#2_15_2_3" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.2. Parameters -&gt; 2.15.2.3. targetARRAYorOBJorBOOL">3</a>. </span>targetARRAYorOBJorBOOL</h4>
-				<div class="contents4">
-					<p>Lets you specify where the result of the mapper should be packaged.</p>
-					
-					<p>You can provide your own target array or object, you can specify to use the source array or object, or you can specify that the result should not be packaged (ie. discarded).</p>
-					
-					<p><span class="allCaps">VALUES</span></p>
-					
-					<table class="list">
-					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>true</code> - When the <b>boolean</b> value <code>true</code> is specified (the default value for the <code><a href="#2_15_2_3">targetARRAYorOBJorBOOL</a></code> parameter if it is omitted), then the <code><a href="#2_15">Uize.Data.map</a></code> method will package the result from the mapper into a new array or object.</td></tr>
-					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>false</code> - When the <b>boolean</b> value <code>false</code> is specified (not the same as not specifying a value), then the <code><a href="#2_15">Uize.Data.map</a></code> method will package the result from the mapper into the source array or object specified by the <code><a href="#2_15_2_2">sourceARRAYorOBJorINT</a></code> parameter (ie. won't use a different target).</td></tr>
-					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>null</code> - When the special value <code>null</code> is specified (not the same as not specifying a value), then the <code><a href="#2_15">Uize.Data.map</a></code> method will not package the result from the mapper into an array or object. This is useful if you just want to use this method as an iterator, without the memory expense of building an array or object.</td></tr>
-					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><b>object or array</b> - When an <b>object</b> or <b>array</b> is explicitly specified, then the <code><a href="#2_15">Uize.Data.map</a></code> method will package the result from the mapper into that array or object. This is convenient if you already have an array or object into which you wish to package the mapped values, or if you want to repeatedly map multiple source arrays or objects into a common array or object so that the mapped values are merged together. Incidentally, specifying the array or object value of the <code><a href="#2_15_2_2">sourceARRAYorOBJorINT</a></code> parameter as the value for the <code><a href="#2_15_2_3">targetARRAYorOBJorBOOL</a></code> parameter has the same effect as specifying the value <code>false</code> for this parameter (ie. use the source as the target, don't use a different target).</td></tr>
-					</table>
-				</div>
-			</div>
-			
-			<a name="2_15_3"></a>
-			<h3 class="heading3" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_15" title="2. Static Methods -&gt; 2.15. Uize.Data.map">15</a>.<a href="#2_15_3" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples">3</a>. </span>More Examples</h3>
-			<div class="contents3">
-				<p>Following are a bunch of examples, demonstrating just a sampling of what's possible using the <code><a href="#2_15">Uize.Data.map</a></code> method...</p>
-				
-				<a name="2_15_3_1"></a>
-				<h4 class="heading4" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.1. Coerce all elements of an array to being numbers, modifying the source array..."><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_15" title="2. Static Methods -&gt; 2.15. Uize.Data.map">15</a>.<a href="#2_15_3" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples">3</a>.<a href="#2_15_3_1" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.1. Coerce all elements of an array to being numbers, modifying the source array...">1</a>. </span>Coerce all elements of an array to being numbers, modifying the source array...</h4>
-				<div class="contents4">
-					
-<pre class="sample-code">Uize.Data.map ('+value',array,false);
-</pre>
-				</div>
-				
-				<a name="2_15_3_2"></a>
-				<h4 class="heading4" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.2. Coerce all elements of an array to being strings, modifying the source array..."><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_15" title="2. Static Methods -&gt; 2.15. Uize.Data.map">15</a>.<a href="#2_15_3" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples">3</a>.<a href="#2_15_3_2" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.2. Coerce all elements of an array to being strings, modifying the source array...">2</a>. </span>Coerce all elements of an array to being strings, modifying the source array...</h4>
-				<div class="contents4">
-					
-<pre class="sample-code">Uize.Data.map ('value + ""',array,false);
-</pre>
-				</div>
-				
-				<a name="2_15_3_3"></a>
-				<h4 class="heading4" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.3. Default all empty string properties of an object to some value, modifying the source object..."><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_15" title="2. Static Methods -&gt; 2.15. Uize.Data.map">15</a>.<a href="#2_15_3" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples">3</a>.<a href="#2_15_3_3" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.3. Default all empty string properties of an object to some value, modifying the source object...">3</a>. </span>Default all empty string properties of an object to some value, modifying the source object...</h4>
-				<div class="contents4">
-					
-<pre class="sample-code">Uize.Data.map ('value || "--- no answer provided ---"',surveyQuestions,false);
-</pre>
-				</div>
-				
-				<a name="2_15_3_4"></a>
-				<h4 class="heading4" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.4. Return an array of all the elements in the source array uppercased..."><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_15" title="2. Static Methods -&gt; 2.15. Uize.Data.map">15</a>.<a href="#2_15_3" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples">3</a>.<a href="#2_15_3_4" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.4. Return an array of all the elements in the source array uppercased...">4</a>. </span>Return an array of all the elements in the source array uppercased...</h4>
-				<div class="contents4">
-					
-<pre class="sample-code">var uppercased = Uize.Data.map ('value.toUpperCase ()',array);
-</pre>
-				</div>
-				
-				<a name="2_15_3_5"></a>
-				<h4 class="heading4" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.5. Add a prefix to all the string elements of an array, modifying the source array..."><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_15" title="2. Static Methods -&gt; 2.15. Uize.Data.map">15</a>.<a href="#2_15_3" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples">3</a>.<a href="#2_15_3_5" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.5. Add a prefix to all the string elements of an array, modifying the source array...">5</a>. </span>Add a prefix to all the string elements of an array, modifying the source array...</h4>
-				<div class="contents4">
-					
-<pre class="sample-code">Uize.Data.map ('"prefix_" + value',array,false);
-</pre>
-				</div>
-				
-				<a name="2_15_3_6"></a>
-				<h4 class="heading4" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.6. Create a cheap (ie. not deep) copy of an object..."><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_15" title="2. Static Methods -&gt; 2.15. Uize.Data.map">15</a>.<a href="#2_15_3" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples">3</a>.<a href="#2_15_3_6" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.6. Create a cheap (ie. not deep) copy of an object...">6</a>. </span>Create a cheap (ie. not deep) copy of an object...</h4>
-				<div class="contents4">
-					
-<pre class="sample-code">var copyOfFoo = Uize.Data.map ('value',foo);
-</pre>
-				</div>
-				
-				<a name="2_15_3_7"></a>
-				<h4 class="heading4" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.7. Seed an array of 100 elements with the value range 0 to 99..."><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_15" title="2. Static Methods -&gt; 2.15. Uize.Data.map">15</a>.<a href="#2_15_3" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples">3</a>.<a href="#2_15_3_7" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.7. Seed an array of 100 elements with the value range 0 to 99...">7</a>. </span>Seed an array of 100 elements with the value range 0 to 99...</h4>
-				<div class="contents4">
-					
-<pre class="sample-code">var range0to99 = Uize.Data.map ('key',100);
-</pre>
-				</div>
-				
-				<a name="2_15_3_8"></a>
-				<h4 class="heading4" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.8. Seed an array of 100 elements with the value range 1 to 100..."><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_15" title="2. Static Methods -&gt; 2.15. Uize.Data.map">15</a>.<a href="#2_15_3" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples">3</a>.<a href="#2_15_3_8" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.8. Seed an array of 100 elements with the value range 1 to 100...">8</a>. </span>Seed an array of 100 elements with the value range 1 to 100...</h4>
-				<div class="contents4">
-					
-<pre class="sample-code">var range1to100 = Uize.Data.map ('key + 1',100);
-</pre>
-				</div>
-				
-				<a name="2_15_3_9"></a>
-				<h4 class="heading4" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.9. Create an array of the square roots of 0 to 99..."><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_15" title="2. Static Methods -&gt; 2.15. Uize.Data.map">15</a>.<a href="#2_15_3" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples">3</a>.<a href="#2_15_3_9" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.9. Create an array of the square roots of 0 to 99...">9</a>. </span>Create an array of the square roots of 0 to 99...</h4>
-				<div class="contents4">
-					
-<pre class="sample-code">var squaresOf0to99 = Uize.Data.map ('Math.sqrt (key)',100);
-</pre>
-				</div>
-				
-				<a name="2_15_3_10"></a>
-				<h4 class="heading4" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.10. Create an array of the square roots of the values in the source array..."><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_15" title="2. Static Methods -&gt; 2.15. Uize.Data.map">15</a>.<a href="#2_15_3" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples">3</a>.<a href="#2_15_3_10" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.10. Create an array of the square roots of the values in the source array...">10</a>. </span>Create an array of the square roots of the values in the source array...</h4>
-				<div class="contents4">
-					
-<pre class="sample-code">var squaresOfArray = Uize.Data.map (Math.sqrt,array);
-</pre>
-				</div>
-				
-				<a name="2_15_3_11"></a>
-				<h4 class="heading4" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.11. Create an array of all the capital letters of the alphabet..."><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_15" title="2. Static Methods -&gt; 2.15. Uize.Data.map">15</a>.<a href="#2_15_3" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples">3</a>.<a href="#2_15_3_11" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.11. Create an array of all the capital letters of the alphabet...">11</a>. </span>Create an array of all the capital letters of the alphabet...</h4>
-				<div class="contents4">
-					
-<pre class="sample-code">var capLetters = Uize.Data.map ('String.fromCharCode (65 + key)',26);
-</pre>
-				</div>
-				
-				<a name="2_15_3_12"></a>
-				<h4 class="heading4" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.12. Create a fresh array of 10 elements that are the first ten powers of 2..."><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_15" title="2. Static Methods -&gt; 2.15. Uize.Data.map">15</a>.<a href="#2_15_3" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples">3</a>.<a href="#2_15_3_12" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.12. Create a fresh array of 10 elements that are the first ten powers of 2...">12</a>. </span>Create a fresh array of 10 elements that are the first ten powers of 2...</h4>
-				<div class="contents4">
-					
-<pre class="sample-code">var powersOf2 = Uize.Data.map ('Math.pow (2,key)',10);
-</pre>
-				</div>
-				
-				<a name="2_15_3_13"></a>
-				<h4 class="heading4" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.13. Creates an array of the first 30 numbers in the Fibonacci series..."><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_15" title="2. Static Methods -&gt; 2.15. Uize.Data.map">15</a>.<a href="#2_15_3" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples">3</a>.<a href="#2_15_3_13" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.13. Creates an array of the first 30 numbers in the Fibonacci series...">13</a>. </span>Creates an array of the first 30 numbers in the Fibonacci series...</h4>
-				<div class="contents4">
-					
-<pre class="sample-code">var fibonacci = Uize.Data.map ('key &gt; 1 ? this [key - 2] + this [key - 1] : key',30);
-</pre>
-				</div>
-				
-				<a name="2_15_3_14"></a>
-				<h4 class="heading4" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.14. Smooth an array of values by averaging against adjacent neighbors..."><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_15" title="2. Static Methods -&gt; 2.15. Uize.Data.map">15</a>.<a href="#2_15_3" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples">3</a>.<a href="#2_15_3_14" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.14. Smooth an array of values by averaging against adjacent neighbors...">14</a>. </span>Smooth an array of values by averaging against adjacent neighbors...</h4>
-				<div class="contents4">
-					
-<pre class="sample-code">var smoothed = Uize.Data.map (
-  'key &amp;&amp; key &lt; this.length - 1 ? (this [key-1] + value + this [key+1]) / 3 : value',
-  array
-);
-</pre>
-				</div>
-				
-				<a name="2_15_3_15"></a>
-				<h4 class="heading4" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.15. Output elements of a log array to the `Firebug` console on separate lines..."><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_15" title="2. Static Methods -&gt; 2.15. Uize.Data.map">15</a>.<a href="#2_15_3" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples">3</a>.<a href="#2_15_3_15" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.15. Output elements of a log array to the `Firebug` console on separate lines...">15</a>. </span>Output elements of a log array to the `Firebug` console on separate lines...</h4>
-				<div class="contents4">
-					
-<pre class="sample-code">Uize.Data.map ('console.log (value)',logArray);
-</pre>
-				</div>
-				
-				<a name="2_15_3_16"></a>
-				<h4 class="heading4" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.16. Output elements of a log array to the `Firebug` console on separate lines, with line numbers..."><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_15" title="2. Static Methods -&gt; 2.15. Uize.Data.map">15</a>.<a href="#2_15_3" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples">3</a>.<a href="#2_15_3_16" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.16. Output elements of a log array to the `Firebug` console on separate lines, with line numbers...">16</a>. </span>Output elements of a log array to the `Firebug` console on separate lines, with line numbers...</h4>
-				<div class="contents4">
-					
-<pre class="sample-code">Uize.Data.map ('console.log (key + ": " + value)',logArray);
-</pre>
-				</div>
-				
-				<a name="2_15_3_17"></a>
-				<h4 class="heading4" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.17. Gets a style properties object from a pure number coords object..."><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_15" title="2. Static Methods -&gt; 2.15. Uize.Data.map">15</a>.<a href="#2_15_3" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples">3</a>.<a href="#2_15_3_17" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.17. Gets a style properties object from a pure number coords object...">17</a>. </span>Gets a style properties object from a pure number coords object...</h4>
-				<div class="contents4">
-					
-<pre class="sample-code">var coordsStyleProperties = Uize.Data.map ('value + "px"',coords);
-
-// EXAMPLE
-// this... {left:0,top:50,width:100,height:175}
-// produces this... {left:'0px',top:'50px',width:'100px',height:'175px'}
-</pre>
-				</div>
-				
-				<a name="2_15_3_18"></a>
-				<h4 class="heading4" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.18. Gets the length of the longest string in an array of strings...."><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_15" title="2. Static Methods -&gt; 2.15. Uize.Data.map">15</a>.<a href="#2_15_3" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples">3</a>.<a href="#2_15_3_18" title="2. Static Methods -&gt; 2.15. Uize.Data.map -&gt; 2.15.3. More Examples -&gt; 2.15.3.18. Gets the length of the longest string in an array of strings....">18</a>. </span>Gets the length of the longest string in an array of strings....</h4>
-				<div class="contents4">
-					
-<pre class="sample-code">var maxStringLength = Uize.max (Uize.Data.map ('value.length',stringsArray));
-</pre>
-				</div>
-			</div>
-			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
@@ -936,10 +628,144 @@ for (var elementNo = -1; ++elementNo &lt; 100;) {
 	</div>
 	
 	<a name="3"></a>
-	<h1 class="heading1" title="3. Static Properties"><span class="headingNumber"><a href="#3" title="3. Static Properties">3</a>. </span>Static Properties</h1>
+	<h1 class="heading1" title="3. Deprecated Features"><span class="headingNumber"><a href="#3" title="3. Deprecated Features">3</a>. </span>Deprecated Features</h1>
 	<div class="contents1">
 		<a name="3_1"></a>
-		<h2 class="heading2" title="3. Static Properties -&gt; 3.1. Uize.Data.moduleName"><span class="headingNumber"><a href="#3" title="3. Static Properties">3</a>.<a href="#3_1" title="3. Static Properties -&gt; 3.1. Uize.Data.moduleName">1</a>. </span>Uize.Data.moduleName</h2>
+		<h2 class="heading2" title="3. Deprecated Features -&gt; 3.1. Uize.Data.emptyOut -- DEPRECATED 2011-11-13"><span class="headingNumber"><a href="#3" title="3. Deprecated Features">3</a>.<a href="#3_1" title="3. Deprecated Features -&gt; 3.1. Uize.Data.emptyOut -- DEPRECATED 2011-11-13">1</a>. </span>Uize.Data.emptyOut -- DEPRECATED 2011-11-13</h2>
+		<div class="contents2">
+			<p>The <code><a href="#2_3">Uize.Data.emptyOut</a></code> static method has been deprecated in favor of the newly added <code>Uize.emptyOut</code> static method of the <code><a href="../reference/Uize.html">Uize</a></code> base module.</p>
+			
+			
+<pre class="sample-code">Uize.Data.emptyOut &gt;&gt; BECOMES &gt;&gt; Uize.emptyOut
+</pre>
+			
+			<p>This method has been promoted to the <code><a href="../reference/Uize.html">Uize</a></code> base module, retaining exactly the same arguments signature and behavior.</p>
+		</div>
+		
+		<a name="3_2"></a>
+		<h2 class="heading2" title="3. Deprecated Features -&gt; 3.2. Uize.Data.getKeys -- DEPRECATED 2011-11-13"><span class="headingNumber"><a href="#3" title="3. Deprecated Features">3</a>.<a href="#3_2" title="3. Deprecated Features -&gt; 3.2. Uize.Data.getKeys -- DEPRECATED 2011-11-13">2</a>. </span>Uize.Data.getKeys -- DEPRECATED 2011-11-13</h2>
+		<div class="contents2">
+			<p>The <code><a href="#2_7">Uize.Data.getKeys</a></code> static method has been deprecated in favor of the newly added <code>Uize.keys</code> static method of the <code><a href="../reference/Uize.html">Uize</a></code> base module.</p>
+			
+			
+<pre class="sample-code">Uize.Data.getKeys &gt;&gt; BECOMES &gt;&gt; Uize.keys
+</pre>
+			
+			<p>This method has been promoted to the <code><a href="../reference/Uize.html">Uize</a></code> base module, retaining exactly the same arguments signature and behavior.</p>
+		</div>
+		
+		<a name="3_3"></a>
+		<h2 class="heading2" title="3. Deprecated Features -&gt; 3.3. Uize.Data.getLookup -- DEPRECATED 2011-11-13"><span class="headingNumber"><a href="#3" title="3. Deprecated Features">3</a>.<a href="#3_3" title="3. Deprecated Features -&gt; 3.3. Uize.Data.getLookup -- DEPRECATED 2011-11-13">3</a>. </span>Uize.Data.getLookup -- DEPRECATED 2011-11-13</h2>
+		<div class="contents2">
+			<p>The <code><a href="#2_8">Uize.Data.getLookup</a></code> static method has been deprecated in favor of the newly added <code>Uize.lookup</code> static method of the <code><a href="../reference/Uize.html">Uize</a></code> base module.</p>
+			
+			
+<pre class="sample-code">Uize.Data.getLookup &gt;&gt; BECOMES &gt;&gt; Uize.lookup
+</pre>
+			
+			<p>This method has been promoted to the <code><a href="../reference/Uize.html">Uize</a></code> base module, retaining exactly the same arguments signature and behavior.</p>
+		</div>
+		
+		<a name="3_4"></a>
+		<h2 class="heading2" title="3. Deprecated Features -&gt; 3.4. Uize.Data.getReverseLookup -- DEPRECATED 2011-11-13"><span class="headingNumber"><a href="#3" title="3. Deprecated Features">3</a>.<a href="#3_4" title="3. Deprecated Features -&gt; 3.4. Uize.Data.getReverseLookup -- DEPRECATED 2011-11-13">4</a>. </span>Uize.Data.getReverseLookup -- DEPRECATED 2011-11-13</h2>
+		<div class="contents2">
+			<p>The <code><a href="#2_9">Uize.Data.getReverseLookup</a></code> static method has been deprecated in favor of the newly added <code>Uize.reverseLookup</code> static method of the <code><a href="../reference/Uize.html">Uize</a></code> base module.</p>
+			
+			
+<pre class="sample-code">Uize.Data.getReverseLookup &gt;&gt; BECOMES &gt;&gt; Uize.reverseLookup
+</pre>
+			
+			<p>This method has been promoted to the <code><a href="../reference/Uize.html">Uize</a></code> base module, retaining exactly the same arguments signature and behavior.</p>
+		</div>
+		
+		<a name="3_5"></a>
+		<h2 class="heading2" title="3. Deprecated Features -&gt; 3.5. Uize.Data.getTotalKeys -- DEPRECATED 2011-11-13"><span class="headingNumber"><a href="#3" title="3. Deprecated Features">3</a>.<a href="#3_5" title="3. Deprecated Features -&gt; 3.5. Uize.Data.getTotalKeys -- DEPRECATED 2011-11-13">5</a>. </span>Uize.Data.getTotalKeys -- DEPRECATED 2011-11-13</h2>
+		<div class="contents2">
+			<p>The <code><a href="#2_10">Uize.Data.getTotalKeys</a></code> static method has been deprecated in favor of the newly added <code>Uize.totalKeys</code> static method of the <code><a href="../reference/Uize.html">Uize</a></code> base module.</p>
+			
+			
+<pre class="sample-code">Uize.Data.getTotalKeys &gt;&gt; BECOMES &gt;&gt; Uize.totalKeys
+</pre>
+			
+			<p>This method has been promoted to the <code><a href="../reference/Uize.html">Uize</a></code> base module, retaining exactly the same arguments signature and behavior.</p>
+		</div>
+		
+		<a name="3_6"></a>
+		<h2 class="heading2" title="3. Deprecated Features -&gt; 3.6. Uize.Data.getValues -- DEPRECATED 2011-11-13"><span class="headingNumber"><a href="#3" title="3. Deprecated Features">3</a>.<a href="#3_6" title="3. Deprecated Features -&gt; 3.6. Uize.Data.getValues -- DEPRECATED 2011-11-13">6</a>. </span>Uize.Data.getValues -- DEPRECATED 2011-11-13</h2>
+		<div class="contents2">
+			<p>The <code><a href="#2_11">Uize.Data.getValues</a></code> static method has been deprecated in favor of the newly added <code>Uize.values</code> static method of the <code><a href="../reference/Uize.html">Uize</a></code> base module.</p>
+			
+			
+<pre class="sample-code">Uize.Data.getValues &gt;&gt; BECOMES &gt;&gt; Uize.values
+</pre>
+			
+			<p>This method has been promoted to the <code><a href="../reference/Uize.html">Uize</a></code> base module, retaining exactly the same arguments signature and behavior.</p>
+		</div>
+		
+		<a name="3_7"></a>
+		<h2 class="heading2" title="3. Deprecated Features -&gt; 3.7. Uize.Data.isEmpty -- DEPRECATED 2011-11-13"><span class="headingNumber"><a href="#3" title="3. Deprecated Features">3</a>.<a href="#3_7" title="3. Deprecated Features -&gt; 3.7. Uize.Data.isEmpty -- DEPRECATED 2011-11-13">7</a>. </span>Uize.Data.isEmpty -- DEPRECATED 2011-11-13</h2>
+		<div class="contents2">
+			<p>The <code><a href="#2_14">Uize.Data.isEmpty</a></code> static method has been deprecated in favor of the newly added <code>Uize.isEmpty</code> static method of the <code><a href="../reference/Uize.html">Uize</a></code> base module.</p>
+			
+			
+<pre class="sample-code">Uize.Data.isEmpty &gt;&gt; BECOMES &gt;&gt; Uize.isEmpty
+</pre>
+			
+			<p>This method has been promoted to the <code><a href="../reference/Uize.html">Uize</a></code> base module, retaining exactly the same arguments signature and behavior.</p>
+		</div>
+		
+		<a name="3_8"></a>
+		<h2 class="heading2" title="3. Deprecated Features -&gt; 3.8. Uize.Data.map -- DEPRECATED 2011-11-27"><span class="headingNumber"><a href="#3" title="3. Deprecated Features">3</a>.<a href="#3_8" title="3. Deprecated Features -&gt; 3.8. Uize.Data.map -- DEPRECATED 2011-11-27">8</a>. </span>Uize.Data.map -- DEPRECATED 2011-11-27</h2>
+		<div class="contents2">
+			<p>The <code><a href="#2_15">Uize.Data.map</a></code> static method has been deprecated in favor of the newly added <code>Uize.map</code> static method of the <code><a href="../reference/Uize.html">Uize</a></code> base module.</p>
+			
+			<p>This method has been promoted to the <code><a href="../reference/Uize.html">Uize</a></code> base module, but the arguments signature has been changed. While the deprecated <code><a href="#2_15">Uize.Data.map</a></code> method accepts a mapper expression or function as its first argument and an array, object, or number as its second argument, these two arguments are swapped around in the <code>Uize.map</code> method. This is the more conventional signature for <code>map</code> type methods.</p>
+			
+			<p><span class="allCaps">INSTEAD OF...</span></p>
+			
+			
+<pre class="sample-code">mappedARRAYorOBJ = Uize.Data.map (mapperSTRorFUNC,sourceARRAYorOBJorINT);
+</pre>
+			
+			<p><span class="allCaps">USE...</span></p>
+			
+			
+<pre class="sample-code">mappedARRAYorOBJ = Uize.map (sourceARRAYorOBJorINT,mapperSTRorFUNC);
+</pre>
+			
+			<p>Other than the change in its arguments signature, the <code>Uize.map</code> behaves in exactly the same way as the deprecated <code><a href="#2_15">Uize.Data.map</a></code> method. Because the <code><a href="#2_15">Uize.Data.map</a></code> method has been deprecated, it will live on for about another year, continuing to behave in the same way and using the same signature as before.</p>
+		</div>
+		
+		<a name="3_9"></a>
+		<h2 class="heading2" title="3. Deprecated Features -&gt; 3.9. Uize.Data.max -- DEPRECATED 2011-11-13"><span class="headingNumber"><a href="#3" title="3. Deprecated Features">3</a>.<a href="#3_9" title="3. Deprecated Features -&gt; 3.9. Uize.Data.max -- DEPRECATED 2011-11-13">9</a>. </span>Uize.Data.max -- DEPRECATED 2011-11-13</h2>
+		<div class="contents2">
+			<p>The <code><a href="#2_16">Uize.Data.max</a></code> static method has been deprecated in favor of the newly added <code>Uize.max</code> static method of the <code><a href="../reference/Uize.html">Uize</a></code> base module.</p>
+			
+			
+<pre class="sample-code">Uize.Data.max &gt;&gt; BECOMES &gt;&gt; Uize.max
+</pre>
+			
+			<p>This method has been promoted to the <code><a href="../reference/Uize.html">Uize</a></code> base module, retaining exactly the same arguments signature and behavior.</p>
+		</div>
+		
+		<a name="3_10"></a>
+		<h2 class="heading2" title="3. Deprecated Features -&gt; 3.10. Uize.Data.min -- DEPRECATED 2011-11-13"><span class="headingNumber"><a href="#3" title="3. Deprecated Features">3</a>.<a href="#3_10" title="3. Deprecated Features -&gt; 3.10. Uize.Data.min -- DEPRECATED 2011-11-13">10</a>. </span>Uize.Data.min -- DEPRECATED 2011-11-13</h2>
+		<div class="contents2">
+			<p>The <code><a href="#2_17">Uize.Data.min</a></code> static method has been deprecated in favor of the newly added <code>Uize.min</code> static method of the <code><a href="../reference/Uize.html">Uize</a></code> base module.</p>
+			
+			
+<pre class="sample-code">Uize.Data.min &gt;&gt; BECOMES &gt;&gt; Uize.min
+</pre>
+			
+			<p>This method has been promoted to the <code><a href="../reference/Uize.html">Uize</a></code> base module, retaining exactly the same arguments signature and behavior.</p>
+		</div>
+	</div>
+	
+	<a name="4"></a>
+	<h1 class="heading1" title="4. Static Properties"><span class="headingNumber"><a href="#4" title="4. Static Properties">4</a>. </span>Static Properties</h1>
+	<div class="contents1">
+		<a name="4_1"></a>
+		<h2 class="heading2" title="4. Static Properties -&gt; 4.1. Uize.Data.moduleName"><span class="headingNumber"><a href="#4" title="4. Static Properties">4</a>.<a href="#4_1" title="4. Static Properties -&gt; 4.1. Uize.Data.moduleName">1</a>. </span>Uize.Data.moduleName</h2>
 		<div class="contents2">
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			

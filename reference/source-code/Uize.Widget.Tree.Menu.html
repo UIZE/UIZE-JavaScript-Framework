@@ -87,22 +87,19 @@ Uize.module ({
         ;
         if (!_itemsWiredMap [_itemSpecifier]) {
           /*** iterate through and wire items ***/
-            function _wireItem (_itemSpecifier) {
-              _this.wireNode (
-                _itemSpecifier + 'TitleLink',
-                'mouseover',
-                function () {_this.collapseAllBut (_itemSpecifier)}
-              );
-            }
-            var _items = _itemSpecifier
-              ? _this.getItemFromSpecifier (_itemSpecifier).items
-              : _this.get ('items')
-            ;
-            if (_items &amp;&amp; _items.length) {
-              for (var _itemNo = -1, _itemsLength = _items.length; ++_itemNo &lt; _itemsLength;)
-                _wireItem (_itemSpecifier + (_itemSpecifier &amp;&amp; 'x') + _itemNo)
-              ;
-            }
+            Uize.forEach (
+              _itemSpecifier
+                ? _this.getItemFromSpecifier (_itemSpecifier).items
+                : _this.get ('items'),
+              function (_item,_itemNo) {
+                var _subItemSpecifier = _itemSpecifier + (_itemSpecifier &amp;&amp; 'x') + _itemNo;
+                _this.wireNode (
+                  _subItemSpecifier + 'TitleLink',
+                  'mouseover',
+                  function () {_this.collapseAllBut (_subItemSpecifier)}
+                );
+              }
+            );
 
           /*** code for managing dismiss when mousing out of the menu ***/
             /* NOTE:

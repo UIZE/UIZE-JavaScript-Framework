@@ -139,10 +139,7 @@ Uize.module ({
 					_undefined
 				;
 				for (var _watchedPropertyAlias in _committedValues) {
-					var
-						_watchedPropertyProfile = _watchedProperties [_watchedPropertyAlias],
-						_propertySetObject = {}
-					;
+					var _watchedPropertyProfile = _watchedProperties [_watchedPropertyAlias];
 					_watchedPropertyProfile.instance.set (
 						_watchedPropertyProfile.name,
 						_newValues && _newValues [_watchedPropertyAlias] != _undefined ? _newValues [_watchedPropertyAlias] : ''
@@ -277,12 +274,9 @@ Uize.module ({
 							_instance = _propertyToWatch.instance,
 							_watchedPropertyProfile = {instance:_instance, name:_name}
 						;
-
 						_propertiesAdded [_alias] = _watchedPropertyProfile;
 						_this._watchProperty (_alias, _watchedPropertyProfile);
-						_committedValues [_alias] =
-						_uncommittedValues [_alias] =
-						_initialValues [_alias] =
+						_committedValues [_alias] = _uncommittedValues [_alias] = _initialValues [_alias] =
 							_instance.get (_name)
 						;
 					}
@@ -357,9 +351,7 @@ Uize.module ({
 					;
 
 					if (_watchedPropertyProfile) {
-						var
-							_watchedPropertyInstance = _watchedPropertyProfile.instance
-						;
+						var _watchedPropertyInstance = _watchedPropertyProfile.instance;
 
 						// any events that are wired to the watched property instance in _classPrototype._watchProperty needs to be unwired here.
 						_watchedPropertyInstance.unwire ('Changed.isValid');

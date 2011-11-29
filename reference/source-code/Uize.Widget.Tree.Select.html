@@ -143,16 +143,7 @@ Uize.module ({
             _this._levels [_nextLevelNo] = _itemSelected.items;
             var _nextSelect = _this.getNode ('level' + _nextLevelNo);
             _addOption (_this._chooseText);
-            for (
-              var
-                _itemNo = -1,
-                _itemSelectedItems = _itemSelected.items,
-                _itemSelectedItemsLength = _itemSelectedItems.length
-              ;
-              ++_itemNo &lt; _itemSelectedItemsLength;
-            )
-              _addOption (_itemSelectedItems [_itemNo].title)
-            ;
+            Uize.forEach (_itemSelected.items,function (_item) {_addOption (_item.title)});
             _enableSelect (_nextSelect,_true);
           }
           if (_selectionComplete != _this._selectionComplete) {

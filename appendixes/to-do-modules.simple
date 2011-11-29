@@ -18,18 +18,30 @@ This document lists to do tasks related to specific JavaScript modules of the UI
 	}
 
 Uize
-	Quick Win Additions (in order of priority / usefulness)
-		- Uize.map
-			- promoted from Uize.Data.map, but with modified signature to make array first
-		- Uize.indexOf, Uize.lastIndexOf
-			- essentially derived from indexIn, but adapted to also operate on strings and to use built-in indexOf when possible and supported by JavaScript built-in objects (ie. newer versions of JavaScript)
-		- Uize.indexIn
-			- adapt to add support for object (ie. which key has specified value)
-			- adapt to fall back to using built-in indexOf or lastIndexOf Array method, when they are present and when comparison is strict
-			- adapt to add support for source being a string
+	- Uize.map
+		- support string for _source?
 
-		- Uize.require
-			- alias to anonymous module with required (to make the simple case of requiring a module deeper in code more convenient & intuitive)
+	Uize.TreeWalker
+		An object built into the =Uize= base module that allows you to control walking through an object tree in a safe and performant way.
+
+		- avoids reference loops / circular references
+		- iterates without using recursion, to minimize function calls used for walking the tree
+
+	Quick Win Additions (in order of priority / usefulness)
+		DONE
+			- Uize.map
+				- promoted from Uize.Data.map, but with modified signature to make array first
+
+		STILL TO DO
+			- Uize.indexOf, Uize.lastIndexOf
+				- essentially derived from indexIn, but adapted to also operate on strings and to use built-in indexOf when possible and supported by JavaScript built-in objects (ie. newer versions of JavaScript)
+			- Uize.indexIn
+				- adapt to add support for object (ie. which key has specified value)
+				- adapt to fall back to using built-in indexOf or lastIndexOf Array method, when they are present and when comparison is strict
+				- adapt to add support for source being a string
+
+			- Uize.require
+				- alias to anonymous module with required (to make the simple case of requiring a module deeper in code more convenient & intuitive)
 
 		LATER
 			- Uize.extend
@@ -367,6 +379,53 @@ Uize
 	- Uize.lookup & Uize.reverseLookup
 		- for =Uize.lookup=, support mode with no parameters that returns an empty safe lookup
 
+	- Uize.reverseLookup
+		- support values for source being arrays
+
+			EXAMPLE
+			.................................
+			Uize.reverseLookup ({
+				vegetable:['potato','tomato'],
+				fruit:['apple','orange']
+			});
+			.................................
+
+			OUTPUT
+			......................
+			{
+				potato:'vegetable',
+				tomato:'vegetable',
+				apple:'fruit',
+				orange:'fruit'
+			}
+			......................
+
+		- support multiple values for source being the same
+
+			EXAMPLE
+			......................
+			Uize.reverseLookup ({
+				potato:'vegetable',
+				tomato:'vegetable',
+				apple:'fruit',
+				orange:'fruit'
+			});
+			......................
+
+			OUTPUT
+			.................................
+			{
+				vegetable:['potato','tomato'],
+				fruit:['apple','orange']
+			}
+			.................................
+
+		- support merging in to target
+			- when entries are added to an existing reverse lookup object, use the following rules...
+				- if the desired key to add already exists, then...
+					- if the key's value is not an array, make it an array with the current value as the first element and the desired value to add as the second
+					- if the key's value is an array, then append the desired value to add if it is not already present
+
 	Uize.callOn
 		Support Instances of Non-Uize Classes
 			Add support for using the =Uize.callOn= method on a target that is an instance of a class that is not a =Uize= subclass.
@@ -416,8 +475,18 @@ Uize
 		new Uize.Widget.Bar.Slider (50);          // old form
 		.....................................................
 
-	Uize.clone and Recursion
-		Handle recursion in Uize.clone (how to generate properties that are references to other parts of structure in same relationship as the equivalent property in the cloning source???)
+	Uize.clone
+		Optimize Array Cloning
+			Optimize cloning of arrays using a number of techniques...
+
+			- minimize for...in iteration by first removing elements from array being cloned using splice
+			- with spliced elements, do a push onto fresh array
+			- iterate through elements of fresh array, replacing values with cloned values if they are objects
+			- do for...in iteration over source array to clone custom properties into fresh array
+			- restore spliced elements to source array
+
+		Uize.clone and Recursion
+			Handle recursion in Uize.clone (how to generate properties that are references to other parts of structure in same relationship as the equivalent property in the cloning source???)
 
 	Improvements to Property Mechanism
 		New Profile Features
@@ -931,8 +1000,6 @@ Uize.Data
 		- tests to see if the object contains circular references / reference loops
 		- for implementation, use object tagging
 
-	- Uize.Data.map
-		- support string for _source?
 	- Uize.Data.mapKeys
 		- lets you rename keys in an object
 	- Uise.Data.mapKeyValues
@@ -1425,6 +1492,9 @@ Uize.Json
 	- for strict mode, must exclude object properties whose values are undefined, null, function, non-simple object, and possibly more prohibited value types (refer to JSON spec online) - probably easier just to include only sanctioned value types (primitives, and simple objects and arrays)
 
 Uize.Node
+	Proposed Shortenings
+		- Uize.Node.getById -> Uize.Node.byId or Uize.Node.id or just Uize.Node
+
 	- Uize.Node.setValue & Uize.Node.getValue
 		- respect disabled property?
 			- what about disabled select options, radios?
@@ -1849,6 +1919,9 @@ Uize.Web.ImageLoader
 		- average load time
 
 Uize.Widget
+	Proposed Shortenings
+		- myWidget.getNode -> myWidget.node
+
 	More Versatile wireNode Method
 		Support an array of event name/event handler pairs.
 

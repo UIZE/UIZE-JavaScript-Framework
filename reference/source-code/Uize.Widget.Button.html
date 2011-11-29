@@ -533,18 +533,7 @@ Uize.module ({
           name:'frameOrder',
           onChange:function () {
             var _frameOrder = this._frameOrder;
-            if (!_frameOrder._frameOrderMap) {
-              for (
-                var
-                  _frameNo = -1,
-                  _frameOrderLength = _frameOrder.length,
-                  _frameOrderMap = _frameOrder._frameOrderMap = {}
-                ;
-                ++_frameNo &lt; _frameOrderLength;
-              )
-                _frameOrderMap [_frameOrder [_frameNo]] = _frameNo
-              ;
-            }
+            _frameOrder._frameOrderMap || (_frameOrder._frameOrderMap = Uize.reverseLookup (_frameOrder));
           },
           value:['grayed','','over','active','playing']
           /*?

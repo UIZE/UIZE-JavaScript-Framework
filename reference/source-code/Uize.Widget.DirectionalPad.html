@@ -114,29 +114,28 @@ Uize.module ({
       };
 
       _classPrototype._updateUiEnabled = function () {
-              var
+        var
           _this = this,
-                _children = _this.children,
-                _enabled = _this.get ('enabled')
-              ;
+          _children = _this.children,
+          _enabled = _this.get ('enabled')
+        ;
 
-              // if enabled is an object then parse through and set the children enabled states
-              if (typeof _enabled == 'object') {
-                var
-                  _default = _enabled.defaultValue === undefined || _enabled.defaultValue,
+        // if enabled is an object then parse through and set the children enabled states
+        if (typeof _enabled == 'object') {
+          var
+            _default = _enabled.defaultValue === undefined || _enabled.defaultValue,
             _children = _this.children,
-                  _childName
-                ;
+            _childName
+          ;
 
-                for (_childName in _children) {
-                  var _childNameInEnabled = _childName in _enabled;
-            (_childNameInEnabled || _default !== undefined) &amp;&amp; _children [_childName].set ({enabled:_childNameInEnabled ? _enabled [_childName] : _default});
-                }
-              }
-              else
-                for (_childName in _children)
-                  _children [_childName].set ({enabled:_enabled})
-                ;
+          for (_childName in _children) {
+            var _childNameInEnabled = _childName in _enabled;
+            (_childNameInEnabled || _default !== undefined) &amp;&amp; _children [_childName].set ({
+              enabled:_childNameInEnabled ? _enabled [_childName] : _default
+            });
+          }
+        } else
+          Uize.callOn (_children,'set',[{enabled:_enabled}]);
       };
 
       _classPrototype.wireUi = function () {

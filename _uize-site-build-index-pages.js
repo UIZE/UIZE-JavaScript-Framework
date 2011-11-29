@@ -56,7 +56,7 @@ Uize.module ({
 
 		/*** build the UizeDotCom.ModulesTree module ***/
 			/*** build modules tree structure from list of module names ***/
-				var _modulesTree = Uize.Data.PathsTree.fromList (Uize.Data.map ('value.title',_moduleReferenceFiles),'.');
+				var _modulesTree = Uize.Data.PathsTree.fromList (Uize.map (_moduleReferenceFiles,'value.title'),'.');
 
 			/*** write the modules tree module file ***/
 				Uize.Wsh.BuildUtils.writeDataModule (env.moduleFolderPath,'UizeDotCom.ModulesTree',_modulesTree);
@@ -103,9 +103,9 @@ Uize.module ({
 					{
 						keywords:Uize.keys (_examplesByKeyword).slice (1).sort (), // slice removes the '' keyword
 						tools:
-							Uize.Data.map (
-								function (_value) {return Uize.Data.filter (_value,['title','path'])},
-								_examplesByKeyword.tool
+							Uize.map (
+								_examplesByKeyword.tool,
+								function (_value) {return Uize.Data.filter (_value,['title','path'])}
 							)
 					}
 				);
@@ -133,7 +133,8 @@ Uize.module ({
 					Uize.Wsh.BuildUtils.processJstFile (
 						'latest-news.rss.jst',
 						{
-							items:Uize.Data.map (
+							items:Uize.map (
+								_latestNews,
 								function (_value) {
 									return {
 										title:_value.title.replace (/^\d\d\d\d-\d\d-\d\d\s*-\s*/,''),
@@ -141,8 +142,7 @@ Uize.module ({
 										link:'http://www.uize.com/' + _value.path,
 										description:_value.description
 									}
-								},
-								_latestNews
+								}
 							)
 						}
 					);

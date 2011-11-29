@@ -88,7 +88,6 @@ Uize.module ({
 	name:'Uize.Wsh.AuditStrings',
 	required:[
 		'Uize.Scruncher',
-		'Uize.Data',
 		'Uize.String'
 	],
 	builder:function () {
@@ -117,7 +116,7 @@ Uize.module ({
 						'.asp', '.ASP', '.gif', '.html', '.jpg', '.js', '.jst', '.png', '.PNG', '.txt', '.xhtml', '.xml' // this could be in a regular expression, with leading period optional, and case insensitive, perhaps it would be good to add a filename match, to catch things like, filename.gif, .gif, and gif (ie. patterns like [[filename].]gif|jpg|html)
 				].concat (
 					_eventNames,
-					Uize.Data.map ('\'on\' + value',_eventNames)
+					Uize.map (_eventNames,'\'on\' + value')
 				),
 				_nonI18nStringsDictionaryLookup
 			;

@@ -615,7 +615,7 @@ Uize.module ({
 						? []
 						: _rowTypeIsObject
 							? Uize.keys (_firstRow)
-							: Uize.Data.map ('key',_firstRow.length)
+							: Uize.map (_firstRow.length,'key')
 				;
 				var _totalColumns = _columns.length;
 				for (var _rowNo = -1 - _hasHeader, _totalRows = _toEncode.length; ++_rowNo < _totalRows;) {

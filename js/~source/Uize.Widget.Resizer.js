@@ -216,12 +216,7 @@ Uize.module ({
 							);
 						}
 					}
-					for (
-						var _areaNodeNo = -1, _areaNodes = _this._areaNodes, _areaNodesLength = _areaNodes.length;
-						++_areaNodeNo < _areaNodesLength;
-					)
-						_setAreaDims (_areaNodes [_areaNodeNo])
-					;
+					Uize.forEach (_this._areaNodes,_setAreaDims);
 				}
 			};
 

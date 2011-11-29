@@ -888,18 +888,7 @@ Uize.module ({
 							_text += _node.textContent;
 						} else {
 							if (_node.nodeType == 3) _text += _node.data;
-							if (_node.childNodes) {
-								for (
-									var
-										_childNodeNo = -1,
-										_childNodes = _node.childNodes,
-										_childNodesLength = _childNodes.length
-									;
-									++_childNodeNo < _childNodesLength;
-								)
-									_getText (_childNodes [_childNodeNo])
-								;
-							}
+							_node.childNodes && Uize.forEach (_node.childNodes,_gatherText);
 						}
 					}
 					_gatherText (_node);
@@ -956,12 +945,10 @@ Uize.module ({
 						} else if (_nodeTagName == 'SELECT') {
 							if (_node.multiple) {
 								_value = [];
-								for (
-									var _optionNo = -1, _options = _node.options, _optionsLength = _options.length, _option;
-									++_optionNo < _optionsLength;
-								)
-									(_option = _options [_optionNo]).selected && _value.push (_option.value)
-								;
+								Uize.forEach (
+									_node.options,
+									function (_option) {_option.selected && _value.push (_option.value)}
+								);
 							} else {
 								_value = _node.value;
 							}
@@ -1094,16 +1081,7 @@ Uize.module ({
 
 									_node.parentNode.replaceChild (_activatedScriptNode,_node);
 								} else if (_htmlHasScript (_node.innerHTML)) {
-									for (
-										var
-											_childNodeNo = -1,
-											_nodeChildNodes = _node.childNodes,
-											_nodeChildNodesLength = _nodeChildNodes.length
-										;
-										++_childNodeNo < _nodeChildNodesLength;
-									)
-										_fixCrippledScripts (_nodeChildNodes [_childNodeNo])
-									;
+									Uize.forEach (_node.childNodes,_fixCrippledScripts);
 								}
 							}
 							while (_nodesToInject.length > _nodesToSkip) {
@@ -1762,16 +1740,7 @@ Uize.module ({
 							} else {
 								var _options = _node.options;
 								if (_node.multiple && (_value == '*' || _value.indexOf (',') > -1)) {
-									var _valuesMap;
-									if (_value != '*') {
-										/* NOTE:
-											Code for creating a lookup object from an array exists in Uize.Data, but for page load reasons, I don't want Uize.Node to have a dependency on Uize.Data. Perhaps someday getKeys will migrate into the Uize base class, and then this code can be revisited.
-										*/
-										_valuesMap = {};
-										for (var _values = _value.split (','), _valueNo = _values.length; --_valueNo >= 0;)
-											_valuesMap [_values [_valueNo]] = 1
-										;
-									}
+									var _valuesMap = _value != '*' ? Uize.lookup (_value.split (',')) : _undefined;
 									for (var _optionNo = _options.length, _option; --_optionNo >= 0;)
 										(_option = _options [_optionNo]).selected = !_valuesMap || _valuesMap [_option.value]
 									;
@@ -2586,20 +2555,20 @@ Uize.module ({
 						_windowEventVehicle = new Uize,
 						_documentLoadedTimeout = setTimeout (function () {_windowEventVehicle.fire ('load')},15000)
 					;
-					function _wireUpWindowEvent (_windowEventName) {
-						var
-							_windowEventPropertyName = 'on' + _windowEventName,
-							_oldWindowEventHandler = window [_windowEventPropertyName] || _package.returnFalse
-						;
-						window [_windowEventPropertyName] = function (_event) {
-							_windowEventName == 'load' && clearTimeout (_documentLoadedTimeout);
-							_oldWindowEventHandler.call (window,_event || (_event = window.event));
-							_windowEventVehicle.fire ({name:_windowEventName,windowEvent:_event});
-						};
-					}
-					for (var _windowEventName in {focus:1,blur:1,load:1,beforeunload:1,unload:1,resize:1,scroll:1})
-						_wireUpWindowEvent (_windowEventName);
-					;
+					Uize.forEach (
+						['focus','blur','load','beforeunload','unload','resize','scroll'],
+						function (_windowEventName) {
+							var
+								_windowEventPropertyName = 'on' + _windowEventName,
+								_oldWindowEventHandler = window [_windowEventPropertyName] || _package.returnFalse
+							;
+							window [_windowEventPropertyName] = function (_event) {
+								_windowEventName == 'load' && clearTimeout (_documentLoadedTimeout);
+								_oldWindowEventHandler.call (window,_event || (_event = window.event));
+								_windowEventVehicle.fire ({name:_windowEventName,windowEvent:_event});
+							};
+						}
+					);
 			}
 
 		return _package;

@@ -71,14 +71,7 @@ Uize.module ({
             _superclass.prototype.processItemTemplate.call (_this, _templateNode) (_input) +
             '&lt;/tbody&gt;&lt;/table&gt;'
           ;
-          var
-            _nodeList = _dummyNode.firstChild.firstChild.childNodes,
-            _nodes = []
-          ;
-          for (var _nodeNo = -1, _nodeListLength = _nodeList.length; ++_nodeNo &lt; _nodeListLength;)
-            _nodes.push (_nodeList[_nodeNo])
-          ;
-          return _nodes;
+          return Uize.map (_dummyNode.firstChild.firstChild.childNodes,'value');
         };
       };
 

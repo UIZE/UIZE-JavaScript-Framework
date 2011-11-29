@@ -190,65 +190,64 @@
 					</li>
 				</ul>
 			</li>
-			<li><a href="#22" title="- Uize.Node.getById -&gt; Uize.Node.byId or Uize.Node.id or just Uize.Node">22. Proposed Shortenings</a></li>
-			<li><a href="#23" title="Solving fundamental problems in useful, convenient, friendly, understandable ways">23. Key Aspects of a Framework</a></li>
-			<li><a href="#24">24. - Uize.Delayed</a>
+			<li><a href="#22" title="Solving fundamental problems in useful, convenient, friendly, understandable ways">22. Key Aspects of a Framework</a></li>
+			<li><a href="#23">23. - Uize.Delayed</a>
 				<ul>
-					<li><a href="#24_1" title="_classPrototype.cancel = function () {&#10;	if (_this._timeout) {&#10;		clearTimeout (_this._timeout);&#10;		_this._timeout = _null;&#10;	}&#10;}&#10;_classPrototype.perform (_actionFunction) { // support optional delay param&#10;	var&#10;		_this = this,&#10;		_delay = _this._delay&#10;	;&#10;	_this.cancel ();&#10;	_delay ? (_this._timeout = setTimeout (_actionFunction,_delay)) : _actionFunction ();&#10;};&#10;">24.1. Portion of Implementation</a></li>
-					<li><a href="#24_2" title="Uize.caller = function (_context,_method,_params,_delay) {&#10;	function _callMethod () {&#10;		var _function  typeof _method = &apos;string&apos; ? _context [_method] : _method;&#10;		_function.callerThis = this;&#10;		_function.callerArguments = arguments;&#10;		var _result = _params ? _function.apply (_context,_params) : _function.call (_context);&#10;		delete _function.callerThis;&#10;		delete _function.callerArguments;&#10;		retur...">24.2. Another Possible Implementation</a></li>
-					<li><a href="#24_3">24.3. Sample Usage</a>
+					<li><a href="#23_1" title="_classPrototype.cancel = function () {&#10;	if (_this._timeout) {&#10;		clearTimeout (_this._timeout);&#10;		_this._timeout = _null;&#10;	}&#10;}&#10;_classPrototype.perform (_actionFunction) { // support optional delay param&#10;	var&#10;		_this = this,&#10;		_delay = _this._delay&#10;	;&#10;	_this.cancel ();&#10;	_delay ? (_this._timeout = setTimeout (_actionFunction,_delay)) : _actionFunction ();&#10;};&#10;">23.1. Portion of Implementation</a></li>
+					<li><a href="#23_2" title="Uize.caller = function (_context,_method,_params,_delay) {&#10;	function _callMethod () {&#10;		var _function  typeof _method = &apos;string&apos; ? _context [_method] : _method;&#10;		_function.callerThis = this;&#10;		_function.callerArguments = arguments;&#10;		var _result = _params ? _function.apply (_context,_params) : _function.call (_context);&#10;		delete _function.callerThis;&#10;		delete _function.callerArguments;&#10;		retur...">23.2. Another Possible Implementation</a></li>
+					<li><a href="#23_3">23.3. Sample Usage</a>
 						<ul>
-							<li><a href="#24_3_1" title="_this._delayedAction = new Uize.Delayed ({delay:1000});&#10;_this.wireNode (&#10;	node,&#10;	{&#10;		mouseover:function () {_this._delayed.perform (function () {_this.doSomething ()})},&#10;		mouseout:function () {_this._delayed.cancel ()}&#10;	}&#10;);&#10;">24.3.1. Approach 1</a></li>
-							<li><a href="#24_3_2" title="var _delayedCaller = Uize.caller (_this,&apos;doSomething&apos;,null,1000);&#10;_this.wireNode (&#10;	node,&#10;	{&#10;		mouseover:_delayedCaller,&#10;		mouseout:function () {_delayedCaller.cancel ()}&#10;	}&#10;);&#10;">24.3.2. Approach 2</a></li>
+							<li><a href="#23_3_1" title="_this._delayedAction = new Uize.Delayed ({delay:1000});&#10;_this.wireNode (&#10;	node,&#10;	{&#10;		mouseover:function () {_this._delayed.perform (function () {_this.doSomething ()})},&#10;		mouseout:function () {_this._delayed.cancel ()}&#10;	}&#10;);&#10;">23.3.1. Approach 1</a></li>
+							<li><a href="#23_3_2" title="var _delayedCaller = Uize.caller (_this,&apos;doSomething&apos;,null,1000);&#10;_this.wireNode (&#10;	node,&#10;	{&#10;		mouseover:_delayedCaller,&#10;		mouseout:function () {_delayedCaller.cancel ()}&#10;	}&#10;);&#10;">23.3.2. Approach 2</a></li>
 						</ul>
 					</li>
-					<li><a href="#24_4" title="function () {_this.setNodeStyle (&apos;blah&apos;,{color:&apos;#000&apos;})}&#10;Uize.caller (_this,&apos;setNodeStyle,[&apos;blah&apos;,{color:&apos;#000&apos;}])&#10;&#10;Uize.defer&#10;">24.4. Thoughts</a></li>
+					<li><a href="#23_4" title="function () {_this.setNodeStyle (&apos;blah&apos;,{color:&apos;#000&apos;})}&#10;Uize.caller (_this,&apos;setNodeStyle,[&apos;blah&apos;,{color:&apos;#000&apos;}])&#10;&#10;Uize.defer&#10;">23.4. Thoughts</a></li>
 				</ul>
 			</li>
-			<li><a href="#25" title="Implement more unobtrusive features, where no JS is needed inside markup, such as...">25. More Unobtrusive JavaScript Features</a>
+			<li><a href="#24" title="Implement more unobtrusive features, where no JS is needed inside markup, such as...">24. More Unobtrusive JavaScript Features</a>
 				<ul>
-					<li><a href="#25_1" title="- a lightweight way to get expand/collapse behavior into documents, without having to instantiate widgets">25.1. - expand/collapse</a></li>
+					<li><a href="#24_1" title="- a lightweight way to get expand/collapse behavior into documents, without having to instantiate widgets">24.1. - expand/collapse</a></li>
 				</ul>
 			</li>
-			<li><a href="#26">26. Code Development (in order of priority)</a>
+			<li><a href="#25">25. Code Development (in order of priority)</a>
 				<ul>
-					<li><a href="#26_1" title="- some events that were being fired in the onChange handlers were not being fired right at the end, but now they in effect are because of the way the Changed.[propertyName] event mechanism is implemented. Could this cause any weird order of execution problems?">26.1. **** property changed events refactoring</a></li>
-					<li><a href="#26_2" title="- drag a value from any widget to any other widget that supports or has a child that supports the value as part of its interface">26.2. - high-minded ideas</a></li>
-					<li><a href="#26_3" title="- use prototype for set-get properties?">26.3. - memory usage optimizations</a></li>
-					<li><a href="#26_4" title="- a way to avoid calling onChange handlers at construction time">26.4. - performance optimizations</a></li>
-					<li><a href="#26_5" title="MyClass.subclass ({&#10;	alphastructor:{&#10;	},&#10;	omegastructor:{&#10;	},&#10;	instanceMethods:{&#10;	},&#10;	staticMethods:{&#10;	},&#10;	instaticMethods:{&#10;	},&#10;	setGetProperties:{&#10;	}&#10;});&#10;">26.5. - new subclassing syntax</a></li>
-					<li><a href="#26_6">26.6. widget ID scheme refactoring</a>
+					<li><a href="#25_1" title="- some events that were being fired in the onChange handlers were not being fired right at the end, but now they in effect are because of the way the Changed.[propertyName] event mechanism is implemented. Could this cause any weird order of execution problems?">25.1. **** property changed events refactoring</a></li>
+					<li><a href="#25_2" title="- drag a value from any widget to any other widget that supports or has a child that supports the value as part of its interface">25.2. - high-minded ideas</a></li>
+					<li><a href="#25_3" title="- use prototype for set-get properties?">25.3. - memory usage optimizations</a></li>
+					<li><a href="#25_4" title="- a way to avoid calling onChange handlers at construction time">25.4. - performance optimizations</a></li>
+					<li><a href="#25_5" title="MyClass.subclass ({&#10;	alphastructor:{&#10;	},&#10;	omegastructor:{&#10;	},&#10;	instanceMethods:{&#10;	},&#10;	staticMethods:{&#10;	},&#10;	instaticMethods:{&#10;	},&#10;	setGetProperties:{&#10;	}&#10;});&#10;">25.5. - new subclassing syntax</a></li>
+					<li><a href="#25_6">25.6. widget ID scheme refactoring</a>
 						<ul>
-							<li><a href="#26_6_1" title="- possibly come up with a different term for the root node of a widget (since we still have shell references in identifiers in various places, possibly just &quot;root&quot; instead of &quot;shell&quot;)">26.6.1. other...</a></li>
+							<li><a href="#25_6_1" title="- possibly come up with a different term for the root node of a widget (since we still have shell references in identifiers in various places, possibly just &quot;root&quot; instead of &quot;shell&quot;)">25.6.1. other...</a></li>
 						</ul>
 					</li>
-					<li><a href="#26_7" title="a convenient way to automatically overlay a border fade on images in a document">26.7. image border fade overlay</a></li>
-					<li><a href="#26_8" title="overlay for stock price chart images to highlight date and price at date">26.8. Graphing DHTML</a></li>
-					<li><a href="#26_9" title="an easy way to display words using character set table images">26.9. Image Letters Widget (Uize.Widget.Spritext)</a></li>
-					<li><a href="#26_10" title="for documents with sections of extra in-depth information that most users may not be interested. Allows the information to be available and read in the context of the larger document with an extra click, but without creating an overly heavy read for most users">26.10. Auto-wired hide-reveal mechanism</a></li>
-					<li><a href="#26_11" title="a convenient way to have a rating value translated into a graphic of stars (whole and fractional). Could this be accomplished with a generalized bar / slider widget that has stars as its fullness bg?">26.11. Stars Rating Widget</a></li>
-					<li><a href="#26_12" title="- mode to automatically detect links to larger images and wire to open correctly sized. Frill where linked thumbnail &quot;throbs&quot; outwardly to suggest enlarging.">26.12. Utility routine to easily make a bunch of links open in a new window</a></li>
-					<li><a href="#26_13" title="Simply put in image tags in your page, let the auto-viewer present the images to the user in a professional layout">26.13. Auto-viewer for Images</a></li>
-					<li><a href="#26_14" title="- facilitate multiple controls controlling the same data (eg. two buttons for the same action) -- might be two different object instances linked in some way">26.14. IDEAS</a></li>
-					<li><a href="#26_15" title="- takes an image and splits it up into puzzle fragments and then lets the user drag and drop them in place">26.15. Puzzle Game</a></li>
+					<li><a href="#25_7" title="a convenient way to automatically overlay a border fade on images in a document">25.7. image border fade overlay</a></li>
+					<li><a href="#25_8" title="overlay for stock price chart images to highlight date and price at date">25.8. Graphing DHTML</a></li>
+					<li><a href="#25_9" title="an easy way to display words using character set table images">25.9. Image Letters Widget (Uize.Widget.Spritext)</a></li>
+					<li><a href="#25_10" title="for documents with sections of extra in-depth information that most users may not be interested. Allows the information to be available and read in the context of the larger document with an extra click, but without creating an overly heavy read for most users">25.10. Auto-wired hide-reveal mechanism</a></li>
+					<li><a href="#25_11" title="a convenient way to have a rating value translated into a graphic of stars (whole and fractional). Could this be accomplished with a generalized bar / slider widget that has stars as its fullness bg?">25.11. Stars Rating Widget</a></li>
+					<li><a href="#25_12" title="- mode to automatically detect links to larger images and wire to open correctly sized. Frill where linked thumbnail &quot;throbs&quot; outwardly to suggest enlarging.">25.12. Utility routine to easily make a bunch of links open in a new window</a></li>
+					<li><a href="#25_13" title="Simply put in image tags in your page, let the auto-viewer present the images to the user in a professional layout">25.13. Auto-viewer for Images</a></li>
+					<li><a href="#25_14" title="- facilitate multiple controls controlling the same data (eg. two buttons for the same action) -- might be two different object instances linked in some way">25.14. IDEAS</a></li>
+					<li><a href="#25_15" title="- takes an image and splits it up into puzzle fragments and then lets the user drag and drop them in place">25.15. Puzzle Game</a></li>
 				</ul>
 			</li>
-			<li><a href="#27">27. BUGS</a>
+			<li><a href="#26">26. BUGS</a>
 				<ul>
-					<li><a href="#27_1">27.1. General</a>
+					<li><a href="#26_1">26.1. General</a>
 						<ul>
-							<li><a href="#27_1_1" title="- when disabled or selected, busy cursor doesn&apos;t display">27.1.1. - examples/button-types.html - nodes type button</a></li>
+							<li><a href="#26_1_1" title="- when disabled or selected, busy cursor doesn&apos;t display">26.1.1. - examples/button-types.html - nodes type button</a></li>
 						</ul>
 					</li>
-					<li><a href="#27_2" title="- in the button-types example, the frames style button does not fire the &quot;Click&quot; event (seems to have something to do with the mousedown event handler&apos;s execution)">27.2. Firefox</a></li>
-					<li><a href="#27_3" title="- for all behaviors that are modified using the Ctrl key, should also be modified by the metaKey (for Mac users)">27.3. Safari</a>
+					<li><a href="#26_2" title="- in the button-types example, the frames style button does not fire the &quot;Click&quot; event (seems to have something to do with the mousedown event handler&apos;s execution)">26.2. Firefox</a></li>
+					<li><a href="#26_3" title="- for all behaviors that are modified using the Ctrl key, should also be modified by the metaKey (for Mac users)">26.3. Safari</a>
 						<ul>
-							<li><a href="#27_3_1" title="no way to initiate Ctrl modifier key behaviors">27.3.1. ...ImagePort.Draggable</a></li>
-							<li><a href="#27_3_2" title="extremely slow">27.3.2. Color Pickers With Gradient example</a></li>
-							<li><a href="#27_3_3" title="- zoom out effect is very choppy">27.3.3. ThumbZoom</a></li>
+							<li><a href="#26_3_1" title="no way to initiate Ctrl modifier key behaviors">26.3.1. ...ImagePort.Draggable</a></li>
+							<li><a href="#26_3_2" title="extremely slow">26.3.2. Color Pickers With Gradient example</a></li>
+							<li><a href="#26_3_3" title="- zoom out effect is very choppy">26.3.3. ThumbZoom</a></li>
 						</ul>
 					</li>
-					<li><a href="#27_4" title="- &quot;Uize.WiseLoad Example&quot;: mouseover opacity effect on thumbnails not working (and trying to enable it using filter:alpha(opacity=...) was completely hosing my machine)">27.4. IE (in order of priority)</a></li>
+					<li><a href="#26_4" title="- &quot;Uize.WiseLoad Example&quot;: mouseover opacity effect on thumbnails not working (and trying to enable it using filter:alpha(opacity=...) was completely hosing my machine)">26.4. IE (in order of priority)</a></li>
 				</ul>
 			</li>
 		</ul>
@@ -1459,16 +1458,7 @@ function callAsAsync (_functionToCall,_args,_returnResult) {
 	</div>
 	
 	<a name="22"></a>
-	<h1 class="heading1" title="22. Proposed Shortenings"><span class="headingNumber"><a href="#22" title="22. Proposed Shortenings">22</a>. </span>Proposed Shortenings</h1>
-	<div class="contents1">
-		<table class="list">
-		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Uize.Node.getById -> Uize.Node.byId or Uize.Node.id or just Uize.Node</td></tr>
-		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>myWidget.getNode -> myWidget.node</td></tr>
-		</table>
-	</div>
-	
-	<a name="23"></a>
-	<h1 class="heading1" title="23. Key Aspects of a Framework"><span class="headingNumber"><a href="#23" title="23. Key Aspects of a Framework">23</a>. </span>Key Aspects of a Framework</h1>
+	<h1 class="heading1" title="22. Key Aspects of a Framework"><span class="headingNumber"><a href="#22" title="22. Key Aspects of a Framework">22</a>. </span>Key Aspects of a Framework</h1>
 	<div class="contents1">
 		<p>Solving fundamental problems in useful, convenient, friendly, understandable ways</p>
 		
@@ -1487,11 +1477,11 @@ function callAsAsync (_functionToCall,_args,_returnResult) {
 		</table>
 	</div>
 	
-	<a name="24"></a>
-	<h1 class="heading1" title="24. - Uize.Delayed"><span class="headingNumber"><a href="#24" title="24. - Uize.Delayed">24</a>. </span>- Uize.Delayed</h1>
+	<a name="23"></a>
+	<h1 class="heading1" title="23. - Uize.Delayed"><span class="headingNumber"><a href="#23" title="23. - Uize.Delayed">23</a>. </span>- Uize.Delayed</h1>
 	<div class="contents1">
-		<a name="24_1"></a>
-		<h2 class="heading2" title="24. - Uize.Delayed -&gt; 24.1. Portion of Implementation"><span class="headingNumber"><a href="#24" title="24. - Uize.Delayed">24</a>.<a href="#24_1" title="24. - Uize.Delayed -&gt; 24.1. Portion of Implementation">1</a>. </span>Portion of Implementation</h2>
+		<a name="23_1"></a>
+		<h2 class="heading2" title="23. - Uize.Delayed -&gt; 23.1. Portion of Implementation"><span class="headingNumber"><a href="#23" title="23. - Uize.Delayed">23</a>.<a href="#23_1" title="23. - Uize.Delayed -&gt; 23.1. Portion of Implementation">1</a>. </span>Portion of Implementation</h2>
 		<div class="contents2">
 			
 <pre class="sample-code">_classPrototype.cancel = function () {
@@ -1511,8 +1501,8 @@ _classPrototype.perform (_actionFunction) { // support optional delay param
 </pre>
 		</div>
 		
-		<a name="24_2"></a>
-		<h2 class="heading2" title="24. - Uize.Delayed -&gt; 24.2. Another Possible Implementation"><span class="headingNumber"><a href="#24" title="24. - Uize.Delayed">24</a>.<a href="#24_2" title="24. - Uize.Delayed -&gt; 24.2. Another Possible Implementation">2</a>. </span>Another Possible Implementation</h2>
+		<a name="23_2"></a>
+		<h2 class="heading2" title="23. - Uize.Delayed -&gt; 23.2. Another Possible Implementation"><span class="headingNumber"><a href="#23" title="23. - Uize.Delayed">23</a>.<a href="#23_2" title="23. - Uize.Delayed -&gt; 23.2. Another Possible Implementation">2</a>. </span>Another Possible Implementation</h2>
 		<div class="contents2">
 			
 <pre class="sample-code">Uize.caller = function (_context,_method,_params,_delay) {
@@ -1546,11 +1536,11 @@ _classPrototype.perform (_actionFunction) { // support optional delay param
 </pre>
 		</div>
 		
-		<a name="24_3"></a>
-		<h2 class="heading2" title="24. - Uize.Delayed -&gt; 24.3. Sample Usage"><span class="headingNumber"><a href="#24" title="24. - Uize.Delayed">24</a>.<a href="#24_3" title="24. - Uize.Delayed -&gt; 24.3. Sample Usage">3</a>. </span>Sample Usage</h2>
+		<a name="23_3"></a>
+		<h2 class="heading2" title="23. - Uize.Delayed -&gt; 23.3. Sample Usage"><span class="headingNumber"><a href="#23" title="23. - Uize.Delayed">23</a>.<a href="#23_3" title="23. - Uize.Delayed -&gt; 23.3. Sample Usage">3</a>. </span>Sample Usage</h2>
 		<div class="contents2">
-			<a name="24_3_1"></a>
-			<h3 class="heading3" title="24. - Uize.Delayed -&gt; 24.3. Sample Usage -&gt; 24.3.1. Approach 1"><span class="headingNumber"><a href="#24" title="24. - Uize.Delayed">24</a>.<a href="#24_3" title="24. - Uize.Delayed -&gt; 24.3. Sample Usage">3</a>.<a href="#24_3_1" title="24. - Uize.Delayed -&gt; 24.3. Sample Usage -&gt; 24.3.1. Approach 1">1</a>. </span>Approach 1</h3>
+			<a name="23_3_1"></a>
+			<h3 class="heading3" title="23. - Uize.Delayed -&gt; 23.3. Sample Usage -&gt; 23.3.1. Approach 1"><span class="headingNumber"><a href="#23" title="23. - Uize.Delayed">23</a>.<a href="#23_3" title="23. - Uize.Delayed -&gt; 23.3. Sample Usage">3</a>.<a href="#23_3_1" title="23. - Uize.Delayed -&gt; 23.3. Sample Usage -&gt; 23.3.1. Approach 1">1</a>. </span>Approach 1</h3>
 			<div class="contents3">
 				
 <pre class="sample-code">_this._delayedAction = new Uize.Delayed ({delay:1000});
@@ -1564,8 +1554,8 @@ _this.wireNode (
 </pre>
 			</div>
 			
-			<a name="24_3_2"></a>
-			<h3 class="heading3" title="24. - Uize.Delayed -&gt; 24.3. Sample Usage -&gt; 24.3.2. Approach 2"><span class="headingNumber"><a href="#24" title="24. - Uize.Delayed">24</a>.<a href="#24_3" title="24. - Uize.Delayed -&gt; 24.3. Sample Usage">3</a>.<a href="#24_3_2" title="24. - Uize.Delayed -&gt; 24.3. Sample Usage -&gt; 24.3.2. Approach 2">2</a>. </span>Approach 2</h3>
+			<a name="23_3_2"></a>
+			<h3 class="heading3" title="23. - Uize.Delayed -&gt; 23.3. Sample Usage -&gt; 23.3.2. Approach 2"><span class="headingNumber"><a href="#23" title="23. - Uize.Delayed">23</a>.<a href="#23_3" title="23. - Uize.Delayed -&gt; 23.3. Sample Usage">3</a>.<a href="#23_3_2" title="23. - Uize.Delayed -&gt; 23.3. Sample Usage -&gt; 23.3.2. Approach 2">2</a>. </span>Approach 2</h3>
 			<div class="contents3">
 				
 <pre class="sample-code">var _delayedCaller = Uize.caller (_this,'doSomething',null,1000);
@@ -1580,8 +1570,8 @@ _this.wireNode (
 			</div>
 		</div>
 		
-		<a name="24_4"></a>
-		<h2 class="heading2" title="24. - Uize.Delayed -&gt; 24.4. Thoughts"><span class="headingNumber"><a href="#24" title="24. - Uize.Delayed">24</a>.<a href="#24_4" title="24. - Uize.Delayed -&gt; 24.4. Thoughts">4</a>. </span>Thoughts</h2>
+		<a name="23_4"></a>
+		<h2 class="heading2" title="23. - Uize.Delayed -&gt; 23.4. Thoughts"><span class="headingNumber"><a href="#23" title="23. - Uize.Delayed">23</a>.<a href="#23_4" title="23. - Uize.Delayed -&gt; 23.4. Thoughts">4</a>. </span>Thoughts</h2>
 		<div class="contents2">
 			
 <pre class="sample-code">function () {_this.setNodeStyle ('blah',{color:'#000'})}
@@ -1605,16 +1595,16 @@ Uize.defer
 		</div>
 	</div>
 	
-	<a name="25"></a>
-	<h1 class="heading1" title="25. More Unobtrusive JavaScript Features"><span class="headingNumber"><a href="#25" title="25. More Unobtrusive JavaScript Features">25</a>. </span>More Unobtrusive JavaScript Features</h1>
+	<a name="24"></a>
+	<h1 class="heading1" title="24. More Unobtrusive JavaScript Features"><span class="headingNumber"><a href="#24" title="24. More Unobtrusive JavaScript Features">24</a>. </span>More Unobtrusive JavaScript Features</h1>
 	<div class="contents1">
 		<p>Implement more unobtrusive features, where no JS is needed inside markup, such as...</p>
 		
 		<table class="list">
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>links that are flagged to pop open windows (perhaps with target="[some window name]")</td></tr>
 		</table>
-		<a name="25_1"></a>
-		<h2 class="heading2" title="25. More Unobtrusive JavaScript Features -&gt; 25.1. - expand/collapse"><span class="headingNumber"><a href="#25" title="25. More Unobtrusive JavaScript Features">25</a>.<a href="#25_1" title="25. More Unobtrusive JavaScript Features -&gt; 25.1. - expand/collapse">1</a>. </span>- expand/collapse</h2>
+		<a name="24_1"></a>
+		<h2 class="heading2" title="24. More Unobtrusive JavaScript Features -&gt; 24.1. - expand/collapse"><span class="headingNumber"><a href="#24" title="24. More Unobtrusive JavaScript Features">24</a>.<a href="#24_1" title="24. More Unobtrusive JavaScript Features -&gt; 24.1. - expand/collapse">1</a>. </span>- expand/collapse</h2>
 		<div class="contents2">
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>a lightweight way to get expand/collapse behavior into documents, without having to instantiate widgets</td></tr>
@@ -1622,11 +1612,11 @@ Uize.defer
 		</div>
 	</div>
 	
-	<a name="26"></a>
-	<h1 class="heading1" title="26. Code Development (in order of priority)"><span class="headingNumber"><a href="#26" title="26. Code Development (in order of priority)">26</a>. </span>Code Development (in order of priority)</h1>
+	<a name="25"></a>
+	<h1 class="heading1" title="25. Code Development (in order of priority)"><span class="headingNumber"><a href="#25" title="25. Code Development (in order of priority)">25</a>. </span>Code Development (in order of priority)</h1>
 	<div class="contents1">
-		<a name="26_1"></a>
-		<h2 class="heading2" title="26. Code Development (in order of priority) -&gt; 26.1. **** property changed events refactoring"><span class="headingNumber"><a href="#26" title="26. Code Development (in order of priority)">26</a>.<a href="#26_1" title="26. Code Development (in order of priority) -&gt; 26.1. **** property changed events refactoring">1</a>. </span>**** property changed events refactoring</h2>
+		<a name="25_1"></a>
+		<h2 class="heading2" title="25. Code Development (in order of priority) -&gt; 25.1. **** property changed events refactoring"><span class="headingNumber"><a href="#25" title="25. Code Development (in order of priority)">25</a>.<a href="#25_1" title="25. Code Development (in order of priority) -&gt; 25.1. **** property changed events refactoring">1</a>. </span>**** property changed events refactoring</h2>
 		<div class="contents2">
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>some events that were being fired in the onChange handlers were not being fired right at the end, but now they in effect are because of the way the Changed.[propertyName] event mechanism is implemented. Could this cause any weird order of execution problems?</td></tr>
@@ -1636,8 +1626,8 @@ Uize.defer
 			</table>
 		</div>
 		
-		<a name="26_2"></a>
-		<h2 class="heading2" title="26. Code Development (in order of priority) -&gt; 26.2. - high-minded ideas"><span class="headingNumber"><a href="#26" title="26. Code Development (in order of priority)">26</a>.<a href="#26_2" title="26. Code Development (in order of priority) -&gt; 26.2. - high-minded ideas">2</a>. </span>- high-minded ideas</h2>
+		<a name="25_2"></a>
+		<h2 class="heading2" title="25. Code Development (in order of priority) -&gt; 25.2. - high-minded ideas"><span class="headingNumber"><a href="#25" title="25. Code Development (in order of priority)">25</a>.<a href="#25_2" title="25. Code Development (in order of priority) -&gt; 25.2. - high-minded ideas">2</a>. </span>- high-minded ideas</h2>
 		<div class="contents2">
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>drag a value from any widget to any other widget that supports or has a child that supports the value as part of its interface</td></tr>
@@ -1647,24 +1637,24 @@ Uize.defer
 			</table>
 		</div>
 		
-		<a name="26_3"></a>
-		<h2 class="heading2" title="26. Code Development (in order of priority) -&gt; 26.3. - memory usage optimizations"><span class="headingNumber"><a href="#26" title="26. Code Development (in order of priority)">26</a>.<a href="#26_3" title="26. Code Development (in order of priority) -&gt; 26.3. - memory usage optimizations">3</a>. </span>- memory usage optimizations</h2>
+		<a name="25_3"></a>
+		<h2 class="heading2" title="25. Code Development (in order of priority) -&gt; 25.3. - memory usage optimizations"><span class="headingNumber"><a href="#25" title="25. Code Development (in order of priority)">25</a>.<a href="#25_3" title="25. Code Development (in order of priority) -&gt; 25.3. - memory usage optimizations">3</a>. </span>- memory usage optimizations</h2>
 		<div class="contents2">
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>use prototype for set-get properties?</td></tr>
 			</table>
 		</div>
 		
-		<a name="26_4"></a>
-		<h2 class="heading2" title="26. Code Development (in order of priority) -&gt; 26.4. - performance optimizations"><span class="headingNumber"><a href="#26" title="26. Code Development (in order of priority)">26</a>.<a href="#26_4" title="26. Code Development (in order of priority) -&gt; 26.4. - performance optimizations">4</a>. </span>- performance optimizations</h2>
+		<a name="25_4"></a>
+		<h2 class="heading2" title="25. Code Development (in order of priority) -&gt; 25.4. - performance optimizations"><span class="headingNumber"><a href="#25" title="25. Code Development (in order of priority)">25</a>.<a href="#25_4" title="25. Code Development (in order of priority) -&gt; 25.4. - performance optimizations">4</a>. </span>- performance optimizations</h2>
 		<div class="contents2">
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>a way to avoid calling onChange handlers at construction time</td></tr>
 			</table>
 		</div>
 		
-		<a name="26_5"></a>
-		<h2 class="heading2" title="26. Code Development (in order of priority) -&gt; 26.5. - new subclassing syntax"><span class="headingNumber"><a href="#26" title="26. Code Development (in order of priority)">26</a>.<a href="#26_5" title="26. Code Development (in order of priority) -&gt; 26.5. - new subclassing syntax">5</a>. </span>- new subclassing syntax</h2>
+		<a name="25_5"></a>
+		<h2 class="heading2" title="25. Code Development (in order of priority) -&gt; 25.5. - new subclassing syntax"><span class="headingNumber"><a href="#25" title="25. Code Development (in order of priority)">25</a>.<a href="#25_5" title="25. Code Development (in order of priority) -&gt; 25.5. - new subclassing syntax">5</a>. </span>- new subclassing syntax</h2>
 		<div class="contents2">
 			
 <pre class="sample-code">MyClass.subclass ({
@@ -1684,11 +1674,11 @@ Uize.defer
 </pre>
 		</div>
 		
-		<a name="26_6"></a>
-		<h2 class="heading2" title="26. Code Development (in order of priority) -&gt; 26.6. widget ID scheme refactoring"><span class="headingNumber"><a href="#26" title="26. Code Development (in order of priority)">26</a>.<a href="#26_6" title="26. Code Development (in order of priority) -&gt; 26.6. widget ID scheme refactoring">6</a>. </span>widget ID scheme refactoring</h2>
+		<a name="25_6"></a>
+		<h2 class="heading2" title="25. Code Development (in order of priority) -&gt; 25.6. widget ID scheme refactoring"><span class="headingNumber"><a href="#25" title="25. Code Development (in order of priority)">25</a>.<a href="#25_6" title="25. Code Development (in order of priority) -&gt; 25.6. widget ID scheme refactoring">6</a>. </span>widget ID scheme refactoring</h2>
 		<div class="contents2">
-			<a name="26_6_1"></a>
-			<h3 class="heading3" title="26. Code Development (in order of priority) -&gt; 26.6. widget ID scheme refactoring -&gt; 26.6.1. other..."><span class="headingNumber"><a href="#26" title="26. Code Development (in order of priority)">26</a>.<a href="#26_6" title="26. Code Development (in order of priority) -&gt; 26.6. widget ID scheme refactoring">6</a>.<a href="#26_6_1" title="26. Code Development (in order of priority) -&gt; 26.6. widget ID scheme refactoring -&gt; 26.6.1. other...">1</a>. </span>other...</h3>
+			<a name="25_6_1"></a>
+			<h3 class="heading3" title="25. Code Development (in order of priority) -&gt; 25.6. widget ID scheme refactoring -&gt; 25.6.1. other..."><span class="headingNumber"><a href="#25" title="25. Code Development (in order of priority)">25</a>.<a href="#25_6" title="25. Code Development (in order of priority) -&gt; 25.6. widget ID scheme refactoring">6</a>.<a href="#25_6_1" title="25. Code Development (in order of priority) -&gt; 25.6. widget ID scheme refactoring -&gt; 25.6.1. other...">1</a>. </span>other...</h3>
 			<div class="contents3">
 				<table class="list">
 				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>possibly come up with a different term for the root node of a widget (since we still have shell references in identifiers in various places, possibly just "root" instead of "shell")</td></tr>
@@ -1696,42 +1686,42 @@ Uize.defer
 			</div>
 		</div>
 		
-		<a name="26_7"></a>
-		<h2 class="heading2" title="26. Code Development (in order of priority) -&gt; 26.7. image border fade overlay"><span class="headingNumber"><a href="#26" title="26. Code Development (in order of priority)">26</a>.<a href="#26_7" title="26. Code Development (in order of priority) -&gt; 26.7. image border fade overlay">7</a>. </span>image border fade overlay</h2>
+		<a name="25_7"></a>
+		<h2 class="heading2" title="25. Code Development (in order of priority) -&gt; 25.7. image border fade overlay"><span class="headingNumber"><a href="#25" title="25. Code Development (in order of priority)">25</a>.<a href="#25_7" title="25. Code Development (in order of priority) -&gt; 25.7. image border fade overlay">7</a>. </span>image border fade overlay</h2>
 		<div class="contents2">
 			<p>a convenient way to automatically overlay a border fade on images in a document</p>
 		</div>
 		
 		<p>Uize.TextOutline: a little class to make it easy to create an outline effect around text, so that it can be legible when against a background of a similar tone (ie. insufficient contrast)</p>
 		
-		<a name="26_8"></a>
-		<h2 class="heading2" title="26. Code Development (in order of priority) -&gt; 26.8. Graphing DHTML"><span class="headingNumber"><a href="#26" title="26. Code Development (in order of priority)">26</a>.<a href="#26_8" title="26. Code Development (in order of priority) -&gt; 26.8. Graphing DHTML">8</a>. </span>Graphing DHTML</h2>
+		<a name="25_8"></a>
+		<h2 class="heading2" title="25. Code Development (in order of priority) -&gt; 25.8. Graphing DHTML"><span class="headingNumber"><a href="#25" title="25. Code Development (in order of priority)">25</a>.<a href="#25_8" title="25. Code Development (in order of priority) -&gt; 25.8. Graphing DHTML">8</a>. </span>Graphing DHTML</h2>
 		<div class="contents2">
 			<p>overlay for stock price chart images to highlight date and price at date</p>
 		</div>
 		
-		<a name="26_9"></a>
-		<h2 class="heading2" title="26. Code Development (in order of priority) -&gt; 26.9. Image Letters Widget (Uize.Widget.Spritext)"><span class="headingNumber"><a href="#26" title="26. Code Development (in order of priority)">26</a>.<a href="#26_9" title="26. Code Development (in order of priority) -&gt; 26.9. Image Letters Widget (Uize.Widget.Spritext)">9</a>. </span>Image Letters Widget (Uize.Widget.Spritext)</h2>
+		<a name="25_9"></a>
+		<h2 class="heading2" title="25. Code Development (in order of priority) -&gt; 25.9. Image Letters Widget (Uize.Widget.Spritext)"><span class="headingNumber"><a href="#25" title="25. Code Development (in order of priority)">25</a>.<a href="#25_9" title="25. Code Development (in order of priority) -&gt; 25.9. Image Letters Widget (Uize.Widget.Spritext)">9</a>. </span>Image Letters Widget (Uize.Widget.Spritext)</h2>
 		<div class="contents2">
 			<p>an easy way to display words using character set table images</p>
 		</div>
 		
-		<a name="26_10"></a>
-		<h2 class="heading2" title="26. Code Development (in order of priority) -&gt; 26.10. Auto-wired hide-reveal mechanism"><span class="headingNumber"><a href="#26" title="26. Code Development (in order of priority)">26</a>.<a href="#26_10" title="26. Code Development (in order of priority) -&gt; 26.10. Auto-wired hide-reveal mechanism">10</a>. </span>Auto-wired hide-reveal mechanism</h2>
+		<a name="25_10"></a>
+		<h2 class="heading2" title="25. Code Development (in order of priority) -&gt; 25.10. Auto-wired hide-reveal mechanism"><span class="headingNumber"><a href="#25" title="25. Code Development (in order of priority)">25</a>.<a href="#25_10" title="25. Code Development (in order of priority) -&gt; 25.10. Auto-wired hide-reveal mechanism">10</a>. </span>Auto-wired hide-reveal mechanism</h2>
 		<div class="contents2">
 			<p>for documents with sections of extra in-depth information that most users may not be interested. Allows the information to be available and read in the context of the larger document with an extra click, but without creating an overly heavy read for most users</p>
 		</div>
 		
-		<a name="26_11"></a>
-		<h2 class="heading2" title="26. Code Development (in order of priority) -&gt; 26.11. Stars Rating Widget"><span class="headingNumber"><a href="#26" title="26. Code Development (in order of priority)">26</a>.<a href="#26_11" title="26. Code Development (in order of priority) -&gt; 26.11. Stars Rating Widget">11</a>. </span>Stars Rating Widget</h2>
+		<a name="25_11"></a>
+		<h2 class="heading2" title="25. Code Development (in order of priority) -&gt; 25.11. Stars Rating Widget"><span class="headingNumber"><a href="#25" title="25. Code Development (in order of priority)">25</a>.<a href="#25_11" title="25. Code Development (in order of priority) -&gt; 25.11. Stars Rating Widget">11</a>. </span>Stars Rating Widget</h2>
 		<div class="contents2">
 			<p>a convenient way to have a rating value translated into a graphic of stars (whole and fractional). Could this be accomplished with a generalized bar / slider widget that has stars as its fullness bg?</p>
 		</div>
 		
 		<p>Suggest / Auto-complete Widget</p>
 		
-		<a name="26_12"></a>
-		<h2 class="heading2" title="26. Code Development (in order of priority) -&gt; 26.12. Utility routine to easily make a bunch of links open in a new window"><span class="headingNumber"><a href="#26" title="26. Code Development (in order of priority)">26</a>.<a href="#26_12" title="26. Code Development (in order of priority) -&gt; 26.12. Utility routine to easily make a bunch of links open in a new window">12</a>. </span>Utility routine to easily make a bunch of links open in a new window</h2>
+		<a name="25_12"></a>
+		<h2 class="heading2" title="25. Code Development (in order of priority) -&gt; 25.12. Utility routine to easily make a bunch of links open in a new window"><span class="headingNumber"><a href="#25" title="25. Code Development (in order of priority)">25</a>.<a href="#25_12" title="25. Code Development (in order of priority) -&gt; 25.12. Utility routine to easily make a bunch of links open in a new window">12</a>. </span>Utility routine to easily make a bunch of links open in a new window</h2>
 		<div class="contents2">
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>mode to automatically detect links to larger images and wire to open correctly sized. Frill where linked thumbnail "throbs" outwardly to suggest enlarging.</td></tr>
@@ -1739,8 +1729,8 @@ Uize.defer
 			</table>
 		</div>
 		
-		<a name="26_13"></a>
-		<h2 class="heading2" title="26. Code Development (in order of priority) -&gt; 26.13. Auto-viewer for Images"><span class="headingNumber"><a href="#26" title="26. Code Development (in order of priority)">26</a>.<a href="#26_13" title="26. Code Development (in order of priority) -&gt; 26.13. Auto-viewer for Images">13</a>. </span>Auto-viewer for Images</h2>
+		<a name="25_13"></a>
+		<h2 class="heading2" title="25. Code Development (in order of priority) -&gt; 25.13. Auto-viewer for Images"><span class="headingNumber"><a href="#25" title="25. Code Development (in order of priority)">25</a>.<a href="#25_13" title="25. Code Development (in order of priority) -&gt; 25.13. Auto-viewer for Images">13</a>. </span>Auto-viewer for Images</h2>
 		<div class="contents2">
 			<p>Simply put in image tags in your page, let the auto-viewer present the images to the user in a professional layout</p>
 			
@@ -1749,8 +1739,8 @@ Uize.defer
 			</table>
 		</div>
 		
-		<a name="26_14"></a>
-		<h2 class="heading2" title="26. Code Development (in order of priority) -&gt; 26.14. IDEAS"><span class="headingNumber"><a href="#26" title="26. Code Development (in order of priority)">26</a>.<a href="#26_14" title="26. Code Development (in order of priority) -&gt; 26.14. IDEAS">14</a>. </span>IDEAS</h2>
+		<a name="25_14"></a>
+		<h2 class="heading2" title="25. Code Development (in order of priority) -&gt; 25.14. IDEAS"><span class="headingNumber"><a href="#25" title="25. Code Development (in order of priority)">25</a>.<a href="#25_14" title="25. Code Development (in order of priority) -&gt; 25.14. IDEAS">14</a>. </span>IDEAS</h2>
 		<div class="contents2">
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>facilitate multiple controls controlling the same data (eg. two buttons for the same action) -- might be two different object instances linked in some way</td></tr>
@@ -1758,8 +1748,8 @@ Uize.defer
 			</table>
 		</div>
 		
-		<a name="26_15"></a>
-		<h2 class="heading2" title="26. Code Development (in order of priority) -&gt; 26.15. Puzzle Game"><span class="headingNumber"><a href="#26" title="26. Code Development (in order of priority)">26</a>.<a href="#26_15" title="26. Code Development (in order of priority) -&gt; 26.15. Puzzle Game">15</a>. </span>Puzzle Game</h2>
+		<a name="25_15"></a>
+		<h2 class="heading2" title="25. Code Development (in order of priority) -&gt; 25.15. Puzzle Game"><span class="headingNumber"><a href="#25" title="25. Code Development (in order of priority)">25</a>.<a href="#25_15" title="25. Code Development (in order of priority) -&gt; 25.15. Puzzle Game">15</a>. </span>Puzzle Game</h2>
 		<div class="contents2">
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>takes an image and splits it up into puzzle fragments and then lets the user drag and drop them in place</td></tr>
@@ -1782,14 +1772,14 @@ Uize.defer
 		</table>
 	</div>
 	
-	<a name="27"></a>
-	<h1 class="heading1" title="27. BUGS"><span class="headingNumber"><a href="#27" title="27. BUGS">27</a>. </span>BUGS</h1>
+	<a name="26"></a>
+	<h1 class="heading1" title="26. BUGS"><span class="headingNumber"><a href="#26" title="26. BUGS">26</a>. </span>BUGS</h1>
 	<div class="contents1">
-		<a name="27_1"></a>
-		<h2 class="heading2" title="27. BUGS -&gt; 27.1. General"><span class="headingNumber"><a href="#27" title="27. BUGS">27</a>.<a href="#27_1" title="27. BUGS -&gt; 27.1. General">1</a>. </span>General</h2>
+		<a name="26_1"></a>
+		<h2 class="heading2" title="26. BUGS -&gt; 26.1. General"><span class="headingNumber"><a href="#26" title="26. BUGS">26</a>.<a href="#26_1" title="26. BUGS -&gt; 26.1. General">1</a>. </span>General</h2>
 		<div class="contents2">
-			<a name="27_1_1"></a>
-			<h3 class="heading3" title="27. BUGS -&gt; 27.1. General -&gt; 27.1.1. - examples/button-types.html - nodes type button"><span class="headingNumber"><a href="#27" title="27. BUGS">27</a>.<a href="#27_1" title="27. BUGS -&gt; 27.1. General">1</a>.<a href="#27_1_1" title="27. BUGS -&gt; 27.1. General -&gt; 27.1.1. - examples/button-types.html - nodes type button">1</a>. </span>- examples/button-types.html - nodes type button</h3>
+			<a name="26_1_1"></a>
+			<h3 class="heading3" title="26. BUGS -&gt; 26.1. General -&gt; 26.1.1. - examples/button-types.html - nodes type button"><span class="headingNumber"><a href="#26" title="26. BUGS">26</a>.<a href="#26_1" title="26. BUGS -&gt; 26.1. General">1</a>.<a href="#26_1_1" title="26. BUGS -&gt; 26.1. General -&gt; 26.1.1. - examples/button-types.html - nodes type button">1</a>. </span>- examples/button-types.html - nodes type button</h3>
 			<div class="contents3">
 				<table class="list">
 				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>when disabled or selected, busy cursor doesn't display</td></tr>
@@ -1798,16 +1788,16 @@ Uize.defer
 			</div>
 		</div>
 		
-		<a name="27_2"></a>
-		<h2 class="heading2" title="27. BUGS -&gt; 27.2. Firefox"><span class="headingNumber"><a href="#27" title="27. BUGS">27</a>.<a href="#27_2" title="27. BUGS -&gt; 27.2. Firefox">2</a>. </span>Firefox</h2>
+		<a name="26_2"></a>
+		<h2 class="heading2" title="26. BUGS -&gt; 26.2. Firefox"><span class="headingNumber"><a href="#26" title="26. BUGS">26</a>.<a href="#26_2" title="26. BUGS -&gt; 26.2. Firefox">2</a>. </span>Firefox</h2>
 		<div class="contents2">
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>in the button-types example, the frames style button does not fire the "Click" event (seems to have something to do with the mousedown event handler's execution)</td></tr>
 			</table>
 		</div>
 		
-		<a name="27_3"></a>
-		<h2 class="heading2" title="27. BUGS -&gt; 27.3. Safari"><span class="headingNumber"><a href="#27" title="27. BUGS">27</a>.<a href="#27_3" title="27. BUGS -&gt; 27.3. Safari">3</a>. </span>Safari</h2>
+		<a name="26_3"></a>
+		<h2 class="heading2" title="26. BUGS -&gt; 26.3. Safari"><span class="headingNumber"><a href="#26" title="26. BUGS">26</a>.<a href="#26_3" title="26. BUGS -&gt; 26.3. Safari">3</a>. </span>Safari</h2>
 		<div class="contents2">
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>for all behaviors that are modified using the Ctrl key, should also be modified by the metaKey (for Mac users)</td></tr>
@@ -1815,20 +1805,20 @@ Uize.defer
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the ThumbZoom class zoom out effect is not centering in the window when the window is scrolled</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>after an image has zoomed out, there is a brief moment where the shield displays all solid before the opacity kicks in</td></tr>
 			</table>
-			<a name="27_3_1"></a>
-			<h3 class="heading3" title="27. BUGS -&gt; 27.3. Safari -&gt; 27.3.1. ...ImagePort.Draggable"><span class="headingNumber"><a href="#27" title="27. BUGS">27</a>.<a href="#27_3" title="27. BUGS -&gt; 27.3. Safari">3</a>.<a href="#27_3_1" title="27. BUGS -&gt; 27.3. Safari -&gt; 27.3.1. ...ImagePort.Draggable">1</a>. </span>...ImagePort.Draggable</h3>
+			<a name="26_3_1"></a>
+			<h3 class="heading3" title="26. BUGS -&gt; 26.3. Safari -&gt; 26.3.1. ...ImagePort.Draggable"><span class="headingNumber"><a href="#26" title="26. BUGS">26</a>.<a href="#26_3" title="26. BUGS -&gt; 26.3. Safari">3</a>.<a href="#26_3_1" title="26. BUGS -&gt; 26.3. Safari -&gt; 26.3.1. ...ImagePort.Draggable">1</a>. </span>...ImagePort.Draggable</h3>
 			<div class="contents3">
 				<p>no way to initiate Ctrl modifier key behaviors</p>
 			</div>
 			
-			<a name="27_3_2"></a>
-			<h3 class="heading3" title="27. BUGS -&gt; 27.3. Safari -&gt; 27.3.2. Color Pickers With Gradient example"><span class="headingNumber"><a href="#27" title="27. BUGS">27</a>.<a href="#27_3" title="27. BUGS -&gt; 27.3. Safari">3</a>.<a href="#27_3_2" title="27. BUGS -&gt; 27.3. Safari -&gt; 27.3.2. Color Pickers With Gradient example">2</a>. </span>Color Pickers With Gradient example</h3>
+			<a name="26_3_2"></a>
+			<h3 class="heading3" title="26. BUGS -&gt; 26.3. Safari -&gt; 26.3.2. Color Pickers With Gradient example"><span class="headingNumber"><a href="#26" title="26. BUGS">26</a>.<a href="#26_3" title="26. BUGS -&gt; 26.3. Safari">3</a>.<a href="#26_3_2" title="26. BUGS -&gt; 26.3. Safari -&gt; 26.3.2. Color Pickers With Gradient example">2</a>. </span>Color Pickers With Gradient example</h3>
 			<div class="contents3">
 				<p>extremely slow</p>
 			</div>
 			
-			<a name="27_3_3"></a>
-			<h3 class="heading3" title="27. BUGS -&gt; 27.3. Safari -&gt; 27.3.3. ThumbZoom"><span class="headingNumber"><a href="#27" title="27. BUGS">27</a>.<a href="#27_3" title="27. BUGS -&gt; 27.3. Safari">3</a>.<a href="#27_3_3" title="27. BUGS -&gt; 27.3. Safari -&gt; 27.3.3. ThumbZoom">3</a>. </span>ThumbZoom</h3>
+			<a name="26_3_3"></a>
+			<h3 class="heading3" title="26. BUGS -&gt; 26.3. Safari -&gt; 26.3.3. ThumbZoom"><span class="headingNumber"><a href="#26" title="26. BUGS">26</a>.<a href="#26_3" title="26. BUGS -&gt; 26.3. Safari">3</a>.<a href="#26_3_3" title="26. BUGS -&gt; 26.3. Safari -&gt; 26.3.3. ThumbZoom">3</a>. </span>ThumbZoom</h3>
 			<div class="contents3">
 				<table class="list">
 				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>zoom out effect is very choppy</td></tr>
@@ -1840,8 +1830,8 @@ Uize.defer
 			</div>
 		</div>
 		
-		<a name="27_4"></a>
-		<h2 class="heading2" title="27. BUGS -&gt; 27.4. IE (in order of priority)"><span class="headingNumber"><a href="#27" title="27. BUGS">27</a>.<a href="#27_4" title="27. BUGS -&gt; 27.4. IE (in order of priority)">4</a>. </span>IE (in order of priority)</h2>
+		<a name="26_4"></a>
+		<h2 class="heading2" title="26. BUGS -&gt; 26.4. IE (in order of priority)"><span class="headingNumber"><a href="#26" title="26. BUGS">26</a>.<a href="#26_4" title="26. BUGS -&gt; 26.4. IE (in order of priority)">4</a>. </span>IE (in order of priority)</h2>
 		<div class="contents2">
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>"Uize.WiseLoad Example": mouseover opacity effect on thumbnails not working (and trying to enable it using filter:alpha(opacity=...) was completely hosing my machine)</td></tr>

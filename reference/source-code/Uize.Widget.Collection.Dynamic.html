@@ -370,18 +370,18 @@ Uize.module ({
           _itemWidgetsAdded = []
         ;
 
-          if (!Uize.isArray (_itemsToAdd)) _itemsToAdd = [_itemsToAdd];
-          var _itemsToAddLength = _itemsToAdd.length;
-          if (_itemsToAddLength) {
-            _this._makeNewlyAddedSelected &amp;&amp; _this.selectAll (_false);
-            var _commonProperties = _this._makeNewlyAddedSelected ? _selectedProperty : _null;
-            for (var _itemToAddNo = -1; ++_itemToAddNo &lt; _itemsToAddLength;)
-              _itemWidgetsAdded.push (
-                _this._addItem (Uize.copyInto (_itemsToAdd [_itemToAddNo],_commonProperties))
-              )
-            ;
-          }
-          _this._fireItemsChangedEvent ();
+        if (!Uize.isArray (_itemsToAdd)) _itemsToAdd = [_itemsToAdd];
+        var _itemsToAddLength = _itemsToAdd.length;
+        if (_itemsToAddLength) {
+          _this._makeNewlyAddedSelected &amp;&amp; _this.selectAll (_false);
+          var _commonProperties = _this._makeNewlyAddedSelected ? _selectedProperty : _null;
+          for (var _itemToAddNo = -1; ++_itemToAddNo &lt; _itemsToAddLength;)
+            _itemWidgetsAdded.push (
+              _this._addItem (Uize.copyInto (_itemsToAdd [_itemToAddNo],_commonProperties))
+            )
+          ;
+        }
+        _this._fireItemsChangedEvent ();
 
         return _itemWidgetsAdded;
       };

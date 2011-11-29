@@ -24,18 +24,18 @@ Value Transformer
 		In the above example, the function =cubed= transforms its input value to the input value to the power of three (ie. cubed).
 
 		Using a Value Transformer Function
-			A `Value Transformer Function` can be supplied as a parameter to any method that supports a Value Transformer Function, such as the =Uize.Data.map= static method of the =Uize.Data= module. Consider the following example...
+			A `Value Transformer Function` can be supplied as a parameter to any method that supports a Value Transformer Function, such as the =Uize.map= static method. Consider the following example...
 
 			EXAMPLE
-			...................................................
+			..............................................
 			function cubed (value) {
 				return value * value * value;
 			}
 
-			var myValuesCubed = Uize.Data.map (cubed,myValues);
-			...................................................
+			var myValuesCubed = Uize.map (myValues,cubed);
+			..............................................
 
-			The =Uize.Data.map= method accepts a `Value and Key Transformer` for its first parameter and a source array as its second. It iterates through all the elements of the source array, calling the Value and Key Transformer for each element. With the transformed element values returned by the Value and Key Transformer, the method populates a new array.
+			The =Uize.map= method accepts a `Value and Key Transformer` for its first parameter and a source array as its second. It iterates through all the elements of the source array, calling the Value and Key Transformer for each element. With the transformed element values returned by the Value and Key Transformer, the method populates a new array.
 
 			In this example we are supplying a `Value Transformer` in place of a `Value and Key Transformer` (see `Using a Value Transformer in Place of a Value and Key Transformer`), which just means that the additional key / index information for the elements will be ignored. The variable =myValuesCubed=, in this case, will contain the cubes of all the values in the =myValues= source array.
 
@@ -64,12 +64,12 @@ Value Transformer
 		In the above example, the expression transforms the value of the =value= variable to =value= to the power of three (ie. cubed).
 
 		Using a Value Transformer Expression
-			A `Value Transformer Expression` can be supplied as a parameter to any method that supports a Value Transformer Expression, such as the =Uize.Data.map= static method of the =Uize.Data= module. Consider the following example...
+			A `Value Transformer Expression` can be supplied as a parameter to any method that supports a Value Transformer Expression, such as the =Uize.map= static method. Consider the following example...
 
 			EXAMPLE
-			.....................................................................
-			var myValuesCubed = Uize.Data.map ('value * value * value',myValues);
-			.....................................................................
+			................................................................
+			var myValuesCubed = Uize.map (myValues,'value * value * value');
+			................................................................
 
 			This example is essentially the same as the example shown in the section `Using a Value Transformer Function`, excepting that the `Value Transformer` is being specified in the form of a `Value Transformer Expression`, rather than a `Value Transformer Function`. The variable =myValuesCubed=, in this case, will contain the cubes calculated from all the values in the =myValues= source array.
 
@@ -146,8 +146,8 @@ Value Transformer
 
 			In such cases, the key that is supplied as the second parameter to the Value Transformer that is only expecting a single parameter will simply be ignored - the transformed value that it returns will only be influenced by the value and not the key.
 
-			The Uize.Data.map Method
-				While the =Uize.Data.map= method of the =Uize.Data= module expects a `Value and Key Transformer`, a `Value Transformer` can be supplied instead.
+			The Uize.map Method
+				While the =Uize.map= method expects a `Value and Key Transformer`, a `Value Transformer` can be supplied instead.
 
 				To see an example that illustrates this, consult the section `Using a Value Transformer Function`.
 
@@ -167,7 +167,7 @@ Value Transformer
 			While an input value for a Value Transformer is likely to be a simple type value, such as a number or a string, there is no saying that an input value can't also be an array or an object. Consider the following example...
 
 			EXAMPLE
-			................................................
+			...........................................
 			function computeArea (value) {
 				return value.width * value.height;
 			}
@@ -178,11 +178,11 @@ Value Transformer
 					{width:1.4,height:5},
 					{width:3,height:4}
 				],
-				rectAreas = Uize.Data.map (computeArea,rects)
+				rectAreas = Uize.map (rects,computeArea)
 			;
-			................................................
+			...........................................
 
-			In the above example, the =computeArea= function defines a `Value Transformer` that transforms an input value that is expected to be an object with =width= and =height= properties, into an area value that is computed as the product of the =width= and =height= properties. This value transformer is then supplied to the =Uize.Data.map= method, which is used to produce an array containing the areas computed from the rectangle objects inside the =rects= array. After the above code has been executed, the statement =alert (rectAreas)= would display the text "50,7,12" in the alert dialog.
+			In the above example, the =computeArea= function defines a `Value Transformer` that transforms an input value that is expected to be an object with =width= and =height= properties, into an area value that is computed as the product of the =width= and =height= properties. This value transformer is then supplied to the =Uize.map= method, which is used to produce an array containing the areas computed from the rectangle objects inside the =rects= array. After the above code has been executed, the statement =alert (rectAreas)= would display the text "50,7,12" in the alert dialog.
 
 	### Supporting Value Transformers
 		document...
@@ -325,7 +325,7 @@ Value Conformer
 	A Value Conformer can be considered to be a specialized kind of `Value Transformer`, where the input value may be returned as is if it already conforms to the criteria, or it may be transformed in some way to force it into conformance with the criteria.
 
 	Applications of Value Conformers
-		Value conformers can have a variety of different uses - they can be used as conformers for set-get properties, or they can be supplied to map functions (such as =Uize.Data.map=).
+		Value conformers can have a variety of different uses - they can be used as conformers for set-get properties, or they can be supplied to map functions (such as =Uize.map=).
 
 		Among other things, value conformers can be used to...
 
@@ -352,14 +352,14 @@ Value Conformer
 		In the above example, the =conformToRange0to100= function defines a `Value Conformer` that conforms a number value so that it is constrained to the value range of =0= to =100=.
 
 		Using a Value Conformer Function
-			A `Value Conformer Function` can be supplied as a parameter to any method that supports a `Value Transformer Function`, such as the =Uize.Data.map= static method of the =Uize.Data= module. Consider the following example...
+			A `Value Conformer Function` can be supplied as a parameter to any method that supports a `Value Transformer Function`, such as the =Uize.map= static method. Consider the following example...
 
 			EXAMPLE
-			................................................
-			Uize.Data.map (Math.round,myNumbersArray,false);
-			................................................
+			...........................................
+			Uize.map (myNumbersArray,Math.round,false);
+			...........................................
 
-			In the above example, the =Math.round= static method of JavaScript's built-in =Math= object is being used as a value conformer with the =Uize.Data.map= method in order to conform all the number values in an array to integer values. The third parameter of the =Uize.Data.map= method specifies the target for the mapped values, where the value =false= indicates that the values should *not* be populated into a new array but should replace the values in the source array.
+			In the above example, the =Math.round= static method of JavaScript's built-in =Math= object is being used as a value conformer with the =Uize.map= method in order to conform all the number values in an array to integer values. The third parameter of the =Uize.map= method specifies the target for the mapped values, where the value =false= indicates that the values should *not* be populated into a new array but should replace the values in the source array.
 
 			Conformers for Set-get Properties
 				A `Value Conformer Function` can be specified for the =conformer= property in the profile of a set-get property. Consider the following example...

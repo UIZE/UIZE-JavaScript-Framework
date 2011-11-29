@@ -267,24 +267,15 @@ Uize.module ({
         /*** compiler directives ***/
           /*** interface type directives ***/
             function required (_requiredModules) {
-              if (_requiredModules) {
-                if (typeof _requiredModules == _string)
-                  _requiredModules = _requiredModules.split (',')
-                ;
-                for (
-                  var
-                    _requiredModuleNo = -1,
-                    _requiredModulesLength = _requiredModules.length,
-                    _requiredModuleName
-                  ;
-                  ++_requiredModuleNo &lt; _requiredModulesLength;
-                ) {
-                  if (!_alreadyRequired [_requiredModuleName = _requiredModules [_requiredModuleNo]]) {
+              Uize.forEach (
+                typeof _requiredModules == _string ? _requiredModules.split (',') : _requiredModules,
+                function (_requiredModuleName) {
+                  if (!_alreadyRequired [_requiredModuleName]) {
                     _required.push (_requiredModuleName);
                     _alreadyRequired [_requiredModuleName] = 1;
                   }
                 }
-              }
+              );
               /*?
                 Directives
                   @required

@@ -31,7 +31,6 @@ Uize.module ({
 		'Uize.Util.Oop',
 		'Uize.Node',
 		'Uize.String',
-		'Uize.Data',
 		'Uize.Data.PathsTree',
 		'Uize.Array.Sort',
 		'Uize.Json',
@@ -141,9 +140,7 @@ Uize.module ({
 											_widgetClassesLength = _widgetClasses.length,
 											_widgetClass,
 											_widgetClassWidgets,
-											_widgetClassWidgetsLength,
-											_widgetClassItem,
-											_widgetClassItemItems
+											_widgetClassWidgetsLength
 										;
 										++_widgetClassNo < _widgetClassesLength;
 									) {
@@ -153,24 +150,25 @@ Uize.module ({
 													_widgetClassWidgets =
 														_instancesPerWidgetClassMap [_widgetClass = _widgetClasses [_widgetClassNo]]
 												).length
-										) {
-											_items.push (
-												_widgetClassItem = {
-													title:_widgetClass + ' (' + _widgetClassWidgetsLength + ')',
-													link:_treeItemLink,
-													expanded:false,
-													objectPath:_widgetClass,
-													items:_widgetClassItemItems = []
-												}
-											);
-											for (var _widgetNo = -1, _widgetPath; ++_widgetNo < _widgetClassWidgetsLength;)
-												_widgetClassItemItems.push ({
-													title:_widgetPath = _this._getWidgetPath (_widgetClassWidgets [_widgetNo]),
-													link:_treeItemLink,
-													objectPath:_widgetPath
-												})
-											;
-										}
+										)
+											_items.push ({
+												title:_widgetClass + ' (' + _widgetClassWidgetsLength + ')',
+												link:_treeItemLink,
+												expanded:false,
+												objectPath:_widgetClass,
+												items:Uize.map (
+													_widgetClassWidgets,
+													function (_widgetClassWidget) {
+														var _widgetPath = _this._getWidgetPath (_widgetClassWidget);
+														return {
+															title:_widgetPath,
+															link:_treeItemLink,
+															objectPath:_widgetPath
+														};
+													}
+												)
+											})
+										;
 									}
 
 								return _items;
@@ -606,17 +604,11 @@ Uize.module ({
 			};
 
 			_classPrototype._getBuiltModules = function () {
-				var
-					_openerUize = this._window.Uize,
-					_builtModules = _openerUize.getModulesBuilt && _openerUize.getModulesBuilt ()
-						/* NOTE: Uize.getModulesBuilt is deprecated */
-				;
-				if (!_builtModules) {
-					_builtModules = [];
-					var _modulesByName = _openerUize.getModuleByName ('*');
-					for (var _moduleName in _modulesByName) _builtModules.push (_moduleName);
-				}
-				return _builtModules;
+				var _openerUize = this._window.Uize;
+				return (
+					(_openerUize.getModulesBuilt && _openerUize.getModulesBuilt ()) ||
+					Uize.keys (_openerUize.getModuleByName ('*')) // NOTE: Uize.getModulesBuilt is deprecated */
+				);
 			};
 
 			_classPrototype._getWidgetPath = function (_widget) {
@@ -772,23 +764,18 @@ Uize.module ({
 					_items = [],
 					_builtModules = _this._getBuiltModules ()
 				;
-				_moduleMatcher && _builtModules.sort ();
-				for (
-					var
-						_builtModuleNo = -1,
-						_builtModulesLength = _builtModules.length
-					;
-					++_builtModuleNo < _builtModulesLength;
-				) {
-					var _builtModule = _builtModules [_builtModuleNo];
-					_builtModule && (!_moduleMatcher || _moduleMatcher (_builtModule)) &&
-						_items.push ({
-							title:_builtModule,
-							link:_treeItemLink,
-							objectPath:_builtModule
-						})
-					;
-				}
+				Uize.forEach (
+					_moduleMatcher ? _builtModules.sort () : _builtModules,
+					function (_builtModule) {
+						_builtModule && (!_moduleMatcher || _moduleMatcher (_builtModule)) &&
+							_items.push ({
+								title:_builtModule,
+								link:_treeItemLink,
+								objectPath:_builtModule
+							})
+						;
+					}
+				);
 				return _items;
 			};
 
@@ -855,26 +842,17 @@ Uize.module ({
 			};
 
 			_classPrototype._getMatchingWidgetsTreeListItems = function (_widgetMatcher) {
-				var
-					_this = this,
-					_items = []
-				;
-				for (
-					var
-						_widgetNo = -1,
-						_widgets = _this._getMatchingWidgetsFromTree (_widgetMatcher).sort (),
-						_widgetsLength = _widgets.length
-					;
-					++_widgetNo < _widgetsLength;
-				) {
-					var _objectPath = _widgets [_widgetNo];
-					_items.push ({
-						title:_objectPath,
-						link:_treeItemLink,
-						objectPath:_objectPath
-					})
-				}
-				return _items;
+				var _this = this;
+				return Uize.map (
+					_this._getMatchingWidgetsFromTree (_widgetMatcher).sort (),
+					function (_widget) {
+						return {
+							title:_objectPath,
+							link:_treeItemLink,
+							objectPath:_objectPath
+						};
+					}
+				);
 			};
 
 			_classPrototype._getMatchingWidgetDomNodesTreeListItems = function (_nodeMatcher) {
@@ -954,15 +932,7 @@ Uize.module ({
 					_processWidget (_this._getPageWidget ());
 
 				return Uize.Array.Sort.sortBy (
-					Uize.Data.map (
-						function (_node) {
-							var _nodeId = _node.id;
-							return {
-								title:'#' + _nodeId,
-								link:_treeItemLink,
-								objectPath:'document.getElementById (\'' + _nodeId + '\')'
-							};
-						},
+					Uize.map (
 						_this._window.Uize.Node.find ({
 							id:function (_nodeId) {
 								if (!_nodeId || _accessedNodesLookup [_nodeId]) return false;
@@ -973,7 +943,15 @@ Uize.module ({
 								}
 								return _nodeBelongsToWidget == _widgetOrNotWidget;
 							}
-						})
+						}),
+						function (_node) {
+							var _nodeId = _node.id;
+							return {
+								title:'#' + _nodeId,
+								link:_treeItemLink,
+								objectPath:'document.getElementById (\'' + _nodeId + '\')'
+							};
+						}
 					),
 					'value.title'
 				);
@@ -1061,7 +1039,8 @@ Uize.module ({
 												'<td>WIDGET PATH</td>' +
 												'<td>CLASS</td>' +
 											'</tr>' +
-											Uize.Data.map (
+											Uize.map (
+												_widgets,
 												function (_widget) {
 													_widget = _this._resolveToObject (_widget);
 													return (
@@ -1074,8 +1053,7 @@ Uize.module ({
 															'</td>' +
 														'</tr>'
 													);
-												},
-												_widgets
+												}
 											).join ('') +
 										'</table>'
 									)
@@ -1139,7 +1117,8 @@ Uize.module ({
 													'<td>ID</td>' +
 													'<td>TAG</td>' +
 												'</tr>' +
-												Uize.Data.map (
+												Uize.map (
+													_nodeNames,
 													function (_nodeName) {
 														var
 															_node = _allNodesMap [_nodeName],
@@ -1167,8 +1146,7 @@ Uize.module ({
 																'</td>' +
 															'</tr>'
 														);
-													},
-													_nodeNames
+													}
 												).join ('') +
 											'</table>'
 										)
@@ -1210,7 +1188,8 @@ Uize.module ({
 													'<td>NAME</td>' +
 													'<td>VALUE</td>' +
 												'</tr>' +
-												Uize.Data.map (
+												Uize.map (
+													_stringNames,
 													function (_stringName) {
 														return (
 															'<tr>' +
@@ -1220,8 +1199,7 @@ Uize.module ({
 																'<td>' + _localized [_stringName] + '</td>' +
 															'</tr>'
 														);
-													},
-													_stringNames
+													}
 												).join ('') +
 											'</table>'
 										)
@@ -1250,9 +1228,9 @@ Uize.module ({
 									_htmlChunks,
 									'INHERITANCE CHAIN',
 									'inheritance depth: ' + (_inheritanceChain.length - 1),
-									Uize.Data.map (
-										function (_class) {return _getObjectLink (_class.moduleName)},
-										_inheritanceChain
+									Uize.map (
+										_inheritanceChain,
+										function (_class) {return _getObjectLink (_class.moduleName)}
 									).join (' -> '),
 									'this is the root class',
 									true
@@ -1264,7 +1242,8 @@ Uize.module ({
 									_htmlChunks,
 									'SUBCLASSES (ON THIS PAGE)',
 									_subclasses.length + ' subclasses',
-									Uize.Data.map (
+									Uize.map (
+										_subclasses,
 										function (_item) {
 											return (
 												_getObjectLink (_item.title) +
@@ -1274,8 +1253,7 @@ Uize.module ({
 														: ''
 												)
 											);
-										},
-										_subclasses
+										}
 									),
 									'no subclasses on this page',
 									true

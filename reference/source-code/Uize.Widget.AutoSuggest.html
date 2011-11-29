@@ -68,7 +68,6 @@ Uize.module({
   name: 'Uize.Widget.AutoSuggest',
   superclass: 'Uize.Widget.FormElement.Text',
   required: [
-    'Uize.Data',
     'Uize.Data.NameValueRecords',
     'Uize.Node',
     'Uize.Node.Event',
@@ -355,7 +354,7 @@ Uize.module({
                 _Uize.isArray(_quotes) ?
                   typeof _quotes[0] === 'object' ?
                     _quotes :
-                    _Uize_Data.map(function (_quote) { return { open: _quote, close: _quote} }, _quotes) :
+                    _Uize.map(_quotes, function (_quote) { return { open: _quote, close: _quote} }) :
                   typeof _quotes === 'object' ?
                     [_quotes] :
                     [{ open: _quotes, close: _quotes}],
@@ -484,7 +483,8 @@ Uize.module({
                 (_suggestions || _this._addAndWireSuggestions()).set({
                   tentativeValue: _null,
                   tentativeValueNo: -1,
-                  values: _Uize_Data.map(
+                  values: _Uize.map(
+                    _this._responseAdapter(_normalizedQuery, _response),
                     function (_suggestion) {
                       var
                         _term = _suggestion.fullWord,
@@ -499,8 +499,7 @@ Uize.module({
                             */
                       ;
                       return _this._optionDataAdapter(_term, _formattedTerm);
-                    },
-                    _this._responseAdapter(_normalizedQuery, _response)
+                    }
                   )
                 });
                 _this._updateSuggestionsPalette();
@@ -788,17 +787,17 @@ Uize.module({
         _responseAdapter: {
           name: 'responseAdapter',
           value: function (_normalizedQuery, _response) {
-            return _Uize_Data.map(
-                function (_term) {
-                  return {
-                    prefix: _emptyString,
-                    suffix: _term.substr(_normalizedQuery.length),
-                    fullWord: _term
+            return _Uize.map(
+              _response,
+              function (_term) {
+                return {
+                  prefix: _emptyString,
+                  suffix: _term.substr(_normalizedQuery.length),
+                  fullWord: _term
 
-                  }
-                },
-                _response
-              )
+                }
+              }
+            )
           }
           /*?
             Set-get Properties

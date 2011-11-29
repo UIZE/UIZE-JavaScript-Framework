@@ -856,10 +856,6 @@ Only Use set Method For Changing Property Values
 			Uize.Browser.Window.resize (window,'max','max')
 			Uize.Browser.Window.resize (window,null,'max')
 
-Proposed Shortenings
-	- Uize.Node.getById -> Uize.Node.byId or Uize.Node.id or just Uize.Node
-	- myWidget.getNode -> myWidget.node
-
 Key Aspects of a Framework
 	Solving fundamental problems in useful, convenient, friendly, understandable ways
 

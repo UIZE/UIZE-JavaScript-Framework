@@ -261,12 +261,10 @@ Uize.module ({
           function _updateButtonEnabled () {
             _buttonWidget.set ({enabled:_enabledWhen.stateEvaluator.call (_this) ? 'inherit' : _false});
           }
-          for (
-            var _affectedByNo = -1, _affectedByLength = _affectedBy.length;
-            ++_affectedByNo &lt; _affectedByLength;
-          )
-            _this.wire ('Changed.' + _affectedBy [_affectedByNo],_updateButtonEnabled)
-          ;
+          Uize.forEach (
+            _affectedBy,
+            function (_affectedByProperty) {_this.wire ('Changed.' + _affectedByProperty,_updateButtonEnabled)}
+          );
           _updateButtonEnabled ();
         };
         return _buttonWidget;
@@ -669,19 +667,13 @@ Uize.module ({
       };
 
       _classPrototype.getPropertyForItems = function (_propertyName,_itemWidgets) {
-        var _propertyForSelected = [];
-        for (
-          var
-            _itemWidgetNo = -1,
-            _itemWidgetsLength = _itemWidgets.length,
-            _wildcardMode = _propertyName == _undefined
-          ;
-          ++_itemWidgetNo &lt; _itemWidgetsLength;
-        ) {
-          var _itemProperties = _itemWidgets [_itemWidgetNo].get ('properties');
-          _propertyForSelected.push (_wildcardMode ? _itemProperties : _itemProperties [_propertyName]);
-        }
-        return _propertyForSelected;
+        return Uize.map (
+          _itemWidgets,
+          function (_itemWidget) {
+            var _itemProperties = _itemWidget.get ('properties');
+            return _propertyName == _undefined ? _itemProperties : _itemProperties [_propertyName];
+          }
+        );
         /*?
           Instance Methods
             getPropertyForItems
@@ -1110,24 +1102,16 @@ Uize.module ({
           name:'items',
           value:[],
           onChange:function () {
-            var
-              _this = this,
-              _items = _this._items
-            ;
+            var _this = this;
 
             /** first remove the old items UI **/
               _this._removeAllItemsUiAndWidget();
 
             /*** create item widgets ***/
-              if (_items) {
-              for (
-                  var _itemNo = -1, _itemsLength = _items.length;
-                ++_itemNo &lt; _itemsLength;
-              ) {
-                var _item = _items [_itemNo];
-                _this.addItemWidget (_this.makeItemWidgetName (_item),{properties:_item});
-              }
-              }
+              Uize.forEach (
+                _this._items,
+                function (_item) {_this.addItemWidget (_this.makeItemWidgetName (_item),{properties:_item})}
+              );
 
             _this._fireItemsChangedEvent ();
           }

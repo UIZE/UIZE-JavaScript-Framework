@@ -32,7 +32,6 @@ Uize.module({
 		'Uize.Scruncher',
 		'Uize.String',
 		'Uize.String.Lines',
-		'Uize.Data',
 		'Uize.Data.Simple',
 		'Uize.Doc.Simple',
 		'Uize.Util.Oop'
@@ -180,9 +179,9 @@ Uize.module({
 											?
 												(
 													'\t\tThe following example pages are good showcases for the =' + _moduleName + '= module...\n' +
-													Uize.Data.map (
-														'"\\t\\t- [[" + value.url + "][" + value.title + "]] - " + value.description + "\\n"',
-														_examples
+													Uize.map (
+														_examples,
+														'"\\t\\t- [[" + value.url + "][" + value.title + "]] - " + value.description + "\\n"'
 													).join ('')
 												)
 											: '\t\tThere are no dedicated showcase example pages for the =' + _moduleName + '= module.\n'
@@ -232,7 +231,7 @@ Uize.module({
 											? (
 												'\t\tINHERITANCE CHAIN\n' +
 												'\t\t' +
-													Uize.Data.map ('"=" + value.moduleName + "="',_inheritanceChain).join (' -> ') +
+													Uize.map (_inheritanceChain,'"=" + value.moduleName + "="').join (' -> ') +
 													'\n' +
 												'\n'
 											)
@@ -274,7 +273,7 @@ Uize.module({
 										_hasFilteredFeatures = true;
 										_filteredFeaturesChunks.push (
 											'\t\t\t' + _featuresSectionTitle.toUpperCase () + '\n' +
-											'\t\t\t' + Uize.Data.map ('"=" + value.name + "="',_filteredFeatures).join (' | ') + '\n' +
+											'\t\t\t' + Uize.map (_filteredFeatures,'"=" + value.name + "="').join (' | ') + '\n' +
 											'\n'
 										);
 									}

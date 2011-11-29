@@ -218,13 +218,11 @@ Uize.module ({
         _totalItems:{
           name:'totalItems',
           onChange:function () {
-            var
-              _this = this,
-              _itemNodeNames = _this._itemNodeNames = []
-            ;
-            for (var _itemNo = -1, _totalItems = _this._totalItems; ++_itemNo &lt; _totalItems;)
-              _itemNodeNames.push (_this._getItemNodeName (_itemNo))
-            ;
+            var _this = this;
+            _this._itemNodeNames = Uize.map (
+              _this._totalItems,
+              function (_junkValue,_itemNo) {return _this._getItemNodeName (_itemNo)}
+            );
           },
           value:0
           /*?

@@ -97,7 +97,7 @@ Uize.module ({
               _this._unappliedChildrenProperties = {};
 
             /*** Public Instance Properties ***/
-              _this.children = _this._children = {
+              _this.children = _this._children = {};
                 /*?
                   Instance Properties
                     children ~~ children Instance Property
@@ -127,7 +127,6 @@ Uize.module ({
                       - see also the special `children set-get property`
                       - see also the related =parent= instance property
                 */
-              };
           }
         ),
         _classPrototype = _class.prototype
@@ -1660,10 +1659,7 @@ Uize.module ({
             this.set ({wired:_true});
 
             /*** wire or insert UI of children ***/
-              var _children = this._children;
-              for (var _childName in _children)
-                _children [_childName].insertOrWireUi ()
-              ;
+              Uize.callOn (this._children,'insertOrWireUi');
 
             this.updateUi ();
           }

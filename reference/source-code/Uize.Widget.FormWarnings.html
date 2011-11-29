@@ -116,13 +116,11 @@ Uize.module ({
         _watchedElements:{
           name:'watchedElements',
           onChange:function() {
-            var
-              _watchedElements = this._watchedElements,
-              _watchedElementNo = -1
-            ;
-            for (; ++_watchedElementNo &lt; _watchedElements.length;)
-              this._wireWatchedElement(_watchedElements[_watchedElementNo])
-            ;
+            var _this = this;
+            Uize.forEach (
+              _this._watchedElements,
+              function (_watchedElement) {_this._wireWatchedElement (_watchedElement)}
+            );
           },
           value:[]
         }

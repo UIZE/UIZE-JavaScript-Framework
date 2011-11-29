@@ -53,7 +53,6 @@
 Uize.module({
   name:'Uize.Doc.Simple',
   required:[
-    'Uize.Data',
     'Uize.Data.Simple',
     'Uize.String',
     'Uize.Templates.List',
@@ -169,7 +168,7 @@ Uize.module({
       function _getSectionPathFromId (_sectionId) {
         return (
           _sectionIdToPathMap [_sectionId] ||
-          (_sectionIdToPathMap [_sectionId] = Uize.Data.map ('+value',_sectionId.split ('_')))
+          (_sectionIdToPathMap [_sectionId] = Uize.map (_sectionId.split ('_'),'+value'))
         );
       }
 
@@ -267,9 +266,7 @@ Uize.module({
                 }
 
               /*** perform canonicalizing within each of the peer sections ***/
-                for (var _childNo = -1, _childrenLength = _children.length; ++_childNo &lt; _childrenLength;)
-                  _canonicalizePeerSections (_children [_childNo])
-                ;
+                Uize.forEach (_children,_canonicalizePeerSections,true);
             }
           }
           _params.canonicalizePeerSections !== false &amp;&amp;
@@ -281,18 +278,13 @@ Uize.module({
           if (_sectionsToSort) {
             var _sectionsToSortLookup = Uize.lookup (_sectionsToSort);
             function _sortPeerSections (_data) {
-              var
-                _children = _data.children,
-                _childrenLength = _children.length
-              ;
-              if (_childrenLength) {
+              var _children = _data.children;
+              if (_children.length) {
                 /*** sort all the peer sections (if this section should be sorted) ***/
                   _sectionsToSortLookup [_data.value] &amp;&amp; Uize.Array.Sort.sortBy (_children,'value.value');
 
                 /*** handle sorting within each of the peer sections ***/
-                  for (var _childNo = -1; ++_childNo &lt; _childrenLength;)
-                    _sortPeerSections (_children [_childNo])
-                  ;
+                  Uize.forEach (_children,_sortPeerSections,true);
               }
             }
             _sortPeerSections (_data);

@@ -1,0 +1,89 @@
+The =Uize= base module has been improved with the addition of the new =Uize.forEach= and =Uize.map= static methods.
+
+Uize.forEach
+	The new =Uize.forEach= static method lets you iterate over an array, object, or length, calling the specified iteration handler for each element or property.
+
+	In its most basic usage, the =Uize.forEach= method can be used to iterate over the elements of an array, performing an action for each element.
+
+	EXAMPLE
+	.....................................................................
+	var fruits = ['apple','banana','grape','melon','peach','watermelon'];
+
+	function createFruitWidget (fruit) {
+		// create a widget for the fruit
+	}
+
+	Uize.forEach (fruits,createFruitWidget);
+	.....................................................................
+
+	Key Benefits
+		While regular JavaScript =for= loops are still worth using in the majority of cases, there are a number of benefits to using the =Uize.forEach= method for iterating...
+
+		- produces more concise code
+		- supports iterating over object properties
+		- supports concise string iteration handler
+		- uses javascript's built-in, when possible
+		- enforces optimized for loop
+		- supports iterating over unassigned array elements
+		- supports iterating for a specified number of iterations
+
+	Some Limitations
+		The =Uize.forEach= is intended for a common and very simple use case, and for this use case it provides a convenient and concise form for expressing iteration.
+
+		As soon as one strays from the very narrow use case that this method is geared towards, one finds oneself needing to use regular JavaScript loops. The most notable limitations of the =Uize.forEach= method are as follows...
+
+		- iterates over every element - can't skip elements, or go back and repeat elements
+		- iterates forwards - can't iterate backwards
+		- iteration can't be stopped - there is no break facility available
+		- iteration handler shouldn't modify the number or order of elements in an array
+		- every iteration involves a function call - sometimes this performance cost may be prohibitive
+
+Uize.map
+	Iterates through the specified array (or object), executing the specified mapper expression or function for each element (or object property), and packages the results into an array (or object).
+
+	SYNTAX
+	....................................................................
+	mappedARRAYorOBJ = Uize.map (sourceARRAYorOBJorINT,mapperSTRorFUNC);
+	....................................................................
+
+	The =Uize.map= method is very vertatile and can be used to accomplish a wide array of different tasks. The example below, which takes a source array of strings and produces a new array of those strings uppercased, illustrates the difference between writing your own iterator and using the =Uize.map= method.
+
+	INSTEAD OF...
+	.............................................................
+	var newArray = [];
+	for (var elementNo = -1; ++elementNo < sourceArray.length;) {
+		newArray.push (sourceArray [elementNo].toUpperCase ());
+	}
+	.............................................................
+
+	USE...
+	.............................................................
+	var newArray = Uize.map (sourceArray,'value.toUpperCase ()');
+	.............................................................
+
+	For tons more great examples, consult the reference documentation for the method in the =Uize= module reference.
+
+	Key Benefits
+		The =Uize.map= static method provides some key improvements over the =Array= object's =map= method in JavaScript 1.6 (which is not supported in all browsers)...
+
+		- can operate on objects as well as arrays
+		- supports a more concise mapper expression string, as well as supporting a function
+		- can optionally modify the source array or object
+		- allows easy creation of a fresh source array for mapping, by specifying an array length
+		- lets you specify an explicit target, where mapped values should be written to
+
+	Migrated from Uize.Data
+		If you're a UIZE developer and the =Uize.map= sounds a little familiar to you, that's because it's been promoted from the =Uize.Data= module, with a minor change to its signature.
+
+		Whereas, in the =Uize.Data= module the =Uize.Data.map= method accepts a mapper expression or function as its first argument and an array, object, or number as its second argument, these two arguments are swapped around in the =Uize.map= method. This is the more conventional signature for =map= type methods.
+
+		As a result of the migration from the =Uize.Data= module, the =Uize.Data.map= method has been deprecated. Because it has been deprecated, it will live on for about another year before being removed from that module. The deprecated =Uize.Data.map= method still behaves in the same way and uses the same signature as before.
+
+Comprehensive Documentation and Unit Tests
+	Comprehensive documentation and thorough unit tests have been created for the new =Uize.forEach= and =Uize.map= static methods.
+
+....................................................................................
+<< metadata >>
+
+title: 2011-11-27 - Uize Base Gets Uize.forEach and Uize.map
+....................................................................................

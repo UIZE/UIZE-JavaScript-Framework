@@ -772,6 +772,27 @@ Uize.module ({
 					},
 					{
 						title:
+							'Test that values can be obtained for multiple properties by calling the get method with a single argument, which is an object whose properties are the properties of the instance whose values should be obtained',
+						test:function () {
+							var _Subclass = Uize.subclass ();
+							_Subclass.registerProperties ({
+								property1:{value:'property1Value'},
+								property2:{value:'property2Value'},
+								property3:{value:'property3Value'}
+							});
+							var _testContext = _isInstance ? new _Subclass : _Subclass;
+							return this.expect (
+								{
+									property1:'property1Value',
+									property2:'property2Value',
+									property3:'property3Value'
+								},
+								_testContext.get ({property1:0,property2:0,property3:0})
+							);
+						}
+					},
+					{
+						title:
 							'Test that values can be obtained for all properties by calling the get method with no arguments',
 						test:function () {
 							var _Subclass = Uize.subclass ();
@@ -1884,6 +1905,14 @@ Uize.module ({
 								[_oneLevelDeepTestArrayForCloning],
 								_oneLevelDeepTestArrayForCloning
 							],
+							{
+								title:'Test that cloning a non-empty array with custom properties preserves the custom properties in the clone',
+								test:function () {
+									var _arrayWithCustomProperties = [0,1,2];
+									_arrayWithCustomProperties.foo = 'bar';
+									return this.expect (_arrayWithCustomProperties,Uize.clone (_arrayWithCustomProperties));
+								}
+							},
 
 						/*** test cloning of complex data structures ***/
 							['Test that cloning a complex object data structure is handled correctly',
@@ -1916,6 +1945,400 @@ Uize.module ({
 								[],
 								undefined
 							]
+					]],
+					['Uize.map',[
+						['Test that function mapper gets element value as a parameter correctly',
+							[['a','b','c'],function (_value) {return _value.toUpperCase ()}],
+							['A','B','C']
+						],
+						['Test that function mapper gets element key as a parameter correctly',
+							[['a','b','c'],function (_value,_key) {return _key}],
+							[0,1,2]
+						],
+						['Test that function mapper is called as instance method on array correctly',
+							[['a','b','c'],function () {return this.length}],
+							[3,3,3]
+						],
+						['Test that number can be specified in place of a source array',
+							[['a','b','c'],function (_value,_key) {return (_key + 1) + ' of ' + this.length + ' = ' + _value}],
+							['1 of 3 = a','2 of 3 = b','3 of 3 = c']
+						],
+						['Test that a string can be used to specify a mapper',
+							[['a','b','c'],'(key + 1) + \' of \' + this.length + \' = \' + value'],
+							['1 of 3 = a','2 of 3 = b','3 of 3 = c']
+						],
+						['Test that a source object is automatically mapped to a object',
+							[{a:0,b:1,c:2},'key + value'],
+							{a:'a0',b:'b1',c:'c2'}
+						],
+						['Test that an empty array maps to an empty array',
+							[[],'value'],
+							[]
+						],
+						['Test that an empty object maps to an empty object',
+							[{},'value'],
+							{}
+						],
+
+						/*** test target parameter ***/
+							['Test that map can be used to convert an array to an object by specifying an empty object target',
+								[['a','b','c'],'value',{}],
+								{0:'a',1:'b',2:'c'}
+							],
+							['Test that map can be used to convert an object to an array by specifying an empty array target',
+								[{0:'a',1:'b',2:'c'},'value',[]],
+								['a','b','c']
+							],
+							['Test that an empty array maps to an empty object, when an empty object target is specified',
+								[[],'value',{}],
+								{}
+							],
+							['Test that an empty object maps to an empty array, when an empty array target is specified',
+								[{},'value',[]],
+								[]
+							]/*,
+							_arrayMethodTargetTest (
+								'Uize',
+								'map',
+								[1,2,3,4,5],
+								[2,4,6,8,10],
+								['value * 2',null,null],
+								1,
+								2
+							)*/
+					]],
+					['Uize.forEach',[
+						/*** test support for the source being an array ***/
+							{
+								title:'Test that, when the source is an empty array, the iterator is never called',
+								test:function () {
+									var _iteratorCalled = false;
+									Uize.forEach ([],function () {_iteratorCalled = true});
+									return this.expect (false,_iteratorCalled);
+								}
+							},
+							{
+								title:'Test that, when the source is an array, the iteration handler is called as a method on the optionally specified context',
+								test:function () {
+									var
+										_context = {},
+										_seenContext
+									;
+									Uize.forEach (['foo'],function () {_seenContext = this},_context);
+									return this.expectSameAs (_context,_seenContext);
+								}
+							},
+							{
+								title:'Test that, when the source is an array, the iteration handler receives the value of elements of the array as its first argument',
+								test:function () {
+									var _seenValues = [];
+									Uize.forEach (['foo','bar'],function (_value) {_seenValues.push (_value)});
+									return this.expect (['foo','bar'],_seenValues);
+								}
+							},
+							{
+								title:'Test that, when the source is an array, the iteration handler receives the index of elements of the array as its second argument',
+								test:function () {
+									var _seenKeys = [];
+									Uize.forEach (['foo','bar'],function (_value,_key) {_seenKeys.push (_key)});
+									return this.expect ([0,1],_seenKeys);
+								}
+							},
+							{
+								title:'Test that, when the source is an array, the iteration handler receives a reference to the source array as its third argument',
+								test:function () {
+									var
+										_source = ['foo'],
+										_seenSource
+									;
+									Uize.forEach (_source,function (_value,_key,_source) {_seenSource = _source});
+									return this.expectSameAs (_source,_seenSource);
+								}
+							},
+							{
+								title:'Test that, when the source is an array, the iteration handler is called only for assigned elements of the source array when the optional allArrayElemnts parameter is not specified',
+								test:function () {
+									var
+										_source = [],
+										_seenElements = []
+									;
+									_source [1] = 'foo';
+									_source [3] = 'bar';
+									Uize.forEach (_source,function (_element) {_seenElements.push (_element)});
+									return this.expect (['foo','bar'],_seenElements);
+								}
+							},
+							{
+								title:'Test that, when the source is an array, the iteration handler is called only for assigned elements of the source array when false is specified for the optional allArrayElemnts parameter',
+								test:function () {
+									var
+										_source = [],
+										_seenElements = []
+									;
+									_source [1] = 'foo';
+									_source [3] = 'bar';
+									Uize.forEach (_source,function (_element) {_seenElements.push (_element)},false);
+									return this.expect (['foo','bar'],_seenElements);
+								}
+							},
+							{
+								title:'Test that, when the source is an array, the iteration handler is called even for unassigned elements of the source array when true is specified for the optional allArrayElemnts parameter',
+								test:function () {
+									var
+										_source = [],
+										_seenElements = []
+									;
+									_source [1] = 'foo';
+									_source [3] = 'bar';
+									Uize.forEach (_source,function (_element) {_seenElements.push (_element)},0,true);
+									return this.expect ([undefined,'foo',undefined,'bar'],_seenElements);
+								}
+							},
+
+						/*** test support for the source being an object ***/
+							{
+								title:'Test that, when the source is an empty object, the iterator is never called',
+								test:function () {
+									var _iteratorCalled = false;
+									Uize.forEach ({},function () {_iteratorCalled = true});
+									return this.expect (false,_iteratorCalled);
+								}
+							},
+							{
+								title:'Test that, when the source is an object, the iteration handler is called as a method on the optionally specified context',
+								test:function () {
+									var
+										_context = {},
+										_seenContext
+									;
+									Uize.forEach ({foo:'bar'},function () {_seenContext = this},_context);
+									return this.expectSameAs (_context,_seenContext);
+								}
+							},
+							{
+								title:'Test that, when the source is an object, the iteration handler receives the value of properties of the object as its first argument',
+								test:function () {
+									var _seenValues = [];
+									Uize.forEach ({foo:'bar',hello:'world'},function (_value) {_seenValues.push (_value)});
+									return this.expect (['bar','world'],_seenValues);
+								}
+							},
+							{
+								title:'Test that, when the source is an object, the iteration handler receives the name of properties of the object as its second argument',
+								test:function () {
+									var _seenKeys = [];
+									Uize.forEach ({foo:'bar',hello:'world'},function (_value,_key) {_seenKeys.push (_key)});
+									return this.expect (['foo','hello'],_seenKeys);
+								}
+							},
+							{
+								title:'Test that, when the source is an object, the iteration handler receives a reference to the source object as its third argument',
+								test:function () {
+									var
+										_source = {foo:'bar'},
+										_seenSource
+									;
+									Uize.forEach (_source,function (_value,_key,_source) {_seenSource = _source});
+									return this.expectSameAs (_source,_seenSource);
+								}
+							},
+							{
+								title:'Test that, when the source is an object, specifying false for the optional allArrayElemnts parameter doesn\'t cause the method to fail',
+								test:function () {
+									var
+										_source = {foo:'bar'},
+										_seenValue,
+										_seenKey,
+										_seenSource
+									;
+									Uize.forEach (
+										_source,
+										function (_value,_key,_source) {
+											_seenValue = _value;
+											_seenKey = _key;
+											_seenSource = _source;
+										},
+										false
+									);
+									return (
+										this.expect ('bar',_seenValue) &&
+										this.expect ('foo',_seenKey) &&
+										this.expectSameAs (_source,_seenSource)
+									);
+								}
+							},
+							{
+								title:'Test that, when the source is an object, specifying true for the optional allArrayElemnts parameter doesn\'t cause the method to fail',
+								test:function () {
+									var
+										_source = {foo:'bar'},
+										_seenValue,
+										_seenKey,
+										_seenSource
+									;
+									Uize.forEach (
+										_source,
+										function (_value,_key,_source) {
+											_seenValue = _value;
+											_seenKey = _key;
+											_seenSource = _source;
+										},
+										true
+									);
+									return (
+										this.expect ('bar',_seenValue) &&
+										this.expect ('foo',_seenKey) &&
+										this.expectSameAs (_source,_seenSource)
+									);
+								}
+							},
+
+						/*** test support for source being a length ***/
+							{
+								title:'Test that, when the source is the number zero, the iterator is never called',
+								test:function () {
+									var _iteratorCalled = false;
+									Uize.forEach (0,function () {_iteratorCalled = true});
+									return this.expect (false,_iteratorCalled);
+								}
+							},
+							{
+								title:'Test that, when the source is a number, the iteration handler is called as a method on the optionally specified context',
+								test:function () {
+									var
+										_context = {},
+										_seenContext
+									;
+									Uize.forEach (1,function () {_seenContext = this},_context);
+									return this.expectSameAs (_context,_seenContext);
+								}
+							},
+							{
+								title:'Test that, when the source is a number, the iteration handler receives the iteration index as its first argument',
+								test:function () {
+									var _seenValues = [];
+									Uize.forEach (10,function (_value) {_seenValues.push (_value)});
+									return this.expect ([0,1,2,3,4,5,6,7,8,9],_seenValues);
+								}
+							},
+							{
+								title:'Test that, when the source is a number, the iteration handler receives the iteration index as its second argument',
+								test:function () {
+									var _seenKeys = [];
+									Uize.forEach (10,function (_value,_key) {_seenKeys.push (_key)});
+									return this.expect ([0,1,2,3,4,5,6,7,8,9],_seenKeys);
+								}
+							},
+							{
+								title:'Test that, when the source is a number, the iteration handler receives the source as its third argument',
+								test:function () {
+									var _seenSource;
+									Uize.forEach (10,function (_value,_key,_source) {_seenSource = _source});
+									return this.expectSameAs (10,_seenSource);
+								}
+							},
+							{
+								title:'Test that, when the source is a number, specifying false for the optional allArrayElemnts parameter doesn\'t cause the method to fail',
+								test:function () {
+									var
+										_seenValue,
+										_seenKey,
+										_seenSource
+									;
+									Uize.forEach (
+										1,
+										function (_value,_key,_source) {
+											_seenValue = _value;
+											_seenKey = _key;
+											_seenSource = _source;
+										},
+										false
+									);
+									return (
+										this.expect (0,_seenValue) &&
+										this.expect (0,_seenKey) &&
+										this.expectSameAs (1,_seenSource)
+									);
+								}
+							},
+							{
+								title:'Test that, when the source is a number, specifying true for the optional allArrayElemnts parameter doesn\'t cause the method to fail',
+								test:function () {
+									var
+										_seenValue,
+										_seenKey,
+										_seenSource
+									;
+									Uize.forEach (
+										1,
+										function (_value,_key,_source) {
+											_seenValue = _value;
+											_seenKey = _key;
+											_seenSource = _source;
+										},
+										true
+									);
+									return (
+										this.expect (0,_seenValue) &&
+										this.expect (0,_seenKey) &&
+										this.expectSameAs (1,_seenSource)
+									);
+								}
+							},
+
+						/*** test support for string iteration handler ***/
+							{
+								title:'Test that, when the iteration handler is a string, the iteration handler is called as a method on the optionally specified context',
+								test:function () {
+									var _context = {};
+									Uize.forEach (1,'this.foo = "bar"',_context);
+									return this.expect ({foo:'bar'},_context);
+								}
+							},
+							{
+								title:'Test that, when the iteration handler is a string, the iteration handler receives the iteration index as its first argument',
+								test:function () {
+									var _seenValues = [];
+									Uize.forEach (['foo','bar'],'this.push (value)',_seenValues);
+									return this.expect (['foo','bar'],_seenValues);
+								}
+							},
+							{
+								title:'Test that, when the iteration handler is a string, the iteration handler receives the iteration index as its second argument',
+								test:function () {
+									var _seenKeys = [];
+									Uize.forEach (['foo','bar'],'this.push (key)',_seenKeys);
+									return this.expect ([0,1],_seenKeys);
+								}
+							},
+							{
+								title:'Test that, when the iteration handler is a string, the iteration handler receives the source as its third argument',
+								test:function () {
+									var
+										_source = {foo:'bar'},
+										_context = {}
+									;
+									Uize.forEach (_source,'source [key] = value.toUpperCase ()',_context);
+									return this.expect ({foo:'BAR'},_source);
+								}
+							},
+
+						/*** test handling of a non-object source ***/
+							{
+								title:'Test that, when the source is neither an array, object, nor length, the iterator is never called',
+								test:function () {
+									var _timesIteratorCalled = 0;
+									function _iterator () {_timesIteratorCalled++}
+
+									Uize.forEach (undefined,_iterator);
+									Uize.forEach (null,_iterator);
+									Uize.forEach (true,_iterator);
+									Uize.forEach (NaN,_iterator);
+									Uize.forEach ('foo',_iterator);
+
+									return this.expect (0,_timesIteratorCalled);
+								}
+							}
 					]],
 					['Uize.callOn',[
 						{

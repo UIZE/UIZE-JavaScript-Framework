@@ -61,6 +61,7 @@ Uize.module ({
         _false = false,
         _null = null,
         _undefined,
+        _Infinity = Infinity,
         _Uize_totalKeys = Uize.totalKeys
       ;
 
@@ -356,8 +357,8 @@ Uize.module ({
                     if (_identical) {
                       /*** remove array elements and store ***/
                         var
-                          _object1Elements = _object1.splice (0,Infinity),
-                          _object2Elements = _object2.splice (0,Infinity)
+                          _object1Elements = _object1.splice (0,_Infinity),
+                          _object2Elements = _object2.splice (0,_Infinity)
                         ;
 
                       _compareObjectsForIdentical ();
@@ -552,252 +553,144 @@ Uize.module ({
         */
       };
 
-      _package.map = function (_mapper,_source,_target) {
-        if (typeof _source == 'number') {
-          _source = new Array (_source);
-          if (typeof _target != 'object') _target = _source;
-        }
-        var _sourceIsArray = Uize.isArray (_source);
-        if (typeof _target != 'object')
-          _target = _target === _false ? _source : _sourceIsArray ? [] : {}
-        ;
-        if (typeof _mapper == _string)
-          _mapper = new Function ('value','key','return ' + _mapper)
-        ;
-        function _callMapper (_key) {
-          var _mappedValue = _mapper.call (_source,_source [_key],_key);
-          if (_target) _target [_key] = _mappedValue;
-        }
-        if (_sourceIsArray) {
-          for (var _elementNo = -1, _sourceLength = _source.length; ++_elementNo &lt; _sourceLength;)
-            _callMapper (_elementNo)
-          ;
-        } else {
-          for (var _key in _source) _callMapper (_key);
-        }
-        return _target;
-        /*?
-          Static Methods
-            Uize.Data.map
-              Iterates through the specified array (or object), executing the specified mapper expression or function for each element (or object property), and packages the results into an array (or object).
-
-              SYNTAX
-              .........................................................................
-              mappedARRAYorOBJ = Uize.Data.map (mapperSTRorFUNC,sourceARRAYorOBJorINT);
-              .........................................................................
-
-              The =Uize.Data.map= method is very vertatile and can be used to accomplish a wide array of different tasks. Sure, you could do all the things you could do with =Uize.Data.map= by writing your own loops. This method serves as a convenience, making certain operations more concise in application code.
-
-              The example below - which takes a source array of strings and produces a new array of those strings uppercased - illustrates the difference between writing your own iterator and using the =Uize.Data.map= method.
-
-              INSTEAD OF...
-              .............................................................
-              var newArray = [];
-              for (var elementNo = -1; ++elementNo &lt; sourceArray.length;) {
-                newArray.push (sourceArray [elementNo].toUpperCase ());
-              }
-              .............................................................
-
-              USE...
-              ..................................................................
-              var newArray = Uize.Data.map ('value.toUpperCase ()',sourceArray);
-              ..................................................................
-
-              OR USING A FUNCTION...
-              .............................................................
-              var newArray = Uize.Data.map (
-                function (value) {return value.toUpperCase ()},sourceArray
-              );
-              .............................................................
-
-              Another example below - which generates an array seeded with the values 0 to 99 - further illustrates the convenience of the =Uize.Data.map= method...
-
-              INSTEAD OF...
-              ..............................................
-              var newArray = [];
-              for (var elementNo = -1; ++elementNo &lt; 100;) {
-                newArray.push (elementNo);
-              }
-              ..............................................
-
-              USE...
-              .........................................
-              var newArray = Uize.Data.map ('key',100);
-              .........................................
-
-              OR USING A FUNCTION...
-              .....................................................................
-              var newArray = Uize.Data.map (function (value,key) {return key},100);
-              .....................................................................
-
-              Key Benefits
-                The =Uize.Data.map= static method provides some key improvements over the =Array= object's map method in JavaScript 1.6 (which is not supported in all browsers)...
-
-                - can operate on objects as well as arrays
-                - supports a more concise mapper expression string, as well as supporting a function
-                - can optionally modify the source array or object
-                - allows easy creation of a fresh source array for mapping, by specifying an array length
-                - lets you specify an explicit target, where mapped values should be written
-
-              VARIATION
-              ..................................
-              mappedARRAYorOBJ = Uize.Data.map (
-                mapperSTRorFUNC,
-                sourceARRAYorOBJorINT,
-                targetARRAYorOBJorBOOL
-              );
-              ..................................
-
-              By default, the =Uize.Data.map= method maps values of the source array or object and packages the result into a new array or object. Specifying the optional =targetARRAYorOBJorBOOL= parameter allows you to explicitly specify a target for the operation, into which the mapped values will be packaged.
-
-              Parameters
-                mapperSTRorFUNC
-                  Lets you specify a mapper expression or function, for mapping the value of the current element of the source array or the current property of the source object to a new value.
-
-                  VALUES
-
-                  - When a *string* value is specified, then the JavaScript expression specified in the string will be compiled to a mapper function that will then be used for each iteration. An expression specified for this parameter must be a complete JavaScript expression (it may not be arbitrary, multi-statement chunks of code) following the same requirements of any expression that you might place on the right-hand side of an assignment statement. Within the context of your expression, the identifiers =this=, =key=, and =value= are defined, where =this= is a reference to the source array or object, =key= is the index of the current element of the source array or the name of the current property of the source object, and where =value= is the value of the current element of the source array or the current property of the source object.
-
-                  - When a *function* reference is specified, then the specified function will be called during each iteration. The function you specify should expect to receive two parameters: =value= and =key=. If you don't care about the key, then you can omit the second parameter and only have one parameter declared in your function's argument list. The mapper function is called as an instance method on the source array or object, so the =this= keyword can be used to access the source array or object for querying the values of other elements or properties.
-
-                sourceARRAYorOBJorINT
-                  Lets you specify the source array or object, or the length of a fresh array, with which the =Uize.Data.map= method should map new values.
-
-                  VALUES
-
-                  - When an *array* is specified, then the =Uize.Data.map= method will iterate through the elements of the array.
-
-                  - When an *object* is specified, then the =Uize.Data.map= method will iterate through the properties of the object.
-
-                  - When a *positive integer* is specified, then the =Uize.Data.map= method will create a fresh array of the length specified by this parameter and then iterate through that array. This is a convenient facility for seeding arrays of some desired length with automatically generated values.
-
-                targetARRAYorOBJorBOOL
-                  Lets you specify where the result of the mapper should be packaged.
-
-                  You can provide your own target array or object, you can specify to use the source array or object, or you can specify that the result should not be packaged (ie. discarded).
-
-                  VALUES
-
-                  - =true= - When the *boolean* value =true= is specified (the default value for the =targetARRAYorOBJorBOOL= parameter if it is omitted), then the =Uize.Data.map= method will package the result from the mapper into a new array or object.
-
-                  - =false= - When the *boolean* value =false= is specified (not the same as not specifying a value), then the =Uize.Data.map= method will package the result from the mapper into the source array or object specified by the =sourceARRAYorOBJorINT= parameter (ie. won't use a different target).
-
-                  - =null= - When the special value =null= is specified (not the same as not specifying a value), then the =Uize.Data.map= method will not package the result from the mapper into an array or object. This is useful if you just want to use this method as an iterator, without the memory expense of building an array or object.
-
-                  - *object or array* - When an *object* or *array* is explicitly specified, then the =Uize.Data.map= method will package the result from the mapper into that array or object. This is convenient if you already have an array or object into which you wish to package the mapped values, or if you want to repeatedly map multiple source arrays or objects into a common array or object so that the mapped values are merged together. Incidentally, specifying the array or object value of the =sourceARRAYorOBJorINT= parameter as the value for the =targetARRAYorOBJorBOOL= parameter has the same effect as specifying the value =false= for this parameter (ie. use the source as the target, don't use a different target).
-
-              More Examples
-                Following are a bunch of examples, demonstrating just a sampling of what's possible using the =Uize.Data.map= method...
-
-                Coerce all elements of an array to being numbers, modifying the source array...
-                  .....................................
-                  Uize.Data.map ('+value',array,false);
-                  .....................................
-
-                Coerce all elements of an array to being strings, modifying the source array...
-                  .........................................
-                  Uize.Data.map ('value + ""',array,false);
-                  .........................................
-
-                Default all empty string properties of an object to some value, modifying the source object...
-                  ..............................................................................
-                  Uize.Data.map ('value || "--- no answer provided ---"',surveyQuestions,false);
-                  ..............................................................................
-
-                Return an array of all the elements in the source array uppercased...
-                  ..............................................................
-                  var uppercased = Uize.Data.map ('value.toUpperCase ()',array);
-                  ..............................................................
-
-                Add a prefix to all the string elements of an array, modifying the source array...
-                  ................................................
-                  Uize.Data.map ('"prefix_" + value',array,false);
-                  ................................................
-
-                Create a cheap (ie. not deep) copy of an object...
-                  ............................................
-                  var copyOfFoo = Uize.Data.map ('value',foo);
-                  ............................................
-
-                Seed an array of 100 elements with the value range 0 to 99...
-                  ...........................................
-                  var range0to99 = Uize.Data.map ('key',100);
-                  ...........................................
-
-                Seed an array of 100 elements with the value range 1 to 100...
-                  ................................................
-                  var range1to100 = Uize.Data.map ('key + 1',100);
-                  ................................................
-
-                Create an array of the square roots of 0 to 99...
-                  ...........................................................
-                  var squaresOf0to99 = Uize.Data.map ('Math.sqrt (key)',100);
-                  ...........................................................
-
-                Create an array of the square roots of the values in the source array...
-                  .....................................................
-                  var squaresOfArray = Uize.Data.map (Math.sqrt,array);
-                  .....................................................
-
-                Create an array of all the capital letters of the alphabet...
-                  .....................................................................
-                  var capLetters = Uize.Data.map ('String.fromCharCode (65 + key)',26);
-                  .....................................................................
-
-                Create a fresh array of 10 elements that are the first ten powers of 2...
-                  ......................................................
-                  var powersOf2 = Uize.Data.map ('Math.pow (2,key)',10);
-                  ......................................................
-
-                Creates an array of the first 30 numbers in the Fibonacci series...
-                  .....................................................................................
-                  var fibonacci = Uize.Data.map ('key &gt; 1 ? this [key - 2] + this [key - 1] : key',30);
-                  .....................................................................................
-
-                Smooth an array of values by averaging against adjacent neighbors...
-                  ......................................................................................
-                  var smoothed = Uize.Data.map (
-                    'key &amp;&amp; key &lt; this.length - 1 ? (this [key-1] + value + this [key+1]) / 3 : value',
-                    array
-                  );
-                  ......................................................................................
-
-                Output elements of a log array to the `Firebug` console on separate lines...
-                  ...............................................
-                  Uize.Data.map ('console.log (value)',logArray);
-                  ...............................................
-
-                Output elements of a log array to the `Firebug` console on separate lines, with line numbers...
-                  ............................................................
-                  Uize.Data.map ('console.log (key + ": " + value)',logArray);
-                  ............................................................
-
-                Gets a style properties object from a pure number coords object...
-                  ........................................................................
-                  var coordsStyleProperties = Uize.Data.map ('value + "px"',coords);
-
-                  // EXAMPLE
-                  // this... {left:0,top:50,width:100,height:175}
-                  // produces this... {left:'0px',top:'50px',width:'100px',height:'175px'}
-                  ........................................................................
-
-                Gets the length of the longest string in an array of strings....
-                  .............................................................................
-                  var maxStringLength = Uize.max (Uize.Data.map ('value.length',stringsArray));
-                  .............................................................................
-        */
-      };
-
       /*** Deprecated Static Methods ***/
         _package.emptyOut = Uize.emptyOut;
+          /*?
+            Deprecated Features
+              Uize.Data.emptyOut -- DEPRECATED 2011-11-13
+                The =Uize.Data.emptyOut= static method has been deprecated in favor of the newly added =Uize.emptyOut= static method of the =Uize= base module.
+
+                ..............................................
+                Uize.Data.emptyOut &gt;&gt; BECOMES &gt;&gt; Uize.emptyOut
+                ..............................................
+
+                This method has been promoted to the =Uize= base module, retaining exactly the same arguments signature and behavior.
+          */
+
         _package.getKeys = Uize.keys;
+          /*?
+            Deprecated Features
+              Uize.Data.getKeys -- DEPRECATED 2011-11-13
+                The =Uize.Data.getKeys= static method has been deprecated in favor of the newly added =Uize.keys= static method of the =Uize= base module.
+
+                .........................................
+                Uize.Data.getKeys &gt;&gt; BECOMES &gt;&gt; Uize.keys
+                .........................................
+
+                This method has been promoted to the =Uize= base module, retaining exactly the same arguments signature and behavior.
+          */
+
         _package.getLookup = Uize.lookup;
+          /*?
+            Deprecated Features
+              Uize.Data.getLookup -- DEPRECATED 2011-11-13
+                The =Uize.Data.getLookup= static method has been deprecated in favor of the newly added =Uize.lookup= static method of the =Uize= base module.
+
+                .............................................
+                Uize.Data.getLookup &gt;&gt; BECOMES &gt;&gt; Uize.lookup
+                .............................................
+
+                This method has been promoted to the =Uize= base module, retaining exactly the same arguments signature and behavior.
+          */
+
         _package.getReverseLookup = Uize.reverseLookup;
+          /*?
+            Deprecated Features
+              Uize.Data.getReverseLookup -- DEPRECATED 2011-11-13
+                The =Uize.Data.getReverseLookup= static method has been deprecated in favor of the newly added =Uize.reverseLookup= static method of the =Uize= base module.
+
+                ...........................................................
+                Uize.Data.getReverseLookup &gt;&gt; BECOMES &gt;&gt; Uize.reverseLookup
+                ...........................................................
+
+                This method has been promoted to the =Uize= base module, retaining exactly the same arguments signature and behavior.
+          */
+
         _package.getTotalKeys = Uize.totalKeys;
+          /*?
+            Deprecated Features
+              Uize.Data.getTotalKeys -- DEPRECATED 2011-11-13
+                The =Uize.Data.getTotalKeys= static method has been deprecated in favor of the newly added =Uize.totalKeys= static method of the =Uize= base module.
+
+                ...................................................
+                Uize.Data.getTotalKeys &gt;&gt; BECOMES &gt;&gt; Uize.totalKeys
+                ...................................................
+
+                This method has been promoted to the =Uize= base module, retaining exactly the same arguments signature and behavior.
+          */
+
         _package.getValues = Uize.values;
+          /*?
+            Deprecated Features
+              Uize.Data.getValues -- DEPRECATED 2011-11-13
+                The =Uize.Data.getValues= static method has been deprecated in favor of the newly added =Uize.values= static method of the =Uize= base module.
+
+                .............................................
+                Uize.Data.getValues &gt;&gt; BECOMES &gt;&gt; Uize.values
+                .............................................
+
+                This method has been promoted to the =Uize= base module, retaining exactly the same arguments signature and behavior.
+          */
+
         _package.isEmpty = Uize.isEmpty;
+          /*?
+            Deprecated Features
+              Uize.Data.isEmpty -- DEPRECATED 2011-11-13
+                The =Uize.Data.isEmpty= static method has been deprecated in favor of the newly added =Uize.isEmpty= static method of the =Uize= base module.
+
+                ............................................
+                Uize.Data.isEmpty &gt;&gt; BECOMES &gt;&gt; Uize.isEmpty
+                ............................................
+
+                This method has been promoted to the =Uize= base module, retaining exactly the same arguments signature and behavior.
+          */
+
+        _package.map = function (_mapper,_source,_target) {return Uize.map (_source,_mapper,_target)};
+          /*?
+            Deprecated Features
+              Uize.Data.map -- DEPRECATED 2011-11-27
+                The =Uize.Data.map= static method has been deprecated in favor of the newly added =Uize.map= static method of the =Uize= base module.
+
+                This method has been promoted to the =Uize= base module, but the arguments signature has been changed. While the deprecated =Uize.Data.map= method accepts a mapper expression or function as its first argument and an array, object, or number as its second argument, these two arguments are swapped around in the =Uize.map= method. This is the more conventional signature for =map= type methods.
+
+                INSTEAD OF...
+                .........................................................................
+                mappedARRAYorOBJ = Uize.Data.map (mapperSTRorFUNC,sourceARRAYorOBJorINT);
+                .........................................................................
+
+                USE...
+                ....................................................................
+                mappedARRAYorOBJ = Uize.map (sourceARRAYorOBJorINT,mapperSTRorFUNC);
+                ....................................................................
+
+                Other than the change in its arguments signature, the =Uize.map= behaves in exactly the same way as the deprecated =Uize.Data.map= method. Because the =Uize.Data.map= method has been deprecated, it will live on for about another year, continuing to behave in the same way and using the same signature as before.
+          */
+
         _package.min = Uize.min;
+          /*?
+            Deprecated Features
+              Uize.Data.min -- DEPRECATED 2011-11-13
+                The =Uize.Data.min= static method has been deprecated in favor of the newly added =Uize.min= static method of the =Uize= base module.
+
+                ....................................
+                Uize.Data.min &gt;&gt; BECOMES &gt;&gt; Uize.min
+                ....................................
+
+                This method has been promoted to the =Uize= base module, retaining exactly the same arguments signature and behavior.
+          */
+
         _package.max = Uize.max;
+          /*?
+            Deprecated Features
+              Uize.Data.max -- DEPRECATED 2011-11-13
+                The =Uize.Data.max= static method has been deprecated in favor of the newly added =Uize.max= static method of the =Uize= base module.
+
+                ....................................
+                Uize.Data.max &gt;&gt; BECOMES &gt;&gt; Uize.max
+                ....................................
+
+                This method has been promoted to the =Uize= base module, retaining exactly the same arguments signature and behavior.
+          */
 
     return _package;
   }

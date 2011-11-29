@@ -61,7 +61,8 @@ Uize.module ({
         _ArrayPush = _ArrayPrototype.push,
         _ArrayConcat = _ArrayPrototype.concat,
         _ArraySplice = _ArrayPrototype.splice,
-        _fullArraySpliceArgs = [0,Infinity]
+        _Infinity = Infinity,
+        _fullArraySpliceArgs = [0,_Infinity]
       ;
 
     /*** Public Static Methods ***/
@@ -109,7 +110,7 @@ Uize.module ({
         if (_array1 != _array2) {
           _ArrayPush.apply (
             _array1,
-            _ArraySplice.apply (_array2,_fullArraySpliceArgs.concat (_array1.splice (0,Infinity)))
+            _ArraySplice.apply (_array2,_fullArraySpliceArgs.concat (_array1.splice (0,_Infinity)))
           );
         }
         return _array1;
@@ -142,7 +143,7 @@ Uize.module ({
       };
 
       _package.flatten = function (_sourceArray,_depth,_target) {
-        _depth = _depth == _undefined ? Infinity : +_depth || 0;
+        _depth = _depth == _undefined ? _Infinity : +_depth || 0;
         var
           _workingArray = _sourceArray,
           _workingArrayPreviousLength,

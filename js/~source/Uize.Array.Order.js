@@ -135,11 +135,7 @@ Uize.module ({
 					} else if (_reorderScheme == 'normal') {
 						_indexMapper = _returnAsIs;
 					} else {
-						var _jumbledOrder = [];
-						for (var _elementNo = _sourceLength; --_elementNo > -1;)
-							_jumbledOrder [_elementNo] = _elementNo
-						;
-						_jumbledOrder.sort (_randomSorter);
+						var _jumbledOrder = Uize.map (_sourceLength,'key').sort (_randomSorter);
 						_indexMapper = function (_index) {return _jumbledOrder [_index]};
 					}
 					for (var _elementNo = -1; ++_elementNo <= _sourceLengthMinus1;)

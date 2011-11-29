@@ -236,11 +236,10 @@ Uize.module ({
 									_addSerializedItemLine ('[]',_appendComma);
 								}
 							} else {
-								var _keys = [];
-								for (var _memberName in _item)
-									_keys.push (_memberName)
+								var
+									_keys = Uize.keys (_item),
+									_keysLength = _keys.length
 								;
-								var _keysLength = _keys.length;
 								if (_keysLength) {
 									/*** sort keys, if desired ***/
 										_sortKeys && _keys.sort ();

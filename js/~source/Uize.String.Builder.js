@@ -521,8 +521,12 @@ Uize.module ({
 					*/
 				};
 
-				for (var _methodName in {charAt:1, charCodeAt:1, concat:1, indexOf:1, lastIndexOf:1, match:1, replace:1, search:1, slice:1, split:1, substr:1, substring:1, toLowerCase:1, toUpperCase:1, anchor:1, big:1, blink:1, bold:1, fixed:1, fontcolor:1, fontsize:1, italics:1, link:1, small:1, strike:1, sub:1, sup:1})
-					_objectPrototype [_methodName] = String.prototype [_methodName]
+				var _StringPrototype = String.prototype;
+				Uize.forEach (
+					[
+						'charAt', 'charCodeAt', 'concat', 'indexOf', 'lastIndexOf', 'match', 'replace', 'search', 'slice', 'split', 'substr', 'substring', 'toLowerCase', 'toUpperCase', 'anchor', 'big', 'blink', 'bold', 'fixed', 'fontcolor', 'fontsize', 'italics', 'link', 'small', 'strike', 'sub', 'sup'
+					],
+					function (_methodName) {_objectPrototype [_methodName] = _StringPrototype [_methodName]}
 					/*?
 						Instance Methods
 							String Object Instance Methods
@@ -532,7 +536,7 @@ Uize.module ({
 
 								All of the =String= object instance methods implemented for the =Uize.String.Builder= object have exactly the same signatures and behave in exactly the same way as they do for the =String= object. Because of this, they have not been documented in detail here. For a detailed explanation for any of them, consult a good JavaScript reference. For some examples, you can read through the section `String Object Parity`.
 					*/
-				;
+				);
 
 		return _object;
 	}

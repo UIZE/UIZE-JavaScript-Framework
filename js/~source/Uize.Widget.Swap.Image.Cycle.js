@@ -108,14 +108,7 @@ Uize.module ({
 				},
 				_cycleSettings:{
 					name:'cycleSettings',
-					conformer:function (_value) {
-						if (!Uize.isArray (_value)) {
-							var _oldValue = _value;
-							_value = [];
-							for (var _key in _oldValue) _value.push (_oldValue [_key]);
-						}
-						return _value;
-					},
+					conformer:function (_value) {return Uize.isArray (_value) ? _value : Uize.values (_value)},
 					onChange:function () {this._cycleSettingNo = -1}
 				}
 			});

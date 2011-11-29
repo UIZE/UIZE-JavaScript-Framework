@@ -98,18 +98,12 @@ Uize.module ({
 							_examplesByTheme ('featured'),
 							_divider
 						];
-						for (
-							var
-								_keywordNo = -1,
-								_keywords = _infoForSiteMap.keywords,
-								_keywordsLength = _keywords.length,
-								_keyword
-							;
-							++_keywordNo < _keywordsLength;
-						)
-							((_keyword = _keywords [_keywordNo]) != 'featured') &&
-								_examplesSubmenuItems.push (_examplesByTheme (_keyword))
-						;
+						Uize.forEach (
+							_infoForSiteMap.keywords,
+							function (_keyword) {
+								_keyword  != 'featured' && _examplesSubmenuItems.push (_examplesByTheme (_keyword));
+							}
+						);
 						_examplesSubmenuItems.push (
 							_divider,
 							_examplesByTheme ('all'),
@@ -118,26 +112,6 @@ Uize.module ({
 								title:'EXAMPLES, BY MODULE...',
 								link:'javascript-examples-by-module.html'
 							}
-						);
-
-					/*** build the tools submenu's items ***/
-						var _toolsSubmenuItems = [
-							_item ('The DELVE Tool','','explainers/using-the-delve-tool'),
-							_explainer ('JavaScript Bookmarklets'),
-							_divider
-						];
-						for (
-							var _toolNo = -1, _tools = _infoForSiteMap.tools, _toolsLength = _tools.length, _tool;
-							++_toolNo < _toolsLength;
-						)
-							_toolsSubmenuItems.push ({
-								title:(_tool = _tools [_toolNo]).title,
-								link:_tool.path
-							})
-						;
-						_toolsSubmenuItems.push (
-							_divider,
-							_item ('Index of JavaScript Tools','','javascript-tool-examples')
 						);
 
 				_data = [
@@ -169,7 +143,21 @@ Uize.module ({
 					{
 						title:'Tools',
 						link:'javascript-tool-examples.html',
-						items:_toolsSubmenuItems
+						items:
+							[
+								_item ('The DELVE Tool','','explainers/using-the-delve-tool'),
+								_explainer ('JavaScript Bookmarklets'),
+								_divider
+							].concat (
+								Uize.map (
+									_infoForSiteMap.tools,
+									function (_tool) {return {title:_tool.title,link:_tool.path}}
+								),
+								[
+									_divider,
+									_item ('Index of JavaScript Tools','','javascript-tool-examples')
+								]
+							)
 					},
 					_divider,
 					{
