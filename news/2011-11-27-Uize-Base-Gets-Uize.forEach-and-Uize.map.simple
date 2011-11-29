@@ -39,7 +39,7 @@ Uize.forEach
 		- every iteration involves a function call - sometimes this performance cost may be prohibitive
 
 Uize.map
-	Iterates through the specified array (or object), executing the specified mapper expression or function for each element (or object property), and packages the results into an array (or object).
+	The new =Uize.map= static method iterates through the specified array (or object), executing the specified mapper expression or function for each element (or object property), and packages the results into an array (or object).
 
 	SYNTAX
 	....................................................................

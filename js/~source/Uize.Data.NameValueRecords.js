@@ -15,7 +15,7 @@
 	type: Package
 	importance: 2
 	codeCompleteness: 100
-	testCompleteness: 0
+	testCompleteness: 100
 	docCompleteness: 100
 */
 
@@ -371,10 +371,10 @@
 Uize.module ({
 	name:'Uize.Data.NameValueRecords',
 	builder:function () {
-
 		/*** Variables for Scruncher Optimization ***/
 			var
 				_undefined,
+				_Uize_defaultNully = Uize.defaultNully,
 				_package = function () {}
 			;
 
@@ -382,21 +382,23 @@ Uize.module ({
 			_package.fromHash = function (_hash,_nameProperty,_valueProperty) {
 				var _result = [];
 
-				/*** default _nameProperty and _valueProperty params ***/
-					if (_nameProperty == _undefined)
-						_nameProperty = 'name'
-					;
-					if (_valueProperty == _undefined)
-						_valueProperty = 'value'
+				if (Uize.isObject (_hash)) {
+					var
+						_recordTypeIsArray = typeof _nameProperty == 'number' && typeof _valueProperty == 'number',
+						_record
 					;
 
-				var _recordTypeIsArray = typeof _nameProperty == 'number' && typeof _valueProperty == 'number';
-				for (var _name in _hash) {
-					var _record = _recordTypeIsArray ? [] : {};
-					_record [_nameProperty] = _name;
-					_record [_valueProperty] = _hash [_name];
-					_result.push (_record);
+					/*** default _nameProperty and _valueProperty params ***/
+						_nameProperty = _Uize_defaultNully (_nameProperty,'name');
+						_valueProperty = _Uize_defaultNully (_valueProperty,'value');
+
+					for (var _name in _hash) {
+						_result.push (_record = _recordTypeIsArray ? [] : {});
+						_record [_nameProperty] = _name;
+						_record [_valueProperty] = _hash [_name];
+					}
 				}
+
 				return _result;
 				/*?
 					Static Methods
@@ -569,21 +571,20 @@ Uize.module ({
 			_package.toHash = function (_records,_nameProperty,_valueProperty) {
 				var
 					_result = {},
-					_recordsLength = _records.length
+					_recordsLength = Uize.isArray (_records) && _records.length
 				;
 				if (_recordsLength) {
 					/*** default _nameProperty and _valueProperty params ***/
 						var _recordTypeIsArray = Uize.isArray (_records [0]);
-						if (_nameProperty == _undefined)
-							_nameProperty = _recordTypeIsArray ? 0 : 'name'
-						;
-						if (_valueProperty == _undefined)
-							_valueProperty = _recordTypeIsArray ? 1 : 'value'
-						;
+						_nameProperty = _Uize_defaultNully (_nameProperty,_recordTypeIsArray ? 0 : 'name');
+						_valueProperty = _Uize_defaultNully (_valueProperty,_recordTypeIsArray ? 1 : 'value');
 
-						for (var _recordNo = -1, _record; ++_recordNo < _recordsLength;)
-							_result [_record [_nameProperty]] = (_record = _records [_recordNo]) [_valueProperty]
-						;
+						for (var _recordNo = -1, _record, _name; ++_recordNo < _recordsLength;) {
+							_name = (_record = _records [_recordNo]) [_nameProperty];
+							if (_name != _undefined)
+								_result [_name] = _record [_valueProperty]
+							;
+						}
 				}
 				return _result;
 				/*?

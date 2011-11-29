@@ -96,6 +96,7 @@ Uize.module ({
 							},
 							Data:{
 								Csv:0,
+								NameValueRecords:0,
 								PathsTree:{
 									CompactString:0
 								}

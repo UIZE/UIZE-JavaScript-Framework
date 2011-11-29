@@ -1,0 +1,10 @@
+Comprehensive unit tests have been created for the =Uize.Data.NameValueRecords= module.
+
+A problem was reported with the =Uize.Data.NameValueRecords.toHash= static method in certain JavaScript interpreters. In the course of fixing this bug, thorough unit tests were created to test the fix and also to ensure that the methods of this module behave correctly under all conditions. Thanks to Vinson Chuong for reporting the problem and pinpointing its cause. Unit tests for the =Uize.Data.NameValueRecords= module can be found in the =Uize.Test.Uize.Data.NameValueRecords= test module.
+
+....................................................................................
+<< metadata >>
+
+title: 2011-11-29 - Unit Tests for Uize.Data.NameValueRecords
+....................................................................................
+
