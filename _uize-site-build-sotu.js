@@ -17,7 +17,7 @@ Uize.module ({
 		/*** Utility Functions ***/
 			function _getFirstTitleSegment (_title) {return _title.match (/^\s*(.*?)\s*\|/) [1]}
 
-		/*** Global Variables ***/
+		/*** General Variables ***/
 			var
 				_sacredEmptyObject = {},
 				_sacredEmptyArray = []

@@ -74,11 +74,13 @@ Uize.module ({
 				_false = false,
 				_null = null,
 				_hidden = 'hidden',
-				_Uize_copyInto = Uize.copyInto,
-				_Uize_isPrimitive = Uize.isPrimitive
+				_Uize = Uize,
+				_Uize_copyInto = _Uize.copyInto,
+				_Uize_isPrimitive = _Uize.isPrimitive,
+				_Uize_returnFalse = _Uize.returnFalse
 			;
 
-		/*** Global Variables ***/
+		/*** General Variables ***/
 			var
 				_isBrowser = typeof navigator != 'undefined',
 				_navigator = _isBrowser ? navigator : {userAgent:'',appName:''},
@@ -93,7 +95,11 @@ Uize.module ({
 				_isOpera = _userAgent.indexOf ('opera') > -1,
 				_isMozillaOrOpera = _isMozilla || _isOpera,
 				_ieMajorVersion = +(_isIe && (_userAgent.match (/MSIE\s*(\d+)/i) || [0,0]) [1]),
-				_useHandForPointerCursor = _isIe && _ieMajorVersion < 9
+				_useHandForPointerCursor = _isIe && _ieMajorVersion < 9,
+				_wirings = _package._wirings = {},
+				_wiringIdsByOwnerId = {},
+				_totalWirings = 0,
+				_mousePos = {clientX:0,clientY:0,pageX:0,pageY:0}
 			;
 
 		/*** Utility Functions ***/
@@ -136,25 +142,6 @@ Uize.module ({
 						: _eventName
 				);
 			}
-
-			function _combineKeysValues (_keys,_values) {
-				/* NOTE: this may be a candidate for migration into the Uize base class at some point */
-				for (
-					var _valueNo = -1, _result = {}, _valuesLength = Math.min (_keys.length,_values.length);
-					++_valueNo < _valuesLength;
-				)
-					_result [_keys [_valueNo]] = _values [_valueNo]
-				;
-				return _result;
-			}
-
-		/*** Global Variables ***/
-			var
-				_wirings = _package._wirings = {},
-				_wiringIdsByOwnerId = {},
-				_totalWirings = 0,
-				_mousePos = {clientX:0,clientY:0,pageX:0,pageY:0}
-			;
 
 		/*** Public Static Methods ***/
 			var
@@ -416,7 +403,7 @@ Uize.module ({
 								var
 									_nodePropertyValue = _node [_propertyName],
 									_test = _unusedProperties [_propertyName],
-									_isFunction = Uize.isFunction
+									_isFunction = _Uize.isFunction
 								;
 								if (
 									!(
@@ -888,7 +875,7 @@ Uize.module ({
 							_text += _node.textContent;
 						} else {
 							if (_node.nodeType == 3) _text += _node.data;
-							_node.childNodes && Uize.forEach (_node.childNodes,_gatherText);
+							_node.childNodes && _Uize.forEach (_node.childNodes,_gatherText);
 						}
 					}
 					_gatherText (_node);
@@ -945,7 +932,7 @@ Uize.module ({
 						} else if (_nodeTagName == 'SELECT') {
 							if (_node.multiple) {
 								_value = [];
-								Uize.forEach (
+								_Uize.forEach (
 									_node.options,
 									function (_option) {_option.selected && _value.push (_option.value)}
 								);
@@ -958,7 +945,7 @@ Uize.module ({
 							_value = _node.innerHTML.replace (/<br\/?>/gi,'\n').replace (/&nbsp;/g,' ');
 						}
 					} else {
-						_value = (Uize.findRecord (_node,{tagName:'INPUT',type:'radio',checked:_true}) || {}).value;
+						_value = (_Uize.findRecord (_node,{tagName:'INPUT',type:'radio',checked:_true}) || {}).value;
 					}
 				}
 				return _value;
@@ -1008,7 +995,7 @@ Uize.module ({
 				var
 					_isInnerReplace, _isOuterReplace, _isInnerTop, _isOuterTop, _isOuterBottom, _isInnerBottom,
 					_areNodes =
-						Uize.isArray (_htmlToInject) ||
+						_Uize.isArray (_htmlToInject) ||
 						(_isNode (_htmlToInject) && (_htmlToInject = [_htmlToInject]))
 				;
 				(
@@ -1081,7 +1068,7 @@ Uize.module ({
 
 									_node.parentNode.replaceChild (_activatedScriptNode,_node);
 								} else if (_htmlHasScript (_node.innerHTML)) {
-									Uize.forEach (_node.childNodes,_fixCrippledScripts);
+									_Uize.forEach (_node.childNodes,_fixCrippledScripts);
 								}
 							}
 							while (_nodesToInject.length > _nodesToSkip) {
@@ -1228,10 +1215,7 @@ Uize.module ({
 
 			var _coordNames = ['left','top','width','height'];
 			_package.setCoords = function (_nodeBlob,_coords) {
-				_setStyle (
-					_nodeBlob,
-					typeof _coords.length == 'number' ? _combineKeysValues (_coordNames,_coords) : _coords
-				);
+				_setStyle (_nodeBlob,_Uize.isArray (_coords) ? _Uize.meldKeysValues (_coordNames,_coords) : _coords);
 				/*?
 					Static Methods
 						Uize.Node.setCoords
@@ -1740,12 +1724,12 @@ Uize.module ({
 							} else {
 								var _options = _node.options;
 								if (_node.multiple && (_value == '*' || _value.indexOf (',') > -1)) {
-									var _valuesMap = _value != '*' ? Uize.lookup (_value.split (',')) : _undefined;
+									var _valuesMap = _value != '*' ? _Uize.lookup (_value.split (',')) : _undefined;
 									for (var _optionNo = _options.length, _option; --_optionNo >= 0;)
 										(_option = _options [_optionNo]).selected = !_valuesMap || _valuesMap [_option.value]
 									;
 								} else {
-									_node.selectedIndex = Uize.findRecordNo (_options,{value:_value},_node.selectedIndex);
+									_node.selectedIndex = _Uize.findRecordNo (_options,{value:_value},_node.selectedIndex);
 								}
 							}
 						} else if (_nodeTagName == 'IMG') {
@@ -2330,7 +2314,7 @@ Uize.module ({
 							var _handlerCaller =
 								(
 									_isVirtualDomEvent
-										? _package.returnFalse
+										? _Uize_returnFalse
 										: _node == window
 											? _makeWindowEventHandlerCaller
 											: _handlerCallerMakersByEvent [_eventName] || _makeGenericHandlerCaller
@@ -2365,10 +2349,10 @@ Uize.module ({
 									_nodeTagName == 'A' &&
 									(_eventName == 'mousedown' || _eventName == 'click') && !_node [_eventPropertyName]
 								)
-									_node [_eventPropertyName] = _package.returnFalse
+									_node [_eventPropertyName] = _Uize_returnFalse
 								;
 						} else if (_isVirtualDomEvent) {
-							_eventName.wire (_node,_handler,_wiring._subWiringsOwnerId = Uize.getGuid ());
+							_eventName.wire (_node,_handler,_wiring._subWiringsOwnerId = _Uize.getGuid ());
 						}
 					}
 				);
@@ -2464,44 +2448,6 @@ Uize.module ({
 				*/
 			};
 
-			_package.returnFalse = new Function ('return false');
-				/*?
-					Static Methods
-						Uize.Node.returnFalse
-							Returns the boolean value =false=.
-
-							This method can be assigned to event handlers to cancel their default action, as in the following example...
-
-							EXAMPLE
-							.......................................
-							myNode.onclick = Uize.Node.returnFalse;
-							.......................................
-
-							If you are cancelling the default action for many nodes in a page, then using this static method allows you to share a single function - by reference - across all these nodes.
-
-							NOTES
-							- see also the =Uize.Node.returnTrue= static method
-				*/
-
-			_package.returnTrue = new Function ('return true');
-				/*?
-					Static Methods
-						Uize.Node.returnTrue
-							Returns the boolean value =true=.
-
-							This method can be assigned to event handlers to enable their default action, as in the following example...
-
-							EXAMPLE
-							......................................
-							myNode.onclick = Uize.Node.returnTrue;
-							......................................
-
-							If you are enabling the default action for many nodes in a page, then using this static method allows you to share a single function - by reference - across all these nodes.
-
-							NOTES
-							- see also the =Uize.Node.returnFalse= static method
-				*/
-
 		/*** Public Static Properties ***/
 			_package.ieMajorVersion = _ieMajorVersion;
 				/*?
@@ -2555,12 +2501,12 @@ Uize.module ({
 						_windowEventVehicle = new Uize,
 						_documentLoadedTimeout = setTimeout (function () {_windowEventVehicle.fire ('load')},15000)
 					;
-					Uize.forEach (
+					_Uize.forEach (
 						['focus','blur','load','beforeunload','unload','resize','scroll'],
 						function (_windowEventName) {
 							var
 								_windowEventPropertyName = 'on' + _windowEventName,
-								_oldWindowEventHandler = window [_windowEventPropertyName] || _package.returnFalse
+								_oldWindowEventHandler = window [_windowEventPropertyName] || _Uize_returnFalse
 							;
 							window [_windowEventPropertyName] = function (_event) {
 								_windowEventName == 'load' && clearTimeout (_documentLoadedTimeout);
@@ -2570,6 +2516,21 @@ Uize.module ({
 						}
 					);
 			}
+
+		/*** Deprecated Features ***/
+			_package.returnFalse = _Uize_returnFalse;
+				/*?
+					Deprecated Features
+						Uize.returnFalse
+							document...
+				*/
+
+			_package.returnTrue = _Uize.returnTrue;
+				/*?
+					Deprecated Features
+						Uize.returnTrue
+							document...
+				*/
 
 		return _package;
 	}

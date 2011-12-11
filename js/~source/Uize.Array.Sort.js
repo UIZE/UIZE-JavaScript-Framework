@@ -213,7 +213,7 @@ Uize.module ({
 		/*** Variables for Scruncher Optimization ***/
 			var _package = function () {};
 
-		/*** Global Variables ***/
+		/*** General Variables ***/
 			var
 				_sortValues = [],
 				_ascendingSort = new Function ('a','b','return a.v<b.v?-1:a.v>b.v?1:0'),

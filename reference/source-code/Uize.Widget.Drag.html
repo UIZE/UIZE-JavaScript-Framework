@@ -67,7 +67,7 @@ Uize.module ({
         _isIe = _Uize_Node.isIe
       ;
 
-    /*** Global Variables ***/
+    /*** General Variables ***/
       var
         _dragShield,
         _hasStickyDragIssue = _false,
@@ -351,7 +351,7 @@ Uize.module ({
         if (!_this.isWired) {
           var _rootNode = _this.getNode ();
           if (_rootNode) {
-            _rootNode.onmousedown = _Uize_Node.returnFalse;
+            _rootNode.onmousedown = Uize.returnFalse;
             function _initiate (_event) {return _this.initiate (_event,_true)}
             _this.wireNode (_rootNode,{mousedown:_initiate,touchstart:_initiate});
           }

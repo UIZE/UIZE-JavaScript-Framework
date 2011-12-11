@@ -37,7 +37,7 @@ Uize.module ({
 			_Uize_Node = Uize.Node
 		;
 
-		/*** Global Variables ***/
+		/*** General Variables ***/
 			var
 				_pathToResources = Uize.pathToResources + 'Uize_Widget_Tree_Menu/',
 				_zIndex = 10000

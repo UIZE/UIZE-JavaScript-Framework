@@ -110,7 +110,6 @@ Uize.module ({
 		function _resolveShouldReturnSpecificDateTest (_testTitle,_arguments,_specificDate) {
 			return _dateMethodShouldReturnSpecificDateTest (_testTitle,'resolve',_arguments,_specificDate);
 		}
-		function _returnAsIs (_value) {return _value}
 		function _isRecentDaysFromNowTest (_testTitle,_daysFromNow,_recencyWindow,_expectedValue,_dateEncoder) {
 			return {
 				title:_testTitle,
@@ -119,7 +118,7 @@ Uize.module ({
 					return this.expect (
 						_expectedValue,
 						Uize.Date.isRecent (
-							(_dateEncoder || _returnAsIs) (new Date (+_now + _daysFromNow * _oneDayInMilliseconds)),
+							(_dateEncoder || Uize.returnX) (new Date (+_now + _daysFromNow * _oneDayInMilliseconds)),
 							_recencyWindow,
 							_now
 						)

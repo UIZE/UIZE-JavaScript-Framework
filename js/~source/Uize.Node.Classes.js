@@ -467,7 +467,7 @@ Uize.module ({
 				_doForAll = Uize.Node.doForAll
 			;
 
-		/*** Global Variables ***/
+		/*** General Variables ***/
 			var
 				_classesProfiles = {},
 				_arrayWithEmptyString = ['']

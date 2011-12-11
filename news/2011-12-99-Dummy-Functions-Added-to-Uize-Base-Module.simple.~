@@ -1,8 +1,11 @@
 
-
+- =Uise.nop= -
+- =Uize.returnFalse= -
+- =Uize.returnTrue= -
+- =Uize.returnX= -
 
 ....................................................................................
 << metadata >>
 
-title: 2011-11-21 - Improved Uize.lookup and Uize.reverseLookup
+title: 2011-12-99 - Dummy Functions Added to Uize Base Module
 ....................................................................................

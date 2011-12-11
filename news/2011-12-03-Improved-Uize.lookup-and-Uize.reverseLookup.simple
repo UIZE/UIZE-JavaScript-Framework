@@ -1,0 +1,54 @@
+The =Uize.lookup= and =Uize.reverseLookup= static methods have been improved with the added ability to specify a target object for adding entries.
+
+The =Uize.lookup= and =Uize.reverseLookup= methods now both support an optional target parameter that lets you provide an object into which lookup entries should be populated. This allows one to stitch in new lookup entries into existing lookup objects.
+
+Add More Entries to a Lookup Object
+	By specifying an existing lookup object for the optional =targetLookupOBJ= third parameter of the =Uize.lookup= method, more entries can be added to the existing lookup.
+
+	SYNTAX
+	.........................................................................
+	lookupOBJ = Uize.lookup (valuesARRAY,lookupValueANYTYPE,targetLookupOBJ);
+	.........................................................................
+
+	EXAMPLE
+	.................................................................................
+	var
+		fruits = ['apple','apricot','orange','peach','pear','watermelon'],
+		vegetables = ['beet','broccoli','cauliflower','onion','potato','squash'],
+		grains = ['barley','maize','oats','quinoa','rice','sorghum','wheat']
+		foodLookup = Uize.lookup (fruits,'fruit')
+	;
+	Uize.lookup (vegetables,'vegetable',foodLookup); // stitch in keys for vegetables
+	Uize.lookup (grains,'grain',foodLookup);         // stitch in keys for grains
+
+	alert (foodLookup ['apricot']);   // alerts "fruit"
+	alert (foodLookup ['broccoli']);  // alerts "vegetable"
+	alert (foodLookup ['quinoa']);    // alerts "grain"
+	.................................................................................
+
+	In the above example, a food lookup object is created initially from the =fruits= array. Then, entries are added to the =foodLookup= lookup object by specifying it as the target in two additional calls to the =Uize.lookup= method: one to stirch in lookup entries for the =vegetables= values array, and the other to stitch in entries for the =grains= values array. Also note that different lookup values are being used in each case, allowing the =foodLookup= lookup object to be used to look up the food type from the food name.
+
+Add More Entries to a Reverse Lookup Object
+	By specifying an existing reverse lookup object for the optional =targetOBJ= second parameter of the =Uize.reverseLookup= method, more entries can be added to the existing reverse lookup.
+
+	SYNTAX
+	................................................................
+	targetOBJ = Uize.reverseLookup (hashOBJorValuesARRAY,targetOBJ);
+	................................................................
+
+	EXAMPLE
+	.............................................................................
+	var entitiesCodesToNames = Uize.reverseLookup ({quot:34,amp:38,lt:60,gt:62});
+	Uize.reverseLookup ({nbsp:160,copy:169,reg:174},entitiesCodesToNames);
+
+	alert (entitiesCodesToNames [38]);   // alerts "amp"
+	alert (entitiesCodesToNames [169]);  // alerts "copy"
+	.............................................................................
+
+	In the above example, the second call to the =Uize.reverseLookup= method is adding more entries to the reverse lookup object that was created in the first call to the method. This is done by supplying that reverse lookup object, which is assigned to the =entitiesCodesToNames= variable, as the second argument. When calling the =Uize.reverseLookup= method the second time, the result is ignored. This is because the method modifies the target, so we don't care about its return value.
+
+....................................................................................
+<< metadata >>
+
+title: 2011-12-03 - Improved Uize.lookup and Uize.reverseLookup
+....................................................................................

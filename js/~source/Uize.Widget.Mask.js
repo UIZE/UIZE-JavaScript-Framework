@@ -37,7 +37,7 @@ Uize.module ({
 				_Uize_Node = Uize.Node
 			;
 
-		/*** Private Variables ***/
+		/*** General Variables ***/
 			var _propertiesAffectingDisplay = ['left','top','width','height','img'];
 
 		/*** Class Constructor ***/

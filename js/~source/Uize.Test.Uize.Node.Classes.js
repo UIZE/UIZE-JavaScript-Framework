@@ -39,7 +39,7 @@ Uize.module ({
 			*/
 			return {
 				className:_className,
-				getAttribute:function () {}
+				getAttribute:Uize.nop
 			};
 		}
 

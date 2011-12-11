@@ -232,7 +232,7 @@ Uize.module ({
 			}
 		;
 
-		/*** Global Variables ***/
+		/*** General Variables ***/
 			var
 				_sacredEmptyObject = {},
 				_propertyProfiles = {

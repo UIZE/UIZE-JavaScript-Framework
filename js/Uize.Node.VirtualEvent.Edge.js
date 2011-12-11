@@ -1,5 +1,5 @@
 /*
-	UIZE JAVASCRIPT FRAMEWORK 2011-11-14
+	UIZE JAVASCRIPT FRAMEWORK 2011-12-03
 
 	http://www.uize.com/reference/Uize.Node.VirtualEvent.Edge.html
 	Available under MIT License or GNU General Public License -- http://www.uize.com/license.html

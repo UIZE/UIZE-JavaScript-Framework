@@ -83,7 +83,7 @@ Uize.module ({
 									_testIfStringUsingTypeof ({});
 									_testIfStringUsingTypeof ([]);
 									_testIfStringUsingTypeof (/\s+/);
-									_testIfStringUsingTypeof (function () {});
+									_testIfStringUsingTypeof (Uize.nop);
 								}
 						},
 						function () {
@@ -98,7 +98,7 @@ Uize.module ({
 									_testIfStringUsingInstanceof ({});
 									_testIfStringUsingInstanceof ([]);
 									_testIfStringUsingInstanceof (/\s+/);
-									_testIfStringUsingInstanceof (function () {});
+									_testIfStringUsingInstanceof (Uize.nop);
 								}
 						},
 						function () {
@@ -113,7 +113,7 @@ Uize.module ({
 									_testIfStringUsingConstructor ({});
 									_testIfStringUsingConstructor ([]);
 									_testIfStringUsingConstructor (/\s+/);
-									_testIfStringUsingConstructor (function () {});
+									_testIfStringUsingConstructor (Uize.nop);
 								}
 						}
 					],

@@ -45,7 +45,7 @@ Uize.module ({
 				_undefined
 			;
 
-		/*** Global Variables ***/
+		/*** General Variables ***/
 			var
 				_forceAsync = typeof navigator == 'object',
 					/* NOTE:

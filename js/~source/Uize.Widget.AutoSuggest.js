@@ -199,7 +199,7 @@ Uize.module({
 				),
 				_classPrototype = _class.prototype;
 		;
-		/*** Global Variables ***/
+		/*** General Variables ***/
 			var _highlightModes = { none: 1, query: 1, remaining: 1 };
 
 		/*** Private Helper Functions ***/

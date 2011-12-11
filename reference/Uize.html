@@ -37,8 +37,9 @@
 								<ul>
 									<li><a href="#1_1_1_1" title="The Uize module provides a number of static methods for performing commonly useful tests on values.">1.1.1.1. Value Testing Methods</a></li>
 									<li><a href="#1_1_1_2" title="The Uize module provides a number of static methods for performing basic data manipulation operations.">1.1.1.2. Basic Data Utilities</a></li>
-									<li><a href="#1_1_1_3" title="- Uize.capFirstChar - capitalizes the first character of a string">1.1.1.3. Useful Value Transformers</a></li>
-									<li><a href="#1_1_1_4" title="- Uize.callOn - calls a method on all values of properties in an object or elements of an array">1.1.1.4. Iterator Methods</a></li>
+									<li><a href="#1_1_1_3" title="- Uize.callOn - calls a method on all values of properties in an object or elements of an array">1.1.1.3. Iterator Methods</a></li>
+									<li><a href="#1_1_1_4" title="- Uize.capFirstChar - capitalizes the first character of a string">1.1.1.4. Useful Value Transformers</a></li>
+									<li><a href="#1_1_1_5" title="- Uize.nop - performs no operation and returns no value (equivalent to returning undefined)">1.1.1.5. Dummy Functions</a></li>
 								</ul>
 							</li>
 						</ul>
@@ -135,8 +136,12 @@
 					<li><a href="#2_32" title="Returns an array, representing the keys (property names) of the specified object.">2.32. Uize.keys</a></li>
 					<li><a href="#2_33" title="Returns a lookup object, where each key is a value from the specified values array.">2.33. Uize.lookup</a>
 						<ul>
-							<li><a href="#2_33_1" title="Creating a lookup object is useful when repeatedly checking to see if values are in a defined values set. Looping through that defined values set array for each of the lookups would result in poor performance if the set of values to scan through is large, and if the lookup is being performed frequently.">2.33.1. A Real World Example</a></li>
-							<li><a href="#2_33_2" title="var&#10;	fruits = [&apos;apple&apos;,&apos;apricot&apos;,&apos;orange&apos;,&apos;peach&apos;,&apos;pear&apos;,&apos;watermelon&apos;],&#10;	vegetables = [&apos;beet&apos;,&apos;broccoli&apos;,&apos;cauliflower&apos;,&apos;onion&apos;,&apos;potato&apos;,&apos;squash&apos;],&#10;	grains = [&apos;barley&apos;,&apos;maize&apos;,&apos;oats&apos;,&apos;quinoa&apos;,&apos;rice&apos;,&apos;sorghum&apos;,&apos;wheat&apos;]&#10;	foodLookup = Uize.lookup (fruits,&apos;fruit&apos;)&#10;;&#10;Uize.lookup (vegetables,&apos;vegetable&apos;,foodLookup); // stitch in keys for vegetables&#10;Uize.lookup (grains,&apos;grain&apos;,foodLookup);         // s...">2.33.2. Example Using Optional Target</a></li>
+							<li><a href="#2_33_1" title="In the most common usage, a lookup object can be created from a values array by specifying just the valuesARRAY parameter.">2.33.1. Create a Lookup From a Values Array</a></li>
+							<li><a href="#2_33_2" title="In cases where the default lookup value true is not desirable, a different lookup value can be specified using the optional lookupValueANYTYPE second parameter.">2.33.2. Create a Lookup Object With a Custom Lookup Value</a></li>
+							<li><a href="#2_33_3" title="A safe lookup object can be created from a values array by specifying the value true for the optional safeBOOL third parameter.">2.33.3. Create a Safe Lookup Object From a Values Array</a></li>
+							<li><a href="#2_33_4" title="By specifying an existing lookup object for the optional targetLookupOBJ third parameter, more entries can be added to the existing lookup.">2.33.4. Add More Entries to a Lookup Object</a></li>
+							<li><a href="#2_33_5" title="An empty safe lookup object can be created by specifying the value null for the valuesARRAY parameter, the value 1 for the lookupValueANYTYPE second parameter, and the value true for the safeBOOL third parameter.">2.33.5. Create an Empty Safe Lookup Object</a></li>
+							<li><a href="#2_33_6" title="Creating a lookup object is useful when repeatedly checking to see if values are in a defined values set.">2.33.6. A Real World Example</a></li>
 						</ul>
 					</li>
 					<li><a href="#2_34" title="Iterates through the specified array (or object), executing the specified mapper expression or function for each element (or object property), and packages the results into an array (or object).">2.34. Uize.map</a>
@@ -167,75 +172,89 @@
 									<li><a href="#2_34_3_14" title="var smoothed = Uize.map (&#10;	array,&#10;	&apos;key &amp;&amp; key &lt; this.length - 1 ? (this [key-1] + value + this [key+1]) / 3 : value&apos;&#10;);&#10;">2.34.3.14. Smooth an array of values by averaging against adjacent neighbors...</a></li>
 									<li><a href="#2_34_3_15" title="Uize.map (logArray,&apos;console.log (value)&apos;);&#10;">2.34.3.15. Output elements of a log array to the Firebug console on separate lines...</a></li>
 									<li><a href="#2_34_3_16" title="Uize.map (logArray,&apos;console.log (key + &quot;: &quot; + value)&apos;);&#10;">2.34.3.16. Output elements of a log array to the Firebug console on separate lines, with line numbers...</a></li>
-									<li><a href="#2_34_3_17" title="var coordsStyleProperties = Uize.map (coords,&apos;value + &quot;px&quot;&apos;);&#10;&#10;// EXAMPLE&#10;// this... {left:0,top:50,width:100,height:175}&#10;// produces this... {left:&apos;0px&apos;,top:&apos;50px&apos;,width:&apos;100px&apos;,height:&apos;175px&apos;}&#10;">2.34.3.17. Gets a style properties object from a pure number coords object...</a></li>
-									<li><a href="#2_34_3_18" title="var maxStringLength = Uize.max (Uize.map (stringsArray,&apos;value.length&apos;));&#10;">2.34.3.18. Gets the length of the longest string in an array of strings....</a></li>
+									<li><a href="#2_34_3_17" title="var coordsStyleProperties = Uize.map (coords,&apos;value + &quot;px&quot;&apos;);&#10;&#10;// EXAMPLE&#10;// this... {left:0,top:50,width:100,height:175}&#10;// produces this... {left:&apos;0px&apos;,top:&apos;50px&apos;,width:&apos;100px&apos;,height:&apos;175px&apos;}&#10;">2.34.3.17. Get a style properties object from a pure number coords object...</a></li>
+									<li><a href="#2_34_3_18" title="var maxStringLength = Uize.max (Uize.map (stringsArray,&apos;value.length&apos;));&#10;">2.34.3.18. Get the length of the longest string in an array of strings....</a></li>
 								</ul>
 							</li>
 						</ul>
 					</li>
 					<li><a href="#2_35" title="Returns the maximum value from the specified array or object.">2.35. Uize.max</a></li>
-					<li><a href="#2_36" title="Returns the minimum value from the specified array or object.">2.36. Uize.min</a></li>
-					<li><a href="#2_37" title="Lets you declare a module in the UIZE JavaScript Framework.">2.37. Uize.module</a></li>
-					<li><a href="#2_38" title="Loads the specified JavaScript module (specified by its module name) and calls the specified callback function once the module has been loaded.">2.38. Uize.moduleLoader</a></li>
-					<li><a href="#2_39" title="Returns a string, representing the URL path from where the specified JavaScript module (specified by its module name) can be loaded.">2.39. Uize.moduleUrlResolver</a></li>
-					<li><a href="#2_40" title="Returns an object, that is the specified key and value, paired up together in the same object.">2.40. Uize.pairUp</a>
+					<li><a href="#2_36" title="Returns an object that is created by melding together the specified keys array and values array.">2.36. Uize.meldKeysValues</a>
 						<ul>
-							<li><a href="#2_40_1" title="The Uize.pairUp method is particularly useful when an object needs to be created from a key/value pair, where the key name is either dynamically generated in an expression or is supplied via a parameter.">2.40.1. Why This Method is Useful</a></li>
-						</ul>
-					</li>
-					<li><a href="#2_41" title="Returns a boolean, indicating whether or not the specified record&apos;s contents is a superset of the contents of the specified match object.">2.41. Uize.recordMatches</a></li>
-					<li><a href="#2_42" title="Lets you register properties for the class.">2.42. Uize.registerProperties</a></li>
-					<li><a href="#2_43" title="Returns a reverse lookup object, where each key is a value from the specified source object, and where the value for each key is the associated key from the specified source.">2.43. Uize.reverseLookup</a>
-						<ul>
-							<li><a href="#2_43_1" title="In the most typical usage of the Uize.reverseLookup method, a reverse lookup object can be created from an object.">2.43.1. Create a Reverse Lookup From an Object</a></li>
-							<li><a href="#2_43_2" title="The Uize.reverseLookup method can also be used to create a reverse lookup object for an array.">2.43.2. Create a Reverse Lookup From a Values Array</a></li>
-							<li><a href="#2_43_3" title="By specifying the value true for the optional safeBOOL parameter, a &quot;safe&quot; lookup object can be created.">2.43.3. Create a Safe Reverse Lookup Object</a></li>
-							<li><a href="#2_43_4" title="By specifying an existing reverse lookup object as the target for the reverse lookup creation, more entries can be added to the existing reverse lookup.">2.43.4. Add More Entries to a Reverse Lookup Object</a></li>
-							<li><a href="#2_43_5" title="By specifying the source hash object as also the target for the reverse lookup creation, a bi-directional lookup object can be created.">2.43.5. Create a Bi-directional Lookup</a>
+							<li><a href="#2_36_1" title="If the lengths of the keysARRAY or valuesARRAY arrays differ, then the surplus keys or values will be ignored.">2.36.1. Surplus Keys or Values Ignored</a>
 								<ul>
-									<li><a href="#2_43_5_1" title="When creating bi-directional lookup objects, be sure that there are no collisions between keys and values, or your bi-directional lookup will not work correctly.">2.43.5.1. Key / Value Collisions</a></li>
+									<li><a href="#2_36_1_1" title="If more keys are specified in keysARRAY than there are values in valuesARRAY, then the surplus keys will be ignored.">2.36.1.1. Surplus Keys</a></li>
+									<li><a href="#2_36_1_2" title="If more values are specified in valuesARRAY than there are keys in keysARRAY, then the surplus values will be ignored.">2.36.1.2. Surplus Values</a></li>
 								</ul>
 							</li>
 						</ul>
 					</li>
-					<li><a href="#2_44" title="Lets you set the initial value for one of the class&apos;s set-get properties.">2.44. Uize.set</a></li>
-					<li><a href="#2_45" title="Lets you subclass the Uize class or any subclass of the Uize class.">2.45. Uize.subclass</a></li>
-					<li><a href="#2_46" title="Lets you substitute one or more specified substitution values into a specified source string.">2.46. Uize.substituteInto</a>
+					<li><a href="#2_37" title="Returns the minimum value from the specified array or object.">2.37. Uize.min</a></li>
+					<li><a href="#2_38" title="Lets you declare a module in the UIZE JavaScript Framework.">2.38. Uize.module</a></li>
+					<li><a href="#2_39" title="Loads the specified JavaScript module (specified by its module name) and calls the specified callback function once the module has been loaded.">2.39. Uize.moduleLoader</a></li>
+					<li><a href="#2_40" title="Returns a string, representing the URL path from where the specified JavaScript module (specified by its module name) can be loaded.">2.40. Uize.moduleUrlResolver</a></li>
+					<li><a href="#2_41" title="A dummy function that performs no operation and returns no value (which is effectively the same as returning the value undefined).">2.41. Uize.nop</a></li>
+					<li><a href="#2_42" title="Returns an object, that is the specified key and value, paired up together in the same object.">2.42. Uize.pairUp</a>
 						<ul>
-							<li><a href="#2_46_1">2.46.1. Parameters</a>
+							<li><a href="#2_42_1" title="The Uize.pairUp method is particularly useful when an object needs to be created from a key/value pair, where the key name is either dynamically generated in an expression or is supplied via a parameter.">2.42.1. Why This Method is Useful</a></li>
+						</ul>
+					</li>
+					<li><a href="#2_43" title="Returns a boolean, indicating whether or not the specified record&apos;s contents is a superset of the contents of the specified match object.">2.43. Uize.recordMatches</a></li>
+					<li><a href="#2_44" title="Lets you register properties for the class.">2.44. Uize.registerProperties</a></li>
+					<li><a href="#2_45" title="A dummy function that always returns the boolean value false, and that can be useful as an event handler or in other situations.">2.45. Uize.returnFalse</a></li>
+					<li><a href="#2_46" title="A dummy function that always returns the boolean value true, and that can be useful as an event handler or in other situations.">2.46. Uize.returnTrue</a></li>
+					<li><a href="#2_47" title="A dummy function that accepts a single argument x and returns the value of that argument unchanged.">2.47. Uize.returnX</a></li>
+					<li><a href="#2_48" title="Returns a reverse lookup object, where each key is a value from the specified source object, and where the value for each key is the associated key from the specified source.">2.48. Uize.reverseLookup</a>
+						<ul>
+							<li><a href="#2_48_1" title="In the most typical usage of the Uize.reverseLookup method, a reverse lookup object can be created from an object.">2.48.1. Create a Reverse Lookup From an Object</a></li>
+							<li><a href="#2_48_2" title="The Uize.reverseLookup method can also be used to create a reverse lookup object for an array.">2.48.2. Create a Reverse Lookup From a Values Array</a></li>
+							<li><a href="#2_48_3" title="By specifying the value true for the optional safeBOOL parameter, a &quot;safe&quot; lookup object can be created.">2.48.3. Create a Safe Reverse Lookup Object</a></li>
+							<li><a href="#2_48_4" title="By specifying an existing reverse lookup object for the optional targetOBJ second parameter, more entries can be added to the existing reverse lookup.">2.48.4. Add More Entries to a Reverse Lookup Object</a></li>
+							<li><a href="#2_48_5" title="By specifying the source hash object as also the target for the reverse lookup creation, a bi-directional lookup object can be created.">2.48.5. Create a Bi-directional Lookup</a>
 								<ul>
-									<li><a href="#2_46_1_1" title="The value of the sourceANYTYPE parameter should be a string containing substitution tokens that the substitution values specified in the substitutionsOBJorARRAY parameter will be substituted into.">2.46.1.1. sourceANYTYPE</a></li>
-									<li><a href="#2_46_1_2" title="An object, array, or simple type value, specifying one or more substitution values that should be substituted into the source string specified by the sourceANYTYPE parameter.">2.46.1.2. substitutionsANYTYPE</a></li>
-									<li><a href="#2_46_1_3" title="The optional tokenNamingSTR parameter allows a custom token naming scheme to be specified, rather than the default [#KEY] format.">2.46.1.3. tokenNamingSTR</a></li>
-								</ul>
-							</li>
-							<li><a href="#2_46_2">2.46.2. Examples</a>
-								<ul>
-									<li><a href="#2_46_2_1" title="In the example below, two substitutions are being performed.">2.46.2.1. Example: Two Substitutions</a></li>
-									<li><a href="#2_46_2_2" title="If there are multiple tokens for the same substitution value, then that value will be substituted multiple times.">2.46.2.2. Example: One Substitution, Used Multiple Times</a></li>
-									<li><a href="#2_46_2_3" title="If there are no substitution tokens for a substitution value, then that value will not be substituted.">2.46.2.3. Example: No Token for a Substitution Value</a></li>
-									<li><a href="#2_46_2_4" title="Substitution tokens for which there are no properties will be left in the string (they will not be blanked out).">2.46.2.4. Example: Tokens With No Substitution Value</a></li>
-									<li><a href="#2_46_2_5" title="The optional tokenNamingSTR parameter allows a custom token naming format to be specified.">2.46.2.5. Example: Custom Token Naming</a></li>
-									<li><a href="#2_46_2_6" title="The optional tokenNamingSTR parameter can be used to specify a &quot;bare token&quot; format for token naming, where the substitution tokens are the substitution keys.">2.46.2.6. Example: Bare Tokens</a></li>
-									<li><a href="#2_46_2_7" title="Substitution values can be of any type, and any value that is not a string will be coerced to a string.">2.46.2.7. Example: Mixed Type Substitution Values</a></li>
-									<li><a href="#2_46_2_8" title="When substitutions are specified using an array, then each substitution&apos;s index in the substitutions array is used as the key when forming its token name.">2.46.2.8. Example: Specifying Substitutions Using an Array</a></li>
-									<li><a href="#2_46_2_9" title="Substitution values that contain tokens are not further substituted into.">2.46.2.9. Example: Substitution Values Containing Tokens</a></li>
-									<li><a href="#2_46_2_10" title="Substitution tokens are case-sensitive.">2.46.2.10. Example: Tokens and Substitutions are Case-sensitive</a></li>
-									<li><a href="#2_46_2_11" title="Substitution tokens are space-sensitive.">2.46.2.11. Example: Tokens and Substitutions are Space-sensitive</a></li>
-									<li><a href="#2_46_2_12" title="When a simple type value (string, number, or boolean) is specified in place of a substitutions object or array, then a substitutions array is formed using that simple type substitution as its single element.">2.46.2.12. Example: A Single Simply Type Substitution</a></li>
-									<li><a href="#2_46_2_13" title="When the source value to substitute into is not a string (eg. an object, array, number, boolean, etc.), then this value will be coerced to a string.">2.46.2.13. Example: Source is Not a String</a></li>
+									<li><a href="#2_48_5_1" title="When creating bi-directional lookup objects, be sure that there are no collisions between keys and values, or your bi-directional lookup will not work correctly.">2.48.5.1. Key / Value Collisions</a></li>
 								</ul>
 							</li>
 						</ul>
 					</li>
-					<li><a href="#2_47" title="IMPLEMENTATION INFO">2.47. Uize.superclass</a></li>
-					<li><a href="#2_48" title="Returns a string, providing summary info for the class on which the method is called.">2.48. Uize.toString</a></li>
-					<li><a href="#2_49" title="Toggles the value of the specified boolean static set-get property.">2.49. Uize.toggle</a></li>
-					<li><a href="#2_50" title="Returns an integer, representing the total number of keys in the specified object.">2.50. Uize.totalKeys</a></li>
-					<li><a href="#2_51" title="Lets you remove a handler previously wired to a static event, or handlers wired for multiple static events.">2.51. Uize.unwire</a></li>
-					<li><a href="#2_52" title="Returns the value of the class&apos; value set-get property.">2.52. Uize.valueOf</a></li>
-					<li><a href="#2_53" title="Returns an array, representing the property values of the specified object.">2.53. Uize.values</a></li>
-					<li><a href="#2_54" title="Lets you wire a handler for a static event of the class, or handlers for multiple static events.">2.54. Uize.wire</a></li>
+					<li><a href="#2_49" title="Lets you set the initial value for one of the class&apos;s set-get properties.">2.49. Uize.set</a></li>
+					<li><a href="#2_50" title="Lets you subclass the Uize class or any subclass of the Uize class.">2.50. Uize.subclass</a></li>
+					<li><a href="#2_51" title="Lets you substitute one or more specified substitution values into a specified source string.">2.51. Uize.substituteInto</a>
+						<ul>
+							<li><a href="#2_51_1">2.51.1. Parameters</a>
+								<ul>
+									<li><a href="#2_51_1_1" title="The value of the sourceANYTYPE parameter should be a string containing substitution tokens that the substitution values specified in the substitutionsOBJorARRAY parameter will be substituted into.">2.51.1.1. sourceANYTYPE</a></li>
+									<li><a href="#2_51_1_2" title="An object, array, or simple type value, specifying one or more substitution values that should be substituted into the source string specified by the sourceANYTYPE parameter.">2.51.1.2. substitutionsANYTYPE</a></li>
+									<li><a href="#2_51_1_3" title="The optional tokenNamingSTR parameter allows a custom token naming scheme to be specified, rather than the default [#KEY] format.">2.51.1.3. tokenNamingSTR</a></li>
+								</ul>
+							</li>
+							<li><a href="#2_51_2">2.51.2. Examples</a>
+								<ul>
+									<li><a href="#2_51_2_1" title="In the example below, two substitutions are being performed.">2.51.2.1. Example: Two Substitutions</a></li>
+									<li><a href="#2_51_2_2" title="If there are multiple tokens for the same substitution value, then that value will be substituted multiple times.">2.51.2.2. Example: One Substitution, Used Multiple Times</a></li>
+									<li><a href="#2_51_2_3" title="If there are no substitution tokens for a substitution value, then that value will not be substituted.">2.51.2.3. Example: No Token for a Substitution Value</a></li>
+									<li><a href="#2_51_2_4" title="Substitution tokens for which there are no properties will be left in the string (they will not be blanked out).">2.51.2.4. Example: Tokens With No Substitution Value</a></li>
+									<li><a href="#2_51_2_5" title="The optional tokenNamingSTR parameter allows a custom token naming format to be specified.">2.51.2.5. Example: Custom Token Naming</a></li>
+									<li><a href="#2_51_2_6" title="The optional tokenNamingSTR parameter can be used to specify a &quot;bare token&quot; format for token naming, where the substitution tokens are the substitution keys.">2.51.2.6. Example: Bare Tokens</a></li>
+									<li><a href="#2_51_2_7" title="Substitution values can be of any type, and any value that is not a string will be coerced to a string.">2.51.2.7. Example: Mixed Type Substitution Values</a></li>
+									<li><a href="#2_51_2_8" title="When substitutions are specified using an array, then each substitution&apos;s index in the substitutions array is used as the key when forming its token name.">2.51.2.8. Example: Specifying Substitutions Using an Array</a></li>
+									<li><a href="#2_51_2_9" title="Substitution values that contain tokens are not further substituted into.">2.51.2.9. Example: Substitution Values Containing Tokens</a></li>
+									<li><a href="#2_51_2_10" title="Substitution tokens are case-sensitive.">2.51.2.10. Example: Tokens and Substitutions are Case-sensitive</a></li>
+									<li><a href="#2_51_2_11" title="Substitution tokens are space-sensitive.">2.51.2.11. Example: Tokens and Substitutions are Space-sensitive</a></li>
+									<li><a href="#2_51_2_12" title="When a simple type value (string, number, or boolean) is specified in place of a substitutions object or array, then a substitutions array is formed using that simple type substitution as its single element.">2.51.2.12. Example: A Single Simply Type Substitution</a></li>
+									<li><a href="#2_51_2_13" title="When the source value to substitute into is not a string (eg. an object, array, number, boolean, etc.), then this value will be coerced to a string.">2.51.2.13. Example: Source is Not a String</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li><a href="#2_52" title="IMPLEMENTATION INFO">2.52. Uize.superclass</a></li>
+					<li><a href="#2_53" title="Returns a string, providing summary info for the class on which the method is called.">2.53. Uize.toString</a></li>
+					<li><a href="#2_54" title="Toggles the value of the specified boolean static set-get property.">2.54. Uize.toggle</a></li>
+					<li><a href="#2_55" title="Returns an integer, representing the total number of keys in the specified object.">2.55. Uize.totalKeys</a></li>
+					<li><a href="#2_56" title="Lets you remove a handler previously wired to a static event, or handlers wired for multiple static events.">2.56. Uize.unwire</a></li>
+					<li><a href="#2_57" title="Returns the value of the class&apos; value set-get property.">2.57. Uize.valueOf</a></li>
+					<li><a href="#2_58" title="Returns an array, representing the property values of the specified object.">2.58. Uize.values</a></li>
+					<li><a href="#2_59" title="Lets you wire a handler for a static event of the class, or handlers for multiple static events.">2.59. Uize.wire</a></li>
 				</ul>
 			</li>
 			<li><a href="#3">3. Instance Methods</a>
@@ -358,33 +377,45 @@
 					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_33">Uize.lookup</a></code> - creates a lookup object from an array of values</td></tr>
 					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_34">Uize.map</a></code> - iterates over an array or object and applies the specified value transformer to produce new values</td></tr>
 					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_35">Uize.max</a></code> - returns the largest value in a values array</td></tr>
-					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_36">Uize.min</a></code> - returns the smallest value in a values array</td></tr>
-					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_40">Uize.pairUp</a></code> - uses a list of key/value pairs to form an object</td></tr>
-					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_41">Uize.recordMatches</a></code> - determines if a record object matches the specified criteria</td></tr>
-					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_43">Uize.reverseLookup</a></code> - creates a reverse lookup from a specified lookup object or values array</td></tr>
-					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_50">Uize.totalKeys</a></code> - counts the number of keys in an object (essentially the number of properties)</td></tr>
-					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_53">Uize.values</a></code> - returns an array containing the values of the properties in an object</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_36">Uize.meldKeysValues</a></code> - creates an object by melding keys from a keys array with values from a values array</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_37">Uize.min</a></code> - returns the smallest value in a values array</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_42">Uize.pairUp</a></code> - uses a list of key/value pairs to form an object</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_43">Uize.recordMatches</a></code> - determines if a record object matches the specified criteria</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_48">Uize.reverseLookup</a></code> - creates a reverse lookup from a specified lookup object or values array</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_55">Uize.totalKeys</a></code> - counts the number of keys in an object (essentially the number of properties)</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_58">Uize.values</a></code> - returns an array containing the values of the properties in an object</td></tr>
 					</table>
 				</div>
 				
 				<a name="1_1_1_3"></a>
-				<h4 class="heading4" title="1. Introduction -&gt; 1.1. Key Features -&gt; 1.1.1. Utility Belt Methods -&gt; 1.1.1.3. Useful Value Transformers"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. Key Features">1</a>.<a href="#1_1_1" title="1. Introduction -&gt; 1.1. Key Features -&gt; 1.1.1. Utility Belt Methods">1</a>.<a href="#1_1_1_3" title="1. Introduction -&gt; 1.1. Key Features -&gt; 1.1.1. Utility Belt Methods -&gt; 1.1.1.3. Useful Value Transformers">3</a>. </span>Useful Value Transformers</h4>
+				<h4 class="heading4" title="1. Introduction -&gt; 1.1. Key Features -&gt; 1.1.1. Utility Belt Methods -&gt; 1.1.1.3. Iterator Methods"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. Key Features">1</a>.<a href="#1_1_1" title="1. Introduction -&gt; 1.1. Key Features -&gt; 1.1.1. Utility Belt Methods">1</a>.<a href="#1_1_1_3" title="1. Introduction -&gt; 1.1. Key Features -&gt; 1.1.1. Utility Belt Methods -&gt; 1.1.1.3. Iterator Methods">3</a>. </span>Iterator Methods</h4>
+				<div class="contents4">
+					<table class="list">
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_1">Uize.callOn</a></code> - calls a method on all values of properties in an object or elements of an array</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_12">Uize.forEach</a></code> - iterates over an array, object, or length, calling the specified iteration handler for each element or property</td></tr>
+					</table>
+				</div>
+				
+				<a name="1_1_1_4"></a>
+				<h4 class="heading4" title="1. Introduction -&gt; 1.1. Key Features -&gt; 1.1.1. Utility Belt Methods -&gt; 1.1.1.4. Useful Value Transformers"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. Key Features">1</a>.<a href="#1_1_1" title="1. Introduction -&gt; 1.1. Key Features -&gt; 1.1.1. Utility Belt Methods">1</a>.<a href="#1_1_1_4" title="1. Introduction -&gt; 1.1. Key Features -&gt; 1.1.1. Utility Belt Methods -&gt; 1.1.1.4. Useful Value Transformers">4</a>. </span>Useful Value Transformers</h4>
 				<div class="contents4">
 					<table class="list">
 					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_2">Uize.capFirstChar</a></code> - capitalizes the first character of a string</td></tr>
 					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_4">Uize.constrain</a></code> - constrains a value to a specified range</td></tr>
 					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_6">Uize.defaultNully</a></code> - defaults a value to the specified default, if the value is nully (ie. <code>null</code> or <code>undefined</code>)</td></tr>
 					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_8">Uize.escapeRegExpLiteral</a></code> - escapes a string so that it can be used as a literal match portion of a regular expression string</td></tr>
-					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_46">Uize.substituteInto</a></code> - substitutes the specified values into the specified string using token replacement</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_51">Uize.substituteInto</a></code> - substitutes the specified values into the specified string using token replacement</td></tr>
 					</table>
 				</div>
 				
-				<a name="1_1_1_4"></a>
-				<h4 class="heading4" title="1. Introduction -&gt; 1.1. Key Features -&gt; 1.1.1. Utility Belt Methods -&gt; 1.1.1.4. Iterator Methods"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. Key Features">1</a>.<a href="#1_1_1" title="1. Introduction -&gt; 1.1. Key Features -&gt; 1.1.1. Utility Belt Methods">1</a>.<a href="#1_1_1_4" title="1. Introduction -&gt; 1.1. Key Features -&gt; 1.1.1. Utility Belt Methods -&gt; 1.1.1.4. Iterator Methods">4</a>. </span>Iterator Methods</h4>
+				<a name="1_1_1_5"></a>
+				<h4 class="heading4" title="1. Introduction -&gt; 1.1. Key Features -&gt; 1.1.1. Utility Belt Methods -&gt; 1.1.1.5. Dummy Functions"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. Key Features">1</a>.<a href="#1_1_1" title="1. Introduction -&gt; 1.1. Key Features -&gt; 1.1.1. Utility Belt Methods">1</a>.<a href="#1_1_1_5" title="1. Introduction -&gt; 1.1. Key Features -&gt; 1.1.1. Utility Belt Methods -&gt; 1.1.1.5. Dummy Functions">5</a>. </span>Dummy Functions</h4>
 				<div class="contents4">
 					<table class="list">
-					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_1">Uize.callOn</a></code> - calls a method on all values of properties in an object or elements of an array</td></tr>
-					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_12">Uize.forEach</a></code> - iterates over an array, object, or length, calling the specified iteration handler for each element or property</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_41">Uize.nop</a></code> - performs no operation and returns no value (equivalent to returning <code>undefined</code>)</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_45">Uize.returnFalse</a></code> - always returns the value <code>false</code></td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_46">Uize.returnTrue</a></code> - always returns the value <code>true</code></td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_47">Uize.returnX</a></code> - always returns the value of the first argument, unaltered</td></tr>
 					</table>
 				</div>
 			</div>
@@ -427,7 +458,7 @@
 				
 				<p><span class="allCaps">STATIC METHODS</span></p>
 				
-				<p><code><a href="#2_1">Uize.callOn</a></code> | <code><a href="#2_2">Uize.capFirstChar</a></code> | <code><a href="#2_3">Uize.clone</a></code> | <code><a href="#2_4">Uize.constrain</a></code> | <code><a href="#2_5">Uize.copyInto</a></code> | <code><a href="#2_6">Uize.defaultNully</a></code> | <code><a href="#2_7">Uize.emptyOut</a></code> | <code><a href="#2_8">Uize.escapeRegExpLiteral</a></code> | <code><a href="#2_9">Uize.findRecord</a></code> | <code><a href="#2_10">Uize.findRecordNo</a></code> | <code><a href="#2_11">Uize.fire</a></code> | <code><a href="#2_12">Uize.forEach</a></code> | <code><a href="#2_13">Uize.get</a></code> | <code><a href="#2_14">Uize.getGuid</a></code> | <code><a href="#2_15">Uize.getModuleByName</a></code> | <code><a href="#2_16">Uize.getPathToLibrary</a></code> | <code><a href="#2_17">Uize.globalEval</a></code> | <code><a href="#2_18">Uize.inRange</a></code> | <code><a href="#2_19">Uize.indexIn</a></code> | <code><a href="#2_20">Uize.isArray</a></code> | <code><a href="#2_21">Uize.isBoolean</a></code> | <code><a href="#2_22">Uize.isEmpty</a></code> | <code><a href="#2_23">Uize.isFunction</a></code> | <code><a href="#2_24">Uize.isIn</a></code> | <code><a href="#2_25">Uize.isInstance</a></code> | <code><a href="#2_26">Uize.isNully</a></code> | <code><a href="#2_27">Uize.isNumber</a></code> | <code><a href="#2_28">Uize.isObject</a></code> | <code><a href="#2_29">Uize.isPlainObject</a></code> | <code><a href="#2_30">Uize.isPrimitive</a></code> | <code><a href="#2_31">Uize.isString</a></code> | <code><a href="#2_32">Uize.keys</a></code> | <code><a href="#2_33">Uize.lookup</a></code> | <code><a href="#2_34">Uize.map</a></code> | <code><a href="#2_35">Uize.max</a></code> | <code><a href="#2_36">Uize.min</a></code> | <code><a href="#2_37">Uize.module</a></code> | <code><a href="#2_38">Uize.moduleLoader</a></code> | <code><a href="#2_39">Uize.moduleUrlResolver</a></code> | <code><a href="#2_40">Uize.pairUp</a></code> | <code><a href="#2_41">Uize.recordMatches</a></code> | <code><a href="#2_42">Uize.registerProperties</a></code> | <code><a href="#2_43">Uize.reverseLookup</a></code> | <code><a href="#2_44">Uize.set</a></code> | <code><a href="#2_45">Uize.subclass</a></code> | <code><a href="#2_46">Uize.substituteInto</a></code> | <code><a href="#2_47">Uize.superclass</a></code> | <code><a href="#2_49">Uize.toggle</a></code> | <code><a href="#2_50">Uize.totalKeys</a></code> | <code><a href="#2_51">Uize.unwire</a></code> | <code><a href="#2_53">Uize.values</a></code> | <code><a href="#2_54">Uize.wire</a></code></p>
+				<p><code><a href="#2_1">Uize.callOn</a></code> | <code><a href="#2_2">Uize.capFirstChar</a></code> | <code><a href="#2_3">Uize.clone</a></code> | <code><a href="#2_4">Uize.constrain</a></code> | <code><a href="#2_5">Uize.copyInto</a></code> | <code><a href="#2_6">Uize.defaultNully</a></code> | <code><a href="#2_7">Uize.emptyOut</a></code> | <code><a href="#2_8">Uize.escapeRegExpLiteral</a></code> | <code><a href="#2_9">Uize.findRecord</a></code> | <code><a href="#2_10">Uize.findRecordNo</a></code> | <code><a href="#2_11">Uize.fire</a></code> | <code><a href="#2_12">Uize.forEach</a></code> | <code><a href="#2_13">Uize.get</a></code> | <code><a href="#2_14">Uize.getGuid</a></code> | <code><a href="#2_15">Uize.getModuleByName</a></code> | <code><a href="#2_16">Uize.getPathToLibrary</a></code> | <code><a href="#2_17">Uize.globalEval</a></code> | <code><a href="#2_18">Uize.inRange</a></code> | <code><a href="#2_19">Uize.indexIn</a></code> | <code><a href="#2_20">Uize.isArray</a></code> | <code><a href="#2_21">Uize.isBoolean</a></code> | <code><a href="#2_22">Uize.isEmpty</a></code> | <code><a href="#2_23">Uize.isFunction</a></code> | <code><a href="#2_24">Uize.isIn</a></code> | <code><a href="#2_25">Uize.isInstance</a></code> | <code><a href="#2_26">Uize.isNully</a></code> | <code><a href="#2_27">Uize.isNumber</a></code> | <code><a href="#2_28">Uize.isObject</a></code> | <code><a href="#2_29">Uize.isPlainObject</a></code> | <code><a href="#2_30">Uize.isPrimitive</a></code> | <code><a href="#2_31">Uize.isString</a></code> | <code><a href="#2_32">Uize.keys</a></code> | <code><a href="#2_33">Uize.lookup</a></code> | <code><a href="#2_34">Uize.map</a></code> | <code><a href="#2_35">Uize.max</a></code> | <code><a href="#2_36">Uize.meldKeysValues</a></code> | <code><a href="#2_37">Uize.min</a></code> | <code><a href="#2_38">Uize.module</a></code> | <code><a href="#2_39">Uize.moduleLoader</a></code> | <code><a href="#2_40">Uize.moduleUrlResolver</a></code> | <code><a href="#2_41">Uize.nop</a></code> | <code><a href="#2_42">Uize.pairUp</a></code> | <code><a href="#2_43">Uize.recordMatches</a></code> | <code><a href="#2_44">Uize.registerProperties</a></code> | <code><a href="#2_45">Uize.returnFalse</a></code> | <code><a href="#2_46">Uize.returnTrue</a></code> | <code><a href="#2_47">Uize.returnX</a></code> | <code><a href="#2_48">Uize.reverseLookup</a></code> | <code><a href="#2_49">Uize.set</a></code> | <code><a href="#2_50">Uize.subclass</a></code> | <code><a href="#2_51">Uize.substituteInto</a></code> | <code><a href="#2_52">Uize.superclass</a></code> | <code><a href="#2_54">Uize.toggle</a></code> | <code><a href="#2_55">Uize.totalKeys</a></code> | <code><a href="#2_56">Uize.unwire</a></code> | <code><a href="#2_58">Uize.values</a></code> | <code><a href="#2_59">Uize.wire</a></code></p>
 				
 				<p><span class="allCaps">STATIC PROPERTIES</span></p>
 				
@@ -1000,7 +1031,7 @@ Uize.copyInto (targetObject,sourceObject1,sourceObject2);
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this method uses strict matching, so the statement <code>Uize.findRecordNo ([{index:'0'},{index:'1'}],{index:1})</code> will return <code>-1</code></td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the related <code><a href="#2_9">Uize.findRecord</a></code> and <code><a href="#2_41">Uize.recordMatches</a></code> static methods</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the related <code><a href="#2_9">Uize.findRecord</a></code> and <code><a href="#2_43">Uize.recordMatches</a></code> static methods</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -1032,7 +1063,7 @@ Uize.copyInto (targetObject,sourceObject1,sourceObject2);
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#2_54">Uize.wire</a></code> and <code><a href="#2_51">Uize.unwire</a></code> static methods</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#2_59">Uize.wire</a></code> and <code><a href="#2_56">Uize.unwire</a></code> static methods</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#3_1">fire</a></code>, <code><a href="#3_9">wire</a></code>, and <code><a href="#3_7">unwire</a></code> instance methods</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -1424,7 +1455,7 @@ Uize.forEach (
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#2_44">Uize.set</a></code> static method</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#2_49">Uize.set</a></code> static method</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#3_2">get</a></code> and <code><a href="#3_4">set</a></code> instance methods</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -2326,54 +2357,171 @@ Uize.isString (function () {});       // returns false
 		<div class="contents2">
 			<p>Returns a lookup object, where each key is a value from the specified values array.</p>
 			
-			<p><span class="allCaps">SYNTAX</span></p>
+			<p><span class="allCaps">DIFFERENT USAGES</span></p>
+			
+			<p><a href="#2_33_1">Create a Lookup From a Values Array</a></p>
 			
 			
 <pre class="sample-code">lookupOBJ = Uize.lookup (valuesARRAY);
 </pre>
 			
-			<p><span class="allCaps">EXAMPLE</span></p>
-			
-			
-<pre class="sample-code">var
-  fruits = ['apple','peach','pear','banana','orange','mango'],
-  fruitsLookup = Uize.lookup (fruits)
-;
-</pre>
-			
-			<p>After the above code is executed, the value of the <code>fruitsLookup</code> variable will be an object with the contents...</p>
-			
-			
-<pre class="sample-code">{apple:true, peach:true, pear:true, banana:true, orange:true, mango:true}
-</pre>
-			
-			<p><span class="allCaps">VARIATION</span></p>
+			<p><a href="#2_33_2">Create a Lookup Object With a Custom Lookup Value</a></p>
 			
 			
 <pre class="sample-code">lookupOBJ = Uize.lookup (valuesARRAY,lookupValueANYTYPE);
 </pre>
 			
-			<p>By default, the <code><a href="#2_33">Uize.lookup</a></code> method creates an object whose properties all have the boolean value <code>true</code>. The optional <code>lookupValueANYTYPE</code> parameter lets you specify the value that should be assigned to each of the properties in the lookup object.</p>
-			
-			<p><span class="allCaps">EXAMPLE</span></p>
+			<p><a href="#2_33_3">Create a Safe Lookup Object From a Values Array</a></p>
 			
 			
-<pre class="sample-code">var
-  fruits = ['apple','peach','pear','banana','orange','mango'],
-  fruitsLookup = Uize.lookup (fruits,1)
-;
+<pre class="sample-code">safeLookupOBJ = Uize.lookup (valuesARRAY,lookupValueANYTYPE,safeBOOL);
 </pre>
 			
-			<p>In the above example, the value <code>1</code> is being specified for the optional <code>lookupValueANYTYPE</code>. After the above code is executed, the value of the <code>fruitsLookup</code> variable will be an object with the contents...</p>
+			<p><a href="#2_33_4">Add More Entries to a Lookup Object</a></p>
 			
 			
-<pre class="sample-code">{apple:1, peach:1, pear:1, banana:1, orange:1, mango:1}
+<pre class="sample-code">lookupOBJ = Uize.lookup (valuesARRAY,lookupValueANYTYPE,targetLookupOBJ);
+</pre>
+			
+			<p><a href="#2_33_5">Create an Empty Safe Lookup Object</a></p>
+			
+			
+<pre class="sample-code">emptyLookupOBJ = Uize.lookup (null,1,true);
 </pre>
 			
 			<a name="2_33_1"></a>
-			<h3 class="heading3" title="2. Static Methods -&gt; 2.33. Uize.lookup -&gt; 2.33.1. A Real World Example"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_33" title="2. Static Methods -&gt; 2.33. Uize.lookup">33</a>.<a href="#2_33_1" title="2. Static Methods -&gt; 2.33. Uize.lookup -&gt; 2.33.1. A Real World Example">1</a>. </span>A Real World Example</h3>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.33. Uize.lookup -&gt; 2.33.1. Create a Lookup From a Values Array"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_33" title="2. Static Methods -&gt; 2.33. Uize.lookup">33</a>.<a href="#2_33_1" title="2. Static Methods -&gt; 2.33. Uize.lookup -&gt; 2.33.1. Create a Lookup From a Values Array">1</a>. </span>Create a Lookup From a Values Array</h3>
 			<div class="contents3">
-				<p>Creating a lookup object is useful when repeatedly checking to see if values are in a defined values set. Looping through that defined values set array for each of the lookups would result in poor performance if the set of values to scan through is large, and if the lookup is being performed frequently.</p>
+				<p>In the most common usage, a lookup object can be created from a values array by specifying just the <code>valuesARRAY</code> parameter.</p>
+				
+				<p><span class="allCaps">SYNTAX</span></p>
+				
+				
+<pre class="sample-code">lookupOBJ = Uize.lookup (valuesARRAY);
+</pre>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">var
+  fruits = ['apple','peach','pear','banana','orange','mango'],
+  fruitsLookup = Uize.lookup (fruits)
+;
+</pre>
+				
+				<p>After the above code is executed, the value of the <code>fruitsLookup</code> variable will be an object with the contents...</p>
+				
+				
+<pre class="sample-code">{apple:true,peach:true,pear:true,banana:true,orange:true,mango:true}
+</pre>
+			</div>
+			
+			<a name="2_33_2"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.33. Uize.lookup -&gt; 2.33.2. Create a Lookup Object With a Custom Lookup Value"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_33" title="2. Static Methods -&gt; 2.33. Uize.lookup">33</a>.<a href="#2_33_2" title="2. Static Methods -&gt; 2.33. Uize.lookup -&gt; 2.33.2. Create a Lookup Object With a Custom Lookup Value">2</a>. </span>Create a Lookup Object With a Custom Lookup Value</h3>
+			<div class="contents3">
+				<p>In cases where the default lookup value <code>true</code> is not desirable, a different lookup value can be specified using the optional <code>lookupValueANYTYPE</code> second parameter.</p>
+				
+				<p><span class="allCaps">SYNTAX</span></p>
+				
+				
+<pre class="sample-code">lookupOBJ = Uize.lookup (valuesARRAY,lookupValueANYTYPE);
+</pre>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">var
+  fruits = ['apple','peach','pear','banana','orange','mango'],
+  foodsLookup = Uize.lookup (fruits,'fruit')
+;
+</pre>
+				
+				<p>In the above example, the value <code>'fruit'</code> is being specified for the optional <code>lookupValueANYTYPE</code> parameter. After the above code is executed, the value of the <code>foodsLookup</code> variable will be an object with the contents...</p>
+				
+				
+<pre class="sample-code">{apple:'fruit',peach:'fruit',pear:'fruit',banana:'fruit',orange:'fruit',mango:'fruit'}
+</pre>
+				
+				<p>Using a custom lookup value can be useful when you're populating a lookup from multiple different values arrays and you want to be able to track which values array a lookup entry came from. For a good illustration of this technique, see the example for the <a href="#2_33_4">Add More Entries to a Lookup Object</a> use case.</p>
+			</div>
+			
+			<a name="2_33_3"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.33. Uize.lookup -&gt; 2.33.3. Create a Safe Lookup Object From a Values Array"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_33" title="2. Static Methods -&gt; 2.33. Uize.lookup">33</a>.<a href="#2_33_3" title="2. Static Methods -&gt; 2.33. Uize.lookup -&gt; 2.33.3. Create a Safe Lookup Object From a Values Array">3</a>. </span>Create a Safe Lookup Object From a Values Array</h3>
+			<div class="contents3">
+				<p>A safe lookup object can be created from a values array by specifying the value <code>true</code> for the optional <code>safeBOOL</code> third parameter.</p>
+				
+				<p><span class="allCaps">SYNTAX</span></p>
+				
+				
+<pre class="sample-code">safeLookupOBJ = Uize.lookup (valuesARRAY,lookupValueANYTYPE,safeBOOL);
+</pre>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">var
+  values = ['foo','bar'],
+  unsafeLookup = Uize.lookup (values),
+  safeLookup = Uize.lookup (values,true,true)
+;
+if (unsafeLookup ['valueOf']) alert ('unsafe');
+if (!safeLookup ['valueOf']) alert ('safe');
+</pre>
+				
+				<p>In the above example, the <code>unsafeLookup</code> lookup object created from the <code>values</code> array tests truthy for a <code>'valueOf'</code> entry. This is because the lookup object is an instance of JavaScript's built-in <code><a href="../javascript-reference/Object.html">Object</a></code> object, and this base object has a <code>valueOf</code> instance method as part of its <code>prototype</code>. In contrast, the <code>safeLookup</code> lookup object tests falsy for a <code>'valueOf'</code> entry, because the <code><a href="#2_33">Uize.lookup</a></code> method adds an explicit <code>undefined</code> value for the <code>'valueOf'</code> entry (and other <code><a href="../javascript-reference/Object.html">Object</a></code> prototype properties) when the value <code>true</code> is specified for the <code>safeBOOL</code> parameter.</p>
+			</div>
+			
+			<a name="2_33_4"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.33. Uize.lookup -&gt; 2.33.4. Add More Entries to a Lookup Object"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_33" title="2. Static Methods -&gt; 2.33. Uize.lookup">33</a>.<a href="#2_33_4" title="2. Static Methods -&gt; 2.33. Uize.lookup -&gt; 2.33.4. Add More Entries to a Lookup Object">4</a>. </span>Add More Entries to a Lookup Object</h3>
+			<div class="contents3">
+				<p>By specifying an existing lookup object for the optional <code>targetLookupOBJ</code> third parameter, more entries can be added to the existing lookup.</p>
+				
+				<p><span class="allCaps">SYNTAX</span></p>
+				
+				
+<pre class="sample-code">lookupOBJ = Uize.lookup (valuesARRAY,lookupValueANYTYPE,targetLookupOBJ);
+</pre>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">var
+  fruits = ['apple','apricot','orange','peach','pear','watermelon'],
+  vegetables = ['beet','broccoli','cauliflower','onion','potato','squash'],
+  grains = ['barley','maize','oats','quinoa','rice','sorghum','wheat']
+  foodLookup = Uize.lookup (fruits,'fruit')
+;
+Uize.lookup (vegetables,'vegetable',foodLookup); // stitch in keys for vegetables
+Uize.lookup (grains,'grain',foodLookup);         // stitch in keys for grains
+
+alert (foodLookup ['apricot']);   // alerts "fruit"
+alert (foodLookup ['broccoli']);  // alerts "vegetable"
+alert (foodLookup ['quinoa']);    // alerts "grain"
+</pre>
+				
+				<p>In the above example, a food lookup object is created initially from the <code>fruits</code> array. Then, entries are added to the <code>foodLookup</code> lookup object by specifying it as the target in two additional calls to the <code><a href="#2_33">Uize.lookup</a></code> method: one to stirch in lookup entries for the <code>vegetables</code> values array, and the other to stitch in entries for the <code>grains</code> values array. Also note that different lookup values are being used in each case, allowing the <code>foodLookup</code> lookup object to be used to look up the food type from the food name.</p>
+			</div>
+			
+			<a name="2_33_5"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.33. Uize.lookup -&gt; 2.33.5. Create an Empty Safe Lookup Object"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_33" title="2. Static Methods -&gt; 2.33. Uize.lookup">33</a>.<a href="#2_33_5" title="2. Static Methods -&gt; 2.33. Uize.lookup -&gt; 2.33.5. Create an Empty Safe Lookup Object">5</a>. </span>Create an Empty Safe Lookup Object</h3>
+			<div class="contents3">
+				<p>An empty safe lookup object can be created by specifying the value <code>null</code> for the <code>valuesARRAY</code> parameter, the value <code>1</code> for the <code>lookupValueANYTYPE</code> second parameter, and the value <code>true</code> for the <code>safeBOOL</code> third parameter.</p>
+				
+				<p><span class="allCaps">SYNTAX</span></p>
+				
+				
+<pre class="sample-code">emptyLookupOBJ = Uize.lookup (null,1,true);
+</pre>
+				
+				<p>By specifying the value <code>null</code> for the <code>valuesARRAY</code> parameter, the resulting lookup object will have no lookup entries. Since the resulting lookup will have no entries, the value specified for the <code>lookupValueANYTYPE</code> second parameter is arbitrary, since this value won't be used - the value <code>1</code> is nice and concise.</p>
+			</div>
+			
+			<a name="2_33_6"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.33. Uize.lookup -&gt; 2.33.6. A Real World Example"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_33" title="2. Static Methods -&gt; 2.33. Uize.lookup">33</a>.<a href="#2_33_6" title="2. Static Methods -&gt; 2.33. Uize.lookup -&gt; 2.33.6. A Real World Example">6</a>. </span>A Real World Example</h3>
+			<div class="contents3">
+				<p>Creating a lookup object is useful when repeatedly checking to see if values are in a defined values set.</p>
+				
+				<p>Looping through that defined values set array for each of the lookups would result in poor performance if the set of values to scan through is large, and if the lookup is being performed frequently.</p>
 				
 				<p>Let's consider an example...</p>
 				
@@ -2407,25 +2555,6 @@ Uize.isString (function () {});       // returns false
 </pre>
 				
 				<p>In the improved version, a lookup object (aka hash table) is created before the loop. Then, in the loop, all that is needed to see if a value being inspected is in the master list is to do a simple dereference into the lookup object, using the value as the key / property name. Here the complexity is O(n), since indexing into the lookup object is constant time.</p>
-			</div>
-			
-			<a name="2_33_2"></a>
-			<h3 class="heading3" title="2. Static Methods -&gt; 2.33. Uize.lookup -&gt; 2.33.2. Example Using Optional Target"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_33" title="2. Static Methods -&gt; 2.33. Uize.lookup">33</a>.<a href="#2_33_2" title="2. Static Methods -&gt; 2.33. Uize.lookup -&gt; 2.33.2. Example Using Optional Target">2</a>. </span>Example Using Optional Target</h3>
-			<div class="contents3">
-				
-<pre class="sample-code">var
-  fruits = ['apple','apricot','orange','peach','pear','watermelon'],
-  vegetables = ['beet','broccoli','cauliflower','onion','potato','squash'],
-  grains = ['barley','maize','oats','quinoa','rice','sorghum','wheat']
-  foodLookup = Uize.lookup (fruits,'fruit')
-;
-Uize.lookup (vegetables,'vegetable',foodLookup); // stitch in keys for vegetables
-Uize.lookup (grains,'grain',foodLookup);         // stitch in keys for grains
-
-alert (foodLookup ['apricot']);   // alerts "fruit"
-alert (foodLookup ['broccoli']);  // alerts "vegetable"
-alert (foodLookup ['quinoa']);    // alerts "grain"
-</pre>
 			</div>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -2708,7 +2837,7 @@ for (var elementNo = 0; elementNo &lt; 100; elementNo++) {
 				</div>
 				
 				<a name="2_34_3_17"></a>
-				<h4 class="heading4" title="2. Static Methods -&gt; 2.34. Uize.map -&gt; 2.34.3. More Examples -&gt; 2.34.3.17. Gets a style properties object from a pure number coords object..."><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_34" title="2. Static Methods -&gt; 2.34. Uize.map">34</a>.<a href="#2_34_3" title="2. Static Methods -&gt; 2.34. Uize.map -&gt; 2.34.3. More Examples">3</a>.<a href="#2_34_3_17" title="2. Static Methods -&gt; 2.34. Uize.map -&gt; 2.34.3. More Examples -&gt; 2.34.3.17. Gets a style properties object from a pure number coords object...">17</a>. </span>Gets a style properties object from a pure number coords object...</h4>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.34. Uize.map -&gt; 2.34.3. More Examples -&gt; 2.34.3.17. Get a style properties object from a pure number coords object..."><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_34" title="2. Static Methods -&gt; 2.34. Uize.map">34</a>.<a href="#2_34_3" title="2. Static Methods -&gt; 2.34. Uize.map -&gt; 2.34.3. More Examples">3</a>.<a href="#2_34_3_17" title="2. Static Methods -&gt; 2.34. Uize.map -&gt; 2.34.3. More Examples -&gt; 2.34.3.17. Get a style properties object from a pure number coords object...">17</a>. </span>Get a style properties object from a pure number coords object...</h4>
 				<div class="contents4">
 					
 <pre class="sample-code">var coordsStyleProperties = Uize.map (coords,'value + "px"');
@@ -2720,7 +2849,7 @@ for (var elementNo = 0; elementNo &lt; 100; elementNo++) {
 				</div>
 				
 				<a name="2_34_3_18"></a>
-				<h4 class="heading4" title="2. Static Methods -&gt; 2.34. Uize.map -&gt; 2.34.3. More Examples -&gt; 2.34.3.18. Gets the length of the longest string in an array of strings...."><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_34" title="2. Static Methods -&gt; 2.34. Uize.map">34</a>.<a href="#2_34_3" title="2. Static Methods -&gt; 2.34. Uize.map -&gt; 2.34.3. More Examples">3</a>.<a href="#2_34_3_18" title="2. Static Methods -&gt; 2.34. Uize.map -&gt; 2.34.3. More Examples -&gt; 2.34.3.18. Gets the length of the longest string in an array of strings....">18</a>. </span>Gets the length of the longest string in an array of strings....</h4>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.34. Uize.map -&gt; 2.34.3. More Examples -&gt; 2.34.3.18. Get the length of the longest string in an array of strings...."><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_34" title="2. Static Methods -&gt; 2.34. Uize.map">34</a>.<a href="#2_34_3" title="2. Static Methods -&gt; 2.34. Uize.map -&gt; 2.34.3. More Examples">3</a>.<a href="#2_34_3_18" title="2. Static Methods -&gt; 2.34. Uize.map -&gt; 2.34.3. More Examples -&gt; 2.34.3.18. Get the length of the longest string in an array of strings....">18</a>. </span>Get the length of the longest string in an array of strings....</h4>
 				<div class="contents4">
 					
 <pre class="sample-code">var maxStringLength = Uize.max (Uize.map (stringsArray,'value.length'));
@@ -2774,7 +2903,7 @@ for (var elementNo = 0; elementNo &lt; 100; elementNo++) {
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>if any of the values are not a number, then this method will return the value <code>NaN</code></td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#2_36">Uize.min</a></code> static method</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#2_37">Uize.min</a></code> static method</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -2785,7 +2914,93 @@ for (var elementNo = 0; elementNo &lt; 100; elementNo++) {
 		</div>
 		
 		<a name="2_36"></a>
-		<h2 class="heading2" title="2. Static Methods -&gt; 2.36. Uize.min"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_36" title="2. Static Methods -&gt; 2.36. Uize.min">36</a>. </span>Uize.min</h2>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.36. Uize.meldKeysValues"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_36" title="2. Static Methods -&gt; 2.36. Uize.meldKeysValues">36</a>. </span>Uize.meldKeysValues</h2>
+		<div class="contents2">
+			<p>Returns an object that is created by melding together the specified keys array and values array.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">resultOBJ = Uize.meldKeysValue (keysARRAY,valuesARRAY);
+</pre>
+			
+			<p>The <code><a href="#2_36">Uize.meldKeysValues</a></code> method iterates through the elements of the <code>keysARRAY</code> and <code>valuesARRAY</code> arrays in lock step, assigning properties to the resulting object using an element from the keys array as property name and an element from the values array as property value.</p>
+			
+			<p>If you obtained a keys array from an object using the <code><a href="#2_32">Uize.keys</a></code> method, and if you also obtained a values array from that same object using the <code><a href="#2_58">Uize.values</a></code> method, then you could use the <code><a href="#2_36">Uize.meldKeysValues</a></code> method with those keys and values arrays to recreate the original object.</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">var
+  foodInfoKeys = ['apple','banana','beet','corn','potato','rice']
+  foodInfoValues = ['fruit','fruit','vegetable','grain','vegetable','grain'],
+  foodInfo = Uize.meldKeysValues (foodInfoKeys,foodInfoValues)
+;
+</pre>
+			
+			<p>In the above example, keys from the <code>foodInfoKeys</code> array are being melded with values from the <code>foodInfoValues</code> array to form a value for the <code>foodInfo</code> object. After this code has executed, the <code>foodInfo</code> object will have the following contents...</p>
+			
+			
+<pre class="sample-code">{
+  apple:'fruit',
+  banana:'fruit',
+  beet:'vegetable',
+  corn:'grain',
+  onion:'vegetable',
+  rice:'grain'
+}
+</pre>
+			
+			<a name="2_36_1"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.36. Uize.meldKeysValues -&gt; 2.36.1. Surplus Keys or Values Ignored"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_36" title="2. Static Methods -&gt; 2.36. Uize.meldKeysValues">36</a>.<a href="#2_36_1" title="2. Static Methods -&gt; 2.36. Uize.meldKeysValues -&gt; 2.36.1. Surplus Keys or Values Ignored">1</a>. </span>Surplus Keys or Values Ignored</h3>
+			<div class="contents3">
+				<p>If the lengths of the <code>keysARRAY</code> or <code>valuesARRAY</code> arrays differ, then the surplus keys or values will be ignored.</p>
+				
+				<a name="2_36_1_1"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.36. Uize.meldKeysValues -&gt; 2.36.1. Surplus Keys or Values Ignored -&gt; 2.36.1.1. Surplus Keys"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_36" title="2. Static Methods -&gt; 2.36. Uize.meldKeysValues">36</a>.<a href="#2_36_1" title="2. Static Methods -&gt; 2.36. Uize.meldKeysValues -&gt; 2.36.1. Surplus Keys or Values Ignored">1</a>.<a href="#2_36_1_1" title="2. Static Methods -&gt; 2.36. Uize.meldKeysValues -&gt; 2.36.1. Surplus Keys or Values Ignored -&gt; 2.36.1.1. Surplus Keys">1</a>. </span>Surplus Keys</h4>
+				<div class="contents4">
+					<p>If more keys are specified in <code>keysARRAY</code> than there are values in <code>valuesARRAY</code>, then the surplus keys will be ignored.</p>
+					
+					<p><span class="allCaps">EXAMPLE</span></p>
+					
+					
+<pre class="sample-code">var object = Uize.meldKeysValues (['foo','hello'],['bar']);
+</pre>
+					
+					<p>After the above code has been executed, the <code>object</code> variable will have the value <code>{foo:'bar'}</code> - the surplus <code>'hello'</code> key is ignored.</p>
+				</div>
+				
+				<a name="2_36_1_2"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.36. Uize.meldKeysValues -&gt; 2.36.1. Surplus Keys or Values Ignored -&gt; 2.36.1.2. Surplus Values"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_36" title="2. Static Methods -&gt; 2.36. Uize.meldKeysValues">36</a>.<a href="#2_36_1" title="2. Static Methods -&gt; 2.36. Uize.meldKeysValues -&gt; 2.36.1. Surplus Keys or Values Ignored">1</a>.<a href="#2_36_1_2" title="2. Static Methods -&gt; 2.36. Uize.meldKeysValues -&gt; 2.36.1. Surplus Keys or Values Ignored -&gt; 2.36.1.2. Surplus Values">2</a>. </span>Surplus Values</h4>
+				<div class="contents4">
+					<p>If more values are specified in <code>valuesARRAY</code> than there are keys in <code>keysARRAY</code>, then the surplus values will be ignored.</p>
+					
+					<p><span class="allCaps">EXAMPLE</span></p>
+					
+					
+<pre class="sample-code">var object = Uize.meldKeysValues (['foo'],['bar','world']);
+</pre>
+					
+					<p>After the above code has been executed, the <code>object</code> variable will have the value <code>{foo:'bar'}</code> - the surplus <code>'world'</code> value is ignored.</p>
+				</div>
+			</div>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#2_32">Uize.keys</a></code> and <code><a href="#2_58">Uize.values</a></code> static methods</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#2_42">Uize.pairUp</a></code> static method</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is <b>not</b> inherited by subclasses</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_37"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.37. Uize.min"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_37" title="2. Static Methods -&gt; 2.37. Uize.min">37</a>. </span>Uize.min</h2>
 		<div class="contents2">
 			<p>Returns the minimum value from the specified array or object.</p>
 			
@@ -2827,8 +3042,8 @@ for (var elementNo = 0; elementNo &lt; 100; elementNo++) {
 			</table>
 		</div>
 		
-		<a name="2_37"></a>
-		<h2 class="heading2" title="2. Static Methods -&gt; 2.37. Uize.module"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_37" title="2. Static Methods -&gt; 2.37. Uize.module">37</a>. </span>Uize.module</h2>
+		<a name="2_38"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.38. Uize.module"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_38" title="2. Static Methods -&gt; 2.38. Uize.module">38</a>. </span>Uize.module</h2>
 		<div class="contents2">
 			<p>Lets you declare a module in the UIZE JavaScript Framework.</p>
 			
@@ -2848,7 +3063,7 @@ for (var elementNo = 0; elementNo &lt; 100; elementNo++) {
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#2_38">Uize.moduleLoader</a></code> static method and the <code><a href="#7_2">Uize.moduleUrlTemplate</a></code> static property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#2_39">Uize.moduleLoader</a></code> static method and the <code><a href="#7_2">Uize.moduleUrlTemplate</a></code> static property</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -2858,8 +3073,8 @@ for (var elementNo = 0; elementNo &lt; 100; elementNo++) {
 			</table>
 		</div>
 		
-		<a name="2_38"></a>
-		<h2 class="heading2" title="2. Static Methods -&gt; 2.38. Uize.moduleLoader"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_38" title="2. Static Methods -&gt; 2.38. Uize.moduleLoader">38</a>. </span>Uize.moduleLoader</h2>
+		<a name="2_39"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.39. Uize.moduleLoader"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_39" title="2. Static Methods -&gt; 2.39. Uize.moduleLoader">39</a>. </span>Uize.moduleLoader</h2>
 		<div class="contents2">
 			<p>Loads the specified JavaScript module (specified by its module name) and calls the specified callback function once the module has been loaded.</p>
 			
@@ -2891,8 +3106,8 @@ for (var elementNo = 0; elementNo &lt; 100; elementNo++) {
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#2_37">Uize.module</a></code> static method</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#2_39">Uize.moduleUrlResolver</a></code> static method and the <code><a href="#7_2">Uize.moduleUrlTemplate</a></code> static property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#2_38">Uize.module</a></code> static method</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#2_40">Uize.moduleUrlResolver</a></code> static method and the <code><a href="#7_2">Uize.moduleUrlTemplate</a></code> static property</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -2902,8 +3117,8 @@ for (var elementNo = 0; elementNo &lt; 100; elementNo++) {
 			</table>
 		</div>
 		
-		<a name="2_39"></a>
-		<h2 class="heading2" title="2. Static Methods -&gt; 2.39. Uize.moduleUrlResolver"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_39" title="2. Static Methods -&gt; 2.39. Uize.moduleUrlResolver">39</a>. </span>Uize.moduleUrlResolver</h2>
+		<a name="2_40"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.40. Uize.moduleUrlResolver"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_40" title="2. Static Methods -&gt; 2.40. Uize.moduleUrlResolver">40</a>. </span>Uize.moduleUrlResolver</h2>
 		<div class="contents2">
 			<p>Returns a string, representing the URL path from where the specified JavaScript module (specified by its module name) can be loaded.</p>
 			
@@ -2929,14 +3144,14 @@ for (var elementNo = 0; elementNo &lt; 100; elementNo++) {
 			
 			<p>In the above example, a custom module URL resolver is being specified. It looks at the module name, determines if the module name is in the namespace for the Web site (<code>MyDomain</code> in this example), and returns a root relative URL. Otherwise, assuming that all other modules are part of the UIZE JavaScript Framework and are stored on a CDN, it returns a URL for where the module would be located on that CDN Web site.</p>
 			
-			<p>The module URL returned by your function will be used by the built-in <code><a href="#2_38">Uize.moduleLoader</a></code> module loader function. If you override the built-in module loader by specifying your own value for the <code><a href="#2_38">Uize.moduleLoader</a></code> static method, then the <code><a href="#2_39">Uize.moduleUrlResolver</a></code> static method will only be applicable if your custom module loader uses this method. Similarly, the built-in <code><a href="#2_39">Uize.moduleUrlResolver</a></code> implementation uses the <code><a href="#7_2">Uize.moduleUrlTemplate</a></code> static property. So, if you supply your own custom module URL resolver by overriding the <code><a href="#2_39">Uize.moduleUrlResolver</a></code> static method, then it is your choice as to whether or not you use the value of the <code><a href="#7_2">Uize.moduleUrlTemplate</a></code> property.</p>
+			<p>The module URL returned by your function will be used by the built-in <code><a href="#2_39">Uize.moduleLoader</a></code> module loader function. If you override the built-in module loader by specifying your own value for the <code><a href="#2_39">Uize.moduleLoader</a></code> static method, then the <code><a href="#2_40">Uize.moduleUrlResolver</a></code> static method will only be applicable if your custom module loader uses this method. Similarly, the built-in <code><a href="#2_40">Uize.moduleUrlResolver</a></code> implementation uses the <code><a href="#7_2">Uize.moduleUrlTemplate</a></code> static property. So, if you supply your own custom module URL resolver by overriding the <code><a href="#2_40">Uize.moduleUrlResolver</a></code> static method, then it is your choice as to whether or not you use the value of the <code><a href="#7_2">Uize.moduleUrlTemplate</a></code> property.</p>
 			
 			<p>For an in-depth discussion of modules, consult the explainer <a href="../explainers/javascript-modules.html">JavaScript Modules</a>.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#2_38">Uize.moduleLoader</a></code> static method and the <code><a href="#7_2">Uize.moduleUrlTemplate</a></code> static property</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#2_39">Uize.moduleLoader</a></code> static method and the <code><a href="#7_2">Uize.moduleUrlTemplate</a></code> static property</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -2946,8 +3161,46 @@ for (var elementNo = 0; elementNo &lt; 100; elementNo++) {
 			</table>
 		</div>
 		
-		<a name="2_40"></a>
-		<h2 class="heading2" title="2. Static Methods -&gt; 2.40. Uize.pairUp"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_40" title="2. Static Methods -&gt; 2.40. Uize.pairUp">40</a>. </span>Uize.pairUp</h2>
+		<a name="2_41"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.41. Uize.nop"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_41" title="2. Static Methods -&gt; 2.41. Uize.nop">41</a>. </span>Uize.nop</h2>
+		<div class="contents2">
+			<p>A dummy function that performs no operation and returns no value (which is effectively the same as returning the value <code>undefined</code>).</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">resultUNDEF = Uize.nop ();
+</pre>
+			
+			<p>The <code><a href="#2_41">Uize.nop</a></code> method is named after the <a href="http://en.wikipedia.org/wiki/Nop" target="_blank" class="externalSiteLink">NOP (No Operation Performed)</a> assembly language instruction. This method can be provided as a callback to methods that require a callback function and may fail if one is not provided, but where you don't need anything to be executed in the callback. You could always provide your own empty anonymous function, but <code><a href="#2_41">Uize.nop</a></code> is provided for your convenience and it can be shared across all instances where an empty function needs to be provided.</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">serviceRequest ({
+  serviceParams:{
+    // service params here
+  },
+  callback:Uize.nop
+});
+</pre>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the companion <code><a href="#2_46">Uize.returnTrue</a></code> static method</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#2_45">Uize.returnFalse</a></code> and <code><a href="#2_46">Uize.returnTrue</a></code> static methods</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is <b>not</b> inherited by subclasses</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_42"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.42. Uize.pairUp"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_42" title="2. Static Methods -&gt; 2.42. Uize.pairUp">42</a>. </span>Uize.pairUp</h2>
 		<div class="contents2">
 			<p>Returns an object, that is the specified key and value, paired up together in the same object.</p>
 			
@@ -2976,7 +3229,7 @@ Uize.pairUp (1,true);       // returns the object {1:true}
 );
 </pre>
 			
-			<p>When an arbitrary number of arguments are specified for the <code><a href="#2_40">Uize.pairUp</a></code> method, then the method will pair up all the arguments as key/value pairs to form a single object, where all the even index arguments are treated as the keys, and where all the odd index arguments are treated as the values. For example, the statement <code>Uize.pairUp ('foo','bar','hello','world')</code> would return the object <code>{foo:'bar',hello:'world'}</code>.</p>
+			<p>When an arbitrary number of arguments are specified for the <code><a href="#2_42">Uize.pairUp</a></code> method, then the method will pair up all the arguments as key/value pairs to form a single object, where all the even index arguments are treated as the keys, and where all the odd index arguments are treated as the values. For example, the statement <code>Uize.pairUp ('foo','bar','hello','world')</code> would return the object <code>{foo:'bar',hello:'world'}</code>.</p>
 			
 			<p><span class="allCaps">VARIATION 2</span></p>
 			
@@ -2984,7 +3237,7 @@ Uize.pairUp (1,true);       // returns the object {1:true}
 <pre class="sample-code">keyValueOBJ = Uize.pairUp (keyAndValuePairsARRAY);
 </pre>
 			
-			<p>When a <code>keyAndValuePairsARRAY</code> parameter is specified when calling the <code><a href="#2_40">Uize.pairUp</a></code> method, then the <code><a href="#2_40">Uize.pairUp</a></code> method operates on the array in the same way as it would an arbitrary number of arguments. For example, the statement <code>Uize.pairUp (['foo','bar','hello','world'])</code> would return the object <code>{foo:'bar',hello:'world'}</code>. Therefore, if you have an array that represents a set of key / value pairs, you can call the <code><a href="#2_40">Uize.pairUp</a></code> method to combine the keys and values together to form an object without having to resort to using the <code>apply</code> method in order to use the arbitrary arguments variation of the <code><a href="#2_40">Uize.pairUp</a></code> method.</p>
+			<p>When a <code>keyAndValuePairsARRAY</code> parameter is specified when calling the <code><a href="#2_42">Uize.pairUp</a></code> method, then the <code><a href="#2_42">Uize.pairUp</a></code> method operates on the array in the same way as it would an arbitrary number of arguments. For example, the statement <code>Uize.pairUp (['foo','bar','hello','world'])</code> would return the object <code>{foo:'bar',hello:'world'}</code>. Therefore, if you have an array that represents a set of key / value pairs, you can call the <code><a href="#2_42">Uize.pairUp</a></code> method to combine the keys and values together to form an object without having to resort to using the <code>apply</code> method in order to use the arbitrary arguments variation of the <code><a href="#2_42">Uize.pairUp</a></code> method.</p>
 			
 			<p><span class="allCaps">INSTEAD OF...</span></p>
 			
@@ -2998,12 +3251,12 @@ Uize.pairUp (1,true);       // returns the object {1:true}
 <pre class="sample-code">Uize.pairUp (myKeyValuePairsArray);
 </pre>
 			
-			<a name="2_40_1"></a>
-			<h3 class="heading3" title="2. Static Methods -&gt; 2.40. Uize.pairUp -&gt; 2.40.1. Why This Method is Useful"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_40" title="2. Static Methods -&gt; 2.40. Uize.pairUp">40</a>.<a href="#2_40_1" title="2. Static Methods -&gt; 2.40. Uize.pairUp -&gt; 2.40.1. Why This Method is Useful">1</a>. </span>Why This Method is Useful</h3>
+			<a name="2_42_1"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.42. Uize.pairUp -&gt; 2.42.1. Why This Method is Useful"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_42" title="2. Static Methods -&gt; 2.42. Uize.pairUp">42</a>.<a href="#2_42_1" title="2. Static Methods -&gt; 2.42. Uize.pairUp -&gt; 2.42.1. Why This Method is Useful">1</a>. </span>Why This Method is Useful</h3>
 			<div class="contents3">
-				<p>The <code><a href="#2_40">Uize.pairUp</a></code> method is particularly useful when an object needs to be created from a key/value pair, where the key name is either dynamically generated in an expression or is supplied via a parameter.</p>
+				<p>The <code><a href="#2_42">Uize.pairUp</a></code> method is particularly useful when an object needs to be created from a key/value pair, where the key name is either dynamically generated in an expression or is supplied via a parameter.</p>
 				
-				<p>Using the <code><a href="#2_40">Uize.pairUp</a></code> method can collapse three statements into a single statement, as follows...</p>
+				<p>Using the <code><a href="#2_42">Uize.pairUp</a></code> method can collapse three statements into a single statement, as follows...</p>
 				
 				<p><span class="allCaps">INSTEAD OF</span></p>
 				
@@ -3037,7 +3290,7 @@ doSomethingWithAnObject (object);
 				
 				<p>In the above example, a function is being defined that will fade the border color of the specified edge of the specified node, from the specified start color to the specified end color. The value of the <code>edge</code> property needs to determine which style property needs to be faded.</p>
 				
-				<p>Now, we're using the <code>Uize.Fx.fadeStyle</code> static method of the <code><a href="../reference/Uize.Fx.html">Uize.Fx</a></code> module to perform the border color animation. This method can fade values for one or more style properties, and the start and end values for the style properties are specified in style property objects. Here we need to create start and end style objects where the style property to be faded is dynamically generated using the <code>edge</code> parameter. As you will see from the code, the <code><a href="#2_40">Uize.pairUp</a></code> method does this for us nicely.</p>
+				<p>Now, we're using the <code>Uize.Fx.fadeStyle</code> static method of the <code><a href="../reference/Uize.Fx.html">Uize.Fx</a></code> module to perform the border color animation. This method can fade values for one or more style properties, and the start and end values for the style properties are specified in style property objects. Here we need to create start and end style objects where the style property to be faded is dynamically generated using the <code>edge</code> parameter. As you will see from the code, the <code><a href="#2_42">Uize.pairUp</a></code> method does this for us nicely.</p>
 			</div>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -3048,8 +3301,8 @@ doSomethingWithAnObject (object);
 			</table>
 		</div>
 		
-		<a name="2_41"></a>
-		<h2 class="heading2" title="2. Static Methods -&gt; 2.41. Uize.recordMatches"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_41" title="2. Static Methods -&gt; 2.41. Uize.recordMatches">41</a>. </span>Uize.recordMatches</h2>
+		<a name="2_43"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.43. Uize.recordMatches"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_43" title="2. Static Methods -&gt; 2.43. Uize.recordMatches">43</a>. </span>Uize.recordMatches</h2>
 		<div class="contents2">
 			<p>Returns a boolean, indicating whether or not the specified record's contents is a superset of the contents of the specified match object.</p>
 			
@@ -3090,8 +3343,8 @@ doSomethingWithAnObject (object);
 			</table>
 		</div>
 		
-		<a name="2_42"></a>
-		<h2 class="heading2" title="2. Static Methods -&gt; 2.42. Uize.registerProperties"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_42" title="2. Static Methods -&gt; 2.42. Uize.registerProperties">42</a>. </span>Uize.registerProperties</h2>
+		<a name="2_44"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.44. Uize.registerProperties"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_44" title="2. Static Methods -&gt; 2.44. Uize.registerProperties">44</a>. </span>Uize.registerProperties</h2>
 		<div class="contents2">
 			<p>Lets you register properties for the class.</p>
 			
@@ -3133,47 +3386,141 @@ doSomethingWithAnObject (object);
 			</table>
 		</div>
 		
-		<a name="2_43"></a>
-		<h2 class="heading2" title="2. Static Methods -&gt; 2.43. Uize.reverseLookup"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_43" title="2. Static Methods -&gt; 2.43. Uize.reverseLookup">43</a>. </span>Uize.reverseLookup</h2>
+		<a name="2_45"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.45. Uize.returnFalse"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_45" title="2. Static Methods -&gt; 2.45. Uize.returnFalse">45</a>. </span>Uize.returnFalse</h2>
+		<div class="contents2">
+			<p>A dummy function that always returns the boolean value <code>false</code>, and that can be useful as an event handler or in other situations.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">falseBOOL = Uize.returnFalse ();
+</pre>
+			
+			<p>This method can be assigned to event handlers to cancel their default action, as in the following example...</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">myNode.onclick = Uize.returnFalse;
+</pre>
+			
+			<p>If you are cancelling the default action for many nodes in a page, then using this static method allows you to share a single function - by reference - across all these nodes.</p>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the companion <code><a href="#2_46">Uize.returnTrue</a></code> static method</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#2_41">Uize.nop</a></code> static method</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is <b>not</b> inherited by subclasses</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_46"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.46. Uize.returnTrue"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_46" title="2. Static Methods -&gt; 2.46. Uize.returnTrue">46</a>. </span>Uize.returnTrue</h2>
+		<div class="contents2">
+			<p>A dummy function that always returns the boolean value <code>true</code>, and that can be useful as an event handler or in other situations.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">trueBOOL = Uize.returnTrue ();
+</pre>
+			
+			<p>This method can be assigned to event handlers to enable their default action, as in the following example...</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">myNode.onclick = Uize.returnTrue;
+</pre>
+			
+			<p>If you are enabling the default action for many nodes in a page, then using this static method allows you to share a single function - by reference - across all these nodes.</p>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the companion <code><a href="#2_45">Uize.returnFalse</a></code> static method</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#2_41">Uize.nop</a></code> static method</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is <b>not</b> inherited by subclasses</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_47"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.47. Uize.returnX"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_47" title="2. Static Methods -&gt; 2.47. Uize.returnX">47</a>. </span>Uize.returnX</h2>
+		<div class="contents2">
+			<p>A dummy function that accepts a single argument <code>x</code> and returns the value of that argument unchanged.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">xANYTYPE = Uize.returnX (xANYTYPE);
+</pre>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#2_41">Uize.nop</a></code>, <code><a href="#2_45">Uize.returnFalse</a></code>, and <code><a href="#2_46">Uize.returnTrue</a></code> static methods</td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is <b>not</b> inherited by subclasses</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_48"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.48. Uize.reverseLookup"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_48" title="2. Static Methods -&gt; 2.48. Uize.reverseLookup">48</a>. </span>Uize.reverseLookup</h2>
 		<div class="contents2">
 			<p>Returns a reverse lookup object, where each key is a value from the specified source object, and where the value for each key is the associated key from the specified source.</p>
 			
 			<p><span class="allCaps">DIFFERENT USAGES</span></p>
 			
-			<p><a href="#2_43_1">Create a Reverse Lookup From an Object</a></p>
+			<p><a href="#2_48_1">Create a Reverse Lookup From an Object</a></p>
 			
 			
 <pre class="sample-code">reverseLookupOBJ = Uize.reverseLookup (hashOBJ);
 </pre>
 			
-			<p><a href="#2_43_2">Create a Reverse Lookup From a Values Array</a></p>
+			<p><a href="#2_48_2">Create a Reverse Lookup From a Values Array</a></p>
 			
 			
 <pre class="sample-code">reverseLookupOBJ = Uize.reverseLookup (valuesARRAY);
 </pre>
 			
-			<p><a href="#2_43_3">Create a Safe Reverse Lookup Object</a></p>
+			<p><a href="#2_48_3">Create a Safe Reverse Lookup Object</a></p>
 			
 			
 <pre class="sample-code">reverseLookupOBJ = Uize.reverseLookup (hashOBJorValuesARRAY,safeBOOL);
 </pre>
 			
-			<p><a href="#2_43_4">Add More Entries to a Reverse Lookup Object</a></p>
+			<p><a href="#2_48_4">Add More Entries to a Reverse Lookup Object</a></p>
 			
 			
-<pre class="sample-code">reverseLookupOBJ = Uize.reverseLookup (hashOBJorValuesARRAY,reverseLookupOBJ);
+<pre class="sample-code">targetOBJ = Uize.reverseLookup (hashOBJorValuesARRAY,targetOBJ);
 </pre>
 			
-			<p><a href="#2_43_5">Create a Bi-directional Lookup</a></p>
+			<p><a href="#2_48_5">Create a Bi-directional Lookup</a></p>
 			
 			
-<pre class="sample-code">hashOBJ = Uize.reverseLookup (hashOBJ,hashOBJ);
+<pre class="sample-code">reverseLookupOBJ = Uize.reverseLookup (reverseLookupOBJ,reverseLookupOBJ);
 </pre>
 			
-			<a name="2_43_1"></a>
-			<h3 class="heading3" title="2. Static Methods -&gt; 2.43. Uize.reverseLookup -&gt; 2.43.1. Create a Reverse Lookup From an Object"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_43" title="2. Static Methods -&gt; 2.43. Uize.reverseLookup">43</a>.<a href="#2_43_1" title="2. Static Methods -&gt; 2.43. Uize.reverseLookup -&gt; 2.43.1. Create a Reverse Lookup From an Object">1</a>. </span>Create a Reverse Lookup From an Object</h3>
+			<a name="2_48_1"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.48. Uize.reverseLookup -&gt; 2.48.1. Create a Reverse Lookup From an Object"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_48" title="2. Static Methods -&gt; 2.48. Uize.reverseLookup">48</a>.<a href="#2_48_1" title="2. Static Methods -&gt; 2.48. Uize.reverseLookup -&gt; 2.48.1. Create a Reverse Lookup From an Object">1</a>. </span>Create a Reverse Lookup From an Object</h3>
 			<div class="contents3">
-				<p>In the most typical usage of the <code><a href="#2_43">Uize.reverseLookup</a></code> method, a reverse lookup object can be created from an object.</p>
+				<p>In the most typical usage of the <code><a href="#2_48">Uize.reverseLookup</a></code> method, a reverse lookup object can be created from an object.</p>
 				
 				<p><span class="allCaps">SYNTAX</span></p>
 				
@@ -3199,10 +3546,10 @@ doSomethingWithAnObject (object);
 				<p>By creating a reverse lookup, this code can lookup up an entity's character code from its name, or its name from its character code.</p>
 			</div>
 			
-			<a name="2_43_2"></a>
-			<h3 class="heading3" title="2. Static Methods -&gt; 2.43. Uize.reverseLookup -&gt; 2.43.2. Create a Reverse Lookup From a Values Array"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_43" title="2. Static Methods -&gt; 2.43. Uize.reverseLookup">43</a>.<a href="#2_43_2" title="2. Static Methods -&gt; 2.43. Uize.reverseLookup -&gt; 2.43.2. Create a Reverse Lookup From a Values Array">2</a>. </span>Create a Reverse Lookup From a Values Array</h3>
+			<a name="2_48_2"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.48. Uize.reverseLookup -&gt; 2.48.2. Create a Reverse Lookup From a Values Array"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_48" title="2. Static Methods -&gt; 2.48. Uize.reverseLookup">48</a>.<a href="#2_48_2" title="2. Static Methods -&gt; 2.48. Uize.reverseLookup -&gt; 2.48.2. Create a Reverse Lookup From a Values Array">2</a>. </span>Create a Reverse Lookup From a Values Array</h3>
 			<div class="contents3">
-				<p>The <code><a href="#2_43">Uize.reverseLookup</a></code> method can also be used to create a reverse lookup object for an array.</p>
+				<p>The <code><a href="#2_48">Uize.reverseLookup</a></code> method can also be used to create a reverse lookup object for an array.</p>
 				
 				<p><span class="allCaps">SYNTAX</span></p>
 				
@@ -3252,8 +3599,8 @@ doSomethingWithAnObject (object);
 				<p>Now the code can look up a front-runner from the front-runner lineup using an index, or the code can determine if a particular person is in the front-runner lineup and what their finishing place is using the generated reverse lookup.</p>
 			</div>
 			
-			<a name="2_43_3"></a>
-			<h3 class="heading3" title="2. Static Methods -&gt; 2.43. Uize.reverseLookup -&gt; 2.43.3. Create a Safe Reverse Lookup Object"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_43" title="2. Static Methods -&gt; 2.43. Uize.reverseLookup">43</a>.<a href="#2_43_3" title="2. Static Methods -&gt; 2.43. Uize.reverseLookup -&gt; 2.43.3. Create a Safe Reverse Lookup Object">3</a>. </span>Create a Safe Reverse Lookup Object</h3>
+			<a name="2_48_3"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.48. Uize.reverseLookup -&gt; 2.48.3. Create a Safe Reverse Lookup Object"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_48" title="2. Static Methods -&gt; 2.48. Uize.reverseLookup">48</a>.<a href="#2_48_3" title="2. Static Methods -&gt; 2.48. Uize.reverseLookup -&gt; 2.48.3. Create a Safe Reverse Lookup Object">3</a>. </span>Create a Safe Reverse Lookup Object</h3>
 			<div class="contents3">
 				<p>By specifying the value <code>true</code> for the optional <code>safeBOOL</code> parameter, a "safe" lookup object can be created.</p>
 				
@@ -3263,7 +3610,7 @@ doSomethingWithAnObject (object);
 <pre class="sample-code">reverseLookupOBJ = Uize.reverseLookup (hashOBJorValuesARRAY,safeBOOL);
 </pre>
 				
-				<p>By default, the <code><a href="#2_43">Uize.reverseLookup</a></code> method creates a lookup object using a simple JavaScript <code><a href="../javascript-reference/Object.html">Object</a></code> instance. However, JavaScript's built-in <code><a href="../javascript-reference/Object.html">Object</a></code> object defines certain properties on its prototype, such as <code>valueOf</code>, so indexing into a lookup object for <code>valueOf</code> will return a truthy result. Specifying the value <code>true</code> for the <code>safeBOOL</code> parameter avoids this issue.</p>
+				<p>By default, the <code><a href="#2_48">Uize.reverseLookup</a></code> method creates a lookup object using a simple JavaScript <code><a href="../javascript-reference/Object.html">Object</a></code> instance. However, JavaScript's built-in <code><a href="../javascript-reference/Object.html">Object</a></code> object defines certain properties on its prototype, such as <code>valueOf</code>, so indexing into a lookup object for <code>valueOf</code> will return a truthy result. Specifying the value <code>true</code> for the <code>safeBOOL</code> parameter avoids this issue.</p>
 				
 				<p><span class="allCaps">EXAMPLE</span></p>
 				
@@ -3288,15 +3635,15 @@ if (entitiesCodesToNamesSafe ['valueOf']) {
 				<p>It is often not essential to create safe lookups, since one may know that the keys being used to index into a lookup object will never be the names of methods of the <code><a href="../javascript-reference/Object.html">Object</a></code> object, and not creating safe lookups is a little more efficient.</p>
 			</div>
 			
-			<a name="2_43_4"></a>
-			<h3 class="heading3" title="2. Static Methods -&gt; 2.43. Uize.reverseLookup -&gt; 2.43.4. Add More Entries to a Reverse Lookup Object"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_43" title="2. Static Methods -&gt; 2.43. Uize.reverseLookup">43</a>.<a href="#2_43_4" title="2. Static Methods -&gt; 2.43. Uize.reverseLookup -&gt; 2.43.4. Add More Entries to a Reverse Lookup Object">4</a>. </span>Add More Entries to a Reverse Lookup Object</h3>
+			<a name="2_48_4"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.48. Uize.reverseLookup -&gt; 2.48.4. Add More Entries to a Reverse Lookup Object"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_48" title="2. Static Methods -&gt; 2.48. Uize.reverseLookup">48</a>.<a href="#2_48_4" title="2. Static Methods -&gt; 2.48. Uize.reverseLookup -&gt; 2.48.4. Add More Entries to a Reverse Lookup Object">4</a>. </span>Add More Entries to a Reverse Lookup Object</h3>
 			<div class="contents3">
-				<p>By specifying an existing reverse lookup object as the target for the reverse lookup creation, more entries can be added to the existing reverse lookup.</p>
+				<p>By specifying an existing reverse lookup object for the optional <code>targetOBJ</code> second parameter, more entries can be added to the existing reverse lookup.</p>
 				
 				<p><span class="allCaps">SYNTAX</span></p>
 				
 				
-<pre class="sample-code">reverseLookupOBJ = Uize.reverseLookup (hashOBJorValuesARRAY,reverseLookupOBJ);
+<pre class="sample-code">targetOBJ = Uize.reverseLookup (hashOBJorValuesARRAY,targetOBJ);
 </pre>
 				
 				<p><span class="allCaps">EXAMPLE</span></p>
@@ -3306,21 +3653,21 @@ if (entitiesCodesToNamesSafe ['valueOf']) {
 Uize.reverseLookup ({nbsp:160,copy:169,reg:174},entitiesCodesToNames);
 
 alert (entitiesCodesToNames [38]);   // alerts "amp"
-alert (entitiesCodesToNames [160]);  // alerts "copy"
+alert (entitiesCodesToNames [169]);  // alerts "copy"
 </pre>
 				
-				<p>In the above example, the second call to the <code><a href="#2_43">Uize.reverseLookup</a></code> method is adding more entries to the reverse lookup object that was created in the first call to the method. This is done by supplying that reverse lookup object, which is assigned to the <code>entitiesCodesToNames</code> variable, as the second argument. When calling the <code><a href="#2_43">Uize.reverseLookup</a></code> method the second time, the result is ignored. This is because the method modifies the target, so we don't care about its return value.</p>
+				<p>In the above example, the second call to the <code><a href="#2_48">Uize.reverseLookup</a></code> method is adding more entries to the reverse lookup object that was created in the first call to the method. This is done by supplying that reverse lookup object, which is assigned to the <code>entitiesCodesToNames</code> variable, as the second argument. When calling the <code><a href="#2_48">Uize.reverseLookup</a></code> method the second time, the result is ignored. This is because the method modifies the target, so we don't care about its return value.</p>
 			</div>
 			
-			<a name="2_43_5"></a>
-			<h3 class="heading3" title="2. Static Methods -&gt; 2.43. Uize.reverseLookup -&gt; 2.43.5. Create a Bi-directional Lookup"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_43" title="2. Static Methods -&gt; 2.43. Uize.reverseLookup">43</a>.<a href="#2_43_5" title="2. Static Methods -&gt; 2.43. Uize.reverseLookup -&gt; 2.43.5. Create a Bi-directional Lookup">5</a>. </span>Create a Bi-directional Lookup</h3>
+			<a name="2_48_5"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.48. Uize.reverseLookup -&gt; 2.48.5. Create a Bi-directional Lookup"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_48" title="2. Static Methods -&gt; 2.48. Uize.reverseLookup">48</a>.<a href="#2_48_5" title="2. Static Methods -&gt; 2.48. Uize.reverseLookup -&gt; 2.48.5. Create a Bi-directional Lookup">5</a>. </span>Create a Bi-directional Lookup</h3>
 			<div class="contents3">
 				<p>By specifying the source hash object as also the target for the reverse lookup creation, a bi-directional lookup object can be created.</p>
 				
 				<p><span class="allCaps">SYNTAX</span></p>
 				
 				
-<pre class="sample-code">hashOBJ = Uize.reverseLookup (hashOBJ,hashOBJ);
+<pre class="sample-code">reverseLookupOBJ = Uize.reverseLookup (reverseLookupOBJ,reverseLookupOBJ);
 </pre>
 				
 				<p><span class="allCaps">EXAMPLE</span></p>
@@ -3333,8 +3680,8 @@ alert (entitiesBiDiLookup ['amp']);  // alerts "38"
 alert (entitiesBiDiLookup [38]);     // alerts "amp"
 </pre>
 				
-				<a name="2_43_5_1"></a>
-				<h4 class="heading4" title="2. Static Methods -&gt; 2.43. Uize.reverseLookup -&gt; 2.43.5. Create a Bi-directional Lookup -&gt; 2.43.5.1. Key / Value Collisions"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_43" title="2. Static Methods -&gt; 2.43. Uize.reverseLookup">43</a>.<a href="#2_43_5" title="2. Static Methods -&gt; 2.43. Uize.reverseLookup -&gt; 2.43.5. Create a Bi-directional Lookup">5</a>.<a href="#2_43_5_1" title="2. Static Methods -&gt; 2.43. Uize.reverseLookup -&gt; 2.43.5. Create a Bi-directional Lookup -&gt; 2.43.5.1. Key / Value Collisions">1</a>. </span>Key / Value Collisions</h4>
+				<a name="2_48_5_1"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.48. Uize.reverseLookup -&gt; 2.48.5. Create a Bi-directional Lookup -&gt; 2.48.5.1. Key / Value Collisions"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_48" title="2. Static Methods -&gt; 2.48. Uize.reverseLookup">48</a>.<a href="#2_48_5" title="2. Static Methods -&gt; 2.48. Uize.reverseLookup -&gt; 2.48.5. Create a Bi-directional Lookup">5</a>.<a href="#2_48_5_1" title="2. Static Methods -&gt; 2.48. Uize.reverseLookup -&gt; 2.48.5. Create a Bi-directional Lookup -&gt; 2.48.5.1. Key / Value Collisions">1</a>. </span>Key / Value Collisions</h4>
 				<div class="contents4">
 					<p>When creating bi-directional lookup objects, be sure that there are no collisions between keys and values, or your bi-directional lookup will not work correctly.</p>
 					
@@ -3360,8 +3707,8 @@ alert (foodsLookup ['grain']);  // alerts "rice"
 			</table>
 		</div>
 		
-		<a name="2_44"></a>
-		<h2 class="heading2" title="2. Static Methods -&gt; 2.44. Uize.set"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_44" title="2. Static Methods -&gt; 2.44. Uize.set">44</a>. </span>Uize.set</h2>
+		<a name="2_49"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.49. Uize.set"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_49" title="2. Static Methods -&gt; 2.49. Uize.set">49</a>. </span>Uize.set</h2>
 		<div class="contents2">
 			<p>Lets you set the initial value for one of the class's set-get properties.</p>
 			
@@ -3429,8 +3776,8 @@ alert (foodsLookup ['grain']);  // alerts "rice"
 			</table>
 		</div>
 		
-		<a name="2_45"></a>
-		<h2 class="heading2" title="2. Static Methods -&gt; 2.45. Uize.subclass"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_45" title="2. Static Methods -&gt; 2.45. Uize.subclass">45</a>. </span>Uize.subclass</h2>
+		<a name="2_50"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.50. Uize.subclass"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_50" title="2. Static Methods -&gt; 2.50. Uize.subclass">50</a>. </span>Uize.subclass</h2>
 		<div class="contents2">
 			<p>Lets you subclass the <code>Uize</code> class or any subclass of the <code>Uize</code> class.</p>
 			
@@ -3468,8 +3815,8 @@ MySubclass = MyClass.subclass (
 			</table>
 		</div>
 		
-		<a name="2_46"></a>
-		<h2 class="heading2" title="2. Static Methods -&gt; 2.46. Uize.substituteInto"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_46" title="2. Static Methods -&gt; 2.46. Uize.substituteInto">46</a>. </span>Uize.substituteInto</h2>
+		<a name="2_51"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.51. Uize.substituteInto"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_51" title="2. Static Methods -&gt; 2.51. Uize.substituteInto">51</a>. </span>Uize.substituteInto</h2>
 		<div class="contents2">
 			<p>Lets you substitute one or more specified substitution values into a specified source string.</p>
 			
@@ -3483,26 +3830,26 @@ MySubclass = MyClass.subclass (
 );
 </pre>
 			
-			<a name="2_46_1"></a>
-			<h3 class="heading3" title="2. Static Methods -&gt; 2.46. Uize.substituteInto -&gt; 2.46.1. Parameters"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_46" title="2. Static Methods -&gt; 2.46. Uize.substituteInto">46</a>.<a href="#2_46_1" title="2. Static Methods -&gt; 2.46. Uize.substituteInto -&gt; 2.46.1. Parameters">1</a>. </span>Parameters</h3>
+			<a name="2_51_1"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.51. Uize.substituteInto -&gt; 2.51.1. Parameters"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_51" title="2. Static Methods -&gt; 2.51. Uize.substituteInto">51</a>.<a href="#2_51_1" title="2. Static Methods -&gt; 2.51. Uize.substituteInto -&gt; 2.51.1. Parameters">1</a>. </span>Parameters</h3>
 			<div class="contents3">
-				<a name="2_46_1_1"></a>
-				<h4 class="heading4" title="2. Static Methods -&gt; 2.46. Uize.substituteInto -&gt; 2.46.1. Parameters -&gt; 2.46.1.1. sourceANYTYPE"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_46" title="2. Static Methods -&gt; 2.46. Uize.substituteInto">46</a>.<a href="#2_46_1" title="2. Static Methods -&gt; 2.46. Uize.substituteInto -&gt; 2.46.1. Parameters">1</a>.<a href="#2_46_1_1" title="2. Static Methods -&gt; 2.46. Uize.substituteInto -&gt; 2.46.1. Parameters -&gt; 2.46.1.1. sourceANYTYPE">1</a>. </span>sourceANYTYPE</h4>
+				<a name="2_51_1_1"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.51. Uize.substituteInto -&gt; 2.51.1. Parameters -&gt; 2.51.1.1. sourceANYTYPE"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_51" title="2. Static Methods -&gt; 2.51. Uize.substituteInto">51</a>.<a href="#2_51_1" title="2. Static Methods -&gt; 2.51. Uize.substituteInto -&gt; 2.51.1. Parameters">1</a>.<a href="#2_51_1_1" title="2. Static Methods -&gt; 2.51. Uize.substituteInto -&gt; 2.51.1. Parameters -&gt; 2.51.1.1. sourceANYTYPE">1</a>. </span>sourceANYTYPE</h4>
 				<div class="contents4">
-					<p>The value of the <code><a href="#2_46_1_1">sourceANYTYPE</a></code> parameter should be a string containing substitution tokens that the substitution values specified in the <code>substitutionsOBJorARRAY</code> parameter will be substituted into.</p>
+					<p>The value of the <code><a href="#2_51_1_1">sourceANYTYPE</a></code> parameter should be a string containing substitution tokens that the substitution values specified in the <code>substitutionsOBJorARRAY</code> parameter will be substituted into.</p>
 					
-					<p>If the value of the <code><a href="#2_46_1_1">sourceANYTYPE</a></code> parameter is not a string, then it will be coerced to a string by invoking the value type's <code><a href="#3_8">valueOf Intrinsic Method</a></code>. For each of the values to substitute, the <code><a href="#2_46_1_1">sourceANYTYPE</a></code> string should contain a token of the form <code>[#propertyName]</code> (unless a custom token naming scheme is specified using the optional <code><a href="#2_46_1_3">tokenNamingSTR</a></code> parameter). Each substitution token for a substitution will be replaced with the substitution value.</p>
+					<p>If the value of the <code><a href="#2_51_1_1">sourceANYTYPE</a></code> parameter is not a string, then it will be coerced to a string by invoking the value type's <code><a href="#3_8">valueOf Intrinsic Method</a></code>. For each of the values to substitute, the <code><a href="#2_51_1_1">sourceANYTYPE</a></code> string should contain a token of the form <code>[#propertyName]</code> (unless a custom token naming scheme is specified using the optional <code><a href="#2_51_1_3">tokenNamingSTR</a></code> parameter). Each substitution token for a substitution will be replaced with the substitution value.</p>
 				</div>
 				
-				<a name="2_46_1_2"></a>
-				<h4 class="heading4" title="2. Static Methods -&gt; 2.46. Uize.substituteInto -&gt; 2.46.1. Parameters -&gt; 2.46.1.2. substitutionsANYTYPE"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_46" title="2. Static Methods -&gt; 2.46. Uize.substituteInto">46</a>.<a href="#2_46_1" title="2. Static Methods -&gt; 2.46. Uize.substituteInto -&gt; 2.46.1. Parameters">1</a>.<a href="#2_46_1_2" title="2. Static Methods -&gt; 2.46. Uize.substituteInto -&gt; 2.46.1. Parameters -&gt; 2.46.1.2. substitutionsANYTYPE">2</a>. </span>substitutionsANYTYPE</h4>
+				<a name="2_51_1_2"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.51. Uize.substituteInto -&gt; 2.51.1. Parameters -&gt; 2.51.1.2. substitutionsANYTYPE"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_51" title="2. Static Methods -&gt; 2.51. Uize.substituteInto">51</a>.<a href="#2_51_1" title="2. Static Methods -&gt; 2.51. Uize.substituteInto -&gt; 2.51.1. Parameters">1</a>.<a href="#2_51_1_2" title="2. Static Methods -&gt; 2.51. Uize.substituteInto -&gt; 2.51.1. Parameters -&gt; 2.51.1.2. substitutionsANYTYPE">2</a>. </span>substitutionsANYTYPE</h4>
 				<div class="contents4">
-					<p>An object, array, or simple type value, specifying one or more substitution values that should be substituted into the source string specified by the <code><a href="#2_46_1_1">sourceANYTYPE</a></code> parameter.</p>
+					<p>An object, array, or simple type value, specifying one or more substitution values that should be substituted into the source string specified by the <code><a href="#2_51_1_1">sourceANYTYPE</a></code> parameter.</p>
 					
 					<table class="list">
-					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>object</code> - When the value of the <code><a href="#2_46_1_2">substitutionsANYTYPE</a></code> parameter is an object, then each property of the object will be a substitution, where a property's value is the substition value, and where a property's name is a key that will be used in forming the substitution's token name.</td></tr>
-					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>array</code> - When the value of the <code><a href="#2_46_1_2">substitutionsANYTYPE</a></code> parameter is an array, then each element of the aray will be a substitution, where an element's value is the substition value, and where an element's index is a key that will be used in forming the substitution's token name.</td></tr>
-					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>simple type</code> - When the value of the <code><a href="#2_46_1_2">substitutionsANYTYPE</a></code> parameter is a simple type value (string, boolean, or number), then a substitutions array is formed using that simple type substitution as its single element.</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>object</code> - When the value of the <code><a href="#2_51_1_2">substitutionsANYTYPE</a></code> parameter is an object, then each property of the object will be a substitution, where a property's value is the substition value, and where a property's name is a key that will be used in forming the substitution's token name.</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>array</code> - When the value of the <code><a href="#2_51_1_2">substitutionsANYTYPE</a></code> parameter is an array, then each element of the aray will be a substitution, where an element's value is the substition value, and where an element's index is a key that will be used in forming the substitution's token name.</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>simple type</code> - When the value of the <code><a href="#2_51_1_2">substitutionsANYTYPE</a></code> parameter is a simple type value (string, boolean, or number), then a substitutions array is formed using that simple type substitution as its single element.</td></tr>
 					</table>
 					<p><span class="allCaps">EXAMPLES</span></p>
 					
@@ -3515,12 +3862,12 @@ Uize.substituteInto ('My name is [#0]','Eric');
 					<p>All of the above statements would produce the result <code>'My name is Eric'</code>.</p>
 				</div>
 				
-				<a name="2_46_1_3"></a>
-				<h4 class="heading4" title="2. Static Methods -&gt; 2.46. Uize.substituteInto -&gt; 2.46.1. Parameters -&gt; 2.46.1.3. tokenNamingSTR"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_46" title="2. Static Methods -&gt; 2.46. Uize.substituteInto">46</a>.<a href="#2_46_1" title="2. Static Methods -&gt; 2.46. Uize.substituteInto -&gt; 2.46.1. Parameters">1</a>.<a href="#2_46_1_3" title="2. Static Methods -&gt; 2.46. Uize.substituteInto -&gt; 2.46.1. Parameters -&gt; 2.46.1.3. tokenNamingSTR">3</a>. </span>tokenNamingSTR</h4>
+				<a name="2_51_1_3"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.51. Uize.substituteInto -&gt; 2.51.1. Parameters -&gt; 2.51.1.3. tokenNamingSTR"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_51" title="2. Static Methods -&gt; 2.51. Uize.substituteInto">51</a>.<a href="#2_51_1" title="2. Static Methods -&gt; 2.51. Uize.substituteInto -&gt; 2.51.1. Parameters">1</a>.<a href="#2_51_1_3" title="2. Static Methods -&gt; 2.51. Uize.substituteInto -&gt; 2.51.1. Parameters -&gt; 2.51.1.3. tokenNamingSTR">3</a>. </span>tokenNamingSTR</h4>
 				<div class="contents4">
-					<p>The optional <code><a href="#2_46_1_3">tokenNamingSTR</a></code> parameter allows a custom token naming scheme to be specified, rather than the default <code>[#KEY]</code> format.</p>
+					<p>The optional <code><a href="#2_51_1_3">tokenNamingSTR</a></code> parameter allows a custom token naming scheme to be specified, rather than the default <code>[#KEY]</code> format.</p>
 					
-					<p>This facility provides a lot of flexibility in how tokens are formatted inside localized strings. The value specified for the <code><a href="#2_46_1_3">tokenNamingSTR</a></code> parameter should be a string containing the text <code>'KEY'</code> somewhere inside it, where that segment will be replaced with the name for a given key. So, for example, a value of <code>'[KEY]'</code> for the <code><a href="#2_46_1_3">tokenNamingSTR</a></code> parameter would produce the token name <code>'[firstName]'</code> for the substitution key <code>'firstName'</code>.</p>
+					<p>This facility provides a lot of flexibility in how tokens are formatted inside localized strings. The value specified for the <code><a href="#2_51_1_3">tokenNamingSTR</a></code> parameter should be a string containing the text <code>'KEY'</code> somewhere inside it, where that segment will be replaced with the name for a given key. So, for example, a value of <code>'[KEY]'</code> for the <code><a href="#2_51_1_3">tokenNamingSTR</a></code> parameter would produce the token name <code>'[firstName]'</code> for the substitution key <code>'firstName'</code>.</p>
 					
 					<p><span class="allCaps">EXAMPLES</span></p>
 					
@@ -3544,13 +3891,13 @@ Uize.substituteInto ('My name is [[name]]',{name:'Eric'},'[[KEY]]');
 <pre class="sample-code">resultSTR = Uize.substituteInto (sourceANYTYPE,substitutionsOBJorARRAY);
 </pre>
 			
-			<p>When the optional <code><a href="#2_46_1_3">tokenNamingSTR</a></code> parameter is omitted, then its value will be defaulted to <code>'[#KEY]'</code>.</p>
+			<p>When the optional <code><a href="#2_51_1_3">tokenNamingSTR</a></code> parameter is omitted, then its value will be defaulted to <code>'[#KEY]'</code>.</p>
 			
-			<a name="2_46_2"></a>
-			<h3 class="heading3" title="2. Static Methods -&gt; 2.46. Uize.substituteInto -&gt; 2.46.2. Examples"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_46" title="2. Static Methods -&gt; 2.46. Uize.substituteInto">46</a>.<a href="#2_46_2" title="2. Static Methods -&gt; 2.46. Uize.substituteInto -&gt; 2.46.2. Examples">2</a>. </span>Examples</h3>
+			<a name="2_51_2"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.51. Uize.substituteInto -&gt; 2.51.2. Examples"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_51" title="2. Static Methods -&gt; 2.51. Uize.substituteInto">51</a>.<a href="#2_51_2" title="2. Static Methods -&gt; 2.51. Uize.substituteInto -&gt; 2.51.2. Examples">2</a>. </span>Examples</h3>
 			<div class="contents3">
-				<a name="2_46_2_1"></a>
-				<h4 class="heading4" title="2. Static Methods -&gt; 2.46. Uize.substituteInto -&gt; 2.46.2. Examples -&gt; 2.46.2.1. Example: Two Substitutions"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_46" title="2. Static Methods -&gt; 2.46. Uize.substituteInto">46</a>.<a href="#2_46_2" title="2. Static Methods -&gt; 2.46. Uize.substituteInto -&gt; 2.46.2. Examples">2</a>.<a href="#2_46_2_1" title="2. Static Methods -&gt; 2.46. Uize.substituteInto -&gt; 2.46.2. Examples -&gt; 2.46.2.1. Example: Two Substitutions">1</a>. </span>Example: Two Substitutions</h4>
+				<a name="2_51_2_1"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.51. Uize.substituteInto -&gt; 2.51.2. Examples -&gt; 2.51.2.1. Example: Two Substitutions"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_51" title="2. Static Methods -&gt; 2.51. Uize.substituteInto">51</a>.<a href="#2_51_2" title="2. Static Methods -&gt; 2.51. Uize.substituteInto -&gt; 2.51.2. Examples">2</a>.<a href="#2_51_2_1" title="2. Static Methods -&gt; 2.51. Uize.substituteInto -&gt; 2.51.2. Examples -&gt; 2.51.2.1. Example: Two Substitutions">1</a>. </span>Example: Two Substitutions</h4>
 				<div class="contents4">
 					<p>In the example below, two substitutions are being performed.</p>
 					
@@ -3570,8 +3917,8 @@ Uize.substituteInto ('My name is [[name]]',{name:'Eric'},'[[KEY]]');
 </pre>
 				</div>
 				
-				<a name="2_46_2_2"></a>
-				<h4 class="heading4" title="2. Static Methods -&gt; 2.46. Uize.substituteInto -&gt; 2.46.2. Examples -&gt; 2.46.2.2. Example: One Substitution, Used Multiple Times"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_46" title="2. Static Methods -&gt; 2.46. Uize.substituteInto">46</a>.<a href="#2_46_2" title="2. Static Methods -&gt; 2.46. Uize.substituteInto -&gt; 2.46.2. Examples">2</a>.<a href="#2_46_2_2" title="2. Static Methods -&gt; 2.46. Uize.substituteInto -&gt; 2.46.2. Examples -&gt; 2.46.2.2. Example: One Substitution, Used Multiple Times">2</a>. </span>Example: One Substitution, Used Multiple Times</h4>
+				<a name="2_51_2_2"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.51. Uize.substituteInto -&gt; 2.51.2. Examples -&gt; 2.51.2.2. Example: One Substitution, Used Multiple Times"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_51" title="2. Static Methods -&gt; 2.51. Uize.substituteInto">51</a>.<a href="#2_51_2" title="2. Static Methods -&gt; 2.51. Uize.substituteInto -&gt; 2.51.2. Examples">2</a>.<a href="#2_51_2_2" title="2. Static Methods -&gt; 2.51. Uize.substituteInto -&gt; 2.51.2. Examples -&gt; 2.51.2.2. Example: One Substitution, Used Multiple Times">2</a>. </span>Example: One Substitution, Used Multiple Times</h4>
 				<div class="contents4">
 					<p>If there are multiple tokens for the same substitution value, then that value will be substituted multiple times.</p>
 					
@@ -3591,8 +3938,8 @@ Uize.substituteInto ('My name is [[name]]',{name:'Eric'},'[[KEY]]');
 </pre>
 				</div>
 				
-				<a name="2_46_2_3"></a>
-				<h4 class="heading4" title="2. Static Methods -&gt; 2.46. Uize.substituteInto -&gt; 2.46.2. Examples -&gt; 2.46.2.3. Example: No Token for a Substitution Value"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_46" title="2. Static Methods -&gt; 2.46. Uize.substituteInto">46</a>.<a href="#2_46_2" title="2. Static Methods -&gt; 2.46. Uize.substituteInto -&gt; 2.46.2. Examples">2</a>.<a href="#2_46_2_3" title="2. Static Methods -&gt; 2.46. Uize.substituteInto -&gt; 2.46.2. Examples -&gt; 2.46.2.3. Example: No Token for a Substitution Value">3</a>. </span>Example: No Token for a Substitution Value</h4>
+				<a name="2_51_2_3"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.51. Uize.substituteInto -&gt; 2.51.2. Examples -&gt; 2.51.2.3. Example: No Token for a Substitution Value"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_51" title="2. Static Methods -&gt; 2.51. Uize.substituteInto">51</a>.<a href="#2_51_2" title="2. Static Methods -&gt; 2.51. Uize.substituteInto -&gt; 2.51.2. Examples">2</a>.<a href="#2_51_2_3" title="2. Static Methods -&gt; 2.51. Uize.substituteInto -&gt; 2.51.2. Examples -&gt; 2.51.2.3. Example: No Token for a Substitution Value">3</a>. </span>Example: No Token for a Substitution Value</h4>
 				<div class="contents4">
 					<p>If there are no substitution tokens for a substitution value, then that value will not be substituted.</p>
 					
@@ -3612,8 +3959,8 @@ Uize.substituteInto ('My name is [[name]]',{name:'Eric'},'[[KEY]]');
 </pre>
 				</div>
 				
-				<a name="2_46_2_4"></a>
-				<h4 class="heading4" title="2. Static Methods -&gt; 2.46. Uize.substituteInto -&gt; 2.46.2. Examples -&gt; 2.46.2.4. Example: Tokens With No Substitution Value"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_46" title="2. Static Methods -&gt; 2.46. Uize.substituteInto">46</a>.<a href="#2_46_2" title="2. Static Methods -&gt; 2.46. Uize.substituteInto -&gt; 2.46.2. Examples">2</a>.<a href="#2_46_2_4" title="2. Static Methods -&gt; 2.46. Uize.substituteInto -&gt; 2.46.2. Examples -&gt; 2.46.2.4. Example: Tokens With No Substitution Value">4</a>. </span>Example: Tokens With No Substitution Value</h4>
+				<a name="2_51_2_4"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.51. Uize.substituteInto -&gt; 2.51.2. Examples -&gt; 2.51.2.4. Example: Tokens With No Substitution Value"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_51" title="2. Static Methods -&gt; 2.51. Uize.substituteInto">51</a>.<a href="#2_51_2" title="2. Static Methods -&gt; 2.51. Uize.substituteInto -&gt; 2.51.2. Examples">2</a>.<a href="#2_51_2_4" title="2. Static Methods -&gt; 2.51. Uize.substituteInto -&gt; 2.51.2. Examples -&gt; 2.51.2.4. Example: Tokens With No Substitution Value">4</a>. </span>Example: Tokens With No Substitution Value</h4>
 				<div class="contents4">
 					<p>Substitution tokens for which there are no properties will be left in the string (they will not be blanked out).</p>
 					
@@ -3633,10 +3980,10 @@ Uize.substituteInto ('My name is [[name]]',{name:'Eric'},'[[KEY]]');
 </pre>
 				</div>
 				
-				<a name="2_46_2_5"></a>
-				<h4 class="heading4" title="2. Static Methods -&gt; 2.46. Uize.substituteInto -&gt; 2.46.2. Examples -&gt; 2.46.2.5. Example: Custom Token Naming"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_46" title="2. Static Methods -&gt; 2.46. Uize.substituteInto">46</a>.<a href="#2_46_2" title="2. Static Methods -&gt; 2.46. Uize.substituteInto -&gt; 2.46.2. Examples">2</a>.<a href="#2_46_2_5" title="2. Static Methods -&gt; 2.46. Uize.substituteInto -&gt; 2.46.2. Examples -&gt; 2.46.2.5. Example: Custom Token Naming">5</a>. </span>Example: Custom Token Naming</h4>
+				<a name="2_51_2_5"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.51. Uize.substituteInto -&gt; 2.51.2. Examples -&gt; 2.51.2.5. Example: Custom Token Naming"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_51" title="2. Static Methods -&gt; 2.51. Uize.substituteInto">51</a>.<a href="#2_51_2" title="2. Static Methods -&gt; 2.51. Uize.substituteInto -&gt; 2.51.2. Examples">2</a>.<a href="#2_51_2_5" title="2. Static Methods -&gt; 2.51. Uize.substituteInto -&gt; 2.51.2. Examples -&gt; 2.51.2.5. Example: Custom Token Naming">5</a>. </span>Example: Custom Token Naming</h4>
 				<div class="contents4">
-					<p>The optional <code><a href="#2_46_1_3">tokenNamingSTR</a></code> parameter allows a custom token naming format to be specified.</p>
+					<p>The optional <code><a href="#2_51_1_3">tokenNamingSTR</a></code> parameter allows a custom token naming format to be specified.</p>
 					
 					<p><span class="allCaps">EXAMPLE</span></p>
 					
@@ -3654,13 +4001,13 @@ Uize.substituteInto ('My name is [[name]]',{name:'Eric'},'[[KEY]]');
 <pre class="sample-code">'Welcome, Chris of California, USA'
 </pre>
 					
-					<p>In the above example, the value <code>'{KEY}'</code> is being specified for the <code><a href="#2_46">Uize.substituteInto</a></code> method's optional <code><a href="#2_46_1_3">tokenNamingSTR</a></code> parameter. This means that the key for each substitution will be enclosed with curly braces to form its token name.</p>
+					<p>In the above example, the value <code>'{KEY}'</code> is being specified for the <code><a href="#2_51">Uize.substituteInto</a></code> method's optional <code><a href="#2_51_1_3">tokenNamingSTR</a></code> parameter. This means that the key for each substitution will be enclosed with curly braces to form its token name.</p>
 				</div>
 				
-				<a name="2_46_2_6"></a>
-				<h4 class="heading4" title="2. Static Methods -&gt; 2.46. Uize.substituteInto -&gt; 2.46.2. Examples -&gt; 2.46.2.6. Example: Bare Tokens"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_46" title="2. Static Methods -&gt; 2.46. Uize.substituteInto">46</a>.<a href="#2_46_2" title="2. Static Methods -&gt; 2.46. Uize.substituteInto -&gt; 2.46.2. Examples">2</a>.<a href="#2_46_2_6" title="2. Static Methods -&gt; 2.46. Uize.substituteInto -&gt; 2.46.2. Examples -&gt; 2.46.2.6. Example: Bare Tokens">6</a>. </span>Example: Bare Tokens</h4>
+				<a name="2_51_2_6"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.51. Uize.substituteInto -&gt; 2.51.2. Examples -&gt; 2.51.2.6. Example: Bare Tokens"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_51" title="2. Static Methods -&gt; 2.51. Uize.substituteInto">51</a>.<a href="#2_51_2" title="2. Static Methods -&gt; 2.51. Uize.substituteInto -&gt; 2.51.2. Examples">2</a>.<a href="#2_51_2_6" title="2. Static Methods -&gt; 2.51. Uize.substituteInto -&gt; 2.51.2. Examples -&gt; 2.51.2.6. Example: Bare Tokens">6</a>. </span>Example: Bare Tokens</h4>
 				<div class="contents4">
-					<p>The optional <code><a href="#2_46_1_3">tokenNamingSTR</a></code> parameter can be used to specify a "bare token" format for token naming, where the substitution tokens are the substitution keys.</p>
+					<p>The optional <code><a href="#2_51_1_3">tokenNamingSTR</a></code> parameter can be used to specify a "bare token" format for token naming, where the substitution tokens are the substitution keys.</p>
 					
 					<p><span class="allCaps">EXAMPLE</span></p>
 					
@@ -3679,8 +4026,8 @@ Uize.substituteInto ('My name is [[name]]',{name:'Eric'},'[[KEY]]');
 </pre>
 				</div>
 				
-				<a name="2_46_2_7"></a>
-				<h4 class="heading4" title="2. Static Methods -&gt; 2.46. Uize.substituteInto -&gt; 2.46.2. Examples -&gt; 2.46.2.7. Example: Mixed Type Substitution Values"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_46" title="2. Static Methods -&gt; 2.46. Uize.substituteInto">46</a>.<a href="#2_46_2" title="2. Static Methods -&gt; 2.46. Uize.substituteInto -&gt; 2.46.2. Examples">2</a>.<a href="#2_46_2_7" title="2. Static Methods -&gt; 2.46. Uize.substituteInto -&gt; 2.46.2. Examples -&gt; 2.46.2.7. Example: Mixed Type Substitution Values">7</a>. </span>Example: Mixed Type Substitution Values</h4>
+				<a name="2_51_2_7"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.51. Uize.substituteInto -&gt; 2.51.2. Examples -&gt; 2.51.2.7. Example: Mixed Type Substitution Values"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_51" title="2. Static Methods -&gt; 2.51. Uize.substituteInto">51</a>.<a href="#2_51_2" title="2. Static Methods -&gt; 2.51. Uize.substituteInto -&gt; 2.51.2. Examples">2</a>.<a href="#2_51_2_7" title="2. Static Methods -&gt; 2.51. Uize.substituteInto -&gt; 2.51.2. Examples -&gt; 2.51.2.7. Example: Mixed Type Substitution Values">7</a>. </span>Example: Mixed Type Substitution Values</h4>
 				<div class="contents4">
 					<p>Substitution values can be of any type, and any value that is not a string will be coerced to a string.</p>
 					
@@ -3705,8 +4052,8 @@ Uize.substituteInto ('My name is [[name]]',{name:'Eric'},'[[KEY]]');
 </pre>
 				</div>
 				
-				<a name="2_46_2_8"></a>
-				<h4 class="heading4" title="2. Static Methods -&gt; 2.46. Uize.substituteInto -&gt; 2.46.2. Examples -&gt; 2.46.2.8. Example: Specifying Substitutions Using an Array"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_46" title="2. Static Methods -&gt; 2.46. Uize.substituteInto">46</a>.<a href="#2_46_2" title="2. Static Methods -&gt; 2.46. Uize.substituteInto -&gt; 2.46.2. Examples">2</a>.<a href="#2_46_2_8" title="2. Static Methods -&gt; 2.46. Uize.substituteInto -&gt; 2.46.2. Examples -&gt; 2.46.2.8. Example: Specifying Substitutions Using an Array">8</a>. </span>Example: Specifying Substitutions Using an Array</h4>
+				<a name="2_51_2_8"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.51. Uize.substituteInto -&gt; 2.51.2. Examples -&gt; 2.51.2.8. Example: Specifying Substitutions Using an Array"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_51" title="2. Static Methods -&gt; 2.51. Uize.substituteInto">51</a>.<a href="#2_51_2" title="2. Static Methods -&gt; 2.51. Uize.substituteInto -&gt; 2.51.2. Examples">2</a>.<a href="#2_51_2_8" title="2. Static Methods -&gt; 2.51. Uize.substituteInto -&gt; 2.51.2. Examples -&gt; 2.51.2.8. Example: Specifying Substitutions Using an Array">8</a>. </span>Example: Specifying Substitutions Using an Array</h4>
 				<div class="contents4">
 					<p>When substitutions are specified using an array, then each substitution's index in the substitutions array is used as the key when forming its token name.</p>
 					
@@ -3723,8 +4070,8 @@ Uize.substituteInto ('My name is [[name]]',{name:'Eric'},'[[KEY]]');
 </pre>
 				</div>
 				
-				<a name="2_46_2_9"></a>
-				<h4 class="heading4" title="2. Static Methods -&gt; 2.46. Uize.substituteInto -&gt; 2.46.2. Examples -&gt; 2.46.2.9. Example: Substitution Values Containing Tokens"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_46" title="2. Static Methods -&gt; 2.46. Uize.substituteInto">46</a>.<a href="#2_46_2" title="2. Static Methods -&gt; 2.46. Uize.substituteInto -&gt; 2.46.2. Examples">2</a>.<a href="#2_46_2_9" title="2. Static Methods -&gt; 2.46. Uize.substituteInto -&gt; 2.46.2. Examples -&gt; 2.46.2.9. Example: Substitution Values Containing Tokens">9</a>. </span>Example: Substitution Values Containing Tokens</h4>
+				<a name="2_51_2_9"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.51. Uize.substituteInto -&gt; 2.51.2. Examples -&gt; 2.51.2.9. Example: Substitution Values Containing Tokens"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_51" title="2. Static Methods -&gt; 2.51. Uize.substituteInto">51</a>.<a href="#2_51_2" title="2. Static Methods -&gt; 2.51. Uize.substituteInto -&gt; 2.51.2. Examples">2</a>.<a href="#2_51_2_9" title="2. Static Methods -&gt; 2.51. Uize.substituteInto -&gt; 2.51.2. Examples -&gt; 2.51.2.9. Example: Substitution Values Containing Tokens">9</a>. </span>Example: Substitution Values Containing Tokens</h4>
 				<div class="contents4">
 					<p>Substitution values that contain tokens are not further substituted into.</p>
 					
@@ -3743,8 +4090,8 @@ Uize.substituteInto ('My name is [[name]]',{name:'Eric'},'[[KEY]]');
 					<p>In the above example, the value for the <code>token1</code> substitution is <code>'[#token2]foo'</code>, which contains a token for the <code>token2</code> substitution. But, the values of substitutions are not further substituted into - for good reason, since this could result in some odd and unexpected behaviors in some cases.</p>
 				</div>
 				
-				<a name="2_46_2_10"></a>
-				<h4 class="heading4" title="2. Static Methods -&gt; 2.46. Uize.substituteInto -&gt; 2.46.2. Examples -&gt; 2.46.2.10. Example: Tokens and Substitutions are Case-sensitive"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_46" title="2. Static Methods -&gt; 2.46. Uize.substituteInto">46</a>.<a href="#2_46_2" title="2. Static Methods -&gt; 2.46. Uize.substituteInto -&gt; 2.46.2. Examples">2</a>.<a href="#2_46_2_10" title="2. Static Methods -&gt; 2.46. Uize.substituteInto -&gt; 2.46.2. Examples -&gt; 2.46.2.10. Example: Tokens and Substitutions are Case-sensitive">10</a>. </span>Example: Tokens and Substitutions are Case-sensitive</h4>
+				<a name="2_51_2_10"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.51. Uize.substituteInto -&gt; 2.51.2. Examples -&gt; 2.51.2.10. Example: Tokens and Substitutions are Case-sensitive"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_51" title="2. Static Methods -&gt; 2.51. Uize.substituteInto">51</a>.<a href="#2_51_2" title="2. Static Methods -&gt; 2.51. Uize.substituteInto -&gt; 2.51.2. Examples">2</a>.<a href="#2_51_2_10" title="2. Static Methods -&gt; 2.51. Uize.substituteInto -&gt; 2.51.2. Examples -&gt; 2.51.2.10. Example: Tokens and Substitutions are Case-sensitive">10</a>. </span>Example: Tokens and Substitutions are Case-sensitive</h4>
 				<div class="contents4">
 					<p>Substitution tokens are case-sensitive.</p>
 					
@@ -3766,8 +4113,8 @@ Uize.substituteInto ('My name is [[name]]',{name:'Eric'},'[[KEY]]');
 					<p>In the above example, the token <code>[#fruit]</code> is distinct from the token <code>[#FRUIT]</code>. Our substitution values object in this case has a value for both the <code>fruit</code> and <code>FRUIT</code> properties, so the method call returns the value <code>'This is a case of comparing apples to oranges.'</code>.</p>
 				</div>
 				
-				<a name="2_46_2_11"></a>
-				<h4 class="heading4" title="2. Static Methods -&gt; 2.46. Uize.substituteInto -&gt; 2.46.2. Examples -&gt; 2.46.2.11. Example: Tokens and Substitutions are Space-sensitive"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_46" title="2. Static Methods -&gt; 2.46. Uize.substituteInto">46</a>.<a href="#2_46_2" title="2. Static Methods -&gt; 2.46. Uize.substituteInto -&gt; 2.46.2. Examples">2</a>.<a href="#2_46_2_11" title="2. Static Methods -&gt; 2.46. Uize.substituteInto -&gt; 2.46.2. Examples -&gt; 2.46.2.11. Example: Tokens and Substitutions are Space-sensitive">11</a>. </span>Example: Tokens and Substitutions are Space-sensitive</h4>
+				<a name="2_51_2_11"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.51. Uize.substituteInto -&gt; 2.51.2. Examples -&gt; 2.51.2.11. Example: Tokens and Substitutions are Space-sensitive"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_51" title="2. Static Methods -&gt; 2.51. Uize.substituteInto">51</a>.<a href="#2_51_2" title="2. Static Methods -&gt; 2.51. Uize.substituteInto -&gt; 2.51.2. Examples">2</a>.<a href="#2_51_2_11" title="2. Static Methods -&gt; 2.51. Uize.substituteInto -&gt; 2.51.2. Examples -&gt; 2.51.2.11. Example: Tokens and Substitutions are Space-sensitive">11</a>. </span>Example: Tokens and Substitutions are Space-sensitive</h4>
 				<div class="contents4">
 					<p>Substitution tokens are space-sensitive.</p>
 					
@@ -3789,8 +4136,8 @@ Uize.substituteInto ('My name is [[name]]',{name:'Eric'},'[[KEY]]');
 					<p>In the above example, the token <code>[#fruit]</code> is distinct from the token <code>[# fruit ]</code>. Our substitution values object in this case has a value for both the <code>fruit</code> and <code>' fruit '</code> properties, so the method call returns the value <code>'This is a case of comparing apples to oranges.'</code>.</p>
 				</div>
 				
-				<a name="2_46_2_12"></a>
-				<h4 class="heading4" title="2. Static Methods -&gt; 2.46. Uize.substituteInto -&gt; 2.46.2. Examples -&gt; 2.46.2.12. Example: A Single Simply Type Substitution"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_46" title="2. Static Methods -&gt; 2.46. Uize.substituteInto">46</a>.<a href="#2_46_2" title="2. Static Methods -&gt; 2.46. Uize.substituteInto -&gt; 2.46.2. Examples">2</a>.<a href="#2_46_2_12" title="2. Static Methods -&gt; 2.46. Uize.substituteInto -&gt; 2.46.2. Examples -&gt; 2.46.2.12. Example: A Single Simply Type Substitution">12</a>. </span>Example: A Single Simply Type Substitution</h4>
+				<a name="2_51_2_12"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.51. Uize.substituteInto -&gt; 2.51.2. Examples -&gt; 2.51.2.12. Example: A Single Simply Type Substitution"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_51" title="2. Static Methods -&gt; 2.51. Uize.substituteInto">51</a>.<a href="#2_51_2" title="2. Static Methods -&gt; 2.51. Uize.substituteInto -&gt; 2.51.2. Examples">2</a>.<a href="#2_51_2_12" title="2. Static Methods -&gt; 2.51. Uize.substituteInto -&gt; 2.51.2. Examples -&gt; 2.51.2.12. Example: A Single Simply Type Substitution">12</a>. </span>Example: A Single Simply Type Substitution</h4>
 				<div class="contents4">
 					<p>When a simple type value (string, number, or boolean) is specified in place of a substitutions object or array, then a substitutions array is formed using that simple type substitution as its single element.</p>
 					
@@ -3807,8 +4154,8 @@ Uize.substituteInto ('My name is [[name]]',{name:'Eric'},'[[KEY]]');
 </pre>
 				</div>
 				
-				<a name="2_46_2_13"></a>
-				<h4 class="heading4" title="2. Static Methods -&gt; 2.46. Uize.substituteInto -&gt; 2.46.2. Examples -&gt; 2.46.2.13. Example: Source is Not a String"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_46" title="2. Static Methods -&gt; 2.46. Uize.substituteInto">46</a>.<a href="#2_46_2" title="2. Static Methods -&gt; 2.46. Uize.substituteInto -&gt; 2.46.2. Examples">2</a>.<a href="#2_46_2_13" title="2. Static Methods -&gt; 2.46. Uize.substituteInto -&gt; 2.46.2. Examples -&gt; 2.46.2.13. Example: Source is Not a String">13</a>. </span>Example: Source is Not a String</h4>
+				<a name="2_51_2_13"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.51. Uize.substituteInto -&gt; 2.51.2. Examples -&gt; 2.51.2.13. Example: Source is Not a String"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_51" title="2. Static Methods -&gt; 2.51. Uize.substituteInto">51</a>.<a href="#2_51_2" title="2. Static Methods -&gt; 2.51. Uize.substituteInto -&gt; 2.51.2. Examples">2</a>.<a href="#2_51_2_13" title="2. Static Methods -&gt; 2.51. Uize.substituteInto -&gt; 2.51.2. Examples -&gt; 2.51.2.13. Example: Source is Not a String">13</a>. </span>Example: Source is Not a String</h4>
 				<div class="contents4">
 					<p>When the source value to substitute into is not a string (eg. an object, array, number, boolean, etc.), then this value will be coerced to a string.</p>
 					
@@ -3842,8 +4189,8 @@ Uize.substituteInto ('My name is [[name]]',{name:'Eric'},'[[KEY]]');
 			</table>
 		</div>
 		
-		<a name="2_47"></a>
-		<h2 class="heading2" title="2. Static Methods -&gt; 2.47. Uize.superclass"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_47" title="2. Static Methods -&gt; 2.47. Uize.superclass">47</a>. </span>Uize.superclass</h2>
+		<a name="2_52"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.52. Uize.superclass"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_52" title="2. Static Methods -&gt; 2.52. Uize.superclass">52</a>. </span>Uize.superclass</h2>
 		<div class="contents2">
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -3853,8 +4200,8 @@ Uize.substituteInto ('My name is [[name]]',{name:'Eric'},'[[KEY]]');
 			</table>
 		</div>
 		
-		<a name="2_48"></a>
-		<h2 class="heading2" title="2. Static Methods -&gt; 2.48. Uize.toString"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_48" title="2. Static Methods -&gt; 2.48. Uize.toString">48</a>. </span>Uize.toString</h2>
+		<a name="2_53"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.53. Uize.toString"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_53" title="2. Static Methods -&gt; 2.53. Uize.toString">53</a>. </span>Uize.toString</h2>
 		<div class="contents2">
 			<p>Returns a string, providing summary info for the class on which the method is called.</p>
 			
@@ -3864,7 +4211,7 @@ Uize.substituteInto ('My name is [[name]]',{name:'Eric'},'[[KEY]]');
 <pre class="sample-code">classSummarySTR = MyClass.toString ();
 </pre>
 			
-			<p>The string returned by this method provides a summary that includes the class' name and the state of its set-get properties. Among other things, this method provides a convenient and lightweight way to gather information about <code>Uize</code> subclasses during debugging and troubleshooting. The <code><a href="#2_48">Uize.toString</a></code> static intrinsic method is invoked automatically in certain contexts in order to convert a class reference to a string form, such as when alerting a class using the <code>alert</code> global function.</p>
+			<p>The string returned by this method provides a summary that includes the class' name and the state of its set-get properties. Among other things, this method provides a convenient and lightweight way to gather information about <code>Uize</code> subclasses during debugging and troubleshooting. The <code><a href="#2_53">Uize.toString</a></code> static intrinsic method is invoked automatically in certain contexts in order to convert a class reference to a string form, such as when alerting a class using the <code>alert</code> global function.</p>
 			
 			<p><span class="allCaps">EXAMPLE</span></p>
 			
@@ -3910,7 +4257,7 @@ valueFunc : [object Function]
 wired : false
 </pre>
 			
-			<p>In certain contexts, providing a reference to a <code>Uize</code> subclass as a parameter to some method will result in the <code><a href="#2_52">Uize.valueOf</a></code> static intrinsic method of that class being invoked in order to coerce it to a simple value. If it is your desire to have the class summary be used rather than the class' value, then you should explicitly call the <code><a href="#2_48">Uize.toString</a></code> static intrinsic method, as follows...</p>
+			<p>In certain contexts, providing a reference to a <code>Uize</code> subclass as a parameter to some method will result in the <code><a href="#2_57">Uize.valueOf</a></code> static intrinsic method of that class being invoked in order to coerce it to a simple value. If it is your desire to have the class summary be used rather than the class' value, then you should explicitly call the <code><a href="#2_53">Uize.toString</a></code> static intrinsic method, as follows...</p>
 			
 			<p><span class="allCaps">EXAMPLE</span></p>
 			
@@ -3924,13 +4271,13 @@ Uize.Node.setInnerHtml ('classCurrentValue',page.children.slider.Class);
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#3_8">valueOf Intrinsic Method</a></code>, and the <code><a href="#2_52">Uize.valueOf</a></code> static intrinsic method</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#3_8">valueOf Intrinsic Method</a></code>, and the <code><a href="#2_57">Uize.valueOf</a></code> static intrinsic method</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#3_5">toString Intrinsic Method</a></code></td></tr>
 			</table>
 		</div>
 		
-		<a name="2_49"></a>
-		<h2 class="heading2" title="2. Static Methods -&gt; 2.49. Uize.toggle"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_49" title="2. Static Methods -&gt; 2.49. Uize.toggle">49</a>. </span>Uize.toggle</h2>
+		<a name="2_54"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.54. Uize.toggle"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_54" title="2. Static Methods -&gt; 2.54. Uize.toggle">54</a>. </span>Uize.toggle</h2>
 		<div class="contents2">
 			<p>Toggles the value of the specified boolean static set-get property.</p>
 			
@@ -3940,14 +4287,14 @@ Uize.Node.setInnerHtml ('classCurrentValue',page.children.slider.Class);
 <pre class="sample-code">toggledValueBOOL = Uize.toggle (propertyNameSTR);
 </pre>
 			
-			<p>The <code><a href="#2_49">Uize.toggle</a></code> static method is provided purely as a convenience. The following two statements are equivalent...</p>
+			<p>The <code><a href="#2_54">Uize.toggle</a></code> static method is provided purely as a convenience. The following two statements are equivalent...</p>
 			
 			
 <pre class="sample-code">Uize.toggle ('myProperty');
 Uize.set ({myProperty:!Uize.get ('myProperty')});
 </pre>
 			
-			<p>As you can see, using the <code><a href="#2_49">Uize.toggle</a></code> method produces more concise code.</p>
+			<p>As you can see, using the <code><a href="#2_54">Uize.toggle</a></code> method produces more concise code.</p>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -3957,8 +4304,8 @@ Uize.set ({myProperty:!Uize.get ('myProperty')});
 			</table>
 		</div>
 		
-		<a name="2_50"></a>
-		<h2 class="heading2" title="2. Static Methods -&gt; 2.50. Uize.totalKeys"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_50" title="2. Static Methods -&gt; 2.50. Uize.totalKeys">50</a>. </span>Uize.totalKeys</h2>
+		<a name="2_55"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.55. Uize.totalKeys"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_55" title="2. Static Methods -&gt; 2.55. Uize.totalKeys">55</a>. </span>Uize.totalKeys</h2>
 		<div class="contents2">
 			<p>Returns an integer, representing the total number of keys in the specified object.</p>
 			
@@ -3968,7 +4315,7 @@ Uize.set ({myProperty:!Uize.get ('myProperty')});
 <pre class="sample-code">totalKeysINT = Uize.totalKeys (objectOBJ);
 </pre>
 			
-			<p>Using the <code><a href="#2_50">Uize.totalKeys</a></code> method to determine the number of keys an object has is more efficient than using the expression <code>Uize.keys (myObject).length</code>, because the <code><a href="#2_50">Uize.totalKeys</a></code> method doesn't populate an array. Furthermore, to determine if an object is empty, you <b>could</b> use the expression <code>!Uize.totalKeys (myObject)</code>, but it would be more efficient to use the convenient <code><a href="#2_22">Uize.isEmpty</a></code> static method.</p>
+			<p>Using the <code><a href="#2_55">Uize.totalKeys</a></code> method to determine the number of keys an object has is more efficient than using the expression <code>Uize.keys (myObject).length</code>, because the <code><a href="#2_55">Uize.totalKeys</a></code> method doesn't populate an array. Furthermore, to determine if an object is empty, you <b>could</b> use the expression <code>!Uize.totalKeys (myObject)</code>, but it would be more efficient to use the convenient <code><a href="#2_22">Uize.isEmpty</a></code> static method.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
@@ -3983,8 +4330,8 @@ Uize.set ({myProperty:!Uize.get ('myProperty')});
 			</table>
 		</div>
 		
-		<a name="2_51"></a>
-		<h2 class="heading2" title="2. Static Methods -&gt; 2.51. Uize.unwire"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_51" title="2. Static Methods -&gt; 2.51. Uize.unwire">51</a>. </span>Uize.unwire</h2>
+		<a name="2_56"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.56. Uize.unwire"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_56" title="2. Static Methods -&gt; 2.56. Uize.unwire">56</a>. </span>Uize.unwire</h2>
 		<div class="contents2">
 			<p>Lets you remove a handler previously wired to a static event, or handlers wired for multiple static events.</p>
 			
@@ -4008,12 +4355,12 @@ Uize.set ({myProperty:!Uize.get ('myProperty')});
 <pre class="sample-code">MyClass.unwire (eventNamesToHandlersMapOBJ);
 </pre>
 			
-			<p>When only a single <code><a href="#5_2">eventNamesToHandlersMapOBJ</a></code> parameter is specified, then event handlers for multiple events can be specified using an object hash. This variation is provided as a convenience and has the effect of iteratively calling the <code><a href="#2_51">Uize.unwire</a></code> static method for each event-name-to-handler mapping in the <code><a href="#5_2">eventNamesToHandlersMapOBJ</a></code> object.</p>
+			<p>When only a single <code><a href="#5_2">eventNamesToHandlersMapOBJ</a></code> parameter is specified, then event handlers for multiple events can be specified using an object hash. This variation is provided as a convenience and has the effect of iteratively calling the <code><a href="#2_56">Uize.unwire</a></code> static method for each event-name-to-handler mapping in the <code><a href="#5_2">eventNamesToHandlersMapOBJ</a></code> object.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#2_11">Uize.fire</a></code> and <code><a href="#2_54">Uize.wire</a></code> static methods</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#2_11">Uize.fire</a></code> and <code><a href="#2_59">Uize.wire</a></code> static methods</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#3_1">fire</a></code>, <code><a href="#3_9">wire</a></code>, and <code><a href="#3_7">unwire</a></code> instance methods</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -4024,8 +4371,8 @@ Uize.set ({myProperty:!Uize.get ('myProperty')});
 			</table>
 		</div>
 		
-		<a name="2_52"></a>
-		<h2 class="heading2" title="2. Static Methods -&gt; 2.52. Uize.valueOf"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_52" title="2. Static Methods -&gt; 2.52. Uize.valueOf">52</a>. </span>Uize.valueOf</h2>
+		<a name="2_57"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.57. Uize.valueOf"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_57" title="2. Static Methods -&gt; 2.57. Uize.valueOf">57</a>. </span>Uize.valueOf</h2>
 		<div class="contents2">
 			<p>Returns the value of the class' <code>value</code> set-get property.</p>
 			
@@ -4035,19 +4382,19 @@ Uize.set ({myProperty:!Uize.get ('myProperty')});
 <pre class="sample-code">classValueANYTYPE = MyClass.valueOf ();
 </pre>
 			
-			<p>The <code><a href="#2_52">Uize.valueOf</a></code> static intrinsic method is invoked automatically in certain contexts in order to convert a class to a value, such as when using a class reference in an expression (eg. <code>Uize.Widget.Bar.Slider + 0</code>). This static method is implemented primarily to provide parity with the <code><a href="#3_8">valueOf Intrinsic Method</a></code>. Its behavior is largely equivalent to that of the instance method, excepting that it applies to the static value of the <code>value</code> set-get property.</p>
+			<p>The <code><a href="#2_57">Uize.valueOf</a></code> static intrinsic method is invoked automatically in certain contexts in order to convert a class to a value, such as when using a class reference in an expression (eg. <code>Uize.Widget.Bar.Slider + 0</code>). This static method is implemented primarily to provide parity with the <code><a href="#3_8">valueOf Intrinsic Method</a></code>. Its behavior is largely equivalent to that of the instance method, excepting that it applies to the static value of the <code>value</code> set-get property.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#3_5">toString Intrinsic Method</a></code>, and the <code><a href="#2_48">Uize.toString</a></code> static intrinsic method</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#3_5">toString Intrinsic Method</a></code>, and the <code><a href="#2_53">Uize.toString</a></code> static intrinsic method</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#3_8">valueOf Intrinsic Method</a></code></td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>if the class does not register a <code>value</code> set-get property, then this method will return the value of the class' <code>value</code> property, and if the class has no <code>value</code> property, then this method will simply return <code>undefined</code></td></tr>
 			</table>
 		</div>
 		
-		<a name="2_53"></a>
-		<h2 class="heading2" title="2. Static Methods -&gt; 2.53. Uize.values"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_53" title="2. Static Methods -&gt; 2.53. Uize.values">53</a>. </span>Uize.values</h2>
+		<a name="2_58"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.58. Uize.values"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_58" title="2. Static Methods -&gt; 2.58. Uize.values">58</a>. </span>Uize.values</h2>
 		<div class="contents2">
 			<p>Returns an array, representing the property values of the specified object.</p>
 			
@@ -4096,8 +4443,8 @@ Uize.set ({myProperty:!Uize.get ('myProperty')});
 			</table>
 		</div>
 		
-		<a name="2_54"></a>
-		<h2 class="heading2" title="2. Static Methods -&gt; 2.54. Uize.wire"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_54" title="2. Static Methods -&gt; 2.54. Uize.wire">54</a>. </span>Uize.wire</h2>
+		<a name="2_59"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.59. Uize.wire"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_59" title="2. Static Methods -&gt; 2.59. Uize.wire">59</a>. </span>Uize.wire</h2>
 		<div class="contents2">
 			<p>Lets you wire a handler for a static event of the class, or handlers for multiple static events.</p>
 			
@@ -4115,7 +4462,7 @@ Uize.set ({myProperty:!Uize.get ('myProperty')});
 <pre class="sample-code">MyClass.wire (eventNamesToHandlersMapOBJ);
 </pre>
 			
-			<p>When only a single <code><a href="#5_2">eventNamesToHandlersMapOBJ</a></code> parameter is specified, then event handlers for multiple events can be specified using an object hash. This variation is provided as a convenience and has the effect of iteratively calling the <code><a href="#2_54">Uize.wire</a></code> static method for each event-name-to-handler mapping in the <code><a href="#5_2">eventNamesToHandlersMapOBJ</a></code> object.</p>
+			<p>When only a single <code><a href="#5_2">eventNamesToHandlersMapOBJ</a></code> parameter is specified, then event handlers for multiple events can be specified using an object hash. This variation is provided as a convenience and has the effect of iteratively calling the <code><a href="#2_59">Uize.wire</a></code> static method for each event-name-to-handler mapping in the <code><a href="#5_2">eventNamesToHandlersMapOBJ</a></code> object.</p>
 			
 			<p><span class="allCaps">SPECIAL VALUES</span></p>
 			
@@ -4125,7 +4472,7 @@ Uize.set ({myProperty:!Uize.get ('myProperty')});
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#2_11">Uize.fire</a></code> and <code><a href="#2_51">Uize.unwire</a></code> static methods</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#2_11">Uize.fire</a></code> and <code><a href="#2_56">Uize.unwire</a></code> static methods</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#3_1">fire</a></code>, <code><a href="#3_9">wire</a></code>, and <code><a href="#3_7">unwire</a></code> instance methods</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -4163,7 +4510,7 @@ Uize.set ({myProperty:!Uize.get ('myProperty')});
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#3_9">wire</a></code> and <code><a href="#3_7">unwire</a></code> instance methods</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#2_11">Uize.fire</a></code>, <code><a href="#2_54">Uize.wire</a></code>, and <code><a href="#2_51">Uize.unwire</a></code> static methods</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#2_11">Uize.fire</a></code>, <code><a href="#2_59">Uize.wire</a></code>, and <code><a href="#2_56">Uize.unwire</a></code> static methods</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -4301,7 +4648,7 @@ sliderValueAndRange = mySlider.get ({minValue:0,maxValue:0,value:0});
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#3_4">set</a></code> instance method</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#2_13">Uize.get</a></code> and <code><a href="#2_44">Uize.set</a></code> static methods</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#2_13">Uize.get</a></code> and <code><a href="#2_49">Uize.set</a></code> static methods</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -4383,7 +4730,7 @@ sliderValueAndRange = mySlider.get ({minValue:0,maxValue:0,value:0});
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#3_2">get</a></code> instance method</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#2_13">Uize.get</a></code> static method</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#2_44">Uize.set</a></code> static method</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#2_49">Uize.set</a></code> static method</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -4463,8 +4810,8 @@ Uize.Node.setInnerHtml ('sliderWidgetCurrentValue',page.children.slider);
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#3_8">valueOf Intrinsic Method</a></code>, and the <code><a href="#2_52">Uize.valueOf</a></code> static intrinsic method</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#2_48">Uize.toString</a></code> static intrinsic method</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#3_8">valueOf Intrinsic Method</a></code>, and the <code><a href="#2_57">Uize.valueOf</a></code> static intrinsic method</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#2_53">Uize.toString</a></code> static intrinsic method</td></tr>
 			</table>
 		</div>
 		
@@ -4526,7 +4873,7 @@ myInstance.set ({myProperty:!myInstance.get ('myProperty')});
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#3_1">fire</a></code> and <code><a href="#3_9">wire</a></code> instance methods</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#2_11">Uize.fire</a></code>, <code><a href="#2_54">Uize.wire</a></code>, and <code><a href="#2_51">Uize.unwire</a></code> static methods</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#2_11">Uize.fire</a></code>, <code><a href="#2_59">Uize.wire</a></code>, and <code><a href="#2_56">Uize.unwire</a></code> static methods</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -4591,8 +4938,8 @@ markedUpPrice = price * (1 + page.children.markupPercentSlider / 100);
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#3_5">toString Intrinsic Method</a></code>, and the <code><a href="#2_48">Uize.toString</a></code> static intrinsic method</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#2_52">Uize.valueOf</a></code> static intrinsic method</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#3_5">toString Intrinsic Method</a></code>, and the <code><a href="#2_53">Uize.toString</a></code> static intrinsic method</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#2_57">Uize.valueOf</a></code> static intrinsic method</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>if the instance's class does not register a <code>value</code> set-get property, then this method will return the value of the instance's <code>value</code> property, and if the instance has no <code>value</code> property, then this method will simply return <code>undefined</code></td></tr>
 			</table>
 		</div>
@@ -4649,7 +4996,7 @@ markedUpPrice = price * (1 + page.children.markupPercentSlider / 100);
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#3_1">fire</a></code> and <code><a href="#3_7">unwire</a></code> instance methods</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#2_11">Uize.fire</a></code>, <code><a href="#2_54">Uize.wire</a></code>, and <code><a href="#2_51">Uize.unwire</a></code> static methods</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#2_11">Uize.fire</a></code>, <code><a href="#2_59">Uize.wire</a></code>, and <code><a href="#2_56">Uize.unwire</a></code> static methods</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -4757,7 +5104,7 @@ MyClass.prototype.insertButton = function () {
 				
 				<p>In the above example, a handler is being registered for the <code>'Click'</code> event of a button (an instance of the <code><a href="../reference/Uize.Widget.Button.html">Uize.Widget.Button</a></code> class) that is a child widget of <code>myWidget</code>. By specifying <code>myWidget</code> as the handler for the <code>Click</code> event, that event will get relayed to <code>myWidget</code>. This means that other code can now register handlers on the <code>Click</code> event for <code>myWidget</code>, and those handlers will handle the <code>Click</code> event being relayed from the button widget.</p>
 				
-				<p>Object handlers added in this way can be removed by using the <code><a href="#3_7">unwire</a></code> instance method and the <code><a href="#2_51">Uize.unwire</a></code> static method, just as with any other type of handler, as in...</p>
+				<p>Object handlers added in this way can be removed by using the <code><a href="#3_7">unwire</a></code> instance method and the <code><a href="#2_56">Uize.unwire</a></code> static method, just as with any other type of handler, as in...</p>
 				
 				
 <pre class="sample-code">myWidget.children.someButton.unwire ('Click',myWidget);
@@ -4816,7 +5163,7 @@ MyClass.prototype.insertButton = function () {
 		<div class="contents2">
 			<p>The <code>Uize</code> base class implements a generalized mechanism for firing events when the values of set-get properties are changed.</p>
 			
-			<p>This means that for any set-get property that is registered through the <code><a href="#2_42">Uize.registerProperties</a></code> static method, a handler can be registered for a change in the value of that property without having to write any additional code to fire an event.</p>
+			<p>This means that for any set-get property that is registered through the <code><a href="#2_44">Uize.registerProperties</a></code> static method, a handler can be registered for a change in the value of that property without having to write any additional code to fire an event.</p>
 			
 			<a name="6_2_1"></a>
 			<h3 class="heading3" title="6. Instance Events -&gt; 6.2. Changed.[propertyName] -&gt; 6.2.1. Event Naming"><span class="headingNumber"><a href="#6" title="6. Instance Events">6</a>.<a href="#6_2" title="6. Instance Events -&gt; 6.2. Changed.[propertyName]">2</a>.<a href="#6_2_1" title="6. Instance Events -&gt; 6.2. Changed.[propertyName] -&gt; 6.2.1. Event Naming">1</a>. </span>Event Naming</h3>
@@ -4894,7 +5241,7 @@ myColorWidget.unwire ('Changed.hexRgb',handleColorChange);
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#2_37">Uize.module</a></code> and <code><a href="#2_38">Uize.moduleLoader</a></code> static methods</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#2_38">Uize.module</a></code> and <code><a href="#2_39">Uize.moduleLoader</a></code> static methods</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static property is not inherited by subclasses</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>

@@ -47,7 +47,7 @@ Uize.module ({
 				_classPrototype = _class.prototype
 			;
 
-		/*** Global Variables ***/
+		/*** General Variables ***/
 			var
 				_overButton,
 
@@ -335,7 +335,7 @@ Uize.module ({
 
 						/*** wire up event handlers ***/
 							if (_this._followLink && _rootNode.tagName == 'A' && !_rootNode.onclick)
-								_rootNode.onclick = _Uize_Node.returnTrue
+								_rootNode.onclick = Uize.returnTrue
 							;
 							function _setStateAndFireEvent (_domEvent) {_this._setStateAndFireEvent (_domEvent)}
 							_this.wireNode (

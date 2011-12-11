@@ -68,12 +68,10 @@ Uize.module ({
     /*** Variables for Scruncher Optimization ***/
       var _package = function () {};
 
-    /*** Global Variables ***/
+    /*** General Variables ***/
       var _compiledJstFilesByPath = {};
 
     /*** Utility Functions ***/
-      function _returnAsIs (_value) {return _value}
-
       function _getFilenameFromPath (_filePath) {
         return Uize.Url.from (_filePath).fileName;
       }
@@ -91,7 +89,7 @@ Uize.module ({
     /*** Public Static Methods ***/
       _package.getHtmlFilesInfo = function (_folderToIndex,_titleExtractor) {
         var _files = [];
-        if (!_titleExtractor) _titleExtractor = _returnAsIs;
+        if (!_titleExtractor) _titleExtractor = Uize.returnX;
 
         for (
           var

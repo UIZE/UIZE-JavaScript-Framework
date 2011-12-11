@@ -40,7 +40,7 @@ Uize.module ({
 				_package = function () {}
 			;
 
-		/*** Global Variables ***/
+		/*** General Variables ***/
 			var
 				_arrayDelimiter = '\\s*\\|\\s*',
 				_arrayDelimiterRegExp = new RegExp (_arrayDelimiter),

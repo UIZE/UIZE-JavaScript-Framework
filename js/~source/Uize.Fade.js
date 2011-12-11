@@ -42,7 +42,7 @@ Uize.module ({
 				_constrain = Uize.constrain
 			;
 
-		/*** Global Variables ***/
+		/*** General Variables ***/
 			var
 				_valueUnchanged = {},
 				_activeFades = [],
@@ -50,7 +50,7 @@ Uize.module ({
 				_interval
 			;
 
-		/*** Global Functions ***/
+		/*** Utility Functions ***/
 			function _updateAnyActiveFades () {
 				if ((_anyActiveFades = !!_activeFades.length) != !!_interval)
 					_interval = _anyActiveFades ? setInterval (_advance,10) : clearInterval (_interval)
@@ -65,8 +65,6 @@ Uize.module ({
 				;
 				_updateAnyActiveFades ();
 			}
-
-			function _linear (_value) {return _value}
 
 		/*** Class Constructor ***/
 			var
@@ -290,7 +288,7 @@ Uize.module ({
 				;
 				return (
 					_sustain >= 1
-						? _linear
+						? Uize.returnX
 						:
 							function (_value) {
 								return (

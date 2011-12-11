@@ -88,8 +88,7 @@ Uize.module ({
 		/*** Variables for Scruncher Optimization ***/
 			var _package = function () {};
 
-		/*** Global Functions ***/
-			function _returnAsIs (_value) {return _value}
+		/*** Utility Functions ***/
 			function _randomSorter () {return Math.random () - .5}
 
 		/*** Public Static Methods ***/
@@ -133,7 +132,7 @@ Uize.module ({
 							return _index % 2 ? _sourceLengthMinus1 - (_index >> 1) : _index >> 1;
 						};
 					} else if (_reorderScheme == 'normal') {
-						_indexMapper = _returnAsIs;
+						_indexMapper = Uize.returnX;
 					} else {
 						var _jumbledOrder = Uize.map (_sourceLength,'key').sort (_randomSorter);
 						_indexMapper = function (_index) {return _jumbledOrder [_index]};

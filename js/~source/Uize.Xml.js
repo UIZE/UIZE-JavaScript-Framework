@@ -37,7 +37,7 @@ Uize.module ({
 				_sacredEmptyObject = {}
 			;
 
-		/*** Global Variables ***/
+		/*** General Variables ***/
 			var
 				_entityMap = function () {
 					return _entityMap = {

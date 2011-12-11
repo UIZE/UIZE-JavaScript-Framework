@@ -48,7 +48,7 @@ Uize.module ({
 				// REFERENCE: http://stackoverflow.com/questions/1700870/how-do-i-do-outerhtml-in-firefox
 			}
 
-		/*** Global Variables ***/
+		/*** General Variables ***/
 			var
 				_sacredEmptyObject = {},
 				_notInitialized = {},

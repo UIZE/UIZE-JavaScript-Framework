@@ -35,7 +35,7 @@ Uize.module ({
 		/*** Variables for Scruncher Optimization ***/
 			var _package = function () {};
 
-		/*** Global Variables ***/
+		/*** General Variables ***/
 			var
 				_copyrightNoticeRegExp = /\(c\)\s*\d{4}(?:\s*-\s*(\d{4}))?/i,
 				_copyrightNoticeEndYearRegExp = /(-\s*)(\d{4})/

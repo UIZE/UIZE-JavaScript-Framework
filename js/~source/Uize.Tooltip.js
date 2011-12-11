@@ -42,7 +42,7 @@ Uize.module ({
 				_Uize_Node = Uize.Node
 			;
 
-		/*** Global Variables ***/
+		/*** General Variables ***/
 			var
 				_packageGuid = Uize.getGuid (),
 				_tooltips = [],

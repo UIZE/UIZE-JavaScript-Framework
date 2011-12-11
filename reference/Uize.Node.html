@@ -103,8 +103,8 @@
 					<li><a href="#2_15" title="Returns a boolean, indicating whether or not the specified node is contained somewhere within the node tree of the specified root node.">2.15. Uize.Node.isOnNodeTree</a></li>
 					<li><a href="#2_16" title="IMPLEMENTATION INFO">2.16. Uize.Node.joinIdPrefixAndNodeId</a></li>
 					<li><a href="#2_17" title="Removes the specified Node Blob from the DOM.">2.17. Uize.Node.remove</a></li>
-					<li><a href="#2_18" title="Returns the boolean value false.">2.18. Uize.Node.returnFalse</a></li>
-					<li><a href="#2_19" title="Returns the boolean value true.">2.19. Uize.Node.returnTrue</a></li>
+					<li><a href="#2_18" title="IMPLEMENTATION INFO">2.18. Uize.Node.returnFalse</a></li>
+					<li><a href="#2_19" title="IMPLEMENTATION INFO">2.19. Uize.Node.returnTrue</a></li>
 					<li><a href="#2_20" title="Positions the specified absolutely positioned node (or Node Blob) to be adjacent to the specified absolute position coordinates.">2.20. Uize.Node.setAbsPos</a>
 						<ul>
 							<li><a href="#2_20_1" title="The absPosOBJ parameter specifies the center of the region, adjacent to which the node should be positioned.">2.20.1. The absPosOBJ Parameter</a></li>
@@ -179,6 +179,12 @@
 					<li><a href="#3_3" title="A boolean, indicating whether or not the browser is a version of Mozilla Firefox.">3.3. Uize.Node.isMozilla</a></li>
 					<li><a href="#3_4" title="A boolean, indicating whether or not the browser is a version of Apple Safari.">3.4. Uize.Node.isSafari</a></li>
 					<li><a href="#3_5" title="IMPLEMENTATION INFO">3.5. Uize.Node.moduleName</a></li>
+				</ul>
+			</li>
+			<li><a href="#4">4. Deprecated Features</a>
+				<ul>
+					<li><a href="#4_1" title="document...">4.1. Uize.returnFalse</a></li>
+					<li><a href="#4_2" title="document...">4.2. Uize.returnTrue</a></li>
 				</ul>
 			</li>
 		</ul>
@@ -1050,23 +1056,6 @@ Uize.Node.setStyle ('node4',Uize.Node.getStyle ('node3',styleProperties));
 		<a name="2_18"></a>
 		<h2 class="heading2" title="2. Static Methods -&gt; 2.18. Uize.Node.returnFalse"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_18" title="2. Static Methods -&gt; 2.18. Uize.Node.returnFalse">18</a>. </span>Uize.Node.returnFalse</h2>
 		<div class="contents2">
-			<p>Returns the boolean value <code>false</code>.</p>
-			
-			<p>This method can be assigned to event handlers to cancel their default action, as in the following example...</p>
-			
-			<p><span class="allCaps">EXAMPLE</span></p>
-			
-			
-<pre class="sample-code">myNode.onclick = Uize.Node.returnFalse;
-</pre>
-			
-			<p>If you are cancelling the default action for many nodes in a page, then using this static method allows you to share a single function - by reference - across all these nodes.</p>
-			
-			<p><span class="allCaps">NOTES</span></p>
-			
-			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#2_19">Uize.Node.returnTrue</a></code> static method</td></tr>
-			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
@@ -1077,23 +1066,6 @@ Uize.Node.setStyle ('node4',Uize.Node.getStyle ('node3',styleProperties));
 		<a name="2_19"></a>
 		<h2 class="heading2" title="2. Static Methods -&gt; 2.19. Uize.Node.returnTrue"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_19" title="2. Static Methods -&gt; 2.19. Uize.Node.returnTrue">19</a>. </span>Uize.Node.returnTrue</h2>
 		<div class="contents2">
-			<p>Returns the boolean value <code>true</code>.</p>
-			
-			<p>This method can be assigned to event handlers to enable their default action, as in the following example...</p>
-			
-			<p><span class="allCaps">EXAMPLE</span></p>
-			
-			
-<pre class="sample-code">myNode.onclick = Uize.Node.returnTrue;
-</pre>
-			
-			<p>If you are enabling the default action for many nodes in a page, then using this static method allows you to share a single function - by reference - across all these nodes.</p>
-			
-			<p><span class="allCaps">NOTES</span></p>
-			
-			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#2_18">Uize.Node.returnFalse</a></code> static method</td></tr>
-			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
@@ -2171,6 +2143,22 @@ Uize.Node.wire (nodeBLOB,eventNamesToHandlersMapOBJ,ownerIdSTR);
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
 			</table>
+		</div>
+	</div>
+	
+	<a name="4"></a>
+	<h1 class="heading1" title="4. Deprecated Features"><span class="headingNumber"><a href="#4" title="4. Deprecated Features">4</a>. </span>Deprecated Features</h1>
+	<div class="contents1">
+		<a name="4_1"></a>
+		<h2 class="heading2" title="4. Deprecated Features -&gt; 4.1. Uize.returnFalse"><span class="headingNumber"><a href="#4" title="4. Deprecated Features">4</a>.<a href="#4_1" title="4. Deprecated Features -&gt; 4.1. Uize.returnFalse">1</a>. </span>Uize.returnFalse</h2>
+		<div class="contents2">
+			<p>document...</p>
+		</div>
+		
+		<a name="4_2"></a>
+		<h2 class="heading2" title="4. Deprecated Features -&gt; 4.2. Uize.returnTrue"><span class="headingNumber"><a href="#4" title="4. Deprecated Features">4</a>.<a href="#4_2" title="4. Deprecated Features -&gt; 4.2. Uize.returnTrue">2</a>. </span>Uize.returnTrue</h2>
+		<div class="contents2">
+			<p>document...</p>
 		</div>
 	</div>
 </div>

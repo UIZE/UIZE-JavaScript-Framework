@@ -104,7 +104,7 @@ Uize.module ({
 				_sacredEmptyArray = []
 			;
 
-		/*** Global Variables ***/
+		/*** General Variables ***/
 			var
 				_someSpaces = '       ',
 				_keyPadding = _someSpaces.replace (/ /g,_someSpaces).replace (/ /g,_someSpaces),

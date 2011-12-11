@@ -1057,7 +1057,7 @@ Uize.module ({
 						{
 							title:'Test that a function type value is not defaulted',
 							test:function () {
-								var _function = function () {};
+								var _function = Uize.nop;
 								return this.expectSameAs (_function,Uize.defaultNully (_function,'foo'));
 							}
 						}
@@ -1073,7 +1073,7 @@ Uize.module ({
 						['Test that a boolean type value is not regarded as an array',true,false],
 						['Test that a Boolean object instance is not regarded as an array',new Boolean (true),false],
 						['Test that an empty object is not regarded as an array',{},false],
-						['Test that a function is not regarded as an array',function () {},false],
+						['Test that a function is not regarded as an array',Uize.nop,false],
 						['Test that a regular expression instance is not regarded as an array',/\d+/,false],
 						['Test that an empty array is regarded as an array',[[]],true],
 						['Test that an array with elements is regarded as an array',[[1,2,3,4]],true]
@@ -1088,7 +1088,7 @@ Uize.module ({
 						['Test that a Boolean object instance is not regarded as a number',new Boolean (true),false],
 						['Test that an object is not regarded as a number',{},false],
 						['Test that an array is not regarded as a number',[[]],false],
-						['Test that a function is not regarded as a number',function () {},false],
+						['Test that a function is not regarded as a number',Uize.nop,false],
 						['Test that a regular expression instance is not regarded as a number',/\d+/,false],
 						['Test that a number type value is regarded as a number',5,true],
 						['Test that the special value Infinity is regarded as a number',Infinity,true],
@@ -1104,7 +1104,7 @@ Uize.module ({
 						['Test that a Boolean object instance is not regarded as a string',new Boolean (true),false],
 						['Test that an object is not regarded as a string',{},false],
 						['Test that an array is not regarded as a string',[[]],false],
-						['Test that a function is not regarded as a string',function () {},false],
+						['Test that a function is not regarded as a string',Uize.nop,false],
 						['Test that a regular expression instance is not regarded as a string',/\d+/,false],
 						['Test that a non-empty string value is regarded as a string','foo',true],
 						['Test that an empty string value is regarded as a string','',true],
@@ -1117,7 +1117,7 @@ Uize.module ({
 						['Test that a string value is not regarded as a boolean','foo',false],
 						['Test that an object is not regarded as a boolean',{},false],
 						['Test that an array is not regarded as a boolean',[[]],false],
-						['Test that a function is not regarded as a boolean',function () {},false],
+						['Test that a function is not regarded as a boolean',Uize.nop,false],
 						['Test that a regular expression instance is not regarded as a boolean',/\d+/,false],
 						['Test that the boolean value false is regarded as a boolean',false,true],
 						['Test that the boolean value true is regarded as a boolean',true,true],
@@ -1133,7 +1133,7 @@ Uize.module ({
 						['Test that an object is not regarded as a function',{},false],
 						['Test that an array is not regarded as a function',[[]],false],
 						['Test that a regular expression instance is not regarded as a function',/\d+/,false],
-						['Test that a function *is* regarded as a function',function () {},true]
+						['Test that a function *is* regarded as a function',Uize.nop,true]
 					]],
 					['Uize.isNully',[
 						['Test that calling with no parameters returns true',[],true],
@@ -1145,7 +1145,7 @@ Uize.module ({
 						['Test that the special value NaN is not regarded as being nully',NaN,false],
 						['Test that an object is not regarded as being nully',{},false],
 						['Test that an array is not regarded as being nully',[[]],false],
-						['Test that a function is not regarded as being nully',function () {},false],
+						['Test that a function is not regarded as being nully',Uize.nop,false],
 						['Test that a regular expression instance is not regarded as being nully',/\d+/,false]
 					]],
 					['Uize.isObject',[
@@ -1156,7 +1156,7 @@ Uize.module ({
 						['Test that a boolean value is not regarded as being an object',true,false],
 						['Test that a number value is not regarded as being an object',42,false],
 						['Test that the special value NaN is not regarded as being an object',NaN,false],
-						['Test that a function is not regarded as being an object',function () {},false],
+						['Test that a function is not regarded as being an object',Uize.nop,false],
 						['Test that an object *is* regarded as being an object',{},true],
 						['Test that an array is regarded as being an object',[[]],true],
 						['Test that a regular expression instance is regarded as being an object',/\d+/,true],
@@ -1172,7 +1172,7 @@ Uize.module ({
 						['Test that a boolean value is not regarded as being a plain object',true,false],
 						['Test that a number value is not regarded as being a plain object',42,false],
 						['Test that the special value NaN is not regarded as being a plain object',NaN,false],
-						['Test that a function is not regarded as being a plain object',function () {},false],
+						['Test that a function is not regarded as being a plain object',Uize.nop,false],
 						['Test that a plain object *is* regarded as being a plain object',{},true],
 						['Test that an array is not regarded as being a plain object',[[]],false],
 						['Test that a regular expression instance is not regarded as being a plain object',/\d+/,false],
@@ -1189,7 +1189,7 @@ Uize.module ({
 						['Test that a boolean value is regarded as being a primitive',false,true],
 						['Test that a number value is regarded as being a primitive',0,true],
 						['Test that the special value NaN is regarded as being a primitive',NaN,true],
-						['Test that a function is not regarded as being a primitive',function () {},false],
+						['Test that a function is not regarded as being a primitive',Uize.nop,false],
 						['Test that an object is not regarded as being a primitive',{},false],
 						['Test that an array is not regarded as being a primitive',[[]],false],
 						['Test that a regular expression instance is not regarded as being a primitive',/\d+/,false],
@@ -1829,7 +1829,7 @@ Uize.module ({
 						['Test that a simple object is not regarded as a Uize subclass instance',{},false],
 						['Test that an array is not regarded as a Uize subclass instance',[],false],
 						['Test that a regular expression is not regarded as a Uize subclass instance',/\d+/,false],
-						['Test that a function is not regarded as a Uize subclass instance',function () {},false],
+						['Test that a function is not regarded as a Uize subclass instance',Uize.nop,false],
 						['Test that a Uize class is not regarded as a Uize subclass instance',Uize,false],
 						['Test that a Uize package is not regarded as a Uize subclass instance',Uize.Data,false],
 						['Test that a Uize instance is correctly regarded as a Uize subclass instance',new Uize,true]
@@ -1928,7 +1928,7 @@ Uize.module ({
 							{
 								title:'Test that cloning a function simply returns a reference to that function',
 								test:function () {
-									var _toClone = function () {};
+									var _toClone = Uize.nop;
 									return this.expectSameAs (_toClone,Uize.clone (_toClone))
 								}
 							},
@@ -2631,6 +2631,20 @@ Uize.module ({
 						['Test that a number value has no values',5,[]],
 						['Test that a string value has no values','hello',[]]
 					]],
+					['Uize.meldKeysValues',[
+						['Test that the method correctly melds together the specified keys and values',
+							[['foo','hello'],['bar','world']],
+							{foo:'bar',hello:'world'}
+						],
+						['Test that surplus values are ignored',
+							[['foo'],['bar','world']],
+							{foo:'bar'}
+						],
+						['Test that surplus keys are ignored',
+							[['foo','hello'],['bar']],
+							{foo:'bar'}
+						]
+					]],
 					['Uize.lookup',[
 						['Test that true is the default value for the lookupValue paramter',
 							[['foo','bar']],
@@ -2659,7 +2673,54 @@ Uize.module ({
 						['Test that a non-zero length values array that is unpopulated produces a lookup object with a single "undefined" key for all the undefined element values',
 							[new Array (5)],
 							{'undefined':true}
-						]
+						],
+
+						/*** test handling of the optional safeOrTarget parameter ***/
+							['Test that specifying the value true for the optional safeOrTarget parameter results in a safe lookup object being created',
+								[['foo','bar'],1,true],
+								{
+									foo:1,
+									bar:1,
+									constructor:undefined,
+									toLocaleString:undefined,
+									toString:undefined,
+									valueOf:undefined
+								}
+							],
+							{
+								title:'Test that specifying the value false for the optional safeOrTarget parameter results in an unsafe lookup object being created',
+								test:function () {
+									var _lookup = Uize.lookup (null,1,false);
+									return this.expect (
+										true,
+										!!(_lookup.constructor && _lookup.toLocaleString && _lookup.toString && _lookup.valueOf)
+									);
+								}
+							},
+							['Test that specifying the value true for the optional safeOrTarget parameter is handled correctly when the source array contains values that coincide with properties of the Object prototype',
+								[['foo','bar','constructor','toLocaleString','toString','valueOf'],1,true],
+								{
+									foo:1,
+									bar:1,
+									constructor:1,
+									toLocaleString:1,
+									toString:1,
+									valueOf:1
+								}
+							],
+							{
+								title:'Test that specifying a target object for the optional safeOrTarget parameter is handled correctly',
+								test:function () {
+									var
+										_target = {foo:1},
+										_lookup = Uize.lookup (['bar','hello','world'],2,_target)
+									;
+									return (
+										this.expectSameAs (_target,_lookup) &&
+										this.expect ({foo:1,bar:2,hello:2,world:2},_lookup)
+									);
+								}
+							}
 					]],
 					['Uize.reverseLookup',[
 						['Test that calling with no parameter produces an empty object',
@@ -2710,7 +2771,57 @@ Uize.module ({
 						['Test that undefined produces an empty reverse lookup object',undefined,{}],
 						['Test that a boolean value produces an empty reverse lookup object',false,{}],
 						['Test that a number value produces an empty reverse lookup object',5,{}],
-						['Test that a string value produces an empty reverse lookup object','hello',{}]
+						['Test that a string value produces an empty reverse lookup object','hello',{}],
+
+						/*** test handling of the optional safeOrTarget parameter ***/
+							['Test that specifying the value true for the optional safeOrTarget parameter results in a safe reverse lookup object being created',
+								[{foo:'bar'},true],
+								{
+									bar:'foo',
+									constructor:undefined,
+									toLocaleString:undefined,
+									toString:undefined,
+									valueOf:undefined
+								}
+							],
+							{
+								title:'Test that specifying the value false for the optional safeOrTarget parameter results in an unsafe reverse lookup object being created',
+								test:function () {
+									var _reverseLookup = Uize.reverseLookup ({foo:'bar'},false);
+									return this.expect (
+										true,
+										!!(
+											_reverseLookup.constructor &&
+											_reverseLookup.toLocaleString &&
+											_reverseLookup.toString &&
+											_reverseLookup.valueOf
+										)
+									);
+								}
+							},
+							['Test that specifying the value true for the optional safeOrTarget parameter is handled correctly when the source object contains values that coincide with properties of the Object prototype',
+								[{foo:'bar',prop1:'constructor',prop2:'toLocaleString',prop3:'toString',prop4:'valueOf'},true],
+								{
+									bar:'foo',
+									constructor:'prop1',
+									toLocaleString:'prop2',
+									toString:'prop3',
+									valueOf:'prop4'
+								}
+							],
+							{
+								title:'Test that specifying a target object for the optional safeOrTarget parameter is handled correctly',
+								test:function () {
+									var
+										_target = {foo:'bar',hello:'world'},
+										_reverseLookup = Uize.reverseLookup (_target,_target)
+									;
+									return (
+										this.expectSameAs (_target,_reverseLookup) &&
+										this.expect ({foo:'bar',hello:'world',bar:'foo',world:'hello'},_reverseLookup)
+									);
+								}
+							}
 					]],
 					['Uize.max',[
 						['Test that the maximum value from an object is reported correctly',[{foo:1,bar:2}],2],
@@ -3762,7 +3873,7 @@ Uize.module ({
 													_Subclass = Uize.subclass (),
 													_instance = new _Subclass
 												;
-												_instance.wire ('Changed.nonExistentProperty',function () {});
+												_instance.wire ('Changed.nonExistentProperty',Uize.nop);
 												return true;
 											}
 										},

@@ -35,7 +35,7 @@ Uize.module({
 				_package = function () {}
 			;
 
-		/*** Global Variables ***/
+		/*** General Variables ***/
 			var _settings = {
 				_upperCasing:{},
 				_specialCharring:{

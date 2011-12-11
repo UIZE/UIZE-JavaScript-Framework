@@ -61,7 +61,7 @@ Uize.module ({
 				_classPrototype = _class.prototype
 			;
 
-		/*** Global Variables ***/
+		/*** General Variables ***/
 			var
 				_ieQuirkyBoxes = _isIe && document.compatMode != 'CSS1Compat',
 				_pointIdsMap = {

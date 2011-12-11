@@ -16,7 +16,7 @@
 	importance: 10
 	codeCompleteness: 100
 	testCompleteness: 38
-	docCompleteness: 95
+	docCompleteness: 100
 */
 
 /*?
@@ -55,12 +55,18 @@
 					- =Uize.lookup= - creates a lookup object from an array of values
 					- =Uize.map= - iterates over an array or object and applies the specified value transformer to produce new values
 					- =Uize.max= - returns the largest value in a values array
+					- =Uize.meldKeysValues= - creates an object by melding keys from a keys array with values from a values array
 					- =Uize.min= - returns the smallest value in a values array
 					- =Uize.pairUp= - uses a list of key/value pairs to form an object
 					- =Uize.recordMatches= - determines if a record object matches the specified criteria
 					- =Uize.reverseLookup= - creates a reverse lookup from a specified lookup object or values array
 					- =Uize.totalKeys= - counts the number of keys in an object (essentially the number of properties)
 					- =Uize.values= - returns an array containing the values of the properties in an object
+
+				Iterator Methods
+
+					- =Uize.callOn= - calls a method on all values of properties in an object or elements of an array
+					- =Uize.forEach= - iterates over an array, object, or length, calling the specified iteration handler for each element or property
 
 				Useful Value Transformers
 
@@ -70,10 +76,12 @@
 					- =Uize.escapeRegExpLiteral= - escapes a string so that it can be used as a literal match portion of a regular expression string
 					- =Uize.substituteInto= - substitutes the specified values into the specified string using token replacement
 
-				Iterator Methods
+				Dummy Functions
 
-					- =Uize.callOn= - calls a method on all values of properties in an object or elements of an array
-					- =Uize.forEach= - iterates over an array, object, or length, calling the specified iteration handler for each element or property
+					- =Uize.nop= - performs no operation and returns no value (equivalent to returning =undefined=)
+					- =Uize.returnFalse= - always returns the value =false=
+					- =Uize.returnTrue= - always returns the value =true=
+					- =Uize.returnX= - always returns the value of the first argument, unaltered
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
@@ -92,7 +100,7 @@
 			_null = null
 		;
 
-	/*** Global Variables ***/
+	/*** General Variables ***/
 		var
 			_uizeGuids = 0,
 			_sacredEmptyArray = [],
@@ -551,6 +559,16 @@
 		function _nonInheritableStatic (_name,_value) {
 			_classNonInheritableStatics [_name] = 1;
 			return _class [_name] = _value;
+		}
+
+		function _resolveTargetLookup (_safeOrTarget) {
+			return (
+				_isObject (_safeOrTarget)
+					? _safeOrTarget
+					: _safeOrTarget
+						? {constructor:_undefined,toLocaleString:_undefined,toString:_undefined,valueOf:_undefined}
+						: {}
+			);
 		}
 
 	/*** Module Loading Mechanism ***/
@@ -2283,7 +2301,7 @@
 								Uize.map (logArray,'console.log (key + ": " + value)');
 								.......................................................
 
-							Gets a style properties object from a pure number coords object...
+							Get a style properties object from a pure number coords object...
 								........................................................................
 								var coordsStyleProperties = Uize.map (coords,'value + "px"');
 
@@ -2292,7 +2310,7 @@
 								// produces this... {left:'0px',top:'50px',width:'100px',height:'175px'}
 								........................................................................
 
-							Gets the length of the longest string in an array of strings....
+							Get the length of the longest string in an array of strings....
 								........................................................................
 								var maxStringLength = Uize.max (Uize.map (stringsArray,'value.length'));
 								........................................................................
@@ -2689,6 +2707,80 @@
 		);
 
 		_nonInheritableStatic (
+			'meldKeysValues',
+			function (_keys,_values) {
+				var _result = {};
+				for (var _keyNo = -1, _keysLength = Math.min (_keys.length,_values.length); ++_keyNo < _keysLength;)
+					_result [_keys [_keyNo]] = _values [_keyNo]
+				;
+				return _result;
+			}
+			/*?
+				Static Methods
+					Uize.meldKeysValues
+						Returns an object that is created by melding together the specified keys array and values array.
+
+						SYNTAX
+						.......................................................
+						resultOBJ = Uize.meldKeysValue (keysARRAY,valuesARRAY);
+						.......................................................
+
+						The =Uize.meldKeysValues= method iterates through the elements of the =keysARRAY= and =valuesARRAY= arrays in lock step, assigning properties to the resulting object using an element from the keys array as property name and an element from the values array as property value.
+
+						If you obtained a keys array from an object using the =Uize.keys= method, and if you also obtained a values array from that same object using the =Uize.values= method, then you could use the =Uize.meldKeysValues= method with those keys and values arrays to recreate the original object.
+
+						EXAMPLE
+						..............................................................................
+						var
+							foodInfoKeys = ['apple','banana','beet','corn','potato','rice']
+							foodInfoValues = ['fruit','fruit','vegetable','grain','vegetable','grain'],
+							foodInfo = Uize.meldKeysValues (foodInfoKeys,foodInfoValues)
+						;
+						..............................................................................
+
+						In the above example, keys from the =foodInfoKeys= array are being melded with values from the =foodInfoValues= array to form a value for the =foodInfo= object. After this code has executed, the =foodInfo= object will have the following contents...
+
+						.....................
+						{
+							apple:'fruit',
+							banana:'fruit',
+							beet:'vegetable',
+							corn:'grain',
+							onion:'vegetable',
+							rice:'grain'
+						}
+						.....................
+
+						Surplus Keys or Values Ignored
+							If the lengths of the =keysARRAY= or =valuesARRAY= arrays differ, then the surplus keys or values will be ignored.
+
+							Surplus Keys
+								If more keys are specified in =keysARRAY= than there are values in =valuesARRAY=, then the surplus keys will be ignored.
+
+								EXAMPLE
+								...........................................................
+								var object = Uize.meldKeysValues (['foo','hello'],['bar']);
+								...........................................................
+
+								After the above code has been executed, the =object= variable will have the value ={foo:'bar'}= - the surplus ='hello'= key is ignored.
+
+							Surplus Values
+								If more values are specified in =valuesARRAY= than there are keys in =keysARRAY=, then the surplus values will be ignored.
+
+								EXAMPLE
+								...........................................................
+								var object = Uize.meldKeysValues (['foo'],['bar','world']);
+								...........................................................
+
+								After the above code has been executed, the =object= variable will have the value ={foo:'bar'}= - the surplus ='world'= value is ignored.
+
+						NOTES
+						- see the related =Uize.keys= and =Uize.values= static methods
+						- compare to the =Uize.pairUp= static method
+			*/
+		);
+
+		_nonInheritableStatic (
 			'min',
 			function (_object) {return Math.min.apply (0,_class.values (_object))}
 			/*?
@@ -2763,7 +2855,7 @@
 		_nonInheritableStatic (
 			'reverseLookup',
 			function (_object,_safeOrTarget) {
-				var _lookup = _class.lookup (_null,0,_safeOrTarget);
+				var _lookup = _resolveTargetLookup (_safeOrTarget);
 				if (!_isString (_object))
 					for (var _key in _object) _lookup [_object [_key] + ''] = _key
 				;
@@ -2792,14 +2884,14 @@
 						......................................................................
 
 						`Add More Entries to a Reverse Lookup Object`
-						..............................................................................
-						reverseLookupOBJ = Uize.reverseLookup (hashOBJorValuesARRAY,reverseLookupOBJ);
-						..............................................................................
+						................................................................
+						targetOBJ = Uize.reverseLookup (hashOBJorValuesARRAY,targetOBJ);
+						................................................................
 
 						`Create a Bi-directional Lookup`
-						...............................................
-						hashOBJ = Uize.reverseLookup (hashOBJ,hashOBJ);
-						...............................................
+						..........................................................................
+						reverseLookupOBJ = Uize.reverseLookup (reverseLookupOBJ,reverseLookupOBJ);
+						..........................................................................
 
 						Create a Reverse Lookup From an Object
 							In the most typical usage of the =Uize.reverseLookup= method, a reverse lookup object can be created from an object.
@@ -2905,12 +2997,12 @@
 							It is often not essential to create safe lookups, since one may know that the keys being used to index into a lookup object will never be the names of methods of the =Object= object, and not creating safe lookups is a little more efficient.
 
 						Add More Entries to a Reverse Lookup Object
-							By specifying an existing reverse lookup object as the target for the reverse lookup creation, more entries can be added to the existing reverse lookup.
+							By specifying an existing reverse lookup object for the optional =targetOBJ= second parameter, more entries can be added to the existing reverse lookup.
 
 							SYNTAX
-							..............................................................................
-							reverseLookupOBJ = Uize.reverseLookup (hashOBJorValuesARRAY,reverseLookupOBJ);
-							..............................................................................
+							................................................................
+							targetOBJ = Uize.reverseLookup (hashOBJorValuesARRAY,targetOBJ);
+							................................................................
 
 							EXAMPLE
 							.............................................................................
@@ -2918,7 +3010,7 @@
 							Uize.reverseLookup ({nbsp:160,copy:169,reg:174},entitiesCodesToNames);
 
 							alert (entitiesCodesToNames [38]);   // alerts "amp"
-							alert (entitiesCodesToNames [160]);  // alerts "copy"
+							alert (entitiesCodesToNames [169]);  // alerts "copy"
 							.............................................................................
 
 							In the above example, the second call to the =Uize.reverseLookup= method is adding more entries to the reverse lookup object that was created in the first call to the method. This is done by supplying that reverse lookup object, which is assigned to the =entitiesCodesToNames= variable, as the second argument. When calling the =Uize.reverseLookup= method the second time, the result is ignored. This is because the method modifies the target, so we don't care about its return value.
@@ -2927,9 +3019,9 @@
 							By specifying the source hash object as also the target for the reverse lookup creation, a bi-directional lookup object can be created.
 
 							SYNTAX
-							...............................................
-							hashOBJ = Uize.reverseLookup (hashOBJ,hashOBJ);
-							...............................................
+							..........................................................................
+							reverseLookupOBJ = Uize.reverseLookup (reverseLookupOBJ,reverseLookupOBJ);
+							..........................................................................
 
 							EXAMPLE
 							......................................................................................
@@ -2959,12 +3051,7 @@
 		_nonInheritableStatic (
 			'lookup',
 			function (_values,_lookupValue,_safeOrTarget) {
-				var _lookup = _isObject (_safeOrTarget)
-					? _safeOrTarget
-					: _safeOrTarget
-						? {constructor:_undefined,toLocaleString:_undefined,toString:_undefined,valueOf:_undefined}
-						: {}
-				;
+				var _lookup = _resolveTargetLookup (_safeOrTarget);
 				if (arguments.length == 1) _lookupValue = _true;
 				if (_values != _undefined) {
 					for (var _valueNo = -1, _valuesLength = _values.length; ++_valueNo < _valuesLength;)
@@ -2978,48 +3065,140 @@
 					Uize.lookup
 						Returns a lookup object, where each key is a value from the specified values array.
 
-						SYNTAX
+						DIFFERENT USAGES
+
+						`Create a Lookup From a Values Array`
 						......................................
 						lookupOBJ = Uize.lookup (valuesARRAY);
 						......................................
 
-						EXAMPLE
-						...............................................................
-						var
-							fruits = ['apple','peach','pear','banana','orange','mango'],
-							fruitsLookup = Uize.lookup (fruits)
-						;
-						...............................................................
-
-						After the above code is executed, the value of the =fruitsLookup= variable will be an object with the contents...
-
-						.........................................................................
-						{apple:true, peach:true, pear:true, banana:true, orange:true, mango:true}
-						.........................................................................
-
-						VARIATION
+						`Create a Lookup Object With a Custom Lookup Value`
 						.........................................................
 						lookupOBJ = Uize.lookup (valuesARRAY,lookupValueANYTYPE);
 						.........................................................
 
-						By default, the =Uize.lookup= method creates an object whose properties all have the boolean value =true=. The optional =lookupValueANYTYPE= parameter lets you specify the value that should be assigned to each of the properties in the lookup object.
+						`Create a Safe Lookup Object From a Values Array`
+						......................................................................
+						safeLookupOBJ = Uize.lookup (valuesARRAY,lookupValueANYTYPE,safeBOOL);
+						......................................................................
 
-						EXAMPLE
-						...............................................................
-						var
-							fruits = ['apple','peach','pear','banana','orange','mango'],
-							fruitsLookup = Uize.lookup (fruits,1)
-						;
-						...............................................................
+						`Add More Entries to a Lookup Object`
+						.........................................................................
+						lookupOBJ = Uize.lookup (valuesARRAY,lookupValueANYTYPE,targetLookupOBJ);
+						.........................................................................
 
-						In the above example, the value =1= is being specified for the optional =lookupValueANYTYPE=. After the above code is executed, the value of the =fruitsLookup= variable will be an object with the contents...
+						`Create an Empty Safe Lookup Object`
+						...........................................
+						emptyLookupOBJ = Uize.lookup (null,1,true);
+						...........................................
 
-						.......................................................
-						{apple:1, peach:1, pear:1, banana:1, orange:1, mango:1}
-						.......................................................
+						Create a Lookup From a Values Array
+							In the most common usage, a lookup object can be created from a values array by specifying just the =valuesARRAY= parameter.
+
+							SYNTAX
+							......................................
+							lookupOBJ = Uize.lookup (valuesARRAY);
+							......................................
+
+							EXAMPLE
+							...............................................................
+							var
+								fruits = ['apple','peach','pear','banana','orange','mango'],
+								fruitsLookup = Uize.lookup (fruits)
+							;
+							...............................................................
+
+							After the above code is executed, the value of the =fruitsLookup= variable will be an object with the contents...
+
+							....................................................................
+							{apple:true,peach:true,pear:true,banana:true,orange:true,mango:true}
+							....................................................................
+
+						Create a Lookup Object With a Custom Lookup Value
+							In cases where the default lookup value =true= is not desirable, a different lookup value can be specified using the optional =lookupValueANYTYPE= second parameter.
+
+							SYNTAX
+							.........................................................
+							lookupOBJ = Uize.lookup (valuesARRAY,lookupValueANYTYPE);
+							.........................................................
+
+							EXAMPLE
+							...............................................................
+							var
+								fruits = ['apple','peach','pear','banana','orange','mango'],
+								foodsLookup = Uize.lookup (fruits,'fruit')
+							;
+							...............................................................
+
+							In the above example, the value ='fruit'= is being specified for the optional =lookupValueANYTYPE= parameter. After the above code is executed, the value of the =foodsLookup= variable will be an object with the contents...
+
+							......................................................................................
+							{apple:'fruit',peach:'fruit',pear:'fruit',banana:'fruit',orange:'fruit',mango:'fruit'}
+							......................................................................................
+
+							Using a custom lookup value can be useful when you're populating a lookup from multiple different values arrays and you want to be able to track which values array a lookup entry came from. For a good illustration of this technique, see the example for the `Add More Entries to a Lookup Object` use case.
+
+						Create a Safe Lookup Object From a Values Array
+							A safe lookup object can be created from a values array by specifying the value =true= for the optional =safeBOOL= third parameter.
+
+							SYNTAX
+							......................................................................
+							safeLookupOBJ = Uize.lookup (valuesARRAY,lookupValueANYTYPE,safeBOOL);
+							......................................................................
+
+							EXAMPLE
+							...............................................
+							var
+								values = ['foo','bar'],
+								unsafeLookup = Uize.lookup (values),
+								safeLookup = Uize.lookup (values,true,true)
+							;
+							if (unsafeLookup ['valueOf']) alert ('unsafe');
+							if (!safeLookup ['valueOf']) alert ('safe');
+							...............................................
+
+							In the above example, the =unsafeLookup= lookup object created from the =values= array tests truthy for a ='valueOf'= entry. This is because the lookup object is an instance of JavaScript's built-in =Object= object, and this base object has a =valueOf= instance method as part of its =prototype=. In contrast, the =safeLookup= lookup object tests falsy for a ='valueOf'= entry, because the =Uize.lookup= method adds an explicit =undefined= value for the ='valueOf'= entry (and other =Object= prototype properties) when the value =true= is specified for the =safeBOOL= parameter.
+
+						Add More Entries to a Lookup Object
+							By specifying an existing lookup object for the optional =targetLookupOBJ= third parameter, more entries can be added to the existing lookup.
+
+							SYNTAX
+							.........................................................................
+							lookupOBJ = Uize.lookup (valuesARRAY,lookupValueANYTYPE,targetLookupOBJ);
+							.........................................................................
+
+							EXAMPLE
+							.................................................................................
+							var
+								fruits = ['apple','apricot','orange','peach','pear','watermelon'],
+								vegetables = ['beet','broccoli','cauliflower','onion','potato','squash'],
+								grains = ['barley','maize','oats','quinoa','rice','sorghum','wheat']
+								foodLookup = Uize.lookup (fruits,'fruit')
+							;
+							Uize.lookup (vegetables,'vegetable',foodLookup); // stitch in keys for vegetables
+							Uize.lookup (grains,'grain',foodLookup);         // stitch in keys for grains
+
+							alert (foodLookup ['apricot']);   // alerts "fruit"
+							alert (foodLookup ['broccoli']);  // alerts "vegetable"
+							alert (foodLookup ['quinoa']);    // alerts "grain"
+							.................................................................................
+
+							In the above example, a food lookup object is created initially from the =fruits= array. Then, entries are added to the =foodLookup= lookup object by specifying it as the target in two additional calls to the =Uize.lookup= method: one to stirch in lookup entries for the =vegetables= values array, and the other to stitch in entries for the =grains= values array. Also note that different lookup values are being used in each case, allowing the =foodLookup= lookup object to be used to look up the food type from the food name.
+
+						Create an Empty Safe Lookup Object
+							An empty safe lookup object can be created by specifying the value =null= for the =valuesARRAY= parameter, the value =1= for the =lookupValueANYTYPE= second parameter, and the value =true= for the =safeBOOL= third parameter.
+
+							SYNTAX
+							...........................................
+							emptyLookupOBJ = Uize.lookup (null,1,true);
+							...........................................
+
+							By specifying the value =null= for the =valuesARRAY= parameter, the resulting lookup object will have no lookup entries. Since the resulting lookup will have no entries, the value specified for the =lookupValueANYTYPE= second parameter is arbitrary, since this value won't be used - the value =1= is nice and concise.
 
 						A Real World Example
-							Creating a lookup object is useful when repeatedly checking to see if values are in a defined values set. Looping through that defined values set array for each of the lookups would result in poor performance if the set of values to scan through is large, and if the lookup is being performed frequently.
+							Creating a lookup object is useful when repeatedly checking to see if values are in a defined values set.
+
+							Looping through that defined values set array for each of the lookups would result in poor performance if the set of values to scan through is large, and if the lookup is being performed frequently.
 
 							Let's consider an example...
 
@@ -3053,22 +3232,6 @@
 							.........................................................
 
 							In the improved version, a lookup object (aka hash table) is created before the loop. Then, in the loop, all that is needed to see if a value being inspected is in the master list is to do a simple dereference into the lookup object, using the value as the key / property name. Here the complexity is O(n), since indexing into the lookup object is constant time.
-
-						Example Using Optional Target
-							.................................................................................
-							var
-								fruits = ['apple','apricot','orange','peach','pear','watermelon'],
-								vegetables = ['beet','broccoli','cauliflower','onion','potato','squash'],
-								grains = ['barley','maize','oats','quinoa','rice','sorghum','wheat']
-								foodLookup = Uize.lookup (fruits,'fruit')
-							;
-							Uize.lookup (vegetables,'vegetable',foodLookup); // stitch in keys for vegetables
-							Uize.lookup (grains,'grain',foodLookup);         // stitch in keys for grains
-
-							alert (foodLookup ['apricot']);   // alerts "fruit"
-							alert (foodLookup ['broccoli']);  // alerts "vegetable"
-							alert (foodLookup ['quinoa']);    // alerts "grain"
-							.................................................................................
 			*/
 		);
 
@@ -3811,6 +3974,99 @@
 						- see also the other `Value Testing Methods`
 			*/
 		);
+
+		_nonInheritableStatic ('nop',new Function);
+			/*?
+				Static Methods
+					Uize.nop
+						A dummy function that performs no operation and returns no value (which is effectively the same as returning the value =undefined=).
+
+						SYNTAX
+						..........................
+						resultUNDEF = Uize.nop ();
+						..........................
+
+						The =Uize.nop= method is named after the [[http://en.wikipedia.org/wiki/Nop][NOP (No Operation Performed)]] assembly language instruction. This method can be provided as a callback to methods that require a callback function and may fail if one is not provided, but where you don't need anything to be executed in the callback. You could always provide your own empty anonymous function, but =Uize.nop= is provided for your convenience and it can be shared across all instances where an empty function needs to be provided.
+
+						EXAMPLE
+						............................
+						serviceRequest ({
+							serviceParams:{
+								// service params here
+							},
+							callback:Uize.nop
+						});
+						............................
+
+						NOTES
+						- see also the companion =Uize.returnTrue= static method
+						- see the related =Uize.returnFalse= and =Uize.returnTrue= static methods
+			*/
+
+		_nonInheritableStatic ('returnFalse',new Function ('return false'));
+			/*?
+				Static Methods
+					Uize.returnFalse
+						A dummy function that always returns the boolean value =false=, and that can be useful as an event handler or in other situations.
+
+						SYNTAX
+						................................
+						falseBOOL = Uize.returnFalse ();
+						................................
+
+						This method can be assigned to event handlers to cancel their default action, as in the following example...
+
+						EXAMPLE
+						..................................
+						myNode.onclick = Uize.returnFalse;
+						..................................
+
+						If you are cancelling the default action for many nodes in a page, then using this static method allows you to share a single function - by reference - across all these nodes.
+
+						NOTES
+						- see also the companion =Uize.returnTrue= static method
+						- see the related =Uize.nop= static method
+			*/
+
+		_nonInheritableStatic ('returnTrue',new Function ('return true'));
+			/*?
+				Static Methods
+					Uize.returnTrue
+						A dummy function that always returns the boolean value =true=, and that can be useful as an event handler or in other situations.
+
+						SYNTAX
+						..............................
+						trueBOOL = Uize.returnTrue ();
+						..............................
+
+						This method can be assigned to event handlers to enable their default action, as in the following example...
+
+						EXAMPLE
+						.................................
+						myNode.onclick = Uize.returnTrue;
+						.................................
+
+						If you are enabling the default action for many nodes in a page, then using this static method allows you to share a single function - by reference - across all these nodes.
+
+						NOTES
+						- see also the companion =Uize.returnFalse= static method
+						- see the related =Uize.nop= static method
+			*/
+
+		_nonInheritableStatic ('returnX',new Function ('x','return x'));
+			/*?
+				Static Methods
+					Uize.returnX
+						A dummy function that accepts a single argument =x= and returns the value of that argument unchanged.
+
+						SYNTAX
+						...................................
+						xANYTYPE = Uize.returnX (xANYTYPE);
+						...................................
+
+						NOTES
+						- see the related =Uize.nop=, =Uize.returnFalse=, and =Uize.returnTrue= static methods
+			*/
 
 		_nonInheritableStatic (
 			'module',

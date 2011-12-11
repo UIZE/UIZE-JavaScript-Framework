@@ -87,7 +87,7 @@ Uize.module({
 				return _value == 'TRUE' || _value == 'ON' || _value == '1';
 			}
 
-		/*** Global Variables ***/
+		/*** General Variables ***/
 			var
 				/*** token types ***/
 					_NONE = 0,

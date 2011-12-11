@@ -167,7 +167,7 @@ Uize.module ({
 
     /*** Public Methods ***/
       // NOTE: can be overidden by subclasses
-      _classPrototype.fireOkOnEnter = function () {return _true};
+      _classPrototype.fireOkOnEnter = Uize.returnTrue;
 
       _classPrototype.checkIsEmpty = function() { return this._value == _null || this._value == '' };
       

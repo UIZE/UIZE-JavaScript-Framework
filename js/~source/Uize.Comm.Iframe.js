@@ -41,7 +41,7 @@ Uize.module ({
 				_classPrototype = _class.prototype
 			;
 
-		/*** Global Variables ***/
+		/*** General Variables ***/
 			var _iframeId;
 
 		/*** Public Instance Methods ***/

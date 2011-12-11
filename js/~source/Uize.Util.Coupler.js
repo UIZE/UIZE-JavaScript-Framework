@@ -72,7 +72,7 @@ Uize.module ({
 	name:'Uize.Util.Coupler',
 	superclass:'Uize',
 	builder:function (_superclass) {
-		/*** Global Variables ***/
+		/*** General Variables ***/
 			var _syncFunctions = {};
 
 		/*** Class Constructor ***/

@@ -44,7 +44,7 @@ Uize.module({
 				_Uize_String_limitLength = Uize.String.limitLength
 			;
 
-		/*** Global Variables ***/
+		/*** General Variables ***/
 			var
 				_bulletCharRegExpStr = '[-\\*~:\\.]',
 				_bulletCharRegExp = new RegExp (_bulletCharRegExpStr),

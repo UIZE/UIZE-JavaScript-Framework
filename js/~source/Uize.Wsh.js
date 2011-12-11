@@ -63,7 +63,7 @@ Uize.module ({
 
 			_package.getFiles = function (_folderPath,_filePathMatcher,_filePathTransformer) {
 				var _resolvedFilePathMatcher = _filePathMatcher == _undefined
-					? function () {return true}
+					? Uize.returnTrue
 					: _filePathMatcher instanceof RegExp
 						? function (_filePath) {return _filePathMatcher.test (_filePath)}
 						: _filePathMatcher

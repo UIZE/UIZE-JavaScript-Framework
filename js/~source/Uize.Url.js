@@ -36,7 +36,7 @@ Uize.module ({
 				_Uize_isArray = Uize.isArray
 			;
 
-		/*** Global Variables ***/
+		/*** General Variables ***/
 			var
 				_sacredEmptyArray = [],
 				_sacredEmptyObject = {},

@@ -48,7 +48,7 @@ Uize.module ({
 				_Uize_Node = Uize.Node
 			;
 
-		/*** Global Variables ***/
+		/*** General Variables ***/
 			var _imagesCached = {};
 
 		/*** Class Constructor ***/

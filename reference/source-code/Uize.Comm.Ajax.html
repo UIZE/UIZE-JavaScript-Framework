@@ -62,8 +62,8 @@ Uize.module ({
         _classPrototype = _class.prototype
       ;
 
-    /*** Global Variables ***/
-      var _doNothing = new Function;
+    /*** General Variables ***/
+      var _nop = Uize.nop;
 
     /*** Public Instance Methods ***/
       _classPrototype.performRequest = function (_request,_callback) {
@@ -93,7 +93,7 @@ Uize.module ({
           ;
         _this._xmlHttpRequest.onreadystatechange = function () {
           if (_this._xmlHttpRequest.readyState == 4) {
-            _this._xmlHttpRequest.onreadystatechange = _doNothing;
+            _this._xmlHttpRequest.onreadystatechange = _nop;
             if (_this._xmlHttpRequest.status == 200) {
               var _responseText = _this._xmlHttpRequest.responseText;
               if (_returnTypeIsObject || _returnType == 'xml')

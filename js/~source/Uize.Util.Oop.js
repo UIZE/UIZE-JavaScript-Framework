@@ -36,7 +36,7 @@ Uize.module ({
 				_isFunction = Uize.isFunction
 			;
 
-		/*** Global Variables ***/
+		/*** General Variables ***/
 			var
 				_sacredEmptyArray = [],
 				_typicalPackageFunction = function () {},

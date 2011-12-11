@@ -115,7 +115,7 @@ Uize.module ({
 				_undefined
 			;
 
-		/*** Global Variables ***/
+		/*** General Variables ***/
 			var _optionDefaults = {
 				columns:'all',              // 'all' | an array of column names
 				hasHeader:false,            // true | false

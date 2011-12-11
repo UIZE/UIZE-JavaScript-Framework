@@ -163,10 +163,10 @@ Uize.module ({
           _this = this,
           _itemSpecifier = _params.itemSpecifier,
           _itemDelimiter = _this._itemDelimiter,
-          _doNothing = function () {},
-          _itemHandler = _params.itemHandler || _doNothing,
-          _beforeSubItemsHandler = _params.beforeSubItemsHandler || _doNothing,
-          _afterSubItemsHandler = _params.afterSubItemsHandler || _doNothing
+          _nop = Uize.nop,
+          _itemHandler = _params.itemHandler || _nop,
+          _beforeSubItemsHandler = _params.beforeSubItemsHandler || _nop,
+          _afterSubItemsHandler = _params.afterSubItemsHandler || _nop
         ;
         function _traverseItem (_item,_itemSpecifier,_depth) {
           _itemHandler (_item,_itemSpecifier,_depth);

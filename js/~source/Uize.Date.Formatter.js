@@ -292,7 +292,7 @@ Uize.module ({
 				_Uize_Date = Uize.Date
 			;
 
-		/*** Global Variables ***/
+		/*** General Variables ***/
 			var
 				_tokenMatcherRegExp,
 				_tokenNameToValueRegExpString = {

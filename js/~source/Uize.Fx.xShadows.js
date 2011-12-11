@@ -380,7 +380,7 @@ Uize.module ({
 		'Uize.Node'
 	],
 	builder:function (_package) {
-		/*** Global Variables ***/
+		/*** General Variables ***/
 			var
 				_extension = function () {},
 				_shadowPropertiesRegExp,

@@ -412,7 +412,7 @@ Uize.module ({
 								'line 2\r' +
 								'line 3\r\n' +
 								'line 4',
-								function (_line,_linebreakChars,_lineNo) {return false}
+								Uize.returnFalse
 							],
 							''
 						],
@@ -422,7 +422,7 @@ Uize.module ({
 								'line 2\r' +
 								'line 3\r\n' +
 								'line 4',
-								function (_line,_linebreakChars,_lineNo) {return true}
+								Uize.returnTrue
 							],
 							'line 1\n' +
 							'line 2\r' +
@@ -839,7 +839,7 @@ Uize.module ({
 								'3: line 3\n' +
 								'line 4'
 								,
-								function () {return false}
+								Uize.returnFalse
 							],
 							'line 1\n' +
 							'2: line 2\n' +
@@ -853,7 +853,7 @@ Uize.module ({
 								'3: line 3\n' +
 								'line 4'
 								,
-								function () {return true}
+								Uize.returnTrue
 							],
 							''
 						],
@@ -960,7 +960,7 @@ Uize.module ({
 								'3: line 3\n' +
 								'line 4'
 								,
-								function () {return false}
+								Uize.returnFalse
 							],
 							''
 						],
@@ -971,7 +971,7 @@ Uize.module ({
 								'3: line 3\n' +
 								'line 4'
 								,
-								function () {return true}
+								Uize.returnTrue
 							],
 							'line 1\n' +
 							'2: line 2\n' +

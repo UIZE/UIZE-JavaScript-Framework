@@ -47,8 +47,8 @@ Uize.module ({
 				_undefined
 			;
 
-		/*** Private Variables ***/
-			var _objectTaggerValue = {fuckyou:1};
+		/*** General Variables ***/
+			var _objectTaggerValue = {};
 
 		/*** Public Static Methods ***/
 			_package.dedupe = function (_source,_canonicalizer,_target) {

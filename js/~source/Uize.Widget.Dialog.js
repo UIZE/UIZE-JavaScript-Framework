@@ -45,7 +45,7 @@ Uize.module ({
 				_Uize_Widget_Drag = _Uize_Widget.Drag
 			;
 
-		/*** Global Variables ***/
+		/*** General Variables ***/
 			var
 				_sacredEmptyObject = {},
 				_zIndexSlots = {},
@@ -342,7 +342,7 @@ Uize.module ({
 
 		/*** Public Instance Methods ***/
 			/*** Hook Methods for Uize.Widget.Dialog.xResizable ***/
-				_classPrototype.atEndOfOmegaStructor = _classPrototype.afterWireUi = function () {};
+				_classPrototype.atEndOfOmegaStructor = _classPrototype.afterWireUi = Uize.nop;
 
 			_classPrototype.updateUi = function () {
 				var _this = this;

@@ -163,7 +163,7 @@ Uize.module ({
 		/*** Variables for Scruncher Optimization ***/
 			var _undefined;
 
-		/*** Global Variables ***/
+		/*** General Variables ***/
 			var
 				_sacredEmptyArray = [],
 				_sacredEmptyObject = {}

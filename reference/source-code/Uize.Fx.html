@@ -76,7 +76,7 @@ Uize.module ({
         _undefined
       ;
 
-    /*** Global Variables ***/
+    /*** General Variables ***/
       var
         _stylePropertiesProfiles = [],
         _stylePropertiesProfilesMap,
@@ -534,8 +534,8 @@ Uize.module ({
     /*** Initialization ***/
       /*** fallback ***/
         _defineStylePropertiesProfile ({
-          test:Uize.Node.returnTrue,
-          decoder:function (_value) {return _value},
+          test:Uize.returnTrue,
+          decoder:Uize.returnX,
           encoderExpression:'VALUE'
         });
 

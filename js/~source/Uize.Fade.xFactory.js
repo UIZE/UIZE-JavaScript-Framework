@@ -43,7 +43,7 @@ Uize.module ({
 				_Uize_totalKeys = Uize.totalKeys
 			;
 
-		/*** Global Variables ***/
+		/*** General Variables ***/
 			var _fadePool = [];
 
 		/*** Public Static Methods ***/

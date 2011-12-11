@@ -160,7 +160,7 @@ Uize.module ({
 										if (_inputNodeForm) {
 											_this._storedFormOnsubmit = _inputNodeForm.onsubmit;
 											_this._blockedFormSubmit = _true;
-											_inputNodeForm.onsubmit = Uize.Node.returnFalse;
+											_inputNodeForm.onsubmit = Uize.returnFalse;
 										}
 									}
 								},

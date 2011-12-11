@@ -622,10 +622,10 @@ Uize.module ({
 				_false = false
 			;
 
-		/*** Global Variables ***/
+		/*** General Variables ***/
 			var _virtualDomEventsByName = {};
 
-		/*** Global Functions ***/
+		/*** Utility Functions ***/
 			function _getCondensedEventName (_eventName) {
 				return _eventName.toLowerCase ().replace (/\s+/g,'');
 			}

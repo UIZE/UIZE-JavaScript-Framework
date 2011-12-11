@@ -42,10 +42,11 @@ Uize.module ({
 					_true = true,
 					_false = false,
 					_typeString = 'string',
-					_isFunction = Uize.isFunction,
+					_Uize = Uize,
+					_isFunction = _Uize.isFunction,
 					_concatenated = 'concatenated',
 					_undefined,
-					_Uize_Node = Uize.Node,
+					_Uize_Node = _Uize.Node,
 					_Uize_Node_doForAll = _Uize_Node.doForAll,
 
 				/*** References for Performance Optimization ***/
@@ -64,7 +65,7 @@ Uize.module ({
 								var _declarativeWidgetProperties =
 									_this._harvestDeclarativeWidgetProperties (_properties.idPrefix,_properties.parent)
 								;
-								_declarativeWidgetProperties && Uize.copyInto (_properties,_declarativeWidgetProperties);
+								_declarativeWidgetProperties && _Uize.copyInto (_properties,_declarativeWidgetProperties);
 
 							delete _properties.widgetClass;
 						}
@@ -165,14 +166,14 @@ Uize.module ({
 			};
 
 			_classPrototype._tryUseConfirmInheritedFromTree = function (_mode,_params,_builtInConfirmFallback) {
-				var _promptMethodName = 'show' + Uize.capFirstChar (_mode);
+				var _promptMethodName = 'show' + _Uize.capFirstChar (_mode);
 				this.getProvider (_promptMethodName)
 					? this.callInherited (_promptMethodName) (_params)
 					:
 						setTimeout (
 							function () {
 								var _confirmed = _builtInConfirmFallback ();
-								(_params.callback || (_confirmed ? _params.yesHandler : _params.noHandler) || function () {})
+								(_params.callback || (_confirmed ? _params.yesHandler : _params.noHandler) || _Uize.nop)
 								(_confirmed)
 							},
 							0
@@ -317,7 +318,7 @@ Uize.module ({
 			_classPrototype.ajax = function (_serviceParams,_requestParams) {
 				this.callInherited ('performAjax') (
 					_serviceParams,
-					Uize.isFunction (_requestParams) ? {callback:_requestParams} : _requestParams || {}
+					_Uize.isFunction (_requestParams) ? {callback:_requestParams} : _requestParams || {}
 				)
 				/*?
 					Instance Methods
@@ -444,7 +445,7 @@ Uize.module ({
 				return (
 					_isFunction (_localizedResource)
 						? _localizedResource.call (this,_substitutions)
-						: Uize.substituteInto (_localizedResource,_substitutions,_tokenNaming || '{KEY}')
+						: _Uize.substituteInto (_localizedResource,_substitutions,_tokenNaming || '{KEY}')
 				);
 				/*?
 					Instance Methods
@@ -585,9 +586,9 @@ Uize.module ({
 								The optional =shell= implied node for a widget instance provides a "slot" in the document into which markup for that instance can be inserted.
 					*/
 					if (_html === _true) {
-						_html = _this._html = Uize.Template && _nodeToInjectInto
+						_html = _this._html = _Uize.Template && _nodeToInjectInto
 							? {
-								process:Uize.Template.compile (
+								process:_Uize.Template.compile (
 									(
 										_Uize_Node.find ({root:_nodeToInjectInto,tagName:'SCRIPT',type:'text/jst'}) [0] ||
 										_nodeToInjectInto
@@ -601,9 +602,9 @@ Uize.module ({
 					}
 					_this._idPrefix || _this.set ({_idPrefix:_this.instanceId});
 					var
-						_templateInput = Uize.copyInto (
+						_templateInput = _Uize.copyInto (
 						{
-							pathToResources:Uize.pathToResources,
+							pathToResources:_Uize.pathToResources,
 							blankGif:_class.getBlankImageUrl ()
 						},
 						_alternateTemplateInput || _this.get ()
@@ -616,9 +617,9 @@ Uize.module ({
 							? _html.process.call (_this,_templateInput)
 							: _isFunction (_html)
 								? typeof (_htmlFuncOutput = _html (_templateInput)) === 'string'
-									? Uize.substituteInto (_htmlFuncOutput, _templateInput)
+									? _Uize.substituteInto (_htmlFuncOutput, _templateInput)
 									: _htmlFuncOutput
-								: Uize.substituteInto (_html, _templateInput)
+								: _Uize.substituteInto (_html, _templateInput)
 						,
 						_this._insertionMode || (_nodeToInjectInto ? 'inner replace' : 'inner bottom')
 					);
@@ -1314,7 +1315,7 @@ Uize.module ({
 					var
 						_this = this,
 						_idPrefix = _this._idPrefix,
-						_child = Uize.isInstance (_childInstanceOrClass) ? _childInstanceOrClass : _null,
+						_child = _Uize.isInstance (_childInstanceOrClass) ? _childInstanceOrClass : _null,
 						_childIdPrefix = 'idPrefix' in _properties ? _properties.idPrefix : _properties.node,
 						_childIdPrefixConstruction = _properties.idPrefixConstruction
 					;
@@ -1341,7 +1342,7 @@ Uize.module ({
 							_unappliedChildrenPropertiesForChild = _unappliedChildrenProperties [_childName]
 						;
 						if (_unappliedChildrenPropertiesForChild) {
-							Uize.copyInto (_properties,_unappliedChildrenPropertiesForChild);
+							_Uize.copyInto (_properties,_unappliedChildrenPropertiesForChild);
 							delete _unappliedChildrenProperties [_childName];
 						}
 
@@ -1388,7 +1389,7 @@ Uize.module ({
 					var
 						_children = this._children,
 						_childName =
-							typeof _childNameOrInstance == _typeString || Uize.isNumber (_childNameOrInstance)
+							typeof _childNameOrInstance == _typeString || _Uize.isNumber (_childNameOrInstance)
 								? _childNameOrInstance
 								: _childNameOrInstance._name,
 						_child = _children [_childName]
@@ -1536,7 +1537,7 @@ Uize.module ({
 
 			/*** Overridable Wiring and Updating Methods ***/
 				_classPrototype.kill = function () {
-					Uize.callOn (this._children,'kill');
+					_Uize.callOn (this._children,'kill');
 					_superclass.prototype.kill.call (this);
 					/*?
 						Instance Methods
@@ -1594,7 +1595,7 @@ Uize.module ({
 					this.removeNode ();
 					_Uize_Node.remove (this._globalizedNodes);
 					this._globalizedNodes = _undefined;
-					Uize.callOn (this._children,'removeUi');
+					_Uize.callOn (this._children,'removeUi');
 					this.set ({_built:_false});
 					/*?
 						Instance Methods
@@ -1635,7 +1636,7 @@ Uize.module ({
 						this.set ({wired:_true});
 
 						/*** wire or insert UI of children ***/
-							Uize.callOn (this._children,'insertOrWireUi');
+							_Uize.callOn (this._children,'insertOrWireUi');
 
 						this.updateUi ();
 					}
@@ -1675,7 +1676,7 @@ Uize.module ({
 					if (this.isWired) {
 						this._nodeCache = _null;
 						this.unwireNode ();
-						Uize.callOn (this._children,'unwireUi');
+						_Uize.callOn (this._children,'unwireUi');
 						this.set ({wired:_false});
 					}
 					/*?
@@ -1695,7 +1696,7 @@ Uize.module ({
 
 		/*** Public Static Methods ***/
 			_class.getBlankImageUrl = function () {
-				return Uize.pathToResources + 'Uize/blank.gif';
+				return _Uize.pathToResources + 'Uize/blank.gif';
 				/*?
 					Static Methods
 						Uize.Widget.getBlankImageUrl
@@ -1717,7 +1718,7 @@ Uize.module ({
 					_parentIdPrefixPlusLength = _parentIdPrefixPlus.length
 				;
 				_Uize_Node_doForAll (
-					Uize.Node.find (_properties.idPrefix),
+					_Uize.Node.find (_properties.idPrefix),
 					function (_node) {
 						_properties.idPrefix = _node;
 						_parent
@@ -1725,7 +1726,7 @@ Uize.module ({
 								_instance = _parent.addChild (
 									_node.id.slice (0,_parentIdPrefixPlusLength) == _parentIdPrefixPlus
 										? _node.id.slice (_parentIdPrefixPlusLength)
-										: 'generatedChildName' + Uize.getGuid (),
+										: 'generatedChildName' + _Uize.getGuid (),
 									_this,
 									_properties
 								)
@@ -1829,7 +1830,7 @@ Uize.module ({
 				},
 				_busyInherited:{
 					name:'busyInherited',
-					onChange:function () {Uize.callOn (this._children,_classPrototype._checkBusyInherited)},
+					onChange:function () {_Uize.callOn (this._children,_classPrototype._checkBusyInherited)},
 					value:_false
 					/*?
 						Set-get Properties
@@ -1901,7 +1902,7 @@ Uize.module ({
 				},
 				_enabledInherited:{
 					name:'enabledInherited',
-					onChange:function () {Uize.callOn (this._children,_classPrototype._checkEnabledInherited)},
+					onChange:function () {_Uize.callOn (this._children,_classPrototype._checkEnabledInherited)},
 					value:_true
 					/*?
 						Set-get Properties
@@ -1977,7 +1978,11 @@ Uize.module ({
 						/* NOTE:
 							if the idPrefix is a node reference, convert it to a string whose value is the id of the node
 						*/
-						return _Uize_Node_isNode (_idPrefix) ? (_idPrefix.id || (_idPrefix.id = Uize.getGuid ())) : _idPrefix;
+						return (
+							_Uize_Node_isNode (_idPrefix)
+							? (_idPrefix.id || (_idPrefix.id = _Uize.getGuid ()))
+							: _idPrefix
+						);
 					},
 					onChange:function () {
 						var

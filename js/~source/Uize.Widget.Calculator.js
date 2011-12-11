@@ -320,7 +320,7 @@ Uize.module ({
 				_undefined
 			;
 
-		/*** Global Variables ***/
+		/*** General Variables ***/
 			var
 				_binaryOperatorsMap = {divide:1,multiply:1,subtract:1,add:1},
 				_unaryOperatorsMap = {negate:1,percent:1,squareRoot:1},

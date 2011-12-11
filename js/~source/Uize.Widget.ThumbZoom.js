@@ -48,7 +48,7 @@ Uize.module ({
 				_Uize_Widget = Uize.Widget
 			;
 
-		/*** Global Variables ***/
+		/*** General Variables ***/
 			var _shield;
 
 		/*** Class Constructor ***/
@@ -292,7 +292,7 @@ Uize.module ({
 						_Uize_Node.doForAll (
 							_Uize_Node.find (_this._thumbNodes),
 							function (_node) {
-								_node.onclick = _Uize_Node.returnFalse;
+								_node.onclick = Uize.returnFalse;
 								_this.wireNode (_node,'click',_handleThumbNodeClick);
 							}
 						);
