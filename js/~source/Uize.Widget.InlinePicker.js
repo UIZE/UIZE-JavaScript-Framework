@@ -52,7 +52,7 @@ Uize.module ({
 						;
 
 						// Sync value & value details back and forth with value widget
-						new Uize.Util.Coupler({
+						Uize.Util.Coupler({
 							instances:[_this, _valueWidget],
 							properties:['value', 'valueDetails', 'tentativeValue', 'tentativeValueDetails']
 						});

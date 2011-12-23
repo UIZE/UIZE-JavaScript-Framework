@@ -423,7 +423,7 @@ Uize.module ({
 											/*** initiate zoom in fade ***/
 												/*** create and set up fade instance (if not already created) ***/
 													_this._fade ||
-														(_this._fade = new Uize.Fade).wire (
+														(_this._fade = Uize.Fade ()).wire (
 															'Changed.value',
 															function () {_this.set ({_displayedZoomPower:+_this._fade})}
 														)

@@ -39,7 +39,7 @@ Uize.module ({
 
 				output.push ('\r\n	</li>');
 				 }
-				output.push ('\r\n</ul>\r\n\r\n</div>\r\n\r\n<script type="text/javascript">\r\n\r\nUize.module ({\r\n	required:[\r\n		\'UizeDotCom.Page.Doc.library\',\r\n		\'UizeDotCom.Page.Index\'\r\n	],\r\n	builder:function () {(window.page = new UizeDotCom.Page.Index).wireUi ()}\r\n});\r\n\r\n</script>\r\n\r\n</body></html>\r\n');
+				output.push ('\r\n</ul>\r\n\r\n</div>\r\n\r\n<script type="text/javascript">\r\n\r\nUize.module ({\r\n	required:[\r\n		\'UizeDotCom.Page.Doc.library\',\r\n		\'UizeDotCom.Page.Index\'\r\n	],\r\n	builder:function () {(window.page = UizeDotCom.Page.Index ()).wireUi ()}\r\n});\r\n\r\n</script>\r\n\r\n</body></html>\r\n');
 				return output.join ('');
 			};
 

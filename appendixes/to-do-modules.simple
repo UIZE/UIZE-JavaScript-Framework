@@ -1,25 +1,43 @@
 This document lists to do tasks related to specific JavaScript modules of the UIZE JavaScript Framework.
 
-## TO FILE
-	Uize.safe = function (_function) {
-		return function () {try {_function.apply (this,arguments)} catch (_error) {}};
-	};
-
-	Uize.cycleCalls = function () {
-		var
-			_functionNo = 0,
-			_arguments = arguments,
-			_totalFunctions = arguments.length
-		;
-		return function () {
-			_arguments [_functionNo].apply (this,arguments);
-			_functionNo = (_functionNo + 1) % _totalFunctions;
-		};
-	}
-
 Uize
-	- Uize.map
-		- support string for _source?
+	Uize.safe
+		Wraps a function in order to protect it from possible JavaScript errors during its execution.
+
+		IMPLEMENTATION
+		......................................................................
+		Uize.safe = function (_function,_returnValueIfError) {
+			var _hasReturnValueIfError = arguments.length > 1;
+			return function () {
+				try {
+					return _function.apply (this,arguments);
+				} catch (_error) {
+					return _hasReturnValueIfError ? _returnValueIfError : _error;
+				}
+			};
+		};
+		......................................................................
+
+		This method catches errors that occur in the function that is being wrapped, returning the error if no value is explicitly specified that should be returned when an errors occur.
+
+	Uize.cycleCalls
+		IMPLEMENTATION
+		........................................................
+		Uize.cycleCalls = function () {
+			var
+				_functionNo = 0,
+				_arguments = arguments,
+				_totalFunctions = arguments.length
+			;
+			return function () {
+				_arguments [_functionNo].apply (this,arguments);
+				_functionNo = (_functionNo + 1) % _totalFunctions;
+			};
+		}
+		........................................................
+
+	Uize.map
+		Add support for _source being a string?
 
 	Uize.TreeWalker
 		An object built into the =Uize= base module that allows you to control walking through an object tree in a safe and performant way.
@@ -29,43 +47,48 @@ Uize
 
 	Quick Win Additions (in order of priority / usefulness)
 		DONE
-			- Uize.map
+			Uize.map
 				- promoted from Uize.Data.map, but with modified signature to make array first
 
 		STILL TO DO
-			- Uize.indexOf, Uize.lastIndexOf
+			Uize.indexOf, Uize.lastIndexOf
 				- essentially derived from indexIn, but adapted to also operate on strings and to use built-in indexOf when possible and supported by JavaScript built-in objects (ie. newer versions of JavaScript)
-			- Uize.indexIn
+
+			Uize.indexIn
 				- adapt to add support for object (ie. which key has specified value)
 				- adapt to fall back to using built-in indexOf or lastIndexOf Array method, when they are present and when comparison is strict
 				- adapt to add support for source being a string
 
-			- Uize.require
+			Uize.require
 				- alias to anonymous module with required (to make the simple case of requiring a module deeper in code more convenient & intuitive)
 
 		LATER
-			- Uize.extend
+			Uize.extend
 				- alias of copyInto, for those who are more comfortable with the extend semantic
-			- Uize.isArrayLike
+
+			Uize.isArrayLike
 				- different name, like isListy or isIterable?
 				- checks to see if value is object and has length property, to ensure object can have any Array method called or applied on it (most native implementations only require a basic / minimal Array like interface to work)
-			- Uize.ensureArray
+
+				Uize.ensureArray
 				- ensures that the value is an array
 				- if the value is already an array, then it is simply returned
 				- if the value is an arguments object, then an array is created from it
 				- if the value is any other type, then a new array is returned with the value as its single element
 				- this is useful for methods that want to be versatile and support simple value types in addition to arrays, but want to normalize to array of one element for purpose of implementation code
 
-			- Uize.ensureIn
+			Uize.ensureIn
 				- checks to see if an element is present, and adds it if not
 				- supports adding at beginning or adding at end, with optional where parameter
 
-			- Uize.isStringy
+			Uize.isStringy
 				- returns true if the value is either a string primitive or an instance of a String object or "subclass"
-			- Uize.isTruthy
+
+			Uize.isTruthy
 				- returns true if the value is truthy
 				- useful for methods that accept value matchers
-			- Uize.isFalsy
+
+			Uize.isFalsy
 				- returns true is the value is falsy
 				- useful for methods that accept value matchers
 
@@ -197,9 +220,9 @@ Uize
 		This would provide a more concise and lightweight way of binding properties than using an instance of the =Uize.Util.PropertyAdapter= class.
 
 		INSTEAD OF...
-		....................................................................................
-		new Uize.Util.PropertyAdapter ({propertyA:[this,'prop'],propertyB:[slider,'prop']});
-		....................................................................................
+		................................................................................
+		Uize.Util.PropertyAdapter ({propertyA:[this,'prop'],propertyB:[slider,'prop']});
+		................................................................................
 
 		USE...
 		............................................
@@ -376,11 +399,8 @@ Uize
 		Unbounded
 			Support either or both of the min and max boundaries being =null= or =undefined=.
 
-	- Uize.lookup & Uize.reverseLookup
-		- for =Uize.lookup=, support mode with no parameters that returns an empty safe lookup
-
-	- Uize.reverseLookup
-		- support values for source being arrays
+	Uize.reverseLookup
+		Support values for source being arrays.
 
 			EXAMPLE
 			.................................
@@ -400,7 +420,7 @@ Uize
 			}
 			......................
 
-		- support multiple values for source being the same
+		Support multiple values for source being the same
 
 			EXAMPLE
 			......................
@@ -420,7 +440,7 @@ Uize
 			}
 			.................................
 
-		- support merging in to target
+		Support Merging in to Target
 			- when entries are added to an existing reverse lookup object, use the following rules...
 				- if the desired key to add already exists, then...
 					- if the key's value is not an array, make it an array with the current value as the first element and the desired value to add as the second
@@ -462,18 +482,18 @@ Uize
 		For example, if =Uize.Color= were to become a subclass of =Uize=...
 
 		EXAMPLE
-		................................................
-		new Uize.Color ({value:'#ffffff'});  // old form
-		new Uize.Color ('#ffffff');          // new form
-		................................................
+		............................................
+		Uize.Color ({value:'#ffffff'});  // old form
+		Uize.Color ('#ffffff');          // new form
+		............................................
 
 		Or, in the case of an existing widget class that supports the value interface...
 
 		EXAMPLE
-		.....................................................
-		new Uize.Widget.Bar.Slider ({value:50});  // old form
-		new Uize.Widget.Bar.Slider (50);          // old form
-		.....................................................
+		.................................................
+		Uize.Widget.Bar.Slider ({value:50});  // old form
+		Uize.Widget.Bar.Slider (50);          // old form
+		.................................................
 
 	Uize.clone
 		Optimize Array Cloning
@@ -527,7 +547,10 @@ Uize
 
 	- idea: a way to track whether a user originated an event. Sufficient to check on the presence of domEvent property? domEvent property should be propagated all the way up.
 
-	- new and more concise semantics for calling methods on superclass
+	Improve Calling of Superclass Methods
+		Come up with a new and more concise semantics for calling methods on superclass.
+
+		POSSIBILITIES
 		................................................................................
 		_this.doIn (_superclass,'wireUi');
 
@@ -603,6 +626,17 @@ Uize.Array
 
 			- support for optional sort value comparison function
 				This allows more sophisticated sorts. For example, with an alphanumerical (as opposed to ASCIIbetical) sort, the sort value generator function may do the work of parsing each element value into a set of number and non-number segments, and then the value comparison function can deal with comparing two sort values that may have different structure. In other words, the sort values generated cannot be compared by a simple a < b logical comparison.
+
+		Uize.Array.Sort.indexBy
+			Returns the index of a value in an array that is sorted by the specified sort value generator.
+
+			SYNTAX
+			..................................................................................................
+			indexINT = Uize.Array.Sort.indexBy (valueANYTYPE,targetARRAY,sortValueGeneratorFUNC,directionINT);
+			indexINT = Uize.Array.Sort.indexBy (valueANYTYPE,targetARRAY,sortValueGeneratorSTR,directionINT);
+			indexINT = Uize.Array.Sort.indexBy (valueANYTYPE,targetARRAY,sortColumnINT,directionINT);
+			..................................................................................................
+
 
 		Uize.Array.Sort.insertBy
 			Inserts the specified value, using the specified sort value generator to determine at which spot to insert it.
@@ -828,15 +862,15 @@ Uize.Css
 		Uize.Css.Border
 
 Uize.Curve.Mod
-	- Uize.Curve.Mod.tame
+	Uize.Curve.Mod.tame
 		- a curve function modifier that...
 			- constrains a curve function so that its values are in the range of =0= to =1=
 			- guarantees that the value =0= is returned for the input value of =0=, and that the value =1= is returned for the input value of =1=
 
-	- Uize.Curve.Mod.Sample
+	Uize.Curve.Mod.Sample
 		- generates a curve function that is a sample, with a specifiable degree of precision, of the specified curve function. This could be useful for curve functions that are performance intensive and where a finite precision might be acceptable. Can be lazy in generation, so values are only generated when needed - perhaps this is a parameter. Also possibly a parameter for interpolation between sample points when using curve function.
 
-	- Uize.Curve.Mod.noise
+	Uize.Curve.Mod.noise
 		- possible implementation...
 			................................................................................
 			_package.noise = function (_curveFunction,_noiseLevel) {
@@ -889,7 +923,7 @@ Uize.Curve.Plot
 				- if curve property is not present, use interpolationCurveFUNC
 
 Uize.Data
-	- Uize.Data.safeLookup
+	Uize.Data.safeLookup
 		- performs a lookup in a lookup object that may not be a safe lookup, so it handles the problems keys
 		- perhaps there should also be a similar Uize.Data.keyIn (or Uize.Data.keyExists) method
 		- possible implementation
@@ -1001,10 +1035,10 @@ Uize.Data
 		_target = _sourceAndTarget._target;
 		................................................................................
 
-	- Uize.Data.structuresMatch
+	Uize.Data.structuresMatch
 		returns true if two objects have the same set of properties and structure
 
-	- Uize.Data.filter
+	Uize.Data.filter
 		- support for new filter types
 			- regular expression type filter
 				- when regular expression is specified for filter, properties are filtered that match the regular expression
@@ -1018,22 +1052,23 @@ Uize.Data
 				- already supported, but need to change implementation? Change implementation for performance, or code size?
 		- support for target property
 
-	- Uize.Data.identical
+	Uize.Data.identical
 		- handle recursion (safeguard against infinite loops). Do this by marking objects / arrays as encountered?
 		- how to support comparison of Uize subclass instances? Is there a meaningful way to do this?
 			- can two instances of classes that support the value interface simply be compared by their respective values?
 			- can two instances of any Uize subclass simply be compared by the values of all their set-get properties?
 
-	- Uize.Data.conjoined
+	Uize.Data.conjoined
 		- improve implementation to use object tagging technique employed in Uize.Array.Dupes
 
-	- Uize.Data.hasCircularity
+	Uize.Data.hasCircularity
 		- tests to see if the object contains circular references / reference loops
 		- for implementation, use object tagging
 
-	- Uize.Data.mapKeys
+	Uize.Data.mapKeys
 		- lets you rename keys in an object
-	- Uise.Data.mapKeyValues
+
+	Uize.Data.mapKeyValues
 		- lets you rename keys and transform values in an object
 
 Uize.Data.Csv
@@ -1048,14 +1083,17 @@ Uize.Date
 	- possibly turn package into an Object
 		- stitch in instance methods from Date object, as is done with the Uize.String.Builder object
 		- make majority of static methods available as instance methods
-	- Uize.Date.resolve
+
+	Uize.Date.resolve
 		- consider expanding dateSTRorOBJ value type to dateSTRorINTorOBJ, in order to support dates specified as POSIX milliseconds
+
 	- refactor tomkidding.com to no longer use Tk.Date
 	- localization
 
 	- possible new methods...
 		- Uize.Date.is - determines if specified value is a valid date (could be used by Uize.Widget.TableSort in checking for valid date columns)
-	- Uize.Date.getRange
+
+	Uize.Date.getRange
 		- support more range types
 			- range, neatly bound
 				- start to end
@@ -1076,14 +1114,17 @@ Uize.Date
 				- 0: starting at
 				- .5: range with date in middle
 				- 1: ending at
-	- Uize.Date.isRecent
+
+	Uize.Date.isRecent
 		- ability to specify time unit for recency window (default to days)
 		- right now, always checks if specified date is recent, relative to now - could also allow reference point date to be specified
 		- right now, you can check if date is within a time window before or after now -- what about date being "around" now (ie. in a window some time leading up to and some time past now)
-	- Uize.Date.constrain
+
+	Uize.Date.constrain
 		- constrain a date to a specified Date range
-	- Uize.Date.inRange
-		- could be refactored to make use of new Uize.Date.constrain method
+
+	Uize.Date.inRange
+		- could be refactored to make use of new =Uize.Date.constrain= method
 			return +(_date = _resolve (_date)) == +_package.constrain (_date,_range)
 		- benefit would be smaller implementation, and Uize.Date.constrain would support ranges where minValue is after maxValue, because it would use Uize.constrain in its implementation
 
@@ -1242,7 +1283,7 @@ Uize.Fx
 	- for all style properties that can be animated by this module, it would be useful if parsing and serializing of the style properties was available outside of the context of just fading for FX purposes
 		- perhaps a Uize.Css module (see Uize.Css)?
 
-	- Uize.Fx.fadeStyle
+	Uize.Fx.fadeStyle
 		- ability to take over fading of certain style properties from active fades
 		- look into support for HSL color fades
 			- with true support, not just initial conversion to RGB
@@ -1318,7 +1359,7 @@ Uize.Generator
 		- a generator should be able to register its inputs
 		- a generator should not assume the context of its usage, so it should be able to operate on the server side or in a non HTML document context
 
-	- Uize.Generator implements simply...
+	Uize.Generator implements simply...
 		- set-get properties
 			- asynchronous
 			- params
@@ -1340,43 +1381,43 @@ Uize.Generator
 			- a generator should be able to leverage other generators in the process of generating their output
 			- generators should be able to register their input interface
 
-		- Uize.Generator (base class)
+		Uize.Generator (base class)
 			- params
 
-		- Uize.Generator.Basic (utilizing basic substitution)
+		Uize.Generator.Basic (utilizing basic substitution)
 			- params
 			- templateStr
 
 			EXAMPLE
 			................................................................................
-			new Uize.Generator.Basic ({
+			Uize.Generator.Basic ({
 				params:['property1','property2'],
 				templateStr:'This template supports [#property1] and [#property2]'
 			});
 			................................................................................
 
-		- Uize.Generator.Tokenized
+		Uize.Generator.Tokenized
 			- params
 			- templateStr
 			- tokenNaming
 
 			EXAMPLE
 			................................................................................
-			new Uize.Generator.Tokenized ({
+			Uize.Generator.Tokenized ({
 				params:['property1','property2'],
 				templateStr:'This template supports {property1} and {property2}',
 				tokenNaming:'{KEY}'
 			})
 			................................................................................
 
-		- Uize.Generator.Population
+		Uize.Generator.Population
 			- params
 			- templateStr
 			- templateItem
 
 			EXAMPLE
 			................................................................................
-			new Uize.Generator.Population ({
+			Uize.Generator.Population ({
 				params:['property1','property2'],
 				templateStr:'This template supports property1Value and property2Value',
 				templateItem:{
@@ -1386,12 +1427,12 @@ Uize.Generator
 			})
 			................................................................................
 
-		- Uize.Generator.Function
+		Uize.Generator.Function
 			- generator
 
 			EXAMPLE
 			................................................................................
-			new Uize.Generator.Function ({
+			Uize.Generator.Function ({
 				params:['property1','property2'],
 				generator:
 					function (_params) {
@@ -1400,12 +1441,12 @@ Uize.Generator
 			});
 			................................................................................
 
-		- Uize.Generator.Ajax
+		Uize.Generator.Ajax
 			- serviceUrl
 
 			EXAMPLE
 			................................................................................
-			new Uize.Generator.Ajax ({
+			Uize.Generator.Ajax ({
 				params:['property1','property2'],
 				url:'service/getcomponent?'
 			});
@@ -1417,7 +1458,7 @@ Uize.Generator
 			- no, because it should be able to use whatever the protocol is that's in use?
 			- should defer to page's environment for URLs and comm
 
-		- Uize.Generator.Async
+		Uize.Generator.Async
 			requires a...
 				- comm object
 				- environment for URLs
@@ -1427,7 +1468,7 @@ Uize.Generator
 
 			- to provide the maximum flexibility, the only thing that an async generator needs is a loader
 
-		- Uize.Generator.Http
+		Uize.Generator.Http
 
 Uize.Is
 	................................................................................
@@ -1526,7 +1567,7 @@ Uize.Node
 	Proposed Shortenings
 		- Uize.Node.getById -> Uize.Node.byId or Uize.Node.id or just Uize.Node
 
-	- Uize.Node.setValue & Uize.Node.getValue
+	Uize.Node.setValue & Uize.Node.getValue
 		- respect disabled property?
 			- what about disabled select options, radios?
 			- browsers are not supposed to send values for disabled form elements to the form processor, so should getValue have special handling to mimic this behavior?
@@ -1543,7 +1584,7 @@ Uize.Node
 			- make sure no events are being wired in a way that they wouldn't get unwired
 			- look at moving more child widget creation into constructor rather than wireUi
 
-	- Uize.Node.display
+	Uize.Node.display
 		- IDEA: respecting initial non-none display value
 			................................................................................
 			var currentDisplay = Uize.Node.getStyle (node,'display');
@@ -1557,10 +1598,10 @@ Uize.Node
 			}
 			................................................................................
 
-	- Uize.Node.getProperty
+	Uize.Node.getProperty
 		- should support string for property name, or object for properties
 
-	- Uize.Node.find
+	Uize.Node.find
 		- provide a way to search through a specified set of nodes (so that one can chain searches)
 		- think about supporting node blob for root, or test object for root (ie. invoke find)
 		- think about testing...
@@ -1575,13 +1616,13 @@ Uize.Node
 	- methods that should coerce use of valueOf interface
 		- Uize.Node.setProperties
 
-	- Uize.Node.setStyle
+	Uize.Node.setStyle
 		- when setting opacity, if opacity is 1, set opacity properties to '' (empty string). Some browsers seem to still be processing opacity when set to 1, which is slowing down render time.
 
-	- Uize.Node.getStyle
+	Uize.Node.getStyle
 		- it would be useful to have a way to parse out a number from style attribute values that are denominated in px (eg. 128px -> 128, empty string -> 0)
 
-	- Uize.Node.injectHtml
+	Uize.Node.injectHtml
 		- support a node reference, or document fragment for html parameter
 
 	- for Uize.Node.getCoords, consider deprecating some of the properties of the return object (eg. right, bottom) to simplify the interface (first investigate extent of usage)
@@ -1719,13 +1760,14 @@ Uize.Scruncher
 			- error is in scrunched module that is discretely loaded
 
 Uize.String
-	- Uize.String.lengthize (sourceSTR,lengthINT,alignFLOAT,padBOOL,truncateBOOL,tildeBOOLorSTR)
+	Uize.String.lengthize (sourceSTR,lengthINT,alignFLOAT,padBOOL,truncateBOOL,tildeBOOLorSTR)
 		- how does this relate to Uize.String.limitLength? (is limitLength a special case of lengthize?)
 		- should the defaults for the extended parameters result in it effectively being a pad? If so, should there be a pad method that is just an alias to lengthize?
 
-	- Uize.String.fromCamel
+	Uize.String.fromCamel
+		yeah?
 
-	- Uize.String.toDelimited & Uize.String.fromDelimited
+	Uize.String.toDelimited & Uize.String.fromDelimited
 		Uize.String.[someMethodName]
 			- how are word starts denoted
 				- delimiter character eg. '_', '-', ':'
@@ -1773,9 +1815,10 @@ Uize.String.Lines
 			................................................................................
 
 		Uize.String.Lines.pad
+			document...
 
 		Rearranging Lines
-			- Uize.String.Lines.sort
+			Uize.String.Lines.sort
 				................................................................................
 				function sortMultilineStr (sourceStr) {
 					return (
@@ -1788,7 +1831,8 @@ Uize.String.Lines
 				}
 				................................................................................
 
-			- Uize.String.Lines.reverse
+			Uize.String.Lines.reverse
+				document...
 
 Uize.Template
 	Look Into Supporting Subclassing
@@ -1926,8 +1970,8 @@ Uize.Util.Cycle
 
 Uize.Util.ValueDeriver
 	EXAMPLE
-	.............................
-	new Uize.Util.ValueDeriver ({
+	...........................
+	Uize.Util.ValueDeriver ({
 		inputs:{
 			a:foo,
 			b:bar
@@ -1938,7 +1982,7 @@ Uize.Util.ValueDeriver
 		output:{
 		}
 	});
-	.............................
+	...........................
 
 Uize.Web.ImageLoader
 	- a class that manages loading state for one or more images

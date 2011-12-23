@@ -92,8 +92,9 @@
 					<li><a href="#2_45" title="IMPLEMENTATION INFO">2.45. updateUi</a></li>
 					<li><a href="#2_46" title="Inherited from Uize.Widget.Page.">2.46. useDialog</a></li>
 					<li><a href="#2_47" title="Inherited from Uize.">2.47. wire</a></li>
-					<li><a href="#2_48" title="Inherited from Uize.Widget.">2.48. wireNode</a></li>
-					<li><a href="#2_49" title="IMPLEMENTATION INFO">2.49. wireUi</a></li>
+					<li><a href="#2_48" title="Inherited from Uize.Widget.Page.">2.48. wireDeferredLinks</a></li>
+					<li><a href="#2_49" title="Inherited from Uize.Widget.">2.49. wireNode</a></li>
+					<li><a href="#2_50" title="IMPLEMENTATION INFO">2.50. wireUi</a></li>
 				</ul>
 			</li>
 			<li><a href="#3">3. Set-get Properties</a>
@@ -105,21 +106,23 @@
 					<li><a href="#3_5" title="Inherited from Uize.Widget.">3.5. children</a></li>
 					<li><a href="#3_6" title="IMPLEMENTATION INFO">3.6. confirmDialog</a></li>
 					<li><a href="#3_7" title="Inherited from Uize.Widget.">3.7. container</a></li>
-					<li><a href="#3_8" title="Inherited from Uize.Widget.Page.">3.8. dialogProperties</a></li>
-					<li><a href="#3_9" title="Inherited from Uize.Widget.">3.9. enabled</a></li>
-					<li><a href="#3_10" title="Inherited from Uize.Widget.">3.10. enabledInherited</a></li>
-					<li><a href="#3_11" title="Inherited from Uize.Widget.">3.11. html</a></li>
-					<li><a href="#3_12" title="Inherited from Uize.Widget.Page, but introduced in Uize.Widget.">3.12. idPrefix</a></li>
-					<li><a href="#3_13" title="Inherited from Uize.Widget.">3.13. idPrefixConstruction</a></li>
-					<li><a href="#3_14" title="Inherited from Uize.Widget.">3.14. insertionMode</a></li>
-					<li><a href="#3_15" title="Inherited from Uize.Widget.">3.15. localized</a></li>
-					<li><a href="#3_16" title="Inherited from Uize.Widget.">3.16. name</a></li>
-					<li><a href="#3_17" title="Inherited from Uize.Widget.">3.17. nodeMap</a></li>
-					<li><a href="#3_18" title="IMPLEMENTATION INFO">3.18. objectInspected</a></li>
-					<li><a href="#3_19" title="IMPLEMENTATION INFO">3.19. objectInspectedPath</a></li>
-					<li><a href="#3_20" title="IMPLEMENTATION INFO">3.20. treeListQuery</a></li>
-					<li><a href="#3_21" title="IMPLEMENTATION INFO">3.21. window</a></li>
-					<li><a href="#3_22" title="Inherited from Uize.Widget.">3.22. wired</a></li>
+					<li><a href="#3_8" title="IMPLEMENTATION INFO">3.8. deferredLinks</a></li>
+					<li><a href="#3_9" title="Inherited from Uize.Widget.Page.">3.9. dialogProperties</a></li>
+					<li><a href="#3_10" title="Inherited from Uize.Widget.">3.10. enabled</a></li>
+					<li><a href="#3_11" title="Inherited from Uize.Widget.">3.11. enabledInherited</a></li>
+					<li><a href="#3_12" title="Inherited from Uize.Widget.">3.12. html</a></li>
+					<li><a href="#3_13" title="Inherited from Uize.Widget.Page, but introduced in Uize.Widget.">3.13. idPrefix</a></li>
+					<li><a href="#3_14" title="Inherited from Uize.Widget.">3.14. idPrefixConstruction</a></li>
+					<li><a href="#3_15" title="Inherited from Uize.Widget.">3.15. insertionMode</a></li>
+					<li><a href="#3_16" title="Inherited from Uize.Widget.Page.">3.16. linkBatchSize</a></li>
+					<li><a href="#3_17" title="Inherited from Uize.Widget.">3.17. localized</a></li>
+					<li><a href="#3_18" title="Inherited from Uize.Widget.">3.18. name</a></li>
+					<li><a href="#3_19" title="Inherited from Uize.Widget.">3.19. nodeMap</a></li>
+					<li><a href="#3_20" title="IMPLEMENTATION INFO">3.20. objectInspected</a></li>
+					<li><a href="#3_21" title="IMPLEMENTATION INFO">3.21. objectInspectedPath</a></li>
+					<li><a href="#3_22" title="IMPLEMENTATION INFO">3.22. treeListQuery</a></li>
+					<li><a href="#3_23" title="IMPLEMENTATION INFO">3.23. window</a></li>
+					<li><a href="#3_24" title="Inherited from Uize.Widget.">3.24. wired</a></li>
 				</ul>
 			</li>
 			<li><a href="#4">4. Static Methods</a>
@@ -185,7 +188,7 @@
 				
 				<p><span class="allCaps">SET-GET PROPERTIES</span></p>
 				
-				<p><code><a href="#3_1">baseUrl</a></code> | <code><a href="#3_18">objectInspected</a></code> | <code><a href="#3_19">objectInspectedPath</a></code> | <code><a href="#3_20">treeListQuery</a></code> | <code><a href="#3_21">window</a></code></p>
+				<p><code><a href="#3_1">baseUrl</a></code> | <code><a href="#3_20">objectInspected</a></code> | <code><a href="#3_21">objectInspectedPath</a></code> | <code><a href="#3_22">treeListQuery</a></code> | <code><a href="#3_23">window</a></code></p>
 			</div>
 			
 			<a name="1_2_2"></a>
@@ -197,11 +200,11 @@
 				
 				<p><span class="allCaps">INSTANCE METHODS</span></p>
 				
-				<p><code><a href="#2_45">updateUi</a></code> | <code><a href="#2_49">wireUi</a></code></p>
+				<p><code><a href="#2_45">updateUi</a></code> | <code><a href="#2_50">wireUi</a></code></p>
 				
 				<p><span class="allCaps">SET-GET PROPERTIES</span></p>
 				
-				<p><code><a href="#3_6">confirmDialog</a></code></p>
+				<p><code><a href="#3_6">confirmDialog</a></code> | <code><a href="#3_8">deferredLinks</a></code></p>
 				
 				<p><span class="allCaps">STATIC PROPERTIES</span></p>
 				
@@ -217,11 +220,11 @@
 				
 				<p><span class="allCaps">INSTANCE METHODS</span></p>
 				
-				<p><code><a href="#2_1">addChild</a></code> | <code><a href="#2_2">ajax</a></code> | <code><a href="#2_3">buildHtml</a></code> | <code><a href="#2_4">callInherited</a></code> | <code><a href="#2_5">confirm</a></code> | <code><a href="#2_6">displayNode</a></code> | <code><a href="#2_7">fire</a></code> | <code><a href="#2_8">flushNodeCache</a></code> | <code><a href="#2_9">get</a></code> | <code><a href="#2_10">getInherited</a></code> | <code><a href="#2_11">getNode</a></code> | <code><a href="#2_12">getNodeStyle</a></code> | <code><a href="#2_13">getNodeValue</a></code> | <code><a href="#2_14">getProvider</a></code> | <code><a href="#2_15">globalizeNode</a></code> | <code><a href="#2_16">inform</a></code> | <code><a href="#2_17">injectNodeHtml</a></code> | <code><a href="#2_18">insertOrWireUi</a></code> | <code><a href="#2_19">insertUi</a></code> | <code><a href="#2_20">kill</a></code> | <code><a href="#2_21">launchPopup</a></code> | <code><a href="#2_22">loadHtml</a></code> | <code><a href="#2_23">loadHtmlIntoNode</a></code> | <code><a href="#2_24">localize</a></code> | <code><a href="#2_25">performAjax</a></code> | <code><a href="#2_26">removeChild</a></code> | <code><a href="#2_27">removeNode</a></code> | <code><a href="#2_28">removeUi</a></code> | <code><a href="#2_29">set</a></code> | <code><a href="#2_30">setInherited</a></code> | <code><a href="#2_31">setNodeClipRect</a></code> | <code><a href="#2_32">setNodeInnerHtml</a></code> | <code><a href="#2_33">setNodeOpacity</a></code> | <code><a href="#2_34">setNodeProperties</a></code> | <code><a href="#2_35">setNodeStyle</a></code> | <code><a href="#2_36">setNodeValue</a></code> | <code><a href="#2_37">showConfirm</a></code> | <code><a href="#2_38">showInform</a></code> | <code><a href="#2_39">showNode</a></code> | <code><a href="#2_40">toggle</a></code> | <code><a href="#2_41">unwire</a></code> | <code><a href="#2_42">unwireNode</a></code> | <code><a href="#2_43">unwireNodeEventsByMatch</a></code> | <code><a href="#2_44">unwireUi</a></code> | <code><a href="#2_46">useDialog</a></code> | <code><a href="#2_47">wire</a></code> | <code><a href="#2_48">wireNode</a></code></p>
+				<p><code><a href="#2_1">addChild</a></code> | <code><a href="#2_2">ajax</a></code> | <code><a href="#2_3">buildHtml</a></code> | <code><a href="#2_4">callInherited</a></code> | <code><a href="#2_5">confirm</a></code> | <code><a href="#2_6">displayNode</a></code> | <code><a href="#2_7">fire</a></code> | <code><a href="#2_8">flushNodeCache</a></code> | <code><a href="#2_9">get</a></code> | <code><a href="#2_10">getInherited</a></code> | <code><a href="#2_11">getNode</a></code> | <code><a href="#2_12">getNodeStyle</a></code> | <code><a href="#2_13">getNodeValue</a></code> | <code><a href="#2_14">getProvider</a></code> | <code><a href="#2_15">globalizeNode</a></code> | <code><a href="#2_16">inform</a></code> | <code><a href="#2_17">injectNodeHtml</a></code> | <code><a href="#2_18">insertOrWireUi</a></code> | <code><a href="#2_19">insertUi</a></code> | <code><a href="#2_20">kill</a></code> | <code><a href="#2_21">launchPopup</a></code> | <code><a href="#2_22">loadHtml</a></code> | <code><a href="#2_23">loadHtmlIntoNode</a></code> | <code><a href="#2_24">localize</a></code> | <code><a href="#2_25">performAjax</a></code> | <code><a href="#2_26">removeChild</a></code> | <code><a href="#2_27">removeNode</a></code> | <code><a href="#2_28">removeUi</a></code> | <code><a href="#2_29">set</a></code> | <code><a href="#2_30">setInherited</a></code> | <code><a href="#2_31">setNodeClipRect</a></code> | <code><a href="#2_32">setNodeInnerHtml</a></code> | <code><a href="#2_33">setNodeOpacity</a></code> | <code><a href="#2_34">setNodeProperties</a></code> | <code><a href="#2_35">setNodeStyle</a></code> | <code><a href="#2_36">setNodeValue</a></code> | <code><a href="#2_37">showConfirm</a></code> | <code><a href="#2_38">showInform</a></code> | <code><a href="#2_39">showNode</a></code> | <code><a href="#2_40">toggle</a></code> | <code><a href="#2_41">unwire</a></code> | <code><a href="#2_42">unwireNode</a></code> | <code><a href="#2_43">unwireNodeEventsByMatch</a></code> | <code><a href="#2_44">unwireUi</a></code> | <code><a href="#2_46">useDialog</a></code> | <code><a href="#2_47">wire</a></code> | <code><a href="#2_48">wireDeferredLinks</a></code> | <code><a href="#2_49">wireNode</a></code></p>
 				
 				<p><span class="allCaps">SET-GET PROPERTIES</span></p>
 				
-				<p><code><a href="#3_2">built</a></code> | <code><a href="#3_3">busy</a></code> | <code><a href="#3_4">busyInherited</a></code> | <code><a href="#3_5">children</a></code> | <code><a href="#3_7">container</a></code> | <code><a href="#3_8">dialogProperties</a></code> | <code><a href="#3_9">enabled</a></code> | <code><a href="#3_10">enabledInherited</a></code> | <code><a href="#3_11">html</a></code> | <code><a href="#3_12">idPrefix</a></code> | <code><a href="#3_13">idPrefixConstruction</a></code> | <code><a href="#3_14">insertionMode</a></code> | <code><a href="#3_15">localized</a></code> | <code><a href="#3_16">name</a></code> | <code><a href="#3_17">nodeMap</a></code> | <code><a href="#3_22">wired</a></code></p>
+				<p><code><a href="#3_2">built</a></code> | <code><a href="#3_3">busy</a></code> | <code><a href="#3_4">busyInherited</a></code> | <code><a href="#3_5">children</a></code> | <code><a href="#3_7">container</a></code> | <code><a href="#3_9">dialogProperties</a></code> | <code><a href="#3_10">enabled</a></code> | <code><a href="#3_11">enabledInherited</a></code> | <code><a href="#3_12">html</a></code> | <code><a href="#3_13">idPrefix</a></code> | <code><a href="#3_14">idPrefixConstruction</a></code> | <code><a href="#3_15">insertionMode</a></code> | <code><a href="#3_16">linkBatchSize</a></code> | <code><a href="#3_17">localized</a></code> | <code><a href="#3_18">name</a></code> | <code><a href="#3_19">nodeMap</a></code> | <code><a href="#3_24">wired</a></code></p>
 				
 				<p><span class="allCaps">STATIC METHODS</span></p>
 				
@@ -812,7 +815,19 @@
 		</div>
 		
 		<a name="2_48"></a>
-		<h2 class="heading2" title="2. Instance Methods -&gt; 2.48. wireNode"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_48" title="2. Instance Methods -&gt; 2.48. wireNode">48</a>. </span>wireNode</h2>
+		<h2 class="heading2" title="2. Instance Methods -&gt; 2.48. wireDeferredLinks"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_48" title="2. Instance Methods -&gt; 2.48. wireDeferredLinks">48</a>. </span>wireDeferredLinks</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code>, first introduced in <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_49"></a>
+		<h2 class="heading2" title="2. Instance Methods -&gt; 2.49. wireNode"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_49" title="2. Instance Methods -&gt; 2.49. wireNode">49</a>. </span>wireNode</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -823,8 +838,8 @@
 			</table>
 		</div>
 		
-		<a name="2_49"></a>
-		<h2 class="heading2" title="2. Instance Methods -&gt; 2.49. wireUi"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_49" title="2. Instance Methods -&gt; 2.49. wireUi">49</a>. </span>wireUi</h2>
+		<a name="2_50"></a>
+		<h2 class="heading2" title="2. Instance Methods -&gt; 2.50. wireUi"><span class="headingNumber"><a href="#2" title="2. Instance Methods">2</a>.<a href="#2_50" title="2. Instance Methods -&gt; 2.50. wireUi">50</a>. </span>wireUi</h2>
 		<div class="contents2">
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -918,7 +933,17 @@
 		</div>
 		
 		<a name="3_8"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.8. dialogProperties"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_8" title="3. Set-get Properties -&gt; 3.8. dialogProperties">8</a>. </span>dialogProperties</h2>
+		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.8. deferredLinks"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_8" title="3. Set-get Properties -&gt; 3.8. deferredLinks">8</a>. </span>deferredLinks</h2>
+		<div class="contents2">
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an override of an inherited feature (implementation is in this module, first introduced in <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_9"></a>
+		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.9. dialogProperties"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_9" title="3. Set-get Properties -&gt; 3.9. dialogProperties">9</a>. </span>dialogProperties</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code>.</p>
 			
@@ -929,20 +954,8 @@
 			</table>
 		</div>
 		
-		<a name="3_9"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.9. enabled"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_9" title="3. Set-get Properties -&gt; 3.9. enabled">9</a>. </span>enabled</h2>
-		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
-			
-			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
-			
-			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
-			</table>
-		</div>
-		
 		<a name="3_10"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.10. enabledInherited"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_10" title="3. Set-get Properties -&gt; 3.10. enabledInherited">10</a>. </span>enabledInherited</h2>
+		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.10. enabled"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_10" title="3. Set-get Properties -&gt; 3.10. enabled">10</a>. </span>enabled</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -954,7 +967,7 @@
 		</div>
 		
 		<a name="3_11"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.11. html"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_11" title="3. Set-get Properties -&gt; 3.11. html">11</a>. </span>html</h2>
+		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.11. enabledInherited"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_11" title="3. Set-get Properties -&gt; 3.11. enabledInherited">11</a>. </span>enabledInherited</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -966,19 +979,7 @@
 		</div>
 		
 		<a name="3_12"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.12. idPrefix"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_12" title="3. Set-get Properties -&gt; 3.12. idPrefix">12</a>. </span>idPrefix</h2>
-		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code>, but introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
-			
-			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
-			
-			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
-			</table>
-		</div>
-		
-		<a name="3_13"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.13. idPrefixConstruction"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_13" title="3. Set-get Properties -&gt; 3.13. idPrefixConstruction">13</a>. </span>idPrefixConstruction</h2>
+		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.12. html"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_12" title="3. Set-get Properties -&gt; 3.12. html">12</a>. </span>html</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -989,8 +990,20 @@
 			</table>
 		</div>
 		
+		<a name="3_13"></a>
+		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.13. idPrefix"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_13" title="3. Set-get Properties -&gt; 3.13. idPrefix">13</a>. </span>idPrefix</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code>, but introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			</table>
+		</div>
+		
 		<a name="3_14"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.14. insertionMode"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_14" title="3. Set-get Properties -&gt; 3.14. insertionMode">14</a>. </span>insertionMode</h2>
+		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.14. idPrefixConstruction"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_14" title="3. Set-get Properties -&gt; 3.14. idPrefixConstruction">14</a>. </span>idPrefixConstruction</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1002,7 +1015,7 @@
 		</div>
 		
 		<a name="3_15"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.15. localized"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_15" title="3. Set-get Properties -&gt; 3.15. localized">15</a>. </span>localized</h2>
+		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.15. insertionMode"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_15" title="3. Set-get Properties -&gt; 3.15. insertionMode">15</a>. </span>insertionMode</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1014,19 +1027,19 @@
 		</div>
 		
 		<a name="3_16"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.16. name"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_16" title="3. Set-get Properties -&gt; 3.16. name">16</a>. </span>name</h2>
+		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.16. linkBatchSize"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_16" title="3. Set-get Properties -&gt; 3.16. linkBatchSize">16</a>. </span>linkBatchSize</h2>
 		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			<p>Inherited from <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code>.</p>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code>, first introduced in <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code>)</td></tr>
 			</table>
 		</div>
 		
 		<a name="3_17"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.17. nodeMap"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_17" title="3. Set-get Properties -&gt; 3.17. nodeMap">17</a>. </span>nodeMap</h2>
+		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.17. localized"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_17" title="3. Set-get Properties -&gt; 3.17. localized">17</a>. </span>localized</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1038,27 +1051,31 @@
 		</div>
 		
 		<a name="3_18"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.18. objectInspected"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_18" title="3. Set-get Properties -&gt; 3.18. objectInspected">18</a>. </span>objectInspected</h2>
+		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.18. name"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_18" title="3. Set-get Properties -&gt; 3.18. name">18</a>. </span>name</h2>
 		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
 			</table>
 		</div>
 		
 		<a name="3_19"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.19. objectInspectedPath"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_19" title="3. Set-get Properties -&gt; 3.19. objectInspectedPath">19</a>. </span>objectInspectedPath</h2>
+		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.19. nodeMap"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_19" title="3. Set-get Properties -&gt; 3.19. nodeMap">19</a>. </span>nodeMap</h2>
 		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
 			</table>
 		</div>
 		
 		<a name="3_20"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.20. treeListQuery"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_20" title="3. Set-get Properties -&gt; 3.20. treeListQuery">20</a>. </span>treeListQuery</h2>
+		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.20. objectInspected"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_20" title="3. Set-get Properties -&gt; 3.20. objectInspected">20</a>. </span>objectInspected</h2>
 		<div class="contents2">
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -1068,7 +1085,7 @@
 		</div>
 		
 		<a name="3_21"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.21. window"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_21" title="3. Set-get Properties -&gt; 3.21. window">21</a>. </span>window</h2>
+		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.21. objectInspectedPath"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_21" title="3. Set-get Properties -&gt; 3.21. objectInspectedPath">21</a>. </span>objectInspectedPath</h2>
 		<div class="contents2">
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -1078,7 +1095,27 @@
 		</div>
 		
 		<a name="3_22"></a>
-		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.22. wired"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_22" title="3. Set-get Properties -&gt; 3.22. wired">22</a>. </span>wired</h2>
+		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.22. treeListQuery"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_22" title="3. Set-get Properties -&gt; 3.22. treeListQuery">22</a>. </span>treeListQuery</h2>
+		<div class="contents2">
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_23"></a>
+		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.23. window"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_23" title="3. Set-get Properties -&gt; 3.23. window">23</a>. </span>window</h2>
+		<div class="contents2">
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_24"></a>
+		<h2 class="heading2" title="3. Set-get Properties -&gt; 3.24. wired"><span class="headingNumber"><a href="#3" title="3. Set-get Properties">3</a>.<a href="#3_24" title="3. Set-get Properties -&gt; 3.24. wired">24</a>. </span>wired</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
 			
@@ -1286,7 +1323,7 @@ Uize.module ({
 		'UizeDotCom.Page.Doc.library',
 		'UizeDotCom.Page.Doc'
 	],
-	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+	builder:function () {(window.page = UizeDotCom.Page.Doc ()).wireUi ()}
 });
 
 </script>

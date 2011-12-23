@@ -41,7 +41,7 @@ Uize.module ({
 				null,
 				function () {
 					var _this = this;
-					_this._commObject = new Uize.Comm.Script ({callbackMode:'client'});
+					_this._commObject = Uize.Comm.Script ({callbackMode:'client'});
 					_this.initializeCaptcha ();
 				}
 			),

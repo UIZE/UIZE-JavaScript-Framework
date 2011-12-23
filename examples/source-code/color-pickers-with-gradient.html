@@ -88,7 +88,7 @@ Uize.module ({
   ],
   builder:function () {
     /*** create the example page widget ***/
-      var page = window.page = new UizeDotCom.Page.Example;
+      var page = window.page = UizeDotCom.Page.Example ();
 
     /*** add the color cube child widget used for the gradient effect ***/
       var colorCube = page.addChild (
@@ -138,7 +138,7 @@ Uize.module ({
 		'UizeDotCom.Page.library',
 		'UizeDotCom.Page'
 	],
-	builder:function () {(window.page = new UizeDotCom.Page).wireUi ()}
+	builder:function () {(window.page = UizeDotCom.Page ()).wireUi ()}
 });
 
 </script>

@@ -170,7 +170,7 @@ Uize.module ({
 							_this._imagesLoaded = [];
 
 						/*** Public Instance Properties ***/
-							_this.fade = new Uize.Fade;
+							_this.fade = Uize.Fade ();
 							/*?
 								Instance Properties
 									fade

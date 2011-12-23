@@ -81,7 +81,7 @@
 
       // couple the alignX, alignY, inUse properties between the collection items
 
-        var coupler = new Uize.Util.Coupler ({
+        var coupler = Uize.Util.Coupler ({
           instances:[item0,item1,item2],
           properties:['alignX','alignY','inUse']
         });
@@ -245,7 +245,7 @@ Uize.module ({
 		'UizeDotCom.Page.library',
 		'UizeDotCom.Page'
 	],
-	builder:function () {(window.page = new UizeDotCom.Page).wireUi ()}
+	builder:function () {(window.page = UizeDotCom.Page ()).wireUi ()}
 });
 
 </script>

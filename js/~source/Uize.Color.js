@@ -47,7 +47,7 @@
 				title: EXAMPLES OF BUILT-IN ENCODINGS
 				data
 				:| ENCODING NAME  |  THE COLOR FUCHSIA IN THIS ENCODING    |
-				:| color          |  new Uize.Color ('fuchsia')            |
+				:| color          |  Uize.Color ('fuchsia')                |
 				:| hex            |  ff00ff                                |
 				:| #hex           |  #ff0fff                               |
 				:| name           |  fuchsia                               |
@@ -78,9 +78,9 @@
 			Using the Constructor
 				Typically, you will create a new instance of the =Uize.Color= object using its constructor, as follows...
 
-				.................................................................
-				var myColor = new Uize.Color ('#f0f');  // initialized to fuchsia
-				.................................................................
+				.............................................................
+				var myColor = Uize.Color ('#f0f');  // initialized to fuchsia
+				.............................................................
 
 			Using the Uize.Color.from Static Method
 				The =Uize.Color.from= static method is a factory method that decodes the specified color value and produces an instance of the =Uize.Color= object as a result.
@@ -165,58 +165,60 @@ Uize.module ({
 
 		/*** Constructor ***/
 			var
-				_object = function () {
-					/*** Public Instance Properties ***/
-						this.tuple = [];
+				_object = Uize.noNew (
+					function () {
+						/*** Public Instance Properties ***/
+							this.tuple = [];
 
-					_objectPrototype.from.apply (this,arguments);
+						_objectPrototype.from.apply (this,arguments);
+					}
 					/*?
 						Constructor
 							Lets you create an instance of the =Uize.Color= object.
 
 							SYNTAX
-							.........................................
-							colorOBJ = new Uize.Color (colorANYTYPE);
-							.........................................
+							.....................................
+							colorOBJ = Uize.Color (colorANYTYPE);
+							.....................................
 
 							Initial color value can be specified in the =colorANYTYPE= parameter using any of the many `Color Encodings` supported by the =Uize.Color= module. The following examples illustrate this variety and flexibility...
 
 							EXAMPLES
-							......................................................................
-							new Uize.Color (new Uize.Color (255,0,255));             // color
-							new Uize.Color ('ff00ff');                               // hex
-							new Uize.Color ('#ff00ff');                              // #hex
-							new Uize.Color ('fuchsia');                              // name
-							new Uize.Color ([255,0,255]);                            // RGB array
-							new Uize.Color (0xff00ff);                               // RGB int
-							new Uize.Color ({red:255,green:0,blue:255});             // RGB object
-							new Uize.Color ('Rgb(255,0,255)');                       // RGB string
-							new Uize.Color ({'HSL array':[300,100,50]});             // HSL array
-							new Uize.Color ({hue:300,saturation:100,lightness:50});  // HSL object
-							new Uize.Color ('Hsl(300,100%,50%)');                    // HSL string
-							......................................................................
+							..................................................................
+							Uize.Color (Uize.Color (255,0,255));                 // color
+							Uize.Color ('ff00ff');                               // hex
+							Uize.Color ('#ff00ff');                              // #hex
+							Uize.Color ('fuchsia');                              // name
+							Uize.Color ([255,0,255]);                            // RGB array
+							Uize.Color (0xff00ff);                               // RGB int
+							Uize.Color ({red:255,green:0,blue:255});             // RGB object
+							Uize.Color ('Rgb(255,0,255)');                       // RGB string
+							Uize.Color ({'HSL array':[300,100,50]});             // HSL array
+							Uize.Color ({hue:300,saturation:100,lightness:50});  // HSL object
+							Uize.Color ('Hsl(300,100%,50%)');                    // HSL string
+							..................................................................
 
 							VARIATION 1
-							..........................
-							colorOBJ = new Uize.Color;
-							..........................
+							.........................
+							colorOBJ = Uize.Color ();
+							.........................
 
 							When no parameter is specified, then the instance will be initialized to black (in the =sRGB= color space).
 
 							VARIATION 2
-							....................................................
-							colorOBJ = new Uize.Color (redINT,greenINT,blueINT);
-							....................................................
+							................................................
+							colorOBJ = Uize.Color (redINT,greenINT,blueINT);
+							................................................
 
 							When the three parameters =redINT=, =greenINT=, =blueINT= are specified, then the color will be initialized as though the arguments of the constructor represented an =RGB array= encoding.
 
 							EXAMPLE
-							............................................
+							........................................
 							var
-								yellow = new Uize.Color (255,255,0),
-								alsoYellow = new Uize.Color ([255,255,0])
+								yellow = Uize.Color (255,255,0),
+								alsoYellow = Uize.Color ([255,255,0])
 							;
-							............................................
+							........................................
 
 							NOTES
 							- in addition to using the constructor, there are two other methods for `Creating Instances` of the =Uize.Color= object
@@ -240,7 +242,7 @@ Uize.module ({
 								- for three component color spaces, the =tuple= array may still contain four elements, where the value of the fourth element is =NaN= or =undefined=
 								- see the related =getTuple= instance method
 					*/
-				},
+				),
 				_objectPrototype = _object.prototype
 			;
 
@@ -305,7 +307,7 @@ Uize.module ({
 
 							EXAMPLES
 							....................................................................
-							myColor.from (new Uize.Color (255,0,255));             // color
+							myColor.from (Uize.Color (255,0,255));                 // color
 							myColor.from ('ff00ff');                               // hex
 							myColor.from ('#ff00ff');                              // #hex
 							myColor.from ('fuchsia');                              // name
@@ -435,7 +437,7 @@ Uize.module ({
 
 							EXAMPLES
 							.............................................................................
-							var fuchsia = new Uize.Color ('fuchsia');
+							var fuchsia = Uize.Color ('fuchsia');
 							fuchsia.to ('color');       // produces a new Uize.Color object
 							fuchsia.to ('hex');         // produces 'ff00ff'
 							fuchsia.to ('#hex');        // produces '#ff00ff'
@@ -463,7 +465,7 @@ Uize.module ({
 				/*?
 					Static Methods
 						Uize.Color.adapter
-							Returns a value adapter object, 
+							Returns a value adapter object,
 
 							SYNTAX
 							.................................................................
@@ -511,7 +513,7 @@ Uize.module ({
 
 							EXAMPLE
 							...........................
-							new Uize.Color ('ff00ff');
+							Uize.Color ('ff00ff');
 							Uize.Color.from ('ff00ff');
 							...........................
 
@@ -521,7 +523,7 @@ Uize.module ({
 
 							EXAMPLES
 							.......................................................................
-							Uize.Color.from (new Uize.Color (255,0,255));             // color
+							Uize.Color.from (Uize.Color (255,0,255));                 // color
 							Uize.Color.from ('ff00ff');                               // hex
 							Uize.Color.from ('#ff00ff');                              // #hex
 							Uize.Color.from ('fuchsia');                              // name
@@ -706,7 +708,7 @@ Uize.module ({
 
 								EXAMPLE
 								................................................................................
-								var myRgbColor = new Uize.Color ('#ff00ff');
+								var myRgbColor = Uize.Color ('#ff00ff');
 								alert (myRgbColor.to ('HSL string'));  // displays "Hsl(300,100%,50%)" in dialog
 								................................................................................
 
@@ -893,17 +895,17 @@ Uize.module ({
 								Encoding
 									When a color is encoded as =color=, an instance of the =Uize.Color= object is created with its color initialized to that of the encoding source.
 
-									...............................................
+									...........................................
 									<< table >>
 
 									title: EXAMPLES
 									data
-									:| COLOR NAME   |  color                      |
-									:| fuchsia      |  new Uize.Color ('fuchsia') |
-									:| yellow       |  new Uize.Color ('yellow')  |
-									:| blue         |  new Uize.Color ('blue')    |
-									:| white        |  new Uize.Color ('white')   |
-									...............................................
+									:| COLOR NAME   |  color                  |
+									:| fuchsia      |  Uize.Color ('fuchsia') |
+									:| yellow       |  Uize.Color ('yellow')  |
+									:| blue         |  Uize.Color ('blue')    |
+									:| white        |  Uize.Color ('white')   |
+									...........................................
 
 								Decoding
 									When a color is decoded from =color=, the value of the source =Uize.Color= object instance's =encoding= property and the component values in its =tuple= property are used for the resulting =Uize.Color= object.
@@ -1403,10 +1405,10 @@ Uize.module ({
 								Named colors defined in the =Uize.Color.colors= object can be used wherever color values can be specified in the methods of the =Uize.Color= object, and other modules that use this object for resolving color values.
 
 								EXAMPLE
-								.........................................................................
-								new Uize.Color ('yellow');                  // source encoding is name
-								new Uize.Color (Uize.Color.colors.yellow);  // source encoding is RGB int
-								.........................................................................
+								.....................................................................
+								Uize.Color ('yellow');                  // source encoding is name
+								Uize.Color (Uize.Color.colors.yellow);  // source encoding is RGB int
+								.....................................................................
 
 								In the above example, each of the statements would create a new instance of the =Uize.Color= object initialized to primary yellow. In the first statement, the color yellow is specified using the =name= encoding. In the second statement, however, the color is specified using the =RGB int= encoding. That's because the values of the properties of the =Uize.Color.colors= static property are actually integers representing the RGB values of the colors.
 
@@ -1448,9 +1450,9 @@ Uize.module ({
 								Named colors defined in the =Uize.Color.colors= object can be used wherever color values can be specified in the methods of the =Uize.Color= object, and other modules that use this object for resolving color values.
 
 								EXAMPLE 1
-								.........................................
-								var myColor = new Uize.Color ('fuchsia');
-								.........................................
+								.....................................
+								var myColor = Uize.Color ('fuchsia');
+								.....................................
 
 								In the above example, the =Uize.Color= instance =myColor= is being initialized to the color "fuchsia" (=#ff00ff=).
 
@@ -1484,7 +1486,7 @@ Uize.module ({
 
 								When extending the =Uize.Color.colors= object, the names of added colors should be in all lowecase, and the values should be specified in the =RGB int= encoding (you can use JavaScript's hexadecimal notation for convenience, so that the =RGB int= encoding resembles the =hex= or =#hex= encodings).
 
-								WRONG! WRONG! WRONG!
+								INCORRECT
 								.................................................................................
 								Uize.Color.defineColors ({DarkMagenta:0x8b008b});     // DON'T USE MIXED CASE
 								Uize.Color.defineColors ({lavenderblush:'#fff0f5'});  // DON'T USE OTHER ENCODING

@@ -82,7 +82,7 @@ Uize.module ({
               _this._titleShowNext ? _nextValueObject : _valueObject
             );
           }
-          _this.setNodeInnerHtml ('text',_text);
+          _this.set ('text',_text);
           _this.setNodeProperties ('',{title:_title});
         }
       };
@@ -188,7 +188,7 @@ Uize.module ({
 		'UizeDotCom.Page.library',
 		'UizeDotCom.Page'
 	],
-	builder:function () {(window.page = new UizeDotCom.Page).wireUi ()}
+	builder:function () {(window.page = UizeDotCom.Page ()).wireUi ()}
 });
 
 </script>

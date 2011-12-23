@@ -750,7 +750,7 @@ Uize.module ({
 							Uize.Widget.Page.launchPopup ({name:'window1',url:'http://www.wikipedia.org'});
 
 							// calling the instance method on a page widget instance
-							page = new Uize.Widget.Page;
+							page = Uize.Widget.Page ();
 							page.launchPopup ({name:'window2',url:'http://www.zazzle.com'});
 
 							// using callInherited to access instance method of root page widget from child

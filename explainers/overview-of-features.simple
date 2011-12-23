@@ -94,7 +94,7 @@ Event Infrastructure
 
 	EXAMPLE
 	....................................................................
-	var myWidget = new Uize.Widget;
+	var myWidget = Uize.Widget ();
 	myWidget.wire (
 		'My Arbitrary Event',
 		function (event) {alert (event.message)}
@@ -117,7 +117,7 @@ Ajax / Asynchronous Communication
 
 	EXAMPLE
 	.............................................
-	(new Uize.Comm.Ajax).request ({
+	Uize.Comm.Ajax ().request ({
 		url:[
 			'/service/search',
 			{
@@ -193,7 +193,7 @@ Internationalization and Localization
 
 	EXAMPLE
 	..........................................................................
-	myWidget = new Uize.Widget ({
+	myWidget = Uize.Widget ({
 		localized:{welcomeMessage:'Welcome, {firstName} of {state}, {country}'}
 	});
 	alert (
@@ -286,7 +286,7 @@ Documentation System
 
 				EXAMPLES
 				.............................................................................
-				var fuchsia = new Uize.Color ('fuchsia');
+				var fuchsia = Uize.Color ('fuchsia');
 				fuchsia.to ('color');       // produces a new Uize.Color object
 				fuchsia.to ('hex');         // produces 'ff00ff'
 				fuchsia.to ('#hex');        // produces '#ff00ff'

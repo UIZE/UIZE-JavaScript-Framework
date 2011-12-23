@@ -109,7 +109,7 @@ Uize.module ({
 	],
 	builder:function () {
 		/*** create the example page widget ***/
-			var page = window.page = new UizeDotCom.Page.Example ({evaluator:function (code) {eval (code)}});
+			var page = window.page = UizeDotCom.Page.Example ({evaluator:function (code) {eval (code)}});
 
 		/*** create and wire the ImagePort instances ***/
 			var
@@ -134,7 +134,7 @@ Uize.module ({
 
 		/*** code for switching the image ***/
 			var
-				fade = new Uize.Fade ({
+				fade = Uize.Fade ({
 					duration:1800,
 					startValue:1,
 					endValue:3,

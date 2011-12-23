@@ -295,7 +295,7 @@ Uize.Node.unwire ('myLinkTag','click',clickHandler);
 			
 			<p>In the above example we are wiring a handler for the <code>click</code> event of the node with the <code>id</code> of "myLinkTag". Then, we are unwiring that exact same event handler. Therefore, after the code has executed, clicking on our link tag will <b>not</b> pop up the alert dialog. Notice how we are specifying the event handler function by reference, and how the function is defined outside of the wiring and unwiring statements. This is necessary in order for the <code>Uize.Node.unwire</code> method call to exactly match the event wiring established by the <code>Uize.Node.wire</code> method call. In order to successfully unwire the wiring, the DOM node, event name, and event handler function must match exactly. To illustrate this subtlety, consider the following example...</p>
 			
-			<p><span class="allCaps">WRONG! WRONG! WRONG!</span></p>
+			<p><span class="allCaps">INCORRECT</span></p>
 			
 			
 <pre class="sample-code">Uize.Node.wire ('myLinkTag','click',function () {alert ('You Clicked Me!')});
@@ -667,7 +667,7 @@ Uize.module ({
 		'UizeDotCom.Page.Doc.library',
 		'UizeDotCom.Page.Doc'
 	],
-	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+	builder:function () {(window.page = UizeDotCom.Page.Doc ()).wireUi ()}
 });
 
 </script>

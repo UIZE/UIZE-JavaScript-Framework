@@ -284,14 +284,14 @@ required:[
 					
 					
 <pre class="sample-code">var page = window.page =
-  new UizeDotCom.Page.Example ({evaluator:function (code) {eval (code)}})
+  UizeDotCom.Page.Example ({evaluator:function (code) {eval (code)}})
 ;
 </pre>
 					
 					<p><span class="allCaps">USE...</span></p>
 					
 					
-<pre class="sample-code">var page = window.page = new Uize.Widget.Page;
+<pre class="sample-code">var page = window.page = Uize.Widget.Page ();
 </pre>
 				</div>
 				
@@ -383,7 +383,7 @@ Uize.module ({
 		'UizeDotCom.Page.Doc.library',
 		'UizeDotCom.Page.Doc'
 	],
-	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+	builder:function () {(window.page = UizeDotCom.Page.Doc ()).wireUi ()}
 });
 
 </script>

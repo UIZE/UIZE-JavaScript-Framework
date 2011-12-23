@@ -343,7 +343,7 @@ function _myFunction () {}
 			
 			<p>A particularly common place to miss a semicolon is when assigning an anonymous function declaration to a prototype property, as in...</p>
 			
-			<p><span class="allCaps">WRONG! WRONG! WRONG!</span></p>
+			<p><span class="allCaps">INCORRECT</span></p>
 			
 			
 <pre class="sample-code">_classPrototype.myMethod1 = function () {
@@ -644,7 +644,7 @@ Uize.module ({
 		'UizeDotCom.Page.Doc.library',
 		'UizeDotCom.Page.Doc'
 	],
-	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+	builder:function () {(window.page = UizeDotCom.Page.Doc ()).wireUi ()}
 });
 
 </script>

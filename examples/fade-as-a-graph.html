@@ -111,7 +111,7 @@ Uize.module ({
 	],
 	builder:function () {
 		/*** create the example page widget ***/
-			var page = window.page = new UizeDotCom.Page.Example ({evaluator:function (code) {eval (code)}});
+			var page = window.page = UizeDotCom.Page.Example ({evaluator:function (code) {eval (code)}});
 
 		/*** configurable values ***/
 			var
@@ -124,7 +124,7 @@ Uize.module ({
 			;
 
 		/*** create fade instance ***/
-			var fade = new Uize.Fade ({
+			var fade = Uize.Fade ({
 				startValue:{barValue:barProperties.minValue,knobColor:{red:0,green:255,blue:60}},
 				endValue:{barValue:barProperties.maxValue,knobColor:{red:0,green:255,blue:255}}
 			});

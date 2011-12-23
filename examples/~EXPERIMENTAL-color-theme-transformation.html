@@ -236,7 +236,7 @@ Uize.module ({
 						- all stroke colors
 		*/
 		/*** create the example page widget ***/
-			var page = window.page = new UizeDotCom.Page.Example;
+			var page = window.page = UizeDotCom.Page.Example ();
 
 		/*** initial color theme ***/
 			var
@@ -286,7 +286,7 @@ Uize.module ({
 			;
 
 		/*** code to transform the color theme and update the preview ***/
-			var color = new Uize.Color ('hsl(0,0,0)');
+			var color = Uize.Color ('hsl(0,0,0)');
 
 			/*** calculate min/max range for components of colors ***/
 				var

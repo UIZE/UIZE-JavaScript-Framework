@@ -203,7 +203,7 @@ Uize.module ({
 							_this._cycleNo = 0;
 
 						/*** Public Instance Properties ***/
-							_this.fade = new Uize.Fade ({
+							_this.fade = Uize.Fade ({
 								duration:850,
 								curve:Uize.Fade.celeration (.5,0),
 								startValue:0,

@@ -35,7 +35,7 @@
 				'Uize.Widget.Dialog.xResizable'
 			],
 			builder:function () {
-				var page = window.page = new Uize.Widget.Page;
+				var page = window.page = Uize.Widget.Page ();
 
 				page.addChild ('resizableDialog',Uize.Widget.Dialog,{resizable:true});
 			}
@@ -121,7 +121,7 @@ Uize.module ({
 											'Uize.Widget.Dialog.xResizable'
 										],
 										builder:function () {
-											var page = window.page = new Uize.Widget.Page;
+											var page = window.page = Uize.Widget.Page ();
 
 											page.addChild (
 												'verticallyResizableDialog',Uize.Widget.Dialog,{resizable:true}

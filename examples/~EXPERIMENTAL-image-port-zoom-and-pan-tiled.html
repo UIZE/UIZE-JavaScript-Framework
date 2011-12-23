@@ -91,7 +91,7 @@ Uize.module ({
 	],
 	builder:function () {
 		/*** create the example page widget ***/
-			var page = window.page = new UizeDotCom.Page.Example;
+			var page = window.page = UizeDotCom.Page.Example ();
 
 		setTimeout (
 			function () {
@@ -112,7 +112,7 @@ Uize.module ({
 
 				/*** generate interface for changing the image set ***/
 					var
-						fade = new Uize.Fade ({
+						fade = Uize.Fade ({
 							startValue:0,
 							endValue:1,
 							duration:3500,

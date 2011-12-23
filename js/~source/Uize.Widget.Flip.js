@@ -38,7 +38,7 @@ Uize.module ({
 							this._phase = 'idle';
 
 						/*** Public Instance Properties ***/
-							this.fade = new Uize.Fade ({duration:400});
+							this.fade = Uize.Fade ({duration:400});
 					}
 				),
 				_classPrototype = _class.prototype

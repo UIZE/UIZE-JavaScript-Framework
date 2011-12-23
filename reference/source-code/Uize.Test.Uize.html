@@ -127,7 +127,7 @@ Uize.module ({
 
     function _eventsSystemTest (_title,_isInstance) {
       function _getEventSource () {
-        return _isInstance ? new Uize : Uize.subclass ();
+        return _isInstance ? Uize () : Uize.subclass ();
       }
       return {
         title:_title,
@@ -870,6 +870,173 @@ Uize.module ({
       title:'Test for Uize Base Class',
       test:[
         Uize.Test.staticMethodsTest ([
+          ['Uize.noNew',[
+            {
+              title:'Test that this method returns a wrapper object constructor that is not the same as the wrapped object constructor',
+              test:function () {
+                var
+                  _wrappedConstructor = function () {},
+                  _wrapperConstructor = Uize.noNew (_wrappedConstructor)
+                ;
+                return (
+                  this.expectFunction (_wrapperConstructor) &amp;&amp;
+                  this.expect (true,_wrapperConstructor != _wrappedConstructor)
+                );
+              }
+            },
+            {
+              title:'Test that calling the wrapper object constructor results in the wrapped object constructor being called once',
+              test:function () {
+                var
+                  _timesWrappedConstructorCalled = 0,
+                  _wrappedConstructor = function () {_timesWrappedConstructorCalled++},
+                  _wrapperConstructor = Uize.noNew (_wrappedConstructor)
+                ;
+                _wrapperConstructor ();
+                return this.expect (1,_timesWrappedConstructorCalled);
+              }
+            },
+            {
+              title:'Test that, when the wrapper object constructor is called using the new operator, an instance of the wrapper object is successfully created',
+              test:function () {
+                var
+                  _wrappedConstructor = function () {},
+                  _wrapperConstructor = Uize.noNew (_wrappedConstructor),
+                  _instance = new _wrapperConstructor ()
+                ;
+                return this.expectInstanceOf (_wrapperConstructor,_instance);
+              }
+            },
+            {
+              title:'Test that, when the wrapper object constructor is called without using the new operator, an instance of the wrapper object is successfully created',
+              test:function () {
+                var
+                  _wrappedConstructor = function () {},
+                  _wrapperConstructor = Uize.noNew (_wrappedConstructor),
+                  _instance = _wrapperConstructor ()
+                ;
+                return this.expectInstanceOf (_wrapperConstructor,_instance);
+              }
+            },
+            {
+              title:'Test that, when the wrapper object constructor is called with a context of undefined, an instance of the wrapper object is created',
+              test:function () {
+                var
+                  _wrappedConstructor = function () {},
+                  _wrapperConstructor = Uize.noNew (_wrappedConstructor),
+                  _instance = _wrapperConstructor.call (undefined)
+                ;
+                return this.expectInstanceOf (_wrapperConstructor,_instance);
+              }
+            },
+            {
+              title:'Test that, when the wrapper object constructor is called with a context of null, an instance of the wrapper object is created',
+              test:function () {
+                var
+                  _wrappedConstructor = function () {},
+                  _wrapperConstructor = Uize.noNew (_wrappedConstructor),
+                  _instance = _wrapperConstructor.call (null)
+                ;
+                return this.expectInstanceOf (_wrapperConstructor,_instance);
+              }
+            },
+            {
+              title:'Test that the wrapped object constructor is called as a method on the same instance as is returned by the wrapper object constructor',
+              test:function () {
+                var
+                  _instanceSeenByWrappedConstructor,
+                  _wrappedConstructor = function () {_instanceSeenByWrappedConstructor = this},
+                  _wrapperConstructor = Uize.noNew (_wrappedConstructor),
+                  _instanceReturnedByWrapperConstructor = _wrapperConstructor ()
+                ;
+                return this.expectSameAs (
+                  _instanceReturnedByWrapperConstructor,
+                  _instanceSeenByWrappedConstructor
+                );
+              }
+            },
+            {
+              title:'Test that, when the wrapper object constructor is called as a method on an instance of the wrapper object constructor, the wrapped object constructor is called as a method on that same instance, and that same instance is returned',
+              test:function () {
+                var
+                  _instanceSeenByWrappedConstructor,
+                  _wrappedConstructor = function () {_instanceSeenByWrappedConstructor = this},
+                  _wrapperConstructor = Uize.noNew (_wrappedConstructor),
+                  _instance = _wrapperConstructor (),
+                  _resultInstance = _wrapperConstructor.call (_instance)
+                ;
+                return (
+                  this.expectSameAs (_instance,_instanceSeenByWrappedConstructor) &amp;&amp;
+                  this.expectSameAs (_instance,_resultInstance)
+                );
+              }
+            },
+            {
+              title:'Test that, when the wrapper object constructor is called as a method on an instance of an object other than the wrapper object, an instance of the wrapper object is created',
+              test:function () {
+                var
+                  _wrappedConstructor = function () {},
+                  _wrapperConstructor = Uize.noNew (_wrappedConstructor),
+                  _instance = _wrapperConstructor.call (new RegExp)
+                ;
+                return this.expectInstanceOf (_wrapperConstructor,_instance);
+              }
+            },
+            {
+              title:'Test that arguments supplied to the wrapper object constructor when creating an instance are supplied also to the wrapped object constructor',
+              test:function () {
+                var
+                  _argumentsSuppliedToWrapper = ['foo','bar'],
+                  _argumentsSuppliedToWrapped,
+                  _wrappedConstructor = function () {_argumentsSuppliedToWrapped = [].slice.call (arguments)},
+                  _wrapperConstructor = Uize.noNew (_wrappedConstructor)
+                ;
+                _wrapperConstructor.apply (null,_argumentsSuppliedToWrapper);
+                return this.expect (_argumentsSuppliedToWrapper,_argumentsSuppliedToWrapped);
+              }
+            },
+            {
+              title:'Test that, when two different wrapper object constructors are created for two different wrapped object constructors, there is no cross contamination of static and instance methods between the wrapper object constructors',
+              test:function () {
+                var
+                  _wrappedConstructorA = function () {},
+                  _wrapperConstructorA = Uize.noNew (_wrappedConstructorA)
+                ;
+                _wrapperConstructorA.staticMethodForA = function () {};
+                _wrapperConstructorA.prototype.instanceMethodForA = function () {};
+
+                var
+                  _wrappedConstructorB = function () {},
+                  _wrapperConstructorB = Uize.noNew (_wrappedConstructorB)
+                ;
+                _wrapperConstructorB.staticMethodForB = function () {};
+                _wrapperConstructorB.prototype.instanceMethodForB = function () {};
+
+                return (
+                  this.expect (false,'staticMethodForA' in _wrapperConstructorB) &amp;&amp;
+                  this.expect (false,'instanceMethodForA' in _wrapperConstructorB.prototype) &amp;&amp;
+                  this.expect (false,'staticMethodForB' in _wrapperConstructorA) &amp;&amp;
+                  this.expect (false,'instanceMethodForB' in _wrapperConstructorA.prototype)
+                );
+              }
+            },
+            {
+              title:'Test that properties of the wrapped object constructor are not transferred to the wrapper object constructor',
+              test:function () {
+                var _wrappedConstructor = function () {};
+                _wrappedConstructor.staticMethod = function () {};
+                _wrappedConstructor.prototype.instanceMethod = function () {};
+                var _wrapperConstructor = Uize.noNew (_wrappedConstructor);
+
+                return (
+                  this.expect (true,'staticMethod' in _wrappedConstructor) &amp;&amp;
+                  this.expect (true,'instanceMethod' in _wrappedConstructor.prototype) &amp;&amp;
+                  this.expect (false,'staticMethod' in _wrapperConstructor) &amp;&amp;
+                  this.expect (false,'instanceMethod' in _wrapperConstructor.prototype)
+                );
+              }
+            }
+          ]],
           ['Uize.capFirstChar',[
             ['Many letters, first letter is lowercase','hello','Hello'],
             ['Many letters, first letter is uppercase','Hello','Hello'],
@@ -1203,7 +1370,7 @@ Uize.module ({
             ['Test that a String object instance is not regarded as being a plain object',new String (''),false],
             ['Test that a Boolean object instance is not regarded as being a plain object',new Boolean (false),false],
             ['Test that a Number object instance is not regarded as being a plain object',new Number (0),false],
-            ['Test that a Uize class instance is not regarded as being a plain object',new Uize,false]
+            ['Test that a Uize class instance is not regarded as being a plain object',Uize (),false]
           ]],
           ['Uize.isPrimitive',[
             ['Test that calling with no parameters returns false',[],false],
@@ -1856,7 +2023,7 @@ Uize.module ({
             ['Test that a function is not regarded as a Uize subclass instance',Uize.nop,false],
             ['Test that a Uize class is not regarded as a Uize subclass instance',Uize,false],
             ['Test that a Uize package is not regarded as a Uize subclass instance',Uize.Data,false],
-            ['Test that a Uize instance is correctly regarded as a Uize subclass instance',new Uize,true]
+            ['Test that a Uize instance is correctly regarded as a Uize subclass instance',Uize (),true]
           ]],
           ['Uize.clone',[
             /*** test cloning of null values ***/
@@ -1959,7 +2126,7 @@ Uize.module ({
               {
                 title:'Test that cloning a Uize class instance simply returns a reference to that instance',
                 test:function () {
-                  var _toClone = new Uize;
+                  var _toClone = Uize ();
                   return this.expectSameAs (_toClone,Uize.clone (_toClone))
                 }
               },
@@ -2385,7 +2552,7 @@ Uize.module ({
               title:
                 'Test that specifying a value for method that is neither a string nor a function results in no error being produced',
               test:function () {
-                var _target = new Uize;
+                var _target = Uize ();
                 Uize.callOn (_target);
                 Uize.callOn (_target,null);
                 Uize.callOn (_target,undefined);
@@ -2401,7 +2568,7 @@ Uize.module ({
                 'Test that specifying a function as the method and an instance as the target results in the function being called as an instance method on the instance',
               test:function () {
                 var
-                  _target = new Uize,
+                  _target = Uize (),
                   _success = false
                 ;
                 Uize.callOn (_target,function () {_success = this == _target});
@@ -2413,7 +2580,7 @@ Uize.module ({
                 'Test that when the optional arguments parameter is not specified, the arguments are defaulted to an empty array',
               test:function () {
                 var
-                  _target = new Uize,
+                  _target = Uize (),
                   _success = false
                 ;
                 Uize.callOn (_target,function () {_success = arguments.length == 0});
@@ -2425,7 +2592,7 @@ Uize.module ({
                 'Test that when the optional arguments parameter is specified, those arguments are passed in the call correctly',
               test:function () {
                 var
-                  _target = new Uize,
+                  _target = Uize (),
                   _expectedArguments = ['foo',42,true],
                   _actualArguments
                 ;
@@ -2442,7 +2609,7 @@ Uize.module ({
                 'Test that specifying the target as an instance and the method as a string does not result in an error being produced when the method is not defined on the instance',
               test:function () {
                 var
-                  _target = new Uize,
+                  _target = Uize (),
                   _bogusMethodName = 'SOME-BOGUS-METHOD-NAME'
                 ;
                 delete _target [_bogusMethodName];
@@ -2455,7 +2622,7 @@ Uize.module ({
                 'Test that specifying the target as an instance and the method as a string results in the specified method being called as an instance method on the instance',
               test:function () {
                 var
-                  _target = new Uize,
+                  _target = Uize (),
                   _success = false,
                   _expectedArguments = ['foo',42,true],
                   _actualArguments
@@ -4565,7 +4732,7 @@ Uize.module ({
 		'UizeDotCom.Page.library',
 		'UizeDotCom.Page'
 	],
-	builder:function () {(window.page = new UizeDotCom.Page).wireUi ()}
+	builder:function () {(window.page = UizeDotCom.Page ()).wireUi ()}
 });
 
 </script>

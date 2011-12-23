@@ -33,7 +33,7 @@ Uize.module ({
 			Uize.Node.injectHtml (document.body,UizeDotCom.Templates.DelveUiHtml.process ());
 
 		/*** create the example page widget ***/
-			var _page = window.page = new UizeDotCom.Delve ({baseUrl:<%= _baseUrl -> json %>,window:top.opener});
+			var _page = window.page = UizeDotCom.Delve ({baseUrl:<%= _baseUrl -> json %>,window:top.opener});
 
 		/*** wire up the page widget ***/
 			_page.wireUi ();

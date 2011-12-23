@@ -57,7 +57,7 @@
 
 			// couple the alignX, alignY, inUse properties between the collection items
 
-				var coupler = new Uize.Util.Coupler ({
+				var coupler = Uize.Util.Coupler ({
 					instances:[item0,item1,item2],
 					properties:['alignX','alignY','inUse']
 				});

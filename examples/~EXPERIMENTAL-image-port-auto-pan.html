@@ -69,7 +69,7 @@ Uize.module ({
 	],
 	builder:function () {
 		/*** create the example page widget ***/
-			var page = window.page = new UizeDotCom.Page.Example;
+			var page = window.page = UizeDotCom.Page.Example ();
 
 		/*** set defaults for all Uize.Widget.ImagePort.AutoPan instances ***/
 			Uize.Widget.ImagePort.AutoPan.set ({

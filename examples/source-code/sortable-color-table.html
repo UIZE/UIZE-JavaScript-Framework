@@ -108,11 +108,11 @@ Uize.module ({
   ],
   builder:function () {
     /*** create the example page widget ***/
-      var page = window.page = new UizeDotCom.Page.Example;
+      var page = window.page = UizeDotCom.Page.Example ();
 
     /*** build the color table ***/
       var
-        color = new Uize.Color,
+        color = Uize.Color (),
         colors = Uize.Color.colors,
         tableHtmlChunks = [
           '&lt;table id="page_colorTable" class="data"&gt;',
@@ -213,7 +213,7 @@ Uize.module ({
 		'UizeDotCom.Page.library',
 		'UizeDotCom.Page'
 	],
-	builder:function () {(window.page = new UizeDotCom.Page).wireUi ()}
+	builder:function () {(window.page = UizeDotCom.Page ()).wireUi ()}
 });
 
 </script>

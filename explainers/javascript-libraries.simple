@@ -141,7 +141,7 @@ What They Look Like
 			Don't Require Listed Modules
 				When declaring a library as a module, the module declaration should *not* include the modules that are listed in the `Library Contents` comment inside the =required= list of the module declaration.
 
-				WRONG! WRONG! WRONG!
+				INCORRECT
 				....................................................................
 				/* Library Contents
 					Uize.Node
@@ -181,17 +181,17 @@ What They Look Like
 				If you *do* decide to include the base class into a library module, you will need to explicitly set a value for the =Uize.moduleUrlTemplate= static property, so that the module loader mechanism will know where to get modules from.
 
 				EXAMPLE
-				.............................................................................
+				............................................................................
 				<script src="js/UberLibraryThatIncludesUizeBaseClass.library.js"></script>
 
 				<script type="text/javascript">
 					Uize.moduleUrlTemplate = 'js/[#modulePath]';
 					Uize.module ({
 						required:'UizeDotCom.Page.Doc',
-						builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+						builder:function () {(window.page = UizeDotCom.Page.Doc ()).wireUi ()}
 					});
 				</script>
-				.............................................................................
+				............................................................................
 
 		Libraries Can't Include Libraries
 			JavaScript library files can't include other JavaScript library files - even if those other library files include a module declaration and are located inside the JavaScript modules folder.
@@ -209,7 +209,7 @@ What They Look Like
 			Uize.module ({name:'Uize.Widget.Page.library'});
 			................................................
 
-			WRONG! WRONG! WRONG!
+			INCORRECT
 			...................................................
 			/* Library Contents
 				Uize.Widget.Page.library
@@ -237,17 +237,17 @@ How To Use Them
 		When doing development, it is useful (and advisable) to source in the source versions of JavaScript library files.
 
 		EXAMPLE
-		.............................................................................
+		............................................................................
 		<script src="js/Uize.js"></script>
 		<script src="js/UizeDotCom.Page.Doc.library.js"></script>
 
 		<script type="text/javascript">
 			Uize.module ({
 				required:'UizeDotCom.Page.Doc',
-				builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+				builder:function () {(window.page = UizeDotCom.Page.Doc ()).wireUi ()}
 			});
 		</script>
-		.............................................................................
+		............................................................................
 
 		By design, the source version of a JavaScript library file does not contain the JavaScript code for the modules it lists, nor should a library module require the modules it lists in the `Library Contents` comment. Loading in a source version of a JavaScript library file should have no effect with regards to loading of modules (see the section `Don't Require Listed Modules` for a more in-depth discussion of this principle).
 
@@ -255,17 +255,17 @@ How To Use Them
 		When pushing code to a live site, you will want to use the built versions of the library files.
 
 		EXAMPLE
-		.............................................................................
+		............................................................................
 		<script src="js/Uize.js"></script>
 		<script src="js/UizeDotCom.Page.Doc.library.js"></script>
 
 		<script type="text/javascript">
 			Uize.module ({
 				required:'UizeDotCom.Page.Doc',
-				builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+				builder:function () {(window.page = UizeDotCom.Page.Doc ()).wireUi ()}
 			});
 		</script>
-		.............................................................................
+		............................................................................
 
 		Basically, to get the built versions, just source in the library files from where all your scrunched JavaScript files would be located.
 
@@ -275,7 +275,7 @@ How To Use Them
 		When a JavaScript library file includes an `Optional Module Declaration` that declares a namespace for the library file, then that library file can be required as a module, and requiring it will result in it being dynamically loaded in by the module loader mechanism - if it is not already loaded. Using this approach, it is not necessary to have a dedicated =script= tag for sourcing in the library file - the library module can simply be added to the =required= list of the anonymous module declaration that sets up the page widget instance in the page.
 
 		EXAMPLE
-		.............................................................................
+		............................................................................
 		<script src="js/Uize.js"></script>
 
 		<script type="text/javascript">
@@ -284,10 +284,10 @@ How To Use Them
 					'UizeDotCom.Page.Doc.library',
 					'UizeDotCom.Page.Doc'
 				],
-				builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+				builder:function () {(window.page = UizeDotCom.Page.Doc ()).wireUi ()}
 			});
 		</script>
-		.............................................................................
+		............................................................................
 
 		A benefit of making JavaScript library files actual modules and requiring them is that they will automatically be loaded from the correct location where all other scrunched JavaScript modules are loaded from. This eliminates additional script tags whose =src= attribute would need to be tweaked when switching back and forth between using source or scrunched code. Of course, if you're using a server code method for writing script tags into your pages and a server config variable for switching back and forth between source and scrunched code, then this is less of an issue.
 
@@ -351,7 +351,7 @@ Important Considerations
 	Incorrect Ordering of Modules
 		When listing JavaScript modules in a library file, they should be listed in the correct dependency order, otherwise the library file won't work efficiently.
 
-		WRONG! WRONG! WRONG!
+		INCORRECT
 		...................
 		/* Library Contents
 			Uize.Node

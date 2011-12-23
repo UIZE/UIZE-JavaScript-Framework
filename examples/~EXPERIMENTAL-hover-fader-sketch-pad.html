@@ -826,7 +826,7 @@ Uize.module ({
 	],
 	builder:function () {
 		/*** create the example page widget ***/
-			var page = window.page = new UizeDotCom.Page.Example ({evaluator:function (code) {eval (code)}});
+			var page = window.page = UizeDotCom.Page.Example ({evaluator:function (code) {eval (code)}});
 
 		/*** create the hover fader instance ***/
 			page.addChild (

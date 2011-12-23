@@ -116,7 +116,7 @@ Uize.module ({
 			};
 
 		/*** Fadeout Management ***/
-			var _fade = _package.fade = new Uize.Fade ({duration:0});
+			var _fade = _package.fade = Uize.Fade ({duration:0});
 			function _endFade () {
 				_shownTooltip._manualPositioning || _Uize_Node.unwireEventsByOwnerId (_packageGuid);
 				_Uize_Node.display (_shownTooltip._node,_false);

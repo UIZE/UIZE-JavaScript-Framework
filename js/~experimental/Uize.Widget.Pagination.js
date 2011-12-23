@@ -139,7 +139,7 @@ Uize.module ({
 					;
 					for( var _idPrefixNo = 0; _idPrefixNo < _this._idPrefixes.length; _idPrefixNo++ ) {
 						_properties.container = _this._idPrefixes[ _idPrefixNo ];
-						(_populations[ _idPrefixNo ] = new Uize.Widget.Population(_properties)).wireUi ();
+						(_populations[ _idPrefixNo ] = Uize.Widget.Population(_properties)).wireUi ();
 					}
 
 					_superclass.prototype.wireUi.call (_this);

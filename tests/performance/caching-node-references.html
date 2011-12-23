@@ -49,7 +49,7 @@ Uize.module ({
 	required:'UizeDotCom.Page.Example.Test.library',
 	builder:function () {
 		/*** create the example page widget ***/
-			var page = window.page = new UizeDotCom.Page.Example.Test;
+			var page = window.page = UizeDotCom.Page.Example.Test ();
 
 		/*** define the test code by overriding the performTest method of the page widget ***/
 			page.performTest = function (_reportResults) {

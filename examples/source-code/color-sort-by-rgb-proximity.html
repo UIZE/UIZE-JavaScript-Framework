@@ -102,7 +102,7 @@ Uize.module ({
   ],
   builder:function () {
     /*** create the example page widget ***/
-      var page = window.page = new UizeDotCom.Page.Example;
+      var page = window.page = UizeDotCom.Page.Example ();
 
     /*** sort colors and update swatches ***/
       function sortColorSwatches () {
@@ -121,7 +121,7 @@ Uize.module ({
       ;
       function randomizeColors () {
         for (var colorNo = -1; ++colorNo &lt; totalColors;)
-          (colors [colorNo] || (colors [colorNo] = new Uize.Color).setEncoding ('RGB string')).random ()
+          (colors [colorNo] || (colors [colorNo] = Uize.Color ()).setEncoding ('RGB string')).random ()
         ;
         sortColorSwatches ();
       }
@@ -193,7 +193,7 @@ Uize.module ({
 		'UizeDotCom.Page.library',
 		'UizeDotCom.Page'
 	],
-	builder:function () {(window.page = new UizeDotCom.Page).wireUi ()}
+	builder:function () {(window.page = UizeDotCom.Page ()).wireUi ()}
 });
 
 </script>

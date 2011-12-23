@@ -123,7 +123,7 @@ Uize.module ({
   ],
   builder:function () {
     /*** create the example page widget ***/
-      var page = window.page = new UizeDotCom.Page.Example;
+      var page = window.page = UizeDotCom.Page.Example ();
 
     /*** set the default UI HTML and other properties for all bar widgets ***/
       Uize.Widget.Bar.set ({
@@ -170,7 +170,7 @@ Uize.module ({
     /*** code to handle updating the bars when a property is selected ***/
       var
         propertyName,
-        fade = new Uize.Fade ({duration:700,curve:Uize.Curve.easeInOutPow (4)})
+        fade = Uize.Fade ({duration:700,curve:Uize.Curve.easeInOutPow (4)})
       ;
       fade.wire ({
         Start:
@@ -269,7 +269,7 @@ Uize.module ({
 		'UizeDotCom.Page.library',
 		'UizeDotCom.Page'
 	],
-	builder:function () {(window.page = new UizeDotCom.Page).wireUi ()}
+	builder:function () {(window.page = UizeDotCom.Page ()).wireUi ()}
 });
 
 </script>

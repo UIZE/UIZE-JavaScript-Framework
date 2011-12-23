@@ -104,13 +104,13 @@
 					In the event that the naming scheme employed by the `Implied Node Bindings` facility does not suit your needs, you can use the implied node name remapping facility provided in the =Uize.Widget= base class to bind slide properties to arbitrarily named implied nodes.
 
 					EXAMPLE
-					..........................................
-					mySlideShow = new Uize.Widget.SlideShow ({
+					......................................
+					mySlideShow = Uize.Widget.SlideShow ({
 						nodeMap:{
 							slide_imageUrl:'imageUrl'
 						}
 					});
-					..........................................
+					......................................
 
 					In the above example, the value of the =imageUrl= slide property - that would normally be bound by the `Implied Node Bindings` facility to the implied node =slide_imageUrl= - is being remapped so that it is bound instead to the implied node =imageUrl=, using the =nodeMap= set-get property that is implemented in the =Uize.Widget= class.
 
@@ -123,13 +123,13 @@
 					Any slide property can be bound to an instance of a =Uize= subclass that implements the `Value Interface` (ie. provides a =value= set-get property), simply by specifying a reference to that instance as the value for a binding.
 
 					EXAMPLE
-					..........................................
-					mySlideShow = new Uize.Widget.SlideShow ({
+					......................................
+					mySlideShow = Uize.Widget.SlideShow ({
 						slideBindings:{
 							imageUrl:myImageWipeInstance
 						}
 					});
-					..........................................
+					......................................
 
 					In the above example, the =imageUrl= slide property is being bound to the widget instance =myImageWipeInstance= - an instance of the =Uize.Widget.ImageWipe= widget class.
 
@@ -138,7 +138,7 @@
 
 					EXAMPLE
 					..............................................................
-					mySlideShow = new Uize.Widget.SlideShow ({
+					mySlideShow = Uize.Widget.SlideShow ({
 						slideBindings:{
 							imageUrl:function (value) {
 								myCustomImageEffectsWidget.chooseRandomTransition ();

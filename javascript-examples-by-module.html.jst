@@ -111,7 +111,7 @@
 Uize.module ({
 	required:'UizeDotCom.Page.Doc.library',
 	builder:function () {
-		(window.page = new UizeDotCom.Page.Doc).wireUi ();
+		(window.page = UizeDotCom.Page.Doc ()).wireUi ();
 
 		page.children.contents.collapseAllBut (['Examples (organized by module)','Uize']);
 	}

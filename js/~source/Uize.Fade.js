@@ -529,7 +529,7 @@ Uize.module ({
 
 								EXAMPLE
 								...................................................
-								var colorFade = new Uize.Fade ({
+								var colorFade = Uize.Fade ({
 									startValue:{red:255,green:128,blue:0}, // orange
 									endValue:{red:179,green:136,blue:255}, // violet
 									quantization:1,
@@ -550,7 +550,7 @@ Uize.module ({
 
 								EXAMPLE
 								...................................................
-								var colorFade = new Uize.Fade ({
+								var colorFade = Uize.Fade ({
 									startValue:{red:255,green:128,blue:0}, // orange
 									endValue:{red:179,green:136,blue:255}, // violet
 									quantization:{
@@ -569,7 +569,7 @@ Uize.module ({
 
 								EXAMPLE
 								...................................................
-								var colorFade = new Uize.Fade ({
+								var colorFade = Uize.Fade ({
 									startValue:{
 										color:{red:255,green:128,blue:0}, // orange
 										opacity:0
@@ -594,7 +594,7 @@ Uize.module ({
 
 								EXAMPLE
 								.......................................................
-								var colorFade = new Uize.Fade ({
+								var colorFade = Uize.Fade ({
 									startValue:{
 										colorA:{red:255,green:128,blue:0},   // orange
 										colorB:{red:255,green:0,blue:0}      // pure red
@@ -623,14 +623,14 @@ Uize.module ({
 								You can just as well specify a floating point value for quantization. For example, a fade starting with =0= and with a quantization of =.5= would produce the interpolated values =0=, =.5=, =1=, =1.5=, =2=, =2.5=, etc. This could be useful in cases where a floating point interpolated value is acceptable, but where one wishes to limit the number of value changes that occur for performance reasons. In such cases, setting a quantization to anything other than =0= would provide a throttling effect that would reduce the number of value updates that would occur.
 
 								EXAMPLE
-								..................................
-								var opacityFade = new Uize.Fade ({
+								..............................
+								var opacityFade = Uize.Fade ({
 									startValue:0,
 									endValue:1,
 									quantization:.02,
 									duration:2000
 								});
-								..................................
+								..............................
 
 								In the above example, a fade instance is created for fading an opacity value between =0= and =1=. Opacity is a floating point value, where =0= represents completely transparent and =1= represents completely opaque. Setting a quantization of =.02= for the fade ensures that there will be a maximum of 50 value updates (1 / .02) over the duration of the fade (there may be fewer, depending on CPU load).
 

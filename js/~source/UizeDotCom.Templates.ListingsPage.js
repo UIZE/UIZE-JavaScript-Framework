@@ -56,7 +56,7 @@ Uize.module ({
 				 }
 				output.push ('\r\n	<br class="end"/>\r\n</div>');
 				 }
-				output.push ('\r\n\r\n</div>\r\n\r\n<script type="text/javascript">\r\n\r\nUize.module ({\r\n	required:\'UizeDotCom.Page.library\',\r\n	builder:function () {(window.page = new UizeDotCom.Page).wireUi ()}\r\n});\r\n\r\n</script>\r\n\r\n</body></html>\r\n');
+				output.push ('\r\n\r\n</div>\r\n\r\n<script type="text/javascript">\r\n\r\nUize.module ({\r\n	required:\'UizeDotCom.Page.library\',\r\n	builder:function () {(window.page = UizeDotCom.Page ()).wireUi ()}\r\n});\r\n\r\n</script>\r\n\r\n</body></html>\r\n');
 				return output.join ('');
 			};
 

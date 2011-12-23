@@ -145,8 +145,8 @@ Relaying Events
 		EXAMPLE
 		.....................................................................
 		var
-			instance1 = new Uize,
-			instance2 = new Uize
+			instance1 = Uize (),
+			instance2 = Uize ()
 		;
 		instance1.wire ('Some Crazy Event',instance2);
 		instance2.wire (
@@ -166,7 +166,7 @@ Relaying Events
 		EXAMPLE
 		.......................................................................................
 		var
-			widget = new Uize.Widget,
+			widget = Uize.Widget (),
 			childWidget = widget.addChild ('child',Uize.Widget),
 			grandchildWidget = childWidget.addChild ('grandchild',Uize.Widget)
 		;

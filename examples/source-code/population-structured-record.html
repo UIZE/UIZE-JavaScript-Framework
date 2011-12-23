@@ -133,7 +133,7 @@ Uize.module ({
   ],
   builder:function () {
     /*** create the example page widget ***/
-      var page = window.page = new UizeDotCom.Page.Example;
+      var page = window.page = UizeDotCom.Page.Example ();
 
     /*** define the data records that will be used in the population process ***/
       var _personRecords = [
@@ -219,7 +219,7 @@ Uize.module ({
 		'UizeDotCom.Page.library',
 		'UizeDotCom.Page'
 	],
-	builder:function () {(window.page = new UizeDotCom.Page).wireUi ()}
+	builder:function () {(window.page = UizeDotCom.Page ()).wireUi ()}
 });
 
 </script>

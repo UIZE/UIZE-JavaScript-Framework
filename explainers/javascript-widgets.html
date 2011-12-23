@@ -446,7 +446,7 @@ page_mySlider-value
 				
 				
 <pre class="sample-code">// create an instance of the page widget class
-var pageWidget = new Uize.Widget.Page ({idPrefix:'page'});
+var pageWidget = Uize.Widget.Page ({idPrefix:'page'});
 
 // add a slider child widget to the page widget
 pageWidget.addChild ('slider',Uize.Widget.Bar.Slider);
@@ -532,7 +532,7 @@ var alsoTheRootNode = myWidget.getNode ('');
 					
 					
 <pre class="sample-code">// create a plain vanilla widget instance
-var myWidget = new Uize.Widget ({
+var myWidget = Uize.Widget ({
   idPrefix:'myWidget',
   html:'&lt;div id="myWidget"&gt;I CRAWLED INTO MY SHELL&lt;/div&gt;'
 });
@@ -568,7 +568,7 @@ myWidget.insertUi ();
 				
 				
 <pre class="sample-code">// create a plain vanilla widget instance
-var myWidget = new Uize.Widget ({idPrefix:'myWidget'});
+var myWidget = Uize.Widget ({idPrefix:'myWidget'});
 
 // inject some HTML into the document for the widget instance
 Uize.Node.injectHtml (
@@ -657,7 +657,7 @@ myWidget.setNodeStyle ('title',{color:'#fff',backgroudColor:'#000'});
 					
 					<p>When removing a node from the DOM using the <code>removeNode</code> instance method, the cached reference to the removed implied node is cleared from <a href="#2_1_12">The Node Cache</a>. When wiring events on implied nodes using the <code>wireNode</code> instance method, an ID for the widget instance that owns the event wirings is provided to the <code>Uize.Node.wire</code> static method, so that events can be unwired later by the widget by providing the same owner ID to the <code>Uize.Node.unwire</code> static method.</p>
 					
-					<p><span class="allCaps">WRONG! WRONG! WRONG!</span></p>
+					<p><span class="allCaps">INCORRECT</span></p>
 					
 					
 <pre class="sample-code">Uize.Node.wire (
@@ -738,7 +738,7 @@ myWidget.flushNodeCache ();                 // flush the cache for ALL implied n
 					
 					
 <pre class="sample-code">// we create a widget instance with the idPrefix of "foo" and wire it up
-var myWidget = new Uize.Widget ({idPrefix:'foo'});
+var myWidget = Uize.Widget ({idPrefix:'foo'});
 myWidget.wireUi ();
 
 // no DOM for "bar" implied node yet, so null value is cached for it
@@ -823,7 +823,7 @@ myWidget.setNodeInnerHtml ('bar','Woo Hoo!');
 &lt;!-- some page setup code --&gt;
   &lt;script type="text/javascript"&gt;
     /*** create the page widget ***/
-      var page = new Uize.Widget.Page;
+      var page = Uize.Widget.Page ();
 
     /*** add the JavaScript widget to manage the hover fader effects ***/
       page.addChild ('menu1HoverFader',Uize.Widget.HoverFader);
@@ -847,7 +847,7 @@ myWidget.setNodeInnerHtml ('bar','Woo Hoo!');
 				
 				
 <pre class="sample-code">/*** create a page widget ***/
-  var page = new Uize.Widget.Page; // the default idPrefix is "page"
+  var page = Uize.Widget.Page ();      // the default idPrefix is "page"
 
 /*** declarative syntax widget properties for widget not yet created ***/
   window.$page_myWidget = {foo:'bar'}; // for the "myWidget" child widget
@@ -856,13 +856,13 @@ myWidget.setNodeInnerHtml ('bar','Woo Hoo!');
   var MyWidgetClass = Uize.Widget.subclass (
     /*** the alphastructor ***/
       function (_properties) {
-        alert (_properties.foo);   // alerts the text "bar"
-        alert (this.get ('foo'));  // alerts the text "undefined" (set hasn't happened)
+        alert (_properties.foo);    // alerts the text "bar"
+        alert (this.get ('foo'));   // alerts the text "undefined" (set hasn't happened)
       },
     /*** the omegastructor ***/
       function (_properties) {
-        alert (_properties.foo);   // alerts the text "bar" (it's still here, no surprise)
-        alert (this.get ('foo'));  // alerts the text "bar" (the set has happened by now)
+        alert (_properties.foo);    // alerts the text "bar" (it's still here, no surprise)
+        alert (this.get ('foo'));   // alerts the text "bar" (the set has happened by now)
       }
   );
 
@@ -921,7 +921,7 @@ page.addChild ('myWidget'Uize.Widget);
 					
 <pre class="sample-code">/*** build up a widget tree under the page widget ***/
   var
-    page = new Uize.Widget.Page,
+    page = Uize.Widget.Page (),
     rgbSliders = page.addChild ('rgbSliders',Uize.Widget)
   ;
 
@@ -955,7 +955,7 @@ page.addChild ('myWidget'Uize.Widget);
 					
 					
 <pre class="sample-code">/*** create a page widget, specifying properties for child widgets not yet created ***/
-  var page = new Uize.Widget.Page ({
+  var page = Uize.Widget.Page ({
     children:{
       rgbSlider:{
         children:{
@@ -1001,7 +1001,7 @@ page.addChild ('myWidget'Uize.Widget);
 
 /*** now, create the page widget and build a widget tree under it ***/
   var
-    page = new Uize.Widget.Page,
+    page = Uize.Widget.Page (),
     rgbSliders = page.addChild ('rgbSliders',Uize.Widget)
   ;
   rgbSliders.addChild ('sliderR',Uize.Widget.Bar.Slider);
@@ -1050,7 +1050,7 @@ page.addChild ('myWidget'Uize.Widget);
 );
 </pre>
 			
-			<p>Notice how the child widget is not created first using the <code>new</code> keyword with its class constructor. Instead, a reference to the child widget's class is provided in the second parameter, and the values for the child widget's set-get properties are supplied in the optional third parameter. By leaving it up to the parent widget to instantiate the child widget before adding it, the parent can ensure that the child widget knows its <code>parent</code> and its <code>idPrefix</code> when its constructor is executed. This can be useful information for the code inside the constructor.</p>
+			<p>Notice how the child widget is not created first using its class constructor. Instead, a reference to the child widget's class is provided in the second parameter, and the values for the child widget's set-get properties are supplied in the optional third parameter. By leaving it up to the parent widget to instantiate the child widget before adding it, the parent can ensure that the child widget knows its <code>parent</code> and its <code>idPrefix</code> when its constructor is executed. This can be useful information for the code inside the constructor.</p>
 		</div>
 		
 		<a name="3_2"></a>
@@ -1136,7 +1136,7 @@ page.addChild ('myWidget'Uize.Widget);
 			
 			<p>Basically, you're assigning a property to the <code>window</code> object, where the property name is the <code>idPrefix</code> of the widget you want to have instantiated, prefixed with a "$" (dollar) sign. The dollar sign serves to minimize namespace collisions with other properties on the window object, and also to flag the property to the page widget as a candidate for adoption. The value of the property is a bundle of set-get property values for the widget that's to be instantiated and adopted. The special <code>widgetClass</code> property is a string value specifying the class name of your widget. Note that you can't just have an "open" class reference here, because the widget class is not guaranteed to be loaded and may need to be dynamically loaded.</p>
 			
-			<p><span class="allCaps">WRONG! WRONG! WRONG!</span></p>
+			<p><span class="allCaps">INCORRECT</span></p>
 			
 			
 <pre class="sample-code">&lt;script type="text/javascript"&gt;
@@ -1433,7 +1433,7 @@ page.addChild ('myWidget'Uize.Widget);
 &lt;/script&gt;
 </pre>
 				
-				<p><span class="allCaps">WRONG! WRONG! WRONG!</span></p>
+				<p><span class="allCaps">INCORRECT</span></p>
 				
 				
 <pre class="sample-code">&lt;script type="text/javascript"&gt;
@@ -1459,7 +1459,7 @@ page.addChild ('myWidget'Uize.Widget);
 				
 				<p>The initial value for the <code>idPrefix</code> set-get property in the <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code> class is <code>'page'</code>, so unless you change that in your own subclasses of <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code> you should be able to start all your widget adoption statements with <code>window.$page_</code>.</p>
 				
-				<p><span class="allCaps">WRONG! WRONG! WRONG!</span></p>
+				<p><span class="allCaps">INCORRECT</span></p>
 				
 				
 <pre class="sample-code">&lt;script type="text/javascript"&gt;
@@ -1472,7 +1472,7 @@ page.addChild ('myWidget'Uize.Widget);
   Uize.module ({
     required:'Uize.Widget.Page',
     builder:function () {
-      (window.page = new Uize.Widget.Page ({idPrefix:'mySitePage'})).wireUi ();
+      (window.page = Uize.Widget.Page ({idPrefix:'mySitePage'})).wireUi ();
     }
   });
 &lt;/script&gt;
@@ -1651,7 +1651,7 @@ Uize.module ({
 		'UizeDotCom.Page.Doc.library',
 		'UizeDotCom.Page.Doc'
 	],
-	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+	builder:function () {(window.page = UizeDotCom.Page.Doc ()).wireUi ()}
 });
 
 </script>

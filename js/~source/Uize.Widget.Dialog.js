@@ -61,7 +61,7 @@ Uize.module ({
 
 						/*** Private Instance Properties ***/
 							(
-								_this._shieldFade = _this.shieldFade = new Uize.Fade ({
+								_this._shieldFade = _this.shieldFade = Uize.Fade ({
 									curve:Uize.Fade.celeration (0,1),
 									duration:750
 								})

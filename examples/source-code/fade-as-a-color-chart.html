@@ -86,7 +86,7 @@ Uize.module ({
   ],
   builder:function () {
     /*** create the example page widget ***/
-      var page = window.page = new UizeDotCom.Page.Example;
+      var page = window.page = UizeDotCom.Page.Example ();
 
     /*** configurable values ***/
       var
@@ -116,7 +116,7 @@ Uize.module ({
       ;
 
     /*** create fade instance ***/
-      var fade = new Uize.Fade ();
+      var fade = Uize.Fade ();
 
     /*** inside the table to hold the bars ***/
       var htmlChunks = ['&lt;table border="0" cellspacing="0" cellpadding="0" class="paramsTable" style="margin:auto;"&gt;'];
@@ -164,7 +164,7 @@ Uize.module ({
 		'UizeDotCom.Page.library',
 		'UizeDotCom.Page'
 	],
-	builder:function () {(window.page = new UizeDotCom.Page).wireUi ()}
+	builder:function () {(window.page = UizeDotCom.Page ()).wireUi ()}
 });
 
 </script>

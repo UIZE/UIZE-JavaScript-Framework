@@ -132,7 +132,7 @@ Uize.module ({
   ],
   builder:function () {
     /*** create the example page widget ***/
-      var page = window.page = new UizeDotCom.Page.Example;
+      var page = window.page = UizeDotCom.Page.Example ();
 
     /*** spawn a batch of Uize.Widget.Bevel instances ***/
       var bevels = Uize.Widget.Bevel.spawn ({idPrefix:{tagName:'DIV',className:'bevelThumb'}},page);
@@ -211,7 +211,7 @@ Uize.module ({
 		'UizeDotCom.Page.library',
 		'UizeDotCom.Page'
 	],
-	builder:function () {(window.page = new UizeDotCom.Page).wireUi ()}
+	builder:function () {(window.page = UizeDotCom.Page ()).wireUi ()}
 });
 
 </script>

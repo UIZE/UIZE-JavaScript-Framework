@@ -333,7 +333,7 @@
 					<p><span class="allCaps">EXAMPLE</span></p>
 					
 					
-<pre class="sample-code">myLog = new Uize.Widget.Log ({showTimestamp:false});
+<pre class="sample-code">myLog = Uize.Widget.Log ({showTimestamp:false});
 myLog.wireUi ();
 myLog.log ('This is my log message');
 </pre>
@@ -353,7 +353,7 @@ myLog.log ('This is my log message');
 					<p><span class="allCaps">EXAMPLE</span></p>
 					
 					
-<pre class="sample-code">myLog = new Uize.Widget.Log;
+<pre class="sample-code">myLog = Uize.Widget.Log ();
 myLog.wireUi ();
 myLog.log ('This is my log message');
 </pre>
@@ -373,7 +373,7 @@ myLog.log ('This is my log message');
 					<p><span class="allCaps">EXAMPLE</span></p>
 					
 					
-<pre class="sample-code">myLog = new Uize.Widget.Log ({timestampFormat:'{YYYY}-{MM}-{DD} {hh}:{mm}:{ss}.{zzz}'});
+<pre class="sample-code">myLog = Uize.Widget.Log ({timestampFormat:'{YYYY}-{MM}-{DD} {hh}:{mm}:{ss}.{zzz}'});
 myLog.wireUi ();
 myLog.log ('This is my log message');
 </pre>
@@ -409,7 +409,7 @@ myLog.log ('This is my log message');
 			<p><span class="allCaps">EXAMPLE</span></p>
 			
 			
-<pre class="sample-code">myLog = new Uize.Widget.Log;
+<pre class="sample-code">myLog = Uize.Widget.Log ();
 myLog.log ('This is my log message');
 myLog.wireUi ();
 </pre>
@@ -1464,7 +1464,7 @@ Uize.module ({
 		'UizeDotCom.Page.Doc.library',
 		'UizeDotCom.Page.Doc'
 	],
-	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+	builder:function () {(window.page = UizeDotCom.Page.Doc ()).wireUi ()}
 });
 
 </script>

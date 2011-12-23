@@ -276,7 +276,7 @@
 			<p><span class="allCaps">EXAMPLE</span></p>
 			
 			
-<pre class="sample-code">var myFade = new Uize.Fade ({startValue:0,endValue:100,duration:5000});
+<pre class="sample-code">var myFade = Uize.Fade ({startValue:0,endValue:100,duration:5000});
 myFade.wire ('Changed.value',function () {Uize.Node.setValue ('testNode',myFade)});
 myFade.start ();
 </pre>
@@ -310,7 +310,7 @@ myFade.start ();
 			<p><span class="allCaps">EXAMPLE</span></p>
 			
 			
-<pre class="sample-code">var myFade = new Uize.Fade ({startValue:0,endValue:100,duration:5000,quantization:1});
+<pre class="sample-code">var myFade = Uize.Fade ({startValue:0,endValue:100,duration:5000,quantization:1});
 myFade.wire ('Changed.value',function () {Uize.Node.setValue ('testNode',myFade)});
 myFade.start ();
 </pre>
@@ -328,7 +328,7 @@ myFade.start ();
 			<p><span class="allCaps">EXAMPLE</span></p>
 			
 			
-<pre class="sample-code">var positionFade = new Uize.Fade ({
+<pre class="sample-code">var positionFade = Uize.Fade ({
   startValue:{left:0,top:0,width:10,height:10},
   endValue:{left:100,top:100,width:200,height:200},
   duration:2000,
@@ -350,7 +350,7 @@ positionFade.start ();
 			<p><span class="allCaps">EXAMPLE</span></p>
 			
 			
-<pre class="sample-code">var positionAndBgFade = new Uize.Fade ({
+<pre class="sample-code">var positionAndBgFade = Uize.Fade ({
   startValue:{
     coords:{left:0,top:0,width:10,height:10},
     bg:{red:255,green:165,blue:0}
@@ -393,7 +393,7 @@ positionAndBgFade.start ();
 				<p><span class="allCaps">EXAMPLE</span></p>
 				
 				
-<pre class="sample-code">var positionAndBgFade = new Uize.Fade ({
+<pre class="sample-code">var positionAndBgFade = Uize.Fade ({
   startValue:{opacity:1,bg:{red:255,green:165,blue:0}},
   endValue:{opacity:0,bg:{red:128,green:0,blue:128}},
   duration:2000,
@@ -1094,7 +1094,7 @@ Uize.Fade.fadeProperty (slider,'value',0,100,2000);
 				<p><span class="allCaps">EXAMPLE</span></p>
 				
 				
-<pre class="sample-code">var positionFade = new Uize.Fade ({
+<pre class="sample-code">var positionFade = Uize.Fade ({
   startValue:{left:0,top:0},
   endValue:{left:100,top:100},
   duration:2000,
@@ -1384,7 +1384,7 @@ Uize.module ({
 		'UizeDotCom.Page.Doc.library',
 		'UizeDotCom.Page.Doc'
 	],
-	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+	builder:function () {(window.page = UizeDotCom.Page.Doc ()).wireUi ()}
 });
 
 </script>

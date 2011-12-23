@@ -302,7 +302,7 @@
 					<p><span class="allCaps">EXAMPLE</span></p>
 					
 					
-<pre class="sample-code">mySlideShow = new Uize.Widget.SlideShow ({
+<pre class="sample-code">mySlideShow = Uize.Widget.SlideShow ({
   nodeMap:{
     slide_imageUrl:'imageUrl'
   }
@@ -328,7 +328,7 @@
 					<p><span class="allCaps">EXAMPLE</span></p>
 					
 					
-<pre class="sample-code">mySlideShow = new Uize.Widget.SlideShow ({
+<pre class="sample-code">mySlideShow = Uize.Widget.SlideShow ({
   slideBindings:{
     imageUrl:myImageWipeInstance
   }
@@ -346,7 +346,7 @@
 					<p><span class="allCaps">EXAMPLE</span></p>
 					
 					
-<pre class="sample-code">mySlideShow = new Uize.Widget.SlideShow ({
+<pre class="sample-code">mySlideShow = Uize.Widget.SlideShow ({
   slideBindings:{
     imageUrl:function (value) {
       myCustomImageEffectsWidget.chooseRandomTransition ();
@@ -1628,7 +1628,7 @@ Uize.module ({
 		'UizeDotCom.Page.Doc.library',
 		'UizeDotCom.Page.Doc'
 	],
-	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+	builder:function () {(window.page = UizeDotCom.Page.Doc ()).wireUi ()}
 });
 
 </script>

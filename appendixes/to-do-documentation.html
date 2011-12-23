@@ -817,9 +817,9 @@ Uize.Xml         -&gt;  ???
 		<p>Code to factor out of widget classes into non-Web specific modules...</p>
 		
 		<table class="list">
-		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="../reference/Uize.Widget.ImagePort.html">Uize.Widget.ImagePort</a></code> - pure rectangle scaling math should be factored out into a new Uize.Math.RectScaler module</td></tr>
-		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="../reference/Uize.Widget.Population.html">Uize.Widget.Population</a></code> - pure population string functionality should be migrated into a new Uize.String.Population module (or Uize.Template.Population?)</td></tr>
-		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="../reference/Uize.Widget.Tree.html">Uize.Widget.Tree</a></code> - model stuff for the data structure that represents a tree (Uize.Data.Tree?)</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="../reference/Uize.Widget.ImagePort.html">Uize.Widget.ImagePort</a></code> - pure rectangle scaling math should be factored out into a new <code>Uize.Math.RectScaler</code> module</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="../reference/Uize.Widget.Population.html">Uize.Widget.Population</a></code> - pure population string functionality should be migrated into a new <code>Uize.String.Population</code> module (or <code>Uize.Template.Population</code>?)</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="../reference/Uize.Widget.Tree.html">Uize.Widget.Tree</a></code> - model stuff for the data structure that represents a tree (<code>Uize.Data.Tree</code>?)</td></tr>
 		</table>
 	</div>
 	
@@ -2030,7 +2030,7 @@ Uize.module ({
 		'UizeDotCom.Page.Doc.library',
 		'UizeDotCom.Page.Doc'
 	],
-	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+	builder:function () {(window.page = UizeDotCom.Page.Doc ()).wireUi ()}
 });
 
 </script>

@@ -35,7 +35,7 @@
 
 				EXAMPLE
 				................................
-				new Uize.Util.PropertyAdapter ({
+				Uize.Util.PropertyAdapter ({
 					propertyA:{
 						instance:sliderA,
 						property:'minValue'
@@ -161,7 +161,7 @@
 
 							EXAMPLE
 							..........................................................................
-							new Uize.Util.PropertyAdapter ({
+							Uize.Util.PropertyAdapter ({
 								propertyA:numberTextInput,         // instance of Uize.Widget.TextInput
 								propertyB:numberSquaredTextInput,  // instance of Uize.Widget.TextInput
 								valueAdapter:{
@@ -178,7 +178,7 @@
 
 							EXAMPLE
 							........................................................
-							new Uize.Util.PropertyAdapter ({
+							Uize.Util.PropertyAdapter ({
 								propertyA:colorAsHexTextInput,
 								propertyB:colorAsRgbTextInput,
 								valueAdapter:Uize.Color.adapter ('#hex','RGB string')
@@ -268,7 +268,7 @@
 
 							EXAMPLE
 							...............................................
-							new Uize.Util.PropertyAdapter ({
+							Uize.Util.PropertyAdapter ({
 								propertyA:sliderA,
 								propertyB:sliderB,
 								valueAdapter:{
@@ -297,7 +297,7 @@
 
 						USING A COUPLER...
 						...................................
-						new Uize.Util.Coupler ({
+						Uize.Util.Coupler ({
 							instances:[instanceA,instanceB],
 							properties:['someProperty']
 						});
@@ -305,7 +305,7 @@
 
 						USING A PROPERTY ADAPTER...
 						........................................
-						new Uize.Util.PropertyAdapter ({
+						Uize.Util.PropertyAdapter ({
 							propertyA:[instanceA,'someProperty'],
 							propertyA:[instanceB,'someProperty']
 						});

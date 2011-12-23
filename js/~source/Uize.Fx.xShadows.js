@@ -196,7 +196,7 @@
 
 				All this is best illustrated with an example...
 
-				WRONG! WRONG! WRONG!
+				INCORRECT
 				......................................................
 				Uize.Fx.fadeStyle (
 					'myNode',
@@ -244,7 +244,7 @@
 
 				So, for instance, you should not omit the unit for a spatial property of a shadow in the start value if the unit specified for the corresponding property of the corresponding shadow in the end value is not "px". Consider the following example...
 
-				WRONG! WRONG! WRONG!
+				INCORRECT
 				..................................
 				Uize.Fx.fadeStyle (
 					'myNode',
@@ -287,7 +287,7 @@
 			Same Number of Shadows
 				For =textShadow= values where there are multiple shadows (see `Supports an Arbitrary Number of Shadows`), both the start value and the end value should contain the same number of shadows.
 
-				WRONG! WRONG! WRONG!
+				INCORRECT
 				.................................................................................
 				Uize.Fx.fadeStyle (
 					'myNode',
@@ -332,7 +332,7 @@
 
 				This is best illustrated with an example...
 
-				WRONG! WRONG! WRONG!
+				INCORRECT
 				................................................................
 				Uize.Fx.fadeStyle (
 					'myNode',

@@ -606,19 +606,19 @@ myTest.expectFunction (Uize.Widget);                             // returns true
 // range boundaries and value are class instances
 
   myTest.expectInRange (    // returns false
-    new Uize ({value:0}),
-    new Uize ({value:1}),
-    new Uize ({value:-1})
+    Uize ({value:0}),
+    Uize ({value:1}),
+    Uize ({value:-1})
   );
   myTest.expectInRange (    // returns true
-    new Uize ({value:0}),
-    new Uize ({value:1}),
-    new Uize ({value:.5})
+    Uize ({value:0}),
+    Uize ({value:1}),
+    Uize ({value:.5})
   );
   myTest.expectInRange (    // returns false
-    new Uize ({value:0}),
-    new Uize ({value:1}),
-    new Uize ({value:1.5})
+    Uize ({value:0}),
+    Uize ({value:1}),
+    Uize ({value:1.5})
   );
 </pre>
 			</div>
@@ -686,7 +686,7 @@ myTest.expectFunction (Uize.Widget);                             // returns true
 			<div class="contents3">
 				<p>The class specified by the <code>classOBJorSTR</code> parameter can be a <code><a href="../reference/Uize.html">Uize</a></code> subclass.</p>
 				
-				<p>So, for example, the statement <code>myTest.expectInstanceOf (Uize.Widget.Bar,new Uize.Widget.Bar)</code> would return the value <code>true</code>.</p>
+				<p>So, for example, the statement <code>myTest.expectInstanceOf (Uize.Widget.Bar,Uize.Widget.Bar ())</code> would return the value <code>true</code>.</p>
 			</div>
 			
 			<a name="2_7_4"></a>
@@ -694,7 +694,7 @@ myTest.expectFunction (Uize.Widget);                             // returns true
 			<div class="contents3">
 				<p>A value will <b>not</b> be considered to be an instance of a specified class if it is, in fact, an instance of a <b>subclass</b> of the specified class.</p>
 				
-				<p>So, for example, the statement <code>myTest.expectInstanceOf (Uize.Widget,new Uize.Widget.Bar)</code> would return the value <code>false</code>.</p>
+				<p>So, for example, the statement <code>myTest.expectInstanceOf (Uize.Widget,Uize.Widget.Bar ())</code> would return the value <code>false</code>.</p>
 			</div>
 			
 			<a name="2_7_5"></a>
@@ -753,16 +753,16 @@ myTest.expectFunction (Uize.Widget);                             // returns true
 			<p><span class="allCaps">EXAMPLES</span></p>
 			
 			
-<pre class="sample-code">myTest.expectInteger (10);                     // returns true
-myTest.expectInteger (0);                      // returns true
-myTest.expectInteger (-10);                    // returns true
-myTest.expectInteger (Infinity);               // returns true
+<pre class="sample-code">myTest.expectInteger (10);                 // returns true
+myTest.expectInteger (0);                  // returns true
+myTest.expectInteger (-10);                // returns true
+myTest.expectInteger (Infinity);           // returns true
 
-myTest.expectInteger (10.5);                   // returns false
-myTest.expectInteger ('10');                   // returns false
-myTest.expectInteger (new Number (10));        // returns false
-myTest.expectInteger (new Uize ({value:10}));  // returns false
-myTest.expectInteger (NaN);                    // returns false
+myTest.expectInteger (10.5);               // returns false
+myTest.expectInteger ('10');               // returns false
+myTest.expectInteger (new Number (10));    // returns false
+myTest.expectInteger (Uize ({value:10}));  // returns false
+myTest.expectInteger (NaN);                // returns false
 </pre>
 			
 			<p><span class="allCaps">NOTES</span></p>
@@ -932,15 +932,15 @@ myTest.expectIntegerInRange (0,100,new Number (.5));   // returns false
 			<p><span class="allCaps">EXAMPLE</span></p>
 			
 			
-<pre class="sample-code">myTest.expectNegativeInteger (0);                      // returns true
-myTest.expectNegativeInteger (-1);                     // returns true
-myTest.expectNegativeInteger (-Infinity);              // returns true
+<pre class="sample-code">myTest.expectNegativeInteger (0);                  // returns true
+myTest.expectNegativeInteger (-1);                 // returns true
+myTest.expectNegativeInteger (-Infinity);          // returns true
 
-myTest.expectNegativeInteger (-1.5);                   // returns false
-myTest.expectNegativeInteger ('-1');                   // returns false
-myTest.expectNegativeInteger (new Uize ({value:-1}));  // returns false
-myTest.expectNegativeInteger (1);                      // returns false
-myTest.expectNegativeInteger (1.5);                    // returns false
+myTest.expectNegativeInteger (-1.5);               // returns false
+myTest.expectNegativeInteger ('-1');               // returns false
+myTest.expectNegativeInteger (Uize ({value:-1}));  // returns false
+myTest.expectNegativeInteger (1);                  // returns false
+myTest.expectNegativeInteger (1.5);                // returns false
 </pre>
 			
 			<p><span class="allCaps">NOTES</span></p>
@@ -979,13 +979,13 @@ myTest.expectNegativeInteger (1.5);                    // returns false
 			<p><span class="allCaps">EXAMPLE</span></p>
 			
 			
-<pre class="sample-code">myTest.expectNegativeNumber (0);                      // returns true
-myTest.expectNegativeNumber (-.5);                    // returns true
-myTest.expectNegativeNumber (-Infinity);              // returns true
+<pre class="sample-code">myTest.expectNegativeNumber (0);                  // returns true
+myTest.expectNegativeNumber (-.5);                // returns true
+myTest.expectNegativeNumber (-Infinity);          // returns true
 
-myTest.expectNegativeNumber (1.333);                  // returns false
-myTest.expectNegativeNumber ('-5');                   // returns false
-myTest.expectNegativeNumber (new Uize ({value:-5}));  // returns false
+myTest.expectNegativeNumber (1.333);              // returns false
+myTest.expectNegativeNumber ('-5');               // returns false
+myTest.expectNegativeNumber (Uize ({value:-5}));  // returns false
 </pre>
 			
 			<p><span class="allCaps">NOTES</span></p>
@@ -1084,16 +1084,16 @@ myTest.expectNoRepeats ([1,2,3,4,5,2]);  // returns false
 			<p><span class="allCaps">EXAMPLES</span></p>
 			
 			
-<pre class="sample-code">myTest.expectNonEmptyArray (['foo','bar']);               // returns true
-myTest.expectNonEmptyArray (new Array ('foo','bar'));     // returns true
-myTest.expectNonEmptyArray (new Array (5));               // returns true
+<pre class="sample-code">myTest.expectNonEmptyArray (['foo','bar']);           // returns true
+myTest.expectNonEmptyArray (new Array ('foo','bar')); // returns true
+myTest.expectNonEmptyArray (new Array (5));           // returns true
 
-myTest.expectNonEmptyArray ([]);                          // returns false
-myTest.expectNonEmptyArray (new Array);                   // returns false
-myTest.expectNonEmptyArray (new Uize ({value:['foo']}));  // returns false
-myTest.expectNonEmptyArray ({foo:'bar'});                 // returns false
-myTest.expectNonEmptyArray (1.2345);                      // returns false
-myTest.expectNonEmptyArray (true);                        // returns false
+myTest.expectNonEmptyArray ([]);                      // returns false
+myTest.expectNonEmptyArray (new Array);               // returns false
+myTest.expectNonEmptyArray (Uize ({value:['foo']}));  // returns false
+myTest.expectNonEmptyArray ({foo:'bar'});             // returns false
+myTest.expectNonEmptyArray (1.2345);                  // returns false
+myTest.expectNonEmptyArray (true);                    // returns false
 </pre>
 			
 			<p><span class="allCaps">NOTES</span></p>
@@ -1125,17 +1125,17 @@ myTest.expectNonEmptyArray (true);                        // returns false
 			<p><span class="allCaps">EXAMPLES</span></p>
 			
 			
-<pre class="sample-code">myTest.expectNonEmptyObject ({foo:'bar'});                     // returns true
-myTest.expectNonEmptyObject (new Object ({foo:'bar'}));        // returns true
-myTest.expectNonEmptyObject (['foo','bar']);                   // returns true
-myTest.expectNonEmptyObject (new Array (5));                   // returns true
-myTest.expectNonEmptyObject (new Uize ({value:'foo'}));        // returns true
-myTest.expectNonEmptyObject ({});                              // returns false
-myTest.expectNonEmptyObject (new Object);                      // returns false
-myTest.expectNonEmptyObject ([]);                              // returns false
-myTest.expectNonEmptyObject (new Array);                       // returns false
-myTest.expectNonEmptyObject (1.2345);                          // returns false
-myTest.expectNonEmptyObject (true);                            // returns false
+<pre class="sample-code">myTest.expectNonEmptyObject ({foo:'bar'});                 // returns true
+myTest.expectNonEmptyObject (new Object ({foo:'bar'}));    // returns true
+myTest.expectNonEmptyObject (['foo','bar']);               // returns true
+myTest.expectNonEmptyObject (new Array (5));               // returns true
+myTest.expectNonEmptyObject (Uize ({value:'foo'}));        // returns true
+myTest.expectNonEmptyObject ({});                          // returns false
+myTest.expectNonEmptyObject (new Object);                  // returns false
+myTest.expectNonEmptyObject ([]);                          // returns false
+myTest.expectNonEmptyObject (new Array);                   // returns false
+myTest.expectNonEmptyObject (1.2345);                      // returns false
+myTest.expectNonEmptyObject (true);                        // returns false
 </pre>
 			
 			<a name="2_16_1"></a>
@@ -1175,13 +1175,13 @@ myTest.expectNonEmptyObject (true);                            // returns false
 			<p><span class="allCaps">EXAMPLES</span></p>
 			
 			
-<pre class="sample-code">myTest.expectNonEmptyString ('foo');                     // returns true
+<pre class="sample-code">myTest.expectNonEmptyString ('foo');                 // returns true
 
-myTest.expectNonEmptyString ('');                        // returns false
-myTest.expectNonEmptyString (new String ('foo'));        // returns false
-myTest.expectNonEmptyString (new Uize ({value:'foo'}));  // returns false
-myTest.expectNonEmptyString (1.2345);                    // returns false
-myTest.expectNonEmptyString (true);                      // returns false
+myTest.expectNonEmptyString ('');                    // returns false
+myTest.expectNonEmptyString (new String ('foo'));    // returns false
+myTest.expectNonEmptyString (Uize ({value:'foo'}));  // returns false
+myTest.expectNonEmptyString (1.2345);                // returns false
+myTest.expectNonEmptyString (true);                  // returns false
 </pre>
 			
 			<p><span class="allCaps">NOTES</span></p>
@@ -1364,7 +1364,7 @@ myTest.expectObject ([]);                                     // returns true
 myTest.expectObject (['foo','bar']);                          // returns true
 myTest.expectObject (/^\s+$/);                                // returns true
 myTest.expectObject (new Boolean (false));                    // returns true
-myTest.expectObject (new Uize.Widget.Bar.Slider);             // returns true
+myTest.expectObject (Uize.Widget.Bar.Slider ());              // returns true
 myTest.expectObject (null);                                   // returns true
 
 myTest.expectObject (undefined);                              // returns false
@@ -1408,15 +1408,15 @@ myTest.expectObject (new Function ('value','alert (value)');  // returns false
 			<p><span class="allCaps">EXAMPLE</span></p>
 			
 			
-<pre class="sample-code">myTest.expectPositiveInteger (0);                     // returns true
-myTest.expectPositiveInteger (1);                     // returns true
-myTest.expectPositiveInteger (Infinity);              // returns true
+<pre class="sample-code">myTest.expectPositiveInteger (0);                 // returns true
+myTest.expectPositiveInteger (1);                 // returns true
+myTest.expectPositiveInteger (Infinity);          // returns true
 
-myTest.expectPositiveInteger (1.5);                   // returns false
-myTest.expectPositiveInteger ('1');                   // returns false
-myTest.expectPositiveInteger (new Uize ({value:1}));  // returns false
-myTest.expectPositiveInteger (-1);                    // returns false
-myTest.expectPositiveInteger (-1.5);                  // returns false
+myTest.expectPositiveInteger (1.5);               // returns false
+myTest.expectPositiveInteger ('1');               // returns false
+myTest.expectPositiveInteger (Uize ({value:1}));  // returns false
+myTest.expectPositiveInteger (-1);                // returns false
+myTest.expectPositiveInteger (-1.5);              // returns false
 </pre>
 			
 			<p><span class="allCaps">NOTES</span></p>
@@ -1455,13 +1455,13 @@ myTest.expectPositiveInteger (-1.5);                  // returns false
 			<p><span class="allCaps">EXAMPLE</span></p>
 			
 			
-<pre class="sample-code">myTest.expectPositiveNumber (0);                      // returns true
-myTest.expectPositiveNumber (5);                      // returns true
-myTest.expectPositiveNumber (Infinity);               // returns true
+<pre class="sample-code">myTest.expectPositiveNumber (0);                  // returns true
+myTest.expectPositiveNumber (5);                  // returns true
+myTest.expectPositiveNumber (Infinity);           // returns true
 
-myTest.expectPositiveNumber (-1.333);                 // returns false
-myTest.expectPositiveNumber ('5');                    // returns false
-myTest.expectPositiveNumber (new Uize ({value:5}));   // returns false
+myTest.expectPositiveNumber (-1.333);             // returns false
+myTest.expectPositiveNumber ('5');                // returns false
+myTest.expectPositiveNumber (Uize ({value:5}));   // returns false
 </pre>
 			
 			<p><span class="allCaps">NOTES</span></p>
@@ -2939,7 +2939,7 @@ Uize.module ({
 		'UizeDotCom.Page.Doc.library',
 		'UizeDotCom.Page.Doc'
 	],
-	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+	builder:function () {(window.page = UizeDotCom.Page.Doc ()).wireUi ()}
 });
 
 </script>

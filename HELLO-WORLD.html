@@ -68,7 +68,7 @@ Uize.module ({
 	],
 	builder:function () {
 		/*** create the hover fader child widget ***/
-			var hoverFader = new Uize.Widget.HoverFader ({
+			var hoverFader = Uize.Widget.HoverFader ({
 				nodes:{root:'helloWorld',tagName:'div'},
 				defaultStyle:{color:'#3',fontSize:50,textIndent:0},
 				hoverStyle:{color:'#ffa200',fontSize:100,textIndent:-15},

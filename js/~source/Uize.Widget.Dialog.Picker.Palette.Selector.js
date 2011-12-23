@@ -37,7 +37,7 @@ Uize.module ({
 			var _class = _superclass.subclass (
 				null,
 				function() {
-					new Uize.Util.Coupler({
+					Uize.Util.Coupler({
 						instances:[this, this.children.value],
 						properties:['valueNo', 'tentativeValueNo']
 					})

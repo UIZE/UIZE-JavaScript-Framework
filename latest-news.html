@@ -28,6 +28,10 @@
 
 <ul id="page-index">
 	<li>
+		<div class="itemTitle"><a href="news/2011-12-22-JavaScript-new-Operator-Now-Optional.html">2011-12-22 - JavaScript new Operator Now Optional</a><span class="arrow">&nbsp;</span></div>
+		<div class="itemBody">The JavaScript new operator is now optional when creating instances of Uize subclasses, and you can make the new operator optional for your own object constructors using the newly added Uize.noNew static method.</div>
+	</li>
+	<li>
 		<div class="itemTitle"><a href="news/2011-12-03-Improved-Uize.lookup-and-Uize.reverseLookup.html">2011-12-03 - Improved Uize.lookup and Uize.reverseLookup</a><span class="arrow">&nbsp;</span></div>
 		<div class="itemBody">The Uize.lookup and Uize.reverseLookup static methods have been improved with the added ability to specify a target object for adding entries.</div>
 	</li>
@@ -223,10 +227,6 @@
 		<div class="itemTitle"><a href="news/2010-08-06-NEW-MODULE-Uize.Node.Util.html">2010-08-06 - NEW MODULE: Uize.Node.Util</a><span class="arrow">&nbsp;</span></div>
 		<div class="itemBody">The new Uize.Node.Util module provides a home for miscellaneous node related methods that are too esoteric to belong in the base Uize.Node module.</div>
 	</li>
-	<li>
-		<div class="itemTitle"><a href="news/2010-08-03-NEW-MODULE-Uize.Node.Classes.html">2010-08-03 - NEW MODULE: Uize.Node.Classes</a><span class="arrow">&nbsp;</span></div>
-		<div class="itemBody">The new Uize.Node.Classes module is a package module with static methods to facilitate manipulation of the value of the className property of DOM nodes, with support for adding classes, removing classes, toggling classes, and lots more.</div>
-	</li>
 </ul>
 
 </div>
@@ -238,7 +238,7 @@ Uize.module ({
 		'UizeDotCom.Page.Doc.library',
 		'UizeDotCom.Page.Index'
 	],
-	builder:function () {(window.page = new UizeDotCom.Page.Index).wireUi ()}
+	builder:function () {(window.page = UizeDotCom.Page.Index ()).wireUi ()}
 });
 
 </script>

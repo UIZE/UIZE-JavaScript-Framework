@@ -50,7 +50,7 @@ Uize.module ({
 	],
 	builder:function () {
 		/*** create the example page widget ***/
-			var page = window.page = new UizeDotCom.Page.Example.Test;
+			var page = window.page = UizeDotCom.Page.Example.Test ();
 
 		/*** define the test code by overriding the performTest method of the page widget ***/
 			page.performTest = function (_reportResults) {
@@ -96,7 +96,7 @@ Uize.module ({
 						},
 						function () {
 							/*** using StringBuilder object ***/
-								var _stringBuilder = new Uize.String.Builder;
+								var _stringBuilder = Uize.String.Builder ();
 								for (_iterationNo = _totalIterations; --_iterationNo >= 0;) {
 									_stringBuilder.append (_stringToRepeat);
 								}

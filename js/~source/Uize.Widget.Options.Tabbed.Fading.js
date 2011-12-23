@@ -43,7 +43,7 @@ Uize.module ({
 					function () {
 						var
 							_this = this,
-							_fade = _this._fade = _this.fade = new Uize.Fade ({duration:1000})
+							_fade = _this._fade = _this.fade = Uize.Fade ({duration:1000})
 						;
 						_fade.wire ({
 							'Changed.value':

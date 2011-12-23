@@ -37,7 +37,7 @@ Uize.module ({
 					var _this = this;
 					
 					// Sync tentativeValue & tentativeValueDetails back and forth with value widget
-					new Uize.Util.Coupler({
+					Uize.Util.Coupler({
 						instances:[_this, _this.children.value],
 						properties:['tentativeValue', 'tentativeValueDetails']
 					});

@@ -141,7 +141,7 @@
 				
 				<p>The <code>Uize.Date</code> module supports parsing from and serializing to the most typical and simple of the <code><a href="#1_1_1">ISO 8601</a></code> standard's many formatting options, namely the big-endian all-numeric date notation <code>YYYY-MM-DD</code>. JavaScript's built-in <code><a href="../javascript-reference/Date.html">Date</a></code> object does not support parsing dates in <code><a href="#1_1_1">ISO 8601</a></code> format. When having date strings in this format, the <code><a href="#2_10">Uize.Date.resolve</a></code> static method can be used to produce <code><a href="../javascript-reference/Date.html">Date</a></code> instances set to the correct date. Consider the following example...</p>
 				
-				<p><span class="allCaps">WRONG! WRONG! WRONG!</span></p>
+				<p><span class="allCaps">INCORRECT</span></p>
 				
 				
 <pre class="sample-code">var myDate = new Date ('2009-09-27');  // produces an invalid date object
@@ -1157,7 +1157,7 @@ Uize.module ({
 		'UizeDotCom.Page.Doc.library',
 		'UizeDotCom.Page.Doc'
 	],
-	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+	builder:function () {(window.page = UizeDotCom.Page.Doc ()).wireUi ()}
 });
 
 </script>

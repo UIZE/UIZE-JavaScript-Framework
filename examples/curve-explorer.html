@@ -1341,13 +1341,13 @@ Uize.module ({
 	],
 	builder:function () {
 		/*** create the example page widget ***/
-			var page = window.page = new UizeDotCom.Page.Example;
+			var page = window.page = UizeDotCom.Page.Example ();
 
 		/*** configurable values ***/
 			var
 				totalSegments = 200,
-				gradientStartColor = new Uize.Color ('hsl(40,20,10)'),
-				gradientEndColor = new Uize.Color ('hsl(40,20,70)')
+				gradientStartColor = Uize.Color ('hsl(40,20,10)'),
+				gradientEndColor = Uize.Color ('hsl(40,20,70)')
 			;
 
 		/*** generate preview UI HTML ***/

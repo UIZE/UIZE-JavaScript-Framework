@@ -455,7 +455,7 @@ Uize.Fx.fadeStyle ('myNode',null,{backgroundColor:'f'});
 Uize.Fx.fadeStyle ('myNode',null,{backgroundColor:'Rgb(255,255,255)');
 Uize.Fx.fadeStyle ('myNode',null,{backgroundColor:{red:255,green:255,blue:255});
 Uize.Fx.fadeStyle ('myNode',null,{backgroundColor:[255,255,255]});
-Uize.Fx.fadeStyle ('myNode',null,{backgroundColor:new Uize.Color (255)});
+Uize.Fx.fadeStyle ('myNode',null,{backgroundColor:Uize.Color (255)});
 Uize.Fx.fadeStyle ('myNode',null,{backgroundColor:255});
 </pre>
 			</div>
@@ -609,7 +609,7 @@ Uize.module ({
 		'UizeDotCom.Page.Doc.library',
 		'UizeDotCom.Page.Doc'
 	],
-	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+	builder:function () {(window.page = UizeDotCom.Page.Doc ()).wireUi ()}
 });
 
 </script>

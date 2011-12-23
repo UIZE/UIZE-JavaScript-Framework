@@ -266,7 +266,7 @@ Uize.module ({name:'MyNamespace.MyLibraryName.library'});
 				<div class="contents4">
 					<p>When declaring a library as a module, the module declaration should <b>not</b> include the modules that are listed in the <a href="#3_1_1">Library Contents</a> comment inside the <code>required</code> list of the module declaration.</p>
 					
-					<p><span class="allCaps">WRONG! WRONG! WRONG!</span></p>
+					<p><span class="allCaps">INCORRECT</span></p>
 					
 					
 <pre class="sample-code">/* Library Contents
@@ -330,7 +330,7 @@ Uize.module ({
   Uize.moduleUrlTemplate = 'js/[#modulePath]';
   Uize.module ({
     required:'UizeDotCom.Page.Doc',
-    builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+    builder:function () {(window.page = UizeDotCom.Page.Doc ()).wireUi ()}
   });
 &lt;/script&gt;
 </pre>
@@ -356,7 +356,7 @@ Uize.module ({
 Uize.module ({name:'Uize.Widget.Page.library'});
 </pre>
 				
-				<p><span class="allCaps">WRONG! WRONG! WRONG!</span></p>
+				<p><span class="allCaps">INCORRECT</span></p>
 				
 				
 <pre class="sample-code">/* Library Contents
@@ -400,7 +400,7 @@ Uize.module ({name:'UizeDotCom.Page.Doc.library'});
 &lt;script type="text/javascript"&gt;
   Uize.module ({
     required:'UizeDotCom.Page.Doc',
-    builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+    builder:function () {(window.page = UizeDotCom.Page.Doc ()).wireUi ()}
   });
 &lt;/script&gt;
 </pre>
@@ -422,7 +422,7 @@ Uize.module ({name:'UizeDotCom.Page.Doc.library'});
 &lt;script type="text/javascript"&gt;
   Uize.module ({
     required:'UizeDotCom.Page.Doc',
-    builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+    builder:function () {(window.page = UizeDotCom.Page.Doc ()).wireUi ()}
   });
 &lt;/script&gt;
 </pre>
@@ -448,7 +448,7 @@ Uize.module ({name:'UizeDotCom.Page.Doc.library'});
       'UizeDotCom.Page.Doc.library',
       'UizeDotCom.Page.Doc'
     ],
-    builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+    builder:function () {(window.page = UizeDotCom.Page.Doc ()).wireUi ()}
   });
 &lt;/script&gt;
 </pre>
@@ -552,7 +552,7 @@ Uize.module ({name:'UizeDotCom.Page.Doc.library'});
 		<div class="contents2">
 			<p>When listing JavaScript modules in a library file, they should be listed in the correct dependency order, otherwise the library file won't work efficiently.</p>
 			
-			<p><span class="allCaps">WRONG! WRONG! WRONG!</span></p>
+			<p><span class="allCaps">INCORRECT</span></p>
 			
 			
 <pre class="sample-code">/* Library Contents
@@ -630,7 +630,7 @@ Uize.module ({
 		'UizeDotCom.Page.Doc.library',
 		'UizeDotCom.Page.Doc'
 	],
-	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+	builder:function () {(window.page = UizeDotCom.Page.Doc ()).wireUi ()}
 });
 
 </script>

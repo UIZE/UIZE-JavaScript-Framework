@@ -194,7 +194,7 @@ Uize.module ({
               _this._imagesLoaded = [];
 
             /*** Public Instance Properties ***/
-              _this.fade = new Uize.Fade;
+              _this.fade = Uize.Fade ();
               /*?
                 Instance Properties
                   fade
@@ -795,7 +795,7 @@ Uize.module ({
 		'UizeDotCom.Page.library',
 		'UizeDotCom.Page'
 	],
-	builder:function () {(window.page = new UizeDotCom.Page).wireUi ()}
+	builder:function () {(window.page = UizeDotCom.Page ()).wireUi ()}
 });
 
 </script>

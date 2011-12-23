@@ -385,7 +385,7 @@ Uize.module ({
 								Uize.Fx.fadeStyle ('myNode',null,{backgroundColor:'Rgb(255,255,255)');
 								Uize.Fx.fadeStyle ('myNode',null,{backgroundColor:{red:255,green:255,blue:255});
 								Uize.Fx.fadeStyle ('myNode',null,{backgroundColor:[255,255,255]});
-								Uize.Fx.fadeStyle ('myNode',null,{backgroundColor:new Uize.Color (255)});
+								Uize.Fx.fadeStyle ('myNode',null,{backgroundColor:Uize.Color (255)});
 								Uize.Fx.fadeStyle ('myNode',null,{backgroundColor:255});
 								................................................................................
 

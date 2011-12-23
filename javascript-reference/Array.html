@@ -994,7 +994,7 @@ newARRAY = new Array (element0ANYTYPE,element1ANYTYPE,...,elementNANYTYPE); // l
   Infinity,                  // serialized to "Infinity"
   'foo',                     // serialized to "foo"
   new RegExp ('\\d+'),       // serialized to "/\d+/"
-  new Uize ({value:'bar'}),  // serialized to "bar"
+  Uize ({value:'bar'}),      // serialized to "bar"
   ['lemon','lime','orange']  // serialized to "lemon,lime,orange"
 ];
 
@@ -1753,7 +1753,7 @@ alert (fruits.toString () == fruits.join ());    // alerts the text "true"
   Infinity,                  // serialized to "Infinity"
   'foo',                     // serialized to "foo"
   new RegExp ('\\d+'),       // serialized to "/\d+/"
-  new Uize ({value:'bar'}),  // serialized to "bar"
+  Uize ({value:'bar'}),      // serialized to "bar"
   ['lemon','lime','orange']  // serialized to "lemon,lime,orange"
 ];
 
@@ -2026,7 +2026,7 @@ Uize.module ({
 		'UizeDotCom.Page.Doc.library',
 		'UizeDotCom.Page.Doc'
 	],
-	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+	builder:function () {(window.page = UizeDotCom.Page.Doc ()).wireUi ()}
 });
 
 </script>

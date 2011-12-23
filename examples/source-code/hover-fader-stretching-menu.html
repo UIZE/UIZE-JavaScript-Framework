@@ -259,7 +259,7 @@ Uize.module ({
     'Uize.Curve.Mod'
   ],
   builder:function () {
-    (window.page = new UizeDotCom.Page.Example ({evaluator:function (code) {eval (code)}})).wireUi ();
+    (window.page = UizeDotCom.Page.Example ({evaluator:function (code) {eval (code)}})).wireUi ();
   }
 });
 
@@ -278,7 +278,7 @@ Uize.module ({
 		'UizeDotCom.Page.library',
 		'UizeDotCom.Page'
 	],
-	builder:function () {(window.page = new UizeDotCom.Page).wireUi ()}
+	builder:function () {(window.page = UizeDotCom.Page ()).wireUi ()}
 });
 
 </script>

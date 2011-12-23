@@ -45,7 +45,7 @@ Uize.module ({
 
 						/*** Private Instance Properties ***/
 							_this._totalProcesses = _this._totalProcessesTime = 0;
-							_this._fade = new Uize.Fade ({duration:4000});
+							_this._fade = Uize.Fade ({duration:4000});
 							_this._fade.wire (
 								'Changed.value',
 								function () {_this.set ({value:+_this._fade})}

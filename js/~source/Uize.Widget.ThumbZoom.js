@@ -58,7 +58,7 @@ Uize.module ({
 						var _this = this;
 
 						/*** Public Instance Properties ***/
-							_this.showFade = new Uize.Fade ({
+							_this.showFade = Uize.Fade ({
 								duration:350,
 								curve:Uize.Fade.celeration (1,0),
 								quantization:1
@@ -71,7 +71,7 @@ Uize.module ({
 											- see the related =hideFade= and =shieldFade= instance properties
 								*/
 							});
-							_this.hideFade = new Uize.Fade ({
+							_this.hideFade = Uize.Fade ({
 								duration:250,
 								curve:Uize.Fade.celeration (0,1),
 								startValue:1,
@@ -85,7 +85,7 @@ Uize.module ({
 											- see the related =showFade= and =shieldFade= instance properties
 								*/
 							});
-							_this.shieldFade = new Uize.Fade ({
+							_this.shieldFade = Uize.Fade ({
 								duration:3000,
 								curve:Uize.Fade.celeration (1,0),
 								startValue:0,

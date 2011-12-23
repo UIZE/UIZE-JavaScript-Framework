@@ -128,9 +128,9 @@
 		<p><span class="allCaps">EXAMPLE</span></p>
 		
 		
-<pre class="sample-code">new Uize.Color ('#ffebcd');
-new Uize.Color ('BlanchedAlmond');
-new Uize.Color (Uize.Color.colors.blanchedalmond);
+<pre class="sample-code">Uize.Color ('#ffebcd');
+Uize.Color ('BlanchedAlmond');
+Uize.Color (Uize.Color.colors.blanchedalmond);
 </pre>
 		
 		<p>Each of the above three statements would create a new instance of the <code><a href="../reference/Uize.Color.html">Uize.Color</a></code> object initialized to the SVG color "BlanchedAlmond". And because the <code><a href="../reference/Uize.Color.html">Uize.Color</a></code> module is used by other modules, such as the <code><a href="../reference/Uize.Fx.html">Uize.Fx</a></code> module, it is possible to use color names when specifying the values of color CSS style properties for fade effects, as in...</p>
@@ -703,7 +703,7 @@ Uize.module ({
 		'UizeDotCom.Page.Doc.library',
 		'UizeDotCom.Page.Doc'
 	],
-	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+	builder:function () {(window.page = UizeDotCom.Page.Doc ()).wireUi ()}
 });
 
 </script>

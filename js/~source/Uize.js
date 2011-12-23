@@ -23,6 +23,8 @@
 	Introduction
 		The =Uize= class is the base class from which many of the classes in the UIZE JavaScript Framework inherit.
 
+		*DEVELOPERS:* `Chris van Rensburg`
+
 		Key Features
 			Utility Belt Methods
 				Value Testing Methods
@@ -83,7 +85,103 @@
 					- =Uize.returnTrue= - always returns the value =true=
 					- =Uize.returnX= - always returns the value of the first argument, unaltered
 
-		*DEVELOPERS:* `Chris van Rensburg`
+				General Utilities
+
+					- =Uize.noNew= - wraps an object constructor function to make JavaScript's =new= operator optional
+
+			The "no new" Mechanism
+				The JavaScript =new= operator is optional when creating instances of =Uize= subclasses, and you can make the =new= operator optional for your own object constructors using the newly added =Uize.noNew= static method.
+
+				Creating Instances of Uize Classes
+					Because the =Uize= base class utilizes `the "no new" mechanism`, one can create instances of any =Uize= class either using the =new= operator or not.
+
+					EXAMPLE
+					................................................................................
+					// this works
+					var mySlider1 = new Uize.Widget.Bar.Slider ({minValue:0,maxValue:100,value:50});
+
+					// Look ma, no "new"!!!
+					var mySlider2 = Uize.Widget.Bar.Slider ({minValue:0,maxValue:100,value:50});
+					................................................................................
+
+				All Uize Classes Get the Benefit
+					Because of the way in which `the "no new" mechanism` is implemented in the =Uize= base class, any class that is derived from a =Uize= class using the =subclass= method gets the same benefit, including classes that you create for your own applications.
+
+					This means, for example, that any widget class you create by subclassing the =Uize.Widget= class will get the same benefit. Consider the following example...
+
+					EXAMPLE
+					..................................................
+					// we create a widget class
+					var MyWidgetClass = Uize.Widget.subclass ();
+
+					// this works
+					var myWidgetClassInstance1 = new MyWidgetClass ();
+
+					// Look ma, no "new"!!!
+					var myWidgetClassInstance2 = MyWidgetClass ();
+					..................................................
+
+				Applies for Other Uize Objects
+					`The "no new" mechanism`, that is implemented in the =Uize.noNew= static method, has been applied to various other =Uize= objects (such as the =Uize.Color= object) that are lightweight objects rather than full =Uize= classes.
+
+					So, for example, one can create instances of the =Uize.Color= object or the =Uize.String.Builder= object without needing to use the =new= operator. Consider the following example...
+
+					EXAMPLE
+					.........................................
+					// this works
+					var fuchsia = new Uize.Color ('#ff0fff');
+
+					// Look ma, no "new"!!!
+					var olive = Uize.Color ('#808000');
+					.........................................
+
+				Using the Uize.noNew Method
+					An object constructor that supports `the "no new" mechanism` can easily be created using the =Uize.noNew= static method.
+
+					In cases where you're creating =Uize= classes, you don't need to worry about the =Uize.noNew= method because `the "no new" mechanism` is built right into the =Uize= base class, so `all Uize classes get the benefit`. However, in cases where you're defining your own lightweight objects, you can use the =Uize.noNew= method to create an object constructor where the =new= operator is optional. Consider the following example...
+
+					EXAMPLE
+					............................................................
+					// define the Food object
+					var Food = Uize.noNew (
+						function (name,type) {
+							this.name = name;
+							this.type = type;
+						}
+					);
+
+					// create an instance of Food using the new operator
+					var apple = new Food ('apple','fruit');
+					alert (apple.type);  // alerts the text "fruit"
+
+					// create an instance of Food without using the new operator
+					var rice = Food ('rice','grain');
+					alert (rice.type);  // alerts the text "grain"
+					............................................................
+
+					What you'll notice from the above example is that the =Uize.noNew= method is quite simple - it takes a single parameter, which is the constructor function that initializes the new instance. This means that you can easily take an existing object constructor function and upgrade it to one that supports `the "no new" mechanism` by wrapping it inside a call to the =Uize.noNew= method, which then returns a wrapper constructor that becomes your new object constructor. Consider the following before-and-after example...
+
+					BEFORE
+					..............................................
+					// must always use "new" with this constructor
+					function Food (name,type) {
+						this.name = name;
+						this.type = type;
+					}
+					..............................................
+
+					AFTER
+					..........................................
+					// "new" is optional with this constructor
+					var Food = Uize.noNew (
+						function (name,type) {
+							this.name = name;
+							this.type = type;
+						}
+					);
+					..........................................
+
+					Notice that you need to assign the result of the =Uize.noNew= method call, and so your original constructor function no longer should have the name.
 */
 
 (function () {
@@ -239,6 +337,25 @@
 						NOTES
 						- The one exception to the conjoined rule is function references, which will be shared according to the current implementation.
 			*/
+		}
+
+		function _noNew (_constructor) {
+			var _constructorCallIsShim;
+			function _constructorSupportingNoNew () {
+				if (_constructorCallIsShim) {
+					_constructorCallIsShim = _false;
+					return this;
+				} else {
+					var _this = this;
+					if (_this == _undefined || _this.constructor != _constructorSupportingNoNew) {
+						_constructorCallIsShim = _true;
+						_this = new _constructorSupportingNoNew;
+					}
+					_constructor.apply (_this,arguments);
+					return _this;
+				}
+			}
+			return _constructorSupportingNoNew;
 		}
 
 		/*** Intrinsic Method Implementations (troubleshooting aid) ***/
@@ -1048,7 +1165,7 @@
 
 								EXAMPLE
 								......................................................
-								var mySlider = new Uize.Widget.Bar.Slider ({
+								var mySlider = Uize.Widget.Bar.Slider ({
 									minValue:0,
 									maxValue:100,
 									value:57
@@ -1106,9 +1223,9 @@
 								For one thing, this variation makes it easy to create a new instance of a class with the same state as an existing instance.
 
 								EXAMPLE
-								.............................................
-								copyOfMyFade = new Uize.Fade (myFade.get ());
-								.............................................
+								.........................................
+								copyOfMyFade = Uize.Fade (myFade.get ());
+								.........................................
 
 								In this example, an instance of the class =Uize.Fade= is being created by passing the constructor all the set-get property values obtained from the =myFade= instance using the =get= method. The new instance created will then have the same state as the =myFade= instance.
 
@@ -1616,10 +1733,10 @@
 						Uize.constrain (150,0,100);   // returns 100
 
 						// constraining with value types that are coerced to number
-						Uize.constrain (              // returns new Uize ({value:0})
-							new Uize ({value:-50}),    // coerced to -50
-							new Uize ({value:0}),      // coerced to 0
-							new Uize ({value:1000})    // coerced to 100
+						Uize.constrain (              // returns Uize ({value:0})
+							Uize ({value:-50}),        // coerced to -50
+							Uize ({value:0}),          // coerced to 0
+							Uize ({value:1000})        // coerced to 100
 						);
 
 						// constraining with strings values
@@ -1660,9 +1777,9 @@
 
 						// inRange testing with value types that are coerced to number
 						Uize.inRange (              // returns false
-							new Uize ({value:-50}),  // coerced to -50
-							new Uize ({value:0}),    // coerced to 0
-							new Uize ({value:1000})  // coerced to 100
+							Uize ({value:-50}),      // coerced to -50
+							Uize ({value:0}),        // coerced to 0
+							Uize ({value:1000})      // coerced to 100
 						);
 
 						// inRange testing with strings values
@@ -1709,10 +1826,10 @@
 							);
 
 							// testing an object against a range expressed using objects
-							Uize.inRange (              // testing
-								new Uize ({value:-50}),  // coerced to -50
-								new Uize ({value:0}),    // coerced to 0
-								new Uize ({value:1000})  // coerced to 100
+							Uize.inRange (          // testing
+								Uize ({value:-50}),  // coerced to -50
+								Uize ({value:0}),    // coerced to 0
+								Uize ({value:1000})  // coerced to 100
 							);
 							............................................................
 
@@ -2721,9 +2838,9 @@
 						Returns an object that is created by melding together the specified keys array and values array.
 
 						SYNTAX
-						.......................................................
-						resultOBJ = Uize.meldKeysValue (keysARRAY,valuesARRAY);
-						.......................................................
+						........................................................
+						resultOBJ = Uize.meldKeysValues (keysARRAY,valuesARRAY);
+						........................................................
 
 						The =Uize.meldKeysValues= method iterates through the elements of the =keysARRAY= and =valuesARRAY= arrays in lock step, assigning properties to the resulting object using an element from the keys array as property name and an element from the values array as property value.
 
@@ -3272,7 +3389,7 @@
 						Uize.isObject (new String ('foo'));   // returns true
 						Uize.isObject (new Number (5));       // returns true
 						Uize.isObject (new Date);             // returns true
-						Uize.isObject (new Uize.Widget);      // returns true
+						Uize.isObject (Uize.Widget ());       // returns true
 
 						Uize.isObject (null);                 // returns false
 						Uize.isObject (undefined);            // returns false
@@ -3323,7 +3440,7 @@
 						Uize.isPlainObject (new String ('foo'));   // returns false
 						Uize.isPlainObject (new Number (5));       // returns false
 						Uize.isPlainObject (new Date);             // returns false
-						Uize.isPlainObject (new Uize.Widget);      // returns false
+						Uize.isPlainObject (Uize.Widget ());       // returns false
 						Uize.isPlainObject (null);                 // returns false
 						Uize.isPlainObject (undefined);            // returns false
 						Uize.isPlainObject ();                     // returns false
@@ -3443,7 +3560,7 @@
 						Uize.isString ();                     // returns false
 						Uize.isString ({foo:'bar'});          // returns false
 						Uize.isString (['foo','bar']);        // returns false
-						Uize.isString (new Uize.Widget);      // returns false
+						Uize.isString (Uize.Widget ());       // returns false
 						Uize.isString (function () {});       // returns false
 						// etc.
 						......................................................
@@ -3482,7 +3599,7 @@
 						Uize.isBoolean ();                     // returns false
 						Uize.isBoolean ({foo:'bar'});          // returns false
 						Uize.isBoolean (['foo','bar']);        // returns false
-						Uize.isBoolean (new Uize.Widget);      // returns false
+						Uize.isBoolean (Uize.Widget ());       // returns false
 						Uize.isBoolean (function () {});       // returns false
 						// etc.
 						.......................................................
@@ -3562,7 +3679,7 @@
 						Uize.isPrimitive ();                     // returns false
 						Uize.isPrimitive ({foo:'bar'});          // returns false
 						Uize.isPrimitive (['foo','bar']);        // returns false
-						Uize.isPrimitive (new Uize.Widget);      // returns false
+						Uize.isPrimitive (Uize.Widget ());       // returns false
 						Uize.isPrimitive (function () {});       // returns false
 						// etc.
 						.........................................................
@@ -3655,12 +3772,12 @@
 						Uize.isEmpty (new String (''));      // returns true
 						Uize.isEmpty (new Number (0));       // returns true
 						Uize.isEmpty (new Boolean (false));  // returns true
-						Uize.isEmpty (new Uize ({value:0}))  // returns true
+						Uize.isEmpty (Uize ({value:0}))      // returns true
 
 						Uize.isEmpty (new String ('blah'));  // returns false
 						Uize.isEmpty (new Number (0));       // returns false
 						Uize.isEmpty (new Boolean (true));   // returns false
-						Uize.isEmpty (new Uize ({value:1}))  // returns false
+						Uize.isEmpty (Uize ({value:1}))      // returns false
 						.....................................................
 
 						Using =Uize.isEmpty (objectOrArray)= has better performance than the expression =!Uize.totalKeys (objectOrArray)=, because the latter expression iterates through all the keys of the object or elements of the array to count the total.
@@ -4618,7 +4735,7 @@
 									{
 										month:9,
 										date:11,
-										year:new Uize ({value:2001}),
+										year:Uize ({value:2001}),
 										flights:['AA11','UA175','AA77','UA93']
 									}
 								);
@@ -4710,9 +4827,9 @@
 								When the source value to substitute into is not a string (eg. an object, array, number, boolean, etc.), then this value will be coerced to a string.
 
 								EXAMPLE
-								.............................................................................
-								Uize.substituteInto (new Uize ({value:'My name is [#name].'}),{name:'Eric'});
-								.............................................................................
+								.........................................................................
+								Uize.substituteInto (Uize ({value:'My name is [#name].'}),{name:'Eric'});
+								.........................................................................
 
 								RESULT
 								..................
@@ -4727,22 +4844,110 @@
 			*/
 		);
 
+		_nonInheritableStatic ('noNew',_noNew);
+			/*?
+				Static Methods
+					Uize.noNew
+						Returns a function that is an object constructor that will construct an object using the specified constructor function, with JavaScript's =new= operator being optional when creating instances of the object.
+
+						SYNTAX
+						.............................................................
+						objectConstructorFUNC = Uize.noNew (constructorFunctionFUNC);
+						.............................................................
+
+						Normally, when creating instances of objects in JavaScript, the =new= operator must be used in conjunction with the constructor function, as in the statement =var date &#61; new Date ()=. The =Uize.noNew= method can be used to wrap any existing object constructor function, to create an object constructor where JavaScript's =new= operator will be optional when creating an instance of the object by calling the constructor.
+
+						EXAMPLE
+						............................................................
+						// define the Food object
+						var Food = Uize.noNew (
+							function (name,type) {
+								this.name = name;
+								this.type = type;
+							}
+						);
+
+						// create an instance of Food using the new operator
+						var apple = new Food ('apple','fruit');
+						alert (apple.type);  // alerts the text "fruit"
+
+						// create an instance of Food without using the new operator
+						var rice = Food ('rice','grain');
+						alert (rice.type);  // alerts the text "grain"
+						............................................................
+
+						In the above example, the =Food= object is being defined by using the =Uize.noNew= method to wrap a constructor function. Then, one instance of this object is created using the =new= operator, while another instance is created without using =new=. Both instances are fully fledged =Food= object instances and behave in exactly the same way.
+
+						Properties Aren't Transferred
+							When wrapping a constructor function using the =Uize.noNew= method, static and instance methods and properties on the wrapped constructor function are not transferred to the wrapper function.
+
+							The =Uize.noNew= method is not intended to be used to wrap constructor functions after the fact, but is intended to be used to wrap a constructor function before static and instance methods and properties are assigned.
+
+							INCORRECT
+							.....................................................................
+							// define Food object
+							function Food (name,type) {
+								this.name = name;
+								this.type = type;
+							}
+
+							// define instance methods
+							Food.prototype.isFruit = function () {return this.type == 'fruit'};
+							Food.prototype.isGrain = function () {return this.type == 'grain'};
+
+							// define static methods
+							Food.isFruit = function (food) {return food && food.isFruit ()};
+							Food.isGrain = function (food) {return food && food.isGrain ()};
+
+							// wrap Food constructor to make new operator optional -- TOO LATE!!!
+							Food = Uize.noNew (Food);
+							.....................................................................
+
+							In the above example, the =Food= object is defined and then instance and static methods are defined for it. The =Food= object is then replaced with a wrapper of itself that is created using the =Uize.noNew= method. Now, the =Uize.noNew= method does not transfer properties of the constructor function that is wrapped, so the new =Food= object lacks the instance and static methods - not the desired effect. The solution is to first wrap the constructor function using =Uize.noNew=, after which the additional features can be defined for the object, as shown below...
+
+							CORRECT
+							....................................................................
+							// define Food object, already wrapped to make new operator optional
+							var Food = Uize.noNew (
+								function (name,type) {
+									this.name = name;
+									this.type = type;
+								}
+							);
+
+							// define instance methods
+							Food.prototype.isFruit = function () {return this.type == 'fruit'};
+							Food.prototype.isGrain = function () {return this.type == 'grain'};
+
+							// define static methods
+							Food.isFruit = function (food) {return food && food.isFruit ()};
+							Food.isGrain = function (food) {return food && food.isGrain ()};
+							....................................................................
+			*/
+
 		/*** Inheritance Mechanism ***/
 			function _createSubclass (_class,_alphastructor,_omegastructor) {
-				var _subclass = function () {
-					var _subclassInheritanceChainForType, _subclassInheritanceChainForTypeLength, _function;
-					for (var _type in _subclassInheritanceChain) {
-						_subclassInheritanceChainForTypeLength =
-							(_subclassInheritanceChainForType = _subclassInheritanceChain [_type]).length
-						;
-						for (var _classNo = -1; ++_classNo < _subclassInheritanceChainForTypeLength;)
-							if (_function = _subclassInheritanceChainForType [_classNo]) _function.apply (this,arguments)
-						;
-					}
-					return this;
-				};
-
-				var _classPrototype = _class.prototype;
+				var
+					_classPrototype = _class.prototype,
+					_skipCallingStructors,
+					_subclass = _noNew (
+						function () {
+							for (
+								var _alphastructorNo = -1, _alphastructorsLength = _alphastructors.length, _alphastructor;
+								++_alphastructorNo < _alphastructorsLength;
+							)
+								if (_alphastructor = _alphastructors [_alphastructorNo]) _alphastructor.apply (this,arguments)
+							;
+							for (
+								var _omegastructorNo = -1, _omegastructorsLength = _omegastructors.length, _omegastructor;
+								++_omegastructorNo < _omegastructorsLength;
+							)
+								if (_omegastructor = _omegastructors [_omegastructorNo]) _omegastructor.apply (this,arguments)
+							;
+						}
+					),
+					_subclassPrototype = _subclass.prototype
+				;
 
 				/*** Inherit static properties (excluding prototype) and methods from base class ***/
 					var
@@ -4763,8 +4968,6 @@
 					;
 
 				/*** Prepare instance properties and methods ***/
-					var _subclassPrototype = _subclass.prototype;
-
 					/*** Inherit instance properties and methods from base class (from prototype) ***/
 						_copyInto (_subclassPrototype,_classPrototype);
 
@@ -4847,16 +5050,12 @@
 						_subclass.toString = _toString;
 						_subclass.valueOf = _valueOf;
 
-				/*** Initialize class inheritance chain ***/
+				/*** Initialize Alphastructors and Omegastructors ***/
 					var
-						_classInheritanceChain = _class._classInheritanceChain || {
-							alphastructor:_sacredEmptyArray,
-							omegastructor:_sacredEmptyArray
-						},
-						_subclassInheritanceChain = _subclass._classInheritanceChain = {
-							alphastructor:_classInheritanceChain.alphastructor.concat (_alphastructor),
-							omegastructor:_classInheritanceChain.omegastructor.concat (_omegastructor)
-						}
+						_alphastructors = _subclass._alphastructors =
+							(_class._alphastructors || _sacredEmptyArray).concat (_alphastructor),
+						_omegastructors = _subclass._omegastructors =
+							(_class._omegastructors || _sacredEmptyArray).concat (_omegastructor)
 					;
 
 				_subclass._propertyProfilesByPrivateNames || (_subclass._propertyProfilesByPrivateNames = {});

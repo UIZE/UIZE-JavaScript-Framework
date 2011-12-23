@@ -191,7 +191,7 @@
 				<p><span class="allCaps">EXAMPLE</span></p>
 				
 				
-<pre class="sample-code">new Uize.Util.PropertyAdapter ({
+<pre class="sample-code">Uize.Util.PropertyAdapter ({
   propertyA:{
     instance:sliderA,
     property:'minValue'
@@ -371,7 +371,7 @@
 							<p><span class="allCaps">EXAMPLE</span></p>
 							
 							
-<pre class="sample-code">new Uize.Util.PropertyAdapter ({
+<pre class="sample-code">Uize.Util.PropertyAdapter ({
   propertyA:numberTextInput,         // instance of Uize.Widget.TextInput
   propertyB:numberSquaredTextInput,  // instance of Uize.Widget.TextInput
   valueAdapter:{
@@ -392,7 +392,7 @@
 							<p><span class="allCaps">EXAMPLE</span></p>
 							
 							
-<pre class="sample-code">new Uize.Util.PropertyAdapter ({
+<pre class="sample-code">Uize.Util.PropertyAdapter ({
   propertyA:colorAsHexTextInput,
   propertyB:colorAsRgbTextInput,
   valueAdapter:Uize.Color.adapter ('#hex','RGB string')
@@ -529,7 +529,7 @@
 							<p><span class="allCaps">EXAMPLE</span></p>
 							
 							
-<pre class="sample-code">new Uize.Util.PropertyAdapter ({
+<pre class="sample-code">Uize.Util.PropertyAdapter ({
   propertyA:sliderA,
   propertyB:sliderB,
   valueAdapter:{
@@ -569,7 +569,7 @@
 						<p><span class="allCaps">USING A COUPLER...</span></p>
 						
 						
-<pre class="sample-code">new Uize.Util.Coupler ({
+<pre class="sample-code">Uize.Util.Coupler ({
   instances:[instanceA,instanceB],
   properties:['someProperty']
 });
@@ -578,7 +578,7 @@
 						<p><span class="allCaps">USING A PROPERTY ADAPTER...</span></p>
 						
 						
-<pre class="sample-code">new Uize.Util.PropertyAdapter ({
+<pre class="sample-code">Uize.Util.PropertyAdapter ({
   propertyA:[instanceA,'someProperty'],
   propertyA:[instanceB,'someProperty']
 });
@@ -979,7 +979,7 @@ Uize.module ({
 		'UizeDotCom.Page.Doc.library',
 		'UizeDotCom.Page.Doc'
 	],
-	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+	builder:function () {(window.page = UizeDotCom.Page.Doc ()).wireUi ()}
 });
 
 </script>

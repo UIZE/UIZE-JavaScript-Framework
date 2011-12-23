@@ -134,10 +134,10 @@ Uize.module ({
   ],
   builder:function () {
     /*** create the example page widget ***/
-      var page = window.page = new UizeDotCom.Page.Example;
+      var page = window.page = UizeDotCom.Page.Example ();
 
     /*** create the color picker, the color info widget, and connect them via a property adapter ***/
-      new Uize.Util.PropertyAdapter ({
+      Uize.Util.PropertyAdapter ({
         propertyA:page.addChild (
           'colorPicker',
           Uize.Widget.ColorPicker,
@@ -153,7 +153,7 @@ Uize.module ({
 
     /*** create the color format text input instances ***/
       function createColorFormatTextInput (widgetName,colorEncoding) {
-        new Uize.Util.PropertyAdapter ({
+        Uize.Util.PropertyAdapter ({
           propertyA:page.children.colorPicker,
           propertyB:page.addChild (widgetName,Uize.Widget.TextInput),
           valueAdapter:Uize.Color.adapter ('hex',colorEncoding)
@@ -186,7 +186,7 @@ Uize.module ({
 		'UizeDotCom.Page.library',
 		'UizeDotCom.Page'
 	],
-	builder:function () {(window.page = new UizeDotCom.Page).wireUi ()}
+	builder:function () {(window.page = UizeDotCom.Page ()).wireUi ()}
 });
 
 </script>

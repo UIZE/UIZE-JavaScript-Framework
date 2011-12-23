@@ -786,7 +786,7 @@ myFade.start ();
 				<p><span class="allCaps">EXAMPLE</span></p>
 				
 				
-<pre class="sample-code">var colorFade = new Uize.Fade ({
+<pre class="sample-code">var colorFade = Uize.Fade ({
   startValue:{red:255,green:128,blue:0}, // orange
   endValue:{red:179,green:136,blue:255}, // violet
   quantization:1,
@@ -811,7 +811,7 @@ myFade.start ();
 				<p><span class="allCaps">EXAMPLE</span></p>
 				
 				
-<pre class="sample-code">var colorFade = new Uize.Fade ({
+<pre class="sample-code">var colorFade = Uize.Fade ({
   startValue:{red:255,green:128,blue:0}, // orange
   endValue:{red:179,green:136,blue:255}, // violet
   quantization:{
@@ -834,7 +834,7 @@ myFade.start ();
 				<p><span class="allCaps">EXAMPLE</span></p>
 				
 				
-<pre class="sample-code">var colorFade = new Uize.Fade ({
+<pre class="sample-code">var colorFade = Uize.Fade ({
   startValue:{
     color:{red:255,green:128,blue:0}, // orange
     opacity:0
@@ -863,7 +863,7 @@ myFade.start ();
 				<p><span class="allCaps">EXAMPLE</span></p>
 				
 				
-<pre class="sample-code">var colorFade = new Uize.Fade ({
+<pre class="sample-code">var colorFade = Uize.Fade ({
   startValue:{
     colorA:{red:255,green:128,blue:0},   // orange
     colorB:{red:255,green:0,blue:0}      // pure red
@@ -897,7 +897,7 @@ myFade.start ();
 				<p><span class="allCaps">EXAMPLE</span></p>
 				
 				
-<pre class="sample-code">var opacityFade = new Uize.Fade ({
+<pre class="sample-code">var opacityFade = Uize.Fade ({
   startValue:0,
   endValue:1,
   quantization:.02,
@@ -1081,7 +1081,7 @@ Uize.module ({
 		'UizeDotCom.Page.Doc.library',
 		'UizeDotCom.Page.Doc'
 	],
-	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+	builder:function () {(window.page = UizeDotCom.Page.Doc ()).wireUi ()}
 });
 
 </script>

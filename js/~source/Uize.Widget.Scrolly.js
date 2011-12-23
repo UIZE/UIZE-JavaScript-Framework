@@ -120,7 +120,7 @@ Uize.module ({
 						var _this = this;
 
 						/*** Public Instance Properties ***/
-							_this.fade = new Uize.Fade ({
+							_this.fade = Uize.Fade ({
 								duration:400,
 								curve:Uize.Fade.celeration (0,1),
 								quantization:1

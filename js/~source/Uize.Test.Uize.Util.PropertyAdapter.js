@@ -39,7 +39,7 @@ Uize.module ({
 			return {
 				_instanceA:_instanceA,
 				_instanceB:_instanceB,
-				_propertyAdapter:new Uize.Util.PropertyAdapter (
+				_propertyAdapter:Uize.Util.PropertyAdapter (
 					Uize.copyInto (
 						{
 							propertyA:{instance:_instanceA,property:'energy'},
@@ -59,7 +59,7 @@ Uize.module ({
 			return {
 				_instanceA:_instanceA,
 				_instanceB:_instanceB,
-				_propertyAdapter:new Uize.Util.PropertyAdapter ({
+				_propertyAdapter:Uize.Util.PropertyAdapter ({
 					propertyA:{instance:_instanceA,property:'normal'},
 					propertyB:{instance:_instanceB,property:'scaled'},
 					valueAdapter:{
@@ -76,13 +76,13 @@ Uize.module ({
 				return {
 					title:_title,
 					test:function () {
-						var _propertyAdapter = new Uize.Util.PropertyAdapter;
+						var _propertyAdapter = Uize.Util.PropertyAdapter ();
 						_propertyAdapter.set (_propertyName,_value);
 						return this.expect (_expectedConformedValue,_propertyAdapter.get (_propertyName));
 					}
 				};
 			}
-			var _someDummyInstance = new Uize;
+			var _someDummyInstance = Uize ();
 			return {
 				title:'Test that the conformer for ' + _propertyName + ' works correctly',
 				test:[
@@ -162,7 +162,7 @@ Uize.module ({
 				{
 					title:'Test that an instance of the class can be successfully created',
 					test:function () {
-						return this.expectInstanceOf (Uize.Util.PropertyAdapter,new Uize.Util.PropertyAdapter);
+						return this.expectInstanceOf (Uize.Util.PropertyAdapter,Uize.Util.PropertyAdapter ());
 					}
 				},
 				{
@@ -480,7 +480,7 @@ Uize.module ({
 							test:function () {
 								var
 									_instance = new _DummyClass ({prop1:'foo',prop2:'bar'}),
-									_propertyAdapter = new Uize.Util.PropertyAdapter ({
+									_propertyAdapter = Uize.Util.PropertyAdapter ({
 										propertyA:{instance:_instance,property:'prop1'},
 										propertyB:{instance:_instance,property:'prop2'}
 									}),
@@ -505,11 +505,11 @@ Uize.module ({
 							test:function () {
 								var
 									_instance = new _DummyClass ({prop1:'foo',prop2:'bar',prop3:'ha'}),
-									_propertyAdapter1 = new Uize.Util.PropertyAdapter ({
+									_propertyAdapter1 = Uize.Util.PropertyAdapter ({
 										propertyA:{instance:_instance,property:'prop1'},
 										propertyB:{instance:_instance,property:'prop2'}
 									}),
-									_propertyAdapter2 = new Uize.Util.PropertyAdapter ({
+									_propertyAdapter2 = Uize.Util.PropertyAdapter ({
 										propertyA:{instance:_instance,property:'prop2'},
 										propertyB:{instance:_instance,property:'prop3'}
 									}),
@@ -558,7 +558,7 @@ Uize.module ({
 
 								var
 									_instance = new _DummyClass,
-									_propertyAdapter = new Uize.Util.PropertyAdapter ({
+									_propertyAdapter = Uize.Util.PropertyAdapter ({
 										propertyA:{instance:_instance,property:'property1'},
 										propertyB:{instance:_instance,property:'property2'},
 										valueAdapter:{
@@ -591,7 +591,7 @@ Uize.module ({
 
 								var
 									_instance = new _CrazyClass,
-									_propertyAdapter = new Uize.Util.PropertyAdapter ({
+									_propertyAdapter = Uize.Util.PropertyAdapter ({
 										propertyA:{instance:_instance,property:'property1'},
 										propertyB:{instance:_instance,property:'property2'}
 									})

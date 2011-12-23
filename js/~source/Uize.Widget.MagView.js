@@ -58,7 +58,7 @@ Uize.module ({
 						var _this = this;
 
 						/*** create the fade instance ***/
-							if (Uize.Fade) _this._fade = new Uize.Fade ({duration:450,curve:Uize.Fade.celeration (0,1)});
+							if (Uize.Fade) _this._fade = Uize.Fade ({duration:450,curve:Uize.Fade.celeration (0,1)});
 
 						/*** create the mag image port widget ***/
 							_this._magImagePort = _this.addChild (

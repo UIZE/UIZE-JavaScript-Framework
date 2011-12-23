@@ -45,7 +45,7 @@ Uize.module ({
 
 						/*** Private Instance Properties ***/
 							_this._lifeTimeout = null;
-							_this._showFade = new Uize.Fade ({
+							_this._showFade = Uize.Fade ({
 								curve:Uize.Fade.celeration (0,1),
 								duration:750
 							});

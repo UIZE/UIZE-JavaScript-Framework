@@ -188,7 +188,7 @@ More on Widgets
 			EXAMPLE
 			............................................................
 			// create an instance of the page widget class
-			var pageWidget = new Uize.Widget.Page ({idPrefix:'page'});
+			var pageWidget = Uize.Widget.Page ({idPrefix:'page'});
 
 			// add a slider child widget to the page widget
 			pageWidget.addChild ('slider',Uize.Widget.Bar.Slider);
@@ -261,7 +261,7 @@ More on Widgets
 				WIDGET SETUP
 				..........................................................
 				// create a plain vanilla widget instance
-				var myWidget = new Uize.Widget ({
+				var myWidget = Uize.Widget ({
 					idPrefix:'myWidget',
 					html:'<div id="myWidget">I CRAWLED INTO MY SHELL</div>'
 				});
@@ -290,7 +290,7 @@ More on Widgets
 			EXAMPLE
 			.........................................................................
 			// create a plain vanilla widget instance
-			var myWidget = new Uize.Widget ({idPrefix:'myWidget'});
+			var myWidget = Uize.Widget ({idPrefix:'myWidget'});
 
 			// inject some HTML into the document for the widget instance
 			Uize.Node.injectHtml (
@@ -364,7 +364,7 @@ More on Widgets
 
 				When removing a node from the DOM using the =removeNode= instance method, the cached reference to the removed implied node is cleared from `The Node Cache`. When wiring events on implied nodes using the =wireNode= instance method, an ID for the widget instance that owns the event wirings is provided to the =Uize.Node.wire= static method, so that events can be unwired later by the widget by providing the same owner ID to the =Uize.Node.unwire= static method.
 
-				WRONG! WRONG! WRONG!
+				INCORRECT
 				................................................
 				Uize.Node.wire (
 					myWidget.getNode ('title'),
@@ -426,7 +426,7 @@ More on Widgets
 				EXAMPLE
 				..............................................................................
 				// we create a widget instance with the idPrefix of "foo" and wire it up
-				var myWidget = new Uize.Widget ({idPrefix:'foo'});
+				var myWidget = Uize.Widget ({idPrefix:'foo'});
 				myWidget.wireUi ();
 
 				// no DOM for "bar" implied node yet, so null value is cached for it
@@ -504,7 +504,7 @@ More on Widgets
 			<!-- some page setup code -->
 				<script type="text/javascript">
 					/*** create the page widget ***/
-						var page = new Uize.Widget.Page;
+						var page = Uize.Widget.Page ();
 
 					/*** add the JavaScript widget to manage the hover fader effects ***/
 						page.addChild ('menu1HoverFader',Uize.Widget.HoverFader);
@@ -522,9 +522,9 @@ More on Widgets
 			Provided that a widget is instantiated with an =idPrefix= specified (which happens automatically when adding a widget as a child widget of another widget), code in the =Uize.Widget= base class will look for the presence of the global variable for the declarative widget properties. If the variable is present, the properties will be harvested and stitched in to the properties object that is used to set the initial state of the widget instance and that is also available as a parameter to the alphastructor and omegastructor functions of a widget class.
 
 			EXAMPLE
-			..............................................................................................
+			...............................................................................................
 			/*** create a page widget ***/
-				var page = new Uize.Widget.Page; // the default idPrefix is "page"
+				var page = Uize.Widget.Page ();      // the default idPrefix is "page"
 
 			/*** declarative syntax widget properties for widget not yet created ***/
 				window.$page_myWidget = {foo:'bar'}; // for the "myWidget" child widget
@@ -533,18 +533,18 @@ More on Widgets
 				var MyWidgetClass = Uize.Widget.subclass (
 					/*** the alphastructor ***/
 						function (_properties) {
-							alert (_properties.foo);   // alerts the text "bar"
-							alert (this.get ('foo'));  // alerts the text "undefined" (set hasn't happened)
+							alert (_properties.foo);    // alerts the text "bar"
+							alert (this.get ('foo'));   // alerts the text "undefined" (set hasn't happened)
 						},
 					/*** the omegastructor ***/
 						function (_properties) {
-							alert (_properties.foo);   // alerts the text "bar" (it's still here, no surprise)
-							alert (this.get ('foo'));  // alerts the text "bar" (the set has happened by now)
+							alert (_properties.foo);    // alerts the text "bar" (it's still here, no surprise)
+							alert (this.get ('foo'));   // alerts the text "bar" (the set has happened by now)
 						}
 				);
 
 			page.addChild ('myWidget'Uize.Widget);
-			..............................................................................................
+			...............................................................................................
 
 			The above example illustrates how the widget properties that are defined for a widget (using the declarative syntax) before the widget is actually created are available as early as the alphastructor of the widget. Because the alphastructor of the =Uize.Widget= base class executes before the alphastructor of the =MyWidgetClass= subclass, the declarative widget properties can be harvested and stitched into the properties parameter that is passed to both the alphastructor and omegastructor, so that the harvested properties are available during the construction code of subclasses.
 
@@ -580,7 +580,7 @@ More on Widgets
 				....................................................................
 				/*** build up a widget tree under the page widget ***/
 					var
-						page = new Uize.Widget.Page,
+						page = Uize.Widget.Page (),
 						rgbSliders = page.addChild ('rgbSliders',Uize.Widget)
 					;
 
@@ -610,7 +610,7 @@ More on Widgets
 				EXAMPLE
 				.......................................................................................
 				/*** create a page widget, specifying properties for child widgets not yet created ***/
-					var page = new Uize.Widget.Page ({
+					var page = Uize.Widget.Page ({
 						children:{
 							rgbSlider:{
 								children:{
@@ -652,7 +652,7 @@ More on Widgets
 
 				/*** now, create the page widget and build a widget tree under it ***/
 					var
-						page = new Uize.Widget.Page,
+						page = Uize.Widget.Page (),
 						rgbSliders = page.addChild ('rgbSliders',Uize.Widget)
 					;
 					rgbSliders.addChild ('sliderR',Uize.Widget.Bar.Slider);
@@ -713,7 +713,7 @@ More on Child Widgets
 		);
 		...................................
 
-		Notice how the child widget is not created first using the =new= keyword with its class constructor. Instead, a reference to the child widget's class is provided in the second parameter, and the values for the child widget's set-get properties are supplied in the optional third parameter. By leaving it up to the parent widget to instantiate the child widget before adding it, the parent can ensure that the child widget knows its =parent= and its =idPrefix= when its constructor is executed. This can be useful information for the code inside the constructor.
+		Notice how the child widget is not created first using its class constructor. Instead, a reference to the child widget's class is provided in the second parameter, and the values for the child widget's set-get properties are supplied in the optional third parameter. By leaving it up to the parent widget to instantiate the child widget before adding it, the parent can ensure that the child widget knows its =parent= and its =idPrefix= when its constructor is executed. This can be useful information for the code inside the constructor.
 
 	Referencing Child Widgets
 		After the above code has executed, the newly added child widget can be referenced using your widget's =children= instance property, as in =myWidget.children.childWidgetName=.
@@ -785,7 +785,7 @@ Widget Adoption
 
 		Basically, you're assigning a property to the =window= object, where the property name is the =idPrefix= of the widget you want to have instantiated, prefixed with a "$" (dollar) sign. The dollar sign serves to minimize namespace collisions with other properties on the window object, and also to flag the property to the page widget as a candidate for adoption. The value of the property is a bundle of set-get property values for the widget that's to be instantiated and adopted. The special =widgetClass= property is a string value specifying the class name of your widget. Note that you can't just have an "open" class reference here, because the widget class is not guaranteed to be loaded and may need to be dynamically loaded.
 
-		WRONG! WRONG! WRONG!
+		INCORRECT
 		...................................................
 		<script type="text/javascript">
 			window.$page_menu1HoverFader = {
@@ -1026,7 +1026,7 @@ Widget Adoption
 			</script>
 			.............................................................
 
-			WRONG! WRONG! WRONG!
+			INCORRECT
 			..........................................................
 			<script type="text/javascript">
 				var $page_widgetName = {widgetClass:'WidgetClassName'};
@@ -1045,7 +1045,7 @@ Widget Adoption
 
 			The initial value for the =idPrefix= set-get property in the =Uize.Widget.Page= class is ='page'=, so unless you change that in your own subclasses of =Uize.Widget.Page= you should be able to start all your widget adoption statements with =window.$page_=.
 
-			WRONG! WRONG! WRONG!
+			INCORRECT
 			..................................................................................
 			<script type="text/javascript">
 				window.$page_widgetName = {widgetClass:'WidgetClassName'};
@@ -1057,7 +1057,7 @@ Widget Adoption
 				Uize.module ({
 					required:'Uize.Widget.Page',
 					builder:function () {
-						(window.page = new Uize.Widget.Page ({idPrefix:'mySitePage'})).wireUi ();
+						(window.page = Uize.Widget.Page ({idPrefix:'mySitePage'})).wireUi ();
 					}
 				});
 			</script>

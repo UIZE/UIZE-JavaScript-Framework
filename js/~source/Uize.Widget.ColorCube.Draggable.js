@@ -42,7 +42,7 @@ Uize.module ({
 			;
 
 		/*** General Variables ***/
-			var _dummyColor = new Uize.Color;
+			var _dummyColor = Uize.Color ();
 
 		/*** Class Constructor ***/
 			var
@@ -87,7 +87,7 @@ Uize.module ({
 				if (!_this.isWired) {
 					var
 						_shell = _this.getNode (),
-						_drag = new Uize.Widget.Drag ({node:_shell}),
+						_drag = Uize.Widget.Drag ({node:_shell}),
 						_xSideNames = ['Left','Right'],
 						_ySideNames = ['Top','Bottom'],
 						_eventStartPos = _drag.eventStartPos,
@@ -106,7 +106,7 @@ Uize.module ({
 								function _initCornerColorAtDragStart (_cornerName) {
 									(
 										_cornerColorsAtDragStart [_cornerName] ||
-										(_cornerColorsAtDragStart [_cornerName] = new Uize.Color)
+										(_cornerColorsAtDragStart [_cornerName] = Uize.Color ())
 									).from (_this.get (_cornerName));
 								}
 								_initCornerColorAtDragStart ('colorTopLeft');

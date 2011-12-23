@@ -1821,7 +1821,7 @@ Uize.module ({
 								Don't Pad Comma-separated Values
 									When the selected options are specified as a comma-separated string, the values in the string *should not* be padded with extra spaces, or the specified options will not become selected correctly.
 
-									WRONG! WRONG! WRONG!
+									INCORRECT
 									.......................................................................................
 									Uize.Node.setValue ('renewableEnergyList','Wind , Solar');  // padding around comma bad
 									Uize.Node.setValue ('renewableEnergyList','Wind, Solar');   // padding after comma bad
@@ -2498,7 +2498,7 @@ Uize.module ({
 
 				/*** wire up window events to fire events on window event vehicle ***/
 					var
-						_windowEventVehicle = new Uize,
+						_windowEventVehicle = Uize (),
 						_documentLoadedTimeout = setTimeout (function () {_windowEventVehicle.fire ('load')},15000)
 					;
 					_Uize.forEach (

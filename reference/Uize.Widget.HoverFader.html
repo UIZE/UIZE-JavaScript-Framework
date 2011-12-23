@@ -1282,7 +1282,7 @@
 			<p><span class="allCaps">EXAMPLE 1</span></p>
 			
 			
-<pre class="sample-code">var hoverFader = new Uize.Widget.HoverFader ({
+<pre class="sample-code">var hoverFader = Uize.Widget.HoverFader ({
   nodes:['link1Id','link2Id','link3Id']
 });
 </pre>
@@ -1290,7 +1290,7 @@
 			<p><span class="allCaps">EXAMPLE 2</span></p>
 			
 			
-<pre class="sample-code">var hoverFader = new Uize.Widget.HoverFader ({
+<pre class="sample-code">var hoverFader = Uize.Widget.HoverFader ({
   nodes:document.getElementsByTagName ('A')
 });
 </pre>
@@ -1298,7 +1298,7 @@
 			<p><span class="allCaps">EXAMPLE 3</span></p>
 			
 			
-<pre class="sample-code">var hoverFader = new Uize.Widget.HoverFader ({
+<pre class="sample-code">var hoverFader = Uize.Widget.HoverFader ({
   nodes:{tagName:'A',className:'hoverFadeLink'}
 });
 </pre>
@@ -1541,7 +1541,7 @@ Uize.module ({
 		'UizeDotCom.Page.Doc.library',
 		'UizeDotCom.Page.Doc'
 	],
-	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+	builder:function () {(window.page = UizeDotCom.Page.Doc ()).wireUi ()}
 });
 
 </script>

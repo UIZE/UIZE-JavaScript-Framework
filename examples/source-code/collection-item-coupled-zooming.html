@@ -132,7 +132,7 @@ Uize.module ({
   ],
   builder:function () {
     /*** create the example page widget ***/
-      var page = window.page = new UizeDotCom.Page.Example;
+      var page = window.page = UizeDotCom.Page.Example ();
 
     /*** create the two collection item widgets ***/
       var
@@ -159,7 +159,7 @@ Uize.module ({
       page.wireUi ();
 
     /*** couple the alignX, alignY, inUse properties between the two collection items ***/
-      var coupler = new Uize.Util.Coupler ({
+      var coupler = Uize.Util.Coupler ({
         instances:[item0,item1],
         properties:['alignX','alignY','inUse']
       });
@@ -186,7 +186,7 @@ Uize.module ({
 		'UizeDotCom.Page.library',
 		'UizeDotCom.Page'
 	],
-	builder:function () {(window.page = new UizeDotCom.Page).wireUi ()}
+	builder:function () {(window.page = UizeDotCom.Page ()).wireUi ()}
 });
 
 </script>

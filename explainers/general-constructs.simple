@@ -475,7 +475,7 @@ Conformers vs. Validators
 	Using a Value Adapter
 		EXAMPLE
 		......................................................
-		new Uize.Util.PropertyAdapter ({
+		Uize.Util.PropertyAdapter ({
 			propertyA:numberTextInput,
 			propertyB:numberSquaredTextInput,
 			valueAdapter:{
@@ -491,7 +491,7 @@ Conformers vs. Validators
 
 		EXAMPLE
 		........................................................
-		new Uize.Util.PropertyAdapter ({
+		Uize.Util.PropertyAdapter ({
 			propertyA:colorAsRgbHexTextInput,
 			propertyB:colorAsRgbTupleTextInput,
 			valueAdapter:Uize.Color.adapter ('#hex','RGB string')

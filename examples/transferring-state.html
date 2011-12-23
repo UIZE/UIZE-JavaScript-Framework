@@ -88,7 +88,7 @@ Uize.module ({
 	],
 	builder:function () {
 		/*** create the example page widget ***/
-			var page = window.page = new UizeDotCom.Page.Example ({evaluator:function (code) {eval (code)}});
+			var page = window.page = UizeDotCom.Page.Example ({evaluator:function (code) {eval (code)}});
 
 		/*** create the marquee instances ***/
 			var
@@ -122,7 +122,7 @@ Uize.module ({
 			page.wireUi ();
 
 		/*** couple the alignX, alignY, inUse properties between the two collection items ***/
-			var coupler = new Uize.Util.Coupler ({
+			var coupler = Uize.Util.Coupler ({
 				coupled:false,
 				instances:[marquee1,marquee2],
 				properties:['left','top','width','height','creatingNew']

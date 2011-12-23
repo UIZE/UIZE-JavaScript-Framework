@@ -193,9 +193,9 @@ Possible New Namespaces
 Code to Factor Out
 	Code to factor out of widget classes into non-Web specific modules...
 
-	- =Uize.Widget.ImagePort= - pure rectangle scaling math should be factored out into a new Uize.Math.RectScaler module
-	- =Uize.Widget.Population= - pure population string functionality should be migrated into a new Uize.String.Population module (or Uize.Template.Population?)
-	- =Uize.Widget.Tree= - model stuff for the data structure that represents a tree (Uize.Data.Tree?)
+	- =Uize.Widget.ImagePort= - pure rectangle scaling math should be factored out into a new =Uize.Math.RectScaler= module
+	- =Uize.Widget.Population= - pure population string functionality should be migrated into a new =Uize.String.Population= module (or =Uize.Template.Population=?)
+	- =Uize.Widget.Tree= - model stuff for the data structure that represents a tree (=Uize.Data.Tree=?)
 
 Upcoming Releases
 	- loop optimization approaches

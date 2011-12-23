@@ -252,8 +252,8 @@
 			
 			
 <pre class="sample-code">var
-  instance1 = new Uize,
-  instance2 = new Uize
+  instance1 = Uize (),
+  instance2 = Uize ()
 ;
 instance1.wire ('Some Crazy Event',instance2);
 instance2.wire (
@@ -277,7 +277,7 @@ instance1.fire ('Some Crazy Event');
 			
 			
 <pre class="sample-code">var
-  widget = new Uize.Widget,
+  widget = Uize.Widget (),
   childWidget = widget.addChild ('child',Uize.Widget),
   grandchildWidget = childWidget.addChild ('grandchild',Uize.Widget)
 ;
@@ -313,7 +313,7 @@ Uize.module ({
 		'UizeDotCom.Page.Doc.library',
 		'UizeDotCom.Page.Doc'
 	],
-	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+	builder:function () {(window.page = UizeDotCom.Page.Doc ()).wireUi ()}
 });
 
 </script>

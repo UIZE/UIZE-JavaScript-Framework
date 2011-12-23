@@ -100,7 +100,7 @@ The Engine
 
 		EXAMPLE
 		...................................................................................
-		var myFade = new Uize.Fade ({startValue:0,endValue:100,duration:5000});
+		var myFade = Uize.Fade ({startValue:0,endValue:100,duration:5000});
 		myFade.wire ('Changed.value',function () {Uize.Node.setValue ('testNode',myFade)});
 		myFade.start ();
 		...................................................................................
@@ -128,11 +128,11 @@ The Engine
 		The =Uize.Fade= class provides a highly versatile mechanism for configuring aribtrary quantization. In our earlier example that displayed an interpolated number in the range of =0= to =100= in a DOM node during the fade, there was no quantization. Consequently, you would see all manner of floating point number displayed throughout the course of the fade. If we were instead using this interpolated value to set something like left position, measured in pixels, then we wouldn't have a healthy value. And even if we rounded the number in our =Changed.value= event handler code, or if the browser forgave floating point pixel measurements, we would still potentially be touching the DOM far more than we would need to - the fractional values will not be noticeable but the unnecessary updates will cost us in performance. This is where the =quantization= set-get property of the =Uize.Fade= class comes in. Consider an updated version of the earlier example...
 
 		EXAMPLE
-		......................................................................................
-		var myFade = new Uize.Fade ({startValue:0,endValue:100,duration:5000,quantization:1});
+		...................................................................................
+		var myFade = Uize.Fade ({startValue:0,endValue:100,duration:5000,quantization:1});
 		myFade.wire ('Changed.value',function () {Uize.Node.setValue ('testNode',myFade)});
 		myFade.start ();
-		......................................................................................
+		...................................................................................
 
 		By setting the value of the =quantization= set-get property to =1=, we are ensuring that the value of the =value= set-get property will always be in increments of =1=. Since the start value is an integer, this will ensure that the interpolated value at any given point in time will always be an integer. Now when the =start= method is called, you would only see integers displayed throughout the course of the fade.
 
@@ -143,7 +143,7 @@ The Engine
 
 		EXAMPLE
 		.........................................................................
-		var positionFade = new Uize.Fade ({
+		var positionFade = Uize.Fade ({
 			startValue:{left:0,top:0,width:10,height:10},
 			endValue:{left:100,top:100,width:200,height:200},
 			duration:2000,
@@ -164,7 +164,7 @@ The Engine
 
 		EXAMPLE
 		.................................................................................
-		var positionAndBgFade = new Uize.Fade ({
+		var positionAndBgFade = Uize.Fade ({
 			startValue:{
 				coords:{left:0,top:0,width:10,height:10},
 				bg:{red:255,green:165,blue:0}
@@ -204,7 +204,7 @@ The Engine
 
 			EXAMPLE
 			..................................................................................
-			var positionAndBgFade = new Uize.Fade ({
+			var positionAndBgFade = Uize.Fade ({
 				startValue:{opacity:1,bg:{red:255,green:165,blue:0}},
 				endValue:{opacity:0,bg:{red:128,green:0,blue:128}},
 				duration:2000,
@@ -770,7 +770,7 @@ Curves
 
 			EXAMPLE
 			.........................................................................
-			var positionFade = new Uize.Fade ({
+			var positionFade = Uize.Fade ({
 				startValue:{left:0,top:0},
 				endValue:{left:100,top:100},
 				duration:2000,

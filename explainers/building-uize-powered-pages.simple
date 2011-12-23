@@ -109,7 +109,7 @@ Anatomy of a Typical Page
 						],
 						builder:function () {
 							/*** create the example page widget ***/
-								var page = window.page = new UizeDotCom.Page.Example;
+								var page = window.page = UizeDotCom.Page.Example ();
 
 							/*** add the Uize.Widget.Bar.Slider child widget ***/
 								page.addChild ('slider',Uize.Widget.Bar.Slider,{minValue:0,maxValue:200});

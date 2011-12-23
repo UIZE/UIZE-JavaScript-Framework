@@ -1595,7 +1595,7 @@ Uize.Node.setValue ('renewableEnergyList',['Solar','Wind','Solar']);  // has dup
 				<div class="contents4">
 					<p>When the selected options are specified as a comma-separated string, the values in the string <b>should not</b> be padded with extra spaces, or the specified options will not become selected correctly.</p>
 					
-					<p><span class="allCaps">WRONG! WRONG! WRONG!</span></p>
+					<p><span class="allCaps">INCORRECT</span></p>
 					
 					
 <pre class="sample-code">Uize.Node.setValue ('renewableEnergyList','Wind , Solar');  // padding around comma bad
@@ -2172,7 +2172,7 @@ Uize.module ({
 		'UizeDotCom.Page.Doc.library',
 		'UizeDotCom.Page.Doc'
 	],
-	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+	builder:function () {(window.page = UizeDotCom.Page.Doc ()).wireUi ()}
 });
 
 </script>

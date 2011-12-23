@@ -1286,7 +1286,7 @@
 				<p><span class="allCaps">EXAMPLE 2</span></p>
 				
 				
-<pre class="sample-code">&lt;%= new Uize ({value:'CONTINUE &gt;&gt;'}) -&gt; tagAttributeValue %&gt;
+<pre class="sample-code">&lt;%= Uize ({value:'CONTINUE &gt;&gt;'}) -&gt; tagAttributeValue %&gt;
 </pre>
 				
 				<p><span class="allCaps">OUTPUT</span></p>
@@ -1557,7 +1557,7 @@
 				<p><span class="allCaps">EXAMPLE 2</span></p>
 				
 				
-<pre class="sample-code">&lt;%= new Uize ({value:'hello, world'}) -&gt; urlPiece %&gt;
+<pre class="sample-code">&lt;%= Uize ({value:'hello, world'}) -&gt; urlPiece %&gt;
 </pre>
 				
 				<p><span class="allCaps">OUTPUT</span></p>
@@ -1612,7 +1612,7 @@ Uize.module ({
 		'UizeDotCom.Page.Doc.library',
 		'UizeDotCom.Page.Doc'
 	],
-	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+	builder:function () {(window.page = UizeDotCom.Page.Doc ()).wireUi ()}
 });
 
 </script>

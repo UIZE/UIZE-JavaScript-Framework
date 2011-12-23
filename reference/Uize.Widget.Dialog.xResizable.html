@@ -90,7 +90,7 @@
     'Uize.Widget.Dialog.xResizable'
   ],
   builder:function () {
-    var page = window.page = new Uize.Widget.Page;
+    var page = window.page = Uize.Widget.Page ();
 
     page.addChild ('resizableDialog',Uize.Widget.Dialog,{resizable:true});
   }
@@ -224,7 +224,7 @@
     'Uize.Widget.Dialog.xResizable'
   ],
   builder:function () {
-    var page = window.page = new Uize.Widget.Page;
+    var page = window.page = Uize.Widget.Page ();
 
     page.addChild (
       'verticallyResizableDialog',Uize.Widget.Dialog,{resizable:true}
@@ -283,7 +283,7 @@ Uize.module ({
 		'UizeDotCom.Page.Doc.library',
 		'UizeDotCom.Page.Doc'
 	],
-	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+	builder:function () {(window.page = UizeDotCom.Page.Doc ()).wireUi ()}
 });
 
 </script>

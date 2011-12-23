@@ -927,7 +927,7 @@ Key Aspects of a Framework
 	Sample Usage
 		Approach 1
 			.........................................................
-			_this._delayedAction = new Uize.Delayed ({delay:1000});
+			_this._delayedAction = Uize.Delayed ({delay:1000});
 			_this.wireNode (
 				node,
 				{

@@ -58,7 +58,7 @@ Uize.module ({
 							_this._titleShowNext ? _nextValueObject : _valueObject
 						);
 					}
-					_this.setNodeInnerHtml ('text',_text);
+					_this.set ('text',_text);
 					_this.setNodeProperties ('',{title:_title});
 				}
 			};

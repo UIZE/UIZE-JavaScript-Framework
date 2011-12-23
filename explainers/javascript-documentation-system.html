@@ -1162,7 +1162,7 @@ Labeled with letters...
 				</table>
 				<p>This behavior has the implication that you can't have two lists one after the other, without some non-list item formatted line to break the two lists apart. Consider the following example...</p>
 				
-				<p><span class="allCaps">WRONG! WRONG! WRONG!</span></p>
+				<p><span class="allCaps">INCORRECT</span></p>
 				
 				
 <pre class="sample-code">1. list item 1 of list 1
@@ -1455,7 +1455,7 @@ IMPORTANT!!!
 				
 				<p>The entire heading for a section is styled in a single way, as determined by the CSS style sheet that decorates a SimpleDoc document that has been converted to HTML. One cannot use inline formatting within section headings.</p>
 				
-				<p><span class="allCaps">WRONG! WRONG! WRONG!</span></p>
+				<p><span class="allCaps">INCORRECT</span></p>
 				
 				
 <pre class="sample-code">Section Heading With *Bolded Text*
@@ -3145,7 +3145,7 @@ These lines that look like object block type declarations are treated as sample 
 			
 			<p>According to the <a href="#8_3_1_1">rules for object block enclosing lines</a>, <a href="#8_3_1">object block enclosing lines</a> may be made up of two or more periods, tildes, commas, colons, or backticks. Which character you use is mostly just a matter of personal preference, however, this support for different characters for denoting sample code blocks is useful when the contents of a sample code block contains a line that looks like a sample code block opener/closer, using the character you would normally use for enclosing sample code blocks. In such cases, you can just switch to one of the several other characters supported. Consider the following example...</p>
 			
-			<p><span class="allCaps">WRONG! WRONG! WRONG!</span></p>
+			<p><span class="allCaps">INCORRECT</span></p>
 			
 			
 <pre class="sample-code">~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -3353,7 +3353,7 @@ Rich Internet Applications
 				
 				<p>In the above example, the entire contents of section "Rich Internet Applications" - but not the line "Rich Internet Applications" - is commented out. There are two comment regions. The inner comment region uses "#<" and "#>" as opener and closer, while the outer comment region uses "#<<" and "#>>".</p>
 				
-				<p><span class="allCaps">WRONG! WRONG! WRONG!</span></p>
+				<p><span class="allCaps">INCORRECT</span></p>
 				
 				
 <pre class="sample-code">Ajax
@@ -3470,7 +3470,7 @@ Uize.module ({
 		'UizeDotCom.Page.Doc.library',
 		'UizeDotCom.Page.Doc'
 	],
-	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+	builder:function () {(window.page = UizeDotCom.Page.Doc ()).wireUi ()}
 });
 
 </script>

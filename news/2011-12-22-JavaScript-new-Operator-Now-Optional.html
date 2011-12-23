@@ -1,0 +1,177 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2011-12-22 - JavaScript new Operator Now Optional | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="The JavaScript new operator is now optional when creating instances of Uize subclasses, and you can make the new operator optional for your own object constructors using the newly added Uize.noNew static method."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2011.html" class="breadcrumb breadcrumbWithArrow">2011 NEWS</a>
+	2011-12-22 - JavaScript new Operator Now Optional
+
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="Because the Uize base class utilizes the &quot;no new&quot; mechanism, one can create instances of any Uize class either using the new operator or not.">1. Creating Instances of Uize Classes</a></li>
+			<li><a href="#2" title="Because of the way in which the &quot;no new&quot; mechanism is implemented in the Uize base class, any class that is derived from a Uize class using the subclass method gets the same benefit, including classes that you create for your own applications.">2. All Uize Classes Get the Benefit</a></li>
+			<li><a href="#3" title="The &quot;no new&quot; mechanism, that is implemented in the Uize.noNew static method, has been applied to various other Uize objects (such as the Uize.Color object) that are lightweight objects rather than full Uize classes.">3. Applies for Other Uize Objects</a></li>
+			<li><a href="#4" title="An object constructor that supports the &quot;no new&quot; mechanism can easily be created using the Uize.noNew static method.">4. Using the Uize.noNew Method</a></li>
+			<li><a href="#5" title="The &quot;no new&quot; mechanism is fully documented and unit tested.">5. Unit Tested and Documented</a></li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<p>The JavaScript <code>new</code> operator is now optional when creating instances of <code><a href="../reference/Uize.html">Uize</a></code> subclasses, and you can make the <code>new</code> operator optional for your own object constructors using the newly added <code>Uize.noNew</code> static method.</p>
+	
+	<a name="1"></a>
+	<h1 class="heading1" title="1. Creating Instances of Uize Classes"><span class="headingNumber"><a href="#1" title="1. Creating Instances of Uize Classes">1</a>. </span>Creating Instances of Uize Classes</h1>
+	<div class="contents1">
+		<p>Because the <code><a href="../reference/Uize.html">Uize</a></code> base class utilizes the "no new" mechanism, one can create instances of any <code><a href="../reference/Uize.html">Uize</a></code> class either using the <code>new</code> operator or not.</p>
+		
+		<p><span class="allCaps">EXAMPLE</span></p>
+		
+		
+<pre class="sample-code">// this works
+var mySlider1 = new Uize.Widget.Bar.Slider ({minValue:0,maxValue:100,value:50});
+
+// Look ma, no "new"!!!
+var mySlider2 = Uize.Widget.Bar.Slider ({minValue:0,maxValue:100,value:50});
+</pre>
+	</div>
+	
+	<a name="2"></a>
+	<h1 class="heading1" title="2. All Uize Classes Get the Benefit"><span class="headingNumber"><a href="#2" title="2. All Uize Classes Get the Benefit">2</a>. </span>All Uize Classes Get the Benefit</h1>
+	<div class="contents1">
+		<p>Because of the way in which the "no new" mechanism is implemented in the <code><a href="../reference/Uize.html">Uize</a></code> base class, any class that is derived from a <code><a href="../reference/Uize.html">Uize</a></code> class using the <code>subclass</code> method gets the same benefit, including classes that you create for your own applications.</p>
+		
+		<p>This means, for example, that any widget class you create by subclassing the <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> class will get the same benefit. Consider the following example...</p>
+		
+		<p><span class="allCaps">EXAMPLE</span></p>
+		
+		
+<pre class="sample-code">// we create a widget class
+var MyWidgetClass = Uize.Widget.subclass ();
+
+// this works
+var myWidgetClassInstance1 = new MyWidgetClass ();
+
+// Look ma, no "new"!!!
+var myWidgetClassInstance2 = MyWidgetClass ();
+</pre>
+	</div>
+	
+	<a name="3"></a>
+	<h1 class="heading1" title="3. Applies for Other Uize Objects"><span class="headingNumber"><a href="#3" title="3. Applies for Other Uize Objects">3</a>. </span>Applies for Other Uize Objects</h1>
+	<div class="contents1">
+		<p>The "no new" mechanism, that is implemented in the <code>Uize.noNew</code> static method, has been applied to various other <code><a href="../reference/Uize.html">Uize</a></code> objects (such as the <code><a href="../reference/Uize.Color.html">Uize.Color</a></code> object) that are lightweight objects rather than full <code><a href="../reference/Uize.html">Uize</a></code> classes.</p>
+		
+		<p>So, for example, one can create instances of the <code><a href="../reference/Uize.Color.html">Uize.Color</a></code> object or the <code><a href="../reference/Uize.String.Builder.html">Uize.String.Builder</a></code> object without needing to use the <code>new</code> operator. Consider the following example...</p>
+		
+		<p><span class="allCaps">EXAMPLE</span></p>
+		
+		
+<pre class="sample-code">// this works
+var fuchsia = new Uize.Color ('#ff0fff');
+
+// Look ma, no "new"!!!
+var olive = Uize.Color ('#808000');
+</pre>
+	</div>
+	
+	<a name="4"></a>
+	<h1 class="heading1" title="4. Using the Uize.noNew Method"><span class="headingNumber"><a href="#4" title="4. Using the Uize.noNew Method">4</a>. </span>Using the Uize.noNew Method</h1>
+	<div class="contents1">
+		<p>An object constructor that supports the "no new" mechanism can easily be created using the <code>Uize.noNew</code> static method.</p>
+		
+		<p>In cases where you're creating <code><a href="../reference/Uize.html">Uize</a></code> classes, you don't need to worry about the <code>Uize.noNew</code> method because the "no new" mechanism is built right into the <code><a href="../reference/Uize.html">Uize</a></code> base class, so <a href="#2">all Uize classes get the benefit</a>. However, in cases where you're defining your own lightweight objects, you can use the <code>Uize.noNew</code> method to create an object constructor where the <code>new</code> operator is optional. Consider the following example...</p>
+		
+		<p><span class="allCaps">EXAMPLE</span></p>
+		
+		
+<pre class="sample-code">// define the Food object
+var Food = Uize.noNew (
+  function (name,type) {
+    this.name = name;
+    this.type = type;
+  }
+);
+
+// create an instance of Food using the new operator
+var apple = new Food ('apple','fruit');
+alert (apple.type);  // alerts the text "fruit"
+
+// create an instance of Food without using the new operator
+var rice = Food ('rice','grain');
+alert (rice.type);  // alerts the text "grain"
+</pre>
+		
+		<p>What you'll notice from the above example is that the <code>Uize.noNew</code> method is quite simple - it takes a single parameter, which is the constructor function that initializes the new instance. This means that you can easily take an existing object constructor function and upgrade it to one that supports the "no new" mechanism by wrapping it inside a call to the <code>Uize.noNew</code> method, which then returns a wrapper constructor that becomes your new object constructor. Consider the following before-and-after example...</p>
+		
+		<p><span class="allCaps">BEFORE</span></p>
+		
+		
+<pre class="sample-code">// must always use "new" with this constructor
+function Food (name,type) {
+  this.name = name;
+  this.type = type;
+}
+</pre>
+		
+		<p><span class="allCaps">AFTER</span></p>
+		
+		
+<pre class="sample-code">// "new" is optional with this constructor
+var Food = Uize.noNew (
+  function (name,type) {
+    this.name = name;
+    this.type = type;
+  }
+);
+</pre>
+		
+		<p>Notice that you need to assign the result of the <code>Uize.noNew</code> method call, and so your original constructor function no longer should have the name.</p>
+	</div>
+	
+	<a name="5"></a>
+	<h1 class="heading1" title="5. Unit Tested and Documented"><span class="headingNumber"><a href="#5" title="5. Unit Tested and Documented">5</a>. </span>Unit Tested and Documented</h1>
+	<div class="contents1">
+		<p>The "no new" mechanism is fully documented and unit tested.</p>
+		
+		<p>And, because this feature makes the <code>new</code> operator optional, the change is fully backwards compatible - all existing classes built on the <code><a href="../reference/Uize.html">Uize</a></code> framework will continue to behave as normal, even if you still feel attached to using the <code>new</code> operator.</p>
+	</div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = UizeDotCom.Page.Doc ()).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

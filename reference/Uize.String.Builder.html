@@ -180,7 +180,7 @@ document.writeln (tableHtml);
 				<p><span class="allCaps">AFTER</span></p>
 				
 				
-<pre class="sample-code">var tableHtml = new Uize.String.Builder;
+<pre class="sample-code">var tableHtml = Uize.String.Builder ();
 for (var rowNo = -1; ++rowNo &lt; rows.length;) {
   tableHtml.append ('&lt;tr&gt;');
   var cols = rows [rowNo];
@@ -211,7 +211,7 @@ document.writeln (tableHtml);
 					<p><span class="allCaps">EXAMPLE</span></p>
 					
 					
-<pre class="sample-code">var myStringBuilder = new Uize.String.Builder ('hello');
+<pre class="sample-code">var myStringBuilder = Uize.String.Builder ('hello');
 alert (myStringBuilder);  // displays the text "hello"
 </pre>
 					
@@ -228,7 +228,7 @@ alert (myStringBuilder);  // displays the text "hello"
 					<p><span class="allCaps">EXAMPLE</span></p>
 					
 					
-<pre class="sample-code">var myStringBuilder = new Uize.String.Builder ('hello');
+<pre class="sample-code">var myStringBuilder = Uize.String.Builder ('hello');
 myStringBuilder.setValue ('goodbye');
 alert (myStringBuilder);  // displays the text "goodbye"
 </pre>
@@ -263,7 +263,7 @@ myStringBuilder.setValue ();
 				<p><span class="allCaps">EXAMPLE</span></p>
 				
 				
-<pre class="sample-code">var myStringBuilder = new Uize.String.Builder;
+<pre class="sample-code">var myStringBuilder = Uize.String.Builder ();
 
 myStringBuilder.append ('l');
 myStringBuilder.prepend ('e');
@@ -292,7 +292,7 @@ alert (myStringBuilder);  // displays the text "hello"
 					<p><span class="allCaps">EXAMPLE</span></p>
 					
 					
-<pre class="sample-code">var myStringBuilder = new Uize.String.Builder ('solar');
+<pre class="sample-code">var myStringBuilder = Uize.String.Builder ('solar');
 myStringBuilder.append (' power');
 alert (myStringBuilder.getValue ());  // displays the text "solar power"
 </pre>
@@ -308,7 +308,7 @@ alert (myStringBuilder.getValue ());  // displays the text "solar power"
 					<p><span class="allCaps">EXAMPLE</span></p>
 					
 					
-<pre class="sample-code">var myStringBuilder  = new Uize.String.Builder ('hello');
+<pre class="sample-code">var myStringBuilder  = Uize.String.Builder ('hello');
 
 
 // all of the alert statements below will display the text "hello"
@@ -337,7 +337,7 @@ alert (myStringBuilder.valueOf ());   // calling valueOf intrinsic method explic
 					<p><span class="allCaps">EXAMPLE</span></p>
 					
 					
-<pre class="sample-code">var fruitsTable = new Uize.String.Builder;  // set fruitsTable to string builder instance
+<pre class="sample-code">var fruitsTable = Uize.String.Builder ();  // set fruitsTable to string builder instance
 for (var fruitNo = -1; ++fruitNo &lt; fruits.length;) {
   // ... ... ...
   // code here to append stuff to fruitsTable
@@ -404,7 +404,7 @@ fruitsTable += '';  // force string builder to resolve value and reassign to fru
 					</tr>
 					<tr>
 						<td>object (Uize instance)</td>
-						<td>new Uize ({value:'foo'})</td>
+						<td>Uize ({value:'foo'})</td>
 						<td>'foo'</td>
 					</tr>
 					<tr>
@@ -422,7 +422,7 @@ fruitsTable += '';  // force string builder to resolve value and reassign to fru
 				<p><span class="allCaps">EXAMPLE</span></p>
 				
 				
-<pre class="sample-code">var myStringBuilder = new Uize.String.Builder;
+<pre class="sample-code">var myStringBuilder = Uize.String.Builder ();
 myStringBuilder.append ('hello');
 myStringBuilder.append (true);
 myStringBuilder.append (42);
@@ -449,7 +449,7 @@ alert (myStringBuilder);  // displays "hellotrue42null"
 					<p><span class="allCaps">EXAMPLE</span></p>
 					
 					
-<pre class="sample-code">var myStringBuilder = new Uize.String.Builder ('solar');
+<pre class="sample-code">var myStringBuilder = Uize.String.Builder ('solar');
 myStringBuilder.append (' power');
 alert (myStringBuilder.toUpperCase ());  // displays the text "SOLAR POWER"
 </pre>
@@ -469,7 +469,7 @@ alert (myStringBuilder.toUpperCase ());  // displays the text "SOLAR POWER"
 					<p><span class="allCaps">EXAMPLE</span></p>
 					
 					
-<pre class="sample-code">var myStringBuilder = new Uize.String.Builder;
+<pre class="sample-code">var myStringBuilder = Uize.String.Builder ();
 alert (myStringBuilder.length);  // displays the text "0"
 
 myStringBuilder.append ('f');
@@ -503,7 +503,7 @@ alert (myStringBuilder.length);  // displays the text "3"
 					
 <pre class="sample-code">var
   myString = 'solar',
-  myStringBuilder = new Uize.String.Builder ('solar')
+  myStringBuilder = Uize.String.Builder ('solar')
 ;
 alert (myString);                    // displays the text "solar"
 alert (myStringBuilder);             // displays the text "solar"
@@ -581,13 +581,13 @@ alert (myStringBuilder + ' power');  // displays the text "solar power"
 		<p><span class="allCaps">SYNTAX</span></p>
 		
 		
-<pre class="sample-code">stringBuilderOBJ = new Uize.String.Builder (valueANYTYPE);
+<pre class="sample-code">stringBuilderOBJ = Uize.String.Builder (valueANYTYPE);
 </pre>
 		
 		<p><span class="allCaps">VARIATION</span></p>
 		
 		
-<pre class="sample-code">stringBuilderOBJ = new Uize.String.Builder;
+<pre class="sample-code">stringBuilderOBJ = Uize.String.Builder ();
 </pre>
 		
 		<p>When no <code>valueANYTYPE</code> parameter is specified in the constructor, then the newly created <code>Uize.String.Builder</code> instance will be initialized to an empty string.</p>
@@ -650,7 +650,7 @@ alert (myStringBuilder + ' power');  // displays the text "solar power"
 			<p><span class="allCaps">EXAMPLE</span></p>
 			
 			
-<pre class="sample-code">var myStringBuilder = new Uize.String.Builder ('solar');
+<pre class="sample-code">var myStringBuilder = Uize.String.Builder ('solar');
 myStringBuilder.append (' power');
 alert (myStringBuilder);  // displays "solar power"
 </pre>
@@ -767,7 +767,7 @@ alert (myStringBuilder);  // displays "solar power"
 			<p><span class="allCaps">EXAMPLE</span></p>
 			
 			
-<pre class="sample-code">var myStringBuilder = new Uize.String.Builder (' ');
+<pre class="sample-code">var myStringBuilder = Uize.String.Builder (' ');
 myStringBuilder.append ('power');
 myStringBuilder.prepend ('solar');
 alert (myStringBuilder.equals ('solar power'));  // displays "true"
@@ -919,7 +919,7 @@ alert (myStringBuilder.equals ('solar power'));  // displays "true"
 			<p><span class="allCaps">EXAMPLE</span></p>
 			
 			
-<pre class="sample-code">var myStringBuilder = new Uize.String.Builder ('power');
+<pre class="sample-code">var myStringBuilder = Uize.String.Builder ('power');
 myStringBuilder.prepend ('solar ');
 alert (myStringBuilder);  // displays "solar power"
 </pre>
@@ -1159,7 +1159,7 @@ Uize.module ({
 		'UizeDotCom.Page.Doc.library',
 		'UizeDotCom.Page.Doc'
 	],
-	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+	builder:function () {(window.page = UizeDotCom.Page.Doc ()).wireUi ()}
 });
 
 </script>

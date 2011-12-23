@@ -413,22 +413,22 @@ Uize.module ({
               - an *object*, being a find expression (see the =Uize.Node.find= static method)
 
               EXAMPLE 1
-              ..............................................
-              var hoverFader = new Uize.Widget.HoverFader ({
+              ..........................................
+              var hoverFader = Uize.Widget.HoverFader ({
                 nodes:['link1Id','link2Id','link3Id']
               });
-              ..............................................
+              ..........................................
 
               EXAMPLE 2
-              ..............................................
-              var hoverFader = new Uize.Widget.HoverFader ({
+              ............................................
+              var hoverFader = Uize.Widget.HoverFader ({
                 nodes:document.getElementsByTagName ('A')
               });
-              ..............................................
+              ............................................
 
               EXAMPLE 3
               ................................................
-              var hoverFader = new Uize.Widget.HoverFader ({
+              var hoverFader = Uize.Widget.HoverFader ({
                 nodes:{tagName:'A',className:'hoverFadeLink'}
               });
               ................................................
@@ -454,7 +454,7 @@ Uize.module ({
 		'UizeDotCom.Page.library',
 		'UizeDotCom.Page'
 	],
-	builder:function () {(window.page = new UizeDotCom.Page).wireUi ()}
+	builder:function () {(window.page = UizeDotCom.Page ()).wireUi ()}
 });
 
 </script>

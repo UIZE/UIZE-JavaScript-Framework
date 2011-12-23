@@ -34,7 +34,7 @@ Uize.module ({
 	],
 	builder:function () {
 		(
-			window.page = new UizeDotCom.WidgetToGoPage ({
+			window.page = UizeDotCom.WidgetToGoPage ({
 				title:<%= _widget.title -> json %>,
 				widgetToGoClass:<%= _widget.widgetClassModule -> json %>,
 				widgetToGoHtml:<%= _widget.widgetTemplateModule -> json %>

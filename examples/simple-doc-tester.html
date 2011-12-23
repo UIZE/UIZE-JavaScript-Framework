@@ -70,7 +70,7 @@ Uize.module ({
 			- in IE, fix problem of JS not loading correctly (lack of base tag?)
 		*/
 		/*** create the example page widget ***/
-			var page = window.page = new UizeDotCom.Page.Example;
+			var page = window.page = UizeDotCom.Page.Example ();
 
 		/*** add property for managing update of converted HTML and preview ***/
 			page.Class.registerProperties ({

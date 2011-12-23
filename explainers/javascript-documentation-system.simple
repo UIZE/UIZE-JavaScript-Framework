@@ -532,7 +532,7 @@ Lists
 
 			This behavior has the implication that you can't have two lists one after the other, without some non-list item formatted line to break the two lists apart. Consider the following example...
 
-			WRONG! WRONG! WRONG!
+			INCORRECT
 			........................
 			1. list item 1 of list 1
 			2. list item 2 of list 1
@@ -740,7 +740,7 @@ Inline Formatting
 
 			The entire heading for a section is styled in a single way, as determined by the CSS style sheet that decorates a SimpleDoc document that has been converted to HTML. One cannot use inline formatting within section headings.
 
-			WRONG! WRONG! WRONG!
+			INCORRECT
 			..............................................................................
 			Section Heading With *Bolded Text*
 				The heading for a section CANNOT be formatted with inline formatting rules.
@@ -1967,7 +1967,7 @@ Sample Code Blocks
 
 		According to the `rules for object block enclosing lines`, `object block enclosing lines` may be made up of two or more periods, tildes, commas, colons, or backticks. Which character you use is mostly just a matter of personal preference, however, this support for different characters for denoting sample code blocks is useful when the contents of a sample code block contains a line that looks like a sample code block opener/closer, using the character you would normally use for enclosing sample code blocks. In such cases, you can just switch to one of the several other characters supported. Consider the following example...
 
-		WRONG! WRONG! WRONG!
+		INCORRECT
 		.........................................
 		~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 		~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -2153,7 +2153,7 @@ Comments
 
 			In the above example, the entire contents of section "Rich Internet Applications" - but not the line "Rich Internet Applications" - is commented out. There are two comment regions. The inner comment region uses "#<" and "#>" as opener and closer, while the outer comment region uses "#<<" and "#>>".
 
-			WRONG! WRONG! WRONG!
+			INCORRECT
 			..........................................................
 			Ajax
 				This is some text explaining Ajax.

@@ -197,7 +197,7 @@
 					<li><a href="#23_2" title="Uize.caller = function (_context,_method,_params,_delay) {&#10;	function _callMethod () {&#10;		var _function  typeof _method = &apos;string&apos; ? _context [_method] : _method;&#10;		_function.callerThis = this;&#10;		_function.callerArguments = arguments;&#10;		var _result = _params ? _function.apply (_context,_params) : _function.call (_context);&#10;		delete _function.callerThis;&#10;		delete _function.callerArguments;&#10;		retur...">23.2. Another Possible Implementation</a></li>
 					<li><a href="#23_3">23.3. Sample Usage</a>
 						<ul>
-							<li><a href="#23_3_1" title="_this._delayedAction = new Uize.Delayed ({delay:1000});&#10;_this.wireNode (&#10;	node,&#10;	{&#10;		mouseover:function () {_this._delayed.perform (function () {_this.doSomething ()})},&#10;		mouseout:function () {_this._delayed.cancel ()}&#10;	}&#10;);&#10;">23.3.1. Approach 1</a></li>
+							<li><a href="#23_3_1" title="_this._delayedAction = Uize.Delayed ({delay:1000});&#10;_this.wireNode (&#10;	node,&#10;	{&#10;		mouseover:function () {_this._delayed.perform (function () {_this.doSomething ()})},&#10;		mouseout:function () {_this._delayed.cancel ()}&#10;	}&#10;);&#10;">23.3.1. Approach 1</a></li>
 							<li><a href="#23_3_2" title="var _delayedCaller = Uize.caller (_this,&apos;doSomething&apos;,null,1000);&#10;_this.wireNode (&#10;	node,&#10;	{&#10;		mouseover:_delayedCaller,&#10;		mouseout:function () {_delayedCaller.cancel ()}&#10;	}&#10;);&#10;">23.3.2. Approach 2</a></li>
 						</ul>
 					</li>
@@ -1543,7 +1543,7 @@ _classPrototype.perform (_actionFunction) { // support optional delay param
 			<h3 class="heading3" title="23. - Uize.Delayed -&gt; 23.3. Sample Usage -&gt; 23.3.1. Approach 1"><span class="headingNumber"><a href="#23" title="23. - Uize.Delayed">23</a>.<a href="#23_3" title="23. - Uize.Delayed -&gt; 23.3. Sample Usage">3</a>.<a href="#23_3_1" title="23. - Uize.Delayed -&gt; 23.3. Sample Usage -&gt; 23.3.1. Approach 1">1</a>. </span>Approach 1</h3>
 			<div class="contents3">
 				
-<pre class="sample-code">_this._delayedAction = new Uize.Delayed ({delay:1000});
+<pre class="sample-code">_this._delayedAction = Uize.Delayed ({delay:1000});
 _this.wireNode (
   node,
   {
@@ -1849,7 +1849,7 @@ Uize.module ({
 		'UizeDotCom.Page.Doc.library',
 		'UizeDotCom.Page.Doc'
 	],
-	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+	builder:function () {(window.page = UizeDotCom.Page.Doc ()).wireUi ()}
 });
 
 </script>

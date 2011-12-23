@@ -76,7 +76,7 @@
 			</li>
 			<li><a href="#5">5. Static Methods</a>
 				<ul>
-					<li><a href="#5_1" title="Returns a value adapter object, ">5.1. Uize.Color.adapter</a></li>
+					<li><a href="#5_1" title="Returns a value adapter object,">5.1. Uize.Color.adapter</a></li>
 					<li><a href="#5_2" title="A method that is useful in the development of color space or encoding extensions, and that returns a tuple array, being a clone of the specified source tuple array.">5.2. Uize.Color.cloneTuple</a></li>
 					<li><a href="#5_3" title="Lets you define an arbitrary number of custom Named Colors, which will then be accessible to code that uses the Uize.Color module.">5.3. Uize.Color.defineColors</a></li>
 					<li><a href="#5_4" title="Returns a freshly minted instance of the Uize.Color object, whose color is initialized to the specified color, by decoding the specified color as needed.">5.4. Uize.Color.from</a>
@@ -234,7 +234,7 @@
 					</tr>
 					<tr>
 						<td>color</td>
-						<td>new Uize.Color ('fuchsia')</td>
+						<td>Uize.Color ('fuchsia')</td>
 					</tr>
 					<tr>
 						<td>hex</td>
@@ -309,7 +309,7 @@
 				<p>Typically, you will create a new instance of the <code>Uize.Color</code> object using its constructor, as follows...</p>
 				
 				
-<pre class="sample-code">var myColor = new Uize.Color ('#f0f');  // initialized to fuchsia
+<pre class="sample-code">var myColor = Uize.Color ('#f0f');  // initialized to fuchsia
 </pre>
 			</div>
 			
@@ -410,7 +410,7 @@
 		<p><span class="allCaps">SYNTAX</span></p>
 		
 		
-<pre class="sample-code">colorOBJ = new Uize.Color (colorANYTYPE);
+<pre class="sample-code">colorOBJ = Uize.Color (colorANYTYPE);
 </pre>
 		
 		<p>Initial color value can be specified in the <code>colorANYTYPE</code> parameter using any of the many <a href="#8">Color Encodings</a> supported by the <code>Uize.Color</code> module. The following examples illustrate this variety and flexibility...</p>
@@ -418,23 +418,23 @@
 		<p><span class="allCaps">EXAMPLES</span></p>
 		
 		
-<pre class="sample-code">new Uize.Color (new Uize.Color (255,0,255));             // color
-new Uize.Color ('ff00ff');                               // hex
-new Uize.Color ('#ff00ff');                              // #hex
-new Uize.Color ('fuchsia');                              // name
-new Uize.Color ([255,0,255]);                            // RGB array
-new Uize.Color (0xff00ff);                               // RGB int
-new Uize.Color ({red:255,green:0,blue:255});             // RGB object
-new Uize.Color ('Rgb(255,0,255)');                       // RGB string
-new Uize.Color ({'HSL array':[300,100,50]});             // HSL array
-new Uize.Color ({hue:300,saturation:100,lightness:50});  // HSL object
-new Uize.Color ('Hsl(300,100%,50%)');                    // HSL string
+<pre class="sample-code">Uize.Color (Uize.Color (255,0,255));                 // color
+Uize.Color ('ff00ff');                               // hex
+Uize.Color ('#ff00ff');                              // #hex
+Uize.Color ('fuchsia');                              // name
+Uize.Color ([255,0,255]);                            // RGB array
+Uize.Color (0xff00ff);                               // RGB int
+Uize.Color ({red:255,green:0,blue:255});             // RGB object
+Uize.Color ('Rgb(255,0,255)');                       // RGB string
+Uize.Color ({'HSL array':[300,100,50]});             // HSL array
+Uize.Color ({hue:300,saturation:100,lightness:50});  // HSL object
+Uize.Color ('Hsl(300,100%,50%)');                    // HSL string
 </pre>
 		
 		<p><span class="allCaps">VARIATION 1</span></p>
 		
 		
-<pre class="sample-code">colorOBJ = new Uize.Color;
+<pre class="sample-code">colorOBJ = Uize.Color ();
 </pre>
 		
 		<p>When no parameter is specified, then the instance will be initialized to black (in the <code><a href="#7_1">sRGB</a></code> color space).</p>
@@ -442,7 +442,7 @@ new Uize.Color ('Hsl(300,100%,50%)');                    // HSL string
 		<p><span class="allCaps">VARIATION 2</span></p>
 		
 		
-<pre class="sample-code">colorOBJ = new Uize.Color (redINT,greenINT,blueINT);
+<pre class="sample-code">colorOBJ = Uize.Color (redINT,greenINT,blueINT);
 </pre>
 		
 		<p>When the three parameters <code>redINT</code>, <code>greenINT</code>, <code>blueINT</code> are specified, then the color will be initialized as though the arguments of the constructor represented an <code><a href="#8_5">RGB array</a></code> encoding.</p>
@@ -451,8 +451,8 @@ new Uize.Color ('Hsl(300,100%,50%)');                    // HSL string
 		
 		
 <pre class="sample-code">var
-  yellow = new Uize.Color (255,255,0),
-  alsoYellow = new Uize.Color ([255,255,0])
+  yellow = Uize.Color (255,255,0),
+  alsoYellow = Uize.Color ([255,255,0])
 ;
 </pre>
 		
@@ -516,7 +516,7 @@ new Uize.Color ('Hsl(300,100%,50%)');                    // HSL string
 			<p><span class="allCaps">EXAMPLES</span></p>
 			
 			
-<pre class="sample-code">myColor.from (new Uize.Color (255,0,255));             // color
+<pre class="sample-code">myColor.from (Uize.Color (255,0,255));                 // color
 myColor.from ('ff00ff');                               // hex
 myColor.from ('#ff00ff');                              // #hex
 myColor.from ('fuchsia');                              // name
@@ -646,7 +646,7 @@ myColor.getTuple ('HSL string');
 			<p><span class="allCaps">EXAMPLES</span></p>
 			
 			
-<pre class="sample-code">var fuchsia = new Uize.Color ('fuchsia');
+<pre class="sample-code">var fuchsia = Uize.Color ('fuchsia');
 fuchsia.to ('color');       // produces a new Uize.Color object
 fuchsia.to ('hex');         // produces 'ff00ff'
 fuchsia.to ('#hex');        // produces '#ff00ff'
@@ -679,7 +679,7 @@ fuchsia.to ('HSL string');  // produces 'hsl(300,100,50)'
 		<a name="5_1"></a>
 		<h2 class="heading2" title="5. Static Methods -&gt; 5.1. Uize.Color.adapter"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_1" title="5. Static Methods -&gt; 5.1. Uize.Color.adapter">1</a>. </span>Uize.Color.adapter</h2>
 		<div class="contents2">
-			<p>Returns a value adapter object, </p>
+			<p>Returns a value adapter object,</p>
 			
 			<p><span class="allCaps">SYNTAX</span></p>
 			
@@ -763,7 +763,7 @@ fuchsia.to ('HSL string');  // produces 'hsl(300,100,50)'
 			<p><span class="allCaps">EXAMPLE</span></p>
 			
 			
-<pre class="sample-code">new Uize.Color ('ff00ff');
+<pre class="sample-code">Uize.Color ('ff00ff');
 Uize.Color.from ('ff00ff');
 </pre>
 			
@@ -774,7 +774,7 @@ Uize.Color.from ('ff00ff');
 			<p><span class="allCaps">EXAMPLES</span></p>
 			
 			
-<pre class="sample-code">Uize.Color.from (new Uize.Color (255,0,255));             // color
+<pre class="sample-code">Uize.Color.from (Uize.Color (255,0,255));                 // color
 Uize.Color.from ('ff00ff');                               // hex
 Uize.Color.from ('#ff00ff');                              // #hex
 Uize.Color.from ('fuchsia');                              // name
@@ -965,7 +965,7 @@ Uize.Color.to ([255,0,255]);              // produces 'ff00ff'
 			<p><span class="allCaps">EXAMPLE</span></p>
 			
 			
-<pre class="sample-code">var myRgbColor = new Uize.Color ('#ff00ff');
+<pre class="sample-code">var myRgbColor = Uize.Color ('#ff00ff');
 alert (myRgbColor.to ('HSL string'));  // displays "Hsl(300,100%,50%)" in dialog
 </pre>
 			
@@ -993,8 +993,8 @@ alert (myRgbColor.to ('HSL string'));  // displays "Hsl(300,100%,50%)" in dialog
 			<p><span class="allCaps">EXAMPLE</span></p>
 			
 			
-<pre class="sample-code">new Uize.Color ('yellow');                  // source encoding is name
-new Uize.Color (Uize.Color.colors.yellow);  // source encoding is RGB int
+<pre class="sample-code">Uize.Color ('yellow');                  // source encoding is name
+Uize.Color (Uize.Color.colors.yellow);  // source encoding is RGB int
 </pre>
 			
 			<p>In the above example, each of the statements would create a new instance of the <code>Uize.Color</code> object initialized to primary yellow. In the first statement, the color yellow is specified using the <code><a href="#8_4">name</a></code> encoding. In the second statement, however, the color is specified using the <code><a href="#8_6">RGB int</a></code> encoding. That's because the values of the properties of the <code><a href="#6_2">Uize.Color.colors</a></code> static property are actually integers representing the RGB values of the colors.</p>
@@ -1148,19 +1148,19 @@ new Uize.Color (Uize.Color.colors.yellow);  // source encoding is RGB int
 					</tr>
 					<tr>
 						<td>fuchsia</td>
-						<td>new Uize.Color ('fuchsia')</td>
+						<td>Uize.Color ('fuchsia')</td>
 					</tr>
 					<tr>
 						<td>yellow</td>
-						<td>new Uize.Color ('yellow')</td>
+						<td>Uize.Color ('yellow')</td>
 					</tr>
 					<tr>
 						<td>blue</td>
-						<td>new Uize.Color ('blue')</td>
+						<td>Uize.Color ('blue')</td>
 					</tr>
 					<tr>
 						<td>white</td>
-						<td>new Uize.Color ('white')</td>
+						<td>Uize.Color ('white')</td>
 					</tr>
 				</table>
 			</div>
@@ -1943,7 +1943,7 @@ Hsl ( 300 , 100 , 50 )
 			<p><span class="allCaps">EXAMPLE 1</span></p>
 			
 			
-<pre class="sample-code">var myColor = new Uize.Color ('fuchsia');
+<pre class="sample-code">var myColor = Uize.Color ('fuchsia');
 </pre>
 			
 			<p>In the above example, the <code>Uize.Color</code> instance <code>myColor</code> is being initialized to the color "fuchsia" (<code>#ff00ff</code>).</p>
@@ -1987,7 +1987,7 @@ Uize.Fx.fadeStyle ('myNodeId',{color:'darkmagenta'},{color:'lavenderblush'});
 			
 			<p>When extending the <code><a href="#6_2">Uize.Color.colors</a></code> object, the names of added colors should be in all lowecase, and the values should be specified in the <code><a href="#8_6">RGB int</a></code> encoding (you can use JavaScript's hexadecimal notation for convenience, so that the <code><a href="#8_6">RGB int</a></code> encoding resembles the <code><a href="#8_2">hex</a></code> or <code><a href="#8_3">#hex</a></code> encodings).</p>
 			
-			<p><span class="allCaps">WRONG! WRONG! WRONG!</span></p>
+			<p><span class="allCaps">INCORRECT</span></p>
 			
 			
 <pre class="sample-code">Uize.Color.defineColors ({DarkMagenta:0x8b008b});     // DON'T USE MIXED CASE
@@ -2021,7 +2021,7 @@ Uize.module ({
 		'UizeDotCom.Page.Doc.library',
 		'UizeDotCom.Page.Doc'
 	],
-	builder:function () {(window.page = new UizeDotCom.Page.Doc).wireUi ()}
+	builder:function () {(window.page = UizeDotCom.Page.Doc ()).wireUi ()}
 });
 
 </script>
