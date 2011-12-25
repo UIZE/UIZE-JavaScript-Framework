@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2011-12-24 - Dummy Functions Added to Uize Base Module | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="A handful of dummy functions have been added to the Uize base module, that can be used in certain situations where you need to supply a dummy function as a handler, callback, or iterator function."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2011.html" class="breadcrumb breadcrumbWithArrow">2011 NEWS</a>
+	2011-12-24 - Dummy Functions Added to Uize Base Module
+
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="In a simple use case for the Uize.returnFalse dummy function, it can be assigned to an event handler property of a DOM node as a means of cancelling the event&apos;s default action.">1. A Simple Example</a></li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<p>A handful of dummy functions have been added to the <code><a href="../reference/Uize.html">Uize</a></code> base module, that can be used in certain situations where you need to supply a dummy function as a handler, callback, or iterator function.</p>
+	
+	<p>Situations occasionally arise where a method or object requires a function to be supplied but where you want to provide a stub implementation or a dummy function that satisfies the requirement of an interface but otherwise does essentially nothing. You can always, of course, just write your own anonymous functions in such cases, but for some typical use cases the following dummy functions are provided for your convenience...</p>
+	
+	<table class="list">
+	<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>Uize.nop</code> - performs no operation and returns no value (equivalent to returning <code>undefined</code>)</td></tr>
+	<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>Uize.returnFalse</code> - always returns the value <code>false</code></td></tr>
+	<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>Uize.returnTrue</code> - always returns the value <code>true</code></td></tr>
+	<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>Uize.returnX</code> - always returns the value of the first argument, unaltered</td></tr>
+	</table>
+	<p>The <code>Uize.nop</code> dummy function can be useful in cases where a callback or handler function is required, but where you don't want anything to occur when the callback or handler is executed. The <code>Uize.returnFalse</code> and <code>Uize.returnTrue</code> dummy functions can be useful in cases where a value matcher function is required but where you want to force an indiscriminate always match or always don't match behavior. The <code>Uize.returnX</code> dummy function can be useful in cases where a value transformer function is required but where you want values to be left as is.</p>
+	
+	<a name="1"></a>
+	<h1 class="heading1" title="1. A Simple Example"><span class="headingNumber"><a href="#1" title="1. A Simple Example">1</a>. </span>A Simple Example</h1>
+	<div class="contents1">
+		<p>In a simple use case for the <code>Uize.returnFalse</code> dummy function, it can be assigned to an event handler property of a DOM node as a means of cancelling the event's default action.</p>
+		
+		<p><span class="allCaps">INSTEAD OF...</span></p>
+		
+		
+<pre class="sample-code">myNode.onclick = function () {return false};
+</pre>
+		
+		<p><span class="allCaps">USE...</span></p>
+		
+		
+<pre class="sample-code">myNode.onclick = Uize.returnFalse;
+</pre>
+	</div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = UizeDotCom.Page.Doc ()).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

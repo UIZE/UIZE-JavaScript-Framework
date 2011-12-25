@@ -67,8 +67,7 @@ Uize.module ({
 				Uize.module ({
 					required:'Uize.Comm.Ajax',
 					builder:function () {
-						var _commObject = Uize.Comm.Ajax;
-						_commObject.request ({
+						Uize.Comm.Ajax ().request ({
 							url:_url,
 							requestMethod:'GET',
 							returnType:'text',

@@ -1,0 +1,29 @@
+A handful of dummy functions have been added to the =Uize= base module, that can be used in certain situations where you need to supply a dummy function as a handler, callback, or iterator function.
+
+Situations occasionally arise where a method or object requires a function to be supplied but where you want to provide a stub implementation or a dummy function that satisfies the requirement of an interface but otherwise does essentially nothing. You can always, of course, just write your own anonymous functions in such cases, but for some typical use cases the following dummy functions are provided for your convenience...
+
+- =Uize.nop= - performs no operation and returns no value (equivalent to returning =undefined=)
+- =Uize.returnFalse= - always returns the value =false=
+- =Uize.returnTrue= - always returns the value =true=
+- =Uize.returnX= - always returns the value of the first argument, unaltered
+
+The =Uize.nop= dummy function can be useful in cases where a callback or handler function is required, but where you don't want anything to occur when the callback or handler is executed. The =Uize.returnFalse= and =Uize.returnTrue= dummy functions can be useful in cases where a value matcher function is required but where you want to force an indiscriminate always match or always don't match behavior. The =Uize.returnX= dummy function can be useful in cases where a value transformer function is required but where you want values to be left as is.
+
+A Simple Example
+	In a simple use case for the =Uize.returnFalse= dummy function, it can be assigned to an event handler property of a DOM node as a means of cancelling the event's default action.
+
+	INSTEAD OF...
+	............................................
+	myNode.onclick = function () {return false};
+	............................................
+
+	USE...
+	..................................
+	myNode.onclick = Uize.returnFalse;
+	..................................
+
+....................................................................................
+<< metadata >>
+
+title: 2011-12-24 - Dummy Functions Added to Uize Base Module
+....................................................................................
