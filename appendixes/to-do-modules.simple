@@ -446,18 +446,7 @@ Uize
 					- if the key's value is not an array, make it an array with the current value as the first element and the desired value to add as the second
 					- if the key's value is an array, then append the desired value to add if it is not already present
 
-	Uize.callOn
-		Support Instances of Non-Uize Classes
-			Add support for using the =Uize.callOn= method on a target that is an instance of a class that is not a =Uize= subclass.
-
-			For example, it should be possible to use the =Uize.callOn= method on instances of the =Date= object, or any of the other JavaScript built-in objects. It should also be possible to use the method on instances of custom objects. Basically, if the target is an object and its constructor is not =Object=, then it should be treated as an instance and not an object containing a collection of subtargets. The one thing to consider in testing for non-Object constructor is simple instances of the =Object= object that originate from a different window or an iframe.
-
 	Uize.indexIn
-		Support Object Source
-			For object type source, could find key whose value matches, and return undefined (or null?) if value not found in object.
-
-			In this mode, =fromEndBOOL= parameter could control direction for iterating through the keys of the object.
-
 		Support Simple Type Source
 			For simple type source, could do string index.
 
@@ -576,6 +565,41 @@ Uize.Array
 
 		- model the interface for this package on the interface for the Uize.String.Lines package
 		- should this be more general and able to apply to both arrays or objects?
+
+	Uize.Array.Interlace
+		A module that lets you interlace multiple arrays into a single interlaced array, or deinterlace an interlaced array to produce the separate source arrays.
+
+		Uize.Array.Interlace.interlace
+			SYNTAX
+			................................................................................
+			interlacedARRAY = Uize.Array.Interlace.interlace (sourceArraysARRAY,optionsOBJ);
+			................................................................................
+
+			EXAMPLE
+			.......................................................................
+			Uize.Array.Interlace.interlace ([[0,1,2],['a','b','c'],['X','Y','Z']]);
+			.......................................................................
+
+			RESULT
+			................................
+			[0,'a','X',1,'b','Y',2,'c','Z'];
+			................................
+
+		Uize.Array.Interlase.deinterlace
+			SYNTAX
+			............................................................................................
+			sourceArraysARRAY = Uize.Array.Interlace.deinterlace (interlacedARRAY,totalSourceArraysINT);
+			............................................................................................
+
+			EXAMPLE
+			.....................................................................
+			Uize.Array.Interlace.deinterlace ([0,'a','X',1,'b','Y',2,'c','Z'],3);
+			.....................................................................
+
+			RESULT
+			......................................
+			[[0,1,2],['a','b','c'],['X','Y','Z']];
+			......................................
 
 	Uize.Array.Order
 		New 'binary' Mode for Uize.Array.Order.reorder
@@ -1053,6 +1077,8 @@ Uize.Data
 		- support for target property
 
 	Uize.Data.identical
+		- finish up support for tree equality mode
+			- support a Date and a RegExp instance being considered tree identical (because they shouldn't be recursed)
 		- handle recursion (safeguard against infinite loops). Do this by marking objects / arrays as encountered?
 		- how to support comparison of Uize subclass instances? Is there a meaningful way to do this?
 			- can two instances of classes that support the value interface simply be compared by their respective values?

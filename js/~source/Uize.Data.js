@@ -258,16 +258,19 @@ Uize.module ({
 				if (!_options) _options = _sacredEmptyObject;
 				var
 					_equality = _options.equality,
-					_equalityLoose = _equality == 'loose',
-					_equalityStrict = !_equalityLoose && _equality != 'type',
+					_looseEquality = _equality == 'loose',
+					_typeEquality = !_looseEquality && _equality == 'type',
+					_treeEquality = !_looseEquality && !_typeEquality && _equality == 'tree',
+					_strictEquality = !_looseEquality && !_typeEquality && !_treeEquality,
 					_allowConjoined = _options.allowConjoined !== _false
 				;
 				function _areIdentical (_object1,_object2) {
 					var
 						_identical,
 						_typeofObject1 = typeof _object1,
-						_typesMatch = _typeofObject1 == typeof _object2,
-						_object1IsObject = _typeofObject1 == 'object'
+						_typeofObject1IsObject = _typeofObject1 == 'object',
+						_object1IsObject = _typeofObject1IsObject && _object1,
+						_typesMatch = _typeofObject1 == typeof _object2
 					;
 					function _compareObjectsForIdentical () {
 						if (_identical = _Uize_totalKeys (_object1) == _Uize_totalKeys (_object2)) {
@@ -282,7 +285,7 @@ Uize.module ({
 							}
 						}
 					}
-					if (_typesMatch && _object1IsObject && _object1 && _object2) {
+					if (_typesMatch && _object1IsObject && _object2) {
 						var _object1Constructor = _object1.constructor;
 						if (_object1 == _object2) {
 							_identical = _allowConjoined;
@@ -350,16 +353,23 @@ Uize.module ({
 							}
 						}
 					} else {
-						_identical =
-							(
-								_equalityLoose
-									? _object1 == _object2
-									: (
-										_typesMatch &&
-										(_equalityStrict ? _object1 === _object2 : (!_object1IsObject || !_object1 == !_object2))
-									)
-							) ||
-							(_typesMatch && _typeofObject1 == 'number' && isNaN (_object1) && isNaN (_object2))
+						_identical = _treeEquality
+							? !_object1IsObject && !(typeof _object2 == 'object' && _object2)
+							: (
+								(
+									_looseEquality
+										? _object1 == _object2
+										: (
+											_typesMatch &&
+											(
+												_strictEquality
+													? _object1 === _object2
+													: (!_typeofObject1IsObject || !_object1 == !_object2)
+											)
+										)
+								) ||
+								(_typesMatch && _typeofObject1 == 'number' && isNaN (_object1) && isNaN (_object2))
+							)
 						;
 					}
 					return _identical;

@@ -512,6 +512,97 @@ Uize.module ({
 									false
 								],
 
+						/*** test for tree equality ***/
+							{
+								title:'Test that various combinations of different simple type values are considered tree identical',
+								test:function () {
+									var _success = true;
+									for (
+										var
+											_valueNoA = -1,
+											_values = [-1,0,1,NaN,Infinity,false,true,'','foo','bar',null,undefined],
+											_valuesLength = _values.length,
+											_equality = {equality:'tree'}
+										;
+										_success && ++_valueNoA < _valuesLength;
+									) {
+										for (var _valueNoB = _valueNoA - 1; _success && ++_valueNoB < _valuesLength;)
+											_success = Uize.Data.identical (_values [_valueNoA],_values [_valueNoB],_equality)
+										;
+									}
+									return this.expect (true,_success);
+								}
+							},
+							/*
+							['Test that a Date object instance and a RegExp object instance are considered tree identical',
+								[new Date,new RegExp,{equality:'tree'}],
+								true
+							],
+							*/
+
+							/*** test arrays for tree equality ***/
+								['Test that two empty arrays are considered tree identical',
+									[[],[],{equality:'tree'}],
+									true
+								],
+								['Test that two arrays with the same number of simple type elements are considered tree identical',
+									[
+										[-1,0,1,NaN,Infinity,false,true,'','foo',null,undefined],
+										[-1,undefined,1,'',NaN,Infinity,false,0,null,true,'foo'],
+										{equality:'tree'}
+									],
+									true
+								],
+								{
+									title:'Test that two arrays with the same number of simple type elements, but where one array has a custom property that the other doesn\'t, are not considered tree identical',
+									test:function () {
+										var
+											_array1 = [0,1,2],
+											_array2 = [0,1,2]
+										;
+										_array2.foo = 'bar';
+										return this.expect (false,Uize.Data.identical (_array1,_array2,{equality:'tree'}));
+									}
+								},
+								['Test that two arrays, each with a different number of simple type elements, are not considered tree identical',
+									[[0,1,2],[0,1,2,3],{equality:'tree'}],
+									false
+								],
+								['Test that two arrays with the same number of elements, where an element of one array is simple type and the corresponding element of the other array is an object, are not considered tree identical',
+									[[0,1,2],[0,1,{}],{equality:'tree'}],
+									false
+								],
+								['Test that two arrays with the same number of elements, where an element of one array is simple type and the corresponding element of the other array is an array, are not considered tree identical',
+									[[0,1,2],[0,1,[]],{equality:'tree'}],
+									false
+								],
+
+							/*** test objects for tree equality ***/
+								['Test that two empty objects are considered tree identical',
+									[{},{},{equality:'tree'}],
+									true
+								],
+								['Test that two objects with the same set of properties but with different simple type values are considered tree identical',
+									[
+										{p0:-1,p1:0,p2:1,p3:NaN,p4:Infinity,p5:false,p6:true,p7:'',p8:'foo',p9:null,p10:undefined},
+										{p0:-1,p1:undefined,p2:1,p3:'',p4:NaN,p5:Infinity,p6:false,p7:0,p8:null,p9:true,p10:'foo'},
+										{equality:'tree'}
+									],
+									true
+								],
+								['Test that two objects, each with a different set of properties, are not considered tree identical',
+									[{foo:'bar'},{foo:'bar',hello:'world'},{equality:'tree'}],
+									false
+								],
+								['Test that two objects with the same set of properties, where the value of a property in one object is simple type and the value of that same property in the other object is an object, are not considered tree identical',
+									[{p0:0,p1:1,p2:2},{p0:0,p1:1,p2:{}},{equality:'tree'}],
+									false
+								],
+								['Test that two objects with the same set of properties, where the value of a property in one object is simple type and the value of that same property in the other object is an array, are not considered tree identical',
+									[{p0:0,p1:1,p2:2},{p0:0,p1:1,p2:[]},{equality:'tree'}],
+									false
+								],
+
 						/*** misc ***/
 							['Test loose equality, with property value being a string in one object and a number in the other',
 								[{foo:'1'},{foo:1},{equality:'loose'}],

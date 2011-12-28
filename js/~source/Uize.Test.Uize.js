@@ -84,6 +84,12 @@ Uize.module ({
 			return _result;
 		}
 
+		function _arrayToListObject (_array) {
+			var _listObject = Uize.map (_array,'value',{});
+			_listObject.length = _array.length;
+			return _array;
+		}
+
 		function _cloneObjectTest (_title,_class,_instantiationValue) {
 			return {
 				title:_title,
@@ -1245,6 +1251,48 @@ Uize.module ({
 						['Test that an empty array is regarded as an array',[[]],true],
 						['Test that an array with elements is regarded as an array',[[1,2,3,4]],true]
 					]],
+					['Uize.isList',[
+						/*** test values that should be considered to be list ***/
+							['Test that an empty JavaScript array is considered to be a list',
+								[[]],
+								true
+							],
+							['Test that a JavaScript array with elements is considered to be a list',
+								[['foo','bar','hello','world']],
+								true
+							],
+							{
+								title:'Test that JavaScript\'s special arguments variable inside functions is considered to be a list',
+								test:function () {
+									return this.expect (true,Uize.isList (arguments));
+								}
+							},
+							['Test that an object with length property that is a number is considered to be a list',
+								[_arrayToListObject (['foo','bar','hello','world'])],
+								true
+							],
+
+						/*** test values that should not be considered to be list ***/
+							['Test that a number is not considered to be a list',42,false],
+							['Test that a boolean is not considered to be a list',true,false],
+							['Test that a string is not considered to be a list','foo',false],
+							['Test that the value null is not considered to be a list',null,false],
+							['Test that the value undefined is not considered to be a list',null,false],
+							['Test that a regular expression is not considered to be a list',/\d+/,false],
+							['Test that a function is not considered to be a list',function () {},false],
+							['Test that an object that has no length property is not considered to be a list',
+								[{0:'foo',1:'bar'}],
+								false
+							],
+							{
+								title:'Test that an object that has a length property that is not a number is not considered to be a list',
+								test:function () {
+									var _object = {0:'foo',1:'bar'};
+									_object.length = '2';
+									return this.expect (false,Uize.isList (_object));
+								}
+							}
+					]],
 					['Uize.isNumber',[
 						['Test that calling with no parameters returns false',[],false],
 						['Test that the value undefined is not regarded as a number',undefined,false],
@@ -1643,77 +1691,137 @@ Uize.module ({
 						]
 					]],
 					['Uize.indexIn',[
-						['Test that calling with no parameters produces the result -1',
-							[],
-							-1
-						],
-						['Test that specifying null for the sourceARRAY parameter produces the result -1',
-							[null,null],
-							-1
-						],
-						['Test that specifying undefined for the sourceARRAY parameter produces the result -1',
-							[undefined,undefined],
-							-1
-						],
-						['Test that specifying a number for the sourceARRAY parameter produces the result -1',
-							[5,5],
-							-1
-						],
-						['Test that specifying a string for the sourceARRAY parameter produces the result -1',
-							['hello','hello'],
-							-1
-						],
-						['Test that specifying a boolean for the sourceARRAY parameter produces the result -1',
-							[true,true],
-							-1
-						],
-						['Test that specifying an empty array for the sourceARRAY parameter produces the result -1',
-							[[],1],
-							-1
-						],
-						['Test that the fromEndBOOL and strictEqualityBOOL parameters are observed correctly',
-							[[0,1,'1','1',1,2],'1',true,false],
-							4
-						],
-						['Test that the strictEqualityBOOL parameter is defaulted to true, as designed',
-							[[0,1,'1','1',1,2],'1',true],
-							3
-						],
-						['Test that the fromEndBOOL parameter is defaulted to false, as designed',
-							[[0,1,'1','1',1,2],'1'],
-							2
-						],
-						['Test that -1 is returned when the value is not found in the source array',
-							[[0,1,'1','1',1,2],'0'],
-							-1
-						]
+						/*** test support for source being an array ***/
+							['Test that specifying an empty array for the source parameter produces the result -1',
+								[[],1],
+								-1
+							],
+							['Test that the fromEndBOOL and strictEqualityBOOL parameters are observed correctly',
+								[[0,1,'1','1',1,2],'1',true,false],
+								4
+							],
+							['Test that the strictEqualityBOOL parameter is defaulted to true, as designed',
+								[[0,1,'1','1',1,2],'1',true],
+								3
+							],
+							['Test that the fromEndBOOL parameter is defaulted to false, as designed',
+								[[0,1,'1','1',1,2],'1'],
+								2
+							],
+							['Test that -1 is returned when the value is not found in the source array',
+								[[0,1,'1','1',1,2],'0'],
+								-1
+							],
+							['Test that the method doesn\'t scan past the end of the source array and find a match for undefined in the first element beyond the end of the array',
+								[[0,1,'1','1',1,2],undefined],
+								-1
+							],
+
+						/*** test support for source being a list object ***/
+							['Test that specifying an empty list object for the source parameter produces the result -1',
+								[_arrayToListObject ([]),1],
+								-1
+							],
+							['Test that, when the source is a list object, the fromEndBOOL and strictEqualityBOOL parameters are observed correctly',
+								[_arrayToListObject ([0,1,'1','1',1,2]),'1',true,false],
+								4
+							],
+							['Test that, when the source is a list object, the strictEqualityBOOL parameter is defaulted to true, as designed',
+								[_arrayToListObject ([0,1,'1','1',1,2]),'1',true],
+								3
+							],
+							['Test that, when the source is a list object, the fromEndBOOL parameter is defaulted to false, as designed',
+								[_arrayToListObject ([0,1,'1','1',1,2]),'1'],
+								2
+							],
+							['Test that, when the source is a list object, -1 is returned when the value is not found in the source list object',
+								[_arrayToListObject ([0,1,'1','1',1,2]),'0'],
+								-1
+							],
+							{
+								title:'Test that the method will correctly find the index of a value in JavaScript\'s special arguments variable inside functions',
+								test:function () {
+									function _dummyFunction () {
+										return Uize.indexIn (arguments,'1',true,false);
+									}
+									return this.expect (4,_dummyFunction (0,1,'1','1',1,2));
+								}
+							},
+
+						/*** test support for source being a non-list object ***/
+							['Test that specifying an empty non-list object for the source parameter produces the result -1',
+								[{},1],
+								-1
+							],
+							['Test that, when the source is a non-list object, the fromEndBOOL and strictEqualityBOOL parameters are observed correctly',
+								[{p0:0,p1:1,p2:'1',p3:'1',p4:1,p5:2},'1',true,false],
+								'p4'
+							],
+							['Test that, when the source is a non-list object, the strictEqualityBOOL parameter is defaulted to true, as designed',
+								[{p0:0,p1:1,p2:'1',p3:'1',p4:1,p5:2},'1',true],
+								'p3'
+							],
+							['Test that, when the source is a non-list object, the fromEndBOOL parameter is defaulted to false, as designed',
+								[{p0:0,p1:1,p2:'1',p3:'1',p4:1,p5:2},'1'],
+								'p2'
+							],
+							['Test that, when the source is a non-list object, -1 is returned when the value is not found in the object',
+								[{p0:0,p1:1,p2:'1',p3:'1',p4:1,p5:2},'0'],
+								-1
+							],
+
+						/*** test handling of source being neither array nor object ***/
+							['Test that calling with no parameters produces the result -1',
+								[],
+								-1
+							],
+							['Test that specifying null for the source parameter produces the result -1',
+								[null,null],
+								-1
+							],
+							['Test that specifying undefined for the source parameter produces the result -1',
+								[undefined,undefined],
+								-1
+							],
+							['Test that specifying a number for the source parameter produces the result -1',
+								[5,5],
+								-1
+							],
+							['Test that specifying a string for the source parameter produces the result -1',
+								['hello','hello'],
+								-1
+							],
+							['Test that specifying a boolean for the source parameter produces the result -1',
+								[true,true],
+								-1
+							]
 					]],
 					['Uize.isIn',[
 						['Test that calling with no parameters produces the result false',
 							[],
 							false
 						],
-						['Test that specifying null for the sourceARRAY parameter produces the result false',
+						['Test that specifying null for the source parameter produces the result false',
 							[null,null],
 							false
 						],
-						['Test that specifying undefined for the sourceARRAY parameter produces the result false',
+						['Test that specifying undefined for the source parameter produces the result false',
 							[undefined,undefined],
 							false
 						],
-						['Test that specifying a number for the sourceARRAY parameter produces the result false',
+						['Test that specifying a number for the source parameter produces the result false',
 							[5,5],
 							false
 						],
-						['Test that specifying a string for the sourceARRAY parameter produces the result false',
+						['Test that specifying a string for the source parameter produces the result false',
 							['hello','hello'],
 							false
 						],
-						['Test that specifying a boolean for the sourceARRAY parameter produces the result false',
+						['Test that specifying a boolean for the source parameter produces the result false',
 							[true,true],
 							false
 						],
-						['Test that specifying an empty array for the sourceARRAY parameter produces the result false',
+						['Test that specifying an empty array for the source parameter produces the result false',
 							[[],1],
 							false
 						],

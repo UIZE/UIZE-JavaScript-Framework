@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2011-12-26 - New Uize.isList Static Method | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="The new Uize.isList static method returns a boolean, indicating whether or not the specified value is considered a list."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2011.html" class="breadcrumb breadcrumbWithArrow">2011 NEWS</a>
+	2011-12-26 - New Uize.isList Static Method
+
+</h1>
+
+<div class="main">
+<div class="contents0">
+	<p>The new <code>Uize.isList</code> static method returns a boolean, indicating whether or not the specified value is considered a list.</p>
+	
+	<p><span class="allCaps">SYNTAX</span></p>
+	
+	
+<pre class="sample-code">isListBOOL = Uize.isList (valueANYTYPE);
+</pre>
+	
+	<p>A list is considered to be a non-null value of type <code>'object'</code> that has a <code>length</code> property whose value is a number. By this definition, an instance of JavaScript's built-in <code><a href="../javascript-reference/Array.html">Array</a></code> object is considered to be a list. Also by this definition, a <code>NodeList</code> instance as returned by the <code>document.getElementsByTagName</code> method is considered to be a list, since it is a non-null object type value with a number type <code>length</code> property.</p>
+	
+	<p>The <code>Uize.isList</code> method is useful when implementing methods that are to conditionalize their behavior based upon the type of a parameter, and where an iteration behavior is desired for list type values. If a value is considered to be a list, its list items can be iterated over using a standard JavaScript <code>for</code> loop, using the <code>length</code> property to determine how many items should be iterated over, and indexing into the list using JavaScript's <code>[]</code> (square brackets) notation.</p>
+	
+	<p><span class="allCaps">EXAMPLES</span></p>
+	
+	
+<pre class="sample-code">alert (Uize.isList (['foo','bar','hello','world']));        // alerts "true"
+alert (Uize.isList (document.getElementsByTagName ('a')));  // alerts "true"
+
+alert (Uize.isList ({foo:'bar',hello:'world'}));            // alerts "false"
+alert (Uize.isList (42));                                   // alerts "false"
+alert (Uize.isList (true));                                 // alerts "false"
+alert (Uize.isList ('foo');                                 // alerts "false"
+alert (Uize.isList (null);                                  // alerts "false"
+alert (Uize.isList (undefined);                             // alerts "false"
+alert (Uize.isList (/\d+/));                                // alerts "false"
+alert (function () {});                                     // alerts "false"
+
+// an object is only considered a list once it has a length property that is a number
+var fooObj = {0:'foo',1:'bar',2:'hello',3:'world'};
+alert (Uize.isList (fooObj));                               // alerts "false"
+fooObj.length = '4';
+alert (Uize.isList (fooObj));                               // alerts "false"
+fooObj.length = 4;
+alert (Uize.isList (fooObj));                               // alerts "true"
+
+// the arguments variable inside functions is considered to be a list
+function fooFunc () {
+  alert (Uize.isList (arguments));                         // alerts "true"
+}
+fooFunc ('foo','bar','hello','world');
+</pre>
+	
+	<p>This new method is thoroughly documented and has comprehensive unit tests.</p>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = UizeDotCom.Page.Doc ()).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

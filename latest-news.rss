@@ -7,7 +7,7 @@
 		<description>UIZE JavaScript Framework (AJAX, RIA, widgets, JSON, OOP, Class Inheritance, XMLHttpRequest, DOM manipulation, and all that stuff)</description>
 		<language>en-us</language>
 		<copyright>© 1996-2008 UIZE</copyright>
-		<pubDate>Sun, 25 Dec 2011 02:08:16 UT</pubDate>
+		<pubDate>Wed, 28 Dec 2011 08:03:10 UT</pubDate>
 		<ttl>10080</ttl>
 		<image>
 			<title>UIZE JavaScript Framework | Latest News</title>
@@ -18,6 +18,14 @@
 			<description>UIZE JavaScript Framework (AJAX, RIA, widgets, JSON, OOP, Class Inheritance, XMLHttpRequest, DOM manipulation, and all that stuff)</description>
 		</image>
 		<atom10:link xmlns:atom10="http://www.w3.org/2005/Atom" rel="self" href="http://www.uize.com/latest-news.rss" type="application/rss+xml" />
+		<item>
+			<title>2011-12-26 - New Uize.isList Static Method</title>
+			<link>http://www.uize.com/news/2011-12-26-New-Uize.isList-Static-Method.html</link>
+			<guid>http://www.uize.com/news/2011-12-26-New-Uize.isList-Static-Method.html</guid>
+			<description>The new Uize.isList static method returns a boolean, indicating whether or not the specified value is considered a list.</description>
+			<pubDate>Mon, 26 Dec 2011 08:00:00 UT</pubDate>
+			<feedburner:origLink>http://www.uize.com/news/2011-12-26-New-Uize.isList-Static-Method.html</feedburner:origLink>
+		</item>
 		<item>
 			<title>2011-12-24 - Dummy Functions Added to Uize Base Module</title>
 			<link>http://www.uize.com/news/2011-12-24-Dummy-Functions-Added-to-Uize-Base-Module.html</link>
@@ -409,14 +417,6 @@
 			<description>The new Uize.Array module defines a namespace for various modules that provide array specific functionality or utilities.</description>
 			<pubDate>Wed, 25 Aug 2010 07:00:00 UT</pubDate>
 			<feedburner:origLink>http://www.uize.com/news/2010-08-25-NEW-MODULE-Uize.Array.html</feedburner:origLink>
-		</item>
-		<item>
-			<title>2010-08-17 - IMPROVED MODULE: Uize.Widget.Collection.Dynamic</title>
-			<link>http://www.uize.com/news/2010-08-17-IMPROVED-MODULE-Uize.Widget.Collection.Dynamic.html</link>
-			<guid>http://www.uize.com/news/2010-08-17-IMPROVED-MODULE-Uize.Widget.Collection.Dynamic.html</guid>
-			<description>The Uize.Widget.Collection.Dynamic module has been improved with the addition of support for the touch interface of Apple&amp;apos;s iPad.</description>
-			<pubDate>Tue, 17 Aug 2010 07:00:00 UT</pubDate>
-			<feedburner:origLink>http://www.uize.com/news/2010-08-17-IMPROVED-MODULE-Uize.Widget.Collection.Dynamic.html</feedburner:origLink>
 		</item>
 	</channel>
 </rss>

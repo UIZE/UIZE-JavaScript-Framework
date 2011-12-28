@@ -36,6 +36,7 @@
 					- =Uize.isEmpty= - tests if an object or array is empty, or if a non-object value is "falsy"
 					- =Uize.isFunction= - tests if value is a function reference
 					- =Uize.isInstance= - tests if value is an instance of a =Uize= subclass
+					- =Uize.isList= - tests if a value is a list object, such as an array
 					- =Uize.isNully= - tests if value is =null= or =undefined=
 					- =Uize.isNumber= - tests if value is a number (and not =NaN)
 					- =Uize.isObject= - tests if value is non-null and an object
@@ -51,7 +52,7 @@
 					- =Uize.emptyOut= - empties out the contents of an object or array
 					- =Uize.findRecord= - finds the first record in a records array that matches specified criteria
 					- =Uize.findRecordNo= - returns the index of the first record in a records array that matches specified criteria
-					- =Uize.indexIn= - returns the index of a value in a values array
+					- =Uize.indexIn= - returns the index of a value in a values array or object
 					- =Uize.isIn= - tests if a value is in a specified array or object
 					- =Uize.keys= - returns an array containing the names of the properties (ie. keys) in an object
 					- =Uize.lookup= - creates a lookup object from an array of values
@@ -193,6 +194,7 @@
 			_typeNumber = 'number',
 			_typeBoolean = 'boolean',
 			_Function = Function,
+			_Array = Array,
 			_false = false,
 			_true = true,
 			_null = null
@@ -205,13 +207,14 @@
 			_sacredEmptyObject = {},
 			_modulePathToken = '[#modulePath]',
 			_scriptParentNode,
-			_interpreterSupportsArrayForEach = !!Array.prototype.forEach
+			_interpreterSupportsArrayForEach = !!_Array.forEach,
+			_interpreterSupportsArrayIndexOf = !!(_Array.indexOf && _Array.lastIndexOf)
 		;
 
 	/*** Functions required by the Class Constructor ***/
 		function _isObject (_value) {return !!_value && typeof _value == _typeObject}
-
 		function _isArray (_value) {return _value instanceof Array || (!!_value && _isFunction (_value.splice))}
+		function _isList (_value) {return _isObject (_value) && typeof _value.length == _typeNumber}
 
 		function _isFunction (_value) {
 			var _constructor = _value != _undefined && _value.constructor;
@@ -2202,7 +2205,7 @@
 			'map',
 			function (_source,_mapper,_target) {
 				if (typeof _source == _typeNumber) {
-					_source = new Array (_source);
+					_source = new _Array (_source);
 					if (typeof _target != _typeObject) _target = _source;
 				}
 				if (typeof _target != _typeObject)
@@ -2654,60 +2657,170 @@
 
 		_nonInheritableStatic (
 			'indexIn',
-			function (_array,_value,_fromEnd,_strict) {
-				if (_isArray (_array)) {
-					_strict = _strict !== _false;
-					for (var _lastIndex = _array.length - 1, _elementNo = _lastIndex + 1, _result; --_elementNo >= 0;) {
-						var _element = _array [_result = _fromEnd ? _elementNo : _lastIndex - _elementNo];
-						if (_strict ? _element === _value : _element == _value)
-							return _result
-						;
+			function (_source,_value,_fromEnd,_strict) {
+				var
+					_sourceIsList = _isList (_source),
+					_result = -1
+				;
+				if (_sourceIsList || _isObject (_source)) {
+					var _sourceValues = _sourceIsList ? _source : _values (_source);
+					if ((_strict = _strict !== _false) && _interpreterSupportsArrayIndexOf) {
+						_result = _Array [_fromEnd ? 'lastIndexOf' : 'indexOf'] (_sourceValues,_value);
+					} else {
+						for (
+							var
+								_elementNo = _sourceValues.length,
+								_index = _fromEnd ? _elementNo : -1,
+								_indexInc = _fromEnd ? -1 : 1
+							;
+							--_elementNo >= 0;
+						) {
+							var _element = _sourceValues [_index += _indexInc];
+							if (_strict ? _element === _value : _element == _value) {
+								_result = _index;
+								break;
+							}
+						}
 					}
+					if (!_sourceIsList && _result > -1)
+						_result = _class.keys (_source) [_result]
+					;
 				}
-				return -1;
+				return _result;
 			}
 			/*?
 				Static Methods
 					Uize.indexIn
-						Returns an integer, indicating the index in the specified array of the first occurrence of the specified value. If the value is not found in the array, then this method will return the value =-1=.
+						Returns an integer, indicating the index in the specified array of the first occurrence of the specified value, or returns a string, indicating the name of first property that has the specified value.
 
-						SYNTAX
+						DIFFERENT USAGES
+
+						`Find a Value in an Array`
 						...................................................
 						indexINT = Uize.indexIn (sourceARRAY,valueANYTYPE);
 						...................................................
 
-						VARIATION
+						`Find a Value in an Array, Scanning Backwards From the End`
 						...............................................................
 						indexINT = Uize.indexIn (sourceARRAY,valueANYTYPE,fromEndBOOL);
 						...............................................................
 
-						By default, this method searches for the specified value by scanning forwards through the array from the beginning. When the value =true= is specified for the optional =fromEndBOOL= parameter, then this method will search for the specified value by scanning backwards through the array from the end.
-
-						EXAMPLE
-						..............................................................................
-						Uize.indexIn (['foo','bar','foo','bar','foo','bar'],'bar');       // returns 1
-						Uize.indexIn (['foo','bar','foo','bar','foo','bar'],'bar',true);  // returns 5
-						..............................................................................
-
-						VARIATION
+						`Find a Value in an Array, Using Non-strict Comparison`
 						..................................................................................
 						indexINT = Uize.indexIn (sourceARRAY,valueANYTYPE,fromEndBOOL,strictEqualityBOOL);
 						..................................................................................
 
-						By default, this method tests for a match using strict equality. When the value =false= is specified for the optional =strictEqualityBOOL= parameter, then this method will test for a match using loose equality (ie. where the string value ='1'= would be considered equal to the number value =1=).
+						`Find a Property in an Object Having a Specific Value`
+						.................................................................................
+						keySTR = Uize.indexIn (sourceOBJECT,valueANYTYPE,fromEndBOOL,strictEqualityBOOL);
+						.................................................................................
 
-						EXAMPLE
-						............................................................
-						Uize.indexIn ([0,1,2,3,4,5],'3');              // returns -1
-						Uize.indexIn ([0,1,2,3,4,5],'3',false,false);  // returns 3
-						............................................................
+						Find a Value in an Array
+							In the most typical use case, a value can be found in a source array by specifying the array as the first parameter and the search value as the second parameter.
+
+							SYNTAX
+							...................................................
+							indexINT = Uize.indexIn (sourceARRAY,valueANYTYPE);
+							...................................................
+
+							If the value specified by the =valueANYTYPE= parameter is found inside the array specified by the =sourceARRAY= parameter, then the index at which the first occurrence is found will be returned. If the value is not found, then the value =-1= will be returned.
+
+							EXAMPLES
+							........................................................................
+							Uize.indexIn (['a','b','c'],'c');      // returns 2
+							Uize.indexIn (['a','b'],'c');          // returns -1 (no match)
+							Uize.indexIn (['a','b','b'],'b');      // returns 1 (first occurrence)
+							Uize.indexIn ([1,7,42,'42',42],'42');  // returns 3 (first strict match)
+							Uize.indexIn ([1,7,42],'42');          // returns -1 (no strict match)
+							........................................................................
+
+						Find a Value in an Array, Scanning Backwards From the End
+							A value can be found in a source array, scanning backwards from the end, by specifing the value =true= for the optional =fromEndBOOL= third parameter.
+
+							SYNTAX
+							...............................................................
+							indexINT = Uize.indexIn (sourceARRAY,valueANYTYPE,fromEndBOOL);
+							...............................................................
+
+							By default, the =Uize.indexIn= method searches for the specified value by scanning forwards through the array from the beginning. When the value =true= is specified for the optional =fromEndBOOL= parameter, then this method will search for the specified value by scanning backwards through the array from the end.
+
+							EXAMPLES
+							.......................................................................................
+							Uize.indexIn (['a','b','c'],'c',true);      // returns 2
+							Uize.indexIn (['a','b'],'c',true);          // returns -1 (no match)
+							Uize.indexIn (['a','b','b'],'b',true);      // returns 2 (first occurrence, from end)
+							Uize.indexIn ([1,7,42,'42',42],'42',true);  // returns 3 (first strict match, from end)
+							Uize.indexIn ([1,7,42],'42',true);          // returns -1 (no strict match)
+							.......................................................................................
+
+						Find a Value in an Array, Using Non-strict Comparison
+							A value can be found in a source array, using non-strict comparison, by specifying the value =false= for the optional =strictEqualityBOOL= fourth parameter.
+
+							SYNTAX
+							..................................................................................
+							indexINT = Uize.indexIn (sourceARRAY,valueANYTYPE,fromEndBOOL,strictEqualityBOOL);
+							..................................................................................
+
+							By default, the =Uize.indexIn= method tests for a match using strict equality. When the value =false= is specified for the optional =strictEqualityBOOL= parameter, then this method will test for a match using loose equality (ie. where the string value ='1'= would be considered equal to the number value =1=).
+
+							EXAMPLES
+							..........................................................................................
+							Uize.indexIn ([5,9],'9',false,true);       // returns -1 (no strict match)
+							Uize.indexIn ([5,9,'9'],'9',false,false);  // returns 1 (first non-strict match)
+							Uize.indexIn ([5,9,'9'],'9',false,true);   // returns 2 (first strict match)
+							Uize.indexIn ([5,9,'9'],9,false,true);     // returns 1 (first strict match)
+							Uize.indexIn ([5,'9',9],'9',true,true);    // returns 1 (first strict match, from end)
+							Uize.indexIn ([5,'9',9],9,true,true);      // returns 2 (first strict match, from end)
+							Uize.indexIn ([5,'9',9],'9',true,false);   // returns 2 (first non-strict match, from end)
+							Uize.indexIn ([5,9,'9'],9,true,false);     // returns 2 (first non-strict match, from end)
+							..........................................................................................
+
+						Find a Property in an Object Having a Specific Value
+							The property of an object having a specific value can be found by specifying a =sourceOBJECT= parameter in place of the =sourceARRAY= first parameter.
+
+							SYNTAX
+							.................................................................................
+							keySTR = Uize.indexIn (sourceOBJECT,valueANYTYPE,fromEndBOOL,strictEqualityBOOL);
+							.................................................................................
+
+							When a =sourceOBJECT= parameter is specified in place of the typical =sourceARRAY= parameter, the =Uize.indexIn= method will iterate through the properties of the specified object to find the property whose value is equal to the value specified by the =valueANYTYPE= parameter. If a property having the specified value is found, then that property's name is returned. If no property having the specified value is found, then the value =-1= is returned.
+
+							When a source object is specified, the optional =fromEndBOOL= and =strictEqualityBOOL= parameters are supported as they are when a source array is specified. In particular, the =fromEndBOOL= determines the direction in which the method scans through the properties of the object, where the default forwards order of the properties is determined by the order in which the properties were assigned on the object (this ia a behavior of the JavaScript language).
+
+							EXAMPLES
+							.........................................................................................
+							Uize.indexIn (
+								{p0:5,p1:9},'9',false,true          // returns -1 (no strict match)
+							);
+							Uize.indexIn (
+								{p0:5,p1:9,p2:'9'},'9',false,false  // returns 'p1' (first non-strict match)
+							);
+							Uize.indexIn (
+								{p0:5,p1:9,p2:'9'},'9',false,true   // returns 'p2' (first strict match)
+							);
+							Uize.indexIn (
+								{p0:5,p1:9,p2:'9'},9,false,true     // returns 'p1' (first strict match)
+							);
+							Uize.indexIn (
+								{p0:5,p1:'9',p2:9},'9',true,true    // returns 'p1' (first strict match, from end)
+							);
+							Uize.indexIn (
+								{p0:5,p1:'9',p2:9},9,true,true      // returns 'p2' (first strict match, from end)
+							);
+							Uize.indexIn (
+								{p0:5,p1:'9',p2:9},'9',true,false   // returns 'p2' (first non-strict match, from end)
+							);
+							Uize.indexIn (
+								{p0:5,p1:9,p2:'9'},9,true,false     // returns 'p2' (first non-strict match, from end)
+							);
+							.........................................................................................
 
 						NOTES
 						- see also the related =Uize.isIn= static method
 			*/
 		);
 
-		_nonInheritableStatic (
+		var _keys = _nonInheritableStatic (
 			'keys',
 			function (_object) {
 				var _result = [];
@@ -3475,6 +3588,56 @@
 						- see also the other `Value Testing Methods`
 			*/
 
+		_nonInheritableStatic ('isList',_isList);
+			/*?
+				Static Methods
+					Uize.isList
+						Returns a boolean, indicating whether or not the specified value is considered a list.
+
+						SYNTAX
+						........................................
+						isListBOOL = Uize.isList (valueANYTYPE);
+						........................................
+
+						A list is considered to be a non-null value of type ='object'= that has a =length= property whose value is a number. By this definition, an instance of JavaScript's built-in =Array= object is considered to be a list. Also by this definition, a =NodeList= instance as returned by the =document.getElementsByTagName= method is considered to be a list, since it is a non-null object type value with a number type =length= property.
+
+						The =Uize.isList= method is useful when implementing methods that are to conditionalize their behavior based upon the type of a parameter, and where an iteration behavior is desired for list type values. If a value is considered to be a list, its list items can be iterated over using a standard JavaScript =for= loop, using the =length= property to determine how many items should be iterated over, and indexing into the list using JavaScript's =[]= (square brackets) notation.
+
+						EXAMPLES
+						.....................................................................................
+						alert (Uize.isList (['foo','bar','hello','world']));        // alerts "true"
+						alert (Uize.isList (document.getElementsByTagName ('a')));  // alerts "true"
+
+						alert (Uize.isList ({foo:'bar',hello:'world'}));            // alerts "false"
+						alert (Uize.isList (42));                                   // alerts "false"
+						alert (Uize.isList (true));                                 // alerts "false"
+						alert (Uize.isList ('foo');                                 // alerts "false"
+						alert (Uize.isList (null);                                  // alerts "false"
+						alert (Uize.isList (undefined);                             // alerts "false"
+						alert (Uize.isList (/\d+/));                                // alerts "false"
+						alert (function () {});                                     // alerts "false"
+
+						// an object is only considered a list once it has a length property that is a number
+						var fooObj = {0:'foo',1:'bar',2:'hello',3:'world'};
+						alert (Uize.isList (fooObj));                               // alerts "false"
+						fooObj.length = '4';
+						alert (Uize.isList (fooObj));                               // alerts "false"
+						fooObj.length = 4;
+						alert (Uize.isList (fooObj));                               // alerts "true"
+
+						// the arguments variable inside functions is considered to be a list
+						function fooFunc () {
+							alert (Uize.isList (arguments));                         // alerts "true"
+						}
+						fooFunc ('foo','bar','hello','world');
+						.....................................................................................
+
+						NOTES
+						- compare to the =Uize.isArray= static method
+						- see also the other `Value Testing Methods`
+			*/
+
+
 		_nonInheritableStatic ('isFunction',_isFunction);
 			/*?
 				Static Methods
@@ -3691,7 +3854,7 @@
 
 		_nonInheritableStatic (
 			'isIn',
-			function (_source,_value,_strict) {return _class.indexIn (_values (_source),_value,_false,_strict) > -1}
+			function (_source,_value,_strict) {return _class.indexIn (_source,_value,_false,_strict) !== -1}
 			/*?
 				Static Methods
 					Uize.isIn

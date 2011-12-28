@@ -1,5 +1,5 @@
 /*
-	UIZE Web Site 2011-12-24
+	UIZE Web Site 2011-12-28
 
 	http://www.uize.com/reference/UizeDotCom.ModulesTree.html
 	Available under MIT License or GNU General Public License -- http://www.uize.com/license.html

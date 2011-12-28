@@ -40,7 +40,8 @@ Uize.module ({
 				_true = true,
 				_false = false,
 				_undefined,
-				_Uize_totalKeys = Uize.totalKeys
+				_Uize_totalKeys = Uize.totalKeys,
+				_Uize_isObject = Uize.isObject
 			;
 
 		/*** General Variables ***/
@@ -142,18 +143,16 @@ Uize.module ({
 									if (_startValue == _endValue) {
 										_signaturesMatch = _newFadeStartValue == _startValue && _newFadeEndValue == _startValue;
 									} else if (
-										_signaturesMatch =
-											typeof _startValue == 'object' && typeof _newFadeStartValue == 'object' &&
-											_startValue && _newFadeStartValue
-												? (
-													(
-														typeof _startValue.length == 'number'
-															? _startValue.length === _newFadeStartValue.length
-															: _true
-													) &&
-													_Uize_totalKeys (_startValue) == _Uize_totalKeys (_newFadeStartValue)
-												)
-												: _true
+										_signaturesMatch = _Uize_isObject (_startValue) && _Uize_isObject (_newFadeStartValue)
+											? (
+												(
+													typeof _startValue.length == 'number'
+														? _startValue.length === _newFadeStartValue.length
+														: _true
+												) &&
+												_Uize_totalKeys (_startValue) == _Uize_totalKeys (_newFadeStartValue)
+											)
+											: _true
 									) {
 										for (var _propertyName in _startValue) {
 											if (

@@ -1,0 +1,47 @@
+The new =Uize.isList= static method returns a boolean, indicating whether or not the specified value is considered a list.
+
+SYNTAX
+........................................
+isListBOOL = Uize.isList (valueANYTYPE);
+........................................
+
+A list is considered to be a non-null value of type ='object'= that has a =length= property whose value is a number. By this definition, an instance of JavaScript's built-in =Array= object is considered to be a list. Also by this definition, a =NodeList= instance as returned by the =document.getElementsByTagName= method is considered to be a list, since it is a non-null object type value with a number type =length= property.
+
+The =Uize.isList= method is useful when implementing methods that are to conditionalize their behavior based upon the type of a parameter, and where an iteration behavior is desired for list type values. If a value is considered to be a list, its list items can be iterated over using a standard JavaScript =for= loop, using the =length= property to determine how many items should be iterated over, and indexing into the list using JavaScript's =[]= (square brackets) notation.
+
+EXAMPLES
+.....................................................................................
+alert (Uize.isList (['foo','bar','hello','world']));        // alerts "true"
+alert (Uize.isList (document.getElementsByTagName ('a')));  // alerts "true"
+
+alert (Uize.isList ({foo:'bar',hello:'world'}));            // alerts "false"
+alert (Uize.isList (42));                                   // alerts "false"
+alert (Uize.isList (true));                                 // alerts "false"
+alert (Uize.isList ('foo');                                 // alerts "false"
+alert (Uize.isList (null);                                  // alerts "false"
+alert (Uize.isList (undefined);                             // alerts "false"
+alert (Uize.isList (/\d+/));                                // alerts "false"
+alert (function () {});                                     // alerts "false"
+
+// an object is only considered a list once it has a length property that is a number
+var fooObj = {0:'foo',1:'bar',2:'hello',3:'world'};
+alert (Uize.isList (fooObj));                               // alerts "false"
+fooObj.length = '4';
+alert (Uize.isList (fooObj));                               // alerts "false"
+fooObj.length = 4;
+alert (Uize.isList (fooObj));                               // alerts "true"
+
+// the arguments variable inside functions is considered to be a list
+function fooFunc () {
+	alert (Uize.isList (arguments));                         // alerts "true"
+}
+fooFunc ('foo','bar','hello','world');
+.....................................................................................
+
+This new method is thoroughly documented and has comprehensive unit tests.
+
+....................................................................................
+<< metadata >>
+
+title: 2011-12-26 - New Uize.isList Static Method
+....................................................................................
