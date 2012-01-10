@@ -678,7 +678,7 @@ Uize.module ({
 				{
 					path:'examples/transferring-state.html',
 					title:'Transferring State',
-					keywords:'touch ipad Uize Uize.Widget.Resizer.Marquee Uize.Util.Coupler',
+					keywords:'touch ipad Uize.Class Uize.Widget.Resizer.Marquee Uize.Util.Coupler',
 					description:'UIZE makes it easy to transfer state from one widget to another. See how to copy state from one marquee to another - or even how to keep them coupled.',
 					imageSrc:''
 				},

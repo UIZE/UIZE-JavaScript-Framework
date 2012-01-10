@@ -401,7 +401,7 @@ alert (fruitsCopy [0] [0]); // alerts the text "grapefruit"
 				
 				<p>In the above example, the <code>fruits</code> array is a two dimensional array, where the elements of the array are references to the <code>citrusFruits</code>, <code>stoneFruits</code>, and <code>berryFruits</code> arrays. The <code>fruitsCopy</code> array is a one level deep copy of the <code>fruits</code> array, created by calling the <code><a href="#3_1">concat</a></code> method on the <code>fruits</code> array and not specifying any additional values to concatenate. Now, if the first element of the <code>citrusFruits</code> array is changed from <code>'lemon'</code> to <code>'grapefruit'</code>, dereferencing the first element in the first nested array in the <code>fruitsCopy</code> array produces the value <code>'grapefruit'</code>. So, clearly the <code>fruitsCopy</code> array didn't get its own copy of the <code>citrusFruits</code> array - it has a shared reference to it.</p>
 				
-				<p>Creating a one level deep copy of an array - rather than a deep clone - is often perfectly adequate, and sometimes actually preferable. In the event that you do actually need a deep clone, you can use the <code>Uize.clone</code> static method of the <code><a href="../reference/Uize.html">Uize</a></code> base class.</p>
+				<p>Creating a one level deep copy of an array - rather than a deep clone - is often perfectly adequate, and sometimes actually preferable. In the event that you do actually need a deep clone, you can use the <code>Uize.clone</code> static method of the <code><a href="../reference/Uize.html">Uize</a></code> base module.</p>
 				
 				<a name="1_2_1_1"></a>
 				<h4 class="heading4" title="1. Introduction -&gt; 1.2. Copy Elements of an Array -&gt; 1.2.1. One Level Deep Copy -&gt; 1.2.1.1. Several Ways to Create a One Level Deep Copy"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Copy Elements of an Array">2</a>.<a href="#1_2_1" title="1. Introduction -&gt; 1.2. Copy Elements of an Array -&gt; 1.2.1. One Level Deep Copy">1</a>.<a href="#1_2_1_1" title="1. Introduction -&gt; 1.2. Copy Elements of an Array -&gt; 1.2.1. One Level Deep Copy -&gt; 1.2.1.1. Several Ways to Create a One Level Deep Copy">1</a>. </span>Several Ways to Create a One Level Deep Copy</h4>
@@ -989,19 +989,19 @@ newARRAY = new Array (element0ANYTYPE,element1ANYTYPE,...,elementNANYTYPE); // l
 				
 				
 <pre class="sample-code">var array = [
-  false,                     // serialized to "false"
-  42,                        // serialized to "42"
-  Infinity,                  // serialized to "Infinity"
-  'foo',                     // serialized to "foo"
-  new RegExp ('\\d+'),       // serialized to "/\d+/"
-  Uize ({value:'bar'}),      // serialized to "bar"
-  ['lemon','lime','orange']  // serialized to "lemon,lime,orange"
+  false,                       // serialized to "false"
+  42,                          // serialized to "42"
+  Infinity,                    // serialized to "Infinity"
+  'foo',                       // serialized to "foo"
+  new RegExp ('\\d+'),         // serialized to "/\d+/"
+  Uize.Class ({value:'bar'}),  // serialized to "bar"
+  ['lemon','lime','orange']    // serialized to "lemon,lime,orange"
 ];
 
 alert (array.join (' ')); // alerts "false 42 Infinity foo /\d+/ bar lemon,lime,orange"
 </pre>
 				
-				<p>In the above example, the <code>alert</code> statement would alert the text <b>"false 42 Infinity foo /\d+/ bar lemon,lime,orange"</b>. Worth noting is that the regular expression has its own string serialization behavior that is implemented in the <code><a href="../javascript-reference/RegExp.html">RegExp</a></code> object, the <code><a href="../reference/Uize.html">Uize</a></code> class has special string serialization behavior for instances of classes with a value interface, and serializing the array value will invoke the <code><a href="#3_10">toString</a></code> method of the <code><a href="../javascript-reference/Array.html">Array</a></code> object.</p>
+				<p>In the above example, the <code>alert</code> statement would alert the text <b>"false 42 Infinity foo /\d+/ bar lemon,lime,orange"</b>. Worth noting is that the regular expression has its own string serialization behavior that is implemented in the <code><a href="../javascript-reference/RegExp.html">RegExp</a></code> object, the <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> base class has special string serialization behavior for instances of classes with a value interface, and serializing the array value will invoke the <code><a href="#3_10">toString</a></code> method of the <code><a href="../javascript-reference/Array.html">Array</a></code> object.</p>
 				
 				<a name="3_2_1_1"></a>
 				<h4 class="heading4" title="3. Instance Methods -&gt; 3.2. join -&gt; 3.2.1. Serialization of Element Values -&gt; 3.2.1.1. Special Handling of null and undefined Values"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_2" title="3. Instance Methods -&gt; 3.2. join">2</a>.<a href="#3_2_1" title="3. Instance Methods -&gt; 3.2. join -&gt; 3.2.1. Serialization of Element Values">1</a>.<a href="#3_2_1_1" title="3. Instance Methods -&gt; 3.2. join -&gt; 3.2.1. Serialization of Element Values -&gt; 3.2.1.1. Special Handling of null and undefined Values">1</a>. </span>Special Handling of null and undefined Values</h4>
@@ -1748,19 +1748,19 @@ alert (fruits.toString () == fruits.join ());    // alerts the text "true"
 				
 				
 <pre class="sample-code">var array = [
-  false,                     // serialized to "false"
-  42,                        // serialized to "42"
-  Infinity,                  // serialized to "Infinity"
-  'foo',                     // serialized to "foo"
-  new RegExp ('\\d+'),       // serialized to "/\d+/"
-  Uize ({value:'bar'}),      // serialized to "bar"
-  ['lemon','lime','orange']  // serialized to "lemon,lime,orange"
+  false,                       // serialized to "false"
+  42,                          // serialized to "42"
+  Infinity,                    // serialized to "Infinity"
+  'foo',                       // serialized to "foo"
+  new RegExp ('\\d+'),         // serialized to "/\d+/"
+  Uize.Class ({value:'bar'}),  // serialized to "bar"
+  ['lemon','lime','orange']    // serialized to "lemon,lime,orange"
 ];
 
 alert (array);  // alerts the text "false,42,Infinity,foo,/\d+/,bar,lemon,lime,orange"
 </pre>
 				
-				<p>In the above example, the <code>alert</code> statement would alert the text <b>"false,42,Infinity,foo,/\d+/,bar,lemon,lime,orange"</b>. Worth noting is that the regular expression has its own string serialization behavior that is implemented in the <code><a href="../javascript-reference/RegExp.html">RegExp</a></code> object, the <code><a href="../reference/Uize.html">Uize</a></code> class has special string serialization behavior for instances of classes with a value interface, and serializing the array value will invoke the <code><a href="#3_10">toString</a></code> method of the <code><a href="../javascript-reference/Array.html">Array</a></code> object.</p>
+				<p>In the above example, the <code>alert</code> statement would alert the text <b>"false,42,Infinity,foo,/\d+/,bar,lemon,lime,orange"</b>. Worth noting is that the regular expression has its own string serialization behavior that is implemented in the <code><a href="../javascript-reference/RegExp.html">RegExp</a></code> object, the <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> base class has special string serialization behavior for instances of classes with a value interface, and serializing the array value will invoke the <code><a href="#3_10">toString</a></code> method of the <code><a href="../javascript-reference/Array.html">Array</a></code> object.</p>
 				
 				<a name="3_10_4_1"></a>
 				<h4 class="heading4" title="3. Instance Methods -&gt; 3.10. toString -&gt; 3.10.4. Serialization of Element Values -&gt; 3.10.4.1. Special Handling of null and undefined Values"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_10" title="3. Instance Methods -&gt; 3.10. toString">10</a>.<a href="#3_10_4" title="3. Instance Methods -&gt; 3.10. toString -&gt; 3.10.4. Serialization of Element Values">4</a>.<a href="#3_10_4_1" title="3. Instance Methods -&gt; 3.10. toString -&gt; 3.10.4. Serialization of Element Values -&gt; 3.10.4.1. Special Handling of null and undefined Values">1</a>. </span>Special Handling of null and undefined Values</h4>

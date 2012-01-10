@@ -32,7 +32,7 @@
 			<li><a href="#1" title="The Uize.Comm class provides functionality and interface that is shared by subclasses that implement support for specific communication protocols.">1. Introduction</a>
 				<ul>
 					<li><a href="#1_1" title="There are no dedicated showcase example pages for the Uize.Comm module.">1.1. Examples</a></li>
-					<li><a href="#1_2" title="The Uize.Comm module defines the Uize.Comm class, which is a subclass of Uize.">1.2. Implementation Info</a>
+					<li><a href="#1_2" title="The Uize.Comm module defines the Uize.Comm class, which is a subclass of Uize.Class.">1.2. Implementation Info</a>
 						<ul>
 							<li><a href="#1_2_1" title="The features listed in this section have been introduced in this module.">1.2.1. Features Introduced in This Module</a></li>
 							<li><a href="#1_2_2" title="The features listed in this section have been overridden in this module.">1.2.2. Features Overridden in This Module</a></li>
@@ -56,11 +56,11 @@
 			</li>
 			<li><a href="#4">4. Instance Methods</a>
 				<ul>
-					<li><a href="#4_1" title="Inherited from Uize.">4.1. fire</a></li>
+					<li><a href="#4_1" title="Inherited from Uize.Class.">4.1. fire</a></li>
 					<li><a href="#4_2" title="A method that lets you flush the request queue.">4.2. flush</a></li>
 					<li><a href="#4_3" title="Lets you flush the cached response for a specific request, or lets you flush the entire response cache for the instance.">4.3. flushCache</a></li>
-					<li><a href="#4_4" title="Inherited from Uize.">4.4. get</a></li>
-					<li><a href="#4_5" title="Inherited from Uize.">4.5. kill</a></li>
+					<li><a href="#4_4" title="Inherited from Uize.Class.">4.4. get</a></li>
+					<li><a href="#4_5" title="Inherited from Uize.Class.">4.5. kill</a></li>
 					<li><a href="#4_6" title="A method that should be overrided in subclasses that implement support for specific communication protocols.">4.6. performRequest</a></li>
 					<li><a href="#4_7" title="IMPLEMENTATION INFO">4.7. queueRequest</a></li>
 					<li><a href="#4_8" title="A method that lets you initiate a request.">4.8. request</a>
@@ -75,24 +75,24 @@
 							</li>
 						</ul>
 					</li>
-					<li><a href="#4_9" title="Inherited from Uize.">4.9. set</a></li>
-					<li><a href="#4_10" title="Inherited from Uize.">4.10. toggle</a></li>
-					<li><a href="#4_11" title="Inherited from Uize.">4.11. unwire</a></li>
+					<li><a href="#4_9" title="Inherited from Uize.Class.">4.9. set</a></li>
+					<li><a href="#4_10" title="Inherited from Uize.Class.">4.10. toggle</a></li>
+					<li><a href="#4_11" title="Inherited from Uize.Class.">4.11. unwire</a></li>
 					<li><a href="#4_12" title="IMPLEMENTATION INFO">4.12. useQueue</a></li>
-					<li><a href="#4_13" title="Inherited from Uize.">4.13. wire</a></li>
+					<li><a href="#4_13" title="Inherited from Uize.Class.">4.13. wire</a></li>
 				</ul>
 			</li>
 			<li><a href="#5">5. Static Methods</a>
 				<ul>
-					<li><a href="#5_1" title="Inherited from Uize.">5.1. Uize.Comm.fire</a></li>
-					<li><a href="#5_2" title="Inherited from Uize.">5.2. Uize.Comm.get</a></li>
+					<li><a href="#5_1" title="Inherited from Uize.Class.">5.1. Uize.Comm.fire</a></li>
+					<li><a href="#5_2" title="Inherited from Uize.Class.">5.2. Uize.Comm.get</a></li>
 					<li><a href="#5_3" title="A method that facilitates asynchronous iteration through and processing of the elements of an array.">5.3. Uize.Comm.processArrayAsync</a></li>
-					<li><a href="#5_4" title="Inherited from Uize.">5.4. Uize.Comm.registerProperties</a></li>
-					<li><a href="#5_5" title="Inherited from Uize.">5.5. Uize.Comm.set</a></li>
-					<li><a href="#5_6" title="Inherited from Uize.">5.6. Uize.Comm.subclass</a></li>
-					<li><a href="#5_7" title="Inherited from Uize.">5.7. Uize.Comm.toggle</a></li>
-					<li><a href="#5_8" title="Inherited from Uize.">5.8. Uize.Comm.unwire</a></li>
-					<li><a href="#5_9" title="Inherited from Uize.">5.9. Uize.Comm.wire</a></li>
+					<li><a href="#5_4" title="Inherited from Uize.Class.">5.4. Uize.Comm.registerProperties</a></li>
+					<li><a href="#5_5" title="Inherited from Uize.Class.">5.5. Uize.Comm.set</a></li>
+					<li><a href="#5_6" title="Inherited from Uize.Class.">5.6. Uize.Comm.subclass</a></li>
+					<li><a href="#5_7" title="Inherited from Uize.Class.">5.7. Uize.Comm.toggle</a></li>
+					<li><a href="#5_8" title="Inherited from Uize.Class.">5.8. Uize.Comm.unwire</a></li>
+					<li><a href="#5_9" title="Inherited from Uize.Class.">5.9. Uize.Comm.wire</a></li>
 				</ul>
 			</li>
 			<li><a href="#6">6. Static Properties</a>
@@ -131,11 +131,11 @@
 		<a name="1_2"></a>
 		<h2 class="heading2" title="1. Introduction -&gt; 1.2. Implementation Info"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>. </span>Implementation Info</h2>
 		<div class="contents2">
-			<p>The <code>Uize.Comm</code> module defines the <code>Uize.Comm</code> class, which is a subclass of <code><a href="../reference/Uize.html">Uize</a></code>.</p>
+			<p>The <code>Uize.Comm</code> module defines the <code>Uize.Comm</code> class, which is a subclass of <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
 			<p><span class="allCaps">INHERITANCE CHAIN</span></p>
 			
-			<p><code><a href="../reference/Uize.html">Uize</a></code> -> <code>Uize.Comm</code></p>
+			<p><code><a href="../reference/Uize.Class.html">Uize.Class</a></code> -> <code>Uize.Comm</code></p>
 			
 			<a name="1_2_1"></a>
 			<h3 class="heading3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.1. Features Introduced in This Module"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>.<a href="#1_2_1" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.1. Features Introduced in This Module">1</a>. </span>Features Introduced in This Module</h3>
@@ -231,12 +231,12 @@
 		<a name="4_1"></a>
 		<h2 class="heading2" title="4. Instance Methods -&gt; 4.1. fire"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_1" title="4. Instance Methods -&gt; 4.1. fire">1</a>. </span>fire</h2>
 		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
 			</table>
 		</div>
 		
@@ -308,24 +308,24 @@
 		<a name="4_4"></a>
 		<h2 class="heading2" title="4. Instance Methods -&gt; 4.4. get"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_4" title="4. Instance Methods -&gt; 4.4. get">4</a>. </span>get</h2>
 		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
 			</table>
 		</div>
 		
 		<a name="4_5"></a>
 		<h2 class="heading2" title="4. Instance Methods -&gt; 4.5. kill"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_5" title="4. Instance Methods -&gt; 4.5. kill">5</a>. </span>kill</h2>
 		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
 			</table>
 		</div>
 		
@@ -458,36 +458,36 @@
 		<a name="4_9"></a>
 		<h2 class="heading2" title="4. Instance Methods -&gt; 4.9. set"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_9" title="4. Instance Methods -&gt; 4.9. set">9</a>. </span>set</h2>
 		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
 			</table>
 		</div>
 		
 		<a name="4_10"></a>
 		<h2 class="heading2" title="4. Instance Methods -&gt; 4.10. toggle"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_10" title="4. Instance Methods -&gt; 4.10. toggle">10</a>. </span>toggle</h2>
 		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
 			</table>
 		</div>
 		
 		<a name="4_11"></a>
 		<h2 class="heading2" title="4. Instance Methods -&gt; 4.11. unwire"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_11" title="4. Instance Methods -&gt; 4.11. unwire">11</a>. </span>unwire</h2>
 		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
 			</table>
 		</div>
 		
@@ -504,12 +504,12 @@
 		<a name="4_13"></a>
 		<h2 class="heading2" title="4. Instance Methods -&gt; 4.13. wire"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_13" title="4. Instance Methods -&gt; 4.13. wire">13</a>. </span>wire</h2>
 		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
 			</table>
 		</div>
 	</div>
@@ -520,12 +520,12 @@
 		<a name="5_1"></a>
 		<h2 class="heading2" title="5. Static Methods -&gt; 5.1. Uize.Comm.fire"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_1" title="5. Static Methods -&gt; 5.1. Uize.Comm.fire">1</a>. </span>Uize.Comm.fire</h2>
 		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
 			</table>
 		</div>
@@ -533,12 +533,12 @@
 		<a name="5_2"></a>
 		<h2 class="heading2" title="5. Static Methods -&gt; 5.2. Uize.Comm.get"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_2" title="5. Static Methods -&gt; 5.2. Uize.Comm.get">2</a>. </span>Uize.Comm.get</h2>
 		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
 			</table>
 		</div>
@@ -650,12 +650,12 @@ Uize.Comm.processArrayAsync (
 		<a name="5_4"></a>
 		<h2 class="heading2" title="5. Static Methods -&gt; 5.4. Uize.Comm.registerProperties"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_4" title="5. Static Methods -&gt; 5.4. Uize.Comm.registerProperties">4</a>. </span>Uize.Comm.registerProperties</h2>
 		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
 			</table>
 		</div>
@@ -663,12 +663,12 @@ Uize.Comm.processArrayAsync (
 		<a name="5_5"></a>
 		<h2 class="heading2" title="5. Static Methods -&gt; 5.5. Uize.Comm.set"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_5" title="5. Static Methods -&gt; 5.5. Uize.Comm.set">5</a>. </span>Uize.Comm.set</h2>
 		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
 			</table>
 		</div>
@@ -676,12 +676,12 @@ Uize.Comm.processArrayAsync (
 		<a name="5_6"></a>
 		<h2 class="heading2" title="5. Static Methods -&gt; 5.6. Uize.Comm.subclass"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_6" title="5. Static Methods -&gt; 5.6. Uize.Comm.subclass">6</a>. </span>Uize.Comm.subclass</h2>
 		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
 			</table>
 		</div>
@@ -689,12 +689,12 @@ Uize.Comm.processArrayAsync (
 		<a name="5_7"></a>
 		<h2 class="heading2" title="5. Static Methods -&gt; 5.7. Uize.Comm.toggle"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_7" title="5. Static Methods -&gt; 5.7. Uize.Comm.toggle">7</a>. </span>Uize.Comm.toggle</h2>
 		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
 			</table>
 		</div>
@@ -702,12 +702,12 @@ Uize.Comm.processArrayAsync (
 		<a name="5_8"></a>
 		<h2 class="heading2" title="5. Static Methods -&gt; 5.8. Uize.Comm.unwire"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_8" title="5. Static Methods -&gt; 5.8. Uize.Comm.unwire">8</a>. </span>Uize.Comm.unwire</h2>
 		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
 			</table>
 		</div>
@@ -715,12 +715,12 @@ Uize.Comm.processArrayAsync (
 		<a name="5_9"></a>
 		<h2 class="heading2" title="5. Static Methods -&gt; 5.9. Uize.Comm.wire"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_9" title="5. Static Methods -&gt; 5.9. Uize.Comm.wire">9</a>. </span>Uize.Comm.wire</h2>
 		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
 			</table>
 		</div>
@@ -735,7 +735,7 @@ Uize.Comm.processArrayAsync (
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an override of an inherited feature (implementation is in this module, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an override of an inherited feature (implementation is in this module, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
 			</table>
 		</div>
@@ -746,7 +746,7 @@ Uize.Comm.processArrayAsync (
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an override of an inherited feature (implementation is in this module, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an override of an inherited feature (implementation is in this module, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is <b>not</b> inherited by subclasses</td></tr>
 			</table>
 		</div>

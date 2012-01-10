@@ -195,7 +195,7 @@ Introduction
 
 			In the above example, the =fruits= array is a two dimensional array, where the elements of the array are references to the =citrusFruits=, =stoneFruits=, and =berryFruits= arrays. The =fruitsCopy= array is a one level deep copy of the =fruits= array, created by calling the =concat= method on the =fruits= array and not specifying any additional values to concatenate. Now, if the first element of the =citrusFruits= array is changed from ='lemon'= to ='grapefruit'=, dereferencing the first element in the first nested array in the =fruitsCopy= array produces the value ='grapefruit'=. So, clearly the =fruitsCopy= array didn't get its own copy of the =citrusFruits= array - it has a shared reference to it.
 
-			Creating a one level deep copy of an array - rather than a deep clone - is often perfectly adequate, and sometimes actually preferable. In the event that you do actually need a deep clone, you can use the =Uize.clone= static method of the =Uize= base class.
+			Creating a one level deep copy of an array - rather than a deep clone - is often perfectly adequate, and sometimes actually preferable. In the event that you do actually need a deep clone, you can use the =Uize.clone= static method of the =Uize= base module.
 
 			Several Ways to Create a One Level Deep Copy
 				Because of the versatility of the various built-in methods of JavaScript's =Array= object, there are actually numerous ways to create a `one level deep copy` of an array - some concise and elegant, and some less so.
@@ -665,19 +665,19 @@ Instance Methods
 			EXAMPLE
 			.......................................................................................
 			var array = [
-				false,                     // serialized to "false"
-				42,                        // serialized to "42"
-				Infinity,                  // serialized to "Infinity"
-				'foo',                     // serialized to "foo"
-				new RegExp ('\\d+'),       // serialized to "/\d+/"
-				Uize ({value:'bar'}),      // serialized to "bar"
-				['lemon','lime','orange']  // serialized to "lemon,lime,orange"
+				false,                       // serialized to "false"
+				42,                          // serialized to "42"
+				Infinity,                    // serialized to "Infinity"
+				'foo',                       // serialized to "foo"
+				new RegExp ('\\d+'),         // serialized to "/\d+/"
+				Uize.Class ({value:'bar'}),  // serialized to "bar"
+				['lemon','lime','orange']    // serialized to "lemon,lime,orange"
 			];
 
 			alert (array.join (' ')); // alerts "false 42 Infinity foo /\d+/ bar lemon,lime,orange"
 			.......................................................................................
 
-			In the above example, the =alert= statement would alert the text *"false 42 Infinity foo /\d+/ bar lemon,lime,orange"*. Worth noting is that the regular expression has its own string serialization behavior that is implemented in the =RegExp= object, the =Uize= class has special string serialization behavior for instances of classes with a value interface, and serializing the array value will invoke the =toString= method of the =Array= object.
+			In the above example, the =alert= statement would alert the text *"false 42 Infinity foo /\d+/ bar lemon,lime,orange"*. Worth noting is that the regular expression has its own string serialization behavior that is implemented in the =RegExp= object, the =Uize.Class= base class has special string serialization behavior for instances of classes with a value interface, and serializing the array value will invoke the =toString= method of the =Array= object.
 
 			Special Handling of null and undefined Values
 				When the =join= method serializes array elements to strings before concatenating them, it implements special handling for elements with values of =null= or =undefined=.
@@ -1329,19 +1329,19 @@ Instance Methods
 			EXAMPLE
 			......................................................................................
 			var array = [
-				false,                     // serialized to "false"
-				42,                        // serialized to "42"
-				Infinity,                  // serialized to "Infinity"
-				'foo',                     // serialized to "foo"
-				new RegExp ('\\d+'),       // serialized to "/\d+/"
-				Uize ({value:'bar'}),      // serialized to "bar"
-				['lemon','lime','orange']  // serialized to "lemon,lime,orange"
+				false,                       // serialized to "false"
+				42,                          // serialized to "42"
+				Infinity,                    // serialized to "Infinity"
+				'foo',                       // serialized to "foo"
+				new RegExp ('\\d+'),         // serialized to "/\d+/"
+				Uize.Class ({value:'bar'}),  // serialized to "bar"
+				['lemon','lime','orange']    // serialized to "lemon,lime,orange"
 			];
 
 			alert (array);  // alerts the text "false,42,Infinity,foo,/\d+/,bar,lemon,lime,orange"
 			......................................................................................
 
-			In the above example, the =alert= statement would alert the text *"false,42,Infinity,foo,/\d+/,bar,lemon,lime,orange"*. Worth noting is that the regular expression has its own string serialization behavior that is implemented in the =RegExp= object, the =Uize= class has special string serialization behavior for instances of classes with a value interface, and serializing the array value will invoke the =toString= method of the =Array= object.
+			In the above example, the =alert= statement would alert the text *"false,42,Infinity,foo,/\d+/,bar,lemon,lime,orange"*. Worth noting is that the regular expression has its own string serialization behavior that is implemented in the =RegExp= object, the =Uize.Class= base class has special string serialization behavior for instances of classes with a value interface, and serializing the array value will invoke the =toString= method of the =Array= object.
 
 			Special Handling of null and undefined Values
 				When the =toString= method serializes array elements to strings before concatenating them, it implements special handling for elements with values of =null= or =undefined=.

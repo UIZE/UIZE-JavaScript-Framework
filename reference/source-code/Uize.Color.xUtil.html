@@ -79,7 +79,7 @@ Uize.module ({
 
     /*** Public Instance Methods ***/
       _objectPrototype.blend = function (_color1,_color2,_blendAmount) {
-        if (isNaN (_blendAmount = +_blendAmount)) _blendAmount = .5;
+        _blendAmount = Uize.toNumber (_blendAmount,.5);
         _dummyColor1.from (_color1);
         _dummyColor2.from (_color2);
         var

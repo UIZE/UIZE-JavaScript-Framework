@@ -137,7 +137,7 @@
 		
 		<p><b>DEVELOPERS:</b> <a href="http://www.tomkidding.com" target="_blank" class="externalSiteLink">Chris van Rensburg</a></p>
 		
-		<p>The <code>Uize.String.Builder</code> module is an object under the <code><a href="../reference/Uize.String.html">Uize.String</a></code> namespace, and is <b>not</b> a <code><a href="../reference/Uize.html">Uize</a></code> subclass.</p>
+		<p>The <code>Uize.String.Builder</code> module is an object under the <code><a href="../reference/Uize.String.html">Uize.String</a></code> namespace, and is <b>not</b> a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass.</p>
 		
 		<a name="1_1"></a>
 		<h2 class="heading2" title="1. Introduction -&gt; 1.1. In a Nutshell"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. In a Nutshell">1</a>. </span>In a Nutshell</h2>
@@ -355,7 +355,7 @@ fruitsTable += '';  // force string builder to resolve value and reassign to fru
 			<div class="contents3">
 				<p>As a convenience, many of the instance methods that are provided for <a href="#1_1_3">Initializing the Value</a> or <a href="#1_1_4">Building the Value</a> of a <code>Uize.String.Builder</code> instance allow a value to be specified in any type.</p>
 				
-				<p>Methods such as the <code><a href="#4_3">append</a></code>, <code><a href="#4_11">equals</a></code>, <code><a href="#4_21">prepend</a></code>, and <code><a href="#4_24">setValue</a></code> instance methods, along with the <a href="#2">Constructor</a>, all support a <code>valueANYTYPE</code> parameter. The value for this parameter can be of any type, and will be coerced to a string. If the value is an instance of an object or a <code><a href="../reference/Uize.html">Uize</a></code> subclass, then it will be coerced to a string by invoking the object's <code><a href="#4_36">valueOf Intrinsic Method</a></code>. So, string type values, boolean type values, number type values, etc. can be used with these methods. As an example, following is a list of mappings between value and string equivalent...</p>
+				<p>Methods such as the <code><a href="#4_3">append</a></code>, <code><a href="#4_11">equals</a></code>, <code><a href="#4_21">prepend</a></code>, and <code><a href="#4_24">setValue</a></code> instance methods, along with the <a href="#2">Constructor</a>, all support a <code>valueANYTYPE</code> parameter. The value for this parameter can be of any type, and will be coerced to a string. If the value is an instance of an object or a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass, then it will be coerced to a string by invoking the object's <code><a href="#4_36">valueOf Intrinsic Method</a></code>. So, string type values, boolean type values, number type values, etc. can be used with these methods. As an example, following is a list of mappings between value and string equivalent...</p>
 				
 				
 				<table class="data">
@@ -404,7 +404,7 @@ fruitsTable += '';  // force string builder to resolve value and reassign to fru
 					</tr>
 					<tr>
 						<td>object (Uize instance)</td>
-						<td>Uize ({value:'foo'})</td>
+						<td>Uize.Class ({value:'foo'})</td>
 						<td>'foo'</td>
 					</tr>
 					<tr>

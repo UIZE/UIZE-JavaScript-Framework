@@ -71,7 +71,9 @@ Implied Nodes
 		It is not necessary to define HTML for every one of a button's possible states. It is perfectly valid to choose not to define HTML for one or more states that you don't wish to be displayed. For example, in a particular button UI design, you may wish to not have a selected display state, but only the normal and mouseover display states. In this case, simply don't define HTML for the button's selected and playing display states. You would typically always define HTML for at least the normal display state for all buttons, though.
 
 Inherited Instance and Static Methods
-	This class inherits from the =Uize= base class. Consequently, it inherits all the instance and static methods that comprise the mechanism for setting and getting property values, the mechanism for managing events, as well as other utility features. Consult the documentation for the =Uize= base class for detailed information on these methods, since they are not explained again in the documentation for this class.
+	This class inherits from the =Uize.Class= base class.
+	
+	Consequently, it inherits all the instance and static methods that comprise the mechanism for setting and getting property values, the mechanism for managing events, as well as other utility features. Consult the documentation for the =Uize.Class= base class for detailed information on these methods, since they are not explained again in the documentation for this class.
 
 Instance Methods
 	wireUi

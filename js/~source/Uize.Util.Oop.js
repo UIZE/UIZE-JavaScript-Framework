@@ -193,8 +193,8 @@ Uize.module ({
 				);
 			};
 
-			_package.isUizeClassInstance = function (_object) {
-				return typeof _object == 'object' && _object != _undefined && _package.isUizeClass (_object.constructor);
+			_package.isUizeClassInstance = function (_value) {
+				return Uize.isObject (_value) && _package.isUizeClass (_value.constructor);
 			};
 
 			_package.getClassName = function (_class) {
@@ -284,9 +284,9 @@ Uize.module ({
 
 			_package.resolveToClass = function (_instanceOrClass) {
 				return (
-					_instanceOrClass == _undefined
-						? _undefined
-						: _isFunction (_instanceOrClass) ? _instanceOrClass : _instanceOrClass.constructor
+					_instanceOrClass == _undefined || _isFunction (_instanceOrClass)
+						? _instanceOrClass || _undefined
+						: _instanceOrClass.constructor
 				);
 			};
 

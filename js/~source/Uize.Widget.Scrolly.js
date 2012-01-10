@@ -402,7 +402,7 @@ Uize.module ({
 								Conformed
 									When setting the value for this property, the value is conformed in a number of ways.
 
-									+. The value will be coerced to a number type by invoking the =valueOf Intrinsic Method=. This means that one can specify a string value that is a valid formatted number, or an object (such as an instance of a =Uize= subclass) that implements the =value= interface.
+									+. The value will be coerced to a number type by invoking the =valueOf Intrinsic Method=. This means that one can specify a string value that is a valid formatted number, or an object (such as an instance of a =Uize.Class= subclass) that implements the =value= interface.
 									+. Values that cannot be successfully coerced to a number type (such as =null=, =NaN=, etc.) will result in the property not changing its value.
 									+. The value will be constrained so that it cannot go below =0= and cannot go above the value of the =maxPageX= set-get property.
 
@@ -424,7 +424,7 @@ Uize.module ({
 								Conformed
 									When setting the value for this property, the value is conformed in a number of ways.
 
-									+. The value will be coerced to a number type by invoking the =valueOf Intrinsic Method=. This means that one can specify a string value that is a valid formatted number, or an object (such as an instance of a =Uize= subclass) that implements the =value= interface.
+									+. The value will be coerced to a number type by invoking the =valueOf Intrinsic Method=. This means that one can specify a string value that is a valid formatted number, or an object (such as an instance of a =Uize.Class= subclass) that implements the =value= interface.
 									+. Values that cannot be successfully coerced to a number type (such as =null=, =NaN=, etc.) will result in the property not changing its value.
 									+. The value will be constrained so that it cannot go below =0= and cannot go above the value of the =maxPageY= set-get property.
 

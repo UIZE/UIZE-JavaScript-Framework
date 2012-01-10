@@ -27,7 +27,7 @@ Naming Conventions
 		EXAMPLE
 		.........................................................
 		var
-			_class = Uize.Subclass = Uize.subclass (
+			_class = MyNamespace.MyClass = Uize.Class.subclass (
 				function () {
 					this._myPrivateInstanceProperty = 0;
 				}
@@ -153,9 +153,11 @@ Naming Conventions
 		Avoid arbitrary and/or obtuse abbreviation of words. So, for example, don't use =bkgdClr= when you could just use =backgroundColor=. Identifiers that are explicit and use full words emphasize their meaning in the context of the code.
 
 	Inheritance and Class Naming
-		By convention, UIZE subclasses are assigned as static properties of their superclass. So, for example, the =Widget= subclass of =Uize= is available as the static property =Uize.Widget=, and the =Bar= subclass of =Uize.Widget= is available as the static property =Uize.Widget.Bar=. So, the names used to access classes denotes their inheritance relationship. Of course, any class may, in its implementation, use multiple orthogonal helper classes, and this cannot be conveyed in its naming.
+		A convention that is used often for UIZE subclasses is to put them under the namespace of their superclass.
 
-		The exception to this rule is the various packages that are assigned as static properties of the =Uize= base class, even though these packages aren't classes and don't actually inherit from =Uize. This is done merely to place these packages in the =Uize= namespace and avoid polluting the global namespace. Examples of these are the =Uize.Node= and =Uize.Data= packages.
+		So, for example, the =Bar= subclass of =Uize.Widget= is available as the static property =Uize.Widget.Bar=, and the =Slider= subclass of =Uize.Widget.Bar= is available as the static property =Uize.Widget.Bar.Slider=. So, the names used to access classes can denote their inheritance relationship. Of course, any class may, in its implementation, use multiple orthogonal helper classes, and this cannot be conveyed in its naming.
+
+		However, a module being assigned as a property on another module does not necessarily indicate an inheritance relationship, since modules can also be used as namespaces to host other modules. So, for example, the module name =Uize.Data= does not indicate that the =Uize.Data= module is a subclass of the =Uize= module. In fact, neither modules are class modules - the =Uize= module is simply serving as a namespace for the =Uize.Data= module. In another example, the =Uize.Util.PropertyAdapter= module defines a subclass of the =Uize.Class= module, but it's kept under the =Uize.Util= namespace.
 
 	Library Filenames
 		Classes and Packages

@@ -9,7 +9,7 @@ Introduction
 
 	Many visible properties of a document can be animated, such as color style properties (eg. =color=, =background=, =backgroundColor=, =borderColor=, etc.), position style properties (eg. =top=, =right=, =bottom=, =left=, =backgroundPosition=), padding and margin style properties (eg. =padding=, =paddingTop=, =paddingRight=, =paddingBottom=, =paddingLeft=, =margin=, =marginTop=, etc.), dimension style properties (eg. =width=, =height=, =maxWidth=, =maxHeigh=, =borderWidth=, =borderTopWidth=, etc.), and font style properties (eg. =fontSize=, =letterSpacing=, =wordSpacing=, =lineHeight=, =textIndent=).
 
-	In addition, the UIZE JavaScript Framework lets you animate the values of set-get properties for instances of =Uize= subclasses, calls to methods, and calls to arbitrary functions. So, beyond just visible style properties of a document, you can animate state of anything. And you're not even limited to time-based effects - you can even use the effects system to produce color gradients and other `Non-time Based Fades`.
+	In addition, the UIZE JavaScript Framework lets you animate the values of set-get properties for instances of =Uize.Class= subclasses, calls to methods, and calls to arbitrary functions. So, beyond just visible style properties of a document, you can animate state of anything. And you're not even limited to time-based effects - you can even use the effects system to produce color gradients and other `Non-time Based Fades`.
 
 	HOW'S THE PERFORMANCE?
 
@@ -408,7 +408,7 @@ The Fade Factory
 			Naturally, the first statement of the above set is the most preferable, but who knows how you might get access to the method to be faded in your own code. This example simply illustrates that you have options, and flexibility.
 
 	Fading the value Set-Get Property
-		The =Uize.Fade.fade= static method that is implemented in the =Uize.Fade.xFactory= extension module supports special handling when the target of a fade is an instance of a =Uize= subclass.
+		The =Uize.Fade.fade= static method that is implemented in the =Uize.Fade.xFactory= extension module supports special handling when the target of a fade is an instance of a =Uize.Class= subclass.
 
 		What does it mean to fade an instance? When an instance is specified in place of an update function when calling the =Uize.Fade.fade= method, this method fades the value of the specified instance's =value= set-get property. So, if the class of your instance implements a =value= set-get property, then you can use this convenient shorthand. Consider the following example...
 

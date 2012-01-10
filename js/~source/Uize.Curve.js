@@ -819,7 +819,7 @@ Uize.module ({
 
 				_package.saw = function (_repeats,_amount) {
 					return (
-						_repeats == 1 || !(_amount = isNaN (_amount += 0) ? 1 : _amount)
+						_repeats == 1 || !(_amount = Uize.toNumber (_amount,1))
 							? _linear
 							: function (_value) {
 								return _blendFloats (_value,_value && ((_value * _repeats) % 1 || 1),_amount)

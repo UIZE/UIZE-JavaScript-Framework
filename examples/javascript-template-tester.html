@@ -106,30 +106,33 @@ Uize.module ({
 		'Uize.Templates.JstModule'
 	],
 	builder:function () {
-		/*** create the example page widget ***/
-			var page = window.page = UizeDotCom.Page.Example ();
+		/*** create a page widget subclass ***/
+			var CustomPageWidget = UizeDotCom.Page.Example.subclass ();
 
-		/*** add property for managing update of scrunched code and scruncher report ***/
-			page.Class.registerProperties ({
-				sourceCode:{
-					name:'sourceCode',
-					onChange:function () {
-						var compiledTemplate = Uize.Template.compile (this.sourceCode,{result:'full'});
-						this.templateFunction = compiledTemplate.templateFunction
-						page.setNodeValue (
-							'compiledForm',
-							'function (input) {\n' + Uize.String.Lines.indent (compiledTemplate.code,1,'\t') + '\n}'
-						);
-						page.setNodeValue (
-							'jstModule',
-							Uize.Templates.JstModule.process ({
-								moduleName:'YourNamespace.Templates.YourTemplateName',
-								compiledTemplate:compiledTemplate
-							})
-						);
+			/*** add property for managing update of scrunched code and scruncher report ***/
+				CustomPageWidget.registerProperties ({
+					sourceCode:{
+						name:'sourceCode',
+						onChange:function () {
+							var compiledTemplate = Uize.Template.compile (this.sourceCode,{result:'full'});
+							this.templateFunction = compiledTemplate.templateFunction
+							page.setNodeValue (
+								'compiledForm',
+								'function (input) {\n' + Uize.String.Lines.indent (compiledTemplate.code,1,'\t') + '\n}'
+							);
+							page.setNodeValue (
+								'jstModule',
+								Uize.Templates.JstModule.process ({
+									moduleName:'YourNamespace.Templates.YourTemplateName',
+									compiledTemplate:compiledTemplate
+								})
+							);
+						}
 					}
-				}
-			});
+				});
+
+		/*** create the example page widget ***/
+			var page = window.page = CustomPageWidget ();
 
 		/*** add the tabs child widget ***/
 			var tabs = window.tabs = page.addChild (

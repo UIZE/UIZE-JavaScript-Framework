@@ -17,6 +17,7 @@
 */
 
 /* Library Contents
+	Uize.Class
 	Uize.Node
 	UizeDotCom
 	UizeDotCom.ModulesTree

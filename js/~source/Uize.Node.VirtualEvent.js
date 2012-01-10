@@ -706,9 +706,7 @@ Uize.module ({
 				return _package.register (
 					_eventName,
 					function (_duration) {
-						if (isNaN (_duration -= 0))
-							_duration = _durationDefault
-						;
+						_duration = Uize.toNumber (_duration,_durationDefault);
 						return _package.getCached (
 							_eventName + '(' + _duration + ')',
 							function (_node,_handler,_subWiringsOwnerId) {

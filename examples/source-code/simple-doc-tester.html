@@ -93,31 +93,34 @@ Uize.module ({
       - in FF, fix links within generated HTML document in IFRAME (lack of base tag?)
       - in IE, fix problem of JS not loading correctly (lack of base tag?)
     */
-    /*** create the example page widget ***/
-      var page = window.page = UizeDotCom.Page.Example ();
+    /*** create a page widget subclass ***/
+      var CustomPageWidget = UizeDotCom.Page.Example.subclass ();
 
-    /*** add property for managing update of converted HTML and preview ***/
-      page.Class.registerProperties ({
-        simpleDocSource:{
-          name:'simpleDocSource',
-          onChange:function () {
-            var _html = Uize.Templates.SimpleDoc.process ({
-              pathToRoot:'../',
-              body:Uize.Doc.Simple.toDocument (page.get ('simpleDocSource'))
-            });
-            page.setNodeValue ('convertedToHtml',_html);
+      /*** add property for managing update of converted HTML and preview ***/
+        CustomPageWidget.registerProperties ({
+          simpleDocSource:{
+            name:'simpleDocSource',
+            onChange:function () {
+              var _html = Uize.Templates.SimpleDoc.process ({
+                pathToRoot:'../',
+                body:Uize.Doc.Simple.toDocument (page.get ('simpleDocSource'))
+              });
+              page.setNodeValue ('convertedToHtml',_html);
 
-            /*** write the generated HTML to the preview iframe ***/
-              var
-                _previewIframe = page.getNode ('htmlPreview'),
-                _previewDocument = _previewIframe.contentDocument || _previewIframe.contentWindow.document
-              ;
-              _previewDocument.open ('text/html');
-              _previewDocument.writeln (_html);
-              _previewDocument.close ();
+              /*** write the generated HTML to the preview iframe ***/
+                var
+                  _previewIframe = page.getNode ('htmlPreview'),
+                  _previewDocument = _previewIframe.contentDocument || _previewIframe.contentWindow.document
+                ;
+                _previewDocument.open ('text/html');
+                _previewDocument.writeln (_html);
+                _previewDocument.close ();
+            }
           }
-        }
-      });
+        });
+
+    /*** create the example page widget ***/
+      var page = window.page = CustomPageWidget ();
 
     /*** add the tabs child widget ***/
       var tabs = window.tabs = page.addChild (

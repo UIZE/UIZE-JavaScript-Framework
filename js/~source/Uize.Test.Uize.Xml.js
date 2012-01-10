@@ -28,9 +28,10 @@
 
 Uize.module ({
 	name:'Uize.Test.Uize.Xml',
+	required:'Uize.Class',
 	builder:function () {
 		/*** create dummy class with value interface ***/
-			var _ClassWithValueInterface = Uize.subclass ();
+			var _ClassWithValueInterface = Uize.Class.subclass ();
 			_ClassWithValueInterface.registerProperties ({
 				_value:'value'
 			});

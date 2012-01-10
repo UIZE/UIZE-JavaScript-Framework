@@ -30,16 +30,16 @@
 			<li><a href="#2" title="While developing your code, it is always best to use source JavaScript code rather than scrunched JavaScript code.">2. Use Source JavaScript When Troubleshooting</a></li>
 			<li><a href="#3" title="As good as tools like Firebug become, there are still times when JavaScript&apos;s tried and tested built-in alert statement provides a good fallback for quick testing across multiple different browsers.">3. Basic Troubleshooting With Alerts</a>
 				<ul>
-					<li><a href="#3_1" title="The Uize base class implements a toString Intrinsic Method that returns a summary for instances of Uize subclasses, and for Uize subclasses.">3.1. Alerting Summary Info for Instances or Classes</a></li>
-					<li><a href="#3_2" title="The Uize base class implements a valueOf Intrinsic Method that returns the value of the value set-get property - for instances of Uize subclasses as well as Uize subclasses.">3.2. Alerting Values of Instances or Classes</a></li>
+					<li><a href="#3_1" title="The Uize.Class base class implements a toString Intrinsic Method that returns a summary for instances of Uize.Class subclasses, and for Uize.Class subclasses.">3.1. Alerting Summary Info for Instances or Classes</a></li>
+					<li><a href="#3_2" title="The Uize.Class base class implements a valueOf Intrinsic Method that returns the value of the value set-get property - for instances of Uize.Class subclasses as well as Uize.Class subclasses.">3.2. Alerting Values of Instances or Classes</a></li>
 				</ul>
 			</li>
 			<li><a href="#4" title="Firebug is an indispensable tool when troubleshooting JavaScript code. There are certain tricks specific to the UIZE JavaScript Framework that will aid in your Firebug troubleshooting.">4. Tips for Troubleshooting in Firebug</a>
 				<ul>
 					<li><a href="#4_1" title="Firebug provides a powerful DOM inspector that not only lets you traverse the document&apos;s node hierarchy, but also lets you inspect user-defined properties and functions.">4.1. Traversing the Widget Tree in Firebug</a></li>
-					<li><a href="#4_2" title="When using the DOM inspector in Firebug to peruse the widget tree, any property that is an instance of a Uize subclass will have the module name of the Uize subclass displayed to the right of the property.">4.2. Display of Types in Firebug's DOM Inspector</a></li>
-					<li><a href="#4_3" title="Just as with Alerting Summary Info for Instances or Classes, summary info for instances of Uize subclasses as well as Uize subclasses can be conveniently logged to the Firebug console using Firebug&apos;s console.log method.">4.3. Logging Summary Info for Instances or Classes to Firebug's Console</a></li>
-					<li><a href="#4_4" title="Just as with Alerting Values of Instances or Classes, values for instances of Uize subclasses as well as Uize subclasses can be conveniently logged to the Firebug console using Firebug&apos;s console.log method.">4.4. Logging Values of Instances or Classes to Firebug's Console</a></li>
+					<li><a href="#4_2" title="When using the DOM inspector in Firebug to peruse the widget tree, any property that is an instance of a Uize.Class subclass will have the module name for its class displayed to the right of the property.">4.2. Display of Types in Firebug's DOM Inspector</a></li>
+					<li><a href="#4_3" title="Just as with Alerting Summary Info for Instances or Classes, summary info for instances of Uize.Class subclasses as well as Uize.Class subclasses can be conveniently logged to the Firebug console using Firebug&apos;s console.log method.">4.3. Logging Summary Info for Instances or Classes to Firebug's Console</a></li>
+					<li><a href="#4_4" title="Just as with Alerting Values of Instances or Classes, values for instances of Uize.Class subclasses as well as Uize.Class subclasses can be conveniently logged to the Firebug console using Firebug&apos;s console.log method.">4.4. Logging Values of Instances or Classes to Firebug's Console</a></li>
 				</ul>
 			</li>
 			<li><a href="#5" title="Certain kinds of problems can arise specifically with scrunched code and not be present with source code.">5. Scrunch-related Problems</a>
@@ -119,9 +119,9 @@
 		<a name="3_1"></a>
 		<h2 class="heading2" title="3. Basic Troubleshooting With Alerts -&gt; 3.1. Alerting Summary Info for Instances or Classes"><span class="headingNumber"><a href="#3" title="3. Basic Troubleshooting With Alerts">3</a>.<a href="#3_1" title="3. Basic Troubleshooting With Alerts -&gt; 3.1. Alerting Summary Info for Instances or Classes">1</a>. </span>Alerting Summary Info for Instances or Classes</h2>
 		<div class="contents2">
-			<p>The <code><a href="../reference/Uize.html">Uize</a></code> base class implements a <code>toString Intrinsic Method</code> that returns a summary for instances of <code><a href="../reference/Uize.html">Uize</a></code> subclasses, and for <code><a href="../reference/Uize.html">Uize</a></code> subclasses.</p>
+			<p>The <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> base class implements a <code>toString Intrinsic Method</code> that returns a summary for instances of <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclasses, and for <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclasses.</p>
 			
-			<p>Because this method is implemented in the <code><a href="../reference/Uize.html">Uize</a></code> base class, all <code><a href="../reference/Uize.html">Uize</a></code> subclasses get to inherit it. Thanks to this method, you can conveniently display summary info for instances of <code><a href="../reference/Uize.html">Uize</a></code> subclasses as well as <code><a href="../reference/Uize.html">Uize</a></code> subclasses using the <code>alert</code> statement.</p>
+			<p>Because this method is implemented in the <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> base class, all <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclasses get to inherit it. Thanks to this method, you can conveniently display summary info for instances of <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclasses as well as <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclasses using the <code>alert</code> statement.</p>
 			
 			<p><span class="allCaps">EXAMPLE 1</span></p>
 			
@@ -215,9 +215,9 @@ wired : false
 		<a name="3_2"></a>
 		<h2 class="heading2" title="3. Basic Troubleshooting With Alerts -&gt; 3.2. Alerting Values of Instances or Classes"><span class="headingNumber"><a href="#3" title="3. Basic Troubleshooting With Alerts">3</a>.<a href="#3_2" title="3. Basic Troubleshooting With Alerts -&gt; 3.2. Alerting Values of Instances or Classes">2</a>. </span>Alerting Values of Instances or Classes</h2>
 		<div class="contents2">
-			<p>The <code><a href="../reference/Uize.html">Uize</a></code> base class implements a <code>valueOf Intrinsic Method</code> that returns the value of the <code>value</code> set-get property - for instances of <code><a href="../reference/Uize.html">Uize</a></code> subclasses as well as <code><a href="../reference/Uize.html">Uize</a></code> subclasses.</p>
+			<p>The <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> base class implements a <code>valueOf Intrinsic Method</code> that returns the value of the <code>value</code> set-get property - for instances of <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclasses as well as <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclasses.</p>
 			
-			<p>Because this method is implemented in the <code><a href="../reference/Uize.html">Uize</a></code> base class, all <code><a href="../reference/Uize.html">Uize</a></code> subclasses get to inherit it. For any class that implements a <code>value</code> set-get property, the value of an instance can be displayed in an alert dialog using a convenient shorthand. This can be done by prepending a "+" (plus sign) to the instance reference for classes that implement a number type value, or by appending a <code>+ ''</code> to the instance reference for classes that implement a string type value.</p>
+			<p>Because this method is implemented in the <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> base class, all <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclasses get to inherit it. For any class that implements a <code>value</code> set-get property, the value of an instance can be displayed in an alert dialog using a convenient shorthand. This can be done by prepending a "+" (plus sign) to the instance reference for classes that implement a number type value, or by appending a <code>+ ''</code> to the instance reference for classes that implement a string type value.</p>
 			
 			<p><span class="allCaps">EXAMPLE 1</span></p>
 			
@@ -251,7 +251,7 @@ wired : false
 		<a name="4_2"></a>
 		<h2 class="heading2" title="4. Tips for Troubleshooting in Firebug -&gt; 4.2. Display of Types in Firebug&apos;s DOM Inspector"><span class="headingNumber"><a href="#4" title="4. Tips for Troubleshooting in Firebug">4</a>.<a href="#4_2" title="4. Tips for Troubleshooting in Firebug -&gt; 4.2. Display of Types in Firebug&apos;s DOM Inspector">2</a>. </span>Display of Types in Firebug's DOM Inspector</h2>
 		<div class="contents2">
-			<p>When using the DOM inspector in <a href="http://getfirebug.com" target="_blank" class="externalSiteLink">Firebug</a> to peruse the widget tree, any property that is an instance of a <code><a href="../reference/Uize.html">Uize</a></code> subclass will have the module name of the <code><a href="../reference/Uize.html">Uize</a></code> subclass displayed to the right of the property.</p>
+			<p>When using the DOM inspector in <a href="http://getfirebug.com" target="_blank" class="externalSiteLink">Firebug</a> to peruse the widget tree, any property that is an instance of a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass will have the module name for its class displayed to the right of the property.</p>
 			
 			<p><span class="allCaps">EXAMPLE</span></p>
 			
@@ -273,7 +273,7 @@ performWipe           Uize.Widget.Button ...
 		<a name="4_3"></a>
 		<h2 class="heading2" title="4. Tips for Troubleshooting in Firebug -&gt; 4.3. Logging Summary Info for Instances or Classes to Firebug&apos;s Console"><span class="headingNumber"><a href="#4" title="4. Tips for Troubleshooting in Firebug">4</a>.<a href="#4_3" title="4. Tips for Troubleshooting in Firebug -&gt; 4.3. Logging Summary Info for Instances or Classes to Firebug&apos;s Console">3</a>. </span>Logging Summary Info for Instances or Classes to Firebug's Console</h2>
 		<div class="contents2">
-			<p>Just as with <a href="#3_1">Alerting Summary Info for Instances or Classes</a>, summary info for instances of <code><a href="../reference/Uize.html">Uize</a></code> subclasses as well as <code><a href="../reference/Uize.html">Uize</a></code> subclasses can be conveniently logged to the <a href="http://getfirebug.com" target="_blank" class="externalSiteLink">Firebug</a> console using Firebug's <code>console.log</code> method.</p>
+			<p>Just as with <a href="#3_1">Alerting Summary Info for Instances or Classes</a>, summary info for instances of <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclasses as well as <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclasses can be conveniently logged to the <a href="http://getfirebug.com" target="_blank" class="externalSiteLink">Firebug</a> console using Firebug's <code>console.log</code> method.</p>
 			
 			<p>Unlike JavaScript's built-in <code>alert</code> function, however, Firebug's <code>console.log</code> method does not call the <code>toString Intrinsic Method</code> on its first argument, so you have to call this method explicitly, as in...</p>
 			
@@ -295,7 +295,7 @@ performWipe           Uize.Widget.Button ...
 		<a name="4_4"></a>
 		<h2 class="heading2" title="4. Tips for Troubleshooting in Firebug -&gt; 4.4. Logging Values of Instances or Classes to Firebug&apos;s Console"><span class="headingNumber"><a href="#4" title="4. Tips for Troubleshooting in Firebug">4</a>.<a href="#4_4" title="4. Tips for Troubleshooting in Firebug -&gt; 4.4. Logging Values of Instances or Classes to Firebug&apos;s Console">4</a>. </span>Logging Values of Instances or Classes to Firebug's Console</h2>
 		<div class="contents2">
-			<p>Just as with <a href="#3_2">Alerting Values of Instances or Classes</a>, values for instances of <code><a href="../reference/Uize.html">Uize</a></code> subclasses as well as <code><a href="../reference/Uize.html">Uize</a></code> subclasses can be conveniently logged to the <a href="http://getfirebug.com" target="_blank" class="externalSiteLink">Firebug</a> console using Firebug's <code>console.log</code> method.</p>
+			<p>Just as with <a href="#3_2">Alerting Values of Instances or Classes</a>, values for instances of <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclasses as well as <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclasses can be conveniently logged to the <a href="http://getfirebug.com" target="_blank" class="externalSiteLink">Firebug</a> console using Firebug's <code>console.log</code> method.</p>
 			
 			<p><span class="allCaps">EXAMPLE 1</span></p>
 			

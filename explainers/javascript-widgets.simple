@@ -678,7 +678,7 @@ More on Widgets
 	### Wiring Phase
 		- don't wire node events during instance construction. Wire them inside the wireUi method's implementation.
 		- always check that widget isn't already wired
-		- don't add event handlers to self or child widgets or other =Uize= subclass instances during wiring - these handlers won't get automatically removed when unwiring a widget through =unwireUi=, so if the widget gets unwired and rewired later, event handlers registered in this way will accumulate, leading to poor performance and potentially unpredictable behavior. Besides, it's a better design to separate the state architecture for your widgets (and how they relate to other instance) from the act of wiring up the DOM events and such. A widget should be able to operate in an application and carry state correctly without being wired up.
+		- don't add event handlers to self or child widgets or other =Uize.Class= subclass instances during wiring - these handlers won't get automatically removed when unwiring a widget through =unwireUi=, so if the widget gets unwired and rewired later, event handlers registered in this way will accumulate, leading to poor performance and potentially unpredictable behavior. Besides, it's a better design to separate the state architecture for your widgets (and how they relate to other instance) from the act of wiring up the DOM events and such. A widget should be able to operate in an application and carry state correctly without being wired up.
 
 	### Inheritance From Tree
 		enabledInherited

@@ -9,16 +9,16 @@ It's Easy
 	..........................................
 
 Where It's Implemented
-	The power of classes built using the UIZE JavaScript Framework is derived from the =Uize= base class.
+	The power of classes built using the UIZE JavaScript Framework is derived from the =Uize.Class= base class.
 
-	All classes inherit directly - or indirectly - from this class. While the =Uize= base class module is not tiny, the core of the inheritance mechanism itself is quite tiny and is encapsulated in a non-public class called =Root= that is, technically, the superclass for the =Uize= class. What makes the =Uize= module larger is that it provides not only an inheritance mechanism, but also a [[javascript-event-system.html][JavaScript Event System]], a [[set-get-properties.html][Set-get Properties]] system, a [[javascript-modules.html][JavaScript Modules]] system, and scores of utility methods.
+	All classes inherit directly - or indirectly - from this class. While the =Uize.Class= module is not tiny, the core of the inheritance mechanism itself is quite tiny. What makes the =Uize.Class= module larger is that it provides not only an inheritance mechanism, but also a [[javascript-event-system.html][JavaScript Event System]] and a [[set-get-properties.html][Set-get Properties]] system.
 
 Fleshing Out a Subclass
 	Each class that you create using the framework inherits the =subclass= static method, so you can easily make further subclasses of them.
 
 	EXAMPLE
 	...................................................................................
-	var MyClass = Uize.subclass ();       // create a class
+	var MyClass = Uize.Class.subclass (); // create a class
 	MyClass.prototype.foo = 'bar';        // create an instance property for the class
 
 	var MySubclass = MyClass.subclass (); // subclass the class
@@ -27,9 +27,9 @@ Fleshing Out a Subclass
 	alert (mySubclassInstance.foo);       // alert the subclass instance's foo property
 	...................................................................................
 
-	In this example, =MyClass= is a plain vanilla subclass of the =Uize= base class. The property =foo= is assigned on its =prototype= and is shared by all instances. Now, a subclass of =MyClass= is created, by the name of =MySubclass=. An instance of =MySubclass= is created, and the value of its =foo= property is alerted. Unsurprisingly, what shows up in the alert dialog is the text "bar". Naturally, meaningful classes are a little more complex than this, but this demonstrates the basics.
+	In this example, =MyClass= is a plain vanilla subclass of the =Uize.Class= base class. The property =foo= is assigned on its =prototype= and is shared by all instances. Now, a subclass of =MyClass= is created, by the name of =MySubclass=. An instance of =MySubclass= is created, and the value of its =foo= property is alerted. Unsurprisingly, what shows up in the alert dialog is the text "bar". Naturally, meaningful classes are a little more complex than this, but this demonstrates the basics.
 
-	The =Uize= base class provides a mechanism for inheriting instance methods and properties assigned on a superclass' prototype, static methods and properties assigned on the superclass (unless they are registered as `non-inheritable statics`), and set-get properties registered on the superclass using the =registerProperties= static method. The inheritance system that is implemented in the =Uize= base class overcomes some of the weaknesses of a superficial prototype-based approach to inheritance, but we'll get into that a little bit later.
+	The =Uize.Class= base class provides a mechanism for inheriting instance methods and properties assigned on a superclass' prototype, static methods and properties assigned on the superclass (unless they are registered as `non-inheritable statics`), and set-get properties registered on the superclass using the =registerProperties= static method. The inheritance system that is implemented in the =Uize.Class= base class overcomes some of the weaknesses of a superficial prototype-based approach to inheritance, but we'll get into that a little bit later.
 
 Fleshing Out a Subclass
 	Once you have a subclass, you can modify it by assigning values on its =prototype= object, adding static methods or properties to the subclass, and registering set-get properties or overriding the initial values of inherited set-get properties.
@@ -39,7 +39,7 @@ Fleshing Out a Subclass
 
 		EXAMPLE
 		..................................................................................
-		var MyClass = Uize.subclass ();                     // create a class
+		var MyClass = Uize.Class.subclass ();               // create a class
 		MyClass.prototype.myInstanceProperty = 'value';     // create an instance property
 		MyClass.prototype.myInstanceMethod = function () {  // create an instance method
 			// do stuff
@@ -53,7 +53,7 @@ Fleshing Out a Subclass
 
 		EXAMPLE
 		...................................................................
-		var MyClass = Uize.subclass ();         // create a class
+		var MyClass = Uize.Class.subclass ();   // create a class
 		MyClass.myStaticProperty = 'value';     // create a static property
 		MyClass.myStaticMethod = function () {  // create a static method
 			// do stuff
@@ -65,12 +65,12 @@ Fleshing Out a Subclass
 		In the UIZE JavaScript Framework, static methods and properties assigned on a class are copied to a subclass when creating that subclass (unless they are registered as `non-inheritable statics`). After a subclass is created, modifying the static methods and properties of the superclass has no effect on that subclass.
 
 	Adding Set-get Properties
-		You can register one or more set-get properties for a subclass, using the =Uize.registerProperties= static method.
+		You can register one or more set-get properties for a subclass, using the =MyClass.registerProperties= static method that is inherited from the =Uize.Class= base class.
 
 		EXAMPLE
-		...........................................................................
-		var MyClass = Uize.subclass ();  // create a class
-		MyClass.registerProperties ({    // register one or more set-get properties
+		.................................................................................
+		var MyClass = Uize.Class.subclass ();  // create a class
+		MyClass.registerProperties ({          // register one or more set-get properties
 			_mySetGetProperty:{
 				name:'mySetGetProperty',
 				onChange:function () {
@@ -79,15 +79,15 @@ Fleshing Out a Subclass
 				value:'initialValue'
 			}
 		});
-		...........................................................................
+		.................................................................................
 
 		Inheriting Set-get Properties
 			Set-get properties registered for a class are inherited when creating a subclass.
 
 			EXAMPLE
-			...........................................................................
-			var MyClass = Uize.subclass ();       // create a class
-			MyClass.registerProperties ({         // register the "foo" set-get property
+			.............................................................................
+			var MyClass = Uize.Class.subclass ();  // create a class
+			MyClass.registerProperties ({          // register the "foo" set-get property
 				_foo:{
 					name:'foo',
 					onChange:function () {
@@ -107,7 +107,7 @@ Fleshing Out a Subclass
 					value:'initial value for bar'
 				}
 			});
-			...........................................................................
+			.............................................................................
 
 			After the above code has executed, the class =MySubclass= will have the two set-get properties =foo= and =bar=.
 
@@ -117,7 +117,7 @@ Overriding a Superclass
 
 		EXAMPLE
 		.....................................................................................
-		var MyClass = Uize.subclass ();            // create a class
+		var MyClass = Uize.Class.subclass ();      // create a class
 		MyClass.prototype.foo = function () {      // create an instance method
 			alert ('bar');
 		};
@@ -144,7 +144,7 @@ Overriding a Superclass
 
 		EXAMPLE
 		...............................................................................
-		var MyClass = Uize.subclass ();            // create a class
+		var MyClass = Uize.Class.subclass ();      // create a class
 		MyClass.myStaticMethod = function () {     // create a static method
 			alert ('foo');
 		};
@@ -180,7 +180,7 @@ Overriding a Superclass
 
 				EXAMPLE
 				..............................................................................
-				MyClass = Uize.subclass ();                // create a class
+				MyClass = Uize.Class.subclass ();          // create a class
 				MyClass.myStaticMethod = function () {     // create a static method
 					alert ('MyClass');
 				};
@@ -212,7 +212,7 @@ Overriding a Superclass
 
 				EXAMPLE
 				...................................................................................
-				MyClass = Uize.subclass ();                     // create a class
+				MyClass = Uize.Class.subclass ();               // create a class
 				MyClass.myStaticMethod = function () {          // create a static method
 					this.myOtherStaticMethod ();
 				};
@@ -231,13 +231,13 @@ Overriding a Superclass
 				In this example, =MyClass= implements the two static methods =MyClass.myStaticMethod= and =MyClass.myOtherStaticMethod=. The implementation of =MyClass.myStaticMethod= wants to always call the subclass' version of =myOtherStaticMethod=. So, instead of calling it as =MyClass.myOtherStaticMethod ()=, it calls it as =this.myOtherStaticMethod ()=. If =myStaticMethod= is called on =MyClass=, then =this= will be a reference to =MyClass=. However, if =myStaticMethod= is called on =MySubclass=, then =this= will be a reference to =MySubclass=. Consequently, using =this= guarantees that the subclass' version will be called. In this example, =MySubclass= overrides the implementation of =myOtherStaticMethod= inherited from =MyClass=, so the statement =MySubclass.myStaticMethod ()= will result in the text "MySubclass" being displayed in the alert dialog - *not* the text "MyClass".
 
 	Overriding Set-get Property Values
-		The initial value for a set-get property inherited from a superclass can be overrided by calling the =Uize.set= static method on the subclass.
+		The initial value for a set-get property inherited from a superclass can be overrided by calling the =MyClass.set= static method that is inherited from the =Uize.Class= base class.
 
 		The initial value for a set-get property is registered by specifying the =value= property in the profile for the set-get property, as follows...
 
 		EXAMPLE
 		...........................................................................
-		var MyClass = Uize.subclass ();        // create a class
+		var MyClass = Uize.Class.subclass ();  // create a class
 		MyClass.registerProperties ({          // register the foo set-get property
 			_foo:{
 				name:'foo',
@@ -258,7 +258,7 @@ Overriding a Superclass
 
 		EXAMPLE
 		.................................................................................
-		var MyClass = Uize.subclass ();            // create a class
+		var MyClass = Uize.Class.subclass ();      // create a class
 		MyClass.registerProperties ({              // register the foo set-get property
 			_foo:{
 				name:'foo',
@@ -322,18 +322,18 @@ Private vs. Public
 		- This technique *could* be used for public instance properties that are intended to be read only and are not intended to be set outside of the class' implementation code. The technique *could* also be used if the value of the property was an object and was never intended to be changed, even if the contents of the object is expected to be modified by code outside of the class' implementation.
 
 Non-inheritable Statics
-	Unless otherwise specified, all static features - methods as well as properties - of a =Uize= subclass are inherited in turn by their subclasses.
+	Unless otherwise specified, all static features - methods as well as properties - of a =Uize.Class= subclass are inherited in turn by their subclasses.
 
 	There are times, however, when there is no compelling reason for a static feature of a class to be inherited by its subclasses. In fact, in some cases too many inherited static features can just clutter subclasses in the class hierarchy with cruft that they neither need nor care about. In such cases, the inheritance system of the UIZE JavaScript Framework provides a way to "register" static features of a class as being non-inheritable. This is done using the =MyClass.nonInheritableStatics= static property.
 
 	The MyClass.nonInheritableStatics Static Property
 		The =MyClass.nonInheritableStatics= static property is a lookup object, automatically created for a class, in which you can register the static features (methods or properties) of the class that should *not* be inherited when that class is subclassed.
 
-		Each property of the =Uize.nonInheritableStatics= lookup object represents a single static feature of the class that should not be inherited by subclasses, where the name of each property should be the name of a static feature (excluding the module name), and the value of each property should be a truthy value (such as =true=, =1=, ='foo'=, =[]=, ={}=, etc.). After a class has been created, non-inheritable statics can be registered for that class by assigning properties to the class' =MyClass.nonInheritableStatics= static property, as shown in the example below...
+		Each property of the =MyClass.nonInheritableStatics= lookup object represents a single static feature of the class that should not be inherited by subclasses, where the name of each property should be the name of a static feature (excluding the module name), and the value of each property should be a truthy value (such as =true=, =1=, ='foo'=, =[]=, ={}=, etc.). After a class has been created, non-inheritable statics can be registered for that class by assigning properties to the class' =MyClass.nonInheritableStatics= static property, as shown in the example below...
 
 		EXAMPLE
 		...........................................................................
-		MyClass = Uize.subclass ();
+		MyClass = Uize.Class.subclass ();
 		MyClass.someUtilityFunction = function () {
 			// do something of great utility
 		};
@@ -357,7 +357,7 @@ Non-inheritable Statics
 
 		EXAMPLE
 		..........................................................................
-		MyClass = Uize.subclass ();
+		MyClass = Uize.Class.subclass ();
 		MyClass.someStaticProperty = 'foo';
 		MyClass.nonInheritableStatics.someStaticProperty = 1;
 
@@ -370,29 +370,25 @@ Non-inheritable Statics
 	Utility Functions Need Not Be Inheritable
 		A good case for making a static method non-inheritable is if it is really just a utility function that happens to be stashed in a class' namespace.
 
-		Static methods that are really just utility or helper functions don't care about the context on which they are called. They just happen to be called on a class as a context because they are assigned as properties on a class. Take, for example, the =Uize.copyInto= static method of the =Uize= base class. You may be calling it on the =Uize= context, but this utility function's implementation doesn't even reference the =this= keyword - it just doesn't care about the context on which it is called. You could, in fact, assigne this static method to a local variable and then call it using that local variable, and it would behave in just the same way as if it were being called on the class. Consider the following example...
+		Static methods that are really just utility or helper functions don't care about the context on which they are called. They just happen to be called on a class as a context because they are assigned as properties on a class. Take, for example, the =Uize.Fade.blendValues= static method of the =Uize.Fade= class. You may be calling it on the =Uize.Fade= context, but this utility function's implementation doesn't even reference the =this= keyword - it just doesn't care about the context on which it is called. You could, in fact, assign this static method to a local variable and then call it using that local variable, and it would behave in just the same way as if it were being called on the class. Consider the following example...
 
 		EXAMPLE
-		...............................................
-		var
-			copyInto = Uize.copyInto,
-			foo = {}
-		;
-		copyInto (foo,{bar:'IT WORKS'});
-		alert (foo.bar);  // alerts the text "IT WORKS"
-		...............................................
+		.........................................................
+		var blendValues = Uize.Fade.blendValues;
+		alert (blendValues (50,100,.5));  // alerts the text "75"
+		.........................................................
 
-		In the above example, our local variable =copyInto= is a function reference. When that local variable is used to call the function in order to copy the property =bar= into the object =foo=, everything works just fine. The =alert= statement alerts the value of the =bar= property that was successfully copied into the =foo= object. Because the =Uize.copyInto= static method doesn't operate on a =Uize= subclass or need a =Uize= subclass as its context when it is called, there's no compelling reason for it to be inheritable, and so it is not.
+		In the above example, our local variable =blendValues= is a function reference. When that local variable is used to call the function in order to blend the values =50= and =100=, everything works just fine. The =alert= statement alerts the result of blending =50= and =100= in equal amounts, which is the =75=. Because the =Uize.Fade.blendValues= static method doesn't operate on a =Uize.Fade= subclass or need a =Uize.Fade= subclass as its context when it is called, there's no compelling reason for it to be inheritable, and so it is not.
 
 	When Statics Should Be Inheritable
 		Whenever a static method or property is intended to be unique to its class context, and it is also desirable for that method or property to be inherited by subclasses, then it should *not* be registered as non-inheritable.
 
-		Examples of some static methods in the =Uize= base class that are inheritable are the =Uize.set=, =Uize.get=, =Uize.toggle=, =Uize.fire=, =Uize.wire=, =Uize.subclass=, and =Uize.registerProperties= methods. All of these methods act on the class context. So, for example, calling =Uize.subclass= is different to calling =Uize.Widget.subclass=. The =Uize.subclass= method, which is inherited by all =Uize= subclasses, uses the context of the class on which it is called. Calling the =Uize.subclass= method returns a subclass of =Uize=, while calling the =Uize.Widget.subclass= method returns a subclass of =Uize.Widget= - even though both of these methods reference the same function for their implementation (in other words, the statement =alert (Uize.subclass &#61;&#61; Uize.Widget.subclass)= would alert the text "true").
+		Examples of some static methods in the =Uize.Class= base class that are inheritable are the =Uize.Class.set=, =Uize.Class.get=, =Uize.Class.toggle=, =Uize.Class.fire=, =Uize.Class.wire=, =Uize.Class.subclass=, and =Uize.Class.registerProperties= methods. All of these methods act on the class context. So, for example, calling =Uize.Class.subclass= is different to calling =Uize.Widget.subclass=. The =Uize.Class.subclass= method, which is inherited by all =Uize.Class= subclasses, uses the context of the class on which it is called. Calling the =Uize.Class.subclass= method returns a subclass of =Uize.Class=, while calling the =Uize.Widget.subclass= method returns a subclass of =Uize.Widget= - even though both of these methods reference the same function for their implementation (in other words, the statement =alert (Uize.Class.subclass &#61;&#61; Uize.Widget.subclass)= would alert the text "true").
 
 	Inheritability of Static Features is Noted in Module References
 		All static features of modules of the UIZE JavaScript Framework are noted as being either inheritable or non-inheritable in the reference documentation for those features.
 
-		The inheritability of the static features of a module is noted in the IMPLEMENTATION INFO notes of the reference documentation for the features in the module's reference. So, for example, if you went to the reference documentation for the =Uize.set= static method of the =Uize= class, you would see it noted that the feature is inherited by subclasses. In contrast, if you went to the reference documentation for the =Uize.copyInto= static method of the =Uize= class, you would see it noted that the feature is *not* inherited by subclasses.
+		The inheritability of the static features of a module is noted in the IMPLEMENTATION INFO notes of the reference documentation for the features in the module's reference. So, for example, if you went to the reference documentation for the =Uize.Class.set= static method of the =Uize.Class= base class, you would see it noted that the feature is inherited by subclasses. In contrast, if you went to the reference documentation for the =Uize.Fade.blendValues= static method of the =Uize.Fade= class, you would see it noted that the feature is *not* inherited by subclasses.
 
 Phases of Construction
 	When an instance of a UIZE class is created, construction involves three phases: the =alphastructor= phase, the set-get property initialization phase, and the =omegastructor= phase.
@@ -403,13 +399,13 @@ Phases of Construction
 		An alphastructor is registered by specifying a value for the first parameter when calling the =subclass= static method on the superclass.
 
 		EXAMPLE
-		.............................
-		var MyClass = Uize.subclass (
+		...................................
+		var MyClass = Uize.Class.subclass (
 			function () {
 				this._someArray = [];
 			}
 		);
-		.............................
+		...................................
 
 		Code inside the alphastructor can set up private "scaffolding" type properties that need to be already in existence by the time any of the set-get properties are initialized. This allows =onChange= handlers for the set-get properties to count on certain foundation having been built.
 
@@ -418,7 +414,7 @@ Phases of Construction
 		EXAMPLE
 		......................................
 		var
-			MyClass = Uize.subclass (
+			MyClass = Uize.Class.subclass (
 				function () {
 					alert (this.get ('foo'));
 				}
@@ -603,9 +599,9 @@ Dissecting a Subclass Module
 		For a more in-depth discussion, see the section `Non-inheritable Statics`.
 
 	Registering Set-get Properties
-		Set-get properties are registered for a class by calling the =Uize.registerProperties= static method that is inherited from the =Uize= base class.
+		Set-get properties are registered for a class by calling the =MyClass.registerProperties= static method that is inherited from the =Uize.Class= base class.
 
-		The =Uize.registerProperties= static method lets you register one or more set-get properties in a single call to the method. The single parameter that the =Uize.registerProperties= static method takes is an object containing profiles for all the set-get properties being registered, where each key is the private name for a set-get property, and where each value is either the public name - or an object providing a complete profile - for the set-get property.
+		The =MyClass.registerProperties= static method lets you register one or more set-get properties in a single call to the method. The single parameter that the =MyClass.registerProperties= static method takes is an object containing profiles for all the set-get properties being registered, where each key is the private name for a set-get property, and where each value is either the public name - or an object providing a complete profile - for the set-get property.
 
 		EXAMPLE
 		.............................................................................

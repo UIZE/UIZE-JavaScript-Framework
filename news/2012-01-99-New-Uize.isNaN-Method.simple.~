@@ -1,0 +1,64 @@
+The new =Uize.isNaN= static method, implemented in the =Uize= base module, returns a boolean value, indicating whether or not the specified value is the JavaScript special value =NaN=.
+
+SYNTAX
+......................................
+isNaNBOOL = Uize.isNaN (valueANYTYPE);
+......................................
+
+There's Something About NaN
+	JavaScript's built-in =isNaN= function is odd - and, some might say, less than useful - in its peculiar behavior.
+
+	The first thing that the =isNaN= function does is to coerce the value it's given to a number type, so it will return =true= when the value being tested is =undefined= or some other value that, when coerced to a number, produces the value =NaN=. For example, the =isNaN= function will produce the result =false= when given the string value ='42'= (='42'= coerces to the number =42=), while it will produce the result =true= when given the string value ='foo'= (='foo'= coerces to the number type value =NaN=). Now, clearly neither of these two string values is the special value =NaN=, so the =isNaN= function fails to provide a useful way to test if a value is =NaN=.
+
+	Now, add to this the peculiar fact that testing any value for strict equality against the special value =NaN= always produces the result =false= - even if the value being tested is itself =NaN= - and you have yourself a rather frustrating quandary. Since the expression =NaN &#61;&#61;&#61; NaN= produces the result =false=, you could use the expression =value !&#61;&#61; value= as a way of testing if a value is =NaN=, but you'd probably want to avoid having that in your code for fear of confusing the hell out of a person reading it later.
+
+	The =Uize.isNaN= method comes to the rescue, providing a useful and semantically sensible way of testing if a value is the JavaScript special value =NaN=.
+
+	EXAMPLES
+	.......................................................................................
+	// using the Uize.isNaN method, you get these results...
+
+	Uize.isNaN (NaN);               // returns true
+
+	Uize.isNaN (function () {});    // returns false (a function is not NaN)
+	Uize.isNaN (new Number (NaN));  // returns false (a Number object is not NaN)
+	Uize.isNaN (new Date ('foo'));  // returns false (a Date object is not NaN)
+	Uize.isNaN (undefined);         // returns false
+	Uize.isNaN (null);              // returns false
+	Uize.isNaN ('foo');             // returns false
+	Uize.isNaN ('');                // returns false
+	Uize.isNaN ('42');              // returns false
+	Uize.isNaN (42);                // returns false
+	Uize.isNaN (true);              // returns false
+	Uize.isNaN ({});                // returns false
+	Uize.isNaN ([]);                // returns false
+
+
+	// in contrast, JavaScript's built-in isNaN function produces these results
+
+	isNaN (NaN);                    // returns true (hallelujah!)
+
+	isNaN (undefined);              // returns true (undefined coerces to NaN)
+	isNaN ('foo');                  // returns true ('foo' coerces to NaN)
+	isNaN ({});                     // returns true ({} coerces to NaN)
+	isNaN (function () {});         // returns true (a function coerces to NaN)
+	isNaN (new Number (NaN));       // returns true (new Number (NaN) coerces to NaN)
+	isNaN (new Date ('foo'));       // returns true (an invalid date coerces to NaN)
+
+	isNaN (null);                   // returns false (null coerces to 0)
+	isNaN ('42');                   // returns false ('42' coerces to 42)
+	isNaN (true);                   // returns false (true coerces to 1)
+	isNaN ('');                     // returns false ('' coerces to 0)
+	isNaN ([]);                     // returns false ([] coerces to '', which coerces to 0)
+	.......................................................................................
+
+	From the above examples, it should be clear that the =Uize.isNaN= method is far more useful when trying to test if a specific value is exactly the JavaScript special value =NaN=, while it's clear that the built-in =isNaN= function's behavior is of questionable value.
+
+Documented and Unit Tested
+	Like the majority of new features added to UIZE more recently, the new =Uize.isNaN= static method is comprehensively documented and thoroughly unit tested.
+
+....................................................................................
+<< metadata >>
+
+title: 2012-01-99 - New Uize.isNaN Method
+....................................................................................

@@ -27,7 +27,7 @@ Introduction
 	Set-get Properties vs. Regular Properties
 		It is not uncommon for the implementation of a class to utilize a combination of regular old properties and set-get properties.
 
-		Regular properties are any old properties assigned on the class or its instances. Set-get properties are specifically registered through the =Uize.registerProperties= static method inherited from the =Uize= base class.
+		Regular properties are any old properties assigned on the class or its instances. Set-get properties are specifically registered through the =MyClass.registerProperties= static method inherited from the =Uize.Class= base class.
 
 		Why "Set-get" Properties?
 			Set-get properties are named thus because they are accessed through the =set= and =get= methods, unlike regular properties that are accessed normally.
@@ -50,17 +50,17 @@ The Basics
 	At the most basic level, using set-get properties is pretty straightforward. Let's consider a few common operations...
 
 	Registering a Set-get Property
-		Set-get properties can be easily registered for a class, using the =Uize.registerProperties= static method that is inherited from the =Uize= base class, as follows...
+		Set-get properties can be easily registered for a class, using the =MyClass.registerProperties= static method that is inherited from the =Uize.Class= base class, as follows...
 
 		............................................................
-		var MyClass = Uize.subclass ();
+		var MyClass = Uize.Class.subclass ();
 		MyClass.registerProperties ({_propertyName:'propertyName'});
 		............................................................
 
 		The above statement registers the set-get property with the public name =propertyName= and the private name =_propertyName=.
 
 	Setting a Set-get Property's Value
-		Once a set-get property has been registered, its value can be easily set using the =set= instance method that is inherited from the =Uize= base class, as follows...
+		Once a set-get property has been registered, its value can be easily set using the =set= instance method that is inherited from the =Uize.Class= base class, as follows...
 
 		.............................................
 		var myClass = new MyClass;
@@ -68,7 +68,7 @@ The Basics
 		.............................................
 
 	Getting a Set-get Property's Value
-		Once a set-get property has been registered, its value can be easily queried using the =get= instance method that is inherited from the =Uize= base class, as follows...
+		Once a set-get property has been registered, its value can be easily queried using the =get= instance method that is inherited from the =Uize.Class= base class, as follows...
 
 		.............................................
 		var myClass = new MyClass;
@@ -94,7 +94,7 @@ The Basics
 		Conforming a value is one such thing that is facilitated by the set-get property mechanism of the UIZE JavaScript Framework. When registering set-get properties it is possible to register a =conformer= function to enforce valid values. Let's consider an example...
 
 		.........................................................................
-		var MyClass = Uize.subclass ();
+		var MyClass = Uize.Class.subclass ();
 		MyClass.registerProperties ({
 			_percentLoaded:{
 				name:'percentLoaded',
@@ -156,7 +156,7 @@ More on Setting Values
 		In the above example, an instance method has been defined that accepts the name of a set-get property as its first parameter and an increment amount as its second parameter. Once the current value for the specified property has been retrieved using the =get= method, it is then incremented and set using the form of the =set= method that takes property name and value as its two parameters. Easy.
 
 	Toggling a Set-get Property
-		The =Uize= base class provides a convenient way to toggle the value of a boolean set-get property, in the form of the =toggle= instance method.
+		The =Uize.Class= base class provides a convenient way to toggle the value of a boolean set-get property, in the form of the =toggle= instance method.
 
 		INSTEAD OF...
 		...........................................................
@@ -277,7 +277,7 @@ More on Getting Values
 		Let's consider an example...
 
 		................................................................
-		var MyClass = Uize.subclass ();
+		var MyClass = Uize.Class.subclass ();
 		MyClass.registerProperties ({
 			_property1Name:{name:'property1Name',value:'property1Value'},
 			_property2Name:{name:'property2Name',value:'property2Value'},
@@ -300,7 +300,7 @@ More on Getting Values
 		..................................
 
 More on Registering Set-get Properties
-	As illustrated earlier, registering set-get properties is done by calling the =Uize.registerProperties= static method on your class.
+	As illustrated earlier, registering set-get properties is done by calling the =MyClass.registerProperties= static method on your class.
 
 	Property Profiles
 		The parameter passed to this method should be an object, whose properties' names are the private/internal names for the set-get properties being registered, and where the value for each property is a profile for each set-get property.
@@ -345,7 +345,7 @@ More on Registering Set-get Properties
 	Mixing Profile Types
 		For any set-get property, you can use either `The Minimal Profile` or `The Complete Profile`.
 
-		So, when registering multiple set-get properties in one call to the =Uize.registerProperties= static method, you can use a combination of both profile types, as suits your needs.
+		So, when registering multiple set-get properties in one call to the =MyClass.registerProperties= static method, you can use a combination of both profile types, as suits your needs.
 
 		EXAMPLE
 		....................................................................................
@@ -429,7 +429,7 @@ More on Registering Set-get Properties
 
 		EXAMPLE
 		...........................................................
-		var MyClass = Uize.subclass ();
+		var MyClass = Uize.Class.subclass ();
 		MyClass.registerProperties ({_title:'title|displayTitle'});
 		var myClass = new MyClass;
 		myClass.set ({displayTitle:'HELLO'});
@@ -462,7 +462,7 @@ More on Registering Set-get Properties
 
 		EXAMPLE
 		.........................................................................
-		var MyClass = Uize.subclass ();
+		var MyClass = Uize.Class.subclass ();
 		MyClass.registerProperties ({
 			_propertyName:'propertyName',
 			_active:{
@@ -511,7 +511,7 @@ More on Registering Set-get Properties
 
 			EXAMPLE 1
 			..........................................................
-			var MyClass = Uize.subclass ();
+			var MyClass = Uize.Class.subclass ();
 			function _updateArea () {
 				this.set ({area:this._width * this._height});
 			}
@@ -561,7 +561,7 @@ More on Registering Set-get Properties
 
 			EXAMPLE
 			.................................................................................
-			var MyClass = Uize.subclass ();
+			var MyClass = Uize.Class.subclass ();
 			MyClass.registerProperties ({
 				_percentLoaded:{
 					name:'percentLoaded',
@@ -582,7 +582,7 @@ More on Registering Set-get Properties
 
 			EXAMPLE
 			.............................................................................
-			var MyClass = Uize.subclass ();
+			var MyClass = Uize.Class.subclass ();
 			MyClass.registerProperties ({
 				_percentLoaded:{
 					name:'percentLoaded',
@@ -605,7 +605,7 @@ More on Registering Set-get Properties
 
 			EXAMPLE
 			................................................
-			var MyClass = Uize.subclass ();
+			var MyClass = Uize.Class.subclass ();
 			function _updateArea () {
 				this.set ({area:this._width * this._height});
 			}
@@ -709,7 +709,7 @@ More on Registering Set-get Properties
 
 		EXAMPLE
 		.........................................................................
-		var MyClass = Uize.subclass ();
+		var MyClass = Uize.Class.subclass ();
 		MyClass.registerProperties ({
 			_percentLoaded:{
 				name:'percentLoaded',
@@ -737,7 +737,7 @@ More on Registering Set-get Properties
 			Consider the following example...
 
 			..................................................................................
-			var MyClass = Uize.subclass ();
+			var MyClass = Uize.Class.subclass ();
 			MyClass.registerProperties ({
 				_percentLoaded:{
 					name:'percentLoaded',
@@ -900,7 +900,7 @@ More on Registering Set-get Properties
 				});
 				......................................................
 
-				In the above example, the conformer for the =title= set-get property is coercing the type of the value being set for it to a string. By concatenating an empty string, JavaScript automatically invokes the =valueOf Intrinsic Method= for the new value. Essentially, adding an empty string has the effect of coercing the value to a string without altering the value. With such a conformer, the value being set for the =title= set-get property can be of type string, number, boolean, or an object that implements a =valueOf Intrinsic Method= (such as an instance of a =Uize= subclass that implements the =value= set-get property).
+				In the above example, the conformer for the =title= set-get property is coercing the type of the value being set for it to a string. By concatenating an empty string, JavaScript automatically invokes the =valueOf Intrinsic Method= for the new value. Essentially, adding an empty string has the effect of coercing the value to a string without altering the value. With such a conformer, the value being set for the =title= set-get property can be of type string, number, boolean, or an object that implements a =valueOf Intrinsic Method= (such as an instance of a =Uize.Class= subclass that implements the =value= set-get property).
 
 				ENFORCE NUMBER TYPE
 				..................................................
@@ -913,7 +913,7 @@ More on Registering Set-get Properties
 				});
 				..................................................
 
-				In the above example, the conformer for the =width= set-get property is coercing the type of the value being set for it to a number. By prepending the plus operator, JavaScript automatically invokes the =valueOf Intrinsic Method= for the new value, thereby coercing the value to a number without altering the value. With such a conformer, the value being set for the =width= set-get property can be of type string, number, boolean, or an object that implements a =valueOf Intrinsic Method= (such as an instance of a =Uize= subclass that implements the =value= set-get property).
+				In the above example, the conformer for the =width= set-get property is coercing the type of the value being set for it to a number. By prepending the plus operator, JavaScript automatically invokes the =valueOf Intrinsic Method= for the new value, thereby coercing the value to a number without altering the value. With such a conformer, the value being set for the =width= set-get property can be of type string, number, boolean, or an object that implements a =valueOf Intrinsic Method= (such as an instance of a =Uize.Class= subclass that implements the =value= set-get property).
 
 				ENFORCE BOOLEAN TYPE - 1
 				...................................................
@@ -942,7 +942,7 @@ More on Registering Set-get Properties
 
 				In the above example, the conformer for the =showTitle= set-get property is coercing the type of the value being set for it to a boolean. Unlike the previous example, this conformer turns certain specific values into =true= and all other values into =false=. The number value =1=, string value ='1'=, boolean value =true=, string value ='true'=, and the string values ='on'=, ='enabled'=, and ='active'= are all turned into =true=.
 
-				An empty string is concatenated to the new value being set so that JavaScript invokes the =valueOf Intrinsic Method= for the value, allowing the value to be an object that implements a =valueOf Intrinsic Method= (such as an instance of a =Uize= subclass that implements the =value= set-get property). After coercing the value to a string, the =_trueValues= hash lookup object is used to test if the value is in the set of values considered equivalent to =true=.
+				An empty string is concatenated to the new value being set so that JavaScript invokes the =valueOf Intrinsic Method= for the value, allowing the value to be an object that implements a =valueOf Intrinsic Method= (such as an instance of a =Uize.Class= subclass that implements the =value= set-get property). After coercing the value to a string, the =_trueValues= hash lookup object is used to test if the value is in the set of values considered equivalent to =true=.
 
 			### Conform to a Valid Syntax
 				- use regular expression, and fail if invalid
@@ -1014,7 +1014,7 @@ Changed Events
 
 		EXAMPLE
 		.....................................................................................
-		var MyClass = Uize.subclass ();
+		var MyClass = Uize.Class.subclass ();
 		MyClass.registerProperties ({
 			_percentLoaded:{
 				name:'percentLoaded',
@@ -1071,13 +1071,13 @@ Changed Events
 		In the above example, two instances of the =Uize.Widget.Resizer.Marquee= widget class are being added as child widgets to the page widget (which we assume to already be defined). A handler is wired to the =Changed.&#42;= wildcard event of the first instance, =marquee1=. The handler tests to see if any of the set-get properties =left=, =top=, =width=, or =height= have changed by checking if any of these keys are present in =properties= property of the event object for the =Changed.&#42;= event. If any of these properties have changed value, the =getCoords= instance method is used to get the values for those properties, and those values are set on the second instance, =instance2=. This code would have the effect of making =instance1= be the "driver" of =instance2=.
 
 The Special value Set-get Property
-	The =Uize= base class provides an implementation for the =valueOf Intrinsic Method=, that returns the value of the special =value= set-get property.
+	The =Uize.Class= base class provides an implementation for the =valueOf Intrinsic Method=, that returns the value of the special =value= set-get property.
 
 	The =valueOf Intrinsic Method= is invoked automatically by Javascript in certain contexts in order to convert an object to a value, such as when using an object reference in an expression. If you register the special =value= set-get property for your class, then you will be able to use a reference to an instance of your class in string and mathematical expressions, and your instance reference will be automatically converted to the value of the =value= set-get property in such expressions. This is a handy shorthand that allows you to use a reference to a class instance as a proxy for its value in expressions.
 
 	EXAMPLE
 	..............................................................................
-	var MyClass = Uize.subclass ();
+	var MyClass = Uize.Class.subclass ();
 	MyClass.registerProperties ({
 		_value:{
 			name:'value',
@@ -1100,7 +1100,7 @@ The Special value Set-get Property
 
 		EXAMPLE
 		.........................................................................
-		var MyClass = Uize.subclass ();
+		var MyClass = Uize.Class.subclass ();
 		MyClass.registerProperties ({
 			_value:{
 				name:'value',
@@ -1115,7 +1115,7 @@ The Special value Set-get Property
 		In the above code, a handler is registered for the =Changed.value= event of the instance =myClass=. Setting the =value= set-get property to =10= causes its value to change from its initial value of =0= (as specified in the =value= property of its profile), thereby firing the =Changed.value= virtual event, and the handler for this event alerts the current value by prepending the plus ("+") operator to the instance reference, invoking the =valueOf Intrinsic Method=.
 
 	Any Class Can Implement Value Interface
-		The =valueOf Intrinsic Method= is implemented in the =Uize= base class, so it is inherited by all subclasses of =Uize=, including =Uize.Widget= and all subclasses of =Uize.Widget=, and all their subclasses, etc.
+		The =valueOf Intrinsic Method= is implemented in the =Uize.Class= base class, so it is inherited by all subclasses of =Uize.Class=, including =Uize.Widget= and all subclasses of =Uize.Widget=, and all their subclasses, etc.
 
 		To take advantage of this facility, all you need to do is register a set-get property with the public name =value=.
 
@@ -1124,7 +1124,7 @@ The Special value Set-get Property
 
 		EXAMPLE
 		.........................................................................
-		var MyClass = Uize.subclass ();
+		var MyClass = Uize.Class.subclass ();
 		MyClass.registerProperties ({
 			_percentLoaded:{
 				name:'percentLoaded|value',
@@ -1158,7 +1158,7 @@ Advanced Topics
 
 		EXAMPLE
 		.................................................................
-		var MyClass = Uize.subclass ();
+		var MyClass = Uize.Class.subclass ();
 		function _updateArea () {
 			this.set ({area:this._width * this._height});
 		}
@@ -1193,7 +1193,7 @@ Advanced Topics
 	Read-only Set-get Properties
 		There is no formal mechanism within the UIZE JavaScript Framework for declaring a set-get property as being read-only.
 
-		There might be occasions when it's desirable to expose some instance state through a set-get property - with all the benefits that come from using set-get properties - without it being intended for application code to ever set the property's value. But the =Uize= base class cannot distinguish between a set-get property's value being set from within the class' implementation, or from some application code using an instance of the class.
+		There might be occasions when it's desirable to expose some instance state through a set-get property - with all the benefits that come from using set-get properties - without it being intended for application code to ever set the property's value. But the =Uize.Class= base class cannot distinguish between a set-get property's value being set from within the class' implementation, or from some application code using an instance of the class.
 
 		In the event that a set-get property is intended only to reflect state that is maintained within a class' implementation, the property should just be documented as intended for read-only use in the documentation for the class. Incorrect setting of the property could cause code to fail, but in the rather open JavaScript language any number of other, more damaging things could be done by application code to trip up a class' implementation.
 

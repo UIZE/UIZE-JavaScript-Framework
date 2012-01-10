@@ -21,7 +21,7 @@
 
 /*?
 	Introduction
-		The =Uize.Widget.Log.InstanceEvents= class implements a log interface for logging the instance events of an instance of a =Uize= subclass.
+		The =Uize.Widget.Log.InstanceEvents= class implements a log interface for logging the instance events of an instance of a =Uize.Class= subclass.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 
@@ -51,9 +51,9 @@
 					When a =Changed.&#42;= property change event is logged, the log message is prefixed with the value of the =propertiesChangedEvent= localizable string, and the new values for all properties that have changed are appended to the message as a JSON formatted string.
 
 			Watch Any Instance
-				The instance for which instance events are logged can be an instance of any =Uize= subclass - not just widget classes.
+				The instance for which instance events are logged can be an instance of any =Uize.Class= subclass - not just widget classes.
 
-				Any =Uize= subclass instance can have set-get properties and can have custom instance events, so logging instance events is applicable beyond just observing widget instance's (although widget instances can be quite compelling to watch).
+				Any =Uize.Class= subclass instance can have set-get properties and can have custom instance events, so logging instance events is applicable beyond just observing widget instance's (although widget instances can be quite compelling to watch).
 
 			Dynamic Switching
 				The =Uize.Widget.Log.InstanceEvents= class supports dynamic switching of the instance for which events are being logged.
@@ -63,7 +63,7 @@
 			Nothing to Watch
 				When a log widget's =instance= set-get property is set to the value =null= or =undefined=, then no instance will be watched.
 
-				If the =instance= property is set to =null= or =undefined= after the log was already wired up and watching instance events for some instance, then the log will be cleared and no more messages will be displayed until the =instance= property is once again set to a reference to a =Uize= subclass.
+				If the =instance= property is set to =null= or =undefined= after the log was already wired up and watching instance events for some instance, then the log will be cleared and no more messages will be displayed until the =instance= property is once again set to an instance of a =Uize.Class= subclass.
 */
 
 Uize.module ({
@@ -139,9 +139,9 @@ Uize.module ({
 					/*?
 						Set-get Properties
 							instance
-								An object reference, specifying the instance of a =Uize= subclass for which instance events should be logged.
+								An object reference, specifying the instance of a =Uize.Class= subclass for which instance events should be logged.
 
-								The value of the =instance= set-get property can be a reference to an instance of *any* =Uize= subclass  - not just widget classes (see `Watch Any Instance`). The value of the =instance= set-get property can be changed at any time - even after the log widget has already been wired up (see `Dynamic Switching`). When the =instance= property is set to the value =null= or =undefined=, then no instance will be watched (see `Nothing to Watch`).
+								The value of the =instance= set-get property can be a reference to an instance of *any* =Uize.Class= subclass - not just widget classes (see `Watch Any Instance`). The value of the =instance= set-get property can be changed at any time - even after the log widget has already been wired up (see `Dynamic Switching`). When the =instance= property is set to the value =null= or =undefined=, then no instance will be watched (see `Nothing to Watch`).
 					*/
 				}
 			});
@@ -161,7 +161,7 @@ Uize.module ({
 							nothingToWatch
 								A localizable string, that will be logged as a log message whenever there is no valid object to watch events on (see `Nothing to Watch`).
 
-								In order for the instance to have a valid object to watch events on, the value of the =instance= set-get property must be either a reference to an instance of a =Uize= subclass, or a referece to a =Uize= subclass.
+								In order for the instance to have a valid object to watch events on, the value of the =instance= set-get property must be either a reference to an instance of a =Uize.Class= subclass, or a referece to a =Uize.Class= subclass.
 
 							propertiesChangedEvent
 								A localizable string, that will be prepended to log messages for all `Property Change Events`.

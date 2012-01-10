@@ -63,10 +63,10 @@
 			</li>
 			<li><a href="#4">4. Uize Specific Code Size Optimization</a>
 				<ul>
-					<li><a href="#4_1" title="The Uize base class implements a valueOf instance method that will be invoked automatically by JavaScript whenever an instance of a Uize subclass is involved in an expression.">4.1. The valueOf Shortcut</a>
+					<li><a href="#4_1" title="The Uize.Class base class implements a valueOf instance method that will be invoked automatically by JavaScript whenever an instance of a Uize.Class subclass is involved in an expression.">4.1. The valueOf Shortcut</a>
 						<ul>
-							<li><a href="#4_1_1" title="If you involve a Uize instance in a math expression, the valueOf intrinsic method will be invoked and the value of your instance will be converted to a number.">4.1.1. Coercion to Number</a></li>
-							<li><a href="#4_1_2" title="If you involve a Uize instance in a string expression, the valueOf intrinsic method will be invoked and the value of your instance will be converted to a string.">4.1.2. Coercion to String</a></li>
+							<li><a href="#4_1_1" title="If you involve an instance of a Uize.Class subclass in a math expression, the valueOf intrinsic method will be invoked and the value of your instance will be converted to a number.">4.1.1. Coercion to Number</a></li>
+							<li><a href="#4_1_2" title="If you involve an instance of a Uize.Class subclass in a string expression, the valueOf intrinsic method will be invoked and the value of your instance will be converted to a string.">4.1.2. Coercion to String</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -758,14 +758,14 @@ function _setNodeCoordsInPixels (_nodeRef,_left,_top,_width,_height) {
 		<a name="4_1"></a>
 		<h2 class="heading2" title="4. Uize Specific Code Size Optimization -&gt; 4.1. The valueOf Shortcut"><span class="headingNumber"><a href="#4" title="4. Uize Specific Code Size Optimization">4</a>.<a href="#4_1" title="4. Uize Specific Code Size Optimization -&gt; 4.1. The valueOf Shortcut">1</a>. </span>The valueOf Shortcut</h2>
 		<div class="contents2">
-			<p>The <code><a href="../reference/Uize.html">Uize</a></code> base class implements a <code>valueOf</code> instance method that will be invoked automatically by JavaScript whenever an instance of a <code><a href="../reference/Uize.html">Uize</a></code> subclass is involved in an expression.</p>
+			<p>The <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> base class implements a <code>valueOf</code> instance method that will be invoked automatically by JavaScript whenever an instance of a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass is involved in an expression.</p>
 			
 			<p>This provides a shortcut to accessing the <code>value</code> set-get property for instances of classes that register this property. In such cases, you can use an instance reference in an expression - such as a mathematical expression, or a string concatenation - as though the object reference were a proxy for its value.</p>
 			
 			<a name="4_1_1"></a>
 			<h3 class="heading3" title="4. Uize Specific Code Size Optimization -&gt; 4.1. The valueOf Shortcut -&gt; 4.1.1. Coercion to Number"><span class="headingNumber"><a href="#4" title="4. Uize Specific Code Size Optimization">4</a>.<a href="#4_1" title="4. Uize Specific Code Size Optimization -&gt; 4.1. The valueOf Shortcut">1</a>.<a href="#4_1_1" title="4. Uize Specific Code Size Optimization -&gt; 4.1. The valueOf Shortcut -&gt; 4.1.1. Coercion to Number">1</a>. </span>Coercion to Number</h3>
 			<div class="contents3">
-				<p>If you involve a <code><a href="../reference/Uize.html">Uize</a></code> instance in a math expression, the <code>valueOf</code> intrinsic method will be invoked and the value of your instance will be converted to a number.</p>
+				<p>If you involve an instance of a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass in a math expression, the <code>valueOf</code> intrinsic method will be invoked and the value of your instance will be converted to a number.</p>
 				
 				<p><span class="allCaps">INSTEAD OF...</span></p>
 				
@@ -797,7 +797,7 @@ function _setNodeCoordsInPixels (_nodeRef,_left,_top,_width,_height) {
 			<a name="4_1_2"></a>
 			<h3 class="heading3" title="4. Uize Specific Code Size Optimization -&gt; 4.1. The valueOf Shortcut -&gt; 4.1.2. Coercion to String"><span class="headingNumber"><a href="#4" title="4. Uize Specific Code Size Optimization">4</a>.<a href="#4_1" title="4. Uize Specific Code Size Optimization -&gt; 4.1. The valueOf Shortcut">1</a>.<a href="#4_1_2" title="4. Uize Specific Code Size Optimization -&gt; 4.1. The valueOf Shortcut -&gt; 4.1.2. Coercion to String">2</a>. </span>Coercion to String</h3>
 			<div class="contents3">
-				<p>If you involve a <code><a href="../reference/Uize.html">Uize</a></code> instance in a string expression, the <code>valueOf</code> intrinsic method will be invoked and the value of your instance will be converted to a string.</p>
+				<p>If you involve an instance of a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass in a string expression, the <code>valueOf</code> intrinsic method will be invoked and the value of your instance will be converted to a string.</p>
 				
 				<p><span class="allCaps">INSTEAD OF...</span></p>
 				

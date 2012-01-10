@@ -1,5 +1,5 @@
 /*
-	UIZE JAVASCRIPT FRAMEWORK 2011-12-23
+	UIZE JAVASCRIPT FRAMEWORK 2012-01-09
 
 	http://www.uize.com/reference/Uize.Widget.Bar.html
 	Available under MIT License or GNU General Public License -- http://www.uize.com/license.html

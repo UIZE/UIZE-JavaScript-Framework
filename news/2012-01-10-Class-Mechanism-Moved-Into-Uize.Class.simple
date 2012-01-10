@@ -1,0 +1,123 @@
+The class mechanism that was implemented in the =Uize= module has been moved out of that module and into the new =Uize.Class= module.
+
+IMPORTANT: THIS IS A BREAKING CHANGE
+	While the chances are quite small, moving the class mechanism out of the =Uize= base module and into its own separate module has the potential of breaking certain custom modules you may have written.
+
+	While every attempt is always made to make changes in the UIZE JavaScript framework be backwards compatible with existing custom code written on top of the framework, it is not always feasible to support backwards compatibility with a framework change. This is one of those rare occasions when it makes more sense to make a clean break than to put messy backwards compatibility provisions in place for a year while an old way of doing things is deprecated.
+
+Rationales For This Change
+	The decision to move the class mechanism into its own separete module is driven by a number of key rationales.
+
+	Get Just the Utility Belt Features
+		Moving the class mechanism out of the =Uize= base module makes it possible to get just the basic utility belt features without taking the class code along with it.
+
+		Some people just want a good suite of utility belt features to complement the features of JavaScript and/or other JavaScript frameworks or libraries they may be using. They may like the toolkit provided in the =Uize= base module but not wish to buy into the whole framework in a given application they're working on. Now, developers can load in just the =Uize= base module to get just the base toolkit.
+
+	Use Other Packages With Less Weight
+		Moving the class mechanism out of the =Uize= base module that defines the namespace for the UIZE JavaScript Frameework makes it possible to load in package modules without the extra weight of the class code.
+
+		Some people may wish to load in the various utility packages of the UIZE JavaScript Framework, like the data manipulation modules under the =Uize.Data= namespace, or the color manipulation modules under the =Uize.Color= namespace. In order to do so, they will at least need the =Uize= namespace and module loader mechanism that is defined in the =Uize= base module. With the class mechanism moved out of the =Uize= base module, it is now possible to use just the packages of the UIZE JavaScript Framework without loading as much code as before.
+
+	Easier to Manage Class Mechanism
+		From a code development and maintenance perspective, moving the class mechanism into its own separate module will make it easier to manage and maintain this code going forward.
+
+		Making improvements to the class mechanism will be easier with the code that implements it in a well defined module. Similarly, maintaining the unit tests for the class mechanism will be easier with those tests in their own corresponding separate unit test module. Continuing to bloat up the size of a monolithic =Uize= module was simply not a scalable approach, and creating a separate module for the class mechanism is just good old fashioned code modularization common sense.
+
+The new Uize.Class Module
+	The class mechanism that was moved out of the =Uize= base module has been moved into the new =Uize.Class= module.
+
+	None of the class functionality has changed - it has just been migrated. Classes should now be created by subclassing the =Uize.Class= base class. Consider the following example...
+
+	EXAMPLE
+	.................................
+	MyClass = Uize.Class.subclass ();
+	.................................
+
+	All classes created by subclassing the =Uize.Class= module will still get the benefits of a built-in events mechanism, properties mechanism, and inheritance mechanism. The various features of the =Uize.Class= module are tested in the =Uize.Test.Uize.Class= test module.
+
+All Uize Code Updated
+	Needless to say, this was a mighty big change that affected numerous modules, but even more so affected the many explainers and reference documents of the framework.
+
+	Thankfully, the entire codebase and all documentation has been updated to reflect the change, and before long we will forget that there ever was such a thing as the "Uize base class", and we will only think of the new =Uize.Class= module when we think of a base class for inheritance for the UIZE JavaScript Framework.
+
+	Various Module Updated
+		Various modules that were previously sublassing off of =Uize=, or that otherwise depended on the class mechanism in the =Uize= module, have been updated to now use the new =Uize.Class= module.
+
+		The list of updated modules includes...
+
+		- =Uize.Comm=
+		- =Uize.Fade=
+		- =Uize.Node=
+		- =Uize.Test=
+		- =Uize.Util.Coupler=
+		- =Uize.Util.Cycle=
+		- =Uize.Util.PropertyAdapter=
+		- =Uize.Widget=
+
+Updating Your Own Code
+	Updating your own code so that it is compatible with this breaking change should be relatively painless.
+
+	Update Any Custom Classes That Subclassed Uize
+		There is a possibility that you may not have to do anything at all - this will depend on whether or not you've created your own custom classes that subclass off of the old =Uize= base class.
+
+		If you're not sure, search your codebase for the text "superclass:'Uize'" - use a well crafted regular expression, as needed, to make sure you catch all cases with whitespace and/or quotes variations. If you find any classes that derive directly from the old =Uize= class, update that code to now subclass the new =Uize.Class= base class - modify the =superclass= specifier in the module declaration to now specify =Uize.Class= as the superclass for such modules.
+
+		THE OLD WAY...
+		...........................................
+		Uize.module ({
+			superclass:'Uize',
+			builder:function (_superclass) {
+				var _class = _superclass.subclass ();
+				// ...
+				return _class;
+			}
+		});
+		...........................................
+
+		THE NEW WAY...
+		...........................................
+		Uize.module ({
+			superclass:'Uize.Class',
+			builder:function (_superclass) {
+				var _class = _superclass.subclass ();
+				// ...
+				return _class;
+			}
+		});
+		...........................................
+
+		Your modules may not look exactly as shown above, but it should be clear once you inspect them. This should be a one line change to a small number - if any - of your custom modules.
+
+	Add Uize.Class to Any Library Files
+		If you've created any [[../explainers/javascript-libraries.html][JavaScript libraries]] to optimize the load time of your Web pages, you should update them to add an entry for the new =Uize.Class= module.
+
+		For any [[../explainers/javascript-libraries.html][JavaScript library]] (=.library.js=) files that you may have created, chances are that they will be loading in some module - like the =Uize.Node= module - that requires the =Uize.Class= module. To ensure that the load performance for your production ready pages isn't tripped up by a separate HTTP request for the =Uize.Class= module, add an entry in your library files, right before the first module that depends on the =Uize.Class= module (typically, this will be the =Uize.Node= module).
+
+		THE OLD WAY
+		................................................
+		/* Library Contents
+			Uize.Node
+			Uize.Widget
+			Uize.Widget.Page
+		*/
+
+		Uize.module ({name:'Uize.Widget.Page.library'});
+		................................................
+
+		THE NEW WAY
+		................................................
+		/* Library Contents
+			Uize.Class
+			Uize.Node
+			Uize.Widget
+			Uize.Widget.Page
+		*/
+
+		Uize.module ({name:'Uize.Widget.Page.library'});
+		................................................
+
+....................................................................................
+<< metadata >>
+
+title: 2012-01-10 - Class Mechanism Moved Into Uize.Class
+....................................................................................

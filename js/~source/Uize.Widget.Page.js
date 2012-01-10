@@ -95,21 +95,6 @@ Uize.module ({
 					_idPrefix = _this.get ('idPrefix'),
 					_window = window
 				;
-				function _mergeCopyInto (_targetObject,_sourceObject) {
-					var
-						_targetObjectPropertyValue,
-						_sourceObjectPropertyValue
-					;
-					for (var _propertyName in _sourceObject)
-						(
-							typeof (_targetObjectPropertyValue = _targetObject [_propertyName]) == 'object' &&
-							typeof (_sourceObjectPropertyValue = _sourceObject [_propertyName]) == 'object' &&
-							_targetObjectPropertyValue && _sourceObjectPropertyValue
-						)
-							? _mergeCopyInto (_targetObjectPropertyValue,_sourceObjectPropertyValue)
-							: (_targetObject [_propertyName] = _sourceObject [_propertyName])
-					;
-				}
 
 				/*** find $... properties in window object, whose values are objects with widgetClass property ***/
 					var
@@ -145,7 +130,7 @@ Uize.module ({
 									;
 								} else {
 									_levelWidget
-										? _mergeCopyInto (_levelWidget,_widgetProperties)
+										? Uize.mergeInto (_levelWidget,_widgetProperties)
 										: (_levelChildren [_widgetLevelName] = _widgetProperties)
 									;
 									_window [_propertyName] = _undefined;

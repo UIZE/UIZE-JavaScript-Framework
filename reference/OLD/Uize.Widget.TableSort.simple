@@ -74,7 +74,7 @@ Introduction
 		There are just three steps involved...
 
 		Source in the JavaScript Libraries
-			The =Uize.TableSort= class inherits from the =Uize= class, so the =Uize.js= JavaScript library must be sourced in. Then, the =Uize.TableSort= class relies on utility features provided in the =Uize.Node= package, so the =Uize.Node.js= library must be sourced in. Finally, the =Uize.TableSort.js= library itself must be sourced in. It is recommended that these libraries be sourced in immediately after the open =body= tag.
+			The =Uize.TableSort= class inherits from the =Uize.Class= base class, so the =Uize.js= JavaScript library must be sourced in. Then, the =Uize.TableSort= class relies on utility features provided in the =Uize.Node= package, so the =Uize.Node.js= library must be sourced in. Finally, the =Uize.TableSort.js= library itself must be sourced in. It is recommended that these libraries be sourced in immediately after the open =body= tag.
 
 		Give Your Table an ID Attribute
 			Because tables are used heavily in page layout, a document may contain many tables that it would not be appropriate to make sortable. By giving the tables you wish to sort unique =id= attribute values, you can then specify just these tables when using the =Uize.TableSort= class to make your tables sortable.
@@ -86,7 +86,9 @@ Introduction
 		[must to document]
 
 Inherited Instance and Static Methods and Properties
-	This class inherits from the =Uize= base class. Consequently, it inherits all the instance and static methods that comprise the mechanism for setting and getting property values, the mechanism for managing events, as well as other utility features. This class also inherits all the instance and static properties of the =Uize= base class. Consult the documentation for the =Uize= base class for detailed information on all these inherited features, since they are not explained again in the documentation for this class.
+	This class inherits from the =Uize.Class= base class.
+
+	Consequently, it inherits all the instance and static methods that comprise the mechanism for setting and getting property values, the mechanism for managing events, as well as other utility features. This class also inherits all the instance and static properties of the =Uize.Class= base class. Consult the documentation for the =Uize.Class= base class for detailed information on all these inherited features, since they are not explained again in the documentation for this class.
 
 Set-get Properties
 	node

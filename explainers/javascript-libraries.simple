@@ -22,6 +22,7 @@ What They Look Like
 			EXAMPLE
 			...................................................
 			/* Library Contents
+				Uize.Class
 				Uize.Node
 				Uize.Fade
 				Uize.Xml
@@ -48,6 +49,7 @@ What They Look Like
 				EXAMPLE
 				...............................................
 				/* Library Contents
+					Uize.Class
 					Uize.Node
 					Uize.Fade
 					# THIS LINE IS A COMMENT AND WILL BE IGNORED
@@ -74,6 +76,7 @@ What They Look Like
 				/* Library Contents
 					// Modules required (directly AND indirectly) by UizeDotCom.WidgetToGoPage
 						UizeDotCom
+						Uize.Class
 						Uize.Node
 						Uize.Widget
 						Uize.Widget.Page
@@ -144,6 +147,7 @@ What They Look Like
 				INCORRECT
 				....................................................................
 				/* Library Contents
+					Uize.Class
 					Uize.Node
 					Uize.Widget
 					Uize.Widget.Page
@@ -173,9 +177,9 @@ What They Look Like
 			The modules included should be listed in the correct order of dependency, otherwise some modules included in the library may actually be dynamically loaded, producing sub-optimal results (see `Incorrect Ordering of Modules` for more details).
 
 		Don't Include Uize Base Class
-			You will typically not include the =Uize= base class module, since this module will typically be sourced in discretely as one of the very first external JavaScript files sourced in.
+			You will typically not include the =Uize= base module, since this module will typically be sourced in discretely as one of the very first external JavaScript files sourced in.
 
-			Using the built-in module loader, the folder location of the =Uize.js= file will determine where subsequent dynamically loaded modules are loaded from. The =Uize= base class tries to find the script tag that sources itself in, so including the =Uize= module in a library file (that will, of course, not be named =Uize.js=) will confuse this mechanism.
+			Using the built-in module loader, the folder location of the =Uize.js= file will determine where subsequent dynamically loaded modules are loaded from. The =Uize= base module tries to find the script tag that sources itself in, so including the =Uize= module in a library file (that will, of course, not be named =Uize.js=) will confuse this mechanism.
 
 			The Exception Proves the Rule
 				If you *do* decide to include the base class into a library module, you will need to explicitly set a value for the =Uize.moduleUrlTemplate= static property, so that the module loader mechanism will know where to get modules from.
@@ -201,6 +205,7 @@ What They Look Like
 			PERFECTLY OK
 			................................................
 			/* Library Contents
+				Uize.Class
 				Uize.Node
 				Uize.Widget
 				Uize.Widget.Page
@@ -341,6 +346,7 @@ Important Considerations
 		EXAMPLE
 		...................
 		/* Library Contents
+			Uize.Class
 			Uize.Node
 			Uize.Widget.Page
 		*/
@@ -354,6 +360,7 @@ Important Considerations
 		INCORRECT
 		...................
 		/* Library Contents
+			Uize.Class
 			Uize.Node
 			Uize.Widget.Page
 			Uize.Widget
@@ -369,6 +376,7 @@ Important Considerations
 		CORRECT
 		...................
 		/* Library Contents
+			Uize.Class
 			Uize.Node
 			Uize.Widget
 			Uize.Widget.Page
@@ -385,6 +393,7 @@ Important Considerations
 		LIBRARY FILE 1
 		...................
 		/* Library Contents
+			Uize.Class
 			Uize.Node
 			Uize.Widget
 			Uize.Widget.Page
@@ -394,6 +403,7 @@ Important Considerations
 		LIBRARY FILE 2
 		........................
 		/* Library Contents
+			Uize.Class
 			Uize.Node
 			Uize.Fade
 			Uize.Xml
@@ -408,5 +418,5 @@ Important Considerations
 		*/
 		........................
 
-		Both of the above two library files include the modules =Uize.Node=, =Uize.Widget=, and =Uize.Widget.Page=. If built versions of the above library files are both sourced into the same page, the modules included in library 1 that are also included in library 2 will not be redefined when the module declarations are encountered in library 2 - only their declaration in library 1 will be honored.
+		Both of the above two library files include the modules =Uize.Class=, =Uize.Node=, =Uize.Widget=, and =Uize.Widget.Page=. If built versions of the above library files are both sourced into the same page, the modules included in library 1 that are also included in library 2 will not be redefined when the module declarations are encountered in library 2 - only their declaration in library 1 will be honored.
 

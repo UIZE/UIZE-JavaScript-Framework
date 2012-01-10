@@ -212,9 +212,8 @@ Uize.module ({
             propertyValue = fruit [propertyName]
           ;
           fadeStartValue [fruitNo] = typeof fadeValue == 'object' ? fadeValue [fruitNo] : 0;
-          fadeEndValue [fruitNo] = isNaN (propertyValue)
-            ? 0
-            : (propertyValue - propertyMinValue) / propertyValueRange
+          fadeEndValue [fruitNo] =
+            (Uize.toNumber (propertyValue,propertyMinValue) - propertyMinValue) / propertyValueRange
           ;
         }
         fade.start ({

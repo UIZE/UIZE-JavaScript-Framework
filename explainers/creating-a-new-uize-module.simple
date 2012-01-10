@@ -30,9 +30,9 @@ Name Your Module
 		Namespace for Class Modules
 			Class modules often, but do not have to, exist under the namespace of the classes that they subclass.
 
-			For example, the =Uize.Widget= module defines a class that is a subclass of the =Uize= class, so it is placed under that namespace. Similarly, the =Uize.Widget.Bar= module defines a class that is a subclass of the =Uize.Widget= class, so it is placed under that namespace. Even further, the =Uize.Widget.Bar.Slider= module defines a class that is a subclass of the =Uize.Widget.Bar= class, and so on.
+			For example, the =Uize.Widget.Bar= module defines a class that is a subclass of the =Uize.Widget= class, so it is placed under that namespace. Similarly, the =Uize.Widget.Bar.Slider= module defines a class that is a subclass of the =Uize.Widget.Bar= class, so it is placed under that namespace, and so on.
 
-			There are times when this general rule is deviated from, such as when class modules are placed under `Namespaces for Areas of Functionality`, rather than directly under the namespace of the class that they subclass. An example of this is the =Uize.Util.Coupler= module. This module defines the =Uize.Util.Coupler= class, which is a subclass of the =Uize= base class - *not* a subclass of =Uize.Util=. The =Uize.Util= module merely defines a namespace that serves as a place to group / organize various utility type modules. The modules under this namespace may be any =type= of module.
+			There are times when this general rule is deviated from, such as when class modules are placed under `Namespaces for Areas of Functionality`, rather than directly under the namespace of the class that they subclass. An example of this is the =Uize.Util.Coupler= module. This module defines the =Uize.Util.Coupler= class, which is a subclass of the =Uize.Class= base class - *not* a subclass of =Uize.Util=. The =Uize.Util= module merely defines a namespace that serves as a place to group / organize various utility type modules. The modules under this namespace may be any =type= of module.
 
 		Namespaces for Areas of Functionality
 			Certain dedicated namespaces exist for grouping / organization modules according to their area of functionality, such as, for example, the =Uize.Color=, =Uize.Data=, and =Uize.Util= modules.
@@ -60,7 +60,7 @@ Name Your Module
 		Namespace for Test Modules
 			All test modules that test regular / non-test modules of the UIZE JavaScript Framework are placed within the =Uize.Test= namespace.
 
-			The namespace hierarchy for test modules mirrors the namespace hierarchy of regular / non-test modules (see the section `Unit Test Module` for more info). The inheritance pattern is not the same, however. For example, the =Uize.Widget= module would define a subclass of =Uize=, but the =Uize.Test.Uize.Widget= module *would not* define a subclass of =Uize.Test.Uize=, since all test modules define subclasses of the =Uize.Test= base class.
+			The namespace hierarchy for test modules mirrors the namespace hierarchy of regular / non-test modules (see the section `Unit Test Module` for more info). The inheritance pattern is not the same, however. For example, the =Uize.Widget.Bar= module would define a subclass of =Uize.Widget=, but the =Uize.Test.Uize.Widget.Bar= module *would not* define a subclass of =Uize.Test.Uize.Widget=, since all test modules define subclasses of the =Uize.Test= base class.
 
 		Namespace for JavaScript Template Modules
 			All JavaScript template modules added to the UIZE JavaScript Framework should be placed somewhere within the =Uize.Templates= namespace.
@@ -137,7 +137,7 @@ Update Header Comments
 		Scruncher Mappings for Class Modules
 			For class modules, it is the convention to use a single letter for the scrunch namespace, where that letter is one letter higher than the letter used for the class' superclass.
 
-			So, for example, the =Uize.Widget.ListEditor= module defines a class that is a subclass of the =Uize.Widget= base class. Further, the =Uize.Widget= class is a subclass of the =Uize= base class. The =Uize= base class module uses the letter "a" for its scrunch namespace, so the =Uize.Widget= subclass uses the letter "b", and the =Uize.Widget.ListEditor= class uses the letter "c". This ensures that the scrunched identifier names for private properties and methods that are defined at the various different levels of this class hierarchy don't accidentally collide (scrunching is applied discretely to each file, after all).
+			So, for example, the =Uize.Widget.ListEditor= module defines a class that is a subclass of the =Uize.Widget= base class. Further, the =Uize.Widget= class is a subclass of the =Uize.Class= base class. The =Uize.Class= module uses the letter "a" for its scrunch namespace, so the =Uize.Widget= subclass uses the letter "b", and the =Uize.Widget.ListEditor= class uses the letter "c". This ensures that the scrunched identifier names for private properties and methods that are defined at the various different levels of this class hierarchy don't accidentally collide (scrunching is applied discretely to each file, after all).
 
 			EXAMPLE
 			.........................................................
@@ -205,7 +205,7 @@ Update Header Comments
 			importance
 				A number, in the range of =0= to =10=, indicating the overal importance of the module in the larger scheme of things.
 
-				To get a sense of how modules should be ranked in importance, take a look at the [[../appendixes/sotu.html][SOTU (State of the UIZE)]] page and note the importance that is assigned to modules with which you are familiar. A module like the =Uize= base class, for example, is assigned the importance of =10=. Without the =Uize= base class and namespace, pretty much nothing else in the framework can exist, so this is the most important module and has the highest importance possible.
+				To get a sense of how modules should be ranked in importance, take a look at the [[../appendixes/sotu.html][SOTU (State of the UIZE)]] page and note the importance that is assigned to modules with which you are familiar. A module like the =Uize= module, for example, is assigned the importance of =10=. Without the =Uize= module and the namespace it defines, pretty much nothing else in the framework can exist, so this is the most important module and has the highest importance possible.
 
 				On the opposite end of the spectrum, a module like the =Uize.String.Discombobulator= package is assigned an importance of =0=. This module provides some very esoteric and hardly used functionality, and so it has the lowest importance possible. It's important to emphasize that having an importance of =0= doesn't mean that a module is useless and has no value - it just means that it is among the least important modules in the framework, in the larger scheme of things.
 

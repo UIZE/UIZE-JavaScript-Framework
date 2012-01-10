@@ -1,0 +1,50 @@
+The new =Uize.isSameAs= static method tests if two values are the same in a strict equality test, with support for =NaN= values.
+
+SYNTAX
+..............................................................
+isSameAsBOOL = Uize.isSameAs (valueANYTYPE,otherValueANYTYPE);
+..............................................................
+
+EXAMPLES
+....................................................................................
+Uize.isSameAs ('foo','foo');          // returns true
+Uize.isSameAs ('','');                // returns true
+Uize.isSameAs (42,42);                // returns true
+Uize.isSameAs (Infinity,Infinity);    // returns true
+Uize.isSameAs (NaN,NaN);              // returns true
+Uize.isSameAs (false,false);          // returns true
+Uize.isSameAs (null,null);            // returns true
+Uize.isSameAs (undefined,undefined);  // returns true
+
+Uize.isSameAs (null,undefined);       // returns false
+Uize.isSameAs (null,NaN);             // returns false
+Uize.isSameAs ('',0);                 // returns false
+Uize.isSameAs (1,true);               // returns false
+Uize.isSameAs ('true',true);          // returns false
+Uize.isSameAs ('foo','');             // returns false
+Uize.isSameAs ('null',null);          // returns false
+Uize.isSameAs ('42',42);              // returns false
+Uize.isSameAs ({},{});                // returns false (different object references)
+Uize.isSameAs ([],[]);                // returns false (different array references)
+....................................................................................
+
+NaN is the Same as NaN
+	The =Uize.isSameAs= method is most useful in its support for comparing two values that may be the JavaScript special value =NaN=.
+
+	The special value =NaN= is never considered to be equal to itself in a strict equality test. So, for example, the expression =NaN &#61;&#61;&#61; NaN= produces the result =false=. The =Uize.isSameAs= method comes to the rescue and provides special handling in order to ensure that if the two values being compared are both =NaN=, then the method will return =true=.
+
+	EXAMPLE
+	.........................................................
+	var
+		valueA = NaN,
+		valueB = NaN
+	;
+	alert (valueA === valueB);              // alerts "false"
+	alert (Uize.isSameAs (valueA,valueB));  // alerts "true"
+	.........................................................
+
+....................................................................................
+<< metadata >>
+
+title: 2012-01-99 - New Uize.isSameAs Method
+....................................................................................

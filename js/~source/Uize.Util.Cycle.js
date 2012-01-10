@@ -28,7 +28,7 @@
 
 Uize.module ({
 	name:'Uize.Util.Cycle',
-	superclass:'Uize',
+	superclass:'Uize.Class',
 	builder:function (_superclass) {
 		/*** Variables for Scruncher Optimization ***/
 			var

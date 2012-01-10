@@ -492,9 +492,6 @@ Test Modules to Implement Next...
 	- =Uize.Test.Uize.Curve.Rubber=
 	- =Uize.Test.Uize.Curve.Mod=
 
-Factor Out mergeCopy
-	Migrate mergeCopyInto to Uize base class, so it can be used by Uize.Widget.Page and other modules.
-
 Value Transformer Function
 	- a function that is flagged as a value transformer
 	- it is up to each function or method to determine if they will support value transformers or not
@@ -517,7 +514,7 @@ Value Transformer Function
 		slider.set ({value:Uize.x (function (x) {return x + 10}}));
 
 		// boolean toggle value transformer
-		slider.set ({value:Uize.toggle})
+		slider.set ({value:Uize.not})
 		slider.set ({value:Uize.x ('!x')})
 		slider.set ({value:Uize.x (function (x) {return !x})})
 
@@ -546,7 +543,7 @@ Value Transformer Function
 		Uize.x ('x % 10')
 		function (x) {return x % 10}
 
-		Uize.toggle
+		Uize.not
 		Uize.x ('!x')
 		function (x) {return !x}
 

@@ -4,7 +4,7 @@ Introduction
 	DOM events vs. UIZE events
 		DOM events are events that originate from HTML elements / DOM nodes in a document.
 
-		DOM events are different from UIZE events that can be fired by any instance of a =Uize= subclass, or by =Uize= subclasses themselves. DOM events are unique to the Web browser environment, whereas UIZE events are supported in any environment that is supported by the UIZE JavaScript Framework, such as Microsoft's Windows Script Host and Adobe's ExtendScript environments. For more information on UIZE events, consult the explainer [[javascript-event-system.html][JavaScript Event System]].
+		DOM events are different from UIZE events that can be fired by any instance of a =Uize.Class= subclass, or by =Uize.Class= subclasses themselves. DOM events are unique to the Web browser environment, whereas UIZE events are supported in any environment that is supported by the UIZE JavaScript Framework, such as Microsoft's Windows Script Host and Adobe's ExtendScript environments. For more information on UIZE events, consult the explainer [[javascript-event-system.html][JavaScript Event System]].
 
 		Some examples of DOM events are...
 

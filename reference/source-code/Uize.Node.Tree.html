@@ -709,7 +709,7 @@ Uize.module ({
           _levelClassRegExp = [],
           _tree = {title:'Contents'}
         ;
-        if (isNaN (_initialExpandedDepth -= 0)) _initialExpandedDepth = 1;
+        _initialExpandedDepth = Uize.toNumber (_initialExpandedDepth,1);
         for (var _levelClassNo = -1, _levelClass; ++_levelClassNo &lt; _levelClasses.length;) {
           _levelClassMap [_levelClass = _levelClasses [_levelClassNo]] = _levelClassNo;
           _levelClassRegExp.push ('\\b' + _levelClass + '\\b');

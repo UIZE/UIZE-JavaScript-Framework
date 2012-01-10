@@ -30,6 +30,7 @@
 
 Uize.module ({
 	name:'Uize.Comm',
+	superclass:'Uize.Class',
 	required:'Uize.Url',
 	builder:function (_superclass) {
 		/*** Variables for Scruncher Optimization ***/

@@ -28,6 +28,7 @@
 
 Uize.module ({
 	name:'Uize.Test.Uize.Date',
+	required:'Uize.Class',
 	builder:function () {
 		function _dateToNumber (_date) {return +_date}
 		function _dateToString (_date) {return _date + ''}
@@ -76,7 +77,7 @@ Uize.module ({
 		;
 
 		/*** create dummy class with value interface ***/
-			var _ClassWithValueInterface = Uize.subclass ();
+			var _ClassWithValueInterface = Uize.Class.subclass ();
 			_ClassWithValueInterface.registerProperties ({
 				_value:'value'
 			});
@@ -462,7 +463,7 @@ Uize.module ({
 								title:'Test that a badly formatted date string resolves to a Date object instance initialized to the time NaN',
 								test:function () {
 									var _result = Uize.Date.resolve ('THIS IS NOT A VALID DATE STRING');
-									return this.expectInstanceOf (Date,_result) && isNaN (_result);
+									return this.expectInstanceOf (Date,_result) && this.expectSameAs (NaN,+_result);
 								}
 							},
 							_resolveShouldReturnNowTest (

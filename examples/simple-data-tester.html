@@ -130,25 +130,28 @@ Uize.module ({
 		'Uize.Json'
 	],
 	builder:function () {
-		/*** create the example page widget ***/
-			var page = window.page = UizeDotCom.Page.Example ();
+		/*** create a page widget subclass ***/
+			var CustomPageWidget = UizeDotCom.Page.Example.subclass ();
 
-		/*** add property for managing update of converted HTML and preview ***/
-			page.Class.registerProperties ({
-				simpleDataSource:{
-					name:'simpleDataSource',
-					onChange:function () {
-						page.setNodeValue (
-							'dataLongForm',
-							Uize.Json.to (Uize.Data.Simple.parse ({simple:this.simpleDataSource}))
-						);
-						page.setNodeValue (
-							'dataCollapsedForm',
-							Uize.Json.to (Uize.Data.Simple.parse ({simple:this.simpleDataSource,collapseChildren:true}))
-						);
+			/*** add property for managing update of converted HTML and preview ***/
+				CustomPageWidget.registerProperties ({
+					simpleDataSource:{
+						name:'simpleDataSource',
+						onChange:function () {
+							page.setNodeValue (
+								'dataLongForm',
+								Uize.Json.to (Uize.Data.Simple.parse ({simple:this.simpleDataSource}))
+							);
+							page.setNodeValue (
+								'dataCollapsedForm',
+								Uize.Json.to (Uize.Data.Simple.parse ({simple:this.simpleDataSource,collapseChildren:true}))
+							);
+						}
 					}
-				}
-			});
+				});
+
+		/*** create the example page widget ***/
+			var page = window.page = CustomPageWidget ();
 
 		/*** add the tabs child widget ***/
 			var tabs = window.tabs = page.addChild (

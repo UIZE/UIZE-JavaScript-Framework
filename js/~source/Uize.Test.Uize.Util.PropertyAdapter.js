@@ -28,8 +28,9 @@
 
 Uize.module ({
 	name:'Uize.Test.Uize.Util.PropertyAdapter',
+	required:'Uize.Class',
 	builder:function () {
-		var _DummyClass = Uize.subclass ();
+		var _DummyClass = Uize.Class.subclass ();
 
 		function _getRig (_extraAdapterProperties) {
 			var
@@ -82,7 +83,7 @@ Uize.module ({
 					}
 				};
 			}
-			var _someDummyInstance = Uize ();
+			var _someDummyInstance = Uize.Class ();
 			return {
 				title:'Test that the conformer for ' + _propertyName + ' works correctly',
 				test:[
@@ -550,7 +551,7 @@ Uize.module ({
 						{
 							title:'Test that an infinite loop is prevented when two properties combined in a property adapter are guaranteed to never be able to ever settle their values, because of a divergent value adapter',
 							test:function () {
-								var _DummyClass = Uize.subclass ();
+								var _DummyClass = Uize.Class.subclass ();
 								_DummyClass.registerProperties ({
 									_property1:'property1',
 									_property2:'property2'
@@ -575,7 +576,7 @@ Uize.module ({
 						{
 							title:'Test that an infinite loop is prevented when two properties combined in a property adapter are guaranteed to never be able to ever settle their values, based upon the definition of those properties',
 							test:function () {
-								var _CrazyClass = Uize.subclass ();
+								var _CrazyClass = Uize.Class.subclass ();
 								_CrazyClass.registerProperties ({
 									_property1:{
 										name:'property1',

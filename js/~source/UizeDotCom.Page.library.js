@@ -18,6 +18,7 @@
 
 /* Library Contents
 	UizeDotCom
+	Uize.Class
 	Uize.Node
 	Uize.Node.Event
 	Uize.Node.VirtualEvent

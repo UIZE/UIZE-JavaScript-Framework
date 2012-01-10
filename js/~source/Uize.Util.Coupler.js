@@ -21,7 +21,7 @@
 
 /*?
 	Introduction
-		The =Uize.Util.Coupler= class implements a mechanism for coupling two or more instances of any =Uize= subclass by synchronizing values of set-get properties.
+		The =Uize.Util.Coupler= class implements a mechanism for coupling two or more instances of any =Uize.Class= subclass by synchronizing values of set-get properties.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 
@@ -70,7 +70,7 @@
 
 Uize.module ({
 	name:'Uize.Util.Coupler',
-	superclass:'Uize',
+	superclass:'Uize.Class',
 	builder:function (_superclass) {
 		/*** General Variables ***/
 			var _syncFunctions = {};

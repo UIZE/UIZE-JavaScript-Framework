@@ -50,7 +50,7 @@
 					<li><a href="#3_3" title="To deliver the best performance for your pages, a library file can include all of the JavaScript modules needed by the page, or at least the complete set of modules required by one or more of the classes used in the page (such as the page widget class, for example).">3.3. What to Include</a>
 						<ul>
 							<li><a href="#3_3_1" title="The modules included should be listed in the correct order of dependency, otherwise some modules included in the library may actually be dynamically loaded, producing sub-optimal results (see Incorrect Ordering of Modules for more details).">3.3.1. Use the Correct Dependency Order</a></li>
-							<li><a href="#3_3_2" title="You will typically not include the Uize base class module, since this module will typically be sourced in discretely as one of the very first external JavaScript files sourced in.">3.3.2. Don't Include Uize Base Class</a>
+							<li><a href="#3_3_2" title="You will typically not include the Uize base module, since this module will typically be sourced in discretely as one of the very first external JavaScript files sourced in.">3.3.2. Don't Include Uize Base Class</a>
 								<ul>
 									<li><a href="#3_3_2_1" title="If you do decide to include the base class into a library module, you will need to explicitly set a value for the Uize.moduleUrlTemplate static property, so that the module loader mechanism will know where to get modules from.">3.3.2.1. The Exception Proves the Rule</a></li>
 								</ul>
@@ -129,6 +129,7 @@
 				
 				
 <pre class="sample-code">/* Library Contents
+  Uize.Class
   Uize.Node
   Uize.Fade
   Uize.Xml
@@ -158,6 +159,7 @@ Uize.module ({name:'UizeDotCom.Page.Doc.library'});
 					
 					
 <pre class="sample-code">/* Library Contents
+  Uize.Class
   Uize.Node
   Uize.Fade
   # THIS LINE IS A COMMENT AND WILL BE IGNORED
@@ -185,6 +187,7 @@ Uize.module ({name:'UizeDotCom.Page.Doc.library'});
 <pre class="sample-code">/* Library Contents
   // Modules required (directly AND indirectly) by UizeDotCom.WidgetToGoPage
     UizeDotCom
+    Uize.Class
     Uize.Node
     Uize.Widget
     Uize.Widget.Page
@@ -270,6 +273,7 @@ Uize.module ({name:'MyNamespace.MyLibraryName.library'});
 					
 					
 <pre class="sample-code">/* Library Contents
+  Uize.Class
   Uize.Node
   Uize.Widget
   Uize.Widget.Page
@@ -312,9 +316,9 @@ Uize.module ({
 			<a name="3_3_2"></a>
 			<h3 class="heading3" title="3. What They Look Like -&gt; 3.3. What to Include -&gt; 3.3.2. Don&apos;t Include Uize Base Class"><span class="headingNumber"><a href="#3" title="3. What They Look Like">3</a>.<a href="#3_3" title="3. What They Look Like -&gt; 3.3. What to Include">3</a>.<a href="#3_3_2" title="3. What They Look Like -&gt; 3.3. What to Include -&gt; 3.3.2. Don&apos;t Include Uize Base Class">2</a>. </span>Don't Include Uize Base Class</h3>
 			<div class="contents3">
-				<p>You will typically not include the <code><a href="../reference/Uize.html">Uize</a></code> base class module, since this module will typically be sourced in discretely as one of the very first external JavaScript files sourced in.</p>
+				<p>You will typically not include the <code><a href="../reference/Uize.html">Uize</a></code> base module, since this module will typically be sourced in discretely as one of the very first external JavaScript files sourced in.</p>
 				
-				<p>Using the built-in module loader, the folder location of the <code>Uize.js</code> file will determine where subsequent dynamically loaded modules are loaded from. The <code><a href="../reference/Uize.html">Uize</a></code> base class tries to find the script tag that sources itself in, so including the <code><a href="../reference/Uize.html">Uize</a></code> module in a library file (that will, of course, not be named <code>Uize.js</code>) will confuse this mechanism.</p>
+				<p>Using the built-in module loader, the folder location of the <code>Uize.js</code> file will determine where subsequent dynamically loaded modules are loaded from. The <code><a href="../reference/Uize.html">Uize</a></code> base module tries to find the script tag that sources itself in, so including the <code><a href="../reference/Uize.html">Uize</a></code> module in a library file (that will, of course, not be named <code>Uize.js</code>) will confuse this mechanism.</p>
 				
 				<a name="3_3_2_1"></a>
 				<h4 class="heading4" title="3. What They Look Like -&gt; 3.3. What to Include -&gt; 3.3.2. Don&apos;t Include Uize Base Class -&gt; 3.3.2.1. The Exception Proves the Rule"><span class="headingNumber"><a href="#3" title="3. What They Look Like">3</a>.<a href="#3_3" title="3. What They Look Like -&gt; 3.3. What to Include">3</a>.<a href="#3_3_2" title="3. What They Look Like -&gt; 3.3. What to Include -&gt; 3.3.2. Don&apos;t Include Uize Base Class">2</a>.<a href="#3_3_2_1" title="3. What They Look Like -&gt; 3.3. What to Include -&gt; 3.3.2. Don&apos;t Include Uize Base Class -&gt; 3.3.2.1. The Exception Proves the Rule">1</a>. </span>The Exception Proves the Rule</h4>
@@ -348,6 +352,7 @@ Uize.module ({
 				
 				
 <pre class="sample-code">/* Library Contents
+  Uize.Class
   Uize.Node
   Uize.Widget
   Uize.Widget.Page
@@ -539,6 +544,7 @@ Uize.module ({name:'UizeDotCom.Page.Doc.library'});
 			
 			
 <pre class="sample-code">/* Library Contents
+  Uize.Class
   Uize.Node
   Uize.Widget.Page
 */
@@ -556,6 +562,7 @@ Uize.module ({name:'UizeDotCom.Page.Doc.library'});
 			
 			
 <pre class="sample-code">/* Library Contents
+  Uize.Class
   Uize.Node
   Uize.Widget.Page
   Uize.Widget
@@ -572,6 +579,7 @@ Uize.module ({name:'UizeDotCom.Page.Doc.library'});
 			
 			
 <pre class="sample-code">/* Library Contents
+  Uize.Class
   Uize.Node
   Uize.Widget
   Uize.Widget.Page
@@ -592,6 +600,7 @@ Uize.module ({name:'UizeDotCom.Page.Doc.library'});
 			
 			
 <pre class="sample-code">/* Library Contents
+  Uize.Class
   Uize.Node
   Uize.Widget
   Uize.Widget.Page
@@ -602,6 +611,7 @@ Uize.module ({name:'UizeDotCom.Page.Doc.library'});
 			
 			
 <pre class="sample-code">/* Library Contents
+  Uize.Class
   Uize.Node
   Uize.Fade
   Uize.Xml
@@ -616,7 +626,7 @@ Uize.module ({name:'UizeDotCom.Page.Doc.library'});
 */
 </pre>
 			
-			<p>Both of the above two library files include the modules <code><a href="../reference/Uize.Node.html">Uize.Node</a></code>, <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, and <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code>. If built versions of the above library files are both sourced into the same page, the modules included in library 1 that are also included in library 2 will not be redefined when the module declarations are encountered in library 2 - only their declaration in library 1 will be honored.</p>
+			<p>Both of the above two library files include the modules <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, <code><a href="../reference/Uize.Node.html">Uize.Node</a></code>, <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, and <code><a href="../reference/Uize.Widget.Page.html">Uize.Widget.Page</a></code>. If built versions of the above library files are both sourced into the same page, the modules included in library 1 that are also included in library 2 will not be redefined when the module declarations are encountered in library 2 - only their declaration in library 1 will be honored.</p>
 		</div>
 	</div>
 </div>

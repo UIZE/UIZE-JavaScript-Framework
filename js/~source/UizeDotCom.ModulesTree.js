@@ -10,6 +10,7 @@ Uize.module ({
 						Sort:0,
 						Util:0
 					},
+					Class:0,
 					Color:{
 						xCmyk:0,
 						xHsv:0,
@@ -94,6 +95,7 @@ Uize.module ({
 								Sort:0,
 								Util:0
 							},
+							Class:0,
 							Data:{
 								Csv:0,
 								NameValueRecords:0,

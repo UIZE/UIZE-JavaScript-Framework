@@ -926,7 +926,7 @@ Uize.module ({
 								myWidget.setNodeOpacity (impliedNodeSTRorBLOB,opacityFLOATorOBJ);
 								.................................................................
 
-								The value of the =opacityFLOATorOBJ= parameter should be a number in the range of =0= to =1=, where =0= represents completely invisible, =1= represents completely opaque, and any fractional values inbetween represent varying degrees of transparency / opacity. Alternatively, if a =Uize= subclass instance is specified, then a value will be obtained by invoking the instance's =valueOf Intrinsic Method=.
+								The value of the =opacityFLOATorOBJ= parameter should be a number in the range of =0= to =1=, where =0= represents completely invisible, =1= represents completely opaque, and any fractional values inbetween represent varying degrees of transparency / opacity. Alternatively, if a =Uize.Class= subclass instance is specified, then a value will be obtained by invoking the instance's =valueOf Intrinsic Method=.
 
 								NOTES
 								- compare to the =Uize.Node.setOpacity= static method
@@ -956,7 +956,7 @@ Uize.module ({
 								);
 								..................................................
 
-								When number type values are specified for CSS style properties, those values will be converted to strings by appending the "px" unit. When string type values are specified, the unit should already be present in the value. =Uize= subclass instances can also be specified, and they will be converted to values by invoking their =valueOf Intrinsic Method=. For a more detailed discussion, consult the reference for the =Uize.Node.setStyle= static method.
+								When number type values are specified for CSS style properties, those values will be converted to strings by appending the "px" unit. When string type values are specified, the unit should already be present in the value. =Uize.Class= subclass instances can also be specified, and they will be converted to values by invoking their =valueOf Intrinsic Method=. For a more detailed discussion, consult the reference for the =Uize.Node.setStyle= static method.
 
 								NOTES
 								- see also the companion =getNodeStyle= instance method
@@ -1019,7 +1019,7 @@ Uize.module ({
 								NOTES
 								- you can use the =setNodeValue= instance method to set values on readonly form elements
 								- see the corresponding =getNodeValue= instance method
-								- the =value= parameter can be an object that implements a =valueOf= interface (such as an instance of a =Uize= subclass that implements the =value= set-get property)
+								- the =value= parameter can be an object that implements a =valueOf= interface (such as an instance of a =Uize.Class= subclass that implements the =value= set-get property)
 								- compare to the =Uize.Node.setValue= static method
 					*/
 
@@ -1546,7 +1546,7 @@ Uize.module ({
 					/*?
 						Instance Methods
 							kill
-								Overrides the =kill= method of the =Uize= base class to call the =kill= method on all of an instance's child widgets.
+								Overrides the =kill= method of the =Uize.Class= base class to call the =kill= method on all of an instance's child widgets.
 
 								SYNTAX
 								.................

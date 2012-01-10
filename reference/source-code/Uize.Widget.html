@@ -57,6 +57,7 @@
 
 Uize.module ({
   name:'Uize.Widget',
+  superclass:'Uize.Class',
   required:'Uize.Node',
   builder:function (_superclass) {
     /*** Variables for Optimization ***/
@@ -175,19 +176,19 @@ Uize.module ({
 
       var _phantomRoot = {_busyInherited:_false,_enabledInherited:_true};
 
-      _classPrototype._checkBusyInherited = function () {
+      function _checkBusyInherited () {
         (this._busy == 'inherit' ? (this.parent || _phantomRoot)._busyInherited : this._busy)
         != this._busyInherited &amp;&amp;
           this.set ({_busyInherited:!this._busyInherited})
         ;
-      };
+      }
 
-      _classPrototype._checkEnabledInherited = function () {
+      function _checkEnabledInherited () {
         (this._enabled == 'inherit' ? (this.parent || _phantomRoot)._enabledInherited : this._enabled)
         != this._enabledInherited &amp;&amp;
           this.set ({_enabledInherited:!this._enabledInherited})
         ;
-      };
+      }
 
       _classPrototype._tryUseConfirmInheritedFromTree = function (_mode,_params,_builtInConfirmFallback) {
         var _promptMethodName = 'show' + _Uize.capFirstChar (_mode);
@@ -956,7 +957,7 @@ Uize.module ({
                 myWidget.setNodeOpacity (impliedNodeSTRorBLOB,opacityFLOATorOBJ);
                 .................................................................
 
-                The value of the =opacityFLOATorOBJ= parameter should be a number in the range of =0= to =1=, where =0= represents completely invisible, =1= represents completely opaque, and any fractional values inbetween represent varying degrees of transparency / opacity. Alternatively, if a =Uize= subclass instance is specified, then a value will be obtained by invoking the instance's =valueOf Intrinsic Method=.
+                The value of the =opacityFLOATorOBJ= parameter should be a number in the range of =0= to =1=, where =0= represents completely invisible, =1= represents completely opaque, and any fractional values inbetween represent varying degrees of transparency / opacity. Alternatively, if an instance of a =Uize.Class= subclass is specified, then a value will be obtained by invoking the instance's =valueOf Intrinsic Method=.
 
                 NOTES
                 - compare to the =Uize.Node.setOpacity= static method
@@ -986,7 +987,7 @@ Uize.module ({
                 );
                 ..................................................
 
-                When number type values are specified for CSS style properties, those values will be converted to strings by appending the "px" unit. When string type values are specified, the unit should already be present in the value. =Uize= subclass instances can also be specified, and they will be converted to values by invoking their =valueOf Intrinsic Method=. For a more detailed discussion, consult the reference for the =Uize.Node.setStyle= static method.
+                When number type values are specified for CSS style properties, those values will be converted to strings by appending the "px" unit. When string type values are specified, the unit should already be present in the value. Instances of =Uize.Class= subclasses can also be specified, and they will be converted to values by invoking their =valueOf Intrinsic Method=. For a more detailed discussion, consult the reference for the =Uize.Node.setStyle= static method.
 
                 NOTES
                 - see also the companion =getNodeStyle= instance method
@@ -1049,7 +1050,7 @@ Uize.module ({
                 NOTES
                 - you can use the =setNodeValue= instance method to set values on readonly form elements
                 - see the corresponding =getNodeValue= instance method
-                - the =value= parameter can be an object that implements a =valueOf= interface (such as an instance of a =Uize= subclass that implements the =value= set-get property)
+                - the =value= parameter can be an object that implements a =valueOf= interface (such as an instance of a =Uize.Class= subclass that implements the =value= set-get property)
                 - compare to the =Uize.Node.setValue= static method
           */
 
@@ -1566,7 +1567,7 @@ Uize.module ({
           /*?
             Instance Methods
               kill
-                Overrides the =kill= method of the =Uize= base class to call the =kill= method on all of an instance's child widgets.
+                Overrides the =kill= method of the =Uize.Class= base class to call the =kill= method on all of an instance's child widgets.
 
                 SYNTAX
                 .................
@@ -1838,7 +1839,7 @@ Uize.module ({
         },
         _busy:{
           name:'busy',
-          onChange:_classPrototype._checkBusyInherited,
+          onChange:_checkBusyInherited,
           value:'inherit'
           /*?
             Set-get Properties
@@ -1854,7 +1855,7 @@ Uize.module ({
         },
         _busyInherited:{
           name:'busyInherited',
-          onChange:function () {_Uize.callOn (this._children,_classPrototype._checkBusyInherited)},
+          onChange:function () {_Uize.callOn (this._children,_checkBusyInherited)},
           value:_false
           /*?
             Set-get Properties
@@ -1910,7 +1911,7 @@ Uize.module ({
           */
         _enabled:{
           name:'enabled',
-          onChange:_classPrototype._checkEnabledInherited,
+          onChange:_checkEnabledInherited,
           value:'inherit'
           /*?
             Set-get Properties
@@ -1926,7 +1927,7 @@ Uize.module ({
         },
         _enabledInherited:{
           name:'enabledInherited',
-          onChange:function () {_Uize.callOn (this._children,_classPrototype._checkEnabledInherited)},
+          onChange:function () {_Uize.callOn (this._children,_checkEnabledInherited)},
           value:_true
           /*?
             Set-get Properties

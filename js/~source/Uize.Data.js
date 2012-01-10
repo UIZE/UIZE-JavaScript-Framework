@@ -187,7 +187,7 @@ Uize.module ({
 							In the above example, the =financeEmployees= variable would have the same value as in the previous example.
 
 							NOTES
-							- see also the =Uize.findRecord=, =Uize.findRecordNo=, and =Uize.recordMatches= static methods of the =Uize= base class
+							- see also the =Uize.findRecord=, =Uize.findRecordNo=, and =Uize.recordMatches= static methods of the =Uize.Class= base class
 				*/
 			};
 
@@ -368,7 +368,7 @@ Uize.module ({
 											)
 										)
 								) ||
-								(_typesMatch && _typeofObject1 == 'number' && isNaN (_object1) && isNaN (_object2))
+								(_typesMatch && _typeofObject1 == 'number' && _object1 != _object1 && _object2 != _object2)
 							)
 						;
 					}

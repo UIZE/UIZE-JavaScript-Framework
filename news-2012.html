@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2012 News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework"/>
+	<meta name="description" content="This is the news archive for the UIZE JavaScript Framework for the year 2012."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="css/page.css"/>
+	<link rel="stylesheet" href="css/page.simpledoc.css"/>
+	<link rel="stylesheet" href="css/page.index.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="index.html" title="UIZE JavaScript Framework home"></a>
+	2012 News
+</h1>
+
+<div class="main">
+
+<div class="preamble">
+	This is the news archive for the UIZE JavaScript Framework for the year 2012.
+	
+</div>
+
+<ul id="page-index">
+	<li>
+		<div class="itemTitle"><a href="news/2012-01-10-Class-Mechanism-Moved-Into-Uize.Class.html">2012-01-10 - Class Mechanism Moved Into Uize.Class</a><span class="arrow">&nbsp;</span></div>
+		<div class="itemBody">The class mechanism that was implemented in the Uize module has been moved out of that module and into the new Uize.Class module.</div>
+	</li>
+</ul>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Index'
+	],
+	builder:function () {(window.page = UizeDotCom.Page.Index ()).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+

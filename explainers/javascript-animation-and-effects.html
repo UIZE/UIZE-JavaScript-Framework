@@ -64,7 +64,7 @@
 							<li><a href="#4_3_2" title="When using the Uize.Fade.fadeMethod method, you have flexibility in how you specify the method you wish to fade.">4.3.2. Specifying Method to Fade</a></li>
 						</ul>
 					</li>
-					<li><a href="#4_4" title="The Uize.Fade.fade static method that is implemented in the Uize.Fade.xFactory extension module supports special handling when the target of a fade is an instance of a Uize subclass.">4.4. Fading the value Set-Get Property</a></li>
+					<li><a href="#4_4" title="The Uize.Fade.fade static method that is implemented in the Uize.Fade.xFactory extension module supports special handling when the target of a fade is an instance of a Uize.Class subclass.">4.4. Fading the value Set-Get Property</a></li>
 					<li><a href="#4_5" title="While the Uize.Fade.fade static method can be used for Fading the value Set-Get Property, fading a set-get property other than the value property can be accomplished using the Uize.Fade.fadeProperty static method.">4.5. Fading a Set-Get Property</a></li>
 					<li><a href="#4_6" title="While the Uize.Fade.fadeProperty static method can be used for Fading a Set-Get Property, fading values for multiple set-get properties of an instance in a single fade can be accomplished using the Uize.Fade.fadeProperties static method.">4.6. Fading Many Set-Get Properties</a>
 						<ul>
@@ -183,7 +183,7 @@
 		
 		<p>Many visible properties of a document can be animated, such as color style properties (eg. <code>color</code>, <code>background</code>, <code>backgroundColor</code>, <code>borderColor</code>, etc.), position style properties (eg. <code>top</code>, <code>right</code>, <code>bottom</code>, <code>left</code>, <code>backgroundPosition</code>), padding and margin style properties (eg. <code>padding</code>, <code>paddingTop</code>, <code>paddingRight</code>, <code>paddingBottom</code>, <code>paddingLeft</code>, <code>margin</code>, <code>marginTop</code>, etc.), dimension style properties (eg. <code>width</code>, <code>height</code>, <code>maxWidth</code>, <code>maxHeigh</code>, <code>borderWidth</code>, <code>borderTopWidth</code>, etc.), and font style properties (eg. <code>fontSize</code>, <code>letterSpacing</code>, <code>wordSpacing</code>, <code>lineHeight</code>, <code>textIndent</code>).</p>
 		
-		<p>In addition, the UIZE JavaScript Framework lets you animate the values of set-get properties for instances of <code><a href="../reference/Uize.html">Uize</a></code> subclasses, calls to methods, and calls to arbitrary functions. So, beyond just visible style properties of a document, you can animate state of anything. And you're not even limited to time-based effects - you can even use the effects system to produce color gradients and other Non-time Based Fades.</p>
+		<p>In addition, the UIZE JavaScript Framework lets you animate the values of set-get properties for instances of <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclasses, calls to methods, and calls to arbitrary functions. So, beyond just visible style properties of a document, you can animate state of anything. And you're not even limited to time-based effects - you can even use the effects system to produce color gradients and other Non-time Based Fades.</p>
 		
 		<p><span class="allCaps">HOW'S THE PERFORMANCE?</span></p>
 		
@@ -622,7 +622,7 @@ Uize.Fade.fadeMethod (slider,function (value) {this.set ({value:value})},0,100,2
 		<a name="4_4"></a>
 		<h2 class="heading2" title="4. The Fade Factory -&gt; 4.4. Fading the value Set-Get Property"><span class="headingNumber"><a href="#4" title="4. The Fade Factory">4</a>.<a href="#4_4" title="4. The Fade Factory -&gt; 4.4. Fading the value Set-Get Property">4</a>. </span>Fading the value Set-Get Property</h2>
 		<div class="contents2">
-			<p>The <code>Uize.Fade.fade</code> static method that is implemented in the <code><a href="../reference/Uize.Fade.xFactory.html">Uize.Fade.xFactory</a></code> extension module supports special handling when the target of a fade is an instance of a <code><a href="../reference/Uize.html">Uize</a></code> subclass.</p>
+			<p>The <code>Uize.Fade.fade</code> static method that is implemented in the <code><a href="../reference/Uize.Fade.xFactory.html">Uize.Fade.xFactory</a></code> extension module supports special handling when the target of a fade is an instance of a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass.</p>
 			
 			<p>What does it mean to fade an instance? When an instance is specified in place of an update function when calling the <code>Uize.Fade.fade</code> method, this method fades the value of the specified instance's <code>value</code> set-get property. So, if the class of your instance implements a <code>value</code> set-get property, then you can use this convenient shorthand. Consider the following example...</p>
 			

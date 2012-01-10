@@ -12,7 +12,7 @@ Inheritance and Object Orientation
 
 	Once you have a subclass, you can modify it by assigning values on its =prototype= object, adding static methods or properties to the subclass, and registering set-get properties or overriding the initial values of inherited set-get properties. Each class that you create using the framework inherits the =subclass= static method, so you can easily make further subclasses of them.
 
-	The =Uize= base class provides a mechanism for inheriting instance methods and properties assigned on a superclass' prototype, set-get properties registered on the superclass using the =registerProperties= static method, and static methods and properties assigned on the superclass. The inheritance system that is implemented in the =Uize= base class overcomes some of the weaknesses of a superficial prototype-based approach to inheritance. As part of the foundation for developing =Uize= subclasses, the =Uize= base class also provides its subclasses with a set of useful static and instance utility methods and properties.
+	The =Uize.Class= base class provides a mechanism for inheriting instance methods and properties assigned on a superclass' prototype, set-get properties registered on the superclass using the =registerProperties= static method, and static methods and properties assigned on the superclass. The inheritance system that is implemented in the =Uize.Class= base class overcomes some of the weaknesses of a superficial prototype-based approach to inheritance. As part of the foundation for developing =Uize.Class= subclasses, the =Uize.Class= base class also provides its subclasses with a `state interface` and an `event infrastructure`.
 
 	For a more in-depth discussion on class inheritance, consult the explainer [[javascript-inheritance.html][JavaScript Inheritance]].
 
@@ -48,7 +48,7 @@ State Interface
 
 	EXAMPLE
 	...........................................................................................
-	var MyClass = Uize.subclass ();
+	var MyClass = Uize.Class.subclass ();
 
 	function _updateArea () {this.set ({area:this._width * this._height})}
 	function _preventNegatives (_value) {return _value > 0 ? _value : 0}
@@ -104,9 +104,9 @@ Event Infrastructure
 
 	In the above example, an instance of the =Uize.Widget= class is created, a handler is registered on an arbitrarily named event (='My Arbitrary Event'=), and then the =fire= instance method is called on the widget in order to fire that event. The event object contains an additional =message= property, whose value is alerted in the handler that was registered for the event.
 
-	The event system implemented by the UIZE JavaScript Framework is orthogonal to the event model of Web browsers that is provided as part of the standardized Document Object Model, and can be used outside of the context of Web browsers and other host environments for the JavaScript language that may implement their own proprietary event systems. As an example of this, the framework's event system can be utilized within Windows Script Host by scripts that use the =Uize= base class.
+	The event system implemented by the UIZE JavaScript Framework is orthogonal to the event model of Web browsers that is provided as part of the standardized Document Object Model, and can be used outside of the context of Web browsers and other host environments for the JavaScript language that may implement their own proprietary event systems. As an example of this, the framework's event system can be utilized within Windows Script Host by scripts that use the =Uize.Class= base class.
 
-	The =Uize= base class provides a convenient infrastructure for supporting both static and instance events. Events can conveniently be fired for a class or an instance of a class, and methods are provided to every class that subclasses the =Uize= class to allow code to manage the registering and unregistering of event handlers for static and instance events. This provides all =Uize= subclasses with a consistent event model.
+	The =Uize.Class= base class provides a convenient infrastructure for supporting both static and instance events. Events can conveniently be fired for a class or an instance of a class, and methods are provided to every class that subclasses the =Uize.Class= base class to allow code to manage the registering and unregistering of event handlers for static and instance events. This provides all =Uize.Class= subclasses with a consistent event model.
 
 	For a more in-depth discussion on events, consult the explainer [[javascript-event-system.html][JavaScript Event System]].
 

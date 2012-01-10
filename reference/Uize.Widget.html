@@ -33,7 +33,7 @@
 				<ul>
 					<li><a href="#1_1" title="The Uize.Widget class is primarily an abstract class, intended for the creation of widget subclasses.">1.1. An Abstract Class</a></li>
 					<li><a href="#1_2" title="The following example pages are good showcases for the Uize.Widget module...">1.2. Examples</a></li>
-					<li><a href="#1_3" title="The Uize.Widget module defines the Uize.Widget class, which is a subclass of Uize.">1.3. Implementation Info</a>
+					<li><a href="#1_3" title="The Uize.Widget module defines the Uize.Widget class, which is a subclass of Uize.Class.">1.3. Implementation Info</a>
 						<ul>
 							<li><a href="#1_3_1" title="The features listed in this section have been introduced in this module.">1.3.1. Features Introduced in This Module</a></li>
 							<li><a href="#1_3_2" title="The features listed in this section have been overridden in this module.">1.3.2. Features Overridden in This Module</a></li>
@@ -74,9 +74,9 @@
 						</ul>
 					</li>
 					<li><a href="#3_6" title="Lets you display or hide the specified implied node, using the display CSS style property.">3.6. displayNode</a></li>
-					<li><a href="#3_7" title="Inherited from Uize.">3.7. fire</a></li>
+					<li><a href="#3_7" title="Inherited from Uize.Class.">3.7. fire</a></li>
 					<li><a href="#3_8" title="Flushes the cached reference to the specified implied node, or all cached node references, from the widget instance&apos;s node cache.">3.8. flushNodeCache</a></li>
-					<li><a href="#3_9" title="Inherited from Uize.">3.9. get</a></li>
+					<li><a href="#3_9" title="Inherited from Uize.Class.">3.9. get</a></li>
 					<li><a href="#3_10" title="Returns the value for the specified set-get property, as inherited from the widget&apos;s parent chain.">3.10. getInherited</a></li>
 					<li><a href="#3_11" title="Returns a reference to the specified implied node of the widget, or an array of references to the specified blob of implied nodes.">3.11. getNode</a></li>
 					<li><a href="#3_12" title="Returns the value of the specified style property (or style properties) for the specified implied node.">3.12. getNodeStyle</a></li>
@@ -91,7 +91,7 @@
 					<li><a href="#3_17" title="Lets you inject the specified HTML markup into the specified implied node, using the specified injection mode.">3.17. injectNodeHtml</a></li>
 					<li><a href="#3_18" title="Calls either the wireUi or insertUi instance method, depending on the value of the built set-get property.">3.18. insertOrWireUi</a></li>
 					<li><a href="#3_19" title="Inserts the UI for an instance by calling the buildHtml instance method, and then wires the instance&apos;s UI by calling the wireUi method.">3.19. insertUi</a></li>
-					<li><a href="#3_20" title="Overrides the kill method of the Uize base class to call the kill method on all of an instance&apos;s child widgets.">3.20. kill</a></li>
+					<li><a href="#3_20" title="Overrides the kill method of the Uize.Class base class to call the kill method on all of an instance&apos;s child widgets.">3.20. kill</a></li>
 					<li><a href="#3_21" title="Returns a string value, representing the localized version of the specified resource string or function.">3.21. localize</a>
 						<ul>
 							<li><a href="#3_21_1" title="An important feature of the localize method is its ability to go up the parent chain of a widget to find the nearest parent widget that provides a value for the specified resource in its localized set-get property.">3.21.1. Providence</a></li>
@@ -101,7 +101,7 @@
 					<li><a href="#3_22" title="The removeChild instance method lets you remove a child widget from a widget.">3.22. removeChild</a></li>
 					<li><a href="#3_23" title="Removes the specified implied node (or nodes) from the DOM.">3.23. removeNode</a></li>
 					<li><a href="#3_24" title="Unwires the UI of the widget, removes the widget&apos;s Root Node from the DOM, and calls this method on all the widget&apos;s child widgets.">3.24. removeUi</a></li>
-					<li><a href="#3_25" title="Inherited from Uize.">3.25. set</a></li>
+					<li><a href="#3_25" title="Inherited from Uize.Class.">3.25. set</a></li>
 					<li><a href="#3_26" title="Allows you to set values for the specified set-get properties on the instance in the widget&apos;s parent chain from which the properties are inherited.">3.26. setInherited</a></li>
 					<li><a href="#3_27" title="Sets the clip style property of the specified implied node (or Node Blob) of the widget instance, using the supplied rectangle coordinates.">3.27. setNodeClipRect</a></li>
 					<li><a href="#3_28" title="Set the innerHTML property for the specified implied node (or Node Blob) to the specified HTML string.">3.28. setNodeInnerHtml</a></li>
@@ -110,8 +110,8 @@
 					<li><a href="#3_31" title="Sets values for an arbitrary set of style attributes for the specified implied node (or nodes).">3.31. setNodeStyle</a></li>
 					<li><a href="#3_32" title="Sets the value of the specified implied node (or Node Blob) of the widget instance.">3.32. setNodeValue</a></li>
 					<li><a href="#3_33" title="Lets you show or hide the specified implied node, using the visibility CSS style property.">3.33. showNode</a></li>
-					<li><a href="#3_34" title="Inherited from Uize.">3.34. toggle</a></li>
-					<li><a href="#3_35" title="Inherited from Uize.">3.35. unwire</a></li>
+					<li><a href="#3_34" title="Inherited from Uize.Class.">3.34. toggle</a></li>
+					<li><a href="#3_35" title="Inherited from Uize.Class.">3.35. unwire</a></li>
 					<li><a href="#3_36" title="Lets you unwire one or more event handlers for the specified implied node.">3.36. unwireNode</a></li>
 					<li><a href="#3_37" title="Lets you unwire one or more event handlers for the specified implied node, using a wiring match object.">3.37. unwireNodeEventsByMatch</a></li>
 					<li><a href="#3_38" title="Unwires all the events associated to the instance and all of its child widgets. After this method has been called, the wired set-get property will be set to false.">3.38. unwireUi</a></li>
@@ -120,7 +120,7 @@
 							<li><a href="#3_39_1" title="It is generally not necessary for the implementation of this method to invoke updates on child widgets, unless the child widgets are used to represent some aspects of the widget&apos;s state and may have become out of sync with that state. Typically, state of a widget that is reflected using its child widgets is set on those child widgets whenever that state changes using private update handlers tha...">3.39.1. Child Widgets</a></li>
 						</ul>
 					</li>
-					<li><a href="#3_40" title="Inherited from Uize.">3.40. wire</a></li>
+					<li><a href="#3_40" title="Inherited from Uize.Class.">3.40. wire</a></li>
 					<li><a href="#3_41" title="Wires the specified handler function to the specified event, or the specified handlers to the specified events, of the specified implied node (or Node Blob) of the widget instance.">3.41. wireNode</a></li>
 					<li><a href="#3_42" title="Wires the widget&apos;s UI.">3.42. wireUi</a></li>
 				</ul>
@@ -171,11 +171,11 @@
 			</li>
 			<li><a href="#6">6. Static Methods</a>
 				<ul>
-					<li><a href="#6_1" title="Inherited from Uize.">6.1. Uize.Widget.fire</a></li>
-					<li><a href="#6_2" title="Inherited from Uize.">6.2. Uize.Widget.get</a></li>
+					<li><a href="#6_1" title="Inherited from Uize.Class.">6.1. Uize.Widget.fire</a></li>
+					<li><a href="#6_2" title="Inherited from Uize.Class.">6.2. Uize.Widget.get</a></li>
 					<li><a href="#6_3" title="Returns a string, representing the relative path from the current document to the &quot;blank.gif&quot; image resource that is available to all Uize.Widget subclasses that may need it in generating HTML markup, or in building or manipulating DOM nodes.">6.3. Uize.Widget.getBlankImageUrl</a></li>
-					<li><a href="#6_4" title="Inherited from Uize.">6.4. Uize.Widget.registerProperties</a></li>
-					<li><a href="#6_5" title="Inherited from Uize.">6.5. Uize.Widget.set</a></li>
+					<li><a href="#6_4" title="Inherited from Uize.Class.">6.4. Uize.Widget.registerProperties</a></li>
+					<li><a href="#6_5" title="Inherited from Uize.Class.">6.5. Uize.Widget.set</a></li>
 					<li><a href="#6_6" title="Spawns a number of widgets using the specified set-get property values, attaches them as children to the specified parent widget, and returns the spawned widgets as an array.">6.6. Uize.Widget.spawn</a>
 						<ul>
 							<li><a href="#6_6_1" title="The Uize.Widget.spawn static method is inherited by subclasses of Uize.Widget and spawns instances of the class on which it is called, so it is not typically called on the Uize.Widget class but rather on a specific widget class.">6.6.1. Called on Subclasses</a></li>
@@ -185,10 +185,10 @@
 							<li><a href="#6_6_5" title="Let&apos;s look at an example of how the Uize.Widget.spawn static method can be used...">6.6.5. An Example</a></li>
 						</ul>
 					</li>
-					<li><a href="#6_7" title="Inherited from Uize.">6.7. Uize.Widget.subclass</a></li>
-					<li><a href="#6_8" title="Inherited from Uize.">6.8. Uize.Widget.toggle</a></li>
-					<li><a href="#6_9" title="Inherited from Uize.">6.9. Uize.Widget.unwire</a></li>
-					<li><a href="#6_10" title="Inherited from Uize.">6.10. Uize.Widget.wire</a></li>
+					<li><a href="#6_7" title="Inherited from Uize.Class.">6.7. Uize.Widget.subclass</a></li>
+					<li><a href="#6_8" title="Inherited from Uize.Class.">6.8. Uize.Widget.toggle</a></li>
+					<li><a href="#6_9" title="Inherited from Uize.Class.">6.9. Uize.Widget.unwire</a></li>
+					<li><a href="#6_10" title="Inherited from Uize.Class.">6.10. Uize.Widget.wire</a></li>
 				</ul>
 			</li>
 			<li><a href="#7">7. Static Properties</a>
@@ -240,11 +240,11 @@
 		<a name="1_3"></a>
 		<h2 class="heading2" title="1. Introduction -&gt; 1.3. Implementation Info"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_3" title="1. Introduction -&gt; 1.3. Implementation Info">3</a>. </span>Implementation Info</h2>
 		<div class="contents2">
-			<p>The <code>Uize.Widget</code> module defines the <code>Uize.Widget</code> class, which is a subclass of <code><a href="../reference/Uize.html">Uize</a></code>.</p>
+			<p>The <code>Uize.Widget</code> module defines the <code>Uize.Widget</code> class, which is a subclass of <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
 			<p><span class="allCaps">INHERITANCE CHAIN</span></p>
 			
-			<p><code><a href="../reference/Uize.html">Uize</a></code> -> <code>Uize.Widget</code></p>
+			<p><code><a href="../reference/Uize.Class.html">Uize.Class</a></code> -> <code>Uize.Widget</code></p>
 			
 			<a name="1_3_1"></a>
 			<h3 class="heading3" title="1. Introduction -&gt; 1.3. Implementation Info -&gt; 1.3.1. Features Introduced in This Module"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_3" title="1. Introduction -&gt; 1.3. Implementation Info">3</a>.<a href="#1_3_1" title="1. Introduction -&gt; 1.3. Implementation Info -&gt; 1.3.1. Features Introduced in This Module">1</a>. </span>Features Introduced in This Module</h3>
@@ -776,12 +776,12 @@ mySlideShow.children.next
 		<a name="3_7"></a>
 		<h2 class="heading2" title="3. Instance Methods -&gt; 3.7. fire"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_7" title="3. Instance Methods -&gt; 3.7. fire">7</a>. </span>fire</h2>
 		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
 			</table>
 		</div>
 		
@@ -814,12 +814,12 @@ mySlideShow.children.next
 		<a name="3_9"></a>
 		<h2 class="heading2" title="3. Instance Methods -&gt; 3.9. get"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_9" title="3. Instance Methods -&gt; 3.9. get">9</a>. </span>get</h2>
 		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
 			</table>
 		</div>
 		
@@ -1148,7 +1148,7 @@ mySlideShow.children.next
 		<a name="3_20"></a>
 		<h2 class="heading2" title="3. Instance Methods -&gt; 3.20. kill"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_20" title="3. Instance Methods -&gt; 3.20. kill">20</a>. </span>kill</h2>
 		<div class="contents2">
-			<p>Overrides the <code><a href="#3_20">kill</a></code> method of the <code><a href="../reference/Uize.html">Uize</a></code> base class to call the <code><a href="#3_20">kill</a></code> method on all of an instance's child widgets.</p>
+			<p>Overrides the <code><a href="#3_20">kill</a></code> method of the <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> base class to call the <code><a href="#3_20">kill</a></code> method on all of an instance's child widgets.</p>
 			
 			<p><span class="allCaps">SYNTAX</span></p>
 			
@@ -1159,7 +1159,7 @@ mySlideShow.children.next
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an override of an inherited feature (implementation is in this module, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an override of an inherited feature (implementation is in this module, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
 			</table>
 		</div>
 		
@@ -1358,12 +1358,12 @@ var localWelcome = myWidget.localize ('welcomeMessage',['Chris','California','US
 		<a name="3_25"></a>
 		<h2 class="heading2" title="3. Instance Methods -&gt; 3.25. set"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_25" title="3. Instance Methods -&gt; 3.25. set">25</a>. </span>set</h2>
 		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
 			</table>
 		</div>
 		
@@ -1457,7 +1457,7 @@ var localWelcome = myWidget.localize ('welcomeMessage',['Chris','California','US
 <pre class="sample-code">myWidget.setNodeOpacity (impliedNodeSTRorBLOB,opacityFLOATorOBJ);
 </pre>
 			
-			<p>The value of the <code>opacityFLOATorOBJ</code> parameter should be a number in the range of <code>0</code> to <code>1</code>, where <code>0</code> represents completely invisible, <code>1</code> represents completely opaque, and any fractional values inbetween represent varying degrees of transparency / opacity. Alternatively, if a <code><a href="../reference/Uize.html">Uize</a></code> subclass instance is specified, then a value will be obtained by invoking the instance's <code>valueOf Intrinsic Method</code>.</p>
+			<p>The value of the <code>opacityFLOATorOBJ</code> parameter should be a number in the range of <code>0</code> to <code>1</code>, where <code>0</code> represents completely invisible, <code>1</code> represents completely opaque, and any fractional values inbetween represent varying degrees of transparency / opacity. Alternatively, if an instance of a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass is specified, then a value will be obtained by invoking the instance's <code>valueOf Intrinsic Method</code>.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
@@ -1533,7 +1533,7 @@ var localWelcome = myWidget.localize ('welcomeMessage',['Chris','California','US
 );
 </pre>
 			
-			<p>When number type values are specified for CSS style properties, those values will be converted to strings by appending the "px" unit. When string type values are specified, the unit should already be present in the value. <code><a href="../reference/Uize.html">Uize</a></code> subclass instances can also be specified, and they will be converted to values by invoking their <code>valueOf Intrinsic Method</code>. For a more detailed discussion, consult the reference for the <code>Uize.Node.setStyle</code> static method.</p>
+			<p>When number type values are specified for CSS style properties, those values will be converted to strings by appending the "px" unit. When string type values are specified, the unit should already be present in the value. Instances of <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclasses can also be specified, and they will be converted to values by invoking their <code>valueOf Intrinsic Method</code>. For a more detailed discussion, consult the reference for the <code>Uize.Node.setStyle</code> static method.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
@@ -1566,7 +1566,7 @@ var localWelcome = myWidget.localize ('welcomeMessage',['Chris','California','US
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>you can use the <code><a href="#3_32">setNodeValue</a></code> instance method to set values on readonly form elements</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the corresponding <code><a href="#3_13">getNodeValue</a></code> instance method</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the <code>value</code> parameter can be an object that implements a <code>valueOf</code> interface (such as an instance of a <code><a href="../reference/Uize.html">Uize</a></code> subclass that implements the <code>value</code> set-get property)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the <code>value</code> parameter can be an object that implements a <code>valueOf</code> interface (such as an instance of a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass that implements the <code>value</code> set-get property)</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code>Uize.Node.setValue</code> static method</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -1613,24 +1613,24 @@ var localWelcome = myWidget.localize ('welcomeMessage',['Chris','California','US
 		<a name="3_34"></a>
 		<h2 class="heading2" title="3. Instance Methods -&gt; 3.34. toggle"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_34" title="3. Instance Methods -&gt; 3.34. toggle">34</a>. </span>toggle</h2>
 		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
 			</table>
 		</div>
 		
 		<a name="3_35"></a>
 		<h2 class="heading2" title="3. Instance Methods -&gt; 3.35. unwire"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_35" title="3. Instance Methods -&gt; 3.35. unwire">35</a>. </span>unwire</h2>
 		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
 			</table>
 		</div>
 		
@@ -1888,12 +1888,12 @@ myWidget.unwireNode (
 		<a name="3_40"></a>
 		<h2 class="heading2" title="3. Instance Methods -&gt; 3.40. wire"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_40" title="3. Instance Methods -&gt; 3.40. wire">40</a>. </span>wire</h2>
 		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
 			</table>
 		</div>
 		
@@ -2492,12 +2492,12 @@ var alsoTheRootNode = myWidget.getNode ('');
 		<a name="6_1"></a>
 		<h2 class="heading2" title="6. Static Methods -&gt; 6.1. Uize.Widget.fire"><span class="headingNumber"><a href="#6" title="6. Static Methods">6</a>.<a href="#6_1" title="6. Static Methods -&gt; 6.1. Uize.Widget.fire">1</a>. </span>Uize.Widget.fire</h2>
 		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
 			</table>
 		</div>
@@ -2505,12 +2505,12 @@ var alsoTheRootNode = myWidget.getNode ('');
 		<a name="6_2"></a>
 		<h2 class="heading2" title="6. Static Methods -&gt; 6.2. Uize.Widget.get"><span class="headingNumber"><a href="#6" title="6. Static Methods">6</a>.<a href="#6_2" title="6. Static Methods -&gt; 6.2. Uize.Widget.get">2</a>. </span>Uize.Widget.get</h2>
 		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
 			</table>
 		</div>
@@ -2537,12 +2537,12 @@ var alsoTheRootNode = myWidget.getNode ('');
 		<a name="6_4"></a>
 		<h2 class="heading2" title="6. Static Methods -&gt; 6.4. Uize.Widget.registerProperties"><span class="headingNumber"><a href="#6" title="6. Static Methods">6</a>.<a href="#6_4" title="6. Static Methods -&gt; 6.4. Uize.Widget.registerProperties">4</a>. </span>Uize.Widget.registerProperties</h2>
 		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
 			</table>
 		</div>
@@ -2550,12 +2550,12 @@ var alsoTheRootNode = myWidget.getNode ('');
 		<a name="6_5"></a>
 		<h2 class="heading2" title="6. Static Methods -&gt; 6.5. Uize.Widget.set"><span class="headingNumber"><a href="#6" title="6. Static Methods">6</a>.<a href="#6_5" title="6. Static Methods -&gt; 6.5. Uize.Widget.set">5</a>. </span>Uize.Widget.set</h2>
 		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
 			</table>
 		</div>
@@ -2650,12 +2650,12 @@ var alsoTheRootNode = myWidget.getNode ('');
 		<a name="6_7"></a>
 		<h2 class="heading2" title="6. Static Methods -&gt; 6.7. Uize.Widget.subclass"><span class="headingNumber"><a href="#6" title="6. Static Methods">6</a>.<a href="#6_7" title="6. Static Methods -&gt; 6.7. Uize.Widget.subclass">7</a>. </span>Uize.Widget.subclass</h2>
 		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
 			</table>
 		</div>
@@ -2663,12 +2663,12 @@ var alsoTheRootNode = myWidget.getNode ('');
 		<a name="6_8"></a>
 		<h2 class="heading2" title="6. Static Methods -&gt; 6.8. Uize.Widget.toggle"><span class="headingNumber"><a href="#6" title="6. Static Methods">6</a>.<a href="#6_8" title="6. Static Methods -&gt; 6.8. Uize.Widget.toggle">8</a>. </span>Uize.Widget.toggle</h2>
 		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
 			</table>
 		</div>
@@ -2676,12 +2676,12 @@ var alsoTheRootNode = myWidget.getNode ('');
 		<a name="6_9"></a>
 		<h2 class="heading2" title="6. Static Methods -&gt; 6.9. Uize.Widget.unwire"><span class="headingNumber"><a href="#6" title="6. Static Methods">6</a>.<a href="#6_9" title="6. Static Methods -&gt; 6.9. Uize.Widget.unwire">9</a>. </span>Uize.Widget.unwire</h2>
 		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
 			</table>
 		</div>
@@ -2689,12 +2689,12 @@ var alsoTheRootNode = myWidget.getNode ('');
 		<a name="6_10"></a>
 		<h2 class="heading2" title="6. Static Methods -&gt; 6.10. Uize.Widget.wire"><span class="headingNumber"><a href="#6" title="6. Static Methods">6</a>.<a href="#6_10" title="6. Static Methods -&gt; 6.10. Uize.Widget.wire">10</a>. </span>Uize.Widget.wire</h2>
 		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
 			</table>
 		</div>
@@ -2720,7 +2720,7 @@ var alsoTheRootNode = myWidget.getNode ('');
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an override of an inherited feature (implementation is in this module, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an override of an inherited feature (implementation is in this module, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
 			</table>
 		</div>
@@ -2731,7 +2731,7 @@ var alsoTheRootNode = myWidget.getNode ('');
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an override of an inherited feature (implementation is in this module, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an override of an inherited feature (implementation is in this module, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is <b>not</b> inherited by subclasses</td></tr>
 			</table>
 		</div>

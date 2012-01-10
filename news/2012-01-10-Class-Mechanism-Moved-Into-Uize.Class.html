@@ -1,0 +1,231 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2012-01-10 - Class Mechanism Moved Into Uize.Class | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="The class mechanism that was implemented in the Uize module has been moved out of that module and into the new Uize.Class module."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2012.html" class="breadcrumb breadcrumbWithArrow">2012 NEWS</a>
+	2012-01-10 - Class Mechanism Moved Into Uize.Class
+
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="While the chances are quite small, moving the class mechanism out of the Uize base module and into its own separate module has the potential of breaking certain custom modules you may have written.">1. IMPORTANT: THIS IS A BREAKING CHANGE</a></li>
+			<li><a href="#2" title="The decision to move the class mechanism into its own separete module is driven by a number of key rationales.">2. Rationales For This Change</a>
+				<ul>
+					<li><a href="#2_1" title="Moving the class mechanism out of the Uize base module makes it possible to get just the basic utility belt features without taking the class code along with it.">2.1. Get Just the Utility Belt Features</a></li>
+					<li><a href="#2_2" title="Moving the class mechanism out of the Uize base module that defines the namespace for the UIZE JavaScript Frameework makes it possible to load in package modules without the extra weight of the class code.">2.2. Use Other Packages With Less Weight</a></li>
+					<li><a href="#2_3" title="From a code development and maintenance perspective, moving the class mechanism into its own separate module will make it easier to manage and maintain this code going forward.">2.3. Easier to Manage Class Mechanism</a></li>
+				</ul>
+			</li>
+			<li><a href="#3" title="The class mechanism that was moved out of the Uize base module has been moved into the new Uize.Class module.">3. The new Uize.Class Module</a></li>
+			<li><a href="#4" title="Needless to say, this was a mighty big change that affected numerous modules, but even more so affected the many explainers and reference documents of the framework.">4. All Uize Code Updated</a>
+				<ul>
+					<li><a href="#4_1" title="Various modules that were previously sublassing off of Uize, or that otherwise depended on the class mechanism in the Uize module, have been updated to now use the new Uize.Class module.">4.1. Various Module Updated</a></li>
+				</ul>
+			</li>
+			<li><a href="#5" title="Updating your own code so that it is compatible with this breaking change should be relatively painless.">5. Updating Your Own Code</a>
+				<ul>
+					<li><a href="#5_1" title="There is a possibility that you may not have to do anything at all - this will depend on whether or not you&apos;ve created your own custom classes that subclass off of the old Uize base class.">5.1. Update Any Custom Classes That Subclassed Uize</a></li>
+					<li><a href="#5_2" title="If you&apos;ve created any JavaScript libraries to optimize the load time of your Web pages, you should update them to add an entry for the new Uize.Class module.">5.2. Add Uize.Class to Any Library Files</a></li>
+				</ul>
+			</li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<p>The class mechanism that was implemented in the <code><a href="../reference/Uize.html">Uize</a></code> module has been moved out of that module and into the new <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> module.</p>
+	
+	<a name="1"></a>
+	<h1 class="heading1" title="1. IMPORTANT: THIS IS A BREAKING CHANGE"><span class="headingNumber"><a href="#1" title="1. IMPORTANT: THIS IS A BREAKING CHANGE">1</a>. </span>IMPORTANT: THIS IS A BREAKING CHANGE</h1>
+	<div class="contents1">
+		<p>While the chances are quite small, moving the class mechanism out of the <code><a href="../reference/Uize.html">Uize</a></code> base module and into its own separate module has the potential of breaking certain custom modules you may have written.</p>
+		
+		<p>While every attempt is always made to make changes in the UIZE JavaScript framework be backwards compatible with existing custom code written on top of the framework, it is not always feasible to support backwards compatibility with a framework change. This is one of those rare occasions when it makes more sense to make a clean break than to put messy backwards compatibility provisions in place for a year while an old way of doing things is deprecated.</p>
+	</div>
+	
+	<a name="2"></a>
+	<h1 class="heading1" title="2. Rationales For This Change"><span class="headingNumber"><a href="#2" title="2. Rationales For This Change">2</a>. </span>Rationales For This Change</h1>
+	<div class="contents1">
+		<p>The decision to move the class mechanism into its own separete module is driven by a number of key rationales.</p>
+		
+		<a name="2_1"></a>
+		<h2 class="heading2" title="2. Rationales For This Change -&gt; 2.1. Get Just the Utility Belt Features"><span class="headingNumber"><a href="#2" title="2. Rationales For This Change">2</a>.<a href="#2_1" title="2. Rationales For This Change -&gt; 2.1. Get Just the Utility Belt Features">1</a>. </span>Get Just the Utility Belt Features</h2>
+		<div class="contents2">
+			<p>Moving the class mechanism out of the <code><a href="../reference/Uize.html">Uize</a></code> base module makes it possible to get just the basic utility belt features without taking the class code along with it.</p>
+			
+			<p>Some people just want a good suite of utility belt features to complement the features of JavaScript and/or other JavaScript frameworks or libraries they may be using. They may like the toolkit provided in the <code><a href="../reference/Uize.html">Uize</a></code> base module but not wish to buy into the whole framework in a given application they're working on. Now, developers can load in just the <code><a href="../reference/Uize.html">Uize</a></code> base module to get just the base toolkit.</p>
+		</div>
+		
+		<a name="2_2"></a>
+		<h2 class="heading2" title="2. Rationales For This Change -&gt; 2.2. Use Other Packages With Less Weight"><span class="headingNumber"><a href="#2" title="2. Rationales For This Change">2</a>.<a href="#2_2" title="2. Rationales For This Change -&gt; 2.2. Use Other Packages With Less Weight">2</a>. </span>Use Other Packages With Less Weight</h2>
+		<div class="contents2">
+			<p>Moving the class mechanism out of the <code><a href="../reference/Uize.html">Uize</a></code> base module that defines the namespace for the UIZE JavaScript Frameework makes it possible to load in package modules without the extra weight of the class code.</p>
+			
+			<p>Some people may wish to load in the various utility packages of the UIZE JavaScript Framework, like the data manipulation modules under the <code><a href="../reference/Uize.Data.html">Uize.Data</a></code> namespace, or the color manipulation modules under the <code><a href="../reference/Uize.Color.html">Uize.Color</a></code> namespace. In order to do so, they will at least need the <code><a href="../reference/Uize.html">Uize</a></code> namespace and module loader mechanism that is defined in the <code><a href="../reference/Uize.html">Uize</a></code> base module. With the class mechanism moved out of the <code><a href="../reference/Uize.html">Uize</a></code> base module, it is now possible to use just the packages of the UIZE JavaScript Framework without loading as much code as before.</p>
+		</div>
+		
+		<a name="2_3"></a>
+		<h2 class="heading2" title="2. Rationales For This Change -&gt; 2.3. Easier to Manage Class Mechanism"><span class="headingNumber"><a href="#2" title="2. Rationales For This Change">2</a>.<a href="#2_3" title="2. Rationales For This Change -&gt; 2.3. Easier to Manage Class Mechanism">3</a>. </span>Easier to Manage Class Mechanism</h2>
+		<div class="contents2">
+			<p>From a code development and maintenance perspective, moving the class mechanism into its own separate module will make it easier to manage and maintain this code going forward.</p>
+			
+			<p>Making improvements to the class mechanism will be easier with the code that implements it in a well defined module. Similarly, maintaining the unit tests for the class mechanism will be easier with those tests in their own corresponding separate unit test module. Continuing to bloat up the size of a monolithic <code><a href="../reference/Uize.html">Uize</a></code> module was simply not a scalable approach, and creating a separate module for the class mechanism is just good old fashioned code modularization common sense.</p>
+		</div>
+	</div>
+	
+	<a name="3"></a>
+	<h1 class="heading1" title="3. The new Uize.Class Module"><span class="headingNumber"><a href="#3" title="3. The new Uize.Class Module">3</a>. </span>The new Uize.Class Module</h1>
+	<div class="contents1">
+		<p>The class mechanism that was moved out of the <code><a href="../reference/Uize.html">Uize</a></code> base module has been moved into the new <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> module.</p>
+		
+		<p>None of the class functionality has changed - it has just been migrated. Classes should now be created by subclassing the <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> base class. Consider the following example...</p>
+		
+		<p><span class="allCaps">EXAMPLE</span></p>
+		
+		
+<pre class="sample-code">MyClass = Uize.Class.subclass ();
+</pre>
+		
+		<p>All classes created by subclassing the <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> module will still get the benefits of a built-in events mechanism, properties mechanism, and inheritance mechanism. The various features of the <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> module are tested in the <code><a href="../reference/Uize.Test.Uize.Class.html">Uize.Test.Uize.Class</a></code> test module.</p>
+	</div>
+	
+	<a name="4"></a>
+	<h1 class="heading1" title="4. All Uize Code Updated"><span class="headingNumber"><a href="#4" title="4. All Uize Code Updated">4</a>. </span>All Uize Code Updated</h1>
+	<div class="contents1">
+		<p>Needless to say, this was a mighty big change that affected numerous modules, but even more so affected the many explainers and reference documents of the framework.</p>
+		
+		<p>Thankfully, the entire codebase and all documentation has been updated to reflect the change, and before long we will forget that there ever was such a thing as the "Uize base class", and we will only think of the new <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> module when we think of a base class for inheritance for the UIZE JavaScript Framework.</p>
+		
+		<a name="4_1"></a>
+		<h2 class="heading2" title="4. All Uize Code Updated -&gt; 4.1. Various Module Updated"><span class="headingNumber"><a href="#4" title="4. All Uize Code Updated">4</a>.<a href="#4_1" title="4. All Uize Code Updated -&gt; 4.1. Various Module Updated">1</a>. </span>Various Module Updated</h2>
+		<div class="contents2">
+			<p>Various modules that were previously sublassing off of <code><a href="../reference/Uize.html">Uize</a></code>, or that otherwise depended on the class mechanism in the <code><a href="../reference/Uize.html">Uize</a></code> module, have been updated to now use the new <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> module.</p>
+			
+			<p>The list of updated modules includes...</p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="../reference/Uize.Comm.html">Uize.Comm</a></code></td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code></td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="../reference/Uize.Node.html">Uize.Node</a></code></td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="../reference/Uize.Test.html">Uize.Test</a></code></td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="../reference/Uize.Util.Coupler.html">Uize.Util.Coupler</a></code></td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="../reference/Uize.Util.Cycle.html">Uize.Util.Cycle</a></code></td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="../reference/Uize.Util.PropertyAdapter.html">Uize.Util.PropertyAdapter</a></code></td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code></td></tr>
+			</table>
+		</div>
+	</div>
+	
+	<a name="5"></a>
+	<h1 class="heading1" title="5. Updating Your Own Code"><span class="headingNumber"><a href="#5" title="5. Updating Your Own Code">5</a>. </span>Updating Your Own Code</h1>
+	<div class="contents1">
+		<p>Updating your own code so that it is compatible with this breaking change should be relatively painless.</p>
+		
+		<a name="5_1"></a>
+		<h2 class="heading2" title="5. Updating Your Own Code -&gt; 5.1. Update Any Custom Classes That Subclassed Uize"><span class="headingNumber"><a href="#5" title="5. Updating Your Own Code">5</a>.<a href="#5_1" title="5. Updating Your Own Code -&gt; 5.1. Update Any Custom Classes That Subclassed Uize">1</a>. </span>Update Any Custom Classes That Subclassed Uize</h2>
+		<div class="contents2">
+			<p>There is a possibility that you may not have to do anything at all - this will depend on whether or not you've created your own custom classes that subclass off of the old <code><a href="../reference/Uize.html">Uize</a></code> base class.</p>
+			
+			<p>If you're not sure, search your codebase for the text "superclass:'Uize'" - use a well crafted regular expression, as needed, to make sure you catch all cases with whitespace and/or quotes variations. If you find any classes that derive directly from the old <code><a href="../reference/Uize.html">Uize</a></code> class, update that code to now subclass the new <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> base class - modify the <code>superclass</code> specifier in the module declaration to now specify <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> as the superclass for such modules.</p>
+			
+			<p><span class="allCaps">THE OLD WAY...</span></p>
+			
+			
+<pre class="sample-code">Uize.module ({
+  superclass:'Uize',
+  builder:function (_superclass) {
+    var _class = _superclass.subclass ();
+    // ...
+    return _class;
+  }
+});
+</pre>
+			
+			<p><span class="allCaps">THE NEW WAY...</span></p>
+			
+			
+<pre class="sample-code">Uize.module ({
+  superclass:'Uize.Class',
+  builder:function (_superclass) {
+    var _class = _superclass.subclass ();
+    // ...
+    return _class;
+  }
+});
+</pre>
+			
+			<p>Your modules may not look exactly as shown above, but it should be clear once you inspect them. This should be a one line change to a small number - if any - of your custom modules.</p>
+		</div>
+		
+		<a name="5_2"></a>
+		<h2 class="heading2" title="5. Updating Your Own Code -&gt; 5.2. Add Uize.Class to Any Library Files"><span class="headingNumber"><a href="#5" title="5. Updating Your Own Code">5</a>.<a href="#5_2" title="5. Updating Your Own Code -&gt; 5.2. Add Uize.Class to Any Library Files">2</a>. </span>Add Uize.Class to Any Library Files</h2>
+		<div class="contents2">
+			<p>If you've created any <a href="../explainers/javascript-libraries.html">JavaScript libraries</a> to optimize the load time of your Web pages, you should update them to add an entry for the new <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> module.</p>
+			
+			<p>For any <a href="../explainers/javascript-libraries.html">JavaScript library</a> (<code>.library.js</code>) files that you may have created, chances are that they will be loading in some module - like the <code><a href="../reference/Uize.Node.html">Uize.Node</a></code> module - that requires the <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> module. To ensure that the load performance for your production ready pages isn't tripped up by a separate HTTP request for the <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> module, add an entry in your library files, right before the first module that depends on the <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> module (typically, this will be the <code><a href="../reference/Uize.Node.html">Uize.Node</a></code> module).</p>
+			
+			<p><span class="allCaps">THE OLD WAY</span></p>
+			
+			
+<pre class="sample-code">/* Library Contents
+  Uize.Node
+  Uize.Widget
+  Uize.Widget.Page
+*/
+
+Uize.module ({name:'Uize.Widget.Page.library'});
+</pre>
+			
+			<p><span class="allCaps">THE NEW WAY</span></p>
+			
+			
+<pre class="sample-code">/* Library Contents
+  Uize.Class
+  Uize.Node
+  Uize.Widget
+  Uize.Widget.Page
+*/
+
+Uize.module ({name:'Uize.Widget.Page.library'});
+</pre>
+		</div>
+	</div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = UizeDotCom.Page.Doc ()).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

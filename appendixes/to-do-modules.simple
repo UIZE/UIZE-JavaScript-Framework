@@ -1,6 +1,47 @@
 This document lists to do tasks related to specific JavaScript modules of the UIZE JavaScript Framework.
 
 Uize
+	Uize.now
+		Returns the current time in milliseconds since 1970 (POSIX time).
+
+		SYNTAX
+		.....................
+		nowINT = Uize.now ();
+		.....................
+
+		IMPLEMENTATION
+		............................................................................................
+		_package.now = Data.now ? function () {return Date.now ()} : function () {return +new Date};
+		............................................................................................
+
+	Uize.canExtend
+		Returns a boolean, indicating whether or not the specified value can be extended with custom properties.
+
+		SYNTAX
+		..............................................
+		canExtendBOOL = Uize.canExtend (valueANYTYPE);
+		..............................................
+
+		A value is considered extendable if it is of type "function", or of type "object" and non-null. Function instances can be extended with custom propeerties, and non-null objects can also be extended with custom properties because this encompasses plain objects, instances of custom object classes, and list objects like instances of JavaScript's built-in =Array= object. Values that are not considered extendable are nully values like =null= and =undefined=, and values for JavaScript primitives, like string values, number values, and boolean values.
+
+		EXAMPLES
+		......................................................
+		Uize.canExtend ({foo:'bar'});         // returns true
+		Uize.canExtend (['foo','bar']);       // returns true
+		Uize.canExtend (function () {});      // returns true
+		Uize.canExtend (new String ('foo'));  // returns true
+		Uize.canExtend (new Boolean (true));  // returns true
+		Uize.canExtend (new Number (42));     // returns true
+		Uize.canExtend (Uize.Widget);         // returns true
+		Uize.canExtend (Uize.Widget ());      // returns true
+
+		Uize.canExtend ('foo');               // returns false
+		Uize.canExtend (true);                // returns false
+		Uize.canExtend (42);                  // returns false
+		Uize.canExtend (null);                // returns false
+		Uize.canExtend (undefined);           // returns false
+		......................................................
+
 	Uize.safe
 		Wraps a function in order to protect it from possible JavaScript errors during its execution.
 
@@ -46,17 +87,11 @@ Uize
 		- iterates without using recursion, to minimize function calls used for walking the tree
 
 	Quick Win Additions (in order of priority / usefulness)
-		DONE
-			Uize.map
-				- promoted from Uize.Data.map, but with modified signature to make array first
-
 		STILL TO DO
 			Uize.indexOf, Uize.lastIndexOf
 				- essentially derived from indexIn, but adapted to also operate on strings and to use built-in indexOf when possible and supported by JavaScript built-in objects (ie. newer versions of JavaScript)
 
 			Uize.indexIn
-				- adapt to add support for object (ie. which key has specified value)
-				- adapt to fall back to using built-in indexOf or lastIndexOf Array method, when they are present and when comparison is strict
 				- adapt to add support for source being a string
 
 			Uize.require
@@ -66,11 +101,7 @@ Uize
 			Uize.extend
 				- alias of copyInto, for those who are more comfortable with the extend semantic
 
-			Uize.isArrayLike
-				- different name, like isListy or isIterable?
-				- checks to see if value is object and has length property, to ensure object can have any Array method called or applied on it (most native implementations only require a basic / minimal Array like interface to work)
-
-				Uize.ensureArray
+			Uize.ensureArray
 				- ensures that the value is an array
 				- if the value is already an array, then it is simply returned
 				- if the value is an arguments object, then an array is created from it
@@ -91,157 +122,6 @@ Uize
 			Uize.isFalsy
 				- returns true is the value is falsy
 				- useful for methods that accept value matchers
-
-	Conditions
-		The whenever Instance Method
-			EXAMPLES
-			...............................................
-			myWidget.whenever (
-				function (theme) {return theme == 'bottle'},
-				function () {
-					// do stuff whenever condition is met
-				}
-			);
-
-			myWidget.whenever (
-				'theme == "bottle"',
-				function () {
-					// do stuff whenever condition is met
-				}
-			);
-			...............................................
-
-		The once Instance Method
-			EXAMPLE
-			..........................................................
-			myWidget.once (
-				'totalSelected  > 5',
-				function () {
-					// do stuff once condition is met for the first time
-				}
-			);
-			..........................................................
-
-	Properties Expressions
-		SYNTAX
-		......................................................................
-		propertiesExpressionFUNC = Uize.propertiesExpression (expressionFUNC);
-		......................................................................
-
-		INSTEAD OF...
-		.......................................................
-		function (object) {
-			return object.get ('width') * object.get ('height');
-		}
-		.......................................................
-
-		USE...
-		...................................................
-		Uize.propertiesExpression (
-			function (width,height) {return width * height};
-		}
-		...................................................
-
-	Derived Properties
-		A derived property is a special type of set-get property whose value is derived from the values of other set-get properties of the same instance.
-
-		EXAMPLE
-		...........................................................................................................
-		_class.registerProperties ({
-			_allSelected:{
-				name:'allSelected',
-				derived:function (totalSelected,totalItems) {return totalSelected > 0 && totalSelected == totalItems}
-			},
-			_oneSelected:{
-				name:'oneSelected',
-				derived:function (totalSelected) {return totalSelected == 1}
-			},
-			_someSelected:{
-				name:'someSelected',
-				derived:function (totalSelected) {return totalSelected > 0}
-			},
-			_totalSelected:{
-				name:'totalSelected',
-				value:0
-			},
-			_totalItems:{
-				name:'totalItems',
-				value:0
-			}
-		});
-		...........................................................................................................
-
-		In the above example, the =allSelected=, =oneSelected=, and =someSelected= set-get properties are all derived properties. A set-get property is indicated as being a derived property by the presence of the =derived= property in the property profile. The =derived= property serves both to indicate that a set-get property is derived, as well to provide the deriver function that indicates from which other set-get properties the derived property is derived and how to calculate the derived value.
-
-		Implementation Questions
-			How Are Derived Properties Inherited
-				Currently, profiles for set-get properties are inherited through cloning of the definition objects.
-
-				If dynamically generated summary information is needed to improve the performance of derived properties, when will this summary information be generated for a class? And how is the information regenerated if it is invalidated by the subsequent registration of more derived properties.
-
-		Implementation Approaches
-			Exloding Out the Properties Being Set
-				With this approach, setting values for derived set-get properties is worked into the process of setting values for properties that affect derived properties, by exploding out the properties being set to included all affected derived properties.
-
-				After setting values for the set-get properties that are being set explicitly, and before executing onChange handlers for any set-get properties whose values have changed, the registered set-get properties are scanned for derived set-get properties that may be affected by the properties being set explicitly. If any derived set-get properties *are* affected by any of the set-get properties whose values have changed, then values are computed for those derived properties and their values are set. This process is repeated to address set- get properties that are derived from derived properties whose values may have changed. The process is repeated until there are no longer any derived properties that are affected and that have not had new values computed.
-
-				Advantages
-					document...
-
-				Disadvantages
-					document...
-
-			Single Level Derived Property Batching
-				With this approach, values for all directly affected derived set-get properties are set in a batch set that occurs before =onChange= handlers are executed for the set-get properties being explicitly set.
-
-			Using onChange Handler Merchanism
-				With this approach, when a derived set-get property is registed, an onChange handler is registered with any property from which the derived property is derived.
-
-				Advantages
-					- uses the existing optimization built into the =onChange= handlers mechanism
-					- matches the way values for derived set-get properties are currently being updated
-
-				Disadvantages
-					- involves a separate set for each derived set-get property whose value changes
-					- requires management of =onChange= handlers and dealing with situations where set-get properties are re-registered
-
-				Issues to Deal With
-					Re-registering a Non-derived Set-get Property
-						How does one deal with re-registering a set-get property that affects a derived set-get property?
-
-						Currently, everything gets blown away when re-registering a set-get property. This means that the =onChange= handler that was added to the set-get property at the time of registering the set-get property that is derived from it will get blown away, and the relationship of the derived property to the property from which it is derived will get blown away.
-
-					Re-registering a Derived Set-get Property
-						How does one deal with re-registering a derived set-get property, where the new profile for the derived property defines a different relationship properties from which it is derived?
-
-	Property Bindings
-		Provide a way in the =Uize= base class to bind two set-get properties together, in order to keep their values synchronized.
-
-		This would provide a more concise and lightweight way of binding properties than using an instance of the =Uize.Util.PropertyAdapter= class.
-
-		INSTEAD OF...
-		................................................................................
-		Uize.Util.PropertyAdapter ({propertyA:[this,'prop'],propertyB:[slider,'prop']});
-		................................................................................
-
-		USE...
-		............................................
-		_this.bindProperty ('prop',[slider,'prop']);
-		............................................
-
-		BENEFITS
-		- The =bindProperty= instance method would be a core capability of the =Uize= base class, and all classes would get to benefit from this.
-		- The =bindProperty= instance method should require a little less code to implement than the =Uize.Util.PropertyAdapter= class.
-
-		NOTES
-		- The =bindProperty= instance method would support an optional value adapter, just like the =Uize.Util.PropertyAdapter= class.
-		- The =bindProperty= instance method would return an array of all the wirings created, so that they could be unwired later.
-		- The =bindProperty= instance method should ideally be implemented by factoring some code out of the =Uize.Util.PropertyAdapter= class, and then the =Uize.Util.PropertyAdapter= class could be reduced in size and made to leverage the =bindProperty= implementation in the =Uize= base class.
-
-	Copy Ability for Set-get Properties
-		Copy ability, for initial values of set-get properties that are arrays or objects.
-
-		Have a property that can be specified in a set-get property's profile, which can be used to cause properties whose initial values are object types to be initialized by cloning the initial value rather than simply setting a reference to a shared object.
 
 	Uize.willCall
 		Lets you conveniently create a function / method caller, where you can specify context, function, and arguments.
@@ -465,96 +345,14 @@ Uize
 		Library of Dispersed Modules
 			Can library modules that are outside the modules directory require modules that are outside the modules directory?
 
-	Handle Simple Type in Place of Constructor Properties
-		Variation on constructor, where specifying a non-object for the properties has the effect of setting the value property.
-
-		For example, if =Uize.Color= were to become a subclass of =Uize=...
-
-		EXAMPLE
-		............................................
-		Uize.Color ({value:'#ffffff'});  // old form
-		Uize.Color ('#ffffff');          // new form
-		............................................
-
-		Or, in the case of an existing widget class that supports the value interface...
-
-		EXAMPLE
-		.................................................
-		Uize.Widget.Bar.Slider ({value:50});  // old form
-		Uize.Widget.Bar.Slider (50);          // old form
-		.................................................
-
 	Uize.clone
-		Optimize Array Cloning
-			Optimize cloning of arrays using a number of techniques...
-
-			- minimize for...in iteration by first removing elements from array being cloned using splice
-			- with spliced elements, do a push onto fresh array
-			- iterate through elements of fresh array, replacing values with cloned values if they are objects
-			- do for...in iteration over source array to clone custom properties into fresh array
-			- restore spliced elements to source array
-
-		Uize.clone and Recursion
-			Handle recursion in Uize.clone (how to generate properties that are references to other parts of structure in same relationship as the equivalent property in the cloning source???)
-
-	Improvements to Property Mechanism
-		New Profile Features
-			type
-				Basic types...
-
-				- string (coerce with value + '', implicit initial value is '')
-				- boolean (coerce with !!value, implicit initial value is false)
-				- number (coerce with +value, implicit initial value is 0)
-				- date (coerce with new Date (value), implicit initial value is now)
-
-				Extended types (ideas for other useful types)...
-
-				- switch (valid string values for true value, implicit initial value is false)
-				- integer (coerce with Math.round (value))
-
-			validator
-				Different types of validators...
-
-				- function that can return true or false
-				- regular expression
-				- array of valid values
-
-		- support for read-only properties (how would that work, exactly? Only settable through private name?)
-
-		- problem: there's currently no way to use the set method to set the value for a set-get property to undefined. This is lame. The original reason for this had to do with the optimizing performance for the very first set during construction. This behavior is beneficial for set-get properties that have no initial value (what percentage of the overall is that?).
+		Uize.clone and Circular References
+			Handle circular references in =Uize.clone= (how to generate properties that are references to other parts of structure in same relationship as the equivalent property in the cloning source???)
 
 	Uize.substituteInto
 		- optimize for successive substitution on the same source using the same form of map (but different values, of course)
 
-	constructed Property
-		- to indicate that the instance has been constructed
-		- can be used by onChange handlers for set-get properties to conditionalize actions
-		- particularly compelling to widgets, since being completely constructed is a good indicator child widgets added during construction exist and can be accessed
-		- some classes (maybe Zazzle.* or Uize.*) are already doing this with their own private properties
-
-	- idea: originator of a property set knows that the property is being set, so doesn't want to be informed of a change in the value? A way to provide an ID for the originator of a set? The basic ongoing problem is when multiple sources want to be able to change and also be informed of changes in a particular property. How does one make this more efficient and eliminate multiple redundant execution triggered by events?
-
 	- idea: a way to track whether a user originated an event. Sufficient to check on the presence of domEvent property? domEvent property should be propagated all the way up.
-
-	Improve Calling of Superclass Methods
-		Come up with a new and more concise semantics for calling methods on superclass.
-
-		POSSIBILITIES
-		................................................................................
-		_this.doIn (_superclass,'wireUi');
-
-		_class.doSuper (_this,'wireUi');
-		_class.useSuper (_this,'wireUi');
-		_class.callSuper (_this,'wireUi');
-
-		_superclass.on (_this,'wireUi');
-		_superclass.my (_this,'wireUi');
-		_superclass.doOn (_this,'wireUi');
-		_superclass.doMy (_this,'wireUi');
-		_superclass.useMy (_this,'wireUi');
-		_superclass.proto (_this,'wireUi');
-		_superclass.useMine (_this,'wireUi');
-		................................................................................
 
 Uize.Array
 	Uize.Array.Matching
@@ -712,6 +510,231 @@ Uize.Array
 		Uize.Array.Util.last
 			- returns the specified number of elements at the tail of the specified source array
 			- when no length parameter is specified, returns the last element of the array
+
+Uize.Class
+	Conditions
+		The whenever Instance Method
+			EXAMPLES
+			...............................................
+			myWidget.whenever (
+				function (theme) {return theme == 'bottle'},
+				function () {
+					// do stuff whenever condition is met
+				}
+			);
+
+			myWidget.whenever (
+				'theme == "bottle"',
+				function () {
+					// do stuff whenever condition is met
+				}
+			);
+			...............................................
+
+		The once Instance Method
+			EXAMPLE
+			..........................................................
+			myWidget.once (
+				'totalSelected  > 5',
+				function () {
+					// do stuff once condition is met for the first time
+				}
+			);
+			..........................................................
+
+	Properties Expressions
+		SYNTAX
+		......................................................................
+		propertiesExpressionFUNC = Uize.propertiesExpression (expressionFUNC);
+		......................................................................
+
+		INSTEAD OF...
+		.......................................................
+		function (object) {
+			return object.get ('width') * object.get ('height');
+		}
+		.......................................................
+
+		USE...
+		...................................................
+		Uize.propertiesExpression (
+			function (width,height) {return width * height};
+		}
+		...................................................
+
+	Derived Properties
+		A derived property is a special type of set-get property whose value is derived from the values of other set-get properties of the same instance.
+
+		EXAMPLE
+		...........................................................................................................
+		_class.registerProperties ({
+			_allSelected:{
+				name:'allSelected',
+				derived:function (totalSelected,totalItems) {return totalSelected > 0 && totalSelected == totalItems}
+			},
+			_oneSelected:{
+				name:'oneSelected',
+				derived:function (totalSelected) {return totalSelected == 1}
+			},
+			_someSelected:{
+				name:'someSelected',
+				derived:function (totalSelected) {return totalSelected > 0}
+			},
+			_totalSelected:{
+				name:'totalSelected',
+				value:0
+			},
+			_totalItems:{
+				name:'totalItems',
+				value:0
+			}
+		});
+		...........................................................................................................
+
+		In the above example, the =allSelected=, =oneSelected=, and =someSelected= set-get properties are all derived properties. A set-get property is indicated as being a derived property by the presence of the =derived= property in the property profile. The =derived= property serves both to indicate that a set-get property is derived, as well to provide the deriver function that indicates from which other set-get properties the derived property is derived and how to calculate the derived value.
+
+		Implementation Questions
+			How Are Derived Properties Inherited
+				Currently, profiles for set-get properties are inherited through cloning of the definition objects.
+
+				If dynamically generated summary information is needed to improve the performance of derived properties, when will this summary information be generated for a class? And how is the information regenerated if it is invalidated by the subsequent registration of more derived properties.
+
+		Implementation Approaches
+			Exloding Out the Properties Being Set
+				With this approach, setting values for derived set-get properties is worked into the process of setting values for properties that affect derived properties, by exploding out the properties being set to included all affected derived properties.
+
+				After setting values for the set-get properties that are being set explicitly, and before executing onChange handlers for any set-get properties whose values have changed, the registered set-get properties are scanned for derived set-get properties that may be affected by the properties being set explicitly. If any derived set-get properties *are* affected by any of the set-get properties whose values have changed, then values are computed for those derived properties and their values are set. This process is repeated to address set- get properties that are derived from derived properties whose values may have changed. The process is repeated until there are no longer any derived properties that are affected and that have not had new values computed.
+
+				Advantages
+					document...
+
+				Disadvantages
+					document...
+
+			Single Level Derived Property Batching
+				With this approach, values for all directly affected derived set-get properties are set in a batch set that occurs before =onChange= handlers are executed for the set-get properties being explicitly set.
+
+			Using onChange Handler Merchanism
+				With this approach, when a derived set-get property is registed, an onChange handler is registered with any property from which the derived property is derived.
+
+				Advantages
+					- uses the existing optimization built into the =onChange= handlers mechanism
+					- matches the way values for derived set-get properties are currently being updated
+
+				Disadvantages
+					- involves a separate set for each derived set-get property whose value changes
+					- requires management of =onChange= handlers and dealing with situations where set-get properties are re-registered
+
+				Issues to Deal With
+					Re-registering a Non-derived Set-get Property
+						How does one deal with re-registering a set-get property that affects a derived set-get property?
+
+						Currently, everything gets blown away when re-registering a set-get property. This means that the =onChange= handler that was added to the set-get property at the time of registering the set-get property that is derived from it will get blown away, and the relationship of the derived property to the property from which it is derived will get blown away.
+
+					Re-registering a Derived Set-get Property
+						How does one deal with re-registering a derived set-get property, where the new profile for the derived property defines a different relationship properties from which it is derived?
+
+	Property Bindings
+		Provide a way in the =Uize.Class= base class to bind two set-get properties together, in order to keep their values synchronized.
+
+		This would provide a more concise and lightweight way of binding properties than using an instance of the =Uize.Util.PropertyAdapter= class.
+
+		INSTEAD OF...
+		................................................................................
+		Uize.Util.PropertyAdapter ({propertyA:[this,'prop'],propertyB:[slider,'prop']});
+		................................................................................
+
+		USE...
+		............................................
+		_this.bindProperty ('prop',[slider,'prop']);
+		............................................
+
+		BENEFITS
+		- The =bindProperty= instance method would be a core capability of the =Uize.Class= base class, and all classes would get to benefit from this.
+		- The =bindProperty= instance method should require a little less code to implement than the =Uize.Util.PropertyAdapter= class.
+
+		NOTES
+		- The =bindProperty= instance method would support an optional value adapter, just like the =Uize.Util.PropertyAdapter= class.
+		- The =bindProperty= instance method would return an array of all the wirings created, so that they could be unwired later.
+		- The =bindProperty= instance method should ideally be implemented by factoring some code out of the =Uize.Util.PropertyAdapter= class, and then the =Uize.Util.PropertyAdapter= class could be reduced in size and made to leverage the =bindProperty= implementation in the =Uize.Class= base class.
+
+	Copy Ability for Set-get Properties
+		Copy ability, for initial values of set-get properties that are arrays or objects.
+
+		Have a property that can be specified in a set-get property's profile, which can be used to cause properties whose initial values are object types to be initialized by cloning the initial value rather than simply setting a reference to a shared object.
+
+	Handle Simple Type in Place of Constructor Properties
+		Variation on constructor, where specifying a non-object for the properties has the effect of setting the value property.
+
+		For example, if =Uize.Color= were to become a subclass of =Uize.Class=...
+
+		EXAMPLE
+		............................................
+		Uize.Color ({value:'#ffffff'});  // old form
+		Uize.Color ('#ffffff');          // new form
+		............................................
+
+		Or, in the case of an existing widget class that supports the value interface...
+
+		EXAMPLE
+		.................................................
+		Uize.Widget.Bar.Slider ({value:50});  // old form
+		Uize.Widget.Bar.Slider (50);          // old form
+		.................................................
+
+	Improvements to Property Mechanism
+		New Profile Features
+			type
+				Basic types...
+
+				- string (coerce with value + '', implicit initial value is '')
+				- boolean (coerce with !!value, implicit initial value is false)
+				- number (coerce with +value, implicit initial value is 0)
+				- date (coerce with new Date (value), implicit initial value is now)
+
+				Extended types (ideas for other useful types)...
+
+				- switch (valid string values for true value, implicit initial value is false)
+				- integer (coerce with Math.round (value))
+
+			validator
+				Different types of validators...
+
+				- function that can return true or false
+				- regular expression
+				- array of valid values
+
+		- support for read-only properties (how would that work, exactly? Only settable through private name?)
+
+		- problem: there's currently no way to use the set method to set the value for a set-get property to undefined. This is lame. The original reason for this had to do with the optimizing performance for the very first set during construction. This behavior is beneficial for set-get properties that have no initial value (what percentage of the overall is that?).
+
+	constructed Property
+		- to indicate that the instance has been constructed
+		- can be used by onChange handlers for set-get properties to conditionalize actions
+		- particularly compelling to widgets, since being completely constructed is a good indicator child widgets added during construction exist and can be accessed
+		- some classes (maybe Zazzle.* or Uize.*) are already doing this with their own private properties
+
+	- idea: originator of a property set knows that the property is being set, so doesn't want to be informed of a change in the value? A way to provide an ID for the originator of a set? The basic ongoing problem is when multiple sources want to be able to change and also be informed of changes in a particular property. How does one make this more efficient and eliminate multiple redundant execution triggered by events?
+
+	Improve Calling of Superclass Methods
+		Come up with a new and more concise semantics for calling methods on superclass.
+
+		POSSIBILITIES
+		................................................................................
+		_this.doIn (_superclass,'wireUi');
+
+		_class.doSuper (_this,'wireUi');
+		_class.useSuper (_this,'wireUi');
+		_class.callSuper (_this,'wireUi');
+
+		_superclass.on (_this,'wireUi');
+		_superclass.my (_this,'wireUi');
+		_superclass.doOn (_this,'wireUi');
+		_superclass.doMy (_this,'wireUi');
+		_superclass.useMy (_this,'wireUi');
+		_superclass.proto (_this,'wireUi');
+		_superclass.useMine (_this,'wireUi');
+		................................................................................
 
 Uize.Color
 	- support for % unit in "RGB string" decoder (eg. rgb(100%,50%,25%))
@@ -1058,9 +1081,6 @@ Uize.Data
 		_source = _sourceAndTarget._source;
 		_target = _sourceAndTarget._target;
 		................................................................................
-
-	Uize.Data.structuresMatch
-		returns true if two objects have the same set of properties and structure
 
 	Uize.Data.filter
 		- support for new filter types

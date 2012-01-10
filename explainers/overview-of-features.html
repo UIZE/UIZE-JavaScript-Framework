@@ -77,7 +77,7 @@
 		
 		<p>Once you have a subclass, you can modify it by assigning values on its <code>prototype</code> object, adding static methods or properties to the subclass, and registering set-get properties or overriding the initial values of inherited set-get properties. Each class that you create using the framework inherits the <code>subclass</code> static method, so you can easily make further subclasses of them.</p>
 		
-		<p>The <code><a href="../reference/Uize.html">Uize</a></code> base class provides a mechanism for inheriting instance methods and properties assigned on a superclass' prototype, set-get properties registered on the superclass using the <code>registerProperties</code> static method, and static methods and properties assigned on the superclass. The inheritance system that is implemented in the <code><a href="../reference/Uize.html">Uize</a></code> base class overcomes some of the weaknesses of a superficial prototype-based approach to inheritance. As part of the foundation for developing <code><a href="../reference/Uize.html">Uize</a></code> subclasses, the <code><a href="../reference/Uize.html">Uize</a></code> base class also provides its subclasses with a set of useful static and instance utility methods and properties.</p>
+		<p>The <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> base class provides a mechanism for inheriting instance methods and properties assigned on a superclass' prototype, set-get properties registered on the superclass using the <code>registerProperties</code> static method, and static methods and properties assigned on the superclass. The inheritance system that is implemented in the <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> base class overcomes some of the weaknesses of a superficial prototype-based approach to inheritance. As part of the foundation for developing <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclasses, the <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> base class also provides its subclasses with a <a href="#4">state interface</a> and an <a href="#5">event infrastructure</a>.</p>
 		
 		<p>For a more in-depth discussion on class inheritance, consult the explainer <a href="javascript-inheritance.html">JavaScript Inheritance</a>.</p>
 	</div>
@@ -121,7 +121,7 @@
 		<p><span class="allCaps">EXAMPLE</span></p>
 		
 		
-<pre class="sample-code">var MyClass = Uize.subclass ();
+<pre class="sample-code">var MyClass = Uize.Class.subclass ();
 
 function _updateArea () {this.set ({area:this._width * this._height})}
 function _preventNegatives (_value) {return _value &gt; 0 ? _value : 0}
@@ -181,9 +181,9 @@ myWidget.fire ({name:'My Arbitrary Event',message:'Hello, world!'});
 		
 		<p>In the above example, an instance of the <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> class is created, a handler is registered on an arbitrarily named event (<code>'My Arbitrary Event'</code>), and then the <code>fire</code> instance method is called on the widget in order to fire that event. The event object contains an additional <code>message</code> property, whose value is alerted in the handler that was registered for the event.</p>
 		
-		<p>The event system implemented by the UIZE JavaScript Framework is orthogonal to the event model of Web browsers that is provided as part of the standardized Document Object Model, and can be used outside of the context of Web browsers and other host environments for the JavaScript language that may implement their own proprietary event systems. As an example of this, the framework's event system can be utilized within Windows Script Host by scripts that use the <code><a href="../reference/Uize.html">Uize</a></code> base class.</p>
+		<p>The event system implemented by the UIZE JavaScript Framework is orthogonal to the event model of Web browsers that is provided as part of the standardized Document Object Model, and can be used outside of the context of Web browsers and other host environments for the JavaScript language that may implement their own proprietary event systems. As an example of this, the framework's event system can be utilized within Windows Script Host by scripts that use the <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> base class.</p>
 		
-		<p>The <code><a href="../reference/Uize.html">Uize</a></code> base class provides a convenient infrastructure for supporting both static and instance events. Events can conveniently be fired for a class or an instance of a class, and methods are provided to every class that subclasses the <code><a href="../reference/Uize.html">Uize</a></code> class to allow code to manage the registering and unregistering of event handlers for static and instance events. This provides all <code><a href="../reference/Uize.html">Uize</a></code> subclasses with a consistent event model.</p>
+		<p>The <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> base class provides a convenient infrastructure for supporting both static and instance events. Events can conveniently be fired for a class or an instance of a class, and methods are provided to every class that subclasses the <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> base class to allow code to manage the registering and unregistering of event handlers for static and instance events. This provides all <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclasses with a consistent event model.</p>
 		
 		<p>For a more in-depth discussion on events, consult the explainer <a href="javascript-event-system.html">JavaScript Event System</a>.</p>
 	</div>

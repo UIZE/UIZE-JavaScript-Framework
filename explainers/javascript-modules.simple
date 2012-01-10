@@ -460,6 +460,7 @@ Types of Modules
 		LIBRARY MODULE
 		...................................................
 		/* Library Contents
+			Uize.Class
 			Uize.Node
 			Uize.Fade
 			Uize.Xml
@@ -725,7 +726,7 @@ Dynamically Loading Modules
 
 		When the =Uize= module is initially loaded, the value of =Uize.moduleUrlTemplate= static property will be set to a path from which the Uize.js file is loaded. This is accomplished by scanning through the document's DOM to find a script node that references the "Uize.js" JavaScript file. This approach usually works well and it is, therefore, usually *not* necessary to set a value for this property in order for the default module loader to work.
 
-		There might be cases, however, when the code for the =Uize= base class is included into a single [[javascript-libraries.html][JavaScript library]] file that is not named "Uize.js". In such cases, it will be necessary to set a value for the =Uize.moduleUrlTemplate= static property that is consistent with your server environment and where the UIZE JavaScript Framework's JavaScript files are located.
+		There might be cases, however, when the code for the =Uize= base module is included into a single [[javascript-libraries.html][JavaScript library]] file that is not named "Uize.js". In such cases, it will be necessary to set a value for the =Uize.moduleUrlTemplate= static property that is consistent with your server environment and where the UIZE JavaScript Framework's JavaScript files are located.
 
 	Custom Module Loader
 		You can override the default implementation of the =Uize.moduleLoader= static method in order to define your own module loader.
@@ -736,7 +737,7 @@ Dynamically Loading Modules
 		The module loader mechanism is flexible enough to allow modules to be loaded and dependencies resolved in a variety of different ways and in a variety of different contexts, such as the browser, WSH (Windows Script Host), and even exotic environments that support JavaScript like Adobe Photoshop.
 
 		Script Tag Module Loader (built-in default)
-			A =script= tag module loader is the default module loader built into the =Uize= base class.
+			A =script= tag module loader is the default module loader built into the =Uize= base module.
 
 			This module loader mechanism makes use of the browser's behavior of automatically loading external JavaScript files whenever script tags linking to external JavaScript files are added to the document's DOM.
 

@@ -49,7 +49,7 @@
 
     *DEVELOPERS:* `Chris van Rensburg`
 
-    The =Uize.String.Builder= module is an object under the =Uize.String= namespace, and is *not* a =Uize= subclass.
+    The =Uize.String.Builder= module is an object under the =Uize.String= namespace, and is *not* a =Uize.Class= subclass.
 
     In a Nutshell
       Building strings using a traditional incremental concatenation approach using the =+&amp;#61;= (incrementing assignment) operator can be slow in certain JavaScript interpreters when *very large* strings are being built.
@@ -218,25 +218,25 @@
       Value to String Coercion
         As a convenience, many of the instance methods that are provided for `Initializing the Value` or `Building the Value` of a =Uize.String.Builder= instance allow a value to be specified in any type.
 
-        Methods such as the =append=, =equals=, =prepend=, and =setValue= instance methods, along with the `Constructor`, all support a =valueANYTYPE= parameter. The value for this parameter can be of any type, and will be coerced to a string. If the value is an instance of an object or a =Uize= subclass, then it will be coerced to a string by invoking the object's =valueOf Intrinsic Method=. So, string type values, boolean type values, number type values, etc. can be used with these methods. As an example, following is a list of mappings between value and string equivalent...
+        Methods such as the =append=, =equals=, =prepend=, and =setValue= instance methods, along with the `Constructor`, all support a =valueANYTYPE= parameter. The value for this parameter can be of any type, and will be coerced to a string. If the value is an instance of an object or a =Uize.Class= subclass, then it will be coerced to a string by invoking the object's =valueOf Intrinsic Method=. So, string type values, boolean type values, number type values, etc. can be used with these methods. As an example, following is a list of mappings between value and string equivalent...
 
         ........................................................................................
         &lt;&lt; table &gt;&gt;
 
         title: HOW DIFFERENT TYPES OF VALUES ARE COERCED TO STRINGS
         data
-        :|             TYPE            |          VALUE           |     STRING EQUIVALENT      |
-        :| string                      | 'fish'                   | 'fish'                     |
-        :| boolean                     | true                     | 'true'                     |
-        :| number                      | 42                       | '42'                       |
-        :| number                      | Infinity                 | 'Infinity'                 |
-        :| number                      | NaN                      | 'NaN'                      |
-        :| object                      | null                     | 'null'                     |
-        :| object (regular expression) | /\s+/                    | '/\\s+/'                   |
-        :| object (Uize instance)      | Uize ({value:'foo'})     | 'foo'                      |
-        :| undefined                   | undefined                | 'undefined'                |
-        :| function                    | function () {alert (1)}  | 'function () {alert (1)}'  |
-        ........................................................................................
+        :|             TYPE            |          VALUE             |     STRING EQUIVALENT     |
+        :| string                      | 'fish'                     | 'fish'                    |
+        :| boolean                     | true                       | 'true'                    |
+        :| number                      | 42                         | '42'                      |
+        :| number                      | Infinity                   | 'Infinity'                |
+        :| number                      | NaN                        | 'NaN'                     |
+        :| object                      | null                       | 'null'                    |
+        :| object (regular expression) | /\s+/                      | '/\\s+/'                  |
+        :| object (Uize instance)      | Uize.Class ({value:'foo'}) | 'foo'                     |
+        :| undefined                   | undefined                  | 'undefined'               |
+        :| function                    | function () {alert (1)}    | 'function () {alert (1)}' |
+        .........................................................................................
 
         EXAMPLE
         .......................................................

@@ -34,6 +34,7 @@
 
 Uize.module ({
 	name:'Uize.Fade',
+	superclass:'Uize.Class',
 	builder:function (_superclass) {
 		/*** Variables for Scruncher Optimization ***/
 			var
@@ -69,7 +70,8 @@ Uize.module ({
 		/*** Class Constructor ***/
 			var
 				_class = _superclass.subclass (),
-				_classPrototype = _class.prototype
+				_classPrototype = _class.prototype,
+				_nonInheritableStatics = _class.nonInheritableStatics
 			;
 
 		/*** Private Instance Methods ***/
@@ -249,6 +251,7 @@ Uize.module ({
 							To illustrate the ability to blend complex values, the above statement of code would return the object ={red:127.5,green:127.5,blue:127.5}=, corresponding to mid gray.
 				*/
 			};
+			_nonInheritableStatics.blendValues = 1;
 
 			_class.celeration = function (_acceleration,_deceleration) {
 				/* NOTES
@@ -363,6 +366,7 @@ Uize.module ({
 							- see also the =curve= set-get property
 				*/
 			};
+			_nonInheritableStatics.celeration = 1;
 
 		/*** Register Properties ***/
 			function _setCurveFromAccelerationDeceleration () {

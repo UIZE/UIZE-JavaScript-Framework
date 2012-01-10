@@ -93,7 +93,7 @@
 					<li><a href="#6_4" title="You can override the default implementation of the Uize.moduleLoader static method in order to define your own module loader.">6.4. Custom Module Loader</a></li>
 					<li><a href="#6_5" title="The module loader mechanism is flexible enough to allow modules to be loaded and dependencies resolved in a variety of different ways and in a variety of different contexts, such as the browser, WSH (Windows Script Host), and even exotic environments that support JavaScript like Adobe Photoshop.">6.5. Different Kinds of Module Loaders</a>
 						<ul>
-							<li><a href="#6_5_1" title="A script tag module loader is the default module loader built into the Uize base class.">6.5.1. Script Tag Module Loader (built-in default)</a></li>
+							<li><a href="#6_5_1" title="A script tag module loader is the default module loader built into the Uize base module.">6.5.1. Script Tag Module Loader (built-in default)</a></li>
 							<li><a href="#6_5_2" title="An Ajax based module loader can be registered to allow modules to be loaded through a Web service of your choosing.">6.5.2. Ajax Module Loader</a></li>
 							<li><a href="#6_5_3" title="Build scripts written for the WSH (Windows Script Host) context can register a module loader that uses the Scripting.FileSystemObject ActiveX control to load modules.">6.5.3. Windows Script Host Module Loader</a></li>
 							<li><a href="#6_5_4" title="It is even possible to register a module loader in Adobe Photoshop&apos;s JavaScript based scripting environment (.jsx files), which has its own facility for reading in files.">6.5.4. Adobe Photoshop Module Loader</a></li>
@@ -657,6 +657,7 @@
 			
 			
 <pre class="sample-code">/* Library Contents
+  Uize.Class
   Uize.Node
   Uize.Fade
   Uize.Xml
@@ -984,7 +985,7 @@ Uize.module ({
 			
 			<p>When the <code><a href="../reference/Uize.html">Uize</a></code> module is initially loaded, the value of <code><a href="#6_3">Uize.moduleUrlTemplate</a></code> static property will be set to a path from which the Uize.js file is loaded. This is accomplished by scanning through the document's DOM to find a script node that references the "Uize.js" JavaScript file. This approach usually works well and it is, therefore, usually <b>not</b> necessary to set a value for this property in order for the default module loader to work.</p>
 			
-			<p>There might be cases, however, when the code for the <code><a href="../reference/Uize.html">Uize</a></code> base class is included into a single <a href="javascript-libraries.html">JavaScript library</a> file that is not named "Uize.js". In such cases, it will be necessary to set a value for the <code><a href="#6_3">Uize.moduleUrlTemplate</a></code> static property that is consistent with your server environment and where the UIZE JavaScript Framework's JavaScript files are located.</p>
+			<p>There might be cases, however, when the code for the <code><a href="../reference/Uize.html">Uize</a></code> base module is included into a single <a href="javascript-libraries.html">JavaScript library</a> file that is not named "Uize.js". In such cases, it will be necessary to set a value for the <code><a href="#6_3">Uize.moduleUrlTemplate</a></code> static property that is consistent with your server environment and where the UIZE JavaScript Framework's JavaScript files are located.</p>
 		</div>
 		
 		<a name="6_4"></a>
@@ -1003,7 +1004,7 @@ Uize.module ({
 			<a name="6_5_1"></a>
 			<h3 class="heading3" title="6. Dynamically Loading Modules -&gt; 6.5. Different Kinds of Module Loaders -&gt; 6.5.1. Script Tag Module Loader (built-in default)"><span class="headingNumber"><a href="#6" title="6. Dynamically Loading Modules">6</a>.<a href="#6_5" title="6. Dynamically Loading Modules -&gt; 6.5. Different Kinds of Module Loaders">5</a>.<a href="#6_5_1" title="6. Dynamically Loading Modules -&gt; 6.5. Different Kinds of Module Loaders -&gt; 6.5.1. Script Tag Module Loader (built-in default)">1</a>. </span>Script Tag Module Loader (built-in default)</h3>
 			<div class="contents3">
-				<p>A <code>script</code> tag module loader is the default module loader built into the <code><a href="../reference/Uize.html">Uize</a></code> base class.</p>
+				<p>A <code>script</code> tag module loader is the default module loader built into the <code><a href="../reference/Uize.html">Uize</a></code> base module.</p>
 				
 				<p>This module loader mechanism makes use of the browser's behavior of automatically loading external JavaScript files whenever script tags linking to external JavaScript files are added to the document's DOM.</p>
 				

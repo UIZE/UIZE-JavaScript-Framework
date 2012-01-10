@@ -53,7 +53,7 @@
 						</ul>
 					</li>
 					<li><a href="#3_7" title="Strive to make code self-explanatory. Ideally, the code is its own documentation. The UIZE JavaScript Framework makes extensive use of long identifier names. Private identifier names will get scrunched and become very short for the production environment, so don&apos;t worry about the impact of verbose naming on code size.">3.7. Verbose and Self-explanatory</a></li>
-					<li><a href="#3_8" title="By convention, UIZE subclasses are assigned as static properties of their superclass. So, for example, the Widget subclass of Uize is available as the static property Uize.Widget, and the Bar subclass of Uize.Widget is available as the static property Uize.Widget.Bar. So, the names used to access classes denotes their inheritance relationship. Of course, any class may, in its implementation, us...">3.8. Inheritance and Class Naming</a></li>
+					<li><a href="#3_8" title="A convention that is used often for UIZE subclasses is to put them under the namespace of their superclass.">3.8. Inheritance and Class Naming</a></li>
 					<li><a href="#3_9">3.9. Library Filenames</a>
 						<ul>
 							<li><a href="#3_9_1" title="JavaScript library files that implement Classes and packages are named according to the class or package names, with the addition of the &quot;.js&quot; file extension. So, for example, the Uize.Widget.Bar class is implemented in the JavaScript file named Uize.Widget.Bar.js. Similarly, the Uize.Node package is implemented in the JavaScript file named Uize.Node.js.">3.9.1. Classes and Packages</a></li>
@@ -149,7 +149,7 @@
 			
 			
 <pre class="sample-code">var
-  _class = Uize.Subclass = Uize.subclass (
+  _class = MyNamespace.MyClass = Uize.Class.subclass (
     function () {
       this._myPrivateInstanceProperty = 0;
     }
@@ -313,9 +313,11 @@ function myFunction2 (_date) {
 		<a name="3_8"></a>
 		<h2 class="heading2" title="3. Naming Conventions -&gt; 3.8. Inheritance and Class Naming"><span class="headingNumber"><a href="#3" title="3. Naming Conventions">3</a>.<a href="#3_8" title="3. Naming Conventions -&gt; 3.8. Inheritance and Class Naming">8</a>. </span>Inheritance and Class Naming</h2>
 		<div class="contents2">
-			<p>By convention, UIZE subclasses are assigned as static properties of their superclass. So, for example, the <code>Widget</code> subclass of <code><a href="../reference/Uize.html">Uize</a></code> is available as the static property <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, and the <code>Bar</code> subclass of <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> is available as the static property <code><a href="../reference/Uize.Widget.Bar.html">Uize.Widget.Bar</a></code>. So, the names used to access classes denotes their inheritance relationship. Of course, any class may, in its implementation, use multiple orthogonal helper classes, and this cannot be conveyed in its naming.</p>
+			<p>A convention that is used often for UIZE subclasses is to put them under the namespace of their superclass.</p>
 			
-			<p>The exception to this rule is the various packages that are assigned as static properties of the <code><a href="../reference/Uize.html">Uize</a></code> base class, even though these packages aren't classes and don't actually inherit from <code>Uize. This is done merely to place these packages in the =Uize</code> namespace and avoid polluting the global namespace. Examples of these are the <code><a href="../reference/Uize.Node.html">Uize.Node</a></code> and <code><a href="../reference/Uize.Data.html">Uize.Data</a></code> packages.</p>
+			<p>So, for example, the <code>Bar</code> subclass of <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> is available as the static property <code><a href="../reference/Uize.Widget.Bar.html">Uize.Widget.Bar</a></code>, and the <code>Slider</code> subclass of <code><a href="../reference/Uize.Widget.Bar.html">Uize.Widget.Bar</a></code> is available as the static property <code><a href="../reference/Uize.Widget.Bar.Slider.html">Uize.Widget.Bar.Slider</a></code>. So, the names used to access classes can denote their inheritance relationship. Of course, any class may, in its implementation, use multiple orthogonal helper classes, and this cannot be conveyed in its naming.</p>
+			
+			<p>However, a module being assigned as a property on another module does not necessarily indicate an inheritance relationship, since modules can also be used as namespaces to host other modules. So, for example, the module name <code><a href="../reference/Uize.Data.html">Uize.Data</a></code> does not indicate that the <code><a href="../reference/Uize.Data.html">Uize.Data</a></code> module is a subclass of the <code><a href="../reference/Uize.html">Uize</a></code> module. In fact, neither modules are class modules - the <code><a href="../reference/Uize.html">Uize</a></code> module is simply serving as a namespace for the <code><a href="../reference/Uize.Data.html">Uize.Data</a></code> module. In another example, the <code><a href="../reference/Uize.Util.PropertyAdapter.html">Uize.Util.PropertyAdapter</a></code> module defines a subclass of the <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> module, but it's kept under the <code><a href="../reference/Uize.Util.html">Uize.Util</a></code> namespace.</p>
 		</div>
 		
 		<a name="3_9"></a>

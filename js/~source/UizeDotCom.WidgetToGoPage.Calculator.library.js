@@ -18,6 +18,7 @@
 
 /* Library Contents
 	UizeDotCom
+	Uize.Class
 	Uize.Node
 	Uize.Widget
 	Uize.Widget.Page

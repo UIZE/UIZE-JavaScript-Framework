@@ -26,9 +26,9 @@
 		*DEVELOPERS:* `Chris van Rensburg`
 
 		Not a Uize Subclass
-			First off, it's worth emphasizing that the =Uize.Color= object is not a =Uize= subclass, but a very lightweight object.
+			First off, it's worth emphasizing that the =Uize.Color= object is not a =Uize.Class= subclass, but a very lightweight object.
 
-			As such, the =Uize.Color= object does not support events, does not provide set-get properties, does not inherit subclassing facilities from the =Uize= base class, etc. This object is deliberately designed to be very lightweight and to have a really tiny footprint - in the spirit of JavaScript's native objects, such as =String=, =Number=, =Date=, and the like.
+			As such, the =Uize.Color= object does not support events, does not provide set-get properties, does not inherit subclassing facilities from the =Uize.Class= base class, etc. This object is deliberately designed to be very lightweight and to have a really tiny footprint - in the spirit of JavaScript's native objects, such as =String=, =Number=, =Date=, and the like.
 
 		Key Features
 			The =Uize.Color= object provides the following key features...
@@ -1076,7 +1076,7 @@ Uize.module ({
 										..................................
 
 									Decoding
-										When a color is decoded from =RGB array=, the values of the array's three elements may be numbers, strings, or any object that implements a =valueOf interface= (such as an instance of a =Uize= subclass that implements the =value= set-get property).
+										When a color is decoded from =RGB array=, the values of the array's three elements may be numbers, strings, or any object that implements a =valueOf interface= (such as an instance of a =Uize.Class= subclass that implements the =value= set-get property).
 
 										EXAMPLES
 										..................................
@@ -1158,7 +1158,7 @@ Uize.module ({
 										.................................................
 
 									Decoding
-										When a color is decoded from =RGB object=, the values of the object's =red=, =green=, and =blue= properties may be numbers, strings, or any object that implements a =valueOf interface= interface (such as an instance of a =Uize= subclass that implements the =value= set-get property).
+										When a color is decoded from =RGB object=, the values of the object's =red=, =green=, and =blue= properties may be numbers, strings, or any object that implements a =valueOf interface= interface (such as an instance of a =Uize.Class= subclass that implements the =value= set-get property).
 
 										EXAMPLES
 										.................................................
@@ -1236,7 +1236,7 @@ Uize.module ({
 										.................................
 
 									Decoding
-										When a color is decoded from =HSL array=, the values of the array's three elements may be numbers, strings, or any object that implements a =valueOf interface= interface (such as an instance of a =Uize= subclass that implements the =value= set-get property).
+										When a color is decoded from =HSL array=, the values of the array's three elements may be numbers, strings, or any object that implements a =valueOf interface= interface (such as an instance of a =Uize.Class= subclass that implements the =value= set-get property).
 
 										EXAMPLES
 										............................................
@@ -1277,7 +1277,7 @@ Uize.module ({
 										..........................................................
 
 									Decoding
-										When a color is decoded from =HSL object=, the values of the object's =hue=, =saturation=, and =lightness= properties may be numbers, strings, or any object that implements a =valueOf interface= interface (such as an instance of a =Uize= subclass that implements the =value= set-get property).
+										When a color is decoded from =HSL object=, the values of the object's =hue=, =saturation=, and =lightness= properties may be numbers, strings, or any object that implements a =valueOf interface= interface (such as an instance of a =Uize.Class= subclass that implements the =value= set-get property).
 
 										EXAMPLES
 										.....................................................................

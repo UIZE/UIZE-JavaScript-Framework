@@ -28,7 +28,10 @@
 
 Uize.module ({
 	name:'Uize.Test.Uize.Data',
-	required:'Uize.Test',
+	required:[
+		'Uize.Test',
+		'Uize.Class'
+	],
 	builder:function () {
 		var
 			_identicalTestObjectA = {
@@ -42,7 +45,7 @@ Uize.module ({
 		;
 
 		/*** create dummy class with value interface ***/
-			var _ClassWithValueInterface = Uize.subclass ();
+			var _ClassWithValueInterface = Uize.Class.subclass ();
 			_ClassWithValueInterface.registerProperties ({
 				_value:'value'
 			});

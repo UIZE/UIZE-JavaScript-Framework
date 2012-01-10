@@ -3,7 +3,7 @@
 <head>
 	<title>Uize.Widget.Log.InstanceEvents | Documentation | UIZE JavaScript Framework</title>
 	<meta name="keywords" content="UIZE JavaScript Framework Documentation Uize.Widget.Log.InstanceEvents module reference documentation"/>
-	<meta name="description" content="The Uize.Widget.Log.InstanceEvents class implements a log interface for logging the instance events of an instance of a Uize subclass."/>
+	<meta name="description" content="The Uize.Widget.Log.InstanceEvents class implements a log interface for logging the instance events of an instance of a Uize.Class subclass."/>
 	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
 	<link rel="stylesheet" href="../css/page.css"/>
 	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
@@ -29,7 +29,7 @@
 <ul>
 	<li>Contents
 		<ul>
-			<li><a href="#1" title="The Uize.Widget.Log.InstanceEvents class implements a log interface for logging the instance events of an instance of a Uize subclass.">1. Introduction</a>
+			<li><a href="#1" title="The Uize.Widget.Log.InstanceEvents class implements a log interface for logging the instance events of an instance of a Uize.Class subclass.">1. Introduction</a>
 				<ul>
 					<li><a href="#1_1">1.1. In a Nutshell</a>
 						<ul>
@@ -40,7 +40,7 @@
 									<li><a href="#1_1_2_2" title="When a Changed.&amp;#42; property change event is logged, the log message is prefixed with the value of the propertiesChangedEvent localizable string, and the new values for all properties that have changed are appended to the message as a JSON formatted string.">1.1.2.2. Property Change Events</a></li>
 								</ul>
 							</li>
-							<li><a href="#1_1_3" title="The instance for which instance events are logged can be an instance of any Uize subclass - not just widget classes.">1.1.3. Watch Any Instance</a></li>
+							<li><a href="#1_1_3" title="The instance for which instance events are logged can be an instance of any Uize.Class subclass - not just widget classes.">1.1.3. Watch Any Instance</a></li>
 							<li><a href="#1_1_4" title="The Uize.Widget.Log.InstanceEvents class supports dynamic switching of the instance for which events are being logged.">1.1.4. Dynamic Switching</a></li>
 							<li><a href="#1_1_5" title="When a log widget&apos;s instance set-get property is set to the value null or undefined, then no instance will be watched.">1.1.5. Nothing to Watch</a></li>
 						</ul>
@@ -70,7 +70,7 @@
 					<li><a href="#2_9" title="Inherited from Uize.Widget.">2.9. idPrefix</a></li>
 					<li><a href="#2_10" title="Inherited from Uize.Widget.">2.10. idPrefixConstruction</a></li>
 					<li><a href="#2_11" title="Inherited from Uize.Widget.">2.11. insertionMode</a></li>
-					<li><a href="#2_12" title="An object reference, specifying the instance of a Uize subclass for which instance events should be logged.">2.12. instance</a></li>
+					<li><a href="#2_12" title="An object reference, specifying the instance of a Uize.Class subclass for which instance events should be logged.">2.12. instance</a></li>
 					<li><a href="#2_13" title="Inherited from Uize.Widget.Log.">2.13. isEmpty</a></li>
 					<li><a href="#2_14" title="IMPLEMENTATION INFO">2.14. localized</a></li>
 					<li><a href="#2_15" title="Inherited from Uize.Widget.">2.15. name</a></li>
@@ -97,9 +97,9 @@
 					<li><a href="#4_5" title="Inherited from Uize.Widget.Log.">4.5. clear</a></li>
 					<li><a href="#4_6" title="Inherited from Uize.Widget.">4.6. confirm</a></li>
 					<li><a href="#4_7" title="Inherited from Uize.Widget.">4.7. displayNode</a></li>
-					<li><a href="#4_8" title="Inherited from Uize.">4.8. fire</a></li>
+					<li><a href="#4_8" title="Inherited from Uize.Class.">4.8. fire</a></li>
 					<li><a href="#4_9" title="Inherited from Uize.Widget.">4.9. flushNodeCache</a></li>
-					<li><a href="#4_10" title="Inherited from Uize.">4.10. get</a></li>
+					<li><a href="#4_10" title="Inherited from Uize.Class.">4.10. get</a></li>
 					<li><a href="#4_11" title="Inherited from Uize.Widget.">4.11. getInherited</a></li>
 					<li><a href="#4_12" title="Inherited from Uize.Widget.">4.12. getNode</a></li>
 					<li><a href="#4_13" title="Inherited from Uize.Widget.">4.13. getNodeStyle</a></li>
@@ -110,13 +110,13 @@
 					<li><a href="#4_18" title="Inherited from Uize.Widget.">4.18. injectNodeHtml</a></li>
 					<li><a href="#4_19" title="Inherited from Uize.Widget.">4.19. insertOrWireUi</a></li>
 					<li><a href="#4_20" title="Inherited from Uize.Widget.">4.20. insertUi</a></li>
-					<li><a href="#4_21" title="Inherited from Uize.Widget, but introduced in Uize.">4.21. kill</a></li>
+					<li><a href="#4_21" title="Inherited from Uize.Widget, but introduced in Uize.Class.">4.21. kill</a></li>
 					<li><a href="#4_22" title="Inherited from Uize.Widget.">4.22. localize</a></li>
 					<li><a href="#4_23" title="Inherited from Uize.Widget.Log.">4.23. log</a></li>
 					<li><a href="#4_24" title="Inherited from Uize.Widget.">4.24. removeChild</a></li>
 					<li><a href="#4_25" title="Inherited from Uize.Widget.">4.25. removeNode</a></li>
 					<li><a href="#4_26" title="Inherited from Uize.Widget.">4.26. removeUi</a></li>
-					<li><a href="#4_27" title="Inherited from Uize.">4.27. set</a></li>
+					<li><a href="#4_27" title="Inherited from Uize.Class.">4.27. set</a></li>
 					<li><a href="#4_28" title="Inherited from Uize.Widget.">4.28. setInherited</a></li>
 					<li><a href="#4_29" title="Inherited from Uize.Widget.">4.29. setNodeClipRect</a></li>
 					<li><a href="#4_30" title="Inherited from Uize.Widget.">4.30. setNodeInnerHtml</a></li>
@@ -125,13 +125,13 @@
 					<li><a href="#4_33" title="Inherited from Uize.Widget.">4.33. setNodeStyle</a></li>
 					<li><a href="#4_34" title="Inherited from Uize.Widget.">4.34. setNodeValue</a></li>
 					<li><a href="#4_35" title="Inherited from Uize.Widget.">4.35. showNode</a></li>
-					<li><a href="#4_36" title="Inherited from Uize.">4.36. toggle</a></li>
-					<li><a href="#4_37" title="Inherited from Uize.">4.37. unwire</a></li>
+					<li><a href="#4_36" title="Inherited from Uize.Class.">4.36. toggle</a></li>
+					<li><a href="#4_37" title="Inherited from Uize.Class.">4.37. unwire</a></li>
 					<li><a href="#4_38" title="Inherited from Uize.Widget.">4.38. unwireNode</a></li>
 					<li><a href="#4_39" title="Inherited from Uize.Widget.">4.39. unwireNodeEventsByMatch</a></li>
 					<li><a href="#4_40" title="Inherited from Uize.Widget.">4.40. unwireUi</a></li>
 					<li><a href="#4_41" title="Inherited from Uize.Widget.">4.41. updateUi</a></li>
-					<li><a href="#4_42" title="Inherited from Uize.">4.42. wire</a></li>
+					<li><a href="#4_42" title="Inherited from Uize.Class.">4.42. wire</a></li>
 					<li><a href="#4_43" title="Inherited from Uize.Widget.">4.43. wireNode</a></li>
 					<li><a href="#4_44" title="Inherited from Uize.Widget.Log, but introduced in Uize.Widget.">4.44. wireUi</a></li>
 				</ul>
@@ -144,16 +144,16 @@
 			</li>
 			<li><a href="#6">6. Static Methods</a>
 				<ul>
-					<li><a href="#6_1" title="Inherited from Uize.">6.1. Uize.Widget.Log.InstanceEvents.fire</a></li>
-					<li><a href="#6_2" title="Inherited from Uize.">6.2. Uize.Widget.Log.InstanceEvents.get</a></li>
+					<li><a href="#6_1" title="Inherited from Uize.Class.">6.1. Uize.Widget.Log.InstanceEvents.fire</a></li>
+					<li><a href="#6_2" title="Inherited from Uize.Class.">6.2. Uize.Widget.Log.InstanceEvents.get</a></li>
 					<li><a href="#6_3" title="Inherited from Uize.Widget.">6.3. Uize.Widget.Log.InstanceEvents.getBlankImageUrl</a></li>
-					<li><a href="#6_4" title="Inherited from Uize.">6.4. Uize.Widget.Log.InstanceEvents.registerProperties</a></li>
-					<li><a href="#6_5" title="Inherited from Uize.">6.5. Uize.Widget.Log.InstanceEvents.set</a></li>
+					<li><a href="#6_4" title="Inherited from Uize.Class.">6.4. Uize.Widget.Log.InstanceEvents.registerProperties</a></li>
+					<li><a href="#6_5" title="Inherited from Uize.Class.">6.5. Uize.Widget.Log.InstanceEvents.set</a></li>
 					<li><a href="#6_6" title="Inherited from Uize.Widget.">6.6. Uize.Widget.Log.InstanceEvents.spawn</a></li>
-					<li><a href="#6_7" title="Inherited from Uize.">6.7. Uize.Widget.Log.InstanceEvents.subclass</a></li>
-					<li><a href="#6_8" title="Inherited from Uize.">6.8. Uize.Widget.Log.InstanceEvents.toggle</a></li>
-					<li><a href="#6_9" title="Inherited from Uize.">6.9. Uize.Widget.Log.InstanceEvents.unwire</a></li>
-					<li><a href="#6_10" title="Inherited from Uize.">6.10. Uize.Widget.Log.InstanceEvents.wire</a></li>
+					<li><a href="#6_7" title="Inherited from Uize.Class.">6.7. Uize.Widget.Log.InstanceEvents.subclass</a></li>
+					<li><a href="#6_8" title="Inherited from Uize.Class.">6.8. Uize.Widget.Log.InstanceEvents.toggle</a></li>
+					<li><a href="#6_9" title="Inherited from Uize.Class.">6.9. Uize.Widget.Log.InstanceEvents.unwire</a></li>
+					<li><a href="#6_10" title="Inherited from Uize.Class.">6.10. Uize.Widget.Log.InstanceEvents.wire</a></li>
 				</ul>
 			</li>
 			<li><a href="#7">7. Static Properties</a>
@@ -172,7 +172,7 @@
 	<a name="1"></a>
 	<h1 class="heading1" title="1. Introduction"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>. </span>Introduction</h1>
 	<div class="contents1">
-		<p>The <code>Uize.Widget.Log.InstanceEvents</code> class implements a log interface for logging the instance events of an instance of a <code><a href="../reference/Uize.html">Uize</a></code> subclass.</p>
+		<p>The <code>Uize.Widget.Log.InstanceEvents</code> class implements a log interface for logging the instance events of an instance of a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass.</p>
 		
 		<p><b>DEVELOPERS:</b> <a href="http://www.tomkidding.com" target="_blank" class="externalSiteLink">Chris van Rensburg</a></p>
 		
@@ -219,9 +219,9 @@ page.addChild ('sliderEventsLog',Uize.Widget.Log.InstanceEvents,{instance:slider
 			<a name="1_1_3"></a>
 			<h3 class="heading3" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.3. Watch Any Instance"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. In a Nutshell">1</a>.<a href="#1_1_3" title="1. Introduction -&gt; 1.1. In a Nutshell -&gt; 1.1.3. Watch Any Instance">3</a>. </span>Watch Any Instance</h3>
 			<div class="contents3">
-				<p>The instance for which instance events are logged can be an instance of any <code><a href="../reference/Uize.html">Uize</a></code> subclass - not just widget classes.</p>
+				<p>The instance for which instance events are logged can be an instance of any <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass - not just widget classes.</p>
 				
-				<p>Any <code><a href="../reference/Uize.html">Uize</a></code> subclass instance can have set-get properties and can have custom instance events, so logging instance events is applicable beyond just observing widget instance's (although widget instances can be quite compelling to watch).</p>
+				<p>Any <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass instance can have set-get properties and can have custom instance events, so logging instance events is applicable beyond just observing widget instance's (although widget instances can be quite compelling to watch).</p>
 			</div>
 			
 			<a name="1_1_4"></a>
@@ -237,7 +237,7 @@ page.addChild ('sliderEventsLog',Uize.Widget.Log.InstanceEvents,{instance:slider
 			<div class="contents3">
 				<p>When a log widget's <code><a href="#2_12">instance</a></code> set-get property is set to the value <code>null</code> or <code>undefined</code>, then no instance will be watched.</p>
 				
-				<p>If the <code><a href="#2_12">instance</a></code> property is set to <code>null</code> or <code>undefined</code> after the log was already wired up and watching instance events for some instance, then the log will be cleared and no more messages will be displayed until the <code><a href="#2_12">instance</a></code> property is once again set to a reference to a <code><a href="../reference/Uize.html">Uize</a></code> subclass.</p>
+				<p>If the <code><a href="#2_12">instance</a></code> property is set to <code>null</code> or <code>undefined</code> after the log was already wired up and watching instance events for some instance, then the log will be cleared and no more messages will be displayed until the <code><a href="#2_12">instance</a></code> property is once again set to an instance of a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass.</p>
 			</div>
 		</div>
 		
@@ -260,7 +260,7 @@ page.addChild ('sliderEventsLog',Uize.Widget.Log.InstanceEvents,{instance:slider
 			
 			<p><span class="allCaps">INHERITANCE CHAIN</span></p>
 			
-			<p><code><a href="../reference/Uize.html">Uize</a></code> -> <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> -> <code><a href="../reference/Uize.Widget.Log.html">Uize.Widget.Log</a></code> -> <code>Uize.Widget.Log.InstanceEvents</code></p>
+			<p><code><a href="../reference/Uize.Class.html">Uize.Class</a></code> -> <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> -> <code><a href="../reference/Uize.Widget.Log.html">Uize.Widget.Log</a></code> -> <code>Uize.Widget.Log.InstanceEvents</code></p>
 			
 			<a name="1_3_1"></a>
 			<h3 class="heading3" title="1. Introduction -&gt; 1.3. Implementation Info -&gt; 1.3.1. Features Introduced in This Module"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_3" title="1. Introduction -&gt; 1.3. Implementation Info">3</a>.<a href="#1_3_1" title="1. Introduction -&gt; 1.3. Implementation Info -&gt; 1.3.1. Features Introduced in This Module">1</a>. </span>Features Introduced in This Module</h3>
@@ -468,9 +468,9 @@ page.addChild ('sliderEventsLog',Uize.Widget.Log.InstanceEvents,{instance:slider
 		<a name="2_12"></a>
 		<h2 class="heading2" title="2. Set-get Properties -&gt; 2.12. instance"><span class="headingNumber"><a href="#2" title="2. Set-get Properties">2</a>.<a href="#2_12" title="2. Set-get Properties -&gt; 2.12. instance">12</a>. </span>instance</h2>
 		<div class="contents2">
-			<p>An object reference, specifying the instance of a <code><a href="../reference/Uize.html">Uize</a></code> subclass for which instance events should be logged.</p>
+			<p>An object reference, specifying the instance of a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass for which instance events should be logged.</p>
 			
-			<p>The value of the <code><a href="#2_12">instance</a></code> set-get property can be a reference to an instance of <b>any</b> <code><a href="../reference/Uize.html">Uize</a></code> subclass  - not just widget classes (see <a href="#1_1_3">Watch Any Instance</a>). The value of the <code><a href="#2_12">instance</a></code> set-get property can be changed at any time - even after the log widget has already been wired up (see <a href="#1_1_4">Dynamic Switching</a>). When the <code><a href="#2_12">instance</a></code> property is set to the value <code>null</code> or <code>undefined</code>, then no instance will be watched (see <a href="#1_1_5">Nothing to Watch</a>).</p>
+			<p>The value of the <code><a href="#2_12">instance</a></code> set-get property can be a reference to an instance of <b>any</b> <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass - not just widget classes (see <a href="#1_1_3">Watch Any Instance</a>). The value of the <code><a href="#2_12">instance</a></code> set-get property can be changed at any time - even after the log widget has already been wired up (see <a href="#1_1_4">Dynamic Switching</a>). When the <code><a href="#2_12">instance</a></code> property is set to the value <code>null</code> or <code>undefined</code>, then no instance will be watched (see <a href="#1_1_5">Nothing to Watch</a>).</p>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -576,7 +576,7 @@ page.addChild ('sliderEventsLog',Uize.Widget.Log.InstanceEvents,{instance:slider
 		<div class="contents2">
 			<p>A localizable string, that will be logged as a log message whenever there is no valid object to watch events on (see <a href="#1_1_5">Nothing to Watch</a>).</p>
 			
-			<p>In order for the instance to have a valid object to watch events on, the value of the <code><a href="#2_12">instance</a></code> set-get property must be either a reference to an instance of a <code><a href="../reference/Uize.html">Uize</a></code> subclass, or a referece to a <code><a href="../reference/Uize.html">Uize</a></code> subclass.</p>
+			<p>In order for the instance to have a valid object to watch events on, the value of the <code><a href="#2_12">instance</a></code> set-get property must be either a reference to an instance of a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass, or a referece to a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass.</p>
 		</div>
 		
 		<a name="3_3"></a>
@@ -682,12 +682,12 @@ page.addChild ('sliderEventsLog',Uize.Widget.Log.InstanceEvents,{instance:slider
 		<a name="4_8"></a>
 		<h2 class="heading2" title="4. Instance Methods -&gt; 4.8. fire"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_8" title="4. Instance Methods -&gt; 4.8. fire">8</a>. </span>fire</h2>
 		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
 			</table>
 		</div>
 		
@@ -706,12 +706,12 @@ page.addChild ('sliderEventsLog',Uize.Widget.Log.InstanceEvents,{instance:slider
 		<a name="4_10"></a>
 		<h2 class="heading2" title="4. Instance Methods -&gt; 4.10. get"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_10" title="4. Instance Methods -&gt; 4.10. get">10</a>. </span>get</h2>
 		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
 			</table>
 		</div>
 		
@@ -838,12 +838,12 @@ page.addChild ('sliderEventsLog',Uize.Widget.Log.InstanceEvents,{instance:slider
 		<a name="4_21"></a>
 		<h2 class="heading2" title="4. Instance Methods -&gt; 4.21. kill"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_21" title="4. Instance Methods -&gt; 4.21. kill">21</a>. </span>kill</h2>
 		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, but introduced in <code><a href="../reference/Uize.html">Uize</a></code>.</p>
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, but introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
 			</table>
 		</div>
 		
@@ -910,12 +910,12 @@ page.addChild ('sliderEventsLog',Uize.Widget.Log.InstanceEvents,{instance:slider
 		<a name="4_27"></a>
 		<h2 class="heading2" title="4. Instance Methods -&gt; 4.27. set"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_27" title="4. Instance Methods -&gt; 4.27. set">27</a>. </span>set</h2>
 		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
 			</table>
 		</div>
 		
@@ -1018,24 +1018,24 @@ page.addChild ('sliderEventsLog',Uize.Widget.Log.InstanceEvents,{instance:slider
 		<a name="4_36"></a>
 		<h2 class="heading2" title="4. Instance Methods -&gt; 4.36. toggle"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_36" title="4. Instance Methods -&gt; 4.36. toggle">36</a>. </span>toggle</h2>
 		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
 			</table>
 		</div>
 		
 		<a name="4_37"></a>
 		<h2 class="heading2" title="4. Instance Methods -&gt; 4.37. unwire"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_37" title="4. Instance Methods -&gt; 4.37. unwire">37</a>. </span>unwire</h2>
 		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
 			</table>
 		</div>
 		
@@ -1090,12 +1090,12 @@ page.addChild ('sliderEventsLog',Uize.Widget.Log.InstanceEvents,{instance:slider
 		<a name="4_42"></a>
 		<h2 class="heading2" title="4. Instance Methods -&gt; 4.42. wire"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_42" title="4. Instance Methods -&gt; 4.42. wire">42</a>. </span>wire</h2>
 		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
 			</table>
 		</div>
 		
@@ -1158,12 +1158,12 @@ page.addChild ('sliderEventsLog',Uize.Widget.Log.InstanceEvents,{instance:slider
 		<a name="6_1"></a>
 		<h2 class="heading2" title="6. Static Methods -&gt; 6.1. Uize.Widget.Log.InstanceEvents.fire"><span class="headingNumber"><a href="#6" title="6. Static Methods">6</a>.<a href="#6_1" title="6. Static Methods -&gt; 6.1. Uize.Widget.Log.InstanceEvents.fire">1</a>. </span>Uize.Widget.Log.InstanceEvents.fire</h2>
 		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
 			</table>
 		</div>
@@ -1171,12 +1171,12 @@ page.addChild ('sliderEventsLog',Uize.Widget.Log.InstanceEvents,{instance:slider
 		<a name="6_2"></a>
 		<h2 class="heading2" title="6. Static Methods -&gt; 6.2. Uize.Widget.Log.InstanceEvents.get"><span class="headingNumber"><a href="#6" title="6. Static Methods">6</a>.<a href="#6_2" title="6. Static Methods -&gt; 6.2. Uize.Widget.Log.InstanceEvents.get">2</a>. </span>Uize.Widget.Log.InstanceEvents.get</h2>
 		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
 			</table>
 		</div>
@@ -1197,12 +1197,12 @@ page.addChild ('sliderEventsLog',Uize.Widget.Log.InstanceEvents,{instance:slider
 		<a name="6_4"></a>
 		<h2 class="heading2" title="6. Static Methods -&gt; 6.4. Uize.Widget.Log.InstanceEvents.registerProperties"><span class="headingNumber"><a href="#6" title="6. Static Methods">6</a>.<a href="#6_4" title="6. Static Methods -&gt; 6.4. Uize.Widget.Log.InstanceEvents.registerProperties">4</a>. </span>Uize.Widget.Log.InstanceEvents.registerProperties</h2>
 		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
 			</table>
 		</div>
@@ -1210,12 +1210,12 @@ page.addChild ('sliderEventsLog',Uize.Widget.Log.InstanceEvents,{instance:slider
 		<a name="6_5"></a>
 		<h2 class="heading2" title="6. Static Methods -&gt; 6.5. Uize.Widget.Log.InstanceEvents.set"><span class="headingNumber"><a href="#6" title="6. Static Methods">6</a>.<a href="#6_5" title="6. Static Methods -&gt; 6.5. Uize.Widget.Log.InstanceEvents.set">5</a>. </span>Uize.Widget.Log.InstanceEvents.set</h2>
 		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
 			</table>
 		</div>
@@ -1236,12 +1236,12 @@ page.addChild ('sliderEventsLog',Uize.Widget.Log.InstanceEvents,{instance:slider
 		<a name="6_7"></a>
 		<h2 class="heading2" title="6. Static Methods -&gt; 6.7. Uize.Widget.Log.InstanceEvents.subclass"><span class="headingNumber"><a href="#6" title="6. Static Methods">6</a>.<a href="#6_7" title="6. Static Methods -&gt; 6.7. Uize.Widget.Log.InstanceEvents.subclass">7</a>. </span>Uize.Widget.Log.InstanceEvents.subclass</h2>
 		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
 			</table>
 		</div>
@@ -1249,12 +1249,12 @@ page.addChild ('sliderEventsLog',Uize.Widget.Log.InstanceEvents,{instance:slider
 		<a name="6_8"></a>
 		<h2 class="heading2" title="6. Static Methods -&gt; 6.8. Uize.Widget.Log.InstanceEvents.toggle"><span class="headingNumber"><a href="#6" title="6. Static Methods">6</a>.<a href="#6_8" title="6. Static Methods -&gt; 6.8. Uize.Widget.Log.InstanceEvents.toggle">8</a>. </span>Uize.Widget.Log.InstanceEvents.toggle</h2>
 		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
 			</table>
 		</div>
@@ -1262,12 +1262,12 @@ page.addChild ('sliderEventsLog',Uize.Widget.Log.InstanceEvents,{instance:slider
 		<a name="6_9"></a>
 		<h2 class="heading2" title="6. Static Methods -&gt; 6.9. Uize.Widget.Log.InstanceEvents.unwire"><span class="headingNumber"><a href="#6" title="6. Static Methods">6</a>.<a href="#6_9" title="6. Static Methods -&gt; 6.9. Uize.Widget.Log.InstanceEvents.unwire">9</a>. </span>Uize.Widget.Log.InstanceEvents.unwire</h2>
 		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
 			</table>
 		</div>
@@ -1275,12 +1275,12 @@ page.addChild ('sliderEventsLog',Uize.Widget.Log.InstanceEvents,{instance:slider
 		<a name="6_10"></a>
 		<h2 class="heading2" title="6. Static Methods -&gt; 6.10. Uize.Widget.Log.InstanceEvents.wire"><span class="headingNumber"><a href="#6" title="6. Static Methods">6</a>.<a href="#6_10" title="6. Static Methods -&gt; 6.10. Uize.Widget.Log.InstanceEvents.wire">10</a>. </span>Uize.Widget.Log.InstanceEvents.wire</h2>
 		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.html">Uize</a></code>.</p>
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.html">Uize</a></code>, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
 			</table>
 		</div>
@@ -1308,7 +1308,7 @@ page.addChild ('sliderEventsLog',Uize.Widget.Log.InstanceEvents,{instance:slider
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an override of an inherited feature (implementation is in this module, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an override of an inherited feature (implementation is in this module, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
 			</table>
 		</div>
@@ -1319,7 +1319,7 @@ page.addChild ('sliderEventsLog',Uize.Widget.Log.InstanceEvents,{instance:slider
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an override of an inherited feature (implementation is in this module, first introduced in <code><a href="../reference/Uize.html">Uize</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an override of an inherited feature (implementation is in this module, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is <b>not</b> inherited by subclasses</td></tr>
 			</table>
 		</div>

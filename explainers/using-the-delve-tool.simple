@@ -200,7 +200,7 @@ The Left Pane
 			All built modules (listed in build order)
 				A flat list of all the modules built for the page, where each module is listed with a fully qualified dereferencing path (eg. =Uize.Widget.Page=).
 
-				Modules are listed in the order in which they are built, which is a good indication of the order in which they are needed (ie. dependency order). This query can be useful when creating JavaScript library files (see the [[javascript-libraries.html][JavaScript Libraries]] explainer for more details). You can use the `as report` tree list action to get the list of built modules in plain text form in a pop-up window. From there, you can copy the list and then paste it into a library file you are creating or updating (make sure to leave out the =Uize= base class, though, since that is usually loaded in with its own =script= tag).
+				Modules are listed in the order in which they are built, which is a good indication of the order in which they are needed (ie. dependency order). This query can be useful when creating JavaScript library files (see the [[javascript-libraries.html][JavaScript Libraries]] explainer for more details). You can use the `as report` tree list action to get the list of built modules in plain text form in a pop-up window. From there, you can copy the list and then paste it into a library file you are creating or updating (make sure to leave out the =Uize.Class= base class, though, since that is usually loaded in with its own =script= tag).
 
 			All widgets classes
 				A flat list of all the modules built for the page that are widget classes (ie. subclasses of the =Uize.Widget= base class), where each module is listed with a fully qualified dereferencing path (eg. =Uize.Widget.Page=).
@@ -438,17 +438,17 @@ The Right Pane
 				The object or class displayed in the INSTANCE OF section is an `object link`, where the `object link text` and the `object link expression` are both the name or dereferencing path for the object / class in the global namespace. This means that clicking on the link will let you further inspect the object or class of which the object being inspected is an instance. This can be particularly useful for widget instances, since clicking on the class for the widget will take you to the summary info for the widget's class, and in the summary for the class you will be able to see all other `instances of this widget class`.
 
 		Summary for All UIZE Subclasses
-			When the expression entered in the `object entry input` is a valid dereferencing path for a =Uize= subclass that is defined on the page being inspected, then the `summary tab` will contain the `INHERITANCE CHAIN` and `SUBCLASSES (ON THIS PAGE)` sections.
+			When the expression entered in the `object entry input` is a valid dereferencing path for a =Uize.Class= subclass that is defined on the page being inspected, then the `summary tab` will contain the `INHERITANCE CHAIN` and `SUBCLASSES (ON THIS PAGE)` sections.
 
 			INHERITANCE CHAIN
-				The INHERITANCE CHAIN section displays in the `summary tab` for all objects that are =Uize= subclasses, and displays the entire inheritance chain (ie. all superclasses) for the class being inspected.
+				The INHERITANCE CHAIN section displays in the `summary tab` for all objects that are =Uize.Class= subclasses, and displays the entire inheritance chain (ie. all superclasses) for the class being inspected.
 
-				The inheritance chain for a class is displayed as a series of classes, separated by "->" (arrow) delimiters, starting on the left with the root class (ie. =Uize=) and ending on the right with the class being inspected. Each one of the classes listed in the chain is an `object link` that links to the class, so you can navigate to anywhere in the inheritance chain for the class being inspected with a single click.
+				The inheritance chain for a class is displayed as a series of classes, separated by "->" (arrow) delimiters, starting on the left with the root class (ie. =Uize.Class=) and ending on the right with the class being inspected. Each one of the classes listed in the chain is an `object link` that links to the class, so you can navigate to anywhere in the inheritance chain for the class being inspected with a single click.
 
 				Additionally, the inheritance depth for the class being inspected is displayed in the subtitle of the INHERITANCE CHAIN section's heading. This is the same value that would be displayed in the [[INHERITANCE DEPTH (all classes)][INHERITANCE DEPTH]] row of the `object info tooltip` that shows when `mousing over an object link` for a class.
 
 			SUBCLASSES (ON THIS PAGE)
-				The SUBCLASSES (ON THIS PAGE) section displays in the `summary tab` for all objects that are =Uize= subclasses, and displays a list of all the classes on the page being inspected that inherit (directly or indirectly) from the class being inspected.
+				The SUBCLASSES (ON THIS PAGE) section displays in the `summary tab` for all objects that are =Uize.Class= subclasses, and displays a list of all the classes on the page being inspected that inherit (directly or indirectly) from the class being inspected.
 
 				Subclasses that are direct subclasses of the class being inspected are indicated with the suffix *"- DIRECT SUBCLASS"* appended after their names. Each subclass is listed as an `object link`, where clicking on the link will let you further inspect the subclass. Additionally, the number of subclasses on the page of the class being inspected is displayed in the subtitle of the SUBCLASSES (ON THIS PAGE) section's heading. This is the same value that would be displayed in the [[SUBCLASSES (all classes)][SUBCLASSES]] row of the `object info tooltip` that shows when `mousing over an object link` for a class.
 
@@ -545,23 +545,23 @@ The Right Pane
 				The HTML section displays in the `summary tab` for all objects that are DOM nodes, and displays the outer HTML of the DOM node being inspected.
 
 		Summary for Functions, Methods, and Non-UIZE Classes
-			When the expression entered in the `object entry input` returns a reference to a function that is not a constructor for a =Uize= subclass (it could be just a plain function, a method, or the constructor for a non-UIZE class or object), then the `summary tab` will contain the `CODE` section.
+			When the expression entered in the `object entry input` returns a reference to a function that is not a constructor for a =Uize.Class= subclass (it could be just a plain function, a method, or the constructor for a non-UIZE class or object), then the `summary tab` will contain the `CODE` section.
 
 			CODE
-				The CODE section displays in the `summary tab` for all objects that are function references (and that are not a constructor for a =Uize= subclass), and displays the code for the function being inspected.
+				The CODE section displays in the `summary tab` for all objects that are function references (and that are not a constructor for a =Uize.Class= subclass), and displays the code for the function being inspected.
 
 				The code that is displayed for the function being inspected is obtained by a simple =toString= serialization of the function object. This means that the function's code may not appear exactly as it does in the actual code where it is defined, and the serialization may differ slightly (in purely cosmetic ways) from one browser to the next.
 
 		Summary for All Other Values
-			When the expression entered in the `object entry input` is neither a function, nor an instance of a =Uize= subclass, nor a DOM node, then the `summary tab` will contain the `TO STRING` and `JSON SERIALIZATION` sections.
+			When the expression entered in the `object entry input` is neither a function, nor an instance of a =Uize.Class= subclass, nor a DOM node, then the `summary tab` will contain the `TO STRING` and `JSON SERIALIZATION` sections.
 
 			TO STRING
-				The TO STRING section displays in the `summary tab` for all objects that are not functions, instances of =Uize= subclasses, or DOM nodes, and displays the =toString= serialization of the object being inspected.
+				The TO STRING section displays in the `summary tab` for all objects that are not functions, instances of =Uize.Class= subclasses, or DOM nodes, and displays the =toString= serialization of the object being inspected.
 
 				The =toString= serialization of the object being inspected will depend on its type - it's really up to the object's particular implementation of the =toString= method. Because the =toString= serialization can sometimes be quite different to a `JSON serialization` and may provide additional useful clues when troubleshooting, the =toString= serialization is provided in addition to the JSON serialization displayed in the `JSON SERIALIZATION` section.
 
 			JSON SERIALIZATION
-				The JSON SERIALIZATION section displays in the `summary tab` for all objects that are not functions, instances of =Uize= subclasses, or DOM nodes, and displays the JSON serialization of the object being inspected.
+				The JSON SERIALIZATION section displays in the `summary tab` for all objects that are not functions, instances of =Uize.Class= subclasses, or DOM nodes, and displays the JSON serialization of the object being inspected.
 
 				The object being inspected is serialized to JSON using the =Uize.Json= module. This module tries to do as good a job as possible at serializing all types of values (such as instances of JavaScript's built-in =Date= object, =RegExp= object, =Boolean= object, =String= object, etc.), but not all types of objects can be successfully serialized. Values that cannot be serialized are replaced with ={}= (an empty object).
 
@@ -576,12 +576,12 @@ The Right Pane
 			Specifically, the widget names in the dereferencing path are bolded, while the ".children." separators between widget names are not. This downplays the =children= object of every widget that contains its child widgets, making it easier to see the important information contained in the paths. So, for example, the dereferencing path =page.children.colorPicker.children.sliderR= would be formatted as *page*.children.*colorPicker*.children.*sliderR*. Reading this, it's quickly clear that the path is dereferencing the =sliderR= child widget of the =colorPicker= child widget of the =page= widget.
 
 	State Tab
-		The State Tab displays the current state of the object being inspected, if the object is an instance of a =Uize= subclass, or a =Uize= subclass.
+		The State Tab displays the current state of the object being inspected, if the object is an instance of a =Uize.Class= subclass, or a =Uize.Class= subclass.
 
-		The state for an instance of a =Uize= subclass is represented by the instance values of all of its set-get properties. The state for a =Uize= subclass (*not* an instance) is represented by the static values of all its set-get properties. The state for the object being inspected is displayed in the `set-get properties table`.
+		The state for an instance of a =Uize.Class= subclass is represented by the instance values of all of its set-get properties. The state for a =Uize.Class= subclass (*not* an instance) is represented by the static values of all its set-get properties. The state for the object being inspected is displayed in the `set-get properties table`.
 
 		Objects Without a State Interface
-			If the object being inspected is neither an *instance* of a =Uize= subclass, nor a =Uize= subclass, then the object is not considered to have a state interface.
+			If the object being inspected is neither an *instance* of a =Uize.Class= subclass, nor a =Uize.Class= subclass, then the object is not considered to have a state interface.
 
 			For objects that do not support a state interface, the `state tab` will contain only a message to the effect that the object does not support a set-get properties state interface - there will be no `set-get properties table`.
 
@@ -602,7 +602,7 @@ The Right Pane
 				The Get Action is an `object link` whose `object link expression` is a getter expression that can be used to query the value of the set-get property.
 
 				Instance Getter or Static Getter
-					The getter expression linked to by `the get action` will be either a call to the =get= instance method or a call to the =MyClass.get= static method, depending on whether the object being inspected is an instance of a =Uize= subclass, or an actual subclass.
+					The getter expression linked to by `the get action` will be either a call to the =get= instance method or a call to the =MyClass.get= static method, depending on whether the object being inspected is an instance of a =Uize.Class= subclass, or an actual subclass.
 
 					For example, if the object being inspected was an instance of the =Uize.Widget.Page= class that is assigned to the global variable =page=, then the getter expression for the =idPrefix= set-get property would be =page.get ('idPrefix')=. On the other hand, if the object being inspected was the actual =Uize.Widget.Page= class, then the getter expression for the =idPrefix= set-get property would be =Uize.Widget.Page.get ('idPrefix')=.
 
@@ -615,7 +615,7 @@ The Right Pane
 				The Set Action is an `object link` whose `object link expression` is a setter expression that can be used to set the value of the set-get property.
 
 				Instance Setter or Static Setter
-					The setter expression linked to by `the set action` will be either a call to the =set= instance method or a call to the =MyClass.set= static method, depending on whether the object being inspected is an instance of a =Uize= subclass, or an actual subclass.
+					The setter expression linked to by `the set action` will be either a call to the =set= instance method or a call to the =MyClass.set= static method, depending on whether the object being inspected is an instance of a =Uize.Class= subclass, or an actual subclass.
 
 					For example, if the object being inspected was an instance of the =Uize.Widget.Page= class that is assigned to the global variable =page=, then the getter expression for the =enabled= set-get property would be =page.set ('enabled',#)=. On the other hand, if the object being inspected was the actual =Uize.Widget.Page= class, then the getter expression for the =enabled= set-get property would be =Uize.Widget.Page.get ('enabled',#)=.
 
@@ -640,7 +640,7 @@ The Right Pane
 		Always Features of a Class
 			The `features tab` always displays features of a *class* - even if the object being inspected is an *instance* of a class.
 
-			So, if the object being inspected is a =Uize= subclass, then the detectable features of that class will be displayed in the `features table`. However, if the inspected object is an instance of a =Uize= subclass, then the features of the instance's class will be displayed in the Features Table.
+			So, if the object being inspected is a =Uize.Class= subclass, then the detectable features of that class will be displayed in the `features table`. However, if the inspected object is an instance of a =Uize.Class= subclass, then the features of the instance's class will be displayed in the Features Table.
 
 		Automatically Detectable Features
 			Features that can be automatically detected for a class include: static methods, static properties, instance methods, instance properties, and set-get properties.
@@ -683,11 +683,11 @@ The Right Pane
 
 				A feature is considered to be one of the following three types...
 
-				- *Method* - Static and instance properties that are function references, and that are *not* references to =Uize= subclasses (which are separately regarded as *Module* type features), are considered to be *Method* type features. This applies to static methods as well as instance methods.
+				- *Method* - Static and instance properties that are function references, and that are *not* references to =Uize.Class= subclasses (which are separately regarded as *Module* type features), are considered to be *Method* type features. This applies to static methods as well as instance methods.
 
 				- *Property* - Static and instance properties that are not function references are considered to be *Property* type features. This applies to static properties as well as instance properties.
 
-				- *Module* - Static and instance properties that are references to =Uize= subclasses are considered to be *Module* type features. So, for example, both =Uize.Widget.Button= and =Uize.Widget.Page= would be considered *Module* type features of the =Uize.Widget= class. A side effect of this definition is that the =MyClass.superclass= static property (implemented in the =Uize= base class) is considered to be a *Module* type feature, as is the =Class= instance property (also implemented in the =Uize= base class).
+				- *Module* - Static and instance properties that are references to =Uize.Class= subclasses are considered to be *Module* type features. So, for example, both =Uize.Widget.Button= and =Uize.Widget.Page= would be considered *Module* type features of the =Uize.Widget= class. A side effect of this definition is that the =MyClass.superclass= static property (implemented in the =Uize.Class= base class) is considered to be a *Module* type feature, as is the =Class= instance property (also implemented in the =Uize.Class= base class).
 
 			Introduced In
 				The Introduced In column displays the class in which the feature was first introduced.
@@ -761,11 +761,11 @@ The Right Pane
 		How the Documentation Page is Determined
 			The documentation page that is shown in the `documentation tab` is determined according to the following rules...
 
-			- If the object being inspected is a =Uize= subclass or an instance of a =Uize= subclass, then the documentation page will be for the last =Uize= class in the inheritance chain. For example, if the object being inspected was a page widget instance that was an instance of =MySite.MyPageWidget=, and =MySite.MyPageWidget= inherited from =Uize.Widget.Page=, which inherited from =Uize.Widget=, which inherited from =Uize=, then the documentation page would be the documentation for the =Uize.Widget.Page= module - not the =Uize.Widget= or =Uize= modules.
+			- If the object being inspected is a =Uize.Class= subclass or an instance of a =Uize.Class= subclass, then the documentation page will be for the last UIZE class in the inheritance chain. For example, if the object being inspected was a page widget instance that was an instance of =MySite.MyPageWidget=, and =MySite.MyPageWidget= inherited from =Uize.Widget.Page=, which inherited from =Uize.Widget=, which inherited from =Uize.Class=, then the documentation page would be the documentation for the =Uize.Widget.Page= module - not the =Uize.Widget= or =Uize.Class= modules.
 
 			- If the object entered in the `object entry input` is a valid UIZE module (such as =Uize.Widget.Bar.Slider=), but that module is not loaded on the page being inspected, then the documentation for the specified UIZE module will still be shown. This behavior provides a convenient way for viewing `documentation for unloaded UIZE modules`.
 
-			- If the object entered in the `object entry input` is neither a =Uize= subclass or instance of a =Uize= subclass loaded on the page being inspected, nor a valid UIZE module that is not loaded on the page being inspected, then the documentation shown will be the `DELVE tool help documentation` (ie. this documentation).
+			- If the object entered in the `object entry input` is neither a =Uize.Class= subclass or instance of a =Uize.Class= subclass loaded on the page being inspected, nor a valid UIZE module that is not loaded on the page being inspected, then the documentation shown will be the `DELVE tool help documentation` (ie. this documentation).
 
 		Documentation for Unloaded UIZE Modules
 			As mentioned in the section `How the Documentation Page is Determined`, the DELVE tool can be used to conveniently obtain documentation for any module that is known to be part of the UIZE JavaScript Framework.
@@ -783,16 +783,16 @@ The Right Pane
 		Watchable Object
 			Not all objects being inspected are supported for event watching in the `events tab`.
 
-			The DELVE tool currently supports automatically watching events on instances of any =Uize= subclass - that includes widget instances as well as non-widget instances - as well as =Uize= subclasses, themselves. For =Uize= subclasses and subclass instances - including classes and instances of classes in a site-specific non-UIZE namespace - event watching is automatic and does not require any cooperation from the code in order to enable the event watching.
+			The DELVE tool currently supports automatically watching events on instances of any =Uize.Class= subclass - that includes widget instances as well as non-widget instances - as well as =Uize.Class= subclasses, themselves. For =Uize.Class= subclasses and subclass instances - including classes and instances of classes in a site-specific non-UIZE namespace - event watching is automatic and does not require any cooperation from the code in order to enable the event watching.
 
 			Non-watchable Object
 				Whenever the object being inspected is set to a non-watchable object, the event log will be cleared and a message, to the effect that there is no valid object to watch, will be logged.
 
 		Types of Events Logged
-			The `events tab` can automatically log all `property change events` for instances of =Uize= subclasses, as well as all instance `custom events` for instances of =Uize= subclasses and all static Custom Events for =Uize= subclasses.
+			The `events tab` can automatically log all `property change events` for instances of =Uize.Class= subclasses, as well as all instance `custom events` for instances of =Uize.Class= subclasses and all static Custom Events for =Uize.Class= subclasses.
 
 			Property Change Events
-				Property Change Events are events that are fired whenever one or more of the set-get properties for an instance of a =Uize= subclass are changed during a set operation.
+				Property Change Events are events that are fired whenever one or more of the set-get properties for an instance of a =Uize.Class= subclass are changed during a set operation.
 
 				Unlike `custom events`, `property change events` are only applicable to *instances* and not to classes. Whenever Property Change Events are logged, an object specifying all the properties that have changed value, along with their new values, is serialized to a one line JSON formatted string and appended to the log message.
 
@@ -802,9 +802,9 @@ The Right Pane
 				........................................................................................
 
 			Custom Events
-				Custom Events are events that are fired deliberately in the implementation for =Uize= subclasses, and all such events are automatically logged in the `events tab`.
+				Custom Events are events that are fired deliberately in the implementation for =Uize.Class= subclasses, and all such events are automatically logged in the `events tab`.
 
-				Custom Events can be fired on instances (as instance events) by calling the =fire= instance method, and they can be fired on classes (as static events) by calling the =MyClass.fire= static method. If the object being inspected is either an instance of a =Uize= subclass or a =Uize= subclass, then its Custom Events are automatically logged.
+				Custom Events can be fired on instances (as instance events) by calling the =fire= instance method, and they can be fired on classes (as static events) by calling the =MyClass.fire= static method. If the object being inspected is either an instance of a =Uize.Class= subclass or a =Uize.Class= subclass, then its Custom Events are automatically logged.
 
 				Whenever Custom Events are logged, the event object is serialized to a one line JSON formatted string and appended to the log message. Certain contents of the event object may not be serializable, however, such as the value of the =source= property. In such an event, an empty object will appear in place of the unserializable value.
 
@@ -814,7 +814,7 @@ The Right Pane
 				...............................................................................
 
 				Static Events Also Supported
-					While instance `custom events` are far more common than static custom events in a class' implementation, a =Uize= subclass is considered a `watchable object` and static custom events - if they are fired on a class that's being watched - will be logged.
+					While instance `custom events` are far more common than static custom events in a class' implementation, a =Uize.Class= subclass is considered a `watchable object` and static custom events - if they are fired on a class that's being watched - will be logged.
 
 		Log Message Timestamps
 			The log message for every event that is logged in the `events tab` is prefixed with a timestamp that captures exactly, right down to the millisecond, when the event was logged.
@@ -904,27 +904,27 @@ Universal Features
 			Info items that may show up in the tooltip's data table include...
 
 			WHAT IT IS (all objects)
-				Shown for all objects, the text displayed will be one of: *"null"*, *"undefined"*, *"widget"* (for widget instances), *"class"* (for =Uize= subclasses), *"DOM node"* (for DOM nodes), *"simple object"* (for instances of JavaScript's built-in =Object= object, or else the type of the object as reported by JavaScript's =typeof= operator (eg. *"number"*, *"string"*, *"boolean"*, etc.).
+				Shown for all objects, the text displayed will be one of: *"null"*, *"undefined"*, *"widget"* (for widget instances), *"class"* (for =Uize.Class= subclasses), *"DOM node"* (for DOM nodes), *"simple object"* (for instances of JavaScript's built-in =Object= object, or else the type of the object as reported by JavaScript's =typeof= operator (eg. *"number"*, *"string"*, *"boolean"*, etc.).
 
 			INSTANCE OF (anything non-null)
 				Shown for any value that is not =null= or =undefined=, the text displayed will be the global name of the class of which the object is an instance.
 
-				For instances of =Uize= subclasses, the text displayed will be the name of the module that implements the class (eg. *"Uize.Widget.Bar.Slider"*). For instances of other objects, it will be the name of the constructor function (eg. *"Number"*, *"String"*, *"Boolean"*, *"RegExp"*, etc.). For classes and functions, the text displayed will be *"Function"*. For DOM nodes, it will be the name of the DOM object of which the DOM node is an instance (eg. *"HTMLAnchorElement"*, *"HTMLDivElement"*, *"HTMLImageElement"*, etc.).
+				For instances of =Uize.Class= subclasses, the text displayed will be the name of the module that implements the class (eg. *"Uize.Widget.Bar.Slider"*). For instances of other objects, it will be the name of the constructor function (eg. *"Number"*, *"String"*, *"Boolean"*, *"RegExp"*, etc.). For classes and functions, the text displayed will be *"Function"*. For DOM nodes, it will be the name of the DOM object of which the DOM node is an instance (eg. *"HTMLAnchorElement"*, *"HTMLDivElement"*, *"HTMLImageElement"*, etc.).
 
 			SUPERCLASS (all classes)
-				Shown only for objects that are =Uize= subclasses, the text displayed will be the global name of the class' superclass.
+				Shown only for objects that are =Uize.Class= subclasses, the text displayed will be the global name of the class' superclass.
 
-				For the =Uize= base class, the text displayed will be *"this is the root class"*, since the =Uize= class is the root class for all classes that use the UIZE JavaScript Framework.
+				For the =Uize.Class= base class, the text displayed will be *"this is the root class"*, since the =Uize.Class= class is the root class for all classes that use the UIZE JavaScript Framework.
 
 			INHERITANCE DEPTH (all classes)
-				Shown only for objects that are =Uize= subclasses, the text displayed will be the inheritance depth of the class.
+				Shown only for objects that are =Uize.Class= subclasses, the text displayed will be the inheritance depth of the class.
 
-				Inheritance depth is how deep the class is in the class hierarchy. Put another way, it's how many subclasses removed the class is from the =Uize= base class. So, for example, for the class =Uize.Widget.Button= the text displayed would be *"2"*, since the =Uize.Widget.Button= class is two subclasses removed from the =Uize= base class. For the =Uize= base class, itself, the text displayed will be *"this is the root class"*.
+				Inheritance depth is how deep the class is in the class hierarchy. Put another way, it's how many subclasses removed the class is from the =Uize.Class= base class. So, for example, for the class =Uize.Widget.Button= the text displayed would be *"2"*, since the =Uize.Widget.Button= class is two subclasses removed from the =Uize.Class= base class. For the =Uize.Class= base class, itself, the text displayed will be *"this is the root class"*.
 
 			SUBCLASSES (all classes)
-				Shown only for objects that are =Uize= subclasses, the text displayed will be the number of modules built for the page that are subclasses of the class - directly or indirectly.
+				Shown only for objects that are =Uize.Class= subclasses, the text displayed will be the number of modules built for the page that are subclasses of the class - directly or indirectly.
 
-				So, for example, if only the modules =Uize=, =Uize.Widget=, and =Uize.Widget.Button= have been built for the page, then the text displayed for the =Uize= class would be *"2"*. This is because both the =Uize.Widget= and =Uize.Widget.Button= classes inherit from the =Uize= class. For classes that have no subclasses on the page that inherit from them, the text displayed will be *"no subclasses on this page"*.
+				So, for example, if only the class modules =Uize.Class=, =Uize.Widget=, and =Uize.Widget.Button= have been built for the page, then the text displayed for the =Uize.Class= class would be *"2"*. This is because both the =Uize.Widget= and =Uize.Widget.Button= classes inherit from =Uize.Class=. For classes that have no subclasses on the page that inherit from them, the text displayed will be *"no subclasses on this page"*. So, in our example, the text displayed for the =Uize.Widget.Button= class would be *"no subclasses on this page"*, since it is at the end of the inheritance chain.
 
 			WIDGET INSTANCES (all widget classes)
 				Shown only for objects that are widget classes (ie. =Uize.Widget=, or a subclass thereof), the text displayed will be the number of instances of the widget class that have been created on the page.
@@ -975,7 +975,7 @@ Universal Features
 				A DOM node is considered to be owned by a widget if the widget uses that node in its implementation and the widget has accessed the node, or if the ID for the node is consistent with the value of the =idPrefix= set-get property for the widget (even if the node has not been accessed by the widget). For DOM nodes that are not considered to be owned by a widget, the text displayed will be *"not owned by a widget"*.
 
 			VALUE (all instances with value interface)
-				Shown only for objects that are instances of =Uize= subclasses that implement the value interface, the text displayed will be a simple =toString= serialization of the value of the instance's =value= set-get property.
+				Shown only for objects that are instances of =Uize.Class= subclasses that implement the value interface, the text displayed will be a simple =toString= serialization of the value of the instance's =value= set-get property.
 
 		Object Highlighting
 			Object Highlighting lets you see where widgets and DOM nodes are in the page being inspected.

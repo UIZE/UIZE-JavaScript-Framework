@@ -64,20 +64,23 @@ Uize.module ({
 		'UizeDotCom.Templates.JavaScriptSourceSample'
 	],
 	builder:function () {
-		/*** create the example page widget ***/
-			var page = window.page = UizeDotCom.Page.Example ();
+		/*** create a page widget subclass ***/
+			var CustomPageWidget = UizeDotCom.Page.Example.subclass ();
 
-		/*** add property for managing update of scrunched code and scruncher report ***/
-			page.Class.registerProperties ({
-				sourceCode:{
-					name:'sourceCode',
-					onChange:function () {
-						var scruncherResult = Uize.Scruncher.scrunch (this.sourceCode);
-						page.setNodeValue ('scrunchedCode',scruncherResult.scrunchedCode);
-						page.setNodeValue ('scruncherReport',scruncherResult.report);
+			/*** add property for managing update of scrunched code and scruncher report ***/
+				CustomPageWidget.registerProperties ({
+					sourceCode:{
+						name:'sourceCode',
+						onChange:function () {
+							var scruncherResult = Uize.Scruncher.scrunch (this.sourceCode);
+							page.setNodeValue ('scrunchedCode',scruncherResult.scrunchedCode);
+							page.setNodeValue ('scruncherReport',scruncherResult.report);
+						}
 					}
-				}
-			});
+				});
+
+		/*** create the example page widget ***/
+			var page = window.page = CustomPageWidget ();
 
 		/*** add the tabs child widget ***/
 			var tabs = window.tabs = page.addChild (

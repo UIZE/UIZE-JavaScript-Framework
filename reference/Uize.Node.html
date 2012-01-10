@@ -128,7 +128,7 @@
 						<ul>
 							<li><a href="#2_27_1" title="The Uize.Node.setStyle method abstracts the differences between Internet Explorer and browsers that support the standard CSS opacity property.">2.27.1. Special Handling for Opacity</a></li>
 							<li><a href="#2_27_2" title="When number type values are specified for CSS style properties (other than the opacity and zIndex properties), the values are converted to strings by appending the &quot;px&quot; unit.">2.27.2. Specifying Number Values</a></li>
-							<li><a href="#2_27_3" title="When an instance of a Uize subclass is specified for a CSS style property, the instance&apos;s valueOf Intrinsic Method is invoked in order to obtain the value of the instance&apos;s value set-get property.">2.27.3. Specifying Instance Values</a></li>
+							<li><a href="#2_27_3" title="When an instance of a Uize.Class subclass is specified for a CSS style property, the instance&apos;s valueOf Intrinsic Method is invoked in order to obtain the value of the instance&apos;s value set-get property.">2.27.3. Specifying Instance Values</a></li>
 						</ul>
 					</li>
 					<li><a href="#2_28" title="Sets the value of the specified Node Blob.">2.28. Uize.Node.setValue</a>
@@ -433,7 +433,7 @@ Uize.Node.show ([topButtons,bottomButtons],true);
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>any parameter of this method can be an object that implements a <code>valueOf</code> interface (such as an instance of a <code><a href="../reference/Uize.html">Uize</a></code> subclass that implements the <code>value</code> set-get property)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>any parameter of this method can be an object that implements a <code>valueOf</code> interface (such as an instance of a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass that implements the <code>value</code> set-get property)</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -940,7 +940,7 @@ Uize.Node.setStyle ('node4',Uize.Node.getStyle ('node3',styleProperties));
 <pre class="sample-code">Uize.Node.injectHtml (nodeBLOB,htmlSTRorOBJ);
 </pre>
 			
-			<p>The <code>htmlSTRorOBJ</code> parameter can be a DOM node, an array of DOM nodes, a string containing the HTML you wish to inject, or it can be any object that implements a <code>valueOf</code> interface (such as an instance of a <code><a href="../reference/Uize.html">Uize</a></code> subclass that implements the <code>value</code> set-get property).</p>
+			<p>The <code>htmlSTRorOBJ</code> parameter can be a DOM node, an array of DOM nodes, a string containing the HTML you wish to inject, or it can be any object that implements a <code>valueOf</code> interface (such as an instance of a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass that implements the <code>value</code> set-get property).</p>
 			
 			<p><span class="allCaps">VARIATION</span></p>
 			
@@ -1261,7 +1261,7 @@ Uize.Node.setStyle ('node4',Uize.Node.getStyle ('node3',styleProperties));
 <pre class="sample-code">[leftINTorSTRorOBJ,topINTorSTRorOBJ]
 </pre>
 			
-			<p>When number type values are specified for <code>leftINTorSTRorOBJ</code>, <code>topINTorSTRorOBJ</code>, <code>widthINTorSTRorOBJ</code>, or <code>heightINTorSTRorOBJ</code>, those values will be converted to strings by appending the "px" unit. When string type values are specified, the unit should already be present in the value. <code><a href="../reference/Uize.html">Uize</a></code> subclass instances can also be specified, and they will be converted to values by invoking their <code>valueOf Intrinsic Method</code>.</p>
+			<p>When number type values are specified for <code>leftINTorSTRorOBJ</code>, <code>topINTorSTRorOBJ</code>, <code>widthINTorSTRorOBJ</code>, or <code>heightINTorSTRorOBJ</code>, those values will be converted to strings by appending the "px" unit. When string type values are specified, the unit should already be present in the value. <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass instances can also be specified, and they will be converted to values by invoking their <code>valueOf Intrinsic Method</code>.</p>
 			
 			<p><span class="allCaps">EXAMPLES</span></p>
 			
@@ -1319,7 +1319,7 @@ Uize.Node.setCoords ('nodeId',{width:sliderW,height:sliderH});
 <pre class="sample-code">Uize.Node.setInnerHtml (nodeBLOB,htmlSTRorOBJ);
 </pre>
 			
-			<p>The <code>htmlSTRorOBJ</code> parameter can be a string containing the HTML you wish to inject, or it can be any object that implements a <code>valueOf</code> interface (such as an instance of a <code><a href="../reference/Uize.html">Uize</a></code> subclass that implements the <code>value</code> set-get property).</p>
+			<p>The <code>htmlSTRorOBJ</code> parameter can be a string containing the HTML you wish to inject, or it can be any object that implements a <code>valueOf</code> interface (such as an instance of a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass that implements the <code>value</code> set-get property).</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
@@ -1351,7 +1351,7 @@ Uize.Node.setCoords ('nodeId',{width:sliderW,height:sliderH});
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this method can operate on multiple nodes at a time. For more details, see the section on <a href="#1_1_1">Node Blob</a></td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the <code>opacityFLOATorOBJ</code> parameter can be an object that implements a <code>valueOf</code> interface (such as an instance of a <code><a href="../reference/Uize.html">Uize</a></code> subclass that implements the <code>value</code> set-get property)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the <code>opacityFLOATorOBJ</code> parameter can be an object that implements a <code>valueOf</code> interface (such as an instance of a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass that implements the <code>value</code> set-get property)</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -1460,7 +1460,7 @@ Uize.Node.setCoords ('nodeId',{width:sliderW,height:sliderH});
 			<a name="2_27_3"></a>
 			<h3 class="heading3" title="2. Static Methods -&gt; 2.27. Uize.Node.setStyle -&gt; 2.27.3. Specifying Instance Values"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_27" title="2. Static Methods -&gt; 2.27. Uize.Node.setStyle">27</a>.<a href="#2_27_3" title="2. Static Methods -&gt; 2.27. Uize.Node.setStyle -&gt; 2.27.3. Specifying Instance Values">3</a>. </span>Specifying Instance Values</h3>
 			<div class="contents3">
-				<p>When an instance of a <code><a href="../reference/Uize.html">Uize</a></code> subclass is specified for a CSS style property, the instance's <code>valueOf Intrinsic Method</code> is invoked in order to obtain the value of the instance's <code>value</code> set-get property.</p>
+				<p>When an instance of a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass is specified for a CSS style property, the instance's <code>valueOf Intrinsic Method</code> is invoked in order to obtain the value of the instance's <code>value</code> set-get property.</p>
 				
 				<p>So, for example, the following statement...</p>
 				
@@ -1474,7 +1474,7 @@ Uize.Node.setCoords ('nodeId',{width:sliderW,height:sliderH});
 <pre class="sample-code">Uize.Node.setStyle ('myNodeId',{width:myWidthSlider});
 </pre>
 				
-				<p>This feature of the <code><a href="#2_27">Uize.Node.setStyle</a></code> method is provided as a convenience, so that instances of <code><a href="../reference/Uize.html">Uize</a></code> subclasses that are value selectors and that implement the <code>value</code> set-get property can be supplied - as is - when setting any style properties. If the value for an instance is a number type, then it will be further handled according to the rules for <a href="#2_27_2">Specifying Number Values</a>.</p>
+				<p>This feature of the <code><a href="#2_27">Uize.Node.setStyle</a></code> method is provided as a convenience, so that instances of <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclasses that are value selectors and that implement the <code>value</code> set-get property can be supplied - as is - when setting any style properties. If the value for an instance is a number type, then it will be further handled according to the rules for <a href="#2_27_2">Specifying Number Values</a>.</p>
 			</div>
 			
 			<p><span class="allCaps">NOTES</span></p>
@@ -1501,7 +1501,7 @@ Uize.Node.setCoords ('nodeId',{width:sliderW,height:sliderH});
 <pre class="sample-code">Uize.Node.setValue (nodeBLOB,valueSTRorNUMorBOOLorOBJ);
 </pre>
 			
-			<p>In addition to being able to be a simple type value (like a string, boolean, or number), the <code>valueSTRorNUMorBOOLorOBJ</code> parameter can also be any object that implements a <code>valueOf</code> interface (such as an instance of a <code><a href="../reference/Uize.html">Uize</a></code> subclass that implements the <code>value</code> set-get property).</p>
+			<p>In addition to being able to be a simple type value (like a string, boolean, or number), the <code>valueSTRorNUMorBOOLorOBJ</code> parameter can also be any object that implements a <code>valueOf</code> interface (such as an instance of a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass that implements the <code>value</code> set-get property).</p>
 			
 			<p>This method provides a convenient abstraction that makes it easier to change a form's implementation, without having to worry about modifying the JavaScript application logic that sets values for the form's fields. For example, you could change the HTML of a form so that what was once a <code>select</code> tag becomes a <code>radio</code> button set, and the call to <code><a href="#2_28">Uize.Node.setValue</a></code> could remain unchanged.</p>
 			
@@ -1700,7 +1700,7 @@ Uize.Node.setValue ('renewableEnergyList',' Wind,Solar ');  // padding around li
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>you can use the <code><a href="#2_28">Uize.Node.setValue</a></code> method to set values on readonly form elements</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the corresponding <code><a href="#2_12">Uize.Node.getValue</a></code> static method</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the <code>value</code> parameter can be an object that implements a <code>valueOf</code> interface (such as an instance of a <code><a href="../reference/Uize.html">Uize</a></code> subclass that implements the <code>value</code> set-get property)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the <code>value</code> parameter can be an object that implements a <code>valueOf</code> interface (such as an instance of a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass that implements the <code>value</code> set-get property)</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			

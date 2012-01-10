@@ -1,5 +1,5 @@
 /*
-	UIZE Web Site 2011-12-23
+	UIZE Web Site 2012-01-09
 
 	http://www.uize.com/reference/UizeDotCom.DialogConfirm.html
 	Available under MIT License or GNU General Public License -- http://www.uize.com/license.html

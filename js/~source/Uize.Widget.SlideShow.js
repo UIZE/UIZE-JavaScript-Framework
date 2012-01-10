@@ -59,7 +59,7 @@
 			The =Uize.Widget.SlideShow= base class does not provide or impose any specific transition effects, however, and acts primarily as a foundation / scaffolding upon which to build a slideshow user experience. Slideshows with elaborate transition effects can quite easily be configured by combining the =Uize.Widget.SlideShow= class with other widget classes from the UIZE JavaScript Framework - such as the =Uize.Widget.Swap.Image= and =Uize.Widget.ImageWipe= classes - or your own widget classes.
 
 		Slide Properties
-			The =Uize.Widget.SlideShow= class supports an arbitrary number of properties for slides, each of which can be bound - either implicitly or explicitly - to child widgets, implied nodes, =Uize= subclass instances, or handler functions.
+			The =Uize.Widget.SlideShow= class supports an arbitrary number of properties for slides, each of which can be bound - either implicitly or explicitly - to child widgets, implied nodes, =Uize.Class= subclass instances, or handler functions.
 
 			The system for binding slide properties so that they are represented in the user interface for a slideshow supports a wide range of possible applications for slideshows, where each slide may contain a rich set of data for display. For example, you may implement a slideshow with slides that contain =imageUrl=, =title=, =description=, =rating=, =author=, and =tags= properties. Or, you may implement a nutritional information slideshow - where each slide represents a different fruit and contains properties like =calories=, =totalFat=, =saturatedFat=, =cholesterol=, =sodium=, etc.
 
@@ -73,7 +73,7 @@
 
 			As mentioned earlier, the =Uize.Widget.SlideShow= class does not make assumptions about the content described by slides, and does also not presume to know how best to display that content. Instead, it is left to an individual application, a subclass of =Uize.Widget.SlideShow=, or some other widget class that uses the =Uize.Widget.SlideShow= class as a helper class to implement the presentation.
 
-			What the =Uize.Widget.SlideShow= class *does* provide is a mechanism for binding the values of slide properties - either implicitly to child widgets or implied nodes, or explicitly to registered =Uize= subclass instances or handler functions.
+			What the =Uize.Widget.SlideShow= class *does* provide is a mechanism for binding the values of slide properties - either implicitly to child widgets or implied nodes, or explicitly to registered =Uize.Class= subclass instances or handler functions.
 
 			Implicit Bindings
 				The =Uize.Widget.SlideShow= class implements a convenient facility for implicitly binding properties of the current slide to either child widgets of a =Uize.Widget.SlideShow= instance, or implied nodes of the instance.
@@ -115,12 +115,12 @@
 					In the above example, the value of the =imageUrl= slide property - that would normally be bound by the `Implied Node Bindings` facility to the implied node =slide_imageUrl= - is being remapped so that it is bound instead to the implied node =imageUrl=, using the =nodeMap= set-get property that is implemented in the =Uize.Widget= class.
 
 			Explicit Bindings
-				A facility is provided to explicitly declare a binding between a slide property and either an instance of a =Uize= subclass that implements the `Value Interface` (ie. provides a =value= set-get property), or an update handler function that will be executed when the value of the =slide= set-get property changes.
+				A facility is provided to explicitly declare a binding between a slide property and either an instance of a =Uize.Class= subclass that implements the `Value Interface` (ie. provides a =value= set-get property), or an update handler function that will be executed when the value of the =slide= set-get property changes.
 
-				This facility is implemented in the form of the =slideBindings= set-get property, whose value should be an object that provides mappings between slide properties and binding targets. The name of each key in the =slideBindings= object should correspond to the name of a property in the =slide= object, and its value should be either a reference to an instance of a =Uize= subclass that implements the `Value Interface` (ie. provides a =value= set-get property), or an update handler function that will be executed when the value of the =slide= set-get property changes. If an explicit binding is provided for a particular slide property, then the `Implicit Bindings` facility will not be employed for that slide property (the explicit binding takes precedence).
+				This facility is implemented in the form of the =slideBindings= set-get property, whose value should be an object that provides mappings between slide properties and binding targets. The name of each key in the =slideBindings= object should correspond to the name of a property in the =slide= object, and its value should be either a reference to an instance of a =Uize.Class= subclass that implements the `Value Interface` (ie. provides a =value= set-get property), or an update handler function that will be executed when the value of the =slide= set-get property changes. If an explicit binding is provided for a particular slide property, then the `Implicit Bindings` facility will not be employed for that slide property (the explicit binding takes precedence).
 
 				Explicit Object Bindings
-					Any slide property can be bound to an instance of a =Uize= subclass that implements the `Value Interface` (ie. provides a =value= set-get property), simply by specifying a reference to that instance as the value for a binding.
+					Any slide property can be bound to an instance of a =Uize.Class= subclass that implements the `Value Interface` (ie. provides a =value= set-get property), simply by specifying a reference to that instance as the value for a binding.
 
 					EXAMPLE
 					......................................
@@ -413,9 +413,9 @@ Uize.module ({
 					/*?
 						Set-get Properties
 							slideBindings
-								An object, representing explicit bindings between slide properties and =Uize= subclass instances or handler functions.
+								An object, representing explicit bindings between slide properties and =Uize.Class= subclass instances or handler functions.
 
-								The name of each key in the =slideBindings= object should correspond to the name of a property in the =slide= object, and its value should be either a reference to an instance of a =Uize= subclass that implements the `Value Interface` (ie. provides a =value= set-get property), or an update handler function that will be executed when the value of the =slide= set-get property changes. It is not necessary to provide a binding for every slide property, and any slide property for which no explicit binding is provided will be bound implicitly to either a child widget or an implied mode.
+								The name of each key in the =slideBindings= object should correspond to the name of a property in the =slide= object, and its value should be either a reference to an instance of a =Uize.Class= subclass that implements the `Value Interface` (ie. provides a =value= set-get property), or an update handler function that will be executed when the value of the =slide= set-get property changes. It is not necessary to provide a binding for every slide property, and any slide property for which no explicit binding is provided will be bound implicitly to either a child widget or an implied mode.
 
 								For more details on property bindings, consult the section `Slide Property Bindings`.
 
