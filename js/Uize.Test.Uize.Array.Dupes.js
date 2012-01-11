@@ -1,5 +1,5 @@
 /*
-	UIZE JAVASCRIPT FRAMEWORK 2012-01-09
+	UIZE JAVASCRIPT FRAMEWORK 2012-01-10
 
 	http://www.uize.com/reference/Uize.Test.Uize.Array.Dupes.html
 	Available under MIT License or GNU General Public License -- http://www.uize.com/license.html

@@ -4,7 +4,7 @@
 |    /    O /   |    MODULE : SIMPLE Doc Build Script (version 1.0.1)
 |   /    / /    |    AUTHOR : Chris van Rensburg (http://www.tomkidding.com)
 |  /    / /  /| |    ONLINE : http://www.uize.com
-| /____/ /__/_| | COPYRIGHT : (c)2005-2011 Chris van Rensburg
+| /____/ /__/_| | COPYRIGHT : (c)2005-2012 Chris van Rensburg
 |          /___ |   LICENSE : Available under MIT License or GNU General Public License
 |_______________|             http://www.uize.com/license.html
 */

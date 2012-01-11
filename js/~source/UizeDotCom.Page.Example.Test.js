@@ -4,7 +4,7 @@
 |    /    O /   |    MODULE : UizeDotCom.Page.Example.Test
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
-| /____/ /__/_| | COPYRIGHT : (c)2008-2011 UIZE
+| /____/ /__/_| | COPYRIGHT : (c)2008-2012 UIZE
 |          /___ |   LICENSE : Available under MIT License or GNU General Public License
 |_______________|             http://www.uize.com/license.html
 */
