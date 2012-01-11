@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2012-01-11 - New Uize.isNaN Method | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="The new Uize.isNaN static method, implemented in the Uize base module, returns a boolean value, indicating whether or not the specified value is the JavaScript special value NaN."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2012.html" class="breadcrumb breadcrumbWithArrow">2012 NEWS</a>
+	2012-01-11 - New Uize.isNaN Method
+
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="JavaScript&apos;s built-in isNaN function is odd - and, some might say, less than useful - in its peculiar behavior.">1. There's Something About NaN</a></li>
+			<li><a href="#2" title="Like the majority of new features added to UIZE more recently, the new Uize.isNaN static method is comprehensively documented and thoroughly unit tested.">2. Documented and Unit Tested</a></li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<p>The new <code>Uize.isNaN</code> static method, implemented in the <code><a href="../reference/Uize.html">Uize</a></code> base module, returns a boolean value, indicating whether or not the specified value is the JavaScript special value <code>NaN</code>.</p>
+	
+	<p><span class="allCaps">SYNTAX</span></p>
+	
+	
+<pre class="sample-code">isNaNBOOL = Uize.isNaN (valueANYTYPE);
+</pre>
+	
+	<a name="1"></a>
+	<h1 class="heading1" title="1. There&apos;s Something About NaN"><span class="headingNumber"><a href="#1" title="1. There&apos;s Something About NaN">1</a>. </span>There's Something About NaN</h1>
+	<div class="contents1">
+		<p>JavaScript's built-in <code>isNaN</code> function is odd - and, some might say, less than useful - in its peculiar behavior.</p>
+		
+		<p>The first thing that the <code>isNaN</code> function does is to coerce the value it's given to a number type, so it will return <code>true</code> when the value being tested is <code>undefined</code> or some other value that, when coerced to a number, produces the value <code>NaN</code>. For example, the <code>isNaN</code> function will produce the result <code>false</code> when given the string value <code>'42'</code> (<code>'42'</code> coerces to the number <code>42</code>), while it will produce the result <code>true</code> when given the string value <code>'foo'</code> (<code>'foo'</code> coerces to the number type value <code>NaN</code>). Now, clearly neither of these two string values is the special value <code>NaN</code>, so the <code>isNaN</code> function fails to provide a useful way to test if a value is <code>NaN</code>.</p>
+		
+		<p>Now, add to this the peculiar fact that testing any value for strict equality against the special value <code>NaN</code> always produces the result <code>false</code> - even if the value being tested is itself <code>NaN</code> - and you have yourself a rather frustrating quandary. Since the expression <code>NaN &#61;&#61;&#61; NaN</code> produces the result <code>false</code>, you could use the expression <code>value !&#61;&#61; value</code> as a way of testing if a value is <code>NaN</code>, but you'd probably want to avoid having that in your code for fear of confusing the hell out of a person reading it later.</p>
+		
+		<p>The <code>Uize.isNaN</code> method comes to the rescue, providing a useful and semantically sensible way of testing if a value is the JavaScript special value <code>NaN</code>.</p>
+		
+		<p><span class="allCaps">EXAMPLES</span></p>
+		
+		
+<pre class="sample-code">// using the Uize.isNaN method, you get these results...
+
+Uize.isNaN (NaN);               // returns true
+
+Uize.isNaN (function () {});    // returns false (a function is not NaN)
+Uize.isNaN (new Number (NaN));  // returns false (a Number object is not NaN)
+Uize.isNaN (new Date ('foo'));  // returns false (a Date object is not NaN)
+Uize.isNaN (undefined);         // returns false
+Uize.isNaN (null);              // returns false
+Uize.isNaN ('foo');             // returns false
+Uize.isNaN ('');                // returns false
+Uize.isNaN ('42');              // returns false
+Uize.isNaN (42);                // returns false
+Uize.isNaN (true);              // returns false
+Uize.isNaN ({});                // returns false
+Uize.isNaN ([]);                // returns false
+
+
+// in contrast, JavaScript's built-in isNaN function produces these results
+
+isNaN (NaN);                    // returns true (hallelujah!)
+
+isNaN (undefined);              // returns true (undefined coerces to NaN)
+isNaN ('foo');                  // returns true ('foo' coerces to NaN)
+isNaN ({});                     // returns true ({} coerces to NaN)
+isNaN (function () {});         // returns true (a function coerces to NaN)
+isNaN (new Number (NaN));       // returns true (new Number (NaN) coerces to NaN)
+isNaN (new Date ('foo'));       // returns true (an invalid date coerces to NaN)
+
+isNaN (null);                   // returns false (null coerces to 0)
+isNaN ('42');                   // returns false ('42' coerces to 42)
+isNaN (true);                   // returns false (true coerces to 1)
+isNaN ('');                     // returns false ('' coerces to 0)
+isNaN ([]);                     // returns false ([] coerces to '', which coerces to 0)
+</pre>
+		
+		<p>From the above examples, it should be clear that the <code>Uize.isNaN</code> method is far more useful when trying to test if a specific value is exactly the JavaScript special value <code>NaN</code>, while it's clear that the built-in <code>isNaN</code> function's behavior is of questionable value.</p>
+	</div>
+	
+	<a name="2"></a>
+	<h1 class="heading1" title="2. Documented and Unit Tested"><span class="headingNumber"><a href="#2" title="2. Documented and Unit Tested">2</a>. </span>Documented and Unit Tested</h1>
+	<div class="contents1">
+		<p>Like the majority of new features added to UIZE more recently, the new <code>Uize.isNaN</code> static method is comprehensively documented and thoroughly unit tested.</p>
+	</div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = UizeDotCom.Page.Doc ()).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

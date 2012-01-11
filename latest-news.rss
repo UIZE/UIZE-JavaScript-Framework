@@ -7,7 +7,7 @@
 		<description>UIZE JavaScript Framework (AJAX, RIA, widgets, JSON, OOP, Class Inheritance, XMLHttpRequest, DOM manipulation, and all that stuff)</description>
 		<language>en-us</language>
 		<copyright>© 1996-2008 UIZE</copyright>
-		<pubDate>Wed, 11 Jan 2012 05:49:11 UT</pubDate>
+		<pubDate>Wed, 11 Jan 2012 06:04:58 UT</pubDate>
 		<ttl>10080</ttl>
 		<image>
 			<title>UIZE JavaScript Framework | Latest News</title>
@@ -18,6 +18,14 @@
 			<description>UIZE JavaScript Framework (AJAX, RIA, widgets, JSON, OOP, Class Inheritance, XMLHttpRequest, DOM manipulation, and all that stuff)</description>
 		</image>
 		<atom10:link xmlns:atom10="http://www.w3.org/2005/Atom" rel="self" href="http://www.uize.com/latest-news.rss" type="application/rss+xml" />
+		<item>
+			<title>2012-01-11 - New Uize.isNaN Method</title>
+			<link>http://www.uize.com/news/2012-01-11-New-Uize.isNaN-Method.html</link>
+			<guid>http://www.uize.com/news/2012-01-11-New-Uize.isNaN-Method.html</guid>
+			<description>The new Uize.isNaN static method, implemented in the Uize base module, returns a boolean value, indicating whether or not the specified value is the JavaScript special value NaN.</description>
+			<pubDate>Wed, 11 Jan 2012 08:00:00 UT</pubDate>
+			<feedburner:origLink>http://www.uize.com/news/2012-01-11-New-Uize.isNaN-Method.html</feedburner:origLink>
+		</item>
 		<item>
 			<title>2012-01-10 - Class Mechanism Moved Into Uize.Class</title>
 			<link>http://www.uize.com/news/2012-01-10-Class-Mechanism-Moved-Into-Uize.Class.html</link>
@@ -409,14 +417,6 @@
 			<description>The new Uize.Data.emptyOut static method, implemented in the Uize.Data module, lets you empty out the contents of a specified source array or object, returning a reference to that source.</description>
 			<pubDate>Mon, 6 Sep 2010 07:00:00 UT</pubDate>
 			<feedburner:origLink>http://www.uize.com/news/2010-09-06-NEW-METHOD-Uize.Data.emptyOut.html</feedburner:origLink>
-		</item>
-		<item>
-			<title>2010-08-25 - NEW MODULE: Uize.Array.Order</title>
-			<link>http://www.uize.com/news/2010-08-25-NEW-MODULE-Uize.Array.Order.html</link>
-			<guid>http://www.uize.com/news/2010-08-25-NEW-MODULE-Uize.Array.Order.html</guid>
-			<description>The new Uize.Array.Order module provides functionality for changing the order of elements in an array, with support for reversing, jumbling, inside to out, etc.</description>
-			<pubDate>Wed, 25 Aug 2010 07:00:00 UT</pubDate>
-			<feedburner:origLink>http://www.uize.com/news/2010-08-25-NEW-MODULE-Uize.Array.Order.html</feedburner:origLink>
 		</item>
 	</channel>
 </rss>
