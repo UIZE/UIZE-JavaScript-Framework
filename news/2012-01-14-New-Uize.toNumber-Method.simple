@@ -1,0 +1,266 @@
+The new =Uize.toNumber= static method, implemented in the =Uize= base module, lets you coerce a value to a number, with defaulting if it cannot be coerced successfully.
+
+The =Uize.toNumber= method returns a number, that is the specified value coerced to a number type value, with optional defaulting if the value can't be successfully coerced to a number.
+
+DIFFERENT USAGES
+
+`Coerce a Value to a Number`
+...........................................
+valueNUMBER = Uize.toNumber (valueANYTYPE);
+...........................................
+
+`Coerce a Value to a Number, With Defaulting`
+..........................................................
+valueNUMBER = Uize.toNumber (valueANYTYPE,defaultANYTYPE);
+..........................................................
+
+How a Value is Coerced to Number
+	The =Uize.toNumber= method coerces a value to a number using the following steps...
+
+	#. if the value is a function, then the function is called and the value is replaced with the value returned by the function
+	#. next, if the value is an object, then the object's =valueOf intrinsic method= is called and the value is replaced by the value returned by the =valueOf intrinsic method=
+	#. next, if the value is =undefined=, =null=, =''= (an empty string), or not a primitive type value like a string, number, or boolean, then it is replaced with the special value =NaN=
+	#. next, the value is coerced to a number using the "+" operator
+	#. next, if the coerced value is the special value =NaN=, and if an optional default value is specified, then the value is replaced with the default value
+
+	The above steps for coercing a value to number has the following side effects / implications...
+
+	Empty String is Coerced to NaN
+		Coercing the value =''= (an empty string) to a number will produce the result =NaN=.
+
+		EXAMPLE
+		...................................
+		Uize.toNumber ('');  // returns NaN
+		...................................
+
+	The Values null and undefined Are Coerced to NaN
+		Coercing the values =null= or =undefined= to a number will produce the result =NaN=
+
+		EXAMPLE
+		..........................................
+		Uize.toNumber (null);       // returns NaN
+		Uize.toNumber (undefined);  // returns NaN
+		..........................................
+
+	Arrays Are Coerced to NaN
+		Coercing an array to a number always produces the result =NaN=.
+
+		This is because the =valueOf intrinsic method= of JavaScript's built-in =Array= object always returns a reference to the array on which it is called.
+
+		EXAMPLE
+		....................................
+		Uize.toNumber ([]);   // returns NaN
+		Uize.toNumber ([1]);  // returns NaN
+		....................................
+
+	Some Objects Are Coerced to NaN
+		Unless an object deliberately implements the =valueOf intrinsic method=, or the object is an instance of a =Uize.Class= subclass, coercing an object to a number will produce the result =NaN=.
+
+		This is because the implementation of the =valueOf intrinsic method= in JavaScript's built-in =Object= object simply returns a reference to the object on which it is called. The =Uize.toNumber= method only coerces an object to a number successfully if the =valueOf intrinsic method= for the object returns a primitive type value, such as a string, number, or boolean.
+
+		EXAMPLE
+		.................................................................
+		// these objects can be successfully coerced to a number
+
+		Uize.toNumber (new Number (5));                    // returns 5
+		Uize.toNumber (new String ('5'));                  // returns 5
+		Uize.toNumber (new Boolean (true));                // returns 1
+		Uize.toNumber (Uize.Class ({value:5}));            // returns 5
+		Uize.toNumber (Uize.Class ({value:'5'}));          // returns 5
+		Uize.toNumber (Uize.Class ({value:true}));         // returns 1
+		Uize.toNumber ({valueOf:function () {return 5}});  // returns 5
+
+
+		// these objects will be coerced to NaN
+
+		Uize.toNumber ({});                                // returns NaN
+		Uize.toNumber ({foo:'bar'});                       // returns NaN
+		Uize.toNumber (new XMLHttpRequest);                // returns NaN
+		Uize.toNumber (/\d+/);                             // returns NaN
+		.................................................................
+
+	Key Distinctions When Compared With Simple Coercion
+		A cheap way to coerce a value to a number in JavaScript is to subtract zero from it, which results in JavaScript performing the steps necessary to produce a number type value.
+
+		Besides its convenient defaulting ability, the =Uize.toNumber= method behaves differently to simple coercion in a number of key ways...
+
+		- The =Uize.toNumber= method coerces =''= (an empty string) to =NaN=, whereas simple coercion turns an empty string into =0=. So, the statement =Uize.toNumber ('')= produces the value =NaN= while the statement ='' - 0= produces the value =0=. For the purpose of coercing a value to a number with defaulting, it makes more sense to treat an empty string as no value specified, rather than as the value =0= specified.
+
+		- The =Uize.toNumber= method coerces =null= to =NaN=, whereas simple coercion turns =null= into =0=. So, the statement =Uize.toNumber (null)= produces the value =NaN= while the statement =null - 0= produces the value =0=. For the purpose of coercing a value to a number with defaulting, it makes more sense to treat the value =null= as no value specified, rather than as the value =0= specified.
+
+		- The =Uize.toNumber= method will attempt to coerce a function to a number by calling it and using its result, whereas simple coercion produces the value =NaN=. So, the statement =Uize.toNumber (function () {return 5})= produces the value =5= while the statement =(function () {return 5}) - 0= produces the value =NaN=.
+
+	Using the Uize.toNumber Method
+		There are two main situations where the =Uize.toNumber= method comes in handy.
+
+		Normalizing Method Parameters
+			The =Uize.toNumber= method can be used to "normalize" method parameter values that need to be number type.
+
+			EXAMPLE
+			.................................................
+			function repeatStr (string,times) {
+				times = Uize.toNumber (times,1);
+				var result = '';
+				for (var repeatNo = -1; ++repeatNo < times;) {
+					result += string;
+				}
+				return result;
+			}
+			.................................................
+
+			In the above example, a =repeatStr= function is being implemented that will take a specified string and create a new string by repeating the string the specified number of times. The number of repetitions, which needs to be a number, is specified by the =times= parameter of the function.
+
+			Now, if the developer of the function wants to provide flexibility in how the number of repetitions is specified, the =Uize.toNumber= method can be used to coerce the value of this parameter to a number before it is used internally by the function's implementation. In this example, we're also specifying a default of =1=, in case the parameter is not specified or if the value specified cannot be coerced to a number without producing the value =NaN=.
+
+			Now, using the =repeatStr= function, as implemented above, we would see the following results...
+
+			RESULTS
+			..............................................................
+			repeatStr ('Foo',2);                       // returns "FooFoo"
+			repeatStr ('Foo','2');                     // returns "FooFoo"
+			repeatStr ('Foo',Uize.Class ({value:2}));  // returns "FooFoo"
+			repeatStr ('Foo',function () {return 2});  // returns "FooFoo"
+			repeatStr ('Foo',true);                    // returns "Foo"
+			repeatStr ('Foo',false);                   // returns ""
+
+			repeatStr ('Foo');                         // returns "Foo"
+			repeatStr ('Foo',NaN);                     // returns "Foo"
+			repeatStr ('Foo','bar');                   // returns "Foo"
+			repeatStr ('Foo',null);                    // returns "Foo"
+			repeatStr ('Foo',undefined);               // returns "Foo"
+			..............................................................
+
+		Conforming Set-get Properties
+			The =Uize.toNumber= method can be specified as a conformer for a set-get property of a =Uize.Class= subclass.
+
+			EXAMPLE
+			.......................................
+			var Rectangle = Uize.Class.subclass ();
+
+			Rectangle.registerProperties ({
+				width:{
+					conformer:Uize.toNumber,
+					value:0
+				},
+				height:{
+					conformer:Uize.toNumber,
+					value:0
+				}
+			});
+			.......................................
+
+			In the above example, a =Rectangle= class is being defined that has two set-get properties: =width= and =height=. For the convenience of users of the class, the =Uize.toNumber= method is set as the conformer for both the =width= and =height= properties. This means that the user of the class can set the values for these properties using values that are other than number type, and the developer of the class can write the rest of the class' code with confidence that internally the values for the properties will always be number type.
+
+			So, given the above implementation of the =Rectangle= class, we would see the following results...
+
+			RESULTS
+			................................................................
+			var rect = Rectangle ({width:'5',height:'10'});
+
+			myInstance.get ('width');                          // returns 5
+			myInstance.get ('height');                         // returns 10
+
+			myInstance.set ('width',true);
+			myInstance.get ('width');                          // returns 1
+
+			myInstance.set ('height',function () {return 7});
+			myInstance.get ('height');                         // returns 7
+
+			myInstance.set ('width',Uize.Class ({value:12}));
+			myInstance.get ('width');                          // returns 12
+			................................................................
+
+Coerce a Value to a Number
+	A value of any type can be coerced to a number by calling the =Uize.toNumber= method and passing the value that is to be coerced to a number as the single parameter.
+
+	SYNTAX
+	...........................................
+	valueNUMBER = Uize.toNumber (valueANYTYPE);
+	...........................................
+
+	EXAMPLES
+	...................................................................................
+	// values that can be coerced successfully to a number
+
+	Uize.toNumber (5);                                              // returns 5
+	Uize.toNumber (Infinity);                                       // returns Infinity
+	Uize.toNumber (true);                                           // returns 1
+	Uize.toNumber (false);                                          // returns 0
+	Uize.toNumber ('-1.234');                                       // returns -1.234
+	Uize.toNumber ('Infinity');                                     // returns Infinity
+	Uize.toNumber ('0xff');                                         // returns 255
+	Uize.toNumber (function () {return 5});                         // returns 5
+	Uize.toNumber (function () {return '5'});                       // returns 5
+	Uize.toNumber (Uize.Class ({value:5}));                         // returns 5
+	Uize.toNumber (Uize.Class ({value:'5'}));                       // returns 5
+	Uize.toNumber (new Number (5));                                 // returns 5
+	Uize.toNumber (new String ('5'));                               // returns 5
+	Uize.toNumber (new Boolean (true));                             // returns 1
+	Uize.toNumber (function () {return Uize.Class ({value:5})});    // returns 5
+	Uize.toNumber (function () {return Uize.Class ({value:'5'})});  // returns 5
+
+
+	// values that cannot be coerced to a number
+
+	Uize.toNumber ('foo');                                          // returns NaN
+	Uize.toNumber (NaN);                                            // returns NaN
+	Uize.toNumber ({});                                             // returns NaN
+	Uize.toNumber ([1]);                                            // returns NaN
+	Uize.toNumber (/\d+/);                                          // returns NaN
+	Uize.toNumber (undefined);                                      // returns NaN
+	Uize.toNumber (null);                                           // returns NaN
+	Uize.toNumber ('');                                             // returns NaN
+	Uize.toNumber (Uize.Class ({value:Uize.Class ({value:5})}));    // returns NaN
+	Uize.toNumber (Uize.Class ({value:function () {return 5}}));    // returns NaN
+	Uize.toNumber (function () {return function () {return 5}});    // returns NaN
+	...................................................................................
+
+Coerce a Value to a Number, With Defaulting
+	A value of any type can be coerced to a number, with defaulting if the value can't be successfully coerced to a number, by specifing a default value using the optional =defaultANYTYPE= second parameter.
+
+	SYNTAX
+	..........................................................
+	valueNUMBER = Uize.toNumber (valueANYTYPE,defaultANYTYPE);
+	..........................................................
+
+	EXAMPLES
+	......................................................................................
+	// values that can be coerced successfully to a number
+
+	Uize.toNumber (5,99);                                              // returns 5
+	Uize.toNumber (Infinity,99);                                       // returns Infinity
+	Uize.toNumber (true,99);                                           // returns 1
+	Uize.toNumber (false,99);                                          // returns 0
+	Uize.toNumber ('-1.234',99);                                       // returns -1.234
+	Uize.toNumber ('Infinity',99);                                     // returns Infinity
+	Uize.toNumber ('0xff',99);                                         // returns 255
+	Uize.toNumber (function () {return 5},99);                         // returns 5
+	Uize.toNumber (function () {return '5'},99);                       // returns 5
+	Uize.toNumber (Uize.Class ({value:5}),99);                         // returns 5
+	Uize.toNumber (Uize.Class ({value:'5'}),99);                       // returns 5
+	Uize.toNumber (new Number (5),99);                                 // returns 5
+	Uize.toNumber (new String ('5'),99);                               // returns 5
+	Uize.toNumber (new Boolean (true),99);                             // returns 1
+	Uize.toNumber (function () {return Uize.Class ({value:5})},99);    // returns 5
+	Uize.toNumber (function () {return Uize.Class ({value:'5'})},99);  // returns 5
+
+	// values that cannot be coerced to a number
+
+	Uize.toNumber ('foo',99);                                          // returns 99
+	Uize.toNumber (NaN,99);                                            // returns 99
+	Uize.toNumber ({},99);                                             // returns 99
+	Uize.toNumber ([1],99);                                            // returns 99
+	Uize.toNumber (/\d+/,99);                                          // returns 99
+	Uize.toNumber (undefined,99);                                      // returns 99
+	Uize.toNumber (null,99);                                           // returns 99
+	Uize.toNumber ('',99);                                             // returns 99
+	Uize.toNumber (Uize.Class ({value:Uize.Class ({value:5})}),99);    // returns 99
+	Uize.toNumber (Uize.Class ({value:function () {return 5}}),99);    // returns 99
+	Uize.toNumber (function () {return function () {return 5}},99);    // returns 99
+	......................................................................................
+
+....................................................................................
+<< metadata >>
+
+title: 2012-01-14 - New Uize.toNumber Method
+....................................................................................

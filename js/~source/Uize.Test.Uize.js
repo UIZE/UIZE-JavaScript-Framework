@@ -110,6 +110,49 @@ Uize.module ({
 			};
 		}
 
+		function _toNumberTestBatch (_wrapValueWithObject,_wrapValueWithFunction) {
+			function _toNumberTest (_value,_expectedValue) {
+				return {
+					title:'Blah',
+					test:function () {
+						return this.expect (
+							_expectedValue,
+							Uize.toNumber (
+								_wrapValueWithObject && _wrapValueWithFunction
+									? function () {return new _ClassWithValueInterface ({value:_value})}
+									: _wrapValueWithObject
+										? new _ClassWithValueInterface ({value:_value})
+										: _wrapValueWithFunction
+											? function () {return _value}
+											: _value
+							)
+						);
+					}
+				};
+			}
+			return {
+				title:'Test coercion of value to number',
+				test:[
+					_toNumberTest (42,42),
+					_toNumberTest (Infinity,Infinity),
+					_toNumberTest (true,1),
+					_toNumberTest (false,0),
+					_toNumberTest ('-1.234',-1.234),
+					_toNumberTest ('Infinity',Infinity),
+					_toNumberTest ('0xff',255),
+					_toNumberTest ('foo',NaN),
+					_toNumberTest (NaN,NaN),
+					_toNumberTest ({},NaN),
+					_toNumberTest ([],NaN),
+					_toNumberTest ([1],NaN),
+					_toNumberTest (/\d+/,NaN),
+					_toNumberTest (undefined,NaN),
+					_toNumberTest (null,NaN),
+					_toNumberTest ('',NaN)
+				]
+			};
+		}
+
 		return Uize.Test.declare ({
 			title:'Test for Uize Base Class',
 			test:[
@@ -729,6 +772,97 @@ Uize.module ({
 							'foobar,:;\'"~`<>/!@#%&_-=',
 							'foobar,:;\'"~`<>/!@#%&_-='
 						]
+					]],
+					['Uize.toNumber',[
+						['Test that calling with no parameters produces the result NaN',[],NaN],
+
+						/*** test coercion of value to number, not wrapped in object or function ***/
+							_toNumberTestBatch (false,false),
+
+						/*** test coercion of value to number, wrapped in object ***/
+							_toNumberTestBatch (true,false),
+
+						/*** test coercion of value to number, wrapped in function ***/
+							_toNumberTestBatch (false,true),
+
+						/*** test coercion of value to number, wrapped in object that is wrapped in function ***/
+							_toNumberTestBatch (true,true),
+
+						/*** test that the optional default value is returned if value can't be coerced to number ***/
+							['Test that the optional default value is returned when trying to coerce NaN to a number',
+								[NaN,42],
+								42
+							],
+							['Test that the optional default value is returned when trying to coerce an empty object to a number',
+								[{},42],
+								42
+							],
+							['Test that the optional default value is returned when trying to coerce an array to a number',
+								[[1],42],
+								42
+							],
+							['Test that the optional default value is returned when trying to coerce a regular expression to a number',
+								[/\d+/,42],
+								42
+							],
+							['Test that the optional default value is returned when trying to coerce an empty string to a number',
+								['',42],
+								42
+							],
+							['Test that the optional default value is returned when a string can\'t be successfully coerced to a number',
+								['foo',42],
+								42
+							],
+							['Test that the optional default value is returned when trying to coerce undefined to a number',
+								[undefined,42],
+								42
+							],
+							['Test that the optional default value is returned when trying to coerce null to a number',
+								[null,42],
+								42
+							],
+
+						/*** test that the optional default value is not itself coerced to a number ***/
+							['Test that a string type default value is not coerced to a number',['foo','bar'],'bar'],
+							['Test that a boolean type default value is not coerced to a number',['foo',true],true],
+							['Test that the default value null is not coerced to a number',['foo',null],null],
+							['Test that the default value undefined is not coerced to a number',['foo',undefined],undefined],
+							['Test that the default value NaN is not coerced to a number',['foo',NaN],NaN],
+							{
+								title:'Test that an object type default value is not coerced to a number',
+								test:function () {
+									var _defaultValue = {};
+									return this.expectSameAs (Uize.toNumber ('foo',_defaultValue),_defaultValue);
+								}
+							},
+							{
+								title:'Test that an array type default value is not coerced to a number',
+								test:function () {
+									var _defaultValue = [];
+									return this.expectSameAs (Uize.toNumber ('foo',_defaultValue),_defaultValue);
+								}
+							},
+							{
+								title:'Test that a regular expression default value is not coerced to a number',
+								test:function () {
+									var _defaultValue = /\d+/;
+									return this.expectSameAs (Uize.toNumber ('foo',_defaultValue),_defaultValue);
+								}
+							},
+
+						/*** miscellaneous ***/
+							['Test that if the value is a function that returns a function, it cannot be coerced to a number',
+								[function () {return function () {return 5}},42],
+								42
+							],
+							['Test that if the value is an object whose valueOf method returns an object, it cannot be coerced to a number',
+								[{valueOf:function () {return {valueOf:function () {return 5}}}},42],
+								42
+							],
+							['Test that if the value is an object whose valueOf method returns a function, it cannot be coerced to a number',
+								[{valueOf:function () {return function () {}}},42],
+								42
+							]
 					]],
 					['Uize.copyInto',
 						[

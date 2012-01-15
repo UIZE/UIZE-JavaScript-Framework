@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2012-01-12 - New Uize.isSameAs Method | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="The new Uize.isSameAs static method tests if two values are the same in a strict equality test, with support for NaN values."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2012.html" class="breadcrumb breadcrumbWithArrow">2012 NEWS</a>
+	2012-01-12 - New Uize.isSameAs Method
+
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="The Uize.isSameAs method is most useful in its support for comparing two values that may be the JavaScript special value NaN.">1. NaN is the Same as NaN</a></li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<p>The new <code>Uize.isSameAs</code> static method tests if two values are the same in a strict equality test, with support for <code>NaN</code> values.</p>
+	
+	<p><span class="allCaps">SYNTAX</span></p>
+	
+	
+<pre class="sample-code">isSameAsBOOL = Uize.isSameAs (valueANYTYPE,otherValueANYTYPE);
+</pre>
+	
+	<p><span class="allCaps">EXAMPLES</span></p>
+	
+	
+<pre class="sample-code">Uize.isSameAs ('foo','foo');          // returns true
+Uize.isSameAs ('','');                // returns true
+Uize.isSameAs (42,42);                // returns true
+Uize.isSameAs (Infinity,Infinity);    // returns true
+Uize.isSameAs (NaN,NaN);              // returns true
+Uize.isSameAs (false,false);          // returns true
+Uize.isSameAs (null,null);            // returns true
+Uize.isSameAs (undefined,undefined);  // returns true
+
+Uize.isSameAs (null,undefined);       // returns false
+Uize.isSameAs (null,NaN);             // returns false
+Uize.isSameAs ('',0);                 // returns false
+Uize.isSameAs (1,true);               // returns false
+Uize.isSameAs ('true',true);          // returns false
+Uize.isSameAs ('foo','');             // returns false
+Uize.isSameAs ('null',null);          // returns false
+Uize.isSameAs ('42',42);              // returns false
+Uize.isSameAs ({},{});                // returns false (different object references)
+Uize.isSameAs ([],[]);                // returns false (different array references)
+</pre>
+	
+	<a name="1"></a>
+	<h1 class="heading1" title="1. NaN is the Same as NaN"><span class="headingNumber"><a href="#1" title="1. NaN is the Same as NaN">1</a>. </span>NaN is the Same as NaN</h1>
+	<div class="contents1">
+		<p>The <code>Uize.isSameAs</code> method is most useful in its support for comparing two values that may be the JavaScript special value <code>NaN</code>.</p>
+		
+		<p>The special value <code>NaN</code> is never considered to be equal to itself in a strict equality test. So, for example, the expression <code>NaN &#61;&#61;&#61; NaN</code> produces the result <code>false</code>. The <code>Uize.isSameAs</code> method comes to the rescue and provides special handling in order to ensure that if the two values being compared are both <code>NaN</code>, then the method will return <code>true</code>.</p>
+		
+		<p><span class="allCaps">EXAMPLE</span></p>
+		
+		
+<pre class="sample-code">var
+  valueA = NaN,
+  valueB = NaN
+;
+alert (valueA === valueB);              // alerts "false"
+alert (Uize.isSameAs (valueA,valueB));  // alerts "true"
+</pre>
+	</div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = UizeDotCom.Page.Doc ()).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

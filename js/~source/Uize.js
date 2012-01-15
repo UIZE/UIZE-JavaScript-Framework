@@ -12,11 +12,11 @@
 /*ScruncherSettings Mappings="" LineCompacting="TRUE"*/
 
 /* Module Meta Data
-	type: Class
+	type: Package
 	importance: 10
 	codeCompleteness: 100
 	testCompleteness: 70
-	docCompleteness: 100
+	docCompleteness: 90
 */
 
 /*?
@@ -81,7 +81,7 @@
 					- =Uize.defaultNully= - defaults a value to the specified default, if the value is nully (ie. =null= or =undefined=)
 					- =Uize.escapeRegExpLiteral= - escapes a string so that it can be used as a literal match portion of a regular expression string
 					- =Uize.substituteInto= - substitutes the specified values into the specified string using token replacement
-					- =Uize.toNumber= -
+					- =Uize.toNumber= - coerces a value to a number, with defaulting if it cannot be coerced successfully
 
 				Dummy Functions
 
@@ -93,6 +93,17 @@
 				General Utilities
 
 					- =Uize.noNew= - wraps an object constructor function to make JavaScript's =new= operator optional
+					- =Uize.getClass= - gets the class of which a specified object is an instance, or returns the object if it is a class
+					- =Uize.substituteInto= - substitutes one or more substitution values into a string
+
+				Module Mechanism Methods
+
+					- =Uize.getModuleByName= - returns a reference to the module of the specified name, or =undefined= if the module's not loaded
+					- =Uize.getPathToLibrary= - returns the relative path from the current document to the folder containing the specified JavaScript file
+					- =Uize.module= - lets you declare a JavaScript module that can be required by other JavaScript modules
+					- =Uize.moduleLoader= - loads a JavaScript module (specified by its module name)
+					- =Uize.moduleUrlResolver= - resolves the specified JavaScript module name to a URL path
+					- =Uize.toString= - provides summary info for the module on which the method is called
 */
 
 (function () {
@@ -185,6 +196,7 @@
 						NOTES
 						- this method is implemented in the =Uize= base module rather than the =Uize.String= module because it is generally useful in many other modules and =Uize.Class= subclasses that don't otherwise want to require the entire =Uize.String= module
 						- if the first character of the source string is already capitalized, then the returned value will be the same as the source string
+						- see also the other `useful value transformers`
 			*/
 		};
 
@@ -285,6 +297,7 @@
 
 						NOTES
 						- The one exception to the conjoined rule is function references, which will be shared according to the current implementation.
+						- see also the other `basic data utilities`
 			*/
 		};
 
@@ -337,6 +350,7 @@
 
 						NOTES
 						- see the related =Uize.inRange= static method
+						- see also the other `useful value transformers`
 			*/
 		};
 
@@ -424,6 +438,7 @@
 
 						NOTES
 						- see the related =Uize.constrain= static method
+						- see also the other `value testing methods`
 			*/
 		};
 
@@ -498,6 +513,7 @@
 						NOTES
 						- compare to the companion =Uize.mergeInto= static method
 						- Source object parameters whose values are not objects will simply not be copied into the target object. This is a useful behavior, as it allows one to mix conditional copies into a single call to =Uize.copyInto= by using the ternary operator to select between a source object and the value =null=.
+						- see also the other `basic data utilities`
 			*/
 		};
 
@@ -551,6 +567,7 @@
 
 						NOTES
 						- compare to the companion =Uize.copyInto= static method
+						- see also the other `basic data utilities`
 			*/
 		};
 
@@ -841,6 +858,7 @@
 
 						NOTES
 						- compare to the =Uize.map= static method
+						- see also the other `iterator methods`
 			*/
 		};
 
@@ -1077,6 +1095,7 @@
 
 						NOTES
 						- compare to the =Uize.forEach= static method
+						- see also the other `basic data utilities`
 			*/
 		};
 
@@ -1205,6 +1224,9 @@
 						......................................................................
 						Uize.callOn (page.children.possiblyNonExistentChildWidget,'insertUi');
 						......................................................................
+
+						NOTES
+						- see also the other `iterator methods`
 			*/
 		};
 
@@ -1242,6 +1264,7 @@
 
 						NOTES
 						- see the related =Uize.isNully= static method
+						- see also the other `useful value transformers`
 			*/
 		};
 
@@ -1460,6 +1483,7 @@
 
 						NOTES
 						- see also the related =Uize.isIn= static method
+						- see also the other `basic data utilities`
 			*/
 		};
 
@@ -1498,6 +1522,7 @@
 
 						NOTES
 						- when the value of =objectOBJ= parameter is =null= or =undefined=, an empty array will be returned
+						- see also the other `basic data utilities`
 			*/
 		};
 
@@ -1521,6 +1546,7 @@
 
 						NOTES
 						- when the value of =objectOBJ= parameter is =null= or =undefined=, the value =0= will be returned
+						- see also the other `basic data utilities`
 			*/
 		};
 
@@ -1567,6 +1593,7 @@
 
 						NOTES
 						- when the value of =objectOBJ= parameter is =null= or =undefined=, an empty array will be returned
+						- see also the other `basic data utilities`
 			*/
 		};
 
@@ -1638,6 +1665,7 @@
 						NOTES
 						- see the related =Uize.keys= and =Uize.values= static methods
 						- compare to the =Uize.pairUp= static method
+						- see also the other `basic data utilities`
 			*/
 		};
 
@@ -1673,6 +1701,7 @@
 						NOTES
 						- if any of the values are not a number, then this method will return the value =NaN=
 						- see the companion =Uize.max= static method
+						- see also the other `basic data utilities`
 			*/
 		};
 
@@ -1708,6 +1737,7 @@
 						NOTES
 						- if any of the values are not a number, then this method will return the value =NaN=
 						- see the companion =Uize.min= static method
+						- see also the other `basic data utilities`
 			*/
 		};
 
@@ -1901,6 +1931,9 @@
 								...........................................................................
 
 								In the above example, creating a bi-directional lookup object from the =foodsLookup= object is not particularly useful, because multiple properties of the source object share the same value. So, when you do a lookup for ='grain'= you get only the value ='rice'=, even though there's more than one grain in the source lookup object.
+
+						NOTES
+						- see also the other `basic data utilities`
 			*/
 		};
 
@@ -2085,6 +2118,9 @@
 							.........................................................
 
 							In the improved version, a lookup object (aka hash table) is created before the loop. Then, in the loop, all that is needed to see if a value being inspected is in the master list is to do a simple dereference into the lookup object, using the value as the key / property name. Here the complexity is O(n), since indexing into the lookup object is constant time.
+
+						NOTES
+						- see also the other `basic data utilities`
 			*/
 		};
 
@@ -2140,7 +2176,7 @@
 
 						NOTES
 						- compare to the =Uize.isNully= and =Uize.isPlainObject= static methods
-						- see also the other `Value Testing Methods`
+						- see also the other `value testing methods`
 			*/
 		};
 
@@ -2188,7 +2224,7 @@
 
 						NOTES
 						- compare to the =Uize.isObject= static method
-						- see also the other `Value Testing Methods`
+						- see also the other `value testing methods`
 			*/
 		};
 
@@ -2208,7 +2244,7 @@
 
 						NOTES
 						- an object having a property named =splice= whose value is of type =function= will be regarded as an array by this method
-						- see also the other `Value Testing Methods`
+						- see also the other `value testing methods`
 			*/
 		};
 
@@ -2259,7 +2295,7 @@
 
 						NOTES
 						- compare to the =Uize.isArray= static method
-						- see also the other `Value Testing Methods`
+						- see also the other `value testing methods`
 			*/
 		};
 
@@ -2304,7 +2340,7 @@
 							Furthermore, references to functions defined in another window will fail in a test of "instanceof Function", because the =Function= constructor for the function that was defined in the other window is discrete from the =Function= object belonging to the window in which the test is being performed. This behavior may seem unfortunate in this one sense, but it is important in the sense of not allowing contamination across windows and possible interoperability and security issues. If your code is expecting functions that may originate from a different window, then it is better to use the =Uize.isFunction= method in testing for function type values, because the =Uize.isFunction= method handles the aforementioned issues.
 
 						NOTES
-						- see also the other `Value Testing Methods`
+						- see also the other `value testing methods`
 			*/
 		};
 
@@ -2329,7 +2365,7 @@
 
 						NOTES
 						- compare to the =Uize.isNaN= static method
-						- see also the other `Value Testing Methods`
+						- see also the other `value testing methods`
 			*/
 		};
 
@@ -2367,7 +2403,7 @@
 						......................................................
 
 						NOTES
-						- see also the other `Value Testing Methods`
+						- see also the other `value testing methods`
 			*/
 		};
 
@@ -2405,7 +2441,7 @@
 						.......................................................
 
 						NOTES
-						- see also the other `Value Testing Methods`
+						- see also the other `value testing methods`
 			*/
 		};
 
@@ -2440,7 +2476,7 @@
 						NOTES
 						- compare to the =Uize.isObject= static method
 						- see the related =Uize.defaultNully= static method
-						- see also the other `Value Testing Methods`
+						- see also the other `value testing methods`
 			*/
 		};
 
@@ -2481,7 +2517,7 @@
 						.........................................................
 
 						NOTES
-						- see also the other `Value Testing Methods`
+						- see also the other `value testing methods`
 			*/
 		};
 
@@ -2515,7 +2551,7 @@
 
 						NOTES
 						- see also the related =Uize.indexIn= static method
-						- see also the other `Value Testing Methods`
+						- see also the other `value testing methods`
 			*/
 		};
 
@@ -2576,7 +2612,7 @@
 
 						NOTES
 						- compare to the =Uize.emptyOut= static method
-						- see also the other `Value Testing Methods`
+						- see also the other `value testing methods`
 			*/
 		};
 
@@ -2646,7 +2682,7 @@
 
 						NOTES
 						- compare to the =Uize.isNumber= static method
-						- see also the other `Value Testing Methods`
+						- see also the other `value testing methods`
 			*/
 		};
 
@@ -2705,7 +2741,7 @@
 
 						NOTES
 						- see also the related =Uize.isNaN= static method
-						- see also the other `Value Testing Methods`
+						- see also the other `value testing methods`
 			*/
 		};
 
@@ -2741,6 +2777,7 @@
 
 						NOTES
 						- compare to the =Uize.isEmpty= static method
+						- see also the other `basic data utilities`
 			*/
 		};
 
@@ -2783,26 +2820,285 @@
 		};
 
 		var _toNumber = _package.toNumber = function (_value,_defaultValue) {
+			if (typeof _value == _typeNumber) {
+				if (_value == _value) return _value; // return early if value is a number and not the special value NaN
+			} else {
+				if (_isFunction (_value)) _value = _value ();
+				if (_isObject (_value)) _value = _value.valueOf ();
+			}
 			return (
-				arguments.length < 2
-					? +_value
-					: _value == _undefined || _value === '' || (_value -= 0) != _value
-						? _defaultValue
-						: _value
+				(
+					_value = _value == _undefined || _value === '' || _value !== _value || !_isPrimitive (_value)
+						? NaN
+						: +_value
+				) != _value && arguments.length > 1
+					? _defaultValue
+					: _value
 			);
 			/*?
 				Static Methods
 					Uize.toNumber
+						Returns a number, that is the specified value coerced to a number type value, with optional defaulting if the value can't be successfully coerced to a number.
+
 						DIFFERENT USAGES
 
-
+						`Coerce a Value to a Number`
 						...........................................
 						valueNUMBER = Uize.toNumber (valueANYTYPE);
 						...........................................
 
+						`Coerce a Value to a Number, With Defaulting`
 						..........................................................
 						valueNUMBER = Uize.toNumber (valueANYTYPE,defaultANYTYPE);
 						..........................................................
+
+						How a Value is Coerced to Number
+							The =Uize.toNumber= method coerces a value to a number using the following steps...
+
+							#. if the value is a function, then the function is called and the value is replaced with the value returned by the function
+							#. next, if the value is an object, then the object's =valueOf intrinsic method= is called and the value is replaced by the value returned by the =valueOf intrinsic method=
+							#. next, if the value is =undefined=, =null=, =''= (an empty string), or not a primitive type value like a string, number, or boolean, then it is replaced with the special value =NaN=
+							#. next, the value is coerced to a number using the "+" operator
+							#. next, if the coerced value is the special value =NaN=, and if an optional default value is specified, then the value is replaced with the default value
+
+							The above steps for coercing a value to number has the following side effects / implications...
+
+							Empty String is Coerced to NaN
+								Coercing the value =''= (an empty string) to a number will produce the result =NaN=.
+
+								EXAMPLE
+								...................................
+								Uize.toNumber ('');  // returns NaN
+								...................................
+
+							The Values null and undefined Are Coerced to NaN
+								Coercing the values =null= or =undefined= to a number will produce the result =NaN=
+
+								EXAMPLE
+								..........................................
+								Uize.toNumber (null);       // returns NaN
+								Uize.toNumber (undefined);  // returns NaN
+								..........................................
+
+							Arrays Are Coerced to NaN
+								Coercing an array to a number always produces the result =NaN=.
+
+								This is because the =valueOf intrinsic method= of JavaScript's built-in =Array= object always returns a reference to the array on which it is called.
+
+								EXAMPLE
+								....................................
+								Uize.toNumber ([]);   // returns NaN
+								Uize.toNumber ([1]);  // returns NaN
+								....................................
+
+							Some Objects Are Coerced to NaN
+								Unless an object deliberately implements the =valueOf intrinsic method=, or the object is an instance of a =Uize.Class= subclass, coercing an object to a number will produce the result =NaN=.
+
+								This is because the implementation of the =valueOf intrinsic method= in JavaScript's built-in =Object= object simply returns a reference to the object on which it is called. The =Uize.toNumber= method only coerces an object to a number successfully if the =valueOf intrinsic method= for the object returns a primitive type value, such as a string, number, or boolean.
+
+								EXAMPLE
+								.................................................................
+								// these objects can be successfully coerced to a number
+
+								Uize.toNumber (new Number (5));                    // returns 5
+								Uize.toNumber (new String ('5'));                  // returns 5
+								Uize.toNumber (new Boolean (true));                // returns 1
+								Uize.toNumber (Uize.Class ({value:5}));            // returns 5
+								Uize.toNumber (Uize.Class ({value:'5'}));          // returns 5
+								Uize.toNumber (Uize.Class ({value:true}));         // returns 1
+								Uize.toNumber ({valueOf:function () {return 5}});  // returns 5
+
+
+								// these objects will be coerced to NaN
+
+								Uize.toNumber ({});                                // returns NaN
+								Uize.toNumber ({foo:'bar'});                       // returns NaN
+								Uize.toNumber (new XMLHttpRequest);                // returns NaN
+								Uize.toNumber (/\d+/);                             // returns NaN
+								.................................................................
+
+							Key Distinctions When Compared With Simple Coercion
+								A cheap way to coerce a value to a number in JavaScript is to subtract zero from it, which results in JavaScript performing the steps necessary to produce a number type value.
+
+								Besides its convenient defaulting ability, the =Uize.toNumber= method behaves differently to simple coercion in a number of key ways...
+
+								- The =Uize.toNumber= method coerces =''= (an empty string) to =NaN=, whereas simple coercion turns an empty string into =0=. So, the statement =Uize.toNumber ('')= produces the value =NaN= while the statement ='' - 0= produces the value =0=. For the purpose of coercing a value to a number with defaulting, it makes more sense to treat an empty string as no value specified, rather than as the value =0= specified.
+
+								- The =Uize.toNumber= method coerces =null= to =NaN=, whereas simple coercion turns =null= into =0=. So, the statement =Uize.toNumber (null)= produces the value =NaN= while the statement =null - 0= produces the value =0=. For the purpose of coercing a value to a number with defaulting, it makes more sense to treat the value =null= as no value specified, rather than as the value =0= specified.
+
+								- The =Uize.toNumber= method will attempt to coerce a function to a number by calling it and using its result, whereas simple coercion produces the value =NaN=. So, the statement =Uize.toNumber (function () {return 5})= produces the value =5= while the statement =(function () {return 5}) - 0= produces the value =NaN=.
+
+							Using the Uize.toNumber Method
+								There are two main situations where the =Uize.toNumber= method comes in handy.
+
+								Normalizing Method Parameters
+									The =Uize.toNumber= method can be used to "normalize" method parameter values that need to be number type.
+
+									EXAMPLE
+									.................................................
+									function repeatStr (string,times) {
+										times = Uize.toNumber (times,1);
+										var result = '';
+										for (var repeatNo = -1; ++repeatNo < times;) {
+											result += string;
+										}
+										return result;
+									}
+									.................................................
+
+									In the above example, a =repeatStr= function is being implemented that will take a specified string and create a new string by repeating the string the specified number of times. The number of repetitions, which needs to be a number, is specified by the =times= parameter of the function.
+
+									Now, if the developer of the function wants to provide flexibility in how the number of repetitions is specified, the =Uize.toNumber= method can be used to coerce the value of this parameter to a number before it is used internally by the function's implementation. In this example, we're also specifying a default of =1=, in case the parameter is not specified or if the value specified cannot be coerced to a number without producing the value =NaN=.
+
+									Now, using the =repeatStr= function, as implemented above, we would see the following results...
+
+									RESULTS
+									..............................................................
+									repeatStr ('Foo',2);                       // returns "FooFoo"
+									repeatStr ('Foo','2');                     // returns "FooFoo"
+									repeatStr ('Foo',Uize.Class ({value:2}));  // returns "FooFoo"
+									repeatStr ('Foo',function () {return 2});  // returns "FooFoo"
+									repeatStr ('Foo',true);                    // returns "Foo"
+									repeatStr ('Foo',false);                   // returns ""
+
+									repeatStr ('Foo');                         // returns "Foo"
+									repeatStr ('Foo',NaN);                     // returns "Foo"
+									repeatStr ('Foo','bar');                   // returns "Foo"
+									repeatStr ('Foo',null);                    // returns "Foo"
+									repeatStr ('Foo',undefined);               // returns "Foo"
+									..............................................................
+
+								Conforming Set-get Properties
+									The =Uize.toNumber= method can be specified as a conformer for a set-get property of a =Uize.Class= subclass.
+
+									EXAMPLE
+									.......................................
+									var Rectangle = Uize.Class.subclass ();
+
+									Rectangle.registerProperties ({
+										width:{
+											conformer:Uize.toNumber,
+											value:0
+										},
+										height:{
+											conformer:Uize.toNumber,
+											value:0
+										}
+									});
+									.......................................
+
+									In the above example, a =Rectangle= class is being defined that has two set-get properties: =width= and =height=. For the convenience of users of the class, the =Uize.toNumber= method is set as the conformer for both the =width= and =height= properties. This means that the user of the class can set the values for these properties using values that are other than number type, and the developer of the class can write the rest of the class' code with confidence that internally the values for the properties will always be number type.
+
+									So, given the above implementation of the =Rectangle= class, we would see the following results...
+
+									RESULTS
+									................................................................
+									var rect = Rectangle ({width:'5',height:'10'});
+
+									myInstance.get ('width');                          // returns 5
+									myInstance.get ('height');                         // returns 10
+
+									myInstance.set ('width',true);
+									myInstance.get ('width');                          // returns 1
+
+									myInstance.set ('height',function () {return 7});
+									myInstance.get ('height');                         // returns 7
+
+									myInstance.set ('width',Uize.Class ({value:12}));
+									myInstance.get ('width');                          // returns 12
+									................................................................
+
+						Coerce a Value to a Number
+							A value of any type can be coerced to a number by calling the =Uize.toNumber= method and passing the value that is to be coerced to a number as the single parameter.
+
+							SYNTAX
+							...........................................
+							valueNUMBER = Uize.toNumber (valueANYTYPE);
+							...........................................
+
+							EXAMPLES
+							...................................................................................
+							// values that can be coerced successfully to a number
+
+							Uize.toNumber (5);                                              // returns 5
+							Uize.toNumber (Infinity);                                       // returns Infinity
+							Uize.toNumber (true);                                           // returns 1
+							Uize.toNumber (false);                                          // returns 0
+							Uize.toNumber ('-1.234');                                       // returns -1.234
+							Uize.toNumber ('Infinity');                                     // returns Infinity
+							Uize.toNumber ('0xff');                                         // returns 255
+							Uize.toNumber (function () {return 5});                         // returns 5
+							Uize.toNumber (function () {return '5'});                       // returns 5
+							Uize.toNumber (Uize.Class ({value:5}));                         // returns 5
+							Uize.toNumber (Uize.Class ({value:'5'}));                       // returns 5
+							Uize.toNumber (new Number (5));                                 // returns 5
+							Uize.toNumber (new String ('5'));                               // returns 5
+							Uize.toNumber (new Boolean (true));                             // returns 1
+							Uize.toNumber (function () {return Uize.Class ({value:5})});    // returns 5
+							Uize.toNumber (function () {return Uize.Class ({value:'5'})});  // returns 5
+
+
+							// values that cannot be coerced to a number
+
+							Uize.toNumber ('foo');                                          // returns NaN
+							Uize.toNumber (NaN);                                            // returns NaN
+							Uize.toNumber ({});                                             // returns NaN
+							Uize.toNumber ([1]);                                            // returns NaN
+							Uize.toNumber (/\d+/);                                          // returns NaN
+							Uize.toNumber (undefined);                                      // returns NaN
+							Uize.toNumber (null);                                           // returns NaN
+							Uize.toNumber ('');                                             // returns NaN
+							Uize.toNumber (Uize.Class ({value:Uize.Class ({value:5})}));    // returns NaN
+							Uize.toNumber (Uize.Class ({value:function () {return 5}}));    // returns NaN
+							Uize.toNumber (function () {return function () {return 5}});    // returns NaN
+							...................................................................................
+
+						Coerce a Value to a Number, With Defaulting
+							A value of any type can be coerced to a number, with defaulting if the value can't be successfully coerced to a number, by specifing a default value using the optional =defaultANYTYPE= second parameter.
+
+							SYNTAX
+							..........................................................
+							valueNUMBER = Uize.toNumber (valueANYTYPE,defaultANYTYPE);
+							..........................................................
+
+							EXAMPLES
+							......................................................................................
+							// values that can be coerced successfully to a number
+
+							Uize.toNumber (5,99);                                              // returns 5
+							Uize.toNumber (Infinity,99);                                       // returns Infinity
+							Uize.toNumber (true,99);                                           // returns 1
+							Uize.toNumber (false,99);                                          // returns 0
+							Uize.toNumber ('-1.234',99);                                       // returns -1.234
+							Uize.toNumber ('Infinity',99);                                     // returns Infinity
+							Uize.toNumber ('0xff',99);                                         // returns 255
+							Uize.toNumber (function () {return 5},99);                         // returns 5
+							Uize.toNumber (function () {return '5'},99);                       // returns 5
+							Uize.toNumber (Uize.Class ({value:5}),99);                         // returns 5
+							Uize.toNumber (Uize.Class ({value:'5'}),99);                       // returns 5
+							Uize.toNumber (new Number (5),99);                                 // returns 5
+							Uize.toNumber (new String ('5'),99);                               // returns 5
+							Uize.toNumber (new Boolean (true),99);                             // returns 1
+							Uize.toNumber (function () {return Uize.Class ({value:5})},99);    // returns 5
+							Uize.toNumber (function () {return Uize.Class ({value:'5'})},99);  // returns 5
+
+							// values that cannot be coerced to a number
+
+							Uize.toNumber ('foo',99);                                          // returns 99
+							Uize.toNumber (NaN,99);                                            // returns 99
+							Uize.toNumber ({},99);                                             // returns 99
+							Uize.toNumber ([1],99);                                            // returns 99
+							Uize.toNumber (/\d+/,99);                                          // returns 99
+							Uize.toNumber (undefined,99);                                      // returns 99
+							Uize.toNumber (null,99);                                           // returns 99
+							Uize.toNumber ('',99);                                             // returns 99
+							Uize.toNumber (Uize.Class ({value:Uize.Class ({value:5})}),99);    // returns 99
+							Uize.toNumber (Uize.Class ({value:function () {return 5}}),99);    // returns 99
+							Uize.toNumber (function () {return function () {return 5}},99);    // returns 99
+							......................................................................................
+
+						NOTES
+						- see also the other `useful value transformers`
 			*/
 		};
 
@@ -2868,6 +3164,7 @@
 						NOTES
 						- this method uses strict matching, so the statement =Uize.findRecordNo ([{index:'0'},{index:'1'}],{index:1})= will return =-1=
 						- see also the related =Uize.findRecord= and =Uize.recordMatches= static methods
+						- see also the other `basic data utilities`
 			*/
 		};
 
@@ -2891,6 +3188,7 @@
 
 						NOTES
 						- this method uses strict matching, so the statement =Uize.findRecord ([{index:'0'},{index:'1'}],{index:1})= will return =null=
+						- see also the other `basic data utilities`
 			*/
 		};
 
@@ -3023,7 +3321,7 @@
 						This method can be useful when implementing methods that may be called on a class as well as on an instance of a class.
 
 						NOTES
-						- see also the other `Value Testing Methods`
+						- see also the other `value testing methods`
 			*/
 		};
 
@@ -3051,8 +3349,8 @@
 						............................
 
 						NOTES
-						- see also the companion =Uize.returnTrue= static method
-						- see the related =Uize.returnFalse= and =Uize.returnTrue= static methods
+						- see the related =Uize.returnFalse= static method
+						- see also the other `dummy functions`
 			*/
 
 		_package.returnFalse = new _Function ('return false');
@@ -3078,6 +3376,7 @@
 						NOTES
 						- see also the companion =Uize.returnTrue= static method
 						- see the related =Uize.nop= static method
+						- see also the other `dummy functions`
 			*/
 
 		_package.returnTrue = new _Function ('return true');
@@ -3102,7 +3401,7 @@
 
 						NOTES
 						- see also the companion =Uize.returnFalse= static method
-						- see the related =Uize.nop= static method
+						- see also the other `dummy functions`
 			*/
 
 		_package.returnX = new _Function ('x','return x');
@@ -3117,7 +3416,7 @@
 						...................................
 
 						NOTES
-						- see the related =Uize.nop=, =Uize.returnFalse=, and =Uize.returnTrue= static methods
+						- see also the other `dummy functions`
 			*/
 
 		_package.module = function (_params) {
@@ -3426,6 +3725,9 @@
 							In the above example, a function is being defined that will fade the border color of the specified edge of the specified node, from the specified start color to the specified end color. The value of the =edge= property needs to determine which style property needs to be faded.
 
 							Now, we're using the =Uize.Fx.fadeStyle= static method of the =Uize.Fx= module to perform the border color animation. This method can fade values for one or more style properties, and the start and end values for the style properties are specified in style property objects. Here we need to create start and end style objects where the style property to be faded is dynamically generated using the =edge= parameter. As you will see from the code, the =Uize.pairUp= method does this for us nicely.
+
+						NOTES
+						- see also the other `basic data utilities`
 			*/
 		};
 
@@ -3458,6 +3760,9 @@
 						Now, the =replace= instance method of JavaScript's =String= object can accept a string as a match parameter, but when a string is specified the replacement is not case insensitive and is only for the first occurrence. So, we have to use a regular expression to specify what to replace, so that we can make use of the "g" (global) and "i" (case insensitive) regular expression switches. The problem, however, with using a regular expression is that the string to replace may contain regular expression special characters, so we can't just use it as is when creating the =RegExp= instance - we have to escape the special characters. So, we use the =Uize.escapeRegExpLiteral= method to escape the string to replace before supplying it to the =RegExp= object's constructor.
 
 						The =Uize.escapeRegExpLiteral= method can be used to escape any string that is to be treated as a literal match - even literals that are to be combined with other regular expression logic to form more complex regular expressions.
+
+						NOTES
+						- see also the other `useful value transformers`
 			*/
 		};
 
