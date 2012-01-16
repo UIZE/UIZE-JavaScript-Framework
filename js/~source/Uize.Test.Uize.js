@@ -1642,6 +1642,63 @@ Uize.module ({
 					]],
 					['Uize.globalEval',[
 					]],
+					['Uize.getClass',[
+						/*** test when value can't be resolved to a class ***/
+							['Test that calling with no parameters produces the result undefined',[],undefined],
+							['Test that the value null is resolved to result undefined',null,undefined],
+							['Test that the value undefined is resolved to result undefined',null,undefined],
+
+						/*** test resolving JavaScript primitives to a class ***/
+							['Test that a number primitive is resolved to the Number object',42,Number],
+							['Test that the special number value Infinity is resolved to the Number object',Infinity,Number],
+							['Test that the special number value NaN is resolved to the Number object',NaN,Number],
+							['Test that a string value is resolved to the String object','foo',String],
+							['Test that boolean value is resolved to the Boolean object',true,Boolean],
+
+						/*** test resolving instances of JavaScript's built-in objects to a class ***/
+							['Test that a Number object instance is resolved to the Number object',new Number (42),Number],
+							['Test that a String object instance is resolved to the String object',new String ('foo'),String],
+							['Test that a Boolean object instance is resolved to the Boolean object',
+								new Boolean (true),
+								Boolean
+							],
+							['Test that a RegExp object instance is resolved to the RegExp object',new RegExp ('\\d+'),RegExp],
+
+						/*** test resolving implicitly created instances of JavaScript's built-in objects to a class ***/
+							['Test that an object created using literal syntax is resolved to the Object object',
+								{foo:'bar'},
+								Object
+							],
+							['Test that an array created using literal syntax is resolved to the Array object',
+								[['foo','bar']],
+								Array
+							],
+							['Test that a regular expression created using literal syntax is resolved to the RegExp object',
+								/\d+/,
+								RegExp
+							],
+
+						/*** test resolving instances of Uize.Class subclasses ***/
+							['Test that an instance of the Uize.Class base class is resolved to the Uize.Class class',
+								Uize.Class (),
+								Uize.Class
+							],
+
+						/*** test resolving classes and object constructors to a class ***/
+							['Test that the Object object is resolved to the Object object',Object,Object],
+							['Test that the Number object is resolved to the Number object',Number,Number],
+							['Test that the String object is resolved to the String object',String,String],
+							['Test that the Boolean object is resolved to the Boolean object',Boolean,Boolean],
+							['Test that the RegExp object is resolved to the RegExp object',RegExp,RegExp],
+							['Test that the Uize.Class object is resolved to the Uize.Class object',Uize.Class,Uize.Class],
+							{
+								title:'Test that resolving a function to a class results in the function being returned',
+								test:function () {
+									var _function = function () {};
+									return this.expectSameAs (_function,Uize.getClass (_function));
+								}
+							}
+					]],
 					['Uize.isInstance',[
 						['Test that calling with no parameters produces the result false',[],false],
 						['Test that null is not regarded as a Uize subclass instance',null,false],

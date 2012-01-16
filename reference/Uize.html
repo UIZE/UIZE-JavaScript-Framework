@@ -102,7 +102,7 @@
 							<li><a href="#2_11_6" title="The Uize.forEach is intended for a common and very simple use case, and for this use case it provides a convenient and concise form for expressing iteration.">2.11.6. Some Limitations</a></li>
 						</ul>
 					</li>
-					<li><a href="#2_12" title="document...">2.12. Uize.getClass</a></li>
+					<li><a href="#2_12" title="Resolves the specified value to a class, or returns the value undefined if the specified value is null or undefined.">2.12. Uize.getClass</a></li>
 					<li><a href="#2_13" title="Returns a string value, being an ID that is globally unique in the current window context.">2.13. Uize.getGuid</a></li>
 					<li><a href="#2_14" title="Returns an object reference, being a reference to the module of the specified name, or returns the value undefined if no such module is defined.">2.14. Uize.getModuleByName</a>
 						<ul>
@@ -416,7 +416,7 @@
 				<div class="contents4">
 					<table class="list">
 					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_44">Uize.noNew</a></code> - wraps an object constructor function to make JavaScript's <code>new</code> operator optional</td></tr>
-					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_12">Uize.getClass</a></code> - gets the class of which a specified object is an instance, or returns the object if it is a class</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_12">Uize.getClass</a></code> - gets the class of which a specified value is an instance, or returns the value if it is a class or function</td></tr>
 					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_52">Uize.substituteInto</a></code> - substitutes one or more substitution values into a string</td></tr>
 					</table>
 				</div>
@@ -1408,7 +1408,66 @@ Uize.forEach (
 		<a name="2_12"></a>
 		<h2 class="heading2" title="2. Static Methods -&gt; 2.12. Uize.getClass"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_12" title="2. Static Methods -&gt; 2.12. Uize.getClass">12</a>. </span>Uize.getClass</h2>
 		<div class="contents2">
-			<p>document...</p>
+			<p>Resolves the specified value to a class, or returns the value <code>undefined</code> if the specified value is <code>null</code> or <code>undefined</code>.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">classOBJ = Uize.getClass (valueANYTYPE);
+</pre>
+			
+			<p>The <code><a href="#2_12">Uize.getClass</a></code> method resolves a value to a class using the following steps...</p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;">1. </span></td><td>if the specified value is <code>null</code> or <code>undefined</code>, then the value <code>undefined</code> is returned</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;">2. </span></td><td>else, if the specified value is a function reference, then the function reference is returned</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;">3. </span></td><td>else, the value of the value's <code>constructor</code> property is returned</td></tr>
+			</table>
+			<p>The <code><a href="#2_12">Uize.getClass</a></code> method can be used to resolve either an instance of a class, or a class itself, to a class.</p>
+			
+			<p><span class="allCaps">EXAMPLES</span></p>
+			
+			
+<pre class="sample-code">// when called with null or undefined
+
+  Uize.getClass (null);                 // returns undefined
+  Uize.getClass (undefined);            // returns undefined
+
+// when called with JavaScript primitives
+
+  Uize.getClass (42);                   // returns Number
+  Uize.getClass (NaN);                  // returns Number
+  Uize.getClass (Infinity);             // returns Number
+  Uize.getClass (true);                 // returns Boolean
+  Uize.getClass ('foo');                // returns String
+
+// when called with instances of JavaScript objects
+
+  Uize.getClass (new Object ());        // returns Object
+  Uize.getClass (new Number (42));      // returns Number
+  Uize.getClass (new Boolean (true));   // returns Boolean
+  Uize.getClass (new String ('foo'));   // returns String
+  Uize.getClass (new RegExp ('\\d+'));  // returns RegExp
+
+// when called with implicitly created instances of JavaScript objects
+
+  Uize.getClass ({foo:'bar'});          // returns Object
+  Uize.getClass (['foo','bar']);        // returns Array
+  Uize.getClass (/\d+/);                // returns RegExp
+
+// when called with instances of Uize.Class subclasses
+
+  Uize.getClass (Uize.Widget.Bar ());   // returns Uize.Widget.Bar
+  Uize.getClass (new Uize.Fade);        // returns Uize.Fade
+
+// when called with object constructors or Uize.Class subclasses
+
+  Uize.getClass (Object);               // returns Object
+  Uize.getClass (Number);               // returns Number
+  Uize.getClass (Boolean);              // returns Boolean
+  Uize.getClass (String);               // returns String
+  Uize.getClass (Uize.Widget.Bar);      // returns Uize.Widget.Bar
+</pre>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			

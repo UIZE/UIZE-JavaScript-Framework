@@ -1,0 +1,105 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2012-01-15 - New Uize.getClass Method | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="The new Uize.getClass static method, implemented in the Uize base module, gets the class of which a specified value is an instance, or returns the value if it is a class or function."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2012.html" class="breadcrumb breadcrumbWithArrow">2012 NEWS</a>
+	2012-01-15 - New Uize.getClass Method
+
+</h1>
+
+<div class="main">
+<div class="contents0">
+	<p>The new <code>Uize.getClass</code> static method, implemented in the <code><a href="../reference/Uize.html">Uize</a></code> base module, gets the class of which a specified value is an instance, or returns the value if it is a class or function.</p>
+	
+	<p><span class="allCaps">SYNTAX</span></p>
+	
+	
+<pre class="sample-code">classOBJ = Uize.getClass (valueANYTYPE);
+</pre>
+	
+	<p>The <code>Uize.getClass</code> method resolves a value to a class using the following steps...</p>
+	
+	<table class="list">
+	<tr valign="top"><td><span style="white-space:nowrap;">1. </span></td><td>if the specified value is <code>null</code> or <code>undefined</code>, then the value <code>undefined</code> is returned</td></tr>
+	<tr valign="top"><td><span style="white-space:nowrap;">2. </span></td><td>else, if the specified value is a function reference, then the function reference is returned</td></tr>
+	<tr valign="top"><td><span style="white-space:nowrap;">3. </span></td><td>else, the value of the value's <code>constructor</code> property is returned</td></tr>
+	</table>
+	<p>The <code>Uize.getClass</code> method can be used to resolve either an instance of a class, or a class itself, to a class.</p>
+	
+	<p><span class="allCaps">EXAMPLES</span></p>
+	
+	
+<pre class="sample-code">// when called with null or undefined
+
+  Uize.getClass (null);                 // returns undefined
+  Uize.getClass (undefined);            // returns undefined
+
+// when called with JavaScript primitives
+
+  Uize.getClass (42);                   // returns Number
+  Uize.getClass (NaN);                  // returns Number
+  Uize.getClass (Infinity);             // returns Number
+  Uize.getClass (true);                 // returns Boolean
+  Uize.getClass ('foo');                // returns String
+
+// when called with instances of JavaScript objects
+
+  Uize.getClass (new Object ());        // returns Object
+  Uize.getClass (new Number (42));      // returns Number
+  Uize.getClass (new Boolean (true));   // returns Boolean
+  Uize.getClass (new String ('foo'));   // returns String
+  Uize.getClass (new RegExp ('\\d+'));  // returns RegExp
+
+// when called with implicitly created instances of JavaScript objects
+
+  Uize.getClass ({foo:'bar'});          // returns Object
+  Uize.getClass (['foo','bar']);        // returns Array
+  Uize.getClass (/\d+/);                // returns RegExp
+
+// when called with instances of Uize.Class subclasses
+
+  Uize.getClass (Uize.Widget.Bar ());   // returns Uize.Widget.Bar
+  Uize.getClass (new Uize.Fade);        // returns Uize.Fade
+
+// when called with object constructors or Uize.Class subclasses
+
+  Uize.getClass (Object);               // returns Object
+  Uize.getClass (Number);               // returns Number
+  Uize.getClass (Boolean);              // returns Boolean
+  Uize.getClass (String);               // returns String
+  Uize.getClass (Uize.Widget.Bar);      // returns Uize.Widget.Bar
+</pre>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = UizeDotCom.Page.Doc ()).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

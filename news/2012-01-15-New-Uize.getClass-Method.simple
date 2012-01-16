@@ -1,0 +1,63 @@
+The new =Uize.getClass= static method, implemented in the =Uize= base module, gets the class of which a specified value is an instance, or returns the value if it is a class or function.
+
+SYNTAX
+........................................
+classOBJ = Uize.getClass (valueANYTYPE);
+........................................
+
+The =Uize.getClass= method resolves a value to a class using the following steps...
+
+#. if the specified value is =null= or =undefined=, then the value =undefined= is returned
+#. else, if the specified value is a function reference, then the function reference is returned
+#. else, the value of the value's =constructor= property is returned
+
+The =Uize.getClass= method can be used to resolve either an instance of a class, or a class itself, to a class.
+
+EXAMPLES
+......................................................................
+// when called with null or undefined
+
+	Uize.getClass (null);                 // returns undefined
+	Uize.getClass (undefined);            // returns undefined
+
+// when called with JavaScript primitives
+
+	Uize.getClass (42);                   // returns Number
+	Uize.getClass (NaN);                  // returns Number
+	Uize.getClass (Infinity);             // returns Number
+	Uize.getClass (true);                 // returns Boolean
+	Uize.getClass ('foo');                // returns String
+
+// when called with instances of JavaScript objects
+
+	Uize.getClass (new Object ());        // returns Object
+	Uize.getClass (new Number (42));      // returns Number
+	Uize.getClass (new Boolean (true));   // returns Boolean
+	Uize.getClass (new String ('foo'));   // returns String
+	Uize.getClass (new RegExp ('\\d+'));  // returns RegExp
+
+// when called with implicitly created instances of JavaScript objects
+
+	Uize.getClass ({foo:'bar'});          // returns Object
+	Uize.getClass (['foo','bar']);        // returns Array
+	Uize.getClass (/\d+/);                // returns RegExp
+
+// when called with instances of Uize.Class subclasses
+
+	Uize.getClass (Uize.Widget.Bar ());   // returns Uize.Widget.Bar
+	Uize.getClass (new Uize.Fade);        // returns Uize.Fade
+
+// when called with object constructors or Uize.Class subclasses
+
+	Uize.getClass (Object);               // returns Object
+	Uize.getClass (Number);               // returns Number
+	Uize.getClass (Boolean);              // returns Boolean
+	Uize.getClass (String);               // returns String
+	Uize.getClass (Uize.Widget.Bar);      // returns Uize.Widget.Bar
+......................................................................
+
+....................................................................................
+<< metadata >>
+
+title: 2012-01-15 - New Uize.getClass Method
+....................................................................................
