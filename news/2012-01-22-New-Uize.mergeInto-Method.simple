@@ -1,0 +1,255 @@
+The new =Uize.mergeInto= static method, implemented in the =Uize= base module, merges the contents of one or more source objects into the specified target object, and returns the target object as the result.
+
+DIFFERENT USAGES
+
+`Merge the Contents of a Source Object Into a Target Object`
+.................................................
+targetOBJ = Uize.mergeInto (targetOBJ,sourceOBJ);
+.................................................
+
+`Merge Multiple Source Objects Into a Target Object`
+............................................................................
+targetOBJ = Uize.mergeInto (targetOBJ,source1OBJ,source2OBJ,...,sourceNOBJ);
+............................................................................
+
+Merge the Contents of a Source Object Into a Target Object
+	In the most simple use case, the =Uize.mergeInto= method can be used to merge the contents of a single source object into a target object.
+
+	SYNTAX
+	.................................................
+	targetOBJ = Uize.mergeInto (targetOBJ,sourceOBJ);
+	.................................................
+
+	The contents of the source object is merged into the target object according to the =Uize.mergeInto= method's `merging rules`.
+
+	EXAMPLE
+	...........................................
+	var
+		targetObject = {
+			foo:'bar',
+			anArray:[0,1,2],
+			junk:{
+				hey:'there',
+				moreJunk:{
+					simple:'simon'
+				}
+			}
+		},
+		sourceObject = {
+			foo:'BAR',
+			anArray:['a','b','c'],
+			junk:{
+				boo:'yah',
+				moreJunk:{
+					peter:'pan',
+					evenMoreJunk:{
+						silly:'sausage'
+					}
+				}
+			}
+		}
+	;
+	Uize.mergeInto (targetObject,sourceObject);
+	...........................................
+
+	RESULT
+	...........................
+	{
+		foo:'BAR',
+		anArray:['a','b','c'],
+		junk:{
+			hey:'there',
+			moreJunk:{
+				simple:'simon',
+				peter:'pan',
+				evenMoreJunk:{
+					silly:'sausage'
+				}
+			},
+			boo:'yah'
+		}
+	}
+	...........................
+
+Merge Multiple Source Objects Into a Target Object
+	As a convenience, the contents of multiple source objects can be merged into a target object by specifying an arbitrary number of source objects after the =targetOBJ= first parameter.
+
+	SYNTAX
+	............................................................................
+	targetOBJ = Uize.mergeInto (targetOBJ,source1OBJ,source2OBJ,...,sourceNOBJ);
+	............................................................................
+
+	When multiple source objects are specified, the contents of the source objects are merged into the target object in the order in which they are specified (ie. left to right in the arguments list). The contents of source objects are merged into the target object according to the =Uize.mergeInto= method's `merging rules`.
+
+	EXAMPLE
+	........................................................................
+	var
+		targetObject = {
+			foo:'bar',
+			anArray:[0,1,2],
+			junk:{
+				hey:'there',
+				moreJunk:{
+					simple:'simon'
+				}
+			}
+		},
+		sourceObject1 = {
+			foo:'BAR',
+			anArray:['a','b','c'],
+			junk:{
+				boo:'yah',
+				moreJunk:{
+					peter:'pan',
+					evenMoreJunk:{
+						silly:'sausage'
+					}
+				}
+			}
+		},
+		sourceObject2 = {
+			hello:'world',
+			anArray:['A','B','C'],
+			junk:{
+				yo:'wassup'
+			}
+		},
+		sourceObject3 = {
+			foo:'BAR!!!',
+			junk:{
+				moreJunk:{
+					evenMoreJunk:{
+						bite:'me'
+					}
+				}
+			}
+		}
+	;
+	Uize.mergeInto (targetObject,sourceObject1,sourceObject2,sourceObject3);
+	........................................................................
+
+	RESULT
+	............................
+	{
+		foo:'BAR!!!',
+		anArray:['A','B','C'],
+		hello:'world',
+		junk:{
+			hey:'there',
+			moreJunk:{
+				simple:'simon',
+				peter:'pan',
+				evenMoreJunk:{
+					silly:'sausage',
+					bite:'me'
+				},
+			},
+			boo:'yah',
+			yo:'wassup'
+		}
+	}
+	............................
+
+Merging Rules
+	The =Uize.mergeInto= method merges the contents of source objects into a target object according to the following set of rules...
+
+	Merging is Recursive
+		The contents of a source object is merged into the contents of the target object recursively.
+
+		EXAMPLE
+		...............................
+		var result = Uize.mergeInto (
+			{foo:{bar:{hello:'world'}}},
+			{foo:{bar:{boo:'yah'}}}
+		);
+		...............................
+
+		RESULT
+		.....................................
+		{foo:{bar:{hello:'world',boo:'yah'}}}
+		.....................................
+
+	Only Plain Objects Are Recursed
+		Only the contents of plain objects are recursed, and non-plain objects are copied by reference.
+
+		EXAMPLE
+		..................................................
+		function CustomObject (value) {this.value = value}
+
+		var
+			customObject1 = new CustomObject (5),
+			customObject2 = new CustomObject (42)
+		;
+		customObject1.foo = 'bar';
+		customObject2.hello = 'world';
+
+		var result = Uize.mergeInto (
+			{prop:customObject1},
+			{prop:customObject2}
+		);
+		..................................................
+
+		In the above example, a constructor is created for a custom object called =CustomObject=. Then, we create two different instances of this object. To each instance, we add extra properties.
+
+		Now, when we use the =Uize.mergeInto= method to merge a source object into a target object, where the value of a =prop= property in the source object is =customObject2= and the value of that same property in the target object is =customObject1=, the value of the =prop= property in the target object is simply overwritten with a reference to the =customObject2= value contained in the source object - the contents of =customObject2= are *not* merged into =customObject1=.
+
+		In other words, the merge process does not recurse into the properties of the =CustomObject= instances (or any non-plain objects, for that matter). The =Uize.mergeInto= method considers custom objects to be values rather than nodes of the object tree.
+
+	Missing Nodes Copied By Reference
+		When the target object being recursed is missing a node, at any level of its structure, that is present in the source object, then the node from the source object is copied by reference - it is not cloned.
+
+		EXAMPLE
+		..................................................................................
+		var
+			targetObject = {foo:'bar'},
+			sourceObject = {aMissingNode:{hello:'world'}}
+		;
+		Uize.mergeInto (targetObject,sourceObject);
+
+		alert (targetObject.aMissingNode === sourceObject.aMissingNode);  // alerts "true"
+		..................................................................................
+
+		In the above example, the =sourceObject= object contains the property =aMissingNode=, whose value is a plain object and represent a node in the object structure that is not present in the =targetObject= object. When the source object is merged into the target object, this missing node is copied by reference - it is not cloned into the target object. Therefore, the expression =target.aMissingNode= is identical in a strict equality to =sourceObject.aMissingNode=.
+
+		This same rule applies if the target object contains the property that is contained in the source object, but the value of the property in the target object is not a plain object.
+
+		EXAMPLE
+		..................................................................................
+		var
+			targetObject = {someProperty:'foo'},
+			sourceObject = {someProperty:{hello:'world'}}
+		;
+		Uize.mergeInto (targetObject,sourceObject);
+
+		alert (targetObject.someProperty === sourceObject.someProperty);  // alerts "true"
+		..................................................................................
+
+		In the above example, the =sourceObject= object contains the property =someProperty=, which is also present in the =targetObject= object. However, the value of this property in the target object is a string, so this value is overwritten with a reference to the object value of the property obtained from the source object. Therefore, the expression =target.someProperty= is identical in a strict equality to =sourceObject.someProperty=.
+
+	Null or Undefined Source Objects Ignored
+		As with the related =Uize.copyInto= method, specifying the values =null= or =undefined= for source object parameters results in those parameters simply being ignored - they contain nothing to merge into the target object.
+
+		EXAMPLE
+		....................................
+		Uize.mergeInto (
+			{foo:'bar',junk:{hello:'world'}},
+			null,
+			{foo:'BAR'},
+			undefined,
+			{junk:{simple:'simon'}}
+		);
+		....................................
+
+		RESULT
+		...............................................
+		{foo:'BAR',junk:{hello:'world',simple:'simon'}}
+		...............................................
+
+
+
+
+....................................................................................
+<< metadata >>
+
+title: 2012-01-22 - New Uize.mergeInto Method
+....................................................................................

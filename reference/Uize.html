@@ -208,10 +208,18 @@
 							</li>
 						</ul>
 					</li>
-					<li><a href="#2_39" title="Merges the contents of one or more source objects into the specified target object.">2.39. Uize.mergeInto</a>
+					<li><a href="#2_39" title="Merges the contents of one or more source objects into the specified target object, and returns the target object as the result.">2.39. Uize.mergeInto</a>
 						<ul>
-							<li><a href="#2_39_1" title="SYNTAX">2.39.1. Merge the Contents of a Source Object Into a Target Object</a></li>
-							<li><a href="#2_39_2" title="SYNTAX">2.39.2. Merge Multiple Source Objects Into a Target Object</a></li>
+							<li><a href="#2_39_1" title="In the most simple use case, the Uize.mergeInto method can be used to merge the contents of a single source object into a target object.">2.39.1. Merge the Contents of a Source Object Into a Target Object</a></li>
+							<li><a href="#2_39_2" title="As a convenience, the contents of multiple source objects can be merged into a target object by specifying an arbitrary number of source objects after the targetOBJ first parameter.">2.39.2. Merge Multiple Source Objects Into a Target Object</a></li>
+							<li><a href="#2_39_3" title="The Uize.mergeInto method merges the contents of source objects into a target object according to the following set of rules...">2.39.3. Merging Rules</a>
+								<ul>
+									<li><a href="#2_39_3_1" title="The contents of a source object is merged into the contents of the target object recursively.">2.39.3.1. Merging is Recursive</a></li>
+									<li><a href="#2_39_3_2" title="Only the contents of plain objects are recursed, and non-plain objects are copied by reference.">2.39.3.2. Only Plain Objects Are Recursed</a></li>
+									<li><a href="#2_39_3_3" title="When the target object being recursed is missing a node, at any level of its structure, that is present in the source object, then the node from the source object is copied by reference - it is not cloned.">2.39.3.3. Missing Nodes Copied By Reference</a></li>
+									<li><a href="#2_39_3_4" title="As with the related Uize.copyInto method, specifying the values null or undefined for source object parameters results in those parameters simply being ignored - they contain nothing to merge into the target object.">2.39.3.4. Null or Undefined Source Objects Ignored</a></li>
+								</ul>
+							</li>
 						</ul>
 					</li>
 					<li><a href="#2_40" title="Returns the minimum value from the specified array or object.">2.40. Uize.min</a></li>
@@ -3313,7 +3321,7 @@ for (var elementNo = 0; elementNo &lt; 100; elementNo++) {
 		<a name="2_39"></a>
 		<h2 class="heading2" title="2. Static Methods -&gt; 2.39. Uize.mergeInto"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_39" title="2. Static Methods -&gt; 2.39. Uize.mergeInto">39</a>. </span>Uize.mergeInto</h2>
 		<div class="contents2">
-			<p>Merges the contents of one or more source objects into the specified target object.</p>
+			<p>Merges the contents of one or more source objects into the specified target object, and returns the target object as the result.</p>
 			
 			<p><span class="allCaps">DIFFERENT USAGES</span></p>
 			
@@ -3332,21 +3340,268 @@ for (var elementNo = 0; elementNo &lt; 100; elementNo++) {
 			<a name="2_39_1"></a>
 			<h3 class="heading3" title="2. Static Methods -&gt; 2.39. Uize.mergeInto -&gt; 2.39.1. Merge the Contents of a Source Object Into a Target Object"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_39" title="2. Static Methods -&gt; 2.39. Uize.mergeInto">39</a>.<a href="#2_39_1" title="2. Static Methods -&gt; 2.39. Uize.mergeInto -&gt; 2.39.1. Merge the Contents of a Source Object Into a Target Object">1</a>. </span>Merge the Contents of a Source Object Into a Target Object</h3>
 			<div class="contents3">
+				<p>In the most simple use case, the <code><a href="#2_39">Uize.mergeInto</a></code> method can be used to merge the contents of a single source object into a target object.</p>
+				
 				<p><span class="allCaps">SYNTAX</span></p>
 				
 				
 <pre class="sample-code">targetOBJ = Uize.mergeInto (targetOBJ,sourceOBJ);
+</pre>
+				
+				<p>The contents of the source object is merged into the target object according to the <code><a href="#2_39">Uize.mergeInto</a></code> method's <a href="#2_39_3">merging rules</a>.</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">var
+  targetObject = {
+    foo:'bar',
+    anArray:[0,1,2],
+    junk:{
+      hey:'there',
+      moreJunk:{
+        simple:'simon'
+      }
+    }
+  },
+  sourceObject = {
+    foo:'BAR',
+    anArray:['a','b','c'],
+    junk:{
+      boo:'yah',
+      moreJunk:{
+        peter:'pan',
+        evenMoreJunk:{
+          silly:'sausage'
+        }
+      }
+    }
+  }
+;
+Uize.mergeInto (targetObject,sourceObject);
+</pre>
+				
+				<p><span class="allCaps">RESULT</span></p>
+				
+				
+<pre class="sample-code">{
+  foo:'BAR',
+  anArray:['a','b','c'],
+  junk:{
+    hey:'there',
+    moreJunk:{
+      simple:'simon',
+      peter:'pan',
+      evenMoreJunk:{
+        silly:'sausage'
+      }
+    },
+    boo:'yah'
+  }
+}
 </pre>
 			</div>
 			
 			<a name="2_39_2"></a>
 			<h3 class="heading3" title="2. Static Methods -&gt; 2.39. Uize.mergeInto -&gt; 2.39.2. Merge Multiple Source Objects Into a Target Object"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_39" title="2. Static Methods -&gt; 2.39. Uize.mergeInto">39</a>.<a href="#2_39_2" title="2. Static Methods -&gt; 2.39. Uize.mergeInto -&gt; 2.39.2. Merge Multiple Source Objects Into a Target Object">2</a>. </span>Merge Multiple Source Objects Into a Target Object</h3>
 			<div class="contents3">
+				<p>As a convenience, the contents of multiple source objects can be merged into a target object by specifying an arbitrary number of source objects after the <code>targetOBJ</code> first parameter.</p>
+				
 				<p><span class="allCaps">SYNTAX</span></p>
 				
 				
 <pre class="sample-code">targetOBJ = Uize.mergeInto (targetOBJ,source1OBJ,source2OBJ,...,sourceNOBJ);
 </pre>
+				
+				<p>When multiple source objects are specified, the contents of the source objects are merged into the target object in the order in which they are specified (ie. left to right in the arguments list). The contents of source objects are merged into the target object according to the <code><a href="#2_39">Uize.mergeInto</a></code> method's <a href="#2_39_3">merging rules</a>.</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">var
+  targetObject = {
+    foo:'bar',
+    anArray:[0,1,2],
+    junk:{
+      hey:'there',
+      moreJunk:{
+        simple:'simon'
+      }
+    }
+  },
+  sourceObject1 = {
+    foo:'BAR',
+    anArray:['a','b','c'],
+    junk:{
+      boo:'yah',
+      moreJunk:{
+        peter:'pan',
+        evenMoreJunk:{
+          silly:'sausage'
+        }
+      }
+    }
+  },
+  sourceObject2 = {
+    hello:'world',
+    anArray:['A','B','C'],
+    junk:{
+      yo:'wassup'
+    }
+  },
+  sourceObject3 = {
+    foo:'BAR!!!',
+    junk:{
+      moreJunk:{
+        evenMoreJunk:{
+          bite:'me'
+        }
+      }
+    }
+  }
+;
+Uize.mergeInto (targetObject,sourceObject1,sourceObject2,sourceObject3);
+</pre>
+				
+				<p><span class="allCaps">RESULT</span></p>
+				
+				
+<pre class="sample-code">{
+  foo:'BAR!!!',
+  anArray:['A','B','C'],
+  hello:'world',
+  junk:{
+    hey:'there',
+    moreJunk:{
+      simple:'simon',
+      peter:'pan',
+      evenMoreJunk:{
+        silly:'sausage',
+        bite:'me'
+      },
+    },
+    boo:'yah',
+    yo:'wassup'
+  }
+}
+</pre>
+			</div>
+			
+			<a name="2_39_3"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.39. Uize.mergeInto -&gt; 2.39.3. Merging Rules"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_39" title="2. Static Methods -&gt; 2.39. Uize.mergeInto">39</a>.<a href="#2_39_3" title="2. Static Methods -&gt; 2.39. Uize.mergeInto -&gt; 2.39.3. Merging Rules">3</a>. </span>Merging Rules</h3>
+			<div class="contents3">
+				<p>The <code><a href="#2_39">Uize.mergeInto</a></code> method merges the contents of source objects into a target object according to the following set of rules...</p>
+				
+				<a name="2_39_3_1"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.39. Uize.mergeInto -&gt; 2.39.3. Merging Rules -&gt; 2.39.3.1. Merging is Recursive"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_39" title="2. Static Methods -&gt; 2.39. Uize.mergeInto">39</a>.<a href="#2_39_3" title="2. Static Methods -&gt; 2.39. Uize.mergeInto -&gt; 2.39.3. Merging Rules">3</a>.<a href="#2_39_3_1" title="2. Static Methods -&gt; 2.39. Uize.mergeInto -&gt; 2.39.3. Merging Rules -&gt; 2.39.3.1. Merging is Recursive">1</a>. </span>Merging is Recursive</h4>
+				<div class="contents4">
+					<p>The contents of a source object is merged into the contents of the target object recursively.</p>
+					
+					<p><span class="allCaps">EXAMPLE</span></p>
+					
+					
+<pre class="sample-code">var result = Uize.mergeInto (
+  {foo:{bar:{hello:'world'}}},
+  {foo:{bar:{boo:'yah'}}}
+);
+</pre>
+					
+					<p><span class="allCaps">RESULT</span></p>
+					
+					
+<pre class="sample-code">{foo:{bar:{hello:'world',boo:'yah'}}}
+</pre>
+				</div>
+				
+				<a name="2_39_3_2"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.39. Uize.mergeInto -&gt; 2.39.3. Merging Rules -&gt; 2.39.3.2. Only Plain Objects Are Recursed"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_39" title="2. Static Methods -&gt; 2.39. Uize.mergeInto">39</a>.<a href="#2_39_3" title="2. Static Methods -&gt; 2.39. Uize.mergeInto -&gt; 2.39.3. Merging Rules">3</a>.<a href="#2_39_3_2" title="2. Static Methods -&gt; 2.39. Uize.mergeInto -&gt; 2.39.3. Merging Rules -&gt; 2.39.3.2. Only Plain Objects Are Recursed">2</a>. </span>Only Plain Objects Are Recursed</h4>
+				<div class="contents4">
+					<p>Only the contents of plain objects are recursed, and non-plain objects are copied by reference.</p>
+					
+					<p><span class="allCaps">EXAMPLE</span></p>
+					
+					
+<pre class="sample-code">function CustomObject (value) {this.value = value}
+
+var
+  customObject1 = new CustomObject (5),
+  customObject2 = new CustomObject (42)
+;
+customObject1.foo = 'bar';
+customObject2.hello = 'world';
+
+var result = Uize.mergeInto (
+  {prop:customObject1},
+  {prop:customObject2}
+);
+</pre>
+					
+					<p>In the above example, a constructor is created for a custom object called <code>CustomObject</code>. Then, we create two different instances of this object. To each instance, we add extra properties.</p>
+					
+					<p>Now, when we use the <code><a href="#2_39">Uize.mergeInto</a></code> method to merge a source object into a target object, where the value of a <code>prop</code> property in the source object is <code>customObject2</code> and the value of that same property in the target object is <code>customObject1</code>, the value of the <code>prop</code> property in the target object is simply overwritten with a reference to the <code>customObject2</code> value contained in the source object - the contents of <code>customObject2</code> are <b>not</b> merged into <code>customObject1</code>.</p>
+					
+					<p>In other words, the merge process does not recurse into the properties of the <code>CustomObject</code> instances (or any non-plain objects, for that matter). The <code><a href="#2_39">Uize.mergeInto</a></code> method considers custom objects to be values rather than nodes of the object tree.</p>
+				</div>
+				
+				<a name="2_39_3_3"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.39. Uize.mergeInto -&gt; 2.39.3. Merging Rules -&gt; 2.39.3.3. Missing Nodes Copied By Reference"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_39" title="2. Static Methods -&gt; 2.39. Uize.mergeInto">39</a>.<a href="#2_39_3" title="2. Static Methods -&gt; 2.39. Uize.mergeInto -&gt; 2.39.3. Merging Rules">3</a>.<a href="#2_39_3_3" title="2. Static Methods -&gt; 2.39. Uize.mergeInto -&gt; 2.39.3. Merging Rules -&gt; 2.39.3.3. Missing Nodes Copied By Reference">3</a>. </span>Missing Nodes Copied By Reference</h4>
+				<div class="contents4">
+					<p>When the target object being recursed is missing a node, at any level of its structure, that is present in the source object, then the node from the source object is copied by reference - it is not cloned.</p>
+					
+					<p><span class="allCaps">EXAMPLE</span></p>
+					
+					
+<pre class="sample-code">var
+  targetObject = {foo:'bar'},
+  sourceObject = {aMissingNode:{hello:'world'}}
+;
+Uize.mergeInto (targetObject,sourceObject);
+
+alert (targetObject.aMissingNode === sourceObject.aMissingNode);  // alerts "true"
+</pre>
+					
+					<p>In the above example, the <code>sourceObject</code> object contains the property <code>aMissingNode</code>, whose value is a plain object and represent a node in the object structure that is not present in the <code>targetObject</code> object. When the source object is merged into the target object, this missing node is copied by reference - it is not cloned into the target object. Therefore, the expression <code>target.aMissingNode</code> is identical in a strict equality to <code>sourceObject.aMissingNode</code>.</p>
+					
+					<p>This same rule applies if the target object contains the property that is contained in the source object, but the value of the property in the target object is not a plain object.</p>
+					
+					<p><span class="allCaps">EXAMPLE</span></p>
+					
+					
+<pre class="sample-code">var
+  targetObject = {someProperty:'foo'},
+  sourceObject = {someProperty:{hello:'world'}}
+;
+Uize.mergeInto (targetObject,sourceObject);
+
+alert (targetObject.someProperty === sourceObject.someProperty);  // alerts "true"
+</pre>
+					
+					<p>In the above example, the <code>sourceObject</code> object contains the property <code>someProperty</code>, which is also present in the <code>targetObject</code> object. However, the value of this property in the target object is a string, so this value is overwritten with a reference to the object value of the property obtained from the source object. Therefore, the expression <code>target.someProperty</code> is identical in a strict equality to <code>sourceObject.someProperty</code>.</p>
+				</div>
+				
+				<a name="2_39_3_4"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.39. Uize.mergeInto -&gt; 2.39.3. Merging Rules -&gt; 2.39.3.4. Null or Undefined Source Objects Ignored"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_39" title="2. Static Methods -&gt; 2.39. Uize.mergeInto">39</a>.<a href="#2_39_3" title="2. Static Methods -&gt; 2.39. Uize.mergeInto -&gt; 2.39.3. Merging Rules">3</a>.<a href="#2_39_3_4" title="2. Static Methods -&gt; 2.39. Uize.mergeInto -&gt; 2.39.3. Merging Rules -&gt; 2.39.3.4. Null or Undefined Source Objects Ignored">4</a>. </span>Null or Undefined Source Objects Ignored</h4>
+				<div class="contents4">
+					<p>As with the related <code><a href="#2_5">Uize.copyInto</a></code> method, specifying the values <code>null</code> or <code>undefined</code> for source object parameters results in those parameters simply being ignored - they contain nothing to merge into the target object.</p>
+					
+					<p><span class="allCaps">EXAMPLE</span></p>
+					
+					
+<pre class="sample-code">Uize.mergeInto (
+  {foo:'bar',junk:{hello:'world'}},
+  null,
+  {foo:'BAR'},
+  undefined,
+  {junk:{simple:'simon'}}
+);
+</pre>
+					
+					<p><span class="allCaps">RESULT</span></p>
+					
+					
+<pre class="sample-code">{foo:'BAR',junk:{hello:'world',simple:'simon'}}
+</pre>
+				</div>
 			</div>
 			
 			<p><span class="allCaps">NOTES</span></p>

@@ -1008,7 +1008,7 @@ Uize.module ({
                 [null,{foo:'bar',hello:'world'}],
                 null
               ],
-              ['Test that specifying the value undefined for the target object results in the value null being returned',
+              ['Test that specifying the value undefined for the target object results in the value undefined being returned',
                 [undefined,{foo:'bar',hello:'world'}],
                 undefined
               ],
@@ -1047,14 +1047,109 @@ Uize.module ({
                   }
                   return _result;
                 }
+              },
+              ['Test that, when the value of a property is a plain object in both the source and target objects, then the contents of the property from the source object are merged into the property in the target object',
+                [{foo:{bar:1}},{foo:{hello:'world'}}],
+                {foo:{bar:1,hello:'world'}}
+              ],
+              ['Test that, when the target object has properties that the source object doesn\'t, those properties are left in the target object',
+                [{foo:'bar',junk:{hello:'world'}},{simple:'simon',junk:{bye:'bye'}}],
+                {foo:'bar',simple:'simon',junk:{hello:'world',bye:'bye'}}
+              ],
+              ['Test that merging complex objects, requiring merging at multiple depths, is handled correctly',
+                [
+                  {
+                    foo:'bar',
+                    junk:{
+                      hey:'there',
+                      moreJunk:{
+                        simple:'simon'
+                      }
+                    }
+                  },
+                  {
+                    foo:'BAR',
+                    junk:{
+                      boo:'yah',
+                      moreJunk:{
+                        peter:'pan'
+                      }
+                    }
+                  }
+                ],
+                {
+                  foo:'BAR',
+                  junk:{
+                    hey:'there',
+                    boo:'yah',
+                    moreJunk:{
+                      simple:'simon',
+                      peter:'pan'
+                    }
+                  }
+                }
+              ],
+              ['Test that deep merging is handled correctly for multiple sources',
+                [
+                  {
+                    foo:'bar',
+                    junk:{
+                      hey:'there',
+                      moreJunk:{
+                        simple:'simon'
+                      }
+                    }
+                  },
+                  {
+                    foo:'BAR',
+                    junk:{
+                      boo:'yah',
+                      moreJunk:{
+                        peter:'pan'
+                      }
+                    }
+                  },
+                  {
+                    foo:'BAR!!!',
+                    i:'can haz more property',
+                    junk:{
+                      hell:'yeah',
+                      moreJunk:{
+                        captain:'hook'
+                      }
+                    }
+                  }
+                ],
+                {
+                  foo:'BAR!!!',
+                  i:'can haz more property',
+                  junk:{
+                    hey:'there',
+                    boo:'yah',
+                    hell:'yeah',
+                    moreJunk:{
+                      simple:'simon',
+                      peter:'pan',
+                      captain:'hook'
+                    }
+                  }
+                }
+              ],
+              {
+                title:'Test that merging object properties from a source object into a target object results in the object properties being copied by reference',
+                test:function () {
+                  var
+                    _objectProperty = {
+                      foo:'bar',
+                      junk:{hello:'world'},
+                      moreJunk:['this','is','some','more','junk']
+                    },
+                    _targetObject = {simple:'simon'}
+                  ;
+                  Uize.mergeInto (_targetObject,{objectProperty:_objectProperty});
+                  return this.expectSameAs (_objectProperty,_targetObject.objectProperty);
+                }
               }
-              /*
-                - test merging of plain object type properties
-                - test merging at multiple levels of complex objects
-                - test merging where target object has nodes that target object doesn't have
-                - test deep merging with multiple source
-
-              */
             ],
             null,
             {cloneArguments:true}
