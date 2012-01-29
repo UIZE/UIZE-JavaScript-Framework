@@ -26,7 +26,7 @@ Uize.module ({
 				_fileNameSansExtension = _fileName.replace (_fileExtensionRegExp,''),
 				_fileIsJsFile = !/\.simple$/i.test (_fileName),
 				_tempFilePath = _fileSystemObject.GetParentFolderName(_file) + '\\' + _fileSystemObject.GetTempName() + '.html',
-				_tempFileLastModifiedTime = +new Date
+				_tempFileLastModifiedTime = Uize.now ()
 			;
 
 			WScript.Echo('Watching: ' + _fileName);
@@ -48,7 +48,7 @@ Uize.module ({
 								title:_simpleDoc.metaData.title || _fileNameSansExtension
 							})
 						});
-						_tempFileLastModifiedTime = +new Date;
+						_tempFileLastModifiedTime = Uize.now ();
 					}
 				});
 			}

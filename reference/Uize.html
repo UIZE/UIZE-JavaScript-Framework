@@ -232,80 +232,81 @@
 						</ul>
 					</li>
 					<li><a href="#2_45" title="A dummy function that performs no operation and returns no value (which is effectively the same as returning the value undefined).">2.45. Uize.nop</a></li>
-					<li><a href="#2_46" title="Returns an object, that is the specified key and value, paired up together in the same object.">2.46. Uize.pairUp</a>
+					<li><a href="#2_46" title="Returns an integer, representing the current time in milliseconds since 1970 (POSIX time).">2.46. Uize.now</a></li>
+					<li><a href="#2_47" title="Returns an object, that is the specified key and value, paired up together in the same object.">2.47. Uize.pairUp</a>
 						<ul>
-							<li><a href="#2_46_1" title="The Uize.pairUp method is particularly useful when an object needs to be created from a key/value pair, where the key name is either dynamically generated in an expression or is supplied via a parameter.">2.46.1. Why This Method is Useful</a></li>
+							<li><a href="#2_47_1" title="The Uize.pairUp method is particularly useful when an object needs to be created from a key/value pair, where the key name is either dynamically generated in an expression or is supplied via a parameter.">2.47.1. Why This Method is Useful</a></li>
 						</ul>
 					</li>
-					<li><a href="#2_47" title="Returns a boolean, indicating whether or not the specified record&apos;s contents is a superset of the contents of the specified match object.">2.47. Uize.recordMatches</a></li>
-					<li><a href="#2_48" title="A dummy function that always returns the boolean value false, and that can be useful as an event handler or in other situations.">2.48. Uize.returnFalse</a></li>
-					<li><a href="#2_49" title="A dummy function that always returns the boolean value true, and that can be useful as an event handler or in other situations.">2.49. Uize.returnTrue</a></li>
-					<li><a href="#2_50" title="A dummy function that accepts a single argument x and returns the value of that argument unchanged.">2.50. Uize.returnX</a></li>
-					<li><a href="#2_51" title="Returns a reverse lookup object, where each key is a value from the specified source object, and where the value for each key is the associated key from the specified source.">2.51. Uize.reverseLookup</a>
+					<li><a href="#2_48" title="Returns a boolean, indicating whether or not the specified record&apos;s contents is a superset of the contents of the specified match object.">2.48. Uize.recordMatches</a></li>
+					<li><a href="#2_49" title="A dummy function that always returns the boolean value false, and that can be useful as an event handler or in other situations.">2.49. Uize.returnFalse</a></li>
+					<li><a href="#2_50" title="A dummy function that always returns the boolean value true, and that can be useful as an event handler or in other situations.">2.50. Uize.returnTrue</a></li>
+					<li><a href="#2_51" title="A dummy function that accepts a single argument x and returns the value of that argument unchanged.">2.51. Uize.returnX</a></li>
+					<li><a href="#2_52" title="Returns a reverse lookup object, where each key is a value from the specified source object, and where the value for each key is the associated key from the specified source.">2.52. Uize.reverseLookup</a>
 						<ul>
-							<li><a href="#2_51_1" title="In the most typical usage of the Uize.reverseLookup method, a reverse lookup object can be created from an object.">2.51.1. Create a Reverse Lookup From an Object</a></li>
-							<li><a href="#2_51_2" title="The Uize.reverseLookup method can also be used to create a reverse lookup object for an array.">2.51.2. Create a Reverse Lookup From a Values Array</a></li>
-							<li><a href="#2_51_3" title="By specifying the value true for the optional safeBOOL parameter, a &quot;safe&quot; lookup object can be created.">2.51.3. Create a Safe Reverse Lookup Object</a></li>
-							<li><a href="#2_51_4" title="By specifying an existing reverse lookup object for the optional targetOBJ second parameter, more entries can be added to the existing reverse lookup.">2.51.4. Add More Entries to a Reverse Lookup Object</a></li>
-							<li><a href="#2_51_5" title="By specifying the source hash object as also the target for the reverse lookup creation, a bi-directional lookup object can be created.">2.51.5. Create a Bi-directional Lookup</a>
+							<li><a href="#2_52_1" title="In the most typical usage of the Uize.reverseLookup method, a reverse lookup object can be created from an object.">2.52.1. Create a Reverse Lookup From an Object</a></li>
+							<li><a href="#2_52_2" title="The Uize.reverseLookup method can also be used to create a reverse lookup object for an array.">2.52.2. Create a Reverse Lookup From a Values Array</a></li>
+							<li><a href="#2_52_3" title="By specifying the value true for the optional safeBOOL parameter, a &quot;safe&quot; lookup object can be created.">2.52.3. Create a Safe Reverse Lookup Object</a></li>
+							<li><a href="#2_52_4" title="By specifying an existing reverse lookup object for the optional targetOBJ second parameter, more entries can be added to the existing reverse lookup.">2.52.4. Add More Entries to a Reverse Lookup Object</a></li>
+							<li><a href="#2_52_5" title="By specifying the source hash object as also the target for the reverse lookup creation, a bi-directional lookup object can be created.">2.52.5. Create a Bi-directional Lookup</a>
 								<ul>
-									<li><a href="#2_51_5_1" title="When creating bi-directional lookup objects, be sure that there are no collisions between keys and values, or your bi-directional lookup will not work correctly.">2.51.5.1. Key / Value Collisions</a></li>
+									<li><a href="#2_52_5_1" title="When creating bi-directional lookup objects, be sure that there are no collisions between keys and values, or your bi-directional lookup will not work correctly.">2.52.5.1. Key / Value Collisions</a></li>
 								</ul>
 							</li>
 						</ul>
 					</li>
-					<li><a href="#2_52" title="Lets you substitute one or more specified substitution values into a specified source string.">2.52. Uize.substituteInto</a>
+					<li><a href="#2_53" title="Lets you substitute one or more specified substitution values into a specified source string.">2.53. Uize.substituteInto</a>
 						<ul>
-							<li><a href="#2_52_1">2.52.1. Parameters</a>
+							<li><a href="#2_53_1">2.53.1. Parameters</a>
 								<ul>
-									<li><a href="#2_52_1_1" title="The value of the sourceANYTYPE parameter should be a string containing substitution tokens that the substitution values specified in the substitutionsOBJorARRAY parameter will be substituted into.">2.52.1.1. sourceANYTYPE</a></li>
-									<li><a href="#2_52_1_2" title="An object, array, or simple type value, specifying one or more substitution values that should be substituted into the source string specified by the sourceANYTYPE parameter.">2.52.1.2. substitutionsANYTYPE</a></li>
-									<li><a href="#2_52_1_3" title="The optional tokenNamingSTR parameter allows a custom token naming scheme to be specified, rather than the default [#KEY] format.">2.52.1.3. tokenNamingSTR</a></li>
+									<li><a href="#2_53_1_1" title="The value of the sourceANYTYPE parameter should be a string containing substitution tokens that the substitution values specified in the substitutionsOBJorARRAY parameter will be substituted into.">2.53.1.1. sourceANYTYPE</a></li>
+									<li><a href="#2_53_1_2" title="An object, array, or simple type value, specifying one or more substitution values that should be substituted into the source string specified by the sourceANYTYPE parameter.">2.53.1.2. substitutionsANYTYPE</a></li>
+									<li><a href="#2_53_1_3" title="The optional tokenNamingSTR parameter allows a custom token naming scheme to be specified, rather than the default [#KEY] format.">2.53.1.3. tokenNamingSTR</a></li>
 								</ul>
 							</li>
-							<li><a href="#2_52_2">2.52.2. Examples</a>
+							<li><a href="#2_53_2">2.53.2. Examples</a>
 								<ul>
-									<li><a href="#2_52_2_1" title="In the example below, two substitutions are being performed.">2.52.2.1. Example: Two Substitutions</a></li>
-									<li><a href="#2_52_2_2" title="If there are multiple tokens for the same substitution value, then that value will be substituted multiple times.">2.52.2.2. Example: One Substitution, Used Multiple Times</a></li>
-									<li><a href="#2_52_2_3" title="If there are no substitution tokens for a substitution value, then that value will not be substituted.">2.52.2.3. Example: No Token for a Substitution Value</a></li>
-									<li><a href="#2_52_2_4" title="Substitution tokens for which there are no properties will be left in the string (they will not be blanked out).">2.52.2.4. Example: Tokens With No Substitution Value</a></li>
-									<li><a href="#2_52_2_5" title="The optional tokenNamingSTR parameter allows a custom token naming format to be specified.">2.52.2.5. Example: Custom Token Naming</a></li>
-									<li><a href="#2_52_2_6" title="The optional tokenNamingSTR parameter can be used to specify a &quot;bare token&quot; format for token naming, where the substitution tokens are the substitution keys.">2.52.2.6. Example: Bare Tokens</a></li>
-									<li><a href="#2_52_2_7" title="Substitution values can be of any type, and any value that is not a string will be coerced to a string.">2.52.2.7. Example: Mixed Type Substitution Values</a></li>
-									<li><a href="#2_52_2_8" title="When substitutions are specified using an array, then each substitution&apos;s index in the substitutions array is used as the key when forming its token name.">2.52.2.8. Example: Specifying Substitutions Using an Array</a></li>
-									<li><a href="#2_52_2_9" title="Substitution values that contain tokens are not further substituted into.">2.52.2.9. Example: Substitution Values Containing Tokens</a></li>
-									<li><a href="#2_52_2_10" title="Substitution tokens are case-sensitive.">2.52.2.10. Example: Tokens and Substitutions are Case-sensitive</a></li>
-									<li><a href="#2_52_2_11" title="Substitution tokens are space-sensitive.">2.52.2.11. Example: Tokens and Substitutions are Space-sensitive</a></li>
-									<li><a href="#2_52_2_12" title="When a simple type value (string, number, or boolean) is specified in place of a substitutions object or array, then a substitutions array is formed using that simple type substitution as its single element.">2.52.2.12. Example: A Single Simply Type Substitution</a></li>
-									<li><a href="#2_52_2_13" title="When the source value to substitute into is not a string (eg. an object, array, number, boolean, etc.), then this value will be coerced to a string.">2.52.2.13. Example: Source is Not a String</a></li>
+									<li><a href="#2_53_2_1" title="In the example below, two substitutions are being performed.">2.53.2.1. Example: Two Substitutions</a></li>
+									<li><a href="#2_53_2_2" title="If there are multiple tokens for the same substitution value, then that value will be substituted multiple times.">2.53.2.2. Example: One Substitution, Used Multiple Times</a></li>
+									<li><a href="#2_53_2_3" title="If there are no substitution tokens for a substitution value, then that value will not be substituted.">2.53.2.3. Example: No Token for a Substitution Value</a></li>
+									<li><a href="#2_53_2_4" title="Substitution tokens for which there are no properties will be left in the string (they will not be blanked out).">2.53.2.4. Example: Tokens With No Substitution Value</a></li>
+									<li><a href="#2_53_2_5" title="The optional tokenNamingSTR parameter allows a custom token naming format to be specified.">2.53.2.5. Example: Custom Token Naming</a></li>
+									<li><a href="#2_53_2_6" title="The optional tokenNamingSTR parameter can be used to specify a &quot;bare token&quot; format for token naming, where the substitution tokens are the substitution keys.">2.53.2.6. Example: Bare Tokens</a></li>
+									<li><a href="#2_53_2_7" title="Substitution values can be of any type, and any value that is not a string will be coerced to a string.">2.53.2.7. Example: Mixed Type Substitution Values</a></li>
+									<li><a href="#2_53_2_8" title="When substitutions are specified using an array, then each substitution&apos;s index in the substitutions array is used as the key when forming its token name.">2.53.2.8. Example: Specifying Substitutions Using an Array</a></li>
+									<li><a href="#2_53_2_9" title="Substitution values that contain tokens are not further substituted into.">2.53.2.9. Example: Substitution Values Containing Tokens</a></li>
+									<li><a href="#2_53_2_10" title="Substitution tokens are case-sensitive.">2.53.2.10. Example: Tokens and Substitutions are Case-sensitive</a></li>
+									<li><a href="#2_53_2_11" title="Substitution tokens are space-sensitive.">2.53.2.11. Example: Tokens and Substitutions are Space-sensitive</a></li>
+									<li><a href="#2_53_2_12" title="When a simple type value (string, number, or boolean) is specified in place of a substitutions object or array, then a substitutions array is formed using that simple type substitution as its single element.">2.53.2.12. Example: A Single Simply Type Substitution</a></li>
+									<li><a href="#2_53_2_13" title="When the source value to substitute into is not a string (eg. an object, array, number, boolean, etc.), then this value will be coerced to a string.">2.53.2.13. Example: Source is Not a String</a></li>
 								</ul>
 							</li>
 						</ul>
 					</li>
-					<li><a href="#2_53" title="Returns a number, that is the specified value coerced to a number type value, with optional defaulting if the value can&apos;t be successfully coerced to a number.">2.53. Uize.toNumber</a>
+					<li><a href="#2_54" title="Returns a number, that is the specified value coerced to a number type value, with optional defaulting if the value can&apos;t be successfully coerced to a number.">2.54. Uize.toNumber</a>
 						<ul>
-							<li><a href="#2_53_1" title="The Uize.toNumber method coerces a value to a number using the following steps...">2.53.1. How a Value is Coerced to Number</a>
+							<li><a href="#2_54_1" title="The Uize.toNumber method coerces a value to a number using the following steps...">2.54.1. How a Value is Coerced to Number</a>
 								<ul>
-									<li><a href="#2_53_1_1" title="Coercing the value &apos;&apos; (an empty string) to a number will produce the result NaN.">2.53.1.1. Empty String is Coerced to NaN</a></li>
-									<li><a href="#2_53_1_2" title="Coercing the values null or undefined to a number will produce the result NaN">2.53.1.2. The Values null and undefined Are Coerced to NaN</a></li>
-									<li><a href="#2_53_1_3" title="Coercing an array to a number always produces the result NaN.">2.53.1.3. Arrays Are Coerced to NaN</a></li>
-									<li><a href="#2_53_1_4" title="Unless an object deliberately implements the valueOf intrinsic method, or the object is an instance of a Uize.Class subclass, coercing an object to a number will produce the result NaN.">2.53.1.4. Some Objects Are Coerced to NaN</a></li>
-									<li><a href="#2_53_1_5" title="A cheap way to coerce a value to a number in JavaScript is to subtract zero from it, which results in JavaScript performing the steps necessary to produce a number type value.">2.53.1.5. Key Distinctions When Compared With Simple Coercion</a></li>
-									<li><a href="#2_53_1_6" title="There are two main situations where the Uize.toNumber method comes in handy.">2.53.1.6. Using the Uize.toNumber Method</a>
+									<li><a href="#2_54_1_1" title="Coercing the value &apos;&apos; (an empty string) to a number will produce the result NaN.">2.54.1.1. Empty String is Coerced to NaN</a></li>
+									<li><a href="#2_54_1_2" title="Coercing the values null or undefined to a number will produce the result NaN">2.54.1.2. The Values null and undefined Are Coerced to NaN</a></li>
+									<li><a href="#2_54_1_3" title="Coercing an array to a number always produces the result NaN.">2.54.1.3. Arrays Are Coerced to NaN</a></li>
+									<li><a href="#2_54_1_4" title="Unless an object deliberately implements the valueOf intrinsic method, or the object is an instance of a Uize.Class subclass, coercing an object to a number will produce the result NaN.">2.54.1.4. Some Objects Are Coerced to NaN</a></li>
+									<li><a href="#2_54_1_5" title="A cheap way to coerce a value to a number in JavaScript is to subtract zero from it, which results in JavaScript performing the steps necessary to produce a number type value.">2.54.1.5. Key Distinctions When Compared With Simple Coercion</a></li>
+									<li><a href="#2_54_1_6" title="There are two main situations where the Uize.toNumber method comes in handy.">2.54.1.6. Using the Uize.toNumber Method</a>
 										<ul>
-											<li><a href="#2_53_1_6_1" title="The Uize.toNumber method can be used to &quot;normalize&quot; method parameter values that need to be number type.">2.53.1.6.1. Normalizing Method Parameters</a></li>
-											<li><a href="#2_53_1_6_2" title="The Uize.toNumber method can be specified as a conformer for a set-get property of a Uize.Class subclass.">2.53.1.6.2. Conforming Set-get Properties</a></li>
+											<li><a href="#2_54_1_6_1" title="The Uize.toNumber method can be used to &quot;normalize&quot; method parameter values that need to be number type.">2.54.1.6.1. Normalizing Method Parameters</a></li>
+											<li><a href="#2_54_1_6_2" title="The Uize.toNumber method can be specified as a conformer for a set-get property of a Uize.Class subclass.">2.54.1.6.2. Conforming Set-get Properties</a></li>
 										</ul>
 									</li>
 								</ul>
 							</li>
-							<li><a href="#2_53_2" title="A value of any type can be coerced to a number by calling the Uize.toNumber method and passing the value that is to be coerced to a number as the single parameter.">2.53.2. Coerce a Value to a Number</a></li>
-							<li><a href="#2_53_3" title="A value of any type can be coerced to a number, with defaulting if the value can&apos;t be successfully coerced to a number, by specifing a default value using the optional defaultANYTYPE second parameter.">2.53.3. Coerce a Value to a Number, With Defaulting</a></li>
+							<li><a href="#2_54_2" title="A value of any type can be coerced to a number by calling the Uize.toNumber method and passing the value that is to be coerced to a number as the single parameter.">2.54.2. Coerce a Value to a Number</a></li>
+							<li><a href="#2_54_3" title="A value of any type can be coerced to a number, with defaulting if the value can&apos;t be successfully coerced to a number, by specifing a default value using the optional defaultANYTYPE second parameter.">2.54.3. Coerce a Value to a Number, With Defaulting</a></li>
 						</ul>
 					</li>
-					<li><a href="#2_54" title="Returns a string, providing summary info for the class on which the method is called.">2.54. Uize.toString</a></li>
-					<li><a href="#2_55" title="Returns an integer, representing the total number of keys in the specified object.">2.55. Uize.totalKeys</a></li>
-					<li><a href="#2_56" title="Returns an array, representing the property values of the specified object.">2.56. Uize.values</a></li>
+					<li><a href="#2_55" title="Returns a string, providing summary info for the class on which the method is called.">2.55. Uize.toString</a></li>
+					<li><a href="#2_56" title="Returns an integer, representing the total number of keys in the specified object.">2.56. Uize.totalKeys</a></li>
+					<li><a href="#2_57" title="Returns an array, representing the property values of the specified object.">2.57. Uize.values</a></li>
 				</ul>
 			</li>
 			<li><a href="#3">3. Static Properties</a>
@@ -378,11 +379,11 @@
 					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_38">Uize.meldKeysValues</a></code> - creates an object by melding keys from a keys array with values from a values array</td></tr>
 					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_39">Uize.mergeInto</a></code> - merges the contents of one or more source objects into a target object</td></tr>
 					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_40">Uize.min</a></code> - returns the smallest value in a values array</td></tr>
-					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_46">Uize.pairUp</a></code> - uses a list of key/value pairs to form an object</td></tr>
-					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_47">Uize.recordMatches</a></code> - determines if a record object matches the specified criteria</td></tr>
-					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_51">Uize.reverseLookup</a></code> - creates a reverse lookup from a specified lookup object or values array</td></tr>
-					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_55">Uize.totalKeys</a></code> - counts the number of keys in an object (essentially the number of properties)</td></tr>
-					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_56">Uize.values</a></code> - returns an array containing the values of the properties in an object</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_47">Uize.pairUp</a></code> - uses a list of key/value pairs to form an object</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_48">Uize.recordMatches</a></code> - determines if a record object matches the specified criteria</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_52">Uize.reverseLookup</a></code> - creates a reverse lookup from a specified lookup object or values array</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_56">Uize.totalKeys</a></code> - counts the number of keys in an object (essentially the number of properties)</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_57">Uize.values</a></code> - returns an array containing the values of the properties in an object</td></tr>
 					</table>
 				</div>
 				
@@ -403,8 +404,8 @@
 					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_4">Uize.constrain</a></code> - constrains a value to a specified range</td></tr>
 					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_6">Uize.defaultNully</a></code> - defaults a value to the specified default, if the value is nully (ie. <code>null</code> or <code>undefined</code>)</td></tr>
 					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_8">Uize.escapeRegExpLiteral</a></code> - escapes a string so that it can be used as a literal match portion of a regular expression string</td></tr>
-					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_52">Uize.substituteInto</a></code> - substitutes the specified values into the specified string using token replacement</td></tr>
-					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_53">Uize.toNumber</a></code> - coerces a value to a number, with defaulting if it cannot be coerced successfully</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_53">Uize.substituteInto</a></code> - substitutes the specified values into the specified string using token replacement</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_54">Uize.toNumber</a></code> - coerces a value to a number, with defaulting if it cannot be coerced successfully</td></tr>
 					</table>
 				</div>
 				
@@ -413,9 +414,9 @@
 				<div class="contents4">
 					<table class="list">
 					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_45">Uize.nop</a></code> - performs no operation and returns no value (equivalent to returning <code>undefined</code>)</td></tr>
-					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_48">Uize.returnFalse</a></code> - always returns the value <code>false</code></td></tr>
-					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_49">Uize.returnTrue</a></code> - always returns the value <code>true</code></td></tr>
-					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_50">Uize.returnX</a></code> - always returns the value of the first argument, unaltered</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_49">Uize.returnFalse</a></code> - always returns the value <code>false</code></td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_50">Uize.returnTrue</a></code> - always returns the value <code>true</code></td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_51">Uize.returnX</a></code> - always returns the value of the first argument, unaltered</td></tr>
 					</table>
 				</div>
 				
@@ -424,8 +425,9 @@
 				<div class="contents4">
 					<table class="list">
 					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_44">Uize.noNew</a></code> - wraps an object constructor function to make JavaScript's <code>new</code> operator optional</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_46">Uize.now</a></code> - returns the current time in milliseconds since 1970 (POSIX time)</td></tr>
 					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_12">Uize.getClass</a></code> - gets the class of which a specified value is an instance, or returns the value if it is a class or function</td></tr>
-					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_52">Uize.substituteInto</a></code> - substitutes one or more substitution values into a string</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_53">Uize.substituteInto</a></code> - substitutes one or more substitution values into a string</td></tr>
 					</table>
 				</div>
 				
@@ -438,7 +440,7 @@
 					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_41">Uize.module</a></code> - lets you declare a JavaScript module that can be required by other JavaScript modules</td></tr>
 					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_42">Uize.moduleLoader</a></code> - loads a JavaScript module (specified by its module name)</td></tr>
 					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_43">Uize.moduleUrlResolver</a></code> - resolves the specified JavaScript module name to a URL path</td></tr>
-					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_54">Uize.toString</a></code> - provides summary info for the module on which the method is called</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#2_55">Uize.toString</a></code> - provides summary info for the module on which the method is called</td></tr>
 					</table>
 				</div>
 			</div>
@@ -468,7 +470,7 @@
 				
 				<p><span class="allCaps">STATIC METHODS</span></p>
 				
-				<p><code><a href="#2_1">Uize.callOn</a></code> | <code><a href="#2_2">Uize.capFirstChar</a></code> | <code><a href="#2_3">Uize.clone</a></code> | <code><a href="#2_4">Uize.constrain</a></code> | <code><a href="#2_5">Uize.copyInto</a></code> | <code><a href="#2_6">Uize.defaultNully</a></code> | <code><a href="#2_7">Uize.emptyOut</a></code> | <code><a href="#2_8">Uize.escapeRegExpLiteral</a></code> | <code><a href="#2_9">Uize.findRecord</a></code> | <code><a href="#2_10">Uize.findRecordNo</a></code> | <code><a href="#2_11">Uize.forEach</a></code> | <code><a href="#2_12">Uize.getClass</a></code> | <code><a href="#2_13">Uize.getGuid</a></code> | <code><a href="#2_14">Uize.getModuleByName</a></code> | <code><a href="#2_15">Uize.getPathToLibrary</a></code> | <code><a href="#2_16">Uize.globalEval</a></code> | <code><a href="#2_17">Uize.inRange</a></code> | <code><a href="#2_18">Uize.indexIn</a></code> | <code><a href="#2_19">Uize.isArray</a></code> | <code><a href="#2_20">Uize.isBoolean</a></code> | <code><a href="#2_21">Uize.isEmpty</a></code> | <code><a href="#2_22">Uize.isFunction</a></code> | <code><a href="#2_23">Uize.isIn</a></code> | <code><a href="#2_24">Uize.isInstance</a></code> | <code><a href="#2_25">Uize.isList</a></code> | <code><a href="#2_26">Uize.isNaN</a></code> | <code><a href="#2_27">Uize.isNully</a></code> | <code><a href="#2_28">Uize.isNumber</a></code> | <code><a href="#2_29">Uize.isObject</a></code> | <code><a href="#2_30">Uize.isPlainObject</a></code> | <code><a href="#2_31">Uize.isPrimitive</a></code> | <code><a href="#2_32">Uize.isSameAs</a></code> | <code><a href="#2_33">Uize.isString</a></code> | <code><a href="#2_34">Uize.keys</a></code> | <code><a href="#2_35">Uize.lookup</a></code> | <code><a href="#2_36">Uize.map</a></code> | <code><a href="#2_37">Uize.max</a></code> | <code><a href="#2_38">Uize.meldKeysValues</a></code> | <code><a href="#2_39">Uize.mergeInto</a></code> | <code><a href="#2_40">Uize.min</a></code> | <code><a href="#2_41">Uize.module</a></code> | <code><a href="#2_42">Uize.moduleLoader</a></code> | <code><a href="#2_43">Uize.moduleUrlResolver</a></code> | <code><a href="#2_44">Uize.noNew</a></code> | <code><a href="#2_45">Uize.nop</a></code> | <code><a href="#2_46">Uize.pairUp</a></code> | <code><a href="#2_47">Uize.recordMatches</a></code> | <code><a href="#2_48">Uize.returnFalse</a></code> | <code><a href="#2_49">Uize.returnTrue</a></code> | <code><a href="#2_50">Uize.returnX</a></code> | <code><a href="#2_51">Uize.reverseLookup</a></code> | <code><a href="#2_52">Uize.substituteInto</a></code> | <code><a href="#2_53">Uize.toNumber</a></code> | <code><a href="#2_55">Uize.totalKeys</a></code> | <code><a href="#2_56">Uize.values</a></code></p>
+				<p><code><a href="#2_1">Uize.callOn</a></code> | <code><a href="#2_2">Uize.capFirstChar</a></code> | <code><a href="#2_3">Uize.clone</a></code> | <code><a href="#2_4">Uize.constrain</a></code> | <code><a href="#2_5">Uize.copyInto</a></code> | <code><a href="#2_6">Uize.defaultNully</a></code> | <code><a href="#2_7">Uize.emptyOut</a></code> | <code><a href="#2_8">Uize.escapeRegExpLiteral</a></code> | <code><a href="#2_9">Uize.findRecord</a></code> | <code><a href="#2_10">Uize.findRecordNo</a></code> | <code><a href="#2_11">Uize.forEach</a></code> | <code><a href="#2_12">Uize.getClass</a></code> | <code><a href="#2_13">Uize.getGuid</a></code> | <code><a href="#2_14">Uize.getModuleByName</a></code> | <code><a href="#2_15">Uize.getPathToLibrary</a></code> | <code><a href="#2_16">Uize.globalEval</a></code> | <code><a href="#2_17">Uize.inRange</a></code> | <code><a href="#2_18">Uize.indexIn</a></code> | <code><a href="#2_19">Uize.isArray</a></code> | <code><a href="#2_20">Uize.isBoolean</a></code> | <code><a href="#2_21">Uize.isEmpty</a></code> | <code><a href="#2_22">Uize.isFunction</a></code> | <code><a href="#2_23">Uize.isIn</a></code> | <code><a href="#2_24">Uize.isInstance</a></code> | <code><a href="#2_25">Uize.isList</a></code> | <code><a href="#2_26">Uize.isNaN</a></code> | <code><a href="#2_27">Uize.isNully</a></code> | <code><a href="#2_28">Uize.isNumber</a></code> | <code><a href="#2_29">Uize.isObject</a></code> | <code><a href="#2_30">Uize.isPlainObject</a></code> | <code><a href="#2_31">Uize.isPrimitive</a></code> | <code><a href="#2_32">Uize.isSameAs</a></code> | <code><a href="#2_33">Uize.isString</a></code> | <code><a href="#2_34">Uize.keys</a></code> | <code><a href="#2_35">Uize.lookup</a></code> | <code><a href="#2_36">Uize.map</a></code> | <code><a href="#2_37">Uize.max</a></code> | <code><a href="#2_38">Uize.meldKeysValues</a></code> | <code><a href="#2_39">Uize.mergeInto</a></code> | <code><a href="#2_40">Uize.min</a></code> | <code><a href="#2_41">Uize.module</a></code> | <code><a href="#2_42">Uize.moduleLoader</a></code> | <code><a href="#2_43">Uize.moduleUrlResolver</a></code> | <code><a href="#2_44">Uize.noNew</a></code> | <code><a href="#2_45">Uize.nop</a></code> | <code><a href="#2_46">Uize.now</a></code> | <code><a href="#2_47">Uize.pairUp</a></code> | <code><a href="#2_48">Uize.recordMatches</a></code> | <code><a href="#2_49">Uize.returnFalse</a></code> | <code><a href="#2_50">Uize.returnTrue</a></code> | <code><a href="#2_51">Uize.returnX</a></code> | <code><a href="#2_52">Uize.reverseLookup</a></code> | <code><a href="#2_53">Uize.substituteInto</a></code> | <code><a href="#2_54">Uize.toNumber</a></code> | <code><a href="#2_56">Uize.totalKeys</a></code> | <code><a href="#2_57">Uize.values</a></code></p>
 				
 				<p><span class="allCaps">STATIC PROPERTIES</span></p>
 				
@@ -1050,7 +1052,7 @@ Uize.copyInto (targetObject,sourceObject1,sourceObject2);
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this method uses strict matching, so the statement <code>Uize.findRecordNo ([{index:'0'},{index:'1'}],{index:1})</code> will return <code>-1</code></td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the related <code><a href="#2_9">Uize.findRecord</a></code> and <code><a href="#2_47">Uize.recordMatches</a></code> static methods</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the related <code><a href="#2_9">Uize.findRecord</a></code> and <code><a href="#2_48">Uize.recordMatches</a></code> static methods</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the other <a href="#1_1_1_2">basic data utilities</a></td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -3245,7 +3247,7 @@ for (var elementNo = 0; elementNo &lt; 100; elementNo++) {
 			
 			<p>The <code><a href="#2_38">Uize.meldKeysValues</a></code> method iterates through the elements of the <code>keysARRAY</code> and <code>valuesARRAY</code> arrays in lock step, assigning properties to the resulting object using an element from the keys array as property name and an element from the values array as property value.</p>
 			
-			<p>If you obtained a keys array from an object using the <code><a href="#2_34">Uize.keys</a></code> method, and if you also obtained a values array from that same object using the <code><a href="#2_56">Uize.values</a></code> method, then you could use the <code><a href="#2_38">Uize.meldKeysValues</a></code> method with those keys and values arrays to recreate the original object.</p>
+			<p>If you obtained a keys array from an object using the <code><a href="#2_34">Uize.keys</a></code> method, and if you also obtained a values array from that same object using the <code><a href="#2_57">Uize.values</a></code> method, then you could use the <code><a href="#2_38">Uize.meldKeysValues</a></code> method with those keys and values arrays to recreate the original object.</p>
 			
 			<p><span class="allCaps">EXAMPLE</span></p>
 			
@@ -3307,8 +3309,8 @@ for (var elementNo = 0; elementNo &lt; 100; elementNo++) {
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#2_34">Uize.keys</a></code> and <code><a href="#2_56">Uize.values</a></code> static methods</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#2_46">Uize.pairUp</a></code> static method</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#2_34">Uize.keys</a></code> and <code><a href="#2_57">Uize.values</a></code> static methods</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#2_47">Uize.pairUp</a></code> static method</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the other <a href="#1_1_1_2">basic data utilities</a></td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -3896,7 +3898,7 @@ Food.isGrain = function (food) {return food &amp;&amp; food.isGrain ()};
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#2_48">Uize.returnFalse</a></code> static method</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#2_49">Uize.returnFalse</a></code> static method</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the other <a href="#1_1_1_5">dummy functions</a></td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -3907,7 +3909,43 @@ Food.isGrain = function (food) {return food &amp;&amp; food.isGrain ()};
 		</div>
 		
 		<a name="2_46"></a>
-		<h2 class="heading2" title="2. Static Methods -&gt; 2.46. Uize.pairUp"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_46" title="2. Static Methods -&gt; 2.46. Uize.pairUp">46</a>. </span>Uize.pairUp</h2>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.46. Uize.now"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_46" title="2. Static Methods -&gt; 2.46. Uize.now">46</a>. </span>Uize.now</h2>
+		<div class="contents2">
+			<p>Returns an integer, representing the current time in milliseconds since 1970 (POSIX time).</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">nowMsINT = Uize.now ();
+</pre>
+			
+			<p>The <code><a href="#2_46">Uize.now</a></code> method is optimized to use the <code>Date.now</code> static method that is supported by JavaScript's built-in <code><a href="../javascript-reference/Date.html">Date</a></code> object in newer versions of the language. If this method is not available, then the <code><a href="#2_46">Uize.now</a></code> method falls back to using the less performant <code>+new Date</code> approach, which involves construction of a <code><a href="../javascript-reference/Date.html">Date</a></code> object instance each time.</p>
+			
+			<p>The <code><a href="#2_46">Uize.now</a></code> method can be useful when capturing start and end times in order to measure the duration of operations. Consider the following example...</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">var start = Uize.now ();
+
+// ... ... ... ... ... ... ... ... ... ... ...
+// do some stuff that may take a bunch of time
+// ... ... ... ... ... ... ... ... ... ... ...
+
+var duration = Uize.now () - start;
+</pre>
+			
+			<p>Using the above template, the value of the <code>duration</code> variable will indicate how long it took to perform the operations in the block between assigning the value for the <code>start</code> variable and the value for the <code>duration</code> variable.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="2_47"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.47. Uize.pairUp"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_47" title="2. Static Methods -&gt; 2.47. Uize.pairUp">47</a>. </span>Uize.pairUp</h2>
 		<div class="contents2">
 			<p>Returns an object, that is the specified key and value, paired up together in the same object.</p>
 			
@@ -3936,7 +3974,7 @@ Uize.pairUp (1,true);       // returns the object {1:true}
 );
 </pre>
 			
-			<p>When an arbitrary number of arguments are specified for the <code><a href="#2_46">Uize.pairUp</a></code> method, then the method will pair up all the arguments as key/value pairs to form a single object, where all the even index arguments are treated as the keys, and where all the odd index arguments are treated as the values. For example, the statement <code>Uize.pairUp ('foo','bar','hello','world')</code> would return the object <code>{foo:'bar',hello:'world'}</code>.</p>
+			<p>When an arbitrary number of arguments are specified for the <code><a href="#2_47">Uize.pairUp</a></code> method, then the method will pair up all the arguments as key/value pairs to form a single object, where all the even index arguments are treated as the keys, and where all the odd index arguments are treated as the values. For example, the statement <code>Uize.pairUp ('foo','bar','hello','world')</code> would return the object <code>{foo:'bar',hello:'world'}</code>.</p>
 			
 			<p><span class="allCaps">VARIATION 2</span></p>
 			
@@ -3944,7 +3982,7 @@ Uize.pairUp (1,true);       // returns the object {1:true}
 <pre class="sample-code">keyValueOBJ = Uize.pairUp (keyAndValuePairsARRAY);
 </pre>
 			
-			<p>When a <code>keyAndValuePairsARRAY</code> parameter is specified when calling the <code><a href="#2_46">Uize.pairUp</a></code> method, then the <code><a href="#2_46">Uize.pairUp</a></code> method operates on the array in the same way as it would an arbitrary number of arguments. For example, the statement <code>Uize.pairUp (['foo','bar','hello','world'])</code> would return the object <code>{foo:'bar',hello:'world'}</code>. Therefore, if you have an array that represents a set of key / value pairs, you can call the <code><a href="#2_46">Uize.pairUp</a></code> method to combine the keys and values together to form an object without having to resort to using the <code>apply</code> method in order to use the arbitrary arguments variation of the <code><a href="#2_46">Uize.pairUp</a></code> method.</p>
+			<p>When a <code>keyAndValuePairsARRAY</code> parameter is specified when calling the <code><a href="#2_47">Uize.pairUp</a></code> method, then the <code><a href="#2_47">Uize.pairUp</a></code> method operates on the array in the same way as it would an arbitrary number of arguments. For example, the statement <code>Uize.pairUp (['foo','bar','hello','world'])</code> would return the object <code>{foo:'bar',hello:'world'}</code>. Therefore, if you have an array that represents a set of key / value pairs, you can call the <code><a href="#2_47">Uize.pairUp</a></code> method to combine the keys and values together to form an object without having to resort to using the <code>apply</code> method in order to use the arbitrary arguments variation of the <code><a href="#2_47">Uize.pairUp</a></code> method.</p>
 			
 			<p><span class="allCaps">INSTEAD OF...</span></p>
 			
@@ -3958,12 +3996,12 @@ Uize.pairUp (1,true);       // returns the object {1:true}
 <pre class="sample-code">Uize.pairUp (myKeyValuePairsArray);
 </pre>
 			
-			<a name="2_46_1"></a>
-			<h3 class="heading3" title="2. Static Methods -&gt; 2.46. Uize.pairUp -&gt; 2.46.1. Why This Method is Useful"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_46" title="2. Static Methods -&gt; 2.46. Uize.pairUp">46</a>.<a href="#2_46_1" title="2. Static Methods -&gt; 2.46. Uize.pairUp -&gt; 2.46.1. Why This Method is Useful">1</a>. </span>Why This Method is Useful</h3>
+			<a name="2_47_1"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.47. Uize.pairUp -&gt; 2.47.1. Why This Method is Useful"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_47" title="2. Static Methods -&gt; 2.47. Uize.pairUp">47</a>.<a href="#2_47_1" title="2. Static Methods -&gt; 2.47. Uize.pairUp -&gt; 2.47.1. Why This Method is Useful">1</a>. </span>Why This Method is Useful</h3>
 			<div class="contents3">
-				<p>The <code><a href="#2_46">Uize.pairUp</a></code> method is particularly useful when an object needs to be created from a key/value pair, where the key name is either dynamically generated in an expression or is supplied via a parameter.</p>
+				<p>The <code><a href="#2_47">Uize.pairUp</a></code> method is particularly useful when an object needs to be created from a key/value pair, where the key name is either dynamically generated in an expression or is supplied via a parameter.</p>
 				
-				<p>Using the <code><a href="#2_46">Uize.pairUp</a></code> method can collapse three statements into a single statement, as follows...</p>
+				<p>Using the <code><a href="#2_47">Uize.pairUp</a></code> method can collapse three statements into a single statement, as follows...</p>
 				
 				<p><span class="allCaps">INSTEAD OF</span></p>
 				
@@ -3997,7 +4035,7 @@ doSomethingWithAnObject (object);
 				
 				<p>In the above example, a function is being defined that will fade the border color of the specified edge of the specified node, from the specified start color to the specified end color. The value of the <code>edge</code> property needs to determine which style property needs to be faded.</p>
 				
-				<p>Now, we're using the <code>Uize.Fx.fadeStyle</code> static method of the <code><a href="../reference/Uize.Fx.html">Uize.Fx</a></code> module to perform the border color animation. This method can fade values for one or more style properties, and the start and end values for the style properties are specified in style property objects. Here we need to create start and end style objects where the style property to be faded is dynamically generated using the <code>edge</code> parameter. As you will see from the code, the <code><a href="#2_46">Uize.pairUp</a></code> method does this for us nicely.</p>
+				<p>Now, we're using the <code>Uize.Fx.fadeStyle</code> static method of the <code><a href="../reference/Uize.Fx.html">Uize.Fx</a></code> module to perform the border color animation. This method can fade values for one or more style properties, and the start and end values for the style properties are specified in style property objects. Here we need to create start and end style objects where the style property to be faded is dynamically generated using the <code>edge</code> parameter. As you will see from the code, the <code><a href="#2_47">Uize.pairUp</a></code> method does this for us nicely.</p>
 			</div>
 			
 			<p><span class="allCaps">NOTES</span></p>
@@ -4012,8 +4050,8 @@ doSomethingWithAnObject (object);
 			</table>
 		</div>
 		
-		<a name="2_47"></a>
-		<h2 class="heading2" title="2. Static Methods -&gt; 2.47. Uize.recordMatches"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_47" title="2. Static Methods -&gt; 2.47. Uize.recordMatches">47</a>. </span>Uize.recordMatches</h2>
+		<a name="2_48"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.48. Uize.recordMatches"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_48" title="2. Static Methods -&gt; 2.48. Uize.recordMatches">48</a>. </span>Uize.recordMatches</h2>
 		<div class="contents2">
 			<p>Returns a boolean, indicating whether or not the specified record's contents is a superset of the contents of the specified match object.</p>
 			
@@ -4053,8 +4091,8 @@ doSomethingWithAnObject (object);
 			</table>
 		</div>
 		
-		<a name="2_48"></a>
-		<h2 class="heading2" title="2. Static Methods -&gt; 2.48. Uize.returnFalse"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_48" title="2. Static Methods -&gt; 2.48. Uize.returnFalse">48</a>. </span>Uize.returnFalse</h2>
+		<a name="2_49"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.49. Uize.returnFalse"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_49" title="2. Static Methods -&gt; 2.49. Uize.returnFalse">49</a>. </span>Uize.returnFalse</h2>
 		<div class="contents2">
 			<p>A dummy function that always returns the boolean value <code>false</code>, and that can be useful as an event handler or in other situations.</p>
 			
@@ -4077,7 +4115,7 @@ doSomethingWithAnObject (object);
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the companion <code><a href="#2_49">Uize.returnTrue</a></code> static method</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the companion <code><a href="#2_50">Uize.returnTrue</a></code> static method</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#2_45">Uize.nop</a></code> static method</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the other <a href="#1_1_1_5">dummy functions</a></td></tr>
 			</table>
@@ -4088,8 +4126,8 @@ doSomethingWithAnObject (object);
 			</table>
 		</div>
 		
-		<a name="2_49"></a>
-		<h2 class="heading2" title="2. Static Methods -&gt; 2.49. Uize.returnTrue"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_49" title="2. Static Methods -&gt; 2.49. Uize.returnTrue">49</a>. </span>Uize.returnTrue</h2>
+		<a name="2_50"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.50. Uize.returnTrue"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_50" title="2. Static Methods -&gt; 2.50. Uize.returnTrue">50</a>. </span>Uize.returnTrue</h2>
 		<div class="contents2">
 			<p>A dummy function that always returns the boolean value <code>true</code>, and that can be useful as an event handler or in other situations.</p>
 			
@@ -4112,7 +4150,7 @@ doSomethingWithAnObject (object);
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the companion <code><a href="#2_48">Uize.returnFalse</a></code> static method</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the companion <code><a href="#2_49">Uize.returnFalse</a></code> static method</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the other <a href="#1_1_1_5">dummy functions</a></td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -4122,8 +4160,8 @@ doSomethingWithAnObject (object);
 			</table>
 		</div>
 		
-		<a name="2_50"></a>
-		<h2 class="heading2" title="2. Static Methods -&gt; 2.50. Uize.returnX"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_50" title="2. Static Methods -&gt; 2.50. Uize.returnX">50</a>. </span>Uize.returnX</h2>
+		<a name="2_51"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.51. Uize.returnX"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_51" title="2. Static Methods -&gt; 2.51. Uize.returnX">51</a>. </span>Uize.returnX</h2>
 		<div class="contents2">
 			<p>A dummy function that accepts a single argument <code>x</code> and returns the value of that argument unchanged.</p>
 			
@@ -4145,47 +4183,47 @@ doSomethingWithAnObject (object);
 			</table>
 		</div>
 		
-		<a name="2_51"></a>
-		<h2 class="heading2" title="2. Static Methods -&gt; 2.51. Uize.reverseLookup"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_51" title="2. Static Methods -&gt; 2.51. Uize.reverseLookup">51</a>. </span>Uize.reverseLookup</h2>
+		<a name="2_52"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.52. Uize.reverseLookup"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_52" title="2. Static Methods -&gt; 2.52. Uize.reverseLookup">52</a>. </span>Uize.reverseLookup</h2>
 		<div class="contents2">
 			<p>Returns a reverse lookup object, where each key is a value from the specified source object, and where the value for each key is the associated key from the specified source.</p>
 			
 			<p><span class="allCaps">DIFFERENT USAGES</span></p>
 			
-			<p><a href="#2_51_1">Create a Reverse Lookup From an Object</a></p>
+			<p><a href="#2_52_1">Create a Reverse Lookup From an Object</a></p>
 			
 			
 <pre class="sample-code">reverseLookupOBJ = Uize.reverseLookup (hashOBJ);
 </pre>
 			
-			<p><a href="#2_51_2">Create a Reverse Lookup From a Values Array</a></p>
+			<p><a href="#2_52_2">Create a Reverse Lookup From a Values Array</a></p>
 			
 			
 <pre class="sample-code">reverseLookupOBJ = Uize.reverseLookup (valuesARRAY);
 </pre>
 			
-			<p><a href="#2_51_3">Create a Safe Reverse Lookup Object</a></p>
+			<p><a href="#2_52_3">Create a Safe Reverse Lookup Object</a></p>
 			
 			
 <pre class="sample-code">reverseLookupOBJ = Uize.reverseLookup (hashOBJorValuesARRAY,safeBOOL);
 </pre>
 			
-			<p><a href="#2_51_4">Add More Entries to a Reverse Lookup Object</a></p>
+			<p><a href="#2_52_4">Add More Entries to a Reverse Lookup Object</a></p>
 			
 			
 <pre class="sample-code">targetOBJ = Uize.reverseLookup (hashOBJorValuesARRAY,targetOBJ);
 </pre>
 			
-			<p><a href="#2_51_5">Create a Bi-directional Lookup</a></p>
+			<p><a href="#2_52_5">Create a Bi-directional Lookup</a></p>
 			
 			
 <pre class="sample-code">reverseLookupOBJ = Uize.reverseLookup (reverseLookupOBJ,reverseLookupOBJ);
 </pre>
 			
-			<a name="2_51_1"></a>
-			<h3 class="heading3" title="2. Static Methods -&gt; 2.51. Uize.reverseLookup -&gt; 2.51.1. Create a Reverse Lookup From an Object"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_51" title="2. Static Methods -&gt; 2.51. Uize.reverseLookup">51</a>.<a href="#2_51_1" title="2. Static Methods -&gt; 2.51. Uize.reverseLookup -&gt; 2.51.1. Create a Reverse Lookup From an Object">1</a>. </span>Create a Reverse Lookup From an Object</h3>
+			<a name="2_52_1"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.52. Uize.reverseLookup -&gt; 2.52.1. Create a Reverse Lookup From an Object"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_52" title="2. Static Methods -&gt; 2.52. Uize.reverseLookup">52</a>.<a href="#2_52_1" title="2. Static Methods -&gt; 2.52. Uize.reverseLookup -&gt; 2.52.1. Create a Reverse Lookup From an Object">1</a>. </span>Create a Reverse Lookup From an Object</h3>
 			<div class="contents3">
-				<p>In the most typical usage of the <code><a href="#2_51">Uize.reverseLookup</a></code> method, a reverse lookup object can be created from an object.</p>
+				<p>In the most typical usage of the <code><a href="#2_52">Uize.reverseLookup</a></code> method, a reverse lookup object can be created from an object.</p>
 				
 				<p><span class="allCaps">SYNTAX</span></p>
 				
@@ -4211,10 +4249,10 @@ doSomethingWithAnObject (object);
 				<p>By creating a reverse lookup, this code can lookup up an entity's character code from its name, or its name from its character code.</p>
 			</div>
 			
-			<a name="2_51_2"></a>
-			<h3 class="heading3" title="2. Static Methods -&gt; 2.51. Uize.reverseLookup -&gt; 2.51.2. Create a Reverse Lookup From a Values Array"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_51" title="2. Static Methods -&gt; 2.51. Uize.reverseLookup">51</a>.<a href="#2_51_2" title="2. Static Methods -&gt; 2.51. Uize.reverseLookup -&gt; 2.51.2. Create a Reverse Lookup From a Values Array">2</a>. </span>Create a Reverse Lookup From a Values Array</h3>
+			<a name="2_52_2"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.52. Uize.reverseLookup -&gt; 2.52.2. Create a Reverse Lookup From a Values Array"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_52" title="2. Static Methods -&gt; 2.52. Uize.reverseLookup">52</a>.<a href="#2_52_2" title="2. Static Methods -&gt; 2.52. Uize.reverseLookup -&gt; 2.52.2. Create a Reverse Lookup From a Values Array">2</a>. </span>Create a Reverse Lookup From a Values Array</h3>
 			<div class="contents3">
-				<p>The <code><a href="#2_51">Uize.reverseLookup</a></code> method can also be used to create a reverse lookup object for an array.</p>
+				<p>The <code><a href="#2_52">Uize.reverseLookup</a></code> method can also be used to create a reverse lookup object for an array.</p>
 				
 				<p><span class="allCaps">SYNTAX</span></p>
 				
@@ -4264,8 +4302,8 @@ doSomethingWithAnObject (object);
 				<p>Now the code can look up a front-runner from the front-runner lineup using an index, or the code can determine if a particular person is in the front-runner lineup and what their finishing place is using the generated reverse lookup.</p>
 			</div>
 			
-			<a name="2_51_3"></a>
-			<h3 class="heading3" title="2. Static Methods -&gt; 2.51. Uize.reverseLookup -&gt; 2.51.3. Create a Safe Reverse Lookup Object"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_51" title="2. Static Methods -&gt; 2.51. Uize.reverseLookup">51</a>.<a href="#2_51_3" title="2. Static Methods -&gt; 2.51. Uize.reverseLookup -&gt; 2.51.3. Create a Safe Reverse Lookup Object">3</a>. </span>Create a Safe Reverse Lookup Object</h3>
+			<a name="2_52_3"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.52. Uize.reverseLookup -&gt; 2.52.3. Create a Safe Reverse Lookup Object"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_52" title="2. Static Methods -&gt; 2.52. Uize.reverseLookup">52</a>.<a href="#2_52_3" title="2. Static Methods -&gt; 2.52. Uize.reverseLookup -&gt; 2.52.3. Create a Safe Reverse Lookup Object">3</a>. </span>Create a Safe Reverse Lookup Object</h3>
 			<div class="contents3">
 				<p>By specifying the value <code>true</code> for the optional <code>safeBOOL</code> parameter, a "safe" lookup object can be created.</p>
 				
@@ -4275,7 +4313,7 @@ doSomethingWithAnObject (object);
 <pre class="sample-code">reverseLookupOBJ = Uize.reverseLookup (hashOBJorValuesARRAY,safeBOOL);
 </pre>
 				
-				<p>By default, the <code><a href="#2_51">Uize.reverseLookup</a></code> method creates a lookup object using a simple JavaScript <code><a href="../javascript-reference/Object.html">Object</a></code> instance. However, JavaScript's built-in <code><a href="../javascript-reference/Object.html">Object</a></code> object defines certain properties on its prototype, such as <code>valueOf</code>, so indexing into a lookup object for <code>valueOf</code> will return a truthy result. Specifying the value <code>true</code> for the <code>safeBOOL</code> parameter avoids this issue.</p>
+				<p>By default, the <code><a href="#2_52">Uize.reverseLookup</a></code> method creates a lookup object using a simple JavaScript <code><a href="../javascript-reference/Object.html">Object</a></code> instance. However, JavaScript's built-in <code><a href="../javascript-reference/Object.html">Object</a></code> object defines certain properties on its prototype, such as <code>valueOf</code>, so indexing into a lookup object for <code>valueOf</code> will return a truthy result. Specifying the value <code>true</code> for the <code>safeBOOL</code> parameter avoids this issue.</p>
 				
 				<p><span class="allCaps">EXAMPLE</span></p>
 				
@@ -4300,8 +4338,8 @@ if (entitiesCodesToNamesSafe ['valueOf']) {
 				<p>It is often not essential to create safe lookups, since one may know that the keys being used to index into a lookup object will never be the names of methods of the <code><a href="../javascript-reference/Object.html">Object</a></code> object, and not creating safe lookups is a little more efficient.</p>
 			</div>
 			
-			<a name="2_51_4"></a>
-			<h3 class="heading3" title="2. Static Methods -&gt; 2.51. Uize.reverseLookup -&gt; 2.51.4. Add More Entries to a Reverse Lookup Object"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_51" title="2. Static Methods -&gt; 2.51. Uize.reverseLookup">51</a>.<a href="#2_51_4" title="2. Static Methods -&gt; 2.51. Uize.reverseLookup -&gt; 2.51.4. Add More Entries to a Reverse Lookup Object">4</a>. </span>Add More Entries to a Reverse Lookup Object</h3>
+			<a name="2_52_4"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.52. Uize.reverseLookup -&gt; 2.52.4. Add More Entries to a Reverse Lookup Object"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_52" title="2. Static Methods -&gt; 2.52. Uize.reverseLookup">52</a>.<a href="#2_52_4" title="2. Static Methods -&gt; 2.52. Uize.reverseLookup -&gt; 2.52.4. Add More Entries to a Reverse Lookup Object">4</a>. </span>Add More Entries to a Reverse Lookup Object</h3>
 			<div class="contents3">
 				<p>By specifying an existing reverse lookup object for the optional <code>targetOBJ</code> second parameter, more entries can be added to the existing reverse lookup.</p>
 				
@@ -4321,11 +4359,11 @@ alert (entitiesCodesToNames [38]);   // alerts "amp"
 alert (entitiesCodesToNames [169]);  // alerts "copy"
 </pre>
 				
-				<p>In the above example, the second call to the <code><a href="#2_51">Uize.reverseLookup</a></code> method is adding more entries to the reverse lookup object that was created in the first call to the method. This is done by supplying that reverse lookup object, which is assigned to the <code>entitiesCodesToNames</code> variable, as the second argument. When calling the <code><a href="#2_51">Uize.reverseLookup</a></code> method the second time, the result is ignored. This is because the method modifies the target, so we don't care about its return value.</p>
+				<p>In the above example, the second call to the <code><a href="#2_52">Uize.reverseLookup</a></code> method is adding more entries to the reverse lookup object that was created in the first call to the method. This is done by supplying that reverse lookup object, which is assigned to the <code>entitiesCodesToNames</code> variable, as the second argument. When calling the <code><a href="#2_52">Uize.reverseLookup</a></code> method the second time, the result is ignored. This is because the method modifies the target, so we don't care about its return value.</p>
 			</div>
 			
-			<a name="2_51_5"></a>
-			<h3 class="heading3" title="2. Static Methods -&gt; 2.51. Uize.reverseLookup -&gt; 2.51.5. Create a Bi-directional Lookup"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_51" title="2. Static Methods -&gt; 2.51. Uize.reverseLookup">51</a>.<a href="#2_51_5" title="2. Static Methods -&gt; 2.51. Uize.reverseLookup -&gt; 2.51.5. Create a Bi-directional Lookup">5</a>. </span>Create a Bi-directional Lookup</h3>
+			<a name="2_52_5"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.52. Uize.reverseLookup -&gt; 2.52.5. Create a Bi-directional Lookup"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_52" title="2. Static Methods -&gt; 2.52. Uize.reverseLookup">52</a>.<a href="#2_52_5" title="2. Static Methods -&gt; 2.52. Uize.reverseLookup -&gt; 2.52.5. Create a Bi-directional Lookup">5</a>. </span>Create a Bi-directional Lookup</h3>
 			<div class="contents3">
 				<p>By specifying the source hash object as also the target for the reverse lookup creation, a bi-directional lookup object can be created.</p>
 				
@@ -4345,8 +4383,8 @@ alert (entitiesBiDiLookup ['amp']);  // alerts "38"
 alert (entitiesBiDiLookup [38]);     // alerts "amp"
 </pre>
 				
-				<a name="2_51_5_1"></a>
-				<h4 class="heading4" title="2. Static Methods -&gt; 2.51. Uize.reverseLookup -&gt; 2.51.5. Create a Bi-directional Lookup -&gt; 2.51.5.1. Key / Value Collisions"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_51" title="2. Static Methods -&gt; 2.51. Uize.reverseLookup">51</a>.<a href="#2_51_5" title="2. Static Methods -&gt; 2.51. Uize.reverseLookup -&gt; 2.51.5. Create a Bi-directional Lookup">5</a>.<a href="#2_51_5_1" title="2. Static Methods -&gt; 2.51. Uize.reverseLookup -&gt; 2.51.5. Create a Bi-directional Lookup -&gt; 2.51.5.1. Key / Value Collisions">1</a>. </span>Key / Value Collisions</h4>
+				<a name="2_52_5_1"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.52. Uize.reverseLookup -&gt; 2.52.5. Create a Bi-directional Lookup -&gt; 2.52.5.1. Key / Value Collisions"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_52" title="2. Static Methods -&gt; 2.52. Uize.reverseLookup">52</a>.<a href="#2_52_5" title="2. Static Methods -&gt; 2.52. Uize.reverseLookup -&gt; 2.52.5. Create a Bi-directional Lookup">5</a>.<a href="#2_52_5_1" title="2. Static Methods -&gt; 2.52. Uize.reverseLookup -&gt; 2.52.5. Create a Bi-directional Lookup -&gt; 2.52.5.1. Key / Value Collisions">1</a>. </span>Key / Value Collisions</h4>
 				<div class="contents4">
 					<p>When creating bi-directional lookup objects, be sure that there are no collisions between keys and values, or your bi-directional lookup will not work correctly.</p>
 					
@@ -4376,8 +4414,8 @@ alert (foodsLookup ['grain']);  // alerts "rice"
 			</table>
 		</div>
 		
-		<a name="2_52"></a>
-		<h2 class="heading2" title="2. Static Methods -&gt; 2.52. Uize.substituteInto"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_52" title="2. Static Methods -&gt; 2.52. Uize.substituteInto">52</a>. </span>Uize.substituteInto</h2>
+		<a name="2_53"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.53. Uize.substituteInto"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_53" title="2. Static Methods -&gt; 2.53. Uize.substituteInto">53</a>. </span>Uize.substituteInto</h2>
 		<div class="contents2">
 			<p>Lets you substitute one or more specified substitution values into a specified source string.</p>
 			
@@ -4391,26 +4429,26 @@ alert (foodsLookup ['grain']);  // alerts "rice"
 );
 </pre>
 			
-			<a name="2_52_1"></a>
-			<h3 class="heading3" title="2. Static Methods -&gt; 2.52. Uize.substituteInto -&gt; 2.52.1. Parameters"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_52" title="2. Static Methods -&gt; 2.52. Uize.substituteInto">52</a>.<a href="#2_52_1" title="2. Static Methods -&gt; 2.52. Uize.substituteInto -&gt; 2.52.1. Parameters">1</a>. </span>Parameters</h3>
+			<a name="2_53_1"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.53. Uize.substituteInto -&gt; 2.53.1. Parameters"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_53" title="2. Static Methods -&gt; 2.53. Uize.substituteInto">53</a>.<a href="#2_53_1" title="2. Static Methods -&gt; 2.53. Uize.substituteInto -&gt; 2.53.1. Parameters">1</a>. </span>Parameters</h3>
 			<div class="contents3">
-				<a name="2_52_1_1"></a>
-				<h4 class="heading4" title="2. Static Methods -&gt; 2.52. Uize.substituteInto -&gt; 2.52.1. Parameters -&gt; 2.52.1.1. sourceANYTYPE"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_52" title="2. Static Methods -&gt; 2.52. Uize.substituteInto">52</a>.<a href="#2_52_1" title="2. Static Methods -&gt; 2.52. Uize.substituteInto -&gt; 2.52.1. Parameters">1</a>.<a href="#2_52_1_1" title="2. Static Methods -&gt; 2.52. Uize.substituteInto -&gt; 2.52.1. Parameters -&gt; 2.52.1.1. sourceANYTYPE">1</a>. </span>sourceANYTYPE</h4>
+				<a name="2_53_1_1"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.53. Uize.substituteInto -&gt; 2.53.1. Parameters -&gt; 2.53.1.1. sourceANYTYPE"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_53" title="2. Static Methods -&gt; 2.53. Uize.substituteInto">53</a>.<a href="#2_53_1" title="2. Static Methods -&gt; 2.53. Uize.substituteInto -&gt; 2.53.1. Parameters">1</a>.<a href="#2_53_1_1" title="2. Static Methods -&gt; 2.53. Uize.substituteInto -&gt; 2.53.1. Parameters -&gt; 2.53.1.1. sourceANYTYPE">1</a>. </span>sourceANYTYPE</h4>
 				<div class="contents4">
-					<p>The value of the <code><a href="#2_52_1_1">sourceANYTYPE</a></code> parameter should be a string containing substitution tokens that the substitution values specified in the <code>substitutionsOBJorARRAY</code> parameter will be substituted into.</p>
+					<p>The value of the <code><a href="#2_53_1_1">sourceANYTYPE</a></code> parameter should be a string containing substitution tokens that the substitution values specified in the <code>substitutionsOBJorARRAY</code> parameter will be substituted into.</p>
 					
-					<p>If the value of the <code><a href="#2_52_1_1">sourceANYTYPE</a></code> parameter is not a string, then it will be coerced to a string by invoking the value type's <code>valueOf Intrinsic Method</code>. For each of the values to substitute, the <code><a href="#2_52_1_1">sourceANYTYPE</a></code> string should contain a token of the form <code>[#propertyName]</code> (unless a custom token naming scheme is specified using the optional <code><a href="#2_52_1_3">tokenNamingSTR</a></code> parameter). Each substitution token for a substitution will be replaced with the substitution value.</p>
+					<p>If the value of the <code><a href="#2_53_1_1">sourceANYTYPE</a></code> parameter is not a string, then it will be coerced to a string by invoking the value type's <code>valueOf Intrinsic Method</code>. For each of the values to substitute, the <code><a href="#2_53_1_1">sourceANYTYPE</a></code> string should contain a token of the form <code>[#propertyName]</code> (unless a custom token naming scheme is specified using the optional <code><a href="#2_53_1_3">tokenNamingSTR</a></code> parameter). Each substitution token for a substitution will be replaced with the substitution value.</p>
 				</div>
 				
-				<a name="2_52_1_2"></a>
-				<h4 class="heading4" title="2. Static Methods -&gt; 2.52. Uize.substituteInto -&gt; 2.52.1. Parameters -&gt; 2.52.1.2. substitutionsANYTYPE"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_52" title="2. Static Methods -&gt; 2.52. Uize.substituteInto">52</a>.<a href="#2_52_1" title="2. Static Methods -&gt; 2.52. Uize.substituteInto -&gt; 2.52.1. Parameters">1</a>.<a href="#2_52_1_2" title="2. Static Methods -&gt; 2.52. Uize.substituteInto -&gt; 2.52.1. Parameters -&gt; 2.52.1.2. substitutionsANYTYPE">2</a>. </span>substitutionsANYTYPE</h4>
+				<a name="2_53_1_2"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.53. Uize.substituteInto -&gt; 2.53.1. Parameters -&gt; 2.53.1.2. substitutionsANYTYPE"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_53" title="2. Static Methods -&gt; 2.53. Uize.substituteInto">53</a>.<a href="#2_53_1" title="2. Static Methods -&gt; 2.53. Uize.substituteInto -&gt; 2.53.1. Parameters">1</a>.<a href="#2_53_1_2" title="2. Static Methods -&gt; 2.53. Uize.substituteInto -&gt; 2.53.1. Parameters -&gt; 2.53.1.2. substitutionsANYTYPE">2</a>. </span>substitutionsANYTYPE</h4>
 				<div class="contents4">
-					<p>An object, array, or simple type value, specifying one or more substitution values that should be substituted into the source string specified by the <code><a href="#2_52_1_1">sourceANYTYPE</a></code> parameter.</p>
+					<p>An object, array, or simple type value, specifying one or more substitution values that should be substituted into the source string specified by the <code><a href="#2_53_1_1">sourceANYTYPE</a></code> parameter.</p>
 					
 					<table class="list">
-					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>object</code> - When the value of the <code><a href="#2_52_1_2">substitutionsANYTYPE</a></code> parameter is an object, then each property of the object will be a substitution, where a property's value is the substition value, and where a property's name is a key that will be used in forming the substitution's token name.</td></tr>
-					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>array</code> - When the value of the <code><a href="#2_52_1_2">substitutionsANYTYPE</a></code> parameter is an array, then each element of the aray will be a substitution, where an element's value is the substition value, and where an element's index is a key that will be used in forming the substitution's token name.</td></tr>
-					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>simple type</code> - When the value of the <code><a href="#2_52_1_2">substitutionsANYTYPE</a></code> parameter is a simple type value (string, boolean, or number), then a substitutions array is formed using that simple type substitution as its single element.</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>object</code> - When the value of the <code><a href="#2_53_1_2">substitutionsANYTYPE</a></code> parameter is an object, then each property of the object will be a substitution, where a property's value is the substition value, and where a property's name is a key that will be used in forming the substitution's token name.</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>array</code> - When the value of the <code><a href="#2_53_1_2">substitutionsANYTYPE</a></code> parameter is an array, then each element of the aray will be a substitution, where an element's value is the substition value, and where an element's index is a key that will be used in forming the substitution's token name.</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>simple type</code> - When the value of the <code><a href="#2_53_1_2">substitutionsANYTYPE</a></code> parameter is a simple type value (string, boolean, or number), then a substitutions array is formed using that simple type substitution as its single element.</td></tr>
 					</table>
 					<p><span class="allCaps">EXAMPLES</span></p>
 					
@@ -4423,12 +4461,12 @@ Uize.substituteInto ('My name is [#0]','Eric');
 					<p>All of the above statements would produce the result <code>'My name is Eric'</code>.</p>
 				</div>
 				
-				<a name="2_52_1_3"></a>
-				<h4 class="heading4" title="2. Static Methods -&gt; 2.52. Uize.substituteInto -&gt; 2.52.1. Parameters -&gt; 2.52.1.3. tokenNamingSTR"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_52" title="2. Static Methods -&gt; 2.52. Uize.substituteInto">52</a>.<a href="#2_52_1" title="2. Static Methods -&gt; 2.52. Uize.substituteInto -&gt; 2.52.1. Parameters">1</a>.<a href="#2_52_1_3" title="2. Static Methods -&gt; 2.52. Uize.substituteInto -&gt; 2.52.1. Parameters -&gt; 2.52.1.3. tokenNamingSTR">3</a>. </span>tokenNamingSTR</h4>
+				<a name="2_53_1_3"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.53. Uize.substituteInto -&gt; 2.53.1. Parameters -&gt; 2.53.1.3. tokenNamingSTR"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_53" title="2. Static Methods -&gt; 2.53. Uize.substituteInto">53</a>.<a href="#2_53_1" title="2. Static Methods -&gt; 2.53. Uize.substituteInto -&gt; 2.53.1. Parameters">1</a>.<a href="#2_53_1_3" title="2. Static Methods -&gt; 2.53. Uize.substituteInto -&gt; 2.53.1. Parameters -&gt; 2.53.1.3. tokenNamingSTR">3</a>. </span>tokenNamingSTR</h4>
 				<div class="contents4">
-					<p>The optional <code><a href="#2_52_1_3">tokenNamingSTR</a></code> parameter allows a custom token naming scheme to be specified, rather than the default <code>[#KEY]</code> format.</p>
+					<p>The optional <code><a href="#2_53_1_3">tokenNamingSTR</a></code> parameter allows a custom token naming scheme to be specified, rather than the default <code>[#KEY]</code> format.</p>
 					
-					<p>This facility provides a lot of flexibility in how tokens are formatted inside localized strings. The value specified for the <code><a href="#2_52_1_3">tokenNamingSTR</a></code> parameter should be a string containing the text <code>'KEY'</code> somewhere inside it, where that segment will be replaced with the name for a given key. So, for example, a value of <code>'[KEY]'</code> for the <code><a href="#2_52_1_3">tokenNamingSTR</a></code> parameter would produce the token name <code>'[firstName]'</code> for the substitution key <code>'firstName'</code>.</p>
+					<p>This facility provides a lot of flexibility in how tokens are formatted inside localized strings. The value specified for the <code><a href="#2_53_1_3">tokenNamingSTR</a></code> parameter should be a string containing the text <code>'KEY'</code> somewhere inside it, where that segment will be replaced with the name for a given key. So, for example, a value of <code>'[KEY]'</code> for the <code><a href="#2_53_1_3">tokenNamingSTR</a></code> parameter would produce the token name <code>'[firstName]'</code> for the substitution key <code>'firstName'</code>.</p>
 					
 					<p><span class="allCaps">EXAMPLES</span></p>
 					
@@ -4452,13 +4490,13 @@ Uize.substituteInto ('My name is [[name]]',{name:'Eric'},'[[KEY]]');
 <pre class="sample-code">resultSTR = Uize.substituteInto (sourceANYTYPE,substitutionsOBJorARRAY);
 </pre>
 			
-			<p>When the optional <code><a href="#2_52_1_3">tokenNamingSTR</a></code> parameter is omitted, then its value will be defaulted to <code>'[#KEY]'</code>.</p>
+			<p>When the optional <code><a href="#2_53_1_3">tokenNamingSTR</a></code> parameter is omitted, then its value will be defaulted to <code>'[#KEY]'</code>.</p>
 			
-			<a name="2_52_2"></a>
-			<h3 class="heading3" title="2. Static Methods -&gt; 2.52. Uize.substituteInto -&gt; 2.52.2. Examples"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_52" title="2. Static Methods -&gt; 2.52. Uize.substituteInto">52</a>.<a href="#2_52_2" title="2. Static Methods -&gt; 2.52. Uize.substituteInto -&gt; 2.52.2. Examples">2</a>. </span>Examples</h3>
+			<a name="2_53_2"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.53. Uize.substituteInto -&gt; 2.53.2. Examples"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_53" title="2. Static Methods -&gt; 2.53. Uize.substituteInto">53</a>.<a href="#2_53_2" title="2. Static Methods -&gt; 2.53. Uize.substituteInto -&gt; 2.53.2. Examples">2</a>. </span>Examples</h3>
 			<div class="contents3">
-				<a name="2_52_2_1"></a>
-				<h4 class="heading4" title="2. Static Methods -&gt; 2.52. Uize.substituteInto -&gt; 2.52.2. Examples -&gt; 2.52.2.1. Example: Two Substitutions"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_52" title="2. Static Methods -&gt; 2.52. Uize.substituteInto">52</a>.<a href="#2_52_2" title="2. Static Methods -&gt; 2.52. Uize.substituteInto -&gt; 2.52.2. Examples">2</a>.<a href="#2_52_2_1" title="2. Static Methods -&gt; 2.52. Uize.substituteInto -&gt; 2.52.2. Examples -&gt; 2.52.2.1. Example: Two Substitutions">1</a>. </span>Example: Two Substitutions</h4>
+				<a name="2_53_2_1"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.53. Uize.substituteInto -&gt; 2.53.2. Examples -&gt; 2.53.2.1. Example: Two Substitutions"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_53" title="2. Static Methods -&gt; 2.53. Uize.substituteInto">53</a>.<a href="#2_53_2" title="2. Static Methods -&gt; 2.53. Uize.substituteInto -&gt; 2.53.2. Examples">2</a>.<a href="#2_53_2_1" title="2. Static Methods -&gt; 2.53. Uize.substituteInto -&gt; 2.53.2. Examples -&gt; 2.53.2.1. Example: Two Substitutions">1</a>. </span>Example: Two Substitutions</h4>
 				<div class="contents4">
 					<p>In the example below, two substitutions are being performed.</p>
 					
@@ -4478,8 +4516,8 @@ Uize.substituteInto ('My name is [[name]]',{name:'Eric'},'[[KEY]]');
 </pre>
 				</div>
 				
-				<a name="2_52_2_2"></a>
-				<h4 class="heading4" title="2. Static Methods -&gt; 2.52. Uize.substituteInto -&gt; 2.52.2. Examples -&gt; 2.52.2.2. Example: One Substitution, Used Multiple Times"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_52" title="2. Static Methods -&gt; 2.52. Uize.substituteInto">52</a>.<a href="#2_52_2" title="2. Static Methods -&gt; 2.52. Uize.substituteInto -&gt; 2.52.2. Examples">2</a>.<a href="#2_52_2_2" title="2. Static Methods -&gt; 2.52. Uize.substituteInto -&gt; 2.52.2. Examples -&gt; 2.52.2.2. Example: One Substitution, Used Multiple Times">2</a>. </span>Example: One Substitution, Used Multiple Times</h4>
+				<a name="2_53_2_2"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.53. Uize.substituteInto -&gt; 2.53.2. Examples -&gt; 2.53.2.2. Example: One Substitution, Used Multiple Times"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_53" title="2. Static Methods -&gt; 2.53. Uize.substituteInto">53</a>.<a href="#2_53_2" title="2. Static Methods -&gt; 2.53. Uize.substituteInto -&gt; 2.53.2. Examples">2</a>.<a href="#2_53_2_2" title="2. Static Methods -&gt; 2.53. Uize.substituteInto -&gt; 2.53.2. Examples -&gt; 2.53.2.2. Example: One Substitution, Used Multiple Times">2</a>. </span>Example: One Substitution, Used Multiple Times</h4>
 				<div class="contents4">
 					<p>If there are multiple tokens for the same substitution value, then that value will be substituted multiple times.</p>
 					
@@ -4499,8 +4537,8 @@ Uize.substituteInto ('My name is [[name]]',{name:'Eric'},'[[KEY]]');
 </pre>
 				</div>
 				
-				<a name="2_52_2_3"></a>
-				<h4 class="heading4" title="2. Static Methods -&gt; 2.52. Uize.substituteInto -&gt; 2.52.2. Examples -&gt; 2.52.2.3. Example: No Token for a Substitution Value"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_52" title="2. Static Methods -&gt; 2.52. Uize.substituteInto">52</a>.<a href="#2_52_2" title="2. Static Methods -&gt; 2.52. Uize.substituteInto -&gt; 2.52.2. Examples">2</a>.<a href="#2_52_2_3" title="2. Static Methods -&gt; 2.52. Uize.substituteInto -&gt; 2.52.2. Examples -&gt; 2.52.2.3. Example: No Token for a Substitution Value">3</a>. </span>Example: No Token for a Substitution Value</h4>
+				<a name="2_53_2_3"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.53. Uize.substituteInto -&gt; 2.53.2. Examples -&gt; 2.53.2.3. Example: No Token for a Substitution Value"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_53" title="2. Static Methods -&gt; 2.53. Uize.substituteInto">53</a>.<a href="#2_53_2" title="2. Static Methods -&gt; 2.53. Uize.substituteInto -&gt; 2.53.2. Examples">2</a>.<a href="#2_53_2_3" title="2. Static Methods -&gt; 2.53. Uize.substituteInto -&gt; 2.53.2. Examples -&gt; 2.53.2.3. Example: No Token for a Substitution Value">3</a>. </span>Example: No Token for a Substitution Value</h4>
 				<div class="contents4">
 					<p>If there are no substitution tokens for a substitution value, then that value will not be substituted.</p>
 					
@@ -4520,8 +4558,8 @@ Uize.substituteInto ('My name is [[name]]',{name:'Eric'},'[[KEY]]');
 </pre>
 				</div>
 				
-				<a name="2_52_2_4"></a>
-				<h4 class="heading4" title="2. Static Methods -&gt; 2.52. Uize.substituteInto -&gt; 2.52.2. Examples -&gt; 2.52.2.4. Example: Tokens With No Substitution Value"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_52" title="2. Static Methods -&gt; 2.52. Uize.substituteInto">52</a>.<a href="#2_52_2" title="2. Static Methods -&gt; 2.52. Uize.substituteInto -&gt; 2.52.2. Examples">2</a>.<a href="#2_52_2_4" title="2. Static Methods -&gt; 2.52. Uize.substituteInto -&gt; 2.52.2. Examples -&gt; 2.52.2.4. Example: Tokens With No Substitution Value">4</a>. </span>Example: Tokens With No Substitution Value</h4>
+				<a name="2_53_2_4"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.53. Uize.substituteInto -&gt; 2.53.2. Examples -&gt; 2.53.2.4. Example: Tokens With No Substitution Value"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_53" title="2. Static Methods -&gt; 2.53. Uize.substituteInto">53</a>.<a href="#2_53_2" title="2. Static Methods -&gt; 2.53. Uize.substituteInto -&gt; 2.53.2. Examples">2</a>.<a href="#2_53_2_4" title="2. Static Methods -&gt; 2.53. Uize.substituteInto -&gt; 2.53.2. Examples -&gt; 2.53.2.4. Example: Tokens With No Substitution Value">4</a>. </span>Example: Tokens With No Substitution Value</h4>
 				<div class="contents4">
 					<p>Substitution tokens for which there are no properties will be left in the string (they will not be blanked out).</p>
 					
@@ -4541,10 +4579,10 @@ Uize.substituteInto ('My name is [[name]]',{name:'Eric'},'[[KEY]]');
 </pre>
 				</div>
 				
-				<a name="2_52_2_5"></a>
-				<h4 class="heading4" title="2. Static Methods -&gt; 2.52. Uize.substituteInto -&gt; 2.52.2. Examples -&gt; 2.52.2.5. Example: Custom Token Naming"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_52" title="2. Static Methods -&gt; 2.52. Uize.substituteInto">52</a>.<a href="#2_52_2" title="2. Static Methods -&gt; 2.52. Uize.substituteInto -&gt; 2.52.2. Examples">2</a>.<a href="#2_52_2_5" title="2. Static Methods -&gt; 2.52. Uize.substituteInto -&gt; 2.52.2. Examples -&gt; 2.52.2.5. Example: Custom Token Naming">5</a>. </span>Example: Custom Token Naming</h4>
+				<a name="2_53_2_5"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.53. Uize.substituteInto -&gt; 2.53.2. Examples -&gt; 2.53.2.5. Example: Custom Token Naming"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_53" title="2. Static Methods -&gt; 2.53. Uize.substituteInto">53</a>.<a href="#2_53_2" title="2. Static Methods -&gt; 2.53. Uize.substituteInto -&gt; 2.53.2. Examples">2</a>.<a href="#2_53_2_5" title="2. Static Methods -&gt; 2.53. Uize.substituteInto -&gt; 2.53.2. Examples -&gt; 2.53.2.5. Example: Custom Token Naming">5</a>. </span>Example: Custom Token Naming</h4>
 				<div class="contents4">
-					<p>The optional <code><a href="#2_52_1_3">tokenNamingSTR</a></code> parameter allows a custom token naming format to be specified.</p>
+					<p>The optional <code><a href="#2_53_1_3">tokenNamingSTR</a></code> parameter allows a custom token naming format to be specified.</p>
 					
 					<p><span class="allCaps">EXAMPLE</span></p>
 					
@@ -4562,13 +4600,13 @@ Uize.substituteInto ('My name is [[name]]',{name:'Eric'},'[[KEY]]');
 <pre class="sample-code">'Welcome, Chris of California, USA'
 </pre>
 					
-					<p>In the above example, the value <code>'{KEY}'</code> is being specified for the <code><a href="#2_52">Uize.substituteInto</a></code> method's optional <code><a href="#2_52_1_3">tokenNamingSTR</a></code> parameter. This means that the key for each substitution will be enclosed with curly braces to form its token name.</p>
+					<p>In the above example, the value <code>'{KEY}'</code> is being specified for the <code><a href="#2_53">Uize.substituteInto</a></code> method's optional <code><a href="#2_53_1_3">tokenNamingSTR</a></code> parameter. This means that the key for each substitution will be enclosed with curly braces to form its token name.</p>
 				</div>
 				
-				<a name="2_52_2_6"></a>
-				<h4 class="heading4" title="2. Static Methods -&gt; 2.52. Uize.substituteInto -&gt; 2.52.2. Examples -&gt; 2.52.2.6. Example: Bare Tokens"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_52" title="2. Static Methods -&gt; 2.52. Uize.substituteInto">52</a>.<a href="#2_52_2" title="2. Static Methods -&gt; 2.52. Uize.substituteInto -&gt; 2.52.2. Examples">2</a>.<a href="#2_52_2_6" title="2. Static Methods -&gt; 2.52. Uize.substituteInto -&gt; 2.52.2. Examples -&gt; 2.52.2.6. Example: Bare Tokens">6</a>. </span>Example: Bare Tokens</h4>
+				<a name="2_53_2_6"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.53. Uize.substituteInto -&gt; 2.53.2. Examples -&gt; 2.53.2.6. Example: Bare Tokens"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_53" title="2. Static Methods -&gt; 2.53. Uize.substituteInto">53</a>.<a href="#2_53_2" title="2. Static Methods -&gt; 2.53. Uize.substituteInto -&gt; 2.53.2. Examples">2</a>.<a href="#2_53_2_6" title="2. Static Methods -&gt; 2.53. Uize.substituteInto -&gt; 2.53.2. Examples -&gt; 2.53.2.6. Example: Bare Tokens">6</a>. </span>Example: Bare Tokens</h4>
 				<div class="contents4">
-					<p>The optional <code><a href="#2_52_1_3">tokenNamingSTR</a></code> parameter can be used to specify a "bare token" format for token naming, where the substitution tokens are the substitution keys.</p>
+					<p>The optional <code><a href="#2_53_1_3">tokenNamingSTR</a></code> parameter can be used to specify a "bare token" format for token naming, where the substitution tokens are the substitution keys.</p>
 					
 					<p><span class="allCaps">EXAMPLE</span></p>
 					
@@ -4587,8 +4625,8 @@ Uize.substituteInto ('My name is [[name]]',{name:'Eric'},'[[KEY]]');
 </pre>
 				</div>
 				
-				<a name="2_52_2_7"></a>
-				<h4 class="heading4" title="2. Static Methods -&gt; 2.52. Uize.substituteInto -&gt; 2.52.2. Examples -&gt; 2.52.2.7. Example: Mixed Type Substitution Values"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_52" title="2. Static Methods -&gt; 2.52. Uize.substituteInto">52</a>.<a href="#2_52_2" title="2. Static Methods -&gt; 2.52. Uize.substituteInto -&gt; 2.52.2. Examples">2</a>.<a href="#2_52_2_7" title="2. Static Methods -&gt; 2.52. Uize.substituteInto -&gt; 2.52.2. Examples -&gt; 2.52.2.7. Example: Mixed Type Substitution Values">7</a>. </span>Example: Mixed Type Substitution Values</h4>
+				<a name="2_53_2_7"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.53. Uize.substituteInto -&gt; 2.53.2. Examples -&gt; 2.53.2.7. Example: Mixed Type Substitution Values"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_53" title="2. Static Methods -&gt; 2.53. Uize.substituteInto">53</a>.<a href="#2_53_2" title="2. Static Methods -&gt; 2.53. Uize.substituteInto -&gt; 2.53.2. Examples">2</a>.<a href="#2_53_2_7" title="2. Static Methods -&gt; 2.53. Uize.substituteInto -&gt; 2.53.2. Examples -&gt; 2.53.2.7. Example: Mixed Type Substitution Values">7</a>. </span>Example: Mixed Type Substitution Values</h4>
 				<div class="contents4">
 					<p>Substitution values can be of any type, and any value that is not a string will be coerced to a string.</p>
 					
@@ -4613,8 +4651,8 @@ Uize.substituteInto ('My name is [[name]]',{name:'Eric'},'[[KEY]]');
 </pre>
 				</div>
 				
-				<a name="2_52_2_8"></a>
-				<h4 class="heading4" title="2. Static Methods -&gt; 2.52. Uize.substituteInto -&gt; 2.52.2. Examples -&gt; 2.52.2.8. Example: Specifying Substitutions Using an Array"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_52" title="2. Static Methods -&gt; 2.52. Uize.substituteInto">52</a>.<a href="#2_52_2" title="2. Static Methods -&gt; 2.52. Uize.substituteInto -&gt; 2.52.2. Examples">2</a>.<a href="#2_52_2_8" title="2. Static Methods -&gt; 2.52. Uize.substituteInto -&gt; 2.52.2. Examples -&gt; 2.52.2.8. Example: Specifying Substitutions Using an Array">8</a>. </span>Example: Specifying Substitutions Using an Array</h4>
+				<a name="2_53_2_8"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.53. Uize.substituteInto -&gt; 2.53.2. Examples -&gt; 2.53.2.8. Example: Specifying Substitutions Using an Array"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_53" title="2. Static Methods -&gt; 2.53. Uize.substituteInto">53</a>.<a href="#2_53_2" title="2. Static Methods -&gt; 2.53. Uize.substituteInto -&gt; 2.53.2. Examples">2</a>.<a href="#2_53_2_8" title="2. Static Methods -&gt; 2.53. Uize.substituteInto -&gt; 2.53.2. Examples -&gt; 2.53.2.8. Example: Specifying Substitutions Using an Array">8</a>. </span>Example: Specifying Substitutions Using an Array</h4>
 				<div class="contents4">
 					<p>When substitutions are specified using an array, then each substitution's index in the substitutions array is used as the key when forming its token name.</p>
 					
@@ -4631,8 +4669,8 @@ Uize.substituteInto ('My name is [[name]]',{name:'Eric'},'[[KEY]]');
 </pre>
 				</div>
 				
-				<a name="2_52_2_9"></a>
-				<h4 class="heading4" title="2. Static Methods -&gt; 2.52. Uize.substituteInto -&gt; 2.52.2. Examples -&gt; 2.52.2.9. Example: Substitution Values Containing Tokens"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_52" title="2. Static Methods -&gt; 2.52. Uize.substituteInto">52</a>.<a href="#2_52_2" title="2. Static Methods -&gt; 2.52. Uize.substituteInto -&gt; 2.52.2. Examples">2</a>.<a href="#2_52_2_9" title="2. Static Methods -&gt; 2.52. Uize.substituteInto -&gt; 2.52.2. Examples -&gt; 2.52.2.9. Example: Substitution Values Containing Tokens">9</a>. </span>Example: Substitution Values Containing Tokens</h4>
+				<a name="2_53_2_9"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.53. Uize.substituteInto -&gt; 2.53.2. Examples -&gt; 2.53.2.9. Example: Substitution Values Containing Tokens"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_53" title="2. Static Methods -&gt; 2.53. Uize.substituteInto">53</a>.<a href="#2_53_2" title="2. Static Methods -&gt; 2.53. Uize.substituteInto -&gt; 2.53.2. Examples">2</a>.<a href="#2_53_2_9" title="2. Static Methods -&gt; 2.53. Uize.substituteInto -&gt; 2.53.2. Examples -&gt; 2.53.2.9. Example: Substitution Values Containing Tokens">9</a>. </span>Example: Substitution Values Containing Tokens</h4>
 				<div class="contents4">
 					<p>Substitution values that contain tokens are not further substituted into.</p>
 					
@@ -4651,8 +4689,8 @@ Uize.substituteInto ('My name is [[name]]',{name:'Eric'},'[[KEY]]');
 					<p>In the above example, the value for the <code>token1</code> substitution is <code>'[#token2]foo'</code>, which contains a token for the <code>token2</code> substitution. But, the values of substitutions are not further substituted into - for good reason, since this could result in some odd and unexpected behaviors in some cases.</p>
 				</div>
 				
-				<a name="2_52_2_10"></a>
-				<h4 class="heading4" title="2. Static Methods -&gt; 2.52. Uize.substituteInto -&gt; 2.52.2. Examples -&gt; 2.52.2.10. Example: Tokens and Substitutions are Case-sensitive"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_52" title="2. Static Methods -&gt; 2.52. Uize.substituteInto">52</a>.<a href="#2_52_2" title="2. Static Methods -&gt; 2.52. Uize.substituteInto -&gt; 2.52.2. Examples">2</a>.<a href="#2_52_2_10" title="2. Static Methods -&gt; 2.52. Uize.substituteInto -&gt; 2.52.2. Examples -&gt; 2.52.2.10. Example: Tokens and Substitutions are Case-sensitive">10</a>. </span>Example: Tokens and Substitutions are Case-sensitive</h4>
+				<a name="2_53_2_10"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.53. Uize.substituteInto -&gt; 2.53.2. Examples -&gt; 2.53.2.10. Example: Tokens and Substitutions are Case-sensitive"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_53" title="2. Static Methods -&gt; 2.53. Uize.substituteInto">53</a>.<a href="#2_53_2" title="2. Static Methods -&gt; 2.53. Uize.substituteInto -&gt; 2.53.2. Examples">2</a>.<a href="#2_53_2_10" title="2. Static Methods -&gt; 2.53. Uize.substituteInto -&gt; 2.53.2. Examples -&gt; 2.53.2.10. Example: Tokens and Substitutions are Case-sensitive">10</a>. </span>Example: Tokens and Substitutions are Case-sensitive</h4>
 				<div class="contents4">
 					<p>Substitution tokens are case-sensitive.</p>
 					
@@ -4674,8 +4712,8 @@ Uize.substituteInto ('My name is [[name]]',{name:'Eric'},'[[KEY]]');
 					<p>In the above example, the token <code>[#fruit]</code> is distinct from the token <code>[#FRUIT]</code>. Our substitution values object in this case has a value for both the <code>fruit</code> and <code>FRUIT</code> properties, so the method call returns the value <code>'This is a case of comparing apples to oranges.'</code>.</p>
 				</div>
 				
-				<a name="2_52_2_11"></a>
-				<h4 class="heading4" title="2. Static Methods -&gt; 2.52. Uize.substituteInto -&gt; 2.52.2. Examples -&gt; 2.52.2.11. Example: Tokens and Substitutions are Space-sensitive"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_52" title="2. Static Methods -&gt; 2.52. Uize.substituteInto">52</a>.<a href="#2_52_2" title="2. Static Methods -&gt; 2.52. Uize.substituteInto -&gt; 2.52.2. Examples">2</a>.<a href="#2_52_2_11" title="2. Static Methods -&gt; 2.52. Uize.substituteInto -&gt; 2.52.2. Examples -&gt; 2.52.2.11. Example: Tokens and Substitutions are Space-sensitive">11</a>. </span>Example: Tokens and Substitutions are Space-sensitive</h4>
+				<a name="2_53_2_11"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.53. Uize.substituteInto -&gt; 2.53.2. Examples -&gt; 2.53.2.11. Example: Tokens and Substitutions are Space-sensitive"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_53" title="2. Static Methods -&gt; 2.53. Uize.substituteInto">53</a>.<a href="#2_53_2" title="2. Static Methods -&gt; 2.53. Uize.substituteInto -&gt; 2.53.2. Examples">2</a>.<a href="#2_53_2_11" title="2. Static Methods -&gt; 2.53. Uize.substituteInto -&gt; 2.53.2. Examples -&gt; 2.53.2.11. Example: Tokens and Substitutions are Space-sensitive">11</a>. </span>Example: Tokens and Substitutions are Space-sensitive</h4>
 				<div class="contents4">
 					<p>Substitution tokens are space-sensitive.</p>
 					
@@ -4697,8 +4735,8 @@ Uize.substituteInto ('My name is [[name]]',{name:'Eric'},'[[KEY]]');
 					<p>In the above example, the token <code>[#fruit]</code> is distinct from the token <code>[# fruit ]</code>. Our substitution values object in this case has a value for both the <code>fruit</code> and <code>' fruit '</code> properties, so the method call returns the value <code>'This is a case of comparing apples to oranges.'</code>.</p>
 				</div>
 				
-				<a name="2_52_2_12"></a>
-				<h4 class="heading4" title="2. Static Methods -&gt; 2.52. Uize.substituteInto -&gt; 2.52.2. Examples -&gt; 2.52.2.12. Example: A Single Simply Type Substitution"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_52" title="2. Static Methods -&gt; 2.52. Uize.substituteInto">52</a>.<a href="#2_52_2" title="2. Static Methods -&gt; 2.52. Uize.substituteInto -&gt; 2.52.2. Examples">2</a>.<a href="#2_52_2_12" title="2. Static Methods -&gt; 2.52. Uize.substituteInto -&gt; 2.52.2. Examples -&gt; 2.52.2.12. Example: A Single Simply Type Substitution">12</a>. </span>Example: A Single Simply Type Substitution</h4>
+				<a name="2_53_2_12"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.53. Uize.substituteInto -&gt; 2.53.2. Examples -&gt; 2.53.2.12. Example: A Single Simply Type Substitution"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_53" title="2. Static Methods -&gt; 2.53. Uize.substituteInto">53</a>.<a href="#2_53_2" title="2. Static Methods -&gt; 2.53. Uize.substituteInto -&gt; 2.53.2. Examples">2</a>.<a href="#2_53_2_12" title="2. Static Methods -&gt; 2.53. Uize.substituteInto -&gt; 2.53.2. Examples -&gt; 2.53.2.12. Example: A Single Simply Type Substitution">12</a>. </span>Example: A Single Simply Type Substitution</h4>
 				<div class="contents4">
 					<p>When a simple type value (string, number, or boolean) is specified in place of a substitutions object or array, then a substitutions array is formed using that simple type substitution as its single element.</p>
 					
@@ -4715,8 +4753,8 @@ Uize.substituteInto ('My name is [[name]]',{name:'Eric'},'[[KEY]]');
 </pre>
 				</div>
 				
-				<a name="2_52_2_13"></a>
-				<h4 class="heading4" title="2. Static Methods -&gt; 2.52. Uize.substituteInto -&gt; 2.52.2. Examples -&gt; 2.52.2.13. Example: Source is Not a String"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_52" title="2. Static Methods -&gt; 2.52. Uize.substituteInto">52</a>.<a href="#2_52_2" title="2. Static Methods -&gt; 2.52. Uize.substituteInto -&gt; 2.52.2. Examples">2</a>.<a href="#2_52_2_13" title="2. Static Methods -&gt; 2.52. Uize.substituteInto -&gt; 2.52.2. Examples -&gt; 2.52.2.13. Example: Source is Not a String">13</a>. </span>Example: Source is Not a String</h4>
+				<a name="2_53_2_13"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.53. Uize.substituteInto -&gt; 2.53.2. Examples -&gt; 2.53.2.13. Example: Source is Not a String"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_53" title="2. Static Methods -&gt; 2.53. Uize.substituteInto">53</a>.<a href="#2_53_2" title="2. Static Methods -&gt; 2.53. Uize.substituteInto -&gt; 2.53.2. Examples">2</a>.<a href="#2_53_2_13" title="2. Static Methods -&gt; 2.53. Uize.substituteInto -&gt; 2.53.2. Examples -&gt; 2.53.2.13. Example: Source is Not a String">13</a>. </span>Example: Source is Not a String</h4>
 				<div class="contents4">
 					<p>When the source value to substitute into is not a string (eg. an object, array, number, boolean, etc.), then this value will be coerced to a string.</p>
 					
@@ -4749,29 +4787,29 @@ Uize.substituteInto ('My name is [[name]]',{name:'Eric'},'[[KEY]]');
 			</table>
 		</div>
 		
-		<a name="2_53"></a>
-		<h2 class="heading2" title="2. Static Methods -&gt; 2.53. Uize.toNumber"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_53" title="2. Static Methods -&gt; 2.53. Uize.toNumber">53</a>. </span>Uize.toNumber</h2>
+		<a name="2_54"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.54. Uize.toNumber"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_54" title="2. Static Methods -&gt; 2.54. Uize.toNumber">54</a>. </span>Uize.toNumber</h2>
 		<div class="contents2">
 			<p>Returns a number, that is the specified value coerced to a number type value, with optional defaulting if the value can't be successfully coerced to a number.</p>
 			
 			<p><span class="allCaps">DIFFERENT USAGES</span></p>
 			
-			<p><a href="#2_53_2">Coerce a Value to a Number</a></p>
+			<p><a href="#2_54_2">Coerce a Value to a Number</a></p>
 			
 			
 <pre class="sample-code">valueNUMBER = Uize.toNumber (valueANYTYPE);
 </pre>
 			
-			<p><a href="#2_53_3">Coerce a Value to a Number, With Defaulting</a></p>
+			<p><a href="#2_54_3">Coerce a Value to a Number, With Defaulting</a></p>
 			
 			
 <pre class="sample-code">valueNUMBER = Uize.toNumber (valueANYTYPE,defaultANYTYPE);
 </pre>
 			
-			<a name="2_53_1"></a>
-			<h3 class="heading3" title="2. Static Methods -&gt; 2.53. Uize.toNumber -&gt; 2.53.1. How a Value is Coerced to Number"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_53" title="2. Static Methods -&gt; 2.53. Uize.toNumber">53</a>.<a href="#2_53_1" title="2. Static Methods -&gt; 2.53. Uize.toNumber -&gt; 2.53.1. How a Value is Coerced to Number">1</a>. </span>How a Value is Coerced to Number</h3>
+			<a name="2_54_1"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.54. Uize.toNumber -&gt; 2.54.1. How a Value is Coerced to Number"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_54" title="2. Static Methods -&gt; 2.54. Uize.toNumber">54</a>.<a href="#2_54_1" title="2. Static Methods -&gt; 2.54. Uize.toNumber -&gt; 2.54.1. How a Value is Coerced to Number">1</a>. </span>How a Value is Coerced to Number</h3>
 			<div class="contents3">
-				<p>The <code><a href="#2_53">Uize.toNumber</a></code> method coerces a value to a number using the following steps...</p>
+				<p>The <code><a href="#2_54">Uize.toNumber</a></code> method coerces a value to a number using the following steps...</p>
 				
 				<table class="list">
 				<tr valign="top"><td><span style="white-space:nowrap;">1. </span></td><td>if the value is a function, then the function is called and the value is replaced with the value returned by the function</td></tr>
@@ -4782,8 +4820,8 @@ Uize.substituteInto ('My name is [[name]]',{name:'Eric'},'[[KEY]]');
 				</table>
 				<p>The above steps for coercing a value to number has the following side effects / implications...</p>
 				
-				<a name="2_53_1_1"></a>
-				<h4 class="heading4" title="2. Static Methods -&gt; 2.53. Uize.toNumber -&gt; 2.53.1. How a Value is Coerced to Number -&gt; 2.53.1.1. Empty String is Coerced to NaN"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_53" title="2. Static Methods -&gt; 2.53. Uize.toNumber">53</a>.<a href="#2_53_1" title="2. Static Methods -&gt; 2.53. Uize.toNumber -&gt; 2.53.1. How a Value is Coerced to Number">1</a>.<a href="#2_53_1_1" title="2. Static Methods -&gt; 2.53. Uize.toNumber -&gt; 2.53.1. How a Value is Coerced to Number -&gt; 2.53.1.1. Empty String is Coerced to NaN">1</a>. </span>Empty String is Coerced to NaN</h4>
+				<a name="2_54_1_1"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.54. Uize.toNumber -&gt; 2.54.1. How a Value is Coerced to Number -&gt; 2.54.1.1. Empty String is Coerced to NaN"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_54" title="2. Static Methods -&gt; 2.54. Uize.toNumber">54</a>.<a href="#2_54_1" title="2. Static Methods -&gt; 2.54. Uize.toNumber -&gt; 2.54.1. How a Value is Coerced to Number">1</a>.<a href="#2_54_1_1" title="2. Static Methods -&gt; 2.54. Uize.toNumber -&gt; 2.54.1. How a Value is Coerced to Number -&gt; 2.54.1.1. Empty String is Coerced to NaN">1</a>. </span>Empty String is Coerced to NaN</h4>
 				<div class="contents4">
 					<p>Coercing the value <code>''</code> (an empty string) to a number will produce the result <code>NaN</code>.</p>
 					
@@ -4794,8 +4832,8 @@ Uize.substituteInto ('My name is [[name]]',{name:'Eric'},'[[KEY]]');
 </pre>
 				</div>
 				
-				<a name="2_53_1_2"></a>
-				<h4 class="heading4" title="2. Static Methods -&gt; 2.53. Uize.toNumber -&gt; 2.53.1. How a Value is Coerced to Number -&gt; 2.53.1.2. The Values null and undefined Are Coerced to NaN"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_53" title="2. Static Methods -&gt; 2.53. Uize.toNumber">53</a>.<a href="#2_53_1" title="2. Static Methods -&gt; 2.53. Uize.toNumber -&gt; 2.53.1. How a Value is Coerced to Number">1</a>.<a href="#2_53_1_2" title="2. Static Methods -&gt; 2.53. Uize.toNumber -&gt; 2.53.1. How a Value is Coerced to Number -&gt; 2.53.1.2. The Values null and undefined Are Coerced to NaN">2</a>. </span>The Values null and undefined Are Coerced to NaN</h4>
+				<a name="2_54_1_2"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.54. Uize.toNumber -&gt; 2.54.1. How a Value is Coerced to Number -&gt; 2.54.1.2. The Values null and undefined Are Coerced to NaN"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_54" title="2. Static Methods -&gt; 2.54. Uize.toNumber">54</a>.<a href="#2_54_1" title="2. Static Methods -&gt; 2.54. Uize.toNumber -&gt; 2.54.1. How a Value is Coerced to Number">1</a>.<a href="#2_54_1_2" title="2. Static Methods -&gt; 2.54. Uize.toNumber -&gt; 2.54.1. How a Value is Coerced to Number -&gt; 2.54.1.2. The Values null and undefined Are Coerced to NaN">2</a>. </span>The Values null and undefined Are Coerced to NaN</h4>
 				<div class="contents4">
 					<p>Coercing the values <code>null</code> or <code>undefined</code> to a number will produce the result <code>NaN</code></p>
 					
@@ -4807,8 +4845,8 @@ Uize.toNumber (undefined);  // returns NaN
 </pre>
 				</div>
 				
-				<a name="2_53_1_3"></a>
-				<h4 class="heading4" title="2. Static Methods -&gt; 2.53. Uize.toNumber -&gt; 2.53.1. How a Value is Coerced to Number -&gt; 2.53.1.3. Arrays Are Coerced to NaN"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_53" title="2. Static Methods -&gt; 2.53. Uize.toNumber">53</a>.<a href="#2_53_1" title="2. Static Methods -&gt; 2.53. Uize.toNumber -&gt; 2.53.1. How a Value is Coerced to Number">1</a>.<a href="#2_53_1_3" title="2. Static Methods -&gt; 2.53. Uize.toNumber -&gt; 2.53.1. How a Value is Coerced to Number -&gt; 2.53.1.3. Arrays Are Coerced to NaN">3</a>. </span>Arrays Are Coerced to NaN</h4>
+				<a name="2_54_1_3"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.54. Uize.toNumber -&gt; 2.54.1. How a Value is Coerced to Number -&gt; 2.54.1.3. Arrays Are Coerced to NaN"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_54" title="2. Static Methods -&gt; 2.54. Uize.toNumber">54</a>.<a href="#2_54_1" title="2. Static Methods -&gt; 2.54. Uize.toNumber -&gt; 2.54.1. How a Value is Coerced to Number">1</a>.<a href="#2_54_1_3" title="2. Static Methods -&gt; 2.54. Uize.toNumber -&gt; 2.54.1. How a Value is Coerced to Number -&gt; 2.54.1.3. Arrays Are Coerced to NaN">3</a>. </span>Arrays Are Coerced to NaN</h4>
 				<div class="contents4">
 					<p>Coercing an array to a number always produces the result <code>NaN</code>.</p>
 					
@@ -4822,12 +4860,12 @@ Uize.toNumber ([1]);  // returns NaN
 </pre>
 				</div>
 				
-				<a name="2_53_1_4"></a>
-				<h4 class="heading4" title="2. Static Methods -&gt; 2.53. Uize.toNumber -&gt; 2.53.1. How a Value is Coerced to Number -&gt; 2.53.1.4. Some Objects Are Coerced to NaN"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_53" title="2. Static Methods -&gt; 2.53. Uize.toNumber">53</a>.<a href="#2_53_1" title="2. Static Methods -&gt; 2.53. Uize.toNumber -&gt; 2.53.1. How a Value is Coerced to Number">1</a>.<a href="#2_53_1_4" title="2. Static Methods -&gt; 2.53. Uize.toNumber -&gt; 2.53.1. How a Value is Coerced to Number -&gt; 2.53.1.4. Some Objects Are Coerced to NaN">4</a>. </span>Some Objects Are Coerced to NaN</h4>
+				<a name="2_54_1_4"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.54. Uize.toNumber -&gt; 2.54.1. How a Value is Coerced to Number -&gt; 2.54.1.4. Some Objects Are Coerced to NaN"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_54" title="2. Static Methods -&gt; 2.54. Uize.toNumber">54</a>.<a href="#2_54_1" title="2. Static Methods -&gt; 2.54. Uize.toNumber -&gt; 2.54.1. How a Value is Coerced to Number">1</a>.<a href="#2_54_1_4" title="2. Static Methods -&gt; 2.54. Uize.toNumber -&gt; 2.54.1. How a Value is Coerced to Number -&gt; 2.54.1.4. Some Objects Are Coerced to NaN">4</a>. </span>Some Objects Are Coerced to NaN</h4>
 				<div class="contents4">
 					<p>Unless an object deliberately implements the <code>valueOf intrinsic method</code>, or the object is an instance of a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass, coercing an object to a number will produce the result <code>NaN</code>.</p>
 					
-					<p>This is because the implementation of the <code>valueOf intrinsic method</code> in JavaScript's built-in <code><a href="../javascript-reference/Object.html">Object</a></code> object simply returns a reference to the object on which it is called. The <code><a href="#2_53">Uize.toNumber</a></code> method only coerces an object to a number successfully if the <code>valueOf intrinsic method</code> for the object returns a primitive type value, such as a string, number, or boolean.</p>
+					<p>This is because the implementation of the <code>valueOf intrinsic method</code> in JavaScript's built-in <code><a href="../javascript-reference/Object.html">Object</a></code> object simply returns a reference to the object on which it is called. The <code><a href="#2_54">Uize.toNumber</a></code> method only coerces an object to a number successfully if the <code>valueOf intrinsic method</code> for the object returns a primitive type value, such as a string, number, or boolean.</p>
 					
 					<p><span class="allCaps">EXAMPLE</span></p>
 					
@@ -4852,29 +4890,29 @@ Uize.toNumber (/\d+/);                             // returns NaN
 </pre>
 				</div>
 				
-				<a name="2_53_1_5"></a>
-				<h4 class="heading4" title="2. Static Methods -&gt; 2.53. Uize.toNumber -&gt; 2.53.1. How a Value is Coerced to Number -&gt; 2.53.1.5. Key Distinctions When Compared With Simple Coercion"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_53" title="2. Static Methods -&gt; 2.53. Uize.toNumber">53</a>.<a href="#2_53_1" title="2. Static Methods -&gt; 2.53. Uize.toNumber -&gt; 2.53.1. How a Value is Coerced to Number">1</a>.<a href="#2_53_1_5" title="2. Static Methods -&gt; 2.53. Uize.toNumber -&gt; 2.53.1. How a Value is Coerced to Number -&gt; 2.53.1.5. Key Distinctions When Compared With Simple Coercion">5</a>. </span>Key Distinctions When Compared With Simple Coercion</h4>
+				<a name="2_54_1_5"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.54. Uize.toNumber -&gt; 2.54.1. How a Value is Coerced to Number -&gt; 2.54.1.5. Key Distinctions When Compared With Simple Coercion"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_54" title="2. Static Methods -&gt; 2.54. Uize.toNumber">54</a>.<a href="#2_54_1" title="2. Static Methods -&gt; 2.54. Uize.toNumber -&gt; 2.54.1. How a Value is Coerced to Number">1</a>.<a href="#2_54_1_5" title="2. Static Methods -&gt; 2.54. Uize.toNumber -&gt; 2.54.1. How a Value is Coerced to Number -&gt; 2.54.1.5. Key Distinctions When Compared With Simple Coercion">5</a>. </span>Key Distinctions When Compared With Simple Coercion</h4>
 				<div class="contents4">
 					<p>A cheap way to coerce a value to a number in JavaScript is to subtract zero from it, which results in JavaScript performing the steps necessary to produce a number type value.</p>
 					
-					<p>Besides its convenient defaulting ability, the <code><a href="#2_53">Uize.toNumber</a></code> method behaves differently to simple coercion in a number of key ways...</p>
+					<p>Besides its convenient defaulting ability, the <code><a href="#2_54">Uize.toNumber</a></code> method behaves differently to simple coercion in a number of key ways...</p>
 					
 					<table class="list">
-					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>The <code><a href="#2_53">Uize.toNumber</a></code> method coerces <code>''</code> (an empty string) to <code>NaN</code>, whereas simple coercion turns an empty string into <code>0</code>. So, the statement <code>Uize.toNumber ('')</code> produces the value <code>NaN</code> while the statement <code>'' - 0</code> produces the value <code>0</code>. For the purpose of coercing a value to a number with defaulting, it makes more sense to treat an empty string as no value specified, rather than as the value <code>0</code> specified.</td></tr>
-					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>The <code><a href="#2_53">Uize.toNumber</a></code> method coerces <code>null</code> to <code>NaN</code>, whereas simple coercion turns <code>null</code> into <code>0</code>. So, the statement <code>Uize.toNumber (null)</code> produces the value <code>NaN</code> while the statement <code>null - 0</code> produces the value <code>0</code>. For the purpose of coercing a value to a number with defaulting, it makes more sense to treat the value <code>null</code> as no value specified, rather than as the value <code>0</code> specified.</td></tr>
-					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>The <code><a href="#2_53">Uize.toNumber</a></code> method will attempt to coerce a function to a number by calling it and using its result, whereas simple coercion produces the value <code>NaN</code>. So, the statement <code>Uize.toNumber (function () {return 5})</code> produces the value <code>5</code> while the statement <code>(function () {return 5}) - 0</code> produces the value <code>NaN</code>.</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>The <code><a href="#2_54">Uize.toNumber</a></code> method coerces <code>''</code> (an empty string) to <code>NaN</code>, whereas simple coercion turns an empty string into <code>0</code>. So, the statement <code>Uize.toNumber ('')</code> produces the value <code>NaN</code> while the statement <code>'' - 0</code> produces the value <code>0</code>. For the purpose of coercing a value to a number with defaulting, it makes more sense to treat an empty string as no value specified, rather than as the value <code>0</code> specified.</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>The <code><a href="#2_54">Uize.toNumber</a></code> method coerces <code>null</code> to <code>NaN</code>, whereas simple coercion turns <code>null</code> into <code>0</code>. So, the statement <code>Uize.toNumber (null)</code> produces the value <code>NaN</code> while the statement <code>null - 0</code> produces the value <code>0</code>. For the purpose of coercing a value to a number with defaulting, it makes more sense to treat the value <code>null</code> as no value specified, rather than as the value <code>0</code> specified.</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>The <code><a href="#2_54">Uize.toNumber</a></code> method will attempt to coerce a function to a number by calling it and using its result, whereas simple coercion produces the value <code>NaN</code>. So, the statement <code>Uize.toNumber (function () {return 5})</code> produces the value <code>5</code> while the statement <code>(function () {return 5}) - 0</code> produces the value <code>NaN</code>.</td></tr>
 					</table>
 				</div>
 				
-				<a name="2_53_1_6"></a>
-				<h4 class="heading4" title="2. Static Methods -&gt; 2.53. Uize.toNumber -&gt; 2.53.1. How a Value is Coerced to Number -&gt; 2.53.1.6. Using the Uize.toNumber Method"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_53" title="2. Static Methods -&gt; 2.53. Uize.toNumber">53</a>.<a href="#2_53_1" title="2. Static Methods -&gt; 2.53. Uize.toNumber -&gt; 2.53.1. How a Value is Coerced to Number">1</a>.<a href="#2_53_1_6" title="2. Static Methods -&gt; 2.53. Uize.toNumber -&gt; 2.53.1. How a Value is Coerced to Number -&gt; 2.53.1.6. Using the Uize.toNumber Method">6</a>. </span>Using the Uize.toNumber Method</h4>
+				<a name="2_54_1_6"></a>
+				<h4 class="heading4" title="2. Static Methods -&gt; 2.54. Uize.toNumber -&gt; 2.54.1. How a Value is Coerced to Number -&gt; 2.54.1.6. Using the Uize.toNumber Method"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_54" title="2. Static Methods -&gt; 2.54. Uize.toNumber">54</a>.<a href="#2_54_1" title="2. Static Methods -&gt; 2.54. Uize.toNumber -&gt; 2.54.1. How a Value is Coerced to Number">1</a>.<a href="#2_54_1_6" title="2. Static Methods -&gt; 2.54. Uize.toNumber -&gt; 2.54.1. How a Value is Coerced to Number -&gt; 2.54.1.6. Using the Uize.toNumber Method">6</a>. </span>Using the Uize.toNumber Method</h4>
 				<div class="contents4">
-					<p>There are two main situations where the <code><a href="#2_53">Uize.toNumber</a></code> method comes in handy.</p>
+					<p>There are two main situations where the <code><a href="#2_54">Uize.toNumber</a></code> method comes in handy.</p>
 					
-					<a name="2_53_1_6_1"></a>
-					<h5 class="heading5" title="2. Static Methods -&gt; 2.53. Uize.toNumber -&gt; 2.53.1. How a Value is Coerced to Number -&gt; 2.53.1.6. Using the Uize.toNumber Method -&gt; 2.53.1.6.1. Normalizing Method Parameters"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_53" title="2. Static Methods -&gt; 2.53. Uize.toNumber">53</a>.<a href="#2_53_1" title="2. Static Methods -&gt; 2.53. Uize.toNumber -&gt; 2.53.1. How a Value is Coerced to Number">1</a>.<a href="#2_53_1_6" title="2. Static Methods -&gt; 2.53. Uize.toNumber -&gt; 2.53.1. How a Value is Coerced to Number -&gt; 2.53.1.6. Using the Uize.toNumber Method">6</a>.<a href="#2_53_1_6_1" title="2. Static Methods -&gt; 2.53. Uize.toNumber -&gt; 2.53.1. How a Value is Coerced to Number -&gt; 2.53.1.6. Using the Uize.toNumber Method -&gt; 2.53.1.6.1. Normalizing Method Parameters">1</a>. </span>Normalizing Method Parameters</h5>
+					<a name="2_54_1_6_1"></a>
+					<h5 class="heading5" title="2. Static Methods -&gt; 2.54. Uize.toNumber -&gt; 2.54.1. How a Value is Coerced to Number -&gt; 2.54.1.6. Using the Uize.toNumber Method -&gt; 2.54.1.6.1. Normalizing Method Parameters"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_54" title="2. Static Methods -&gt; 2.54. Uize.toNumber">54</a>.<a href="#2_54_1" title="2. Static Methods -&gt; 2.54. Uize.toNumber -&gt; 2.54.1. How a Value is Coerced to Number">1</a>.<a href="#2_54_1_6" title="2. Static Methods -&gt; 2.54. Uize.toNumber -&gt; 2.54.1. How a Value is Coerced to Number -&gt; 2.54.1.6. Using the Uize.toNumber Method">6</a>.<a href="#2_54_1_6_1" title="2. Static Methods -&gt; 2.54. Uize.toNumber -&gt; 2.54.1. How a Value is Coerced to Number -&gt; 2.54.1.6. Using the Uize.toNumber Method -&gt; 2.54.1.6.1. Normalizing Method Parameters">1</a>. </span>Normalizing Method Parameters</h5>
 					<div class="contents5">
-						<p>The <code><a href="#2_53">Uize.toNumber</a></code> method can be used to "normalize" method parameter values that need to be number type.</p>
+						<p>The <code><a href="#2_54">Uize.toNumber</a></code> method can be used to "normalize" method parameter values that need to be number type.</p>
 						
 						<p><span class="allCaps">EXAMPLE</span></p>
 						
@@ -4891,7 +4929,7 @@ Uize.toNumber (/\d+/);                             // returns NaN
 						
 						<p>In the above example, a <code>repeatStr</code> function is being implemented that will take a specified string and create a new string by repeating the string the specified number of times. The number of repetitions, which needs to be a number, is specified by the <code>times</code> parameter of the function.</p>
 						
-						<p>Now, if the developer of the function wants to provide flexibility in how the number of repetitions is specified, the <code><a href="#2_53">Uize.toNumber</a></code> method can be used to coerce the value of this parameter to a number before it is used internally by the function's implementation. In this example, we're also specifying a default of <code>1</code>, in case the parameter is not specified or if the value specified cannot be coerced to a number without producing the value <code>NaN</code>.</p>
+						<p>Now, if the developer of the function wants to provide flexibility in how the number of repetitions is specified, the <code><a href="#2_54">Uize.toNumber</a></code> method can be used to coerce the value of this parameter to a number before it is used internally by the function's implementation. In this example, we're also specifying a default of <code>1</code>, in case the parameter is not specified or if the value specified cannot be coerced to a number without producing the value <code>NaN</code>.</p>
 						
 						<p>Now, using the <code>repeatStr</code> function, as implemented above, we would see the following results...</p>
 						
@@ -4913,10 +4951,10 @@ repeatStr ('Foo',undefined);               // returns "Foo"
 </pre>
 					</div>
 					
-					<a name="2_53_1_6_2"></a>
-					<h5 class="heading5" title="2. Static Methods -&gt; 2.53. Uize.toNumber -&gt; 2.53.1. How a Value is Coerced to Number -&gt; 2.53.1.6. Using the Uize.toNumber Method -&gt; 2.53.1.6.2. Conforming Set-get Properties"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_53" title="2. Static Methods -&gt; 2.53. Uize.toNumber">53</a>.<a href="#2_53_1" title="2. Static Methods -&gt; 2.53. Uize.toNumber -&gt; 2.53.1. How a Value is Coerced to Number">1</a>.<a href="#2_53_1_6" title="2. Static Methods -&gt; 2.53. Uize.toNumber -&gt; 2.53.1. How a Value is Coerced to Number -&gt; 2.53.1.6. Using the Uize.toNumber Method">6</a>.<a href="#2_53_1_6_2" title="2. Static Methods -&gt; 2.53. Uize.toNumber -&gt; 2.53.1. How a Value is Coerced to Number -&gt; 2.53.1.6. Using the Uize.toNumber Method -&gt; 2.53.1.6.2. Conforming Set-get Properties">2</a>. </span>Conforming Set-get Properties</h5>
+					<a name="2_54_1_6_2"></a>
+					<h5 class="heading5" title="2. Static Methods -&gt; 2.54. Uize.toNumber -&gt; 2.54.1. How a Value is Coerced to Number -&gt; 2.54.1.6. Using the Uize.toNumber Method -&gt; 2.54.1.6.2. Conforming Set-get Properties"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_54" title="2. Static Methods -&gt; 2.54. Uize.toNumber">54</a>.<a href="#2_54_1" title="2. Static Methods -&gt; 2.54. Uize.toNumber -&gt; 2.54.1. How a Value is Coerced to Number">1</a>.<a href="#2_54_1_6" title="2. Static Methods -&gt; 2.54. Uize.toNumber -&gt; 2.54.1. How a Value is Coerced to Number -&gt; 2.54.1.6. Using the Uize.toNumber Method">6</a>.<a href="#2_54_1_6_2" title="2. Static Methods -&gt; 2.54. Uize.toNumber -&gt; 2.54.1. How a Value is Coerced to Number -&gt; 2.54.1.6. Using the Uize.toNumber Method -&gt; 2.54.1.6.2. Conforming Set-get Properties">2</a>. </span>Conforming Set-get Properties</h5>
 					<div class="contents5">
-						<p>The <code><a href="#2_53">Uize.toNumber</a></code> method can be specified as a conformer for a set-get property of a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass.</p>
+						<p>The <code><a href="#2_54">Uize.toNumber</a></code> method can be specified as a conformer for a set-get property of a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass.</p>
 						
 						<p><span class="allCaps">EXAMPLE</span></p>
 						
@@ -4935,7 +4973,7 @@ Rectangle.registerProperties ({
 });
 </pre>
 						
-						<p>In the above example, a <code>Rectangle</code> class is being defined that has two set-get properties: <code>width</code> and <code>height</code>. For the convenience of users of the class, the <code><a href="#2_53">Uize.toNumber</a></code> method is set as the conformer for both the <code>width</code> and <code>height</code> properties. This means that the user of the class can set the values for these properties using values that are other than number type, and the developer of the class can write the rest of the class' code with confidence that internally the values for the properties will always be number type.</p>
+						<p>In the above example, a <code>Rectangle</code> class is being defined that has two set-get properties: <code>width</code> and <code>height</code>. For the convenience of users of the class, the <code><a href="#2_54">Uize.toNumber</a></code> method is set as the conformer for both the <code>width</code> and <code>height</code> properties. This means that the user of the class can set the values for these properties using values that are other than number type, and the developer of the class can write the rest of the class' code with confidence that internally the values for the properties will always be number type.</p>
 						
 						<p>So, given the above implementation of the <code>Rectangle</code> class, we would see the following results...</p>
 						
@@ -4960,10 +4998,10 @@ myInstance.get ('width');                          // returns 12
 				</div>
 			</div>
 			
-			<a name="2_53_2"></a>
-			<h3 class="heading3" title="2. Static Methods -&gt; 2.53. Uize.toNumber -&gt; 2.53.2. Coerce a Value to a Number"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_53" title="2. Static Methods -&gt; 2.53. Uize.toNumber">53</a>.<a href="#2_53_2" title="2. Static Methods -&gt; 2.53. Uize.toNumber -&gt; 2.53.2. Coerce a Value to a Number">2</a>. </span>Coerce a Value to a Number</h3>
+			<a name="2_54_2"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.54. Uize.toNumber -&gt; 2.54.2. Coerce a Value to a Number"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_54" title="2. Static Methods -&gt; 2.54. Uize.toNumber">54</a>.<a href="#2_54_2" title="2. Static Methods -&gt; 2.54. Uize.toNumber -&gt; 2.54.2. Coerce a Value to a Number">2</a>. </span>Coerce a Value to a Number</h3>
 			<div class="contents3">
-				<p>A value of any type can be coerced to a number by calling the <code><a href="#2_53">Uize.toNumber</a></code> method and passing the value that is to be coerced to a number as the single parameter.</p>
+				<p>A value of any type can be coerced to a number by calling the <code><a href="#2_54">Uize.toNumber</a></code> method and passing the value that is to be coerced to a number as the single parameter.</p>
 				
 				<p><span class="allCaps">SYNTAX</span></p>
 				
@@ -5010,8 +5048,8 @@ Uize.toNumber (function () {return function () {return 5}});    // returns NaN
 </pre>
 			</div>
 			
-			<a name="2_53_3"></a>
-			<h3 class="heading3" title="2. Static Methods -&gt; 2.53. Uize.toNumber -&gt; 2.53.3. Coerce a Value to a Number, With Defaulting"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_53" title="2. Static Methods -&gt; 2.53. Uize.toNumber">53</a>.<a href="#2_53_3" title="2. Static Methods -&gt; 2.53. Uize.toNumber -&gt; 2.53.3. Coerce a Value to a Number, With Defaulting">3</a>. </span>Coerce a Value to a Number, With Defaulting</h3>
+			<a name="2_54_3"></a>
+			<h3 class="heading3" title="2. Static Methods -&gt; 2.54. Uize.toNumber -&gt; 2.54.3. Coerce a Value to a Number, With Defaulting"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_54" title="2. Static Methods -&gt; 2.54. Uize.toNumber">54</a>.<a href="#2_54_3" title="2. Static Methods -&gt; 2.54. Uize.toNumber -&gt; 2.54.3. Coerce a Value to a Number, With Defaulting">3</a>. </span>Coerce a Value to a Number, With Defaulting</h3>
 			<div class="contents3">
 				<p>A value of any type can be coerced to a number, with defaulting if the value can't be successfully coerced to a number, by specifing a default value using the optional <code>defaultANYTYPE</code> second parameter.</p>
 				
@@ -5071,8 +5109,8 @@ Uize.toNumber (function () {return function () {return 5}},99);    // returns 99
 			</table>
 		</div>
 		
-		<a name="2_54"></a>
-		<h2 class="heading2" title="2. Static Methods -&gt; 2.54. Uize.toString"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_54" title="2. Static Methods -&gt; 2.54. Uize.toString">54</a>. </span>Uize.toString</h2>
+		<a name="2_55"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.55. Uize.toString"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_55" title="2. Static Methods -&gt; 2.55. Uize.toString">55</a>. </span>Uize.toString</h2>
 		<div class="contents2">
 			<p>Returns a string, providing summary info for the class on which the method is called.</p>
 			
@@ -5082,7 +5120,7 @@ Uize.toNumber (function () {return function () {return 5}},99);    // returns 99
 <pre class="sample-code">classSummarySTR = MyClass.toString ();
 </pre>
 			
-			<p>The string returned by this method provides a summary that includes the class' name and the state of its set-get properties. Among other things, this method provides a convenient and lightweight way to gather information about <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclasses during debugging and troubleshooting. The <code><a href="#2_54">Uize.toString</a></code> static intrinsic method is invoked automatically in certain contexts in order to convert a class reference to a string form, such as when alerting a class using the <code>alert</code> global function.</p>
+			<p>The string returned by this method provides a summary that includes the class' name and the state of its set-get properties. Among other things, this method provides a convenient and lightweight way to gather information about <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclasses during debugging and troubleshooting. The <code><a href="#2_55">Uize.toString</a></code> static intrinsic method is invoked automatically in certain contexts in order to convert a class reference to a string form, such as when alerting a class using the <code>alert</code> global function.</p>
 			
 			<p><span class="allCaps">EXAMPLE</span></p>
 			
@@ -5128,7 +5166,7 @@ valueFunc : [object Function]
 wired : false
 </pre>
 			
-			<p>In certain contexts, providing a reference to a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass as a parameter to some method will result in the <code>Uize.Class.valueOf</code> static intrinsic method of that class being invoked in order to coerce it to a simple value. If it is your desire to have the class summary be used rather than the class' value, then you should explicitly call the <code><a href="#2_54">Uize.toString</a></code> static intrinsic method, as follows...</p>
+			<p>In certain contexts, providing a reference to a <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass as a parameter to some method will result in the <code>Uize.Class.valueOf</code> static intrinsic method of that class being invoked in order to coerce it to a simple value. If it is your desire to have the class summary be used rather than the class' value, then you should explicitly call the <code><a href="#2_55">Uize.toString</a></code> static intrinsic method, as follows...</p>
 			
 			<p><span class="allCaps">EXAMPLE</span></p>
 			
@@ -5140,8 +5178,8 @@ Uize.Node.setInnerHtml ('classCurrentValue',page.children.slider.Class);
 			<p>In this example, the <code>classSummaryForDebug</code> node will contain the summary info for the <code><a href="../reference/Uize.Widget.Bar.Slider.html">Uize.Widget.Bar.Slider</a></code> class, while the <code>classCurrentValue</code> node will just show the class' current value.</p>
 		</div>
 		
-		<a name="2_55"></a>
-		<h2 class="heading2" title="2. Static Methods -&gt; 2.55. Uize.totalKeys"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_55" title="2. Static Methods -&gt; 2.55. Uize.totalKeys">55</a>. </span>Uize.totalKeys</h2>
+		<a name="2_56"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.56. Uize.totalKeys"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_56" title="2. Static Methods -&gt; 2.56. Uize.totalKeys">56</a>. </span>Uize.totalKeys</h2>
 		<div class="contents2">
 			<p>Returns an integer, representing the total number of keys in the specified object.</p>
 			
@@ -5151,7 +5189,7 @@ Uize.Node.setInnerHtml ('classCurrentValue',page.children.slider.Class);
 <pre class="sample-code">totalKeysINT = Uize.totalKeys (objectOBJ);
 </pre>
 			
-			<p>Using the <code><a href="#2_55">Uize.totalKeys</a></code> method to determine the number of keys an object has is more efficient than using the expression <code>Uize.keys (myObject).length</code>, because the <code><a href="#2_55">Uize.totalKeys</a></code> method doesn't populate an array. Furthermore, to determine if an object is empty, you <b>could</b> use the expression <code>!Uize.totalKeys (myObject)</code>, but it would be more efficient to use the convenient <code><a href="#2_21">Uize.isEmpty</a></code> static method.</p>
+			<p>Using the <code><a href="#2_56">Uize.totalKeys</a></code> method to determine the number of keys an object has is more efficient than using the expression <code>Uize.keys (myObject).length</code>, because the <code><a href="#2_56">Uize.totalKeys</a></code> method doesn't populate an array. Furthermore, to determine if an object is empty, you <b>could</b> use the expression <code>!Uize.totalKeys (myObject)</code>, but it would be more efficient to use the convenient <code><a href="#2_21">Uize.isEmpty</a></code> static method.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
@@ -5166,8 +5204,8 @@ Uize.Node.setInnerHtml ('classCurrentValue',page.children.slider.Class);
 			</table>
 		</div>
 		
-		<a name="2_56"></a>
-		<h2 class="heading2" title="2. Static Methods -&gt; 2.56. Uize.values"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_56" title="2. Static Methods -&gt; 2.56. Uize.values">56</a>. </span>Uize.values</h2>
+		<a name="2_57"></a>
+		<h2 class="heading2" title="2. Static Methods -&gt; 2.57. Uize.values"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_57" title="2. Static Methods -&gt; 2.57. Uize.values">57</a>. </span>Uize.values</h2>
 		<div class="contents2">
 			<p>Returns an array, representing the property values of the specified object.</p>
 			

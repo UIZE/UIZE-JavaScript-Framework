@@ -77,7 +77,7 @@ Uize.module ({
 					onChange:function () {
 						var
 							_this = this,
-							_nowMs = +new Date
+							_nowMs = Uize.now ()
 						;
 						if (_this._inProgress) _this._startTime = _nowMs;
 						if (!_this._inProgress && typeof _this._startTime == 'number') {

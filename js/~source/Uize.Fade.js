@@ -40,7 +40,8 @@ Uize.module ({
 			var
 				_undefined,
 				_typeObject = 'object',
-				_constrain = Uize.constrain
+				_constrain = Uize.constrain,
+				_now = Uize.now
 			;
 
 		/*** General Variables ***/
@@ -93,7 +94,7 @@ Uize.module ({
 			};
 
 			_classPrototype._advance = function () {
-				var _completion = Math.min (((Date.now ? Date.now () : +new Date) - this._startTime) / this._duration,1);
+				var _completion = Math.min ((_now () - this._startTime) / this._duration,1);
 				this.set ({_progress:this._reverse ? 1 - _completion : _completion});
 				if (_completion == 1) {
 					this.stop ();
@@ -442,7 +443,7 @@ Uize.module ({
 					onChange:function () {
 						var _this = this;
 						if (_this._inProgress) {
-							_this._startTime = Date.now ? Date.now () : +new Date;
+							_this._startTime = _now ();
 							_this.fire ('Start');
 								/*?
 									Instance Events

@@ -2836,6 +2836,26 @@ Uize.module ({
 						['Test that the minimum value from a number value is Infinity',5,Infinity],
 						['Test that the minimum value from a string value is Infinity','hello',Infinity]
 					]],
+					['Uize.now',[
+						{
+							title:'Test that the method returns an integer',
+							test:function () {return this.expectInteger (Uize.now ())}
+						},
+						{
+							title:'Test that the method returns the current time in milliseconds',
+							test:function () {
+								var
+									_nowMs = +new Date,
+									_result = Uize.now ()
+								;
+								return this.expectIntegerInRange (
+									_nowMs,
+									_nowMs + 10, // shouldn't take longer than 10ms to get into the method and compute its result
+									_result
+								);
+							}
+						}
+					]],
 
 					['Uize.toString',[
 					]],

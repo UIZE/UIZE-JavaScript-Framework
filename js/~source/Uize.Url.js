@@ -481,7 +481,7 @@ Uize.module ({
 				*/
 
 			_package.getCacheDefeatStr = function () {
-				return +new Date + '' + Math.round (Math.random () * 1000) + _cacheDefeatStrCallCount++;
+				return Uize.now () + '' + Math.round (Math.random () * 1000) + _cacheDefeatStrCallCount++;
 				/*?
 					Static Methods
 						Uize.Url.getCacheDefeatStr

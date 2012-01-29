@@ -25,83 +25,82 @@
 		<ul>
 			<li><a href="#1">1. Uize</a>
 				<ul>
-					<li><a href="#1_1" title="Returns the current time in milliseconds since 1970 (POSIX time).">1.1. Uize.now</a></li>
-					<li><a href="#1_2" title="Returns a boolean, indicating whether or not the specified value can be extended with custom properties.">1.2. Uize.canExtend</a></li>
-					<li><a href="#1_3" title="Wraps a function in order to protect it from possible JavaScript errors during its execution.">1.3. Uize.safe</a></li>
-					<li><a href="#1_4" title="IMPLEMENTATION">1.4. Uize.cycleCalls</a></li>
-					<li><a href="#1_5" title="Add support for _source being a string?">1.5. Uize.map</a></li>
-					<li><a href="#1_6" title="An object built into the Uize base module that allows you to control walking through an object tree in a safe and performant way.">1.6. Uize.TreeWalker</a></li>
-					<li><a href="#1_7">1.7. Quick Win Additions (in order of priority / usefulness)</a>
+					<li><a href="#1_1" title="Returns a boolean, indicating whether or not the specified value can be extended with custom properties.">1.1. Uize.canExtend</a></li>
+					<li><a href="#1_2" title="Wraps a function in order to protect it from possible JavaScript errors during its execution.">1.2. Uize.safe</a></li>
+					<li><a href="#1_3" title="IMPLEMENTATION">1.3. Uize.cycleCalls</a></li>
+					<li><a href="#1_4" title="Add support for _source being a string?">1.4. Uize.map</a></li>
+					<li><a href="#1_5" title="An object built into the Uize base module that allows you to control walking through an object tree in a safe and performant way.">1.5. Uize.TreeWalker</a></li>
+					<li><a href="#1_6">1.6. Quick Win Additions (in order of priority / usefulness)</a>
 						<ul>
-							<li><a href="#1_7_1">1.7.1. STILL TO DO</a>
+							<li><a href="#1_6_1">1.6.1. STILL TO DO</a>
 								<ul>
-									<li><a href="#1_7_1_1" title="- essentially derived from indexIn, but adapted to also operate on strings and to use built-in indexOf when possible and supported by JavaScript built-in objects (ie. newer versions of JavaScript)">1.7.1.1. Uize.indexOf, Uize.lastIndexOf</a></li>
-									<li><a href="#1_7_1_2" title="- adapt to add support for source being a string">1.7.1.2. Uize.indexIn</a></li>
-									<li><a href="#1_7_1_3" title="- alias to anonymous module with required (to make the simple case of requiring a module deeper in code more convenient &amp; intuitive)">1.7.1.3. Uize.require</a></li>
+									<li><a href="#1_6_1_1" title="- essentially derived from indexIn, but adapted to also operate on strings and to use built-in indexOf when possible and supported by JavaScript built-in objects (ie. newer versions of JavaScript)">1.6.1.1. Uize.indexOf, Uize.lastIndexOf</a></li>
+									<li><a href="#1_6_1_2" title="- adapt to add support for source being a string">1.6.1.2. Uize.indexIn</a></li>
+									<li><a href="#1_6_1_3" title="- alias to anonymous module with required (to make the simple case of requiring a module deeper in code more convenient &amp; intuitive)">1.6.1.3. Uize.require</a></li>
 								</ul>
 							</li>
-							<li><a href="#1_7_2">1.7.2. LATER</a>
+							<li><a href="#1_6_2">1.6.2. LATER</a>
 								<ul>
-									<li><a href="#1_7_2_1" title="- alias of copyInto, for those who are more comfortable with the extend semantic">1.7.2.1. Uize.extend</a></li>
-									<li><a href="#1_7_2_2" title="- ensures that the value is an array">1.7.2.2. Uize.ensureArray</a></li>
-									<li><a href="#1_7_2_3" title="- checks to see if an element is present, and adds it if not">1.7.2.3. Uize.ensureIn</a></li>
-									<li><a href="#1_7_2_4" title="- returns true if the value is either a string primitive or an instance of a String object or &quot;subclass&quot;">1.7.2.4. Uize.isStringy</a></li>
-									<li><a href="#1_7_2_5" title="- returns true if the value is truthy">1.7.2.5. Uize.isTruthy</a></li>
-									<li><a href="#1_7_2_6" title="- returns true is the value is falsy">1.7.2.6. Uize.isFalsy</a></li>
+									<li><a href="#1_6_2_1" title="- alias of copyInto, for those who are more comfortable with the extend semantic">1.6.2.1. Uize.extend</a></li>
+									<li><a href="#1_6_2_2" title="- ensures that the value is an array">1.6.2.2. Uize.ensureArray</a></li>
+									<li><a href="#1_6_2_3" title="- checks to see if an element is present, and adds it if not">1.6.2.3. Uize.ensureIn</a></li>
+									<li><a href="#1_6_2_4" title="- returns true if the value is either a string primitive or an instance of a String object or &quot;subclass&quot;">1.6.2.4. Uize.isStringy</a></li>
+									<li><a href="#1_6_2_5" title="- returns true if the value is truthy">1.6.2.5. Uize.isTruthy</a></li>
+									<li><a href="#1_6_2_6" title="- returns true is the value is falsy">1.6.2.6. Uize.isFalsy</a></li>
 								</ul>
 							</li>
 						</ul>
 					</li>
-					<li><a href="#1_8" title="Lets you conveniently create a function / method caller, where you can specify context, function, and arguments.">1.8. Uize.willCall</a>
+					<li><a href="#1_7" title="Lets you conveniently create a function / method caller, where you can specify context, function, and arguments.">1.7. Uize.willCall</a>
 						<ul>
-							<li><a href="#1_8_1" title="- callback">1.8.1. - names considered</a></li>
+							<li><a href="#1_7_1" title="- callback">1.7.1. - names considered</a></li>
 						</ul>
 					</li>
-					<li><a href="#1_9" title="Uize.watchFunction = function (_function,_before,_after) {&#10;	return function () {&#10;		_before &amp;&amp; _before (this,arguments);&#10;		var _result = _watched.apply (this,arguments);&#10;		_after &amp;&amp; _after (this,arguments,_result);&#10;		return _result;&#10;	};&#10;};&#10;&#10;Uize.watchMethod = function (_context,_methodName,_before,_after) {&#10;	if (!Uize.isInstance (_context))&#10;		_context = _context.prototype&#10;	;&#10;	var&#10;		_watched = _c...">1.9. Uize.watchMethod</a></li>
-					<li><a href="#1_10" title="Uize.memoize = function (_function) {&#10;	var _resultsCache = {};&#10;	return function () {&#10;		var _cacheKey = Uize.Json.to (arguments);&#10;		return (&#10;			_cacheKey in _resultsCache&#10;				? _resultsCache [_cacheKey]&#10;				: (_resultsCache [_cacheKey] = _function.apply (this,arguments))&#10;		);&#10;	};&#10;};&#10;&#10;Uize.memoizeMethod = function (_context,_methodName) {&#10;	// ...&#10;};&#10;">1.10. Uize.memoize</a></li>
-					<li><a href="#1_11">1.11. Uize.constrain</a>
+					<li><a href="#1_8" title="Uize.watchFunction = function (_function,_before,_after) {&#10;	return function () {&#10;		_before &amp;&amp; _before (this,arguments);&#10;		var _result = _watched.apply (this,arguments);&#10;		_after &amp;&amp; _after (this,arguments,_result);&#10;		return _result;&#10;	};&#10;};&#10;&#10;Uize.watchMethod = function (_context,_methodName,_before,_after) {&#10;	if (!Uize.isInstance (_context))&#10;		_context = _context.prototype&#10;	;&#10;	var&#10;		_watched = _c...">1.8. Uize.watchMethod</a></li>
+					<li><a href="#1_9" title="Uize.memoize = function (_function) {&#10;	var _resultsCache = {};&#10;	return function () {&#10;		var _cacheKey = Uize.Json.to (arguments);&#10;		return (&#10;			_cacheKey in _resultsCache&#10;				? _resultsCache [_cacheKey]&#10;				: (_resultsCache [_cacheKey] = _function.apply (this,arguments))&#10;		);&#10;	};&#10;};&#10;&#10;Uize.memoizeMethod = function (_context,_methodName) {&#10;	// ...&#10;};&#10;">1.9. Uize.memoize</a></li>
+					<li><a href="#1_10">1.10. Uize.constrain</a>
 						<ul>
-							<li><a href="#1_11_1" title="Support a wrap flag, so that constrained values can be made to wrap around within the constraining range, rather than always only hitting up against the edges.">1.11.1. Support a wrap flag</a></li>
-							<li><a href="#1_11_2" title="Support either or both of the min and max boundaries being null or undefined.">1.11.2. Unbounded</a></li>
+							<li><a href="#1_10_1" title="Support a wrap flag, so that constrained values can be made to wrap around within the constraining range, rather than always only hitting up against the edges.">1.10.1. Support a wrap flag</a></li>
+							<li><a href="#1_10_2" title="Support either or both of the min and max boundaries being null or undefined.">1.10.2. Unbounded</a></li>
 						</ul>
 					</li>
-					<li><a href="#1_12">1.12. Uize.reverseLookup</a>
+					<li><a href="#1_11">1.11. Uize.reverseLookup</a>
 						<ul>
-							<li><a href="#1_12_1" title="EXAMPLE">1.12.1. Support values for source being arrays.</a></li>
-							<li><a href="#1_12_2" title="EXAMPLE">1.12.2. Support multiple values for source being the same</a></li>
-							<li><a href="#1_12_3">1.12.3. Support Merging in to Target</a>
+							<li><a href="#1_11_1" title="EXAMPLE">1.11.1. Support values for source being arrays.</a></li>
+							<li><a href="#1_11_2" title="EXAMPLE">1.11.2. Support multiple values for source being the same</a></li>
+							<li><a href="#1_11_3">1.11.3. Support Merging in to Target</a>
 								<ul>
-									<li><a href="#1_12_3_1">1.12.3.1. - when entries are added to an existing reverse lookup object, use the following rules...</a>
+									<li><a href="#1_11_3_1">1.11.3.1. - when entries are added to an existing reverse lookup object, use the following rules...</a>
 										<ul>
-											<li><a href="#1_12_3_1_1" title="- if the key&apos;s value is not an array, make it an array with the current value as the first element and the desired value to add as the second">1.12.3.1.1. - if the desired key to add already exists, then...</a></li>
+											<li><a href="#1_11_3_1_1" title="- if the key&apos;s value is not an array, make it an array with the current value as the first element and the desired value to add as the second">1.11.3.1.1. - if the desired key to add already exists, then...</a></li>
 										</ul>
 									</li>
 								</ul>
 							</li>
 						</ul>
 					</li>
-					<li><a href="#1_13">1.13. Uize.indexIn</a>
+					<li><a href="#1_12">1.12. Uize.indexIn</a>
 						<ul>
-							<li><a href="#1_13_1" title="For simple type source, could do string index.">1.13.1. Support Simple Type Source</a></li>
+							<li><a href="#1_12_1" title="For simple type source, could do string index.">1.12.1. Support Simple Type Source</a></li>
 						</ul>
 					</li>
-					<li><a href="#1_14">1.14. Uize.module</a>
+					<li><a href="#1_13">1.13. Uize.module</a>
 						<ul>
-							<li><a href="#1_14_1" title="How can code require a module that is not in the modules directory (like a code beside)?">1.14.1. Support Code Besides in Module Loader</a></li>
+							<li><a href="#1_13_1" title="How can code require a module that is not in the modules directory (like a code beside)?">1.13.1. Support Code Besides in Module Loader</a></li>
 						</ul>
 					</li>
-					<li><a href="#1_15" title="Consider a facility to support multiple inheritance (may involve creating a merge service for merging data from one object into another, since it should be possible to merge additional features of a different class into an already created class, and perhaps that merge feature would also be used in the _subclass function&apos;s implementation).">1.15. Multiple Inheritance</a></li>
-					<li><a href="#1_16">1.16. Library Modules</a>
+					<li><a href="#1_14" title="Consider a facility to support multiple inheritance (may involve creating a merge service for merging data from one object into another, since it should be possible to merge additional features of a different class into an already created class, and perhaps that merge feature would also be used in the _subclass function&apos;s implementation).">1.14. Multiple Inheritance</a></li>
+					<li><a href="#1_15">1.15. Library Modules</a>
 						<ul>
-							<li><a href="#1_16_1" title="Can library modules that are outside the modules directory require modules that are outside the modules directory?">1.16.1. Library of Dispersed Modules</a></li>
+							<li><a href="#1_15_1" title="Can library modules that are outside the modules directory require modules that are outside the modules directory?">1.15.1. Library of Dispersed Modules</a></li>
 						</ul>
 					</li>
-					<li><a href="#1_17">1.17. Uize.clone</a>
+					<li><a href="#1_16">1.16. Uize.clone</a>
 						<ul>
-							<li><a href="#1_17_1" title="Handle circular references in Uize.clone (how to generate properties that are references to other parts of structure in same relationship as the equivalent property in the cloning source???)">1.17.1. Uize.clone and Circular References</a></li>
+							<li><a href="#1_16_1" title="Handle circular references in Uize.clone (how to generate properties that are references to other parts of structure in same relationship as the equivalent property in the cloning source???)">1.16.1. Uize.clone and Circular References</a></li>
 						</ul>
 					</li>
-					<li><a href="#1_18" title="- optimize for successive substitution on the same source using the same form of map (but different values, of course)">1.18. Uize.substituteInto</a></li>
+					<li><a href="#1_17" title="- optimize for successive substitution on the same source using the same form of map (but different values, of course)">1.17. Uize.substituteInto</a></li>
 				</ul>
 			</li>
 			<li><a href="#2">2. Uize.Array</a>
@@ -181,7 +180,7 @@
 							</li>
 							<li><a href="#3_3_2">3.3.2. Implementation Approaches</a>
 								<ul>
-									<li><a href="#3_3_2_1" title="With this approach, setting values for derived set-get properties is worked into the process of setting values for properties that affect derived properties, by exploding out the properties being set to included all affected derived properties.">3.3.2.1. Exloding Out the Properties Being Set</a>
+									<li><a href="#3_3_2_1" title="With this approach, setting values for derived set-get properties is worked into the process of setting values for properties that affect derived properties, by exploding out the properties being set to included all affected derived properties.">3.3.2.1. Exploding Out the Properties Being Set</a>
 										<ul>
 											<li><a href="#3_3_2_1_1" title="document...">3.3.2.1.1. Advantages</a></li>
 											<li><a href="#3_3_2_1_2" title="document...">3.3.2.1.2. Disadvantages</a></li>
@@ -1144,25 +1143,7 @@
 	<h1 class="heading1" title="1. Uize"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>. </span>Uize</h1>
 	<div class="contents1">
 		<a name="1_1"></a>
-		<h2 class="heading2" title="1. Uize -&gt; 1.1. Uize.now"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_1" title="1. Uize -&gt; 1.1. Uize.now">1</a>. </span>Uize.now</h2>
-		<div class="contents2">
-			<p>Returns the current time in milliseconds since 1970 (POSIX time).</p>
-			
-			<p><span class="allCaps">SYNTAX</span></p>
-			
-			
-<pre class="sample-code">nowINT = Uize.now ();
-</pre>
-			
-			<p><span class="allCaps">IMPLEMENTATION</span></p>
-			
-			
-<pre class="sample-code">_package.now = Data.now ? function () {return Date.now ()} : function () {return +new Date};
-</pre>
-		</div>
-		
-		<a name="1_2"></a>
-		<h2 class="heading2" title="1. Uize -&gt; 1.2. Uize.canExtend"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_2" title="1. Uize -&gt; 1.2. Uize.canExtend">2</a>. </span>Uize.canExtend</h2>
+		<h2 class="heading2" title="1. Uize -&gt; 1.1. Uize.canExtend"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_1" title="1. Uize -&gt; 1.1. Uize.canExtend">1</a>. </span>Uize.canExtend</h2>
 		<div class="contents2">
 			<p>Returns a boolean, indicating whether or not the specified value can be extended with custom properties.</p>
 			
@@ -1194,8 +1175,8 @@ Uize.canExtend (undefined);           // returns false
 </pre>
 		</div>
 		
-		<a name="1_3"></a>
-		<h2 class="heading2" title="1. Uize -&gt; 1.3. Uize.safe"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_3" title="1. Uize -&gt; 1.3. Uize.safe">3</a>. </span>Uize.safe</h2>
+		<a name="1_2"></a>
+		<h2 class="heading2" title="1. Uize -&gt; 1.2. Uize.safe"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_2" title="1. Uize -&gt; 1.2. Uize.safe">2</a>. </span>Uize.safe</h2>
 		<div class="contents2">
 			<p>Wraps a function in order to protect it from possible JavaScript errors during its execution.</p>
 			
@@ -1217,8 +1198,8 @@ Uize.canExtend (undefined);           // returns false
 			<p>This method catches errors that occur in the function that is being wrapped, returning the error if no value is explicitly specified that should be returned when an errors occur.</p>
 		</div>
 		
-		<a name="1_4"></a>
-		<h2 class="heading2" title="1. Uize -&gt; 1.4. Uize.cycleCalls"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_4" title="1. Uize -&gt; 1.4. Uize.cycleCalls">4</a>. </span>Uize.cycleCalls</h2>
+		<a name="1_3"></a>
+		<h2 class="heading2" title="1. Uize -&gt; 1.3. Uize.cycleCalls"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_3" title="1. Uize -&gt; 1.3. Uize.cycleCalls">3</a>. </span>Uize.cycleCalls</h2>
 		<div class="contents2">
 			<p><span class="allCaps">IMPLEMENTATION</span></p>
 			
@@ -1237,14 +1218,14 @@ Uize.canExtend (undefined);           // returns false
 </pre>
 		</div>
 		
-		<a name="1_5"></a>
-		<h2 class="heading2" title="1. Uize -&gt; 1.5. Uize.map"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_5" title="1. Uize -&gt; 1.5. Uize.map">5</a>. </span>Uize.map</h2>
+		<a name="1_4"></a>
+		<h2 class="heading2" title="1. Uize -&gt; 1.4. Uize.map"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_4" title="1. Uize -&gt; 1.4. Uize.map">4</a>. </span>Uize.map</h2>
 		<div class="contents2">
 			<p>Add support for _source being a string?</p>
 		</div>
 		
-		<a name="1_6"></a>
-		<h2 class="heading2" title="1. Uize -&gt; 1.6. Uize.TreeWalker"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_6" title="1. Uize -&gt; 1.6. Uize.TreeWalker">6</a>. </span>Uize.TreeWalker</h2>
+		<a name="1_5"></a>
+		<h2 class="heading2" title="1. Uize -&gt; 1.5. Uize.TreeWalker"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_5" title="1. Uize -&gt; 1.5. Uize.TreeWalker">5</a>. </span>Uize.TreeWalker</h2>
 		<div class="contents2">
 			<p>An object built into the <code><a href="#1">Uize</a></code> base module that allows you to control walking through an object tree in a safe and performant way.</p>
 			
@@ -1254,30 +1235,30 @@ Uize.canExtend (undefined);           // returns false
 			</table>
 		</div>
 		
-		<a name="1_7"></a>
-		<h2 class="heading2" title="1. Uize -&gt; 1.7. Quick Win Additions (in order of priority / usefulness)"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_7" title="1. Uize -&gt; 1.7. Quick Win Additions (in order of priority / usefulness)">7</a>. </span>Quick Win Additions (in order of priority / usefulness)</h2>
+		<a name="1_6"></a>
+		<h2 class="heading2" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness)"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_6" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness)">6</a>. </span>Quick Win Additions (in order of priority / usefulness)</h2>
 		<div class="contents2">
-			<a name="1_7_1"></a>
-			<h3 class="heading3" title="1. Uize -&gt; 1.7. Quick Win Additions (in order of priority / usefulness) -&gt; 1.7.1. STILL TO DO"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_7" title="1. Uize -&gt; 1.7. Quick Win Additions (in order of priority / usefulness)">7</a>.<a href="#1_7_1" title="1. Uize -&gt; 1.7. Quick Win Additions (in order of priority / usefulness) -&gt; 1.7.1. STILL TO DO">1</a>. </span>STILL TO DO</h3>
+			<a name="1_6_1"></a>
+			<h3 class="heading3" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness) -&gt; 1.6.1. STILL TO DO"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_6" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness)">6</a>.<a href="#1_6_1" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness) -&gt; 1.6.1. STILL TO DO">1</a>. </span>STILL TO DO</h3>
 			<div class="contents3">
-				<a name="1_7_1_1"></a>
-				<h4 class="heading4" title="1. Uize -&gt; 1.7. Quick Win Additions (in order of priority / usefulness) -&gt; 1.7.1. STILL TO DO -&gt; 1.7.1.1. Uize.indexOf, Uize.lastIndexOf"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_7" title="1. Uize -&gt; 1.7. Quick Win Additions (in order of priority / usefulness)">7</a>.<a href="#1_7_1" title="1. Uize -&gt; 1.7. Quick Win Additions (in order of priority / usefulness) -&gt; 1.7.1. STILL TO DO">1</a>.<a href="#1_7_1_1" title="1. Uize -&gt; 1.7. Quick Win Additions (in order of priority / usefulness) -&gt; 1.7.1. STILL TO DO -&gt; 1.7.1.1. Uize.indexOf, Uize.lastIndexOf">1</a>. </span>Uize.indexOf, Uize.lastIndexOf</h4>
+				<a name="1_6_1_1"></a>
+				<h4 class="heading4" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness) -&gt; 1.6.1. STILL TO DO -&gt; 1.6.1.1. Uize.indexOf, Uize.lastIndexOf"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_6" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness)">6</a>.<a href="#1_6_1" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness) -&gt; 1.6.1. STILL TO DO">1</a>.<a href="#1_6_1_1" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness) -&gt; 1.6.1. STILL TO DO -&gt; 1.6.1.1. Uize.indexOf, Uize.lastIndexOf">1</a>. </span>Uize.indexOf, Uize.lastIndexOf</h4>
 				<div class="contents4">
 					<table class="list">
 					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>essentially derived from indexIn, but adapted to also operate on strings and to use built-in indexOf when possible and supported by JavaScript built-in objects (ie. newer versions of JavaScript)</td></tr>
 					</table>
 				</div>
 				
-				<a name="1_7_1_2"></a>
-				<h4 class="heading4" title="1. Uize -&gt; 1.7. Quick Win Additions (in order of priority / usefulness) -&gt; 1.7.1. STILL TO DO -&gt; 1.7.1.2. Uize.indexIn"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_7" title="1. Uize -&gt; 1.7. Quick Win Additions (in order of priority / usefulness)">7</a>.<a href="#1_7_1" title="1. Uize -&gt; 1.7. Quick Win Additions (in order of priority / usefulness) -&gt; 1.7.1. STILL TO DO">1</a>.<a href="#1_7_1_2" title="1. Uize -&gt; 1.7. Quick Win Additions (in order of priority / usefulness) -&gt; 1.7.1. STILL TO DO -&gt; 1.7.1.2. Uize.indexIn">2</a>. </span>Uize.indexIn</h4>
+				<a name="1_6_1_2"></a>
+				<h4 class="heading4" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness) -&gt; 1.6.1. STILL TO DO -&gt; 1.6.1.2. Uize.indexIn"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_6" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness)">6</a>.<a href="#1_6_1" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness) -&gt; 1.6.1. STILL TO DO">1</a>.<a href="#1_6_1_2" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness) -&gt; 1.6.1. STILL TO DO -&gt; 1.6.1.2. Uize.indexIn">2</a>. </span>Uize.indexIn</h4>
 				<div class="contents4">
 					<table class="list">
 					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>adapt to add support for source being a string</td></tr>
 					</table>
 				</div>
 				
-				<a name="1_7_1_3"></a>
-				<h4 class="heading4" title="1. Uize -&gt; 1.7. Quick Win Additions (in order of priority / usefulness) -&gt; 1.7.1. STILL TO DO -&gt; 1.7.1.3. Uize.require"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_7" title="1. Uize -&gt; 1.7. Quick Win Additions (in order of priority / usefulness)">7</a>.<a href="#1_7_1" title="1. Uize -&gt; 1.7. Quick Win Additions (in order of priority / usefulness) -&gt; 1.7.1. STILL TO DO">1</a>.<a href="#1_7_1_3" title="1. Uize -&gt; 1.7. Quick Win Additions (in order of priority / usefulness) -&gt; 1.7.1. STILL TO DO -&gt; 1.7.1.3. Uize.require">3</a>. </span>Uize.require</h4>
+				<a name="1_6_1_3"></a>
+				<h4 class="heading4" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness) -&gt; 1.6.1. STILL TO DO -&gt; 1.6.1.3. Uize.require"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_6" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness)">6</a>.<a href="#1_6_1" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness) -&gt; 1.6.1. STILL TO DO">1</a>.<a href="#1_6_1_3" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness) -&gt; 1.6.1. STILL TO DO -&gt; 1.6.1.3. Uize.require">3</a>. </span>Uize.require</h4>
 				<div class="contents4">
 					<table class="list">
 					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>alias to anonymous module with required (to make the simple case of requiring a module deeper in code more convenient & intuitive)</td></tr>
@@ -1285,19 +1266,19 @@ Uize.canExtend (undefined);           // returns false
 				</div>
 			</div>
 			
-			<a name="1_7_2"></a>
-			<h3 class="heading3" title="1. Uize -&gt; 1.7. Quick Win Additions (in order of priority / usefulness) -&gt; 1.7.2. LATER"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_7" title="1. Uize -&gt; 1.7. Quick Win Additions (in order of priority / usefulness)">7</a>.<a href="#1_7_2" title="1. Uize -&gt; 1.7. Quick Win Additions (in order of priority / usefulness) -&gt; 1.7.2. LATER">2</a>. </span>LATER</h3>
+			<a name="1_6_2"></a>
+			<h3 class="heading3" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness) -&gt; 1.6.2. LATER"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_6" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness)">6</a>.<a href="#1_6_2" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness) -&gt; 1.6.2. LATER">2</a>. </span>LATER</h3>
 			<div class="contents3">
-				<a name="1_7_2_1"></a>
-				<h4 class="heading4" title="1. Uize -&gt; 1.7. Quick Win Additions (in order of priority / usefulness) -&gt; 1.7.2. LATER -&gt; 1.7.2.1. Uize.extend"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_7" title="1. Uize -&gt; 1.7. Quick Win Additions (in order of priority / usefulness)">7</a>.<a href="#1_7_2" title="1. Uize -&gt; 1.7. Quick Win Additions (in order of priority / usefulness) -&gt; 1.7.2. LATER">2</a>.<a href="#1_7_2_1" title="1. Uize -&gt; 1.7. Quick Win Additions (in order of priority / usefulness) -&gt; 1.7.2. LATER -&gt; 1.7.2.1. Uize.extend">1</a>. </span>Uize.extend</h4>
+				<a name="1_6_2_1"></a>
+				<h4 class="heading4" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness) -&gt; 1.6.2. LATER -&gt; 1.6.2.1. Uize.extend"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_6" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness)">6</a>.<a href="#1_6_2" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness) -&gt; 1.6.2. LATER">2</a>.<a href="#1_6_2_1" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness) -&gt; 1.6.2. LATER -&gt; 1.6.2.1. Uize.extend">1</a>. </span>Uize.extend</h4>
 				<div class="contents4">
 					<table class="list">
 					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>alias of copyInto, for those who are more comfortable with the extend semantic</td></tr>
 					</table>
 				</div>
 				
-				<a name="1_7_2_2"></a>
-				<h4 class="heading4" title="1. Uize -&gt; 1.7. Quick Win Additions (in order of priority / usefulness) -&gt; 1.7.2. LATER -&gt; 1.7.2.2. Uize.ensureArray"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_7" title="1. Uize -&gt; 1.7. Quick Win Additions (in order of priority / usefulness)">7</a>.<a href="#1_7_2" title="1. Uize -&gt; 1.7. Quick Win Additions (in order of priority / usefulness) -&gt; 1.7.2. LATER">2</a>.<a href="#1_7_2_2" title="1. Uize -&gt; 1.7. Quick Win Additions (in order of priority / usefulness) -&gt; 1.7.2. LATER -&gt; 1.7.2.2. Uize.ensureArray">2</a>. </span>Uize.ensureArray</h4>
+				<a name="1_6_2_2"></a>
+				<h4 class="heading4" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness) -&gt; 1.6.2. LATER -&gt; 1.6.2.2. Uize.ensureArray"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_6" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness)">6</a>.<a href="#1_6_2" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness) -&gt; 1.6.2. LATER">2</a>.<a href="#1_6_2_2" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness) -&gt; 1.6.2. LATER -&gt; 1.6.2.2. Uize.ensureArray">2</a>. </span>Uize.ensureArray</h4>
 				<div class="contents4">
 					<table class="list">
 					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>ensures that the value is an array</td></tr>
@@ -1308,8 +1289,8 @@ Uize.canExtend (undefined);           // returns false
 					</table>
 				</div>
 				
-				<a name="1_7_2_3"></a>
-				<h4 class="heading4" title="1. Uize -&gt; 1.7. Quick Win Additions (in order of priority / usefulness) -&gt; 1.7.2. LATER -&gt; 1.7.2.3. Uize.ensureIn"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_7" title="1. Uize -&gt; 1.7. Quick Win Additions (in order of priority / usefulness)">7</a>.<a href="#1_7_2" title="1. Uize -&gt; 1.7. Quick Win Additions (in order of priority / usefulness) -&gt; 1.7.2. LATER">2</a>.<a href="#1_7_2_3" title="1. Uize -&gt; 1.7. Quick Win Additions (in order of priority / usefulness) -&gt; 1.7.2. LATER -&gt; 1.7.2.3. Uize.ensureIn">3</a>. </span>Uize.ensureIn</h4>
+				<a name="1_6_2_3"></a>
+				<h4 class="heading4" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness) -&gt; 1.6.2. LATER -&gt; 1.6.2.3. Uize.ensureIn"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_6" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness)">6</a>.<a href="#1_6_2" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness) -&gt; 1.6.2. LATER">2</a>.<a href="#1_6_2_3" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness) -&gt; 1.6.2. LATER -&gt; 1.6.2.3. Uize.ensureIn">3</a>. </span>Uize.ensureIn</h4>
 				<div class="contents4">
 					<table class="list">
 					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>checks to see if an element is present, and adds it if not</td></tr>
@@ -1317,16 +1298,16 @@ Uize.canExtend (undefined);           // returns false
 					</table>
 				</div>
 				
-				<a name="1_7_2_4"></a>
-				<h4 class="heading4" title="1. Uize -&gt; 1.7. Quick Win Additions (in order of priority / usefulness) -&gt; 1.7.2. LATER -&gt; 1.7.2.4. Uize.isStringy"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_7" title="1. Uize -&gt; 1.7. Quick Win Additions (in order of priority / usefulness)">7</a>.<a href="#1_7_2" title="1. Uize -&gt; 1.7. Quick Win Additions (in order of priority / usefulness) -&gt; 1.7.2. LATER">2</a>.<a href="#1_7_2_4" title="1. Uize -&gt; 1.7. Quick Win Additions (in order of priority / usefulness) -&gt; 1.7.2. LATER -&gt; 1.7.2.4. Uize.isStringy">4</a>. </span>Uize.isStringy</h4>
+				<a name="1_6_2_4"></a>
+				<h4 class="heading4" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness) -&gt; 1.6.2. LATER -&gt; 1.6.2.4. Uize.isStringy"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_6" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness)">6</a>.<a href="#1_6_2" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness) -&gt; 1.6.2. LATER">2</a>.<a href="#1_6_2_4" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness) -&gt; 1.6.2. LATER -&gt; 1.6.2.4. Uize.isStringy">4</a>. </span>Uize.isStringy</h4>
 				<div class="contents4">
 					<table class="list">
 					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>returns true if the value is either a string primitive or an instance of a String object or "subclass"</td></tr>
 					</table>
 				</div>
 				
-				<a name="1_7_2_5"></a>
-				<h4 class="heading4" title="1. Uize -&gt; 1.7. Quick Win Additions (in order of priority / usefulness) -&gt; 1.7.2. LATER -&gt; 1.7.2.5. Uize.isTruthy"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_7" title="1. Uize -&gt; 1.7. Quick Win Additions (in order of priority / usefulness)">7</a>.<a href="#1_7_2" title="1. Uize -&gt; 1.7. Quick Win Additions (in order of priority / usefulness) -&gt; 1.7.2. LATER">2</a>.<a href="#1_7_2_5" title="1. Uize -&gt; 1.7. Quick Win Additions (in order of priority / usefulness) -&gt; 1.7.2. LATER -&gt; 1.7.2.5. Uize.isTruthy">5</a>. </span>Uize.isTruthy</h4>
+				<a name="1_6_2_5"></a>
+				<h4 class="heading4" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness) -&gt; 1.6.2. LATER -&gt; 1.6.2.5. Uize.isTruthy"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_6" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness)">6</a>.<a href="#1_6_2" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness) -&gt; 1.6.2. LATER">2</a>.<a href="#1_6_2_5" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness) -&gt; 1.6.2. LATER -&gt; 1.6.2.5. Uize.isTruthy">5</a>. </span>Uize.isTruthy</h4>
 				<div class="contents4">
 					<table class="list">
 					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>returns true if the value is truthy</td></tr>
@@ -1334,8 +1315,8 @@ Uize.canExtend (undefined);           // returns false
 					</table>
 				</div>
 				
-				<a name="1_7_2_6"></a>
-				<h4 class="heading4" title="1. Uize -&gt; 1.7. Quick Win Additions (in order of priority / usefulness) -&gt; 1.7.2. LATER -&gt; 1.7.2.6. Uize.isFalsy"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_7" title="1. Uize -&gt; 1.7. Quick Win Additions (in order of priority / usefulness)">7</a>.<a href="#1_7_2" title="1. Uize -&gt; 1.7. Quick Win Additions (in order of priority / usefulness) -&gt; 1.7.2. LATER">2</a>.<a href="#1_7_2_6" title="1. Uize -&gt; 1.7. Quick Win Additions (in order of priority / usefulness) -&gt; 1.7.2. LATER -&gt; 1.7.2.6. Uize.isFalsy">6</a>. </span>Uize.isFalsy</h4>
+				<a name="1_6_2_6"></a>
+				<h4 class="heading4" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness) -&gt; 1.6.2. LATER -&gt; 1.6.2.6. Uize.isFalsy"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_6" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness)">6</a>.<a href="#1_6_2" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness) -&gt; 1.6.2. LATER">2</a>.<a href="#1_6_2_6" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness) -&gt; 1.6.2. LATER -&gt; 1.6.2.6. Uize.isFalsy">6</a>. </span>Uize.isFalsy</h4>
 				<div class="contents4">
 					<table class="list">
 					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>returns true is the value is falsy</td></tr>
@@ -1345,13 +1326,13 @@ Uize.canExtend (undefined);           // returns false
 			</div>
 		</div>
 		
-		<a name="1_8"></a>
-		<h2 class="heading2" title="1. Uize -&gt; 1.8. Uize.willCall"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_8" title="1. Uize -&gt; 1.8. Uize.willCall">8</a>. </span>Uize.willCall</h2>
+		<a name="1_7"></a>
+		<h2 class="heading2" title="1. Uize -&gt; 1.7. Uize.willCall"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_7" title="1. Uize -&gt; 1.7. Uize.willCall">7</a>. </span>Uize.willCall</h2>
 		<div class="contents2">
 			<p>Lets you conveniently create a function / method caller, where you can specify context, function, and arguments.</p>
 			
-			<a name="1_8_1"></a>
-			<h3 class="heading3" title="1. Uize -&gt; 1.8. Uize.willCall -&gt; 1.8.1. - names considered"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_8" title="1. Uize -&gt; 1.8. Uize.willCall">8</a>.<a href="#1_8_1" title="1. Uize -&gt; 1.8. Uize.willCall -&gt; 1.8.1. - names considered">1</a>. </span>- names considered</h3>
+			<a name="1_7_1"></a>
+			<h3 class="heading3" title="1. Uize -&gt; 1.7. Uize.willCall -&gt; 1.7.1. - names considered"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_7" title="1. Uize -&gt; 1.7. Uize.willCall">7</a>.<a href="#1_7_1" title="1. Uize -&gt; 1.7. Uize.willCall -&gt; 1.7.1. - names considered">1</a>. </span>- names considered</h3>
 			<div class="contents3">
 				<table class="list">
 				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>callback</td></tr>
@@ -1440,8 +1421,8 @@ Uize.functionCall = function (_function,_arguments,_extraArgsMapping) {
 </pre>
 		</div>
 		
-		<a name="1_9"></a>
-		<h2 class="heading2" title="1. Uize -&gt; 1.9. Uize.watchMethod"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_9" title="1. Uize -&gt; 1.9. Uize.watchMethod">9</a>. </span>Uize.watchMethod</h2>
+		<a name="1_8"></a>
+		<h2 class="heading2" title="1. Uize -&gt; 1.8. Uize.watchMethod"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_8" title="1. Uize -&gt; 1.8. Uize.watchMethod">8</a>. </span>Uize.watchMethod</h2>
 		<div class="contents2">
 			
 <pre class="sample-code">Uize.watchFunction = function (_function,_before,_after) {
@@ -1469,8 +1450,8 @@ Uize.watchMethod = function (_context,_methodName,_before,_after) {
 </pre>
 		</div>
 		
-		<a name="1_10"></a>
-		<h2 class="heading2" title="1. Uize -&gt; 1.10. Uize.memoize"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_10" title="1. Uize -&gt; 1.10. Uize.memoize">10</a>. </span>Uize.memoize</h2>
+		<a name="1_9"></a>
+		<h2 class="heading2" title="1. Uize -&gt; 1.9. Uize.memoize"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_9" title="1. Uize -&gt; 1.9. Uize.memoize">9</a>. </span>Uize.memoize</h2>
 		<div class="contents2">
 			
 <pre class="sample-code">Uize.memoize = function (_function) {
@@ -1502,11 +1483,11 @@ Uize.memoizeMethod = function (_context,_methodName) {
 			</table>
 		</div>
 		
-		<a name="1_11"></a>
-		<h2 class="heading2" title="1. Uize -&gt; 1.11. Uize.constrain"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_11" title="1. Uize -&gt; 1.11. Uize.constrain">11</a>. </span>Uize.constrain</h2>
+		<a name="1_10"></a>
+		<h2 class="heading2" title="1. Uize -&gt; 1.10. Uize.constrain"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_10" title="1. Uize -&gt; 1.10. Uize.constrain">10</a>. </span>Uize.constrain</h2>
 		<div class="contents2">
-			<a name="1_11_1"></a>
-			<h3 class="heading3" title="1. Uize -&gt; 1.11. Uize.constrain -&gt; 1.11.1. Support a wrap flag"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_11" title="1. Uize -&gt; 1.11. Uize.constrain">11</a>.<a href="#1_11_1" title="1. Uize -&gt; 1.11. Uize.constrain -&gt; 1.11.1. Support a wrap flag">1</a>. </span>Support a wrap flag</h3>
+			<a name="1_10_1"></a>
+			<h3 class="heading3" title="1. Uize -&gt; 1.10. Uize.constrain -&gt; 1.10.1. Support a wrap flag"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_10" title="1. Uize -&gt; 1.10. Uize.constrain">10</a>.<a href="#1_10_1" title="1. Uize -&gt; 1.10. Uize.constrain -&gt; 1.10.1. Support a wrap flag">1</a>. </span>Support a wrap flag</h3>
 			<div class="contents3">
 				<p>Support a wrap flag, so that constrained values can be made to wrap around within the constraining range, rather than always only hitting up against the edges.</p>
 				
@@ -1525,18 +1506,18 @@ return ((value - min) % maxMinDelta + maxMinDelta) % maxMinDelta + min;
 </pre>
 			</div>
 			
-			<a name="1_11_2"></a>
-			<h3 class="heading3" title="1. Uize -&gt; 1.11. Uize.constrain -&gt; 1.11.2. Unbounded"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_11" title="1. Uize -&gt; 1.11. Uize.constrain">11</a>.<a href="#1_11_2" title="1. Uize -&gt; 1.11. Uize.constrain -&gt; 1.11.2. Unbounded">2</a>. </span>Unbounded</h3>
+			<a name="1_10_2"></a>
+			<h3 class="heading3" title="1. Uize -&gt; 1.10. Uize.constrain -&gt; 1.10.2. Unbounded"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_10" title="1. Uize -&gt; 1.10. Uize.constrain">10</a>.<a href="#1_10_2" title="1. Uize -&gt; 1.10. Uize.constrain -&gt; 1.10.2. Unbounded">2</a>. </span>Unbounded</h3>
 			<div class="contents3">
 				<p>Support either or both of the min and max boundaries being <code>null</code> or <code>undefined</code>.</p>
 			</div>
 		</div>
 		
-		<a name="1_12"></a>
-		<h2 class="heading2" title="1. Uize -&gt; 1.12. Uize.reverseLookup"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_12" title="1. Uize -&gt; 1.12. Uize.reverseLookup">12</a>. </span>Uize.reverseLookup</h2>
+		<a name="1_11"></a>
+		<h2 class="heading2" title="1. Uize -&gt; 1.11. Uize.reverseLookup"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_11" title="1. Uize -&gt; 1.11. Uize.reverseLookup">11</a>. </span>Uize.reverseLookup</h2>
 		<div class="contents2">
-			<a name="1_12_1"></a>
-			<h3 class="heading3" title="1. Uize -&gt; 1.12. Uize.reverseLookup -&gt; 1.12.1. Support values for source being arrays."><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_12" title="1. Uize -&gt; 1.12. Uize.reverseLookup">12</a>.<a href="#1_12_1" title="1. Uize -&gt; 1.12. Uize.reverseLookup -&gt; 1.12.1. Support values for source being arrays.">1</a>. </span>Support values for source being arrays.</h3>
+			<a name="1_11_1"></a>
+			<h3 class="heading3" title="1. Uize -&gt; 1.11. Uize.reverseLookup -&gt; 1.11.1. Support values for source being arrays."><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_11" title="1. Uize -&gt; 1.11. Uize.reverseLookup">11</a>.<a href="#1_11_1" title="1. Uize -&gt; 1.11. Uize.reverseLookup -&gt; 1.11.1. Support values for source being arrays.">1</a>. </span>Support values for source being arrays.</h3>
 			<div class="contents3">
 				<p><span class="allCaps">EXAMPLE</span></p>
 				
@@ -1559,8 +1540,8 @@ return ((value - min) % maxMinDelta + maxMinDelta) % maxMinDelta + min;
 </pre>
 			</div>
 			
-			<a name="1_12_2"></a>
-			<h3 class="heading3" title="1. Uize -&gt; 1.12. Uize.reverseLookup -&gt; 1.12.2. Support multiple values for source being the same"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_12" title="1. Uize -&gt; 1.12. Uize.reverseLookup">12</a>.<a href="#1_12_2" title="1. Uize -&gt; 1.12. Uize.reverseLookup -&gt; 1.12.2. Support multiple values for source being the same">2</a>. </span>Support multiple values for source being the same</h3>
+			<a name="1_11_2"></a>
+			<h3 class="heading3" title="1. Uize -&gt; 1.11. Uize.reverseLookup -&gt; 1.11.2. Support multiple values for source being the same"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_11" title="1. Uize -&gt; 1.11. Uize.reverseLookup">11</a>.<a href="#1_11_2" title="1. Uize -&gt; 1.11. Uize.reverseLookup -&gt; 1.11.2. Support multiple values for source being the same">2</a>. </span>Support multiple values for source being the same</h3>
 			<div class="contents3">
 				<p><span class="allCaps">EXAMPLE</span></p>
 				
@@ -1583,14 +1564,14 @@ return ((value - min) % maxMinDelta + maxMinDelta) % maxMinDelta + min;
 </pre>
 			</div>
 			
-			<a name="1_12_3"></a>
-			<h3 class="heading3" title="1. Uize -&gt; 1.12. Uize.reverseLookup -&gt; 1.12.3. Support Merging in to Target"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_12" title="1. Uize -&gt; 1.12. Uize.reverseLookup">12</a>.<a href="#1_12_3" title="1. Uize -&gt; 1.12. Uize.reverseLookup -&gt; 1.12.3. Support Merging in to Target">3</a>. </span>Support Merging in to Target</h3>
+			<a name="1_11_3"></a>
+			<h3 class="heading3" title="1. Uize -&gt; 1.11. Uize.reverseLookup -&gt; 1.11.3. Support Merging in to Target"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_11" title="1. Uize -&gt; 1.11. Uize.reverseLookup">11</a>.<a href="#1_11_3" title="1. Uize -&gt; 1.11. Uize.reverseLookup -&gt; 1.11.3. Support Merging in to Target">3</a>. </span>Support Merging in to Target</h3>
 			<div class="contents3">
-				<a name="1_12_3_1"></a>
-				<h4 class="heading4" title="1. Uize -&gt; 1.12. Uize.reverseLookup -&gt; 1.12.3. Support Merging in to Target -&gt; 1.12.3.1. - when entries are added to an existing reverse lookup object, use the following rules..."><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_12" title="1. Uize -&gt; 1.12. Uize.reverseLookup">12</a>.<a href="#1_12_3" title="1. Uize -&gt; 1.12. Uize.reverseLookup -&gt; 1.12.3. Support Merging in to Target">3</a>.<a href="#1_12_3_1" title="1. Uize -&gt; 1.12. Uize.reverseLookup -&gt; 1.12.3. Support Merging in to Target -&gt; 1.12.3.1. - when entries are added to an existing reverse lookup object, use the following rules...">1</a>. </span>- when entries are added to an existing reverse lookup object, use the following rules...</h4>
+				<a name="1_11_3_1"></a>
+				<h4 class="heading4" title="1. Uize -&gt; 1.11. Uize.reverseLookup -&gt; 1.11.3. Support Merging in to Target -&gt; 1.11.3.1. - when entries are added to an existing reverse lookup object, use the following rules..."><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_11" title="1. Uize -&gt; 1.11. Uize.reverseLookup">11</a>.<a href="#1_11_3" title="1. Uize -&gt; 1.11. Uize.reverseLookup -&gt; 1.11.3. Support Merging in to Target">3</a>.<a href="#1_11_3_1" title="1. Uize -&gt; 1.11. Uize.reverseLookup -&gt; 1.11.3. Support Merging in to Target -&gt; 1.11.3.1. - when entries are added to an existing reverse lookup object, use the following rules...">1</a>. </span>- when entries are added to an existing reverse lookup object, use the following rules...</h4>
 				<div class="contents4">
-					<a name="1_12_3_1_1"></a>
-					<h5 class="heading5" title="1. Uize -&gt; 1.12. Uize.reverseLookup -&gt; 1.12.3. Support Merging in to Target -&gt; 1.12.3.1. - when entries are added to an existing reverse lookup object, use the following rules... -&gt; 1.12.3.1.1. - if the desired key to add already exists, then..."><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_12" title="1. Uize -&gt; 1.12. Uize.reverseLookup">12</a>.<a href="#1_12_3" title="1. Uize -&gt; 1.12. Uize.reverseLookup -&gt; 1.12.3. Support Merging in to Target">3</a>.<a href="#1_12_3_1" title="1. Uize -&gt; 1.12. Uize.reverseLookup -&gt; 1.12.3. Support Merging in to Target -&gt; 1.12.3.1. - when entries are added to an existing reverse lookup object, use the following rules...">1</a>.<a href="#1_12_3_1_1" title="1. Uize -&gt; 1.12. Uize.reverseLookup -&gt; 1.12.3. Support Merging in to Target -&gt; 1.12.3.1. - when entries are added to an existing reverse lookup object, use the following rules... -&gt; 1.12.3.1.1. - if the desired key to add already exists, then...">1</a>. </span>- if the desired key to add already exists, then...</h5>
+					<a name="1_11_3_1_1"></a>
+					<h5 class="heading5" title="1. Uize -&gt; 1.11. Uize.reverseLookup -&gt; 1.11.3. Support Merging in to Target -&gt; 1.11.3.1. - when entries are added to an existing reverse lookup object, use the following rules... -&gt; 1.11.3.1.1. - if the desired key to add already exists, then..."><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_11" title="1. Uize -&gt; 1.11. Uize.reverseLookup">11</a>.<a href="#1_11_3" title="1. Uize -&gt; 1.11. Uize.reverseLookup -&gt; 1.11.3. Support Merging in to Target">3</a>.<a href="#1_11_3_1" title="1. Uize -&gt; 1.11. Uize.reverseLookup -&gt; 1.11.3. Support Merging in to Target -&gt; 1.11.3.1. - when entries are added to an existing reverse lookup object, use the following rules...">1</a>.<a href="#1_11_3_1_1" title="1. Uize -&gt; 1.11. Uize.reverseLookup -&gt; 1.11.3. Support Merging in to Target -&gt; 1.11.3.1. - when entries are added to an existing reverse lookup object, use the following rules... -&gt; 1.11.3.1.1. - if the desired key to add already exists, then...">1</a>. </span>- if the desired key to add already exists, then...</h5>
 					<div class="contents5">
 						<table class="list">
 						<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>if the key's value is not an array, make it an array with the current value as the first element and the desired value to add as the second</td></tr>
@@ -1601,11 +1582,11 @@ return ((value - min) % maxMinDelta + maxMinDelta) % maxMinDelta + min;
 			</div>
 		</div>
 		
-		<a name="1_13"></a>
-		<h2 class="heading2" title="1. Uize -&gt; 1.13. Uize.indexIn"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_13" title="1. Uize -&gt; 1.13. Uize.indexIn">13</a>. </span>Uize.indexIn</h2>
+		<a name="1_12"></a>
+		<h2 class="heading2" title="1. Uize -&gt; 1.12. Uize.indexIn"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_12" title="1. Uize -&gt; 1.12. Uize.indexIn">12</a>. </span>Uize.indexIn</h2>
 		<div class="contents2">
-			<a name="1_13_1"></a>
-			<h3 class="heading3" title="1. Uize -&gt; 1.13. Uize.indexIn -&gt; 1.13.1. Support Simple Type Source"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_13" title="1. Uize -&gt; 1.13. Uize.indexIn">13</a>.<a href="#1_13_1" title="1. Uize -&gt; 1.13. Uize.indexIn -&gt; 1.13.1. Support Simple Type Source">1</a>. </span>Support Simple Type Source</h3>
+			<a name="1_12_1"></a>
+			<h3 class="heading3" title="1. Uize -&gt; 1.12. Uize.indexIn -&gt; 1.12.1. Support Simple Type Source"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_12" title="1. Uize -&gt; 1.12. Uize.indexIn">12</a>.<a href="#1_12_1" title="1. Uize -&gt; 1.12. Uize.indexIn -&gt; 1.12.1. Support Simple Type Source">1</a>. </span>Support Simple Type Source</h3>
 			<div class="contents3">
 				<p>For simple type source, could do string index.</p>
 				
@@ -1613,11 +1594,11 @@ return ((value - min) % maxMinDelta + maxMinDelta) % maxMinDelta + min;
 			</div>
 		</div>
 		
-		<a name="1_14"></a>
-		<h2 class="heading2" title="1. Uize -&gt; 1.14. Uize.module"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_14" title="1. Uize -&gt; 1.14. Uize.module">14</a>. </span>Uize.module</h2>
+		<a name="1_13"></a>
+		<h2 class="heading2" title="1. Uize -&gt; 1.13. Uize.module"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_13" title="1. Uize -&gt; 1.13. Uize.module">13</a>. </span>Uize.module</h2>
 		<div class="contents2">
-			<a name="1_14_1"></a>
-			<h3 class="heading3" title="1. Uize -&gt; 1.14. Uize.module -&gt; 1.14.1. Support Code Besides in Module Loader"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_14" title="1. Uize -&gt; 1.14. Uize.module">14</a>.<a href="#1_14_1" title="1. Uize -&gt; 1.14. Uize.module -&gt; 1.14.1. Support Code Besides in Module Loader">1</a>. </span>Support Code Besides in Module Loader</h3>
+			<a name="1_13_1"></a>
+			<h3 class="heading3" title="1. Uize -&gt; 1.13. Uize.module -&gt; 1.13.1. Support Code Besides in Module Loader"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_13" title="1. Uize -&gt; 1.13. Uize.module">13</a>.<a href="#1_13_1" title="1. Uize -&gt; 1.13. Uize.module -&gt; 1.13.1. Support Code Besides in Module Loader">1</a>. </span>Support Code Besides in Module Loader</h3>
 			<div class="contents3">
 				<p>How can code require a module that is not in the modules directory (like a code beside)?</p>
 				
@@ -1625,34 +1606,34 @@ return ((value - min) % maxMinDelta + maxMinDelta) % maxMinDelta + min;
 			</div>
 		</div>
 		
-		<a name="1_15"></a>
-		<h2 class="heading2" title="1. Uize -&gt; 1.15. Multiple Inheritance"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_15" title="1. Uize -&gt; 1.15. Multiple Inheritance">15</a>. </span>Multiple Inheritance</h2>
+		<a name="1_14"></a>
+		<h2 class="heading2" title="1. Uize -&gt; 1.14. Multiple Inheritance"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_14" title="1. Uize -&gt; 1.14. Multiple Inheritance">14</a>. </span>Multiple Inheritance</h2>
 		<div class="contents2">
 			<p>Consider a facility to support multiple inheritance (may involve creating a merge service for merging data from one object into another, since it should be possible to merge additional features of a different class into an already created class, and perhaps that merge feature would also be used in the _subclass function's implementation).</p>
 		</div>
 		
-		<a name="1_16"></a>
-		<h2 class="heading2" title="1. Uize -&gt; 1.16. Library Modules"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_16" title="1. Uize -&gt; 1.16. Library Modules">16</a>. </span>Library Modules</h2>
+		<a name="1_15"></a>
+		<h2 class="heading2" title="1. Uize -&gt; 1.15. Library Modules"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_15" title="1. Uize -&gt; 1.15. Library Modules">15</a>. </span>Library Modules</h2>
 		<div class="contents2">
-			<a name="1_16_1"></a>
-			<h3 class="heading3" title="1. Uize -&gt; 1.16. Library Modules -&gt; 1.16.1. Library of Dispersed Modules"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_16" title="1. Uize -&gt; 1.16. Library Modules">16</a>.<a href="#1_16_1" title="1. Uize -&gt; 1.16. Library Modules -&gt; 1.16.1. Library of Dispersed Modules">1</a>. </span>Library of Dispersed Modules</h3>
+			<a name="1_15_1"></a>
+			<h3 class="heading3" title="1. Uize -&gt; 1.15. Library Modules -&gt; 1.15.1. Library of Dispersed Modules"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_15" title="1. Uize -&gt; 1.15. Library Modules">15</a>.<a href="#1_15_1" title="1. Uize -&gt; 1.15. Library Modules -&gt; 1.15.1. Library of Dispersed Modules">1</a>. </span>Library of Dispersed Modules</h3>
 			<div class="contents3">
 				<p>Can library modules that are outside the modules directory require modules that are outside the modules directory?</p>
 			</div>
 		</div>
 		
-		<a name="1_17"></a>
-		<h2 class="heading2" title="1. Uize -&gt; 1.17. Uize.clone"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_17" title="1. Uize -&gt; 1.17. Uize.clone">17</a>. </span>Uize.clone</h2>
+		<a name="1_16"></a>
+		<h2 class="heading2" title="1. Uize -&gt; 1.16. Uize.clone"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_16" title="1. Uize -&gt; 1.16. Uize.clone">16</a>. </span>Uize.clone</h2>
 		<div class="contents2">
-			<a name="1_17_1"></a>
-			<h3 class="heading3" title="1. Uize -&gt; 1.17. Uize.clone -&gt; 1.17.1. Uize.clone and Circular References"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_17" title="1. Uize -&gt; 1.17. Uize.clone">17</a>.<a href="#1_17_1" title="1. Uize -&gt; 1.17. Uize.clone -&gt; 1.17.1. Uize.clone and Circular References">1</a>. </span>Uize.clone and Circular References</h3>
+			<a name="1_16_1"></a>
+			<h3 class="heading3" title="1. Uize -&gt; 1.16. Uize.clone -&gt; 1.16.1. Uize.clone and Circular References"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_16" title="1. Uize -&gt; 1.16. Uize.clone">16</a>.<a href="#1_16_1" title="1. Uize -&gt; 1.16. Uize.clone -&gt; 1.16.1. Uize.clone and Circular References">1</a>. </span>Uize.clone and Circular References</h3>
 			<div class="contents3">
-				<p>Handle circular references in <code><a href="#1_17">Uize.clone</a></code> (how to generate properties that are references to other parts of structure in same relationship as the equivalent property in the cloning source???)</p>
+				<p>Handle circular references in <code><a href="#1_16">Uize.clone</a></code> (how to generate properties that are references to other parts of structure in same relationship as the equivalent property in the cloning source???)</p>
 			</div>
 		</div>
 		
-		<a name="1_18"></a>
-		<h2 class="heading2" title="1. Uize -&gt; 1.18. Uize.substituteInto"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_18" title="1. Uize -&gt; 1.18. Uize.substituteInto">18</a>. </span>Uize.substituteInto</h2>
+		<a name="1_17"></a>
+		<h2 class="heading2" title="1. Uize -&gt; 1.17. Uize.substituteInto"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_17" title="1. Uize -&gt; 1.17. Uize.substituteInto">17</a>. </span>Uize.substituteInto</h2>
 		<div class="contents2">
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>optimize for successive substitution on the same source using the same form of map (but different values, of course)</td></tr>
@@ -2093,20 +2074,20 @@ myWidget.whenever (
 			<h3 class="heading3" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches"><span class="headingNumber"><a href="#3" title="3. Uize.Class">3</a>.<a href="#3_3" title="3. Uize.Class -&gt; 3.3. Derived Properties">3</a>.<a href="#3_3_2" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches">2</a>. </span>Implementation Approaches</h3>
 			<div class="contents3">
 				<a name="3_3_2_1"></a>
-				<h4 class="heading4" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.1. Exloding Out the Properties Being Set"><span class="headingNumber"><a href="#3" title="3. Uize.Class">3</a>.<a href="#3_3" title="3. Uize.Class -&gt; 3.3. Derived Properties">3</a>.<a href="#3_3_2" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches">2</a>.<a href="#3_3_2_1" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.1. Exloding Out the Properties Being Set">1</a>. </span>Exloding Out the Properties Being Set</h4>
+				<h4 class="heading4" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.1. Exploding Out the Properties Being Set"><span class="headingNumber"><a href="#3" title="3. Uize.Class">3</a>.<a href="#3_3" title="3. Uize.Class -&gt; 3.3. Derived Properties">3</a>.<a href="#3_3_2" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches">2</a>.<a href="#3_3_2_1" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.1. Exploding Out the Properties Being Set">1</a>. </span>Exploding Out the Properties Being Set</h4>
 				<div class="contents4">
 					<p>With this approach, setting values for derived set-get properties is worked into the process of setting values for properties that affect derived properties, by exploding out the properties being set to included all affected derived properties.</p>
 					
 					<p>After setting values for the set-get properties that are being set explicitly, and before executing onChange handlers for any set-get properties whose values have changed, the registered set-get properties are scanned for derived set-get properties that may be affected by the properties being set explicitly. If any derived set-get properties <b>are</b> affected by any of the set-get properties whose values have changed, then values are computed for those derived properties and their values are set. This process is repeated to address set- get properties that are derived from derived properties whose values may have changed. The process is repeated until there are no longer any derived properties that are affected and that have not had new values computed.</p>
 					
 					<a name="3_3_2_1_1"></a>
-					<h5 class="heading5" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.1. Exloding Out the Properties Being Set -&gt; 3.3.2.1.1. Advantages"><span class="headingNumber"><a href="#3" title="3. Uize.Class">3</a>.<a href="#3_3" title="3. Uize.Class -&gt; 3.3. Derived Properties">3</a>.<a href="#3_3_2" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches">2</a>.<a href="#3_3_2_1" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.1. Exloding Out the Properties Being Set">1</a>.<a href="#3_3_2_1_1" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.1. Exloding Out the Properties Being Set -&gt; 3.3.2.1.1. Advantages">1</a>. </span>Advantages</h5>
+					<h5 class="heading5" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.1. Exploding Out the Properties Being Set -&gt; 3.3.2.1.1. Advantages"><span class="headingNumber"><a href="#3" title="3. Uize.Class">3</a>.<a href="#3_3" title="3. Uize.Class -&gt; 3.3. Derived Properties">3</a>.<a href="#3_3_2" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches">2</a>.<a href="#3_3_2_1" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.1. Exploding Out the Properties Being Set">1</a>.<a href="#3_3_2_1_1" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.1. Exploding Out the Properties Being Set -&gt; 3.3.2.1.1. Advantages">1</a>. </span>Advantages</h5>
 					<div class="contents5">
 						<p>document...</p>
 					</div>
 					
 					<a name="3_3_2_1_2"></a>
-					<h5 class="heading5" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.1. Exloding Out the Properties Being Set -&gt; 3.3.2.1.2. Disadvantages"><span class="headingNumber"><a href="#3" title="3. Uize.Class">3</a>.<a href="#3_3" title="3. Uize.Class -&gt; 3.3. Derived Properties">3</a>.<a href="#3_3_2" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches">2</a>.<a href="#3_3_2_1" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.1. Exloding Out the Properties Being Set">1</a>.<a href="#3_3_2_1_2" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.1. Exloding Out the Properties Being Set -&gt; 3.3.2.1.2. Disadvantages">2</a>. </span>Disadvantages</h5>
+					<h5 class="heading5" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.1. Exploding Out the Properties Being Set -&gt; 3.3.2.1.2. Disadvantages"><span class="headingNumber"><a href="#3" title="3. Uize.Class">3</a>.<a href="#3_3" title="3. Uize.Class -&gt; 3.3. Derived Properties">3</a>.<a href="#3_3_2" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches">2</a>.<a href="#3_3_2_1" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.1. Exploding Out the Properties Being Set">1</a>.<a href="#3_3_2_1_2" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.1. Exploding Out the Properties Being Set -&gt; 3.3.2.1.2. Disadvantages">2</a>. </span>Disadvantages</h5>
 					<div class="contents5">
 						<p>document...</p>
 					</div>

@@ -215,7 +215,7 @@ Uize.module ({
 
         function _dragMove (_eventX,_eventY) {
           _this._eventPreviousTime = _this._eventTime;
-          _this._eventTime = +new Date;
+          _this._eventTime = Uize.now ();
           _eventPreviousPos [0] = _eventPos [0];
           _eventPreviousPos [1] = _eventPos [1];
           var
@@ -281,7 +281,7 @@ Uize.module ({
           var _dragEventPos = _Uize_Node_getEventAbsPos (_event);
           _eventStartPos [0] = _eventPos [0] = _eventPreviousPos [0] = _dragEventPos.left;
           _eventStartPos [1] = _eventPos [1] = _eventPreviousPos [1] = _dragEventPos.top;
-          _this._eventTime = _this._eventPreviousTime = +new Date;
+          _this._eventTime = _this._eventPreviousTime = Uize.now ();
 
           var
             _dragIsDone = _false,

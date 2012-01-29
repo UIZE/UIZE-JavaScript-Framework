@@ -1,19 +1,6 @@
 This document lists to do tasks related to specific JavaScript modules of the UIZE JavaScript Framework.
 
 Uize
-	Uize.now
-		Returns the current time in milliseconds since 1970 (POSIX time).
-
-		SYNTAX
-		.....................
-		nowINT = Uize.now ();
-		.....................
-
-		IMPLEMENTATION
-		............................................................................................
-		_package.now = Data.now ? function () {return Date.now ()} : function () {return +new Date};
-		............................................................................................
-
 	Uize.canExtend
 		Returns a boolean, indicating whether or not the specified value can be extended with custom properties.
 
@@ -600,7 +587,7 @@ Uize.Class
 				If dynamically generated summary information is needed to improve the performance of derived properties, when will this summary information be generated for a class? And how is the information regenerated if it is invalidated by the subsequent registration of more derived properties.
 
 		Implementation Approaches
-			Exloding Out the Properties Being Set
+			Exploding Out the Properties Being Set
 				With this approach, setting values for derived set-get properties is worked into the process of setting values for properties that affect derived properties, by exploding out the properties being set to included all affected derived properties.
 
 				After setting values for the set-get properties that are being set explicitly, and before executing onChange handlers for any set-get properties whose values have changed, the registered set-get properties are scanned for derived set-get properties that may be affected by the properties being set explicitly. If any derived set-get properties *are* affected by any of the set-get properties whose values have changed, then values are computed for those derived properties and their values are set. This process is repeated to address set- get properties that are derived from derived properties whose values may have changed. The process is repeated until there are no longer any derived properties that are affected and that have not had new values computed.

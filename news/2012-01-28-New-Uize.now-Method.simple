@@ -1,0 +1,29 @@
+The new =Uize.now= static method, implemented in the =Uize= base module, returns the current time in milliseconds since 1970 (POSIX time).
+
+SYNTAX
+.......................
+nowMsINT = Uize.now ();
+.......................
+
+The =Uize.now= method is optimized to use the =Date.now= static method that is supported by JavaScript's built-in =Date= object in newer versions of the language. If this method is not available, then the =Uize.now= method falls back to using the less performant =+new Date= approach, which involves construction of a =Date= object instance each time.
+
+The =Uize.now= method can be useful when capturing start and end times in order to measure the duration of operations. Consider the following example...
+
+EXAMPLE
+..............................................
+var start = Uize.now ();
+
+// ... ... ... ... ... ... ... ... ... ... ...
+// do some stuff that may take a bunch of time
+// ... ... ... ... ... ... ... ... ... ... ...
+
+var duration = Uize.now () - start;
+..............................................
+
+Using the above template, the value of the =duration= variable will indicate how long it took to perform the operations in the block between assigning the value for the =start= variable and the value for the =duration= variable.
+
+....................................................................................
+<< metadata >>
+
+title: 2012-01-28 - New Uize.now Method
+....................................................................................
