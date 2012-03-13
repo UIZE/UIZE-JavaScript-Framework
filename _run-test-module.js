@@ -5,6 +5,6 @@
 
 Uize.module ({
 	required:'Uize.Wsh.BuildUtils',
-	builder:function () {Uize.Wsh.BuildUtils.runUnitTests ('Uize.Test.Uize')}
+	builder:function () {Uize.Wsh.BuildUtils.runUnitTests ('Uize.Test.Uize.Data.Combinations')}
 });
 

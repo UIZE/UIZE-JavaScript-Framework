@@ -25,82 +25,88 @@
 		<ul>
 			<li><a href="#1">1. Uize</a>
 				<ul>
-					<li><a href="#1_1" title="Returns a boolean, indicating whether or not the specified value can be extended with custom properties.">1.1. Uize.canExtend</a></li>
-					<li><a href="#1_2" title="Wraps a function in order to protect it from possible JavaScript errors during its execution.">1.2. Uize.safe</a></li>
-					<li><a href="#1_3" title="IMPLEMENTATION">1.3. Uize.cycleCalls</a></li>
-					<li><a href="#1_4" title="Add support for _source being a string?">1.4. Uize.map</a></li>
-					<li><a href="#1_5" title="An object built into the Uize base module that allows you to control walking through an object tree in a safe and performant way.">1.5. Uize.TreeWalker</a></li>
-					<li><a href="#1_6">1.6. Quick Win Additions (in order of priority / usefulness)</a>
+					<li><a href="#1_1" title="Logs a message, using the configured logging options.">1.1. Uize.log</a></li>
+					<li><a href="#1_2" title="Tries to execute the given function, executing the optional catch expression and warning, ignoring, or throwing any error that occurs.">1.2. Uize.try</a></li>
+					<li><a href="#1_3" title="Outputs to the log, depending on the configuration for warnings.">1.3. Uize.warn</a></li>
+					<li><a href="#1_4" title="Warns if the specified function takes too long to complete (the function can be synchronous or asynchronous).">1.4. Uize.warnIfSlow</a></li>
+					<li><a href="#1_5" title="Quantizes the specified number to the specified quantum size.">1.5. Uize.quantize</a></li>
+					<li><a href="#1_6" title="Generates a random value from the specified range or list of possible values.">1.6. Uize.random</a></li>
+					<li><a href="#1_7" title="Returns a boolean, indicating whether or not the specified value can be extended with custom properties.">1.7. Uize.canExtend</a></li>
+					<li><a href="#1_8" title="Wraps a function in order to protect it from possible JavaScript errors during its execution.">1.8. Uize.safe</a></li>
+					<li><a href="#1_9" title="IMPLEMENTATION">1.9. Uize.cycleCalls</a></li>
+					<li><a href="#1_10" title="Add support for _source being a string?">1.10. Uize.map</a></li>
+					<li><a href="#1_11" title="An object built into the Uize base module that allows you to control walking through an object tree in a safe and performant way.">1.11. Uize.TreeWalker</a></li>
+					<li><a href="#1_12">1.12. Quick Win Additions (in order of priority / usefulness)</a>
 						<ul>
-							<li><a href="#1_6_1">1.6.1. STILL TO DO</a>
+							<li><a href="#1_12_1">1.12.1. STILL TO DO</a>
 								<ul>
-									<li><a href="#1_6_1_1" title="- essentially derived from indexIn, but adapted to also operate on strings and to use built-in indexOf when possible and supported by JavaScript built-in objects (ie. newer versions of JavaScript)">1.6.1.1. Uize.indexOf, Uize.lastIndexOf</a></li>
-									<li><a href="#1_6_1_2" title="- adapt to add support for source being a string">1.6.1.2. Uize.indexIn</a></li>
-									<li><a href="#1_6_1_3" title="- alias to anonymous module with required (to make the simple case of requiring a module deeper in code more convenient &amp; intuitive)">1.6.1.3. Uize.require</a></li>
+									<li><a href="#1_12_1_1" title="- essentially derived from indexIn, but adapted to also operate on strings and to use built-in indexOf when possible and supported by JavaScript built-in objects (ie. newer versions of JavaScript)">1.12.1.1. Uize.indexOf, Uize.lastIndexOf</a></li>
+									<li><a href="#1_12_1_2" title="- adapt to add support for source being a string">1.12.1.2. Uize.indexIn</a></li>
+									<li><a href="#1_12_1_3" title="- alias to anonymous module with required (to make the simple case of requiring a module deeper in code more convenient &amp; intuitive)">1.12.1.3. Uize.require</a></li>
 								</ul>
 							</li>
-							<li><a href="#1_6_2">1.6.2. LATER</a>
+							<li><a href="#1_12_2">1.12.2. LATER</a>
 								<ul>
-									<li><a href="#1_6_2_1" title="- alias of copyInto, for those who are more comfortable with the extend semantic">1.6.2.1. Uize.extend</a></li>
-									<li><a href="#1_6_2_2" title="- ensures that the value is an array">1.6.2.2. Uize.ensureArray</a></li>
-									<li><a href="#1_6_2_3" title="- checks to see if an element is present, and adds it if not">1.6.2.3. Uize.ensureIn</a></li>
-									<li><a href="#1_6_2_4" title="- returns true if the value is either a string primitive or an instance of a String object or &quot;subclass&quot;">1.6.2.4. Uize.isStringy</a></li>
-									<li><a href="#1_6_2_5" title="- returns true if the value is truthy">1.6.2.5. Uize.isTruthy</a></li>
-									<li><a href="#1_6_2_6" title="- returns true is the value is falsy">1.6.2.6. Uize.isFalsy</a></li>
+									<li><a href="#1_12_2_1" title="- alias of copyInto, for those who are more comfortable with the extend semantic">1.12.2.1. Uize.extend</a></li>
+									<li><a href="#1_12_2_2" title="- ensures that the value is an array">1.12.2.2. Uize.ensureArray</a></li>
+									<li><a href="#1_12_2_3" title="- checks to see if an element is present, and adds it if not">1.12.2.3. Uize.ensureIn</a></li>
+									<li><a href="#1_12_2_4" title="- returns true if the value is either a string primitive or an instance of a String object or &quot;subclass&quot;">1.12.2.4. Uize.isStringy</a></li>
+									<li><a href="#1_12_2_5" title="- returns true if the value is truthy">1.12.2.5. Uize.isTruthy</a></li>
+									<li><a href="#1_12_2_6" title="- returns true is the value is falsy">1.12.2.6. Uize.isFalsy</a></li>
 								</ul>
 							</li>
 						</ul>
 					</li>
-					<li><a href="#1_7" title="Lets you conveniently create a function / method caller, where you can specify context, function, and arguments.">1.7. Uize.willCall</a>
+					<li><a href="#1_13" title="Lets you conveniently create a function / method caller, where you can specify context, function, and arguments.">1.13. Uize.willCall</a>
 						<ul>
-							<li><a href="#1_7_1" title="- callback">1.7.1. - names considered</a></li>
+							<li><a href="#1_13_1" title="- callback">1.13.1. - names considered</a></li>
 						</ul>
 					</li>
-					<li><a href="#1_8" title="Uize.watchFunction = function (_function,_before,_after) {&#10;	return function () {&#10;		_before &amp;&amp; _before (this,arguments);&#10;		var _result = _watched.apply (this,arguments);&#10;		_after &amp;&amp; _after (this,arguments,_result);&#10;		return _result;&#10;	};&#10;};&#10;&#10;Uize.watchMethod = function (_context,_methodName,_before,_after) {&#10;	if (!Uize.isInstance (_context))&#10;		_context = _context.prototype&#10;	;&#10;	var&#10;		_watched = _c...">1.8. Uize.watchMethod</a></li>
-					<li><a href="#1_9" title="Uize.memoize = function (_function) {&#10;	var _resultsCache = {};&#10;	return function () {&#10;		var _cacheKey = Uize.Json.to (arguments);&#10;		return (&#10;			_cacheKey in _resultsCache&#10;				? _resultsCache [_cacheKey]&#10;				: (_resultsCache [_cacheKey] = _function.apply (this,arguments))&#10;		);&#10;	};&#10;};&#10;&#10;Uize.memoizeMethod = function (_context,_methodName) {&#10;	// ...&#10;};&#10;">1.9. Uize.memoize</a></li>
-					<li><a href="#1_10">1.10. Uize.constrain</a>
+					<li><a href="#1_14" title="Uize.watchFunction = function (_function,_before,_after) {&#10;	return function () {&#10;		_before &amp;&amp; _before (this,arguments);&#10;		var _result = _watched.apply (this,arguments);&#10;		_after &amp;&amp; _after (this,arguments,_result);&#10;		return _result;&#10;	};&#10;};&#10;&#10;Uize.watchMethod = function (_context,_methodName,_before,_after) {&#10;	if (!Uize.isInstance (_context))&#10;		_context = _context.prototype&#10;	;&#10;	var&#10;		_watched = _c...">1.14. Uize.watchMethod</a></li>
+					<li><a href="#1_15" title="Uize.memoize = function (_function) {&#10;	var _resultsCache = {};&#10;	return function () {&#10;		var _cacheKey = Uize.Json.to (arguments);&#10;		return (&#10;			_cacheKey in _resultsCache&#10;				? _resultsCache [_cacheKey]&#10;				: (_resultsCache [_cacheKey] = _function.apply (this,arguments))&#10;		);&#10;	};&#10;};&#10;&#10;Uize.memoizeMethod = function (_context,_methodName) {&#10;	// ...&#10;};&#10;">1.15. Uize.memoize</a></li>
+					<li><a href="#1_16">1.16. Uize.constrain</a>
 						<ul>
-							<li><a href="#1_10_1" title="Support a wrap flag, so that constrained values can be made to wrap around within the constraining range, rather than always only hitting up against the edges.">1.10.1. Support a wrap flag</a></li>
-							<li><a href="#1_10_2" title="Support either or both of the min and max boundaries being null or undefined.">1.10.2. Unbounded</a></li>
+							<li><a href="#1_16_1" title="Support a wrap flag, so that constrained values can be made to wrap around within the constraining range, rather than always only hitting up against the edges.">1.16.1. Support a wrap flag</a></li>
+							<li><a href="#1_16_2" title="Support either or both of the min and max boundaries being null or undefined.">1.16.2. Unbounded</a></li>
 						</ul>
 					</li>
-					<li><a href="#1_11">1.11. Uize.reverseLookup</a>
+					<li><a href="#1_17">1.17. Uize.reverseLookup</a>
 						<ul>
-							<li><a href="#1_11_1" title="EXAMPLE">1.11.1. Support values for source being arrays.</a></li>
-							<li><a href="#1_11_2" title="EXAMPLE">1.11.2. Support multiple values for source being the same</a></li>
-							<li><a href="#1_11_3">1.11.3. Support Merging in to Target</a>
+							<li><a href="#1_17_1" title="EXAMPLE">1.17.1. Support values for source being arrays.</a></li>
+							<li><a href="#1_17_2" title="EXAMPLE">1.17.2. Support multiple values for source being the same</a></li>
+							<li><a href="#1_17_3">1.17.3. Support Merging in to Target</a>
 								<ul>
-									<li><a href="#1_11_3_1">1.11.3.1. - when entries are added to an existing reverse lookup object, use the following rules...</a>
+									<li><a href="#1_17_3_1">1.17.3.1. - when entries are added to an existing reverse lookup object, use the following rules...</a>
 										<ul>
-											<li><a href="#1_11_3_1_1" title="- if the key&apos;s value is not an array, make it an array with the current value as the first element and the desired value to add as the second">1.11.3.1.1. - if the desired key to add already exists, then...</a></li>
+											<li><a href="#1_17_3_1_1" title="- if the key&apos;s value is not an array, make it an array with the current value as the first element and the desired value to add as the second">1.17.3.1.1. - if the desired key to add already exists, then...</a></li>
 										</ul>
 									</li>
 								</ul>
 							</li>
 						</ul>
 					</li>
-					<li><a href="#1_12">1.12. Uize.indexIn</a>
+					<li><a href="#1_18">1.18. Uize.indexIn</a>
 						<ul>
-							<li><a href="#1_12_1" title="For simple type source, could do string index.">1.12.1. Support Simple Type Source</a></li>
+							<li><a href="#1_18_1" title="For simple type source, could do string index.">1.18.1. Support Simple Type Source</a></li>
 						</ul>
 					</li>
-					<li><a href="#1_13">1.13. Uize.module</a>
+					<li><a href="#1_19">1.19. Uize.module</a>
 						<ul>
-							<li><a href="#1_13_1" title="How can code require a module that is not in the modules directory (like a code beside)?">1.13.1. Support Code Besides in Module Loader</a></li>
+							<li><a href="#1_19_1" title="How can code require a module that is not in the modules directory (like a code beside)?">1.19.1. Support Code Besides in Module Loader</a></li>
 						</ul>
 					</li>
-					<li><a href="#1_14" title="Consider a facility to support multiple inheritance (may involve creating a merge service for merging data from one object into another, since it should be possible to merge additional features of a different class into an already created class, and perhaps that merge feature would also be used in the _subclass function&apos;s implementation).">1.14. Multiple Inheritance</a></li>
-					<li><a href="#1_15">1.15. Library Modules</a>
+					<li><a href="#1_20" title="Consider a facility to support multiple inheritance (may involve creating a merge service for merging data from one object into another, since it should be possible to merge additional features of a different class into an already created class, and perhaps that merge feature would also be used in the _subclass function&apos;s implementation).">1.20. Multiple Inheritance</a></li>
+					<li><a href="#1_21">1.21. Library Modules</a>
 						<ul>
-							<li><a href="#1_15_1" title="Can library modules that are outside the modules directory require modules that are outside the modules directory?">1.15.1. Library of Dispersed Modules</a></li>
+							<li><a href="#1_21_1" title="Can library modules that are outside the modules directory require modules that are outside the modules directory?">1.21.1. Library of Dispersed Modules</a></li>
 						</ul>
 					</li>
-					<li><a href="#1_16">1.16. Uize.clone</a>
+					<li><a href="#1_22">1.22. Uize.clone</a>
 						<ul>
-							<li><a href="#1_16_1" title="Handle circular references in Uize.clone (how to generate properties that are references to other parts of structure in same relationship as the equivalent property in the cloning source???)">1.16.1. Uize.clone and Circular References</a></li>
+							<li><a href="#1_22_1" title="Handle circular references in Uize.clone (how to generate properties that are references to other parts of structure in same relationship as the equivalent property in the cloning source???)">1.22.1. Uize.clone and Circular References</a></li>
 						</ul>
 					</li>
-					<li><a href="#1_17" title="- optimize for successive substitution on the same source using the same form of map (but different values, of course)">1.17. Uize.substituteInto</a></li>
+					<li><a href="#1_23" title="- optimize for successive substitution on the same source using the same form of map (but different values, of course)">1.23. Uize.substituteInto</a></li>
 				</ul>
 			</li>
 			<li><a href="#2">2. Uize.Array</a>
@@ -167,7 +173,7 @@
 					<li><a href="#3_1">3.1. Conditions</a>
 						<ul>
 							<li><a href="#3_1_1" title="EXAMPLES">3.1.1. The whenever Instance Method</a></li>
-							<li><a href="#3_1_2" title="EXAMPLE">3.1.2. The once Instance Method</a></li>
+							<li><a href="#3_1_2" title="EXAMPLES">3.1.2. The once Instance Method</a></li>
 						</ul>
 					</li>
 					<li><a href="#3_2" title="SYNTAX">3.2. Properties Expressions</a></li>
@@ -538,34 +544,52 @@
 			<li><a href="#32" title="- document Uize.Json.encodingOptionsPresets static property">32. Uize.Json</a></li>
 			<li><a href="#33">33. Uize.Node</a>
 				<ul>
-					<li><a href="#33_1" title="- Uize.Node.getById -&gt; Uize.Node.byId or Uize.Node.id or just Uize.Node">33.1. Proposed Shortenings</a></li>
-					<li><a href="#33_2">33.2. Uize.Node.setValue & Uize.Node.getValue</a>
+					<li><a href="#33_1" title="The following proposed interface aims to address the desire amongst Web developers for easier and more concise ways to access and manipulate DOM elements.">33.1. Proposed Simplified Interface</a>
 						<ul>
-							<li><a href="#33_2_1" title="- what about disabled select options, radios?">33.2.1. - respect disabled property?</a></li>
+							<li><a href="#33_1_1" title="A convenient proxy wrapper for DOM objects that allows methods to be called without always dereferencing the static methods on the Uize.Node package and having to specify the node blob in each call.">33.1.1. The Uize.Node Object</a></li>
+							<li><a href="#33_1_2" title="The Uize.Node object provides methods for managing the set of nodes that make up the node blob that the object represents.">33.1.2. Node Blob Management</a></li>
+							<li><a href="#33_1_3">33.1.3. Versatile Setter and Getter Signatures</a>
+								<ul>
+									<li><a href="#33_1_3_1" title="Get the Value for a Single Style Property">33.1.3.1. Getting Values</a></li>
+									<li><a href="#33_1_3_2" title="Set the Values for Multiple Style Properties as an Object">33.1.3.2. Setting Values</a></li>
+								</ul>
+							</li>
+							<li><a href="#33_1_4" title="document...">33.1.4. Shortened Method Names</a></li>
+							<li><a href="#33_1_5" title="As a convenience for developers, short form wiring methods are provided for all the major DOM event types.">33.1.5. Convenience Event Wiring Methods</a></li>
+							<li><a href="#33_1_6" title="document...">33.1.6. Combo Setter and Getter Methods</a></li>
+							<li><a href="#33_1_7" title="To appease developers who are fond of method chaining, all modify type methods that don&apos;t need to return a result will return a reference to the node blob.">33.1.7. Method Chaining</a></li>
+							<li><a href="#33_1_8" title="Set or get style for a node blob.">33.1.8. Uize.Node.style</a></li>
+							<li><a href="#33_1_9" title="A short form for the wire method.">33.1.9. Uize.Node.on</a></li>
 						</ul>
 					</li>
-					<li><a href="#33_3" title="- consider providing a way of unwiring wirings by specifying the wiring IDs, and returning wiring IDs from Uize.Node.wire and myWidget.wire">33.3. - NEW WIRE EVENTS MECHANISM</a>
+					<li><a href="#33_2" title="- Uize.Node.getById -&gt; Uize.Node.byId or Uize.Node.id or just Uize.Node">33.2. Proposed Shortenings</a></li>
+					<li><a href="#33_3">33.3. Uize.Node.setValue & Uize.Node.getValue</a>
 						<ul>
-							<li><a href="#33_3_1" title="1) when is this likely to happen? what code might do this?">33.3.1. **** make sure that Uize.Node.wire handles rewiring the same event for the same node</a></li>
-							<li><a href="#33_3_2" title="- make sure no events are being wired in a way that they wouldn&apos;t get unwired">33.3.2. - for all widget classes...</a></li>
+							<li><a href="#33_3_1" title="- what about disabled select options, radios?">33.3.1. - respect disabled property?</a></li>
 						</ul>
 					</li>
-					<li><a href="#33_4">33.4. Uize.Node.display</a>
+					<li><a href="#33_4" title="- consider providing a way of unwiring wirings by specifying the wiring IDs, and returning wiring IDs from Uize.Node.wire and myWidget.wire">33.4. - NEW WIRE EVENTS MECHANISM</a>
 						<ul>
-							<li><a href="#33_4_1" title="var currentDisplay = Uize.Node.getStyle (node,&apos;display&apos;);&#10;if (mustDisplay ! (currentDisplay ! &apos;none&apos;)) {&#10;	if (mustDisplay) {&#10;		node.style.display = node.OLDDISPLAY || &apos;block&apos;;&#10;	} else {&#10;		node.OLDDISPLAY = currentDisplay;&#10;		node.style.display = &apos;none&apos;;&#10;	}&#10;}&#10;">33.4.1. - IDEA: respecting initial non-none display value</a></li>
+							<li><a href="#33_4_1" title="1) when is this likely to happen? what code might do this?">33.4.1. **** make sure that Uize.Node.wire handles rewiring the same event for the same node</a></li>
+							<li><a href="#33_4_2" title="- make sure no events are being wired in a way that they wouldn&apos;t get unwired">33.4.2. - for all widget classes...</a></li>
 						</ul>
 					</li>
-					<li><a href="#33_5" title="- should support string for property name, or object for properties">33.5. Uize.Node.getProperty</a></li>
-					<li><a href="#33_6" title="- provide a way to search through a specified set of nodes (so that one can chain searches)">33.6. Uize.Node.find</a>
+					<li><a href="#33_5">33.5. Uize.Node.display</a>
 						<ul>
-							<li><a href="#33_6_1" title="- style properties">33.6.1. - think about testing...</a></li>
+							<li><a href="#33_5_1" title="var currentDisplay = Uize.Node.getStyle (node,&apos;display&apos;);&#10;if (mustDisplay ! (currentDisplay ! &apos;none&apos;)) {&#10;	if (mustDisplay) {&#10;		node.style.display = node.OLDDISPLAY || &apos;block&apos;;&#10;	} else {&#10;		node.OLDDISPLAY = currentDisplay;&#10;		node.style.display = &apos;none&apos;;&#10;	}&#10;}&#10;">33.5.1. - IDEA: respecting initial non-none display value</a></li>
 						</ul>
 					</li>
-					<li><a href="#33_7" title="- Uize.Node.setProperties">33.7. - methods that should coerce use of valueOf interface</a></li>
-					<li><a href="#33_8" title="- when setting opacity, if opacity is 1, set opacity properties to &apos;&apos; (empty string). Some browsers seem to still be processing opacity when set to 1, which is slowing down render time.">33.8. Uize.Node.setStyle</a></li>
-					<li><a href="#33_9" title="- it would be useful to have a way to parse out a number from style attribute values that are denominated in px (eg. 128px -&gt; 128, empty string -&gt; 0)">33.9. Uize.Node.getStyle</a></li>
-					<li><a href="#33_10" title="- support a node reference, or document fragment for html parameter">33.10. Uize.Node.injectHtml</a></li>
-					<li><a href="#33_11" title="- setSize">33.11. - new methods</a></li>
+					<li><a href="#33_6" title="- should support string for property name, or object for properties">33.6. Uize.Node.getProperty</a></li>
+					<li><a href="#33_7" title="- provide a way to search through a specified set of nodes (so that one can chain searches)">33.7. Uize.Node.find</a>
+						<ul>
+							<li><a href="#33_7_1" title="- style properties">33.7.1. - think about testing...</a></li>
+						</ul>
+					</li>
+					<li><a href="#33_8" title="- Uize.Node.setProperties">33.8. - methods that should coerce use of valueOf interface</a></li>
+					<li><a href="#33_9" title="- when setting opacity, if opacity is 1, set opacity properties to &apos;&apos; (empty string). Some browsers seem to still be processing opacity when set to 1, which is slowing down render time.">33.9. Uize.Node.setStyle</a></li>
+					<li><a href="#33_10" title="- it would be useful to have a way to parse out a number from style attribute values that are denominated in px (eg. 128px -&gt; 128, empty string -&gt; 0)">33.10. Uize.Node.getStyle</a></li>
+					<li><a href="#33_11" title="- support a node reference, or document fragment for html parameter">33.11. Uize.Node.injectHtml</a></li>
+					<li><a href="#33_12" title="- setSize">33.12. - new methods</a></li>
 				</ul>
 			</li>
 			<li><a href="#34" title="- a module that provides services for determining and manipulating node positions">34. Uize.Node.Pos</a></li>
@@ -1143,7 +1167,188 @@
 	<h1 class="heading1" title="1. Uize"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>. </span>Uize</h1>
 	<div class="contents1">
 		<a name="1_1"></a>
-		<h2 class="heading2" title="1. Uize -&gt; 1.1. Uize.canExtend"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_1" title="1. Uize -&gt; 1.1. Uize.canExtend">1</a>. </span>Uize.canExtend</h2>
+		<h2 class="heading2" title="1. Uize -&gt; 1.1. Uize.log"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_1" title="1. Uize -&gt; 1.1. Uize.log">1</a>. </span>Uize.log</h2>
+		<div class="contents2">
+			<p>Logs a message, using the configured logging options.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">Uize.log (messageSTR);
+</pre>
+			
+			<p><span class="allCaps">IMPLEMENTATION</span></p>
+			
+			
+<pre class="sample-code">_package.log = function (message) {
+  // fill this in
+};
+</pre>
+		</div>
+		
+		<a name="1_2"></a>
+		<h2 class="heading2" title="1. Uize -&gt; 1.2. Uize.try"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_2" title="1. Uize -&gt; 1.2. Uize.try">2</a>. </span>Uize.try</h2>
+		<div class="contents2">
+			<p>Tries to execute the given function, executing the optional catch expression and warning, ignoring, or throwing any error that occurs.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">Uize.try (tryFUNC,catchFUNC);
+</pre>
+			
+			<p><span class="allCaps">IMPLEMENTATION</span></p>
+			
+			
+<pre class="sample-code">_package.warnForTryErrors = true;
+_package.ignoreUncaughtTryErrors = false;
+_package.try = function (_tryFunction,_catchFunction) {
+  try {
+    _tryFunction ();
+  } catch (_error) {
+    _package.warnForTryErrors &amp;&amp; _package.warn (_error);
+    if (_catchFunction) {
+      _catchFunction (_error);
+    } else if (!_package.ignoreUncaughtTryErrors) {
+      throw _error;
+    }
+  }
+};
+</pre>
+		</div>
+		
+		<a name="1_3"></a>
+		<h2 class="heading2" title="1. Uize -&gt; 1.3. Uize.warn"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_3" title="1. Uize -&gt; 1.3. Uize.warn">3</a>. </span>Uize.warn</h2>
+		<div class="contents2">
+			<p>Outputs to the log, depending on the configuration for warnings.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">Uize.warn (messageSTR);
+</pre>
+			
+			<p><span class="allCaps">IMPLEMENTATION</span></p>
+			
+			
+<pre class="sample-code">_package.logWarnings = true;
+_package.warn = function (_message) {
+  _package.logWarnings &amp;&amp; _package.log (_message);
+};
+</pre>
+		</div>
+		
+		<a name="1_4"></a>
+		<h2 class="heading2" title="1. Uize -&gt; 1.4. Uize.warnIfSlow"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_4" title="1. Uize -&gt; 1.4. Uize.warnIfSlow">4</a>. </span>Uize.warnIfSlow</h2>
+		<div class="contents2">
+			<p>Warns if the specified function takes too long to complete (the function can be synchronous or asynchronous).</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION</span></p>
+			
+			
+<pre class="sample-code">_package.warnIfSlow = function (_function) {
+  function _done () {
+
+  }
+  _function (_done);
+};
+</pre>
+		</div>
+		
+		<a name="1_5"></a>
+		<h2 class="heading2" title="1. Uize -&gt; 1.5. Uize.quantize"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_5" title="1. Uize -&gt; 1.5. Uize.quantize">5</a>. </span>Uize.quantize</h2>
+		<div class="contents2">
+			<p>Quantizes the specified number to the specified quantum size.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION</span></p>
+			
+			
+<pre class="sample-code">_package.quantize = function (_value,_quantum) {
+  return _quantum ? Math.round (_value / _quantum) * _quantum : _value;
+};
+</pre>
+		</div>
+		
+		<a name="1_6"></a>
+		<h2 class="heading2" title="1. Uize -&gt; 1.6. Uize.random"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_6" title="1. Uize -&gt; 1.6. Uize.random">6</a>. </span>Uize.random</h2>
+		<div class="contents2">
+			<p>Generates a random value from the specified range or list of possible values.</p>
+			
+			<p><span class="allCaps">DIFFERENT USAGES</span></p>
+			
+			<p>Generate a Random Number in the Range of Zero to One</p>
+			
+			
+<pre class="sample-code">randomNUM = Uize.random ();
+</pre>
+			
+			<p>Generate a Random Number in the Range of Zero to a Maximum Value</p>
+			
+			
+<pre class="sample-code">randomNUM = Uize.random (maxValueNUM);
+</pre>
+			
+			<p>Select a Random Value From a List of Possible Values</p>
+			
+			
+<pre class="sample-code">randomValueANYTYPE = Uize.random (valuesLIST);
+</pre>
+			
+			<p>Select a Random Characters From a Characters String</p>
+			
+			
+<pre class="sample-code">randomCharacterSTR = Uize.random (charactersSTR);
+</pre>
+			
+			<p>Generate a Random Integer in a Specified Range</p>
+			
+			
+<pre class="sample-code">randomINT = Uize.random (rangeLowerLimitINT,rangeUpperLimitINT);
+</pre>
+			
+			<p>Generate a Random Floating Point Number in a Specified Range</p>
+			
+			
+<pre class="sample-code">randomNUM = Uize.random (rangeLowerLimitNUM,rangeUpperLimitNUM,0);
+</pre>
+			
+			<p>Generate a Random, Custom Quantized Number in a Specified Range</p>
+			
+			
+<pre class="sample-code">randomNUM = Uize.random (rangeLowerLimitNUM,rangeUpperLimitNUM,quantumNUM);
+</pre>
+			
+			<p><span class="allCaps">IMPLEMENTATION</span></p>
+			
+			
+<pre class="sample-code">_package.random = function (_arg0,_arg1,_arg2) {
+  var _random0to1 = Math.random ();
+  function _randomIndex () {
+    return Math.round ((_arg0.length - 1) * _random0to1);
+  }
+  return (
+    arguments.length &gt; 1
+      ? _package.constrain (
+        _arg0 + _quantize ((_arg1 - _arg0) * _random0to1,_arg2 == _undefined ? 1 : _arg2),
+        _arg0,
+        _arg1
+      )
+      : _arg0 == _undefined
+        ? _random0to1
+        : _package.isNumber (_arg0)
+          ? Math.round (_random0to1 * _arg0)
+          : _package.isList (_arg0)
+            ? _arg0 [_randomIndex ()]
+            : _package.isString (_arg0)
+              ? _arg0.charAt (_randomIndex ())
+              : _random0to1
+  );
+};
+</pre>
+		</div>
+		
+		<a name="1_7"></a>
+		<h2 class="heading2" title="1. Uize -&gt; 1.7. Uize.canExtend"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_7" title="1. Uize -&gt; 1.7. Uize.canExtend">7</a>. </span>Uize.canExtend</h2>
 		<div class="contents2">
 			<p>Returns a boolean, indicating whether or not the specified value can be extended with custom properties.</p>
 			
@@ -1175,8 +1380,8 @@ Uize.canExtend (undefined);           // returns false
 </pre>
 		</div>
 		
-		<a name="1_2"></a>
-		<h2 class="heading2" title="1. Uize -&gt; 1.2. Uize.safe"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_2" title="1. Uize -&gt; 1.2. Uize.safe">2</a>. </span>Uize.safe</h2>
+		<a name="1_8"></a>
+		<h2 class="heading2" title="1. Uize -&gt; 1.8. Uize.safe"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_8" title="1. Uize -&gt; 1.8. Uize.safe">8</a>. </span>Uize.safe</h2>
 		<div class="contents2">
 			<p>Wraps a function in order to protect it from possible JavaScript errors during its execution.</p>
 			
@@ -1198,8 +1403,8 @@ Uize.canExtend (undefined);           // returns false
 			<p>This method catches errors that occur in the function that is being wrapped, returning the error if no value is explicitly specified that should be returned when an errors occur.</p>
 		</div>
 		
-		<a name="1_3"></a>
-		<h2 class="heading2" title="1. Uize -&gt; 1.3. Uize.cycleCalls"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_3" title="1. Uize -&gt; 1.3. Uize.cycleCalls">3</a>. </span>Uize.cycleCalls</h2>
+		<a name="1_9"></a>
+		<h2 class="heading2" title="1. Uize -&gt; 1.9. Uize.cycleCalls"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_9" title="1. Uize -&gt; 1.9. Uize.cycleCalls">9</a>. </span>Uize.cycleCalls</h2>
 		<div class="contents2">
 			<p><span class="allCaps">IMPLEMENTATION</span></p>
 			
@@ -1218,14 +1423,14 @@ Uize.canExtend (undefined);           // returns false
 </pre>
 		</div>
 		
-		<a name="1_4"></a>
-		<h2 class="heading2" title="1. Uize -&gt; 1.4. Uize.map"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_4" title="1. Uize -&gt; 1.4. Uize.map">4</a>. </span>Uize.map</h2>
+		<a name="1_10"></a>
+		<h2 class="heading2" title="1. Uize -&gt; 1.10. Uize.map"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_10" title="1. Uize -&gt; 1.10. Uize.map">10</a>. </span>Uize.map</h2>
 		<div class="contents2">
 			<p>Add support for _source being a string?</p>
 		</div>
 		
-		<a name="1_5"></a>
-		<h2 class="heading2" title="1. Uize -&gt; 1.5. Uize.TreeWalker"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_5" title="1. Uize -&gt; 1.5. Uize.TreeWalker">5</a>. </span>Uize.TreeWalker</h2>
+		<a name="1_11"></a>
+		<h2 class="heading2" title="1. Uize -&gt; 1.11. Uize.TreeWalker"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_11" title="1. Uize -&gt; 1.11. Uize.TreeWalker">11</a>. </span>Uize.TreeWalker</h2>
 		<div class="contents2">
 			<p>An object built into the <code><a href="#1">Uize</a></code> base module that allows you to control walking through an object tree in a safe and performant way.</p>
 			
@@ -1235,30 +1440,30 @@ Uize.canExtend (undefined);           // returns false
 			</table>
 		</div>
 		
-		<a name="1_6"></a>
-		<h2 class="heading2" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness)"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_6" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness)">6</a>. </span>Quick Win Additions (in order of priority / usefulness)</h2>
+		<a name="1_12"></a>
+		<h2 class="heading2" title="1. Uize -&gt; 1.12. Quick Win Additions (in order of priority / usefulness)"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_12" title="1. Uize -&gt; 1.12. Quick Win Additions (in order of priority / usefulness)">12</a>. </span>Quick Win Additions (in order of priority / usefulness)</h2>
 		<div class="contents2">
-			<a name="1_6_1"></a>
-			<h3 class="heading3" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness) -&gt; 1.6.1. STILL TO DO"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_6" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness)">6</a>.<a href="#1_6_1" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness) -&gt; 1.6.1. STILL TO DO">1</a>. </span>STILL TO DO</h3>
+			<a name="1_12_1"></a>
+			<h3 class="heading3" title="1. Uize -&gt; 1.12. Quick Win Additions (in order of priority / usefulness) -&gt; 1.12.1. STILL TO DO"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_12" title="1. Uize -&gt; 1.12. Quick Win Additions (in order of priority / usefulness)">12</a>.<a href="#1_12_1" title="1. Uize -&gt; 1.12. Quick Win Additions (in order of priority / usefulness) -&gt; 1.12.1. STILL TO DO">1</a>. </span>STILL TO DO</h3>
 			<div class="contents3">
-				<a name="1_6_1_1"></a>
-				<h4 class="heading4" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness) -&gt; 1.6.1. STILL TO DO -&gt; 1.6.1.1. Uize.indexOf, Uize.lastIndexOf"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_6" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness)">6</a>.<a href="#1_6_1" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness) -&gt; 1.6.1. STILL TO DO">1</a>.<a href="#1_6_1_1" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness) -&gt; 1.6.1. STILL TO DO -&gt; 1.6.1.1. Uize.indexOf, Uize.lastIndexOf">1</a>. </span>Uize.indexOf, Uize.lastIndexOf</h4>
+				<a name="1_12_1_1"></a>
+				<h4 class="heading4" title="1. Uize -&gt; 1.12. Quick Win Additions (in order of priority / usefulness) -&gt; 1.12.1. STILL TO DO -&gt; 1.12.1.1. Uize.indexOf, Uize.lastIndexOf"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_12" title="1. Uize -&gt; 1.12. Quick Win Additions (in order of priority / usefulness)">12</a>.<a href="#1_12_1" title="1. Uize -&gt; 1.12. Quick Win Additions (in order of priority / usefulness) -&gt; 1.12.1. STILL TO DO">1</a>.<a href="#1_12_1_1" title="1. Uize -&gt; 1.12. Quick Win Additions (in order of priority / usefulness) -&gt; 1.12.1. STILL TO DO -&gt; 1.12.1.1. Uize.indexOf, Uize.lastIndexOf">1</a>. </span>Uize.indexOf, Uize.lastIndexOf</h4>
 				<div class="contents4">
 					<table class="list">
 					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>essentially derived from indexIn, but adapted to also operate on strings and to use built-in indexOf when possible and supported by JavaScript built-in objects (ie. newer versions of JavaScript)</td></tr>
 					</table>
 				</div>
 				
-				<a name="1_6_1_2"></a>
-				<h4 class="heading4" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness) -&gt; 1.6.1. STILL TO DO -&gt; 1.6.1.2. Uize.indexIn"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_6" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness)">6</a>.<a href="#1_6_1" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness) -&gt; 1.6.1. STILL TO DO">1</a>.<a href="#1_6_1_2" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness) -&gt; 1.6.1. STILL TO DO -&gt; 1.6.1.2. Uize.indexIn">2</a>. </span>Uize.indexIn</h4>
+				<a name="1_12_1_2"></a>
+				<h4 class="heading4" title="1. Uize -&gt; 1.12. Quick Win Additions (in order of priority / usefulness) -&gt; 1.12.1. STILL TO DO -&gt; 1.12.1.2. Uize.indexIn"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_12" title="1. Uize -&gt; 1.12. Quick Win Additions (in order of priority / usefulness)">12</a>.<a href="#1_12_1" title="1. Uize -&gt; 1.12. Quick Win Additions (in order of priority / usefulness) -&gt; 1.12.1. STILL TO DO">1</a>.<a href="#1_12_1_2" title="1. Uize -&gt; 1.12. Quick Win Additions (in order of priority / usefulness) -&gt; 1.12.1. STILL TO DO -&gt; 1.12.1.2. Uize.indexIn">2</a>. </span>Uize.indexIn</h4>
 				<div class="contents4">
 					<table class="list">
 					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>adapt to add support for source being a string</td></tr>
 					</table>
 				</div>
 				
-				<a name="1_6_1_3"></a>
-				<h4 class="heading4" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness) -&gt; 1.6.1. STILL TO DO -&gt; 1.6.1.3. Uize.require"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_6" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness)">6</a>.<a href="#1_6_1" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness) -&gt; 1.6.1. STILL TO DO">1</a>.<a href="#1_6_1_3" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness) -&gt; 1.6.1. STILL TO DO -&gt; 1.6.1.3. Uize.require">3</a>. </span>Uize.require</h4>
+				<a name="1_12_1_3"></a>
+				<h4 class="heading4" title="1. Uize -&gt; 1.12. Quick Win Additions (in order of priority / usefulness) -&gt; 1.12.1. STILL TO DO -&gt; 1.12.1.3. Uize.require"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_12" title="1. Uize -&gt; 1.12. Quick Win Additions (in order of priority / usefulness)">12</a>.<a href="#1_12_1" title="1. Uize -&gt; 1.12. Quick Win Additions (in order of priority / usefulness) -&gt; 1.12.1. STILL TO DO">1</a>.<a href="#1_12_1_3" title="1. Uize -&gt; 1.12. Quick Win Additions (in order of priority / usefulness) -&gt; 1.12.1. STILL TO DO -&gt; 1.12.1.3. Uize.require">3</a>. </span>Uize.require</h4>
 				<div class="contents4">
 					<table class="list">
 					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>alias to anonymous module with required (to make the simple case of requiring a module deeper in code more convenient & intuitive)</td></tr>
@@ -1266,19 +1471,19 @@ Uize.canExtend (undefined);           // returns false
 				</div>
 			</div>
 			
-			<a name="1_6_2"></a>
-			<h3 class="heading3" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness) -&gt; 1.6.2. LATER"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_6" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness)">6</a>.<a href="#1_6_2" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness) -&gt; 1.6.2. LATER">2</a>. </span>LATER</h3>
+			<a name="1_12_2"></a>
+			<h3 class="heading3" title="1. Uize -&gt; 1.12. Quick Win Additions (in order of priority / usefulness) -&gt; 1.12.2. LATER"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_12" title="1. Uize -&gt; 1.12. Quick Win Additions (in order of priority / usefulness)">12</a>.<a href="#1_12_2" title="1. Uize -&gt; 1.12. Quick Win Additions (in order of priority / usefulness) -&gt; 1.12.2. LATER">2</a>. </span>LATER</h3>
 			<div class="contents3">
-				<a name="1_6_2_1"></a>
-				<h4 class="heading4" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness) -&gt; 1.6.2. LATER -&gt; 1.6.2.1. Uize.extend"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_6" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness)">6</a>.<a href="#1_6_2" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness) -&gt; 1.6.2. LATER">2</a>.<a href="#1_6_2_1" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness) -&gt; 1.6.2. LATER -&gt; 1.6.2.1. Uize.extend">1</a>. </span>Uize.extend</h4>
+				<a name="1_12_2_1"></a>
+				<h4 class="heading4" title="1. Uize -&gt; 1.12. Quick Win Additions (in order of priority / usefulness) -&gt; 1.12.2. LATER -&gt; 1.12.2.1. Uize.extend"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_12" title="1. Uize -&gt; 1.12. Quick Win Additions (in order of priority / usefulness)">12</a>.<a href="#1_12_2" title="1. Uize -&gt; 1.12. Quick Win Additions (in order of priority / usefulness) -&gt; 1.12.2. LATER">2</a>.<a href="#1_12_2_1" title="1. Uize -&gt; 1.12. Quick Win Additions (in order of priority / usefulness) -&gt; 1.12.2. LATER -&gt; 1.12.2.1. Uize.extend">1</a>. </span>Uize.extend</h4>
 				<div class="contents4">
 					<table class="list">
 					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>alias of copyInto, for those who are more comfortable with the extend semantic</td></tr>
 					</table>
 				</div>
 				
-				<a name="1_6_2_2"></a>
-				<h4 class="heading4" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness) -&gt; 1.6.2. LATER -&gt; 1.6.2.2. Uize.ensureArray"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_6" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness)">6</a>.<a href="#1_6_2" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness) -&gt; 1.6.2. LATER">2</a>.<a href="#1_6_2_2" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness) -&gt; 1.6.2. LATER -&gt; 1.6.2.2. Uize.ensureArray">2</a>. </span>Uize.ensureArray</h4>
+				<a name="1_12_2_2"></a>
+				<h4 class="heading4" title="1. Uize -&gt; 1.12. Quick Win Additions (in order of priority / usefulness) -&gt; 1.12.2. LATER -&gt; 1.12.2.2. Uize.ensureArray"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_12" title="1. Uize -&gt; 1.12. Quick Win Additions (in order of priority / usefulness)">12</a>.<a href="#1_12_2" title="1. Uize -&gt; 1.12. Quick Win Additions (in order of priority / usefulness) -&gt; 1.12.2. LATER">2</a>.<a href="#1_12_2_2" title="1. Uize -&gt; 1.12. Quick Win Additions (in order of priority / usefulness) -&gt; 1.12.2. LATER -&gt; 1.12.2.2. Uize.ensureArray">2</a>. </span>Uize.ensureArray</h4>
 				<div class="contents4">
 					<table class="list">
 					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>ensures that the value is an array</td></tr>
@@ -1289,8 +1494,8 @@ Uize.canExtend (undefined);           // returns false
 					</table>
 				</div>
 				
-				<a name="1_6_2_3"></a>
-				<h4 class="heading4" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness) -&gt; 1.6.2. LATER -&gt; 1.6.2.3. Uize.ensureIn"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_6" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness)">6</a>.<a href="#1_6_2" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness) -&gt; 1.6.2. LATER">2</a>.<a href="#1_6_2_3" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness) -&gt; 1.6.2. LATER -&gt; 1.6.2.3. Uize.ensureIn">3</a>. </span>Uize.ensureIn</h4>
+				<a name="1_12_2_3"></a>
+				<h4 class="heading4" title="1. Uize -&gt; 1.12. Quick Win Additions (in order of priority / usefulness) -&gt; 1.12.2. LATER -&gt; 1.12.2.3. Uize.ensureIn"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_12" title="1. Uize -&gt; 1.12. Quick Win Additions (in order of priority / usefulness)">12</a>.<a href="#1_12_2" title="1. Uize -&gt; 1.12. Quick Win Additions (in order of priority / usefulness) -&gt; 1.12.2. LATER">2</a>.<a href="#1_12_2_3" title="1. Uize -&gt; 1.12. Quick Win Additions (in order of priority / usefulness) -&gt; 1.12.2. LATER -&gt; 1.12.2.3. Uize.ensureIn">3</a>. </span>Uize.ensureIn</h4>
 				<div class="contents4">
 					<table class="list">
 					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>checks to see if an element is present, and adds it if not</td></tr>
@@ -1298,16 +1503,16 @@ Uize.canExtend (undefined);           // returns false
 					</table>
 				</div>
 				
-				<a name="1_6_2_4"></a>
-				<h4 class="heading4" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness) -&gt; 1.6.2. LATER -&gt; 1.6.2.4. Uize.isStringy"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_6" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness)">6</a>.<a href="#1_6_2" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness) -&gt; 1.6.2. LATER">2</a>.<a href="#1_6_2_4" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness) -&gt; 1.6.2. LATER -&gt; 1.6.2.4. Uize.isStringy">4</a>. </span>Uize.isStringy</h4>
+				<a name="1_12_2_4"></a>
+				<h4 class="heading4" title="1. Uize -&gt; 1.12. Quick Win Additions (in order of priority / usefulness) -&gt; 1.12.2. LATER -&gt; 1.12.2.4. Uize.isStringy"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_12" title="1. Uize -&gt; 1.12. Quick Win Additions (in order of priority / usefulness)">12</a>.<a href="#1_12_2" title="1. Uize -&gt; 1.12. Quick Win Additions (in order of priority / usefulness) -&gt; 1.12.2. LATER">2</a>.<a href="#1_12_2_4" title="1. Uize -&gt; 1.12. Quick Win Additions (in order of priority / usefulness) -&gt; 1.12.2. LATER -&gt; 1.12.2.4. Uize.isStringy">4</a>. </span>Uize.isStringy</h4>
 				<div class="contents4">
 					<table class="list">
 					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>returns true if the value is either a string primitive or an instance of a String object or "subclass"</td></tr>
 					</table>
 				</div>
 				
-				<a name="1_6_2_5"></a>
-				<h4 class="heading4" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness) -&gt; 1.6.2. LATER -&gt; 1.6.2.5. Uize.isTruthy"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_6" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness)">6</a>.<a href="#1_6_2" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness) -&gt; 1.6.2. LATER">2</a>.<a href="#1_6_2_5" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness) -&gt; 1.6.2. LATER -&gt; 1.6.2.5. Uize.isTruthy">5</a>. </span>Uize.isTruthy</h4>
+				<a name="1_12_2_5"></a>
+				<h4 class="heading4" title="1. Uize -&gt; 1.12. Quick Win Additions (in order of priority / usefulness) -&gt; 1.12.2. LATER -&gt; 1.12.2.5. Uize.isTruthy"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_12" title="1. Uize -&gt; 1.12. Quick Win Additions (in order of priority / usefulness)">12</a>.<a href="#1_12_2" title="1. Uize -&gt; 1.12. Quick Win Additions (in order of priority / usefulness) -&gt; 1.12.2. LATER">2</a>.<a href="#1_12_2_5" title="1. Uize -&gt; 1.12. Quick Win Additions (in order of priority / usefulness) -&gt; 1.12.2. LATER -&gt; 1.12.2.5. Uize.isTruthy">5</a>. </span>Uize.isTruthy</h4>
 				<div class="contents4">
 					<table class="list">
 					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>returns true if the value is truthy</td></tr>
@@ -1315,8 +1520,8 @@ Uize.canExtend (undefined);           // returns false
 					</table>
 				</div>
 				
-				<a name="1_6_2_6"></a>
-				<h4 class="heading4" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness) -&gt; 1.6.2. LATER -&gt; 1.6.2.6. Uize.isFalsy"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_6" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness)">6</a>.<a href="#1_6_2" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness) -&gt; 1.6.2. LATER">2</a>.<a href="#1_6_2_6" title="1. Uize -&gt; 1.6. Quick Win Additions (in order of priority / usefulness) -&gt; 1.6.2. LATER -&gt; 1.6.2.6. Uize.isFalsy">6</a>. </span>Uize.isFalsy</h4>
+				<a name="1_12_2_6"></a>
+				<h4 class="heading4" title="1. Uize -&gt; 1.12. Quick Win Additions (in order of priority / usefulness) -&gt; 1.12.2. LATER -&gt; 1.12.2.6. Uize.isFalsy"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_12" title="1. Uize -&gt; 1.12. Quick Win Additions (in order of priority / usefulness)">12</a>.<a href="#1_12_2" title="1. Uize -&gt; 1.12. Quick Win Additions (in order of priority / usefulness) -&gt; 1.12.2. LATER">2</a>.<a href="#1_12_2_6" title="1. Uize -&gt; 1.12. Quick Win Additions (in order of priority / usefulness) -&gt; 1.12.2. LATER -&gt; 1.12.2.6. Uize.isFalsy">6</a>. </span>Uize.isFalsy</h4>
 				<div class="contents4">
 					<table class="list">
 					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>returns true is the value is falsy</td></tr>
@@ -1326,13 +1531,13 @@ Uize.canExtend (undefined);           // returns false
 			</div>
 		</div>
 		
-		<a name="1_7"></a>
-		<h2 class="heading2" title="1. Uize -&gt; 1.7. Uize.willCall"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_7" title="1. Uize -&gt; 1.7. Uize.willCall">7</a>. </span>Uize.willCall</h2>
+		<a name="1_13"></a>
+		<h2 class="heading2" title="1. Uize -&gt; 1.13. Uize.willCall"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_13" title="1. Uize -&gt; 1.13. Uize.willCall">13</a>. </span>Uize.willCall</h2>
 		<div class="contents2">
 			<p>Lets you conveniently create a function / method caller, where you can specify context, function, and arguments.</p>
 			
-			<a name="1_7_1"></a>
-			<h3 class="heading3" title="1. Uize -&gt; 1.7. Uize.willCall -&gt; 1.7.1. - names considered"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_7" title="1. Uize -&gt; 1.7. Uize.willCall">7</a>.<a href="#1_7_1" title="1. Uize -&gt; 1.7. Uize.willCall -&gt; 1.7.1. - names considered">1</a>. </span>- names considered</h3>
+			<a name="1_13_1"></a>
+			<h3 class="heading3" title="1. Uize -&gt; 1.13. Uize.willCall -&gt; 1.13.1. - names considered"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_13" title="1. Uize -&gt; 1.13. Uize.willCall">13</a>.<a href="#1_13_1" title="1. Uize -&gt; 1.13. Uize.willCall -&gt; 1.13.1. - names considered">1</a>. </span>- names considered</h3>
 			<div class="contents3">
 				<table class="list">
 				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>callback</td></tr>
@@ -1421,8 +1626,8 @@ Uize.functionCall = function (_function,_arguments,_extraArgsMapping) {
 </pre>
 		</div>
 		
-		<a name="1_8"></a>
-		<h2 class="heading2" title="1. Uize -&gt; 1.8. Uize.watchMethod"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_8" title="1. Uize -&gt; 1.8. Uize.watchMethod">8</a>. </span>Uize.watchMethod</h2>
+		<a name="1_14"></a>
+		<h2 class="heading2" title="1. Uize -&gt; 1.14. Uize.watchMethod"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_14" title="1. Uize -&gt; 1.14. Uize.watchMethod">14</a>. </span>Uize.watchMethod</h2>
 		<div class="contents2">
 			
 <pre class="sample-code">Uize.watchFunction = function (_function,_before,_after) {
@@ -1450,8 +1655,8 @@ Uize.watchMethod = function (_context,_methodName,_before,_after) {
 </pre>
 		</div>
 		
-		<a name="1_9"></a>
-		<h2 class="heading2" title="1. Uize -&gt; 1.9. Uize.memoize"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_9" title="1. Uize -&gt; 1.9. Uize.memoize">9</a>. </span>Uize.memoize</h2>
+		<a name="1_15"></a>
+		<h2 class="heading2" title="1. Uize -&gt; 1.15. Uize.memoize"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_15" title="1. Uize -&gt; 1.15. Uize.memoize">15</a>. </span>Uize.memoize</h2>
 		<div class="contents2">
 			
 <pre class="sample-code">Uize.memoize = function (_function) {
@@ -1483,11 +1688,11 @@ Uize.memoizeMethod = function (_context,_methodName) {
 			</table>
 		</div>
 		
-		<a name="1_10"></a>
-		<h2 class="heading2" title="1. Uize -&gt; 1.10. Uize.constrain"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_10" title="1. Uize -&gt; 1.10. Uize.constrain">10</a>. </span>Uize.constrain</h2>
+		<a name="1_16"></a>
+		<h2 class="heading2" title="1. Uize -&gt; 1.16. Uize.constrain"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_16" title="1. Uize -&gt; 1.16. Uize.constrain">16</a>. </span>Uize.constrain</h2>
 		<div class="contents2">
-			<a name="1_10_1"></a>
-			<h3 class="heading3" title="1. Uize -&gt; 1.10. Uize.constrain -&gt; 1.10.1. Support a wrap flag"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_10" title="1. Uize -&gt; 1.10. Uize.constrain">10</a>.<a href="#1_10_1" title="1. Uize -&gt; 1.10. Uize.constrain -&gt; 1.10.1. Support a wrap flag">1</a>. </span>Support a wrap flag</h3>
+			<a name="1_16_1"></a>
+			<h3 class="heading3" title="1. Uize -&gt; 1.16. Uize.constrain -&gt; 1.16.1. Support a wrap flag"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_16" title="1. Uize -&gt; 1.16. Uize.constrain">16</a>.<a href="#1_16_1" title="1. Uize -&gt; 1.16. Uize.constrain -&gt; 1.16.1. Support a wrap flag">1</a>. </span>Support a wrap flag</h3>
 			<div class="contents3">
 				<p>Support a wrap flag, so that constrained values can be made to wrap around within the constraining range, rather than always only hitting up against the edges.</p>
 				
@@ -1506,18 +1711,18 @@ return ((value - min) % maxMinDelta + maxMinDelta) % maxMinDelta + min;
 </pre>
 			</div>
 			
-			<a name="1_10_2"></a>
-			<h3 class="heading3" title="1. Uize -&gt; 1.10. Uize.constrain -&gt; 1.10.2. Unbounded"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_10" title="1. Uize -&gt; 1.10. Uize.constrain">10</a>.<a href="#1_10_2" title="1. Uize -&gt; 1.10. Uize.constrain -&gt; 1.10.2. Unbounded">2</a>. </span>Unbounded</h3>
+			<a name="1_16_2"></a>
+			<h3 class="heading3" title="1. Uize -&gt; 1.16. Uize.constrain -&gt; 1.16.2. Unbounded"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_16" title="1. Uize -&gt; 1.16. Uize.constrain">16</a>.<a href="#1_16_2" title="1. Uize -&gt; 1.16. Uize.constrain -&gt; 1.16.2. Unbounded">2</a>. </span>Unbounded</h3>
 			<div class="contents3">
 				<p>Support either or both of the min and max boundaries being <code>null</code> or <code>undefined</code>.</p>
 			</div>
 		</div>
 		
-		<a name="1_11"></a>
-		<h2 class="heading2" title="1. Uize -&gt; 1.11. Uize.reverseLookup"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_11" title="1. Uize -&gt; 1.11. Uize.reverseLookup">11</a>. </span>Uize.reverseLookup</h2>
+		<a name="1_17"></a>
+		<h2 class="heading2" title="1. Uize -&gt; 1.17. Uize.reverseLookup"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_17" title="1. Uize -&gt; 1.17. Uize.reverseLookup">17</a>. </span>Uize.reverseLookup</h2>
 		<div class="contents2">
-			<a name="1_11_1"></a>
-			<h3 class="heading3" title="1. Uize -&gt; 1.11. Uize.reverseLookup -&gt; 1.11.1. Support values for source being arrays."><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_11" title="1. Uize -&gt; 1.11. Uize.reverseLookup">11</a>.<a href="#1_11_1" title="1. Uize -&gt; 1.11. Uize.reverseLookup -&gt; 1.11.1. Support values for source being arrays.">1</a>. </span>Support values for source being arrays.</h3>
+			<a name="1_17_1"></a>
+			<h3 class="heading3" title="1. Uize -&gt; 1.17. Uize.reverseLookup -&gt; 1.17.1. Support values for source being arrays."><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_17" title="1. Uize -&gt; 1.17. Uize.reverseLookup">17</a>.<a href="#1_17_1" title="1. Uize -&gt; 1.17. Uize.reverseLookup -&gt; 1.17.1. Support values for source being arrays.">1</a>. </span>Support values for source being arrays.</h3>
 			<div class="contents3">
 				<p><span class="allCaps">EXAMPLE</span></p>
 				
@@ -1540,8 +1745,8 @@ return ((value - min) % maxMinDelta + maxMinDelta) % maxMinDelta + min;
 </pre>
 			</div>
 			
-			<a name="1_11_2"></a>
-			<h3 class="heading3" title="1. Uize -&gt; 1.11. Uize.reverseLookup -&gt; 1.11.2. Support multiple values for source being the same"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_11" title="1. Uize -&gt; 1.11. Uize.reverseLookup">11</a>.<a href="#1_11_2" title="1. Uize -&gt; 1.11. Uize.reverseLookup -&gt; 1.11.2. Support multiple values for source being the same">2</a>. </span>Support multiple values for source being the same</h3>
+			<a name="1_17_2"></a>
+			<h3 class="heading3" title="1. Uize -&gt; 1.17. Uize.reverseLookup -&gt; 1.17.2. Support multiple values for source being the same"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_17" title="1. Uize -&gt; 1.17. Uize.reverseLookup">17</a>.<a href="#1_17_2" title="1. Uize -&gt; 1.17. Uize.reverseLookup -&gt; 1.17.2. Support multiple values for source being the same">2</a>. </span>Support multiple values for source being the same</h3>
 			<div class="contents3">
 				<p><span class="allCaps">EXAMPLE</span></p>
 				
@@ -1564,14 +1769,14 @@ return ((value - min) % maxMinDelta + maxMinDelta) % maxMinDelta + min;
 </pre>
 			</div>
 			
-			<a name="1_11_3"></a>
-			<h3 class="heading3" title="1. Uize -&gt; 1.11. Uize.reverseLookup -&gt; 1.11.3. Support Merging in to Target"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_11" title="1. Uize -&gt; 1.11. Uize.reverseLookup">11</a>.<a href="#1_11_3" title="1. Uize -&gt; 1.11. Uize.reverseLookup -&gt; 1.11.3. Support Merging in to Target">3</a>. </span>Support Merging in to Target</h3>
+			<a name="1_17_3"></a>
+			<h3 class="heading3" title="1. Uize -&gt; 1.17. Uize.reverseLookup -&gt; 1.17.3. Support Merging in to Target"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_17" title="1. Uize -&gt; 1.17. Uize.reverseLookup">17</a>.<a href="#1_17_3" title="1. Uize -&gt; 1.17. Uize.reverseLookup -&gt; 1.17.3. Support Merging in to Target">3</a>. </span>Support Merging in to Target</h3>
 			<div class="contents3">
-				<a name="1_11_3_1"></a>
-				<h4 class="heading4" title="1. Uize -&gt; 1.11. Uize.reverseLookup -&gt; 1.11.3. Support Merging in to Target -&gt; 1.11.3.1. - when entries are added to an existing reverse lookup object, use the following rules..."><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_11" title="1. Uize -&gt; 1.11. Uize.reverseLookup">11</a>.<a href="#1_11_3" title="1. Uize -&gt; 1.11. Uize.reverseLookup -&gt; 1.11.3. Support Merging in to Target">3</a>.<a href="#1_11_3_1" title="1. Uize -&gt; 1.11. Uize.reverseLookup -&gt; 1.11.3. Support Merging in to Target -&gt; 1.11.3.1. - when entries are added to an existing reverse lookup object, use the following rules...">1</a>. </span>- when entries are added to an existing reverse lookup object, use the following rules...</h4>
+				<a name="1_17_3_1"></a>
+				<h4 class="heading4" title="1. Uize -&gt; 1.17. Uize.reverseLookup -&gt; 1.17.3. Support Merging in to Target -&gt; 1.17.3.1. - when entries are added to an existing reverse lookup object, use the following rules..."><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_17" title="1. Uize -&gt; 1.17. Uize.reverseLookup">17</a>.<a href="#1_17_3" title="1. Uize -&gt; 1.17. Uize.reverseLookup -&gt; 1.17.3. Support Merging in to Target">3</a>.<a href="#1_17_3_1" title="1. Uize -&gt; 1.17. Uize.reverseLookup -&gt; 1.17.3. Support Merging in to Target -&gt; 1.17.3.1. - when entries are added to an existing reverse lookup object, use the following rules...">1</a>. </span>- when entries are added to an existing reverse lookup object, use the following rules...</h4>
 				<div class="contents4">
-					<a name="1_11_3_1_1"></a>
-					<h5 class="heading5" title="1. Uize -&gt; 1.11. Uize.reverseLookup -&gt; 1.11.3. Support Merging in to Target -&gt; 1.11.3.1. - when entries are added to an existing reverse lookup object, use the following rules... -&gt; 1.11.3.1.1. - if the desired key to add already exists, then..."><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_11" title="1. Uize -&gt; 1.11. Uize.reverseLookup">11</a>.<a href="#1_11_3" title="1. Uize -&gt; 1.11. Uize.reverseLookup -&gt; 1.11.3. Support Merging in to Target">3</a>.<a href="#1_11_3_1" title="1. Uize -&gt; 1.11. Uize.reverseLookup -&gt; 1.11.3. Support Merging in to Target -&gt; 1.11.3.1. - when entries are added to an existing reverse lookup object, use the following rules...">1</a>.<a href="#1_11_3_1_1" title="1. Uize -&gt; 1.11. Uize.reverseLookup -&gt; 1.11.3. Support Merging in to Target -&gt; 1.11.3.1. - when entries are added to an existing reverse lookup object, use the following rules... -&gt; 1.11.3.1.1. - if the desired key to add already exists, then...">1</a>. </span>- if the desired key to add already exists, then...</h5>
+					<a name="1_17_3_1_1"></a>
+					<h5 class="heading5" title="1. Uize -&gt; 1.17. Uize.reverseLookup -&gt; 1.17.3. Support Merging in to Target -&gt; 1.17.3.1. - when entries are added to an existing reverse lookup object, use the following rules... -&gt; 1.17.3.1.1. - if the desired key to add already exists, then..."><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_17" title="1. Uize -&gt; 1.17. Uize.reverseLookup">17</a>.<a href="#1_17_3" title="1. Uize -&gt; 1.17. Uize.reverseLookup -&gt; 1.17.3. Support Merging in to Target">3</a>.<a href="#1_17_3_1" title="1. Uize -&gt; 1.17. Uize.reverseLookup -&gt; 1.17.3. Support Merging in to Target -&gt; 1.17.3.1. - when entries are added to an existing reverse lookup object, use the following rules...">1</a>.<a href="#1_17_3_1_1" title="1. Uize -&gt; 1.17. Uize.reverseLookup -&gt; 1.17.3. Support Merging in to Target -&gt; 1.17.3.1. - when entries are added to an existing reverse lookup object, use the following rules... -&gt; 1.17.3.1.1. - if the desired key to add already exists, then...">1</a>. </span>- if the desired key to add already exists, then...</h5>
 					<div class="contents5">
 						<table class="list">
 						<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>if the key's value is not an array, make it an array with the current value as the first element and the desired value to add as the second</td></tr>
@@ -1582,11 +1787,11 @@ return ((value - min) % maxMinDelta + maxMinDelta) % maxMinDelta + min;
 			</div>
 		</div>
 		
-		<a name="1_12"></a>
-		<h2 class="heading2" title="1. Uize -&gt; 1.12. Uize.indexIn"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_12" title="1. Uize -&gt; 1.12. Uize.indexIn">12</a>. </span>Uize.indexIn</h2>
+		<a name="1_18"></a>
+		<h2 class="heading2" title="1. Uize -&gt; 1.18. Uize.indexIn"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_18" title="1. Uize -&gt; 1.18. Uize.indexIn">18</a>. </span>Uize.indexIn</h2>
 		<div class="contents2">
-			<a name="1_12_1"></a>
-			<h3 class="heading3" title="1. Uize -&gt; 1.12. Uize.indexIn -&gt; 1.12.1. Support Simple Type Source"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_12" title="1. Uize -&gt; 1.12. Uize.indexIn">12</a>.<a href="#1_12_1" title="1. Uize -&gt; 1.12. Uize.indexIn -&gt; 1.12.1. Support Simple Type Source">1</a>. </span>Support Simple Type Source</h3>
+			<a name="1_18_1"></a>
+			<h3 class="heading3" title="1. Uize -&gt; 1.18. Uize.indexIn -&gt; 1.18.1. Support Simple Type Source"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_18" title="1. Uize -&gt; 1.18. Uize.indexIn">18</a>.<a href="#1_18_1" title="1. Uize -&gt; 1.18. Uize.indexIn -&gt; 1.18.1. Support Simple Type Source">1</a>. </span>Support Simple Type Source</h3>
 			<div class="contents3">
 				<p>For simple type source, could do string index.</p>
 				
@@ -1594,11 +1799,11 @@ return ((value - min) % maxMinDelta + maxMinDelta) % maxMinDelta + min;
 			</div>
 		</div>
 		
-		<a name="1_13"></a>
-		<h2 class="heading2" title="1. Uize -&gt; 1.13. Uize.module"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_13" title="1. Uize -&gt; 1.13. Uize.module">13</a>. </span>Uize.module</h2>
+		<a name="1_19"></a>
+		<h2 class="heading2" title="1. Uize -&gt; 1.19. Uize.module"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_19" title="1. Uize -&gt; 1.19. Uize.module">19</a>. </span>Uize.module</h2>
 		<div class="contents2">
-			<a name="1_13_1"></a>
-			<h3 class="heading3" title="1. Uize -&gt; 1.13. Uize.module -&gt; 1.13.1. Support Code Besides in Module Loader"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_13" title="1. Uize -&gt; 1.13. Uize.module">13</a>.<a href="#1_13_1" title="1. Uize -&gt; 1.13. Uize.module -&gt; 1.13.1. Support Code Besides in Module Loader">1</a>. </span>Support Code Besides in Module Loader</h3>
+			<a name="1_19_1"></a>
+			<h3 class="heading3" title="1. Uize -&gt; 1.19. Uize.module -&gt; 1.19.1. Support Code Besides in Module Loader"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_19" title="1. Uize -&gt; 1.19. Uize.module">19</a>.<a href="#1_19_1" title="1. Uize -&gt; 1.19. Uize.module -&gt; 1.19.1. Support Code Besides in Module Loader">1</a>. </span>Support Code Besides in Module Loader</h3>
 			<div class="contents3">
 				<p>How can code require a module that is not in the modules directory (like a code beside)?</p>
 				
@@ -1606,34 +1811,34 @@ return ((value - min) % maxMinDelta + maxMinDelta) % maxMinDelta + min;
 			</div>
 		</div>
 		
-		<a name="1_14"></a>
-		<h2 class="heading2" title="1. Uize -&gt; 1.14. Multiple Inheritance"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_14" title="1. Uize -&gt; 1.14. Multiple Inheritance">14</a>. </span>Multiple Inheritance</h2>
+		<a name="1_20"></a>
+		<h2 class="heading2" title="1. Uize -&gt; 1.20. Multiple Inheritance"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_20" title="1. Uize -&gt; 1.20. Multiple Inheritance">20</a>. </span>Multiple Inheritance</h2>
 		<div class="contents2">
 			<p>Consider a facility to support multiple inheritance (may involve creating a merge service for merging data from one object into another, since it should be possible to merge additional features of a different class into an already created class, and perhaps that merge feature would also be used in the _subclass function's implementation).</p>
 		</div>
 		
-		<a name="1_15"></a>
-		<h2 class="heading2" title="1. Uize -&gt; 1.15. Library Modules"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_15" title="1. Uize -&gt; 1.15. Library Modules">15</a>. </span>Library Modules</h2>
+		<a name="1_21"></a>
+		<h2 class="heading2" title="1. Uize -&gt; 1.21. Library Modules"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_21" title="1. Uize -&gt; 1.21. Library Modules">21</a>. </span>Library Modules</h2>
 		<div class="contents2">
-			<a name="1_15_1"></a>
-			<h3 class="heading3" title="1. Uize -&gt; 1.15. Library Modules -&gt; 1.15.1. Library of Dispersed Modules"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_15" title="1. Uize -&gt; 1.15. Library Modules">15</a>.<a href="#1_15_1" title="1. Uize -&gt; 1.15. Library Modules -&gt; 1.15.1. Library of Dispersed Modules">1</a>. </span>Library of Dispersed Modules</h3>
+			<a name="1_21_1"></a>
+			<h3 class="heading3" title="1. Uize -&gt; 1.21. Library Modules -&gt; 1.21.1. Library of Dispersed Modules"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_21" title="1. Uize -&gt; 1.21. Library Modules">21</a>.<a href="#1_21_1" title="1. Uize -&gt; 1.21. Library Modules -&gt; 1.21.1. Library of Dispersed Modules">1</a>. </span>Library of Dispersed Modules</h3>
 			<div class="contents3">
 				<p>Can library modules that are outside the modules directory require modules that are outside the modules directory?</p>
 			</div>
 		</div>
 		
-		<a name="1_16"></a>
-		<h2 class="heading2" title="1. Uize -&gt; 1.16. Uize.clone"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_16" title="1. Uize -&gt; 1.16. Uize.clone">16</a>. </span>Uize.clone</h2>
+		<a name="1_22"></a>
+		<h2 class="heading2" title="1. Uize -&gt; 1.22. Uize.clone"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_22" title="1. Uize -&gt; 1.22. Uize.clone">22</a>. </span>Uize.clone</h2>
 		<div class="contents2">
-			<a name="1_16_1"></a>
-			<h3 class="heading3" title="1. Uize -&gt; 1.16. Uize.clone -&gt; 1.16.1. Uize.clone and Circular References"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_16" title="1. Uize -&gt; 1.16. Uize.clone">16</a>.<a href="#1_16_1" title="1. Uize -&gt; 1.16. Uize.clone -&gt; 1.16.1. Uize.clone and Circular References">1</a>. </span>Uize.clone and Circular References</h3>
+			<a name="1_22_1"></a>
+			<h3 class="heading3" title="1. Uize -&gt; 1.22. Uize.clone -&gt; 1.22.1. Uize.clone and Circular References"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_22" title="1. Uize -&gt; 1.22. Uize.clone">22</a>.<a href="#1_22_1" title="1. Uize -&gt; 1.22. Uize.clone -&gt; 1.22.1. Uize.clone and Circular References">1</a>. </span>Uize.clone and Circular References</h3>
 			<div class="contents3">
-				<p>Handle circular references in <code><a href="#1_16">Uize.clone</a></code> (how to generate properties that are references to other parts of structure in same relationship as the equivalent property in the cloning source???)</p>
+				<p>Handle circular references in <code><a href="#1_22">Uize.clone</a></code> (how to generate properties that are references to other parts of structure in same relationship as the equivalent property in the cloning source???)</p>
 			</div>
 		</div>
 		
-		<a name="1_17"></a>
-		<h2 class="heading2" title="1. Uize -&gt; 1.17. Uize.substituteInto"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_17" title="1. Uize -&gt; 1.17. Uize.substituteInto">17</a>. </span>Uize.substituteInto</h2>
+		<a name="1_23"></a>
+		<h2 class="heading2" title="1. Uize -&gt; 1.23. Uize.substituteInto"><span class="headingNumber"><a href="#1" title="1. Uize">1</a>.<a href="#1_23" title="1. Uize -&gt; 1.23. Uize.substituteInto">23</a>. </span>Uize.substituteInto</h2>
 		<div class="contents2">
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>optimize for successive substitution on the same source using the same form of map (but different values, of course)</td></tr>
@@ -1974,7 +2179,21 @@ firstANYTYPE = Uize.Array.Sort.lastBy (sourceARRAY,sortColumnINT,directionINT);
 );
 
 myWidget.whenever (
-  'theme == "bottle"',
+  'theme =&gt; theme == "bottle"',
+  function () {
+    // do stuff whenever condition is met
+  }
+);
+
+myWidget.wire (
+  Uize.Class.virtualEvent ('whenever','theme =&gt; theme == "bottle"'),
+  function () {
+    // do stuff whenever condition is met
+  }
+);
+
+myWidget.wire (
+  'whenever("theme =&gt; theme == \'bottle\'")',
   function () {
     // do stuff whenever condition is met
   }
@@ -1985,11 +2204,18 @@ myWidget.whenever (
 			<a name="3_1_2"></a>
 			<h3 class="heading3" title="3. Uize.Class -&gt; 3.1. Conditions -&gt; 3.1.2. The once Instance Method"><span class="headingNumber"><a href="#3" title="3. Uize.Class">3</a>.<a href="#3_1" title="3. Uize.Class -&gt; 3.1. Conditions">1</a>.<a href="#3_1_2" title="3. Uize.Class -&gt; 3.1. Conditions -&gt; 3.1.2. The once Instance Method">2</a>. </span>The once Instance Method</h3>
 			<div class="contents3">
-				<p><span class="allCaps">EXAMPLE</span></p>
+				<p><span class="allCaps">EXAMPLES</span></p>
 				
 				
 <pre class="sample-code">myWidget.once (
-  'totalSelected  &gt; 5',
+  function (totalSelected) {return totalSelected  &gt; 5},
+  function () {
+    // do stuff once condition is met for the first time
+  }
+);
+
+myWidget.once (
+  'totalSelected =&gt; totalSelected  &gt; 5',
   function () {
     // do stuff once condition is met for the first time
   }
@@ -3871,18 +4097,206 @@ Uize.Conformer.toRange (1,100) (5);     // creates a conformer, uses it immediat
 	<h1 class="heading1" title="33. Uize.Node"><span class="headingNumber"><a href="#33" title="33. Uize.Node">33</a>. </span>Uize.Node</h1>
 	<div class="contents1">
 		<a name="33_1"></a>
-		<h2 class="heading2" title="33. Uize.Node -&gt; 33.1. Proposed Shortenings"><span class="headingNumber"><a href="#33" title="33. Uize.Node">33</a>.<a href="#33_1" title="33. Uize.Node -&gt; 33.1. Proposed Shortenings">1</a>. </span>Proposed Shortenings</h2>
+		<h2 class="heading2" title="33. Uize.Node -&gt; 33.1. Proposed Simplified Interface"><span class="headingNumber"><a href="#33" title="33. Uize.Node">33</a>.<a href="#33_1" title="33. Uize.Node -&gt; 33.1. Proposed Simplified Interface">1</a>. </span>Proposed Simplified Interface</h2>
+		<div class="contents2">
+			<p>The following proposed interface aims to address the desire amongst Web developers for easier and more concise ways to access and manipulate DOM elements.</p>
+			
+			<a name="33_1_1"></a>
+			<h3 class="heading3" title="33. Uize.Node -&gt; 33.1. Proposed Simplified Interface -&gt; 33.1.1. The Uize.Node Object"><span class="headingNumber"><a href="#33" title="33. Uize.Node">33</a>.<a href="#33_1" title="33. Uize.Node -&gt; 33.1. Proposed Simplified Interface">1</a>.<a href="#33_1_1" title="33. Uize.Node -&gt; 33.1. Proposed Simplified Interface -&gt; 33.1.1. The Uize.Node Object">1</a>. </span>The Uize.Node Object</h3>
+			<div class="contents3">
+				<p>A convenient proxy wrapper for DOM objects that allows methods to be called without always dereferencing the static methods on the <code><a href="#33">Uize.Node</a></code> package and having to specify the <code>node blob</code> in each call.</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">var myNode = Uize.Node ('#myNodeId');
+myNode.style ({
+  border: '1px',
+  background: '#ccc'
+});
+myNode.display (false);
+myNode.on (
+  'click',
+  function () {
+    // do something
+  }
+);
+</pre>
+			</div>
+			
+			<a name="33_1_2"></a>
+			<h3 class="heading3" title="33. Uize.Node -&gt; 33.1. Proposed Simplified Interface -&gt; 33.1.2. Node Blob Management"><span class="headingNumber"><a href="#33" title="33. Uize.Node">33</a>.<a href="#33_1" title="33. Uize.Node -&gt; 33.1. Proposed Simplified Interface">1</a>.<a href="#33_1_2" title="33. Uize.Node -&gt; 33.1. Proposed Simplified Interface -&gt; 33.1.2. Node Blob Management">2</a>. </span>Node Blob Management</h3>
+			<div class="contents3">
+				<p>The <code><a href="#33">Uize.Node</a></code> object provides methods for managing the set of nodes that make up the node blob that the object represents.</p>
+				
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>nodeBlobOBJ.addToBlob</code> - lets you add more nodes to a node blob</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>nodeBlobOBJ.clearBlob</code> - clears the node blob of all its contents</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>nodeBlobOBJ.removeFromBlob</code> - removes the specified nodes from the node blob</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>nodeBlobOBJ.setBlob</code> - lets you set the nodes that make up the node blob</td></tr>
+				</table>
+			</div>
+			
+			<a name="33_1_3"></a>
+			<h3 class="heading3" title="33. Uize.Node -&gt; 33.1. Proposed Simplified Interface -&gt; 33.1.3. Versatile Setter and Getter Signatures"><span class="headingNumber"><a href="#33" title="33. Uize.Node">33</a>.<a href="#33_1" title="33. Uize.Node -&gt; 33.1. Proposed Simplified Interface">1</a>.<a href="#33_1_3" title="33. Uize.Node -&gt; 33.1. Proposed Simplified Interface -&gt; 33.1.3. Versatile Setter and Getter Signatures">3</a>. </span>Versatile Setter and Getter Signatures</h3>
+			<div class="contents3">
+				<a name="33_1_3_1"></a>
+				<h4 class="heading4" title="33. Uize.Node -&gt; 33.1. Proposed Simplified Interface -&gt; 33.1.3. Versatile Setter and Getter Signatures -&gt; 33.1.3.1. Getting Values"><span class="headingNumber"><a href="#33" title="33. Uize.Node">33</a>.<a href="#33_1" title="33. Uize.Node -&gt; 33.1. Proposed Simplified Interface">1</a>.<a href="#33_1_3" title="33. Uize.Node -&gt; 33.1. Proposed Simplified Interface -&gt; 33.1.3. Versatile Setter and Getter Signatures">3</a>.<a href="#33_1_3_1" title="33. Uize.Node -&gt; 33.1. Proposed Simplified Interface -&gt; 33.1.3. Versatile Setter and Getter Signatures -&gt; 33.1.3.1. Getting Values">1</a>. </span>Getting Values</h4>
+				<div class="contents4">
+					<p>Get the Value for a Single Style Property</p>
+					
+					
+<pre class="sample-code">var stylePropertyValueSTR = Uize.Node.style (nodeBLOB, stylePropertyNameSTR);
+</pre>
+					
+					<p>Get the Values for Multiple Style Properties as an Array</p>
+					
+					
+<pre class="sample-code">var stylePropertiesValuesARRAY = Uize.Node.style (nodeBLOB, stylePropertiesNamesARRAY);
+</pre>
+				</div>
+				
+				<a name="33_1_3_2"></a>
+				<h4 class="heading4" title="33. Uize.Node -&gt; 33.1. Proposed Simplified Interface -&gt; 33.1.3. Versatile Setter and Getter Signatures -&gt; 33.1.3.2. Setting Values"><span class="headingNumber"><a href="#33" title="33. Uize.Node">33</a>.<a href="#33_1" title="33. Uize.Node -&gt; 33.1. Proposed Simplified Interface">1</a>.<a href="#33_1_3" title="33. Uize.Node -&gt; 33.1. Proposed Simplified Interface -&gt; 33.1.3. Versatile Setter and Getter Signatures">3</a>.<a href="#33_1_3_2" title="33. Uize.Node -&gt; 33.1. Proposed Simplified Interface -&gt; 33.1.3. Versatile Setter and Getter Signatures -&gt; 33.1.3.2. Setting Values">2</a>. </span>Setting Values</h4>
+				<div class="contents4">
+					<p>Set the Values for Multiple Style Properties as an Object</p>
+					
+					
+<pre class="sample-code">Uize.Node.style (nodeBLOB, stylePropertiesOBJ);
+</pre>
+					
+					<p>Set the Values for Multiple Style Properties, Specifying Names And Values Separately</p>
+					
+					
+<pre class="sample-code">Uize.Node.style (nodeBLOB, stylePropertiesNamesARRAY, stylePropertiesValuesARRAY);
+</pre>
+					
+					<p>Set the Same Value For Multiple Style Properties</p>
+					
+					
+<pre class="sample-code">Uize.Node.style (nodeBLOB, stylePropertiesNamesARRAY, stylePropertyValuePRIMITIVE);
+</pre>
+				</div>
+			</div>
+			
+			<a name="33_1_4"></a>
+			<h3 class="heading3" title="33. Uize.Node -&gt; 33.1. Proposed Simplified Interface -&gt; 33.1.4. Shortened Method Names"><span class="headingNumber"><a href="#33" title="33. Uize.Node">33</a>.<a href="#33_1" title="33. Uize.Node -&gt; 33.1. Proposed Simplified Interface">1</a>.<a href="#33_1_4" title="33. Uize.Node -&gt; 33.1. Proposed Simplified Interface -&gt; 33.1.4. Shortened Method Names">4</a>. </span>Shortened Method Names</h3>
+			<div class="contents3">
+				<p>document...</p>
+				
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#33_1_8">Uize.Node.style</a></code> - set the values for one or more style properties for all the nodes of a node blob, or get the value for a single style property</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>Uize.Node.prop</code> - set the value for one or more properties, or get the value for a single property</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>Uize.Node.attr</code> - set the value for one or more attributes, or get the value for a single attribute</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#33_1_9">Uize.Node.on</a></code> - wire event handlers for one or more DOM events</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>Uize.Node.text</code> - set the text of a DOM node, or get the text of a DOM node</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>Uize.Node.value</code> - set the value for a DOM node, or get the value for a DOM node</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>Uize.Node.html</code> - set the inner HTML for a node blob</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>Uize.Node.clip</code> - set the clip rect for all the nodes of a node blob</td></tr>
+				</table>
+			</div>
+			
+			<a name="33_1_5"></a>
+			<h3 class="heading3" title="33. Uize.Node -&gt; 33.1. Proposed Simplified Interface -&gt; 33.1.5. Convenience Event Wiring Methods"><span class="headingNumber"><a href="#33" title="33. Uize.Node">33</a>.<a href="#33_1" title="33. Uize.Node -&gt; 33.1. Proposed Simplified Interface">1</a>.<a href="#33_1_5" title="33. Uize.Node -&gt; 33.1. Proposed Simplified Interface -&gt; 33.1.5. Convenience Event Wiring Methods">5</a>. </span>Convenience Event Wiring Methods</h3>
+			<div class="contents3">
+				<p>As a convenience for developers, short form wiring methods are provided for all the major DOM event types.</p>
+				
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>Uize.Node.onclick</code></td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>Uize.Node.onmouseover</code></td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>Uize.Node.onmouseout</code></td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>Uize.Node.onmousedown</code></td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>Uize.Node.onmouseup</code></td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>Uize.Node.ondblclick</code></td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>Uize.Node.onchange</code></td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>Uize.Node.onload</code></td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>Uize.Node.onerror</code></td></tr>
+				</table>
+			</div>
+			
+			<a name="33_1_6"></a>
+			<h3 class="heading3" title="33. Uize.Node -&gt; 33.1. Proposed Simplified Interface -&gt; 33.1.6. Combo Setter and Getter Methods"><span class="headingNumber"><a href="#33" title="33. Uize.Node">33</a>.<a href="#33_1" title="33. Uize.Node -&gt; 33.1. Proposed Simplified Interface">1</a>.<a href="#33_1_6" title="33. Uize.Node -&gt; 33.1. Proposed Simplified Interface -&gt; 33.1.6. Combo Setter and Getter Methods">6</a>. </span>Combo Setter and Getter Methods</h3>
+			<div class="contents3">
+				<p>document...</p>
+			</div>
+			
+			<a name="33_1_7"></a>
+			<h3 class="heading3" title="33. Uize.Node -&gt; 33.1. Proposed Simplified Interface -&gt; 33.1.7. Method Chaining"><span class="headingNumber"><a href="#33" title="33. Uize.Node">33</a>.<a href="#33_1" title="33. Uize.Node -&gt; 33.1. Proposed Simplified Interface">1</a>.<a href="#33_1_7" title="33. Uize.Node -&gt; 33.1. Proposed Simplified Interface -&gt; 33.1.7. Method Chaining">7</a>. </span>Method Chaining</h3>
+			<div class="contents3">
+				<p>To appease developers who are fond of method chaining, all modify type methods that don't need to return a result will return a reference to the node blob.</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">Uize.Node ('#myNodeId')
+  .style ({display: 'none', position: 'absolute'})
+  .on (
+    'click',
+    function () {
+      // handle click event
+    }
+  )
+;
+</pre>
+			</div>
+			
+			<a name="33_1_8"></a>
+			<h3 class="heading3" title="33. Uize.Node -&gt; 33.1. Proposed Simplified Interface -&gt; 33.1.8. Uize.Node.style"><span class="headingNumber"><a href="#33" title="33. Uize.Node">33</a>.<a href="#33_1" title="33. Uize.Node -&gt; 33.1. Proposed Simplified Interface">1</a>.<a href="#33_1_8" title="33. Uize.Node -&gt; 33.1. Proposed Simplified Interface -&gt; 33.1.8. Uize.Node.style">8</a>. </span>Uize.Node.style</h3>
+			<div class="contents3">
+				<p>Set or get style for a node blob.</p>
+				
+				<p><span class="allCaps">SYNTAX</span></p>
+				
+				
+<pre class="sample-code">Uize.Node.style ('#myNodeId', 'display', 'none');
+Uize.Node.style ('#myNodeId', {display: 'none', position: 'absolute'});
+var nodeDisplay = Uize.Node.style ('#myNodeId', 'display');
+
+Uize.Node ('#myNodeId').style ('display', 'none');
+Uize.Node ('#myNodeId').style ({display: 'none', position: 'absolute'});
+var nodeDisplay = Uize.Node ('#myNodeId').style ('display');
+</pre>
+			</div>
+			
+			<a name="33_1_9"></a>
+			<h3 class="heading3" title="33. Uize.Node -&gt; 33.1. Proposed Simplified Interface -&gt; 33.1.9. Uize.Node.on"><span class="headingNumber"><a href="#33" title="33. Uize.Node">33</a>.<a href="#33_1" title="33. Uize.Node -&gt; 33.1. Proposed Simplified Interface">1</a>.<a href="#33_1_9" title="33. Uize.Node -&gt; 33.1. Proposed Simplified Interface -&gt; 33.1.9. Uize.Node.on">9</a>. </span>Uize.Node.on</h3>
+			<div class="contents3">
+				<p>A short form for the <code>wire</code> method.</p>
+				
+				<p><span class="allCaps">SYNTAX</span></p>
+				
+				
+<pre class="sample-code">Uize.Node.on (
+  '#myNodeId',
+  'click',
+  function () {
+    // handle click event
+  }
+);
+
+Uize.Node ('#myNodeId').on (
+  'click',
+  function () {
+    // handle click event
+  }
+);
+</pre>
+			</div>
+		</div>
+		
+		<a name="33_2"></a>
+		<h2 class="heading2" title="33. Uize.Node -&gt; 33.2. Proposed Shortenings"><span class="headingNumber"><a href="#33" title="33. Uize.Node">33</a>.<a href="#33_2" title="33. Uize.Node -&gt; 33.2. Proposed Shortenings">2</a>. </span>Proposed Shortenings</h2>
 		<div class="contents2">
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Uize.Node.getById -> Uize.Node.byId or Uize.Node.id or just Uize.Node</td></tr>
 			</table>
 		</div>
 		
-		<a name="33_2"></a>
-		<h2 class="heading2" title="33. Uize.Node -&gt; 33.2. Uize.Node.setValue &amp; Uize.Node.getValue"><span class="headingNumber"><a href="#33" title="33. Uize.Node">33</a>.<a href="#33_2" title="33. Uize.Node -&gt; 33.2. Uize.Node.setValue &amp; Uize.Node.getValue">2</a>. </span>Uize.Node.setValue & Uize.Node.getValue</h2>
+		<a name="33_3"></a>
+		<h2 class="heading2" title="33. Uize.Node -&gt; 33.3. Uize.Node.setValue &amp; Uize.Node.getValue"><span class="headingNumber"><a href="#33" title="33. Uize.Node">33</a>.<a href="#33_3" title="33. Uize.Node -&gt; 33.3. Uize.Node.setValue &amp; Uize.Node.getValue">3</a>. </span>Uize.Node.setValue & Uize.Node.getValue</h2>
 		<div class="contents2">
-			<a name="33_2_1"></a>
-			<h3 class="heading3" title="33. Uize.Node -&gt; 33.2. Uize.Node.setValue &amp; Uize.Node.getValue -&gt; 33.2.1. - respect disabled property?"><span class="headingNumber"><a href="#33" title="33. Uize.Node">33</a>.<a href="#33_2" title="33. Uize.Node -&gt; 33.2. Uize.Node.setValue &amp; Uize.Node.getValue">2</a>.<a href="#33_2_1" title="33. Uize.Node -&gt; 33.2. Uize.Node.setValue &amp; Uize.Node.getValue -&gt; 33.2.1. - respect disabled property?">1</a>. </span>- respect disabled property?</h3>
+			<a name="33_3_1"></a>
+			<h3 class="heading3" title="33. Uize.Node -&gt; 33.3. Uize.Node.setValue &amp; Uize.Node.getValue -&gt; 33.3.1. - respect disabled property?"><span class="headingNumber"><a href="#33" title="33. Uize.Node">33</a>.<a href="#33_3" title="33. Uize.Node -&gt; 33.3. Uize.Node.setValue &amp; Uize.Node.getValue">3</a>.<a href="#33_3_1" title="33. Uize.Node -&gt; 33.3. Uize.Node.setValue &amp; Uize.Node.getValue -&gt; 33.3.1. - respect disabled property?">1</a>. </span>- respect disabled property?</h3>
 			<div class="contents3">
 				<table class="list">
 				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>what about disabled select options, radios?</td></tr>
@@ -3891,14 +4305,14 @@ Uize.Conformer.toRange (1,100) (5);     // creates a conformer, uses it immediat
 			</div>
 		</div>
 		
-		<a name="33_3"></a>
-		<h2 class="heading2" title="33. Uize.Node -&gt; 33.3. - NEW WIRE EVENTS MECHANISM"><span class="headingNumber"><a href="#33" title="33. Uize.Node">33</a>.<a href="#33_3" title="33. Uize.Node -&gt; 33.3. - NEW WIRE EVENTS MECHANISM">3</a>. </span>- NEW WIRE EVENTS MECHANISM</h2>
+		<a name="33_4"></a>
+		<h2 class="heading2" title="33. Uize.Node -&gt; 33.4. - NEW WIRE EVENTS MECHANISM"><span class="headingNumber"><a href="#33" title="33. Uize.Node">33</a>.<a href="#33_4" title="33. Uize.Node -&gt; 33.4. - NEW WIRE EVENTS MECHANISM">4</a>. </span>- NEW WIRE EVENTS MECHANISM</h2>
 		<div class="contents2">
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>consider providing a way of unwiring wirings by specifying the wiring IDs, and returning wiring IDs from Uize.Node.wire and myWidget.wire</td></tr>
 			</table>
-			<a name="33_3_1"></a>
-			<h3 class="heading3" title="33. Uize.Node -&gt; 33.3. - NEW WIRE EVENTS MECHANISM -&gt; 33.3.1. **** make sure that Uize.Node.wire handles rewiring the same event for the same node"><span class="headingNumber"><a href="#33" title="33. Uize.Node">33</a>.<a href="#33_3" title="33. Uize.Node -&gt; 33.3. - NEW WIRE EVENTS MECHANISM">3</a>.<a href="#33_3_1" title="33. Uize.Node -&gt; 33.3. - NEW WIRE EVENTS MECHANISM -&gt; 33.3.1. **** make sure that Uize.Node.wire handles rewiring the same event for the same node">1</a>. </span>**** make sure that Uize.Node.wire handles rewiring the same event for the same node</h3>
+			<a name="33_4_1"></a>
+			<h3 class="heading3" title="33. Uize.Node -&gt; 33.4. - NEW WIRE EVENTS MECHANISM -&gt; 33.4.1. **** make sure that Uize.Node.wire handles rewiring the same event for the same node"><span class="headingNumber"><a href="#33" title="33. Uize.Node">33</a>.<a href="#33_4" title="33. Uize.Node -&gt; 33.4. - NEW WIRE EVENTS MECHANISM">4</a>.<a href="#33_4_1" title="33. Uize.Node -&gt; 33.4. - NEW WIRE EVENTS MECHANISM -&gt; 33.4.1. **** make sure that Uize.Node.wire handles rewiring the same event for the same node">1</a>. </span>**** make sure that Uize.Node.wire handles rewiring the same event for the same node</h3>
 			<div class="contents3">
 				<table class="list">
 				<tr valign="top"><td><span style="white-space:nowrap;">1) </span></td><td>when is this likely to happen? what code might do this?</td></tr>
@@ -3909,8 +4323,8 @@ Uize.Conformer.toRange (1,100) (5);     // creates a conformer, uses it immediat
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>make changes so that wired nodes are only remembered by ID (make IDs on the fly for nodes without)</td></tr>
 			</table>
-			<a name="33_3_2"></a>
-			<h3 class="heading3" title="33. Uize.Node -&gt; 33.3. - NEW WIRE EVENTS MECHANISM -&gt; 33.3.2. - for all widget classes..."><span class="headingNumber"><a href="#33" title="33. Uize.Node">33</a>.<a href="#33_3" title="33. Uize.Node -&gt; 33.3. - NEW WIRE EVENTS MECHANISM">3</a>.<a href="#33_3_2" title="33. Uize.Node -&gt; 33.3. - NEW WIRE EVENTS MECHANISM -&gt; 33.3.2. - for all widget classes...">2</a>. </span>- for all widget classes...</h3>
+			<a name="33_4_2"></a>
+			<h3 class="heading3" title="33. Uize.Node -&gt; 33.4. - NEW WIRE EVENTS MECHANISM -&gt; 33.4.2. - for all widget classes..."><span class="headingNumber"><a href="#33" title="33. Uize.Node">33</a>.<a href="#33_4" title="33. Uize.Node -&gt; 33.4. - NEW WIRE EVENTS MECHANISM">4</a>.<a href="#33_4_2" title="33. Uize.Node -&gt; 33.4. - NEW WIRE EVENTS MECHANISM -&gt; 33.4.2. - for all widget classes...">2</a>. </span>- for all widget classes...</h3>
 			<div class="contents3">
 				<table class="list">
 				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>make sure no events are being wired in a way that they wouldn't get unwired</td></tr>
@@ -3919,11 +4333,11 @@ Uize.Conformer.toRange (1,100) (5);     // creates a conformer, uses it immediat
 			</div>
 		</div>
 		
-		<a name="33_4"></a>
-		<h2 class="heading2" title="33. Uize.Node -&gt; 33.4. Uize.Node.display"><span class="headingNumber"><a href="#33" title="33. Uize.Node">33</a>.<a href="#33_4" title="33. Uize.Node -&gt; 33.4. Uize.Node.display">4</a>. </span>Uize.Node.display</h2>
+		<a name="33_5"></a>
+		<h2 class="heading2" title="33. Uize.Node -&gt; 33.5. Uize.Node.display"><span class="headingNumber"><a href="#33" title="33. Uize.Node">33</a>.<a href="#33_5" title="33. Uize.Node -&gt; 33.5. Uize.Node.display">5</a>. </span>Uize.Node.display</h2>
 		<div class="contents2">
-			<a name="33_4_1"></a>
-			<h3 class="heading3" title="33. Uize.Node -&gt; 33.4. Uize.Node.display -&gt; 33.4.1. - IDEA: respecting initial non-none display value"><span class="headingNumber"><a href="#33" title="33. Uize.Node">33</a>.<a href="#33_4" title="33. Uize.Node -&gt; 33.4. Uize.Node.display">4</a>.<a href="#33_4_1" title="33. Uize.Node -&gt; 33.4. Uize.Node.display -&gt; 33.4.1. - IDEA: respecting initial non-none display value">1</a>. </span>- IDEA: respecting initial non-none display value</h3>
+			<a name="33_5_1"></a>
+			<h3 class="heading3" title="33. Uize.Node -&gt; 33.5. Uize.Node.display -&gt; 33.5.1. - IDEA: respecting initial non-none display value"><span class="headingNumber"><a href="#33" title="33. Uize.Node">33</a>.<a href="#33_5" title="33. Uize.Node -&gt; 33.5. Uize.Node.display">5</a>.<a href="#33_5_1" title="33. Uize.Node -&gt; 33.5. Uize.Node.display -&gt; 33.5.1. - IDEA: respecting initial non-none display value">1</a>. </span>- IDEA: respecting initial non-none display value</h3>
 			<div class="contents3">
 				
 <pre class="sample-code">var currentDisplay = Uize.Node.getStyle (node,'display');
@@ -3939,23 +4353,23 @@ if (mustDisplay != (currentDisplay != 'none')) {
 			</div>
 		</div>
 		
-		<a name="33_5"></a>
-		<h2 class="heading2" title="33. Uize.Node -&gt; 33.5. Uize.Node.getProperty"><span class="headingNumber"><a href="#33" title="33. Uize.Node">33</a>.<a href="#33_5" title="33. Uize.Node -&gt; 33.5. Uize.Node.getProperty">5</a>. </span>Uize.Node.getProperty</h2>
+		<a name="33_6"></a>
+		<h2 class="heading2" title="33. Uize.Node -&gt; 33.6. Uize.Node.getProperty"><span class="headingNumber"><a href="#33" title="33. Uize.Node">33</a>.<a href="#33_6" title="33. Uize.Node -&gt; 33.6. Uize.Node.getProperty">6</a>. </span>Uize.Node.getProperty</h2>
 		<div class="contents2">
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>should support string for property name, or object for properties</td></tr>
 			</table>
 		</div>
 		
-		<a name="33_6"></a>
-		<h2 class="heading2" title="33. Uize.Node -&gt; 33.6. Uize.Node.find"><span class="headingNumber"><a href="#33" title="33. Uize.Node">33</a>.<a href="#33_6" title="33. Uize.Node -&gt; 33.6. Uize.Node.find">6</a>. </span>Uize.Node.find</h2>
+		<a name="33_7"></a>
+		<h2 class="heading2" title="33. Uize.Node -&gt; 33.7. Uize.Node.find"><span class="headingNumber"><a href="#33" title="33. Uize.Node">33</a>.<a href="#33_7" title="33. Uize.Node -&gt; 33.7. Uize.Node.find">7</a>. </span>Uize.Node.find</h2>
 		<div class="contents2">
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>provide a way to search through a specified set of nodes (so that one can chain searches)</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>think about supporting node blob for root, or test object for root (ie. invoke find)</td></tr>
 			</table>
-			<a name="33_6_1"></a>
-			<h3 class="heading3" title="33. Uize.Node -&gt; 33.6. Uize.Node.find -&gt; 33.6.1. - think about testing..."><span class="headingNumber"><a href="#33" title="33. Uize.Node">33</a>.<a href="#33_6" title="33. Uize.Node -&gt; 33.6. Uize.Node.find">6</a>.<a href="#33_6_1" title="33. Uize.Node -&gt; 33.6. Uize.Node.find -&gt; 33.6.1. - think about testing...">1</a>. </span>- think about testing...</h3>
+			<a name="33_7_1"></a>
+			<h3 class="heading3" title="33. Uize.Node -&gt; 33.7. Uize.Node.find -&gt; 33.7.1. - think about testing..."><span class="headingNumber"><a href="#33" title="33. Uize.Node">33</a>.<a href="#33_7" title="33. Uize.Node -&gt; 33.7. Uize.Node.find">7</a>.<a href="#33_7_1" title="33. Uize.Node -&gt; 33.7. Uize.Node.find -&gt; 33.7.1. - think about testing...">1</a>. </span>- think about testing...</h3>
 			<div class="contents3">
 				<table class="list">
 				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>style properties</td></tr>
@@ -3973,32 +4387,32 @@ if (mustDisplay != (currentDisplay != 'none')) {
 		<table class="list">
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>facility for specifying a set of nodes using a match object (eg {class:/^heading\d+$/})</td></tr>
 		</table>
-		<a name="33_7"></a>
-		<h2 class="heading2" title="33. Uize.Node -&gt; 33.7. - methods that should coerce use of valueOf interface"><span class="headingNumber"><a href="#33" title="33. Uize.Node">33</a>.<a href="#33_7" title="33. Uize.Node -&gt; 33.7. - methods that should coerce use of valueOf interface">7</a>. </span>- methods that should coerce use of valueOf interface</h2>
+		<a name="33_8"></a>
+		<h2 class="heading2" title="33. Uize.Node -&gt; 33.8. - methods that should coerce use of valueOf interface"><span class="headingNumber"><a href="#33" title="33. Uize.Node">33</a>.<a href="#33_8" title="33. Uize.Node -&gt; 33.8. - methods that should coerce use of valueOf interface">8</a>. </span>- methods that should coerce use of valueOf interface</h2>
 		<div class="contents2">
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Uize.Node.setProperties</td></tr>
 			</table>
 		</div>
 		
-		<a name="33_8"></a>
-		<h2 class="heading2" title="33. Uize.Node -&gt; 33.8. Uize.Node.setStyle"><span class="headingNumber"><a href="#33" title="33. Uize.Node">33</a>.<a href="#33_8" title="33. Uize.Node -&gt; 33.8. Uize.Node.setStyle">8</a>. </span>Uize.Node.setStyle</h2>
+		<a name="33_9"></a>
+		<h2 class="heading2" title="33. Uize.Node -&gt; 33.9. Uize.Node.setStyle"><span class="headingNumber"><a href="#33" title="33. Uize.Node">33</a>.<a href="#33_9" title="33. Uize.Node -&gt; 33.9. Uize.Node.setStyle">9</a>. </span>Uize.Node.setStyle</h2>
 		<div class="contents2">
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>when setting opacity, if opacity is 1, set opacity properties to '' (empty string). Some browsers seem to still be processing opacity when set to 1, which is slowing down render time.</td></tr>
 			</table>
 		</div>
 		
-		<a name="33_9"></a>
-		<h2 class="heading2" title="33. Uize.Node -&gt; 33.9. Uize.Node.getStyle"><span class="headingNumber"><a href="#33" title="33. Uize.Node">33</a>.<a href="#33_9" title="33. Uize.Node -&gt; 33.9. Uize.Node.getStyle">9</a>. </span>Uize.Node.getStyle</h2>
+		<a name="33_10"></a>
+		<h2 class="heading2" title="33. Uize.Node -&gt; 33.10. Uize.Node.getStyle"><span class="headingNumber"><a href="#33" title="33. Uize.Node">33</a>.<a href="#33_10" title="33. Uize.Node -&gt; 33.10. Uize.Node.getStyle">10</a>. </span>Uize.Node.getStyle</h2>
 		<div class="contents2">
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>it would be useful to have a way to parse out a number from style attribute values that are denominated in px (eg. 128px -> 128, empty string -> 0)</td></tr>
 			</table>
 		</div>
 		
-		<a name="33_10"></a>
-		<h2 class="heading2" title="33. Uize.Node -&gt; 33.10. Uize.Node.injectHtml"><span class="headingNumber"><a href="#33" title="33. Uize.Node">33</a>.<a href="#33_10" title="33. Uize.Node -&gt; 33.10. Uize.Node.injectHtml">10</a>. </span>Uize.Node.injectHtml</h2>
+		<a name="33_11"></a>
+		<h2 class="heading2" title="33. Uize.Node -&gt; 33.11. Uize.Node.injectHtml"><span class="headingNumber"><a href="#33" title="33. Uize.Node">33</a>.<a href="#33_11" title="33. Uize.Node -&gt; 33.11. Uize.Node.injectHtml">11</a>. </span>Uize.Node.injectHtml</h2>
 		<div class="contents2">
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>support a node reference, or document fragment for html parameter</td></tr>
@@ -4012,8 +4426,8 @@ if (mustDisplay != (currentDisplay != 'none')) {
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>for Uize.Node.getByMatch, consider supporting regular expressions in the properties match object</td></tr>
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>rename: getDimensions -> getSize</td></tr>
 		</table>
-		<a name="33_11"></a>
-		<h2 class="heading2" title="33. Uize.Node -&gt; 33.11. - new methods"><span class="headingNumber"><a href="#33" title="33. Uize.Node">33</a>.<a href="#33_11" title="33. Uize.Node -&gt; 33.11. - new methods">11</a>. </span>- new methods</h2>
+		<a name="33_12"></a>
+		<h2 class="heading2" title="33. Uize.Node -&gt; 33.12. - new methods"><span class="headingNumber"><a href="#33" title="33. Uize.Node">33</a>.<a href="#33_12" title="33. Uize.Node -&gt; 33.12. - new methods">12</a>. </span>- new methods</h2>
 		<div class="contents2">
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>setSize</td></tr>

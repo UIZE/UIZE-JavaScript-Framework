@@ -7,7 +7,7 @@
 		<description>UIZE JavaScript Framework (AJAX, RIA, widgets, JSON, OOP, Class Inheritance, XMLHttpRequest, DOM manipulation, and all that stuff)</description>
 		<language>en-us</language>
 		<copyright>© 1996-2008 UIZE</copyright>
-		<pubDate>Sun, 29 Jan 2012 04:47:31 UT</pubDate>
+		<pubDate>Tue, 13 Mar 2012 06:02:28 UT</pubDate>
 		<ttl>10080</ttl>
 		<image>
 			<title>UIZE JavaScript Framework | Latest News</title>
@@ -18,6 +18,14 @@
 			<description>UIZE JavaScript Framework (AJAX, RIA, widgets, JSON, OOP, Class Inheritance, XMLHttpRequest, DOM manipulation, and all that stuff)</description>
 		</image>
 		<atom10:link xmlns:atom10="http://www.w3.org/2005/Atom" rel="self" href="http://www.uize.com/latest-news.rss" type="application/rss+xml" />
+		<item>
+			<title>2012-02-19 - NEW MODULE: Uize.Data.Combinations</title>
+			<link>http://www.uize.com/news/2012-02-19-NEW-MODULE-Uize.Data.Combinations.html</link>
+			<guid>http://www.uize.com/news/2012-02-19-NEW-MODULE-Uize.Data.Combinations.html</guid>
+			<description>The new Uize.Data.Combinations module provides methods for generating object or array combinations from a combination specifier, with support for an optional combination transformer and combination matcher.</description>
+			<pubDate>Sun, 19 Feb 2012 08:00:00 UT</pubDate>
+			<feedburner:origLink>http://www.uize.com/news/2012-02-19-NEW-MODULE-Uize.Data.Combinations.html</feedburner:origLink>
+		</item>
 		<item>
 			<title>2012-01-28 - New Uize.now Method</title>
 			<link>http://www.uize.com/news/2012-01-28-New-Uize.now-Method.html</link>
@@ -409,14 +417,6 @@
 			<description>The Uize base class has been improved with the addition of the new Uize.getModuleByName static method.</description>
 			<pubDate>Wed, 3 Nov 2010 07:00:00 UT</pubDate>
 			<feedburner:origLink>http://www.uize.com/news/2010-11-03-NEW-METHOD-Uize.getModuleByName.html</feedburner:origLink>
-		</item>
-		<item>
-			<title>2010-11-01 - IMPROVED MODULES: Uize and Uize.Data</title>
-			<link>http://www.uize.com/news/2010-11-01-IMPROVED-MODULES-Uize-and-Uize.Data.html</link>
-			<guid>http://www.uize.com/news/2010-11-01-IMPROVED-MODULES-Uize-and-Uize.Data.html</guid>
-			<description>The Uize and Uize.Data modules have been improved with better handling of certain types of objects when cloning and comparing arbitrarily complex data structures.</description>
-			<pubDate>Mon, 1 Nov 2010 07:00:00 UT</pubDate>
-			<feedburner:origLink>http://www.uize.com/news/2010-11-01-IMPROVED-MODULES-Uize-and-Uize.Data.html</feedburner:origLink>
 		</item>
 	</channel>
 </rss>

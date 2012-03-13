@@ -1,6 +1,153 @@
 This document lists to do tasks related to specific JavaScript modules of the UIZE JavaScript Framework.
 
 Uize
+	Uize.log
+		Logs a message, using the configured logging options.
+
+		SYNTAX
+		......................
+		Uize.log (messageSTR);
+		......................
+
+		IMPLEMENTATION
+		...................................
+		_package.log = function (message) {
+			// fill this in
+		};
+		...................................
+
+	Uize.try
+		Tries to execute the given function, executing the optional catch expression and warning, ignoring, or throwing any error that occurs.
+
+		SYNTAX
+		.............................
+		Uize.try (tryFUNC,catchFUNC);
+		.............................
+
+		IMPLEMENTATION
+		.......................................................
+		_package.warnForTryErrors = true;
+		_package.ignoreUncaughtTryErrors = false;
+		_package.try = function (_tryFunction,_catchFunction) {
+			try {
+				_tryFunction ();
+			} catch (_error) {
+				_package.warnForTryErrors && _package.warn (_error);
+				if (_catchFunction) {
+					_catchFunction (_error);
+				} else if (!_package.ignoreUncaughtTryErrors) {
+					throw _error;
+				}
+			}
+		};
+		.......................................................
+
+	Uize.warn
+		Outputs to the log, depending on the configuration for warnings.
+
+		SYNTAX
+		.......................
+		Uize.warn (messageSTR);
+		.......................
+
+		IMPLEMENTATION
+		...................................................
+		_package.logWarnings = true;
+		_package.warn = function (_message) {
+			_package.logWarnings && _package.log (_message);
+		};
+		...................................................
+
+	Uize.warnIfSlow
+		Warns if the specified function takes too long to complete (the function can be synchronous or asynchronous).
+
+		IMPLEMENTATION
+		............................................
+		_package.warnIfSlow = function (_function) {
+			function _done () {
+
+			}
+			_function (_done);
+		};
+		............................................
+
+	Uize.quantize
+		Quantizes the specified number to the specified quantum size.
+
+		IMPLEMENTATION
+		........................................................................
+		_package.quantize = function (_value,_quantum) {
+			return _quantum ? Math.round (_value / _quantum) * _quantum : _value;
+		};
+		........................................................................
+
+	Uize.random
+		Generates a random value from the specified range or list of possible values.
+
+		DIFFERENT USAGES
+
+		`Generate a Random Number in the Range of Zero to One`
+		...........................
+		randomNUM = Uize.random ();
+		...........................
+
+		`Generate a Random Number in the Range of Zero to a Maximum Value`
+		......................................
+		randomNUM = Uize.random (maxValueNUM);
+		......................................
+
+		`Select a Random Value From a List of Possible Values`
+		..............................................
+		randomValueANYTYPE = Uize.random (valuesLIST);
+		..............................................
+
+		`Select a Random Characters From a Characters String`
+		.................................................
+		randomCharacterSTR = Uize.random (charactersSTR);
+		.................................................
+
+		`Generate a Random Integer in a Specified Range`
+		................................................................
+		randomINT = Uize.random (rangeLowerLimitINT,rangeUpperLimitINT);
+		................................................................
+
+		`Generate a Random Floating Point Number in a Specified Range`
+		..................................................................
+		randomNUM = Uize.random (rangeLowerLimitNUM,rangeUpperLimitNUM,0);
+		..................................................................
+
+		`Generate a Random, Custom Quantized Number in a Specified Range`
+		...........................................................................
+		randomNUM = Uize.random (rangeLowerLimitNUM,rangeUpperLimitNUM,quantumNUM);
+		...........................................................................
+
+		IMPLEMENTATION
+		..............................................................................................
+		_package.random = function (_arg0,_arg1,_arg2) {
+			var _random0to1 = Math.random ();
+			function _randomIndex () {
+				return Math.round ((_arg0.length - 1) * _random0to1);
+			}
+			return (
+				arguments.length > 1
+					? _package.constrain (
+						_arg0 + _quantize ((_arg1 - _arg0) * _random0to1,_arg2 == _undefined ? 1 : _arg2),
+						_arg0,
+						_arg1
+					)
+					: _arg0 == _undefined
+						? _random0to1
+						: _package.isNumber (_arg0)
+							? Math.round (_random0to1 * _arg0)
+							: _package.isList (_arg0)
+								? _arg0 [_randomIndex ()]
+								: _package.isString (_arg0)
+									? _arg0.charAt (_randomIndex ())
+									: _random0to1
+			);
+		};
+		..............................................................................................
+
 	Uize.canExtend
 		Returns a boolean, indicating whether or not the specified value can be extended with custom properties.
 
@@ -502,7 +649,7 @@ Uize.Class
 	Conditions
 		The whenever Instance Method
 			EXAMPLES
-			...............................................
+			.....................................................................
 			myWidget.whenever (
 				function (theme) {return theme == 'bottle'},
 				function () {
@@ -511,18 +658,39 @@ Uize.Class
 			);
 
 			myWidget.whenever (
-				'theme == "bottle"',
+				'theme => theme == "bottle"',
 				function () {
 					// do stuff whenever condition is met
 				}
 			);
-			...............................................
+
+			myWidget.wire (
+				Uize.Class.virtualEvent ('whenever','theme => theme == "bottle"'),
+				function () {
+					// do stuff whenever condition is met
+				}
+			);
+
+			myWidget.wire (
+				'whenever("theme => theme == \'bottle\'")',
+				function () {
+					// do stuff whenever condition is met
+				}
+			);
+			.....................................................................
 
 		The once Instance Method
-			EXAMPLE
+			EXAMPLES
 			..........................................................
 			myWidget.once (
-				'totalSelected  > 5',
+				function (totalSelected) {return totalSelected  > 5},
+				function () {
+					// do stuff once condition is met for the first time
+				}
+			);
+
+			myWidget.once (
+				'totalSelected => totalSelected  > 5',
 				function () {
 					// do stuff once condition is met for the first time
 				}
@@ -1597,6 +1765,144 @@ Uize.Json
 	- for strict mode, must exclude object properties whose values are undefined, null, function, non-simple object, and possibly more prohibited value types (refer to JSON spec online) - probably easier just to include only sanctioned value types (primitives, and simple objects and arrays)
 
 Uize.Node
+	Proposed Simplified Interface
+		The following proposed interface aims to address the desire amongst Web developers for easier and more concise ways to access and manipulate DOM elements.
+
+		The Uize.Node Object
+			A convenient proxy wrapper for DOM objects that allows methods to be called without always dereferencing the static methods on the =Uize.Node= package and having to specify the =node blob= in each call.
+
+			EXAMPLE
+			.....................................
+			var myNode = Uize.Node ('#myNodeId');
+			myNode.style ({
+				border: '1px',
+				background: '#ccc'
+			});
+			myNode.display (false);
+			myNode.on (
+				'click',
+				function () {
+					// do something
+				}
+			);
+			.....................................
+
+		Node Blob Management
+			The =Uize.Node= object provides methods for managing the set of nodes that make up the node blob that the object represents.
+
+			- =nodeBlobOBJ.addToBlob= - lets you add more nodes to a node blob
+			- =nodeBlobOBJ.clearBlob= - clears the node blob of all its contents
+			- =nodeBlobOBJ.removeFromBlob= - removes the specified nodes from the node blob
+			- =nodeBlobOBJ.setBlob= - lets you set the nodes that make up the node blob
+
+		Versatile Setter and Getter Signatures
+
+			Getting Values
+				`Get the Value for a Single Style Property`
+				.............................................................................
+				var stylePropertyValueSTR = Uize.Node.style (nodeBLOB, stylePropertyNameSTR);
+				.............................................................................
+
+				`Get the Values for Multiple Style Properties as an Array`
+				.......................................................................................
+				var stylePropertiesValuesARRAY = Uize.Node.style (nodeBLOB, stylePropertiesNamesARRAY);
+				.......................................................................................
+
+			Setting Values
+				`Set the Values for Multiple Style Properties as an Object`
+				...............................................
+				Uize.Node.style (nodeBLOB, stylePropertiesOBJ);
+				...............................................
+
+				`Set the Values for Multiple Style Properties, Specifying Names And Values Separately`
+				..................................................................................
+				Uize.Node.style (nodeBLOB, stylePropertiesNamesARRAY, stylePropertiesValuesARRAY);
+				..................................................................................
+
+				`Set the Same Value For Multiple Style Properties`
+				...................................................................................
+				Uize.Node.style (nodeBLOB, stylePropertiesNamesARRAY, stylePropertyValuePRIMITIVE);
+				...................................................................................
+
+		Shortened Method Names
+			document...
+
+			- =Uize.Node.style= - set the values for one or more style properties for all the nodes of a node blob, or get the value for a single style property
+			- =Uize.Node.prop= - set the value for one or more properties, or get the value for a single property
+			- =Uize.Node.attr= - set the value for one or more attributes, or get the value for a single attribute
+			- =Uize.Node.on= - wire event handlers for one or more DOM events
+			- =Uize.Node.text= - set the text of a DOM node, or get the text of a DOM node
+			- =Uize.Node.value= - set the value for a DOM node, or get the value for a DOM node
+			- =Uize.Node.html= - set the inner HTML for a node blob
+			- =Uize.Node.clip= - set the clip rect for all the nodes of a node blob
+
+		Convenience Event Wiring Methods
+			As a convenience for developers, short form wiring methods are provided for all the major DOM event types.
+
+			- =Uize.Node.onclick=
+			- =Uize.Node.onmouseover=
+			- =Uize.Node.onmouseout=
+			- =Uize.Node.onmousedown=
+			- =Uize.Node.onmouseup=
+			- =Uize.Node.ondblclick=
+			- =Uize.Node.onchange=
+			- =Uize.Node.onload=
+			- =Uize.Node.onerror=
+
+		Combo Setter and Getter Methods
+			document...
+
+		Method Chaining
+			To appease developers who are fond of method chaining, all modify type methods that don't need to return a result will return a reference to the `node blob`.
+
+			EXAMPLE
+			...................................................
+			Uize.Node ('#myNodeId')
+				.style ({display: 'none', position: 'absolute'})
+				.on (
+					'click',
+					function () {
+						// handle click event
+					}
+				)
+			;
+			...................................................
+
+		Uize.Node.style
+			Set or get style for a `node blob`.
+
+			SYNTAX
+			........................................................................
+			Uize.Node.style ('#myNodeId', 'display', 'none');
+			Uize.Node.style ('#myNodeId', {display: 'none', position: 'absolute'});
+			var nodeDisplay = Uize.Node.style ('#myNodeId', 'display');
+
+			Uize.Node ('#myNodeId').style ('display', 'none');
+			Uize.Node ('#myNodeId').style ({display: 'none', position: 'absolute'});
+			var nodeDisplay = Uize.Node ('#myNodeId').style ('display');
+			........................................................................
+
+		Uize.Node.on
+			A short form for the =wire= method.
+
+			SYNTAX
+			............................
+			Uize.Node.on (
+				'#myNodeId',
+				'click',
+				function () {
+					// handle click event
+				}
+			);
+
+			Uize.Node ('#myNodeId').on (
+				'click',
+				function () {
+					// handle click event
+				}
+			);
+			............................
+
 	Proposed Shortenings
 		- Uize.Node.getById -> Uize.Node.byId or Uize.Node.id or just Uize.Node
 

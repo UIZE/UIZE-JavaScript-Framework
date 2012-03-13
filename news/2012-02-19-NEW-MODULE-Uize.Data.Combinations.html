@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2012-02-19 - NEW MODULE: Uize.Data.Combinations | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="The new Uize.Data.Combinations module provides methods for generating object or array combinations from a combination specifier, with support for an optional combination transformer and combination matcher."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2012.html" class="breadcrumb breadcrumbWithArrow">2012 NEWS</a>
+	2012-02-19 - NEW MODULE: Uize.Data.Combinations
+
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="The Uize.Data.Combinations module is scalable in its ability to support an arbitrary number of combination properties.">1. Scalable</a></li>
+			<li><a href="#2" title="The Uize.Data.Combinations module is implemented to be highly performant, avoiding the use of recursion or the repeated creation and destruction of partial results sets.">2. Performant</a></li>
+			<li><a href="#3" title="The Uize.Data.Combinations module provides the following static methods to deal with generated combinations...">3. The Methods</a></li>
+			<li><a href="#4" title="In this example, we are using the Uize.Data.Combinations.generate method to generate an array of hex RGB color strings for the full palette of Web safe colors.">4. A Real World Example</a></li>
+			<li><a href="#5" title="The Uize.Data.Combinations module is comprehensively documented and has exhaustive unit tests in the Uize.Test.Uize.Data.Combinations test module.">5. Comprehensively Documented and Tested</a></li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<p>The new <code><a href="../reference/Uize.Data.Combinations.html">Uize.Data.Combinations</a></code> module provides methods for generating object or array combinations from a combination specifier, with support for an optional combination transformer and combination matcher.</p>
+	
+	<p>The methods of the <code><a href="../reference/Uize.Data.Combinations.html">Uize.Data.Combinations</a></code> module make it easy to produce a large set of combinations in a highly performant way.</p>
+	
+	<a name="1"></a>
+	<h1 class="heading1" title="1. Scalable"><span class="headingNumber"><a href="#1" title="1. Scalable">1</a>. </span>Scalable</h1>
+	<div class="contents1">
+		<p>The <code><a href="../reference/Uize.Data.Combinations.html">Uize.Data.Combinations</a></code> module is scalable in its ability to support an arbitrary number of combination properties.</p>
+		
+		<p>Whereas a typical approach to producing combinations might involve nested <code>for</code> loop structures, this approach can only support a fixed number of properties and does not scale well to support an arbitrary or dynamic number of properties. The <code><a href="../reference/Uize.Data.Combinations.html">Uize.Data.Combinations</a></code> module can support an arbitrary and also very large number of combination properties without trouble.</p>
+	</div>
+	
+	<a name="2"></a>
+	<h1 class="heading1" title="2. Performant"><span class="headingNumber"><a href="#2" title="2. Performant">2</a>. </span>Performant</h1>
+	<div class="contents1">
+		<p>The <code><a href="../reference/Uize.Data.Combinations.html">Uize.Data.Combinations</a></code> module is implemented to be highly performant, avoiding the use of recursion or the repeated creation and destruction of partial results sets.</p>
+		
+		<p>The <code><a href="../reference/Uize.Data.Combinations.html">Uize.Data.Combinations</a></code> module uses an approach much like generating all possible numbers up to a maximum number. In this way, the module can implement combination generation using just two levels of loop nesting, regardless of how many properties there are in the combination specifier. No recursion is used, thereby reducing function call overhead and call stack bloat.</p>
+	</div>
+	
+	<a name="3"></a>
+	<h1 class="heading1" title="3. The Methods"><span class="headingNumber"><a href="#3" title="3. The Methods">3</a>. </span>The Methods</h1>
+	<div class="contents1">
+		<p>The <code><a href="../reference/Uize.Data.Combinations.html">Uize.Data.Combinations</a></code> module provides the following static methods to deal with generated combinations...</p>
+		
+		<table class="list">
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>Uize.Data.Combinations.forEach</code> - lets you iterate through generated combinations, executing the specified iteration handler function for each combination</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>Uize.Data.Combinations.generate</code> - produces an array containing the generated combinations</td></tr>
+		</table>
+	</div>
+	
+	<a name="4"></a>
+	<h1 class="heading1" title="4. A Real World Example"><span class="headingNumber"><a href="#4" title="4. A Real World Example">4</a>. </span>A Real World Example</h1>
+	<div class="contents1">
+		<p>In this example, we are using the <code>Uize.Data.Combinations.generate</code> method to generate an array of hex RGB color strings for the full palette of <a href="http://en.wikipedia.org/wiki/Web_safe_colors#Web-safe_colors" target="_blank" class="externalSiteLink">Web safe colors</a>.</p>
+		
+		<p>If we were to approach this problem the traditional way, we would write our code using three nested <code>for</code> loops - one for each of the three RGB color channels. This approach would produce code as follows...</p>
+		
+		<p><span class="allCaps">THE TEDIOUS WAY</span></p>
+		
+		
+<pre class="sample-code">var
+  channelValues = ['00','33','66','99','CC','FF'],
+  webSafeColors = []
+;
+for (var redValueNo = 0; redValueNo &lt; channelValues.length; redValueNo++) {
+  for (var greenValueNo = 0; greenValueNo &lt; channelValues.length; greenValueNo++) {
+    for (var blueValueNo = 0; blueValueNo &lt; channelValues.length; blueValueNo++) {
+      webSafeColors.push (
+        '#' +
+        channelValues [redValueNo] +
+        channelValues [greenValueNo] +
+        channelValues [blueValueNo]
+      );
+    }
+  }
+}
+</pre>
+		
+		<p>If we instead use the <code>Uize.Data.Combinations.generate</code> method, we can reduce our code down to something more concise and elegant, as follows...</p>
+		
+		<p><span class="allCaps">THE CONCISE WAY</span></p>
+		
+		
+<pre class="sample-code">var
+  channelValues = ['00','33','66','99','CC','FF'],
+  webSafeColors = Uize.Data.Combinations.generate (
+    [channelValues,channelValues,channelValues],
+    '"#" + value.join ("")'
+  )
+;
+</pre>
+		
+		<p>In our solution, we create the variable <code>channelValues</code>, whose value is an array representing all the possible values for a color channel in a Web safe color. We then use this possible values array in a combination specifier that provides a template for an RGB color tuple. Then, to ensure that the array of generated values is an array of hex formatted RGB color strings, we specify a combination transformer expression string that takes a generated combination tuple and joins its three elements and adds a "#" (pound character) prefix.</p>
+	</div>
+	
+	<a name="5"></a>
+	<h1 class="heading1" title="5. Comprehensively Documented and Tested"><span class="headingNumber"><a href="#5" title="5. Comprehensively Documented and Tested">5</a>. </span>Comprehensively Documented and Tested</h1>
+	<div class="contents1">
+		<p>The <code><a href="../reference/Uize.Data.Combinations.html">Uize.Data.Combinations</a></code> module is comprehensively <a href="../reference/Uize.Data.Combinations.html">documented</a> and has exhaustive unit tests in the <code><a href="../reference/Uize.Test.Uize.Data.Combinations.html">Uize.Test.Uize.Data.Combinations</a></code> test module.</p>
+	</div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = UizeDotCom.Page.Doc ()).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

@@ -1665,13 +1665,13 @@ Uize.module ({
             ]
           ]],
           ['Uize.findRecordNo',[
-            ['Test that specifying null for the records results in the default number being returned',
+            ['Test that specifying null for the records results in the value -1 being returned, regardless of what the specified default value is',
               [null,{},5],
-              5
+              -1
             ],
-            ['Test that specifying undefined for the records results in the default number being returned',
+            ['Test that specifying undefined for the records results in the value -1 being returned, regardless of what the specified default value is',
               [undefined,{},5],
-              5
+              -1
             ],
             ['Test that not specifying a default number results in the value -1 being used for default number',
               [[{foo:'boo'},{foo:'bar'},{foo:'foo'}],{foo:'woo'}],
@@ -1686,16 +1686,16 @@ Uize.module ({
               -1
             ],
             ['Test that specifying a string value for detault number results in it being coerced to a number',
-              [[{foo:'boo'},{foo:'bar'},{foo:'foo'}],{foo:'woo'},'5'],
-              5
+              [[{foo:'boo'},{foo:'bar'},{foo:'foo'}],{foo:'woo'},'2'],
+              2
             ],
             ['Test that specifying a boolean value for the default number results in it being coerced to a number',
               [[{foo:'boo'},{foo:'bar'},{foo:'foo'}],{foo:'woo'},true],
               1
             ],
             ['Test that specifying an object value for the default number results in it being coerced to a number',
-              [[{foo:'boo'},{foo:'bar'},{foo:'foo'}],{foo:'woo'},new _ClassWithValueInterface ({value:5})],
-              5
+              [[{foo:'boo'},{foo:'bar'},{foo:'foo'}],{foo:'woo'},new _ClassWithValueInterface ({value:2})],
+              2
             ],
             ['Test that specifying an object value for the default number that cannot be coerced to a number results in the value -1 being used for the default number',
               [[{foo:'boo'},{foo:'bar'},{foo:'foo'}],{foo:'woo'},new _ClassWithValueInterface ({value:'blah'})],

@@ -302,7 +302,7 @@
 			*/
 		};
 
-		_package.constrain = function (_value,_limitA,_limitB) {
+		var _constrain = _package.constrain = function (_value,_limitA,_limitB) {
 			/* NOTES:
 				- deliberately not using Math.max and Math.min
 					- to avoid function calls, for performance
@@ -3002,6 +3002,7 @@
 
 		var _recordMatches = _package.recordMatches = function (_record,_match) {
 			if (!_record) return !_match;
+			if (_isFunction (_match)) return _match (_record);
 			for (var _propertyName in _match) {
 				if (_record [_propertyName] !== _match [_propertyName]) return _false;
 			}
@@ -3322,14 +3323,10 @@
 		};
 
 		_package.findRecordNo = function (_records,_match,_defaultNoIfNoMatch) {
-			if (_records) {
-				for (var _recordNo = -1, _recordsLength = _records.length; ++_recordNo < _recordsLength;) {
-					if (_recordMatches (_records [_recordNo],_match))
-						return _recordNo
-					;
-				}
-			}
-			return _toNumber (_defaultNoIfNoMatch,-1);
+			for (var _recordNo = -1, _recordsLength = _records ? _records.length : 0; ++_recordNo < _recordsLength;)
+				if (_recordMatches (_records [_recordNo],_match)) return _recordNo
+			;
+			return _constrain (_toNumber (_defaultNoIfNoMatch,-1),-1,_recordsLength - 1);
 			/*?
 				Static Methods
 					Uize.findRecordNo
@@ -3388,11 +3385,8 @@
 		};
 
 		_package.findRecord = function (_records,_match,_defaultNoIfNoMatch) {
-			return (
-				_records != _null && (_recordNo = _package.findRecordNo (_records,_match,_defaultNoIfNoMatch)) > -1
-					? _records [_recordNo]
-					: null
-			);
+			var _recordNo = _package.findRecordNo (_records,_match,_defaultNoIfNoMatch);
+			return _recordNo > -1 ? _records [_recordNo] : null;
 			/*?
 				Static Methods
 					Uize.findRecord

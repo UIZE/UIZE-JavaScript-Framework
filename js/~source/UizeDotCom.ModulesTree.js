@@ -30,6 +30,7 @@ Uize.module ({
 						Rubber:0
 					},
 					Data:{
+						Combinations:0,
 						Csv:0,
 						NameValueRecords:0,
 						PathsTree:{
@@ -97,6 +98,7 @@ Uize.module ({
 							},
 							Class:0,
 							Data:{
+								Combinations:0,
 								Csv:0,
 								NameValueRecords:0,
 								PathsTree:{
