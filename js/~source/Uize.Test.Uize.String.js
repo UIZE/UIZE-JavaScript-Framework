@@ -28,14 +28,11 @@
 
 Uize.module ({
 	name:'Uize.Test.Uize.String',
-	required:'Uize.Class',
+	required:[
+		'Uize.Class',
+		'Uize.Class.Value'
+	],
 	builder:function () {
-		/*** create dummy class with value interface ***/
-			var _ClassWithValueInterface = Uize.Class.subclass ();
-			_ClassWithValueInterface.registerProperties ({
-				_value:'value'
-			});
-
 		return Uize.Test.declare ({
 			title:'Test for Uize.String Module',
 			test:[
@@ -91,9 +88,9 @@ Uize.module ({
 						['Test that specifying object type prefix, suffix, and separator works',
 							[
 								['A','B','C','D','E'],
-								new _ClassWithValueInterface ({value:'<'}),
-								new _ClassWithValueInterface ({value:'>'}),
-								new _ClassWithValueInterface ({value:'-'})
+								Uize.Class.Value ({value:'<'}),
+								Uize.Class.Value ({value:'>'}),
+								Uize.Class.Value ({value:'-'})
 							],
 							'<A>-<B>-<C>-<D>-<E>'
 						],

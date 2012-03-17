@@ -28,7 +28,10 @@
 
 Uize.module ({
 	name:'Uize.Test.Uize.Date',
-	required:'Uize.Class',
+	required:[
+		'Uize.Class',
+		'Uize.Class.Value'
+	],
 	builder:function () {
 		function _dateToNumber (_date) {return +_date}
 		function _dateToString (_date) {return _date + ''}
@@ -75,12 +78,6 @@ Uize.module ({
 					_dateRangeWhereMinIsUsedForMax = {minValue:_testDateDateRangeMin,maxValue:_testDateDateRangeMin},
 					_dateRangeWithoutBounds = {}
 		;
-
-		/*** create dummy class with value interface ***/
-			var _ClassWithValueInterface = Uize.Class.subclass ();
-			_ClassWithValueInterface.registerProperties ({
-				_value:'value'
-			});
 
 		function _resolveShouldReturnNowTest (_testTitle,_arguments) {
 			return {
@@ -266,9 +263,9 @@ Uize.module ({
 						],
 						['Test that the values for all the parameters can be Uize class instances',
 							[
-								new _ClassWithValueInterface ({value:'2'}),
-								new _ClassWithValueInterface ({value:'hours'}),
-								new _ClassWithValueInterface ({value:'seconds'})
+								Uize.Class.Value ({value:'2'}),
+								Uize.Class.Value ({value:'hours'}),
+								Uize.Class.Value ({value:'seconds'})
 							],
 							7200
 						]

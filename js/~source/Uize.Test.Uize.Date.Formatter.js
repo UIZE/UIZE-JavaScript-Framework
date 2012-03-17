@@ -28,7 +28,10 @@
 
 Uize.module ({
 	name:'Uize.Test.Uize.Date.Formatter',
-	required:'Uize.Class',
+	required:[
+		'Uize.Class',
+		'Uize.Class.Value'
+	],
 	builder:function () {
 		function _newDate (_year,_month,_dayNo,_hours,_minutes,_seconds,_milliseconds) {
 			var _date = new Date (
@@ -86,12 +89,6 @@ Uize.module ({
 					_testDateTimeIs1pm = _newDate (2001,1,1,13,0,0,0),
 					_testDateTimeIsJustBeforeMidnight = _newDate (2001,1,1,23,59,59,999)
 		;
-
-		/*** create dummy class with value interface ***/
-			var _ClassWithValueInterface = Uize.Class.subclass ();
-			_ClassWithValueInterface.registerProperties ({
-				_value:'value'
-			});
 
 		return Uize.Test.declare ({
 			title:'Test for Uize.Date.Formatter Module',
@@ -1326,23 +1323,23 @@ Uize.module ({
 
 						/*** test support for objects that implement valueOf interface ***/
 							['Test that a date specified as a Date object instance is handled correctly',
-								[new _ClassWithValueInterface ({value:_testDate})],
+								[Uize.Class.Value ({value:_testDate})],
 								_testDate
 							],
 							['Test that specifying the value null for the date to parse produces the value undefined',
-								[new _ClassWithValueInterface ({value:null})],
+								[Uize.Class.Value ({value:null})],
 								undefined
 							],
 							['Test that specifying an empty string for the date to parse produces the value undefined',
-								[new _ClassWithValueInterface ({value:''})],
+								[Uize.Class.Value ({value:''})],
 								undefined
 							],
 							['Test that a date specified as a number is handled correctly',
-								[new _ClassWithValueInterface ({value:+_testDate})],
+								[Uize.Class.Value ({value:+_testDate})],
 								_testDate
 							],
 							['Test that a date specified as a number is handled correctly',
-								[new _ClassWithValueInterface ({value:'2001-09-11'}),'{YYYY}-{MM}-{DD}'],
+								[Uize.Class.Value ({value:'2001-09-11'}),'{YYYY}-{MM}-{DD}'],
 								_newDate (2001,9,11)
 							],
 

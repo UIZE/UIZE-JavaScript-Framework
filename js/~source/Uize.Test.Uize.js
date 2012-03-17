@@ -30,7 +30,8 @@ Uize.module ({
 	name:'Uize.Test.Uize',
 	required:[
 		'Uize.Data',
-		'Uize.Class'
+		'Uize.Class',
+		'Uize.Class.Value'
 	],
 	builder:function () {
 		var
@@ -75,12 +76,6 @@ Uize.module ({
 		_sparselyPopulatedArray [2] = 1;
 		_sparselyPopulatedArray [7] = 2;
 
-		/*** create dummy class with value interface ***/
-			var _ClassWithValueInterface = Uize.Class.subclass ();
-			_ClassWithValueInterface.registerProperties ({
-				_value:'value'
-			});
-
 		function _copyArguments (_arguments) {
 			var _result = [];
 			_result.push.apply (_result,_arguments);
@@ -119,9 +114,9 @@ Uize.module ({
 							_expectedValue,
 							Uize.toNumber (
 								_wrapValueWithObject && _wrapValueWithFunction
-									? function () {return new _ClassWithValueInterface ({value:_value})}
+									? function () {return Uize.Class.Value ({value:_value})}
 									: _wrapValueWithObject
-										? new _ClassWithValueInterface ({value:_value})
+										? Uize.Class.Value ({value:_value})
 										: _wrapValueWithFunction
 											? function () {return _value}
 											: _value
@@ -154,7 +149,7 @@ Uize.module ({
 		}
 
 		return Uize.Test.declare ({
-			title:'Test for Uize Base Class',
+			title:'Test for Uize Base Module',
 			test:[
 				Uize.Test.staticMethodsTest ([
 					['Uize.noNew',[
@@ -428,41 +423,41 @@ Uize.module ({
 						/*** test support for object's with valueOf implemented ***/
 							['Test that an object whose value is lower than the lower bound of a range is not considered in range',
 								[
-									new _ClassWithValueInterface ({value:-50}),
-									new _ClassWithValueInterface ({value:0}),
-									new _ClassWithValueInterface ({value:100})
+									Uize.Class.Value ({value:-50}),
+									Uize.Class.Value ({value:0}),
+									Uize.Class.Value ({value:100})
 								],
 								false
 							],
 							['Test that an object whose value is at the lower bound of a range is considered in range',
 								[
-									new _ClassWithValueInterface ({value:0}),
-									new _ClassWithValueInterface ({value:0}),
-									new _ClassWithValueInterface ({value:100})
+									Uize.Class.Value ({value:0}),
+									Uize.Class.Value ({value:0}),
+									Uize.Class.Value ({value:100})
 								],
 								true
 							],
 							['Test that an object whose value is between the lower and upper bounds of a range is considered in range',
 								[
-									new _ClassWithValueInterface ({value:50}),
-									new _ClassWithValueInterface ({value:0}),
-									new _ClassWithValueInterface ({value:100})
+									Uize.Class.Value ({value:50}),
+									Uize.Class.Value ({value:0}),
+									Uize.Class.Value ({value:100})
 								],
 								true
 							],
 							['Test that an object whose value is at the upper bound of a range is considered in range',
 								[
-									new _ClassWithValueInterface ({value:100}),
-									new _ClassWithValueInterface ({value:0}),
-									new _ClassWithValueInterface ({value:100})
+									Uize.Class.Value ({value:100}),
+									Uize.Class.Value ({value:0}),
+									Uize.Class.Value ({value:100})
 								],
 								true
 							],
 							['Test that an object whose value is higher than the upper bound of a range is not considered in range',
 								[
-									new _ClassWithValueInterface ({value:150}),
-									new _ClassWithValueInterface ({value:0}),
-									new _ClassWithValueInterface ({value:100})
+									Uize.Class.Value ({value:150}),
+									Uize.Class.Value ({value:0}),
+									Uize.Class.Value ({value:100})
 								],
 								false
 							],
@@ -1274,7 +1269,7 @@ Uize.module ({
 								{
 									int:5,neg:-5,float:5.5,nan:NaN,infinity:Infinity,
 									'true':true,'false':false,
-									obj:new _ClassWithValueInterface ({value:'OBJECT'}),
+									obj:Uize.Class.Value ({value:'OBJECT'}),
 									'null':null,'undefined':undefined
 								}
 							],
@@ -1325,7 +1320,7 @@ Uize.module ({
 							'tRussiae'
 						],
 						['Test that the source for substituting into can be an object that implements a value interface',
-							[new _ClassWithValueInterface ({value:'My name is [#name].'}),{name:'Eric'}],
+							[Uize.Class.Value ({value:'My name is [#name].'}),{name:'Eric'}],
 							'My name is Eric.'
 						],
 						['Test that the source for substituting into can be an array, whose elements will be concatenated',
@@ -1516,7 +1511,7 @@ Uize.module ({
 						['Test that undefined is considered empty',[undefined],true],
 						['Test that NaN is considered empty',[NaN],true],
 						['Test that class instance with empty value set-get property is considered empty',
-							[new _ClassWithValueInterface ({value:0})],
+							[Uize.Class.Value ({value:0})],
 							true
 						],
 						['Test that a non-empty object is not considered empty',[{blah:0}],false],
@@ -1536,7 +1531,7 @@ Uize.module ({
 						//['Test that a regular expression is not considered empty',[/^.+$/],false],
 						['Test that a function (even an empty one) is not considered empty',function () {},false],
 						['Test that class instance with non-empty value set-get property is not considered empty',
-							[new _ClassWithValueInterface ({value:1})],
+							[Uize.Class.Value ({value:1})],
 							false
 						]
 					]],
@@ -1670,11 +1665,11 @@ Uize.module ({
 							1
 						],
 						['Test that specifying an object value for the default number results in it being coerced to a number',
-							[[{foo:'boo'},{foo:'bar'},{foo:'foo'}],{foo:'woo'},new _ClassWithValueInterface ({value:2})],
+							[[{foo:'boo'},{foo:'bar'},{foo:'foo'}],{foo:'woo'},Uize.Class.Value ({value:2})],
 							2
 						],
 						['Test that specifying an object value for the default number that cannot be coerced to a number results in the value -1 being used for the default number',
-							[[{foo:'boo'},{foo:'bar'},{foo:'foo'}],{foo:'woo'},new _ClassWithValueInterface ({value:'blah'})],
+							[[{foo:'boo'},{foo:'bar'},{foo:'foo'}],{foo:'woo'},Uize.Class.Value ({value:'blah'})],
 							-1
 						],
 						['Test that the index of the first matching record is returned when the match matches a record',
@@ -1734,8 +1729,10 @@ Uize.module ({
 						}
 					]],
 					['Uize.getPathToLibrary',[
+						/* TODO: implement tests */
 					]],
 					['Uize.globalEval',[
+						/* TODO: implement tests */
 					]],
 					['Uize.getClass',[
 						/*** test when value can't be resolved to a class ***/
@@ -2858,8 +2855,10 @@ Uize.module ({
 					]],
 
 					['Uize.toString',[
+						/* TODO: implement tests */
 					]],
 					['Uize.module',[
+						/* TODO: implement tests */
 					]]
 				]),
 				{

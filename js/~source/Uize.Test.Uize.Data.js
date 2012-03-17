@@ -30,7 +30,8 @@ Uize.module ({
 	name:'Uize.Test.Uize.Data',
 	required:[
 		'Uize.Test',
-		'Uize.Class'
+		'Uize.Class',
+		'Uize.Class.Value'
 	],
 	builder:function () {
 		var
@@ -43,12 +44,6 @@ Uize.module ({
 				anArray:[1,2,3]
 			}
 		;
-
-		/*** create dummy class with value interface ***/
-			var _ClassWithValueInterface = Uize.Class.subclass ();
-			_ClassWithValueInterface.registerProperties ({
-				_value:'value'
-			});
 
 		function _arrayMethodTargetTest (
 			_hostName,

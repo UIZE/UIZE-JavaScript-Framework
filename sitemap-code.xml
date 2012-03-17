@@ -42,6 +42,13 @@
 		</codesearch:codesearch>
 	</url>
 	<url>
+		<loc>http://www.uize.com/js/~source/Uize.Class.Value.js</loc>
+		<codesearch:codesearch>
+			<codesearch:filetype>javascript</codesearch:filetype>
+			<codesearch:license>GPL</codesearch:license>
+		</codesearch:codesearch>
+	</url>
+	<url>
 		<loc>http://www.uize.com/js/~source/Uize.Color.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
