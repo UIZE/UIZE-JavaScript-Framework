@@ -237,7 +237,6 @@ Uize.module ({
 							_divider,
 							_appendix ('JavaScript Fun'),
 							_appendix ('JavaScript Interview Questions'),
-							_appendix ('Code Fragments'),
 							_appendix ('Glossary')
 						]
 					},

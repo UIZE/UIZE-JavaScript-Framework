@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2012-03-24 - New Uize.canExtend Method | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="The new Uize.canExtend static method, implemented in the Uize base module, returns a boolean, indicating whether or not the specified value can be extended with custom properties."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2012.html" class="breadcrumb breadcrumbWithArrow">2012 NEWS</a>
+	2012-03-24 - New Uize.canExtend Method
+
+</h1>
+
+<div class="main">
+<div class="contents0">
+	<p>The new <code>Uize.canExtend</code> static method, implemented in the <code><a href="../reference/Uize.html">Uize</a></code> base module, returns a boolean, indicating whether or not the specified value can be extended with custom properties.</p>
+	
+	<p><span class="allCaps">SYNTAX</span></p>
+	
+	
+<pre class="sample-code">canExtendBOOL = Uize.canExtend (valueANYTYPE);
+</pre>
+	
+	<p>A value is considered extendable if it is of type "function", or of type "object" and non-null. Function instances can be extended with custom propeerties, and non-null objects can also be extended with custom properties because this encompasses plain objects, instances of custom object classes, and list objects like instances of JavaScript's built-in <code><a href="../javascript-reference/Array.html">Array</a></code> object. Values that are not considered extendable are nully values like <code>null</code> and <code>undefined</code>, and values for JavaScript primitives, like string values, number values, and boolean values.</p>
+	
+	<p><span class="allCaps">EXAMPLES</span></p>
+	
+	
+<pre class="sample-code">Uize.canExtend ({foo:'bar'});         // returns true
+Uize.canExtend (['foo','bar']);       // returns true
+Uize.canExtend (function () {});      // returns true
+Uize.canExtend (new String ('foo'));  // returns true
+Uize.canExtend (new Boolean (true));  // returns true
+Uize.canExtend (new Number (42));     // returns true
+Uize.canExtend (Uize.Widget);         // returns true
+Uize.canExtend (Uize.Widget ());      // returns true
+
+Uize.canExtend ('foo');               // returns false
+Uize.canExtend (true);                // returns false
+Uize.canExtend (42);                  // returns false
+Uize.canExtend (null);                // returns false
+Uize.canExtend (undefined);           // returns false
+</pre>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = UizeDotCom.Page.Doc ()).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

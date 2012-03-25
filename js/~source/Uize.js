@@ -30,6 +30,7 @@
 				Value Testing Methods
 					The =Uize= module provides a number of static methods for performing commonly useful tests on values.
 
+					- =Uize.canExtend= - tests if value can be extended with custom properties
 					- =Uize.inRange= - tests if value is within specified value range
 					- =Uize.isArray= - tests if value is an array
 					- =Uize.isBoolean= - tests if value is a boolean
@@ -150,15 +151,15 @@
 
 		function _performOperationWithMultipleSources (_targetAndSources,_operation) {
 			var _targetObject = _targetAndSources [0];
-			if (_isObject (_targetObject)) {
+			if (_canExtend (_targetObject)) {
 				var
 					_sourceObject = _targetAndSources [1],
 					_targetAndSourcesLength = _targetAndSources.length
 				;
-				_isObject (_sourceObject) && _operation (_targetObject,_sourceObject);
+				_canExtend (_sourceObject) && _operation (_targetObject,_sourceObject);
 				if (_targetAndSourcesLength > 2) {
 					for (var _sourceObjectNo = 1; ++_sourceObjectNo < _targetAndSourcesLength;)
-						_isObject (_sourceObject = _targetAndSources [_sourceObjectNo]) &&
+						_canExtend (_sourceObject = _targetAndSources [_sourceObjectNo]) &&
 							_operation (_targetObject,_sourceObject)
 						;
 					;
@@ -2395,6 +2396,44 @@
 
 						NOTES
 						- compare to the =Uize.isNully= and =Uize.isPlainObject= static methods
+						- see also the other `value testing methods`
+			*/
+		};
+
+		var _canExtend = _package.canExtend = function (_value) {
+			var _typeofValue = typeof _value;
+			return !!_value && (_typeofValue == _typeObject || _typeofValue == 'function');
+			/*?
+				Static Methods
+					Uize.canExtend
+						Returns a boolean, indicating whether or not the specified value can be extended with custom properties.
+
+						SYNTAX
+						..............................................
+						canExtendBOOL = Uize.canExtend (valueANYTYPE);
+						..............................................
+
+						A value is considered extendable if it is of type "function", or of type "object" and non-null. Function instances can be extended with custom propeerties, and non-null objects can also be extended with custom properties because this encompasses plain objects, instances of custom object classes, and list objects like instances of JavaScript's built-in =Array= object. Values that are not considered extendable are nully values like =null= and =undefined=, and values for JavaScript primitives, like string values, number values, and boolean values.
+
+						EXAMPLES
+						......................................................
+						Uize.canExtend ({foo:'bar'});         // returns true
+						Uize.canExtend (['foo','bar']);       // returns true
+						Uize.canExtend (function () {});      // returns true
+						Uize.canExtend (new String ('foo'));  // returns true
+						Uize.canExtend (new Boolean (true));  // returns true
+						Uize.canExtend (new Number (42));     // returns true
+						Uize.canExtend (Uize.Widget);         // returns true
+						Uize.canExtend (Uize.Widget ());      // returns true
+
+						Uize.canExtend ('foo');               // returns false
+						Uize.canExtend (true);                // returns false
+						Uize.canExtend (42);                  // returns false
+						Uize.canExtend (null);                // returns false
+						Uize.canExtend (undefined);           // returns false
+						......................................................
+
+						NOTES
 						- see also the other `value testing methods`
 			*/
 		};

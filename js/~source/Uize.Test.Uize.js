@@ -679,6 +679,22 @@ Uize.module ({
 						['Test that a Boolean object instance is regarded as being an object',new Boolean (false),true],
 						['Test that a Number object instance is regarded as being an object',new Number (0),true]
 					]],
+					['Uize.canExtend',[
+						['Test that calling with no parameters returns false',[],false],
+						['Test that the value undefined is not regarded as being extendable',undefined,false],
+						['Test that the value null is not regarded as being extendable',null,false],
+						['Test that a string value is not regarded as being extendable','foo',false],
+						['Test that a boolean value is not regarded as being extendable',true,false],
+						['Test that a number value is not regarded as being extendable',42,false],
+						['Test that the special value NaN is not regarded as being extendable',NaN,false],
+						['Test that a function is regarded as being extendable',Uize.nop,true],
+						['Test that an object is regarded as being extendable',{},true],
+						['Test that an array is regarded as being extendable',[[]],true],
+						['Test that a regular expression instance is regarded as being extendable',/\d+/,true],
+						['Test that a String object instance is regarded as being extendable',new String (''),true],
+						['Test that a Boolean object instance is regarded as being extendable',new Boolean (false),true],
+						['Test that a Number object instance is regarded as being extendable',new Number (0),true]
+					]],
 					['Uize.isPlainObject',[
 						['Test that calling with no parameters returns false',[],false],
 						['Test that the value undefined is not regarded as being a plain object',undefined,false],
@@ -915,10 +931,50 @@ Uize.module ({
 								[null,{foo:'bar',hello:'world'}],
 								null
 							],
-							['Test that specifying the value undefined for the target object results in the value null being returned',
+							['Test that specifying the value undefined for the target object results in the value undefined being returned',
 								[undefined,{foo:'bar',hello:'world'}],
 								undefined
-							]
+							],
+
+							/*** test support for function target and sources ***/
+								{
+									title:'Test that the source can be a function, and that the properties from the sources will be copied in as custom properties of the function',
+									test:function () {
+										var
+											_target = function () {},
+											_result = Uize.copyInto (_target,{foo:'bar'},{hello:'world'},{theAnswer:42})
+										;
+										return (
+											this.expectSameAs (_target,_result) &&
+											this.expect ('bar',_target.foo) &&
+											this.expect ('world',_target.hello) &&
+											this.expect (42,_target.theAnswer)
+										);
+									}
+								},
+								{
+									title:'Test that any source can be a function that has custom properties, and that the properties from all such sources will be copied into the target',
+									test:function () {
+										var
+											_source1 = function () {},
+											_source2 = function () {},
+											_source3 = function () {},
+											_target = {}
+										;
+										_source1.foo = 'bar';
+										_source2.hello = 'world';
+										_source3.theAnswer = 42;
+										Uize.copyInto (_target,_source1,_source2,_source3);
+										return this.expect (
+											{
+												foo:'bar',
+												hello:'world',
+												theAnswer:42
+											},
+											_target
+										);
+									}
+								}
 						],
 						null,
 						{cloneArguments:true}
@@ -1120,7 +1176,47 @@ Uize.module ({
 									Uize.mergeInto (_targetObject,{objectProperty:_objectProperty});
 									return this.expectSameAs (_objectProperty,_targetObject.objectProperty);
 								}
-							}
+							},
+
+							/*** test support for function target and sources ***/
+								{
+									title:'Test that the source can be a function, and that the properties from the sources will be merged in as custom properties of the function',
+									test:function () {
+										var
+											_target = function () {},
+											_result = Uize.mergeInto (_target,{foo:'bar'},{hello:'world'},{theAnswer:42})
+										;
+										return (
+											this.expectSameAs (_target,_result) &&
+											this.expect ('bar',_target.foo) &&
+											this.expect ('world',_target.hello) &&
+											this.expect (42,_target.theAnswer)
+										);
+									}
+								},
+								{
+									title:'Test that any source can be a function that has custom properties, and that the properties from all such sources will be merged into the target',
+									test:function () {
+										var
+											_source1 = function () {},
+											_source2 = function () {},
+											_source3 = function () {},
+											_target = {}
+										;
+										_source1.foo = 'bar';
+										_source2.hello = 'world';
+										_source3.theAnswer = 42;
+										Uize.mergeInto (_target,_source1,_source2,_source3);
+										return this.expect (
+											{
+												foo:'bar',
+												hello:'world',
+												theAnswer:42
+											},
+											_target
+										);
+									}
+								}
 						],
 						null,
 						{cloneArguments:true}

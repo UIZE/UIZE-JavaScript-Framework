@@ -25,9 +25,25 @@
 		<ul>
 			<li><a href="#1" title="Virtual dom events to mimic new HTML5 dnd events.">1. General Drag and Drop Framework</a></li>
 			<li><a href="#2" title="Can be used by interpolation code (such as fades).">2. Types for Properties</a></li>
-			<li><a href="#3" title="A series of functions, in the spirit of curve function modifiers, but that return iterator functions that are modifications of the source iterator functions.">3. Iterator Modifier Functions</a>
+			<li><a href="#3">3. Iterator Interface</a>
 				<ul>
-					<li><a href="#3_1" title="- stretch - would stretch out the number of iterations by either repeating or interpolating between the values in the original iterator function">3.1. Examples of iterator modifier functions would be...</a></li>
+					<li><a href="#3_1" title="- first - rewinds the iterator to the beginning and returns the value for the first iteration">3.1. Instance Methods</a></li>
+					<li><a href="#3_2" title="- value - the value for the current iteration">3.2. Instance Properties</a></li>
+					<li><a href="#3_3" title="EXAMPLE">3.3. Usages</a></li>
+					<li><a href="#3_4" title="The Uize.Iterator object implements the iterator interface.">3.4. Uize.Iterator</a>
+						<ul>
+							<li><a href="#3_4_1" title="A Uize.Iterator object can be instantiated as a wrapper around a number of different source values.">3.4.1. As a Wrapper</a>
+								<ul>
+									<li><a href="#3_4_1_1" title="document...">3.4.1.1. Wrapping a Number</a></li>
+									<li><a href="#3_4_1_2" title="document...">3.4.1.2. Wrapping an Array</a></li>
+									<li><a href="#3_4_1_3" title="document...">3.4.1.3. Wrapping an Object</a></li>
+									<li><a href="#3_4_1_4" title="document...">3.4.1.4. Wrapping a JavaScript Iterator</a></li>
+								</ul>
+							</li>
+							<li><a href="#3_4_2" title="Several UIZE modules provide built-in support for the Uize.Iterator class.">3.4.2. Modules Supporting Iterators</a></li>
+							<li><a href="#3_4_3" title="A function, in the spirit of a curve function modifier, that returns an iterator function that is a modification of the source iterator function (or the source resolved to an iterator function).">3.4.3. Iterator Modifier Function</a></li>
+						</ul>
+					</li>
 				</ul>
 			</li>
 			<li><a href="#4" title="A new system to support safe private properties and methods - for both instance as well as static private properties and methods.">4. Safe Privates</a></li>
@@ -275,23 +291,127 @@
 	</div>
 	
 	<a name="3"></a>
-	<h1 class="heading1" title="3. Iterator Modifier Functions"><span class="headingNumber"><a href="#3" title="3. Iterator Modifier Functions">3</a>. </span>Iterator Modifier Functions</h1>
+	<h1 class="heading1" title="3. Iterator Interface"><span class="headingNumber"><a href="#3" title="3. Iterator Interface">3</a>. </span>Iterator Interface</h1>
 	<div class="contents1">
-		<p>A series of functions, in the spirit of curve function modifiers, but that return iterator functions that are modifications of the source iterator functions.</p>
-		
 		<a name="3_1"></a>
-		<h2 class="heading2" title="3. Iterator Modifier Functions -&gt; 3.1. Examples of iterator modifier functions would be..."><span class="headingNumber"><a href="#3" title="3. Iterator Modifier Functions">3</a>.<a href="#3_1" title="3. Iterator Modifier Functions -&gt; 3.1. Examples of iterator modifier functions would be...">1</a>. </span>Examples of iterator modifier functions would be...</h2>
+		<h2 class="heading2" title="3. Iterator Interface -&gt; 3.1. Instance Methods"><span class="headingNumber"><a href="#3" title="3. Iterator Interface">3</a>.<a href="#3_1" title="3. Iterator Interface -&gt; 3.1. Instance Methods">1</a>. </span>Instance Methods</h2>
 		<div class="contents2">
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>stretch - would stretch out the number of iterations by either repeating or interpolating between the values in the original iterator function</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>transform - the new iterator produces every value from the source iterator, transformed through a specified value transformer function</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>filter - the new iterator produces only values from the source iterator that are filtered by the specified value matcher function</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>nest - for every value produced by the source iterator, produces values from a nested iterator that is seeded with the value from the source iterator</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>combine - takes multiple source iterators and produces a new iterator where the value for each iteration is generated by the specified function that takes the values from all the source iterators as its input</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>cycle - </td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>slice - produces an iterator that includes only the specified slice of the values from the source iterator</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>concat - produces a new iterator by concatenating multiple iterators</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>first</code> - rewinds the iterator to the beginning and returns the value for the first iteration</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>next</code> - advances to the next iteration and returns the value for the iteration</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>advance</code> - advances to the next iteration, if possible, and returns a boolean indicating success</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>rewind</code> - rewinds the iterator, so that calling <code>next</code> will return the value for the first iteration</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>reset</code> - synonymous with <code>rewind</code></td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>forEach</code> - executes the entire iteration, calling the specified iteration handler function for each iteration</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>end</code> - ends the iteration, after which calling <code>hasNext</code> will return <code>false</code></td></tr>
 			</table>
+		</div>
+		
+		<a name="3_2"></a>
+		<h2 class="heading2" title="3. Iterator Interface -&gt; 3.2. Instance Properties"><span class="headingNumber"><a href="#3" title="3. Iterator Interface">3</a>.<a href="#3_2" title="3. Iterator Interface -&gt; 3.2. Instance Properties">2</a>. </span>Instance Properties</h2>
+		<div class="contents2">
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>value</code> - the value for the current iteration</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>current</code> - synonymous with <code>value</code></td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>key</code> - the key / index for the current iteration</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>ended</code> - a boolean, indicating whether or not the iteration has ended</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_3"></a>
+		<h2 class="heading2" title="3. Iterator Interface -&gt; 3.3. Usages"><span class="headingNumber"><a href="#3" title="3. Iterator Interface">3</a>.<a href="#3_3" title="3. Iterator Interface -&gt; 3.3. Usages">3</a>. </span>Usages</h2>
+		<div class="contents2">
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">for (var currentSum = series.first(); !series.ended; currentSum = series.next();) {
+  // do stuff
+}
+</pre>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">var currentSum;
+while (series.advance()) {
+  currentSum = series.value;
+  // do stuff
+}
+</pre>
+		</div>
+		
+		<a name="3_4"></a>
+		<h2 class="heading2" title="3. Iterator Interface -&gt; 3.4. Uize.Iterator"><span class="headingNumber"><a href="#3" title="3. Iterator Interface">3</a>.<a href="#3_4" title="3. Iterator Interface -&gt; 3.4. Uize.Iterator">4</a>. </span>Uize.Iterator</h2>
+		<div class="contents2">
+			<p>The <code><a href="#3_4">Uize.Iterator</a></code> object implements the <a href="#3">iterator interface</a>.</p>
+			
+			<a name="3_4_1"></a>
+			<h3 class="heading3" title="3. Iterator Interface -&gt; 3.4. Uize.Iterator -&gt; 3.4.1. As a Wrapper"><span class="headingNumber"><a href="#3" title="3. Iterator Interface">3</a>.<a href="#3_4" title="3. Iterator Interface -&gt; 3.4. Uize.Iterator">4</a>.<a href="#3_4_1" title="3. Iterator Interface -&gt; 3.4. Uize.Iterator -&gt; 3.4.1. As a Wrapper">1</a>. </span>As a Wrapper</h3>
+			<div class="contents3">
+				<p>A <code><a href="#3_4">Uize.Iterator</a></code> object can be instantiated as a wrapper around a number of different source values.</p>
+				
+				<a name="3_4_1_1"></a>
+				<h4 class="heading4" title="3. Iterator Interface -&gt; 3.4. Uize.Iterator -&gt; 3.4.1. As a Wrapper -&gt; 3.4.1.1. Wrapping a Number"><span class="headingNumber"><a href="#3" title="3. Iterator Interface">3</a>.<a href="#3_4" title="3. Iterator Interface -&gt; 3.4. Uize.Iterator">4</a>.<a href="#3_4_1" title="3. Iterator Interface -&gt; 3.4. Uize.Iterator -&gt; 3.4.1. As a Wrapper">1</a>.<a href="#3_4_1_1" title="3. Iterator Interface -&gt; 3.4. Uize.Iterator -&gt; 3.4.1. As a Wrapper -&gt; 3.4.1.1. Wrapping a Number">1</a>. </span>Wrapping a Number</h4>
+				<div class="contents4">
+					<p>document...</p>
+				</div>
+				
+				<a name="3_4_1_2"></a>
+				<h4 class="heading4" title="3. Iterator Interface -&gt; 3.4. Uize.Iterator -&gt; 3.4.1. As a Wrapper -&gt; 3.4.1.2. Wrapping an Array"><span class="headingNumber"><a href="#3" title="3. Iterator Interface">3</a>.<a href="#3_4" title="3. Iterator Interface -&gt; 3.4. Uize.Iterator">4</a>.<a href="#3_4_1" title="3. Iterator Interface -&gt; 3.4. Uize.Iterator -&gt; 3.4.1. As a Wrapper">1</a>.<a href="#3_4_1_2" title="3. Iterator Interface -&gt; 3.4. Uize.Iterator -&gt; 3.4.1. As a Wrapper -&gt; 3.4.1.2. Wrapping an Array">2</a>. </span>Wrapping an Array</h4>
+				<div class="contents4">
+					<p>document...</p>
+				</div>
+				
+				<a name="3_4_1_3"></a>
+				<h4 class="heading4" title="3. Iterator Interface -&gt; 3.4. Uize.Iterator -&gt; 3.4.1. As a Wrapper -&gt; 3.4.1.3. Wrapping an Object"><span class="headingNumber"><a href="#3" title="3. Iterator Interface">3</a>.<a href="#3_4" title="3. Iterator Interface -&gt; 3.4. Uize.Iterator">4</a>.<a href="#3_4_1" title="3. Iterator Interface -&gt; 3.4. Uize.Iterator -&gt; 3.4.1. As a Wrapper">1</a>.<a href="#3_4_1_3" title="3. Iterator Interface -&gt; 3.4. Uize.Iterator -&gt; 3.4.1. As a Wrapper -&gt; 3.4.1.3. Wrapping an Object">3</a>. </span>Wrapping an Object</h4>
+				<div class="contents4">
+					<p>document...</p>
+				</div>
+				
+				<a name="3_4_1_4"></a>
+				<h4 class="heading4" title="3. Iterator Interface -&gt; 3.4. Uize.Iterator -&gt; 3.4.1. As a Wrapper -&gt; 3.4.1.4. Wrapping a JavaScript Iterator"><span class="headingNumber"><a href="#3" title="3. Iterator Interface">3</a>.<a href="#3_4" title="3. Iterator Interface -&gt; 3.4. Uize.Iterator">4</a>.<a href="#3_4_1" title="3. Iterator Interface -&gt; 3.4. Uize.Iterator -&gt; 3.4.1. As a Wrapper">1</a>.<a href="#3_4_1_4" title="3. Iterator Interface -&gt; 3.4. Uize.Iterator -&gt; 3.4.1. As a Wrapper -&gt; 3.4.1.4. Wrapping a JavaScript Iterator">4</a>. </span>Wrapping a JavaScript Iterator</h4>
+				<div class="contents4">
+					<p>document...</p>
+				</div>
+			</div>
+			
+			<a name="3_4_2"></a>
+			<h3 class="heading3" title="3. Iterator Interface -&gt; 3.4. Uize.Iterator -&gt; 3.4.2. Modules Supporting Iterators"><span class="headingNumber"><a href="#3" title="3. Iterator Interface">3</a>.<a href="#3_4" title="3. Iterator Interface -&gt; 3.4. Uize.Iterator">4</a>.<a href="#3_4_2" title="3. Iterator Interface -&gt; 3.4. Uize.Iterator -&gt; 3.4.2. Modules Supporting Iterators">2</a>. </span>Modules Supporting Iterators</h3>
+			<div class="contents3">
+				<p>Several UIZE modules provide built-in support for the <code><a href="#3_4">Uize.Iterator</a></code> class.</p>
+				
+				<p>For example, the <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> module supports wrapping a <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> value series as an iterator.</p>
+				
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="../reference/Uize.Data.Combinations.html">Uize.Data.Combinations</a></code></td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="../reference/Uize.String.Lines.html">Uize.String.Lines</a></code></td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="../reference/Uize.Color.xUtil.html">Uize.Color.xUtil</a></code></td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="../reference/Uize.Curve.html">Uize.Curve</a></code></td></tr>
+				</table>
+			</div>
+			
+			<a name="3_4_3"></a>
+			<h3 class="heading3" title="3. Iterator Interface -&gt; 3.4. Uize.Iterator -&gt; 3.4.3. Iterator Modifier Function"><span class="headingNumber"><a href="#3" title="3. Iterator Interface">3</a>.<a href="#3_4" title="3. Iterator Interface -&gt; 3.4. Uize.Iterator">4</a>.<a href="#3_4_3" title="3. Iterator Interface -&gt; 3.4. Uize.Iterator -&gt; 3.4.3. Iterator Modifier Function">3</a>. </span>Iterator Modifier Function</h3>
+			<div class="contents3">
+				<p>A function, in the spirit of a curve function modifier, that returns an iterator function that is a modification of the source iterator function (or the source resolved to an iterator function).</p>
+				
+				<p>An iterator modifier function can accept a source that is not an iterator object, which will first be resolved to an iterator object.</p>
+				
+				<p>Examples of iterator modifier functions...</p>
+				
+				<table class="list">
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>Uize.Iterator.map</code> - the new iterator produces every value from the source iterator, transformed through a specified value transformer</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>Uize.Iterator.filter</code> - produces an iterator with only those iterations whose values pass the specified value matcher</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>Uize.Iterator.stretch</code> - stretches out the number of iterations by either repeating or interpolating between the values in the original iterator function</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>Uize.Iterator.slice</code> - produces an iterator that includes only the specified slice of iterations from the source iterator</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>Uize.Iterator.sliceByMatch</code> - produces a slice of the source iterator, where the first and last iterations are determined by specified value matchers</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>Uize.Iterator.concat</code> - produces a new iterator by concatenating multiple iterators</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>Uize.Iterator.combine</code> - takes multiple source iterators and produces a new iterator where the value for each iteration is generated by the specified function that takes the values from all the source iterators as its input</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>Uize.Iterator.nest</code> - produces an iterator where for each iteration of an outer source iterator, an inner "nested" iterator is iterated over, where the inner iterator is provided the value of an iteration of the outer iterator as a seed value, and where the resulting iterator returns the values from the nested iterator</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>Uize.Iterator.cycle</code> - produces an iterator where the specified source iterator is cycled through the specified number of times</td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>Uize.Iterator.interleave</code> - produces an iterator by interleaving multiple source iterators together (ie. where each iteration alternates through the specified source iterators)</td></tr>
+				</table>
+			</div>
 		</div>
 	</div>
 	
@@ -1483,8 +1603,9 @@ function callAsAsync (_functionToCall,_args,_returnResult) {
 		
 		<table class="list">
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>performance (load time, interaction speed, memory usage (non-leaky))</td></tr>
-		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>I18N</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>i18n / L10n</td></tr>
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>interaction logging & tracking</td></tr>
+		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>multivariate testing</td></tr>
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>application robustness & state management</td></tr>
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>skinning / theming</td></tr>
 		<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>troubleshooting</td></tr>
