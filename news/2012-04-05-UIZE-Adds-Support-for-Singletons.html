@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2012-05-05 - UIZE Adds Support for Singletons | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="UIZE has added support for singletons in the form of the new Uize.Class.singleton static method implemented in the Uize.Class base class and inherited by all Uize.Class subclasses."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2012.html" class="breadcrumb breadcrumbWithArrow">2012 NEWS</a>
+	2012-05-05 - UIZE Adds Support for Singletons
+
+</h1>
+
+<div class="main">
+<div id="page_contents" class="contents-tree-shell">
+<ul>
+	<li>Contents
+		<ul>
+			<li><a href="#1" title="When no parameters are specified, this method will return a singleton for the class in the default scope.">1. Get a Singleton for a Class</a></li>
+			<li><a href="#2" title="When the optional scopeSTR parameter is specified, this method will return a singleton for the class in the specified scope.">2. Get a Singleton for a Class for a Specific Scope</a></li>
+			<li><a href="#3" title="When the optional propertiesOBJ parameter is specified, then this method will return a singleton for the class in the specified scope, and with the state of its set-get properties set using the propertiesOBJ object.">3. Get a Singleton for a Class for a Specific Scope, Specifying Initial State</a></li>
+			<li><a href="#4" title="As a convenience, the Uize.Class.singleton static method lets you optionally specify a scope when getting singleton instances, using the scopeSTR parameter.">4. Singleton Scope</a></li>
+		</ul>
+	</li>
+</ul>
+</div>
+
+<div class="contents0">
+	<p>UIZE has added support for singletons in the form of the new <code>Uize.Class.singleton</code> static method implemented in the <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> base class and inherited by all <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclasses.</p>
+	
+	<p>The <code>Uize.Class.singleton</code> static method returns a singleton for the class for the optionally specified scope (default is empty scope).</p>
+	
+	<p><span class="allCaps">DIFFERENT USAGES</span></p>
+	
+	<p><a href="#1">Get a Singleton for a Class</a></p>
+	
+	
+<pre class="sample-code">singletonOBJ = MyClass.singleton ();
+</pre>
+	
+	<p><a href="#2">Get a Singleton for a Class for a Specific Scope</a></p>
+	
+	
+<pre class="sample-code">singletonOBJ = MyClass.singleton (scopeSTR);
+</pre>
+	
+	<p><a href="#3">Get a Singleton for a Class for a Specific Scope, Specifying Initial State</a></p>
+	
+	
+<pre class="sample-code">singletonOBJ = MyClass.singleton (scopeSTR,propertiesOBJ);
+</pre>
+	
+	<a name="1"></a>
+	<h1 class="heading1" title="1. Get a Singleton for a Class"><span class="headingNumber"><a href="#1" title="1. Get a Singleton for a Class">1</a>. </span>Get a Singleton for a Class</h1>
+	<div class="contents1">
+		<p>When no parameters are specified, this method will return a singleton for the class in the default scope.</p>
+		
+		<p><span class="allCaps">SYNTAX</span></p>
+		
+		
+<pre class="sample-code">singletonOBJ = MyClass.singleton ();
+</pre>
+		
+		<p>When the <code>Uize.Class.singleton</code> static method is called on a class, if a singleton instance has already been created for the default scope, then that instance will be returned. Otherwise, a singleton instance will be created for the default scope and then returned.</p>
+	</div>
+	
+	<a name="2"></a>
+	<h1 class="heading1" title="2. Get a Singleton for a Class for a Specific Scope"><span class="headingNumber"><a href="#2" title="2. Get a Singleton for a Class for a Specific Scope">2</a>. </span>Get a Singleton for a Class for a Specific Scope</h1>
+	<div class="contents1">
+		<p>When the optional <code>scopeSTR</code> parameter is specified, this method will return a singleton for the class in the specified scope.</p>
+		
+		<p><span class="allCaps">SYNTAX</span></p>
+		
+		
+<pre class="sample-code">singletonOBJ = MyClass.singleton (scopeSTR);
+</pre>
+		
+		<p>When the <code>Uize.Class.singleton</code> static method is called on a class, if a singleton instance has already been created for the specified scope, then that instance will be returned. Otherwise, a singleton instance will be created for the specified scope and then returned.</p>
+	</div>
+	
+	<a name="3"></a>
+	<h1 class="heading1" title="3. Get a Singleton for a Class for a Specific Scope, Specifying Initial State"><span class="headingNumber"><a href="#3" title="3. Get a Singleton for a Class for a Specific Scope, Specifying Initial State">3</a>. </span>Get a Singleton for a Class for a Specific Scope, Specifying Initial State</h1>
+	<div class="contents1">
+		<p>When the optional <code>propertiesOBJ</code> parameter is specified, then this method will return a singleton for the class in the specified scope, and with the state of its set-get properties set using the <code>propertiesOBJ</code> object.</p>
+		
+		<p><span class="allCaps">SYNTAX</span></p>
+		
+		
+<pre class="sample-code">singletonOBJ = MyClass.singleton (scopeSTR,propertiesOBJ);
+</pre>
+		
+		<p>When the <code>Uize.Class.singleton</code> static method is called on a class, if a singleton instance has already been created for the specified scope, then that instance will be set to the state specified by the <code>propertiesOBJ</code> parameter and then returned. Otherwise, a singleton instance will be created for the specified scope, with its state initialized using the <code>propertiesOBJ</code> parameter, and then returned.</p>
+	</div>
+	
+	<a name="4"></a>
+	<h1 class="heading1" title="4. Singleton Scope"><span class="headingNumber"><a href="#4" title="4. Singleton Scope">4</a>. </span>Singleton Scope</h1>
+	<div class="contents1">
+		<p>As a convenience, the <code>Uize.Class.singleton</code> static method lets you optionally specify a scope when getting singleton instances, using the <code>scopeSTR</code> parameter.</p>
+		
+		<p>If no <code>scopeSTR</code> parameter is specified when getting a singleton for a class, then the default scope (an empty string) will be used. Therefore, the statement <code>MyClass.singleton ()</code> is equivalent to the statement <code>MyClass.singleton ('')</code>.</p>
+		
+		<p>A scope provides multiple different bits of related but distributed code to get a reference to the same singleton by specifying the same scope, while still allowing other code to share references to a different singleton created using a different scope.</p>
+	</div>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = UizeDotCom.Page.Doc ()).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

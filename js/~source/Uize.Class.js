@@ -1393,7 +1393,7 @@ Uize.module ({
 							*/
 
 					/*** Non-inherited Public Static Properties ***/
-						_subclass.nonInheritableStatics = {nonInheritableStatics:1,toString:0,valueOf:0};
+						_subclass.nonInheritableStatics = {_singletons:1,nonInheritableStatics:1,toString:0,valueOf:0};
 							/*?
 								Static Properties
 									Uize.Class.nonInheritableStatics
@@ -1487,6 +1487,77 @@ Uize.module ({
 							.......................................
 
 							In the above example, =MySubclass= is a subclass of =MyClass=, which is in turn a subclass of the =Uize.Class= base class. Now, when an instance of =MySubSubclass= gets created, the constructor of =MyClass= and then the constructor of =MySubSubclass= will be executed in the initialization of the instance, and the instance will have both =foo= and =bar= properties, where the =bar= property will have a value of "How unoriginal! Indeed!".
+				*/
+			};
+
+			_class.singleton = function (_scope,_properties) {
+				var
+					_singletons = this._singletons || (this._singletons = {}),
+					_singleton = _singletons [_scope || (_scope = '')]
+				;
+				_singleton
+					? _properties && _singleton.set (_properties)
+					: (_singleton = _singletons [_scope] = this (_properties))
+				;
+				return _singleton;
+				/*?
+					Static Methods
+						Uize.Class.singleton
+							Returns a singleton for the class for the optionally specified scope (default is empty scope).
+
+							DIFFERENT USAGES
+
+							`Get a Singleton for a Class`
+							....................................
+							singletonOBJ = MyClass.singleton ();
+							....................................
+
+							`Get a Singleton for a Class for a Specific Scope`
+							............................................
+							singletonOBJ = MyClass.singleton (scopeSTR);
+							............................................
+
+							`Get a Singleton for a Class for a Specific Scope, Specifying Initial State`
+							..........................................................
+							singletonOBJ = MyClass.singleton (scopeSTR,propertiesOBJ);
+							..........................................................
+
+							Get a Singleton for a Class
+								When no parameters are specified, this method will return a singleton for the class in the default scope.
+
+								SYNTAX
+								....................................
+								singletonOBJ = MyClass.singleton ();
+								....................................
+
+								When the =Uize.Class.singleton= static method is called on a class, if a singleton instance has already been created for the default scope, then that instance will be returned. Otherwise, a singleton instance will be created for the default scope and then returned.
+
+							Get a Singleton for a Class for a Specific Scope
+								When the optional =scopeSTR= parameter is specified, this method will return a singleton for the class in the specified scope.
+
+								SYNTAX
+								............................................
+								singletonOBJ = MyClass.singleton (scopeSTR);
+								............................................
+
+								When the =Uize.Class.singleton= static method is called on a class, if a singleton instance has already been created for the specified scope, then that instance will be returned. Otherwise, a singleton instance will be created for the specified scope and then returned.
+
+							Get a Singleton for a Class for a Specific Scope, Specifying Initial State
+								When the optional =propertiesOBJ= parameter is specified, then this method will return a singleton for the class in the specified scope, and with the state of its set-get properties set using the =propertiesOBJ= object.
+
+								SYNTAX
+								..........................................................
+								singletonOBJ = MyClass.singleton (scopeSTR,propertiesOBJ);
+								..........................................................
+
+								When the =Uize.Class.singleton= static method is called on a class, if a singleton instance has already been created for the specified scope, then that instance will be set to the state specified by the =propertiesOBJ= parameter and then returned. Otherwise, a singleton instance will be created for the specified scope, with its state initialized using the =propertiesOBJ= parameter, and then returned.
+
+							Singleton Scope
+								As a convenience, the =Uize.Class.singleton= static method lets you optionally specify a scope when getting singleton instances, using the =scopeSTR= parameter.
+
+								If no =scopeSTR= parameter is specified when getting a singleton for a class, then the default scope (an empty string) will be used. Therefore, the statement =MyClass.singleton ()= is equivalent to the statement =MyClass.singleton ('')=.
+
+								A scope provides multiple different bits of related but distributed code to get a reference to the same singleton by specifying the same scope, while still allowing other code to share references to a different singleton created using a different scope.
 				*/
 			};
 

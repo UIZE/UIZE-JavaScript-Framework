@@ -30,7 +30,8 @@ Uize.module ({
 	name:'Uize.Test.Uize.Class',
 	required:[
 		'Uize.Data',
-		'Uize.Class'
+		'Uize.Class',
+		'Uize.Class.Value'
 	],
 	builder:function () {
 		function _copyArguments (_arguments) {
@@ -785,25 +786,25 @@ Uize.module ({
 			test:[
 				Uize.Test.staticMethodsTest ([
 					['Uize.Class.fire',[
-						// NOTE: this method is thoroughly tested by the event system tests (so, no more tests here)
+						// NOTE: this method is thoroughly tested by the event system tests (so, no tests here)
 					]],
 					['Uize.Class.wire',[
-						// NOTE: this method is thoroughly tested by the event system tests (so, no more tests here)
+						// NOTE: this method is thoroughly tested by the event system tests (so, no tests here)
 					]],
 					['Uize.Class.unwire',[
-						// NOTE: this method is thoroughly tested by the event system tests (so, no more tests here)
+						// NOTE: this method is thoroughly tested by the event system tests (so, no tests here)
 					]],
 					['Uize.Class.registerProperties',[
-						// NOTE: this method is thoroughly tested by the properties system tests (so, no more tests here)
+						// NOTE: this method is thoroughly tested by the properties system tests (so, no tests here)
 					]],
 					['Uize.Class.get',[
-						// NOTE: this method is thoroughly tested by the properties system tests (so, no more tests here)
+						// NOTE: this method is thoroughly tested by the properties system tests (so, no tests here)
 					]],
 					['Uize.Class.set',[
-						// NOTE: this method is thoroughly tested by the properties system tests (so, no more tests here)
+						// NOTE: this method is thoroughly tested by the properties system tests (so, no tests here)
 					]],
 					['Uize.Class.toggle',[
-						// NOTE: this method is thoroughly tested by the properties system tests (so, no more tests here)
+						// NOTE: this method is thoroughly tested by the properties system tests (so, no tests here)
 					]],
 					['Uize.Class.valueOf',[
 						{
@@ -841,6 +842,111 @@ Uize.module ({
 							- test set-get properties and inheritance
 								- test that set-get properties are inherited by subclasses
 						*/
+					]],
+					['Uize.Class.singleton',[
+						{
+							title:'Test that a singleton is an instance of the class on which the static method is called',
+							test:function () {
+								var _Class = Uize.Class.subclass ();
+								return this.expectInstanceOf (_Class,_Class.singleton ());
+							}
+						},
+						{
+							title:'Test that all attempts to create a singleton in the default scope produce the same instance',
+							test:function () {
+								var
+									_Class = Uize.Class.subclass (),
+									_singletonA = _Class.singleton (),
+									_singletonB = _Class.singleton (),
+									_singletonC = _Class.singleton ()
+								;
+								return (
+									this.expectSameAs (_singletonA,_singletonB) &&
+									this.expectSameAs (_singletonB,_singletonC)
+								);
+							}
+						},
+						{
+							title:'Test that a singleton created for a class is not inherited by a subclass of that class',
+							test:function () {
+								var
+									_Class = Uize.Class.subclass (),
+									_ClassSubclass = _Class.subclass ()
+								;
+								return this.expect (false,_Class.singleton () === _ClassSubclass.singleton ());
+							}
+						},
+						{
+							title:'Test that a singleton can be created in a custom scope and that such a singleton will be a different one from that created in the default scope',
+							test:function () {
+								var
+									_Class = Uize.Class.subclass (),
+									_singletonInCustomScope = _Class.singleton ('foo')
+								;
+								return (
+									this.expectInstanceOf (_Class,_singletonInCustomScope) &&
+									this.expect (false,_singletonInCustomScope === _Class.singleton ())
+								);
+							}
+						},
+						{
+							title:'Test that all attempts to create a singleton in a custom scope produce the same instance',
+							test:function () {
+								var
+									_Class = Uize.Class.subclass (),
+									_singletonA = _Class.singleton ('foo'),
+									_singletonB = _Class.singleton ('foo'),
+									_singletonC = _Class.singleton ('foo')
+								;
+								return (
+									this.expectSameAs (_singletonA,_singletonB) &&
+									this.expectSameAs (_singletonB,_singletonC)
+								);
+							}
+						},
+						{
+							title:'Test that singletons created for different scopes are different instances',
+							test:function () {
+								var
+									_Class = Uize.Class.subclass (),
+									_singletonForFooScope = _Class.singleton ('foo'),
+									_singletonForBarScope = _Class.singleton ('bar'),
+									_singletonForBooScope = _Class.singleton ('boo')
+								;
+								return (
+									this.expect (false,_singletonForFooScope === _singletonForBarScope) &&
+									this.expect (false,_singletonForFooScope === _singletonForBooScope) &&
+									this.expect (false,_singletonForBarScope === _singletonForBooScope)
+								);
+							}
+						},
+						{
+							title:'Test that specifying the empty string scope is equivalent to specifying no scope',
+							test:function () {
+								var _Class = Uize.Class.subclass ();
+								return this.expectSameAs (_Class.singleton (),_Class.singleton (''));
+							}
+						},
+						{
+							title:'Test that specifying the optional properties object will initialize a newly created singleton to the state defined by the properties object',
+							test:function () {
+								var _singleton = Uize.Class.Value.singleton ('',{value:'foo'});
+								return this.expect ('foo',_singleton.get ('value'));
+							}
+						},
+						{
+							title:'Test that specifying the optional properties object when getting a singleton instance that has already been created will update the singleton instance to the state defined by the properties object',
+							test:function () {
+								var
+									_singleton = Uize.Class.Value.singleton (),
+									_anotherSingleton = Uize.Class.Value.singleton ('',{value:'foo'})
+								;
+								return (
+									this.expectSameAs (_singleton,_anotherSingleton) &&
+									this.expect ('foo',_singleton.get ('value'))
+								);
+							}
+						}
 					]]
 				]),
 				{

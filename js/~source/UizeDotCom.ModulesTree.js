@@ -67,6 +67,7 @@ Uize.module ({
 						}
 					},
 					Scruncher:0,
+					Service:0,
 					String:{
 						Builder:0,
 						Discombobulator:0,

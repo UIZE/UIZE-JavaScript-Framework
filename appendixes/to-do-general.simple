@@ -126,6 +126,91 @@ Mixins
 	ISSUES
 	- namespace conflict for all instance properties
 
+Rethinking Module Definitions
+
+	Using a Provide-Need Pattern as Foundation
+		In Essence
+			- the needer specifies the criteria for what is needed
+			- from the registered providers, a provider is selected that can best satisfy the need
+			- the chosen provider sees if anything is already cached that matches the need
+			- if something is cached, the provider passes it on to the needer
+			- if nothing is cached, then...
+			- the provider goes about obtaining something that matches the need
+			- the provider caches the thing that it obtained, for the benefit of others that may have matching needs
+			- the provider passes the needed item on to the needer
+	
+
+		Other Patterns That Can Be Modeled on Provide-Need
+			Needing an Instance
+				An instance provider would be given criteria for the instance needed, such as class module, initial / constructor properties, etc.
+
+				The provider registered for providing instances would in turn need the class module for a specific instance that is needed.
+
+			Needing a Session
+				Code that needs the user to be logged in and to have a session could use a provide-need pattern, where a registered provider for session would go about prompting the user to log in.
+
+		.......................................
+		Uize.provide (
+			{type: 'module', org: 'Uize'},
+			function (needed, deliver) {
+				// code here to load Uize modules
+			}
+		);
+		.......................................
+
+		.........................................
+		Uize.provide (
+			{type: 'module', org: 'Zazzle'},
+			function (needed, deliver) {
+				// code here to load Zazzle modules
+			}
+		);
+		.........................................
+
+		....................................
+		Uize.providers
+		....................................
+
+		......................................................
+		Uize.need (
+			{type: 'module', org: 'Uize', name: 'Uize.Widget'},
+			function (Uize_Widget) {
+				// now we can use the Uize.Widget class
+			}
+		);
+		......................................................
+
+	Uize.module And Uize.require as Syntactical Sugar
+		....................................
+		Uize.module ({
+			org: 'zazzle',
+			name: 'Zazzle.Foo.Bar',
+			builder: function () {
+				// build and return the module
+			}
+		});
+		....................................
+
+		.............................
+		Uize.require (
+			{
+				org: 'zazzle',
+				name: 'Zazzle.Foo.Bar'
+			},
+			function (Zazzle_Foo_Bar) {
+
+			}
+		);
+		.............................
+
+		...........................
+		Uize.require(
+			'zazzle:Zazzle.Foo.Bar',
+			function () {
+			}
+		);
+		...........................
+
 Version Support in Module Mechanism
 	Requirements
 		Support the following...

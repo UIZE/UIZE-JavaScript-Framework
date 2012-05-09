@@ -49,7 +49,7 @@
 							<li><a href="#1_3_1" title="The features listed in this section have been introduced in this module.">1.3.1. Features Introduced in This Module</a></li>
 							<li><a href="#1_3_2" title="No features have been overridden in this module.">1.3.2. Features Overridden in This Module</a></li>
 							<li><a href="#1_3_3" title="This module has no inherited features.">1.3.3. Features Inherited From Other Modules</a></li>
-							<li><a href="#1_3_4" title="There are no modules directly under this namespace.">1.3.4. Modules Directly Under This Namespace</a></li>
+							<li><a href="#1_3_4" title="Uize.Class.Value">1.3.4. Modules Directly Under This Namespace</a></li>
 							<li><a href="#1_3_5" title="The Uize.Class module is unit tested by the Uize.Test.Uize.Class test module.">1.3.5. Unit Tests</a></li>
 						</ul>
 					</li>
@@ -87,12 +87,20 @@
 					<li><a href="#4_2" title="Lets you query the initial value for one of the class&apos;s set-get properties.">4.2. Uize.Class.get</a></li>
 					<li><a href="#4_3" title="Lets you register properties for the class.">4.3. Uize.Class.registerProperties</a></li>
 					<li><a href="#4_4" title="Lets you set the initial value for one of the class&apos;s set-get properties.">4.4. Uize.Class.set</a></li>
-					<li><a href="#4_5" title="Lets you subclass the Uize.Class base class or any subclass of Uize.Class.">4.5. Uize.Class.subclass</a></li>
-					<li><a href="#4_6" title="IMPLEMENTATION INFO">4.6. Uize.Class.superclass</a></li>
-					<li><a href="#4_7" title="Toggles the value of the specified boolean static set-get property.">4.7. Uize.Class.toggle</a></li>
-					<li><a href="#4_8" title="Lets you remove a handler previously wired to a static event, or handlers wired for multiple static events.">4.8. Uize.Class.unwire</a></li>
-					<li><a href="#4_9" title="Returns the value of the class&apos; value set-get property.">4.9. Uize.Class.valueOf</a></li>
-					<li><a href="#4_10" title="Lets you wire a handler for a static event of the class, or handlers for multiple static events.">4.10. Uize.Class.wire</a></li>
+					<li><a href="#4_5" title="Returns a singleton for the class for the optionally specified scope (default is empty scope).">4.5. Uize.Class.singleton</a>
+						<ul>
+							<li><a href="#4_5_1" title="When no parameters are specified, this method will return a singleton for the class in the default scope.">4.5.1. Get a Singleton for a Class</a></li>
+							<li><a href="#4_5_2" title="When the optional scopeSTR parameter is specified, this method will return a singleton for the class in the specified scope.">4.5.2. Get a Singleton for a Class for a Specific Scope</a></li>
+							<li><a href="#4_5_3" title="When the optional propertiesOBJ parameter is specified, then this method will return a singleton for the class in the specified scope, and with the state of its set-get properties set using the propertiesOBJ object.">4.5.3. Get a Singleton for a Class for a Specific Scope, Specifying Initial State</a></li>
+							<li><a href="#4_5_4" title="As a convenience, the Uize.Class.singleton static method lets you optionally specify a scope when getting singleton instances, using the scopeSTR parameter.">4.5.4. Singleton Scope</a></li>
+						</ul>
+					</li>
+					<li><a href="#4_6" title="Lets you subclass the Uize.Class base class or any subclass of Uize.Class.">4.6. Uize.Class.subclass</a></li>
+					<li><a href="#4_7" title="IMPLEMENTATION INFO">4.7. Uize.Class.superclass</a></li>
+					<li><a href="#4_8" title="Toggles the value of the specified boolean static set-get property.">4.8. Uize.Class.toggle</a></li>
+					<li><a href="#4_9" title="Lets you remove a handler previously wired to a static event, or handlers wired for multiple static events.">4.9. Uize.Class.unwire</a></li>
+					<li><a href="#4_10" title="Returns the value of the class&apos; value set-get property.">4.10. Uize.Class.valueOf</a></li>
+					<li><a href="#4_11" title="Lets you wire a handler for a static event of the class, or handlers for multiple static events.">4.11. Uize.Class.wire</a></li>
 				</ul>
 			</li>
 			<li><a href="#5">5. Parameters</a>
@@ -299,7 +307,7 @@ var Food = Uize.noNew (
 				
 				<p><span class="allCaps">STATIC METHODS</span></p>
 				
-				<p><code><a href="#4_1">Uize.Class.fire</a></code> | <code><a href="#4_2">Uize.Class.get</a></code> | <code><a href="#4_3">Uize.Class.registerProperties</a></code> | <code><a href="#4_4">Uize.Class.set</a></code> | <code><a href="#4_5">Uize.Class.subclass</a></code> | <code><a href="#4_6">Uize.Class.superclass</a></code> | <code><a href="#4_7">Uize.Class.toggle</a></code> | <code><a href="#4_8">Uize.Class.unwire</a></code> | <code><a href="#4_10">Uize.Class.wire</a></code></p>
+				<p><code><a href="#4_1">Uize.Class.fire</a></code> | <code><a href="#4_2">Uize.Class.get</a></code> | <code><a href="#4_3">Uize.Class.registerProperties</a></code> | <code><a href="#4_4">Uize.Class.set</a></code> | <code><a href="#4_5">Uize.Class.singleton</a></code> | <code><a href="#4_6">Uize.Class.subclass</a></code> | <code><a href="#4_7">Uize.Class.superclass</a></code> | <code><a href="#4_8">Uize.Class.toggle</a></code> | <code><a href="#4_9">Uize.Class.unwire</a></code> | <code><a href="#4_11">Uize.Class.wire</a></code></p>
 				
 				<p><span class="allCaps">STATIC PROPERTIES</span></p>
 				
@@ -321,7 +329,7 @@ var Food = Uize.noNew (
 			<a name="1_3_4"></a>
 			<h3 class="heading3" title="1. Introduction -&gt; 1.3. Implementation Info -&gt; 1.3.4. Modules Directly Under This Namespace"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_3" title="1. Introduction -&gt; 1.3. Implementation Info">3</a>.<a href="#1_3_4" title="1. Introduction -&gt; 1.3. Implementation Info -&gt; 1.3.4. Modules Directly Under This Namespace">4</a>. </span>Modules Directly Under This Namespace</h3>
 			<div class="contents3">
-				<p>There are no modules directly under this namespace.</p>
+				<p><code><a href="../reference/Uize.Class.Value.html">Uize.Class.Value</a></code></p>
 			</div>
 			
 			<a name="1_3_5"></a>
@@ -417,7 +425,7 @@ MyClass.prototype.insertButton = function () {
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#3_9">wire</a></code> and <code><a href="#3_7">unwire</a></code> instance methods</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#4_1">Uize.Class.fire</a></code>, <code><a href="#4_10">Uize.Class.wire</a></code>, and <code><a href="#4_8">Uize.Class.unwire</a></code> static methods</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#4_1">Uize.Class.fire</a></code>, <code><a href="#4_11">Uize.Class.wire</a></code>, and <code><a href="#4_9">Uize.Class.unwire</a></code> static methods</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -779,7 +787,7 @@ myInstance.set ({myProperty:!myInstance.get ('myProperty')});
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#3_1">fire</a></code> and <code><a href="#3_9">wire</a></code> instance methods</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#4_1">Uize.Class.fire</a></code>, <code><a href="#4_10">Uize.Class.wire</a></code>, and <code><a href="#4_8">Uize.Class.unwire</a></code> static methods</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#4_1">Uize.Class.fire</a></code>, <code><a href="#4_11">Uize.Class.wire</a></code>, and <code><a href="#4_9">Uize.Class.unwire</a></code> static methods</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -845,7 +853,7 @@ markedUpPrice = price * (1 + page.children.markupPercentSlider / 100);
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#3_5">toString Intrinsic Method</a></code>, and the <code>Uize.toString</code> static intrinsic method</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#4_9">Uize.Class.valueOf</a></code> static intrinsic method</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#4_10">Uize.Class.valueOf</a></code> static intrinsic method</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>if the instance's class does not register a <code>value</code> set-get property, then this method will return the value of the instance's <code>value</code> property, and if the instance has no <code>value</code> property, then this method will simply return <code>undefined</code></td></tr>
 			</table>
 		</div>
@@ -902,7 +910,7 @@ markedUpPrice = price * (1 + page.children.markupPercentSlider / 100);
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#3_1">fire</a></code> and <code><a href="#3_7">unwire</a></code> instance methods</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#4_1">Uize.Class.fire</a></code>, <code><a href="#4_10">Uize.Class.wire</a></code>, and <code><a href="#4_8">Uize.Class.unwire</a></code> static methods</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#4_1">Uize.Class.fire</a></code>, <code><a href="#4_11">Uize.Class.wire</a></code>, and <code><a href="#4_9">Uize.Class.unwire</a></code> static methods</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -937,7 +945,7 @@ markedUpPrice = price * (1 + page.children.markupPercentSlider / 100);
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#4_10">Uize.Class.wire</a></code> and <code><a href="#4_8">Uize.Class.unwire</a></code> static methods</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#4_11">Uize.Class.wire</a></code> and <code><a href="#4_9">Uize.Class.unwire</a></code> static methods</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#3_1">fire</a></code>, <code><a href="#3_9">wire</a></code>, and <code><a href="#3_7">unwire</a></code> instance methods</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -1100,7 +1108,92 @@ markedUpPrice = price * (1 + page.children.markupPercentSlider / 100);
 		</div>
 		
 		<a name="4_5"></a>
-		<h2 class="heading2" title="4. Static Methods -&gt; 4.5. Uize.Class.subclass"><span class="headingNumber"><a href="#4" title="4. Static Methods">4</a>.<a href="#4_5" title="4. Static Methods -&gt; 4.5. Uize.Class.subclass">5</a>. </span>Uize.Class.subclass</h2>
+		<h2 class="heading2" title="4. Static Methods -&gt; 4.5. Uize.Class.singleton"><span class="headingNumber"><a href="#4" title="4. Static Methods">4</a>.<a href="#4_5" title="4. Static Methods -&gt; 4.5. Uize.Class.singleton">5</a>. </span>Uize.Class.singleton</h2>
+		<div class="contents2">
+			<p>Returns a singleton for the class for the optionally specified scope (default is empty scope).</p>
+			
+			<p><span class="allCaps">DIFFERENT USAGES</span></p>
+			
+			<p><a href="#4_5_1">Get a Singleton for a Class</a></p>
+			
+			
+<pre class="sample-code">singletonOBJ = MyClass.singleton ();
+</pre>
+			
+			<p><a href="#4_5_2">Get a Singleton for a Class for a Specific Scope</a></p>
+			
+			
+<pre class="sample-code">singletonOBJ = MyClass.singleton (scopeSTR);
+</pre>
+			
+			<p><a href="#4_5_3">Get a Singleton for a Class for a Specific Scope, Specifying Initial State</a></p>
+			
+			
+<pre class="sample-code">singletonOBJ = MyClass.singleton (scopeSTR,propertiesOBJ);
+</pre>
+			
+			<a name="4_5_1"></a>
+			<h3 class="heading3" title="4. Static Methods -&gt; 4.5. Uize.Class.singleton -&gt; 4.5.1. Get a Singleton for a Class"><span class="headingNumber"><a href="#4" title="4. Static Methods">4</a>.<a href="#4_5" title="4. Static Methods -&gt; 4.5. Uize.Class.singleton">5</a>.<a href="#4_5_1" title="4. Static Methods -&gt; 4.5. Uize.Class.singleton -&gt; 4.5.1. Get a Singleton for a Class">1</a>. </span>Get a Singleton for a Class</h3>
+			<div class="contents3">
+				<p>When no parameters are specified, this method will return a singleton for the class in the default scope.</p>
+				
+				<p><span class="allCaps">SYNTAX</span></p>
+				
+				
+<pre class="sample-code">singletonOBJ = MyClass.singleton ();
+</pre>
+				
+				<p>When the <code><a href="#4_5">Uize.Class.singleton</a></code> static method is called on a class, if a singleton instance has already been created for the default scope, then that instance will be returned. Otherwise, a singleton instance will be created for the default scope and then returned.</p>
+			</div>
+			
+			<a name="4_5_2"></a>
+			<h3 class="heading3" title="4. Static Methods -&gt; 4.5. Uize.Class.singleton -&gt; 4.5.2. Get a Singleton for a Class for a Specific Scope"><span class="headingNumber"><a href="#4" title="4. Static Methods">4</a>.<a href="#4_5" title="4. Static Methods -&gt; 4.5. Uize.Class.singleton">5</a>.<a href="#4_5_2" title="4. Static Methods -&gt; 4.5. Uize.Class.singleton -&gt; 4.5.2. Get a Singleton for a Class for a Specific Scope">2</a>. </span>Get a Singleton for a Class for a Specific Scope</h3>
+			<div class="contents3">
+				<p>When the optional <code>scopeSTR</code> parameter is specified, this method will return a singleton for the class in the specified scope.</p>
+				
+				<p><span class="allCaps">SYNTAX</span></p>
+				
+				
+<pre class="sample-code">singletonOBJ = MyClass.singleton (scopeSTR);
+</pre>
+				
+				<p>When the <code><a href="#4_5">Uize.Class.singleton</a></code> static method is called on a class, if a singleton instance has already been created for the specified scope, then that instance will be returned. Otherwise, a singleton instance will be created for the specified scope and then returned.</p>
+			</div>
+			
+			<a name="4_5_3"></a>
+			<h3 class="heading3" title="4. Static Methods -&gt; 4.5. Uize.Class.singleton -&gt; 4.5.3. Get a Singleton for a Class for a Specific Scope, Specifying Initial State"><span class="headingNumber"><a href="#4" title="4. Static Methods">4</a>.<a href="#4_5" title="4. Static Methods -&gt; 4.5. Uize.Class.singleton">5</a>.<a href="#4_5_3" title="4. Static Methods -&gt; 4.5. Uize.Class.singleton -&gt; 4.5.3. Get a Singleton for a Class for a Specific Scope, Specifying Initial State">3</a>. </span>Get a Singleton for a Class for a Specific Scope, Specifying Initial State</h3>
+			<div class="contents3">
+				<p>When the optional <code>propertiesOBJ</code> parameter is specified, then this method will return a singleton for the class in the specified scope, and with the state of its set-get properties set using the <code>propertiesOBJ</code> object.</p>
+				
+				<p><span class="allCaps">SYNTAX</span></p>
+				
+				
+<pre class="sample-code">singletonOBJ = MyClass.singleton (scopeSTR,propertiesOBJ);
+</pre>
+				
+				<p>When the <code><a href="#4_5">Uize.Class.singleton</a></code> static method is called on a class, if a singleton instance has already been created for the specified scope, then that instance will be set to the state specified by the <code>propertiesOBJ</code> parameter and then returned. Otherwise, a singleton instance will be created for the specified scope, with its state initialized using the <code>propertiesOBJ</code> parameter, and then returned.</p>
+			</div>
+			
+			<a name="4_5_4"></a>
+			<h3 class="heading3" title="4. Static Methods -&gt; 4.5. Uize.Class.singleton -&gt; 4.5.4. Singleton Scope"><span class="headingNumber"><a href="#4" title="4. Static Methods">4</a>.<a href="#4_5" title="4. Static Methods -&gt; 4.5. Uize.Class.singleton">5</a>.<a href="#4_5_4" title="4. Static Methods -&gt; 4.5. Uize.Class.singleton -&gt; 4.5.4. Singleton Scope">4</a>. </span>Singleton Scope</h3>
+			<div class="contents3">
+				<p>As a convenience, the <code><a href="#4_5">Uize.Class.singleton</a></code> static method lets you optionally specify a scope when getting singleton instances, using the <code>scopeSTR</code> parameter.</p>
+				
+				<p>If no <code>scopeSTR</code> parameter is specified when getting a singleton for a class, then the default scope (an empty string) will be used. Therefore, the statement <code>MyClass.singleton ()</code> is equivalent to the statement <code>MyClass.singleton ('')</code>.</p>
+				
+				<p>A scope provides multiple different bits of related but distributed code to get a reference to the same singleton by specifying the same scope, while still allowing other code to share references to a different singleton created using a different scope.</p>
+			</div>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_6"></a>
+		<h2 class="heading2" title="4. Static Methods -&gt; 4.6. Uize.Class.subclass"><span class="headingNumber"><a href="#4" title="4. Static Methods">4</a>.<a href="#4_6" title="4. Static Methods -&gt; 4.6. Uize.Class.subclass">6</a>. </span>Uize.Class.subclass</h2>
 		<div class="contents2">
 			<p>Lets you subclass the <code>Uize.Class</code> base class or any subclass of <code>Uize.Class</code>.</p>
 			
@@ -1138,37 +1231,9 @@ MySubclass = MyClass.subclass (
 			</table>
 		</div>
 		
-		<a name="4_6"></a>
-		<h2 class="heading2" title="4. Static Methods -&gt; 4.6. Uize.Class.superclass"><span class="headingNumber"><a href="#4" title="4. Static Methods">4</a>.<a href="#4_6" title="4. Static Methods -&gt; 4.6. Uize.Class.superclass">6</a>. </span>Uize.Class.superclass</h2>
-		<div class="contents2">
-			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
-			
-			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
-			</table>
-		</div>
-		
 		<a name="4_7"></a>
-		<h2 class="heading2" title="4. Static Methods -&gt; 4.7. Uize.Class.toggle"><span class="headingNumber"><a href="#4" title="4. Static Methods">4</a>.<a href="#4_7" title="4. Static Methods -&gt; 4.7. Uize.Class.toggle">7</a>. </span>Uize.Class.toggle</h2>
+		<h2 class="heading2" title="4. Static Methods -&gt; 4.7. Uize.Class.superclass"><span class="headingNumber"><a href="#4" title="4. Static Methods">4</a>.<a href="#4_7" title="4. Static Methods -&gt; 4.7. Uize.Class.superclass">7</a>. </span>Uize.Class.superclass</h2>
 		<div class="contents2">
-			<p>Toggles the value of the specified boolean static set-get property.</p>
-			
-			<p><span class="allCaps">SYNTAX</span></p>
-			
-			
-<pre class="sample-code">toggledValueBOOL = Uize.Class.toggle (propertyNameSTR);
-</pre>
-			
-			<p>The <code><a href="#4_7">Uize.Class.toggle</a></code> static method is provided purely as a convenience. The following two statements are equivalent...</p>
-			
-			
-<pre class="sample-code">Uize.Class.toggle ('myProperty');
-Uize.Class.set ({myProperty:!Uize.Class.get ('myProperty')});
-</pre>
-			
-			<p>As you can see, using the <code><a href="#4_7">Uize.Class.toggle</a></code> method produces more concise code.</p>
-			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
 			<table class="list">
@@ -1178,7 +1243,35 @@ Uize.Class.set ({myProperty:!Uize.Class.get ('myProperty')});
 		</div>
 		
 		<a name="4_8"></a>
-		<h2 class="heading2" title="4. Static Methods -&gt; 4.8. Uize.Class.unwire"><span class="headingNumber"><a href="#4" title="4. Static Methods">4</a>.<a href="#4_8" title="4. Static Methods -&gt; 4.8. Uize.Class.unwire">8</a>. </span>Uize.Class.unwire</h2>
+		<h2 class="heading2" title="4. Static Methods -&gt; 4.8. Uize.Class.toggle"><span class="headingNumber"><a href="#4" title="4. Static Methods">4</a>.<a href="#4_8" title="4. Static Methods -&gt; 4.8. Uize.Class.toggle">8</a>. </span>Uize.Class.toggle</h2>
+		<div class="contents2">
+			<p>Toggles the value of the specified boolean static set-get property.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">toggledValueBOOL = Uize.Class.toggle (propertyNameSTR);
+</pre>
+			
+			<p>The <code><a href="#4_8">Uize.Class.toggle</a></code> static method is provided purely as a convenience. The following two statements are equivalent...</p>
+			
+			
+<pre class="sample-code">Uize.Class.toggle ('myProperty');
+Uize.Class.set ({myProperty:!Uize.Class.get ('myProperty')});
+</pre>
+			
+			<p>As you can see, using the <code><a href="#4_8">Uize.Class.toggle</a></code> method produces more concise code.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_9"></a>
+		<h2 class="heading2" title="4. Static Methods -&gt; 4.9. Uize.Class.unwire"><span class="headingNumber"><a href="#4" title="4. Static Methods">4</a>.<a href="#4_9" title="4. Static Methods -&gt; 4.9. Uize.Class.unwire">9</a>. </span>Uize.Class.unwire</h2>
 		<div class="contents2">
 			<p>Lets you remove a handler previously wired to a static event, or handlers wired for multiple static events.</p>
 			
@@ -1202,12 +1295,12 @@ Uize.Class.set ({myProperty:!Uize.Class.get ('myProperty')});
 <pre class="sample-code">MyClass.unwire (eventNamesToHandlersMapOBJ);
 </pre>
 			
-			<p>When only a single <code><a href="#5_2">eventNamesToHandlersMapOBJ</a></code> parameter is specified, then event handlers for multiple events can be specified using an object hash. This variation is provided as a convenience and has the effect of iteratively calling the <code><a href="#4_8">Uize.Class.unwire</a></code> static method for each event-name-to-handler mapping in the <code><a href="#5_2">eventNamesToHandlersMapOBJ</a></code> object.</p>
+			<p>When only a single <code><a href="#5_2">eventNamesToHandlersMapOBJ</a></code> parameter is specified, then event handlers for multiple events can be specified using an object hash. This variation is provided as a convenience and has the effect of iteratively calling the <code><a href="#4_9">Uize.Class.unwire</a></code> static method for each event-name-to-handler mapping in the <code><a href="#5_2">eventNamesToHandlersMapOBJ</a></code> object.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#4_1">Uize.Class.fire</a></code> and <code><a href="#4_10">Uize.Class.wire</a></code> static methods</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#4_1">Uize.Class.fire</a></code> and <code><a href="#4_11">Uize.Class.wire</a></code> static methods</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#3_1">fire</a></code>, <code><a href="#3_9">wire</a></code>, and <code><a href="#3_7">unwire</a></code> instance methods</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -1218,8 +1311,8 @@ Uize.Class.set ({myProperty:!Uize.Class.get ('myProperty')});
 			</table>
 		</div>
 		
-		<a name="4_9"></a>
-		<h2 class="heading2" title="4. Static Methods -&gt; 4.9. Uize.Class.valueOf"><span class="headingNumber"><a href="#4" title="4. Static Methods">4</a>.<a href="#4_9" title="4. Static Methods -&gt; 4.9. Uize.Class.valueOf">9</a>. </span>Uize.Class.valueOf</h2>
+		<a name="4_10"></a>
+		<h2 class="heading2" title="4. Static Methods -&gt; 4.10. Uize.Class.valueOf"><span class="headingNumber"><a href="#4" title="4. Static Methods">4</a>.<a href="#4_10" title="4. Static Methods -&gt; 4.10. Uize.Class.valueOf">10</a>. </span>Uize.Class.valueOf</h2>
 		<div class="contents2">
 			<p>Returns the value of the class' <code>value</code> set-get property.</p>
 			
@@ -1229,7 +1322,7 @@ Uize.Class.set ({myProperty:!Uize.Class.get ('myProperty')});
 <pre class="sample-code">classValueANYTYPE = MyClass.valueOf ();
 </pre>
 			
-			<p>The <code><a href="#4_9">Uize.Class.valueOf</a></code> static intrinsic method is invoked automatically in certain contexts in order to convert a class to a value, such as when using a class reference in an expression (eg. <code>Uize.Widget.Bar.Slider + 0</code>). This static method is implemented primarily to provide parity with the <code><a href="#3_8">valueOf Intrinsic Method</a></code>. Its behavior is largely equivalent to that of the instance method, excepting that it applies to the static value of the <code>value</code> set-get property.</p>
+			<p>The <code><a href="#4_10">Uize.Class.valueOf</a></code> static intrinsic method is invoked automatically in certain contexts in order to convert a class to a value, such as when using a class reference in an expression (eg. <code>Uize.Widget.Bar.Slider + 0</code>). This static method is implemented primarily to provide parity with the <code><a href="#3_8">valueOf Intrinsic Method</a></code>. Its behavior is largely equivalent to that of the instance method, excepting that it applies to the static value of the <code>value</code> set-get property.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
@@ -1240,8 +1333,8 @@ Uize.Class.set ({myProperty:!Uize.Class.get ('myProperty')});
 			</table>
 		</div>
 		
-		<a name="4_10"></a>
-		<h2 class="heading2" title="4. Static Methods -&gt; 4.10. Uize.Class.wire"><span class="headingNumber"><a href="#4" title="4. Static Methods">4</a>.<a href="#4_10" title="4. Static Methods -&gt; 4.10. Uize.Class.wire">10</a>. </span>Uize.Class.wire</h2>
+		<a name="4_11"></a>
+		<h2 class="heading2" title="4. Static Methods -&gt; 4.11. Uize.Class.wire"><span class="headingNumber"><a href="#4" title="4. Static Methods">4</a>.<a href="#4_11" title="4. Static Methods -&gt; 4.11. Uize.Class.wire">11</a>. </span>Uize.Class.wire</h2>
 		<div class="contents2">
 			<p>Lets you wire a handler for a static event of the class, or handlers for multiple static events.</p>
 			
@@ -1259,7 +1352,7 @@ Uize.Class.set ({myProperty:!Uize.Class.get ('myProperty')});
 <pre class="sample-code">MyClass.wire (eventNamesToHandlersMapOBJ);
 </pre>
 			
-			<p>When only a single <code><a href="#5_2">eventNamesToHandlersMapOBJ</a></code> parameter is specified, then event handlers for multiple events can be specified using an object hash. This variation is provided as a convenience and has the effect of iteratively calling the <code><a href="#4_10">Uize.Class.wire</a></code> static method for each event-name-to-handler mapping in the <code><a href="#5_2">eventNamesToHandlersMapOBJ</a></code> object.</p>
+			<p>When only a single <code><a href="#5_2">eventNamesToHandlersMapOBJ</a></code> parameter is specified, then event handlers for multiple events can be specified using an object hash. This variation is provided as a convenience and has the effect of iteratively calling the <code><a href="#4_11">Uize.Class.wire</a></code> static method for each event-name-to-handler mapping in the <code><a href="#5_2">eventNamesToHandlersMapOBJ</a></code> object.</p>
 			
 			<p><span class="allCaps">SPECIAL VALUES</span></p>
 			
@@ -1269,7 +1362,7 @@ Uize.Class.set ({myProperty:!Uize.Class.get ('myProperty')});
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#4_1">Uize.Class.fire</a></code> and <code><a href="#4_8">Uize.Class.unwire</a></code> static methods</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#4_1">Uize.Class.fire</a></code> and <code><a href="#4_9">Uize.Class.unwire</a></code> static methods</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#3_1">fire</a></code>, <code><a href="#3_9">wire</a></code>, and <code><a href="#3_7">unwire</a></code> instance methods</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -1320,7 +1413,7 @@ Uize.Class.set ({myProperty:!Uize.Class.get ('myProperty')});
 				
 				<p>In the above example, a handler is being registered for the <code>'Click'</code> event of a button (an instance of the <code><a href="../reference/Uize.Widget.Button.html">Uize.Widget.Button</a></code> class) that is a child widget of <code>myWidget</code>. By specifying <code>myWidget</code> as the handler for the <code>Click</code> event, that event will get relayed to <code>myWidget</code>. This means that other code can now register handlers on the <code>Click</code> event for <code>myWidget</code>, and those handlers will handle the <code>Click</code> event being relayed from the button widget.</p>
 				
-				<p>Object handlers added in this way can be removed by using the <code><a href="#3_7">unwire</a></code> instance method and the <code><a href="#4_8">Uize.Class.unwire</a></code> static method, just as with any other type of handler, as in...</p>
+				<p>Object handlers added in this way can be removed by using the <code><a href="#3_7">unwire</a></code> instance method and the <code><a href="#4_9">Uize.Class.unwire</a></code> static method, just as with any other type of handler, as in...</p>
 				
 				
 <pre class="sample-code">myWidget.children.someButton.unwire ('Click',myWidget);

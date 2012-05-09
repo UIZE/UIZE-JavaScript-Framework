@@ -91,6 +91,22 @@
 					<li><a href="#9_7" title="Set-get properties are registered for a class by calling the MyClass.registerProperties static method that is inherited from the Uize.Class base class.">9.7. Registering Set-get Properties</a></li>
 				</ul>
 			</li>
+			<li><a href="#10" title="The UIZE JavaScript Framework provides support for singletons in the form of the Uize.Class.singleton static method that is implemented in the Uize.Class base class and is inherited by all Uize.Class subclasses.">10. Singletons</a>
+				<ul>
+					<li><a href="#10_1" title="Because singleton support is implemented in the Uize.Class base class, a singleton for any Uize.Class subclass can be created by calling the singleton static method on the class.">10.1. Every Class Supports Singletons</a></li>
+					<li><a href="#10_2" title="As expected with singletons, multiple separate calls to the singleton static method will return a reference to the same singleton.">10.2. A Single Singleton</a></li>
+					<li><a href="#10_3" title="A typical and compelling use case for the singleton feature is with service classes, where one typically wants to share a single instance of a service class amongst multiple disparate users of the service.">10.3. Compelling Use Cases for Singletons</a></li>
+					<li><a href="#10_4" title="As a convenience, the singleton static method provides a way to optionally create singletons in a custom scope.">10.4. Singleton Scope</a>
+						<ul>
+							<li><a href="#10_4_1" title="The exception to the rule of a single singleton is when using the singleton scope feature.">10.4.1. A Single Singleton Per Scope</a></li>
+							<li><a href="#10_4_2" title="In order to be able to take advantage of the singleton scope feature, your classes need to be designed correctly.">10.4.2. Designing Classes to Support Singleton Scope</a></li>
+							<li><a href="#10_4_3" title="A singleton scope is effectively global for a given class.">10.4.3. Singleton Scope is Effectively Global</a></li>
+						</ul>
+					</li>
+					<li><a href="#10_5" title="A singleton can be created with an initial state by specifying the optional propertiesOBJ second parameter.">10.5. Initial State for Singletons</a></li>
+					<li><a href="#10_6" title="While there are a few compelling use cases for singletons, one should nevertheless use the singleton feature sparingly and with caution.">10.6. Use the Singleton Feature Sparingly</a></li>
+				</ul>
+			</li>
 		</ul>
 	</li>
 </ul>
@@ -842,6 +858,124 @@ _class.nonInheritableStatics.myStaticMethod = 1;
 </pre>
 			
 			<p>In the above example, the set-get property with the public name <code>property1</code> is being mapped to the private identifier <code>_property1</code>. It is not technically necessary that the private name be the public name prefixed with an underscore - this is simply a convention that is followed. Because no object is used to specify the profile for this set-get property, there is no <code>onChange</code> handler registered, and the initial value is <code>undefined</code>. By contrast, the <code>property2</code> set-get property is registered with a profile object that specifies an <code>onChange</code> handler function and an initial value of <code>0</code>.</p>
+		</div>
+	</div>
+	
+	<a name="10"></a>
+	<h1 class="heading1" title="10. Singletons"><span class="headingNumber"><a href="#10" title="10. Singletons">10</a>. </span>Singletons</h1>
+	<div class="contents1">
+		<p>The UIZE JavaScript Framework provides support for <a href="http://en.wikipedia.org/wiki/Singleton_pattern" target="_blank" class="externalSiteLink">singletons</a> in the form of the <code>Uize.Class.singleton</code> static method that is implemented in the <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> base class and is inherited by all <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclasses.</p>
+		
+		<a name="10_1"></a>
+		<h2 class="heading2" title="10. Singletons -&gt; 10.1. Every Class Supports Singletons"><span class="headingNumber"><a href="#10" title="10. Singletons">10</a>.<a href="#10_1" title="10. Singletons -&gt; 10.1. Every Class Supports Singletons">1</a>. </span>Every Class Supports Singletons</h2>
+		<div class="contents2">
+			<p>Because singleton support is implemented in the <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> base class, a singleton for any <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> subclass can be created by calling the <code>singleton</code> static method on the class.</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">var fileSystem = Uize.Services.FileSystem.singleton ();
+</pre>
+			
+			<p>In the above example, the <code>Uize.Services.FileSystem</code> class is a subclass of the <code><a href="../reference/Uize.Service.html">Uize.Service</a></code> class, which is itself a subclass of the <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> base class. Therefore, a singleton can be created using the <code>Uize.Services.FileSystem.singleton</code> static method that is inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
+		</div>
+		
+		<a name="10_2"></a>
+		<h2 class="heading2" title="10. Singletons -&gt; 10.2. A Single Singleton"><span class="headingNumber"><a href="#10" title="10. Singletons">10</a>.<a href="#10_2" title="10. Singletons -&gt; 10.2. A Single Singleton">2</a>. </span>A Single Singleton</h2>
+		<div class="contents2">
+			<p>As expected with singletons, multiple separate calls to the <code>singleton</code> static method will return a reference to the same singleton.</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">var
+  fileSystemSingleton1 = Uize.Services.FileSystem.singleton (),
+  fileSystemSingleton2 = Uize.Services.FileSystem.singleton ()
+;
+alert (fileSystemSingleton1 === fileSystemSingleton2);  // alerts "true"
+</pre>
+			
+			<p>In the above example, both the <code>fileSystemSingleton1</code> and <code>fileSystemSingleton2</code> variables are set to be a singleton of the <code>Uize.Services.FileSystem</code> class. Therefore, when their values are compared using a strict equality, they are found to be equal.</p>
+		</div>
+		
+		<a name="10_3"></a>
+		<h2 class="heading2" title="10. Singletons -&gt; 10.3. Compelling Use Cases for Singletons"><span class="headingNumber"><a href="#10" title="10. Singletons">10</a>.<a href="#10_3" title="10. Singletons -&gt; 10.3. Compelling Use Cases for Singletons">3</a>. </span>Compelling Use Cases for Singletons</h2>
+		<div class="contents2">
+			<p>A typical and compelling use case for the singleton feature is with service classes, where one typically wants to share a single instance of a service class amongst multiple disparate users of the service.</p>
+			
+			<p>In the case of service classes, one may instantiate and set up the singleton of a service in the environment (which will likely be a Web page for services that are to run in Web applications). Then, in other code that is to run in the environment and use the service, the singleton of the service can simply be obtained and used - the service doesn't need to be initialized by all the users because the same shared singleton of the service class is initialized and set up in the environment.</p>
+		</div>
+		
+		<a name="10_4"></a>
+		<h2 class="heading2" title="10. Singletons -&gt; 10.4. Singleton Scope"><span class="headingNumber"><a href="#10" title="10. Singletons">10</a>.<a href="#10_4" title="10. Singletons -&gt; 10.4. Singleton Scope">4</a>. </span>Singleton Scope</h2>
+		<div class="contents2">
+			<p>As a convenience, the <code>singleton</code> static method provides a way to optionally create singletons in a custom scope.</p>
+			
+			<p>A scope for a singleton of a class is specified using the optional <code>scopeSTR</code> parameter, as follows...</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">var fileSystemForBuildScripts = Uize.Services.FileSystem.singleton ('buildScripts');
+</pre>
+			
+			<p>In the above example, a singleton of the <code>Uize.Services.FileSystem</code> class is being created in a scope we have decided to call "buildScripts". Now, any other build script code that wants to get a reference to this singleton can perform the same operation, specifying <code>'buildScripts'</code> as the value for the <code>scopeSTR</code> parameter. With this kind of arrangement, other code can now use the same <code>Uize.Services.FileSystem</code> service class in a different scope. In different scopes, the different singletons may be set up with different service adapters and initialized differently to perform different I/O.</p>
+			
+			<a name="10_4_1"></a>
+			<h3 class="heading3" title="10. Singletons -&gt; 10.4. Singleton Scope -&gt; 10.4.1. A Single Singleton Per Scope"><span class="headingNumber"><a href="#10" title="10. Singletons">10</a>.<a href="#10_4" title="10. Singletons -&gt; 10.4. Singleton Scope">4</a>.<a href="#10_4_1" title="10. Singletons -&gt; 10.4. Singleton Scope -&gt; 10.4.1. A Single Singleton Per Scope">1</a>. </span>A Single Singleton Per Scope</h3>
+			<div class="contents3">
+				<p>The exception to the rule of <a href="#10_2">a single singleton</a> is when using the <a href="#10_4">singleton scope</a> feature.</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">var
+  fileSystemInScopeA = Uize.Services.FileSystem.singleton ('scopeA'),
+  fileSystemInScopeB = Uize.Services.FileSystem.singleton ('scopeB')
+;
+alert (fileSystemInScopeA === fileSystemInScopeB);  // alerts "false"
+</pre>
+				
+				<p>In the above example, two singletons of the <code>Uize.Services.FileSystem</code> class are being created: one in a scope we've called "scopeA" and the other in a scope we've called "scopeB". When the values of the <code>fileSystemInScopeA</code> and <code>fileSystemInScopeB</code> variables are compared using a strict equality, they are found to <b>not</b> be equal. However, if we called the <code>singleton</code> method multiple times for "scopeA", we would always get back the same singleton for this scope, and similarly with "scopeB".</p>
+			</div>
+			
+			<a name="10_4_2"></a>
+			<h3 class="heading3" title="10. Singletons -&gt; 10.4. Singleton Scope -&gt; 10.4.2. Designing Classes to Support Singleton Scope"><span class="headingNumber"><a href="#10" title="10. Singletons">10</a>.<a href="#10_4" title="10. Singletons -&gt; 10.4. Singleton Scope">4</a>.<a href="#10_4_2" title="10. Singletons -&gt; 10.4. Singleton Scope -&gt; 10.4.2. Designing Classes to Support Singleton Scope">2</a>. </span>Designing Classes to Support Singleton Scope</h3>
+			<div class="contents3">
+				<p>In order to be able to take advantage of the <a href="#10_4">singleton scope</a> feature, your classes need to be designed correctly.</p>
+				
+				<p>In order to correctly support singletons in different scopes, your class should not store state for a singleton as statics on the class, but should instead use instance properties. Provided your classes are designed correctly, you can have multiple singletons instantiated for different scopes that you define, so that different sets of distributed code can share their own singleton instances, and for each differently scoped singleton the singleton may be initialized or set up in a different way.</p>
+			</div>
+			
+			<a name="10_4_3"></a>
+			<h3 class="heading3" title="10. Singletons -&gt; 10.4. Singleton Scope -&gt; 10.4.3. Singleton Scope is Effectively Global"><span class="headingNumber"><a href="#10" title="10. Singletons">10</a>.<a href="#10_4" title="10. Singletons -&gt; 10.4. Singleton Scope">4</a>.<a href="#10_4_3" title="10. Singletons -&gt; 10.4. Singleton Scope -&gt; 10.4.3. Singleton Scope is Effectively Global">3</a>. </span>Singleton Scope is Effectively Global</h3>
+			<div class="contents3">
+				<p>A <a href="#10_4">singleton scope</a> is effectively global for a given class.</p>
+				
+				<p>Therefore, if you have distributed code that is making use of the singleton feature and you are specifying a custom scope, you need to have a good degree of confidence that you won't have totally different code trying to use the same scope name for a singleton of a class where the initialization and usage of the singleton is different. This is the age old problem with things that are global in nature. The globalness of singletons is both the upside and the downside, so you should <a href="#10_6">use the singleton feature sparingly</a>.</p>
+			</div>
+		</div>
+		
+		<a name="10_5"></a>
+		<h2 class="heading2" title="10. Singletons -&gt; 10.5. Initial State for Singletons"><span class="headingNumber"><a href="#10" title="10. Singletons">10</a>.<a href="#10_5" title="10. Singletons -&gt; 10.5. Initial State for Singletons">5</a>. </span>Initial State for Singletons</h2>
+		<div class="contents2">
+			<p>A singleton can be created with an initial state by specifying the optional <code>propertiesOBJ</code> second parameter.</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">var fileSystemForBuildScripts = Uize.Services.FileSystem.singleton ('',{defaultEncoding:'utf8'});
+</pre>
+			
+			<p>In the above example, a singleton is being created for the <code>Uize.Services.FileSystem</code> class. Because the first parameter of the <code>singleton</code> method is the singleton scope, if we want to use the default scope we need to specify an empty string. The second parameter is the state for the singleton, where the value is an object that will be passed to the constructor of the class if the singleton has not yet been created for the scope, or used in a call to the <code>set</code> method if the singleton already exists in the scope.</p>
+		</div>
+		
+		<a name="10_6"></a>
+		<h2 class="heading2" title="10. Singletons -&gt; 10.6. Use the Singleton Feature Sparingly"><span class="headingNumber"><a href="#10" title="10. Singletons">10</a>.<a href="#10_6" title="10. Singletons -&gt; 10.6. Use the Singleton Feature Sparingly">6</a>. </span>Use the Singleton Feature Sparingly</h2>
+		<div class="contents2">
+			<p>While there are a few <a href="#10_3">compelling use cases for singletons</a>, one should nevertheless use the singleton feature sparingly and with caution.</p>
+			
+			<p>The very advantage of singletons, which is that they can be shared by disparate pieces of code, can also become a disadvantage. Singletons can be regarded as being, in effect, globals in the scope of the class on which they are created, or the <a href="#10_4">singleton scope</a> in which they are created. This consequence brings with it the kinds of drawbacks that globals have more generally. Singletons aren't as egregious as global variables, and the <a href="#10_4">singleton scope</a> facility goes some way to alleviating the global nature of singletons. Nevertheless, before resorting to using singletons, consider first if there are other alternatives. In UIZE, you will find singletons mostly advocated for use with service classes.</p>
 		</div>
 	</div>
 </div>
