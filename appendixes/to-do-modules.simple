@@ -461,15 +461,6 @@ Uize
 	- idea: a way to track whether a user originated an event. Sufficient to check on the presence of domEvent property? domEvent property should be propagated all the way up.
 
 Uize.Array
-	Uize.Array.Matching
-		Uize.Array.Matching.countMatching
-		Uize.Array.Matching.keepMatching
-		Uize.Array.Matching.tossMatching
-		Uize.Array.Matching.eachMatching
-
-		- model the interface for this package on the interface for the Uize.String.Lines package
-		- should this be more general and able to apply to both arrays or objects?
-
 	Uize.Array.Interlace
 		A module that lets you interlace multiple arrays into a single interlaced array, or deinterlace an interlaced array to produce the separate source arrays.
 

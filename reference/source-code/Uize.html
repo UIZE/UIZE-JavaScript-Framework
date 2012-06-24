@@ -68,6 +68,7 @@
           - =Uize.isObject= - tests if a value is non-null and an object
           - =Uize.isPlainObject=- tests if a value is a plain object (an instance of JavaScript's built-in =Object= object)
           - =Uize.isPrimitive= - tests if a value is a JavaScript primitive (ie. string, number, or boolean)
+          - =Uize.isRegExp=- tests if a value is a regular expression (ie. an instance of the =RegExp= object)
           - =Uize.isSameAs= - tests if two values are the same in a strict equality test, with support for =NaN= values
           - =Uize.isString= - tests if a value is a string
 
@@ -145,7 +146,8 @@
       _Array = Array,
       _false = false,
       _true = true,
-      _null = null
+      _null = null,
+      _ObjectToString = Object.prototype.toString
     ;
 
   /*** General Variables ***/
@@ -1106,16 +1108,92 @@
       */
     };
 
+    var _resolveTransformer = _package.resolveTransformer = function (_transformer) {
+      var _typeofTransformer = typeof _transformer;
+      return (
+        _transformer == _undefined
+          ? _package.returnX
+          : _typeofTransformer == 'function'
+            ? _transformer
+            : _typeofTransformer == 'string'
+              ? new Function ('value','key','return ' + _transformer)
+              : _isRegExp (_transformer)
+                ? function (_value) {return _transformer.test (_value + '')}
+                : function () {return _transformer}
+      );
+      /*?
+        Static Methods
+          Uize.resolveTransformer
+
+            SYNTAX
+            ...............................................................
+            transformerFUNC = Uize.resolveTransformer (transformerANYTYPE);
+            ...............................................................
+
+            How Different Transformer Types are Resolved
+              When a Function Type Transformer is Specified
+                document...
+
+              When a String Type Transformer is Specified
+                document...
+
+              When a Regular Expression Transformer is Specified
+                document...
+
+              When a Nully Transformer is Specified
+                document...
+
+              When Other Transformer Types are Specified
+                document...
+      */
+    };
+
+    _package.resolveMatcher = function (_matcher) {
+      return (
+        _matcher == _undefined
+          ? _package.returnTrue
+          : typeof _matcher == 'boolean'
+            ? (_matcher ? _package.returnTrue : _package.returnFalse)
+            : _resolveTransformer (_matcher)
+      );
+      /*?
+        Static Methods
+          Uize.resolveMatcher
+
+            SYNTAX
+            ...................................................
+            matcherFUNC = Uize.resolveMatcher (matcherANYTYPE);
+            ...................................................
+
+            How Different Matcher Types are Resolved
+              When a Function Type Matcher is Specified
+                document...
+
+              When a String Type Matcher is Specified
+                document...
+
+              When a Regular Expression Matcher is Specified
+                document...
+
+              When a Boolean Matcher is Specified
+                document...
+
+              When a Nully Matcher is Specified
+                document...
+
+              When Other Matcher Types are Specified
+                document...
+      */
+    };
+
     var _map = _package.map = function (_source,_mapper,_target) {
       if (typeof _source == _typeNumber) {
         _source = new _Array (_source);
         if (typeof _target != _typeObject) _target = _source;
       }
+      _mapper = _resolveTransformer (_mapper);
       if (typeof _target != _typeObject)
         _target = _target === _false ? _source : _isArray (_source) ? [] : {}
-      ;
-      if (typeof _mapper == _typeString)
-        _mapper = new _Function ('value','key','return ' + _mapper)
       ;
       _forEach (
         _source,
@@ -2797,6 +2875,44 @@
             Uize.isPrimitive (function () {});       // returns false
             // etc.
             .........................................................
+
+            NOTES
+            - see also the other `value testing methods`
+      */
+    };
+
+    var _isRegExp = _package.isRegExp = function (_value) {
+      return _ObjectToString.call (_value) == '[object RegExp]';
+      /*?
+        Static Methods
+          Uize.isRegExp
+            Returns a boolean, indicating whether or not the specified value is a regular expression (ie. an instance of JavaScript's built-in =RegExp= object).
+
+            SYNTAX
+            ............................................
+            isRegExpBOOL = Uize.isRegExp (valueANYTYPE);
+            ............................................
+
+            EXAMPLES
+            ........................................................
+            Uize.isRegExp (/^\d+$/);                // returns true
+            Uize.isRegExp (new RegExp ('^\\d+$'));  // returns true
+
+            Uize.isRegExp (true);                   // returns false
+            Uize.isRegExp ('foo');                  // returns false
+            Uize.isRegExp (42);                     // returns false
+            Uize.isRegExp (new Boolean (true));     // returns false
+            Uize.isRegExp (new String (foo));       // returns false
+            Uize.isRegExp (new Number (42));        // returns false
+            Uize.isRegExp (null);                   // returns false
+            Uize.isRegExp (undefined);              // returns false
+            Uize.isRegExp ();                       // returns false
+            Uize.isRegExp ({foo:'bar'});            // returns false
+            Uize.isRegExp (['foo','bar']);          // returns false
+            Uize.isRegExp (Uize.Widget ());         // returns false
+            Uize.isRegExp (function () {});         // returns false
+            // etc.
+            ........................................................
 
             NOTES
             - see also the other `value testing methods`

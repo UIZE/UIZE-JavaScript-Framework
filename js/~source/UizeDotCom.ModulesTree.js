@@ -34,6 +34,7 @@ Uize.module ({
 					Data:{
 						Combinations:0,
 						Csv:0,
+						Matches:0,
 						NameValueRecords:0,
 						PathsTree:{
 							CompactString:0
@@ -103,6 +104,7 @@ Uize.module ({
 							Data:{
 								Combinations:0,
 								Csv:0,
+								Matches:0,
 								NameValueRecords:0,
 								PathsTree:{
 									CompactString:0

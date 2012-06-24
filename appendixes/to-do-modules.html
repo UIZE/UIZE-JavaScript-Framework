@@ -110,59 +110,58 @@
 			</li>
 			<li><a href="#2">2. Uize.Array</a>
 				<ul>
-					<li><a href="#2_1" title="Uize.Array.Matching.countMatching">2.1. Uize.Array.Matching</a></li>
-					<li><a href="#2_2" title="A module that lets you interlace multiple arrays into a single interlaced array, or deinterlace an interlaced array to produce the separate source arrays.">2.2. Uize.Array.Interlace</a>
+					<li><a href="#2_1" title="A module that lets you interlace multiple arrays into a single interlaced array, or deinterlace an interlaced array to produce the separate source arrays.">2.1. Uize.Array.Interlace</a>
 						<ul>
-							<li><a href="#2_2_1" title="SYNTAX">2.2.1. Uize.Array.Interlace.interlace</a></li>
-							<li><a href="#2_2_2" title="SYNTAX">2.2.2. Uize.Array.Interlase.deinterlace</a></li>
+							<li><a href="#2_1_1" title="SYNTAX">2.1.1. Uize.Array.Interlace.interlace</a></li>
+							<li><a href="#2_1_2" title="SYNTAX">2.1.2. Uize.Array.Interlase.deinterlace</a></li>
 						</ul>
 					</li>
-					<li><a href="#2_3">2.3. Uize.Array.Order</a>
+					<li><a href="#2_2">2.2. Uize.Array.Order</a>
 						<ul>
-							<li><a href="#2_3_1" title="- reorders the array in a binary search pattern">2.3.1. New 'binary' Mode for Uize.Array.Order.reorder</a></li>
-							<li><a href="#2_3_2" title="1,2,3,4,5,6,7">2.3.2. New 'evens odds' Mode for Uize.Array.Order.reorder</a>
+							<li><a href="#2_2_1" title="- reorders the array in a binary search pattern">2.2.1. New 'binary' Mode for Uize.Array.Order.reorder</a></li>
+							<li><a href="#2_2_2" title="1,2,3,4,5,6,7">2.2.2. New 'evens odds' Mode for Uize.Array.Order.reorder</a>
 								<ul>
-									<li><a href="#2_3_2_1" title="1,2,3,4,5,6,7">2.3.2.1. - is this a special case of a more general algorithm? What about every third?</a></li>
+									<li><a href="#2_2_2_1" title="1,2,3,4,5,6,7">2.2.2.1. - is this a special case of a more general algorithm? What about every third?</a></li>
 								</ul>
 							</li>
-							<li><a href="#2_3_3" title="1,2,3,4,5,6,7">2.3.3. New 'odds evens' Mode for Uize.Array.Order.reorder</a></li>
-							<li><a href="#2_3_4" title="In other words, perhaps any reordering should be able have a chunk size, which could be larger than one element, and when it is, then the chunks can themselves be ordered according to secondary ordering.">2.3.4. Primary, Secondary, or Even Tertiary Ordering?</a></li>
+							<li><a href="#2_2_3" title="1,2,3,4,5,6,7">2.2.3. New 'odds evens' Mode for Uize.Array.Order.reorder</a></li>
+							<li><a href="#2_2_4" title="In other words, perhaps any reordering should be able have a chunk size, which could be larger than one element, and when it is, then the chunks can themselves be ordered according to secondary ordering.">2.2.4. Primary, Secondary, or Even Tertiary Ordering?</a></li>
 						</ul>
 					</li>
-					<li><a href="#2_4" title="Uize.Array.Records.getColumn -- migrated from Uize.Data.getColumn">2.4. Uize.Array.Records</a>
+					<li><a href="#2_3" title="Uize.Array.Records.getColumn -- migrated from Uize.Data.getColumn">2.3. Uize.Array.Records</a>
 						<ul>
-							<li><a href="#2_4_1" title="delete all records that match (with configurable match function)">2.4.1. Uize.Array.Records.removeMatching</a></li>
-							<li><a href="#2_4_2" title="delete all records that match (with configurable match function)">2.4.2. Uize.Array.Records.retainMatching</a></li>
+							<li><a href="#2_3_1" title="delete all records that match (with configurable match function)">2.3.1. Uize.Array.Records.removeMatching</a></li>
+							<li><a href="#2_3_2" title="delete all records that match (with configurable match function)">2.3.2. Uize.Array.Records.retainMatching</a></li>
 						</ul>
 					</li>
-					<li><a href="#2_5">2.5. Uize.Array.Sort</a>
+					<li><a href="#2_4">2.4. Uize.Array.Sort</a>
 						<ul>
-							<li><a href="#2_5_1" title="- a sophisticated, human / intuituve alphanumeric sort">2.5.1. Uize.Array.Sort.alphaNum</a></li>
-							<li><a href="#2_5_2">2.5.2. Uize.Array.Sort.sortBy</a>
+							<li><a href="#2_4_1" title="- a sophisticated, human / intuituve alphanumeric sort">2.4.1. Uize.Array.Sort.alphaNum</a></li>
+							<li><a href="#2_4_2">2.4.2. Uize.Array.Sort.sortBy</a>
 								<ul>
-									<li><a href="#2_5_2_1" title="- sort value generator can be an array of sort value generators?">2.5.2.1. - add support for subsorts (secondary, tertiary sorts, etc.)</a></li>
-									<li><a href="#2_5_2_2" title="This allows more sophisticated sorts. For example, with an alphanumerical (as opposed to ASCIIbetical) sort, the sort value generator function may do the work of parsing each element value into a set of number and non-number segments, and then the value comparison function can deal with comparing two sort values that may have different structure. In other words, the sort values generated cannot...">2.5.2.2. - support for optional sort value comparison function</a></li>
+									<li><a href="#2_4_2_1" title="- sort value generator can be an array of sort value generators?">2.4.2.1. - add support for subsorts (secondary, tertiary sorts, etc.)</a></li>
+									<li><a href="#2_4_2_2" title="This allows more sophisticated sorts. For example, with an alphanumerical (as opposed to ASCIIbetical) sort, the sort value generator function may do the work of parsing each element value into a set of number and non-number segments, and then the value comparison function can deal with comparing two sort values that may have different structure. In other words, the sort values generated cannot...">2.4.2.2. - support for optional sort value comparison function</a></li>
 								</ul>
 							</li>
-							<li><a href="#2_5_3" title="Returns the index of a value in an array that is sorted by the specified sort value generator.">2.5.3. Uize.Array.Sort.indexBy</a></li>
-							<li><a href="#2_5_4" title="Inserts the specified value, using the specified sort value generator to determine at which spot to insert it.">2.5.4. Uize.Array.Sort.insertBy</a></li>
-							<li><a href="#2_5_5" title="Returns the first element from a sort by the specified sort value generator.">2.5.5. Uize.Array.Sort.firstBy</a></li>
-							<li><a href="#2_5_6" title="Returns the last element from a sort by the specified sort value generator.">2.5.6. Uize.Array.Sort.lastBy</a></li>
-							<li><a href="#2_5_7" title="Consider adding support for a sorted array object, that can retain a configured sort and where the sort affects how methods like pop, shift, push, and unshift behave.">2.5.7. Sorted Array Object</a></li>
+							<li><a href="#2_4_3" title="Returns the index of a value in an array that is sorted by the specified sort value generator.">2.4.3. Uize.Array.Sort.indexBy</a></li>
+							<li><a href="#2_4_4" title="Inserts the specified value, using the specified sort value generator to determine at which spot to insert it.">2.4.4. Uize.Array.Sort.insertBy</a></li>
+							<li><a href="#2_4_5" title="Returns the first element from a sort by the specified sort value generator.">2.4.5. Uize.Array.Sort.firstBy</a></li>
+							<li><a href="#2_4_6" title="Returns the last element from a sort by the specified sort value generator.">2.4.6. Uize.Array.Sort.lastBy</a></li>
+							<li><a href="#2_4_7" title="Consider adding support for a sorted array object, that can retain a configured sort and where the sort affects how methods like pop, shift, push, and unshift behave.">2.4.7. Sorted Array Object</a></li>
 						</ul>
 					</li>
-					<li><a href="#2_6">2.6. Uize.Array.Dupes</a>
+					<li><a href="#2_5">2.5. Uize.Array.Dupes</a>
 						<ul>
-							<li><a href="#2_6_1" title="- returns an array of dupe info objects">2.6.1. Uize.Array.Dupes.getDupes</a></li>
-							<li><a href="#2_6_2" title="- returns the number of occurrences of the specified value">2.6.2. Uize.Array.Dupes.getValueCount</a></li>
-							<li><a href="#2_6_3" title="- returns a lookup array of counts per value">2.6.3. Uize.Array.Dupes.getValueCounts</a></li>
+							<li><a href="#2_5_1" title="- returns an array of dupe info objects">2.5.1. Uize.Array.Dupes.getDupes</a></li>
+							<li><a href="#2_5_2" title="- returns the number of occurrences of the specified value">2.5.2. Uize.Array.Dupes.getValueCount</a></li>
+							<li><a href="#2_5_3" title="- returns a lookup array of counts per value">2.5.3. Uize.Array.Dupes.getValueCounts</a></li>
 						</ul>
 					</li>
-					<li><a href="#2_7">2.7. Uize.Array.Util</a>
+					<li><a href="#2_6">2.6. Uize.Array.Util</a>
 						<ul>
-							<li><a href="#2_7_1" title="- returns a chunk of the specified source array of the specified size">2.7.1. Uize.Array.Util.chunk</a></li>
-							<li><a href="#2_7_2" title="- returns the specified number of elements at the head of the specified source array">2.7.2. Uize.Array.Util.first</a></li>
-							<li><a href="#2_7_3" title="- returns the specified number of elements at the tail of the specified source array">2.7.3. Uize.Array.Util.last</a></li>
+							<li><a href="#2_6_1" title="- returns a chunk of the specified source array of the specified size">2.6.1. Uize.Array.Util.chunk</a></li>
+							<li><a href="#2_6_2" title="- returns the specified number of elements at the head of the specified source array">2.6.2. Uize.Array.Util.first</a></li>
+							<li><a href="#2_6_3" title="- returns the specified number of elements at the tail of the specified source array">2.6.3. Uize.Array.Util.last</a></li>
 						</ul>
 					</li>
 				</ul>
@@ -1820,29 +1819,12 @@ return ((value - min) % maxMinDelta + maxMinDelta) % maxMinDelta + min;
 	<h1 class="heading1" title="2. Uize.Array"><span class="headingNumber"><a href="#2" title="2. Uize.Array">2</a>. </span>Uize.Array</h1>
 	<div class="contents1">
 		<a name="2_1"></a>
-		<h2 class="heading2" title="2. Uize.Array -&gt; 2.1. Uize.Array.Matching"><span class="headingNumber"><a href="#2" title="2. Uize.Array">2</a>.<a href="#2_1" title="2. Uize.Array -&gt; 2.1. Uize.Array.Matching">1</a>. </span>Uize.Array.Matching</h2>
-		<div class="contents2">
-			<p>Uize.Array.Matching.countMatching</p>
-			
-			<p>Uize.Array.Matching.keepMatching</p>
-			
-			<p>Uize.Array.Matching.tossMatching</p>
-			
-			<p>Uize.Array.Matching.eachMatching</p>
-			
-			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>model the interface for this package on the interface for the Uize.String.Lines package</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>should this be more general and able to apply to both arrays or objects?</td></tr>
-			</table>
-		</div>
-		
-		<a name="2_2"></a>
-		<h2 class="heading2" title="2. Uize.Array -&gt; 2.2. Uize.Array.Interlace"><span class="headingNumber"><a href="#2" title="2. Uize.Array">2</a>.<a href="#2_2" title="2. Uize.Array -&gt; 2.2. Uize.Array.Interlace">2</a>. </span>Uize.Array.Interlace</h2>
+		<h2 class="heading2" title="2. Uize.Array -&gt; 2.1. Uize.Array.Interlace"><span class="headingNumber"><a href="#2" title="2. Uize.Array">2</a>.<a href="#2_1" title="2. Uize.Array -&gt; 2.1. Uize.Array.Interlace">1</a>. </span>Uize.Array.Interlace</h2>
 		<div class="contents2">
 			<p>A module that lets you interlace multiple arrays into a single interlaced array, or deinterlace an interlaced array to produce the separate source arrays.</p>
 			
-			<a name="2_2_1"></a>
-			<h3 class="heading3" title="2. Uize.Array -&gt; 2.2. Uize.Array.Interlace -&gt; 2.2.1. Uize.Array.Interlace.interlace"><span class="headingNumber"><a href="#2" title="2. Uize.Array">2</a>.<a href="#2_2" title="2. Uize.Array -&gt; 2.2. Uize.Array.Interlace">2</a>.<a href="#2_2_1" title="2. Uize.Array -&gt; 2.2. Uize.Array.Interlace -&gt; 2.2.1. Uize.Array.Interlace.interlace">1</a>. </span>Uize.Array.Interlace.interlace</h3>
+			<a name="2_1_1"></a>
+			<h3 class="heading3" title="2. Uize.Array -&gt; 2.1. Uize.Array.Interlace -&gt; 2.1.1. Uize.Array.Interlace.interlace"><span class="headingNumber"><a href="#2" title="2. Uize.Array">2</a>.<a href="#2_1" title="2. Uize.Array -&gt; 2.1. Uize.Array.Interlace">1</a>.<a href="#2_1_1" title="2. Uize.Array -&gt; 2.1. Uize.Array.Interlace -&gt; 2.1.1. Uize.Array.Interlace.interlace">1</a>. </span>Uize.Array.Interlace.interlace</h3>
 			<div class="contents3">
 				<p><span class="allCaps">SYNTAX</span></p>
 				
@@ -1863,8 +1845,8 @@ return ((value - min) % maxMinDelta + maxMinDelta) % maxMinDelta + min;
 </pre>
 			</div>
 			
-			<a name="2_2_2"></a>
-			<h3 class="heading3" title="2. Uize.Array -&gt; 2.2. Uize.Array.Interlace -&gt; 2.2.2. Uize.Array.Interlase.deinterlace"><span class="headingNumber"><a href="#2" title="2. Uize.Array">2</a>.<a href="#2_2" title="2. Uize.Array -&gt; 2.2. Uize.Array.Interlace">2</a>.<a href="#2_2_2" title="2. Uize.Array -&gt; 2.2. Uize.Array.Interlace -&gt; 2.2.2. Uize.Array.Interlase.deinterlace">2</a>. </span>Uize.Array.Interlase.deinterlace</h3>
+			<a name="2_1_2"></a>
+			<h3 class="heading3" title="2. Uize.Array -&gt; 2.1. Uize.Array.Interlace -&gt; 2.1.2. Uize.Array.Interlase.deinterlace"><span class="headingNumber"><a href="#2" title="2. Uize.Array">2</a>.<a href="#2_1" title="2. Uize.Array -&gt; 2.1. Uize.Array.Interlace">1</a>.<a href="#2_1_2" title="2. Uize.Array -&gt; 2.1. Uize.Array.Interlace -&gt; 2.1.2. Uize.Array.Interlase.deinterlace">2</a>. </span>Uize.Array.Interlase.deinterlace</h3>
 			<div class="contents3">
 				<p><span class="allCaps">SYNTAX</span></p>
 				
@@ -1886,11 +1868,11 @@ return ((value - min) % maxMinDelta + maxMinDelta) % maxMinDelta + min;
 			</div>
 		</div>
 		
-		<a name="2_3"></a>
-		<h2 class="heading2" title="2. Uize.Array -&gt; 2.3. Uize.Array.Order"><span class="headingNumber"><a href="#2" title="2. Uize.Array">2</a>.<a href="#2_3" title="2. Uize.Array -&gt; 2.3. Uize.Array.Order">3</a>. </span>Uize.Array.Order</h2>
+		<a name="2_2"></a>
+		<h2 class="heading2" title="2. Uize.Array -&gt; 2.2. Uize.Array.Order"><span class="headingNumber"><a href="#2" title="2. Uize.Array">2</a>.<a href="#2_2" title="2. Uize.Array -&gt; 2.2. Uize.Array.Order">2</a>. </span>Uize.Array.Order</h2>
 		<div class="contents2">
-			<a name="2_3_1"></a>
-			<h3 class="heading3" title="2. Uize.Array -&gt; 2.3. Uize.Array.Order -&gt; 2.3.1. New &apos;binary&apos; Mode for Uize.Array.Order.reorder"><span class="headingNumber"><a href="#2" title="2. Uize.Array">2</a>.<a href="#2_3" title="2. Uize.Array -&gt; 2.3. Uize.Array.Order">3</a>.<a href="#2_3_1" title="2. Uize.Array -&gt; 2.3. Uize.Array.Order -&gt; 2.3.1. New &apos;binary&apos; Mode for Uize.Array.Order.reorder">1</a>. </span>New 'binary' Mode for Uize.Array.Order.reorder</h3>
+			<a name="2_2_1"></a>
+			<h3 class="heading3" title="2. Uize.Array -&gt; 2.2. Uize.Array.Order -&gt; 2.2.1. New &apos;binary&apos; Mode for Uize.Array.Order.reorder"><span class="headingNumber"><a href="#2" title="2. Uize.Array">2</a>.<a href="#2_2" title="2. Uize.Array -&gt; 2.2. Uize.Array.Order">2</a>.<a href="#2_2_1" title="2. Uize.Array -&gt; 2.2. Uize.Array.Order -&gt; 2.2.1. New &apos;binary&apos; Mode for Uize.Array.Order.reorder">1</a>. </span>New 'binary' Mode for Uize.Array.Order.reorder</h3>
 			<div class="contents3">
 				<table class="list">
 				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>reorders the array in a binary search pattern</td></tr>
@@ -1904,8 +1886,8 @@ return ((value - min) % maxMinDelta + maxMinDelta) % maxMinDelta + min;
 				</table>
 			</div>
 			
-			<a name="2_3_2"></a>
-			<h3 class="heading3" title="2. Uize.Array -&gt; 2.3. Uize.Array.Order -&gt; 2.3.2. New &apos;evens odds&apos; Mode for Uize.Array.Order.reorder"><span class="headingNumber"><a href="#2" title="2. Uize.Array">2</a>.<a href="#2_3" title="2. Uize.Array -&gt; 2.3. Uize.Array.Order">3</a>.<a href="#2_3_2" title="2. Uize.Array -&gt; 2.3. Uize.Array.Order -&gt; 2.3.2. New &apos;evens odds&apos; Mode for Uize.Array.Order.reorder">2</a>. </span>New 'evens odds' Mode for Uize.Array.Order.reorder</h3>
+			<a name="2_2_2"></a>
+			<h3 class="heading3" title="2. Uize.Array -&gt; 2.2. Uize.Array.Order -&gt; 2.2.2. New &apos;evens odds&apos; Mode for Uize.Array.Order.reorder"><span class="headingNumber"><a href="#2" title="2. Uize.Array">2</a>.<a href="#2_2" title="2. Uize.Array -&gt; 2.2. Uize.Array.Order">2</a>.<a href="#2_2_2" title="2. Uize.Array -&gt; 2.2. Uize.Array.Order -&gt; 2.2.2. New &apos;evens odds&apos; Mode for Uize.Array.Order.reorder">2</a>. </span>New 'evens odds' Mode for Uize.Array.Order.reorder</h3>
 			<div class="contents3">
 				<p>1,2,3,4,5,6,7</p>
 				
@@ -1914,8 +1896,8 @@ return ((value - min) % maxMinDelta + maxMinDelta) % maxMinDelta + min;
 				<table class="list">
 				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>what about 'evens reverse odds'?</td></tr>
 				</table>
-				<a name="2_3_2_1"></a>
-				<h4 class="heading4" title="2. Uize.Array -&gt; 2.3. Uize.Array.Order -&gt; 2.3.2. New &apos;evens odds&apos; Mode for Uize.Array.Order.reorder -&gt; 2.3.2.1. - is this a special case of a more general algorithm? What about every third?"><span class="headingNumber"><a href="#2" title="2. Uize.Array">2</a>.<a href="#2_3" title="2. Uize.Array -&gt; 2.3. Uize.Array.Order">3</a>.<a href="#2_3_2" title="2. Uize.Array -&gt; 2.3. Uize.Array.Order -&gt; 2.3.2. New &apos;evens odds&apos; Mode for Uize.Array.Order.reorder">2</a>.<a href="#2_3_2_1" title="2. Uize.Array -&gt; 2.3. Uize.Array.Order -&gt; 2.3.2. New &apos;evens odds&apos; Mode for Uize.Array.Order.reorder -&gt; 2.3.2.1. - is this a special case of a more general algorithm? What about every third?">1</a>. </span>- is this a special case of a more general algorithm? What about every third?</h4>
+				<a name="2_2_2_1"></a>
+				<h4 class="heading4" title="2. Uize.Array -&gt; 2.2. Uize.Array.Order -&gt; 2.2.2. New &apos;evens odds&apos; Mode for Uize.Array.Order.reorder -&gt; 2.2.2.1. - is this a special case of a more general algorithm? What about every third?"><span class="headingNumber"><a href="#2" title="2. Uize.Array">2</a>.<a href="#2_2" title="2. Uize.Array -&gt; 2.2. Uize.Array.Order">2</a>.<a href="#2_2_2" title="2. Uize.Array -&gt; 2.2. Uize.Array.Order -&gt; 2.2.2. New &apos;evens odds&apos; Mode for Uize.Array.Order.reorder">2</a>.<a href="#2_2_2_1" title="2. Uize.Array -&gt; 2.2. Uize.Array.Order -&gt; 2.2.2. New &apos;evens odds&apos; Mode for Uize.Array.Order.reorder -&gt; 2.2.2.1. - is this a special case of a more general algorithm? What about every third?">1</a>. </span>- is this a special case of a more general algorithm? What about every third?</h4>
 				<div class="contents4">
 					<p>1,2,3,4,5,6,7</p>
 					
@@ -1927,8 +1909,8 @@ return ((value - min) % maxMinDelta + maxMinDelta) % maxMinDelta + min;
 				</div>
 			</div>
 			
-			<a name="2_3_3"></a>
-			<h3 class="heading3" title="2. Uize.Array -&gt; 2.3. Uize.Array.Order -&gt; 2.3.3. New &apos;odds evens&apos; Mode for Uize.Array.Order.reorder"><span class="headingNumber"><a href="#2" title="2. Uize.Array">2</a>.<a href="#2_3" title="2. Uize.Array -&gt; 2.3. Uize.Array.Order">3</a>.<a href="#2_3_3" title="2. Uize.Array -&gt; 2.3. Uize.Array.Order -&gt; 2.3.3. New &apos;odds evens&apos; Mode for Uize.Array.Order.reorder">3</a>. </span>New 'odds evens' Mode for Uize.Array.Order.reorder</h3>
+			<a name="2_2_3"></a>
+			<h3 class="heading3" title="2. Uize.Array -&gt; 2.2. Uize.Array.Order -&gt; 2.2.3. New &apos;odds evens&apos; Mode for Uize.Array.Order.reorder"><span class="headingNumber"><a href="#2" title="2. Uize.Array">2</a>.<a href="#2_2" title="2. Uize.Array -&gt; 2.2. Uize.Array.Order">2</a>.<a href="#2_2_3" title="2. Uize.Array -&gt; 2.2. Uize.Array.Order -&gt; 2.2.3. New &apos;odds evens&apos; Mode for Uize.Array.Order.reorder">3</a>. </span>New 'odds evens' Mode for Uize.Array.Order.reorder</h3>
 			<div class="contents3">
 				<p>1,2,3,4,5,6,7</p>
 				
@@ -1944,8 +1926,8 @@ return ((value - min) % maxMinDelta + maxMinDelta) % maxMinDelta + min;
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Uize.Array.Order.evensOdds</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>Uize.Array.Order.oddsEvens</td></tr>
 			</table>
-			<a name="2_3_4"></a>
-			<h3 class="heading3" title="2. Uize.Array -&gt; 2.3. Uize.Array.Order -&gt; 2.3.4. Primary, Secondary, or Even Tertiary Ordering?"><span class="headingNumber"><a href="#2" title="2. Uize.Array">2</a>.<a href="#2_3" title="2. Uize.Array -&gt; 2.3. Uize.Array.Order">3</a>.<a href="#2_3_4" title="2. Uize.Array -&gt; 2.3. Uize.Array.Order -&gt; 2.3.4. Primary, Secondary, or Even Tertiary Ordering?">4</a>. </span>Primary, Secondary, or Even Tertiary Ordering?</h3>
+			<a name="2_2_4"></a>
+			<h3 class="heading3" title="2. Uize.Array -&gt; 2.2. Uize.Array.Order -&gt; 2.2.4. Primary, Secondary, or Even Tertiary Ordering?"><span class="headingNumber"><a href="#2" title="2. Uize.Array">2</a>.<a href="#2_2" title="2. Uize.Array -&gt; 2.2. Uize.Array.Order">2</a>.<a href="#2_2_4" title="2. Uize.Array -&gt; 2.2. Uize.Array.Order -&gt; 2.2.4. Primary, Secondary, or Even Tertiary Ordering?">4</a>. </span>Primary, Secondary, or Even Tertiary Ordering?</h3>
 			<div class="contents3">
 				<p>In other words, perhaps any reordering should be able have a chunk size, which could be larger than one element, and when it is, then the chunks can themselves be ordered according to secondary ordering.</p>
 				
@@ -1953,31 +1935,31 @@ return ((value - min) % maxMinDelta + maxMinDelta) % maxMinDelta + min;
 			</div>
 		</div>
 		
-		<a name="2_4"></a>
-		<h2 class="heading2" title="2. Uize.Array -&gt; 2.4. Uize.Array.Records"><span class="headingNumber"><a href="#2" title="2. Uize.Array">2</a>.<a href="#2_4" title="2. Uize.Array -&gt; 2.4. Uize.Array.Records">4</a>. </span>Uize.Array.Records</h2>
+		<a name="2_3"></a>
+		<h2 class="heading2" title="2. Uize.Array -&gt; 2.3. Uize.Array.Records"><span class="headingNumber"><a href="#2" title="2. Uize.Array">2</a>.<a href="#2_3" title="2. Uize.Array -&gt; 2.3. Uize.Array.Records">3</a>. </span>Uize.Array.Records</h2>
 		<div class="contents2">
 			<p>Uize.Array.Records.getColumn -- migrated from Uize.Data.getColumn</p>
 			
 			<p>Uize.Array.Records.findRows -- migrated from Uize.Data.findRows</p>
 			
-			<a name="2_4_1"></a>
-			<h3 class="heading3" title="2. Uize.Array -&gt; 2.4. Uize.Array.Records -&gt; 2.4.1. Uize.Array.Records.removeMatching"><span class="headingNumber"><a href="#2" title="2. Uize.Array">2</a>.<a href="#2_4" title="2. Uize.Array -&gt; 2.4. Uize.Array.Records">4</a>.<a href="#2_4_1" title="2. Uize.Array -&gt; 2.4. Uize.Array.Records -&gt; 2.4.1. Uize.Array.Records.removeMatching">1</a>. </span>Uize.Array.Records.removeMatching</h3>
+			<a name="2_3_1"></a>
+			<h3 class="heading3" title="2. Uize.Array -&gt; 2.3. Uize.Array.Records -&gt; 2.3.1. Uize.Array.Records.removeMatching"><span class="headingNumber"><a href="#2" title="2. Uize.Array">2</a>.<a href="#2_3" title="2. Uize.Array -&gt; 2.3. Uize.Array.Records">3</a>.<a href="#2_3_1" title="2. Uize.Array -&gt; 2.3. Uize.Array.Records -&gt; 2.3.1. Uize.Array.Records.removeMatching">1</a>. </span>Uize.Array.Records.removeMatching</h3>
 			<div class="contents3">
 				<p>delete all records that match (with configurable match function)</p>
 			</div>
 			
-			<a name="2_4_2"></a>
-			<h3 class="heading3" title="2. Uize.Array -&gt; 2.4. Uize.Array.Records -&gt; 2.4.2. Uize.Array.Records.retainMatching"><span class="headingNumber"><a href="#2" title="2. Uize.Array">2</a>.<a href="#2_4" title="2. Uize.Array -&gt; 2.4. Uize.Array.Records">4</a>.<a href="#2_4_2" title="2. Uize.Array -&gt; 2.4. Uize.Array.Records -&gt; 2.4.2. Uize.Array.Records.retainMatching">2</a>. </span>Uize.Array.Records.retainMatching</h3>
+			<a name="2_3_2"></a>
+			<h3 class="heading3" title="2. Uize.Array -&gt; 2.3. Uize.Array.Records -&gt; 2.3.2. Uize.Array.Records.retainMatching"><span class="headingNumber"><a href="#2" title="2. Uize.Array">2</a>.<a href="#2_3" title="2. Uize.Array -&gt; 2.3. Uize.Array.Records">3</a>.<a href="#2_3_2" title="2. Uize.Array -&gt; 2.3. Uize.Array.Records -&gt; 2.3.2. Uize.Array.Records.retainMatching">2</a>. </span>Uize.Array.Records.retainMatching</h3>
 			<div class="contents3">
 				<p>delete all records that match (with configurable match function)</p>
 			</div>
 		</div>
 		
-		<a name="2_5"></a>
-		<h2 class="heading2" title="2. Uize.Array -&gt; 2.5. Uize.Array.Sort"><span class="headingNumber"><a href="#2" title="2. Uize.Array">2</a>.<a href="#2_5" title="2. Uize.Array -&gt; 2.5. Uize.Array.Sort">5</a>. </span>Uize.Array.Sort</h2>
+		<a name="2_4"></a>
+		<h2 class="heading2" title="2. Uize.Array -&gt; 2.4. Uize.Array.Sort"><span class="headingNumber"><a href="#2" title="2. Uize.Array">2</a>.<a href="#2_4" title="2. Uize.Array -&gt; 2.4. Uize.Array.Sort">4</a>. </span>Uize.Array.Sort</h2>
 		<div class="contents2">
-			<a name="2_5_1"></a>
-			<h3 class="heading3" title="2. Uize.Array -&gt; 2.5. Uize.Array.Sort -&gt; 2.5.1. Uize.Array.Sort.alphaNum"><span class="headingNumber"><a href="#2" title="2. Uize.Array">2</a>.<a href="#2_5" title="2. Uize.Array -&gt; 2.5. Uize.Array.Sort">5</a>.<a href="#2_5_1" title="2. Uize.Array -&gt; 2.5. Uize.Array.Sort -&gt; 2.5.1. Uize.Array.Sort.alphaNum">1</a>. </span>Uize.Array.Sort.alphaNum</h3>
+			<a name="2_4_1"></a>
+			<h3 class="heading3" title="2. Uize.Array -&gt; 2.4. Uize.Array.Sort -&gt; 2.4.1. Uize.Array.Sort.alphaNum"><span class="headingNumber"><a href="#2" title="2. Uize.Array">2</a>.<a href="#2_4" title="2. Uize.Array -&gt; 2.4. Uize.Array.Sort">4</a>.<a href="#2_4_1" title="2. Uize.Array -&gt; 2.4. Uize.Array.Sort -&gt; 2.4.1. Uize.Array.Sort.alphaNum">1</a>. </span>Uize.Array.Sort.alphaNum</h3>
 			<div class="contents3">
 				<table class="list">
 				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>a sophisticated, human / intuituve alphanumeric sort</td></tr>
@@ -1985,26 +1967,26 @@ return ((value - min) % maxMinDelta + maxMinDelta) % maxMinDelta + min;
 				</table>
 			</div>
 			
-			<a name="2_5_2"></a>
-			<h3 class="heading3" title="2. Uize.Array -&gt; 2.5. Uize.Array.Sort -&gt; 2.5.2. Uize.Array.Sort.sortBy"><span class="headingNumber"><a href="#2" title="2. Uize.Array">2</a>.<a href="#2_5" title="2. Uize.Array -&gt; 2.5. Uize.Array.Sort">5</a>.<a href="#2_5_2" title="2. Uize.Array -&gt; 2.5. Uize.Array.Sort -&gt; 2.5.2. Uize.Array.Sort.sortBy">2</a>. </span>Uize.Array.Sort.sortBy</h3>
+			<a name="2_4_2"></a>
+			<h3 class="heading3" title="2. Uize.Array -&gt; 2.4. Uize.Array.Sort -&gt; 2.4.2. Uize.Array.Sort.sortBy"><span class="headingNumber"><a href="#2" title="2. Uize.Array">2</a>.<a href="#2_4" title="2. Uize.Array -&gt; 2.4. Uize.Array.Sort">4</a>.<a href="#2_4_2" title="2. Uize.Array -&gt; 2.4. Uize.Array.Sort -&gt; 2.4.2. Uize.Array.Sort.sortBy">2</a>. </span>Uize.Array.Sort.sortBy</h3>
 			<div class="contents3">
-				<a name="2_5_2_1"></a>
-				<h4 class="heading4" title="2. Uize.Array -&gt; 2.5. Uize.Array.Sort -&gt; 2.5.2. Uize.Array.Sort.sortBy -&gt; 2.5.2.1. - add support for subsorts (secondary, tertiary sorts, etc.)"><span class="headingNumber"><a href="#2" title="2. Uize.Array">2</a>.<a href="#2_5" title="2. Uize.Array -&gt; 2.5. Uize.Array.Sort">5</a>.<a href="#2_5_2" title="2. Uize.Array -&gt; 2.5. Uize.Array.Sort -&gt; 2.5.2. Uize.Array.Sort.sortBy">2</a>.<a href="#2_5_2_1" title="2. Uize.Array -&gt; 2.5. Uize.Array.Sort -&gt; 2.5.2. Uize.Array.Sort.sortBy -&gt; 2.5.2.1. - add support for subsorts (secondary, tertiary sorts, etc.)">1</a>. </span>- add support for subsorts (secondary, tertiary sorts, etc.)</h4>
+				<a name="2_4_2_1"></a>
+				<h4 class="heading4" title="2. Uize.Array -&gt; 2.4. Uize.Array.Sort -&gt; 2.4.2. Uize.Array.Sort.sortBy -&gt; 2.4.2.1. - add support for subsorts (secondary, tertiary sorts, etc.)"><span class="headingNumber"><a href="#2" title="2. Uize.Array">2</a>.<a href="#2_4" title="2. Uize.Array -&gt; 2.4. Uize.Array.Sort">4</a>.<a href="#2_4_2" title="2. Uize.Array -&gt; 2.4. Uize.Array.Sort -&gt; 2.4.2. Uize.Array.Sort.sortBy">2</a>.<a href="#2_4_2_1" title="2. Uize.Array -&gt; 2.4. Uize.Array.Sort -&gt; 2.4.2. Uize.Array.Sort.sortBy -&gt; 2.4.2.1. - add support for subsorts (secondary, tertiary sorts, etc.)">1</a>. </span>- add support for subsorts (secondary, tertiary sorts, etc.)</h4>
 				<div class="contents4">
 					<table class="list">
 					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>sort value generator can be an array of sort value generators?</td></tr>
 					</table>
 				</div>
 				
-				<a name="2_5_2_2"></a>
-				<h4 class="heading4" title="2. Uize.Array -&gt; 2.5. Uize.Array.Sort -&gt; 2.5.2. Uize.Array.Sort.sortBy -&gt; 2.5.2.2. - support for optional sort value comparison function"><span class="headingNumber"><a href="#2" title="2. Uize.Array">2</a>.<a href="#2_5" title="2. Uize.Array -&gt; 2.5. Uize.Array.Sort">5</a>.<a href="#2_5_2" title="2. Uize.Array -&gt; 2.5. Uize.Array.Sort -&gt; 2.5.2. Uize.Array.Sort.sortBy">2</a>.<a href="#2_5_2_2" title="2. Uize.Array -&gt; 2.5. Uize.Array.Sort -&gt; 2.5.2. Uize.Array.Sort.sortBy -&gt; 2.5.2.2. - support for optional sort value comparison function">2</a>. </span>- support for optional sort value comparison function</h4>
+				<a name="2_4_2_2"></a>
+				<h4 class="heading4" title="2. Uize.Array -&gt; 2.4. Uize.Array.Sort -&gt; 2.4.2. Uize.Array.Sort.sortBy -&gt; 2.4.2.2. - support for optional sort value comparison function"><span class="headingNumber"><a href="#2" title="2. Uize.Array">2</a>.<a href="#2_4" title="2. Uize.Array -&gt; 2.4. Uize.Array.Sort">4</a>.<a href="#2_4_2" title="2. Uize.Array -&gt; 2.4. Uize.Array.Sort -&gt; 2.4.2. Uize.Array.Sort.sortBy">2</a>.<a href="#2_4_2_2" title="2. Uize.Array -&gt; 2.4. Uize.Array.Sort -&gt; 2.4.2. Uize.Array.Sort.sortBy -&gt; 2.4.2.2. - support for optional sort value comparison function">2</a>. </span>- support for optional sort value comparison function</h4>
 				<div class="contents4">
 					<p>This allows more sophisticated sorts. For example, with an alphanumerical (as opposed to ASCIIbetical) sort, the sort value generator function may do the work of parsing each element value into a set of number and non-number segments, and then the value comparison function can deal with comparing two sort values that may have different structure. In other words, the sort values generated cannot be compared by a simple a < b logical comparison.</p>
 				</div>
 			</div>
 			
-			<a name="2_5_3"></a>
-			<h3 class="heading3" title="2. Uize.Array -&gt; 2.5. Uize.Array.Sort -&gt; 2.5.3. Uize.Array.Sort.indexBy"><span class="headingNumber"><a href="#2" title="2. Uize.Array">2</a>.<a href="#2_5" title="2. Uize.Array -&gt; 2.5. Uize.Array.Sort">5</a>.<a href="#2_5_3" title="2. Uize.Array -&gt; 2.5. Uize.Array.Sort -&gt; 2.5.3. Uize.Array.Sort.indexBy">3</a>. </span>Uize.Array.Sort.indexBy</h3>
+			<a name="2_4_3"></a>
+			<h3 class="heading3" title="2. Uize.Array -&gt; 2.4. Uize.Array.Sort -&gt; 2.4.3. Uize.Array.Sort.indexBy"><span class="headingNumber"><a href="#2" title="2. Uize.Array">2</a>.<a href="#2_4" title="2. Uize.Array -&gt; 2.4. Uize.Array.Sort">4</a>.<a href="#2_4_3" title="2. Uize.Array -&gt; 2.4. Uize.Array.Sort -&gt; 2.4.3. Uize.Array.Sort.indexBy">3</a>. </span>Uize.Array.Sort.indexBy</h3>
 			<div class="contents3">
 				<p>Returns the index of a value in an array that is sorted by the specified sort value generator.</p>
 				
@@ -2017,8 +1999,8 @@ indexINT = Uize.Array.Sort.indexBy (valueANYTYPE,targetARRAY,sortColumnINT,direc
 </pre>
 			</div>
 			
-			<a name="2_5_4"></a>
-			<h3 class="heading3" title="2. Uize.Array -&gt; 2.5. Uize.Array.Sort -&gt; 2.5.4. Uize.Array.Sort.insertBy"><span class="headingNumber"><a href="#2" title="2. Uize.Array">2</a>.<a href="#2_5" title="2. Uize.Array -&gt; 2.5. Uize.Array.Sort">5</a>.<a href="#2_5_4" title="2. Uize.Array -&gt; 2.5. Uize.Array.Sort -&gt; 2.5.4. Uize.Array.Sort.insertBy">4</a>. </span>Uize.Array.Sort.insertBy</h3>
+			<a name="2_4_4"></a>
+			<h3 class="heading3" title="2. Uize.Array -&gt; 2.4. Uize.Array.Sort -&gt; 2.4.4. Uize.Array.Sort.insertBy"><span class="headingNumber"><a href="#2" title="2. Uize.Array">2</a>.<a href="#2_4" title="2. Uize.Array -&gt; 2.4. Uize.Array.Sort">4</a>.<a href="#2_4_4" title="2. Uize.Array -&gt; 2.4. Uize.Array.Sort -&gt; 2.4.4. Uize.Array.Sort.insertBy">4</a>. </span>Uize.Array.Sort.insertBy</h3>
 			<div class="contents3">
 				<p>Inserts the specified value, using the specified sort value generator to determine at which spot to insert it.</p>
 				
@@ -2031,8 +2013,8 @@ Uize.Array.Sort.insertBy (valueANYTYPE,targetARRAY,sortColumnINT,directionINT);
 </pre>
 			</div>
 			
-			<a name="2_5_5"></a>
-			<h3 class="heading3" title="2. Uize.Array -&gt; 2.5. Uize.Array.Sort -&gt; 2.5.5. Uize.Array.Sort.firstBy"><span class="headingNumber"><a href="#2" title="2. Uize.Array">2</a>.<a href="#2_5" title="2. Uize.Array -&gt; 2.5. Uize.Array.Sort">5</a>.<a href="#2_5_5" title="2. Uize.Array -&gt; 2.5. Uize.Array.Sort -&gt; 2.5.5. Uize.Array.Sort.firstBy">5</a>. </span>Uize.Array.Sort.firstBy</h3>
+			<a name="2_4_5"></a>
+			<h3 class="heading3" title="2. Uize.Array -&gt; 2.4. Uize.Array.Sort -&gt; 2.4.5. Uize.Array.Sort.firstBy"><span class="headingNumber"><a href="#2" title="2. Uize.Array">2</a>.<a href="#2_4" title="2. Uize.Array -&gt; 2.4. Uize.Array.Sort">4</a>.<a href="#2_4_5" title="2. Uize.Array -&gt; 2.4. Uize.Array.Sort -&gt; 2.4.5. Uize.Array.Sort.firstBy">5</a>. </span>Uize.Array.Sort.firstBy</h3>
 			<div class="contents3">
 				<p>Returns the first element from a sort by the specified sort value generator.</p>
 				
@@ -2045,8 +2027,8 @@ firstANYTYPE = Uize.Array.Sort.firstBy (sourceARRAY,sortColumnINT,directionINT);
 </pre>
 			</div>
 			
-			<a name="2_5_6"></a>
-			<h3 class="heading3" title="2. Uize.Array -&gt; 2.5. Uize.Array.Sort -&gt; 2.5.6. Uize.Array.Sort.lastBy"><span class="headingNumber"><a href="#2" title="2. Uize.Array">2</a>.<a href="#2_5" title="2. Uize.Array -&gt; 2.5. Uize.Array.Sort">5</a>.<a href="#2_5_6" title="2. Uize.Array -&gt; 2.5. Uize.Array.Sort -&gt; 2.5.6. Uize.Array.Sort.lastBy">6</a>. </span>Uize.Array.Sort.lastBy</h3>
+			<a name="2_4_6"></a>
+			<h3 class="heading3" title="2. Uize.Array -&gt; 2.4. Uize.Array.Sort -&gt; 2.4.6. Uize.Array.Sort.lastBy"><span class="headingNumber"><a href="#2" title="2. Uize.Array">2</a>.<a href="#2_4" title="2. Uize.Array -&gt; 2.4. Uize.Array.Sort">4</a>.<a href="#2_4_6" title="2. Uize.Array -&gt; 2.4. Uize.Array.Sort -&gt; 2.4.6. Uize.Array.Sort.lastBy">6</a>. </span>Uize.Array.Sort.lastBy</h3>
 			<div class="contents3">
 				<p>Returns the last element from a sort by the specified sort value generator.</p>
 				
@@ -2059,34 +2041,34 @@ firstANYTYPE = Uize.Array.Sort.lastBy (sourceARRAY,sortColumnINT,directionINT);
 </pre>
 			</div>
 			
-			<a name="2_5_7"></a>
-			<h3 class="heading3" title="2. Uize.Array -&gt; 2.5. Uize.Array.Sort -&gt; 2.5.7. Sorted Array Object"><span class="headingNumber"><a href="#2" title="2. Uize.Array">2</a>.<a href="#2_5" title="2. Uize.Array -&gt; 2.5. Uize.Array.Sort">5</a>.<a href="#2_5_7" title="2. Uize.Array -&gt; 2.5. Uize.Array.Sort -&gt; 2.5.7. Sorted Array Object">7</a>. </span>Sorted Array Object</h3>
+			<a name="2_4_7"></a>
+			<h3 class="heading3" title="2. Uize.Array -&gt; 2.4. Uize.Array.Sort -&gt; 2.4.7. Sorted Array Object"><span class="headingNumber"><a href="#2" title="2. Uize.Array">2</a>.<a href="#2_4" title="2. Uize.Array -&gt; 2.4. Uize.Array.Sort">4</a>.<a href="#2_4_7" title="2. Uize.Array -&gt; 2.4. Uize.Array.Sort -&gt; 2.4.7. Sorted Array Object">7</a>. </span>Sorted Array Object</h3>
 			<div class="contents3">
 				<p>Consider adding support for a sorted array object, that can retain a configured sort and where the sort affects how methods like <code>pop</code>, <code>shift</code>, <code>push</code>, and <code>unshift</code> behave.</p>
 			</div>
 		</div>
 		
-		<a name="2_6"></a>
-		<h2 class="heading2" title="2. Uize.Array -&gt; 2.6. Uize.Array.Dupes"><span class="headingNumber"><a href="#2" title="2. Uize.Array">2</a>.<a href="#2_6" title="2. Uize.Array -&gt; 2.6. Uize.Array.Dupes">6</a>. </span>Uize.Array.Dupes</h2>
+		<a name="2_5"></a>
+		<h2 class="heading2" title="2. Uize.Array -&gt; 2.5. Uize.Array.Dupes"><span class="headingNumber"><a href="#2" title="2. Uize.Array">2</a>.<a href="#2_5" title="2. Uize.Array -&gt; 2.5. Uize.Array.Dupes">5</a>. </span>Uize.Array.Dupes</h2>
 		<div class="contents2">
-			<a name="2_6_1"></a>
-			<h3 class="heading3" title="2. Uize.Array -&gt; 2.6. Uize.Array.Dupes -&gt; 2.6.1. Uize.Array.Dupes.getDupes"><span class="headingNumber"><a href="#2" title="2. Uize.Array">2</a>.<a href="#2_6" title="2. Uize.Array -&gt; 2.6. Uize.Array.Dupes">6</a>.<a href="#2_6_1" title="2. Uize.Array -&gt; 2.6. Uize.Array.Dupes -&gt; 2.6.1. Uize.Array.Dupes.getDupes">1</a>. </span>Uize.Array.Dupes.getDupes</h3>
+			<a name="2_5_1"></a>
+			<h3 class="heading3" title="2. Uize.Array -&gt; 2.5. Uize.Array.Dupes -&gt; 2.5.1. Uize.Array.Dupes.getDupes"><span class="headingNumber"><a href="#2" title="2. Uize.Array">2</a>.<a href="#2_5" title="2. Uize.Array -&gt; 2.5. Uize.Array.Dupes">5</a>.<a href="#2_5_1" title="2. Uize.Array -&gt; 2.5. Uize.Array.Dupes -&gt; 2.5.1. Uize.Array.Dupes.getDupes">1</a>. </span>Uize.Array.Dupes.getDupes</h3>
 			<div class="contents3">
 				<table class="list">
 				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>returns an array of dupe info objects</td></tr>
 				</table>
 			</div>
 			
-			<a name="2_6_2"></a>
-			<h3 class="heading3" title="2. Uize.Array -&gt; 2.6. Uize.Array.Dupes -&gt; 2.6.2. Uize.Array.Dupes.getValueCount"><span class="headingNumber"><a href="#2" title="2. Uize.Array">2</a>.<a href="#2_6" title="2. Uize.Array -&gt; 2.6. Uize.Array.Dupes">6</a>.<a href="#2_6_2" title="2. Uize.Array -&gt; 2.6. Uize.Array.Dupes -&gt; 2.6.2. Uize.Array.Dupes.getValueCount">2</a>. </span>Uize.Array.Dupes.getValueCount</h3>
+			<a name="2_5_2"></a>
+			<h3 class="heading3" title="2. Uize.Array -&gt; 2.5. Uize.Array.Dupes -&gt; 2.5.2. Uize.Array.Dupes.getValueCount"><span class="headingNumber"><a href="#2" title="2. Uize.Array">2</a>.<a href="#2_5" title="2. Uize.Array -&gt; 2.5. Uize.Array.Dupes">5</a>.<a href="#2_5_2" title="2. Uize.Array -&gt; 2.5. Uize.Array.Dupes -&gt; 2.5.2. Uize.Array.Dupes.getValueCount">2</a>. </span>Uize.Array.Dupes.getValueCount</h3>
 			<div class="contents3">
 				<table class="list">
 				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>returns the number of occurrences of the specified value</td></tr>
 				</table>
 			</div>
 			
-			<a name="2_6_3"></a>
-			<h3 class="heading3" title="2. Uize.Array -&gt; 2.6. Uize.Array.Dupes -&gt; 2.6.3. Uize.Array.Dupes.getValueCounts"><span class="headingNumber"><a href="#2" title="2. Uize.Array">2</a>.<a href="#2_6" title="2. Uize.Array -&gt; 2.6. Uize.Array.Dupes">6</a>.<a href="#2_6_3" title="2. Uize.Array -&gt; 2.6. Uize.Array.Dupes -&gt; 2.6.3. Uize.Array.Dupes.getValueCounts">3</a>. </span>Uize.Array.Dupes.getValueCounts</h3>
+			<a name="2_5_3"></a>
+			<h3 class="heading3" title="2. Uize.Array -&gt; 2.5. Uize.Array.Dupes -&gt; 2.5.3. Uize.Array.Dupes.getValueCounts"><span class="headingNumber"><a href="#2" title="2. Uize.Array">2</a>.<a href="#2_5" title="2. Uize.Array -&gt; 2.5. Uize.Array.Dupes">5</a>.<a href="#2_5_3" title="2. Uize.Array -&gt; 2.5. Uize.Array.Dupes -&gt; 2.5.3. Uize.Array.Dupes.getValueCounts">3</a>. </span>Uize.Array.Dupes.getValueCounts</h3>
 			<div class="contents3">
 				<table class="list">
 				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>returns a lookup array of counts per value</td></tr>
@@ -2094,19 +2076,19 @@ firstANYTYPE = Uize.Array.Sort.lastBy (sourceARRAY,sortColumnINT,directionINT);
 			</div>
 		</div>
 		
-		<a name="2_7"></a>
-		<h2 class="heading2" title="2. Uize.Array -&gt; 2.7. Uize.Array.Util"><span class="headingNumber"><a href="#2" title="2. Uize.Array">2</a>.<a href="#2_7" title="2. Uize.Array -&gt; 2.7. Uize.Array.Util">7</a>. </span>Uize.Array.Util</h2>
+		<a name="2_6"></a>
+		<h2 class="heading2" title="2. Uize.Array -&gt; 2.6. Uize.Array.Util"><span class="headingNumber"><a href="#2" title="2. Uize.Array">2</a>.<a href="#2_6" title="2. Uize.Array -&gt; 2.6. Uize.Array.Util">6</a>. </span>Uize.Array.Util</h2>
 		<div class="contents2">
-			<a name="2_7_1"></a>
-			<h3 class="heading3" title="2. Uize.Array -&gt; 2.7. Uize.Array.Util -&gt; 2.7.1. Uize.Array.Util.chunk"><span class="headingNumber"><a href="#2" title="2. Uize.Array">2</a>.<a href="#2_7" title="2. Uize.Array -&gt; 2.7. Uize.Array.Util">7</a>.<a href="#2_7_1" title="2. Uize.Array -&gt; 2.7. Uize.Array.Util -&gt; 2.7.1. Uize.Array.Util.chunk">1</a>. </span>Uize.Array.Util.chunk</h3>
+			<a name="2_6_1"></a>
+			<h3 class="heading3" title="2. Uize.Array -&gt; 2.6. Uize.Array.Util -&gt; 2.6.1. Uize.Array.Util.chunk"><span class="headingNumber"><a href="#2" title="2. Uize.Array">2</a>.<a href="#2_6" title="2. Uize.Array -&gt; 2.6. Uize.Array.Util">6</a>.<a href="#2_6_1" title="2. Uize.Array -&gt; 2.6. Uize.Array.Util -&gt; 2.6.1. Uize.Array.Util.chunk">1</a>. </span>Uize.Array.Util.chunk</h3>
 			<div class="contents3">
 				<table class="list">
 				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>returns a chunk of the specified source array of the specified size</td></tr>
 				</table>
 			</div>
 			
-			<a name="2_7_2"></a>
-			<h3 class="heading3" title="2. Uize.Array -&gt; 2.7. Uize.Array.Util -&gt; 2.7.2. Uize.Array.Util.first"><span class="headingNumber"><a href="#2" title="2. Uize.Array">2</a>.<a href="#2_7" title="2. Uize.Array -&gt; 2.7. Uize.Array.Util">7</a>.<a href="#2_7_2" title="2. Uize.Array -&gt; 2.7. Uize.Array.Util -&gt; 2.7.2. Uize.Array.Util.first">2</a>. </span>Uize.Array.Util.first</h3>
+			<a name="2_6_2"></a>
+			<h3 class="heading3" title="2. Uize.Array -&gt; 2.6. Uize.Array.Util -&gt; 2.6.2. Uize.Array.Util.first"><span class="headingNumber"><a href="#2" title="2. Uize.Array">2</a>.<a href="#2_6" title="2. Uize.Array -&gt; 2.6. Uize.Array.Util">6</a>.<a href="#2_6_2" title="2. Uize.Array -&gt; 2.6. Uize.Array.Util -&gt; 2.6.2. Uize.Array.Util.first">2</a>. </span>Uize.Array.Util.first</h3>
 			<div class="contents3">
 				<table class="list">
 				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>returns the specified number of elements at the head of the specified source array</td></tr>
@@ -2114,8 +2096,8 @@ firstANYTYPE = Uize.Array.Sort.lastBy (sourceARRAY,sortColumnINT,directionINT);
 				</table>
 			</div>
 			
-			<a name="2_7_3"></a>
-			<h3 class="heading3" title="2. Uize.Array -&gt; 2.7. Uize.Array.Util -&gt; 2.7.3. Uize.Array.Util.last"><span class="headingNumber"><a href="#2" title="2. Uize.Array">2</a>.<a href="#2_7" title="2. Uize.Array -&gt; 2.7. Uize.Array.Util">7</a>.<a href="#2_7_3" title="2. Uize.Array -&gt; 2.7. Uize.Array.Util -&gt; 2.7.3. Uize.Array.Util.last">3</a>. </span>Uize.Array.Util.last</h3>
+			<a name="2_6_3"></a>
+			<h3 class="heading3" title="2. Uize.Array -&gt; 2.6. Uize.Array.Util -&gt; 2.6.3. Uize.Array.Util.last"><span class="headingNumber"><a href="#2" title="2. Uize.Array">2</a>.<a href="#2_6" title="2. Uize.Array -&gt; 2.6. Uize.Array.Util">6</a>.<a href="#2_6_3" title="2. Uize.Array -&gt; 2.6. Uize.Array.Util -&gt; 2.6.3. Uize.Array.Util.last">3</a>. </span>Uize.Array.Util.last</h3>
 			<div class="contents3">
 				<table class="list">
 				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>returns the specified number of elements at the tail of the specified source array</td></tr>

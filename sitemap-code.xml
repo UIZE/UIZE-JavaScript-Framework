@@ -168,6 +168,13 @@
 		</codesearch:codesearch>
 	</url>
 	<url>
+		<loc>http://www.uize.com/js/~source/Uize.Data.Matches.js</loc>
+		<codesearch:codesearch>
+			<codesearch:filetype>javascript</codesearch:filetype>
+			<codesearch:license>GPL</codesearch:license>
+		</codesearch:codesearch>
+	</url>
+	<url>
 		<loc>http://www.uize.com/js/~source/Uize.Data.NameValueRecords.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
@@ -561,6 +568,13 @@
 	</url>
 	<url>
 		<loc>http://www.uize.com/js/~source/Uize.Test.Uize.Data.js</loc>
+		<codesearch:codesearch>
+			<codesearch:filetype>javascript</codesearch:filetype>
+			<codesearch:license>GPL</codesearch:license>
+		</codesearch:codesearch>
+	</url>
+	<url>
+		<loc>http://www.uize.com/js/~source/Uize.Test.Uize.Data.Matches.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>

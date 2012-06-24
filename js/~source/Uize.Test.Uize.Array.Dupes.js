@@ -153,7 +153,39 @@ Uize.module ({
 						],
 						null,
 						{cloneArguments:true}
-					]
+					],
+					['Uize.Array.Dupes.removeValues',[
+						{
+							title:'',
+							test:function () {
+								var
+									_source = [
+										2,1,2,
+										true,false,true,
+										'bye','hi','bye',
+										_objectB,_objectA,_objectB,
+										_arrayB,_arrayA,_arrayB,
+										_functionB,_functionA,_functionB,
+										null,null,null,
+										undefined,undefined,undefined
+									],
+									_result = Uize.Array.Dupes.removeValues (
+										_source,
+										[2,true,'bye',_objectB,_arrayB,_functionB,null,undefined]
+									)
+								;
+								return (
+									this.expect (6,_result.length) &&
+									this.expect (1,_result [0]) &&
+									this.expect (false,_result [1]) &&
+									this.expect ('hi',_result [2]) &&
+									this.expectSameAs (_objectA,_result [3]) &&
+									this.expectSameAs (_arrayA,_result [4]) &&
+									this.expectSameAs (_functionA,_result [5])
+								);
+							}
+						}
+					]]
 				])
 			]
 		});

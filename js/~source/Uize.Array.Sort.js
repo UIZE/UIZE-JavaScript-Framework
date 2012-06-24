@@ -232,9 +232,7 @@ Uize.module ({
 							if (typeof _sortValueGenerator == 'number')
 								_sortValueGenerator = 'value [' + _sortValueGenerator + ']'
 							;
-							if (typeof _sortValueGenerator == 'string')
-								_sortValueGenerator = new Function ('value','key','return ' + _sortValueGenerator)
-							;
+							_sortValueGenerator = Uize.resolveTransformer (_sortValueGenerator);
 						};
 						/*** build sortValues array ***/
 							for (var _elementNo = _sortValues.length = _elementsLength; --_elementNo >= 0;) {

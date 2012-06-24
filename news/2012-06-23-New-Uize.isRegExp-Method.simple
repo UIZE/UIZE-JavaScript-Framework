@@ -1,0 +1,33 @@
+The new =Uize.isRegExp= static method, implemented in the =Uize= base module, returns a boolean, indicating whether or not the specified value is a regular expression (ie. an instance of JavaScript's built-in =RegExp= object).
+
+SYNTAX
+............................................
+isRegExpBOOL = Uize.isRegExp (valueANYTYPE);
+............................................
+
+EXAMPLES
+........................................................
+Uize.isRegExp (/^\d+$/);                // returns true
+Uize.isRegExp (new RegExp ('^\\d+$'));  // returns true
+
+Uize.isRegExp (true);                   // returns false
+Uize.isRegExp ('foo');                  // returns false
+Uize.isRegExp (42);                     // returns false
+Uize.isRegExp (new Boolean (true));     // returns false
+Uize.isRegExp (new String (foo));       // returns false
+Uize.isRegExp (new Number (42));        // returns false
+Uize.isRegExp (null);                   // returns false
+Uize.isRegExp (undefined);              // returns false
+Uize.isRegExp ();                       // returns false
+Uize.isRegExp ({foo:'bar'});            // returns false
+Uize.isRegExp (['foo','bar']);          // returns false
+Uize.isRegExp (Uize.Widget ());         // returns false
+Uize.isRegExp (function () {});         // returns false
+// etc.
+........................................................
+
+....................................................................................
+<< metadata >>
+
+title: 2012-06-23 - New Uize.isRegExp Method
+....................................................................................

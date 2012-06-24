@@ -1,7 +1,7 @@
 /*
-	UIZE JAVASCRIPT FRAMEWORK 2012-03-12
+	UIZE JAVASCRIPT FRAMEWORK 2012-06-23
 
 	http://www.uize.com/reference/Uize.Data.Combinations.html
 	Available under MIT License or GNU General Public License -- http://www.uize.com/license.html
 */
-Uize.module({name:'Uize.Data.Combinations',builder:function(){var _a=function(){},_b,_c=Uize.isList;function _d(_e){return(typeof _e=='string'?new Function('value','key','return '+_e):_e);}_a.generate=function(_f,_g,_h){var _i=[];_a.forEach(_f,function(_j){_i.push(_j)},_g,_h);return _i;};_a.forEach=function(_f,_k,_g,_h){if(Uize.isObject(_f)){_g=_d(_g);_h=_d(_h);var _l=[],_m,_n= -1,_o,_p=[],_q=[],_r=[],_s=Uize.isArray(_f);Uize.forEach(_f,function(_o,_m){_o=_f[_m];if(!_c(_o))_o=[_o];if(_o.length){_l.push(_m);_n++;_q[_n]=(_p[_n]=_o).length;_r[_n]=0;}});var _t= -1,_u=_n+1,_v,_w=true;while(_n>=0){_t++;var _j=_s?[]:{};for(_n= -1;++_n<_u;)_j[_l[_n]]=_p[_n][_r[_n]];if(_g&&(_v=_g(_j,_t))!==_b)_j=_v;if(_h)_w=_h(_j,_t);_w&&_k(_j);_n=_u;while(--_n>=0&& !(_r[_n]=(_r[_n]+1)%_q[_n]));}}};return _a;}});
+Uize.module({name:'Uize.Data.Combinations',builder:function(){var _a=function(){},_b,_c=Uize.isList;_a.generate=function(_d,_e,_f){var _g=[];_a.forEach(_d,function(_h){_g.push(_h)},_e,_f);return _g;};_a.forEach=function(_d,_i,_e,_f){if(Uize.isObject(_d)){if(_e!=_b)_e=Uize.resolveTransformer(_e);if(_f!=_b)_f=Uize.resolveMatcher(_f);var _j=[],_k,_l= -1,_m,_n=[],_o=[],_p=[],_q=Uize.isArray(_d);Uize.forEach(_d,function(_m,_k){_m=_d[_k];if(!_c(_m))_m=[_m];if(_m.length){_j.push(_k);_l++;_o[_l]=(_n[_l]=_m).length;_p[_l]=0;}});var _r= -1,_s=_l+1,_t;while(_l>=0){_r++;var _h=_q?[]:{};for(_l= -1;++_l<_s;)_h[_j[_l]]=_n[_l][_p[_l]];if(_e&&(_t=_e(_h,_r))!==_b)_h=_t;(!_f||_f(_h,_r))&&_i(_h);_l=_s;while(--_l>=0&& !(_p[_l]=(_p[_l]+1)%_o[_l]));}}};return _a;}});

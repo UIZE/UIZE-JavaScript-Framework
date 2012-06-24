@@ -714,8 +714,8 @@ Uize.module ({
 					]],
 					['Uize.isPrimitive',[
 						['Test that calling with no parameters returns false',[],false],
-						['Test that the value undefined is not regarded as being an object',undefined,false],
-						['Test that the value null is not regarded as being an object',null,false],
+						['Test that the value undefined is not regarded as being a primitive',undefined,false],
+						['Test that the value null is not regarded as being a primitive',null,false],
 						['Test that a string value is regarded as being a primitive','',true],
 						['Test that a boolean value is regarded as being a primitive',false,true],
 						['Test that a number value is regarded as being a primitive',0,true],
@@ -727,6 +727,26 @@ Uize.module ({
 						['Test that a String object instance is not regarded as being a primitive',new String ('foo'),false],
 						['Test that a Boolean object instance is not regarded as being a primitive',new Boolean (true),false],
 						['Test that a Number object instance is not regarded as being a primitive',new Number (42),false]
+					]],
+					['Uize.isRegExp',[
+						['Test that calling with no parameters returns false',[],false],
+						['Test that the value undefined is not regarded as being a regular expression',undefined,false],
+						['Test that the value null is not regarded as being a regular expression',null,false],
+						['Test that a string value is not regarded as being a regular expression','foo',false],
+						['Test that a boolean value is not regarded as being a regular expression',true,false],
+						['Test that a number value is not regarded as being a regular expression',42,false],
+						['Test that a function is not regarded as being a regular expression',Uize.nop,false],
+						['Test that an object is not regarded as being a regular expression',{foo:'bar'},false],
+						['Test that an array is not regarded as being a regular expression',[['foo','bar']],false],
+						['Test that a regular expression instance is regarded as being a regular expression',/\d+/,true],
+						['Test that a regular expression instance created using the RegExp constructor is regarded as being a regular expression',
+							new RegExp ('\\d+'),
+							true
+						],
+						['Test that an empty regular expression instance is regarded as being a regular expression',
+							new RegExp (''),
+							true
+						]
 					]],
 					['Uize.isNaN',[
 						['Test that the value NaN is considered to be NaN',NaN,true],
