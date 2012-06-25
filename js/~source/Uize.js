@@ -94,9 +94,10 @@
 
 				General Utilities
 
+					- =Uize.getClass= - gets the class of which a specified value is an instance, or returns the value if it is a class or function
 					- =Uize.noNew= - wraps an object constructor function to make JavaScript's =new= operator optional
 					- =Uize.now= - returns the current time in milliseconds since 1970 (POSIX time)
-					- =Uize.getClass= - gets the class of which a specified value is an instance, or returns the value if it is a class or function
+					- =Uize.resolveTransformer= - resolves the specified transformer (of any type) to a transformer function
 					- =Uize.substituteInto= - substitutes one or more substitution values into a string
 
 				Module Mechanism Methods
@@ -1093,45 +1094,120 @@
 						? _transformer
 						: _typeofTransformer == 'string'
 							? new Function ('value','key','return ' + _transformer)
-							: _isRegExp (_transformer)
-								? function (_value) {return _transformer.test (_value + '')}
+							: _typeofTransformer == 'object'
+								? (
+									_isRegExp (_transformer)
+										? function (_value) {return _transformer.test (_value + '')}
+										: function (_value) {
+											return _transformer.hasOwnProperty (_value) ? _transformer [_value] : _value
+										}
+								)
 								: function () {return _transformer}
 			);
 			/*?
 				Static Methods
 					Uize.resolveTransformer
+						Resolves the specified transformer to a function that can be passed two arguments, value and key, and that returns a value derived from one or both of those inputs.
 
 						SYNTAX
 						...............................................................
 						transformerFUNC = Uize.resolveTransformer (transformerANYTYPE);
 						...............................................................
 
+						The =Uize.resolveTransformer= method is intended to be used in the implementation of other methods that want to allow a value transformer to be specified in several different forms (such as an expression string, for example), but always want to use the transformer as a function. An example of one such method is the =Uize.map= method, whose second argument is a mapper transformer. The =Uize.resolveTransformer= method allows such methods to be versatile in how they let transformers be specified.
+
+						EXAMPLE
+						..........................................................
+						function simpleArrayMap (array,mapper) {
+							mapper = Uize.resolveTransformer (mapper);
+							var result = [];
+							for (var elementNo = array.length; --elementNo >= 0;) {
+								result [elementNo] = mapper (array [elementNo]);
+							}
+							return result;
+						}
+						..........................................................
+
+						In the above example, we are implementing a simple array mapper function. The second argument of the function is a mapper. To allow users of the function to specify a mapper using an expression string short form, we resolve the value of the =mapper= argument using the =Uize.resolveTransformer= method and re-assign the resolved value to the =mapper= argument. Once resolved, we can now count on the mapper being a function and we can call it in the loop that processes the source array. Now a caller can call this function with a statement like =simpleArrayMap (fruits,'value.toLowerCase ()')=.
+
 						How Different Transformer Types are Resolved
+							The =Uize.resolveTransformer= method supports numerous different ways of specifying a transformer.
+
 							When a Function Type Transformer is Specified
-								document...
+								When a function is specified for the =transformerANYTYPE= parameter, that function is simply returned.
+
+								The =Uize.resolveTransformer= method is used to resolve a value that could be one of several different types to something that's guaranteed to be a function. In the case where the transformer is already a function, it is considered to already be resolved and is returned as is.
 
 							When a String Type Transformer is Specified
-								document...
+								When a string value is specified for the =transformerANYTYPE= parameter, a function is produced using the specified string transformer expression as the function's body, and accepting the two arguments =value= and =key=.
+
+								For example, the transformer expression string ='key + ": " + value'= would be resolved to the function =function (value,key) {return key + ': ' + value}=. In another example, the transformer expression string ='value &#42; value'= would be resolved to the function =function (value,key) {return value &#42; value}=.
+
+								The =Uize.resolveTransformer= method imposes the argument names =value= and =key= for the two arguments of the function that it produces from a transformer exprression string, so such an expression must use these reserved variable names to access the value and optional key that will be passed in by the caller of the resolved transforer.
+
+								EXAMPLE
+								........................................................
+								var squared = Uize.resolveTransformer ('value * value');
+
+								alert (squared (3));  // alerts the text "9"
+								........................................................
 
 							When a Regular Expression Transformer is Specified
-								document...
+								When a regular expression is specified for the =transformerANYTYPE= parameter, a function is produced using the regular expression to test the value of its first argument for a match, returning a boolean value.
+
+								Because regular expression transformers are resolved to functions that always return =true= or =false= values, they are most suited to and most commonly used as value matchers.
+
+								EXAMPLE
+								.................................................................................
+								var isValidIdentifier = Uize.resolveTransformer (/^[_\$a-zA-Z][_\$a-zA-Z0-9]*$/);
+
+								alert (isValidIdentifier (''));         // alerts "false"
+								alert (isValidIdentifier ('fooVar'));   // alerts "true"
+								alert (isValidIdentifier ('$foo'));     // alerts "true"
+								alert (isValidIdentifier ('3rdVar'));   // alerts "false"
+								alert (isValidIdentifier ('_4thVar'));  // alerts "true"
+								.................................................................................
+
+							When an Object Type Transformer is Specified
+								When an object is specified for the =transformerANYTYPE= parameter, a function is produced using the object as a lookup for remapping the input value, but leaving the input value unchanged if it is not found in the lookup.
+
+								EXAMPLE
+								.......................................................
+								var whatFoodType = Uize.resolveTransformer ({
+									apple:'fruit',
+									banana:'fruit',
+									beet:'vegetable',
+									corn:'grain',
+									onion:'vegetable',
+									rice:'grain'
+								});
+
+								alert (whatFoodType ('apple'));   // alerts "fruit"
+								alert (whatFoodType ('onion'));   // alerts "vegetable"
+								alert (whatFoodType ('rice'));    // alerts "grain"
+								alert (whatFoodType ('burger'));  // alerts "burger"
+								.......................................................
 
 							When a Nully Transformer is Specified
-								document...
+								When a nully value (ie. the value =null= or =undefined=) is specified for the =transformerANYTYPE= parameter, a function is produced that simply returns the value of its first argument unmodified.
 
-							When Other Transformer Types are Specified
-								document...
+								This behavior is useful for methods that want to offer an optional transformer and wish no transformation to be performed when the optional argument is not specified, or if the values =null= or =undefined= are explicitly specified.
+
+							When a Boolean Type Transformer is Specified
+								When a boolean value is specified for the =transformerANYTYPE= parameter, a function is produced that simply returns that boolean value, regardless of the input value.
+
+								This behavior is most suited to methods that resolve matchers, and the =Uize.resolveMatcher= method takes advantage of this behavior because it uses the =Uize.resolveTransformer= method in its implementation. In cases where a transformer is serving the purpose of a matcher, the values =true= or =false= can be provided to defeat the effect of the matcher to either match all elements or no elements.
+
+							When a Number Type Transformer is Specified
+								When a number value is specified for the =transformerANYTYPE= parameter, a function is produced that simply returns that number value, regardless of the input value.
+
+						NOTES
+						- see the companion =Uize.resolveMatcher= static method
 			*/
 		};
 
 		_package.resolveMatcher = function (_matcher) {
-			return (
-				_matcher == _undefined
-					? _package.returnTrue
-					: typeof _matcher == 'boolean'
-						? (_matcher ? _package.returnTrue : _package.returnFalse)
-						: _resolveTransformer (_matcher)
-			);
+			return _matcher == _undefined ? _package.returnTrue : _resolveTransformer (_matcher);
 			/*?
 				Static Methods
 					Uize.resolveMatcher
@@ -1151,10 +1227,10 @@
 							When a Regular Expression Matcher is Specified
 								document...
 
-							When a Boolean Matcher is Specified
+							When a Nully Matcher is Specified
 								document...
 
-							When a Nully Matcher is Specified
+							When a Boolean Type Matcher is Specified
 								document...
 
 							When Other Matcher Types are Specified

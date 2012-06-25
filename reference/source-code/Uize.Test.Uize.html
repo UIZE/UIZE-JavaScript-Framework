@@ -172,6 +172,87 @@ Uize.module ({
       };
     }
 
+    function _returnXTest (_functionGenerator) {
+      return {
+        title:'Test that the function always returns the value of its first argument, unmodified',
+        test:[
+          {
+            title:'Test that calling with no parameters returns undefined',
+            test:function () {
+              return this.expect (undefined,_functionGenerator () ());
+            }
+          },
+          {
+            title:'Test that calling with the value undefined returns the value undefined',
+            test:function () {
+              return this.expect (undefined,_functionGenerator () (undefined));
+            }
+          },
+          {
+            title:'Test that calling with the value null returns the value null',
+            test:function () {
+              return this.expect (null,_functionGenerator () (null));
+            }
+          },
+          {
+            title:'Test that calling with a number value returns that same number value',
+            test:function () {
+              return this.expect (42,_functionGenerator () (42));
+            }
+          },
+          {
+            title:'Test that calling with a boolean value returns that same boolean value',
+            test:function () {
+              return this.expect (false,_functionGenerator () (false));
+            }
+          },
+          {
+            title:'Test that calling with a string value returns that same string value',
+            test:function () {
+              return this.expect ('foo',_functionGenerator () ('foo'));
+            }
+          },
+          {
+            title:'Test that calling with a function value returns that same function value',
+            test:function () {
+              function _function () {};
+              return this.expectSameAs (_function,_functionGenerator () (_function));
+            }
+          },
+          {
+            title:'Test that calling with an array value returns that same array, unmodified',
+            test:function () {
+              var _array = ['foo','bar'];
+              return (
+                this.expectSameAs (_array,_functionGenerator () (_array)) &amp;&amp;
+                this.expect (['foo','bar'],_array)
+              );
+            }
+          },
+          {
+            title:'Test that calling with an object value returns that same object, unmodified',
+            test:function () {
+              var _object = {foo:'bar'};
+              return (
+                this.expectSameAs (_object,_functionGenerator () (_object)) &amp;&amp;
+                this.expect ({foo:'bar'},_object)
+              );
+            }
+          },
+          {
+            title:'Test that calling with a regular expression value returns that same regular expression value',
+            test:function () {
+              var _regExp = /^\d+$/;
+              return (
+                this.expectSameAs (_regExp,_functionGenerator () (_regExp)) &amp;&amp;
+                this.expect (/^\d+$/,_regExp)
+              );
+            }
+          }
+        ]
+      };
+    }
+
     return Uize.Test.declare ({
       title:'Test for Uize Base Module',
       test:[
@@ -817,6 +898,105 @@ Uize.module ({
                 return this.expect (true,_result);
               }
             }
+          ]],
+          ['Uize.returnFalse',[
+            /* TODO: implement tests */
+          ]],
+          ['Uize.returnTrue',[
+            /* TODO: implement tests */
+          ]],
+          ['Uize.returnX',[
+            _returnXTest (function () {return Uize.returnX})
+          ]],
+          ['Uize.nop',[
+            /* TODO: implement tests */
+          ]],
+          ['Uize.resolveTransformer',[
+            {
+              title:'Test that calling with no parameters produces a value transformer that always returns the input value',
+              test:[
+                _returnXTest (function () {return Uize.resolveTransformer ()})
+              ]
+            },
+            {
+              title:'Test that specifying the value undefined produces a value transformer that always returns the input value',
+              test:[
+                _returnXTest (function () {return Uize.resolveTransformer (undefined)})
+              ]
+            },
+            {
+              title:'Test that specifying the value null produces a value transformer that always returns the input value',
+              test:[
+                _returnXTest (function () {return Uize.resolveTransformer (null)})
+              ]
+            },
+            {
+              title:'Test that specifying a function type transformer results in that exact function being returned',
+              test:function () {
+                function _function () {}
+                return this.expectSameAs (_function,Uize.resolveTransformer (_function));
+              }
+            },
+            {
+              title:'Test that specifying a string type transformer results in a function being created using that transformer expression string as the function body and accepting value and key arguments',
+              test:function () {
+                var _resolvedTransformer = Uize.resolveTransformer ('value + "|" + key');
+                return (
+                  this.expectType ('function',_resolvedTransformer) &amp;&amp;
+                  this.expect ('foo|bar',_resolvedTransformer ('foo','bar'))
+                );
+              }
+            },
+            {
+              title:'Test that specifying a regular expression transformer results in a function being created that uses the regular expression to test the value parameter after it\'s been coerced to a string',
+              test:function () {
+                var _resolvedTransformer = Uize.resolveTransformer (/^42$/);
+                return (
+                  this.expectType ('function',_resolvedTransformer) &amp;&amp;
+                  this.expect (true,_resolvedTransformer ('42')) &amp;&amp;
+                  this.expect (true,_resolvedTransformer (42)) &amp;&amp;
+                  this.expect (false,_resolvedTransformer (' 42 '))
+                );
+              }
+            },
+            {
+              title:'Test that specifying an object type transformer results in a function that uses the object transformer as a lookup for remapping the input value, leaving the input value unchanged if it is not found in the lookup',
+              test:function () {
+                var _resolvedTransformer = Uize.resolveTransformer ({
+                  foo:'bar',
+                  hello:'world'
+                });
+                return (
+                  this.expectType ('function',_resolvedTransformer) &amp;&amp;
+                  this.expect ('bar',_resolvedTransformer ('foo')) &amp;&amp;
+                  this.expect ('world',_resolvedTransformer ('hello')) &amp;&amp;
+                  this.expect (42,_resolvedTransformer (42))
+                );
+              }
+            },
+            {
+              title:'Test that specifying a number type transformer results in a function being created that returns that exact number value as its result',
+              test:function () {
+                var _resolvedTransformer = Uize.resolveTransformer (42);
+                return (
+                  this.expectType ('function',_resolvedTransformer) &amp;&amp;
+                  this.expect (42,_resolvedTransformer ('foo'))
+                );
+              }
+            },
+            {
+              title:'Test that specifying a boolean type transformer results in a function being created that returns that exact boolean value as its result',
+              test:function () {
+                var _resolvedTransformer = Uize.resolveTransformer (false);
+                return (
+                  this.expectType ('function',_resolvedTransformer) &amp;&amp;
+                  this.expect (false,_resolvedTransformer ('foo'))
+                );
+              }
+            }
+          ]],
+          ['Uize.resolveMatcher',[
+            /* TODO: implement tests */
           ]],
           ['Uize.escapeRegExpLiteral',[
             ['Test that all of the regular expression special characters are escaped correctly',
@@ -1867,9 +2047,6 @@ Uize.module ({
                 return this.expectNoRepeats (_callResults);
               }
             }
-          ]],
-          ['Uize.getPathToLibrary',[
-            /* TODO: implement tests */
           ]],
           ['Uize.globalEval',[
             /* TODO: implement tests */
@@ -2998,6 +3175,18 @@ Uize.module ({
             /* TODO: implement tests */
           ]],
           ['Uize.module',[
+            /* TODO: implement tests */
+          ]],
+          ['Uize.getModuleByName',[
+            /* TODO: implement tests */
+          ]],
+          ['Uize.moduleLoader',[
+            /* TODO: implement tests */
+          ]],
+          ['Uize.moduleUrlResolver',[
+            /* TODO: implement tests */
+          ]],
+          ['Uize.getPathToLibrary',[
             /* TODO: implement tests */
           ]]
         ]),

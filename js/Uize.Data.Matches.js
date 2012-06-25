@@ -1,5 +1,5 @@
 /*
-	UIZE JAVASCRIPT FRAMEWORK 2012-06-23
+	UIZE JAVASCRIPT FRAMEWORK 2012-06-25
 
 	http://www.uize.com/reference/Uize.Data.Matches.html
 	Available under MIT License or GNU General Public License -- http://www.uize.com/license.html
