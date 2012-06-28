@@ -38,8 +38,8 @@
 /* Module Meta Data
   type: Test
   importance: 8
-  codeCompleteness: 70
-  testCompleteness: 100
+  codeCompleteness: 80
+  testCompleteness: 80
   docCompleteness: 100
 */
 
@@ -249,6 +249,38 @@ Uize.module ({
               );
             }
           }
+        ]
+      };
+    }
+
+    function _returnsSpecificValueTest (_methodNameOrFunctionGenerator,_expectedReturnValue) {
+      var _function = typeof _methodNameOrFunctionGenerator == 'function'
+        ? _methodNameOrFunctionGenerator ()
+        : Uize [_methodNameOrFunctionGenerator]
+      ;
+      function _inputValueTest (_inputValue,_inputValueName) {
+        return {
+          title:'Test that calling with ' + _inputValueName + ' returns the result ' + _expectedReturnValue,
+          test:function () {
+            return this.expect (_expectedReturnValue,_function (_inputValueName));
+          }
+        };
+      }
+      return {
+        title:'Test that the method always returns the value ' + _expectedReturnValue + ', regardless of its input',
+        test:[
+          {
+            title:'Test that calling with no parameters returns ' + _expectedReturnValue,
+            test:function () {return this.expect (_expectedReturnValue,_function ())}
+          },
+          _inputValueTest (undefined,'undefined'),
+          _inputValueTest (null,'null'),
+          _inputValueTest ('foo','a string value'),
+          _inputValueTest (42,'a number value'),
+          _inputValueTest (true,'a boolean value'),
+          _inputValueTest (['foo','bar'],'an array value'),
+          _inputValueTest ({foo:'bar'},'an object value'),
+          _inputValueTest (/\d+/,'a regular expression')
         ]
       };
     }
@@ -900,32 +932,32 @@ Uize.module ({
             }
           ]],
           ['Uize.returnFalse',[
-            /* TODO: implement tests */
+            _returnsSpecificValueTest ('returnFalse',false)
           ]],
           ['Uize.returnTrue',[
-            /* TODO: implement tests */
+            _returnsSpecificValueTest ('returnTrue',true)
           ]],
           ['Uize.returnX',[
             _returnXTest (function () {return Uize.returnX})
           ]],
           ['Uize.nop',[
-            /* TODO: implement tests */
+            _returnsSpecificValueTest ('nop',undefined)
           ]],
           ['Uize.resolveTransformer',[
             {
-              title:'Test that calling with no parameters produces a value transformer that always returns the input value',
+              title:'Test that calling with no parameters produces a transformer function that always returns the value of its first argument',
               test:[
                 _returnXTest (function () {return Uize.resolveTransformer ()})
               ]
             },
             {
-              title:'Test that specifying the value undefined produces a value transformer that always returns the input value',
+              title:'Test that specifying the value undefined produces a transformer function that always returns the value of its first argument',
               test:[
                 _returnXTest (function () {return Uize.resolveTransformer (undefined)})
               ]
             },
             {
-              title:'Test that specifying the value null produces a value transformer that always returns the input value',
+              title:'Test that specifying the value null produces a transformer function that always returns the value of its first argument',
               test:[
                 _returnXTest (function () {return Uize.resolveTransformer (null)})
               ]
@@ -996,7 +1028,63 @@ Uize.module ({
             }
           ]],
           ['Uize.resolveMatcher',[
-            /* TODO: implement tests */
+            {
+              title:'Test that calling with no parameters produces a matcher function that always returns true',
+              test:[
+                _returnsSpecificValueTest (function () {return Uize.resolveMatcher ()},true)
+              ]
+            },
+            {
+              title:'Test that specifying the value undefined produces a matcher function that always returns true',
+              test:[
+                _returnsSpecificValueTest (function () {return Uize.resolveMatcher (undefined)},true)
+              ]
+            },
+            {
+              title:'Test that specifying the value null produces a matcher function that always returns true',
+              test:[
+                _returnsSpecificValueTest (function () {return Uize.resolveMatcher (null)},true)
+              ]
+            },
+            {
+              title:'Test that specifying a function type matcher results in that exact function being returned',
+              test:function () {
+                function _function () {}
+                return this.expectSameAs (_function,Uize.resolveMatcher (_function));
+              }
+            },
+            {
+              title:'Test that specifying a string type matcher results in a function being created using that matcher expression string as the function body and accepting value and key arguments',
+              test:function () {
+                var _resolvedMatcher = Uize.resolveMatcher ('value + "|" + key');
+                return (
+                  this.expectType ('function',_resolvedMatcher) &amp;&amp;
+                  this.expect ('foo|bar',_resolvedMatcher ('foo','bar'))
+                );
+              }
+            },
+            {
+              title:'Test that specifying a regular expression matcher results in a function being created that uses the regular expression to test the value parameter after it\'s been coerced to a string',
+              test:function () {
+                var _resolvedMatcher = Uize.resolveMatcher (/^42$/);
+                return (
+                  this.expectType ('function',_resolvedMatcher) &amp;&amp;
+                  this.expect (true,_resolvedMatcher ('42')) &amp;&amp;
+                  this.expect (true,_resolvedMatcher (42)) &amp;&amp;
+                  this.expect (false,_resolvedMatcher (' 42 '))
+                );
+              }
+            },
+            {
+              title:'Test that specifying a boolean type matcher results in a function being created that returns that exact boolean value as its result',
+              test:function () {
+                var _resolvedMatcher = Uize.resolveMatcher (false);
+                return (
+                  this.expectType ('function',_resolvedMatcher) &amp;&amp;
+                  this.expect (false,_resolvedMatcher ('foo'))
+                );
+              }
+            }
           ]],
           ['Uize.escapeRegExpLiteral',[
             ['Test that all of the regular expression special characters are escaped correctly',

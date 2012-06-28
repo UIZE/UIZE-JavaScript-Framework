@@ -1138,7 +1138,7 @@
             transformerFUNC = Uize.resolveTransformer (transformerANYTYPE);
             ...............................................................
 
-            The =Uize.resolveTransformer= method is intended to be used in the implementation of other methods that want to allow a value transformer to be specified in several different forms (such as an expression string, for example), but always want to use the transformer as a function. An example of one such method is the =Uize.map= method, whose second argument is a mapper transformer. The =Uize.resolveTransformer= method allows such methods to be versatile in how they let transformers be specified.
+            The =Uize.resolveTransformer= method is intended to be used in the implementation of other methods that want to allow a transformer to be specified in several different forms (such as an expression string, for example), but always want to use the transformer as a function. An example of one such method is the =Uize.map= method, whose second argument is a mapper transformer. The =Uize.resolveTransformer= method allows such methods to be versatile in how they let transformers be specified.
 
             EXAMPLE
             ..........................................................
@@ -1167,7 +1167,7 @@
 
                 For example, the transformer expression string ='key + ": " + value'= would be resolved to the function =function (value,key) {return key + ': ' + value}=. In another example, the transformer expression string ='value &amp;#42; value'= would be resolved to the function =function (value,key) {return value &amp;#42; value}=.
 
-                The =Uize.resolveTransformer= method imposes the argument names =value= and =key= for the two arguments of the function that it produces from a transformer exprression string, so such an expression must use these reserved variable names to access the value and optional key that will be passed in by the caller of the resolved transforer.
+                The =Uize.resolveTransformer= method imposes the argument names =value= and =key= for the two arguments of the function that it produces from a transformer exprression string, so such an expression must use these reserved variable names to access the value and optional key that will be passed in by the caller of the resolved transformer.
 
                 EXAMPLE
                 ........................................................
@@ -1226,7 +1226,7 @@
                 When a number value is specified for the =transformerANYTYPE= parameter, a function is produced that simply returns that number value, regardless of the input value.
 
             NOTES
-            - see the companion =Uize.resolveMatcher= static method
+            - see also the related =Uize.resolveMatcher= static method
       */
     };
 
@@ -1235,30 +1235,78 @@
       /*?
         Static Methods
           Uize.resolveMatcher
+            Resolves the specified matcher to a function that can be passed two arguments, value and key, and that returns a value derived from one or both of those inputs.
 
             SYNTAX
             ...................................................
             matcherFUNC = Uize.resolveMatcher (matcherANYTYPE);
             ...................................................
 
+            The =Uize.resolveMatcher= method is intended to be used in the implementation of other methods that want to allow a matcher to be specified in several different forms (such as an expression string, for example), but always want to use the matcher as a function. Examples of such methods include the various methods of the =Uize.Data.Matches= module, such as the =Uize.Data.Matches.remove= method whose second argument is a matcher. The =Uize.resolveMatcher= method allows such methods to be versatile in how they let matchers be specified.
+
+            EXAMPLE
+            ..........................................................
+            function findMatches (array,matcher) {
+              matcher = Uize.resolveMatcher (matcher);
+              var matches = [];
+              for (var elementNo = -1; ++elementNo &lt; array.length;) {
+                var elementValue = array [elementNo];
+                if (matcher (elementValue)) {
+                  matches.push (elementValue);
+                }
+              }
+              return matches;
+            }
+            ..........................................................
+
+            In the above example, we are implementing a simple function to find the elements in an array that match a specified matcher and return those matches in a new array. The second argument of the function is a matcher. To allow users of the function to specify a matcher using an expression string short form, we resolve the value of the =matcher= argument using the =Uize.resolveMatcher= method and re-assign the resolved value to the =matcher= argument. Once resolved, we can now count on the matcher being a function and we can call it in the loop that iterates over the source array. Now a caller can call this function with statements like...
+
+            .................................................................
+            findMatches (possibleNumbers,'typeof value == "number"');
+            findMatches (possibleIdentifiers,/^[_\$a-zA-Z][_\$a-zA-Z0-9]*$/);
+            .................................................................
+
             How Different Matcher Types are Resolved
+              The =Uize.resolveMatcher= method supports numerous different ways of specifying a matcher.
+
               When a Function Type Matcher is Specified
-                document...
+                When a function is specified for the =matcherANYTYPE= parameter, that function is simply returned.
+
+                The =Uize.resolveMatcher= method is used to resolve a value that could be one of several different types to something that's guaranteed to be a function. In the case where the matcher is already a function, it is considered to already be resolved and is returned as is.
 
               When a String Type Matcher is Specified
-                document...
+                When a string value is specified for the =matcherANYTYPE= parameter, a function is produced using the specified string matcher expression as the function's body, and accepting the two arguments =value= and =key=.
+
+                For example, the matcher expression string ='typeof value &amp;#61;&amp;#61; "number"'= would be resolved to the function =function (value,key) {return typeof value &amp;#61;&amp;#61; 'number'}=. In another example, the matcher expression string ='/name/i.test (key) &amp;&amp; /^c/i.test (value)'= would be resolved to the function =function (value,key) {return /name/i.test (key) &amp;&amp; /^c/i.test (value)}=.
+
+                The =Uize.resolveMatcher= method imposes the argument names =value= and =key= for the two arguments of the function that it produces from a matcher exprression string, so such an expression must use these reserved variable names to access the value and optional key that will be passed in by the caller of the resolved matcher.
 
               When a Regular Expression Matcher is Specified
-                document...
+                When a regular expression is specified for the =matcherANYTYPE= parameter, a function is produced using the regular expression to test the value of its first argument for a match, returning a boolean value.
+
+                EXAMPLE
+                .............................................................................
+                var isValidIdentifier = Uize.resolveMatcher (/^[_\$a-zA-Z][_\$a-zA-Z0-9]*$/);
+
+                alert (isValidIdentifier (''));         // alerts "false"
+                alert (isValidIdentifier ('fooVar'));   // alerts "true"
+                alert (isValidIdentifier ('$foo'));     // alerts "true"
+                alert (isValidIdentifier ('3rdVar'));   // alerts "false"
+                alert (isValidIdentifier ('_4thVar'));  // alerts "true"
+                .............................................................................
 
               When a Nully Matcher is Specified
-                document...
+                When a nully value (ie. the value =null= or =undefined=) is specified for the =matcherANYTYPE= parameter, a function is produced that always returns the value =true=.
+
+                This behavior is useful for methods that want to offer an optional matcher and wish no filtering (ie. always matching) to be performed when the optional argument is not specified, or if the values =null= or =undefined= are explicitly specified.
 
               When a Boolean Type Matcher is Specified
-                document...
+                When a boolean value is specified for the =matcherANYTYPE= parameter, a function is produced that simply returns that boolean value, regardless of the argument values.
 
-              When Other Matcher Types are Specified
-                document...
+                This behavior can be useful in situations where you wish to force the matching result to be always true or false. In such cases, specifying simply a boolean value for the matcher is a convenient shorthand.
+
+            NOTES
+            - see also the related =Uize.resolveTransformer= static method
       */
     };
 
