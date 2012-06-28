@@ -789,9 +789,12 @@ Uize.module ({
           margin:1
         },
         _getStyle = _package.getStyle = function (_node,_property) {
-          var _value = '';
-          if (typeof _property == _typeString) {
-            if (_node) {
+          var
+            _typeofPropertyIsString = typeof _property == _typeString,
+            _value = _typeofPropertyIsString ? '' : {}
+          ;
+          if (_node = _getById (_node)) {
+            if (_typeofPropertyIsString) {
               var
                 _opacityInIe = _isIe &amp;&amp; _property == 'opacity',
                 _documentDefaultView = document.defaultView,
@@ -827,13 +830,11 @@ Uize.module ({
                 var _match = (_value || '').match (/alpha\s*\(\s*opacity\s*=([^\)]*)\)/i);
                 _value = _match ? _match [1] / 100 : 1;
               }
-            }
-          } else {
-            _value = {};
-            if (_node)
+            } else {
               for (_property in _property)
                 _value [_property] = _getStyle (_node,_property)
               ;
+            }
           }
           return _value;
           /*?
