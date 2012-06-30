@@ -3,8 +3,6 @@
 		UizeDotCom.Templates.Footer.js.jst
 */
 
-/*ScruncherSettings Mappings="=" LineCompacting="TRUE"*/
-
 Uize.module ({
 	name:'UizeDotCom.Templates.Footer',
 	builder:function () {

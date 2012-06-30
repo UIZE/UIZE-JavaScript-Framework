@@ -3,8 +3,6 @@
 		UizeDotCom.Templates.IndexPage.js.jst
 */
 
-/*ScruncherSettings Mappings="=" LineCompacting="TRUE"*/
-
 Uize.module ({
 	name:'UizeDotCom.Templates.IndexPage',
 	required:[

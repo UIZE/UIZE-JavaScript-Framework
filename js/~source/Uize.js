@@ -1,7 +1,7 @@
 /*______________
 |       ______  |   U I Z E    J A V A S C R I P T    F R A M E W O R K
 |     /      /  |   ---------------------------------------------------
-|    /    O /   |    MODULE : Uize Base Class
+|    /    O /   |    MODULE : Uize Base Module
 |   /    / /    |
 |  /    / /  /| |    ONLINE : http://www.uize.com
 | /____/ /__/_| | COPYRIGHT : (c)2003-2012 UIZE
@@ -9,7 +9,7 @@
 |_______________|             http://www.uize.com/license.html
 */
 
-/*ScruncherSettings Mappings="" LineCompacting="TRUE"*/
+/*ScruncherSettings Mappings=""*/
 
 /* Module Meta Data
 	type: Package
@@ -2197,9 +2197,9 @@
 						................................................................
 
 						`Create a Bi-directional Lookup`
-						..........................................................................
-						reverseLookupOBJ = Uize.reverseLookup (reverseLookupOBJ,reverseLookupOBJ);
-						..........................................................................
+						............................................................
+						reverseLookupOBJ = Uize.reverseLookup (lookupOBJ,lookupOBJ);
+						............................................................
 
 						Create a Reverse Lookup From an Object
 							In the most typical usage of the =Uize.reverseLookup= method, a reverse lookup object can be created from an object.
@@ -2327,9 +2327,9 @@
 							By specifying the source hash object as also the target for the reverse lookup creation, a bi-directional lookup object can be created.
 
 							SYNTAX
-							..........................................................................
-							reverseLookupOBJ = Uize.reverseLookup (reverseLookupOBJ,reverseLookupOBJ);
-							..........................................................................
+							............................................................
+							reverseLookupOBJ = Uize.reverseLookup (lookupOBJ,lookupOBJ);
+							............................................................
 
 							EXAMPLE
 							......................................................................................

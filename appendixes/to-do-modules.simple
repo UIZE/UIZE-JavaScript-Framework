@@ -635,6 +635,13 @@ Uize.Class
 			);
 
 			myWidget.wire (
+				Uize.Class.virtualEvent ('whenever',function (theme) {return theme == 'bottle'}),
+				function () {
+					// do stuff whenever condition is met
+				}
+			);
+
+			myWidget.wire (
 				'whenever("theme => theme == \'bottle\'")',
 				function () {
 					// do stuff whenever condition is met
@@ -659,6 +666,107 @@ Uize.Class
 				}
 			);
 			..........................................................
+
+			IMPLEMENTATION
+			.........................................................................
+			function _resolveDerivation (_derivation) {
+				function _getDeterminantsFromListStr (_determinantsStr) {
+					return _determinantsStr.replace (/\s+/g,'').split (',');
+				}
+				if (typeof _derivation == 'string') {
+					var _separatorPos = _derivation.indexOf (':');
+					if (_separatorPos > -1) {
+						var _determinantsStr = _derivation.slice (0,_separatorPos);
+						_derivation = {
+							_determinants:_getDeterminantsFromListStr (_determinantsStr),
+							_determiner:eval (
+								'(function d (' + _determinantsStr + ') {' +
+									'return ' + _derivation.slice (_separatorPos + 1) +
+								'})'
+							)
+						};
+					} else {
+						_derivation = {
+							_determinants:[_derivation],
+							_determiner:new Function (_derivation,'return ' + _derivation)
+						};
+					}
+				} else if (Uize.isFunction (_derivation)) {
+					_derivation = {
+						_determinants:_getDeterminantsFromListStr ((_derivation + '').match (/\(([^\)]*)\)/) [1]),
+						_determiner:_derivation
+					};
+				} else if (Uize.isArray (_derivation)) {
+					_derivation = {
+						_determinants:_derivation,
+						_determiner:eval (
+							'(function d (' + _derivation.join (',') + ') {' +
+								'return ' + _derivation.join (' && ') +
+							'})'
+						)
+					};
+				}
+				return _derivation;
+			}
+
+			_classPrototype.once = function (_condition,_handler) {
+				var
+					_this = this,
+					_propertyValue
+				;
+				if (
+					typeof _condition == 'string' &&
+					(_condition in _this._propertyProfilesByPublicNames || _condition.indexOf (':') < 0) &&
+					(_propertyValue = _this.get (_condition))
+				) {
+					_handler (_propertyValue);
+				} else {
+					var
+						_derivation = _resolveDerivation (_condiiton),
+						_properties = _derivation._determinants,
+						_determiner = _derivation._determiner,
+						_propertiesLength = _properties.length,
+						_propertyValues = []
+					;
+					function _isConditionMet () {
+						for (var _propertyNo = _propertiesLength; --_propertyNo >= 0;)
+							_propertyValues [_propertyNo] = _this.get (_properties [_propertyNo])
+						;
+						var _conditionMet = _determiner.apply (0,_propertyValues);
+						_conditionMet && _handler.apply (0,_propertyValues);
+						return _conditionMet;
+					}
+					if (!_isConditionMet ()) {
+						var _wirings = {};
+						function _checkIfConditionMet () {
+							_isConditionMet () && _this.unwire (_wirings);
+						}
+						for (var _propertyNo = -1; ++_propertyNo < _propertiesLength;)
+							_wirings ['Changed:' + _properties [_propertyNo]] = _checkIfConditionMet
+						;
+						_this.wire (_wirings);
+					}
+				}
+			};
+			.........................................................................
+
+		The next Virtual Event
+			EXAMPLES
+			..................................................
+			myWidget.wire (
+				'next("Click")',
+				function () {
+					// do something for only the very next click
+				}
+			);
+
+			myWidget.onNext(
+				'Click',
+				function () {
+					// do something for only the very next click
+				}
+			);
+			..................................................
 
 	Properties Expressions
 		SYNTAX
@@ -732,7 +840,7 @@ Uize.Class
 			Single Level Derived Property Batching
 				With this approach, values for all directly affected derived set-get properties are set in a batch set that occurs before =onChange= handlers are executed for the set-get properties being explicitly set.
 
-			Using onChange Handler Merchanism
+			Using onChange Handler Mechanism
 				With this approach, when a derived set-get property is registed, an onChange handler is registered with any property from which the derived property is derived.
 
 				Advantages

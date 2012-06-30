@@ -16,7 +16,7 @@
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
-/*ScruncherSettings Mappings="=e" LineCompacting="TRUE"*/
+/*ScruncherSettings Mappings="=e"*/
 
 Uize.module ({
 	name:'UizeDotCom.Page.Example',

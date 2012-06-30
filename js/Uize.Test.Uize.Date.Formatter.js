@@ -1,5 +1,5 @@
 /*
-	UIZE JAVASCRIPT FRAMEWORK 2012-03-16
+	UIZE JAVASCRIPT FRAMEWORK 2012-06-30
 
 	http://www.uize.com/reference/Uize.Test.Uize.Date.Formatter.html
 	Available under MIT License or GNU General Public License -- http://www.uize.com/license.html

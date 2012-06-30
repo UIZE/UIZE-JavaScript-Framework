@@ -9,8 +9,6 @@
 |_______________|             http://www.uize.com/license.html
 */
 
-/*ScruncherSettings Mappings="=" LineCompacting="TRUE"*/
-
 /* Module Meta Data
 	type: Template
 	importance: 1

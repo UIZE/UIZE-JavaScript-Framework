@@ -3,8 +3,6 @@
 		UizeDotCom.Templates.Dialog.Picker.Date.js.jst
 */
 
-/*ScruncherSettings Mappings="=" LineCompacting="TRUE"*/
-
 Uize.module ({
 	name:'UizeDotCom.Templates.Dialog.Picker.Date',
 	required:[

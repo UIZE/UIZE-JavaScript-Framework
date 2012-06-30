@@ -3,8 +3,6 @@
 		Uize.Templates.SevenSegmentDisplayDimsCss.js.jst
 */
 
-/*ScruncherSettings Mappings="=" LineCompacting="TRUE"*/
-
 Uize.module ({
 	name:'Uize.Templates.SevenSegmentDisplayDimsCss',
 	builder:function () {

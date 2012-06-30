@@ -3,8 +3,6 @@
 		Uize.Templates.ColorInfo.js.jst
 */
 
-/*ScruncherSettings Mappings="=" LineCompacting="TRUE"*/
-
 Uize.module ({
 	name:'Uize.Templates.ColorInfo',
 	builder:function () {

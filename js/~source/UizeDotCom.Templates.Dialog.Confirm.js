@@ -3,8 +3,6 @@
 		UizeDotCom.Templates.Dialog.Confirm.js.jst
 */
 
-/*ScruncherSettings Mappings="=" LineCompacting="TRUE"*/
-
 Uize.module ({
 	name:'UizeDotCom.Templates.Dialog.Confirm',
 	required:[

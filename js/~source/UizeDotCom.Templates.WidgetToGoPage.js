@@ -3,8 +3,6 @@
 		UizeDotCom.Templates.WidgetToGoPage.js.jst
 */
 
-/*ScruncherSettings Mappings="=" LineCompacting="TRUE"*/
-
 Uize.module ({
 	name:'UizeDotCom.Templates.WidgetToGoPage',
 	required:[

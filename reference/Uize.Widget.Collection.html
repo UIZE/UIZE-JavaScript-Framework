@@ -198,11 +198,12 @@
 					<li><a href="#9_3" title="Inherited from Uize.Widget.">9.3. Uize.Widget.Collection.getBlankImageUrl</a></li>
 					<li><a href="#9_4" title="Inherited from Uize.Class.">9.4. Uize.Widget.Collection.registerProperties</a></li>
 					<li><a href="#9_5" title="Inherited from Uize.Class.">9.5. Uize.Widget.Collection.set</a></li>
-					<li><a href="#9_6" title="Inherited from Uize.Widget.">9.6. Uize.Widget.Collection.spawn</a></li>
-					<li><a href="#9_7" title="Inherited from Uize.Class.">9.7. Uize.Widget.Collection.subclass</a></li>
-					<li><a href="#9_8" title="Inherited from Uize.Class.">9.8. Uize.Widget.Collection.toggle</a></li>
-					<li><a href="#9_9" title="Inherited from Uize.Class.">9.9. Uize.Widget.Collection.unwire</a></li>
-					<li><a href="#9_10" title="Inherited from Uize.Class.">9.10. Uize.Widget.Collection.wire</a></li>
+					<li><a href="#9_6" title="Inherited from Uize.Class.">9.6. Uize.Widget.Collection.singleton</a></li>
+					<li><a href="#9_7" title="Inherited from Uize.Widget.">9.7. Uize.Widget.Collection.spawn</a></li>
+					<li><a href="#9_8" title="Inherited from Uize.Class.">9.8. Uize.Widget.Collection.subclass</a></li>
+					<li><a href="#9_9" title="Inherited from Uize.Class.">9.9. Uize.Widget.Collection.toggle</a></li>
+					<li><a href="#9_10" title="Inherited from Uize.Class.">9.10. Uize.Widget.Collection.unwire</a></li>
+					<li><a href="#9_11" title="Inherited from Uize.Class.">9.11. Uize.Widget.Collection.wire</a></li>
 				</ul>
 			</li>
 			<li><a href="#10">10. Static Properties</a>
@@ -376,7 +377,7 @@
 				
 				<p><span class="allCaps">STATIC METHODS</span></p>
 				
-				<p><code><a href="#9_1">Uize.Widget.Collection.fire</a></code> | <code><a href="#9_2">Uize.Widget.Collection.get</a></code> | <code><a href="#9_3">Uize.Widget.Collection.getBlankImageUrl</a></code> | <code><a href="#9_4">Uize.Widget.Collection.registerProperties</a></code> | <code><a href="#9_5">Uize.Widget.Collection.set</a></code> | <code><a href="#9_6">Uize.Widget.Collection.spawn</a></code> | <code><a href="#9_7">Uize.Widget.Collection.subclass</a></code> | <code><a href="#9_8">Uize.Widget.Collection.toggle</a></code> | <code><a href="#9_9">Uize.Widget.Collection.unwire</a></code> | <code><a href="#9_10">Uize.Widget.Collection.wire</a></code></p>
+				<p><code><a href="#9_1">Uize.Widget.Collection.fire</a></code> | <code><a href="#9_2">Uize.Widget.Collection.get</a></code> | <code><a href="#9_3">Uize.Widget.Collection.getBlankImageUrl</a></code> | <code><a href="#9_4">Uize.Widget.Collection.registerProperties</a></code> | <code><a href="#9_5">Uize.Widget.Collection.set</a></code> | <code><a href="#9_6">Uize.Widget.Collection.singleton</a></code> | <code><a href="#9_7">Uize.Widget.Collection.spawn</a></code> | <code><a href="#9_8">Uize.Widget.Collection.subclass</a></code> | <code><a href="#9_9">Uize.Widget.Collection.toggle</a></code> | <code><a href="#9_10">Uize.Widget.Collection.unwire</a></code> | <code><a href="#9_11">Uize.Widget.Collection.wire</a></code></p>
 				
 				<p><span class="allCaps">STATIC PROPERTIES</span></p>
 				
@@ -2250,20 +2251,7 @@ var productIds = myCollection.getPropertyForItems ('productId',myCollection.item
 		</div>
 		
 		<a name="9_6"></a>
-		<h2 class="heading2" title="9. Static Methods -&gt; 9.6. Uize.Widget.Collection.spawn"><span class="headingNumber"><a href="#9" title="9. Static Methods">9</a>.<a href="#9_6" title="9. Static Methods -&gt; 9.6. Uize.Widget.Collection.spawn">6</a>. </span>Uize.Widget.Collection.spawn</h2>
-		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
-			
-			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
-			
-			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
-			</table>
-		</div>
-		
-		<a name="9_7"></a>
-		<h2 class="heading2" title="9. Static Methods -&gt; 9.7. Uize.Widget.Collection.subclass"><span class="headingNumber"><a href="#9" title="9. Static Methods">9</a>.<a href="#9_7" title="9. Static Methods -&gt; 9.7. Uize.Widget.Collection.subclass">7</a>. </span>Uize.Widget.Collection.subclass</h2>
+		<h2 class="heading2" title="9. Static Methods -&gt; 9.6. Uize.Widget.Collection.singleton"><span class="headingNumber"><a href="#9" title="9. Static Methods">9</a>.<a href="#9_6" title="9. Static Methods -&gt; 9.6. Uize.Widget.Collection.singleton">6</a>. </span>Uize.Widget.Collection.singleton</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
@@ -2275,8 +2263,21 @@ var productIds = myCollection.getPropertyForItems ('productId',myCollection.item
 			</table>
 		</div>
 		
+		<a name="9_7"></a>
+		<h2 class="heading2" title="9. Static Methods -&gt; 9.7. Uize.Widget.Collection.spawn"><span class="headingNumber"><a href="#9" title="9. Static Methods">9</a>.<a href="#9_7" title="9. Static Methods -&gt; 9.7. Uize.Widget.Collection.spawn">7</a>. </span>Uize.Widget.Collection.spawn</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
+			</table>
+		</div>
+		
 		<a name="9_8"></a>
-		<h2 class="heading2" title="9. Static Methods -&gt; 9.8. Uize.Widget.Collection.toggle"><span class="headingNumber"><a href="#9" title="9. Static Methods">9</a>.<a href="#9_8" title="9. Static Methods -&gt; 9.8. Uize.Widget.Collection.toggle">8</a>. </span>Uize.Widget.Collection.toggle</h2>
+		<h2 class="heading2" title="9. Static Methods -&gt; 9.8. Uize.Widget.Collection.subclass"><span class="headingNumber"><a href="#9" title="9. Static Methods">9</a>.<a href="#9_8" title="9. Static Methods -&gt; 9.8. Uize.Widget.Collection.subclass">8</a>. </span>Uize.Widget.Collection.subclass</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
@@ -2289,7 +2290,7 @@ var productIds = myCollection.getPropertyForItems ('productId',myCollection.item
 		</div>
 		
 		<a name="9_9"></a>
-		<h2 class="heading2" title="9. Static Methods -&gt; 9.9. Uize.Widget.Collection.unwire"><span class="headingNumber"><a href="#9" title="9. Static Methods">9</a>.<a href="#9_9" title="9. Static Methods -&gt; 9.9. Uize.Widget.Collection.unwire">9</a>. </span>Uize.Widget.Collection.unwire</h2>
+		<h2 class="heading2" title="9. Static Methods -&gt; 9.9. Uize.Widget.Collection.toggle"><span class="headingNumber"><a href="#9" title="9. Static Methods">9</a>.<a href="#9_9" title="9. Static Methods -&gt; 9.9. Uize.Widget.Collection.toggle">9</a>. </span>Uize.Widget.Collection.toggle</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
@@ -2302,7 +2303,20 @@ var productIds = myCollection.getPropertyForItems ('productId',myCollection.item
 		</div>
 		
 		<a name="9_10"></a>
-		<h2 class="heading2" title="9. Static Methods -&gt; 9.10. Uize.Widget.Collection.wire"><span class="headingNumber"><a href="#9" title="9. Static Methods">9</a>.<a href="#9_10" title="9. Static Methods -&gt; 9.10. Uize.Widget.Collection.wire">10</a>. </span>Uize.Widget.Collection.wire</h2>
+		<h2 class="heading2" title="9. Static Methods -&gt; 9.10. Uize.Widget.Collection.unwire"><span class="headingNumber"><a href="#9" title="9. Static Methods">9</a>.<a href="#9_10" title="9. Static Methods -&gt; 9.10. Uize.Widget.Collection.unwire">10</a>. </span>Uize.Widget.Collection.unwire</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
+			</table>
+		</div>
+		
+		<a name="9_11"></a>
+		<h2 class="heading2" title="9. Static Methods -&gt; 9.11. Uize.Widget.Collection.wire"><span class="headingNumber"><a href="#9" title="9. Static Methods">9</a>.<a href="#9_11" title="9. Static Methods -&gt; 9.11. Uize.Widget.Collection.wire">11</a>. </span>Uize.Widget.Collection.wire</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			

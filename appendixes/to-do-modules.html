@@ -172,6 +172,7 @@
 						<ul>
 							<li><a href="#3_1_1" title="EXAMPLES">3.1.1. The whenever Instance Method</a></li>
 							<li><a href="#3_1_2" title="EXAMPLES">3.1.2. The once Instance Method</a></li>
+							<li><a href="#3_1_3" title="EXAMPLES">3.1.3. The next Virtual Event</a></li>
 						</ul>
 					</li>
 					<li><a href="#3_2" title="SYNTAX">3.2. Properties Expressions</a></li>
@@ -191,7 +192,7 @@
 										</ul>
 									</li>
 									<li><a href="#3_3_2_2" title="With this approach, values for all directly affected derived set-get properties are set in a batch set that occurs before onChange handlers are executed for the set-get properties being explicitly set.">3.3.2.2. Single Level Derived Property Batching</a></li>
-									<li><a href="#3_3_2_3" title="With this approach, when a derived set-get property is registed, an onChange handler is registered with any property from which the derived property is derived.">3.3.2.3. Using onChange Handler Merchanism</a>
+									<li><a href="#3_3_2_3" title="With this approach, when a derived set-get property is registed, an onChange handler is registered with any property from which the derived property is derived.">3.3.2.3. Using onChange Handler Mechanism</a>
 										<ul>
 											<li><a href="#3_3_2_3_1" title="- uses the existing optimization built into the onChange handlers mechanism">3.3.2.3.1. Advantages</a></li>
 											<li><a href="#3_3_2_3_2" title="- involves a separate set for each derived set-get property whose value changes">3.3.2.3.2. Disadvantages</a></li>
@@ -2141,6 +2142,13 @@ myWidget.wire (
 );
 
 myWidget.wire (
+  Uize.Class.virtualEvent ('whenever',function (theme) {return theme == 'bottle'}),
+  function () {
+    // do stuff whenever condition is met
+  }
+);
+
+myWidget.wire (
   'whenever("theme =&gt; theme == \'bottle\'")',
   function () {
     // do stuff whenever condition is met
@@ -2166,6 +2174,112 @@ myWidget.once (
   'totalSelected =&gt; totalSelected  &gt; 5',
   function () {
     // do stuff once condition is met for the first time
+  }
+);
+</pre>
+				
+				<p><span class="allCaps">IMPLEMENTATION</span></p>
+				
+				
+<pre class="sample-code">function _resolveDerivation (_derivation) {
+  function _getDeterminantsFromListStr (_determinantsStr) {
+    return _determinantsStr.replace (/\s+/g,'').split (',');
+  }
+  if (typeof _derivation == 'string') {
+    var _separatorPos = _derivation.indexOf (':');
+    if (_separatorPos &gt; -1) {
+      var _determinantsStr = _derivation.slice (0,_separatorPos);
+      _derivation = {
+        _determinants:_getDeterminantsFromListStr (_determinantsStr),
+        _determiner:eval (
+          '(function d (' + _determinantsStr + ') {' +
+            'return ' + _derivation.slice (_separatorPos + 1) +
+          '})'
+        )
+      };
+    } else {
+      _derivation = {
+        _determinants:[_derivation],
+        _determiner:new Function (_derivation,'return ' + _derivation)
+      };
+    }
+  } else if (Uize.isFunction (_derivation)) {
+    _derivation = {
+      _determinants:_getDeterminantsFromListStr ((_derivation + '').match (/\(([^\)]*)\)/) [1]),
+      _determiner:_derivation
+    };
+  } else if (Uize.isArray (_derivation)) {
+    _derivation = {
+      _determinants:_derivation,
+      _determiner:eval (
+        '(function d (' + _derivation.join (',') + ') {' +
+          'return ' + _derivation.join (' &amp;&amp; ') +
+        '})'
+      )
+    };
+  }
+  return _derivation;
+}
+
+_classPrototype.once = function (_condition,_handler) {
+  var
+    _this = this,
+    _propertyValue
+  ;
+  if (
+    typeof _condition == 'string' &amp;&amp;
+    (_condition in _this._propertyProfilesByPublicNames || _condition.indexOf (':') &lt; 0) &amp;&amp;
+    (_propertyValue = _this.get (_condition))
+  ) {
+    _handler (_propertyValue);
+  } else {
+    var
+      _derivation = _resolveDerivation (_condiiton),
+      _properties = _derivation._determinants,
+      _determiner = _derivation._determiner,
+      _propertiesLength = _properties.length,
+      _propertyValues = []
+    ;
+    function _isConditionMet () {
+      for (var _propertyNo = _propertiesLength; --_propertyNo &gt;= 0;)
+        _propertyValues [_propertyNo] = _this.get (_properties [_propertyNo])
+      ;
+      var _conditionMet = _determiner.apply (0,_propertyValues);
+      _conditionMet &amp;&amp; _handler.apply (0,_propertyValues);
+      return _conditionMet;
+    }
+    if (!_isConditionMet ()) {
+      var _wirings = {};
+      function _checkIfConditionMet () {
+        _isConditionMet () &amp;&amp; _this.unwire (_wirings);
+      }
+      for (var _propertyNo = -1; ++_propertyNo &lt; _propertiesLength;)
+        _wirings ['Changed:' + _properties [_propertyNo]] = _checkIfConditionMet
+      ;
+      _this.wire (_wirings);
+    }
+  }
+};
+</pre>
+			</div>
+			
+			<a name="3_1_3"></a>
+			<h3 class="heading3" title="3. Uize.Class -&gt; 3.1. Conditions -&gt; 3.1.3. The next Virtual Event"><span class="headingNumber"><a href="#3" title="3. Uize.Class">3</a>.<a href="#3_1" title="3. Uize.Class -&gt; 3.1. Conditions">1</a>.<a href="#3_1_3" title="3. Uize.Class -&gt; 3.1. Conditions -&gt; 3.1.3. The next Virtual Event">3</a>. </span>The next Virtual Event</h3>
+			<div class="contents3">
+				<p><span class="allCaps">EXAMPLES</span></p>
+				
+				
+<pre class="sample-code">myWidget.wire (
+  'next("Click")',
+  function () {
+    // do something for only the very next click
+  }
+);
+
+myWidget.onNext(
+  'Click',
+  function () {
+    // do something for only the very next click
   }
 );
 </pre>
@@ -2274,12 +2388,12 @@ myWidget.once (
 				</div>
 				
 				<a name="3_3_2_3"></a>
-				<h4 class="heading4" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.3. Using onChange Handler Merchanism"><span class="headingNumber"><a href="#3" title="3. Uize.Class">3</a>.<a href="#3_3" title="3. Uize.Class -&gt; 3.3. Derived Properties">3</a>.<a href="#3_3_2" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches">2</a>.<a href="#3_3_2_3" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.3. Using onChange Handler Merchanism">3</a>. </span>Using onChange Handler Merchanism</h4>
+				<h4 class="heading4" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.3. Using onChange Handler Mechanism"><span class="headingNumber"><a href="#3" title="3. Uize.Class">3</a>.<a href="#3_3" title="3. Uize.Class -&gt; 3.3. Derived Properties">3</a>.<a href="#3_3_2" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches">2</a>.<a href="#3_3_2_3" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.3. Using onChange Handler Mechanism">3</a>. </span>Using onChange Handler Mechanism</h4>
 				<div class="contents4">
 					<p>With this approach, when a derived set-get property is registed, an onChange handler is registered with any property from which the derived property is derived.</p>
 					
 					<a name="3_3_2_3_1"></a>
-					<h5 class="heading5" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.3. Using onChange Handler Merchanism -&gt; 3.3.2.3.1. Advantages"><span class="headingNumber"><a href="#3" title="3. Uize.Class">3</a>.<a href="#3_3" title="3. Uize.Class -&gt; 3.3. Derived Properties">3</a>.<a href="#3_3_2" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches">2</a>.<a href="#3_3_2_3" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.3. Using onChange Handler Merchanism">3</a>.<a href="#3_3_2_3_1" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.3. Using onChange Handler Merchanism -&gt; 3.3.2.3.1. Advantages">1</a>. </span>Advantages</h5>
+					<h5 class="heading5" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.3. Using onChange Handler Mechanism -&gt; 3.3.2.3.1. Advantages"><span class="headingNumber"><a href="#3" title="3. Uize.Class">3</a>.<a href="#3_3" title="3. Uize.Class -&gt; 3.3. Derived Properties">3</a>.<a href="#3_3_2" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches">2</a>.<a href="#3_3_2_3" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.3. Using onChange Handler Mechanism">3</a>.<a href="#3_3_2_3_1" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.3. Using onChange Handler Mechanism -&gt; 3.3.2.3.1. Advantages">1</a>. </span>Advantages</h5>
 					<div class="contents5">
 						<table class="list">
 						<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>uses the existing optimization built into the <code>onChange</code> handlers mechanism</td></tr>
@@ -2288,7 +2402,7 @@ myWidget.once (
 					</div>
 					
 					<a name="3_3_2_3_2"></a>
-					<h5 class="heading5" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.3. Using onChange Handler Merchanism -&gt; 3.3.2.3.2. Disadvantages"><span class="headingNumber"><a href="#3" title="3. Uize.Class">3</a>.<a href="#3_3" title="3. Uize.Class -&gt; 3.3. Derived Properties">3</a>.<a href="#3_3_2" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches">2</a>.<a href="#3_3_2_3" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.3. Using onChange Handler Merchanism">3</a>.<a href="#3_3_2_3_2" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.3. Using onChange Handler Merchanism -&gt; 3.3.2.3.2. Disadvantages">2</a>. </span>Disadvantages</h5>
+					<h5 class="heading5" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.3. Using onChange Handler Mechanism -&gt; 3.3.2.3.2. Disadvantages"><span class="headingNumber"><a href="#3" title="3. Uize.Class">3</a>.<a href="#3_3" title="3. Uize.Class -&gt; 3.3. Derived Properties">3</a>.<a href="#3_3_2" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches">2</a>.<a href="#3_3_2_3" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.3. Using onChange Handler Mechanism">3</a>.<a href="#3_3_2_3_2" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.3. Using onChange Handler Mechanism -&gt; 3.3.2.3.2. Disadvantages">2</a>. </span>Disadvantages</h5>
 					<div class="contents5">
 						<table class="list">
 						<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>involves a separate set for each derived set-get property whose value changes</td></tr>
@@ -2297,10 +2411,10 @@ myWidget.once (
 					</div>
 					
 					<a name="3_3_2_3_3"></a>
-					<h5 class="heading5" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.3. Using onChange Handler Merchanism -&gt; 3.3.2.3.3. Issues to Deal With"><span class="headingNumber"><a href="#3" title="3. Uize.Class">3</a>.<a href="#3_3" title="3. Uize.Class -&gt; 3.3. Derived Properties">3</a>.<a href="#3_3_2" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches">2</a>.<a href="#3_3_2_3" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.3. Using onChange Handler Merchanism">3</a>.<a href="#3_3_2_3_3" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.3. Using onChange Handler Merchanism -&gt; 3.3.2.3.3. Issues to Deal With">3</a>. </span>Issues to Deal With</h5>
+					<h5 class="heading5" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.3. Using onChange Handler Mechanism -&gt; 3.3.2.3.3. Issues to Deal With"><span class="headingNumber"><a href="#3" title="3. Uize.Class">3</a>.<a href="#3_3" title="3. Uize.Class -&gt; 3.3. Derived Properties">3</a>.<a href="#3_3_2" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches">2</a>.<a href="#3_3_2_3" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.3. Using onChange Handler Mechanism">3</a>.<a href="#3_3_2_3_3" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.3. Using onChange Handler Mechanism -&gt; 3.3.2.3.3. Issues to Deal With">3</a>. </span>Issues to Deal With</h5>
 					<div class="contents5">
 						<a name="3_3_2_3_3_1"></a>
-						<h5 class="heading6" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.3. Using onChange Handler Merchanism -&gt; 3.3.2.3.3. Issues to Deal With -&gt; 3.3.2.3.3.1. Re-registering a Non-derived Set-get Property"><span class="headingNumber"><a href="#3" title="3. Uize.Class">3</a>.<a href="#3_3" title="3. Uize.Class -&gt; 3.3. Derived Properties">3</a>.<a href="#3_3_2" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches">2</a>.<a href="#3_3_2_3" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.3. Using onChange Handler Merchanism">3</a>.<a href="#3_3_2_3_3" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.3. Using onChange Handler Merchanism -&gt; 3.3.2.3.3. Issues to Deal With">3</a>.<a href="#3_3_2_3_3_1" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.3. Using onChange Handler Merchanism -&gt; 3.3.2.3.3. Issues to Deal With -&gt; 3.3.2.3.3.1. Re-registering a Non-derived Set-get Property">1</a>. </span>Re-registering a Non-derived Set-get Property</h5>
+						<h5 class="heading6" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.3. Using onChange Handler Mechanism -&gt; 3.3.2.3.3. Issues to Deal With -&gt; 3.3.2.3.3.1. Re-registering a Non-derived Set-get Property"><span class="headingNumber"><a href="#3" title="3. Uize.Class">3</a>.<a href="#3_3" title="3. Uize.Class -&gt; 3.3. Derived Properties">3</a>.<a href="#3_3_2" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches">2</a>.<a href="#3_3_2_3" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.3. Using onChange Handler Mechanism">3</a>.<a href="#3_3_2_3_3" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.3. Using onChange Handler Mechanism -&gt; 3.3.2.3.3. Issues to Deal With">3</a>.<a href="#3_3_2_3_3_1" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.3. Using onChange Handler Mechanism -&gt; 3.3.2.3.3. Issues to Deal With -&gt; 3.3.2.3.3.1. Re-registering a Non-derived Set-get Property">1</a>. </span>Re-registering a Non-derived Set-get Property</h5>
 						<div class="contents6">
 							<p>How does one deal with re-registering a set-get property that affects a derived set-get property?</p>
 							
@@ -2308,7 +2422,7 @@ myWidget.once (
 						</div>
 						
 						<a name="3_3_2_3_3_2"></a>
-						<h5 class="heading6" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.3. Using onChange Handler Merchanism -&gt; 3.3.2.3.3. Issues to Deal With -&gt; 3.3.2.3.3.2. Re-registering a Derived Set-get Property"><span class="headingNumber"><a href="#3" title="3. Uize.Class">3</a>.<a href="#3_3" title="3. Uize.Class -&gt; 3.3. Derived Properties">3</a>.<a href="#3_3_2" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches">2</a>.<a href="#3_3_2_3" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.3. Using onChange Handler Merchanism">3</a>.<a href="#3_3_2_3_3" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.3. Using onChange Handler Merchanism -&gt; 3.3.2.3.3. Issues to Deal With">3</a>.<a href="#3_3_2_3_3_2" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.3. Using onChange Handler Merchanism -&gt; 3.3.2.3.3. Issues to Deal With -&gt; 3.3.2.3.3.2. Re-registering a Derived Set-get Property">2</a>. </span>Re-registering a Derived Set-get Property</h5>
+						<h5 class="heading6" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.3. Using onChange Handler Mechanism -&gt; 3.3.2.3.3. Issues to Deal With -&gt; 3.3.2.3.3.2. Re-registering a Derived Set-get Property"><span class="headingNumber"><a href="#3" title="3. Uize.Class">3</a>.<a href="#3_3" title="3. Uize.Class -&gt; 3.3. Derived Properties">3</a>.<a href="#3_3_2" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches">2</a>.<a href="#3_3_2_3" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.3. Using onChange Handler Mechanism">3</a>.<a href="#3_3_2_3_3" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.3. Using onChange Handler Mechanism -&gt; 3.3.2.3.3. Issues to Deal With">3</a>.<a href="#3_3_2_3_3_2" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.3. Using onChange Handler Mechanism -&gt; 3.3.2.3.3. Issues to Deal With -&gt; 3.3.2.3.3.2. Re-registering a Derived Set-get Property">2</a>. </span>Re-registering a Derived Set-get Property</h5>
 						<div class="contents6">
 							<p>How does one deal with re-registering a derived set-get property, where the new profile for the derived property defines a different relationship properties from which it is derived?</p>
 						</div>

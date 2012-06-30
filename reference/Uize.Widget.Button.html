@@ -164,11 +164,12 @@
 					<li><a href="#8_4" title="Inherited from Uize.Widget.">8.4. Uize.Widget.Button.getBlankImageUrl</a></li>
 					<li><a href="#8_5" title="Inherited from Uize.Class.">8.5. Uize.Widget.Button.registerProperties</a></li>
 					<li><a href="#8_6" title="Inherited from Uize.Class.">8.6. Uize.Widget.Button.set</a></li>
-					<li><a href="#8_7" title="Inherited from Uize.Widget.">8.7. Uize.Widget.Button.spawn</a></li>
-					<li><a href="#8_8" title="Inherited from Uize.Class.">8.8. Uize.Widget.Button.subclass</a></li>
-					<li><a href="#8_9" title="Inherited from Uize.Class.">8.9. Uize.Widget.Button.toggle</a></li>
-					<li><a href="#8_10" title="Inherited from Uize.Class.">8.10. Uize.Widget.Button.unwire</a></li>
-					<li><a href="#8_11" title="Inherited from Uize.Class.">8.11. Uize.Widget.Button.wire</a></li>
+					<li><a href="#8_7" title="Inherited from Uize.Class.">8.7. Uize.Widget.Button.singleton</a></li>
+					<li><a href="#8_8" title="Inherited from Uize.Widget.">8.8. Uize.Widget.Button.spawn</a></li>
+					<li><a href="#8_9" title="Inherited from Uize.Class.">8.9. Uize.Widget.Button.subclass</a></li>
+					<li><a href="#8_10" title="Inherited from Uize.Class.">8.10. Uize.Widget.Button.toggle</a></li>
+					<li><a href="#8_11" title="Inherited from Uize.Class.">8.11. Uize.Widget.Button.unwire</a></li>
+					<li><a href="#8_12" title="Inherited from Uize.Class.">8.12. Uize.Widget.Button.wire</a></li>
 				</ul>
 			</li>
 		</ul>
@@ -260,7 +261,7 @@
 				
 				<p><span class="allCaps">STATIC METHODS</span></p>
 				
-				<p><code><a href="#8_2">Uize.Widget.Button.fire</a></code> | <code><a href="#8_3">Uize.Widget.Button.get</a></code> | <code><a href="#8_4">Uize.Widget.Button.getBlankImageUrl</a></code> | <code><a href="#8_5">Uize.Widget.Button.registerProperties</a></code> | <code><a href="#8_6">Uize.Widget.Button.set</a></code> | <code><a href="#8_7">Uize.Widget.Button.spawn</a></code> | <code><a href="#8_8">Uize.Widget.Button.subclass</a></code> | <code><a href="#8_9">Uize.Widget.Button.toggle</a></code> | <code><a href="#8_10">Uize.Widget.Button.unwire</a></code> | <code><a href="#8_11">Uize.Widget.Button.wire</a></code></p>
+				<p><code><a href="#8_2">Uize.Widget.Button.fire</a></code> | <code><a href="#8_3">Uize.Widget.Button.get</a></code> | <code><a href="#8_4">Uize.Widget.Button.getBlankImageUrl</a></code> | <code><a href="#8_5">Uize.Widget.Button.registerProperties</a></code> | <code><a href="#8_6">Uize.Widget.Button.set</a></code> | <code><a href="#8_7">Uize.Widget.Button.singleton</a></code> | <code><a href="#8_8">Uize.Widget.Button.spawn</a></code> | <code><a href="#8_9">Uize.Widget.Button.subclass</a></code> | <code><a href="#8_10">Uize.Widget.Button.toggle</a></code> | <code><a href="#8_11">Uize.Widget.Button.unwire</a></code> | <code><a href="#8_12">Uize.Widget.Button.wire</a></code></p>
 				
 				<p><span class="allCaps">STATIC PROPERTIES</span></p>
 				
@@ -270,7 +271,7 @@
 			<a name="1_2_4"></a>
 			<h3 class="heading3" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.4. Modules Directly Under This Namespace"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_2" title="1. Introduction -&gt; 1.2. Implementation Info">2</a>.<a href="#1_2_4" title="1. Introduction -&gt; 1.2. Implementation Info -&gt; 1.2.4. Modules Directly Under This Namespace">4</a>. </span>Modules Directly Under This Namespace</h3>
 			<div class="contents3">
-				<p><code><a href="../reference/Uize.Widget.Button.Checkbox.html">Uize.Widget.Button.Checkbox</a></code> | <code><a href="../reference/Uize.Widget.Button.Filter.html">Uize.Widget.Button.Filter</a></code> | <code><a href="#8_9">Uize.Widget.Button.Toggle</a></code> | <code><a href="../reference/Uize.Widget.Button.ValueDisplay.html">Uize.Widget.Button.ValueDisplay</a></code></p>
+				<p><code><a href="../reference/Uize.Widget.Button.Checkbox.html">Uize.Widget.Button.Checkbox</a></code> | <code><a href="../reference/Uize.Widget.Button.Filter.html">Uize.Widget.Button.Filter</a></code> | <code><a href="#8_10">Uize.Widget.Button.Toggle</a></code> | <code><a href="../reference/Uize.Widget.Button.ValueDisplay.html">Uize.Widget.Button.ValueDisplay</a></code></p>
 			</div>
 			
 			<a name="1_2_5"></a>
@@ -1530,20 +1531,7 @@ MyWidgetClass.prototype._addChildButton = Uize.Widget.Button.addChildButton;
 		</div>
 		
 		<a name="8_7"></a>
-		<h2 class="heading2" title="8. Static Methods -&gt; 8.7. Uize.Widget.Button.spawn"><span class="headingNumber"><a href="#8" title="8. Static Methods">8</a>.<a href="#8_7" title="8. Static Methods -&gt; 8.7. Uize.Widget.Button.spawn">7</a>. </span>Uize.Widget.Button.spawn</h2>
-		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
-			
-			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
-			
-			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
-			</table>
-		</div>
-		
-		<a name="8_8"></a>
-		<h2 class="heading2" title="8. Static Methods -&gt; 8.8. Uize.Widget.Button.subclass"><span class="headingNumber"><a href="#8" title="8. Static Methods">8</a>.<a href="#8_8" title="8. Static Methods -&gt; 8.8. Uize.Widget.Button.subclass">8</a>. </span>Uize.Widget.Button.subclass</h2>
+		<h2 class="heading2" title="8. Static Methods -&gt; 8.7. Uize.Widget.Button.singleton"><span class="headingNumber"><a href="#8" title="8. Static Methods">8</a>.<a href="#8_7" title="8. Static Methods -&gt; 8.7. Uize.Widget.Button.singleton">7</a>. </span>Uize.Widget.Button.singleton</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
@@ -1555,8 +1543,21 @@ MyWidgetClass.prototype._addChildButton = Uize.Widget.Button.addChildButton;
 			</table>
 		</div>
 		
+		<a name="8_8"></a>
+		<h2 class="heading2" title="8. Static Methods -&gt; 8.8. Uize.Widget.Button.spawn"><span class="headingNumber"><a href="#8" title="8. Static Methods">8</a>.<a href="#8_8" title="8. Static Methods -&gt; 8.8. Uize.Widget.Button.spawn">8</a>. </span>Uize.Widget.Button.spawn</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
+			</table>
+		</div>
+		
 		<a name="8_9"></a>
-		<h2 class="heading2" title="8. Static Methods -&gt; 8.9. Uize.Widget.Button.toggle"><span class="headingNumber"><a href="#8" title="8. Static Methods">8</a>.<a href="#8_9" title="8. Static Methods -&gt; 8.9. Uize.Widget.Button.toggle">9</a>. </span>Uize.Widget.Button.toggle</h2>
+		<h2 class="heading2" title="8. Static Methods -&gt; 8.9. Uize.Widget.Button.subclass"><span class="headingNumber"><a href="#8" title="8. Static Methods">8</a>.<a href="#8_9" title="8. Static Methods -&gt; 8.9. Uize.Widget.Button.subclass">9</a>. </span>Uize.Widget.Button.subclass</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
@@ -1569,7 +1570,7 @@ MyWidgetClass.prototype._addChildButton = Uize.Widget.Button.addChildButton;
 		</div>
 		
 		<a name="8_10"></a>
-		<h2 class="heading2" title="8. Static Methods -&gt; 8.10. Uize.Widget.Button.unwire"><span class="headingNumber"><a href="#8" title="8. Static Methods">8</a>.<a href="#8_10" title="8. Static Methods -&gt; 8.10. Uize.Widget.Button.unwire">10</a>. </span>Uize.Widget.Button.unwire</h2>
+		<h2 class="heading2" title="8. Static Methods -&gt; 8.10. Uize.Widget.Button.toggle"><span class="headingNumber"><a href="#8" title="8. Static Methods">8</a>.<a href="#8_10" title="8. Static Methods -&gt; 8.10. Uize.Widget.Button.toggle">10</a>. </span>Uize.Widget.Button.toggle</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
@@ -1582,7 +1583,20 @@ MyWidgetClass.prototype._addChildButton = Uize.Widget.Button.addChildButton;
 		</div>
 		
 		<a name="8_11"></a>
-		<h2 class="heading2" title="8. Static Methods -&gt; 8.11. Uize.Widget.Button.wire"><span class="headingNumber"><a href="#8" title="8. Static Methods">8</a>.<a href="#8_11" title="8. Static Methods -&gt; 8.11. Uize.Widget.Button.wire">11</a>. </span>Uize.Widget.Button.wire</h2>
+		<h2 class="heading2" title="8. Static Methods -&gt; 8.11. Uize.Widget.Button.unwire"><span class="headingNumber"><a href="#8" title="8. Static Methods">8</a>.<a href="#8_11" title="8. Static Methods -&gt; 8.11. Uize.Widget.Button.unwire">11</a>. </span>Uize.Widget.Button.unwire</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
+			</table>
+		</div>
+		
+		<a name="8_12"></a>
+		<h2 class="heading2" title="8. Static Methods -&gt; 8.12. Uize.Widget.Button.wire"><span class="headingNumber"><a href="#8" title="8. Static Methods">8</a>.<a href="#8_12" title="8. Static Methods -&gt; 8.12. Uize.Widget.Button.wire">12</a>. </span>Uize.Widget.Button.wire</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			

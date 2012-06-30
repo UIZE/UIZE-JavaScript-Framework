@@ -9,7 +9,7 @@
 |_______________|             http://www.uize.com/license.html
 */
 
-/*ScruncherSettings Mappings="=c" LineCompacting="TRUE"*/
+/*ScruncherSettings Mappings="=c"*/
 
 /*?
 	Introduction

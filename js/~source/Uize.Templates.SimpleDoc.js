@@ -3,8 +3,6 @@
 		Uize.Templates.SimpleDoc.js.jst
 */
 
-/*ScruncherSettings Mappings="=" LineCompacting="TRUE"*/
-
 Uize.module ({
 	name:'Uize.Templates.SimpleDoc',
 	required:[

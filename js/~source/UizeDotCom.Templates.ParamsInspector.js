@@ -3,8 +3,6 @@
 		UizeDotCom.Templates.ParamsInspector.js.jst
 */
 
-/*ScruncherSettings Mappings="=" LineCompacting="TRUE"*/
-
 Uize.module ({
 	name:'UizeDotCom.Templates.ParamsInspector',
 	required:[

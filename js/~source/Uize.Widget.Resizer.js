@@ -18,7 +18,7 @@
 		- activeHandleEffectivePointIdY
 */
 
-/*ScruncherSettings Mappings="=c" LineCompacting="TRUE"*/
+/*ScruncherSettings Mappings="=c"*/
 
 /* Module Meta Data
 	type: Class

@@ -176,19 +176,20 @@
 					<li><a href="#6_3" title="Returns a string, representing the relative path from the current document to the &quot;blank.gif&quot; image resource that is available to all Uize.Widget subclasses that may need it in generating HTML markup, or in building or manipulating DOM nodes.">6.3. Uize.Widget.getBlankImageUrl</a></li>
 					<li><a href="#6_4" title="Inherited from Uize.Class.">6.4. Uize.Widget.registerProperties</a></li>
 					<li><a href="#6_5" title="Inherited from Uize.Class.">6.5. Uize.Widget.set</a></li>
-					<li><a href="#6_6" title="Spawns a number of widgets using the specified set-get property values, attaches them as children to the specified parent widget, and returns the spawned widgets as an array.">6.6. Uize.Widget.spawn</a>
+					<li><a href="#6_6" title="Inherited from Uize.Class.">6.6. Uize.Widget.singleton</a></li>
+					<li><a href="#6_7" title="Spawns a number of widgets using the specified set-get property values, attaches them as children to the specified parent widget, and returns the spawned widgets as an array.">6.7. Uize.Widget.spawn</a>
 						<ul>
-							<li><a href="#6_6_1" title="The Uize.Widget.spawn static method is inherited by subclasses of Uize.Widget and spawns instances of the class on which it is called, so it is not typically called on the Uize.Widget class but rather on a specific widget class.">6.6.1. Called on Subclasses</a></li>
-							<li><a href="#6_6_2" title="The propertiesOBJ parameter is an object, containing values for the set-get properties of the widget class of which instances are being spawned.">6.6.2. The propertiesOBJ Parameter</a></li>
-							<li><a href="#6_6_3" title="The number of widgets spawned is determined by the value of the &quot;idPrefix&quot; property in the propertiesOBJ object.">6.6.3. Special Meaning of idPrefix</a></li>
-							<li><a href="#6_6_4" title="When spawned widgets are added as child widgets of a specified parent widget, the names of the child widget are - if possible - derived using the value of the idPrefix set-get property of the parent widget and the value of the id attribute for the DOM node for which a widget instance is being spawned.">6.6.4. Child Widget Naming</a></li>
-							<li><a href="#6_6_5" title="Let&apos;s look at an example of how the Uize.Widget.spawn static method can be used...">6.6.5. An Example</a></li>
+							<li><a href="#6_7_1" title="The Uize.Widget.spawn static method is inherited by subclasses of Uize.Widget and spawns instances of the class on which it is called, so it is not typically called on the Uize.Widget class but rather on a specific widget class.">6.7.1. Called on Subclasses</a></li>
+							<li><a href="#6_7_2" title="The propertiesOBJ parameter is an object, containing values for the set-get properties of the widget class of which instances are being spawned.">6.7.2. The propertiesOBJ Parameter</a></li>
+							<li><a href="#6_7_3" title="The number of widgets spawned is determined by the value of the &quot;idPrefix&quot; property in the propertiesOBJ object.">6.7.3. Special Meaning of idPrefix</a></li>
+							<li><a href="#6_7_4" title="When spawned widgets are added as child widgets of a specified parent widget, the names of the child widget are - if possible - derived using the value of the idPrefix set-get property of the parent widget and the value of the id attribute for the DOM node for which a widget instance is being spawned.">6.7.4. Child Widget Naming</a></li>
+							<li><a href="#6_7_5" title="Let&apos;s look at an example of how the Uize.Widget.spawn static method can be used...">6.7.5. An Example</a></li>
 						</ul>
 					</li>
-					<li><a href="#6_7" title="Inherited from Uize.Class.">6.7. Uize.Widget.subclass</a></li>
-					<li><a href="#6_8" title="Inherited from Uize.Class.">6.8. Uize.Widget.toggle</a></li>
-					<li><a href="#6_9" title="Inherited from Uize.Class.">6.9. Uize.Widget.unwire</a></li>
-					<li><a href="#6_10" title="Inherited from Uize.Class.">6.10. Uize.Widget.wire</a></li>
+					<li><a href="#6_8" title="Inherited from Uize.Class.">6.8. Uize.Widget.subclass</a></li>
+					<li><a href="#6_9" title="Inherited from Uize.Class.">6.9. Uize.Widget.toggle</a></li>
+					<li><a href="#6_10" title="Inherited from Uize.Class.">6.10. Uize.Widget.unwire</a></li>
+					<li><a href="#6_11" title="Inherited from Uize.Class.">6.11. Uize.Widget.wire</a></li>
 				</ul>
 			</li>
 			<li><a href="#7">7. Static Properties</a>
@@ -265,7 +266,7 @@
 				
 				<p><span class="allCaps">STATIC METHODS</span></p>
 				
-				<p><code><a href="#6_3">Uize.Widget.getBlankImageUrl</a></code> | <code><a href="#6_6">Uize.Widget.spawn</a></code></p>
+				<p><code><a href="#6_3">Uize.Widget.getBlankImageUrl</a></code> | <code><a href="#6_7">Uize.Widget.spawn</a></code></p>
 				
 				<p><span class="allCaps">STATIC PROPERTIES</span></p>
 				
@@ -301,7 +302,7 @@
 				
 				<p><span class="allCaps">STATIC METHODS</span></p>
 				
-				<p><code><a href="#6_1">Uize.Widget.fire</a></code> | <code><a href="#6_2">Uize.Widget.get</a></code> | <code><a href="#6_4">Uize.Widget.registerProperties</a></code> | <code><a href="#6_5">Uize.Widget.set</a></code> | <code><a href="#6_7">Uize.Widget.subclass</a></code> | <code><a href="#6_8">Uize.Widget.toggle</a></code> | <code><a href="#6_9">Uize.Widget.unwire</a></code> | <code><a href="#6_10">Uize.Widget.wire</a></code></p>
+				<p><code><a href="#6_1">Uize.Widget.fire</a></code> | <code><a href="#6_2">Uize.Widget.get</a></code> | <code><a href="#6_4">Uize.Widget.registerProperties</a></code> | <code><a href="#6_5">Uize.Widget.set</a></code> | <code><a href="#6_6">Uize.Widget.singleton</a></code> | <code><a href="#6_8">Uize.Widget.subclass</a></code> | <code><a href="#6_9">Uize.Widget.toggle</a></code> | <code><a href="#6_10">Uize.Widget.unwire</a></code> | <code><a href="#6_11">Uize.Widget.wire</a></code></p>
 			</div>
 			
 			<a name="1_3_4"></a>
@@ -2561,7 +2562,20 @@ var alsoTheRootNode = myWidget.getNode ('');
 		</div>
 		
 		<a name="6_6"></a>
-		<h2 class="heading2" title="6. Static Methods -&gt; 6.6. Uize.Widget.spawn"><span class="headingNumber"><a href="#6" title="6. Static Methods">6</a>.<a href="#6_6" title="6. Static Methods -&gt; 6.6. Uize.Widget.spawn">6</a>. </span>Uize.Widget.spawn</h2>
+		<h2 class="heading2" title="6. Static Methods -&gt; 6.6. Uize.Widget.singleton"><span class="headingNumber"><a href="#6" title="6. Static Methods">6</a>.<a href="#6_6" title="6. Static Methods -&gt; 6.6. Uize.Widget.singleton">6</a>. </span>Uize.Widget.singleton</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
+			</table>
+		</div>
+		
+		<a name="6_7"></a>
+		<h2 class="heading2" title="6. Static Methods -&gt; 6.7. Uize.Widget.spawn"><span class="headingNumber"><a href="#6" title="6. Static Methods">6</a>.<a href="#6_7" title="6. Static Methods -&gt; 6.7. Uize.Widget.spawn">7</a>. </span>Uize.Widget.spawn</h2>
 		<div class="contents2">
 			<p>Spawns a number of widgets using the specified set-get property values, attaches them as children to the specified parent widget, and returns the spawned widgets as an array.</p>
 			
@@ -2579,42 +2593,42 @@ var alsoTheRootNode = myWidget.getNode ('');
 			
 			<p>When no <code>parentWidgetOBJ</code> parameter is specified, the spawned widgets are not added as children of any parent widget and are wired <b>immediately</b> by calling their <code><a href="#3_42">wireUi</a></code> instance method.</p>
 			
-			<a name="6_6_1"></a>
-			<h3 class="heading3" title="6. Static Methods -&gt; 6.6. Uize.Widget.spawn -&gt; 6.6.1. Called on Subclasses"><span class="headingNumber"><a href="#6" title="6. Static Methods">6</a>.<a href="#6_6" title="6. Static Methods -&gt; 6.6. Uize.Widget.spawn">6</a>.<a href="#6_6_1" title="6. Static Methods -&gt; 6.6. Uize.Widget.spawn -&gt; 6.6.1. Called on Subclasses">1</a>. </span>Called on Subclasses</h3>
+			<a name="6_7_1"></a>
+			<h3 class="heading3" title="6. Static Methods -&gt; 6.7. Uize.Widget.spawn -&gt; 6.7.1. Called on Subclasses"><span class="headingNumber"><a href="#6" title="6. Static Methods">6</a>.<a href="#6_7" title="6. Static Methods -&gt; 6.7. Uize.Widget.spawn">7</a>.<a href="#6_7_1" title="6. Static Methods -&gt; 6.7. Uize.Widget.spawn -&gt; 6.7.1. Called on Subclasses">1</a>. </span>Called on Subclasses</h3>
 			<div class="contents3">
-				<p>The <code><a href="#6_6">Uize.Widget.spawn</a></code> static method is inherited by subclasses of <code>Uize.Widget</code> and spawns instances of the class on which it is called, so it is not typically called on the <code>Uize.Widget</code> class but rather on a specific widget class.</p>
+				<p>The <code><a href="#6_7">Uize.Widget.spawn</a></code> static method is inherited by subclasses of <code>Uize.Widget</code> and spawns instances of the class on which it is called, so it is not typically called on the <code>Uize.Widget</code> class but rather on a specific widget class.</p>
 			</div>
 			
-			<a name="6_6_2"></a>
-			<h3 class="heading3" title="6. Static Methods -&gt; 6.6. Uize.Widget.spawn -&gt; 6.6.2. The propertiesOBJ Parameter"><span class="headingNumber"><a href="#6" title="6. Static Methods">6</a>.<a href="#6_6" title="6. Static Methods -&gt; 6.6. Uize.Widget.spawn">6</a>.<a href="#6_6_2" title="6. Static Methods -&gt; 6.6. Uize.Widget.spawn -&gt; 6.6.2. The propertiesOBJ Parameter">2</a>. </span>The propertiesOBJ Parameter</h3>
+			<a name="6_7_2"></a>
+			<h3 class="heading3" title="6. Static Methods -&gt; 6.7. Uize.Widget.spawn -&gt; 6.7.2. The propertiesOBJ Parameter"><span class="headingNumber"><a href="#6" title="6. Static Methods">6</a>.<a href="#6_7" title="6. Static Methods -&gt; 6.7. Uize.Widget.spawn">7</a>.<a href="#6_7_2" title="6. Static Methods -&gt; 6.7. Uize.Widget.spawn -&gt; 6.7.2. The propertiesOBJ Parameter">2</a>. </span>The propertiesOBJ Parameter</h3>
 			<div class="contents3">
 				<p>The <code>propertiesOBJ</code> parameter is an object, containing values for the set-get properties of the widget class of which instances are being spawned.</p>
 				
-				<p>Besides the required <code><a href="#4_10">idPrefix</a></code> property (see <a href="#6_6_3">Special Meaning of idPrefix</a>), the <code>propertiesOBJ</code> parameter may contain values for any of the other set-get properties of the widget class on which this method is being called.</p>
+				<p>Besides the required <code><a href="#4_10">idPrefix</a></code> property (see <a href="#6_7_3">Special Meaning of idPrefix</a>), the <code>propertiesOBJ</code> parameter may contain values for any of the other set-get properties of the widget class on which this method is being called.</p>
 			</div>
 			
-			<a name="6_6_3"></a>
-			<h3 class="heading3" title="6. Static Methods -&gt; 6.6. Uize.Widget.spawn -&gt; 6.6.3. Special Meaning of idPrefix"><span class="headingNumber"><a href="#6" title="6. Static Methods">6</a>.<a href="#6_6" title="6. Static Methods -&gt; 6.6. Uize.Widget.spawn">6</a>.<a href="#6_6_3" title="6. Static Methods -&gt; 6.6. Uize.Widget.spawn -&gt; 6.6.3. Special Meaning of idPrefix">3</a>. </span>Special Meaning of idPrefix</h3>
+			<a name="6_7_3"></a>
+			<h3 class="heading3" title="6. Static Methods -&gt; 6.7. Uize.Widget.spawn -&gt; 6.7.3. Special Meaning of idPrefix"><span class="headingNumber"><a href="#6" title="6. Static Methods">6</a>.<a href="#6_7" title="6. Static Methods -&gt; 6.7. Uize.Widget.spawn">7</a>.<a href="#6_7_3" title="6. Static Methods -&gt; 6.7. Uize.Widget.spawn -&gt; 6.7.3. Special Meaning of idPrefix">3</a>. </span>Special Meaning of idPrefix</h3>
 			<div class="contents3">
 				<p>The number of widgets spawned is determined by the value of the "idPrefix" property in the <code>propertiesOBJ</code> object.</p>
 				
-				<p>A value for "idPrefix" must be specified, otherwise the <code><a href="#6_6">Uize.Widget.spawn</a></code> method will not work correctly. The value of this property identifies one or more DOM nodes for which the widget instances should be spawned, and may be a DOM node reference, a string representing the <code>id</code> of a DOM node, an array of DOM node references, or a find expression object that will be used with the <code>Uize.Node.find</code> static method to find the DOM nodes.</p>
+				<p>A value for "idPrefix" must be specified, otherwise the <code><a href="#6_7">Uize.Widget.spawn</a></code> method will not work correctly. The value of this property identifies one or more DOM nodes for which the widget instances should be spawned, and may be a DOM node reference, a string representing the <code>id</code> of a DOM node, an array of DOM node references, or a find expression object that will be used with the <code>Uize.Node.find</code> static method to find the DOM nodes.</p>
 				
 				<p>Once the value of the "idPrefix" property has been resolved to one or more DOM nodes, an instance of the widget class on which the method is called will be created for each of the DOM nodes. For each widget instance that is created, the actual <code><a href="#4_10">idPrefix</a></code> value for the instance will be derived from the <code>id</code> attribute of the DOM node for which the instance is being created. For this reason, the DOM nodes represented by the "idPrefix" property should be the root nodes for the widget instances that will be spawned.</p>
 			</div>
 			
-			<a name="6_6_4"></a>
-			<h3 class="heading3" title="6. Static Methods -&gt; 6.6. Uize.Widget.spawn -&gt; 6.6.4. Child Widget Naming"><span class="headingNumber"><a href="#6" title="6. Static Methods">6</a>.<a href="#6_6" title="6. Static Methods -&gt; 6.6. Uize.Widget.spawn">6</a>.<a href="#6_6_4" title="6. Static Methods -&gt; 6.6. Uize.Widget.spawn -&gt; 6.6.4. Child Widget Naming">4</a>. </span>Child Widget Naming</h3>
+			<a name="6_7_4"></a>
+			<h3 class="heading3" title="6. Static Methods -&gt; 6.7. Uize.Widget.spawn -&gt; 6.7.4. Child Widget Naming"><span class="headingNumber"><a href="#6" title="6. Static Methods">6</a>.<a href="#6_7" title="6. Static Methods -&gt; 6.7. Uize.Widget.spawn">7</a>.<a href="#6_7_4" title="6. Static Methods -&gt; 6.7. Uize.Widget.spawn -&gt; 6.7.4. Child Widget Naming">4</a>. </span>Child Widget Naming</h3>
 			<div class="contents3">
 				<p>When spawned widgets are added as child widgets of a specified parent widget, the names of the child widget are - if possible - derived using the value of the <code><a href="#4_10">idPrefix</a></code> set-get property of the parent widget and the value of the <code>id</code> attribute for the DOM node for which a widget instance is being spawned.</p>
 				
 				<p>For example, if the <code>id</code> attribute of a DOM node for which a widget is to be spawned has the value "page_item0", and if the parent widget of the spawned widget is a page widget instance with the <code><a href="#4_10">idPrefix</a></code> value of <code>'page'</code>, then the spawned widget will be added as the child named "item0".</p>
 			</div>
 			
-			<a name="6_6_5"></a>
-			<h3 class="heading3" title="6. Static Methods -&gt; 6.6. Uize.Widget.spawn -&gt; 6.6.5. An Example"><span class="headingNumber"><a href="#6" title="6. Static Methods">6</a>.<a href="#6_6" title="6. Static Methods -&gt; 6.6. Uize.Widget.spawn">6</a>.<a href="#6_6_5" title="6. Static Methods -&gt; 6.6. Uize.Widget.spawn -&gt; 6.6.5. An Example">5</a>. </span>An Example</h3>
+			<a name="6_7_5"></a>
+			<h3 class="heading3" title="6. Static Methods -&gt; 6.7. Uize.Widget.spawn -&gt; 6.7.5. An Example"><span class="headingNumber"><a href="#6" title="6. Static Methods">6</a>.<a href="#6_7" title="6. Static Methods -&gt; 6.7. Uize.Widget.spawn">7</a>.<a href="#6_7_5" title="6. Static Methods -&gt; 6.7. Uize.Widget.spawn -&gt; 6.7.5. An Example">5</a>. </span>An Example</h3>
 			<div class="contents3">
-				<p>Let's look at an example of how the <code><a href="#6_6">Uize.Widget.spawn</a></code> static method can be used...</p>
+				<p>Let's look at an example of how the <code><a href="#6_7">Uize.Widget.spawn</a></code> static method can be used...</p>
 				
 				<p><span class="allCaps">EXAMPLE</span></p>
 				
@@ -2647,21 +2661,8 @@ var alsoTheRootNode = myWidget.getNode ('');
 			</table>
 		</div>
 		
-		<a name="6_7"></a>
-		<h2 class="heading2" title="6. Static Methods -&gt; 6.7. Uize.Widget.subclass"><span class="headingNumber"><a href="#6" title="6. Static Methods">6</a>.<a href="#6_7" title="6. Static Methods -&gt; 6.7. Uize.Widget.subclass">7</a>. </span>Uize.Widget.subclass</h2>
-		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
-			
-			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
-			
-			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
-			</table>
-		</div>
-		
 		<a name="6_8"></a>
-		<h2 class="heading2" title="6. Static Methods -&gt; 6.8. Uize.Widget.toggle"><span class="headingNumber"><a href="#6" title="6. Static Methods">6</a>.<a href="#6_8" title="6. Static Methods -&gt; 6.8. Uize.Widget.toggle">8</a>. </span>Uize.Widget.toggle</h2>
+		<h2 class="heading2" title="6. Static Methods -&gt; 6.8. Uize.Widget.subclass"><span class="headingNumber"><a href="#6" title="6. Static Methods">6</a>.<a href="#6_8" title="6. Static Methods -&gt; 6.8. Uize.Widget.subclass">8</a>. </span>Uize.Widget.subclass</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
@@ -2674,7 +2675,7 @@ var alsoTheRootNode = myWidget.getNode ('');
 		</div>
 		
 		<a name="6_9"></a>
-		<h2 class="heading2" title="6. Static Methods -&gt; 6.9. Uize.Widget.unwire"><span class="headingNumber"><a href="#6" title="6. Static Methods">6</a>.<a href="#6_9" title="6. Static Methods -&gt; 6.9. Uize.Widget.unwire">9</a>. </span>Uize.Widget.unwire</h2>
+		<h2 class="heading2" title="6. Static Methods -&gt; 6.9. Uize.Widget.toggle"><span class="headingNumber"><a href="#6" title="6. Static Methods">6</a>.<a href="#6_9" title="6. Static Methods -&gt; 6.9. Uize.Widget.toggle">9</a>. </span>Uize.Widget.toggle</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
@@ -2687,7 +2688,20 @@ var alsoTheRootNode = myWidget.getNode ('');
 		</div>
 		
 		<a name="6_10"></a>
-		<h2 class="heading2" title="6. Static Methods -&gt; 6.10. Uize.Widget.wire"><span class="headingNumber"><a href="#6" title="6. Static Methods">6</a>.<a href="#6_10" title="6. Static Methods -&gt; 6.10. Uize.Widget.wire">10</a>. </span>Uize.Widget.wire</h2>
+		<h2 class="heading2" title="6. Static Methods -&gt; 6.10. Uize.Widget.unwire"><span class="headingNumber"><a href="#6" title="6. Static Methods">6</a>.<a href="#6_10" title="6. Static Methods -&gt; 6.10. Uize.Widget.unwire">10</a>. </span>Uize.Widget.unwire</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
+			</table>
+		</div>
+		
+		<a name="6_11"></a>
+		<h2 class="heading2" title="6. Static Methods -&gt; 6.11. Uize.Widget.wire"><span class="headingNumber"><a href="#6" title="6. Static Methods">6</a>.<a href="#6_11" title="6. Static Methods -&gt; 6.11. Uize.Widget.wire">11</a>. </span>Uize.Widget.wire</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			

@@ -3,8 +3,6 @@
 		UizeDotCom.Templates.ListingsPage.js.jst
 */
 
-/*ScruncherSettings Mappings="=" LineCompacting="TRUE"*/
-
 Uize.module ({
 	name:'UizeDotCom.Templates.ListingsPage',
 	required:[

@@ -17,7 +17,7 @@
 	docCompleteness: 2
 */
 
-/*ScruncherSettings Mappings="=e" LineCompacting="TRUE"*/
+/*ScruncherSettings Mappings="=e"*/
 
 /*?
 	Introduction

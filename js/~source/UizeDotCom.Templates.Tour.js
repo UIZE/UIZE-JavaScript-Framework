@@ -3,8 +3,6 @@
 		UizeDotCom.Templates.Tour.js.jst
 */
 
-/*ScruncherSettings Mappings="=" LineCompacting="TRUE"*/
-
 Uize.module ({
 	name:'UizeDotCom.Templates.Tour',
 	required:[

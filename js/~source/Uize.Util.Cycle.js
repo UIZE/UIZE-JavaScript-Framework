@@ -9,7 +9,7 @@
 |_______________|             http://www.uize.com/license.html
 */
 
-/*ScruncherSettings Mappings="=b" LineCompacting="TRUE"*/
+/*ScruncherSettings Mappings="=b"*/
 
 /* Module Meta Data
 	type: Class

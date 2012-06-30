@@ -3,8 +3,6 @@
 		UizeDotCom.Templates.DataBar.js.jst
 */
 
-/*ScruncherSettings Mappings="=" LineCompacting="TRUE"*/
-
 Uize.module ({
 	name:'UizeDotCom.Templates.DataBar',
 	builder:function () {

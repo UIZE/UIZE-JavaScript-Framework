@@ -200,11 +200,12 @@
 					</li>
 					<li><a href="#4_5" title="Inherited from Uize.Class.">4.5. Uize.Widget.Page.registerProperties</a></li>
 					<li><a href="#4_6" title="Inherited from Uize.Class.">4.6. Uize.Widget.Page.set</a></li>
-					<li><a href="#4_7" title="Inherited from Uize.Widget.">4.7. Uize.Widget.Page.spawn</a></li>
-					<li><a href="#4_8" title="Inherited from Uize.Class.">4.8. Uize.Widget.Page.subclass</a></li>
-					<li><a href="#4_9" title="Inherited from Uize.Class.">4.9. Uize.Widget.Page.toggle</a></li>
-					<li><a href="#4_10" title="Inherited from Uize.Class.">4.10. Uize.Widget.Page.unwire</a></li>
-					<li><a href="#4_11" title="Inherited from Uize.Class.">4.11. Uize.Widget.Page.wire</a></li>
+					<li><a href="#4_7" title="Inherited from Uize.Class.">4.7. Uize.Widget.Page.singleton</a></li>
+					<li><a href="#4_8" title="Inherited from Uize.Widget.">4.8. Uize.Widget.Page.spawn</a></li>
+					<li><a href="#4_9" title="Inherited from Uize.Class.">4.9. Uize.Widget.Page.subclass</a></li>
+					<li><a href="#4_10" title="Inherited from Uize.Class.">4.10. Uize.Widget.Page.toggle</a></li>
+					<li><a href="#4_11" title="Inherited from Uize.Class.">4.11. Uize.Widget.Page.unwire</a></li>
+					<li><a href="#4_12" title="Inherited from Uize.Class.">4.12. Uize.Widget.Page.wire</a></li>
 				</ul>
 			</li>
 			<li><a href="#5">5. Set-get Properties</a>
@@ -333,7 +334,7 @@
 				
 				<p><span class="allCaps">STATIC METHODS</span></p>
 				
-				<p><code><a href="#4_1">Uize.Widget.Page.fire</a></code> | <code><a href="#4_2">Uize.Widget.Page.get</a></code> | <code><a href="#4_3">Uize.Widget.Page.getBlankImageUrl</a></code> | <code><a href="#4_5">Uize.Widget.Page.registerProperties</a></code> | <code><a href="#4_6">Uize.Widget.Page.set</a></code> | <code><a href="#4_7">Uize.Widget.Page.spawn</a></code> | <code><a href="#4_8">Uize.Widget.Page.subclass</a></code> | <code><a href="#4_9">Uize.Widget.Page.toggle</a></code> | <code><a href="#4_10">Uize.Widget.Page.unwire</a></code> | <code><a href="#4_11">Uize.Widget.Page.wire</a></code></p>
+				<p><code><a href="#4_1">Uize.Widget.Page.fire</a></code> | <code><a href="#4_2">Uize.Widget.Page.get</a></code> | <code><a href="#4_3">Uize.Widget.Page.getBlankImageUrl</a></code> | <code><a href="#4_5">Uize.Widget.Page.registerProperties</a></code> | <code><a href="#4_6">Uize.Widget.Page.set</a></code> | <code><a href="#4_7">Uize.Widget.Page.singleton</a></code> | <code><a href="#4_8">Uize.Widget.Page.spawn</a></code> | <code><a href="#4_9">Uize.Widget.Page.subclass</a></code> | <code><a href="#4_10">Uize.Widget.Page.toggle</a></code> | <code><a href="#4_11">Uize.Widget.Page.unwire</a></code> | <code><a href="#4_12">Uize.Widget.Page.wire</a></code></p>
 				
 				<p><span class="allCaps">STATIC PROPERTIES</span></p>
 				
@@ -1700,20 +1701,7 @@ popupWindowDoc.close ();
 		</div>
 		
 		<a name="4_7"></a>
-		<h2 class="heading2" title="4. Static Methods -&gt; 4.7. Uize.Widget.Page.spawn"><span class="headingNumber"><a href="#4" title="4. Static Methods">4</a>.<a href="#4_7" title="4. Static Methods -&gt; 4.7. Uize.Widget.Page.spawn">7</a>. </span>Uize.Widget.Page.spawn</h2>
-		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
-			
-			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
-			
-			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
-			</table>
-		</div>
-		
-		<a name="4_8"></a>
-		<h2 class="heading2" title="4. Static Methods -&gt; 4.8. Uize.Widget.Page.subclass"><span class="headingNumber"><a href="#4" title="4. Static Methods">4</a>.<a href="#4_8" title="4. Static Methods -&gt; 4.8. Uize.Widget.Page.subclass">8</a>. </span>Uize.Widget.Page.subclass</h2>
+		<h2 class="heading2" title="4. Static Methods -&gt; 4.7. Uize.Widget.Page.singleton"><span class="headingNumber"><a href="#4" title="4. Static Methods">4</a>.<a href="#4_7" title="4. Static Methods -&gt; 4.7. Uize.Widget.Page.singleton">7</a>. </span>Uize.Widget.Page.singleton</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
@@ -1725,8 +1713,21 @@ popupWindowDoc.close ();
 			</table>
 		</div>
 		
+		<a name="4_8"></a>
+		<h2 class="heading2" title="4. Static Methods -&gt; 4.8. Uize.Widget.Page.spawn"><span class="headingNumber"><a href="#4" title="4. Static Methods">4</a>.<a href="#4_8" title="4. Static Methods -&gt; 4.8. Uize.Widget.Page.spawn">8</a>. </span>Uize.Widget.Page.spawn</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
+			</table>
+		</div>
+		
 		<a name="4_9"></a>
-		<h2 class="heading2" title="4. Static Methods -&gt; 4.9. Uize.Widget.Page.toggle"><span class="headingNumber"><a href="#4" title="4. Static Methods">4</a>.<a href="#4_9" title="4. Static Methods -&gt; 4.9. Uize.Widget.Page.toggle">9</a>. </span>Uize.Widget.Page.toggle</h2>
+		<h2 class="heading2" title="4. Static Methods -&gt; 4.9. Uize.Widget.Page.subclass"><span class="headingNumber"><a href="#4" title="4. Static Methods">4</a>.<a href="#4_9" title="4. Static Methods -&gt; 4.9. Uize.Widget.Page.subclass">9</a>. </span>Uize.Widget.Page.subclass</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
@@ -1739,7 +1740,7 @@ popupWindowDoc.close ();
 		</div>
 		
 		<a name="4_10"></a>
-		<h2 class="heading2" title="4. Static Methods -&gt; 4.10. Uize.Widget.Page.unwire"><span class="headingNumber"><a href="#4" title="4. Static Methods">4</a>.<a href="#4_10" title="4. Static Methods -&gt; 4.10. Uize.Widget.Page.unwire">10</a>. </span>Uize.Widget.Page.unwire</h2>
+		<h2 class="heading2" title="4. Static Methods -&gt; 4.10. Uize.Widget.Page.toggle"><span class="headingNumber"><a href="#4" title="4. Static Methods">4</a>.<a href="#4_10" title="4. Static Methods -&gt; 4.10. Uize.Widget.Page.toggle">10</a>. </span>Uize.Widget.Page.toggle</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
@@ -1752,7 +1753,20 @@ popupWindowDoc.close ();
 		</div>
 		
 		<a name="4_11"></a>
-		<h2 class="heading2" title="4. Static Methods -&gt; 4.11. Uize.Widget.Page.wire"><span class="headingNumber"><a href="#4" title="4. Static Methods">4</a>.<a href="#4_11" title="4. Static Methods -&gt; 4.11. Uize.Widget.Page.wire">11</a>. </span>Uize.Widget.Page.wire</h2>
+		<h2 class="heading2" title="4. Static Methods -&gt; 4.11. Uize.Widget.Page.unwire"><span class="headingNumber"><a href="#4" title="4. Static Methods">4</a>.<a href="#4_11" title="4. Static Methods -&gt; 4.11. Uize.Widget.Page.unwire">11</a>. </span>Uize.Widget.Page.unwire</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_12"></a>
+		<h2 class="heading2" title="4. Static Methods -&gt; 4.12. Uize.Widget.Page.wire"><span class="headingNumber"><a href="#4" title="4. Static Methods">4</a>.<a href="#4_12" title="4. Static Methods -&gt; 4.12. Uize.Widget.Page.wire">12</a>. </span>Uize.Widget.Page.wire</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			

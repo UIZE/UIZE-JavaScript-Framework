@@ -3,8 +3,6 @@
 		Uize.Templates.HashTable.js.jst
 */
 
-/*ScruncherSettings Mappings="=" LineCompacting="TRUE"*/
-
 Uize.module ({
 	name:'Uize.Templates.HashTable',
 	builder:function () {

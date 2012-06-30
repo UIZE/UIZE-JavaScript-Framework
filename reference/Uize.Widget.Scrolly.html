@@ -168,11 +168,12 @@
 					<li><a href="#7_3" title="Inherited from Uize.Widget.">7.3. Uize.Widget.Scrolly.getBlankImageUrl</a></li>
 					<li><a href="#7_4" title="Inherited from Uize.Class.">7.4. Uize.Widget.Scrolly.registerProperties</a></li>
 					<li><a href="#7_5" title="Inherited from Uize.Class.">7.5. Uize.Widget.Scrolly.set</a></li>
-					<li><a href="#7_6" title="Inherited from Uize.Widget.">7.6. Uize.Widget.Scrolly.spawn</a></li>
-					<li><a href="#7_7" title="Inherited from Uize.Class.">7.7. Uize.Widget.Scrolly.subclass</a></li>
-					<li><a href="#7_8" title="Inherited from Uize.Class.">7.8. Uize.Widget.Scrolly.toggle</a></li>
-					<li><a href="#7_9" title="Inherited from Uize.Class.">7.9. Uize.Widget.Scrolly.unwire</a></li>
-					<li><a href="#7_10" title="Inherited from Uize.Class.">7.10. Uize.Widget.Scrolly.wire</a></li>
+					<li><a href="#7_6" title="Inherited from Uize.Class.">7.6. Uize.Widget.Scrolly.singleton</a></li>
+					<li><a href="#7_7" title="Inherited from Uize.Widget.">7.7. Uize.Widget.Scrolly.spawn</a></li>
+					<li><a href="#7_8" title="Inherited from Uize.Class.">7.8. Uize.Widget.Scrolly.subclass</a></li>
+					<li><a href="#7_9" title="Inherited from Uize.Class.">7.9. Uize.Widget.Scrolly.toggle</a></li>
+					<li><a href="#7_10" title="Inherited from Uize.Class.">7.10. Uize.Widget.Scrolly.unwire</a></li>
+					<li><a href="#7_11" title="Inherited from Uize.Class.">7.11. Uize.Widget.Scrolly.wire</a></li>
 				</ul>
 			</li>
 			<li><a href="#8">8. Static Properties</a>
@@ -370,7 +371,7 @@ scrolly.set ({pageY:Infinity});                    // scroll to last page, verti
 				
 				<p><span class="allCaps">STATIC METHODS</span></p>
 				
-				<p><code><a href="#7_1">Uize.Widget.Scrolly.fire</a></code> | <code><a href="#7_2">Uize.Widget.Scrolly.get</a></code> | <code><a href="#7_3">Uize.Widget.Scrolly.getBlankImageUrl</a></code> | <code><a href="#7_4">Uize.Widget.Scrolly.registerProperties</a></code> | <code><a href="#7_5">Uize.Widget.Scrolly.set</a></code> | <code><a href="#7_6">Uize.Widget.Scrolly.spawn</a></code> | <code><a href="#7_7">Uize.Widget.Scrolly.subclass</a></code> | <code><a href="#7_8">Uize.Widget.Scrolly.toggle</a></code> | <code><a href="#7_9">Uize.Widget.Scrolly.unwire</a></code> | <code><a href="#7_10">Uize.Widget.Scrolly.wire</a></code></p>
+				<p><code><a href="#7_1">Uize.Widget.Scrolly.fire</a></code> | <code><a href="#7_2">Uize.Widget.Scrolly.get</a></code> | <code><a href="#7_3">Uize.Widget.Scrolly.getBlankImageUrl</a></code> | <code><a href="#7_4">Uize.Widget.Scrolly.registerProperties</a></code> | <code><a href="#7_5">Uize.Widget.Scrolly.set</a></code> | <code><a href="#7_6">Uize.Widget.Scrolly.singleton</a></code> | <code><a href="#7_7">Uize.Widget.Scrolly.spawn</a></code> | <code><a href="#7_8">Uize.Widget.Scrolly.subclass</a></code> | <code><a href="#7_9">Uize.Widget.Scrolly.toggle</a></code> | <code><a href="#7_10">Uize.Widget.Scrolly.unwire</a></code> | <code><a href="#7_11">Uize.Widget.Scrolly.wire</a></code></p>
 				
 				<p><span class="allCaps">STATIC PROPERTIES</span></p>
 				
@@ -1430,20 +1431,7 @@ scrolly.set ({pageY:Infinity});                    // scroll to last page, verti
 		</div>
 		
 		<a name="7_6"></a>
-		<h2 class="heading2" title="7. Static Methods -&gt; 7.6. Uize.Widget.Scrolly.spawn"><span class="headingNumber"><a href="#7" title="7. Static Methods">7</a>.<a href="#7_6" title="7. Static Methods -&gt; 7.6. Uize.Widget.Scrolly.spawn">6</a>. </span>Uize.Widget.Scrolly.spawn</h2>
-		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
-			
-			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
-			
-			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
-			</table>
-		</div>
-		
-		<a name="7_7"></a>
-		<h2 class="heading2" title="7. Static Methods -&gt; 7.7. Uize.Widget.Scrolly.subclass"><span class="headingNumber"><a href="#7" title="7. Static Methods">7</a>.<a href="#7_7" title="7. Static Methods -&gt; 7.7. Uize.Widget.Scrolly.subclass">7</a>. </span>Uize.Widget.Scrolly.subclass</h2>
+		<h2 class="heading2" title="7. Static Methods -&gt; 7.6. Uize.Widget.Scrolly.singleton"><span class="headingNumber"><a href="#7" title="7. Static Methods">7</a>.<a href="#7_6" title="7. Static Methods -&gt; 7.6. Uize.Widget.Scrolly.singleton">6</a>. </span>Uize.Widget.Scrolly.singleton</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
@@ -1455,8 +1443,21 @@ scrolly.set ({pageY:Infinity});                    // scroll to last page, verti
 			</table>
 		</div>
 		
+		<a name="7_7"></a>
+		<h2 class="heading2" title="7. Static Methods -&gt; 7.7. Uize.Widget.Scrolly.spawn"><span class="headingNumber"><a href="#7" title="7. Static Methods">7</a>.<a href="#7_7" title="7. Static Methods -&gt; 7.7. Uize.Widget.Scrolly.spawn">7</a>. </span>Uize.Widget.Scrolly.spawn</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>, first introduced in <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
+			</table>
+		</div>
+		
 		<a name="7_8"></a>
-		<h2 class="heading2" title="7. Static Methods -&gt; 7.8. Uize.Widget.Scrolly.toggle"><span class="headingNumber"><a href="#7" title="7. Static Methods">7</a>.<a href="#7_8" title="7. Static Methods -&gt; 7.8. Uize.Widget.Scrolly.toggle">8</a>. </span>Uize.Widget.Scrolly.toggle</h2>
+		<h2 class="heading2" title="7. Static Methods -&gt; 7.8. Uize.Widget.Scrolly.subclass"><span class="headingNumber"><a href="#7" title="7. Static Methods">7</a>.<a href="#7_8" title="7. Static Methods -&gt; 7.8. Uize.Widget.Scrolly.subclass">8</a>. </span>Uize.Widget.Scrolly.subclass</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
@@ -1469,7 +1470,7 @@ scrolly.set ({pageY:Infinity});                    // scroll to last page, verti
 		</div>
 		
 		<a name="7_9"></a>
-		<h2 class="heading2" title="7. Static Methods -&gt; 7.9. Uize.Widget.Scrolly.unwire"><span class="headingNumber"><a href="#7" title="7. Static Methods">7</a>.<a href="#7_9" title="7. Static Methods -&gt; 7.9. Uize.Widget.Scrolly.unwire">9</a>. </span>Uize.Widget.Scrolly.unwire</h2>
+		<h2 class="heading2" title="7. Static Methods -&gt; 7.9. Uize.Widget.Scrolly.toggle"><span class="headingNumber"><a href="#7" title="7. Static Methods">7</a>.<a href="#7_9" title="7. Static Methods -&gt; 7.9. Uize.Widget.Scrolly.toggle">9</a>. </span>Uize.Widget.Scrolly.toggle</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
@@ -1482,7 +1483,20 @@ scrolly.set ({pageY:Infinity});                    // scroll to last page, verti
 		</div>
 		
 		<a name="7_10"></a>
-		<h2 class="heading2" title="7. Static Methods -&gt; 7.10. Uize.Widget.Scrolly.wire"><span class="headingNumber"><a href="#7" title="7. Static Methods">7</a>.<a href="#7_10" title="7. Static Methods -&gt; 7.10. Uize.Widget.Scrolly.wire">10</a>. </span>Uize.Widget.Scrolly.wire</h2>
+		<h2 class="heading2" title="7. Static Methods -&gt; 7.10. Uize.Widget.Scrolly.unwire"><span class="headingNumber"><a href="#7" title="7. Static Methods">7</a>.<a href="#7_10" title="7. Static Methods -&gt; 7.10. Uize.Widget.Scrolly.unwire">10</a>. </span>Uize.Widget.Scrolly.unwire</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
+			</table>
+		</div>
+		
+		<a name="7_11"></a>
+		<h2 class="heading2" title="7. Static Methods -&gt; 7.11. Uize.Widget.Scrolly.wire"><span class="headingNumber"><a href="#7" title="7. Static Methods">7</a>.<a href="#7_11" title="7. Static Methods -&gt; 7.11. Uize.Widget.Scrolly.wire">11</a>. </span>Uize.Widget.Scrolly.wire</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			

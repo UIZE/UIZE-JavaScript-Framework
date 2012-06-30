@@ -9,6 +9,14 @@
 |_______________|             http://www.uize.com/license.html
 */
 
+/* Module Meta Data
+	type: Package
+	importance: 2
+	codeCompleteness: 100
+	testCompleteness: 0
+	docCompleteness: 0
+*/
+
 /*?
 	Introduction
 		The =Uize.Node.Tree= package provides convenience methods for generating a tree data object by analyzing HTML on a page.
@@ -585,14 +593,6 @@
 
 					NOTE
 					Note that for any item that is expanded, the value of the =expanded= property will be =true= and the property will not be present in the `Tree Item`, since =true= is the default value for this property.
-*/
-
-/* Module Meta Data
-	type: Package
-	importance: 2
-	codeCompleteness: 100
-	testCompleteness: 0
-	docCompleteness: 0
 */
 
 Uize.module ({

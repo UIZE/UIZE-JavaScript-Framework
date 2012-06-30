@@ -198,44 +198,45 @@
 						</ul>
 					</li>
 					<li><a href="#5_8" title="Inherited from Uize.Class.">5.8. Uize.Test.set</a></li>
-					<li><a href="#5_9" title="Returns an object, containing host and property properties that represent the specified property full path name split into the two parts.">5.9. Uize.Test.splitHostAndProperty</a></li>
-					<li><a href="#5_10" title="Returns a Uize.Test subclass, for a test that tests whether or not the specified static method is defined and all the specified test cases succeed.">5.10. Uize.Test.staticMethodTest</a>
+					<li><a href="#5_9" title="Inherited from Uize.Class.">5.9. Uize.Test.singleton</a></li>
+					<li><a href="#5_10" title="Returns an object, containing host and property properties that represent the specified property full path name split into the two parts.">5.10. Uize.Test.splitHostAndProperty</a></li>
+					<li><a href="#5_11" title="Returns a Uize.Test subclass, for a test that tests whether or not the specified static method is defined and all the specified test cases succeed.">5.11. Uize.Test.staticMethodTest</a>
 						<ul>
-							<li><a href="#5_10_1" title="A string, specifying the full name of the static method, including the full host path.">5.10.1. methodFullNameSTR</a></li>
-							<li><a href="#5_10_2" title="An array, containing a sequence of test cases, all of which need to succeed in order for the static method test to succeed.">5.10.2. casesARRAY</a>
+							<li><a href="#5_11_1" title="A string, specifying the full name of the static method, including the full host path.">5.11.1. methodFullNameSTR</a></li>
+							<li><a href="#5_11_2" title="An array, containing a sequence of test cases, all of which need to succeed in order for the static method test to succeed.">5.11.2. casesARRAY</a>
 								<ul>
-									<li><a href="#5_10_2_1" title="An array, providing a concise declaration of a synchronous, deterministic test case for the static method, or an object providing a declaration of a generic test, or an instance of a Uize.Test subclass.">5.10.2.1. caseARRAYorOBJ</a>
+									<li><a href="#5_11_2_1" title="An array, providing a concise declaration of a synchronous, deterministic test case for the static method, or an object providing a declaration of a generic test, or an instance of a Uize.Test subclass.">5.11.2.1. caseARRAYorOBJ</a>
 										<ul>
-											<li><a href="#5_10_2_1_1" title="When an array value is specified for the caseARRAYorOBJ value type, then the case describes a synchronous and deterministic test of the static method, and the array should have the following structure...">5.10.2.1.1. Synchronous and Deterministic Cases</a></li>
-											<li><a href="#5_10_2_1_2" title="When a case is either asynchronous or non-deterministic (ie. you can&apos;t be guaranteed to always get the same result returned for the same argument values), then you cannot use the concise array syntax for declaring the case as you can with Synchronous and Deterministic Cases.">5.10.2.1.2. Asynchronous or Non-deterministic Cases</a></li>
+											<li><a href="#5_11_2_1_1" title="When an array value is specified for the caseARRAYorOBJ value type, then the case describes a synchronous and deterministic test of the static method, and the array should have the following structure...">5.11.2.1.1. Synchronous and Deterministic Cases</a></li>
+											<li><a href="#5_11_2_1_2" title="When a case is either asynchronous or non-deterministic (ie. you can&apos;t be guaranteed to always get the same result returned for the same argument values), then you cannot use the concise array syntax for declaring the case as you can with Synchronous and Deterministic Cases.">5.11.2.1.2. Asynchronous or Non-deterministic Cases</a></li>
 										</ul>
 									</li>
 								</ul>
 							</li>
-							<li><a href="#5_10_3" title="When the optional supplementalTestPropertiesOBJ parameter is specified, then additional values for the set-get properties of the created Uize.Test subclass can be specified.">5.10.3. supplementalTestPropertiesOBJ</a></li>
-							<li><a href="#5_10_4" title="The optional supplementalCaseTestPropertiesOBJ parameter lets you specify supplemental test properties that should be applied to each of the cases specified by the casesARRAY parameter.">5.10.4. supplementalCaseTestPropertiesOBJ</a></li>
-							<li><a href="#5_10_5" title="In the following example, a test class is being created for the Uize.capFirstChar static method.">5.10.5. An Example</a></li>
+							<li><a href="#5_11_3" title="When the optional supplementalTestPropertiesOBJ parameter is specified, then additional values for the set-get properties of the created Uize.Test subclass can be specified.">5.11.3. supplementalTestPropertiesOBJ</a></li>
+							<li><a href="#5_11_4" title="The optional supplementalCaseTestPropertiesOBJ parameter lets you specify supplemental test properties that should be applied to each of the cases specified by the casesARRAY parameter.">5.11.4. supplementalCaseTestPropertiesOBJ</a></li>
+							<li><a href="#5_11_5" title="In the following example, a test class is being created for the Uize.capFirstChar static method.">5.11.5. An Example</a></li>
 						</ul>
 					</li>
-					<li><a href="#5_11" title="Returns a Uize.Test subclass, for a test that tests all the specified test cases of all the specified static methods.">5.11. Uize.Test.staticMethodsTest</a>
+					<li><a href="#5_12" title="Returns a Uize.Test subclass, for a test that tests all the specified test cases of all the specified static methods.">5.12. Uize.Test.staticMethodsTest</a>
 						<ul>
-							<li><a href="#5_11_1" title="An array, where each element of the array specifies a test for a specific static method.">5.11.1. staticMethodsTestARRAY</a></li>
-							<li><a href="#5_11_2" title="An array, specifying the parameter values for a call to the Uize.Test.staticMethodTest static method, or a value that can be used for the testOBJ parameter of the Uize.Test.declare static method and that will be resolved to a Uize.Test subclass.">5.11.2. staticMethodTestARRAYorOBJ</a></li>
+							<li><a href="#5_12_1" title="An array, where each element of the array specifies a test for a specific static method.">5.12.1. staticMethodsTestARRAY</a></li>
+							<li><a href="#5_12_2" title="An array, specifying the parameter values for a call to the Uize.Test.staticMethodTest static method, or a value that can be used for the testOBJ parameter of the Uize.Test.declare static method and that will be resolved to a Uize.Test subclass.">5.12.2. staticMethodTestARRAYorOBJ</a></li>
 						</ul>
 					</li>
-					<li><a href="#5_12" title="Returns a Uize.Test subclass, for a test that tests whether or not the specified static property exists and is of the specified type.">5.12. Uize.Test.staticPropertyTest</a>
+					<li><a href="#5_13" title="Returns a Uize.Test subclass, for a test that tests whether or not the specified static property exists and is of the specified type.">5.13. Uize.Test.staticPropertyTest</a>
 						<ul>
-							<li><a href="#5_12_1" title="A string, specifying the full name of the static property, including the full host path.">5.12.1. propertyFullNameSTR</a></li>
-							<li><a href="#5_12_2" title="The test class created by the Uize.Test.staticPropertyTest method has two child tests.">5.12.2. What Comprises a Static Property Test</a></li>
-							<li><a href="#5_12_3" title="The following example serves merely to illustrate the behavior of a static property test (typically static property tests won&apos;t be created in this way - they will typically be incorporated into a list of other tests, in a more concise declarative statement).">5.12.3. An Example</a></li>
+							<li><a href="#5_13_1" title="A string, specifying the full name of the static property, including the full host path.">5.13.1. propertyFullNameSTR</a></li>
+							<li><a href="#5_13_2" title="The test class created by the Uize.Test.staticPropertyTest method has two child tests.">5.13.2. What Comprises a Static Property Test</a></li>
+							<li><a href="#5_13_3" title="The following example serves merely to illustrate the behavior of a static property test (typically static property tests won&apos;t be created in this way - they will typically be incorporated into a list of other tests, in a more concise declarative statement).">5.13.3. An Example</a></li>
 						</ul>
 					</li>
-					<li><a href="#5_13" title="Inherited from Uize.Class.">5.13. Uize.Test.subclass</a></li>
-					<li><a href="#5_14" title="Returns a Uize.Test subclass, for a test that safely tests the loading and running of a test module.">5.14. Uize.Test.testModuleTest</a></li>
-					<li><a href="#5_15" title="Returns a Uize.Test subclass, for a test that combines multiple separate test modules into a single test suite.">5.15. Uize.Test.testSuite</a></li>
-					<li><a href="#5_16" title="Inherited from Uize.Class.">5.16. Uize.Test.toggle</a></li>
-					<li><a href="#5_17" title="Inherited from Uize.Class.">5.17. Uize.Test.unwire</a></li>
-					<li><a href="#5_18" title="Inherited from Uize.Class.">5.18. Uize.Test.wire</a></li>
+					<li><a href="#5_14" title="Inherited from Uize.Class.">5.14. Uize.Test.subclass</a></li>
+					<li><a href="#5_15" title="Returns a Uize.Test subclass, for a test that safely tests the loading and running of a test module.">5.15. Uize.Test.testModuleTest</a></li>
+					<li><a href="#5_16" title="Returns a Uize.Test subclass, for a test that combines multiple separate test modules into a single test suite.">5.16. Uize.Test.testSuite</a></li>
+					<li><a href="#5_17" title="Inherited from Uize.Class.">5.17. Uize.Test.toggle</a></li>
+					<li><a href="#5_18" title="Inherited from Uize.Class.">5.18. Uize.Test.unwire</a></li>
+					<li><a href="#5_19" title="Inherited from Uize.Class.">5.19. Uize.Test.wire</a></li>
 				</ul>
 			</li>
 			<li><a href="#6">6. Set-get Properties</a>
@@ -315,7 +316,7 @@
 				
 				<p><span class="allCaps">STATIC METHODS</span></p>
 				
-				<p><code><a href="#5_1">Uize.Test.addTest</a></code> | <code><a href="#5_2">Uize.Test.declare</a></code> | <code><a href="#4_1">Uize.Test.isAsync</a></code> | <code><a href="#5_7">Uize.Test.requiredModulesTest</a></code> | <code><a href="#5_9">Uize.Test.splitHostAndProperty</a></code> | <code><a href="#5_10">Uize.Test.staticMethodTest</a></code> | <code><a href="#5_11">Uize.Test.staticMethodsTest</a></code> | <code><a href="#5_12">Uize.Test.staticPropertyTest</a></code> | <code><a href="#5_14">Uize.Test.testModuleTest</a></code> | <code><a href="#5_15">Uize.Test.testSuite</a></code></p>
+				<p><code><a href="#5_1">Uize.Test.addTest</a></code> | <code><a href="#5_2">Uize.Test.declare</a></code> | <code><a href="#4_1">Uize.Test.isAsync</a></code> | <code><a href="#5_7">Uize.Test.requiredModulesTest</a></code> | <code><a href="#5_10">Uize.Test.splitHostAndProperty</a></code> | <code><a href="#5_11">Uize.Test.staticMethodTest</a></code> | <code><a href="#5_12">Uize.Test.staticMethodsTest</a></code> | <code><a href="#5_13">Uize.Test.staticPropertyTest</a></code> | <code><a href="#5_15">Uize.Test.testModuleTest</a></code> | <code><a href="#5_16">Uize.Test.testSuite</a></code></p>
 			</div>
 			
 			<a name="1_2_2"></a>
@@ -343,7 +344,7 @@
 				
 				<p><span class="allCaps">STATIC METHODS</span></p>
 				
-				<p><code><a href="#5_3">Uize.Test.fire</a></code> | <code><a href="#5_4">Uize.Test.get</a></code> | <code><a href="#5_6">Uize.Test.registerProperties</a></code> | <code><a href="#5_8">Uize.Test.set</a></code> | <code><a href="#5_13">Uize.Test.subclass</a></code> | <code><a href="#5_16">Uize.Test.toggle</a></code> | <code><a href="#5_17">Uize.Test.unwire</a></code> | <code><a href="#5_18">Uize.Test.wire</a></code></p>
+				<p><code><a href="#5_3">Uize.Test.fire</a></code> | <code><a href="#5_4">Uize.Test.get</a></code> | <code><a href="#5_6">Uize.Test.registerProperties</a></code> | <code><a href="#5_8">Uize.Test.set</a></code> | <code><a href="#5_9">Uize.Test.singleton</a></code> | <code><a href="#5_14">Uize.Test.subclass</a></code> | <code><a href="#5_17">Uize.Test.toggle</a></code> | <code><a href="#5_18">Uize.Test.unwire</a></code> | <code><a href="#5_19">Uize.Test.wire</a></code></p>
 			</div>
 			
 			<a name="1_2_4"></a>
@@ -2054,7 +2055,7 @@ My2Plus2Equals4TestClass.set ({
 });
 </pre>
 				
-				<p>The value of the <code><a href="#6_10">test</a></code> set-get property in this case is an array, which contains a sequence of child tests. The elements of the child tests array are resolved to test classes (see <a href="#5_2_4">Resolving Subtests</a>). In this example, the child tests array contains a mix of child tests declared in different ways: the first child test is declared using the simple object syntax, the second is declared by calling the <code><a href="#5_2">Uize.Test.declare</a></code> method explicitly, and the remaining child tests are declared by calling the <code><a href="#5_12">Uize.Test.staticPropertyTest</a></code> static method.</p>
+				<p>The value of the <code><a href="#6_10">test</a></code> set-get property in this case is an array, which contains a sequence of child tests. The elements of the child tests array are resolved to test classes (see <a href="#5_2_4">Resolving Subtests</a>). In this example, the child tests array contains a mix of child tests declared in different ways: the first child test is declared using the simple object syntax, the second is declared by calling the <code><a href="#5_2">Uize.Test.declare</a></code> method explicitly, and the remaining child tests are declared by calling the <code><a href="#5_13">Uize.Test.staticPropertyTest</a></code> static method.</p>
 			</div>
 			
 			<p><span class="allCaps">NOTES</span></p>
@@ -2190,7 +2191,20 @@ My2Plus2Equals4TestClass.set ({
 		</div>
 		
 		<a name="5_9"></a>
-		<h2 class="heading2" title="5. Static Methods -&gt; 5.9. Uize.Test.splitHostAndProperty"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_9" title="5. Static Methods -&gt; 5.9. Uize.Test.splitHostAndProperty">9</a>. </span>Uize.Test.splitHostAndProperty</h2>
+		<h2 class="heading2" title="5. Static Methods -&gt; 5.9. Uize.Test.singleton"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_9" title="5. Static Methods -&gt; 5.9. Uize.Test.singleton">9</a>. </span>Uize.Test.singleton</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
+			</table>
+		</div>
+		
+		<a name="5_10"></a>
+		<h2 class="heading2" title="5. Static Methods -&gt; 5.10. Uize.Test.splitHostAndProperty"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_10" title="5. Static Methods -&gt; 5.10. Uize.Test.splitHostAndProperty">10</a>. </span>Uize.Test.splitHostAndProperty</h2>
 		<div class="contents2">
 			<p>Returns an object, containing <code>host</code> and <code>property</code> properties that represent the specified property full path name split into the two parts.</p>
 			
@@ -2209,7 +2223,7 @@ My2Plus2Equals4TestClass.set ({
 }
 </pre>
 			
-			<p>The value of the <code><a href="#5_12_1">propertyFullNameSTR</a></code> parameter should be a string that fully qualifies the path for referencing a property in the global context (eg. <code>'Uize.Test.declare'</code>). The <code><a href="#5_9">Uize.Test.splitHostAndProperty</a></code> method splits this string into host and property strings, and packages these two string values into an object. Supplied our example value of <code>'Uize.Test.declare'</code>, the <code><a href="#5_9">Uize.Test.splitHostAndProperty</a></code> method would return the object <code>{host:'Uize.Test',property:'declare'}</code>.</p>
+			<p>The value of the <code><a href="#5_13_1">propertyFullNameSTR</a></code> parameter should be a string that fully qualifies the path for referencing a property in the global context (eg. <code>'Uize.Test.declare'</code>). The <code><a href="#5_10">Uize.Test.splitHostAndProperty</a></code> method splits this string into host and property strings, and packages these two string values into an object. Supplied our example value of <code>'Uize.Test.declare'</code>, the <code><a href="#5_10">Uize.Test.splitHostAndProperty</a></code> method would return the object <code>{host:'Uize.Test',property:'declare'}</code>.</p>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -2219,8 +2233,8 @@ My2Plus2Equals4TestClass.set ({
 			</table>
 		</div>
 		
-		<a name="5_10"></a>
-		<h2 class="heading2" title="5. Static Methods -&gt; 5.10. Uize.Test.staticMethodTest"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_10" title="5. Static Methods -&gt; 5.10. Uize.Test.staticMethodTest">10</a>. </span>Uize.Test.staticMethodTest</h2>
+		<a name="5_11"></a>
+		<h2 class="heading2" title="5. Static Methods -&gt; 5.11. Uize.Test.staticMethodTest"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_11" title="5. Static Methods -&gt; 5.11. Uize.Test.staticMethodTest">11</a>. </span>Uize.Test.staticMethodTest</h2>
 		<div class="contents2">
 			<p>Returns a <code>Uize.Test</code> subclass, for a test that tests whether or not the specified static method is defined and all the specified test cases succeed.</p>
 			
@@ -2235,16 +2249,16 @@ My2Plus2Equals4TestClass.set ({
 );
 </pre>
 			
-			<a name="5_10_1"></a>
-			<h3 class="heading3" title="5. Static Methods -&gt; 5.10. Uize.Test.staticMethodTest -&gt; 5.10.1. methodFullNameSTR"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_10" title="5. Static Methods -&gt; 5.10. Uize.Test.staticMethodTest">10</a>.<a href="#5_10_1" title="5. Static Methods -&gt; 5.10. Uize.Test.staticMethodTest -&gt; 5.10.1. methodFullNameSTR">1</a>. </span>methodFullNameSTR</h3>
+			<a name="5_11_1"></a>
+			<h3 class="heading3" title="5. Static Methods -&gt; 5.11. Uize.Test.staticMethodTest -&gt; 5.11.1. methodFullNameSTR"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_11" title="5. Static Methods -&gt; 5.11. Uize.Test.staticMethodTest">11</a>.<a href="#5_11_1" title="5. Static Methods -&gt; 5.11. Uize.Test.staticMethodTest -&gt; 5.11.1. methodFullNameSTR">1</a>. </span>methodFullNameSTR</h3>
 			<div class="contents3">
 				<p>A string, specifying the full name of the static method, including the full host path.</p>
 				
-				<p>For example, with the "declare" method of the <code>Uize.Test</code> module, the value specified for the <code><a href="#5_10_1">methodFullNameSTR</a></code> parameter would be <code>'Uize.Test.declare'</code>.</p>
+				<p>For example, with the "declare" method of the <code>Uize.Test</code> module, the value specified for the <code><a href="#5_11_1">methodFullNameSTR</a></code> parameter would be <code>'Uize.Test.declare'</code>.</p>
 			</div>
 			
-			<a name="5_10_2"></a>
-			<h3 class="heading3" title="5. Static Methods -&gt; 5.10. Uize.Test.staticMethodTest -&gt; 5.10.2. casesARRAY"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_10" title="5. Static Methods -&gt; 5.10. Uize.Test.staticMethodTest">10</a>.<a href="#5_10_2" title="5. Static Methods -&gt; 5.10. Uize.Test.staticMethodTest -&gt; 5.10.2. casesARRAY">2</a>. </span>casesARRAY</h3>
+			<a name="5_11_2"></a>
+			<h3 class="heading3" title="5. Static Methods -&gt; 5.11. Uize.Test.staticMethodTest -&gt; 5.11.2. casesARRAY"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_11" title="5. Static Methods -&gt; 5.11. Uize.Test.staticMethodTest">11</a>.<a href="#5_11_2" title="5. Static Methods -&gt; 5.11. Uize.Test.staticMethodTest -&gt; 5.11.2. casesARRAY">2</a>. </span>casesARRAY</h3>
 			<div class="contents3">
 				<p>An array, containing a sequence of test cases, all of which need to succeed in order for the static method test to succeed.</p>
 				
@@ -2259,17 +2273,17 @@ My2Plus2Equals4TestClass.set ({
 ]
 </pre>
 				
-				<p>Each element of the <code><a href="#5_10_2">casesARRAY</a></code> array should be of the type <code><a href="#5_10_2_1">caseARRAYorOBJ</a></code> and will be resolved to a <code>Uize.Test</code> subclass.</p>
+				<p>Each element of the <code><a href="#5_11_2">casesARRAY</a></code> array should be of the type <code><a href="#5_11_2_1">caseARRAYorOBJ</a></code> and will be resolved to a <code>Uize.Test</code> subclass.</p>
 				
-				<a name="5_10_2_1"></a>
-				<h4 class="heading4" title="5. Static Methods -&gt; 5.10. Uize.Test.staticMethodTest -&gt; 5.10.2. casesARRAY -&gt; 5.10.2.1. caseARRAYorOBJ"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_10" title="5. Static Methods -&gt; 5.10. Uize.Test.staticMethodTest">10</a>.<a href="#5_10_2" title="5. Static Methods -&gt; 5.10. Uize.Test.staticMethodTest -&gt; 5.10.2. casesARRAY">2</a>.<a href="#5_10_2_1" title="5. Static Methods -&gt; 5.10. Uize.Test.staticMethodTest -&gt; 5.10.2. casesARRAY -&gt; 5.10.2.1. caseARRAYorOBJ">1</a>. </span>caseARRAYorOBJ</h4>
+				<a name="5_11_2_1"></a>
+				<h4 class="heading4" title="5. Static Methods -&gt; 5.11. Uize.Test.staticMethodTest -&gt; 5.11.2. casesARRAY -&gt; 5.11.2.1. caseARRAYorOBJ"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_11" title="5. Static Methods -&gt; 5.11. Uize.Test.staticMethodTest">11</a>.<a href="#5_11_2" title="5. Static Methods -&gt; 5.11. Uize.Test.staticMethodTest -&gt; 5.11.2. casesARRAY">2</a>.<a href="#5_11_2_1" title="5. Static Methods -&gt; 5.11. Uize.Test.staticMethodTest -&gt; 5.11.2. casesARRAY -&gt; 5.11.2.1. caseARRAYorOBJ">1</a>. </span>caseARRAYorOBJ</h4>
 				<div class="contents4">
 					<p>An array, providing a concise declaration of a synchronous, deterministic test case for the static method, or an object providing a declaration of a generic test, or an instance of a <code>Uize.Test</code> subclass.</p>
 					
-					<a name="5_10_2_1_1"></a>
-					<h5 class="heading5" title="5. Static Methods -&gt; 5.10. Uize.Test.staticMethodTest -&gt; 5.10.2. casesARRAY -&gt; 5.10.2.1. caseARRAYorOBJ -&gt; 5.10.2.1.1. Synchronous and Deterministic Cases"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_10" title="5. Static Methods -&gt; 5.10. Uize.Test.staticMethodTest">10</a>.<a href="#5_10_2" title="5. Static Methods -&gt; 5.10. Uize.Test.staticMethodTest -&gt; 5.10.2. casesARRAY">2</a>.<a href="#5_10_2_1" title="5. Static Methods -&gt; 5.10. Uize.Test.staticMethodTest -&gt; 5.10.2. casesARRAY -&gt; 5.10.2.1. caseARRAYorOBJ">1</a>.<a href="#5_10_2_1_1" title="5. Static Methods -&gt; 5.10. Uize.Test.staticMethodTest -&gt; 5.10.2. casesARRAY -&gt; 5.10.2.1. caseARRAYorOBJ -&gt; 5.10.2.1.1. Synchronous and Deterministic Cases">1</a>. </span>Synchronous and Deterministic Cases</h5>
+					<a name="5_11_2_1_1"></a>
+					<h5 class="heading5" title="5. Static Methods -&gt; 5.11. Uize.Test.staticMethodTest -&gt; 5.11.2. casesARRAY -&gt; 5.11.2.1. caseARRAYorOBJ -&gt; 5.11.2.1.1. Synchronous and Deterministic Cases"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_11" title="5. Static Methods -&gt; 5.11. Uize.Test.staticMethodTest">11</a>.<a href="#5_11_2" title="5. Static Methods -&gt; 5.11. Uize.Test.staticMethodTest -&gt; 5.11.2. casesARRAY">2</a>.<a href="#5_11_2_1" title="5. Static Methods -&gt; 5.11. Uize.Test.staticMethodTest -&gt; 5.11.2. casesARRAY -&gt; 5.11.2.1. caseARRAYorOBJ">1</a>.<a href="#5_11_2_1_1" title="5. Static Methods -&gt; 5.11. Uize.Test.staticMethodTest -&gt; 5.11.2. casesARRAY -&gt; 5.11.2.1. caseARRAYorOBJ -&gt; 5.11.2.1.1. Synchronous and Deterministic Cases">1</a>. </span>Synchronous and Deterministic Cases</h5>
 					<div class="contents5">
-						<p>When an array value is specified for the <code><a href="#5_10_2_1">caseARRAYorOBJ</a></code> value type, then the case describes a synchronous and deterministic test of the static method, and the array should have the following structure...</p>
+						<p>When an array value is specified for the <code><a href="#5_11_2_1">caseARRAYorOBJ</a></code> value type, then the case describes a synchronous and deterministic test of the static method, and the array should have the following structure...</p>
 						
 						<p>caseARRAY</p>
 						
@@ -2283,37 +2297,37 @@ My2Plus2Equals4TestClass.set ({
 						
 						<table class="list">
 						<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>titleSTR</code> - a string, specifying the title of the test case</td></tr>
-						<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>argumentsANYTYPE</code> - either an array of argument values, or a non-array value for the method's single argument (NOTE: in cases where the value for a method's single argument is an array, then that array value <b>must</b> be wrapped in an arguments array so that the <code><a href="#5_10">Uize.Test.staticMethodTest</a></code> method doesn't mistake that array for the arguments array)</td></tr>
+						<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>argumentsANYTYPE</code> - either an array of argument values, or a non-array value for the method's single argument (NOTE: in cases where the value for a method's single argument is an array, then that array value <b>must</b> be wrapped in an arguments array so that the <code><a href="#5_11">Uize.Test.staticMethodTest</a></code> method doesn't mistake that array for the arguments array)</td></tr>
 						<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>expectedResultANYTYPE</code> - the result that is expected to be returned by the static method when calling it with the arguments specified for the case</td></tr>
 						</table>
 					</div>
 					
-					<a name="5_10_2_1_2"></a>
-					<h5 class="heading5" title="5. Static Methods -&gt; 5.10. Uize.Test.staticMethodTest -&gt; 5.10.2. casesARRAY -&gt; 5.10.2.1. caseARRAYorOBJ -&gt; 5.10.2.1.2. Asynchronous or Non-deterministic Cases"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_10" title="5. Static Methods -&gt; 5.10. Uize.Test.staticMethodTest">10</a>.<a href="#5_10_2" title="5. Static Methods -&gt; 5.10. Uize.Test.staticMethodTest -&gt; 5.10.2. casesARRAY">2</a>.<a href="#5_10_2_1" title="5. Static Methods -&gt; 5.10. Uize.Test.staticMethodTest -&gt; 5.10.2. casesARRAY -&gt; 5.10.2.1. caseARRAYorOBJ">1</a>.<a href="#5_10_2_1_2" title="5. Static Methods -&gt; 5.10. Uize.Test.staticMethodTest -&gt; 5.10.2. casesARRAY -&gt; 5.10.2.1. caseARRAYorOBJ -&gt; 5.10.2.1.2. Asynchronous or Non-deterministic Cases">2</a>. </span>Asynchronous or Non-deterministic Cases</h5>
+					<a name="5_11_2_1_2"></a>
+					<h5 class="heading5" title="5. Static Methods -&gt; 5.11. Uize.Test.staticMethodTest -&gt; 5.11.2. casesARRAY -&gt; 5.11.2.1. caseARRAYorOBJ -&gt; 5.11.2.1.2. Asynchronous or Non-deterministic Cases"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_11" title="5. Static Methods -&gt; 5.11. Uize.Test.staticMethodTest">11</a>.<a href="#5_11_2" title="5. Static Methods -&gt; 5.11. Uize.Test.staticMethodTest -&gt; 5.11.2. casesARRAY">2</a>.<a href="#5_11_2_1" title="5. Static Methods -&gt; 5.11. Uize.Test.staticMethodTest -&gt; 5.11.2. casesARRAY -&gt; 5.11.2.1. caseARRAYorOBJ">1</a>.<a href="#5_11_2_1_2" title="5. Static Methods -&gt; 5.11. Uize.Test.staticMethodTest -&gt; 5.11.2. casesARRAY -&gt; 5.11.2.1. caseARRAYorOBJ -&gt; 5.11.2.1.2. Asynchronous or Non-deterministic Cases">2</a>. </span>Asynchronous or Non-deterministic Cases</h5>
 					<div class="contents5">
-						<p>When a case is either asynchronous or non-deterministic (ie. you can't be guaranteed to always get the same result returned for the same argument values), then you cannot use the concise array syntax for declaring the case as you can with <a href="#5_10_2_1_1">Synchronous and Deterministic Cases</a>.</p>
+						<p>When a case is either asynchronous or non-deterministic (ie. you can't be guaranteed to always get the same result returned for the same argument values), then you cannot use the concise array syntax for declaring the case as you can with <a href="#5_11_2_1_1">Synchronous and Deterministic Cases</a>.</p>
 						
 						<p>Instead, you can use the object syntax accepted for the <code><a href="#5_2_1">testOBJ</a></code> parameter of the <code><a href="#5_2">Uize.Test.declare</a></code> static method, or you can provide a <code>Uize.Test</code> subclass (created by one of the Test Class Factory Methods, or otherwise created).</p>
 					</div>
 				</div>
 			</div>
 			
-			<a name="5_10_3"></a>
-			<h3 class="heading3" title="5. Static Methods -&gt; 5.10. Uize.Test.staticMethodTest -&gt; 5.10.3. supplementalTestPropertiesOBJ"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_10" title="5. Static Methods -&gt; 5.10. Uize.Test.staticMethodTest">10</a>.<a href="#5_10_3" title="5. Static Methods -&gt; 5.10. Uize.Test.staticMethodTest -&gt; 5.10.3. supplementalTestPropertiesOBJ">3</a>. </span>supplementalTestPropertiesOBJ</h3>
+			<a name="5_11_3"></a>
+			<h3 class="heading3" title="5. Static Methods -&gt; 5.11. Uize.Test.staticMethodTest -&gt; 5.11.3. supplementalTestPropertiesOBJ"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_11" title="5. Static Methods -&gt; 5.11. Uize.Test.staticMethodTest">11</a>.<a href="#5_11_3" title="5. Static Methods -&gt; 5.11. Uize.Test.staticMethodTest -&gt; 5.11.3. supplementalTestPropertiesOBJ">3</a>. </span>supplementalTestPropertiesOBJ</h3>
 			<div class="contents3">
-				<p>When the optional <code><a href="#5_10_3">supplementalTestPropertiesOBJ</a></code> parameter is specified, then additional values for the set-get properties of the created <code>Uize.Test</code> subclass can be specified.</p>
+				<p>When the optional <code><a href="#5_11_3">supplementalTestPropertiesOBJ</a></code> parameter is specified, then additional values for the set-get properties of the created <code>Uize.Test</code> subclass can be specified.</p>
 				
 				<p>Among other things, this allows the <code><a href="#6_11">title</a></code> of the test class to be specified (rather than using the automatically generated title).</p>
 			</div>
 			
-			<a name="5_10_4"></a>
-			<h3 class="heading3" title="5. Static Methods -&gt; 5.10. Uize.Test.staticMethodTest -&gt; 5.10.4. supplementalCaseTestPropertiesOBJ"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_10" title="5. Static Methods -&gt; 5.10. Uize.Test.staticMethodTest">10</a>.<a href="#5_10_4" title="5. Static Methods -&gt; 5.10. Uize.Test.staticMethodTest -&gt; 5.10.4. supplementalCaseTestPropertiesOBJ">4</a>. </span>supplementalCaseTestPropertiesOBJ</h3>
+			<a name="5_11_4"></a>
+			<h3 class="heading3" title="5. Static Methods -&gt; 5.11. Uize.Test.staticMethodTest -&gt; 5.11.4. supplementalCaseTestPropertiesOBJ"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_11" title="5. Static Methods -&gt; 5.11. Uize.Test.staticMethodTest">11</a>.<a href="#5_11_4" title="5. Static Methods -&gt; 5.11. Uize.Test.staticMethodTest -&gt; 5.11.4. supplementalCaseTestPropertiesOBJ">4</a>. </span>supplementalCaseTestPropertiesOBJ</h3>
 			<div class="contents3">
-				<p>The optional <code><a href="#5_10_4">supplementalCaseTestPropertiesOBJ</a></code> parameter lets you specify supplemental test properties that should be applied to each of the cases specified by the <code><a href="#5_10_2">casesARRAY</a></code> parameter.</p>
+				<p>The optional <code><a href="#5_11_4">supplementalCaseTestPropertiesOBJ</a></code> parameter lets you specify supplemental test properties that should be applied to each of the cases specified by the <code><a href="#5_11_2">casesARRAY</a></code> parameter.</p>
 			</div>
 			
-			<a name="5_10_5"></a>
-			<h3 class="heading3" title="5. Static Methods -&gt; 5.10. Uize.Test.staticMethodTest -&gt; 5.10.5. An Example"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_10" title="5. Static Methods -&gt; 5.10. Uize.Test.staticMethodTest">10</a>.<a href="#5_10_5" title="5. Static Methods -&gt; 5.10. Uize.Test.staticMethodTest -&gt; 5.10.5. An Example">5</a>. </span>An Example</h3>
+			<a name="5_11_5"></a>
+			<h3 class="heading3" title="5. Static Methods -&gt; 5.11. Uize.Test.staticMethodTest -&gt; 5.11.5. An Example"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_11" title="5. Static Methods -&gt; 5.11. Uize.Test.staticMethodTest">11</a>.<a href="#5_11_5" title="5. Static Methods -&gt; 5.11. Uize.Test.staticMethodTest -&gt; 5.11.5. An Example">5</a>. </span>An Example</h3>
 			<div class="contents3">
 				<p>In the following example, a test class is being created for the <code>Uize.capFirstChar</code> static method.</p>
 				
@@ -2332,13 +2346,13 @@ My2Plus2Equals4TestClass.set ({
 );
 </pre>
 				
-				<p>Notice how, with each of the test cases, the value specified for the arguments is a string - not an array. This is because the <code>Uize.capFirstChar</code> method takes only one parameter, and for cases where methods only take a single parameter, the <code><a href="#5_10">Uize.Test.staticMethodTest</a></code> method supports that single value being specified without the arguments array "wrapper".</p>
+				<p>Notice how, with each of the test cases, the value specified for the arguments is a string - not an array. This is because the <code>Uize.capFirstChar</code> method takes only one parameter, and for cases where methods only take a single parameter, the <code><a href="#5_11">Uize.Test.staticMethodTest</a></code> method supports that single value being specified without the arguments array "wrapper".</p>
 			</div>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#5_11">Uize.Test.staticMethodsTest</a></code> static method</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#5_12">Uize.Test.staticMethodsTest</a></code> static method</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this method is one of the many available Test Class Factory Methods</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -2349,8 +2363,8 @@ My2Plus2Equals4TestClass.set ({
 			</table>
 		</div>
 		
-		<a name="5_11"></a>
-		<h2 class="heading2" title="5. Static Methods -&gt; 5.11. Uize.Test.staticMethodsTest"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_11" title="5. Static Methods -&gt; 5.11. Uize.Test.staticMethodsTest">11</a>. </span>Uize.Test.staticMethodsTest</h2>
+		<a name="5_12"></a>
+		<h2 class="heading2" title="5. Static Methods -&gt; 5.12. Uize.Test.staticMethodsTest"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_12" title="5. Static Methods -&gt; 5.12. Uize.Test.staticMethodsTest">12</a>. </span>Uize.Test.staticMethodsTest</h2>
 		<div class="contents2">
 			<p>Returns a <code>Uize.Test</code> subclass, for a test that tests all the specified test cases of all the specified static methods.</p>
 			
@@ -2360,10 +2374,10 @@ My2Plus2Equals4TestClass.set ({
 <pre class="sample-code">testCLASS = Uize.Test.staticMethodsTest (staticMethodsTestARRAY);
 </pre>
 			
-			<p>The <code><a href="#5_11">Uize.Test.staticMethodsTest</a></code> method is a convenience method that provides a more concise way to declare static methods tests for multiple static methods in a single statement.</p>
+			<p>The <code><a href="#5_12">Uize.Test.staticMethodsTest</a></code> method is a convenience method that provides a more concise way to declare static methods tests for multiple static methods in a single statement.</p>
 			
-			<a name="5_11_1"></a>
-			<h3 class="heading3" title="5. Static Methods -&gt; 5.11. Uize.Test.staticMethodsTest -&gt; 5.11.1. staticMethodsTestARRAY"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_11" title="5. Static Methods -&gt; 5.11. Uize.Test.staticMethodsTest">11</a>.<a href="#5_11_1" title="5. Static Methods -&gt; 5.11. Uize.Test.staticMethodsTest -&gt; 5.11.1. staticMethodsTestARRAY">1</a>. </span>staticMethodsTestARRAY</h3>
+			<a name="5_12_1"></a>
+			<h3 class="heading3" title="5. Static Methods -&gt; 5.12. Uize.Test.staticMethodsTest -&gt; 5.12.1. staticMethodsTestARRAY"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_12" title="5. Static Methods -&gt; 5.12. Uize.Test.staticMethodsTest">12</a>.<a href="#5_12_1" title="5. Static Methods -&gt; 5.12. Uize.Test.staticMethodsTest -&gt; 5.12.1. staticMethodsTestARRAY">1</a>. </span>staticMethodsTestARRAY</h3>
 			<div class="contents3">
 				<p>An array, where each element of the array specifies a test for a specific static method.</p>
 				
@@ -2379,12 +2393,12 @@ My2Plus2Equals4TestClass.set ({
 </pre>
 			</div>
 			
-			<a name="5_11_2"></a>
-			<h3 class="heading3" title="5. Static Methods -&gt; 5.11. Uize.Test.staticMethodsTest -&gt; 5.11.2. staticMethodTestARRAYorOBJ"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_11" title="5. Static Methods -&gt; 5.11. Uize.Test.staticMethodsTest">11</a>.<a href="#5_11_2" title="5. Static Methods -&gt; 5.11. Uize.Test.staticMethodsTest -&gt; 5.11.2. staticMethodTestARRAYorOBJ">2</a>. </span>staticMethodTestARRAYorOBJ</h3>
+			<a name="5_12_2"></a>
+			<h3 class="heading3" title="5. Static Methods -&gt; 5.12. Uize.Test.staticMethodsTest -&gt; 5.12.2. staticMethodTestARRAYorOBJ"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_12" title="5. Static Methods -&gt; 5.12. Uize.Test.staticMethodsTest">12</a>.<a href="#5_12_2" title="5. Static Methods -&gt; 5.12. Uize.Test.staticMethodsTest -&gt; 5.12.2. staticMethodTestARRAYorOBJ">2</a>. </span>staticMethodTestARRAYorOBJ</h3>
 			<div class="contents3">
-				<p>An array, specifying the parameter values for a call to the <code><a href="#5_10">Uize.Test.staticMethodTest</a></code> static method, or a value that can be used for the <code><a href="#5_2_1">testOBJ</a></code> parameter of the <code><a href="#5_2">Uize.Test.declare</a></code> static method and that will be resolved to a <code>Uize.Test</code> subclass.</p>
+				<p>An array, specifying the parameter values for a call to the <code><a href="#5_11">Uize.Test.staticMethodTest</a></code> static method, or a value that can be used for the <code><a href="#5_2_1">testOBJ</a></code> parameter of the <code><a href="#5_2">Uize.Test.declare</a></code> static method and that will be resolved to a <code>Uize.Test</code> subclass.</p>
 				
-				<p>If an array value is specified for the <code><a href="#5_11_2">staticMethodTestARRAYorOBJ</a></code> value type, then it should have the following structure...</p>
+				<p>If an array value is specified for the <code><a href="#5_12_2">staticMethodTestARRAYorOBJ</a></code> value type, then it should have the following structure...</p>
 				
 				<p>staticMethodTestARRAY</p>
 				
@@ -2395,7 +2409,7 @@ My2Plus2Equals4TestClass.set ({
 ]
 </pre>
 				
-				<p>When a non-array value is specified for the <code><a href="#5_11_2">staticMethodTestARRAYorOBJ</a></code> value type, then it will be resolved to a <code>Uize.Test</code> subclass using the <code><a href="#5_2">Uize.Test.declare</a></code> static method.</p>
+				<p>When a non-array value is specified for the <code><a href="#5_12_2">staticMethodTestARRAYorOBJ</a></code> value type, then it will be resolved to a <code>Uize.Test</code> subclass using the <code><a href="#5_2">Uize.Test.declare</a></code> static method.</p>
 			</div>
 			
 			<p><span class="allCaps">EXAMPLE</span></p>
@@ -2470,7 +2484,7 @@ My2Plus2Equals4TestClass.set ({
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#5_10">Uize.Test.staticMethodTest</a></code> static method</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#5_11">Uize.Test.staticMethodTest</a></code> static method</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this method is one of the many available Test Class Factory Methods</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -2481,8 +2495,8 @@ My2Plus2Equals4TestClass.set ({
 			</table>
 		</div>
 		
-		<a name="5_12"></a>
-		<h2 class="heading2" title="5. Static Methods -&gt; 5.12. Uize.Test.staticPropertyTest"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_12" title="5. Static Methods -&gt; 5.12. Uize.Test.staticPropertyTest">12</a>. </span>Uize.Test.staticPropertyTest</h2>
+		<a name="5_13"></a>
+		<h2 class="heading2" title="5. Static Methods -&gt; 5.13. Uize.Test.staticPropertyTest"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_13" title="5. Static Methods -&gt; 5.13. Uize.Test.staticPropertyTest">13</a>. </span>Uize.Test.staticPropertyTest</h2>
 		<div class="contents2">
 			<p>Returns a <code>Uize.Test</code> subclass, for a test that tests whether or not the specified static property exists and is of the specified type.</p>
 			
@@ -2492,24 +2506,24 @@ My2Plus2Equals4TestClass.set ({
 <pre class="sample-code">testCLASS = Uize.Test.staticPropertyTest (propertyFullNameSTR,typeSTR);
 </pre>
 			
-			<a name="5_12_1"></a>
-			<h3 class="heading3" title="5. Static Methods -&gt; 5.12. Uize.Test.staticPropertyTest -&gt; 5.12.1. propertyFullNameSTR"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_12" title="5. Static Methods -&gt; 5.12. Uize.Test.staticPropertyTest">12</a>.<a href="#5_12_1" title="5. Static Methods -&gt; 5.12. Uize.Test.staticPropertyTest -&gt; 5.12.1. propertyFullNameSTR">1</a>. </span>propertyFullNameSTR</h3>
+			<a name="5_13_1"></a>
+			<h3 class="heading3" title="5. Static Methods -&gt; 5.13. Uize.Test.staticPropertyTest -&gt; 5.13.1. propertyFullNameSTR"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_13" title="5. Static Methods -&gt; 5.13. Uize.Test.staticPropertyTest">13</a>.<a href="#5_13_1" title="5. Static Methods -&gt; 5.13. Uize.Test.staticPropertyTest -&gt; 5.13.1. propertyFullNameSTR">1</a>. </span>propertyFullNameSTR</h3>
 			<div class="contents3">
 				<p>A string, specifying the full name of the static property, including the full host path.</p>
 				
-				<p>For example, with the "isAsync" property of the <code>Uize.Test</code> module, the value specified for the <code><a href="#5_12_1">propertyFullNameSTR</a></code> parameter would be <code>'Uize.Test.isAsync'</code>.</p>
+				<p>For example, with the "isAsync" property of the <code>Uize.Test</code> module, the value specified for the <code><a href="#5_13_1">propertyFullNameSTR</a></code> parameter would be <code>'Uize.Test.isAsync'</code>.</p>
 			</div>
 			
-			<a name="5_12_2"></a>
-			<h3 class="heading3" title="5. Static Methods -&gt; 5.12. Uize.Test.staticPropertyTest -&gt; 5.12.2. What Comprises a Static Property Test"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_12" title="5. Static Methods -&gt; 5.12. Uize.Test.staticPropertyTest">12</a>.<a href="#5_12_2" title="5. Static Methods -&gt; 5.12. Uize.Test.staticPropertyTest -&gt; 5.12.2. What Comprises a Static Property Test">2</a>. </span>What Comprises a Static Property Test</h3>
+			<a name="5_13_2"></a>
+			<h3 class="heading3" title="5. Static Methods -&gt; 5.13. Uize.Test.staticPropertyTest -&gt; 5.13.2. What Comprises a Static Property Test"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_13" title="5. Static Methods -&gt; 5.13. Uize.Test.staticPropertyTest">13</a>.<a href="#5_13_2" title="5. Static Methods -&gt; 5.13. Uize.Test.staticPropertyTest -&gt; 5.13.2. What Comprises a Static Property Test">2</a>. </span>What Comprises a Static Property Test</h3>
 			<div class="contents3">
-				<p>The test class created by the <code><a href="#5_12">Uize.Test.staticPropertyTest</a></code> method has two child tests.</p>
+				<p>The test class created by the <code><a href="#5_13">Uize.Test.staticPropertyTest</a></code> method has two child tests.</p>
 				
-				<p>The first test tests whether or not the property's host is defined (with the value <code>'Uize.Test.isAsync'</code> specified for the <code><a href="#5_12_1">propertyFullNameSTR</a></code> parameter, that would test for <code>Uize.Test</code> to be defined). The second test tests that the specified property is of the specified type.</p>
+				<p>The first test tests whether or not the property's host is defined (with the value <code>'Uize.Test.isAsync'</code> specified for the <code><a href="#5_13_1">propertyFullNameSTR</a></code> parameter, that would test for <code>Uize.Test</code> to be defined). The second test tests that the specified property is of the specified type.</p>
 			</div>
 			
-			<a name="5_12_3"></a>
-			<h3 class="heading3" title="5. Static Methods -&gt; 5.12. Uize.Test.staticPropertyTest -&gt; 5.12.3. An Example"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_12" title="5. Static Methods -&gt; 5.12. Uize.Test.staticPropertyTest">12</a>.<a href="#5_12_3" title="5. Static Methods -&gt; 5.12. Uize.Test.staticPropertyTest -&gt; 5.12.3. An Example">3</a>. </span>An Example</h3>
+			<a name="5_13_3"></a>
+			<h3 class="heading3" title="5. Static Methods -&gt; 5.13. Uize.Test.staticPropertyTest -&gt; 5.13.3. An Example"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_13" title="5. Static Methods -&gt; 5.13. Uize.Test.staticPropertyTest">13</a>.<a href="#5_13_3" title="5. Static Methods -&gt; 5.13. Uize.Test.staticPropertyTest -&gt; 5.13.3. An Example">3</a>. </span>An Example</h3>
 			<div class="contents3">
 				<p>The following example serves merely to illustrate the behavior of a static property test (typically static property tests won't be created in this way - they will typically be incorporated into a list of other tests, in a more concise declarative statement).</p>
 				
@@ -2543,8 +2557,8 @@ staticPropertyTest.run (
 			</table>
 		</div>
 		
-		<a name="5_13"></a>
-		<h2 class="heading2" title="5. Static Methods -&gt; 5.13. Uize.Test.subclass"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_13" title="5. Static Methods -&gt; 5.13. Uize.Test.subclass">13</a>. </span>Uize.Test.subclass</h2>
+		<a name="5_14"></a>
+		<h2 class="heading2" title="5. Static Methods -&gt; 5.14. Uize.Test.subclass"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_14" title="5. Static Methods -&gt; 5.14. Uize.Test.subclass">14</a>. </span>Uize.Test.subclass</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
@@ -2556,8 +2570,8 @@ staticPropertyTest.run (
 			</table>
 		</div>
 		
-		<a name="5_14"></a>
-		<h2 class="heading2" title="5. Static Methods -&gt; 5.14. Uize.Test.testModuleTest"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_14" title="5. Static Methods -&gt; 5.14. Uize.Test.testModuleTest">14</a>. </span>Uize.Test.testModuleTest</h2>
+		<a name="5_15"></a>
+		<h2 class="heading2" title="5. Static Methods -&gt; 5.15. Uize.Test.testModuleTest"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_15" title="5. Static Methods -&gt; 5.15. Uize.Test.testModuleTest">15</a>. </span>Uize.Test.testModuleTest</h2>
 		<div class="contents2">
 			<p>Returns a <code>Uize.Test</code> subclass, for a test that safely tests the loading and running of a test module.</p>
 			
@@ -2588,8 +2602,8 @@ staticPropertyTest.run (
 			</table>
 		</div>
 		
-		<a name="5_15"></a>
-		<h2 class="heading2" title="5. Static Methods -&gt; 5.15. Uize.Test.testSuite"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_15" title="5. Static Methods -&gt; 5.15. Uize.Test.testSuite">15</a>. </span>Uize.Test.testSuite</h2>
+		<a name="5_16"></a>
+		<h2 class="heading2" title="5. Static Methods -&gt; 5.16. Uize.Test.testSuite"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_16" title="5. Static Methods -&gt; 5.16. Uize.Test.testSuite">16</a>. </span>Uize.Test.testSuite</h2>
 		<div class="contents2">
 			<p>Returns a <code>Uize.Test</code> subclass, for a test that combines multiple separate test modules into a single test suite.</p>
 			
@@ -2599,7 +2613,7 @@ staticPropertyTest.run (
 <pre class="sample-code">testCLASS = Uize.Test.testSuite (testSuiteTitleSTR,testSuiteModulesARRAY);
 </pre>
 			
-			<p>The <code><a href="#5_15">Uize.Test.testSuite</a></code> method wraps each of the test modules specified in the <code>testSuiteModulesARRAY</code> parameter in a test module test, using the <code><a href="#5_14">Uize.Test.testModuleTest</a></code> static method. This ensures that the many individual test modules that make up a test suite are only loaded dynamically as needed when the test suite is run - they are not directly required by the test suite test, and they do not need to be loaded in just so that the test suite's test class can be built. This is a good thing, because many of the test modules are rather large.</p>
+			<p>The <code><a href="#5_16">Uize.Test.testSuite</a></code> method wraps each of the test modules specified in the <code>testSuiteModulesARRAY</code> parameter in a test module test, using the <code><a href="#5_15">Uize.Test.testModuleTest</a></code> static method. This ensures that the many individual test modules that make up a test suite are only loaded dynamically as needed when the test suite is run - they are not directly required by the test suite test, and they do not need to be loaded in just so that the test suite's test class can be built. This is a good thing, because many of the test modules are rather large.</p>
 			
 			<p><span class="allCaps">EXAMPLE</span></p>
 			
@@ -2636,21 +2650,8 @@ staticPropertyTest.run (
 			</table>
 		</div>
 		
-		<a name="5_16"></a>
-		<h2 class="heading2" title="5. Static Methods -&gt; 5.16. Uize.Test.toggle"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_16" title="5. Static Methods -&gt; 5.16. Uize.Test.toggle">16</a>. </span>Uize.Test.toggle</h2>
-		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
-			
-			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
-			
-			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
-			</table>
-		</div>
-		
 		<a name="5_17"></a>
-		<h2 class="heading2" title="5. Static Methods -&gt; 5.17. Uize.Test.unwire"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_17" title="5. Static Methods -&gt; 5.17. Uize.Test.unwire">17</a>. </span>Uize.Test.unwire</h2>
+		<h2 class="heading2" title="5. Static Methods -&gt; 5.17. Uize.Test.toggle"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_17" title="5. Static Methods -&gt; 5.17. Uize.Test.toggle">17</a>. </span>Uize.Test.toggle</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
@@ -2663,7 +2664,20 @@ staticPropertyTest.run (
 		</div>
 		
 		<a name="5_18"></a>
-		<h2 class="heading2" title="5. Static Methods -&gt; 5.18. Uize.Test.wire"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_18" title="5. Static Methods -&gt; 5.18. Uize.Test.wire">18</a>. </span>Uize.Test.wire</h2>
+		<h2 class="heading2" title="5. Static Methods -&gt; 5.18. Uize.Test.unwire"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_18" title="5. Static Methods -&gt; 5.18. Uize.Test.unwire">18</a>. </span>Uize.Test.unwire</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this static feature is  inherited by subclasses</td></tr>
+			</table>
+		</div>
+		
+		<a name="5_19"></a>
+		<h2 class="heading2" title="5. Static Methods -&gt; 5.19. Uize.Test.wire"><span class="headingNumber"><a href="#5" title="5. Static Methods">5</a>.<a href="#5_19" title="5. Static Methods -&gt; 5.19. Uize.Test.wire">19</a>. </span>Uize.Test.wire</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			

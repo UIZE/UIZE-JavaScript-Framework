@@ -3,8 +3,6 @@
 		Uize.Templates.Collection.js.jst
 */
 
-/*ScruncherSettings Mappings="=" LineCompacting="TRUE"*/
-
 Uize.module ({
 	name:'Uize.Templates.Collection',
 	builder:function () {

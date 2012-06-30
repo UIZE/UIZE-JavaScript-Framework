@@ -3,8 +3,6 @@
 		Uize.Templates.SevenSegmentDisplay.js.jst
 */
 
-/*ScruncherSettings Mappings="=" LineCompacting="TRUE"*/
-
 Uize.module ({
 	name:'Uize.Templates.SevenSegmentDisplay',
 	builder:function () {

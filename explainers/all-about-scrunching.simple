@@ -181,6 +181,15 @@ Scruncher Settings
 			- the default value is =1024=
 			- see also the =LineCompacting= setting
 
+		### ScrunchBooleans -- NOT YET IMPLEMENTED
+			Specifies whether or not to scrunch the boolean values =true= and =false=.
+
+			When =ScrunchBooleans= is set to =TRUE= (the default), the boolean value =true= will be scrunched to the expression =!0= and the boolean value =false= will be scrunched to the expression =!1=. When =ScrunchBooleans= is set to =FALSE=, these boolean values will be left unscrunched.
+
+			NOTES
+			- the default value is =TRUE=
+			- values for this setting are not case-sensitive
+
 Tips and Tricks
 	Capture Dereferencings
 		If you are writing a module that will use some other package module and make several references to it to dereference static methods or properties, you can create a private variable in your module's scope that can capture the dereferencing of the package module you'll be using.

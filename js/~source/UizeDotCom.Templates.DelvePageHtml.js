@@ -3,8 +3,6 @@
 		UizeDotCom.Templates.DelvePageHtml.js.jst
 */
 
-/*ScruncherSettings Mappings="=" LineCompacting="TRUE"*/
-
 Uize.module ({
 	name:'UizeDotCom.Templates.DelvePageHtml',
 	required:[

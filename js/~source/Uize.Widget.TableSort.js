@@ -9,7 +9,7 @@
 |_______________|             http://www.uize.com/license.html
 */
 
-/*ScruncherSettings Mappings="=c,Uize_TableSort" LineCompacting="TRUE"*/
+/*ScruncherSettings Mappings="=c,Uize_Widget_TableSort"*/
 
 /* Module Meta Data
 	type: Class
@@ -108,7 +108,7 @@ Uize.module ({
 			_classPrototype._updateRowUi = function (_row) {
 				var _this = this;
 				if (_this.isWired && _row)
-					_row.className = (_row == _this._rowOver ? _this._rowOverClass : _row.Uize_TableSort_oldClassName) || ''
+					_row.className = (_row == _this._rowOver ? _this._rowOverClass : _row.Uize_Widget_TableSort_oldClassName) || ''
 				;
 			};
 
@@ -322,7 +322,7 @@ Uize.module ({
 								function (_heading) {return _Uize_Node.getText (_heading)}
 							);
 							function _wireRow (_row) {
-								_row.Uize_TableSort_oldClassName = _row.className;
+								_row.Uize_Widget_TableSort_oldClassName = _row.className;
 								_this.wireNode (
 									_row,
 									{

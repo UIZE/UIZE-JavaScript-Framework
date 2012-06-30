@@ -3,8 +3,6 @@
 		Uize.Templates.Calculator.js.jst
 */
 
-/*ScruncherSettings Mappings="=" LineCompacting="TRUE"*/
-
 Uize.module ({
 	name:'Uize.Templates.Calculator',
 	builder:function () {

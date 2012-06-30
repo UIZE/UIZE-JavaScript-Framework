@@ -3,8 +3,6 @@
 		UizeDotCom.Templates.SlideShow.Basic.js.jst
 */
 
-/*ScruncherSettings Mappings="=" LineCompacting="TRUE"*/
-
 Uize.module ({
 	name:'UizeDotCom.Templates.SlideShow.Basic',
 	required:[
