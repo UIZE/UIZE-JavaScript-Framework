@@ -80,7 +80,7 @@ Uize.module ({
             Uize.Templates.JstModule.input
               An object, describing the allowed properties of the =inputOBJ= parameter of the =Uize.Templates.JstModule.process= static method.
         */
-        output.push ('/*\r\n  This is an automatically generated module, compiled from the JavaScript template file:\r\n    ',input .moduleName,'.js.jst\r\n*/\r\n\r\n/*ScruncherSettings Mappings="="*/\r\n\r\nUize.module ({\r\n  name:',Uize.Json.to (input .moduleName),',');
+        output.push ('/*\r\n  This is an automatically generated module, compiled from the JavaScript template file:\r\n    ',input .moduleName,'.js.jst\r\n*/\r\n\r\nUize.module ({\r\n  name:',Uize.Json.to (input .moduleName),',');
          var required = input.compiledTemplate.required;
          if (required.length) {
         output.push ('\r\n  required:',Uize.String.Lines.indent (Uize.Json.to (required),1,'\t',false),',');

@@ -9,8 +9,6 @@
 |_______________|             http://www.uize.com/license.html
 */
 
-/*ScruncherSettings Mappings=""*/
-
 /* Module Meta Data
 	type: Extension
 	importance: 1
