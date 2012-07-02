@@ -10,6 +10,9 @@ Uize.module ({
 						Sort:0,
 						Util:0
 					},
+					Build:{
+						ModuleInfo:0
+					},
 					Class:{
 						Value:0
 					},
@@ -69,6 +72,7 @@ Uize.module ({
 					},
 					Scruncher:0,
 					Service:0,
+					Services:0,
 					String:{
 						Builder:0,
 						Discombobulator:0,

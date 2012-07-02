@@ -59,7 +59,7 @@ Uize.module ({
           null,
           function() {
             var _this = this;
-            
+
             _this.wire(
               'Changed.value',
               function() {
@@ -79,7 +79,7 @@ Uize.module ({
     /*** Private Instance Methods ***/
       _classPrototype._updateUiValues = function() {
         var _this = this;
-        
+
         if (_this.isWired) {
           var
             _oldValue = _this.get('value'),
@@ -94,7 +94,7 @@ Uize.module ({
             // it wasn't deleted in case its exclusion caused another bug.
             //_this.set({value:null});
             _this._valueNo = -1;
-            
+
             // iterate through the values in values object, replacing the Option nodes
             // adding new ones if necessary
             for (
@@ -129,7 +129,7 @@ Uize.module ({
                   selected:_selected
                 }
               );
-              
+
               if (_selected)
                 _valueFound = true;
             }
@@ -141,7 +141,7 @@ Uize.module ({
             for (var _optionNo = _optionsLength - 1; _optionNo &gt;= _valueNo; _optionNo--)
               _selectNode.remove(_optionNo)
             ;
-            
+
             if (!(_valueFound &amp;&amp; _oldValue) &amp;&amp; _values.length)
               _this.set({value:_values[0].name});
           }
@@ -153,12 +153,12 @@ Uize.module ({
         var _this = this;
         if (!_this.isWired) {
           _superclass.prototype.wireUi.call (_this);
-          
+
           var
             _values = _this._values,
             _selectNode = _this.getNode('input')
           ;
-          
+
           if (_values.length)  // values data exists so update the &lt;option&gt;s in the &lt;select&gt; tag
             _this._updateUiValues();
           else if (_selectNode &amp;&amp; _this.get('type') == 'select-one') { // build values from &lt;select&gt; tag &lt;option&gt;s
@@ -178,7 +178,7 @@ Uize.module ({
                 _optionText = _optionNode.text,
                 _valueObjectName = _optionValue != null ? _optionValue : _optionText
               ;
-              
+
               _values.push({
                 name:_valueObjectName,
                 displayName:_optionText
@@ -187,7 +187,7 @@ Uize.module ({
               if (_valueObjectName == _value)
                 _optionNode.selected = true;
             }
-            
+
             // set valueNo to be selectedIndex &amp;&amp; sync up the value in case it has changed
             (_this._valueNo = _selectNode.selectedIndex) &gt; -1
               &amp;&amp; _this.set({value:_values[_this._valueNo].name})

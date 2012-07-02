@@ -333,7 +333,7 @@ Uize.module ({
 
 							rootFolderPath
 								An optional string, specifying the path of a folder to serve as the root folder from which to start building files.
-								
+
 								NOTES
 								- If no =rootFolderPath= parameter is specified, or if it's value is an empty string, =null=, or =undefined=, then the root folder will be the parent folder of the build script.
 

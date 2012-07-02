@@ -39,7 +39,7 @@ Uize.module ({
 		/*** Private Instance Methods ***/
 			_classPrototype._updateUiLabel = function() {
 				var _this = this;
-				
+
 				if (_this.isWired) {
 					var
 						_label = _this._label,
@@ -51,7 +51,7 @@ Uize.module ({
 							}
 						)
 					;
-					
+
 					_this.set({
 						text:_this._showCount && _labelWithCount
 							? _labelWithCount
@@ -59,10 +59,10 @@ Uize.module ({
 					});
 				}
 			};
-			
+
 			_classPrototype._updateUiFeaturedState = function() {
 				var _this = this;
-				
+
 				_this.isWired
 					&& Uize.Node.Classes.setState(
 						_this.getNode(),

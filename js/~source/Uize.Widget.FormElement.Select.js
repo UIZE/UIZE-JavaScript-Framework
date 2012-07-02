@@ -35,7 +35,7 @@ Uize.module ({
 					null,
 					function() {
 						var _this = this;
-						
+
 						_this.wire(
 							'Changed.value',
 							function() {
@@ -55,7 +55,7 @@ Uize.module ({
 		/*** Private Instance Methods ***/
 			_classPrototype._updateUiValues = function() {
 				var _this = this;
-				
+
 				if (_this.isWired) {
 					var
 						_oldValue = _this.get('value'),
@@ -70,7 +70,7 @@ Uize.module ({
 						// it wasn't deleted in case its exclusion caused another bug.
 						//_this.set({value:null});
 						_this._valueNo = -1;
-						
+
 						// iterate through the values in values object, replacing the Option nodes
 						// adding new ones if necessary
 						for (
@@ -105,7 +105,7 @@ Uize.module ({
 									selected:_selected
 								}
 							);
-							
+
 							if (_selected)
 								_valueFound = true;
 						}
@@ -117,7 +117,7 @@ Uize.module ({
 						for (var _optionNo = _optionsLength - 1; _optionNo >= _valueNo; _optionNo--)
 							_selectNode.remove(_optionNo)
 						;
-						
+
 						if (!(_valueFound && _oldValue) && _values.length)
 							_this.set({value:_values[0].name});
 					}
@@ -129,12 +129,12 @@ Uize.module ({
 				var _this = this;
 				if (!_this.isWired) {
 					_superclass.prototype.wireUi.call (_this);
-					
+
 					var
 						_values = _this._values,
 						_selectNode = _this.getNode('input')
 					;
-					
+
 					if (_values.length)	// values data exists so update the <option>s in the <select> tag
 						_this._updateUiValues();
 					else if (_selectNode && _this.get('type') == 'select-one') { // build values from <select> tag <option>s
@@ -154,7 +154,7 @@ Uize.module ({
 								_optionText = _optionNode.text,
 								_valueObjectName = _optionValue != null ? _optionValue : _optionText
 							;
-							
+
 							_values.push({
 								name:_valueObjectName,
 								displayName:_optionText
@@ -163,7 +163,7 @@ Uize.module ({
 							if (_valueObjectName == _value)
 								_optionNode.selected = true;
 						}
-						
+
 						// set valueNo to be selectedIndex && sync up the value in case it has changed
 						(_this._valueNo = _selectNode.selectedIndex) > -1
 							&& _this.set({value:_values[_this._valueNo].name})

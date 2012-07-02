@@ -9,8 +9,6 @@
 |_______________|             http://www.uize.com/license.html
 */
 
-Uize.module ({name:'Uize.Util'});
-
 /* Module Meta Data
 	type: Namespace
 	importance: 1
@@ -25,4 +23,6 @@ Uize.module ({name:'Uize.Util'});
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
+
+Uize.module ({name:'Uize.Util'});
 

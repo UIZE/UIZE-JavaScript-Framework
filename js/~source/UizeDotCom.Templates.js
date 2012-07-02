@@ -9,12 +9,12 @@
 |_______________|             http://www.uize.com/license.html
 */
 
-Uize.module ({name:'UizeDotCom.Templates'});
-
 /*?
 	Introduction
 		The =UizeDotCom.Templates= module is a simple namespace module that defines the =UizeDotCom.Templates= namespace that is used as a place to house templates for various widgets used in the uize.com Web site and many of its example pages.
 
 		*DEVELOPERS:* `Chris van Rensburg`
 */
+
+Uize.module ({name:'UizeDotCom.Templates'});
 

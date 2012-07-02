@@ -96,7 +96,7 @@ Uize.module ({
 
 			_classPrototype.updateUi = function () {
 				var _this = this;
-				
+
 				if (_this.isWired) {
 					_this._updateUiText ();
 					_superclass.prototype.updateUi.call (_this);
@@ -132,23 +132,23 @@ Uize.module ({
 					name:'shown',
 					onChange:function () {
 						var _this = this;
-						
+
 						if (_this.isWired) {
 							_this._shown
 								&& _this.fire ('Before Show');
-	
+
 						_this._showFade.start ({
 							startValue: _this._shown ? 0 : _this._maxOpacity,
 								endValue:_this._shown ? _this._maxOpacity : 0
 						});
-							
+
 							if (_this._shown)
 								_this._lifeTimeout = setTimeout(
 									function() { _this.set({_shown:_false}) },
 									_this._lifeSpan
 								)
 							;
-							
+
 							!_this._shown
 								&& _this.fire('After Hide');
 						}

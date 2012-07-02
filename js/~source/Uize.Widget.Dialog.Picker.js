@@ -64,7 +64,7 @@ Uize.module ({
 								;
 
 								_this._submittedValue = _true;
-								
+
 								_this.fireSubmissionComplete(
 									_keepOpen,
 									Uize.copyInto(
@@ -148,7 +148,7 @@ Uize.module ({
 			_classPrototype._updateUiKeepOpenState = function () {
 				this._widgetsAdded && this.children.keepOpen.set ({selected:this._keepOpen})
 			};
-			
+
 		/*** Public Instance Methods ***/
 			_classPrototype.fireSubmissionComplete = function(_keepOpen, _result) {
 				var _this = this;

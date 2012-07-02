@@ -39,7 +39,7 @@ Uize.module ({
 				_false = false,
 				_Uize_Node_Classes = Uize.Node.Classes
 			;
-			
+
 		/*** Class Constructor ***/
 			var
 				_class = _superclass.subclass (),
@@ -58,13 +58,13 @@ Uize.module ({
 					)
 				;
 			};
-			
+
 			_classPrototype._updateUiFilterVisibility = function() {
 				var
 					_this = this,
 					_allZero = _true
 				;
-				
+
 				_this.isWired
 					&& _this.forAll(
 						function(_filterWidget) {
@@ -73,19 +73,19 @@ Uize.module ({
 								_displayFilter = !_this._hideWhenZero
 									|| _filterCount
 							;
-							
+
 							_filterWidget.displayNode('', _displayFilter);
 							_filterWidget.set({enabled:!_filterCount ? _false : 'inherit'});
-							
+
 							if (_displayFilter)
 								_allZero = _false;
 						}
 					)
 				;
-				
+
 				_this.displayNode('', !_allZero && _this.get('values').length > 1);
 			};
-			
+
 			_classPrototype._updateUiTitle = function() {
 				this.isWired && this.setNodeInnerHtml('title', this._title)
 			};
@@ -96,11 +96,11 @@ Uize.module ({
 					_this = this,
 					_countsLength = _counts.length
 				;
-				
+
 				if (_this.isWired) {
 					// NOTE: the count parameter for each filter in the values set
 					// will be out of sync...
-					
+
 					_counts
 						&& _countsLength
 						&& _this.forAll(
@@ -110,11 +110,11 @@ Uize.module ({
 							}
 						)
 					;
-					
+
 					_this._updateUiFilterVisibility();
 				}
 			};
-		
+
 			_classPrototype.updateUi = function () {
 				var _this = this;
 				if (_this.isWired) {

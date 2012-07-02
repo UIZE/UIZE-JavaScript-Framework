@@ -266,7 +266,7 @@ Uize.module ({
 
     /*** Private Instance Methods ***/
       _classPrototype._addChildButton = _Uize_Widget.Button.addChildButton;
-      
+
       _classPrototype._dismiss = function (_dismissalEvent) {
         this.fire (_dismissalEvent).abort || this.set ({_shown:_false})
       };
@@ -383,7 +383,7 @@ Uize.module ({
         if (!_this.isWired) {
           _this.wireNode (window,'resize',function () {_this._updateUiPositionIfShown ()});
           _this._drag.set ({node:_this.getNode ('title')});
-          
+
           _this.wireNode(
             'shield',
             'click',

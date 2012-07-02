@@ -42,7 +42,7 @@ Uize.module ({
 							_valueDetailsCache = {},
 							_undefined
 						;
-						
+
 						// So there can be a case where the value & valueDetails are set for the options, but that
 						// info isn't in the values set.  In order to support tentativeValue & tentativeValueDetails
 						// changing but still getting back that value & valueDetails that were set (and not in the list)
@@ -51,7 +51,7 @@ Uize.module ({
 							if (_valueDetails != null)
 								_valueDetailsCache[_value] = _valueDetails;
 						}
-						
+
 						function _syncValueDetails(_propertyName) {
 							var
 								_propertyValue = _this.get(_propertyName),
@@ -60,7 +60,7 @@ Uize.module ({
 
 							if (_valueDetails === _undefined) {
 								var _valueObject = Uize.findRecord (_this.get('values'), {name:_propertyValue});
-								
+
 								_addToValueDetailsCache(
 									_propertyValue,
 									_valueDetails = (_valueObject ? _valueObject.valueDetails : null)
@@ -69,7 +69,7 @@ Uize.module ({
 
 							_this.set(_propertyName + 'Details', _valueDetails);
 						}
-						
+
 						_this.wire({
 							'Changed.tentativeValue':function() { _syncValueDetails(_tentativeValueString) },
 							'Changed.value':function() { _syncValueDetails(_valueString) },
@@ -84,14 +84,14 @@ Uize.module ({
 								_addToValueDetailsCache(_this.valueOf(), _this._valueDetails);
 							}
 						});
-						
+
 						_syncValueDetails(_valueString);
 						_syncValueDetails(_tentativeValueString);
 					}
 				),
 				_classPrototype = _class.prototype
 			;
-		
+
 		/*** Public Methods ***/
 			_classPrototype.getOptionProperties = function(_valueNo, _valueObject) {
 				return Uize.copyInto(
@@ -102,14 +102,14 @@ Uize.module ({
 					}
 				)
 			};
-			
+
 			_classPrototype.wireUi = function() {
 				var _this = this;
-				
+
 				if (!_this.isWired) {
 					// set the container for the options that get created
 					_this.set({container:_this.getNode('options')});
-						
+
 					_superclass.prototype.wireUi.call(_this);
 				}
 			};

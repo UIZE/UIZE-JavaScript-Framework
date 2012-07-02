@@ -114,7 +114,7 @@ Uize.module ({
 					onChange:function () {
 						var _this = this;
 						if (_this._playing) {
-						if (_this._interSlideTime && _this._interSlideTime < 0) {							
+						if (_this._interSlideTime && _this._interSlideTime < 0) {
 							_this.set({ playing: false });
 						} else {
 							_this._clearResumeTimeout ();

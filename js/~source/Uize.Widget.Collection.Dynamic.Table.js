@@ -14,9 +14,9 @@
 /* Module Meta Data
 	type: Class
 	importance: 4
-	codeCompleteness: 100 
+	codeCompleteness: 100
 	testCompleteness: 0
-	docCompleteness: 100 
+	docCompleteness: 100
 */
 
 /*?

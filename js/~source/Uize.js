@@ -1741,6 +1741,9 @@
 						..............................................
 
 						After the above code has been executed, the =modulesBuilt= array will contain the names of all the modules that have been built, listed in the order in which they were built.
+
+						NOTES
+						- see also the other `module mechanism methods`
 			*/
 		};
 
@@ -3833,6 +3836,7 @@
 
 						NOTES
 						- see also the =Uize.pathToResources= static property
+						- see also the other `module mechanism methods`
 			*/
 		};
 
@@ -3967,40 +3971,67 @@
 						- see also the other `dummy functions`
 			*/
 
-		_package.module = function (_params) {
-			function _handleModuleLoaded (_module) {
-				_forEach (_moduleLoadHandlers [_module],function (_loadHandler) {_loadHandler ()});
-				delete _moduleLoadHandlers [_module];
-			}
+		var _resolveModuleDefinition = _package.resolveModuleDefinition = function (_definition) {
+			var
+				_name = _definition.name = _definition.name || '',
+				_host = _definition.host = _name.substr (0,_name.lastIndexOf ('.')),
+				_superclass = _definition.superclass = _definition.superclass || _host,
+				_required = _definition.required
+			;
+			_required = _definition.required = _isString (_required) ? _required.split (',') : _required || [];
+			_host && _required.push (_host);
+			_superclass != _host && _required.push (_superclass);
+
+			return _definition;
+			/*?
+				Static Methods
+					Uize.resolveModuleDefinition
+						Resolves the specified module definition object by defaulting its properties and expanding them as necessary, modifying and returning the original definition object.
+
+						SYNTAX
+						.........................................................................
+						moduleDefinitionOBJ = Uize.resolveModuleDefinition (moduleDefinitionOBJ);
+						.........................................................................
+
+						The =Uize.resolveModuleDefinition= method is not intended for use in general application development but is intended for specialized build processes, such as dependency tracing performed during the creation of JavaScript packages.
+
+						For an in-depth discussion of modules, consult the explainer [[../explainers/javascript-modules.html][JavaScript Modules]].
+
+						NOTES
+						- see also the other `module mechanism methods`
+			*/
+		};
+
+		_package.module = function (_definition) {
+			_resolveModuleDefinition (_definition);
 
  			var
-				_name = _params.name || '',
-				_host = _name.substr (0,_name.lastIndexOf ('.')),
-				_superclass = _params.superclass || _host,
-				_required = _params.required || [],
+				_name = _definition.name,
 				_modulesToLoad = []
 			;
 			_moduleLoadHandlers [_name] || (_moduleLoadHandlers [_name] = []);
 				/* NOTE:
 					If a named module is declared inline, and another module requires that module further down in the same page, then that subsequent module declaration will know to wait on the successful building of the first module, because the presence of a handlers array for a particular module is regarded as an indication that code is busy waiting on building of that module. This behavior also supports library modules, where individual modules are declared inline inside the library module.
 				*/
-			if (_isString (_required)) _required = _required.split (',');
-			_host && _required.push (_host);
-			_superclass != _host && _required.push (_superclass);
 
 			/*** determine which required modules are not already loaded ***/
 				_forEach (
-					_required,
+					_definition.required,
 					function (_requiredModule) {
 						_requiredModule && !_getModuleByName (_requiredModule) && _modulesToLoad.push (_requiredModule);
 					}
 				);
 
 			/*** load modules (if necessary) ***/
+				function _handleModuleLoaded (_module) {
+					_forEach (_moduleLoadHandlers [_module],function (_loadHandler) {_loadHandler ()});
+					delete _moduleLoadHandlers [_module];
+				}
+
 				function _buildModule () {
 					var
-						_builder = _params.builder,
-						_module = _builder && _builder (_getModuleByName (_superclass))
+						_builder = _definition.builder,
+						_module = _builder && _builder (_getModuleByName (_definition.superclass))
 					;
 					_name &&
 						(new _Function ('m',_name + '=m')) (_module = _modulesByName [_name] = _module || function () {})
@@ -4016,6 +4047,7 @@
 					}
 					_handleModuleLoaded (_name);
 				}
+
 				var _modulesToLoadLength = _modulesToLoad.length;
 				if (_modulesToLoadLength) {
 					var _moduleLoader = _package.moduleLoader;
@@ -4091,6 +4123,7 @@
 
 						NOTES
 						- see also the =Uize.moduleLoader= static method and the =Uize.moduleUrlTemplate= static property
+						- see also the other `module mechanism methods`
 			*/
 		};
 
@@ -4137,8 +4170,8 @@
 						For an in-depth discussion of modules, consult the explainer [[../explainers/javascript-modules.html][JavaScript Modules]].
 
 						NOTES
-						- see also the =Uize.module= static method
 						- see the related =Uize.moduleUrlResolver= static method and the =Uize.moduleUrlTemplate= static property
+						- see also the other `module mechanism methods`
 			*/
 		};
 
@@ -4175,6 +4208,7 @@
 
 						NOTES
 						- see the related =Uize.moduleLoader= static method and the =Uize.moduleUrlTemplate= static property
+						- see also the other `module mechanism methods`
 			*/
 		};
 
@@ -4826,6 +4860,9 @@
 						.......................................................................................
 
 						In this example, the =classSummaryForDebug= node will contain the summary info for the =Uize.Widget.Bar.Slider= class, while the =classCurrentValue= node will just show the class' current value.
+
+						NOTES
+						- see also the other `module mechanism methods`
 			*/
 		};
 

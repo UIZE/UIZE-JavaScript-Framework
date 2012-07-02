@@ -36,7 +36,7 @@ Uize.module ({
 					null,
 					function() {
 						var _this = this;
-						
+
 						function _syncValueDetails() {
 							var _valueObject = _this.getValueObject();
 
@@ -47,7 +47,7 @@ Uize.module ({
 							});
 						}
 						_this.wire('Changed.value', _syncValueDetails);
-						
+
 						_syncValueDetails();
 					}
 				),
@@ -66,13 +66,13 @@ Uize.module ({
 					}
 				);
 			};
-			
+
 			_classPrototype.handleDialogSubmit = function(_valueInfo) {
 				var
 					_this = this,
 					_undefined
 				;
-				
+
 				function _createSetObject(_propertyName) {
 					var _propertyValue = _valueInfo[_propertyName];
 					return _propertyValue !== _undefined ? Uize.pairUp(_propertyName, _propertyValue) : _undefined
@@ -85,7 +85,7 @@ Uize.module ({
 						_createSetObject('tentativeValueNo')
 					)
 				);
-				
+
 				_superclass.prototype.handleDialogSubmit.call(_this, _valueInfo);
 			};
 

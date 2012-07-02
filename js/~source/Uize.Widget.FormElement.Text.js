@@ -36,7 +36,7 @@ Uize.module ({
 				_supportsPlaceholder = typeof document != 'undefined'
 					&& 'placeholder' in document.createElement('input')
 			;
-		
+
 		/*** Class Constructor ***/
 			var
 				_class = _superclass.subclass(
@@ -176,7 +176,7 @@ Uize.module ({
 					if (_placeholder) {
 						if (_supportsPlaceholder)
 							_this.setNodeProperties (_input, {placeholder:_placeholder});
-						else 
+						else
 							_this.set ('value', _placeholder);
 					}
 

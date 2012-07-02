@@ -59,7 +59,7 @@ Uize.module ({
 			_classPrototype._setInputNodeProperties = function (_nodeProperties) {
 				this.isWired && this.setNodeProperties('input', _nodeProperties)
 			};
-			
+
 			_classPrototype._updateUiSelectorValueDetails = function() {
 				var
 					_this = this,
@@ -80,21 +80,21 @@ Uize.module ({
 					;
 				}
 			};
-			
+
 			_classPrototype._updateUiSelectorState = function() {
 				var _this = this;
-				
+
 				if (_this.isWired) {
 					var
 						_state = _this.get('state'),
 						_enabled = _this.get ('enabledInherited') && !_this.get ('busyInherited')
 					;
-					
+
 					_this._setInputNodeProperties({
 						readOnly:!_enabled,
 						disabled:!_enabled
 					});
-					
+
 					_Uize_Node_Classes.setState(
 						_this.getNode(),
 						['', _this._cssClassTentativeSelected, _this._cssClassActive, _this._cssClassDisabled],
@@ -110,12 +110,12 @@ Uize.module ({
 
 			_classPrototype._updateUiSelectedState = function () {
 				var _this = this;
-				
+
 				if (_this.isWired) {
 					var _selected = _this.get('selected');
-	
+
 					_this._setInputNodeProperties({checked:_selected});
-					
+
 					_Uize_Node_Classes.setState(
 						_this.getNode(),
 						['', _this._cssClassSelected],
@@ -148,7 +148,7 @@ Uize.module ({
 						'change',
 						function () { _this.set({selected:_inputNode.checked}) }
 					);
-					
+
 					// NOTE: in the case where the display name is a <label> tag w/ a for
 					// attribute, this could cause double selections on the input tag,
 					// one for the overall button click and one for the <label> interaction.

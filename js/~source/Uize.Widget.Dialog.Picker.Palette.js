@@ -35,13 +35,13 @@ Uize.module ({
 				null,
 				function() {
 					var _this = this;
-					
+
 					// Sync tentativeValue & tentativeValueDetails back and forth with value widget
 					Uize.Util.Coupler({
 						instances:[_this, _this.children.value],
 						properties:['tentativeValue', 'tentativeValueDetails']
 					});
-					
+
 					_this.wire(
 						'After Show',
 						function() {
@@ -69,7 +69,7 @@ Uize.module ({
 					name:'tentativeValue',
 					onChange:function() {
 						var _this = this;
-						
+
 						// Changed.tentativeValue could be fired prior to Changed.tentativeValueDetails, so break flow so that the tentativeValueDetails can be synced before the 'Submission Complete' event is fired
 						setTimeout(
 							function() {

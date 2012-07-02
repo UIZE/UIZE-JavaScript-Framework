@@ -37,7 +37,7 @@ Uize.module ({
 			var
 				_true = true,
 				_false = false,
-				
+
 				_Uize = Uize,
 				_Uize_Node = _Uize.Node,
 				_Uize_Fade = _Uize.Fade
@@ -53,7 +53,7 @@ Uize.module ({
 							_previousTabNodeHeight,
 							_newTabNodeHeight
 						;
-						
+
 						function _tabBodyStart(_tabNo) {
 							_this.isWired
 								// prepare the node to animate its height by 1) making sure it's visible
@@ -78,9 +78,9 @@ Uize.module ({
 						function _tabBodyDone(_tabNo, _mustDisplay) {
 							if (_this.isWired) {
 								var _tabBodyNode = _this._getTabBodyNode(_tabNo);
-								
+
 								_this.displayNode(_tabBodyNode, _mustDisplay);
-								
+
 								// undo the explicit height & overflow we set
 								_this.setNodeStyle(
 									_tabBodyNode,
@@ -103,7 +103,7 @@ Uize.module ({
 							},
 							'Changed.value':function() {
 								var _newHeight = +_this.fade;
-								
+
 								// Since we have only one fade object, the previous tab body node height
 								// needs to change inversely proportional to the change of the new tab body node
 								_previousTabNodeHeight
@@ -139,7 +139,7 @@ Uize.module ({
 			_classPrototype._getTabBodyNode = function (_valueOrValueNo) {
 				return this.getNode ('option' + this._resolveToValueNo (_valueOrValueNo) + 'TabBody')
 			};
-			
+
 			_classPrototype._updateUiTabBodies = function() {
 				var
 					_this = this,
@@ -153,7 +153,7 @@ Uize.module ({
 							_newTabBodyNode = _this._getTabBodyNode(_newTabNo),
 							_newTabBodyNodeStyleHeight = _this.getNodeStyle(_newTabBodyNode, 'height')
 						;
-						
+
 						_this.setNodeStyle(
 							_newTabBodyNode,
 							{
@@ -170,7 +170,7 @@ Uize.module ({
 							_newTabHeight = parseInt(_newTabBodyNodeStyleHeight)
 								|| _Uize_Node.getDimensions(_newTabBodyNode).height
 						;
-						
+
 						_newTabHeight
 							&& _this.fade.start({
 								curve:_this._animationCurve || _Uize_Fade.celeration (0,1),
@@ -199,7 +199,7 @@ Uize.module ({
 				this.getOptionButton (_value).set ({enabled:_mustEnable ? 'inherit' : false});
 				this._updateUiTabBodies ();
 			};
-			
+
 			_classPrototype.getOptionButton = function (_valueOrValueNo) {
 				return this.children ['option' + this._resolveToValueNo (_valueOrValueNo)]
 			};
@@ -212,28 +212,28 @@ Uize.module ({
 						: _false
 				);
 			};
-			
+
 			_classPrototype.updateUi = function () {
 				var _this = this;
 				if (_this.isWired) {
 					var _rootNode = _this.getNode();
-					
+
 					// Ensure that the root node is at least positioned relative
 					_this.getNodeStyle(_rootNode, 'position') == 'static'
 						&& _this.setNodeStyle(_rootNode, {position:'relative'})
 					;
 
 					_this._updateUiTabBodies();
-					
+
 					_superclass.prototype.updateUi.call (_this);
 				}
 			};
-			
+
 			_classPrototype.wireUi = function () {
 				var _this = this;
 				if (!_this.isWired) {
 					_this._previousTabNo = _this.get('valueNo');
-					
+
 					_superclass.prototype.wireUi.call (_this);
 				}
 			};

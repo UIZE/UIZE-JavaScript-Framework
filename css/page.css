@@ -275,6 +275,7 @@
 			margin:0 1px;
 			float:left;
 			text-decoration:none;
+			white-space:nowrap;
 		}
 		.menuShell .menuItemActive,
 		.menuShell .menuItemActive:link,
@@ -333,6 +334,7 @@
 			color:#000;
 			border:none;
 			text-decoration:none;
+			white-space:nowrap;
 		}
 		.subMenuShell .subMenuItemActive,
 		.subMenuShell .subMenuItemActive:link,
