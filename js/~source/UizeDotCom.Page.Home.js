@@ -9,8 +9,6 @@
 |_______________|             http://www.uize.com/license.html
 */
 
-/*ScruncherSettings Mappings="=e"*/
-
 /*?
 	Introduction
 		A subclass of the =UizeDotCom.Page= class, designed exclusively for the very important homepage of the *uize.com* Web site.

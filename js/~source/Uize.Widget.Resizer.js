@@ -18,8 +18,6 @@
 		- activeHandleEffectivePointIdY
 */
 
-/*ScruncherSettings Mappings="=c"*/
-
 /* Module Meta Data
 	type: Class
 	importance: 6

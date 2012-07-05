@@ -1,7 +1,7 @@
 /*
-	UIZE JAVASCRIPT FRAMEWORK 2012-06-30
+	UIZE JAVASCRIPT FRAMEWORK 2012-07-04
 
 	http://www.uize.com/reference/Uize.Fade.xSeries.html
 	Available under MIT License or GNU General Public License -- http://www.uize.com/license.html
 */
-Uize.module({name:'Uize.Fade.xSeries',builder:function(b_b_a){b_b_a.prototype.getSeries=function(b_b_b){var b_b_c=this,b_b_d=[],b_b_e=Math.max(b_b_b-1,1);for(var b_b_f= -1;++b_b_f<b_b_b;){b_b_c.set({b_b_g:b_b_f/b_b_e});b_b_d.push(Uize.clone(b_b_c.valueOf()));}return b_b_d;};b_b_a.getSeries=function(b_b_h,b_b_i,b_b_b,b_b_j){return(new b_b_a(Uize.copyInto({startValue:b_b_h,endValue:b_b_i},b_b_j)).getSeries(b_b_b));};}});
+Uize.module({name:'Uize.Fade.xSeries',builder:function(_a){_a.prototype.getSeries=function(_b){var _c=this,_d=[],_e=Math.max(_b-1,1);for(var _f= -1;++_f<_b;){_c.set({progress:_f/_e});_d.push(Uize.clone(_c.valueOf()));}return _d;};_a.getSeries=function(_g,_h,_b,_i){return(new _a(Uize.copyInto({startValue:_g,endValue:_h},_i)).getSeries(_b));};}});

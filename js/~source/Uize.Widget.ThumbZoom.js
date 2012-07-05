@@ -14,8 +14,6 @@
 		- Uize.Widget.Bar.Progress.js (if overlayed progress indicator during load is desired)
 */
 
-/*ScruncherSettings Mappings="=c"*/
-
 /* Module Meta Data
 	type: Class
 	importance: 2

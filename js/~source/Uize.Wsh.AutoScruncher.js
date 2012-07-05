@@ -32,7 +32,8 @@ Uize.module ({
 		'Uize.Scruncher',
 		'Uize.Date',
 		'Uize.String',
-		'Uize.String.Lines'
+		'Uize.String.Lines',
+		'Uize.Util.Oop'
 	],
 	builder:function () {
 		/*** Variables for Scruncher Optimization ***/
@@ -60,7 +61,8 @@ Uize.module ({
 					_buildDate = Uize.Date.toIso8601 (),
 					_endsWidthDotJsRegExp = /\.js$/,
 					_buildScriptName = WScript.ScriptName,
-					_scrunchedHeadComments = _params.scrunchedHeadComments || {}
+					_scrunchedHeadComments = _params.scrunchedHeadComments || {},
+					_scruncherPrefixChars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 				;
 				function _targetFolderPathCreator (_folderPath) {
 					return _package.getScrunchedFolderPath (_folderPath,_params.buildFolderPath,_params.sourceFolderName);
@@ -77,13 +79,27 @@ Uize.module ({
 								},
 								fileBuilder:function (_sourceFileName,_sourceFileText) {
 									var
+										_moduleName = _sourceFileName.replace (_endsWidthDotJsRegExp,''),
+										_scruncherSettings = {},
 										_headComment =
 											_scrunchedHeadComments [_sourceFileName.slice (0,_sourceFileName.indexOf ('.'))],
-										_keepHeadComment = _headComment == undefined,
-										_scruncherResult = Uize.Scruncher.scrunch (
-											_sourceFileText,_keepHeadComment ? '' : 'KEEPHEADCOMMENT="FALSE"'
-										)
+										_keepHeadComment = _headComment == undefined
 									;
+									if (!_keepHeadComment)
+										_scruncherSettings.KEEPHEADCOMMENT = 'FALSE'
+									;
+									Uize.module ({
+										required:_moduleName,
+										builder:function () {
+											var _inheritanceDepth = Uize.Util.Oop.getInheritanceChain (eval (_moduleName)).length;
+											_scruncherSettings.MAPPINGS =
+												'=' +
+												(_inheritanceDepth ? _scruncherPrefixChars.charAt (_inheritanceDepth - 1) : '') +
+												',' + _moduleName.replace (/\./g,'_')
+											;
+										}
+									});
+									var _scruncherResult = Uize.Scruncher.scrunch (_sourceFileText,_scruncherSettings);
 									return {
 										outputText:
 											(
@@ -91,10 +107,7 @@ Uize.module ({
 													? ''
 													: Uize.substituteInto (
 														_headComment,
-														{
-															buildDate:_buildDate,
-															moduleName:_sourceFileName.replace (_endsWidthDotJsRegExp,'')
-														},
+														{buildDate:_buildDate,moduleName:_moduleName},
 														'{KEY}'
 													)
 											) + _scruncherResult.scrunchedCode,

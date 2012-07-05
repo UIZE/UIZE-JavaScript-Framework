@@ -9,8 +9,6 @@
 |_______________|             http://www.uize.com/license.html
 */
 
-/*ScruncherSettings Mappings="=d"*/
-
 /*?
 	Introduction
 		A subclass of =Uize.Widget.Page= that provides a base class for page widget classes used by the UIZE JavaScript Framework's Web site. This class provides functionality that is generally useful to all types of pages on the site.

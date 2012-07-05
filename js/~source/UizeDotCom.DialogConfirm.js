@@ -9,8 +9,6 @@
 |_______________|             http://www.uize.com/license.html
 */
 
-/*ScruncherSettings Mappings="=e"*/
-
 /*?
 	Introduction
 		*DEVELOPERS:* `Chris van Rensburg`

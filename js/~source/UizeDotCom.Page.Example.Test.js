@@ -16,8 +16,6 @@
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
-/*ScruncherSettings Mappings="=f"*/
-
 Uize.module ({
 	name:'UizeDotCom.Page.Example.Test',
 	required:'Uize.Widget.Button',

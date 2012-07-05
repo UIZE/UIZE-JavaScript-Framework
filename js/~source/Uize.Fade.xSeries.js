@@ -9,8 +9,6 @@
 |_______________|             http://www.uize.com/license.html
 */
 
-/*ScruncherSettings Mappings="=b_b"*/
-
 /* Module Meta Data
 	type: Extension
 	importance: 2
@@ -67,7 +65,7 @@ Uize.module ({
 					_valuesLengthMinus1 = Math.max (_valuesLength - 1,1)
 				;
 				for (var _valueNo = -1; ++_valueNo < _valuesLength;) {
-					_this.set ({_progress:_valueNo / _valuesLengthMinus1});
+					_this.set ({progress:_valueNo / _valuesLengthMinus1});
 					_values.push (Uize.clone (_this.valueOf ()));
 				}
 				return _values;

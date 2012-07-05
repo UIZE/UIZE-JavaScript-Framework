@@ -17,8 +17,6 @@
 	docCompleteness: 2
 */
 
-/*ScruncherSettings Mappings="=e"*/
-
 /*?
 	Introduction
 		The =Uize.Widget.Swap.Image.Cycle= class extends its superclass by adding the ability to specify a set of images that the widget should cycle through.

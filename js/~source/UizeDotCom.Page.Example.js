@@ -16,8 +16,6 @@
 		*DEVELOPERS:* `Chris van Rensburg`
 */
 
-/*ScruncherSettings Mappings="=e"*/
-
 Uize.module ({
 	name:'UizeDotCom.Page.Example',
 	required:[

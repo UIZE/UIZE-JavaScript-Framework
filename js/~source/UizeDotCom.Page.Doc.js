@@ -9,8 +9,6 @@
 |_______________|             http://www.uize.com/license.html
 */
 
-/*ScruncherSettings Mappings="=e"*/
-
 /*?
 	Introduction
 		A subclass of =UizeDotCom.Page= that provides additional functionality specific to pages that contain documentation.
