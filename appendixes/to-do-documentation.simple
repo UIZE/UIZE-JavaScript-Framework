@@ -16,12 +16,6 @@ Issues With Auto-generated Documentation
 
 		This is simply because the initial value in the subclass is a clone of the initial value in the base class and not a shared reference. The initial value is a clone because the whole property definition is a clone. Not sure what the solution is.
 
-SimpleDoc Previewing Utility
-	- eliminate alert dialog when first starting up
-	- add convenient way in window to get source - either the full document, or just the contents of the body
-	- open window with minimal chrome
-	- see if it's possible to launch Firefox instead of IE
-
 DELVE tool improvements
 	- polling to watch the window and detect when the window has been reloaded, and then auto-refresh view
 	- polling (or some other mechanism) to keep DELVE in sync with changing contents in the page being inspected
@@ -190,7 +184,6 @@ Migrate Modules Into Deeper Namespaces
 	.........................................................
 
 Possible New Namespaces
-	- Uize.Build
 	* Uize.Math
 	- Uize.Web (or Uize.Browser? or Uize.Html? or Uize.WebBrowser? or Uize.Wb? or Uize.Www?)
 

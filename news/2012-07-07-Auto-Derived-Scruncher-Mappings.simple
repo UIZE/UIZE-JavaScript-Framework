@@ -1,0 +1,21 @@
+With a recent improvement in the auto scruncher (implemented in the =Uize.Wsh.AutoScruncher= module), it is no longer necessary to specify unique mappings for scrunched identifier names in a =ScruncherSettings= comment in source files.
+
+Anybody who has done extensive development of widget classes using UIZE will be well familiar with the burden of having to maintain correct scruncher mappings in order to avoid bugs with collisions in the scrunched names of private properties and methods between classes and their subclasses. Thankfully, the improved auto scruncher makes this burden a thing of the past.
+
+The auto scruncher now automatically derives scrunched identifier namespace mappings for your classes, by actually loading the modules as part of the build process and determining their inheritance chain. A namespace for scrunched identifiers is determined for a module based upon the inheritance depth for the class defined by the module. If a module does not define a class, or if the class defined by the module is at the root of the inheritance chain, then the namespace for scrunched identifiers will be the empty namespace. If the module defines a class that is one level deep, then the namespace for scrunched identifiers will be "a_". If the module defines a class that is two levels deep, then the namespace for scrunched identifiers will be "b_", and so on.
+
+The rare case where scruncher mappings may still need to be specified is with extension modules, but this issue can also be addressed with other namespacing techniques that obviate the need for scruncher mappings. This is a rare case and you are not likely to encounter it in your own applications, so don't worry.
+
+As a result of this change, it should be safe to remove from your modules all =ScruncherSettings= comments of the form...
+
+....................................
+/*ScruncherSettings Mappings="=b_"*/
+....................................
+
+With this little annoyance cleared away, life using UIZE becomes more enjoyable.
+
+....................................................................................
+<< metadata >>
+
+title: 2012-07-07 - Auto-derived Scruncher Mappings
+....................................................................................

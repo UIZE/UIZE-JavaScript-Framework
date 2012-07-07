@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2012-07-07 - Auto-derived Scruncher Mappings | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="With a recent improvement in the auto scruncher (implemented in the Uize.Wsh.AutoScruncher module), it is no longer necessary to specify unique mappings for scrunched identifier names in a ScruncherSettings comment in source files."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2012.html" class="breadcrumb breadcrumbWithArrow">2012 NEWS</a>
+	2012-07-07 - Auto-derived Scruncher Mappings
+
+</h1>
+
+<div class="main">
+<div class="contents0">
+	<p>With a recent improvement in the auto scruncher (implemented in the <code><a href="../reference/Uize.Wsh.AutoScruncher.html">Uize.Wsh.AutoScruncher</a></code> module), it is no longer necessary to specify unique mappings for scrunched identifier names in a <code>ScruncherSettings</code> comment in source files.</p>
+	
+	<p>Anybody who has done extensive development of widget classes using UIZE will be well familiar with the burden of having to maintain correct scruncher mappings in order to avoid bugs with collisions in the scrunched names of private properties and methods between classes and their subclasses. Thankfully, the improved auto scruncher makes this burden a thing of the past.</p>
+	
+	<p>The auto scruncher now automatically derives scrunched identifier namespace mappings for your classes, by actually loading the modules as part of the build process and determining their inheritance chain. A namespace for scrunched identifiers is determined for a module based upon the inheritance depth for the class defined by the module. If a module does not define a class, or if the class defined by the module is at the root of the inheritance chain, then the namespace for scrunched identifiers will be the empty namespace. If the module defines a class that is one level deep, then the namespace for scrunched identifiers will be "a_". If the module defines a class that is two levels deep, then the namespace for scrunched identifiers will be "b_", and so on.</p>
+	
+	<p>The rare case where scruncher mappings may still need to be specified is with extension modules, but this issue can also be addressed with other namespacing techniques that obviate the need for scruncher mappings. This is a rare case and you are not likely to encounter it in your own applications, so don't worry.</p>
+	
+	<p>As a result of this change, it should be safe to remove from your modules all <code>ScruncherSettings</code> comments of the form...</p>
+	
+	
+<pre class="sample-code">/*ScruncherSettings Mappings="=b_"*/
+</pre>
+	
+	<p>With this little annoyance cleared away, life using UIZE becomes more enjoyable.</p>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = UizeDotCom.Page.Doc ()).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+
