@@ -254,7 +254,7 @@
 							</li>
 						</ul>
 					</li>
-					<li><a href="#2_52" title="Resolves the specified module definition object by defaulting and expanding on its properties, as necessary, modifying and returning the original definition object.">2.52. Uize.resolveModuleDefinition</a></li>
+					<li><a href="#2_52" title="Resolves the specified module definition object by defaulting its properties and expanding them as necessary, modifying and returning the original definition object.">2.52. Uize.resolveModuleDefinition</a></li>
 					<li><a href="#2_53" title="Resolves the specified transformer to a function that can be passed two arguments, value and key, and that returns a value derived from one or both of those inputs.">2.53. Uize.resolveTransformer</a>
 						<ul>
 							<li><a href="#2_53_1" title="The Uize.resolveTransformer method supports numerous different ways of specifying a transformer.">2.53.1. How Different Transformer Types are Resolved</a>
@@ -4331,7 +4331,7 @@ alert (isValidIdentifier ('_4thVar'));  // alerts "true"
 		<a name="2_52"></a>
 		<h2 class="heading2" title="2. Static Methods -&gt; 2.52. Uize.resolveModuleDefinition"><span class="headingNumber"><a href="#2" title="2. Static Methods">2</a>.<a href="#2_52" title="2. Static Methods -&gt; 2.52. Uize.resolveModuleDefinition">52</a>. </span>Uize.resolveModuleDefinition</h2>
 		<div class="contents2">
-			<p>Resolves the specified module definition object by defaulting and expanding on its properties, as necessary, modifying and returning the original definition object.</p>
+			<p>Resolves the specified module definition object by defaulting its properties and expanding them as necessary, modifying and returning the original definition object.</p>
 			
 			<p><span class="allCaps">SYNTAX</span></p>
 			
@@ -4339,7 +4339,7 @@ alert (isValidIdentifier ('_4thVar'));  // alerts "true"
 <pre class="sample-code">moduleDefinitionOBJ = Uize.resolveModuleDefinition (moduleDefinitionOBJ);
 </pre>
 			
-			<p>The <code><a href="#2_52">Uize.resolveModuleDefinition</a></code> method is not intended for generaly application development but is intended for specialized build processes, such as dependency tracing and packaging of JavaScript modules.</p>
+			<p>The <code><a href="#2_52">Uize.resolveModuleDefinition</a></code> method is not intended for use in general application development but is intended for specialized build processes, such as dependency tracing performed during the creation of JavaScript packages.</p>
 			
 			<p>For an in-depth discussion of modules, consult the explainer <a href="../explainers/javascript-modules.html">JavaScript Modules</a>.</p>
 			

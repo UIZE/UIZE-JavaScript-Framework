@@ -9,8 +9,6 @@
 |_______________|             http://www.uize.com/license.html
 */
 
-/*ScruncherSettings Mappings="=c_a"*/
-
 Uize.module ({
 	name:'Uize.Widget.Page.xDeferredLinks',
 	required:'Uize.Node',
@@ -18,7 +16,7 @@ Uize.module ({
 		_class.prototype.wireDeferredLinks = function() {
 			var
 				_this = this,
-				_links = _this._deferredLinks,
+				_links = _this.deferredLinks,
 				_numLinks = _links.length,
 				_linkNo = 0
 			;
@@ -50,7 +48,7 @@ Uize.module ({
 						);
 				}
 
-				for (var _endNo = Math.min(_numLinks, _linkNo + _this._linkBatchSize); _linkNo < _endNo; _linkNo++)
+				for (var _endNo = Math.min(_numLinks, _linkNo + _this.linkBatchSize); _linkNo < _endNo; _linkNo++)
 					_wireLink(_links[_linkNo])
 				;
 
@@ -62,11 +60,11 @@ Uize.module ({
 
 		/*** Register Properties ***/
 			_class.registerProperties ({
-				_deferredLinks:{
+				deferredLinks:{
 					name:'deferredLinks',
 					value:[]
 				},
-				_linkBatchSize:{
+				linkBatchSize:{
 					name:'linkBatchSize',
 					value:25
 				}

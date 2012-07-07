@@ -9,8 +9,6 @@
 |_______________|             http://www.uize.com/license.html
 */
 
-/*ScruncherSettings Mappings="=c_a"*/
-
 /* Module Meta Data
 	type: Extension
 	importance: 6
@@ -88,17 +86,26 @@ Uize.module ({
 		'Uize.Node'
 	],
 	builder:function (_class) {
+		/*** Names for Namespaced Privates ***/
+			var
+				_privatesNamespace = 'Uize.Widget.Dialog.xResizable.',
+				_pResizer = _privatesNamespace + 'resizer',
+				_pResizerInitialized = _privatesNamespace + 'resizerInitialized',
+				_pCreateResizerIfNecessary = _privatesNamespace + 'createResizerIfNecessary',
+				_pInitializeResizerNodesIfNecessary = _privatesNamespace + 'initializeResizerNodesIfNecessary'
+			;
+
 		var _classPrototype = _class.prototype;
 
 		/*** Private Instance Methods ***/
-			_classPrototype._createResizerIfNecessary = function () {
+			_classPrototype [_pCreateResizerIfNecessary] = function () {
 				var
 					_this = this,
-					_resizer = _this._resizer
+					_resizer = _this [_pResizer]
 				;
-				if (_this._resizable && !_resizer) {
+				if (_this.resizable && !_resizer) {
 					(
-						_this._resizer = _resizer = _this.addChild (
+						_this [_pResizer] = _resizer = _this.addChild (
 							'resizer',
 							Uize.Widget.Resizer,
 							{
@@ -172,7 +179,7 @@ Uize.module ({
 
 					/*** initialization ***/
 						if (_this.isWired) {
-							_this._initializeResizerNodesIfNecessary ();
+							_this [_pInitializeResizerNodesIfNecessary] ();
 							_this.get ('shown') && // sync position, if resizer created after dialog is shown
 								_syncResizerToDialogPosition ()
 							;
@@ -181,11 +188,11 @@ Uize.module ({
 				}
 			};
 
-			_classPrototype._initializeResizerNodesIfNecessary = function () {
+			_classPrototype [_pInitializeResizerNodesIfNecessary] = function () {
 				var _this = this;
-				if (_this.isWired && _this._resizable && !_this._resizerInitialized) {
-					_this._resizerInitialized = true;
-					_this._resizer.set ({
+				if (_this.isWired && _this.resizable && !_this [_pResizerInitialized]) {
+					_this [_pResizerInitialized] = true;
+					_this [_pResizer].set ({
 						areaNodes:[_this.getNode ()],
 						nodeMap:{
 							move:null,
@@ -196,18 +203,21 @@ Uize.module ({
 			};
 
 		/*** implement hook methods ***/
-			_classPrototype.atEndOfOmegaStructor = function () {this._createResizerIfNecessary ()};
-			_classPrototype.afterWireUi = function () {this._initializeResizerNodesIfNecessary ()};
+			_classPrototype.atEndOfOmegaStructor = function () {this [_pCreateResizerIfNecessary] ()};
+			_classPrototype.afterWireUi = function () {this [_pInitializeResizerNodesIfNecessary] ()};
 
 		/*** Register Properties ***/
 			_class.registerProperties ({
-				_resizable:{
+				resizable:{
 					name:'resizable',
 					onChange:function () {
-						var _this = this;
-						_this._createResizerIfNecessary ();
-						_this._initializeResizerNodesIfNecessary ();
-						_this._resizer && _this._resizer.set ({enabled:_this._resizable ? 'inherit' : false});
+						var
+							_this = this,
+							_resizer = _this [_pResizer]
+						;
+						_this [_pCreateResizerIfNecessary] ();
+						_this [_pInitializeResizerNodesIfNecessary] ();
+						_resizer && _resizer.set ({enabled:_this.resizable ? 'inherit' : false});
 					}
 					/*?
 						Set-get Properties

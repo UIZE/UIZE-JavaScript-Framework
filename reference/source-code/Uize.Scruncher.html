@@ -104,11 +104,6 @@ Uize.module({
         return Uize.lookup (_charsStr.split (''),_lookupValue != null ? _lookupValue : _true);
       }
 
-      function _stringToBoolean (_value) {
-        var _value = (_value + '').toUpperCase ();
-        return _value == 'TRUE' || _value == 'ON' || _value == '1';
-      }
-
     /*** General Variables ***/
       var
         /*** token types ***/
@@ -175,37 +170,6 @@ Uize.module({
     /*** Private Static Properties ***/
       var _settings = {};
 
-    function _parseScruncherSettings (_scruncherSettings) {
-      Uize.copyInto (
-        _settings,
-        typeof _scruncherSettings == 'string'
-          ? Uize.Xml.fromAttributes (_scruncherSettings,{nameCase:'upper'})
-          : _scruncherSettings
-      );
-
-      /*** update/resolve settings ***/
-        _settings.LINECOMPACTING = _stringToBoolean (_settings.LINECOMPACTING);
-        _settings.KEEPHEADCOMMENT = _stringToBoolean (_settings.KEEPHEADCOMMENT);
-        _settings.AUDITSTRINGS = _stringToBoolean (_settings.AUDITSTRINGS);
-
-        _mappings = [];
-        var _mappingPairs = _settings.MAPPINGS.split (',');
-        for (var _pairNo = -1; ++_pairNo &lt; _mappingPairs.length;) {
-          var _sourcePrefixAndTargetPrefix = Uize.String.splitInTwo (_mappingPairs [_pairNo],'=');
-          _mappings [_pairNo] = new _Mapping (_sourcePrefixAndTargetPrefix [0],_sourcePrefixAndTargetPrefix [1]);
-        }
-    }
-
-    function _Mapping (_sourcePrefix,_targetPrefix) {
-      /*** Constructor Properties ***/
-        this._sourcePrefix = _sourcePrefix;
-        this._targetPrefix = _targetPrefix || _sourcePrefix;
-
-      /*** Private Instance Properties ***/
-        this._scrunchMap = [];
-        this._totalIdentifiers = 0;
-    }
-
     /*** Public Static Methods ***/
       _package.scrunch = function (_sourceCode,_scruncherSettings) {
         var
@@ -218,6 +182,7 @@ Uize.module({
             _savingsFromRemovedLinebreaks = 0,
             _totalCommentsRemoved = 0,
 
+          _mappings,
           _endOfHeadComment = _false,
           _lineNo = 1,
           _scrunchedCode = _scrunchedCodeHeader = '',
@@ -248,7 +213,47 @@ Uize.module({
           _settings.KEEPHEADCOMMENT = 'TRUE';
           _settings.AUDITSTRINGS = 'FALSE';
 
+        function _Mapping (_sourcePrefix,_targetPrefix) {
+          /*** Constructor Properties ***/
+            this._sourcePrefix = _sourcePrefix;
+            this._targetPrefix = _targetPrefix || _sourcePrefix;
+
+          /*** Private Instance Properties ***/
+            this._scrunchMap = [];
+            this._totalIdentifiers = 0;
+        }
+
+        function _parseScruncherSettings (_scruncherSettings) {
+          function _stringToBoolean (_value) {
+            _value = (_value + '').toUpperCase ();
+            return _value == 'TRUE' || _value == 'ON' || _value == '1';
+          }
+
+          Uize.copyInto (
+            _settings,
+            typeof _scruncherSettings == 'string'
+              ? Uize.Xml.fromAttributes (_scruncherSettings,{nameCase:'upper'})
+              : _scruncherSettings
+          );
+
+          /*** update/resolve settings ***/
+            _settings.LINECOMPACTING = _stringToBoolean (_settings.LINECOMPACTING);
+            _settings.KEEPHEADCOMMENT = _stringToBoolean (_settings.KEEPHEADCOMMENT);
+            _settings.AUDITSTRINGS = _stringToBoolean (_settings.AUDITSTRINGS);
+
+            /*** parse mappings to create mapping objects ***/
+              _mappings = [];
+              var _mappingPairs = _settings.MAPPINGS.split (',');
+              for (var _pairNo = -1; ++_pairNo &lt; _mappingPairs.length;) {
+                var _sourcePrefixAndTargetPrefix = Uize.String.splitInTwo (_mappingPairs [_pairNo],'=');
+                _mappings [_pairNo] = new _Mapping (
+                  _sourcePrefixAndTargetPrefix [0],
+                  _sourcePrefixAndTargetPrefix [1]
+                );
+              }
+        }
         _parseScruncherSettings (_scruncherSettings);
+
         for (
           var
             _charNo = -1,

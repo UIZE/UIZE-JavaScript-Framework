@@ -9,8 +9,6 @@
 |_______________|             http://www.uize.com/license.html
 */
 
-/*ScruncherSettings Mappings="=b_a"*/
-
 /* Module Meta Data
 	type: Extension
 	importance: 5
@@ -41,7 +39,8 @@ Uize.module ({
 				_false = false,
 				_undefined,
 				_Uize_totalKeys = Uize.totalKeys,
-				_Uize_isObject = Uize.isObject
+				_Uize_isObject = Uize.isObject,
+				_pTarget = 'Uize.Fade.xFactory.target'
 			;
 
 		/*** General Variables ***/
@@ -102,7 +101,7 @@ Uize.module ({
 						++_fadeNo < _fadePoolLength;
 					) {
 						var
-							_matchingFadeTarget = (_matchingFade = _fadePool [_fadeNo])._target,
+							_matchingFadeTarget = (_matchingFade = _fadePool [_fadeNo]) [_pTarget],
 							_matchingFadeTargetContext = _matchingFadeTarget.context,
 							_matchingFadeTargetHandler = _matchingFadeTarget.handler,
 							_isMatch =
@@ -183,7 +182,8 @@ Uize.module ({
 					(
 						_newFadeHolder [0] = new _class (
 							Uize.copyInto (
-								{duration:_duration,startValue:_startValue,endValue:_endValue,_target:_target},
+								{duration:_duration,startValue:_startValue,endValue:_endValue},
+								Uize.pairUp (_pTarget,_target),
 								_fadeProperties
 							)
 						)
@@ -200,7 +200,7 @@ Uize.module ({
 							function (_event) {
 								var
 									_this = _event.source,
-									_target = _this._target,
+									_target = _this [_pTarget],
 									_context = _target.context,
 									_handler = _target.handler,
 									_value = _this.valueOf ()

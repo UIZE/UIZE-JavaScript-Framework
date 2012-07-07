@@ -149,6 +149,10 @@ iPad issues
 			- for example and module source code pages, width of pages causes titlebar to be tiny, since default is to scale page so there is no horizontal scrolling
 
 Bugs
+	file:///C:/~uize/UIZE-JavaScript-Framework/examples/date-picker.html
+		- initial values in text input all display as null
+	file:///C:/~uize/UIZE-JavaScript-Framework/examples/dialog-resizable.html
+		- when resizing by dragging either the left or top edges, dialog repositions incorrectly after drag
 	file:///C:/~uize/UIZE-JavaScript-Framework/examples/slideshow-of-data.html
 		- data bars don't have any space around them (has to do with IE8's handling of cellspacing attribute of table)
 	- weird bug with slideshow with wipes, where if you navigate forward and then back (or vice versa), it starts coming up with bogus wipe effect settings. Is this a side effect of the code that picks a new random wipe each slide? Or is this a side effect of recent loop optimizations? Seems like it may have to do with the images for the various panes being cached. Maybe something about the load handler behavior. Doesn't seem reproducable at all when going straight through - regardless of direction. Flipping back and forth between two images, however, causes corruption of the effects.
