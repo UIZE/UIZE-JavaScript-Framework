@@ -56,6 +56,13 @@
 		</codesearch:codesearch>
 	</url>
 	<url>
+		<loc>http://www.uize.com/js/~source/Uize.Build.BuildSimpleDocPages.js</loc>
+		<codesearch:codesearch>
+			<codesearch:filetype>javascript</codesearch:filetype>
+			<codesearch:license>GPL</codesearch:license>
+		</codesearch:codesearch>
+	</url>
+	<url>
 		<loc>http://www.uize.com/js/~source/Uize.Build.CompileJstModules.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
@@ -1645,7 +1652,49 @@
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/UizeDotCom.BuildUtils.js</loc>
+		<loc>http://www.uize.com/js/~source/UizeDotCom.Build.BuildCodeSitemap.js</loc>
+		<codesearch:codesearch>
+			<codesearch:filetype>javascript</codesearch:filetype>
+			<codesearch:license>GPL</codesearch:license>
+		</codesearch:codesearch>
+	</url>
+	<url>
+		<loc>http://www.uize.com/js/~source/UizeDotCom.Build.BuildIndexPages.js</loc>
+		<codesearch:codesearch>
+			<codesearch:filetype>javascript</codesearch:filetype>
+			<codesearch:license>GPL</codesearch:license>
+		</codesearch:codesearch>
+	</url>
+	<url>
+		<loc>http://www.uize.com/js/~source/UizeDotCom.Build.BuildPagesFromSourceCode.js</loc>
+		<codesearch:codesearch>
+			<codesearch:filetype>javascript</codesearch:filetype>
+			<codesearch:license>GPL</codesearch:license>
+		</codesearch:codesearch>
+	</url>
+	<url>
+		<loc>http://www.uize.com/js/~source/UizeDotCom.Build.BuildSotu.js</loc>
+		<codesearch:codesearch>
+			<codesearch:filetype>javascript</codesearch:filetype>
+			<codesearch:license>GPL</codesearch:license>
+		</codesearch:codesearch>
+	</url>
+	<url>
+		<loc>http://www.uize.com/js/~source/UizeDotCom.Build.BuildWidgetPages.js</loc>
+		<codesearch:codesearch>
+			<codesearch:filetype>javascript</codesearch:filetype>
+			<codesearch:license>GPL</codesearch:license>
+		</codesearch:codesearch>
+	</url>
+	<url>
+		<loc>http://www.uize.com/js/~source/UizeDotCom.Build.js</loc>
+		<codesearch:codesearch>
+			<codesearch:filetype>javascript</codesearch:filetype>
+			<codesearch:license>GPL</codesearch:license>
+		</codesearch:codesearch>
+	</url>
+	<url>
+		<loc>http://www.uize.com/js/~source/UizeDotCom.Build.Util.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>

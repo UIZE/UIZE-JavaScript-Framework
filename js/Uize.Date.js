@@ -1,5 +1,5 @@
 /*
-	UIZE JAVASCRIPT FRAMEWORK 2012-07-07
+	UIZE JAVASCRIPT FRAMEWORK 2012-07-08
 
 	http://www.uize.com/reference/Uize.Date.html
 	Available under MIT License or GNU General Public License -- http://www.uize.com/license.html
