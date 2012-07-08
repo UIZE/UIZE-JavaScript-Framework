@@ -40,7 +40,7 @@ NEW MODULE: Uize.Widget.ColorInfo
 NEW MODULE: Uize.Widget.EdgeHugger
 	Announce this new widget.
 
-IMPROVED MODULE: Uize.Wsh.AutoScruncher
+IMPROVED MODULE: Uize.Build.AutoScruncher
 	Announce configurable handling of head comments.
 
 NEW PERFORMANCE TEST: Loop Optimization Approaches

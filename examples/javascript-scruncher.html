@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<title>JavaScript Scruncher | JavaScript Tools | UIZE JavaScript Framework</title>
-	<meta name="keywords" content="tool Uize.Scruncher"/>
+	<meta name="keywords" content="tool Uize.Build.Scruncher"/>
 	<meta name="description" content="Take bloated JavaScript source code and scrunch (minify, compress) it using this versatile tool. Drastically reduce its size and even obfuscate it!"/>
 	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
 	<link rel="stylesheet" href="../css/page.css"/>
@@ -28,7 +28,7 @@
 	<!-- explanation copy -->
 
 	<div class="explanation">
-		<p>The <b>JavaScript Scruncher</b> tool (which makes use of the <a href="../reference/Uize.Scruncher.html"><code>Uize.Scruncher</code></a> module) lets you test the scrunching of JavaScript code. Paste some JavaScript into the <b>"SOURCE CODE"</b> tab and then switch to the <b>"SCRUNCHED CODE"</b> tab to see the scrunched version. Switch to the <b>"SCRUNCHER REPORT"</b> tab to see a summary of the file size savings for different facets of the scrunching operation. To start you off, the <b>"SOURCE CODE"</b> tab is set up with the contents of a Uize module. To learn more about how the scruncher works and the options available, consult the explainer <a href="../explainers/all-about-scrunching.html">All About Scrunching</a>.</p>
+		<p>The <b>JavaScript Scruncher</b> tool (which makes use of the <a href="../reference/Uize.Build.Scruncher.html"><code>Uize.Build.Scruncher</code></a> module) lets you test the scrunching of JavaScript code. Paste some JavaScript into the <b>"SOURCE CODE"</b> tab and then switch to the <b>"SCRUNCHED CODE"</b> tab to see the scrunched version. Switch to the <b>"SCRUNCHER REPORT"</b> tab to see a summary of the file size savings for different facets of the scrunching operation. To start you off, the <b>"SOURCE CODE"</b> tab is set up with the contents of a Uize module. To learn more about how the scruncher works and the options available, consult the explainer <a href="../explainers/all-about-scrunching.html">All About Scrunching</a>.</p>
 	</div>
 
 	<form>
@@ -60,7 +60,7 @@ Uize.module ({
 	required:[
 		'UizeDotCom.Page.Example',
 		'Uize.Widget.Options.Tabbed',
-		'Uize.Scruncher',
+		'Uize.Build.Scruncher',
 		'UizeDotCom.Templates.JavaScriptSourceSample'
 	],
 	builder:function () {
@@ -72,7 +72,7 @@ Uize.module ({
 					sourceCode:{
 						name:'sourceCode',
 						onChange:function () {
-							var scruncherResult = Uize.Scruncher.scrunch (this.sourceCode);
+							var scruncherResult = Uize.Build.Scruncher.scrunch (this.sourceCode);
 							page.setNodeValue ('scrunchedCode',scruncherResult.scrunchedCode);
 							page.setNodeValue ('scruncherReport',scruncherResult.report);
 						}

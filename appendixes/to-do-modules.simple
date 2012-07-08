@@ -2124,7 +2124,7 @@ Uize.Widget.Population
 				eg. function (_keyName) {return '[' + _keyName.toUpperCase () + ']'}
 			- default value for this param is "{KEY}"
 
-Uize.Scruncher
+Uize.Build.Scruncher
 	- allow the first block of comments in a document to consist of comment lines that are started with a "//"
 	- provide more info in reports
 		- time elapsed
@@ -3845,7 +3845,7 @@ Uize.Wsh
 
 		- use these new params to speed up: _build-pages-from-simple-doc.js (for documenting the JavaScript modules)
 
-Uize.Wsh.AutoScruncher
+Uize.Build.AutoScruncher
 	- should no longer support .library.js files that don't have a Library Contents comment, because it's not really a JS file if it has a bunch of modules listed in the open
 	- provide a switch to use the source files (ie. scrunched files are replaced with source files)
 	- provide a switch to enable echo of progress / status

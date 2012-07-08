@@ -35,6 +35,34 @@
 		</codesearch:codesearch>
 	</url>
 	<url>
+		<loc>http://www.uize.com/js/~source/Uize.Build.AuditStrings.js</loc>
+		<codesearch:codesearch>
+			<codesearch:filetype>javascript</codesearch:filetype>
+			<codesearch:license>GPL</codesearch:license>
+		</codesearch:codesearch>
+	</url>
+	<url>
+		<loc>http://www.uize.com/js/~source/Uize.Build.AutoScruncher.js</loc>
+		<codesearch:codesearch>
+			<codesearch:filetype>javascript</codesearch:filetype>
+			<codesearch:license>GPL</codesearch:license>
+		</codesearch:codesearch>
+	</url>
+	<url>
+		<loc>http://www.uize.com/js/~source/Uize.Build.BuildSimpleDataPages.js</loc>
+		<codesearch:codesearch>
+			<codesearch:filetype>javascript</codesearch:filetype>
+			<codesearch:license>GPL</codesearch:license>
+		</codesearch:codesearch>
+	</url>
+	<url>
+		<loc>http://www.uize.com/js/~source/Uize.Build.CompileJstModules.js</loc>
+		<codesearch:codesearch>
+			<codesearch:filetype>javascript</codesearch:filetype>
+			<codesearch:license>GPL</codesearch:license>
+		</codesearch:codesearch>
+	</url>
+	<url>
 		<loc>http://www.uize.com/js/~source/Uize.Build.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
@@ -43,6 +71,34 @@
 	</url>
 	<url>
 		<loc>http://www.uize.com/js/~source/Uize.Build.ModuleInfo.js</loc>
+		<codesearch:codesearch>
+			<codesearch:filetype>javascript</codesearch:filetype>
+			<codesearch:license>GPL</codesearch:license>
+		</codesearch:codesearch>
+	</url>
+	<url>
+		<loc>http://www.uize.com/js/~source/Uize.Build.NeatenJsFiles.js</loc>
+		<codesearch:codesearch>
+			<codesearch:filetype>javascript</codesearch:filetype>
+			<codesearch:license>GPL</codesearch:license>
+		</codesearch:codesearch>
+	</url>
+	<url>
+		<loc>http://www.uize.com/js/~source/Uize.Build.Scruncher.js</loc>
+		<codesearch:codesearch>
+			<codesearch:filetype>javascript</codesearch:filetype>
+			<codesearch:license>GPL</codesearch:license>
+		</codesearch:codesearch>
+	</url>
+	<url>
+		<loc>http://www.uize.com/js/~source/Uize.Build.UpdateCopyrightNotices.js</loc>
+		<codesearch:codesearch>
+			<codesearch:filetype>javascript</codesearch:filetype>
+			<codesearch:license>GPL</codesearch:license>
+		</codesearch:codesearch>
+	</url>
+	<url>
+		<loc>http://www.uize.com/js/~source/Uize.Build.Util.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
@@ -358,13 +414,6 @@
 	</url>
 	<url>
 		<loc>http://www.uize.com/js/~source/Uize.Node.VirtualEvent.js</loc>
-		<codesearch:codesearch>
-			<codesearch:filetype>javascript</codesearch:filetype>
-			<codesearch:license>GPL</codesearch:license>
-		</codesearch:codesearch>
-	</url>
-	<url>
-		<loc>http://www.uize.com/js/~source/Uize.Scruncher.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>
@@ -1582,56 +1631,7 @@
 		</codesearch:codesearch>
 	</url>
 	<url>
-		<loc>http://www.uize.com/js/~source/Uize.Wsh.AuditStrings.js</loc>
-		<codesearch:codesearch>
-			<codesearch:filetype>javascript</codesearch:filetype>
-			<codesearch:license>GPL</codesearch:license>
-		</codesearch:codesearch>
-	</url>
-	<url>
-		<loc>http://www.uize.com/js/~source/Uize.Wsh.AutoScruncher.js</loc>
-		<codesearch:codesearch>
-			<codesearch:filetype>javascript</codesearch:filetype>
-			<codesearch:license>GPL</codesearch:license>
-		</codesearch:codesearch>
-	</url>
-	<url>
-		<loc>http://www.uize.com/js/~source/Uize.Wsh.BuildSimpleDataPages.js</loc>
-		<codesearch:codesearch>
-			<codesearch:filetype>javascript</codesearch:filetype>
-			<codesearch:license>GPL</codesearch:license>
-		</codesearch:codesearch>
-	</url>
-	<url>
-		<loc>http://www.uize.com/js/~source/Uize.Wsh.BuildUtils.js</loc>
-		<codesearch:codesearch>
-			<codesearch:filetype>javascript</codesearch:filetype>
-			<codesearch:license>GPL</codesearch:license>
-		</codesearch:codesearch>
-	</url>
-	<url>
-		<loc>http://www.uize.com/js/~source/Uize.Wsh.CompileJstModules.js</loc>
-		<codesearch:codesearch>
-			<codesearch:filetype>javascript</codesearch:filetype>
-			<codesearch:license>GPL</codesearch:license>
-		</codesearch:codesearch>
-	</url>
-	<url>
 		<loc>http://www.uize.com/js/~source/Uize.Wsh.js</loc>
-		<codesearch:codesearch>
-			<codesearch:filetype>javascript</codesearch:filetype>
-			<codesearch:license>GPL</codesearch:license>
-		</codesearch:codesearch>
-	</url>
-	<url>
-		<loc>http://www.uize.com/js/~source/Uize.Wsh.NeatenJsFiles.js</loc>
-		<codesearch:codesearch>
-			<codesearch:filetype>javascript</codesearch:filetype>
-			<codesearch:license>GPL</codesearch:license>
-		</codesearch:codesearch>
-	</url>
-	<url>
-		<loc>http://www.uize.com/js/~source/Uize.Wsh.UpdateCopyrightNotices.js</loc>
 		<codesearch:codesearch>
 			<codesearch:filetype>javascript</codesearch:filetype>
 			<codesearch:license>GPL</codesearch:license>

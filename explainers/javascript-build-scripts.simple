@@ -176,7 +176,7 @@ The Build Scripts
 		For more information on JavaScript template modules, consult the explainers [[javascript-templates.html][JavaScript Templates]] and [[javascript-modules.html][JavaScript Modules]].
 
 		NOTES
-		- the core of the intelligence of the Build JST Modules build script can be found in the =Uize.Wsh.CompileJstModules= module
+		- the core of the intelligence of the Build JST Modules build script can be found in the =Uize.Build.CompileJstModules= module
 
 	Build Pages from Simple Data
 		The Build Pages from Simple Data build script (implemented in the file =_build-pages-from-simple-data.js=) recurses through all folders of a Web site project, building pages from all the Simple Data (=.simpledata=) files that it finds.
@@ -200,7 +200,7 @@ The Build Scripts
 			Based on this file naming principle, the desired file extension for the built file is put before the =.simpledata= and =.jst= extensions. This means that the Build Pages from Simple Data build script can build any type of text file from Simple Data files it encounters, and, in fact, the *uize.com* Web site project uses it to build a few HTML pages as well as an RSS (=.rss=) file.
 
 		NOTES
-		- the core of the intelligence of the Build Pages from Simple Data build script can be found in the =Uize.Wsh.BuildSimpleDataPages= module
+		- the core of the intelligence of the Build Pages from Simple Data build script can be found in the =Uize.Build.BuildSimpleDataPages= module
 		- the behavior of this build script is not affected by the values of the =buildFolderPath= and =sourceFolderName= build environment variables
 		- the summary info for this build script is output to the log file =_build-pages-from-simple-data.log=
 
@@ -282,7 +282,7 @@ The Build Scripts
 			document...
 
 		NOTES
-		- the core of the intelligence of the Build Scrunched build script can be found in the =Uize.Wsh.AutoScruncher= module
+		- the core of the intelligence of the Build Scrunched build script can be found in the =Uize.Build.AutoScruncher= module
 
 	Build Strings Audit Report
 		The Build Strings Audit Report build script (implemented in the file =_build-strings-audit-report.js=) recurses through all folders of a Web site project, harvests all the string literals from JavaScript files, filters them into different buckets depending on their likelihood of internationalizability, and produces a report with summaries for all the JavaScript files.
@@ -344,7 +344,7 @@ The Build Scripts
 		Be warned: this build script can be quite slow to run, especially if you have a large project with many folders and many JavaScript files. It could take a few minutes to process all JavaScript files in a large project. You'll know when it's done running by the modified date of the associated log file, or you can watch the *WSCRIPT.EXE* process in the Windows Task Manager.
 
 		NOTES
-		- the core of the intelligence of the Build Strings Audit Report build script can be found in the =Uize.Wsh.AuditStrings= module
+		- the core of the intelligence of the Build Strings Audit Report build script can be found in the =Uize.Build.AuditStrings= module
 		- the summary info for this build script is output to the log file =_build-strings-audit-report.log=
 
 	Run Unit Tests (Scrunched)
@@ -393,8 +393,8 @@ Build Script Setup
 				_setupFile.Close ();
 
 			Uize.module ({
-				required:'Uize.Wsh.BuildUtils',
-				builder:function () {Uize.Wsh.BuildUtils.testAllModules ()}
+				required:'Uize.Build.Util',
+				builder:function () {Uize.Build.Util.testAllModules ()}
 			});
 			...................................................................................
 
@@ -415,8 +415,8 @@ Build Script Setup
 				_setupFile.Close ();
 
 			Uize.module ({
-				required:'Uize.Wsh.BuildUtils',
-				builder:function () {Uize.Wsh.BuildUtils.testAllModules ()}
+				required:'Uize.Build.Util',
+				builder:function () {Uize.Build.Util.testAllModules ()}
 			});
 			...................................................................................
 
@@ -592,7 +592,7 @@ Writing Your Own Build Scripts
 			Required Modules
 				Your build script's anonymous module can require any of the `WSH-compatible UIZE Modules`, which includes many modules of the UIZE JavaScript Framework, and even your own modules (provided they are WSH-compatible and reside in the modules folder).
 
-				Typically, your build script's code will at least require the =Uize.Wsh= module, but many build scripts may also require additional modules under the =Uize.Wsh= namespace (such as the =Uize.Wsh.BuildUtils= module), or basic utility modules such as the =Uize.Data=, =Uize.String=, =Uize.Template=, and other modules.
+				Typically, your build script's code will at least require the =Uize.Wsh= module, but many build scripts may also require additional modules under the =Uize.Wsh= namespace (such as the =Uize.Build.Util= module), or basic utility modules such as the =Uize.Data=, =Uize.String=, =Uize.Template=, and other modules.
 
 			Builder Function
 				The builder function in your `Build Script Anonymous Module Declaration` is what contains the code that performs the build script's action.
@@ -612,7 +612,7 @@ Writing Your Own Build Scripts
 			- =Uize.Doc= (and all submodules)
 			- =Uize.Fade= (and all submodules, but *only for non-time based fades*)
 			- =Uize.Json=
-			- =Uize.Scruncher=
+			- =Uize.Build.Scruncher=
 			- =Uize.String= (and all submodules)
 			- =Uize.Template=
 			- =Uize.Templates= (and all submodules)

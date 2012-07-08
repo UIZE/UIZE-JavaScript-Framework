@@ -400,7 +400,7 @@ C:\~uize\UIZE-JavaScript-Framework\js\~source\Uize.Comm.Iframe.js
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the core of the intelligence of the Build JST Modules build script can be found in the <code><a href="../reference/Uize.Wsh.CompileJstModules.html">Uize.Wsh.CompileJstModules</a></code> module</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the core of the intelligence of the Build JST Modules build script can be found in the <code><a href="../reference/Uize.Build.CompileJstModules.html">Uize.Build.CompileJstModules</a></code> module</td></tr>
 			</table>
 		</div>
 		
@@ -434,7 +434,7 @@ JST template file &gt; credits.html.jst
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the core of the intelligence of the Build Pages from Simple Data build script can be found in the <code><a href="../reference/Uize.Wsh.BuildSimpleDataPages.html">Uize.Wsh.BuildSimpleDataPages</a></code> module</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the core of the intelligence of the Build Pages from Simple Data build script can be found in the <code><a href="../reference/Uize.Build.BuildSimpleDataPages.html">Uize.Build.BuildSimpleDataPages</a></code> module</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the behavior of this build script is not affected by the values of the <code><a href="#4_2">buildFolderPath</a></code> and <code><a href="#4_7">sourceFolderName</a></code> build environment variables</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the summary info for this build script is output to the log file <code>_build-pages-from-simple-data.log</code></td></tr>
 			</table>
@@ -566,7 +566,7 @@ JST template file &gt; credits.html.jst
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the core of the intelligence of the Build Scrunched build script can be found in the <code><a href="../reference/Uize.Wsh.AutoScruncher.html">Uize.Wsh.AutoScruncher</a></code> module</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the core of the intelligence of the Build Scrunched build script can be found in the <code><a href="../reference/Uize.Build.AutoScruncher.html">Uize.Build.AutoScruncher</a></code> module</td></tr>
 			</table>
 		</div>
 		
@@ -648,7 +648,7 @@ JST template file &gt; credits.html.jst
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the core of the intelligence of the Build Strings Audit Report build script can be found in the <code><a href="../reference/Uize.Wsh.AuditStrings.html">Uize.Wsh.AuditStrings</a></code> module</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the core of the intelligence of the Build Strings Audit Report build script can be found in the <code><a href="../reference/Uize.Build.AuditStrings.html">Uize.Build.AuditStrings</a></code> module</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>the summary info for this build script is output to the log file <code>_build-strings-audit-report.log</code></td></tr>
 			</table>
 		</div>
@@ -714,8 +714,8 @@ JST template file &gt; credits.html.jst
   _setupFile.Close ();
 
 Uize.module ({
-  required:'Uize.Wsh.BuildUtils',
-  builder:function () {Uize.Wsh.BuildUtils.testAllModules ()}
+  required:'Uize.Build.Util',
+  builder:function () {Uize.Build.Util.testAllModules ()}
 });
 </pre>
 				
@@ -740,8 +740,8 @@ Uize.module ({
   _setupFile.Close ();
 
 Uize.module ({
-  required:'Uize.Wsh.BuildUtils',
-  builder:function () {Uize.Wsh.BuildUtils.testAllModules ()}
+  required:'Uize.Build.Util',
+  builder:function () {Uize.Build.Util.testAllModules ()}
 });
 </pre>
 				
@@ -981,7 +981,7 @@ js/Uize.Comm.Iframe.Upload.js
 				<div class="contents4">
 					<p>Your build script's anonymous module can require any of the <a href="#5_5">WSH-compatible UIZE Modules</a>, which includes many modules of the UIZE JavaScript Framework, and even your own modules (provided they are WSH-compatible and reside in the modules folder).</p>
 					
-					<p>Typically, your build script's code will at least require the <code><a href="../reference/Uize.Wsh.html">Uize.Wsh</a></code> module, but many build scripts may also require additional modules under the <code><a href="../reference/Uize.Wsh.html">Uize.Wsh</a></code> namespace (such as the <code><a href="../reference/Uize.Wsh.BuildUtils.html">Uize.Wsh.BuildUtils</a></code> module), or basic utility modules such as the <code><a href="../reference/Uize.Data.html">Uize.Data</a></code>, <code><a href="../reference/Uize.String.html">Uize.String</a></code>, <code><a href="../reference/Uize.Template.html">Uize.Template</a></code>, and other modules.</p>
+					<p>Typically, your build script's code will at least require the <code><a href="../reference/Uize.Wsh.html">Uize.Wsh</a></code> module, but many build scripts may also require additional modules under the <code><a href="../reference/Uize.Wsh.html">Uize.Wsh</a></code> namespace (such as the <code><a href="../reference/Uize.Build.Util.html">Uize.Build.Util</a></code> module), or basic utility modules such as the <code><a href="../reference/Uize.Data.html">Uize.Data</a></code>, <code><a href="../reference/Uize.String.html">Uize.String</a></code>, <code><a href="../reference/Uize.Template.html">Uize.Template</a></code>, and other modules.</p>
 				</div>
 				
 				<a name="5_4_2_2"></a>
@@ -1012,7 +1012,7 @@ js/Uize.Comm.Iframe.Upload.js
 				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="../reference/Uize.Doc.html">Uize.Doc</a></code> (and all submodules)</td></tr>
 				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> (and all submodules, but <b>only for non-time based fades</b>)</td></tr>
 				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="../reference/Uize.Json.html">Uize.Json</a></code></td></tr>
-				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="../reference/Uize.Scruncher.html">Uize.Scruncher</a></code></td></tr>
+				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="../reference/Uize.Build.Scruncher.html">Uize.Build.Scruncher</a></code></td></tr>
 				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="../reference/Uize.String.html">Uize.String</a></code> (and all submodules)</td></tr>
 				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="../reference/Uize.Template.html">Uize.Template</a></code></td></tr>
 				<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="../reference/Uize.Templates.html">Uize.Templates</a></code> (and all submodules)</td></tr>

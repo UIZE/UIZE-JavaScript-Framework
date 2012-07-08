@@ -51,7 +51,7 @@
 Uize.module({
   name:'Uize.Doc.Sucker',
   required:[
-    'Uize.Scruncher',
+    'Uize.Build.Scruncher',
     'Uize.String',
     'Uize.String.Lines',
     'Uize.Data.Simple',
@@ -75,7 +75,7 @@ Uize.module({
           var
             _commentNo = -1,
             _comment,
-            _comments = Uize.Scruncher.scrunch (_javascriptSource).comments,
+            _comments = Uize.Build.Scruncher.scrunch (_javascriptSource).comments,
             _commentsLength = _comments.length
           ;
           ++_commentNo &lt; _commentsLength;

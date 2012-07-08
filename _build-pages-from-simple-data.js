@@ -4,7 +4,7 @@
 	_setupFile.Close ();
 
 Uize.module ({
-	required:'Uize.Wsh.BuildSimpleDataPages',
-	builder:function () {Uize.Wsh.BuildSimpleDataPages.perform (env)}
+	required:'Uize.Build.BuildSimpleDataPages',
+	builder:function () {Uize.Build.BuildSimpleDataPages.perform (env)}
 });
 

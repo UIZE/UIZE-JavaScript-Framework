@@ -178,7 +178,6 @@ Migrate Modules Into Deeper Namespaces
 	Migrate some modules at the root =Uize= namespace into deeper namespaces in order to tuck them away.
 
 	.........................................................
-	Uize.Scruncher   ->  Uize.Build.Scruncher ?
 	Uize.Tooltip     ->  ???
 	Uize.Xml         ->  ???
 	.........................................................

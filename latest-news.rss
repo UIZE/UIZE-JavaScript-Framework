@@ -7,7 +7,7 @@
 		<description>UIZE JavaScript Framework (AJAX, RIA, widgets, JSON, OOP, Class Inheritance, XMLHttpRequest, DOM manipulation, and all that stuff)</description>
 		<language>en-us</language>
 		<copyright>© 1996-2008 UIZE</copyright>
-		<pubDate>Sat, 7 Jul 2012 19:52:02 UT</pubDate>
+		<pubDate>Sun, 8 Jul 2012 01:07:58 UT</pubDate>
 		<ttl>10080</ttl>
 		<image>
 			<title>UIZE JavaScript Framework | Latest News</title>
@@ -22,7 +22,7 @@
 			<title>2012-07-07 - Auto-derived Scruncher Mappings</title>
 			<link>http://www.uize.com/news/2012-07-07-Auto-Derived-Scruncher-Mappings.html</link>
 			<guid>http://www.uize.com/news/2012-07-07-Auto-Derived-Scruncher-Mappings.html</guid>
-			<description>With a recent improvement in the auto scruncher (implemented in the Uize.Wsh.AutoScruncher module), it is no longer necessary to specify unique mappings for scrunched identifier names in a ScruncherSettings comment in source files.</description>
+			<description>With a recent improvement in the auto scruncher (implemented in the Uize.Build.AutoScruncher module), it is no longer necessary to specify unique mappings for scrunched identifier names in a ScruncherSettings comment in source files.</description>
 			<pubDate>Sat, 7 Jul 2012 07:00:00 UT</pubDate>
 			<feedburner:origLink>http://www.uize.com/news/2012-07-07-Auto-Derived-Scruncher-Mappings.html</feedburner:origLink>
 		</item>

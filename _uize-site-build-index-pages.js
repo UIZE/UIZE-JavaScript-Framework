@@ -22,7 +22,7 @@
 Uize.module ({
 	required:[
 		'Uize.Wsh',
-		'Uize.Wsh.BuildUtils',
+		'Uize.Build.Util',
 		'Uize.Template',
 		'Uize.String',
 		'Uize.String.Lines',
@@ -35,23 +35,23 @@ Uize.module ({
 	builder:function () {
 		/*** Utility Functions ***/
 			function _buildIndexPage (_indexPageTemplatePath,_filesToIndex) {
-				Uize.Wsh.BuildUtils.processJstFile (_indexPageTemplatePath,{files:_filesToIndex});
+				Uize.Build.Util.processJstFile (_indexPageTemplatePath,{files:_filesToIndex});
 			}
 
 		var
 			_getFirstTitleSegment = UizeDotCom.BuildUtils.getFirstTitleSegment,
-			_moduleReferenceFiles = Uize.Wsh.BuildUtils.getHtmlFilesInfo ('reference',_getFirstTitleSegment)
+			_moduleReferenceFiles = Uize.Build.Util.getHtmlFilesInfo ('reference',_getFirstTitleSegment)
 		;
 
 		/*** build index files for modules, explainers, and widgets ***/
 			_buildIndexPage (
 				'javascript-explainers.html.jst',
-				Uize.Wsh.BuildUtils.getHtmlFilesInfo ('explainers',_getFirstTitleSegment)
+				Uize.Build.Util.getHtmlFilesInfo ('explainers',_getFirstTitleSegment)
 			);
 			_buildIndexPage ('javascript-modules-index.html.jst',_moduleReferenceFiles);
 			_buildIndexPage (
 				'javascript-widgets.html.jst',
-				Uize.Wsh.BuildUtils.getHtmlFilesInfo ('widgets',_getFirstTitleSegment)
+				Uize.Build.Util.getHtmlFilesInfo ('widgets',_getFirstTitleSegment)
 			);
 
 		/*** build the UizeDotCom.ModulesTree module ***/
@@ -59,16 +59,16 @@ Uize.module ({
 				var _modulesTree = Uize.Data.PathsTree.fromList (Uize.map (_moduleReferenceFiles,'value.title'),'.');
 
 			/*** write the modules tree module file ***/
-				Uize.Wsh.BuildUtils.writeDataModule (env.moduleFolderPath,'UizeDotCom.ModulesTree',_modulesTree);
+				Uize.Build.Util.writeDataModule (env.moduleFolderPath,'UizeDotCom.ModulesTree',_modulesTree);
 
 		/*** build the examples module and index pages ***/
-			var _examples = Uize.Wsh.BuildUtils.getHtmlFilesInfo ('examples',_getFirstTitleSegment);
+			var _examples = Uize.Build.Util.getHtmlFilesInfo ('examples',_getFirstTitleSegment);
 
 			/*** build the UizeDotCom.Examples module ***/
-				Uize.Wsh.BuildUtils.writeDataModule (env.moduleFolderPath,'UizeDotCom.Examples',_examples);
+				Uize.Build.Util.writeDataModule (env.moduleFolderPath,'UizeDotCom.Examples',_examples);
 
 			/*** build the examples by module page ***/
-				Uize.Wsh.BuildUtils.processJstFile ('javascript-examples-by-module.html.jst');
+				Uize.Build.Util.processJstFile ('javascript-examples-by-module.html.jst');
 
 			/*** build map of examples by keyword ***/
 				var _examplesByKeyword = {'':_examples};
@@ -89,7 +89,7 @@ Uize.module ({
 				}
 
 			/*** build examples index pages for each keyword ***/
-				var _indexPageTemplate = Uize.Wsh.BuildUtils.compileJstFile ('javascript-examples.html.jst');
+				var _indexPageTemplate = Uize.Build.Util.compileJstFile ('javascript-examples.html.jst');
 				for (var _keyword in _examplesByKeyword)
 					Uize.Wsh.writeFile ({
 						path:'javascript-' + _keyword + (_keyword && '-') + 'examples.html',
@@ -98,7 +98,7 @@ Uize.module ({
 				;
 
 			/*** build the UizeDotCom.ExamplesInfoForSiteMap module ***/
-				Uize.Wsh.BuildUtils.writeDataModule (
+				Uize.Build.Util.writeDataModule (
 					env.moduleFolderPath,'UizeDotCom.ExamplesInfoForSiteMap',
 					{
 						keywords:Uize.keys (_examplesByKeyword).slice (1).sort (), // slice removes the '' keyword
@@ -113,11 +113,11 @@ Uize.module ({
 		/*** build the news index pages ***/
 			var
 				_newsItems = Uize.Array.Sort.sortBy (
-					Uize.Wsh.BuildUtils.getHtmlFilesInfo ('news',_getFirstTitleSegment),
+					Uize.Build.Util.getHtmlFilesInfo ('news',_getFirstTitleSegment),
 					'value.title',
 					-1
 				),
-				_newsIndexPageTemplate = Uize.Wsh.BuildUtils.compileJstFile ('news.html.jst')
+				_newsIndexPageTemplate = Uize.Build.Util.compileJstFile ('news.html.jst')
 			;
 
 			/*** build the latest news files ***/
@@ -130,7 +130,7 @@ Uize.module ({
 					});
 
 				/*** build the latest news RSS file ***/
-					Uize.Wsh.BuildUtils.processJstFile (
+					Uize.Build.Util.processJstFile (
 						'latest-news.rss.jst',
 						{
 							items:Uize.map (
@@ -148,7 +148,7 @@ Uize.module ({
 					);
 
 			/*** build the home page, to update the news pod ***/
-				Uize.Wsh.BuildUtils.processJstFile ('index.html.jst',{latestNews:_latestNews});
+				Uize.Build.Util.processJstFile ('index.html.jst',{latestNews:_latestNews});
 
 			/*** build map of news items by year ***/
 				var _newsItemsByYear = {};
@@ -169,7 +169,7 @@ Uize.module ({
 				;
 
 		/*** build the directory page ***/
-			Uize.Wsh.BuildUtils.processJstFile ('directory.html.jst');
+			Uize.Build.Util.processJstFile ('directory.html.jst');
 	}
 });
 

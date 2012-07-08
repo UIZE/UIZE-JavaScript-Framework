@@ -4,9 +4,9 @@
 	_setupFile.Close ();
 
 Uize.module ({
-	required:'Uize.Wsh.BuildUtils',
+	required:'Uize.Build.Util',
 	builder:function () {
-		var _buildError = Uize.Wsh.BuildUtils.runScripts (env.buildSequence);
+		var _buildError = Uize.Build.Util.runScripts (env.buildSequence);
 		(WScript.Arguments.Count () && WScript.Arguments.Item (0) == 'silent') ||
 			alert (
 				_buildError

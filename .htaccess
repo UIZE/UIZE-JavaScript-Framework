@@ -25,6 +25,11 @@
 		RedirectMatch 301 ^/(reference(/source-code)?)/Uize\.Cycle\.html$ http://www.uize.com/$1/Uize.Util.Cycle.html
 		RedirectMatch 301 ^/(reference(/source-code)?)/Uize\.Population\.html$ http://www.uize.com/$1/Uize.Widget.Population.html
 
+		# renamed build modules
+			RedirectMatch 301 ^/(reference(/source-code)?)/Uize\.Scruncher\.html$ http://www.uize.com/$1/Uize.Build.Scruncher.html
+			RedirectMatch 301 ^/(reference(/source-code)?)/Uize\.Wsh\.BuildUtils\.html$ http://www.uize.com/$1/Uize.Build.Util.html
+			RedirectMatch 301 ^/(reference(/source-code)?)/Uize\.Wsh\.(AuditStrings|AutoScruncher|BuildSimpleDataPages|CompileJstModules|NeatenJsFiles|UpdateCopyrightNotices)\.html$ http://www.uize.com/$1/Uize.Build.$2.html
+
 		# killed modules
 			RedirectMatch 301 ^/(reference(/source-code)?)/Uize\.Subclass\.html$ http://www.uize.com/javascript-modules-index.html
 

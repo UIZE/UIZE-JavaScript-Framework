@@ -22,7 +22,7 @@
 Uize.module ({
 	required:[
 		'Uize.Wsh',
-		'Uize.Wsh.BuildUtils',
+		'Uize.Build.Util',
 		'Uize.Template'
 	],
 	builder:function () {
@@ -50,7 +50,7 @@ Uize.module ({
 				}
 				if (
 					_targetFolderPath &&
-					!(_docTemplate = Uize.Wsh.BuildUtils.compileJstFile (_targetFolderPath + '\\' + _docTemplateFileName))
+					!(_docTemplate = Uize.Build.Util.compileJstFile (_targetFolderPath + '\\' + _docTemplateFileName))
 				)
 					_targetFolderPath = null
 				;

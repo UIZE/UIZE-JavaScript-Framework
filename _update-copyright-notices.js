@@ -4,7 +4,7 @@
 	_setupFile.Close ();
 
 Uize.module ({
-	required:'Uize.Wsh.UpdateCopyrightNotices',
-	builder:function () {Uize.Wsh.UpdateCopyrightNotices.perform (env)}
+	required:'Uize.Build.UpdateCopyrightNotices',
+	builder:function () {Uize.Build.UpdateCopyrightNotices.perform (env)}
 });
 

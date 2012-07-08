@@ -4,7 +4,7 @@
 	_setupFile.Close ();
 
 Uize.module ({
-	required:'Uize.Wsh.BuildUtils',
-	builder:function () {Uize.Wsh.BuildUtils.testAllModules ()}
+	required:'Uize.Build.Util',
+	builder:function () {Uize.Build.Util.testAllModules ()}
 });
 

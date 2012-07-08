@@ -6,8 +6,8 @@
 Uize.module ({
 	required:[
 		'Uize.Wsh',
-		'Uize.Wsh.BuildUtils',
-		'Uize.Wsh.AutoScruncher',
+		'Uize.Build.Util',
+		'Uize.Build.AutoScruncher',
 		'Uize.String',
 		'Uize.String.Lines',
 		'Uize.Data.Simple',
@@ -25,7 +25,7 @@ Uize.module ({
 
 		/*** build up data records for table ***/
 			var
-				_moduleReferenceFiles = Uize.Wsh.BuildUtils.getHtmlFilesInfo ('reference',_getFirstTitleSegment),
+				_moduleReferenceFiles = Uize.Build.Util.getHtmlFilesInfo ('reference',_getFirstTitleSegment),
 				_examplesByKeyword = UizeDotCom.BuildUtils.getExamplesByKeyword (),
 				_modules = []
 			;
@@ -93,7 +93,7 @@ Uize.module ({
 						_moduleInfo.sourceFileSize = _sourceFileText.length;
 						_moduleInfo.scrunchedFileSize =
 							Uize.Wsh.readFile (
-								Uize.Wsh.AutoScruncher.getScrunchedFolderPath (
+								Uize.Build.AutoScruncher.getScrunchedFolderPath (
 									Uize.Wsh.getScriptFolderPath () + '\\' + env.moduleFolderPath,
 									env.buildFolderPath,
 									env.sourceFolderName
@@ -106,7 +106,7 @@ Uize.module ({
 			}
 
 		/*** process JavaScript template with modules data ***/
-			Uize.Wsh.BuildUtils.processJstFile ('appendixes\\sotu.html.jst',{modules:_modules});
+			Uize.Build.Util.processJstFile ('appendixes\\sotu.html.jst',{modules:_modules});
 
 		/*
 			TO DO:

@@ -16,7 +16,7 @@
 
 Uize.module ({
 	name:'UizeDotCom.BuildUtils',
-	required:'Uize.Wsh.BuildUtils',
+	required:'Uize.Build.Util',
 	builder:function () {
 		/*** Variables for Scruncher Optimization ***/
 			var _package = function () {};
@@ -29,7 +29,7 @@ Uize.module ({
 				for (
 					var
 						_exampleNo = -1,
-						_examples = Uize.Wsh.BuildUtils.getHtmlFilesInfo ('examples',_package.getFirstTitleSegment),
+						_examples = Uize.Build.Util.getHtmlFilesInfo ('examples',_package.getFirstTitleSegment),
 						_examplesLength = _examples.length,
 						_example,
 						_keywordsStr

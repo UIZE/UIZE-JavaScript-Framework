@@ -1,4 +1,4 @@
-With a recent improvement in the auto scruncher (implemented in the =Uize.Wsh.AutoScruncher= module), it is no longer necessary to specify unique mappings for scrunched identifier names in a =ScruncherSettings= comment in source files.
+With a recent improvement in the auto scruncher (implemented in the =Uize.Build.AutoScruncher= module), it is no longer necessary to specify unique mappings for scrunched identifier names in a =ScruncherSettings= comment in source files.
 
 Anybody who has done extensive development of widget classes using UIZE will be well familiar with the burden of having to maintain correct scruncher mappings in order to avoid bugs with collisions in the scrunched names of private properties and methods between classes and their subclasses. Thankfully, the improved auto scruncher makes this burden a thing of the past.
 

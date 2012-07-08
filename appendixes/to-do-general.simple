@@ -652,7 +652,7 @@ Test Modules to Implement Next...
 	- =Uize.Test.Uize.Color=
 	- =Uize.Test.Uize.Color.xUtil=
 	- =Uize.Test.Uize.Curve=
-	- =Uize.Test.Uize.Scruncher=
+	- =Uize.Test.Uize.Build.Scruncher=
 	- =Uize.Test.Uize.Curve.Rubber=
 	- =Uize.Test.Uize.Curve.Mod=
 

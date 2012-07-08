@@ -4,7 +4,7 @@
 	_setupFile.Close ();
 
 Uize.module ({
-	required:'Uize.Wsh.AutoScruncher',
-	builder:function () {Uize.Wsh.AutoScruncher.perform (env)}
+	required:'Uize.Build.AutoScruncher',
+	builder:function () {Uize.Build.AutoScruncher.perform (env)}
 });
 

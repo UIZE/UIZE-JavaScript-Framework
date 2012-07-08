@@ -4,7 +4,7 @@
 	_setupFile.Close ();
 
 Uize.module ({
-	required:'Uize.Wsh.AuditStrings',
-	builder:function () {Uize.Wsh.AuditStrings.perform (env)}
+	required:'Uize.Build.AuditStrings',
+	builder:function () {Uize.Build.AuditStrings.perform (env)}
 });
 

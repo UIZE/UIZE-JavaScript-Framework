@@ -22,7 +22,7 @@
 Uize.module ({
 	required:[
 		'Uize.Wsh',
-		'Uize.Wsh.BuildUtils',
+		'Uize.Build.Util',
 		'Uize.Data.Simple',
 		'Uize.Data.PathsTree',
 		'Uize.Doc.Simple',
@@ -93,7 +93,7 @@ Uize.module ({
 			return function (_sourceFileName,_sourceFileText) {
 				if (!_simpleDocTemplate) {
 					/*** compile the template ***/
-						_simpleDocTemplate = Uize.Wsh.BuildUtils.compileJstFile (_simpleDocTemplatePath);
+						_simpleDocTemplate = Uize.Build.Util.compileJstFile (_simpleDocTemplatePath);
 
 					/*** determine path to root from current folder ***/
 						var _simpleDocTemplatePathSansRoot = _simpleDocTemplatePath.slice (_scriptFolderPathLengthPlusOne);

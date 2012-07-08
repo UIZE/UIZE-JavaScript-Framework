@@ -6,13 +6,13 @@
 Uize.module ({
 	required:[
 		'Uize.Wsh',
-		'Uize.Wsh.BuildUtils',
+		'Uize.Build.Util',
 		'UizeDotCom.Templates.WidgetToGoGadgetXml',
 		'UizeDotCom.Templates.WidgetToGoPage',
 		'UizeDotCom.Templates.WidgetToGoHomepage'
 	],
 	builder:function () {
-		var _widgets = Uize.Wsh.BuildUtils.readSimpleDataFile ('widgets/widgets.simpledata').widgets;
+		var _widgets = Uize.Build.Util.readSimpleDataFile ('widgets/widgets.simpledata').widgets;
 		for (var _widgetNo = -1, _widgetsLength = _widgets.length; ++_widgetNo < _widgetsLength;) {
 			var
 				_widget = _widgets [_widgetNo],

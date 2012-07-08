@@ -1,5 +1,5 @@
 /*
-	UIZE JAVASCRIPT FRAMEWORK 2012-07-06
+	UIZE JAVASCRIPT FRAMEWORK 2012-07-07
 
 	http://www.uize.com/reference/Uize.Widget.FormElement.html
 	Available under MIT License or GNU General Public License -- http://www.uize.com/license.html

@@ -11,7 +11,15 @@ Uize.module ({
 						Util:0
 					},
 					Build:{
-						ModuleInfo:0
+						AuditStrings:0,
+						AutoScruncher:0,
+						BuildSimpleDataPages:0,
+						CompileJstModules:0,
+						ModuleInfo:0,
+						NeatenJsFiles:0,
+						Scruncher:0,
+						UpdateCopyrightNotices:0,
+						Util:0
 					},
 					Class:{
 						Value:0
@@ -70,7 +78,6 @@ Uize.module ({
 							Edge:0
 						}
 					},
-					Scruncher:0,
 					Service:0,
 					Services:0,
 					String:{
@@ -289,15 +296,7 @@ Uize.module ({
 							Select:0
 						}
 					},
-					Wsh:{
-						AuditStrings:0,
-						AutoScruncher:0,
-						BuildSimpleDataPages:0,
-						BuildUtils:0,
-						CompileJstModules:0,
-						NeatenJsFiles:0,
-						UpdateCopyrightNotices:0
-					},
+					Wsh:0,
 					Xml:0
 				},
 				UizeDotCom:{

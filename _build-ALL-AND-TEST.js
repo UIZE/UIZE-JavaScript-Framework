@@ -4,9 +4,9 @@
 	_setupFile.Close ();
 
 Uize.module ({
-	required:'Uize.Wsh.BuildUtils',
+	required:'Uize.Build.Util',
 	builder:function () {
-		var _buildError = Uize.Wsh.BuildUtils.runScripts (
+		var _buildError = Uize.Build.Util.runScripts (
 			env.buildSequence.concat ([
 				'_run-unit-tests-source.js silent',
 				'_run-unit-tests-scrunched.js silent'

@@ -4,7 +4,7 @@
 	_setupFile.Close ();
 
 Uize.module ({
-	required:'Uize.Wsh.NeatenJsFiles',
-	builder:function () {Uize.Wsh.NeatenJsFiles.perform (env)}
+	required:'Uize.Build.NeatenJsFiles',
+	builder:function () {Uize.Build.NeatenJsFiles.perform (env)}
 });
 

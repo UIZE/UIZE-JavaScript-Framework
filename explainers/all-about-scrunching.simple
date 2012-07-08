@@ -7,7 +7,7 @@ Introduction
 		Obfuscation is an added bonus, if you are putting a significant investment into code development. Scrunching is referred to by some as "minifying". Yes, "minify" is a commonly used term these days, but the term "scrunch" has a proud tradition amongst its users. Besides, the term "scrunch" is more colorful and has so much more attitude to it.
 
 	Where is the Scruncher?
-		The UIZE JavaScript Scruncher is implemented in the =Uize.Scruncher= package (yes, the JavaScript Scruncher *is*, itself, written in JavaScript... and, yes, the JavaScript Scruncher *can* be used to scrunch itself).
+		The UIZE JavaScript Scruncher is implemented in the =Uize.Build.Scruncher= package (yes, the JavaScript Scruncher *is*, itself, written in JavaScript... and, yes, the JavaScript Scruncher *can* be used to scrunch itself).
 
 	How is the Scruncher Used?
 		Web Interface
@@ -19,7 +19,7 @@ Introduction
 			By using Windows Script Host (or some other means of running JavaScript locally in your operating system of choice), you can iterate through the files in a Web site and use the Scruncher to process the appropriate JavaScript files. The project for the <b>uize.com</b> Web site, which is downloadable in its entirety, contains build scripts written for WSH that are demonstrative of how the Scruncher can be used in this way.
 
 		Scruncher Interface
-			For details on the Scruncher's programmatic interface, consult the reference for the =Uize.Scruncher= package.
+			For details on the Scruncher's programmatic interface, consult the reference for the =Uize.Build.Scruncher= package.
 
 	History
 		The UIZE JavaScript Scruncher has a history that dates back to 1997, when Beatnik was one of the first companies to distribute scrunched versions of JavaScript API libraries that had private identifiers automatically reduced in size through enumeration.

@@ -4,7 +4,7 @@
 	_setupFile.Close ();
 
 Uize.module ({
-	required:'Uize.Wsh.CompileJstModules',
-	builder:function () {Uize.Wsh.CompileJstModules.perform (env)}
+	required:'Uize.Build.CompileJstModules',
+	builder:function () {Uize.Build.CompileJstModules.perform (env)}
 });
 
