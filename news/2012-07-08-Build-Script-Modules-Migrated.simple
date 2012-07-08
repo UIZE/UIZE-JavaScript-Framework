@@ -1,0 +1,38 @@
+Various build scripts used for building the UIZE project and the *uize.com* Web site have been migrated.
+
+Various build scripts that were located under the =Uize.Wsh= namespace have been migrated into the more recently created =Uize.Build= namespace. This migration is in preparation for retooling these build scripts to make them environment agnostic, so that they can be run also in non-Windows environments. Currently, the migrated scripts still rely on WSH (Windows Script Host), but they will be updated in future to be able to run in other environments (such as Mac OS and Linux) with appropriate environment specific bootstrapping.
+
+The list of modules that have been migrated is as follows...
+
+MIGRATED
+.................................................................................
+Uize.Scruncher                   >> BECOMES >>  Uize.Build.Scruncher
+Uize.Wsh.AuditStrings            >> BECOMES >>  Uize.Build.AuditStrings
+Uize.Wsh.AutoScruncher           >> BECOMES >>  Uize.Build.AutoScruncher
+Uize.Wsh.BuildSimpleDataPages    >> BECOMES >>  Uize.Build.BuildSimpleDataPages
+Uize.Wsh.BuildUtils              >> BECOMES >>  Uize.Build.Util
+Uize.Wsh.CompileJstModules       >> BECOMES >>  Uize.Build.CompileJstModules
+Uize.Wsh.NeatenJsFiles           >> BECOMES >>  Uize.Build.NeatenJsFiles
+Uize.Wsh.UpdateCopyrightNotices  >> BECOMES >>  Uize.Build.UpdateCopyrightNotices
+.................................................................................
+
+In addition to the migration of these build script modules, a set of new build script modules has been created to allow code that was previously inside build scripts at the root of the *uize.com* site to be migrated into the modules folder. Migrating the build script code from the script files to being legitimate modules in the modules folder confers upon them all the benefits of being true modules, such as documentation generation, basic automated sanity testing, source viewing on the Web site, etc.
+
+The list of newly created build script modules is as follows...
+
+- =Uize.Build.BuildSimpleDocPages= (code migrated from the *_build-pages-from-simple-doc.js* build script)
+- =UizeDotCom.Build.BuildCodeSitemap= (code migrated from the *_uize-site-build-code-sitemap.js* build script)
+- =UizeDotCom.Build.BuildIndexPages= (code migrated from the *_uize-site-build-index-pages.js* build script)
+- =UizeDotCom.Build.BuildPagesFromSourceCode= (code migrated from the *_uize-site-build-pages-from-source-code.js* build script)
+- =UizeDotCom.Build.BuildSotu= (code migrated from the *_uize-site-build-sotu.js* build script)
+- =UizeDotCom.Build.BuildWidgetPages= (code migrated from the *_uize-site-build-widget-pages.js* build script)
+- =UizeDotCom.Build= (a namespace created to house all the build script modules specific to the *uize.com* site)
+- =UizeDotCom.Build.Util= (migrated from the prior =UizeDotCom.BuildUtils= module)
+
+This change will likely not affect you at all, unless you had written custom build scripts derived from or leveraging any of the migrated build script code.
+
+....................................................................................
+<< metadata >>
+
+title: 2012-07-08 - Build Script Modules Migrated
+....................................................................................
