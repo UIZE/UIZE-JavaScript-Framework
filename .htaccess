@@ -28,7 +28,7 @@
 		# renamed build modules
 			RedirectMatch 301 ^/(reference(/source-code)?)/Uize\.Scruncher\.html$ http://www.uize.com/$1/Uize.Build.Scruncher.html
 			RedirectMatch 301 ^/(reference(/source-code)?)/Uize\.Wsh\.BuildUtils\.html$ http://www.uize.com/$1/Uize.Build.Util.html
-			RedirectMatch 301 ^/(reference(/source-code)?)/Uize\.Wsh\.(AuditStrings|AutoScruncher|BuildSimpleDataPages|CompileJstModules|NeatenJsFiles|UpdateCopyrightNotices)\.html$ http://www.uize.com/$1/Uize.Build.$2.html
+			RedirectMatch 301 ^/(reference(/source-code)?)/Uize\.Wsh\.(AuditStrings|AutoScruncher|BuildSimpleDataPages|CompileJstModules|NeatenJsFiles|UpdateCopyrightNotices)\.html$ http://www.uize.com/$1/Uize.Build.$3.html
 			RedirectMatch 301 ^/(reference(/source-code)?)/UizeDotCom\.BuildUtils\.html$ http://www.uize.com/$1/UizeDotCom.Build.Util.html
 
 		# killed modules

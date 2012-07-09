@@ -40,6 +40,7 @@ Uize.Wsh.BuildUtils              &gt;&gt; BECOMES &gt;&gt;  Uize.Build.Util
 Uize.Wsh.CompileJstModules       &gt;&gt; BECOMES &gt;&gt;  Uize.Build.CompileJstModules
 Uize.Wsh.NeatenJsFiles           &gt;&gt; BECOMES &gt;&gt;  Uize.Build.NeatenJsFiles
 Uize.Wsh.UpdateCopyrightNotices  &gt;&gt; BECOMES &gt;&gt;  Uize.Build.UpdateCopyrightNotices
+UizeDotCom.BuildUtils            &gt;&gt; BECOMES &gt;&gt;  UizeDotCom.Build.Util
 </pre>
 	
 	<p>In addition to the migration of these build script modules, a set of new build script modules has been created to allow code that was previously inside build scripts at the root of the <b>uize.com</b> site to be migrated into the modules folder. Migrating the build script code from the script files to being legitimate modules in the modules folder confers upon them all the benefits of being true modules, such as documentation generation, basic automated sanity testing, source viewing on the Web site, etc.</p>
@@ -47,14 +48,13 @@ Uize.Wsh.UpdateCopyrightNotices  &gt;&gt; BECOMES &gt;&gt;  Uize.Build.UpdateCop
 	<p>The list of newly created build script modules is as follows...</p>
 	
 	<table class="list">
-	<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="../reference/Uize.Build.BuildSimpleDocPages.html">Uize.Build.BuildSimpleDocPages</a></code> (code migrated from the <b>_build-pages-from-simple-doc.js</b> build script)</td></tr>
+	<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="../reference/UizeDotCom.Build.html">UizeDotCom.Build</a></code> (a namespace created to house all the build script modules specific to the <b>uize.com</b> site)</td></tr>
+	<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>UizeDotCom.Build.BuildSimpleDocPages</code> (code migrated from the <b>_build-pages-from-simple-doc.js</b> build script)</td></tr>
 	<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="../reference/UizeDotCom.Build.BuildCodeSitemap.html">UizeDotCom.Build.BuildCodeSitemap</a></code> (code migrated from the <b>_uize-site-build-code-sitemap.js</b> build script)</td></tr>
 	<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="../reference/UizeDotCom.Build.BuildIndexPages.html">UizeDotCom.Build.BuildIndexPages</a></code> (code migrated from the <b>_uize-site-build-index-pages.js</b> build script)</td></tr>
 	<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="../reference/UizeDotCom.Build.BuildPagesFromSourceCode.html">UizeDotCom.Build.BuildPagesFromSourceCode</a></code> (code migrated from the <b>_uize-site-build-pages-from-source-code.js</b> build script)</td></tr>
 	<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="../reference/UizeDotCom.Build.BuildSotu.html">UizeDotCom.Build.BuildSotu</a></code> (code migrated from the <b>_uize-site-build-sotu.js</b> build script)</td></tr>
 	<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="../reference/UizeDotCom.Build.BuildWidgetPages.html">UizeDotCom.Build.BuildWidgetPages</a></code> (code migrated from the <b>_uize-site-build-widget-pages.js</b> build script)</td></tr>
-	<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="../reference/UizeDotCom.Build.html">UizeDotCom.Build</a></code> (a namespace created to house all the build script modules specific to the <b>uize.com</b> site)</td></tr>
-	<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="../reference/UizeDotCom.Build.Util.html">UizeDotCom.Build.Util</a></code> (migrated from the prior <code>UizeDotCom.BuildUtils</code> module)</td></tr>
 	</table>
 	<p>This change will likely not affect you at all, unless you had written custom build scripts derived from or leveraging any of the migrated build script code.</p>
 </div>
