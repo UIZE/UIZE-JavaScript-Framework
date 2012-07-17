@@ -80,7 +80,9 @@ Uize.module ({
 						}
 					},
 					Service:0,
-					Services:0,
+					Services:{
+						FileSystem:0
+					},
 					String:{
 						Builder:0,
 						Discombobulator:0,
@@ -128,6 +130,10 @@ Uize.module ({
 							Doc:0,
 							Node:{
 								Classes:0
+							},
+							Service:0,
+							Services:{
+								FileSystem:0
 							},
 							String:{
 								Builder:0,
