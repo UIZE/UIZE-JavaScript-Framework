@@ -821,7 +821,15 @@ Uize.module ({
 						['Test that a String object instance is not regarded as being a plain object',new String (''),false],
 						['Test that a Boolean object instance is not regarded as being a plain object',new Boolean (false),false],
 						['Test that a Number object instance is not regarded as being a plain object',new Number (0),false],
-						['Test that a Uize class instance is not regarded as being a plain object',Uize.Class (),false]
+						['Test that a Uize class instance is not regarded as being a plain object',Uize.Class (),false],
+						{
+							title:'Test that an object that doesn\'t have a hasOwnProperty method is not regarded as being a plain object',
+							test:function () {
+								function _TestObject () {}
+								_TestObject.prototype.hasOwnProperty = null;
+								return this.expect (false,Uize.isPlainObject (new _TestObject));
+							}
+						}
 					]],
 					['Uize.isPrimitive',[
 						['Test that calling with no parameters returns false',[],false],

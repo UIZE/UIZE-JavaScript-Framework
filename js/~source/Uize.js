@@ -117,6 +117,7 @@
 			_typeObject = 'object',
 			_typeNumber = 'number',
 			_typeBoolean = 'boolean',
+			_typeFunction = 'function',
 			_Function = Function,
 			_Array = Array,
 			_false = false,
@@ -1088,7 +1089,7 @@
 			return (
 				_transformer == _undefined
 					? _package.returnX
-					: _typeofTransformer == 'function'
+					: _typeofTransformer == _typeFunction
 						? _transformer
 						: _typeofTransformer == 'string'
 							? new Function ('value','key','return ' + _transformer)
@@ -2605,7 +2606,7 @@
 
 		var _canExtend = _package.canExtend = function (_value) {
 			var _typeofValue = typeof _value;
-			return !!_value && (_typeofValue == _typeObject || _typeofValue == 'function');
+			return !!_value && (_typeofValue == _typeObject || _typeofValue == _typeFunction);
 			/*?
 				Static Methods
 					Uize.canExtend
@@ -2642,12 +2643,24 @@
 		};
 
 		var _isPlainObject = _package.isPlainObject = function (_value) {
-			return (
-				_value != _undefined &&
-				(_value.constructor == Object || _value.constructor.prototype.hasOwnProperty ('hasOwnProperty'))
-				/* NOTE:
-					For plain object instances that originate from a different window or IFRAME, and where the constructor will be a discrete Object object from that other context, we test if the constructor's prototype has 'hasOwnProperty' as an own property, which is only true of the Object object, unless people are screwing around with overriding basic language features like this (not so likely).
-				*/
+			var _valueConstructor = _value && _value.constructor;
+			return !!(
+				_valueConstructor &&
+				(
+					_valueConstructor == Object ||
+						/* NOTE:
+							This test only works for objects created in the current global context - not different browser windows or IFRAMEs.
+						*/
+					(
+						typeof _valueConstructor.prototype.hasOwnProperty == _typeFunction &&
+						_valueConstructor.prototype.hasOwnProperty ('hasOwnProperty')
+						/* NOTES:
+							- For plain object instances that originate from a different window or IFRAME, and where the constructor will be a discrete Object object from that other context, we test if the constructor's prototype has 'hasOwnProperty' as an own property, which is only true of the Object object, unless people are screwing around with overriding basic language features like this (not so likely).
+
+							- For Internet Explorer versions earlier than IE9, DOM nodes are weird objects that don't root off of JavaScript's built-in Object object, so their constructor prototype doesn't have a 'hasOwnProperty' method.
+						*/
+					)
+				)
 			);
 			/*?
 				Static Methods
@@ -3689,7 +3702,7 @@
 			return (
 				_instanceOrClass == _undefined
 					? _undefined
-					: typeof _instanceOrClass == 'function'
+					: typeof _instanceOrClass == _typeFunction
 						? _instanceOrClass
 						: _instanceOrClass.constructor
 			);

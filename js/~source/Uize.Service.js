@@ -302,14 +302,16 @@ Uize.module ({
 					name:'adapter',
 					conformer:function (_adapter) {
 						if (typeof _adapter == 'string') {
-							var _adapterModuleName = _adapter;
-							if ((_adapter = eval (_adapterModuleName)) == _undefined)
+							var _adapterClass = eval (_adapter);
+							if (_adapterClass) {
+								_adapter = new _adapterClass;
+							} else {
 								throw new Error (
 									_errorMessage (
-										'The adapter module ' + _adapterModuleName + ' must be required and loaded first if you wish to set an adapter by module name'
+										'The adapter module ' + _adapter + ' must be required and loaded first if you wish to set an adapter by module name'
 									)
-								)
-							;
+								);
+							}
 						}
 						if (_adapter != _undefined) {
 							// validate the service adapter

@@ -5,6 +5,6 @@
 
 Uize.module ({
 	required:'Uize.Build.Util',
-	builder:function () {Uize.Build.Util.runUnitTests ('Uize.Test.Uize.Services.FileSystem')}
+	builder:function () {Uize.Build.Util.runUnitTests ('Uize.Test.Uize')}
 });
 
