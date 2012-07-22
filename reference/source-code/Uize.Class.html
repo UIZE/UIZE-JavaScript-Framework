@@ -1348,16 +1348,16 @@ Uize.module ({
           _subclass = _noNew (
             function () {
               for (
-                var _alphastructorNo = -1, _alphastructorsLength = _alphastructors.length, _alphastructor;
+                var _alphastructorNo = -1, _alphastructorsLength = _alphastructors.length;
                 ++_alphastructorNo &lt; _alphastructorsLength;
               )
-                if (_alphastructor = _alphastructors [_alphastructorNo]) _alphastructor.apply (this,arguments)
+                _alphastructors [_alphastructorNo].apply (this,arguments)
               ;
               for (
-                var _omegastructorNo = -1, _omegastructorsLength = _omegastructors.length, _omegastructor;
+                var _omegastructorNo = -1, _omegastructorsLength = _omegastructors.length;
                 ++_omegastructorNo &lt; _omegastructorsLength;
               )
-                if (_omegastructor = _omegastructors [_omegastructorNo]) _omegastructor.apply (this,arguments)
+                _omegastructors [_omegastructorNo].apply (this,arguments)
               ;
             }
           ),
@@ -1467,11 +1467,11 @@ Uize.module ({
 
         /*** Initialize Alphastructors and Omegastructors ***/
           var
-            _alphastructors = _subclass._alphastructors =
-              (_class._alphastructors || _sacredEmptyArray).concat (_alphastructor),
-            _omegastructors = _subclass._omegastructors =
-              (_class._omegastructors || _sacredEmptyArray).concat (_omegastructor)
+            _alphastructors = _subclass._alphastructors = (_class._alphastructors || _sacredEmptyArray).concat (),
+            _omegastructors = _subclass._omegastructors = (_class._omegastructors || _sacredEmptyArray).concat ()
           ;
+          _alphastructor &amp;&amp; _alphastructors.push (_alphastructor);
+          _omegastructor &amp;&amp; _omegastructors.push (_omegastructor);
 
         _subclass._propertyProfilesByPrivateNames || (_subclass._propertyProfilesByPrivateNames = {});
         _subclass._propertyProfilesByPublicNames || (_subclass._propertyProfilesByPublicNames = {});

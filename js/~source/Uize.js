@@ -1092,7 +1092,7 @@
 					: _typeofTransformer == _typeFunction
 						? _transformer
 						: _typeofTransformer == 'string'
-							? new Function ('value','key','return ' + _transformer)
+							? new _Function ('value','key','return ' + _transformer)
 							: _typeofTransformer == 'object'
 								? (
 									_isRegExp (_transformer)
