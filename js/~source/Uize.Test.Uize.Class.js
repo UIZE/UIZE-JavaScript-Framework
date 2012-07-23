@@ -951,7 +951,209 @@ Uize.module ({
 					title:'Test the event system for instances and classes',
 					test:[
 						_eventsSystemTest ('Test that the event system works for instances',true),
-						_eventsSystemTest ('Test that the event system works for classes',false)
+						_eventsSystemTest ('Test that the event system works for classes',false),
+						{
+							title:'Test that the once instance method works correctly',
+							test:[
+								{
+									title:'Test that the handler is executed immediately if the property is already truthy',
+									test:function () {
+										var _Class = Uize.Class.subclass ();
+										_Class.registerProperties ({_myProperty:{name:'myProperty',value:{}}});
+										var
+											_instance = _Class (),
+											_handlerCalled = false
+										;
+										_instance.once ('myProperty',function () {_handlerCalled = true});
+										return this.expect (true,_handlerCalled);
+									}
+								},
+								{
+									title:'Test that the handler is not executed immediately if the property is not yet truthy',
+									test:function () {
+										var _Class = Uize.Class.subclass ();
+										_Class.registerProperties ({_myProperty:{name:'myProperty',value:null}});
+										var
+											_instance = _Class (),
+											_handlerCalled = false
+										;
+										_instance.once ('myProperty',function () {_handlerCalled = true});
+										return this.expect (false,_handlerCalled);
+									}
+								},
+								{
+									title:'Test that the handler is executed later once the property becomes truthy, if it wasn\'t already truthy',
+									test:function () {
+										var _Class = Uize.Class.subclass ();
+										_Class.registerProperties ({_myProperty:{name:'myProperty',value:null}});
+										var
+											_instance = _Class (),
+											_handlerCalled = false
+										;
+										_instance.once ('myProperty',function () {_handlerCalled = true});
+										_instance.set ({myProperty:{}});
+										return this.expect (true,_handlerCalled);
+									}
+								},
+								{
+									title:'Test that the handler is executed only the first time that the property becomes truthy',
+									test:function () {
+										var _Class = Uize.Class.subclass ();
+										_Class.registerProperties ({_myProperty:{name:'myProperty',value:null}});
+										var
+											_instance = _Class (),
+											_handlerCalledCount = 0
+										;
+										_instance.once ('myProperty',function () {_handlerCalledCount++});
+										_instance.set ({myProperty:{}});
+										_instance.set ({myProperty:null});
+										_instance.set ({myProperty:{}});
+										return this.expect (1,_handlerCalledCount);
+									}
+								},
+								{
+									title:'Test that the method returns a wirings object that can be used to unwire the handler before the property becomes truthy',
+									test:function () {
+										var _Class = Uize.Class.subclass ();
+										_Class.registerProperties ({_myProperty:{name:'myProperty',value:null}});
+										var
+											_instance = _Class (),
+											_handlerCalled = false,
+											_wirings = _instance.once ('myProperty',function () {_handlerCalled = true})
+										;
+										_instance.unwire (_wirings);
+										_instance.set ({myProperty:{}});
+										return this.expectNonEmptyObject (_wirings) && this.expect (false,_handlerCalled);
+									}
+								},
+								{
+									title:'Test that the method returns an empty wirings object if the handler is executed immediately because the property is already truthy',
+									test:function () {
+										var _Class = Uize.Class.subclass ();
+										_Class.registerProperties ({_myProperty:{name:'myProperty',value:{}}});
+										var
+											_instance = _Class (),
+											_wirings = _instance.once ('myProperty',function () {})
+										;
+										return this.expectObject (_wirings) && this.expect (true,Uize.isEmpty (_wirings));
+									}
+								},
+								{
+									title:'Test that a once handler can safely be registered for a property that has not yet been registered',
+									test:function () {
+										var
+											_Class = Uize.Class.subclass (),
+											_instance = _Class (),
+											_handlerCalled = false
+										;
+										_instance.once ('myProperty',function () {_handlerCalled = true});
+										_instance.set ({myProperty:{}});
+										return this.expect (true,_handlerCalled);
+									}
+								},
+								{
+									title:'Test that the handler is passed the value of the property as its single argument, both when executed immediately and when executed later',
+									test:function () {
+										var _Class = Uize.Class.subclass ();
+										_Class.registerProperties ({
+											_myProperty1:{name:'myProperty1',value:'foo'},
+											_myProperty2:{name:'myProperty2',value:null}
+										});
+										var
+											_instance = _Class (),
+											_valuesPassedToHandler = []
+										;
+										_instance.once (
+											'myProperty1',
+											function (_propertyValue) {_valuesPassedToHandler.push (_propertyValue)}
+										);
+										_instance.once (
+											'myProperty2',
+											function (_propertyValue) {_valuesPassedToHandler.push (_propertyValue)}
+										);
+										_instance.set ({myProperty2:'bar'});
+										return this.expect (['foo','bar'],_valuesPassedToHandler);
+									}
+								},
+								{
+									title:'Test that the same once handler can be registered repeatedly for the same property',
+									test:function () {
+										var _Class = Uize.Class.subclass ();
+										_Class.registerProperties ({_myProperty:{name:'myProperty',value:'foo'}});
+										var
+											_instance = _Class (),
+											_valuesPassedToHandler = []
+										;
+										function _onceHandler (_propertyValue) {
+											_valuesPassedToHandler.push (_propertyValue);
+										}
+										_instance.once ('myProperty',_onceHandler);
+										_instance.set ({myProperty:null});
+										_instance.once ('myProperty',_onceHandler);
+										_instance.set ({myProperty:'bar'});
+										_instance.set ({myProperty:null});
+										_instance.once ('myProperty',_onceHandler);
+										_instance.set ({myProperty:'woot'});
+										return this.expect (['foo','bar','woot'],_valuesPassedToHandler);
+									}
+								},
+								{
+									title:'Test that multiple once handlers can be registered for the same property',
+									test:function () {
+										var _Class = Uize.Class.subclass ();
+										_Class.registerProperties ({_myProperty:{name:'myProperty',value:null}});
+										var
+											_instance = _Class (),
+											_handler1Called = false,
+											_handler2Called = false,
+											_handler3Called = false
+										;
+										_instance.once ('myProperty',function () {_handler1Called = true});
+										_instance.once ('myProperty',function () {_handler2Called = true});
+										_instance.once ('myProperty',function () {_handler3Called = true});
+										_instance.set ({myProperty:{}});
+										return (
+											this.expect (true,_handler1Called) &&
+											this.expect (true,_handler2Called) &&
+											this.expect (true,_handler3Called)
+										);
+									}
+								},
+								{
+									title:'Test that a once handler is executed for all types of truthy values and for no falsy values',
+									test:function () {
+										var
+											_Class = Uize.Class.subclass (),
+											_valuesToTest = [
+												null,undefined,0,false,'',NaN, // falsy values
+												{},[],1,-1,true,'foo'          // truthy values
+											],
+											_expectedHandlersCalled = []
+										;
+										Uize.forEach (
+											_valuesToTest,
+											function (_value,_valueNo) {
+												var _propertyName = 'myProperty' + _valueNo;
+												_Class.registerProperties (Uize.pairUp (_propertyName,{value:_value}));
+												_value && _expectedHandlersCalled.push (_propertyName);
+											}
+										);
+										var
+											_instance = _Class (),
+											_handlersCalled = []
+										;
+										Uize.forEach (
+											_valuesToTest,
+											function (_value,_valueNo) {
+												var _propertyName = 'myProperty' + _valueNo;
+												_instance.once (_propertyName,function () {_handlersCalled.push (_propertyName)});
+											}
+										);
+										return this.expect (_expectedHandlersCalled,_handlersCalled);
+									}
+								}
+							]
+						}
 					]
 				},
 				{

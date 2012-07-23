@@ -1,0 +1,33 @@
+The =Uize.Class= module, that implements the class mechanism for the UIZE JavaScript Framework, has been improved with the addition of a =once= instance method for set-get properties.
+
+SYNTAX
+...........................................................
+wiringsOBJ = myInstance.once (propertyNameSTR,handlerFUNC);
+...........................................................
+
+If the value of the property specified by the =propertyNameSTR= parameter is truthy when the =once= method is called, then the handler specified by the =handlerFUNC= parameter will be executed immediately. Otherwise, the value of the property will be watched and the handler will be executed once the property's value becomes truthy, upon which the property watcher will be removed and the property will no longer be watched. By design, the handler is only executed for the first time that the property's value becomes truthy.
+
+The =once= method is useful when using a set-get property to represent a condition, and where you wish to register code that should be executed once the condition has been met, and immediately if the condition is already met at the time that the =once= method is called. Consider the following example...
+
+EXAMPLE
+........................................................
+myWidget.once (
+	'wired',
+	function () {
+		// do something now that the widget has been wired
+	}
+);
+........................................................
+
+In the above example, a handler is being registered to be executed once the widget =myWidget= has been wired (ie. the value of its =wired= set-get property hecomes =true=).
+
+Return Value
+	The =once= method returns a wirings object that can be supplied to the =unwire= method in order to unwire the handler, in the unlikely event that one may wish to remove the handler before the property's value has become truthy.
+
+	This case is unlikely to arise except in exceptional situations, but the means is provided. In most cases, you will simply discard / ignore the return value of the =once= method. In the event that the property's value is truthy when the =once= method is called, then the returned wirings object will be an empty object.
+
+....................................................................................
+<< metadata >>
+
+title: 2012-07-22 - New once Instances Method for Classes
+....................................................................................

@@ -170,9 +170,10 @@
 				<ul>
 					<li><a href="#3_1">3.1. Conditions</a>
 						<ul>
-							<li><a href="#3_1_1" title="EXAMPLES">3.1.1. The whenever Instance Method</a></li>
-							<li><a href="#3_1_2" title="EXAMPLES">3.1.2. The once Instance Method</a></li>
-							<li><a href="#3_1_3" title="EXAMPLES">3.1.3. The next Virtual Event</a></li>
+							<li><a href="#3_1_1" title="once">3.1.1. Possible Methods</a></li>
+							<li><a href="#3_1_2" title="EXAMPLES">3.1.2. The whenever Instance Method</a></li>
+							<li><a href="#3_1_3" title="EXAMPLES">3.1.3. The once Instance Method</a></li>
+							<li><a href="#3_1_4" title="EXAMPLES">3.1.4. The next Virtual Event</a></li>
 						</ul>
 					</li>
 					<li><a href="#3_2" title="SYNTAX">3.2. Properties Expressions</a></li>
@@ -185,7 +186,7 @@
 							</li>
 							<li><a href="#3_3_2">3.3.2. Implementation Approaches</a>
 								<ul>
-									<li><a href="#3_3_2_1" title="With this approach, setting values for derived set-get properties is worked into the process of setting values for properties that affect derived properties, by exploding out the properties being set to included all affected derived properties.">3.3.2.1. Exploding Out the Properties Being Set</a>
+									<li><a href="#3_3_2_1" title="With this approach, setting values for derived set-get properties is worked into the process of setting values for properties that affect derived properties, by exploding out the properties being set to include all affected derived properties.">3.3.2.1. Exploding Out the Properties Being Set</a>
 										<ul>
 											<li><a href="#3_3_2_1_1" title="document...">3.3.2.1.1. Advantages</a></li>
 											<li><a href="#3_3_2_1_2" title="document...">3.3.2.1.2. Disadvantages</a></li>
@@ -2115,7 +2116,33 @@ firstANYTYPE = Uize.Array.Sort.lastBy (sourceARRAY,sortColumnINT,directionINT);
 		<h2 class="heading2" title="3. Uize.Class -&gt; 3.1. Conditions"><span class="headingNumber"><a href="#3" title="3. Uize.Class">3</a>.<a href="#3_1" title="3. Uize.Class -&gt; 3.1. Conditions">1</a>. </span>Conditions</h2>
 		<div class="contents2">
 			<a name="3_1_1"></a>
-			<h3 class="heading3" title="3. Uize.Class -&gt; 3.1. Conditions -&gt; 3.1.1. The whenever Instance Method"><span class="headingNumber"><a href="#3" title="3. Uize.Class">3</a>.<a href="#3_1" title="3. Uize.Class -&gt; 3.1. Conditions">1</a>.<a href="#3_1_1" title="3. Uize.Class -&gt; 3.1. Conditions -&gt; 3.1.1. The whenever Instance Method">1</a>. </span>The whenever Instance Method</h3>
+			<h3 class="heading3" title="3. Uize.Class -&gt; 3.1. Conditions -&gt; 3.1.1. Possible Methods"><span class="headingNumber"><a href="#3" title="3. Uize.Class">3</a>.<a href="#3_1" title="3. Uize.Class -&gt; 3.1. Conditions">1</a>.<a href="#3_1_1" title="3. Uize.Class -&gt; 3.1. Conditions -&gt; 3.1.1. Possible Methods">1</a>. </span>Possible Methods</h3>
+			<div class="contents3">
+				<p>once</p>
+				
+				<p>is</p>
+				
+				<p>done</p>
+				
+				<p>undone</p>
+				
+				<p>waitingOn</p>
+				
+				<p>need</p>
+				
+				<p>provide</p>
+				
+				<p>hasProvider</p>
+				
+				<p>onceNeeded</p>
+				
+				<p>onceProvided</p>
+				
+				<p>needed</p>
+			</div>
+			
+			<a name="3_1_2"></a>
+			<h3 class="heading3" title="3. Uize.Class -&gt; 3.1. Conditions -&gt; 3.1.2. The whenever Instance Method"><span class="headingNumber"><a href="#3" title="3. Uize.Class">3</a>.<a href="#3_1" title="3. Uize.Class -&gt; 3.1. Conditions">1</a>.<a href="#3_1_2" title="3. Uize.Class -&gt; 3.1. Conditions -&gt; 3.1.2. The whenever Instance Method">2</a>. </span>The whenever Instance Method</h3>
 			<div class="contents3">
 				<p><span class="allCaps">EXAMPLES</span></p>
 				
@@ -2157,8 +2184,8 @@ myWidget.wire (
 </pre>
 			</div>
 			
-			<a name="3_1_2"></a>
-			<h3 class="heading3" title="3. Uize.Class -&gt; 3.1. Conditions -&gt; 3.1.2. The once Instance Method"><span class="headingNumber"><a href="#3" title="3. Uize.Class">3</a>.<a href="#3_1" title="3. Uize.Class -&gt; 3.1. Conditions">1</a>.<a href="#3_1_2" title="3. Uize.Class -&gt; 3.1. Conditions -&gt; 3.1.2. The once Instance Method">2</a>. </span>The once Instance Method</h3>
+			<a name="3_1_3"></a>
+			<h3 class="heading3" title="3. Uize.Class -&gt; 3.1. Conditions -&gt; 3.1.3. The once Instance Method"><span class="headingNumber"><a href="#3" title="3. Uize.Class">3</a>.<a href="#3_1" title="3. Uize.Class -&gt; 3.1. Conditions">1</a>.<a href="#3_1_3" title="3. Uize.Class -&gt; 3.1. Conditions -&gt; 3.1.3. The once Instance Method">3</a>. </span>The once Instance Method</h3>
 			<div class="contents3">
 				<p><span class="allCaps">EXAMPLES</span></p>
 				
@@ -2263,8 +2290,8 @@ _classPrototype.once = function (_condition,_handler) {
 </pre>
 			</div>
 			
-			<a name="3_1_3"></a>
-			<h3 class="heading3" title="3. Uize.Class -&gt; 3.1. Conditions -&gt; 3.1.3. The next Virtual Event"><span class="headingNumber"><a href="#3" title="3. Uize.Class">3</a>.<a href="#3_1" title="3. Uize.Class -&gt; 3.1. Conditions">1</a>.<a href="#3_1_3" title="3. Uize.Class -&gt; 3.1. Conditions -&gt; 3.1.3. The next Virtual Event">3</a>. </span>The next Virtual Event</h3>
+			<a name="3_1_4"></a>
+			<h3 class="heading3" title="3. Uize.Class -&gt; 3.1. Conditions -&gt; 3.1.4. The next Virtual Event"><span class="headingNumber"><a href="#3" title="3. Uize.Class">3</a>.<a href="#3_1" title="3. Uize.Class -&gt; 3.1. Conditions">1</a>.<a href="#3_1_4" title="3. Uize.Class -&gt; 3.1. Conditions -&gt; 3.1.4. The next Virtual Event">4</a>. </span>The next Virtual Event</h3>
 			<div class="contents3">
 				<p><span class="allCaps">EXAMPLES</span></p>
 				
@@ -2364,7 +2391,7 @@ myWidget.onNext(
 				<a name="3_3_2_1"></a>
 				<h4 class="heading4" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.1. Exploding Out the Properties Being Set"><span class="headingNumber"><a href="#3" title="3. Uize.Class">3</a>.<a href="#3_3" title="3. Uize.Class -&gt; 3.3. Derived Properties">3</a>.<a href="#3_3_2" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches">2</a>.<a href="#3_3_2_1" title="3. Uize.Class -&gt; 3.3. Derived Properties -&gt; 3.3.2. Implementation Approaches -&gt; 3.3.2.1. Exploding Out the Properties Being Set">1</a>. </span>Exploding Out the Properties Being Set</h4>
 				<div class="contents4">
-					<p>With this approach, setting values for derived set-get properties is worked into the process of setting values for properties that affect derived properties, by exploding out the properties being set to included all affected derived properties.</p>
+					<p>With this approach, setting values for derived set-get properties is worked into the process of setting values for properties that affect derived properties, by exploding out the properties being set to include all affected derived properties.</p>
 					
 					<p>After setting values for the set-get properties that are being set explicitly, and before executing onChange handlers for any set-get properties whose values have changed, the registered set-get properties are scanned for derived set-get properties that may be affected by the properties being set explicitly. If any derived set-get properties <b>are</b> affected by any of the set-get properties whose values have changed, then values are computed for those derived properties and their values are set. This process is repeated to address set- get properties that are derived from derived properties whose values may have changed. The process is repeated until there are no longer any derived properties that are affected and that have not had new values computed.</p>
 					

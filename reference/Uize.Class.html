@@ -33,12 +33,17 @@
 				<ul>
 					<li><a href="#1_1">1.1. Key Features</a>
 						<ul>
-							<li><a href="#1_1_1" title="The JavaScript new operator is optional when creating instances of Uize.Class subclasses, and you can make the new operator optional for your own object constructors using the newly added Uize.noNew static method.">1.1.1. The "no new" Mechanism</a>
+							<li><a href="#1_1_1" title="The Uize.Class module implements a powerful and versatile event system, which can be used for application events outside the context of browser DOM events.">1.1.1. Event System</a>
 								<ul>
-									<li><a href="#1_1_1_1" title="Because the Uize.Class base class utilizes the &quot;no new&quot; mechanism, one can create instances of any Uize.Class subclass either using the new operator or not.">1.1.1.1. Creating Instances of Uize Classes</a></li>
-									<li><a href="#1_1_1_2" title="Because of the way in which the &quot;no new&quot; mechanism is implemented in the Uize.Class base class, any class that is derived from a Uize.Class base class using the subclass method gets the same benefit, including classes that you create for your own applications.">1.1.1.2. All Uize Classes Get the Benefit</a></li>
-									<li><a href="#1_1_1_3" title="The &quot;no new&quot; mechanism, that is implemented in the Uize.noNew static method, has been applied to various other Uize objects (such as the Uize.Color object) that are lightweight objects rather than full Uize.Class subclasses.">1.1.1.3. Applies for Other Uize Objects</a></li>
-									<li><a href="#1_1_1_4" title="An object constructor that supports the &quot;no new&quot; mechanism can easily be created using the Uize.noNew static method.">1.1.1.4. Using the Uize.noNew Method</a></li>
+									<li><a href="#1_1_1_1" title="The event system of the Uize.Class module is exposed through the following methods...">1.1.1.1. Event System Methods</a></li>
+								</ul>
+							</li>
+							<li><a href="#1_1_2" title="The JavaScript new operator is optional when creating instances of Uize.Class subclasses, and you can make the new operator optional for your own object constructors using the newly added Uize.noNew static method.">1.1.2. The "no new" Mechanism</a>
+								<ul>
+									<li><a href="#1_1_2_1" title="Because the Uize.Class base class utilizes the &quot;no new&quot; mechanism, one can create instances of any Uize.Class subclass either using the new operator or not.">1.1.2.1. Creating Instances of Uize Classes</a></li>
+									<li><a href="#1_1_2_2" title="Because of the way in which the &quot;no new&quot; mechanism is implemented in the Uize.Class base class, any class that is derived from a Uize.Class base class using the subclass method gets the same benefit, including classes that you create for your own applications.">1.1.2.2. All Uize Classes Get the Benefit</a></li>
+									<li><a href="#1_1_2_3" title="The &quot;no new&quot; mechanism, that is implemented in the Uize.noNew static method, has been applied to various other Uize objects (such as the Uize.Color object) that are lightweight objects rather than full Uize.Class subclasses.">1.1.2.3. Applies for Other Uize Objects</a></li>
+									<li><a href="#1_1_2_4" title="An object constructor that supports the &quot;no new&quot; mechanism can easily be created using the Uize.noNew static method.">1.1.2.4. Using the Uize.noNew Method</a></li>
 								</ul>
 							</li>
 						</ul>
@@ -73,12 +78,17 @@
 						</ul>
 					</li>
 					<li><a href="#3_3" title="Nulls out the global variable (or property of the window object) of the name instanceId.">3.3. kill</a></li>
-					<li><a href="#3_4" title="Lets you set one or more of an instance&apos;s set-get properties.">3.4. set</a></li>
-					<li><a href="#3_5" title="Returns a string, providing summary info for the instance on which the method is called.">3.5. toString Intrinsic Method</a></li>
-					<li><a href="#3_6" title="Toggles the value of the specified boolean instance set-get property.">3.6. toggle</a></li>
-					<li><a href="#3_7" title="Lets you remove a handler previously wired to an instance event, or handlers wired for multiple instance events.">3.7. unwire</a></li>
-					<li><a href="#3_8" title="Returns the value of the instance&apos;s value set-get property.">3.8. valueOf Intrinsic Method</a></li>
-					<li><a href="#3_9" title="Lets you wire a handler for a specific instance event, or handlers for multiple instance events.">3.9. wire</a></li>
+					<li><a href="#3_4" title="Lets you register a handler that should be executed only once the value of the specified set-get property is truthy.">3.4. once</a>
+						<ul>
+							<li><a href="#3_4_1" title="The once method returns a wirings object that can be supplied to the unwire method in order to unwire the handler, in the unlikely event that one may wish to remove the handler before the property&apos;s value has become truthy.">3.4.1. Return Value</a></li>
+						</ul>
+					</li>
+					<li><a href="#3_5" title="Lets you set one or more of an instance&apos;s set-get properties.">3.5. set</a></li>
+					<li><a href="#3_6" title="Returns a string, providing summary info for the instance on which the method is called.">3.6. toString Intrinsic Method</a></li>
+					<li><a href="#3_7" title="Toggles the value of the specified boolean instance set-get property.">3.7. toggle</a></li>
+					<li><a href="#3_8" title="Lets you remove a handler previously wired to an instance event, or handlers wired for multiple instance events.">3.8. unwire</a></li>
+					<li><a href="#3_9" title="Returns the value of the instance&apos;s value set-get property.">3.9. valueOf Intrinsic Method</a></li>
+					<li><a href="#3_10" title="Lets you wire a handler for a specific instance event, or handlers for multiple instance events.">3.10. wire</a></li>
 				</ul>
 			</li>
 			<li><a href="#4">4. Static Methods</a>
@@ -157,14 +167,36 @@
 		<h2 class="heading2" title="1. Introduction -&gt; 1.1. Key Features"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. Key Features">1</a>. </span>Key Features</h2>
 		<div class="contents2">
 			<a name="1_1_1"></a>
-			<h3 class="heading3" title="1. Introduction -&gt; 1.1. Key Features -&gt; 1.1.1. The &quot;no new&quot; Mechanism"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. Key Features">1</a>.<a href="#1_1_1" title="1. Introduction -&gt; 1.1. Key Features -&gt; 1.1.1. The &quot;no new&quot; Mechanism">1</a>. </span>The "no new" Mechanism</h3>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.1. Key Features -&gt; 1.1.1. Event System"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. Key Features">1</a>.<a href="#1_1_1" title="1. Introduction -&gt; 1.1. Key Features -&gt; 1.1.1. Event System">1</a>. </span>Event System</h3>
+			<div class="contents3">
+				<p>The <code>Uize.Class</code> module implements a powerful and versatile event system, which can be used for application events outside the context of browser DOM events.</p>
+				
+				<a name="1_1_1_1"></a>
+				<h4 class="heading4" title="1. Introduction -&gt; 1.1. Key Features -&gt; 1.1.1. Event System -&gt; 1.1.1.1. Event System Methods"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. Key Features">1</a>.<a href="#1_1_1" title="1. Introduction -&gt; 1.1. Key Features -&gt; 1.1.1. Event System">1</a>.<a href="#1_1_1_1" title="1. Introduction -&gt; 1.1. Key Features -&gt; 1.1.1. Event System -&gt; 1.1.1.1. Event System Methods">1</a>. </span>Event System Methods</h4>
+				<div class="contents4">
+					<p>The event system of the <code>Uize.Class</code> module is exposed through the following methods...</p>
+					
+					<table class="list">
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#3_1">fire</a></code> - fires an event on an instance</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#3_8">unwire</a></code> - unwires handlers for one or more events on an instance</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#3_10">wire</a></code> - wires handlers for one or more events on an instance</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#3_4">once</a></code> - registers a handler that is to be executed once a set-get property's value becomes truthy</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#4_1">Uize.Class.fire</a></code> - fires an event on a class</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#4_9">Uize.Class.unwire</a></code> - unwires handlers for one or more events on a class</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#4_11">Uize.Class.wire</a></code> - wires handlers for one or more events on a class</td></tr>
+					</table>
+				</div>
+			</div>
+			
+			<a name="1_1_2"></a>
+			<h3 class="heading3" title="1. Introduction -&gt; 1.1. Key Features -&gt; 1.1.2. The &quot;no new&quot; Mechanism"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. Key Features">1</a>.<a href="#1_1_2" title="1. Introduction -&gt; 1.1. Key Features -&gt; 1.1.2. The &quot;no new&quot; Mechanism">2</a>. </span>The "no new" Mechanism</h3>
 			<div class="contents3">
 				<p>The JavaScript <code>new</code> operator is optional when creating instances of <code>Uize.Class</code> subclasses, and you can make the <code>new</code> operator optional for your own object constructors using the newly added <code>Uize.noNew</code> static method.</p>
 				
-				<a name="1_1_1_1"></a>
-				<h4 class="heading4" title="1. Introduction -&gt; 1.1. Key Features -&gt; 1.1.1. The &quot;no new&quot; Mechanism -&gt; 1.1.1.1. Creating Instances of Uize Classes"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. Key Features">1</a>.<a href="#1_1_1" title="1. Introduction -&gt; 1.1. Key Features -&gt; 1.1.1. The &quot;no new&quot; Mechanism">1</a>.<a href="#1_1_1_1" title="1. Introduction -&gt; 1.1. Key Features -&gt; 1.1.1. The &quot;no new&quot; Mechanism -&gt; 1.1.1.1. Creating Instances of Uize Classes">1</a>. </span>Creating Instances of Uize Classes</h4>
+				<a name="1_1_2_1"></a>
+				<h4 class="heading4" title="1. Introduction -&gt; 1.1. Key Features -&gt; 1.1.2. The &quot;no new&quot; Mechanism -&gt; 1.1.2.1. Creating Instances of Uize Classes"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. Key Features">1</a>.<a href="#1_1_2" title="1. Introduction -&gt; 1.1. Key Features -&gt; 1.1.2. The &quot;no new&quot; Mechanism">2</a>.<a href="#1_1_2_1" title="1. Introduction -&gt; 1.1. Key Features -&gt; 1.1.2. The &quot;no new&quot; Mechanism -&gt; 1.1.2.1. Creating Instances of Uize Classes">1</a>. </span>Creating Instances of Uize Classes</h4>
 				<div class="contents4">
-					<p>Because the <code>Uize.Class</code> base class utilizes <a href="#1_1_1">the "no new" mechanism</a>, one can create instances of any <code>Uize.Class</code> subclass either using the <code>new</code> operator or not.</p>
+					<p>Because the <code>Uize.Class</code> base class utilizes <a href="#1_1_2">the "no new" mechanism</a>, one can create instances of any <code>Uize.Class</code> subclass either using the <code>new</code> operator or not.</p>
 					
 					<p><span class="allCaps">EXAMPLE</span></p>
 					
@@ -177,10 +209,10 @@ var mySlider2 = Uize.Widget.Bar.Slider ({minValue:0,maxValue:100,value:50});
 </pre>
 				</div>
 				
-				<a name="1_1_1_2"></a>
-				<h4 class="heading4" title="1. Introduction -&gt; 1.1. Key Features -&gt; 1.1.1. The &quot;no new&quot; Mechanism -&gt; 1.1.1.2. All Uize Classes Get the Benefit"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. Key Features">1</a>.<a href="#1_1_1" title="1. Introduction -&gt; 1.1. Key Features -&gt; 1.1.1. The &quot;no new&quot; Mechanism">1</a>.<a href="#1_1_1_2" title="1. Introduction -&gt; 1.1. Key Features -&gt; 1.1.1. The &quot;no new&quot; Mechanism -&gt; 1.1.1.2. All Uize Classes Get the Benefit">2</a>. </span>All Uize Classes Get the Benefit</h4>
+				<a name="1_1_2_2"></a>
+				<h4 class="heading4" title="1. Introduction -&gt; 1.1. Key Features -&gt; 1.1.2. The &quot;no new&quot; Mechanism -&gt; 1.1.2.2. All Uize Classes Get the Benefit"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. Key Features">1</a>.<a href="#1_1_2" title="1. Introduction -&gt; 1.1. Key Features -&gt; 1.1.2. The &quot;no new&quot; Mechanism">2</a>.<a href="#1_1_2_2" title="1. Introduction -&gt; 1.1. Key Features -&gt; 1.1.2. The &quot;no new&quot; Mechanism -&gt; 1.1.2.2. All Uize Classes Get the Benefit">2</a>. </span>All Uize Classes Get the Benefit</h4>
 				<div class="contents4">
-					<p>Because of the way in which <a href="#1_1_1">the "no new" mechanism</a> is implemented in the <code>Uize.Class</code> base class, any class that is derived from a <code>Uize.Class</code> base class using the <code>subclass</code> method gets the same benefit, including classes that you create for your own applications.</p>
+					<p>Because of the way in which <a href="#1_1_2">the "no new" mechanism</a> is implemented in the <code>Uize.Class</code> base class, any class that is derived from a <code>Uize.Class</code> base class using the <code>subclass</code> method gets the same benefit, including classes that you create for your own applications.</p>
 					
 					<p>This means, for example, that any widget class you create by subclassing the <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> class will get the same benefit. Consider the following example...</p>
 					
@@ -198,10 +230,10 @@ var myWidgetClassInstance2 = MyWidgetClass ();
 </pre>
 				</div>
 				
-				<a name="1_1_1_3"></a>
-				<h4 class="heading4" title="1. Introduction -&gt; 1.1. Key Features -&gt; 1.1.1. The &quot;no new&quot; Mechanism -&gt; 1.1.1.3. Applies for Other Uize Objects"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. Key Features">1</a>.<a href="#1_1_1" title="1. Introduction -&gt; 1.1. Key Features -&gt; 1.1.1. The &quot;no new&quot; Mechanism">1</a>.<a href="#1_1_1_3" title="1. Introduction -&gt; 1.1. Key Features -&gt; 1.1.1. The &quot;no new&quot; Mechanism -&gt; 1.1.1.3. Applies for Other Uize Objects">3</a>. </span>Applies for Other Uize Objects</h4>
+				<a name="1_1_2_3"></a>
+				<h4 class="heading4" title="1. Introduction -&gt; 1.1. Key Features -&gt; 1.1.2. The &quot;no new&quot; Mechanism -&gt; 1.1.2.3. Applies for Other Uize Objects"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. Key Features">1</a>.<a href="#1_1_2" title="1. Introduction -&gt; 1.1. Key Features -&gt; 1.1.2. The &quot;no new&quot; Mechanism">2</a>.<a href="#1_1_2_3" title="1. Introduction -&gt; 1.1. Key Features -&gt; 1.1.2. The &quot;no new&quot; Mechanism -&gt; 1.1.2.3. Applies for Other Uize Objects">3</a>. </span>Applies for Other Uize Objects</h4>
 				<div class="contents4">
-					<p><a href="#1_1_1">The "no new" mechanism</a>, that is implemented in the <code>Uize.noNew</code> static method, has been applied to various other <code><a href="../reference/Uize.html">Uize</a></code> objects (such as the <code><a href="../reference/Uize.Color.html">Uize.Color</a></code> object) that are lightweight objects rather than full <code>Uize.Class</code> subclasses.</p>
+					<p><a href="#1_1_2">The "no new" mechanism</a>, that is implemented in the <code>Uize.noNew</code> static method, has been applied to various other <code><a href="../reference/Uize.html">Uize</a></code> objects (such as the <code><a href="../reference/Uize.Color.html">Uize.Color</a></code> object) that are lightweight objects rather than full <code>Uize.Class</code> subclasses.</p>
 					
 					<p>So, for example, one can create instances of the <code><a href="../reference/Uize.Color.html">Uize.Color</a></code> object or the <code><a href="../reference/Uize.String.Builder.html">Uize.String.Builder</a></code> object without needing to use the <code>new</code> operator. Consider the following example...</p>
 					
@@ -216,12 +248,12 @@ var olive = Uize.Color ('#808000');
 </pre>
 				</div>
 				
-				<a name="1_1_1_4"></a>
-				<h4 class="heading4" title="1. Introduction -&gt; 1.1. Key Features -&gt; 1.1.1. The &quot;no new&quot; Mechanism -&gt; 1.1.1.4. Using the Uize.noNew Method"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. Key Features">1</a>.<a href="#1_1_1" title="1. Introduction -&gt; 1.1. Key Features -&gt; 1.1.1. The &quot;no new&quot; Mechanism">1</a>.<a href="#1_1_1_4" title="1. Introduction -&gt; 1.1. Key Features -&gt; 1.1.1. The &quot;no new&quot; Mechanism -&gt; 1.1.1.4. Using the Uize.noNew Method">4</a>. </span>Using the Uize.noNew Method</h4>
+				<a name="1_1_2_4"></a>
+				<h4 class="heading4" title="1. Introduction -&gt; 1.1. Key Features -&gt; 1.1.2. The &quot;no new&quot; Mechanism -&gt; 1.1.2.4. Using the Uize.noNew Method"><span class="headingNumber"><a href="#1" title="1. Introduction">1</a>.<a href="#1_1" title="1. Introduction -&gt; 1.1. Key Features">1</a>.<a href="#1_1_2" title="1. Introduction -&gt; 1.1. Key Features -&gt; 1.1.2. The &quot;no new&quot; Mechanism">2</a>.<a href="#1_1_2_4" title="1. Introduction -&gt; 1.1. Key Features -&gt; 1.1.2. The &quot;no new&quot; Mechanism -&gt; 1.1.2.4. Using the Uize.noNew Method">4</a>. </span>Using the Uize.noNew Method</h4>
 				<div class="contents4">
-					<p>An object constructor that supports <a href="#1_1_1">the "no new" mechanism</a> can easily be created using the <code>Uize.noNew</code> static method.</p>
+					<p>An object constructor that supports <a href="#1_1_2">the "no new" mechanism</a> can easily be created using the <code>Uize.noNew</code> static method.</p>
 					
-					<p>In cases where you're creating <code>Uize.Class</code> subclasses, you don't need to worry about the <code>Uize.noNew</code> method because <a href="#1_1_1">the "no new" mechanism</a> is built right into the <code>Uize.Class</code> base class, so <a href="#1_1_1_2">all Uize classes get the benefit</a>. However, in cases where you're defining your own lightweight objects, you can use the <code>Uize.noNew</code> method to create an object constructor where the <code>new</code> operator is optional. Consider the following example...</p>
+					<p>In cases where you're creating <code>Uize.Class</code> subclasses, you don't need to worry about the <code>Uize.noNew</code> method because <a href="#1_1_2">the "no new" mechanism</a> is built right into the <code>Uize.Class</code> base class, so <a href="#1_1_2_2">all Uize classes get the benefit</a>. However, in cases where you're defining your own lightweight objects, you can use the <code>Uize.noNew</code> method to create an object constructor where the <code>new</code> operator is optional. Consider the following example...</p>
 					
 					<p><span class="allCaps">EXAMPLE</span></p>
 					
@@ -243,7 +275,7 @@ var rice = Food ('rice','grain');
 alert (rice.type);  // alerts the text "grain"
 </pre>
 					
-					<p>What you'll notice from the above example is that the <code>Uize.noNew</code> method is quite simple - it takes a single parameter, which is the constructor function that initializes the new instance. This means that you can easily take an existing object constructor function and upgrade it to one that supports <a href="#1_1_1">the "no new" mechanism</a> by wrapping it inside a call to the <code>Uize.noNew</code> method, which then returns a wrapper constructor that becomes your new object constructor. Consider the following before-and-after example...</p>
+					<p>What you'll notice from the above example is that the <code>Uize.noNew</code> method is quite simple - it takes a single parameter, which is the constructor function that initializes the new instance. This means that you can easily take an existing object constructor function and upgrade it to one that supports <a href="#1_1_2">the "no new" mechanism</a> by wrapping it inside a call to the <code>Uize.noNew</code> method, which then returns a wrapper constructor that becomes your new object constructor. Consider the following before-and-after example...</p>
 					
 					<p><span class="allCaps">BEFORE</span></p>
 					
@@ -303,7 +335,7 @@ var Food = Uize.noNew (
 				
 				<p><span class="allCaps">INSTANCE METHODS</span></p>
 				
-				<p><code><a href="#3_1">fire</a></code> | <code><a href="#3_2">get</a></code> | <code><a href="#3_3">kill</a></code> | <code><a href="#3_4">set</a></code> | <code><a href="#3_6">toggle</a></code> | <code><a href="#3_7">unwire</a></code> | <code><a href="#3_9">wire</a></code></p>
+				<p><code><a href="#3_1">fire</a></code> | <code><a href="#3_2">get</a></code> | <code><a href="#3_3">kill</a></code> | <code><a href="#3_4">once</a></code> | <code><a href="#3_5">set</a></code> | <code><a href="#3_7">toggle</a></code> | <code><a href="#3_8">unwire</a></code> | <code><a href="#3_10">wire</a></code></p>
 				
 				<p><span class="allCaps">STATIC METHODS</span></p>
 				
@@ -424,7 +456,7 @@ MyClass.prototype.insertButton = function () {
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#3_9">wire</a></code> and <code><a href="#3_7">unwire</a></code> instance methods</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#3_10">wire</a></code> and <code><a href="#3_8">unwire</a></code> instance methods</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#4_1">Uize.Class.fire</a></code>, <code><a href="#4_11">Uize.Class.wire</a></code>, and <code><a href="#4_9">Uize.Class.unwire</a></code> static methods</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -562,7 +594,7 @@ sliderValueAndRange = mySlider.get ({minValue:0,maxValue:0,value:0});
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#3_4">set</a></code> instance method</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#3_5">set</a></code> instance method</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#4_2">Uize.Class.get</a></code> and <code><a href="#4_4">Uize.Class.set</a></code> static methods</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -587,7 +619,55 @@ sliderValueAndRange = mySlider.get ({minValue:0,maxValue:0,value:0});
 		</div>
 		
 		<a name="3_4"></a>
-		<h2 class="heading2" title="3. Instance Methods -&gt; 3.4. set"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_4" title="3. Instance Methods -&gt; 3.4. set">4</a>. </span>set</h2>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.4. once"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_4" title="3. Instance Methods -&gt; 3.4. once">4</a>. </span>once</h2>
+		<div class="contents2">
+			<p>Lets you register a handler that should be executed only once the value of the specified set-get property is truthy.</p>
+			
+			<p><span class="allCaps">SYNTAX</span></p>
+			
+			
+<pre class="sample-code">wiringsOBJ = myInstance.once (propertyNameSTR,handlerFUNC);
+</pre>
+			
+			<p>If the value of the property specified by the <code>propertyNameSTR</code> parameter is truthy when the <code><a href="#3_4">once</a></code> method is called, then the handler specified by the <code>handlerFUNC</code> parameter will be executed immediately. Otherwise, the value of the property will be watched and the handler will be executed once the property's value becomes truthy, upon which the property watcher will be removed and the property will no longer be watched. By design, the handler is only executed for the first time that the property's value becomes truthy.</p>
+			
+			<p>The <code><a href="#3_4">once</a></code> method is useful when using a set-get property to represent a condition, and where you wish to register code that should be executed once the condition has been met, and immediately if the condition is already met at the time that the <code><a href="#3_4">once</a></code> method is called. Consider the following example...</p>
+			
+			<p><span class="allCaps">EXAMPLE</span></p>
+			
+			
+<pre class="sample-code">myWidget.once (
+  'wired',
+  function () {
+    // do something now that the widget has been wired
+  }
+);
+</pre>
+			
+			<p>In the above example, a handler is being registered to be executed once the widget <code>myWidget</code> has been wired (ie. the value of its <code>wired</code> set-get property hecomes <code>true</code>).</p>
+			
+			<a name="3_4_1"></a>
+			<h3 class="heading3" title="3. Instance Methods -&gt; 3.4. once -&gt; 3.4.1. Return Value"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_4" title="3. Instance Methods -&gt; 3.4. once">4</a>.<a href="#3_4_1" title="3. Instance Methods -&gt; 3.4. once -&gt; 3.4.1. Return Value">1</a>. </span>Return Value</h3>
+			<div class="contents3">
+				<p>The <code><a href="#3_4">once</a></code> method returns a wirings object that can be supplied to the <code><a href="#3_8">unwire</a></code> method in order to unwire the handler, in the unlikely event that one may wish to remove the handler before the property's value has become truthy.</p>
+				
+				<p>This case is unlikely to arise except in exceptional situations, but the means is provided. In most cases, you will simply discard / ignore the return value of the <code><a href="#3_4">once</a></code> method. In the event that the property's value is truthy when the <code><a href="#3_4">once</a></code> method is called, then the returned wirings object will be an empty object.</p>
+			</div>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the other <a href="#1_1_1_1">event system methods</a></td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
+		<a name="3_5"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.5. set"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_5" title="3. Instance Methods -&gt; 3.5. set">5</a>. </span>set</h2>
 		<div class="contents2">
 			<p>Lets you set one or more of an instance's set-get properties.</p>
 			
@@ -638,7 +718,7 @@ sliderValueAndRange = mySlider.get ({minValue:0,maxValue:0,value:0});
 );
 </pre>
 			
-			<p>This variation allows values for an arbitrary number of set-get properties to be set in a single call to the <code><a href="#3_4">set</a></code> method, by specifying the names and values of the properties using an arbitrary number of name-value pair arguments, where even numbered arguments are property names and odd numbered arguments are property values. This variation makes it possible to use expressions or the values of variables for specifying the names of the properties to set.</p>
+			<p>This variation allows values for an arbitrary number of set-get properties to be set in a single call to the <code><a href="#3_5">set</a></code> method, by specifying the names and values of the properties using an arbitrary number of name-value pair arguments, where even numbered arguments are property names and odd numbered arguments are property values. This variation makes it possible to use expressions or the values of variables for specifying the names of the properties to set.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
@@ -654,8 +734,8 @@ sliderValueAndRange = mySlider.get ({minValue:0,maxValue:0,value:0});
 			</table>
 		</div>
 		
-		<a name="3_5"></a>
-		<h2 class="heading2" title="3. Instance Methods -&gt; 3.5. toString Intrinsic Method"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_5" title="3. Instance Methods -&gt; 3.5. toString Intrinsic Method">5</a>. </span>toString Intrinsic Method</h2>
+		<a name="3_6"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.6. toString Intrinsic Method"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_6" title="3. Instance Methods -&gt; 3.6. toString Intrinsic Method">6</a>. </span>toString Intrinsic Method</h2>
 		<div class="contents2">
 			<p>Returns a string, providing summary info for the instance on which the method is called.</p>
 			
@@ -665,7 +745,7 @@ sliderValueAndRange = mySlider.get ({minValue:0,maxValue:0,value:0});
 <pre class="sample-code">instanceSummarySTR = myInstance.toString ();
 </pre>
 			
-			<p>The string returned by this method provides a summary that includes the instance's class name and the state of its set-get properties. Among other things, this method provides a convenient and lightweight way to gather information about instances of <code>Uize.Class</code> subclasses during debugging and troubleshooting. The <code><a href="#3_5">toString Intrinsic Method</a></code> is invoked automatically in certain contexts in order to convert an object to a string form, such as when alerting an object using the <code>alert</code> global function.</p>
+			<p>The string returned by this method provides a summary that includes the instance's class name and the state of its set-get properties. Among other things, this method provides a convenient and lightweight way to gather information about instances of <code>Uize.Class</code> subclasses during debugging and troubleshooting. The <code><a href="#3_6">toString Intrinsic Method</a></code> is invoked automatically in certain contexts in order to convert an object to a string form, such as when alerting an object using the <code>alert</code> global function.</p>
 			
 			<p><span class="allCaps">EXAMPLE</span></p>
 			
@@ -711,7 +791,7 @@ valueFunc : [object Function]
 wired : true
 </pre>
 			
-			<p>In certain contexts, providing a reference to a <code>Uize.Class</code> subclass instance as a parameter to some method will result in the <code><a href="#3_8">valueOf Intrinsic Method</a></code> of that instance being invoked in order to coerce it to a simple value. If it is your desire to have the instance summary be used rather than the instance's value, then you should explicitly call the <code><a href="#3_5">toString Intrinsic Method</a></code>, as follows...</p>
+			<p>In certain contexts, providing a reference to a <code>Uize.Class</code> subclass instance as a parameter to some method will result in the <code><a href="#3_9">valueOf Intrinsic Method</a></code> of that instance being invoked in order to coerce it to a simple value. If it is your desire to have the instance summary be used rather than the instance's value, then you should explicitly call the <code><a href="#3_6">toString Intrinsic Method</a></code>, as follows...</p>
 			
 			<p><span class="allCaps">EXAMPLE</span></p>
 			
@@ -729,8 +809,8 @@ Uize.Node.setInnerHtml ('sliderWidgetCurrentValue',page.children.slider);
 			</table>
 		</div>
 		
-		<a name="3_6"></a>
-		<h2 class="heading2" title="3. Instance Methods -&gt; 3.6. toggle"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_6" title="3. Instance Methods -&gt; 3.6. toggle">6</a>. </span>toggle</h2>
+		<a name="3_7"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.7. toggle"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_7" title="3. Instance Methods -&gt; 3.7. toggle">7</a>. </span>toggle</h2>
 		<div class="contents2">
 			<p>Toggles the value of the specified boolean instance set-get property.</p>
 			
@@ -740,14 +820,14 @@ Uize.Node.setInnerHtml ('sliderWidgetCurrentValue',page.children.slider);
 <pre class="sample-code">toggledValueBOOL = myInstance.toggle (propertyNameSTR);
 </pre>
 			
-			<p>The <code><a href="#3_6">toggle</a></code> instance method is provided purely as a convenience. The following two statements are equivalent...</p>
+			<p>The <code><a href="#3_7">toggle</a></code> instance method is provided purely as a convenience. The following two statements are equivalent...</p>
 			
 			
 <pre class="sample-code">myInstance.toggle ('myProperty');
 myInstance.set ({myProperty:!myInstance.get ('myProperty')});
 </pre>
 			
-			<p>As you can see, using the <code><a href="#3_6">toggle</a></code> method produces more concise code.</p>
+			<p>As you can see, using the <code><a href="#3_7">toggle</a></code> method produces more concise code.</p>
 			
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -756,8 +836,8 @@ myInstance.set ({myProperty:!myInstance.get ('myProperty')});
 			</table>
 		</div>
 		
-		<a name="3_7"></a>
-		<h2 class="heading2" title="3. Instance Methods -&gt; 3.7. unwire"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_7" title="3. Instance Methods -&gt; 3.7. unwire">7</a>. </span>unwire</h2>
+		<a name="3_8"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.8. unwire"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_8" title="3. Instance Methods -&gt; 3.8. unwire">8</a>. </span>unwire</h2>
 		<div class="contents2">
 			<p>Lets you remove a handler previously wired to an instance event, or handlers wired for multiple instance events.</p>
 			
@@ -781,12 +861,12 @@ myInstance.set ({myProperty:!myInstance.get ('myProperty')});
 <pre class="sample-code">myInstance.unwire (eventNamesToHandlersMapOBJ);
 </pre>
 			
-			<p>When only a single <code><a href="#5_2">eventNamesToHandlersMapOBJ</a></code> parameter is specified, then event handlers for multiple events can be specified using an object hash. This variation is provided as a convenience and has the effect of iteratively calling the <code><a href="#3_7">unwire</a></code> instance method for each event-name-to-handler mapping in the <code><a href="#5_2">eventNamesToHandlersMapOBJ</a></code> object.</p>
+			<p>When only a single <code><a href="#5_2">eventNamesToHandlersMapOBJ</a></code> parameter is specified, then event handlers for multiple events can be specified using an object hash. This variation is provided as a convenience and has the effect of iteratively calling the <code><a href="#3_8">unwire</a></code> instance method for each event-name-to-handler mapping in the <code><a href="#5_2">eventNamesToHandlersMapOBJ</a></code> object.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#3_1">fire</a></code> and <code><a href="#3_9">wire</a></code> instance methods</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#3_1">fire</a></code> and <code><a href="#3_10">wire</a></code> instance methods</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#4_1">Uize.Class.fire</a></code>, <code><a href="#4_11">Uize.Class.wire</a></code>, and <code><a href="#4_9">Uize.Class.unwire</a></code> static methods</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -796,8 +876,8 @@ myInstance.set ({myProperty:!myInstance.get ('myProperty')});
 			</table>
 		</div>
 		
-		<a name="3_8"></a>
-		<h2 class="heading2" title="3. Instance Methods -&gt; 3.8. valueOf Intrinsic Method"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_8" title="3. Instance Methods -&gt; 3.8. valueOf Intrinsic Method">8</a>. </span>valueOf Intrinsic Method</h2>
+		<a name="3_9"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.9. valueOf Intrinsic Method"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_9" title="3. Instance Methods -&gt; 3.9. valueOf Intrinsic Method">9</a>. </span>valueOf Intrinsic Method</h2>
 		<div class="contents2">
 			<p>Returns the value of the instance's <code>value</code> set-get property.</p>
 			
@@ -807,7 +887,7 @@ myInstance.set ({myProperty:!myInstance.get ('myProperty')});
 <pre class="sample-code">instanceValueANYTYPE = myInstance.valueOf ();
 </pre>
 			
-			<p>The <code><a href="#3_8">valueOf Intrinsic Method</a></code> is invoked automatically in certain contexts in order to convert an object to a value, such as when using an object reference in an expression.</p>
+			<p>The <code><a href="#3_9">valueOf Intrinsic Method</a></code> is invoked automatically in certain contexts in order to convert an object to a value, such as when using an object reference in an expression.</p>
 			
 			<p><span class="allCaps">EXAMPLE</span></p>
 			
@@ -815,7 +895,7 @@ myInstance.set ({myProperty:!myInstance.get ('myProperty')});
 <pre class="sample-code">var markedUpPrice = price * (1 + page.children.markupPercentSlider / 100);
 </pre>
 			
-			<p>In the above example, the page widget has a slider child widget that is an instance of the class <code><a href="../reference/Uize.Widget.Bar.Slider.html">Uize.Widget.Bar.Slider</a></code> and that lets the user choose a markup percentage between <code>0</code> and <code>100</code>. In the above expression, the slider widget is being divided by 100. Rather than giving you a hundred <b>really</b> tiny slider widgets (not all that useful), JavaScript automatically invokes the <code><a href="#3_8">valueOf Intrinsic Method</a></code>. The implementation of this instance method in the <code>Uize.Class</code> base class results in the slider's current value being returned so that it can then be used in the expression.</p>
+			<p>In the above example, the page widget has a slider child widget that is an instance of the class <code><a href="../reference/Uize.Widget.Bar.Slider.html">Uize.Widget.Bar.Slider</a></code> and that lets the user choose a markup percentage between <code>0</code> and <code>100</code>. In the above expression, the slider widget is being divided by 100. Rather than giving you a hundred <b>really</b> tiny slider widgets (not all that useful), JavaScript automatically invokes the <code><a href="#3_9">valueOf Intrinsic Method</a></code>. The implementation of this instance method in the <code>Uize.Class</code> base class results in the slider's current value being returned so that it can then be used in the expression.</p>
 			
 			<p>The following three statements are equivalent...</p>
 			
@@ -825,7 +905,7 @@ markedUpPrice = price * (1 + page.children.markupPercentSlider.valueOf () / 100)
 markedUpPrice = price * (1 + page.children.markupPercentSlider / 100);
 </pre>
 			
-			<p>In certain contexts, providing a reference to a <code>Uize.Class</code> subclass instance as a parameter to some method will result in the <code><a href="#3_5">toString Intrinsic Method</a></code> of that instance being invoked in order to resolve it to a string value. If it is your desire to have the value used rather than the instance summary, then you should explicitly call the <code><a href="#3_8">valueOf Intrinsic Method</a></code>, as follows...</p>
+			<p>In certain contexts, providing a reference to a <code>Uize.Class</code> subclass instance as a parameter to some method will result in the <code><a href="#3_6">toString Intrinsic Method</a></code> of that instance being invoked in order to resolve it to a string value. If it is your desire to have the value used rather than the instance summary, then you should explicitly call the <code><a href="#3_9">valueOf Intrinsic Method</a></code>, as follows...</p>
 			
 			<p><span class="allCaps">EXAMPLE</span></p>
 			
@@ -847,19 +927,19 @@ markedUpPrice = price * (1 + page.children.markupPercentSlider / 100);
 <pre class="sample-code">alert (page.children.titleTextInputWidget + '');
 </pre>
 			
-			<p>Both of the above examples will cause JavaScript to invoke the <code><a href="#3_8">valueOf Intrinsic Method</a></code> rather than the <code><a href="#3_5">toString Intrinsic Method</a></code>, but the first will coerce the value to a number type, while the second will coerce the value to a string type.</p>
+			<p>Both of the above examples will cause JavaScript to invoke the <code><a href="#3_9">valueOf Intrinsic Method</a></code> rather than the <code><a href="#3_6">toString Intrinsic Method</a></code>, but the first will coerce the value to a number type, while the second will coerce the value to a string type.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#3_5">toString Intrinsic Method</a></code>, and the <code>Uize.toString</code> static intrinsic method</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#3_6">toString Intrinsic Method</a></code>, and the <code>Uize.toString</code> static intrinsic method</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#4_10">Uize.Class.valueOf</a></code> static intrinsic method</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>if the instance's class does not register a <code>value</code> set-get property, then this method will return the value of the instance's <code>value</code> property, and if the instance has no <code>value</code> property, then this method will simply return <code>undefined</code></td></tr>
 			</table>
 		</div>
 		
-		<a name="3_9"></a>
-		<h2 class="heading2" title="3. Instance Methods -&gt; 3.9. wire"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_9" title="3. Instance Methods -&gt; 3.9. wire">9</a>. </span>wire</h2>
+		<a name="3_10"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.10. wire"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_10" title="3. Instance Methods -&gt; 3.10. wire">10</a>. </span>wire</h2>
 		<div class="contents2">
 			<p>Lets you wire a handler for a specific instance event, or handlers for multiple instance events.</p>
 			
@@ -886,7 +966,7 @@ markedUpPrice = price * (1 + page.children.markupPercentSlider / 100);
 <pre class="sample-code">myInstance.wire (eventNamesToHandlersMapOBJ);
 </pre>
 			
-			<p>When only a single <code><a href="#5_2">eventNamesToHandlersMapOBJ</a></code> parameter is specified, then event handlers for multiple events can be specified using an object hash. This variation is provided as a convenience and has the effect of iteratively calling the <code><a href="#3_9">wire</a></code> instance method for each event-name-to-handler mapping in the <code><a href="#5_2">eventNamesToHandlersMapOBJ</a></code> object.</p>
+			<p>When only a single <code><a href="#5_2">eventNamesToHandlersMapOBJ</a></code> parameter is specified, then event handlers for multiple events can be specified using an object hash. This variation is provided as a convenience and has the effect of iteratively calling the <code><a href="#3_10">wire</a></code> instance method for each event-name-to-handler mapping in the <code><a href="#5_2">eventNamesToHandlersMapOBJ</a></code> object.</p>
 			
 			<p><span class="allCaps">EXAMPLE</span></p>
 			
@@ -909,7 +989,7 @@ markedUpPrice = price * (1 + page.children.markupPercentSlider / 100);
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#3_1">fire</a></code> and <code><a href="#3_7">unwire</a></code> instance methods</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#3_1">fire</a></code> and <code><a href="#3_8">unwire</a></code> instance methods</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#4_1">Uize.Class.fire</a></code>, <code><a href="#4_11">Uize.Class.wire</a></code>, and <code><a href="#4_9">Uize.Class.unwire</a></code> static methods</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -946,7 +1026,7 @@ markedUpPrice = price * (1 + page.children.markupPercentSlider / 100);
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#4_11">Uize.Class.wire</a></code> and <code><a href="#4_9">Uize.Class.unwire</a></code> static methods</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#3_1">fire</a></code>, <code><a href="#3_9">wire</a></code>, and <code><a href="#3_7">unwire</a></code> instance methods</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#3_1">fire</a></code>, <code><a href="#3_10">wire</a></code>, and <code><a href="#3_8">unwire</a></code> instance methods</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -985,7 +1065,7 @@ markedUpPrice = price * (1 + page.children.markupPercentSlider / 100);
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#4_4">Uize.Class.set</a></code> static method</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#3_2">get</a></code> and <code><a href="#3_4">set</a></code> instance methods</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#3_2">get</a></code> and <code><a href="#3_5">set</a></code> instance methods</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -1090,14 +1170,14 @@ markedUpPrice = price * (1 + page.children.markupPercentSlider / 100);
 );
 </pre>
 			
-			<p>This variation allows initial values for an arbitrary number of set-get properties to be set in a single call to the <code><a href="#3_4">set</a></code> method, by specifying the names and values of the properties using an arbitrary number of name-value pair arguments, where even numbered arguments are property names and odd numbered arguments are property values. This variation makes it possible to use expressions or the values of variables for specifying the names of the properties to set.</p>
+			<p>This variation allows initial values for an arbitrary number of set-get properties to be set in a single call to the <code><a href="#3_5">set</a></code> method, by specifying the names and values of the properties using an arbitrary number of name-value pair arguments, where even numbered arguments are property names and odd numbered arguments are property values. This variation makes it possible to use expressions or the values of variables for specifying the names of the properties to set.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#4_2">Uize.Class.get</a></code> static method</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#3_2">get</a></code> instance method</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#3_4">set</a></code> instance method</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#3_5">set</a></code> instance method</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -1301,7 +1381,7 @@ Uize.Class.set ({myProperty:!Uize.Class.get ('myProperty')});
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#4_1">Uize.Class.fire</a></code> and <code><a href="#4_11">Uize.Class.wire</a></code> static methods</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#3_1">fire</a></code>, <code><a href="#3_9">wire</a></code>, and <code><a href="#3_7">unwire</a></code> instance methods</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#3_1">fire</a></code>, <code><a href="#3_10">wire</a></code>, and <code><a href="#3_8">unwire</a></code> instance methods</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -1322,13 +1402,13 @@ Uize.Class.set ({myProperty:!Uize.Class.get ('myProperty')});
 <pre class="sample-code">classValueANYTYPE = MyClass.valueOf ();
 </pre>
 			
-			<p>The <code><a href="#4_10">Uize.Class.valueOf</a></code> static intrinsic method is invoked automatically in certain contexts in order to convert a class to a value, such as when using a class reference in an expression (eg. <code>Uize.Widget.Bar.Slider + 0</code>). This static method is implemented primarily to provide parity with the <code><a href="#3_8">valueOf Intrinsic Method</a></code>. Its behavior is largely equivalent to that of the instance method, excepting that it applies to the static value of the <code>value</code> set-get property.</p>
+			<p>The <code><a href="#4_10">Uize.Class.valueOf</a></code> static intrinsic method is invoked automatically in certain contexts in order to convert a class to a value, such as when using a class reference in an expression (eg. <code>Uize.Widget.Bar.Slider + 0</code>). This static method is implemented primarily to provide parity with the <code><a href="#3_9">valueOf Intrinsic Method</a></code>. Its behavior is largely equivalent to that of the instance method, excepting that it applies to the static value of the <code>value</code> set-get property.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#3_5">toString Intrinsic Method</a></code>, and the <code>Uize.toString</code> static intrinsic method</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#3_8">valueOf Intrinsic Method</a></code></td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#3_6">toString Intrinsic Method</a></code>, and the <code>Uize.toString</code> static intrinsic method</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#3_9">valueOf Intrinsic Method</a></code></td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>if the class does not register a <code>value</code> set-get property, then this method will return the value of the class' <code>value</code> property, and if the class has no <code>value</code> property, then this method will simply return <code>undefined</code></td></tr>
 			</table>
 		</div>
@@ -1363,7 +1443,7 @@ Uize.Class.set ({myProperty:!Uize.Class.get ('myProperty')});
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#4_1">Uize.Class.fire</a></code> and <code><a href="#4_9">Uize.Class.unwire</a></code> static methods</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#3_1">fire</a></code>, <code><a href="#3_9">wire</a></code>, and <code><a href="#3_7">unwire</a></code> instance methods</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#3_1">fire</a></code>, <code><a href="#3_10">wire</a></code>, and <code><a href="#3_8">unwire</a></code> instance methods</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -1413,7 +1493,7 @@ Uize.Class.set ({myProperty:!Uize.Class.get ('myProperty')});
 				
 				<p>In the above example, a handler is being registered for the <code>'Click'</code> event of a button (an instance of the <code><a href="../reference/Uize.Widget.Button.html">Uize.Widget.Button</a></code> class) that is a child widget of <code>myWidget</code>. By specifying <code>myWidget</code> as the handler for the <code>Click</code> event, that event will get relayed to <code>myWidget</code>. This means that other code can now register handlers on the <code>Click</code> event for <code>myWidget</code>, and those handlers will handle the <code>Click</code> event being relayed from the button widget.</p>
 				
-				<p>Object handlers added in this way can be removed by using the <code><a href="#3_7">unwire</a></code> instance method and the <code><a href="#4_9">Uize.Class.unwire</a></code> static method, just as with any other type of handler, as in...</p>
+				<p>Object handlers added in this way can be removed by using the <code><a href="#3_8">unwire</a></code> instance method and the <code><a href="#4_9">Uize.Class.unwire</a></code> static method, just as with any other type of handler, as in...</p>
 				
 				
 <pre class="sample-code">myWidget.children.someButton.unwire ('Click',myWidget);
@@ -1455,9 +1535,9 @@ Uize.Class.set ({myProperty:!Uize.Class.get ('myProperty')});
 		<a name="6_1"></a>
 		<h2 class="heading2" title="6. Instance Events -&gt; 6.1. Changed.*"><span class="headingNumber"><a href="#6" title="6. Instance Events">6</a>.<a href="#6_1" title="6. Instance Events -&gt; 6.1. Changed.*">1</a>. </span>Changed.*</h2>
 		<div class="contents2">
-			<p>The <code><a href="#6_1">Changed.*</a></code> instance event is a wildcard event that is fired whenever one or more set-get properties change value as a result of a call to the <code><a href="#3_4">set</a></code> instance method.</p>
+			<p>The <code><a href="#6_1">Changed.*</a></code> instance event is a wildcard event that is fired whenever one or more set-get properties change value as a result of a call to the <code><a href="#3_5">set</a></code> instance method.</p>
 			
-			<p>This event will only be fired once for all set-get properties that have changed value during a call to the <code><a href="#3_4">set</a></code> method. The event object for this event will contain a <code>properties</code> property, which is an object indicating which set-get properties have changed value, being a mapping between the public names of set-get properties that have changed and their new values.</p>
+			<p>This event will only be fired once for all set-get properties that have changed value during a call to the <code><a href="#3_5">set</a></code> method. The event object for this event will contain a <code>properties</code> property, which is an object indicating which set-get properties have changed value, being a mapping between the public names of set-get properties that have changed and their new values.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
@@ -1495,21 +1575,21 @@ myColorWidget.wire ('Changed.color',handleColorChange);
 myColorWidget.unwire ('Changed.hexRgb',handleColorChange);
 </pre>
 				
-				<p>In this example, the <code>handleColorChange</code> function would not be executed when the value of the <code>color</code> set-get property changes, because <code>Changed.color</code> and <code>Changed.hexRgb</code> are treated as equivalent and therefore the <code><a href="#3_7">unwire</a></code> statement effectively removes the handler registered in the previous statement.</p>
+				<p>In this example, the <code>handleColorChange</code> function would not be executed when the value of the <code>color</code> set-get property changes, because <code>Changed.color</code> and <code>Changed.hexRgb</code> are treated as equivalent and therefore the <code><a href="#3_8">unwire</a></code> statement effectively removes the handler registered in the previous statement.</p>
 			</div>
 			
 			<a name="6_2_3"></a>
 			<h3 class="heading3" title="6. Instance Events -&gt; 6.2. Changed.[propertyName] -&gt; 6.2.3. Must Use the set Method"><span class="headingNumber"><a href="#6" title="6. Instance Events">6</a>.<a href="#6_2" title="6. Instance Events -&gt; 6.2. Changed.[propertyName]">2</a>.<a href="#6_2_3" title="6. Instance Events -&gt; 6.2. Changed.[propertyName] -&gt; 6.2.3. Must Use the set Method">3</a>. </span>Must Use the set Method</h3>
 			<div class="contents3">
-				<p>The <code><a href="#6_2">Changed.[propertyName]</a></code> event will only fire for a particular set-get property if the value for that property is set using the <code><a href="#3_4">set</a></code> method, since it is within the <code><a href="#3_4">set</a></code> method that change detection occurs and the event is fired. If you simply assign a value by directly accessing the private name of the property, then the event will not fire.</p>
+				<p>The <code><a href="#6_2">Changed.[propertyName]</a></code> event will only fire for a particular set-get property if the value for that property is set using the <code><a href="#3_5">set</a></code> method, since it is within the <code><a href="#3_5">set</a></code> method that change detection occurs and the event is fired. If you simply assign a value by directly accessing the private name of the property, then the event will not fire.</p>
 			</div>
 			
 			<a name="6_2_4"></a>
 			<h3 class="heading3" title="6. Instance Events -&gt; 6.2. Changed.[propertyName] -&gt; 6.2.4. Only On Change, Not Every Set"><span class="headingNumber"><a href="#6" title="6. Instance Events">6</a>.<a href="#6_2" title="6. Instance Events -&gt; 6.2. Changed.[propertyName]">2</a>.<a href="#6_2_4" title="6. Instance Events -&gt; 6.2. Changed.[propertyName] -&gt; 6.2.4. Only On Change, Not Every Set">4</a>. </span>Only On Change, Not Every Set</h3>
 			<div class="contents3">
-				<p>The <code><a href="#6_2">Changed.[propertyName]</a></code> event only fires for a particular set-get property when the value for that property is <b>changed</b> by using the <code><a href="#3_4">set</a></code> method. So, if the <code><a href="#3_4">set</a></code> method is called but the value that is specified is already the value of the property, then there will be no change and no event will be fired.</p>
+				<p>The <code><a href="#6_2">Changed.[propertyName]</a></code> event only fires for a particular set-get property when the value for that property is <b>changed</b> by using the <code><a href="#3_5">set</a></code> method. So, if the <code><a href="#3_5">set</a></code> method is called but the value that is specified is already the value of the property, then there will be no change and no event will be fired.</p>
 				
-				<p>Additionally, if a <code>conformer</code> is registered for the property and the action of the conformer results in the property value not being changed, then no event will be fired - even if the value specified in the <code><a href="#3_4">set</a></code> call is different to the current value of the property. This can be the case if the value is at an edge of its valid range, an attempt is made to set the value outside of its valid range, and the conformer has the action of constraining the value so that it remains at the same edge of its valid range.</p>
+				<p>Additionally, if a <code>conformer</code> is registered for the property and the action of the conformer results in the property value not being changed, then no event will be fired - even if the value specified in the <code><a href="#3_5">set</a></code> call is different to the current value of the property. This can be the case if the value is at an edge of its valid range, an attempt is made to set the value outside of its valid range, and the conformer has the action of constraining the value so that it remains at the same edge of its valid range.</p>
 			</div>
 			
 			<p><span class="allCaps">NOTES</span></p>

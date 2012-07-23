@@ -24,6 +24,20 @@
 		*DEVELOPERS:* `Chris van Rensburg`
 
 		Key Features
+			Event System
+				The =Uize.Class= module implements a powerful and versatile event system, which can be used for application events outside the context of browser DOM events.
+
+				Event System Methods
+					The event system of the =Uize.Class= module is exposed through the following methods...
+
+					- =fire= - fires an event on an instance
+					- =unwire= - unwires handlers for one or more events on an instance
+					- =wire= - wires handlers for one or more events on an instance
+					- =once= - registers a handler that is to be executed once a set-get property's value becomes truthy
+					- =Uize.Class.fire= - fires an event on a class
+					- =Uize.Class.unwire= - unwires handlers for one or more events on a class
+					- =Uize.Class.wire= - wires handlers for one or more events on a class
+
 			The "no new" Mechanism
 				The JavaScript =new= operator is optional when creating instances of =Uize.Class= subclasses, and you can make the =new= operator optional for your own object constructors using the newly added =Uize.noNew= static method.
 
@@ -259,7 +273,7 @@ Uize.module ({
 						_this._abstractEventName (
 							_eventNameOrEventsMap,
 							function (_eventName) {
-								var _eventHandlers = _this._eventHandlers || (_this._eventHandlers = _this.eventHandlers = {});
+								var _eventHandlers = _this._eventHandlers || (_this._eventHandlers = {});
 								(_eventHandlers [_eventName] || (_eventHandlers [_eventName] = [])).push (
 									{
 										_eventName:_eventName,
@@ -587,6 +601,60 @@ Uize.module ({
 								NOTES
 								- see the related =Uize.Class.fire= and =Uize.Class.wire= static methods
 								- compare to the =fire=, =wire=, and =unwire= instance methods
+					*/
+				};
+
+				_classPrototype.once = function (_property,_handler) {
+					var
+						_this = this,
+						_propertyValue = _this.get (_property),
+						_wirings = {}
+					;
+					if (_propertyValue) {
+						_handler (_propertyValue);
+					} else {
+						_wirings ['Changed.' + _property] = function  () {
+							if (_propertyValue = _this.get (_property)) {
+								_this.unwire (_wirings);
+								_handler (_propertyValue);
+							}
+						};
+						_this.wire (_wirings);
+					}
+					return _wirings;
+					/*?
+						Instance Methods
+							once
+								Lets you register a handler that should be executed only once the value of the specified set-get property is truthy.
+
+								SYNTAX
+								...........................................................
+								wiringsOBJ = myInstance.once (propertyNameSTR,handlerFUNC);
+								...........................................................
+
+								If the value of the property specified by the =propertyNameSTR= parameter is truthy when the =once= method is called, then the handler specified by the =handlerFUNC= parameter will be executed immediately. Otherwise, the value of the property will be watched and the handler will be executed once the property's value becomes truthy, upon which the property watcher will be removed and the property will no longer be watched. By design, the handler is only executed for the first time that the property's value becomes truthy.
+
+								The =once= method is useful when using a set-get property to represent a condition, and where you wish to register code that should be executed once the condition has been met, and immediately if the condition is already met at the time that the =once= method is called. Consider the following example...
+
+								EXAMPLE
+								........................................................
+								myWidget.once (
+									'wired',
+									function () {
+										// do something now that the widget has been wired
+									}
+								);
+								........................................................
+
+								In the above example, a handler is being registered to be executed once the widget =myWidget= has been wired (ie. the value of its =wired= set-get property hecomes =true=).
+
+								Return Value
+									The =once= method returns a wirings object that can be supplied to the =unwire= method in order to unwire the handler, in the unlikely event that one may wish to remove the handler before the property's value has become truthy.
+
+									This case is unlikely to arise except in exceptional situations, but the means is provided. In most cases, you will simply discard / ignore the return value of the =once= method. In the event that the property's value is truthy when the =once= method is called, then the returned wirings object will be an empty object.
+
+								NOTES
+								- see the other `event system methods`
 					*/
 				};
 
