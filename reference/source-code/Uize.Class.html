@@ -71,8 +71,8 @@
 
           - =is= - returns whether or not a condition has been met
           - =once= - registers code that is to be executed once a condition has been met
-          - =done= - sets a condition as having been met
-          - =undone= - sets a condition as having not been met / no longer being met
+          - =met= - sets a condition as having been met
+          - =unmet= - sets a condition as having not been met / no longer being met
 
       The "no new" Mechanism
         The JavaScript =new= operator is optional when creating instances of =Uize.Class= subclasses, and you can make the =new= operator optional for your own object constructors using the newly added =Uize.noNew= static method.
@@ -663,7 +663,7 @@ Uize.module ({
           /*?
             Instance Methods
               once
-                Lets you register a handler that should be executed only once the value of the specified set-get property is truthy.
+                Lets you register a handler that should be executed only once a condition is met (ie. the value of the specified condition property is truthy).
 
                 SYNTAX
                 ...........................................................
@@ -724,37 +724,37 @@ Uize.module ({
           */
         };
 
-        _classPrototype.done = function (_property) {
+        _classPrototype.met = function (_property) {
           this.set (_property,_true);
           /*?
             Instance Methods
-              done
+              met
                 Sets the specified condition (or conditions) as having been met.
 
                 DIFFERENT USAGES
 
                 `Set a Single Condition as Having Been Met`
-                ..................................
-                myInstance.done (propertyNameSTR);
-                ..................................
+                .................................
+                myInstance.met (propertyNameSTR);
+                .................................
 
                 `Set Multiple Conditions as Having Been Met`
-                .....................................
-                myInstance.done (propertyNamesARRAY);
-                .....................................
+                ....................................
+                myInstance.met (propertyNamesARRAY);
+                ....................................
 
                 Set a Single Condition as Having Been Met
-                  The =done= method is offered as a convenience to improve the semantics of code that is using set-get properties to represent conditions, and is a very thin wrapper around the =set= instance method. The statement =myInstance.done ('myCondition')= is equivalent to the statement =myInstance.set ('myCondition',true)=. When using a set-get property to represent a condition, the =done= method is a semantically elegant way to set the value of the property to =true= to indicate that the condition represented by the property has been met.
+                  The =met= method is offered as a convenience to improve the semantics of code that is using set-get properties to represent conditions, and is a very thin wrapper around the =set= instance method. The statement =myInstance.met ('myCondition')= is equivalent to the statement =myInstance.set ('myCondition',true)=. When using a set-get property to represent a condition, the =met= method is a semantically elegant way to set the value of the property to =true= to indicate that the condition represented by the property has been met.
 
                   EXAMPLE
                   .............................................
                   MyClass.prototype.initialize = function () {
                     // some code here to do the initialization
-                    this.done ('initialized');
+                    this.met ('initialized');
                   };
                   .............................................
 
-                  In the above example, an =initialize= instance method is defined for the class =MyClass=. In the method's implementation, after all the initialization has been performed, the =done= method is being called to indicate that the =initialized= condition has been met, where =initialized= is the name of a set-get property provided in =MyClass=. Now, other code can be registered to be executed only once an instance has been initialized by using the =once= instance method, as follows...
+                  In the above example, an =initialize= instance method is defined for the class =MyClass=. In the method's implementation, after all the initialization has been performed, the =met= method is being called to indicate that the =initialized= condition has been met, where =initialized= is the name of a set-get property provided in =MyClass=. Now, other code can be registered to be executed only once an instance has been initialized by using the =once= instance method, as follows...
 
                   .............................................................
                   myInstance.once (
@@ -766,48 +766,48 @@ Uize.module ({
                   .............................................................
 
                   SYNTAX
-                  ..................................
-                  myInstance.done (propertyNameSTR);
-                  ..................................
+                  .................................
+                  myInstance.met (propertyNameSTR);
+                  .................................
 
                 Set Multiple Conditions as Having Been Met
                   SYNTAX
-                  .....................................
-                  myInstance.done (propertyNamesARRAY);
-                  .....................................
+                  ....................................
+                  myInstance.met (propertyNamesARRAY);
+                  ....................................
 
                 NOTES
-                - see the companion =undone= instance method
+                - see the companion =unmet= instance method
                 - see the other `condition system methods`
           */
         };
 
-        _classPrototype.undone = function (_property) {
+        _classPrototype.unmet = function (_property) {
           this.set (_property,_false);
           /*?
             Instance Methods
-              undone
+              unmet
                 Sets the specified set-get property to the boolean value =false=.
 
                 SYNTAX
-                ....................................
-                myInstance.undone (propertyNameSTR);
-                ....................................
+                ...................................
+                myInstance.unmet (propertyNameSTR);
+                ...................................
 
-                The =undone= method is offered as a convenience to improve the semantics of code that is using set-get properties to represent conditions, and is a very thin wrapper around the =set= instance method. The statement =myInstance.undone ('myCondition')= is equivalent to the statement =myInstance.set ('myCondition',false)=. When using a set-get property to represent a condition, the =undone= method is a semantically elegant way to set the value of the property to =false= to indicate that the condition represented by the property is not met / no longer met.
+                The =unmet= method is offered as a convenience to improve the semantics of code that is using set-get properties to represent conditions, and is a very thin wrapper around the =set= instance method. The statement =myInstance.unmet ('myCondition')= is equivalent to the statement =myInstance.set ('myCondition',false)=. When using a set-get property to represent a condition, the =unmet= method is a semantically elegant way to set the value of the property to =false= to indicate that the condition represented by the property is not met / no longer met.
 
                 EXAMPLE
                 ..............................................
                 MyClass.prototype.die = function () {
                   // some code here to tear down the instance
-                  this.undone ('initialized');
+                  this.unmet ('initialized');
                 };
                 ..............................................
 
-                In the above example, a =die= instance method is defined for the class =MyClass=. In the method's implementation, after all the tear down steps have been performed, the =undone= method is being called to indicate that the =initialized= condition is no longer met, where =initialized= is the name of a set-get property provided in =MyClass=. It is assumed that some other method, such as an =initialize= instance method for the class, is responsible for setting the condition as having been met with a statement like =this.done ('initialized')=.
+                In the above example, a =die= instance method is defined for the class =MyClass=. In the method's implementation, after all the tear down steps have been performed, the =unmet= method is being called to indicate that the =initialized= condition is no longer met, where =initialized= is the name of a set-get property provided in =MyClass=. It is assumed that some other method, such as an =initialize= instance method for the class, is responsible for setting the condition as having been met with a statement like =this.met ('initialized')=.
 
                 NOTES
-                - see the companion =done= instance method
+                - see the companion =met= instance method
                 - see the other `condition system methods`
           */
         };

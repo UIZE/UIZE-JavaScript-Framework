@@ -73,24 +73,24 @@
 			</li>
 			<li><a href="#3">3. Instance Methods</a>
 				<ul>
-					<li><a href="#3_1" title="Sets the specified condition (or conditions) as having been met.">3.1. done</a>
+					<li><a href="#3_1" title="Lets you fire an event for an instance of the class.">3.1. fire</a></li>
+					<li><a href="#3_2" title="Lets you query the value of one of an instance&apos;s set-get properties.">3.2. get</a>
 						<ul>
-							<li><a href="#3_1_1" title="The done method is offered as a convenience to improve the semantics of code that is using set-get properties to represent conditions, and is a very thin wrapper around the set instance method. The statement myInstance.done (&apos;myCondition&apos;) is equivalent to the statement myInstance.set (&apos;myCondition&apos;,true). When using a set-get property to represent a condition, the done method is a semantically...">3.1.1. Set a Single Condition as Having Been Met</a></li>
-							<li><a href="#3_1_2" title="SYNTAX">3.1.2. Set Multiple Conditions as Having Been Met</a></li>
+							<li><a href="#3_2_1" title="In the most typical usage of the get instance method, a propertyNameSTR parameter can be specified in order to get the value of a single set-get property.">3.2.1. Get the Value of a Single Property</a></li>
+							<li><a href="#3_2_2" title="When a propertyNamesARRAY parameter is specified in place of the propertyNameSTR parameter, the values for the instance set-get properties specified in the array will be populated into an object and returned.">3.2.2. Get Values for Multiples Properties, by Specifying a Property Names Array</a></li>
+							<li><a href="#3_2_3" title="When a propertyNamesARRAY parameter is specified in place of the propertyNameSTR parameter, the values for the instance set-get properties specified in the array will be populated into an object and returned.">3.2.3. Get Values for Multiples Properties, by Specifying a Properties Object</a></li>
+							<li><a href="#3_2_4" title="When no parameter is specified, the get instance method will return an object containing values for all the set-get properties of the instance.">3.2.4. Get Values for All Properties</a></li>
 						</ul>
 					</li>
-					<li><a href="#3_2" title="Lets you fire an event for an instance of the class.">3.2. fire</a></li>
-					<li><a href="#3_3" title="Lets you query the value of one of an instance&apos;s set-get properties.">3.3. get</a>
+					<li><a href="#3_3" title="Returns a boolean, indicating whether or not the specified set-get property&apos;s value is truthy.">3.3. is</a></li>
+					<li><a href="#3_4" title="Nulls out the global variable (or property of the window object) of the name instanceId.">3.4. kill</a></li>
+					<li><a href="#3_5" title="Sets the specified condition (or conditions) as having been met.">3.5. met</a>
 						<ul>
-							<li><a href="#3_3_1" title="In the most typical usage of the get instance method, a propertyNameSTR parameter can be specified in order to get the value of a single set-get property.">3.3.1. Get the Value of a Single Property</a></li>
-							<li><a href="#3_3_2" title="When a propertyNamesARRAY parameter is specified in place of the propertyNameSTR parameter, the values for the instance set-get properties specified in the array will be populated into an object and returned.">3.3.2. Get Values for Multiples Properties, by Specifying a Property Names Array</a></li>
-							<li><a href="#3_3_3" title="When a propertyNamesARRAY parameter is specified in place of the propertyNameSTR parameter, the values for the instance set-get properties specified in the array will be populated into an object and returned.">3.3.3. Get Values for Multiples Properties, by Specifying a Properties Object</a></li>
-							<li><a href="#3_3_4" title="When no parameter is specified, the get instance method will return an object containing values for all the set-get properties of the instance.">3.3.4. Get Values for All Properties</a></li>
+							<li><a href="#3_5_1" title="The met method is offered as a convenience to improve the semantics of code that is using set-get properties to represent conditions, and is a very thin wrapper around the set instance method. The statement myInstance.met (&apos;myCondition&apos;) is equivalent to the statement myInstance.set (&apos;myCondition&apos;,true). When using a set-get property to represent a condition, the met method is a semantically el...">3.5.1. Set a Single Condition as Having Been Met</a></li>
+							<li><a href="#3_5_2" title="SYNTAX">3.5.2. Set Multiple Conditions as Having Been Met</a></li>
 						</ul>
 					</li>
-					<li><a href="#3_4" title="Returns a boolean, indicating whether or not the specified set-get property&apos;s value is truthy.">3.4. is</a></li>
-					<li><a href="#3_5" title="Nulls out the global variable (or property of the window object) of the name instanceId.">3.5. kill</a></li>
-					<li><a href="#3_6" title="Lets you register a handler that should be executed only once the value of the specified set-get property is truthy.">3.6. once</a>
+					<li><a href="#3_6" title="Lets you register a handler that should be executed only once a condition is met (ie. the value of the specified condition property is truthy).">3.6. once</a>
 						<ul>
 							<li><a href="#3_6_1" title="The once method returns a wirings object that can be supplied to the unwire method in order to unwire the handler, in the unlikely event that one may wish to remove the handler before the property&apos;s value has become truthy.">3.6.1. Return Value</a></li>
 						</ul>
@@ -109,7 +109,7 @@
 					</li>
 					<li><a href="#3_8" title="Returns a string, providing summary info for the instance on which the method is called.">3.8. toString Intrinsic Method</a></li>
 					<li><a href="#3_9" title="Toggles the value of the specified boolean instance set-get property.">3.9. toggle</a></li>
-					<li><a href="#3_10" title="Sets the specified set-get property to the boolean value false.">3.10. undone</a></li>
+					<li><a href="#3_10" title="Sets the specified set-get property to the boolean value false.">3.10. unmet</a></li>
 					<li><a href="#3_11" title="Lets you remove a handler previously wired to an instance event, or handlers wired for multiple instance events.">3.11. unwire</a></li>
 					<li><a href="#3_12" title="Returns the value of the instance&apos;s value set-get property.">3.12. valueOf Intrinsic Method</a></li>
 					<li><a href="#3_13" title="Lets you wire a handler for a specific instance event, or handlers for multiple instance events.">3.13. wire</a></li>
@@ -212,7 +212,7 @@
 					<p>The <a href="#1_1_1">event system</a> of the <code>Uize.Class</code> module is exposed through the following methods...</p>
 					
 					<table class="list">
-					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#3_2">fire</a></code> - fires an event on an instance</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#3_1">fire</a></code> - fires an event on an instance</td></tr>
 					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#3_11">unwire</a></code> - unwires handlers for one or more events on an instance</td></tr>
 					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#3_13">wire</a></code> - wires handlers for one or more events on an instance</td></tr>
 					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#4_1">Uize.Class.fire</a></code> - fires an event on a class</td></tr>
@@ -235,10 +235,10 @@
 					<p>The <a href="#1_1_2">condition system</a> of the <code>Uize.Class</code> module is exposed through the following methods...</p>
 					
 					<table class="list">
-					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#3_4">is</a></code> - returns whether or not a condition has been met</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#3_3">is</a></code> - returns whether or not a condition has been met</td></tr>
 					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#3_6">once</a></code> - registers code that is to be executed once a condition has been met</td></tr>
-					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#3_1">done</a></code> - sets a condition as having been met</td></tr>
-					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#3_10">undone</a></code> - sets a condition as having not been met / no longer being met</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#3_5">met</a></code> - sets a condition as having been met</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code><a href="#3_10">unmet</a></code> - sets a condition as having not been met / no longer being met</td></tr>
 					</table>
 				</div>
 			</div>
@@ -390,7 +390,7 @@ var Food = Uize.noNew (
 				
 				<p><span class="allCaps">INSTANCE METHODS</span></p>
 				
-				<p><code><a href="#3_1">done</a></code> | <code><a href="#3_2">fire</a></code> | <code><a href="#3_3">get</a></code> | <code><a href="#3_4">is</a></code> | <code><a href="#3_5">kill</a></code> | <code><a href="#3_6">once</a></code> | <code><a href="#3_7">set</a></code> | <code><a href="#3_9">toggle</a></code> | <code><a href="#3_10">undone</a></code> | <code><a href="#3_11">unwire</a></code> | <code><a href="#3_13">wire</a></code></p>
+				<p><code><a href="#3_1">fire</a></code> | <code><a href="#3_2">get</a></code> | <code><a href="#3_3">is</a></code> | <code><a href="#3_4">kill</a></code> | <code><a href="#3_5">met</a></code> | <code><a href="#3_6">once</a></code> | <code><a href="#3_7">set</a></code> | <code><a href="#3_9">toggle</a></code> | <code><a href="#3_10">unmet</a></code> | <code><a href="#3_11">unwire</a></code> | <code><a href="#3_13">wire</a></code></p>
 				
 				<p><span class="allCaps">STATIC METHODS</span></p>
 				
@@ -490,81 +490,7 @@ MyClass.prototype.insertButton = function () {
 	<h1 class="heading1" title="3. Instance Methods"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>. </span>Instance Methods</h1>
 	<div class="contents1">
 		<a name="3_1"></a>
-		<h2 class="heading2" title="3. Instance Methods -&gt; 3.1. done"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_1" title="3. Instance Methods -&gt; 3.1. done">1</a>. </span>done</h2>
-		<div class="contents2">
-			<p>Sets the specified condition (or conditions) as having been met.</p>
-			
-			<p><span class="allCaps">DIFFERENT USAGES</span></p>
-			
-			<p><a href="#3_1_1">Set a Single Condition as Having Been Met</a></p>
-			
-			
-<pre class="sample-code">myInstance.done (propertyNameSTR);
-</pre>
-			
-			<p><a href="#3_1_2">Set Multiple Conditions as Having Been Met</a></p>
-			
-			
-<pre class="sample-code">myInstance.done (propertyNamesARRAY);
-</pre>
-			
-			<a name="3_1_1"></a>
-			<h3 class="heading3" title="3. Instance Methods -&gt; 3.1. done -&gt; 3.1.1. Set a Single Condition as Having Been Met"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_1" title="3. Instance Methods -&gt; 3.1. done">1</a>.<a href="#3_1_1" title="3. Instance Methods -&gt; 3.1. done -&gt; 3.1.1. Set a Single Condition as Having Been Met">1</a>. </span>Set a Single Condition as Having Been Met</h3>
-			<div class="contents3">
-				<p>The <code><a href="#3_1">done</a></code> method is offered as a convenience to improve the semantics of code that is using set-get properties to represent conditions, and is a very thin wrapper around the <code><a href="#3_7">set</a></code> instance method. The statement <code>myInstance.done ('myCondition')</code> is equivalent to the statement <code>myInstance.set ('myCondition',true)</code>. When using a set-get property to represent a condition, the <code><a href="#3_1">done</a></code> method is a semantically elegant way to set the value of the property to <code>true</code> to indicate that the condition represented by the property has been met.</p>
-				
-				<p><span class="allCaps">EXAMPLE</span></p>
-				
-				
-<pre class="sample-code">MyClass.prototype.initialize = function () {
-  // some code here to do the initialization
-  this.done ('initialized');
-};
-</pre>
-				
-				<p>In the above example, an <code>initialize</code> instance method is defined for the class <code>MyClass</code>. In the method's implementation, after all the initialization has been performed, the <code><a href="#3_1">done</a></code> method is being called to indicate that the <code>initialized</code> condition has been met, where <code>initialized</code> is the name of a set-get property provided in <code>MyClass</code>. Now, other code can be registered to be executed only once an instance has been initialized by using the <code><a href="#3_6">once</a></code> instance method, as follows...</p>
-				
-				
-<pre class="sample-code">myInstance.once (
-  'initialized',
-  function () {
-    // do some stuff once the instance has been initialized
-  }
-);
-</pre>
-				
-				<p><span class="allCaps">SYNTAX</span></p>
-				
-				
-<pre class="sample-code">myInstance.done (propertyNameSTR);
-</pre>
-			</div>
-			
-			<a name="3_1_2"></a>
-			<h3 class="heading3" title="3. Instance Methods -&gt; 3.1. done -&gt; 3.1.2. Set Multiple Conditions as Having Been Met"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_1" title="3. Instance Methods -&gt; 3.1. done">1</a>.<a href="#3_1_2" title="3. Instance Methods -&gt; 3.1. done -&gt; 3.1.2. Set Multiple Conditions as Having Been Met">2</a>. </span>Set Multiple Conditions as Having Been Met</h3>
-			<div class="contents3">
-				<p><span class="allCaps">SYNTAX</span></p>
-				
-				
-<pre class="sample-code">myInstance.done (propertyNamesARRAY);
-</pre>
-			</div>
-			
-			<p><span class="allCaps">NOTES</span></p>
-			
-			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#3_10">undone</a></code> instance method</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the other <a href="#1_1_2_1">condition system methods</a></td></tr>
-			</table>
-			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
-			
-			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
-			</table>
-		</div>
-		
-		<a name="3_2"></a>
-		<h2 class="heading2" title="3. Instance Methods -&gt; 3.2. fire"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_2" title="3. Instance Methods -&gt; 3.2. fire">2</a>. </span>fire</h2>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.1. fire"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_1" title="3. Instance Methods -&gt; 3.1. fire">1</a>. </span>fire</h2>
 		<div class="contents2">
 			<p>Lets you fire an event for an instance of the class.</p>
 			
@@ -595,41 +521,41 @@ MyClass.prototype.insertButton = function () {
 			</table>
 		</div>
 		
-		<a name="3_3"></a>
-		<h2 class="heading2" title="3. Instance Methods -&gt; 3.3. get"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_3" title="3. Instance Methods -&gt; 3.3. get">3</a>. </span>get</h2>
+		<a name="3_2"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.2. get"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_2" title="3. Instance Methods -&gt; 3.2. get">2</a>. </span>get</h2>
 		<div class="contents2">
 			<p>Lets you query the value of one of an instance's set-get properties.</p>
 			
 			<p><span class="allCaps">DIFFERENT USAGES</span></p>
 			
-			<p><a href="#3_3_1">Get the Value of a Single Property</a></p>
+			<p><a href="#3_2_1">Get the Value of a Single Property</a></p>
 			
 			
 <pre class="sample-code">propertyValueANYTYPE = myInstance.get (propertyNameSTR);
 </pre>
 			
-			<p><a href="#3_3_2">Get Values for Multiples Properties, by Specifying a Property Names Array</a></p>
+			<p><a href="#3_2_2">Get Values for Multiples Properties, by Specifying a Property Names Array</a></p>
 			
 			
 <pre class="sample-code">propertyValuesOBJ = myInstance.get (propertyNamesARRAY);
 </pre>
 			
-			<p><a href="#3_3_3">Get Values for Multiples Properties, by Specifying a Properties Object</a></p>
+			<p><a href="#3_2_3">Get Values for Multiples Properties, by Specifying a Properties Object</a></p>
 			
 			
 <pre class="sample-code">propertyValuesOBJ = myInstance.get (propertiesOBJ);
 </pre>
 			
-			<p><a href="#3_3_4">Get Values for All Properties</a></p>
+			<p><a href="#3_2_4">Get Values for All Properties</a></p>
 			
 			
 <pre class="sample-code">allPropertyValuesOBJ = myInstance.get ();
 </pre>
 			
-			<a name="3_3_1"></a>
-			<h3 class="heading3" title="3. Instance Methods -&gt; 3.3. get -&gt; 3.3.1. Get the Value of a Single Property"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_3" title="3. Instance Methods -&gt; 3.3. get">3</a>.<a href="#3_3_1" title="3. Instance Methods -&gt; 3.3. get -&gt; 3.3.1. Get the Value of a Single Property">1</a>. </span>Get the Value of a Single Property</h3>
+			<a name="3_2_1"></a>
+			<h3 class="heading3" title="3. Instance Methods -&gt; 3.2. get -&gt; 3.2.1. Get the Value of a Single Property"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_2" title="3. Instance Methods -&gt; 3.2. get">2</a>.<a href="#3_2_1" title="3. Instance Methods -&gt; 3.2. get -&gt; 3.2.1. Get the Value of a Single Property">1</a>. </span>Get the Value of a Single Property</h3>
 			<div class="contents3">
-				<p>In the most typical usage of the <code><a href="#3_3">get</a></code> instance method, a <code>propertyNameSTR</code> parameter can be specified in order to get the value of a single set-get property.</p>
+				<p>In the most typical usage of the <code><a href="#3_2">get</a></code> instance method, a <code>propertyNameSTR</code> parameter can be specified in order to get the value of a single set-get property.</p>
 				
 				<p><span class="allCaps">SYNTAX</span></p>
 				
@@ -650,8 +576,8 @@ alert (mySlider.get ('value')); // alerts the text "57
 </pre>
 			</div>
 			
-			<a name="3_3_2"></a>
-			<h3 class="heading3" title="3. Instance Methods -&gt; 3.3. get -&gt; 3.3.2. Get Values for Multiples Properties, by Specifying a Property Names Array"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_3" title="3. Instance Methods -&gt; 3.3. get">3</a>.<a href="#3_3_2" title="3. Instance Methods -&gt; 3.3. get -&gt; 3.3.2. Get Values for Multiples Properties, by Specifying a Property Names Array">2</a>. </span>Get Values for Multiples Properties, by Specifying a Property Names Array</h3>
+			<a name="3_2_2"></a>
+			<h3 class="heading3" title="3. Instance Methods -&gt; 3.2. get -&gt; 3.2.2. Get Values for Multiples Properties, by Specifying a Property Names Array"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_2" title="3. Instance Methods -&gt; 3.2. get">2</a>.<a href="#3_2_2" title="3. Instance Methods -&gt; 3.2. get -&gt; 3.2.2. Get Values for Multiples Properties, by Specifying a Property Names Array">2</a>. </span>Get Values for Multiples Properties, by Specifying a Property Names Array</h3>
 			<div class="contents3">
 				<p>When a <code>propertyNamesARRAY</code> parameter is specified in place of the <code>propertyNameSTR</code> parameter, the values for the instance set-get properties specified in the array will be populated into an object and returned.</p>
 				
@@ -674,8 +600,8 @@ sliderValueAndRange = mySlider.get (['minValue','maxValue','value']);
 				<p>After the above code has been executed, the <code>sliderValueAndRange</code> variable would have the value <code>{minValue:0,maxValue:100,value:57}</code>.</p>
 			</div>
 			
-			<a name="3_3_3"></a>
-			<h3 class="heading3" title="3. Instance Methods -&gt; 3.3. get -&gt; 3.3.3. Get Values for Multiples Properties, by Specifying a Properties Object"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_3" title="3. Instance Methods -&gt; 3.3. get">3</a>.<a href="#3_3_3" title="3. Instance Methods -&gt; 3.3. get -&gt; 3.3.3. Get Values for Multiples Properties, by Specifying a Properties Object">3</a>. </span>Get Values for Multiples Properties, by Specifying a Properties Object</h3>
+			<a name="3_2_3"></a>
+			<h3 class="heading3" title="3. Instance Methods -&gt; 3.2. get -&gt; 3.2.3. Get Values for Multiples Properties, by Specifying a Properties Object"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_2" title="3. Instance Methods -&gt; 3.2. get">2</a>.<a href="#3_2_3" title="3. Instance Methods -&gt; 3.2. get -&gt; 3.2.3. Get Values for Multiples Properties, by Specifying a Properties Object">3</a>. </span>Get Values for Multiples Properties, by Specifying a Properties Object</h3>
 			<div class="contents3">
 				<p>When a <code>propertyNamesARRAY</code> parameter is specified in place of the <code>propertyNameSTR</code> parameter, the values for the instance set-get properties specified in the array will be populated into an object and returned.</p>
 				
@@ -698,10 +624,10 @@ sliderValueAndRange = mySlider.get ({minValue:0,maxValue:0,value:0});
 				<p>After the above code has been executed, the <code>sliderValueAndRange</code> variable would have the value <code>{minValue:0,maxValue:100,value:57}</code>. The values of the properties in the properties object, as specified by the <code>propertiesOBJ</code> parameter, are immaterial - for whatever properties exist in the object, the values for the corresponding set-get properties of the instance will be returned.</p>
 			</div>
 			
-			<a name="3_3_4"></a>
-			<h3 class="heading3" title="3. Instance Methods -&gt; 3.3. get -&gt; 3.3.4. Get Values for All Properties"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_3" title="3. Instance Methods -&gt; 3.3. get">3</a>.<a href="#3_3_4" title="3. Instance Methods -&gt; 3.3. get -&gt; 3.3.4. Get Values for All Properties">4</a>. </span>Get Values for All Properties</h3>
+			<a name="3_2_4"></a>
+			<h3 class="heading3" title="3. Instance Methods -&gt; 3.2. get -&gt; 3.2.4. Get Values for All Properties"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_2" title="3. Instance Methods -&gt; 3.2. get">2</a>.<a href="#3_2_4" title="3. Instance Methods -&gt; 3.2. get -&gt; 3.2.4. Get Values for All Properties">4</a>. </span>Get Values for All Properties</h3>
 			<div class="contents3">
-				<p>When no parameter is specified, the <code><a href="#3_3">get</a></code> instance method will return an object containing values for all the set-get properties of the instance.</p>
+				<p>When no parameter is specified, the <code><a href="#3_2">get</a></code> instance method will return an object containing values for all the set-get properties of the instance.</p>
 				
 				<p><span class="allCaps">SYNTAX</span></p>
 				
@@ -717,7 +643,7 @@ sliderValueAndRange = mySlider.get ({minValue:0,maxValue:0,value:0});
 <pre class="sample-code">copyOfMyFade = Uize.Fade (myFade.get ());
 </pre>
 				
-				<p>In this example, an instance of the class <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> is being created by passing the constructor all the set-get property values obtained from the <code>myFade</code> instance using the <code><a href="#3_3">get</a></code> method. The new instance created will then have the same state as the <code>myFade</code> instance.</p>
+				<p>In this example, an instance of the class <code><a href="../reference/Uize.Fade.html">Uize.Fade</a></code> is being created by passing the constructor all the set-get property values obtained from the <code>myFade</code> instance using the <code><a href="#3_2">get</a></code> method. The new instance created will then have the same state as the <code>myFade</code> instance.</p>
 			</div>
 			
 			<p><span class="allCaps">NOTES</span></p>
@@ -733,8 +659,8 @@ sliderValueAndRange = mySlider.get ({minValue:0,maxValue:0,value:0});
 			</table>
 		</div>
 		
-		<a name="3_4"></a>
-		<h2 class="heading2" title="3. Instance Methods -&gt; 3.4. is"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_4" title="3. Instance Methods -&gt; 3.4. is">4</a>. </span>is</h2>
+		<a name="3_3"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.3. is"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_3" title="3. Instance Methods -&gt; 3.3. is">3</a>. </span>is</h2>
 		<div class="contents2">
 			<p>Returns a boolean, indicating whether or not the specified set-get property's value is truthy.</p>
 			
@@ -744,7 +670,7 @@ sliderValueAndRange = mySlider.get ({minValue:0,maxValue:0,value:0});
 <pre class="sample-code">myInstance.is (propertyNameSTR);
 </pre>
 			
-			<p>The <code><a href="#3_4">is</a></code> method is offered as a convenience to improve the semantics of code that is using set-get properties to represent conditions, and is a very thin wrapper around the <code><a href="#3_3">get</a></code> instance method. The statement <code>myInstance.is ('myCondition')</code> is equivalent to the statement <code>!!myInstance.get ('myCondition')</code>.</p>
+			<p>The <code><a href="#3_3">is</a></code> method is offered as a convenience to improve the semantics of code that is using set-get properties to represent conditions, and is a very thin wrapper around the <code><a href="#3_2">get</a></code> instance method. The statement <code>myInstance.is ('myCondition')</code> is equivalent to the statement <code>!!myInstance.get ('myCondition')</code>.</p>
 			
 			<p><span class="allCaps">EXAMPLE</span></p>
 			
@@ -754,7 +680,7 @@ sliderValueAndRange = mySlider.get ({minValue:0,maxValue:0,value:0});
 }
 </pre>
 			
-			<p>In the above example, some code is being executed conditionally, based upon whether or not a widget is enabled. The <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> base class provides an <code>enabled</code> set-get property, whose value is a boolean. One could use the <code><a href="#3_3">get</a></code> method in this code example to achieve the same effect, but using the <code><a href="#3_4">is</a></code> method make the code more readable.</p>
+			<p>In the above example, some code is being executed conditionally, based upon whether or not a widget is enabled. The <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> base class provides an <code>enabled</code> set-get property, whose value is a boolean. One could use the <code><a href="#3_2">get</a></code> method in this code example to achieve the same effect, but using the <code><a href="#3_3">is</a></code> method make the code more readable.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
@@ -768,8 +694,8 @@ sliderValueAndRange = mySlider.get ({minValue:0,maxValue:0,value:0});
 			</table>
 		</div>
 		
-		<a name="3_5"></a>
-		<h2 class="heading2" title="3. Instance Methods -&gt; 3.5. kill"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_5" title="3. Instance Methods -&gt; 3.5. kill">5</a>. </span>kill</h2>
+		<a name="3_4"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.4. kill"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_4" title="3. Instance Methods -&gt; 3.4. kill">4</a>. </span>kill</h2>
 		<div class="contents2">
 			<p>Nulls out the global variable (or property of the <code>window</code> object) of the name <code><a href="#2_2">instanceId</a></code>.</p>
 			
@@ -782,10 +708,84 @@ sliderValueAndRange = mySlider.get ({minValue:0,maxValue:0,value:0});
 			</table>
 		</div>
 		
+		<a name="3_5"></a>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.5. met"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_5" title="3. Instance Methods -&gt; 3.5. met">5</a>. </span>met</h2>
+		<div class="contents2">
+			<p>Sets the specified condition (or conditions) as having been met.</p>
+			
+			<p><span class="allCaps">DIFFERENT USAGES</span></p>
+			
+			<p><a href="#3_5_1">Set a Single Condition as Having Been Met</a></p>
+			
+			
+<pre class="sample-code">myInstance.met (propertyNameSTR);
+</pre>
+			
+			<p><a href="#3_5_2">Set Multiple Conditions as Having Been Met</a></p>
+			
+			
+<pre class="sample-code">myInstance.met (propertyNamesARRAY);
+</pre>
+			
+			<a name="3_5_1"></a>
+			<h3 class="heading3" title="3. Instance Methods -&gt; 3.5. met -&gt; 3.5.1. Set a Single Condition as Having Been Met"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_5" title="3. Instance Methods -&gt; 3.5. met">5</a>.<a href="#3_5_1" title="3. Instance Methods -&gt; 3.5. met -&gt; 3.5.1. Set a Single Condition as Having Been Met">1</a>. </span>Set a Single Condition as Having Been Met</h3>
+			<div class="contents3">
+				<p>The <code><a href="#3_5">met</a></code> method is offered as a convenience to improve the semantics of code that is using set-get properties to represent conditions, and is a very thin wrapper around the <code><a href="#3_7">set</a></code> instance method. The statement <code>myInstance.met ('myCondition')</code> is equivalent to the statement <code>myInstance.set ('myCondition',true)</code>. When using a set-get property to represent a condition, the <code><a href="#3_5">met</a></code> method is a semantically elegant way to set the value of the property to <code>true</code> to indicate that the condition represented by the property has been met.</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">MyClass.prototype.initialize = function () {
+  // some code here to do the initialization
+  this.met ('initialized');
+};
+</pre>
+				
+				<p>In the above example, an <code>initialize</code> instance method is defined for the class <code>MyClass</code>. In the method's implementation, after all the initialization has been performed, the <code><a href="#3_5">met</a></code> method is being called to indicate that the <code>initialized</code> condition has been met, where <code>initialized</code> is the name of a set-get property provided in <code>MyClass</code>. Now, other code can be registered to be executed only once an instance has been initialized by using the <code><a href="#3_6">once</a></code> instance method, as follows...</p>
+				
+				
+<pre class="sample-code">myInstance.once (
+  'initialized',
+  function () {
+    // do some stuff once the instance has been initialized
+  }
+);
+</pre>
+				
+				<p><span class="allCaps">SYNTAX</span></p>
+				
+				
+<pre class="sample-code">myInstance.met (propertyNameSTR);
+</pre>
+			</div>
+			
+			<a name="3_5_2"></a>
+			<h3 class="heading3" title="3. Instance Methods -&gt; 3.5. met -&gt; 3.5.2. Set Multiple Conditions as Having Been Met"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_5" title="3. Instance Methods -&gt; 3.5. met">5</a>.<a href="#3_5_2" title="3. Instance Methods -&gt; 3.5. met -&gt; 3.5.2. Set Multiple Conditions as Having Been Met">2</a>. </span>Set Multiple Conditions as Having Been Met</h3>
+			<div class="contents3">
+				<p><span class="allCaps">SYNTAX</span></p>
+				
+				
+<pre class="sample-code">myInstance.met (propertyNamesARRAY);
+</pre>
+			</div>
+			
+			<p><span class="allCaps">NOTES</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#3_10">unmet</a></code> instance method</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the other <a href="#1_1_2_1">condition system methods</a></td></tr>
+			</table>
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this feature was introduced in this module</td></tr>
+			</table>
+		</div>
+		
 		<a name="3_6"></a>
 		<h2 class="heading2" title="3. Instance Methods -&gt; 3.6. once"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_6" title="3. Instance Methods -&gt; 3.6. once">6</a>. </span>once</h2>
 		<div class="contents2">
-			<p>Lets you register a handler that should be executed only once the value of the specified set-get property is truthy.</p>
+			<p>Lets you register a handler that should be executed only once a condition is met (ie. the value of the specified condition property is truthy).</p>
 			
 			<p><span class="allCaps">SYNTAX</span></p>
 			
@@ -996,7 +996,7 @@ myInstance.set ({
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#3_3">get</a></code> instance method</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#3_2">get</a></code> instance method</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#4_2">Uize.Class.get</a></code> and <code><a href="#4_4">Uize.Class.set</a></code> static methods</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -1109,33 +1109,33 @@ myInstance.set ({myProperty:!myInstance.get ('myProperty')});
 		</div>
 		
 		<a name="3_10"></a>
-		<h2 class="heading2" title="3. Instance Methods -&gt; 3.10. undone"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_10" title="3. Instance Methods -&gt; 3.10. undone">10</a>. </span>undone</h2>
+		<h2 class="heading2" title="3. Instance Methods -&gt; 3.10. unmet"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_10" title="3. Instance Methods -&gt; 3.10. unmet">10</a>. </span>unmet</h2>
 		<div class="contents2">
 			<p>Sets the specified set-get property to the boolean value <code>false</code>.</p>
 			
 			<p><span class="allCaps">SYNTAX</span></p>
 			
 			
-<pre class="sample-code">myInstance.undone (propertyNameSTR);
+<pre class="sample-code">myInstance.unmet (propertyNameSTR);
 </pre>
 			
-			<p>The <code><a href="#3_10">undone</a></code> method is offered as a convenience to improve the semantics of code that is using set-get properties to represent conditions, and is a very thin wrapper around the <code><a href="#3_7">set</a></code> instance method. The statement <code>myInstance.undone ('myCondition')</code> is equivalent to the statement <code>myInstance.set ('myCondition',false)</code>. When using a set-get property to represent a condition, the <code><a href="#3_10">undone</a></code> method is a semantically elegant way to set the value of the property to <code>false</code> to indicate that the condition represented by the property is not met / no longer met.</p>
+			<p>The <code><a href="#3_10">unmet</a></code> method is offered as a convenience to improve the semantics of code that is using set-get properties to represent conditions, and is a very thin wrapper around the <code><a href="#3_7">set</a></code> instance method. The statement <code>myInstance.unmet ('myCondition')</code> is equivalent to the statement <code>myInstance.set ('myCondition',false)</code>. When using a set-get property to represent a condition, the <code><a href="#3_10">unmet</a></code> method is a semantically elegant way to set the value of the property to <code>false</code> to indicate that the condition represented by the property is not met / no longer met.</p>
 			
 			<p><span class="allCaps">EXAMPLE</span></p>
 			
 			
 <pre class="sample-code">MyClass.prototype.die = function () {
   // some code here to tear down the instance
-  this.undone ('initialized');
+  this.unmet ('initialized');
 };
 </pre>
 			
-			<p>In the above example, a <code>die</code> instance method is defined for the class <code>MyClass</code>. In the method's implementation, after all the tear down steps have been performed, the <code><a href="#3_10">undone</a></code> method is being called to indicate that the <code>initialized</code> condition is no longer met, where <code>initialized</code> is the name of a set-get property provided in <code>MyClass</code>. It is assumed that some other method, such as an <code>initialize</code> instance method for the class, is responsible for setting the condition as having been met with a statement like <code>this.done ('initialized')</code>.</p>
+			<p>In the above example, a <code>die</code> instance method is defined for the class <code>MyClass</code>. In the method's implementation, after all the tear down steps have been performed, the <code><a href="#3_10">unmet</a></code> method is being called to indicate that the <code>initialized</code> condition is no longer met, where <code>initialized</code> is the name of a set-get property provided in <code>MyClass</code>. It is assumed that some other method, such as an <code>initialize</code> instance method for the class, is responsible for setting the condition as having been met with a statement like <code>this.met ('initialized')</code>.</p>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#3_1">done</a></code> instance method</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#3_5">met</a></code> instance method</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the other <a href="#1_1_2_1">condition system methods</a></td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -1175,7 +1175,7 @@ myInstance.set ({myProperty:!myInstance.get ('myProperty')});
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#3_2">fire</a></code> and <code><a href="#3_13">wire</a></code> instance methods</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#3_1">fire</a></code> and <code><a href="#3_13">wire</a></code> instance methods</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#4_1">Uize.Class.fire</a></code>, <code><a href="#4_11">Uize.Class.wire</a></code>, and <code><a href="#4_9">Uize.Class.unwire</a></code> static methods</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -1258,7 +1258,7 @@ markedUpPrice = price * (1 + page.children.markupPercentSlider / 100);
 <pre class="sample-code">myInstance.wire (eventNameSTR,eventHandlerSTRorFNorOBJ);
 </pre>
 			
-			<p>Event handlers registered using this method will handle events fired for the instance using the <code><a href="#3_2">fire</a></code> instance method, and not those events fired using the <code><a href="#4_1">Uize.Class.fire</a></code> static method. A <code>Uize.Class</code> subclass may not provide any instance events, so you should consult the reference documentation for a class to learn more about its suite of events. Handlers specified by the <code><a href="#5_1">eventHandlerSTRorFNorOBJ</a></code> parameter may be of string, function, or object type.</p>
+			<p>Event handlers registered using this method will handle events fired for the instance using the <code><a href="#3_1">fire</a></code> instance method, and not those events fired using the <code><a href="#4_1">Uize.Class.fire</a></code> static method. A <code>Uize.Class</code> subclass may not provide any instance events, so you should consult the reference documentation for a class to learn more about its suite of events. Handlers specified by the <code><a href="#5_1">eventHandlerSTRorFNorOBJ</a></code> parameter may be of string, function, or object type.</p>
 			
 			<p><span class="allCaps">EXAMPLE</span></p>
 			
@@ -1298,7 +1298,7 @@ markedUpPrice = price * (1 + page.children.markupPercentSlider / 100);
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#3_2">fire</a></code> and <code><a href="#3_11">unwire</a></code> instance methods</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#3_1">fire</a></code> and <code><a href="#3_11">unwire</a></code> instance methods</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#4_1">Uize.Class.fire</a></code>, <code><a href="#4_11">Uize.Class.wire</a></code>, and <code><a href="#4_9">Uize.Class.unwire</a></code> static methods</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -1335,7 +1335,7 @@ markedUpPrice = price * (1 + page.children.markupPercentSlider / 100);
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#4_11">Uize.Class.wire</a></code> and <code><a href="#4_9">Uize.Class.unwire</a></code> static methods</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#3_2">fire</a></code>, <code><a href="#3_13">wire</a></code>, and <code><a href="#3_11">unwire</a></code> instance methods</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#3_1">fire</a></code>, <code><a href="#3_13">wire</a></code>, and <code><a href="#3_11">unwire</a></code> instance methods</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -1374,7 +1374,7 @@ markedUpPrice = price * (1 + page.children.markupPercentSlider / 100);
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#4_4">Uize.Class.set</a></code> static method</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#3_3">get</a></code> and <code><a href="#3_7">set</a></code> instance methods</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#3_2">get</a></code> and <code><a href="#3_7">set</a></code> instance methods</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -1594,7 +1594,7 @@ MyClass.set ({
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the companion <code><a href="#4_2">Uize.Class.get</a></code> static method</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#3_3">get</a></code> and <code><a href="#3_7">set</a></code> instance methods</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#3_2">get</a></code> and <code><a href="#3_7">set</a></code> instance methods</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -1798,7 +1798,7 @@ Uize.Class.set ({myProperty:!Uize.Class.get ('myProperty')});
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#4_1">Uize.Class.fire</a></code> and <code><a href="#4_11">Uize.Class.wire</a></code> static methods</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#3_2">fire</a></code>, <code><a href="#3_13">wire</a></code>, and <code><a href="#3_11">unwire</a></code> instance methods</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#3_1">fire</a></code>, <code><a href="#3_13">wire</a></code>, and <code><a href="#3_11">unwire</a></code> instance methods</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -1841,7 +1841,7 @@ Uize.Class.set ({myProperty:!Uize.Class.get ('myProperty')});
 <pre class="sample-code">MyClass.wire (eventNameSTR,eventHandlerSTRorFNorOBJ);
 </pre>
 			
-			<p>Event handlers registered using this method will handle events fired for the class using the <code><a href="#4_1">Uize.Class.fire</a></code> static method, and not those events fired using the <code><a href="#3_2">fire</a></code> instance method. A <code>Uize.Class</code> subclass may not provide any static events, so you should consult the reference documentation for a class to learn more about its suite of events. Handlers specified by the <code><a href="#5_1">eventHandlerSTRorFNorOBJ</a></code> parameter may be of string, function, or object type.</p>
+			<p>Event handlers registered using this method will handle events fired for the class using the <code><a href="#4_1">Uize.Class.fire</a></code> static method, and not those events fired using the <code><a href="#3_1">fire</a></code> instance method. A <code>Uize.Class</code> subclass may not provide any static events, so you should consult the reference documentation for a class to learn more about its suite of events. Handlers specified by the <code><a href="#5_1">eventHandlerSTRorFNorOBJ</a></code> parameter may be of string, function, or object type.</p>
 			
 			<p><span class="allCaps">VARIATION</span></p>
 			
@@ -1860,7 +1860,7 @@ Uize.Class.set ({myProperty:!Uize.Class.get ('myProperty')});
 			
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see the related <code><a href="#4_1">Uize.Class.fire</a></code> and <code><a href="#4_9">Uize.Class.unwire</a></code> static methods</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#3_2">fire</a></code>, <code><a href="#3_13">wire</a></code>, and <code><a href="#3_11">unwire</a></code> instance methods</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>compare to the <code><a href="#3_1">fire</a></code>, <code><a href="#3_13">wire</a></code>, and <code><a href="#3_11">unwire</a></code> instance methods</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
