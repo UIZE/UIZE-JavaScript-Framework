@@ -666,6 +666,25 @@ Uize.module ({
           },
           {
             title:
+              'Test that the same value can be set for multiple properties by specifying the names of the properties in an array for the first argument and the value that all the properties should be set to as the second argument',
+            test:function () {
+              var _Subclass = Uize.Class.subclass ();
+              _Subclass.registerProperties ({
+                property1:{},
+                property2:{},
+                property3:{}
+              });
+              var _testContext = _isInstance ? new _Subclass : _Subclass;
+              _testContext.set (['property1','property2','property3'],'valueForAllProperties');
+              return (
+                this.expect ('valueForAllProperties',_testContext.get ('property1')) &amp;&amp;
+                this.expect ('valueForAllProperties',_testContext.get ('property2')) &amp;&amp;
+                this.expect ('valueForAllProperties',_testContext.get ('property3'))
+              );
+            }
+          },
+          {
+            title:
               'Test that, when a private name for a set-get property is different from its publice name, the set method sets a value for a property using the private name of the set-get property and not its public name',
             test:function () {
               var _Subclass = Uize.Class.subclass ();

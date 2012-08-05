@@ -1,0 +1,84 @@
+Setting of set-get properties has been improved with convenient new variations for the =set= instance method and the =Uize.Class.set= static method, implemented in the =Uize.Class= base class module.
+
+The new variation for both the =set= and =Uize.Class.set= methods provides a convenient way to set the same value or initial value, respectively, for multiple properties. Because this improvement is implemented in the =Uize.Class= base class module, the benefit is conferred upon all =Uize.Class= subclasses, which means all UIZE widgets and other class modules.
+
+Set the Same Value for Multiple Properties
+	The same value can be set for multiple set-get properties by specifying the names of the properties that should all be set to the same value in a =propertyNamesARRAY= parameter, and by specifying the value they should all be set to in a =propertyValueANYTYPE= parameter.
+
+	SYNTAX
+	.........................................................
+	myInstance.set (propertyNamesARRAY,propertyValueANYTYPE);
+	.........................................................
+
+	EXAMPLE
+	..............................................................
+	myWidget.set (['initialized','ready','enabled','busy'],false);
+	..............................................................
+
+	In the above example, the properties =initialized=, =ready=, =enabled=, and =busy= of a widget instance are all being set to =false=.
+
+	This variation of the =set= method can be useful in cases where you wish to set a good number of properties to the same value and where it would be more concise to use this form, or in cases where you are receiving an array of properties that should be set to some desired value. This variation can also be convenient when the value that you wish to set multiple properties to is the result of an expression and where you would otherwise need to create a local variable in order to avoid recalculating the expression for each property.
+
+	INSTEAD OF...
+	.......................................................................................
+	var initValue = env.config.hasOwnProperty ('initValue') ? env.config.initValue : false;
+	myInstance.set ({
+		foo:initValue,
+		bar:initValue,
+		baz:initValue
+	});
+	.......................................................................................
+
+	USE...
+	.........................................................................
+	myInstance.set (
+		['foo','bar','baz'],
+		env.config.hasOwnProperty ('initValue') ? env.config.initValue : false
+	);
+	.........................................................................
+
+Set the Same Initial Value for Multiple Properties
+	The same initial value can be set for multiple set-get properties by specifying the names of the properties whose initial values should all be set to the same value in a =propertyNamesARRAY= parameter, and by specifying the initial value that should be set for them all in a =propertyValueANYTYPE= parameter.
+
+	SYNTAX
+	......................................................
+	MyClass.set (propertyNamesARRAY,propertyValueANYTYPE);
+	......................................................
+
+	EXAMPLE
+	...................................................................
+	MyWidgetClass.set (['initialized','ready','enabled','busy'],false);
+	...................................................................
+
+	In the above example, the initial value for the properties =initialized=, =ready=, =enabled=, and =busy= of a widget class is being set to =false=.
+
+	This variation of the =Uize.Class.set= method can be useful in cases where you wish to set the initial value for a good number of properties to the same value and where it would be more concise to use this form, or in cases where you are receiving an array of properties whose initial values should all be set to some desired value. This variation can also be convenient when the initial value that you wish to set for multiple properties is the result of an expression and where you would otherwise need to create a local variable in order to avoid recalculating the expression for each property.
+
+	INSTEAD OF...
+	.......................................................................................
+	var initValue = env.config.hasOwnProperty ('initValue') ? env.config.initValue : false;
+	MyClass.set ({
+		foo:initValue,
+		bar:initValue,
+		baz:initValue
+	});
+	.......................................................................................
+
+	USE...
+	.........................................................................
+	MyClass.set (
+		['foo','bar','baz'],
+		env.config.hasOwnProperty ('initValue') ? env.config.initValue : false
+	);
+	.........................................................................
+
+Full Documentation and Unit Tests
+	The new variations of the =set= instance method and =Uize.Class.set= static method are comprehensively documented and unit tested.
+
+	In addition, the documentation for these methods has been improved in general, with better documentation and examples provided for all variations of these methods.
+
+....................................................................................
+<< metadata >>
+
+title: 2012-08-04 - Improved Setting of Set-get Properties
+....................................................................................

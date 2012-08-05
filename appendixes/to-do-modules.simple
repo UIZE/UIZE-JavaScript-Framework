@@ -611,19 +611,49 @@ Uize.Array
 Uize.Class
 	Conditions
 		Possible Methods
-			once
-			is
-			done
-			undone
-			waitingOn
+			need & provide
 
-			need
-			provide
-			hasProvider
+				IMPLEMENTATION
+				..............................
+				_classPrototype.need = function (_property,_needer) {
+					this.done ('Needed:' + _property);
+					this.once (_property,_needer);
+					/*?
+						Instance Methods
+							need
 
-			onceNeeded
-			onceProvided
-			needed
+								SYNTAX
+								.............................................
+								myInstance.need (propertyNameSTR,neederFUNC);
+								.............................................
+
+								NOTES
+								- see the companion `provide` instance method
+								- compare to the related `condition system methods`
+					*/
+				};
+
+				_classPrototype.provide = function (_property,_provider) {
+					var _this = this;
+					_this.once (
+						'Needed:' + _property,
+						function () {_provider (function (_provided) {_this.set (_property,_provided)})}
+					);
+					/*?
+						Instance Methods
+							provide
+
+								SYNTAX
+								..................................................
+								myInstance.provide (propertyNameSTR,providerFUNC);
+								..................................................
+
+								NOTES
+								- see the companion `need` instance method
+								- compare to the related `condition system methods`
+					*/
+				};
+				..............................
 
 		The whenever Instance Method
 			EXAMPLES

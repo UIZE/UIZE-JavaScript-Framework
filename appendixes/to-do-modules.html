@@ -170,7 +170,11 @@
 				<ul>
 					<li><a href="#3_1">3.1. Conditions</a>
 						<ul>
-							<li><a href="#3_1_1" title="once">3.1.1. Possible Methods</a></li>
+							<li><a href="#3_1_1">3.1.1. Possible Methods</a>
+								<ul>
+									<li><a href="#3_1_1_1" title="IMPLEMENTATION">3.1.1.1. need & provide</a></li>
+								</ul>
+							</li>
 							<li><a href="#3_1_2" title="EXAMPLES">3.1.2. The whenever Instance Method</a></li>
 							<li><a href="#3_1_3" title="EXAMPLES">3.1.3. The once Instance Method</a></li>
 							<li><a href="#3_1_4" title="EXAMPLES">3.1.4. The next Virtual Event</a></li>
@@ -2118,27 +2122,52 @@ firstANYTYPE = Uize.Array.Sort.lastBy (sourceARRAY,sortColumnINT,directionINT);
 			<a name="3_1_1"></a>
 			<h3 class="heading3" title="3. Uize.Class -&gt; 3.1. Conditions -&gt; 3.1.1. Possible Methods"><span class="headingNumber"><a href="#3" title="3. Uize.Class">3</a>.<a href="#3_1" title="3. Uize.Class -&gt; 3.1. Conditions">1</a>.<a href="#3_1_1" title="3. Uize.Class -&gt; 3.1. Conditions -&gt; 3.1.1. Possible Methods">1</a>. </span>Possible Methods</h3>
 			<div class="contents3">
-				<p>once</p>
-				
-				<p>is</p>
-				
-				<p>done</p>
-				
-				<p>undone</p>
-				
-				<p>waitingOn</p>
-				
-				<p>need</p>
-				
-				<p>provide</p>
-				
-				<p>hasProvider</p>
-				
-				<p>onceNeeded</p>
-				
-				<p>onceProvided</p>
-				
-				<p>needed</p>
+				<a name="3_1_1_1"></a>
+				<h4 class="heading4" title="3. Uize.Class -&gt; 3.1. Conditions -&gt; 3.1.1. Possible Methods -&gt; 3.1.1.1. need &amp; provide"><span class="headingNumber"><a href="#3" title="3. Uize.Class">3</a>.<a href="#3_1" title="3. Uize.Class -&gt; 3.1. Conditions">1</a>.<a href="#3_1_1" title="3. Uize.Class -&gt; 3.1. Conditions -&gt; 3.1.1. Possible Methods">1</a>.<a href="#3_1_1_1" title="3. Uize.Class -&gt; 3.1. Conditions -&gt; 3.1.1. Possible Methods -&gt; 3.1.1.1. need &amp; provide">1</a>. </span>need & provide</h4>
+				<div class="contents4">
+					<p><span class="allCaps">IMPLEMENTATION</span></p>
+					
+					
+<pre class="sample-code">_classPrototype.need = function (_property,_needer) {
+  this.done ('Needed:' + _property);
+  this.once (_property,_needer);
+  /*?
+    Instance Methods
+      need
+
+        SYNTAX
+        .............................................
+        myInstance.need (propertyNameSTR,neederFUNC);
+        .............................................
+
+        NOTES
+        - see the companion `provide` instance method
+        - compare to the related `condition system methods`
+  */
+};
+
+_classPrototype.provide = function (_property,_provider) {
+  var _this = this;
+  _this.once (
+    'Needed:' + _property,
+    function () {_provider (function (_provided) {_this.set (_property,_provided)})}
+  );
+  /*?
+    Instance Methods
+      provide
+
+        SYNTAX
+        ..................................................
+        myInstance.provide (propertyNameSTR,providerFUNC);
+        ..................................................
+
+        NOTES
+        - see the companion `need` instance method
+        - compare to the related `condition system methods`
+  */
+};
+</pre>
+				</div>
 			</div>
 			
 			<a name="3_1_2"></a>

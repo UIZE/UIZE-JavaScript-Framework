@@ -28,15 +28,27 @@
 				The =Uize.Class= module implements a powerful and versatile event system, which can be used for application events outside the context of browser DOM events.
 
 				Event System Methods
-					The event system of the =Uize.Class= module is exposed through the following methods...
+					The `event system` of the =Uize.Class= module is exposed through the following methods...
 
 					- =fire= - fires an event on an instance
 					- =unwire= - unwires handlers for one or more events on an instance
 					- =wire= - wires handlers for one or more events on an instance
-					- =once= - registers a handler that is to be executed once a set-get property's value becomes truthy
 					- =Uize.Class.fire= - fires an event on a class
 					- =Uize.Class.unwire= - unwires handlers for one or more events on a class
 					- =Uize.Class.wire= - wires handlers for one or more events on a class
+
+				For an in-depth discussion of events, consult the [[../explainers/javascript-event-system.html][JavaScript Event System]] explainer.
+
+			Condition System
+				The =Uize.Class= module implements a condition system in the form of set-get properties combined with convenience methods that allow set-get properties to be treated semantically as conditions.
+
+				Condition System Methods
+					The `condition system` of the =Uize.Class= module is exposed through the following methods...
+
+					- =is= - returns whether or not a condition has been met
+					- =once= - registers code that is to be executed once a condition has been met
+					- =done= - sets a condition as having been met
+					- =undone= - sets a condition as having not been met / no longer being met
 
 			The "no new" Mechanism
 				The JavaScript =new= operator is optional when creating instances of =Uize.Class= subclasses, and you can make the =new= operator optional for your own object constructors using the newly added =Uize.noNew= static method.
@@ -605,21 +617,23 @@ Uize.module ({
 				};
 
 				_classPrototype.once = function (_property,_handler) {
-					var
-						_this = this,
-						_propertyValue = _this.get (_property),
-						_wirings = {}
-					;
-					if (_propertyValue) {
-						_handler (_propertyValue);
-					} else {
-						_wirings ['Changed.' + _property] = function  () {
-							if (_propertyValue = _this.get (_property)) {
-								_this.unwire (_wirings);
-								_handler (_propertyValue);
-							}
-						};
-						_this.wire (_wirings);
+					var _wirings = {};
+					if (_handler) {
+						var
+							_this = this,
+							_propertyValue = _this.get (_property)
+						;
+						if (_propertyValue) {
+							_handler (_propertyValue);
+						} else {
+							_wirings ['Changed.' + _property] = function  () {
+								if (_propertyValue = _this.get (_property)) {
+									_this.unwire (_wirings);
+									_handler (_propertyValue);
+								}
+							};
+							_this.wire (_wirings);
+						}
 					}
 					return _wirings;
 					/*?
@@ -646,7 +660,7 @@ Uize.module ({
 								);
 								........................................................
 
-								In the above example, a handler is being registered to be executed once the widget =myWidget= has been wired (ie. the value of its =wired= set-get property hecomes =true=).
+								In the above example, a handler is being registered to be executed once the widget =myWidget= has been wired (ie. the value of its =wired= set-get property becomes =true=).
 
 								Return Value
 									The =once= method returns a wirings object that can be supplied to the =unwire= method in order to unwire the handler, in the unlikely event that one may wish to remove the handler before the property's value has become truthy.
@@ -654,7 +668,123 @@ Uize.module ({
 									This case is unlikely to arise except in exceptional situations, but the means is provided. In most cases, you will simply discard / ignore the return value of the =once= method. In the event that the property's value is truthy when the =once= method is called, then the returned wirings object will be an empty object.
 
 								NOTES
-								- see the other `event system methods`
+								- see the other `condition system methods`
+					*/
+				};
+
+				_classPrototype.is = function (_property) {
+					return !!this [_getPropertyPrivateName (this,_property)];
+					/*?
+						Instance Methods
+							is
+								Returns a boolean, indicating whether or not the specified set-get property's value is truthy.
+
+								SYNTAX
+								................................
+								myInstance.is (propertyNameSTR);
+								................................
+
+								The =is= method is offered as a convenience to improve the semantics of code that is using set-get properties to represent conditions, and is a very thin wrapper around the =get= instance method. The statement =myInstance.is ('myCondition')= is equivalent to the statement =!!myInstance.get ('myCondition')=.
+
+								EXAMPLE
+								...........................................
+								if (myWidget.is ('enabled')) {
+									// do something if the widget is enabled
+								}
+								...........................................
+
+								In the above example, some code is being executed conditionally, based upon whether or not a widget is enabled. The =Uize.Widget= base class provides an =enabled= set-get property, whose value is a boolean. One could use the =get= method in this code example to achieve the same effect, but using the =is= method make the code more readable.
+
+								NOTES
+								- see the other `condition system methods`
+					*/
+				};
+
+				_classPrototype.done = function (_property) {
+					this.set (_property,_true);
+					/*?
+						Instance Methods
+							done
+								Sets the specified condition (or conditions) as having been met.
+
+								DIFFERENT USAGES
+
+								`Set a Single Condition as Having Been Met`
+								..................................
+								myInstance.done (propertyNameSTR);
+								..................................
+
+								`Set Multiple Conditions as Having Been Met`
+								.....................................
+								myInstance.done (propertyNamesARRAY);
+								.....................................
+
+								Set a Single Condition as Having Been Met
+									The =done= method is offered as a convenience to improve the semantics of code that is using set-get properties to represent conditions, and is a very thin wrapper around the =set= instance method. The statement =myInstance.done ('myCondition')= is equivalent to the statement =myInstance.set ('myCondition',true)=. When using a set-get property to represent a condition, the =done= method is a semantically elegant way to set the value of the property to =true= to indicate that the condition represented by the property has been met.
+
+									EXAMPLE
+									.............................................
+									MyClass.prototype.initialize = function () {
+										// some code here to do the initialization
+										this.done ('initialized');
+									};
+									.............................................
+
+									In the above example, an =initialize= instance method is defined for the class =MyClass=. In the method's implementation, after all the initialization has been performed, the =done= method is being called to indicate that the =initialized= condition has been met, where =initialized= is the name of a set-get property provided in =MyClass=. Now, other code can be registered to be executed only once an instance has been initialized by using the =once= instance method, as follows...
+
+									.............................................................
+									myInstance.once (
+										'initialized',
+										function () {
+											// do some stuff once the instance has been initialized
+										}
+									);
+									.............................................................
+
+									SYNTAX
+									..................................
+									myInstance.done (propertyNameSTR);
+									..................................
+
+								Set Multiple Conditions as Having Been Met
+									SYNTAX
+									.....................................
+									myInstance.done (propertyNamesARRAY);
+									.....................................
+
+								NOTES
+								- see the companion =undone= instance method
+								- see the other `condition system methods`
+					*/
+				};
+
+				_classPrototype.undone = function (_property) {
+					this.set (_property,_false);
+					/*?
+						Instance Methods
+							undone
+								Sets the specified set-get property to the boolean value =false=.
+
+								SYNTAX
+								....................................
+								myInstance.undone (propertyNameSTR);
+								....................................
+
+								The =undone= method is offered as a convenience to improve the semantics of code that is using set-get properties to represent conditions, and is a very thin wrapper around the =set= instance method. The statement =myInstance.undone ('myCondition')= is equivalent to the statement =myInstance.set ('myCondition',false)=. When using a set-get property to represent a condition, the =undone= method is a semantically elegant way to set the value of the property to =false= to indicate that the condition represented by the property is not met / no longer met.
+
+								EXAMPLE
+								..............................................
+								MyClass.prototype.die = function () {
+									// some code here to tear down the instance
+									this.undone ('initialized');
+								};
+								..............................................
+
+								In the above example, a =die= instance method is defined for the class =MyClass=. In the method's implementation, after all the tear down steps have been performed, the =undone= method is being called to indicate that the =initialized= condition is no longer met, where =initialized= is the name of a set-get property provided in =MyClass=. It is assumed that some other method, such as an =initialize= instance method for the class, is responsible for setting the condition as having been met with a statement like =this.done ('initialized')=.
+
+								NOTES
+								- see the companion =done= instance method
+								- see the other `condition system methods`
 					*/
 				};
 
@@ -897,21 +1027,31 @@ Uize.module ({
 					/* NOTE:
 						Yes, there are functions _getClass and _getPropertyPrivateName that could be used (and were at one point), but this code needs to be tuned for performance since set is a touch point in so many places.
 					*/
-					if (arguments.length > 1)
+					var
+						_arguments = arguments,
+						_argumentsLength = _arguments.length
+					;
+					if (_argumentsLength > 1)
 						/* NOTE:
 							- support for...
-								set (propertyName,propertyValue)
+								set (propertyNameSTR,propertyValueANYTYPE)
 
 								or...
 
 								set (
-									property1Name,property1Value,
-									property2Name,property2Value,
+									property1NameSTR,property1ValueANYTYPE,
+									property2NameSTR,property2ValueANYTYPE,
 									...
-									propertyNName,propertyNValue
+									propertyNNameSTR,propertyNValueANYTYPE
 								)
+
+								or...
+
+								set (propertyNamesARRAY,propertyValueANYTYPE)
 						*/
-						_properties = _pairUp.apply (0,arguments)
+						_properties = _argumentsLength > 2 || typeof _properties == _typeString
+							? _pairUp.apply (0,_arguments)
+							: _Uize.lookup (_properties,_arguments [1])
 					;
 					var
 						_this = this,
@@ -1063,109 +1203,277 @@ Uize.module ({
 					/*?
 						Instance Methods
 							set
-								Lets you set one or more of an instance's set-get properties.
+								Lets you set values for one or more of an instance's set-get properties.
 
-								SYNTAX
-								...............................
-								myInstance.set (propertiesOBJ);
-								...............................
+								DIFFERENT USAGES
 
-								EXAMPLE
-								.....................................
-								myInstance.set (
-									{
-										property1Name:'property1Value',
-										property2Name:'property2Value',
-										property3Name:'property4Value'
-									}
-								);
-								.....................................
+								`Set Values for One or More Properties with a Names/Values Object`
+								........................................
+								myInstance.set (propertyNamesValuesOBJ);
+								........................................
 
-								VARIATION 1
+								`Set the Value for a Property with Name and Value Arguments`
 								......................................................
 								myInstance.set (propertyNameSTR,propertyValueANYTYPE);
 								......................................................
 
-								A variation that accepts the two parameters =propertyNameSTR= and =propertyValueANYTYPE= makes it possible to use an expression or the value of a variable for specifying the name of the property to set. There is no appreciable difference in performance between using the =propertiesOBJ= form and the two parameter form when setting the value for a single set-get property, so the two parameter form is primarily a convenience for setting the value for a dynamically selected property.
-
-								EXAMPLE
-								...............................................................
-								_classPrototype.increment = function (_propertyName,_amount) {
-									this.set (_propertyName,this.get (_propertyName) + _amount);
-								}
-								...............................................................
-
-								In the above example, a generic incrementer instance method is being implemented. It receives a =_propertyName= parameter that specifies the set-get property to increment, and it passes the value of this parameter as the first parameter in the call to the set method.
-
-								VARIATION 2
-								..........................................
+								`Set Values for Multiple Properties with Multiple Name and Value Arguments`
+								.........................................
 								myInstance.set (
 									property1NameSTR,property1ValueANYTYPE,
 									property2NameSTR,property2ValueANYTYPE,
-									...,
+									... ... ...
 									propertyNNameSTR,propertyNValueANYTYPE
 								);
-								..........................................
+								.........................................
 
-								This variation allows values for an arbitrary number of set-get properties to be set in a single call to the =set= method, by specifying the names and values of the properties using an arbitrary number of name-value pair arguments, where even numbered arguments are property names and odd numbered arguments are property values. This variation makes it possible to use expressions or the values of variables for specifying the names of the properties to set.
+								`Set the Same Value for Multiple Properties`
+								.........................................................
+								myInstance.set (propertyNamesARRAY,propertyValueANYTYPE);
+								.........................................................
+
+								Set Values for One or More Properties with a Names/Values Object
+									In the standard usage, a single =propertyNamesValuesOBJ= parameter can be passed to the =set= method in order to set values for one or more properties.
+
+									SYNTAX
+									........................................
+									myInstance.set (propertyNamesValuesOBJ);
+									........................................
+
+									Each key of the =propertyNamesValuesOBJ= object represents the name of a set-get property whose value should be set, and each corresponding value represents the value that a property should be set to.
+
+									EXAMPLE 1
+									...............................
+									myWidget.set ({enabled:false});
+									...............................
+
+									In the above example, the =set= method is being used to set the value of just one property - the =enabled= property of a widget instance.
+
+									EXAMPLE 2
+									................
+									mySlider.set ({
+										maxValue:100,
+										minValue:0,
+										value:23
+									});
+									................
+
+									In the above example, the =set= method is being used to set values for multiple properties - the =maxValue=, =minValue=, and =value= properties of a slider widget instance.
+
+								Set the Value for a Property with Name and Value Arguments
+									The value of a set-get property can be set by providing two parameters to the =set= method: a string parameter specifying the name of a property, and a value parameter that can be of any type.
+
+									SYNTAX
+									......................................................
+									myInstance.set (propertyNameSTR,propertyValueANYTYPE);
+									......................................................
+
+									This variation of the =set= method is particularly useful in cases where you wish to use a variable or an expression to determine the set-get property whose value should be set. Consider the following example...
+
+									EXAMPLE
+									..............................................................
+									MyClass.prototype.increment = function (propertyName,amount) {
+										this.set (propertyName,this.get (propertyName) + amount);
+									}
+									..............................................................
+
+									In the above example, a generic incrementer instance method is being implemented. It receives a =propertyName= parameter that specifies the set-get property to increment, and it passes the value of this parameter as the first parameter in the call to the =set= method.
+
+									Slightly Less Performant
+										This variation of the =set= method is very slightly less performant than the variation that accepts a single =propertyNamesValuesOBJ= parameter.
+
+										This variation is offered primarily as a convenience for when the names of properties to be set need to be supplied through variables or expressions. While there is not much cost to using this variation when not necessary, it is advised to generally use the form that accepts a =propertyNamesValuesOBJ= parameter whenever possible (see `Set Values for One or More Properties with a Names/Values Object`).
+
+								Set Values for Multiple Properties with Multiple Name and Value Arguments
+									The values for an arbitrary number of set-get properties can be set by providing the names and values of the properties using an arbitrary number of name-value pair arguments, where even numbered arguments are property names and odd numbered arguments are property values.
+
+									SYNTAX
+									.........................................
+									myInstance.set (
+										property1NameSTR,property1ValueANYTYPE,
+										property2NameSTR,property2ValueANYTYPE,
+										... ... ...
+										propertyNNameSTR,propertyNValueANYTYPE
+									);
+									.........................................
+
+									This variation of the =set= method is an extension of the variation that lets you `set the value for a property with name and value arguments`, and has the same benefits and performance considerations.
+
+								Set the Same Value for Multiple Properties
+									The same value can be set for multiple set-get properties by specifying the names of the properties that should all be set to the same value in a =propertyNamesARRAY= parameter, and by specifying the value they should all be set to in a =propertyValueANYTYPE= parameter.
+
+									SYNTAX
+									.........................................................
+									myInstance.set (propertyNamesARRAY,propertyValueANYTYPE);
+									.........................................................
+
+									EXAMPLE
+									..............................................................
+									myWidget.set (['initialized','ready','enabled','busy'],false);
+									..............................................................
+
+									In the above example, the properties =initialized=, =ready=, =enabled=, and =busy= of a widget instance are all being set to =false=.
+
+									This variation of the =set= method can be useful in cases where you wish to set a good number of properties to the same value and where it would be more concise to use this form, or in cases where you are receiving an array of properties that should be set to some desired value. This variation can also be convenient when the value that you wish to set multiple properties to is the result of an expression and where you would otherwise need to create a local variable in order to avoid recalculating the expression for each property.
+
+									INSTEAD OF...
+									.......................................................................................
+									var initValue = env.config.hasOwnProperty ('initValue') ? env.config.initValue : false;
+									myInstance.set ({
+										foo:initValue,
+										bar:initValue,
+										baz:initValue
+									});
+									.......................................................................................
+
+									USE...
+									.........................................................................
+									myInstance.set (
+										['foo','bar','baz'],
+										env.config.hasOwnProperty ('initValue') ? env.config.initValue : false
+									);
+									.........................................................................
 
 								NOTES
-								- see also the =get= instance method
-								- see also the =Uize.Class.get= static method
-								- see also the =Uize.Class.set= static method
+								- see the companion =get= instance method
+								- see also the =Uize.Class.get= and =Uize.Class.set= static methods
 
 						Static Methods
 							Uize.Class.set
-								Lets you set the initial value for one of the class's set-get properties.
+								Lets you set initial values for one or more of a class's set-get properties.
 
-								SYNTAX
-								...............................
-								Uize.Class.set (propertiesOBJ);
-								...............................
+								DIFFERENT USAGES
 
-								EXAMPLE
+								`Set Initial Values for One or More Properties with a Names/Values Object`
 								.....................................
-								Uize.Class.set (
-									{
-										property1Name:'property1Value',
-										property2Name:'property2Value',
-										property3Name:'property4Value'
-									}
-								);
+								MyClass.set (propertyNamesValuesOBJ);
 								.....................................
 
-								VARIATION 1
-								......................................................
-								Uize.Class.set (propertyNameSTR,propertyValueANYTYPE);
-								......................................................
+								`Set the Initial Value for a Property with Name and Value Arguments`
+								...................................................
+								MyClass.set (propertyNameSTR,propertyValueANYTYPE);
+								...................................................
 
-								A variation that accepts the two parameters =propertyNameSTR= and =propertyValueANYTYPE= makes it possible to use an expression or the value of a variable for specifying the name of the property to set. There is no appreciable difference in performance between using the =propertiesOBJ= form and the two parameter form when setting the value for a single set-get property, so the two parameter form is primarily a convenience for setting the value for a dynamically selected property.
-
-								EXAMPLE
-								...............................................................
-								_class.increment = function (_propertyName,_amount) {
-									this.set (_propertyName,this.get (_propertyName) + _amount);
-								}
-								...............................................................
-
-								In the above example, a generic incrementer static method is being implemented. It receives a =_propertyName= parameter that specifies the set-get property to increment, and it passes the value of this parameter as the first parameter in the call to the set method.
-
-								VARIATION 2
-								..........................................
-								Uize.Class.set (
+								`Set Initial Values for Multiple Properties with Multiple Name and Value Arguments`
+								.........................................
+								MyClass.set (
 									property1NameSTR,property1ValueANYTYPE,
 									property2NameSTR,property2ValueANYTYPE,
-									...,
+									... ... ...
 									propertyNNameSTR,propertyNValueANYTYPE
 								);
-								..........................................
+								.........................................
 
-								This variation allows initial values for an arbitrary number of set-get properties to be set in a single call to the =set= method, by specifying the names and values of the properties using an arbitrary number of name-value pair arguments, where even numbered arguments are property names and odd numbered arguments are property values. This variation makes it possible to use expressions or the values of variables for specifying the names of the properties to set.
+								`Set the Same Initial Value for Multiple Properties`
+								......................................................
+								MyClass.set (propertyNamesARRAY,propertyValueANYTYPE);
+								......................................................
+
+								Set Initial Values for One or More Properties with a Names/Values Object
+									In the standard usage, a single =propertyNamesValuesOBJ= parameter can be passed to the =Uize.Class.set= method in order to set initial values for one or more properties.
+
+									SYNTAX
+									.....................................
+									MyClass.set (propertyNamesValuesOBJ);
+									.....................................
+
+									Each key of the =propertyNamesValuesOBJ= object represents the name of a set-get property whose initial value should be set, and each corresponding value represents the initial value that should be set for a property.
+
+									EXAMPLE 1
+									....................................
+									MyWidgetClass.set ({enabled:false});
+									....................................
+
+									In the above example, the =Uize.Class.set= method is being used to set the initial value for just one property - the =enabled= property of a widget class.
+
+									EXAMPLE 2
+									.............................
+									Uize.Widget.Bar.Slider.set ({
+										maxValue:100,
+										minValue:0,
+										value:0
+									});
+									.............................
+
+									In the above example, the =Uize.Class.set= method is being used to set initial values for multiple properties - the =maxValue=, =minValue=, and =value= properties of the =Uize.Widget.Bar.Slider= widget class.
+
+								Set the Initial Value for a Property with Name and Value Arguments
+									The initial value for a set-get property can be set by providing two parameters to the =Uize.Class.set= method: a string parameter specifying the name of a property, and a value parameter that can be of any type.
+
+									SYNTAX
+									...................................................
+									MyClass.set (propertyNameSTR,propertyValueANYTYPE);
+									...................................................
+
+									This variation of the =Uize.Class.set= method is particularly useful in cases where you wish to use a variable or an expression to determine the set-get property whose initial value should be set. Consider the following example...
+
+									EXAMPLE
+									............................................................
+									MyClass.increment = function (propertyName,amount) {
+										this.set (propertyName,this.get (propertyName) + amount);
+									}
+									............................................................
+
+									In the above example, a generic incrementer static method is being implemented. It receives a =propertyName= parameter that specifies the set-get property whose initial value should be incremented, and it passes the value of this parameter as the first parameter in the call to the =Uize.Class.set= method.
+
+									Slightly Less Performant
+										This variation of the =Uize.Class.set= method is very slightly less performant than the variation that accepts a single =propertyNamesValuesOBJ= parameter.
+
+										This variation is offered primarily as a convenience for when the names of properties whose initial values are to be set need to be supplied through variables or expressions. While there is not much cost to using this variation when not necessary, it is advised to generally use the form that accepts a =propertyNamesValuesOBJ= parameter whenever possible (see `Set Initial Values for One or More Properties with a Names/Values Object`).
+
+								Set Initial Values for Multiple Properties with Multiple Name and Value Arguments
+									The initial values for an arbitrary number of set-get properties can be set by providing the names and values of the properties using an arbitrary number of name-value pair arguments, where even numbered arguments are property names and odd numbered arguments are property values.
+
+									SYNTAX
+									.........................................
+									MyClass.set (
+										property1NameSTR,property1ValueANYTYPE,
+										property2NameSTR,property2ValueANYTYPE,
+										... ... ...
+										propertyNNameSTR,propertyNValueANYTYPE
+									);
+									.........................................
+
+									This variation of the =Uize.Class.set= method is an extension of the variation that lets you `set the initial value for a property with name and value arguments`, and has the same benefits and performance considerations.
+
+								Set the Same Initial Value for Multiple Properties
+									The same initial value can be set for multiple set-get properties by specifying the names of the properties whose initial values should all be set to the same value in a =propertyNamesARRAY= parameter, and by specifying the initial value that should be set for them all in a =propertyValueANYTYPE= parameter.
+
+									SYNTAX
+									......................................................
+									MyClass.set (propertyNamesARRAY,propertyValueANYTYPE);
+									......................................................
+
+									EXAMPLE
+									...................................................................
+									MyWidgetClass.set (['initialized','ready','enabled','busy'],false);
+									...................................................................
+
+									In the above example, the initial value for the properties =initialized=, =ready=, =enabled=, and =busy= of a widget class is being set to =false=.
+
+									This variation of the =Uize.Class.set= method can be useful in cases where you wish to set the initial value for a good number of properties to the same value and where it would be more concise to use this form, or in cases where you are receiving an array of properties whose initial values should all be set to some desired value. This variation can also be convenient when the initial value that you wish to set for multiple properties is the result of an expression and where you would otherwise need to create a local variable in order to avoid recalculating the expression for each property.
+
+									INSTEAD OF...
+									.......................................................................................
+									var initValue = env.config.hasOwnProperty ('initValue') ? env.config.initValue : false;
+									MyClass.set ({
+										foo:initValue,
+										bar:initValue,
+										baz:initValue
+									});
+									.......................................................................................
+
+									USE...
+									.........................................................................
+									MyClass.set (
+										['foo','bar','baz'],
+										env.config.hasOwnProperty ('initValue') ? env.config.initValue : false
+									);
+									.........................................................................
 
 								NOTES
-								- see also the =Uize.Class.get= static method
-								- see also the =get= instance method
-								- see also the =set= instance method
+								- see the companion =Uize.Class.get= static method
+								- see also the =get= and =set= instance methods
 
 					*/
 				};
