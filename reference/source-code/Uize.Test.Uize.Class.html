@@ -56,6 +56,11 @@ Uize.module ({
     'Uize.Class.Value'
   ],
   builder:function () {
+    var _falsyAndTruthyValues = [
+      null,undefined,0,false,'',NaN, // falsy values
+      {},[],1,-1,true,'foo'          // truthy values
+    ];
+
     function _copyArguments (_arguments) {
       var _result = [];
       _result.push.apply (_result,_arguments);
@@ -1167,14 +1172,10 @@ Uize.module ({
                   test:function () {
                     var
                       _Class = Uize.Class.subclass (),
-                      _valuesToTest = [
-                        null,undefined,0,false,'',NaN, // falsy values
-                        {},[],1,-1,true,'foo'          // truthy values
-                      ],
                       _expectedHandlersCalled = []
                     ;
                     Uize.forEach (
-                      _valuesToTest,
+                      _falsyAndTruthyValues,
                       function (_value,_valueNo) {
                         var _propertyName = 'myProperty' + _valueNo;
                         _Class.registerProperties (Uize.pairUp (_propertyName,{value:_value}));
@@ -1186,7 +1187,7 @@ Uize.module ({
                       _handlersCalled = []
                     ;
                     Uize.forEach (
-                      _valuesToTest,
+                      _falsyAndTruthyValues,
                       function (_value,_valueNo) {
                         var _propertyName = 'myProperty' + _valueNo;
                         _instance.once (_propertyName,function () {_handlersCalled.push (_propertyName)});
@@ -2703,6 +2704,54 @@ Uize.module ({
                   this.expect ('myProperty3 initial value',_instance._myProperty3)
                 );
               }
+            },
+            {
+              title:'Test the condition related instance methods',
+              test:[
+                {
+                  title:'Test that the is instance method works correctly',
+                  test:[
+                    {
+                      title:'Test that the value false is returned when the specified condition property is not registered',
+                      test:function () {
+                        var
+                          _Subclass = Uize.Class.subclass (),
+                          _instance = new _Subclass
+                        ;
+                        return this.expect (false,_instance.is ('nonExistentProperty'));
+                      }
+                    },
+                    {
+                      title:'Test that the value true is returned for all truthy values of the specified condition property, and that the value false is returned for all falsy values of the property',
+                      test:function () {
+                        var _Class = Uize.Class.subclass ();
+                        _Class.registerProperties ({myProperty:{}});
+                        var _instance = _Class ();
+                        return this.expect (
+                          Uize.map (_falsyAndTruthyValues,'!!value'),
+                          Uize.map (
+                            _falsyAndTruthyValues,
+                            function (_value) {
+                              _instance.set ({myProperty:_value});
+                              return _instance.is ('myProperty');
+                            }
+                          )
+                        );
+                      }
+                    }
+                  ]
+                },
+                {
+                  title:'Test that the met instance method works correctly',
+                  test:[
+                  ]
+                },
+                {
+                  title:'Test that the unmet instance method works correctly',
+                  test:[
+                  ]
+                }
+              ]
             }
           ]
         }

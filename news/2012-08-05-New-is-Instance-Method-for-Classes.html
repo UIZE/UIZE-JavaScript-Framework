@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2012-08-05 - New is Instance Method for Classes | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="The new is instance method, implemented in the Uize.Class base class module, provides a semantically elegant way to test if the value of an instance&apos;s set-get property is truthy."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2012.html" class="breadcrumb breadcrumbWithArrow">2012 NEWS</a>
+	2012-08-05 - New is Instance Method for Classes
+
+</h1>
+
+<div class="main">
+<div class="contents0">
+	<p>The new <code>is</code> instance method, implemented in the <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> base class module, provides a semantically elegant way to test if the value of an instance's set-get property is truthy.</p>
+	
+	<p><span class="allCaps">SYNTAX</span></p>
+	
+	
+<pre class="sample-code">myInstance.is (propertyNameSTR);
+</pre>
+	
+	<p>The <code>is</code> method returns a boolean, indicating whether or not the specified set-get property's value is truthy. This method is offered as a convenience to improve the semantics of code that is using set-get properties to represent conditions, and is a very thin wrapper around the <code>get</code> instance method. The statement <code>myInstance.is ('myCondition')</code> is equivalent to the statement <code>!!myInstance.get ('myCondition')</code>.</p>
+	
+	<p><span class="allCaps">EXAMPLE</span></p>
+	
+	
+<pre class="sample-code">if (myWidget.is ('enabled')) {
+  // do something if the widget is enabled
+}
+</pre>
+	
+	<p>In the above example, some code is being executed conditionally, based upon whether or not a widget is enabled. The <code><a href="../reference/Uize.Widget.html">Uize.Widget</a></code> base class provides an <code>enabled</code> set-get property, whose value is a boolean. One could use the <code>get</code> method in this code example to achieve the same effect, but using the <code>is</code> method make the code more readable.</p>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = UizeDotCom.Page.Doc ()).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

@@ -1,0 +1,23 @@
+The new =is= instance method, implemented in the =Uize.Class= base class module, provides a semantically elegant way to test if the value of an instance's set-get property is truthy.
+
+SYNTAX
+................................
+myInstance.is (propertyNameSTR);
+................................
+
+The =is= method returns a boolean, indicating whether or not the specified set-get property's value is truthy. This method is offered as a convenience to improve the semantics of code that is using set-get properties to represent conditions, and is a very thin wrapper around the =get= instance method. The statement =myInstance.is ('myCondition')= is equivalent to the statement =!!myInstance.get ('myCondition')=.
+
+EXAMPLE
+...........................................
+if (myWidget.is ('enabled')) {
+	// do something if the widget is enabled
+}
+...........................................
+
+In the above example, some code is being executed conditionally, based upon whether or not a widget is enabled. The =Uize.Widget= base class provides an =enabled= set-get property, whose value is a boolean. One could use the =get= method in this code example to achieve the same effect, but using the =is= method make the code more readable.
+
+....................................................................................
+<< metadata >>
+
+title: 2012-08-05 - New is Instance Method for Classes
+....................................................................................
