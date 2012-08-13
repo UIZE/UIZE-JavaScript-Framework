@@ -1,0 +1,21 @@
+The =once= instance method, implemented in the =Uize.Class= base class module, has been improved with support for optional condition inversion.
+
+As a convenience, the =once= method now supports condition inversion through an optional "!" (logical not) prefix that can be placed before the condition name.
+
+EXAMPLE
+................................................................
+myCollectionWidget.once (
+	'!isEmpty',
+	function () {
+		// do something now that the collection is no longer empty
+	}
+);
+................................................................
+
+In the above example, code is being registered to execute once the =isEmpty= condition becomes false. This is done by prefixing the "isEmpty" condition name with a "!" (bang / exclamation) character to indicate that the code should execute only once the collection is not empty (ie. the value of the =isEmpty= set-get property becomes =false=). The `condition inversion` facility is convenient in situations like this where you wish to execute code only once a condition becomes unmet, rather than once the condition becomes met (which is the standard behavior for the =once= method).
+
+....................................................................................
+<< metadata >>
+
+title: 2012-08-12 - Improved once Method for Classes
+....................................................................................

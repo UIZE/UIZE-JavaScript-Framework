@@ -619,15 +619,17 @@ Uize.module ({
 				_classPrototype.once = function (_property,_handler) {
 					var _wirings = {};
 					if (_handler) {
+						var _not = _property.charCodeAt (0) == 33; // supports usages like instance.once ('!empty', ...
+						if (_not) _property = _property.slice (1);
 						var
 							_this = this,
 							_propertyValue = _this.get (_property)
 						;
-						if (_propertyValue) {
+						if (!_propertyValue == _not) {
 							_handler (_propertyValue);
 						} else {
 							_wirings ['Changed.' + _property] = function  () {
-								if (_propertyValue = _this.get (_property)) {
+								if (!(_propertyValue = _this.get (_property)) == _not) {
 									_this.unwire (_wirings);
 									_handler (_propertyValue);
 								}
@@ -661,6 +663,21 @@ Uize.module ({
 								........................................................
 
 								In the above example, a handler is being registered to be executed once the widget =myWidget= has been wired (ie. the value of its =wired= set-get property becomes =true=).
+
+								Condition Inversion
+									As a convenience, the =once= method supports condition inversion through an optional "!" (logical not) prefix that can be placed before the condition name.
+
+									EXAMPLE
+									................................................................
+									myCollectionWidget.once (
+										'!isEmpty',
+										function () {
+											// do something now that the collection is no longer empty
+										}
+									);
+									................................................................
+
+									In the above example, code is being registered to execute once the =isEmpty= condition becomes false. This is done by prefixing the "isEmpty" condition name with a "!" (bang / exclamation) character to indicate that the code should execute only once the collection is not empty (ie. the value of the =isEmpty= set-get property becomes =false=). The `condition inversion` facility is convenient in situations like this where you wish to execute code only once a condition becomes unmet, rather than once the condition becomes met (which is the standard behavior for the =once= method).
 
 								Return Value
 									The =once= method returns a wirings object that can be supplied to the =unwire= method in order to unwire the handler, in the unlikely event that one may wish to remove the handler before the property's value has become truthy.
@@ -700,8 +717,8 @@ Uize.module ({
 					*/
 				};
 
-				_classPrototype.met = function (_property) {
-					this.set (_property,_true);
+				_classPrototype.met = function (_propertyOrProperties) {
+					this.set (_propertyOrProperties,true);
 					/*?
 						Instance Methods
 							met
@@ -719,8 +736,10 @@ Uize.module ({
 								myInstance.met (propertyNamesARRAY);
 								....................................
 
-								Set a Single Condition as Having Been Met
-									The =met= method is offered as a convenience to improve the semantics of code that is using set-get properties to represent conditions, and is a very thin wrapper around the =set= instance method. The statement =myInstance.met ('myCondition')= is equivalent to the statement =myInstance.set ('myCondition',true)=. When using a set-get property to represent a condition, the =met= method is a semantically elegant way to set the value of the property to =true= to indicate that the condition represented by the property has been met.
+								For Improved Semantics
+									The =met= method is offered as a convenience to improve the semantics of code that is using set-get properties to represent conditions, and is a very thin wrapper around the =set= instance method.
+
+									The statement =myInstance.met ('myCondition')= is equivalent to the statement =myInstance.set ('myCondition',true)=. When using a set-get property to represent a condition, the =met= method is a semantically elegant way to set the value of the property to =true= to indicate that the condition represented by the property has been met.
 
 									EXAMPLE
 									.............................................
@@ -741,15 +760,30 @@ Uize.module ({
 									);
 									.............................................................
 
+								Set a Single Condition as Having Been Met
+									In its most typical usage, a single condition can be set as having been met by specifying the name of the condition for the =propertyNameSTR= parameter.
+
 									SYNTAX
 									.................................
 									myInstance.met (propertyNameSTR);
 									.................................
 
+									EXAMPLE
+									..........................
+									this.met ('someSelected');
+									..........................
+
 								Set Multiple Conditions as Having Been Met
+									In cases where you wish to set multiple conditions as having been met, the names of those conditions can be supplied by specifying an array for the =propertyNamesARRAY= parameter.
+
 									SYNTAX
 									....................................
 									myInstance.met (propertyNamesARRAY);
+									....................................
+
+									EXAMPLE
+									....................................
+									this.met (['initialized', 'ready']);
 									....................................
 
 								NOTES
@@ -758,29 +792,65 @@ Uize.module ({
 					*/
 				};
 
-				_classPrototype.unmet = function (_property) {
-					this.set (_property,_false);
+				_classPrototype.unmet = function (_propertyOrProperties) {
+					this.set (_propertyOrProperties,false);
 					/*?
 						Instance Methods
 							unmet
-								Sets the specified set-get property to the boolean value =false=.
+								Sets the specified condition (or conditions) as being unmet.
 
-								SYNTAX
+								DIFFERENT USAGES
+
+								`Set a Single Condition as Being Unmet`
 								...................................
 								myInstance.unmet (propertyNameSTR);
 								...................................
 
-								The =unmet= method is offered as a convenience to improve the semantics of code that is using set-get properties to represent conditions, and is a very thin wrapper around the =set= instance method. The statement =myInstance.unmet ('myCondition')= is equivalent to the statement =myInstance.set ('myCondition',false)=. When using a set-get property to represent a condition, the =unmet= method is a semantically elegant way to set the value of the property to =false= to indicate that the condition represented by the property is not met / no longer met.
+								`Set Multiple Conditions as Being Unmet`
+								......................................
+								myInstance.unmet (propertyNamesARRAY);
+								......................................
 
-								EXAMPLE
-								..............................................
-								MyClass.prototype.die = function () {
-									// some code here to tear down the instance
-									this.unmet ('initialized');
-								};
-								..............................................
+								For Improved Semantics
+									The =unmet= method is offered as a convenience to improve the semantics of code that is using set-get properties to represent conditions, and is a very thin wrapper around the =set= instance method.
 
-								In the above example, a =die= instance method is defined for the class =MyClass=. In the method's implementation, after all the tear down steps have been performed, the =unmet= method is being called to indicate that the =initialized= condition is no longer met, where =initialized= is the name of a set-get property provided in =MyClass=. It is assumed that some other method, such as an =initialize= instance method for the class, is responsible for setting the condition as having been met with a statement like =this.met ('initialized')=.
+									The statement =myInstance.unmet ('myCondition')= is equivalent to the statement =myInstance.set ('myCondition',false)=. When using a set-get property to represent a condition, the =unmet= method is a semantically elegant way to set the value of the property to =false= to indicate that the condition represented by the property is not met / no longer met.
+
+									EXAMPLE
+									..............................................
+									MyClass.prototype.die = function () {
+										// some code here to tear down the instance
+										this.unmet ('initialized');
+									};
+									..............................................
+
+									In the above example, a =die= instance method is defined for the class =MyClass=. In the method's implementation, after all the tear down steps have been performed, the =unmet= method is being called to indicate that the =initialized= condition is no longer met, where =initialized= is the name of a set-get property provided in =MyClass=. It is assumed that some other method, such as an =initialize= instance method for the class, is responsible for setting the condition as having been met with a statement like =this.met ('initialized')=.
+
+								Set a Single Condition as Being Unmet
+									In its most typical usage, a single condition can be set as being unmet by specifying the name of the condition for the =propertyNameSTR= parameter.
+
+									SYNTAX
+									...................................
+									myInstance.unmet (propertyNameSTR);
+									...................................
+
+									EXAMPLE
+									............................
+									this.unmet ('someSelected');
+									............................
+
+								Set Multiple Conditions as Being Unmet
+									In cases where you wish to set multiple conditions as being unmet, the names of those conditions can be supplied by specifying an array for the =propertyNamesARRAY= parameter.
+
+									SYNTAX
+									......................................
+									myInstance.unmet (propertyNamesARRAY);
+									......................................
+
+									EXAMPLE
+									......................................
+									this.unmet (['initialized', 'ready']);
+									......................................
 
 								NOTES
 								- see the companion =met= instance method

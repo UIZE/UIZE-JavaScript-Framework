@@ -86,13 +86,15 @@
 					<li><a href="#3_4" title="Nulls out the global variable (or property of the window object) of the name instanceId.">3.4. kill</a></li>
 					<li><a href="#3_5" title="Sets the specified condition (or conditions) as having been met.">3.5. met</a>
 						<ul>
-							<li><a href="#3_5_1" title="The met method is offered as a convenience to improve the semantics of code that is using set-get properties to represent conditions, and is a very thin wrapper around the set instance method. The statement myInstance.met (&apos;myCondition&apos;) is equivalent to the statement myInstance.set (&apos;myCondition&apos;,true). When using a set-get property to represent a condition, the met method is a semantically el...">3.5.1. Set a Single Condition as Having Been Met</a></li>
-							<li><a href="#3_5_2" title="SYNTAX">3.5.2. Set Multiple Conditions as Having Been Met</a></li>
+							<li><a href="#3_5_1" title="The met method is offered as a convenience to improve the semantics of code that is using set-get properties to represent conditions, and is a very thin wrapper around the set instance method.">3.5.1. For Improved Semantics</a></li>
+							<li><a href="#3_5_2" title="In its most typical usage, a single condition can be set as having been met by specifying the name of the condition for the propertyNameSTR parameter.">3.5.2. Set a Single Condition as Having Been Met</a></li>
+							<li><a href="#3_5_3" title="In cases where you wish to set multiple conditions as having been met, the names of those conditions can be supplied by specifying an array for the propertyNamesARRAY parameter.">3.5.3. Set Multiple Conditions as Having Been Met</a></li>
 						</ul>
 					</li>
 					<li><a href="#3_6" title="Lets you register a handler that should be executed only once a condition is met (ie. the value of the specified condition property is truthy).">3.6. once</a>
 						<ul>
-							<li><a href="#3_6_1" title="The once method returns a wirings object that can be supplied to the unwire method in order to unwire the handler, in the unlikely event that one may wish to remove the handler before the property&apos;s value has become truthy.">3.6.1. Return Value</a></li>
+							<li><a href="#3_6_1" title="As a convenience, the once method supports condition inversion through an optional &quot;!&quot; (logical not) prefix that can be placed before the condition name.">3.6.1. Condition Inversion</a></li>
+							<li><a href="#3_6_2" title="The once method returns a wirings object that can be supplied to the unwire method in order to unwire the handler, in the unlikely event that one may wish to remove the handler before the property&apos;s value has become truthy.">3.6.2. Return Value</a></li>
 						</ul>
 					</li>
 					<li><a href="#3_7" title="Lets you set values for one or more of an instance&apos;s set-get properties.">3.7. set</a>
@@ -109,7 +111,13 @@
 					</li>
 					<li><a href="#3_8" title="Returns a string, providing summary info for the instance on which the method is called.">3.8. toString Intrinsic Method</a></li>
 					<li><a href="#3_9" title="Toggles the value of the specified boolean instance set-get property.">3.9. toggle</a></li>
-					<li><a href="#3_10" title="Sets the specified set-get property to the boolean value false.">3.10. unmet</a></li>
+					<li><a href="#3_10" title="Sets the specified condition (or conditions) as being unmet.">3.10. unmet</a>
+						<ul>
+							<li><a href="#3_10_1" title="The unmet method is offered as a convenience to improve the semantics of code that is using set-get properties to represent conditions, and is a very thin wrapper around the set instance method.">3.10.1. For Improved Semantics</a></li>
+							<li><a href="#3_10_2" title="In its most typical usage, a single condition can be set as being unmet by specifying the name of the condition for the propertyNameSTR parameter.">3.10.2. Set a Single Condition as Being Unmet</a></li>
+							<li><a href="#3_10_3" title="In cases where you wish to set multiple conditions as being unmet, the names of those conditions can be supplied by specifying an array for the propertyNamesARRAY parameter.">3.10.3. Set Multiple Conditions as Being Unmet</a></li>
+						</ul>
+					</li>
 					<li><a href="#3_11" title="Lets you remove a handler previously wired to an instance event, or handlers wired for multiple instance events.">3.11. unwire</a></li>
 					<li><a href="#3_12" title="Returns the value of the instance&apos;s value set-get property.">3.12. valueOf Intrinsic Method</a></li>
 					<li><a href="#3_13" title="Lets you wire a handler for a specific instance event, or handlers for multiple instance events.">3.13. wire</a></li>
@@ -715,22 +723,24 @@ sliderValueAndRange = mySlider.get ({minValue:0,maxValue:0,value:0});
 			
 			<p><span class="allCaps">DIFFERENT USAGES</span></p>
 			
-			<p><a href="#3_5_1">Set a Single Condition as Having Been Met</a></p>
+			<p><a href="#3_5_2">Set a Single Condition as Having Been Met</a></p>
 			
 			
 <pre class="sample-code">myInstance.met (propertyNameSTR);
 </pre>
 			
-			<p><a href="#3_5_2">Set Multiple Conditions as Having Been Met</a></p>
+			<p><a href="#3_5_3">Set Multiple Conditions as Having Been Met</a></p>
 			
 			
 <pre class="sample-code">myInstance.met (propertyNamesARRAY);
 </pre>
 			
 			<a name="3_5_1"></a>
-			<h3 class="heading3" title="3. Instance Methods -&gt; 3.5. met -&gt; 3.5.1. Set a Single Condition as Having Been Met"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_5" title="3. Instance Methods -&gt; 3.5. met">5</a>.<a href="#3_5_1" title="3. Instance Methods -&gt; 3.5. met -&gt; 3.5.1. Set a Single Condition as Having Been Met">1</a>. </span>Set a Single Condition as Having Been Met</h3>
+			<h3 class="heading3" title="3. Instance Methods -&gt; 3.5. met -&gt; 3.5.1. For Improved Semantics"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_5" title="3. Instance Methods -&gt; 3.5. met">5</a>.<a href="#3_5_1" title="3. Instance Methods -&gt; 3.5. met -&gt; 3.5.1. For Improved Semantics">1</a>. </span>For Improved Semantics</h3>
 			<div class="contents3">
-				<p>The <code><a href="#3_5">met</a></code> method is offered as a convenience to improve the semantics of code that is using set-get properties to represent conditions, and is a very thin wrapper around the <code><a href="#3_7">set</a></code> instance method. The statement <code>myInstance.met ('myCondition')</code> is equivalent to the statement <code>myInstance.set ('myCondition',true)</code>. When using a set-get property to represent a condition, the <code><a href="#3_5">met</a></code> method is a semantically elegant way to set the value of the property to <code>true</code> to indicate that the condition represented by the property has been met.</p>
+				<p>The <code><a href="#3_5">met</a></code> method is offered as a convenience to improve the semantics of code that is using set-get properties to represent conditions, and is a very thin wrapper around the <code><a href="#3_7">set</a></code> instance method.</p>
+				
+				<p>The statement <code>myInstance.met ('myCondition')</code> is equivalent to the statement <code>myInstance.set ('myCondition',true)</code>. When using a set-get property to represent a condition, the <code><a href="#3_5">met</a></code> method is a semantically elegant way to set the value of the property to <code>true</code> to indicate that the condition represented by the property has been met.</p>
 				
 				<p><span class="allCaps">EXAMPLE</span></p>
 				
@@ -751,21 +761,41 @@ sliderValueAndRange = mySlider.get ({minValue:0,maxValue:0,value:0});
   }
 );
 </pre>
+			</div>
+			
+			<a name="3_5_2"></a>
+			<h3 class="heading3" title="3. Instance Methods -&gt; 3.5. met -&gt; 3.5.2. Set a Single Condition as Having Been Met"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_5" title="3. Instance Methods -&gt; 3.5. met">5</a>.<a href="#3_5_2" title="3. Instance Methods -&gt; 3.5. met -&gt; 3.5.2. Set a Single Condition as Having Been Met">2</a>. </span>Set a Single Condition as Having Been Met</h3>
+			<div class="contents3">
+				<p>In its most typical usage, a single condition can be set as having been met by specifying the name of the condition for the <code>propertyNameSTR</code> parameter.</p>
 				
 				<p><span class="allCaps">SYNTAX</span></p>
 				
 				
 <pre class="sample-code">myInstance.met (propertyNameSTR);
 </pre>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">this.met ('someSelected');
+</pre>
 			</div>
 			
-			<a name="3_5_2"></a>
-			<h3 class="heading3" title="3. Instance Methods -&gt; 3.5. met -&gt; 3.5.2. Set Multiple Conditions as Having Been Met"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_5" title="3. Instance Methods -&gt; 3.5. met">5</a>.<a href="#3_5_2" title="3. Instance Methods -&gt; 3.5. met -&gt; 3.5.2. Set Multiple Conditions as Having Been Met">2</a>. </span>Set Multiple Conditions as Having Been Met</h3>
+			<a name="3_5_3"></a>
+			<h3 class="heading3" title="3. Instance Methods -&gt; 3.5. met -&gt; 3.5.3. Set Multiple Conditions as Having Been Met"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_5" title="3. Instance Methods -&gt; 3.5. met">5</a>.<a href="#3_5_3" title="3. Instance Methods -&gt; 3.5. met -&gt; 3.5.3. Set Multiple Conditions as Having Been Met">3</a>. </span>Set Multiple Conditions as Having Been Met</h3>
 			<div class="contents3">
+				<p>In cases where you wish to set multiple conditions as having been met, the names of those conditions can be supplied by specifying an array for the <code>propertyNamesARRAY</code> parameter.</p>
+				
 				<p><span class="allCaps">SYNTAX</span></p>
 				
 				
 <pre class="sample-code">myInstance.met (propertyNamesARRAY);
+</pre>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">this.met (['initialized', 'ready']);
 </pre>
 			</div>
 			
@@ -811,7 +841,26 @@ sliderValueAndRange = mySlider.get ({minValue:0,maxValue:0,value:0});
 			<p>In the above example, a handler is being registered to be executed once the widget <code>myWidget</code> has been wired (ie. the value of its <code>wired</code> set-get property becomes <code>true</code>).</p>
 			
 			<a name="3_6_1"></a>
-			<h3 class="heading3" title="3. Instance Methods -&gt; 3.6. once -&gt; 3.6.1. Return Value"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_6" title="3. Instance Methods -&gt; 3.6. once">6</a>.<a href="#3_6_1" title="3. Instance Methods -&gt; 3.6. once -&gt; 3.6.1. Return Value">1</a>. </span>Return Value</h3>
+			<h3 class="heading3" title="3. Instance Methods -&gt; 3.6. once -&gt; 3.6.1. Condition Inversion"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_6" title="3. Instance Methods -&gt; 3.6. once">6</a>.<a href="#3_6_1" title="3. Instance Methods -&gt; 3.6. once -&gt; 3.6.1. Condition Inversion">1</a>. </span>Condition Inversion</h3>
+			<div class="contents3">
+				<p>As a convenience, the <code><a href="#3_6">once</a></code> method supports condition inversion through an optional "!" (logical not) prefix that can be placed before the condition name.</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">myCollectionWidget.once (
+  '!isEmpty',
+  function () {
+    // do something now that the collection is no longer empty
+  }
+);
+</pre>
+				
+				<p>In the above example, code is being registered to execute once the <code>isEmpty</code> condition becomes false. This is done by prefixing the "isEmpty" condition name with a "!" (bang / exclamation) character to indicate that the code should execute only once the collection is not empty (ie. the value of the <code>isEmpty</code> set-get property becomes <code>false</code>). The <a href="#3_6_1">condition inversion</a> facility is convenient in situations like this where you wish to execute code only once a condition becomes unmet, rather than once the condition becomes met (which is the standard behavior for the <code><a href="#3_6">once</a></code> method).</p>
+			</div>
+			
+			<a name="3_6_2"></a>
+			<h3 class="heading3" title="3. Instance Methods -&gt; 3.6. once -&gt; 3.6.2. Return Value"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_6" title="3. Instance Methods -&gt; 3.6. once">6</a>.<a href="#3_6_2" title="3. Instance Methods -&gt; 3.6. once -&gt; 3.6.2. Return Value">2</a>. </span>Return Value</h3>
 			<div class="contents3">
 				<p>The <code><a href="#3_6">once</a></code> method returns a wirings object that can be supplied to the <code><a href="#3_11">unwire</a></code> method in order to unwire the handler, in the unlikely event that one may wish to remove the handler before the property's value has become truthy.</p>
 				
@@ -1111,26 +1160,76 @@ myInstance.set ({myProperty:!myInstance.get ('myProperty')});
 		<a name="3_10"></a>
 		<h2 class="heading2" title="3. Instance Methods -&gt; 3.10. unmet"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_10" title="3. Instance Methods -&gt; 3.10. unmet">10</a>. </span>unmet</h2>
 		<div class="contents2">
-			<p>Sets the specified set-get property to the boolean value <code>false</code>.</p>
+			<p>Sets the specified condition (or conditions) as being unmet.</p>
 			
-			<p><span class="allCaps">SYNTAX</span></p>
+			<p><span class="allCaps">DIFFERENT USAGES</span></p>
+			
+			<p><a href="#3_10_2">Set a Single Condition as Being Unmet</a></p>
 			
 			
 <pre class="sample-code">myInstance.unmet (propertyNameSTR);
 </pre>
 			
-			<p>The <code><a href="#3_10">unmet</a></code> method is offered as a convenience to improve the semantics of code that is using set-get properties to represent conditions, and is a very thin wrapper around the <code><a href="#3_7">set</a></code> instance method. The statement <code>myInstance.unmet ('myCondition')</code> is equivalent to the statement <code>myInstance.set ('myCondition',false)</code>. When using a set-get property to represent a condition, the <code><a href="#3_10">unmet</a></code> method is a semantically elegant way to set the value of the property to <code>false</code> to indicate that the condition represented by the property is not met / no longer met.</p>
-			
-			<p><span class="allCaps">EXAMPLE</span></p>
+			<p><a href="#3_10_3">Set Multiple Conditions as Being Unmet</a></p>
 			
 			
+<pre class="sample-code">myInstance.unmet (propertyNamesARRAY);
+</pre>
+			
+			<a name="3_10_1"></a>
+			<h3 class="heading3" title="3. Instance Methods -&gt; 3.10. unmet -&gt; 3.10.1. For Improved Semantics"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_10" title="3. Instance Methods -&gt; 3.10. unmet">10</a>.<a href="#3_10_1" title="3. Instance Methods -&gt; 3.10. unmet -&gt; 3.10.1. For Improved Semantics">1</a>. </span>For Improved Semantics</h3>
+			<div class="contents3">
+				<p>The <code><a href="#3_10">unmet</a></code> method is offered as a convenience to improve the semantics of code that is using set-get properties to represent conditions, and is a very thin wrapper around the <code><a href="#3_7">set</a></code> instance method.</p>
+				
+				<p>The statement <code>myInstance.unmet ('myCondition')</code> is equivalent to the statement <code>myInstance.set ('myCondition',false)</code>. When using a set-get property to represent a condition, the <code><a href="#3_10">unmet</a></code> method is a semantically elegant way to set the value of the property to <code>false</code> to indicate that the condition represented by the property is not met / no longer met.</p>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
 <pre class="sample-code">MyClass.prototype.die = function () {
   // some code here to tear down the instance
   this.unmet ('initialized');
 };
 </pre>
+				
+				<p>In the above example, a <code>die</code> instance method is defined for the class <code>MyClass</code>. In the method's implementation, after all the tear down steps have been performed, the <code><a href="#3_10">unmet</a></code> method is being called to indicate that the <code>initialized</code> condition is no longer met, where <code>initialized</code> is the name of a set-get property provided in <code>MyClass</code>. It is assumed that some other method, such as an <code>initialize</code> instance method for the class, is responsible for setting the condition as having been met with a statement like <code>this.met ('initialized')</code>.</p>
+			</div>
 			
-			<p>In the above example, a <code>die</code> instance method is defined for the class <code>MyClass</code>. In the method's implementation, after all the tear down steps have been performed, the <code><a href="#3_10">unmet</a></code> method is being called to indicate that the <code>initialized</code> condition is no longer met, where <code>initialized</code> is the name of a set-get property provided in <code>MyClass</code>. It is assumed that some other method, such as an <code>initialize</code> instance method for the class, is responsible for setting the condition as having been met with a statement like <code>this.met ('initialized')</code>.</p>
+			<a name="3_10_2"></a>
+			<h3 class="heading3" title="3. Instance Methods -&gt; 3.10. unmet -&gt; 3.10.2. Set a Single Condition as Being Unmet"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_10" title="3. Instance Methods -&gt; 3.10. unmet">10</a>.<a href="#3_10_2" title="3. Instance Methods -&gt; 3.10. unmet -&gt; 3.10.2. Set a Single Condition as Being Unmet">2</a>. </span>Set a Single Condition as Being Unmet</h3>
+			<div class="contents3">
+				<p>In its most typical usage, a single condition can be set as being unmet by specifying the name of the condition for the <code>propertyNameSTR</code> parameter.</p>
+				
+				<p><span class="allCaps">SYNTAX</span></p>
+				
+				
+<pre class="sample-code">myInstance.unmet (propertyNameSTR);
+</pre>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">this.unmet ('someSelected');
+</pre>
+			</div>
+			
+			<a name="3_10_3"></a>
+			<h3 class="heading3" title="3. Instance Methods -&gt; 3.10. unmet -&gt; 3.10.3. Set Multiple Conditions as Being Unmet"><span class="headingNumber"><a href="#3" title="3. Instance Methods">3</a>.<a href="#3_10" title="3. Instance Methods -&gt; 3.10. unmet">10</a>.<a href="#3_10_3" title="3. Instance Methods -&gt; 3.10. unmet -&gt; 3.10.3. Set Multiple Conditions as Being Unmet">3</a>. </span>Set Multiple Conditions as Being Unmet</h3>
+			<div class="contents3">
+				<p>In cases where you wish to set multiple conditions as being unmet, the names of those conditions can be supplied by specifying an array for the <code>propertyNamesARRAY</code> parameter.</p>
+				
+				<p><span class="allCaps">SYNTAX</span></p>
+				
+				
+<pre class="sample-code">myInstance.unmet (propertyNamesARRAY);
+</pre>
+				
+				<p><span class="allCaps">EXAMPLE</span></p>
+				
+				
+<pre class="sample-code">this.unmet (['initialized', 'ready']);
+</pre>
+			</div>
 			
 			<p><span class="allCaps">NOTES</span></p>
 			

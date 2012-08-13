@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>2012-08-12 - Improved once Method for Classes | News | UIZE JavaScript Framework</title>
+	<meta name="keywords" content="UIZE JavaScript Framework News "/>
+	<meta name="description" content="The once instance method, implemented in the Uize.Class base class module, has been improved with support for optional condition inversion."/>
+	<link rel="alternate" type="application/rss+xml" title="UIZE JavaScript Framework - Latest News" href="http://www.uize.com/latest-news.rss"/>
+	<link rel="stylesheet" href="../css/page.css"/>
+	<link rel="stylesheet" href="../css/page.simpledoc.css"/>
+</head>
+
+<body>
+
+<script type="text/javascript" src="../js/Uize.js"></script>
+
+<h1 class="document-title">
+	<a id="page-homeLink" href="../index.html" title="UIZE JavaScript Framework home"></a>
+	
+	<a href="../news-2012.html" class="breadcrumb breadcrumbWithArrow">2012 NEWS</a>
+	2012-08-12 - Improved once Method for Classes
+
+</h1>
+
+<div class="main">
+<div class="contents0">
+	<p>The <code>once</code> instance method, implemented in the <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> base class module, has been improved with support for optional condition inversion.</p>
+	
+	<p>As a convenience, the <code>once</code> method now supports condition inversion through an optional "!" (logical not) prefix that can be placed before the condition name.</p>
+	
+	<p><span class="allCaps">EXAMPLE</span></p>
+	
+	
+<pre class="sample-code">myCollectionWidget.once (
+  '!isEmpty',
+  function () {
+    // do something now that the collection is no longer empty
+  }
+);
+</pre>
+	
+	<p>In the above example, code is being registered to execute once the <code>isEmpty</code> condition becomes false. This is done by prefixing the "isEmpty" condition name with a "!" (bang / exclamation) character to indicate that the code should execute only once the collection is not empty (ie. the value of the <code>isEmpty</code> set-get property becomes <code>false</code>). The condition inversion facility is convenient in situations like this where you wish to execute code only once a condition becomes unmet, rather than once the condition becomes met (which is the standard behavior for the <code>once</code> method).</p>
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+Uize.module ({
+	required:[
+		'UizeDotCom.Page.Doc.library',
+		'UizeDotCom.Page.Doc'
+	],
+	builder:function () {(window.page = UizeDotCom.Page.Doc ()).wireUi ()}
+});
+
+</script>
+
+</body></html>
+
+
+

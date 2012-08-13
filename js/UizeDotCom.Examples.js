@@ -1,5 +1,5 @@
 /*
-	UIZE Web Site 2012-08-06
+	UIZE Web Site 2012-08-12
 
 	http://www.uize.com/reference/UizeDotCom.Examples.html
 	Available under MIT License or GNU General Public License -- http://www.uize.com/license.html
