@@ -877,7 +877,7 @@ _class.nonInheritableStatics.myStaticMethod = 1;
 <pre class="sample-code">var fileSystem = Uize.Services.FileSystem.singleton ();
 </pre>
 			
-			<p>In the above example, the <code>Uize.Services.FileSystem</code> class is a subclass of the <code><a href="../reference/Uize.Service.html">Uize.Service</a></code> class, which is itself a subclass of the <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> base class. Therefore, a singleton can be created using the <code>Uize.Services.FileSystem.singleton</code> static method that is inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
+			<p>In the above example, the <code><a href="../reference/Uize.Services.FileSystem.html">Uize.Services.FileSystem</a></code> class is a subclass of the <code><a href="../reference/Uize.Service.html">Uize.Service</a></code> class, which is itself a subclass of the <code><a href="../reference/Uize.Class.html">Uize.Class</a></code> base class. Therefore, a singleton can be created using the <code>Uize.Services.FileSystem.singleton</code> static method that is inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 		</div>
 		
 		<a name="10_2"></a>
@@ -895,7 +895,7 @@ _class.nonInheritableStatics.myStaticMethod = 1;
 alert (fileSystemSingleton1 === fileSystemSingleton2);  // alerts "true"
 </pre>
 			
-			<p>In the above example, both the <code>fileSystemSingleton1</code> and <code>fileSystemSingleton2</code> variables are set to be a singleton of the <code>Uize.Services.FileSystem</code> class. Therefore, when their values are compared using a strict equality, they are found to be equal.</p>
+			<p>In the above example, both the <code>fileSystemSingleton1</code> and <code>fileSystemSingleton2</code> variables are set to be a singleton of the <code><a href="../reference/Uize.Services.FileSystem.html">Uize.Services.FileSystem</a></code> class. Therefore, when their values are compared using a strict equality, they are found to be equal.</p>
 		</div>
 		
 		<a name="10_3"></a>
@@ -919,7 +919,7 @@ alert (fileSystemSingleton1 === fileSystemSingleton2);  // alerts "true"
 <pre class="sample-code">var fileSystemForBuildScripts = Uize.Services.FileSystem.singleton ('buildScripts');
 </pre>
 			
-			<p>In the above example, a singleton of the <code>Uize.Services.FileSystem</code> class is being created in a scope we have decided to call "buildScripts". Now, any other build script code that wants to get a reference to this singleton can perform the same operation, specifying <code>'buildScripts'</code> as the value for the <code>scopeSTR</code> parameter. With this kind of arrangement, other code can now use the same <code>Uize.Services.FileSystem</code> service class in a different scope. In different scopes, the different singletons may be set up with different service adapters and initialized differently to perform different I/O.</p>
+			<p>In the above example, a singleton of the <code><a href="../reference/Uize.Services.FileSystem.html">Uize.Services.FileSystem</a></code> class is being created in a scope we have decided to call "buildScripts". Now, any other build script code that wants to get a reference to this singleton can perform the same operation, specifying <code>'buildScripts'</code> as the value for the <code>scopeSTR</code> parameter. With this kind of arrangement, other code can now use the same <code><a href="../reference/Uize.Services.FileSystem.html">Uize.Services.FileSystem</a></code> service class in a different scope. In different scopes, the different singletons may be set up with different service adapters and initialized differently to perform different I/O.</p>
 			
 			<a name="10_4_1"></a>
 			<h3 class="heading3" title="10. Singletons -&gt; 10.4. Singleton Scope -&gt; 10.4.1. A Single Singleton Per Scope"><span class="headingNumber"><a href="#10" title="10. Singletons">10</a>.<a href="#10_4" title="10. Singletons -&gt; 10.4. Singleton Scope">4</a>.<a href="#10_4_1" title="10. Singletons -&gt; 10.4. Singleton Scope -&gt; 10.4.1. A Single Singleton Per Scope">1</a>. </span>A Single Singleton Per Scope</h3>
@@ -936,7 +936,7 @@ alert (fileSystemSingleton1 === fileSystemSingleton2);  // alerts "true"
 alert (fileSystemInScopeA === fileSystemInScopeB);  // alerts "false"
 </pre>
 				
-				<p>In the above example, two singletons of the <code>Uize.Services.FileSystem</code> class are being created: one in a scope we've called "scopeA" and the other in a scope we've called "scopeB". When the values of the <code>fileSystemInScopeA</code> and <code>fileSystemInScopeB</code> variables are compared using a strict equality, they are found to <b>not</b> be equal. However, if we called the <code>singleton</code> method multiple times for "scopeA", we would always get back the same singleton for this scope, and similarly with "scopeB".</p>
+				<p>In the above example, two singletons of the <code><a href="../reference/Uize.Services.FileSystem.html">Uize.Services.FileSystem</a></code> class are being created: one in a scope we've called "scopeA" and the other in a scope we've called "scopeB". When the values of the <code>fileSystemInScopeA</code> and <code>fileSystemInScopeB</code> variables are compared using a strict equality, they are found to <b>not</b> be equal. However, if we called the <code>singleton</code> method multiple times for "scopeA", we would always get back the same singleton for this scope, and similarly with "scopeB".</p>
 			</div>
 			
 			<a name="10_4_2"></a>
@@ -967,7 +967,7 @@ alert (fileSystemInScopeA === fileSystemInScopeB);  // alerts "false"
 <pre class="sample-code">var fileSystemForBuildScripts = Uize.Services.FileSystem.singleton ('',{defaultEncoding:'utf8'});
 </pre>
 			
-			<p>In the above example, a singleton is being created for the <code>Uize.Services.FileSystem</code> class. Because the first parameter of the <code>singleton</code> method is the singleton scope, if we want to use the default scope we need to specify an empty string. The second parameter is the state for the singleton, where the value is an object that will be passed to the constructor of the class if the singleton has not yet been created for the scope, or used in a call to the <code>set</code> method if the singleton already exists in the scope.</p>
+			<p>In the above example, a singleton is being created for the <code><a href="../reference/Uize.Services.FileSystem.html">Uize.Services.FileSystem</a></code> class. Because the first parameter of the <code>singleton</code> method is the singleton scope, if we want to use the default scope we need to specify an empty string. The second parameter is the state for the singleton, where the value is an object that will be passed to the constructor of the class if the singleton has not yet been created for the scope, or used in a call to the <code>set</code> method if the singleton already exists in the scope.</p>
 		</div>
 		
 		<a name="10_6"></a>

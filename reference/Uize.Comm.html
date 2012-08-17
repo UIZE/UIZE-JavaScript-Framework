@@ -60,26 +60,30 @@
 					<li><a href="#4_2" title="A method that lets you flush the request queue.">4.2. flush</a></li>
 					<li><a href="#4_3" title="Lets you flush the cached response for a specific request, or lets you flush the entire response cache for the instance.">4.3. flushCache</a></li>
 					<li><a href="#4_4" title="Inherited from Uize.Class.">4.4. get</a></li>
-					<li><a href="#4_5" title="Inherited from Uize.Class.">4.5. kill</a></li>
-					<li><a href="#4_6" title="A method that should be overrided in subclasses that implement support for specific communication protocols.">4.6. performRequest</a></li>
-					<li><a href="#4_7" title="IMPLEMENTATION INFO">4.7. queueRequest</a></li>
-					<li><a href="#4_8" title="A method that lets you initiate a request.">4.8. request</a>
+					<li><a href="#4_5" title="Inherited from Uize.Class.">4.5. is</a></li>
+					<li><a href="#4_6" title="Inherited from Uize.Class.">4.6. kill</a></li>
+					<li><a href="#4_7" title="Inherited from Uize.Class.">4.7. met</a></li>
+					<li><a href="#4_8" title="Inherited from Uize.Class.">4.8. once</a></li>
+					<li><a href="#4_9" title="A method that should be overrided in subclasses that implement support for specific communication protocols.">4.9. performRequest</a></li>
+					<li><a href="#4_10" title="IMPLEMENTATION INFO">4.10. queueRequest</a></li>
+					<li><a href="#4_11" title="A method that lets you initiate a request.">4.11. request</a>
 						<ul>
-							<li><a href="#4_8_1" title="The Uize.Comm base class handles the following properties of the requestOBJ parameter...">4.8.1. requestOBJ Properties</a>
+							<li><a href="#4_11_1" title="The Uize.Comm base class handles the following properties of the requestOBJ parameter...">4.11.1. requestOBJ Properties</a>
 								<ul>
-									<li><a href="#4_8_1_1" title="A string, specifying the data type that should be used when passing the response result to the callback function specified by the callback property.">4.8.1.1. returnType</a></li>
-									<li><a href="#4_8_1_2" title="A string, specifying the caching mode that should be employed when performing the request.">4.8.1.2. cache</a></li>
-									<li><a href="#4_8_1_3" title="A function reference, specifying the function that should be called once the request has been performed.">4.8.1.3. callback</a></li>
-									<li><a href="#4_8_1_4" title="A boolean, specifying whether or not the request should cut to the head of the request queue.">4.8.1.4. cutToHead</a></li>
+									<li><a href="#4_11_1_1" title="A string, specifying the data type that should be used when passing the response result to the callback function specified by the callback property.">4.11.1.1. returnType</a></li>
+									<li><a href="#4_11_1_2" title="A string, specifying the caching mode that should be employed when performing the request.">4.11.1.2. cache</a></li>
+									<li><a href="#4_11_1_3" title="A function reference, specifying the function that should be called once the request has been performed.">4.11.1.3. callback</a></li>
+									<li><a href="#4_11_1_4" title="A boolean, specifying whether or not the request should cut to the head of the request queue.">4.11.1.4. cutToHead</a></li>
 								</ul>
 							</li>
 						</ul>
 					</li>
-					<li><a href="#4_9" title="Inherited from Uize.Class.">4.9. set</a></li>
-					<li><a href="#4_10" title="Inherited from Uize.Class.">4.10. toggle</a></li>
-					<li><a href="#4_11" title="Inherited from Uize.Class.">4.11. unwire</a></li>
-					<li><a href="#4_12" title="IMPLEMENTATION INFO">4.12. useQueue</a></li>
-					<li><a href="#4_13" title="Inherited from Uize.Class.">4.13. wire</a></li>
+					<li><a href="#4_12" title="Inherited from Uize.Class.">4.12. set</a></li>
+					<li><a href="#4_13" title="Inherited from Uize.Class.">4.13. toggle</a></li>
+					<li><a href="#4_14" title="Inherited from Uize.Class.">4.14. unmet</a></li>
+					<li><a href="#4_15" title="Inherited from Uize.Class.">4.15. unwire</a></li>
+					<li><a href="#4_16" title="IMPLEMENTATION INFO">4.16. useQueue</a></li>
+					<li><a href="#4_17" title="Inherited from Uize.Class.">4.17. wire</a></li>
 				</ul>
 			</li>
 			<li><a href="#5">5. Static Methods</a>
@@ -145,7 +149,7 @@
 				
 				<p><span class="allCaps">INSTANCE METHODS</span></p>
 				
-				<p><code><a href="#4_2">flush</a></code> | <code><a href="#4_3">flushCache</a></code> | <code><a href="#4_6">performRequest</a></code> | <code><a href="#4_7">queueRequest</a></code> | <code><a href="#4_8">request</a></code> | <code><a href="#4_12">useQueue</a></code></p>
+				<p><code><a href="#4_2">flush</a></code> | <code><a href="#4_3">flushCache</a></code> | <code><a href="#4_9">performRequest</a></code> | <code><a href="#4_10">queueRequest</a></code> | <code><a href="#4_11">request</a></code> | <code><a href="#4_16">useQueue</a></code></p>
 				
 				<p><span class="allCaps">STATIC METHODS</span></p>
 				
@@ -173,7 +177,7 @@
 				
 				<p><span class="allCaps">INSTANCE METHODS</span></p>
 				
-				<p><code><a href="#4_1">fire</a></code> | <code><a href="#4_4">get</a></code> | <code><a href="#4_5">kill</a></code> | <code><a href="#4_9">set</a></code> | <code><a href="#4_10">toggle</a></code> | <code><a href="#4_11">unwire</a></code> | <code><a href="#4_13">wire</a></code></p>
+				<p><code><a href="#4_1">fire</a></code> | <code><a href="#4_4">get</a></code> | <code><a href="#4_5">is</a></code> | <code><a href="#4_6">kill</a></code> | <code><a href="#4_7">met</a></code> | <code><a href="#4_8">once</a></code> | <code><a href="#4_12">set</a></code> | <code><a href="#4_13">toggle</a></code> | <code><a href="#4_14">unmet</a></code> | <code><a href="#4_15">unwire</a></code> | <code><a href="#4_17">wire</a></code></p>
 				
 				<p><span class="allCaps">STATIC METHODS</span></p>
 				
@@ -205,7 +209,7 @@
 			<p><span class="allCaps">NOTES</span></p>
 			
 			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#4_2">flush</a></code>, <code><a href="#4_7">queueRequest</a></code>, and <code><a href="#4_12">useQueue</a></code> instance methods</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#4_2">flush</a></code>, <code><a href="#4_10">queueRequest</a></code>, and <code><a href="#4_16">useQueue</a></code> instance methods</td></tr>
 			</table>
 		</div>
 	</div>
@@ -257,7 +261,7 @@
 			<table class="list">
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this method takes no parameters</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>after flushing the request queue, the <code><a href="#3_2">Request Queue Updated</a></code> instance event will be fired</td></tr>
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#4_7">queueRequest</a></code> and <code><a href="#4_12">useQueue</a></code> instance methods</td></tr>
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#4_10">queueRequest</a></code> and <code><a href="#4_16">useQueue</a></code> instance methods</td></tr>
 			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>see also the <code><a href="#2_1">requestQueue</a></code> instance property</td></tr>
 			</table>
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
@@ -319,7 +323,7 @@
 		</div>
 		
 		<a name="4_5"></a>
-		<h2 class="heading2" title="4. Instance Methods -&gt; 4.5. kill"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_5" title="4. Instance Methods -&gt; 4.5. kill">5</a>. </span>kill</h2>
+		<h2 class="heading2" title="4. Instance Methods -&gt; 4.5. is"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_5" title="4. Instance Methods -&gt; 4.5. is">5</a>. </span>is</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
@@ -331,7 +335,43 @@
 		</div>
 		
 		<a name="4_6"></a>
-		<h2 class="heading2" title="4. Instance Methods -&gt; 4.6. performRequest"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_6" title="4. Instance Methods -&gt; 4.6. performRequest">6</a>. </span>performRequest</h2>
+		<h2 class="heading2" title="4. Instance Methods -&gt; 4.6. kill"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_6" title="4. Instance Methods -&gt; 4.6. kill">6</a>. </span>kill</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_7"></a>
+		<h2 class="heading2" title="4. Instance Methods -&gt; 4.7. met"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_7" title="4. Instance Methods -&gt; 4.7. met">7</a>. </span>met</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_8"></a>
+		<h2 class="heading2" title="4. Instance Methods -&gt; 4.8. once"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_8" title="4. Instance Methods -&gt; 4.8. once">8</a>. </span>once</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_9"></a>
+		<h2 class="heading2" title="4. Instance Methods -&gt; 4.9. performRequest"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_9" title="4. Instance Methods -&gt; 4.9. performRequest">9</a>. </span>performRequest</h2>
 		<div class="contents2">
 			<p>A method that should be overrided in subclasses that implement support for specific communication protocols.</p>
 			
@@ -352,8 +392,8 @@
 			</table>
 		</div>
 		
-		<a name="4_7"></a>
-		<h2 class="heading2" title="4. Instance Methods -&gt; 4.7. queueRequest"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_7" title="4. Instance Methods -&gt; 4.7. queueRequest">7</a>. </span>queueRequest</h2>
+		<a name="4_10"></a>
+		<h2 class="heading2" title="4. Instance Methods -&gt; 4.10. queueRequest"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_10" title="4. Instance Methods -&gt; 4.10. queueRequest">10</a>. </span>queueRequest</h2>
 		<div class="contents2">
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -362,8 +402,8 @@
 			</table>
 		</div>
 		
-		<a name="4_8"></a>
-		<h2 class="heading2" title="4. Instance Methods -&gt; 4.8. request"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_8" title="4. Instance Methods -&gt; 4.8. request">8</a>. </span>request</h2>
+		<a name="4_11"></a>
+		<h2 class="heading2" title="4. Instance Methods -&gt; 4.11. request"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_11" title="4. Instance Methods -&gt; 4.11. request">11</a>. </span>request</h2>
 		<div class="contents2">
 			<p>A method that lets you initiate a request.</p>
 			
@@ -388,23 +428,23 @@
 });
 </pre>
 			
-			<a name="4_8_1"></a>
-			<h3 class="heading3" title="4. Instance Methods -&gt; 4.8. request -&gt; 4.8.1. requestOBJ Properties"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_8" title="4. Instance Methods -&gt; 4.8. request">8</a>.<a href="#4_8_1" title="4. Instance Methods -&gt; 4.8. request -&gt; 4.8.1. requestOBJ Properties">1</a>. </span>requestOBJ Properties</h3>
+			<a name="4_11_1"></a>
+			<h3 class="heading3" title="4. Instance Methods -&gt; 4.11. request -&gt; 4.11.1. requestOBJ Properties"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_11" title="4. Instance Methods -&gt; 4.11. request">11</a>.<a href="#4_11_1" title="4. Instance Methods -&gt; 4.11. request -&gt; 4.11.1. requestOBJ Properties">1</a>. </span>requestOBJ Properties</h3>
 			<div class="contents3">
 				<p>The <code>Uize.Comm</code> base class handles the following properties of the <code>requestOBJ</code> parameter...</p>
 				
-				<a name="4_8_1_1"></a>
-				<h4 class="heading4" title="4. Instance Methods -&gt; 4.8. request -&gt; 4.8.1. requestOBJ Properties -&gt; 4.8.1.1. returnType"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_8" title="4. Instance Methods -&gt; 4.8. request">8</a>.<a href="#4_8_1" title="4. Instance Methods -&gt; 4.8. request -&gt; 4.8.1. requestOBJ Properties">1</a>.<a href="#4_8_1_1" title="4. Instance Methods -&gt; 4.8. request -&gt; 4.8.1. requestOBJ Properties -&gt; 4.8.1.1. returnType">1</a>. </span>returnType</h4>
+				<a name="4_11_1_1"></a>
+				<h4 class="heading4" title="4. Instance Methods -&gt; 4.11. request -&gt; 4.11.1. requestOBJ Properties -&gt; 4.11.1.1. returnType"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_11" title="4. Instance Methods -&gt; 4.11. request">11</a>.<a href="#4_11_1" title="4. Instance Methods -&gt; 4.11. request -&gt; 4.11.1. requestOBJ Properties">1</a>.<a href="#4_11_1_1" title="4. Instance Methods -&gt; 4.11. request -&gt; 4.11.1. requestOBJ Properties -&gt; 4.11.1.1. returnType">1</a>. </span>returnType</h4>
 				<div class="contents4">
-					<p>A string, specifying the data type that should be used when passing the response result to the callback function specified by the <code><a href="#4_8_1_3">callback</a></code> property.</p>
+					<p>A string, specifying the data type that should be used when passing the response result to the callback function specified by the <code><a href="#4_11_1_3">callback</a></code> property.</p>
 					
 					<p><span class="allCaps">VALUES</span></p>
 					
 					<table class="list">
-					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>'text'</code> - the value of the <code>responseText</code> property of <code>requestOBJ</code> will be passed as the parameter to the <code><a href="#4_8_1_3">callback</a></code> function</td></tr>
-					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>'json'</code> - the value of the <code>responseJson</code> property of <code>requestOBJ</code> will be passed as the parameter to the <code><a href="#4_8_1_3">callback</a></code> function</td></tr>
-					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>'xml'</code> - the value of the <code>responseJson</code> property of <code>requestOBJ</code> will be passed as the parameter to the <code><a href="#4_8_1_3">callback</a></code> function</td></tr>
-					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>'object'</code> (default) - the <code>requestOBJ</code> object will be passed as the parameter to the <code><a href="#4_8_1_3">callback</a></code> function</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>'text'</code> - the value of the <code>responseText</code> property of <code>requestOBJ</code> will be passed as the parameter to the <code><a href="#4_11_1_3">callback</a></code> function</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>'json'</code> - the value of the <code>responseJson</code> property of <code>requestOBJ</code> will be passed as the parameter to the <code><a href="#4_11_1_3">callback</a></code> function</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>'xml'</code> - the value of the <code>responseJson</code> property of <code>requestOBJ</code> will be passed as the parameter to the <code><a href="#4_11_1_3">callback</a></code> function</td></tr>
+					<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td><code>'object'</code> (default) - the <code>requestOBJ</code> object will be passed as the parameter to the <code><a href="#4_11_1_3">callback</a></code> function</td></tr>
 					</table>
 					<p><span class="allCaps">NOTES</span></p>
 					
@@ -413,8 +453,8 @@
 					</table>
 				</div>
 				
-				<a name="4_8_1_2"></a>
-				<h4 class="heading4" title="4. Instance Methods -&gt; 4.8. request -&gt; 4.8.1. requestOBJ Properties -&gt; 4.8.1.2. cache"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_8" title="4. Instance Methods -&gt; 4.8. request">8</a>.<a href="#4_8_1" title="4. Instance Methods -&gt; 4.8. request -&gt; 4.8.1. requestOBJ Properties">1</a>.<a href="#4_8_1_2" title="4. Instance Methods -&gt; 4.8. request -&gt; 4.8.1. requestOBJ Properties -&gt; 4.8.1.2. cache">2</a>. </span>cache</h4>
+				<a name="4_11_1_2"></a>
+				<h4 class="heading4" title="4. Instance Methods -&gt; 4.11. request -&gt; 4.11.1. requestOBJ Properties -&gt; 4.11.1.2. cache"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_11" title="4. Instance Methods -&gt; 4.11. request">11</a>.<a href="#4_11_1" title="4. Instance Methods -&gt; 4.11. request -&gt; 4.11.1. requestOBJ Properties">1</a>.<a href="#4_11_1_2" title="4. Instance Methods -&gt; 4.11. request -&gt; 4.11.1. requestOBJ Properties -&gt; 4.11.1.2. cache">2</a>. </span>cache</h4>
 				<div class="contents4">
 					<p>A string, specifying the caching mode that should be employed when performing the request.</p>
 					
@@ -432,20 +472,20 @@
 					</table>
 				</div>
 				
-				<a name="4_8_1_3"></a>
-				<h4 class="heading4" title="4. Instance Methods -&gt; 4.8. request -&gt; 4.8.1. requestOBJ Properties -&gt; 4.8.1.3. callback"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_8" title="4. Instance Methods -&gt; 4.8. request">8</a>.<a href="#4_8_1" title="4. Instance Methods -&gt; 4.8. request -&gt; 4.8.1. requestOBJ Properties">1</a>.<a href="#4_8_1_3" title="4. Instance Methods -&gt; 4.8. request -&gt; 4.8.1. requestOBJ Properties -&gt; 4.8.1.3. callback">3</a>. </span>callback</h4>
+				<a name="4_11_1_3"></a>
+				<h4 class="heading4" title="4. Instance Methods -&gt; 4.11. request -&gt; 4.11.1. requestOBJ Properties -&gt; 4.11.1.3. callback"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_11" title="4. Instance Methods -&gt; 4.11. request">11</a>.<a href="#4_11_1" title="4. Instance Methods -&gt; 4.11. request -&gt; 4.11.1. requestOBJ Properties">1</a>.<a href="#4_11_1_3" title="4. Instance Methods -&gt; 4.11. request -&gt; 4.11.1. requestOBJ Properties -&gt; 4.11.1.3. callback">3</a>. </span>callback</h4>
 				<div class="contents4">
 					<p>A function reference, specifying the function that should be called once the request has been performed.</p>
 					
-					<p>The callback function you specify should expect to receive one parameter that will be of the type specified by the <code><a href="#4_8_1_1">returnType</a></code> property.</p>
+					<p>The callback function you specify should expect to receive one parameter that will be of the type specified by the <code><a href="#4_11_1_1">returnType</a></code> property.</p>
 				</div>
 				
-				<a name="4_8_1_4"></a>
-				<h4 class="heading4" title="4. Instance Methods -&gt; 4.8. request -&gt; 4.8.1. requestOBJ Properties -&gt; 4.8.1.4. cutToHead"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_8" title="4. Instance Methods -&gt; 4.8. request">8</a>.<a href="#4_8_1" title="4. Instance Methods -&gt; 4.8. request -&gt; 4.8.1. requestOBJ Properties">1</a>.<a href="#4_8_1_4" title="4. Instance Methods -&gt; 4.8. request -&gt; 4.8.1. requestOBJ Properties -&gt; 4.8.1.4. cutToHead">4</a>. </span>cutToHead</h4>
+				<a name="4_11_1_4"></a>
+				<h4 class="heading4" title="4. Instance Methods -&gt; 4.11. request -&gt; 4.11.1. requestOBJ Properties -&gt; 4.11.1.4. cutToHead"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_11" title="4. Instance Methods -&gt; 4.11. request">11</a>.<a href="#4_11_1" title="4. Instance Methods -&gt; 4.11. request -&gt; 4.11.1. requestOBJ Properties">1</a>.<a href="#4_11_1_4" title="4. Instance Methods -&gt; 4.11. request -&gt; 4.11.1. requestOBJ Properties -&gt; 4.11.1.4. cutToHead">4</a>. </span>cutToHead</h4>
 				<div class="contents4">
 					<p>A boolean, specifying whether or not the request should cut to the head of the request queue.</p>
 					
-					<p>If the value <code>false</code> is specified for the <code><a href="#4_8_1_4">cutToHead</a></code> property, or if this property is not specified, then the request is appended to the request queue. This is the default behavior. In some rare cases, such as when recovering from a request that returns a failure / error response, it might be desirable to push requests that are part of recovering from the failed request to the head of the queue. In such cases, such recovery requests can specify the value <code>true</code> for the <code><a href="#4_8_1_4">cutToHead</a></code> property.</p>
+					<p>If the value <code>false</code> is specified for the <code><a href="#4_11_1_4">cutToHead</a></code> property, or if this property is not specified, then the request is appended to the request queue. This is the default behavior. In some rare cases, such as when recovering from a request that returns a failure / error response, it might be desirable to push requests that are part of recovering from the failed request to the head of the queue. In such cases, such recovery requests can specify the value <code>true</code> for the <code><a href="#4_11_1_4">cutToHead</a></code> property.</p>
 				</div>
 			</div>
 			
@@ -456,44 +496,56 @@
 			</table>
 		</div>
 		
-		<a name="4_9"></a>
-		<h2 class="heading2" title="4. Instance Methods -&gt; 4.9. set"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_9" title="4. Instance Methods -&gt; 4.9. set">9</a>. </span>set</h2>
-		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
-			
-			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
-			
-			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
-			</table>
-		</div>
-		
-		<a name="4_10"></a>
-		<h2 class="heading2" title="4. Instance Methods -&gt; 4.10. toggle"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_10" title="4. Instance Methods -&gt; 4.10. toggle">10</a>. </span>toggle</h2>
-		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
-			
-			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
-			
-			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
-			</table>
-		</div>
-		
-		<a name="4_11"></a>
-		<h2 class="heading2" title="4. Instance Methods -&gt; 4.11. unwire"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_11" title="4. Instance Methods -&gt; 4.11. unwire">11</a>. </span>unwire</h2>
-		<div class="contents2">
-			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
-			
-			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
-			
-			<table class="list">
-			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
-			</table>
-		</div>
-		
 		<a name="4_12"></a>
-		<h2 class="heading2" title="4. Instance Methods -&gt; 4.12. useQueue"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_12" title="4. Instance Methods -&gt; 4.12. useQueue">12</a>. </span>useQueue</h2>
+		<h2 class="heading2" title="4. Instance Methods -&gt; 4.12. set"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_12" title="4. Instance Methods -&gt; 4.12. set">12</a>. </span>set</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_13"></a>
+		<h2 class="heading2" title="4. Instance Methods -&gt; 4.13. toggle"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_13" title="4. Instance Methods -&gt; 4.13. toggle">13</a>. </span>toggle</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_14"></a>
+		<h2 class="heading2" title="4. Instance Methods -&gt; 4.14. unmet"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_14" title="4. Instance Methods -&gt; 4.14. unmet">14</a>. </span>unmet</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_15"></a>
+		<h2 class="heading2" title="4. Instance Methods -&gt; 4.15. unwire"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_15" title="4. Instance Methods -&gt; 4.15. unwire">15</a>. </span>unwire</h2>
+		<div class="contents2">
+			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
+			
+			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
+			
+			<table class="list">
+			<tr valign="top"><td><span style="white-space:nowrap;"><span class="bullet"></span> </span></td><td>this is an inherited feature (implementation is in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>, first introduced in <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>)</td></tr>
+			</table>
+		</div>
+		
+		<a name="4_16"></a>
+		<h2 class="heading2" title="4. Instance Methods -&gt; 4.16. useQueue"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_16" title="4. Instance Methods -&gt; 4.16. useQueue">16</a>. </span>useQueue</h2>
 		<div class="contents2">
 			<p><span class="allCaps">IMPLEMENTATION INFO</span></p>
 			
@@ -502,8 +554,8 @@
 			</table>
 		</div>
 		
-		<a name="4_13"></a>
-		<h2 class="heading2" title="4. Instance Methods -&gt; 4.13. wire"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_13" title="4. Instance Methods -&gt; 4.13. wire">13</a>. </span>wire</h2>
+		<a name="4_17"></a>
+		<h2 class="heading2" title="4. Instance Methods -&gt; 4.17. wire"><span class="headingNumber"><a href="#4" title="4. Instance Methods">4</a>.<a href="#4_17" title="4. Instance Methods -&gt; 4.17. wire">17</a>. </span>wire</h2>
 		<div class="contents2">
 			<p>Inherited from <code><a href="../reference/Uize.Class.html">Uize.Class</a></code>.</p>
 			
