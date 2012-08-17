@@ -148,20 +148,38 @@ Uize.module ({
 				);
 			};
 
-			var _phantomRoot = {_busyInherited:_false,_enabledInherited:_true};
-
-			function _checkBusyInherited () {
-				(this._busy == 'inherit' ? (this.parent || _phantomRoot)._busyInherited : this._busy)
-				!= this._busyInherited &&
-					this.set ({_busyInherited:!this._busyInherited})
+			function _registerTreeInheritedProperty (_propertyPrivateToPublicNameMapping,_defaultValue) {
+				var
+					_propertyPrivateNames = _Uize.keys (_propertyPrivateToPublicNameMapping),
+					_propertyPublicNames = _Uize.values (_propertyPrivateToPublicNameMapping),
+					_propertyPrivateName = _propertyPrivateNames [0],
+					_propertyInheritedPrivateName = _propertyPrivateNames [1]
 				;
-			}
-
-			function _checkEnabledInherited () {
-				(this._enabled == 'inherit' ? (this.parent || _phantomRoot)._enabledInherited : this._enabled)
-				!= this._enabledInherited &&
-					this.set ({_enabledInherited:!this._enabledInherited})
-				;
+				function _checkInherited () {
+					var _value = this [_propertyPrivateName];
+					if (_value == 'inherit')
+						_value = this.parent ? this.parent [_propertyInheritedPrivateName] : _defaultValue
+					;
+					if (_value != this [_propertyInheritedPrivateName])
+						this.set (_propertyInheritedPrivateName,_value)
+					;
+				}
+				_class.registerProperties (
+					_Uize.pairUp (
+						_propertyPrivateName,
+						{
+							name:_propertyPublicNames [0],
+							onChange:_checkInherited,
+							value:'inherit'
+						},
+						_propertyInheritedPrivateName,
+						{
+							name:_propertyPublicNames [1],
+							onChange:function () {_Uize.callOn (this._children,_checkInherited)},
+							value:_defaultValue
+						}
+					)
+				);
 			}
 
 			_classPrototype._tryUseConfirmInheritedFromTree = function (_mode,_params,_builtInConfirmFallback) {
@@ -1811,39 +1829,6 @@ Uize.module ({
 								- the initial value is =true=
 					*/
 				},
-				_busy:{
-					name:'busy',
-					onChange:_checkBusyInherited,
-					value:'inherit'
-					/*?
-						Set-get Properties
-							busy
-								A boolean, indicating whether or not the widget is busy.
-
-								The busy state can be useful when a complex set of processes needs to be performed and user interaction with certain widgets needs to be blocked during that time. Widgets that are in a busy state should not allow user interaction. It is up to an individual widget class to provide its own implementation for the busy state.
-
-								NOTES
-								- the initial value is =true=
-								- this set-get property has a significantly different effect to the =enabled= set-get property
-					*/
-				},
-				_busyInherited:{
-					name:'busyInherited',
-					onChange:function () {_Uize.callOn (this._children,_checkBusyInherited)},
-					value:_false
-					/*?
-						Set-get Properties
-							busyInherited
-								A boolean, indicating whether or not the instance is busy. A widget subclass can use this set-get property when performing UI updates in order to reflect a busy state.
-
-								This property will be =true= if the =busy= set-get property is set to =true=, or if =busy= is set to ='inherit'= and the value inherited from up the parent chain resolves to =true=. If an inherited value resolves to =inherit=, then this property will be set to =false=.
-
-								NOTES
-								- the initial value is =false=
-								- see also the =busy= set-get property
-								- see also the =getInherited= instance method
-					*/
-				},
 				_children:{
 					name:'children',
 					conformer:function (_value) {
@@ -1883,39 +1868,6 @@ Uize.module ({
 								NOTES
 								- the initial value is =undefined=
 					*/
-				_enabled:{
-					name:'enabled',
-					onChange:_checkEnabledInherited,
-					value:'inherit'
-					/*?
-						Set-get Properties
-							enabled
-								A boolean, specifying whether or not the widget is enabled.
-
-								The enabled state can be useful when a complex set of processes needs to be performed and user interaction with certain widgets needs to be blocked during that time. Widgets that are not in an enabled state (ie. disabled) should not allow user interaction. It is up to an individual widget class to provide its own implementation for the enabled state.
-
-								NOTES
-								- the initial value is =true=
-								- this set-get property has a significantly different effect to the =busy= set-get property
-					*/
-				},
-				_enabledInherited:{
-					name:'enabledInherited',
-					onChange:function () {_Uize.callOn (this._children,_checkEnabledInherited)},
-					value:_true
-					/*?
-						Set-get Properties
-							enabledInherited
-								A boolean, indicating whether or not the instance is enabled. A widget subclass can use this set-get property when performing UI updates in order to reflect a disabled state.
-
-								This property will be set to =true= if the =enabled= set-get property is set to =true=, or if =enabled= is set to ='inherit'= and the inherited value resolves to either ='inherit'= or =true=.
-
-								NOTES
-								- the initial value is =true=
-								- see also the =enabled= set-get property
-								- see also the =getInherited= instance method
-					*/
-				},
 				_html:'html',
 					/*?
 						Set-get Properties
@@ -2160,6 +2112,52 @@ Uize.module ({
 					*/
 				}
 			});
+
+			_registerTreeInheritedProperty ({_busy:'busy',_busyInherited:'busyInherited'},_false);
+				/*?
+					Set-get Properties
+						busy
+							A boolean, indicating whether or not the widget is busy.
+
+							The busy state can be useful when a complex set of processes needs to be performed and user interaction with certain widgets needs to be blocked during that time. Widgets that are in a busy state should not allow user interaction. It is up to an individual widget class to provide its own implementation for the busy state.
+
+							NOTES
+							- the initial value is =true=
+							- this set-get property has a significantly different effect to the =enabled= set-get property
+
+						busyInherited
+							A boolean, indicating whether or not the instance is busy. A widget subclass can use this set-get property when performing UI updates in order to reflect a busy state.
+
+							This property will be =true= if the =busy= set-get property is set to =true=, or if =busy= is set to ='inherit'= and the value inherited from up the parent chain resolves to =true=. If an inherited value resolves to =inherit=, then this property will be set to =false=.
+
+							NOTES
+							- the initial value is =false=
+							- see also the =busy= set-get property
+							- see also the =getInherited= instance method
+				*/
+
+			_registerTreeInheritedProperty ({_enabled:'enabled',_enabledInherited:'enabledInherited'},_true);
+				/*?
+					Set-get Properties
+						enabled
+							A boolean, specifying whether or not the widget is enabled.
+
+							The enabled state can be useful when a complex set of processes needs to be performed and user interaction with certain widgets needs to be blocked during that time. Widgets that are not in an enabled state (ie. disabled) should not allow user interaction. It is up to an individual widget class to provide its own implementation for the enabled state.
+
+							NOTES
+							- the initial value is =true=
+							- this set-get property has a significantly different effect to the =busy= set-get property
+
+						enabledInherited
+							A boolean, indicating whether or not the instance is enabled. A widget subclass can use this set-get property when performing UI updates in order to reflect a disabled state.
+
+							This property will be set to =true= if the =enabled= set-get property is set to =true=, or if =enabled= is set to ='inherit'= and the inherited value resolves to either ='inherit'= or =true=.
+
+							NOTES
+							- the initial value is =true=
+							- see also the =enabled= set-get property
+							- see also the =getInherited= instance method
+				*/
 
 		return _class;
 	}
