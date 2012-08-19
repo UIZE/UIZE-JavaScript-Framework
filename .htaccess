@@ -13,6 +13,7 @@
 		Redirect 301 /explainers/all-about-templates.html http://www.uize.com/explainers/javascript-templates.html
 		Redirect 301 /explainers/all-about-widgets.html http://www.uize.com/explainers/javascript-widgets.html
 		Redirect 301 /explainers/modules.html http://www.uize.com/explainers/javascript-modules.html
+		Redirect 301 /explainers/set-get-properties.html http://www.uize.com/explainers/state-properties.html
 		Redirect 301 /tools/scruncher/introduction-to-the-scruncher.html http://www.uize.com/explainers/all-about-scrunching.html
 
 	# renamed modules

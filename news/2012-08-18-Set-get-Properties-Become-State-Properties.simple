@@ -1,0 +1,9 @@
+Set-get properties, a core system of the UIZE JavaScript Framework, has been renamed to "state properties".
+
+All documentation that once referred to "set-get properties" has been updated to now refer to these properties as state properties. This change is purely semantic / cosmetic and has no impact on the functioning of any of the code of the framework. For the longest time, UIZE's properties system has been referred to as "set-get properties", and for the longest time this term has felt a little bit clumsy and uninspiring. The change, while affecting a ridiculous number of files in the project, is completely backwards compatible with all application code built around the framework. Enjoy using the more elegant terminology.
+
+....................................................................................
+<< metadata >>
+
+title: 2012-08-18 - Set-get Properties Become State Properties
+....................................................................................
